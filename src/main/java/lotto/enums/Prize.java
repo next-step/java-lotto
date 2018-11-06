@@ -1,5 +1,7 @@
 package lotto.enums;
 
+import java.util.Arrays;
+
 public enum Prize {
 
 	MATCH6(6, 2000000000),
@@ -18,14 +20,15 @@ public enum Prize {
 		this.money = money;
 	}
 
-	public static Prize get(int matchCount) {
-		for(Prize prize : Prize.values()) {
-			if(prize.matchCount == matchCount) {
-				return prize;
-			}
-		}
+	public static Prize of(int matchCount) {
+		return Arrays.stream(Prize.values())
+				.filter(prize -> prize.isSameMatchCount(matchCount))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("일치하는 상금이 존재하지 않습니다."));
+	}
 
-		throw new IllegalArgumentException("일치하는 상금이 존재하지 않습니다.");
+	private boolean isSameMatchCount(int matchCount) {
+		return this.matchCount == matchCount;
 	}
 
 	public int getMatchCount() {

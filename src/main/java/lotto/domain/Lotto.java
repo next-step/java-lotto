@@ -19,7 +19,7 @@ public class Lotto {
 				++match;
 			}
 		}
-		return Prize.get(match);
+		return Prize.of(match);
 	}
 
 	public boolean hasNumber(Integer number) {
