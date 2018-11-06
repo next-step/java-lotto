@@ -8,7 +8,11 @@ import java.util.List;
 public class LottoTicket {
 	private List<Integer> lottoNumbers;
 
-	public LottoTicket(List<Integer> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
+	public LottoTicket(LottoMachine lottoMachine) {
+		this.lottoNumbers = lottoMachine.drawLottNumbers();
+	}
+
+	public LottoWinnerType matachNumber(List<Integer> winningNubmer){
+		return null;
 	}
 }
