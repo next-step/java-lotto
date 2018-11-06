@@ -44,12 +44,11 @@ public class LottoMachine {
 	}
 
 	private Lotto getLotto() {
-		List<Integer> pickedNumbers = pick();
-		return new Lotto(pickedNumbers);
+		Collections.shuffle(numbers);
+		return new Lotto(pick());
 	}
 
 	private List<Integer> pick() {
-		Collections.shuffle(numbers);
 		return numbers.stream()
 				.limit(PICK_COUNT)
 				.collect(Collectors.toList());
