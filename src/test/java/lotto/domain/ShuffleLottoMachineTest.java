@@ -1,13 +1,12 @@
 package lotto.domain;
 
+import lotto.domain.validator.LottoNumberValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by hspark on 07/11/2018.
@@ -19,5 +18,14 @@ public class ShuffleLottoMachineTest {
 		List<Integer> numberList = Stream.iterate(1, i -> i + 1).limit(45).collect(Collectors.toList());
 		List<Integer> subList = numberList.subList(0, 6);
 		Assertions.assertThat(subList).hasSize(6);
+	}
+
+	@Test
+	public void test_로또번호_validator_test() {
+		ShuffleLottoMachine shuffleLottoMachine = new ShuffleLottoMachine();
+		LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
+		for (int i = 0; i < 1000; i++) {
+			lottoNumberValidator.valid(shuffleLottoMachine.draw());
+		}
 	}
 }

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.validator.LottoPurchaseAmountValidator;
-import lotto.domain.validator.PreviousWinningNumberValidator;
+import lotto.domain.validator.LottoNumberValidator;
 import lotto.domain.validator.Validator;
 
 import java.util.Collections;
@@ -22,7 +22,7 @@ public class Lotto {
 
 	static {
 		PURCHASE_AMOUNT_VALIDATOR = new LottoPurchaseAmountValidator();
-		PREVIOUS_WINNING_NUMBER_VALIDATOR = new PreviousWinningNumberValidator();
+		PREVIOUS_WINNING_NUMBER_VALIDATOR = new LottoNumberValidator();
 	}
 
 	public Lotto(LottoMachine lottoMachine) {
