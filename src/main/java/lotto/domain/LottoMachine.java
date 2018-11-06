@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,6 +12,7 @@ public interface LottoMachine {
 		if (lottoNumbers.size() > 6) {
 			throw new RuntimeException();
 		}
+		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}
 

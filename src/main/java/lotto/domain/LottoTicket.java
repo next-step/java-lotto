@@ -12,7 +12,7 @@ public class LottoTicket {
 		this.lottoNumbers = lottoMachine.drawLottNumbers();
 	}
 
-	public LottoWinnerType matachNumber(List<Integer> winningNubmer){
+	public LottoWinnerType matchNumber(List<Integer> winningNubmer){
 		return null;
 	}
 }
