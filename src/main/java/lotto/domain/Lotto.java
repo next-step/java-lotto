@@ -32,8 +32,7 @@ public class Lotto {
 	}
 
 	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
-		Preconditions.checkArgument(lottoPurchaseAmount >= LOTTO_TICKET_AMOUNT, "로또 구매 금액 이하입니다.");
-		Preconditions.checkArgument(lottoPurchaseAmount % LOTTO_TICKET_AMOUNT == 0, "1000원 단위로 입력해 주세요.");
+		validatePurchaseAmount(lottoPurchaseAmount);
 
 		final int lottoTicketCount = lottoPurchaseAmount / LOTTO_TICKET_AMOUNT;
 		List<LottoTicket> lottoTicketList = Stream.generate(() -> new LottoTicket(lottoMachine))
@@ -44,13 +43,25 @@ public class Lotto {
 	}
 
 	public LottoMatchingResult matchNumber(List<Integer> previousWinningNumber) {
-		Preconditions.checkArgument(previousWinningNumber.size() == 6, "로또 번호는 6자리여야합니다.");
-		Preconditions.checkArgument(!previousWinningNumber.stream().filter(LOTTO_NUMBER_RANGE_PREDICATE).findAny().isPresent()
-			, "잘못된 로또 번호입니다.");
+		validatePrevoiusNumber(previousWinningNumber);
 
 		Map<LottoWinnerType, Long> lottoWinnerTypeListMap = lottoTicketList.stream().
 			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningNumber), Collectors.counting()));
 
 		return new LottoMatchingResult(lottoWinnerTypeListMap);
+	}
+
+	private void validatePurchaseAmount(int lottoPurchaseAmount) {
+		Preconditions.checkArgument(lottoPurchaseAmount >= LOTTO_TICKET_AMOUNT, "로또 구매 금액 이하입니다.");
+		Preconditions.checkArgument(lottoPurchaseAmount % LOTTO_TICKET_AMOUNT == 0, "1000원 단위로 입력해 주세요.");
+	}
+
+	private void validatePrevoiusNumber(List<Integer> previousWinningNumber) {
+		Preconditions.checkArgument(previousWinningNumber.size() == 6,
+			"로또 번호는 6자리여야합니다.");
+		Preconditions.checkArgument(previousWinningNumber.stream().distinct().count() == 6,
+			"중복은 허용되지 않습니다.");
+		Preconditions.checkArgument(!previousWinningNumber.stream().filter(LOTTO_NUMBER_RANGE_PREDICATE).findAny().isPresent()
+			, "잘못된 로또 번호입니다.");
 	}
 }

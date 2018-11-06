@@ -75,4 +75,15 @@ public class LottoTest {
 		List<Integer> previousLottoNumber = Arrays.asList(0, 1, 2, 3, 4, 5);
 		lotto.matchNumber(previousLottoNumber);
 	}
+
+	@Test
+	public void test_이전_로또번호에_숫자_중복이_있을때() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("중복은 허용되지 않습니다.");
+
+		Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+		lotto.purchaseLottoTickets(1000);
+		List<Integer> previousLottoNumber = Arrays.asList(0, 1, 2, 3, 5, 5);
+		lotto.matchNumber(previousLottoNumber);
+	}
 }
