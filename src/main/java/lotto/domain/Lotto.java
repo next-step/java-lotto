@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import com.google.common.base.Preconditions;
+import lotto.domain.validator.LottoPurchaseAmountValidator;
+import lotto.domain.validator.PreviousWinningNumberValidator;
+import lotto.domain.validator.Validator;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,14 +14,42 @@ import java.util.stream.Stream;
  * Created by hspark on 06/11/2018.
  */
 public class Lotto {
+	private static final Validator<Integer> PURCHASE_AMOUNT_VALIDATOR;
+	private static final Validator<List<Integer>> PREVIOUS_WINNING_NUMBER_VALIDATOR;
 
-	public static final int LOTTO_TICKET_AMOUNT = 1_000;
-	private static Predicate<Integer> LOTTO_NUMBER_RANGE_PREDICATE = (i) -> i > 45 || i <= 0;
 	private LottoMachine lottoMachine;
 	private List<LottoTicket> lottoTicketList;
 
+	static {
+		PURCHASE_AMOUNT_VALIDATOR = new LottoPurchaseAmountValidator();
+		PREVIOUS_WINNING_NUMBER_VALIDATOR = new PreviousWinningNumberValidator();
+	}
+
 	public Lotto(LottoMachine lottoMachine) {
 		this.lottoMachine = lottoMachine;
+	}
+
+	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
+		PURCHASE_AMOUNT_VALIDATOR.valid(lottoPurchaseAmount);
+
+		final int lottoTicketCount = lottoPurchaseAmount / LottoConstants.LOTTO_TICKET_AMOUNT;
+
+		List<LottoTicket> lottoTicketList = Stream.generate(() -> new LottoTicket(lottoMachine))
+			.limit(lottoTicketCount).collect(Collectors.toList());
+
+		setLottoTicketList(lottoTicketList);
+
+		return getLottoTicketList();
+	}
+
+	public LottoMatchingResult matchNumber(List<Integer> previousWinningNumber) {
+		PREVIOUS_WINNING_NUMBER_VALIDATOR.valid(previousWinningNumber);
+
+		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
+			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningNumber),
+				Collectors.counting()));
+
+		return new LottoMatchingResult(lottoWinnerTypeCountMap);
 	}
 
 	public List<LottoTicket> getLottoTicketList() {
@@ -31,37 +60,4 @@ public class Lotto {
 		this.lottoTicketList = lottoTicketList;
 	}
 
-	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
-		validatePurchaseAmount(lottoPurchaseAmount);
-
-		final int lottoTicketCount = lottoPurchaseAmount / LOTTO_TICKET_AMOUNT;
-		List<LottoTicket> lottoTicketList = Stream.generate(() -> new LottoTicket(lottoMachine))
-			.limit(lottoTicketCount).collect(Collectors.toList());
-		setLottoTicketList(lottoTicketList);
-
-		return getLottoTicketList();
-	}
-
-	public LottoMatchingResult matchNumber(List<Integer> previousWinningNumber) {
-		validatePrevoiusNumber(previousWinningNumber);
-
-		Map<LottoWinnerType, Long> lottoWinnerTypeListMap = lottoTicketList.stream().
-			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningNumber), Collectors.counting()));
-
-		return new LottoMatchingResult(lottoWinnerTypeListMap);
-	}
-
-	private void validatePurchaseAmount(int lottoPurchaseAmount) {
-		Preconditions.checkArgument(lottoPurchaseAmount >= LOTTO_TICKET_AMOUNT, "로또 구매 금액 이하입니다.");
-		Preconditions.checkArgument(lottoPurchaseAmount % LOTTO_TICKET_AMOUNT == 0, "1000원 단위로 입력해 주세요.");
-	}
-
-	private void validatePrevoiusNumber(List<Integer> previousWinningNumber) {
-		Preconditions.checkArgument(previousWinningNumber.size() == 6,
-			"로또 번호는 6자리여야합니다.");
-		Preconditions.checkArgument(previousWinningNumber.stream().distinct().count() == 6,
-			"중복은 허용되지 않습니다.");
-		Preconditions.checkArgument(!previousWinningNumber.stream().filter(LOTTO_NUMBER_RANGE_PREDICATE).findAny().isPresent()
-			, "잘못된 로또 번호입니다.");
-	}
 }
