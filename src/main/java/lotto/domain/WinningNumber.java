@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.enums.Prize;
 
 public class WinningNumber {
 
@@ -19,13 +18,7 @@ public class WinningNumber {
 				.collect(Collectors.toList());
 	}
 
-	public Prize match(Lotto lotto) {
-		int match = 0;
-		for(Integer winningNumber : winningNumbers) {
-			if(lotto.match(winningNumber)) {
-				++match;
-			}
-		}
-		return Prize.get(match);
+	public boolean hasNumber(Integer number) {
+		return winningNumbers.contains(number);
 	}
 }

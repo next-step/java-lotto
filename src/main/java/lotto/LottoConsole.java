@@ -19,7 +19,7 @@ public class LottoConsole {
 		String winningNumbers = InputView.drawWinningNumbers();
 
 		WinningNumber winningNumber = new WinningNumber(winningNumbers);
-		WinningResult winningResult = lottoTicket.win(winningNumber);
+		WinningResult winningResult = lottoTicket.match(winningNumber);
 		ResultView.printResult(winningResult);
 	}
 }

@@ -16,7 +16,7 @@ public class LottoTicketTest {
 		LottoTicket lottoTicket = new LottoTicket(asList(lotto1, lotto2, lotto3));
 
 		WinningNumber winningNumber = new WinningNumber("1, 3, 5, 13, 14, 17");
-		WinningResult winningResult = lottoTicket.win(winningNumber);
+		WinningResult winningResult = lottoTicket.match(winningNumber);
 
 		assertThat(winningResult).extracting("prizes")
 				.containsExactlyInAnyOrder(asList(Prize.MATCH3, Prize.MATCH6, Prize.MATCH1));
