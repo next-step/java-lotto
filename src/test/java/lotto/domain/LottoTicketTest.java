@@ -42,4 +42,20 @@ public class LottoTicketTest {
 
 		assertThat(winnerType).isEqualTo(LottoWinnerType.FOURTH_WINNER);
 	}
+
+	@Test
+	public void test_로또_번호_꽝_2개() {
+		LottoTicket lottoTicket = new LottoTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoWinnerType winnerType = lottoTicket.matchNumber(Arrays.asList(1, 2, 10, 9, 8, 7));
+
+		assertThat(winnerType).isEqualTo(LottoWinnerType.LOSING_TICKET);
+	}
+
+	@Test
+	public void test_로또_번호_꽝_1개() {
+		LottoTicket lottoTicket = new LottoTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+		LottoWinnerType winnerType = lottoTicket.matchNumber(Arrays.asList(1, 11, 10, 9, 8, 7));
+
+		assertThat(winnerType).isEqualTo(LottoWinnerType.LOSING_TICKET);
+	}
 }
