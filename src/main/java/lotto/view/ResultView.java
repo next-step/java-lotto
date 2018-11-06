@@ -39,7 +39,7 @@ public class ResultView {
 	}
 
 	private static void profitRate(WinningResult winningResult) {
-		System.out.println(String.format("총 수익률은 %d%%입니다.", winningResult.getProfitRate()));
+		System.out.println(String.format("총 수익률은 %.2f입니다.", winningResult.getProfitRate()));
 	}
 
 }

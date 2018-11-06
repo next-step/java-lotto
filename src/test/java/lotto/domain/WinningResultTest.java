@@ -30,7 +30,7 @@ public class WinningResultTest {
 				NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH, NO_MATCH);
 		WinningResult winningResult = new WinningResult(prizes);
 
-		int profitRate = winningResult.calculateProfitRate(prize.getMoney());
-		assertThat(profitRate).isEqualTo(0);
+		double profitRate = winningResult.calculateProfitRate(prize.getMoney());
+		assertThat(profitRate).isEqualTo(1);
 	}
 }

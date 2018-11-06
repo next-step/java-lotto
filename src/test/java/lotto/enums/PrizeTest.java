@@ -24,4 +24,11 @@ public class PrizeTest {
 	public void 없는_상금_검증() {
 		Prize.of(7);
 	}
+
+	@Test
+	public void 당첨금_합계_검증() {
+		int totalMoney = 50000;
+		assertThat(Prize.MATCH4.sumMoney(totalMoney))
+				.isEqualTo(totalMoney + Prize.MATCH4.getMoney());
+	}
 }

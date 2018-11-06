@@ -38,4 +38,8 @@ public enum Prize {
 	public int getMoney() {
 		return money;
 	}
+
+	public int sumMoney(int totalMoney) {
+		return money + totalMoney;
+	}
 }
