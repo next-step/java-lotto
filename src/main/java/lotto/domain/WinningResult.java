@@ -18,8 +18,7 @@ public class WinningResult {
 	}
 
 	public int getProfitRate() {
-		int money = calculateBuyingMoney();
-		return calculateProfitRate(money);
+		return calculateProfitRate(calculateBuyingMoney());
 	}
 
 	public int calculateProfitRate(int money) {
