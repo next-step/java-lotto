@@ -10,7 +10,7 @@ public class LottoTicket {
 	private List<Integer> lottoNumbers;
 
 	public LottoTicket(LottoMachine lottoMachine) {
-		this.lottoNumbers = lottoMachine.drawLottNumbers();
+		this.lottoNumbers = lottoMachine.drawLottoNumbers();
 	}
 
 	public LottoWinnerType matchNumber(List<Integer> winningNumberList) {

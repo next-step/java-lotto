@@ -7,7 +7,7 @@ import java.util.List;
  * Created by hspark on 06/11/2018.
  */
 public interface LottoMachine {
-	default List<Integer> drawLottNumbers() {
+	default List<Integer> drawLottoNumbers() {
 		List<Integer> lottoNumbers = draw();
 		if (lottoNumbers.size() > 6) {
 			throw new RuntimeException();
