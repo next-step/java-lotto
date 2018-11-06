@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 /**
  * Created by hspark on 07/11/2018.
  */
-public class PreviousWinningNumberValidator implements Validator<List<Integer>> {
+public class LottoNumberValidator implements Validator<List<Integer>> {
 
 	@Override
 	public void valid(List<Integer> previousWinningNumber) {
