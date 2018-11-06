@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +52,20 @@ public class LottoMachine {
 	private List<Integer> pick() {
 		return numbers.stream()
 				.limit(PICK_COUNT)
+				.collect(Collectors.toList());
+	}
+
+	public Lotto getLotto(String number) {
+		if(number == null || number.isEmpty()) {
+			throw new IllegalArgumentException("숫자를 입력하세요.");
+		}
+
+		return new Lotto(parseNumbers(number));
+	}
+
+	private List<Integer> parseNumbers(String number) {
+		return Arrays.stream(number.split("[\\s,]+"))
+				.map(Integer::valueOf)
 				.collect(Collectors.toList());
 	}
 }

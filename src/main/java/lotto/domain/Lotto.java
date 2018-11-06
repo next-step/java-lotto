@@ -12,7 +12,7 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public Prize match(WinningNumber winningNumber) {
+	public Prize match(Lotto winningNumber) {
 		int match = 0;
 		for(Integer number : numbers) {
 			if(winningNumber.hasNumber(number)) {
@@ -20,6 +20,10 @@ public class Lotto {
 			}
 		}
 		return Prize.get(match);
+	}
+
+	public boolean hasNumber(Integer number) {
+		return numbers.contains(number);
 	}
 
 	@Override
