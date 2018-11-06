@@ -15,14 +15,14 @@ import java.util.stream.Stream;
  */
 public class Lotto {
 	private static final Validator<Integer> PURCHASE_AMOUNT_VALIDATOR;
-	private static final Validator<List<Integer>> PREVIOUS_WINNING_NUMBER_VALIDATOR;
+	private static final Validator<List<Integer>> LOTTO_NUMBER_VALIDATOR;
 
 	private LottoMachine lottoMachine;
 	private List<LottoTicket> lottoTicketList;
 
 	static {
 		PURCHASE_AMOUNT_VALIDATOR = new LottoPurchaseAmountValidator();
-		PREVIOUS_WINNING_NUMBER_VALIDATOR = new LottoNumberValidator();
+		LOTTO_NUMBER_VALIDATOR = new LottoNumberValidator();
 	}
 
 	public Lotto(LottoMachine lottoMachine) {
@@ -43,7 +43,7 @@ public class Lotto {
 	}
 
 	public LottoMatchingResult matchNumber(List<Integer> previousWinningNumber) {
-		PREVIOUS_WINNING_NUMBER_VALIDATOR.valid(previousWinningNumber);
+		LOTTO_NUMBER_VALIDATOR.valid(previousWinningNumber);
 
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
 			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningNumber),
