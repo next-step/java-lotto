@@ -10,13 +10,15 @@ import java.util.stream.Collectors;
  */
 public class InputView {
 	public static int inputLottoPurchaseAmount() {
+		System.out.println("구입금액을 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextInt();
 	}
 
 	public static List<Integer> inputLottoNumbers() {
+		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		Scanner scanner = new Scanner(System.in);
 		return Arrays.stream(scanner.nextLine().split(","))
-			.map(Integer::parseInt).collect(Collectors.toList());
+			.map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
 	}
 }

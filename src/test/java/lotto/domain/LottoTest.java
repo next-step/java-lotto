@@ -28,6 +28,9 @@ public class LottoTest {
 
 	@Test
 	public void test_1000단위가_아닐때() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("1000원 단위로 입력해 주세요.");
+
 		Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
 		List<LottoTicket> lottoTicketList = lotto.purchaseLottoTickets(1500);
 		assertThat(lottoTicketList).hasSize(1);
