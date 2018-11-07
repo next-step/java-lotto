@@ -8,27 +8,28 @@ public class PrizeTest {
 
 	@Test
 	public void 상금_검증1() {
-		Prize prize = Prize.of(6);
+		Prize prize = Prize.of(6, false);
 
-		assertThat(prize).isEqualByComparingTo(Prize.MATCH6);
+		assertThat(prize).isEqualTo(Prize.FIRST);
 	}
 
 	@Test
 	public void 상금_검증2() {
-		Prize prize = Prize.of(3);
+		Prize prize = Prize.of(3, false);
 
-		assertThat(prize).isEqualByComparingTo(Prize.MATCH3);
+		assertThat(prize).isEqualTo(Prize.FIFTH);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void 없는_상금_검증() {
-		Prize.of(7);
+		Prize prize = Prize.of(7, false);
+		assertThat(prize).isEqualTo(Prize.NO_MATCH);
 	}
 
 	@Test
 	public void 당첨금_합계_검증() {
 		int totalMoney = 50000;
-		assertThat(Prize.MATCH4.sumMoney(totalMoney))
-				.isEqualTo(totalMoney + Prize.MATCH4.getMoney());
+		assertThat(Prize.THIRD.sumMoney(totalMoney))
+				.isEqualTo(totalMoney + Prize.THIRD.getMoney());
 	}
 }

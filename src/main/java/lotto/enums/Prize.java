@@ -4,12 +4,11 @@ import java.util.Arrays;
 
 public enum Prize {
 
-	MATCH6(6, 2000000000),
-	MATCH5(5, 1500000),
-	MATCH4(4, 50000),
-	MATCH3(3, 5000),
-	MATCH2(2, 0),
-	MATCH1(1, 0),
+	FIRST(6, 2000000000),
+	SECOND(5, 1500000),
+	THIRD(5, 50000),
+	FOURTH(4, 5000),
+	FIFTH(3, 0),
 	NO_MATCH(0, 0);
 
 	private int matchCount;
@@ -20,11 +19,12 @@ public enum Prize {
 		this.money = money;
 	}
 
-	public static Prize of(int matchCount) {
+	public static Prize of(int matchCount, boolean hasBonusNumber) {
 		return Arrays.stream(Prize.values())
 				.filter(prize -> prize.isSameMatchCount(matchCount))
+				.filter(prize -> !prize.equals(SECOND) || hasBonusNumber) // 2등 확인 로직
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("일치하는 상금이 존재하지 않습니다."));
+				.orElse(NO_MATCH);
 	}
 
 	private boolean isSameMatchCount(int matchCount) {
