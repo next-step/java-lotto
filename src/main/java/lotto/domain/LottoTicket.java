@@ -10,17 +10,19 @@ import java.util.StringJoiner;
 public class LottoTicket {
 	private List<Integer> lottoNumbers;
 
+	public LottoTicket(List<Integer> lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+	}
+
 	public static LottoTicket newInstanceByAutomation(LottoMachine lottoMachine) {
-		LottoTicket lottoTicket = new LottoTicket();
 		List<Integer> lottoNumbers = lottoMachine.drawLottoNumbers();
-		lottoTicket.setLottoNumbers(lottoNumbers);
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		return lottoTicket;
 	}
 
 	public static LottoTicket newInstanceByManual(List<Integer> lottoNumbers) {
-		LottoTicket lottoTicket = new LottoTicket();
 		Collections.sort(lottoNumbers);
-		lottoTicket.setLottoNumbers(lottoNumbers);
+		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 		return lottoTicket;
 	}
 
