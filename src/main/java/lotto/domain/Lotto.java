@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.validator.LottoPurchaseAmountValidator;
-import lotto.domain.validator.LottoNumberValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,8 +33,6 @@ public class Lotto {
 	}
 
 	public LottoMatchingResult matchNumber(WinningLottoTicket previousWinningTicket) {
-		LottoNumberValidator.valid(previousWinningTicket);
-
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
 			collect(Collectors.groupingBy(lottoTicket -> previousWinningTicket.matchNumber(lottoTicket),
 				Collectors.counting()));
