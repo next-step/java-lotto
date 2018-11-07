@@ -1,8 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.validator.LottoPurchaseAmountValidator;
-import lotto.domain.validator.LottoNumberValidator;
-import lotto.domain.validator.Validator;
+import lotto.domain.validator.LottoTicketValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,23 +13,17 @@ import java.util.stream.Stream;
  * Created by hspark on 06/11/2018.
  */
 public class Lotto {
-	private static final Validator<Integer> PURCHASE_AMOUNT_VALIDATOR;
-	private static final Validator<LottoTicket> LOTTO_NUMBER_VALIDATOR;
-
 	private LottoMachine lottoMachine;
 	private List<LottoTicket> lottoTicketList;
 
-	static {
-		PURCHASE_AMOUNT_VALIDATOR = new LottoPurchaseAmountValidator();
-		LOTTO_NUMBER_VALIDATOR = new LottoNumberValidator();
-	}
+
 
 	public Lotto(LottoMachine lottoMachine) {
 		this.lottoMachine = lottoMachine;
 	}
 
 	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
-		PURCHASE_AMOUNT_VALIDATOR.valid(lottoPurchaseAmount);
+		LottoPurchaseAmountValidator.valid(lottoPurchaseAmount);
 
 		final int lottoTicketCount = lottoPurchaseAmount / LottoConstants.LOTTO_TICKET_AMOUNT;
 
@@ -43,7 +36,7 @@ public class Lotto {
 	}
 
 	public LottoMatchingResult matchNumber(LottoTicket previousWinningTicket) {
-		LOTTO_NUMBER_VALIDATOR.valid(previousWinningTicket);
+		LottoTicketValidator.valid(previousWinningTicket);
 
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
 			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningTicket),
