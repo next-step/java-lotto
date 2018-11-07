@@ -1,15 +1,18 @@
 package raffle.lotto.play;
 
-import raffle.lotto.RandomLotto;
+import raffle.lotto.LottoMachine;
+import raffle.lotto.win.LottoResult;
 import raffle.view.InputView;
 import raffle.view.ResultView;
 
 public class PlayLotto {
     public static void main(String[] args) {
         ResultView resultView = new ResultView();
-        RandomLotto randomLotto = new RandomLotto(InputView.lottoAmount());
-        resultView.buyLotto(randomLotto.getLottoList());
+        LottoMachine lottoMachine = new LottoMachine(InputView.lottoAmount());
+        resultView.buyLotto(lottoMachine.getLottos());
 
-        InputView.lastWeekLotto();
+        LottoResult lottoResult = lottoMachine.winLotto(InputView.lastWeekLotto());
+        resultView.result(lottoResult);
+
     }
 }
