@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.enums.Prize;
 
 public class Lotto {
 
@@ -12,14 +11,14 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public Prize match(Lotto lotto) {
+	public int match(Lotto lotto) {
 		int match = 0;
 		for(Integer number : numbers) {
 			if(lotto.hasNumber(number)) {
 				++match;
 			}
 		}
-		return Prize.of(match);
+		return match;
 	}
 
 	public boolean hasNumber(Integer number) {
