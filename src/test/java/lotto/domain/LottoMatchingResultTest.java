@@ -21,7 +21,7 @@ public class LottoMatchingResultTest {
 		LottoMatchingResult lottoMatchingResult = new LottoMatchingResult(lottoWinnerTypeListMap);
 
 		assertThat(lottoMatchingResult.getTotalPurchaseAmount()).isEqualTo(14_000);
-		assertThat(lottoMatchingResult.getTotalProfits()).isEqualTo(5_000);
-		assertThat(lottoMatchingResult.getProfitsRate()).isEqualTo(new BigDecimal("0.35"));
+		assertThat(lottoMatchingResult.getTotalProfits()).isEqualTo(50_000);
+		assertThat(lottoMatchingResult.getProfitsRate()).isEqualTo(new BigDecimal("3.57"));
 	}
 }

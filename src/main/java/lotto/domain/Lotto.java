@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.validator.LottoPurchaseAmountValidator;
-import lotto.domain.validator.LottoTicketValidator;
+import lotto.domain.validator.LottoNumberValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,20 +14,18 @@ import java.util.stream.Stream;
  */
 public class Lotto {
 	private LottoMachine lottoMachine;
-	private List<LottoTicket> lottoTicketList;
-
-
+	private List<LottoNumber> lottoTicketList;
 
 	public Lotto(LottoMachine lottoMachine) {
 		this.lottoMachine = lottoMachine;
 	}
 
-	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
+	public List<LottoNumber> purchaseLottoTickets(int lottoPurchaseAmount) {
 		LottoPurchaseAmountValidator.valid(lottoPurchaseAmount);
 
 		final int lottoTicketCount = lottoPurchaseAmount / LottoConstants.LOTTO_TICKET_AMOUNT;
 
-		List<LottoTicket> lottoTicketList = Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
+		List<LottoNumber> lottoTicketList = Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
 			.limit(lottoTicketCount).collect(Collectors.toList());
 
 		setLottoTicketList(lottoTicketList);
@@ -35,21 +33,21 @@ public class Lotto {
 		return getLottoTicketList();
 	}
 
-	public LottoMatchingResult matchNumber(LottoTicket previousWinningTicket) {
-		LottoTicketValidator.valid(previousWinningTicket);
+	public LottoMatchingResult matchNumber(LottoNumber previousWinningTicket) {
+		LottoNumberValidator.valid(previousWinningTicket);
 
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
-			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningTicket),
+			collect(Collectors.groupingBy(lottoTicket -> previousWinningTicket.matchNumber(lottoTicket),
 				Collectors.counting()));
 
 		return new LottoMatchingResult(lottoWinnerTypeCountMap);
 	}
 
-	public List<LottoTicket> getLottoTicketList() {
+	public List<LottoNumber> getLottoTicketList() {
 		return Collections.unmodifiableList(lottoTicketList);
 	}
 
-	private void setLottoTicketList(List<LottoTicket> lottoTicketList) {
+	private void setLottoTicketList(List<LottoNumber> lottoTicketList) {
 		this.lottoTicketList = lottoTicketList;
 	}
 

@@ -19,7 +19,7 @@ public class LottoNumberValidatorTest {
 	public void test_정상() {
 		List<Integer> previousLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
-		LottoTicketValidator.valid(previousLottoTicket);
+		LottoNumberValidator.valid(previousLottoTicket);
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class LottoNumberValidatorTest {
 
 		List<Integer> previousLottoNumber = Arrays.asList(46, 47, 48, 49, 50, 51);
 		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
-		LottoTicketValidator.valid(previousLottoTicket);
+		LottoNumberValidator.valid(previousLottoTicket);
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class LottoNumberValidatorTest {
 
 		List<Integer> previousLottoNumber = Arrays.asList(0, 1, 2, 3, 4, 5);
 		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
-		LottoTicketValidator.valid(previousLottoTicket);
+		LottoNumberValidator.valid(previousLottoTicket);
 	}
 
 	@Test
@@ -49,6 +49,6 @@ public class LottoNumberValidatorTest {
 
 		List<Integer> previousLottoNumber = Arrays.asList(0, 1, 2, 3, 5, 5);
 		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
-		LottoTicketValidator.valid(previousLottoTicket);
+		LottoNumberValidator.valid(previousLottoTicket);
 	}
 }

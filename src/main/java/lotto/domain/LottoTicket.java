@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 /**
  * Created by hspark on 06/11/2018.
  */
-public class LottoTicket {
+public class LottoTicket implements LottoNumber {
 	private List<Integer> lottoNumbers;
 
 	public LottoTicket(List<Integer> lottoNumbers) {
@@ -26,16 +26,13 @@ public class LottoTicket {
 		return lottoTicket;
 	}
 
-	public LottoWinnerType matchNumber(LottoTicket targetTicket) {
-		int matchingCount = 0;
-		for (Integer winningNumber : targetTicket.lottoNumbers) {
-			matchingCount += lottoNumbers.contains(winningNumber) ? 1 : 0;
-		}
-		return LottoWinnerType.findByMatchingCount(matchingCount);
+	public LottoWinnerType matchNumber(LottoNumber lottoNumber) {
+		int matchingCount = getMatchingCount(lottoNumber);
+		return LottoWinnerType.findByMatchingCountAndBonus(matchingCount, false);
 	}
 
-	public List<Integer> getLottoNumbers() {
-		return lottoNumbers;
+	public List<Integer> getNumbers() {
+		return Collections.unmodifiableList(lottoNumbers);
 	}
 
 	private void setLottoNumbers(List<Integer> lottoNumbers) {

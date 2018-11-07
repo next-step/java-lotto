@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMatchingResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.ShuffleLottoMachine;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -18,10 +15,13 @@ public class LottoMain {
 			int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
 
 			Lotto lotto = new Lotto(new ShuffleLottoMachine());
-			List<LottoTicket> lottoTicketList = lotto.purchaseLottoTickets(lottoPurchaseAmount);
+			List<LottoNumber> lottoTicketList = lotto.purchaseLottoTickets(lottoPurchaseAmount);
 			ResultView.printLottoTickets(lottoTicketList);
 
-			LottoTicket previousWinningTicket = LottoTicket.newInstanceByManual(InputView.inputLottoNumbers());
+			List<Integer> lottoNumber = InputView.inputLottoNumbers();
+			int bonusNumber = InputView.inputLottoBonusNumber();
+			LottoNumber previousWinningTicket = new WinningLottoTicket(lottoNumber, bonusNumber);
+
 			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
 			ResultView.printResult(lottoMatchingResult);
 		} catch (Exception e) {
