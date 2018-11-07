@@ -20,7 +20,7 @@ public class LottoMain {
 
 			List<Integer> lottoNumber = InputView.inputLottoNumbers();
 			int bonusNumber = InputView.inputLottoBonusNumber();
-			LottoNumber previousWinningTicket = new WinningLottoTicket(lottoNumber, bonusNumber);
+			LottoNumber previousWinningTicket = WinningLottoTicket.newInstance(lottoNumber, bonusNumber);
 
 			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
 			ResultView.printResult(lottoMatchingResult);
