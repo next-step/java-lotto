@@ -1,5 +1,6 @@
 package lotto.domain.validator;
 
+import lotto.domain.LottoTicket;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +25,8 @@ public class LottoNumberValidatorTest {
 	@Test
 	public void test_정상() {
 		List<Integer> previousLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-		lottoNumberValidator.valid(previousLottoNumber);
+		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
+		lottoNumberValidator.valid(previousLottoTicket);
 	}
 
 	@Test
@@ -33,7 +35,8 @@ public class LottoNumberValidatorTest {
 		expectedException.expectMessage("잘못된 로또 번호입니다.");
 
 		List<Integer> previousLottoNumber = Arrays.asList(46, 47, 48, 49, 50, 51);
-		lottoNumberValidator.valid(previousLottoNumber);
+		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
+		lottoNumberValidator.valid(previousLottoTicket);
 	}
 
 	@Test
@@ -42,7 +45,8 @@ public class LottoNumberValidatorTest {
 		expectedException.expectMessage("잘못된 로또 번호입니다.");
 
 		List<Integer> previousLottoNumber = Arrays.asList(0, 1, 2, 3, 4, 5);
-		lottoNumberValidator.valid(previousLottoNumber);
+		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
+		lottoNumberValidator.valid(previousLottoTicket);
 	}
 
 	@Test
@@ -51,6 +55,7 @@ public class LottoNumberValidatorTest {
 		expectedException.expectMessage("중복은 허용되지 않습니다.");
 
 		List<Integer> previousLottoNumber = Arrays.asList(0, 1, 2, 3, 5, 5);
-		lottoNumberValidator.valid(previousLottoNumber);
+		LottoTicket previousLottoTicket = LottoTicket.newInstanceByManual(previousLottoNumber);
+		lottoNumberValidator.valid(previousLottoTicket);
 	}
 }

@@ -9,9 +9,6 @@ import java.util.List;
 public interface LottoMachine {
 	default List<Integer> drawLottoNumbers() {
 		List<Integer> lottoNumbers = draw();
-		if (lottoNumbers.size() > 6) {
-			throw new RuntimeException();
-		}
 		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}

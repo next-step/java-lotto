@@ -25,7 +25,7 @@ public class ShuffleLottoMachineTest {
 		ShuffleLottoMachine shuffleLottoMachine = new ShuffleLottoMachine();
 		LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
 		for (int i = 0; i < 1000; i++) {
-			lottoNumberValidator.valid(shuffleLottoMachine.draw());
+			lottoNumberValidator.valid(LottoTicket.newInstanceByAutomation(shuffleLottoMachine));
 		}
 	}
 }

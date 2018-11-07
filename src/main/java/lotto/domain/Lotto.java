@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  */
 public class Lotto {
 	private static final Validator<Integer> PURCHASE_AMOUNT_VALIDATOR;
-	private static final Validator<List<Integer>> LOTTO_NUMBER_VALIDATOR;
+	private static final Validator<LottoTicket> LOTTO_NUMBER_VALIDATOR;
 
 	private LottoMachine lottoMachine;
 	private List<LottoTicket> lottoTicketList;
@@ -34,7 +34,7 @@ public class Lotto {
 
 		final int lottoTicketCount = lottoPurchaseAmount / LottoConstants.LOTTO_TICKET_AMOUNT;
 
-		List<LottoTicket> lottoTicketList = Stream.generate(() -> new LottoTicket(lottoMachine))
+		List<LottoTicket> lottoTicketList = Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
 			.limit(lottoTicketCount).collect(Collectors.toList());
 
 		setLottoTicketList(lottoTicketList);
@@ -42,11 +42,11 @@ public class Lotto {
 		return getLottoTicketList();
 	}
 
-	public LottoMatchingResult matchNumber(List<Integer> previousWinningNumber) {
-		LOTTO_NUMBER_VALIDATOR.valid(previousWinningNumber);
+	public LottoMatchingResult matchNumber(LottoTicket previousWinningTicket) {
+		LOTTO_NUMBER_VALIDATOR.valid(previousWinningTicket);
 
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
-			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningNumber),
+			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningTicket),
 				Collectors.counting()));
 
 		return new LottoMatchingResult(lottoWinnerTypeCountMap);

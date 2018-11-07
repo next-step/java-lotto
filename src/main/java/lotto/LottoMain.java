@@ -21,10 +21,10 @@ public class LottoMain {
 			List<LottoTicket> lottoTicketList = lotto.purchaseLottoTickets(lottoPurchaseAmount);
 			ResultView.printLottoTickets(lottoTicketList);
 
-			List<Integer> previousWinningNumber = InputView.inputLottoNumbers();
-			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningNumber);
+			LottoTicket previousWinningTicket = LottoTicket.newInstanceByManual(InputView.inputLottoNumbers());
+			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
 			ResultView.printResult(lottoMatchingResult);
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}

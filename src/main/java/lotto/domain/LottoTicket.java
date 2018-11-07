@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -9,16 +10,34 @@ import java.util.StringJoiner;
 public class LottoTicket {
 	private List<Integer> lottoNumbers;
 
-	public LottoTicket(LottoMachine lottoMachine) {
-		this.lottoNumbers = lottoMachine.drawLottoNumbers();
+	public static LottoTicket newInstanceByAutomation(LottoMachine lottoMachine) {
+		LottoTicket lottoTicket = new LottoTicket();
+		List<Integer> lottoNumbers = lottoMachine.drawLottoNumbers();
+		lottoTicket.setLottoNumbers(lottoNumbers);
+		return lottoTicket;
 	}
 
-	public LottoWinnerType matchNumber(List<Integer> winningNumberList) {
+	public static LottoTicket newInstanceByManual(List<Integer> lottoNumbers) {
+		LottoTicket lottoTicket = new LottoTicket();
+		Collections.sort(lottoNumbers);
+		lottoTicket.setLottoNumbers(lottoNumbers);
+		return lottoTicket;
+	}
+
+	public LottoWinnerType matchNumber(LottoTicket targetTicket) {
 		int matchingCount = 0;
-		for (Integer winningNumber : winningNumberList) {
+		for (Integer winningNumber : targetTicket.lottoNumbers) {
 			matchingCount += lottoNumbers.contains(winningNumber) ? 1 : 0;
 		}
 		return LottoWinnerType.findByMatchingCount(matchingCount);
+	}
+
+	public List<Integer> getLottoNumbers() {
+		return lottoNumbers;
+	}
+
+	private void setLottoNumbers(List<Integer> lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
 	}
 
 	@Override
