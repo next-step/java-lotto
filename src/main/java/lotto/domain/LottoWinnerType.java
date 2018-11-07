@@ -15,35 +15,35 @@ public enum LottoWinnerType {
 	FIFTH_WINNER(3, false, 5_000),
 	LOSING_TICKET(0, false, 0);
 
-	private int matchNumberCount;
+	private int matchCount;
 	private boolean bonusGame;
 	private long reward;
 
-	LottoWinnerType(int matchNumberCount, boolean bonusGame, long reward) {
-		this.matchNumberCount = matchNumberCount;
+	LottoWinnerType(int matchCount, boolean bonusGame, long reward) {
+		this.matchCount = matchCount;
 		this.bonusGame = bonusGame;
 		this.reward = reward;
 	}
 
-	public int getMatchNumberCount() {
-		return matchNumberCount;
+	public int getMatchCount() {
+		return matchCount;
 	}
 
 	public long getReward() {
 		return reward;
 	}
 
-	public boolean isMatchCount(int matchingCount) {
-		return this.matchNumberCount == matchingCount;
+	public boolean isMatchCount(int numberOfMatched) {
+		return this.matchCount == numberOfMatched;
 	}
 
 	public boolean isBonusGame() {
 		return this.bonusGame;
 	}
 
-	public static LottoWinnerType findByMatchingCountAndBonus(final int matchingCount, final boolean hasBonusNumber) {
+	public static LottoWinnerType findByMatchingCountAndBonus(final int numberOfMatched, final boolean hasBonusNumber) {
 		return Arrays.stream(LottoWinnerType.values())
-			.filter(lottoWinnerType -> lottoWinnerType.isMatchCount(matchingCount))
+			.filter(lottoWinnerType -> lottoWinnerType.isMatchCount(numberOfMatched))
 			.filter(lottoWinnerType -> lottoWinnerType.isBonusGame() ? hasBonusNumber : true)
 			.findFirst().orElse(LOSING_TICKET);
 	}

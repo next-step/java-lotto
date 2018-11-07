@@ -27,7 +27,7 @@ public class ResultView {
 		for (LottoWinnerType winnerType : LottoWinnerType.getWinnerList()) {
 			Long matchingCount = lottoMatchingResult.getWinnerCountByWinnerType(winnerType);
 
-			sb.append(String.format("%d개 일치", winnerType.getMatchNumberCount()));
+			sb.append(String.format("%d개 일치", winnerType.getMatchCount()));
 			if (winnerType.isBonusGame()) {
 				sb.append(", 보너스 볼 일치");
 			}
