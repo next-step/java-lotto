@@ -12,6 +12,10 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MIN = 0;
+    public static final int LOTTO_MAX = 6;
 
     List<Integer> lottoNumber;
     private List<Lotto> lottos;
@@ -25,9 +29,9 @@ public class LottoMachine {
     }
 
     private void suffleLotto() {
-        lottoNumber = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumber);
-        lottos.add(new Lotto(lottoNumber.subList(0, 6)));
+        lottos.add(new Lotto(lottoNumber.subList(LOTTO_MIN, LOTTO_MAX)));
     }
 
     public List<Lotto> getLottos() {
