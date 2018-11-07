@@ -37,10 +37,6 @@ public enum LottoWinnerType {
 		return this.matchNumberCount == matchingCount;
 	}
 
-	public boolean isBonusWinner(boolean hasBonusNumber) {
-		return isBonusGame() ? hasBonusNumber : true;
-	}
-
 	public boolean isBonusGame() {
 		return this.bonusGame;
 	}
@@ -48,7 +44,7 @@ public enum LottoWinnerType {
 	public static LottoWinnerType findByMatchingCountAndBonus(final int matchingCount, final boolean hasBonusNumber) {
 		return Arrays.stream(LottoWinnerType.values())
 			.filter(lottoWinnerType -> lottoWinnerType.isMatchCount(matchingCount))
-			.filter(lottoWinnerType -> lottoWinnerType.isBonusWinner(hasBonusNumber))
+			.filter(lottoWinnerType -> lottoWinnerType.isBonusGame() ? hasBonusNumber : true)
 			.findFirst().orElse(LOSING_TICKET);
 	}
 

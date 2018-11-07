@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.validator.LottoNumberValidator;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
@@ -10,19 +12,21 @@ import java.util.StringJoiner;
 public class LottoTicket implements LottoNumber {
 	private List<Integer> lottoNumbers;
 
-	public LottoTicket(List<Integer> lottoNumbers) {
+	private LottoTicket(List<Integer> lottoNumbers) {
 		this.lottoNumbers = lottoNumbers;
 	}
 
 	public static LottoTicket newInstanceByAutomation(LottoMachine lottoMachine) {
 		List<Integer> lottoNumbers = lottoMachine.drawLottoNumbers();
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoNumberValidator.valid(lottoTicket);
 		return lottoTicket;
 	}
 
 	public static LottoTicket newInstanceByManual(List<Integer> lottoNumbers) {
 		Collections.sort(lottoNumbers);
 		LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+		LottoNumberValidator.valid(lottoTicket);
 		return lottoTicket;
 	}
 

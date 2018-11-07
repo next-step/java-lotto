@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.validator.WinningLottoTicketValidator;
+
 import java.util.List;
 
 /**
@@ -9,9 +11,15 @@ public class WinningLottoTicket implements LottoNumber {
 	private LottoTicket lottoTicket;
 	private Integer bonusNumber;
 
-	public WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusNumber) {
+	private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusNumber) {
 		this.lottoTicket = LottoTicket.newInstanceByManual(lottoNumbers);
 		this.bonusNumber = bonusNumber;
+	}
+
+	public static WinningLottoTicket newInstance(List<Integer> lottoNumbers, Integer bonusNumber) {
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoNumbers, bonusNumber);
+		WinningLottoTicketValidator.valid(winningLottoTicket);
+		return winningLottoTicket;
 	}
 
 	@Override
