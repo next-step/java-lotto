@@ -16,6 +16,6 @@ public class WinningLottoTest {
 		int bonusNumber = 7;
 		WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
 
-		assertThat(winningLotto.match(lotto)).isEqualTo(Prize.MATCH5);
+		assertThat(winningLotto.getPrize(lotto)).isEqualTo(Prize.SECOND);
 	}
 }

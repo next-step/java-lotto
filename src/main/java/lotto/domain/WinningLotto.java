@@ -12,19 +12,11 @@ public class WinningLotto extends Lotto {
 		this.bonusNumber = bonusNumber;
 	}
 
-	@Override
-	public Prize match(Lotto lotto) {
-		Prize prize = super.match(lotto);
-		if(prize.equals(Prize.MATCH5)) {
-			return matchBonusNumber(lotto);
-		}
-		return prize;
+	public Prize getPrize(Lotto lotto) {
+		return Prize.of(super.match(lotto), hasBonusNumber(lotto));
 	}
 
-	private Prize matchBonusNumber(Lotto lotto) {
-		if(lotto.hasNumber(bonusNumber)) {
-			return Prize.MATCH5;
-		}
-		return Prize.MATCH4;
+	private boolean hasBonusNumber(Lotto lotto) {
+		return lotto.hasNumber(bonusNumber);
 	}
 }

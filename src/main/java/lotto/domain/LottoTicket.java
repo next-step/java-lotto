@@ -12,9 +12,9 @@ public class LottoTicket {
 		this.lottos = lottos;
 	}
 
-	public WinningResult match(Lotto winningNumber) {
+	public WinningResult match(WinningLotto winningLotto) {
 		List<Prize> prizes = lottos.stream()
-				.map(lotto -> lotto.match(winningNumber))
+				.map(lotto -> winningLotto.getPrize(lotto))
 				.collect(Collectors.toList());
 		return new WinningResult(prizes);
 	}
