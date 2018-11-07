@@ -15,8 +15,9 @@ public class LottoTicketTest {
 		Lotto lotto3 = new Lotto(asList(1, 8, 9, 10, 11, 12)); // 1개 매치
 		LottoTicket lottoTicket = new LottoTicket(asList(lotto1, lotto2, lotto3));
 
-		WinningLotto winningNumber = new WinningLotto(asList(1, 3, 5, 13, 14, 17), 19);
-		WinningResult winningResult = lottoTicket.match(winningNumber);
+		Lotto winningNumber = new Lotto(asList(1, 3, 5, 13, 14, 17));
+		WinningLotto winningLotto = new WinningLotto(winningNumber, 19);
+		WinningResult winningResult = lottoTicket.match(winningLotto);
 
 		assertThat(winningResult).extracting("prizes")
 				.containsExactlyInAnyOrder(asList(Prize.FIFTH, Prize.FIRST, Prize.NO_MATCH));

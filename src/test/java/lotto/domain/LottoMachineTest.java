@@ -2,9 +2,12 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.dto.WinningNumber;
 import org.junit.Test;
 
 public class LottoMachineTest {
+
+	private LottoMachine lottoMachine = new LottoMachine(LottoMachine.LOTTO_PRICE);
 
 	@Test
 	public void 자동으로_구매한_로또_확인() {
@@ -29,8 +32,7 @@ public class LottoMachineTest {
 				String.valueOf(number4), String.valueOf(number5), String.valueOf(number6));
 
 		// 로또 생성
-		LottoMachine lottoMachine = new LottoMachine(LottoMachine.LOTTO_PRICE);
-		Lotto lotto = lottoMachine.getWinningLotto(numbers, 0);
+		Lotto lotto = lottoMachine.getLotto(numbers);
 
 		assertThat(lotto.hasNumber(number1)).isTrue();
 		assertThat(lotto.hasNumber(number2)).isTrue();
@@ -49,7 +51,7 @@ public class LottoMachineTest {
 				String.valueOf(number4), String.valueOf(number5), String.valueOf(number6));
 
 		// 로또 생성
-		LottoMachine lottoMachine = new LottoMachine(LottoMachine.LOTTO_PRICE);
-		lottoMachine.getWinningLotto(numbers, 1);
+		WinningNumber winningNumber = new WinningNumber(numbers, 1);
+		lottoMachine.getWinningLotto(winningNumber);
 	}
 }

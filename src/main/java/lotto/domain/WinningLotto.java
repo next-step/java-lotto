@@ -1,19 +1,19 @@
 package lotto.domain;
 
-import java.util.List;
 import lotto.enums.Prize;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
 
+	private Lotto winningNumber;
 	private int bonusNumber;
 
-	public WinningLotto(List<Integer> numbers, int bonusNumber) {
-		super(numbers);
+	public WinningLotto(Lotto winningNumber, int bonusNumber) {
+		this.winningNumber = winningNumber;
 		this.bonusNumber = bonusNumber;
 	}
 
 	public Prize getPrize(Lotto lotto) {
-		return Prize.of(super.match(lotto), hasBonusNumber(lotto));
+		return Prize.of(winningNumber.match(lotto), hasBonusNumber(lotto));
 	}
 
 	private boolean hasBonusNumber(Lotto lotto) {
