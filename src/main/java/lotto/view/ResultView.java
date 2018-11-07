@@ -1,8 +1,5 @@
 package lotto.view;
 
-import static java.util.Arrays.asList;
-
-import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningResult;
@@ -28,14 +25,18 @@ public class ResultView {
 	}
 
 	private static void prizeCount(WinningResult winningResult) {
-		for(Prize prize : getPrintPrizes()) {
-			System.out.println(String.format("%d개 일치 (%d원) - %d개",
+		for(Prize prize : Prize.values()) {
+			if(prize.equals(Prize.NO_MATCH)) {
+				continue;
+			}
+
+			String output = "%d개 일치 (%d원) - %d개";
+			if(prize.equals(Prize.SECOND)) {
+				output = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
+			}
+			System.out.println(String.format(output,
 					prize.getMatchCount(), prize.getMoney(), winningResult.getPrizeCount(prize)));
 		}
-	}
-
-	private static List<Prize> getPrintPrizes() {
-		return asList(Prize.MATCH3, Prize.MATCH4, Prize.MATCH5, Prize.MATCH6);
 	}
 
 	private static void profitRate(WinningResult winningResult) {
