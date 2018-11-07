@@ -27,7 +27,6 @@ public class WinningLottoTicket implements LottoNumber {
 		return lottoTicket.getNumbers();
 	}
 
-	@Override
 	public LottoWinnerType matchNumber(LottoNumber lottoNumber) {
 		int matchingCount = getMatchingCount(lottoNumber);
 		boolean hasBonusNumber = lottoNumber.getNumbers().contains(bonusNumber);

@@ -30,17 +30,8 @@ public class LottoTicket implements LottoNumber {
 		return lottoTicket;
 	}
 
-	public LottoWinnerType matchNumber(LottoNumber lottoNumber) {
-		int matchingCount = getMatchingCount(lottoNumber);
-		return LottoWinnerType.findByMatchingCountAndBonus(matchingCount, false);
-	}
-
 	public List<Integer> getNumbers() {
 		return Collections.unmodifiableList(lottoNumbers);
-	}
-
-	private void setLottoNumbers(List<Integer> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
 	}
 
 	@Override

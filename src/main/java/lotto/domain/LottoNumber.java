@@ -8,8 +8,6 @@ import java.util.List;
 public interface LottoNumber {
 	List<Integer> getNumbers();
 
-	LottoWinnerType matchNumber(LottoNumber lottoNumber);
-
 	default int getMatchingCount(LottoNumber lottoNumber) {
 		int matchingCount = 0;
 		for (Integer number : lottoNumber.getNumbers()) {

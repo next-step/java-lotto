@@ -33,7 +33,7 @@ public class Lotto {
 		return getLottoTicketList();
 	}
 
-	public LottoMatchingResult matchNumber(LottoNumber previousWinningTicket) {
+	public LottoMatchingResult matchNumber(WinningLottoTicket previousWinningTicket) {
 		LottoNumberValidator.valid(previousWinningTicket);
 
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
