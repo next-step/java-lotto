@@ -12,10 +12,10 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public Prize match(Lotto winningNumber) {
+	public Prize match(Lotto lotto) {
 		int match = 0;
 		for(Integer number : numbers) {
-			if(winningNumber.hasNumber(number)) {
+			if(lotto.hasNumber(number)) {
 				++match;
 			}
 		}

@@ -31,15 +31,15 @@ public enum Prize {
 		return this.matchCount == matchCount;
 	}
 
+	public int sumMoney(int totalMoney) {
+		return money + totalMoney;
+	}
+
 	public int getMatchCount() {
 		return matchCount;
 	}
 
 	public int getMoney() {
 		return money;
-	}
-
-	public int sumMoney(int totalMoney) {
-		return money + totalMoney;
 	}
 }
