@@ -22,14 +22,10 @@ public class PurchaseInfo {
 	}
 
 	public int getQuickPickCount() {
-		return getPickCount() - getManualPickCount();
+		return getPickCount() - manualNumbers.size();
 	}
 
 	private int getPickCount() {
 		return money / LottoMachine.LOTTO_PRICE;
-	}
-
-	public int getManualPickCount() {
-		return manualNumbers.size();
 	}
 }
