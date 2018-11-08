@@ -22,4 +22,16 @@ public class LottoTicket {
 	public List<Lotto> getLottos() {
 		return lottos;
 	}
+
+	public List<Lotto> getManualPickLottos() {
+		return lottos.stream()
+				.filter(lotto -> lotto.isManual())
+				.collect(Collectors.toList());
+	}
+
+	public List<Lotto> getQuickPickLottos() {
+		return lottos.stream()
+				.filter(lotto -> !lotto.isManual())
+				.collect(Collectors.toList());
+	}
 }

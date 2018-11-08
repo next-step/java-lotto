@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
@@ -15,8 +17,29 @@ public class InputView {
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		int manualPickCount = scanner.nextInt();
 
-		return new PurchaseInfo(money, manualPickCount);
+		List<String> manualNumbers = new ArrayList<>();
+		if(hasManualPickCount(manualPickCount)) {
+			System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+			manualNumbers.addAll(inputManualNumbers(manualPickCount));
+		}
+
+		return new PurchaseInfo(money, manualNumbers);
 	}
+
+	private static boolean hasManualPickCount(int manualPickCount) {
+		return manualPickCount > 0;
+	}
+
+	private static List<String> inputManualNumbers(int manualPickCount) {
+		scanner.nextLine(); // 엔터 제거
+		List<String> manualNumbers = new ArrayList<>();
+		for(int count = 1; count <= manualPickCount; count++) {
+			String manualNumber = scanner.nextLine();
+			manualNumbers.add(manualNumber);
+		}
+		return manualNumbers;
+	}
+
 
 	public static WinningNumber drawWinningNumbers() {
 		scanner.nextLine(); // 엔터 제거

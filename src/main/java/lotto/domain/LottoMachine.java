@@ -10,32 +10,41 @@ public class LottoMachine {
 
 	public static final int LOTTO_PRICE = 1000;
 
-	private int money;
+	private PurchaseInfo purchaseInfo;
 	private LottoNumberGenerator lottoNumberGenerator;
 
 	public LottoMachine(PurchaseInfo purchaseInfo) {
 		if(purchaseInfo.getMoney() < LOTTO_PRICE) {
 			throw new IllegalArgumentException("1개 이상부터 구매 가능합니다.");
 		}
-		this.money = purchaseInfo.getMoney();
+		this.purchaseInfo = purchaseInfo;
 		this.lottoNumberGenerator = new LottoNumberGenerator();
 	}
 
 	public LottoTicket getLottos() {
-		int lottoCount = getLottoCount(money);
-		List<Lotto> lottos = new ArrayList<>();
-		for(int count = 1; count <= lottoCount; count++) {
-			lottos.add(getLotto());
-		}
+		List<Lotto> lottos = manualPick();
+		lottos.addAll(quickPick());
 		return new LottoTicket(lottos);
 	}
 
-	private int getLottoCount(int money) {
-		return money / LOTTO_PRICE;
+	private List<Lotto> quickPick() {
+		List<Lotto> lottos = new ArrayList<>();
+		for(int count = 1; count <= purchaseInfo.getQuickPickCount(); count++) {
+			lottos.add(getLotto());
+		}
+		return lottos;
 	}
 
 	private Lotto getLotto() {
 		return new Lotto(lottoNumberGenerator.pick());
+	}
+
+	private List<Lotto> manualPick() {
+		List<Lotto> lottos = new ArrayList<>();
+		for(String manualNumber : purchaseInfo.getManualNumbers()) {
+			lottos.add(getLotto(manualNumber));
+		}
+		return lottos;
 	}
 
 	public WinningLotto getWinningLotto(WinningNumber winningNumber) {
@@ -48,7 +57,7 @@ public class LottoMachine {
 	}
 
 	public Lotto getLotto(String number) {
-		return new Lotto(lottoNumberGenerator.pick(number));
+		return new Lotto(lottoNumberGenerator.pick(number), true);
 	}
 
 }

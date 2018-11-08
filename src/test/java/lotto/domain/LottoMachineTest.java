@@ -1,20 +1,23 @@
 package lotto.domain;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Collections;
+import java.util.List;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
 import org.junit.Test;
 
 public class LottoMachineTest {
 
-	private LottoMachine lottoMachine = new LottoMachine(new PurchaseInfo(LottoMachine.LOTTO_PRICE, 0));
+	private LottoMachine lottoMachine = new LottoMachine(new PurchaseInfo(LottoMachine.LOTTO_PRICE, Collections.emptyList()));
 
 	@Test
 	public void 자동으로_구매한_로또_확인() {
 		final int lottoCount = 6;
 		int money = lottoCount * LottoMachine.LOTTO_PRICE;
-		LottoMachine lottoMachine = new LottoMachine(new PurchaseInfo(money, 0));
+		LottoMachine lottoMachine = new LottoMachine(new PurchaseInfo(money, Collections.emptyList()));
 		LottoTicket lottoTicket = lottoMachine.getLottos();
 
 		assertThat(lottoTicket.getLottos()).hasSize(lottoCount);
@@ -23,7 +26,7 @@ public class LottoMachineTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void 잘못된_구매_개수_검증() {
 		int money = LottoMachine.LOTTO_PRICE - LottoMachine.LOTTO_PRICE;
-		new LottoMachine(new PurchaseInfo(money, 0));
+		new LottoMachine(new PurchaseInfo(money, Collections.emptyList()));
 	}
 
 	@Test
@@ -56,5 +59,16 @@ public class LottoMachineTest {
 		// 로또 생성
 		WinningNumber winningNumber = new WinningNumber(numbers, 1);
 		lottoMachine.getWinningLotto(winningNumber);
+	}
+
+	@Test
+	public void 수동_구매_검증() {
+		final int totalPickCount = 10;
+		final List<String> manualNumbers = asList("1, 2, 3, 4, 5, 6", "2, 3, 4, 5, 6, 7", "8, 9, 12, 13, 14, 15");
+		PurchaseInfo purchaseInfo = new PurchaseInfo(totalPickCount * LottoMachine.LOTTO_PRICE, manualNumbers);
+		LottoMachine lottoMachine = new LottoMachine(purchaseInfo);
+		LottoTicket lottoTicket = lottoMachine.getLottos();
+
+		assertThat(lottoTicket.getLottos()).hasSize(totalPickCount);
 	}
 }
