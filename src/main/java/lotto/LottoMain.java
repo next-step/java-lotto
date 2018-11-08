@@ -15,12 +15,12 @@ public class LottoMain {
 			int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
 
 			Lotto lotto = new Lotto(new ShuffleLottoMachine());
-			List<LottoNumber> lottoTicketList = lotto.purchaseLottoTickets(lottoPurchaseAmount);
+			List<LottoTicket> lottoTicketList = lotto.purchaseLottoTickets(lottoPurchaseAmount);
 			ResultView.printLottoTickets(lottoTicketList);
 
 			List<Integer> lottoNumber = InputView.inputLottoNumbers();
 			int bonusNumber = InputView.inputLottoBonusNumber();
-			WinningLottoTicket previousWinningTicket = WinningLottoTicket.newInstance(lottoNumber, bonusNumber);
+			WinningLottoTicket previousWinningTicket = new WinningLottoTicket(lottoNumber, bonusNumber);
 
 			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
 			ResultView.printResult(lottoMatchingResult);

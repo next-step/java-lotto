@@ -7,33 +7,27 @@ import java.util.List;
 /**
  * Created by hspark on 07/11/2018.
  */
-public class WinningLottoTicket implements LottoNumber {
+public class WinningLottoTicket {
 	private LottoTicket lottoTicket;
 	private Integer bonusNumber;
 
-	private WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusNumber) {
+	public WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusNumber) {
 		this.lottoTicket = LottoTicket.newInstanceByManual(lottoNumbers);
 		this.bonusNumber = bonusNumber;
+		WinningLottoTicketValidator.valid(this);
 	}
 
-	public static WinningLottoTicket newInstance(List<Integer> lottoNumbers, Integer bonusNumber) {
-		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoNumbers, bonusNumber);
-		WinningLottoTicketValidator.valid(winningLottoTicket);
-		return winningLottoTicket;
-	}
-
-	@Override
-	public List<Integer> getNumbers() {
-		return lottoTicket.getNumbers();
-	}
-
-	public LottoWinnerType matchNumber(LottoNumber lottoNumber) {
-		int matchingCount = getMatchingCount(lottoNumber);
-		boolean hasBonusNumber = lottoNumber.getNumbers().contains(bonusNumber);
+	public LottoWinnerType matchNumber(LottoTicket targetLottoTicket) {
+		int matchingCount = this.lottoTicket.getMatchingCount(targetLottoTicket);
+		boolean hasBonusNumber = targetLottoTicket.hasNumber(bonusNumber);
 		return LottoWinnerType.findByMatchingCountAndBonus(matchingCount, hasBonusNumber);
 	}
 
 	public Integer getBonusNumber() {
 		return bonusNumber;
+	}
+
+	public List<Integer> getNumbers() {
+		return lottoTicket.getNumbers();
 	}
 }

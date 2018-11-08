@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoMatchingResult;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerType;
 
 import java.math.BigDecimal;
@@ -11,10 +11,10 @@ import java.util.List;
  * Created by hspark on 06/11/2018.
  */
 public class ResultView {
-	public static void printLottoTickets(List<LottoNumber> lottoNumberList) {
+	public static void printLottoTickets(List<LottoTicket> lottoNumberList) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("%d개를 구매했습니다.\n", lottoNumberList.size()));
-		for (LottoNumber lottoNumber : lottoNumberList) {
+		for (LottoTicket lottoNumber : lottoNumberList) {
 			sb.append(lottoNumber + "\n");
 		}
 		System.out.println(sb.toString());

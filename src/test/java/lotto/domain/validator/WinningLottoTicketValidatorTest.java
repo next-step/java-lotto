@@ -7,8 +7,6 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by hspark on 08/11/2018.
  */
@@ -20,7 +18,7 @@ public class WinningLottoTicketValidatorTest {
 	public void test_보너스_볼_중복() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("보너스 볼 중복");
-		WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
+		WinningLottoTicket winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
 		WinningLottoTicketValidator.BONUS_NUMBER_OVERLAP.getValidator().valid(winningLottoTicket);
 	}
 }

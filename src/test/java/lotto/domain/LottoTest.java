@@ -20,7 +20,7 @@ public class LottoTest {
 	@Test
 	public void test_16000원_구매() {
 		Lotto lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-		List<LottoNumber> lottoTicketList = lotto.purchaseLottoTickets(16000);
+		List<LottoTicket> lottoTicketList = lotto.purchaseLottoTickets(16000);
 		assertThat(lottoTicketList).hasSize(16);
 	}
 }

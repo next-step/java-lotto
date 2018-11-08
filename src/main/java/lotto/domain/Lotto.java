@@ -13,18 +13,18 @@ import java.util.stream.Stream;
  */
 public class Lotto {
 	private LottoMachine lottoMachine;
-	private List<LottoNumber> lottoTicketList;
+	private List<LottoTicket> lottoTicketList;
 
 	public Lotto(LottoMachine lottoMachine) {
 		this.lottoMachine = lottoMachine;
 	}
 
-	public List<LottoNumber> purchaseLottoTickets(int lottoPurchaseAmount) {
+	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
 		LottoPurchaseAmountValidator.valid(lottoPurchaseAmount);
 
 		final int lottoTicketCount = lottoPurchaseAmount / LottoConstants.LOTTO_TICKET_AMOUNT;
 
-		List<LottoNumber> lottoTicketList = Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
+		List<LottoTicket> lottoTicketList = Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
 			.limit(lottoTicketCount).collect(Collectors.toList());
 
 		setLottoTicketList(lottoTicketList);
@@ -40,11 +40,11 @@ public class Lotto {
 		return new LottoMatchingResult(lottoWinnerTypeCountMap);
 	}
 
-	public List<LottoNumber> getLottoTicketList() {
+	public List<LottoTicket> getLottoTicketList() {
 		return Collections.unmodifiableList(lottoTicketList);
 	}
 
-	private void setLottoTicketList(List<LottoNumber> lottoTicketList) {
+	private void setLottoTicketList(List<LottoTicket> lottoTicketList) {
 		this.lottoTicketList = lottoTicketList;
 	}
 

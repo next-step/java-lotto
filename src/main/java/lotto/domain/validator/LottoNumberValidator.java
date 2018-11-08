@@ -1,7 +1,7 @@
 package lotto.domain.validator;
 
 import lotto.domain.LottoConstants;
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -19,13 +19,13 @@ public enum LottoNumberValidator {
 	WRONG_LOTTO_NUMBER(ticket -> checkArgument(!ticket.getNumbers().stream()
 		.filter(lottoNumberRangePredicate()).findAny().isPresent(), "잘못된 로또 번호입니다."));
 
-	private Validator<LottoNumber> validator;
+	private Validator<LottoTicket> validator;
 
-	LottoNumberValidator(Validator<LottoNumber> validator) {
+	LottoNumberValidator(Validator<LottoTicket> validator) {
 		this.validator = validator;
 	}
 
-	public Validator<LottoNumber> getValidator() {
+	public Validator<LottoTicket> getValidator() {
 		return validator;
 	}
 
@@ -33,7 +33,7 @@ public enum LottoNumberValidator {
 		return i -> i > LottoConstants.LOTTO_MAX_NUMBER || i < LottoConstants.LOTTO_MIN_NUMBER;
 	}
 
-	public static void valid(LottoNumber lottoTicket) {
+	public static void valid(LottoTicket lottoTicket) {
 		Arrays.stream(LottoNumberValidator.values()).forEach(validator -> validator.getValidator().valid(lottoTicket));
 	}
 }
