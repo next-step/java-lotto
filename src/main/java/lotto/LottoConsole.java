@@ -4,6 +4,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
+import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -11,9 +12,9 @@ import lotto.view.ResultView;
 public class LottoConsole {
 
 	public static void main(String[] args) {
-		int money = InputView.buyLotto();
+		PurchaseInfo purchaseInfo = InputView.buyLotto();
 
-		LottoMachine lottoMachine = new LottoMachine(money);
+		LottoMachine lottoMachine = new LottoMachine(purchaseInfo);
 		LottoTicket lottoTicket = lottoMachine.getLottos();
 		ResultView.printBuyingLottos(lottoTicket);
 

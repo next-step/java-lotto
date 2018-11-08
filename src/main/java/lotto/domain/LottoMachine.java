@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
 import lotto.utils.LottoNumberGenerator;
 
@@ -12,11 +13,11 @@ public class LottoMachine {
 	private int money;
 	private LottoNumberGenerator lottoNumberGenerator;
 
-	public LottoMachine(int money) {
-		if(money < LOTTO_PRICE) {
+	public LottoMachine(PurchaseInfo purchaseInfo) {
+		if(purchaseInfo.getMoney() < LOTTO_PRICE) {
 			throw new IllegalArgumentException("1개 이상부터 구매 가능합니다.");
 		}
-		this.money = money;
+		this.money = purchaseInfo.getMoney();
 		this.lottoNumberGenerator = new LottoNumberGenerator();
 	}
 

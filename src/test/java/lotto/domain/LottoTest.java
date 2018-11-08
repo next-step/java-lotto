@@ -32,4 +32,19 @@ public class LottoTest {
 
 		assertThat(lotto.match(winningNumber)).isEqualTo(3);
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void 중복된_번호_오류_검증() {
+		new Lotto(asList(1, 1, 1, 42, 33, 6));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void 잘못된_범위의_번호_오류_검증() {
+		new Lotto(asList(49, 1, 1, 42, 33, 6));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void 잘못된_번호_개수_오류_검증() {
+		new Lotto(asList(1));
+	}
 }
