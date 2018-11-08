@@ -11,17 +11,17 @@ import static com.google.common.base.Preconditions.checkArgument;
 /**
  * Created by hspark on 07/11/2018.
  */
-public enum LottoTicketValidator {
-	LOTTO_NUMBER_CHECK(ticket -> checkArgument(ticket.getLottoNumbers().size()
+public enum LottoNumberValidator {
+	LOTTO_NUMBER_CHECK(ticket -> checkArgument(ticket.getNumbers().size()
 		== LottoConstants.LOTTO_NUMBER_COUNT, "로또 번호는 6자리여야합니다.")),
-	LOTTO_NUMBER_OVERLAP_CHECK(ticket -> checkArgument(ticket.getLottoNumbers().stream().distinct().count()
+	LOTTO_NUMBER_OVERLAP_CHECK(ticket -> checkArgument(ticket.getNumbers().stream().distinct().count()
 		== LottoConstants.LOTTO_NUMBER_COUNT, "중복은 허용되지 않습니다.")),
-	WRONG_LOTTO_NUMBER(ticket -> checkArgument(!ticket.getLottoNumbers().stream()
+	WRONG_LOTTO_NUMBER(ticket -> checkArgument(!ticket.getNumbers().stream()
 		.filter(lottoNumberRangePredicate()).findAny().isPresent(), "잘못된 로또 번호입니다."));
 
 	private Validator<LottoTicket> validator;
 
-	LottoTicketValidator(Validator<LottoTicket> validator) {
+	LottoNumberValidator(Validator<LottoTicket> validator) {
 		this.validator = validator;
 	}
 
@@ -34,6 +34,6 @@ public enum LottoTicketValidator {
 	}
 
 	public static void valid(LottoTicket lottoTicket) {
-		Arrays.stream(LottoTicketValidator.values()).forEach(validator -> validator.getValidator().valid(lottoTicket));
+		Arrays.stream(LottoNumberValidator.values()).forEach(validator -> validator.getValidator().valid(lottoTicket));
 	}
 }

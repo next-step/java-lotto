@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.validator.LottoPurchaseAmountValidator;
-import lotto.domain.validator.LottoTicketValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,8 +14,6 @@ import java.util.stream.Stream;
 public class Lotto {
 	private LottoMachine lottoMachine;
 	private List<LottoTicket> lottoTicketList;
-
-
 
 	public Lotto(LottoMachine lottoMachine) {
 		this.lottoMachine = lottoMachine;
@@ -35,11 +32,9 @@ public class Lotto {
 		return getLottoTicketList();
 	}
 
-	public LottoMatchingResult matchNumber(LottoTicket previousWinningTicket) {
-		LottoTicketValidator.valid(previousWinningTicket);
-
+	public LottoMatchingResult matchNumber(WinningLottoTicket previousWinningTicket) {
 		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
-			collect(Collectors.groupingBy(lottoTicket -> lottoTicket.matchNumber(previousWinningTicket),
+			collect(Collectors.groupingBy(lottoTicket -> previousWinningTicket.matchNumber(lottoTicket),
 				Collectors.counting()));
 
 		return new LottoMatchingResult(lottoWinnerTypeCountMap);

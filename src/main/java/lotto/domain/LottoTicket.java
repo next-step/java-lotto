@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.validator.LottoNumberValidator;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
@@ -10,34 +12,35 @@ import java.util.StringJoiner;
 public class LottoTicket {
 	private List<Integer> lottoNumbers;
 
+	private LottoTicket(List<Integer> lottoNumbers) {
+		this.lottoNumbers = lottoNumbers;
+		LottoNumberValidator.valid(this);
+	}
+
 	public static LottoTicket newInstanceByAutomation(LottoMachine lottoMachine) {
-		LottoTicket lottoTicket = new LottoTicket();
 		List<Integer> lottoNumbers = lottoMachine.drawLottoNumbers();
-		lottoTicket.setLottoNumbers(lottoNumbers);
-		return lottoTicket;
+		return new LottoTicket(lottoNumbers);
 	}
 
 	public static LottoTicket newInstanceByManual(List<Integer> lottoNumbers) {
-		LottoTicket lottoTicket = new LottoTicket();
 		Collections.sort(lottoNumbers);
-		lottoTicket.setLottoNumbers(lottoNumbers);
-		return lottoTicket;
+		return new LottoTicket(lottoNumbers);
 	}
 
-	public LottoWinnerType matchNumber(LottoTicket targetTicket) {
+	public int getMatchingCount(LottoTicket lottoTicket) {
 		int matchingCount = 0;
-		for (Integer winningNumber : targetTicket.lottoNumbers) {
-			matchingCount += lottoNumbers.contains(winningNumber) ? 1 : 0;
+		for (Integer number : lottoTicket.getNumbers()) {
+			matchingCount += getNumbers().contains(number) ? 1 : 0;
 		}
-		return LottoWinnerType.findByMatchingCount(matchingCount);
+		return matchingCount;
 	}
 
-	public List<Integer> getLottoNumbers() {
-		return lottoNumbers;
+	public boolean hasNumber(Integer number) {
+		return getNumbers().contains(number);
 	}
 
-	private void setLottoNumbers(List<Integer> lottoNumbers) {
-		this.lottoNumbers = lottoNumbers;
+	public List<Integer> getNumbers() {
+		return Collections.unmodifiableList(lottoNumbers);
 	}
 
 	@Override
