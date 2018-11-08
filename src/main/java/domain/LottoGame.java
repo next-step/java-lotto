@@ -7,42 +7,42 @@ public class LottoGame {
     private static final int COMBINE_MAX_NUM = 6;
     private static final int COMBINE_MIN_NUM = 3;
     private static List<Lotto> combineLottos = new ArrayList<>();
+    private static Lotto lastLotto;
     private static int[] combineNumbers = new int[COMBINE_MAX_NUM + 1];
-    //Lotto끼리 글자수비교
-    public static void getCombineCount(Lotto originLotto, Lotto lastLotto){
-        List<Integer> numbers = originLotto.getNumbers();
-        int combineCount = (int)numbers.stream()
-                .filter(obj->lastLotto.getNumbers().contains(obj))
-                .count();
 
+    public LottoGame(List<Lotto> lottos, Lotto lastLotto) {
+        combineLottos = lottos;
+        this.lastLotto = lastLotto;
+    }
 
-        if(combineCount >= COMBINE_MIN_NUM){
-            originLotto.setCombineCount(combineCount);
-            combineLottos.add(originLotto);
+    public List<Lotto> getCombineLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        for(Lotto lotto : combineLottos ){
+            int combineCount = lastLotto.getCombineCount(lotto);
+            if(combineCount >= COMBINE_MIN_NUM) {
+                lottos.add(lotto);
+            }
         }
+        combineLottos = lottos;
+        return lottos;
     }
 
-    public static List<Lotto> getCombineLottos() {
-        return combineLottos;
-    }
 
-    public static int[] getCombineNumbers() {
-        return combineNumbers;
-    }
     public static int[] winCalculate(){
         for(Lotto lotto : combineLottos){
-            combineNumbers[lotto.getCombineCount()]++;
+            combineNumbers[lotto.getCombineCount(lastLotto)]++;
         }
         return combineNumbers;
     }
 
     public static int winResult() {
-        LottoRank[] ranks = LottoRank.values();
         int result = 0;
-        for(LottoRank rank : ranks){
-            System.out.println(String.format("%s개 일치 (%s원)- %s개",rank.getCombineNum(), rank.getPriceRewards(), combineNumbers[rank.getCombineNum()]));
-            result += (rank.getPriceRewards() * combineNumbers[rank.getCombineNum()]);
+
+        for(int i = COMBINE_MAX_NUM; COMBINE_MIN_NUM <= i ; i--){
+            System.out.println(String.format("%s개 일치 (%s원)- %s개",i, LottoRank.findByCombineNum(i), combineNumbers[i]));
+            result += LottoRank.findByCombineNum(i) * combineNumbers[i];
         }
+
         return result;
     }
 }

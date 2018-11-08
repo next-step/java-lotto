@@ -13,8 +13,7 @@ public class LottoTest {
     public void generateLotto() {
         Lotto lotto = new Lotto(6);
 
-        assertThat(lotto.getCombineCount()).isEqualTo(0);
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getNumbers()).hasSize(6);
 
     }
 
@@ -48,6 +47,5 @@ public class LottoTest {
 
 
     }
-
 
 }

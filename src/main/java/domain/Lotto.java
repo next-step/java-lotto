@@ -6,10 +6,9 @@ import java.util.List;
 
 public class Lotto {
     private List<Integer> numbers;
-    private int combineCount = 0;
 
     public Lotto(int number){
-        this.numbers = LottoGenerator.generateNumberList(number);
+        numbers = LottoGenerator.generateNumberList(number);
     }
 
     public Lotto(List<Integer> numbers) {
@@ -20,19 +19,18 @@ public class Lotto {
         return numbers;
     }
 
-    public int getCombineCount() {
-        return combineCount;
+    public int getCombineCount(Lotto lastLotto) {
+        if(lastLotto == null){
+            return 0;
+        }
+        return (int)numbers.stream().filter(obj-> isContains(lastLotto, obj)).count();
     }
 
-    public void setCombineCount(int combineCount) {
-        this.combineCount = combineCount;
-    }
-    //Lotto끼리 글자수비교
-    public int getCombineCount(Lotto lastLotto){
-        this.combineCount =  (int)numbers.stream().filter(obj->lastLotto.getNumbers().contains(obj)).count();
-        return combineCount;
+    private boolean isContains(Lotto lastLotto, Integer obj) {
+        return lastLotto.getNumbers().contains(obj);
     }
 
-
-
+    public void printLotto(){
+        System.out.println(this.numbers);
+    }
 }
