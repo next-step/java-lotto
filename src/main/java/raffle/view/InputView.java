@@ -1,5 +1,7 @@
 package raffle.view;
 
+import raffle.lotto.Lotto;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,11 +16,11 @@ public class InputView {
         return lottoAmount;
     }
 
-    public static List<Integer> lastWeekLotto(){
+    public static Lotto lastWeekLotto(){
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
+        return new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
 }

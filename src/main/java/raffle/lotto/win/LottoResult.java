@@ -4,16 +4,17 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-import static raffle.lotto.LottoMachine.LOTTO_PRICE;
-
 public class LottoResult {
 
     private static final int SCALE= 2;
 
+    private int lottoPrice;
+
     private List<WinLotto> winLottos;
 
-    public LottoResult(List<WinLotto> winLottos) {
+    public LottoResult(List<WinLotto> winLottos, int lottoPrice) {
         this.winLottos = winLottos;
+        this.lottoPrice = lottoPrice;
     }
 
     public int getLottoCount(WinLotto selectWinLotto) {
@@ -27,7 +28,7 @@ public class LottoResult {
     }
 
     public double  getResultProfit() {
-        return calculateProfit(winLottos.size() * LOTTO_PRICE);
+        return calculateProfit(winLottos.size() * lottoPrice);
     }
 
     public double calculateProfit(int money) {

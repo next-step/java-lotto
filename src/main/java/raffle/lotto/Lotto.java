@@ -20,4 +20,9 @@ public class Lotto {
     public String toString() {
         return String.valueOf(lottoNumber.toArray());
     }
+
+    public int getWinCount(Lotto lastWeekLotto) {
+        return (int) getLottoNumber().stream().filter(number -> lastWeekLotto.getLottoNumber().contains(number)).count();
+    }
+
 }

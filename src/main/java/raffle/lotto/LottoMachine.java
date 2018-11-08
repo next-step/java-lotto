@@ -17,34 +17,32 @@ public class LottoMachine {
     public static final int LOTTO_MIN = 0;
     public static final int LOTTO_MAX = 6;
 
-    List<Integer> lottoNumber;
     private List<Lotto> lottos;
 
     public LottoMachine(int lottoAmount) {
         lottos = new ArrayList<Lotto>();
-        while (lottoAmount >= LOTTO_PRICE){
+        int count = lottoAmount / LOTTO_PRICE;
+        for(int i =0; i < count; i++){
             suffleLotto();
-            lottoAmount -= LOTTO_PRICE;
         }
     }
 
     private void suffleLotto() {
-        lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
+        List<Integer> lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumber);
         lottos.add(new Lotto(lottoNumber.subList(LOTTO_MIN, LOTTO_MAX)));
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult winLotto(List<Integer> lastWeekLotto) {
+    public LottoResult winLotto(Lotto lastWeekLotto) {
         List<WinLotto> winLottos = new ArrayList<>();
         for(Lotto lotto : lottos){
-            int winCount = (int) lotto.getLottoNumber().stream().filter(number -> lastWeekLotto.contains(number)).count();
-            winLottos.add(WinLotto.search(winCount));
+            winLottos.add(WinLotto.search(lotto.getWinCount(lastWeekLotto)));
         }
-        return new LottoResult(winLottos);
+        return new LottoResult(winLottos, LOTTO_PRICE);
     }
 
 }

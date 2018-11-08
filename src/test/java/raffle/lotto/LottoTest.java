@@ -16,4 +16,15 @@ public class LottoTest {
 
         assertThat(lotto.getLottoNumber().size()).isEqualTo(6);
     }
+
+    @Test
+    public void 로또등수4등(){
+        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
+        Lotto lotto = new Lotto(number);
+
+        List<Integer> lastWeekLotto = Arrays.asList(1, 2 , 5 , 11 , 22 , 15);
+        Lotto lottoWin = new Lotto(lastWeekLotto);
+
+        assertThat(lotto.getWinCount(lottoWin)).isEqualTo(4);
+    }
 }

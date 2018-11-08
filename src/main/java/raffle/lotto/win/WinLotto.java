@@ -12,8 +12,8 @@ public enum WinLotto {
     FIVE_WIN_LOTTO(5, 1500000),
     SIX_WIN_LOTTO(6, 2000000000);
 
-    int winCount;
-    int price;
+    private int winCount;
+    private int price;
 
     WinLotto(int winCount, int price) {
         this.winCount = winCount;

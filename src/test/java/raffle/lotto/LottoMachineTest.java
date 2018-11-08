@@ -10,7 +10,7 @@ public class LottoMachineTest {
     @Test
     public void 로또입력확인() {
         LottoMachine lottoMachine = new LottoMachine(13000);
-        assertThat(lottoMachine.getLottos().size()).isEqualTo(13);
+        assertThat(lottoMachine.getLottos()).hasSize(13);
     }
 
 }
