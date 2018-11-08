@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,24 +10,11 @@ import org.junit.Test;
 public class LottoStoreTest {
 
     private LottoStore lottoStore = null;
-    private LottoTicketGenerator lottoTicketGenerator = null;
     
     @Before
     public void setup() {
-        lottoTicketGenerator = new LottoTicketGenerator();
-        lottoStore = new LottoStore(lottoTicketGenerator);
+        lottoStore = new LottoStore(new LottoMchine());
     }
-    
-//    @Test
-//    public void 로또_객체_확인() {
-//        new LottoStore();
-//    }
-    
-//    @Test
-//    public void 로또_구입_매소드_확인() {
-//        LottoGame lottoGame = new LottoGame();
-//        lottoGame.buy(1000);
-//    }
     
     @Test
     public void 로또_1000원_구입_확인() {

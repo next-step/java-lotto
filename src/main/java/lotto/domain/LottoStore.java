@@ -1,15 +1,15 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
 
-    private final LottoTicketGenerator lottoTicketGenerator;
+    private final LottoMchine lottoMchine;
     private final int LOTTO_PRICE = 1000;
     
-    public LottoStore(LottoTicketGenerator lottoTicketGenerator) {
-        this.lottoTicketGenerator = lottoTicketGenerator; 
+    public LottoStore(LottoMchine lottoMchine) {
+        this.lottoMchine = lottoMchine; 
     }
 
     public List<LottoTicket> buy(int money) {
@@ -26,7 +26,7 @@ public class LottoStore {
     }
 
     private LottoTicket generateLottoTicket() {
-        return lottoTicketGenerator.generate();
+        return lottoMchine.generate();
     }
 
 }
