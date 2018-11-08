@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
 import lotto.utils.LottoNumberGenerator;
@@ -27,6 +28,12 @@ public class LottoMachine {
 		return new LottoTicket(lottos);
 	}
 
+	private List<Lotto> manualPick() {
+		return purchaseInfo.getManualNumbers().stream()
+				.map(manualNumber -> getLotto(manualNumber))
+				.collect(Collectors.toList());
+	}
+
 	private List<Lotto> quickPick() {
 		List<Lotto> lottos = new ArrayList<>();
 		for(int count = 1; count <= purchaseInfo.getQuickPickCount(); count++) {
@@ -39,12 +46,8 @@ public class LottoMachine {
 		return new Lotto(lottoNumberGenerator.pick());
 	}
 
-	private List<Lotto> manualPick() {
-		List<Lotto> lottos = new ArrayList<>();
-		for(String manualNumber : purchaseInfo.getManualNumbers()) {
-			lottos.add(getLotto(manualNumber));
-		}
-		return lottos;
+	public Lotto getLotto(String number) {
+		return new Lotto(lottoNumberGenerator.pick(number), true);
 	}
 
 	public WinningLotto getWinningLotto(WinningNumber winningNumber) {
@@ -55,9 +58,4 @@ public class LottoMachine {
 		}
 		return new WinningLotto(lotto, bonusNumber);
 	}
-
-	public Lotto getLotto(String number) {
-		return new Lotto(lottoNumberGenerator.pick(number), true);
-	}
-
 }

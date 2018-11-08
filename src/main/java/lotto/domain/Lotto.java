@@ -29,12 +29,12 @@ public class Lotto {
 	private boolean isValid(List<Integer> numbers) {
 		int count = (int) numbers.stream()
 				.distinct()
-				.filter(number -> hasNumberInRange(number))
+				.filter(number -> isInRange(number))
 				.count();
 		return count == NUMBER_COUNT;
 	}
 
-	private boolean hasNumberInRange(Integer number) {
+	private boolean isInRange(Integer number) {
 		return MIN_NUMBER <= number && number <= MAX_NUMBER;
 	}
 
