@@ -6,19 +6,18 @@ import java.util.List;
 public class LottoStore {
 
     private final LottoMchine lottoMchine;
-    private final int LOTTO_PRICE = 1000;
-    
+
     public LottoStore(LottoMchine lottoMchine) {
         this.lottoMchine = lottoMchine; 
     }
 
     public List<LottoTicket> buy(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(String.format("로또 한개당 가격은 %d원입니다.", LOTTO_PRICE));
+        if (money < LottoMchine.LOTTO_GAME_FEE) {
+            throw new IllegalArgumentException(String.format("로또 한개당 가격은 %d원입니다.", LottoMchine.LOTTO_GAME_FEE));
         }
         
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < money / LOTTO_PRICE; i++) {
+        for (int i = 0; i < money / LottoMchine.LOTTO_GAME_FEE; i++) {
             tickets.add(generateLottoTicket());
         }
         

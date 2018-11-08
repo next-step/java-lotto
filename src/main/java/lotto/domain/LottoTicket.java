@@ -5,17 +5,17 @@ import java.util.List;
 
 public class LottoTicket {
     private List<Integer> numbers = null;
-    
+
     public LottoTicket(List<Integer> numbers) {
         this.numbers = numbers;
+        Collections.sort(numbers);
     }
 
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
-
-    public int howManyNumber(List<Integer> otherNumber) {
+    public int howManyMatch(List<Integer> otherNumber) {
         int count = 0;
         for (Integer number : otherNumber) {
             if (isMatch(number)) {
@@ -31,7 +31,6 @@ public class LottoTicket {
         }
         return false;
     }
-    
 
     @Override
     public String toString() {

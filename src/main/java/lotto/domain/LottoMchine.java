@@ -1,72 +1,72 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+import lotto.utils.LottoHelper;
 import lotto.utils.RandomNumberGenerator;
 
 public class LottoMchine {
-    private final int LOTTO_NUMERS = 6;
-    private final int LOTTO_MAX_RANGE = 45;
+    public static final int LOTTO_GAME_FEE = 1000;
 
-    private List<LottoTicket> lssuedTickets;
-    
+    private final int LOTTO_NUMERS = 6;
+    private final int LOTTO_MIX_NUMBER = 1;
+    private final int LOTTO_MAX_NUMBER = 45;
+
     public LottoMchine() {
-        this.lssuedTickets = new ArrayList<>();
     }
 
     public LottoTicket generate() {
-        
         LottoTicket tiket = createTiket();
-        lssuedTickets.add(tiket);
         return tiket;
     }
 
     private LottoTicket createTiket() {
-        List<Integer> numbers = new ArrayList<>();
-        int i = 0;
-        while (i < LOTTO_NUMERS) {
-            int number = nextNumber();
-            if (isDuplicate(numbers, number)) {
-                continue;
-            }
-            numbers.add(number);
-            i++;
-        }
-        
-        return  new LottoTicket(numbers);
+        return new LottoTicket(RandomNumberGenerator.generate(LOTTO_MIX_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMERS));
     }
 
-    private int nextNumber() {
-        // 랜덤 번호는 0-45를 만들지만 로또 번호는 1에서 시작이므로 최대 범위를 줄이고 1을 더함.
-        return RandomNumberGenerator.nextInt(LOTTO_MAX_RANGE - 1) + 1;
-    }
-
-    private boolean isDuplicate(List<Integer> numbers, int number) {
-        return numbers.contains(number);
-    }
-
-    public Map<Integer, Integer> check(String winningNumber, List<LottoTicket> tikets) {
-        List<Integer> numbers = convertToInts(winningNumber);
+    public LottoResult check(String winningNumber, List<LottoTicket> tikets) {
+        List<Integer> numbers = LottoHelper.convertToList(winningNumber);
        
-        Map<Integer, Integer> stats = new HashMap<>();
+        LottoResult lottoResult = new LottoResult();
         for (LottoTicket ticket : tikets) {
-            int howMany = ticket.howManyNumber(numbers);
-            if (howMany > 0) {
-                stats.merge(howMany, 1, (a, b) -> a + 1);
-            }
+            int matchCount = ticket.howManyMatch(numbers);
+            lottoResult.addResult(matchCount);
         }
         
-        return stats;
+        return lottoResult;
     }
 
-    private List<Integer> convertToInts(String winningNumber) {
-        return Arrays.stream(winningNumber.split(","))
-                .map(number -> Integer.parseInt(number))
-                .collect(Collectors.toList());
+    public static int getPrize(int matchCount) {
+        return LottoPrize.findPize(matchCount);
+    }
+
+    enum LottoPrize {
+        MATCH3(3, 5000),
+        MATCH4(4, 50000),
+        MATCH5(5, 1500000),
+        MATCH6(6, 2000000000);
+
+        private int matchCount;
+        private int prize;
+
+        LottoPrize(int matchCount, int prize) {
+            this.matchCount = matchCount;
+            this.prize = prize;
+        }
+
+        public static int findPize(int matchCount) {
+            for (LottoPrize prize:LottoPrize.values()) {
+                if (prize.isMatchedCount(matchCount)) {
+                    return prize.prize;
+                }
+            }
+            return 0;
+        }
+
+        private boolean isMatchedCount(int matchCount) {
+            return this.matchCount == matchCount;
+        }
     }
 }

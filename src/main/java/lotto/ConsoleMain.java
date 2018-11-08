@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import lotto.domain.LottoMchine;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;
@@ -22,8 +23,8 @@ public class ConsoleMain {
         ResultView.renderBuyedTikets(tikets);
         
         String winningNumber = InputView.inputTryLine("지난 주 당첨 번호를 입력해 주세요.");
-        Map<Integer, Integer> stats = lottoMchine.check(winningNumber, tikets);
+        LottoResult lottoResult = lottoMchine.check(winningNumber, tikets);
         
-        ResultView.renderStats(stats, money);
+        ResultView.renderStats(lottoResult);
     }
 }

@@ -2,27 +2,30 @@ package utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 import org.junit.Test;
 
 import lotto.utils.RandomNumberGenerator;
 
+import java.util.List;
+
 public class RandomNumberGeneratorTest {
     
     @Test
-    public void 랜덤값_생성_성공() {
-        int MAX_RANGE = 45;
+    public void 랜덤숫자_여섯자리_검증() {
+        List<Integer> numbers = RandomNumberGenerator.generate(1, 45, 6);
 
-        assertThat(RandomNumberGenerator.nextInt(MAX_RANGE)).isBetween(1, MAX_RANGE);
+        assertUniqueNumber(numbers);
+        assertNumberOfRange(numbers);
     }
 
-    @Test
-    public void 랜덤값_최소_최대값_검증() {
-        int MAX_RANGE = 45;
-        int[] values = new int[20];
+    private void assertNumberOfRange(List<Integer> numbers) {
+        numbers.forEach(number -> {
+            assertThat(number).isBetween(1, 45);
+        });
+    }
 
-        for (int i = 0; i < values.length; i++) {
-            assertThat(RandomNumberGenerator.nextInt(MAX_RANGE)).isBetween(1, MAX_RANGE);
-        }
-
+    private void assertUniqueNumber(List<Integer> numbers) {
+        assertThat(numbers.stream().distinct().count()).isEqualTo(6);
     }
 }
