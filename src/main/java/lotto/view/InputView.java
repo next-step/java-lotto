@@ -16,6 +16,7 @@ public class InputView {
 
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		int manualPickCount = scanner.nextInt();
+		scanner.nextLine(); // 엔터 제거
 
 		List<String> manualNumbers = new ArrayList<>();
 		if(hasManualPickCount(manualPickCount)) {
@@ -31,7 +32,6 @@ public class InputView {
 	}
 
 	private static List<String> inputManualNumbers(int manualPickCount) {
-		scanner.nextLine(); // 엔터 제거
 		List<String> manualNumbers = new ArrayList<>();
 		for(int count = 1; count <= manualPickCount; count++) {
 			String manualNumber = scanner.nextLine();
@@ -42,7 +42,6 @@ public class InputView {
 
 
 	public static WinningNumber drawWinningNumbers() {
-		scanner.nextLine(); // 엔터 제거
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String winningNumber = scanner.nextLine();
 
