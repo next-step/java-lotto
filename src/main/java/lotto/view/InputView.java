@@ -31,13 +31,14 @@ public class InputView {
 	}
 
 	public static List<LottoTicket> inputManualLottoNumbers(int manualLottoCount) {
+		if (manualLottoCount == 0) {
+			return Arrays.asList();
+		}
+		System.out.println("수동으로 구매 할 로또 번호를 입력해 주세요.");
 		List<LottoTicket> manualLottoTickets = new ArrayList<>();
-		if (manualLottoCount != 0) {
-			System.out.println("수동으로 구매 할 로또 번호를 입력해 주세요.");
-			for (int i = 0; i < manualLottoCount; i++) {
-				List<Integer> numbers = InputView.inputLottoNumbers();
-				manualLottoTickets.add(LottoTicket.newInstanceByManual(numbers));
-			}
+		for (int i = 0; i < manualLottoCount; i++) {
+			List<Integer> numbers = InputView.inputLottoNumbers();
+			manualLottoTickets.add(LottoTicket.newInstanceByManual(numbers));
 		}
 		return manualLottoTickets;
 	}

@@ -20,8 +20,7 @@ public class Lotto {
 	}
 
 	public PurchaseLottoTickets purchaseLottoTickets(int lottoPurchaseAmount, List<LottoTicket> manualTickets) {
-		final int manualLottoTicketAmount = manualTickets.size() * LottoConstants.LOTTO_TICKET_AMOUNT;
-		final int remainAmount = lottoPurchaseAmount - manualLottoTicketAmount;
+		final int remainAmount = getRemainPurchaseAmount(lottoPurchaseAmount, manualTickets);
 		List<LottoTicket> autoTickets = issueLottoTicketByAutomation(remainAmount);
 
 		PurchaseLottoTickets purchaseLottoTickets = PurchaseLottoTickets.builder()
@@ -54,5 +53,10 @@ public class Lotto {
 
 	public void setPurchaseLottoTickets(PurchaseLottoTickets purchaseLottoTickets) {
 		this.purchaseLottoTickets = purchaseLottoTickets;
+	}
+
+	private int getRemainPurchaseAmount(int lottoPurchaseAmount, List<LottoTicket> manualTickets) {
+		final int manualLottoTicketAmount = manualTickets.size() * LottoConstants.LOTTO_TICKET_AMOUNT;
+		return lottoPurchaseAmount - manualLottoTicketAmount;
 	}
 }
