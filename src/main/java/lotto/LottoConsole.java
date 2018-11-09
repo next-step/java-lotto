@@ -26,8 +26,9 @@ public class LottoConsole {
 		WinningNumber winningNumber = InputView.drawWinningNumbers();
 		WinningLotto winningLotto = WinningLottoGenerator.generate(winningNumber);
 
-		WinningResult manualPickResult = manualLottoTicket.match(winningLotto);
-		WinningResult quickPickResult= quickPickLottoTicket.match(winningLotto);
-		ResultView.printResult(purchaseInfo.getMoney(), quickPickResult.join(manualPickResult));
+		WinningResult winningResult = WinningResult.of(
+				manualLottoTicket.match(winningLotto),
+				quickPickLottoTicket.match(winningLotto));
+		ResultView.printResult(purchaseInfo.getMoney(), winningResult);
 	}
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.enums.Prize;
 
@@ -11,9 +12,12 @@ public class WinningResult {
 		this.prizes = prizes;
 	}
 
-	public WinningResult join(WinningResult winningResult) {
-		this.prizes.addAll(winningResult.prizes);
-		return this;
+	public static WinningResult of(WinningResult... winningResults) {
+		List<Prize> prizes = new ArrayList<>();
+		for (WinningResult winningResult : winningResults) {
+			prizes.addAll(winningResult.prizes);
+		}
+		return new WinningResult(prizes);
 	}
 
 	public int getPrizeCount(Prize selectedPrize) {
