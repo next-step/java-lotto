@@ -18,9 +18,8 @@ public class LottoConsole {
 		PurchaseInfo purchaseInfo = InputView.buyLotto();
 
 		LottoMachine manualPickLottoMachine = new LottoMachine(new ManualPickLottoGenerator());
-		LottoMachine quickPickLottoMachine = new LottoMachine(new QuickPickLottoGenerator());
-
 		LottoTicket manualLottoTicket = manualPickLottoMachine.purchase(purchaseInfo);
+		LottoMachine quickPickLottoMachine = new LottoMachine(new QuickPickLottoGenerator());
 		LottoTicket quickPickLottoTicket = quickPickLottoMachine.purchase(purchaseInfo);
 		ResultView.printBuyingLottos(manualLottoTicket, quickPickLottoTicket);
 

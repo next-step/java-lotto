@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
@@ -46,8 +47,8 @@ public class InputView {
 		String winningNumber = scanner.nextLine();
 
 		System.out.println("보너스 볼을 입력해 주세요.");
-		int bonusNumber = scanner.nextInt();
+		Integer bonusNumber = scanner.nextInt();
 
-		return new WinningNumber(winningNumber, bonusNumber);
+		return new WinningNumber(winningNumber, new LottoNumber(bonusNumber));
 	}
 }
