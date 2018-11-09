@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 
-import lotto.domain.LottoMchine;
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
 import lotto.domain.LottoTicket;
@@ -14,10 +14,8 @@ public class ConsoleMain {
     public static void main(String[] args) {
         int money = InputView.inputTryNo("구입금액을 입력해 주세요.");
         
-        LottoMchine lottoMchine = new LottoMchine();
-        LottoStore lottoStore = new LottoStore(lottoMchine);
-        
-        List<LottoTicket> tickets = lottoStore.buy(money);
+        LottoStore lottoStore = new LottoStore(new LottoMachine());
+        List<LottoTicket> tickets = lottoStore.buyTickets(money);
         
         ResultView.renderBuyedTickets(tickets);
         

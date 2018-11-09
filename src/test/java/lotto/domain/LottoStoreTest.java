@@ -13,7 +13,7 @@ public class LottoStoreTest {
     
     @Before
     public void setup() {
-        lottoStore = new LottoStore(new LottoMchine());
+        lottoStore = new LottoStore(new LottoMachine());
     }
     
     @Test
@@ -22,7 +22,7 @@ public class LottoStoreTest {
         int money = 1000;
         
         // when
-        List<LottoTicket> tickets = lottoStore.buy(money);
+        List<LottoTicket> tickets = lottoStore.buyTickets(money);
         
         // then
         assertThat(tickets.size()).isEqualTo(1);
@@ -34,7 +34,7 @@ public class LottoStoreTest {
         int money = 3000;
         
         // when
-        List<LottoTicket> tickets = lottoStore.buy(money);
+        List<LottoTicket> tickets = lottoStore.buyTickets(money);
         
         // then
         assertThat(tickets.size()).isEqualTo(3);
@@ -46,7 +46,7 @@ public class LottoStoreTest {
         int money = 500;
         
         // when
-        List<LottoTicket> tickets = lottoStore.buy(money);
+        List<LottoTicket> tickets = lottoStore.buyTickets(money);
         
         // then
         assertThat(tickets.size()).isEqualTo(0);

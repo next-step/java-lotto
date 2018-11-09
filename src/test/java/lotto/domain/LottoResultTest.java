@@ -9,10 +9,10 @@ public class LottoResultTest {
     @Test
     public void  당첨금_검증() {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.addResult(LottoMchine.getPrize(3));  // 5000
-        lottoResult.addResult(LottoMchine.getPrize(3));  // 5000
-        lottoResult.addResult(LottoMchine.getPrize(4));  // 50000
-        lottoResult.addResult(LottoMchine.getPrize(5));  // 1500000
+        lottoResult.addResult(LottoMachine.getPrize(3));  // 5000
+        lottoResult.addResult(LottoMachine.getPrize(3));  // 5000
+        lottoResult.addResult(LottoMachine.getPrize(4));  // 50000
+        lottoResult.addResult(LottoMachine.getPrize(5));  // 1500000
 
         assertThat(lottoResult.getCountByMatchCount(3)).isEqualTo(2);
         assertThat(lottoResult.getCountByMatchCount(4)).isEqualTo(1);

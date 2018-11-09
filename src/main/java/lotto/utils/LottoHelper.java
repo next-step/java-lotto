@@ -1,7 +1,6 @@
 package lotto.utils;
 
 import lotto.domain.LottoBall;
-import lotto.domain.LottoMchine;
 
 import java.util.Arrays;
 import java.util.List;

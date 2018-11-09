@@ -5,15 +5,15 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private Map<LottoMchine.LottoPrize, Integer> stats = new HashMap<>();
+    private Map<LottoMachine.LottoPrize, Integer> stats = new HashMap<>();
 
-    public void addResult(LottoMchine.LottoPrize lottoPrize) {
+    public void addResult(LottoMachine.LottoPrize lottoPrize) {
         if (lottoPrize == null) return;
         stats.merge(lottoPrize, 1, (a, b) -> a + 1);
     }
 
     public int getCountByMatchCount(int matchCount) {
-        return stats.getOrDefault(LottoMchine.LottoPrize.findPrize(matchCount), 0);
+        return stats.getOrDefault(LottoMachine.LottoPrize.findPrize(matchCount), 0);
     }
 
     public double getRatePercent() {

@@ -2,21 +2,20 @@ package lotto.domain;
 
 import lotto.utils.LottoHelper;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class LottoStore {
 
-    private final LottoMchine lottoMchine;
+    private final LottoMachine lottoMchine;
 
     public static final int LOTTO_GAME_FEE = 1000;
 
-    public LottoStore(LottoMchine lottoMchine) {
+    public LottoStore(LottoMachine lottoMchine) {
         this.lottoMchine = lottoMchine; 
     }
 
-    public List<LottoTicket> buy(int money) {
+    public List<LottoTicket> buyTickets(int money) {
         if (money < LOTTO_GAME_FEE) {
             throw new IllegalArgumentException(String.format("로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
         }

@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoMchine {
+public class LottoMachine {
     public static final int LOTTO_NUMERS = 6;
     private final int LOTTO_MIN_NUMBER = 1;
     private final int LOTTO_MAX_NUMBER = 45;
 
     private List<LottoBall> balls = null;
 
-    public LottoMchine() {
+    public LottoMachine() {
         this.balls = makeBalls();
     }
 

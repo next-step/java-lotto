@@ -9,7 +9,7 @@ public class LottoTicket {
     private List<LottoBall> balls = null;
 
     public LottoTicket(List<LottoBall> balls) {
-        if (balls.size() != LottoMchine.LOTTO_NUMERS || !isUniqueBalls(balls)) {
+        if (balls.size() != LottoMachine.LOTTO_NUMERS || !isUniqueBalls(balls)) {
             throw new IllegalArgumentException("로또복권은 서로다른 숫자 6자리로 이루어져야한다.");
         }
         this.balls = Lists.newArrayList(balls);
@@ -17,7 +17,7 @@ public class LottoTicket {
     }
 
     private boolean isUniqueBalls(List<LottoBall> balls) {
-        return balls.stream().distinct().count() == LottoMchine.LOTTO_NUMERS;
+        return balls.stream().distinct().count() == LottoMachine.LOTTO_NUMERS;
     }
 
     public List<LottoBall> getNumbers() {

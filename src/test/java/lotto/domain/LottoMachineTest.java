@@ -2,25 +2,23 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class LottoMchineTest {
+public class LottoMachineTest {
 
-    private LottoMchine lottoMchine = null;
+    private LottoMachine lottoMachine = null;
     
     @Before
     public void setup() {
-        lottoMchine = new LottoMchine();
+        lottoMachine = new LottoMachine();
     }
     
     @Test
     public void 티켓_자동발급_검증() {
-        LottoTicket ticket = lottoMchine.createTicket();
+        LottoTicket ticket = lottoMachine.createTicket();
         
 //        assertNumberOfRange(ticket.getNumbers());
 //        assertUniqueNumber(ticket.getNumbers());
