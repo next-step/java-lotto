@@ -1,46 +1,49 @@
 package lotto.domain;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.utils.LottoHelper;
-
 public class LottoMchine {
-    private final int LOTTO_NUMERS = 6;
+    public static final int LOTTO_NUMERS = 6;
     private final int LOTTO_MIN_NUMBER = 1;
     private final int LOTTO_MAX_NUMBER = 45;
 
-    private List<Integer> numbers = null;
+    private List<LottoBall> balls = null;
 
     public LottoMchine() {
-        numbers = makeBalls();
+        this.balls = makeBalls();
     }
 
     public LottoTicket createTicket() {
-        return new LottoTicket(selectBalls());
+        return createTicket(selectBalls());
     }
 
-    private List<Integer> selectBalls() {
-        Collections.shuffle(numbers);
-        return numbers.subList(0, LOTTO_NUMERS);
+    public LottoTicket createTicket(List<LottoBall> balls) {
+        return new LottoTicket(balls);
     }
 
-    public LottoResult check(String winningNumber, List<LottoTicket> tikets) {
-        List<Integer> numbers = LottoHelper.convertToList(winningNumber);
-       
+    private List<LottoBall> selectBalls() {
+        Collections.shuffle(this.balls);
+        return this.balls.subList(0, LOTTO_NUMERS);
+    }
+
+    public LottoResult check(LottoTicket winningTicket, List<LottoTicket> tickets) {
         LottoResult lottoResult = new LottoResult();
-        for (LottoTicket ticket : tikets) {
-            int matchCount = ticket.howManyMatch(numbers);
+        for (LottoTicket ticket : tickets) {
+            int matchCount = ticket.howManyMatch(winningTicket);
             lottoResult.addResult(matchCount);
         }
         
         return lottoResult;
     }
 
-    private List<Integer> makeBalls() {
-        return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
+    private List<LottoBall> makeBalls() {
+        return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).mapToObj(number -> new LottoBall(number)).collect(Collectors.toList());
     }
 
     public static int getPrize(int matchCount) {

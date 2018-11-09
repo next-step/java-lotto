@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.LottoMchine;
 import lotto.domain.LottoResult;
@@ -18,12 +17,12 @@ public class ConsoleMain {
         LottoMchine lottoMchine = new LottoMchine();
         LottoStore lottoStore = new LottoStore(lottoMchine);
         
-        List<LottoTicket> tikets = lottoStore.buy(money);
+        List<LottoTicket> tickets = lottoStore.buy(money);
         
-        ResultView.renderBuyedTikets(tikets);
+        ResultView.renderBuyedTickets(tickets);
         
         String winningNumber = InputView.inputTryLine("지난 주 당첨 번호를 입력해 주세요.");
-        LottoResult lottoResult = lottoMchine.check(winningNumber, tikets);
+        LottoResult lottoResult = lottoStore.checkTickets(winningNumber, tickets);
         
         ResultView.renderStats(lottoResult);
     }

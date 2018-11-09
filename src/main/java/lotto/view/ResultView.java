@@ -8,10 +8,10 @@ import lotto.domain.LottoTicket;
 
 public class ResultView {
 
-    public static void renderBuyedTikets(List<LottoTicket> tikets) {
-        System.out.println(String.format("%d개를 구매했습니다.", tikets.size()));
-        for (LottoTicket tiket : tikets) {
-            System.out.println(tiket);
+    public static void renderBuyedTickets(List<LottoTicket> tickets) {
+        System.out.println(String.format("%d개를 구매했습니다.", tickets.size()));
+        for (LottoTicket ticket : tickets) {
+            System.out.println(ticket);
         }
     }
 
