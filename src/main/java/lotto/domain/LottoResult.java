@@ -5,26 +5,34 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private Map<Integer, Integer> stats = new HashMap<>();
-    private double totalPrize = 0l;
-    private int buyedTicketCount = 0;
+    private Map<LottoMchine.LottoPrize, Integer> stats = new HashMap<>();
 
-    public void addResult(int matchCount) {
-        stats.merge(matchCount, 1, (a, b) -> a + 1);
-        totalPrize += LottoMchine.LottoPrize.findPrize(matchCount);
-        buyedTicketCount++;
+    public void addResult(LottoMchine.LottoPrize lottoPrize) {
+        if (lottoPrize == null) return;
+        stats.merge(lottoPrize, 1, (a, b) -> a + 1);
     }
 
     public int getCountByMatchCount(int matchCount) {
-        return stats.getOrDefault(matchCount, 0);
-    }
-
-    public double getTotalPrize() {
-        return totalPrize;
+        return stats.getOrDefault(LottoMchine.LottoPrize.findPrize(matchCount), 0);
     }
 
     public double getRatePercent() {
-        return totalPrize / (buyedTicketCount * LottoStore.LOTTO_GAME_FEE);
+        return getTotalPrize() / getMoney();
+    }
+
+    private int getMoney() {
+        int count = 0;
+        for (int ticketCount:this.stats.values()) {
+            count += ticketCount;
+        }
+        return count * LottoStore.LOTTO_GAME_FEE;
+    }
+
+    private double getTotalPrize() {
+        return this.stats.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
     }
 }
 

@@ -36,7 +36,7 @@ public class LottoMchine {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket ticket : tickets) {
             int matchCount = ticket.howManyMatch(winningTicket);
-            lottoResult.addResult(matchCount);
+            lottoResult.addResult(LottoPrize.findPrize(matchCount));
         }
         
         return lottoResult;
@@ -47,7 +47,7 @@ public class LottoMchine {
     }
 
     public static int getPrize(int matchCount) {
-        return LottoPrize.findPrize(matchCount);
+        return LottoPrize.findPrize(matchCount).getPrize();
     }
 
     enum LottoPrize {
@@ -64,13 +64,21 @@ public class LottoMchine {
             this.prize = prize;
         }
 
-        public static int findPrize(int matchCount) {
+        public int getMatchCount() {
+            return matchCount;
+        }
+
+        public int getPrize() {
+            return prize;
+        }
+
+        public static LottoPrize findPrize(int matchCount) {
             for (LottoPrize prize:LottoPrize.values()) {
                 if (prize.isMatchedCount(matchCount)) {
-                    return prize.prize;
+                    return prize;
                 }
             }
-            return 0;
+            return null;
         }
 
         private boolean isMatchedCount(int matchCount) {
