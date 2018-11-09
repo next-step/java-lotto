@@ -13,27 +13,35 @@ import java.util.stream.Stream;
  */
 public class Lotto {
 	private LottoMachine lottoMachine;
-	private List<LottoTicket> lottoTicketList;
+	private PurchaseLottoTickets purchaseLottoTickets;
 
 	public Lotto(LottoMachine lottoMachine) {
 		this.lottoMachine = lottoMachine;
 	}
 
-	public List<LottoTicket> purchaseLottoTickets(int lottoPurchaseAmount) {
+	public PurchaseLottoTickets purchaseLottoTickets(int lottoPurchaseAmount, List<LottoTicket> manualTickets) {
+		final int manualLottoTicketAmount = manualTickets.size() * LottoConstants.LOTTO_TICKET_AMOUNT;
+		final int remainAmount = lottoPurchaseAmount - manualLottoTicketAmount;
+		List<LottoTicket> autoTickets = issueLottoTicketByAutomation(remainAmount);
+
+		PurchaseLottoTickets purchaseLottoTickets = PurchaseLottoTickets.builder()
+			.autoTickets(autoTickets).manualTickets(manualTickets).build();
+		setPurchaseLottoTickets(purchaseLottoTickets);
+
+		return purchaseLottoTickets;
+	}
+
+	private List<LottoTicket> issueLottoTicketByAutomation(int lottoPurchaseAmount) {
 		LottoPurchaseAmountValidator.valid(lottoPurchaseAmount);
 
 		final int lottoTicketCount = lottoPurchaseAmount / LottoConstants.LOTTO_TICKET_AMOUNT;
 
-		List<LottoTicket> lottoTicketList = Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
+		return Stream.generate(() -> LottoTicket.newInstanceByAutomation(lottoMachine))
 			.limit(lottoTicketCount).collect(Collectors.toList());
-
-		setLottoTicketList(lottoTicketList);
-
-		return getLottoTicketList();
 	}
 
 	public LottoMatchingResult matchNumber(WinningLottoTicket previousWinningTicket) {
-		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = lottoTicketList.stream().
+		Map<LottoWinnerType, Long> lottoWinnerTypeCountMap = getLottoTicketList().stream().
 			collect(Collectors.groupingBy(lottoTicket -> previousWinningTicket.matchNumber(lottoTicket),
 				Collectors.counting()));
 
@@ -41,11 +49,10 @@ public class Lotto {
 	}
 
 	public List<LottoTicket> getLottoTicketList() {
-		return Collections.unmodifiableList(lottoTicketList);
+		return Collections.unmodifiableList(purchaseLottoTickets.getTickets());
 	}
 
-	private void setLottoTicketList(List<LottoTicket> lottoTicketList) {
-		this.lottoTicketList = lottoTicketList;
+	public void setPurchaseLottoTickets(PurchaseLottoTickets purchaseLottoTickets) {
+		this.purchaseLottoTickets = purchaseLottoTickets;
 	}
-
 }

@@ -13,16 +13,16 @@ public class LottoMain {
 	public static void main(String[] args) {
 		try {
 			int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
+			int manualLottoCount = InputView.inputManualLottoCount();
+			List<LottoTicket> manualLottoTickets = InputView.inputManualLottoNumbers(manualLottoCount);
 
 			Lotto lotto = new Lotto(new ShuffleLottoMachine());
-			List<LottoTicket> lottoTicketList = lotto.purchaseLottoTickets(lottoPurchaseAmount);
-			ResultView.printLottoTickets(lottoTicketList);
+			PurchaseLottoTickets purchaseLottoTickets = lotto.purchaseLottoTickets(lottoPurchaseAmount, manualLottoTickets);
+			ResultView.printLottoTickets(purchaseLottoTickets);
 
-			List<Integer> lottoNumber = InputView.inputLottoNumbers();
-			int bonusNumber = InputView.inputLottoBonusNumber();
-			WinningLottoTicket previousWinningTicket = new WinningLottoTicket(lottoNumber, bonusNumber);
-
+			WinningLottoTicket previousWinningTicket = InputView.inputWinningLottoNumbers();
 			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
+
 			ResultView.printResult(lottoMatchingResult);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
