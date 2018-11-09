@@ -17,12 +17,7 @@ public class LottoMchine {
     public LottoMchine() {
     }
 
-    public LottoTicket generate() {
-        LottoTicket tiket = createTiket();
-        return tiket;
-    }
-
-    private LottoTicket createTiket() {
+    public LottoTicket createTicket() {
         return new LottoTicket(RandomNumberGenerator.generate(LOTTO_MIX_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMERS));
     }
 

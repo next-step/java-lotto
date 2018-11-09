@@ -18,14 +18,14 @@ public class LottoStore {
         
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < money / LottoMchine.LOTTO_GAME_FEE; i++) {
-            tickets.add(generateLottoTicket());
+            tickets.add(createTicket());
         }
         
         return tickets;
     }
 
-    private LottoTicket generateLottoTicket() {
-        return lottoMchine.generate();
+    private LottoTicket createTicket() {
+        return lottoMchine.createTicket();
     }
 
 }
