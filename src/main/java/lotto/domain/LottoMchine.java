@@ -8,8 +8,6 @@ import lotto.utils.LottoHelper;
 import lotto.utils.RandomNumberGenerator;
 
 public class LottoMchine {
-    public static final int LOTTO_GAME_FEE = 1000;
-
     private final int LOTTO_NUMERS = 6;
     private final int LOTTO_MIX_NUMBER = 1;
     private final int LOTTO_MAX_NUMBER = 45;

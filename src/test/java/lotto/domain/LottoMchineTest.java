@@ -20,7 +20,7 @@ public class LottoMchineTest {
     
     @Test
     public void 티켓_생산_확인() {
-        LottoTicket ticket = lottoMchine.generate();
+        LottoTicket ticket = lottoMchine.createTicket();
         
         assertNumberOfRange(ticket.getNumbers());
         assertUniqueNumber(ticket.getNumbers());

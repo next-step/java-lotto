@@ -24,7 +24,7 @@ public class LottoResult {
     }
 
     public double getRatePercent() {
-        return totalPrize / (buyedTicketCount * LottoMchine.LOTTO_GAME_FEE);
+        return totalPrize / (buyedTicketCount * LottoStore.LOTTO_GAME_FEE);
     }
 }
 
