@@ -4,13 +4,14 @@ import java.util.Arrays;
 
 public enum WinLotto {
 
-    ZERO_LOTTO(0, 0),
-    ONE_LOTTO(1, 0),
-    TWO_LOTTO(2, 0),
-    THREE_WIN_LOTTO(3, 5000),
-    FOUR_WIN_LOTTO(4, 50000),
+    SIX_WIN_LOTTO(6, 2000000000),
+    FIVE_WIN_BONUS_LOTTO(5, 30000000),
     FIVE_WIN_LOTTO(5, 1500000),
-    SIX_WIN_LOTTO(6, 2000000000);
+    FOUR_WIN_LOTTO(4, 50000),
+    THREE_WIN_LOTTO(3, 5000),
+    TWO_LOTTO(2, 0),
+    ONE_LOTTO(1, 0),
+    ZERO_LOTTO(0, 0);
 
     private int winCount;
     private int price;
@@ -20,9 +21,10 @@ public enum WinLotto {
         this.price = price;
     }
 
-    public static WinLotto search(long count) {
+    public static WinLotto search(long count, boolean hasBonus) {
         return Arrays.stream(values())
                     .filter(winLotto -> winLotto.match(count))
+                    .filter(winLotto -> !winLotto.equals(FIVE_WIN_BONUS_LOTTO) || hasBonus)
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("상금이 존재하지 않습니다."));
     }

@@ -11,7 +11,7 @@ public class PlayLotto {
         LottoMachine lottoMachine = new LottoMachine(InputView.lottoAmount());
         resultView.buyLotto(lottoMachine.getLottos());
 
-        LottoResult lottoResult = lottoMachine.winLotto(InputView.lastWeekLotto());
+        LottoResult lottoResult = lottoMachine.winLotto(InputView.lastWeekLotto(), InputView.bonusLotto());
         resultView.result(lottoResult);
 
     }

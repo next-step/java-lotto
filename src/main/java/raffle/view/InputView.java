@@ -23,4 +23,11 @@ public class InputView {
         return new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
+    public static Lotto bonusLotto(){
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner sc = new Scanner(System.in);
+        int bonusLotto = sc.nextInt();
+        return new Lotto(Arrays.asList(bonusLotto));
+    }
+
 }

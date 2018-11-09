@@ -23,10 +23,6 @@ public class LottoResult {
                 .count();
     }
 
-    public List<WinLotto> getWinLottos() {
-        return winLottos;
-    }
-
     public double  getResultProfit() {
         return calculateProfit(winLottos.size() * lottoPrice);
     }
