@@ -1,19 +1,19 @@
 package lotto.dto;
 
 import java.util.List;
-import lotto.domain.LottoMachine;
+import lotto.domain.Money;
 
 public class PurchaseInfo {
 
-	private int money;
+	private Money money;
 	private List<String> manualNumbers;
 
-	public PurchaseInfo(int money, List<String> manualNumbers) {
+	public PurchaseInfo(Money money, List<String> manualNumbers) {
 		this.money = money;
 		this.manualNumbers = manualNumbers;
 	}
 
-	public int getMoney() {
+	public Money getMoney() {
 		return money;
 	}
 
@@ -22,10 +22,6 @@ public class PurchaseInfo {
 	}
 
 	public int getQuickPickCount() {
-		return getPickCount() - manualNumbers.size();
-	}
-
-	private int getPickCount() {
-		return money / LottoMachine.LOTTO_PRICE;
+		return money.getPickCount() - manualNumbers.size();
 	}
 }

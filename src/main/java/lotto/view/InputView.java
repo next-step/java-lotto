@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Money;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
 
@@ -24,7 +25,7 @@ public class InputView {
 			manualNumbers.addAll(inputManualNumbers(manualPickCount));
 		}
 
-		return new PurchaseInfo(money, manualNumbers);
+		return new PurchaseInfo(new Money(money), manualNumbers);
 	}
 
 	private static boolean hasManualPickCount(int manualPickCount) {
@@ -39,7 +40,6 @@ public class InputView {
 		}
 		return manualNumbers;
 	}
-
 
 	public static WinningNumber drawWinningNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");

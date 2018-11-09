@@ -7,11 +7,9 @@ import org.junit.Test;
 
 public class LottoNumberGeneratorTest {
 
-	private LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-
 	@Test
 	public void 자동으로_구매한_로또_확인() {
-		assertThat(lottoNumberGenerator.pick()).hasSize(Lotto.NUMBER_COUNT);
+		assertThat(LottoNumberGenerator.pick()).hasSize(Lotto.NUMBER_COUNT);
 	}
 
 	@Test
@@ -21,7 +19,7 @@ public class LottoNumberGeneratorTest {
 				String.valueOf(number1), String.valueOf(number2), String.valueOf(number3),
 				String.valueOf(number4), String.valueOf(number5), String.valueOf(number6));
 
-		assertThat(lottoNumberGenerator.pick(numbers))
+		assertThat(LottoNumberGenerator.parse(numbers))
 				.hasSize(Lotto.NUMBER_COUNT)
 				.containsExactly(number1, number2, number3, number4, number5, number6);
 	}

@@ -2,24 +2,30 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.WinningResult;
 import lotto.enums.Prize;
 
 public class ResultView {
 
-	public static void printBuyingLottos(LottoTicket lottoTicket) {
+	public static void printBuyingLottos(LottoTicket manualPickLottoTicket, LottoTicket quickPickLottoTicket) {
 		System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
-				lottoTicket.getManualPickLottos().size(), lottoTicket.getQuickPickLottos().size()));
-		for(Lotto lotto : lottoTicket.getLottos()) {
-			System.out.println(lotto.toString());
-		}
+				manualPickLottoTicket.getLottos().size(), quickPickLottoTicket.getLottos().size()));
+		printLottos(manualPickLottoTicket);
+		printLottos(quickPickLottoTicket);
 		System.out.println();
 	}
 
-	public static void printResult(WinningResult winningResult) {
+	private static void printLottos(LottoTicket lottoTicket) {
+		for(Lotto lotto : lottoTicket.getLottos()) {
+			System.out.println(lotto.toString());
+		}
+	}
+
+	public static void printResult(Money money, WinningResult winningResult) {
 		header();
 		prizeCount(winningResult);
-		profitRate(winningResult);
+		profitRate(money.calculateProfitRate(winningResult.getTotalPrizeMoney()));
 	}
 
 	private static void header() {
@@ -41,8 +47,7 @@ public class ResultView {
 		}
 	}
 
-	private static void profitRate(WinningResult winningResult) {
-		System.out.println(String.format("총 수익률은 %.2f입니다.", winningResult.getProfitRate()));
+	private static void profitRate(double profitRate) {
+		System.out.println(String.format("총 수익률은 %.2f입니다.", profitRate));
 	}
-
 }

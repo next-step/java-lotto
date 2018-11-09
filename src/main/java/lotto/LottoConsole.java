@@ -2,10 +2,13 @@ package lotto;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
+import lotto.domain.ManualPickLottoGenerator;
+import lotto.domain.QuickPickLottoGenerator;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningResult;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
+import lotto.utils.WinningLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -14,13 +17,18 @@ public class LottoConsole {
 	public static void main(String[] args) {
 		PurchaseInfo purchaseInfo = InputView.buyLotto();
 
-		LottoMachine lottoMachine = new LottoMachine(purchaseInfo);
-		LottoTicket lottoTicket = lottoMachine.getLottos();
-		ResultView.printBuyingLottos(lottoTicket);
+		LottoMachine manualPickLottoMachine = new LottoMachine(new ManualPickLottoGenerator());
+		LottoMachine quickPickLottoMachine = new LottoMachine(new QuickPickLottoGenerator());
+
+		LottoTicket manualLottoTicket = manualPickLottoMachine.purchase(purchaseInfo);
+		LottoTicket quickPickLottoTicket = quickPickLottoMachine.purchase(purchaseInfo);
+		ResultView.printBuyingLottos(manualLottoTicket, quickPickLottoTicket);
 
 		WinningNumber winningNumber = InputView.drawWinningNumbers();
-		WinningLotto winningLotto = lottoMachine.getWinningLotto(winningNumber);
-		WinningResult winningResult = lottoTicket.match(winningLotto);
-		ResultView.printResult(winningResult);
+		WinningLotto winningLotto = WinningLottoGenerator.generate(winningNumber);
+
+		WinningResult manualPickResult = manualLottoTicket.match(winningLotto);
+		WinningResult quickPickResult= quickPickLottoTicket.match(winningLotto);
+		ResultView.printResult(purchaseInfo.getMoney(), quickPickResult.join(manualPickResult));
 	}
 }
