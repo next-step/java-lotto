@@ -26,10 +26,7 @@ public class LottoTicket {
     }
 
     private boolean isMatch(int number) {
-        if (numbers.contains(number)) {
-            return true;
-        }
-        return false;
+        return numbers.contains(number);
     }
 
     @Override
