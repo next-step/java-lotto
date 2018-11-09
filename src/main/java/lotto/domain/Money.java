@@ -13,8 +13,8 @@ public class Money {
 		this.money = money;
 	}
 
-	public int getPickCount() {
-		return money / LottoMachine.LOTTO_PRICE;
+	public int getTotalPickCount() {
+		return money / Lotto.PRICE;
 	}
 
 	public double calculateProfitRate(int totalPrizeMoney) {

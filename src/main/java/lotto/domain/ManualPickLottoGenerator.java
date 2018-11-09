@@ -9,7 +9,8 @@ public class ManualPickLottoGenerator implements LottoGenerator {
 
 	@Override
 	public List<Lotto> generate(PurchaseInfo purchaseInfo) {
-		return purchaseInfo.getManualNumbers().stream()
+		ManualPickInfo manualPickInfo = purchaseInfo.getManualPickInfo();
+		return manualPickInfo.getManualNumbers().stream()
 				.map(manualNumber -> LottoNumberGenerator.parse(manualNumber))
 				.map(Lotto::new)
 				.collect(Collectors.toList());

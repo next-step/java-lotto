@@ -1,27 +1,23 @@
 package lotto.dto;
 
-import java.util.List;
+import lotto.domain.ManualPickInfo;
 import lotto.domain.Money;
 
 public class PurchaseInfo {
 
 	private Money money;
-	private List<String> manualNumbers;
+	private ManualPickInfo manualPickInfo;
 
-	public PurchaseInfo(Money money, List<String> manualNumbers) {
+	public PurchaseInfo(Money money, ManualPickInfo manualPickInfo) {
 		this.money = money;
-		this.manualNumbers = manualNumbers;
+		this.manualPickInfo = manualPickInfo;
 	}
 
 	public Money getMoney() {
 		return money;
 	}
 
-	public List<String> getManualNumbers() {
-		return manualNumbers;
-	}
-
-	public int getQuickPickCount() {
-		return money.getPickCount() - manualNumbers.size();
+	public ManualPickInfo getManualPickInfo() {
+		return manualPickInfo;
 	}
 }

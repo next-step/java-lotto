@@ -12,9 +12,10 @@ public class LottoMachineTest {
 	@Test
 	public void 자동_구매_검증() {
 		final int lottoCount = 10;
+		Money money = new Money(lottoCount * Lotto.PRICE);
 		List<String> manualNumbers = asList("1,2,3,4,5,6");
-		Money money = new Money(lottoCount * LottoMachine.LOTTO_PRICE);
-		PurchaseInfo purchaseInfo = new PurchaseInfo(money, manualNumbers);
+		ManualPickInfo manualPickInfo = new ManualPickInfo(manualNumbers);
+		PurchaseInfo purchaseInfo = new PurchaseInfo(money, manualPickInfo);
 		LottoMachine lottoMachine = new LottoMachine(new QuickPickLottoGenerator());
 
 		LottoTicket lottoTicket = lottoMachine.purchase(purchaseInfo);
@@ -24,9 +25,10 @@ public class LottoMachineTest {
 	@Test
 	public void 수동_구매_검증() {
 		final int lottoCount = 10;
+		Money money = new Money(lottoCount * Lotto.PRICE);
 		List<String> manualNumbers = asList("1,2,3,4,5,6");
-		Money money = new Money(lottoCount * LottoMachine.LOTTO_PRICE);
-		PurchaseInfo purchaseInfo = new PurchaseInfo(money, manualNumbers);
+		ManualPickInfo manualPickInfo = new ManualPickInfo(manualNumbers);
+		PurchaseInfo purchaseInfo = new PurchaseInfo(money, manualPickInfo);
 		LottoMachine lottoMachine = new LottoMachine(new ManualPickLottoGenerator());
 
 		LottoTicket lottoTicket = lottoMachine.purchase(purchaseInfo);

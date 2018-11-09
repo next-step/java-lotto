@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoNumber;
+import lotto.domain.ManualPickInfo;
 import lotto.domain.Money;
 import lotto.dto.PurchaseInfo;
 import lotto.dto.WinningNumber;
@@ -14,7 +15,7 @@ public class InputView {
 
 	public static PurchaseInfo buyLotto() {
 		System.out.println("구입금액을 입력해 주세요.");
-		int money = scanner.nextInt();
+		Money money = new Money(scanner.nextInt());
 
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		int manualPickCount = scanner.nextInt();
@@ -25,8 +26,9 @@ public class InputView {
 			System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 			manualNumbers.addAll(inputManualNumbers(manualPickCount));
 		}
+		ManualPickInfo manualPickInfo = new ManualPickInfo(manualNumbers);
 
-		return new PurchaseInfo(new Money(money), manualNumbers);
+		return new PurchaseInfo(money, manualPickInfo);
 	}
 
 	private static boolean hasManualPickCount(int manualPickCount) {
