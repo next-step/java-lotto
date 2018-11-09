@@ -1,22 +1,30 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import lotto.utils.LottoHelper;
-import lotto.utils.RandomNumberGenerator;
 
 public class LottoMchine {
     private final int LOTTO_NUMERS = 6;
-    private final int LOTTO_MIX_NUMBER = 1;
+    private final int LOTTO_MIN_NUMBER = 1;
     private final int LOTTO_MAX_NUMBER = 45;
 
+    private List<Integer> numbers = null;
+
     public LottoMchine() {
+        numbers = makeBalls();
     }
 
     public LottoTicket createTicket() {
-        return new LottoTicket(RandomNumberGenerator.generate(LOTTO_MIX_NUMBER, LOTTO_MAX_NUMBER, LOTTO_NUMERS));
+        return new LottoTicket(selectBalls());
+    }
+
+    private List<Integer> selectBalls() {
+        Collections.shuffle(numbers);
+        return numbers.subList(0, LOTTO_NUMERS);
     }
 
     public LottoResult check(String winningNumber, List<LottoTicket> tikets) {
@@ -31,8 +39,12 @@ public class LottoMchine {
         return lottoResult;
     }
 
+    private List<Integer> makeBalls() {
+        return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
+    }
+
     public static int getPrize(int matchCount) {
-        return LottoPrize.findPize(matchCount);
+        return LottoPrize.findPrize(matchCount);
     }
 
     enum LottoPrize {
@@ -49,7 +61,7 @@ public class LottoMchine {
             this.prize = prize;
         }
 
-        public static int findPize(int matchCount) {
+        public static int findPrize(int matchCount) {
             for (LottoPrize prize:LottoPrize.values()) {
                 if (prize.isMatchedCount(matchCount)) {
                     return prize.prize;

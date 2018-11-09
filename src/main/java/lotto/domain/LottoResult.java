@@ -11,7 +11,7 @@ public class LottoResult {
 
     public void addResult(int matchCount) {
         stats.merge(matchCount, 1, (a, b) -> a + 1);
-        totalPrize += LottoMchine.LottoPrize.findPize(matchCount);
+        totalPrize += LottoMchine.LottoPrize.findPrize(matchCount);
         buyedTicketCount++;
     }
 
