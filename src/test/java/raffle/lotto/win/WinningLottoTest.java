@@ -3,6 +3,7 @@ package raffle.lotto.win;
 import org.junit.Before;
 import org.junit.Test;
 import raffle.lotto.Lotto;
+import raffle.lotto.LottoNo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,14 +14,14 @@ import static org.junit.Assert.*;
 public class WinningLottoTest {
 
     Lotto lotto;
-    int bonusLotto;
     WinningLotto winningLotto;
+    LottoNo bonusLotto;
 
     @Before
     public void setUp(){
         List<Integer> lottoNumber = Arrays.asList(1, 23 , 5 , 44 , 22 , 15);
         lotto = new Lotto(lottoNumber);
-        bonusLotto = 23;
+        bonusLotto = new LottoNo(22);
     }
 
     @Test

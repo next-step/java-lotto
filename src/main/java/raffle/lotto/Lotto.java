@@ -33,8 +33,8 @@ public class Lotto {
         return lottoNumber.contains(number);
     }
 
-    public boolean hasBonus(int bonusLotto) {
-        return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto)).count() > 0;
+    public boolean hasBonus(LottoNo bonusLotto) {
+        return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto.getBonusnumber())).count() > 0;
     }
 
     public boolean isLottoNumber() {

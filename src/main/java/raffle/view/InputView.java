@@ -1,6 +1,7 @@
 package raffle.view;
 
 import raffle.lotto.Lotto;
+import raffle.lotto.LottoNo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,12 +25,11 @@ public class InputView {
         return new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
-    public static int bonusLotto(){
+    public static LottoNo bonusLotto(){
         System.out.println();
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        int bonusLotto = sc.nextInt();
-        return bonusLotto;
+        return new LottoNo(sc.nextInt());
     }
 
     public static int buyLotto() {

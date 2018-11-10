@@ -1,12 +1,13 @@
 package raffle.lotto.win;
 
 import raffle.lotto.Lotto;
+import raffle.lotto.LottoNo;
 
 public class WinningLotto {
     private Lotto lastWeekLotto;
-    private int bonusLotto;
+    private LottoNo bonusLotto;
 
-    public WinningLotto(Lotto lastWeekLotto, int bonusLotto) {
+    public WinningLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
         this.lastWeekLotto = lastWeekLotto;
         this.bonusLotto = bonusLotto;
     }
