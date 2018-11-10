@@ -1,5 +1,7 @@
 package raffle.lotto.win;
 
+import raffle.lotto.money.Money;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -28,10 +30,7 @@ public class LottoResult {
     }
 
     public double calculateProfit(int money) {
-        int totalMoney = winLottos.stream().mapToInt(WinLotto::getPrice).sum();
-        double profit = (double) totalMoney / money;
-        return new BigDecimal(profit)
-                .setScale(SCALE, RoundingMode.HALF_UP)
-                .doubleValue();
+        Money ManageMoney = new Money(money, winLottos);
+        return ManageMoney.getCalculateProfit();
     }
 }
