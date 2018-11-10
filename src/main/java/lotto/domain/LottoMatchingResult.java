@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.common.Money;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -18,22 +20,23 @@ public class LottoMatchingResult {
 	}
 
 	public BigDecimal getProfitsRate() {
-		BigDecimal profitRate = new BigDecimal((double) getTotalProfits() / getTotalPurchaseAmount());
-		return profitRate.setScale(2, BigDecimal.ROUND_DOWN);
+		return Money.calculateRate(getTotalProfits(), getTotalPurchaseAmount());
 	}
 
-	public int getTotalPurchaseAmount() {
-		int totalPurchaseAmount = 0;
+	public Money getTotalPurchaseAmount() {
+		Money totalPurchaseAmount = Money.ZERO;
 		for (Long value : lottoWinnerTypeCountMap.values()) {
-			totalPurchaseAmount += value * LottoConstants.LOTTO_TICKET_AMOUNT;
+			Money purchaseAmount = LottoConstants.LOTTO_TICKET_AMOUNT.multiply(Money.of(value));
+			totalPurchaseAmount = totalPurchaseAmount.add(purchaseAmount);
 		}
 		return totalPurchaseAmount;
 	}
 
-	public int getTotalProfits() {
-		int totalProfits = 0;
+	public Money getTotalProfits() {
+		Money totalProfits = Money.ZERO;
 		for (Map.Entry<LottoWinnerType, Long> entry : lottoWinnerTypeCountMap.entrySet()) {
-			totalProfits += entry.getKey().getReward() * entry.getValue();
+			Money profits = entry.getKey().getReward().multiply(entry.getValue());
+			totalProfits = totalProfits.add(profits);
 		}
 		return totalProfits;
 	}

@@ -1,6 +1,11 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.common.Money;
+import lotto.domain.generator.LottoTicketDispenser;
+import lotto.domain.generator.PurchaseLottoTicketRequestInfo;
+import lotto.domain.generator.PurchaseLottoTicketResultInfo;
+import lotto.domain.generator.ShuffleLottoTicketDispenser;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,17 +17,22 @@ import java.util.List;
 public class LottoMain {
 	public static void main(String[] args) {
 		try {
-			int lottoPurchaseAmount = InputView.inputLottoPurchaseAmount();
+			Money lottoPurchaseAmount = Money.of(InputView.inputLottoPurchaseAmount());
 			int manualLottoCount = InputView.inputManualLottoCount();
 			List<LottoTicket> manualLottoTickets = InputView.inputManualLottoNumbers(manualLottoCount);
 
-			Lotto lotto = new Lotto(new ShuffleLottoMachine());
-			PurchaseLottoTickets purchaseLottoTickets = lotto.purchaseLottoTickets(lottoPurchaseAmount, manualLottoTickets);
-			ResultView.printLottoTickets(purchaseLottoTickets);
+			// 로또 구입
+			LottoTicketDispenser lottoTicketDispenser = new ShuffleLottoTicketDispenser(new ShuffleLottoMachine());
+			PurchaseLottoTicketRequestInfo requestInfo = new PurchaseLottoTicketRequestInfo(lottoPurchaseAmount, manualLottoTickets);
+			PurchaseLottoTicketResultInfo purchaseLottoTicketResultInfo = lottoTicketDispenser.purchase(requestInfo);
+			ResultView.printLottoTickets(purchaseLottoTicketResultInfo);
 
+			// 매칭할 로또 번호 생성
 			WinningLottoTicket previousWinningTicket = InputView.inputWinningLottoNumbers();
-			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
 
+			//로또 매칭
+			Lotto lotto = new Lotto(purchaseLottoTicketResultInfo.getTickets());
+			LottoMatchingResult lottoMatchingResult = lotto.matchNumber(previousWinningTicket);
 			ResultView.printResult(lottoMatchingResult);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

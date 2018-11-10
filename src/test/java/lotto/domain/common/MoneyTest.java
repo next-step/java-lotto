@@ -70,4 +70,44 @@ public class MoneyTest {
 		assertThat(actual).isNotSameAs(money2);
 		assertThat(actual.getAmount()).isEqualTo(expect);
 	}
+
+	@Test
+	public void test_나머지연산1() {
+		Money money1 = Money.of(2000);
+		Money money2 = Money.of(2000);
+		Money actual = money1.remainder(money2);
+		assertThat(actual).isNotSameAs(money1);
+		assertThat(actual).isNotSameAs(money2);
+		assertThat(actual).isEqualTo(Money.ZERO);
+	}
+
+	@Test
+	public void test_나머지연산2() {
+		Money money1 = Money.of(3000);
+		Money money2 = Money.of(2000);
+		Money actual = money1.remainder(money2);
+		assertThat(actual).isNotSameAs(money1);
+		assertThat(actual).isNotSameAs(money2);
+		assertThat(actual).isEqualTo(Money.of(1000));
+	}
+
+	@Test
+	public void test_나눗셈연산1() {
+		Money money1 = Money.of(3000);
+		Money money2 = Money.of(2000);
+		Money actual = money1.divide(money2);
+		assertThat(actual).isNotSameAs(money1);
+		assertThat(actual).isNotSameAs(money2);
+		assertThat(actual).isEqualTo(Money.of(1));
+	}
+
+	@Test
+	public void test_나눗셈연산2() {
+		Money money1 = Money.of(4000);
+		Money money2 = Money.of(2000);
+		Money actual = money1.divide(money2);
+		assertThat(actual).isNotSameAs(money1);
+		assertThat(actual).isNotSameAs(money2);
+		assertThat(actual).isEqualTo(Money.of(2));
+	}
 }

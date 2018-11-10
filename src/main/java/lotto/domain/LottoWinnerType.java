@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.common.Money;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,19 +19,19 @@ public enum LottoWinnerType {
 
 	private int matchCount;
 	private boolean bonusGame;
-	private long reward;
+	private Money reward;
 
 	LottoWinnerType(int matchCount, boolean bonusGame, long reward) {
 		this.matchCount = matchCount;
 		this.bonusGame = bonusGame;
-		this.reward = reward;
+		this.reward = Money.of(reward);
 	}
 
 	public int getMatchCount() {
 		return matchCount;
 	}
 
-	public long getReward() {
+	public Money getReward() {
 		return reward;
 	}
 

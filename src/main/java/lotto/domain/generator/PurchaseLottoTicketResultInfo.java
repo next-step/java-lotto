@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.generator;
+
+import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,11 +9,11 @@ import java.util.List;
 /**
  * Created by hspark on 10/11/2018.
  */
-public class PurchaseLottoTickets {
+public class PurchaseLottoTicketResultInfo {
 	private List<LottoTicket> autoTickets;
 	private List<LottoTicket> manualTickets;
 
-	public PurchaseLottoTickets(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
+	public PurchaseLottoTicketResultInfo(List<LottoTicket> autoTickets, List<LottoTicket> manualTickets) {
 		this.autoTickets = autoTickets;
 		this.manualTickets = manualTickets;
 	}
@@ -38,7 +40,7 @@ public class PurchaseLottoTickets {
 		return new PurchaseLottoTicketsBuilder();
 	}
 
-	static class PurchaseLottoTicketsBuilder {
+	public static class PurchaseLottoTicketsBuilder {
 		private List<LottoTicket> autoTickets;
 		private List<LottoTicket> manualTickets;
 
@@ -52,8 +54,8 @@ public class PurchaseLottoTickets {
 			return this;
 		}
 
-		public PurchaseLottoTickets build() {
-			return new PurchaseLottoTickets(autoTickets, manualTickets);
+		public PurchaseLottoTicketResultInfo build() {
+			return new PurchaseLottoTicketResultInfo(autoTickets, manualTickets);
 		}
 	}
 }
