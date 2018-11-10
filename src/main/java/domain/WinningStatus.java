@@ -14,7 +14,9 @@ public class WinningStatus {
 
     private void initialize(List<Lotto> lottoGames, WinningNumber winningNumber) {
         for (Lotto lotto : lottoGames) {
-            Prize prize = Prize.matchPrize(lotto.match(winningNumber));
+            Prize prize = Prize.matchPrize(
+                lotto.match(winningNumber),
+                lotto.matchBonus(winningNumber));
 
             result.put(prize, result.getOrDefault(prize, 0) + 1);
         }

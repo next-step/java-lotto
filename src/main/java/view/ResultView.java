@@ -17,7 +17,7 @@ public class ResultView {
         System.out.println("당첨통계\n--------");
 
         for (Prize prize : Prize.values()) {
-            if (prize == Prize.NONE)    continue;
+            if (prize == Prize.NONE) continue;
             prizeResult(prize, status.getPrizeCount(prize));
         }
 
@@ -25,7 +25,16 @@ public class ResultView {
     }
 
     private static void prizeResult(Prize prize, int matched) {
-        System.out.println(prize.getForWin() + "개 일치 (" + prize.getReward() + ") - " + matched);
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(prize.getToWin()).append("개 일치");
+        if (prize.getRequireBonus()) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append(" (").append(prize.getReward()).append(") - ");
+        stringBuilder.append(matched).append("개");
+
+        System.out.println(stringBuilder.toString());
     }
 
     private static void profitRate(double profitRate) {
