@@ -9,7 +9,8 @@ import view.ResultView;
 
 public class ConsoleUI {
     public static void main(String[] args) {
-        int buyLottoCount = LottoGame.buyLottoCount(InputView.setLottoPayment());
+        int price = InputView.setLottoPayment();
+        int buyLottoCount = LottoGame.buyLottoCount(price);
         ResultView.printBuyLottoCount(buyLottoCount);
 
         LottoGroup lottoGroup = new LottoGroup(buyLottoCount);
@@ -22,11 +23,7 @@ public class ConsoleUI {
         combineLottoGroup.calculateCombine(lastLotto);
         ResultView.printStats(combineLottoGroup);
 
-        double totalEarningRate = LottoGame.getTotalEarningRate(getPrice(buyLottoCount), combineLottoGroup.getTotalRewards());
+        double totalEarningRate = LottoGame.getTotalEarningRate(price, combineLottoGroup.getTotalRewards());
         ResultView.printResult(totalEarningRate);
-    }
-
-    private static int getPrice(int buyLottoCount) {
-        return buyLottoCount * Lotto.LOTTO_PRICE;
     }
 }
