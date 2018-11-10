@@ -9,11 +9,11 @@ public class Lotto {
 
     private List<Integer> numbers;
 
-    public Lotto(){
+    public Lotto() {
         numbers = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
     }
 
-    public Lotto(int number){
+    public Lotto(int number) {
         numbers = LottoGenerator.generateNumberList(number);
     }
 
@@ -26,17 +26,17 @@ public class Lotto {
     }
 
     public int getCombineCount(Lotto lastLotto) {
-        if(lastLotto == null){
+        if (lastLotto == null) {
             return 0;
         }
-        return (int)numbers.stream().filter(obj-> lastLotto.isContains(obj)).count();
+        return (int) numbers.stream().filter(obj -> lastLotto.isContains(obj)).count();
     }
 
     private boolean isContains(Integer number) {
         return numbers.contains(number);
     }
 
-    public void printLotto(){
+    public void printLotto() {
         System.out.println(this.numbers);
     }
 

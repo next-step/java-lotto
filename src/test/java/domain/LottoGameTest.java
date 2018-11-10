@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoGameTest {
     List<Lotto> lottoList = new ArrayList<>();
     Lottos lottos;
@@ -19,8 +20,8 @@ public class LottoGameTest {
 
 
     @Before
-    public void setUp()  {
-        numbers = Arrays.asList(1,2,3,4,5,6);
+    public void setUp() {
+        numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         lastLotto = new Lotto(numbers);
         lottoList = Arrays.asList(lastLotto, lastLotto, lastLotto);
         lottos = new Lottos(lottoList);
@@ -44,7 +45,7 @@ public class LottoGameTest {
 
     @Test
     public void 당첨안된로또목록() {
-        List<Integer> diffNum = Arrays.asList(7,8,9,10,11,12);
+        List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
         Lotto diff = new Lotto(diffNum);
         Lottos cobineLottos = lottos.getCombineLottos(diff);
 
@@ -54,26 +55,26 @@ public class LottoGameTest {
 
     @Test
     public void 총수입률() {
-        double result = LottoGame.getTotalEarningRate(price,totalRewards);
-        assertThat(result).isEqualTo(((double)5000/(double)14000));
+        double result = LottoGame.getTotalEarningRate(price, totalRewards);
+        assertThat(result).isEqualTo(((double) 5000 / (double) 14000));
     }
 
     @Test
-    public void 당첨개수테스트(){
+    public void 당첨개수테스트() {
         lastLotto = new Lotto(numbers);
         int[] combineNumbers = new int[7];
-        for(Lotto lotto : lottoList){
+        for (Lotto lotto : lottoList) {
             combineNumbers[lotto.getCombineCount(lastLotto)]++;
         }
         assertThat(combineNumbers[6]).isEqualTo(3);
     }
 
     @Test
-    public void 미당첨개수테스트(){
-        List<Integer> diffNum = Arrays.asList(7,8,9,10,11,12);
+    public void 미당첨개수테스트() {
+        List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
         Lotto diff = new Lotto(diffNum);
         int[] combineNumbers = new int[7];
-        for(Lotto lotto : lottoList){
+        for (Lotto lotto : lottoList) {
             combineNumbers[lotto.getCombineCount(diff)]++;
         }
         assertThat(combineNumbers[0]).isEqualTo(3);
@@ -83,12 +84,12 @@ public class LottoGameTest {
     public void getTotalRewards() {
         lottos.calculateCombine(lastLotto);
         int rewards = lottos.getTotalRewards();
-        assertThat(rewards).isEqualTo(2_000_000_000* 3);
+        assertThat(rewards).isEqualTo(2_000_000_000 * 3);
     }
 
     @Test
     public void getTotalEarningRate() {
-        double earningRate = LottoGame.getTotalEarningRate(14000 , 5000);
-        assertThat(earningRate).isEqualTo((double)(5000)/(double)14000);
+        double earningRate = LottoGame.getTotalEarningRate(14000, 5000);
+        assertThat(earningRate).isEqualTo((double) (5000) / (double) 14000);
     }
 }

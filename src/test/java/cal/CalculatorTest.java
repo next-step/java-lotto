@@ -39,6 +39,11 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Test(expected = NumberFormatException.class)
+    public void 다른구분자() {
+        int result  = StringCalculator.add("1-2:3");
+        assertThat(result).isEqualTo(6);
+    }
     @Test
     public void 패턴테스트() {
         int result = StringCalculator.add(expression);

@@ -7,6 +7,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoTest {
 
     @Test
@@ -18,18 +19,18 @@ public class LottoTest {
     }
 
     @Test
-    public void 중복검사(){
+    public void 중복검사() {
         Lotto lotto = new Lotto(6);
-        for (Integer number : lotto.getNumbers()){
-            assertThat(lotto.getNumbers().stream().filter(obj-> obj.equals(number)).count()).isLessThanOrEqualTo(1);
+        for (Integer number : lotto.getNumbers()) {
+            assertThat(lotto.getNumbers().stream().filter(obj -> obj.equals(number)).count()).isLessThanOrEqualTo(1);
         }
     }
 
     @Test
-    public void 콜렉션검사(){
+    public void 콜렉션검사() {
         List<Integer> numbers = new ArrayList<>();
         List<Integer> numbers1 = new ArrayList<>();
-        for(int i = 1; i < 46; i++){
+        for (int i = 1; i < 46; i++) {
             numbers.add(i);
             numbers1.add(i);
         }
@@ -39,19 +40,19 @@ public class LottoTest {
         assertThat(numbers).isNotEqualTo(numbers1);
 
         List<Integer> result = new ArrayList<>();
-        for(int i =0; i< 6; i++){
+        for (int i = 0; i < 6; i++) {
             result.add(numbers.get(i));
         }
 //        Collections.sort(result);
-        assertThat(numbers.subList(0,6)).isEqualTo(result);
+        assertThat(numbers.subList(0, 6)).isEqualTo(result);
 
 
     }
 
     @Test
-    public void getCombineCount(){
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-        List<Integer> numbers2 = Arrays.asList(1,2,3,4,5,7);
+    public void getCombineCount() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 5, 7);
         Lotto originLotto = new Lotto(numbers);
         Lotto lastLotto = new Lotto(numbers2);
         int combineCount = originLotto.getCombineCount(lastLotto);
