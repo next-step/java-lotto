@@ -56,10 +56,12 @@ public class Statistics {
         for (int i = 3; i <=6 ; i++) {
             sum += PRICES.get(i) * getMatchGroupNum(i);
         }
+
         double profitRate = (double) sum / moneyAmount;
         if(Double.isNaN(profitRate)) {
             return 0;
         }
+
         return profitRate;
     }
 
