@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import collection.IntegerWrapper;
 
@@ -18,14 +18,7 @@ public class InputView {
     public static int purcharseLotto() {
         System.out.println("구입금액을 입력해주세요.");
         Scanner sc = new Scanner(System.in);
-        int money = new IntegerWrapper(sc.next()).getValue();
-        int num = money / 1000;
-        StringBuffer sb = new StringBuffer();
-        sb.append(num);
-        sb.append("개를 구매했습니다.");
-        System.out.println(sb.toString());
-
-        return num;
+        return new IntegerWrapper(sc.next()).getValue();
     }
 
     /**

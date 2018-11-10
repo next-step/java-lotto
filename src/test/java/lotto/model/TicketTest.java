@@ -1,8 +1,8 @@
-package lotto;
+package lotto.model;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

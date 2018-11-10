@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,9 +7,14 @@ import java.util.stream.IntStream;
 public class Lotto {
     private static final int SIZE = 6;
     private static final int RANDOM_NUM_MAX = 45;
+    private static final int PRICE = 1000;
     private static final int RANDOM_NUM_MIN = 1;
+    private static List<Integer> lotteryNums = IntStream.rangeClosed(RANDOM_NUM_MIN, RANDOM_NUM_MAX)
+            .boxed()
+            .collect(Collectors.toList());
     private List<Ticket> tickets = new ArrayList<>();
-    private static List<Integer> lotteryNums = IntStream.rangeClosed(RANDOM_NUM_MIN, RANDOM_NUM_MAX).boxed().collect(Collectors.toList());
+
+
 
     public Lotto(int num) {
         createTickets(num);
@@ -17,10 +22,10 @@ public class Lotto {
 
     /**
      * 티켓 생성
-     * @param num
+     * @param buyAmount
      */
-    private void createTickets(int num) {
-        for (int i = 0; i < num; i++) {
+    private void createTickets(int buyAmount) {
+        for (int i = 0; i < buyAmount/PRICE; i++) {
             Ticket ticket = new Ticket(makeRandNums());
             tickets.add(ticket);
         }

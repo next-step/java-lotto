@@ -1,6 +1,7 @@
-package lotto;
+package lotto.model;
 
-import java.util.HashMap;
+import com.google.common.collect.ImmutableMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,15 +13,16 @@ import static java.util.stream.Collectors.groupingBy;
  * 통계
  */
 public class Statistics {
-    private static final Map<Integer, Integer> prices;
+    public static final Map<Integer, Integer> PRICES;
     private Map<Integer, Long> results;
 
     static {
-        prices = new HashMap<>();
-        prices.put(3, 5000);
-        prices.put(4, 50000);
-        prices.put(5, 1500000);
-        prices.put(6, 2000000000);
+        PRICES = ImmutableMap.<Integer, Integer>builder()
+                .put(3, 5000)
+                .put(4, 50000)
+                .put(5, 1500000)
+                .put(6, 2000000000)
+                .build();
     }
 
     public Statistics(List<Ticket> tickets, List<Integer> prizeNums) {
@@ -52,7 +54,7 @@ public class Statistics {
     public double getProfitRate(int moneyAmount) {
         int sum = 0;
         for (int i = 3; i <=6 ; i++) {
-            sum += prices.get(i) * getMatchGroupNum(i);
+            sum += PRICES.get(i) * getMatchGroupNum(i);
         }
         double profitRate = (double) sum / moneyAmount;
         if(Double.isNaN(profitRate)) {

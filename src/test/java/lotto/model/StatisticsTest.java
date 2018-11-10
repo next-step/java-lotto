@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import org.junit.Before;
 import org.junit.Test;
