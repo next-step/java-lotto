@@ -17,4 +17,7 @@ public class StringExpression {
         return Pattern.compile("//(.)\n(.*)").matcher(expression);
     }
 
+    public String[] getExpression(String delemeter) {
+        return expression.split(delemeter);
+    }
 }

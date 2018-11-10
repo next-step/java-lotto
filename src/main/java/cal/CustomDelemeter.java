@@ -15,7 +15,7 @@ public class CustomDelemeter {
     }
 
     public StringExpressions getSplitStr(StringExpression customExpression) {
-        return new StringExpressions(customExpression.expression.split(delemeter));
+        return new StringExpressions(customExpression.getExpression(delemeter));
     }
 
 

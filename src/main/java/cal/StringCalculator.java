@@ -14,6 +14,6 @@ public class StringCalculator {
             inputExpression = new StringExpression(m.group(2));
             strNumbers = customDelemeter.getSplitStr(inputExpression);
         }
-        return ResultNum.getResult(strNumbers);
+        return strNumbers.getSum();
     }
 }
