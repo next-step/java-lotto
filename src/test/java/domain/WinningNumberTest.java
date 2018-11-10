@@ -13,11 +13,6 @@ public class WinningNumberTest {
         WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(winningNumber.isContain(1)).isTrue();
-        assertThat(winningNumber.isContain(2)).isTrue();
-        assertThat(winningNumber.isContain(3)).isTrue();
-        assertThat(winningNumber.isContain(4)).isTrue();
-        assertThat(winningNumber.isContain(5)).isTrue();
-        assertThat(winningNumber.isContain(6)).isTrue();
 
         assertThat(winningNumber.isContain(7)).isFalse();
     }
