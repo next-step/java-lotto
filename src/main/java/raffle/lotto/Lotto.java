@@ -3,6 +3,10 @@ package raffle.lotto;
 import java.util.Comparator;
 import java.util.List;
 
+import static raffle.lotto.LottoMachine.LOTTO_MAX;
+import static raffle.lotto.LottoMachine.LOTTO_MAX_NUMBER;
+import static raffle.lotto.LottoMachine.LOTTO_MIN_NUMBER;
+
 public class Lotto {
 
     private List<Integer> lottoNumber;
@@ -33,4 +37,7 @@ public class Lotto {
         return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto)).count() > 0;
     }
 
+    public boolean isLottoNumber() {
+        return lottoNumber.stream().allMatch(number -> LOTTO_MIN_NUMBER <= number  && number <= LOTTO_MAX_NUMBER);
+    }
 }

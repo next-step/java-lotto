@@ -10,8 +10,9 @@ import static java.util.Arrays.asList;
 
 public class ResultView {
 
-    public void buyLotto(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public void buyLotto(List<Lotto> lottos, int lottoCount) {
+        System.out.println();
+        System.out.println("수동으로 " + lottoCount + "장, 자동으로 " + (lottos.size() - lottoCount) + "개를 구매했습니다.");
         for(Lotto lotto: lottos){
             System.out.println(lotto.getLottoNumber());
         }

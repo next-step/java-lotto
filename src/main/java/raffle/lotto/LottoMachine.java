@@ -20,9 +20,13 @@ public class LottoMachine {
 
     private List<Lotto> lottos;
 
-    public LottoMachine(int lottoAmount) {
-        lottos = new ArrayList<Lotto>();
-        int count = lottoAmount / LOTTO_PRICE;
+    public LottoMachine(int lottoAmount, List<Lotto> lottos) {
+        if(!lottos.stream().allMatch(lotto -> lotto.isLottoNumber())){
+            throw new RuntimeException("로또에 해당하는 번호가 아닙니다.");
+        }
+        this.lottos = lottos;
+        int buyLottoAmount = lottos.size() * LOTTO_PRICE;
+        int count = (lottoAmount - buyLottoAmount) / LOTTO_PRICE;
         for(int i =0; i < count; i++){
             suffleLotto();
         }

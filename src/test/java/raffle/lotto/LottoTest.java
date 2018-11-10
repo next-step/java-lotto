@@ -37,4 +37,12 @@ public class LottoTest {
 
         assertThat(lotto.hasBonus(bonusLotto)).isTrue();
     }
+
+    @Test
+    public void 로또_범위_아닌_숫자(){
+        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 77);
+        Lotto lotto = new Lotto(number);
+
+        assertThat(lotto.isLottoNumber()).isFalse();
+    }
 }

@@ -8,8 +8,9 @@ import raffle.view.ResultView;
 public class PlayLotto {
     public static void main(String[] args) {
         ResultView resultView = new ResultView();
-        LottoMachine lottoMachine = new LottoMachine(InputView.lottoAmount());
-        resultView.buyLotto(lottoMachine.getLottos());
+        int lottoCount = InputView.buyLotto();
+        LottoMachine lottoMachine = new LottoMachine(InputView.lottoAmount() ,InputView.getLottoNumber(lottoCount));
+        resultView.buyLotto(lottoMachine.getLottos(), lottoCount);
 
         LottoResult lottoResult = lottoMachine.winLotto(InputView.lastWeekLotto(), InputView.bonusLotto());
         resultView.result(lottoResult);
