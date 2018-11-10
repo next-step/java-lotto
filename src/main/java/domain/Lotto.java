@@ -17,6 +17,11 @@ public class Lotto {
             .count();
     }
 
+    public boolean matchBonus(WinningNumber winningNumber) {
+        return numbers.stream()
+            .anyMatch(winningNumber::isBonusMatched);
+    }
+
     @Override
     public String toString() {
         return "[" +

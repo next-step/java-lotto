@@ -20,7 +20,8 @@ public class Main {
         String numbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
-        WinningNumber winningNumber = new WinningNumber(ParsingUtil.parseStringToIntList(numbers));
+        WinningNumber winningNumber = new WinningNumber(
+            ParsingUtil.parseStringToIntList(numbers), bonusNumber);
 
         WinningStatus status = lottoMachine.match(lottoGames, winningNumber);
         ResultView.lottoResult(status);
