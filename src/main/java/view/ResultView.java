@@ -1,6 +1,5 @@
 package view;
 
-import domain.Lotto;
 import domain.LottoGroup;
 import domain.LottoRank;
 
@@ -21,10 +20,8 @@ public class ResultView {
     }
 
     public static void printLottoGroup(LottoGroup lottoGroup) {
-        for(Lotto lotto : lottoGroup.getLottoGroup()){
-            System.out.println(lotto.getNumbers());
-        }
-
+        lottoGroup.getLottoGroup().stream()
+                .forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
     public static void printStats(LottoGroup lottoGroup) {
