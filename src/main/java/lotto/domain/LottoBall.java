@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoBall implements Comparable<LottoBall> {
     private int number;
 
@@ -38,5 +40,9 @@ public class LottoBall implements Comparable<LottoBall> {
     @Override
     public String toString() {
         return  Integer.toString(number);
+    }
+
+    public boolean isIncludeIn(List<LottoBall> balls) {
+        return balls.contains(this);
     }
 }

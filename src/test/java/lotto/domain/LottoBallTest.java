@@ -25,13 +25,13 @@ public class LottoBallTest {
     public void 같은번호_로또볼_비교() {
         LottoBall ball1 = new LottoBall(5);
         LottoBall ball2 = new LottoBall(5);
-        assertThat(ball1).isEqualTo(ball2);
+        assertThat(ball1.equals(ball2)).isTrue();
     }
 
     @Test
     public void 다른번호_로또볼_비교() {
         LottoBall ball1 = new LottoBall(3);
         LottoBall ball2 = new LottoBall(5);
-        assertThat(ball1).isNotEqualTo(ball2);
+        assertThat(ball1.equals(ball2)).isFalse();
     }
 }

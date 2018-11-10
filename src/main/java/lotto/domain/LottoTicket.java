@@ -26,16 +26,12 @@ public class LottoTicket {
 
     public int howManyMatch(LottoTicket otherTicket) {
         int count = 0;
-        for (LottoBall ball : otherTicket.getNumbers()) {
-            if (isMatch(ball)) {
+        for (LottoBall ball : this.balls) {
+            if (ball.isIncludeIn(otherTicket.getNumbers())) {
                 count++;
             }
         }
         return count;
-    }
-
-    private boolean isMatch(LottoBall ball) {
-        return this.balls.contains(ball);
     }
 
     @Override
