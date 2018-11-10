@@ -2,11 +2,15 @@ package lotto.domain.common;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 /**
  * Created by hspark on 10/11/2018.
  */
 public final class Money implements Comparable<Money> {
+
+	private static final Cache<Long, Money> CACHE = new HashMapCache<>();
+
 	private final BigDecimal amount;
 
 	public static final Money ZERO = new Money(BigDecimal.ZERO);
@@ -19,11 +23,17 @@ public final class Money implements Comparable<Money> {
 	}
 
 	public static Money of(int amount) {
-		return new Money(BigDecimal.valueOf(amount));
+		return of((long) amount);
 	}
 
 	public static Money of(long amount) {
-		return new Money(BigDecimal.valueOf(amount));
+		Money cacheMoney = CACHE.get(amount);
+		if (Objects.nonNull(cacheMoney)) {
+			return cacheMoney;
+		}
+		cacheMoney = new Money(BigDecimal.valueOf(amount));
+		CACHE.put(amount, cacheMoney);
+		return cacheMoney;
 	}
 
 	public BigDecimal getAmount() {

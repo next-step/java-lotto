@@ -54,8 +54,8 @@ public class LottoTicketValidatorTest {
 	}
 
 	private List<LottoNumber> lottoNumber(int a, int b, int c, int d, int e, int f) {
-		return Arrays.asList(new LottoNumber(a), new LottoNumber(b)
-			, new LottoNumber(c), new LottoNumber(d)
-			, new LottoNumber(e), new LottoNumber(f));
+		return Arrays.asList(LottoNumber.of(a), LottoNumber.of(b)
+			, LottoNumber.of(c), LottoNumber.of(d)
+			, LottoNumber.of(e), LottoNumber.of(f));
 	}
 }

@@ -1,16 +1,32 @@
 package lotto.domain;
 
+import lotto.domain.common.Cache;
+import lotto.domain.common.HashMapCache;
 import lotto.domain.validator.LottoNumberValidator;
+
+import java.util.Objects;
 
 /**
  * Created by hspark on 10/11/2018.
  */
 public final class LottoNumber implements Comparable<LottoNumber> {
+	private static final Cache<Integer, LottoNumber> CACHE = new HashMapCache<>();
+
 	private final int number;
 
-	public LottoNumber(int number) {
+	private LottoNumber(int number) {
 		this.number = number;
-		LottoNumberValidator.valid(this);
+	}
+
+	public static LottoNumber of(int number) {
+		LottoNumberValidator.valid(number);
+		LottoNumber cache = CACHE.get(number);
+		if (Objects.nonNull(cache)) {
+			return cache;
+		}
+		cache = new LottoNumber(number);
+		CACHE.put(number, cache);
+		return cache;
 	}
 
 	public int getNumber() {

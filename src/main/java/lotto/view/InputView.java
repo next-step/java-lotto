@@ -28,7 +28,7 @@ public class InputView {
 
 	public static LottoNumber inputLottoBonusNumber() {
 		Scanner scanner = new Scanner(System.in);
-		return new LottoNumber(scanner.nextInt());
+		return LottoNumber.of(scanner.nextInt());
 	}
 
 	public static List<LottoTicket> inputManualLottoNumbers(int manualLottoCount) {
@@ -55,7 +55,7 @@ public class InputView {
 	private static List<LottoNumber> inputLottoNumbers() {
 		Scanner scanner = new Scanner(System.in);
 		return Arrays.stream(scanner.nextLine().split(","))
-			.map(String::trim).map(Integer::parseInt).map(LottoNumber::new)
+			.map(String::trim).map(Integer::parseInt).map(LottoNumber::of)
 			.collect(Collectors.toList());
 	}
 }

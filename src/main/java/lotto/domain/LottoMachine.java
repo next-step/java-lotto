@@ -11,7 +11,7 @@ public interface LottoMachine {
 	default List<LottoNumber> drawLottoNumbers() {
 		List<Integer> lottoNumbers = draw();
 		Collections.sort(lottoNumbers);
-		return lottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+		return lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
 	}
 
 	List<Integer> draw();

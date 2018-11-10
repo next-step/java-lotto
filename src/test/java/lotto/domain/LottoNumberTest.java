@@ -11,19 +11,19 @@ public class LottoNumberTest {
 
 	@Test
 	public void test_객체생성() {
-		LottoNumber lottoNumber = new LottoNumber(10);
+		LottoNumber lottoNumber = LottoNumber.of(10);
 		int actual = lottoNumber.getNumber();
 		assertThat(actual).isEqualTo(10);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void test_숫자46이상() {
-		new LottoNumber(46);
+		LottoNumber.of(46);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void test_숫자0이하() {
-		new LottoNumber(0);
+		LottoNumber.of(0);
 	}
 
 }
