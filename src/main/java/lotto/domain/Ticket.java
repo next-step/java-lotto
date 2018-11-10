@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,19 +16,15 @@ public class Ticket {
     }
 
     public int getCountOfMatches(Ticket winningNumbers) {
-        int count = (int) this.numbers.stream()
+        return (int) this.numbers.stream()
                 .filter(number -> winningNumbers.numbers.contains(number))
                 .count();
-
-        return count;
     }
 
     @Override
     public String toString() {
-        String str = numbers.stream()
-                .map(number -> String.valueOf(number))
+        return numbers.stream()
+                .map(String::valueOf)
                 .collect(Collectors.joining(","));
-
-        return str;
     }
 }
