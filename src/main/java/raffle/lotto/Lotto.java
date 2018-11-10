@@ -29,8 +29,8 @@ public class Lotto {
         return lottoNumber.contains(number);
     }
 
-    public boolean hasBonus(Lotto bonusLotto) {
-        return (int) lottoNumber.stream().filter(number -> bonusLotto.contains(number)).count() > 0;
+    public boolean hasBonus(int bonusLotto) {
+        return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto)).count() > 0;
     }
 
 }

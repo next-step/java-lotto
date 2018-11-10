@@ -19,8 +19,7 @@ public class WinningLottoTest {
         List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
         Lotto lastWeekLotto = new Lotto(number);
 
-        List<Integer> number2 = Arrays.asList(23);
-        Lotto bonusLotto = new Lotto(number2);
+        int bonusLotto = 23;
 
         WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
 

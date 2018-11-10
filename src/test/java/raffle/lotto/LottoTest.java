@@ -33,8 +33,7 @@ public class LottoTest {
         List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
         Lotto lotto = new Lotto(number);
 
-        List<Integer> bonus = Arrays.asList(6);
-        Lotto bonusLotto = new Lotto(bonus);
+        int bonusLotto = 22;
 
         assertThat(lotto.hasBonus(bonusLotto)).isTrue();
     }
