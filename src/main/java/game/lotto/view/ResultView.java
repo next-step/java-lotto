@@ -2,6 +2,7 @@ package game.lotto.view;
 
 import game.lotto.model.Amount;
 import game.lotto.model.Lotto;
+import game.lotto.model.Report;
 
 import java.util.List;
 
@@ -15,4 +16,11 @@ public class ResultView {
         lottos.forEach(System.out::println);
         System.out.println();
     }
+
+    public static void printReport(Report report) {
+        System.out.println();
+        System.out.println(report.makeStringReport());
+        System.out.println();
+    }
+
 }

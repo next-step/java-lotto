@@ -1,6 +1,10 @@
 package game.lotto.model;
 
+import game.lotto.util.LottoMatcher;
+
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class LottoGame {
 
@@ -9,11 +13,14 @@ public class LottoGame {
 
     public LottoGame(Money money) {
         this.amount = new Amount(money);
-        createLottoRegistry();
+        initLottoRegistry(LottosFactory.createLottos(amount));
     }
 
-    private void createLottoRegistry() {
-        List<Lotto> lottos = LottoFactory.createLottos(amount);
+    public LottoGame(Collection<Lotto> lottos) {
+        initLottoRegistry(lottos);
+    }
+
+    private void initLottoRegistry(Collection<Lotto> lottos) {
         this.lottoRegistry = new LottoRegistry(lottos);
     }
 
@@ -25,4 +32,8 @@ public class LottoGame {
         return this.lottoRegistry.getLottos();
     }
 
+    public MatchResult match(Set<LottoNumber> winningNumbers) {
+
+        return LottoMatcher.match(winningNumbers, lottoRegistry.getLottos());
+    }
 }

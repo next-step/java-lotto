@@ -27,11 +27,11 @@ public class LottoNumberFactory {
         return lottoNumbers;
     }
 
-    public static Set<LottoNumber> createWinningLottoNumbers(String stringWinningNumbers) {
+    public static Set<LottoNumber> createLottoNumbers(String stringWinningNumbers) {
         String[] winningNumbers = WinningNumberSplitor.split(stringWinningNumbers);
 
         if(winningNumbers.length != Lotto.NUMBER_SIZE) {
-            throw new IllegalArgumentException("당첨 로또 번호 갯수는 6개입니다.");
+            throw new IllegalArgumentException("로또 번호 갯수는 6개입니다.");
         }
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(winningNumbers)
@@ -40,7 +40,7 @@ public class LottoNumberFactory {
                                                 .collect(Collectors.toCollection(TreeSet::new));
 
         if(lottoNumbers.size() < Lotto.NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복된 당첨 번호가 존재합니다.");
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
         return lottoNumbers;
     }

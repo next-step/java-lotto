@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.filter;
 
 public class LottoNumberFactoryTest {
 
@@ -18,35 +17,34 @@ public class LottoNumberFactoryTest {
         assertThat(lottoNumbers).hasSize(Lotto.NUMBER_SIZE);
     }
 
-    //TODO 고쳐야댐
     @Test(expected = IllegalArgumentException.class)
-    public void 당첨_번호_생성_당첨번호_갯수_적을때() {
-        final String stringWinningNumbers = "1, 2, 3, 4, 5";
-        LottoNumberFactory.createWinningLottoNumbers(stringWinningNumbers);
+    public void 문자열_번호_생성_번호_갯수_적을때() {
+        final String stringNumbers = "1, 2, 3, 4, 5";
+        LottoNumberFactory.createLottoNumbers(stringNumbers);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void 당첨_번호_생성_당첨번호_갯수_많을때() {
-        final String stringWinningNumbers = "1, 2, 3, 4, 5, 6, 7";
-        LottoNumberFactory.createWinningLottoNumbers(stringWinningNumbers);
+    public void 문자열_번호_생성_번호_갯수_많을때() {
+        final String stringNumbers = "1, 2, 3, 4, 5, 6, 7";
+        LottoNumberFactory.createLottoNumbers(stringNumbers);
     }
 
     @Test
-    public void 당첨_번호_생성() {
-        final String stringWinningNumbers = "1, 2, 3, 4, 5, 6";
-        final String[] expectedNumbers = WinningNumberSplitor.split(stringWinningNumbers);
+    public void 문자열_번호_생성() {
+        final String stringNumbers = "1, 2, 3, 4, 5, 6";
+        final String[] expectedNumbers = WinningNumberSplitor.split(stringNumbers);
         Arrays.sort(expectedNumbers);
 
-        Set<LottoNumber> winningLottoNumbers = LottoNumberFactory.createWinningLottoNumbers(stringWinningNumbers);
+        Set<LottoNumber> winningLottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
 
         assertThat(winningLottoNumbers.toString()).isEqualTo(Arrays.toString(expectedNumbers));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void 중복_당첨_번호_생성() {
-        final String stringWinningNumbers = "1, 2, 3, 4, 5, 5";
+    public void 중복_문자열_번호_생성() {
+        final String stringNumbers = "1, 2, 3, 4, 5, 5";
 
-        LottoNumberFactory.createWinningLottoNumbers(stringWinningNumbers);
+        LottoNumberFactory.createLottoNumbers(stringNumbers);
     }
 
 }

@@ -7,20 +7,13 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoFactoryTest {
-
-    @Test
-    public void 로또만들기() {
-        Lotto lotto = LottoFactory.createLotto();
-
-        assertThat(lotto).isNotNull();
-    }
+public class LottosFactoryTest {
 
     @Test
     public void 로또_여러개_만들기() {
         final Amount amount = new Amount(new Money(10000));
 
-        List<Lotto> lottos = LottoFactory.createLottos(amount);
+        List<Lotto> lottos = LottosFactory.createLottos(amount);
 
         assertThat(lottos).hasSize(amount.getValue());
         assertThat(lottos).allMatch(Objects::nonNull);

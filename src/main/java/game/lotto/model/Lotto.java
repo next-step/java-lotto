@@ -13,13 +13,22 @@ public class Lotto {
         this.lottoNumbers = LottoNumberFactory.createRandomLottoNumbers();
     }
 
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
 
     public Set<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
+
+
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
+    }
+
+    public int match(Set<LottoNumber> lottoNumbers) {
+        return (int) lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
     }
 }
