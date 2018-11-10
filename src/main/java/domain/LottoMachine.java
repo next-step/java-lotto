@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private static final int GAME_AMOUNT = 1000;
+    private static final int GAME_AMOUNT = 1_000;
 
     public List<Lotto> purchaseLotto(int amount) {
         List<Lotto> lottoGames = new ArrayList<>();
