@@ -27,8 +27,12 @@ public enum LottoPrize {
         return this.prize * number;
     }
 
+    private boolean isMatchedCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
     public static LottoPrize findPrize(int matchCount, int bonusCount) {
-        LottoPrize prize = getLottoPrize(matchCount);
+        LottoPrize prize = valueOf(matchCount);
         if (isSecond(bonusCount, prize)) {
             return SECOND;
         }
@@ -39,16 +43,12 @@ public enum LottoPrize {
         return THIRD == prize && bonusCount == 1;
     }
 
-    private static LottoPrize getLottoPrize(int matchCount) {
+    private static LottoPrize valueOf(int matchCount) {
         for (LottoPrize prize: LottoPrize.values()) {
             if (prize.isMatchedCount(matchCount)) {
                 return prize;
             }
         }
         return null;
-    }
-
-    private boolean isMatchedCount(int matchCount) {
-        return this.matchCount == matchCount;
     }
 }
