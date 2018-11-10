@@ -56,7 +56,7 @@ public class WinningStatusTest {
 
         WinningStatus status = new WinningStatus(Collections.singletonList(lotto), winningNumber);
 
-        assertThat(status.getPrizeCount(Prize.FOURTH_PRIZE)).isEqualTo(1);
+        assertThat(status.getPrizeCount(Prize.FIFTH_PRIZE)).isEqualTo(1);
     }
 
     @Test
