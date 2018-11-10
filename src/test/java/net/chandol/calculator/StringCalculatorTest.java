@@ -1,9 +1,7 @@
-package net.chandol.splitter;
+package net.chandol.calculator;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-
-import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +15,14 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void 문자열자르고더하기() {
+    public void 기본_자르고_더하기_테스트() {
         Integer result = StringCalculator.add("1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 빈문자열인경우_예외처리(){
+        StringCalculator.add("");
     }
 
     @Test
@@ -31,7 +34,7 @@ public class StringCalculatorTest {
     @Test(expected = IllegalArgumentException.class)
     public void 옳바르지않은형식인경우_에러반환하기(){
         StringCalculator.add("1?2;3");
-        Assertions.fail("여기로 오면 안됨요!!");
+        Assertions.fail("");
     }
 
     @Test
@@ -41,7 +44,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void 점이들어가는_경우에_대한_이슈() {
+    public void 점이들어오는경우_예외처리() {
         Integer result = StringCalculator.add("//.\\n1.2.3");
         assertThat(result).isEqualTo(6);
     }
