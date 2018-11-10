@@ -48,4 +48,13 @@ public class LottoTest {
 
     }
 
+    @Test
+    public void getCombineCount(){
+        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> numbers2 = Arrays.asList(1,2,3,4,5,7);
+        Lotto originLotto = new Lotto(numbers);
+        Lotto lastLotto = new Lotto(numbers2);
+        int combineCount = originLotto.getCombineCount(lastLotto);
+        assertThat(combineCount).isEqualTo(5);
+    }
 }
