@@ -1,13 +1,14 @@
 package lotto.dto;
 
+import lotto.domain.LottoNumber;
 import lotto.utils.StringUtils;
 
 public class WinningNumber {
 
 	private String winningNumber;
-	private int bonusNumber;
+	private LottoNumber bonusNumber;
 
-	public WinningNumber(String winningNumber, int bonusNumber) {
+	public WinningNumber(String winningNumber, LottoNumber bonusNumber) {
 		if(StringUtils.isBlank(winningNumber)) {
 			throw new IllegalArgumentException("잘못된 당첨 번호입니다.");
 		}
@@ -19,7 +20,7 @@ public class WinningNumber {
 		return winningNumber;
 	}
 
-	public int getBonusNumber() {
+	public LottoNumber getBonusNumber() {
 		return bonusNumber;
 	}
 }
