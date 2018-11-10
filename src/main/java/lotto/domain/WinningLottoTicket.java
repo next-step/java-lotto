@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class WinningLottoTicket {
 	private LottoTicket lottoTicket;
-	private Integer bonusNumber;
+	private LottoNumber bonusNumber;
 
-	public WinningLottoTicket(List<Integer> lottoNumbers, Integer bonusNumber) {
+	public WinningLottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
 		this.lottoTicket = LottoTicket.newInstanceByManual(lottoNumbers);
 		this.bonusNumber = bonusNumber;
 		WinningLottoTicketValidator.valid(this);
@@ -23,11 +23,11 @@ public class WinningLottoTicket {
 		return LottoWinnerType.findByMatchingCountAndBonus(matchingCount, hasBonusNumber);
 	}
 
-	public Integer getBonusNumber() {
+	public LottoNumber getBonusNumber() {
 		return bonusNumber;
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LottoNumber> getNumbers() {
 		return lottoTicket.getNumbers();
 	}
 }

@@ -40,6 +40,12 @@ public class LottoTest {
 	}
 
 	private LottoTicket lottoTicket(int a, int b, int c, int d, int e, int f) {
-		return LottoTicket.newInstanceByManual(Arrays.asList(a, b, c, d, e, f));
+		return LottoTicket.newInstanceByManual(lottoNumber(a, b, c, d, e, f));
+	}
+
+	private List<LottoNumber> lottoNumber(int a, int b, int c, int d, int e, int f) {
+		return Arrays.asList(new LottoNumber(a), new LottoNumber(b)
+			, new LottoNumber(c), new LottoNumber(d)
+			, new LottoNumber(e), new LottoNumber(f));
 	}
 }
