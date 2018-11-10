@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -14,16 +12,22 @@ public class LottoTest {
     public void generateLotto() {
         Lotto lotto = new Lotto(6);
 
-        assertThat(lotto.getNumbers()).hasSize(6);
+        assertThat(lotto.getNumCount()).isEqualTo(6);
 
     }
 
     @Test
     public void 중복검사() {
-        Lotto lotto = new Lotto(6);
-        for (Integer number : lotto.getNumbers()) {
-            assertThat(lotto.getNumbers().stream().filter(obj -> obj.equals(number)).count()).isLessThanOrEqualTo(1);
-        }
+        List<Integer> num = Arrays.asList(1,2,3,4,5,6);
+        Lotto lotto = new Lotto(num);
+        assertThat(lotto.isDuplication()).isFalse();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void 중복발생검사() {
+        List<Integer> num = Arrays.asList(1,2,3,4,5,5);
+        Lotto lotto = new Lotto(num);
+        assertThat(lotto.isDuplication()).isTrue();
     }
 
     @Test
@@ -43,7 +47,6 @@ public class LottoTest {
         for (int i = 0; i < 6; i++) {
             result.add(numbers.get(i));
         }
-//        Collections.sort(result);
         assertThat(numbers.subList(0, 6)).isEqualTo(result);
 
 

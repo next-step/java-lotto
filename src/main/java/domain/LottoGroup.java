@@ -47,7 +47,7 @@ public class LottoGroup {
         return new LottoGroup(lottos);
     }
 
-    public static boolean isContain(Lotto lastLotto) {
+    public boolean isContain(Lotto lastLotto) {
         return lottoGroup.stream().
                 anyMatch(obj -> obj.equals(lastLotto));
     }

@@ -11,18 +11,23 @@ public class Lotto {
 
     public Lotto() {
         numbers = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
+        if (isDuplication()) {
+            throw new RuntimeException("중복번호입니다.");
+        }
     }
 
     public Lotto(int number) {
         numbers = LottoGenerator.generateNumberList(number);
+        if (isDuplication()) {
+            throw new RuntimeException("중복번호입니다.");
+        }
     }
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
+        if (isDuplication()) {
+            throw new RuntimeException("중복번호입니다.");
+        }
     }
 
     public int getCombineCount(Lotto lastLotto) {
@@ -38,6 +43,14 @@ public class Lotto {
 
     public void printLotto() {
         System.out.println(this.numbers);
+    }
+
+    public int getNumCount() {
+        return numbers.size();
+    }
+
+    public boolean isDuplication() {
+        return numbers.stream().count() != numbers.stream().distinct().count();
     }
 
 }
