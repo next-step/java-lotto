@@ -11,6 +11,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int match(WinningNumber winningNumber) {
+        return (int) numbers.stream()
+            .filter(winningNumber::isContain)
+            .count();
+    }
+
     @Override
     public String toString() {
         return "[" +
@@ -18,11 +24,5 @@ public class Lotto {
                 ", ",
                 numbers.stream().map(String::valueOf).collect(Collectors.toList())) +
             "]";
-    }
-
-    public int match(WinningNumber winningNumber) {
-        return (int) numbers.stream()
-            .filter(winningNumber::isContain)
-            .count();
     }
 }
