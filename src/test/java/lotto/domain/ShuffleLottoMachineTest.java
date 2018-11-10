@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.validator.LottoNumberValidator;
+import lotto.domain.validator.LottoTicketValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class ShuffleLottoMachineTest {
 	public void test_로또번호_validator_test() {
 		ShuffleLottoMachine shuffleLottoMachine = new ShuffleLottoMachine();
 		for (int i = 0; i < 1000; i++) {
-			LottoNumberValidator.valid(LottoTicket.newInstanceByAutomation(shuffleLottoMachine));
+			LottoTicketValidator.valid(LottoTicket.newInstanceByAutomation(shuffleLottoMachine));
 		}
 	}
 }

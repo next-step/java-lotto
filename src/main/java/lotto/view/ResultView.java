@@ -3,18 +3,19 @@ package lotto.view;
 import lotto.domain.LottoMatchingResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerType;
+import lotto.domain.generator.PurchaseLottoTicketResultInfo;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Created by hspark on 06/11/2018.
  */
 public class ResultView {
-	public static void printLottoTickets(List<LottoTicket> lottoNumberList) {
+	public static void printLottoTickets(PurchaseLottoTicketResultInfo purchaseLottoTicketResultInfo) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("%d개를 구매했습니다.\n", lottoNumberList.size()));
-		for (LottoTicket lottoNumber : lottoNumberList) {
+		sb.append(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n",
+			purchaseLottoTicketResultInfo.getManualTickets().size(), purchaseLottoTicketResultInfo.getAutoTickets().size()));
+		for (LottoTicket lottoNumber : purchaseLottoTicketResultInfo.getTickets()) {
 			sb.append(lottoNumber + "\n");
 		}
 		System.out.println(sb.toString());
@@ -31,7 +32,7 @@ public class ResultView {
 			if (winnerType.isBonusGame()) {
 				sb.append(", 보너스 볼 일치");
 			}
-			sb.append(String.format("(%d 원) - %d개\n", winnerType.getReward(), matchingCount));
+			sb.append(String.format("(%d 원) - %d개\n", winnerType.getReward().getAmount().intValue(), matchingCount));
 
 		}
 		BigDecimal totalProfitRate = lottoMatchingResult.getProfitsRate();
