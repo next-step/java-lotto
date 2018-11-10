@@ -23,7 +23,7 @@ public class LottoNumberGeneratorTest {
 		assertThat(LottoNumberGenerator.parse(numbers))
 				.hasSize(Lotto.NUMBER_COUNT)
 				.containsExactly(
-						new LottoNumber(number1), new LottoNumber(number2), new LottoNumber(number3),
-						new LottoNumber(number4), new LottoNumber(number5), new LottoNumber(number6));
+						LottoNumber.valueOf(number1), LottoNumber.valueOf(number2), LottoNumber.valueOf(number3),
+						LottoNumber.valueOf(number4), LottoNumber.valueOf(number5), LottoNumber.valueOf(number6));
 	}
 }

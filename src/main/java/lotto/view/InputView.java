@@ -51,6 +51,6 @@ public class InputView {
 		System.out.println("보너스 볼을 입력해 주세요.");
 		Integer bonusNumber = scanner.nextInt();
 
-		return new WinningNumber(winningNumber, new LottoNumber(bonusNumber));
+		return new WinningNumber(winningNumber, LottoNumber.valueOf(bonusNumber));
 	}
 }

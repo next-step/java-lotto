@@ -17,14 +17,14 @@ public class LottoNumberGenerator {
 	public static List<LottoNumber> pick() {
 		Collections.shuffle(numbers);
 		return numbers.stream()
-				.map(LottoNumber::new)
+				.map(LottoNumber::valueOf)
 				.limit(Lotto.NUMBER_COUNT)
 				.collect(Collectors.toList());
 	}
 
 	public static List<LottoNumber> parse(String number) {
 		return Arrays.stream(number.split("[\\s,]+"))
-				.map(LottoNumber::new)
+				.map(LottoNumber::valueOf)
 				.collect(Collectors.toList());
 	}
 }

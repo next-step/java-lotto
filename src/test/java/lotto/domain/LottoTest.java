@@ -11,7 +11,7 @@ public class LottoTest {
 	public void 당첨번호가_존재할때_검증() {
 		Lotto lotto = new Lotto(LottoNumberGenerator.parse("1,2,3,4,5,6"));
 
-		LottoNumber number = new LottoNumber(3);
+		LottoNumber number = LottoNumber.valueOf(3);
 
 		assertThat(lotto.hasNumber(number)).isTrue();
 	}
@@ -20,7 +20,7 @@ public class LottoTest {
 	public void 당첨번호가_존재하지않을때_검증() {
 		Lotto lotto = new Lotto(LottoNumberGenerator.parse("1,2,3,4,5,6"));
 
-		LottoNumber number = new LottoNumber(9);
+		LottoNumber number = LottoNumber.valueOf(9);
 
 		assertThat(lotto.hasNumber(number)).isFalse();
 	}
