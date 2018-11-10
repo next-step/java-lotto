@@ -21,9 +21,6 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
-        if (isDuplication()) {
-            throw new RuntimeException("중복번호입니다.");
-        }
     }
 
     public List<Integer> getNumbers() {
@@ -43,10 +40,6 @@ public class Lotto {
 
     public int getNumCount() {
         return numbers.size();
-    }
-
-    public boolean isDuplication() {
-        return numbers.stream().count() != numbers.stream().distinct().count();
     }
 
 }

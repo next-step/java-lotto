@@ -7,7 +7,7 @@ public class LottoGroup {
     public static final int COMBINE_MIN_NUM = 3;
     public static final int COMBINE_MAX_NUM = 6;
 
-    private static List<Lotto> lottoGroup;
+    private List<Lotto> lottoGroup;
     private int[] combineNumbers;
 
     public LottoGroup(List<Lotto> lottoGroup) {
@@ -33,6 +33,7 @@ public class LottoGroup {
     public List<Lotto> getLottoGroup() {
         return lottoGroup;
     }
+
     public int getCombineNumbers(int combineNum) {
         return combineNumbers[combineNum];
     }
@@ -41,28 +42,18 @@ public class LottoGroup {
         return lottoGroup.size();
     }
 
-    public static LottoGroup getCombineLottos(Lotto lastLotto) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (Lotto lotto : lottoGroup) {
-            int combineCount = lastLotto.getCombineCount(lotto);
-            if (combineCount >= COMBINE_MIN_NUM) {
-                lottos.add(lotto);
-            }
-        }
-        return new LottoGroup(lottos);
-    }
-
     public boolean isContain(Lotto lastLotto) {
         return lottoGroup.stream().
                 anyMatch(obj -> obj.equals(lastLotto));
     }
 
-    public void calculateCombine(Lotto lastLotto) {
+    public int[] calculateCombine(Lotto lastLotto) {
         int[] combineNumbers = new int[COMBINE_MAX_NUM + 1];
         for (Lotto lotto : lottoGroup) {
             combineNumbers[lotto.getCombineCount(lastLotto)]++;
         }
         this.combineNumbers = combineNumbers;
+        return combineNumbers;
     }
 
     public int getTotalRewards() {

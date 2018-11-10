@@ -1,6 +1,7 @@
 package domain;
 
 import org.junit.Test;
+import utils.LottoGenerator;
 
 import java.util.*;
 
@@ -19,15 +20,13 @@ public class LottoTest {
     @Test
     public void 중복검사() {
         List<Integer> num = Arrays.asList(1,2,3,4,5,6);
-        Lotto lotto = new Lotto(num);
-        assertThat(lotto.isDuplication()).isFalse();
+        assertThat(LottoGenerator.isDuplication(num)).isFalse();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void 중복발생검사() {
         List<Integer> num = Arrays.asList(1,2,3,4,5,5);
-        Lotto lotto = new Lotto(num);
-        assertThat(lotto.isDuplication()).isTrue();
+        assertThat(LottoGenerator.isDuplication(num)).isTrue();
     }
 
     @Test

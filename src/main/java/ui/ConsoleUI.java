@@ -17,7 +17,7 @@ public class ConsoleUI {
         ResultView.printLottoGroup(lottoGroup);
 
         Lotto lastLotto = new Lotto(StringUtils.convertStrToNum(InputView.lastLottoNumber()));
-        LottoGroup combineLottoGroup = lottoGroup.getCombineLottos(lastLotto);
+        LottoGroup combineLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
         ResultView.viewStats();
 
         combineLottoGroup.calculateCombine(lastLotto);

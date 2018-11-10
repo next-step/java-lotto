@@ -29,7 +29,7 @@ public class LottoGroupTest {
 
     @Test
     public void 당첨된로또목록() {
-        LottoGroup cobineLottoGroup = lottoGroup.getCombineLottos(lastLotto);
+        LottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
         assertThat(cobineLottoGroup.getSize()).isEqualTo(3);
         assertThat(cobineLottoGroup.isContain(lastLotto)).isTrue();
     }
@@ -38,7 +38,7 @@ public class LottoGroupTest {
     public void 당첨안된로또목록() {
         List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
         Lotto diff = new Lotto(diffNum);
-        LottoGroup cobineLottoGroup = lottoGroup.getCombineLottos(diff);
+        LottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, diff);
 
         assertThat(cobineLottoGroup.getSize()).isEqualTo(0);
         assertThat(cobineLottoGroup.isContain(diff)).isFalse();
