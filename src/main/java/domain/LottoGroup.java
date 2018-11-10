@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lottos {
+public class LottoGroup {
     private static final int COMBINE_MIN_NUM = 3;
     private static final int COMBINE_MAX_NUM = 6;
     private static final int LOTTO_PRICE = 1000;
@@ -11,7 +11,7 @@ public class Lottos {
     private static List<Lotto> lottoGroup;
     private int[] combineNumbers;
 
-    public Lottos(List<Lotto> lottoGroup) {
+    public LottoGroup(List<Lotto> lottoGroup) {
         if (lottoGroup == null) {
             throw new NullPointerException();
         }
@@ -22,7 +22,7 @@ public class Lottos {
         this.lottoGroup = lottoGroup;
     }
 
-    public Lottos(int lottoCount) {
+    public LottoGroup(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = new Lotto();
@@ -36,7 +36,7 @@ public class Lottos {
         return lottoGroup.size();
     }
 
-    public static Lottos getCombineLottos(Lotto lastLotto) {
+    public static LottoGroup getCombineLottos(Lotto lastLotto) {
         List<Lotto> lottos = new ArrayList<>();
         for (Lotto lotto : lottoGroup) {
             int combineCount = lastLotto.getCombineCount(lotto);
@@ -44,7 +44,7 @@ public class Lottos {
                 lottos.add(lotto);
             }
         }
-        return new Lottos(lottos);
+        return new LottoGroup(lottos);
     }
 
     public static boolean isContain(Lotto lastLotto) {
@@ -71,7 +71,6 @@ public class Lottos {
 
         return totalRewards;
     }
-
 
     private static void printCombineCount(int lottoCount) {
         System.out.println(String.format("- %s개", lottoCount));

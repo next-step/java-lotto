@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CalculatorTest {
-    String expression;
+    private String expression;
 
     @Before
     public void setUp() throws Exception {
