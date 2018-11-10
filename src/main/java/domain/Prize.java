@@ -1,35 +1,38 @@
 package domain;
 
 public enum Prize {
-    NONE(0, 0),
-    FOURTH_PRIZE(3, 5000),
-    THIRD_PRIZE(4, 50000),
-    SECOND_PRIZE(5, 1500000),
-    FIRST_PRIZE(6, 2000000000);
+    NONE(0, false, 0),
+    FIFTH_PRIZE(3, false, 5000),
+    FOURTH_PRIZE(4, false, 50000),
+    THIRD_PRIZE(5, false, 1500000),
+    SECOND_PRIZE(5, true, 30000000),
+    FIRST_PRIZE(6, false, 2000000000);
 
-    private int forWin;
+    private int toWin;
+    private boolean requireBonus;
     private int reward;
 
-    Prize(int forWin, int reward) {
-        this.forWin = forWin;
+    Prize(int toWin, boolean requireBonus, int reward) {
+        this.toWin = toWin;
+        this.requireBonus = requireBonus;
         this.reward = reward;
     }
 
-    public int getForWin() {
-        return forWin;
+    public int getToWin() {
+        return toWin;
     }
 
     public int getReward() {
         return reward;
     }
 
-    public boolean isMatchedPrize(int matched) {
-        return forWin == matched;
+    public boolean isMatchedPrize(int matched, boolean bonusMatched) {
+        return toWin == matched && requireBonus == bonusMatched;
     }
 
-    public static Prize matchPrize(int matched) {
+    public static Prize matchPrize(int matched, boolean bonusMatched) {
         for (Prize prize : Prize.values()) {
-            if (prize.isMatchedPrize(matched)) {
+            if (prize.isMatchedPrize(matched, bonusMatched)) {
                 return prize;
             }
         }

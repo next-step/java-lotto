@@ -25,7 +25,7 @@ public class ResultView {
     }
 
     private static void prizeResult(Prize prize, int matched) {
-        System.out.println(prize.getForWin() + "개 일치 (" + prize.getReward() + ") - " + matched);
+        System.out.println(prize.getToWin() + "개 일치 (" + prize.getReward() + ") - " + matched);
     }
 
     private static void profitRate(double profitRate) {
