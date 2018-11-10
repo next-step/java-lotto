@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class StringStringCalculatorTest {
+public class StringCalculatorTest {
 
     @Test
     public void 덧셈_빈문자열() {
