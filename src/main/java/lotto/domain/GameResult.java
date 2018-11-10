@@ -5,7 +5,7 @@ import lotto.enums.MatchType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.stream.IntStream;
+
 
 public class GameResult {
 
@@ -14,22 +14,20 @@ public class GameResult {
     private static final int PRICE_PER_ONE_LOTTO = 1_000;
 
     private List<Ticket> tickets;
-    private int[] results = new int[MATCH_CASE_NUM];
 
     public GameResult(List<Ticket> tickets, Ticket winningNumbers) {
         this.tickets = tickets;
-        this.results = generateGameResult(winningNumbers);
+        generateGameResult(winningNumbers);
     }
 
-     private int[] generateGameResult(Ticket winningNumbers) {
-        IntStream.range(0, this.tickets.size())
-                .forEach(i -> this.results[this.tickets.get(i).getCountOfMatches(winningNumbers)]++);
-
-        return this.results;
+     protected void generateGameResult(Ticket winningNumbers) {
+         this.tickets.stream()
+                 .mapToInt(ticket -> ticket.getCountOfMatches(winningNumbers))
+                 .forEach(MatchType::updateCount);
     }
 
     public BigDecimal getBenefitRate() {
-        BigDecimal totalWinAmount = new BigDecimal(calculateTotalAmount(this.results));
+        BigDecimal totalWinAmount = new BigDecimal(MatchType.getTotalAmount());
         BigDecimal purchaseAmount = new BigDecimal(getPurchaseAmount());
 
         return calculateBenefitRate(totalWinAmount, purchaseAmount);
@@ -41,15 +39,5 @@ public class GameResult {
 
     public int getPurchaseAmount() {
         return this.tickets.size() * PRICE_PER_ONE_LOTTO;
-    }
-
-    protected static int calculateTotalAmount(int results[]) {
-        return IntStream.range(0, results.length)
-                .map(i -> MatchType.getMatchedPrice(i) * results[i])
-                .sum();
-    }
-
-    public int[] getResults() {
-        return this.results;
     }
 }

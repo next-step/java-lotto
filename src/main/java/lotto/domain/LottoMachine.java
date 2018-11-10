@@ -17,7 +17,7 @@ public class LottoMachine {
         return new GameResult(lotto.getTickets(), convertWinningNumbers(winningNumbers));
     }
 
-    public static Ticket convertWinningNumbers (String s) {
+    public static Ticket convertWinningNumbers(String s) {
         String [] numbers = s.replace(" ", "").split(",");
 
         List<Integer> winningNumbers = Arrays.stream(numbers)
