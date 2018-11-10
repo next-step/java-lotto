@@ -1,5 +1,6 @@
 package raffle.lotto;
 
+import raffle.lotto.validator.LottoValidator;
 import raffle.lotto.win.LottoResult;
 import raffle.lotto.win.WinLotto;
 import raffle.lotto.win.WinningLotto;
@@ -19,11 +20,12 @@ public class LottoMachine {
     public static final int LOTTO_MAX = 6;
 
     private List<Lotto> lottos;
+    private LottoValidator lottoValidator;
 
-    public LottoMachine(int lottoAmount, List<Lotto> lottos) {
-        if(!lottos.stream().allMatch(lotto -> lotto.isLottoNumber())){
-            throw new RuntimeException("로또에 해당하는 번호가 아닙니다.");
-        }
+    public LottoMachine(int lottoAmount, List<Lotto> lottos, LottoValidator lottoValidator) {
+        this.lottoValidator = lottoValidator;
+        if(lottoValidator.validator(lottos));
+
         this.lottos = lottos;
         int buyLottoAmount = lottos.size() * LOTTO_PRICE;
         int count = (lottoAmount - buyLottoAmount) / LOTTO_PRICE;
