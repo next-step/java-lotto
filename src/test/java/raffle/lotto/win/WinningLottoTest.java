@@ -1,5 +1,6 @@
 package raffle.lotto.win;
 
+import org.junit.Before;
 import org.junit.Test;
 import raffle.lotto.Lotto;
 
@@ -11,19 +12,47 @@ import static org.junit.Assert.*;
 
 public class WinningLottoTest {
 
-    @Test
-    public void 로또2등여부검사() {
-        List<Integer> lottoNumber = Arrays.asList(1, 23 , 5 , 44 , 22 , 15);
-        Lotto lotto = new Lotto(lottoNumber);
+    Lotto lotto;
+    int bonusLotto;
+    WinningLotto winningLotto;
 
+    @Before
+    public void setUp(){
+        List<Integer> lottoNumber = Arrays.asList(1, 23 , 5 , 44 , 22 , 15);
+        lotto = new Lotto(lottoNumber);
+        bonusLotto = 23;
+    }
+
+    @Test
+    public void 로또2등_여부검사() {
         List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
         Lotto lastWeekLotto = new Lotto(number);
 
-        int bonusLotto = 23;
-
-        WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
+        winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
 
         assertThat(winningLotto.result(lotto)).isEqualTo(WinLotto.FIVE_WIN_BONUS_LOTTO);
+
+    }
+
+    @Test
+    public void 로또3등_여부검사() {
+        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 11);
+        Lotto lastWeekLotto = new Lotto(number);
+
+        winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
+
+        assertThat(winningLotto.result(lotto)).isEqualTo(WinLotto.FOUR_WIN_LOTTO);
+
+    }
+
+    @Test
+    public void 로또5등_여부검사() {
+        List<Integer> number = Arrays.asList(1, 6 , 14 , 44 , 36 , 11);
+        Lotto lastWeekLotto = new Lotto(number);
+
+        winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
+
+        assertThat(winningLotto.result(lotto)).isEqualTo(WinLotto.TWO_LOTTO);
 
     }
 }
