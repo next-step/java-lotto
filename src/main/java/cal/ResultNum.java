@@ -10,7 +10,11 @@ public class ResultNum {
     }
 
     public static int parserInt(String strNumber) {
-        return Integer.parseInt(strNumber.trim());
+        int num =  Integer.parseInt(strNumber.trim());
+        if(num < 0){
+            throw new RuntimeException();
+        }
+        return num;
     }
 
 }

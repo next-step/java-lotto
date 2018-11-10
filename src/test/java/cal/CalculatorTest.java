@@ -45,6 +45,11 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void 음수테스트() {
+        int result = StringCalculator.add("-1,2,3");
+        assertThat(result).isEqualTo(6);
+    }
 
     @Test
     public void MatchTest() {
@@ -56,5 +61,7 @@ public class CalculatorTest {
         assertThat(m.group(1)).isEqualTo(m1.group(1));
 
     }
+
+
 
 }
