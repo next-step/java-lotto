@@ -1,5 +1,9 @@
 package view;
 
+import domain.Lotto;
+import domain.LottoGroup;
+import domain.LottoRank;
+
 public class ResultView {
 
     public static void viewStats() {
@@ -16,4 +20,25 @@ public class ResultView {
         System.out.println(String.format("%s개를 구매했습니다.", lottoCount));
     }
 
+    public static void printLottoGroup(LottoGroup lottoGroup) {
+        for(Lotto lotto : lottoGroup.getLottoGroup()){
+            System.out.println(lotto.getNumbers());
+        }
+
+    }
+
+    public static void printStats(LottoGroup lottoGroup) {
+        for (int combineNum = lottoGroup.COMBINE_MAX_NUM; combineNum >= lottoGroup.COMBINE_MIN_NUM; combineNum--) {
+            printCombineCurrent(combineNum);
+            printCombineCount(lottoGroup.getCombineNumbers(combineNum));
+        }
+    }
+
+    private static void printCombineCount(int lottoCount) {
+        System.out.println(String.format("- %s개", lottoCount));
+    }
+
+    private static void printCombineCurrent(int combineCount) {
+        System.out.print(String.format("%s개 일치 (%s원)", combineCount, LottoRank.findByCombineNum(combineCount)));
+    }
 }

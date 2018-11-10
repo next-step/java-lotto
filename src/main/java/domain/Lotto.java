@@ -5,22 +5,18 @@ import utils.LottoGenerator;
 import java.util.List;
 
 public class Lotto {
-    private static final int LOTTO_CHOICE_CNT = 6;
+    public static final int LOTTO_CHOICE_CNT = 6;
+    public static final int LOTTO_PRICE = 1000;
 
     private List<Integer> numbers;
 
     public Lotto() {
-        numbers = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
-        if (isDuplication()) {
-            throw new RuntimeException("중복번호입니다.");
-        }
+        this(LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT));
+
     }
 
     public Lotto(int number) {
-        numbers = LottoGenerator.generateNumberList(number);
-        if (isDuplication()) {
-            throw new RuntimeException("중복번호입니다.");
-        }
+        this(LottoGenerator.generateNumberList(number));
     }
 
     public Lotto(List<Integer> numbers) {
@@ -28,6 +24,10 @@ public class Lotto {
         if (isDuplication()) {
             throw new RuntimeException("중복번호입니다.");
         }
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     public int getCombineCount(Lotto lastLotto) {
@@ -39,10 +39,6 @@ public class Lotto {
 
     private boolean isContains(Integer number) {
         return numbers.contains(number);
-    }
-
-    public void printLotto() {
-        System.out.println(this.numbers);
     }
 
     public int getNumCount() {

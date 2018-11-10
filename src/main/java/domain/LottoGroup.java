@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
-    private static final int COMBINE_MIN_NUM = 3;
-    private static final int COMBINE_MAX_NUM = 6;
-    private static final int LOTTO_PRICE = 1000;
+    public static final int COMBINE_MIN_NUM = 3;
+    public static final int COMBINE_MAX_NUM = 6;
 
     private static List<Lotto> lottoGroup;
     private int[] combineNumbers;
@@ -27,12 +26,18 @@ public class LottoGroup {
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
-            lotto.printLotto();
         }
         this.lottoGroup = lottos;
     }
 
-    public int size() {
+    public List<Lotto> getLottoGroup() {
+        return lottoGroup;
+    }
+    public int getCombineNumbers(int combineNum) {
+        return combineNumbers[combineNum];
+    }
+
+    public int getSize() {
         return lottoGroup.size();
     }
 
@@ -64,28 +69,13 @@ public class LottoGroup {
         int totalRewards = 0;
 
         for (int combineNum = COMBINE_MAX_NUM; combineNum >= COMBINE_MIN_NUM; combineNum--) {
-            printCombineCurrent(combineNum);
-            printCombineCount(combineNumbers[combineNum]);
             totalRewards += getRewards(combineNumbers[combineNum], combineNum);
         }
 
         return totalRewards;
     }
 
-    private static void printCombineCount(int lottoCount) {
-        System.out.println(String.format("- %s개", lottoCount));
-    }
-
-    private static void printCombineCurrent(int combineCount) {
-        System.out.print(String.format("%s개 일치 (%s원)", combineCount, LottoRank.findByCombineNum(combineCount)));
-    }
-
     private static int getRewards(int lottoCount, int combineNum) {
         return LottoRank.findByCombineNum(combineNum) * lottoCount;
     }
-
-    public static int getPrice() {
-        return lottoGroup.size() * LOTTO_PRICE;
-    }
-
 }

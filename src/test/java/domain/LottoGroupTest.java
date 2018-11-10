@@ -3,7 +3,6 @@ package domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,35 +10,27 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGroupTest {
-    List<Lotto> lottoList = new ArrayList<>();
     LottoGroup lottoGroup;
-    List<Integer> numbers = new ArrayList<>();
     Lotto lastLotto;
-    int price = 0;
-    int totalRewards = 0;
 
 
     @Before
     public void setUp() {
-        numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        lastLotto = new Lotto(numbers);
-        lottoList = Arrays.asList(lastLotto, lastLotto, lastLotto);
-        lottoGroup = new LottoGroup(lottoList);
-        price = 14000;
-        totalRewards = 5000;
+        lastLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoGroup = new LottoGroup(Arrays.asList(lastLotto, lastLotto, lastLotto));
     }
 
     @Test
     public void 로또가격만큼산개수() {
         LottoGroup buyLottoGroup = new LottoGroup(14);
-        assertThat(buyLottoGroup.size()).isEqualTo(14);
+        assertThat(buyLottoGroup.getSize()).isEqualTo(14);
     }
 
 
     @Test
     public void 당첨된로또목록() {
         LottoGroup cobineLottoGroup = lottoGroup.getCombineLottos(lastLotto);
-        assertThat(cobineLottoGroup.size()).isEqualTo(3);
+        assertThat(cobineLottoGroup.getSize()).isEqualTo(3);
         assertThat(cobineLottoGroup.isContain(lastLotto)).isTrue();
     }
 
@@ -49,19 +40,22 @@ public class LottoGroupTest {
         Lotto diff = new Lotto(diffNum);
         LottoGroup cobineLottoGroup = lottoGroup.getCombineLottos(diff);
 
-        assertThat(cobineLottoGroup.size()).isEqualTo(0);
+        assertThat(cobineLottoGroup.getSize()).isEqualTo(0);
         assertThat(cobineLottoGroup.isContain(diff)).isFalse();
     }
 
     @Test
     public void 총수입률() {
+        int price = 14000;
+        int totalRewards = 5000;
         double result = LottoGame.getTotalEarningRate(price, totalRewards);
         assertThat(result).isEqualTo(((double) 5000 / (double) 14000));
     }
 
     @Test
     public void 당첨개수테스트() {
-        lastLotto = new Lotto(numbers);
+        List<Lotto> lottoList = Arrays.asList(lastLotto, lastLotto, lastLotto);
+        Lotto lastLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int[] combineNumbers = new int[7];
         for (Lotto lotto : lottoList) {
             combineNumbers[lotto.getCombineCount(lastLotto)]++;
@@ -71,6 +65,7 @@ public class LottoGroupTest {
 
     @Test
     public void 미당첨개수테스트() {
+        List<Lotto> lottoList = Arrays.asList(lastLotto, lastLotto, lastLotto);
         List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
         Lotto diff = new Lotto(diffNum);
         int[] combineNumbers = new int[7];
