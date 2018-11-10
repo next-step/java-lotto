@@ -2,6 +2,7 @@ package raffle.lotto;
 
 import raffle.lotto.win.LottoResult;
 import raffle.lotto.win.WinLotto;
+import raffle.lotto.win.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,10 +38,11 @@ public class LottoMachine {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult winLotto(Lotto lastWeekLotto) {
+    public LottoResult winLotto(Lotto lastWeekLotto, int bonusLotto) {
         List<WinLotto> winLottos = new ArrayList<>();
+        WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
         for(Lotto lotto : lottos){
-            winLottos.add(WinLotto.search(lotto.getWinCount(lastWeekLotto)));
+            winLottos.add(winningLotto.result(lotto));
         }
         return new LottoResult(winLottos, LOTTO_PRICE);
     }

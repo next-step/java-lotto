@@ -27,4 +27,14 @@ public class LottoTest {
 
         assertThat(lotto.getWinCount(lottoWin)).isEqualTo(4);
     }
+
+    @Test
+    public void 로또등수_보너스볼_여부(){
+        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
+        Lotto lotto = new Lotto(number);
+
+        int bonusLotto = 22;
+
+        assertThat(lotto.hasBonus(bonusLotto)).isTrue();
+    }
 }
