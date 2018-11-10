@@ -8,9 +8,9 @@ public enum Prize {
     SECOND_PRIZE(5, true, 30000000),
     FIRST_PRIZE(6, false, 2000000000);
 
-    private int toWin;
-    private boolean requireBonus;
-    private int reward;
+    private final int toWin;
+    private final boolean requireBonus;
+    private final int reward;
 
     Prize(int toWin, boolean requireBonus, int reward) {
         this.toWin = toWin;
@@ -20,6 +20,10 @@ public enum Prize {
 
     public int getToWin() {
         return toWin;
+    }
+
+    public boolean getRequireBonus() {
+        return requireBonus;
     }
 
     public int getReward() {
