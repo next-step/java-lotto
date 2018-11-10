@@ -50,7 +50,7 @@ public class LottoMachine {
         return LottoPrize.findPrize(matchCount).getPrize();
     }
 
-    enum LottoPrize {
+    public enum LottoPrize {
         MATCH3(3, 5000),
         MATCH4(4, 50000),
         MATCH5(5, 1500000),
@@ -70,6 +70,10 @@ public class LottoMachine {
 
         public int getPrize() {
             return prize;
+        }
+
+        public int sum(int number) {
+            return this.prize * number;
         }
 
         public static LottoPrize findPrize(int matchCount) {
