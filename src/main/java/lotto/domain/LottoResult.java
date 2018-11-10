@@ -12,8 +12,8 @@ public class LottoResult {
         winStats.merge(lottoPrize, 1, (a, b) -> a + 1);
     }
 
-    public int getCountByMatchCount(int matchCount) {
-        return winStats.getOrDefault(LottoPrize.findPrize(matchCount), 0);
+    public int getCountByLottoPrize(LottoPrize lottoPrize) {
+        return winStats.getOrDefault(lottoPrize, 0);
     }
 
     public double getRatePercent() {

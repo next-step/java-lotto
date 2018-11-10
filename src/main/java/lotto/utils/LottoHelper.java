@@ -9,7 +9,11 @@ import java.util.stream.Collectors;
 public class LottoHelper {
     public static List<LottoBall> convertToBalls(String numbers) {
         return Arrays.stream(numbers.split(","))
-                .map(number -> new LottoBall(Integer.parseInt(number)))
+                .map(number -> convertToBall(Integer.parseInt(number)))
                 .collect(Collectors.toList());
+    }
+
+    public static LottoBall convertToBall(int number) {
+        return new LottoBall(number);
     }
 }

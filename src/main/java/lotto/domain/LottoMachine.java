@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import lotto.utils.LottoHelper;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,12 +18,16 @@ public class LottoMachine {
         this.balls = makeBalls();
     }
 
-    public LottoTicket createTicket() {
-        return createTicket(selectBalls());
+    public Lotto createLotto() {
+        return createLotto(selectBalls());
     }
 
-    public LottoTicket createTicket(List<LottoBall> balls) {
-        return new LottoTicket(balls);
+    public Lotto createLotto(List<LottoBall> balls) {
+        return new Lotto(balls);
+    }
+
+    public WInningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
+        return new WInningLotto(LottoHelper.convertToBalls(winningNumbers), LottoHelper.convertToBall(bonusNumber));
     }
 
     private List<LottoBall> selectBalls() {
@@ -32,11 +35,12 @@ public class LottoMachine {
         return this.balls.subList(0, LOTTO_NUMERS);
     }
 
-    public LottoResult check(LottoTicket winningTicket, List<LottoTicket> tickets) {
+    public LottoResult check(WInningLotto winningLotto, List<Lotto> buyedLottos) {
         LottoResult lottoResult = new LottoResult();
-        for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.howManyMatch(winningTicket);
-            lottoResult.addResult(LottoPrize.findPrize(matchCount));
+        for (Lotto lotto : buyedLottos) {
+            int matchCount = winningLotto.howManyMatchBall(lotto);
+            int bonusCount = winningLotto.hasBonusBall(lotto);
+            lottoResult.addResult(LottoPrize.findPrize(matchCount, bonusCount));
         }
         
         return lottoResult;

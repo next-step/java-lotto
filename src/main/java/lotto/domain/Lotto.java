@@ -5,10 +5,10 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTicket {
-    private List<LottoBall> balls = null;
+public class Lotto {
+    protected List<LottoBall> balls = null;
 
-    public LottoTicket(List<LottoBall> balls) {
+    public Lotto(List<LottoBall> balls) {
         if (balls.size() != LottoMachine.LOTTO_NUMERS || !isUniqueBalls(balls)) {
             throw new IllegalArgumentException("로또복권은 서로다른 숫자 6자리로 이루어져야한다.");
         }
@@ -22,16 +22,6 @@ public class LottoTicket {
 
     public List<LottoBall> getNumbers() {
         return Collections.unmodifiableList(this.balls);
-    }
-
-    public int howManyMatch(LottoTicket otherTicket) {
-        int count = 0;
-        for (LottoBall ball : this.balls) {
-            if (ball.isIncludeIn(otherTicket.getNumbers())) {
-                count++;
-            }
-        }
-        return count;
     }
 
     @Override

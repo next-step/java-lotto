@@ -27,7 +27,19 @@ public enum LottoPrize {
         return this.prize * number;
     }
 
-    public static LottoPrize findPrize(int matchCount) {
+    public static LottoPrize findPrize(int matchCount, int bonusCount) {
+        LottoPrize prize = getLottoPrize(matchCount);
+        if (isSecond(bonusCount, prize)) {
+            return SECOND;
+        }
+        return prize;
+    }
+
+    private static boolean isSecond(int bonusCount, LottoPrize prize) {
+        return THIRD == prize && bonusCount == 1;
+    }
+
+    private static LottoPrize getLottoPrize(int matchCount) {
         for (LottoPrize prize: LottoPrize.values()) {
             if (prize.isMatchedCount(matchCount)) {
                 return prize;
