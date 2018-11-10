@@ -52,10 +52,10 @@ public class Statistics {
      * @return
      */
     public double getProfitRate(int moneyAmount) {
-        int sum = 0;
-        for (int i = 3; i <=6 ; i++) {
-            sum += PRICES.get(i) * getMatchGroupNum(i);
-        }
+        int sum = PRICES.keySet()
+                .stream()
+                .mapToInt(k->PRICES.get(k) * getMatchGroupNum(k))
+                .sum();
 
         double profitRate = (double) sum / moneyAmount;
         if(Double.isNaN(profitRate)) {
