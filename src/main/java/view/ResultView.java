@@ -16,10 +16,10 @@ public class ResultView {
     public static void lottoResult(WinningStatus status) {
         System.out.println("당첨통계\n--------");
 
-        prizeResult(Prize.FOURTH_PRIZE, status.getPrizeCount(Prize.FOURTH_PRIZE));
-        prizeResult(Prize.THIRD_PRIZE, status.getPrizeCount(Prize.THIRD_PRIZE));
-        prizeResult(Prize.SECOND_PRIZE, status.getPrizeCount(Prize.SECOND_PRIZE));
-        prizeResult(Prize.FIRST_PRIZE, status.getPrizeCount(Prize.FIRST_PRIZE));
+        for (Prize prize : Prize.values()) {
+            if (prize == Prize.NONE)    continue;
+            prizeResult(prize, status.getPrizeCount(prize));
+        }
 
         profitRate(status.getProfit());
     }

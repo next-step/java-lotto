@@ -1,11 +1,11 @@
 package domain;
 
 public enum Prize {
-    FIRST_PRIZE(6, 2000000000),
-    SECOND_PRIZE(5, 1500000),
-    THIRD_PRIZE(4, 50000),
+    NONE(0, 0),
     FOURTH_PRIZE(3, 5000),
-    NONE(0, 0);
+    THIRD_PRIZE(4, 50000),
+    SECOND_PRIZE(5, 1500000),
+    FIRST_PRIZE(6, 2000000000);
 
     private int forWin;
     private int reward;
@@ -23,15 +23,15 @@ public enum Prize {
         return reward;
     }
 
+    public boolean isMatchedPrize(int matched) {
+        return forWin == matched;
+    }
+
     public static Prize matchPrize(int matched) {
-        if (matched == 6) {
-            return FIRST_PRIZE;
-        } else if (matched == 5) {
-            return SECOND_PRIZE;
-        } else if (matched == 4) {
-            return THIRD_PRIZE;
-        } else if (matched == 3) {
-            return FOURTH_PRIZE;
+        for (Prize prize : Prize.values()) {
+            if (prize.isMatchedPrize(matched)) {
+                return prize;
+            }
         }
 
         return NONE;
