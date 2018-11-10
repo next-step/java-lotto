@@ -20,8 +20,7 @@ public class LottoMachineTest {
     public void 티켓_자동발급_검증() {
         LottoTicket ticket = lottoMachine.createTicket();
         
-//        assertNumberOfRange(ticket.getNumbers());
-//        assertUniqueNumber(ticket.getNumbers());
+        assertThat(ticket.getNumbers().size()).isEqualTo(6);
     }
 
 //    @Test
@@ -31,14 +30,4 @@ public class LottoMachineTest {
 //        assertNumberOfRange(ticket.getNumbers());
 //        assertUniqueNumber(ticket.getNumbers());
 //    }
-
-    private void assertUniqueNumber(List<Integer> numbers) {
-        assertThat(numbers.stream().distinct().count()).isEqualTo(6);
-    }
-
-    private void assertNumberOfRange(List<Integer> numbers) {
-        numbers.forEach(number -> {
-            assertThat(number).isBetween(1, 45);
-        });
-    }
 }

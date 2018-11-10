@@ -45,48 +45,4 @@ public class LottoMachine {
     private List<LottoBall> makeBalls() {
         return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).mapToObj(number -> new LottoBall(number)).collect(Collectors.toList());
     }
-
-    public static int getPrize(int matchCount) {
-        return LottoPrize.findPrize(matchCount).getPrize();
-    }
-
-    public enum LottoPrize {
-        MATCH3(3, 5000),
-        MATCH4(4, 50000),
-        MATCH5(5, 1500000),
-        MATCH6(6, 2000000000);
-
-        private int matchCount;
-        private int prize;
-
-        LottoPrize(int matchCount, int prize) {
-            this.matchCount = matchCount;
-            this.prize = prize;
-        }
-
-        public int getMatchCount() {
-            return matchCount;
-        }
-
-        public int getPrize() {
-            return prize;
-        }
-
-        public int sum(int number) {
-            return this.prize * number;
-        }
-
-        public static LottoPrize findPrize(int matchCount) {
-            for (LottoPrize prize:LottoPrize.values()) {
-                if (prize.isMatchedCount(matchCount)) {
-                    return prize;
-                }
-            }
-            return null;
-        }
-
-        private boolean isMatchedCount(int matchCount) {
-            return this.matchCount == matchCount;
-        }
-    }
 }
