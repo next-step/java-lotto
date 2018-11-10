@@ -22,11 +22,15 @@ public class Lotto {
     }
 
     public int getWinCount(Lotto lastWeekLotto) {
-        return (int) lottoNumber.stream().filter(number -> lastWeekLotto.getLottoNumber().contains(number)).count();
+        return (int) lottoNumber.stream().filter(number -> lastWeekLotto.contains(number)).count();
+    }
+
+    private boolean contains(Integer number) {
+        return lottoNumber.contains(number);
     }
 
     public boolean hasBonus(Lotto bonusLotto) {
-        return (int) lottoNumber.stream().filter(number -> bonusLotto.getLottoNumber().contains(number)).count() > 0;
+        return (int) lottoNumber.stream().filter(number -> bonusLotto.contains(number)).count() > 0;
     }
 
 }
