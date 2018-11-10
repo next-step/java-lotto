@@ -20,18 +20,11 @@ public class Calculator {
     }
 
     private int getSumNumber(String[] numbers) {
-        int sumNumber = 0;
-        for (String number : numbers) {
-            sumNumber += isNumber(number);
-        }
-        return sumNumber;
+        StringNumber stringNumber = new StringNumber(numbers);
+        return sumNum(stringNumber);
     }
 
-    private int isNumber(String number) {
-        int isNumber = Integer.parseInt(number);
-        if(isNumber < 0){
-            new RuntimeException();
-        }
-        return isNumber;
+    private int sumNum(StringNumber number) {
+        return number.sumNum();
     }
 }
