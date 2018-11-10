@@ -19,4 +19,8 @@ public class LottoMachine {
     private int games(int amount) {
         return amount / GAME_AMOUNT;
     }
+
+    public WinningStatus match(List<Lotto> lottoGames, WinningNumber winningNumber) {
+        return new WinningStatus(lottoGames, winningNumber);
+    }
 }
