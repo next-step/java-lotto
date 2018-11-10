@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
     public static final int LOTTO_NUMERS = 6;
-    private final int LOTTO_MIN_NUMBER = 1;
-    private final int LOTTO_MAX_NUMBER = 45;
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
 
     private List<LottoBall> balls = null;
 

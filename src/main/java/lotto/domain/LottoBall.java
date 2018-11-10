@@ -4,7 +4,7 @@ public class LottoBall implements Comparable<LottoBall> {
     private int number;
 
     public LottoBall(int number) {
-        if (number < 0 || number > 45) {
+        if (number < LottoMachine.LOTTO_MIN_NUMBER || number > LottoMachine.LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또볼은 1-45의 숫자로 가능합니다.");
         }
         this.number = number;
