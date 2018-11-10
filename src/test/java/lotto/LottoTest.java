@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,17 +23,4 @@ public class LottoTest {
         List<Ticket> tickets = lotto.getTickets();
         assertThat(tickets.size()).isEqualTo(4);
     }
-
-    @Test
-    public void randNum() {
-        List<Integer> collect = new Random().ints(10000, 1, 46)
-                .boxed()
-                .collect(Collectors.toList());
-        System.out.println(collect.toString());
-        boolean a = collect.stream().anyMatch(integer -> integer.equals(45));
-        boolean b = collect.stream().anyMatch(integer -> integer.equals(46));
-        assertThat(a).isTrue();
-        assertThat(b).isFalse();
-    }
-
 }

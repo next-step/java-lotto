@@ -7,8 +7,8 @@ public class ConsoleMain {
         int purcharNum = InputView.purcharseLotto();
         Lotto lotto = new Lotto(purcharNum);
         List<Ticket> tickets = lotto.getTickets();
-
+        ResultView.printTicketNums(tickets);
         Statistics statistics = new Statistics(lotto.getTickets(), InputView.getPrizeNums());
-        ResultView.printResult(statistics, InputView.purcharseLotto()*1000);
+        ResultView.printResult(statistics, purcharNum*1000);
     }
 }
