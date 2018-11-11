@@ -1,6 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum LottoPrize {
+    NONE(0, 0),
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
@@ -39,6 +44,12 @@ public enum LottoPrize {
         return prize;
     }
 
+    public static List<LottoPrize> valuesWithoutNone() {
+        return Arrays.stream(LottoPrize.values())
+                .filter(value -> value != LottoPrize.NONE)
+                .collect(Collectors.toList());
+    }
+
     private static boolean isSecond(LottoPrize prize, boolean hasBonusBall) {
         return THIRD == prize && hasBonusBall;
     }
@@ -49,6 +60,6 @@ public enum LottoPrize {
                 return prize;
             }
         }
-        return null;
+        return NONE;
     }
 }

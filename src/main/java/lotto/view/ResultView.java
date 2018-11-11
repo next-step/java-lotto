@@ -19,7 +19,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("----------");
 
-        for (LottoPrize prize:LottoPrize.values()) {
+        for (LottoPrize prize:LottoPrize.valuesWithoutNone()) {
             String message = "%d개 일치 (%d원)- %d개";
             if (LottoPrize.SECOND == prize) {
                 message = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
