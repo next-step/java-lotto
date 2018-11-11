@@ -1,11 +1,11 @@
 package lotto.view;
 
+import lotto.model.PrizeMoneyType;
 import lotto.model.Statistics;
 import lotto.model.Ticket;
 
+import java.util.Arrays;
 import java.util.List;
-
-import static lotto.model.Statistics.PRICES;
 
 public class ResultView {
     private ResultView() {
@@ -31,14 +31,15 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("----------");
-        PRICES.keySet()
-                .stream()
-                .forEach(matchNum->{
+
+        Arrays.stream(PrizeMoneyType.values())
+                .forEach(p ->{
                     StringBuffer sb = new StringBuffer();
-                    sb.append(matchNum).append("개 일치 (").append(PRICES.get(matchNum)).append("원)- ")
-                            .append(statistics.getMatchGroupNum(matchNum)).append("개");
+                    sb.append(p.getMatchNum()).append("개 일치 (").append(p.getPrizeMoney()).append("원)- ")
+                            .append(statistics.getMatchGroupNum(p.getMatchNum())).append("개");
                     System.out.println(sb.toString());
                 });
+
         System.out.printf("%.2f 입니다.", statistics.getProfitRate(buyAmount) );
     }
 }

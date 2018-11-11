@@ -16,7 +16,7 @@ public class LottoTest {
 
     @Test
     public void 로또_4장구매() {
-        Lotto lotto = new Lotto(4);
+        Lotto lotto = new Lotto(4000);
         List<Ticket> tickets = lotto.getTickets();
         assertThat(tickets.size()).isEqualTo(4);
     }
