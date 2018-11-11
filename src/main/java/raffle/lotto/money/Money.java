@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
+import static raffle.lotto.LottoMachine.LOTTO_PRICE;
 
 public class Money {
     private int manualCount;
@@ -26,5 +27,9 @@ public class Money {
 
     public int getAmout() {
         return amount;
+    }
+
+    public int getRancomCount() {
+        return (amount / LOTTO_PRICE) - manualCount;
     }
 }

@@ -13,7 +13,7 @@ public class PlayLotto {
         ResultView resultView = new ResultView();
         Money money = new Money(InputView.buyLotto() , InputView.lottoAmount());
         LottoMachine lottoMachine =
-                new LottoMachine(money ,InputView.getLottoNumber(money.getManualCount()), new LottoNumberValidator(), new LottosCreation());
+                new LottoMachine(money ,new LottoNumberValidator(), new LottosCreation(InputView.getLottoNumber(money.getManualCount())));
         resultView.buyLotto(lottoMachine.getLottos(), money.getManualCount());
 
         LottoResult lottoResult = lottoMachine.winLotto(InputView.lastWeekLotto(), InputView.bonusLotto());

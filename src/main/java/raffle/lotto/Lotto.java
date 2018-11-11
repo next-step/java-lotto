@@ -10,7 +10,6 @@ import static raffle.lotto.LottoMachine.LOTTO_MIN_NUMBER;
 public class Lotto {
 
     private List<Integer> lottoNumber;
-    private LottoNo bounsLottoNo;
 
     public Lotto(List<Integer> lottoNumber) {
         this.lottoNumber = lottoNumber;
@@ -36,13 +35,5 @@ public class Lotto {
 
     public boolean hasBonus(LottoNo bonusLotto) {
         return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto.getBonusnumber())).count() > 0;
-    }
-
-    public void setBounsLottoNo(LottoNo bounsLottoNo) {
-        this.bounsLottoNo = bounsLottoNo;
-    }
-
-    public LottoNo getBounsLottoNo() {
-        return bounsLottoNo;
     }
 }

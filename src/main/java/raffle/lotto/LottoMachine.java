@@ -21,13 +21,12 @@ public class LottoMachine {
     private List<Lotto> lottos;
     private LottoValidator lottoValidator;
     private Money money;
+    private LottosGenerator lottosGenerator;
 
-    public LottoMachine(Money moeny, List<Lotto> lottos, LottoValidator lottoValidator, LottosGenerator lottosGenerator) {
+    public LottoMachine(Money moeny, LottoValidator lottoValidator, LottosGenerator lottosGenerator) {
         this.money = moeny;
-        this.lottos = lottos;
-        for(Lotto lotto : lottosGenerator.generate(moeny)){
-            lottos.add(lotto);
-        }
+        this.lottosGenerator = lottosGenerator;
+        this.lottos = lottosGenerator.generate(moeny);
         this.lottoValidator = lottoValidator;
         if(lottoValidator.validator(lottos));
     }
@@ -38,10 +37,8 @@ public class LottoMachine {
     }
 
     public LottoResult winLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
-        if(bonusLotto.isLottoNumber());
-        lastWeekLotto.setBounsLottoNo(bonusLotto);
         List<WinLotto> winLottos = new ArrayList<>();
-        WinningLotto winningLotto = new WinningLotto(lastWeekLotto);
+        WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
         for(Lotto lotto : lottos){
             winLottos.add(winningLotto.result(lotto));
         }

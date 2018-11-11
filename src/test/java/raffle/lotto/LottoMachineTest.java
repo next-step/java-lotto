@@ -23,7 +23,7 @@ public class LottoMachineTest {
 
         Money money = new Money(3 , 13000);
 
-        LottoMachine lottoMachine = new LottoMachine(money, lottos, new LottoNumberValidator(), new LottosCreation());
+        LottoMachine lottoMachine = new LottoMachine(money, new LottoNumberValidator(), new LottosCreation(lottos));
         assertThat(lottoMachine.getLottos()).hasSize(13);
     }
 

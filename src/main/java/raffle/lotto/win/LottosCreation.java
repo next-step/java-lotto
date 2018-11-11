@@ -3,7 +3,6 @@ package raffle.lotto.win;
 import raffle.lotto.Lotto;
 import raffle.lotto.money.Money;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,14 +13,16 @@ import static raffle.lotto.LottoMachine.*;
 public class LottosCreation implements LottosGenerator {
     private List<Lotto> lottos;
 
+    public LottosCreation(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     @Override
     public List<Lotto> generate(Money money) {
-        lottos = new ArrayList<>();
-        int count = (money.getAmout() / LOTTO_PRICE ) - money.getManualCount();
-        for(int i =0; i < count; i++){
+        for(int i =0; i < money.getRancomCount(); i++){
             suffleLotto();
         }
-        return lottos;
+        return this.lottos;
     }
 
     private void suffleLotto() {
@@ -30,4 +31,7 @@ public class LottosCreation implements LottosGenerator {
         lottos.add(new Lotto(lottoNumber.subList(LOTTO_MIN, LOTTO_MAX)));
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
