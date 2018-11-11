@@ -17,11 +17,11 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printLottoResults(GameResult gameResult) {
-        System.out.println("3개 일치 (5000원)- " + MatchType.THREE.getCount());
-        System.out.println("4개 일치 (50000원)- " + MatchType.FOUR.getCount());
-        System.out.println("5개 일치 (1500000원)- " + MatchType.FIVE.getCount());
-        System.out.println("6개 일치 (2000000000원)- " + MatchType.SIX.getCount());
-        System.out.println("총 수익률은 " + gameResult.getBenefitRate() + "입니다.");
+    public static void printLottoResults(GameResult result) {
+        System.out.println("3개 일치 (5000원)- " + result.getLottoResults().get(MatchType.THREE.getMatch()));
+        System.out.println("4개 일치 (50000원)- " + result.getLottoResults().get(MatchType.FOUR.getMatch()));
+        System.out.println("5개 일치 (1500000원)- " + result.getLottoResults().get(MatchType.FIVE.getMatch()));
+        System.out.println("6개 일치 (2000000000원)- " + result.getLottoResults().get(MatchType.SIX.getMatch()));
+        System.out.println("총 수익률은 " + result.getBenefitRate() + "입니다.");
     }
 }

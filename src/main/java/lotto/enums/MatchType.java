@@ -7,53 +7,41 @@ import java.util.function.Function;
 
 public enum MatchType {
 
-    THREE(3, 5_000, 0),
-    FOUR(4, 50_000, 0),
-    FIVE(5, 150_000, 0),
-    SIX(6, 2_000_000_000, 0),
-    DEFAULT(0, 0, 0);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 150_000),
+    SIX(6, 2_000_000_000),
+    DEFAULT(0, 0);
 
     private int match;
     private int price;
-    private int count;
 
-    MatchType(int match, int price, int count) {
+    MatchType(int match, int price) {
         this.match = match;
         this.price = price;
-        this.count = count;
     }
 
-    public int getCount() {
-        return this.count;
+    public int getMatch() {
+        return this.match;
     }
 
-    public int getAmount() {
-        return this.count * this.price;
-    }
-
-    public static int getTotalAmount() {
-        return Arrays.stream(MatchType.values())
-                .mapToInt(MatchType::getAmount)
-                .sum();
-    }
-
-    public static int updateCount(int num) {
+    public static int getPrice(int num) {
         if(THREE.match == num) {
-            return THREE.count++;
+            return THREE.price;
         }
 
         if(FOUR.match == num) {
-            return FOUR.count++;
+            return FOUR.price;
         }
 
         if(FIVE.match == num) {
-            return FIVE.count++;
+            return FIVE.price;
         }
 
         if(SIX.match == num) {
-            return SIX.count++;
+            return SIX.price;
         }
 
-        return DEFAULT.count++;
+        return DEFAULT.price;
     }
 }

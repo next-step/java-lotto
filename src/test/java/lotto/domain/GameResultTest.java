@@ -25,8 +25,7 @@ public class GameResultTest {
         tickets.add(ticket3);
 
         GameResult gr = new GameResult(tickets, winningNumber);
-        int result = MatchType.getTotalAmount();
-
+        int result = gr.getTotalAmount();
         assertThat(result).isEqualTo(2_000_005_000);
     }
 
