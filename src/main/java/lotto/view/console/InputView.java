@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.console;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
