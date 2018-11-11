@@ -1,6 +1,6 @@
 package lotto.view;
 
-import collection.IntegerWrapper;
+import collection.PositiveNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class InputView {
     public static int purcharseLotto() {
         System.out.println("구입금액을 입력해주세요.");
         Scanner sc = new Scanner(System.in);
-        return new IntegerWrapper(sc.next()).getValue();
+        return new PositiveNumber(sc.next()).getValue();
     }
 
     /**
@@ -32,15 +32,28 @@ public class InputView {
         String s = sc.next();
         String[] strPrizeNums = split(s);
 
+        return toPositiveNums(strPrizeNums);
+    }
+
+    /**
+     * 양의 정수로 변환
+     * @param strPrizeNums
+     * @return
+     */
+    private static List<Integer> toPositiveNums(String[] strPrizeNums) {
         ArrayList<Integer> prizeNums = new ArrayList<>();
         for (int i = 0; i < strPrizeNums.length; i++) {
-            int prizeNum = Integer.parseInt(strPrizeNums[i]);
-            prizeNums.add(prizeNum);
+            prizeNums.add(new PositiveNumber(strPrizeNums[i]).getValue());
         }
 
         return prizeNums;
     }
 
+    /**
+     * 분리
+     * @param s
+     * @return
+     */
     private static String[] split(String s) {
         return s.split(",");
     }

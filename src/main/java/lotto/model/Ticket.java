@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.List;
 
 public class Ticket {
-    List<Integer> nums;
+    private List<Integer> nums;
 
     public Ticket(List<Integer> nums) {
         this.nums = nums;

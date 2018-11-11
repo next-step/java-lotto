@@ -52,17 +52,23 @@ public class Statistics {
      * @return
      */
     public double getProfitRate(int moneyAmount) {
-        int sum = PRICES.keySet()
-                .stream()
-                .mapToInt(k->PRICES.get(k) * getMatchGroupNum(k))
-                .sum();
-
-        double profitRate = (double) sum / moneyAmount;
+        double profitRate = (double) getProfit() / moneyAmount;
         if(Double.isNaN(profitRate)) {
             return 0;
         }
 
         return profitRate;
+    }
+
+    /**
+     * 수익 가져오기
+     * @return
+     */
+    private int getProfit() {
+        return PRICES.keySet()
+                    .stream()
+                    .mapToInt(k->PRICES.get(k) * getMatchGroupNum(k))
+                    .sum();
     }
 
     public Map<Integer, Long> getResults() {

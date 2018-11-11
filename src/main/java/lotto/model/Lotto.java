@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class Lotto {
     private static final int SIZE = 6;
     private static final int RANDOM_NUM_MAX = 45;
-    private static final int PRICE = 1000;
+    private static final int PRICE = 1_000;
     private static final int RANDOM_NUM_MIN = 1;
     private static List<Integer> lotteryNums = IntStream.rangeClosed(RANDOM_NUM_MIN, RANDOM_NUM_MAX)
             .boxed()

@@ -1,8 +1,8 @@
 package collection;
 
-public class IntegerWrapper {
+public class PositiveNumber {
     private Integer value;
-    public IntegerWrapper(String input) {
+    public PositiveNumber(String input) {
         int i = Integer.parseInt(input);
         if(i < 0) {
             throw new RuntimeException();

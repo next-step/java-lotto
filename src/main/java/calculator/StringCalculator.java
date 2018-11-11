@@ -1,6 +1,6 @@
 package calculator;
 
-import collection.IntegerWrapper;
+import collection.PositiveNumber;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +31,7 @@ public class StringCalculator {
     private static int[] toInt(String[] values) {
         int[] ints = new int[values.length];
         for (int i = 0; i < values.length; i++) {
-            int num = new IntegerWrapper(values[i]).getValue();
+            int num = new PositiveNumber(values[i]).getValue();
             ints[i] = num;
         }
 
