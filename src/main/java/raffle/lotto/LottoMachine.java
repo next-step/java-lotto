@@ -45,6 +45,7 @@ public class LottoMachine {
     }
 
     public LottoResult winLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
+        if(bonusLotto.isLottoNumber());
         List<WinLotto> winLottos = new ArrayList<>();
         WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
         for(Lotto lotto : lottos){

@@ -1,7 +1,7 @@
 package raffle.view;
 
 import raffle.lotto.Lotto;
-import raffle.lotto.LottoBuyConut;
+import raffle.lotto.LottoBuy;
 import raffle.lotto.LottoNo;
 
 import java.util.ArrayList;
@@ -33,11 +33,12 @@ public class InputView {
         return new LottoNo(sc.nextInt());
     }
 
-    public static LottoBuyConut buyLotto() {
+    public static int buyLotto() {
         System.out.println();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return new LottoBuyConut(sc.nextInt());
+        int bonusLottoCount = sc.nextInt();
+        return bonusLottoCount;
     }
 
     public static List<Lotto> getLottoNumber(int lottoCount) {

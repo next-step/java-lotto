@@ -37,7 +37,4 @@ public class Lotto {
         return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto.getBonusnumber())).count() > 0;
     }
 
-    public boolean isLottoNumber() {
-        return lottoNumber.stream().allMatch(number -> LOTTO_MIN_NUMBER <= number  && number <= LOTTO_MAX_NUMBER);
-    }
 }

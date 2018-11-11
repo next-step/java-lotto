@@ -9,7 +9,8 @@ import java.util.List;
 import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
 
 public class Money {
-    int money;
+    private int money;
+
     private List<WinLotto> winLottos;
 
     public Money(int money, List<WinLotto> winLottos){
