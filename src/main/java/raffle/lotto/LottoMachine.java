@@ -2,9 +2,7 @@ package raffle.lotto;
 
 import raffle.lotto.money.Money;
 import raffle.lotto.validator.LottoValidator;
-import raffle.lotto.win.LottoResult;
-import raffle.lotto.win.WinLotto;
-import raffle.lotto.win.WinningLotto;
+import raffle.lotto.win.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,24 +22,16 @@ public class LottoMachine {
     private LottoValidator lottoValidator;
     private Money money;
 
-    public LottoMachine(Money moeny, List<Lotto> lottos, LottoValidator lottoValidator) {
+    public LottoMachine(Money moeny, List<Lotto> lottos, LottoValidator lottoValidator, LottosGenerator lottosGenerator) {
+        this.money = moeny;
+        this.lottos = lottos;
+        for(Lotto lotto : lottosGenerator.generate(moeny)){
+            lottos.add(lotto);
+        }
         this.lottoValidator = lottoValidator;
         if(lottoValidator.validator(lottos));
-        this.lottos = lottos;
-        this.money = moeny;
-
-        int buyLottoAmount = lottos.size() * LOTTO_PRICE;
-        int count = (moeny.getAmout() - buyLottoAmount) / LOTTO_PRICE;
-        for(int i =0; i < count; i++){
-            suffleLotto();
-        }
     }
 
-    private void suffleLotto() {
-        List<Integer> lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
-        Collections.shuffle(lottoNumber);
-        lottos.add(new Lotto(lottoNumber.subList(LOTTO_MIN, LOTTO_MAX)));
-    }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);

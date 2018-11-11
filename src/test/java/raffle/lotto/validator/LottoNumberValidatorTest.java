@@ -20,4 +20,5 @@ public class LottoNumberValidatorTest {
         LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
         lottoNumberValidator.validator(lottos);
     }
+
 }

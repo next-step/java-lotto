@@ -49,18 +49,6 @@ public class InputView {
             lottos.add(new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList())));
         }
         return lottos;
-
     }
 
-    /*public static List<Lotto> getLottoNumber(int lottoCount) {
-        System.out.println();
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        Scanner sc = new Scanner(System.in);
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList())));
-        }
-        return lottos;
-
-    }*/
 }
