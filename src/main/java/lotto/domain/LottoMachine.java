@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
     public static final int LOTTO_NUMERS = 6;
-    public static final int LOTTO_MIN_NUMBER = 1;
-    public static final int LOTTO_MAX_NUMBER = 45;
 
     private List<LottoBall> balls = null;
 
@@ -47,6 +45,6 @@ public class LottoMachine {
     }
 
     private List<LottoBall> makeBalls() {
-        return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).mapToObj(number -> new LottoBall(number)).collect(Collectors.toList());
+        return IntStream.range(LottoBall.LOTTO_MIN_NUMBER, LottoBall.LOTTO_MAX_NUMBER).mapToObj(number -> new LottoBall(number)).collect(Collectors.toList());
     }
 }
