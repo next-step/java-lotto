@@ -2,37 +2,27 @@ package lotto.domain;
 
 import java.util.List;
 
-public class WInningLotto extends Lotto {
+public class WInningLotto {
+    private Lotto lotto = null;
     private LottoBall bonusBall = null;
 
-    public WInningLotto(List<LottoBall> winningBalls, LottoBall bonusBall) {
-        super(winningBalls);
-        if (bonusBall.isIncludeIn(winningBalls)) {
+    public WInningLotto(Lotto lotto, LottoBall bonusBall) {
+        if (bonusBall.isIncludeIn(lotto.getNumbers())) {
             throw new IllegalArgumentException("로또 당첨번호와 보너스 번호는 같을 수 없습니다.");
         }
+        this.lotto = lotto;
         this.bonusBall = bonusBall;
     }
 
     public LottoBall getBonusBall() {
-        return bonusBall;
+        return this.bonusBall;
     }
 
     public int howManyMatchBall(Lotto otherLotto) {
-        int count = 0;
-        for (LottoBall ball : this.balls) {
-            count += isInculdeIn(ball, otherLotto);
-        }
-        return count;
+        return this.lotto.howManyMatchBall(otherLotto);
     }
 
     public boolean hasBonusBall(Lotto otherLotto) {
-        return bonusBall.isIncludeIn(otherLotto.getNumbers());
-    }
-
-    private int isInculdeIn(LottoBall ball, Lotto lotto) {
-        if (ball.isIncludeIn(lotto.getNumbers())) {
-            return 1;
-        }
-        return 0;
+        return this.bonusBall.isIncludeIn(otherLotto.getNumbers());
     }
 }

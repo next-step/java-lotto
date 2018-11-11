@@ -24,6 +24,21 @@ public class Lotto {
         return Collections.unmodifiableList(this.balls);
     }
 
+    public int howManyMatchBall(Lotto otherLotto) {
+        int count = 0;
+        for (LottoBall ball : this.balls) {
+            count += isInculdeIn(ball, otherLotto);
+        }
+        return count;
+    }
+
+    private int isInculdeIn(LottoBall ball, Lotto lotto) {
+        if (ball.isIncludeIn(lotto.getNumbers())) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     public String toString() {
         return this.balls.toString();

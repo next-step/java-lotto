@@ -25,7 +25,7 @@ public class LottoMachine {
     }
 
     public WInningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
-        return new WInningLotto(LottoHelper.convertToBalls(winningNumbers), LottoHelper.convertToBall(bonusNumber));
+        return new WInningLotto(createLotto(LottoHelper.convertToBalls(winningNumbers)), LottoHelper.convertToBall(bonusNumber));
     }
 
     private List<LottoBall> selectBalls() {
