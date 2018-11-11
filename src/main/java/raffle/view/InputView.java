@@ -2,6 +2,7 @@ package raffle.view;
 
 import raffle.lotto.Lotto;
 import raffle.lotto.LottoNo;
+import raffle.lotto.win.LottosCreation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,7 @@ public class InputView {
             lottos.add(new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList())));
         }
         return lottos;
-    }
 
+    }
+    
 }
