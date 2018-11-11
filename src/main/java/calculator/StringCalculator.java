@@ -19,6 +19,12 @@ public class StringCalculator {
         return getSum(s, splitRegex);
     }
 
+    /**
+     * 총합 구하기
+     * @param s
+     * @param splitRegex
+     * @return
+     */
     private static int getSum(String s, String splitRegex) {
         int sum = 0;
         for (String string : s.split(splitRegex)) {
