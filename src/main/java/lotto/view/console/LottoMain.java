@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view.console;
 
 import lotto.domain.*;
 import lotto.domain.common.Money;
@@ -6,8 +6,6 @@ import lotto.domain.generator.LottoTicketDispenser;
 import lotto.domain.generator.PurchaseLottoTicketRequestInfo;
 import lotto.domain.generator.PurchaseLottoTicketResultInfo;
 import lotto.domain.generator.ShuffleLottoTicketDispenser;
-import lotto.view.InputView;
-import lotto.view.ResultView;
 
 import java.util.List;
 
