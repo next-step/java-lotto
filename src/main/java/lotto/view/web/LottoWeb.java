@@ -10,6 +10,7 @@ import lotto.view.web.hadlebars.helper.LengthHelper;
 import org.apache.commons.lang3.StringUtils;
 import spark.ModelAndView;
 import spark.Request;
+import spark.Response;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.*;
@@ -32,11 +33,11 @@ public class LottoWeb {
 
 	private static void routes() {
 		get("/", (req, res) -> render(new HashMap<>(), "/index.html"));
-		post("/buyLotto", (request, response) -> buyLotto(request));
-		post("/matchLotto", (request, response) -> matchLotto(request));
+		post("/buyLotto", LottoWeb::buyLotto);
+		post("/matchLotto", LottoWeb::matchLotto);
 	}
 
-	private static Object buyLotto(Request request) {
+	private static Object buyLotto(Request request, Response response) {
 		String manualLottoNumberInput = request.queryParams("manualNumber");
 		Long inputMoney = Long.parseLong(request.queryParams("inputMoney"));
 
@@ -52,7 +53,7 @@ public class LottoWeb {
 		return render(model, "/show.html");
 	}
 
-	private static Object matchLotto(Request request) {
+	private static Object matchLotto(Request request, Response response) {
 		List<LottoNumber> winningNumbers = createLottoNumbers(request.queryParams("winningNumber"));
 		LottoNumber bonusNumberInput = LottoNumber.of(Integer.parseInt(request.queryParams("bonusNumber")));
 
