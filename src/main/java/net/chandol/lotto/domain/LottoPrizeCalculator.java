@@ -5,21 +5,20 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 class LottoPrizeCalculator {
-    private LottoNumber winNumber;
+    private WinningNumber winningNumber;
 
-    public LottoPrizeCalculator(LottoNumber winNumber) {
-        if (winNumber == null) {
-            throw new IllegalArgumentException();
+    public LottoPrizeCalculator(WinningNumber winningNumber) {
+        if (winningNumber == null) {
+            throw new IllegalArgumentException("당첨번호가 입력되지 않았습니다.");
         }
-        this.winNumber = winNumber;
+        this.winningNumber = winningNumber;
     }
 
     public LottoPrize findPrize(Lotto lotto) {
-        int matchCount = lotto.getMatchCount(winNumber);
-        return LottoPrize.getMatchingPrize(matchCount);
+        return lotto.getMatchingLottoPrize(winningNumber);
     }
 
-    public LottoGameResult lottoGameResult(List<Lotto> lottos){
+    public LottoGameResult lottoGameResult(List<Lotto> lottos) {
         List<LottoPrize> prizes = lottos.stream()
                 .map(this::findPrize)
                 .collect(toList());

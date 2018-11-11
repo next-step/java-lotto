@@ -21,7 +21,7 @@ public class StringCalculatorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void 빈문자열인경우_예외처리(){
+    public void 빈문자열인경우_예외처리() {
         StringCalculator.add("");
     }
 
@@ -32,7 +32,7 @@ public class StringCalculatorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void 옳바르지않은형식인경우_에러반환하기(){
+    public void 옳바르지않은형식인경우_에러반환하기() {
         StringCalculator.add("1?2;3");
         Assertions.fail("");
     }

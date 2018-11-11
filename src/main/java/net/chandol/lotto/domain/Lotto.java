@@ -14,9 +14,14 @@ public class Lotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public int getMatchCount(LottoNumber another) {
-        List<Integer> matchNumbers = lottoNumber.getMatchNumbers(another);
-        return matchNumbers.size();
+    public LottoPrize getMatchingLottoPrize(WinningNumber winningNumber) {
+        LottoNumber lottoNumber = winningNumber.getLottoNumber();
+        List<Integer> matchNumbers = this.lottoNumber.getMatchNumbers(lottoNumber);
+
+        Integer bonusNumber = winningNumber.getBonusNumber();
+        boolean isMatchBonusNumber = this.lottoNumber.containsNumber(bonusNumber);
+
+        return LottoPrize.getMatchingPrize(matchNumbers.size(), isMatchBonusNumber);
     }
 
     public List<Integer> getLottoNumbers() {

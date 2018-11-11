@@ -13,9 +13,11 @@ public class LottoTest {
     }
 
     @Test
-    public void getMatchCount() {
+    public void 매칭결과반환() {
         Lotto lotto = new Lotto(direct(1, 2, 3, 4, 5, 6));
-        int matchCount = lotto.getMatchCount(direct(4, 5, 6, 7, 8, 9));
-        assertThat(matchCount).isEqualTo(3);
+        WinningNumber winningNumber = new WinningNumber(direct(2, 3, 4, 5, 6, 7), 8);
+
+        LottoPrize lottoPrize = lotto.getMatchingLottoPrize(winningNumber);
+        assertThat(lottoPrize).isEqualTo(LottoPrize._3);
     }
 }

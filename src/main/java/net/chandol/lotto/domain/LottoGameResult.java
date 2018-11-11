@@ -26,7 +26,13 @@ public class LottoGameResult {
     }
 
     public String getFormattedResult(LottoPrize lottoPrize) {
-        Integer prizeCount = getPrizeCount(lottoPrize);
-        return String.format("%d개 일치 (%d) - %d개", lottoPrize.getMatchCount(), lottoPrize.getPrize(), prizeCount);
+        StringBuilder resultBuilder = new StringBuilder(lottoPrize.getMatchCount() + "개 일치");
+
+        if (lottoPrize.getNeedMatch()) {
+            resultBuilder.append(", 보너스 볼 일치");
+        }
+
+        resultBuilder.append(String.format(" (%d) - %d개", lottoPrize.getPrize(), getPrizeCount(lottoPrize)));
+        return resultBuilder.toString();
     }
 }

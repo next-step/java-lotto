@@ -38,8 +38,8 @@ public class LottoGame {
                 .collect(toList());
     }
 
-    public static LottoGameResult getLottoGameResult(LottoNumber winNumber, List<Lotto> lottos) {
-        LottoPrizeCalculator calculator = new LottoPrizeCalculator(winNumber);
+    public static LottoGameResult getLottoGameResult(WinningNumber winningNumber, List<Lotto> lottos) {
+        LottoPrizeCalculator calculator = new LottoPrizeCalculator(winningNumber);
         return calculator.lottoGameResult(lottos);
     }
 }
