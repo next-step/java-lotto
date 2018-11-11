@@ -9,15 +9,21 @@ import java.util.stream.IntStream;
 
 public class StringCalculator {
     public static int add(String s) {
-        String splitRegex = getSplitRegex(getCustomSeperator(s));
-        s = s.replaceAll("^//.\\n", "");
-        String[] strings = s.split(splitRegex);
-
-        int sum = 0;
-        for (String string : strings) {
-            sum += new IntegerWrapper(string).getValue();
+        if (s == null || s.equals("")) {
+            return 0;
         }
 
+        String splitRegex = getSplitRegex(getCustomSeperator(s));
+        s = s.replaceAll("^//.\\n", "");
+
+        return getSum(s, splitRegex);
+    }
+
+    private static int getSum(String s, String splitRegex) {
+        int sum = 0;
+        for (String string : s.split(splitRegex)) {
+            sum += new IntegerWrapper(string).getValue();
+        }
         return sum;
     }
 
