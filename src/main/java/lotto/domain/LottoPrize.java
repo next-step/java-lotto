@@ -31,16 +31,16 @@ public enum LottoPrize {
         return this.matchCount == matchCount;
     }
 
-    public static LottoPrize findPrize(int matchCount, int bonusCount) {
+    public static LottoPrize findPrize(int matchCount, boolean hasBonusBall) {
         LottoPrize prize = valueOf(matchCount);
-        if (isSecond(bonusCount, prize)) {
+        if (isSecond(prize, hasBonusBall)) {
             return SECOND;
         }
         return prize;
     }
 
-    private static boolean isSecond(int bonusCount, LottoPrize prize) {
-        return THIRD == prize && bonusCount == 1;
+    private static boolean isSecond(LottoPrize prize, boolean hasBonusBall) {
+        return THIRD == prize && hasBonusBall;
     }
 
     private static LottoPrize valueOf(int matchCount) {

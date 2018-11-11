@@ -37,7 +37,7 @@ public class LottoMachine {
         LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : buyedLottos) {
             int matchCount = winningLotto.howManyMatchBall(lotto);
-            int bonusCount = winningLotto.hasBonusBall(lotto);
+            boolean bonusCount = winningLotto.hasBonusBall(lotto);
             lottoResult.addResult(LottoPrize.findPrize(matchCount, bonusCount));
         }
         

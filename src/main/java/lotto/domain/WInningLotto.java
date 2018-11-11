@@ -25,8 +25,8 @@ public class WInningLotto extends Lotto {
         return count;
     }
 
-    public int hasBonusBall(Lotto otherLotto) {
-        return isInculdeIn(bonusBall, otherLotto);
+    public boolean hasBonusBall(Lotto otherLotto) {
+        return bonusBall.isIncludeIn(otherLotto.getNumbers());
     }
 
     private int isInculdeIn(LottoBall ball, Lotto lotto) {
