@@ -24,7 +24,7 @@ public class LottoNumberValidator implements LottoValidator {
     }
 
     private boolean isLottoNumber(Lotto lotto) {
-        return !lotto.getLottoNumber().stream().allMatch(number -> LOTTO_MIN_NUMBER <= number  && number <= LOTTO_MAX_NUMBER);
+        return !lotto.getLottoNumber().stream().allMatch(lottoNo -> LOTTO_MIN_NUMBER <= lottoNo.getLottoNumber()  && lottoNo.getLottoNumber() <= LOTTO_MAX_NUMBER);
     }
 
 }

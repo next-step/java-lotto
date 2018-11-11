@@ -1,22 +1,18 @@
 package raffle.lotto;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
-
-import static raffle.lotto.LottoMachine.LOTTO_MAX;
-import static raffle.lotto.LottoMachine.LOTTO_MAX_NUMBER;
-import static raffle.lotto.LottoMachine.LOTTO_MIN_NUMBER;
 
 public class Lotto {
 
-    private List<Integer> lottoNumber;
+    private List<LottoNo> lottoNumber;
 
-    public Lotto(List<Integer> lottoNumber) {
+    public Lotto(List<LottoNo> lottoNumber) {
         this.lottoNumber = lottoNumber;
-        lottoNumber.sort(Comparator.naturalOrder());
+        Collections.sort(lottoNumber);
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNo> getLottoNumber() {
         return lottoNumber;
     }
 
@@ -26,14 +22,19 @@ public class Lotto {
     }
 
     public int getWinCount(Lotto lastWeekLotto) {
-        return (int) lottoNumber.stream().filter(number -> lastWeekLotto.contains(number)).count();
+        return (int) lottoNumber.stream().filter(lottoNo -> matching(lottoNo.getLottoNumber(), lastWeekLotto.getLottoNumber())).count();
     }
 
-    private boolean contains(Integer number) {
-        return lottoNumber.contains(number);
+    private boolean matching(int lottoNumber, List<LottoNo> lastWeekLotto) {
+        return lastWeekLotto.stream().anyMatch(lottoNo -> lottoNo.getLottoNumber() == lottoNumber);
+    }
+
+    private boolean isaBoolean(int lottoNumber, LottoNo lottoNo) {
+        return lottoNo.getLottoNumber() == lottoNumber;
     }
 
     public boolean hasBonus(LottoNo bonusLotto) {
-        return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto.getBonusnumber())).count() > 0;
+        return (int) lottoNumber.stream().filter(lottoNo -> isaBoolean(bonusLotto.getLottoNumber(), lottoNo)).count() > 0;
     }
+
 }

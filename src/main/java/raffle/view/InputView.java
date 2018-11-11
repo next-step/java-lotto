@@ -2,7 +2,6 @@ package raffle.view;
 
 import raffle.lotto.Lotto;
 import raffle.lotto.LottoNo;
-import raffle.lotto.win.LottosCreation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +21,12 @@ public class InputView {
     public static Lotto lastWeekLotto(){
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return new Lotto(InputView.inputLottoNumbers());
+    }
+
+    private static List<LottoNo> inputLottoNumbers() {
         Scanner sc = new Scanner(System.in);
-        return new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList()));
+        return Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList());
     }
 
     public static LottoNo bonusLotto(){
@@ -47,7 +50,7 @@ public class InputView {
         Scanner sc = new Scanner(System.in);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList())));
+            lottos.add(new Lotto(InputView.inputLottoNumbers()));
         }
         return lottos;
 
