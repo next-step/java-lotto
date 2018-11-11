@@ -31,7 +31,7 @@ public class LottoGenerator {
         return numbers;
     }
 
-    private static boolean isDuplication(List<Integer> numbers) {
+    public static boolean isDuplication(List<Integer> numbers) {
         return numbers.stream().count() != numbers.stream().distinct().count();
     }
 

@@ -3,12 +3,13 @@ package domain;
 import utils.LottoGenerator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_CHOICE_CNT = 6;
-    public static final int LOTTO_PRICE = 1000;
 
     private List<Integer> numbers;
+    private Integer bonusNumber;
 
     public Lotto() {
         this(LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT));
@@ -42,4 +43,20 @@ public class Lotto {
         return numbers.size();
     }
 
+    public WinningLotto getCombineNumbers(Lotto lotto) {
+        List<Integer> combineNumbers = numbers.stream().
+                filter(obj -> lotto.getNumbers().contains(obj))
+                .collect(Collectors.toList());
+
+        boolean isBonus = isContains(lotto.getBonusNum());
+        return new WinningLotto(combineNumbers, isBonus);
+    }
+
+    private Integer getBonusNum() {
+        return bonusNumber;
+    }
+
+    public void addNumber(Integer bonusNum) {
+        bonusNumber = bonusNum;
+    }
 }

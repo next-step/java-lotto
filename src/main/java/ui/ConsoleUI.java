@@ -3,6 +3,7 @@ package ui;
 import domain.Lotto;
 import domain.LottoGame;
 import domain.LottoGroup;
+import domain.WinningLottoGroup;
 import utils.StringUtils;
 import view.InputView;
 import view.ResultView;
@@ -17,13 +18,16 @@ public class ConsoleUI {
         ResultView.printLottoGroup(lottoGroup);
 
         Lotto lastLotto = new Lotto(StringUtils.convertStrToNum(InputView.lastLottoNumber()));
-        LottoGroup combineLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
+
+        Integer bonusNum = Integer.parseInt(InputView.setBonusNumber());
+        lastLotto.addNumber(bonusNum);
+
+        WinningLottoGroup combineLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
         ResultView.viewStats();
 
-        combineLottoGroup.calculateCombine(lastLotto);
         ResultView.printStats(combineLottoGroup);
 
-        double totalEarningRate = LottoGame.getTotalEarningRate(price, combineLottoGroup.getTotalRewards());
+        double totalEarningRate = LottoGame.getTotalEarningRate(price, combineLottoGroup.getTotalReward());
         ResultView.printResult(totalEarningRate);
     }
 }

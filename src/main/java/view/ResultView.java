@@ -2,13 +2,17 @@ package view;
 
 import domain.LottoGroup;
 import domain.LottoRank;
+import domain.WinningLotto;
+import domain.WinningLottoGroup;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ResultView {
 
     public static void viewStats() {
         System.out.println("당첨통계");
         System.out.println("---------");
-
     }
 
     public static void printResult(double result) {
@@ -24,18 +28,30 @@ public class ResultView {
                 .forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
-    public static void printStats(LottoGroup lottoGroup) {
-        for (int combineNum = lottoGroup.COMBINE_MAX_NUM; combineNum >= lottoGroup.COMBINE_MIN_NUM; combineNum--) {
-            printCombineCurrent(combineNum);
-            printCombineCount(lottoGroup.getCombineNumbers(combineNum));
+    public static void printStats(WinningLottoGroup winningLottoGroup) {
+        boolean isFiveBonus = true;
+        for(LottoRank rank :  LottoRank.values()){
+            boolean isBonusCheck = false;
+            int lottoCount = winningLottoGroup.getCombineNumbers(rank.getCombineNum(), isBonusCheck);
+            if(rank.getCombineNum() == 5 && isFiveBonus){
+                lottoCount = winningLottoGroup.getCombineNumbers(rank.getCombineNum(), isFiveBonus);
+                isFiveBonus = !isFiveBonus;
+                isBonusCheck = !isFiveBonus;
+            }
+            ResultView.printCombineCurrent(rank.getCombineNum(), isBonusCheck);
+            ResultView.printCombineCount(lottoCount);
         }
     }
 
-    private static void printCombineCount(int lottoCount) {
+    public static void printCombineCount(int lottoCount) {
         System.out.println(String.format("- %s개", lottoCount));
     }
 
-    private static void printCombineCurrent(int combineCount) {
-        System.out.print(String.format("%s개 일치 (%s원)", combineCount, LottoRank.findByCombineNum(combineCount)));
+    public static void printCombineCurrent(int combineCount, boolean isBonus) {
+        System.out.print(String.format("%s개 일치", combineCount ));
+        if(combineCount==5 && isBonus) {
+            System.out.print(", 보너스 볼 일치");
+        }
+        System.out.print(String.format(" (%s원)",LottoRank.valueOf(combineCount, isBonus).getPriceRewards()));
     }
 }

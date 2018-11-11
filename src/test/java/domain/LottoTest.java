@@ -47,8 +47,6 @@ public class LottoTest {
             result.add(numbers.get(i));
         }
         assertThat(numbers.subList(0, 6)).isEqualTo(result);
-
-
     }
 
     @Test

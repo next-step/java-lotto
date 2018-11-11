@@ -26,24 +26,6 @@ public class LottoGroupTest {
         assertThat(buyLottoGroup.getSize()).isEqualTo(14);
     }
 
-
-    @Test
-    public void 당첨된로또목록() {
-        LottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
-        assertThat(cobineLottoGroup.getSize()).isEqualTo(3);
-        assertThat(cobineLottoGroup.isContain(lastLotto)).isTrue();
-    }
-
-    @Test
-    public void 당첨안된로또목록() {
-        List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
-        Lotto diff = new Lotto(diffNum);
-        LottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, diff);
-
-        assertThat(cobineLottoGroup.getSize()).isEqualTo(0);
-        assertThat(cobineLottoGroup.isContain(diff)).isFalse();
-    }
-
     @Test
     public void 총수입률() {
         int price = 14000;
@@ -73,13 +55,6 @@ public class LottoGroupTest {
             combineNumbers[lotto.getCombineCount(diff)]++;
         }
         assertThat(combineNumbers[0]).isEqualTo(3);
-    }
-
-    @Test
-    public void getTotalRewards() {
-        lottoGroup.calculateCombine(lastLotto);
-        int rewards = lottoGroup.getTotalRewards();
-        assertThat(rewards).isEqualTo(2_000_000_000 * 3);
     }
 
 }
