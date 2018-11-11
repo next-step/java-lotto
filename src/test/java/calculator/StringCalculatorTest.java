@@ -1,7 +1,11 @@
 package calculator;
 
+import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * TODO: 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환 (예: “” => 0, "1,2" => 3, "1,2,3" => 6, “1,2:3” => 6)
@@ -11,5 +15,52 @@ import org.junit.runners.MethodSorters;
 @SuppressWarnings({"NonAsciiCharacters", "SpellCheckingInspection"})
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class StringCalculatorTest {
+
+    private StringCalculator sc;
+
+    @Before
+    public void setUp() {
+        sc = new StringCalculator();
+    }
+
+    @Test
+    public void NULL인_문자열을_넘기는_경우_0을_반환() {
+        int result = sc.add(new Text(null));
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void 공백_문자열을_넘기는_경우_0을_반환() {
+        int result = sc.add(new Text(""));
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void 콤마로_구분하는_문자열을_넘기는_경우() {
+        int result = sc.add(new Text("1,2"));
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    public void 콜론과_콤마로_구분하는_문자열을_넘기는_경우() {
+        int result = sc.add(new Text("1,2:3"));
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    public void 커스텀_구분자가_있는_문자열을_넘기는_경우() {
+        int result = sc.add(new Text("//;\n1;2;3"));
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void 문자열에_음수가_포함된_경우() {
+        sc.add(new Text("//;\n1;-2;3"));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void 문자열에_숫자가_아닌_문자가_포함된_경우() {
+        sc.add(new Text("//;\n1;@;3"));
+    }
 
 }
