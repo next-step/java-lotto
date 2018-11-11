@@ -2,8 +2,6 @@ package raffle.lotto.win;
 
 import raffle.lotto.money.Money;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 public class LottoResult {
@@ -13,10 +11,12 @@ public class LottoResult {
     private int lottoPrice;
 
     private List<WinLotto> winLottos;
+    private Money moneyManament;
 
-    public LottoResult(List<WinLotto> winLottos, int lottoPrice) {
+    public LottoResult(List<WinLotto> winLottos, int lottoPrice, Money money) {
         this.winLottos = winLottos;
         this.lottoPrice = lottoPrice;
+        this.moneyManament = money;
     }
 
     public int getLottoCount(WinLotto selectWinLotto) {
@@ -30,7 +30,10 @@ public class LottoResult {
     }
 
     public double calculateProfit(int money) {
-        Money ManageMoney = new Money(money, winLottos);
-        return ManageMoney.getCalculateProfit();
+        return moneyManament.getCalculateProfit(getSumPrice(money));
+    }
+
+    private double getSumPrice(int money) {
+        return (double) winLottos.stream().mapToInt(WinLotto::getPrice).sum() / money;
     }
 }

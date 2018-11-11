@@ -1,5 +1,6 @@
 package raffle.lotto;
 
+import raffle.lotto.money.Money;
 import raffle.lotto.validator.LottoValidator;
 import raffle.lotto.win.LottoResult;
 import raffle.lotto.win.WinLotto;
@@ -21,14 +22,16 @@ public class LottoMachine {
 
     private List<Lotto> lottos;
     private LottoValidator lottoValidator;
+    private Money money;
 
-    public LottoMachine(int lottoAmount, List<Lotto> lottos, LottoValidator lottoValidator) {
+    public LottoMachine(Money moeny, List<Lotto> lottos, LottoValidator lottoValidator) {
         this.lottoValidator = lottoValidator;
         if(lottoValidator.validator(lottos));
-
         this.lottos = lottos;
+        this.money = moeny;
+
         int buyLottoAmount = lottos.size() * LOTTO_PRICE;
-        int count = (lottoAmount - buyLottoAmount) / LOTTO_PRICE;
+        int count = (moeny.getAmout() - buyLottoAmount) / LOTTO_PRICE;
         for(int i =0; i < count; i++){
             suffleLotto();
         }
@@ -51,7 +54,7 @@ public class LottoMachine {
         for(Lotto lotto : lottos){
             winLottos.add(winningLotto.result(lotto));
         }
-        return new LottoResult(winLottos, LOTTO_PRICE);
+        return new LottoResult(winLottos, LOTTO_PRICE, money);
     }
 
 }

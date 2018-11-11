@@ -1,7 +1,6 @@
 package raffle.view;
 
 import raffle.lotto.Lotto;
-import raffle.lotto.LottoBuy;
 import raffle.lotto.LottoNo;
 
 import java.util.ArrayList;

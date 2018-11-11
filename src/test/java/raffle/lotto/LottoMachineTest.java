@@ -2,7 +2,9 @@ package raffle.lotto;
 
 import org.junit.Before;
 import org.junit.Test;
+import raffle.lotto.money.Money;
 import raffle.lotto.validator.LottoNumberValidator;
+import raffle.view.InputView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +22,9 @@ public class LottoMachineTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 6, 5, 44, 22, 15)));
 
-        lottoMachine = new LottoMachine(13000, lottos, new LottoNumberValidator());
+        Money money = new Money(3 , 13000);
+
+        lottoMachine = new LottoMachine(money, lottos, new LottoNumberValidator());
     }
 
     @Test
@@ -32,7 +36,9 @@ public class LottoMachineTest {
     public void 로또_수동_잘못된_숫자() {
         List<Lotto> notLottos = new ArrayList<>();
         notLottos.add(new Lotto(Arrays.asList(1, 6, 5, 44, 22, 77)));
-        lottoMachine = new LottoMachine(13000, notLottos, new LottoNumberValidator());
+        Money money = new Money(3 , 13000);
+
+        lottoMachine = new LottoMachine(money, notLottos, new LottoNumberValidator());
     }
 
 }
