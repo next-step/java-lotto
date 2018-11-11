@@ -32,7 +32,7 @@ public class Ticket {
                 .count();
     }
 
-    protected boolean hasBonus(int bonus) {
+    private boolean hasBonus(int bonus) {
         return numbers.contains(bonus);
     }
 
