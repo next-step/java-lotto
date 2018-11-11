@@ -4,7 +4,6 @@ import game.lotto.util.LottoMatcher;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class LottoGame {
 
@@ -32,8 +31,8 @@ public class LottoGame {
         return this.lottoRegistry.getLottos();
     }
 
-    public MatchResult match(Lotto lotto) {
+    public MatchResult match(WinningLotto winningLotto) {
 
-        return LottoMatcher.match(lotto, lottoRegistry.getLottos());
+        return LottoMatcher.match(winningLotto, lottoRegistry.getLottos());
     }
 }

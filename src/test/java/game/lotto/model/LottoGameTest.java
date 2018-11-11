@@ -21,17 +21,19 @@ public class LottoGameTest {
 
     @Test
     public void 로또번호_맞춰보기() {
+        final LottoNumber bonus = new LottoNumber(11);
         final String stringWinningNumbers = "1, 2, 3, 4, 5, 6";
         final Set<LottoNumber> winningNumbers = LottoNumberFactory.createLottoNumbers(stringWinningNumbers);
         final Lotto winningNumberLotto = new Lotto(winningNumbers);
 
         LottoGame lottoGame = new LottoGame(createMatchTestLottos());
-        MatchResult matchResult = lottoGame.match(winningNumberLotto);
+        MatchResult matchResult = lottoGame.match(new WinningLotto(winningNumberLotto, bonus));
 
-        assertThat(matchResult.getMatch(MatchType.MATCH_3).getCount()).as("3개 일치 갯수").isEqualTo(2);
-        assertThat(matchResult.getMatch(MatchType.MATCH_4).getCount()).as("4개 일치 갯수").isEqualTo(1);
-        assertThat(matchResult.getMatch(MatchType.MATCH_5).getCount()).as("5개 일치 갯수").isEqualTo(2);
-        assertThat(matchResult.getMatch(MatchType.MATCH_6).getCount()).as("6개 일치 갯수").isEqualTo(3);
+        assertThat(matchResult.getMatch(Rank.FIFTH).getCount()).as("5등 일치 갯수").isEqualTo(2);
+        assertThat(matchResult.getMatch(Rank.FOURTH).getCount()).as("4등 일치 갯수").isEqualTo(1);
+        assertThat(matchResult.getMatch(Rank.THIRD).getCount()).as("3등 일치 갯수").isEqualTo(2);
+        assertThat(matchResult.getMatch(Rank.SECOND).getCount()).as("2등 일치 갯수").isEqualTo(0);
+        assertThat(matchResult.getMatch(Rank.FIRST).getCount()).as("1등 일치 갯수").isEqualTo(3);
     }
 
     private List<Lotto> createMatchTestLottos() {
@@ -60,6 +62,11 @@ public class LottoGameTest {
 
     private Lotto create5MatchLotto() {
         String matchNumbers = "1, 3, 4, 5, 6, 9";
+        return creatMatchLotto(matchNumbers);
+    }
+
+    private Lotto createBonusMatchLotto() {
+        String matchNumbers = "1, 3, 4, 5, 6, 11";
         return creatMatchLotto(matchNumbers);
     }
 

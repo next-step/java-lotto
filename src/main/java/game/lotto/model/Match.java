@@ -3,15 +3,15 @@ package game.lotto.model;
 public class Match {
 
     private int count;
-    private MatchType matchType;
+    private Rank rank;
 
-    public Match(MatchType matchType) {
-        this.matchType = matchType;
+    public Match(Rank rank) {
+        this.rank = rank;
     }
 
     public Match(Match match) {
         this.count = match.count;
-        this.matchType = match.matchType;
+        this.rank = match.rank;
     }
 
     public void plusCount() {
@@ -22,11 +22,11 @@ public class Match {
         return this.count;
     }
 
-    public MatchType getMatchType() {
-        return this.matchType;
+    public Rank getRank() {
+        return this.rank;
     }
 
     public long getTotalPrize() {
-        return matchType.getTotalPrize(this.count);
+        return rank.getTotalPrize(this.count);
     }
 }

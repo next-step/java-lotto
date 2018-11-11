@@ -1,5 +1,6 @@
 package game.lotto.view;
 
+import game.lotto.model.LottoNumber;
 import game.lotto.model.Money;
 
 import java.util.Scanner;
@@ -21,4 +22,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static LottoNumber readBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int readValue = Integer.parseInt(scanner.nextLine());
+
+        return new LottoNumber(readValue);
+    }
 }

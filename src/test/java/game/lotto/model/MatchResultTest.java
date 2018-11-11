@@ -15,47 +15,15 @@ public class MatchResultTest {
     }
 
     @Test
-    public void 일치_3개_숫자_증가() {
-        matchResult.incrementMatch(3);
+    public void 매치_추가하기() {
+        final Rank rank = Rank.SECOND;
+        final Match input = new Match(rank);
+        final int beforeCount = matchResult.getMatch(rank).getCount();
 
-        assertThat(matchResult.getMatch(MatchType.MATCH_3).getCount()).isEqualTo(1);
+        matchResult.plus(input);
 
-        matchResult.incrementMatch(3);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_3).getCount()).isEqualTo(2);
-    }
-
-    @Test
-    public void 일치_4개_숫자_증가() {
-        matchResult.incrementMatch(4);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_4).getCount()).isEqualTo(1);
-
-        matchResult.incrementMatch(4);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_4).getCount()).isEqualTo(2);
-    }
-
-    @Test
-    public void 일치_5개_숫자_증가() {
-        matchResult.incrementMatch(5);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_5).getCount()).isEqualTo(1);
-
-        matchResult.incrementMatch(5);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_5).getCount()).isEqualTo(2);
-    }
-
-    @Test
-    public void 일치_6개_숫자_증가() {
-        matchResult.incrementMatch(6);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_6).getCount()).isEqualTo(1);
-
-        matchResult.incrementMatch(6);
-
-        assertThat(matchResult.getMatch(MatchType.MATCH_6).getCount()).isEqualTo(2);
+        Match match = matchResult.getMatch(rank);
+        assertThat(match.getCount()).isEqualTo(beforeCount + 1);
     }
 
 }
