@@ -30,18 +30,6 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void 커스텀구분자가져오기_물결() {
-        String customSeperator = StringCalculator.getCustomSeperator("//~\n1,2:3");
-        assertThat(customSeperator).isEqualTo("~");
-    }
-
-    @Test
-    public void 커스텀구분자가져오기_느낌표() {
-        String customSeperator = StringCalculator.getCustomSeperator("//!\n1,2!3");
-        assertThat(customSeperator).isEqualTo("!");
-    }
-
-    @Test
     public void add_숫자_커스텀구분자() {
         int result = StringCalculator.add("//!\n1,2:3!4");
         assertThat(result).isEqualTo(10);
