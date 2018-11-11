@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
-    public static final int LOTTO_NUMERS = 6;
-
     private List<LottoBall> balls = null;
 
     public LottoMachine() {
@@ -17,7 +15,7 @@ public class LottoMachine {
     }
 
     public Lotto createLotto() {
-        return createLotto(selectBalls());
+        return createLotto(LottoHelper.pickRandomBalls(this.balls, Lotto.LOTTO_NUMERS));
     }
 
     public Lotto createLotto(List<LottoBall> balls) {
@@ -26,22 +24,6 @@ public class LottoMachine {
 
     public WInningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
         return new WInningLotto(createLotto(LottoHelper.convertToBalls(winningNumbers)), LottoHelper.convertToBall(bonusNumber));
-    }
-
-    private List<LottoBall> selectBalls() {
-        Collections.shuffle(this.balls);
-        return this.balls.subList(0, LOTTO_NUMERS);
-    }
-
-    public LottoResult check(WInningLotto winningLotto, List<Lotto> buyedLottos) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : buyedLottos) {
-            int matchCount = winningLotto.howManyMatchBall(lotto);
-            boolean bonusCount = winningLotto.hasBonusBall(lotto);
-            lottoResult.addResult(LottoPrize.findPrize(matchCount, bonusCount));
-        }
-        
-        return lottoResult;
     }
 
     private List<LottoBall> makeBalls() {

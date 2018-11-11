@@ -27,7 +27,18 @@ public class LottoStore {
     }
 
     public LottoResult checkWinningLotto(String winningNumber, int bonusNumber, List<Lotto> buyedTickets) {
-        return lottoMchine.check(createWInningLotto(winningNumber, bonusNumber), buyedTickets);
+        return check(createWInningLotto(winningNumber, bonusNumber), buyedTickets);
+    }
+
+    private LottoResult check(WInningLotto winningLotto, List<Lotto> buyedLottos) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : buyedLottos) {
+            int matchCount = winningLotto.howManyMatchBall(lotto);
+            boolean bonusCount = winningLotto.hasBonusBall(lotto);
+            lottoResult.addResult(LottoPrize.findPrize(matchCount, bonusCount));
+        }
+
+        return lottoResult;
     }
 
     private WInningLotto createWInningLotto(String winningNumber, int bonusNumber) {
