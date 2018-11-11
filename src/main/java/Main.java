@@ -1,7 +1,4 @@
-import domain.Lotto;
-import domain.LottoMachine;
-import domain.WinningNumber;
-import domain.WinningStatus;
+import domain.*;
 import util.ParsingUtil;
 import view.InputView;
 import view.ResultView;
@@ -10,7 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int amount = InputView.inputPurchaseAmount();
+        Money amount = new Money(InputView.inputPurchaseAmount());
 
         LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> lottoGames = lottoMachine.purchaseLotto(amount);
