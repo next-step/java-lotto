@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.enums.MatchType;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +17,23 @@ public class Ticket {
         return this.numbers;
     }
 
-    public int getCountOfMatches(Ticket winningNumbers) {
+    public int compareWinningLotto(WinningLotto winningLotto) {
+        int count = getCountOfMatches(winningLotto.getNumbers());
+
+        if(count == MatchType.FIVE.getMatch() && hasBonus(winningLotto.getBonus()))
+            return MatchType.BONUS.getMatch();
+
+        return count;
+    }
+
+    protected int getCountOfMatches(List<Integer> winningNumbers) {
         return (int) this.numbers.stream()
-                .filter(number -> winningNumbers.numbers.contains(number))
+                .filter(winningNumbers::contains)
                 .count();
+    }
+
+    protected boolean hasBonus(int bonus) {
+        return numbers.contains(bonus);
     }
 
     @Override

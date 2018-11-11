@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import jdk.internal.util.xml.impl.Input;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -17,7 +18,8 @@ public class Main {
         ResultView.printTickets(tickets);
 
         LottoMachine lottoMachine = new LottoMachine(lotto);
-        GameResult gameResult = lottoMachine.playLotto(InputView.inputLastWeeksWinningNumbers());
+        GameResult gameResult = lottoMachine.playLotto(InputView.inputLastWeeksWinningNumbers(), InputView.inputBonusNumber());
+
         ResultView.printLottoResults(gameResult);
     }
 }

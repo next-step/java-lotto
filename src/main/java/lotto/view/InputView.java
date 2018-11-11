@@ -18,4 +18,11 @@ public class InputView {
         String winningNumbers = scanner.nextLine();
         return winningNumbers;
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int bonus = scanner.nextInt();
+        return bonus;
+    }
 }

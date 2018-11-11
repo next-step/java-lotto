@@ -18,22 +18,26 @@ public class GameResult {
     private List<Ticket> tickets;
     private Map<Integer, Integer> lottoResults;
 
-    public GameResult(List<Ticket> tickets, Ticket winningNumbers) {
+    public GameResult(List<Ticket> tickets, WinningLotto winningLotto) {
         this.tickets = tickets;
         this.lottoResults = new HashMap<>();
-        generateGameResult(winningNumbers);
+        generateGameResult(winningLotto);
     }
 
-     protected void generateGameResult(Ticket winningNumbers) {
-        initializeMap(winningNumbers);
-         tickets.stream()
-                 .mapToInt(ticket -> ticket.getCountOfMatches(winningNumbers))
-                 .forEach(key -> lottoResults.put(key, lottoResults.get(key) + 1));
-     }
+    protected void generateGameResult(WinningLotto winningLotto) {
+        initializeMap(winningLotto);
+        this.tickets.stream()
+                .mapToInt(ticket -> ticket.compareWinningLotto(winningLotto))
+                .forEach(this::updateResult);
+    }
 
-    private void initializeMap(Ticket winningNumbers) {
-        IntStream.rangeClosed(0, winningNumbers.getNumbers().size())
+    private void initializeMap(WinningLotto winningNumbers) {
+        IntStream.rangeClosed(0, MatchType.BONUS.getMatch())
                 .forEach(i -> lottoResults.put(i, 0));
+    }
+
+    private void updateResult(int key) {
+        lottoResults.put(key, lottoResults.get(key) + 1);
     }
 
 
@@ -48,7 +52,8 @@ public class GameResult {
         int totalAmount = 0;
 
         for(Integer key : lottoResults.keySet()) {
-            totalAmount += MatchType.getPrice(key) * lottoResults.get(key);
+            MatchType matchType = MatchType.getMatchType(key);
+            totalAmount += matchType.getPrice() * lottoResults.get(key);
         }
 
         return totalAmount;

@@ -18,7 +18,7 @@ public class GameResultTest {
         Ticket ticket2 = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6));
         Ticket ticket3 = new Ticket(Arrays.asList(9, 10, 11, 12, 13, 15));
 
-        Ticket winningNumber = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(ticket);
         tickets.add(ticket2);
@@ -33,5 +33,20 @@ public class GameResultTest {
     public void 로또_수익률_계산() {
         BigDecimal result = GameResult.calculateBenefitRate(BigDecimal.valueOf(5000), BigDecimal.valueOf(14000));
         assertThat(result).isEqualTo(BigDecimal.valueOf(0.35));
+    }
+
+    @Test
+    public void 로또_보너스볼_당첨_금액_확인() {
+        Ticket ticket = new Ticket(Arrays.asList(9, 10, 11, 12, 13, 14));
+        Ticket ticket2 = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(ticket);
+        tickets.add(ticket2);
+
+        WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 10), 7);
+        GameResult gr = new GameResult(tickets, winningNumber);
+        int result = gr.getTotalAmount();
+
+        assertThat(result).isEqualTo(30_000_000);
     }
 }
