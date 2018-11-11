@@ -22,6 +22,7 @@ public class StringCalculator {
             if (convertValue < 0) {
                 throw new RuntimeException();
             }
+
             ints[index] = convertValue;
         }
         return ints;
