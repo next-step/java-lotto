@@ -1,7 +1,8 @@
 package game.lotto.model;
 
+import java.util.Optional;
+
 public enum MatchType {
-    EMPTY(0, 0),
     MATCH_3(3, 5_000),
     MATCH_4(4, 50_000),
     MATCH_5(5, 1_500_000),
@@ -17,15 +18,15 @@ public enum MatchType {
         this.message = String.format("%d개 일치 (%d원)", key, prize);
     }
 
-    public static MatchType valueOf(int key) {
+    public static Optional<MatchType> valueOf(int key) {
 
         for (MatchType matchType : values()) {
             if(matchType.isSameKey(key)) {
-                return matchType;
+                return Optional.of(matchType);
             }
         }
 
-        return MatchType.EMPTY;
+        return Optional.empty();
     }
 
     public String getMessage() {

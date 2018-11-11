@@ -23,10 +23,9 @@ public class Report {
         StringBuilder report = new StringBuilder();
         report.append("당첨 통계").append(LINE_SEPARATOR);
         report.append("---------").append(LINE_SEPARATOR);
-        appendMatch(report, MatchType.MATCH_3);
-        appendMatch(report, MatchType.MATCH_4);
-        appendMatch(report, MatchType.MATCH_5);
-        appendMatch(report, MatchType.MATCH_6);
+        for (MatchType matchType : MatchType.values()) {
+            appendMatch(report, matchType);
+        }
         BigDecimal earningRate = money.computeEarningRate(matchResult.getTotalPrize());
         report.append(
                 String.format(

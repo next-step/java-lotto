@@ -3,6 +3,7 @@ package game.lotto.model;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MatchResult {
@@ -23,14 +24,17 @@ public class MatchResult {
 
 
     public void incrementMatch(int matchCount) {
-        MatchType matchType = MatchType.valueOf(matchCount);
-        matchs.computeIfPresent(
-                matchType,
-                (key, match) -> {
-                    match.plusCount();
-                    return match;
-                }
+        Optional<MatchType> optionalMatchType = MatchType.valueOf(matchCount);
+        optionalMatchType.ifPresent(
+                matchType -> matchs.compute(
+                        matchType,
+                        (key, match) -> {
+                            match.plusCount();
+                            return match;
+                        }
+                )
         );
+
     }
 
     public Match getMatch(MatchType matchType) {
