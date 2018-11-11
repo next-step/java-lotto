@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;
+import lotto.domain.LottoGameResult;
 
 public class ResultView {
 
@@ -19,22 +20,13 @@ public class ResultView {
         System.out.println(s);
     }
 
-    public static void showResult(LottoDto lottoDto) {
+    public static void showResult(LottoGameResult lottoGameResult) {
         StringBuilder sb = new StringBuilder();
-        switch (lottoDto.getWinnerCategory()) {
-            case 3 :
-                sb.append(lottoDto.getWinnerCategory() + "개 일치 (5000원)-" + lottoDto.getMatchNumber() + "개");
-                break;
-            case 4:
-                sb.append(lottoDto.getWinnerCategory() + "개 일치 (50000원)-" + lottoDto.getMatchNumber() + "개");
-                break;
-            case 5:
-                sb.append(lottoDto.getWinnerCategory() + "개 일치 (1500000원)-" + lottoDto.getMatchNumber() + "개");
-                break;
-            case 6:
-                sb.append(lottoDto.getWinnerCategory() + "개 일치 (2000000000원)-" + lottoDto.getMatchNumber() + "개");
-                break;
+
+        for (LottoDto lottoDto : lottoGameResult.getLottoDtos()) {
+            sb.append(lottoDto.getWinnerCategory() + "개 일치 (" + lottoDto.getDefaultMoney() + "원)-" + lottoDto.getMatchNumber() + "개\n");
         }
+
         System.out.println(sb.toString());
     }
 

@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGameResult {
 
@@ -9,91 +12,73 @@ public class LottoGameResult {
     private static final int FIVE_MATCH_MONEY = 1500000;
     private static final int SIX_MATCH_MONEY = 2000000000;
 
-    public LottoDto getLottoResultForThree(List<Lotto> lottos, List<Integer> winningNumbers) {
-        int result = 0;
+    private static final int THREE_MATCH = 3;
+    private static final int FOUR_MATCH = 4;
+    private static final int FIVE_MATCH = 5;
+    private static final int SIX_MATCH = 6;
+
+    private List<LottoDto> lottoDtos;
+
+    public LottoGameResult() {
+        lottoDtos = new ArrayList<>();
+    }
+
+    public void doCalculateLottoResult(List<Lotto> lottos, List<Integer> winningNumbers) {
+
+        Map<Integer, Integer> lottoDtoMap = initLottoMap();
 
         for (Lotto lotto : lottos) {
             int count = 0;
             count = getCount(winningNumbers, lotto, count);
-            result = getResult(result, count, 3);
+            getMatchCount(lottoDtoMap, count);
         }
 
-        LottoDto lottoDto = makeLottoDto(result, THREE_MATCH_MONEY, 3);
-
-        return lottoDto;
+        lottoDtos.add(makeLottoDto(lottoDtoMap.get(THREE_MATCH), THREE_MATCH_MONEY, THREE_MATCH));
+        lottoDtos.add(makeLottoDto(lottoDtoMap.get(FOUR_MATCH), FOUR_MATCH_MONEY, FOUR_MATCH));
+        lottoDtos.add(makeLottoDto(lottoDtoMap.get(FIVE_MATCH), FIVE_MATCH_MONEY, FIVE_MATCH));
+        lottoDtos.add(makeLottoDto(lottoDtoMap.get(SIX_MATCH), SIX_MATCH_MONEY, SIX_MATCH));
     }
 
-    public LottoDto getLottoResultForFour(List<Lotto> lottos, List<Integer> winningNumbers) {
-        int result = 0;
+    private Map<Integer, Integer> initLottoMap() {
+        Map<Integer, Integer> lottoDtoMap = new HashMap<>();
+        lottoDtoMap.put(THREE_MATCH, 0);
+        lottoDtoMap.put(FOUR_MATCH, 0);
+        lottoDtoMap.put(FIVE_MATCH, 0);
+        lottoDtoMap.put(SIX_MATCH, 0);
+        return lottoDtoMap;
+    }
 
-        for (Lotto lotto : lottos) {
-            int count = 0;
-            count = getCount(winningNumbers, lotto, count);
-            result = getResult(result, count, 4);
+    private void getMatchCount(Map<Integer, Integer> lottoDtoMap, int count) {
+        if (THREE_MATCH == count) {
+            lottoDtoMap.put(THREE_MATCH, lottoDtoMap.get(THREE_MATCH)+1);
         }
 
-        LottoDto lottoDto = makeLottoDto(result, FOUR_MATCH_MONEY, 4);
-
-        return lottoDto;
-    }
-
-    public LottoDto getLottoResultForFive(List<Lotto> lottos, List<Integer> winningNumbers) {
-        int result = 0;
-
-        for (Lotto lotto : lottos) {
-            int count = 0;
-            count = getCount(winningNumbers, lotto, count);
-            result = getResult(result, count, 5);
+        if (FOUR_MATCH == count) {
+            lottoDtoMap.put(FOUR_MATCH, lottoDtoMap.get(FOUR_MATCH)+1);
         }
 
-        LottoDto lottoDto = makeLottoDto(result, FIVE_MATCH_MONEY, 5);
-
-        return lottoDto;
-    }
-
-    public LottoDto getLottoResultForSix(List<Lotto> lottos, List<Integer> winningNumbers) {
-        int result = 0;
-
-        for (Lotto lotto : lottos) {
-            int count = 0;
-            count = getCount(winningNumbers, lotto, count);
-            result = getResult(result, count, 6);
+        if (FIVE_MATCH == count) {
+            lottoDtoMap.put(FIVE_MATCH, lottoDtoMap.get(FIVE_MATCH)+1);
         }
 
-        LottoDto lottoDto = makeLottoDto(result, SIX_MATCH_MONEY, 6);
-
-        return lottoDto;
-    }
-
-    private LottoDto makeLottoDto(int result, int winningMoney, int winnerCategory) {
-        LottoDto lottoDto = new LottoDto();
-        lottoDto.setWinnerCategory(winnerCategory);
-        lottoDto.setMatchNumber(result);
-        lottoDto.setWinningMoney(result * winningMoney);
-        return lottoDto;
-    }
-
-    private int getResult(int result, int count, int matchNum) {
-        if (count == matchNum) {
-            result++;
+        if (SIX_MATCH == count) {
+            lottoDtoMap.put(SIX_MATCH, lottoDtoMap.get(SIX_MATCH)+1);
         }
-        return result;
     }
 
     private int getCount(List<Integer> winningNumbers, Lotto lotto, int count) {
-        for (Integer numbers : winningNumbers) {
-            count = getMatchNumberCount(lotto, count, numbers);
+        for (Integer number : winningNumbers) {
+            if (lotto.getLottoNumbers().contains(number)) {
+                count++;
+            }
         }
         return count;
     }
 
-    private int getMatchNumberCount(Lotto lotto, int count, Integer numbers) {
-        if (lotto.getLottoNumbers().contains(numbers)) {
-            count++;
-        }
-        return count;
+    private LottoDto makeLottoDto(int result, int winningMoney, int winnerCategory) {
+        LottoDto lottoDto = new LottoDto(winnerCategory, winningMoney, result, winningMoney * result);
+        return lottoDto;
     }
-
 
     public String getRatio(List<LottoDto> lottoDtos, int budget) {
         double totalMoney = 0;
@@ -103,5 +88,9 @@ public class LottoGameResult {
         double result = totalMoney/(double)budget;
 
         return String.format("%.2f", result);
+    }
+
+    public List<LottoDto> getLottoDtos() {
+        return lottoDtos;
     }
 }
