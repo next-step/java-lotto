@@ -1,18 +1,16 @@
 package game.lotto.util;
 
 import game.lotto.model.Lotto;
-import game.lotto.model.LottoNumber;
 import game.lotto.model.MatchResult;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoMatcher {
 
-    public static MatchResult match(Set<LottoNumber> winningNumbers, List<Lotto> lottos) {
+    public static MatchResult match(Lotto target, List<Lotto> lottos) {
         MatchResult matchResult = new MatchResult();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.match(winningNumbers);
+            int matchCount = lotto.match(target);
             matchResult.incrementMatch(matchCount);
         }
         return matchResult;

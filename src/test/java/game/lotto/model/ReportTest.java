@@ -3,30 +3,10 @@ package game.lotto.model;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReportTest {
-
-    @Test
-    public void 수익률_계산() {
-        final Money money = new Money(50000);
-        final MatchResult matchResult = new MatchResult();
-        matchResult.incrementMatch(3);
-        matchResult.incrementMatch(3);
-        final BigDecimal expected = new BigDecimal(matchResult.getTotalPrize())
-                                    .divide(
-                                            new BigDecimal(money.getValue()),
-                                            Report.SCALE,
-                                            RoundingMode.HALF_UP
-                                    );
-        final Report report = new Report(matchResult, money);
-
-        BigDecimal earningRate = report.computeEarningRate();
-
-        assertThat(earningRate).isEqualTo(expected);
-    }
 
     @Test
     public void 수익여부_손해() {

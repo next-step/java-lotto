@@ -1,22 +1,11 @@
 package game.lotto.model;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 public enum MatchType {
-    MATCH_3(3, 5000),
-    MATCH_4(4, 50000),
-    MATCH_5(5, 1500000),
-    MATCH_6(6, 2000000000);
-
-    private static final Map<Integer, MatchType> types;
-
-    static {
-        types = Arrays.stream(MatchType.values())
-                        .collect(Collectors.toMap(type -> type.key, Function.identity()));
-    }
+    EMPTY(0, 0),
+    MATCH_3(3, 5_000),
+    MATCH_4(4, 50_000),
+    MATCH_5(5, 1_500_000),
+    MATCH_6(6, 2_000_000_000);
 
     private int key;
     private int prize;
@@ -28,6 +17,17 @@ public enum MatchType {
         this.message = String.format("%d개 일치 (%d원)", key, prize);
     }
 
+    public static MatchType valueOf(int key) {
+
+        for (MatchType matchType : values()) {
+            if(matchType.isSameKey(key)) {
+                return matchType;
+            }
+        }
+
+        return MatchType.EMPTY;
+    }
+
     public String getMessage() {
         return this.message;
     }
@@ -36,15 +36,11 @@ public enum MatchType {
         return this.prize;
     }
 
-    public static MatchType valueOf(int key) {
-        if(!types.containsKey(key)) {
-            throw new IllegalArgumentException("존재 하지 않는 키 입니다. 키 종류 : [3, 4, 5, 6]");
-        }
-
-        return types.get(key);
+    public int getTotalPrize(int matchCount) {
+        return this.prize * matchCount;
     }
 
-    public static boolean containsKey(int key) {
-        return types.containsKey(key);
+    public boolean isSameKey(int key) {
+        return this.key == key;
     }
 }

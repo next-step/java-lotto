@@ -14,6 +14,11 @@ public class Lotto {
     }
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
+
+        if(lottoNumbers.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 갯수는 6개입니다.");
+        }
+
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -21,14 +26,12 @@ public class Lotto {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 
-
-
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
     }
 
-    public int match(Set<LottoNumber> lottoNumbers) {
-        return (int) lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
+    public int match(Lotto lotto) {
+        return (int) lotto.lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
     }
 }

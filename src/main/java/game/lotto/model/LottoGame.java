@@ -32,8 +32,8 @@ public class LottoGame {
         return this.lottoRegistry.getLottos();
     }
 
-    public MatchResult match(Set<LottoNumber> winningNumbers) {
+    public MatchResult match(Lotto lotto) {
 
-        return LottoMatcher.match(winningNumbers, lottoRegistry.getLottos());
+        return LottoMatcher.match(lotto, lottoRegistry.getLottos());
     }
 }

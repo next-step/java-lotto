@@ -23,9 +23,10 @@ public class LottoGameTest {
     public void 로또번호_맞춰보기() {
         final String stringWinningNumbers = "1, 2, 3, 4, 5, 6";
         final Set<LottoNumber> winningNumbers = LottoNumberFactory.createLottoNumbers(stringWinningNumbers);
+        final Lotto winningNumberLotto = new Lotto(winningNumbers);
 
         LottoGame lottoGame = new LottoGame(createMatchTestLottos());
-        MatchResult matchResult = lottoGame.match(winningNumbers);
+        MatchResult matchResult = lottoGame.match(winningNumberLotto);
 
         assertThat(matchResult.getMatch(MatchType.MATCH_3).getCount()).as("3개 일치 갯수").isEqualTo(2);
         assertThat(matchResult.getMatch(MatchType.MATCH_4).getCount()).as("4개 일치 갯수").isEqualTo(1);

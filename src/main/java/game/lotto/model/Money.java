@@ -1,7 +1,12 @@
 package game.lotto.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Money {
+
     public static final int LOTTO_PRICE = 1000;
+    public static final int SCALE = 2;
 
     private final int value;
 
@@ -15,6 +20,11 @@ public class Money {
 
     public int getValue() {
         return this.value;
+    }
+
+    public BigDecimal computeEarningRate(long totalPrize) {
+        BigDecimal prize = new BigDecimal(totalPrize);
+        return prize.divide(new BigDecimal(this.value), SCALE, RoundingMode.HALF_UP);
     }
 
     @Override

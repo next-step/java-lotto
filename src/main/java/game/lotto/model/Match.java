@@ -27,6 +27,6 @@ public class Match {
     }
 
     public long getTotalPrize() {
-        return this.count * matchType.getPrize();
+        return matchType.getTotalPrize(this.count);
     }
 }

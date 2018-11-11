@@ -18,8 +18,9 @@ public class LottoConsole {
 
         String stringWinningNumbers = InputView.readWinningNumbers();
         Set<LottoNumber> winningLottoNumbers = LottoNumberFactory.createLottoNumbers(stringWinningNumbers);
+        Lotto winningNumberLotto = new Lotto(winningLottoNumbers);
 
-        MatchResult matchResult = lottoGame.match(winningLottoNumbers);
+        MatchResult matchResult = lottoGame.match(winningNumberLotto);
 
         ResultView.printReport(matchResult.makeReport(purchaseMoney));
     }
