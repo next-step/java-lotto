@@ -15,12 +15,12 @@ public class StringCalculator {
      * @param str
      * @return
      */
-    public static int add(String str) {
+    public static Long add(String str) {
         if (str == null || str.isEmpty()) {
-            return 0;
+            return 0L;
         }
 
-        return sum(toInt(split(str)));
+        return sum(toLong(split(str)));
     }
 
     /**
@@ -28,14 +28,14 @@ public class StringCalculator {
      * @param values
      * @return
      */
-    private static int[] toInt(String[] values) {
-        int[] ints = new int[values.length];
+    private static Long[] toLong(String[] values) {
+        Long[] nums = new Long[values.length];
         for (int i = 0; i < values.length; i++) {
-            int num = new PositiveNumber(values[i]).getValue();
-            ints[i] = num;
+            Long num = new PositiveNumber(values[i]).getValue();
+            nums[i] = num;
         }
 
-        return ints;
+        return nums;
     }
 
     /**
@@ -43,9 +43,9 @@ public class StringCalculator {
      * @param values
      * @return
      */
-    private static int sum(int[] values) {
-        int sum = 0;
-        for (int value : values) {
+    private static Long sum(Long[] values) {
+        Long sum = 0L;
+        for (Long value : values) {
             sum += value;
         }
         return sum;

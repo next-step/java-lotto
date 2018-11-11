@@ -15,17 +15,17 @@ public class Lotto {
     private List<Ticket> tickets = new ArrayList<>();
 
 
-
-    public Lotto(int num) {
+    public Lotto(Long num) {
         createTickets(num);
     }
 
     /**
      * 티켓 생성
+     *
      * @param buyAmount
      */
-    private void createTickets(int buyAmount) {
-        for (int i = 0; i < buyAmount/PRICE; i++) {
+    private void createTickets(Long buyAmount) {
+        for (int i = 0; i < buyAmount / PRICE; i++) {
             Ticket ticket = new Ticket(makeRandNums());
             tickets.add(ticket);
         }
@@ -33,6 +33,7 @@ public class Lotto {
 
     /**
      * 랜덤 숫자 생성
+     *
      * @return
      */
     private List<Integer> makeRandNums() {
