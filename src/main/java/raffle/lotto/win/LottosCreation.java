@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static raffle.lotto.LottoMachine.*;
 
 public class LottosCreation implements LottosGenerator {
-    List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     @Override
     public List<Lotto> generate(Money money) {

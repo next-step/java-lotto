@@ -7,9 +7,9 @@ public class WinningLotto {
     private Lotto lastWeekLotto;
     private LottoNo bonusLotto;
 
-    public WinningLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
+    public WinningLotto(Lotto lastWeekLotto) {
         this.lastWeekLotto = lastWeekLotto;
-        this.bonusLotto = bonusLotto;
+        this.bonusLotto = lastWeekLotto.getBounsLottoNo();
     }
 
     public WinLotto result(Lotto lotto) {

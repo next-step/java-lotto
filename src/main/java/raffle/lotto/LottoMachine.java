@@ -39,8 +39,9 @@ public class LottoMachine {
 
     public LottoResult winLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
         if(bonusLotto.isLottoNumber());
+        lastWeekLotto.setBounsLottoNo(bonusLotto);
         List<WinLotto> winLottos = new ArrayList<>();
-        WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
+        WinningLotto winningLotto = new WinningLotto(lastWeekLotto);
         for(Lotto lotto : lottos){
             winLottos.add(winningLotto.result(lotto));
         }
