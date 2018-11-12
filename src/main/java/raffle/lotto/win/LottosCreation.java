@@ -28,12 +28,9 @@ public class LottosCreation implements LottosGenerator {
     }
 
     private void suffleLotto() {
-        List<LottoNo> lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNo::new).collect(Collectors.toList());
+        List<LottoNo> lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().map(LottoNo::in).collect(Collectors.toList());
         Collections.shuffle(lottoNumber);
         lottos.add(new Lotto(lottoNumber.subList(LOTTO_MIN, LOTTO_MAX)));
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
 }

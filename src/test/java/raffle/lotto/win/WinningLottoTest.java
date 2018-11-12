@@ -20,14 +20,14 @@ public class WinningLottoTest {
     @Before
     public void setUp(){
         String lottoNo = "1, 23 , 5 , 44 , 22 , 15";
-        lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList()));
+        lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
         bonusLotto = new LottoNo(22);
     }
 
     @Test
     public void 로또2등_여부검사() {
         String lottoNo = "1, 6 , 5 , 44 , 22 , 15";
-        Lotto lastWeekLotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList()));
+        Lotto lastWeekLotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
         winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
 
@@ -38,7 +38,7 @@ public class WinningLottoTest {
     @Test
     public void 로또3등_여부검사() {
         String lottoNo = "1, 23 , 5 , 22 , 10 , 33";
-        Lotto lastWeekLotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList()));
+        Lotto lastWeekLotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
         winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
 
@@ -49,7 +49,7 @@ public class WinningLottoTest {
     @Test
     public void 로또5등_여부검사() {
         String lottoNo = "1, 6 , 14 , 44 , 36 , 11";
-        Lotto lastWeekLotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList()));
+        Lotto lastWeekLotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
         winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
 

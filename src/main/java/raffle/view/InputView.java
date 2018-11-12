@@ -26,7 +26,7 @@ public class InputView {
 
     private static List<LottoNo> inputLottoNumbers() {
         Scanner sc = new Scanner(System.in);
-        return Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList());
+        return Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList());
     }
 
     public static LottoNo bonusLotto(){

@@ -1,20 +1,28 @@
 package raffle.lotto;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static raffle.lotto.LottoMachine.LOTTO_MAX_NUMBER;
 import static raffle.lotto.LottoMachine.LOTTO_MIN_NUMBER;
 
 public class LottoNo implements Comparable<LottoNo> {
     private int lottoNumber;
 
+    private static final Map<Integer, LottoNo> lottoCache = new HashMap<>();
+
     public LottoNo(int lottoNumber){
-        if(!isLottoNumber()){
-            new RuntimeException("보너스 로또 범위의 숫자가 아닙니다.");
-        }
         this.lottoNumber = lottoNumber;
     }
 
-    public boolean isLottoNumber() {
-        return  LOTTO_MIN_NUMBER <= lottoNumber && lottoNumber <= LOTTO_MAX_NUMBER;
+    public static LottoNo in(int lottoNumber){
+        if(lottoCache.containsKey(lottoNumber)){
+            LottoNo lottoNo = lottoCache.get(lottoNumber);
+            return lottoNo;
+        }
+        LottoNo lottoNo = new LottoNo(lottoNumber);
+        lottoCache.put(lottoNumber, lottoNo);
+        return lottoNo;
     }
 
     @Override

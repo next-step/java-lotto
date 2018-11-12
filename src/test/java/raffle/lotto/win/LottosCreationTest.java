@@ -19,7 +19,7 @@ public class LottosCreationTest {
     public void 로또수동생성(){
         String lottoNo = "1, 6 , 14 , 44 , 36 , 11";
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::new).collect(Collectors.toList())));
+        lottos.add(new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList())));
         Money money = new Money(1, 0);
 
         LottosCreation lottosCreation = new LottosCreation(lottos);

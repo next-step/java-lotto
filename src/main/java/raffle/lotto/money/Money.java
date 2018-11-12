@@ -25,10 +25,6 @@ public class Money {
         return manualCount;
     }
 
-    public int getAmout() {
-        return amount;
-    }
-
     public int getRancomCount() {
         return (amount / LOTTO_PRICE) - manualCount;
     }
