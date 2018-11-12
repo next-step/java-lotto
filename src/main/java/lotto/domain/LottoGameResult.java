@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.enums.Rank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoGameResult {
 
@@ -15,22 +12,21 @@ public class LottoGameResult {
         lottoDtos = new ArrayList<>();
     }
 
-    public void doCalculateLottoResult(List<Lotto> lottos, WinningLotto winningNumbers, int bonusBall) {
-
+    public void doCalculateLottoResult(BundleLotto lottos, WinningLotto winningNumbers, int bonusBall) {
         Map<Rank, Integer> lottoRankMap = initLottoMap();
 
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             int count = 0;
             Rank rank = getRank(winningNumbers, lotto, count, bonusBall);
 
             makeLottoRankMap(lottoRankMap, rank);
         }
 
-        lottoDtos.add(makeLottoDto(lottoRankMap.get(Rank.FIFTH), Rank.FIFTH));
-        lottoDtos.add(makeLottoDto(lottoRankMap.get(Rank.FOURTH), Rank.FOURTH));
-        lottoDtos.add(makeLottoDto(lottoRankMap.get(Rank.THIRD), Rank.THIRD));
-        lottoDtos.add(makeLottoDto(lottoRankMap.get(Rank.SECOND), Rank.SECOND));
-        lottoDtos.add(makeLottoDto(lottoRankMap.get(Rank.FIRST), Rank.FIRST));
+        for (Rank key : lottoRankMap.keySet()) {
+            lottoDtos.add(makeLottoDto(lottoRankMap.get(key), key));
+        }
+
+        Collections.sort(lottoDtos);
     }
 
     private void makeLottoRankMap(Map<Rank, Integer> lottoRankMap, Rank rank) {
@@ -42,9 +38,7 @@ public class LottoGameResult {
     private Rank getRank(WinningLotto winningNumbers, Lotto lotto, int count, int bonusBall) {
         boolean matchBonus = false;
         for (Integer number : winningNumbers.getWinningNumbers()) {
-            if (lotto.getLottoNumbers().contains(number)) {
-                count++;
-            }
+            count = getCount(lotto, count, number);
         }
 
         if (count == 4 && lotto.getLottoNumbers().contains(bonusBall)) {
@@ -55,15 +49,25 @@ public class LottoGameResult {
         return Rank.valueOf(count, matchBonus);
     }
 
+    private int getCount(Lotto lotto, int count, Integer number) {
+        if (lotto.getLottoNumbers().contains(number)) {
+            count++;
+        }
+        return count;
+    }
+
     private Map<Rank, Integer> initLottoMap() {
         Map<Rank, Integer> lottoDtoMap = new HashMap<>();
-        lottoDtoMap.put(Rank.FIRST, 0);
-        lottoDtoMap.put(Rank.SECOND, 0);
-        lottoDtoMap.put(Rank.THIRD, 0);
-        lottoDtoMap.put(Rank.FOURTH, 0);
-        lottoDtoMap.put(Rank.FIFTH, 0);
+        for (Rank rank : Rank.values()) {
+            filterRankMiss(lottoDtoMap, rank);
+        }
 
         return lottoDtoMap;
+    }
+
+    private void filterRankMiss(Map<Rank, Integer> lottoDtoMap, Rank rank) {
+        if (!rank.equals(rank.MISS))
+            lottoDtoMap.put(rank, 0);
     }
 
     private LottoDto makeLottoDto(int countResult, Rank rank) {
@@ -73,6 +77,7 @@ public class LottoGameResult {
 
     public String getRatio(List<LottoDto> lottoDtos, int budget) {
         double totalMoney = 0;
+
         for (LottoDto lottoDto : lottoDtos) {
             totalMoney += lottoDto.getWinningMoney();
         }

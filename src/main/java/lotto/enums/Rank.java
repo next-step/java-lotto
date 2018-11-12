@@ -43,18 +43,4 @@ public enum Rank {
 
         return MISS;
     }
-
-    private static boolean checkMatchCount(boolean match, boolean matchBonus) {
-        if (match) {
-            if (isBonus(matchBonus)) return true;
-        }
-        return false;
-    }
-
-    private static boolean isBonus(boolean matchBonus) {
-        if (matchBonus) {
-            return true;
-        }
-        return false;
-    }
 }
