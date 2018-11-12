@@ -58,8 +58,9 @@ public class LottoNumbers {
 
     private List<Integer> getRandomNumbers() {
         List<Integer> numbers = new ArrayList<>();
+        List<Integer> shuffledNumbers = shuffle(getLottoAllNumbers());
         for (int i = 0; i < LOTTO_NUMBER_COUNT ; i++) {
-            numbers.add(shuffle(getLottoAllNumbers()).get(i));
+            numbers.add(shuffledNumbers.get(i));
         }
         Collections.sort(numbers);
         return numbers;
@@ -77,5 +78,4 @@ public class LottoNumbers {
         }
         return lottoNumbers;
     }
-
 }
