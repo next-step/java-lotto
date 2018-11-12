@@ -4,6 +4,7 @@ import game.lotto.model.*;
 import game.lotto.view.InputView;
 import game.lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Set;
 
 public class LottoConsole {
@@ -11,7 +12,11 @@ public class LottoConsole {
     public static void main(String[] args) {
         Money purchaseMoney = InputView.readPurchaseMoney();
 
-        LottoGame lottoGame = new LottoGame(purchaseMoney);
+        int manualCount = InputView.readManualCount();
+        List<String> manualNumbers = InputView.readManualNumbers(manualCount);
+
+        LottoGame lottoGame = new LottoGame(purchaseMoney, manualNumbers);
+
         ResultView.printAmount(lottoGame.getAmount());
         ResultView.printLottos(lottoGame.getLottos());
 

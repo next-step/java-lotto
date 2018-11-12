@@ -55,21 +55,6 @@ public class LottoTest {
     }
 
     @Test
-    public void 일치하는_랭크() {
-        final String stringNumbers = "1, 2, 3, 7, 8, 9";
-        final Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
-        final Lotto lotto = new Lotto(lottoNumbers);
-
-        final String otherStringNumbers = "1, 2, 3, 5, 7, 8";
-        final Set<LottoNumber> otherNumbers = LottoNumberFactory.createLottoNumbers(otherStringNumbers);
-        final Lotto otherLotto = new Lotto(otherNumbers);
-
-        Rank rank = lotto.getMatchRank(otherLotto);
-
-        assertThat(rank).isEqualByComparingTo(Rank.THIRD);
-    }
-
-    @Test
     public void 로또_번호_존재_테스트() {
         final String stringNumbers = "1, 2, 3, 7, 8, 9";
         final Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
@@ -80,5 +65,17 @@ public class LottoTest {
 
         assertThat(lotto.contains(yes)).isTrue();
         assertThat(lotto.contains(no)).isFalse();
+    }
+
+    @Test
+    public void 로또_동등성_테스트() {
+        final String stringNumbers = "1, 2, 3, 7, 8, 9";
+        final Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
+        final Set<LottoNumber> otherLottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
+
+        final Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto other = new Lotto(otherLottoNumbers);
+
+        assertThat(lotto).isEqualTo(other);
     }
 }

@@ -10,9 +10,9 @@ public class LottoGame {
     private Amount amount;
     private LottoRegistry lottoRegistry;
 
-    public LottoGame(Money money) {
-        this.amount = new Amount(money);
-        initLottoRegistry(LottosFactory.createLottos(amount));
+    public LottoGame(Money money, List<String> manualNumbers) {
+        this.amount = new Amount(money, manualNumbers.size());
+        initLottoRegistry(LottosFactory.createComplexLottos(amount, manualNumbers));
     }
 
     public LottoGame(Collection<Lotto> lottos) {
@@ -24,7 +24,7 @@ public class LottoGame {
     }
 
     public Amount getAmount() {
-        return new Amount(amount);
+        return new Amount(this.amount);
     }
 
     public List<Lotto> getLottos() {

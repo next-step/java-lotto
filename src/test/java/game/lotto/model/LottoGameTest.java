@@ -3,6 +3,7 @@ package game.lotto.model;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -13,10 +14,21 @@ public class LottoGameTest {
     @Test
     public void 게임_만들기() {
         final Money money = new Money(3000);
-        final Amount expectedAmount = new Amount(money);
-        LottoGame lottoGame = new LottoGame(money);
+        final Amount expectedAmount = new Amount(money, 0);
+        LottoGame lottoGame = new LottoGame(money, new ArrayList<>());
 
         assertThat(lottoGame.getAmount()).isEqualTo(expectedAmount);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 게임_만들기_수동갯수_초과() {
+        final Money money = new Money(1000);
+        final List<String> manualNumbers = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "2, 3, 4, 5, 6, 7"
+        );
+
+        new LottoGame(money, manualNumbers);
     }
 
     @Test

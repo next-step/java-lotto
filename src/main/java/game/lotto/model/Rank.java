@@ -18,7 +18,18 @@ public enum Rank {
         this.message = messageFormat.getFormatMessage(countOfMatch, prize);
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    public static Rank valueOf(int matchOfCount, Lotto lotto, LottoNumber bonus) {
+
+        Rank rank = valueOf(matchOfCount);
+
+        if(rank.isNotThird(lotto, bonus)) {
+            return Rank.SECOND;
+        }
+
+        return rank;
+    }
+
+    private static Rank valueOf(int countOfMatch) {
 
         for (Rank rank : values()) {
             if(rank.isSecond()) {
@@ -35,6 +46,10 @@ public enum Rank {
 
     private boolean isSecond() {
         return this == SECOND;
+    }
+
+    private boolean isNotThird(Lotto lotto, LottoNumber bonus) {
+        return this == THIRD && lotto.contains(bonus);
     }
 
     public boolean isMiss() {

@@ -12,20 +12,53 @@ public class AmountTest {
 
     @Before
     public void setup() {
-        money = new Money(14000);
-        amount = new Amount(money);
+        money = new Money(5000);
     }
 
     @Test
     public void 생성하기() {
-        assertThat(amount.getValue()).isEqualTo(money.getValue() / Money.LOTTO_PRICE);
+        final int manualCount = 5;
+        Amount amount = new Amount(money, manualCount);
+
+        assertThat(amount.getAutoCount()).isEqualTo(money.getValue() / Money.LOTTO_PRICE - manualCount);
+        assertThat(amount.getManualCount()).isEqualTo(manualCount);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 생성하기_수동갯수가_더_많을때() {
+        final int manualCount = 6;
+        Amount amount = new Amount(money, manualCount);
+
+        assertThat(amount.getAutoCount()).isEqualTo(money.getValue() / Money.LOTTO_PRICE - manualCount);
     }
 
     @Test
     public void 동등성_테스트() {
-        final Amount other = new Amount(money);
+        final int manualCount = 5;
+        final Amount origin = new Amount(money, manualCount);
+        final Amount other = new Amount(money, manualCount);
 
-        assertThat(amount).isEqualTo(other);
+        assertThat(other).isEqualTo(origin);
+    }
+
+    @Test
+    public void 동등성_테스트_객체넘겨_생성한거() {
+        final int manualCount = 5;
+        final Amount origin = new Amount(money, manualCount);
+        final Amount other = new Amount(origin);
+
+        assertThat(other).isEqualTo(origin);
+    }
+
+    @Test
+    public void isSame() {
+        Amount amount = new Amount(money, 0);
+        final int sameCount = (money.getValue() / Money.LOTTO_PRICE);
+        final int graterCount = sameCount + 1;
+
+        assertThat(amount.isSameAutoCount(sameCount)).isTrue();
+        assertThat(amount.isSameAutoCount(graterCount)).isFalse();
     }
 
 }
