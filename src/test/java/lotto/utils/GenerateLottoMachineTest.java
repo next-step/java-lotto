@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("NonAsciiCharacters")
-public class GenerateLottoTest {
+public class GenerateLottoMachineTest {
 
     @SuppressWarnings("CodeBlock2Expr")
     @Test
@@ -15,7 +15,7 @@ public class GenerateLottoTest {
         IntStream.range(0, 10000000)
                 .parallel()
                 .forEach(i -> {
-                    assertThat(new GenerateLotto().create().stream().distinct())
+                    assertThat(new GenerateLottoMachine().create().stream().distinct())
                             .as("로또 번호가 6개가 아니면 실패")
                             .hasSize(6);
                 });

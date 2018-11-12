@@ -1,6 +1,8 @@
 package lotto;
 
-import lotto.utils.IGenerateLotto;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.utils.GenerateLotto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,22 +15,15 @@ public class LottoGame {
     private int price;
     private final Lottos lottos = new Lottos();
 
-    public LottoGame(final int amount, final IGenerateLotto generateLotto) {
+    public LottoGame(final int amount, final GenerateLotto generateLotto) {
 
         this.amount = amount;
         this.price = DEFAULT_PRICE;
 
-        for (int i = 0; i < calculateCountAvailableForPurchase(); i++) {
-            this.lottos.add(new Lotto(generateLotto));
-        }
-
-        for (int i = 0; i < calculateCountAvailableForPurchase(); i++) {
-            this.lottos.getLottos().forEach(Lotto::createLotto);
-        }
+        initialize(generateLotto);
     }
 
-    @SuppressWarnings("unused")
-    public LottoGame(final int amount, final int price, final IGenerateLotto generateLotto) throws IllegalArgumentException {
+    public LottoGame(final int amount, final int price, final GenerateLotto generateLotto) throws IllegalArgumentException {
 
         this.amount = amount;
         this.price = price;
@@ -37,13 +32,7 @@ public class LottoGame {
             throw new IllegalArgumentException();
         }
 
-        for (int i = 0; i < calculateCountAvailableForPurchase(); i++) {
-            this.lottos.add(new Lotto(generateLotto));
-        }
-
-        for (int i = 0; i < calculateCountAvailableForPurchase(); i++) {
-            this.lottos.getLottos().forEach(Lotto::createLotto);
-        }
+        initialize(generateLotto);
     }
 
     public int getCountAvailableForPurchase() {
@@ -54,14 +43,25 @@ public class LottoGame {
         return lottos.getLottos();
     }
 
-    public void executeAnalysisLottoNumberMatch(final Lotto sourceLotto) {
-        for (Lotto lotto : this.getLottos()) {
-            lotto.calculatorMatchLottoNumber(sourceLotto.getLottoNumber());
+    private int calculateCountAvailableForPurchase() {
+        return new BigDecimal(this.amount / this.price).intValue();
+    }
+
+    private void initialize(final GenerateLotto generateLotto) {
+        addLottos(generateLotto);
+        createLottos();
+    }
+
+    private void createLottos() {
+        for (int i = 0; i < calculateCountAvailableForPurchase(); i++) {
+            this.lottos.getLottos().forEach(Lotto::createLotto);
         }
     }
 
-    private int calculateCountAvailableForPurchase() {
-        return new BigDecimal(this.amount / this.price).intValue();
+    private void addLottos(final GenerateLotto generateLotto) {
+        for (int i = 0; i < calculateCountAvailableForPurchase(); i++) {
+            this.lottos.add(new Lotto(generateLotto));
+        }
     }
 
 }
