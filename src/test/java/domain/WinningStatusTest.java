@@ -73,11 +73,11 @@ public class WinningStatusTest {
     }
 
     private Lotto makeLotto(Integer... numbers) {
-        List<LottoNumber> LottoNumbers = Arrays.stream(numbers)
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        return new Lotto(LottoNumbers, true);
+        return new Lotto(new LottoNumbers(lottoNumbers), true);
     }
 
     private WinningNumber makeWinningNumber(int bonus, Integer... numbers) {

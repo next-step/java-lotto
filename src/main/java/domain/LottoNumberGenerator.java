@@ -11,7 +11,7 @@ public class LottoNumberGenerator {
     private static final int MAXIMUM = 45;
     private static final int PICK = 6;
 
-    public static List<LottoNumber> generateNumbers() {
+    public static LottoNumbers generateNumbers() {
         List<LottoNumber> candidate = IntStream
             .range(MINIMUM, MAXIMUM)
             .mapToObj(LottoNumber::new)
@@ -22,6 +22,6 @@ public class LottoNumberGenerator {
         List<LottoNumber> lottoNumbers = candidate.subList(0, PICK);
         Collections.sort(lottoNumbers);
 
-        return Collections.unmodifiableList(lottoNumbers);
+        return new LottoNumbers(lottoNumbers);
     }
 }

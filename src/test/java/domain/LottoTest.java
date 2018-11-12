@@ -28,9 +28,11 @@ public class LottoTest {
         assertThat(lotto.matchBonus(winningNumber)).isTrue();
     }
 
-    private List<LottoNumber> lottoNumbers(Integer... args) {
-        return Arrays.stream(args)
+    private LottoNumbers lottoNumbers(Integer... args) {
+        List<LottoNumber> numbers = Arrays.stream(args)
             .map(LottoNumber::new)
             .collect(Collectors.toList());
+
+        return new LottoNumbers(numbers);
     }
 }

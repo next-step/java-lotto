@@ -1,15 +1,12 @@
 package domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class Lotto {
 
-    private final List<LottoNumber> numbers;
+    private final LottoNumbers lottoNumbers;
     private final boolean isAutoGame;
 
-    public Lotto(List<LottoNumber> numbers, boolean isAutoGame) {
-        this.numbers = numbers;
+    public Lotto(LottoNumbers lottoNumbers, boolean isAutoGame) {
+        this.lottoNumbers = lottoNumbers;
         this.isAutoGame = isAutoGame;
     }
 
@@ -18,22 +15,15 @@ public class Lotto {
     }
 
     public int match(WinningNumber winningNumber) {
-        return (int) numbers.stream()
-            .filter(winningNumber::isContain)
-            .count();
+        return lottoNumbers.match(winningNumber);
     }
 
     public boolean matchBonus(WinningNumber winningNumber) {
-        return numbers.stream()
-            .anyMatch(winningNumber::isBonusMatched);
+        return lottoNumbers.matchBonus(winningNumber);
     }
 
     @Override
     public String toString() {
-        return "[" +
-            String.join(
-                ", ",
-                numbers.stream().map(String::valueOf).collect(Collectors.toList())) +
-            "]";
+        return "[" + lottoNumbers.toString() + "]";
     }
 }

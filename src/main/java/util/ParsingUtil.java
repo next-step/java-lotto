@@ -1,6 +1,7 @@
 package util;
 
 import domain.LottoNumber;
+import domain.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,12 +17,14 @@ public class ParsingUtil {
             .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> parseStringToLottoNumbers(String s) {
+    public static LottoNumbers parseStringToLottoNumbers(String s) {
         String[] split = s.replaceAll("\\s+", "").split(",");
 
-        return Arrays.stream(split)
+        List<LottoNumber> numbers = Arrays.stream(split)
             .mapToInt(Integer::parseInt)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
+
+        return new LottoNumbers(numbers);
     }
 }
