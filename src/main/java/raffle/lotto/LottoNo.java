@@ -7,10 +7,10 @@ public class LottoNo implements Comparable<LottoNo> {
     private int lottoNumber;
 
     public LottoNo(int lottoNumber){
-        this.lottoNumber = lottoNumber;
         if(!isLottoNumber()){
             new RuntimeException("보너스 로또 범위의 숫자가 아닙니다.");
         }
+        this.lottoNumber = lottoNumber;
     }
 
     public boolean isLottoNumber() {
@@ -24,5 +24,9 @@ public class LottoNo implements Comparable<LottoNo> {
 
     public int getLottoNumber() {
         return lottoNumber;
+    }
+
+    public boolean isLotto(LottoNo lottoNumber) {
+        return getLottoNumber() == lottoNumber.getLottoNumber();
     }
 }

@@ -22,19 +22,15 @@ public class Lotto {
     }
 
     public int getWinCount(Lotto lastWeekLotto) {
-        return (int) lottoNumber.stream().filter(lottoNo -> matching(lottoNo.getLottoNumber(), lastWeekLotto.getLottoNumber())).count();
+        return (int) lottoNumber.stream().filter(lottoNo -> matching(lottoNo, lastWeekLotto)).count();
     }
 
-    private boolean matching(int lottoNumber, List<LottoNo> lastWeekLotto) {
-        return lastWeekLotto.stream().anyMatch(lottoNo -> lottoNo.getLottoNumber() == lottoNumber);
-    }
-
-    private boolean isaBoolean(int lottoNumber, LottoNo lottoNo) {
-        return lottoNo.getLottoNumber() == lottoNumber;
+    private boolean matching(LottoNo lottoNumber, Lotto lastWeekLotto) {
+        return lastWeekLotto.getLottoNumber().stream().anyMatch(lottoNo -> lottoNo.isLotto(lottoNumber));
     }
 
     public boolean hasBonus(LottoNo bonusLotto) {
-        return (int) lottoNumber.stream().filter(lottoNo -> isaBoolean(bonusLotto.getLottoNumber(), lottoNo)).count() > 0;
+        return (int) lottoNumber.stream().filter(lottoNo -> bonusLotto.isLotto(lottoNo)).count() > 0;
     }
 
 }

@@ -1,6 +1,7 @@
 package raffle.lotto;
 
 import raffle.lotto.money.Money;
+import raffle.lotto.validator.LottoNumberValidator;
 import raffle.lotto.validator.LottoValidator;
 import raffle.lotto.win.*;
 
@@ -21,13 +22,11 @@ public class LottoMachine {
     private List<Lotto> lottos;
     private LottoValidator lottoValidator;
     private Money money;
-    private LottosGenerator lottosGenerator;
 
-    public LottoMachine(Money moeny, LottoValidator lottoValidator, LottosGenerator lottosGenerator) {
+    public LottoMachine(Money moeny, LottosGenerator lottosGenerator) {
         this.money = moeny;
-        this.lottosGenerator = lottosGenerator;
         this.lottos = lottosGenerator.generate(moeny);
-        this.lottoValidator = lottoValidator;
+        this.lottoValidator = new LottoNumberValidator();
         if(lottoValidator.validator(lottos));
     }
 
