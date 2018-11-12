@@ -5,11 +5,13 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTicket {
+public class Lotto {
+    public static final int LOTTO_NUMERS = 6;
+
     private List<LottoBall> balls = null;
 
-    public LottoTicket(List<LottoBall> balls) {
-        if (balls.size() != LottoMachine.LOTTO_NUMERS || !isUniqueBalls(balls)) {
+    public Lotto(List<LottoBall> balls) {
+        if (balls.size() != LOTTO_NUMERS || !isUniqueBalls(balls)) {
             throw new IllegalArgumentException("로또복권은 서로다른 숫자 6자리로 이루어져야한다.");
         }
         this.balls = Lists.newArrayList(balls);
@@ -17,29 +19,29 @@ public class LottoTicket {
     }
 
     private boolean isUniqueBalls(List<LottoBall> balls) {
-        return balls.stream().distinct().count() == LottoMachine.LOTTO_NUMERS;
+        return balls.stream().distinct().count() == LOTTO_NUMERS;
     }
 
     public List<LottoBall> getNumbers() {
         return Collections.unmodifiableList(this.balls);
     }
 
-    public int howManyMatch(LottoTicket otherTicket) {
+    public int howManyMatchBall(Lotto otherLotto) {
         int count = 0;
-        for (LottoBall ball : otherTicket.getNumbers()) {
-            if (isMatch(ball)) {
+        for (LottoBall ball : this.balls) {
+            if (otherLotto.hasBall(ball)) {
                 count++;
             }
         }
         return count;
     }
 
-    private boolean isMatch(LottoBall ball) {
-        return this.balls.contains(ball);
-    }
-
     @Override
     public String toString() {
         return this.balls.toString();
+    }
+
+    public boolean hasBall(LottoBall bonusBall) {
+        return this.balls.contains(bonusBall);
     }
 }

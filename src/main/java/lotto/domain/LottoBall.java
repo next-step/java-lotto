@@ -1,10 +1,15 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoBall implements Comparable<LottoBall> {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+
     private int number;
 
     public LottoBall(int number) {
-        if (number < 0 || number > 45) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또볼은 1-45의 숫자로 가능합니다.");
         }
         this.number = number;
@@ -38,5 +43,13 @@ public class LottoBall implements Comparable<LottoBall> {
     @Override
     public String toString() {
         return  Integer.toString(number);
+    }
+
+    public boolean isIncludeIn(List<LottoBall> balls) {
+        return balls.contains(this);
+    }
+
+    public static LottoBall of(int number) {
+        return new LottoBall(number);
     }
 }

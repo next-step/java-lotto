@@ -7,17 +7,26 @@ import org.junit.Test;
 public class LottoResultTest {
 
     @Test
-    public void  당첨금_검증() {
+    public void  상금_있는_검증() {
+        Money money = new Money(4000);
         LottoResult lottoResult = new LottoResult();
-        lottoResult.addResult(LottoMachine.getPrize(3));  // 5000
-        lottoResult.addResult(LottoMachine.getPrize(3));  // 5000
-        lottoResult.addResult(LottoMachine.getPrize(4));  // 50000
-        lottoResult.addResult(LottoMachine.getPrize(5));  // 1500000
+        lottoResult.addResult(LottoPrize.FIFTH);  // 5000
+        lottoResult.addResult(LottoPrize.FIFTH);  // 5000
+        lottoResult.addResult(LottoPrize.FOURTH);  // 50000
+        lottoResult.addResult(LottoPrize.THIRD);  // 1500000
 
-        assertThat(lottoResult.getCountByMatchCount(3)).isEqualTo(2);
-        assertThat(lottoResult.getCountByMatchCount(4)).isEqualTo(1);
-        assertThat(lottoResult.getCountByMatchCount(5)).isEqualTo(1);
-        assertThat(lottoResult.getRatePercent()).isEqualTo((1500000 + 50000 + 5000 + 5000) / 4000);
+        assertThat(money.calcurateProfitRate(1500000 + 50000 + 5000 + 5000)).isEqualTo((1500000 + 50000 + 5000 + 5000) / 4000);
+    }
+
+    @Test
+    public void  상금_없는_검증() {
+        Money money = new Money(4000);
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.addResult(LottoPrize.NONE);  // 0
+        lottoResult.addResult(LottoPrize.NONE);  // 0
+        lottoResult.addResult(LottoPrize.NONE);  // 0
+
+        assertThat(money.calcurateProfitRate(0)).isEqualTo(0);
     }
 
 }

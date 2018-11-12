@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.LottoHelper;
-
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
@@ -15,25 +13,40 @@ public class LottoStore {
         this.lottoMchine = lottoMchine; 
     }
 
-    public List<LottoTicket> buyTickets(int money) {
-        if (money < LOTTO_GAME_FEE) {
-            throw new IllegalArgumentException(String.format("로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
+    public List<Lotto> buyTickets(Money won) {
+        if (won.isLess(LOTTO_GAME_FEE)) {
+            throw new IllegalArgumentException(String.format("금액이 부족합니다. \n 로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
         }
         
-        List<LottoTicket> tickets = new LinkedList<>();
-        for (int i = 0; i < money / LOTTO_GAME_FEE; i++) {
-            tickets.add(createTicket());
+        List<Lotto> tickets = new ArrayList<>();
+        int times = won.getGameTImes(LOTTO_GAME_FEE);
+        for (int i = 0; i < times; i++) {
+            tickets.add(createLotto());
         }
         return tickets;
     }
 
-    public LottoResult checkTickets(String winningNumber, List<LottoTicket> buyedTickets) {
-        LottoTicket winningTicket = lottoMchine.createTicket(LottoHelper.convertToBalls(winningNumber));
-        return lottoMchine.check(winningTicket, buyedTickets);
+    public LottoResult checkWinningLotto(String winningNumber, int bonusNumber, List<Lotto> buyedTickets) {
+        return check(createWInningLotto(winningNumber, bonusNumber), buyedTickets);
     }
 
-    private LottoTicket createTicket() {
-        return lottoMchine.createTicket();
+    private LottoResult check(WInningLotto winningLotto, List<Lotto> buyedLottos) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : buyedLottos) {
+            int matchCount = winningLotto.howManyMatchBall(lotto);
+            boolean bonusCount = winningLotto.hasBonusBall(lotto);
+            lottoResult.addResult(LottoPrize.findPrize(matchCount, bonusCount));
+        }
+
+        return lottoResult;
+    }
+
+    private WInningLotto createWInningLotto(String winningNumber, int bonusNumber) {
+        return lottoMchine.createWinningLotto(winningNumber, bonusNumber);
+    }
+
+    private Lotto createLotto() {
+        return lottoMchine.createLotto();
     }
 
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import lotto.utils.LottoHelper;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,80 +8,25 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
-    public static final int LOTTO_NUMERS = 6;
-    private final int LOTTO_MIN_NUMBER = 1;
-    private final int LOTTO_MAX_NUMBER = 45;
-
     private List<LottoBall> balls = null;
 
     public LottoMachine() {
         this.balls = makeBalls();
     }
 
-    public LottoTicket createTicket() {
-        return createTicket(selectBalls());
+    public Lotto createLotto() {
+        return createLotto(LottoHelper.pickRandomBalls(this.balls, Lotto.LOTTO_NUMERS));
     }
 
-    public LottoTicket createTicket(List<LottoBall> balls) {
-        return new LottoTicket(balls);
+    public Lotto createLotto(List<LottoBall> balls) {
+        return new Lotto(balls);
     }
 
-    private List<LottoBall> selectBalls() {
-        Collections.shuffle(this.balls);
-        return this.balls.subList(0, LOTTO_NUMERS);
-    }
-
-    public LottoResult check(LottoTicket winningTicket, List<LottoTicket> tickets) {
-        LottoResult lottoResult = new LottoResult();
-        for (LottoTicket ticket : tickets) {
-            int matchCount = ticket.howManyMatch(winningTicket);
-            lottoResult.addResult(LottoPrize.findPrize(matchCount));
-        }
-        
-        return lottoResult;
+    public WInningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
+        return new WInningLotto(createLotto(LottoHelper.convertToBalls(winningNumbers)), LottoHelper.convertToBall(bonusNumber));
     }
 
     private List<LottoBall> makeBalls() {
-        return IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).mapToObj(number -> new LottoBall(number)).collect(Collectors.toList());
-    }
-
-    public static int getPrize(int matchCount) {
-        return LottoPrize.findPrize(matchCount).getPrize();
-    }
-
-    enum LottoPrize {
-        MATCH3(3, 5000),
-        MATCH4(4, 50000),
-        MATCH5(5, 1500000),
-        MATCH6(6, 2000000000);
-
-        private int matchCount;
-        private int prize;
-
-        LottoPrize(int matchCount, int prize) {
-            this.matchCount = matchCount;
-            this.prize = prize;
-        }
-
-        public int getMatchCount() {
-            return matchCount;
-        }
-
-        public int getPrize() {
-            return prize;
-        }
-
-        public static LottoPrize findPrize(int matchCount) {
-            for (LottoPrize prize:LottoPrize.values()) {
-                if (prize.isMatchedCount(matchCount)) {
-                    return prize;
-                }
-            }
-            return null;
-        }
-
-        private boolean isMatchedCount(int matchCount) {
-            return this.matchCount == matchCount;
-        }
+        return IntStream.range(LottoBall.LOTTO_MIN_NUMBER, LottoBall.LOTTO_MAX_NUMBER).mapToObj(number -> new LottoBall(number)).collect(Collectors.toList());
     }
 }
