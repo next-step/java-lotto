@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
@@ -13,13 +13,13 @@ public class LottoStore {
         this.lottoMchine = lottoMchine; 
     }
 
-    public List<Lotto> buyTickets(int money) {
-        if (money < LOTTO_GAME_FEE) {
-            throw new IllegalArgumentException(String.format("로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
+    public List<Lotto> buyTickets(Money won) {
+        if (won.isLess(LOTTO_GAME_FEE)) {
+            throw new IllegalArgumentException(String.format("금액이 부족합니다. \n 로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
         }
         
-        List<Lotto> tickets = new LinkedList<>();
-        int times = money / LOTTO_GAME_FEE;
+        List<Lotto> tickets = new ArrayList<>();
+        int times = won.getGameTImes(LOTTO_GAME_FEE);
         for (int i = 0; i < times; i++) {
             tickets.add(createLotto());
         }

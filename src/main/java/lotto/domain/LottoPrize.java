@@ -25,7 +25,7 @@ public enum LottoPrize {
     }
 
     public int getPrize() {
-        return prize;
+        return this.prize;
     }
 
     public int sum(int number) {
@@ -36,9 +36,13 @@ public enum LottoPrize {
         return this.matchCount == matchCount;
     }
 
+    private boolean isSecond(boolean hasBonusBall) {
+        return THIRD == this && hasBonusBall;
+    }
+
     public static LottoPrize findPrize(int matchCount, boolean hasBonusBall) {
         LottoPrize prize = valueOf(matchCount);
-        if (isSecond(prize, hasBonusBall)) {
+        if (prize.isSecond(hasBonusBall)) {
             return SECOND;
         }
         return prize;
@@ -48,10 +52,6 @@ public enum LottoPrize {
         return Arrays.stream(LottoPrize.values())
                 .filter(value -> value != LottoPrize.NONE)
                 .collect(Collectors.toList());
-    }
-
-    private static boolean isSecond(LottoPrize prize, boolean hasBonusBall) {
-        return THIRD == prize && hasBonusBall;
     }
 
     private static LottoPrize valueOf(int matchCount) {

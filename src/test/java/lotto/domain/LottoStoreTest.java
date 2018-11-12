@@ -18,11 +18,8 @@ public class LottoStoreTest {
     
     @Test
     public void 로또_1000원_구입_확인() {
-        // given
-        int money = 1000;
-        
         // when
-        List<Lotto> tickets = lottoStore.buyTickets(money);
+        List<Lotto> tickets = lottoStore.buyTickets(Money.of(1000));
         
         // then
         assertThat(tickets.size()).isEqualTo(1);
@@ -30,11 +27,8 @@ public class LottoStoreTest {
     
     @Test
     public void 로또_3000원_구입_확인() {
-        // given
-        int money = 3000;
-        
         // when
-        List<Lotto> tickets = lottoStore.buyTickets(money);
+        List<Lotto> tickets = lottoStore.buyTickets(Money.of(3000));
         
         // then
         assertThat(tickets.size()).isEqualTo(3);
@@ -42,11 +36,8 @@ public class LottoStoreTest {
     
     @Test(expected=IllegalArgumentException.class)
     public void 로또_500원_구입_확인() {
-        // given
-        int money = 500;
-        
         // when
-        List<Lotto> tickets = lottoStore.buyTickets(money);
+        List<Lotto> tickets = lottoStore.buyTickets(Money.of(500));
         
         // then
         assertThat(tickets.size()).isEqualTo(0);

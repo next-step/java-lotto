@@ -16,22 +16,10 @@ public class LottoResult {
         return winStats.getOrDefault(lottoPrize, 0);
     }
 
-    public double getRatePercent() {
-        return getTotalPrize() / getMoney();
-    }
-
-    private int getMoney() {
-        int count = 0;
-        for (int ticketCount:this.winStats.values()) {
-            count += ticketCount;
-        }
-        return count * LottoStore.LOTTO_GAME_FEE;
-    }
-
-    private double getTotalPrize() {
+    public int getTotalPrize() {
         return this.winStats.keySet()
                 .stream()
-                .mapToDouble(lottoPrize -> lottoPrize.sum(winStats.get(lottoPrize)))
+                .mapToInt(lottoPrize -> lottoPrize.sum(winStats.get(lottoPrize)))
                 .sum();
     }
 }
