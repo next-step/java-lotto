@@ -7,7 +7,7 @@ public class WInningLotto {
     private LottoBall bonusBall = null;
 
     public WInningLotto(Lotto lotto, LottoBall bonusBall) {
-        if (bonusBall.isIncludeIn(lotto.getNumbers())) {
+        if (lotto.hasBall(bonusBall)) {
             throw new IllegalArgumentException("로또 당첨번호와 보너스 번호는 같을 수 없습니다.");
         }
         this.lotto = lotto;

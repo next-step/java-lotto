@@ -45,10 +45,6 @@ public class LottoBall implements Comparable<LottoBall> {
         return  Integer.toString(number);
     }
 
-    public boolean isIncludeIn(List<LottoBall> balls) {
-        return balls.contains(this);
-    }
-
     public static LottoBall of(int number) {
         return new LottoBall(number);
     }

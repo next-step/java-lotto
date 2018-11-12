@@ -15,4 +15,16 @@ public class InputView {
         System.out.println(message);
         return scanner.next();
     }
+
+    public static String[] inputTryLines(String message, int tryManualLottoCount) {
+        if (tryManualLottoCount > 0) {
+            System.out.println(message);
+            String[] lines = new String[tryManualLottoCount];
+            for (int i = 0; i < tryManualLottoCount; i++) {
+                lines[i] = scanner.next();
+            }
+            return lines;
+        }
+        return null;
+    }
 }

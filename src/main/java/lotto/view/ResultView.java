@@ -2,16 +2,15 @@ package lotto.view;
 
 import java.util.List;
 
-import lotto.domain.LottoPrize;
-import lotto.domain.LottoResult;
-import lotto.domain.Lotto;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 public class ResultView {
 
-    public static void renderBuyedTickets(List<Lotto> tickets) {
-        System.out.println(String.format("%d개를 구매했습니다.", tickets.size()));
-        for (Lotto ticket : tickets) {
+    public static void renderBuyedTickets(LottoTicket tickets) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                tickets.getLottoCountByLottoType(Lotto.LottoType.MANUAL),
+                tickets.getLottoCountByLottoType(Lotto.LottoType.AUTO)));
+        for (Lotto ticket : tickets.getAllLotto()) {
             System.out.println(ticket);
         }
     }

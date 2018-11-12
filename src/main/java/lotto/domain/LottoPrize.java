@@ -55,11 +55,9 @@ public enum LottoPrize {
     }
 
     private static LottoPrize valueOf(int matchCount) {
-        for (LottoPrize prize: LottoPrize.values()) {
-            if (prize.isMatchedCount(matchCount)) {
-                return prize;
-            }
-        }
-        return NONE;
+        return Arrays.stream(LottoPrize.values())
+                .filter(prize -> prize.isMatchedCount(matchCount))
+                .findFirst()
+                .orElse(NONE);
     }
 }

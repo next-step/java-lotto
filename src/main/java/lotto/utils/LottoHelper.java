@@ -17,9 +17,4 @@ public class LottoHelper {
     public static LottoBall convertToBall(int number) {
         return new LottoBall(number);
     }
-
-    public static List<LottoBall> pickRandomBalls(List<LottoBall> balls, int pickCount) {
-        Collections.shuffle(balls);
-        return balls.subList(0, pickCount);
-    }
 }
