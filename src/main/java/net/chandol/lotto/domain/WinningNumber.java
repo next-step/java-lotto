@@ -1,9 +1,10 @@
 package net.chandol.lotto.domain;
 
-import net.chandol.lotto.util.LottoNumberValidator;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.chandol.lotto.util.LottoNumberValidator.validateNumberRange;
+import static net.chandol.lotto.util.LottoNumberValidator.validateUniqueNumbers;
 
 public class WinningNumber {
     private LottoNumber lottoNumber;
@@ -25,27 +26,8 @@ public class WinningNumber {
 
     private void validateNumbers(LottoNumber lottoNumber, Integer bonusNumber) {
         validateNotNull(lottoNumber, bonusNumber);
-        validateBonusNumberRange(bonusNumber);
-        validateUniqueNumbers(lottoNumber, bonusNumber);
-    }
-
-    private void validateNotNull(LottoNumber lottoNumber, Integer bonusNumber) {
-        if (lottoNumber == null || bonusNumber == null) {
-            throw new IllegalArgumentException("입력값을 확인해주세요.");
-        }
-    }
-
-    private void validateBonusNumberRange(Integer bonusNumber) {
-        if (LottoNumberValidator.isInvalidLottoRange(bonusNumber)) {
-            throw new IllegalArgumentException("bonus 번호를 확인해주세요.");
-        }
-    }
-
-    private void validateUniqueNumbers(LottoNumber lottoNumber, Integer bonusNumber) {
-        List<Integer> numbers = new ArrayList<>(lottoNumber.getLottoNumbers());
-        numbers.add(bonusNumber);
-
-        LottoNumberValidator.validateUniqueNumbers(numbers);
+        validateNumberRange(bonusNumber);
+        validateUniqueNumbers(getMergedList(lottoNumber, bonusNumber));
     }
 
     public LottoPrize findPrize(LottoNumber inputLottoNumber) {
@@ -53,5 +35,18 @@ public class WinningNumber {
         boolean isMatchBonusNumber = inputLottoNumber.containsNumber(bonusNumber);
 
         return LottoPrize.getMatchingPrize(matchSize, isMatchBonusNumber);
+    }
+
+    private List<Integer> getMergedList(LottoNumber lottoNumber, Integer bonusNumber) {
+        List<Integer> numbers = new ArrayList<>(lottoNumber.getLottoNumbers());
+        numbers.add(bonusNumber);
+
+        return numbers;
+    }
+
+    private void validateNotNull(LottoNumber lottoNumber, Integer bonusNumber) {
+        if (lottoNumber == null || bonusNumber == null) {
+            throw new IllegalArgumentException("입력값을 확인해주세요.");
+        }
     }
 }

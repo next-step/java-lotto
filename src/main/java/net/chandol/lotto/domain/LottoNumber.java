@@ -5,7 +5,7 @@ import java.util.List;
 import static com.google.common.primitives.Ints.asList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
-import static net.chandol.lotto.util.LottoNumberValidator.validateNumbersRange;
+import static net.chandol.lotto.util.LottoNumberValidator.validateNumbersRanges;
 import static net.chandol.lotto.util.LottoNumberValidator.validateUniqueNumbers;
 import static net.chandol.lotto.util.RandomLottoNumberProvider.getNumbers;
 
@@ -26,7 +26,7 @@ public class LottoNumber {
     private void validateNumbers(List<Integer> numbers) {
         validateNumberSize(numbers);
         validateUniqueNumbers(numbers);
-        validateNumbersRange(numbers);
+        validateNumbersRanges(numbers);
     }
 
     private void validateNumberSize(List<Integer> numbers) {

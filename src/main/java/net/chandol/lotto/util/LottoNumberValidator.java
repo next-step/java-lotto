@@ -6,14 +6,14 @@ public class LottoNumberValidator {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    public static void validateNumbersRange(List<Integer> numbers) {
-        if (containsInvalidRange(numbers)) {
-            throw new IllegalArgumentException("유효하지 않은 범위의 번호입니다.");
-        }
+    public static void validateNumbersRanges(List<Integer> numbers) {
+        numbers.forEach(LottoNumberValidator::validateNumberRange);
     }
 
-    public static boolean isInvalidLottoRange(int n) {
-        return (n < LOTTO_MIN_NUMBER) || (n > LOTTO_MAX_NUMBER);
+    public static void validateNumberRange(int n) {
+        if ((n < LOTTO_MIN_NUMBER) || (n > LOTTO_MAX_NUMBER)) {
+            throw new IllegalArgumentException("유효하지 않은 범위의 번호입니다.");
+        }
     }
 
     public static void validateUniqueNumbers(List<Integer> numbers) {
@@ -25,10 +25,6 @@ public class LottoNumberValidator {
 
     private static long getUniqueNumberCount(List<Integer> numbers) {
         return numbers.stream().distinct().count();
-    }
-
-    private static boolean containsInvalidRange(List<Integer> numbers) {
-        return numbers.stream().anyMatch(LottoNumberValidator::isInvalidLottoRange);
     }
 
 }
