@@ -24,7 +24,7 @@ public class Lotto {
      *
      * @param buyAmount
      */
-    private void createTickets(Long buyAmount) {
+    private void createTickets(long buyAmount) {
         for (int i = 0; i < buyAmount / PRICE; i++) {
             Ticket ticket = new Ticket(makeRandNums());
             tickets.add(ticket);

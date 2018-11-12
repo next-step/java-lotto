@@ -30,7 +30,7 @@ public class ResultView {
      * @param statistics
      * @param buyAmount
      */
-    public static void printResult(Statistics statistics, Long buyAmount) {
+    public static void printResult(Statistics statistics, long buyAmount) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("----------");

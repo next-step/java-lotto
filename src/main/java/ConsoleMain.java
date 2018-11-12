@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ConsoleMain {
     public static void main(String[] args) {
-        Long buyAmount = InputView.purcharseLotto();
+        long buyAmount = InputView.purcharseLotto();
         Lotto lotto = new Lotto(buyAmount);
         List<Ticket> tickets = lotto.getTickets();
         ResultView.printTicketNums(tickets);

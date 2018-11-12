@@ -46,7 +46,7 @@ public class StatisticsTest {
     @Test
     public void 일치_1등1개_2등2개_3등1개_5등1개_수익률() {
 
-        Long moneyAmount = 100000000L;
+        long moneyAmount = 100000000L;
         double profitRate = statistics.getProfitRate(moneyAmount);
         assertThat(profitRate).isEqualTo(20.61505);
     }

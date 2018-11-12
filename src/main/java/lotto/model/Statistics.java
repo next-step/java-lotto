@@ -43,7 +43,7 @@ public class Statistics {
      * @param moneyAmount
      * @return
      */
-    public double getProfitRate(Long moneyAmount) {
+    public double getProfitRate(long moneyAmount) {
         double profitRate = (double) getProfit() / moneyAmount;
         if (Double.isNaN(profitRate)) {
             return 0;
@@ -59,7 +59,7 @@ public class Statistics {
      */
     private int getProfit() {
         return Arrays.stream(PrizeType.values())
-                .mapToInt(p -> p.getPrizeMoney() * getMatchGroupNum(p))
+                .mapToInt(p -> p.getPrizeMoney(getMatchGroupNum(p)))
                 .sum();
     }
 

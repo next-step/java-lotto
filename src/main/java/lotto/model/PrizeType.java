@@ -10,20 +10,24 @@ public enum PrizeType {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private Integer matchNum;
-    private Integer prizeMoney;
+    private int matchNum;
+    private int prizeMoney;
 
-    PrizeType(Integer matchNum, Integer prizeMoney) {
+    PrizeType(int matchNum, int prizeMoney) {
         this.matchNum = matchNum;
         this.prizeMoney = prizeMoney;
     }
 
-    public Integer getMatchNum() {
+    public int getMatchNum() {
         return matchNum;
     }
 
-    public Integer getPrizeMoney() {
+    public int getPrizeMoney() {
         return prizeMoney;
+    }
+
+    public int getPrizeMoney(int num) {
+        return prizeMoney * num;
     }
 
     /**
@@ -34,33 +38,30 @@ public enum PrizeType {
      * @return
      */
     public static PrizeType valueOf(int matchNum, boolean isMatchBonus) {
-        PrizeType[] types = values();
-        PrizeType secondOrThird = getSecondOrThird(matchNum, isMatchBonus);
-        if (secondOrThird != null) {
-            return secondOrThird;
+        if (isSecond(matchNum, isMatchBonus)) {
+            return SECOND;
         }
 
-        return Arrays.stream(types)
+        return Arrays.stream(values())
+                .filter(i -> !i.equals(SECOND))
                 .filter(i -> i.getMatchNum() == matchNum)
                 .findAny().orElse(MISS);
     }
 
     /**
-     * 2등 혹은 3등 가져오기
-     *
+     * 2등인지 여부
      * @param matchNum
      * @param isMatchBonus
      * @return
      */
-    private static PrizeType getSecondOrThird(int matchNum, boolean isMatchBonus) {
+    private static boolean isSecond(int matchNum, boolean isMatchBonus) {
         if (matchNum == SECOND.matchNum && isMatchBonus) {
-            return SECOND;
-        } else if (matchNum == THIRD.matchNum && !isMatchBonus) {
-            return THIRD;
+            return true;
         }
 
-        return null;
+        return false;
     }
+
 
     /**
      * 당첨됐는지 여부

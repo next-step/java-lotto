@@ -15,7 +15,7 @@ public class InputView {
      * 로또 구매
      * @return
      */
-    public static Long purcharseLotto() {
+    public static long purcharseLotto() {
         System.out.println("구입금액을 입력해주세요.");
         Scanner sc = new Scanner(System.in);
         return new PositiveNumber(sc.next()).getValue();
@@ -35,7 +35,7 @@ public class InputView {
         return toPositiveNums(strPrizeNums);
     }
 
-    public static Integer getBounsNum() {
+    public static int getBounsNum() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
 
