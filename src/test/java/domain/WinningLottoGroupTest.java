@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.Before;
 import org.junit.Test;
+import view.ResultView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,16 +12,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WinningLottoGroupTest {
     Lotto lotto;
     LottoGroup lottoGroup;
+    List<Integer> numbers;
 
     @Before
     public void setUp() throws Exception {
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        lotto = new Lotto(numbers);
         lottoGroup = new LottoGroup(Arrays.asList(lotto, lotto, lotto));
     }
 
     @Test
     public void 당첨로또만들기() {
-        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, lotto);
+        WinningLotto winningLotto = new WinningLotto(numbers);
+        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
         assertThat(cobineLottoGroup.getSize()).isEqualTo(3);
     }
 
@@ -28,7 +32,8 @@ public class WinningLottoGroupTest {
     public void 당첨안된로또목록() {
         List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
         Lotto diff = new Lotto(diffNum);
-        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, diff);
+        WinningLotto winningLotto = new WinningLotto(diffNum);
+        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
 
         assertThat(cobineLottoGroup.getSize()).isEqualTo(0);
         assertThat(cobineLottoGroup.isContain(diff)).isFalse();
@@ -37,39 +42,34 @@ public class WinningLottoGroupTest {
 
     @Test
     public void 당첨금총액() {
-        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, lotto);
-        int sum = winningLottoGroup.getTotalReward();
+        WinningLotto winningLotto = new WinningLotto(numbers);
+        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
+        int sum = cobineLottoGroup.getTotalReward();
         assertThat(sum).isEqualTo(3 * (LottoRank.FIRST_PRICE.getPriceRewards()));
-    }
-
-    @Test
-    public void 보너스번호넣기() {
-        Integer bonusNum = 10;
-        lotto.addNumber(bonusNum);
-
     }
 
     @Test
     public void 보너스당첨금() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 7);
-        Lotto lastLotto = new Lotto(numbers);
         Integer bonusNum = 6;
-        lastLotto.addNumber(bonusNum);
-        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
+        WinningLotto winningLotto = new WinningLotto(numbers,bonusNum);
+        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
         int sum = winningLottoGroup.getTotalReward();
         assertThat(sum).isEqualTo(3 * (LottoRank.SECOND_PRICE.getPriceRewards()));
     }
 
     @Test
-    public void 보너스복권구하기() {
+    public void 보너스통계출력하기() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 7);
-        Lotto lastLotto = new Lotto(numbers);
         Integer bonusNum = 6;
-        lastLotto.addNumber(bonusNum);
+        WinningLotto winningLotto = new WinningLotto(numbers,bonusNum);
+        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
 
-        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, lastLotto);
+        for (LottoRank rank : LottoRank.values()) {
+            int lottoCount = winningLottoGroup.getCombineNumbers(rank);
 
-        int lottoCount = winningLottoGroup.getCombineNumbers(LottoRank.SECOND_PRICE.getCombineNum(), true);
-        assertThat(lottoCount).isEqualTo(3);
+            ResultView.printCombineCurrent(rank);
+            ResultView.printCombineCount(lottoCount);
+        }
     }
 }

@@ -1,9 +1,6 @@
 package view;
 
-import domain.LottoGroup;
-import domain.LottoRank;
-import domain.WinningLotto;
-import domain.WinningLottoGroup;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,21 +21,13 @@ public class ResultView {
     }
 
     public static void printLottoGroup(LottoGroup lottoGroup) {
-        lottoGroup.getLottoGroup().stream()
-                .forEach(lotto -> System.out.println(lotto.getNumbers()));
+        lottoGroup.getLottoGroup().forEach((lotto)-> System.out.println(lotto.toString()));
     }
 
     public static void printStats(WinningLottoGroup winningLottoGroup) {
-        boolean isFiveBonus = true;
         for(LottoRank rank :  LottoRank.values()){
-            boolean isBonusCheck = false;
-            int lottoCount = winningLottoGroup.getCombineNumbers(rank.getCombineNum(), isBonusCheck);
-            if(rank.getCombineNum() == 5 && isFiveBonus){
-                lottoCount = winningLottoGroup.getCombineNumbers(rank.getCombineNum(), isFiveBonus);
-                isFiveBonus = !isFiveBonus;
-                isBonusCheck = !isFiveBonus;
-            }
-            ResultView.printCombineCurrent(rank.getCombineNum(), isBonusCheck);
+            int lottoCount = winningLottoGroup.getCombineNumbers(rank);
+            ResultView.printCombineCurrent(rank);
             ResultView.printCombineCount(lottoCount);
         }
     }
@@ -47,11 +36,15 @@ public class ResultView {
         System.out.println(String.format("- %s개", lottoCount));
     }
 
-    public static void printCombineCurrent(int combineCount, boolean isBonus) {
-        System.out.print(String.format("%s개 일치", combineCount ));
-        if(combineCount==5 && isBonus) {
+    public static void printCombineCurrent(LottoRank rank) {
+        System.out.print(String.format("%s개 일치", rank.getCombineNum() ));
+        if(rank.equals(LottoRank.SECOND_PRICE)) {
             System.out.print(", 보너스 볼 일치");
         }
-        System.out.print(String.format(" (%s원)",LottoRank.valueOf(combineCount, isBonus).getPriceRewards()));
+        printRewards(rank);
+    }
+
+    private static void printRewards(LottoRank rank) {
+        System.out.print(String.format(" (%s원)", rank.getPriceRewards()));
     }
 }

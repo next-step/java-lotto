@@ -1,14 +1,10 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoGame {
-    private static final int COMBINE_MIN_NUM = 3;
     private static final int LOTTO_PRICE = 1000;
 
-    public static double getTotalEarningRate(int price, int rewards) {
-        double result = (double) rewards / (double) price;
+    public static double getTotalEarningRate(int price, WinningLottoGroup winningLottoGroup) {
+        double result = (double) winningLottoGroup.getTotalReward() / (double) price;
         if (price == 0) {
             result = 0;
         }
@@ -21,13 +17,5 @@ public class LottoGame {
     }
 
 
-    public static WinningLottoGroup getCombineLottos(LottoGroup lottoGroup, Lotto lastLotto) {
-        List<WinningLotto> winningLottos = new ArrayList<>();
-        for (Lotto lotto : lottoGroup.getLottoGroup()) {
-            if (lotto.getCombineCount(lastLotto) > COMBINE_MIN_NUM) {
-                winningLottos.add(lotto.getCombineNumbers(lastLotto));
-            }
-        }
-        return new WinningLottoGroup(winningLottos);
-    }
+
 }

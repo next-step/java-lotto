@@ -27,14 +27,18 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean matchBonus) {
-
-        if(countOfMatch == 5 && !matchBonus){
-            return LottoRank.THIRD_PRICE;
-        }
-
-        return Arrays.stream(LottoRank.values())
+        LottoRank lottoRank = Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.combineNum == countOfMatch)
                 .findFirst()
                 .orElse(LottoRank.MISS);
+
+        if (isSecondPrizeEquals(lottoRank) && !matchBonus) {
+            return LottoRank.THIRD_PRICE;
+        }
+        return lottoRank;
+    }
+
+    private static boolean isSecondPrizeEquals(LottoRank lottoRank) {
+        return lottoRank.equals(LottoRank.SECOND_PRICE);
     }
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGroup {
+    private static final int COMBINE_MIN_NUM = 3;
+
     private List<Lotto> lottoGroup;
 
     public LottoGroup(List<Lotto> lottoGroup) {
@@ -33,4 +35,14 @@ public class LottoGroup {
         return lottoGroup.size();
     }
 
+    public WinningLottoGroup getCombineLottos(WinningLotto lastLotto) {
+        List<WinningLotto> winningLottos = new ArrayList<>();
+
+        for (Lotto lotto : lottoGroup) {
+            if (lastLotto.getCombineCount(lotto) > COMBINE_MIN_NUM) {
+                winningLottos.add(lastLotto.getCombineNumbers(lotto));
+            }
+        }
+        return new WinningLottoGroup(winningLottos);
+    }
 }
