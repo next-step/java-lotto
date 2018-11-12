@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import jdk.internal.util.xml.impl.Input;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

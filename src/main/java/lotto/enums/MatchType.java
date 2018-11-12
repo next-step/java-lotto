@@ -4,19 +4,21 @@ import java.util.Arrays;
 
 public enum MatchType {
 
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 150_000),
-    SIX(6, 2_000_000_000),
-    BONUS(7, 30_000_000),
-    DEFAULT(0, 0);
+    THREE(3, 5_000, false),
+    FOUR(4, 50_000, false),
+    FIVE(5, 150_000, false),
+    SIX(6, 2_000_000_000, false),
+    BONUS(5, 30_000_000, true),
+    DEFAULT(0, 0, false);
 
     private int match;
     private int price;
+    private boolean bonus;
 
-    MatchType(int match, int price) {
+    MatchType(int match, int price, boolean bonus) {
         this.match = match;
         this.price = price;
+        this.bonus = bonus;
     }
 
     public int getMatch() {
@@ -27,10 +29,10 @@ public enum MatchType {
         return this.price;
     }
 
-    public static MatchType getMatchType(int num) {
+    public static MatchType getMatchType(int num, boolean bonus) {
        return Arrays.stream(MatchType.values())
-                .filter(value -> value.match == num)
-                .findFirst()
-                .orElse(DEFAULT);
+               .filter(value -> value.match == num && value.bonus == bonus)
+               .findFirst()
+               .orElse(DEFAULT);
     }
 }

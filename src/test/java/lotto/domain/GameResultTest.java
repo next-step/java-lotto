@@ -37,10 +37,10 @@ public class GameResultTest {
 
     @Test
     public void 로또_보너스볼_당첨_금액_확인() {
-        Ticket ticket = new Ticket(Arrays.asList(9, 10, 11, 12, 13, 14));
+       // Ticket ticket = new Ticket(Arrays.asList(9, 10, 11, 12, 13, 14));
         Ticket ticket2 = new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7));
         List<Ticket> tickets = new ArrayList<>();
-        tickets.add(ticket);
+        //tickets.add(ticket);
         tickets.add(ticket2);
 
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 10), 7);

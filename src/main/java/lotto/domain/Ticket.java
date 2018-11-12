@@ -17,13 +17,13 @@ public class Ticket {
         return this.numbers;
     }
 
-    public int compareWinningLotto(WinningLotto winningLotto) {
-        int count = getCountOfMatches(winningLotto.getNumbers());
+    public MatchType compareWinningLotto(WinningLotto winningLotto) {
+        int count = getCountOfMatches(winningLotto.winningLottoStatus());
 
-        if(count == MatchType.FIVE.getMatch() && hasBonus(winningLotto.getBonus()))
-            return MatchType.BONUS.getMatch();
+        if(count == MatchType.FIVE.getMatch() && hasBonus(winningLotto.findBonus()))
+            return MatchType.BONUS;
 
-        return count;
+        return MatchType.getMatchType(count, false);
     }
 
     protected int getCountOfMatches(List<Integer> winningNumbers) {
@@ -32,7 +32,7 @@ public class Ticket {
                 .count();
     }
 
-    private boolean hasBonus(int bonus) {
+    public boolean hasBonus(int bonus) {
         return numbers.contains(bonus);
     }
 

@@ -12,6 +12,6 @@ public class LottoMachineTest {
     public void 스트링티켓을_티켓으로_변환하는_테스트() {
         WinningLotto result = LottoMachine.convertWinningNumbers("1, 2, 3, 4, 5, 6", 7);
 
-        assertThat(result.getNumbers()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(result.winningLottoStatus()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }
