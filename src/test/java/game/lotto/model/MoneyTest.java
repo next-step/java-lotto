@@ -37,8 +37,9 @@ public class MoneyTest {
     public void 수익률_계산() {
         final Money money = new Money(50000);
         final MatchResult matchResult = new MatchResult();
-        matchResult.incrementMatch(3);
-        matchResult.incrementMatch(3);
+        final Match match = new Match(Rank.THIRD);
+        matchResult.plus(match);
+        matchResult.plus(match);
         final BigDecimal expected = new BigDecimal(matchResult.getTotalPrize())
                 .divide(
                         new BigDecimal(money.getValue()),

@@ -31,7 +31,16 @@ public class Lotto {
         return this.lottoNumbers.toString();
     }
 
-    public int match(Lotto lotto) {
-        return (int) lotto.lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
+    public Rank getMatchRank(Lotto lotto) {
+        int countOfMatch = getMatchOfCount(lotto);
+        return Rank.valueOf(countOfMatch);
+    }
+
+    int getMatchOfCount(Lotto lotto) {
+        return (int) lotto.lottoNumbers.stream().filter(this::contains).count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
     }
 }

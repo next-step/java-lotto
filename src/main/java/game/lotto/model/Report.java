@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 public class Report {
 
+    public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String LOSS_MESSAGE = "손해";
     public static final String SAME_MESSAGE = "본전";
     public static final String PROFIT_MESSAGE = "이익";
 
     private static final BigDecimal STANDARD = BigDecimal.ONE;
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     private MatchResult matchResult;
     private Money money;
@@ -23,8 +23,11 @@ public class Report {
         StringBuilder report = new StringBuilder();
         report.append("당첨 통계").append(LINE_SEPARATOR);
         report.append("---------").append(LINE_SEPARATOR);
-        for (MatchType matchType : MatchType.values()) {
-            appendMatch(report, matchType);
+        for (Rank rank : Rank.values()) {
+            if (rank.isMiss()) {
+                continue;
+            }
+            appendMatch(report, rank);
         }
         BigDecimal earningRate = money.computeEarningRate(matchResult.getTotalPrize());
         report.append(
@@ -39,8 +42,8 @@ public class Report {
         return report.toString();
     }
 
-    private StringBuilder appendMatch(StringBuilder stringBuilder, MatchType matchType) {
-        stringBuilder.append(matchType.getMessage()).append(" - ").append(matchResult.getMatch(matchType).getCount()).append("개").append(LINE_SEPARATOR);
+    private StringBuilder appendMatch(StringBuilder stringBuilder, Rank rank) {
+        stringBuilder.append(rank.getMessage()).append(" - ").append(matchResult.getMatch(rank).getCount()).append("개").append(LINE_SEPARATOR);
         return stringBuilder;
     }
 

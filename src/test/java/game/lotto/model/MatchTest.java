@@ -11,7 +11,7 @@ public class MatchTest {
 
     @Before
     public void setup() {
-        this.match = new Match(MatchType.MATCH_3);
+        this.match = new Match(Rank.FIFTH);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class MatchTest {
             match.plusCount();
         }
 
-        assertThat(match.getTotalPrize()).isEqualTo(match.getMatchType().getPrize() * incrementCount);
+        assertThat(match.getTotalPrize()).isEqualTo(match.getRank().getPrize() * incrementCount);
     }
 
 }

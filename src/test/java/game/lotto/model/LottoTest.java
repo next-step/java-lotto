@@ -49,8 +49,36 @@ public class LottoTest {
         final Set<LottoNumber> otherNumbers = LottoNumberFactory.createLottoNumbers(otherStringNumbers);
         final Lotto otherLotto = new Lotto(otherNumbers);
 
-        int matchCount = lotto.match(otherLotto);
+        int matchCount = lotto.getMatchOfCount(otherLotto);
 
         assertThat(matchCount).isEqualTo(3);
+    }
+
+    @Test
+    public void 일치하는_랭크() {
+        final String stringNumbers = "1, 2, 3, 7, 8, 9";
+        final Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
+
+        final String otherStringNumbers = "1, 2, 3, 5, 7, 8";
+        final Set<LottoNumber> otherNumbers = LottoNumberFactory.createLottoNumbers(otherStringNumbers);
+        final Lotto otherLotto = new Lotto(otherNumbers);
+
+        Rank rank = lotto.getMatchRank(otherLotto);
+
+        assertThat(rank).isEqualByComparingTo(Rank.THIRD);
+    }
+
+    @Test
+    public void 로또_번호_존재_테스트() {
+        final String stringNumbers = "1, 2, 3, 7, 8, 9";
+        final Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
+        final Lotto lotto = new Lotto(lottoNumbers);
+
+        final LottoNumber yes = new LottoNumber(3);
+        final LottoNumber no = new LottoNumber(4);
+
+        assertThat(lotto.contains(yes)).isTrue();
+        assertThat(lotto.contains(no)).isFalse();
     }
 }

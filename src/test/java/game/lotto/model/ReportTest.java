@@ -34,5 +34,22 @@ public class ReportTest {
 
         assertThat(message).isEqualTo("이익");
     }
+    
+    @Test
+    public void 결과생성확인() {
+        
+        final String exepected = "당첨 통계" + Report.LINE_SEPARATOR +
+                                "---------" + Report.LINE_SEPARATOR +
+                                "3개 일치 (5000원) - 0개" + Report.LINE_SEPARATOR +
+                                "4개 일치 (50000원) - 0개" + Report.LINE_SEPARATOR +
+                                "5개 일치 (1500000원) - 0개" + Report.LINE_SEPARATOR +
+                                "5개 일치, 보너스 볼 일치(30000000원) - 0개" + Report.LINE_SEPARATOR +
+                                "6개 일치 (2000000000원) - 0개" + Report.LINE_SEPARATOR +
+                                "총 수익률은 0.00 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
+        Report report = new Report(new MatchResult(), new Money(1000));
+
+        assertThat(report.makeStringReport()).isEqualTo(exepected);
+    }
+    
 }

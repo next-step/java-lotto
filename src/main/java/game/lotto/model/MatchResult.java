@@ -3,42 +3,27 @@ package game.lotto.model;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MatchResult {
 
-    private final Map<MatchType, Match> matchs;
+    private final Map<Rank, Match> matchs;
 
     public MatchResult() {
-        matchs = Arrays.stream(MatchType.values())
+        matchs = Arrays.stream(Rank.values())
                 .collect(
                         Collectors.toMap(
                                 matchType -> matchType,
                                 Match::new,
                                 (before, after) -> before,
-                                () -> new EnumMap<>(MatchType.class)
+                                () -> new EnumMap<>(Rank.class)
                         )
                 );
     }
 
 
-    public void incrementMatch(int matchCount) {
-        Optional<MatchType> optionalMatchType = MatchType.valueOf(matchCount);
-        optionalMatchType.ifPresent(
-                matchType -> matchs.compute(
-                        matchType,
-                        (key, match) -> {
-                            match.plusCount();
-                            return match;
-                        }
-                )
-        );
-
-    }
-
-    public Match getMatch(MatchType matchType) {
-        return new Match(matchs.get(matchType));
+    public Match getMatch(Rank rank) {
+        return new Match(matchs.get(rank));
     }
 
     public long getTotalPrize() {
@@ -47,5 +32,15 @@ public class MatchResult {
 
     public Report makeReport(Money purchaseMoney) {
         return new Report(this, purchaseMoney);
+    }
+
+    public void plus(Match match) {
+        matchs.computeIfPresent(
+                match.getRank(),
+                (key, value) -> {
+                    value.plusCount();
+                    return value;
+                }
+        );
     }
 }
