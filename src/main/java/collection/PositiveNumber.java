@@ -1,9 +1,9 @@
 package collection;
 
 public class PositiveNumber {
-    private Integer value;
+    private Long value;
     public PositiveNumber(String input) {
-        int i = Integer.parseInt(input);
+        Long i = Long.parseLong(input);
         if(i < 0) {
             throw new RuntimeException();
         }
@@ -11,7 +11,7 @@ public class PositiveNumber {
         this.value = i;
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 }

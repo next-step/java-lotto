@@ -15,7 +15,7 @@ public class InputView {
      * 로또 구매
      * @return
      */
-    public static int purcharseLotto() {
+    public static long purcharseLotto() {
         System.out.println("구입금액을 입력해주세요.");
         Scanner sc = new Scanner(System.in);
         return new PositiveNumber(sc.next()).getValue();
@@ -35,6 +35,13 @@ public class InputView {
         return toPositiveNums(strPrizeNums);
     }
 
+    public static int getBounsNum() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner sc = new Scanner(System.in);
+
+        return new PositiveNumber(sc.next()).getValue().intValue();
+    }
+
     /**
      * 양의 정수로 변환
      * @param strPrizeNums
@@ -43,7 +50,7 @@ public class InputView {
     private static List<Integer> toPositiveNums(String[] strPrizeNums) {
         ArrayList<Integer> prizeNums = new ArrayList<>();
         for (int i = 0; i < strPrizeNums.length; i++) {
-            prizeNums.add(new PositiveNumber(strPrizeNums[i]).getValue());
+            prizeNums.add(new PositiveNumber(strPrizeNums[i]).getValue().intValue());
         }
 
         return prizeNums;

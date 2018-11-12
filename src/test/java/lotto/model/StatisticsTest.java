@@ -16,23 +16,38 @@ public class StatisticsTest {
     @Before
     public void setUp() {
         tickets = Arrays.asList(
-                new Ticket(Arrays.asList(1, 2, 3, 7, 8, 9))
-                , new Ticket(Arrays.asList(1, 2, 7, 8, 9, 10))
-                , new Ticket(Arrays.asList(1, 7, 8, 9, 10, 11))
+                new Ticket(Arrays.asList(1, 2, 3, 7, 8, 9)) // 5등
+                , new Ticket(Arrays.asList(1, 2, 7, 8, 9, 10)) // 꽝
+                , new Ticket(Arrays.asList(1, 2, 3, 4, 5, 6)) // 1등
+                , new Ticket(Arrays.asList(1, 2, 3, 4, 5, 7)) // 2등
+                , new Ticket(Arrays.asList(2, 3, 4, 5, 6, 7)) // 2등
+                , new Ticket(Arrays.asList(1, 2, 3, 4, 5, 8)) // 3등
         );
-        statistics = new Statistics(tickets, Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        statistics = new Statistics(tickets, winningTicket);
     }
 
     @Test
-    public void 일치_3개_1개() {
-
-        assertThat(statistics.getMatchGroupNum(3)).isEqualTo(1);
+    public void 일치_5등_1개() {
+        assertThat(statistics.getMatchGroupNum(PrizeType.FIFTH)).isEqualTo(1);
     }
 
     @Test
-    public void 일치_3개_1개수익률() {
-        int moneyAmount = 1000;
+    public void 일치_2등_2개() {
+        assertThat(statistics.getMatchGroupNum(PrizeType.SECOND)).isEqualTo(2);
+    }
+
+    @Test
+    public void 일치_3등_1개() {
+        assertThat(statistics.getMatchGroupNum(PrizeType.THIRD)).isEqualTo(1);
+    }
+
+    @Test
+    public void 일치_1등1개_2등2개_3등1개_5등1개_수익률() {
+
+        long moneyAmount = 100000000L;
         double profitRate = statistics.getProfitRate(moneyAmount);
-        assertThat(profitRate).isEqualTo(5);
+        assertThat(profitRate).isEqualTo(20.61505);
     }
 }
