@@ -12,11 +12,11 @@ public class WinningNumber {
         this.bonus = bonus;
     }
 
-    public boolean isContain(int number) {
-        return numbers.contains(number);
+    public boolean isContain(LottoNumber number) {
+        return numbers.contains(number.getNumber());
     }
 
-    public boolean isBonusMatched(int number) {
-        return number == bonus;
+    public boolean isBonusMatched(LottoNumber number) {
+        return number.getNumber() == bonus;
     }
 }

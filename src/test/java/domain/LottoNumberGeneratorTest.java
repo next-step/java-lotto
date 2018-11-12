@@ -10,9 +10,8 @@ public class LottoNumberGeneratorTest {
 
     @Test
     public void 로또_번호를_반환한다() {
-        List<Integer> numbers = LottoNumberGenerator.generateNumbers();
+        List<LottoNumber> numbers = LottoNumberGenerator.generateNumbers();
 
-        assertThat(numbers)
-            .hasSize(6);
+        assertThat(numbers).hasSize(6);
     }
 }

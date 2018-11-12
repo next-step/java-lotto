@@ -11,7 +11,7 @@ public class LottoMachine {
         List<Lotto> lottoGames = new ArrayList<>();
 
         for (String manualNumber : manualNumbers) {
-            lottoGames.add(new Lotto(ParsingUtil.parseStringToIntList(manualNumber), false));
+            lottoGames.add(new Lotto(ParsingUtil.parseStringToLottoNumbers(manualNumber), false));
         }
 
         int autoGameCount = money.getGameCount() - manualNumbers.size();

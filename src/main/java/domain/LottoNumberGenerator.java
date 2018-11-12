@@ -11,15 +11,15 @@ public class LottoNumberGenerator {
     private static final int MAXIMUM = 45;
     private static final int PICK = 6;
 
-    public static List<Integer> generateNumbers() {
-        List<Integer> candidate = IntStream
+    public static List<LottoNumber> generateNumbers() {
+        List<LottoNumber> candidate = IntStream
             .range(MINIMUM, MAXIMUM)
-            .boxed()
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 
         Collections.shuffle(candidate);
 
-        List<Integer> lottoNumbers = candidate.subList(0, PICK);
+        List<LottoNumber> lottoNumbers = candidate.subList(0, PICK);
         Collections.sort(lottoNumbers);
 
         return Collections.unmodifiableList(lottoNumbers);

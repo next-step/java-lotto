@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -71,7 +73,11 @@ public class WinningStatusTest {
     }
 
     private Lotto makeLotto(Integer... numbers) {
-        return new Lotto(Arrays.asList(numbers), true);
+        List<LottoNumber> LottoNumbers = Arrays.stream(numbers)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
+        return new Lotto(LottoNumbers, true);
     }
 
     private WinningNumber makeWinningNumber(int bonus, Integer... numbers) {

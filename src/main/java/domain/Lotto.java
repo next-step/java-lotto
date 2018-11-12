@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
     private final boolean isAutoGame;
 
-    public Lotto(List<Integer> numbers, boolean isAutoGame) {
+    public Lotto(List<LottoNumber> numbers, boolean isAutoGame) {
         this.numbers = numbers;
         this.isAutoGame = isAutoGame;
     }
