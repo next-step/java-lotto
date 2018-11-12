@@ -20,9 +20,9 @@ public class LottoMachineTest {
 
     @Test
     public void 구입_금액에_맞는_갯수의_자동_로또를_반환한다() {
-        List<Lotto> games = lottoMachine.purchaseLotto(new Money(14500), Collections.emptyList());
+        LottoGames games = lottoMachine.purchaseLotto(new Money(14500), Collections.emptyList());
 
-        assertThat(games).hasSize(14);
+        assertThat(games.getGames()).hasSize(14);
     }
 
     @Test
@@ -32,10 +32,10 @@ public class LottoMachineTest {
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("1,2,3,4,5,6");
 
-        List<Lotto> games = lottoMachine.purchaseLotto(new Money(14500), manualNumbers);
+        LottoGames games = lottoMachine.purchaseLotto(new Money(14500), manualNumbers);
 
-        assertThat(games).hasSize(14);
-        assertThat(games).filteredOn(Lotto::isAutoGame).hasSize(11);
-        assertThat(games).filteredOn(game -> !game.isAutoGame()).hasSize(3);
+        assertThat(games.getGames()).hasSize(14);
+        assertThat(games.getAutoGameCount()).isEqualTo(11);
+        assertThat(games.getManualGameCount()).isEqualTo(3);
     }
 }

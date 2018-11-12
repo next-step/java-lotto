@@ -2,13 +2,12 @@ package domain;
 
 import util.ParsingUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
 
-    public List<Lotto> purchaseLotto(Money money, List<String> manualNumbers) {
-        List<Lotto> lottoGames = new ArrayList<>();
+    public LottoGames purchaseLotto(Money money, List<String> manualNumbers) {
+        LottoGames lottoGames = new LottoGames();
 
         for (String manualNumber : manualNumbers) {
             lottoGames.add(new Lotto(ParsingUtil.parseStringToLottoNumbers(manualNumber), false));
@@ -22,7 +21,7 @@ public class LottoMachine {
         return lottoGames;
     }
 
-    public WinningStatus match(List<Lotto> lottoGames, WinningNumber winningNumber) {
+    public WinningStatus match(LottoGames lottoGames, WinningNumber winningNumber) {
         return new WinningStatus(lottoGames, winningNumber);
     }
 }

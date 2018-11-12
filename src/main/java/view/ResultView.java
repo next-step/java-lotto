@@ -1,26 +1,19 @@
 package view;
 
-import domain.Lotto;
+import domain.LottoGames;
 import domain.Prize;
 import domain.WinningStatus;
 
-import java.util.List;
-
 public class ResultView {
 
-    public static void purchasedLottoGames(List<Lotto> lottoGames) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        int autoGameCount = (int) lottoGames.stream().filter(Lotto::isAutoGame).count();
-
-        stringBuilder.append("수동으로 ")
-            .append(lottoGames.size() - autoGameCount)
-            .append("장, 자동으로 ")
-            .append(autoGameCount)
-            .append("개를 구매했습니다.");
-
-        System.out.println(stringBuilder.toString());
-        lottoGames.forEach(System.out::println);
+    public static void purchasedLottoGames(LottoGames lottoGames) {
+        String puchasedCount = "수동으로 " +
+            lottoGames.getManualGameCount() +
+            "장, 자동으로 " +
+            lottoGames.getAutoGameCount() +
+            "개를 구매했습니다.";
+        System.out.println(puchasedCount);
+        lottoGames.getGames().forEach(System.out::println);
     }
 
     public static void lottoResult(WinningStatus status) {

@@ -1,19 +1,18 @@
 package domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinningStatus {
 
     private final Map<Prize, Integer> result = new HashMap<>();
 
-    public WinningStatus(List<Lotto> lottoGames, WinningNumber winningNumber) {
+    public WinningStatus(LottoGames lottoGames, WinningNumber winningNumber) {
         initialize(lottoGames, winningNumber);
     }
 
-    private void initialize(List<Lotto> lottoGames, WinningNumber winningNumber) {
-        for (Lotto lotto : lottoGames) {
+    private void initialize(LottoGames lottoGames, WinningNumber winningNumber) {
+        for (Lotto lotto : lottoGames.getGames()) {
             Prize prize = Prize.matchPrize(
                 lotto.match(winningNumber),
                 lotto.matchBonus(winningNumber));
