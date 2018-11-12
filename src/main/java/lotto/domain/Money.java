@@ -24,7 +24,7 @@ public class Money {
     }
 
     public double profitRate(Money prize) {
-        return (prize.money * 100) / money;
+        return (double)prize.money / money;
     }
 
     @Override

@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 
 public class MoneyTest {
     @Test
@@ -28,8 +29,8 @@ public class MoneyTest {
     @Test
     public void profitRate() {
         Money prize = new Money(1000);
-        Money investMoney = new Money(10000);
+        Money investMoney = new Money(14000);
         double profitRate = investMoney.profitRate(prize);
-        assertThat(profitRate).isEqualTo(10);
+        assertThat(profitRate).isEqualTo(0.071, offset(0.001));
     }
 }
