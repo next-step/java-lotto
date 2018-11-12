@@ -1,21 +1,20 @@
 package lotto.domain;
 
 public class WinningLotto {
-    private Lotto lotto;
-    private LottoNumber bonus;
+    private final Lotto lotto;
+    private final LottoNumber bonusNo;
 
-    public WinningLotto(Lotto lotto, LottoNumber bonus) {
-        if (lotto.contains(bonus)) {
+    public WinningLotto(Lotto lotto, int no) {
+        this.bonusNo = LottoNumber.of(no);
+        if (lotto.contains(bonusNo)) {
             throw new IllegalArgumentException();
         }
-
         this.lotto = lotto;
-        this.bonus = bonus;
     }
 
     public Rank match(Lotto userLotto) {
-        int countOfMatch = lotto.match(userLotto);
-        boolean matchBonus = userLotto.contains(bonus);
-        return Rank.valueOf(countOfMatch, matchBonus);
+        int matchCount = lotto.match(userLotto);
+        boolean matchBonus = userLotto.contains(bonusNo);
+        return Rank.valueOf(matchCount, matchBonus);
     }
 }

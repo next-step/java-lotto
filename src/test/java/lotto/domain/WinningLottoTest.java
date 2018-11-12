@@ -2,29 +2,17 @@ package lotto.domain;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class WinningLottoTest {
     @Test
-    public void match_first() {
-        Lotto userLotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto lotto = new WinningLotto(userLotto, LottoNumber.of(7));
-        assertThat(lotto.match(userLotto)).isEqualTo(Rank.FIRST);
-    }
-
-    @Test
-    public void match_second() {
-        Lotto userLotto = Lotto.of(1, 2, 3, 4, 5, 7);
-        Lotto winningLotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto lotto = new WinningLotto(winningLotto, LottoNumber.of(7));
-        assertThat(lotto.match(userLotto)).isEqualTo(Rank.SECOND);
-    }
-
-    @Test
-    public void match_miss() {
-        Lotto userLotto = Lotto.of(1, 2, 3, 4, 5, 7);
-        Lotto winningLotto = Lotto.of(1, 2, 8, 9, 10, 11);
-        WinningLotto lotto = new WinningLotto(winningLotto, LottoNumber.of(7));
-        assertThat(lotto.match(userLotto)).isEqualTo(Rank.MISS);
+    public void match() {
+        Lotto userLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+        Rank rank = winningLotto.match(userLotto);
+        assertThat(rank).isEqualTo(Rank.SECOND);
     }
 }

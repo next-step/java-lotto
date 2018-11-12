@@ -19,16 +19,12 @@ public class Money {
         return new Money(money - countOfLotto * MONEY_PER_LOTTO);
     }
 
-    public static Money buyingMoney(int countOfLotto) {
-        return new Money(countOfLotto * MONEY_PER_LOTTO);
-    }
-
     public Money sum(Money money) {
         return new Money(this.money + money.money);
     }
 
     public double profitRate(Money prize) {
-        return prize.money / money;
+        return (prize.money * 100) / money;
     }
 
     @Override

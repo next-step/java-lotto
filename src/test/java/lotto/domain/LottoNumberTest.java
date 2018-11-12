@@ -15,6 +15,11 @@ public class LottoNumberTest {
         assertThat(LottoNumber.of("8 ")).isEqualTo(LottoNumber.of(8));
     }
 
+    @Test
+    public void create_재사용() {
+        assertThat(LottoNumber.of("8") == LottoNumber.of(8)).isTrue();
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void create_1보다_작은_값() {
         LottoNumber.of(0);
