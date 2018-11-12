@@ -11,19 +11,23 @@ public enum Jackpot {
     SAME_5_NUMBERS(5, 1_500_000),
     SAME_6_NUMBERS(6, 2_000_000_000);
 
-    private int matchCount;
+    private int matchNumber;
     private int prizeMoney;
 
-    Jackpot(int matchCount, int prizeMoney) {
-        this.matchCount = matchCount;
+    Jackpot(int matchNumber, int prizeMoney) {
+        this.matchNumber = matchNumber;
         this.prizeMoney = prizeMoney;
     }
 
     public static Jackpot valueOf(int matchCount) {
         return Arrays.stream(Jackpot.values())
-                .filter(jackpot -> jackpot.isSameMatchCount(matchCount))
+                .filter(jackpot -> jackpot.isSameMatchNumber(matchCount))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 데이터가 입력되었습니다."));
+    }
+
+    public int getMatchNumber() {
+        return this.matchNumber;
     }
 
     public int getPrizeMoney() {
@@ -34,7 +38,7 @@ public enum Jackpot {
         return this.prizeMoney * sameCount;
     }
 
-    public boolean isSameMatchCount(int key) {
-        return this.matchCount == key;
+    public boolean isSameMatchNumber(int matchNumber) {
+        return this.matchNumber == matchNumber;
     }
 }

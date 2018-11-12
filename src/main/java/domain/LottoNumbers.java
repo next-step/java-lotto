@@ -57,8 +57,8 @@ public class LottoNumbers {
     }
 
     private List<Integer> getRandomNumbers() {
-        List<Integer> numbers = new ArrayList<>(LOTTO_NUMBER_COUNT);
-        for (int i = 0; i <numbers.size() ; i++) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < LOTTO_NUMBER_COUNT ; i++) {
             numbers.add(shuffle(getLottoAllNumbers()).get(i));
         }
         Collections.sort(numbers);

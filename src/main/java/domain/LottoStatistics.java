@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStatistics {
@@ -22,6 +23,15 @@ public class LottoStatistics {
             }
         }
         return Jackpot.valueOf(sameCount);
+    }
+
+    public List<Jackpot> getJackpots(List<Lotto> lottos) {
+        List<Jackpot> jackpots = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            Jackpot jackpot = getJackpot(lotto.getLottoNumbers());
+            jackpots.add(jackpot);
+        }
+        return jackpots;
     }
 
     private boolean hasNumber(Integer number) {
