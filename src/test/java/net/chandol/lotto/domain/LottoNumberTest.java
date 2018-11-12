@@ -49,5 +49,13 @@ public class LottoNumberTest {
 
         Assertions.assertThat(matchNumbers).containsExactly(5, 6);
     }
+    @Test
+    public void 다른로또번호와매칭사이즈확인() {
+        LottoNumber num1 = LottoNumber.direct(1, 2, 3, 4, 5, 6);
+        LottoNumber num2 = LottoNumber.direct(5, 6, 7, 8, 9, 10);
+        Integer matchNumbers = num1.getMatchSize(num2);
+
+        Assertions.assertThat(matchNumbers).isEqualTo(2);
+    }
 
 }

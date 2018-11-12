@@ -41,6 +41,10 @@ public class LottoNumber {
                 .collect(toList());
     }
 
+    public Integer getMatchSize(LottoNumber another) {
+        return getMatchNumbers(another).size();
+    }
+
     public boolean containsNumber(Integer bonusNumber) {
         return this.getLottoNumbers().contains(bonusNumber);
     }

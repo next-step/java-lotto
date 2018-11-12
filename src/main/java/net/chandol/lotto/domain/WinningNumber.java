@@ -47,4 +47,11 @@ public class WinningNumber {
 
         LottoNumberValidator.validateUniqueNumbers(numbers);
     }
+
+    public LottoPrize findPrize(LottoNumber inputLottoNumber) {
+        Integer matchSize = inputLottoNumber.getMatchSize(this.lottoNumber);
+        boolean isMatchBonusNumber = inputLottoNumber.containsNumber(bonusNumber);
+
+        return LottoPrize.getMatchingPrize(matchSize, isMatchBonusNumber);
+    }
 }
