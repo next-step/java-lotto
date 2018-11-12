@@ -10,7 +10,7 @@ public enum Reward {
     MATCH_NUMBER_FIVE(5, 1500000),
     MATCH_NUMBER_SIX(6, 2000000000);
 
-    public static List<Reward> rewards = Arrays.asList(MATCH_NUMBER_THERE, MATCH_NUMBER_FOUR, MATCH_NUMBER_FIVE, MATCH_NUMBER_SIX);
+    public static final List<Reward> NUMBERS = Arrays.asList(MATCH_NUMBER_THERE, MATCH_NUMBER_FOUR, MATCH_NUMBER_FIVE, MATCH_NUMBER_SIX);
 
     private int matchNumber;
     private int price;

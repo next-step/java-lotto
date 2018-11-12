@@ -28,7 +28,7 @@ public class Lottos {
 
     private static int calculatorRewordAmount(LottoNumber lottoNumber, List<Lotto> lottos) {
         int sum = 0;
-        for (Reward reward : Reward.rewards) {
+        for (Reward reward : Reward.NUMBERS) {
             sum += Lottos.filter(lottoNumber, lottos, reward.getMatchNumber()).size() * reward.getPrice();
         }
         return sum;

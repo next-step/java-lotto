@@ -24,7 +24,7 @@ public abstract class ResultView {
     public static void printAnalysisLottoResult(final LottoNumber lottoNumber, final List<Lotto> lottos, final int lottoPurchaseAmount) {
         final StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n").append("---------\n");
-        Reward.rewards.forEach(reward -> {
+        Reward.NUMBERS.forEach(reward -> {
             sb.append(reward.getMatchNumber()).append("개 일치 (").append(reward.getPrice()).append(")- ").append(Lottos.filter(lottoNumber, lottos, reward.getMatchNumber()).size()).append("개\n");
         });
         sb.append("총 수익률은 ").append(Lottos.getRate(lottoNumber, lottos, lottoPurchaseAmount)).append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
