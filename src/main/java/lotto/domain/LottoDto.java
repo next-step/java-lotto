@@ -1,24 +1,24 @@
 package lotto.domain;
 
+import lotto.enums.Rank;
+
 public class LottoDto {
-    private int winnerCategory;
-    private int defaultMoney;
+    Rank rank;
     private int matchNumber;
     private int winningMoney;
 
-    public LottoDto(int winnerCategory, int defaultMoney, int matchNumber, int winningMoney) {
-        this.winnerCategory = winnerCategory;
-        this.defaultMoney = defaultMoney;
+    public LottoDto(Rank rank, int matchNumber, int winningMoney) {
+        this.rank = rank;
         this.matchNumber = matchNumber;
         this.winningMoney = winningMoney;
     }
 
     public int getDefaultMoney() {
-        return defaultMoney;
+        return rank.getWinningMoney();
     }
 
     public int getWinnerCategory() {
-        return winnerCategory;
+        return rank.getCountOfMatch();
     }
 
     public int getMatchNumber() {
