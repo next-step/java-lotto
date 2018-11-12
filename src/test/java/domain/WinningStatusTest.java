@@ -71,7 +71,7 @@ public class WinningStatusTest {
     }
 
     private Lotto makeLotto(Integer... numbers) {
-        return new Lotto(Arrays.asList(numbers));
+        return new Lotto(Arrays.asList(numbers), true);
     }
 
     private WinningNumber makeWinningNumber(int bonus, Integer... numbers) {

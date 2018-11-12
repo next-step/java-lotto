@@ -9,7 +9,17 @@ import java.util.List;
 public class ResultView {
 
     public static void purchasedLottoGames(List<Lotto> lottoGames) {
-        System.out.println(lottoGames.size() + "개를 구매했습니다.");
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int autoGameCount = (int) lottoGames.stream().filter(Lotto::isAutoGame).count();
+
+        stringBuilder.append("수동으로 ")
+            .append(lottoGames.size() - autoGameCount)
+            .append("장, 자동으로 ")
+            .append(autoGameCount)
+            .append("개를 구매했습니다.");
+
+        System.out.println(stringBuilder.toString());
         lottoGames.forEach(System.out::println);
     }
 

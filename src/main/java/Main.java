@@ -9,8 +9,11 @@ public class Main {
     public static void main(String[] args) {
         Money amount = new Money(InputView.inputPurchaseAmount());
 
+        int manualGameCount = InputView.inputManualGameCount();
+        List<String> manualGameNumbers = InputView.inputManualGameNumbers(manualGameCount);
+
         LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottoGames = lottoMachine.purchaseLotto(amount);
+        List<Lotto> lottoGames = lottoMachine.purchaseLotto(amount, manualGameNumbers);
 
         ResultView.purchasedLottoGames(lottoGames);
 

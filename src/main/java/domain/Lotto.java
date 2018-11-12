@@ -6,9 +6,15 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private final List<Integer> numbers;
+    private final boolean isAutoGame;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers, boolean isAutoGame) {
         this.numbers = numbers;
+        this.isAutoGame = isAutoGame;
+    }
+
+    public boolean isAutoGame() {
+        return isAutoGame;
     }
 
     public int match(WinningNumber winningNumber) {
