@@ -29,20 +29,19 @@ public class Lotto {
     public int howManyMatchBall(Lotto otherLotto) {
         int count = 0;
         for (LottoBall ball : this.balls) {
-            count += isInculdeIn(ball, otherLotto);
+            if (otherLotto.hasBall(ball)) {
+                count++;
+            }
         }
         return count;
-    }
-
-    private int isInculdeIn(LottoBall ball, Lotto lotto) {
-        if (ball.isIncludeIn(lotto.getNumbers())) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override
     public String toString() {
         return this.balls.toString();
+    }
+
+    public boolean hasBall(LottoBall bonusBall) {
+        return this.balls.contains(bonusBall);
     }
 }

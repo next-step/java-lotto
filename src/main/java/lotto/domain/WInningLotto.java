@@ -23,6 +23,6 @@ public class WInningLotto {
     }
 
     public boolean hasBonusBall(Lotto otherLotto) {
-        return this.bonusBall.isIncludeIn(otherLotto.getNumbers());
+        return otherLotto.hasBall(bonusBall);
     }
 }
