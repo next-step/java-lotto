@@ -30,6 +30,15 @@ public class LottoRegistry {
         return this.lottos.size();
     }
 
+    public Amount getAmount() {
+        int autoCount = countAutoType();
+        return new Amount(autoCount, this.lottos.size() - autoCount);
+    }
+
+    private int countAutoType() {
+        return (int) this.lottos.stream().filter(Lotto::isAuto).count();
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(this.lottos);
     }

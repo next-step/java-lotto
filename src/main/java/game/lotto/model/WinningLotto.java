@@ -13,18 +13,13 @@ public class WinningLotto{
         this.bonusNumber = bonusNumber;
     }
 
-    public Match match(Lotto lotto) {
-        Rank rank = lotto.getMatchRank(this.lotto);
+    public Match match(Lotto target) {
 
-        if(isSecondRank(lotto, rank)) {
-            return new Match(Rank.SECOND);
-        }
+        int matchOfCount = this.lotto.getMatchOfCount(target);
+
+        Rank rank = Rank.valueOf(matchOfCount, target, bonusNumber);
 
         return new Match(rank);
-    }
-
-    private boolean isSecondRank(Lotto lotto, Rank rank) {
-        return rank == Rank.THIRD && lotto.contains(bonusNumber);
     }
 
 }

@@ -13,8 +13,8 @@ public class LottoGameTest {
     @Test
     public void 게임_만들기() {
         final Money money = new Money(3000);
-        final Amount expectedAmount = new Amount(money);
-        LottoGame lottoGame = new LottoGame(money);
+        final Amount expectedAmount = new Amount(money, 0);
+        LottoGame lottoGame = new LottoGame(new AutoLottosGenerator(expectedAmount));
 
         assertThat(lottoGame.getAmount()).isEqualTo(expectedAmount);
     }
@@ -24,7 +24,7 @@ public class LottoGameTest {
         final LottoNumber bonus = new LottoNumber(11);
         final String stringWinningNumbers = "1, 2, 3, 4, 5, 6";
         final Set<LottoNumber> winningNumbers = LottoNumberFactory.createLottoNumbers(stringWinningNumbers);
-        final Lotto winningNumberLotto = new Lotto(winningNumbers);
+        final Lotto winningNumberLotto = Lotto.manual(winningNumbers);
 
         LottoGame lottoGame = new LottoGame(createMatchTestLottos());
         MatchResult matchResult = lottoGame.match(new WinningLotto(winningNumberLotto, bonus));
@@ -77,7 +77,7 @@ public class LottoGameTest {
 
     private Lotto creatMatchLotto(String matchNumbers) {
         Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(matchNumbers);
-        return new Lotto(lottoNumbers);
+        return Lotto.manual(lottoNumbers);
     }
 
 }

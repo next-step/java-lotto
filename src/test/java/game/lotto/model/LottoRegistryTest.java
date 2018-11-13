@@ -35,7 +35,7 @@ public class LottoRegistryTest {
     public void 로또추가() {
         final int beforeSize = lottoRegistry.size();
 
-        lottoRegistry.regist(new Lotto());
+        lottoRegistry.regist(Lotto.auto());
 
         assertThat(lottoRegistry.size()).isEqualTo(beforeSize + 1);
     }
@@ -53,7 +53,21 @@ public class LottoRegistryTest {
 
 
     private List<Lotto> createTestLottos(int size) {
-        return IntStream.range(0, size).mapToObj(i -> new Lotto()).collect(Collectors.toList());
+        return IntStream.range(0, size).mapToObj(i -> Lotto.auto()).collect(Collectors.toList());
+    }
+
+    @Test
+    public void 수량확인() {
+        final List<Lotto> lottos = createTestLottos(5);
+        lottos.add(Lotto.manual(LottoNumberFactory.createLottoNumbers("2, 4, 5, 6, 7, 8")));
+
+        lottoRegistry.regists(lottos);
+
+        Amount amount = lottoRegistry.getAmount();
+
+        assertThat(amount.getAutoCount()).isEqualTo(lottos.size() - 1);
+        assertThat(amount.getManualCount()).isEqualTo(1);
+        assertThat(amount.getTotalAmount()).isEqualTo(lottos.size());
     }
 
 }

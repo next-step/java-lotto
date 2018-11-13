@@ -2,22 +2,53 @@ package game.lotto.model;
 
 public class Amount {
 
-    private int value;
+    private int autoCount;
+    private int manualCount;
 
-    public Amount(Money money) {
-        this.value = computeAmount(money);
+    public Amount(Money money, int manualCount) {
+        this.autoCount = computeAmount(money);
+        this.manualCount = manualCount;
+        if (isGraterManualCountThanAutoCount()) {
+            throw new IllegalArgumentException("수동 갯수는 자동 갯수를 초과할 수 없습니다.");
+        }
+        this.autoCount -= this.manualCount;
+    }
+
+    public Amount(int autoCount, int manualCount) {
+        this.autoCount = autoCount;
+        this.manualCount = manualCount;
+        if (isGraterManualCountThanAutoCount()) {
+            throw new IllegalArgumentException("수동 갯수는 자동 갯수를 초과할 수 없습니다.");
+        }
     }
 
     public Amount(Amount amount) {
-        this.value = amount.value;
+        this.autoCount = amount.autoCount;
+        this.manualCount = amount.manualCount;
     }
 
     private int computeAmount(Money money) {
         return money.getValue() / Money.LOTTO_PRICE;
     }
 
-    public int getValue() {
-        return this.value;
+    private boolean isGraterManualCountThanAutoCount() {
+        return this.manualCount > this.autoCount;
+    }
+
+    public int getAutoCount() {
+        return this.autoCount;
+    }
+
+    public int getManualCount() {
+        return this.manualCount;
+    }
+
+    public boolean isSameAutoCount(int value) {
+        return this.autoCount == value;
+    }
+
+    public int getTotalAmount() {
+        return this.autoCount + this.manualCount;
     }
 
     @Override
@@ -27,16 +58,16 @@ public class Amount {
 
         Amount amount = (Amount) o;
 
-        return value == amount.value;
+        return autoCount == amount.autoCount;
     }
 
     @Override
     public int hashCode() {
-        return value;
+        return autoCount;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(this.value);
+        return String.valueOf(this.autoCount);
     }
 }
