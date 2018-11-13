@@ -9,7 +9,7 @@ public class ResultView {
     public static void renderBuyedTickets(LottoTicket tickets) {
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
                 tickets.getManualLottoCount(),
-                tickets.getManualLottoCount()));
+                tickets.getAutoLottoCount()));
         printLotto(tickets.getManualLottos());
         printLotto(tickets.getAutoLottos());
     }
