@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
 
@@ -20,26 +21,16 @@ public class StringCalculator {
         Pattern pattern = Pattern.compile("//(?<divider>.)\n(?<source>.*)");
         Matcher matcher = pattern.matcher(source);
 
-        if (matcher.find()) {
-            return Arrays.asList(matcher.group("source").split(matcher.group("divider")));
-        }
-
-        return Arrays.asList(source.split(",|:"));
+        return Arrays.asList(matcher.find() ?
+                matcher.group("source").split(matcher.group("divider")) :
+                source.split(",|:"));
     }
 
     private static int sum(List<Integer> values) {
-        int result = 0;
-        for (int value : values) {
-            result += value;
-        }
-        return result;
+        return values.stream().mapToInt(Integer::intValue).sum();
     }
 
     private static List<Integer> convertToIntegers(List<String> values) {
-        List<Integer> results = new ArrayList<>();
-        for (String value : values) {
-            results.add(Integer.parseInt(value));
-        }
-        return results;
+        return values.stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 }
