@@ -31,8 +31,8 @@ public class LottoStore {
         return tickets;
     }
 
-    public LottoResult checkWinningLotto(String winningNumber, int bonusNumber, LottoTicket lottoTicket) {
-        return check(createWInningLotto(winningNumber, bonusNumber), lottoTicket);
+    public LottoResult checkWinningLotto(WInningLottoRequest wInningLottoRequest, LottoTicket lottoTicket) {
+        return check(createWInningLotto(wInningLottoRequest), lottoTicket);
     }
 
     private LottoResult check(WInningLotto winningLotto, LottoTicket lottoTicket) {
@@ -46,8 +46,8 @@ public class LottoStore {
         return lottoResult;
     }
 
-    private WInningLotto createWInningLotto(String winningNumber, int bonusNumber) {
-        return new WInningLotto(new Lotto(Lotto.LottoType.WINNING, LottoHelper.convertToBalls(winningNumber)), LottoHelper.convertToBall(bonusNumber));
+    private WInningLotto createWInningLotto(WInningLottoRequest wInningLottoRequest) {
+        return new WInningLotto(new Lotto(Lotto.LottoType.WINNING, LottoHelper.convertToBalls(wInningLottoRequest.getLottoNumbers())), LottoHelper.convertToBall(wInningLottoRequest.getBonusNumber()));
     }
 
     private List<Lotto> createLotto(Lotto.LottoType type, LottoRequest request) {
