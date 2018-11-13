@@ -4,11 +4,10 @@ import lotto.enums.MatchType;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
-
 
 public class GameResult {
 
@@ -16,24 +15,29 @@ public class GameResult {
     private static final int PRICE_PER_ONE_LOTTO = 1_000;
 
     private List<Ticket> tickets;
-    private Map<Integer, Integer> lottoResults;
+    private Map<MatchType, Integer> lottoResults;
 
-    public GameResult(List<Ticket> tickets, Ticket winningNumbers) {
+    public GameResult(List<Ticket> tickets, WinningLotto winningLotto) {
         this.tickets = tickets;
         this.lottoResults = new HashMap<>();
-        generateGameResult(winningNumbers);
+        generateGameResult(winningLotto);
     }
 
-     protected void generateGameResult(Ticket winningNumbers) {
-        initializeMap(winningNumbers);
-         tickets.stream()
-                 .mapToInt(ticket -> ticket.getCountOfMatches(winningNumbers))
-                 .forEach(key -> lottoResults.put(key, lottoResults.get(key) + 1));
-     }
+    protected void generateGameResult(WinningLotto winningLotto) {
+        initializeMap();
+        this.tickets.stream()
+                .map(ticket -> ticket.compareWinningLotto(winningLotto))
+                .forEach(this::updateResult);
+    }
 
-    private void initializeMap(Ticket winningNumbers) {
-        IntStream.rangeClosed(0, winningNumbers.getNumbers().size())
-                .forEach(i -> lottoResults.put(i, 0));
+    private void initializeMap() {
+        for (MatchType matchType : MatchType.values()) {
+            lottoResults.put(matchType, 0);
+        }
+    }
+
+    private void updateResult(MatchType type) {
+        lottoResults.put(type, lottoResults.get(type) + 1);
     }
 
 
@@ -45,20 +49,16 @@ public class GameResult {
     }
 
     public int getTotalAmount() {
-        int totalAmount = 0;
-
-        for(Integer key : lottoResults.keySet()) {
-            totalAmount += MatchType.getPrice(key) * lottoResults.get(key);
-        }
-
-        return totalAmount;
+        return Arrays.stream(MatchType.values())
+                .mapToInt(i -> i.getPrice() * lottoResults.get(i))
+                .sum();
     }
 
     public static BigDecimal calculateBenefitRate(BigDecimal totalWinAmount, BigDecimal purchaseAmount) {
         return totalWinAmount.divide(purchaseAmount, ROUND_SCALE, RoundingMode.DOWN);
     }
 
-    public Map<Integer, Integer> getLottoResults() {
+    public Map<MatchType, Integer> getLottoResults() {
         return lottoResults;
     }
 

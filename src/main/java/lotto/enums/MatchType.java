@@ -1,47 +1,38 @@
 package lotto.enums;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.util.Arrays;
-import java.util.function.Function;
 
 public enum MatchType {
 
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 150_000),
-    SIX(6, 2_000_000_000),
-    DEFAULT(0, 0);
+    THREE(3, 5_000, false),
+    FOUR(4, 50_000, false),
+    FIVE(5, 150_000, false),
+    SIX(6, 2_000_000_000, false),
+    BONUS(5, 30_000_000, true),
+    DEFAULT(0, 0, false);
 
     private int match;
     private int price;
+    private boolean bonus;
 
-    MatchType(int match, int price) {
+    MatchType(int match, int price, boolean bonus) {
         this.match = match;
         this.price = price;
+        this.bonus = bonus;
     }
 
     public int getMatch() {
         return this.match;
     }
 
-    public static int getPrice(int num) {
-        if(THREE.match == num) {
-            return THREE.price;
-        }
+    public int getPrice() {
+        return this.price;
+    }
 
-        if(FOUR.match == num) {
-            return FOUR.price;
-        }
-
-        if(FIVE.match == num) {
-            return FIVE.price;
-        }
-
-        if(SIX.match == num) {
-            return SIX.price;
-        }
-
-        return DEFAULT.price;
+    public static MatchType getMatchType(int num, boolean bonus) {
+       return Arrays.stream(MatchType.values())
+               .filter(value -> value.match == num && value.bonus == bonus)
+               .findFirst()
+               .orElse(DEFAULT);
     }
 }

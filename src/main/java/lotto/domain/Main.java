@@ -17,7 +17,8 @@ public class Main {
         ResultView.printTickets(tickets);
 
         LottoMachine lottoMachine = new LottoMachine(lotto);
-        GameResult gameResult = lottoMachine.playLotto(InputView.inputLastWeeksWinningNumbers());
+        GameResult gameResult = lottoMachine.playLotto(InputView.inputLastWeeksWinningNumbers(), InputView.inputBonusNumber());
+
         ResultView.printLottoResults(gameResult);
     }
 }
