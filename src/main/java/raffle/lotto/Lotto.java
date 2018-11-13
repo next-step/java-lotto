@@ -1,18 +1,18 @@
 package raffle.lotto;
 
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> lottoNumber;
+    private List<LottoNo> lottoNumber;
 
-    public Lotto(List<Integer> lottoNumber) {
+    public Lotto(List<LottoNo> lottoNumber) {
         this.lottoNumber = lottoNumber;
-        lottoNumber.sort(Comparator.naturalOrder());
+        Collections.sort(lottoNumber);
     }
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNo> getLottoNumber() {
         return lottoNumber;
     }
 
@@ -21,16 +21,12 @@ public class Lotto {
         return String.valueOf(lottoNumber.toArray());
     }
 
-    public int getWinCount(Lotto lastWeekLotto) {
-        return (int) lottoNumber.stream().filter(number -> lastWeekLotto.contains(number)).count();
+    public int getWinCount(List<LottoNo> lastWeekLotto) {
+        return (int) lottoNumber.stream().filter(lottoNo -> lottoNo.isLottoNumber(lastWeekLotto)).count();
     }
 
-    private boolean contains(Integer number) {
-        return lottoNumber.contains(number);
-    }
-
-    public boolean hasBonus(int bonusLotto) {
-        return (int) lottoNumber.stream().filter(number -> number.equals(bonusLotto)).count() > 0;
+    public boolean hasBonus(LottoNo bonusLotto) {
+        return (int) lottoNumber.stream().filter(lottoNo -> lottoNo.equals(bonusLotto)).count() > 0;
     }
 
 }

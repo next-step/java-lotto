@@ -1,8 +1,9 @@
 package raffle.lotto;
 
-import raffle.lotto.win.LottoResult;
-import raffle.lotto.win.WinLotto;
-import raffle.lotto.win.WinningLotto;
+import raffle.lotto.money.Money;
+import raffle.lotto.validator.LottoNumberValidator;
+import raffle.lotto.validator.LottoValidator;
+import raffle.lotto.win.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,32 +20,28 @@ public class LottoMachine {
     public static final int LOTTO_MAX = 6;
 
     private List<Lotto> lottos;
+    private LottoValidator lottoValidator;
+    private Money money;
 
-    public LottoMachine(int lottoAmount) {
-        lottos = new ArrayList<Lotto>();
-        int count = lottoAmount / LOTTO_PRICE;
-        for(int i =0; i < count; i++){
-            suffleLotto();
-        }
+    public LottoMachine(Money moeny, LottosGenerator lottosGenerator) {
+        this.money = moeny;
+        this.lottos = lottosGenerator.generate(moeny);
+        this.lottoValidator = new LottoNumberValidator();
+        if(lottoValidator.validator(lottos));
     }
 
-    private void suffleLotto() {
-        List<Integer> lottoNumber = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
-        Collections.shuffle(lottoNumber);
-        lottos.add(new Lotto(lottoNumber.subList(LOTTO_MIN, LOTTO_MAX)));
-    }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult winLotto(Lotto lastWeekLotto, int bonusLotto) {
+    public LottoResult winLotto(List<LottoNo> lastWeekLotto, LottoNo bonusLotto) {
         List<WinLotto> winLottos = new ArrayList<>();
         WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
         for(Lotto lotto : lottos){
             winLottos.add(winningLotto.result(lotto));
         }
-        return new LottoResult(winLottos, LOTTO_PRICE);
+        return new LottoResult(winLottos, LOTTO_PRICE, money);
     }
 
 }

@@ -2,8 +2,10 @@ package raffle.lotto;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,30 +13,31 @@ public class LottoTest {
 
     @Test
     public void 로또입력확인(){
-        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
-        Lotto lotto = new Lotto(number);
+        String lottoNo = "1, 6 , 14 , 44 , 36 , 11";
+        Lotto lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
         assertThat(lotto.getLottoNumber().size()).isEqualTo(6);
     }
 
     @Test
     public void 로또등수4등(){
-        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
-        Lotto lotto = new Lotto(number);
+        String lottoNo = "1, 6 , 5 , 44 , 22 , 15";
+        Lotto lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
-        List<Integer> lastWeekLotto = Arrays.asList(1, 2 , 5 , 11 , 22 , 15);
-        Lotto lottoWin = new Lotto(lastWeekLotto);
+        String lastWeekLotto = "1, 2 , 5 , 11 , 22 , 15";
+        List<LottoNo> lottoWin = Arrays.stream(lastWeekLotto.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList());
 
         assertThat(lotto.getWinCount(lottoWin)).isEqualTo(4);
     }
 
     @Test
     public void 로또등수_보너스볼_여부(){
-        List<Integer> number = Arrays.asList(1, 6 , 5 , 44 , 22 , 15);
-        Lotto lotto = new Lotto(number);
+        String lottoNo = "1, 6 , 5 , 44 , 22 , 15";
+        Lotto lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
-        int bonusLotto = 22;
+        LottoNo bonusLotto = LottoNo.in(22);
 
         assertThat(lotto.hasBonus(bonusLotto)).isTrue();
     }
+
 }
