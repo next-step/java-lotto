@@ -24,7 +24,7 @@ public class Lotto {
      * @param amount
      */
     private void createTickets(Amount amount) {
-        while(amount.canPurcharse(1)) {
+        while (amount.canPurcharse(1)) {
             amount.purcharseTicket(1);
             Ticket ticket = new Ticket(makeRandNums(), true);
             tickets.add(ticket);

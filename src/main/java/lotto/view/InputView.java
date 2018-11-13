@@ -19,6 +19,7 @@ public class InputView {
 
     /**
      * 로또 구매
+     *
      * @return
      */
     public static Amount purcharseLotto() {
@@ -29,6 +30,7 @@ public class InputView {
 
     /**
      * 수동으로 구매할 로또 수
+     *
      * @return
      */
     public static int purcharseManual(Amount buyAmount) {
@@ -42,6 +44,7 @@ public class InputView {
 
     /**
      * 수동으로 구매한 로또 가져오기
+     *
      * @param manualNum
      * @return
      */
@@ -53,11 +56,11 @@ public class InputView {
             Scanner sc = new Scanner(System.in);
             String[] strPrizeNums = split(sc.next());
 
-            if(strPrizeNums.length > MAX_SIZE) {
+            if (strPrizeNums.length > MAX_SIZE) {
                 throw new IllegalStateException("최대 6개의 숫자만 입력 가능");
             }
 
-            tickets.add(new Ticket(toLottoNums(toPositiveNums(strPrizeNums)),false));
+            tickets.add(new Ticket(toLottoNums(toPositiveNums(strPrizeNums)), false));
         }
 
         return tickets;
@@ -66,6 +69,7 @@ public class InputView {
 
     /**
      * 당첨번호 가져오기
+     *
      * @return
      */
     public static List<LottoNum> getPrizeNums() {
@@ -87,6 +91,7 @@ public class InputView {
 
     /**
      * 양의 정수로 변환
+     *
      * @param strPrizeNums
      * @return
      */
@@ -101,6 +106,7 @@ public class InputView {
 
     /**
      * 양의 정수로 변환
+     *
      * @param strPrizeNums
      * @return
      */
@@ -115,6 +121,7 @@ public class InputView {
 
     /**
      * 분리
+     *
      * @param s
      * @return
      */

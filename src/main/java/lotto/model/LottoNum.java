@@ -8,8 +8,8 @@ public class LottoNum {
     private int num;
 
     public LottoNum(int num) {
-        if(num < RANDOM_NUM_MIN || num > RANDOM_NUM_MAX) {
-            throw new IllegalArgumentException("숫자는"+RANDOM_NUM_MIN+"과 "+RANDOM_NUM_MAX+"사이여햐합니다.");
+        if (num < RANDOM_NUM_MIN || num > RANDOM_NUM_MAX) {
+            throw new IllegalArgumentException("숫자는" + RANDOM_NUM_MIN + "과 " + RANDOM_NUM_MAX + "사이여햐합니다.");
         }
         this.num = num;
     }

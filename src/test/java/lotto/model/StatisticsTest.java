@@ -17,12 +17,12 @@ public class StatisticsTest {
     @Before
     public void setUp() {
         tickets = Arrays.asList(
-                new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 7, 8, 9)),false) // 5등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 7, 8, 9, 10)),false) // 꽝
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)),false) // 1등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 7)),false) // 2등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(2, 3, 4, 5, 6, 7)),false) // 2등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 8)),false) // 3등
+                new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 7, 8, 9)), false) // 5등
+                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 7, 8, 9, 10)), false) // 꽝
+                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)), false) // 1등
+                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 7)), false) // 2등
+                , new Ticket(InputView.toLottoNums(Arrays.asList(2, 3, 4, 5, 6, 7)), false) // 2등
+                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 8)), false) // 3등
         );
 
         WinningTicket winningTicket = new WinningTicket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNum(7));

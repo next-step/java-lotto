@@ -50,6 +50,7 @@ public enum PrizeType {
 
     /**
      * 2등인지 여부
+     *
      * @param matchNum
      * @param isMatchBonus
      * @return

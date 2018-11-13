@@ -16,6 +16,7 @@ public class ResultView {
 
     /**
      * 티켓 종류 출력
+     *
      * @param tickets
      */
     public static void printTicketType(List<Ticket> tickets) {
@@ -30,6 +31,7 @@ public class ResultView {
 
     /**
      * 수동 숫자 구하기
+     *
      * @param tickets
      * @param autoNum
      * @return
@@ -40,6 +42,7 @@ public class ResultView {
 
     /**
      * 자동 갯수 구하기
+     *
      * @param tickets
      * @return
      */

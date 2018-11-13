@@ -7,6 +7,7 @@ public class Ticket {
     public static final int PRICE = 1_000;
     private List<LottoNum> nums;
     private boolean isAuto;
+
     public Ticket(List<LottoNum> nums, boolean isAuto) {
         this.nums = nums;
         this.isAuto = isAuto;
@@ -43,6 +44,7 @@ public class Ticket {
 
     /**
      * 자동인지 여부
+     *
      * @return
      */
     public boolean isAuto() {
@@ -51,6 +53,7 @@ public class Ticket {
 
     /**
      * Integer로 변환
+     *
      * @param lottoNums
      * @return
      */

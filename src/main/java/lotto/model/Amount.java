@@ -12,11 +12,12 @@ public class Amount {
 
     /**
      * 빼기
+     *
      * @param num
      */
     public void purcharseTicket(long num) {
         long totalAmount = num * Ticket.PRICE;
-        if(!canPurcharse(num)) {
+        if (!canPurcharse(num)) {
             throw new IllegalArgumentException("더 이상 뺄 수 없습니다.");
         }
 
@@ -25,6 +26,7 @@ public class Amount {
 
     /**
      * 구매 가능한가?
+     *
      * @param num
      * @return
      */
