@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.WinningNumber;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class LottosTest {
                 new Lotto("31,32,3,34,5,36")
         );
 
-        assertThat(Lottos.filter(lottos, new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 1)).hasSize(1);
+        assertThat(Lottos.findWinningNumbers(new WinningNumber(lottos, new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))), 1)).hasSize(1);
     }
 
     @Test
@@ -41,17 +42,23 @@ public class LottosTest {
                 new Lotto("34,33,32,31,30,29")
         );
 
-        assertThat(Lottos.filter(lottos, new ArrayList<>(Arrays.asList(29, 30, 31, 32, 33, 34)), 6)).hasSize(2);
+        assertThat(Lottos.findWinningNumbers(new WinningNumber(lottos, new ArrayList<>(Arrays.asList(29, 30, 31, 32, 33, 34))), 6)).hasSize(2);
     }
 
     @Test
     public void 로또번호_3개가_맞았을떄_수익률_계산() {
-        assertThat(Lottos.getRate(Collections.singletonList(new Lotto("1,2,3,30,31,32")), new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 100000)).isEqualTo(0.05);
+        assertThat(Lottos.getRate(
+                new WinningNumber(Collections.singletonList(new Lotto("1,2,3,30,31,32")), new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                , 100000)
+        ).isEqualTo(0.05);
     }
 
     @Test
     public void 로또번호_6개가_맞았을떄_수익률_계산() {
-        assertThat(Lottos.getRate(Collections.singletonList(new Lotto("1,2,3,4,5,6")), new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 100000)).isEqualTo(20000);
+        assertThat(Lottos.getRate(
+                new WinningNumber(Collections.singletonList(new Lotto("1,2,3,4,5,6")), new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                , 100000)
+        ).isEqualTo(20000);
     }
 
 }

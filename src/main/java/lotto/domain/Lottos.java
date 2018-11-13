@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class Lottos {
 
     private List<Lotto> lottos = new ArrayList<>();
@@ -18,18 +16,18 @@ public class Lottos {
         return lottos;
     }
 
-    public static List<Lotto> filter(final List<Lotto> lottos, final List<Integer> numbers, final int matchNumber) {
-        return lottos.stream().filter(lotto -> lotto.isMatchNumber(numbers, matchNumber)).collect(toList());
+    public static List<Lotto> findWinningNumbers(final WinningNumber winningNumber, final int matchNumber) {
+        return winningNumber.filter(matchNumber);
     }
 
-    public static double getRate(final List<Lotto> lottos, final List<Integer> numbers, final int amount) {
-        return calculatorLottoRate(amount, calculatorRewordAmount(lottos, numbers));
+    public static double getRate(final WinningNumber winningNumber, final int amount) {
+        return calculatorLottoRate(amount, calculatorRewordAmount(winningNumber));
     }
 
-    private static int calculatorRewordAmount(final List<Lotto> lottos, final List<Integer> numbers) {
+    private static int calculatorRewordAmount(final WinningNumber winningNumber) {
         int sum = 0;
         for (Reward reward : Reward.NUMBERS) {
-            sum += Lottos.filter(lottos, numbers, reward.getMatchNumber()).size() * reward.getPrice();
+            sum += Lottos.findWinningNumbers(new WinningNumber(winningNumber.getLottos(), winningNumber.getNumbers()), reward.getMatchNumber()).size() * reward.getPrice();
         }
         return sum;
     }

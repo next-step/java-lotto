@@ -4,6 +4,7 @@ import lotto.LottoGame;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Reward;
+import lotto.domain.WinningNumber;
 
 import java.util.List;
 
@@ -31,12 +32,12 @@ public abstract class ResultView {
             sb.append("개 일치 (");
             sb.append(reward.getPrice());
             sb.append(")- ");
-            sb.append(Lottos.filter(lottoGame.getLottos(), lotto.getNumber(), reward.getMatchNumber()).size());
+            sb.append(Lottos.findWinningNumbers(new WinningNumber(lottoGame.getLottos(), lotto.getNumber()), reward.getMatchNumber()).size());
             sb.append("개\n");
         });
 
         sb.append("총 수익률은 ");
-        sb.append(Lottos.getRate(lottoGame.getLottos(), lotto.getNumber(), amount));
+        sb.append(Lottos.getRate(new WinningNumber(lottoGame.getLottos(), lotto.getNumber()), amount));
         sb.append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 
         System.out.println(sb.toString());
