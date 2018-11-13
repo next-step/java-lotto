@@ -23,4 +23,10 @@ public class StringCalculatorTest {
         assertThat(1).isEqualTo(stringCalculator.add("1,"));
         assertThat(7).isEqualTo(stringCalculator.add("1,2,4"));
     }
+
+    @Test
+    public void add_구분자_쉼표_또는_콜론() {
+        assertThat(1).isEqualTo(stringCalculator.add("1:"));
+        assertThat(7).isEqualTo(stringCalculator.add("1:2:4"));
+    }
 }

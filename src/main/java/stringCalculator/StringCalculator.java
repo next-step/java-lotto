@@ -15,7 +15,7 @@ public class StringCalculator {
     }
 
     private static List<String> split(String source) {
-        return Arrays.asList(source.split(","));
+        return Arrays.asList(source.split(",|:"));
     }
 
     private static int sum(List<Integer> values) {
