@@ -9,7 +9,7 @@ public class LottoStore {
 
     private final LottoMachineFactory lottoMchineFactory;
 
-    public static final int LOTTO_GAME_FEE = 1000;
+    public static final int LOTTO_GAME_FEE = 1_000;
 
     public LottoStore(LottoMachineFactory lottoMchineFactory) {
         this.lottoMchineFactory = lottoMchineFactory;
