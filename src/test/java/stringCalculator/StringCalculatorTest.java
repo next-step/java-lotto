@@ -29,4 +29,9 @@ public class StringCalculatorTest {
         assertThat(1).isEqualTo(stringCalculator.add("1:"));
         assertThat(7).isEqualTo(stringCalculator.add("1:2:4"));
     }
+
+    @Test
+    public void add_커스텀_구분자() {
+        assertThat(6).isEqualTo(stringCalculator.add("//;\n1;2;3"));
+    }
 }

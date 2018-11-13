@@ -3,6 +3,8 @@ package stringCalculator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
@@ -15,6 +17,13 @@ public class StringCalculator {
     }
 
     private static List<String> split(String source) {
+        Pattern pattern = Pattern.compile("//(?<divider>.)\n(?<source>.*)");
+        Matcher matcher = pattern.matcher(source);
+
+        if (matcher.find()) {
+            return Arrays.asList(matcher.group("source").split(matcher.group("divider")));
+        }
+
         return Arrays.asList(source.split(",|:"));
     }
 
