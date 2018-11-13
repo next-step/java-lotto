@@ -1,11 +1,9 @@
 package lotto.domain.lottoMachine;
 
 import lotto.domain.*;
+import lotto.utils.LottoHelper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,23 +16,29 @@ public class DefaultLottoMachine implements LottoMachine {
 
     @Override
     public List<Lotto> createAutoLotto(LottoRequest lottoRequest) {
+        int gameTimes = getAutoGameTimes(lottoRequest);
+        return IntStream.range(0, gameTimes)
+                .mapToObj(i -> {
+                    Collections.shuffle(this.balls);
+                    return Lotto.of(pickLottoBalls());
+                })
+                .collect(Collectors.toList());
+    }
 
+    private int getAutoGameTimes(LottoRequest lottoRequest) {
         int gameTimes = lottoRequest.getTotalGameTimes(LottoStore.LOTTO_GAME_FEE);
         gameTimes -= lottoRequest.getManualGameTimes();
-
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < gameTimes; i++) {
-            Collections.shuffle(this.balls);
-            lottos.add(Lotto.of(pickLottoBalls()));
-        }
-
-        return lottos;
+        return gameTimes;
     }
 
     @Override
     public List<Lotto> createManualLotto(LottoRequest lottoRequest) {
-        if (lottoRequest.getManualGameTimes() == 0) return null;
-        return lottoRequest.getManualLottoNumbers().stream()
+        if (lottoRequest.getManualLottoValues() == null) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.stream(lottoRequest.getManualLottoValues())
+                .map(value -> LottoHelper.toInts(LottoHelper.split(value)))
                 .map(numbers -> Lotto.of(toLottoBalls(numbers)))
                 .collect(Collectors.toList());
     }

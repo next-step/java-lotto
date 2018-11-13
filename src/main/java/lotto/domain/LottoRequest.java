@@ -29,21 +29,7 @@ public class LottoRequest {
         return manualLottoValues == null ? 0 : manualLottoValues.length;
     }
 
-    public List<int[]> getManualLottoNumbers() {
-        return Arrays.asList(this.manualLottoValues).stream()
-                .map(value -> toInts(split(value)))
-                .collect(Collectors.toList());
-    }
-
-    private int[] toInts(String[] values) {
-        int[] numbers = new int[values.length];
-        for (int i = 0; i < values.length; i++) {
-            numbers[i] = Integer.parseInt(values[i]);
-        }
-        return numbers;
-    }
-
-    private String[] split(String value) {
-        return value.split("(\\s+)?,(\\s+)?");
+    public String[] getManualLottoValues() {
+        return manualLottoValues;
     }
 }

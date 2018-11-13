@@ -17,4 +17,16 @@ public class LottoHelper {
     public static LottoBall convertToBall(int number) {
         return new LottoBall(number);
     }
+
+    public static int[] toInts(String[] values) {
+        int[] numbers = new int[values.length];
+        for (int i = 0; i < values.length; i++) {
+            numbers[i] = Integer.parseInt(values[i]);
+        }
+        return numbers;
+    }
+
+    public static String[] split(String value) {
+        return value.split("(\\s+)?,(\\s+)?");
+    }
 }
