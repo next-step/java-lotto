@@ -18,10 +18,11 @@ public class InputView {
         return lottoAmount;
     }
 
-    public static Lotto lastWeekLotto(){
+    public static List<LottoNo> lastWeekLotto(){
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(InputView.inputLottoNumbers());
+        Scanner sc = new Scanner(System.in);
+        return Arrays.stream(sc.nextLine().split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList());
     }
 
     private static List<LottoNo> inputLottoNumbers() {
@@ -33,7 +34,7 @@ public class InputView {
         System.out.println();
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
-        return new LottoNo(sc.nextInt());
+        return LottoNo.in(sc.nextInt());
     }
 
     public static int buyLotto() {
@@ -47,7 +48,6 @@ public class InputView {
     public static List<Lotto> getLottoNumber(int lottoCount) {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        Scanner sc = new Scanner(System.in);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto(InputView.inputLottoNumbers()));

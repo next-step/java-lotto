@@ -35,7 +35,7 @@ public class LottoMachine {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult winLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
+    public LottoResult winLotto(List<LottoNo> lastWeekLotto, LottoNo bonusLotto) {
         List<WinLotto> winLottos = new ArrayList<>();
         WinningLotto winningLotto = new WinningLotto(lastWeekLotto, bonusLotto);
         for(Lotto lotto : lottos){

@@ -3,11 +3,13 @@ package raffle.lotto.win;
 import raffle.lotto.Lotto;
 import raffle.lotto.LottoNo;
 
+import java.util.List;
+
 public class WinningLotto {
-    private Lotto lastWeekLotto;
+    private List<LottoNo> lastWeekLotto;
     private LottoNo bonusLotto;
 
-    public WinningLotto(Lotto lastWeekLotto, LottoNo bonusLotto) {
+    public WinningLotto(List<LottoNo> lastWeekLotto, LottoNo bonusLotto) {
         this.lastWeekLotto = lastWeekLotto;
         this.bonusLotto = bonusLotto;
     }

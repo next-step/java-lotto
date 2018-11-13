@@ -21,16 +21,12 @@ public class Lotto {
         return String.valueOf(lottoNumber.toArray());
     }
 
-    public int getWinCount(Lotto lastWeekLotto) {
-        return (int) lottoNumber.stream().filter(lottoNo -> matching(lottoNo, lastWeekLotto)).count();
-    }
-
-    private boolean matching(LottoNo lottoNumber, Lotto lastWeekLotto) {
-        return lastWeekLotto.getLottoNumber().stream().anyMatch(lottoNo -> lottoNo.isLotto(lottoNumber));
+    public int getWinCount(List<LottoNo> lastWeekLotto) {
+        return (int) lottoNumber.stream().filter(lottoNo -> lottoNo.isLottoNumber(lastWeekLotto)).count();
     }
 
     public boolean hasBonus(LottoNo bonusLotto) {
-        return (int) lottoNumber.stream().filter(lottoNo -> bonusLotto.isLotto(lottoNo)).count() > 0;
+        return (int) lottoNumber.stream().filter(lottoNo -> lottoNo.equals(bonusLotto)).count() > 0;
     }
 
 }

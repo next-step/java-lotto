@@ -22,7 +22,7 @@ public class LottoMachineTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList())));
 
-        Money money = new Money(1 , 13000);
+        Money money = new Money(1 , 13_000);
 
         LottoMachine lottoMachine = new LottoMachine(money, new LottosCreation(lottos));
         assertThat(lottoMachine.getLottos()).hasSize(13);

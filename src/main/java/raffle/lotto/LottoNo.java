@@ -1,6 +1,7 @@
 package raffle.lotto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static raffle.lotto.LottoMachine.LOTTO_MAX_NUMBER;
@@ -34,7 +35,7 @@ public class LottoNo implements Comparable<LottoNo> {
         return lottoNumber;
     }
 
-    public boolean isLotto(LottoNo lottoNumber) {
-        return getLottoNumber() == lottoNumber.getLottoNumber();
+    public boolean isLottoNumber(List<LottoNo> lottoNumber) {
+        return lottoNumber.stream().anyMatch(lottoNo -> lottoNo.equals(this));
     }
 }

@@ -25,7 +25,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
         String lastWeekLotto = "1, 2 , 5 , 11 , 22 , 15";
-        Lotto lottoWin = new Lotto(Arrays.stream(lastWeekLotto.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
+        List<LottoNo> lottoWin = Arrays.stream(lastWeekLotto.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList());
 
         assertThat(lotto.getWinCount(lottoWin)).isEqualTo(4);
     }
@@ -35,7 +35,7 @@ public class LottoTest {
         String lottoNo = "1, 6 , 5 , 44 , 22 , 15";
         Lotto lotto = new Lotto(Arrays.stream(lottoNo.split(", ")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()));
 
-        LottoNo bonusLotto = new LottoNo(22);
+        LottoNo bonusLotto = LottoNo.in(22);
 
         assertThat(lotto.hasBonus(bonusLotto)).isTrue();
     }
