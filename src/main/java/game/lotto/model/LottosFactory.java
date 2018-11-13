@@ -11,7 +11,7 @@ public class LottosFactory {
     public static Set<Lotto> createRandomLottos(int size) {
         Set<Lotto> lottos = new HashSet<>();
         while (lottos.size() != size) {
-            Lotto randomLotto = new Lotto();
+            Lotto randomLotto = Lotto.auto();
             lottos.add(randomLotto);
         }
         return lottos;
@@ -20,7 +20,7 @@ public class LottosFactory {
     public static Set<Lotto> createManualLottos(List<String> manualNumbers) {
         Set<Lotto> manualLottos = manualNumbers.stream()
                 .map(LottoNumberFactory::createLottoNumbers)
-                .map(Lotto::new)
+                .map(Lotto::manual)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
         if(manualNumbers.size() != manualLottos.size()) {
@@ -31,12 +31,12 @@ public class LottosFactory {
     }
 
     public static Set<Lotto> createComplexLottos(Amount amount, List<String> manualNumbers) {
-        int totalSize = amount.getAutoCount() + manualNumbers.size();
+        int totalSize = amount.getTotalAmount();
 
         Set<Lotto> complex = createManualLottos(manualNumbers);
 
         while (complex.size() != totalSize) {
-            Lotto randomLotto = new Lotto();
+            Lotto randomLotto = Lotto.auto();
             complex.add(randomLotto);
         }
 

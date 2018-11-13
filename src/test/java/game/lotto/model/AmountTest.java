@@ -61,4 +61,12 @@ public class AmountTest {
         assertThat(amount.isSameAutoCount(graterCount)).isFalse();
     }
 
+    @Test
+    public void getTotalAmount() {
+        final int expectedCount = (money.getValue() / Money.LOTTO_PRICE);
+        final Amount amount = new Amount(money, 2);
+
+        assertThat(amount.getTotalAmount()).isEqualTo(expectedCount);
+    }
+
 }

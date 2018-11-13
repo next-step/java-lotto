@@ -3,7 +3,6 @@ package game.lotto.model;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -15,20 +14,9 @@ public class LottoGameTest {
     public void 게임_만들기() {
         final Money money = new Money(3000);
         final Amount expectedAmount = new Amount(money, 0);
-        LottoGame lottoGame = new LottoGame(money, new ArrayList<>());
+        LottoGame lottoGame = new LottoGame(new AutoLottosGenerator(expectedAmount));
 
         assertThat(lottoGame.getAmount()).isEqualTo(expectedAmount);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void 게임_만들기_수동갯수_초과() {
-        final Money money = new Money(1000);
-        final List<String> manualNumbers = Arrays.asList(
-                "1, 2, 3, 4, 5, 6",
-                "2, 3, 4, 5, 6, 7"
-        );
-
-        new LottoGame(money, manualNumbers);
     }
 
     @Test
@@ -36,7 +24,7 @@ public class LottoGameTest {
         final LottoNumber bonus = new LottoNumber(11);
         final String stringWinningNumbers = "1, 2, 3, 4, 5, 6";
         final Set<LottoNumber> winningNumbers = LottoNumberFactory.createLottoNumbers(stringWinningNumbers);
-        final Lotto winningNumberLotto = new Lotto(winningNumbers);
+        final Lotto winningNumberLotto = Lotto.manual(winningNumbers);
 
         LottoGame lottoGame = new LottoGame(createMatchTestLottos());
         MatchResult matchResult = lottoGame.match(new WinningLotto(winningNumberLotto, bonus));
@@ -89,7 +77,7 @@ public class LottoGameTest {
 
     private Lotto creatMatchLotto(String matchNumbers) {
         Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(matchNumbers);
-        return new Lotto(lottoNumbers);
+        return Lotto.manual(lottoNumbers);
     }
 
 }

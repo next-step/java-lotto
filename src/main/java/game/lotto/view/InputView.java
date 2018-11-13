@@ -1,5 +1,6 @@
 package game.lotto.view;
 
+import game.lotto.model.Amount;
 import game.lotto.model.LottoNumber;
 import game.lotto.model.Money;
 
@@ -36,10 +37,10 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<String> readManualNumbers(int manualCount) {
+    public static List<String> readManualNumbers(Amount amount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> manualNumbers = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
+        for (int i = 0; i < amount.getManualCount(); i++) {
             manualNumbers.add(scanner.nextLine());
         }
         return manualNumbers;

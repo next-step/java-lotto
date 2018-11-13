@@ -1,6 +1,5 @@
 package game.lotto.model;
 
-import game.lotto.util.RandomNumberGenerator;
 import game.lotto.util.WinningNumberSplitor;
 
 import java.util.Arrays;
@@ -14,8 +13,7 @@ public class LottoNumberFactory {
         Set<LottoNumber> lottoNumbers = new TreeSet<>();
 
         while (lottoNumbers.size() != Lotto.NUMBER_SIZE) {
-            int randomNumber = RandomNumberGenerator.generateStartWithOne(LottoNumber.MAX);
-            LottoNumber lottoNumber = new LottoNumber(randomNumber);
+            LottoNumber lottoNumber = LottoNumberPool.getRandomLottoNumber();
 
             if (lottoNumbers.contains(lottoNumber)) {
                 continue;
@@ -36,7 +34,7 @@ public class LottoNumberFactory {
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(winningNumbers)
                                                 .mapToInt(Integer::parseInt)
-                                                .mapToObj(LottoNumber::new)
+                                                .mapToObj(LottoNumberPool::getLottoNumber)
                                                 .collect(Collectors.toCollection(TreeSet::new));
 
         if(lottoNumbers.size() < Lotto.NUMBER_SIZE) {

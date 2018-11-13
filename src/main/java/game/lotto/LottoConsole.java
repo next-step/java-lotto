@@ -13,9 +13,15 @@ public class LottoConsole {
         Money purchaseMoney = InputView.readPurchaseMoney();
 
         int manualCount = InputView.readManualCount();
-        List<String> manualNumbers = InputView.readManualNumbers(manualCount);
+        Amount amount = new Amount(purchaseMoney, manualCount);
 
-        LottoGame lottoGame = new LottoGame(purchaseMoney, manualNumbers);
+        List<String> manualNumbers = InputView.readManualNumbers(amount);
+
+        LottosGenerator generator = new ComplexLottosGenerator(
+                new AutoLottosGenerator(amount),
+                new ManulLottosGenerator(manualNumbers)
+        );
+        LottoGame lottoGame = new LottoGame(generator);
 
         ResultView.printAmount(lottoGame.getAmount());
         ResultView.printLottos(lottoGame.getLottos());
@@ -25,7 +31,7 @@ public class LottoConsole {
 
         LottoNumber bonus = InputView.readBonusNumber();
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningLottoNumbers), bonus);
+        WinningLotto winningLotto = new WinningLotto(Lotto.manual(winningLottoNumbers), bonus);
 
         MatchResult matchResult = lottoGame.match(winningLotto);
 

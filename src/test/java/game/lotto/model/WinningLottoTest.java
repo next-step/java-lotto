@@ -49,7 +49,7 @@ public class WinningLottoTest {
 
     private Lotto createLotto(String stringNumbers) {
         Set<LottoNumber> lottoNumbers = LottoNumberFactory.createLottoNumbers(stringNumbers);
-        return new Lotto(lottoNumbers);
+        return Lotto.manual(lottoNumbers);
     }
 
 }

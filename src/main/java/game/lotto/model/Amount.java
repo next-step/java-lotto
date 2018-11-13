@@ -14,6 +14,13 @@ public class Amount {
         this.autoCount -= this.manualCount;
     }
 
+    public Amount(int autoCount, int manualCount) {
+        this.autoCount = autoCount;
+        this.manualCount = manualCount;
+        if (isGraterManualCountThanAutoCount()) {
+            throw new IllegalArgumentException("수동 갯수는 자동 갯수를 초과할 수 없습니다.");
+        }
+    }
 
     public Amount(Amount amount) {
         this.autoCount = amount.autoCount;
@@ -36,6 +43,14 @@ public class Amount {
         return this.manualCount;
     }
 
+    public boolean isSameAutoCount(int value) {
+        return this.autoCount == value;
+    }
+
+    public int getTotalAmount() {
+        return this.autoCount + this.manualCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,9 +69,5 @@ public class Amount {
     @Override
     public String toString() {
         return String.valueOf(this.autoCount);
-    }
-
-    public boolean isSameAutoCount(int value) {
-        return this.autoCount == value;
     }
 }
