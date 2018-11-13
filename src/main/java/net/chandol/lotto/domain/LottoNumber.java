@@ -5,13 +5,15 @@ import java.util.List;
 import static com.google.common.primitives.Ints.asList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
+import static net.chandol.lotto.util.LottoNumberValidator.validateNumbersRanges;
+import static net.chandol.lotto.util.LottoNumberValidator.validateUniqueNumbers;
 import static net.chandol.lotto.util.RandomLottoNumberProvider.getNumbers;
 
 public class LottoNumber {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private List<Integer> numbers;
 
-    // static factory method만을 사용하도록 만들자!
+    // static factory method 만을 사용하도록 만들자!
     private LottoNumber(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
@@ -22,28 +24,29 @@ public class LottoNumber {
     }
 
     private void validateNumbers(List<Integer> numbers) {
+        validateNumberSize(numbers);
+        validateUniqueNumbers(numbers);
+        validateNumbersRanges(numbers);
+    }
+
+    private void validateNumberSize(List<Integer> numbers) {
         if (numbers == null || numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 숫자를 확인해주세요.");
         }
-
-        if (hasDuplicatedNumber(numbers)) {
-            throw new IllegalArgumentException("중복번호가 존재합니다.");
-        }
-
-        if (containsInvalidRange(numbers)) {
-            throw new IllegalArgumentException("유효하지 않은 범위의 번호입니다.");
-        }
     }
 
-    private boolean containsInvalidRange(List<Integer> numbers) {
-        return numbers.stream().anyMatch(n -> n <= 0 || n > 45);
+    public List<Integer> getMatchNumbers(LottoNumber another) {
+        return another.getLottoNumbers().stream()
+                .filter(i -> numbers.contains(i))
+                .collect(toList());
     }
 
-    // 유일한 값의 갯수를 기준으로 비교하자!
-    private boolean hasDuplicatedNumber(List<Integer> numbers) {
-        long count = numbers.stream()
-                .distinct().count();
-        return count != numbers.size();
+    public Integer getMatchSize(LottoNumber another) {
+        return getMatchNumbers(another).size();
+    }
+
+    public boolean containsNumber(Integer bonusNumber) {
+        return this.getLottoNumbers().contains(bonusNumber);
     }
 
     public static LottoNumber direct(List<Integer> numbers) {
@@ -56,11 +59,5 @@ public class LottoNumber {
 
     public static LottoNumber auto() {
         return new LottoNumber(getNumbers());
-    }
-
-    public List<Integer> getMatchNumbers(LottoNumber another) {
-        return another.getLottoNumbers().stream()
-                .filter(i -> numbers.contains(i))
-                .collect(toList());
     }
 }

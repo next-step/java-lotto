@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 public class ConsoleUiUtil {
     public static String formatLotto(Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        List<Integer> lottoNumbers = lotto.getLottoNumber().getLottoNumbers();
         return lottoNumbers.stream()
                 .map(String::valueOf)
                 .collect(joining(", ", "[", "]"));

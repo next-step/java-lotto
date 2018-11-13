@@ -35,6 +35,7 @@ public class ConsoleUi {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
+        System.out.println(lottoGameResult.getFormattedResult(_5));
         System.out.println(lottoGameResult.getFormattedResult(_4));
         System.out.println(lottoGameResult.getFormattedResult(_3));
         System.out.println(lottoGameResult.getFormattedResult(_2));

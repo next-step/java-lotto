@@ -1,7 +1,5 @@
 package net.chandol.lotto.domain;
 
-import java.util.List;
-
 public class Lotto {
     public static final int PRICE = 1000;
     private LottoNumber lottoNumber;
@@ -14,12 +12,11 @@ public class Lotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public int getMatchCount(LottoNumber another) {
-        List<Integer> matchNumbers = lottoNumber.getMatchNumbers(another);
-        return matchNumbers.size();
+    public LottoPrize getMatchingLottoPrize(WinningNumber winningNumber) {
+        return winningNumber.findPrize(this.lottoNumber);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumber.getLottoNumbers();
+    public LottoNumber getLottoNumber() {
+        return lottoNumber;
     }
 }
