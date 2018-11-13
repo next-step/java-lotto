@@ -2,9 +2,6 @@ package view;
 
 import domain.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ResultView {
 
     public static void viewStats() {
@@ -24,9 +21,9 @@ public class ResultView {
         lottoGroup.getLottoGroup().forEach((lotto)-> System.out.println(lotto.toString()));
     }
 
-    public static void printStats(WinningLottoGroup winningLottoGroup) {
+    public static void printStats(LottoResultGroup lottoResultGroup) {
         for(LottoRank rank :  LottoRank.values()){
-            int lottoCount = winningLottoGroup.getCombineNumbers(rank);
+            int lottoCount = lottoResultGroup.getCombineNumbers(rank);
             ResultView.printCombineCurrent(rank);
             ResultView.printCombineCount(lottoCount);
         }

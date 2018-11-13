@@ -35,14 +35,14 @@ public class LottoGroup {
         return lottoGroup.size();
     }
 
-    public WinningLottoGroup getCombineLottos(WinningLotto lastLotto) {
-        List<WinningLotto> winningLottos = new ArrayList<>();
+    public LottoResultGroup getCombineLottos(WinningLotto lastLotto) {
+        List<LottoResult> winningLottos = new ArrayList<>();
 
         for (Lotto lotto : lottoGroup) {
             if (lastLotto.getCombineCount(lotto) > COMBINE_MIN_NUM) {
                 winningLottos.add(lastLotto.getCombineNumbers(lotto));
             }
         }
-        return new WinningLottoGroup(winningLottos);
+        return new LottoResultGroup(winningLottos);
     }
 }

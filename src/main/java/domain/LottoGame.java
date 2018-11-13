@@ -7,7 +7,7 @@ public class LottoGame {
         if (price == 0) {
             return 0;
         }
-        return  (double) rewards / (double) price;
+        return (double) rewards / (double) price;
     }
 
     public static int buyLottoCount(int price) {
