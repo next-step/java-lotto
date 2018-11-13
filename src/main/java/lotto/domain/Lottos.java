@@ -22,11 +22,11 @@ public class Lottos {
         return lottos.stream().filter(lotto -> lotto.isMatchNumber(numbers, matchNumber)).collect(toList());
     }
 
-    public static double getRate(final List<Integer> numbers, final List<Lotto> lottos, final int amount) {
-        return calculatorLottoRate(amount, calculatorRewordAmount(numbers, lottos));
+    public static double getRate(final List<Lotto> lottos, final List<Integer> numbers, final int amount) {
+        return calculatorLottoRate(amount, calculatorRewordAmount(lottos, numbers));
     }
 
-    private static int calculatorRewordAmount(final List<Integer> numbers, final List<Lotto> lottos) {
+    private static int calculatorRewordAmount(final List<Lotto> lottos, final List<Integer> numbers) {
         int sum = 0;
         for (Reward reward : Reward.NUMBERS) {
             sum += Lottos.filter(lottos, numbers, reward.getMatchNumber()).size() * reward.getPrice();

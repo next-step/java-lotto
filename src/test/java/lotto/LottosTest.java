@@ -47,12 +47,12 @@ public class LottosTest {
 
     @Test
     public void 로또번호_3개가_맞았을떄_수익률_계산() {
-        assertThat(Lottos.getRate(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), Collections.singletonList(new Lotto(new GenerateLottoMachine(), "1,2,3,30,31,32")), 100000)).isEqualTo(0.05);
+        assertThat(Lottos.getRate(Collections.singletonList(new Lotto(new GenerateLottoMachine(), "1,2,3,30,31,32")), new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 100000)).isEqualTo(0.05);
     }
 
     @Test
     public void 로또번호_6개가_맞았을떄_수익률_계산() {
-        assertThat(Lottos.getRate(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), Collections.singletonList(new Lotto(new GenerateLottoMachine(), "1,2,3,4,5,6")), 100000)).isEqualTo(20000);
+        assertThat(Lottos.getRate(Collections.singletonList(new Lotto(new GenerateLottoMachine(), "1,2,3,4,5,6")), new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 100000)).isEqualTo(20000);
     }
 
 }
