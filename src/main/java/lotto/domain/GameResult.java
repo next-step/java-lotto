@@ -48,13 +48,13 @@ public class GameResult {
         return calculateBenefitRate(totalWinAmount, purchaseAmount);
     }
 
-    public int getTotalAmount() {
+    protected int getTotalAmount() {
         return Arrays.stream(MatchType.values())
                 .mapToInt(i -> i.getPrice() * lottoResults.get(i))
                 .sum();
     }
 
-    public static BigDecimal calculateBenefitRate(BigDecimal totalWinAmount, BigDecimal purchaseAmount) {
+    protected static BigDecimal calculateBenefitRate(BigDecimal totalWinAmount, BigDecimal purchaseAmount) {
         return totalWinAmount.divide(purchaseAmount, ROUND_SCALE, RoundingMode.DOWN);
     }
 
@@ -62,7 +62,7 @@ public class GameResult {
         return lottoResults;
     }
 
-    public int getPurchaseAmount() {
+    private int getPurchaseAmount() {
         return this.tickets.size() * PRICE_PER_ONE_LOTTO;
     }
 }

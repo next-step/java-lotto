@@ -29,6 +29,10 @@ public enum MatchType {
         return this.price;
     }
 
+    public boolean isMatching(int count) {
+        return this.match == count;
+    }
+
     public static MatchType getMatchType(int num, boolean bonus) {
        return Arrays.stream(MatchType.values())
                .filter(value -> value.match == num && value.bonus == bonus)

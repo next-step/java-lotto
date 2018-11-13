@@ -8,8 +8,9 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printLottoTicketCount(int num) {
-        System.out.println(num + "개를 구매했습니다.");
+    public static void printLottoTicketCount(int manualTicketCount, int autoTicketCount) {
+        System.out.println();
+        System.out.println("수동으로 " + manualTicketCount + "장, " + autoTicketCount + " 개를 구매했습니다.");
     }
 
     public static void printTickets(List<Ticket> tickets) {

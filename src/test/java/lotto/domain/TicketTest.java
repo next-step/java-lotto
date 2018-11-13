@@ -14,8 +14,8 @@ public class TicketTest {
         Ticket ticket = new Ticket(Arrays.asList(1, 3, 5, 14, 22, 45));
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         MatchType type = ticket.compareWinningLotto(winningNumber);
-        int result = type.getMatch();
-        assertThat(result).isEqualTo(3);
+        boolean result = type.isMatching(3);
+        assertThat(result).isEqualTo(true);
     }
 
     @Test

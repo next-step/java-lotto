@@ -20,7 +20,7 @@ public class Ticket {
     public MatchType compareWinningLotto(WinningLotto winningLotto) {
         int count = getCountOfMatches(winningLotto.winningLottoStatus());
 
-        if(count == MatchType.FIVE.getMatch() && hasBonus(winningLotto.findBonus()))
+        if(MatchType.FIVE.isMatching(count) && hasBonus(winningLotto.findBonus()))
             return MatchType.BONUS;
 
         return MatchType.getMatchType(count, false);
@@ -32,7 +32,7 @@ public class Ticket {
                 .count();
     }
 
-    public boolean hasBonus(int bonus) {
+    private boolean hasBonus(int bonus) {
         return numbers.contains(bonus);
     }
 
