@@ -1,21 +1,21 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoGame {
 
+    private static final int LOTTO_PRICE = 1000;
+
     public int getLottoCount(int budget) {
-        int countByBudget = budget/1000;
+        int countByBudget = budget/LOTTO_PRICE;
         return countByBudget;
     }
 
-    public List<Lotto> makeLotto(int budget) {
+    public BundleLotto makeLotto(int budget) {
         int countByBudget = getLottoCount(budget);
-        List<Lotto> lottos = new ArrayList<>();
 
+        BundleLotto lottos = new BundleLotto();
         for (int i = 0; i < countByBudget; i++) {
-            lottos.add(new Lotto());
+            lottos.addLotto(new Lotto());
         }
         return lottos;
     }

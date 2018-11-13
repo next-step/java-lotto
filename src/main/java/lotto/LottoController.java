@@ -1,31 +1,24 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGameResult;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoController {
     public static void main(String[] args) {
         int budget = InputView.getBudget();
 
         LottoGame lottoGame = new LottoGame();
-        List<Lotto> lottos = lottoGame.makeLotto(budget);
+        BundleLotto lottos = lottoGame.makeLotto(budget);
 
         int lottoCount = lottoGame.getLottoCount(budget);
         ResultView.showLottoCount(lottoCount);
+        ResultView.showLottoNumbers(lottos);
 
-        for (Lotto lotto : lottos) {
-            ResultView.showLottoNumbers(lotto);
-        }
-
-        List<Integer> winningNumbers = InputView.getWinningNumber();
+        WinningLotto winningLotto = InputView.getWinningNumberWithBonus();
 
         LottoGameResult lottoGameResult = new LottoGameResult();
-        lottoGameResult.doCalculateLottoResult(lottos, winningNumbers);
+        lottoGameResult.doCalculateLottoResult(lottos, winningLotto);
 
         ResultView.showResult(lottoGameResult);
 

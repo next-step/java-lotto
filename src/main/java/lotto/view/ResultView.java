@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.BundleLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;
 import lotto.domain.LottoGameResult;
@@ -10,14 +11,20 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void showLottoNumbers(Lotto lotto) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ ");
+    public static void showLottoNumbers(BundleLotto lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[ ");
+            makeLottoString(sb, lotto);
+            String s = sb.substring(0, sb.lastIndexOf(",")) + " ]";
+            System.out.println(s);
+        }
+    }
+
+    private static void makeLottoString(StringBuilder sb, Lotto lotto) {
         for (Integer number : lotto.getLottoNumbers()) {
             sb.append(number+", ");
         }
-        String s = sb.substring(0, sb.lastIndexOf(",")) + " ]";
-        System.out.println(s);
     }
 
     public static void showResult(LottoGameResult lottoGameResult) {

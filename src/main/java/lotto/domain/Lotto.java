@@ -8,6 +8,7 @@ import java.util.Random;
 public class Lotto {
 
     private static final int LOTTO_COUNT = 6;
+    private static final int LOTTO_BOUND = 46;
     private List<Integer> lottoNumbers;
 
     public Lotto() {
@@ -25,7 +26,7 @@ public class Lotto {
         int count = 0;
         while (true) {
             if (count == LOTTO_COUNT) break;
-            int randomValue = random.nextInt(46);
+            int randomValue = random.nextInt(LOTTO_BOUND);
             if (lottoNumbers.contains(randomValue)) continue;
             lottoNumbers.add(randomValue);
             count++;
@@ -34,8 +35,15 @@ public class Lotto {
         Collections.shuffle(lottoNumbers);
     }
 
+    public boolean isBonusBallInLotto(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
+
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
+    public boolean contains(Integer number) {
+        return this.lottoNumbers.contains(number);
+    }
 }

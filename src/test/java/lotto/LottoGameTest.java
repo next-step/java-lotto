@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.BundleLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import org.junit.Test;
@@ -13,8 +14,8 @@ public class LottoGameTest {
     @Test
     public void 로또발급() {
         LottoGame lottoGame = new LottoGame();
-        List<Lotto> lottoList = lottoGame.makeLotto(14000);
-        assertThat(lottoList.size()).isEqualTo(14);
+        BundleLotto lottos = lottoGame.makeLotto(14000);
+        assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
     @Test
