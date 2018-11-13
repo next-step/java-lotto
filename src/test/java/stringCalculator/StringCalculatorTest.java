@@ -34,4 +34,14 @@ public class StringCalculatorTest {
     public void add_커스텀_구분자() {
         assertThat(6).isEqualTo(stringCalculator.add("//;\n1;2;3"));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void add_음수() {
+        assertThat(-1).isEqualTo(stringCalculator.add("-1"));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void add_숫자_이외의_값() {
+        assertThat(65).isEqualTo(stringCalculator.add("A"));
+    }
 }

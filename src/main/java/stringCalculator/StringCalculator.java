@@ -1,6 +1,5 @@
 package stringCalculator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -31,6 +30,15 @@ public class StringCalculator {
     }
 
     private static List<Integer> convertToIntegers(List<String> values) {
-        return values.stream().map(Integer::valueOf).collect(Collectors.toList());
+        return values.stream()
+                .map(value -> {
+                    int parsedValue = Integer.parseInt(value);
+                    if (parsedValue < 0) {
+                        throw new RuntimeException();
+                    }
+
+                    return parsedValue;
+                })
+                .collect(Collectors.toList());
     }
 }
