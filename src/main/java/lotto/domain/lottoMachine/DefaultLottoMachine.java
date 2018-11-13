@@ -25,7 +25,7 @@ public class DefaultLottoMachine implements LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < gameTimes; i++) {
             Collections.shuffle(this.balls);
-            lottos.add(new Lotto(pickLottoBalls()));
+            lottos.add(Lotto.of(pickLottoBalls()));
         }
 
         return lottos;
@@ -35,7 +35,7 @@ public class DefaultLottoMachine implements LottoMachine {
     public List<Lotto> createManualLotto(LottoRequest lottoRequest) {
         if (lottoRequest.getManualGameTimes() == 0) return null;
         return lottoRequest.getManualLottoNumbers().stream()
-                .map(numbers -> new Lotto(toLottoBalls(numbers)))
+                .map(numbers -> Lotto.of(toLottoBalls(numbers)))
                 .collect(Collectors.toList());
     }
 

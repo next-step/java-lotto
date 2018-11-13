@@ -54,6 +54,6 @@ public class LottoStore {
     }
 
     private WInningLotto createWInningLotto(WInningLottoRequest wInningLottoRequest) {
-        return new WInningLotto(new Lotto(LottoHelper.convertToBalls(wInningLottoRequest.getLottoNumbers())), LottoHelper.convertToBall(wInningLottoRequest.getBonusNumber()));
+        return new WInningLotto(Lotto.of(LottoHelper.convertToBalls(wInningLottoRequest.getLottoNumbers())), LottoHelper.convertToBall(wInningLottoRequest.getBonusNumber()));
     }
 }
