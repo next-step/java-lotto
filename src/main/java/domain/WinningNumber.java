@@ -5,9 +5,9 @@ import java.util.List;
 public class WinningNumber {
 
     private final List<Integer> numbers;
-    private final int bonus;
+    private final LottoNumber bonus;
 
-    public WinningNumber(List<Integer> numbers, int bonus) {
+    public WinningNumber(List<Integer> numbers, LottoNumber bonus) {
         this.numbers = numbers;
         this.bonus = bonus;
     }
@@ -17,6 +17,6 @@ public class WinningNumber {
     }
 
     public boolean isBonusMatched(LottoNumber number) {
-        return number.getNumber() == bonus;
+        return number.equals(bonus);
     }
 }

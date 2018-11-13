@@ -10,13 +10,13 @@ public class InputView {
     public static int inputPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return validateInteger(scanner.nextInt());
     }
 
     public static int inputManualGameCount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return validateInteger(scanner.nextInt());
     }
 
     public static List<String> inputManualGameNumbers(int manualGameCount) {
@@ -44,6 +44,13 @@ public class InputView {
     public static int inputBonusNumber() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return validateInteger(scanner.nextInt());
+    }
+
+    private static int validateInteger(int v) {
+        if (v < 0) {
+            throw new IllegalArgumentException("Input integer must be greater than 0");
+        }
+        return v;
     }
 }

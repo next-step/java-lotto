@@ -16,7 +16,7 @@ public class LottoNumbersTest {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 7, 8), 9);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 7, 8), new LottoNumber(9));
 
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         int matched = lottoNumbers.match(winningNumber);
@@ -30,7 +30,7 @@ public class LottoNumbersTest {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 7, 8), 9);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 7, 8), new LottoNumber(9));
 
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         boolean matched = lottoNumbers.matchBonus(winningNumber);

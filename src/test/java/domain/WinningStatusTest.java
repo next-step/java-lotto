@@ -80,7 +80,7 @@ public class WinningStatusTest {
     }
 
     private WinningNumber makeWinningNumber(int bonus, Integer... numbers) {
-        return new WinningNumber(Arrays.asList(numbers), bonus);
+        return new WinningNumber(Arrays.asList(numbers), new LottoNumber(bonus));
     }
 
     private LottoGames makeLottoGames(Lotto... games) {

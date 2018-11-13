@@ -10,7 +10,7 @@ public class WinningNumberTest {
 
     @Test
     public void 당첨번호_생성() {
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), new LottoNumber(10));
 
         assertThat(winningNumber.isContain(new LottoNumber(1))).isTrue();
         assertThat(winningNumber.isBonusMatched(new LottoNumber(10))).isTrue();

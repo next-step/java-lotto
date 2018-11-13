@@ -7,12 +7,12 @@ import domain.WinningStatus;
 public class ResultView {
 
     public static void purchasedLottoGames(LottoGames lottoGames) {
-        String puchasedCount = "수동으로 " +
+        String purchasedCount = "수동으로 " +
             lottoGames.getManualGameCount() +
             "장, 자동으로 " +
             lottoGames.getAutoGameCount() +
             "개를 구매했습니다.";
-        System.out.println(puchasedCount);
+        System.out.println(purchasedCount);
         lottoGames.getGames().forEach(System.out::println);
     }
 

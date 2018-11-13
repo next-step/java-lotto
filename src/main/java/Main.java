@@ -18,7 +18,7 @@ public class Main {
         ResultView.purchasedLottoGames(lottoGames);
 
         String numbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
         WinningNumber winningNumber = new WinningNumber(
             ParsingUtil.parseStringToIntList(numbers), bonusNumber);
