@@ -2,16 +2,39 @@ package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
 public class LottoResult {
 
     private List<Jackpot> jackpots;
+    private Map<Jackpot, Integer> result;
 
     public LottoResult(List<Jackpot> jackpots) {
         this.jackpots = jackpots;
+        initResult();
+        setResults();
+    }
+
+    private void initResult() {
+        result = new HashMap<>();
+        for (Jackpot jackpot: Jackpot.values()) {
+            result.put(jackpot, 0);
+        }
+    }
+
+    private void setResults() {
+        for (Jackpot jackpot : getJackpot()) {
+            result.put(jackpot, matchCount(jackpot));
+        }
+    }
+
+    public Map<Jackpot, Integer> getResult() {
+        return result;
     }
 
     public int matchCount(Jackpot selectedJackpot) {

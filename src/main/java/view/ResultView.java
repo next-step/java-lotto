@@ -4,7 +4,9 @@ import domain.Jackpot;
 import domain.Lotto;
 import domain.LottoResult;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -31,11 +33,23 @@ public class ResultView {
 
     private static void showMatches(LottoResult lottoResult) {
         StringBuilder sb = new StringBuilder();
-        for (Jackpot jackpot : lottoResult.getJackpot()) {
+
+        Map<Jackpot, Integer> result = lottoResult.getResult();
+        for (Jackpot jackpot: result.keySet()) {
             int matchCount = lottoResult.matchCount(jackpot);
             sb.append(String.format("%d개 일치 (%d원) - %d개", jackpot.getMatchNumber(), jackpot.getPrizeMoney(), matchCount));
             sb.append("\n");
         }
+
+//
+//
+//        for (Jackpot jackpot : lottoResult.getJackpot()) {
+//            int matchCount = lottoResult.matchCount(jackpot);
+//            sb.append(String.format("%d개 일치 (%d원) - %d개", jackpot.getMatchNumber(), jackpot.getPrizeMoney(), matchCount));
+//            sb.append("\n");
+//        }
+
+        System.out.println(lottoResult.getResult());
         System.out.println(sb.toString());
     }
 

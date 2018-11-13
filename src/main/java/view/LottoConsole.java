@@ -15,8 +15,7 @@ public class LottoConsole {
         String lottoWinningNumbers = InputView.getInputString("지난 주 당첨 번호를 입력해 주세요.");
 
         LottoStatistics lottoStatistics = new LottoStatistics(lottoWinningNumbers);
-        List<Jackpot> jackpots = lottoStatistics.getJackpots(lottos);
-        LottoResult lottoResult = new LottoResult(jackpots);
+        LottoResult lottoResult = lottoStatistics.match(lottos);
         ResultView.showResult(lottoResult);
     }
 }

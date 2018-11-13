@@ -2,12 +2,12 @@ package domain
 
 import java.util.ArrayList
 
-class LottoStatisticsKt(private val values: String) {
+class LottoStatisticsKt(values: String) {
 
-    private val winningNumbers: List<Int> = Lotto(values).lottoNumbers
+    private val winningNumbers: List<Int> = Lotto.manual(values).lottoNumbers
 
     fun getNumbers(numbers: String): List<Int> {
-        return LottoKt(numbers).numbers
+        return LottoKt.manual(numbers).numbers
     }
 
     fun getJackpot(lottoNumbers: List<Int>): JackpotKt {
@@ -31,5 +31,10 @@ class LottoStatisticsKt(private val values: String) {
 
     private fun hasNumber(number: Int?): Boolean {
         return winningNumbers.contains(number)
+    }
+
+    fun match(lottos: MutableList<LottoKt>): LottoResultKt {
+        val jackpots = getJackpots(lottos)
+        return LottoResultKt(jackpots)
     }
 }

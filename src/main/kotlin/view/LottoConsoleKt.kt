@@ -14,8 +14,7 @@ object LottoConsoleKt {
         val lottoWinningNumbers = InputViewKt.getInputString("지난 주 당첨 번호를 입력해 주세요.")
 
         val lottoStatistics = LottoStatisticsKt(lottoWinningNumbers)
-        val jackpots = lottoStatistics.getJackpots(lottos)
-        val lottoResult = LottoResultKt(jackpots)
+        val lottoResult = lottoStatistics.match(lottos)
         ResultViewKt.showResult(lottoResult)
     }
 }

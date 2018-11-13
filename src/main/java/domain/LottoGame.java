@@ -12,9 +12,13 @@ public class LottoGame {
     }
 
     public void buyLotto(int price) {
-        for (int i = 0; i < price / Lotto.PRICE; i++) {
-            lottos.add(new Lotto());
+        for (int i = 0; i < getSizeOfLotto(price); i++) {
+            lottos.add(Lotto.auto());
         }
+    }
+
+    private int getSizeOfLotto(int price) {
+        return price / Lotto.PRICE;
     }
 
     public int getLottoCount() {
