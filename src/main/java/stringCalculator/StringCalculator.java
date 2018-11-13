@@ -7,6 +7,14 @@ public class StringCalculator {
             return 0;
         }
 
-        return -1;
+        if (source.contains(",")) {
+            int result = 0;
+            for (String value : source.split(",")) {
+                result += Integer.parseInt(value);
+            }
+            return result;
+        }
+
+        return Integer.parseInt(source);
     }
 }
