@@ -8,19 +8,15 @@ public class WinningLotto {
     private List<Integer> winningNumbers;
     private int bonusBall;
 
-    public WinningLotto() {
-        winningNumbers = new ArrayList<>();
-    }
-
     public WinningLotto(String[] splitWinningLine, int bonusBall) {
-        this();
-        makeWinningNumber(splitWinningLine);
+        winningNumbers = new ArrayList<>();
         this.bonusBall = bonusBall;
+        makeWinningNumber(splitWinningLine);
     }
 
     private void makeWinningNumber(String[] splitWinningLine) {
-        for (int i = 0; i < splitWinningLine.length; i++) {
-            this.winningNumbers.add(Integer.parseInt(splitWinningLine[i].trim()));
+        for (String winningNum : splitWinningLine) {
+            this.winningNumbers.add(Integer.parseInt(winningNum.trim()));
         }
     }
 
@@ -33,14 +29,11 @@ public class WinningLotto {
     }
 
     private int getCount(Lotto lotto, int count, Integer number) {
-        if (lotto.getLottoNumbers().contains(number)) {
+        if (lotto.contains(number)) {
             count++;
         }
-        return count;
-    }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+        return count;
     }
 
     public int getBonusBall() {

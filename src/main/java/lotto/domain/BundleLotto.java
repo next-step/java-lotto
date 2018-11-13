@@ -53,18 +53,11 @@ public class BundleLotto {
         boolean matchBonus = false;
         count = winningNumbers.getRankCount(lotto, count);
 
-        if (count == Rank.FOURTH.getCountOfMatch() && lotto.isBonusBallInLotto(winningNumbers.getBonusBall())) {
+        if (Rank.FOURTH.equals(count) && lotto.isBonusBallInLotto(winningNumbers.getBonusBall())) {
             count++;
             matchBonus = true;
         }
 
         return Rank.valueOf(count, matchBonus);
-    }
-
-    private int getCount(Lotto lotto, int count, Integer number) {
-        if (lotto.getLottoNumbers().contains(number)) {
-            count++;
-        }
-        return count;
     }
 }

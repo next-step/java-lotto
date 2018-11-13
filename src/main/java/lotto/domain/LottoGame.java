@@ -3,8 +3,10 @@ package lotto.domain;
 
 public class LottoGame {
 
+    private static final int LOTTO_PRICE = 1000;
+
     public int getLottoCount(int budget) {
-        int countByBudget = budget/1000;
+        int countByBudget = budget/LOTTO_PRICE;
         return countByBudget;
     }
 
