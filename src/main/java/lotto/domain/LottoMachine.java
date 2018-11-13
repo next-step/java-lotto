@@ -3,5 +3,6 @@ package lotto.domain;
 import java.util.List;
 
 public interface LottoMachine {
-    List<Lotto> createLotto(LottoRequest lottoRequestCard);
+    List<Lotto> createAutoLotto(LottoRequest lottoRequest);
+    List<Lotto> createManualLotto(LottoRequest lottoRequest);
 }

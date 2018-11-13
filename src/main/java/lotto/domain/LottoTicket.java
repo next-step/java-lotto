@@ -1,29 +1,30 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private List<Lotto> lottos = null;
+    private List<Lotto> manualLottos = null;
+    private List<Lotto> autoLottos = null;
 
-    public LottoTicket() {
-        this.lottos = new ArrayList<>();
+    public LottoTicket(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        this.manualLottos = manualLottos;
+        this.autoLottos = autoLottos;
     }
 
-    public void addLotto(List<Lotto> otherLottos) {
-        if (otherLottos == null) return;
-        lottos.addAll(otherLottos);
+    public List<Lotto> getManualLottos() {
+        return Collections.unmodifiableList(manualLottos);
     }
 
-    public List<Lotto> getAllLotto(){
-        return Collections.unmodifiableList(this.lottos);
+    public List<Lotto> getAutoLottos() {
+        return Collections.unmodifiableList(autoLottos);
     }
 
-    public int getLottoCountByLottoType(Lotto.LottoType type) {
-        return lottos.stream()
-                .filter(lotto -> lotto.isType(type))
-                .collect(Collectors.reducing(0, e -> 1, Integer::sum));
+    public int getManualLottoCount() {
+        return this.manualLottos.size();
+    }
+
+    public int getAutoLottoCount() {
+        return this.autoLottos.size();
     }
 }

@@ -6,24 +6,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    public static enum LottoType {
-        AUTO, MANUAL, WINNING;
-    }
-
     public static final int LOTTO_NUMERS = 6;
 
-    private LottoType type = null;
     private List<LottoBall> balls = null;
 
     public Lotto(List<LottoBall> balls) {
-        this(LottoType.AUTO, balls);
-    }
-
-    public Lotto(LottoType type, List<LottoBall> balls) {
         if (balls.size() != LOTTO_NUMERS || !isUniqueBalls(balls)) {
             throw new IllegalArgumentException("로또복권은 서로다른 숫자 6자리로 이루어져야한다.");
         }
-        this.type = type;
         this.balls = Lists.newArrayList(balls);
         Collections.sort(this.balls);
     }
@@ -48,10 +38,6 @@ public class Lotto {
 
     public boolean hasBall(LottoBall bonusBall) {
         return this.balls.contains(bonusBall);
-    }
-
-    public boolean isType(LottoType type) {
-        return this.type == type;
     }
 
     @Override
