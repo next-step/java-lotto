@@ -3,19 +3,19 @@ package lotto.model;
 import java.util.List;
 
 public class WinningTicket {
-    private List<Integer> nums;
-    private Integer bonusNum;
+    private List<LottoNum> nums;
+    private LottoNum bonusNum;
 
-    public WinningTicket(List<Integer> nums, Integer bonusNum) {
+    public WinningTicket(List<LottoNum> nums, LottoNum bonusNum) {
         this.nums = nums;
         this.bonusNum = bonusNum;
     }
 
-    public List<Integer> getNums() {
+    public List<LottoNum> getNums() {
         return nums;
     }
 
-    public Integer getBonusNum() {
+    public LottoNum getBonusNum() {
         return bonusNum;
     }
 }

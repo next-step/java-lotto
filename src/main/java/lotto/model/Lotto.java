@@ -6,27 +6,27 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     private static final int SIZE = 6;
-    private static final int RANDOM_NUM_MAX = 45;
-    private static final int PRICE = 1_000;
-    private static final int RANDOM_NUM_MIN = 1;
-    private static List<Integer> lotteryNums = IntStream.rangeClosed(RANDOM_NUM_MIN, RANDOM_NUM_MAX)
-            .boxed()
+
+    private static List<LottoNum> lotteryNums = IntStream.rangeClosed(LottoNum.RANDOM_NUM_MIN, LottoNum.RANDOM_NUM_MAX)
+            .mapToObj(LottoNum::new)
             .collect(Collectors.toList());
     private List<Ticket> tickets = new ArrayList<>();
 
 
-    public Lotto(Long num) {
-        createTickets(num);
+    public Lotto(Amount amount, List<Ticket> manualTickets) {
+        tickets.addAll(manualTickets);
+        createTickets(amount);
     }
 
     /**
      * 티켓 생성
      *
-     * @param buyAmount
+     * @param amount
      */
-    private void createTickets(long buyAmount) {
-        for (int i = 0; i < buyAmount / PRICE; i++) {
-            Ticket ticket = new Ticket(makeRandNums());
+    private void createTickets(Amount amount) {
+        while(amount.canPurcharse(1)) {
+            amount.purcharseTicket(1);
+            Ticket ticket = new Ticket(makeRandNums(), true);
             tickets.add(ticket);
         }
     }
@@ -36,7 +36,7 @@ public class Lotto {
      *
      * @return
      */
-    private List<Integer> makeRandNums() {
+    private List<LottoNum> makeRandNums() {
         Collections.shuffle(lotteryNums);
         return lotteryNums.stream()
                 .limit(SIZE)
