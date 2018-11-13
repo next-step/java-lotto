@@ -7,14 +7,18 @@ public class StringCalculator {
             return 0;
         }
 
-        if (source.contains(",")) {
-            int result = 0;
-            for (String value : source.split(",")) {
-                result += Integer.parseInt(value);
-            }
-            return result;
-        }
+        return sum(split(source));
+    }
 
-        return Integer.parseInt(source);
+    private static String[] split(String source) {
+        return source.split(",");
+    }
+
+    private static int sum(String[] values) {
+        int result = 0;
+        for (String value : values) {
+            result += Integer.parseInt(value);
+        }
+        return result;
     }
 }
