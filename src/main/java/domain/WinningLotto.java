@@ -2,19 +2,20 @@ package domain;
 
 import java.util.List;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
     private boolean isBonus;
     private Integer combineCount;
     private Integer bonusNumber;
+    private Lotto lotto;
 
-    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
-        super(numbers);
+    public WinningLotto(Lotto lotto, Integer bonusNumber) {
+        this.lotto = lotto;
         this.bonusNumber = bonusNumber;
-        this.isBonus = isContains(bonusNumber);
+        this.isBonus = lotto.isContains(bonusNumber);
     }
 
-    public WinningLotto(List<Integer> numbers) {
-        super(numbers);
+    public WinningLotto(Lotto lotto) {
+        this.lotto = lotto;
     }
 
     public WinningLotto(Integer combineCount, boolean isBonus) {
@@ -28,13 +29,16 @@ public class WinningLotto extends Lotto {
     }
 
     public boolean getCombineLotto(int combineNum, boolean isBonus) {
-        return this.combineCount.equals(combineNum) && this.isBonus == isBonus;
+        return combineCount.equals(combineNum) && this.isBonus == isBonus;
     }
 
     public WinningLotto getCombineNumbers(Lotto lotto) {
-        this.combineCount = getCombineCount(lotto);
-        this.isBonus = lotto.isContains(bonusNumber);
+        combineCount = this.lotto.getCombineCount(lotto);
+        isBonus = lotto.isContains(bonusNumber);
         return new WinningLotto(combineCount, isBonus);
     }
 
+    public int getCombineCount(Lotto lastLotto) {
+        return lotto.getCombineCount(lastLotto);
+    }
 }

@@ -23,8 +23,8 @@ public class WinningLottoGroupTest {
 
     @Test
     public void 당첨로또만들기() {
-        WinningLotto winningLotto = new WinningLotto(numbers);
-        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
+        WinningLotto winningLotto = new WinningLotto(lotto);
+        WinningLottoGroup cobineLottoGroup =lottoGroup.getCombineLottos(winningLotto);
         assertThat(cobineLottoGroup.getSize()).isEqualTo(3);
     }
 
@@ -32,8 +32,8 @@ public class WinningLottoGroupTest {
     public void 당첨안된로또목록() {
         List<Integer> diffNum = Arrays.asList(7, 8, 9, 10, 11, 12);
         Lotto diff = new Lotto(diffNum);
-        WinningLotto winningLotto = new WinningLotto(diffNum);
-        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
+        WinningLotto winningLotto = new WinningLotto(diff);
+        WinningLottoGroup cobineLottoGroup = lottoGroup.getCombineLottos(winningLotto);
 
         assertThat(cobineLottoGroup.getSize()).isEqualTo(0);
         assertThat(cobineLottoGroup.isContain(diff)).isFalse();
@@ -42,8 +42,8 @@ public class WinningLottoGroupTest {
 
     @Test
     public void 당첨금총액() {
-        WinningLotto winningLotto = new WinningLotto(numbers);
-        WinningLottoGroup cobineLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
+        WinningLotto winningLotto = new WinningLotto(lotto);
+        WinningLottoGroup cobineLottoGroup = lottoGroup.getCombineLottos(winningLotto);
         int sum = cobineLottoGroup.getTotalReward();
         assertThat(sum).isEqualTo(3 * (LottoRank.FIRST_PRICE.getPriceRewards()));
     }
@@ -51,9 +51,10 @@ public class WinningLottoGroupTest {
     @Test
     public void 보너스당첨금() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 7);
+        Lotto lotto = new Lotto(numbers);
         Integer bonusNum = 6;
-        WinningLotto winningLotto = new WinningLotto(numbers,bonusNum);
-        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
+        WinningLotto winningLotto = new WinningLotto(lotto,bonusNum);
+        WinningLottoGroup winningLottoGroup =lottoGroup.getCombineLottos(winningLotto);
         int sum = winningLottoGroup.getTotalReward();
         assertThat(sum).isEqualTo(3 * (LottoRank.SECOND_PRICE.getPriceRewards()));
     }
@@ -61,9 +62,10 @@ public class WinningLottoGroupTest {
     @Test
     public void 보너스통계출력하기() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 7);
+        Lotto lotto = new Lotto(numbers);
         Integer bonusNum = 6;
-        WinningLotto winningLotto = new WinningLotto(numbers,bonusNum);
-        WinningLottoGroup winningLottoGroup = LottoGame.getCombineLottos(lottoGroup, winningLotto);
+        WinningLotto winningLotto = new WinningLotto(lotto,bonusNum);
+        WinningLottoGroup winningLottoGroup =  lottoGroup.getCombineLottos(winningLotto) ;
 
         for (LottoRank rank : LottoRank.values()) {
             int lottoCount = winningLottoGroup.getCombineNumbers(rank);

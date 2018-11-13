@@ -15,12 +15,12 @@ public class ConsoleUI {
         ResultView.printLottoGroup(lottoGroup);
 
         Integer bonusNum = Integer.parseInt(InputView.setBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(StringUtils.convertStrToNum(InputView.lastLottoNumber()), bonusNum);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(StringUtils.convertStrToNum(InputView.lastLottoNumber())), bonusNum);
         WinningLottoGroup combineLottoGroup = lottoGroup.getCombineLottos(winningLotto);
         ResultView.viewStats();
         ResultView.printStats(combineLottoGroup);
-
-        double totalEarningRate = LottoGame.getTotalEarningRate(price, combineLottoGroup);
+        int totalRewards = combineLottoGroup.getTotalReward();
+        double totalEarningRate = LottoGame.getTotalEarningRate(price, totalRewards);
         ResultView.printResult(totalEarningRate);
     }
 }
