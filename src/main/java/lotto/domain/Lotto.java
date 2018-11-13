@@ -34,7 +34,7 @@ public class Lotto {
     }
 
     private int numberMatchCheckLoop(int matchScore, final Integer numbers) {
-        for (Integer num : this.number) {
+        for (Integer num : getNumber()) {
             matchScore = eqCheckLottoNumber(matchScore, numbers, num);
         }
         return matchScore;
