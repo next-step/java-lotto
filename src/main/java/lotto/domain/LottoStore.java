@@ -18,20 +18,12 @@ public class LottoStore {
         if (request.getMoney().isLess(LOTTO_GAME_FEE)) {
             throw new IllegalArgumentException(String.format("금액이 부족합니다. \n 로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
         }
-
-        return LottoTicket.builder()
-                    .manualLottos(createManualLottos(request))
-                    .autoLottos(createAutoLottos(request))
-                    .build();
+        return createLottos(request);
 
     }
 
-    private List<Lotto> createAutoLottos(LottoRequest request) {
-        return lottoMachine.createAutoLotto(request);
-    }
-
-    private List<Lotto> createManualLottos(LottoRequest request) {
-        return lottoMachine.createManualLotto(request);
+    private LottoTicket createLottos(LottoRequest request) {
+        return lottoMachine.createLotto(request);
     }
 
     public LottoResult checkWinningLotto(WInningLottoRequest wInningLottoRequest, LottoTicket lottoTicket) {

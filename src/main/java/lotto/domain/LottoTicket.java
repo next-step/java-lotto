@@ -29,7 +29,7 @@ public class LottoTicket {
     public int getAutoLottoCount() {
         return this.autoLottos.size();
     }
-
+    
     public static LottoTicketBuilder builder() {
         return new LottoTicketBuilder();
     }

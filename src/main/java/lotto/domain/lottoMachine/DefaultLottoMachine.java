@@ -14,7 +14,15 @@ public class DefaultLottoMachine implements LottoMachine {
         this.balls = makeLottoBals();
     }
 
+
     @Override
+    public LottoTicket createLotto(LottoRequest lottoRequest) {
+        return LottoTicket.builder()
+                .manualLottos(createManualLotto(lottoRequest))
+                .autoLottos(createAutoLotto(lottoRequest))
+                .build();
+    }
+    
     public List<Lotto> createAutoLotto(LottoRequest lottoRequest) {
         int gameTimes = getAutoGameTimes(lottoRequest);
         return IntStream.range(0, gameTimes)
@@ -31,7 +39,6 @@ public class DefaultLottoMachine implements LottoMachine {
         return gameTimes;
     }
 
-    @Override
     public List<Lotto> createManualLotto(LottoRequest lottoRequest) {
         if (lottoRequest.getManualLottoValues() == null) {
             return Collections.emptyList();
@@ -58,4 +65,5 @@ public class DefaultLottoMachine implements LottoMachine {
                 .mapToObj(number -> LottoBall.of(number))
                 .collect(Collectors.toList());
     }
+
 }

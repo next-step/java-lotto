@@ -1,12 +1,11 @@
 package lotto.domain;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.google.common.collect.Sets;
 
 public class Lotto {
     public static final int LOTTO_NUMERS = 6;
@@ -44,7 +43,6 @@ public class Lotto {
     }
 
     public static Lotto of(List<LottoBall> balls) {
-        Collections.sort(balls);
         return new Lotto(new HashSet<>(balls));
     }
 }
