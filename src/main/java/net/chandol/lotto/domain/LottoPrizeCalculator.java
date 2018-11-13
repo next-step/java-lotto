@@ -23,8 +23,8 @@ class LottoPrizeCalculator {
                 .map(this::findPrize)
                 .collect(toList());
 
-        int buyPrice = lottos.size() * Lotto.PRICE;
+        Money purchasePrice = Lotto.LOTTO_PRICE.multiply(lottos.size());
 
-        return new LottoGameResult(prizes, buyPrice);
+        return new LottoGameResult(prizes, purchasePrice);
     }
 }

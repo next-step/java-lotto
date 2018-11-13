@@ -1,7 +1,7 @@
 package net.chandol.lotto.domain;
 
 public class Lotto {
-    public static final int PRICE = 1000;
+    public static final Money LOTTO_PRICE = Money.of(1000);
     private LottoNumber lottoNumber;
 
     public Lotto(LottoNumber lottoNumber) {

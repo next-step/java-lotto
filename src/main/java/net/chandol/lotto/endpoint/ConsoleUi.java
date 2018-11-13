@@ -3,6 +3,7 @@ package net.chandol.lotto.endpoint;
 import net.chandol.lotto.domain.Lotto;
 import net.chandol.lotto.domain.LottoGameResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,28 +11,45 @@ import static net.chandol.lotto.domain.LottoPrize.*;
 import static net.chandol.lotto.util.ConsoleUiUtil.formatLotto;
 
 public class ConsoleUi {
-    private Scanner scanner = new Scanner(System.in);
 
-    public Integer getInputNumber(String message) {
+    public static Integer getInputNumber(String message) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println(message);
         return scanner.nextInt();
     }
 
-    public String getInputString(String message) {
+    public static String getInputString(String message) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println(message);
         return scanner.next();
     }
 
-    public void printLottoNumbers(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매하였습니다.");
 
+    public static List<String> getInputStringArrays(int count, String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(message);
+        List<String> results = new ArrayList<>();
+
+        for (int idx = 0; idx < count; idx++) {
+            String line = scanner.nextLine();
+            results.add(line);
+        }
+
+        return results;
+    }
+
+    public static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             String formattedLottoNumber = formatLotto(lotto);
             System.out.println(formattedLottoNumber);
         }
     }
 
-    public void printLottoGameResult(LottoGameResult lottoGameResult) {
+    public static void printLottoPurchaseCount(int directCount, int autoCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", directCount, autoCount));
+    }
+
+    public static void printLottoGameResult(LottoGameResult lottoGameResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 

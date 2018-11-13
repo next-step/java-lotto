@@ -17,6 +17,12 @@ public class ConsoleUiUtil {
                 .collect(joining(", ", "[", "]"));
     }
 
+    public static List<LottoNumber> getLottoNumbers(List<String> rawLottoNumbers) {
+        return rawLottoNumbers.stream()
+                .map(ConsoleUiUtil::getLottoNumber)
+                .collect(toList());
+    }
+
     public static LottoNumber getLottoNumber(String rawLottoNumber) {
         String[] rawLottoNumbers = rawLottoNumber.split(",");
         List<Integer> numbers = Arrays.stream(rawLottoNumbers)

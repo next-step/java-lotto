@@ -4,11 +4,11 @@ import java.util.List;
 
 public class LottoGameResult {
     private List<LottoPrize> prizes;
-    private Integer buyPrice;
+    private Money purchasePrice;
 
-    public LottoGameResult(List<LottoPrize> prizes, Integer buyPrice) {
+    public LottoGameResult(List<LottoPrize> prizes, Money purchasePrice) {
         this.prizes = prizes;
-        this.buyPrice = buyPrice;
+        this.purchasePrice = purchasePrice;
     }
 
     public Integer getTotalPrize() {
@@ -18,7 +18,7 @@ public class LottoGameResult {
     }
 
     public Double getProfitRate() {
-        return getTotalPrize() * 1d / buyPrice;
+        return getTotalPrize() * 1d / purchasePrice.getValue();
     }
 
     private Integer getPrizeCount(LottoPrize lottoPrize) {

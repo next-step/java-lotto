@@ -49,6 +49,19 @@ public class LottoNumber {
         return this.getLottoNumbers().contains(bonusNumber);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LottoNumber that = (LottoNumber) o;
+        if (numbers == null || that.numbers == null) {
+            return false;
+        } else {
+            return numbers.containsAll(that.numbers) && numbers.containsAll(that.numbers);
+        }
+    }
+
     public static LottoNumber direct(List<Integer> numbers) {
         return new LottoNumber(numbers);
     }
