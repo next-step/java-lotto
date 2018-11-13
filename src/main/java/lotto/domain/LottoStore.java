@@ -19,7 +19,11 @@ public class LottoStore {
             throw new IllegalArgumentException(String.format("금액이 부족합니다. \n 로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
         }
 
-        return new LottoTicket(createManualLottos(request), createAutoLottos(request));
+        return LottoTicket.builder()
+                    .manualLottos(createManualLottos(request))
+                    .autoLottos(createAutoLottos(request))
+                    .build();
+
     }
 
     private List<Lotto> createAutoLottos(LottoRequest request) {
