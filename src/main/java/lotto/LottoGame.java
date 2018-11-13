@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.utils.GenerateLotto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,11 +14,11 @@ public class LottoGame {
     private final int price;
     private final Lottos lottos = new Lottos();
 
-    public LottoGame(final int amount, final GenerateLotto generateLotto) {
-        this(amount, DEFAULT_PRICE, generateLotto);
+    public LottoGame(final int amount) {
+        this(amount, DEFAULT_PRICE);
     }
 
-    public LottoGame(final int amount, final int price, final GenerateLotto generateLotto) throws IllegalArgumentException {
+    public LottoGame(final int amount, final int price) throws IllegalArgumentException {
 
         this.amount = amount;
         this.price = price;
@@ -28,7 +27,7 @@ public class LottoGame {
             throw new IllegalArgumentException();
         }
 
-        createLottos(generateLotto);
+        createLottos();
     }
 
     public List<Lotto> getLottos() {
@@ -39,9 +38,9 @@ public class LottoGame {
         return new BigDecimal(this.amount / this.price).intValue();
     }
 
-    private void createLottos(final GenerateLotto generateLotto) {
+    private void createLottos() {
         for (int i = 0; i < getCountPurchased(); i++) {
-            this.lottos.add(new Lotto(generateLotto));
+            this.lottos.add(new Lotto());
         }
     }
 

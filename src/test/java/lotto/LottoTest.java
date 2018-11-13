@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.utils.GenerateLottoMachine;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ public class LottoTest {
 
     @Before
     public void setUp() {
-        lotto = new Lotto(new GenerateLottoMachine(), "1,2,3,4,5,6");
+        lotto = new Lotto("1,2,3,4,5,6");
     }
 
     @Test

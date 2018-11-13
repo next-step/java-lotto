@@ -15,7 +15,7 @@ public class GenerateLottoMachineTest {
         IntStream.range(0, 10000000)
                 .parallel()
                 .forEach(i -> {
-                    assertThat(new GenerateLottoMachine().create().stream().distinct())
+                    assertThat(GenerateLotto.create().stream().distinct())
                             .as("로또 번호가 6개가 아니면 실패")
                             .hasSize(6);
                 });
