@@ -1,20 +1,22 @@
 package lotto;
 
 public class LottoInit {
-        private int cost;
-        private int count;
+    private final static int DIVISOR = 1000;
+    private int cost;
+    private int count;
 
-    public LottoInit(int cost){
+
+    public LottoInit(int cost) {
         this.cost = cost;
-        this.count = cost/1000;
+        this.count = cost / DIVISOR;
     }
 
-    public int getCount(){
+    public int getCount() {
         return this.count;
     }
-    public int getCost(){
+
+    public int getCost() {
         return this.cost;
     }
-
 
 }

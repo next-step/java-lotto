@@ -1,8 +1,11 @@
 package lotto.lottoView;
 
+import lotto.Lotto;
 import lotto.LottoResult;
+import lotto.MappingCode;
 
 import java.util.List;
+
 
 public class ResultView {
 
@@ -10,36 +13,35 @@ public class ResultView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printAllLotteries(List<List<Integer>> lotteries){
-        for(List<Integer> lotto : lotteries){
+    public static void printAllLotteries(List<Lotto> lotteries){
+        for(Lotto lotto : lotteries){
             makeString(lotto);
         }
     }
 
-    public static void makeString(List<Integer> lotto){
-        String list = "";
-        list += "[";
-        for(int a : lotto){
-            list+= a+", ";
+    public static void makeString(Lotto lotto){
+        String numberList = "";
+        numberList += "[";
+        for(int a : lotto.getNumber()){
+            numberList += a+", ";
         }
-        list = list.substring(0,list.lastIndexOf(", "));
-        list +="]";
+        numberList = numberList.substring(0, numberList.lastIndexOf(", "));
+        numberList += "]";
 
-        System.out.println(list);
+        System.out.println(numberList);
     }
 
-    public static void makeStatistic(int[] arr){
-        System.out.println("3개 일치 (5000원) - " +arr[3] + "개");
-        System.out.println("4개 일치 (50000원) - " +arr[4] + "개");
-        System.out.println("5개 일치 (1500000원) - " +arr[5] + "개");
-        System.out.println("6개 일치 (2000000000원) - " +arr[6] + "개");
+    public static void makeStatistic(LottoResult result){
+        System.out.println("3개 일치 (5000원) - " +result.getValue(MappingCode.THREE.getCount()) + "개");
+        System.out.println("4개 일치 (50000원) - " +result.getValue(MappingCode.FOUR.getCount()) + "개");
+        System.out.println("5개 일치 (1500000원) - " +result.getValue(MappingCode.FIVE.getCount()) + "개");
+        System.out.println("6개 일치 (2000000000원) - " +result.getValue(MappingCode.SIX.getCount()) + "개");
 
     }
-    public static void winRate(int[] arr,int cost){
+    public static void winRate(LottoResult result, int cost){
         System.out.println("당첨 통계");
         System.out.println("---------");
-        makeStatistic(arr);
-        LottoResult lr = new LottoResult(arr);
-        System.out.println("총 수익률은 "+lr.calculateRate(lr.getTotalSum(),cost)+"입니다.");
+        makeStatistic(result);
+        System.out.println("총 수익률은 "+result.calculateRate(result.getTotalSum(),cost)+"입니다.");
     }
 }

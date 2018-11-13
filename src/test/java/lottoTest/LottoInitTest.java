@@ -37,15 +37,16 @@ public class LottoInitTest {
     public void 로또당첨숫자비교하기(){
         Scanner sc = new Scanner(System.in);
         System.out.println("입력: ");
-        String list =sc.next();
+        String list = sc.next();
         LottoCompare lr = new LottoCompare(list);
 
         List<Integer> params = Arrays.asList(new Integer[]{30,40,2,14,5,6});
-        int result = lr.CompareNumber(params);
+        int result = lr.compareNumber(params);
         assertThat(result).isEqualTo(3);
 
     }
-    @Test
+
+/*    @Test
     public void 총합계구하기(){
         LottoResult lr = new LottoResult(new int[]{10,3,1,0,0,0});
         assertThat(lr.getTotalSum()).isEqualTo(5000);
@@ -55,6 +56,6 @@ public class LottoInitTest {
         LottoResult lr = new LottoResult(new int[]{10,3,1,0,0,0});
         double rate = lr.calculateRate(5000, 14000);
         assertThat(Math.floor(rate*100)/100.0).isEqualTo(0.35);
-    }
+    }*/
 
 }
