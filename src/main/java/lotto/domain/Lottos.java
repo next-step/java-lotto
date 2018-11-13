@@ -18,18 +18,18 @@ public class Lottos {
         return lottos;
     }
 
-    public static List<Lotto> filter(final LottoNumber lottoNumber, final List<Lotto> lottos, final int matchNumber) {
-        return lottos.stream().filter(lotto -> lotto.isMatchNumber(lottoNumber, matchNumber)).collect(toList());
+    public static List<Lotto> filter(final List<Lotto> lottos, final List<Integer> numbers, final int matchNumber) {
+        return lottos.stream().filter(lotto -> lotto.isMatchNumber(numbers, matchNumber)).collect(toList());
     }
 
-    public static double getRate(final LottoNumber lottoNumber, final List<Lotto> lottos, final int lottoPurchaseAmount) {
-        return calculatorLottoRate(lottoPurchaseAmount, calculatorRewordAmount(lottoNumber, lottos));
+    public static double getRate(final List<Integer> numbers, final List<Lotto> lottos, final int amount) {
+        return calculatorLottoRate(amount, calculatorRewordAmount(numbers, lottos));
     }
 
-    private static int calculatorRewordAmount(final LottoNumber lottoNumber, final List<Lotto> lottos) {
+    private static int calculatorRewordAmount(final List<Integer> numbers, final List<Lotto> lottos) {
         int sum = 0;
         for (Reward reward : Reward.NUMBERS) {
-            sum += Lottos.filter(lottoNumber, lottos, reward.getMatchNumber()).size() * reward.getPrice();
+            sum += Lottos.filter(lottos, numbers, reward.getMatchNumber()).size() * reward.getPrice();
         }
         return sum;
     }
