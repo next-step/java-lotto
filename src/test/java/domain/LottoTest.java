@@ -12,9 +12,7 @@ public class LottoTest {
     @Test
     public void generateLotto() {
         Lotto lotto = new Lotto(6);
-
         assertThat(lotto.getNumCount()).isEqualTo(6);
-
     }
 
     @Test
@@ -47,8 +45,6 @@ public class LottoTest {
             result.add(numbers.get(i));
         }
         assertThat(numbers.subList(0, 6)).isEqualTo(result);
-
-
     }
 
     @Test

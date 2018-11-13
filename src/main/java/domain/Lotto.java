@@ -6,13 +6,11 @@ import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_CHOICE_CNT = 6;
-    public static final int LOTTO_PRICE = 1000;
 
     private List<Integer> numbers;
 
     public Lotto() {
         this(LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT));
-
     }
 
     public Lotto(int number) {
@@ -23,10 +21,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public int getCombineCount(Lotto lastLotto) {
         if (lastLotto == null) {
             return 0;
@@ -34,7 +28,7 @@ public class Lotto {
         return (int) numbers.stream().filter(obj -> lastLotto.isContains(obj)).count();
     }
 
-    private boolean isContains(Integer number) {
+    protected boolean isContains(Integer number) {
         return numbers.contains(number);
     }
 
@@ -42,4 +36,8 @@ public class Lotto {
         return numbers.size();
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }
