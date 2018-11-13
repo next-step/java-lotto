@@ -13,7 +13,7 @@ public class LottoGame {
 
         BundleLotto lottos = new BundleLotto();
         for (int i = 0; i < countByBudget; i++) {
-            lottos.getLottos().add(new Lotto());
+            lottos.addLotto(new Lotto());
         }
         return lottos;
     }

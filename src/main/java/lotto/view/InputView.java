@@ -11,25 +11,17 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static WinningLotto getWinningNumber() {
+    public static WinningLotto getWinningNumberWithBonus() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String winningLine = scanner.nextLine();
 
-        WinningLotto winningLotto = new WinningLotto();
         String[] splitWinningLine = winningLine.split(",");
 
-        for (int i = 0; i < splitWinningLine.length; i++) {
-            winningLotto.getWinningNumbers().add(Integer.parseInt(splitWinningLine[i].trim()));
-        }
-
-        return winningLotto;
-    }
-
-
-    public static int getBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        int bonusBall = scanner.nextInt();
+
+        return new WinningLotto(splitWinningLine, bonusBall);
     }
+
 }

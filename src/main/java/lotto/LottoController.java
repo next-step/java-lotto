@@ -13,16 +13,12 @@ public class LottoController {
 
         int lottoCount = lottoGame.getLottoCount(budget);
         ResultView.showLottoCount(lottoCount);
+        ResultView.showLottoNumbers(lottos);
 
-        for (Lotto lotto : lottos.getLottos()) {
-            ResultView.showLottoNumbers(lotto);
-        }
-
-        WinningLotto winningLotto = InputView.getWinningNumber();
-        int bonusBall = InputView.getBonusBall();
+        WinningLotto winningLotto = InputView.getWinningNumberWithBonus();
 
         LottoGameResult lottoGameResult = new LottoGameResult();
-        lottoGameResult.doCalculateLottoResult(lottos, winningLotto, bonusBall);
+        lottoGameResult.doCalculateLottoResult(lottos, winningLotto);
 
         ResultView.showResult(lottoGameResult);
 

@@ -34,6 +34,10 @@ public class Lotto {
         Collections.shuffle(lottoNumbers);
     }
 
+    public boolean isBonusBallInLotto(int bonusBall) {
+        return this.lottoNumbers.contains(bonusBall);
+    }
+
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }

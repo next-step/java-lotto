@@ -16,6 +16,10 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
+    public boolean isMiss() {
+        return this.equals(MISS);
+    }
+
     public int getCountOfMatch() {
         return countOfMatch;
     }
@@ -28,19 +32,17 @@ public enum Rank {
         Rank[] ranks = values();
 
         for (int i = 0; i < ranks.length; i++) {
-            if (countOfMatch == SECOND.getCountOfMatch() && matchBonus) {
-                return SECOND;
-            }
-
-            if (countOfMatch == SECOND.getCountOfMatch() && !matchBonus) {
-                return THIRD;
-            }
-
-            if (ranks[i].getCountOfMatch() == countOfMatch) {
-                return ranks[i];
+            if (ranks[i].equals(countOfMatch)) {
+                if (!ranks[i].equals(SECOND) || matchBonus) {
+                    return ranks[i];
+                }
             }
         }
 
         return MISS;
+    }
+
+    public boolean equals(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
     }
 }

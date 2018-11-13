@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.enums.Rank;
 
 public class LottoDto implements Comparable{
-    Rank rank;
+    private Rank rank;
     private int matchNumber;
     private int winningMoney;
 

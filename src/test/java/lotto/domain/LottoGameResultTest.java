@@ -28,7 +28,7 @@ public class LottoGameResultTest {
 
     @Test
     public void 게임결과얻기_3개_일치() {
-        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(Arrays.asList(1,2,3,4,5,6)), 7);
+        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(new String[] {"1","2","3","4","5","6"}, 7));
 
         LottoDto lottoDto = lottoGameResult.getLottoDtos().get(0);
         assertThat(lottoDto.getMatchNumber()).isEqualTo(1);
@@ -37,7 +37,7 @@ public class LottoGameResultTest {
 
     @Test
     public void 게임결과얻기_4개_일치() {
-        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(Arrays.asList(32,38,2,4,13,6)), 7);
+        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(new String[] {"32","38","2","4","13","6"}, 7));
 
         LottoDto lottoDto = lottoGameResult.getLottoDtos().get(1);
         assertThat(lottoDto.getMatchNumber()).isEqualTo(1);
@@ -46,7 +46,7 @@ public class LottoGameResultTest {
 
     @Test
     public void 게임결과얻기_5개_일치() {
-        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(Arrays.asList(5, 9, 38, 41, 43, 6)), 45);
+        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(new String[] {"5","9","38","41","43","6"}, 45));
 
         LottoDto lottoDto = lottoGameResult.getLottoDtos().get(2);
         assertThat(lottoDto.getMatchNumber()).isEqualTo(1);
@@ -55,7 +55,7 @@ public class LottoGameResultTest {
 
     @Test
     public void 게임결과얻기_5개_보너스_일치() {
-        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(Arrays.asList(39, 7, 40, 27, 6, 10)), 26);
+        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(new String[] {"39","7","40","27","6","10"}, 26));
 
         LottoDto lottoDto = lottoGameResult.getLottoDtos().get(3);
         assertThat(lottoDto.getMatchNumber()).isEqualTo(1);
@@ -64,7 +64,7 @@ public class LottoGameResultTest {
 
     @Test
     public void 게임결과얻기_6개_일치() {
-        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(Arrays.asList(23, 25, 33, 36, 39, 41)), 7);
+        lottoGameResult.doCalculateLottoResult(lottos, new WinningLotto(new String[] {"23","25","33","36","39","41"}, 7));
 
         LottoDto lottoDto = lottoGameResult.getLottoDtos().get(4);
         assertThat(lottoDto.getMatchNumber()).isEqualTo(1);
