@@ -26,14 +26,14 @@ public class LottoNumber {
         return matchLottoPoint;
     }
 
-    private int lottoNumberLoop(LottoNumber sourceLottoNumber, int matchLottoPoint, Integer targetLottoNumber) {
+    private int lottoNumberLoop(final LottoNumber sourceLottoNumber, int matchLottoPoint, final Integer targetLottoNumber) {
         for (Integer lottoNumber1 : sourceLottoNumber.getNumbers()) {
             matchLottoPoint = checkLottoNumberSame(matchLottoPoint, targetLottoNumber, lottoNumber1);
         }
         return matchLottoPoint;
     }
 
-    private int checkLottoNumberSame(int matchLottoPoint, Integer targetLottoNumber, Integer lottoNumber1) {
+    private int checkLottoNumberSame(int matchLottoPoint, final Integer targetLottoNumber, final Integer lottoNumber1) {
         if (targetLottoNumber.equals(lottoNumber1)) {
             matchLottoPoint++;
         }

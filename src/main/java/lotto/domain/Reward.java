@@ -15,7 +15,7 @@ public enum Reward {
     private int matchNumber;
     private int price;
 
-    Reward(int matchNumber, int price) {
+    Reward(final int matchNumber, final int price) {
         this.matchNumber = matchNumber;
         this.price = price;
     }

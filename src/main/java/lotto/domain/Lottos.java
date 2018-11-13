@@ -26,7 +26,7 @@ public class Lottos {
         return calculatorLottoRate(lottoPurchaseAmount, calculatorRewordAmount(lottoNumber, lottos));
     }
 
-    private static int calculatorRewordAmount(LottoNumber lottoNumber, List<Lotto> lottos) {
+    private static int calculatorRewordAmount(final LottoNumber lottoNumber, final List<Lotto> lottos) {
         int sum = 0;
         for (Reward reward : Reward.NUMBERS) {
             sum += Lottos.filter(lottoNumber, lottos, reward.getMatchNumber()).size() * reward.getPrice();
@@ -35,7 +35,7 @@ public class Lottos {
     }
 
     @SuppressWarnings({"IntegerDivisionInFloatingPointContext", "BigDecimalMethodWithoutRoundingCalled", "RedundantSuppression"})
-    private static double calculatorLottoRate(int lottoPurchaseAmount, int rewordAmount) {
+    private static double calculatorLottoRate(final int lottoPurchaseAmount, final int rewordAmount) {
         return new BigDecimal(rewordAmount).divide(new BigDecimal(lottoPurchaseAmount)).doubleValue();
     }
 
