@@ -65,7 +65,7 @@ body {
 <form class="form-show" method="post" action="/matchLotto">
 	<div class="form-show-div form-group">
 		<label for="winningNumber">지난 주 당첨 번호</label>
-		<input type="text" id="inputMoney" class="form-control"
+		<input type="text" id="winningNumber" class="form-control"
 				name="winningNumber" placeholder="1,2,3,4,5,6" required autofocus>
 	</div>
 	<div class="form-show-div form-group">
@@ -87,6 +87,7 @@ body {
 		<tbody>
 		{{#each lottos}}
 		<tr>
+			<th>{{@index_1}}</th>
 			<td>{{this}}</td>
 		</tr>
 		{{/each}}

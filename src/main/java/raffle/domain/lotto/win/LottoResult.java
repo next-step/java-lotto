@@ -25,7 +25,7 @@ public class LottoResult {
                 .count();
     }
 
-    public double  getResultProfit() {
+    public double getResultProfit() {
         return calculateProfit(winLottos.size() * lottoPrice);
     }
 

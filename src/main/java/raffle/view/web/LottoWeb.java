@@ -4,6 +4,7 @@ import raffle.domain.lotto.Lotto;
 import raffle.domain.lotto.LottoMachine;
 import raffle.domain.lotto.LottoNo;
 import raffle.domain.lotto.money.Money;
+import raffle.domain.lotto.win.LottoResult;
 import raffle.domain.lotto.win.LottosCreation;
 import raffle.view.console.InputView;
 import spark.ModelAndView;
@@ -39,12 +40,27 @@ public class LottoWeb {
             show.put("lottos", lottoMachine.getLottos());
             show.put("lottosSize", lottoMachine.getLottos().size());
 
+            req.session().attribute("lottoMachine", lottoMachine);
+
             return render(show, "/show.html");
+        });
+
+        post("/matchLotto", (req, res) -> {
+            Map show = new HashMap();
+
+            String winningNumber = req.queryParams("winningNumber");
+            int bonusNumber = Integer.parseInt(req.queryParams("bonusNumber"));
+
+            LottoMachine lottoMachine = req.session().attribute("lottoMachine");
+            LottoResult lottoResult = lottoMachine.winLotto(Arrays.stream(winningNumber.split(",")).map(String::trim).map(Integer::parseInt).map(LottoNo::in).collect(Collectors.toList()), LottoNo.in(bonusNumber));
+
+            show.put("lottoResult" ,lottoResult);
+            return render(show, "/result.html");
         });
     }
 
     public static String render(Map<String, Object> model, String templatePath) {
-        return new HandlebarsTemplateEngine().render(new ModelAndView(model, templatePath));
+        return new CustomResultTemplateEngine().render(new ModelAndView(model, templatePath));
     }
 
 }
