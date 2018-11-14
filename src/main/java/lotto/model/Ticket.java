@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 public class Ticket {
     public static final int PRICE = 1_000;
     private List<LottoNum> nums;
-    private boolean isAuto;
 
-    public Ticket(List<LottoNum> nums, boolean isAuto) {
+    public Ticket(List<LottoNum> nums) {
         this.nums = nums;
-        this.isAuto = isAuto;
     }
 
     public List<LottoNum> getNums() {
@@ -40,15 +38,6 @@ public class Ticket {
     public boolean hasBonusNum(LottoNum bonusNum) {
         return toInteger(nums)
                 .contains(bonusNum.getNum());
-    }
-
-    /**
-     * 자동인지 여부
-     *
-     * @return
-     */
-    public boolean isAuto() {
-        return isAuto;
     }
 
     /**

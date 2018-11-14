@@ -19,38 +19,15 @@ public class ResultView {
      *
      * @param tickets
      */
-    public static void printTicketType(List<Ticket> tickets) {
-        long autoNum = getAutoNum(tickets);
-
-        long manualNum = getManualNum(tickets, autoNum);
+    public static void printTicketType(List<Ticket> manualTickets, List<Ticket> tickets) {
+        long manualNum = manualTickets.size();
+        long autoNum = tickets.size() - manualNum;
 
         StringBuffer sb = new StringBuffer();
         System.out.println();
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualNum, autoNum);
     }
 
-    /**
-     * 수동 숫자 구하기
-     *
-     * @param tickets
-     * @param autoNum
-     * @return
-     */
-    private static long getManualNum(List<Ticket> tickets, long autoNum) {
-        return tickets.size() - autoNum;
-    }
-
-    /**
-     * 자동 갯수 구하기
-     *
-     * @param tickets
-     * @return
-     */
-    private static long getAutoNum(List<Ticket> tickets) {
-        return tickets.stream()
-                .filter(Ticket::isAuto)
-                .count();
-    }
 
     /**
      * 티켓번호들 출력
