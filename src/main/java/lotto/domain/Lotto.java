@@ -13,7 +13,7 @@ public class Lotto {
     }
 
     public static Lotto create() {
-        return new Lotto(LottoNumberGenerator.generate();
+        return new Lotto(LottoNumberGenerator.generate());
     }
 
     public static Lotto create(List<Integer> numbers) {
