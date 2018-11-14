@@ -2,6 +2,7 @@ package lotto;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
@@ -21,5 +22,4 @@ public class LottoGameTest {
     public void buy_구입_금액에_해당하는_로또_수량() {
         assertThat(5).isEqualTo(lottoGame.buy(5000).size());
     }
-
 }
