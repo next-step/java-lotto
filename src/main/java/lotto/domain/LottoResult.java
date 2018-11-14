@@ -17,13 +17,11 @@ public class LottoResult {
     }
 
     public int reward() {
-        return lottoType.getPrice() * numberOfMatches;
+        return lottoType.computeReward(numberOfMatches);
     }
 
     @Override
     public String toString() {
-        int matchCount = lottoType.getMatchCount();
-        int price = lottoType.getPrice();
-        return MessageFormat.format("{0}개 일치 ({1}원) - {2}개", matchCount, price, matchCount);
+        return MessageFormat.format("{0} - {1}개", lottoType, numberOfMatches);
     }
 }

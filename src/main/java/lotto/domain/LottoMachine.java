@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +27,7 @@ public class LottoMachine {
     }
 
     private int findNumberOfMatchesByLottoType(LottoType lottoType) {
-        return lottoSet.numberOfMatches(target, lottoType.getMatchCount());
+        return lottoSet.numberOfMatches(target, lottoType.count);
     }
 
     public enum LottoType {
@@ -36,20 +37,21 @@ public class LottoMachine {
         FIVE(5, 150_000),
         SIX(6, 2_000_000_000);
 
-        private int matchCount;
+        private int count;
         private int price;
 
-        LottoType(int matchCount, int price) {
-            this.matchCount = matchCount;
+        LottoType(int count, int price) {
+            this.count = count;
             this.price = price;
         }
 
-        public int getMatchCount() {
-            return matchCount;
+        public int computeReward(int numberOfMatches) {
+            return this.price * numberOfMatches;
         }
 
-        public int getPrice() {
-            return price;
+        @Override
+        public String toString() {
+            return MessageFormat.format("{0}개 일치 ({1}원)", this.count, this.price);
         }
     }
 }
