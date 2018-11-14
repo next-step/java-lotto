@@ -27,4 +27,12 @@ public class AmountTest {
         Amount amount = new Amount(4000);
         amount.purcharseTicket(100);
     }
+
+
+    @Test
+    public void getProfitRate_2배() {
+        Amount amount = new Amount(4_000);
+        double profitRate = amount.getProfitRate(8000);
+        assertThat(profitRate).isEqualTo(2.0);
+    }
 }

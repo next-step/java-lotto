@@ -62,6 +62,7 @@ public class InputView {
 
     /**
      * 티켓 생성
+     *
      * @param strPrizeNums
      * @return
      */
@@ -75,6 +76,7 @@ public class InputView {
 
     /**
      * 티켓 만들 수 있는지 여부
+     *
      * @param strPrizeNums
      * @return
      */

@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.view.InputView;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -21,4 +20,12 @@ public class TicketTest {
         int matchNums = ticket.countMatch(LottoNum.toLottoNums(Arrays.asList(8, 21, 23, 41, 42, 43)));
         assertThat(matchNums).isEqualTo(6);
     }
+
+    @Test
+    public void hasBonusNum_6() {
+        Ticket ticket = new Ticket(LottoNum.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        boolean hasBonusNum = ticket.hasBonusNum(LottoNum.toLottoNum(6));
+        assertThat(hasBonusNum).isTrue();
+    }
+
 }

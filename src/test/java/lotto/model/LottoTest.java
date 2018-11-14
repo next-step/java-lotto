@@ -2,7 +2,6 @@ package lotto.model;
 
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

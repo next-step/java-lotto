@@ -11,6 +11,7 @@ public class LottosAutoGenerator implements LottosGenerator {
             amount.purcharseTicket(1);
             tickets.add(new Ticket(LottoNum.getRandNums()));
         }
+
         return tickets;
     }
 }

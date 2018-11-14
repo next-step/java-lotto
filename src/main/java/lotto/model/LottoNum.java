@@ -24,15 +24,21 @@ public class LottoNum {
         this.num = num;
     }
 
+    /**
+     * 범위 유효성 검사
+     *
+     * @param num
+     */
     private static void validateRange(int num) {
         if (!isWithinRange(num)) {
-            System.out.println("adsad : "+num);
+            System.out.println("adsad : " + num);
             throw new IllegalArgumentException("숫자는" + RANDOM_NUM_MIN + "과 " + RANDOM_NUM_MAX + "사이여햐합니다.");
         }
     }
 
     /**
      * 범위 이내인가?
+     *
      * @param num
      * @return
      */
@@ -54,6 +60,7 @@ public class LottoNum {
 
     /**
      * 로또 번호들로 변경
+     *
      * @param nums
      * @return
      */
@@ -65,6 +72,7 @@ public class LottoNum {
 
     /**
      * 로또 번호로 변경
+     *
      * @param num
      * @return
      */
@@ -72,6 +80,18 @@ public class LottoNum {
         validateRange(num);
 
         return LOTTO_NUM_MAP.get(num);
+    }
+
+    /**
+     * Integer로 변환
+     *
+     * @param lottoNums
+     * @return
+     */
+    public static List<Integer> toInteger(List<LottoNum> lottoNums) {
+        return lottoNums.stream()
+                .map(LottoNum::getNum)
+                .collect(Collectors.toList());
     }
 
     public int getNum() {
