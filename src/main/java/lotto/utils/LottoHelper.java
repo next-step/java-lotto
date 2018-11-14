@@ -18,8 +18,15 @@ public class LottoHelper {
         return new LottoBall(number);
     }
 
-    public static List<LottoBall> pickRandomBalls(List<LottoBall> balls, int pickCount) {
-        Collections.shuffle(balls);
-        return balls.subList(0, pickCount);
+    public static int[] toInts(String[] values) {
+        int[] numbers = new int[values.length];
+        for (int i = 0; i < values.length; i++) {
+            numbers[i] = Integer.parseInt(values[i]);
+        }
+        return numbers;
+    }
+
+    public static String[] split(String value) {
+        return value.split("(\\s+)?,(\\s+)?");
     }
 }
