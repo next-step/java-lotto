@@ -23,16 +23,20 @@ public class LottoGame {
         return lottos;
     }
 
-    public Map<Integer, Integer> getReword(String numbers) {
-        Lotto winnerLotto = new Lotto(convertStringNumberToListInteger(numbers));
+    public LottoGameResult getReword(String stringNumber) {
+        Lotto winnerLotto = createWinnerLotto(stringNumber);
         LottoGameResult lottoGameResult = new LottoGameResult();
 
-        Map<Integer, Integer> results = new HashMap<>();
         for (Lotto lotto : lottos) {
-            results = lottoGameResult.setRewordCount(lotto, winnerLotto);
+            lottoGameResult.setRewordCount(lotto, winnerLotto);
         }
 
-        return results;
+        return lottoGameResult;
+    }
+
+    private Lotto createWinnerLotto(String stringNumber) {
+        List<String> numbers = Arrays.asList(stringNumber.replace(" ", "").split(","));
+        return new Lotto(new ArrayList(numbers.stream().map(Integer::parseInt).collect(toList())));
     }
 
     private void validation(int totalPrice) {
@@ -43,14 +47,6 @@ public class LottoGame {
         if(totalPrice < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또 구매금액은 1000원이 넘어야 합니다.");
         }
-    }
-
-    private List<Integer> convertStringNumberToListInteger(String stringNumber) {
-        List<String> numbers = Arrays.asList(stringNumber.replace(" ", "").split(","));
-
-        return numbers.stream()
-                .map(Integer::parseInt)
-                .collect(toList());
     }
 
 

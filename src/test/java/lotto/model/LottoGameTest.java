@@ -4,9 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Map;
 
-import static lotto.model.LottoGameResult.earningsRate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameTest {
@@ -28,7 +26,7 @@ public class LottoGameTest {
     @Test(expected = IllegalArgumentException.class)
     public void 로또_게임_1000원_미만_구입() {
         LottoGame lottoGame = new LottoGame();
-        List<Lotto> lottos = lottoGame.createLotto(999);
+        lottoGame.createLotto(999);
     }
 
     @Test
@@ -37,9 +35,9 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         List<Lotto> lottos = lottoGame.createLotto(totalPrice);
 
-        Map<Integer, Integer> rewordLotto = lottoGame.getReword("1, 2, 3, 4, 5, 6");
-        float earningsRate = earningsRate(rewordLotto, totalPrice);
-        assertThat(rewordLotto.size()).isEqualTo(7);
+        LottoGameResult lottoGameResult = lottoGame.getReword("1, 2, 3, 4, 5, 6");
+        assertThat(lottoGameResult.getResults().size()).isEqualTo(7);
+        float earningsRate = lottoGameResult.earningsRate(totalPrice);
 
     }
 }

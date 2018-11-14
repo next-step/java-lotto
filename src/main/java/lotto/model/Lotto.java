@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 public class Lotto {
     private static final int LOTTO_NUMBER_DIGIT = 6;
@@ -10,7 +12,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validation(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList(numbers);
     }
 
     public List<Integer> getNumbers() {
@@ -18,9 +20,16 @@ public class Lotto {
     }
 
     private void validation(List<Integer> numbers) {
+        validationNumberDuplicate(numbers);
         validationNumberDigit(numbers);
         validationNumberRange(numbers);
 
+    }
+
+    private void validationNumberDuplicate(List<Integer> numbers) {
+        if(!numbers.stream().allMatch(new HashSet<>()::add)) {
+            throw new IllegalArgumentException("숫자는 중복하여 입력할 수 없습니다.");
+        }
     }
 
     private void validationNumberDigit(List<Integer> numbers) {
@@ -39,6 +48,12 @@ public class Lotto {
 
     public int matchCount(List<Integer> winnerLotto) {
         this.numbers.retainAll(winnerLotto);
+        return numbers.size();
+    }
+
+    public int matchCount(Lotto winnerLotto) {
+
+        this.numbers.retainAll(winnerLotto.numbers);
         return numbers.size();
     }
 }

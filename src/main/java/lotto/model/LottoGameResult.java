@@ -15,19 +15,20 @@ public class LottoGameResult {
         results = initalizeResult();
     }
 
-    public Map<Integer, Integer> setRewordCount(Lotto lotto, Lotto winnerLotto) {
+    public Map<Integer, Integer> getResults() {
+        return results;
+    }
+
+    public void setRewordCount(Lotto lotto, Lotto winnerLotto) {
         int matchNumber = lotto.matchCount(winnerLotto.getNumbers());
 
         Integer count = results.containsKey(matchNumber) ? results.get(matchNumber) : 0;
         results.put(matchNumber, ++count);
-
-        return results;
     }
 
-    public static float earningsRate(Map<Integer, Integer> reword, Integer totalPrice) {
+    public float earningsRate(Integer totalPrice) {
         LottoReword[] lottoRewords = LottoReword.values();
-
-        Integer totalReword = reword.entrySet().stream()
+        Integer totalReword = results.entrySet().stream()
                 .mapToInt(e -> e.getValue() * lottoRewords[e.getKey()].getReword())
                 .sum();
 

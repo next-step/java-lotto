@@ -3,11 +3,10 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoGame;
+import lotto.model.LottoGameResult;
 
 import java.util.List;
-import java.util.Map;
 
-import static lotto.model.LottoGameResult.earningsRate;
 import static lotto.ui.InputView.buyLotto;
 import static lotto.ui.InputView.lastWeekWinnerNumbers;
 import static lotto.ui.ResultView.printBuyLottoNumbers;
@@ -23,10 +22,9 @@ public class ConsoleApplication {
         printBuyLottoNumbers(lottos);
 
         String winnerNumber = lastWeekWinnerNumbers();
-        Map<Integer, Integer> rewordLotto = lottoGame.getReword(winnerNumber);
-        float earningsRate = earningsRate(rewordLotto, totalPrice);
+        LottoGameResult rewordLotto = lottoGame.getReword(winnerNumber);
+        float earningsRate = rewordLotto.earningsRate(totalPrice);
         printResultLottoReword(rewordLotto, earningsRate);
-
 
     }
 }
