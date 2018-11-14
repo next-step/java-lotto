@@ -1,6 +1,7 @@
 package view;
 
 import domain.*;
+import domain.wrapper.BuyLotto;
 
 public class ResultView {
 
@@ -15,6 +16,10 @@ public class ResultView {
 
     public static void printBuyLottoCount(int lottoCount) {
         System.out.println(String.format("%s개를 구매했습니다.", lottoCount));
+    }
+
+    public static void printBuyLottoCount(BuyLotto buyManualLottoCount) {
+        System.out.println(String.format("%s개를 구매했습니다.", buyManualLottoCount.getLottoCount()));
     }
 
     public static void printLottoGroup(LottoGroup lottoGroup) {
@@ -44,4 +49,9 @@ public class ResultView {
     private static void printRewards(LottoRank rank) {
         System.out.print(String.format(" (%s원)", rank.getPriceRewards()));
     }
+
+    public static void printLottoGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+        System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manualLottoGroup.getSize(), autoLottoGroup.getSize()));
+    }
+
 }

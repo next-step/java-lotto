@@ -1,5 +1,7 @@
 package domain;
 
+import domain.wrapper.Money;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +29,23 @@ public class LottoGroup {
         this.lottoGroup = lottos;
     }
 
-    public List<Lotto> getLottoGroup() {
-        return lottoGroup;
+    public LottoGroup(List<Lotto> lottoList, List<Lotto> lottoList1) {
+        lottoList.addAll(lottoList1);
+        this.lottoGroup = lottoList;
+    }
+
+    public LottoGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+        this.lottoGroup = manualLottoGroup.getLottoGroup();
+        autoLottoGroup.getLottoGroup().stream().forEach(obj-> this.lottoGroup.add(obj));
+    }
+
+    public LottoGroup(Money myMoney) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < myMoney.getCount(); i++) {
+            Lotto lotto = new Lotto();
+            lottos.add(lotto);
+        }
+        this.lottoGroup = lottos;
     }
 
     public int getSize() {
@@ -44,5 +61,9 @@ public class LottoGroup {
             }
         }
         return new LottoResultGroup(winningLottos);
+    }
+
+    public List<Lotto> getLottoGroup() {
+        return lottoGroup;
     }
 }

@@ -73,4 +73,5 @@ public class LottoResultGroupTest {
             ResultView.printCombineCount(lottoCount);
         }
     }
+
 }

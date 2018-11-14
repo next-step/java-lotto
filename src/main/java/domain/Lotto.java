@@ -1,6 +1,8 @@
 package domain;
 
+import domain.wrapper.LottoNo;
 import utils.LottoGenerator;
+import utils.StringUtils;
 
 import java.util.List;
 
@@ -8,6 +10,7 @@ public class Lotto {
     public static final int LOTTO_CHOICE_CNT = 6;
 
     private List<Integer> numbers;
+    private List<LottoNo> lottoNumbers;
 
     public Lotto() {
         this(LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT));
@@ -19,6 +22,13 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+//    public Lotto(List<LottoNo> lottoNumbers) {
+//        this.lottoNumbers = lottoNumbers;
+//    }
+    public Lotto(String lottoStringNumber) {
+        this.numbers = StringUtils.convertStrToNum(lottoStringNumber);
     }
 
     public int getCombineCount(Lotto lastLotto) {

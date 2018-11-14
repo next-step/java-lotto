@@ -2,7 +2,10 @@ package domain;
 
 import org.junit.Before;
 import org.junit.Test;
+import utils.StringUtils;
+import view.InputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,4 +60,23 @@ public class LottoGroupTest {
         assertThat(combineNumbers[0]).isEqualTo(3);
     }
 
+
+    @Test
+    public void 수동로또하기() {
+
+        int buyManualLottoCount = 3;
+        List<Lotto> lottoList = Arrays.asList(lastLotto, lastLotto, lastLotto);
+        List<Lotto> lottoList1 = Arrays.asList(lastLotto, lastLotto, lastLotto);
+//        for(int i =0; i < buyManualLottoCount; i++){
+//            lottoList.add(new Lotto(StringUtils.convertStrToNum(InputView.lastLottoNumber())));
+//        }
+        lottoList.addAll(lottoList1);
+        LottoGroup lottoGroup = new LottoGroup(lottoList, lottoList1);
+//        lottoGroup.add(manualLottoGroup);
+
+
+
+
+        assertThat(lottoList.size()).isEqualTo(lottoGroup.getSize());
+    }
 }
