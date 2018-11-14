@@ -1,5 +1,6 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.value.Money;
 import org.junit.Test;
 
 import java.util.List;

@@ -1,8 +1,10 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
 
+import net.chandol.lotto.value.LottoNumberItem;
+import net.chandol.lotto.value.WinningNumber;
 import org.junit.Test;
 
-import static net.chandol.lotto.domain.LottoNumber.direct;
+import static net.chandol.lotto.value.LottoNumber.direct;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningNumberTest {

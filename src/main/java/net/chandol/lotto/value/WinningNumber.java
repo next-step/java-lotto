@@ -1,4 +1,6 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
+
+import net.chandol.lotto.type.LottoPrize;
 
 import java.util.ArrayList;
 import java.util.List;

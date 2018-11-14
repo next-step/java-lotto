@@ -1,10 +1,11 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.value.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
-import static net.chandol.lotto.domain.LottoPrize.*;
+import static net.chandol.lotto.type.LottoPrize.*;
 
 public class LottoGameResultTest {
 

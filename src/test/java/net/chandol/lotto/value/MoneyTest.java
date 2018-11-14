@@ -1,5 +1,6 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
 
+import net.chandol.lotto.value.Money;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

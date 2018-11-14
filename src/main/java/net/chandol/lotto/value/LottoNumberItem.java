@@ -1,4 +1,4 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
 
 public class LottoNumberItem {
     private static final int LOTTO_MIN_NUMBER = 1;
@@ -19,6 +19,10 @@ public class LottoNumberItem {
         if ((n < LOTTO_MIN_NUMBER) || (n > LOTTO_MAX_NUMBER)) {
             throw new IllegalArgumentException("유효하지 않은 범위의 번호입니다.");
         }
+    }
+
+    public static LottoNumberItem of(int number) {
+        return new LottoNumberItem(number);
     }
 
     @Override

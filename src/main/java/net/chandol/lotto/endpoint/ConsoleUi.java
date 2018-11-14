@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static net.chandol.lotto.domain.LottoPrize.*;
+import static net.chandol.lotto.type.LottoPrize.*;
 import static net.chandol.lotto.util.ConsoleUiUtil.formatLotto;
 
 public class ConsoleUi {

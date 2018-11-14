@@ -1,8 +1,8 @@
 package net.chandol.lotto.util;
 
 import net.chandol.lotto.domain.Lotto;
-import net.chandol.lotto.domain.LottoNumber;
-import net.chandol.lotto.domain.LottoNumberItem;
+import net.chandol.lotto.value.LottoNumber;
+import net.chandol.lotto.value.LottoNumberItem;
 
 import java.util.Arrays;
 import java.util.List;

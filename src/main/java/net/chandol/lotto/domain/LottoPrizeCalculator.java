@@ -1,5 +1,9 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.type.LottoPrize;
+import net.chandol.lotto.value.Money;
+import net.chandol.lotto.value.WinningNumber;
+
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;

@@ -1,11 +1,13 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.type.LottoPrize;
+import net.chandol.lotto.value.WinningNumber;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static net.chandol.lotto.domain.LottoNumber.direct;
+import static net.chandol.lotto.value.LottoNumber.direct;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPrizeCalculatorTest {

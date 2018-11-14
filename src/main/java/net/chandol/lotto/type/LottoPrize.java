@@ -1,4 +1,4 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.type;
 
 import java.util.Arrays;
 import java.util.Objects;

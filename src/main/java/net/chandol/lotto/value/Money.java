@@ -1,4 +1,4 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
 
 import java.util.Objects;
 

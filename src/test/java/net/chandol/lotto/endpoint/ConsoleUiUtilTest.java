@@ -1,15 +1,15 @@
 package net.chandol.lotto.endpoint;
 
 import net.chandol.lotto.domain.Lotto;
-import net.chandol.lotto.domain.LottoNumber;
-import net.chandol.lotto.domain.LottoNumberItem;
+import net.chandol.lotto.value.LottoNumber;
+import net.chandol.lotto.value.LottoNumberItem;
 import net.chandol.lotto.util.ConsoleUiUtil;
 import org.junit.Test;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static net.chandol.lotto.domain.LottoNumber.direct;
+import static net.chandol.lotto.value.LottoNumber.direct;
 import static net.chandol.lotto.util.ConsoleUiUtil.getLottoNumber;
 import static net.chandol.lotto.util.ConsoleUiUtil.getLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;

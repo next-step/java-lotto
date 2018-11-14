@@ -1,5 +1,8 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.type.LottoPrize;
+import net.chandol.lotto.value.Money;
+
 import java.util.List;
 
 public class LottoGameResult {
