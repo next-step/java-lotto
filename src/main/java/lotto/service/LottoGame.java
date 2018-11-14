@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    private static final int FEE_OF_ONE_TRY = 1000;
+    private static final int FEE_OF_ONE_TRY = 1_000;
 
     private int games;
     private int money;
@@ -34,7 +34,7 @@ public class LottoGame {
         return gamePlays;
     }
 
-    public int getMoney() {
-        return money;
+    public LottoResult match(List<Integer> winnersNum){
+        return new LottoResult(gamePlays,winnersNum,money);
     }
 }

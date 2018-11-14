@@ -16,9 +16,4 @@ public class Lotto {
         return frameNumber;
     }
 
-
-
-
-
-
 }

@@ -12,9 +12,9 @@ public class LottoResult {
     public static final String PLUS_PROFIT = "이익";
     public static final String SAME_PROFIT = "본전";
 
-    List<Lotto> lottos;
-    List<Integer> winnerNums;
-    int inputMoney;
+    private List<Lotto> lottos;
+    private List<Integer> winnerNums;
+    private int inputMoney;
 
     public LottoResult(List<Lotto> lottos, List<Integer> winnerNums, int inputMoney) {
         this.lottos = lottos;
@@ -31,7 +31,7 @@ public class LottoResult {
                             "%s개 일치 (%d원) - %d개\n"
                             ,lEnum.getMatch()
                             ,lEnum.getWon()
-                            ,new LottoMatch(winnersNum).getMatchNum(lottos).get(lEnum.getMatch())
+                            ,new LottoMatch(winnersNum).getMatchNum(lottos).get(LottoMatch.getEnumMatch(lEnum.getMatch()))
                     )
             );
         }
@@ -79,7 +79,7 @@ public class LottoResult {
     public double getProfit(List<Integer> winnersNum){
         int sum = 0;
         for(LottoEnum lEnum : LottoEnum.values()){
-            sum += new LottoMatch(winnersNum).getMatchNum(lottos).get(lEnum.getMatch()) * lEnum.getWon();
+            sum += new LottoMatch(winnersNum).getMatchNum(lottos).get(LottoMatch.getEnumMatch(lEnum.getMatch())) * lEnum.getWon();
         }
         return sum/this.inputMoney;
     }

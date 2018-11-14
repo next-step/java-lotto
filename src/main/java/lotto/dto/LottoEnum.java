@@ -2,13 +2,13 @@ package lotto.dto;
 
 public enum LottoEnum {
 
-    THREE(3,5000),
-    FOUR(4,50000),
-    FIVE(5,1500000),
-    SIX(6,2000000000);
+    THREE(3,5_000),
+    FOUR(4,50_000),
+    FIVE(5,1_500_000),
+    SIX(6,2_000_000_000);
 
-    final private int match;
-    final private int won;
+    private final int match;
+    private final int won;
 
 
     LottoEnum(int match, int won) {
@@ -23,4 +23,5 @@ public enum LottoEnum {
     public int getWon() {
         return won;
     }
+
 }

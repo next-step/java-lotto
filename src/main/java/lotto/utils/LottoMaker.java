@@ -12,7 +12,7 @@ public class LottoMaker {
 
     public static List<Integer> getOnetoFortyFive() {
         List<Integer> nums = new ArrayList<>();
-        for( int i = 0 ; i < NUM_OF_CARDS ; i ++ ){
+        for( int i = 1 ; i <= NUM_OF_CARDS ; i ++ ){
             nums.add(i);
         }
         return nums;

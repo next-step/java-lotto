@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.dto.Lotto;
+import lotto.dto.LottoEnum;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,25 +17,25 @@ public class LottoMatchTest {
     public void 매칭결과테스트() {
 
         LottoMatch lm = new LottoMatch(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
-        Map<Integer,Integer> temp = lm.getMatch();
+        Map<LottoEnum,Integer> temp = lm.getMatch();
         assertThat(temp).hasSize(4);
         /** 초기값 0 출력 확인
          *
          */
-        System.out.println(lm.getMatch().get(3));
-        System.out.println(lm.getMatch().get(4));
-        System.out.println(lm.getMatch().get(5));
-        System.out.println(lm.getMatch().get(6));
+        System.out.println(lm.getMatch().get(LottoEnum.THREE));
+        System.out.println(lm.getMatch().get(LottoEnum.FOUR));
+        System.out.println(lm.getMatch().get(LottoEnum.FIVE));
+        System.out.println(lm.getMatch().get(LottoEnum.SIX));
 
 
     }
 
     @Test
     public void 매칭결과_MAP반환() {
-        LottoMatch lm = new LottoMatch(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
+        LottoMatch lm = new LottoMatch(Arrays.asList(1,2,3,4,5,6));
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(), new Lotto()));
-        Map<Integer,Integer> maps = lm.getMatchNum(lottos);
-        assertThat(maps.get(3)).isEqualTo(0);
+        Map<LottoEnum,Integer> maps = lm.getMatchNum(lottos);
+        assertThat(maps.get(LottoEnum.THREE)).isEqualTo(0);
     }
 
     @Test
@@ -49,7 +50,14 @@ public class LottoMatchTest {
         for(Lotto lotto : lottos){
             System.out.println(LottoMatch.duplicatedCounts(lotto.getLotto(),winnerNums));
         }
+    }
 
+    @Test
+    public void ENUM반환() {
+        assertThat(LottoMatch.getEnumMatch(3)).isEqualTo(LottoEnum.THREE);
+        assertThat(LottoMatch.getEnumMatch(4)).isEqualTo(LottoEnum.FOUR);
+        assertThat(LottoMatch.getEnumMatch(5)).isEqualTo(LottoEnum.FIVE);
+        assertThat(LottoMatch.getEnumMatch(6)).isEqualTo(LottoEnum.SIX);
 
     }
 }

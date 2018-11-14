@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.dto.Lotto;
 import lotto.service.LottoGame;
 import lotto.service.LottoResult;
 import lotto.utils.Utils;
@@ -12,20 +13,16 @@ public class ConsoleMain {
 
     public static void main(String[] args){
 
-
         LottoGame lg = new LottoGame(InputView.inputMoney());
-        InputView.printLottoList(lg.getGamePlays());
+        List<Lotto> lottos = lg.getGamePlays();
+        InputView.printLottoList(lottos);
 
         String inputWinnerNumsToString = InputView.winningNumbers();
         List<Integer> winnersNum = Utils.getIntListFromString(inputWinnerNumsToString);
-        LottoResult lr = new LottoResult(lg.getGamePlays(),winnersNum,lg.getMoney());
+        LottoResult lr = lg.match(winnersNum);
 
-        ResultView.gameResult();
-        System.out.println(lr.matchCountResultString(winnersNum));
-
-
-        //마지막 출력 소수점
-
+        String result = lr.matchCountResultString(winnersNum);
+        ResultView.gameResult(result);
 
     }
 }

@@ -4,23 +4,31 @@ import lotto.dto.Lotto;
 import lotto.dto.LottoEnum;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoMatch {
 
-    Map<Integer,Integer> match;
+    private static final int MATCH_MINIMUM_STANDARD = 3;
+    private static final int MAX_LENGTH_AFTER_DISTINCT = 12;
+
+    private Map<LottoEnum,Integer> match;
     private List<Integer> winnersNums;
 
     public LottoMatch(List<Integer> winnersNums){
-        match = Arrays.stream(LottoEnum.values())
-                .collect(Collectors.toMap(LottoEnum::getMatch, e-> 0));
+        match = Stream.of(LottoEnum.values())
+                .collect(Collectors.toMap(
+                        e -> e
+                        ,e -> 0
+                ));
         this.winnersNums = winnersNums;
     }
 
 
-    public Map<Integer, Integer> getMatch() {
+    public Map<LottoEnum, Integer> getMatch() {
         return match;
     }
 
@@ -31,19 +39,23 @@ public class LottoMatch {
     public static int duplicatedCounts(List<Integer> lotto , List<Integer> winnersNum){
         lotto.addAll(winnersNum);
 
-        return 12 - (int) lotto.stream()
+        return MAX_LENGTH_AFTER_DISTINCT - (int) lotto.stream()
                 .distinct()
                 .count();
     }
 
-    public Map<Integer, Integer> getMatchNum(List<Lotto> lottos){
+    public Map<LottoEnum, Integer> getMatchNum(List<Lotto> lottos){
         for(Lotto lotto : lottos){
             int duplicateTemp = duplicatedCounts(lotto.getLotto(),winnersNums);
-            if(duplicateTemp >= 3)
-            match.put(duplicateTemp,pluscount(match.get(duplicateTemp)));
+            if(duplicateTemp >= MATCH_MINIMUM_STANDARD)
+                match.put(getEnumMatch(duplicateTemp),pluscount(match.get(getEnumMatch(duplicateTemp))));
         }
 
         return match;
+    }
+
+    public static LottoEnum getEnumMatch(int duplicateNums){
+        return LottoEnum.values()[duplicateNums-3];
     }
 
 
