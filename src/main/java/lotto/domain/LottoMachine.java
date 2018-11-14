@@ -22,11 +22,11 @@ public class LottoMachine {
     }
 
     private LottoResult createLottoResult(LottoType lottoType) {
-        return LottoResult.create(lottoType, findMatchSetByLottoType(lottoType));
+        return LottoResult.create(lottoType, findNumberOfMatchesByLottoType(lottoType));
     }
 
-    private List<Lotto> findMatchSetByLottoType(LottoType lottoType) {
-        return lottoSet.matchSets(target, lottoType.getMatchCount());
+    private int findNumberOfMatchesByLottoType(LottoType lottoType) {
+        return lottoSet.numberOfMatches(target, lottoType.getMatchCount());
     }
 
     public enum LottoType {

@@ -27,11 +27,12 @@ public class LottoSet {
         return lottos.size();
     }
 
-    public List<Lotto> matchSets(List<Integer> target, int count) {
-        return this.lottos.stream()
+    public int numberOfMatches(List<Integer> target, int count) {
+        return Math.toIntExact(this.lottos.stream()
                 .filter(lotto -> lotto.hasMatches(target, count))
-                .collect(Collectors.toList());
+                .count());
     }
+
 
     @Override
     public String toString() {

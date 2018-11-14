@@ -37,10 +37,10 @@ public class LottoSetTest {
     }
 
     @Test
-    public void 일치하는_로또셋을_알수있다() {
+    public void 일치하는_로또셋_갯수를_알수있다() {
         LottoSet lottoSet = LottoSet.create(lottos);
 
-        assertThat(lottoSet.matchSets(Arrays.asList(1, 10, 15, 91, 92, 93), 3)).hasSize(1);
-        assertThat(lottoSet.matchSets(Arrays.asList(20, 25, 30, 91, 92, 93), 3)).hasSize(2);
+        assertThat(lottoSet.numberOfMatches(Arrays.asList(1, 10, 15, 91, 92, 93), 3)).isEqualTo(1);
+        assertThat(lottoSet.numberOfMatches(Arrays.asList(20, 25, 30, 91, 92, 93), 3)).isEqualTo(2);
     }
 }
