@@ -2,28 +2,28 @@ package domain;
 
 import java.util.Arrays;
 
-public enum Jackpot {
-    SAME_0_NUMBERS(0, 0),
-    SAME_1_NUMBERS(1, 0),
-    SAME_2_NUMBERS(2, 0),
-    SAME_3_NUMBERS(3, 5_000),
-    SAME_4_NUMBERS(4, 50_000),
-    SAME_5_NUMBERS(5, 1_500_000),
-    SAME_6_NUMBERS(6, 2_000_000_000);
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
     private int matchNumber;
     private int prizeMoney;
 
-    Jackpot(int matchNumber, int prizeMoney) {
+    Rank(int matchNumber, int prizeMoney) {
         this.matchNumber = matchNumber;
         this.prizeMoney = prizeMoney;
     }
 
-    public static Jackpot valueOf(int matchCount) {
-        return Arrays.stream(Jackpot.values())
-                .filter(jackpot -> jackpot.isSameMatchNumber(matchCount))
+    public static Rank valueOf(int matchCount, boolean matchBonus) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.isSameMatchNumber(matchCount))
+                .filter(rank -> !rank.equals(SECOND) || matchBonus)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 데이터가 입력되었습니다."));
+                .orElse(MISS);
     }
 
     public int getMatchNumber() {

@@ -19,50 +19,41 @@ public class LottoResultTest {
 
     @Test
     public void 번호_3개일치_항목_개수체크() {
-        int matchCount = lottoResult.matchCount(Jackpot.SAME_3_NUMBERS);
+        int matchCount = lottoResult.matchCount(Rank.FIFTH);
         assertThat(matchCount).isEqualTo(1);
     }
 
     @Test
     public void 번호_4개일치_항목_개수체크() {
-        int matchCount = lottoResult.matchCount(Jackpot.SAME_4_NUMBERS);
+        int matchCount = lottoResult.matchCount(Rank.FOURTH);
         assertThat(matchCount).isEqualTo(0);
     }
 
     @Test
     public void 번호_5개일치_항목_개수체크() {
-        int matchCount = lottoResult.matchCount(Jackpot.SAME_5_NUMBERS);
+        int matchCount = lottoResult.matchCount(Rank.THIRD);
         assertThat(matchCount).isEqualTo(0);
     }
 
     @Test
     public void 번호_6개일치_항목_개수체크() {
-        int matchCount = lottoResult.matchCount(Jackpot.SAME_6_NUMBERS);
+        int matchCount = lottoResult.matchCount(Rank.FIRST);
         assertThat(matchCount).isEqualTo(0);
     }
 
     @Test
     public void 수익률_구하기() {
         double rate = lottoResult.calculatorRate();
-        assertThat(rate).isEqualTo(0.35);
+        assertThat(rate).isEqualTo(1.0);
     }
 
-    private List<Jackpot> getDummyJackpots() {
+    private List<Rank> getDummyJackpots() {
         return Arrays.asList(
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_1_NUMBERS,
-                Jackpot.SAME_1_NUMBERS,
-                Jackpot.SAME_2_NUMBERS,
-                Jackpot.SAME_3_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS,
-                Jackpot.SAME_0_NUMBERS
+                Rank.MISS,
+                Rank.MISS,
+                Rank.FIFTH,
+                Rank.MISS,
+                Rank.MISS
         );
     }
 }

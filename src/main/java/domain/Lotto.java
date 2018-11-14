@@ -12,6 +12,7 @@ public class Lotto {
     private static final int MIN_NUMBER = 1;
     private static final int LOTTO_NUMBER_COUNT = 6;
     private List<Integer> numbers;
+    private int bonusNumber;
 
     private Lotto() {
         numbers = getRandomNumbers();
@@ -36,6 +37,10 @@ public class Lotto {
 
     public static Lotto manual(String values) {
         return new Lotto(values);
+    }
+
+    public void setBonusNumber(int bonusNumber) {
+        this.bonusNumber = bonusNumber;
     }
 
     public List<Integer> getLottoNumbers() {
@@ -89,14 +94,18 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Jackpot getMatchJackpot(Lotto winningNumbers) {
+    public Rank getMatchJackpot(Lotto winningNumbers) {
         int sameCount = 0;
         for (int number: numbers) {
             if(winningNumbers.hasNumber(number)) {
                 sameCount += 1;
             }
         }
-        return Jackpot.valueOf(sameCount);
+        return Rank.valueOf(sameCount, isMatchBonus());
+    }
+
+    private boolean isMatchBonus() {
+        return hasNumber(bonusNumber);
     }
 
     private boolean hasNumber(int number) {

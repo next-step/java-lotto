@@ -2,32 +2,29 @@ package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
 public class LottoResult {
 
-    private List<Jackpot> jackpots;
+    private List<Rank> ranks;
 
-    public LottoResult(List<Jackpot> jackpots) {
-        this.jackpots = jackpots;
+    public LottoResult(List<Rank> ranks) {
+        this.ranks = ranks;
     }
 
-    public int matchCount(Jackpot selectedJackpot) {
-        return (int) jackpots.stream()
-                .filter(jackpot -> jackpot.equals(selectedJackpot))
+    public int matchCount(Rank selectedRank) {
+        return (int) ranks.stream()
+                .filter(jackpot -> jackpot.equals(selectedRank))
                 .count();
     }
 
-    public List<Jackpot> getJackpot() {
-        return asList(Jackpot.SAME_3_NUMBERS,
-                Jackpot.SAME_4_NUMBERS,
-                Jackpot.SAME_5_NUMBERS,
-                Jackpot.SAME_6_NUMBERS);
+    public List<Rank> getRanks() {
+        return asList(Rank.FIFTH,
+                Rank.FOURTH,
+                Rank.THIRD,
+                Rank.FIRST);
     }
 
     public double calculatorRate() {
@@ -39,13 +36,13 @@ public class LottoResult {
     }
 
     private int getPaidLotto() {
-        return Lotto.PRICE * jackpots.size();
+        return Lotto.PRICE * ranks.size();
     }
 
     private int getTotalPrizeMoney() {
         int totalPrizeMoney = 0;
-        for (Jackpot jackpot : getJackpot()) {
-            totalPrizeMoney += jackpot.getTotalPrizeMoney(matchCount(jackpot));
+        for (Rank rank : getRanks()) {
+            totalPrizeMoney += rank.getTotalPrizeMoney(matchCount(rank));
         }
         return totalPrizeMoney;
     }
