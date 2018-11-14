@@ -2,6 +2,7 @@ package net.chandol.lotto.endpoint;
 
 import net.chandol.lotto.domain.Lotto;
 import net.chandol.lotto.domain.LottoNumber;
+import net.chandol.lotto.domain.LottoNumberItem;
 import net.chandol.lotto.util.ConsoleUiUtil;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class ConsoleUiUtilTest {
         LottoNumber lottoNumber = getLottoNumber(rawLottoNumber);
 
         assertThat(lottoNumber.getLottoNumbers())
-                .containsExactly(1, 2, 3, 4, 5, 6);
+                .containsExactly(new LottoNumberItem(1), new LottoNumberItem(2), new LottoNumberItem(3), new LottoNumberItem(4), new LottoNumberItem(5), new LottoNumberItem(6));
     }
 
     @Test

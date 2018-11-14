@@ -5,39 +5,48 @@ import java.util.List;
 import static com.google.common.primitives.Ints.asList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
-import static net.chandol.lotto.util.LottoNumberValidator.validateNumbersRanges;
 import static net.chandol.lotto.util.LottoNumberValidator.validateUniqueNumbers;
 import static net.chandol.lotto.util.RandomLottoNumberProvider.getNumbers;
 
 public class LottoNumber {
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private List<Integer> numbers;
+    private List<LottoNumberItem> items;
 
-    // static factory method 만을 사용하도록 만들자!
     private LottoNumber(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
+        validateNonNull(numbers);
+
+        List<LottoNumberItem> items = numbers.stream()
+                .map(LottoNumberItem::new)
+                .collect(toList());
+
+        validateNumbers(items);
+        this.items = items;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return unmodifiableList(numbers);
+    private void validateNonNull(List<Integer> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException("null은 허용되지 않습니다.");
+        }
     }
 
-    private void validateNumbers(List<Integer> numbers) {
-        validateNumberSize(numbers);
-        validateUniqueNumbers(numbers);
-        validateNumbersRanges(numbers);
+    public List<LottoNumberItem> getLottoNumbers() {
+        return unmodifiableList(items);
     }
 
-    private void validateNumberSize(List<Integer> numbers) {
-        if (numbers == null || numbers.size() != LOTTO_NUMBER_SIZE) {
+    private void validateNumbers(List<LottoNumberItem> items) {
+        validateNumberSize(items);
+        validateUniqueNumbers(items);
+    }
+
+    private void validateNumberSize(List<LottoNumberItem> items) {
+        if (items == null || items.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("로또 숫자를 확인해주세요.");
         }
     }
 
-    public List<Integer> getMatchNumbers(LottoNumber another) {
+    public List<LottoNumberItem> getMatchNumbers(LottoNumber another) {
         return another.getLottoNumbers().stream()
-                .filter(i -> numbers.contains(i))
+                .filter(i -> items.contains(i))
                 .collect(toList());
     }
 
@@ -45,7 +54,7 @@ public class LottoNumber {
         return getMatchNumbers(another).size();
     }
 
-    public boolean containsNumber(Integer bonusNumber) {
+    public boolean containsNumber(LottoNumberItem bonusNumber) {
         return this.getLottoNumbers().contains(bonusNumber);
     }
 
@@ -55,10 +64,10 @@ public class LottoNumber {
         if (o == null || getClass() != o.getClass()) return false;
 
         LottoNumber that = (LottoNumber) o;
-        if (numbers == null || that.numbers == null) {
+        if (items == null || that.items == null) {
             return false;
         } else {
-            return numbers.containsAll(that.numbers) && numbers.containsAll(that.numbers);
+            return items.containsAll(that.items) && items.containsAll(that.items);
         }
     }
 

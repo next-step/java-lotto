@@ -2,6 +2,7 @@ package net.chandol.lotto.util;
 
 import net.chandol.lotto.domain.Lotto;
 import net.chandol.lotto.domain.LottoNumber;
+import net.chandol.lotto.domain.LottoNumberItem;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 
 public class ConsoleUiUtil {
     public static String formatLotto(Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getLottoNumber().getLottoNumbers();
+        List<LottoNumberItem> lottoNumbers = lotto.getLottoNumber().getLottoNumbers();
         return lottoNumbers.stream()
                 .map(String::valueOf)
                 .collect(joining(", ", "[", "]"));

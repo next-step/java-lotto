@@ -29,7 +29,7 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.direct(1, 2, 3, 4, 5, 6);
         assertThat(lottoNumber.getLottoNumbers())
                 .hasSize(6)
-                .contains(1, 2, 3, 4, 5, 6);
+                .contains(new LottoNumberItem(1), new LottoNumberItem(2), new LottoNumberItem(3), new LottoNumberItem(4), new LottoNumberItem(5), new LottoNumberItem(6));
     }
 
     // 테스트할 수 없는 영역..
@@ -45,9 +45,9 @@ public class LottoNumberTest {
     public void 다른로또번호와매칭결과확인() {
         LottoNumber num1 = LottoNumber.direct(1, 2, 3, 4, 5, 6);
         LottoNumber num2 = LottoNumber.direct(5, 6, 7, 8, 9, 10);
-        List<Integer> matchNumbers = num1.getMatchNumbers(num2);
+        List<LottoNumberItem> matchNumbers = num1.getMatchNumbers(num2);
 
-        Assertions.assertThat(matchNumbers).containsExactly(5, 6);
+        Assertions.assertThat(matchNumbers).containsExactly(new LottoNumberItem(5), new LottoNumberItem(6));
     }
     @Test
     public void 다른로또번호와매칭사이즈확인() {
