@@ -9,15 +9,18 @@ public class Lotto {
 
     private static final int LOTTO_COUNT = 6;
     private static final int LOTTO_BOUND = 46;
-    private List<Integer> lottoNumbers;
+    private List<LottoNo> lottoNumbers;
 
     public Lotto() {
         lottoNumbers = new ArrayList<>();
         initLottoNumbers();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(String[] lottoNumbers) {
+        this.lottoNumbers = new ArrayList<>();
+        for (String number : lottoNumbers) {
+            this.lottoNumbers.add(new LottoNo(number));
+        }
     }
 
     private void initLottoNumbers() {
@@ -28,7 +31,7 @@ public class Lotto {
             if (count == LOTTO_COUNT) break;
             int randomValue = random.nextInt(LOTTO_BOUND);
             if (lottoNumbers.contains(randomValue)) continue;
-            lottoNumbers.add(randomValue);
+            lottoNumbers.add(new LottoNo(randomValue));
             count++;
         }
 
@@ -36,14 +39,18 @@ public class Lotto {
     }
 
     public boolean isBonusBallInLotto(int bonusBall) {
-        return this.lottoNumbers.contains(bonusBall);
+        return this.contains(bonusBall);
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNo> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
     public boolean contains(Integer number) {
-        return this.lottoNumbers.contains(number);
+        for (LottoNo lottoNo : this.lottoNumbers) {
+            if (lottoNo.equals(number))
+                return true;
+        }
+        return false;
     }
 }

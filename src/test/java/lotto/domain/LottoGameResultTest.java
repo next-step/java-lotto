@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,11 +18,11 @@ public class LottoGameResultTest {
     public void setUp() throws Exception {
         lottoGameResult = new LottoGameResult();
         lottos = new BundleLotto();
-        lottos.getLottos().add(new Lotto(Arrays.asList(1, 3, 5, 14, 22, 45)));
-        lottos.getLottos().add(new Lotto(Arrays.asList(2, 13, 22, 32, 38, 45)));
-        lottos.getLottos().add(new Lotto(Arrays.asList(5, 9, 38, 41, 43, 44)));
-        lottos.getLottos().add(new Lotto(Arrays.asList(39, 7, 40, 27, 26, 21)));
-        lottos.getLottos().add(new Lotto(Arrays.asList(23, 25, 33, 36, 39, 41)));
+        lottos.addLotto(new Lotto(new String[] {"1","3","5","14","22","45"}));
+        lottos.addLotto(new Lotto(new String[] {"2","13","22","32","38","45"}));
+        lottos.addLotto(new Lotto(new String[] {"5","9","38","41","43","44"}));
+        lottos.addLotto(new Lotto(new String[] {"39","7","40","27","26","21"}));
+        lottos.addLotto(new Lotto(new String[] {"23","25","33","36","39","41"}));
     }
 
     @Test
@@ -75,7 +74,7 @@ public class LottoGameResultTest {
     public void 게임결과_수익률_얻기() {
         List<LottoDto> lottoDtos = new ArrayList<>();
         lottoDtos.add(new LottoDto(Rank.FIFTH, 1, 5000));
-        String ratio = lottoGameResult.getRatio(lottoDtos, 14000);
+        String ratio = lottoGameResult.getRatio(lottoDtos, new LottoCountManager(14000, 3));
         assertThat(ratio).isEqualTo("0.36");
     }
 }

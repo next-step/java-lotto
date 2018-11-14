@@ -8,11 +8,12 @@ public class LottoController {
     public static void main(String[] args) {
         LottoCountManager lottoCountManager = InputView.getBudget();
 
-        LottoGame lottoGame = new LottoGame();
-        BundleLotto lottos = lottoGame.makeLotto(budget);
+        BundleLotto lottos = InputView.getManualLottoNumbers(lottoCountManager);
 
-        int lottoCount = lottoGame.getLottoCount(budget);
-        ResultView.showLottoCount(lottoCount);
+        LottoGame lottoGame = new LottoGame();
+        lottos = lottoGame.makeLotto(lottoCountManager, lottos);
+
+        ResultView.showLottoCount(lottoCountManager);
         ResultView.showLottoNumbers(lottos);
 
         WinningLotto winningLotto = InputView.getWinningNumberWithBonus();
@@ -22,7 +23,7 @@ public class LottoController {
 
         ResultView.showResult(lottoGameResult);
 
-        String ratio = lottoGameResult.getRatio(lottoGameResult.getLottoDtos(), budget);
+        String ratio = lottoGameResult.getRatio(lottoGameResult.getLottoDtos(), lottoCountManager);
         ResultView.showRatioResult(ratio);
     }
 }

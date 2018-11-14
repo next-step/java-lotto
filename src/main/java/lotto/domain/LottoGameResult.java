@@ -33,15 +33,16 @@ public class LottoGameResult {
     }
 
 
-    public String getRatio(List<LottoDto> lottoDtos, int budget) {
+    public String getRatio(List<LottoDto> lottoDtos, LottoCountManager lottoCountManager) {
         double totalMoney = 0;
 
         for (LottoDto lottoDto : lottoDtos) {
             totalMoney += lottoDto.getWinningMoney();
         }
-        double result = totalMoney/(double)budget;
 
-        return String.format("%.2f", result);
+//        double result = totalMoney/(double)budget;
+
+        return String.format("%.2f", lottoCountManager.getRatio(totalMoney));
     }
 
     public List<LottoDto> getLottoDtos() {
