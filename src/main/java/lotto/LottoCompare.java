@@ -27,4 +27,12 @@ public class LottoCompare {
         return count;
     }
 
+    public LottoResult match(List<Lotto> lotteries){
+        LottoResult result = new LottoResult();
+        for(Lotto oneTicket : lotteries){
+            result.addCountToResult(compareNumber(oneTicket.getNumber()));
+        }
+        return result;
+    }
+
 }

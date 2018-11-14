@@ -1,24 +1,31 @@
 package lotto;
 
+
+import static lotto.LottoCommonUtil.ConvertMoneyFromString;
+
 public enum MappingCode {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    THREE(3, "5_000"),
+    FOUR(4, "50_000"),
+    FIVE(5, "1_500_000"),
+    SIX(6, "2_000_000_000");
 
     private final int count;
-    private final int prizes;
+    private final String prizes;
 
-    MappingCode(int count, int prizes){
+    MappingCode(int count, String prizes){
         this.count = count;
         this.prizes = prizes;
     }
 
-    public int getCount(){
-        return this.count;
+    public int calculateTotalPrize(int count) {
+        int prize = ConvertMoneyFromString(this.prizes);
+        return count * prize;
     }
+    public boolean matchCode(int count){
+            if(this.count == count){
+                return true;
+            }
 
-    public int getPrizes(){
-        return this.prizes;
+        return false;
     }
 }

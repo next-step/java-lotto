@@ -23,12 +23,7 @@ public class LottoMain {
         printAllLotteries(boughtLotteries); // 구매한 로또 모두 출력!
 
         LottoCompare compare = new LottoCompare(inputWinNumbers());
-
-        LottoResult result = new LottoResult();
-        for(Lotto oneTicket : boughtLotteries) {
-            //일치하는 갯수 카운트 증가시키기!
-            result.addCountToResult(compare.compareNumber(oneTicket.getNumber()));
-        }
+        LottoResult result = compare.match(boughtLotteries);
 
         winRate(result, cost.getCost());
 
