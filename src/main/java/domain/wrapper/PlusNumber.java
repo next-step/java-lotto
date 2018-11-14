@@ -1,8 +1,8 @@
 package domain.wrapper;
 
 public abstract class PlusNumber {
+    public static final int LOTTO_PRICE = 1000;
     private int number;
-    public PlusNumber(){}
 
     public PlusNumber(int number) {
         if(number < 0){
@@ -26,23 +26,4 @@ public abstract class PlusNumber {
     public int getNumber() {
         return number;
     }
-
-    public int addition(PlusNumber obj){
-        this.number +=  obj.number;
-        return number;
-    }
-
-    public double division(PlusNumber obj){
-        this.number /=  (double)obj.number;
-        return (double)number;
-    }
-
-    public int multiply(PlusNumber obj){
-        this.number *=  obj.number;
-        return number;
-    }
-
-
-
-
 }

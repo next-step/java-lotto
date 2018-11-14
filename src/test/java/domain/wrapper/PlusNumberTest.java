@@ -8,7 +8,7 @@ public class PlusNumberTest {
 
     @Test(expected = RuntimeException.class)
     public void 음수예외테스트() {
-        new LottoCombineCount(-1);
+        new BuyLotto(-1);
     }
 
     @Test(expected = RuntimeException.class)

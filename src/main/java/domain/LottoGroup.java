@@ -1,9 +1,14 @@
 package domain;
 
 import domain.wrapper.Money;
+import utils.LottoGenerator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
+import static domain.Lotto.LOTTO_CHOICE_CNT;
 
 public class LottoGroup {
     private static final int COMBINE_MIN_NUM = 3;
@@ -23,26 +28,27 @@ public class LottoGroup {
     public LottoGroup(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
             lottos.add(lotto);
         }
         this.lottoGroup = lottos;
     }
 
-    public LottoGroup(List<Lotto> lottoList, List<Lotto> lottoList1) {
-        lottoList.addAll(lottoList1);
-        this.lottoGroup = lottoList;
+    public LottoGroup(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        Optional.ofNullable(manualLottos).orElse(new ArrayList<>());
+        manualLottos.addAll(autoLottos);
+        this.lottoGroup = manualLottos;
     }
 
     public LottoGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
         this.lottoGroup = manualLottoGroup.getLottoGroup();
-        autoLottoGroup.getLottoGroup().stream().forEach(obj-> this.lottoGroup.add(obj));
+        lottoGroup.addAll(autoLottoGroup.getLottoGroup());
     }
 
     public LottoGroup(Money myMoney) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < myMoney.getCount(); i++) {
-            Lotto lotto = new Lotto();
+            Lotto lotto = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
             lottos.add(lotto);
         }
         this.lottoGroup = lottos;

@@ -16,6 +16,6 @@ public class Money extends PlusNumber{
     }
 
     public int getCount(){
-        return super.getNumber() / 1000;
+        return super.getNumber() / LOTTO_PRICE;
     }
 }

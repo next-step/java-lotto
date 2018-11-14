@@ -15,14 +15,6 @@ public class LottoResultGroup {
         return lottoResultGroup.size();
     }
 
-//    public int getTotalReward() {
-//        int sum = 0;
-//        for (LottoResult winningLotto : lottoResultGroup) {
-//            sum += winningLotto.getReward();
-//        }
-//        return sum;
-//    }
-
     public Money getTotalReward() {
         int sum = 0;
         for (LottoResult winningLotto : lottoResultGroup) {

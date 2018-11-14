@@ -10,12 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
 
     @Test
-    public void generateLotto() {
-        Lotto lotto = new Lotto(6);
-        assertThat(lotto.getNumCount()).isEqualTo(6);
-    }
-
-    @Test
     public void 중복검사() {
         List<Integer> num = Arrays.asList(1,2,3,4,5,6);
         assertThat(LottoGenerator.isDuplication(num)).isFalse();
