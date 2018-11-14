@@ -1,36 +1,33 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoCompare {
-    private static final String DELIMETER = ", ";
-    private List<Integer> winNumber;
+    private LottoBonusBall bonusBall;
 
-
-    public LottoCompare(String winNumber) {
-        String[] nums = winNumber.split(DELIMETER);
-
-        this.winNumber = new ArrayList();
-        for (String num : nums) {
-            this.winNumber.add(Integer.parseInt(num));
-        }
+    public LottoCompare(LottoBonusBall bonusBall){
+       this.bonusBall = bonusBall;
     }
 
-    public int compareNumber(List<Integer> lotto) {
+
+    public Rank compareNumber(Lotto lotto, WinningLotto winNumber) {
         int count = 0;
-        for (int num : this.winNumber) {
-            if (lotto.contains(num)) {
+        List<Integer> lottoNumbers = lotto.getNumber();
+
+        for (int num : winNumber.getNumber()) {
+            if (lottoNumbers.contains(num)) {
                 count++;
             }
         }
-        return count;
+        return Rank.valueOf(count, this.bonusBall.isExistBonusBall(lotto));
     }
 
-    public LottoResult match(List<Lotto> lotteries){
+    public LottoResult match(List<Lotto> lotteries, WinningLotto winNumber){
         LottoResult result = new LottoResult();
+
+
         for(Lotto oneTicket : lotteries){
-            result.addCountToResult(compareNumber(oneTicket.getNumber()));
+            result.calculateResult(compareNumber(oneTicket, winNumber));
         }
         return result;
     }

@@ -33,13 +33,11 @@ public class Lotto {
 
     public void shuffleNumbers(){
         Collections.shuffle(numbers);
-
     }
 
     public List<Integer> sortNumbers(List<Integer> numbers){
         Collections.sort(numbers);
         return numbers;
-
     }
 
     public List<Integer> getNumber(){

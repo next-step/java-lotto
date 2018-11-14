@@ -5,7 +5,7 @@ import lotto.lottoView.ResultView;
 
 import java.util.List;
 
-
+import static lotto.lottoView.InputView.inputBonusNumber;
 import static lotto.lottoView.InputView.inputWinNumbers;
 import static lotto.lottoView.ResultView.printAllLotteries;
 import static lotto.lottoView.ResultView.winRate;
@@ -22,8 +22,12 @@ public class LottoMain {
 
         printAllLotteries(boughtLotteries); // 구매한 로또 모두 출력!
 
-        LottoCompare compare = new LottoCompare(inputWinNumbers());
-        LottoResult result = compare.match(boughtLotteries);
+        WinningLotto winningLotto = new WinningLotto(inputWinNumbers());
+        LottoBonusBall bonusBall = new LottoBonusBall(inputBonusNumber());
+
+        LottoCompare compare = new LottoCompare(bonusBall);
+
+        LottoResult result = compare.match(boughtLotteries, winningLotto);
 
         winRate(result, cost.getCost());
 

@@ -32,7 +32,7 @@ public class LottoInitTest {
         List<Integer> result = pn.sortNumbers(params);
         assertThat(result).isEqualTo(Arrays.asList(new Integer[]{2,5,6,14,30,40}));
     }
-
+/*
     @Test
     public void 로또당첨숫자비교하기(){
         Scanner sc = new Scanner(System.in);
@@ -46,7 +46,7 @@ public class LottoInitTest {
 
     }
 
-/*    @Test
+    @Test
     public void 총합계구하기(){
         LottoResult lr = new LottoResult(new int[]{10,3,1,0,0,0});
         assertThat(lr.getTotalSum()).isEqualTo(5000);
