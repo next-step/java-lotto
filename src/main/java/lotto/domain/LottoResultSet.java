@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class LottoResultSet {
 
+    private static final int DECIMAL_PLACES = 2;
+
     private List<LottoResult> lottoResults;
 
     private LottoResultSet(List<LottoResult> lottoResults) {
@@ -21,7 +23,7 @@ public class LottoResultSet {
         BigDecimal amount = BigDecimal.valueOf(purchaseAmount);
         BigDecimal reward = BigDecimal.valueOf(reward());
 
-        return reward.divide(amount, 2, RoundingMode.DOWN);
+        return reward.divide(amount, DECIMAL_PLACES, RoundingMode.DOWN);
     }
 
     public int reward() {
