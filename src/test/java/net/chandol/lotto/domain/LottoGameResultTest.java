@@ -11,9 +11,9 @@ public class LottoGameResultTest {
 
     @Test
     public void 합계구하기() {
-        LottoGameResult result = new LottoGameResult(asList(_2, _3, _3), Money.of(0));
-        Integer totalPrize = result.getTotalPrize();
-        Assertions.assertThat(totalPrize).isEqualTo(33_000_000);
+        LottoGameResult result = new LottoGameResult(asList(_2, _3, _3), Money.ZERO);
+        Money totalPrize = result.getTotalPrize();
+        Assertions.assertThat(totalPrize).isEqualTo(Money.of(33_000_000));
     }
 
     @Test

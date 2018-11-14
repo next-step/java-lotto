@@ -68,4 +68,8 @@ public class Money implements Comparable<Money>{
     public static Money of(int money) {
         return new Money(money);
     }
+
+    public double calculateProfitRate(Money purchasePrice) {
+        return value * 1d / purchasePrice.value;
+    }
 }

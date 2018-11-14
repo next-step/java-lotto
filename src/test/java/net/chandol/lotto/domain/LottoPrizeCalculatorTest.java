@@ -1,6 +1,7 @@
 package net.chandol.lotto.domain;
 
 import net.chandol.lotto.type.LottoPrize;
+import net.chandol.lotto.value.Money;
 import net.chandol.lotto.value.WinningNumber;
 import org.junit.Test;
 
@@ -48,6 +49,6 @@ public class LottoPrizeCalculatorTest {
         LottoGameResult result = calculator.lottoGameResult(lottos);
 
         assertThat(result.getProfitRate()).isEqualTo(38.75d);
-        assertThat(result.getTotalPrize()).isEqualTo(155_000);
+        assertThat(result.getTotalPrize()).isEqualTo(Money.of(155_000));
     }
 }
