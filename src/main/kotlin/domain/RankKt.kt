@@ -1,6 +1,6 @@
 package domain
 
-enum class JackpotKt(val matchNumber: Int, var prizeMoney: Int) {
+enum class RankKt(val matchNumber: Int, var prizeMoney: Int) {
     SAME_0_NUMBERS(0, 0),
     SAME_1_NUMBERS(1, 0),
     SAME_2_NUMBERS(2, 0),
@@ -18,8 +18,8 @@ enum class JackpotKt(val matchNumber: Int, var prizeMoney: Int) {
     }
 
     companion object {
-        fun valueOf(matchCount: Int): JackpotKt {
-            return JackpotKt.values()
+        fun valueOf(matchCount: Int): RankKt {
+            return RankKt.values()
                     .firstOrNull { it.isSameMatchNumber(matchCount) }
                     ?: throw IllegalArgumentException("잘못된 데이터가 입력되었습니다.")
         }

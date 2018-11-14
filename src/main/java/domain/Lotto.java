@@ -94,18 +94,14 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Rank getMatchJackpot(Lotto winningNumbers) {
+    public Rank getMatchRank(Lotto winningNumbers, int bonusNumber) {
         int sameCount = 0;
         for (int number: numbers) {
             if(winningNumbers.hasNumber(number)) {
                 sameCount += 1;
             }
         }
-        return Rank.valueOf(sameCount, isMatchBonus());
-    }
-
-    private boolean isMatchBonus() {
-        return hasNumber(bonusNumber);
+        return Rank.valueOf(sameCount, hasNumber(bonusNumber));
     }
 
     private boolean hasNumber(int number) {

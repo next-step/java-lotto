@@ -24,6 +24,7 @@ public class LottoResult {
         return asList(Rank.FIFTH,
                 Rank.FOURTH,
                 Rank.THIRD,
+                Rank.SECOND,
                 Rank.FIRST);
     }
 

@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JackpotTest {
+public class RankTest {
 
     @Test
     public void 맞춘개수_0개_금액_0원() {

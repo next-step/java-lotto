@@ -28,7 +28,7 @@ object ResultViewKt {
 
     private fun showMatches(lottoResult: LottoResultKt) {
         val sb = StringBuilder()
-        for (jackpot in lottoResult.jackpot) {
+        for (jackpot in lottoResult.rank) {
             val matchCount = lottoResult.matchCount(jackpot)
             sb.append(String.format("%d개 일치 (%d원) - %d개", jackpot.matchNumber, jackpot.prizeMoney, matchCount))
             sb.append("\n")

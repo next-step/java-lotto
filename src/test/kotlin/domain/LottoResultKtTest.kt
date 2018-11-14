@@ -11,50 +11,50 @@ class LottoResultKtTest {
 
     private lateinit var lottoResult: LottoResultKt
 
-    private val dummyJackpots: List<JackpotKt>
+    private val dummyRanks: List<RankKt>
         get() = Arrays.asList(
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_1_NUMBERS,
-                JackpotKt.SAME_1_NUMBERS,
-                JackpotKt.SAME_2_NUMBERS,
-                JackpotKt.SAME_3_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_1_NUMBERS,
+                RankKt.SAME_1_NUMBERS,
+                RankKt.SAME_2_NUMBERS,
+                RankKt.SAME_3_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS,
+                RankKt.SAME_0_NUMBERS
         )
 
     @Before
     fun setup() {
-        lottoResult = LottoResultKt(dummyJackpots)
+        lottoResult = LottoResultKt(dummyRanks)
     }
 
     @Test
     fun `번호 3개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_3_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.SAME_3_NUMBERS)
         assertThat(matchCount).isEqualTo(1)
     }
 
     @Test
     fun `번호 4개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_4_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.SAME_4_NUMBERS)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `번호 5개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_5_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.SAME_5_NUMBERS)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `번호 6개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_6_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.SAME_6_NUMBERS)
         assertThat(matchCount).isEqualTo(0)
     }
 

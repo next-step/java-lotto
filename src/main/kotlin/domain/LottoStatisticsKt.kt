@@ -10,18 +10,18 @@ class LottoStatisticsKt(values: String) {
         return LottoKt.manual(numbers).numbers
     }
 
-    fun getJackpot(lottoNumbers: List<Int>): JackpotKt {
+    fun getJackpot(lottoNumbers: List<Int>): RankKt {
         var sameCount = 0
         lottoNumbers.forEach {
             if (hasNumber(it)) {
                 sameCount += 1
             }
         }
-        return JackpotKt.valueOf(sameCount)
+        return RankKt.valueOf(sameCount)
     }
 
-    fun getJackpots(lottos: List<LottoKt>): List<JackpotKt> {
-        val jackpots = ArrayList<JackpotKt>()
+    fun getJackpots(lottos: List<LottoKt>): List<RankKt> {
+        val jackpots = ArrayList<RankKt>()
         lottos.forEach {
             val jackpot = getJackpot(it.numbers)
             jackpots.add(jackpot)
