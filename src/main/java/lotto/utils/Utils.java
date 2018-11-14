@@ -1,5 +1,8 @@
 package lotto.utils;
 
+import lotto.domain.LottoNo;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,15 +17,16 @@ public class Utils {
 
     private Utils() {}
 
-    public static List<Integer> generateRandomNumbers() {
-        List<Integer> numbers = IntStream.rangeClosed(LOTTO_NUMBER_RANGE_START, LOTTO_NUMBER_RANGE_END)
-                .mapToObj(i -> i)
+    public static List<LottoNo> generateRandomNumbers() {
+        List<LottoNo> numbers = IntStream
+                .rangeClosed(LOTTO_NUMBER_RANGE_START, LOTTO_NUMBER_RANGE_END)
+                .mapToObj(LottoNo::new)
                 .collect(Collectors.toList());
 
         return shuffle(numbers).subList(LOTTO_NUMBER_BOUND_START, LOTTO_NUMBER_BOUND_END);
     }
 
-    private static List<Integer> shuffle(List<Integer> numbers) {
+    private static List<LottoNo> shuffle(List<LottoNo> numbers) {
         Collections.shuffle(numbers);
         return numbers;
     }

@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
@@ -23,12 +25,12 @@ public class ManualLottoGenerator implements LottoGenerator {
     }
 
     private Ticket convertToTicket(String[] str) {
-        List<Integer> list = new ArrayList<>();
+        List<LottoNo> list = Arrays
+                .stream(str)
+                .map(s -> new LottoNo(Integer.parseInt(s)))
+                .collect(Collectors.toList());
 
-        for(String s : str) {
-            list.add(Integer.parseInt(s));
-        }
-
+        LottoValidator.validate(list);
         return new Ticket(list);
     }
 }
