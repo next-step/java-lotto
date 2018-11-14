@@ -7,6 +7,7 @@ import net.chandol.lotto.value.WinningNumber;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static net.chandol.lotto.util.LottoNumberConstants.LOTTO_PRICE;
 
 class LottoPrizeCalculator {
     private WinningNumber winningNumber;
@@ -27,7 +28,7 @@ class LottoPrizeCalculator {
                 .map(this::findPrize)
                 .collect(toList());
 
-        Money purchasePrice = Lotto.LOTTO_PRICE.multiply(lottos.size());
+        Money purchasePrice = LOTTO_PRICE.multiply(lottos.size());
 
         return new LottoGameResult(prizes, purchasePrice);
     }

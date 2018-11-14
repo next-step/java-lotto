@@ -5,11 +5,11 @@ import java.util.List;
 import static com.google.common.primitives.Ints.asList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
+import static net.chandol.lotto.util.LottoNumberConstants.LOTTO_NUMBER_SIZE;
 import static net.chandol.lotto.util.LottoNumberValidator.validateUniqueNumbers;
 import static net.chandol.lotto.util.RandomLottoNumberProvider.getNumbers;
 
 public class LottoNumber {
-    private static final int LOTTO_NUMBER_SIZE = 6;
     private List<LottoNumberItem> items;
 
     private LottoNumber(List<Integer> numbers) {

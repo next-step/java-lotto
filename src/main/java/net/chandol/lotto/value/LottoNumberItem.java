@@ -1,9 +1,9 @@
 package net.chandol.lotto.value;
 
-public class LottoNumberItem {
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+import static net.chandol.lotto.util.LottoNumberConstants.LOTTO_MAX_NUMBER;
+import static net.chandol.lotto.util.LottoNumberConstants.LOTTO_MIN_NUMBER;
 
+public class LottoNumberItem {
     private int number;
 
     public LottoNumberItem(int number) {

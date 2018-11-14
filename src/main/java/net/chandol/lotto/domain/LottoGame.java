@@ -12,7 +12,7 @@ import static java.util.Collections.unmodifiableList;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.generate;
-import static net.chandol.lotto.domain.Lotto.LOTTO_PRICE;
+import static net.chandol.lotto.util.LottoNumberConstants.LOTTO_PRICE;
 
 public class LottoGame {
     private Money totalPrice;
