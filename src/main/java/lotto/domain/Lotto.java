@@ -5,6 +5,8 @@ import lotto.utils.GenerateLotto;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lotto {
 
     private List<Integer> number;
@@ -21,13 +23,17 @@ public class Lotto {
         return number;
     }
 
-    public boolean isMatchNumber(final List<Integer> numbers, final int point) {
-        return calculatorLottoNumberMatchScore(numbers) == point;
+    public boolean lottoOfRank(final Lotto lotto, final Rank rank) {
+        return calculatorLottoNumberMatchScore(lotto) == rank.getCountOfMatch();
     }
 
-    private int calculatorLottoNumberMatchScore(final List<Integer> numbers) {
+    public boolean eqBonus(final int bonus) {
+        return getNumber().stream().filter(number -> number == bonus).collect(toList()).size() > 0;
+    }
+
+    private int calculatorLottoNumberMatchScore(final Lotto lotto) {
         int matchScore = 0;
-        for (Integer num : numbers) {
+        for (Integer num : lotto.getNumber()) {
             matchScore = numberMatchCheckLoop(matchScore, num);
         }
         return matchScore;

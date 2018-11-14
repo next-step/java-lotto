@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.LottoGame;
+import lotto.LottoResult;
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Reward;
-import lotto.domain.WinningNumber;
+import lotto.domain.LottoDto;
+import lotto.domain.Rank;
 
 import java.util.List;
 
@@ -21,23 +21,47 @@ public abstract class ResultView {
         newLine();
     }
 
-    @SuppressWarnings("CodeBlock2Expr")
-    public static void printAnalysisLottoResult(final LottoGame lottoGame, final Lotto lotto, final int amount) {
+    public static void printAnalysisLottoResult(final LottoDto lottoDto, final int amount) {
         final StringBuilder sb = new StringBuilder();
-
         sb.append("\n당첨 통계\n").append("---------\n");
 
-        Reward.NUMBERS.forEach(reward -> {
-            sb.append(reward.getMatchNumber());
-            sb.append("개 일치 (");
-            sb.append(reward.getPrice());
-            sb.append(")- ");
-            sb.append(Lottos.findWinningNumbers(new WinningNumber(lottoGame.getLottos(), lotto.getNumber()), reward.getMatchNumber()).size());
-            sb.append("개\n");
-        });
+        sb.append(Rank.FIFTH.getCountOfMatch());
+        sb.append("개 일치 (");
+        sb.append(Rank.FIFTH.getWinningMoney());
+        sb.append(")- ");
+        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.FIFTH).getLottos().size());
+        sb.append("개\n");
+
+        sb.append(Rank.FOURTH.getCountOfMatch());
+        sb.append("개 일치 (");
+        sb.append(Rank.FOURTH.getWinningMoney());
+        sb.append(")- ");
+        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.FOURTH).getLottos().size());
+        sb.append("개\n");
+
+        sb.append(Rank.THIRD.getCountOfMatch());
+        sb.append("개 일치 (");
+        sb.append(Rank.THIRD.getWinningMoney());
+        sb.append(")- ");
+        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.THIRD).getLottos().size());
+        sb.append("개\n");
+
+        sb.append(Rank.SECOND.getCountOfMatch());
+        sb.append("개 일치, 보너스 볼 일치");
+        sb.append(Rank.SECOND.getWinningMoney());
+        sb.append(")- ");
+        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.SECOND).getLottos().size());
+        sb.append("개\n");
+
+        sb.append(Rank.FIRST.getCountOfMatch());
+        sb.append("개 일치 (");
+        sb.append(Rank.FIRST.getWinningMoney());
+        sb.append(")- ");
+        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.FIRST).getLottos().size());
+        sb.append("개\n");
 
         sb.append("총 수익률은 ");
-        sb.append(Lottos.getRate(new WinningNumber(lottoGame.getLottos(), lotto.getNumber()), amount));
+        sb.append(LottoResult.calculatorRate(lottoDto, amount));
         sb.append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
 
         System.out.println(sb.toString());

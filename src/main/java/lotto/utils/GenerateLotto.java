@@ -13,7 +13,7 @@ public class GenerateLotto {
         return convertToList(pickRandom(LOTTO_NUMBER_LENGTH, MAX_BOUND));
     }
 
-    public static List<Integer> create(String number) {
+    public static List<Integer> create(final String number) {
         return toList(split(number));
     }
 

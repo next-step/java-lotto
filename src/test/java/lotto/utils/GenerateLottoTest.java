@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("NonAsciiCharacters")
-public class GenerateLottoMachineTest {
+public class GenerateLottoTest {
 
     @SuppressWarnings("CodeBlock2Expr")
     @Test
