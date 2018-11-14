@@ -14,7 +14,6 @@ public class LottoGame {
         for (int i = 0, len = money / PRICE_PER_ONE; i < len; i++) {
             results.add(new Lotto(LotteryNumberGenerator.generate()));
         }
-
         return results;
     }
 }

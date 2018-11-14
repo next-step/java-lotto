@@ -15,4 +15,9 @@ public class Lotto {
                 .filter(targetNumber -> this.numbers.contains(targetNumber))
                 .count();
     }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }
