@@ -24,6 +24,6 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원)- " + result.getLottoResults().get(MatchType.FIVE));
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + result.getLottoResults().get(MatchType.BONUS));
         System.out.println("6개 일치 (2000000000원)- " + result.getLottoResults().get(MatchType.SIX));
-        System.out.println("총 수익률은 " + result.getBenefitRate() + "입니다.");
+        System.out.println("총 수익률은 " + result.calculateBenefitRate() + "입니다.");
     }
 }

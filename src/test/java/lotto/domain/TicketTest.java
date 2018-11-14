@@ -24,7 +24,7 @@ public class TicketTest {
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         MatchType type = ticket.compareWinningLotto(winningNumber);
-        int result = type.getMatch();
-        assertThat(result).isEqualTo(MatchType.BONUS.getMatch());
+        int result = type.findMatchCount();
+        assertThat(result).isEqualTo(MatchType.BONUS.findMatchCount());
     }
 }

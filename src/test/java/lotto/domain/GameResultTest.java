@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.enums.MatchType;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -25,13 +24,13 @@ public class GameResultTest {
         tickets.add(ticket3);
 
         GameResult gr = new GameResult(tickets, winningNumber);
-        int result = gr.getTotalAmount();
+        int result = Money.calculateTotalAmount(gr.getLottoResults());
         assertThat(result).isEqualTo(2_000_005_000);
     }
 
     @Test
     public void 로또_수익률_계산() {
-        BigDecimal result = GameResult.calculateBenefitRate(BigDecimal.valueOf(5000), BigDecimal.valueOf(14000));
+        BigDecimal result = Money.calculateBenefitRate(BigDecimal.valueOf(5000), BigDecimal.valueOf(14000));
         assertThat(result).isEqualTo(BigDecimal.valueOf(0.35));
     }
 
@@ -45,7 +44,7 @@ public class GameResultTest {
 
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 10), 7);
         GameResult gr = new GameResult(tickets, winningNumber);
-        int result = gr.getTotalAmount();
+        int result = Money.calculateTotalAmount(gr.getLottoResults());
 
         assertThat(result).isEqualTo(30_000_000);
     }

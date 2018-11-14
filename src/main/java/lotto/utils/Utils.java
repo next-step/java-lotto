@@ -26,5 +26,4 @@ public class Utils {
         Collections.shuffle(numbers);
         return numbers;
     }
-
 }

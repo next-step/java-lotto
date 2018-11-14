@@ -34,6 +34,7 @@ public class InputView {
         return manualLottoCount;
     }
 
+    //메소드가 한개 이상의 일을 하고 있다
     public static List<String> inputManualLottoNumbers(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
