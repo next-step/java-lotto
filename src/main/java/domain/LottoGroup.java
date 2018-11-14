@@ -1,17 +1,14 @@
 package domain;
 
 import domain.wrapper.Money;
-import utils.LottoGenerator;
+import utils.LottoNumberGenerator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import static domain.Lotto.LOTTO_CHOICE_CNT;
 
 public class LottoGroup {
     private static final int COMBINE_MIN_NUM = 3;
+    private static final int LOTTO_CHOICE_CNT = 6;
 
     private List<Lotto> lottoGroup;
 
@@ -19,23 +16,19 @@ public class LottoGroup {
         if (lottoGroup == null) {
             throw new NullPointerException();
         }
-        if (lottoGroup.size() < 0) {
-            throw new IllegalArgumentException("배열이 없습니다.");
-        }
         this.lottoGroup = lottoGroup;
     }
 
     public LottoGroup(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
+            Lotto lotto = new Lotto(LottoNumberGenerator.generateNumberList(LOTTO_CHOICE_CNT));
             lottos.add(lotto);
         }
         this.lottoGroup = lottos;
     }
 
     public LottoGroup(List<Lotto> manualLottos, List<Lotto> autoLottos) {
-        Optional.ofNullable(manualLottos).orElse(new ArrayList<>());
         manualLottos.addAll(autoLottos);
         this.lottoGroup = manualLottos;
     }
@@ -48,7 +41,7 @@ public class LottoGroup {
     public LottoGroup(Money myMoney) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < myMoney.getCount(); i++) {
-            Lotto lotto = LottoGenerator.generateNumberList(LOTTO_CHOICE_CNT);
+            Lotto lotto = new Lotto(LottoNumberGenerator.generateNumberList(LOTTO_CHOICE_CNT));
             lottos.add(lotto);
         }
         this.lottoGroup = lottos;

@@ -34,7 +34,7 @@ public class StringUtils {
             if (lottoNums[i] == null) {
                 throw new NullPointerException();
             }
-            lastLottoNumbers.add(new LottoNo(Integer.parseInt(lottoNums[i].trim())));
+            lastLottoNumbers.add(LottoNo.getLottoNo(Integer.parseInt(lottoNums[i].trim())));
         }
 
         return lastLottoNumbers;

@@ -8,7 +8,14 @@ public class WinningLotto {
 
     public WinningLotto(Lotto lotto, LottoNo bonusNumber) {
         this.lotto = lotto;
+        isDuplication(lotto, bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    private void isDuplication(Lotto lotto, LottoNo bonusNumber) {
+        if(lotto.isContains(bonusNumber)){
+            throw new RuntimeException("로또번호와 보너스번호는 겹칠 수 없습니다.");
+        }
     }
 
     public LottoResult getCombineNumbers(Lotto lotto) {

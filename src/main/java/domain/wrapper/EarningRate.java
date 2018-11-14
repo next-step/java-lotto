@@ -10,7 +10,12 @@ public class EarningRate{
         this.earningRate = earningRate;
     }
 
+    public EarningRate(Money price, Money totalRewards) {
+        this(totalRewards.divide(price));
+    }
+
     public double getEarningRate() {
         return earningRate;
     }
+
 }

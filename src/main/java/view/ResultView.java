@@ -19,7 +19,7 @@ public class ResultView {
         System.out.println(String.format("%s개를 구매했습니다.", buyManualLottoCount.getLottoCount()));
     }
 
-    public static void printLottoGroup(LottoGroup lottoGroup) {
+    public static void printTotalLottoGroup(LottoGroup lottoGroup) {
         lottoGroup.getLottoGroup().forEach((lotto)-> System.out.println(lotto.toString()));
     }
 
@@ -47,7 +47,7 @@ public class ResultView {
         System.out.print(String.format(" (%s원)", rank.getPriceRewards()));
     }
 
-    public static void printLottoGroup(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+    public static void printLottoGroups(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
         System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manualLottoGroup.getSize(), autoLottoGroup.getSize()));
     }
 }
