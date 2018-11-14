@@ -11,12 +11,8 @@ public class Lotto {
     }
 
     public int getMatchCount(Set<Integer> targetNumbers) {
-        int count = 0;
-        for (int targetNumber : targetNumbers) {
-            if (this.numbers.contains(targetNumber)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) targetNumbers.stream()
+                .filter(targetNumber -> this.numbers.contains(targetNumber))
+                .count();
     }
 }
