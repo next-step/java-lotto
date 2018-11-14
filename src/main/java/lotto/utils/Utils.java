@@ -7,10 +7,10 @@ import java.util.stream.IntStream;
 
 public class Utils {
 
-    private static final int LOTTO_NUMBER_RANGE_START = 1;
-    private static final int LOTTO_NUMBER_RANGE_END = 45;
-    private static final int LOTTO_NUMBER_BOUND_START = 0;
-    private static final int LOTTO_NUMBER_BOUND_END = 6;
+    public static final int LOTTO_NUMBER_RANGE_START = 1;
+    public static final int LOTTO_NUMBER_RANGE_END = 45;
+    public static final int LOTTO_NUMBER_BOUND_START = 0;
+    public static final int LOTTO_NUMBER_BOUND_END = 6;
 
     private Utils() {}
 

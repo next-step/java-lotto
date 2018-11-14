@@ -13,7 +13,7 @@ public class LottoMachine {
     }
 
     public GameResult playLotto(String winningNumbers, int bonus) {
-        return new GameResult(lotto.getTickets(), convertWinningNumbers(winningNumbers, bonus));
+        return new GameResult(lotto.findLottos(), convertWinningNumbers(winningNumbers, bonus));
     }
 
     protected static WinningLotto convertWinningNumbers(String s, int bonus) {

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +16,14 @@ public class LottoTest {
                                                     "2, 3, 4, 5, 6, 7",
                                                     "2, 3, 4, 5, 6, 7");
 
-        int result = lotto.generateTickets(11, lottoNumbers).size();
+        Money money = new Money(14000, 3);
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator();
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoNumbers);
+
+        lotto.addTickets(autoLottoGenerator.generate());
+        lotto.addTickets(manualLottoGenerator.generate());
+
+        int result = lotto.findLottos().size();
         assertThat(result).isEqualTo(14);
     }
 }
