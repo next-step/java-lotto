@@ -1,13 +1,12 @@
 package domain
 
 enum class RankKt(val matchNumber: Int, var prizeMoney: Int) {
-    SAME_0_NUMBERS(0, 0),
-    SAME_1_NUMBERS(1, 0),
-    SAME_2_NUMBERS(2, 0),
-    SAME_3_NUMBERS(3, 5000),
-    SAME_4_NUMBERS(4, 50000),
-    SAME_5_NUMBERS(5, 1500000),
-    SAME_6_NUMBERS(6, 2000000000);
+    FIRST(6, 2000000000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    MISS(0, 0);
 
     fun getTotalPrizeMoney(sameCount: Int): Int {
         return this.prizeMoney * sameCount
@@ -18,10 +17,11 @@ enum class RankKt(val matchNumber: Int, var prizeMoney: Int) {
     }
 
     companion object {
-        fun valueOf(matchCount: Int): RankKt {
+        fun valueOf(matchCount: Int, matchBonus: Boolean): RankKt {
             return RankKt.values()
-                    .firstOrNull { it.isSameMatchNumber(matchCount) }
-                    ?: throw IllegalArgumentException("잘못된 데이터가 입력되었습니다.")
+                    .filter { it.isSameMatchNumber(matchCount) }
+                    .firstOrNull { it != SECOND || matchBonus }
+                    ?: MISS
         }
     }
 }

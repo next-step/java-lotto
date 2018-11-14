@@ -6,10 +6,11 @@ import java.util.Arrays.asList
 class LottoResultKt(private val ranks: List<RankKt>) {
 
     val rank: List<RankKt>
-        get() = asList(RankKt.SAME_3_NUMBERS,
-                RankKt.SAME_4_NUMBERS,
-                RankKt.SAME_5_NUMBERS,
-                RankKt.SAME_6_NUMBERS)
+        get() = asList(RankKt.FIFTH,
+                RankKt.FOURTH,
+                RankKt.THIRD,
+                RankKt.SECOND,
+                RankKt.FIRST)
 
     private val paidLotto: Int
         get() = Lotto.PRICE * ranks.size

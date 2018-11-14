@@ -12,8 +12,9 @@ object LottoConsoleKt {
         ResultViewKt.showBoughtLottos(lottos)
 
         val lottoWinningNumbers = InputViewKt.getInputString("지난 주 당첨 번호를 입력해 주세요.")
+        val bonusNumber = InputViewKt.getInputNumber("보너스 볼을 입력해 주세요.")
 
-        val lottoStatistics = LottoStatisticsKt(lottoWinningNumbers)
+        val lottoStatistics = LottoStatisticsKt(lottoWinningNumbers, bonusNumber)
         val lottoResult = lottoStatistics.match(lottos)
         ResultViewKt.showResult(lottoResult)
     }

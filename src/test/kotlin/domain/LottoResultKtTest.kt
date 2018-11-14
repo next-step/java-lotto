@@ -13,20 +13,11 @@ class LottoResultKtTest {
 
     private val dummyRanks: List<RankKt>
         get() = Arrays.asList(
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_1_NUMBERS,
-                RankKt.SAME_1_NUMBERS,
-                RankKt.SAME_2_NUMBERS,
-                RankKt.SAME_3_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS,
-                RankKt.SAME_0_NUMBERS
+                RankKt.MISS,
+                RankKt.MISS,
+                RankKt.FIFTH,
+                RankKt.MISS,
+                RankKt.MISS
         )
 
     @Before
@@ -36,31 +27,31 @@ class LottoResultKtTest {
 
     @Test
     fun `번호 3개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(RankKt.SAME_3_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.FIFTH)
         assertThat(matchCount).isEqualTo(1)
     }
 
     @Test
     fun `번호 4개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(RankKt.SAME_4_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.FOURTH)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `번호 5개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(RankKt.SAME_5_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.THIRD)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `번호 6개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(RankKt.SAME_6_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.FIRST)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `수익률 구하기`() {
         val rate = lottoResult.calculatorRate()
-        assertThat(rate).isEqualTo(0.35)
+        assertThat(rate).isEqualTo(1.0)
     }
 }
