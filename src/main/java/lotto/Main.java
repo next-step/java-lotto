@@ -18,8 +18,9 @@ public class Main {
         ResultView.printLottoSet(lottoSet);
 
         List<Integer> target = InputView.inputLastWeeksNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
 
-        LottoMachine lottoMachine = new LottoMachine(lottoSet, target);
+        LottoMachine lottoMachine = new LottoMachine(lottoSet, target, bonusNumber);
         LottoResultSet lottoResultSet = lottoMachine.createLottoResultSet();
 
         ResultView.printLottoResultSet(lottoResultSet);
