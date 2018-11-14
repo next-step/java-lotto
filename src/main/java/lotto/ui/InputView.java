@@ -23,4 +23,10 @@ public class InputView {
 
         return CollectionUtils.convert(scanner.nextLine().split(", "));
     }
+
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
 }
