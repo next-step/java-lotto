@@ -68,6 +68,6 @@ public class Amount {
 
     @Override
     public String toString() {
-        return String.valueOf(this.autoCount);
+        return String.valueOf(getTotalAmount());
     }
 }
