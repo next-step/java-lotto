@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<String> numbers;
+    private List<Integer> numbers;
 
     private Lotto() {
         this.numbers = LottoNumberGenerator.generate();
     }
 
-    private Lotto(List<String> numbers) {
+    private Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
@@ -20,21 +20,21 @@ public class Lotto {
         return new Lotto();
     }
 
-    public static Lotto create(List<String> numbers) {
+    public static Lotto create(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
-    public boolean hasMatches(List<String> target, int count) {
+    public boolean hasMatches(List<Integer> target, int count) {
         return count == this.numberOfMatches(target);
     }
 
-    public int numberOfMatches(List<String> target) {
+    public int numberOfMatches(List<Integer> target) {
         return Math.toIntExact(target.stream()
                 .filter(this::contains)
                 .count());
     }
 
-    private boolean contains(String number) {
+    private boolean contains(int number) {
         return this.numbers.contains(number);
     }
 

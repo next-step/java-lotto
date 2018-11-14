@@ -17,7 +17,7 @@ public class Main {
         LottoSet lottoSet = LottoShop.buy(amount);
         ResultView.printLottoSet(lottoSet);
 
-        List<String> target = InputView.inputLastWeeksNumbers();
+        List<Integer> target = InputView.inputLastWeeksNumbers();
 
         LottoMachine lottoMachine = new LottoMachine(lottoSet, target);
         LottoResultSet lottoResultSet = lottoMachine.createLottoResultSet();

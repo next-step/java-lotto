@@ -14,8 +14,8 @@ public class LottoNumberGenerator {
 
     }
 
-    public static List<String> generate() {
-        List<String> lottoNumbers = new ArrayList<>();
+    public static List<Integer> generate() {
+        List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
             lottoNumbers.add(generateRandomLotto());
         }
@@ -23,8 +23,8 @@ public class LottoNumberGenerator {
         return lottoNumbers;
     }
 
-    private static String generateRandomLotto() {
-        return String.valueOf(new Random().nextInt(LOTTO_NUMBER_BOUND));
+    private static int generateRandomLotto() {
+        return new Random().nextInt(LOTTO_NUMBER_BOUND);
     }
 
 }

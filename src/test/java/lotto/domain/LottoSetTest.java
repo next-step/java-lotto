@@ -15,9 +15,9 @@ public class LottoSetTest {
     @Before
     public void setup() {
         lottos = Arrays.asList(
-                Lotto.create(Arrays.asList("1", "10", "15", "20", "25", "30")),
-                Lotto.create(Arrays.asList("20", "25", "30", "35", "40", "45")),
-                Lotto.create(Arrays.asList("35", "40", "45", "50", "55", "60"))
+                Lotto.create(Arrays.asList(1, 10, 15, 20, 25, 30)),
+                Lotto.create(Arrays.asList(20, 25, 30, 35, 40, 45)),
+                Lotto.create(Arrays.asList(35, 40, 45, 50, 55, 60))
 
         );
     }
@@ -40,7 +40,7 @@ public class LottoSetTest {
     public void 일치하는_로또셋을_알수있다() {
         LottoSet lottoSet = LottoSet.create(lottos);
 
-        assertThat(lottoSet.matchSets(Arrays.asList("1", "10", "15", "91", "92", "93"), 3)).hasSize(1);
-        assertThat(lottoSet.matchSets(Arrays.asList("20", "25", "30", "91", "92", "93"), 3)).hasSize(2);
+        assertThat(lottoSet.matchSets(Arrays.asList(1, 10, 15, 91, 92, 93), 3)).hasSize(1);
+        assertThat(lottoSet.matchSets(Arrays.asList(20, 25, 30, 91, 92, 93), 3)).hasSize(2);
     }
 }

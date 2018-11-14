@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 public class LottoMachine {
 
     private final LottoSet lottoSet;
-    private final List<String> target;
+    private final List<Integer> target;
 
-    public LottoMachine(LottoSet lottoSet, List<String> target) {
+    public LottoMachine(LottoSet lottoSet, List<Integer> target) {
         this.lottoSet = lottoSet;
         this.target = target;
     }

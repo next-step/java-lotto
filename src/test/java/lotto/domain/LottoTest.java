@@ -10,11 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private List<String> numbers;
+    private List<Integer> numbers;
 
     @Before
     public void setup() {
-        numbers = Arrays.asList("1", "10", "15", "20", "25", "30");
+        numbers = Arrays.asList(1, 10, 15, 20, 25, 30);
     }
 
     @Test
@@ -25,14 +25,14 @@ public class LottoTest {
 
     @Test
     public void 일치하는_로또숫자가_존재하는지_알수있다() {
-        List<String> target = Arrays.asList("1", "10", "15", "91", "92", "93");
+        List<Integer> target = Arrays.asList(1, 10, 15, 91, 92, 93);
         Lotto lotto = Lotto.create(numbers);
         assertThat(lotto.hasMatches(target, 3)).isTrue();
     }
 
     @Test
     public void 일치하는_로또숫자_갯수를_알수있다() {
-        List<String> target = Arrays.asList("1", "10", "15", "91", "92", "93");
+        List<Integer> target = Arrays.asList(1, 10, 15, 91, 92, 93);
         Lotto lotto = Lotto.create(numbers);
         assertThat(lotto.numberOfMatches(target)).isEqualTo(3);
     }

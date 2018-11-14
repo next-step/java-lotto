@@ -27,7 +27,7 @@ public class LottoSet {
         return lottos.size();
     }
 
-    public List<Lotto> matchSets(List<String> target, int count) {
+    public List<Lotto> matchSets(List<Integer> target, int count) {
         return this.lottos.stream()
                 .filter(lotto -> lotto.hasMatches(target, count))
                 .collect(Collectors.toList());
