@@ -1,6 +1,8 @@
 package game.lotto.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Report {
 
@@ -40,6 +42,24 @@ public class Report {
         );
 
         return report.toString();
+    }
+
+    public List<String> getRanksResult() {
+        List<String> result = new ArrayList<>();
+        for (Rank rank : Rank.values()) {
+            if (rank.isMiss()) {
+                continue;
+            }
+            result.add(rank.getMessage() + " - " + matchResult.getMatch(rank).getCount() + "개");
+        }
+
+        return result;
+    }
+
+    public String getEarningRateResult() {
+        float rate = this.money.computeEarningRate(matchResult.getTotalPrize()).floatValue();
+
+        return String.format("총 수익률은 %d%%입니다.", (int)(rate * 100));
     }
 
     private StringBuilder appendMatch(StringBuilder stringBuilder, Rank rank) {
