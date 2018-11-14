@@ -1,14 +1,19 @@
 package lotto.view;
 
+import lotto.domain.LottoCountManager;
 import lotto.domain.WinningLotto;
 import java.util.Scanner;
 
 public class InputView {
 
-    public static int getBudget() {
+    public static LottoCountManager getBudget() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        int budget = scanner.nextInt();
+
+        System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
+        int manualCount = scanner.nextInt();
+        return new LottoCountManager(budget, manualCount);
     }
 
     public static WinningLotto getWinningNumberWithBonus() {

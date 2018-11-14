@@ -6,7 +6,7 @@ import lotto.view.ResultView;
 
 public class LottoController {
     public static void main(String[] args) {
-        int budget = InputView.getBudget();
+        LottoCountManager lottoCountManager = InputView.getBudget();
 
         LottoGame lottoGame = new LottoGame();
         BundleLotto lottos = lottoGame.makeLotto(budget);
