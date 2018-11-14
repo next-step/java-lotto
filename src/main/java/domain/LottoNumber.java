@@ -4,10 +4,13 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < 1 || number > 45) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("Lotto number must be in 1 <= n <= 45");
         }
 
