@@ -8,16 +8,12 @@ public class Lotto {
 
     private List<Integer> numbers;
 
-    private Lotto() {
-        this.numbers = LottoNumberGenerator.generate();
-    }
-
     private Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
     public static Lotto create() {
-        return new Lotto();
+        return new Lotto(LottoNumberGenerator.generate();
     }
 
     public static Lotto create(List<Integer> numbers) {
