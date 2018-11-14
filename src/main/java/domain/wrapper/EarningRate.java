@@ -7,4 +7,7 @@ public class EarningRate{
         this.earningRate = earningRate;
     }
 
+    public double getEarningRate() {
+        return earningRate;
+    }
 }

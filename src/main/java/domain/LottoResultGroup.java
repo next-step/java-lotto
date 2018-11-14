@@ -1,5 +1,7 @@
 package domain;
 
+import domain.wrapper.Money;
+
 import java.util.List;
 
 public class LottoResultGroup {
@@ -13,12 +15,20 @@ public class LottoResultGroup {
         return lottoResultGroup.size();
     }
 
-    public int getTotalReward() {
+//    public int getTotalReward() {
+//        int sum = 0;
+//        for (LottoResult winningLotto : lottoResultGroup) {
+//            sum += winningLotto.getReward();
+//        }
+//        return sum;
+//    }
+
+    public Money getTotalReward() {
         int sum = 0;
         for (LottoResult winningLotto : lottoResultGroup) {
             sum += winningLotto.getReward();
         }
-        return sum;
+        return new Money(sum);
     }
 
     public int getCombineNumbers(LottoRank rank) {

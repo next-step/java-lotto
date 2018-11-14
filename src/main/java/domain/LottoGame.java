@@ -1,5 +1,8 @@
 package domain;
 
+import domain.wrapper.EarningRate;
+import domain.wrapper.Money;
+
 public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
 
@@ -15,4 +18,7 @@ public class LottoGame {
         return lottoCount;
     }
 
+    public static EarningRate getTotalEarningRate(Money price, Money totalRewards) {
+        return new EarningRate((double)price.getNumber() / (double)totalRewards.getNumber());
+    }
 }

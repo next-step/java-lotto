@@ -6,7 +6,7 @@ public class LottoNo extends PlusNumber {
 
     public LottoNo(int number) {
         super(number);
-        if(LOTTO_MIN_NUM < number || number < LOTTO_MAX_NUM ){
+        if(LOTTO_MIN_NUM > number || number > LOTTO_MAX_NUM ){
             throw new RuntimeException("로또 범위를 벗어났습니다.");
         }
     }
