@@ -1,6 +1,7 @@
 package view;
 
 import domain.Attempt;
+import domain.LottoAmount;
 import domain.LottoNo;
 
 import java.util.ArrayList;
@@ -29,19 +30,19 @@ public class InputView {
         return amount;
     }
 
-    public static List<List<LottoNo>> printManualPurchaseNumber(int amount) {
+    public static List<List<LottoNo>> printManualPurchaseNumber(LottoAmount amount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
         List<List<LottoNo>> manualPurchaseNumbers = new ArrayList();
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < amount.getAmount(); i++) {
             Scanner scanner = new Scanner(System.in);
             manualPurchaseNumbers.add(changeWinNumberToInteger(scanner.next()));
         }
         return manualPurchaseNumbers;
     }
 
-    public static void printLottoAmount(int manualPurchaseAmount, int autoPurchaseAmount) {
-        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualPurchaseAmount, autoPurchaseAmount));
+    public static void printLottoAmount(LottoAmount manualPurchaseAmount, LottoAmount autoPurchaseAmount) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualPurchaseAmount.getAmount(), autoPurchaseAmount.getAmount()));
     }
 
     public static void printLottoNumber(List<Attempt> lottoNumbers) {

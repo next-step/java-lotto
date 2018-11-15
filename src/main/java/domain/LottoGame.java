@@ -9,15 +9,15 @@ public class LottoGame {
     private LottoAmount manualPurchaseAmount;
     private List<Attempt> lottoNumbers;
 
-    public LottoGame(int totalPurchaseAmount, int manualPurchaseAmount, NumberGenerator generator) {
+    public LottoGame(LottoAmount totalPurchaseAmount, LottoAmount manualPurchaseAmount, NumberGenerator generator) {
         lottoNumbers = new ArrayList<>();
-        this.totalPurchaseAmount = new LottoAmount(totalPurchaseAmount);
-        this.manualPurchaseAmount = new LottoAmount(manualPurchaseAmount);
+        this.totalPurchaseAmount = totalPurchaseAmount;
+        this.manualPurchaseAmount = manualPurchaseAmount;
         generateByAuto(calculateAutoPurchaseAmount(), generator);
     }
 
-    private void generateByAuto(int amount, NumberGenerator generator) {
-        for (int i = 0; i < amount; i++) {
+    private void generateByAuto(LottoAmount amount, NumberGenerator generator) {
+        for (int i = 0; i < amount.getAmount(); i++) {
             Attempt attempt = new Attempt(generator);
             this.lottoNumbers.add(attempt);
         }
@@ -41,7 +41,7 @@ public class LottoGame {
         }
     }
 
-    public int calculateAutoPurchaseAmount() {
-        return totalPurchaseAmount.getAmount() - manualPurchaseAmount.getAmount();
+    public LottoAmount calculateAutoPurchaseAmount() {
+        return new LottoAmount(totalPurchaseAmount.getAmount() - manualPurchaseAmount.getAmount());
     }
 }

@@ -12,4 +12,7 @@ public class LottoAmount {
         return amount;
     }
 
+    public static boolean isAmountPositive(LottoAmount amount) {
+        return amount.getAmount() > 0;
+    }
 }

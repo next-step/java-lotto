@@ -10,10 +10,10 @@ import static view.OutputView.*;
 
 public class Main {
     public static void main(String[] args) {
-        int totalPurchaseMoney = getPurchaseAmount();
+        Money totalPurchaseMoney = new Money(getPurchaseAmount());
         validatePurchaseMoney(totalPurchaseMoney);
 
-        int manualPurchaseAmount = getManualPurchaseAmount();
+        LottoAmount manualPurchaseAmount = new LottoAmount(getManualPurchaseAmount());
         validatePurchaseAmount(manualPurchaseAmount);
 
         LottoGame lotto = new LottoGame(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
