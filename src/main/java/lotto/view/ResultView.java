@@ -9,6 +9,7 @@ import lotto.model.Ticket;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private ResultView() {
@@ -33,10 +34,8 @@ public class ResultView {
      * @param tickets
      */
     public static void printTicketNums(List<Ticket> tickets) {
-        tickets.stream()
-                .map(Ticket::getNums)
-                .map(LottoNum::toInteger)
-                .forEach(nums -> System.out.println(nums.toString()));
+        Ticket.getTicketsNums(tickets).stream()
+                .forEach(t -> System.out.println(t));
     }
 
     /**
@@ -49,16 +48,7 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("----------");
-        Arrays.stream(PrizeType.values())
-                .filter(PrizeType::isWin)
-                .sorted(Comparator.comparing(PrizeType::getPrizeMoney))
-                .forEach(p -> {
-                    StringBuffer sb = new StringBuffer();
-                    sb.append(p.getMatchNum()).append("개 일치");
-                    printBonusResult(PrizeType.SECOND::equals, p, sb);
-                    sb.append("(").append(p.getPrizeMoney()).append("원)- ").append(statistics.getMatchGroupNum(p)).append("개");
-                    System.out.println(sb.toString());
-                });
+        getResult(statistics).forEach(s -> System.out.println(s));
         System.out.printf("총 수익률은 %.2f 입니다.", profitRate.apply(statistics.getProfit()));
     }
 
@@ -66,5 +56,24 @@ public class ResultView {
         if (bonusFunc.apply(p)) {
             sb.append(", 보너스 볼 일치");
         }
+    }
+
+    /**
+     * 결과 가져오기
+     * @param statistics
+     * @return
+     */
+    public static List<String> getResult(Statistics statistics) {
+        return Arrays.stream(PrizeType.values())
+                .filter(PrizeType::isWin)
+                .sorted(Comparator.comparing(PrizeType::getPrizeMoney))
+                .map(p -> {
+                    StringBuffer sb = new StringBuffer();
+                    sb.append(p.getMatchNum()).append("개 일치");
+                    printBonusResult(PrizeType.SECOND::equals, p, sb);
+                    sb.append("(").append(p.getPrizeMoney()).append("원)- ").append(statistics.getMatchGroupNum(p)).append("개");
+                    return sb.toString();
+                })
+                .collect(Collectors.toList());
     }
 }

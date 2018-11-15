@@ -25,7 +25,16 @@ public class InputView {
     public static Amount purcharseLotto() {
         System.out.println("구입금액을 입력해주세요.");
         Scanner sc = new Scanner(System.in);
-        return new Amount(new PositiveNumber(sc.next()).getValue());
+        return createAmount(sc.next());
+    }
+
+    /**
+     * amount 생성
+     * @param s
+     * @return
+     */
+    public static Amount createAmount(String s) {
+        return new Amount(new PositiveNumber(s).getValue());
     }
 
     /**
@@ -50,11 +59,20 @@ public class InputView {
      */
     public static List<Ticket> getManualTicket(int manualNum) {
         System.out.println("수동으로 구매할 번호를 입력해주세요.");
-
-        ArrayList<Ticket> tickets = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+        String[] strings = new String[manualNum];
         for (int i = 0; i < manualNum; i++) {
-            tickets.add(createManualTicket(split(sc.next())));
+            strings[i] = sc.next();
+        }
+
+        return createManualTickets(strings);
+    }
+
+    public static List<Ticket> createManualTickets(String[] ticketsNums) {
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        for (int i = 0; i < ticketsNums.length; i++) {
+            tickets.add(createManualTicket(split(ticketsNums[i])));
         }
 
         return tickets;
@@ -66,7 +84,7 @@ public class InputView {
      * @param strPrizeNums
      * @return
      */
-    private static Ticket createManualTicket(String[] strPrizeNums) {
+    public static Ticket createManualTicket(String[] strPrizeNums) {
         if (isOverMaxSize(strPrizeNums)) {
             throw new IllegalStateException("최대 6개의 숫자만 입력 가능");
         }
@@ -113,7 +131,7 @@ public class InputView {
      * @param strPrizeNums
      * @return
      */
-    private static List<Integer> toPositiveNums(String[] strPrizeNums) {
+    public static List<Integer> toPositiveNums(String[] strPrizeNums) {
         ArrayList<Integer> prizeNums = new ArrayList<>();
         for (int i = 0; i < strPrizeNums.length; i++) {
             prizeNums.add(new PositiveNumber(strPrizeNums[i]).getValue().intValue());
@@ -129,7 +147,7 @@ public class InputView {
      * @param s
      * @return
      */
-    private static String[] split(String s) {
+    public static String[] split(String s) {
         return s.split(",");
     }
 }
