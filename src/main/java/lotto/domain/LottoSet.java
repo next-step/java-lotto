@@ -27,9 +27,9 @@ public class LottoSet {
         return lottos.size();
     }
 
-    public int numberOfMatches(List<Integer> target, int count) {
+    public int numberOfMatches(List<Integer> winningNumbers, int count) {
         return Math.toIntExact(this.lottos.stream()
-                .filter(lotto -> lotto.hasMatches(target, count))
+                .filter(lotto -> lotto.hasMatches(winningNumbers, count))
                 .count());
     }
 

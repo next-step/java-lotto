@@ -20,12 +20,12 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public boolean hasMatches(List<Integer> target, int count) {
-        return count == this.numberOfMatches(target);
+    public boolean hasMatches(List<Integer> winningNumbers, int count) {
+        return count == this.numberOfMatches(winningNumbers);
     }
 
-    public int numberOfMatches(List<Integer> target) {
-        return Math.toIntExact(target.stream()
+    public int numberOfMatches(List<Integer> winningNumbers) {
+        return Math.toIntExact(winningNumbers.stream()
                 .filter(this::contains)
                 .count());
     }
