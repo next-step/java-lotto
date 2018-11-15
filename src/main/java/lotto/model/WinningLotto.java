@@ -2,28 +2,40 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Lotto {
+
+public class WinningLotto {
     private static final int LOTTO_NUMBER_DIGIT = 6;
     private static final int LOTTO_NUMBER_START_RANGE = 1;
     private static final int LOTTO_NUMBER_END_RANGE = 45;
 
     private List<Integer> numbers;
+    private Integer bonusNumber;
 
-    public Lotto(List<Integer> numbers) {
+    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
         validation(numbers);
         this.numbers = new ArrayList(numbers);
+
+        validation(bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return this.numbers;
     }
 
-    public int matchCount(WinningLotto winningLotto) {
-        return winningLotto.matchCount(numbers);
+
+    public boolean isBonusMatch(List<Integer> numbers) {
+        return numbers.contains(bonusNumber);
     }
 
-    public boolean isBonusMatch(WinningLotto winningLotto) {
-        return winningLotto.isBonusMatch(numbers);
+    public int matchCount(List<Integer> numbers) {
+        numbers.retainAll(this.numbers);
+        return numbers.size();
+    }
+
+    private void validation(Integer bonusNumber) {
+        validationNumberRange(bonusNumber);
+        validationNumberDuplicate(bonusNumber);
     }
 
     private void validation(List<Integer> numbers) {
@@ -38,6 +50,12 @@ public class Lotto {
         }
     }
 
+    private void validationNumberDuplicate(Integer bonusNumber) {
+        if(this.numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("숫자는 중복하여 입력할 수 없습니다.");
+        }
+    }
+
     private void validationNumberDigit(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_DIGIT) {
             throw new IllegalArgumentException("숫자는 6개 까지 입력하세요.");
@@ -46,9 +64,13 @@ public class Lotto {
 
     private void validationNumberRange(List<Integer> numbers) {
         numbers.forEach(number ->  {
-            if(number < LOTTO_NUMBER_START_RANGE || number >LOTTO_NUMBER_END_RANGE) {
-                throw new IllegalArgumentException("숫자는 1부터 45사이의 값을 입력하세요.");
-            }
+            validationNumberRange(number);
         });
+    }
+
+    private void validationNumberRange(Integer number) {
+        if(number < LOTTO_NUMBER_START_RANGE || number >LOTTO_NUMBER_END_RANGE) {
+            throw new IllegalArgumentException("숫자는 1부터 45사이의 값을 입력하세요.");
+        }
     }
 }

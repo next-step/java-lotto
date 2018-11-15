@@ -9,6 +9,7 @@ import java.util.List;
 
 import static lotto.ui.InputView.buyLotto;
 import static lotto.ui.InputView.lastWeekWinnerNumbers;
+import static lotto.ui.InputView.bonusNumber;
 import static lotto.ui.ResultView.printBuyLottoNumbers;
 import static lotto.ui.ResultView.printResultLottoReword;
 
@@ -22,7 +23,9 @@ public class ConsoleApplication {
         printBuyLottoNumbers(lottos);
 
         String winnerNumber = lastWeekWinnerNumbers();
-        LottoGameResult rewordLotto = lottoGame.getReword(winnerNumber);
+        int bonusNumber = bonusNumber();
+
+        LottoGameResult rewordLotto = lottoGame.getReword(winnerNumber, bonusNumber);
         float earningsRate = rewordLotto.earningsRate(totalPrice);
         printResultLottoReword(rewordLotto, earningsRate);
 

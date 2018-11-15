@@ -19,8 +19,8 @@ public class LottoGameResult {
         return results;
     }
 
-    public void setRewordCount(Lotto lotto, Lotto winnerLotto) {
-        int matchNumber = lotto.matchCount(winnerLotto.getNumbers());
+    public void setRewordCount(Lotto lotto, WinningLotto winningLotto) {
+        int matchNumber = lotto.matchCount(winningLotto);
 
         Integer count = results.containsKey(matchNumber) ? results.get(matchNumber) : 0;
         results.put(matchNumber, ++count);
@@ -29,8 +29,8 @@ public class LottoGameResult {
     public float earningsRate(Integer totalPrice) {
         LottoReword[] lottoRewords = LottoReword.values();
         Integer totalReword = results.entrySet().stream()
-                .mapToInt(e -> e.getValue() * lottoRewords[e.getKey()].getReword())
-                .sum();
+                        .mapToInt(e -> lottoRewords[e.getKey()].computeReward(e.getValue()))
+                        .sum();
 
         return totalReword / Float.valueOf(totalPrice);
     }

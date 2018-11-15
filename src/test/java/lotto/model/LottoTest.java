@@ -28,9 +28,7 @@ public class LottoTest {
         Lotto winnerLotto = new Lotto(winnerNumbers);
 
         int matchCount = lotto.matchCount(winnerLotto);
-
         assertThat(matchCount).isEqualTo(4);
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -56,6 +54,4 @@ public class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
         new Lotto(numbers);
     }
-
-
 }
