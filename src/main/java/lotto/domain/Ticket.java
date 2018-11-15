@@ -3,37 +3,44 @@ package lotto.domain;
 import lotto.enums.MatchType;
 
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class Ticket {
 
-    private List<Integer> numbers;
+    private List<LottoNo> numbers;
 
-    public Ticket(List<Integer> numbers) {
+    public Ticket(List<LottoNo> numbers) {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNo> getNumbers() {
         return this.numbers;
     }
 
     public MatchType compareWinningLotto(WinningLotto winningLotto) {
-        int count = getCountOfMatches(winningLotto.winningLottoStatus());
+        int count = winningLotto.winningLottoStatus()
+                .stream()
+                .mapToInt(this::getCountOfMatches)
+                .sum();
 
-        if(count == MatchType.FIVE.getMatch() && hasBonus(winningLotto.findBonus()))
+        if(MatchType.FIVE.isMatching(count) && hasBonus(winningLotto.findBonus()))
             return MatchType.BONUS;
 
         return MatchType.getMatchType(count, false);
     }
 
-    protected int getCountOfMatches(List<Integer> winningNumbers) {
-        return (int) this.numbers.stream()
-                .filter(winningNumbers::contains)
+    int getCountOfMatches(LottoNo number) {
+        return (int)this.numbers
+                .stream()
+                .filter(n -> n.compareTo(number) == 0)
                 .count();
     }
 
-    public boolean hasBonus(int bonus) {
-        return numbers.contains(bonus);
+    private boolean hasBonus(LottoNo bonus) {
+        return this.numbers
+                .stream()
+                .anyMatch(n -> n.compareTo(bonus) == 0);
     }
 
     @Override

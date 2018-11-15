@@ -12,15 +12,16 @@ public class LottoMachine {
         this.lotto = lotto;
     }
 
-    public GameResult playLotto(String winningNumbers, int bonus) {
-        return new GameResult(lotto.getTickets(), convertWinningNumbers(winningNumbers, bonus));
+    public GameResult playLotto(String winningNumbers, LottoNo bonus) {
+        return new GameResult(lotto.findLottos(), convertWinningNumbers(winningNumbers, bonus));
     }
 
-    protected static WinningLotto convertWinningNumbers(String s, int bonus) {
+    protected static WinningLotto convertWinningNumbers(String s, LottoNo bonus) {
         String [] numbers = s.replace(" ", "").split(",");
 
-        List<Integer> winningNumbers = Arrays.stream(numbers)
-                .map(Integer::valueOf)
+        List<LottoNo> winningNumbers = Arrays
+                .stream(numbers)
+                .map(number -> LottoNo.getInstance(Integer.valueOf(number)))
                 .collect(Collectors.toList());
 
         return new WinningLotto(winningNumbers, bonus);

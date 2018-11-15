@@ -5,18 +5,19 @@ import java.util.List;
 public class WinningLotto {
 
     private Ticket winningTicket;
-    private int bonus;
+    private LottoNo bonus;
 
-    public WinningLotto(List<Integer> winningNumbers, int bonus) {
+    public WinningLotto(List<LottoNo> winningNumbers, LottoNo bonus) {
         this.winningTicket = new Ticket(winningNumbers);
         this.bonus = bonus;
+        LottoValidator.validate(winningNumbers);
     }
 
-    public List<Integer> winningLottoStatus() {
+    public List<LottoNo> winningLottoStatus() {
         return this.winningTicket.getNumbers();
     }
 
-    public int findBonus() {
+    public LottoNo findBonus() {
         return this.bonus;
     }
 }

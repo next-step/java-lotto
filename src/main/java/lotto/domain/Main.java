@@ -3,21 +3,22 @@ package lotto.domain;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class Main {
 
     public static void main(String [] args) {
         Lotto lotto = new Lotto();
-        int ticketCount = lotto.countTicket(InputView.inputPurchaseAmount());
+        int purchaseAmount = InputView.inputPurchaseAmount();
+        int manualTicketCount = InputView.inputManualLottoCount();
 
-        ResultView.printLottoTicketCount(ticketCount);
+        Money money = new Money(purchaseAmount, manualTicketCount);
 
-        List<Ticket> tickets = lotto.generateTickets(ticketCount);
-        ResultView.printTickets(tickets);
+        LottoGenerator.generateLotto(lotto, InputView.inputManualLottoNumbers(manualTicketCount));
+
+        ResultView.printLottoTicketCount(money);
+        ResultView.printTickets(lotto.findLottos());
 
         LottoMachine lottoMachine = new LottoMachine(lotto);
-        GameResult gameResult = lottoMachine.playLotto(InputView.inputLastWeeksWinningNumbers(), InputView.inputBonusNumber());
+        GameResult gameResult = lottoMachine.playLotto(InputView.inputLastWeeksWinningNumbers(), LottoNo.getInstance(InputView.inputBonusNumber()));
 
         ResultView.printLottoResults(gameResult);
     }

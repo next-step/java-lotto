@@ -21,12 +21,12 @@ public enum MatchType {
         this.bonus = bonus;
     }
 
-    public int getMatch() {
+    public int findMatchCount() {
         return this.match;
     }
 
-    public int getPrice() {
-        return this.price;
+    public boolean isMatching(int count) {
+        return this.match == count;
     }
 
     public static MatchType getMatchType(int num, boolean bonus) {
@@ -34,5 +34,9 @@ public enum MatchType {
                .filter(value -> value.match == num && value.bonus == bonus)
                .findFirst()
                .orElse(DEFAULT);
+    }
+
+    public int calculateTotalAmountForOneLotto(int num) {
+        return this.price * num;
     }
 }

@@ -11,9 +11,6 @@ import java.util.Map;
 
 public class GameResult {
 
-    public static final int ROUND_SCALE = 2;
-    private static final int PRICE_PER_ONE_LOTTO = 1_000;
-
     private List<Ticket> tickets;
     private Map<MatchType, Integer> lottoResults;
 
@@ -40,29 +37,11 @@ public class GameResult {
         lottoResults.put(type, lottoResults.get(type) + 1);
     }
 
-
-    public BigDecimal getBenefitRate() {
-        BigDecimal totalWinAmount = new BigDecimal(getTotalAmount());
-        BigDecimal purchaseAmount = new BigDecimal(getPurchaseAmount());
-
-        return calculateBenefitRate(totalWinAmount, purchaseAmount);
-    }
-
-    public int getTotalAmount() {
-        return Arrays.stream(MatchType.values())
-                .mapToInt(i -> i.getPrice() * lottoResults.get(i))
-                .sum();
-    }
-
-    public static BigDecimal calculateBenefitRate(BigDecimal totalWinAmount, BigDecimal purchaseAmount) {
-        return totalWinAmount.divide(purchaseAmount, ROUND_SCALE, RoundingMode.DOWN);
-    }
-
     public Map<MatchType, Integer> getLottoResults() {
         return lottoResults;
     }
 
-    public int getPurchaseAmount() {
-        return this.tickets.size() * PRICE_PER_ONE_LOTTO;
+    public BigDecimal calculateBenefitRate() {
+        return Money.getBenefitRate(this.lottoResults);
     }
 }
