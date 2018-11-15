@@ -20,8 +20,7 @@ public class Attempt {
     }
 
     private List<Integer> generateAttemptNumbers(NumberGenerator numberGenerator) {
-        NumberGenerator generator = numberGenerator;
-        return generator.getRandomNumber();
+        return numberGenerator.getRandomNumber();
     }
 
     public List<Integer> getNumbers() {
