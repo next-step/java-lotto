@@ -1,3 +1,4 @@
+import domain.Lotto;
 import domain.LottoGame;
 import org.junit.Test;
 import view.InputView;
@@ -13,11 +14,6 @@ public class LottoTest {
         int money = 14000;
         int numberOfPurchase = InputView.numberOfPurchase(money);
         assertThat(numberOfPurchase).isEqualTo(14);
-    }
-    @Test
-    public void 로또번호생성() {
-        int lottoNum = LottoGame.startGame().size();
-        assertThat(lottoNum).isEqualTo(6);
     }
     @Test
     public void 로또번호입력() throws Exception {

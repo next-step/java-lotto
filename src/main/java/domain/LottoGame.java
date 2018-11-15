@@ -3,57 +3,84 @@ package domain;
 import view.InputView;
 import view.ResultView;
 
-import java.util.*;
+import java.util.List;
 
 public class LottoGame {
-    static final int LOTTOBALLS = 6;
-    static final int LOTTORANGE = 45;
+    static final int MATCHTHREE = 3;
+    static final int MATCHFOUR = 4;
+    static final int MATCHFIVE = 5;
+    static final int MATCHSIX = 6;
+    static final int numberOfRewards = 4;
 
-    public LottoGame() {
+    private int list[];
+    private LottoPapers lottoPapers;
 
+    public LottoGame(int turn) {
+        this.list = new int[numberOfRewards];
+        this.lottoPapers = new LottoPapers(turn);
+    }
+
+    public int[] getList() {
+        return this.list;
+    }
+
+    public LottoPapers getLottoPapers() {
+        return this.lottoPapers;
+    }
+
+    public int[] putList() {
+        return this.getList();
     }
 
     public static void main(String[] args) throws Exception {
         int turn = InputView.numberOfPurchase(InputView.purchasingAmount());
-        System.out.println(turn + "개를 구매했습니다.");
-        Lotto lotto = new Lotto();
+        ResultView.printNumberOfLottos(turn);
 
-        for(int i = 0; i < turn; i++) {
-            lotto.putLottoNumber(LottoGame.startGame());
-        }
+        LottoGame lottoGame = new LottoGame(turn);
 
-        ResultView.printLottoNumbers(lotto);
-        System.out.println();
-        lotto.winningLottoNumber(InputView.typeLottoNumbers());
-        System.out.println();
+        ResultView.printLottoNumbers(lottoGame.lottoPapers);
 
-        List<Integer> winningLotto = lotto.putWinningNumber();
-        CompareLotto compareLotto = new CompareLotto();
-        compareLotto.initCompareLotto();
+        WinningLotto winningLotto = new WinningLotto(InputView.typeLottoNumbers());
+        lottoGame.playingLotto(lottoGame.lottoPapers, winningLotto);
 
-        compareLotto.processingLotto(lotto, winningLotto);
-
-        ResultView.printResult(compareLotto.getArrayOfLottoCheck(), turn * 1000);
+        ResultView.printResult(lottoGame.putList(), turn * 1000);
     }
 
-    public static List<Integer> startGame() {
-        Set<Integer> set = new HashSet<>();
-        List<Integer> lottoNum = new ArrayList<>();
+    public void playingLotto(LottoPapers lottoPapers, WinningLotto winningLotto) {
+        int count;
+        for(Lotto lotto : lottoPapers.putLottoPapers()) {
+            count = 0;
+            this.list = amountOfMatching(compareLotto(lotto, winningLotto, count));
+        }
+    }
 
-        for(int i = 1; i <= LOTTORANGE; i++) {
-            lottoNum.add(i);
+    private int compareLotto(Lotto lotto, WinningLotto winningLotto, int count) {
+        for(Integer i : winningLotto.putWinningNumber()) {
+            count = isMatched(lotto.putLottoNumber(), i, count);
+        }
+        return count;
+    }
+
+    private int isMatched(List<Integer> lotto, Integer i, int count) {
+        if(lotto.contains(i)) {
+            count++;
+        }
+        return count;
+    }
+
+    private int[] amountOfMatching(int count) {
+        int matchList[] = {MATCHTHREE, MATCHFOUR, MATCHFIVE, MATCHSIX};
+
+        for (int i = 0; i < numberOfRewards; i++) {
+            checkMatchCount(count >= matchList[i], i);
         }
 
-        Collections.shuffle(lottoNum);
+        return list;
+    }
 
-        while(set.size() < LOTTOBALLS) {
-            int index = set.size();
-            set.add(lottoNum.get(index));
+    private void checkMatchCount(boolean condition, int i) {
+        if (condition) {
+            list[i] += 1;
         }
-
-        lottoNum = new ArrayList<>(set);
-        Collections.sort(lottoNum);
-
-        return lottoNum;
     }
 }

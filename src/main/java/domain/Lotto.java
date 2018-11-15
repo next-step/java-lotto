@@ -1,37 +1,50 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
-    private List<List<Integer>> lottoNumbers;
-    private List<Integer> winningLotto;
+    static final int LOTTOBALLS = 6;
+    static final int LOTTORANGE = 45;
+
+    private List<Integer> lotto;
 
     public Lotto() {
-        this.lottoNumbers = new ArrayList<>();
+        this.lotto = new ArrayList<>();
+        pickLottoNumbers();
     }
 
-    public List<Integer> getWinningLotto() {
-        return winningLotto;
+    public List<Integer> getLotto() {
+        return this.lotto;
     }
 
-    public List<List<Integer>> getLottoNumbers() {
-        return lottoNumbers;
+    public void rangeOfLottoNumber() {
+        for(int i = 1; i <= LOTTORANGE; i++) {
+            this.lotto.add(i);
+        }
     }
 
-    public void putLottoNumber(List<Integer> integers) {
-        this.lottoNumbers.add(integers);
+    public void shuffleNumbers() {
+        Collections.shuffle(this.lotto);
     }
 
-    public List<List<Integer>> lottoPapers() {
-        return this.getLottoNumbers();
+    public void fillLottoNumbers() {
+        Set<Integer> set = new HashSet<>();
+
+        while(set.size() < LOTTOBALLS) {
+            set.add(this.lotto.get(set.size()));
+        }
+
+        this.lotto = new ArrayList<>(set);
+        Collections.sort(this.lotto);
     }
 
-    public void winningLottoNumber(List<Integer> integers) {
-        this.winningLotto = integers;
+    public void pickLottoNumbers() {
+        rangeOfLottoNumber();
+        shuffleNumbers();
+        fillLottoNumbers();
     }
 
-    public List<Integer> putWinningNumber() {
-        return this.getWinningLotto();
+    public List<Integer> putLottoNumber() {
+        return this.getLotto();
     }
 }

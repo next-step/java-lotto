@@ -4,6 +4,7 @@ import java.util.*;
 
 public class InputView {
     static final int LOTTOBALLS = 6;
+    static final int PRICE = 1000;
 
     public static int purchasingAmount() {
         Scanner sc = new Scanner(System.in);
@@ -13,10 +14,10 @@ public class InputView {
     }
 
     public static int numberOfPurchase(int money) throws Exception{
-        if(money < 1000) {
+        if(money < PRICE) {
             throw new Exception("1000원 이상 입력");
         }
-        return money/1000;
+        return money/PRICE;
     }
 
     public static List<Integer> typeLottoNumbers() throws Exception {
