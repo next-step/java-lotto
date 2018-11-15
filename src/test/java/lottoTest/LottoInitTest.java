@@ -26,13 +26,38 @@ public class LottoInitTest {
     }
 
     @Test
-    public void 로또순서맞추기(){
+    public void 로또순서정렬(){
         Lotto pn = new Lotto();
         List<Integer> params = Arrays.asList(new Integer[]{30,40,2,14,5,6});
         List<Integer> result = pn.sortNumbers(params);
         assertThat(result).isEqualTo(Arrays.asList(new Integer[]{2,5,6,14,30,40}));
     }
 
+    @Test
+    public void 등수구하기(){
+        Rank rank = Rank.valueOf(5, false);
+        assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @Test
+    public void 일치하는갯수_구하기(){
+        WinningLotto wl = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
+        Lotto one = new Lotto(new Integer[]{30,40,2,14,5,6});
+
+        int result = wl.matchingCount(one);
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    public void 총합계_구하기(){
+
+    }
+    @Test
+    public void 수익률_구하기(){
+
+    }
+
+/*
     @Test
     public void 로또당첨숫자비교하기(){
         Scanner sc = new Scanner(System.in);
@@ -46,7 +71,7 @@ public class LottoInitTest {
 
     }
 
-/*    @Test
+    @Test
     public void 총합계구하기(){
         LottoResult lr = new LottoResult(new int[]{10,3,1,0,0,0});
         assertThat(lr.getTotalSum()).isEqualTo(5000);

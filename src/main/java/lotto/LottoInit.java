@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.LottoCommonUtil.ConvertMoneyFromString;
+import static lotto.LottoCommonUtil.convertMoneyFromString;
 
 public class LottoInit {
     private final static String DIVISOR = "1_000";
@@ -10,7 +10,7 @@ public class LottoInit {
 
     public LottoInit(int cost) {
         this.cost = cost;
-        this.count = cost / ConvertMoneyFromString(DIVISOR);
+        this.count = cost / convertMoneyFromString(DIVISOR);
     }
 
     public int getCount() {

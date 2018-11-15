@@ -30,11 +30,11 @@ public class StringCalculatorTest {
         assertThat(result).isEqualTo(15);
 
     }
-    @Test
+/*    @Test
     public void Add_커스텀문자출력하기(){
         String result = ifCustomRegex("//;\\n1;2;3",",|:");
         assertThat(result).isEqualTo(",|:|;");
-    }
+    }*/
 
 
 
