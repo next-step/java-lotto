@@ -11,7 +11,7 @@ public class LottoTest {
 
     @Test
     public void 구매금액으로_구매량을_구한다() {
-        lotto = new Lotto(14, new TestNumberGenerator());
+        lotto = new Lotto(14,0, new TestNumberGenerator());
         List<Attempt> lottoNumbers = lotto.getLottoNumbers();
 
         Assertions.assertThat(lottoNumbers).hasSize(14);

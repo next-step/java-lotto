@@ -15,6 +15,10 @@ public class Attempt {
         this.rank = rank;
     }
 
+    public Attempt(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     public Attempt(NumberGenerator numberGenerator) {
         this.numbers = generateAttemptNumbers(numberGenerator);
     }

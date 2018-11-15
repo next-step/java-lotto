@@ -5,20 +5,30 @@ import java.util.List;
 
 public class Lotto {
 
-    private int amount;
+    private int totalPurchaseAmount;
+    private int manualPurchaseAmount;
     private List<Attempt> lottoNumbers;
 
-    public Lotto(int amount, NumberGenerator generator) {
-        this.amount = amount;
-        initLottoNumbers(amount, generator);
+    public Lotto(int totalPurchaseAmount, int manualPurchaseAmount, NumberGenerator generator) {
+        lottoNumbers = new ArrayList<>();
+        this.totalPurchaseAmount = totalPurchaseAmount;
+        this.manualPurchaseAmount = manualPurchaseAmount;
+        generateByAuto(calculateAutoPurchaseAmount(), generator);
     }
 
-    private void initLottoNumbers(int amount, NumberGenerator generator) {
-        List<Attempt> tempLottoNumber = new ArrayList<>();
+    private void generateByAuto(int amount, NumberGenerator generator) {
         for (int i = 0; i < amount; i++) {
-            tempLottoNumber.add(new Attempt(generator));
+            Attempt attempt = new Attempt(generator);
+            this.lottoNumbers.add(attempt);
         }
-        this.lottoNumbers = tempLottoNumber;
+    }
+
+    public void generateByManual(List<List<Integer>> lottoNumbers) {
+        List<Attempt> manualAttempts = new ArrayList<>();
+        for (List<Integer> lottoNumber : lottoNumbers) {
+            manualAttempts.add(new Attempt(lottoNumber));
+        }
+        this.lottoNumbers.addAll(0,manualAttempts);
     }
 
     public List<Attempt> getLottoNumbers() {
@@ -31,4 +41,7 @@ public class Lotto {
         }
     }
 
+    public int calculateAutoPurchaseAmount() {
+        return this.totalPurchaseAmount - this.manualPurchaseAmount;
+    }
 }

@@ -1,41 +1,41 @@
 import domain.*;
-import view.InputView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static domain.Money.calculateAmount;
-import static view.InputView.*;
-import static view.OutputView.printRankAmount;
-import static view.OutputView.printResultNotice;
-import static view.OutputView.printResultYield;
-import static util.ConsoleUtil.changeWinNumberToInteger;
 import static util.Validation.validatePurchaseAmount;
+import static util.Validation.validatePurchaseMoney;
+import static view.InputView.*;
+import static view.OutputView.*;
 
 public class Main {
     public static void main(String[] args) {
-        int purchaseAmount = InputView.getPurchaseAmount();
-        validatePurchaseAmount(purchaseAmount);
+        int totalPurchaseMoney = getPurchaseAmount();
+        validatePurchaseMoney(totalPurchaseMoney);
 
-        int amount = calculateAmount(purchaseAmount);
-        printLottoAmount(amount);
+        int manualPurchaseAmount = getManualPurchaseAmount();
+        validatePurchaseAmount(manualPurchaseAmount);
 
-        NumberGenerator generator = new RandomNumberGenerator();
-        Lotto lotto = new Lotto(amount, generator);
+        Lotto lotto = new Lotto(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
+        lotto.generateByManual(printManualPurchaseNumber(manualPurchaseAmount));
+
+        printLottoAmount(manualPurchaseAmount, lotto.calculateAutoPurchaseAmount());
+
         List<Attempt> lottoNumbers = lotto.getLottoNumbers();
         printLottoNumber(lottoNumbers);
 
-        String winnerNumber = printLastWeekWinNumber();
-        List<Integer> numbers = changeWinNumberToInteger(winnerNumber);
+        List<Integer> winnerNumbers = printLastWeekWinNumber();
 
-        int bonusNumber = printBonusNumber(numbers);
-        lotto.calculateAllRank(numbers, bonusNumber);
+        int bonusNumber = printBonusNumber(winnerNumbers);
+        lotto.calculateAllRank(winnerNumbers, bonusNumber);
 
         printResultNotice();
 
         RankAmount rankLongMap = new RankAmount(lottoNumbers);
         printRankAmount(rankLongMap);
 
-        float v = rankLongMap.calculateYeild(purchaseAmount);
-        printResultYield(v);
+        float yeild = rankLongMap.calculateYeild(totalPurchaseMoney);
+        printResultYield(yeild);
     }
 }

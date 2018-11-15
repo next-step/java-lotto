@@ -2,8 +2,11 @@ package view;
 
 import domain.Attempt;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static util.ConsoleUtil.changeWinNumberToInteger;
 
 public class InputView {
 
@@ -15,8 +18,27 @@ public class InputView {
         return money;
     }
 
-    public static void printLottoAmount(int amount) {
-        System.out.println( amount + "개를 구매했습니다.");
+    public static int getManualPurchaseAmount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int amount = scanner.nextInt();
+
+        return amount;
+    }
+
+    public static List<List<Integer>> printManualPurchaseNumber(int amount) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+
+        List<List<Integer>> manualPurchaseNumbers = new ArrayList();
+        for (int i = 0; i < amount; i++) {
+            Scanner scanner = new Scanner(System.in);
+            manualPurchaseNumbers.add(changeWinNumberToInteger(scanner.next()));
+        }
+        return manualPurchaseNumbers;
+    }
+
+    public static void printLottoAmount(int manualPurchaseAmount, int autoPurchaseAmount) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualPurchaseAmount, autoPurchaseAmount));
     }
 
     public static void printLottoNumber(List<Attempt> lottoNumbers) {
@@ -25,12 +47,12 @@ public class InputView {
         }
     }
 
-    public static String printLastWeekWinNumber() {
+    public static List<Integer> printLastWeekWinNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String winNumber = scanner.next();
 
-        return winNumber;
+        return changeWinNumberToInteger(winNumber);
     }
 
     public static int printBonusNumber(List<Integer> winnerNumbers) {
