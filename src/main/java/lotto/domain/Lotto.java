@@ -23,17 +23,29 @@ public class Lotto {
         return number;
     }
 
-    public boolean lottoOfRank(final Lotto lotto, final Rank rank) {
+    public boolean lottoOfRank(final Lotto lotto, final Rank rank, final int bonus) {
+        return isSecondRank(rank, bonus) ? eqCountOfMatch(lotto, rank) && eqBonus(bonus) : eqCountOfMatch(lotto, rank);
+    }
+
+    private boolean eqCountOfMatch(final Lotto lotto, final Rank rank) {
         return calculatorLottoNumberMatchScore(lotto) == rank.getCountOfMatch();
     }
 
-    public boolean eqBonus(final int bonus) {
+    private boolean eqBonus(final int bonus) {
         return getNumber().stream().filter(number -> number == bonus).collect(toList()).size() > 0;
     }
 
+    private boolean isSecondRank(final Rank rank, final int bonus) {
+        return Rank.valueOf(rank.getCountOfMatch(), eqBonus(bonus)).equals(Rank.SECOND);
+    }
+
     private int calculatorLottoNumberMatchScore(final Lotto lotto) {
-        int matchScore = 0;
-        for (Integer num : lotto.getNumber()) {
+        return sumNumberMatchCheckLoop(0, lotto.getNumber());
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private int sumNumberMatchCheckLoop(int matchScore, final List<Integer> number) {
+        for (Integer num : number) {
             matchScore = numberMatchCheckLoop(matchScore, num);
         }
         return matchScore;

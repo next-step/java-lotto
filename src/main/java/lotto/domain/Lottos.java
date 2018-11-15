@@ -14,4 +14,8 @@ public class Lottos {
         return lottos;
     }
 
+    public static int rankOfMatchSize(final Lottos lottos) {
+        return lottos.getLottos().size();
+    }
+
 }

@@ -4,9 +4,11 @@ import lotto.LottoGame;
 import lotto.LottoResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;
+import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class ResultView {
 
@@ -24,47 +26,29 @@ public abstract class ResultView {
     public static void printAnalysisLottoResult(final LottoDto lottoDto, final int amount) {
         final StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n").append("---------\n");
-
-        sb.append(Rank.FIFTH.getCountOfMatch());
-        sb.append("개 일치 (");
-        sb.append(Rank.FIFTH.getWinningMoney());
-        sb.append(")- ");
-        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.FIFTH).getLottos().size());
-        sb.append("개\n");
-
-        sb.append(Rank.FOURTH.getCountOfMatch());
-        sb.append("개 일치 (");
-        sb.append(Rank.FOURTH.getWinningMoney());
-        sb.append(")- ");
-        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.FOURTH).getLottos().size());
-        sb.append("개\n");
-
-        sb.append(Rank.THIRD.getCountOfMatch());
-        sb.append("개 일치 (");
-        sb.append(Rank.THIRD.getWinningMoney());
-        sb.append(")- ");
-        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.THIRD).getLottos().size());
-        sb.append("개\n");
-
-        sb.append(Rank.SECOND.getCountOfMatch());
-        sb.append("개 일치, 보너스 볼 일치");
-        sb.append(Rank.SECOND.getWinningMoney());
-        sb.append(")- ");
-        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.SECOND).getLottos().size());
-        sb.append("개\n");
-
-        sb.append(Rank.FIRST.getCountOfMatch());
-        sb.append("개 일치 (");
-        sb.append(Rank.FIRST.getWinningMoney());
-        sb.append(")- ");
-        sb.append(LottoResult.rankOfMatch(lottoDto, Rank.FIRST).getLottos().size());
-        sb.append("개\n");
-
+        appendRanks(lottoDto, sb);
         sb.append("총 수익률은 ");
         sb.append(LottoResult.calculatorRate(lottoDto, amount));
         sb.append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
-
         System.out.println(sb.toString());
+    }
+
+    private static void appendRanks(final LottoDto lottoDto, final StringBuilder sb) {
+        final Map<Rank, Lottos> rankLottos = LottoResult.calculateLottoResult(lottoDto);
+        appendRank(sb, Rank.FIFTH, rankLottos.get(Rank.FIFTH));
+        appendRank(sb, Rank.FOURTH, rankLottos.get(Rank.FOURTH));
+        appendRank(sb, Rank.THIRD, rankLottos.get(Rank.THIRD));
+        appendRank(sb, Rank.SECOND, rankLottos.get(Rank.SECOND));
+        appendRank(sb, Rank.FIRST, rankLottos.get(Rank.FIRST));
+    }
+
+    private static void appendRank(final StringBuilder sb, final Rank rank, final Lottos lottos) {
+        sb.append(rank.getCountOfMatch());
+        sb.append(rank.equals(Rank.SECOND) ? "개 일치, 보너스 볼 일치(" : "개 일치 (");
+        sb.append(rank.getWinningMoney());
+        sb.append(")- ");
+        sb.append(Lottos.rankOfMatchSize(lottos));
+        sb.append("개\n");
     }
 
     private static void printCountOfPurchases(final int countPurchased) {
