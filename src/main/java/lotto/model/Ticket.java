@@ -3,13 +3,14 @@ package lotto.model;
 import java.util.List;
 
 public class Ticket {
-    private List<Integer> nums;
+    public static final int PRICE = 1_000;
+    private List<LottoNum> nums;
 
-    public Ticket(List<Integer> nums) {
+    public Ticket(List<LottoNum> nums) {
         this.nums = nums;
     }
 
-    public List<Integer> getNums() {
+    public List<LottoNum> getNums() {
         return nums;
     }
 
@@ -19,9 +20,11 @@ public class Ticket {
      * @param lotteryNums
      * @return
      */
-    public int countMatch(List<Integer> lotteryNums) {
+    public int countMatch(List<LottoNum> lotteryNums) {
         return (int) lotteryNums.stream()
-                .filter(i -> nums.contains(i))
+                .filter(i -> {
+                    return LottoNum.toInteger(nums).contains(i.getNum());
+                })
                 .count();
     }
 
@@ -31,7 +34,8 @@ public class Ticket {
      * @param bonusNum
      * @return
      */
-    public boolean hasBonusNum(Integer bonusNum) {
-        return nums.contains(bonusNum);
+    public boolean hasBonusNum(LottoNum bonusNum) {
+        return LottoNum.toInteger(nums)
+                .contains(bonusNum.getNum());
     }
 }

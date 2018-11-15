@@ -38,26 +38,11 @@ public class Statistics {
     }
 
     /**
-     * 수익률 가져오기
-     *
-     * @param moneyAmount
-     * @return
-     */
-    public double getProfitRate(long moneyAmount) {
-        double profitRate = (double) getProfit() / moneyAmount;
-        if (Double.isNaN(profitRate)) {
-            return 0;
-        }
-
-        return profitRate;
-    }
-
-    /**
      * 수익 가져오기
      *
      * @return
      */
-    private int getProfit() {
+    public int getProfit() {
         return Arrays.stream(PrizeType.values())
                 .mapToInt(p -> p.getPrizeMoney(getMatchGroupNum(p)))
                 .sum();
