@@ -1,5 +1,6 @@
-package domain;
+package domain.winningStatus;
 
+import domain.*;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -8,14 +9,14 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningStatusTest {
+public class GeneralWinningStatusTest {
 
     @Test
     public void 로또_1등() {
         Lotto lotto = makeLotto(1, 2, 3, 4, 5, 6);
         WinningNumber winningNumber = makeWinningNumber(10, 1, 2, 3, 4, 5, 6);
 
-        WinningStatus status = new WinningStatus(makeLottoGames(lotto), winningNumber);
+        WinningStatus status = makeLottoGames(lotto).match(winningNumber);
 
         assertThat(status.getPrizeCount(Prize.FIRST_PRIZE)).isEqualTo(1);
     }
@@ -25,7 +26,7 @@ public class WinningStatusTest {
         Lotto lotto = makeLotto(1, 2, 3, 4, 5, 10);
         WinningNumber winningNumber = makeWinningNumber(10, 1, 2, 3, 4, 5, 7);
 
-        WinningStatus status = new WinningStatus(makeLottoGames(lotto), winningNumber);
+        WinningStatus status = makeLottoGames(lotto).match(winningNumber);
 
         assertThat(status.getPrizeCount(Prize.SECOND_PRIZE)).isEqualTo(1);
     }
@@ -35,7 +36,7 @@ public class WinningStatusTest {
         Lotto lotto = makeLotto(1, 2, 3, 4, 5, 6);
         WinningNumber winningNumber = makeWinningNumber(10, 1, 2, 3, 4, 5, 7);
 
-        WinningStatus status = new WinningStatus(makeLottoGames(lotto), winningNumber);
+        WinningStatus status = makeLottoGames(lotto).match(winningNumber);
 
         assertThat(status.getPrizeCount(Prize.THIRD_PRIZE)).isEqualTo(1);
     }
@@ -45,7 +46,7 @@ public class WinningStatusTest {
         Lotto lotto = makeLotto(1, 2, 3, 4, 5, 6);
         WinningNumber winningNumber = makeWinningNumber(10, 1, 2, 3, 4, 7, 8);
 
-        WinningStatus status = new WinningStatus(makeLottoGames(lotto), winningNumber);
+        WinningStatus status = makeLottoGames(lotto).match(winningNumber);
 
         assertThat(status.getPrizeCount(Prize.FOURTH_PRIZE)).isEqualTo(1);
     }
@@ -55,7 +56,7 @@ public class WinningStatusTest {
         Lotto lotto = makeLotto(1, 2, 3, 4, 5, 6);
         WinningNumber winningNumber = makeWinningNumber(10, 1, 2, 3, 7, 8, 9);
 
-        WinningStatus status = new WinningStatus(makeLottoGames(lotto), winningNumber);
+        WinningStatus status = makeLottoGames(lotto).match(winningNumber);
 
         assertThat(status.getPrizeCount(Prize.FIFTH_PRIZE)).isEqualTo(1);
     }
@@ -66,7 +67,7 @@ public class WinningStatusTest {
         Lotto lotto2 = makeLotto(8, 9, 10, 11, 12, 13);
         WinningNumber winningNumber = makeWinningNumber(10, 1, 2, 3, 4, 5, 6);
 
-        WinningStatus status = new WinningStatus(makeLottoGames(lotto1, lotto2), winningNumber);
+        WinningStatus status = makeLottoGames(lotto1, lotto2).match(winningNumber);
 
         assertThat(status.getProfit()).isEqualTo(0.5);
     }
@@ -76,11 +77,12 @@ public class WinningStatusTest {
             .map(LottoNumber::new)
             .collect(Collectors.toList());
 
-        return new Lotto(new LottoNumbers(lottoNumbers), true);
+        return new Lotto(lottoNumbers);
     }
 
     private WinningNumber makeWinningNumber(int bonus, Integer... numbers) {
-        return new WinningNumber(Arrays.asList(numbers), new LottoNumber(bonus));
+        String join = String.join(",", Arrays.stream(numbers).map(String::valueOf).collect(Collectors.toList()));
+        return new WinningNumber(Lotto.fromCommaString(join), new LottoNumber(bonus));
     }
 
     private LottoGames makeLottoGames(Lotto... games) {

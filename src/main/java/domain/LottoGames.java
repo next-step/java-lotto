@@ -1,5 +1,8 @@
 package domain;
 
+import domain.winningStatus.GeneralWinningStatus;
+import domain.winningStatus.WinningStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +18,17 @@ public class LottoGames {
         return games;
     }
 
-    public int getAutoGameCount() {
-        return (int) games.stream().filter(Lotto::isAutoGame).count();
-    }
+    public WinningStatus match(WinningNumber winningNumber) {
+        WinningStatus winningStatus = new GeneralWinningStatus();
 
-    public int getManualGameCount() {
-        return (int) games.stream().filter(lotto -> !lotto.isAutoGame()).count();
+        for (Lotto lotto : games) {
+            Prize prize = Prize.matchPrize(
+                winningNumber.matched(lotto),
+                winningNumber.isBonusMatched(lotto));
+
+            winningStatus.putPrize(prize);
+        }
+
+        return winningStatus;
     }
 }

@@ -2,17 +2,16 @@ package view;
 
 import domain.LottoGames;
 import domain.Prize;
-import domain.WinningStatus;
+import domain.winningStatus.WinningStatus;
 
 public class ResultView {
 
-    public static void purchasedLottoGames(LottoGames lottoGames) {
-        String purchasedCount = "수동으로 " +
-            lottoGames.getManualGameCount() +
-            "장, 자동으로 " +
-            lottoGames.getAutoGameCount() +
-            "개를 구매했습니다.";
+    public static void purchasedLottoGamesCount(int manual, int auto) {
+        String purchasedCount = "수동으로 " + manual + "장, 자동으로 " + auto + "개를 구매했습니다.";
         System.out.println(purchasedCount);
+    }
+
+    public static void purchasedLottoGames(LottoGames lottoGames) {
         lottoGames.getGames().forEach(System.out::println);
     }
 

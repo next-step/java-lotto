@@ -1,5 +1,7 @@
 import domain.*;
-import util.ParsingUtil;
+import domain.lottosGenerator.AutoLottosGenerator;
+import domain.lottosGenerator.ManualLottosGenerator;
+import domain.winningStatus.WinningStatus;
 import view.InputView;
 import view.ResultView;
 
@@ -13,17 +15,26 @@ public class Main {
         List<String> manualGameNumbers = InputView.inputManualGameNumbers(manualGameCount);
 
         LottoMachine lottoMachine = new LottoMachine();
-        LottoGames lottoGames = lottoMachine.purchaseLotto(amount, manualGameNumbers);
 
+        List<Lotto> manualGames = lottoMachine.purchaseLotto(amount, new ManualLottosGenerator(manualGameNumbers));
+
+        Money autoMoney = amount.remain(manualGames.size());
+        List<Lotto> autoGames = lottoMachine.purchaseLotto(autoMoney, new AutoLottosGenerator());
+
+        manualGames.addAll(autoGames);
+
+        LottoGames lottoGames = new LottoGames();
+        manualGames.forEach(lottoGames::add);
+
+        ResultView.purchasedLottoGamesCount(manualGames.size(), autoGames.size());
         ResultView.purchasedLottoGames(lottoGames);
 
-        String numbers = InputView.inputWinningNumbers();
+        String winningNumbers = InputView.inputWinningNumbers();
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 
-        WinningNumber winningNumber = new WinningNumber(
-            ParsingUtil.parseStringToIntList(numbers), bonusNumber);
+        WinningNumber winningNumber = new WinningNumber(Lotto.fromCommaString(winningNumbers), bonusNumber);
 
-        WinningStatus status = lottoMachine.match(lottoGames, winningNumber);
+        WinningStatus status = lottoGames.match(winningNumber);
         ResultView.lottoResult(status);
     }
 }

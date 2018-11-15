@@ -13,4 +13,8 @@ public class Money {
     public int getGameCount() {
         return amount / ONE_GAME_AMOUNT;
     }
+
+    public Money remain(int size) {
+        return new Money(amount - size * ONE_GAME_AMOUNT);
+    }
 }

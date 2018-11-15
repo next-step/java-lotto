@@ -1,29 +1,48 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Lotto {
 
-    private final LottoNumbers lottoNumbers;
-    private final boolean isAutoGame;
+    private static final int NUMBER_SIZE = 6;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(LottoNumbers lottoNumbers, boolean isAutoGame) {
-        this.lottoNumbers = lottoNumbers;
-        this.isAutoGame = isAutoGame;
+    public Lotto(List<LottoNumber> numbers) {
+        if (numbers.size() != NUMBER_SIZE) {
+            throw new IllegalArgumentException("Lotto numbers must have 6 numbers");
+        }
+        this.numbers = numbers;
     }
 
-    public boolean isAutoGame() {
-        return isAutoGame;
+    public int match(Lotto lotto) {
+        return (int) numbers.stream()
+            .filter(lotto::contains)
+            .count();
     }
 
-    public int match(WinningNumber winningNumber) {
-        return lottoNumbers.match(winningNumber);
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
-    public boolean matchBonus(WinningNumber winningNumber) {
-        return lottoNumbers.matchBonus(winningNumber);
+    public static Lotto fromCommaString(String s) {
+        String[] split = s.replaceAll("\\s+", "").split(",");
+
+        List<LottoNumber> numbers = Arrays.stream(split)
+            .mapToInt(Integer::parseInt)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
+
+        return new Lotto(numbers);
     }
 
     @Override
     public String toString() {
-        return "[" + lottoNumbers.toString() + "]";
+        return "[" +
+            String.join(
+                ", ",
+                numbers.stream().map(LottoNumber::toString).collect(Collectors.toList())) +
+            "]";
     }
 }
