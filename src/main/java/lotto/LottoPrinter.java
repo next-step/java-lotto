@@ -1,3 +1,7 @@
+package lotto;
+
+import java.util.List;
+
 public interface LottoPrinter {
-    void printer();
+    List<Lotto> printer(int quantity);
 }
