@@ -4,9 +4,7 @@ import view.InputView;
 import java.util.*;
 
 import static domain.Money.calculateAmount;
-import static view.InputView.printLastWeekWinNumber;
-import static view.InputView.printLottoAmount;
-import static view.InputView.printLottoNumber;
+import static view.InputView.*;
 import static view.OutputView.printRankAmount;
 import static view.OutputView.printResultNotice;
 import static view.OutputView.printResultYield;
@@ -28,7 +26,9 @@ public class Main {
 
         String winnerNumber = printLastWeekWinNumber();
         List<Integer> numbers = changeWinNumberToInteger(winnerNumber);
-        lotto.calculateAllRank(numbers);
+
+        int bonusNumber = printBonusNumber(numbers);
+        lotto.calculateAllRank(numbers, bonusNumber);
 
         printResultNotice();
 
