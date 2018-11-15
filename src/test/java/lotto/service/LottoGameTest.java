@@ -15,7 +15,6 @@ public class LottoGameTest {
     @Test
     public void 게임수_리스트_만들기() {
         LottoGame lg = new LottoGame(14000);
-        lg.gameSettingAllFrame();
         assertThat(lg.getGamePlays().size()).isEqualTo(14);
     }
 

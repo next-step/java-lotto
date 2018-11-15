@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.dto.Lotto;
+import lotto.dto.WinningLotto;
 import lotto.service.LottoGame;
 import lotto.service.LottoResult;
 import lotto.utils.Utils;
@@ -18,10 +19,14 @@ public class ConsoleMain {
         InputView.printLottoList(lottos);
 
         String inputWinnerNumsToString = InputView.winningNumbers();
-        List<Integer> winnersNum = Utils.getIntListFromString(inputWinnerNumsToString);
-        LottoResult lr = lg.match(winnersNum);
+        int bonusNum = InputView.bonusNum();
+        WinningLotto winnerNums = new WinningLotto(
+                Utils.getIntListFromString(inputWinnerNumsToString)
+                ,bonusNum);
+//        List<Integer> winnersNum = Utils.getIntListFromString(inputWinnerNumsToString);
+        LottoResult lr = lg.match(winnerNums);
 
-        String result = lr.matchCountResultString(winnersNum);
+        String result = lr.matchCountResultString(winnerNums);
         ResultView.gameResult(result);
 
     }

@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.dto.Lotto;
+import lotto.dto.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class LottoGame {
         return gamePlays;
     }
 
-    public LottoResult match(List<Integer> winnersNum){
-        return new LottoResult(gamePlays,winnersNum,money);
+    public LottoResult match(WinningLotto winnersNum){
+        return new LottoResult(this.gamePlays,winnersNum,this.money);
     }
 }
