@@ -52,18 +52,36 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해주세요.");
 
         ArrayList<Ticket> tickets = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
         for (int i = 0; i < manualNum; i++) {
-            Scanner sc = new Scanner(System.in);
-            String[] strPrizeNums = split(sc.next());
-
-            if (strPrizeNums.length > MAX_SIZE) {
-                throw new IllegalStateException("최대 6개의 숫자만 입력 가능");
-            }
-
-            tickets.add(new Ticket(toLottoNums(toPositiveNums(strPrizeNums)), false));
+            tickets.add(createManualTicket(split(sc.next())));
         }
 
         return tickets;
+    }
+
+    /**
+     * 티켓 생성
+     *
+     * @param strPrizeNums
+     * @return
+     */
+    private static Ticket createManualTicket(String[] strPrizeNums) {
+        if (isOverMaxSize(strPrizeNums)) {
+            throw new IllegalStateException("최대 6개의 숫자만 입력 가능");
+        }
+
+        return new Ticket(LottoNum.toLottoNums(toPositiveNums(strPrizeNums)));
+    }
+
+    /**
+     * 티켓 만들 수 있는지 여부
+     *
+     * @param strPrizeNums
+     * @return
+     */
+    private static boolean isOverMaxSize(String[] strPrizeNums) {
+        return strPrizeNums.length > MAX_SIZE;
     }
 
 
@@ -79,14 +97,14 @@ public class InputView {
         String s = sc.next();
         String[] strPrizeNums = split(s);
 
-        return toLottoNums(toPositiveNums(strPrizeNums));
+        return LottoNum.toLottoNums(toPositiveNums(strPrizeNums));
     }
 
     public static LottoNum getBounsNum() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
 
-        return new LottoNum(new PositiveNumber(sc.next()).getValue().intValue());
+        return LottoNum.toLottoNum(new PositiveNumber(sc.next()).getValue().intValue());
     }
 
     /**
@@ -104,20 +122,6 @@ public class InputView {
         return prizeNums;
     }
 
-    /**
-     * 양의 정수로 변환
-     *
-     * @param strPrizeNums
-     * @return
-     */
-    public static List<LottoNum> toLottoNums(List<Integer> prizeNums) {
-        ArrayList<LottoNum> lottoNums = new ArrayList<>();
-        for (int i = 0; i < prizeNums.size(); i++) {
-            lottoNums.add(new LottoNum(prizeNums.get(i)));
-        }
-
-        return lottoNums;
-    }
 
     /**
      * 분리

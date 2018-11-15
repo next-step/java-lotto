@@ -1,16 +1,13 @@
 package lotto.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Ticket {
     public static final int PRICE = 1_000;
     private List<LottoNum> nums;
-    private boolean isAuto;
 
-    public Ticket(List<LottoNum> nums, boolean isAuto) {
+    public Ticket(List<LottoNum> nums) {
         this.nums = nums;
-        this.isAuto = isAuto;
     }
 
     public List<LottoNum> getNums() {
@@ -26,7 +23,7 @@ public class Ticket {
     public int countMatch(List<LottoNum> lotteryNums) {
         return (int) lotteryNums.stream()
                 .filter(i -> {
-                    return toInteger(nums).contains(i.getNum());
+                    return LottoNum.toInteger(nums).contains(i.getNum());
                 })
                 .count();
     }
@@ -38,28 +35,7 @@ public class Ticket {
      * @return
      */
     public boolean hasBonusNum(LottoNum bonusNum) {
-        return toInteger(nums)
+        return LottoNum.toInteger(nums)
                 .contains(bonusNum.getNum());
-    }
-
-    /**
-     * 자동인지 여부
-     *
-     * @return
-     */
-    public boolean isAuto() {
-        return isAuto;
-    }
-
-    /**
-     * Integer로 변환
-     *
-     * @param lottoNums
-     * @return
-     */
-    public static List<Integer> toInteger(List<LottoNum> lottoNums) {
-        return lottoNums.stream()
-                .map(LottoNum::getNum)
-                .collect(Collectors.toList());
     }
 }

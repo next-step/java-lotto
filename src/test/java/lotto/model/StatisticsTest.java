@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.view.InputView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,15 +16,15 @@ public class StatisticsTest {
     @Before
     public void setUp() {
         tickets = Arrays.asList(
-                new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 7, 8, 9)), false) // 5등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 7, 8, 9, 10)), false) // 꽝
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)), false) // 1등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 7)), false) // 2등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(2, 3, 4, 5, 6, 7)), false) // 2등
-                , new Ticket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 8)), false) // 3등
+                new Ticket(LottoNum.toLottoNums(Arrays.asList(1, 2, 3, 7, 8, 9))) // 5등
+                , new Ticket(LottoNum.toLottoNums(Arrays.asList(1, 2, 7, 8, 9, 10))) // 꽝
+                , new Ticket(LottoNum.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6))) // 1등
+                , new Ticket(LottoNum.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 7))) // 2등
+                , new Ticket(LottoNum.toLottoNums(Arrays.asList(2, 3, 4, 5, 6, 7))) // 2등
+                , new Ticket(LottoNum.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 8))) // 3등
         );
 
-        WinningTicket winningTicket = new WinningTicket(InputView.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNum(7));
+        WinningTicket winningTicket = new WinningTicket(LottoNum.toLottoNums(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNum(7));
         statistics = new Statistics(tickets, winningTicket);
     }
 
@@ -44,11 +43,4 @@ public class StatisticsTest {
         assertThat(statistics.getMatchGroupNum(PrizeType.THIRD)).isEqualTo(1);
     }
 
-    @Test
-    public void 일치_1등1개_2등2개_3등1개_5등1개_수익률() {
-
-        long moneyAmount = 100000000L;
-        double profitRate = statistics.getProfitRate(moneyAmount);
-        assertThat(profitRate).isEqualTo(20.61505);
-    }
 }

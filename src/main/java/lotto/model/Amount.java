@@ -11,6 +11,21 @@ public class Amount {
     }
 
     /**
+     * 수익률 가져오기
+     *
+     * @param moneyAmount
+     * @return
+     */
+    public double getProfitRate(int profit) {
+        double profitRate = (double) profit / originalValue;
+        if (Double.isNaN(profitRate)) {
+            return 0;
+        }
+
+        return profitRate;
+    }
+
+    /**
      * 빼기
      *
      * @param num
