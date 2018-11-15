@@ -21,7 +21,7 @@ public class LottoMachine {
 
         List<LottoNo> winningNumbers = Arrays
                 .stream(numbers)
-                .map(number -> new LottoNo(Integer.valueOf(number)))
+                .map(number -> LottoNo.getInstance(Integer.valueOf(number)))
                 .collect(Collectors.toList());
 
         return new WinningLotto(winningNumbers, bonus);

@@ -18,9 +18,8 @@ public class Utils {
     private Utils() {}
 
     public static List<LottoNo> generateRandomNumbers() {
-        List<LottoNo> numbers = IntStream
-                .rangeClosed(LOTTO_NUMBER_RANGE_START, LOTTO_NUMBER_RANGE_END)
-                .mapToObj(LottoNo::new)
+        List<LottoNo> numbers = IntStream.rangeClosed(LOTTO_NUMBER_RANGE_START, LOTTO_NUMBER_RANGE_END)
+                .mapToObj(LottoNo::getInstance)
                 .collect(Collectors.toList());
 
         return shuffle(numbers).subList(LOTTO_NUMBER_BOUND_START, LOTTO_NUMBER_BOUND_END);

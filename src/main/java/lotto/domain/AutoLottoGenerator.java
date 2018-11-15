@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class AutoLottoGenerator implements LottoGenerator {
+public class AutoLottoGenerator implements Generator {
 
     @Override
     public List<Ticket> generate() {

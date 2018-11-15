@@ -13,7 +13,7 @@ public class LottoValidatorTest {
     public void 로또_번호가_45_이상() throws Exception {
         List<LottoNo> lottoNos = Arrays.asList(46, 2, 3, 4, 5, 6)
                 .stream()
-                .map(i -> new LottoNo(i))
+                .map(i -> LottoNo.getInstance(i))
                 .collect(Collectors.toList());
 
         LottoValidator.validate(lottoNos);
@@ -23,7 +23,7 @@ public class LottoValidatorTest {
     public void 로또_갯수가_6개가_넘는_경우() throws Exception {
         List<LottoNo> lottoNos = Arrays.asList(1, 2, 3, 4, 5, 6, 7)
                 .stream()
-                .map(i -> new LottoNo(i))
+                .map(i -> LottoNo.getInstance(i))
                 .collect(Collectors.toList());
 
         LottoValidator.validate(lottoNos);

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualLottoGenerator implements LottoGenerator {
+public class ManualLottoGenerator implements Generator {
 
     private List<String> manualTickets;
 
@@ -27,7 +27,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     private Ticket convertToTicket(String[] str) {
         List<LottoNo> list = Arrays
                 .stream(str)
-                .map(s -> new LottoNo(Integer.parseInt(s)))
+                .map(s -> LottoNo.getInstance(Integer.parseInt(s)))
                 .collect(Collectors.toList());
 
         LottoValidator.validate(list);

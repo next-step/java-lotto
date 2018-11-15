@@ -11,7 +11,6 @@ public class WinningLotto {
         this.winningTicket = new Ticket(winningNumbers);
         this.bonus = bonus;
         LottoValidator.validate(winningNumbers);
-        LottoValidator.validate(bonus);
     }
 
     public List<LottoNo> winningLottoStatus() {
