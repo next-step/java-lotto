@@ -41,6 +41,10 @@ public class Money implements Comparable<Money>{
         return this.value / money.getValue();
     }
 
+    public int divideAsNumber(Integer value){
+        return this.value / value;
+    }
+
     public int getValue() {
         return value;
     }

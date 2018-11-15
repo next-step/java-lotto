@@ -4,6 +4,7 @@ import net.chandol.lotto.domain.Lotto;
 import net.chandol.lotto.value.LottoNumber;
 import net.chandol.lotto.value.LottoNumberItem;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,5 +33,13 @@ public class ConsoleUiUtil {
                 .collect(toList());
 
         return LottoNumber.direct(numbers);
+    }
+
+    public static List<Lotto> merge(List<Lotto> a, List<Lotto> b) {
+        List<Lotto> results = new ArrayList<>();
+        results.addAll(a);
+        results.addAll(b);
+
+        return results;
     }
 }
