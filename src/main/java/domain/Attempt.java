@@ -1,9 +1,9 @@
-package Domain;
+package domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static Domain.Rank.*;
+import static domain.Rank.*;
 
 public class Attempt {
 

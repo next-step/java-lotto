@@ -1,4 +1,4 @@
-package Domain;
+package domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

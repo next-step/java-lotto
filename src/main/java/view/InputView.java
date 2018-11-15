@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Domain.Attempt;
+import domain.Attempt;
 
 import java.util.List;
 import java.util.Scanner;

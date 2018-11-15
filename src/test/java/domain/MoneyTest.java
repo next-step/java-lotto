@@ -1,10 +1,10 @@
-package Domain;
+package domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import static Domain.Money.LOTTO_PRICE;
-import static Domain.Money.calculateAmount;
+import static domain.Money.LOTTO_PRICE;
+import static domain.Money.calculateAmount;
 
 public class MoneyTest {
 

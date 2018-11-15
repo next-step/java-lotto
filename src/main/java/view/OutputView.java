@@ -1,12 +1,12 @@
-package View;
+package view;
 
-import Domain.Rank;
-import Domain.RankAmount;
+import domain.Rank;
+import domain.RankAmount;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static Domain.Rank.*;
+import static domain.Rank.*;
 
 public class OutputView {
 

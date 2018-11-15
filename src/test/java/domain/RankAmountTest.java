@@ -1,4 +1,4 @@
-package Domain;
+package domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static Domain.Rank.*;
+import static domain.Rank.*;
 import static org.assertj.core.api.Assertions.entry;
 
 public class RankAmountTest {
