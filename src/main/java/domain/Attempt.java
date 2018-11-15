@@ -35,15 +35,19 @@ public class Attempt {
         setRank(calculateMatchCount(numbers));
     }
 
-    public int calculateMatchCount(List<Integer> numbers) {
-        List<Integer> attemptNumbers = new ArrayList<>();
-        attemptNumbers.addAll(this.numbers);
+    public int calculateMatchCount(List<Integer> winnerNumbers) {
+        return calculateMatchNumbers(winnerNumbers).size();
+    }
 
-        List<Integer> winnerNumbers = new ArrayList<>();
-        winnerNumbers.addAll(numbers);
-        winnerNumbers.retainAll(attemptNumbers);
+    private List<Integer> calculateMatchNumbers(List<Integer> winnerNumbers) {
+        List<Integer> matchNumbers = new ArrayList<>();
 
-        return winnerNumbers.size();
+        for (Integer winnerNumber : winnerNumbers) {
+            if (numbers.contains(winnerNumber)) {
+                matchNumbers.add(winnerNumber);
+            }
+        }
+        return matchNumbers;
     }
 
     public void setRank(int matchCount) {
