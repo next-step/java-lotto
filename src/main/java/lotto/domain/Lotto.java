@@ -5,6 +5,8 @@ import lotto.utils.GenerateLotto;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lotto {
 
     private List<Integer> number;
@@ -21,13 +23,29 @@ public class Lotto {
         return number;
     }
 
-    public boolean isMatchNumber(final List<Integer> numbers, final int point) {
-        return calculatorLottoNumberMatchScore(numbers) == point;
+    public boolean lottoOfRank(final Lotto lotto, final Rank rank, final int bonus) {
+        return isSecondRank(rank, bonus) ? eqCountOfMatch(lotto, rank) && eqBonus(bonus) : eqCountOfMatch(lotto, rank);
     }
 
-    private int calculatorLottoNumberMatchScore(final List<Integer> numbers) {
-        int matchScore = 0;
-        for (Integer num : numbers) {
+    private boolean eqCountOfMatch(final Lotto lotto, final Rank rank) {
+        return calculatorLottoNumberMatchScore(lotto) == rank.getCountOfMatch();
+    }
+
+    private boolean eqBonus(final int bonus) {
+        return getNumber().stream().filter(number -> number == bonus).collect(toList()).size() > 0;
+    }
+
+    private boolean isSecondRank(final Rank rank, final int bonus) {
+        return Rank.valueOf(rank.getCountOfMatch(), eqBonus(bonus)).equals(Rank.SECOND);
+    }
+
+    private int calculatorLottoNumberMatchScore(final Lotto lotto) {
+        return sumNumberMatchCheckLoop(0, lotto.getNumber());
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private int sumNumberMatchCheckLoop(int matchScore, final List<Integer> number) {
+        for (Integer num : number) {
             matchScore = numberMatchCheckLoop(matchScore, num);
         }
         return matchScore;

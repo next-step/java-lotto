@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -12,7 +13,7 @@ public class LottoGame {
 
     private final int amount;
     private final int price;
-    private final Lottos lottos = new Lottos();
+    private final Lottos lottos;
 
     public LottoGame(final int amount) {
         this(amount, DEFAULT_PRICE);
@@ -27,7 +28,7 @@ public class LottoGame {
             throw new IllegalArgumentException();
         }
 
-        createLottos();
+        this.lottos = new Lottos(createLottos());
     }
 
     public List<Lotto> getLottos() {
@@ -38,10 +39,12 @@ public class LottoGame {
         return new BigDecimal(this.amount / this.price).intValue();
     }
 
-    private void createLottos() {
+    private List<Lotto> createLottos() {
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < getCountPurchased(); i++) {
-            this.lottos.add(new Lotto());
+            lottos.add(new Lotto());
         }
+        return lottos;
     }
 
 }
