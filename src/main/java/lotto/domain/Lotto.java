@@ -8,21 +8,16 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Lotto {
 
+    private static final int INITIAL_COUNT = 0;
+    private static final int LOTTO_MIN_BOUND = 1;
+    private static final int LOTTO_MAX_BOUND = 46;
     private static final int LOTTO_COUNT = 6;
-    private static final int LOTTO_BOUND = 46;
     private List<LottoNo> lottoNumbers;
 
     private Lotto() {
         this.lottoNumbers = new ArrayList<>();
         initLottoNumbers();
         validationCheck();
-
-    }
-
-    private void validationCheck() {
-        if (this.lottoNumbers.size() != 6) {
-            throw new InputFormatException();
-        }
     }
 
     private Lotto(String lottoNumbers) {
@@ -31,6 +26,12 @@ public class Lotto {
             this.lottoNumbers.add(LottoNo.lottoNoFactory(Integer.parseInt(number.trim())));
         }
         validationCheck();
+    }
+
+    private void validationCheck() {
+        if (this.lottoNumbers.size() != LOTTO_COUNT) {
+            throw new InputFormatException();
+        }
     }
 
     public static Lotto auto() {
@@ -42,10 +43,10 @@ public class Lotto {
     }
 
     private void initLottoNumbers() {
-        int count = 0;
+        int count = INITIAL_COUNT;
         while (true) {
             if (count == LOTTO_COUNT) break;
-            int randomValue = ThreadLocalRandom.current().nextInt(1, LOTTO_BOUND);
+            int randomValue = ThreadLocalRandom.current().nextInt(LOTTO_MIN_BOUND, LOTTO_MAX_BOUND);
             if (lottoNumbers.contains(randomValue)) continue;
             lottoNumbers.add(LottoNo.lottoNoFactory(randomValue));
             count++;

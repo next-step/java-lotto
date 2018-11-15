@@ -8,32 +8,24 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private List<Integer> winningNumbers;
+    private Lotto winningLottoNumber;
     private int bonusBall;
 
-    public WinningLotto(String splitWinningLine, int bonusBall) {
-        winningNumbers = new ArrayList<>();
+    public WinningLotto(Lotto lotto, int bonusBall) {
+        this.winningLottoNumber = lotto;
         this.bonusBall = bonusBall;
-        makeWinningNumber(splitWinningLine);
+        validationCheck(bonusBall);
     }
 
-    private void makeWinningNumber(String splitWinningLine) {
-        for (String winningNum : StringParser.StringParserByDelimeter(splitWinningLine, ",")) {
-            int num = Integer.parseInt(winningNum.trim());
-            validationCheck(num);
-            this.winningNumbers.add(num);
-        }
-    }
-
-    private void validationCheck(int num) {
-        if (!(num >= 1 && num <= 45) || this.bonusBall == num) {
+    private void validationCheck(int bonusBall) {
+        if (winningLottoNumber.isBonusBallInLotto(bonusBall)) {
             throw new InputFormatException();
         }
     }
 
     public int getRankCount(Lotto lotto, int count) {
-        for (Integer number : winningNumbers) {
-            count = getCount(lotto, count, number);
+        for (LottoNo lottoNo : winningLottoNumber.getLottoNumbers()) {
+            count = getCount(lotto, count, lottoNo.getLottoNumber());
         }
 
         return count;

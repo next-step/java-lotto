@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoNo {
-    private int number;
+
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static Map<Integer, LottoNo> lottoNoMap = new HashMap<>();
+    private int number;
 
     private LottoNo(int number) {
         this.number = number;
-        if (!(this.number >= 1 && this.number <= 45)) {
+        if (!(this.number >= MINIMUM_LOTTO_NUMBER && this.number <= MAXIMUM_LOTTO_NUMBER)) {
             throw new InputFormatException();
         }
     }

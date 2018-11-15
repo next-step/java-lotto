@@ -35,7 +35,7 @@ public class InputView {
             System.out.println("보너스 볼을 입력해 주세요.");
             int bonusBall = scanner.nextInt();
 
-            return new WinningLotto(winningLine, bonusBall);
+            return new WinningLotto(Lotto.manual(winningLine), bonusBall);
         } catch (Exception e) {
             throw new InputFormatException();
         }
