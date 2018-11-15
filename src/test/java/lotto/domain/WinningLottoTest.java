@@ -3,9 +3,9 @@ package lotto.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static lotto.utils.LottoNumberGenerator.generate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningLottoTest {
@@ -14,8 +14,8 @@ public class WinningLottoTest {
 
     @Before
     public void setup() {
-        List<Integer> numbers = Arrays.asList(1, 10, 15, 20, 25, 30);
-        int bonusNumber = 35;
+        List<LottoNo> numbers = generate(1, 10, 15, 20, 25, 30);
+        LottoNo bonusNumber = LottoNo.create(35);
         winningLotto = WinningLotto.create(numbers, bonusNumber);
     }
 
@@ -26,11 +26,12 @@ public class WinningLottoTest {
 
     @Test
     public void 당첨번호를_얻을수있다() {
-        assertThat(winningLotto.getNumbers()).contains(1, 10, 15, 20, 25, 30);
+
+        assertThat(winningLotto.getNumbers()).isEqualTo(generate(1, 10, 15, 20, 25, 30));
     }
 
     @Test
     public void 보너스번호가_포함된_당첨번호를_얻을수있다() {
-        assertThat(winningLotto.getNumbersWithBonus()).contains(1, 10, 15, 20, 25, 30, 35);
+        assertThat(winningLotto.getNumbersWithBonus()).isEqualTo(generate(1, 10, 15, 20, 25, 30, 35));
     }
 }

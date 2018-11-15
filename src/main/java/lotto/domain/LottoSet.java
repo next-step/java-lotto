@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoSet {
@@ -27,12 +28,11 @@ public class LottoSet {
         return lottos.size();
     }
 
-    public int numberOfMatches(List<Integer> winningNumbers, int count) {
+    public int numberOfMatches(List<LottoNo> winningNumbers, int count) {
         return Math.toIntExact(this.lottos.stream()
                 .filter(lotto -> lotto.hasMatches(winningNumbers, count))
                 .count());
     }
-
 
     @Override
     public String toString() {

@@ -1,28 +1,33 @@
 package lotto.domain;
 
-import lotto.utils.CollectionUtils;
+import lotto.utils.LottoCollectionUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private List<Integer> numbers;
-    private int bonusNumber;
+    private List<LottoNo> numbers;
+    private LottoNo bonusNumber;
 
-    private WinningLotto(List<Integer> numbers, int bonusNumber) {
+    private WinningLotto(List<LottoNo> numbers, LottoNo bonusNumber) {
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto create(List<Integer> numbers, int bonusNumber) {
+    public static WinningLotto create(List<LottoNo> numbers, LottoNo bonusNumber) {
         return new WinningLotto(numbers, bonusNumber);
     }
 
-    public List<Integer> getNumbers(){
+    public static WinningLotto of(List<Integer> numbers) {
+        return new WinningLotto(numbers.stream().map(LottoNo::create).collect(Collectors.toList()), null);
+    }
+
+    public List<LottoNo> getNumbers(){
         return this.numbers;
     }
 
-    public List<Integer> getNumbersWithBonus(){
-        return CollectionUtils.merge(this.numbers, this.bonusNumber);
+    public List<LottoNo> getNumbersWithBonus(){
+        return LottoCollectionUtils.merge(this.numbers, this.bonusNumber);
     }
 }

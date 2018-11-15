@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.utils.LottoNumberGenerator.generate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoSetTest {
@@ -15,10 +16,9 @@ public class LottoSetTest {
     @Before
     public void setup() {
         lottos = Arrays.asList(
-                Lotto.create(Arrays.asList(1, 10, 15, 20, 25, 30)),
-                Lotto.create(Arrays.asList(20, 25, 30, 35, 40, 45)),
-                Lotto.create(Arrays.asList(35, 40, 45, 50, 55, 60))
-
+                Lotto.create(generate(1, 10, 15, 20, 25, 30)),
+                Lotto.create(generate(20, 25, 30, 35, 40, 45)),
+                Lotto.create(generate(35, 40, 45, 50, 55, 60))
         );
     }
 
@@ -40,7 +40,7 @@ public class LottoSetTest {
     public void 일치하는_로또셋_갯수를_알수있다() {
         LottoSet lottoSet = LottoSet.create(lottos);
 
-        assertThat(lottoSet.numberOfMatches(Arrays.asList(1, 10, 15, 91, 92, 93), 3)).isEqualTo(1);
-        assertThat(lottoSet.numberOfMatches(Arrays.asList(20, 25, 30, 91, 92, 93), 3)).isEqualTo(2);
+        assertThat(lottoSet.numberOfMatches(generate(1, 10, 15, 91, 92, 93), 3)).isEqualTo(1);
+        assertThat(lottoSet.numberOfMatches(generate(20, 25, 30, 91, 92, 93), 3)).isEqualTo(2);
     }
 }

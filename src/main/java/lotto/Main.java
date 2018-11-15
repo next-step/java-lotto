@@ -14,8 +14,8 @@ public class Main {
         LottoSet lottoSet = LottoShop.buy(amount);
         ResultView.printLottoSet(lottoSet);
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        List<LottoNo> winningNumbers = InputView.inputWinningNumbers();
+        LottoNo bonusNumber = InputView.inputBonusNumber();
 
         WinningLotto winningLotto = WinningLotto.create(winningNumbers, bonusNumber);
 

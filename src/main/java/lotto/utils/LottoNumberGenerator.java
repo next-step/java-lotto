@@ -1,9 +1,9 @@
 package lotto.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import lotto.domain.LottoNo;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumberGenerator {
 
@@ -14,8 +14,18 @@ public class LottoNumberGenerator {
 
     }
 
-    public static List<Integer> generate() {
-        List<Integer> lottoNumbers = new ArrayList<>();
+    public static List<LottoNo> generate(int... numbers) {
+        return generate(Arrays.stream(numbers).boxed().collect(Collectors.toList()));
+    }
+    
+    public static List<LottoNo> generate(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNo::create)
+                .collect(Collectors.toList());
+    }
+
+    public static List<LottoNo> generate() {
+        List<LottoNo> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
             lottoNumbers.add(generateRandomLotto());
         }
@@ -23,8 +33,7 @@ public class LottoNumberGenerator {
         return lottoNumbers;
     }
 
-    private static int generateRandomLotto() {
-        return new Random().nextInt(LOTTO_NUMBER_BOUND);
+    private static LottoNo generateRandomLotto() {
+        return LottoNo.create(new Random().nextInt(LOTTO_NUMBER_BOUND));
     }
-
 }
