@@ -10,9 +10,6 @@ public class Attempt {
     private List<Integer> numbers;
     private Rank rank;
 
-    public Attempt() {
-    }
-
     public Attempt(List<Integer> numbers, Rank rank) {
         this.numbers = numbers;
         this.rank = rank;
