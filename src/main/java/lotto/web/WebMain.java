@@ -25,9 +25,6 @@ public class WebMain {
             List<String> manualNumbers = new ArrayList<>();
             Collections.addAll(manualNumbers, manual);
 
-            for(int i = 0; i < manual.length; i++) {
-                System.out.println(manualNumbers.get(i));
-            }
             Money money = new Money(Integer.parseInt(inputMoney), manual.length);
 
             LottoGenerator.generateLotto(lotto, manualNumbers);
