@@ -32,4 +32,8 @@ public enum Rank {
                 .findAny()
                 .orElse(ETC);
     }
+
+    public long calculateRankSum(Long amount) {
+        return getRewardMoney() * amount;
+    }
 }

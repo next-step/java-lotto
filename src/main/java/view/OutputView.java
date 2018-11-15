@@ -19,7 +19,7 @@ public class OutputView {
     public static void printRankAmount(RankAmount rankLongMap) {
         List<Rank> ranks = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
         for (Rank rank : ranks) {
-            System.out.println(String.format("%d개 일치 (%d원) - %d개",rank.getMatchCount(), rank.getRewardMoney(), rankLongMap.getAmount(rank)));
+            System.out.println(String.format("%d개 일치 (%d원) - %d개",rank.getMatchCount(), rank.getRewardMoney(), rankLongMap.inquireAmount(rank)));
         }
     }
 

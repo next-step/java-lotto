@@ -21,7 +21,7 @@ public class RankAmount {
                 .collect(Collectors.groupingBy(Attempt::getRank, Collectors.counting()));
     }
 
-    public Long getAmount(Rank rank) {
+    public Long inquireAmount(Rank rank) {
         return rankAmount.get(rank) != null? rankAmount.get(rank) : 0L;
     }
 
@@ -32,9 +32,11 @@ public class RankAmount {
     private Long calculateTotalSum() {
         Long money = 0L;
         for (Rank rank : rankAmount.keySet()) {
-            money += rank.getRewardMoney() * getAmount(rank);
+            money += rank.calculateRankSum(inquireAmount(rank));
         }
         return money;
     }
+
+
 
 }
