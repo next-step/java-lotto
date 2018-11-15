@@ -1,38 +1,59 @@
 package domain;
 
+import domain.winningStatus.WinningStatus;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningNumberTest {
 
     @Test
-    public void 당첨번호만_맞은_것이_있다() {
-        Lotto toWin = Lotto.fromCommaString("1, 2, 3, 4, 5, 6");
-        WinningNumber winningNumber = new WinningNumber(toWin, new LottoNumber(10));
-        Lotto lotto = new Lotto(lottoNumbers(1, 2, 3, 7, 8, 9));
+    public void 로또_1등() {
+        Lotto lotto = TestUtil.makeLotto(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = TestUtil.makeWinningNumber(10, 1, 2, 3, 4, 5, 6);
 
-        assertThat(winningNumber.matched(lotto)).isEqualTo(3);
-        assertThat(winningNumber.isBonusMatched(lotto)).isFalse();
+        WinningStatus status = TestUtil.makeLottoGames(lotto).match(winningNumber);
+
+        assertThat(status.getPrizeCount(Prize.FIRST_PRIZE)).isEqualTo(1);
     }
 
     @Test
-    public void 당첨번호와_보너스번호_동시에_맞은_것이_있다() {
-        Lotto toWin = Lotto.fromCommaString("1, 2, 3, 4, 5, 6");
-        WinningNumber winningNumber = new WinningNumber(toWin, new LottoNumber(7));
-        Lotto lotto = new Lotto(lottoNumbers(1, 2, 3, 7, 8, 9));
+    public void 로또_2등() {
+        Lotto lotto = TestUtil.makeLotto(1, 2, 3, 4, 5, 10);
+        WinningNumber winningNumber = TestUtil.makeWinningNumber(10, 1, 2, 3, 4, 5, 7);
 
-        assertThat(winningNumber.matched(lotto)).isEqualTo(3);
-        assertThat(winningNumber.isBonusMatched(lotto)).isTrue();
+        WinningStatus status = TestUtil.makeLottoGames(lotto).match(winningNumber);
+
+        assertThat(status.getPrizeCount(Prize.SECOND_PRIZE)).isEqualTo(1);
     }
 
-    private List<LottoNumber> lottoNumbers(Integer... args) {
-        return Arrays.stream(args)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+    @Test
+    public void 로또_3등() {
+        Lotto lotto = TestUtil.makeLotto(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = TestUtil.makeWinningNumber(10, 1, 2, 3, 4, 5, 7);
+
+        WinningStatus status = TestUtil.makeLottoGames(lotto).match(winningNumber);
+
+        assertThat(status.getPrizeCount(Prize.THIRD_PRIZE)).isEqualTo(1);
+    }
+
+    @Test
+    public void 로또_4등() {
+        Lotto lotto = TestUtil.makeLotto(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = TestUtil.makeWinningNumber(10, 1, 2, 3, 4, 7, 8);
+
+        WinningStatus status = TestUtil.makeLottoGames(lotto).match(winningNumber);
+
+        assertThat(status.getPrizeCount(Prize.FOURTH_PRIZE)).isEqualTo(1);
+    }
+
+    @Test
+    public void 로또_5등() {
+        Lotto lotto = TestUtil.makeLotto(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = TestUtil.makeWinningNumber(10, 1, 2, 3, 7, 8, 9);
+
+        WinningStatus status = TestUtil.makeLottoGames(lotto).match(winningNumber);
+
+        assertThat(status.getPrizeCount(Prize.FIFTH_PRIZE)).isEqualTo(1);
     }
 }

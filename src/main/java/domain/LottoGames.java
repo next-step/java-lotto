@@ -22,11 +22,7 @@ public class LottoGames {
         WinningStatus winningStatus = new GeneralWinningStatus();
 
         for (Lotto lotto : games) {
-            Prize prize = Prize.matchPrize(
-                winningNumber.matched(lotto),
-                winningNumber.isBonusMatched(lotto));
-
-            winningStatus.putPrize(prize);
+            winningStatus.putPrize(winningNumber.match(lotto));
         }
 
         return winningStatus;
