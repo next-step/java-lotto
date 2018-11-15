@@ -32,4 +32,15 @@ public class InputView {
 
         return winNumber;
     }
+
+    public static int printBonusNumber(List<Integer> winnerNumbers) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int bonusNumber = scanner.nextInt();
+
+        if(winnerNumbers.contains(bonusNumber))
+            throw new RuntimeException("보너스 볼은 담청 번호와 같을 수 없습니다.");
+
+        return bonusNumber;
+    }
 }

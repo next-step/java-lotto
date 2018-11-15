@@ -17,9 +17,13 @@ public class OutputView {
     }
 
     public static void printRankAmount(RankAmount rankLongMap) {
-        List<Rank> ranks = Arrays.asList(FOURTH, THIRD, SECOND, FIRST);
+        List<Rank> ranks = Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
         for (Rank rank : ranks) {
-            System.out.println(String.format("%d개 일치 (%d원) - %d개",rank.getMatchCount(), rank.getRewardMoney(), rankLongMap.inquireAmount(rank)));
+            if(rank==Rank.SECOND){
+                System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개",rank.getMatchCount(), rank.getRewardMoney(), rankLongMap.inquireAmount(rank)));
+            } else {
+                System.out.println(String.format("%d개 일치 (%d원) - %d개",rank.getMatchCount(), rank.getRewardMoney(), rankLongMap.inquireAmount(rank)));
+            }
         }
     }
 

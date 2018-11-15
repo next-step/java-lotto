@@ -25,9 +25,9 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public void calculateAllRank(List<Integer> numbers) {
+    public void calculateAllRank(List<Integer> numbers, int bonusNumber) {
         for (Attempt attemptNumber : getLottoNumbers()) {
-            attemptNumber.calculateRank(numbers);
+            attemptNumber.calculateRank(numbers, bonusNumber);
         }
     }
 

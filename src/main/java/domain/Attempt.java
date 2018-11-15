@@ -31,8 +31,8 @@ public class Attempt {
         return rank;
     }
 
-    public void calculateRank(List<Integer> numbers){
-        setRank(calculateMatchCount(numbers));
+    public void calculateRank(List<Integer> numbers, int bonusNumber){
+        setRank(calculateMatchCount(numbers), isExistBonusNumber(bonusNumber));
     }
 
     public int calculateMatchCount(List<Integer> winnerNumbers) {
@@ -42,16 +42,20 @@ public class Attempt {
     private List<Integer> calculateMatchNumbers(List<Integer> winnerNumbers) {
         List<Integer> matchNumbers = new ArrayList<>();
 
-        for (Integer winnerNumber : winnerNumbers) {
-            if (numbers.contains(winnerNumber)) {
-                matchNumbers.add(winnerNumber);
+        for (Integer number : numbers) {
+            if (winnerNumbers.contains(number)) {
+                matchNumbers.add(number);
             }
         }
         return matchNumbers;
     }
 
-    public void setRank(int matchCount) {
-        this.rank = findRankBy(matchCount);
+    private boolean isExistBonusNumber(int numbers) {
+        return this.numbers.contains(numbers);
+    }
+
+    public void setRank(int matchCount, boolean bonusYn) {
+        this.rank = findRankBy(matchCount, bonusYn);
     }
 
 }
