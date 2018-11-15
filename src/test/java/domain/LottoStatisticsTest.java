@@ -15,7 +15,8 @@ public class LottoStatisticsTest {
     @Before
     public void setup() {
         String winningNumbers = "1, 2, 3, 4, 5, 6";
-        lottoStatistics = new LottoStatistics(winningNumbers, 17);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, 17);
+        lottoStatistics = new LottoStatistics(winningLotto);
     }
 
     @Test

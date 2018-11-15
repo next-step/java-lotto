@@ -5,12 +5,10 @@ import java.util.List;
 
 public class LottoStatistics {
 
-    private Lotto winningNumbers;
-    private int bonusNumber;
+    private WinningLotto winningLotto;
 
-    public LottoStatistics(String winningNumbers, int bonusNumber) {
-        this.winningNumbers = Lotto.manual(winningNumbers);
-        this.bonusNumber = bonusNumber;
+    public LottoStatistics(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
     public LottoResult match(List<Lotto> lottos) {
@@ -20,7 +18,7 @@ public class LottoStatistics {
     private List<Rank> getRanks(List<Lotto> lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            ranks.add(lotto.getMatchRank(winningNumbers, bonusNumber));
+            ranks.add(lotto.getMatchRank(winningLotto));
         }
         return ranks;
     }
