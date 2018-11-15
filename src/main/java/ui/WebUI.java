@@ -34,9 +34,9 @@ public class WebUI {
         post("/buyLotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             Money money = new Money(Integer.parseInt(req.queryParams("inputMoney")));
-
             String manualNumber = req.queryParams("manualNumber");
             String[] stringTokens = manualNumber.split(System.getProperty("line.separator"));
+
             BuyLotto buyManualLottoCount = new BuyLotto(stringTokens.length);
             List<Lotto> manualLottoNumbers = new ArrayList<>();
             for(int i =0; i <stringTokens.length; i++){
@@ -66,18 +66,13 @@ public class WebUI {
 
             LottoResultGroup combineLottoGroup = lottoGroup.getCombineLottos(winningLotto);
             //결과
-            List<String> lottoRankResults = new ArrayList<>();
-            for(LottoRank rank :  LottoRank.values()){
-                String result = WebResultView.getString(combineLottoGroup, rank);
-                lottoRankResults.add(result);
-            }
+            List<String> lottoRankResults = WebResultView.getResults(combineLottoGroup);
             model.put("results", lottoRankResults);
 
             //수익률
             Money totalRewards = combineLottoGroup.getTotalReward();
             EarningRate totalEarningRate = new EarningRate(money,totalRewards);
-            String rate = WebResultView.getTotalRate(totalEarningRate);
-            model.put("rate", rate);
+            model.put("rate", WebResultView.getTotalRate(totalEarningRate));
             return render(model, "/result.html");
         });
 
