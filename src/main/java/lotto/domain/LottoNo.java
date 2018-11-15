@@ -7,7 +7,7 @@ public class LottoNo {
     private int number;
 
     private LottoNo(int number) {
-        if(number < 0) {
+        if (number < 0) {
             throw new IllegalArgumentException();
         }
         this.number = number;
@@ -18,11 +18,7 @@ public class LottoNo {
     }
 
     public static LottoNo create(String number) {
-        try {
-            return new LottoNo(Integer.parseInt(number));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(e);
-        }
+        return new LottoNo(Integer.parseInt(number));
     }
 
     @Override

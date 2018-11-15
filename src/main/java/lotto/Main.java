@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args) {
-        LottoWallet lottoWallet = InputView.inputMoney();
+        LottoWallet lottoWallet = InputView.inputMoneyAndManualNumbers();
 
         LottoSet lottoSet = LottoShop.buy(lottoWallet);
         ResultView.printLottoSet(lottoSet);

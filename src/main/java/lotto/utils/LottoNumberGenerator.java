@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumberGenerator {
 
-    private static final int LOTTO_NUMBER_LENGTH = 6;
+    public static final int LOTTO_NUMBER_LENGTH = 6;
     private static final int LOTTO_NUMBER_BOUND = 50;
 
     private LottoNumberGenerator() {

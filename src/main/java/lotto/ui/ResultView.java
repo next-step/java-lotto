@@ -13,7 +13,8 @@ public class ResultView {
     }
 
     public static void printLottoSet(LottoSet lottoSet) {
-        System.out.println(MessageFormat.format("{0}개를 구입했습니다.", lottoSet.size()));
+        System.out.println();
+        System.out.println(MessageFormat.format("수동으로 {0}개, 자동으로 {1}개를 구매했습니다.", lottoSet.sizeOfManual(), lottoSet.sizeOfAutomatic()));
         System.out.println(lottoSet);
         System.out.println();
     }

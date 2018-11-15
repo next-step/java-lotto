@@ -13,7 +13,7 @@ public class LottoWalletTest {
 
     @Before
     public void setup() {
-        lottoWallet = LottoWallet.create(14_000);
+        lottoWallet = LottoWallet.create(14_000, lottos);
     }
 
     @Test

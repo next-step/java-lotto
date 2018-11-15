@@ -11,6 +11,6 @@ public class LottoShopTest {
         int amount = 14_000;
         LottoSet lottoSet = LottoShop.buy(amount);
         assertThat(lottoSet).isNotNull();
-        assertThat(lottoSet.size()).isEqualTo(14);
+        assertThat(lottoSet.sizeOfAutomatic()).isEqualTo(14);
     }
 }
