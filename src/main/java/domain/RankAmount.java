@@ -25,7 +25,7 @@ public class RankAmount {
         return rankAmount.get(rank) != null? rankAmount.get(rank) : 0L;
     }
 
-    public float calculateYeild(int purchaseAmount) {
+    public float calculateYield(int purchaseAmount) {
         return (float) calculateTotalSum()/purchaseAmount;
     }
 

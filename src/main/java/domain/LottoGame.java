@@ -5,14 +5,14 @@ import java.util.List;
 
 public class LottoGame {
 
-    private int totalPurchaseAmount;
-    private int manualPurchaseAmount;
+    private LottoAmount totalPurchaseAmount;
+    private LottoAmount manualPurchaseAmount;
     private List<Attempt> lottoNumbers;
 
     public LottoGame(int totalPurchaseAmount, int manualPurchaseAmount, NumberGenerator generator) {
         lottoNumbers = new ArrayList<>();
-        this.totalPurchaseAmount = totalPurchaseAmount;
-        this.manualPurchaseAmount = manualPurchaseAmount;
+        this.totalPurchaseAmount = new LottoAmount(totalPurchaseAmount);
+        this.manualPurchaseAmount = new LottoAmount(manualPurchaseAmount);
         generateByAuto(calculateAutoPurchaseAmount(), generator);
     }
 
@@ -35,13 +35,13 @@ public class LottoGame {
         return lottoNumbers;
     }
 
-    public void calculateAllRank(List<LottoNo> numbers, int bonusNumber) {
+    public void calculateAllRank(LottoWinningNo winningNo) {
         for (Attempt attemptNumber : getLottoNumbers()) {
-            attemptNumber.calculateRank(numbers, bonusNumber);
+            attemptNumber.calculateRank(winningNo);
         }
     }
 
     public int calculateAutoPurchaseAmount() {
-        return this.totalPurchaseAmount - this.manualPurchaseAmount;
+        return totalPurchaseAmount.getAmount() - manualPurchaseAmount.getAmount();
     }
 }

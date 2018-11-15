@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static domain.Attempt.isContainSameNumber;
+import static domain.LottoWinningNo.isContainSameNumber;
 import static util.ConsoleUtil.changeWinNumberToInteger;
 
 public class InputView {

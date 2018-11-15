@@ -35,36 +35,7 @@ public class Attempt {
         return numberGenerator.getRandomNumber();
     }
 
-    public void calculateRank(List<LottoNo> numbers, int bonusNumber){
-        setRank(calculateMatchCount(numbers), isExistBonusNumber(bonusNumber));
-    }
-
-    public int calculateMatchCount(List<LottoNo> numbers) {
-        return calculateMatchNumbers(numbers).size();
-    }
-
-    private List<LottoNo> calculateMatchNumbers(List<LottoNo> winnerNumbers) {
-        List<LottoNo> matchNumbers = new ArrayList<>();
-
-        for (LottoNo number : lottoNos) {
-            if (isContainSameNumber(winnerNumbers, number.getNumber())) {
-                matchNumbers.add(number);
-            }
-        }
-        return matchNumbers;
-    }
-
-    private boolean isExistBonusNumber(int numbers) {
-        return isContainSameNumber(lottoNos, numbers);
-    }
-
-    public void setRank(int matchCount, boolean bonusYn) {
-        this.rank = findRankBy(matchCount, bonusYn);
-    }
-
-    public static boolean isContainSameNumber(List<LottoNo> numbers, int bonusNumber) {
-        return numbers.stream()
-                .filter(lottoNo -> lottoNo.getNumber() == bonusNumber)
-                .count() > 0;
+    public void calculateRank(LottoWinningNo winningNo){
+        this.rank = findRankBy(winningNo.calculateMatchCount(lottoNos), winningNo.isExistBonusNumber(lottoNos));
     }
 }

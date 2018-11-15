@@ -27,14 +27,14 @@ public class Main {
         List<LottoNo> winnerNumbers = printLastWeekWinNumber();
 
         int bonusNumber = printBonusNumber(winnerNumbers);
-        lotto.calculateAllRank(winnerNumbers, bonusNumber);
+        lotto.calculateAllRank(new LottoWinningNo(winnerNumbers,bonusNumber));
 
         printResultNotice();
 
         RankAmount rankLongMap = new RankAmount(lottoNumbers);
         printRankAmount(rankLongMap);
 
-        float yeild = rankLongMap.calculateYeild(totalPurchaseMoney);
-        printResultYield(yeild);
+        float yield = rankLongMap.calculateYield(totalPurchaseMoney);
+        printResultYield(yield);
     }
 }
