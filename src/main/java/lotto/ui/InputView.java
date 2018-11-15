@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.LottoNo;
+import lotto.domain.LottoWallet;
 import lotto.utils.LottoCollectionUtils;
 
 import java.util.List;
@@ -12,10 +13,10 @@ public class InputView {
 
     }
 
-    public static int inputPurchaseAmount() {
+    public static LottoWallet inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return LottoWallet.create(scanner.nextInt());
     }
 
     public static List<LottoNo> inputWinningNumbers() {

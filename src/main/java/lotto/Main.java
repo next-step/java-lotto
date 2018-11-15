@@ -9,9 +9,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args) {
-        int amount = InputView.inputPurchaseAmount();
+        LottoWallet lottoWallet = InputView.inputMoney();
 
-        LottoSet lottoSet = LottoShop.buy(amount);
+        LottoSet lottoSet = LottoShop.buy(lottoWallet);
         ResultView.printLottoSet(lottoSet);
 
         List<LottoNo> winningNumbers = InputView.inputWinningNumbers();
@@ -23,6 +23,6 @@ public class Main {
         LottoResultSet lottoResultSet = lottoMachine.createLottoResultSet();
 
         ResultView.printLottoResultSet(lottoResultSet);
-        ResultView.printRateReturn(lottoResultSet.rateReturn(amount));
+        ResultView.printRateReturn(lottoWallet.rateReturn(lottoResultSet.reward()));
     }
 }

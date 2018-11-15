@@ -8,8 +8,12 @@ public class LottoShop {
 
     }
 
-    public static LottoSet buy(int amount) {
-        int count = amount / LOTTO_PRICE;
-        return LottoSet.create(count);
+    public static LottoSet buy(int money) {
+        return LottoSet.create(money / LOTTO_PRICE);
+    }
+
+    public static LottoSet buy(LottoWallet lottoWallet) {
+        int numberOfBuy = lottoWallet.numberOfBuy(LOTTO_PRICE);
+        return LottoSet.create(numberOfBuy);
     }
 }
