@@ -9,26 +9,29 @@ import java.util.Map;
 import java.util.Set;
 
 public class PrizeStatisticsService {
-    private Map<Integer, Integer> criteriaCounts;
+    private static final int MIN_PRIZE_COUNT = 3;
+    private Map<PrizePrice, Integer> criteriaCounts;
 
     public void calculate(List<Lotto> lottos, Set<Integer> prizeNumbers) {
         this.criteriaCounts = new HashMap<>();
 
+        PrizePrice prizePrice;
         int matchCount;
         for (Lotto lotto : lottos) {
             matchCount = lotto.getMatchCount(prizeNumbers);
-            if (this.criteriaCounts.containsKey(matchCount)) {
-                this.criteriaCounts.replace(matchCount, this.criteriaCounts.get(matchCount) + 1);
+            prizePrice = PrizePrice.valueOf(matchCount);
+            if (this.criteriaCounts.containsKey(prizePrice)) {
+                this.criteriaCounts.replace(prizePrice, this.criteriaCounts.get(prizePrice) + 1);
                 continue;
             }
 
-            this.criteriaCounts.put(matchCount, 1);
+            this.criteriaCounts.put(prizePrice, 1);
         }
     }
 
     public int getMatchCount(int criteria) {
-        return this.criteriaCounts.containsKey(criteria) ?
-                this.criteriaCounts.get(criteria) : 0;
+        return this.criteriaCounts.containsKey(PrizePrice.valueOf(criteria)) ?
+                this.criteriaCounts.get(PrizePrice.valueOf(criteria)) : 0;
     }
 
     public double getReturnsOfInvestment(int money) {
@@ -37,8 +40,8 @@ public class PrizeStatisticsService {
 
     private int getTotalPrizePrice() {
         return this.criteriaCounts.entrySet().stream()
-                .filter(entry -> entry.getKey() >= 3)
-                .mapToInt(entry -> PrizePrice.getPrice(entry.getKey()) * entry.getValue())
+                .filter(entry -> entry.getKey().ordinal() >= MIN_PRIZE_COUNT)
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
 }

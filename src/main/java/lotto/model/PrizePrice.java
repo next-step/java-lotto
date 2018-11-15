@@ -17,11 +17,18 @@ public enum PrizePrice {
         this.price = price;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public static int getPrice(int index) {
+        return valueOf(index).price;
+    }
+
+    public static PrizePrice valueOf(int index) {
         return Arrays.stream(PrizePrice.values())
                 .filter(prizePrice -> prizePrice.ordinal() == index)
                 .findFirst()
-                .get()
-                .price;
+                .get();
     }
 }

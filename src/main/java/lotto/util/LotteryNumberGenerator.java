@@ -3,8 +3,8 @@ package lotto.util;
 import java.util.*;
 
 public class LotteryNumberGenerator {
-    private static int MAX_NUMBER = 45;
-    private static int QUANTITY = 6;
+    private static final int MAX_NUMBER = 45;
+    private static final int QUANTITY = 6;
 
     public static Set<Integer> generate() {
         return new HashSet<>(sort(pick(shuffle(getNumbers()))));
