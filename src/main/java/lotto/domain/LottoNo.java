@@ -7,6 +7,9 @@ public class LottoNo {
     private int number;
 
     private LottoNo(int number) {
+        if(number < 0) {
+            throw new IllegalArgumentException();
+        }
         this.number = number;
     }
 
