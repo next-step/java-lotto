@@ -38,10 +38,6 @@ public class Lotto {
         return new Lotto(values);
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.numbers;
-    }
-
     private boolean isLottoNumber(List<Integer> numbers) {
         List<Integer> lottoNumbers = numbers.stream()
                 .filter(number -> number >= MIN_NUMBER && number <= MAX_NUMBER)
@@ -89,17 +85,21 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Jackpot getMatchJackpot(Lotto winningNumbers) {
+    public Rank getMatchRank(WinningLotto winningLotto) {
+        return winningLotto.getRank(this);
+    }
+
+    public int getMatchNumber(Lotto winningNumbers) {
         int sameCount = 0;
         for (int number: numbers) {
             if(winningNumbers.hasNumber(number)) {
                 sameCount += 1;
             }
         }
-        return Jackpot.valueOf(sameCount);
+        return sameCount;
     }
 
-    private boolean hasNumber(int number) {
+    boolean hasNumber(int number) {
         return numbers.contains(number);
     }
 

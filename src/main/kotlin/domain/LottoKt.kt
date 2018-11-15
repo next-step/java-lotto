@@ -61,6 +61,20 @@ class LottoKt {
         return lottoNumbers.split(",")
     }
 
+    fun getMatchRank(winningNumbers: LottoKt, bonusNumber: Int): RankKt {
+        var sameCount = 0
+        for (number in numbers) {
+            if (winningNumbers.hasNumber(number)) {
+                sameCount += 1
+            }
+        }
+        return RankKt.valueOf(sameCount, hasNumber(bonusNumber))
+    }
+
+    private fun hasNumber(number: Int): Boolean {
+        return numbers.contains(number)
+    }
+
     override fun toString(): String {
         return numbers.toString()
     }

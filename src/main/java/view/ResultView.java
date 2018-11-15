@@ -1,13 +1,12 @@
 package view;
 
-import domain.Jackpot;
+import domain.Rank;
 import domain.Lotto;
 import domain.LottoResult;
 
 import java.util.List;
 
 public class ResultView {
-
     public static void showBoughtLottos(List<Lotto> lottos) {
         howManyBoughtLotto(lottos.size());
 
@@ -31,12 +30,20 @@ public class ResultView {
 
     private static void showMatches(LottoResult lottoResult) {
         StringBuilder sb = new StringBuilder();
-        for (Jackpot jackpot : lottoResult.getJackpot()) {
-            int matchCount = lottoResult.matchCount(jackpot);
-            sb.append(String.format("%d개 일치 (%d원) - %d개", jackpot.getMatchNumber(), jackpot.getPrizeMoney(), matchCount));
+        for (Rank rank : lottoResult.getRanks()) {
+            int matchCount = lottoResult.matchCount(rank);
+            sb.append(String.format(matchedFormat(rank), rank.getMatchNumber(), rank.getPrizeMoney(), matchCount));
             sb.append("\n");
         }
         System.out.println(sb.toString());
+    }
+
+    private static String matchedFormat(Rank rank) {
+        String matchedFormat = "%d개 일치 (%d원) - %d개";
+        if (rank.equals(Rank.SECOND)) {
+            matchedFormat = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
+        }
+        return matchedFormat;
     }
 
     private static void showRate(LottoResult lottoResult) {

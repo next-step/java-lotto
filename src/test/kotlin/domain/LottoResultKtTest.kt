@@ -11,56 +11,47 @@ class LottoResultKtTest {
 
     private lateinit var lottoResult: LottoResultKt
 
-    private val dummyJackpots: List<JackpotKt>
+    private val dummyRanks: List<RankKt>
         get() = Arrays.asList(
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_1_NUMBERS,
-                JackpotKt.SAME_1_NUMBERS,
-                JackpotKt.SAME_2_NUMBERS,
-                JackpotKt.SAME_3_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS,
-                JackpotKt.SAME_0_NUMBERS
+                RankKt.MISS,
+                RankKt.MISS,
+                RankKt.FIFTH,
+                RankKt.MISS,
+                RankKt.MISS
         )
 
     @Before
     fun setup() {
-        lottoResult = LottoResultKt(dummyJackpots)
+        lottoResult = LottoResultKt(dummyRanks)
     }
 
     @Test
     fun `번호 3개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_3_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.FIFTH)
         assertThat(matchCount).isEqualTo(1)
     }
 
     @Test
     fun `번호 4개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_4_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.FOURTH)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `번호 5개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_5_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.THIRD)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `번호 6개일치 항목 개수체크`() {
-        val matchCount = lottoResult.matchCount(JackpotKt.SAME_6_NUMBERS)
+        val matchCount = lottoResult.matchCount(RankKt.FIRST)
         assertThat(matchCount).isEqualTo(0)
     }
 
     @Test
     fun `수익률 구하기`() {
         val rate = lottoResult.calculatorRate()
-        assertThat(rate).isEqualTo(0.35)
+        assertThat(rate).isEqualTo(1.0)
     }
 }

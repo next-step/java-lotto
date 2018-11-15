@@ -2,6 +2,7 @@ package view
 
 import domain.LottoKt
 import domain.LottoResultKt
+import domain.RankKt
 
 object ResultViewKt {
 
@@ -28,12 +29,20 @@ object ResultViewKt {
 
     private fun showMatches(lottoResult: LottoResultKt) {
         val sb = StringBuilder()
-        for (jackpot in lottoResult.jackpot) {
-            val matchCount = lottoResult.matchCount(jackpot)
-            sb.append(String.format("%d개 일치 (%d원) - %d개", jackpot.matchNumber, jackpot.prizeMoney, matchCount))
+        for (rank in lottoResult.rank) {
+            val matchCount = lottoResult.matchCount(rank)
+            sb.append(String.format(matchedFormat(rank), rank.matchNumber, rank.prizeMoney, matchCount))
             sb.append("\n")
         }
         println(sb.toString())
+    }
+
+    private fun matchedFormat(rank: RankKt): String {
+        var matchedFormat = "%d개 일치 (%d원) - %d개"
+        if (rank == RankKt.SECOND) {
+            matchedFormat = "%d개 일치, 보너스 볼 일치 (%d원) - %d개"
+        }
+        return matchedFormat
     }
 
     private fun showRate(lottoResult: LottoResultKt) {

@@ -5,21 +5,21 @@ import java.util.List;
 
 public class LottoStatistics {
 
-    private Lotto winningNumbers;
+    private WinningLotto winningLotto;
 
-    public LottoStatistics(String values) {
-        winningNumbers = Lotto.manual(values);
+    public LottoStatistics(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
     public LottoResult match(List<Lotto> lottos) {
-        return new LottoResult(getJackpots(lottos));
+        return new LottoResult(getRanks(lottos));
     }
 
-    private List<Jackpot> getJackpots(List<Lotto> lottos) {
-        List<Jackpot> jackpots = new ArrayList<>();
+    private List<Rank> getRanks(List<Lotto> lottos) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            jackpots.add(lotto.getMatchJackpot(winningNumbers));
+            ranks.add(lotto.getMatchRank(winningLotto));
         }
-        return jackpots;
+        return ranks;
     }
 }

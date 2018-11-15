@@ -13,8 +13,10 @@ public class LottoConsole {
         ResultView.showBoughtLottos(lottos);
 
         String lottoWinningNumbers = InputView.getInputString("지난 주 당첨 번호를 입력해 주세요.");
+        int bonusNumber = InputView.getInputNumber("보너스 볼을 입력해 주세요.");
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoWinningNumbers);
+        WinningLotto winningLotto = new WinningLotto(lottoWinningNumbers, bonusNumber);
+        LottoStatistics lottoStatistics = new LottoStatistics(winningLotto);
         LottoResult lottoResult = lottoStatistics.match(lottos);
         ResultView.showResult(lottoResult);
     }

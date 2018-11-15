@@ -2,32 +2,50 @@ package domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
 
 public class LottoResult {
 
-    private List<Jackpot> jackpots;
+    private Map<Rank, Integer> result = new HashMap<>();
 
-    public LottoResult(List<Jackpot> jackpots) {
-        this.jackpots = jackpots;
+    public LottoResult(List<Rank> ranks) {
+        initResult();
+        setResults(ranks);
     }
 
-    public int matchCount(Jackpot selectedJackpot) {
-        return (int) jackpots.stream()
-                .filter(jackpot -> jackpot.equals(selectedJackpot))
-                .count();
+    private void initResult() {
+        for (Rank rank : Rank.values()) {
+            result.put(rank, 0);
+        }
     }
 
-    public List<Jackpot> getJackpot() {
-        return asList(Jackpot.SAME_3_NUMBERS,
-                Jackpot.SAME_4_NUMBERS,
-                Jackpot.SAME_5_NUMBERS,
-                Jackpot.SAME_6_NUMBERS);
+    private void setResults(List<Rank> ranks) {
+        for (Rank rank : ranks) {
+            result.put(rank, plus(rank));
+        }
+    }
+
+    private int plus(Rank rank) {
+        return matchCount(rank) + 1;
+    }
+
+    public int matchCount(Rank selectedRank) {
+        return result.get(selectedRank);
+    }
+
+    public List<Rank> getRanks() {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equals(Rank.MISS))
+                .collect(Collectors.toList());
+    }
+    
+    private int sizeOfTicket() {
+        int ticketSize = 0;
+        for (Rank rank : Rank.values()) {
+            ticketSize += result.get(rank);
+        }
+        return ticketSize;
     }
 
     public double calculatorRate() {
@@ -39,13 +57,13 @@ public class LottoResult {
     }
 
     private int getPaidLotto() {
-        return Lotto.PRICE * jackpots.size();
+        return Lotto.PRICE * sizeOfTicket();
     }
 
     private int getTotalPrizeMoney() {
         int totalPrizeMoney = 0;
-        for (Jackpot jackpot : getJackpot()) {
-            totalPrizeMoney += jackpot.getTotalPrizeMoney(matchCount(jackpot));
+        for (Rank rank : Rank.values()) {
+            totalPrizeMoney += rank.getTotalPrizeMoney(matchCount(rank));
         }
         return totalPrizeMoney;
     }

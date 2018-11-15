@@ -3,28 +3,29 @@ package domain
 import java.math.RoundingMode
 import java.util.Arrays.asList
 
-class LottoResultKt(private val jackpots: List<JackpotKt>) {
+class LottoResultKt(private val ranks: List<RankKt>) {
 
-    val jackpot: List<JackpotKt>
-        get() = asList(JackpotKt.SAME_3_NUMBERS,
-                JackpotKt.SAME_4_NUMBERS,
-                JackpotKt.SAME_5_NUMBERS,
-                JackpotKt.SAME_6_NUMBERS)
+    val rank: List<RankKt>
+        get() = asList(RankKt.FIFTH,
+                RankKt.FOURTH,
+                RankKt.THIRD,
+                RankKt.SECOND,
+                RankKt.FIRST)
 
     private val paidLotto: Int
-        get() = Lotto.PRICE * jackpots.size
+        get() = Lotto.PRICE * ranks.size
 
     private val totalPrizeMoney: Int
         get() {
             var totalPrizeMoney = 0
-            for (jackpot in jackpot) {
+            for (jackpot in rank) {
                 totalPrizeMoney += jackpot.getTotalPrizeMoney(matchCount(jackpot))
             }
             return totalPrizeMoney
         }
 
-    fun matchCount(selectedJackpot: JackpotKt): Int {
-        return jackpots.filter { jackpot -> jackpot == selectedJackpot }
+    fun matchCount(selectedRank: RankKt): Int {
+        return ranks.filter { jackpot -> jackpot == selectedRank }
                 .count()
     }
 
