@@ -20,7 +20,7 @@ public class WebMain {
 
         post("/buyLotto", (req, res) -> {
             String inputMoney = req.queryParams("inputMoney");
-            String [] manual = req.queryParams("manualNumber").split("\n");
+            String [] manual = req.queryParams("manualNumber").split("\r\n");
 
             List<String> manualNumbers = new ArrayList<>();
             Collections.addAll(manualNumbers, manual);
