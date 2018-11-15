@@ -1,32 +1,26 @@
-import java.util.Set;
+package lotto;
+
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
+import java.util.*;
 
 public class LottoMain {
-    class 로또{}
-    class 당첨로또{}
+    public static void main(String[] args) {
+        Money money = InputView.getPrice();
+        OutputView.printAmount(money.getQuntity());
 
-    interface 발행{}
-    class 자동발행 implements 발행{
-        Set<로또> 로또리스트생성(){
+        LottoPrinter lottoPrinter = new AutoLottoPrinter();
+        List<Lotto> purchaseLotto = lottoPrinter.printer(money.getQuntity());
+        OutputView.printPurchaseLottos(purchaseLotto);
 
-        }
+        WinningNumber winningNumber = InputView.getWinningNumber();
+        LottoComparator lottoComparator = new LottoComparator();
+        lottoComparator.comparate(purchaseLotto, winningNumber.getWinningNumbers());
+        OutputView.printCompareResult(lottoComparator);
+
+        double earing = ComputeEarningsRate.computeEarning(lottoComparator.getWinnings(), 0.0);
+        double eaningRate = ComputeEarningsRate.computeEarningRate(earing, money.getPrice());
+        OutputView.printEaningRate(eaningRate);
     }
-    class 수동발행 implements 발행{
-        Set<로또> 로또리스트생성(Set<로또> 로또리스트){
-
-        }
-    }
-
-    class 로또번호매칭{
-        void 로또매칭(Set<로또> 이번주번호){
-            //이번주 번호랑
-            //발행된 리스트랑 비
-        }
-    }
-
-    class 계산_로또수익률{}
-
-    interface 계산{}
-    class 로또수익률 implements 계산{}
-
-    //구체적인 클래스가 아니라 행위에만 의존해야함.
 }
