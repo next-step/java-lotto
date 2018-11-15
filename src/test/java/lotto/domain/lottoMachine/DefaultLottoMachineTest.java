@@ -16,19 +16,19 @@ public class DefaultLottoMachineTest {
     
     @Before
     public void setup() {
-        lottoMachine = new DefaultLottoMachine();
+        lottoMachine = new DefaultLottoMachine(new AutoLottoMachine(), new ManualLottoMachine());
     }
     
     @Test
     public void 티켓_자동발급_검증() {
         LottoTicket lottos = lottoMachine.createLotto(new LottoRequest(Money.of(2000)));
-        assertThat(lottos.getAutoLottoCount()).isEqualTo(2);
+        assertThat(lottos.getCount()).isEqualTo(2);
     }
 
     @Test
     public void 티켓_수동발급_검증() {
         LottoTicket lottos = lottoMachine.createLotto(new LottoRequest(Money.of(1000), new String[]{"1,2,3,4,5,6"}));
-        assertThat(lottos.getManualLottoCount()).isEqualTo(1);
+        assertThat(lottos.getCount()).isEqualTo(1);
     }
 
 }

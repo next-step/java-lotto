@@ -8,14 +8,20 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 public class Lotto {
+    public static enum LottoType {
+        AUTO, MANUAL, WINNING;
+    }
+    
     public static final int LOTTO_NUMERS = 6;
 
+    private LottoType type;
     private Set<LottoBall> balls = null;
 
-    private Lotto(Set<LottoBall> balls) {
+    private Lotto(LottoType type, Set<LottoBall> balls) {
         if (balls.size() != LOTTO_NUMERS) {
             throw new IllegalArgumentException("로또복권은 서로다른 숫자 6자리로 이루어져야한다.");
         }
+        this.type = type;
         this.balls = Sets.newHashSet(balls);
     }
 
@@ -36,13 +42,21 @@ public class Lotto {
     public boolean hasBall(LottoBall bonusBall) {
         return this.balls.contains(bonusBall);
     }
+    
+    public boolean isType(LottoType type) {
+        return this.type == type;
+    }
 
     @Override
     public String toString() {
         return this.balls.toString();
     }
 
-    public static Lotto of(List<LottoBall> balls) {
-        return new Lotto(new HashSet<>(balls));
+    public static Lotto ofManual(List<LottoBall> lottoBalls) {
+        return new Lotto(LottoType.MANUAL, new HashSet<LottoBall>(lottoBalls));
+    }
+    
+    public static Lotto ofAuto(List<LottoBall> lottoBalls) {
+        return new Lotto(LottoType.AUTO, new HashSet<LottoBall>(lottoBalls));
     }
 }
