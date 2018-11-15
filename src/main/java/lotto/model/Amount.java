@@ -2,6 +2,7 @@ package lotto.model;
 
 public class Amount {
     private static final int ZERO = 0;
+    private static final int HUNDRED = 100;;
     private long value;
     private long originalValue;
 
@@ -25,6 +26,15 @@ public class Amount {
         return profitRate;
     }
 
+    /**
+     * 수익률 가져오기 100을 기준으로
+     *
+     * @param moneyAmount
+     * @return
+     */
+    public double getProfitRate_100(int profit) {
+        return getProfitRate(profit) * HUNDRED;
+    }
     /**
      * 빼기
      *
