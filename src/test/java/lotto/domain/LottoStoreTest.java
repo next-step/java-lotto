@@ -24,7 +24,7 @@ public class LottoStoreTest {
         LottoTicket tickets = lottoStore.buyTickets(new LottoRequest(Money.of(1000)));
         
         // then
-        assertThat(tickets.getAutoLottoCount()).isEqualTo(1);
+        assertThat(tickets.getCount()).isEqualTo(1);
     }
     
     @Test
@@ -33,7 +33,7 @@ public class LottoStoreTest {
         LottoTicket tickets = lottoStore.buyTickets(new LottoRequest(Money.of(3000)));
         
         // then
-        assertThat(tickets.getAutoLottoCount()).isEqualTo(3);
+        assertThat(tickets.getCount()).isEqualTo(3);
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -42,6 +42,6 @@ public class LottoStoreTest {
         LottoTicket tickets = lottoStore.buyTickets(new LottoRequest(Money.of(500)));
         
         // then
-        assertThat(tickets.getAutoLottoCount()).isEqualTo(0);
+        assertThat(tickets.getCount()).isEqualTo(0);
     }
 }
