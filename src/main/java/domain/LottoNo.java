@@ -21,11 +21,4 @@ public class LottoNo {
                 .collect(Collectors.toList());
 
     }
-
-    public static List<Integer> changeInLottoNosBy(List<LottoNo> lottoNos){
-        return lottoNos.stream()
-                .map(LottoNo::getNumber)
-                .collect(Collectors.toList());
-
-    }
 }
