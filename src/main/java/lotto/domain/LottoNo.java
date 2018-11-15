@@ -15,7 +15,11 @@ public class LottoNo {
     }
 
     public static LottoNo create(String number) {
-        return new LottoNo(Integer.parseInt(number));
+        try {
+            return new LottoNo(Integer.parseInt(number));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Override
