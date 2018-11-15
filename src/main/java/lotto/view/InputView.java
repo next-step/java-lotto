@@ -6,6 +6,8 @@ import lotto.domain.LottoCountManager;
 import lotto.domain.WinningLotto;
 import lotto.exceptions.InputFormatException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -30,26 +32,24 @@ public class InputView {
             Scanner scanner = new Scanner(System.in);
             String winningLine = scanner.nextLine();
 
-            String[] splitWinningLine = winningLine.split(",");
-
             System.out.println("보너스 볼을 입력해 주세요.");
             int bonusBall = scanner.nextInt();
 
-            return new WinningLotto(splitWinningLine, bonusBall);
+            return new WinningLotto(winningLine, bonusBall);
         } catch (Exception e) {
             throw new InputFormatException();
         }
     }
 
-    public static BundleLotto getManualLottoNumbers(LottoCountManager lottoCountManager) {
+    public static List<String> getManualLottoNumbers(LottoCountManager lottoCountManager) {
         try {
             System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            BundleLotto bundleLotto = new BundleLotto();
+            List<String> manualLottoNumbers = new ArrayList<>();
             Scanner scanner = new Scanner(System.in);
             for (int i = 0; i < lottoCountManager.getManualCount(); i++) {
-                bundleLotto.addLotto(new Lotto(scanner.nextLine().split(",")));
+                manualLottoNumbers.add(scanner.nextLine());
             }
-            return bundleLotto;
+            return manualLottoNumbers;
         } catch (Exception e) {
             throw new InputFormatException();
         }

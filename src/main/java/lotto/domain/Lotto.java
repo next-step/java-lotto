@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import lotto.exceptions.InputFormatException;
+import lotto.utils.StringParser;
+
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Lotto {
 
@@ -11,27 +12,42 @@ public class Lotto {
     private static final int LOTTO_BOUND = 46;
     private List<LottoNo> lottoNumbers;
 
-    public Lotto() {
-        lottoNumbers = new ArrayList<>();
+    private Lotto() {
+        this.lottoNumbers = new ArrayList<>();
         initLottoNumbers();
+        validationCheck();
+
     }
 
-    public Lotto(String[] lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>();
-        for (String number : lottoNumbers) {
-            this.lottoNumbers.add(new LottoNo(number));
+    private void validationCheck() {
+        if (this.lottoNumbers.size() != 6) {
+            throw new InputFormatException();
         }
     }
 
-    private void initLottoNumbers() {
-        Random random = new Random();
+    private Lotto(String lottoNumbers) {
+        this.lottoNumbers = new ArrayList<>();
+        for (String number : StringParser.StringParserByDelimeter(lottoNumbers, ",")) {
+            this.lottoNumbers.add(LottoNo.lottoNoFactory(Integer.parseInt(number.trim())));
+        }
+        validationCheck();
+    }
 
+    public static Lotto auto() {
+        return new Lotto();
+    }
+
+    public static Lotto manual(String lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    private void initLottoNumbers() {
         int count = 0;
         while (true) {
             if (count == LOTTO_COUNT) break;
-            int randomValue = random.nextInt(LOTTO_BOUND);
+            int randomValue = ThreadLocalRandom.current().nextInt(1, LOTTO_BOUND);
             if (lottoNumbers.contains(randomValue)) continue;
-            lottoNumbers.add(new LottoNo(randomValue));
+            lottoNumbers.add(LottoNo.lottoNoFactory(randomValue));
             count++;
         }
 
