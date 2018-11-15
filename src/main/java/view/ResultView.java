@@ -1,6 +1,8 @@
 package view;
 
 import domain.*;
+import domain.wrapper.BuyLotto;
+import domain.wrapper.EarningRate;
 
 public class ResultView {
 
@@ -9,15 +11,15 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public static void printResult(double result) {
-        System.out.println(String.format("총 수익률은 %1$,.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)", result));
+    public static void printResult(EarningRate totalEarningRate) {
+        System.out.println(String.format("총 수익률은 %1$,.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)", totalEarningRate.getEarningRate()));
     }
 
-    public static void printBuyLottoCount(int lottoCount) {
-        System.out.println(String.format("%s개를 구매했습니다.", lottoCount));
+    public static void printBuyLottoCount(BuyLotto buyManualLottoCount) {
+        System.out.println(String.format("%s개를 구매했습니다.", buyManualLottoCount.getLottoCount()));
     }
 
-    public static void printLottoGroup(LottoGroup lottoGroup) {
+    public static void printTotalLottoGroup(LottoGroup lottoGroup) {
         lottoGroup.getLottoGroup().forEach((lotto)-> System.out.println(lotto.toString()));
     }
 
@@ -43,5 +45,9 @@ public class ResultView {
 
     private static void printRewards(LottoRank rank) {
         System.out.print(String.format(" (%s원)", rank.getPriceRewards()));
+    }
+
+    public static void printLottoGroups(LottoGroup manualLottoGroup, LottoGroup autoLottoGroup) {
+        System.out.println(String.format("수동으로 %s장, 자동으로 %s개를 구매했습니다.", manualLottoGroup.getSize(), autoLottoGroup.getSize()));
     }
 }

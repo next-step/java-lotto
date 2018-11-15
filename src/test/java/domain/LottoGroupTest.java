@@ -1,8 +1,13 @@
 package domain;
 
+import domain.wrapper.EarningRate;
+import domain.wrapper.Money;
 import org.junit.Before;
 import org.junit.Test;
+import utils.StringUtils;
+import view.InputView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,8 +35,8 @@ public class LottoGroupTest {
     public void 총수입률() {
         int price = 14000;
         int totalRewards = 5000;
-        double result = LottoGame.getTotalEarningRate(price, totalRewards);
-        assertThat(result).isEqualTo(((double) 5000 / (double) 14000));
+        EarningRate earningRate = new EarningRate(new Money(price), new Money(totalRewards));
+        assertThat(earningRate.getEarningRate()).isEqualTo(((double) 5000 / (double) 14000));
     }
 
     @Test
