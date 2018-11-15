@@ -5,14 +5,14 @@ import java.util.List;
 
 public class TestNumberGenerator implements NumberGenerator {
 
-    private List<Integer> numbers;
+    private List<LottoNo> numbers;
 
     @Override
-    public List<Integer> getRandomNumber() {
+    public List<LottoNo> getRandomNumber() {
         return numbers;
     }
 
-    public void setRandomNumber(List<Integer> numbers) {
+    public void setRandomNumber(List<LottoNo> numbers) {
         this.numbers = new ArrayList<>();
         this.numbers.addAll(numbers);
     }

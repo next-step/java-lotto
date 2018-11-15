@@ -1,6 +1,5 @@
 import domain.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static domain.Money.calculateAmount;
@@ -17,7 +16,7 @@ public class Main {
         int manualPurchaseAmount = getManualPurchaseAmount();
         validatePurchaseAmount(manualPurchaseAmount);
 
-        Lotto lotto = new Lotto(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
+        LottoGame lotto = new LottoGame(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
         lotto.generateByManual(printManualPurchaseNumber(manualPurchaseAmount));
 
         printLottoAmount(manualPurchaseAmount, lotto.calculateAutoPurchaseAmount());
@@ -25,7 +24,7 @@ public class Main {
         List<Attempt> lottoNumbers = lotto.getLottoNumbers();
         printLottoNumber(lottoNumbers);
 
-        List<Integer> winnerNumbers = printLastWeekWinNumber();
+        List<LottoNo> winnerNumbers = printLastWeekWinNumber();
 
         int bonusNumber = printBonusNumber(winnerNumbers);
         lotto.calculateAllRank(winnerNumbers, bonusNumber);

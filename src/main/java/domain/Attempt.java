@@ -7,47 +7,47 @@ import static domain.Rank.*;
 
 public class Attempt {
 
-    private List<Integer> numbers;
+    private List<LottoNo> lottoNos;
     private Rank rank;
 
-    public Attempt(List<Integer> numbers, Rank rank) {
-        this.numbers = numbers;
+    public Attempt(List<LottoNo> numbers, Rank rank) {
+        this.lottoNos = numbers;
         this.rank = rank;
     }
 
-    public Attempt(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Attempt(List<LottoNo> numbers) {
+        this.lottoNos = numbers;
     }
 
     public Attempt(NumberGenerator numberGenerator) {
-        this.numbers = generateAttemptNumbers(numberGenerator);
+        this.lottoNos = generateAttemptNumbers(numberGenerator);
     }
 
-    private List<Integer> generateAttemptNumbers(NumberGenerator numberGenerator) {
-        return numberGenerator.getRandomNumber();
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<LottoNo> getLottoNos() {
+        return lottoNos;
     }
 
     public Rank getRank() {
         return rank;
     }
 
-    public void calculateRank(List<Integer> numbers, int bonusNumber){
+    private List<LottoNo> generateAttemptNumbers(NumberGenerator numberGenerator) {
+        return numberGenerator.getRandomNumber();
+    }
+
+    public void calculateRank(List<LottoNo> numbers, int bonusNumber){
         setRank(calculateMatchCount(numbers), isExistBonusNumber(bonusNumber));
     }
 
-    public int calculateMatchCount(List<Integer> winnerNumbers) {
-        return calculateMatchNumbers(winnerNumbers).size();
+    public int calculateMatchCount(List<LottoNo> numbers) {
+        return calculateMatchNumbers(numbers).size();
     }
 
-    private List<Integer> calculateMatchNumbers(List<Integer> winnerNumbers) {
-        List<Integer> matchNumbers = new ArrayList<>();
+    private List<LottoNo> calculateMatchNumbers(List<LottoNo> winnerNumbers) {
+        List<LottoNo> matchNumbers = new ArrayList<>();
 
-        for (Integer number : numbers) {
-            if (winnerNumbers.contains(number)) {
+        for (LottoNo number : lottoNos) {
+            if (isContainSameNumber(winnerNumbers, number.getNumber())) {
                 matchNumbers.add(number);
             }
         }
@@ -55,11 +55,16 @@ public class Attempt {
     }
 
     private boolean isExistBonusNumber(int numbers) {
-        return this.numbers.contains(numbers);
+        return isContainSameNumber(lottoNos, numbers);
     }
 
     public void setRank(int matchCount, boolean bonusYn) {
         this.rank = findRankBy(matchCount, bonusYn);
     }
 
+    public static boolean isContainSameNumber(List<LottoNo> numbers, int bonusNumber) {
+        return numbers.stream()
+                .filter(lottoNo -> lottoNo.getNumber() == bonusNumber)
+                .count() > 0;
+    }
 }

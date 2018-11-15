@@ -3,13 +3,13 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lotto {
+public class LottoGame {
 
     private int totalPurchaseAmount;
     private int manualPurchaseAmount;
     private List<Attempt> lottoNumbers;
 
-    public Lotto(int totalPurchaseAmount, int manualPurchaseAmount, NumberGenerator generator) {
+    public LottoGame(int totalPurchaseAmount, int manualPurchaseAmount, NumberGenerator generator) {
         lottoNumbers = new ArrayList<>();
         this.totalPurchaseAmount = totalPurchaseAmount;
         this.manualPurchaseAmount = manualPurchaseAmount;
@@ -23,9 +23,9 @@ public class Lotto {
         }
     }
 
-    public void generateByManual(List<List<Integer>> lottoNumbers) {
+    public void generateByManual(List<List<LottoNo>> lottoNumbers) {
         List<Attempt> manualAttempts = new ArrayList<>();
-        for (List<Integer> lottoNumber : lottoNumbers) {
+        for (List<LottoNo> lottoNumber : lottoNumbers) {
             manualAttempts.add(new Attempt(lottoNumber));
         }
         this.lottoNumbers.addAll(0,manualAttempts);
@@ -35,7 +35,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public void calculateAllRank(List<Integer> numbers, int bonusNumber) {
+    public void calculateAllRank(List<LottoNo> numbers, int bonusNumber) {
         for (Attempt attemptNumber : getLottoNumbers()) {
             attemptNumber.calculateRank(numbers, bonusNumber);
         }

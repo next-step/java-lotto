@@ -1,11 +1,14 @@
 package view;
 
 import domain.Attempt;
+import domain.LottoNo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+import static domain.Attempt.isContainSameNumber;
 import static util.ConsoleUtil.changeWinNumberToInteger;
 
 public class InputView {
@@ -26,10 +29,10 @@ public class InputView {
         return amount;
     }
 
-    public static List<List<Integer>> printManualPurchaseNumber(int amount) {
+    public static List<List<LottoNo>> printManualPurchaseNumber(int amount) {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<Integer>> manualPurchaseNumbers = new ArrayList();
+        List<List<LottoNo>> manualPurchaseNumbers = new ArrayList();
         for (int i = 0; i < amount; i++) {
             Scanner scanner = new Scanner(System.in);
             manualPurchaseNumbers.add(changeWinNumberToInteger(scanner.next()));
@@ -43,11 +46,13 @@ public class InputView {
 
     public static void printLottoNumber(List<Attempt> lottoNumbers) {
         for (Attempt lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.getNumbers());
+            System.out.println(lottoNumber.getLottoNos().stream()
+                                    .map(LottoNo::getNumber)
+                                    .collect(Collectors.toList()));
         }
     }
 
-    public static List<Integer> printLastWeekWinNumber() {
+    public static List<LottoNo> printLastWeekWinNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String winNumber = scanner.next();
@@ -55,14 +60,15 @@ public class InputView {
         return changeWinNumberToInteger(winNumber);
     }
 
-    public static int printBonusNumber(List<Integer> winnerNumbers) {
+    public static int printBonusNumber(List<LottoNo> winnerNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         int bonusNumber = scanner.nextInt();
 
-        if(winnerNumbers.contains(bonusNumber))
+        if(isContainSameNumber(winnerNumbers, bonusNumber))
             throw new RuntimeException("보너스 볼은 담청 번호와 같을 수 없습니다.");
 
         return bonusNumber;
     }
+
 }
