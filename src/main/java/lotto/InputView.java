@@ -6,27 +6,27 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class InputView {
-    private static final int pickNumber_Count = 6;
-    Scanner sc = new Scanner(System.in);
+    private static final int PICK_NUMBER_COUNT = 6;
 
-    int inputCost() {
+    static int inputCost() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-        int cost = sc.nextInt();
-
-        return cost;
+        return sc.nextInt();
     }
 
-    List<Integer> inputPickNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-//        String[] temp = sc.next().split(",");
-        StringTokenizer token = new StringTokenizer(sc.next(), ", ");
+    static List<Integer> inputPickNumbers() {
         List<Integer> pickNumbers = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        StringTokenizer token = new StringTokenizer(sc.next(), ", ");
 
-        for(int i = 0; i < pickNumber_Count; i++) {
+        return split(pickNumbers, token);
+    }
+
+    private static List<Integer> split(List<Integer> pickNumbers, StringTokenizer token) {
+        for(int i = 0; i < PICK_NUMBER_COUNT; i++) {
             pickNumbers.add(Integer.parseInt(token.nextToken()));
-//            pickNumbers.add(Integer.parseInt(temp[i]));
         }
-
         return pickNumbers;
     }
 
