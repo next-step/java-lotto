@@ -1,22 +1,18 @@
 package domain;
 
-import java.util.List;
-
 public class WinningNumber {
 
-    private final List<Integer> numbers;
-    private final int bonus;
+    private final Lotto toWin;
+    private final LottoNumber bonus;
 
-    public WinningNumber(List<Integer> numbers, int bonus) {
-        this.numbers = numbers;
+    public WinningNumber(Lotto toWin, LottoNumber bonus) {
+        this.toWin = toWin;
         this.bonus = bonus;
     }
 
-    public boolean isContain(int number) {
-        return numbers.contains(number);
-    }
-
-    public boolean isBonusMatched(int number) {
-        return number == bonus;
+    public Prize match(Lotto lotto) {
+        return Prize.matchPrize(
+            lotto.match(toWin),
+            lotto.contains(bonus));
     }
 }

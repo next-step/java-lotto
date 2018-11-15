@@ -30,13 +30,17 @@ public enum Prize {
         return reward;
     }
 
-    public boolean isMatchedPrize(int matched, boolean bonusMatched) {
-        return toWin == matched && requireBonus == bonusMatched;
+    public boolean isMatchedPrize(int matched) {
+        return matched == toWin;
     }
 
     public static Prize matchPrize(int matched, boolean bonusMatched) {
+        if (SECOND_PRIZE.isMatchedPrize(matched) && bonusMatched) {
+            return SECOND_PRIZE;
+        }
+
         for (Prize prize : Prize.values()) {
-            if (prize.isMatchedPrize(matched, bonusMatched)) {
+            if (prize.isMatchedPrize(matched)) {
                 return prize;
             }
         }

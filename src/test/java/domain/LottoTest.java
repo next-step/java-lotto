@@ -2,27 +2,27 @@ package domain;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    @Test
-    public void 당첨번호만_맞은_것이_있다() {
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-
-        assertThat(lotto.match(winningNumber)).isEqualTo(3);
-        assertThat(lotto.matchBonus(winningNumber)).isFalse();
+    @Test(expected = IllegalArgumentException.class)
+    public void 로또_번호_갯수_맞지않으면_Exception() {
+        TestUtil.makeLotto(1,2,3,4,5);
     }
 
     @Test
-    public void 당첨번호와_보너스번호_동시에_맞은_것이_있다() {
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
+    public void 로또간_번호를_비교한다() {
+        Lotto lotto1 = TestUtil.makeLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto2 = TestUtil.makeLotto(1, 2, 3, 4, 5, 7);
 
-        assertThat(lotto.match(winningNumber)).isEqualTo(3);
-        assertThat(lotto.matchBonus(winningNumber)).isTrue();
+        assertThat(lotto1.match(lotto2)).isEqualTo(5);
+    }
+
+    @Test
+    public void 로또_번호에_포함되는지_확인한다() {
+        Lotto lotto = TestUtil.makeLotto(1, 2, 3, 4, 5, 6);
+
+        assertThat(lotto.contains(new LottoNumber(1))).isTrue();
     }
 }

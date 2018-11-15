@@ -1,19 +1,40 @@
 package domain;
 
+import domain.lottosGenerator.AutoLottosGenerator;
+import domain.lottosGenerator.ManualLottosGenerator;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
 
-    @Test
-    public void 구입_금액에_맞는_갯수의_로또를_반환한다() {
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> games = lottoMachine.purchaseLotto(14500);
+    private LottoMachine lottoMachine;
 
-        assertThat(games).hasSize(14);
+    @Before
+    public void setUp() {
+        lottoMachine = new LottoMachine();
     }
 
+    @Test
+    public void 자동_로또_구입() {
+        List<Lotto> games = lottoMachine.purchaseLotto(new Money(5000), new AutoLottosGenerator());
+
+        assertThat(games).hasSize(5);
+    }
+
+    @Test
+    public void 수동_로또_구입() {
+        List<String> manualNumbers = new ArrayList<>();
+        manualNumbers.add("1,2,3,4,5,6");
+        manualNumbers.add("1,2,3,4,5,6");
+        manualNumbers.add("1,2,3,4,5,6");
+
+        List<Lotto> games = lottoMachine.purchaseLotto(new Money(5000), new ManualLottosGenerator(manualNumbers));
+
+        assertThat(games).hasSize(3);
+    }
 }

@@ -1,26 +1,13 @@
 package domain;
 
-import java.util.ArrayList;
+import domain.lottosGenerator.LottosGenerator;
+
 import java.util.List;
 
 public class LottoMachine {
 
-    private static final int GAME_AMOUNT = 1_000;
-
-    public List<Lotto> purchaseLotto(int amount) {
-        List<Lotto> lottoGames = new ArrayList<>();
-        for (int i = 0; i < games(amount); i++) {
-            lottoGames.add(new Lotto(LottoNumberGenerator.generateNumbers()));
-        }
-
-        return lottoGames;
+    public List<Lotto> purchaseLotto(Money money, LottosGenerator lottosGenerator) {
+        return lottosGenerator.generate(money);
     }
 
-    private int games(int amount) {
-        return amount / GAME_AMOUNT;
-    }
-
-    public WinningStatus match(List<Lotto> lottoGames, WinningNumber winningNumber) {
-        return new WinningStatus(lottoGames, winningNumber);
-    }
 }

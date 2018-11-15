@@ -11,6 +11,7 @@ public class PrizeTest {
         assertThat(Prize.matchPrize(5, true)).isEqualByComparingTo(Prize.SECOND_PRIZE);
         assertThat(Prize.matchPrize(5, false)).isEqualByComparingTo(Prize.THIRD_PRIZE);
         assertThat(Prize.matchPrize(4, false)).isEqualByComparingTo(Prize.FOURTH_PRIZE);
+        assertThat(Prize.matchPrize(4, true)).isEqualByComparingTo(Prize.FOURTH_PRIZE);
         assertThat(Prize.matchPrize(3, false)).isEqualByComparingTo(Prize.FIFTH_PRIZE);
 
         assertThat(Prize.matchPrize(2, false)).isEqualByComparingTo(Prize.NONE);
