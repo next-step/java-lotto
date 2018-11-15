@@ -24,26 +24,22 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus){
-        //일치하는 수를 로또 등수로 변경한다? enum 값 목록은 Rank[] ranks = values();
-        Rank[] ranks = values();
-        if(countOfMatch < 3){
-            return ranks[5];
+    //일치하는 수를 로또 등수로 변경한다? enum 값 목록은 Rank[] ranks = values();
+        for(Rank rank : Rank.values()){
+            if(countOfMatch == rank.countOfMatch){
+                return isSecond(rank, matchBonus);
+            }
         }
-        if(countOfMatch == 3){
-            return ranks[4];
+        return MISS;
+    }
+
+    private static Rank isSecond(Rank rank, boolean matchBonus){
+        if(rank.equals(SECOND) && matchBonus){
+            return SECOND;
         }
-        if(countOfMatch == 4){
-            return ranks[3];
+        if(rank.equals(SECOND) && !matchBonus){
+            return THIRD;
         }
-        if(countOfMatch == 5 && matchBonus){
-            return ranks[1];
-        }
-        if(countOfMatch == 5){
-            return ranks[2];
-        }
-        if(countOfMatch == 6){
-            return ranks[0];
-        }
-        return null;
+        return rank;
     }
 }

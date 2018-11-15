@@ -1,6 +1,9 @@
 package lotto;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +19,9 @@ public class Lotto {
         for(int i = 0; i < LOTTO_MAX_COUNT; i++){
             numbers.add(i+1);
         }
+    }
+    public Lotto(Integer[] oneTicket){
+        lotto = Arrays.asList(oneTicket);
     }
 
     public void generateLottoNumber(){
@@ -40,7 +46,12 @@ public class Lotto {
         return numbers;
     }
 
-    public List<Integer> getNumber(){
-        return this.lotto;
+    public boolean isContains(int num){
+        return this.lotto.contains(num);
     }
+
+    public String makeString(String delimeter){
+        return StringUtils.join(this.lotto, ",");
+    }
+
 }

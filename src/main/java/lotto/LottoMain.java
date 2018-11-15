@@ -22,10 +22,9 @@ public class LottoMain {
 
         printAllLotteries(boughtLotteries); // 구매한 로또 모두 출력!
 
-        WinningLotto winningLotto = new WinningLotto(inputWinNumbers());
-        LottoBonusBall bonusBall = new LottoBonusBall(inputBonusNumber());
+        WinningLotto winningLotto = new WinningLotto(inputWinNumbers(), inputBonusNumber());
 
-        LottoCompare compare = new LottoCompare(bonusBall);
+        LottoCompare compare = new LottoCompare();
 
         LottoResult result = compare.match(boughtLotteries, winningLotto);
 

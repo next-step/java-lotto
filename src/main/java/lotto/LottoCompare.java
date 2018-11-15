@@ -3,23 +3,11 @@ package lotto;
 import java.util.List;
 
 public class LottoCompare {
-    private LottoBonusBall bonusBall;
-
-    public LottoCompare(LottoBonusBall bonusBall){
-       this.bonusBall = bonusBall;
-    }
-
 
     public Rank compareNumber(Lotto lotto, WinningLotto winNumber) {
-        int count = 0;
-        List<Integer> lottoNumbers = lotto.getNumber();
+        int count = winNumber.matchingCount(lotto);
 
-        for (int num : winNumber.getNumber()) {
-            if (lottoNumbers.contains(num)) {
-                count++;
-            }
-        }
-        return Rank.valueOf(count, this.bonusBall.isExistBonusBall(lotto));
+        return Rank.valueOf(count, winNumber.isExistBonusBall(lotto));
     }
 
     public LottoResult match(List<Lotto> lotteries, WinningLotto winNumber){

@@ -22,10 +22,7 @@ public class ResultView {
     public static void makeString(Lotto lotto){
         String numberList = "";
         numberList += "[";
-        for(int a : lotto.getNumber()){
-            numberList += a+", ";
-        }
-        numberList = numberList.substring(0, numberList.lastIndexOf(", "));
+        numberList += lotto.makeString(", ");
         numberList += "]";
 
         System.out.println(numberList);
