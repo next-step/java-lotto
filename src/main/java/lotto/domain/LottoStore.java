@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.utils.LottoHelper;
 
-import java.util.List;
-
 public class LottoStore {
 
     private final LottoMachine lottoMachine;
@@ -19,7 +17,6 @@ public class LottoStore {
             throw new IllegalArgumentException(String.format("금액이 부족합니다. \n 로또 한개당 가격은 %d원입니다.", LOTTO_GAME_FEE));
         }
         return createLottos(request);
-
     }
 
     private LottoTicket createLottos(LottoRequest request) {
@@ -32,20 +29,15 @@ public class LottoStore {
 
     private LottoResult check(WInningLotto winningLotto, LottoTicket lottoTicket) {
         LottoResult lottoResult = new LottoResult();
-        checkLotto(winningLotto, lottoResult, lottoTicket.getAutoLottos());
-        checkLotto(winningLotto, lottoResult, lottoTicket.getManualLottos());
-        return lottoResult;
-    }
-
-    private void checkLotto(WInningLotto winningLotto, LottoResult lottoResult, List<Lotto> autoLottos) {
-        for (Lotto lotto : autoLottos) {
+        for (Lotto lotto : lottoTicket.getLottos()) {
             int matchCount = winningLotto.howManyMatchBall(lotto);
             boolean bonusCount = winningLotto.hasBonusBall(lotto);
             lottoResult.addResult(LottoPrize.findPrize(matchCount, bonusCount));
         }
+        return lottoResult;
     }
 
     private WInningLotto createWInningLotto(WInningLottoRequest wInningLottoRequest) {
-        return new WInningLotto(Lotto.of(LottoHelper.convertToBalls(wInningLottoRequest.getLottoNumbers())), LottoHelper.convertToBall(wInningLottoRequest.getBonusNumber()));
+        return new WInningLotto(Lotto.ofManual(LottoHelper.convertToBalls(wInningLottoRequest.getLottoNumbers())), LottoHelper.convertToBall(wInningLottoRequest.getBonusNumber()));
     }
 }

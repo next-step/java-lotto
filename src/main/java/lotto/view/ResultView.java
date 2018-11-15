@@ -3,19 +3,19 @@ package lotto.view;
 import java.util.List;
 
 import lotto.domain.*;
+import lotto.domain.Lotto.LottoType;
 
 public class ResultView {
 
     public static void renderBuyedTickets(LottoTicket tickets) {
         System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
-                tickets.getManualLottoCount(),
-                tickets.getAutoLottoCount()));
-        printLotto(tickets.getManualLottos());
-        printLotto(tickets.getAutoLottos());
+                tickets.getCount(LottoType.MANUAL),
+                tickets.getCount(LottoType.AUTO)));
+        printLotto(tickets.getLottos());
     }
 
-    private static void printLotto(List<Lotto> manualLottos) {
-        for (Lotto ticket : manualLottos) {
+    private static void printLotto(List<Lotto> lottos) {
+        for (Lotto ticket : lottos) {
             System.out.println(ticket);
         }
     }
