@@ -1,28 +1,31 @@
 package lotto.domain;
 
+import lotto.exceptions.InputFormatException;
+import lotto.utils.StringParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
 
-    private List<Integer> winningNumbers;
+    private Lotto winningLottoNumber;
     private int bonusBall;
 
-    public WinningLotto(String[] splitWinningLine, int bonusBall) {
-        winningNumbers = new ArrayList<>();
+    public WinningLotto(Lotto lotto, int bonusBall) {
+        this.winningLottoNumber = lotto;
         this.bonusBall = bonusBall;
-        makeWinningNumber(splitWinningLine);
+        validationCheck(bonusBall);
     }
 
-    private void makeWinningNumber(String[] splitWinningLine) {
-        for (String winningNum : splitWinningLine) {
-            this.winningNumbers.add(Integer.parseInt(winningNum.trim()));
+    private void validationCheck(int bonusBall) {
+        if (winningLottoNumber.isBonusBallInLotto(bonusBall)) {
+            throw new InputFormatException();
         }
     }
 
     public int getRankCount(Lotto lotto, int count) {
-        for (Integer number : winningNumbers) {
-            count = getCount(lotto, count, number);
+        for (LottoNo lottoNo : winningLottoNumber.getLottoNumbers()) {
+            count = getCount(lotto, count, lottoNo.getLottoNumber());
         }
 
         return count;

@@ -1,14 +1,12 @@
 package lotto.view;
 
-import lotto.domain.BundleLotto;
-import lotto.domain.Lotto;
-import lotto.domain.LottoDto;
-import lotto.domain.LottoGameResult;
+import lotto.domain.*;
 
 public class ResultView {
 
-    public static void showLottoCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void showLottoCount(LottoCountManager lottoCountManager) {
+        System.out.println("수동으로 " + lottoCountManager.getManualCount() +
+                "장 자동으로 " + lottoCountManager.getAutoLottoCount() + "개를 구매했습니다.");
     }
 
     public static void showLottoNumbers(BundleLotto lottos) {
@@ -22,8 +20,8 @@ public class ResultView {
     }
 
     private static void makeLottoString(StringBuilder sb, Lotto lotto) {
-        for (Integer number : lotto.getLottoNumbers()) {
-            sb.append(number+", ");
+        for (LottoNo lottoNo : lotto.getLottoNumbers()) {
+            sb.append(lottoNo.getLottoNumber()+", ");
         }
     }
 

@@ -1,21 +1,27 @@
 package lotto.domain;
 
+import lotto.domain.generate.LottoAutoGenerator;
+import lotto.domain.generate.LottoManualGenerator;
+import lotto.domain.generate.LottosGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGame {
 
-    private static final int LOTTO_PRICE = 1000;
+    List<LottosGenerator> lottosGenerators;
 
-    public int getLottoCount(int budget) {
-        int countByBudget = budget/LOTTO_PRICE;
-        return countByBudget;
+    public LottoGame() {
+        lottosGenerators = new ArrayList<>();
+        lottosGenerators.add(new LottoManualGenerator());
+        lottosGenerators.add(new LottoAutoGenerator());
     }
 
-    public BundleLotto makeLotto(int budget) {
-        int countByBudget = getLottoCount(budget);
 
+    public BundleLotto generateLottoNumber(LottoCountManager lottoCountManager) {
         BundleLotto lottos = new BundleLotto();
-        for (int i = 0; i < countByBudget; i++) {
-            lottos.addLotto(new Lotto());
+        for (LottosGenerator lottosGenerator : lottosGenerators) {
+            lottos = lottosGenerator.generate(lottoCountManager, lottos);
         }
         return lottos;
     }

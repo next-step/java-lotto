@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class BundleLotto {
+
+    private static final int INITIAL_COUNT = 0;
     private List<Lotto> lottos;
 
     public BundleLotto() {
@@ -25,7 +27,7 @@ public class BundleLotto {
         List<LottoDto> lottoDtos = new ArrayList<>();
 
         for (Lotto lotto : this.lottos) {
-            int count = 0;
+            int count = INITIAL_COUNT;
             Rank rank = getRank(winningNumbers, lotto, count);
 
             makeLottoRankMap(lottoRankMap, rank);

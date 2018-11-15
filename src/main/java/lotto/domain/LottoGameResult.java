@@ -6,6 +6,7 @@ import java.util.*;
 
 public class LottoGameResult {
 
+    private static final int INITIAL_COUNT = 0;
     private List<LottoDto> lottoDtos;
 
     public LottoGameResult() {
@@ -29,19 +30,18 @@ public class LottoGameResult {
 
     private void filterRankMiss(Map<Rank, Integer> lottoDtoMap, Rank rank) {
         if (!rank.isMiss())
-            lottoDtoMap.put(rank, 0);
+            lottoDtoMap.put(rank, INITIAL_COUNT);
     }
 
 
-    public String getRatio(List<LottoDto> lottoDtos, int budget) {
-        double totalMoney = 0;
+    public String getRatio(List<LottoDto> lottoDtos, LottoCountManager lottoCountManager) {
+        double totalMoney = INITIAL_COUNT;
 
         for (LottoDto lottoDto : lottoDtos) {
             totalMoney += lottoDto.getWinningMoney();
         }
-        double result = totalMoney/(double)budget;
 
-        return String.format("%.2f", result);
+        return String.format("%.2f", lottoCountManager.getRatio(totalMoney));
     }
 
     public List<LottoDto> getLottoDtos() {
