@@ -30,6 +30,12 @@ public class LottoTicket {
         return this.autoLottos.size();
     }
     
+    public List<Lotto> getAllLotto() {
+        List<Lotto> list = new ArrayList<>(this.manualLottos); 
+        list.addAll(this.autoLottos);
+        return list; 
+    } 
+    
     public static LottoTicketBuilder builder() {
         return new LottoTicketBuilder();
     }
