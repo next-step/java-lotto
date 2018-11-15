@@ -18,7 +18,13 @@ public class LottoTest {
     }
 
     @Test
-    public void 랜덤숫자로_로또를_생성할수있다() {
+    public void 랜덤으로_로또를_생성할수있다() {
+        Lotto lotto = Lotto.create();
+        assertThat(lotto).isNotNull();
+    }
+
+    @Test
+    public void 숫자목록으로_로또를_생성할수있다() {
         Lotto lotto = Lotto.create(numbers);
         assertThat(lotto).isNotNull();
     }

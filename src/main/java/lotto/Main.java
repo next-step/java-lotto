@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoResultSet;
-import lotto.domain.LottoSet;
-import lotto.domain.LottoShop;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -17,10 +14,12 @@ public class Main {
         LottoSet lottoSet = LottoShop.buy(amount);
         ResultView.printLottoSet(lottoSet);
 
-        List<Integer> target = InputView.inputLastWeeksNumbers();
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
 
-        LottoMachine lottoMachine = new LottoMachine(lottoSet, target, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.create(winningNumbers, bonusNumber);
+
+        LottoMachine lottoMachine = new LottoMachine(lottoSet, winningLotto);
         LottoResultSet lottoResultSet = lottoMachine.createLottoResultSet();
 
         ResultView.printLottoResultSet(lottoResultSet);

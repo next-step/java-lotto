@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.CollectionUtils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,13 +7,11 @@ import java.util.stream.Collectors;
 public class LottoMachine {
 
     private final LottoSet lottoSet;
-    private final List<Integer> target;
-    private final int bonusNumber;
+    private final WinningLotto winningLotto;
 
-    public LottoMachine(LottoSet lottoSet, List<Integer> target, int bonusNumber) {
+    public LottoMachine(LottoSet lottoSet, WinningLotto winningLotto) {
         this.lottoSet = lottoSet;
-        this.target = target;
-        this.bonusNumber = bonusNumber;
+        this.winningLotto = winningLotto;
     }
 
     public LottoResultSet createLottoResultSet() {
@@ -30,8 +27,8 @@ public class LottoMachine {
 
     private int findNumberOfMatchesByLottoType(LottoType lottoType) {
         return lottoType.hasBonus() ?
-                lottoSet.numberOfMatches(CollectionUtils.merge(target, bonusNumber), lottoType.count) :
-                lottoSet.numberOfMatches(target, lottoType.count);
+                lottoSet.numberOfMatches(winningLotto.getNumbersWithBonus(), lottoType.count) :
+                lottoSet.numberOfMatches(winningLotto.getNumbers(), lottoType.count);
     }
 
     public enum LottoType {
