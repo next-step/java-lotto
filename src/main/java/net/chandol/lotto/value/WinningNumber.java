@@ -1,33 +1,33 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
+
+import net.chandol.lotto.type.LottoPrize;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.chandol.lotto.util.LottoNumberValidator.validateNumberRange;
 import static net.chandol.lotto.util.LottoNumberValidator.validateUniqueNumbers;
 
 public class WinningNumber {
     private LottoNumber lottoNumber;
-    private Integer bonusNumber;
+    private LottoNumberItem bonusNumber;
 
     public WinningNumber(LottoNumber lottoNumber, Integer bonusNumber) {
         validateNumbers(lottoNumber, bonusNumber);
         this.lottoNumber = lottoNumber;
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumberItem(bonusNumber);
     }
 
     public LottoNumber getLottoNumber() {
         return lottoNumber;
     }
 
-    public Integer getBonusNumber() {
+    public LottoNumberItem getBonusNumber() {
         return bonusNumber;
     }
 
     private void validateNumbers(LottoNumber lottoNumber, Integer bonusNumber) {
         validateNotNull(lottoNumber, bonusNumber);
-        validateNumberRange(bonusNumber);
-        validateUniqueNumbers(getMergedList(lottoNumber, bonusNumber));
+        validateUniqueNumbers(getMergedList(lottoNumber, new LottoNumberItem(bonusNumber)));
     }
 
     public LottoPrize findPrize(LottoNumber inputLottoNumber) {
@@ -37,8 +37,8 @@ public class WinningNumber {
         return LottoPrize.getMatchingPrize(matchSize, isMatchBonusNumber);
     }
 
-    private List<Integer> getMergedList(LottoNumber lottoNumber, Integer bonusNumber) {
-        List<Integer> numbers = new ArrayList<>(lottoNumber.getLottoNumbers());
+    private List<LottoNumberItem> getMergedList(LottoNumber lottoNumber, LottoNumberItem bonusNumber) {
+        List<LottoNumberItem> numbers = new ArrayList<>(lottoNumber.getLottoNumbers());
         numbers.add(bonusNumber);
 
         return numbers;

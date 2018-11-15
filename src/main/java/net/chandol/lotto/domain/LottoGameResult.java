@@ -1,24 +1,29 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.type.LottoPrize;
+import net.chandol.lotto.value.Money;
+
 import java.util.List;
+
+import static net.chandol.lotto.value.Money.ZERO;
 
 public class LottoGameResult {
     private List<LottoPrize> prizes;
-    private Integer buyPrice;
+    private Money purchasePrice;
 
-    public LottoGameResult(List<LottoPrize> prizes, Integer buyPrice) {
+    public LottoGameResult(List<LottoPrize> prizes, Money purchasePrice) {
         this.prizes = prizes;
-        this.buyPrice = buyPrice;
+        this.purchasePrice = purchasePrice;
     }
 
-    public Integer getTotalPrize() {
+    public Money getTotalPrize() {
         return prizes.stream()
-                .mapToInt(LottoPrize::getPrize)
-                .sum();
+                .map(LottoPrize::getPrize)
+                .reduce(ZERO, Money::add);
     }
 
-    public Double getProfitRate() {
-        return getTotalPrize() * 1d / buyPrice;
+    public double getProfitRate() {
+        return getTotalPrize().calculateProfitRate(purchasePrice);
     }
 
     private Integer getPrizeCount(LottoPrize lottoPrize) {
@@ -32,7 +37,7 @@ public class LottoGameResult {
             resultBuilder.append(", 보너스 볼 일치");
         }
 
-        resultBuilder.append(String.format(" (%d) - %d개", lottoPrize.getPrize(), getPrizeCount(lottoPrize)));
+        resultBuilder.append(String.format(" (%d) - %d개", lottoPrize.getPrize().getValue(), getPrizeCount(lottoPrize)));
         return resultBuilder.toString();
     }
 }

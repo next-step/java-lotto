@@ -1,29 +1,23 @@
 package net.chandol.lotto;
 
-import net.chandol.lotto.domain.*;
-import net.chandol.lotto.endpoint.ConsoleUi;
+import net.chandol.lotto.domain.LottoGame;
+import net.chandol.lotto.domain.LottoGameResult;
+import net.chandol.lotto.dto.PurchaseRequest;
+import net.chandol.lotto.value.WinningNumber;
 
-import java.util.List;
-
-import static net.chandol.lotto.domain.LottoGame.getLottoGameResult;
-import static net.chandol.lotto.util.ConsoleUiUtil.getLottoNumber;
+import static net.chandol.lotto.endpoint.ConsoleUi.*;
 
 public class Main {
     public static void main(String[] args) {
-        ConsoleUi console = new ConsoleUi();
+        PurchaseRequest purchaseRequest = inputPurchaseRequest();
 
-        Integer inputPrice = console.getInputNumber("구매금액을 입력해주세요");
-        List<Lotto> lottos = LottoGame.buy(inputPrice);
+        LottoGame lottoGame = new LottoGame(purchaseRequest);
 
-        console.printLottoNumbers(lottos);
+        printLottoNumberAndCount(purchaseRequest, lottoGame);
 
-        String rawWinLottoNumber = console.getInputString("지난 주 당첨 번호를 입력해 주세요.");
-        Integer bonusNumber = console.getInputNumber("보너스 볼을 입력해 주세요.");
+        WinningNumber winningNumber = inputWinningNumber();
 
-        LottoNumber winLottoNumber = getLottoNumber(rawWinLottoNumber);
-        WinningNumber winningNumber = new WinningNumber(winLottoNumber, bonusNumber);
-
-        LottoGameResult lottoGameResult = getLottoGameResult(winningNumber, lottos);
-        console.printLottoGameResult(lottoGameResult);
+        LottoGameResult lottoGameResult = lottoGame.getLottoGameResult(winningNumber);
+        printLottoGameResult(lottoGameResult);
     }
 }

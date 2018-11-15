@@ -1,45 +1,42 @@
 package net.chandol.lotto.domain;
 
+import net.chandol.lotto.domain.generator.AutoLottoGenerator;
+import net.chandol.lotto.domain.generator.DirectLottoGenerator;
+import net.chandol.lotto.dto.PurchaseRequest;
+import net.chandol.lotto.util.ConsoleUiUtil;
+import net.chandol.lotto.value.LottoNumber;
+import net.chandol.lotto.value.WinningNumber;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Stream.generate;
 
 public class LottoGame {
+    private PurchaseRequest request;
+    private List<Lotto> lottos;
 
-    public static List<Lotto> buy(int price) {
-        validatePrice(price);
+    public LottoGame(PurchaseRequest request) {
+        List<Lotto> directLottos = new DirectLottoGenerator().generate(request);
+        List<Lotto> autoLottos = new AutoLottoGenerator().generate(request);
+        List<Lotto> lottos = ConsoleUiUtil.merge(directLottos, autoLottos);
 
-        int size = getAvailableLottoSize(price);
-        List<LottoNumber> lottoNumbers = getLottoNumbers(size);
-
-        return createLottos(lottoNumbers);
+        this.lottos = lottos;
+        this.request = request;
     }
 
-    private static void validatePrice(int price) {
-        if (price < 0) {
-            throw new IllegalArgumentException("금액은 음수가 들어올 수 없습니다.");
-        }
+    public List<Lotto> getLottos() {
+        return unmodifiableList(lottos);
     }
 
-    private static List<LottoNumber> getLottoNumbers(int size) {
-        return generate(LottoNumber::auto)
-                .limit(size).collect(Collectors.toList());
-    }
-
-    private static int getAvailableLottoSize(int price) {
-        return price / Lotto.PRICE;
-    }
-
-    private static List<Lotto> createLottos(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .map(Lotto::new)
-                .collect(toList());
-    }
-
-    public static LottoGameResult getLottoGameResult(WinningNumber winningNumber, List<Lotto> lottos) {
+    public LottoGameResult getLottoGameResult(WinningNumber winningNumber) {
         LottoPrizeCalculator calculator = new LottoPrizeCalculator(winningNumber);
         return calculator.lottoGameResult(lottos);
+    }
+
+    public static List<LottoNumber> getAutoLottoNumbers(int size) {
+        return generate(LottoNumber::auto)
+                .limit(size).collect(Collectors.toList());
     }
 }

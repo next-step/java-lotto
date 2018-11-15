@@ -1,8 +1,10 @@
-package net.chandol.lotto.domain;
+package net.chandol.lotto.value;
 
+import net.chandol.lotto.value.LottoNumberItem;
+import net.chandol.lotto.value.WinningNumber;
 import org.junit.Test;
 
-import static net.chandol.lotto.domain.LottoNumber.direct;
+import static net.chandol.lotto.value.LottoNumber.direct;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningNumberTest {
@@ -28,8 +30,8 @@ public class WinningNumberTest {
         WinningNumber numbers = new WinningNumber(direct(1, 2, 3, 4, 5, 6), 7);
 
         assertThat(numbers.getLottoNumber().getLottoNumbers())
-                .containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(numbers.getBonusNumber()).isEqualTo(7);
+                .containsExactly(new LottoNumberItem(1), new LottoNumberItem(2), new LottoNumberItem(3), new LottoNumberItem(4), new LottoNumberItem(5), new LottoNumberItem(6));
+        assertThat(numbers.getBonusNumber()).isEqualTo(new LottoNumberItem(7));
     }
 
 }
