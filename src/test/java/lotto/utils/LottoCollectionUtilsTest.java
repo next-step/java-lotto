@@ -1,10 +1,8 @@
 package lotto.utils;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static lotto.utils.LottoNumberGenerator.generate;
@@ -31,5 +29,13 @@ public class LottoCollectionUtilsTest {
         List<LottoNo> numbers = generate(1, 2, 3, 4, 5);
         List<LottoNo> result = LottoCollectionUtils.merge(numbers, LottoNo.create(6), LottoNo.create(7));
         assertThat(result).isEqualTo(generate(1, 2, 3, 4, 5, 6, 7));
+    }
+
+    @Test
+    public void Null은_제외된다() {
+        List<LottoNo> numbers = generate(1, 2, 3, 4, 5);
+        assertThat(LottoCollectionUtils.merge(numbers, null)).isEqualTo(numbers);
+
+        assertThat(LottoCollectionUtils.merge(null, LottoNo.create(1))).isEqualTo(generate(1));
     }
 }
