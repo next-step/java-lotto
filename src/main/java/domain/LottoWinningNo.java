@@ -2,13 +2,14 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class LottoWinningNo {
 
-    List<LottoNo> winnerNumbers;
-    int bonusNumber;
+    private List<LottoNo> winnerNumbers;
+    private LottoNo bonusNumber;
 
-    public LottoWinningNo(List<LottoNo> winnerNumbers, int bonusNumber) {
+    public LottoWinningNo(List<LottoNo> winnerNumbers, LottoNo bonusNumber) {
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -17,9 +18,9 @@ public class LottoWinningNo {
         return isContainSameNumber(numbers, bonusNumber);
     }
 
-    public static boolean isContainSameNumber(List<LottoNo> numbers, int bonusNumber) {
+    public static boolean isContainSameNumber(List<LottoNo> numbers, LottoNo bonusNumber) {
         return numbers.stream()
-                .filter(lottoNo -> lottoNo.getNumber() == bonusNumber)
+                .filter(lottoNo -> lottoNo.isExistBonusNumber(bonusNumber))
                 .count() > 0;
     }
 
@@ -31,10 +32,11 @@ public class LottoWinningNo {
         List<LottoNo> matchNumbers = new ArrayList<>();
 
         for (LottoNo number : lottoNos) {
-            if (isContainSameNumber(winnerNumbers, number.getNumber())) {
+            if (isContainSameNumber(winnerNumbers, number)) {
                 matchNumbers.add(number);
             }
         }
         return matchNumbers;
     }
+
 }

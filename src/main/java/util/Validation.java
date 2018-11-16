@@ -21,7 +21,7 @@ public class Validation {
     }
 
     public static void validateLottoNo(int number){
-        if(MIN_NUMBER > number || MAX_NUMBER > number)
+        if(MIN_NUMBER > number || MAX_NUMBER < number)
             throw new RuntimeException("로또 번호가 올바르게 입력되지 않았습니다.");
     }
 }

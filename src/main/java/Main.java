@@ -26,8 +26,8 @@ public class Main {
 
         List<LottoNo> winnerNumbers = printLastWeekWinNumber();
 
-        int bonusNumber = printBonusNumber(winnerNumbers);
-        lotto.calculateAllRank(new LottoWinningNo(winnerNumbers,bonusNumber));
+        LottoNo bonusNumber = new LottoNo(printBonusNumber(winnerNumbers));
+        lotto.calculateAllRank(new LottoWinningNo(winnerNumbers, bonusNumber));
 
         printResultNotice();
 

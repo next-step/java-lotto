@@ -27,4 +27,8 @@ public class LottoNo {
                 .collect(Collectors.toList());
 
     }
+
+    public boolean isExistBonusNumber(LottoNo bonusNumber) {
+        return getNumber() == bonusNumber.getNumber();
+    }
 }

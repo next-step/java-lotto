@@ -66,7 +66,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         int bonusNumber = scanner.nextInt();
 
-        if(isContainSameNumber(winnerNumbers, bonusNumber))
+        if(isContainSameNumber(winnerNumbers, new LottoNo(bonusNumber)))
             throw new RuntimeException("보너스 볼은 담청 번호와 같을 수 없습니다.");
 
         return bonusNumber;
