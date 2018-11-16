@@ -12,8 +12,8 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money create(int money) {
-        return new Money(money);
+    public static Money create(int amount) {
+        return new Money(amount);
     }
 
     public BigDecimal rateReturn(int reward) {

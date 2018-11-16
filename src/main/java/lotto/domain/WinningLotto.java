@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.utils.LottoCollectionUtils;
-import lotto.utils.LottoNumberGenerator;
+import lotto.utils.LottoNoGenerator;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class WinningLotto {
     }
 
     public static WinningLotto of(List<Integer> numbers) {
-        return new WinningLotto(Lotto.create(LottoNumberGenerator.generate(numbers)), null);
+        return new WinningLotto(Lotto.create(LottoNoGenerator.generate(numbers)), null);
     }
 
     public List<LottoNo> getNumbers(){

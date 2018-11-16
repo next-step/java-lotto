@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.LottoNumberGenerator;
+import lotto.utils.LottoNoGenerator;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     public static Lotto create() {
-        return new Lotto(LottoNumberGenerator.generate(), true);
+        return new Lotto(LottoNoGenerator.generate(), true);
     }
 
     public static Lotto create(List<LottoNo> numbers) {

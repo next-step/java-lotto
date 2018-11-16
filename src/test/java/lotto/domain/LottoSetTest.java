@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.utils.LottoNumberGenerator.generate;
+import static lotto.utils.LottoNoGenerator.generate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoSetTest {

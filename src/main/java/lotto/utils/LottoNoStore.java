@@ -5,11 +5,11 @@ import lotto.domain.LottoNo;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoNumberStore {
+public class LottoNoStore {
 
     private static final Map<Integer, LottoNo> LOTTO_NO_MAP = new HashMap<>();
 
-    private LottoNumberStore() {
+    private LottoNoStore() {
 
     }
 

@@ -2,7 +2,7 @@ package lotto.validator;
 
 import java.util.Scanner;
 
-import static lotto.utils.LottoNumberGenerator.LOTTO_NUMBER_LENGTH;
+import static lotto.utils.LottoNoGenerator.LOTTO_NUMBER_LENGTH;
 
 public class LottoValidator {
 

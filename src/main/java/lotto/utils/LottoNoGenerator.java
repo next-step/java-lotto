@@ -7,11 +7,11 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNo.LOTTO_NUMBER_BOUND;
 
-public class LottoNumberGenerator {
+public class LottoNoGenerator {
 
     public static final int LOTTO_NUMBER_LENGTH = 6;
 
-    private LottoNumberGenerator() {
+    private LottoNoGenerator() {
 
     }
 
@@ -21,7 +21,7 @@ public class LottoNumberGenerator {
     
     public static List<LottoNo> generate(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumberGenerator::create)
+                .map(LottoNoGenerator::create)
                 .collect(Collectors.toList());
     }
 
@@ -35,9 +35,9 @@ public class LottoNumberGenerator {
     }
 
     private static LottoNo create(int number) {
-        return LottoNumberStore.exists(number) ?
-                LottoNumberStore.get(number) :
-                LottoNumberStore.put(number, LottoNo.create(number));
+        return LottoNoStore.exists(number) ?
+                LottoNoStore.get(number) :
+                LottoNoStore.put(number, LottoNo.create(number));
     }
 
     private static int random() {
