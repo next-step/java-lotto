@@ -6,11 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.ToIntFunction;
 
+import static domain.LottoNo.MAX_NUMBER;
+import static domain.LottoNo.MIN_NUMBER;
+
 public class RandomNumberGenerator implements NumberGenerator {
 
     public static final int DIGITS = 6;
-    public static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
 
     @Override
     public List<LottoNo> getRandomNumber() {

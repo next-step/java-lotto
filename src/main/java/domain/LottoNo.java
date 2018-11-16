@@ -3,11 +3,17 @@ package domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static util.Validation.validateLottoNo;
+
 public class LottoNo {
+
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
 
     private int number;
 
     public LottoNo(int number) {
+        validateLottoNo(number);
         this.number = number;
     }
 
