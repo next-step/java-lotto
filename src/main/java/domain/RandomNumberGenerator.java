@@ -13,6 +13,13 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     public static final int LOTTO_DIGITS = 6;
 
+    List<LottoNo> initNumbers;
+
+    public RandomNumberGenerator() {
+        if(initNumbers == null)
+        initNumbers = new ArrayList<>();
+    }
+
     @Override
     public List<LottoNo> getRandomNumber() {
         List<LottoNo> initNumbers = initNumbers();
@@ -33,7 +40,6 @@ public class RandomNumberGenerator implements NumberGenerator {
     }
 
     private List<LottoNo> initNumbers() {
-        List<LottoNo> initNumbers = new ArrayList<>();
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             initNumbers.add(new LottoNo(i));
         }

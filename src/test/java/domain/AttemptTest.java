@@ -34,8 +34,8 @@ public class AttemptTest {
         generator.setRandomNumber(attemptNumbers);
         attempt = new Attempt(generator);
 
-        List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(4 ,5 ,6));
-        LottoWinningNo lottoWinningNo = new LottoWinningNo(winnerNumbers, new LottoNo(7));
+        List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(4 ,5 ,6, 7, 8, 9));
+        LottoWinningNo lottoWinningNo = new LottoWinningNo(winnerNumbers, new LottoNo(10));
 
         //given
         Integer matchCount = lottoWinningNo.calculateMatchCount(attemptNumbers);
@@ -52,7 +52,7 @@ public class AttemptTest {
         generator.setRandomNumber(attemptNumbers);
         attempt = new Attempt(generator);
 
-        List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5));
+        List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 7));
         LottoNo bonusNumber = new LottoNo(6);
 
         //given
@@ -71,8 +71,8 @@ public class AttemptTest {
         generator.setRandomNumber(attemptNumbers);
         attempt = new Attempt(generator);
 
-        List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5));
-        LottoNo bonusNumber = new LottoNo(7);
+        List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoNo bonusNumber = new LottoNo(8);
 
         //given
         attempt.calculateRank(new LottoWinningNo(winnerNumbers, bonusNumber));
