@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static net.chandol.lotto.type.LottoPrize.*;
-import static net.chandol.lotto.util.ConsoleUiUtil.*;
+import static net.chandol.lotto.view.ViewUtil.*;
 
 public class ConsoleUi {
 
