@@ -35,16 +35,19 @@ public enum Rank {
             return MISS;
         }
 
-        if (SECOND.matchCount(countOfMatch) && matchBonus) {
-            return SECOND;
+        Rank rank = valueOf(countOfMatch);
+        if (SECOND.matchCount(countOfMatch)) {
+            return matchBonus ? SECOND : THIRD;
         }
+        return rank;
+    }
 
+    private static Rank valueOf(int countOfMatch) {
         for (Rank rank : values()) {
             if (rank.matchCount(countOfMatch)) {
                 return rank;
             }
         }
-
         throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
     }
 
