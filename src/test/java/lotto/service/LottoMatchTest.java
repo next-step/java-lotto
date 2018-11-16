@@ -1,7 +1,10 @@
 package lotto.service;
 
 import lotto.dto.Lotto;
-import lotto.dto.LottoEnum;
+import lotto.dto.Rank;
+import lotto.dto.WinningLotto;
+import lotto.utils.LottoMaker;
+import lotto.utils.MatchUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,48 +19,90 @@ public class LottoMatchTest {
     @Test
     public void 매칭결과테스트() {
 
-        LottoMatch lm = new LottoMatch(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
-        Map<LottoEnum,Integer> temp = lm.getMatch();
-        assertThat(temp).hasSize(4);
+        LottoMatch lm = new LottoMatch(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        Map<Rank, Integer> temp = lm.getMatch();
+        assertThat(temp).hasSize(6);
         /** 초기값 0 출력 확인
          *
          */
-        System.out.println(lm.getMatch().get(LottoEnum.THREE));
-        System.out.println(lm.getMatch().get(LottoEnum.FOUR));
-        System.out.println(lm.getMatch().get(LottoEnum.FIVE));
-        System.out.println(lm.getMatch().get(LottoEnum.SIX));
-
-
+        assertThat(lm.getMatch().get(Rank.FIRST)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.SECOND)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.THIRD)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.FIFTH)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.MISS)).isEqualTo(0);
     }
 
     @Test
-    public void 매칭결과_MAP반환() {
-        LottoMatch lm = new LottoMatch(Arrays.asList(1,2,3,4,5,6));
-        List<Lotto> lottos = new ArrayList<>(Arrays.asList(new Lotto(), new Lotto()));
-        Map<LottoEnum,Integer> maps = lm.getMatchNum(lottos);
-        assertThat(maps.get(LottoEnum.THREE)).isEqualTo(0);
+    public void 매칭결과_MAP반환_FOURTH() {
+        LottoMatch lm = new LottoMatch(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4)))
+        );
+        Map<Rank, Integer> maps = lm.getMatchNum(lottos);
+        for(Rank rank : Rank.values()){
+            System.out.println(rank + " " + maps.get(rank));
+        }
+        assertThat(maps.get(Rank.FOURTH)).isEqualTo(1);
+    }
+
+
+    @Test
+    public void 매칭결과_MAP반환_SECOND() {
+        LottoMatch lm = new LottoMatch(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,7)))
+        );
+        Map<Rank, Integer> maps = lm.getMatchNum(lottos);
+        for(Rank rank : Rank.values()){
+            System.out.println(rank + " " + maps.get(rank));
+        }
+        assertThat(maps.get(Rank.SECOND)).isEqualTo(1);
+    }
+
+
+    @Test
+    public void 매칭결과_MAP반환_THIRD() {
+        LottoMatch lm = new LottoMatch(new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5)))
+        );
+        Map<Rank, Integer> maps = lm.getMatchNum(lottos);
+        for(Rank rank : Rank.values()){
+            System.out.println(rank + " " + maps.get(rank));
+        }
+        assertThat(maps.get(Rank.THIRD)).isEqualTo(1);
     }
 
     @Test
     public void 중복검사테스트() {
-        List<Integer> winnerNums = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto1 = new Lotto();
-        Lotto lotto2 = new Lotto();
+        List<Integer> winnerNums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto1 = new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive()));
+        Lotto lotto2 = new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive()));
+        Lotto temp = new Lotto(new ArrayList<>(lotto2.getLotto().subList(0, 4)));
+        temp.getLotto().add(9);
+        WinningLotto wl = new WinningLotto(temp.getLotto(), lotto2.getLotto().get(5));
         List<Lotto> lottos = new ArrayList<>(Arrays.asList(lotto1, lotto2));
+        LottoMatch lm = new LottoMatch(wl);
 
         System.out.println(Arrays.toString(lotto1.getLotto().toArray()));
         System.out.println(Arrays.toString(lotto2.getLotto().toArray()));
-        for(Lotto lotto : lottos){
-            System.out.println(LottoMatch.duplicatedCounts(lotto.getLotto(),winnerNums));
-        }
+        System.out.println(Arrays.toString(wl.getWinnerNums().toArray()) + " , " + wl.getBonusNum());
+
+        //assertThat(lm.getRankFromDuplicateCount(lotto1.getLotto(), wl)).isEqualTo(Rank.MISS);
+        assertThat(lm.getRankFromDuplicateCount(lotto2.getLotto(), wl)).isEqualTo(Rank.SECOND);
     }
 
-    @Test
-    public void ENUM반환() {
-        assertThat(LottoMatch.getEnumMatch(3)).isEqualTo(LottoEnum.THREE);
-        assertThat(LottoMatch.getEnumMatch(4)).isEqualTo(LottoEnum.FOUR);
-        assertThat(LottoMatch.getEnumMatch(5)).isEqualTo(LottoEnum.FIVE);
-        assertThat(LottoMatch.getEnumMatch(6)).isEqualTo(LottoEnum.SIX);
+    /**
+     * Rank로 대체됨
+     *
 
-    }
+     @Deprecated public void ENUM반환() {
+     assertThat(LottoMatch.getEnumMatch(3)).isEqualTo(Rank.FIFTH);
+     assertThat(LottoMatch.getEnumMatch(4)).isEqualTo(Rank.FOURTH);
+     assertThat(LottoMatch.getEnumMatch(5)).isEqualTo(Rank.SECOND);
+     assertThat(LottoMatch.getEnumMatch(6)).isEqualTo(Rank.FIRST);
+
+     }
+     */
 }

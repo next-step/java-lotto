@@ -1,61 +1,62 @@
 package lotto.service;
 
 import lotto.dto.Lotto;
-import lotto.dto.LottoEnum;
+import lotto.dto.Rank;
+import lotto.dto.WinningLotto;
+import lotto.utils.MatchUtils;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoMatch {
 
     private static final int MATCH_MINIMUM_STANDARD = 3;
-    private static final int MAX_LENGTH_AFTER_DISTINCT = 12;
 
-    private Map<LottoEnum,Integer> match;
-    private List<Integer> winnersNums;
 
-    public LottoMatch(List<Integer> winnersNums){
-        match = Stream.of(LottoEnum.values())
+    private Map<Rank,Integer> match;
+    private WinningLotto winnersNum;
+
+    public LottoMatch(WinningLotto winnersNum){
+        match = Stream.of(Rank.values())
                 .collect(Collectors.toMap(
                         e -> e
                         ,e -> 0
                 ));
-        this.winnersNums = winnersNums;
+        this.winnersNum = winnersNum;
     }
 
-
-    public Map<LottoEnum, Integer> getMatch() {
+    public Map<Rank, Integer> getMatch() {
         return match;
     }
 
-    private int pluscount(int currentCount){
-        return ++currentCount;
+    //return형식을 WinningLotto로 바꾸어야함
+    public Rank getRankFromDuplicateCount(List<Integer> lotto , WinningLotto winnersNum){
+        lotto.addAll(winnersNum.getWinnerNums());
+        lotto.add(winnersNum.getBonusNum());
+        int numOfDuplicate = MatchUtils.getDuplicateCount(lotto);
+
+        if(MatchUtils.isContains(MatchUtils.getDuplicateNums(lotto),winnersNum.getBonusNum())){
+            return findSecond(numOfDuplicate);
+        }
+        return Rank.valueOf(numOfDuplicate , false);
     }
 
-    public static int duplicatedCounts(List<Integer> lotto , List<Integer> winnersNum){
-        lotto.addAll(winnersNum);
-
-        return MAX_LENGTH_AFTER_DISTINCT - (int) lotto.stream()
-                .distinct()
-                .count();
-    }
-
-    public Map<LottoEnum, Integer> getMatchNum(List<Lotto> lottos){
+    public Map<Rank, Integer> getMatchNum(List<Lotto> lottos){
         for(Lotto lotto : lottos){
-            int duplicateTemp = duplicatedCounts(lotto.getLotto(),winnersNums);
-            if(duplicateTemp >= MATCH_MINIMUM_STANDARD)
-                match.put(getEnumMatch(duplicateTemp),pluscount(match.get(getEnumMatch(duplicateTemp))));
+            Rank rank = getRankFromDuplicateCount(lotto.getLotto(),winnersNum);
+            if(rank.getMatch() >= MATCH_MINIMUM_STANDARD)
+                match.put(rank,MatchUtils.pluscount(match.get(rank)));
         }
 
         return match;
     }
 
-    public static LottoEnum getEnumMatch(int duplicateNums){
-        return LottoEnum.values()[duplicateNums-3];
+    private Rank findSecond(int numOfDuplicate){
+        if(numOfDuplicate == Rank.SECOND.getMatch())
+            return Rank.valueOf(numOfDuplicate,true);
+        return Rank.valueOf(numOfDuplicate-1,false);
+
     }
 
 

@@ -22,4 +22,7 @@ public class Utils {
         return Arrays.stream(nums.split(", ")).map(Integer::parseInt).collect(Collectors.toList());
     }
 
+    public static double getProfit(int sum, int money) {
+        return sum/money;
+    }
 }
