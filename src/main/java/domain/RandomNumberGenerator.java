@@ -11,14 +11,14 @@ import static domain.LottoNo.MIN_NUMBER;
 
 public class RandomNumberGenerator implements NumberGenerator {
 
-    public static final int DIGITS = 6;
+    public static final int LOTTO_DIGITS = 6;
 
     @Override
     public List<LottoNo> getRandomNumber() {
         List<LottoNo> initNumbers = initNumbers();
         shuffleNumbers(initNumbers);
 
-        List<LottoNo> attemptNumbers = initNumbers.subList(0, DIGITS);
+        List<LottoNo> attemptNumbers = initNumbers.subList(0, LOTTO_DIGITS);
         sortNumbers(attemptNumbers);
 
         return attemptNumbers;

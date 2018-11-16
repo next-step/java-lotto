@@ -81,4 +81,11 @@ public class AttemptTest {
         Assertions.assertThat(attempt.getRank())
                 .isEqualTo(THIRD);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void 입력숫자는_여섯자리가_아닐경우_오류가_발생한다() {
+        new Attempt(generateLottoNos(Arrays.asList(1, 2, 3, 4, 5)));
+        new Attempt(generateLottoNos(Arrays.asList(1, 2, 3, 4, 6, 7)));
+    }
+
 }

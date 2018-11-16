@@ -1,14 +1,21 @@
 package util;
 
 import domain.LottoAmount;
+import domain.LottoNo;
 import domain.Money;
 
+import java.util.List;
+
+import static domain.Attempt.isExistDuplicateNumber;
 import static domain.LottoAmount.isAmountPositive;
 import static domain.LottoNo.MAX_NUMBER;
 import static domain.LottoNo.MIN_NUMBER;
+import static domain.LottoWinningNo.isContainSameNumber;
 import static domain.Money.isMoneyPositive;
+import static domain.RandomNumberGenerator.LOTTO_DIGITS;
 
 public class Validation {
+
 
     public static void validatePurchaseMoney(Money money){
         if(!isMoneyPositive(money))
@@ -24,4 +31,18 @@ public class Validation {
         if(MIN_NUMBER > number || MAX_NUMBER < number)
             throw new RuntimeException("로또 번호가 올바르게 입력되지 않았습니다.");
     }
+
+    public static void validateLottoNos(List<LottoNo> numbers){
+        if(numbers.size() != LOTTO_DIGITS)
+            throw new RuntimeException("로또번호가 올바르지 않습니다.");
+
+        if(isExistDuplicateNumber(numbers))
+            throw new RuntimeException("로또번호는 중복일 수 없습니다.");
+    }
+
+    public static void validateBonusNo(List<LottoNo> winnerNumbers, LottoNo bonusNumber){
+        if(isContainSameNumber(winnerNumbers, bonusNumber))
+            throw new RuntimeException("보너스 번호는 중복일 수 없습니다.");
+    }
+
 }

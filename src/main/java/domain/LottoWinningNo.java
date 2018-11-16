@@ -2,7 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+
+import static util.Validation.validateBonusNo;
+import static util.Validation.validateLottoNos;
 
 public class LottoWinningNo {
 
@@ -10,7 +12,9 @@ public class LottoWinningNo {
     private LottoNo bonusNumber;
 
     public LottoWinningNo(List<LottoNo> winnerNumbers, LottoNo bonusNumber) {
+        validateLottoNos(winnerNumbers);
         this.winnerNumbers = winnerNumbers;
+        validateBonusNo(winnerNumbers, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
