@@ -25,9 +25,9 @@ public class LottoTest {
         List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 20, 21);
 
         Lotto lotto = new Lotto(numbers);
-        Lotto winnerLotto = new Lotto(winnerNumbers);
+        Lotto winningLotto = new Lotto(winnerNumbers);
 
-        int matchCount = lotto.matchCount(winnerLotto);
+        int matchCount = winningLotto.matchCount(lotto);
         assertThat(matchCount).isEqualTo(4);
     }
 
