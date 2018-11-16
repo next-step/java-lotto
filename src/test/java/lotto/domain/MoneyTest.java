@@ -7,22 +7,22 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoWalletTest {
+public class MoneyTest {
 
-    private LottoWallet lottoWallet;
+    private Money money;
 
     @Before
     public void setup() {
-        lottoWallet = LottoWallet.create(14_000);
+        money = Money.create(14_000);
     }
 
     @Test
     public void 복권을_몇개_구매할수있는지_알수있다() {
-        assertThat(lottoWallet.numberOfBuy(1_000)).isEqualTo(14);
+        assertThat(money.numberOfBuy(1_000)).isEqualTo(14);
     }
 
     @Test
     public void 수익률을_알수있다() {
-        assertThat(lottoWallet.rateReturn(13_000)).isLessThan(BigDecimal.ONE);
+        assertThat(money.rateReturn(13_000)).isLessThan(BigDecimal.ONE);
     }
 }

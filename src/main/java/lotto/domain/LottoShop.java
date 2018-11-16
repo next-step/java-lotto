@@ -15,8 +15,14 @@ public class LottoShop {
     }
 
     public static LottoSet buy(LottoWallet lottoWallet) {
-        int numberOfBuy = lottoWallet.numberOfBuy(LOTTO_PRICE);
         List<Lotto> lottos = lottoWallet.getManualLottos();
+        Money money = lottoWallet.getMoney();
+
+        int numberOfBuy = numberOfBuy(money, lottos.size());
         return LottoSet.create(numberOfBuy, lottos);
+    }
+
+    public static int numberOfBuy(Money money, int numberOfManualLottos) {
+        return money.numberOfBuy(LOTTO_PRICE) - numberOfManualLottos;
     }
 }

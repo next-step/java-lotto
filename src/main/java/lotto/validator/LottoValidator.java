@@ -6,6 +6,10 @@ import static lotto.utils.LottoNumberGenerator.LOTTO_NUMBER_LENGTH;
 
 public class LottoValidator {
 
+    private LottoValidator() {
+
+    }
+
     public static void throwExceptionWhenHasNoInt(Scanner scanner) {
         if (!scanner.hasNextInt()) {
             throw new IllegalArgumentException();

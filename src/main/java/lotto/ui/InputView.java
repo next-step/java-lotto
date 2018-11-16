@@ -3,6 +3,7 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNo;
 import lotto.domain.LottoWallet;
+import lotto.domain.Money;
 import lotto.validator.LottoValidator;
 
 import java.util.ArrayList;
@@ -18,10 +19,10 @@ public class InputView {
     }
 
     public static LottoWallet inputMoneyAndManualNumbers() {
-        int money = inputMoney();
+        Money money = Money.create(inputMoney());
         int manualCount = inputManualCount();
-        List<Lotto> manualNumbers = inputManualNumbers(manualCount);
 
+        List<Lotto> manualNumbers = inputManualNumbers(manualCount);
         return LottoWallet.create(money, manualNumbers);
     }
 

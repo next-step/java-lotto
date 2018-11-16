@@ -7,7 +7,11 @@ import java.util.Map;
 
 public class LottoNumberStore {
 
-    public static final Map<Integer, LottoNo> LOTTO_NO_MAP = new HashMap<>();
+    private static final Map<Integer, LottoNo> LOTTO_NO_MAP = new HashMap<>();
+
+    private LottoNumberStore() {
+
+    }
 
     public static LottoNo get(int key) {
         return LOTTO_NO_MAP.get(Integer.valueOf(key));

@@ -23,6 +23,6 @@ public class Main {
         LottoResultSet lottoResultSet = lottoMachine.createLottoResultSet();
 
         ResultView.printLottoResultSet(lottoResultSet);
-        ResultView.printRateReturn(lottoWallet.rateReturn(lottoResultSet.reward()));
+        ResultView.printRateReturn(lottoWallet.getMoney(), lottoResultSet.reward());
     }
 }
