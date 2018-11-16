@@ -11,9 +11,9 @@ public class LottoGame {
 
     List<LottosGenerator> lottosGenerators;
 
-    public LottoGame() {
+    public LottoGame(List<String> manualLottoNumbers) {
         lottosGenerators = new ArrayList<>();
-        lottosGenerators.add(new LottoManualGenerator());
+        lottosGenerators.add(new LottoManualGenerator(manualLottoNumbers));
         lottosGenerators.add(new LottoAutoGenerator());
     }
 

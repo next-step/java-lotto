@@ -13,6 +13,10 @@ public class LottoDto implements Comparable{
         this.winningMoney = winningMoney;
     }
 
+    public Rank getRank() {
+        return this.rank;
+    }
+
     public int getDefaultMoney() {
         return rank.getWinningMoney();
     }
