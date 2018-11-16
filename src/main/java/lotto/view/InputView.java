@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.BundleLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCountManager;
 import lotto.domain.WinningLotto;

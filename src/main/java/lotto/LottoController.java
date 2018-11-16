@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.domain.generate.LottoAutoGenerator;
-import lotto.domain.generate.LottoManualGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -10,7 +8,7 @@ public class LottoController {
     public static void main(String[] args) {
         LottoCountManager lottoCountManager = InputView.getBudget();
 
-        LottoGame lottoGame = new LottoGame();
+        LottoGame lottoGame = new LottoGame(InputView.getManualLottoNumbers(lottoCountManager));
         BundleLotto lottos = lottoGame.generateLottoNumber(lottoCountManager);
 
         ResultView.showLottoCount(lottoCountManager);
