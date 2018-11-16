@@ -14,12 +14,12 @@ public class LottoMain {
 
     public static void main(String[] args){
 
-        LottoInit cost = new LottoInit(InputView.inputInitCost());
-        ResultView.printTotalCount(cost.getCount()); // 갯수 입력& 결과출력
+        LottoInit init = new LottoInit(InputView.inputInitCost());
 
-        Lotteries lotteries = new Lotteries(cost.getCount()); //
+        Lotteries lotteries = new Lotteries(init); //
         List<Lotto> boughtLotteries = lotteries.buyLotto();
 
+        ResultView.printTotalCount(init); // 갯수 입력& 결과출력
         printAllLotteries(boughtLotteries); // 구매한 로또 모두 출력!
 
         WinningLotto winningLotto = new WinningLotto(inputWinNumbers(), inputBonusNumber());
@@ -28,7 +28,7 @@ public class LottoMain {
 
         LottoResult result = compare.match(boughtLotteries, winningLotto);
 
-        winRate(result, cost.getCost());
+        winRate(result, init.getCost());
 
     }
 

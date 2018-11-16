@@ -11,47 +11,54 @@ import java.util.List;
 public class Lotto {
     private static final int LOTTO_MAX_COUNT = 45;
     private static final int LOTTO_NUMBER = 6;
-    private List<Integer> numbers;
-    private List<Integer> lotto;
+    private List<LottoNo> numbers;
+    private List<LottoNo> lotto;
 
-    public Lotto(){
+    public Lotto() {
         numbers = new ArrayList<>();
-        for(int i = 0; i < LOTTO_MAX_COUNT; i++){
-            numbers.add(i+1);
+        for (int i = 0; i < LOTTO_MAX_COUNT; i++) {
+            numbers.add(new LottoNo(i + 1));
         }
     }
-    public Lotto(Integer[] oneTicket){
+
+    public Lotto(LottoNo[] oneTicket) {
         lotto = Arrays.asList(oneTicket);
     }
 
-    public void generateLottoNumber(){
+    public void generateLottoNumber() {
         shuffleNumbers();
         lotto = sortNumbers(pickSixNumbers());
     }
 
-    public List<Integer> pickSixNumbers(){
-        List<Integer> resultNumbers = new ArrayList<>();
-        for(int i = 0; i < LOTTO_NUMBER; i++){
-            resultNumbers.add(numbers.get(i));
-        }
-        return resultNumbers;
+    public List<LottoNo> pickSixNumbers() {
+        return numbers.subList(0, LOTTO_NUMBER);
     }
 
-    public void shuffleNumbers(){
+    public void shuffleNumbers() {
         Collections.shuffle(numbers);
     }
 
-    public List<Integer> sortNumbers(List<Integer> numbers){
+    public List<LottoNo> sortNumbers(List<LottoNo> numbers) {
         Collections.sort(numbers);
         return numbers;
     }
 
-    public boolean isContains(int num){
-        return this.lotto.contains(num);
+    public boolean isContains(LottoNo num) {
+        for (LottoNo no : this.lotto) {
+            if (no.compareTo(num) == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public String makeString(String delimeter){
-        return StringUtils.join(this.lotto, ",");
+    public String toString(String delimeter) {
+        String result = "";
+        for (LottoNo no : this.lotto) {
+            result += no.getNumber() + delimeter;
+        }
+        return result.substring(0, result.length() - delimeter.length());
+
     }
 
 }

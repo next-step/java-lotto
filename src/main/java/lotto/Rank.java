@@ -13,7 +13,7 @@ public enum Rank {
     private int countOfMatch;
     private String winningMoney;
 
-    private Rank(int count, String winningMoney){
+    private Rank(int count, String winningMoney) {
         this.countOfMatch = count;
         this.winningMoney = winningMoney;
     }
@@ -23,21 +23,21 @@ public enum Rank {
         return count * prize;
     }
 
-    public static Rank valueOf(int countOfMatch, boolean matchBonus){
-    //일치하는 수를 로또 등수로 변경한다? enum 값 목록은 Rank[] ranks = values();
-        for(Rank rank : Rank.values()){
-            if(countOfMatch == rank.countOfMatch){
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        //일치하는 수를 로또 등수로 변경한다? enum 값 목록은 Rank[] ranks = values();
+        for (Rank rank : Rank.values()) {
+            if (countOfMatch == rank.countOfMatch) {
                 return isSecond(rank, matchBonus);
             }
         }
         return MISS;
     }
 
-    private static Rank isSecond(Rank rank, boolean matchBonus){
-        if(rank.equals(SECOND) && matchBonus){
+    private static Rank isSecond(Rank rank, boolean matchBonus) {
+        if (rank.equals(SECOND) && matchBonus) {
             return SECOND;
         }
-        if(rank.equals(SECOND) && !matchBonus){
+        if (rank.equals(SECOND) && !matchBonus) {
             return THIRD;
         }
         return rank;
