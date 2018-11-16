@@ -7,7 +7,7 @@ import net.chandol.lotto.value.WinningNumber;
 
 import static net.chandol.lotto.endpoint.ConsoleUi.*;
 
-public class Main {
+public class ConsoleMain {
     public static void main(String[] args) {
         PurchaseRequest purchaseRequest = inputPurchaseRequest();
 

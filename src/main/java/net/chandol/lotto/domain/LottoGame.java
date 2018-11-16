@@ -3,7 +3,7 @@ package net.chandol.lotto.domain;
 import net.chandol.lotto.domain.generator.AutoLottoGenerator;
 import net.chandol.lotto.domain.generator.DirectLottoGenerator;
 import net.chandol.lotto.dto.PurchaseRequest;
-import net.chandol.lotto.util.ConsoleUiUtil;
+import net.chandol.lotto.view.ViewUtil;
 import net.chandol.lotto.value.LottoNumber;
 import net.chandol.lotto.value.WinningNumber;
 
@@ -20,7 +20,7 @@ public class LottoGame {
     public LottoGame(PurchaseRequest request) {
         List<Lotto> directLottos = new DirectLottoGenerator().generate(request);
         List<Lotto> autoLottos = new AutoLottoGenerator().generate(request);
-        List<Lotto> lottos = ConsoleUiUtil.merge(directLottos, autoLottos);
+        List<Lotto> lottos = ViewUtil.merge(directLottos, autoLottos);
 
         this.lottos = lottos;
         this.request = request;
