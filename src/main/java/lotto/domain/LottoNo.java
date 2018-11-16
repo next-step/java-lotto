@@ -1,22 +1,17 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class LottoNo {
 
-    private static final int LOTTO_NUMBER_BOUND = 45;
+    public static final int LOTTO_NUMBER_BOUND = 45;
     private int number;
 
     private LottoNo(int number) {
-        if (number < 0) {
+        if (isValidNumber(number)) {
             throw new IllegalArgumentException();
         }
         this.number = number;
-    }
-
-    public static LottoNo create() {
-        return new LottoNo(new Random().nextInt(LOTTO_NUMBER_BOUND));
     }
 
     public static LottoNo create(int number) {
@@ -53,5 +48,9 @@ public class LottoNo {
     @Override
     public String toString() {
         return String.valueOf(this.number);
+    }
+
+    private boolean isValidNumber(int number) {
+        return number < 0 || LOTTO_NUMBER_BOUND < number;
     }
 }

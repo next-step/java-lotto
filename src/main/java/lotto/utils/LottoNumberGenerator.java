@@ -2,16 +2,14 @@ package lotto.utils;
 
 import lotto.domain.LottoNo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static lotto.domain.LottoNo.LOTTO_NUMBER_BOUND;
 
 public class LottoNumberGenerator {
 
     public static final int LOTTO_NUMBER_LENGTH = 6;
-
 
     private LottoNumberGenerator() {
 
@@ -30,9 +28,13 @@ public class LottoNumberGenerator {
     public static List<LottoNo> generate() {
         List<LottoNo> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
-            lottoNumbers.add(LottoNo.create());
+            lottoNumbers.add(LottoNo.create(random()));
         }
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
+    }
+
+    public static int random() {
+       return new Random().nextInt(LOTTO_NUMBER_BOUND);
     }
 }
