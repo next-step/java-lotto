@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoWallet {
@@ -13,6 +14,10 @@ public class LottoWallet {
     private LottoWallet(int money, List<Lotto> lottos) {
         this.money = money;
         this.lottos = lottos;
+    }
+
+    public static LottoWallet create(int money) {
+        return new LottoWallet(money, new ArrayList<>());
     }
 
     public static LottoWallet create(int money, List<Lotto> lottos) {

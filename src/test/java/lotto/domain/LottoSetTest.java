@@ -17,8 +17,8 @@ public class LottoSetTest {
     public void setup() {
         lottos = Arrays.asList(
                 Lotto.create(generate(1, 10, 15, 20, 25, 30)),
-                Lotto.create(generate(20, 25, 30, 35, 40, 45)),
-                Lotto.create(generate(35, 40, 45, 50, 55, 60))
+                Lotto.create(generate(10, 15, 20, 25, 30, 35)),
+                Lotto.create(generate(20, 25, 30, 35, 40, 45))
         );
     }
 
@@ -40,7 +40,7 @@ public class LottoSetTest {
     public void 일치하는_로또셋_갯수를_알수있다() {
         LottoSet lottoSet = LottoSet.create(lottos);
 
-        assertThat(lottoSet.numberOfMatches(generate(1, 10, 15, 91, 92, 93), 3)).isEqualTo(1);
-        assertThat(lottoSet.numberOfMatches(generate(20, 25, 30, 91, 92, 93), 3)).isEqualTo(2);
+        assertThat(lottoSet.numberOfMatches(generate(1, 10, 15, 16, 17, 18), 3)).isEqualTo(1);
+        assertThat(lottoSet.numberOfMatches(generate(20, 25, 30, 31, 32, 33), 3)).isEqualTo(3);
     }
 }
