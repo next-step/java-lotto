@@ -15,7 +15,7 @@ public enum Rank {
     private int matchCount;
     private int rewardMoney;
 
-    private Rank(int matchCount, int rewardMoney) {
+    Rank(int matchCount, int rewardMoney) {
         this.matchCount = matchCount;
         this.rewardMoney = rewardMoney;
     }

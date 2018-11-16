@@ -25,7 +25,6 @@ public class LottoNo {
         return numbers.stream()
                 .map(LottoNo::new)
                 .collect(Collectors.toList());
-
     }
 
     public boolean isExistBonusNumber(LottoNo bonusNumber) {
