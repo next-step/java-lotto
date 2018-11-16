@@ -23,20 +23,22 @@ public class LottoGame {
         return lottos;
     }
 
-    public LottoGameResult getReword(String stringNumber) {
-        Lotto winnerLotto = createWinnerLotto(stringNumber);
+    public LottoGameResult getReword(String stringNumber, Integer bonusNumber) {
+        WinningLotto winnerLotto = createWinnerLotto(stringNumber, bonusNumber);
         LottoGameResult lottoGameResult = new LottoGameResult();
 
         for (Lotto lotto : lottos) {
             lottoGameResult.setRewordCount(lotto, winnerLotto);
         }
-
         return lottoGameResult;
     }
 
-    private Lotto createWinnerLotto(String stringNumber) {
-        List<String> numbers = Arrays.asList(stringNumber.replace(" ", "").split(","));
-        return new Lotto(new ArrayList(numbers.stream().map(Integer::parseInt).collect(toList())));
+    private WinningLotto createWinnerLotto(String stringNumber, Integer bonusNumber) {
+        Set<Integer> numbers = new HashSet(
+            Arrays.asList(stringNumber.replace(" ", "").split(","))
+            .stream().map(Integer::parseInt).collect(toList()));
+
+        return new WinningLotto(numbers, bonusNumber);
     }
 
     private void validation(int totalPrice) {

@@ -1,59 +1,60 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
+
 public class Lotto {
     private static final int LOTTO_NUMBER_DIGIT = 6;
     private static final int LOTTO_NUMBER_START_RANGE = 1;
     private static final int LOTTO_NUMBER_END_RANGE = 45;
 
-    private List<Integer> numbers;
+    private Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         validation(numbers);
-        this.numbers = new ArrayList(numbers);
+        this.numbers = new HashSet<>(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public Set<Integer> getNumbers() {
         return numbers;
     }
 
-    private void validation(List<Integer> numbers) {
+    public int matchCount(Lotto lotto) {
+        lotto.numbers.retainAll(this.numbers);
+        return lotto.numbers.size();
+    }
+
+    public boolean isBonusMatch(Integer bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
+    private void validation(Set<Integer> numbers) {
         validationNumberDuplicate(numbers);
         validationNumberDigit(numbers);
         validationNumberRange(numbers);
-
     }
 
-    private void validationNumberDuplicate(List<Integer> numbers) {
+    private void validationNumberDuplicate(Set<Integer> numbers) {
         if(!numbers.stream().allMatch(new HashSet<>()::add)) {
             throw new IllegalArgumentException("숫자는 중복하여 입력할 수 없습니다.");
         }
     }
 
-    private void validationNumberDigit(List<Integer> numbers) {
+    private void validationNumberDigit(Set<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_DIGIT) {
             throw new IllegalArgumentException("숫자는 6개 까지 입력하세요.");
         }
     }
 
-    private void validationNumberRange(List<Integer> numbers) {
+    private void validationNumberRange(Set<Integer> numbers) {
         numbers.forEach(number ->  {
-            if(number < LOTTO_NUMBER_START_RANGE || number >LOTTO_NUMBER_END_RANGE) {
-                throw new IllegalArgumentException("숫자는 1부터 45사이의 값을 입력하세요.");
-            }
+            validationNumberRange(number);
         });
     }
 
-    public int matchCount(List<Integer> winnerLotto) {
-        this.numbers.retainAll(winnerLotto);
-        return numbers.size();
-    }
-
-    public int matchCount(Lotto winnerLotto) {
-
-        this.numbers.retainAll(winnerLotto.numbers);
-        return numbers.size();
+    private void validationNumberRange(Integer number) {
+        if(number < LOTTO_NUMBER_START_RANGE || number >LOTTO_NUMBER_END_RANGE) {
+            throw new IllegalArgumentException("숫자는 1부터 45사이의 값을 입력하세요.");
+        }
     }
 }

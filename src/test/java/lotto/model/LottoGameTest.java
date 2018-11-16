@@ -34,9 +34,10 @@ public class LottoGameTest {
         // TODO 로또 구매시 번호 추출 로직을 분리 (테스트하기 어려운 코드)
         LottoGame lottoGame = new LottoGame();
         List<Lotto> lottos = lottoGame.createLotto(totalPrice);
+        Integer bonusNumber = 10;
 
-        LottoGameResult lottoGameResult = lottoGame.getReword("1, 2, 3, 4, 5, 6");
-        assertThat(lottoGameResult.getResults().size()).isEqualTo(7);
+        LottoGameResult lottoGameResult = lottoGame.getReword("1, 2, 3, 4, 5, 6", bonusNumber);
+        assertThat(lottoGameResult.getResults().size()).isEqualTo(6);
         float earningsRate = lottoGameResult.earningsRate(totalPrice);
 
     }
