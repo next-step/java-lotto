@@ -2,13 +2,16 @@ package domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import util.CollectionCast;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static domain.LottoNo.generateLottoNos;
 import static domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static util.CollectionCast.*;
 
 public class AttemptTest {
 
@@ -18,12 +21,13 @@ public class AttemptTest {
     public void 로또번호_추출_45이하_6개() {
         attempt = new Attempt(new RandomNumberGenerator());
 
-        List<LottoNo> numbers = attempt.getLottoNos();
+        Map<Integer, LottoNo> numbers = attempt.getLottoNos();
         assertThat(numbers).hasSize(6);
 
-        for (LottoNo number : numbers) {
-            assertThat(number.getNumber()).isBetween(0,45);
+        for (LottoNo lottoNo : numbers.values()) {
+            assertThat(lottoNo.getNumber()).isBetween(0,45);
         }
+
     }
 
     @Test
@@ -38,7 +42,7 @@ public class AttemptTest {
         LottoWinningNo lottoWinningNo = new LottoWinningNo(winnerNumbers, new LottoNo(10));
 
         //given
-        Integer matchCount = lottoWinningNo.calculateMatchCount(attemptNumbers);
+        Integer matchCount = lottoWinningNo.calculateMatchCount(changeListToMap(attemptNumbers));
 
         //then
         Assertions.assertThat(matchCount).isEqualTo(3);

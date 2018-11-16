@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.List;
+import java.util.Map;
 
 public interface NumberGenerator {
-    List<LottoNo> getRandomNumber();
+    Map<Integer, LottoNo> getRandomNumber();
 }

@@ -41,7 +41,7 @@ public class Validation {
     }
 
     public static void validateBonusNo(List<LottoNo> winnerNumbers, LottoNo bonusNumber){
-        if(isContainSameNumber(winnerNumbers, bonusNumber))
+        if(isContainSameNumber(CollectionCast.changeListToMap(winnerNumbers), bonusNumber))
             throw new RuntimeException("보너스 번호는 중복일 수 없습니다.");
     }
 

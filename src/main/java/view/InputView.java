@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static domain.LottoWinningNo.isContainSameNumber;
+import static util.CollectionCast.changeListToMap;
 import static util.ConsoleUtil.changeWinNumberToInteger;
 
 public class InputView {
@@ -47,9 +48,9 @@ public class InputView {
 
     public static void printLottoNumber(List<Attempt> lottoNumbers) {
         for (Attempt lottoNumber : lottoNumbers) {
-            System.out.println(lottoNumber.getLottoNos().stream()
-                                    .map(LottoNo::getNumber)
-                                    .collect(Collectors.toList()));
+            System.out.println(lottoNumber.getLottoNos().values().stream()
+                    .map(LottoNo::getNumber)
+                    .collect(Collectors.toList()));
         }
     }
 
@@ -66,7 +67,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         int bonusNumber = scanner.nextInt();
 
-        if(isContainSameNumber(winnerNumbers, new LottoNo(bonusNumber)))
+        if(isContainSameNumber(changeListToMap(winnerNumbers), new LottoNo(bonusNumber)))
             throw new RuntimeException("보너스 볼은 담청 번호와 같을 수 없습니다.");
 
         return bonusNumber;
