@@ -1,11 +1,11 @@
 package lotto.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningLotto extends Lotto {
     private Integer bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
+    public WinningLotto(Set<Integer> numbers, Integer bonusNumber) {
         super(numbers);
 
         validation(bonusNumber);

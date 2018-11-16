@@ -34,7 +34,7 @@ public class LottoGame {
     }
 
     private WinningLotto createWinnerLotto(String stringNumber, Integer bonusNumber) {
-        List<Integer> numbers = new ArrayList(
+        Set<Integer> numbers = new HashSet(
             Arrays.asList(stringNumber.replace(" ", "").split(","))
             .stream().map(Integer::parseInt).collect(toList()));
 

@@ -1,5 +1,7 @@
 package lotto.enums;
 
+import java.util.Arrays;
+import java.util.Optional;
 
 public enum LottoReword {
     MISS_MATCH(0, 0, ""),
@@ -33,21 +35,23 @@ public enum LottoReword {
 
     public static LottoReword valueOf(int matchCount, boolean matchBonus) {
         LottoReword[] lottoRewords = LottoReword.values();
-
         if(matchBonus && matchCount == 5) {
             return LottoReword.FIVE_AND_BONUS_MATCH;
         }
 
-        for(int i = 0; i < lottoRewords.length; i++) {
-            if(lottoRewords[i].getMatchCount() == matchCount) {
-                return lottoRewords[i];
-            }
+        Optional<LottoReword> lottoRewordOptional = Arrays.asList(lottoRewords)
+                .stream()
+                .filter(e -> e.getMatchCount() == matchCount)
+                .findFirst();
+        if(lottoRewordOptional.isPresent()) {
+            return lottoRewordOptional.get();
         }
+
         return MISS_MATCH;
     }
 
-    public int computeReward(int numberOfMatches) {
-        return this.reword * numberOfMatches;
+    public int computeReward(int matchCount) {
+        return this.reword * matchCount;
 
     }
 
