@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum LottoReword {
-    MISS_MATCH(0, 0, ""),
+    MISS_MATCH(0, 0, "Miss Match"),
     THREE_MATCH(3, 5_000, "3개 일치 (5000원)"),
     FOUR_MATCH(4, 50_000, "4개 일치 (50000원)"),
     FIVE_MATCH(5, 1_500_000, "5개 일치 (1500000원)"),
@@ -35,13 +35,13 @@ public enum LottoReword {
 
     public static LottoReword valueOf(int matchCount, boolean matchBonus) {
         LottoReword[] lottoRewords = LottoReword.values();
-        if(matchBonus && matchCount == 5) {
+        if(matchBonus && matchCount == FIVE_AND_BONUS_MATCH.matchCount) {
             return LottoReword.FIVE_AND_BONUS_MATCH;
         }
 
         Optional<LottoReword> lottoRewordOptional = Arrays.asList(lottoRewords)
                 .stream()
-                .filter(e -> e.getMatchCount() == matchCount)
+                .filter(e -> e.matchCount == matchCount)
                 .findFirst();
         if(lottoRewordOptional.isPresent()) {
             return lottoRewordOptional.get();

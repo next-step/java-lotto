@@ -37,7 +37,7 @@ public class LottoGameTest {
         Integer bonusNumber = 10;
 
         LottoGameResult lottoGameResult = lottoGame.getReword("1, 2, 3, 4, 5, 6", bonusNumber);
-        assertThat(lottoGameResult.getResults().size()).isEqualTo(7);
+        assertThat(lottoGameResult.getResults().size()).isEqualTo(6);
         float earningsRate = lottoGameResult.earningsRate(totalPrice);
 
     }
