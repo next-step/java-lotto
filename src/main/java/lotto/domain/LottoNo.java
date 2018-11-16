@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class LottoNo {
 
+    private static final int LOTTO_NUMBER_BOUND = 45;
     private int number;
 
     private LottoNo(int number) {
@@ -11,6 +13,10 @@ public class LottoNo {
             throw new IllegalArgumentException();
         }
         this.number = number;
+    }
+
+    public static LottoNo create() {
+        return new LottoNo(new Random().nextInt(LOTTO_NUMBER_BOUND));
     }
 
     public static LottoNo create(int number) {
