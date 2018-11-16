@@ -7,27 +7,27 @@ import static domain.Rank.findRankBy;
 import static util.CollectionCast.changeListToMap;
 import static util.Validation.validateLottoNos;
 
-public class Attempt {
+public class Lotto {
 
     private Map<Integer, LottoNo> lottoNos;
     private Rank rank;
 
-    public Attempt(List<LottoNo> numbers, Rank rank) {
+    public Lotto(List<LottoNo> numbers, Rank rank) {
         validateLottoNos(numbers);
         this.lottoNos.putAll(changeListToMap(numbers));
         this.rank = rank;
     }
 
-    public Attempt(Rank rank) {
+    public Lotto(Rank rank) {
         this.rank = rank;
     }
 
-    public Attempt(List<LottoNo> numbers) {
+    public Lotto(List<LottoNo> numbers) {
         validateLottoNos(numbers);
         this.lottoNos =changeListToMap(numbers);
     }
 
-    public Attempt(NumberGenerator numberGenerator) {
+    public Lotto(NumberGenerator numberGenerator) {
         Map<Integer, LottoNo> integerLottoNoMap = generateAttemptNumbers(numberGenerator);
         this.lottoNos = integerLottoNoMap;
     }

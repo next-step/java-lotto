@@ -19,7 +19,7 @@ public class LottoGameTest {
         generator.setRandomNumber(attemptNumbers);
 
         lotto = new LottoGame(new LottoAmount(14), new LottoAmount(0), generator);
-        List<Attempt> lottoNumbers = lotto.getLottoNumbers();
+        List<Lotto> lottoNumbers = lotto.getLottoNumbers();
 
         Assertions.assertThat(lottoNumbers).hasSize(14);
     }

@@ -8,7 +8,7 @@ public class RankAmount {
 
     private Map<Rank, Long> rankAmount;
 
-    public RankAmount(List<Attempt> attempts) {
+    public RankAmount(List<Lotto> attempts) {
         rankAmount = countRankAmount(attempts);
     }
 
@@ -16,9 +16,9 @@ public class RankAmount {
         return rankAmount;
     }
 
-    public Map<Rank, Long> countRankAmount(List<Attempt> attempts) {
+    public Map<Rank, Long> countRankAmount(List<Lotto> attempts) {
         return attempts.stream()
-                .collect(Collectors.groupingBy(Attempt::getRank, Collectors.counting()));
+                .collect(Collectors.groupingBy(Lotto::getRank, Collectors.counting()));
     }
 
     public Long inquireAmount(Rank rank) {
