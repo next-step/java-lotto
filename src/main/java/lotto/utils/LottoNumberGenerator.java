@@ -21,20 +21,26 @@ public class LottoNumberGenerator {
     
     public static List<LottoNo> generate(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNo::create)
+                .map(LottoNumberGenerator::create)
                 .collect(Collectors.toList());
     }
 
     public static List<LottoNo> generate() {
         List<LottoNo> lottoNumbers = new ArrayList<>();
         for (int i = 0; i < LOTTO_NUMBER_LENGTH; i++) {
-            lottoNumbers.add(LottoNo.create(random()));
+            lottoNumbers.add(create(random()));
         }
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
     }
 
-    public static int random() {
+    private static LottoNo create(int number) {
+        return LottoNumberStore.exists(number) ?
+                LottoNumberStore.get(number) :
+                LottoNumberStore.put(number, LottoNo.create(number));
+    }
+
+    private static int random() {
        return new Random().nextInt(LOTTO_NUMBER_BOUND);
     }
 }
