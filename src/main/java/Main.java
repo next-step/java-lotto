@@ -10,10 +10,10 @@ import static view.OutputView.*;
 
 public class Main {
     public static void main(String[] args) {
-        Money totalPurchaseMoney = new Money(getPurchaseAmount());
+        Money totalPurchaseMoney = Money.from(getPurchaseAmount());
         validatePurchaseMoney(totalPurchaseMoney);
 
-        LottoAmount manualPurchaseAmount = new LottoAmount(getManualPurchaseAmount());
+        LottoAmount manualPurchaseAmount = LottoAmount.from(getManualPurchaseAmount());
         validatePurchaseAmount(manualPurchaseAmount);
 
         LottoGame lotto = new LottoGame(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
@@ -26,12 +26,12 @@ public class Main {
 
         List<LottoNo> winnerNumbers = printLastWeekWinNumber();
 
-        LottoNo bonusNumber = new LottoNo(printBonusNumber(winnerNumbers));
-        lotto.calculateAllRank(new LottoWinningNo(winnerNumbers, bonusNumber));
+        LottoNo bonusNumber = LottoNo.from(printBonusNumber(winnerNumbers));
+        lotto.calculateAllRank(LottoWinning.from(winnerNumbers, bonusNumber));
 
         printResultNotice();
 
-        RankAmount rankLongMap = new RankAmount(lottoNumbers);
+        RankAmount rankLongMap = RankAmount.from(lottoNumbers);
         printRankAmount(rankLongMap);
 
         float yield = rankLongMap.calculateYield(totalPurchaseMoney);

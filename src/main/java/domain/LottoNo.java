@@ -24,9 +24,13 @@ public class LottoNo {
 
     private int number;
 
-    public LottoNo(int number) {
+    private LottoNo(int number) {
         validateLottoNo(number);
         this.number = number;
+    }
+
+    public static LottoNo from(int number) {
+        return new LottoNo(number);
     }
 
     public int getNumber() {

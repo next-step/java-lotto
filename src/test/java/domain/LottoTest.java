@@ -35,7 +35,7 @@ public class LottoTest {
         attempt = new Lotto(generator);
 
         List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(4 ,5 ,6, 7, 8, 9));
-        LottoWinningNo lottoWinningNo = new LottoWinningNo(winnerNumbers, new LottoNo(10));
+        LottoWinning lottoWinningNo = LottoWinning.from(winnerNumbers, LottoNo.from(10));
 
         //given
         Integer matchCount = lottoWinningNo.calculateMatchCount(attemptNumbers);
@@ -53,10 +53,10 @@ public class LottoTest {
         attempt = new Lotto(generator);
 
         List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 7));
-        LottoNo bonusNumber = new LottoNo(6);
+        LottoNo bonusNumber = LottoNo.from(6);
 
         //given
-        attempt.calculateRank(new LottoWinningNo(winnerNumbers, bonusNumber));
+        attempt.calculateRank(LottoWinning.from(winnerNumbers, bonusNumber));
 
         //then
         Assertions.assertThat(attempt.getRank())
@@ -72,10 +72,10 @@ public class LottoTest {
         attempt = new Lotto(generator);
 
         List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 7));
-        LottoNo bonusNumber = new LottoNo(8);
+        LottoNo bonusNumber = LottoNo.from(8);
 
         //given
-        attempt.calculateRank(new LottoWinningNo(winnerNumbers, bonusNumber));
+        attempt.calculateRank(LottoWinning.from(winnerNumbers, bonusNumber));
 
         //then
         Assertions.assertThat(attempt.getRank())
@@ -84,8 +84,8 @@ public class LottoTest {
 
     @Test(expected = RuntimeException.class)
     public void 입력숫자는_여섯자리가_아닐경우_오류가_발생한다() {
-        new Lotto(generateLottoNos(Arrays.asList(1, 2, 3, 4, 5)));
-        new Lotto(generateLottoNos(Arrays.asList(1, 2, 3, 4, 6, 7)));
+        Lotto.from(generateLottoNos(Arrays.asList(1, 2, 3, 4, 5)));
+        Lotto.from(generateLottoNos(Arrays.asList(1, 2, 3, 4, 6, 7)));
     }
 
 }

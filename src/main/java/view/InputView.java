@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static domain.LottoWinningNo.isContainSameNumber;
+import static domain.LottoWinning.isContainSameNumber;
 import static util.ConsoleUtil.changeWinNumberToInteger;
 
 public class InputView {
@@ -66,7 +66,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         int bonusNumber = scanner.nextInt();
 
-        if(isContainSameNumber(winnerNumbers, new LottoNo(bonusNumber)))
+        if(isContainSameNumber(winnerNumbers, LottoNo.from(bonusNumber)))
             throw new RuntimeException("보너스 볼은 담청 번호와 같을 수 없습니다.");
 
         return bonusNumber;

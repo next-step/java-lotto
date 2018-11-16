@@ -6,16 +6,20 @@ import java.util.List;
 import static util.Validation.validateBonusNo;
 import static util.Validation.validateLottoNos;
 
-public class LottoWinningNo {
+public class LottoWinning {
 
     private List<LottoNo> winnerNumbers;
     private LottoNo bonusNumber;
 
-    public LottoWinningNo(List<LottoNo> winnerNumbers, LottoNo bonusNumber) {
+    private LottoWinning(List<LottoNo> winnerNumbers, LottoNo bonusNumber) {
         validateLottoNos(winnerNumbers);
         this.winnerNumbers = winnerNumbers;
         validateBonusNo(winnerNumbers, bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    public static LottoWinning from(List<LottoNo> winnerNumbers, LottoNo bonusNumber) {
+        return new LottoWinning(winnerNumbers,bonusNumber);
     }
 
     public boolean isExistBonusNumber(List<LottoNo> numbers) {

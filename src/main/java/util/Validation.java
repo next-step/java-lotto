@@ -10,7 +10,7 @@ import static domain.Lotto.isExistDuplicateNumber;
 import static domain.LottoAmount.isAmountPositive;
 import static domain.LottoNo.MAX_NUMBER;
 import static domain.LottoNo.MIN_NUMBER;
-import static domain.LottoWinningNo.isContainSameNumber;
+import static domain.LottoWinning.isContainSameNumber;
 import static domain.Money.isMoneyPositive;
 import static domain.RandomNumberGenerator.LOTTO_DIGITS;
 

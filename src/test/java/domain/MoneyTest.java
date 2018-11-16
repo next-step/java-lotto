@@ -11,7 +11,7 @@ public class MoneyTest {
     @Test
     public void 구매금액으로_구매량을_구한다() {
         int parchaseMoney = 14000;
-        LottoAmount amount = calculateAmount(new Money(parchaseMoney));
+        LottoAmount amount = calculateAmount(Money.from(parchaseMoney));
 
         Assertions.assertThat(amount.getAmount()).isEqualTo(parchaseMoney/LOTTO_PRICE);
     }

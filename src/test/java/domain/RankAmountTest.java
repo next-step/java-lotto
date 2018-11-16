@@ -15,18 +15,18 @@ public class RankAmountTest {
     public void 각_랭크의_갯수를_계산한다() {
 
         List<Lotto> attempts = Arrays.asList(
-                new Lotto(FIRST),
-                new Lotto(SECOND),
-                new Lotto(SECOND),
-                new Lotto(THIRD),
-                new Lotto(THIRD),
-                new Lotto(THIRD),
-                new Lotto(FOURTH),
-                new Lotto(FOURTH),
-                new Lotto(FOURTH)
+                Lotto.from(FIRST),
+                Lotto.from(SECOND),
+                Lotto.from(SECOND),
+                Lotto.from(THIRD),
+                Lotto.from(THIRD),
+                Lotto.from(THIRD),
+                Lotto.from(FOURTH),
+                Lotto.from(FOURTH),
+                Lotto.from(FOURTH)
         );
 
-        RankAmount rankAmount = new RankAmount(attempts);
+        RankAmount rankAmount = RankAmount.from(attempts);
 
         Assertions.assertThat(rankAmount.getRankAmount()).containsOnly(entry(FIRST, 1L),
                 entry(SECOND, 2L),

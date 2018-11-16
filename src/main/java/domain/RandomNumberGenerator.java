@@ -41,7 +41,7 @@ public class RandomNumberGenerator implements NumberGenerator {
 
     private List<LottoNo> initNumbers() {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            initNumbers.add(new LottoNo(i));
+            initNumbers.add(LottoNo.from(i));
         }
         return initNumbers;
     }

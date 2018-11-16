@@ -4,8 +4,12 @@ public class Money {
 
     private int money;
 
-    public Money(int money) {
+    private Money(int money) {
         this.money = money;
+    }
+
+    public static Money from(int money){
+        return new Money(money);
     }
 
     public int getMoney() {
@@ -15,7 +19,7 @@ public class Money {
     public static final int LOTTO_PRICE = 1_000;
 
     public static LottoAmount calculateAmount(Money money) {
-        return new LottoAmount(money.getMoney() / LOTTO_PRICE);
+        return LottoAmount.from(money.getMoney() / LOTTO_PRICE);
     }
 
     public static boolean isMoneyPositive(Money money) {

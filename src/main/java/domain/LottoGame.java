@@ -26,7 +26,7 @@ public class LottoGame {
     public void generateByManual(List<List<LottoNo>> lottoNumbers) {
         List<Lotto> manualAttempts = new ArrayList<>();
         for (List<LottoNo> lottoNumber : lottoNumbers) {
-            manualAttempts.add(new Lotto(lottoNumber));
+            manualAttempts.add(Lotto.from(lottoNumber));
         }
         this.lottoNumbers.addAll(0,manualAttempts);
     }
@@ -35,13 +35,13 @@ public class LottoGame {
         return lottoNumbers;
     }
 
-    public void calculateAllRank(LottoWinningNo winningNo) {
+    public void calculateAllRank(LottoWinning winningNo) {
         for (Lotto attemptNumber : getLottoNumbers()) {
             attemptNumber.calculateRank(winningNo);
         }
     }
 
     public LottoAmount calculateAutoPurchaseAmount() {
-        return new LottoAmount(totalPurchaseAmount.getAmount() - manualPurchaseAmount.getAmount());
+        return LottoAmount.from(totalPurchaseAmount.getAmount() - manualPurchaseAmount.getAmount());
     }
 }

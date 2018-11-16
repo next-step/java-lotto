@@ -15,6 +15,6 @@ public class ConsoleUtil {
     }
 
     private static LottoNo apply(String s) {
-        return new LottoNo(Integer.valueOf(s));
+        return LottoNo.from(Integer.valueOf(s));
     }
 }

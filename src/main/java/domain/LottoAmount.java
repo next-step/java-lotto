@@ -4,8 +4,12 @@ public class LottoAmount {
 
     private int amount;
 
-    public LottoAmount(int amount) {
+    private LottoAmount(int amount) {
         this.amount = amount;
+    }
+
+    public static LottoAmount from(int amount){
+        return new LottoAmount(amount);
     }
 
     public int getAmount() {

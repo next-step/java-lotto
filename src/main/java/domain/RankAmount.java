@@ -8,8 +8,12 @@ public class RankAmount {
 
     private Map<Rank, Long> rankAmount;
 
-    public RankAmount(List<Lotto> attempts) {
+    private RankAmount(List<Lotto> attempts) {
         rankAmount = countRankAmount(attempts);
+    }
+
+    public static RankAmount from(List<Lotto> attempts) {
+        return new RankAmount(attempts);
     }
 
     public Map<Rank, Long> getRankAmount() {
