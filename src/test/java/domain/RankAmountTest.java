@@ -16,15 +16,15 @@ public class RankAmountTest {
     public void 각_랭크의_갯수를_계산한다() {
 
         List<Attempt> attempts = Arrays.asList(
-                new Attempt(new ArrayList<LottoNo>(), FIRST),
-                new Attempt(new ArrayList<LottoNo>(), SECOND),
-                new Attempt(new ArrayList<LottoNo>(), SECOND),
-                new Attempt(new ArrayList<LottoNo>(), THIRD),
-                new Attempt(new ArrayList<LottoNo>(), THIRD),
-                new Attempt(new ArrayList<LottoNo>(), THIRD),
-                new Attempt(new ArrayList<LottoNo>(), FOURTH),
-                new Attempt(new ArrayList<LottoNo>(), FOURTH),
-                new Attempt(new ArrayList<LottoNo>(), FOURTH)
+                new Attempt(FIRST),
+                new Attempt(SECOND),
+                new Attempt(SECOND),
+                new Attempt(THIRD),
+                new Attempt(THIRD),
+                new Attempt(THIRD),
+                new Attempt(FOURTH),
+                new Attempt(FOURTH),
+                new Attempt(FOURTH)
         );
 
         RankAmount rankAmount = new RankAmount(attempts);

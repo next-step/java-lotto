@@ -16,6 +16,10 @@ public class Attempt {
         this.rank = rank;
     }
 
+    public Attempt(Rank rank) {
+        this.rank = rank;
+    }
+
     public Attempt(List<LottoNo> numbers) {
         validateLottoNos(numbers);
         this.lottoNos = numbers;
