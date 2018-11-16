@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.dto.Lotto;
 import lotto.dto.WinningLotto;
+import lotto.utils.LottoMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class LottoGame {
 
     public void gameSettingAllFrame() {
         for (int i = 0 ; i < games ; i++){
-            gamePlays.add(new Lotto());
+            gamePlays.add(new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive())));
         }
     }
 

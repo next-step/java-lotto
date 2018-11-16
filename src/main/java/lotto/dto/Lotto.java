@@ -8,9 +8,11 @@ public class Lotto {
 
     private List<Integer> frameNumber;
 
+    /* 디폴트 생성자 재구현
     public Lotto() {
         this.frameNumber = LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive());
     }
+    */
 
     /**
      * Test용 생성자

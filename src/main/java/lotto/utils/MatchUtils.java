@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
 public class MatchUtils {
 
     public static int getDuplicateCount(List<Integer> lotto){
-        return lotto.size() - (int) lotto.stream()
+        int lottoCombinedSize = lotto.size();
+        return lottoCombinedSize - (int) lotto.stream()
                 .distinct()
                 .count();
     }

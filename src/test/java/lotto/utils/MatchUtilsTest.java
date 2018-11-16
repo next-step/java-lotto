@@ -10,7 +10,7 @@ public class MatchUtilsTest {
 
     @Test
     public void 중복제거된_갯수반환() {
-        assertThat(MatchUtils.getDuplicateCount(Arrays.asList(1,2,3,4,5,6,7,8,8,7,9,6,5))).isEqualTo(3);
+        assertThat(MatchUtils.getDuplicateCount(Arrays.asList(1,2,3,4,5,6,7,8,8,7,9,6,5))).isEqualTo(4);
         assertThat(MatchUtils.getDuplicateCount(Arrays.asList(1,2,3,4,5,6,1,2,3))).isEqualTo(3);
         assertThat(MatchUtils.getDuplicateCount(Arrays.asList(1,2,3,4,5,6,1,2,3,4))).isEqualTo(4);
     }

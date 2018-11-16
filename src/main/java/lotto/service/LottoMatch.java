@@ -34,9 +34,7 @@ public class LottoMatch {
     public Rank getRankFromDuplicateCount(List<Integer> lotto , WinningLotto winnersNum){
         lotto.addAll(winnersNum.getWinnerNums());
         lotto.add(winnersNum.getBonusNum());
-        System.out.println("lotto size : " + lotto.size());
         int numOfDuplicate = MatchUtils.getDuplicateCount(lotto);
-        System.out.println("중복갯수 : " + numOfDuplicate);
 
         if(MatchUtils.isContains(MatchUtils.getDuplicateNums(lotto),winnersNum.getBonusNum())){
             return findSecond(numOfDuplicate);

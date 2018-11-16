@@ -14,8 +14,8 @@ public class ConsoleMain {
 
     public static void main(String[] args){
 
-        LottoGame lg = new LottoGame(InputView.inputMoney());
-        List<Lotto> lottos = lg.getGamePlays();
+        LottoGame lottoGame = new LottoGame(InputView.inputMoney());
+        List<Lotto> lottos = lottoGame.getGamePlays();
         InputView.printLottoList(lottos);
 
         String inputWinnerNumsToString = InputView.winningNumbers();
@@ -23,10 +23,13 @@ public class ConsoleMain {
         WinningLotto winnerNums = new WinningLotto(
                 Utils.getIntListFromString(inputWinnerNumsToString)
                 ,bonusNum);
-//        List<Integer> winnersNum = Utils.getIntListFromString(inputWinnerNumsToString);
-        LottoResult lr = lg.match(winnerNums);
 
-        String result = lr.matchCountResultString(winnerNums);
+//        step1
+//        List<Integer> winnersNum = Utils.getIntListFromString(inputWinnerNumsToString);
+
+        LottoResult lottoResult = lottoGame.match(winnerNums);
+
+        String result = lottoResult.matchCountResultString(winnerNums);
         ResultView.gameResult(result);
 
     }

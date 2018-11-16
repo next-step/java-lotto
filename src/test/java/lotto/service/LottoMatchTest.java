@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.dto.Lotto;
 import lotto.dto.Rank;
 import lotto.dto.WinningLotto;
+import lotto.utils.LottoMaker;
 import lotto.utils.MatchUtils;
 import org.junit.Test;
 
@@ -24,14 +25,12 @@ public class LottoMatchTest {
         /** 초기값 0 출력 확인
          *
          */
-        System.out.println(lm.getMatch().get(Rank.FIRST));
-        System.out.println(lm.getMatch().get(Rank.SECOND));
-        System.out.println(lm.getMatch().get(Rank.THIRD));
-        System.out.println(lm.getMatch().get(Rank.FOURTH));
-        System.out.println(lm.getMatch().get(Rank.FIFTH));
-        System.out.println(lm.getMatch().get(Rank.MISS));
-
-
+        assertThat(lm.getMatch().get(Rank.FIRST)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.SECOND)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.THIRD)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.FIFTH)).isEqualTo(0);
+        assertThat(lm.getMatch().get(Rank.MISS)).isEqualTo(0);
     }
 
     @Test
@@ -78,8 +77,8 @@ public class LottoMatchTest {
     @Test
     public void 중복검사테스트() {
         List<Integer> winnerNums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = new Lotto();
-        Lotto lotto2 = new Lotto();
+        Lotto lotto1 = new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive()));
+        Lotto lotto2 = new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive()));
         Lotto temp = new Lotto(new ArrayList<>(lotto2.getLotto().subList(0, 4)));
         temp.getLotto().add(9);
         WinningLotto wl = new WinningLotto(temp.getLotto(), lotto2.getLotto().get(5));

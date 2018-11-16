@@ -2,18 +2,17 @@ package lotto.dto;
 
 import java.util.List;
 
-public class WinningLotto {
+public class WinningLotto extends Lotto {
 
-    private List<Integer> winnerNums;
     private int bonusNum;
 
     public WinningLotto(List<Integer> winnerNums, int bonusNum) {
-        this.winnerNums = winnerNums;
+        super(winnerNums);
         this.bonusNum = bonusNum;
     }
 
     public List<Integer> getWinnerNums() {
-        return winnerNums;
+        return super.getLotto();
     }
 
     public int getBonusNum() {
