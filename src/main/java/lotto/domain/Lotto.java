@@ -48,6 +48,10 @@ public class Lotto {
         return !isAutomatic;
     }
 
+    public List<LottoNo> getNumbers() {
+        return numbers;
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
