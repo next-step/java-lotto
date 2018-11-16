@@ -1,34 +1,66 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static domain.Rank.findRankBy;
+import static util.Validation.validateLottoNos;
 
 public class Lotto {
 
-    private int amount;
-    private List<Attempt> lottoNumbers;
+    private List<LottoNo> lottoNos;
+    private Rank rank;
 
-    public Lotto(int amount, NumberGenerator generator) {
-        this.amount = amount;
-        initLottoNumbers(amount, generator);
+    private Lotto(List<LottoNo> numbers, Rank rank) {
+        validateLottoNos(numbers);
+        this.lottoNos = numbers;
+        this.rank = rank;
     }
 
-    private void initLottoNumbers(int amount, NumberGenerator generator) {
-        List<Attempt> tempLottoNumber = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
-            tempLottoNumber.add(new Attempt(generator));
-        }
-        this.lottoNumbers = tempLottoNumber;
+    private Lotto(Rank rank) {
+        this.rank = rank;
     }
 
-    public List<Attempt> getLottoNumbers() {
-        return lottoNumbers;
+    private Lotto(List<LottoNo> numbers) {
+        validateLottoNos(numbers);
+        this.lottoNos = numbers;
     }
 
-    public void calculateAllRank(List<Integer> numbers, int bonusNumber) {
-        for (Attempt attemptNumber : getLottoNumbers()) {
-            attemptNumber.calculateRank(numbers, bonusNumber);
-        }
+    public static Lotto from(Rank rank) {
+        return new Lotto(rank);
     }
 
+    public static Lotto from(List<LottoNo> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto from(List<LottoNo> numbers, Rank rank) {
+        return new Lotto(numbers, rank);
+    }
+
+    public Lotto(NumberGenerator numberGenerator) {
+        this.lottoNos = generateAttemptNumbers(numberGenerator);
+    }
+
+    public List<LottoNo> getLottoNos() {
+        return lottoNos;
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
+
+    private List<LottoNo> generateAttemptNumbers(NumberGenerator numberGenerator) {
+        return numberGenerator.getRandomNumber();
+    }
+
+    public void calculateRank(LottoWinning winningNo){
+        this.rank = findRankBy(winningNo.calculateMatchCount(lottoNos), winningNo.isExistBonusNumber(lottoNos));
+    }
+
+    public static boolean isExistDuplicateNumber(List<LottoNo> numbers) {
+        return numbers.stream()
+                .map(LottoNo::getNumber)
+                .distinct()
+                .count() != numbers.size();
+    }
 }
