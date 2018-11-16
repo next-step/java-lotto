@@ -6,7 +6,7 @@ import domain.Money;
 
 import java.util.List;
 
-import static domain.Lotto.isExistDuplicateNumber;
+import static domain.Attempt.isExistDuplicateNumber;
 import static domain.LottoAmount.isAmountPositive;
 import static domain.LottoNo.MAX_NUMBER;
 import static domain.LottoNo.MIN_NUMBER;
@@ -41,7 +41,7 @@ public class Validation {
     }
 
     public static void validateBonusNo(List<LottoNo> winnerNumbers, LottoNo bonusNumber){
-        if(isContainSameNumber(CollectionCast.changeListToMap(winnerNumbers), bonusNumber))
+        if(isContainSameNumber(winnerNumbers, bonusNumber))
             throw new RuntimeException("보너스 번호는 중복일 수 없습니다.");
     }
 

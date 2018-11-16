@@ -5,28 +5,25 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static domain.LottoNo.generateLottoNos;
 import static domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static util.CollectionCast.*;
 
 public class AttemptTest {
 
-    private Lotto attempt;
+    private Attempt attempt;
 
     @Test
     public void 로또번호_추출_45이하_6개() {
-        attempt = new Lotto(new RandomNumberGenerator());
+        attempt = new Attempt(new RandomNumberGenerator());
 
-        Map<Integer, LottoNo> numbers = attempt.getLottoNos();
+        List<LottoNo> numbers = attempt.getLottoNos();
         assertThat(numbers).hasSize(6);
 
-        for (LottoNo lottoNo : numbers.values()) {
-            assertThat(lottoNo.getNumber()).isBetween(0,45);
+        for (LottoNo number : numbers) {
+            assertThat(number.getNumber()).isBetween(0,45);
         }
-
     }
 
     @Test
@@ -35,13 +32,13 @@ public class AttemptTest {
         TestNumberGenerator generator = new TestNumberGenerator();
         List<LottoNo> attemptNumbers = generateLottoNos(Arrays.asList( 1, 2, 3, 4, 5, 6));
         generator.setRandomNumber(attemptNumbers);
-        attempt = new Lotto(generator);
+        attempt = new Attempt(generator);
 
         List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(4 ,5 ,6, 7, 8, 9));
         LottoWinningNo lottoWinningNo = new LottoWinningNo(winnerNumbers, new LottoNo(10));
 
         //given
-        Integer matchCount = lottoWinningNo.calculateMatchCount(changeListToMap(attemptNumbers));
+        Integer matchCount = lottoWinningNo.calculateMatchCount(attemptNumbers);
 
         //then
         Assertions.assertThat(matchCount).isEqualTo(3);
@@ -53,7 +50,7 @@ public class AttemptTest {
         TestNumberGenerator generator = new TestNumberGenerator();
         List<LottoNo> attemptNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6));
         generator.setRandomNumber(attemptNumbers);
-        attempt = new Lotto(generator);
+        attempt = new Attempt(generator);
 
         List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 7));
         LottoNo bonusNumber = new LottoNo(6);
@@ -72,7 +69,7 @@ public class AttemptTest {
         TestNumberGenerator generator = new TestNumberGenerator();
         List<LottoNo> attemptNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6));
         generator.setRandomNumber(attemptNumbers);
-        attempt = new Lotto(generator);
+        attempt = new Attempt(generator);
 
         List<LottoNo> winnerNumbers = generateLottoNos(Arrays.asList(1, 2, 3, 4, 5, 7));
         LottoNo bonusNumber = new LottoNo(8);
@@ -87,8 +84,8 @@ public class AttemptTest {
 
     @Test(expected = RuntimeException.class)
     public void 입력숫자는_여섯자리가_아닐경우_오류가_발생한다() {
-        new Lotto(generateLottoNos(Arrays.asList(1, 2, 3, 4, 5)));
-        new Lotto(generateLottoNos(Arrays.asList(1, 2, 3, 4, 6, 7)));
+        new Attempt(generateLottoNos(Arrays.asList(1, 2, 3, 4, 5)));
+        new Attempt(generateLottoNos(Arrays.asList(1, 2, 3, 4, 6, 7)));
     }
 
 }

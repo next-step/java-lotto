@@ -7,7 +7,7 @@ public class LottoGame {
 
     private LottoAmount totalPurchaseAmount;
     private LottoAmount manualPurchaseAmount;
-    private List<Lotto> lottoNumbers;
+    private List<Attempt> lottoNumbers;
 
     public LottoGame(LottoAmount totalPurchaseAmount, LottoAmount manualPurchaseAmount, NumberGenerator generator) {
         lottoNumbers = new ArrayList<>();
@@ -18,25 +18,25 @@ public class LottoGame {
 
     private void generateByAuto(LottoAmount amount, NumberGenerator generator) {
         for (int i = 0; i < amount.getAmount(); i++) {
-            Lotto attempt = new Lotto(generator);
+            Attempt attempt = new Attempt(generator);
             this.lottoNumbers.add(attempt);
         }
     }
 
     public void generateByManual(List<List<LottoNo>> lottoNumbers) {
-        List<Lotto> manualAttempts = new ArrayList<>();
+        List<Attempt> manualAttempts = new ArrayList<>();
         for (List<LottoNo> lottoNumber : lottoNumbers) {
-            manualAttempts.add(new Lotto(lottoNumber));
+            manualAttempts.add(new Attempt(lottoNumber));
         }
         this.lottoNumbers.addAll(0,manualAttempts);
     }
 
-    public List<Lotto> getLottoNumbers() {
+    public List<Attempt> getLottoNumbers() {
         return lottoNumbers;
     }
 
     public void calculateAllRank(LottoWinningNo winningNo) {
-        for (Lotto attemptNumber : getLottoNumbers()) {
+        for (Attempt attemptNumber : getLottoNumbers()) {
             attemptNumber.calculateRank(winningNo);
         }
     }

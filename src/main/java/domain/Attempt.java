@@ -1,38 +1,35 @@
 package domain;
 
 import java.util.List;
-import java.util.Map;
 
 import static domain.Rank.findRankBy;
-import static util.CollectionCast.changeListToMap;
 import static util.Validation.validateLottoNos;
 
-public class Lotto {
+public class Attempt {
 
-    private Map<Integer, LottoNo> lottoNos;
+    private List<LottoNo> lottoNos;
     private Rank rank;
 
-    public Lotto(List<LottoNo> numbers, Rank rank) {
+    public Attempt(List<LottoNo> numbers, Rank rank) {
         validateLottoNos(numbers);
-        this.lottoNos.putAll(changeListToMap(numbers));
+        this.lottoNos = numbers;
         this.rank = rank;
     }
 
-    public Lotto(Rank rank) {
+    public Attempt(Rank rank) {
         this.rank = rank;
     }
 
-    public Lotto(List<LottoNo> numbers) {
+    public Attempt(List<LottoNo> numbers) {
         validateLottoNos(numbers);
-        this.lottoNos =changeListToMap(numbers);
+        this.lottoNos = numbers;
     }
 
-    public Lotto(NumberGenerator numberGenerator) {
-        Map<Integer, LottoNo> integerLottoNoMap = generateAttemptNumbers(numberGenerator);
-        this.lottoNos = integerLottoNoMap;
+    public Attempt(NumberGenerator numberGenerator) {
+        this.lottoNos = generateAttemptNumbers(numberGenerator);
     }
 
-    public Map<Integer, LottoNo> getLottoNos() {
+    public List<LottoNo> getLottoNos() {
         return lottoNos;
     }
 
@@ -40,7 +37,7 @@ public class Lotto {
         return rank;
     }
 
-    private Map<Integer, LottoNo> generateAttemptNumbers(NumberGenerator numberGenerator) {
+    private List<LottoNo> generateAttemptNumbers(NumberGenerator numberGenerator) {
         return numberGenerator.getRandomNumber();
     }
 

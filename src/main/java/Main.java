@@ -21,7 +21,7 @@ public class Main {
 
         printLottoAmount(manualPurchaseAmount, lotto.calculateAutoPurchaseAmount());
 
-        List<Lotto> lottoNumbers = lotto.getLottoNumbers();
+        List<Attempt> lottoNumbers = lotto.getLottoNumbers();
         printLottoNumber(lottoNumbers);
 
         List<LottoNo> winnerNumbers = printLastWeekWinNumber();

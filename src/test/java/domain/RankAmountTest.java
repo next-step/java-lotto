@@ -3,6 +3,7 @@ package domain;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,16 +15,16 @@ public class RankAmountTest {
     @Test
     public void 각_랭크의_갯수를_계산한다() {
 
-        List<Lotto> attempts = Arrays.asList(
-                new Lotto(FIRST),
-                new Lotto(SECOND),
-                new Lotto(SECOND),
-                new Lotto(THIRD),
-                new Lotto(THIRD),
-                new Lotto(THIRD),
-                new Lotto(FOURTH),
-                new Lotto(FOURTH),
-                new Lotto(FOURTH)
+        List<Attempt> attempts = Arrays.asList(
+                new Attempt(FIRST),
+                new Attempt(SECOND),
+                new Attempt(SECOND),
+                new Attempt(THIRD),
+                new Attempt(THIRD),
+                new Attempt(THIRD),
+                new Attempt(FOURTH),
+                new Attempt(FOURTH),
+                new Attempt(FOURTH)
         );
 
         RankAmount rankAmount = new RankAmount(attempts);
