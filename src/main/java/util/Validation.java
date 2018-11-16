@@ -6,7 +6,7 @@ import domain.Money;
 
 import java.util.List;
 
-import static domain.Attempt.isExistDuplicateNumber;
+import static domain.Lotto.isExistDuplicateNumber;
 import static domain.LottoAmount.isAmountPositive;
 import static domain.LottoNo.MAX_NUMBER;
 import static domain.LottoNo.MIN_NUMBER;

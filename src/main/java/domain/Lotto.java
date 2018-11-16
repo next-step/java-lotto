@@ -5,27 +5,27 @@ import java.util.List;
 import static domain.Rank.findRankBy;
 import static util.Validation.validateLottoNos;
 
-public class Attempt {
+public class Lotto {
 
     private List<LottoNo> lottoNos;
     private Rank rank;
 
-    public Attempt(List<LottoNo> numbers, Rank rank) {
+    public Lotto(List<LottoNo> numbers, Rank rank) {
         validateLottoNos(numbers);
         this.lottoNos = numbers;
         this.rank = rank;
     }
 
-    public Attempt(Rank rank) {
+    public Lotto(Rank rank) {
         this.rank = rank;
     }
 
-    public Attempt(List<LottoNo> numbers) {
+    public Lotto(List<LottoNo> numbers) {
         validateLottoNos(numbers);
         this.lottoNos = numbers;
     }
 
-    public Attempt(NumberGenerator numberGenerator) {
+    public Lotto(NumberGenerator numberGenerator) {
         this.lottoNos = generateAttemptNumbers(numberGenerator);
     }
 

@@ -1,6 +1,6 @@
 package view;
 
-import domain.Attempt;
+import domain.Lotto;
 import domain.LottoAmount;
 import domain.LottoNo;
 
@@ -45,8 +45,8 @@ public class InputView {
         System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualPurchaseAmount.getAmount(), autoPurchaseAmount.getAmount()));
     }
 
-    public static void printLottoNumber(List<Attempt> lottoNumbers) {
-        for (Attempt lottoNumber : lottoNumbers) {
+    public static void printLottoNumber(List<Lotto> lottoNumbers) {
+        for (Lotto lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.getLottoNos().stream()
                                     .map(LottoNo::getNumber)
                                     .collect(Collectors.toList()));
