@@ -19,20 +19,10 @@ public class LottoSet {
         return new LottoSet(lottos);
     }
 
-    public static LottoSet create(int count) {
-        return new LottoSet(createByAutomatic(count));
-    }
-
-    public static LottoSet create(int count, List<Lotto> lottos) {
-        return new LottoSet(merge(createByAutomatic(count), lottos));
-    }
-
-    private static List<Lotto> createByAutomatic(int count) {
+    public static LottoSet generate(List<LottoGenerator> generators) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.create());
-        }
-        return lottos;
+        generators.forEach(generator -> merge(lottos, generator.create()));
+        return new LottoSet(lottos);
     }
 
     public int sizeOfAutomatic() {

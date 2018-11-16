@@ -23,13 +23,6 @@ public class LottoSetTest {
     }
 
     @Test
-    public void 로또셋을_갯수만큼_생성할수있다() {
-        LottoSet lottoSet = LottoSet.create(10);
-        assertThat(lottoSet).isNotNull();
-        assertThat(lottoSet.sizeOfAutomatic()).isEqualTo(10);
-    }
-
-    @Test
     public void 로또목록으로_로또셋을_생성할수있다() {
         LottoSet lottoSet = LottoSet.create(lottos);
         assertThat(lottoSet).isNotNull();
