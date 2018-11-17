@@ -1,7 +1,11 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.lang.Math.toIntExact;
+import static lotto.utils.LottoCollectionUtils.merge;
 
 public class LottoSet {
 
@@ -15,24 +19,29 @@ public class LottoSet {
         return new LottoSet(lottos);
     }
 
-    public static LottoSet create(int count) {
+    public static LottoSet generate(List<LottoGenerator> generators) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.create());
-        }
+        generators.forEach(generator -> merge(lottos, generator.create()));
         return new LottoSet(lottos);
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
-    public int numberOfMatches(List<Integer> target, int count) {
-        return Math.toIntExact(this.lottos.stream()
-                .filter(lotto -> lotto.hasMatches(target, count))
+    public int sizeOfAutomatic() {
+        return toIntExact(this.lottos.stream()
+                .filter(Lotto::isAutomatic)
                 .count());
     }
 
+    public int sizeOfManual() {
+        return toIntExact(this.lottos.stream()
+                .filter(Lotto::isManual)
+                .count());
+    }
+
+    public int numberOfMatches(List<LottoNo> winningNumbers, int count) {
+        return toIntExact(this.lottos.stream()
+                .filter(lotto -> lotto.hasMatches(winningNumbers, count))
+                .count());
+    }
 
     @Override
     public String toString() {

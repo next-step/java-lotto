@@ -31,10 +31,4 @@ public class LottoResultSetTest {
         // 5개 일치, 보너스 볼 일치(30000000원) * 1개
         assertThat(lottoResultSet.reward()).isEqualTo(30_005_000);
     }
-
-    @Test
-    public void 수익률을_알수있다() {
-        // 5개 일치, 보너스 볼 일치(30000000원) * 1개
-        assertThat(lottoResultSet.rateReturn(30_010_000)).isLessThan(BigDecimal.ONE);
-    }
 }

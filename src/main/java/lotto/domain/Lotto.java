@@ -1,37 +1,55 @@
 package lotto.domain;
 
-import lotto.utils.LottoNumberGenerator;
+import lotto.utils.LottoNoGenerator;
 
 import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private boolean isAutomatic;
+    private List<LottoNo> numbers;
 
-    private Lotto(List<Integer> numbers) {
+    private Lotto(List<LottoNo> numbers, boolean isAutomatic) {
         this.numbers = numbers;
+        this.isAutomatic = isAutomatic;
     }
 
     public static Lotto create() {
-        return new Lotto(LottoNumberGenerator.generate());
+        return new Lotto(LottoNoGenerator.generate(), true);
     }
 
-    public static Lotto create(List<Integer> numbers) {
-        return new Lotto(numbers);
+    public static Lotto create(List<LottoNo> numbers) {
+        return new Lotto(numbers, true);
     }
 
-    public boolean hasMatches(List<Integer> target, int count) {
-        return count == this.numberOfMatches(target);
+    public static Lotto create(List<LottoNo> numbers, boolean isAutomatic) {
+        return new Lotto(numbers, isAutomatic);
     }
 
-    public int numberOfMatches(List<Integer> target) {
-        return Math.toIntExact(target.stream()
+    public boolean hasMatches(List<LottoNo> winningNumbers, int count) {
+        return count == this.numberOfMatches(winningNumbers);
+    }
+
+    public int numberOfMatches(List<LottoNo> winningNumbers) {
+        return Math.toIntExact(winningNumbers.stream()
                 .filter(this::contains)
                 .count());
     }
 
-    private boolean contains(int number) {
-        return this.numbers.contains(number);
+    private boolean contains(LottoNo lottoNo) {
+        return this.numbers.contains(lottoNo);
+    }
+
+    public boolean isAutomatic() {
+        return isAutomatic;
+    }
+
+    public boolean isManual() {
+        return !isAutomatic;
+    }
+
+    public List<LottoNo> getNumbers() {
+        return numbers;
     }
 
     @Override
