@@ -18,6 +18,10 @@ public class WinningLotto {
         return new WinningLotto(new HashSet<>(numbers), bonusNumber);
     }
 
+    public Rank getRank(Lotto userLotto) {
+        return Rank.valueOf(userLotto.getMatchCount(numbers), userLotto.isContain(bonusNumber));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

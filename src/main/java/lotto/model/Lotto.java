@@ -12,8 +12,12 @@ public class Lotto {
 
     public int getMatchCount(Set<Integer> targetNumbers) {
         return (int) targetNumbers.stream()
-                .filter(targetNumber -> this.numbers.contains(targetNumber))
+                .filter(this::isContain)
                 .count();
+    }
+
+    public boolean isContain(int number) {
+        return numbers.contains(number);
     }
 
     @Override
