@@ -37,7 +37,7 @@ public class LottoSystem {
             }
 
             sortLottoNumbers(lottoNumber);
-            lottos.add(new Lotto(lottoNumber));
+            lottos.add(Lotto.from(lottoNumber));
         }
 
         return lottos;

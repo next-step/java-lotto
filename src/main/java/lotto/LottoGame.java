@@ -16,12 +16,15 @@ public class LottoGame {
         ResultView.showLottos(lottos);
         ResultView.moveLine();
 
-        WinningLotto winningLotto = new WinningLotto(lottos);
-        winningLotto.winNCheckNumber(InputView.inputPickNumbers());
-        ResultView.moveLine();
+        WinningLotto winningLotto = new WinningLotto(InputView.inputWinningLotto(), InputView.inputWinningBonus());
+        LottoResult result = new LottoResult();
 
-        ResultView.showStatistics(Rank.makeWinResult(), Rank.makeWinPrice(),
-                Profit.profitRate(Profit.totalPrice(Rank.makeWinResult(), Rank.makeWinPrice()), lottoCost));
+        for(Lotto lotto : lottos) {
+            result.setRankingStatus(winningLotto.getRankByMatchingLotto(lotto));
+        }
+
+        ResultView.moveLine();
+        ResultView.showStatistics(result, lottoCost);
     }
 
 }
