@@ -26,12 +26,6 @@ public class PrizeStatisticsServiceTest {
     }
 
     @Test
-    public void 당첨번호를_기준으로_구매한_로또_번호_일치_개수() {
-        assertThat(0).isEqualTo(prizeStatisticsService.getMatchCount(0));
-        assertThat(1).isEqualTo(prizeStatisticsService.getMatchCount(3));
-    }
-
-    @Test
     public void 수익률() {
         assertThat(0.6).isEqualTo(prizeStatisticsService.getReturnsOfInvestment(3000));
     }
