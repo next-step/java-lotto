@@ -34,7 +34,7 @@ public class LottoGameTest {
     public void 로또번호의길이가6인_로또번호리스트_구매갯수만큼생성() {
         List<Lotto> lottos = lottoSystem.makeLottoList(lottoSystem.lottoNumbersSetting(), lottoSystem.calcLottoCount(14000));
         assertThat(lottos.size()).isEqualTo(lottoSystem.calcLottoCount(14000));
-        assertThat(lottos.get(0).getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lottos.get(0).size()).isEqualTo(6);
     }
 
     @Test
@@ -49,16 +49,9 @@ public class LottoGameTest {
 
     @Test
     public void 당첨번호포함_갯수확인() {
-        Integer[] test = {3, 13, 15, 21, 28, 41};
-        Lotto lotto = new Lotto(Arrays.asList(test));
-        Integer[] test2 = {3, 13, 17, 18, 33, 34};
-        List<Integer> pickLottoNumber = Arrays.asList(test2);
-
-        int sum = 0;
-        for(int number : pickLottoNumber) {
-            sum += WinningLotto.containsPerOneLotto(lotto, number);
-        }
-        assertThat(sum).isEqualTo(2);
+        Lotto lotto = Lotto.from(Arrays.asList(3, 13, 15, 21, 28, 41));
+        WinningLotto winningLotto = new WinningLotto(Lotto.from(Arrays.asList(3, 13, 17, 18, 33, 34)), 7);
+        assertThat(winningLotto.matchLottoCount(lotto)).isEqualTo(2);
     }
 
     @Test

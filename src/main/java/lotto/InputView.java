@@ -14,13 +14,19 @@ public class InputView {
         return sc.nextInt();
     }
 
-    static List<Integer> inputPickNumbers() {
+    static Lotto inputWinningLotto() {
         List<Integer> pickNumbers = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         StringTokenizer token = new StringTokenizer(sc.next(), ", ");
 
-        return split(pickNumbers, token);
+        return Lotto.from(split(pickNumbers, token));
+    }
+
+    static int inputWinningBonus() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return sc.nextInt();
     }
 
     private static List<Integer> split(List<Integer> pickNumbers, StringTokenizer token) {

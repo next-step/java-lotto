@@ -1,37 +1,52 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
-public class Rank {
-    private static final int WIN_3 = 3;
-    private static final int WIN_4 = 4;
-    private static final int WIN_5 = 5;
-    private static final int WIN_6 = 6;
-    private static final Integer[] winPrice = {5_000, 50_000, 1_500_000, 2_000_000_000};
-    private static Integer[] winResult = {0, 0, 0, 0};   // 3개, 4개, 5개, 6개 일치
+public enum Rank {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    MISS(0, 0);
 
-    static void doWinResultProcess(int cnt) {
-        if(cnt == WIN_3) {
-            winResult[0]++;
-        }
-        if(cnt == WIN_4) {
-            winResult[1]++;
-        }
-        if(cnt == WIN_5) {
-            winResult[2]++;
-        }
-        if(cnt== WIN_6) {
-            winResult[3]++;
-        }
+    private static final int MIN_MATCH_COUNT = 3;
+    private int countOfMatch;
+    private int winningMoney;
+
+    private Rank(int countOfMatch, int winningMoney) {
+        this.countOfMatch = countOfMatch;
+        this.winningMoney = winningMoney;
     }
 
-    static List<Integer> makeWinResult() {
-        return Arrays.asList(winResult);
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
-    static List<Integer> makeWinPrice() {
-        return Arrays.asList(winPrice);
+    public int getWinningMoney() {
+        return winningMoney;
+    }
+
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        //일치하는 수를 로또 등수로 변경. enum 값 목록은 Rank[] ranks = values(); 와 같이 가져올 수 있다.
+        if(countOfMatch < MIN_MATCH_COUNT) return MISS;
+        if(SECOND.match(countOfMatch)) {
+            return matchBonus ? SECOND : THIRD;
+        }
+        return Rank.valueOf(countOfMatch);
+    }
+
+    public static Rank valueOf(int countOfMatch) {
+        for(Rank rank : values()) {
+            if(rank.match(countOfMatch)) {
+                return rank;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    private boolean match(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
     }
 
 }

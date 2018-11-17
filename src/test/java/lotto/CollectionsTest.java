@@ -3,6 +3,7 @@ package lotto;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,10 +26,7 @@ public class CollectionsTest {
 
     @Test
     public void Collections_Sort_테스트() {
-        List<Integer> nums = new ArrayList<>();
-        nums.add(5);
-        nums.add(2);
-        nums.add(3);
+        List<Integer> nums = Arrays.asList(5, 2, 3);
         Collections.sort(nums);
         assertThat(nums.get(0)).isEqualTo(2);
         Collections.reverse(nums);
@@ -37,11 +35,9 @@ public class CollectionsTest {
 
     @Test
     public void Collections_Contains_테스트() {
-        List<Integer> nums = new ArrayList<>();
-        nums.add(5);
-        nums.add(2);
-        nums.add(3);
+        List<Integer> nums = Arrays.asList(5, 2, 3);
         assertThat(nums.contains(2)).isEqualTo(true);
     }
+
 
 }
