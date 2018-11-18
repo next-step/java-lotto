@@ -5,14 +5,17 @@ import java.util.List;
 public class LottoGame {
 
     public static void main(String[] args) {
+        List<Lotto> lottos;
         LottoSystem lottoSystem = new LottoSystem();
 
         int lottoCost = InputView.inputCost();
         int lottoCount = lottoSystem.calcLottoCount(lottoCost);
+        int manualLottoCount = InputView.inputManualLottoCount();
 
-        List<Lotto> lottos = lottoSystem.makeLottoList(lottoSystem.lottoNumbersSetting(), lottoCount);
+        lottos = lottoSystem.generateAllLottos(InputView.inputManualLottos(manualLottoCount), (lottoCount - manualLottoCount));
 
-        ResultView.showLottoCount(lottoCount);
+        ResultView.moveLine();
+        ResultView.showLottoCount(lottoCount, manualLottoCount);
         ResultView.showLottos(lottos);
         ResultView.moveLine();
 

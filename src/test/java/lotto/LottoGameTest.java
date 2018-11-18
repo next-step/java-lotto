@@ -32,7 +32,7 @@ public class LottoGameTest {
 
     @Test
     public void 로또번호의길이가6인_로또번호리스트_구매갯수만큼생성() {
-        List<Lotto> lottos = lottoSystem.makeLottoList(lottoSystem.lottoNumbersSetting(), lottoSystem.calcLottoCount(14000));
+        List<Lotto> lottos = lottoSystem.generateAutoLottos(lottoSystem.lottoNumbersSetting(), lottoSystem.calcLottoCount(14000));
         assertThat(lottos.size()).isEqualTo(lottoSystem.calcLottoCount(14000));
         assertThat(lottos.get(0).size()).isEqualTo(6);
     }

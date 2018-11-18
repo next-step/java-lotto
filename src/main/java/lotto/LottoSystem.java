@@ -18,14 +18,15 @@ public class LottoSystem {
 
     static List<Integer> lottoNumbersSetting() {
         List<Integer> numbers = new ArrayList<>();
-        for(int i = 0; i < LOTTO_NUMBER_TOTAL_COUNT; i++){
-            numbers.add(i + 1);
+        for(int i = 1; i <= LOTTO_NUMBER_TOTAL_COUNT; i++){
+            numbers.add(i);
         }
 
         return numbers;
     }
 
-    List<Lotto> makeLottoList(List<Integer> numbers, int lottoCount) {
+    void generateAutoLottos(int lottoCount) {
+        List<Integer> numbers = lottoNumbersSetting();
         List<Integer> lottoNumber;
 
         for(int i = 0; i < lottoCount; i++) {
@@ -40,6 +41,17 @@ public class LottoSystem {
             lottos.add(Lotto.from(lottoNumber));
         }
 
+    }
+
+    void generateManualLottos(String[] values) {
+        for(String v : values) {
+            lottos.add(Lotto.fromComma(v));
+        }
+    }
+
+    List<Lotto> generateAllLottos(String[] values, int autoLottoCount) {
+        generateManualLottos(values);
+        generateAutoLottos(autoLottoCount);
         return lottos;
     }
 
