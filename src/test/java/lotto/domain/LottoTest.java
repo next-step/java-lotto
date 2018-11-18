@@ -32,7 +32,7 @@ public class LottoTest {
 
     @Test
     public void 일치하는_로또숫자가_존재하는지_알수있다() {
-        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1, 10, 15, 41, 42, 43));
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(1, 10, 15, 41, 42, 43));
 
         Lotto lotto = Lotto.create(numbers);
         assertThat(lotto.hasMatches(winningLotto.getNumbers(), 3)).isTrue();
@@ -40,7 +40,7 @@ public class LottoTest {
 
     @Test
     public void 일치하는_로또숫자_갯수를_알수있다() {
-        WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1, 10, 15, 41, 42, 43));
+        WinningLotto winningLotto = WinningLotto.create(Arrays.asList(1, 10, 15, 41, 42, 43));
 
         Lotto lotto = Lotto.create(numbers);
         assertThat(lotto.numberOfMatches(winningLotto.getNumbers())).isEqualTo(3);

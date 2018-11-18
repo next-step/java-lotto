@@ -6,7 +6,7 @@ import lotto.ui.ResultView;
 
 import java.util.List;
 
-public class Main {
+public class ConsoleMain {
 
     public static void main(String [] args) {
         LottoWallet lottoWallet = InputView.inputMoneyAndManualNumbers();
@@ -23,6 +23,6 @@ public class Main {
         LottoResultSet lottoResultSet = lottoMachine.createLottoResultSet();
 
         ResultView.printLottoResultSet(lottoResultSet);
-        ResultView.printRateReturn(lottoWallet.getMoney(), lottoResultSet.reward());
+        ResultView.printRateReturn(lottoWallet.rateReturn(lottoResultSet.reward()));
     }
 }

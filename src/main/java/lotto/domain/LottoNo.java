@@ -19,7 +19,7 @@ public class LottoNo {
     }
 
     public static LottoNo create(String number) {
-        return new LottoNo(Integer.parseInt(number));
+        return new LottoNo(Integer.parseInt(number.trim()));
     }
 
     @Override
