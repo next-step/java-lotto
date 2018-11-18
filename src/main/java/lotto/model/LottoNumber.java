@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class LottoNumber {
     private static final Map<Integer, LottoNumber> definedNumbers = new HashMap<>();
     static {
-        IntStream.range(LottoConstants.MIN_NUMBER, LottoConstants.MAX_NUMBER)
+        IntStream.range(LottoConstants.MIN_NUMBER, LottoConstants.MAX_NUMBER + 1)
             .forEach(rangeNumber -> definedNumbers.put(rangeNumber, new LottoNumber(rangeNumber)));
     }
 
@@ -42,8 +42,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return "LottoNumber{" +
-                "number=" + number +
-                '}';
+        return String.valueOf(number);
     }
 }

@@ -35,4 +35,14 @@ public class LottoNumberTest {
     public void 인스턴스_재사용() {
         assertThat(LottoNumber.from(10) == LottoNumber.from(10)).isTrue();
     }
+
+    @Test
+    public void 값_1() {
+        assertThat(LottoNumber.from(1).toString()).isEqualTo("1");
+    }
+
+    @Test
+    public void 값_45() {
+        assertThat(LottoNumber.from(45).toString()).isEqualTo("45");
+    }
 }
