@@ -1,5 +1,8 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -30,17 +33,25 @@ public enum Rank {
             return Rank.MISS;
         }
 
-        if (countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus) {
-            return Rank.SECOND;
-        }
+        Rank matchRank = Arrays.asList(values()).stream()
+            .sorted(Comparator.reverseOrder())
+            .filter(rank -> rank.isMatchCount(countOfMatch))
+            .map(rank -> getPrecisionRank(rank, matchBonus))
+            .findFirst()
+            .get();
 
-        Rank result = Rank.MISS;
-        for (Rank rank : values()) {
-            if (rank.getCountOfMatch() == countOfMatch) {
-                result = rank;
-                break;
-            }
-        }
-        return result;
+        return matchRank;
+    }
+
+    public int calculatePrize(int count) {
+        return this.winningMoney * count;
+    }
+
+    private boolean isMatchCount(int countOfMatch) {
+        return this.countOfMatch == countOfMatch;
+    }
+
+    private static Rank getPrecisionRank(Rank rank, boolean matchBonus) {
+        return rank == Rank.THIRD && matchBonus ? Rank.SECOND : rank;
     }
 }

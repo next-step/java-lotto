@@ -38,7 +38,7 @@ public class Statistics {
 
     private int getTotalPrizePrice(Map<Rank, Integer> countOfRank) {
         return countOfRank.entrySet().stream()
-                .mapToInt(mapper -> mapper.getKey().getWinningMoney() * mapper.getValue())
+                .mapToInt(mapper -> mapper.getKey().calculatePrize(mapper.getValue()))
                 .sum();
     }
 
