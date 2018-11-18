@@ -16,6 +16,10 @@ public class Money {
         return new Money(amount);
     }
 
+    public static Money create(String amount) {
+        return new Money(Integer.parseInt(amount));
+    }
+
     public BigDecimal rateReturn(int reward) {
         BigDecimal amountMoney = BigDecimal.valueOf(amount);
         BigDecimal rewardMoney = BigDecimal.valueOf(reward);

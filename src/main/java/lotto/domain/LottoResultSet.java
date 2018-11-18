@@ -21,6 +21,10 @@ public class LottoResultSet {
                 .sum();
     }
 
+    public List<LottoResult> getLottoResults() {
+        return lottoResults;
+    }
+
     @Override
     public String toString() {
         return lottoResults.stream()

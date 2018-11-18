@@ -20,9 +20,11 @@ public class LottoSet {
     }
 
     public static LottoSet generate(List<LottoGenerator> generators) {
-        List<Lotto> lottos = new ArrayList<>();
-        generators.forEach(generator -> merge(lottos, generator.create()));
-        return new LottoSet(lottos);
+        List<Lotto> result = new ArrayList<>();
+        for (LottoGenerator generator : generators) {
+            result = merge(result, generator.create());
+        }
+        return new LottoSet(result);
     }
 
     public int sizeOfAutomatic() {
@@ -41,6 +43,10 @@ public class LottoSet {
         return toIntExact(this.lottos.stream()
                 .filter(lotto -> lotto.hasMatches(winningNumbers, count))
                 .count());
+    }
+
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 
     @Override

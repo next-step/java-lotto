@@ -3,7 +3,10 @@ package lotto.domain;
 import lotto.utils.LottoCollectionUtils;
 import lotto.utils.LottoNoGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static lotto.utils.LottoCollectionUtils.convert;
 
 public class WinningLotto {
 
@@ -19,8 +22,16 @@ public class WinningLotto {
         return new WinningLotto(Lotto.create(numbers), bonusNumber);
     }
 
-    public static WinningLotto of(List<Integer> numbers) {
+    public static WinningLotto create(List<Integer> numbers) {
         return new WinningLotto(Lotto.create(LottoNoGenerator.generate(numbers)), null);
+    }
+
+    public static WinningLotto create(String winningNumbers, String bonusNumber) {
+        List<LottoNo> lottoNumbers = new ArrayList<>();
+        for (String number: winningNumbers.split(", ")) {
+            lottoNumbers.add(LottoNo.create(number));
+        }
+        return new WinningLotto(Lotto.create(lottoNumbers), LottoNo.create(bonusNumber));
     }
 
     public List<LottoNo> getNumbers(){
