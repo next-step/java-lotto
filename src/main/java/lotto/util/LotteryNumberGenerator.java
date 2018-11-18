@@ -1,18 +1,18 @@
 package lotto.util;
 
+import lotto.LottoConstants;
+
 import java.util.*;
 
 public class LotteryNumberGenerator {
-    private static final int MAX_NUMBER = 45;
-    private static final int QUANTITY = 6;
 
-    public static Set<Integer> generate() {
-        return new HashSet<>(sort(pick(shuffle(getNumbers()))));
+    public static List<Integer> generate() {
+        return sort(pick(shuffle(getNumbers())));
     }
 
     private static List<Integer> getNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= MAX_NUMBER; i++) {
+        for (int i = 1; i <= LottoConstants.MAX_NUMBER; i++) {
             numbers.add(i);
         }
         return numbers;
@@ -24,7 +24,7 @@ public class LotteryNumberGenerator {
     }
 
     private static List<Integer> pick(List<Integer> numbers) {
-        return numbers.subList(0, QUANTITY);
+        return numbers.subList(0, LottoConstants.QUANTITY);
     }
 
     private static List<Integer> sort(List<Integer> numbers) {

@@ -1,25 +1,23 @@
 package lotto.model;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class WinningLotto {
-    private Set<Integer> numbers;
-    private int bonusNumber;
+    private Lotto lotto;
+    private LottoNumber bonusNumber;
 
-    private WinningLotto(Set<Integer> numbers, int bonusNumber) {
-        this.numbers = numbers;
-        this.bonusNumber = bonusNumber;
+    private WinningLotto(List<Integer> numbers, int bonusNumber) {
+        this.lotto = Lotto.from(numbers);
+        this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
     public static WinningLotto from(List<Integer> numbers, int bonusNumber) {
-        return new WinningLotto(new HashSet<>(numbers), bonusNumber);
+        return new WinningLotto(numbers, bonusNumber);
     }
 
     public Rank getRank(Lotto userLotto) {
-        return Rank.valueOf(userLotto.getMatchCount(numbers), userLotto.isContain(bonusNumber));
+        return Rank.valueOf(userLotto.getMatchCount(lotto), userLotto.isContain(bonusNumber));
     }
 
     @Override
@@ -27,12 +25,12 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonusNumber == that.bonusNumber &&
-                Objects.equals(numbers, that.numbers);
+        return Objects.equals(lotto, that.lotto) &&
+                Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers, bonusNumber);
+        return Objects.hash(lotto, bonusNumber);
     }
 }

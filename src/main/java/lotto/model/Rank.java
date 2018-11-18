@@ -30,7 +30,7 @@ public enum Rank {
             return Rank.MISS;
         }
 
-        if (countOfMatch == 5 && matchBonus) {
+        if (countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus) {
             return Rank.SECOND;
         }
 
@@ -42,9 +42,5 @@ public enum Rank {
             }
         }
         return result;
-    }
-
-    public static int getWinningMoneyByRank(Rank rank) {
-        return rank.getWinningMoney();
     }
 }
