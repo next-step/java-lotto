@@ -8,6 +8,10 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     private WinningLotto(List<Integer> numbers, int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
+
         this.lotto = Lotto.from(numbers);
         this.bonusNumber = LottoNumber.from(bonusNumber);
     }

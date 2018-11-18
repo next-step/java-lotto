@@ -37,4 +37,9 @@ public class WinningLottoTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 10, 20, 30));
         assertThat(winningLotto.getRank(lotto)).isEqualTo(Rank.FIFTH);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 당첨번호와_보너스번호_중복() {
+        WinningLotto.from(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+    }
 }
