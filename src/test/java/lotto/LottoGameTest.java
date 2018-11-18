@@ -7,15 +7,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SuppressWarnings("NonAsciiCharacters")
 public class LottoGameTest {
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 기본금액이_0원인_상태에서_구입금액을_10000원으로_했을떄_IllegalArgumentException_예외가_발생하면_정상() {
+        new LottoGame(10000, 0);
+    }
+
     @Test
     public void 기본금액이_1000원인_상태에서_구입금액을_0원으로_했을떄_로또가_발급되지_않으면_정상() {
         final LottoGame lottoGame = new LottoGame(0, 1000);
         assertThat(lottoGame.getLottos().size()).isEqualTo(0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void 기본금액이_0원인_상태에서_구입금액을_10000원으로_했을떄_IllegalArgumentException_예외가_발생하면_정상() {
-        new LottoGame(10000, 0);
     }
 
     @Test

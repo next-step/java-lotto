@@ -9,14 +9,13 @@ import java.util.List;
 public class LottoGame {
 
     private final static int DEFAULT_PRICE = 1000;
-    private final static Lottos MANUAL_PURCHASE_LOTTOS_EMPTY = new Lottos();
 
     private final int amount;
     private final int price;
     private final Lottos lottos;
 
-    public LottoGame(final int amount) {
-        this(amount, DEFAULT_PRICE, MANUAL_PURCHASE_LOTTOS_EMPTY);
+    public LottoGame(final int amount, final int price) {
+        this(amount, price, new Lottos());
     }
 
     public LottoGame(final int amount, final Lottos manualPurchaseLottos) {
