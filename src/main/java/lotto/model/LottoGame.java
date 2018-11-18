@@ -16,7 +16,7 @@ public class LottoGame {
 
         this.lottos = new ArrayList<>();
         for(int i= 0; i< lottoTicketCount; i++) {
-            Lotto lotto = new Lotto(LottoNumbers.getAutoNumbers());
+            Lotto lotto = Lotto.from(LottoNumbers.getAutoNumbers());
             this.lottos.add(lotto);
         }
 
@@ -24,7 +24,7 @@ public class LottoGame {
     }
 
     public LottoGameResult getReword(String stringNumber, Integer bonusNumber) {
-        WinningLotto winnerLotto = createWinnerLotto(stringNumber, bonusNumber);
+        WinningLotto winnerLotto = createWinnerLotto(stringNumber, LottoNo.from(bonusNumber));
         LottoGameResult lottoGameResult = new LottoGameResult();
 
         for (Lotto lotto : lottos) {
@@ -33,7 +33,7 @@ public class LottoGame {
         return lottoGameResult;
     }
 
-    private WinningLotto createWinnerLotto(String stringNumber, Integer bonusNumber) {
+    private WinningLotto createWinnerLotto(String stringNumber, LottoNo bonusNumber) {
         Set<Integer> numbers = new HashSet(
             Arrays.asList(stringNumber.replace(" ", "").split(","))
             .stream().map(Integer::parseInt).collect(toList()));

@@ -27,7 +27,6 @@ public class LottoNumbers {
 
     private static Set<Integer> getLottoNumber(List<Integer> lottoNumbers) {
         lottoNumbers = lottoNumbers.subList(0, LOTTO_NUMBER);
-        Collections.sort(lottoNumbers);
 
         return lottoNumbers.stream().collect(toSet());
     }

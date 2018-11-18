@@ -15,9 +15,12 @@ public class LottoTest {
     @Test
     public void 로또_번호_입력() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto = new Lotto(numbers);
+        Set<Integer> numbers1 = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto lotto = Lotto.from(numbers);
+        Lotto lotto1 = Lotto.from(numbers1);
 
-        assertThat(lotto.getNumbers()).isEqualTo(numbers);
+        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto).isEqualTo(lotto1);
     }
 
     @Test
@@ -25,8 +28,8 @@ public class LottoTest {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 20, 21));
 
-        Lotto lotto = new Lotto(numbers);
-        Lotto winningLotto = new Lotto(winnerNumbers);
+        Lotto lotto = Lotto.from(numbers);
+        Lotto winningLotto = Lotto.from(winnerNumbers);
 
         int matchCount = winningLotto.matchCount(lotto);
         assertThat(matchCount).isEqualTo(4);
@@ -35,24 +38,18 @@ public class LottoTest {
     @Test(expected = IllegalArgumentException.class)
     public void 로또_중복_숫자_입력() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 1, 3, 4, 5, 2));
-        new Lotto(numbers);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void 로또_1_45_범위에_벗어난_숫자_입력() {
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 47, 3, 4, 5, 2));
-        new Lotto(numbers);
+        Lotto.from(numbers);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 로또_숫자가_6개_미만_입력() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
-        new Lotto(numbers);
+        Lotto.from(numbers);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 로또_숫자가_6개_초과_입력() {
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        new Lotto(numbers);
+        Lotto.from(numbers);
     }
 }

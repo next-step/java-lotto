@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRewordTest {
     @Test
-    public void 로또_번호_매치() throws Exception {
+    public void 로또_번호_매치() {
         LottoReword bonusReword = LottoReword.valueOf(5, true);
         LottoReword fiveMatchReword = LottoReword.valueOf(5, false);
         LottoReword sixMatchReword = LottoReword.valueOf(6, false);
@@ -21,7 +21,7 @@ public class LottoRewordTest {
     }
 
     @Test
-    public void 로또_매치_금액() throws Exception {
+    public void 로또_매치_금액() {
         int reword = LottoReword.THREE_MATCH.computeReward(4);
         assertThat(reword).isEqualTo(20_000);
 
