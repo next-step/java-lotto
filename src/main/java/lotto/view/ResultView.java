@@ -17,8 +17,8 @@ public abstract class ResultView {
     private ResultView() {
     }
 
-    public static void printLottos(final LottoGame lottoGame) {
-        printCountOfPurchases(lottoGame.getCountPurchased());
+    public static void printLottos(final int manualPurchaseLottoNumber, final LottoGame lottoGame) {
+        printCountOfPurchases(manualPurchaseLottoNumber, lottoGame.getCountPurchased());
         printLottos(lottoGame.getLottos());
         newLine();
     }
@@ -51,7 +51,13 @@ public abstract class ResultView {
         sb.append("개\n");
     }
 
-    private static void printCountOfPurchases(final int countPurchased) {
+    private static void printCountOfPurchases(final int manualPurchaseLottoNumber, final int countPurchased) {
+
+        if (manualPurchaseLottoNumber > 0) {
+            System.out.println("수동으로 " + manualPurchaseLottoNumber + "장, 자동으로 " + countPurchased + "개를 구매했습니다.");
+            return;
+        }
+
         System.out.println(countPurchased + COUNT_OF_PURCHASES_SUFFIX);
     }
 
