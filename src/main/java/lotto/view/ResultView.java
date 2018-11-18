@@ -2,9 +2,11 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Rank;
-import lotto.service.PrizeStatisticsService;
+import lotto.model.Statistics;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -16,18 +18,32 @@ public class ResultView {
         }
     }
 
-    public static void printStatisticsOfPrize(PrizeStatisticsService statisticsService) {
+    public static void printCountOfRank(Statistics statistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.println("3개 일치 (" + Rank.valueOf(3, false).getWinningMoney() + "원)- " + Rank.valueOf(3, false).getCountOfMatch() + "개");
-        System.out.println("4개 일치 (" + Rank.valueOf(4, false).getWinningMoney() + "원)- " + Rank.valueOf(4, false).getCountOfMatch() + "개");
-        System.out.println("5개 일치 (" + Rank.valueOf(5, false).getWinningMoney() + "원)- " + Rank.valueOf(5, false).getCountOfMatch() + "개");
-        System.out.println("5개 일치 (" + Rank.valueOf(5, true).getWinningMoney() + "원)- " + Rank.valueOf(5, true).getCountOfMatch() + "개");
-        System.out.println("6개 일치 (" + Rank.valueOf(6, false).getWinningMoney() + "원)- " + Rank.valueOf(6, false).getCountOfMatch() + "개");
+        Map<Rank, Integer> countOfRank = statistics.getCountOfRank();
+        countOfRank.keySet().stream()
+            .sorted(Comparator.reverseOrder())
+            .filter(rank -> rank.getCountOfMatch() != 0)
+            .map(rank -> convertToMatchMessage(rank, countOfRank.get(rank)))
+            .forEach(System.out::println);
     }
 
-    public static void printReturnsOfInvestment(PrizeStatisticsService statisticsService, int money) {
-        System.out.println("총 수익률은 " + statisticsService.getReturnsOfInvestment(money) + "입니다.");
+    public static void printReturnsOfInvestment(Statistics statistics) {
+        double returnsOfInvestment = statistics.getReturnsOfInvestment();
+        System.out.print("총 수익률은 " + returnsOfInvestment + "입니다.");
+
+        if (returnsOfInvestment < 1) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+    }
+
+    private static String convertToMatchMessage(Rank rank, int countOfLotto) {
+        if (rank == Rank.SECOND) {
+            return rank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + rank.getWinningMoney() + "원)- " + countOfLotto + "개";
+        }
+
+        return rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + "원)- " + countOfLotto + "개";
     }
 }

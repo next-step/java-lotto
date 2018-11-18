@@ -43,4 +43,8 @@ public enum Rank {
         }
         return result;
     }
+
+    public static int getWinningMoneyByRank(Rank rank) {
+        return rank.getWinningMoney();
+    }
 }
