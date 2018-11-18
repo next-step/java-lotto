@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -11,10 +8,10 @@ public class Lotto {
     private static final int MAX_NUMBER = 45;
     private static final int MIN_NUMBER = 1;
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private List<Integer> numbers;
+    private Set<Integer> numbers;
 
     private Lotto() {
-        numbers = getRandomNumbers();
+        numbers = new HashSet<>(getRandomNumbers());
     }
 
     private Lotto(String values) {
@@ -27,7 +24,11 @@ public class Lotto {
             throw new IllegalArgumentException("잘못된 로또 번호입니다. (1~45 범위초과)");
         }
 
-        numbers = toInts(lottoNumbers);
+        numbers = new HashSet<>(toInts(lottoNumbers));
+
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("중복값이 있습니다.");
+        }
     }
 
     public static Lotto auto() {

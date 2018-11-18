@@ -26,6 +26,11 @@ public class LottoTest {
         Lotto lotto = Lotto.manual("1, 2, 3, 100, 5, 6");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 로또번호_중복체크() {
+        Lotto lotto = Lotto.manual("1, 2, 3, 3, 5, 6");
+    }
+
     @Test
     public void 로또_2등당첨_확인() {
         Lotto lotto = Lotto.manual("1, 2, 3, 4, 5, 6");
