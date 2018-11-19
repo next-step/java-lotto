@@ -1,5 +1,6 @@
 package view;
 
+import domain.LottoCountManager;
 import domain.Rank;
 import domain.Lotto;
 import domain.LottoResult;
@@ -8,8 +9,6 @@ import java.util.List;
 
 public class ResultView {
     public static void showBoughtLottos(List<Lotto> lottos) {
-        howManyBoughtLotto(lottos.size());
-
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
             sb.append(lotto.toString());
@@ -18,8 +17,11 @@ public class ResultView {
         System.out.println(sb.toString()+"\n");
     }
 
-    private static void howManyBoughtLotto(int sizeOfLotto) {
-        System.out.println(String.format("%d개를 구매했습니다.", sizeOfLotto));
+    public static void howManyBoughtLotto(LottoCountManager lottoCountManager) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                lottoCountManager.manualCount(),
+                lottoCountManager.autoCount())
+        );
     }
 
     public static void showResult(LottoResult lottoResult) {

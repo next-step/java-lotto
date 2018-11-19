@@ -6,23 +6,23 @@ import java.util.List;
 public class LottoGame {
 
     private List<Lotto> lottos;
+    private LottoCountManager lottoCountManager;
 
-    public LottoGame() {
+    public LottoGame(LottoCountManager lottoCountManager) {
         lottos = new ArrayList<>();
+        this.lottoCountManager = lottoCountManager;
     }
 
-    public void buyLotto(int price) {
-        for (int i = 0; i < getSizeOfLotto(price); i++) {
+    public void buyAuto() {
+        for (int i = 0; i < lottoCountManager.autoCount(); i++) {
             lottos.add(Lotto.auto());
         }
     }
 
-    private int getSizeOfLotto(int price) {
-        return price / Lotto.PRICE;
-    }
-
-    public int getLottoCount() {
-        return lottos.size();
+    public void buyManual(List<Lotto> manualLottos) {
+        if (!manualLottos.isEmpty()) {
+            lottos.addAll(manualLottos);
+        }
     }
 
     public List<Lotto> getBoughtLottos() {
