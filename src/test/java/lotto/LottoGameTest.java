@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.Money;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,11 +16,11 @@ public class LottoGameTest {
 
     @Test
     public void buy_구입_금액_0원_수량() {
-        assertThat(0).isEqualTo(lottoGame.buy(0).size());
+        assertThat(lottoGame.buy(Money.from(0)).size()).isEqualTo(0);
     }
 
     @Test
     public void buy_구입_금액에_해당하는_로또_수량() {
-        assertThat(5).isEqualTo(lottoGame.buy(5000).size());
+        assertThat(lottoGame.buy(Money.from(5000)).size()).isEqualTo(5);
     }
 }

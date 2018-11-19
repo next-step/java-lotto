@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
+import lotto.model.Money;
 import lotto.model.Statistics;
 import lotto.model.WinningLotto;
 import lotto.view.InputView;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class LottoGameConsole {
 
     public static void main(String args[]) {
-        int money = InputView.inputInteger(QuestionType.MONEY_FOR_BUY.getQuestion());
+        Money money = Money.from(InputView.inputInteger(QuestionType.MONEY_FOR_BUY.getQuestion()));
         LottoGame lottoGame = new LottoGame();
         List<Lotto> lottos = lottoGame.buy(money);
 
