@@ -4,8 +4,8 @@ import java.util.List;
 
 public class ResultView {
 
-    static void showLottoCount(int lottoCount, int manualLottoCount) {
-        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 "+ (lottoCount - manualLottoCount) + "장을 구매했습니다.");
+    static void showLottoCount(Money money, int manualLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 "+ (money.calcLottoCount() - manualLottoCount) + "장을 구매했습니다.");
     }
 
     static void showLottos(List<Lotto> lottos) {
@@ -18,7 +18,7 @@ public class ResultView {
         System.out.println();
     }
 
-    static void showStatistics(LottoResult result, int lottoCost) {
+    static void showStatistics(LottoResultDefault result, double profitRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -33,6 +33,6 @@ public class ResultView {
 //                System.out.println(rank.getCountOfMatch() +"개 일치 (" + rank.getWinningMoney() + ") - " + result.getRankingCount(rank) + "개");
 //            }
 //        }
-        System.out.println("총 수익률은 " + result.profitRate(lottoCost) + "입니다.");
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 }

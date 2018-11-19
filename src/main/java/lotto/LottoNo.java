@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class LottoNo {
+    private static final int STARTED_NUMBER = 1;
     private static final int LIMITTED_NUMBER = 45;
     private static final HashMap<Integer, LottoNo> lottoNumbers = new HashMap<>();
     static {
@@ -15,7 +16,7 @@ public class LottoNo {
     private final int no;
 
     private LottoNo(int no) {
-        if(no < 1 || no > 45) throw new IllegalArgumentException();
+        if(no < STARTED_NUMBER || no > LIMITTED_NUMBER) throw new IllegalArgumentException();
         this.no = no;
     }
 

@@ -1,21 +1,19 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
     private final int LOTTO_SIZE = 6;
-    private List<LottoNo> lottoNumbers;
+    private Set<LottoNo> lottoNumbers;
 
-    private Lotto(List<LottoNo> lottoNumbers) {
+    private Lotto(Set<LottoNo> lottoNumbers) {
         if(lottoNumbers.size() > LOTTO_SIZE) throw new IllegalArgumentException();
         this.lottoNumbers = lottoNumbers;
     }
 
     /** 정적 팩토리메서드 */
     public static Lotto from(List<Integer> numbers) {
-        List<LottoNo> lotto = new ArrayList<>();
+        Set<LottoNo> lotto = new HashSet<>();
         for(Integer i : numbers) {
             lotto.add(LottoNo.of(i));
         }
@@ -24,7 +22,7 @@ public class Lotto {
 
     public static Lotto fromComma(String value) {
         String[] values = value.split(",");
-        List<LottoNo> lotto = new ArrayList<>();
+        Set<LottoNo> lotto = new HashSet<>();
         for (String v : values) {
             lotto.add(LottoNo.of(Integer.parseInt(v)));
         }
