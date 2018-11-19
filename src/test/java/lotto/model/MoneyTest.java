@@ -25,13 +25,12 @@ public class MoneyTest {
     @Test(expected = IllegalArgumentException.class)
     public void 차감_불가() {
         Money money = Money.from(15000);
-        money.deduct(20000);
+        money.deduct(Money.from(20000));
     }
 
     @Test
     public void 차감() {
         Money money = Money.from(15000);
-        money.deduct(3000);
-        assertThat(money).isEqualTo(Money.from(12000));
+        assertThat(money.deduct(Money.from(3000))).isEqualTo(Money.from(12000));
     }
 }

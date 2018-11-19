@@ -17,4 +17,8 @@ public class LottoGame {
             .mapToObj(i -> Lotto.from(LotteryNumberGenerator.generate()))
             .collect(Collectors.toList());
     }
+
+    public static Money moneyOfCount(int count) {
+        return Money.from(count * LottoConstants.PRICE_PER_ONE);
+    }
 }

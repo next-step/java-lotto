@@ -21,12 +21,8 @@ public class Money {
         return money / criteriaMoney;
     }
 
-    public void deduct(int criteriaMoney) {
-        if (this.money - criteriaMoney < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        this.money -= criteriaMoney;
+    public Money deduct(Money criteriaMoney) {
+        return Money.from(this.money - criteriaMoney.money);
     }
 
     @Override
@@ -41,4 +37,6 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
+
 }
