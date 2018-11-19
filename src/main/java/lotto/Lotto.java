@@ -1,57 +1,62 @@
 package lotto;
 
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-//로또 한줄 구하는 객체
+
 public class Lotto {
-    private static final int LOTTO_MAX_COUNT = 45;
+    private static final int LOTTO_MAX_COUNT = 46;
     private static final int LOTTO_NUMBER = 6;
     private List<Integer> numbers;
-    private List<Integer> lotto;
+    private Set<LottoNo> lotto2;
 
-    public Lotto(){
-        numbers = new ArrayList<>();
-        for(int i = 0; i < LOTTO_MAX_COUNT; i++){
-            numbers.add(i+1);
-        }
-    }
-    public Lotto(Integer[] oneTicket){
-        lotto = Arrays.asList(oneTicket);
+    public Lotto(Set<LottoNo> lotto) {
+        this.lotto2 = lotto;
     }
 
-    public void generateLottoNumber(){
+    public void generateLottoNumber() {
+
         shuffleNumbers();
-        lotto = sortNumbers(pickSixNumbers());
+        lotto2 = changeType(sortNumbers(pickSixNumbers()));
     }
 
-    public List<Integer> pickSixNumbers(){
-        List<Integer> resultNumbers = new ArrayList<>();
-        for(int i = 0; i < LOTTO_NUMBER; i++){
-            resultNumbers.add(numbers.get(i));
+    public Set<LottoNo> changeType(List<Integer> lottoNumber) {
+        Set<LottoNo> lotto = new HashSet<>();
+        for (Integer number : lottoNumber) {
+            lotto.add(LottoNo.of(number));
         }
-        return resultNumbers;
+        return lotto;
     }
 
-    public void shuffleNumbers(){
+    public List<Integer> pickSixNumbers() {
+        return numbers.subList(0, LOTTO_NUMBER);
+    }
+
+    public void shuffleNumbers() {
+        numbers = IntStream.range(1, LOTTO_MAX_COUNT).boxed().collect(Collectors.toList());
         Collections.shuffle(numbers);
     }
 
-    public List<Integer> sortNumbers(List<Integer> numbers){
+    public List<Integer> sortNumbers(List<Integer> numbers) {
+
         Collections.sort(numbers);
         return numbers;
+
     }
 
-    public boolean isContains(int num){
-        return this.lotto.contains(num);
+    public boolean isContains(LottoNo num) {
+        return this.lotto2.contains(num);
     }
 
-    public String makeString(String delimeter){
-        return StringUtils.join(this.lotto, ",");
+    public String toString(String delimeter) {
+        String result = "";
+        for (LottoNo no : this.lotto2) {
+            result += no.toString() + delimeter;
+        }
+        return result.substring(0, result.length() - delimeter.length());
+
     }
 
 }

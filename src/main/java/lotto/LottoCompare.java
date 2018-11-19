@@ -13,7 +13,6 @@ public class LottoCompare {
     public LottoResult match(List<Lotto> lotteries, WinningLotto winNumber){
         LottoResult result = new LottoResult();
 
-
         for(Lotto oneTicket : lotteries){
             result.calculateResult(compareNumber(oneTicket, winNumber));
         }

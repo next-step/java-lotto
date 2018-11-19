@@ -5,28 +5,30 @@ import java.util.List;
 
 public class WinningLotto {
     private static final String DELIMETER = ", ";
-    private List<Integer> winNumber;
-    private int bonusNumber;
+    private List<LottoNo> winNumber;
+    private LottoNo bonusNumber;
 
-    public WinningLotto(String winningString, int bonusNumber){
-        String[] nums = winningString.split(DELIMETER);
+    public WinningLotto(String winningString, int bonusNumber) {
+        String[] nums = null;
+
+        nums = winningString.split(DELIMETER);
 
         this.winNumber = new ArrayList();
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNo.of(bonusNumber);
 
         for (String num : nums) {
-            this.winNumber.add(Integer.parseInt(num));
+            this.winNumber.add(LottoNo.of(num));
         }
     }
 
-    public boolean isExistBonusBall(Lotto lotto){
+    public boolean isExistBonusBall(Lotto lotto) {
         return lotto.isContains(this.bonusNumber);
     }
 
-    public int matchingCount(Lotto lotto){
-        int result=0;
-        for(Integer winNum : this.winNumber){
-            if(lotto.isContains(winNum)){
+    public int matchingCount(Lotto lotto) {
+        int result = 0;
+        for (LottoNo winNum : this.winNumber) {
+            if (lotto.isContains(winNum)) {
                 result++;
             }
 
