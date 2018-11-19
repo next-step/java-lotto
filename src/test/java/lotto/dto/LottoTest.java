@@ -11,7 +11,7 @@ public class LottoTest {
 
     @Test
     public void 로또생성테스트() {
-        Lotto lt = new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive()));
+        Lotto lt = LottoMaker.lottoOf();
         assertThat(lt.getLotto()).hasSize(6);
     }
 
