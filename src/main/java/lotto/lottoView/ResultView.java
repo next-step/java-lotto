@@ -1,8 +1,8 @@
 package lotto.lottoView;
 
 import lotto.Lotto;
-import lotto.LottoInit;
 import lotto.LottoResult;
+import lotto.Money;
 import lotto.Rank;
 
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printTotalCount(LottoInit init) {
-        System.out.println("수동으로 " + init.getManualCount() + "장, 자동으로 " + (init.getTotalCount() - init.getManualCount()) + "개를 구매했습니다.");
+    public static void printTotalCount(int totalCount, int manualCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + (totalCount - manualCount) + "개를 구매했습니다.");
     }
 
     public static void printAllLotteries(List<Lotto> lotteries) {
@@ -38,10 +38,10 @@ public class ResultView {
 
     }
 
-    public static void winRate(LottoResult result, int cost) {
+    public static void winRate(LottoResult result, Money money) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         makeStatistic(result);
-        System.out.println("총 수익률은 " + result.calculateRate(result.getTotalSum(), cost) + "입니다.");
+        System.out.println("총 수익률은 " + money.calculateRate(result.getTotalSum()) + "입니다.");
     }
 }

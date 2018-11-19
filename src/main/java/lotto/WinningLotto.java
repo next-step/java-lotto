@@ -8,16 +8,16 @@ public class WinningLotto {
     private List<LottoNo> winNumber;
     private LottoNo bonusNumber;
 
-    public WinningLotto(String winningString, LottoNo bonusNumber) {
+    public WinningLotto(String winningString, int bonusNumber) {
         String[] nums = null;
 
         nums = winningString.split(DELIMETER);
 
         this.winNumber = new ArrayList();
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNo.of(bonusNumber);
 
         for (String num : nums) {
-            this.winNumber.add(new LottoNo(Integer.parseInt(num)));
+            this.winNumber.add(LottoNo.of(num));
         }
     }
 

@@ -13,20 +13,16 @@ public class LottoResult {
         }
     }
 
-    public int getTotalSum() {
+    public Money getTotalSum() {
         int totalSum = 0;
         for (Rank rank : this.result.keySet()) {
             totalSum += rank.calculateTotalPrize(result.get(rank));
         }
-        return totalSum;
+        return new Money(totalSum);
     }
 
     public void calculateResult(Rank rank) {
         this.result.put(rank, this.result.get(rank) + 1);
-    }
-
-    public float calculateRate(int totalSum, int paidCost) {
-        return totalSum / (float) paidCost;
     }
 
     public int get(Rank rank) {

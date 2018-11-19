@@ -1,65 +1,61 @@
 package lotto;
 
-import lotto.lottoView.InputView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //로또 카운트 만큼 생성하기
 public class Lotteries {
     private static final String DELIMITER = ", ";
     private List<Lotto> lotteries;
     private int lottoTotalNum;
-    private int lottoManualNum;
 
-    public Lotteries(LottoInit init) {
-        this.lottoTotalNum = init.getTotalCount();
-        this.lottoManualNum = init.getManualCount();
+    public Lotteries(int lottoTotalNum) {
+        this.lottoTotalNum = lottoTotalNum;
         this.lotteries = new ArrayList<Lotto>();
     }
 
-    public List<Lotto> buyLotto() {
+    public List<Lotto> buyLotto(String[] manualLotto) {
         //수동으로 입력한 로또번호들을 나눠서 Lotteries에 insert한다.
-        if (this.lottoManualNum > 0) {
-            String[] manualLotto = InputView.inputManualNumbers(this.lottoManualNum);
+
+        if (manualLotto.length > 0) {
             try {
                 insertIntoLotteries(manualLotto);
             } catch (NumberFormatException nfe) {
                 System.out.println(nfe.getMessage());
-                buyLotto();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
         //자동으로 입력할 로또 숫자만큼 받아온다.
-        for (int i = 0; i < this.lottoTotalNum - this.lottoManualNum; i++) {
-            Lotto lotto = new Lotto();
+        for (int i = 0; i < this.lottoTotalNum - manualLotto.length; i++) {
+            Lotto lotto = new Lotto(new HashSet());
             lotto.generateLottoNumber();
             this.lotteries.add(lotto);
         }
         return lotteries;
     }
 
-    public void insertIntoLotteries(String[] manualLotto) throws NumberFormatException, Exception {
+    public void insertIntoLotteries(String[] manualLotto) {
         for (String oneLotto : manualLotto) {
             String[] oneNumbers = oneLotto.split(DELIMITER);
-            this.lotteries.add(new Lotto(convertIntegerArray(oneNumbers)));
+            this.lotteries.add(new Lotto(convertManualLotteries(oneNumbers)));
 
         }
     }
 
-    public LottoNo[] convertIntegerArray(String[] oneNumbers) throws NumberFormatException, Exception {
-        LottoNo[] result = new LottoNo[oneNumbers.length];
-        for (int i = 0; i < oneNumbers.length; i++) {
-            try {
-                result[i] = new LottoNo(Integer.parseInt(oneNumbers[i]));
-            } catch (NumberFormatException nfe) {
-                throw new NumberFormatException("번호 포맷이 잘못 입력되었습니다. 다시 입력 바랍니다.");
-            } catch (Exception e) {
-                throw new Exception("예외가 발생했습니다.", e);
-            }
+    public Set<LottoNo> convertManualLotteries(String[] oneNumbers) {
+        Set<LottoNo> manualLotto = new HashSet<LottoNo>();
+        for (String number : oneNumbers) {
+            LottoNo num = LottoNo.of(number);
+            manualLotto.add(num);
+
         }
-        return result;
+        return manualLotto;
+
     }
 
 }

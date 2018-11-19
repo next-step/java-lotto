@@ -7,6 +7,7 @@ import lotto.exception.IncorrectNumberBoundryException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class InputView {
 
     private static final int MAX_NUMBER = 45;
@@ -21,7 +22,6 @@ public class InputView {
             System.out.println("정확한 금액을 입력해 주세요.(1,000원 단위)");
             cost = sc.nextInt();
         }
-        System.out.println(cost);
         return cost;
     }
 
@@ -30,7 +30,7 @@ public class InputView {
         return (sc.nextLine());
     }
 
-    public static LottoNo inputBonusNumber() {
+    public static int inputBonusNumber() {
         int bonusBall = 0;
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
@@ -46,37 +46,39 @@ public class InputView {
         } catch (Exception e) {
             System.out.println("에러가 발생하였습니다. " + e.getStackTrace());
         }
-        return new LottoNo(bonusBall);
+        return bonusBall;
     }
 
     public static int inputManualCount(int totalCount) {
-        int manualNum = 0;
+        int manualCount = 0;
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
         try {
-            manualNum = sc.nextInt();
+            manualCount = sc.nextInt();
             sc.nextLine();
-            if (manualNum < 0 || manualNum > totalCount) {
+            if (manualCount < 0 || manualCount > totalCount) {
                 throw new IncorrectNumberBoundryException("범위가 잘못 되었습니다.");
             }
         } catch (InputMismatchException ime) {
             System.out.println("정확한 숫자 포맷으로 입력해주세요.");
-            manualNum = sc.nextInt();
+            manualCount = sc.nextInt();
             sc.nextLine(); //개행버퍼 지움
         } catch (IncorrectNumberBoundryException inb) {
             System.out.println(inb.getMessage());
             System.out.println("정확한 범위의 값을 입력해주세요.(0~" + totalCount + ")");
-            manualNum = sc.nextInt();
+            manualCount = sc.nextInt();
             sc.nextLine(); //개행버퍼 지움
         }
-        return manualNum;
+        return manualCount;
     }
 
     public static String[] inputManualNumbers(int manualCount) {
         String[] manualNumbers = new String[manualCount];
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualCount; i++) {
-            manualNumbers[i] = sc.nextLine();
+        if (manualCount > 0) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            for (int i = 0; i < manualCount; i++) {
+                manualNumbers[i] = sc.nextLine();
+            }
         }
         return manualNumbers;
     }
