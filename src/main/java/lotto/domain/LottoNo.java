@@ -3,7 +3,8 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
+
+import static java.util.Optional.of;
 
 public class LottoNo {
 
@@ -35,8 +36,7 @@ public class LottoNo {
     }
 
     private static void validation(final int number) {
-        Optional.of(number)
-                .filter(num -> num >= MIN && num <= MAX)
+        of(number).filter(num -> num >= MIN && num <= MAX)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -57,5 +57,5 @@ public class LottoNo {
     public String toString() {
         return String.valueOf(number);
     }
-    
+
 }
