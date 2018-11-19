@@ -104,6 +104,10 @@ public class Lotto {
         return numbers.contains(number);
     }
 
+    public Set<Integer> getNumbers() {
+        return numbers;
+    }
+
     @Override
     public String toString() {
         return Arrays.toString(numbers.toArray());
