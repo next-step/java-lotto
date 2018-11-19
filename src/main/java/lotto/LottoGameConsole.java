@@ -1,14 +1,14 @@
 package lotto;
 
 import lotto.model.Lotto;
-import lotto.service.PrizeStatisticsService;
-import lotto.util.CollectionUtil;
+import lotto.model.Statistics;
+import lotto.model.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.QuestionType;
 import lotto.view.ResultView;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGameConsole {
 
@@ -19,13 +19,17 @@ public class LottoGameConsole {
 
         ResultView.printBoughtHistory(lottos);
 
-        List<Integer> prizeNumber = CollectionUtil
-                .toIntegers(InputView.inputStrings(QuestionType.LAST_WEEKEND_PRIZE.getQuestion()));
-        PrizeStatisticsService statisticsService = new PrizeStatisticsService();
-        statisticsService.calculate(lottos, new HashSet<>(prizeNumber));
+        List<Integer> winningNumber = toIntegers(InputView.inputStrings(QuestionType.LAST_WEEKEND_PRIZE.getQuestion()));
+        int bonusNumber = InputView.inputInteger(QuestionType.LAST_WEEKEND_BONUS.getQuestion());
+        WinningLotto winningLotto = WinningLotto.from(winningNumber, bonusNumber);
 
-        ResultView.printStatisticsOfPrize(statisticsService);
-        ResultView.printReturnsOfInvestment(statisticsService, money);
+        Statistics statistics = new Statistics(lottos, winningLotto);
+        ResultView.printCountOfRank(statistics);
+        ResultView.printReturnsOfInvestment(statistics);
+    }
+
+    private static List<Integer> toIntegers(List<String> strings) {
+        return strings.stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 
 }

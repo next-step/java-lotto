@@ -9,11 +9,11 @@ public class InputView {
 
     public static int inputInteger(String question) {
         System.out.println(question);
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static List<String> inputStrings(String question) {
         System.out.println(question);
-        return Arrays.asList(scanner.next().trim().split(","));
+        return Arrays.asList(scanner.nextLine().replaceAll("\\s+","").split(","));
     }
 }
