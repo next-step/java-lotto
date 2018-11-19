@@ -46,7 +46,8 @@ public class LottoGame {
         String[] manualLottos = manualLottoNumbers.split("\n");
 
         for(int i = 0; i < manualLottos.length; i++) {
-            lottoNumberGenerate = new ManualLottoNumberGenerate(manualLottos[i].replace(" ", ""));
+            lottoNumberGenerate = new ManualLottoNumberGenerate(
+                    manualLottos[i].replace(" ", "").replace("\r", ""));
 
             Lotto lotto = Lotto.from(lottoNumberGenerate.generate());
             this.lottos.add(lotto);
