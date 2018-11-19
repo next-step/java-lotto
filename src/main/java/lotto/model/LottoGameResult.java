@@ -5,6 +5,7 @@ import lotto.enums.LottoReword;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoGameResult {
     private Map<LottoReword, Integer> results;
@@ -27,12 +28,12 @@ public class LottoGameResult {
         results.put(reword, ++count);
     }
 
-    public float earningsRate(Integer totalPrice) {
-        Integer totalReword = results.entrySet().stream()
-                        .mapToInt(e -> e.getKey().computeReward(e.getValue()))
+    public float earningsRate(Money money) {
+        Long totalReword = results.entrySet().stream()
+                        .mapToLong(e -> e.getKey().computeReward(e.getValue()))
                         .sum();
 
-        return totalReword / Float.valueOf(totalPrice);
+        return money.earningsRate(totalReword);
     }
 
     private Map<LottoReword, Integer> initalizeResult() {
@@ -44,5 +45,18 @@ public class LottoGameResult {
         }
 
         return initResult;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoGameResult that = (LottoGameResult) o;
+        return Objects.equals(results, that.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results);
     }
 }

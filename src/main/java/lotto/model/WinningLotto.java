@@ -6,11 +6,15 @@ public class WinningLotto  {
     private Lotto lotto;
     private LottoNo bonusNumber;
 
-    public WinningLotto(Set<Integer> numbers, LottoNo bonusNumber) {
+    private WinningLotto(Set<Integer> numbers, LottoNo bonusNumber) {
         this.lotto = Lotto.from(numbers);
 
         validation(bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    public static WinningLotto from(Set<Integer> numbers, LottoNo bonusNumber) {
+       return new WinningLotto(numbers, bonusNumber);
     }
 
     public int matchCount(Lotto lotto) {

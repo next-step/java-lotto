@@ -18,7 +18,7 @@ public class WinningLottoTest {
         Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 20, 21));
 
         Lotto lotto = Lotto.from(numbers);
-        WinningLotto winningLotto = new WinningLotto(winnerNumbers, LottoNo.from(7));
+        WinningLotto winningLotto = WinningLotto.from(winnerNumbers, LottoNo.from(7));
 
         int matchCount = winningLotto.matchCount(lotto);
         assertThat(matchCount).isEqualTo(4);
@@ -31,7 +31,7 @@ public class WinningLottoTest {
         Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 20, 21));
 
         Lotto lotto = Lotto.from(numbers);
-        WinningLotto winningLotto = new WinningLotto(winnerNumbers, LottoNo.from(7));
+        WinningLotto winningLotto = WinningLotto.from(winnerNumbers, LottoNo.from(7));
 
         assertThat(winningLotto.isBonusMatch(lotto)).isEqualTo(true);
 
@@ -40,7 +40,7 @@ public class WinningLottoTest {
     @Test(expected = IllegalArgumentException.class)
     public void 로또_보너스_번호_중복_입력() {
         Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 20, 21));
-        new WinningLotto(winnerNumbers, LottoNo.from(1));
+        WinningLotto.from(winnerNumbers, LottoNo.from(1));
     }
 
 }
