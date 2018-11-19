@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static domain.Rank.findRankBy;
 import static util.Validation.validateLottoNos;
@@ -62,5 +63,15 @@ public class Lotto {
                 .map(LottoNo::getNumber)
                 .distinct()
                 .count() != numbers.size();
+    }
+
+    @Override
+    public String toString() {
+        System.out.println("lottoNos");
+        System.out.println(lottoNos);
+        System.out.println("lottoNos");
+        return lottoNos.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
     }
 }

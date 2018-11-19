@@ -16,7 +16,7 @@ public class Main {
         LottoAmount manualPurchaseAmount = LottoAmount.from(getManualPurchaseAmount());
         validatePurchaseAmount(manualPurchaseAmount);
 
-        LottoGame lotto = new LottoGame(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
+        LottoGame lotto = LottoGame.from(calculateAmount(totalPurchaseMoney), manualPurchaseAmount, new RandomNumberGenerator());
         lotto.generateByManual(printManualPurchaseNumber(manualPurchaseAmount));
 
         printLottoAmount(manualPurchaseAmount, lotto.calculateAutoPurchaseAmount());

@@ -9,11 +9,15 @@ public class LottoGame {
     private LottoAmount manualPurchaseAmount;
     private List<Lotto> lottoNumbers;
 
-    public LottoGame(LottoAmount totalPurchaseAmount, LottoAmount manualPurchaseAmount, NumberGenerator generator) {
+    private LottoGame(LottoAmount totalPurchaseAmount, LottoAmount manualPurchaseAmount, NumberGenerator generator) {
         lottoNumbers = new ArrayList<>();
         this.totalPurchaseAmount = totalPurchaseAmount;
         this.manualPurchaseAmount = manualPurchaseAmount;
         generateByAuto(calculateAutoPurchaseAmount(), generator);
+    }
+
+    public static LottoGame from(LottoAmount totalPurchaseAmount, LottoAmount manualPurchaseAmount, NumberGenerator generator){
+        return new LottoGame( totalPurchaseAmount, manualPurchaseAmount, generator);
     }
 
     private void generateByAuto(LottoAmount amount, NumberGenerator generator) {
@@ -36,6 +40,10 @@ public class LottoGame {
     }
 
     public void calculateAllRank(LottoWinning winningNo) {
+        System.out.println("lottoNumbers");
+        System.out.println(lottoNumbers);
+        System.out.println(winningNo);
+        System.out.println("winningNo");
         for (Lotto attemptNumber : getLottoNumbers()) {
             attemptNumber.calculateRank(winningNo);
         }
@@ -43,5 +51,12 @@ public class LottoGame {
 
     public LottoAmount calculateAutoPurchaseAmount() {
         return LottoAmount.from(totalPurchaseAmount.getAmount() - manualPurchaseAmount.getAmount());
+    }
+
+    @Override
+    public String toString() {
+        return "LottoGame{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }

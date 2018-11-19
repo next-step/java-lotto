@@ -46,4 +46,9 @@ public class LottoNo {
     public boolean isExistBonusNumber(LottoNo bonusNumber) {
         return getNumber() == bonusNumber.getNumber();
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }
