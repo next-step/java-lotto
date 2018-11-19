@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.generate;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,12 +8,17 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
-public class LottoNumbers {
+public class AutoLottoNumberGenerate implements LottoNumberGenerate {
     private static final int LOTTO_NUMBER = 6;
     private static final int LOTTO_NUMBER_START_RANGE = 1;
     private static final int LOTTO_NUMBER_END_RANGE = 45;
 
-    public static Set<Integer> getAutoNumbers() {
+    @Override
+    public Set<Integer> generate() {
+        return getAutoNumbers();
+    }
+
+    private static Set<Integer> getAutoNumbers() {
         List<Integer> lottoNumbers = getRangeNumber();
         Collections.shuffle(lottoNumbers);
 
@@ -27,6 +32,7 @@ public class LottoNumbers {
 
     private static Set<Integer> getLottoNumber(List<Integer> lottoNumbers) {
         lottoNumbers = lottoNumbers.subList(0, LOTTO_NUMBER);
+
         Collections.sort(lottoNumbers);
 
         return lottoNumbers.stream().collect(toSet());

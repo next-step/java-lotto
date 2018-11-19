@@ -13,6 +13,10 @@ public class ResultView {
                 System.out.println(lotto.getNumbers()));
     }
 
+    public static void printBuyLottos(int manualCount, int autoCount) {
+        System.out.println("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
+    }
+
     public static void printResultLottoReword(LottoGameResult lottoGameResult, float earningsRate) {
         Map<LottoReword, Integer> reword = lottoGameResult.getResults();
 

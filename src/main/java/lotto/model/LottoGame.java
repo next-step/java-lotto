@@ -1,30 +1,31 @@
 package lotto.model;
 
+import lotto.model.generate.AutoLottoNumberGenerate;
+import lotto.model.generate.LottoNumberGenerate;
+import lotto.model.generate.ManualLottoNumberGenerate;
+
 import java.util.*;
 
 import static java.util.stream.Collectors.*;
 
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos;
 
-    public List<Lotto> createLotto(int totalPrice) throws IllegalArgumentException {
-        validation(totalPrice);
+    private LottoNumberGenerate lottoNumberGenerate;
 
-        int lottoTicketCount = totalPrice / LOTTO_PRICE;
-
+    public List<Lotto> createLotto(Money money, String manualLottoNumbers) throws IllegalArgumentException {
         this.lottos = new ArrayList<>();
-        for(int i= 0; i< lottoTicketCount; i++) {
-            Lotto lotto = new Lotto(LottoNumbers.getAutoNumbers());
-            this.lottos.add(lotto);
-        }
+        manualLottoGenerate(manualLottoNumbers);
+
+        int autoLottoTicketCount = money.buyManualLotto(lottos.size());
+        autoLottoGenerate(autoLottoTicketCount);
 
         return lottos;
     }
 
     public LottoGameResult getReword(String stringNumber, Integer bonusNumber) {
-        WinningLotto winnerLotto = createWinnerLotto(stringNumber, bonusNumber);
+        WinningLotto winnerLotto = createWinnerLotto(stringNumber, LottoNo.from(bonusNumber));
         LottoGameResult lottoGameResult = new LottoGameResult();
 
         for (Lotto lotto : lottos) {
@@ -33,23 +34,32 @@ public class LottoGame {
         return lottoGameResult;
     }
 
-    private WinningLotto createWinnerLotto(String stringNumber, Integer bonusNumber) {
+    private WinningLotto createWinnerLotto(String stringNumber, LottoNo bonusNumber) {
         Set<Integer> numbers = new HashSet(
             Arrays.asList(stringNumber.replace(" ", "").split(","))
             .stream().map(Integer::parseInt).collect(toList()));
 
-        return new WinningLotto(numbers, bonusNumber);
+        return WinningLotto.from(numbers, bonusNumber);
     }
 
-    private void validation(int totalPrice) {
-        validationTotalPrice(totalPrice);
-    }
+    private void manualLottoGenerate(String manualLottoNumbers) {
+        String[] manualLottos = manualLottoNumbers.split("\n");
 
-    private void validationTotalPrice(int totalPrice) {
-        if(totalPrice < LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또 구매금액은 1000원이 넘어야 합니다.");
+        for(int i = 0; i < manualLottos.length; i++) {
+            lottoNumberGenerate = new ManualLottoNumberGenerate(manualLottos[i].replace(" ", ""));
+
+            Lotto lotto = Lotto.from(lottoNumberGenerate.generate());
+            this.lottos.add(lotto);
         }
     }
 
+    private void autoLottoGenerate(int autoLottoTicketCount) {
+        lottoNumberGenerate = new AutoLottoNumberGenerate();
+
+        for(int i= 0; i< autoLottoTicketCount; i++) {
+            Lotto lotto = Lotto.from(lottoNumberGenerate.generate());
+            this.lottos.add(lotto);
+        }
+    }
 
 }

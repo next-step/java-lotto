@@ -1,21 +1,29 @@
 package lotto.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_DIGIT = 6;
-    private static final int LOTTO_NUMBER_START_RANGE = 1;
-    private static final int LOTTO_NUMBER_END_RANGE = 45;
 
-    private Set<Integer> numbers;
+    private Set<LottoNo> numbers;
 
-    public Lotto(Set<Integer> numbers) {
+    private Lotto(Set<LottoNo> numbers) {
         validation(numbers);
         this.numbers = new HashSet<>(numbers);
     }
 
-    public Set<Integer> getNumbers() {
+    public static Lotto from(Set<Integer> numbers) {
+        Set<LottoNo> lotto = new HashSet<>();
+        for (Integer number : numbers) {
+            lotto.add(LottoNo.from(number));
+        }
+
+        return new Lotto(lotto);
+    }
+
+    public Set<LottoNo> getNumbers() {
         return numbers;
     }
 
@@ -24,37 +32,45 @@ public class Lotto {
         return lotto.numbers.size();
     }
 
-    public boolean isBonusMatch(Integer bonusNumber) {
+    public boolean isBonusMatch(LottoNo bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 
-    private void validation(Set<Integer> numbers) {
+    private void validation(Set<LottoNo> numbers) {
         validationNumberDuplicate(numbers);
         validationNumberDigit(numbers);
-        validationNumberRange(numbers);
     }
 
-    private void validationNumberDuplicate(Set<Integer> numbers) {
+    private void validationNumberDuplicate(Set<LottoNo> numbers) {
         if(!numbers.stream().allMatch(new HashSet<>()::add)) {
             throw new IllegalArgumentException("숫자는 중복하여 입력할 수 없습니다.");
         }
     }
 
-    private void validationNumberDigit(Set<Integer> numbers) {
+    private void validationNumberDigit(Set<LottoNo> numbers) {
         if (numbers.size() != LOTTO_NUMBER_DIGIT) {
             throw new IllegalArgumentException("숫자는 6개 까지 입력하세요.");
         }
     }
 
-    private void validationNumberRange(Set<Integer> numbers) {
-        numbers.forEach(number ->  {
-            validationNumberRange(number);
-        });
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
     }
 
-    private void validationNumberRange(Integer number) {
-        if(number < LOTTO_NUMBER_START_RANGE || number >LOTTO_NUMBER_END_RANGE) {
-            throw new IllegalArgumentException("숫자는 1부터 45사이의 값을 입력하세요.");
-        }
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
