@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.generator.AutoLottoGenerator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,23 +18,23 @@ public class LottoGameTest {
     //로또 하나당 일치하는 갯수 넘겨받아 3~6개 일치 할 경우 총 당첨금 체크
     //구입금액/당첨금 으로 수익률 체크
 
-    LottoSystem lottoSystem;
+    AutoLottoGenerator autoLottoGenerator;
 
     @Before
     public void setUp() throws Exception {
-        lottoSystem = new LottoSystem();
+        autoLottoGenerator = new AutoLottoGenerator();
     }
 
     @Test
     public void 구입금액_로또구매갯수반환() {
-        int a = lottoSystem.calcLottoCount(14000);
+        int a = autoLottoGenerator.calcLottoCount(14000);
         assertThat(a).isEqualTo(14);
     }
 
     @Test
     public void 로또번호의길이가6인_로또번호리스트_구매갯수만큼생성() {
-        List<Lotto> lottos = lottoSystem.makeLottoList(lottoSystem.lottoNumbersSetting(), lottoSystem.calcLottoCount(14000));
-        assertThat(lottos.size()).isEqualTo(lottoSystem.calcLottoCount(14000));
+        List<Lotto> lottos = autoLottoGenerator.generateAutoLottos(autoLottoGenerator.lottoNumbersSetting(), autoLottoGenerator.calcLottoCount(14000));
+        assertThat(lottos.size()).isEqualTo(autoLottoGenerator.calcLottoCount(14000));
         assertThat(lottos.get(0).size()).isEqualTo(6);
     }
 
@@ -43,7 +44,7 @@ public class LottoGameTest {
         List<Integer> lotto = Arrays.asList(test);
 
         assertThat(lotto.get(0)).isEqualTo(3);
-        lottoSystem.sortLottoNumbers(lotto);
+        autoLottoGenerator.sortLottoNumbers(lotto);
         assertThat(lotto.get(0)).isEqualTo(1);
     }
 

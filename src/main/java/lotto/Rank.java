@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.HashMap;
-
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -17,6 +15,10 @@ public enum Rank {
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+    }
+
+    public Money prizePerRanking(int matchCount) {
+        return new Money(winningMoney * matchCount);
     }
 
     public int getCountOfMatch() {

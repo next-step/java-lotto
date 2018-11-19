@@ -2,9 +2,9 @@ package lotto;
 
 public class WinningLotto {
     private Lotto winningLotto;
-    private int bonus;
+    private LottoNo bonus;
 
-    public WinningLotto(Lotto winningLotto, int bonus) {
+    public WinningLotto(Lotto winningLotto, LottoNo bonus) {
         this.winningLotto = winningLotto;
         this.bonus = bonus;
     }
