@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class Money {
     private static final int PRICE_PER_LOTTO = 1_000;
@@ -16,8 +16,9 @@ public class Money {
         return new Money(money - (PRICE_PER_LOTTO * manualLottoCount));
     }
 
-    double profitRate(Money totalPrize) {
-        return Double.parseDouble(String.format("%.2f", (totalPrize.money / (double) money)));
+    public double profitRate(Money totalPrize) {
+        return Math.ceil(totalPrize.money / (double) money);
+//        return Double.parseDouble(String.format("%.2f", (totalPrize.money / (double) money)));
     }
 
     public Money sum(Money money) {

@@ -1,8 +1,8 @@
-package lotto.generator;
+package lotto.domain.generator;
 
-import lotto.Lotto;
-import lotto.LottoGenerator;
-import lotto.Money;
+import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
+import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.Collections;

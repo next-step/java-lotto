@@ -1,6 +1,9 @@
 package lotto;
 
 
+import lotto.domain.Lotto;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import org.junit.Test;
 
 import java.util.Arrays;

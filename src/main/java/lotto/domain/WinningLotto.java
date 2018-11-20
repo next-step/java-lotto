@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class WinningLotto {
     private Lotto winningLotto;
@@ -13,7 +13,7 @@ public class WinningLotto {
         return winningLotto.match(lotto);
     }
 
-    Rank getRankByMatchingLotto(Lotto lotto) {
+    public Rank getRankByMatchingLotto(Lotto lotto) {
         int matchCount = winningLotto.match(lotto);
         boolean matchBonus = lotto.contains(bonus);
         return Rank.valueOf(matchCount, matchBonus);

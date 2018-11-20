@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -13,7 +13,7 @@ public class LottoNo {
             lottoNumbers.put(i, new LottoNo(i));
         }
     }
-    private final int no;
+    private final Integer no;
 
     private LottoNo(int no) {
         if(no < STARTED_NUMBER || no > LIMITTED_NUMBER) throw new IllegalArgumentException();
@@ -39,6 +39,6 @@ public class LottoNo {
 
     @Override
     public String toString() {
-        return "LottoNo[" + "no=" + no + "]";
+        return no.toString();
     }
 }

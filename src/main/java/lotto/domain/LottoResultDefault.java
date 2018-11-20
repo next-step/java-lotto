@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ public class LottoResultDefault implements LottoResult {
         }
     }
 
-    void setRankingStatus(Rank rank) {
+    public void setRankingStatus(Rank rank) {
         ranking.put(rank, ranking.get(rank) + 1);
     }
 
