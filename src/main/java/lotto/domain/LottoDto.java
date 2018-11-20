@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.LottoGame;
+
 import java.util.List;
 
 public class LottoDto {
@@ -12,8 +14,8 @@ public class LottoDto {
         this.lotto = lotto;
     }
 
-    public LottoDto(final List<Lotto> lottos, final WinningLotto lotto) {
-        this.lottos = new Lottos(lottos);
+    public LottoDto(final LottoGame lottoGame, final WinningLotto lotto) {
+        this.lottos = new Lottos(lottoGame.getLottos());
         this.lotto = lotto;
     }
 

@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 
 public class Lotto {
 
-    private List<Integer> number;
+    private List<LottoNo> number;
 
     public Lotto() {
         this.number = GenerateLotto.create();
@@ -19,7 +19,7 @@ public class Lotto {
         this.number = GenerateLotto.create(number);
     }
 
-    public List<Integer> getNumber() {
+    public List<LottoNo> getNumber() {
         return number;
     }
 
@@ -32,7 +32,9 @@ public class Lotto {
     }
 
     private boolean eqBonus(final int bonus) {
-        return getNumber().stream().filter(number -> number == bonus).collect(toList()).size() > 0;
+        return getNumber().stream()
+                .filter(number -> LottoNo.eqBonus(number, bonus))
+                .collect(toList()).size() > 0;
     }
 
     private boolean isSecondRank(final Rank rank, final int bonus) {
@@ -44,21 +46,21 @@ public class Lotto {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private int sumNumberMatchCheckLoop(int matchScore, final List<Integer> number) {
-        for (Integer num : number) {
+    private int sumNumberMatchCheckLoop(int matchScore, final List<LottoNo> number) {
+        for (LottoNo num : number) {
             matchScore = numberMatchCheckLoop(matchScore, num);
         }
         return matchScore;
     }
 
-    private int numberMatchCheckLoop(int matchScore, final Integer numbers) {
-        for (Integer num : getNumber()) {
+    private int numberMatchCheckLoop(int matchScore, final LottoNo numbers) {
+        for (LottoNo num : getNumber()) {
             matchScore = eqCheckLottoNumber(matchScore, numbers, num);
         }
         return matchScore;
     }
 
-    private int eqCheckLottoNumber(int matchScore, final Integer sourceNumber, final Integer targetNumber) {
+    private int eqCheckLottoNumber(int matchScore, final LottoNo sourceNumber, final LottoNo targetNumber) {
         if (sourceNumber.equals(targetNumber)) {
             matchScore = increaseMatchScore(matchScore);
         }

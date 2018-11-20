@@ -1,5 +1,7 @@
 package lotto.utils;
 
+import lotto.domain.LottoNo;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,11 +11,11 @@ public class GenerateLotto {
     private static final int LOTTO_NUMBER_LENGTH = 6;
     private static final Random RANDOM = new Random();
 
-    public static List<Integer> create() {
+    public static List<LottoNo> create() {
         return convertToList(pickRandom(LOTTO_NUMBER_LENGTH, MAX_BOUND));
     }
 
-    public static List<Integer> create(final String number) {
+    public static List<LottoNo> create(final String number) {
         return toList(split(number));
     }
 
@@ -21,10 +23,10 @@ public class GenerateLotto {
         return number.split(",");
     }
 
-    private static List<Integer> toList(final String[] number) {
-        final List<Integer> ints = new ArrayList<>();
+    private static List<LottoNo> toList(final String[] number) {
+        final List<LottoNo> ints = new ArrayList<>();
         for (Integer num : toInts(number)) {
-            ints.add(num);
+            ints.add(LottoNo.from(num));
         }
         return ints;
     }
@@ -41,14 +43,20 @@ public class GenerateLotto {
         return Integer.parseInt(text);
     }
 
-    private static List<Integer> convertToList(final Set<Integer> integers) {
-        return integers.stream().map(Integer::new).sorted().collect(Collectors.toList());
+    private static List<LottoNo> convertToList(final Set<Integer> integers) {
+        return integers.stream().map(LottoNo::from).collect(Collectors.toList());
     }
 
     private static Set<Integer> pickRandom(final int n, final int k) {
         final Set<Integer> picked = new HashSet<>();
         while (picked.size() < n) {
-            picked.add(RANDOM.nextInt(k));
+
+            final int randomNo = RANDOM.nextInt(k);
+            if (randomNo < LottoNo.MIN || randomNo > LottoNo.MAX) {
+                continue;
+            }
+
+            picked.add(randomNo);
         }
         return picked;
     }

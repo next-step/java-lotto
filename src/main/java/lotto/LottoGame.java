@@ -2,49 +2,35 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.utils.AutomaticallyLottosGenerator;
+import lotto.utils.LottosGenerator;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Optional.ofNullable;
 
 public class LottoGame {
 
-    private final static int DEFAULT_PRICE = 1000;
-
-    private final int amount;
-    private final int price;
     private final Lottos lottos;
 
-    public LottoGame(final int amount) {
-        this(amount, DEFAULT_PRICE);
+    public LottoGame(final Money money) throws IllegalArgumentException {
+        this(money, new AutomaticallyLottosGenerator(), new Lottos());
     }
 
-    public LottoGame(final int amount, final int price) throws IllegalArgumentException {
-
-        this.amount = amount;
-        this.price = price;
-
-        if (this.price == 0) {
-            throw new IllegalArgumentException();
-        }
-
-        this.lottos = new Lottos(createLottos());
+    public LottoGame(final Money money, final LottosGenerator lottosGenerator, final Lottos lottos) throws IllegalArgumentException {
+        validation(money, lottos);
+        this.lottos = lottos;
+        lottosGenerator.generate(money).forEach(this.lottos::add);
     }
 
     public List<Lotto> getLottos() {
         return lottos.getLottos();
     }
 
-    public int getCountPurchased() {
-        return new BigDecimal(this.amount / this.price).intValue();
-    }
-
-    private List<Lotto> createLottos() {
-        final List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < getCountPurchased(); i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+    private void validation(final Money money, final Lottos lottos) {
+        ofNullable(money).orElseThrow(IllegalArgumentException::new);
+        ofNullable(lottos).orElseThrow(IllegalArgumentException::new);
     }
 
 }

@@ -2,10 +2,7 @@ package lotto.view;
 
 import lotto.LottoGame;
 import lotto.LottoResult;
-import lotto.domain.Lotto;
-import lotto.domain.LottoDto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -17,18 +14,18 @@ public abstract class ResultView {
     private ResultView() {
     }
 
-    public static void printLottos(final LottoGame lottoGame) {
-        printCountOfPurchases(lottoGame.getCountPurchased());
+    public static void printLottos(final LottoGame lottoGame, final Money money) {
+        printCountOfPurchases(money);
         printLottos(lottoGame.getLottos());
         newLine();
     }
 
-    public static void printAnalysisLottoResult(final LottoDto lottoDto, final int amount) {
+    public static void printAnalysisLottoResult(final LottoDto lottoDto, final Money money) {
         final StringBuilder sb = new StringBuilder();
         sb.append("\n당첨 통계\n").append("---------\n");
         appendRanks(lottoDto, sb);
         sb.append("총 수익률은 ");
-        sb.append(LottoResult.calculatorRate(lottoDto, amount));
+        sb.append(money.calculateRate(lottoDto));
         sb.append("입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         System.out.println(sb.toString());
     }
@@ -51,8 +48,14 @@ public abstract class ResultView {
         sb.append("개\n");
     }
 
-    private static void printCountOfPurchases(final int countPurchased) {
-        System.out.println(countPurchased + COUNT_OF_PURCHASES_SUFFIX);
+    private static void printCountOfPurchases(final Money money) {
+
+        if (money.hasManualPurchaseLottoNumber()) {
+            System.out.println("수동으로 " + money.getManualPurchaseLottoNumber() + "장, 자동으로 " + money.calculateLottoCountToPurchasedAutomatically() + "개를 구매했습니다.");
+            return;
+        }
+
+        System.out.println(money.calculateLottoCountToPurchasedAutomatically() + COUNT_OF_PURCHASES_SUFFIX);
     }
 
     private static void printLottos(final List<Lotto> lottos) {
