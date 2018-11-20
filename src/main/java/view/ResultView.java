@@ -1,9 +1,8 @@
 package view;
 
-import domain.LottoCountManager;
-import domain.Rank;
 import domain.Lotto;
-import domain.LottoResult;
+import domain.LottoCountManager;
+import domain.LottoReport;
 
 import java.util.List;
 
@@ -24,31 +23,22 @@ public class ResultView {
         );
     }
 
-    public static void showResult(LottoResult lottoResult) {
+    public static void showResult(LottoReport lottoReport) {
         System.out.println("당첨 통계\n---------");
-        showMatches(lottoResult);
-        showRate(lottoResult);
+        showMatches(lottoReport);
+        showRate(lottoReport);
     }
 
-    private static void showMatches(LottoResult lottoResult) {
+    private static void showMatches(LottoReport lottoReport) {
         StringBuilder sb = new StringBuilder();
-        for (Rank rank : lottoResult.getRanks()) {
-            int matchCount = lottoResult.matchCount(rank);
-            sb.append(String.format(matchedFormat(rank), rank.getMatchNumber(), rank.getPrizeMoney(), matchCount));
+        for (String match : lottoReport.getMatches()) {
+            sb.append(match);
             sb.append("\n");
         }
         System.out.println(sb.toString());
     }
 
-    private static String matchedFormat(Rank rank) {
-        String matchedFormat = "%d개 일치 (%d원) - %d개";
-        if (rank.equals(Rank.SECOND)) {
-            matchedFormat = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
-        }
-        return matchedFormat;
-    }
-
-    private static void showRate(LottoResult lottoResult) {
-        System.out.println(String.format("총 수익률은 %.2f입니다.", lottoResult.calculatorRate()));
+    private static void showRate(LottoReport lottoReport) {
+        System.out.println(lottoReport.getRate());
     }
 }

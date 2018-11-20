@@ -15,6 +15,10 @@ public class LottoStatistics {
         return new LottoResult(getRanks(lottos));
     }
 
+    public LottoReport report(List<Lotto> lottos) {
+        return new LottoReport(match(lottos));
+    }
+
     private List<Rank> getRanks(List<Lotto> lottos) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
