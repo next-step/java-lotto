@@ -12,6 +12,10 @@ public class LottoTest {
         assertThat(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6))).isEqualTo(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
+    public void 생성_콤마() {
+        assertThat(Lotto.fromComma("1,2,3,4,5,6")).isEqualTo(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void 생성_6개_외() {
         Lotto.from(Arrays.asList(1, 2, 3, 4, 5));

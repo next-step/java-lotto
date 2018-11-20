@@ -7,17 +7,17 @@ public class WinningLotto {
     private Lotto lotto;
     private LottoNumber bonusNumber;
 
-    private WinningLotto(List<Integer> numbers, int bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
+    private WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.isContain(bonusNumber)) {
             throw new IllegalArgumentException();
         }
 
-        this.lotto = Lotto.from(numbers);
-        this.bonusNumber = LottoNumber.from(bonusNumber);
+        this.lotto = lotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto from(List<Integer> numbers, int bonusNumber) {
-        return new WinningLotto(numbers, bonusNumber);
+    public static WinningLotto from(Lotto lotto, LottoNumber bonusNumber) {
+        return new WinningLotto(lotto, bonusNumber);
     }
 
     public Rank getRank(Lotto userLotto) {

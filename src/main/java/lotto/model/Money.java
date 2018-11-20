@@ -21,8 +21,12 @@ public class Money {
         return money / criteriaMoney;
     }
 
-    public Money deduct(Money criteriaMoney) {
-        return Money.from(this.money - criteriaMoney.money);
+    public void deduct(Money criteriaMoney) {
+        if (this.money < criteriaMoney.money) {
+            throw new IllegalArgumentException();
+        }
+
+        this.money -= criteriaMoney.money;
     }
 
     @Override

@@ -31,6 +31,7 @@ public class MoneyTest {
     @Test
     public void 차감() {
         Money money = Money.from(15000);
-        assertThat(money.deduct(Money.from(3000))).isEqualTo(Money.from(12000));
+        money.deduct(Money.from(3000));
+        assertThat(money).isEqualTo(Money.from(12000));
     }
 }

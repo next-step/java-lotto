@@ -15,7 +15,13 @@ public class ResultView {
         System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
 
         Stream.concat(manualLottos.stream(), autoLottos.stream())
-            .forEach(lotto -> System.out.println(lotto.toString()));
+                .forEach(lotto -> System.out.println(lotto.toString()));
+    }
+
+    public static void printBoughtHistory(List<Lotto> lottos, int countOfManual) {
+        System.out.println("수동으로 " + countOfManual + "장, 자동으로 " + (lottos.size() - countOfManual) + "개를 구매했습니다.");
+
+        lottos.forEach(lotto -> System.out.println(lotto.toString()));
     }
 
     public static void printCountOfRank(Statistics statistics) {

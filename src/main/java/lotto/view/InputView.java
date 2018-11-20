@@ -1,8 +1,5 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -16,32 +13,16 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<Integer> inputIntegers(String question) {
+    public static String inputString(String question) {
         System.out.println(question);
-        return inputSimpleIntegers();
+        return scanner.nextLine();
     }
 
-    public static List<Lotto> inputLottos(String question, int countOfLotto) {
+    public static List<String> inputMultilineStrings(String question, int countOfLotto) {
         System.out.println(question);
 
         return IntStream.range(0, countOfLotto)
-            .mapToObj(i -> Lotto.from(inputSimpleIntegers()))
-            .collect(Collectors.toList());
-    }
-
-    private static String removeWhitespace(String value) {
-        return value.replaceAll("\\s+","");
-    }
-
-    private static List<String> split(String value) {
-        return Arrays.asList(value.split(","));
-    }
-
-    private static List<Integer> toIntegers(List<String> strings) {
-        return strings.stream().map(Integer::valueOf).collect(Collectors.toList());
-    }
-
-    private static List<Integer> inputSimpleIntegers() {
-        return toIntegers(split(removeWhitespace(scanner.nextLine())));
+                .mapToObj(i -> scanner.nextLine())
+                .collect(Collectors.toList());
     }
 }

@@ -2,10 +2,7 @@ package lotto.model;
 
 import lotto.LottoConstants;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -22,6 +19,22 @@ public class Lotto {
 
     public static Lotto from(List<Integer> numbers) {
         return new Lotto(new HashSet<>(numbers));
+    }
+
+    public static Lotto fromComma(String value) {
+        return new Lotto(new HashSet<>(toIntegers(split(removeWhitespace(value)))));
+    }
+
+    private static String removeWhitespace(String value) {
+        return value.replaceAll("\\s+","");
+    }
+
+    private static List<String> split(String value) {
+        return Arrays.asList(value.split(","));
+    }
+
+    private static List<Integer> toIntegers(List<String> strings) {
+        return strings.stream().map(Integer::valueOf).collect(Collectors.toList());
     }
 
     public int getMatchCount(Lotto targetLotto) {

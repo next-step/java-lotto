@@ -19,7 +19,8 @@ public class StatisticsTest {
                 Lotto.from(Arrays.asList(34, 35, 5, 38, 13, 30)),
                 Lotto.from(Arrays.asList(3, 36, 37, 41, 27, 13))
         );
-        WinningLotto winningLotto = WinningLotto.from(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = WinningLotto.from(
+            Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(7));
         statistics = new Statistics(lottos, winningLotto);
     }
 
