@@ -1,42 +1,40 @@
 package lotto.service;
 
+import lotto.dao.LottosGenerator;
 import lotto.dto.Lotto;
+import lotto.dto.Money;
+import lotto.dto.Rank;
 import lotto.dto.WinningLotto;
 import lotto.utils.LottoMaker;
+import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGame {
 
-    private static final int FEE_OF_ONE_TRY = 1_000;
-
-    private int games;
-    private int money;
     private List<Lotto> gamePlays;
 
-    public LottoGame(int money){
-        this.money = money;
-        games = getNumOfGames(money);
-        gamePlays = new ArrayList<>();
-        gameSettingAllFrame();
+    public LottoGame(Money money2,LottosGenerator lottosGenerator) {
+        this.gamePlays = lottosGenerator.genertate(money2);
     }
 
-    public static int getNumOfGames(int money){
-        return money/FEE_OF_ONE_TRY;
-    }
-
-    public void gameSettingAllFrame() {
-        for (int i = 0 ; i < games ; i++){
-            gamePlays.add(new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive())));
-        }
+    public LottoGame(List<Lotto> gamePlays,List<Lotto> gamePlays2) {
+        this.gamePlays = gamePlays;
+        gamePlays.addAll(gamePlays2);
     }
 
     public List<Lotto> getGamePlays() {
         return gamePlays;
     }
 
-    public LottoResult match(WinningLotto winnersNum){
-        return new LottoResult(this.gamePlays,winnersNum,this.money);
+    public Map<Rank, Integer> match(WinningLotto winnersNum){
+        return winnersNum.match(gamePlays);
     }
+
+    public int getGames() {
+        return gamePlays.size();
+    }
+
 }

@@ -3,28 +3,44 @@ package lotto.dto;
 import lotto.utils.LottoMaker;
 
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
-    private List<Integer> frameNumber;
-
-    /* 디폴트 생성자 재구현
-    public Lotto() {
-        this.frameNumber = LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive());
-    }
-    */
+    public static final int LOTTO_SIZE = 6;
+    private Set<Integer> frameNumber;
 
     /**
      * Test용 생성자
      * 테스트하려면 필요한데...필요할까..
      * @param frameNumber
      */
-    public Lotto(List<Integer> frameNumber) {
+    public Lotto(Set<Integer> frameNumber) {
+        if(frameNumber.size() != LOTTO_SIZE){
+            throw new IllegalArgumentException("Lotto has must 6 arguments size");
+        }
         this.frameNumber = frameNumber;
     }
 
-    public List<Integer> getLotto() {
+    public Set<Integer> getLotto() {
         return frameNumber;
     }
 
+    /**
+     * get을 안쓸 수는 없을까..
+     * VO를 안쓰면 get을 써야만 할 것 같다..
+     */
+    public int match(Lotto boughntLotto) {
+        int matchCount = 0;
+        for(Integer integer : frameNumber){
+            if(boughntLotto.contains(integer)){
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
+    public boolean contains(int bonusnum){
+        return frameNumber.contains(bonusnum);
+    }
 }

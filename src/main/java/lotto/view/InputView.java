@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.dto.Money;
 import lotto.utils.Utils;
 import lotto.dto.Lotto;
 import lotto.service.LottoGame;
@@ -14,9 +15,13 @@ public class InputView {
     public static int inputMoney(){
 
         System.out.println("구매금액을 입력해주세요.");
-        int money = Integer.parseInt(sc.nextLine());
-        System.out.println(LottoGame.getNumOfGames(money) + "개를 구매했습니다.");
-        return money;
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    public static Money inputMoney2(){
+
+        System.out.println("구매금액을 입력해주세요.");
+        return new Money(Integer.parseInt(sc.nextLine()));
     }
 
     public static void printLottoList(List<Lotto> lottos){
@@ -24,7 +29,14 @@ public class InputView {
         for(Lotto lotto : lottos){
             System.out.println("[" + Utils.getCommaLottoNums(lotto.getLotto())+ "]");
         }
+    }
 
+    public static void printLottoList(List<Lotto> autoLottos , List<Lotto> manualLottos){
+        System.out.println();
+        autoLottos.addAll(manualLottos);
+        for(Lotto lotto : autoLottos){
+            System.out.println("[" + Utils.getCommaLottoNums(lotto.getLotto())+ "]");
+        }
     }
 
     public static String winningNumbers(){
@@ -41,7 +53,26 @@ public class InputView {
         return Integer.parseInt(sc.nextLine());
     }
 
+    /**
+     * step3 start
+     */
 
+    private static int manual(){
+        System.out.println();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    public static String manualgame(){
+        int num = manual();
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요..");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0 ; i < num ; i++){
+            sb.append(sc.nextLine()+"\n");
+        }
+        return sb.toString();
+    }
 
 
 }

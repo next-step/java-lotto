@@ -15,7 +15,7 @@ public class RankTest {
 
     @Test
     public void Enum보너스검출테스트() {
-        assertThat(Rank.valueOf(5,true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.valueOf(5,true)).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class RankTest {
 
     @Test
     public void EnumForth검출테스트() {
-        assertThat(Rank.valueOf(4,true)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.valueOf(4,true)).isEqualTo(Rank.SECOND);
     }
 
     @Test

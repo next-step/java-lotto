@@ -1,75 +1,52 @@
 package lotto.service;
 
-import lotto.dto.Lotto;
-import lotto.dto.WinningLotto;
-import lotto.utils.LottoMaker;
-import lotto.utils.MatchUtils;
+
+import lotto.dto.Rank;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    private WinningLotto wl;
-    private LottoResult lr;
+    private LottoResult lottoResult;
 
     @Before
-    public void Winner세팅() {
-        wl = new WinningLotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)),7);
-        lr = new LottoResult(new ArrayList<Lotto>(
-                Arrays.asList(
-                        new Lotto(LottoMaker.getSixNumsAfterShuffle(LottoMaker.getOnetoFortyFive())))
-        ),wl,14000);
-    }
-
-
-    @Test
-    public void 손해결과출력() {
-        assertThat(lr.getProfitMessage(0.5f)).isEqualTo(LottoResult.MINUS_PROFIT);
+    public void init(){
+        Map<Rank,Integer> maps = Stream.of(Rank.values())
+                .collect(Collectors.toMap(
+                        e -> e
+                        ,e -> 1
+                        )
+                );
+        lottoResult = new LottoResult(1000,maps);
     }
 
     @Test
-    public void 이익결과출력() {
-        assertThat(lr.getProfitMessage(1.5f)).isEqualTo(LottoResult.PLUS_PROFIT);
+    public void 이익테스트() {
+        assertThat(lottoResult.getProfitMessage(0.4)).isEqualTo("손해");
     }
 
     @Test
-    public void 본전결과출력() {
-        assertThat(lr.getProfitMessage(1)).isEqualTo(LottoResult.SAME_PROFIT);
+    public void 손해테스트() {
+        assertThat(lottoResult.getProfitMessage(3000)).isEqualTo("이익");
     }
 
     @Test
-    public void 출력값정상테스트() {
+    public void 이익금테스트() {
+        Map<Rank,Integer> maps = Stream.of(Rank.values())
+                .collect(Collectors.toMap(
+                        e -> e
+                        ,e -> 0
+                    )
+                );
 
-        String result = "6개 일치 (2000000000원) - 0개\n" +
-                        "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n" +
-                        "5개 일치 (1500000원) - 0개\n" +
-                        "4개 일치 (50000원) - 0개\n" +
-                        "3개 일치 (5000원) - 0개\n" +
-                        "0개 일치 (0원) - 0개\n" +
-                        "총 수익률은 0.00입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        assertThat(lottoResult.profit()).isEqualTo(2031555.0);
 
-        assertThat(lr.matchCountResultString(lr.getWinnerNums())).isEqualTo(result);
 
-    }
-
-    @Test
-    public void 결과값정상테스트() {
-
-        LottoResult lr = new LottoResult(new ArrayList<Lotto>(Arrays.asList(new Lotto(new ArrayList<>(Arrays.asList(1,2,3,4,5,7))))), wl, 14000);
-        String result = "6개 일치 (2000000000원) - 0개\n" +
-                "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n" +
-                "5개 일치 (1500000원) - 1개\n" +
-                "4개 일치 (50000원) - 0개\n" +
-                "3개 일치 (5000원) - 0개\n" +
-                "0개 일치 (0원) - 0개\n" +
-                "총 수익률은 107.00입니다. (기준이 1이기 때문에 결과적으로 이익라는 의미임)";
-
-        assertThat(lr.matchCountResultString(lr.getWinnerNums())).isEqualTo(result);
     }
 }

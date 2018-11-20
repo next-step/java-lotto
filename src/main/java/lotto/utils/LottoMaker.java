@@ -1,9 +1,8 @@
 package lotto.utils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Dictionary;
-import java.util.List;
+import lotto.dto.Lotto;
+
+import java.util.*;
 
 public class LottoMaker {
 
@@ -18,8 +17,34 @@ public class LottoMaker {
         return nums;
     }
 
-    public static List<Integer> getSixNumsAfterShuffle(List<Integer> nums) {
+    public static List<Integer> getSixNumsAfterShuffle() {
+        List<Integer> nums = getOnetoFortyFive();
         Collections.shuffle(nums);
         return nums.subList(0,NUM_OF_NUMBERS);
+    }
+
+    public static Lotto lottoOf(){
+        List<Integer> lotto = getSixNumsAfterShuffle();
+        Set<Integer> makedLotto = new HashSet<>();
+        for (Integer integer : lotto){
+            makedLotto.add(integer);
+        }
+        return new Lotto(makedLotto);
+    }
+
+    public static Lotto of(String arg){
+        String[] temp = arg.split(",");
+        Set<Integer> makedLotto = new HashSet<>();
+        for(int i = 0 ; i < temp.length ; i++){
+            makedLotto.add(Integer.parseInt(temp[i].trim()));
+        }
+
+        return new Lotto(makedLotto);
+    }
+
+
+
+    public static String[] ofNewLine(String games) {
+        return games.split("\n");
     }
 }
