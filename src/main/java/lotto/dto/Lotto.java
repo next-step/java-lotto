@@ -32,8 +32,8 @@ public class Lotto {
      */
     public int match(Lotto boughntLotto) {
         int matchCount = 0;
-        for ( int i = 0 ; i < frameNumber.size() ; i++ ){
-            if(boughntLotto.getLotto().contains(frameNumber.toArray()[i])){
+        for(Integer integer : frameNumber){
+            if(boughntLotto.contains(integer)){
                 matchCount++;
             }
         }

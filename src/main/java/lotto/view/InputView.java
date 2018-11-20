@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.dto.Money;
 import lotto.utils.Utils;
 import lotto.dto.Lotto;
 import lotto.service.LottoGame;
@@ -17,12 +18,25 @@ public class InputView {
         return Integer.parseInt(sc.nextLine());
     }
 
+    public static Money inputMoney2(){
+
+        System.out.println("구매금액을 입력해주세요.");
+        return new Money(Integer.parseInt(sc.nextLine()));
+    }
+
     public static void printLottoList(List<Lotto> lottos){
         System.out.println();
         for(Lotto lotto : lottos){
             System.out.println("[" + Utils.getCommaLottoNums(lotto.getLotto())+ "]");
         }
+    }
 
+    public static void printLottoList(List<Lotto> autoLottos , List<Lotto> manualLottos){
+        System.out.println();
+        autoLottos.addAll(manualLottos);
+        for(Lotto lotto : autoLottos){
+            System.out.println("[" + Utils.getCommaLottoNums(lotto.getLotto())+ "]");
+        }
     }
 
     public static String winningNumbers(){
@@ -43,13 +57,14 @@ public class InputView {
      * step3 start
      */
 
-    public static int manual(){
+    private static int manual(){
         System.out.println();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return Integer.parseInt(sc.nextLine());
     }
 
-    public static String manualgame(int num){
+    public static String manualgame(){
+        int num = manual();
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요..");
         StringBuilder sb = new StringBuilder();

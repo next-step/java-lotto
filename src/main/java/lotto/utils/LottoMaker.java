@@ -6,8 +6,8 @@ import java.util.*;
 
 public class LottoMaker {
 
-    private static final int NUM_OF_CARDS = 45;
-    private static final int NUM_OF_NUMBERS = 6;
+    public static final int NUM_OF_CARDS = 45;
+    public static final int NUM_OF_NUMBERS = 6;
 
     public static List<Integer> getOnetoFortyFive() {
         List<Integer> nums = new ArrayList<>();
@@ -51,5 +51,10 @@ public class LottoMaker {
 
         return manualLottos;
 
+    }
+
+
+    public static String[] ofNewLine2(String games) {
+        return games.split("\n");
     }
 }

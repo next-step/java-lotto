@@ -1,5 +1,7 @@
 package lotto.dto;
 
+import lotto.utils.LottoMaker;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -7,11 +9,13 @@ import java.util.stream.Stream;
 
 public class WinningLotto{
 
+    private static final int MIN_OF_LOTTO = 1;
+    private static final int MAX_OF_LOTTO = 45;
     private Lotto lotto;
     private int bonusNum;
 
     public WinningLotto(Lotto lotto, int bonusNum) {
-        if(bonusNum < 1 || bonusNum > 45 ){
+        if(bonusNum < MIN_OF_LOTTO || bonusNum > MAX_OF_LOTTO ){
             throw new IllegalArgumentException("bonusNum in not in boudary");
         }
         this.lotto = lotto;
