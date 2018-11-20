@@ -19,7 +19,7 @@ public class ManualLottoGeneratorImpl implements LottosGenerator {
     @Override
     public List<Lotto> genertate(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for(String stringLotto : LottoMaker.ofNewLine2(ManualInputs)){
+        for(String stringLotto : LottoMaker.ofNewLine(ManualInputs)){
             lottos.add(LottoMaker.of(stringLotto));
         }
         return lottos;

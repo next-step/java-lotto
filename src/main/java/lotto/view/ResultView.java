@@ -8,11 +8,10 @@ import java.util.Map;
 
 public class ResultView {
 
-    public static void gameResult(String result){
+    public static void gameResult(){
 
         System.out.println("당첨 통계");
         System.out.println("-------");
-        System.out.println(result);
 
     }
 

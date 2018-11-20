@@ -36,6 +36,9 @@ public class ConsoleMain {
         String inputWinnerNumsToString = InputView.winningNumbers();
         int bonusNum = InputView.bonusNum();
 
+        //결과 출력 시작
+        ResultView.gameResult();
+
         //결과 계산
         Map<Rank,Integer> maps = lottoGameTogether.match(new WinningLotto(LottoMaker.of(inputWinnerNumsToString),bonusNum));
         ResultView.printMatchingResult(maps);

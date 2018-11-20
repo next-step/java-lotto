@@ -44,13 +44,6 @@ public enum Rank {
         return rank;
     }
 
-    private static Rank isMatch(Rank rank){
-        if(SECOND == rank){
-            return THIRD;
-        }
-        return rank;
-    }
-
     public int reward(int matchCount){
         return matchCount * won;
     }

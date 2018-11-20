@@ -42,19 +42,9 @@ public class LottoMaker {
         return new Lotto(makedLotto);
     }
 
-    public static Set<Lotto> ofNewLine(String games) {
-        String[] bindedGames = games.split("\n");
-        Set<Lotto> manualLottos = new HashSet<>();
-        for( int i = 0 ; i < bindedGames.length ; i++ ){
-            manualLottos.add(of(bindedGames[i]));
-        }
-
-        return manualLottos;
-
-    }
 
 
-    public static String[] ofNewLine2(String games) {
+    public static String[] ofNewLine(String games) {
         return games.split("\n");
     }
 }
