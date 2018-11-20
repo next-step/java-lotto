@@ -1,6 +1,8 @@
 package lotto;
 
-import lotto.generator.AutoLottoGenerator;
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+import lotto.domain.generator.AutoLottoGenerator;
 import org.junit.Before;
 import org.junit.Test;
 

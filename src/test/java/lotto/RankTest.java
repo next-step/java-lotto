@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Rank;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
@@ -29,10 +29,6 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
-    public String toString() {
-        return String.join(", ", String.valueOf(lottoNumbers));
-    }
-
     int match(Lotto lotto) {
         int count = 0;
         for(LottoNo lottoNumber : lottoNumbers) {
@@ -55,6 +51,12 @@ public class Lotto {
     public int size() {
         return lottoNumbers.size();
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);

@@ -1,6 +1,8 @@
-package lotto;
+package lotto.domain;
 
-import lotto.generator.ManualLottoGenerator;
+import lotto.domain.generator.ManualLottoGenerator;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 
