@@ -12,12 +12,14 @@ public class WinningLottoTest {
 
     @Before
     public void setup() {
-        winningLotto = WinningLotto.from(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        winningLotto = WinningLotto.from(
+            Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(7));
     }
 
     @Test
     public void 생성() {
-        assertThat(winningLotto).isEqualTo(WinningLotto.from(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        assertThat(winningLotto).isEqualTo(
+            WinningLotto.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(7)));
     }
 
     @Test
@@ -40,6 +42,6 @@ public class WinningLottoTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void 당첨번호와_보너스번호_중복() {
-        WinningLotto.from(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+        WinningLotto.from(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(6));
     }
 }

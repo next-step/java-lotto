@@ -1,8 +1,9 @@
 package lotto.view;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private static Scanner scanner = new Scanner(System.in);
@@ -12,8 +13,16 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public static List<String> inputStrings(String question) {
+    public static String inputString(String question) {
         System.out.println(question);
-        return Arrays.asList(scanner.nextLine().replaceAll("\\s+","").split(","));
+        return scanner.nextLine();
+    }
+
+    public static List<String> inputMultilineStrings(String question, int countOfLotto) {
+        System.out.println(question);
+
+        return IntStream.range(0, countOfLotto)
+                .mapToObj(i -> scanner.nextLine())
+                .collect(Collectors.toList());
     }
 }

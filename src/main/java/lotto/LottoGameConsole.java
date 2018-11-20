@@ -1,35 +1,31 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.Statistics;
-import lotto.model.WinningLotto;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.QuestionType;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGameConsole {
 
     public static void main(String args[]) {
-        int money = InputView.inputInteger(QuestionType.MONEY_FOR_BUY.getQuestion());
-        LottoGame lottoGame = new LottoGame();
-        List<Lotto> lottos = lottoGame.buy(money);
+        Money money = Money.from(InputView.inputInteger(QuestionType.MONEY_FOR_BUY.getQuestion()));
+        int countOfManual = InputView.inputInteger(QuestionType.COUNT_OF_MANUAL.getQuestion());
 
-        ResultView.printBoughtHistory(lottos);
+        LottoGame lottoGame = new LottoGame(money);
+        List<Lotto> lottos = lottoGame.buy(
+            new ManualLottosGenerator(InputView.inputMultilineStrings(QuestionType.NUMBERS_OF_MANUAL.getQuestion(), countOfManual)),
+            new AutoLottosGenerator());
 
-        List<Integer> winningNumber = toIntegers(InputView.inputStrings(QuestionType.LAST_WEEKEND_PRIZE.getQuestion()));
-        int bonusNumber = InputView.inputInteger(QuestionType.LAST_WEEKEND_BONUS.getQuestion());
-        WinningLotto winningLotto = WinningLotto.from(winningNumber, bonusNumber);
+        ResultView.printBoughtHistory(lottos, countOfManual);
+
+        WinningLotto winningLotto = WinningLotto.from(
+            Lotto.fromComma(InputView.inputString(QuestionType.LAST_WEEKEND_PRIZE.getQuestion())),
+            LottoNumber.from(InputView.inputInteger(QuestionType.LAST_WEEKEND_BONUS.getQuestion())));
 
         Statistics statistics = new Statistics(lottos, winningLotto);
         ResultView.printCountOfRank(statistics);
         ResultView.printReturnsOfInvestment(statistics);
     }
-
-    private static List<Integer> toIntegers(List<String> strings) {
-        return strings.stream().map(Integer::valueOf).collect(Collectors.toList());
-    }
-
 }
