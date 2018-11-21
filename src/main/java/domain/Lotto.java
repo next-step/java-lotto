@@ -3,48 +3,75 @@ package domain;
 import java.util.*;
 
 public class Lotto {
-    static final int LOTTOBALLS = 6;
-    static final int LOTTORANGE = 45;
+    static final int LOTTO_SIZE = 6;
 
-    private List<Integer> lotto;
+    private Set<LottoNo> lotto;
 
-    public Lotto() {
-        this.lotto = new ArrayList<>();
-        pickLottoNumbers();
-    }
-
-    public List<Integer> getLotto() {
-        return this.lotto;
-    }
-
-    public void rangeOfLottoNumber() {
-        for(int i = 1; i <= LOTTORANGE; i++) {
-            this.lotto.add(i);
+    private Lotto(Set<LottoNo> lottoNo) {
+        if(lottoNo.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException();
         }
+        this.lotto = lottoNo;
     }
 
-    public void shuffleNumbers() {
-        Collections.shuffle(this.lotto);
+    public Set<LottoNo> getLotto() {
+        return lotto;
     }
 
-    public void fillLottoNumbers() {
-        Set<Integer> set = new HashSet<>();
+    public int match(Lotto winningLotto) {
+        int count = 0;
 
-        while(set.size() < LOTTOBALLS) {
-            set.add(this.lotto.get(set.size()));
+        for (LottoNo lottoNo : lotto) {
+            count += winningLotto.matchCount(lottoNo);
         }
-
-        this.lotto = new ArrayList<>(set);
-        Collections.sort(this.lotto);
+        return count;
     }
 
-    public void pickLottoNumbers() {
-        rangeOfLottoNumber();
-        shuffleNumbers();
-        fillLottoNumbers();
+    int matchCount(LottoNo i) {
+        if(lotto.contains(i)) {
+            return 1;
+        }
+        return 0;
     }
 
-    public List<Integer> putLottoNumber() {
-        return this.getLotto();
+    boolean isMatched(int bonusNo) {
+        return lotto.contains(LottoNo.from(bonusNo));
+    }
+
+    public static Lotto from(List<Integer> lotto) {
+        Set<LottoNo> set = new HashSet<>();
+        for(Integer i : lotto) {
+            set.add(LottoNo.from(i));
+        }
+        return new Lotto(set);
+    }
+
+    public static Lotto fromCommas(String string) {
+        String str[] = string.split(",|, ");
+        List<Integer> inputLotto = new ArrayList<>();
+        for(String s : str) {
+            inputLotto.add(Integer.parseInt(s));
+        }
+        return from(inputLotto);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lotto=" + lotto +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }
