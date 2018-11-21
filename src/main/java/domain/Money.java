@@ -1,15 +1,7 @@
 package domain;
 
-import java.util.List;
-
 public class Money {
-//    public static int sum(List<Rank> values) {
-//        int sum = 0;
-//        for(Rank rank : values) {
-//            sum += rank.getWinningMoney();
-//        }
-//        return sum;
-//    }
+    static final int PRICE = 1_000;
 
     public static double profitRatio(int putMoney, int totalProfitMoney) {
         double number = (double)totalProfitMoney / (double)putMoney;
@@ -18,5 +10,9 @@ public class Money {
 
     public static Integer sum(Rank rank, Integer integer) {
         return rank.getWinningMoney() * integer;
+    }
+
+    public static int turnOfLotto(int i) {
+        return i/PRICE;
     }
 }

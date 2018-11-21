@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoResult;
-import domain.Money;
-import domain.Rank;
+import domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -13,18 +10,16 @@ public class ResultView {
         System.out.println(turn + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<Lotto> lottos) {
-        for(Lotto lotto : lottos) {
+    public static void printLottos(LottoCreate lottos) {
+        for(Lotto lotto : lottos.getLottocreate()) {
             System.out.println(lotto.getLotto());
         }
     }
 
     public static void printResult(LottoResult list) {
         System.out.println();
-
         System.out.println("당첨 통계");
         System.out.println("---------");
-
         System.out.println("3개 일치 (5000)원 - " + list.getCount(Rank.FIFTH) + "개");
         System.out.println("4개 일치 (50000원) - " + list.getCount(Rank.FOURTH) + "개");
         System.out.println("5개 일치 (1500000원) - " + list.getCount(Rank.THIRD) + "개");
