@@ -16,17 +16,14 @@ public class LottoCreate {
 
     public LottoResult match(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
-
         for(Lotto lotto : lottocreate) {
             lottoResult.addLotto((winningLotto.matchesNo(lotto)));
         }
-
         return lottoResult;
     }
 
-    public static LottoCreate from(int num) {
-        List<Lotto> lottos = new ArrayList<>();
-
+    public static LottoCreate from(int num, List<Lotto> list) {
+        List<Lotto> lottos = list;
         for(int i = 0; i < num; i++) {
             lottos.add(LottoCreate.pickLottoBalls());
         }

@@ -2,12 +2,12 @@ package view;
 
 import domain.*;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    public static void printNumberOfLottos(int turn) {
-        System.out.println(turn + "개를 구매했습니다.");
+    public static void printNumberOfLottos(int turn, int manual) {
+        System.out.println();
+        System.out.println("수동으로 " + manual + "장, 자동으로 " + (turn - manual) + "개를 구매했습니다.");
     }
 
     public static void printLottos(LottoCreate lottos) {

@@ -1,7 +1,6 @@
 import domain.Lotto;
 import domain.Rank;
 import domain.WinningLotto;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
@@ -23,7 +22,7 @@ public class LottoTest {
     @Test
     public void 이등() {
         int bonusNo = 7;
-        Lotto lotto = Lotto.fromCommas("1,2,3,4,5,7");
+        Lotto lotto = Lotto.fromCommas("1, 2, 3, 4, 5, 7");
         Lotto winNo = Lotto.from(Arrays.asList(1,2,3,4,5,6));
         WinningLotto winningLotto = WinningLotto.from(winNo, bonusNo);
         Rank value = winningLotto.matchesNo(lotto);

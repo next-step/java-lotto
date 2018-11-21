@@ -47,7 +47,7 @@ public class Lotto {
     }
 
     public static Lotto fromCommas(String string) {
-        String str[] = string.split(",|, ");
+        String str[] = string.split(", ");
         List<Integer> inputLotto = new ArrayList<>();
         for(String s : str) {
             inputLotto.add(Integer.parseInt(s));
