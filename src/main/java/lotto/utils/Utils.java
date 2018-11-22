@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.dto.Lotto;
+import lotto.vo.LottoNum;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class Utils {
 
-    public static String getCommaLottoNums(Set<Integer> lotto){
+    public static String getCommaLottoNums(Set<LottoNum> lotto){
         return String.join(", ", getLottoNumbersToStringArray(lotto));
     }
 
-    public static String[] getLottoNumbersToStringArray(Set<Integer> numbers){
+    public static String[] getLottoNumbersToStringArray(Set<LottoNum> numbers){
         String[] lottoNums = new String[Lotto.LOTTO_SIZE];
         for(int i = 0 ; i < numbers.size() ; i++ ){
             lottoNums[i] = String.valueOf(numbers.toArray()[i]);

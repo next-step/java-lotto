@@ -20,7 +20,7 @@ public class ManualLottoGeneratorImpl implements LottosGenerator {
     public List<Lotto> genertate(Money money) {
         List<Lotto> lottos = new ArrayList<>();
         for(String stringLotto : LottoMaker.ofNewLine(ManualInputs)){
-            lottos.add(LottoMaker.of(stringLotto));
+            lottos.add(LottoMaker.of(stringLotto.trim()));
         }
         return lottos;
     }

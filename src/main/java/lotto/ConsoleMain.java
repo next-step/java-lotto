@@ -12,6 +12,7 @@ import lotto.service.LottoResult;
 import lotto.utils.LottoMaker;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.vo.LottoNum;
 
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class ConsoleMain {
         ResultView.printMatchingResult(maps);
 
         //결과 출력
-        LottoResult lottoResult = new LottoResult( autoMoney.getMoney() , maps);
+        LottoResult lottoResult = new LottoResult(autoMoney.getMoney() , maps);
         ResultView.printProfitResult(lottoResult);
 
 

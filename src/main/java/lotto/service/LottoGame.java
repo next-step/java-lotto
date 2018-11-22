@@ -6,6 +6,7 @@ import lotto.dto.Money;
 import lotto.dto.Rank;
 import lotto.dto.WinningLotto;
 import lotto.utils.LottoMaker;
+import lotto.utils.Utils;
 import lotto.view.InputView;
 
 import java.util.ArrayList;
@@ -35,6 +36,14 @@ public class LottoGame {
 
     public int getGames() {
         return gamePlays.size();
+    }
+
+    public List<String> stringOf(){
+        List<String> stringLottos = new ArrayList<>();
+        for(Lotto lotto : gamePlays){
+            stringLottos.add(lotto.toString());
+        }
+        return stringLottos;
     }
 
 }
