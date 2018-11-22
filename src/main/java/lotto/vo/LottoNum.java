@@ -12,7 +12,7 @@ public class LottoNum {
     private static final Map<Integer, LottoNum> lottoNums = new HashMap<>();
 
     static {
-        for (int i = 0; i < 46; i++){
+        for (int i = 1; i < 46; i++){
             lottoNums.put(i,new LottoNum(i));
         }
     }
@@ -23,5 +23,13 @@ public class LottoNum {
             throw new IllegalArgumentException();
         }
         this.num = num;
+    }
+
+    public static LottoNum of(int num){
+        return lottoNums.get(num);
+    }
+
+    public int getNum() {
+        return num;
     }
 }

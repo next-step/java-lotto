@@ -1,5 +1,7 @@
 package lotto.dto;
 
+import lotto.vo.LottoNum;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,20 +12,20 @@ public class WinningLotto{
     private static final int MIN_OF_LOTTO = 1;
     private static final int MAX_OF_LOTTO = 45;
     private Lotto lotto;
-    private int bonusNum;
+    private LottoNum bonusNum;
 
     public WinningLotto(Lotto lotto, int bonusNum) {
         if(bonusNum < MIN_OF_LOTTO || bonusNum > MAX_OF_LOTTO ){
             throw new IllegalArgumentException("bonusNum in not in boudary");
         }
         this.lotto = lotto;
-        this.bonusNum = bonusNum;
+        this.bonusNum = LottoNum.of(bonusNum);
     }
 
     public Rank matchOf(Lotto boughntLotto) {
         int matchingCount = lotto.match(boughntLotto);
-        boolean matchingBonus = boughntLotto.contains(bonusNum);
-        return Rank.valueOf(matchingCount,matchingBonus);
+        boolean matchingBonus2 = boughntLotto.contains(bonusNum);
+        return Rank.valueOf(matchingCount,matchingBonus2);
     }
 
     public Map<Rank,Integer> match(List<Lotto> gamePlays) {

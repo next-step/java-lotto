@@ -31,14 +31,6 @@ public class InputView {
         }
     }
 
-    public static void printLottoList(List<Lotto> autoLottos , List<Lotto> manualLottos){
-        System.out.println();
-        autoLottos.addAll(manualLottos);
-        for(Lotto lotto : autoLottos){
-            System.out.println("[" + Utils.getCommaLottoNums(lotto.getLotto())+ "]");
-        }
-    }
-
     public static String winningNumbers(){
 
         System.out.println();

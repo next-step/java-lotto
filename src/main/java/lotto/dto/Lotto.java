@@ -1,28 +1,22 @@
 package lotto.dto;
 
-import lotto.utils.LottoMaker;
+import lotto.vo.LottoNum;
 
-import java.util.List;
 import java.util.Set;
 
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-    private Set<Integer> frameNumber;
+    private Set<LottoNum> frameNumber;
 
-    /**
-     * Test용 생성자
-     * 테스트하려면 필요한데...필요할까..
-     * @param frameNumber
-     */
-    public Lotto(Set<Integer> frameNumber) {
+    public Lotto(Set<LottoNum> frameNumber) {
         if(frameNumber.size() != LOTTO_SIZE){
             throw new IllegalArgumentException("Lotto has must 6 arguments size");
         }
         this.frameNumber = frameNumber;
     }
 
-    public Set<Integer> getLotto() {
+    public Set<LottoNum> getLotto() {
         return frameNumber;
     }
 
@@ -32,15 +26,31 @@ public class Lotto {
      */
     public int match(Lotto boughntLotto) {
         int matchCount = 0;
-        for(Integer integer : frameNumber){
-            if(boughntLotto.contains(integer)){
+        for(LottoNum lottoNum : frameNumber){
+            if(boughntLotto.contains(lottoNum)){
                 matchCount++;
             }
         }
         return matchCount;
     }
 
-    public boolean contains(int bonusnum){
+    public boolean contains(LottoNum bonusnum){
         return frameNumber.contains(bonusnum);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        boolean start = true;
+        for(LottoNum lottoNum : frameNumber){
+            if(start){
+                sb.append(lottoNum.getNum());
+                start = false;
+                continue;
+            }
+            sb.append(", " + lottoNum.getNum());
+        }
+
+        return sb.toString();
     }
 }

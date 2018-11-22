@@ -1,10 +1,6 @@
 package lotto.service;
 
-import lotto.dto.Lotto;
 import lotto.dto.Rank;
-import lotto.dto.WinningLotto;
-
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -16,7 +12,6 @@ public class LottoResult {
 
     int inputMoney;
     Map<Rank, Integer> maps;
-
 
     public LottoResult(int inputMoney, Map<Rank, Integer> maps) {
         this.inputMoney = inputMoney;

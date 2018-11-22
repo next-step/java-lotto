@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.dto.Lotto;
+import lotto.vo.LottoNum;
 
 import java.util.*;
 
@@ -25,18 +26,18 @@ public class LottoMaker {
 
     public static Lotto lottoOf(){
         List<Integer> lotto = getSixNumsAfterShuffle();
-        Set<Integer> makedLotto = new HashSet<>();
+        Set<LottoNum> makedLotto = new HashSet<>();
         for (Integer integer : lotto){
-            makedLotto.add(integer);
+            makedLotto.add(LottoNum.of(integer));
         }
         return new Lotto(makedLotto);
     }
 
     public static Lotto of(String arg){
         String[] temp = arg.split(",");
-        Set<Integer> makedLotto = new HashSet<>();
+        Set<LottoNum> makedLotto = new HashSet<>();
         for(int i = 0 ; i < temp.length ; i++){
-            makedLotto.add(Integer.parseInt(temp[i].trim()));
+            makedLotto.add(LottoNum.of(Integer.parseInt(temp[i])));
         }
 
         return new Lotto(makedLotto);
