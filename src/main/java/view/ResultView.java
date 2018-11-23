@@ -2,6 +2,7 @@ package view;
 
 import domain.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -10,10 +11,10 @@ public class ResultView {
         System.out.println("수동으로 " + manual + "장, 자동으로 " + (turn - manual) + "개를 구매했습니다.");
     }
 
-    public static void printLottos(LottoCreate lottos) {
-        for(Lotto lotto : lottos.getLottocreate()) {
-            System.out.println(lotto.getLotto());
-        }
+    public static void printLottos(List<Lotto> lottos) {
+        lottos.forEach(l -> {
+            System.out.println(l.getLotto());
+        });
     }
 
     public static void printResult(LottoResult list) {
