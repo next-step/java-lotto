@@ -3,43 +3,42 @@ package domain;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class LottoCreate {
+public class LottoCreate implements LottoGenerator{
     private List<Lotto> lottocreate;
 
-    private LottoCreate(List<Lotto> lottocreate) {
-        this.lottocreate = lottocreate;
+    private LottoCreate() {
+        lottocreate = new ArrayList<>();
     }
 
     public List<Lotto> getLottocreate() {
         return lottocreate;
     }
 
+    public List<Lotto> generate(Money money) {
+        int num = money.turnOfLotto();
+        IntStream.range(0, num).forEach(i -> lottocreate.add(pickLottoBalls()));
+        return lottocreate;
+    }
+
     public LottoResult match(WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
-
-        for(Lotto lotto : lottocreate) {
-            lottoResult.addLotto((winningLotto.matchesNo(lotto)));
-        }
-
+        lottocreate.forEach(l -> {
+            lottoResult.addLotto(winningLotto.matchesNo(l));
+        });
         return lottoResult;
     }
 
-    public static LottoCreate from(int num) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for(int i = 0; i < num; i++) {
-            lottos.add(LottoCreate.pickLottoBalls());
-        }
-        return new LottoCreate(lottos);
+    public static LottoCreate from() {
+        return new LottoCreate();
     }
 
-    public static Lotto pickLottoBalls() {
+    public Lotto pickLottoBalls() {
         List<Integer> lottoBalls = (createAutoLottoBall().subList(0, 6));
         Collections.sort(lottoBalls);
         return Lotto.from(lottoBalls);
     }
 
-    public static List<Integer> createAutoLottoBall() {
+    public List<Integer> createAutoLottoBall() {
         List<Integer> lottoBall = new ArrayList<>();
         IntStream.range(1, 46).forEach(i -> lottoBall.add(i));
         Collections.shuffle(lottoBall);
