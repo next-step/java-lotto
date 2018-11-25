@@ -3,6 +3,8 @@ package view;
 import domain.Lotto;
 import domain.LottoCreate;
 import domain.Money;
+
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -12,7 +14,7 @@ public class InputView {
         Scanner sc = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         int amount = sc.nextInt();
-        return amount;
+        return Optional.ofNullable(amount).orElseThrow(IllegalArgumentException::new);
     }
 
     public static String typeLottoNumbers(){
@@ -20,14 +22,14 @@ public class InputView {
         System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String str = sc.nextLine();
-        return str;
+        return Optional.ofNullable(str).orElseThrow(IllegalArgumentException::new);
     }
 
     public static int typeBonusNo() {
         Scanner sc = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonumNo = sc.nextInt();
-        return bonumNo;
+        return Optional.ofNullable(bonumNo).orElseThrow(IllegalArgumentException::new);
     }
 
     public static int ManualLotto() {
@@ -35,13 +37,11 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         Scanner sc = new Scanner(System.in);
         int no = sc.nextInt();
-        return no;
+        return Optional.ofNullable(no).orElseThrow(IllegalArgumentException::new);
     }
 
-    public static void typeManualLotto(LottoCreate lottos, Money money) {
-        Scanner sc = new Scanner(System.in);
+    public static void typeManualLotto() {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        IntStream.range(0, money.turnOfManualLotto()).forEach(i -> lottos.getLottocreate().add(Lotto.fromCommas(sc.nextLine())));
     }
 }
