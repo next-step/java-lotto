@@ -30,7 +30,7 @@ public class LottoTest {
     }
 
     @Test
-    public void 당첨로() {
+    public void 당첨로또() {
         Set<Integer> winningNumber = new TreeSet<>(Arrays.asList(2, 5, 11, 23, 35, 40));
 
         lotto.countbyComparingNumbers(winningNumber);

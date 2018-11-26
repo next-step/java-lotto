@@ -13,8 +13,13 @@ public class LottoTypeTest {
         assertThat(lottoType).isEqualTo(LottoType.THREE);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 로또타입없음_예외발생() {
+       LottoType.findLottoType(2);
+    }
+
     @Test
-    public void 수량에해당하는_수익계() {
+    public void 수량에해당하는_수익계산() {
         LottoType lottoType = LottoType.THREE;
         int result = lottoType.computeEarning(10);
 

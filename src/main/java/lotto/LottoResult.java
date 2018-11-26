@@ -1,22 +1,20 @@
-package lotto;
+import lotto.Lotto;
+import lotto.LottoType;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class LottoComparator {
+public class LottoResult {
     private Map<LottoType, Integer> winnings = new HashMap<>();
 
-    public Map<LottoType, Integer> getWinnings() {
-        return winnings;
-    }
-
-    public void comparate(List<Lotto> purchasLottos, Set<Integer> winningNumber) {
+    public Map<LottoType, Integer> comparate(List<Lotto> purchasLottos, Set<Integer> winningNumber) {
         for (Lotto lotto : purchasLottos) {
             lotto.countbyComparingNumbers(winningNumber);
             increaseWinningCount(lotto);
         }
+        return winnings;
     }
 
     private void increaseWinningCount(Lotto lotto) {

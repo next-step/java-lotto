@@ -2,19 +2,22 @@ package lotto;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningNumberTest {
 
     @Test
-    public void 당첨번호만들기() {
-        WinningNumber winningNumber = new WinningNumber("1, 5, 10, 20, 25, 33");
-       Set<Integer> winnings = winningNumber.getWinningNumbers();
+    public void 로또비교() {
+        Set<Integer> lottoNumber = new TreeSet<>(Arrays.asList(5, 12, 25, 28, 33, 42));
+        List<Lotto> purchasLottos = new ArrayList<>();
+        purchasLottos.add(new Lotto(lottoNumber));
+        WinningNumber winningNumber = new WinningNumber("5, 12, 25, 20, 30, 40");
 
-       assertThat(winnings).containsExactly(1, 5, 10, 20, 25, 33);
+        Map<LottoType, Integer> winnings = winningNumber.match(purchasLottos);
+        int result = winnings.get(LottoType.THREE);
+
+        assertThat(result).isOne();
     }
 }

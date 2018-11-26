@@ -19,4 +19,12 @@ public class MoneyTest {
         Money money = new Money(5);
         money.getQuntity();
     }
+
+    @Test
+    public void 수익률계산(){
+        Money money = new Money(14000);
+        double result = money.earningRate(5000.0);
+
+        assertThat(String.format("%.2f", result)).isEqualTo("0.36");
+    }
 }
