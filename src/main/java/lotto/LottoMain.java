@@ -15,12 +15,11 @@ public class LottoMain {
         OutputView.printPurchaseLottos(purchaseLotto);
 
         WinningNumber winningNumber = InputView.getWinningNumber();
-        LottoComparator lottoComparator = new LottoComparator();
-        lottoComparator.comparate(purchaseLotto, winningNumber.getWinningNumbers());
-        OutputView.printCompareResult(lottoComparator);
 
-        double earing = ComputeEarningsRate.computeEarning(lottoComparator.getWinnings(), 0.0);
-        double eaningRate = ComputeEarningsRate.computeEarningRate(earing, money.getPrice());
-        OutputView.printEaningRate(eaningRate);
+        LottoResult lottoResult = new LottoResult(winningNumber.match(purchaseLotto));
+        OutputView.printLottoResult(lottoResult);
+        double earning = lottoResult.computeEarning();
+
+        OutputView.printEarningRate(money.earningRate(earning));
     }
 }
