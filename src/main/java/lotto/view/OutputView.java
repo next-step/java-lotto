@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.Lotto;
-import lotto.LottoComparator;
+import lotto.LottoResult;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printCompareResult(LottoComparator lottoComparator) {
+    public static void printLottoResult(LottoResult lottoResult) {
         System.out.println();
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.println(lottoComparator);
+        System.out.println(lottoResult);
     }
 
-    public static void printEaningRate(double earningRate) {
-        System.out.println("총 수익률은" + earningRate + "입니다.");
+    public static void printEarningRate(double earningRate) {
+        System.out.println("총 수익률은" + String.format("%.2f", earningRate) + "입니다.");
     }
 }
