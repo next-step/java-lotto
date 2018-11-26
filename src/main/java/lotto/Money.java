@@ -10,7 +10,7 @@ public class Money {
         }
         this.price = price;
     }
-    
+
     public int getQuntity() {
         return this.price / DEFAULT_PRICE;
     }
