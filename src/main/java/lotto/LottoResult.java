@@ -1,27 +1,26 @@
-import lotto.Lotto;
-import lotto.LottoType;
+package lotto;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class LottoResult {
-    private Map<LottoType, Integer> winnings = new HashMap<>();
+    private static final int INT_DEFAULT_VALUE = 0;
+    private Map<LottoType, Integer> winnings;
 
-    public Map<LottoType, Integer> comparate(List<Lotto> purchasLottos, Set<Integer> winningNumber) {
-        for (Lotto lotto : purchasLottos) {
-            lotto.countbyComparingNumbers(winningNumber);
-            increaseWinningCount(lotto);
-        }
+    public LottoResult(Map<LottoType, Integer> winnings) {
+        this.winnings = winnings;
+    }
+
+    public Map<LottoType, Integer> getWinnings() {
         return winnings;
     }
 
-    private void increaseWinningCount(Lotto lotto) {
-        if (lotto.isWinning()) {
-            LottoType lottoType = lotto.findLottoType();
-            winnings.compute(lottoType, (key, winningCount) -> winningCount == null ? 1 : winningCount + 1);
+    public double computeEarning() {
+        double earnings = 0.0;
+        for (LottoType lottoType : LottoType.values()) {
+            int winningCount = winnings.getOrDefault(lottoType, INT_DEFAULT_VALUE);
+            earnings += lottoType.computeEarning(winningCount);
         }
+        return earnings;
     }
 
     @Override
