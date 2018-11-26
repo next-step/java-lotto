@@ -24,7 +24,7 @@ public class Lotto {
         for (LottoNo lottoNo : lotto) {
             count += winningLotto.matchCount(lottoNo);
         }
-        return count;
+        return Optional.ofNullable(count).orElseThrow(IllegalArgumentException::new);
     }
 
     int matchCount(LottoNo i) {

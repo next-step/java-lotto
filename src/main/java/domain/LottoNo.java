@@ -19,8 +19,12 @@ public class LottoNo {
         this.num = num;
     }
 
-    public static LottoNo from(int num) {
-        return lottoNumbers.get(num);
+    static LottoNo from(int num) {
+        return Optional.ofNullable(lottoNumbers.get(num)).orElseThrow(IllegalArgumentException::new);
+    }
+
+    public int getNum() {
+        return num;
     }
 
     @Override

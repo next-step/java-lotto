@@ -20,7 +20,7 @@ public class Money {
         return rank.getWinningMoney() * integer;
     }
 
-    public int turnOfLotto() {
+    public int turnOfAutoLotto() {
         return (this.money-this.manualMoney)/PRICE;
     }
 
@@ -29,6 +29,9 @@ public class Money {
     }
 
     public static Money amountOfPurchase(int money, int manual) {
+        if(money - (manual*PRICE) < 0) {
+            throw new IllegalArgumentException();
+        }
         return new Money(money, manual*PRICE);
     }
 

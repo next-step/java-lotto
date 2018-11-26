@@ -15,8 +15,9 @@ public class LottoCreate implements LottoGenerator{
     }
 
     public List<Lotto> generate(Money money) {
-        int num = money.turnOfLotto();
+        int num = money.turnOfAutoLotto();
         IntStream.range(0, num).forEach(i -> lottocreate.add(pickLottoBalls()));
+        Optional.ofNullable(lottocreate);
         return lottocreate;
     }
 
@@ -34,7 +35,6 @@ public class LottoCreate implements LottoGenerator{
 
     public Lotto pickLottoBalls() {
         List<Integer> lottoBalls = (createAutoLottoBall().subList(0, 6));
-        Collections.sort(lottoBalls);
         return Lotto.from(lottoBalls);
     }
 
