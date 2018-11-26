@@ -1,7 +1,9 @@
 package lotto;
 
+import java.util.stream.Stream;
+
 public enum LottoType {
-    THREE(3, 5000), FOUR(4, 50000), FIVE(5, 150000), SIX(6, 200000000);
+    THREE(3, 5_000), FOUR(4, 50_000), FIVE(5, 150_000), SIX(6, 200_000_000);
 
     private int winningNumber;
     private int reword;
@@ -12,18 +14,18 @@ public enum LottoType {
     }
 
     public static LottoType findLottoType(int winningNumber) {
-        switch (winningNumber) {
-            case 3:
-                return THREE;
-            case 4:
-                return FOUR;
-            case 5:
-                return FIVE;
-        }
-        return SIX;
+        return Stream.of(values())
+                .filter(value -> value.isSameWinningNumber(winningNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("타입정보를 찾을 수 없습니다" + winningNumber));
+
     }
 
-    public int computeEarning(int winningCount){
+    private boolean isSameWinningNumber(int winningNumber) {
+        return this.winningNumber == winningNumber;
+    }
+
+    public int computeEarning(int winningCount) {
         return this.reword * winningCount;
     }
 
