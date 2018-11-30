@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class Money {
     private final static int DIVISOR = 1_000;
