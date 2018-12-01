@@ -1,6 +1,9 @@
 package lottoTest;
 
-import lotto.*;
+import lotto.domain.Lotteries;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
+import lotto.domain.Money;
 import org.junit.Test;
 
 import java.util.Arrays;

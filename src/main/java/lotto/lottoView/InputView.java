@@ -1,7 +1,5 @@
 package lotto.lottoView;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.parser.IncorrectNamespaceURIChecker;
-import lotto.LottoNo;
 import lotto.exception.IncorrectNumberBoundryException;
 
 import java.util.InputMismatchException;

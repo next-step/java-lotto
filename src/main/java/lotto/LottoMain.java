@@ -1,15 +1,15 @@
 package lotto;
 
+import lotto.domain.*;
 import lotto.lottoView.InputView;
 import lotto.lottoView.ResultView;
 
 import java.util.List;
 
 
-
 public class LottoMain {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         //처음 금액, 수동 입력갯수 입력
         Money money = new Money(InputView.inputInitCost());
