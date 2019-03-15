@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 public class StringAddCalculator {
     private static final String REGEX = ",|:";
 
-    public static int add(String input) {
+    public static Positive add(String input) {
         if (isBlank(input))
-            return 0;
+            return new Positive(0);
 
         if (isSingleInteger(input)) {
-            return Integer.parseInt(input);
+            return new Positive(Integer.parseInt(input));
         }
 
         return sum(convertStringsIntoIntegers(split(input, REGEX)));
@@ -45,19 +45,16 @@ public class StringAddCalculator {
         return tokens.split(regex);
     }
 
-    private static List<Integer> convertStringsIntoIntegers(String[] tokens) {
+    private static List<Positive> convertStringsIntoIntegers(String[] tokens) {
         return Arrays.stream(tokens)
-            .map(token -> {
-                if (Integer.parseInt(token) < 0)
-                    throw new RuntimeException();
-                return Integer.parseInt(token);
-            })
+            .map(Integer::parseInt)
+            .map(Positive::new)
             .collect(Collectors.toList());
     }
 
-    private static int sum(List<Integer> integerTokens) {
-        return integerTokens.stream()
-            .mapToInt(Integer::intValue)
-            .sum();
+    private static Positive sum(List<Positive> integerTokens) {
+        Positive sum = new Positive(0);
+        integerTokens.forEach(sum::add);
+        return sum;
     }
 }

@@ -1,19 +1,31 @@
 package stringaddcalculator;
 
-/*
-    Value Object
-    "모든 원시값과 문자열을 포장한다."를 만족시키려면...어디에 써야할까...
-*/
-public class Positive {
-    private int no;
+import java.util.Objects;
 
-    public Positive(int no) {
-        if (no < 0)
+public class Positive {
+    private int number;
+
+    public Positive(int number) {
+        if (number < 0)
             throw new IllegalArgumentException();
-        this.no = no;
+        this.number = number;
     }
 
-    public Positive add(int no) {
-        return new Positive(this.no + no);
+    public Positive add(Positive positive) {
+        this.number += positive.number;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Positive positive = (Positive) o;
+        return number == positive.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
