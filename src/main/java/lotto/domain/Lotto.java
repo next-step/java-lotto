@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+    public static final int TOTAL_LOTTO_NUMBERS = 6;
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
