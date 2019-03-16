@@ -27,7 +27,7 @@ public class LottoMachine {
      * @param lottos 구매한 로또들
      * @param number 당첨로또 번호 한개
      */
-    private static void checkWinningNumber(List<Lotto> lottos, int number) {
+    public static void checkWinningNumber(List<Lotto> lottos, int number) {
         for (Lotto lotto : lottos) {
             lotto.incrementMatchCount(number);
         }
@@ -40,7 +40,7 @@ public class LottoMachine {
      * @param lottos 구매한 로또들
      * @return 로또 통계 dto
      */
-    private static LottoStatistics checkWinningLotto(List<Lotto> lottos) {
+    public static LottoStatistics checkWinningLotto(List<Lotto> lottos) {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         //등수별 개수

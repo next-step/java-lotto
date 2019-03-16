@@ -20,11 +20,11 @@ public enum LottoPrize {
         this.prize = prize;
     }
 
-    public static LottoPrize getEnumNameByIntValue(int matchCount){
+    public static LottoPrize getEnumNameByIntValue(int matchCount) throws IllegalArgumentException {
         return Arrays.stream(LottoPrize.values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException(String.format("해당 카운트는 없음 : %d", matchCount)));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("해당 카운트는 없음 : %d", matchCount)));
     }
 
     public int getPrize() {

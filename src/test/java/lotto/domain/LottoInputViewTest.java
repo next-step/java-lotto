@@ -4,6 +4,8 @@ package lotto.domain;
 import lotto.view.LottoInputView;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoInputViewTest {
@@ -30,5 +32,17 @@ public class LottoInputViewTest {
     public void 지난주당첨번호개수안맞음() {
         String inputValue = "1, 2, 3, 4";
         LottoInputView.splitWinningNumbers(inputValue);
+    }
+
+    @Test
+    public void 당첨로또번호생성() {
+        List<Integer> winningNumbers = LottoInputView.createWinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"});
+        assertThat(winningNumbers).hasSize(6);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 당첨로또번호중복() {
+        List<Integer> winningNumbers = LottoInputView.createWinningNumbers(new String[]{"1", "1", "1", "1", "1", "1"});
+        assertThat(winningNumbers).hasSize(6);
     }
 }

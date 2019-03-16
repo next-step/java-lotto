@@ -12,6 +12,11 @@ public class Lotto {
         this.matchCount = 0;
     }
 
+    public Lotto(List<Integer> numbers, int matchCount) {
+        this.numbers = numbers;
+        this.matchCount = matchCount;
+    }
+
     /**
      * 맞은 숫자 개수 증가
      * @param number 당첨번호 한개
