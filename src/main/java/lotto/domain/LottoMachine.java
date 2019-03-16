@@ -27,4 +27,16 @@ public class LottoMachine {
             lotto.incrMatchCount(number);
         }
     }
+
+    public static LottoStatistics checkWinningLotto(List<Lotto> lottos) {
+        LottoStatistics lottoStatistics = new LottoStatistics();
+
+        for (Lotto lotto : lottos) {
+            lottoStatistics.incrPrizeCnt(LottoStatistics.Prize.getEnumNameByIntValue(lotto.getMatchCount()));
+        }
+
+        lottoStatistics.calculateProfit(lottos.size());
+
+        return lottoStatistics;
+    }
 }

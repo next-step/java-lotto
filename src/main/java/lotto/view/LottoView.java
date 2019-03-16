@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
 
 import java.util.List;
 import java.util.Scanner;
@@ -56,33 +57,16 @@ public class LottoView {
     }
 
 
-    public static void showWinningStatistics(List<Lotto> lottos) {
+    public static void showWinningStatistics(LottoStatistics lottoStatistics) {
         System.out.println();
         System.out.println("당첨 통계\n---------");
 
-        int threeMatchCnt = 0;
-        int fourMatchCnt = 0;
-        int fiveMatchCnt = 0;
-        int sixMatchCnt = 0;
-
-        for (Lotto lotto : lottos) {
-            if (lotto.getMatchCount() == 3) {
-                threeMatchCnt++;
-            } else if (lotto.getMatchCount() == 4) {
-                fourMatchCnt++;
-            } else if (lotto.getMatchCount() == 5) {
-                fiveMatchCnt++;
-            } else if (lotto.getMatchCount() == 6) {
-                sixMatchCnt++;
-            }
-        }
-
-        System.out.println("3개 일치 (5000원)- " + threeMatchCnt + "개");
-        System.out.println("4개 일치 (50000원)- " + fourMatchCnt + "개");
-        System.out.println("5개 일치 (1500000원)- " + fiveMatchCnt + "개");
-        System.out.println("6개 일치 (2000000000원)- " + sixMatchCnt + "개");
-        System.out.println("총 수익률은 "
-                + (5000 * threeMatchCnt + 50000 * fourMatchCnt + 1500000 * fiveMatchCnt + 2000000000 * sixMatchCnt)/(lottos.size()*1000)*1.0d
-                + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("3개 일치 (5000원)- " + lottoStatistics.getForthCnt() + "개");
+        System.out.println("4개 일치 (50000원)- " + lottoStatistics.getThirdCnt() + "개");
+        System.out.println("5개 일치 (1500000원)- " + lottoStatistics.getSecondCnt() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + lottoStatistics.getFirstCnt() + "개");
+        System.out.println("총 수익률은 " + lottoStatistics.getProfit() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
+
+
 }
