@@ -11,8 +11,8 @@ public class LottoChecker {
         return new LottoResult(getMatchCounts(winner, lottoBundle));
     }
 
-    static int[] getMatchCounts(Lotto winner, LottoBundle lottoBundle) {
-        int[] result = new int[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+    static long[] getMatchCounts(Lotto winner, LottoBundle lottoBundle) {
+        long[] result = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
 
         lottoBundle.getLottos().forEach(lotto -> {
             int numberOfDuplicatedNumbers = lotto.getNumberOfDuplicatedNumbers(winner);
@@ -27,7 +27,7 @@ public class LottoChecker {
     }
 
     private static double getProfitRate(long money, long totalPrizeMoney) {
-        return  (double) totalPrizeMoney / money;
+        return (double) totalPrizeMoney / money;
     }
 
     static long getTotalPrizeMoney(LottoResult lottoResult) {

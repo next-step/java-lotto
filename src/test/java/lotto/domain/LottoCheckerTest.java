@@ -20,7 +20,7 @@ public class LottoCheckerTest {
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(six, one, zero));
 
         // when
-        int[] matchCounts = LottoChecker.getMatchCounts(winner, lottoBundle);
+        long[] matchCounts = LottoChecker.getMatchCounts(winner, lottoBundle);
 
         // then
         assertThat(matchCounts).containsSequence(1, 0, 0, 0, 0, 1);
@@ -49,7 +49,7 @@ public class LottoCheckerTest {
     @Test
     public void 총_수익_계산() {
         // given
-        int[] matchCounts = new int[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] matchCounts = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
         matchCounts[LottoRank.FIRST.getMatchCount()]++;
         matchCounts[LottoRank.THIRD.getMatchCount()]++;
 
@@ -66,7 +66,7 @@ public class LottoCheckerTest {
     @Test
     public void 총_수익률_계산() {
         // given
-        int[] matchCounts = new int[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] matchCounts = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
         matchCounts[LottoRank.FIRST.getMatchCount()]++;
         matchCounts[LottoRank.THIRD.getMatchCount()]++;
 

@@ -7,9 +7,9 @@ public enum LottoRank {
     FOURTH(3, 2_000_000_000);
 
     private int matchCount;
-    private int prizeMoney;
+    private long prizeMoney;
 
-    LottoRank(int matchCount, int prizeMoney) {
+    LottoRank(int matchCount, long prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
@@ -18,7 +18,7 @@ public enum LottoRank {
         return matchCount;
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 }

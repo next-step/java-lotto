@@ -3,31 +3,31 @@ package lotto.vo;
 import lotto.enums.LottoRank;
 
 public class LottoResult {
-    private final int first;
-    private final int second;
-    private final int third;
-    private final int fourth;
+    private final long first;
+    private final long second;
+    private final long third;
+    private final long fourth;
 
-    public LottoResult(int[] matchCounts) {
+    public LottoResult(long[] matchCounts) {
         this.first = matchCounts[LottoRank.FIRST.getMatchCount()];
         this.second = matchCounts[LottoRank.SECOND.getMatchCount()];
         this.third = matchCounts[LottoRank.THIRD.getMatchCount()];
         this.fourth = matchCounts[LottoRank.FOURTH.getMatchCount()];
     }
 
-    public int getFirst() {
+    public long getFirst() {
         return first;
     }
 
-    public int getSecond() {
+    public long getSecond() {
         return second;
     }
 
-    public int getThird() {
+    public long getThird() {
         return third;
     }
 
-    public int getFourth() {
+    public long getFourth() {
         return fourth;
     }
 }
