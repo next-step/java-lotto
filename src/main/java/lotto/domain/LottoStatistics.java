@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class LottoStatistics {
+    private static final int LOTTO_PRICE = 1000;
+
     private double profit;
 
     private int firstCnt;
@@ -60,7 +62,7 @@ public class LottoStatistics {
     }
 
     public double calculateProfit(int buyCount) {
-        profit = (5000 * forthCnt + 50000 * thirdCnt + 1500000 * secondCnt + 2000000000 * firstCnt)/(buyCount*1000*1.0d);
+        profit = (Prize.FORTH.prize * forthCnt + Prize.THIRD.prize * thirdCnt + Prize.SECOND.prize * secondCnt + Prize.FIRST.prize * firstCnt)/(buyCount*LOTTO_PRICE*1.0d);
         return profit;
     }
 
