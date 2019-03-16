@@ -2,8 +2,6 @@ package lotto.domain;
 
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -14,7 +12,6 @@ public class LottoMachineTest {
         int numberOfLottos = 5;
 
         // when
-//        List<Lotto> lottos = LottoMachine.getLottos(5);
         LottoBundle lottoBundle = LottoMachine.getLottos(5);
 
         // then
