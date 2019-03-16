@@ -24,20 +24,20 @@ public class LottoGeneratorTest {
     public void 로또_번호_생성() {
         // given
         // when
-        List<Integer> lottoNumbers = LottoGenerator.generate();
+        Lotto lotto = LottoGenerator.generate();
 
         // then
-        assertThat(lottoNumbers).hasSize(6);
+        assertThat(lotto.getNumbers()).hasSize(6);
     }
 
     @Test
     public void 로또_번호는_중복돼선_안됨() {
         // given
         // when
-        List<Integer> lottoNumbers = LottoGenerator.generate();
+        Lotto lotto = LottoGenerator.generate();
 
         // then
-        long numberOfUniqueNumber = lottoNumbers.stream().distinct().count();
-        assertThat(numberOfUniqueNumber).isEqualTo(lottoNumbers.size());
+        long numberOfUniqueNumber = lotto.getNumbers().stream().distinct().count();
+        assertThat(lotto.getNumbers().size()).isEqualTo(numberOfUniqueNumber);
     }
 }

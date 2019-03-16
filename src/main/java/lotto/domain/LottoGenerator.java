@@ -14,8 +14,8 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static List<Integer> generate() {
-        return getSortedLottoNumbers();
+    public static Lotto generate() {
+        return new Lotto(getSortedLottoNumbers());
     }
 
     private static List<Integer> getSortedLottoNumbers() {
