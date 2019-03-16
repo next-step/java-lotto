@@ -14,10 +14,11 @@ public class LottoMachineTest {
         int numberOfLottos = 5;
 
         // when
-        List<Lotto> lottos = LottoMachine.getLottos(5);
+//        List<Lotto> lottos = LottoMachine.getLottos(5);
+        LottoBundle lottoBundle = LottoMachine.getLottos(5);
 
         // then
-        assertThat(lottos).hasSize(numberOfLottos);
+        assertThat(lottoBundle.getLottos()).hasSize(numberOfLottos);
     }
 
     @Test
@@ -26,10 +27,10 @@ public class LottoMachineTest {
         int money = 10_000;
 
         // when
-        List<Lotto> lottos = LottoMachine.buyLottos(money);
+        LottoBundle lottoBundle = LottoMachine.buyLottos(money);
 
         // then
-        assertThat(lottos).hasSize(10);
+        assertThat(lottoBundle.getLottos()).hasSize(10);
     }
 
     @Test
@@ -38,10 +39,10 @@ public class LottoMachineTest {
         int money = 10_500;
 
         // when
-        List<Lotto> lottos = LottoMachine.buyLottos(money);
+        LottoBundle lottoBundle = LottoMachine.buyLottos(money);
 
         // then
-        assertThat(lottos).hasSize(10);
+        assertThat(lottoBundle.getLottos()).hasSize(10);
     }
 
     @Test

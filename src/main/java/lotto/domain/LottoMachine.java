@@ -10,13 +10,15 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    static List<Lotto> getLottos(int numberOfLotto) {
-        return IntStream.range(0, numberOfLotto)
+    static LottoBundle getLottos(int numberOfLotto) {
+        List<Lotto> lottos = IntStream.range(0, numberOfLotto)
                 .mapToObj(i -> LottoGenerator.generate())
                 .collect(Collectors.toList());
+
+        return new LottoBundle(lottos);
     }
 
-    public static List<Lotto> buyLottos(int money) {
+    public static LottoBundle buyLottos(int money) {
         if (money < 0) {
             throw new IllegalArgumentException();
         }
