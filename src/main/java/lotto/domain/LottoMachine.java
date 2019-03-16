@@ -26,7 +26,7 @@ public class LottoMachine {
         return getLottos(getNumberOfAffordableLottos(money));
     }
 
-    private static int getNumberOfAffordableLottos(int money) {
+    public static int getNumberOfAffordableLottos(int money) {
         return money / PRICE_OF_LOTTO;
     }
 }
