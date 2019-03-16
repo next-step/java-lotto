@@ -29,4 +29,15 @@ public class LottoGeneratorTest {
         // then
         assertThat(lottoNumbers).hasSize(6);
     }
+
+    @Test
+    public void 로또_번호는_중복돼선_안됨() {
+        // given
+        // when
+        List<Integer> lottoNumbers = LottoGenerator.generate();
+
+        // then
+        long numberOfUniqueNumber = lottoNumbers.stream().distinct().count();
+        assertThat(numberOfUniqueNumber).isEqualTo(lottoNumbers.size());
+    }
 }
