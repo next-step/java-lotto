@@ -32,7 +32,7 @@ public class LottoMachine {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         for (Lotto lotto : lottos) {
-            lottoStatistics.incrPrizeCnt(LottoStatistics.Prize.getEnumNameByIntValue(lotto.getMatchCount()));
+            lottoStatistics.incrPrizeCnt(LottoPrize.getEnumNameByIntValue(lotto.getMatchCount()));
         }
 
         lottoStatistics.calculateProfit(lottos.size());
