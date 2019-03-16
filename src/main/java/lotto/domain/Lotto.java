@@ -9,9 +9,14 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+        this.matchCount = 0;
     }
 
-    void incrMatchCount(int number) {
+    /**
+     * 맞은 숫자 개수 증가
+     * @param number 당첨번호 한개
+     */
+    void incrementMatchCount(int number) {
         if (numbers.contains(number)) {
             matchCount++;
         }

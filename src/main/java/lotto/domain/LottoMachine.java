@@ -1,40 +1,54 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoMachine {
-    private static final int LOTTO_NUM_COUNT = 6;
 
-    public static List<Integer> createWinningNumbers(String[] winningNumbers) throws IllegalArgumentException {
-        List<Integer> numbers = new ArrayList<>();
-        for (String number : winningNumbers) {
-            numbers.add(Integer.valueOf(number));
+    /**
+     * 당첨번호로 통계 dto 생성
+     *
+     * @param lottos 구매한 로또들
+     * @param winningNumbers 당첨번호들
+     * @return 당첨통계 dto
+     */
+    public static LottoStatistics getLottoStatistics(List<Lotto> lottos, List<Integer> winningNumbers) {
+        for (int number : winningNumbers) {
+            //각 번호별로 체크
+            checkWinningNumber(lottos, number);
         }
 
-        Set<Integer> duplicateNumbers = new HashSet<>(numbers);
-        if (duplicateNumbers.size() != LOTTO_NUM_COUNT) {
-            throw new IllegalArgumentException("중복 당첨숫자 있음");
-        }
-
-        return numbers;
+        //노출 통계자료 생성
+        return checkWinningLotto(lottos);
     }
 
-    public static void checkWinning(List<Lotto> lottos, int number) {
+    /**
+     * 당첨번호 하나로 구매한 로또들에 맞은 번호가 있는지 체크
+     *
+     * @param lottos 구매한 로또들
+     * @param number 당첨로또 번호 한개
+     */
+    private static void checkWinningNumber(List<Lotto> lottos, int number) {
         for (Lotto lotto : lottos) {
-            lotto.incrMatchCount(number);
+            lotto.incrementMatchCount(number);
         }
     }
 
-    public static LottoStatistics checkWinningLotto(List<Lotto> lottos) {
+    /**
+     * 구매한 로또들에 저장한 값들로
+     * 당첨통계 dto 생성
+     *
+     * @param lottos 구매한 로또들
+     * @return 로또 통계 dto
+     */
+    private static LottoStatistics checkWinningLotto(List<Lotto> lottos) {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
+        //등수별 개수
         for (Lotto lotto : lottos) {
-            lottoStatistics.incrPrizeCnt(LottoPrize.getEnumNameByIntValue(lotto.getMatchCount()));
+            lottoStatistics.incrementPrizeCnt(LottoPrize.getEnumNameByIntValue(lotto.getMatchCount()));
         }
 
+        //수익율
         lottoStatistics.calculateProfit(lottos.size());
 
         return lottoStatistics;

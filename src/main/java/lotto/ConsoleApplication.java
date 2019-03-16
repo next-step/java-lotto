@@ -4,9 +4,9 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMarket;
 import lotto.domain.LottoStatistics;
-import lotto.view.LottoView;
+import lotto.view.LottoInputView;
+import lotto.view.LottoOutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleApplication {
@@ -17,35 +17,28 @@ public class ConsoleApplication {
     private static void doLottery() {
         try {
             //로또 구매
-            int buyCount = LottoView.buyLotto();
+            int buyCount = LottoInputView.buyLotto();
 
-            List<Lotto> lottos = new ArrayList<>();
-
-            //로또 번호생성
-            for (int i = 0; i < buyCount; i++) {
-                Lotto lotto = new Lotto(LottoMarket.createNumbers());
-                lottos.add(lotto);
-            }
+            //로또 생성
+            List<Lotto> lottos = LottoMarket.createLottos(buyCount);
 
             //생성번호 view
-            LottoView.showBuyLottos(lottos);
+            LottoOutputView.showBuyLottos(lottos);
 
             //당첨번호 입력
-            String[] splitWinningNumbers = LottoView.splitWinningNumbers(LottoView.inputWinningNumbers());
-            List<Integer> winningNumbers = LottoMachine.createWinningNumbers(splitWinningNumbers);
+            String[] splitWinningNumbers = LottoInputView.splitWinningNumbers(LottoInputView.inputWinningNumbers());
+
+            //입력값 예외 확인 및 당첨번호 리스트 생성
+            List<Integer> winningNumbers = LottoInputView.createWinningNumbers(splitWinningNumbers);
 
             //당첨등수 확인
-            for (int number : winningNumbers) {
-                LottoMachine.checkWinning(lottos, number);
-            }
-
-            //노출 통계자료 생성
-            LottoStatistics lottoStatistics = LottoMachine.checkWinningLotto(lottos);
+            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, winningNumbers);
 
             //통계자료 view
-            LottoView.showWinningStatistics(lottoStatistics);
+            LottoOutputView.showWinningStatistics(lottoStatistics);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
         }
     }
+
 }

@@ -1,34 +1,34 @@
 package lotto.domain;
 
 
-import lotto.view.LottoView;
+import lotto.view.LottoInputView;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoViewTest {
+public class LottoInputViewTest {
     @Test
     public void 지난주당첨번호패턴체크() {
         String inputValue = "1, 2, 3, 4, 5, 6";
-        String[] numbers = LottoView.splitWinningNumbers(inputValue);
+        String[] numbers = LottoInputView.splitWinningNumbers(inputValue);
         assertThat(numbers).containsExactly("1", "2", "3", "4", "5", "6");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 지난주당첨번호패턴체크실패1() {
         String inputValue = "1, 2 3, 4, 5, 6";
-        LottoView.splitWinningNumbers(inputValue);
+        LottoInputView.splitWinningNumbers(inputValue);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 지난주당첨번호패턴체크실패2() {
         String inputValue = "1, 2, 3, 4, 5, ";
-        LottoView.splitWinningNumbers(inputValue);
+        LottoInputView.splitWinningNumbers(inputValue);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 지난주당첨번호개수안맞음() {
         String inputValue = "1, 2, 3, 4";
-        LottoView.splitWinningNumbers(inputValue);
+        LottoInputView.splitWinningNumbers(inputValue);
     }
 }
