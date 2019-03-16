@@ -17,7 +17,7 @@ public class CalculatorView {
         if (separator.isEmpty()) {
             return inputValue.split("[,:]");
         }
-        
+
         return inputValue.substring(5).split(separator);
     }
 
