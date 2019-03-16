@@ -7,15 +7,15 @@ public class ConsoleOutputView {
     private ConsoleOutputView() {
     }
 
-    public static void printNumberOfAffordableLottos(int money) {
-        int numberOfAffordableLottos = LottoMachine.getNumberOfAffordableLottos(money);
+    public static void printNumberOfAffordableLottos(long money) {
+        long numberOfAffordableLottos = LottoMachine.getNumberOfAffordableLottos(money);
         System.out.println(numberOfAffordableLottos + "개를 구매했습니다.");
     }
 
     public static void printLottos(LottoBundle lottoBundle) {
-        lottoBundle.getLottos().forEach(lotto -> {
-            System.out.println(lotto.getNumbers());
-        });
+        lottoBundle.getLottos().forEach(lotto ->
+            System.out.println(lotto.getNumbers())
+        );
 
         System.out.println();
     }
