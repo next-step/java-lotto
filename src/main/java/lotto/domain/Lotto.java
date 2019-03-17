@@ -66,4 +66,9 @@ public class Lotto {
     private int getNumberOfDuplicatedNumber(List<Integer> numbers, int target) {
         return (numbers.contains(target) ? 1 : 0);
     }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString();
+    }
 }

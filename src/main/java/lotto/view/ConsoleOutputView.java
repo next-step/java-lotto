@@ -17,10 +17,7 @@ public class ConsoleOutputView {
     }
 
     public static void printLottos(LottoBundle lottoBundle) {
-        lottoBundle.getLottos().forEach(lotto ->
-            System.out.println(lotto.getNumbers())
-        );
-
+        lottoBundle.getLottos().forEach(System.out::println);
         System.out.println();
     }
 
