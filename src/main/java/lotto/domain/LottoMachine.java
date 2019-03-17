@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public class LottoMachine {
-    private static final int PRICE_OF_LOTTO = 1_000;
+    public static final int PRICE_OF_LOTTO = 1_000;
 
     private LottoMachine() {
     }
