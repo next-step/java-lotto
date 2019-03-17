@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.parser.LottoNumberParser;
 import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutputView;
 import lotto.vo.LottoResult;
@@ -20,7 +21,8 @@ public class ConsoleMain {
             ConsoleOutputView.printNumberOfLottos(lottoBundle.getLottos().size());
             ConsoleOutputView.printLottos(lottoBundle);
 
-            winner = ConsoleInputView.inputWinnerNumbers(scanner);
+            String winnerNumbersString = ConsoleInputView.inputWinnerNumbers(scanner);
+            winner = LottoNumberParser.parse(winnerNumbersString);
         }
 
         LottoResult lottoResult = LottoRunner.runLotto(winner, lottoBundle);
