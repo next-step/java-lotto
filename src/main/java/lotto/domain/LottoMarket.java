@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoMarket {
 
@@ -29,11 +32,9 @@ public class LottoMarket {
      * @return 한 로또의 번호들
      */
     public static List<Integer> createNumbers() {
-        List<Integer> allNumber = new ArrayList<>();
-
-        for (int i = 1; i < 46; i++) {
-            allNumber.add(i);
-        }
+        List<Integer> allNumber = IntStream.rangeClosed(1, 45)
+                .boxed()
+                .collect(toList());
 
         Collections.shuffle(allNumber);
 

@@ -1,8 +1,8 @@
 package calculator;
 
-import calculator.domain.Calculator;
-import calculator.domain.CalculatorDTO;
-import calculator.view.CalculatorView;
+import calculator.domain.CalculatorCore;
+import calculator.domain.CalculatorUtils;
+import calculator.view.CalculatorInputView;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ public class ConsoleApplication {
     private static void doCalculator() {
         try {
             //input 값 가져오기
-            String value = CalculatorView.getInputValue();
+            String value = CalculatorInputView.getInputValue();
 
             //input 값 유효성 체크 및 split
-            List<String> splitValues = CalculatorDTO.splitInputValue(value, CalculatorDTO.checkCustomSeparator(value));
+            List<String> splitValues = CalculatorUtils.splitInputValue(value, CalculatorUtils.checkCustomSeparator(value));
 
             //계산
-            int result = Calculator.sum(splitValues);
+            int result = CalculatorCore.sum(splitValues);
 
             //print result
             System.out.println(result);

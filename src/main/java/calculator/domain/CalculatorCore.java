@@ -2,7 +2,7 @@ package calculator.domain;
 
 import java.util.List;
 
-public class Calculator {
+public class CalculatorCore {
 
     public static int sum(List<String> splitValues) {
         if (splitValues.isEmpty() || splitValues.contains("")) {

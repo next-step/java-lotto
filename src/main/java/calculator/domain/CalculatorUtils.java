@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CalculatorDTO {
+public class CalculatorUtils {
 
     private static final int CUSTOM_SEPARATOR_START_POINT = 2;
     private static final int CUSTOM_SEPARATOR_END_POINT = 3;
     private static final int CUSTOM_NUMBER_START_POINT = 5;
 
     public static List<String> splitInputValue(String inputValue, String separator) {
-        isBlankOrNull(inputValue);
+        isBlank(inputValue);
 
         if (StringUtils.isBlank(separator)) {
             return Arrays.asList(inputValue.split("[,:]"));
@@ -23,7 +23,7 @@ public class CalculatorDTO {
         return Arrays.asList(inputValue.substring(CUSTOM_NUMBER_START_POINT).split(separator));
     }
 
-    public static void isBlankOrNull(String inputValue) throws IllegalArgumentException {
+    public static void isBlank(String inputValue) throws IllegalArgumentException {
         if (StringUtils.isBlank(inputValue)) {
             throw new IllegalArgumentException("입력값이 없음");
         }

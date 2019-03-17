@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.List;
 
 public class Lotto {
+    public static final int LOTTO_NUM_COUNT = 6;
+    public static final int LOTTO_PRICE = 1000;
+
     private List<Integer> numbers;
 
     private int matchCount;

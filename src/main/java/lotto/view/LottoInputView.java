@@ -1,12 +1,14 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoInputView {
-    private static final int LOTTO_NUM_COUNT = 6;
-
     public static int buyLotto() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
@@ -46,7 +48,7 @@ public class LottoInputView {
 
         String[] winningNumbers = inputValue.split(", ");
 
-        if (winningNumbers.length != LOTTO_NUM_COUNT) {
+        if (winningNumbers.length != Lotto.LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("당첨숫자 개수 안맞음");
         }
 
@@ -62,16 +64,17 @@ public class LottoInputView {
      * @throws IllegalArgumentException
      */
     public static List<Integer> createWinningNumbers(String[] winningNumbers) throws IllegalArgumentException {
-        List<Integer> numbers = new ArrayList<>();
 
-        Arrays.stream(winningNumbers).forEach(number -> numbers.add(Integer.valueOf(number)));
+        Set<Integer> duplicateNumbers = Stream.of(winningNumbers)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toSet());
 
         //중복 입력 체크
-        Set<Integer> duplicateNumbers = new HashSet<>(numbers);
-        if (duplicateNumbers.size() != LOTTO_NUM_COUNT) {
+        if (duplicateNumbers.size() != Lotto.LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("중복 당첨숫자 있음");
         }
 
-        return numbers;
+        return new ArrayList<>(duplicateNumbers);
     }
 }
