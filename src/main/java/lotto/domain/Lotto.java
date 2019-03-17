@@ -8,7 +8,24 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
+        if (!isLottoNumbersSizeCorrect(lottoNumbers)) {
+            throw new IllegalArgumentException("Lotto numbers size must be " + TOTAL_LOTTO_NUMBERS);
+        }
+
+        if (!isLottoNumbersUnique(lottoNumbers)) {
+            throw new IllegalArgumentException("Every lotto numbers must be unique");
+        }
+
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private boolean isLottoNumbersUnique(List<Integer> lottoNumbers) {
+        long numberOfUniqueNumbers = lottoNumbers.stream().distinct().count();
+        return lottoNumbers.size() == numberOfUniqueNumbers;
+    }
+
+    private boolean isLottoNumbersSizeCorrect(List<Integer> lottoNumbers) {
+        return TOTAL_LOTTO_NUMBERS == lottoNumbers.size();
     }
 
     public List<Integer> getNumbers() {
