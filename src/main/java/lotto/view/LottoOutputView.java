@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatistics;
+import lotto.dto.Lotto;
+import lotto.dto.LottoStatistics;
 
 import java.util.List;
 
@@ -25,6 +25,8 @@ public class LottoOutputView {
         System.out.println("4개 일치 (50000원)- " + lottoStatistics.getThirdCnt() + "개");
         System.out.println("5개 일치 (1500000원)- " + lottoStatistics.getSecondCnt() + "개");
         System.out.println("6개 일치 (2000000000원)- " + lottoStatistics.getFirstCnt() + "개");
-        System.out.println("총 수익률은 " + lottoStatistics.getProfit() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 "
+                + lottoStatistics.getLottoProfit().getProfit()
+                + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

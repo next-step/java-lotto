@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.view;
 
 
-import lotto.view.LottoInputView;
 import org.junit.Test;
 
 import java.util.List;

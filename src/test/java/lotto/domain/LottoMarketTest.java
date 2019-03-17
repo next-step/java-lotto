@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.Lotto;
 import org.junit.Test;
 
 import java.util.Collections;

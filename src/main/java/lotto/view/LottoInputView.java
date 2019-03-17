@@ -1,30 +1,37 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.dto.Lotto;
+import lotto.dto.LottoProfit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoInputView {
-    public static int buyLotto() throws IllegalArgumentException {
+
+    public static LottoProfit buyLotto() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-        int number = scanner.nextInt();
+        int buyAmount = scanner.nextInt();
 
-        if (number == 0) {
+        if (buyAmount == 0) {
             throw new IllegalArgumentException("돈을 넣으세요.");
         }
 
-        if (number < 1000) {
+        if (buyAmount < Lotto.LOTTO_PRICE) {
             throw new IllegalArgumentException("돈을 더 넣으세요.");
         }
 
-        System.out.println(number/1000 + "개를 구매했습니다.");
+        LottoProfit lottoProfit = new LottoProfit(buyAmount / Lotto.LOTTO_PRICE, buyAmount);
 
-        return number/1000;
+        System.out.println(lottoProfit.getBuyCount() + "개를 구매했습니다.");
+
+        return lottoProfit;
     }
 
     /**

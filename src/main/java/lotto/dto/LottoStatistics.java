@@ -1,12 +1,19 @@
-package lotto.domain;
+package lotto.dto;
+
+import lotto.domain.LottoPrize;
 
 public class LottoStatistics {
-    private double profit;
+
+    private LottoProfit lottoProfit;
 
     private int firstCnt;
     private int secondCnt;
     private int thirdCnt;
     private int forthCnt;
+
+    public LottoStatistics(LottoProfit lottoProfit) {
+        this.lottoProfit = lottoProfit;
+    }
 
     /**
      * 등수별 개수 체크
@@ -32,24 +39,8 @@ public class LottoStatistics {
         }
     }
 
-    /**
-     * 수익율 개산
-     *
-     * @param buyCount 구매개수
-     * @return 수익율
-     */
-    public double calculateProfit(int buyCount) {
-        profit = (LottoPrize.FORTH.getPrize() * forthCnt
-                + LottoPrize.THIRD.getPrize() * thirdCnt
-                + LottoPrize.SECOND.getPrize() * secondCnt
-                + LottoPrize.FIRST.getPrize() * firstCnt)
-                /
-                (buyCount*Lotto.LOTTO_PRICE*1.0d);
-        return profit;
-    }
-
-    public double getProfit() {
-        return profit;
+    public LottoProfit getLottoProfit() {
+        return lottoProfit;
     }
 
     public int getFirstCnt() {

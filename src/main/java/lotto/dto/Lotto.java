@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.dto;
 
 import java.util.List;
 
@@ -22,9 +22,10 @@ public class Lotto {
 
     /**
      * 맞은 숫자 개수 증가
+     *
      * @param number 당첨번호 한개
      */
-    void incrementMatchCount(int number) {
+    public void incrementMatchCount(int number) {
         if (numbers.contains(number)) {
             matchCount++;
         }
@@ -41,7 +42,7 @@ public class Lotto {
             value += number;
             value += ", ";
         }
-        value = value.substring(0,value.length()-2) + "]";
+        value = value.substring(0, value.length() - 2) + "]";
 
         return value;
     }

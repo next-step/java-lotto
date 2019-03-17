@@ -1,9 +1,10 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMarket;
-import lotto.domain.LottoStatistics;
+import lotto.dto.Lotto;
+import lotto.dto.LottoProfit;
+import lotto.dto.LottoStatistics;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -17,10 +18,10 @@ public class ConsoleApplication {
     private static void doLottery() {
         try {
             //로또 구매
-            int buyCount = LottoInputView.buyLotto();
+            LottoProfit lottoProfit = LottoInputView.buyLotto();
 
             //로또 생성
-            List<Lotto> lottos = LottoMarket.createLottos(buyCount);
+            List<Lotto> lottos = LottoMarket.createLottos(lottoProfit.getBuyCount());
 
             //생성번호 view
             LottoOutputView.showBuyLottos(lottos);
@@ -32,7 +33,7 @@ public class ConsoleApplication {
             List<Integer> winningNumbers = LottoInputView.createWinningNumbers(splitWinningNumbers);
 
             //당첨등수 확인
-            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, winningNumbers);
+            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, winningNumbers, lottoProfit);
 
             //통계자료 view
             LottoOutputView.showWinningStatistics(lottoStatistics);

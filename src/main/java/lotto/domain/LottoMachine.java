@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.dto.Lotto;
+import lotto.dto.LottoProfit;
+import lotto.dto.LottoStatistics;
+
 import java.util.List;
 
 public class LottoMachine {
@@ -7,18 +11,18 @@ public class LottoMachine {
     /**
      * 당첨번호로 통계 dto 생성
      *
-     * @param lottos 구매한 로또들
+     * @param lottos         구매한 로또들
      * @param winningNumbers 당첨번호들
      * @return 당첨통계 dto
      */
-    public static LottoStatistics getLottoStatistics(List<Lotto> lottos, List<Integer> winningNumbers) {
+    public static LottoStatistics getLottoStatistics(List<Lotto> lottos, List<Integer> winningNumbers, LottoProfit lottoProfit) {
         for (int number : winningNumbers) {
             //각 번호별로 체크
             checkWinningNumber(lottos, number);
         }
 
         //노출 통계자료 생성
-        return checkWinningLotto(lottos);
+        return checkWinningLotto(lottos, lottoProfit);
     }
 
     /**
@@ -40,8 +44,8 @@ public class LottoMachine {
      * @param lottos 구매한 로또들
      * @return 로또 통계 dto
      */
-    public static LottoStatistics checkWinningLotto(List<Lotto> lottos) {
-        LottoStatistics lottoStatistics = new LottoStatistics();
+    public static LottoStatistics checkWinningLotto(List<Lotto> lottos, LottoProfit lottoProfit) {
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoProfit);
 
         //등수별 개수
         for (Lotto lotto : lottos) {
@@ -49,7 +53,8 @@ public class LottoMachine {
         }
 
         //수익율
-        lottoStatistics.calculateProfit(lottos.size());
+        lottoProfit.calculateProfit(lottoStatistics.getForthCnt(), lottoStatistics.getThirdCnt(),
+                lottoStatistics.getSecondCnt(), lottoStatistics.getFirstCnt());
 
         return lottoStatistics;
     }
