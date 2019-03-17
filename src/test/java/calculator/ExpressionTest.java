@@ -8,7 +8,7 @@ public class ExpressionTest {
 
     @Test
     public void 문자열_콤마_분리() {
-        String expression = "1,2,3";
+        String expression = "1";
         int[] results = Expression.extractOperands(expression);
 
         for (int i = 0; i < results.length; i++) {
@@ -38,14 +38,15 @@ public class ExpressionTest {
         assertThat(isNullOrEmpty).isEqualTo(false);
     }
 
-    @Test
-    public void 숫자_하나만_들어온_경우() {
-        boolean isSingleNumber = Expression.isSingleNumber("12547");
-        assertThat(isSingleNumber).isEqualTo(true);
-
-        isSingleNumber = Expression.isSingleNumber("12547:52");
-        assertThat(isSingleNumber).isEqualTo(false);
-    }
+//    한글자만 들어온 경우도 똑같이 처리하면 된다.
+//    @Test
+//    public void 숫자_하나만_들어온_경우() {
+//        boolean isSingleNumber = Expression.isSingleNumber("12547");
+//        assertThat(isSingleNumber).isEqualTo(true);
+//
+//        isSingleNumber = Expression.isSingleNumber("12547:52");
+//        assertThat(isSingleNumber).isEqualTo(false);
+//    }
 
     @Test(expected = RuntimeException.class)
     public void 숫자변환_비정상데이터_예외처리() {
