@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.enums.LottoRank;
 import lotto.vo.LottoResult;
 
 public class LottoChecker {
@@ -20,24 +19,5 @@ public class LottoChecker {
         });
 
         return result;
-    }
-
-    public static double getTotalProfitRate(long cost, LottoResult lottoResult) {
-        return getProfitRate(cost, getTotalPrizeMoney(lottoResult));
-    }
-
-    private static double getProfitRate(long money, long totalPrizeMoney) {
-        return (double) totalPrizeMoney / money;
-    }
-
-    static long getTotalPrizeMoney(LottoResult lottoResult) {
-        long totalPrizeMoney = 0;
-
-        totalPrizeMoney += (LottoRank.FIRST.getPrizeMoney() * lottoResult.getFirst());
-        totalPrizeMoney += (LottoRank.SECOND.getPrizeMoney() * lottoResult.getSecond());
-        totalPrizeMoney += (LottoRank.THIRD.getPrizeMoney() * lottoResult.getThird());
-        totalPrizeMoney += (LottoRank.FOURTH.getPrizeMoney() * lottoResult.getFourth());
-
-        return totalPrizeMoney;
     }
 }

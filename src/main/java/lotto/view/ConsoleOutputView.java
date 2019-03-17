@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoBundle;
-import lotto.domain.LottoChecker;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoProfitCalculator;
 import lotto.enums.LottoRank;
 import lotto.vo.LottoResult;
 
@@ -38,7 +38,7 @@ public class ConsoleOutputView {
         System.out.printf(format,
                 LottoRank.FIRST.getMatchCount(), LottoRank.FIRST.getPrizeMoney(), lottoResult.getFirst());
 
-        double totalProfitRate = LottoChecker.getTotalProfitRate(cost, lottoResult);
+        double totalProfitRate = LottoProfitCalculator.getTotalProfitRate(cost, lottoResult);
         printTotalProfitRate(totalProfitRate);
     }
 
