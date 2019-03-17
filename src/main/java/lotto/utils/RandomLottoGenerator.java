@@ -10,9 +10,12 @@ public class RandomLottoGenerator implements LottoGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private List<Integer> allNumbers;
 
+    public RandomLottoGenerator() {
+        createAllNumbers();
+    }
+
     public List<Integer> generate() {
         List<Integer> generatedNumbers = new ArrayList<>();
-        createAllNumbers();
         Collections.shuffle(this.allNumbers);
         for (int i = 0; i < SELECT_MAX_COUNT; i++) {
             generatedNumbers.add(this.allNumbers.get(i));
