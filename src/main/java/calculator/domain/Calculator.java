@@ -1,12 +1,16 @@
 package calculator.domain;
 
+import java.util.List;
+
 public class Calculator {
 
-    public static int sum(String[] splitValues) {
-        int result = 0;
-        for (String value : splitValues) {
-            result += Integer.parseInt(value);
+    public static int sum(List<String> splitValues) {
+        if (splitValues.isEmpty() || splitValues.contains("")) {
+            return 0;
         }
-        return result;
+
+        return splitValues.stream()
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }

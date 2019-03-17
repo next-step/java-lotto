@@ -1,7 +1,10 @@
 package calculator;
 
 import calculator.domain.Calculator;
+import calculator.domain.CalculatorDTO;
 import calculator.view.CalculatorView;
+
+import java.util.List;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
@@ -11,13 +14,16 @@ public class ConsoleApplication {
 
     private static void doCalculator() {
         try {
+            //input 값 가져오기
             String value = CalculatorView.getInputValue();
 
-            CalculatorView.isBlankOrNull(value);
+            //input 값 유효성 체크 및 split
+            List<String> splitValues = CalculatorDTO.splitInputValue(value, CalculatorDTO.checkCustomSeparator(value));
 
-            String[] splitValues = CalculatorView.splitInputValue(value, CalculatorView.checkCustomSeparator(value));
+            //계산
             int result = Calculator.sum(splitValues);
 
+            //print result
             System.out.println(result);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
