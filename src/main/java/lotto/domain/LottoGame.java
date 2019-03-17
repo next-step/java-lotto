@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.lotto.LottoImpl;
+import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 import lotto.utils.LottoGenerator;
@@ -14,7 +14,7 @@ public class LottoGame {
 
     private int tryCount;
     private LottoGenerator lottoGenerator;
-    private List<LottoImpl> lottos;
+    private List<BasicLotto> lottos;
     private int reward = 0;
 
     public LottoGame(int money, LottoGenerator lottoGenerator) {
@@ -29,22 +29,22 @@ public class LottoGame {
         return money / LOTTO_PRICE;
     }
 
-    public List<LottoImpl> createLottos() {
+    public List<BasicLotto> createLottos() {
         lottos = new ArrayList<>();
         for (int i = 0; i < this.tryCount; i++) {
-            lottos.add(new LottoImpl(this.lottoGenerator.generate()));
+            lottos.add(new BasicLotto(this.lottoGenerator.generate()));
         }
         return lottos;
     }
 
     public void play(WinningLotto winningLotto) {
-        for (LottoImpl lotto : lottos) {
+        for (BasicLotto lotto : lottos) {
             checkMatchNumbers(lotto, winningLotto);
             addReward(lotto.getMatchCount());
         }
     }
 
-    private void checkMatchNumbers(LottoImpl lotto, WinningLotto winningLotto) {
+    private void checkMatchNumbers(BasicLotto lotto, WinningLotto winningLotto) {
         for (int number : lotto.getNumbers()) {
             if (winningLotto.getNumbers().contains(number)) {
                 lotto.matchCountUp();

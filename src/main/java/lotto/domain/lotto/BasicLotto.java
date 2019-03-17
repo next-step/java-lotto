@@ -3,11 +3,11 @@ package lotto.domain.lotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoImpl implements Lotto {
+public class BasicLotto implements Lotto {
     private int matchCount = 0;
     private List<Integer> numbers;
 
-    public LottoImpl(List<Integer> numbers) {
+    public BasicLotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 

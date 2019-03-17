@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+public class BasicLottoTest {
 
     private List<Integer> numbers;
 
@@ -25,13 +25,13 @@ public class LottoTest {
 
     @Test
     public void 임의의_로또_생성() {
-        Lotto lotto = new LottoImpl(numbers);
+        Lotto lotto = new BasicLotto(numbers);
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @Test
     public void 로또_매치카운트_증가() {
-        LottoImpl lotto = new LottoImpl(numbers);
+        BasicLotto lotto = new BasicLotto(numbers);
         assertThat(lotto.matchCountUp()).isEqualTo(1);
     }
 }

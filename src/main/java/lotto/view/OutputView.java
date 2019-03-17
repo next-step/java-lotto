@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
-import lotto.domain.lotto.LottoImpl;
+import lotto.domain.lotto.BasicLotto;
 import lotto.enums.Rank;
 
 import java.util.List;
@@ -13,8 +13,8 @@ public class OutputView {
     private static int fiveMatchCount = 0;
     private static int sixMatchCount = 0;
 
-    public static void generateResult(List<LottoImpl> lottos) {
-        for (LottoImpl lotto : lottos) {
+    public static void generateResult(List<BasicLotto> lottos) {
+        for (BasicLotto lotto : lottos) {
             if (lotto.getMatchCount() == Rank.FOURCE.getCountOfMatch()) {
                 threeMatchCount++;
             }

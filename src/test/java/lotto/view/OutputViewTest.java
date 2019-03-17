@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoGame;
-import lotto.domain.lotto.LottoImpl;
+import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.utils.TestLottoGenerator;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class OutputViewTest {
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
         LottoGame lottoGame = new LottoGame(money, new TestLottoGenerator());
 
-        List<LottoImpl> lottos = lottoGame.createLottos();
+        List<BasicLotto> lottos = lottoGame.createLottos();
 
         scanner = new Scanner("1, 3, 5, 8, 9, 10");
         List<Integer> winningLottoNumbers

@@ -1,10 +1,10 @@
 package lotto;
 
 import lotto.domain.LottoGame;
-import lotto.domain.lotto.LottoImpl;
+import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
-import lotto.utils.LottoGeneratorImpl;
+import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,9 +16,9 @@ public class ConsoleApplication {
 
     public static void main(String[] args) {
         int money = InputView.getMoney("구입금액을 입력해 주세요. ", new Scanner(System.in));
-        LottoGame lottoGame = new LottoGame(money, new LottoGeneratorImpl());
+        LottoGame lottoGame = new LottoGame(money, new RandomLottoGenerator());
 
-        List<LottoImpl> lottos = lottoGame.createLottos();
+        List<BasicLotto> lottos = lottoGame.createLottos();
         lottos.forEach(System.out::println);
 
         System.out.println();

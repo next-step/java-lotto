@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGeneratorImpl implements LottoGenerator {
+public class RandomLottoGenerator implements LottoGenerator {
     private static final int SELECT_MAX_COUNT = 6;
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;

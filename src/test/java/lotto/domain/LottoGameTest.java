@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.lotto.LottoImpl;
+import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
-import lotto.utils.LottoGeneratorImpl;
+import lotto.utils.RandomLottoGenerator;
 import lotto.utils.TestLottoGenerator;
 import lotto.view.InputView;
 import org.junit.Test;
@@ -18,14 +18,14 @@ public class LottoGameTest {
     public void 구입금액_음수입력시_예외() {
         Scanner scanner = new Scanner("-1000");
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
-        LottoGame lottoGame = new LottoGame(money, new LottoGeneratorImpl());
+        LottoGame lottoGame = new LottoGame(money, new RandomLottoGenerator());
     }
 
     @Test
     public void 구입금액_입력시_로또_횟수_생성() {
         Scanner scanner = new Scanner("10000");
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
-        LottoGame lottoGame = new LottoGame(money, new LottoGeneratorImpl());
+        LottoGame lottoGame = new LottoGame(money, new RandomLottoGenerator());
 
         assertThat(lottoGame.getTryCount()).isEqualTo(10);
     }
@@ -34,7 +34,7 @@ public class LottoGameTest {
     public void 횟수만큼_로또_생성() {
         Scanner scanner = new Scanner("10000");
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
-        LottoGame lottoGame = new LottoGame(money, new LottoGeneratorImpl());
+        LottoGame lottoGame = new LottoGame(money, new RandomLottoGenerator());
 
         assertThat(lottoGame.createLottos().size()).isEqualTo(10);
     }
@@ -45,7 +45,7 @@ public class LottoGameTest {
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
         LottoGame lottoGame = new LottoGame(money, new TestLottoGenerator());
 
-        LottoImpl firstLotto = lottoGame.createLottos().get(0);
+        BasicLotto firstLotto = lottoGame.createLottos().get(0);
 
         assertThat(firstLotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
@@ -56,7 +56,7 @@ public class LottoGameTest {
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
         LottoGame lottoGame = new LottoGame(money, new TestLottoGenerator());
 
-        List<LottoImpl> lottos = lottoGame.createLottos();
+        List<BasicLotto> lottos = lottoGame.createLottos();
 
         scanner = new Scanner("1, 3, 5, 8, 9, 10");
         List<Integer> winningLottoNumbers
@@ -74,7 +74,7 @@ public class LottoGameTest {
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
         LottoGame lottoGame = new LottoGame(money, new TestLottoGenerator());
 
-        List<LottoImpl> lottos = lottoGame.createLottos();
+        List<BasicLotto> lottos = lottoGame.createLottos();
 
         scanner = new Scanner("1, 2, 3, 4, 5, 6");
         List<Integer> winningLottoNumbers
