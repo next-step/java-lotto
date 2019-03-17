@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.enums.LottoRank;
 import lotto.vo.LottoResult;
 import org.junit.Test;
 
@@ -39,9 +40,9 @@ public class LottoRunnerTest {
         LottoResult lottoResult = LottoRunner.runLotto(winner, lottoBundle);
 
         // then
-        assertThat(lottoResult.getFirst()).isEqualTo(1);
-        assertThat(lottoResult.getSecond()).isEqualTo(1);
-        assertThat(lottoResult.getThird()).isEqualTo(0);
-        assertThat(lottoResult.getFourth()).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.THIRD)).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.FOURTH)).isEqualTo(0);
     }
 }

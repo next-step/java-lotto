@@ -15,19 +15,7 @@ public class LottoWinResult {
         wins.put(LottoRank.FOURTH, matchCounts[LottoRank.FOURTH.getMatchCount()]);
     }
 
-    long getFirst() {
-        return wins.get(LottoRank.FIRST);
-    }
-
-    long getSecond() {
-        return wins.get(LottoRank.SECOND);
-    }
-
-    long getThird() {
-        return wins.get(LottoRank.THIRD);
-    }
-
-    long getFourth() {
-        return wins.get(LottoRank.FOURTH);
+    long get(LottoRank lottoRank) {
+        return wins.get(lottoRank);
     }
 }

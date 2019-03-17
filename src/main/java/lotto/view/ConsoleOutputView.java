@@ -4,6 +4,10 @@ import lotto.domain.LottoBundle;
 import lotto.enums.LottoRank;
 import lotto.vo.LottoResult;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 public class ConsoleOutputView {
     private ConsoleOutputView() {
     }
@@ -26,14 +30,13 @@ public class ConsoleOutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        System.out.printf(format,
-                LottoRank.FOURTH.getMatchCount(), LottoRank.FOURTH.getPrizeMoney(), lottoResult.getFourth());
-        System.out.printf(format,
-                LottoRank.THIRD.getMatchCount(), LottoRank.THIRD.getPrizeMoney(), lottoResult.getThird());
-        System.out.printf(format,
-                LottoRank.SECOND.getMatchCount(), LottoRank.SECOND.getPrizeMoney(), lottoResult.getSecond());
-        System.out.printf(format,
-                LottoRank.FIRST.getMatchCount(), LottoRank.FIRST.getPrizeMoney(), lottoResult.getFirst());
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
+        lottoRanks.sort(Comparator.reverseOrder());
+
+        lottoRanks.forEach(lottoRank ->
+            System.out.printf(format,
+                    lottoRank.getMatchCount(), lottoRank.getPrizeMoney(), lottoResult.getNumberOfWin(lottoRank))
+        );
 
         System.out.printf("총 수익률은 %,.2f입니다.%n", lottoResult.getTotalProfitRate());
     }

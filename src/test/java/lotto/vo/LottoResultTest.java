@@ -19,10 +19,10 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(matchCounts);
 
         // then
-        assertThat(lottoResult.getFirst()).isEqualTo(1);
-        assertThat(lottoResult.getSecond()).isEqualTo(0);
-        assertThat(lottoResult.getThird()).isEqualTo(3);
-        assertThat(lottoResult.getFourth()).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.SECOND)).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.THIRD)).isEqualTo(3);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.FOURTH)).isEqualTo(0);
     }
 
     @Test

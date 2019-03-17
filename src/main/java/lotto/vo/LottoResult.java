@@ -22,20 +22,8 @@ public class LottoResult {
         return Arrays.stream(matchCounts).sum();
     }
 
-    public long getFirst() {
-        return lottoWinResult.getFirst();
-    }
-
-    public long getSecond() {
-        return lottoWinResult.getSecond();
-    }
-
-    public long getThird() {
-        return lottoWinResult.getThird();
-    }
-
-    public long getFourth() {
-        return lottoWinResult.getFourth();
+    public long getNumberOfWin(LottoRank lottoRank) {
+        return lottoWinResult.get(lottoRank);
     }
 
     long getCost() {
@@ -43,15 +31,13 @@ public class LottoResult {
     }
 
     public long getTotalPrizeMoney() {
-        long totalPrizeMoney = 0;
+        return Arrays.stream(LottoRank.values())
+                .mapToLong(lottoRank -> getPrizeMoneyOfLottoRank(lottoWinResult, lottoRank))
+                .sum();
+    }
 
-        totalPrizeMoney += (LottoRank.FIRST.getPrizeMoney() * getFirst());
-        totalPrizeMoney += (LottoRank.SECOND.getPrizeMoney() * getSecond());
-        totalPrizeMoney += (LottoRank.THIRD.getPrizeMoney() * getThird());
-        totalPrizeMoney += (LottoRank.FOURTH.getPrizeMoney() * getFourth());
-
-        return totalPrizeMoney;
-
+    private long getPrizeMoneyOfLottoRank(LottoWinResult lottoWinResult, LottoRank lottoRank) {
+        return lottoWinResult.get(lottoRank) * lottoRank.getPrizeMoney();
     }
 
     public double getTotalProfitRate() {
