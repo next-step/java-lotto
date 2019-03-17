@@ -7,6 +7,7 @@ import lotto.enums.Rank;
 import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.view.vo.MatchResult;
 
 import java.util.List;
 import java.util.Scanner;
@@ -33,10 +34,10 @@ public class ConsoleApplication {
         OutputView.generateResult(lottos, winningLotto);
         System.out.println("당첨통계");
         System.out.println("-------");
-        System.out.println(Rank.FOURCE.toString() + OutputView.getThreeMatchCount());
-        System.out.println(Rank.THIRD.toString() + OutputView.getFourMatchCount());
-        System.out.println(Rank.SECOND.toString() + OutputView.getFiveMatchCount());
-        System.out.println(Rank.FIRST.toString() + OutputView.getSixMatchCount());
+        System.out.println(Rank.FOURCE.toString() + MatchResult.getMatchCount(Rank.FOURCE.getCountOfMatch()));
+        System.out.println(Rank.THIRD.toString() + MatchResult.getMatchCount(Rank.THIRD.getCountOfMatch()));
+        System.out.println(Rank.SECOND.toString() + MatchResult.getMatchCount(Rank.SECOND.getCountOfMatch()));
+        System.out.println(Rank.FIRST.toString() + MatchResult.getMatchCount(Rank.FIRST.getCountOfMatch()));
 
         System.out.println("총 수익률은 " + OutputView.getRewardPercent(money) + "입니다.");
         System.out.println("수익률이 1이면 본전");
