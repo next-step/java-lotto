@@ -20,7 +20,7 @@ public class LottoMachine {
 
     public static LottoBundle buyLottos(long money) {
         if (money < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("money must be positive");
         }
 
         return getLottos(getNumberOfAffordableLottos(money));
