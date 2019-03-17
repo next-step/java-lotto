@@ -21,7 +21,7 @@ public class StringAddCalculator {
     }
 
     private static boolean isBlank(String input) {
-        return input == null || input.isEmpty();
+        return input == null || input.trim().isEmpty();
     }
 
     private static boolean isSingleInteger(String input) {

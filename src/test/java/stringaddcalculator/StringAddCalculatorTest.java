@@ -10,6 +10,7 @@ public class StringAddCalculatorTest {
     public void null_또는_빈문자() {
         assertEquals(new Positive(0), StringAddCalculator.add(null));
         assertEquals(new Positive(0), StringAddCalculator.add(""));
+        assertEquals(new Positive(0), StringAddCalculator.add(" "));
     }
 
     @Test
