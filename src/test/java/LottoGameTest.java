@@ -18,4 +18,12 @@ public class LottoGameTest {
 
         assertThat(lottoGame.getLottoSize()).isEqualTo(10);
     }
+
+    @Test
+    public void 로또를_생성() {
+        int money = 10000;
+        LottoGame lottoGame = new LottoGame(money);
+
+        assertThat(lottoGame.getLottoSize()).isEqualTo(10);
+    }
 }

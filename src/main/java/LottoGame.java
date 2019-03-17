@@ -1,11 +1,12 @@
 public class LottoGame {
-    private int numberOfLotto;
+    private Lottos lottos;
 
     public LottoGame(int money) {
-        this.numberOfLotto = money / 1000;
+        int numberOfLotto = money / 1000;
+        this.lottos = new Lottos(numberOfLotto);
     }
 
     public int getLottoSize() {
-        return this.numberOfLotto;
+        return this.lottos.size();
     }
 }
