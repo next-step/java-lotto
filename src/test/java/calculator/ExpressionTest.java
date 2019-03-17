@@ -60,4 +60,13 @@ public class ExpressionTest {
         System.out.println("check result");
         assertThat(results[1]).isEqualTo(-100);
     }
+
+    @Test
+    public void 커스텀구분자_인식하기() {
+        int[] result = Expression.extractOperands("//;\n1;2;3");
+
+        for (int i = 0; i < result.length; i++) {
+            assertThat(result[i]).isEqualTo(i+1);
+        }
+    }
 }

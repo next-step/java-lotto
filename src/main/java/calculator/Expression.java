@@ -2,6 +2,7 @@ package calculator;
 
 import spark.utils.StringUtils;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Expression {
@@ -9,6 +10,7 @@ public class Expression {
     private static final String DELIMITER = ",|:";
     private static final String SINGLE_NUMBER_PATTERN = "^[0-9]+$";
     private static final String NUMBER_PATTERN = "^[0-9]$";
+    private static final String CUSTOM_DELIMITER_PATTERN = "^//(.)\n(.*)$";
     private static final int ZERO = 0;
 
     public static boolean isNullOrEmpty(String expression) {
@@ -26,7 +28,7 @@ public class Expression {
     }
 
     public static int[] extractOperands(String expression) {
-        String[] operands = expression.split(DELIMITER);
+        String[] operands = splitExpression(expression);
         int[] result = new int[operands.length];
 
         return convertToNumbers(operands, result);
@@ -46,7 +48,7 @@ public class Expression {
     }
 
     private static void checkWrongPattern(String operand) {
-        if (Pattern.matches(NUMBER_PATTERN, operand)) {
+        if (!Pattern.matches(NUMBER_PATTERN, operand)) {
             throw new RuntimeException();
         }
     }
@@ -55,5 +57,15 @@ public class Expression {
         if (Integer.parseInt(operand) < ZERO) {
             throw new RuntimeException();
         }
+    }
+
+    private static String[] splitExpression(String expression) {
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(expression);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            expression = m.group(2);
+            return expression.split(customDelimiter);
+        }
+        return expression.split(DELIMITER);
     }
 }
