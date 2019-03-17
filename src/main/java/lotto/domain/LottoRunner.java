@@ -2,11 +2,11 @@ package lotto.domain;
 
 import lotto.vo.LottoResult;
 
-public class LottoChecker {
-    private LottoChecker() {
+public class LottoRunner {
+    private LottoRunner() {
     }
 
-    public static LottoResult getResult(Lotto winner, LottoBundle lottoBundle) {
+    public static LottoResult runLotto(Lotto winner, LottoBundle lottoBundle) {
         return new LottoResult(getMatchCounts(winner, lottoBundle));
     }
 

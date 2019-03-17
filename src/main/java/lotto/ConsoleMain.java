@@ -23,7 +23,7 @@ public class ConsoleMain {
             winner = ConsoleInputView.inputWinnerNumbers(scanner);
         }
 
-        LottoResult lottoResult = LottoChecker.getResult(winner, lottoBundle);
+        LottoResult lottoResult = LottoRunner.runLotto(winner, lottoBundle);
         ConsoleOutputView.printWinStatistics(lottoResult);
     }
 }

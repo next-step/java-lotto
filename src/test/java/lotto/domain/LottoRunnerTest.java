@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoCheckerTest {
+public class LottoRunnerTest {
     @Test
     public void LottoBundle의_당범_번호와_비교() {
         // given
@@ -19,7 +19,7 @@ public class LottoCheckerTest {
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(six, one, zero));
 
         // when
-        long[] matchCounts = LottoChecker.getMatchCounts(winner, lottoBundle);
+        long[] matchCounts = LottoRunner.getMatchCounts(winner, lottoBundle);
 
         // then
         assertThat(matchCounts).containsSequence(1, 0, 0, 0, 0, 1);
@@ -36,7 +36,7 @@ public class LottoCheckerTest {
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(first, second, fail));
 
         // when
-        LottoResult lottoResult = LottoChecker.getResult(winner, lottoBundle);
+        LottoResult lottoResult = LottoRunner.runLotto(winner, lottoBundle);
 
         // then
         assertThat(lottoResult.getFirst()).isEqualTo(1);
