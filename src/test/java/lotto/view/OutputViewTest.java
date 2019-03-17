@@ -17,17 +17,19 @@ public class OutputViewTest {
     public void 열개_모두_5등일경우_수익률_5배() {
         Scanner scanner = new Scanner("10000");
         int money = InputView.getMoney("구입금액을 입력하세요.", scanner);
-        LottoGame lottoGame = new LottoGame(money, new TestLottoGenerator());
+        LottoGame lottoGame = new LottoGame(new TestLottoGenerator());
 
-        List<BasicLotto> lottos = lottoGame.createLottos();
+        List<BasicLotto> lottos = lottoGame.createLottos(money);
 
         scanner = new Scanner("1, 3, 5, 8, 9, 10");
         List<Integer> winningLottoNumbers
             = InputView.getWinningLottoNumbers("지난 주 당첨 번호를 입력해 주세요.", ",", scanner);
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        lottoGame.play(winningLotto);
+        lottoGame.play(lottos, winningLotto);
 
-        assertThat(OutputView.getRewardPercent(lottoGame)).isEqualTo("5.00");
+        OutputView.generateResult(lottos);
+
+        assertThat(OutputView.getRewardPercent(money)).isEqualTo("5.00");
     }
 }

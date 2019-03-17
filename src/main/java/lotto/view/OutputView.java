@@ -7,7 +7,6 @@ import lotto.enums.Rank;
 import java.util.List;
 
 public class OutputView {
-    private static final int LOTTO_PRICE = 1000;
     private static int threeMatchCount = 0;
     private static int fourMatchCount = 0;
     private static int fiveMatchCount = 0;
@@ -30,8 +29,15 @@ public class OutputView {
         }
     }
 
-    public static String getRewardPercent(LottoGame lottoGame) {
-        double percent = (double) lottoGame.getReward() / (lottoGame.getTryCount() * LOTTO_PRICE);
+    public static String getRewardPercent(int money) {
+        int reward = 0;
+
+        reward += (Rank.FOURCE.getWinningMoney() * threeMatchCount);
+        reward += (Rank.THIRD.getWinningMoney() * fourMatchCount);
+        reward += (Rank.SECOND.getWinningMoney() * fiveMatchCount);
+        reward += (Rank.FIRST.getWinningMoney() * sixMatchCount);
+
+        double percent = (double) reward / money;
         return String.format("%.2f", percent);
     }
 

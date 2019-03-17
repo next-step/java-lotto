@@ -16,9 +16,9 @@ public class ConsoleApplication {
 
     public static void main(String[] args) {
         int money = InputView.getMoney("구입금액을 입력해 주세요. ", new Scanner(System.in));
-        LottoGame lottoGame = new LottoGame(money, new RandomLottoGenerator());
+        LottoGame lottoGame = new LottoGame(new RandomLottoGenerator());
 
-        List<BasicLotto> lottos = lottoGame.createLottos();
+        List<BasicLotto> lottos = lottoGame.createLottos(money);
         lottos.forEach(System.out::println);
 
         System.out.println();
@@ -29,7 +29,7 @@ public class ConsoleApplication {
 
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
-        lottoGame.play(winningLotto);
+        lottoGame.play(lottos, winningLotto);
 
         OutputView.generateResult(lottos);
         System.out.println("당첨통계");
@@ -39,7 +39,7 @@ public class ConsoleApplication {
         System.out.println(Rank.SECOND.toString() + OutputView.getFiveMatchCount());
         System.out.println(Rank.FIRST.toString() + OutputView.getSixMatchCount());
 
-        System.out.println("총 수익률은 " + OutputView.getRewardPercent(lottoGame) + "입니다.");
+        System.out.println("총 수익률은 " + OutputView.getRewardPercent(money) + "입니다.");
         System.out.println("수익률이 1이면 본전");
 
     }
