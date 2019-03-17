@@ -15,9 +15,9 @@ public class ConsoleMain {
 
         try (Scanner scanner = new Scanner(System.in)) {
             money = ConsoleInputView.inputMoney(scanner);
-            ConsoleOutputView.printNumberOfAffordableLottos(money);
 
             lottoBundle = LottoMachine.buyLottos(money);
+            ConsoleOutputView.printNumberOfLottos(lottoBundle.getLottos().size());
             ConsoleOutputView.printLottos(lottoBundle);
 
             winner = ConsoleInputView.inputWinnerNumbers(scanner);

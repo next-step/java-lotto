@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoBundle;
-import lotto.domain.LottoMachine;
 import lotto.enums.LottoRank;
 import lotto.vo.LottoResult;
 
@@ -9,9 +8,8 @@ public class ConsoleOutputView {
     private ConsoleOutputView() {
     }
 
-    public static void printNumberOfAffordableLottos(long money) {
-        long numberOfAffordableLottos = LottoMachine.getNumberOfAffordableLottos(money);
-        System.out.println(numberOfAffordableLottos + "개를 구매했습니다.");
+    public static void printNumberOfLottos(long numberOfLottos) {
+        System.out.println(numberOfLottos + "개를 구매했습니다.");
     }
 
     public static void printLottos(LottoBundle lottoBundle) {
