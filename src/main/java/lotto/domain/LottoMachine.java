@@ -6,6 +6,7 @@ import java.util.stream.LongStream;
 
 public class LottoMachine {
     public static final int PRICE_OF_LOTTO = 1_000;
+    public static final int MIN_MONEY = 0;
 
     private LottoMachine() {
     }
@@ -19,7 +20,7 @@ public class LottoMachine {
     }
 
     public static LottoBundle buyLottos(long money) {
-        if (money < 0) {
+        if (money < MIN_MONEY) {
             throw new IllegalArgumentException("money must be positive");
         }
 
