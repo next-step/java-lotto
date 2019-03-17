@@ -28,10 +28,4 @@ public class BasicLottoTest {
         Lotto lotto = new BasicLotto(numbers);
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
-
-    @Test
-    public void 로또_매치카운트_증가() {
-        BasicLotto lotto = new BasicLotto(numbers);
-        assertThat(lotto.matchCountUp()).isEqualTo(1);
-    }
 }

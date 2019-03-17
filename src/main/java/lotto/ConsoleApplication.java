@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoGame;
+import lotto.domain.LottoStore;
 import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
@@ -16,9 +16,9 @@ public class ConsoleApplication {
 
     public static void main(String[] args) {
         int money = InputView.getMoney("구입금액을 입력해 주세요. ", new Scanner(System.in));
-        LottoGame lottoGame = new LottoGame(new RandomLottoGenerator());
+        LottoStore lottoStore = new LottoStore(new RandomLottoGenerator());
 
-        List<BasicLotto> lottos = lottoGame.createLottos(money);
+        List<BasicLotto> lottos = lottoStore.buyLottos(money);
         lottos.forEach(System.out::println);
 
         System.out.println();
@@ -29,9 +29,8 @@ public class ConsoleApplication {
 
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
-        lottoGame.play(lottos, winningLotto);
 
-        OutputView.generateResult(lottos);
+        OutputView.generateResult(lottos, winningLotto);
         System.out.println("당첨통계");
         System.out.println("-------");
         System.out.println(Rank.FOURCE.toString() + OutputView.getThreeMatchCount());

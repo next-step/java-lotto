@@ -12,8 +12,14 @@ public class WinningLotto implements Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return this.numbers;
+    public int checkMatchNumbers(BasicLotto lotto) {
+        int matchCount = 0;
+        for (int number : lotto.getNumbers()) {
+            if (numbers.contains(number)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
     }
 
     @Override

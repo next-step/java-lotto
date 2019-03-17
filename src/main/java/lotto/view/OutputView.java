@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
 import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 
 import java.util.List;
@@ -12,18 +12,19 @@ public class OutputView {
     private static int fiveMatchCount = 0;
     private static int sixMatchCount = 0;
 
-    public static void generateResult(List<BasicLotto> lottos) {
+    public static void generateResult(List<BasicLotto> lottos, WinningLotto winningLotto) {
         for (BasicLotto lotto : lottos) {
-            if (lotto.getMatchCount() == Rank.FOURCE.getCountOfMatch()) {
+            int matchCount = winningLotto.checkMatchNumbers(lotto);
+            if (matchCount == Rank.FOURCE.getCountOfMatch()) {
                 threeMatchCount++;
             }
-            if (lotto.getMatchCount() == Rank.THIRD.getCountOfMatch()) {
+            if (matchCount == Rank.THIRD.getCountOfMatch()) {
                 fourMatchCount++;
             }
-            if (lotto.getMatchCount() == Rank.SECOND.getCountOfMatch()) {
+            if (matchCount == Rank.SECOND.getCountOfMatch()) {
                 fiveMatchCount++;
             }
-            if (lotto.getMatchCount() == Rank.FIRST.getCountOfMatch()) {
+            if (matchCount == Rank.FIRST.getCountOfMatch()) {
                 sixMatchCount++;
             }
         }
