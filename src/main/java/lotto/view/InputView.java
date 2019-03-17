@@ -35,7 +35,7 @@ public class InputView {
     private static void readString(Scanner scanner) {
         while (!scanner.hasNext()) {
             scanner.next();
-            System.err.print("자동차 이름 입력하세요> ");
+            System.err.print("지난 주 당첨 번호를 입력해 주세요.> ");
         }
     }
 }
