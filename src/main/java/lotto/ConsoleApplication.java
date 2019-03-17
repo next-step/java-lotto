@@ -5,6 +5,7 @@ import lotto.domain.LottoMarket;
 import lotto.dto.Lotto;
 import lotto.dto.LottoProfit;
 import lotto.dto.LottoStatistics;
+import lotto.dto.LottoWinningNumber;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -29,11 +30,14 @@ public class ConsoleApplication {
             //당첨번호 입력
             String[] splitWinningNumbers = LottoInputView.splitWinningNumbers(LottoInputView.inputWinningNumbers());
 
+            //보너스 번호 입력
+            int bounusNumber = LottoInputView.inputBounusNumber();
+
             //입력값 예외 확인 및 당첨번호 리스트 생성
-            List<Integer> winningNumbers = LottoInputView.createWinningNumbers(splitWinningNumbers);
+            LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(splitWinningNumbers, bounusNumber);
 
             //당첨등수 확인
-            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, winningNumbers, lottoProfit);
+            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, lottoWinningNumber, lottoProfit);
 
             //통계자료 view
             LottoOutputView.showWinningStatistics(lottoStatistics);

@@ -21,8 +21,9 @@ public class LottoProfit {
     /**
      * 수익율 개산
      */
-    public void calculateProfit(int forthCnt, int thirdCnt, int secondCnt, int firstCnt) {
-        profit = (LottoPrize.FORTH.getPrize() * forthCnt
+    public void calculateProfit(int fifthCnt, int forthCnt, int thirdCnt, int secondCnt, int firstCnt) {
+        profit = (LottoPrize.FIFTH.getPrize() * fifthCnt
+                + LottoPrize.FORTH.getPrize() * forthCnt
                 + LottoPrize.THIRD.getPrize() * thirdCnt
                 + LottoPrize.SECOND.getPrize() * secondCnt
                 + LottoPrize.FIRST.getPrize() * firstCnt)

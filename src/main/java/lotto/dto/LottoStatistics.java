@@ -10,6 +10,7 @@ public class LottoStatistics {
     private int secondCnt;
     private int thirdCnt;
     private int forthCnt;
+    private int fifthCnt;
 
     public LottoStatistics(LottoProfit lottoProfit) {
         this.lottoProfit = lottoProfit;
@@ -34,6 +35,9 @@ public class LottoStatistics {
             case FORTH:
                 forthCnt++;
                 break;
+            case FIFTH:
+                fifthCnt++;
+                break;
             default:
                 break;
         }
@@ -57,5 +61,9 @@ public class LottoStatistics {
 
     public int getForthCnt() {
         return forthCnt;
+    }
+
+    public int getFifthCnt() {
+        return fifthCnt;
     }
 }

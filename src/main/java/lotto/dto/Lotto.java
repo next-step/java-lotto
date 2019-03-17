@@ -4,20 +4,25 @@ import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_NUM_COUNT = 6;
+    public static final int LOTTO_BONUS_COUNT = 1;
     public static final int LOTTO_PRICE = 1000;
 
     private List<Integer> numbers;
 
     private int matchCount;
 
+    private boolean matchBonus;
+
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
         this.matchCount = 0;
+        this.matchBonus = false;
     }
 
     public Lotto(List<Integer> numbers, int matchCount) {
         this.numbers = numbers;
         this.matchCount = matchCount;
+        this.matchBonus = false;
     }
 
     /**
@@ -31,8 +36,23 @@ public class Lotto {
         }
     }
 
+    /**
+     * 보너스 번호 체크
+     *
+     * @param bonusNumber 보너스번호
+     */
+    public void checkBonus(int bonusNumber) {
+        if (numbers.contains(bonusNumber) && matchCount == 5) {
+            matchBonus = true;
+        }
+    }
+
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
     }
 
     @Override

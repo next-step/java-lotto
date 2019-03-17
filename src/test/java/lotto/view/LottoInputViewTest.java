@@ -1,9 +1,8 @@
 package lotto.view;
 
 
+import lotto.dto.LottoWinningNumber;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,13 +34,18 @@ public class LottoInputViewTest {
 
     @Test
     public void 당첨로또번호생성() {
-        List<Integer> winningNumbers = LottoInputView.createWinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"});
-        assertThat(winningNumbers).hasSize(6);
+        LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"}, 7);
+        assertThat(lottoWinningNumber.getWinningNumber()).hasSize(6);
+        assertThat(lottoWinningNumber.getBonusNumber()).isEqualTo(7);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 당첨로또번호중복() {
-        List<Integer> winningNumbers = LottoInputView.createWinningNumbers(new String[]{"1", "1", "1", "1", "1", "1"});
-        assertThat(winningNumbers).hasSize(6);
+        LottoInputView.createWinningNumbers(new String[]{"1", "1", "1", "1", "1", "1"}, 1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 당첨로또번호중복2() {
+        LottoInputView.createWinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"}, 1);
     }
 }
