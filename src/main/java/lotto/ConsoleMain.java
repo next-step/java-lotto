@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoChecker;
-import lotto.domain.LottoMachine;
+import lotto.domain.*;
 import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleOutputView;
 import lotto.vo.LottoResult;
@@ -27,6 +24,6 @@ public class ConsoleMain {
         }
 
         LottoResult lottoResult = LottoChecker.getResult(winner, lottoBundle);
-        ConsoleOutputView.printWinStatistics(money, lottoResult);
+        ConsoleOutputView.printWinStatistics(lottoResult);
     }
 }
