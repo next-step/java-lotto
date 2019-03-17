@@ -1,7 +1,5 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoImpl;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,5 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.WinningLotto;
 import org.junit.Test;
 
 import java.util.ArrayList;
