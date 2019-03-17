@@ -10,6 +10,11 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
+        checkLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private void checkLottoNumbers(List<Integer> lottoNumbers) {
         if (!isLottoNumbersSizeCorrect(lottoNumbers)) {
             throw new IllegalArgumentException("Lotto numbers size must be " + TOTAL_LOTTO_NUMBERS);
         }
@@ -21,9 +26,6 @@ public class Lotto {
         if (!isLottoNumbersCorrect(lottoNumbers)) {
             throw new IllegalArgumentException("Lotto number must be between " + MIN_NUMBER + " and " + MAX_NUMBER);
         }
-
-
-        this.lottoNumbers = lottoNumbers;
     }
 
     private boolean isLottoNumbersUnique(List<Integer> lottoNumbers) {
