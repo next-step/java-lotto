@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
     public static final int TOTAL_LOTTO_NUMBERS = 6;
     private final List<Integer> lottoNumbers;
 
@@ -16,6 +18,11 @@ public class Lotto {
             throw new IllegalArgumentException("Every lotto numbers must be unique");
         }
 
+        if (!isLottoNumbersCorrect(lottoNumbers)) {
+            throw new IllegalArgumentException("Lotto number must be between " + MIN_NUMBER + " and " + MAX_NUMBER);
+        }
+
+
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -26,6 +33,18 @@ public class Lotto {
 
     private boolean isLottoNumbersSizeCorrect(List<Integer> lottoNumbers) {
         return TOTAL_LOTTO_NUMBERS == lottoNumbers.size();
+    }
+
+    private boolean isLottoNumbersCorrect(List<Integer> lottoNumbers) {
+        long correctLottoNumbers = lottoNumbers.stream()
+                .filter(this::isLottoNumberCorrect)
+                .count();
+
+        return correctLottoNumbers == lottoNumbers.size();
+    }
+
+    private boolean isLottoNumberCorrect(int lottoNumber) {
+        return (MIN_NUMBER <= lottoNumber) && (lottoNumber <= MAX_NUMBER);
     }
 
     public List<Integer> getNumbers() {

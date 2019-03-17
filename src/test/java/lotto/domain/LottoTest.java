@@ -21,7 +21,7 @@ public class LottoTest {
     }
 
     @Test
-    public void 로또_생성_시_숫자가_6개가_아니면_IlligalArgumentExceptin() {
+    public void 로또_생성_시_숫자가_6개가_아니면_IlligalArgumentException() {
         // given
         List<Integer> fiveNumbers = Arrays.asList(1, 2, 3, 4, 5);
         List<Integer> sevenNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
@@ -30,6 +30,16 @@ public class LottoTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(fiveNumbers));
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(sevenNumbers));
+    }
+
+    @Test
+    public void 로또_생성_시_숫자가_범위를_벗어나면_IlligalArgumentException() {
+        // given
+        List<Integer> outOfRangeNumbers = Arrays.asList(100, 2, 3, 4, 5, 6);
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(outOfRangeNumbers));
     }
 
     @Test
