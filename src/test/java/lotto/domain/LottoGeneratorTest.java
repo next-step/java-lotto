@@ -21,23 +21,8 @@ public class LottoGeneratorTest {
     }
 
     @Test
-    public void 로또_번호_생성() {
-        // given
-        // when
-        Lotto lotto = LottoGenerator.generate();
-
-        // then
-        assertThat(lotto.getNumbers()).hasSize(6);
-    }
-
-    @Test
-    public void 로또_번호는_중복돼선_안됨() {
-        // given
-        // when
-        Lotto lotto = LottoGenerator.generate();
-
-        // then
-        long numberOfUniqueNumber = lotto.getNumbers().stream().distinct().count();
-        assertThat(lotto.getNumbers().size()).isEqualTo(numberOfUniqueNumber);
+    public void 로또_번호_정상_생성() {
+        // 비정상 경우는 LottoTest
+        LottoGenerator.generate();
     }
 }
