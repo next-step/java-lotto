@@ -5,13 +5,13 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAdditionCalculatorTest {
-    @Test
-    public void 입력값이_공백_null_인경우() {
-        int result = StringAdditionCalculator.validateInput("");
-        assertThat(result).isEqualTo(0);
 
-        result = StringAdditionCalculator.validateInput(null);
-        assertThat(result).isEqualTo(0);
+    @Test
+    public void 숫자들_덧셈() {
+        int[] operands = {1,2,3,4};
+
+        int result = StringAdditionCalculator.add(operands);
+        assertThat(result).isEqualTo(10);
     }
 }
 
@@ -21,8 +21,8 @@ public class StringAdditionCalculatorTest {
  * <p>
  * 1.쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우
  * 구분자를 기준으로 분리한 각 숫자의 합을 반환 (예: “” => 0, "1,2" => 3, "1,2,3" => 6, “1,2:3” => 6)
- * > 빈문자, null인경우 0을 반환 : OK
- * - 구분자없이 숫자 하나만 있는경우 해당 숫자 반환
+ * > 빈문자, null인경우 0을 반환
+ * > 구분자없이 숫자 하나만 있는경우 해당 숫자 반환
  * - 쉼표,콜론으로 구분되는 경우 덧셈결과 반환
  * <p>
  * 2.앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다.
