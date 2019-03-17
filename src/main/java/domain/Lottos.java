@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,10 @@ public class Lottos {
         for (int i = 0; i < numberOfLotto; i++) {
             lottos.add(new Lotto());
         }
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public int size() {

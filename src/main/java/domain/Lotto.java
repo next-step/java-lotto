@@ -1,3 +1,8 @@
+package domain;
+
+import com.sun.deploy.util.StringUtils;
+import util.RandomUtils;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +18,12 @@ public class Lotto {
     public Lotto(int... numbers) {
         for (int number : numbers) {
             this.numbers.add(number);
+        }
+    }
+
+    public Lotto(String[] winLottoArr) {
+        for (String number : winLottoArr) {
+            this.numbers.add(Integer.parseInt(StringUtils.trimWhitespace(number)));
         }
     }
 
