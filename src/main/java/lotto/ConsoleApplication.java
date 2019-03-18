@@ -3,11 +3,9 @@ package lotto;
 import lotto.domain.LottoStore;
 import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
-import lotto.enums.Rank;
 import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
-import lotto.view.OutputView;
-import lotto.view.vo.MatchResult;
+import lotto.view.LottoResult;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +18,7 @@ public class ConsoleApplication {
         LottoStore lottoStore = new LottoStore(new RandomLottoGenerator());
 
         List<BasicLotto> lottos = lottoStore.buyLottos(money);
-        lottos.forEach(System.out::println);
-
-        System.out.println();
+        LottoResult.printLottos(lottos);
 
         List<Integer> winningLottoNumbers =
             InputView.getWinningLottoNumbers("지난 주 당첨 번호를 입력해 주세요.",
@@ -31,16 +27,7 @@ public class ConsoleApplication {
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        OutputView.generateResult(lottos, winningLotto);
-        System.out.println("당첨통계");
-        System.out.println("-------");
-        System.out.println(Rank.FOURCE.toString() + MatchResult.getMatchCount(Rank.FOURCE.getCountOfMatch()));
-        System.out.println(Rank.THIRD.toString() + MatchResult.getMatchCount(Rank.THIRD.getCountOfMatch()));
-        System.out.println(Rank.SECOND.toString() + MatchResult.getMatchCount(Rank.SECOND.getCountOfMatch()));
-        System.out.println(Rank.FIRST.toString() + MatchResult.getMatchCount(Rank.FIRST.getCountOfMatch()));
-
-        System.out.println("총 수익률은 " + OutputView.getRewardPercent(money) + "입니다.");
-        System.out.println("수익률이 1이면 본전");
-
+        LottoResult.generate(lottos, winningLotto);
+        LottoResult.getRewardPercent(money);
     }
 }
