@@ -12,8 +12,11 @@ public class Positive {
     }
 
     public Positive add(Positive positive) {
-        this.number += positive.number;
-        return this;
+        return new Positive(this.number + positive.number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

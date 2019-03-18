@@ -20,7 +20,7 @@ public class StringAddCalculatorTest {
 
     @Test
     public void add_쉼표구분자() {
-        assertEquals(new Positive(5), StringAddCalculator.add("1,4"));
+        assertEquals(new Positive(7), StringAddCalculator.add("2,5"));
     }
 
     @Test

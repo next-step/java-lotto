@@ -54,7 +54,9 @@ public class StringAddCalculator {
 
     private static Positive sum(List<Positive> integerTokens) {
         Positive sum = new Positive(0);
-        integerTokens.forEach(sum::add);
+        for (Positive positive : integerTokens) {
+            sum = sum.add(positive);
+        }
         return sum;
     }
 }

@@ -18,8 +18,7 @@ public class InputView {
         readString(scanner);
         String str = scanner.nextLine();
 
-        return Arrays.asList(str.split(regex))
-            .stream()
+        return Arrays.stream(str.split(regex))
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
