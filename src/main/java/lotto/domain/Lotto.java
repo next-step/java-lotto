@@ -6,7 +6,7 @@ import java.util.List;
 public class Lotto {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
-    public static final int TOTAL_LOTTO_NUMBERS = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -16,7 +16,7 @@ public class Lotto {
 
     private void checkLottoNumbers(List<Integer> lottoNumbers) {
         if (!isLottoNumbersSizeCorrect(lottoNumbers)) {
-            throw new IllegalArgumentException("Lotto numbers size must be " + TOTAL_LOTTO_NUMBERS);
+            throw new IllegalArgumentException("Lotto numbers size must be " + LOTTO_NUMBERS_SIZE);
         }
 
         if (!isLottoNumbersUnique(lottoNumbers)) {
@@ -34,7 +34,7 @@ public class Lotto {
     }
 
     private boolean isLottoNumbersSizeCorrect(List<Integer> lottoNumbers) {
-        return TOTAL_LOTTO_NUMBERS == lottoNumbers.size();
+        return LOTTO_NUMBERS_SIZE == lottoNumbers.size();
     }
 
     private boolean isLottoNumbersCorrect(List<Integer> lottoNumbers) {

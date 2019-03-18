@@ -11,7 +11,7 @@ public class LottoRunner {
     }
 
     static long[] getMatchCounts(Lotto winner, LottoBundle lottoBundle) {
-        long[] result = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] result = new long[Lotto.LOTTO_NUMBERS_SIZE + 1];
 
         lottoBundle.getLottos().forEach(lotto -> {
             int numberOfDuplicatedNumbers = lotto.getNumberOfDuplicatedNumbers(winner);

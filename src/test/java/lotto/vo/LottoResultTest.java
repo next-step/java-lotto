@@ -11,7 +11,7 @@ public class LottoResultTest {
     @Test
     public void 당첨번호와_비교한_결과를_통해_로또결과_생성() {
         // given
-        long[] matchCounts = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] matchCounts = new long[Lotto.LOTTO_NUMBERS_SIZE + 1];
         matchCounts[LottoRank.FIRST.getMatchCount()] = 1;
         matchCounts[LottoRank.THIRD.getMatchCount()] = 3;
 
@@ -28,7 +28,7 @@ public class LottoResultTest {
     @Test
     public void 당첨번호와_비교한_결과를_통해_구입한_로또_금액_계산() {
         // given
-        long[] matchCounts = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] matchCounts = new long[Lotto.LOTTO_NUMBERS_SIZE + 1];
         matchCounts[LottoRank.FIRST.getMatchCount()] = 1;
         matchCounts[LottoRank.THIRD.getMatchCount()] = 3;
         matchCounts[0] = 5; // 전부 일치 하지 않는 경우
@@ -45,7 +45,7 @@ public class LottoResultTest {
     @Test
     public void 총_당첨금액_계산() {
         // given
-        long[] matchCounts = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] matchCounts = new long[Lotto.LOTTO_NUMBERS_SIZE + 1];
         matchCounts[LottoRank.SECOND.getMatchCount()] = 1;
         matchCounts[LottoRank.FOURTH.getMatchCount()] = 3;
 
@@ -62,7 +62,7 @@ public class LottoResultTest {
     @Test
     public void 총_수익률_계산() {
         // given
-        long[] matchCounts = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+        long[] matchCounts = new long[Lotto.LOTTO_NUMBERS_SIZE + 1];
         matchCounts[LottoRank.SECOND.getMatchCount()] = 1;
         matchCounts[LottoRank.FOURTH.getMatchCount()] = 3;
         matchCounts[0] = 5; // 전부 일치 하지 않는 경우
