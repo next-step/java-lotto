@@ -58,4 +58,8 @@ public enum Prize {
         }
         return result;
     }
+
+    public static long getPrizeMoney(int i) {
+        return Prize.typeOf(i).calculatePrizeMoney(1);
+    }
 }

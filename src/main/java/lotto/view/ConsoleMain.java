@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ConsoleMain {
     public static void main(String[] args) {
-
         int money = InputView.input();
         OutputView.issueLottoTickets(money);
 
@@ -23,8 +22,5 @@ public class ConsoleMain {
 
         double rate = lottoResult.calculateRate(money);
         OutputView.printRate(rate);
-
-
-
     }
 }

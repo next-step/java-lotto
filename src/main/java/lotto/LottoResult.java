@@ -4,11 +4,12 @@ public class LottoResult {
 
     private static final int MIN_RANGE = 3;
     private static final int MAX_RANGE = 6;
+    private static final int LOTTO_SIZE = 7;
 
     private int[] matchCount;
 
     public LottoResult() {
-        matchCount = new int[7];
+        matchCount = new int[LOTTO_SIZE];
     }
 
     public void addMatchCount(int i) {
