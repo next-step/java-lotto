@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoBundle;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
