@@ -31,10 +31,10 @@ public class ConsoleApplication {
             String[] splitWinningNumbers = LottoInputView.splitWinningNumbers(LottoInputView.inputWinningNumbers());
 
             //보너스 번호 입력
-            int bounusNumber = LottoInputView.inputBounusNumber();
+            int bonusNumber = LottoInputView.inputBounusNumber();
 
             //입력값 예외 확인 및 당첨번호 리스트 생성
-            LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(splitWinningNumbers, bounusNumber);
+            LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(splitWinningNumbers, bonusNumber);
 
             //당첨등수 확인
             LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, lottoWinningNumber, lottoProfit);

@@ -19,12 +19,6 @@ public class Lotto {
         this.matchBonus = false;
     }
 
-    public Lotto(List<Integer> numbers, int matchCount) {
-        this.numbers = numbers;
-        this.matchCount = matchCount;
-        this.matchBonus = false;
-    }
-
     /**
      * 맞은 숫자 개수 증가
      *

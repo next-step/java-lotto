@@ -22,7 +22,12 @@ public class LottoMachine {
 
         //각 당첨 번호별로 체크
         for (int number : lottoWinningNumber.getWinningNumber()) {
-            checkWinningNumber(lottos, number, lottoWinningNumber.getBonusNumber());
+            checkWinningNumber(lottos, number);
+        }
+
+        //보너스 번호 체크
+        for (Lotto lotto : lottos) {
+            lotto.checkBonus(lottoWinningNumber.getBonusNumber());
         }
 
         //노출 통계자료 생성
@@ -34,12 +39,10 @@ public class LottoMachine {
      *
      * @param lottos 구매한 로또들
      * @param number 당첨로또 번호 한개
-     * @param bonusNumber 보너스번호
      */
-    public static void checkWinningNumber(List<Lotto> lottos, int number, int bonusNumber) {
+    public static void checkWinningNumber(List<Lotto> lottos, int number) {
         for (Lotto lotto : lottos) {
             lotto.incrementMatchCount(number);
-            lotto.checkBonus(bonusNumber);
         }
     }
 
