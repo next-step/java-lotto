@@ -15,7 +15,7 @@ public class LottoResult {
     }
 
     private long extractCost(long[] matchCounts) {
-        return LottoMachine.PRICE_OF_LOTTO * extractNumberOfLottos(matchCounts);
+        return LottoMachine.LOTTO_PRICE * extractNumberOfLottos(matchCounts);
     }
 
     private long extractNumberOfLottos(long[] matchCounts) {
