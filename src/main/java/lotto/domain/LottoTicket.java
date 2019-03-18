@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoTicket {
     private int lottosCount;
@@ -22,6 +24,40 @@ public class LottoTicket {
         }
 
         return this.lottos;
+    }
+
+    public Map<Integer, List<Lotto>> announceWinningResult(final List<Integer> winningNumbers) {
+        Map<Integer, List<Lotto>> winningResults = new HashMap<>();
+
+        List<Lotto> lottosHasThreeWinning = new ArrayList<>();
+        List<Lotto> lottosHasFourWinning = new ArrayList<>();
+        List<Lotto> lottosHasFiveWinning = new ArrayList<>();
+        List<Lotto> lottosHasSixWinning = new ArrayList<>();
+
+        this.lottos.forEach(lotto -> {
+            if (lotto.getContainsCount(winningNumbers) == 3) {
+                lottosHasThreeWinning.add(lotto);
+            }
+
+            if (lotto.getContainsCount(winningNumbers) == 4) {
+                lottosHasFourWinning.add(lotto);
+            }
+
+            if (lotto.getContainsCount(winningNumbers) == 5) {
+                lottosHasFiveWinning.add(lotto);
+            }
+
+            if (lotto.getContainsCount(winningNumbers) == 6) {
+                lottosHasSixWinning.add(lotto);
+            }
+        });
+
+        winningResults.put(3, lottosHasThreeWinning);
+        winningResults.put(4, lottosHasFourWinning);
+        winningResults.put(5, lottosHasFiveWinning);
+        winningResults.put(6, lottosHasSixWinning);
+
+        return winningResults;
     }
 
     public int getLottosCount() {

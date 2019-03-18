@@ -26,6 +26,18 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    public int getContainsCount(final List<Integer> winningNumbers) {
+        int containsCount = 0;
+
+        for (Integer winningNumber : winningNumbers) {
+            if (this.lottoNumbers.contains(winningNumber)) {
+                containsCount++;
+            }
+        }
+
+        return containsCount;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
