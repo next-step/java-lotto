@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoBundle;
+import lotto.enums.LottoRank;
 import lotto.vo.LottoResult;
 
 public class LottoRunner {
@@ -11,10 +14,10 @@ public class LottoRunner {
     }
 
     static long[] getMatchCounts(Lotto winner, LottoBundle lottoBundle) {
-        long[] result = new long[Lotto.LOTTO_NUMBERS_SIZE + 1];
+        long[] result = new long[LottoRank.SECOND.getMatchCount() + 1];
 
         lottoBundle.getLottos().forEach(lotto -> {
-            int numberOfDuplicatedNumbers = lotto.getNumberOfDuplicatedNumbers(winner);
+            int numberOfDuplicatedNumbers = lotto.getMatchCounts(winner);
             result[numberOfDuplicatedNumbers]++;
         });
 
