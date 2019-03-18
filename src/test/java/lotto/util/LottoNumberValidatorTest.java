@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.domain.Lotto;
+import lotto.domain.ticket.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
