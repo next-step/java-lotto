@@ -21,5 +21,6 @@ public class LottoWinResultTest {
         assertThat(lottoWinResult.get(LottoRank.SECOND)).isEqualTo(0);
         assertThat(lottoWinResult.get(LottoRank.THIRD)).isEqualTo(3);
         assertThat(lottoWinResult.get(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(lottoWinResult.get(LottoRank.FIFTH)).isEqualTo(0);
     }
 }

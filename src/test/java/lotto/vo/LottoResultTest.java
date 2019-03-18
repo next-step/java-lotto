@@ -22,6 +22,7 @@ public class LottoResultTest {
         assertThat(lottoResult.getNumberOfWin(LottoRank.SECOND)).isEqualTo(0);
         assertThat(lottoResult.getNumberOfWin(LottoRank.THIRD)).isEqualTo(3);
         assertThat(lottoResult.getNumberOfWin(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfWin(LottoRank.FIFTH)).isEqualTo(0);
     }
 
     @Test
