@@ -42,6 +42,10 @@ public class Lotto {
         return this.lottoNumbers.getNumbers();
     }
 
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
     public int getMatchCounts(Lotto target) {
         int matchCounts = this.lottoNumbers.getNumberOfDuplicatedNumbers(target.lottoNumbers);
 
