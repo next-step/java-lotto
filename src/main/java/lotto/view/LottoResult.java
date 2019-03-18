@@ -8,40 +8,30 @@ import lotto.view.vo.MatchResult;
 import java.util.List;
 
 public class LottoResult {
+    private MatchResult matchResult;
+
+    public LottoResult(WinningLotto winningLotto) {
+        matchResult = new MatchResult(winningLotto);
+    }
 
     public static void printLottos(List<BasicLotto> lottos) {
         lottos.forEach(System.out::println);
         System.out.println();
     }
 
-    public static void generate(List<BasicLotto> lottos, WinningLotto winningLotto) {
-        for (BasicLotto lotto : lottos) {
-            int matchCount = winningLotto.checkMatchNumbers(lotto);
-            calculateMatchCount(matchCount);
-        }
+    public void generate(List<BasicLotto> lottos) {
+        matchResult.calculate(lottos);
 
         System.out.println("당첨통계");
         System.out.println("-------");
-        System.out.println(Rank.FOURCE.toString() + MatchResult.getMatchCount(Rank.FOURCE.getCountOfMatch()));
-        System.out.println(Rank.THIRD.toString() + MatchResult.getMatchCount(Rank.THIRD.getCountOfMatch()));
-        System.out.println(Rank.SECOND.toString() + MatchResult.getMatchCount(Rank.SECOND.getCountOfMatch()));
-        System.out.println(Rank.FIRST.toString() + MatchResult.getMatchCount(Rank.FIRST.getCountOfMatch()));
-    }
 
-    private static void calculateMatchCount(int matchCount) {
         for (Rank rank : Rank.values()) {
-            if (matchCount == rank.getCountOfMatch()) {
-                MatchResult.addMatchCount(rank.getCountOfMatch());
-            }
+            System.out.println(rank.toString() + matchResult.getRank().get(rank));
         }
     }
 
-    public static String getRewardPercent(int money) {
-        int reward = 0;
-
-        for (Rank rank : Rank.values()) {
-            reward += (rank.getWinningMoney() * MatchResult.getMatchCount(rank.getCountOfMatch()));
-        }
+    public String getRewardPercent(int money) {
+        long reward = matchResult.calculateTotalReward();
 
         double percent = (double) reward / money;
 

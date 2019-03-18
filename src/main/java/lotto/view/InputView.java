@@ -13,6 +13,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
+    public static int getBonusNumber(String question, Scanner scanner) {
+        System.out.println(question);
+        readInteger(scanner);
+        return scanner.nextInt();
+    }
+
     public static List<Integer> getWinningLottoNumbers(String question, String regex, Scanner scanner) {
         System.out.println(question);
         readString(scanner);

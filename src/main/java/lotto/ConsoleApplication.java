@@ -24,10 +24,12 @@ public class ConsoleApplication {
             InputView.getWinningLottoNumbers("지난 주 당첨 번호를 입력해 주세요.",
                 REGEX, new Scanner(System.in));
 
+        int bonusNumber = InputView.getBonusNumber("보너스 볼을 입력해 주세요.", new Scanner(System.in));
 
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
-        LottoResult.generate(lottos, winningLotto);
-        LottoResult.getRewardPercent(money);
+        LottoResult lottoResult = new LottoResult(winningLotto);
+        lottoResult.generate(lottos);
+        lottoResult.getRewardPercent(money);
     }
 }
