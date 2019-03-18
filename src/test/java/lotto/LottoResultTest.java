@@ -29,4 +29,14 @@ public class LottoResultTest {
 
         assertThat(rate).isEqualTo(750);
     }
+
+    @Test
+    public void 소수점_수익률_구하기() {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.addMatchCount(3);
+
+        double rate = lottoResult.calculateRate(400000);
+
+        assertThat(rate).isEqualTo(0.0125);
+    }
 }
