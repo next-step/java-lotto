@@ -11,6 +11,8 @@ public enum LottoRank {
     FOURTH(4, 50_000),
     FIFTH(3, 5_000);
 
+    public static final int BONUS_NUMBER_MATCH_COUNT = 10;
+
     private int matchCount;
     private long prizeMoney;
 
