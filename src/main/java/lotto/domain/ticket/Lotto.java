@@ -62,6 +62,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return this.lottoNumbers.toString();
+        return this.lottoNumbers.getNumbers().toString() + " / " + this.bonusNumber;
     }
 }
