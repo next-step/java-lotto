@@ -13,9 +13,14 @@ public class ConsoleInputView {
 
     public static String inputWinnerNumbers(Scanner scanner) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winnerNumbersString = scanner.nextLine();
+        return scanner.nextLine();
+    }
+
+    public static int inputBonusNumber(Scanner scanner) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumber = scanner.nextLine();
         System.out.println();
 
-        return winnerNumbersString;
+        return Integer.parseInt(bonusNumber);
     }
 }
