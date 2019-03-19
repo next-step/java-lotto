@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto;
 
-import lotto.dto.Lotto;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMarket;
 import org.junit.Test;
 
 import java.util.Collections;

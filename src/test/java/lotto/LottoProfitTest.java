@@ -1,5 +1,7 @@
-package lotto.dto;
+package lotto;
 
+import lotto.dto.LottoProfit;
+import lotto.vo.LottoMatchCount;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

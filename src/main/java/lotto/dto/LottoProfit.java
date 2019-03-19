@@ -1,6 +1,8 @@
 package lotto.dto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
+import lotto.vo.LottoMatchCount;
 
 public class LottoProfit {
     private double profit;

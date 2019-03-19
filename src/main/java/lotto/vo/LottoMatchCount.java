@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.vo;
 
 public class LottoMatchCount {
     private int firstCnt;

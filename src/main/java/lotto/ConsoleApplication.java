@@ -2,10 +2,10 @@ package lotto;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMarket;
-import lotto.dto.Lotto;
+import lotto.domain.Lotto;
 import lotto.dto.LottoProfit;
 import lotto.dto.LottoStatistics;
-import lotto.dto.LottoWinningNumber;
+import lotto.vo.LottoWinningNumber;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 

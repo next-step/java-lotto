@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.dto.Lotto;
-import lotto.dto.LottoProfit;
-import lotto.dto.LottoWinningNumber;
+import lotto.domain.Lotto;
+import lotto.vo.LottoWinningNumber;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;

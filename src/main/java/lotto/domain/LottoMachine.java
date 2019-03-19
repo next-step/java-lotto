@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.dto.*;
+import lotto.vo.LottoMatchCount;
+import lotto.vo.LottoWinningNumber;
 
 import java.util.List;
 

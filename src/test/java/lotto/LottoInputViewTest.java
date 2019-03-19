@@ -1,7 +1,8 @@
-package lotto.view;
+package lotto;
 
 
-import lotto.dto.LottoWinningNumber;
+import lotto.view.LottoInputView;
+import lotto.vo.LottoWinningNumber;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
