@@ -21,16 +21,6 @@ public class LottoResultTest {
     }
 
     @Test
-    public void 수익률_구하기() {
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.addMatchCount(5);
-        lottoResult.addMatchCount(5);
-        double rate = lottoResult.calculateRate(4000);
-
-        assertThat(rate).isEqualTo(750);
-    }
-
-    @Test
     public void 소수점_수익률_구하기() {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addMatchCount(3);
@@ -38,5 +28,15 @@ public class LottoResultTest {
         double rate = lottoResult.calculateRate(400000);
 
         assertThat(rate).isEqualTo(0.0125);
+    }
+
+    @Test
+    public void 수익률_구하기() {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.addMatchCount(5);
+        lottoResult.addMatchCount(5);
+        double rate = lottoResult.calculateRate(4000);
+
+        assertThat(rate).isEqualTo(750);
     }
 }
