@@ -166,6 +166,73 @@ public class LottoVendingMachineTest {
   }
 
   @Test
+  public void test_winMoney_three() {
+
+    // Given
+    int matchCount = 3;
+    int winCount = 2;
+
+    // When
+    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+
+    // Then
+    assertThat(winMoney).isEqualTo(new Money(5000 * winCount));
+  }
+
+  @Test
+  public void test_winMoney_four() {
+
+    // Given
+    int matchCount = 4;
+    int winCount = 3;
+
+    // When
+    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+
+    // Then
+    assertThat(winMoney).isEqualTo(new Money(50000 * winCount));
+  }
+
+  @Test
+  public void test_winMoney_five() {
+
+    // Given
+    int matchCount = 5;
+    int winCount = 1;
+
+    // When
+    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+
+    // Then
+    assertThat(winMoney).isEqualTo(new Money(1500000 * winCount));
+  }
+
+  @Test
+  public void test_winMoney_six() {
+
+    // Given
+    int matchCount = 6;
+    int winCount = 2;
+
+    // When
+    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+
+    // Then
+    assertThat(winMoney).isEqualTo(new Money(2000000000 * winCount));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void test_winMoney_illegalArgumentException() {
+
+    // Given
+    int matchCount = 1;
+    int winCount = 2;
+
+    // When
+    LottoVendingMachine.winMoney(matchCount, (long)winCount);
+  }
+
+  @Test
   public void test_yield() {
 
     // Given

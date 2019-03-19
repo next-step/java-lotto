@@ -47,20 +47,18 @@ public class LottoVendingMachine {
   public static Money totalWinMoney(List<Lotto> lottoList, List<Number> winNumbers) {
 
     Money totalWinMoney = new Money(0);
-    for (int matchIndex = 3; matchIndex <= 6; matchIndex++) {
-      totalWinMoney.add(winMoney(matchIndex, lottoList, winNumbers));
+    for (int matchCount = 3; matchCount <= 6; matchCount++) {
+
+      long winCount = winCount(matchCount, lottoList, winNumbers);
+      totalWinMoney.add(winMoney(matchCount, winCount));
     }
 
     return totalWinMoney;
   }
 
-  private static Money winMoney(int matchCount, List<Lotto> lottoList, List<Number> winNumbers) {
+  public static Money winMoney(int matchCount, long winCount) {
 
-    long winCount = lottoList.stream()
-        .filter(lotto -> lotto.winMatch(winNumbers) == matchCount)
-        .count();
-
-    Money winMoney = new Money(0);
+    Money winMoney;
     switch(matchCount) {
       case 3:
         winMoney = TRHEE_WIN_MONEY;
@@ -74,9 +72,17 @@ public class LottoVendingMachine {
       case 6:
         winMoney = SIX_WIN_MONEY;
         break;
+      default:
+        throw new IllegalArgumentException();
     }
     ResultView.printMatchWinCount(matchCount, winMoney, winCount);
     return winMoney.count(winCount);
+  }
+
+  private static long winCount(int matchCount, List<Lotto> lottoList, List<Number> winNumbers) {
+    return lottoList.stream()
+        .filter(lotto -> lotto.winMatch(winNumbers) == matchCount)
+        .count();
   }
 
   public static String yield(Money purchaseMoney, Money winMoney) {
