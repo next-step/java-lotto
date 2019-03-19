@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.Lotto;
+import lotto.vo.LottoNo;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -11,16 +11,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoMarketTest {
     @Test
     public void 로또번호생성() {
-        List<Integer> numbers = LottoMarket.createNumbers();
+        List<LottoNo> numbers = LottoMarket.createNumbers();
         assertThat(numbers).hasSize(6);
     }
 
     @Test
     public void 로또번호검증() {
-        List<Integer> numbers = LottoMarket.createNumbers();
+        List<LottoNo> numbers = LottoMarket.createNumbers();
         Collections.sort(numbers);
-        assertThat(numbers.get(0)).isGreaterThan(0);
-        assertThat(numbers.get(5)).isLessThanOrEqualTo(45);
+        assertThat(numbers.get(0).getNumber()).isGreaterThan(0);
+        assertThat(numbers.get(5).getNumber()).isLessThanOrEqualTo(45);
     }
 
     @Test

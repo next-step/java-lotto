@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.Lotto;
+import lotto.vo.LottoNo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ public class LottoMarket {
      * @param buyCount 구매개수
      * @return 구매한 로또들
      */
-    public static List<Lotto> createLottos(int buyCount) {
+    public static List<Lotto> createLottos(int buyCount) throws IllegalArgumentException {
         List<Lotto> lottos = new ArrayList<>();
 
         //로또 번호생성
@@ -33,13 +33,17 @@ public class LottoMarket {
      *
      * @return 한 로또의 번호들
      */
-    public static List<Integer> createNumbers() {
+    public static List<LottoNo> createNumbers() throws IllegalArgumentException {
         List<Integer> allNumber = IntStream.rangeClosed(1, 45)
                 .boxed()
                 .collect(toList());
 
         Collections.shuffle(allNumber);
 
-        return allNumber.subList(0, 6);
+        List<LottoNo> numbers = new ArrayList<>();
+        allNumber.subList(0, 6)
+                .forEach(number -> numbers.add(new LottoNo(number)));
+
+        return numbers;
     }
 }

@@ -1,18 +1,17 @@
 package lotto.dto;
 
 import lotto.domain.LottoPrize;
+import lotto.vo.LottoMatchCount;
 
 public class LottoStatistics {
 
     private LottoProfit lottoProfit;
 
-    private int firstCnt;
-    private int secondCnt;
-    private int thirdCnt;
-    private int forthCnt;
+    private LottoMatchCount lottoMatchCount;
 
-    public LottoStatistics(LottoProfit lottoProfit) {
+    public LottoStatistics(LottoProfit lottoProfit, LottoMatchCount lottoMatchCount) {
         this.lottoProfit = lottoProfit;
+        this.lottoMatchCount = lottoMatchCount;
     }
 
     /**
@@ -20,42 +19,35 @@ public class LottoStatistics {
      *
      * @param prize 등수
      */
-    public void incrementPrizeCnt(LottoPrize prize) {
+    public LottoMatchCount incrementPrizeCnt(LottoPrize prize) {
         switch (prize) {
             case FIRST:
-                firstCnt++;
+                lottoMatchCount.incrementFirstCount();
                 break;
             case SECOND:
-                secondCnt++;
+                lottoMatchCount.incrementSecondCount();
                 break;
             case THIRD:
-                thirdCnt++;
+                lottoMatchCount.incrementThirdCount();
                 break;
             case FORTH:
-                forthCnt++;
+                lottoMatchCount.incrementForthCount();
+                break;
+            case FIFTH:
+                lottoMatchCount.incrementFifthCount();
                 break;
             default:
                 break;
         }
+
+        return lottoMatchCount;
     }
 
     public LottoProfit getLottoProfit() {
         return lottoProfit;
     }
 
-    public int getFirstCnt() {
-        return firstCnt;
-    }
-
-    public int getSecondCnt() {
-        return secondCnt;
-    }
-
-    public int getThirdCnt() {
-        return thirdCnt;
-    }
-
-    public int getForthCnt() {
-        return forthCnt;
+    public LottoMatchCount getLottoMatchCount() {
+        return lottoMatchCount;
     }
 }

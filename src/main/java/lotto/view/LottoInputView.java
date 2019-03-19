@@ -1,7 +1,8 @@
 package lotto.view;
 
-import lotto.dto.Lotto;
-import lotto.dto.LottoProfit;
+import lotto.domain.Lotto;
+import lotto.vo.LottoNo;
+import lotto.vo.LottoWinningNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
 
 public class LottoInputView {
 
-    public static LottoProfit buyLotto() throws IllegalArgumentException {
+    public static int inputBuyAmount() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         int buyAmount = scanner.nextInt();
@@ -27,11 +28,7 @@ public class LottoInputView {
             throw new IllegalArgumentException("돈을 더 넣으세요.");
         }
 
-        LottoProfit lottoProfit = new LottoProfit(buyAmount / Lotto.LOTTO_PRICE, buyAmount);
-
-        System.out.println(lottoProfit.getBuyCount() + "개를 구매했습니다.");
-
-        return lottoProfit;
+        return buyAmount;
     }
 
     /**
@@ -41,6 +38,15 @@ public class LottoInputView {
         Scanner scanner = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
+    }
+
+    /**
+     * 보너스 번호 입력
+     */
+    public static int inputBounusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 
     /**
@@ -67,21 +73,29 @@ public class LottoInputView {
      * 정수형 리스트로 리턴
      *
      * @param winningNumbers 당첨번호 string[]
+     * @param bonusNumber 보너스번호
      * @return 당첨번호 list
      * @throws IllegalArgumentException
      */
-    public static List<Integer> createWinningNumbers(String[] winningNumbers) throws IllegalArgumentException {
+    public static LottoWinningNumber createWinningNumbers(String[] winningNumbers, int bonusNumber) throws IllegalArgumentException {
 
         Set<Integer> duplicateNumbers = Stream.of(winningNumbers)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toSet());
 
+        duplicateNumbers.add(bonusNumber);
+
         //중복 입력 체크
-        if (duplicateNumbers.size() != Lotto.LOTTO_NUM_COUNT) {
+        if (duplicateNumbers.size() != Lotto.LOTTO_NUM_COUNT + Lotto.LOTTO_BONUS_COUNT) {
             throw new IllegalArgumentException("중복 당첨숫자 있음");
         }
 
-        return new ArrayList<>(duplicateNumbers);
+        duplicateNumbers.remove(bonusNumber);
+
+        List<LottoNo> numbers = new ArrayList<>();
+        duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
+
+        return new LottoWinningNumber(numbers, new LottoNo(bonusNumber));
     }
 }
