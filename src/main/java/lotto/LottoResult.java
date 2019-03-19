@@ -2,8 +2,6 @@ package lotto;
 
 public class LottoResult {
 
-    private static final int MIN_RANGE = 3;
-    private static final int MAX_RANGE = 6;
     private static final int LOTTO_SIZE = 7;
 
     private int[] matchCount;
@@ -22,8 +20,9 @@ public class LottoResult {
 
     public double calculateRate(int money) {
         double rate = 0;
-        for (int i = MIN_RANGE; i <= MAX_RANGE; i++) {
-            rate += Prize.typeOf(i).calculatePrizeMoney(matchCount[i]);
+
+        for (Prize prize : Prize.values()) {
+            rate += prize.calculatePrizeMoney(matchCount);
         }
         rate /= money;
         return rate;

@@ -4,44 +4,29 @@ import java.util.Optional;
 
 public enum Prize {
 
-    FIRST(6) {
-        public long calculatePrizeMoney(int count) {
-            return count * FIRST_PRIZE_MONEY;
-        }
-    },
-
-    SECONDE(5) {
-        public long calculatePrizeMoney(int count) {
-            return count * SECOND_PRIZE_MONEY;
-        }
-    },
-
-    THIRD(4) {
-        public long calculatePrizeMoney(int count) {
-            return count * THIRD_PRIZE_MONEY;
-        }
-    },
-
-    FORTH(3) {
-        public long calculatePrizeMoney(int count) {
-            return count * FORTH_PRIZE_MONEY;
-        }
-    };
-
-    private static final int FIRST_PRIZE_MONEY = 2_000_000_000;
-    private static final int SECOND_PRIZE_MONEY = 1500_000;
-    private static final int THIRD_PRIZE_MONEY = 50_000;
-    private static final int FORTH_PRIZE_MONEY = 5_000;
+    //구조변경 : http://woowabros.github.io/tools/2017/07/10/java-enum-uses.html
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 1500_000),
+    THIRD(4, 50_000),
+    FORTH(3, 5_000);
 
     private final int matchNumber;
+    private final int prizeMoney;
 
-    Prize(int matchNumber) {
+    Prize(int matchNumber, int prizeMoney) {
         this.matchNumber = matchNumber;
+        this.prizeMoney = prizeMoney;
     }
 
-    public abstract long calculatePrizeMoney(int count);
+    public long calculatePrizeMoney(int[] matchNumbers) {
+        return matchNumbers[matchNumber] * prizeMoney;
+    }
 
-    public static Prize typeOf(int matchNumber) {
+    public static long getPrizeMoney(int i) {
+        return Prize.typeOf(i).prizeMoney;
+    }
+
+    private static Prize typeOf(int matchNumber) {
         Prize[] prizes = Prize.values();
         Prize result = null;
 
@@ -57,9 +42,5 @@ public enum Prize {
             result = prize;
         }
         return result;
-    }
-
-    public static long getPrizeMoney(int i) {
-        return Prize.typeOf(i).calculatePrizeMoney(1);
     }
 }

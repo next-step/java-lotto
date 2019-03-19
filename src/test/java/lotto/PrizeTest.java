@@ -7,16 +7,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PrizeTest {
 
     @Test
-    public void 타입구하기() {
-        Prize prize = Prize.typeOf(3);
-        assertThat(prize.name()).isEqualTo("FORTH");
+    public void ENUM_이름_확인하기() {
+        assertThat(Prize.SECOND.name()).isEqualTo("SECOND");
     }
 
     @Test
-    public void first_금액구하기() {
-        Prize prize = Prize.typeOf(6);
-        long prizeMoney = prize.calculatePrizeMoney(1);
+    public void 최종상금_구하기() {
+        int[] matchNumbers = {0, 0, 0, 0, 0, 0, 2};
 
-        assertThat(prizeMoney).isEqualTo(2_000_000_000);
+        Prize prize = Prize.FIRST;
+        long prizeMoney = prize.calculatePrizeMoney(matchNumbers);
+
+        assertThat(prizeMoney).isEqualTo(4_000_000_000L);
     }
 }
