@@ -12,11 +12,8 @@ public class TestInputView extends InputView {
   private Money money;
   private List<Number> winNumbers;
 
-  public TestInputView(Money money) {
+  public TestInputView(Money money, List<Number> winNumbers) {
     this.money = money;
-  }
-
-  public TestInputView(List<Number> winNumbers) {
     this.winNumbers = winNumbers;
   }
 

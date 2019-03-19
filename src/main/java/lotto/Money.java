@@ -4,22 +4,22 @@ import java.util.Objects;
 
 public class Money {
 
-  private int value;
+  private long value;
 
-  public Money(int value) {
+  public Money(long value) {
     this.value = value;
   }
 
-  public void add(Money threeMatchWinMoney) {
+  void add(Money threeMatchWinMoney) {
     this.value += threeMatchWinMoney.value;
   }
 
-  public Money count(long winCount) {
+  Money count(long winCount) {
     this.value *= winCount;
     return this;
   }
 
-  public String division(Money winMoney) {
+  String division(Money winMoney) {
     return String.format("%.2f", (float)this.value / winMoney.value);
   }
 
@@ -43,5 +43,9 @@ public class Money {
   @Override
   public String toString() {
     return value + "";
+  }
+
+  long amount() {
+    return value;
   }
 }

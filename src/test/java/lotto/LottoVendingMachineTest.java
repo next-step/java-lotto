@@ -4,31 +4,53 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.view.TestInputView;
 import org.junit.Test;
 
 public class LottoVendingMachineTest {
 
   @Test
-  public void test_purchaseLotto_by_inputMoney() {
+  public void test_game() {
 
     // Given
-    int purchaseAmount = 14000;
+    Money purchaseAmount = new Money(1000);
+
+    int firstMatchNumber = 3;
+    int secondMatchNumber = 12;
+    int thirdMatchNumber = 25;
+    int fourthMatchNumber = 36;
+    int fifthMatchNumber = 40;
+    int sixthMatchNumber = 19;
+    TestNumberGenerator testNumberGenerator = new TestNumberGenerator(
+        firstMatchNumber,
+        secondMatchNumber,
+        thirdMatchNumber,
+        fourthMatchNumber,
+        fifthMatchNumber,
+        sixthMatchNumber);
+
+    TestInputView testInputView = new TestInputView(purchaseAmount, testNumberGenerator.generate());
 
     // When
-    List<Lotto> lottoList = LottoVendingMachine.purchaseLotto(purchaseAmount);
+    LottoVendingMachine lottoVendingMachine
+        = new LottoVendingMachine(testInputView, testNumberGenerator);
+    String yield = lottoVendingMachine.game();
 
     // Then
-    assertThat(lottoList.size()).isEqualTo(14);
+    assertThat(yield).isEqualTo("2000000.00");
   }
 
   @Test
-  public void test_generateLottoNumbers_sixNumber() {
+  public void test_purchaseLotto_by_inputMoney() {
+
+    // Given
+    Money purchaseAmount = new Money(14000);
 
     // When
-    List<Number> generateNumber = LottoVendingMachine.generateLottoNumbers();
+    List<Lotto> lottoList = new LottoVendingMachine().purchaseLotto(purchaseAmount);
 
     // Then
-    assertThat(generateNumber.size()).isEqualTo(6);
+    assertThat(lottoList.size()).isEqualTo(14);
   }
 
   @Test
@@ -46,13 +68,13 @@ public class LottoVendingMachineTest {
         2,
         19,
         15);
-    List<Number> winNumbers = generateNumberArray(
+    List<Number> winNumbers = new TestNumberGenerator(
         5,
         firstMatchNumber,
         secondMatchNumber,
         42,
         thirdMatchNumber,
-        31);
+        31).generate();
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -77,13 +99,13 @@ public class LottoVendingMachineTest {
         fourthMatchNumber,
         19,
         15);
-    List<Number> winNumbers = generateNumberArray(
+    List<Number> winNumbers = new TestNumberGenerator(
         5,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        31);
+        31).generate();
 
     // When
       int matchingCount = lotto.winMatch(winNumbers);
@@ -109,13 +131,13 @@ public class LottoVendingMachineTest {
         fourthMatchNumber,
         fifthMatchNumber,
         15);
-    List<Number> winNumbers = generateNumberArray(
+    List<Number> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        31);
+        31).generate();
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -142,13 +164,13 @@ public class LottoVendingMachineTest {
         fourthMatchNumber,
         fifthMatchNumber,
         sixthMatchNumber);
-    List<Number> winNumbers = generateNumberArray(
+    List<Number> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        sixthMatchNumber);
+        sixthMatchNumber).generate();
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -166,32 +188,14 @@ public class LottoVendingMachineTest {
       int sixthMatchNumber) {
 
     return new Lotto(
-        generateNumberArray(
+        new TestNumberGenerator(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
             sixthMatchNumber
-        )
-    );
-  }
-
-  private List<Number> generateNumberArray(
-      int firstMatchNumber,
-      int secondMatchNumber,
-      int thirdMatchNumber,
-      int fourthMatchNumber,
-      int fifthMatchNumber,
-      int sixthMatchNumber) {
-
-    return Arrays.asList(
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(fifthMatchNumber),
-        new Number(sixthMatchNumber)
+        ).generate()
     );
   }
 
@@ -236,16 +240,16 @@ public class LottoVendingMachineTest {
             fifthMatchNumber,
             sixthMatchNumber)
     );
-    List<Number> winNumbers = generateNumberArray(
+    List<Number> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        sixthMatchNumber);
+        sixthMatchNumber).generate();
 
     // When
-    Money winMoney = LottoVendingMachine.totalWinMoney(lottoList, winNumbers);
+    Money winMoney = new LottoVendingMachine().totalWinMoney(lottoList, winNumbers);
 
     // Then
     assertThat(winMoney).isEqualTo(new Money(5000 + 50000 + 1500000 + 2000000000));
@@ -259,7 +263,7 @@ public class LottoVendingMachineTest {
     int winCount = 2;
 
     // When
-    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+    Money winMoney = new LottoVendingMachine().winMoney(matchCount, (long)winCount);
 
     // Then
     assertThat(winMoney).isEqualTo(new Money(5000 * winCount));
@@ -273,10 +277,11 @@ public class LottoVendingMachineTest {
     int winCount = 3;
 
     // When
-    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+    Money winMoney = new LottoVendingMachine().winMoney(matchCount, (long)winCount);
 
     // Then
-    assertThat(winMoney).isEqualTo(new Money(50000 * winCount));
+    long resultMoney = (long)50000 * winCount;
+    assertThat(winMoney).isEqualTo(new Money(resultMoney));
   }
 
   @Test
@@ -287,10 +292,11 @@ public class LottoVendingMachineTest {
     int winCount = 1;
 
     // When
-    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+    Money winMoney = new LottoVendingMachine().winMoney(matchCount, (long)winCount);
 
     // Then
-    assertThat(winMoney).isEqualTo(new Money(1500000 * winCount));
+    long resultMoney = (long)1500000 * winCount;
+    assertThat(winMoney).isEqualTo(new Money(resultMoney));
   }
 
   @Test
@@ -301,10 +307,11 @@ public class LottoVendingMachineTest {
     int winCount = 2;
 
     // When
-    Money winMoney = LottoVendingMachine.winMoney(matchCount, (long)winCount);
+    Money winMoney = new LottoVendingMachine().winMoney(matchCount, (long)winCount);
 
     // Then
-    assertThat(winMoney).isEqualTo(new Money(2000000000 * winCount));
+    long resultMoney = (long)2000000000 * winCount;
+    assertThat(winMoney).isEqualTo(new Money(resultMoney));
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -315,7 +322,7 @@ public class LottoVendingMachineTest {
     int winCount = 2;
 
     // When
-    LottoVendingMachine.winMoney(matchCount, (long)winCount);
+    new LottoVendingMachine().winMoney(matchCount, (long)winCount);
   }
 
   @Test

@@ -6,12 +6,11 @@ public class Lotto {
 
   private List<Number> numbers;
 
-  public Lotto(List<Number> numbers) {
-
+  Lotto(List<Number> numbers) {
     this.numbers = numbers;
   }
 
-  public int winMatch(List<Number> winNumbers) {
+  int winMatch(List<Number> winNumbers) {
 
     int matchCount = 0;
 
