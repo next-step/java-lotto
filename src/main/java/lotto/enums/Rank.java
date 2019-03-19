@@ -42,7 +42,7 @@ public enum Rank {
     }
 
     public String toString() {
-        if (countOfMatch == SECOND.getCountOfMatch())
+        if (this == SECOND)
             return countOfMatch + "개 일치, 보너스 볼 일치 (" + getWinningMoney() + "원) - ";
         return countOfMatch + "개 일치 (" + getWinningMoney() + "원) - ";
     }

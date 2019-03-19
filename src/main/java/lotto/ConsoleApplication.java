@@ -14,7 +14,8 @@ public class ConsoleApplication {
     private static final String REGEX = ",";
 
     public static void main(String[] args) {
-        int money = InputView.getMoney("구입금액을 입력해 주세요. ", new Scanner(System.in));
+        Scanner scanner = new Scanner(System.in);
+        int money = InputView.getMoney("구입금액을 입력해 주세요. ", scanner);
         LottoStore lottoStore = new LottoStore(new RandomLottoGenerator());
 
         List<BasicLotto> lottos = lottoStore.buyLottos(money);
@@ -24,7 +25,7 @@ public class ConsoleApplication {
             InputView.getWinningLottoNumbers("지난 주 당첨 번호를 입력해 주세요.",
                 REGEX, new Scanner(System.in));
 
-        int bonusNumber = InputView.getBonusNumber("보너스 볼을 입력해 주세요.", new Scanner(System.in));
+        int bonusNumber = InputView.getBonusNumber("보너스 볼을 입력해 주세요.", scanner);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
