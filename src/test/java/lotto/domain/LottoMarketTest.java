@@ -1,7 +1,5 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoMarket;
 import lotto.vo.LottoNo;
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
-package lotto;
+package lotto.dto;
 
-import lotto.dto.LottoProfit;
 import lotto.vo.LottoMatchCount;
 import org.junit.Test;
 

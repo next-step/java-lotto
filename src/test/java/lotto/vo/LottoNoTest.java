@@ -1,6 +1,5 @@
-package lotto;
+package lotto.vo;
 
-import lotto.vo.LottoNo;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

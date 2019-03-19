@@ -1,13 +1,13 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMarket;
-import lotto.domain.Lotto;
 import lotto.dto.LottoProfit;
 import lotto.dto.LottoStatistics;
-import lotto.vo.LottoWinningNumber;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
+import lotto.vo.LottoWinningNumber;
 
 import java.util.List;
 

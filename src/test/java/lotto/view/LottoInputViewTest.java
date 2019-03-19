@@ -1,7 +1,6 @@
-package lotto;
+package lotto.view;
 
 
-import lotto.view.LottoInputView;
 import lotto.vo.LottoWinningNumber;
 import org.junit.Test;
 
