@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.vo.LottoNo;
 import lotto.vo.LottoWinningNumber;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -91,6 +93,9 @@ public class LottoInputView {
 
         duplicateNumbers.remove(bonusNumber);
 
-        return new LottoWinningNumber(new ArrayList<>(duplicateNumbers), bonusNumber);
+        List<LottoNo> numbers = new ArrayList<>();
+        duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
+
+        return new LottoWinningNumber(numbers, new LottoNo(bonusNumber));
     }
 }

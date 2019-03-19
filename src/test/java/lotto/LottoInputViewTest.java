@@ -37,7 +37,7 @@ public class LottoInputViewTest {
     public void 당첨로또번호생성() {
         LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"}, 7);
         assertThat(lottoWinningNumber.getWinningNumber()).hasSize(6);
-        assertThat(lottoWinningNumber.getBonusNumber()).isEqualTo(7);
+        assertThat(lottoWinningNumber.getBonusNumber().getNumber()).isEqualTo(7);
     }
 
     @Test(expected = IllegalArgumentException.class)

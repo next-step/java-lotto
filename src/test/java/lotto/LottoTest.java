@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.vo.LottoNo;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,8 +12,8 @@ public class LottoTest {
 
     @Test
     public void 당첨숫자_카운트증가() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lotto.incrementMatchCount(3);
+        Lotto lotto = new Lotto(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6)));
+        lotto.incrementMatchCount(new LottoNo(3));
         assertThat(lotto.getMatchCount()).isEqualTo(1);
     }
 }

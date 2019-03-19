@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.vo.LottoNo;
+
 import java.util.List;
 
 public class Lotto {
@@ -8,13 +10,13 @@ public class Lotto {
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_SECOND_MATCH_COUNT = 5;
 
-    private List<Integer> numbers;
+    private List<LottoNo> numbers;
 
     private int matchCount;
 
     private boolean matchBonus;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNo> numbers) {
         this.numbers = numbers;
         this.matchCount = 0;
         this.matchBonus = false;
@@ -25,7 +27,7 @@ public class Lotto {
      *
      * @param number 당첨번호 한개
      */
-    public void incrementMatchCount(int number) {
+    public void incrementMatchCount(LottoNo number) {
         if (numbers.contains(number)) {
             matchCount++;
         }
@@ -36,7 +38,7 @@ public class Lotto {
      *
      * @param bonusNumber 보너스번호
      */
-    public void checkBonus(int bonusNumber) {
+    public void checkBonus(LottoNo bonusNumber) {
         if (numbers.contains(bonusNumber) && matchCount == LOTTO_SECOND_MATCH_COUNT) {
             matchBonus = true;
         }
@@ -53,8 +55,8 @@ public class Lotto {
     @Override
     public String toString() {
         String value = "[";
-        for (int number : numbers) {
-            value += number;
+        for (LottoNo lottoNo : numbers) {
+            value += lottoNo.getNumber();
             value += ", ";
         }
         value = value.substring(0, value.length() - 2) + "]";

@@ -3,20 +3,20 @@ package lotto.vo;
 import java.util.List;
 
 public class LottoWinningNumber {
-    private List<Integer> winningNumber;
+    private List<LottoNo> winningNumber;
 
-    private int bonusNumber;
+    private LottoNo bonusNumber;
 
-    public LottoWinningNumber(List<Integer> winningNumber, int bonusNumber) {
+    public LottoWinningNumber(List<LottoNo> winningNumber, LottoNo bonusNumber) {
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getWinningNumber() {
+    public List<LottoNo> getWinningNumber() {
         return winningNumber;
     }
 
-    public int getBonusNumber() {
+    public LottoNo getBonusNumber() {
         return bonusNumber;
     }
 }

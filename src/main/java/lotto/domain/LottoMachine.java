@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.dto.*;
 import lotto.vo.LottoMatchCount;
+import lotto.vo.LottoNo;
 import lotto.vo.LottoWinningNumber;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class LottoMachine {
                                                      LottoWinningNumber lottoWinningNumber, LottoProfit lottoProfit) {
 
         //각 당첨 번호별로 체크
-        for (int number : lottoWinningNumber.getWinningNumber()) {
+        for (LottoNo number : lottoWinningNumber.getWinningNumber()) {
             checkWinningNumber(lottos, number);
         }
 
@@ -39,7 +40,7 @@ public class LottoMachine {
      * @param lottos 구매한 로또들
      * @param number 당첨로또 번호 한개
      */
-    public static void checkWinningNumber(List<Lotto> lottos, int number) {
+    public static void checkWinningNumber(List<Lotto> lottos, LottoNo number) {
         for (Lotto lotto : lottos) {
             lotto.incrementMatchCount(number);
         }
