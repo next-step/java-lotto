@@ -10,26 +10,26 @@ public class LottoInputViewTest {
     @Test
     public void 지난주당첨번호패턴체크() {
         String inputValue = "1, 2, 3, 4, 5, 6";
-        String[] numbers = LottoInputView.splitWinningNumbers(inputValue);
+        String[] numbers = LottoInputView.splitLottoNumbers(inputValue);
         assertThat(numbers).containsExactly("1", "2", "3", "4", "5", "6");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 지난주당첨번호패턴체크실패1() {
         String inputValue = "1, 2 3, 4, 5, 6";
-        LottoInputView.splitWinningNumbers(inputValue);
+        LottoInputView.splitLottoNumbers(inputValue);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 지난주당첨번호패턴체크실패2() {
         String inputValue = "1, 2, 3, 4, 5, ";
-        LottoInputView.splitWinningNumbers(inputValue);
+        LottoInputView.splitLottoNumbers(inputValue);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 지난주당첨번호개수안맞음() {
         String inputValue = "1, 2, 3, 4";
-        LottoInputView.splitWinningNumbers(inputValue);
+        LottoInputView.splitLottoNumbers(inputValue);
     }
 
     @Test

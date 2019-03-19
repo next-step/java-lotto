@@ -21,20 +21,29 @@ public class ConsoleApplication {
             //로또 구매 갯수 입력
             int buyAmount = LottoInputView.inputBuyAmount();
 
+            //수동 입력 갯수 입력
+            int directCount = LottoInputView.inputDirectAmount();
+
+            //수동 번호 입력
+            List<String[]> directNumbers = LottoInputView.inputDirectNumbers(directCount);
+
+            //수동입력 번호 생성
+            List<Lotto> lottos = LottoMarket.createDirectNumbers(directNumbers);
+
             //구매수익 set
-            LottoProfit lottoProfit = new LottoProfit(buyAmount / Lotto.LOTTO_PRICE, buyAmount);
+            LottoProfit lottoProfit = new LottoProfit((buyAmount - (directCount * Lotto.LOTTO_PRICE)) / Lotto.LOTTO_PRICE, directCount, buyAmount);
 
             //구매 갯수 출력
-            LottoOutputView.showBuyCount(lottoProfit.getBuyCount());
+            LottoOutputView.showBuyCount(lottoProfit);
 
             //로또 생성
-            List<Lotto> lottos = LottoMarket.createLottos(lottoProfit.getBuyCount());
+            LottoMarket.createLottos(lottos, lottoProfit.getBuyAutoCount());
 
             //생성번호 view
             LottoOutputView.showBuyLottos(lottos);
 
             //당첨번호 입력
-            String[] splitWinningNumbers = LottoInputView.splitWinningNumbers(LottoInputView.inputWinningNumbers());
+            String[] splitWinningNumbers = LottoInputView.splitLottoNumbers(LottoInputView.inputWinningNumbers());
 
             //보너스 번호 입력
             int bonusNumber = LottoInputView.inputBounusNumber();

@@ -1,14 +1,15 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.dto.LottoProfit;
 import lotto.dto.LottoStatistics;
 
 import java.util.List;
 
 public class LottoOutputView {
 
-    public static void showBuyCount(int buyCount) {
-        System.out.println(buyCount + "개를 구매했습니다.");
+    public static void showBuyCount(LottoProfit lottoProfit) {
+        System.out.println("\n수동으로 " + lottoProfit.getBuyDirectCount() + "장, 자동으로 " + lottoProfit.getBuyAutoCount() + "개를 구매했습니다.");
     }
 
     /**
@@ -23,8 +24,7 @@ public class LottoOutputView {
      * 당첨 통계 view
      */
     public static void showWinningStatistics(LottoStatistics lottoStatistics) {
-        System.out.println();
-        System.out.println("당첨 통계\n---------");
+        System.out.println("\n당첨 통계\n---------");
 
         System.out.println("3개 일치 (5000원)- " + lottoStatistics.getLottoMatchCount().getFifthCnt() + "개");
         System.out.println("4개 일치 (50000원)- " + lottoStatistics.getLottoMatchCount().getForthCnt() + "개");
