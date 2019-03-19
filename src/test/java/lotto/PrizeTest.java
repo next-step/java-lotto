@@ -17,6 +17,6 @@ public class PrizeTest {
         Prize prize = Prize.typeOf(6);
         long prizeMoney = prize.calculatePrizeMoney(1);
 
-        assertThat(prizeMoney).isEqualTo(2000000000);
+        assertThat(prizeMoney).isEqualTo(2_000_000_000);
     }
 }

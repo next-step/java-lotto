@@ -28,10 +28,10 @@ public enum Prize {
         }
     };
 
-    private static final int FIRST_PRIZE_MONEY = 2000000000;
-    private static final int SECOND_PRIZE_MONEY = 1500000;
-    private static final int THIRD_PRIZE_MONEY = 50000;
-    private static final int FORTH_PRIZE_MONEY = 5000;
+    private static final int FIRST_PRIZE_MONEY = 2_000_000_000;
+    private static final int SECOND_PRIZE_MONEY = 1500_000;
+    private static final int THIRD_PRIZE_MONEY = 50_000;
+    private static final int FORTH_PRIZE_MONEY = 5_000;
 
     private final int matchNumber;
 
