@@ -25,8 +25,9 @@ public class LottoGameTest {
         for (int i = 0; i < 6 ; i++) {
             luckyNumbers.add(0);
         }
+        Lotto luckyLotto = new Lotto(luckyNumbers);
 
-        int[] matchCount = lottoGame.checkLuckyCount(new LottoResult(), luckyNumbers);
+        int[] matchCount = lottoGame.checkLuckyCount(new LottoResult(), luckyLotto);
 
         for (int i = 3; i <= 6 ; i++) {
             System.out.println(matchCount[i]);

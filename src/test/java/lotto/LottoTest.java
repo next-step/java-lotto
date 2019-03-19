@@ -14,10 +14,11 @@ public class LottoTest {
         LottoGenerator lottoGenerator = new LottoGenerator(6);
         Lotto lotto = new Lotto(lottoGenerator.generate());
 
-        List<Integer> luckyNumbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            luckyNumbers.add(i + 1);
+            numbers.add(i + 1);
         }
+        Lotto luckyNumbers = new Lotto(numbers);
 
         int matchCount = lotto.matchNumbers(luckyNumbers);
         assertThat(matchCount).isEqualTo(6);

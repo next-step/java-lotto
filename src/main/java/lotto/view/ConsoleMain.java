@@ -15,7 +15,7 @@ public class ConsoleMain {
         List<Lotto> lottos = lottoGame.buy(money);
         OutputView.printLottoNumbers(lottos);
 
-        List<Integer> luckyNumbers = InputView.inputLuckyNumbers();
+        Lotto luckyNumbers = InputView.inputLuckyNumbers();
         LottoResult lottoResult = new LottoResult();
         int[] result = lottoGame.checkLuckyCount(lottoResult, luckyNumbers);
         OutputView.printMatchCount(result);

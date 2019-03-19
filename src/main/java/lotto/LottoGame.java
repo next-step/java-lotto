@@ -24,7 +24,7 @@ public class LottoGame {
         return lottos;
     }
 
-    public int[] checkLuckyCount(LottoResult lottoResult, List<Integer> luckyNumbers) {
+    public int[] checkLuckyCount(LottoResult lottoResult, Lotto luckyNumbers) {
         for (Lotto lotto : lottos) {
             lottoResult.addMatchCount(lotto.matchNumbers(luckyNumbers));
         }

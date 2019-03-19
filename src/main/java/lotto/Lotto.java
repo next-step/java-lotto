@@ -13,10 +13,16 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int matchNumbers(List<Integer> luckyNumbers) {
-        int matchCount = 0;
+    private boolean isWrongSize(int size) {
+        if (size != NUMBER_COUNT) {
+            return true;
+        }
+        return false;
+    }
 
-        for (int luckyNumber : luckyNumbers) {
+    public int matchNumbers(Lotto luckyNumbers) {
+        int matchCount = 0;
+        for (int luckyNumber : luckyNumbers.numbers) {
             matchCount = checkLuckyNumber(luckyNumber, matchCount);
         }
         return matchCount;
