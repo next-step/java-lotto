@@ -18,6 +18,11 @@ public class LottoGame {
         this.lottoGenerator = new LottoGenerator();
     }
 
+    public LottoGame(List<Lotto> lottos) {
+        this.lottos = lottos;
+        this.lottoGenerator = new LottoGenerator();
+    }
+
     public List<Lotto> buy(int money) {
         int tickets = money / LOTTO_PRICE;
 

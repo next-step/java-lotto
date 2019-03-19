@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.util.LottoBasicNumber;
-import lotto.util.LottoGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,13 +11,11 @@ public class LottoTest {
 
     @Test
     public void 일치하는_번호_개수_구하기() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Lotto lotto = new Lotto(lottoGenerator.generate(LottoBasicNumber.numbers));
-
         List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             numbers.add(i + 1);
         }
+        Lotto lotto = new Lotto(numbers);
         Lotto luckyNumbers = new Lotto(numbers);
 
         int matchCount = lotto.matchNumbers(luckyNumbers);
