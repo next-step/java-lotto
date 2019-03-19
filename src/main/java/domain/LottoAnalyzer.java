@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LottoCalculator {
+public class LottoAnalyzer {
     public static Map<Rank, Long> makeWinGroup(List<Rank> ranks) {
         return ranks.stream()
             .filter(r -> r != Rank.None)

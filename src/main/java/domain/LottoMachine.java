@@ -23,10 +23,6 @@ public class LottoMachine {
         return lottos;
     }
 
-    public Rank calculateRank(Lotto lotto) {
-        return Rank.calculate(calculateMatchCount(lotto));
-    }
-
     public List<Rank> calculateRanks(List<Lotto> lottos){
         List<Rank> ranks = new ArrayList<>();
         lottos.stream()
@@ -34,6 +30,10 @@ public class LottoMachine {
             .forEach(ranks::add);
 
         return ranks;
+    }
+
+    public Rank calculateRank(Lotto lotto) {
+        return Rank.calculate(calculateMatchCount(lotto));
     }
 
     // fixme private 으로 변경하고 싶음

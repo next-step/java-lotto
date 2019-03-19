@@ -17,7 +17,7 @@ public class ConsoleMain {
 
         List<Rank> ranks = lottoMachine.calculateRanks(lottos);
         ConsoleResultView.printTotalResult(
-            LottoCalculator.makeWinGroup(ranks),
-            LottoCalculator.calculateProfitRate(ranks));
+            LottoAnalyzer.makeWinGroup(ranks),
+            LottoAnalyzer.calculateProfitRate(ranks));
     }
 }
