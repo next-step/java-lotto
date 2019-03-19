@@ -4,6 +4,7 @@ import lotto.domain.lotto.BasicLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,21 +12,16 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class MatchResult {
     private WinningLotto winningLotto;
-    private Map<Rank, Integer> rank;
+    private Map<Rank, Integer> ranks;
 
     public MatchResult(WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
-        rank = new HashMap<>();
-        rank.put(Rank.FIRST, 0);
-        rank.put(Rank.SECOND, 0);
-        rank.put(Rank.THIRD, 0);
-        rank.put(Rank.FOURTH, 0);
-        rank.put(Rank.FIFTH, 0);
-        rank.put(Rank.MISS, 0);
+        ranks = new HashMap<>();
+        Arrays.stream(Rank.values()).forEach(rank -> ranks.put(rank, 0));
     }
 
     public void calculate(List<BasicLotto> lottos) {
-        rank.forEach((key, value) -> rank.put(key, match(lottos, key)));
+        ranks.forEach((key, value) -> ranks.put(key, match(lottos, key)));
     }
 
     private int match(List<BasicLotto> lottos, Rank matchRank) {
@@ -36,11 +32,11 @@ public class MatchResult {
 
     public long calculateTotalReward() {
         AtomicLong reward = new AtomicLong(0L);
-        rank.forEach((key, value) -> reward.addAndGet(key.getTotalReward(value)));
+        ranks.forEach((key, value) -> reward.addAndGet(key.getTotalReward(value)));
         return reward.longValue();
     }
 
-    public Map<Rank, Integer> getRank() {
-        return rank;
+    public Map<Rank, Integer> getRanks() {
+        return ranks;
     }
 }
