@@ -3,10 +3,13 @@ package lotto;
 import java.util.List;
 
 public class Lotto {
-
+    private static final int NUMBER_COUNT = 6;
     private List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
+        if (isWrongSize(numbers.size())) {
+            throw new RuntimeException();
+        }
         this.numbers = numbers;
     }
 

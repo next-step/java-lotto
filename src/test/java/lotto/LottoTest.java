@@ -16,10 +16,19 @@ public class LottoTest {
 
         List<Integer> luckyNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            luckyNumbers.add(i+1);
+            luckyNumbers.add(i + 1);
         }
 
         int matchCount = lotto.matchNumbers(luckyNumbers);
         assertThat(matchCount).isEqualTo(6);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void Lotto_숫자개수_검증() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            numbers.add(i + 1);
+        }
+        Lotto lotto = new Lotto(numbers);
     }
 }
