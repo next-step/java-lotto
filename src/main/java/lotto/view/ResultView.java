@@ -18,7 +18,7 @@ public class ResultView {
 
   public static void printMatchWinCount(int matchCount, Money winMoney, long winCount) {
 
-    System.out.println(matchCount + "개 일치 (" + winMoney + "원)- " + winCount +"개");
+    System.out.println(matchCount + "개 일치 (" + winMoney + "원) - " + winCount +"개");
   }
 
   public static void printYield(String yield) {

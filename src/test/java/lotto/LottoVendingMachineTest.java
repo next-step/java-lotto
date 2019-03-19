@@ -39,22 +39,20 @@ public class LottoVendingMachineTest {
     int secondMatchNumber = 12;
     int thirdMatchNumber = 25;
 
-    Lotto lotto = new Lotto(Arrays.asList(
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(2),
-        new Number(19),
-        new Number(15)
-    ));
-    List<Number> winNumbers = Arrays.asList(
-        new Number(5),
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(42),
-        new Number(thirdMatchNumber),
-        new Number(31)
-    );
+    Lotto lotto = generateLotto(
+        firstMatchNumber,
+        secondMatchNumber,
+        thirdMatchNumber,
+        2,
+        19,
+        15);
+    List<Number> winNumbers = generateNumberArray(
+        5,
+        firstMatchNumber,
+        secondMatchNumber,
+        42,
+        thirdMatchNumber,
+        31);
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -72,22 +70,20 @@ public class LottoVendingMachineTest {
     int thirdMatchNumber = 25;
     int fourthMatchNumber = 36;
 
-    Lotto lotto = new Lotto(Arrays.asList(
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(19),
-        new Number(15)
-    ));
-    List<Number> winNumbers = Arrays.asList(
-        new Number(5),
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(31)
-    );
+    Lotto lotto = generateLotto(
+        firstMatchNumber,
+        secondMatchNumber,
+        thirdMatchNumber,
+        fourthMatchNumber,
+        19,
+        15);
+    List<Number> winNumbers = generateNumberArray(
+        5,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
+        31);
 
     // When
       int matchingCount = lotto.winMatch(winNumbers);
@@ -106,22 +102,20 @@ public class LottoVendingMachineTest {
     int fourthMatchNumber = 36;
     int fifthMatchNumber = 40;
 
-    Lotto lotto = new Lotto(Arrays.asList(
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(fifthMatchNumber),
-        new Number(15)
-    ));
-    List<Number> winNumbers = Arrays.asList(
-        new Number(fifthMatchNumber),
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(31)
-    );
+    Lotto lotto = generateLotto(
+        firstMatchNumber,
+        secondMatchNumber,
+        thirdMatchNumber,
+        fourthMatchNumber,
+        fifthMatchNumber,
+        15);
+    List<Number> winNumbers = generateNumberArray(
+        fifthMatchNumber,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
+        31);
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -141,28 +135,120 @@ public class LottoVendingMachineTest {
     int fifthMatchNumber = 40;
     int sixthMatchNumber = 19;
 
-    Lotto lotto = new Lotto(Arrays.asList(
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(fifthMatchNumber),
-        new Number(sixthMatchNumber)
-    ));
-    List<Number> winNumbers = Arrays.asList(
-        new Number(fifthMatchNumber),
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(sixthMatchNumber)
-    );
+    Lotto lotto = generateLotto(
+        firstMatchNumber,
+        secondMatchNumber,
+        thirdMatchNumber,
+        fourthMatchNumber,
+        fifthMatchNumber,
+        sixthMatchNumber);
+    List<Number> winNumbers = generateNumberArray(
+        fifthMatchNumber,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
+        sixthMatchNumber);
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
 
     // Then
     assertThat(matchingCount).isEqualTo(6);
+  }
+
+  private Lotto generateLotto(
+      int firstMatchNumber,
+      int secondMatchNumber,
+      int thirdMatchNumber,
+      int fourthMatchNumber,
+      int fifthMatchNumber,
+      int sixthMatchNumber) {
+
+    return new Lotto(
+        generateNumberArray(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            fifthMatchNumber,
+            sixthMatchNumber
+        )
+    );
+  }
+
+  private List<Number> generateNumberArray(
+      int firstMatchNumber,
+      int secondMatchNumber,
+      int thirdMatchNumber,
+      int fourthMatchNumber,
+      int fifthMatchNumber,
+      int sixthMatchNumber) {
+
+    return Arrays.asList(
+        new Number(firstMatchNumber),
+        new Number(secondMatchNumber),
+        new Number(thirdMatchNumber),
+        new Number(fourthMatchNumber),
+        new Number(fifthMatchNumber),
+        new Number(sixthMatchNumber)
+    );
+  }
+
+  @Test
+  public void test_totalWinMoney() {
+
+    // Given
+    int firstMatchNumber = 3;
+    int secondMatchNumber = 12;
+    int thirdMatchNumber = 25;
+    int fourthMatchNumber = 36;
+    int fifthMatchNumber = 40;
+    int sixthMatchNumber = 19;
+
+    List<Lotto> lottoList = Arrays.asList(
+        generateLotto(
+            5,
+            firstMatchNumber,
+            secondMatchNumber,
+            42,
+            thirdMatchNumber,
+            31),
+        generateLotto(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            1,
+            14),
+        generateLotto(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            fifthMatchNumber,
+            45),
+        generateLotto(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            fifthMatchNumber,
+            sixthMatchNumber)
+    );
+    List<Number> winNumbers = generateNumberArray(
+        fifthMatchNumber,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
+        sixthMatchNumber);
+
+    // When
+    Money winMoney = LottoVendingMachine.totalWinMoney(lottoList, winNumbers);
+
+    // Then
+    assertThat(winMoney).isEqualTo(new Money(5000 + 50000 + 1500000 + 2000000000));
   }
 
   @Test
