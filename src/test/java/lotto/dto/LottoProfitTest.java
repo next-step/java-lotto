@@ -10,7 +10,8 @@ public class LottoProfitTest {
     @Test
     public void 수익금계산테스트() {
         LottoProfit lottoProfit = new LottoProfit(1, 1500);
-        lottoProfit.calculateProfit(0, 1, 0, 0, 0);
+        LottoMatchCount lottoMatchCount = new LottoMatchCount(0, 0, 0, 1, 0);
+        lottoProfit.calculateProfit(lottoMatchCount);
         assertThat(lottoProfit.getProfit()).isEqualTo(50.0);
     }
 

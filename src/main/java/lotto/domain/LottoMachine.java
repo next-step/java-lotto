@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.Lotto;
-import lotto.dto.LottoProfit;
-import lotto.dto.LottoStatistics;
-import lotto.dto.LottoWinningNumber;
+import lotto.dto.*;
 
 import java.util.List;
 
@@ -54,16 +51,17 @@ public class LottoMachine {
      * @return 로또 통계 dto
      */
     public static LottoStatistics checkWinningLotto(List<Lotto> lottos, LottoProfit lottoProfit) {
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoProfit);
+        LottoMatchCount lottoMatchCount = new LottoMatchCount();
+
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoProfit, lottoMatchCount);
 
         //등수별 개수
         for (Lotto lotto : lottos) {
-            lottoStatistics.incrementPrizeCnt(LottoPrize.getEnumNameByIntValue(lotto.getMatchCount(), lotto.isMatchBonus()));
+            lottoMatchCount = lottoStatistics.incrementPrizeCnt(LottoPrize.getEnumNameByIntValue(lotto.getMatchCount(), lotto.isMatchBonus()));
         }
 
         //수익율
-        lottoProfit.calculateProfit(lottoStatistics.getFifthCnt(), lottoStatistics.getForthCnt(), lottoStatistics.getThirdCnt(),
-                lottoStatistics.getSecondCnt(), lottoStatistics.getFirstCnt());
+        lottoProfit.calculateProfit(lottoMatchCount);
 
         return lottoStatistics;
     }

@@ -18,8 +18,14 @@ public class ConsoleApplication {
 
     private static void doLottery() {
         try {
-            //로또 구매
-            LottoProfit lottoProfit = LottoInputView.buyLotto();
+            //로또 구매 갯수 입력
+            int buyAmount = LottoInputView.inputBuyAmount();
+
+            //구매수익 set
+            LottoProfit lottoProfit = new LottoProfit(buyAmount / Lotto.LOTTO_PRICE, buyAmount);
+
+            //구매 갯수 출력
+            LottoOutputView.showBuyCount(lottoProfit.getBuyCount());
 
             //로또 생성
             List<Lotto> lottos = LottoMarket.createLottos(lottoProfit.getBuyCount());

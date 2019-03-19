@@ -21,12 +21,12 @@ public class LottoProfit {
     /**
      * 수익율 개산
      */
-    public void calculateProfit(int fifthCnt, int forthCnt, int thirdCnt, int secondCnt, int firstCnt) {
-        profit = (LottoPrize.FIFTH.getPrize() * fifthCnt
-                + LottoPrize.FORTH.getPrize() * forthCnt
-                + LottoPrize.THIRD.getPrize() * thirdCnt
-                + LottoPrize.SECOND.getPrize() * secondCnt
-                + LottoPrize.FIRST.getPrize() * firstCnt)
+    public void calculateProfit(LottoMatchCount lottoMatchCount) {
+        profit = (LottoPrize.FIFTH.getPrize() * lottoMatchCount.getFifthCnt()
+                + LottoPrize.FORTH.getPrize() * lottoMatchCount.getForthCnt()
+                + LottoPrize.THIRD.getPrize() * lottoMatchCount.getThirdCnt()
+                + LottoPrize.SECOND.getPrize() * lottoMatchCount.getSecondCnt()
+                + LottoPrize.FIRST.getPrize() * lottoMatchCount.getFirstCnt())
                 /
                 ((buyAmount - changeAmount) * 1.0d);
     }

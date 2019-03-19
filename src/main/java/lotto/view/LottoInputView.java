@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class LottoInputView {
 
-    public static LottoProfit buyLotto() throws IllegalArgumentException {
+    public static int inputBuyAmount() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         int buyAmount = scanner.nextInt();
@@ -28,11 +28,7 @@ public class LottoInputView {
             throw new IllegalArgumentException("돈을 더 넣으세요.");
         }
 
-        LottoProfit lottoProfit = new LottoProfit(buyAmount / Lotto.LOTTO_PRICE, buyAmount);
-
-        System.out.println(lottoProfit.getBuyCount() + "개를 구매했습니다.");
-
-        return lottoProfit;
+        return buyAmount;
     }
 
     /**

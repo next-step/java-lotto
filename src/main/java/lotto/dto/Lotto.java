@@ -6,6 +6,7 @@ public class Lotto {
     public static final int LOTTO_NUM_COUNT = 6;
     public static final int LOTTO_BONUS_COUNT = 1;
     public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_SECOND_MATCH_COUNT = 5;
 
     private List<Integer> numbers;
 
@@ -36,7 +37,7 @@ public class Lotto {
      * @param bonusNumber 보너스번호
      */
     public void checkBonus(int bonusNumber) {
-        if (numbers.contains(bonusNumber) && matchCount == 5) {
+        if (numbers.contains(bonusNumber) && matchCount == LOTTO_SECOND_MATCH_COUNT) {
             matchBonus = true;
         }
     }
