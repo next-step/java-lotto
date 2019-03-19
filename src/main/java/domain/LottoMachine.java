@@ -27,6 +27,15 @@ public class LottoMachine {
         return Rank.calculate(calculateMatchCount(lotto));
     }
 
+    public List<Rank> calculateRanks(List<Lotto> lottos){
+        List<Rank> ranks = new ArrayList<>();
+        lottos.stream()
+            .map(this::calculateRank)
+            .forEach(ranks::add);
+
+        return ranks;
+    }
+
     // fixme private 으로 변경하고 싶음
     public int calculateMatchCount(Lotto lotto) {
         return (int)lotto.getLottoNumbers().stream()

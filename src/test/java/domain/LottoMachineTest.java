@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,5 +34,20 @@ public class LottoMachineTest {
         Rank rank = lottoMachine.calculateRank(new Lotto(1,2,3,4,5,6));
 
         assertThat(rank).isEqualTo(Rank.Fourth);
+    }
+
+    @Test
+    public void get_ranks_from_lottos() {
+        LottoMachine lottoMachine = new LottoMachine();
+        lottoMachine.setWinningNumbers(new WinningNumbers(4,5,6,7,8,9));
+
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(1,2,3,4,5,6));
+        lottos.add(new Lotto(1,2,3,4,5,6));
+
+        List<Rank> ranks = lottoMachine.calculateRanks(lottos);
+
+        assertThat(ranks).hasSize(2);
+        assertThat(ranks).allMatch(r -> r == Rank.Fourth);
     }
 }
