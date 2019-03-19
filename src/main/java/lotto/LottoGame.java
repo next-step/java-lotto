@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.util.LottoBasicNumber;
+import lotto.util.LottoGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +22,7 @@ public class LottoGame {
         int tickets = money / LOTTO_PRICE;
 
         for (int i = 0; i < tickets; i++) {
-            lottos.add(new Lotto(lottoGenerator.generate()));
+            lottos.add(new Lotto(lottoGenerator.generate(LottoBasicNumber.numbers)));
         }
         return lottos;
     }
