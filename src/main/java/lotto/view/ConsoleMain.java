@@ -16,9 +16,8 @@ public class ConsoleMain {
         OutputView.printLottoNumbers(lottos);
 
         Lotto luckyNumbers = InputView.inputLuckyNumbers();
-        LottoResult lottoResult = new LottoResult();
-        int[] result = lottoGame.checkLuckyCount(lottoResult, luckyNumbers);
-        OutputView.printMatchCount(result);
+        LottoResult lottoResult = lottoGame.checkLuckyCount(luckyNumbers);
+        OutputView.printMatchCount(lottoResult.checkResult());
 
         double rate = lottoResult.calculateRate(money);
         OutputView.printRate(rate);

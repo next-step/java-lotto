@@ -24,10 +24,12 @@ public class LottoGame {
         return lottos;
     }
 
-    public int[] checkLuckyCount(LottoResult lottoResult, Lotto luckyNumbers) {
+    public LottoResult checkLuckyCount(Lotto luckyNumbers) {
+        LottoResult lottoResult = new LottoResult();
+
         for (Lotto lotto : lottos) {
             lottoResult.addMatchCount(lotto.matchNumbers(luckyNumbers));
         }
-        return lottoResult.checkResult();
+        return lottoResult;
     }
 }

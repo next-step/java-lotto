@@ -27,8 +27,8 @@ public class LottoGameTest {
         }
         Lotto luckyLotto = new Lotto(luckyNumbers);
 
-        int[] matchCount = lottoGame.checkLuckyCount(new LottoResult(), luckyLotto);
-
+        LottoResult lottoResult = lottoGame.checkLuckyCount(luckyLotto);
+        int[] matchCount = lottoResult.checkResult();
         for (int i = 3; i <= 6 ; i++) {
             System.out.println(matchCount[i]);
             assertThat(matchCount[i]).isEqualTo(0);
