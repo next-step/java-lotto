@@ -20,4 +20,8 @@ public class WinningNumbers {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
