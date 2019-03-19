@@ -12,6 +12,10 @@ public class Lotto {
         this.publish();
     }
 
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private List<Integer> publish() {
         for (int i = 0; i < 6; i++) {
             int randomNumber = LottoRandomNumberGenerator.next();

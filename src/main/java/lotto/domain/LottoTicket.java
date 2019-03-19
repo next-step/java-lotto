@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoTicket {
-    private int lottosCount;
+
     private List<Lotto> lottos;
 
     public LottoTicket(final int lottosCount) {
@@ -14,54 +14,44 @@ public class LottoTicket {
             throw new IllegalArgumentException();
         }
 
-        this.lottosCount = lottosCount;
-        this.lottos = new ArrayList<>(this.lottosCount);
-    }
+        this.lottos = new ArrayList<>(lottosCount);
 
-    public List<Lotto> publish() {
-        for (int i = 0; i < this.lottosCount; i++) {
+        for (int i = 0; i < lottosCount; i++) {
             this.lottos.add(new Lotto());
         }
-
-        return this.lottos;
     }
 
-    public Map<Integer, List<Lotto>> announceWinningResult(final List<Integer> winningNumbers) {
-        Map<Integer, List<Lotto>> winningResults = new HashMap<>();
-
-        List<Lotto> lottosHasThreeWinning = new ArrayList<>();
-        List<Lotto> lottosHasFourWinning = new ArrayList<>();
-        List<Lotto> lottosHasFiveWinning = new ArrayList<>();
-        List<Lotto> lottosHasSixWinning = new ArrayList<>();
-
-        this.lottos.forEach(lotto -> {
-            if (lotto.getContainsCount(winningNumbers) == 3) {
-                lottosHasThreeWinning.add(lotto);
-            }
-
-            if (lotto.getContainsCount(winningNumbers) == 4) {
-                lottosHasFourWinning.add(lotto);
-            }
-
-            if (lotto.getContainsCount(winningNumbers) == 5) {
-                lottosHasFiveWinning.add(lotto);
-            }
-
-            if (lotto.getContainsCount(winningNumbers) == 6) {
-                lottosHasSixWinning.add(lotto);
-            }
-        });
-
-        winningResults.put(3, lottosHasThreeWinning);
-        winningResults.put(4, lottosHasFourWinning);
-        winningResults.put(5, lottosHasFiveWinning);
-        winningResults.put(6, lottosHasSixWinning);
-
-        return winningResults;
+    public LottoTicket(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public int getLottosCount() {
-        return lottosCount;
+    public Map<Integer, List<Lotto>> getWinningResult(final List<Integer> winningNumbers) {
+        Map<Integer, List<Lotto>> lottoResult = new HashMap<>();
+
+        for (Prize prize : Prize.values()) {
+            List<Lotto> winningLottos = new ArrayList<>();
+
+            for (Lotto lotto : this.lottos) {
+                int containsCount = lotto.getContainsCount(winningNumbers);
+
+                if (containsCount == prize.getHavingCounts()) {
+                    winningLottos.add(lotto);
+                }
+            }
+
+            lottoResult.put(prize.getHavingCounts(), winningLottos);
+        }
+
+        return lottoResult;
+    }
+
+    public double getEarningsRate(final Map<Integer, List<Lotto>> lottoResult, final int purchaseAmount) {
+        int totalPrizeMoney = 0;
+        for (Prize prize : Prize.values()) {
+            totalPrizeMoney += lottoResult.get(prize.getHavingCounts()).size() * prize.getMoney();
+        }
+
+        return totalPrizeMoney / (double) purchaseAmount;
     }
 
     public List<Lotto> getLottos() {

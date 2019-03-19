@@ -19,7 +19,7 @@ public class LottoTest {
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
 
-        assertThat(lottoTicket.getLottosCount()).isEqualTo(14);
+        assertThat(lottoTicket.getLottos().size()).isEqualTo(14);
     }
 
     @Test
@@ -41,21 +41,11 @@ public class LottoTest {
     }
 
     @Test
-    public void 발급개수만큼_로또_생성되었는지() {
-        final int won = 14000;
-
-        LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
-        List<Lotto> lottos = lottoTicket.publish();
-
-        assertThat(lottos.size()).isEqualTo(14);
-    }
-
-    @Test
     public void 발급개수만큼_생성된_각_로또번호가_유일한지() {
         final int won = 14000;
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
-        List<Lotto> lottos = lottoTicket.publish();
+        List<Lotto> lottos = lottoTicket.getLottos();
 
         for (Lotto lotto : lottos) {
             Set<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
@@ -68,7 +58,7 @@ public class LottoTest {
         final int won = 14000;
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
-        List<Lotto> lottos = lottoTicket.publish();
+        List<Lotto> lottos = lottoTicket.getLottos();
 
         for (Lotto lotto : lottos) {
             List<Integer> lottoNumbers = lotto.getLottoNumbers();
@@ -83,7 +73,7 @@ public class LottoTest {
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
 
-        Map<Integer, List<Lotto>> lottoResults = lottoTicket.announceWinningResult(winnerNumbers);
+        Map<Integer, List<Lotto>> lottoResults = lottoTicket.getWinningResult(winnerNumbers);
 
         assertThat(lottoResults.keySet()).isEqualTo(new HashSet<>(Arrays.asList(3, 4, 5, 6)));
     }
@@ -95,7 +85,7 @@ public class LottoTest {
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
 
-        Map<Integer, List<Lotto>> lottoResults = lottoTicket.announceWinningResult(winnerNumbers);
+        Map<Integer, List<Lotto>> lottoResults = lottoTicket.getWinningResult(winnerNumbers);
 
         List<Lotto> lottos = lottoTicket.getLottos();
 

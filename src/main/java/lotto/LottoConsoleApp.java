@@ -1,6 +1,8 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
+import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketMachine;
 import lotto.view.InputView;
@@ -9,16 +11,18 @@ import lotto.view.ResultView;
 public class LottoConsoleApp {
 
     public static void main(String[] args) {
-        int purchaseAmount = InputView.inputPurchaseAmount();
+        final int purchaseAmount = InputView.inputPurchaseAmount();
 
-        LottoTicket lottoTicket = LottoTicketMachine.purchase(purchaseAmount);
-        lottoTicket.publish();
+        final LottoTicket lottoTicket = LottoTicketMachine.purchase(purchaseAmount);
 
-        ResultView.printLottoCounts(lottoTicket.getLottosCount());
+        ResultView.printLottoCounts(lottoTicket.getLottos().size());
         ResultView.printLottos(lottoTicket.getLottos());
 
-        List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
+        final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
+        final Map<Integer, List<Lotto>> winningResult = lottoTicket.getWinningResult(winningNumbers);
 
-        ResultView.printWinningStatistics(lottoTicket, winningNumbers);
+        ResultView.printWinningStatistics(winningResult);
+
+        ResultView.printEarningsRate(lottoTicket.getEarningsRate(winningResult, purchaseAmount));
     }
 }

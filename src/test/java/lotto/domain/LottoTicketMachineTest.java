@@ -13,7 +13,7 @@ public class LottoTicketMachineTest {
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(purchaseWon);
 
-        assertThat(lottoTicket.getLottosCount()).isEqualTo(15);
+        assertThat(lottoTicket.getLottos().size()).isEqualTo(15);
     }
 
     @Test(expected = RuntimeException.class)
@@ -29,6 +29,6 @@ public class LottoTicketMachineTest {
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(purchaseWon);
 
-        assertThat(lottoTicket.getLottosCount()).isEqualTo(14);
+        assertThat(lottoTicket.getLottos().size()).isEqualTo(14);
     }
 }
