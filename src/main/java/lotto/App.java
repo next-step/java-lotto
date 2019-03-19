@@ -11,16 +11,23 @@ public class App {
 //        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(3000);
 //
 //        System.out.println(lottoTickets.toString());
+        int amount = InputView.getAmount();
+
+        OutputView.numberOfTickets(amount);
 
 
-        int startLotto = InputView.getStartLotto();
+        LottoMachine lottoMachine = new LottoMachine(new LottoRandomNumGenerator());
 
-        LottoMachine lottoMachine = new LottoMachine();
-
-        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(startLotto);
+        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(amount);
 
         OutputView.buyLottoNumberPrint(lottoTickets);
-        String s = InputView.winningNumbersInput();
+
+//        List<Integer> winningNumber = InputView.getwinningNumber();
+
+
+
+
+//        OutputView.printWinningNumber(winningNumber);
 
 
     }

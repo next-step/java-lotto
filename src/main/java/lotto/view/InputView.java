@@ -1,20 +1,16 @@
 package lotto.view;
 
-import lotto.LottoMachine;
-import lotto.LottoTicket;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
 
 
-    public static int getStartLotto() {
+    public static int getAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요");
-        int amount = scanner.nextInt();
-        System.out.println(amount / 1000 + "개를 구매했습니다.");
-        return amount;
+        return scanner.nextInt();
     }
 
     public static String winningNumbersInput() {
