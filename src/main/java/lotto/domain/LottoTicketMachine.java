@@ -5,7 +5,7 @@ public class LottoTicketMachine {
 
     public static LottoTicket purchase(final int purchaseAmount) {
         if (purchaseAmount < LOTTO_UNIT_PRICE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("LESS THAN " + LOTTO_UNIT_PRICE);
         }
 
         return new LottoTicket((int) Math.floor(purchaseAmount / LOTTO_UNIT_PRICE));

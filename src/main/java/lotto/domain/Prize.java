@@ -29,6 +29,6 @@ public enum Prize {
             }
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("NO MATCHED");
     }
 }

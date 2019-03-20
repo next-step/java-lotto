@@ -11,7 +11,7 @@ public class LottoTicket {
 
     public LottoTicket(final int lottosCount) {
         if (lottosCount < 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("LESS THAN 1");
         }
 
         this.lottos = new ArrayList<>(lottosCount);
