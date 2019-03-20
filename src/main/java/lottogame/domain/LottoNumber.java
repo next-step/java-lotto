@@ -1,18 +1,17 @@
 package lottogame.domain;
 
+import lottogame.validator.InputValidatable;
+
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements InputValidatable<Integer> {
     public static final int MINIMUM_LOTTO_NUMBER = 1;
     public static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int number;
 
     public LottoNumber(int number) {
-        if(isInvalid(number)) {
-            throw new IllegalArgumentException(MINIMUM_LOTTO_NUMBER + "이상 " + MAXIMUM_LOTTO_NUMBER + "이하의 숫자를 입력하세요.");
-        }
-
+        validate(number);
         this.number = number;
     }
 
@@ -20,12 +19,18 @@ public class LottoNumber {
         return number;
     }
 
-    public static boolean isInvalid(int number) {
-        return number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER;
-    }
-
     public boolean equalsNumber(int number) {
         return this.number == number;
+    }
+
+    @Override
+    public boolean isInvalid(Integer target) {
+        return target < MINIMUM_LOTTO_NUMBER || target > MAXIMUM_LOTTO_NUMBER;
+    }
+
+    @Override
+    public String getInvalidMessage() {
+        return MINIMUM_LOTTO_NUMBER + "이상 " + MAXIMUM_LOTTO_NUMBER + "이하의 숫자를 입력하세요.";
     }
 
     @Override

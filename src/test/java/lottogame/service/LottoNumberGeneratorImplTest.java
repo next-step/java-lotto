@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
-import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
-import static lottogame.domain.LottoGame.LOTTO_GAME_SIZE;
+import static lottogame.domain.LottoNumberPackage.LOTTO_GAME_SIZE;
 import static org.junit.Assert.*;
 
 public class LottoNumberGeneratorImplTest {
@@ -23,7 +21,7 @@ public class LottoNumberGeneratorImplTest {
 
         assertEquals(LOTTO_GAME_SIZE, lottoNumbers.size());
         for(int curNumber : lottoNumbers) {
-            assertFalse(LottoNumber.isInvalid(curNumber));
+            assertEquals(curNumber, new LottoNumber(curNumber).getNumber());
         }
     }
 }

@@ -9,25 +9,30 @@ import java.util.stream.IntStream;
 
 import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LottoNumberTest {
     private LottoNumber lottoNumber;
 
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_LottoNumber_for_less_than_minimum() {
+        int invalidNumber = MINIMUM_LOTTO_NUMBER-1;
+        lottoNumber = new LottoNumber(invalidNumber);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_LottoNumber_for_more_than_maximum() {
+        int invalidNumber = MAXIMUM_LOTTO_NUMBER+1;
+        lottoNumber = new LottoNumber(invalidNumber);
+    }
+
     @Test
-    public void isInvalid() {
-        List<Integer> invalidLottoNumbers =
-                Arrays.asList(MINIMUM_LOTTO_NUMBER-1, MAXIMUM_LOTTO_NUMBER+1);
-
-        for(int curNumber : invalidLottoNumbers) {
-            assertTrue(lottoNumber.isInvalid(curNumber));
-        }
-
+    public void constructor_of_LottoNumber() {
         List<Integer> validLottoNumbers = getValidLottoNumbers();
 
         for(int curNumber : validLottoNumbers) {
-            assertFalse(lottoNumber.isInvalid(curNumber));
+            lottoNumber = new LottoNumber(curNumber);
+            assertEquals(curNumber, lottoNumber.getNumber());
         }
     }
 

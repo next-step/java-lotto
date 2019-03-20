@@ -16,10 +16,10 @@ public class LottoResultTest {
 
     @Test
     public void test_MISS_rank() {
-        List<LottoGame> gameNumbers = Arrays.asList(
-            new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 40)),
-            new LottoGame(Arrays.asList(1, 2, 3, 4, 40, 41))
+        List<LottoNumberPackage> gameNumbers = Arrays.asList(
+            new LottoNumberPackage(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            new LottoNumberPackage(Arrays.asList(1, 2, 3, 4, 5, 40)),
+            new LottoNumberPackage(Arrays.asList(1, 2, 3, 4, 40, 41))
         );
 
         lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
@@ -33,11 +33,11 @@ public class LottoResultTest {
 
     @Test
     public void getWinningCountPerRank_FOURTH() {
-        List<LottoGame> gameNumbers = Arrays.asList(
-            new LottoGame(Arrays.asList(40, 41, 42, 4, 5, 6)),
-            new LottoGame(Arrays.asList(1, 41, 42, 43, 5, 6)),
-            new LottoGame(Arrays.asList(1, 2, 42, 43, 44, 6)),
-            new LottoGame(Arrays.asList(1, 2, 3, 43, 44, 45))
+        List<LottoNumberPackage> gameNumbers = Arrays.asList(
+            new LottoNumberPackage(Arrays.asList(40, 41, 42, 4, 5, 6)),
+            new LottoNumberPackage(Arrays.asList(1, 41, 42, 43, 5, 6)),
+            new LottoNumberPackage(Arrays.asList(1, 2, 42, 43, 44, 6)),
+            new LottoNumberPackage(Arrays.asList(1, 2, 3, 43, 44, 45))
         );
 
         lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
@@ -51,12 +51,12 @@ public class LottoResultTest {
 
     @Test
     public void getWinningCountPerRank_THIRD() {
-        List<LottoGame> gameNumbers = Arrays.asList(
-            new LottoGame(Arrays.asList(40, 41, 42, 43, 5, 6)),
-            new LottoGame(Arrays.asList(1, 41, 42, 43, 44, 6)),
-            new LottoGame(Arrays.asList(1, 2, 42, 43, 44, 45)),
-            new LottoGame(Arrays.asList(40, 41, 3, 43, 44, 6)),
-            new LottoGame(Arrays.asList(40, 41, 3, 4, 44, 45))
+        List<LottoNumberPackage> gameNumbers = Arrays.asList(
+            new LottoNumberPackage(Arrays.asList(40, 41, 42, 43, 5, 6)),
+            new LottoNumberPackage(Arrays.asList(1, 41, 42, 43, 44, 6)),
+            new LottoNumberPackage(Arrays.asList(1, 2, 42, 43, 44, 45)),
+            new LottoNumberPackage(Arrays.asList(40, 41, 3, 43, 44, 6)),
+            new LottoNumberPackage(Arrays.asList(40, 41, 3, 4, 44, 45))
         );
 
         lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
@@ -70,13 +70,13 @@ public class LottoResultTest {
 
     @Test
     public void getWinningCountPerRank_SECOND() {
-        List<LottoGame> gameNumbers = Arrays.asList(
-            new LottoGame(Arrays.asList(1, 41, 42, 43, 44, 45)),
-            new LottoGame(Arrays.asList(40, 2, 42, 43, 44, 45)),
-            new LottoGame(Arrays.asList(40, 41, 3, 43, 44, 45)),
-            new LottoGame(Arrays.asList(40, 41, 42, 4, 44, 45)),
-            new LottoGame(Arrays.asList(40, 41, 42, 43, 5, 45)),
-            new LottoGame(Arrays.asList(40, 41, 42, 43, 44, 6))
+        List<LottoNumberPackage> gameNumbers = Arrays.asList(
+            new LottoNumberPackage(Arrays.asList(1, 41, 42, 43, 44, 45)),
+            new LottoNumberPackage(Arrays.asList(40, 2, 42, 43, 44, 45)),
+            new LottoNumberPackage(Arrays.asList(40, 41, 3, 43, 44, 45)),
+            new LottoNumberPackage(Arrays.asList(40, 41, 42, 4, 44, 45)),
+            new LottoNumberPackage(Arrays.asList(40, 41, 42, 43, 5, 45)),
+            new LottoNumberPackage(Arrays.asList(40, 41, 42, 43, 44, 6))
         );
 
         lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
@@ -90,8 +90,8 @@ public class LottoResultTest {
 
     @Test
     public void getWinningCountPerRank_FIRST() {
-        List<LottoGame> gameNumbers = Arrays.asList(
-            new LottoGame(Arrays.asList(40, 41, 42, 43, 44, 45))
+        List<LottoNumberPackage> gameNumbers = Arrays.asList(
+            new LottoNumberPackage(Arrays.asList(40, 41, 42, 43, 44, 45))
         );
 
         lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
@@ -104,11 +104,11 @@ public class LottoResultTest {
     }
 
     private LottoResult getLottoResult(long purchaseAmount,
-                                       List<LottoGame> automaticNumbers,
+                                       List<LottoNumberPackage> automaticNumbers,
                                        List<Integer> winningNumbers) {
 
         PurchaseAmount purchaseAmountObj = new PurchaseAmount(purchaseAmount);
-        WinningNumbers winningNumbersObj = new WinningNumbers(new LottoGame(winningNumbers));
+        WinningInfo winningNumbersObj = new WinningInfo(new LottoNumberPackage(winningNumbers));
         return new LottoResult(new LottoTicket(new PurchaseInfo(purchaseAmountObj), automaticNumbers), winningNumbersObj);
     }
 }

@@ -1,7 +1,6 @@
 package lottogame.domain;
 
 import lottogame.service.LottoNumberGenerator;
-import lottogame.service.LottoNumberGeneratorImpl;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class LottoTicket {
 
     private final PurchaseInfo purchaseInfo;
-    private final List<LottoGame> automaticNumbers;
+    private final List<LottoNumberPackage> automaticNumbers;
     private LottoNumberGenerator lottoNumberGenerator;
 
     public LottoTicket(PurchaseInfo purchaseInfo, LottoNumberGenerator lottoNumberGenerator) {
@@ -18,7 +17,7 @@ public class LottoTicket {
         automaticNumbers = this.lottoNumberGenerator.generate(purchaseInfo.getPurchaseCount().getValue());
     }
 
-    LottoTicket(PurchaseInfo purchaseInfo, List<LottoGame> automaticNumbers) {
+    LottoTicket(PurchaseInfo purchaseInfo, List<LottoNumberPackage> automaticNumbers) {
         this.purchaseInfo = purchaseInfo;
         this.automaticNumbers = automaticNumbers;
     }
@@ -31,7 +30,7 @@ public class LottoTicket {
         return purchaseInfo.getPurchaseCount();
     }
 
-    public List<LottoGame> getAutomaticNumbers() {
+    public List<LottoNumberPackage> getAutomaticNumbers() {
         return Collections.unmodifiableList(automaticNumbers);
     }
 }

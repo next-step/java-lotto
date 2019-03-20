@@ -12,7 +12,7 @@ public class ConsoleApplicationLauncher {
         LottoTicket lottoTicket = new LottoTicket(new PurchaseInfo(purchaseAmount), new LottoNumberGeneratorImpl());
         ResultView.showPurchasedResult(lottoTicket);
 
-        WinningNumbers winningNumbers = InputView.getWinningNumbers();
+        WinningInfo winningNumbers = InputView.getWinningNumbers();
         LottoResult lottoResult = new LottoResult(lottoTicket, winningNumbers);
         ResultView.showWinningResult(lottoResult);
     }

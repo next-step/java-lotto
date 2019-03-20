@@ -8,31 +8,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lottogame.domain.LottoGame.LOTTO_GAME_SIZE;
+import static lottogame.domain.LottoNumberPackage.LOTTO_GAME_SIZE;
 import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 import static org.junit.Assert.*;
 
-public class LottoGameTest {
+public class LottoNumberPackageTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void LottoGame_for_null_integer_array() {
-        new LottoGame((List<Integer>)null);
+        new LottoNumberPackage((List<Integer>)null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void LottoGame_for_empty_integer_array() {
-        new LottoGame(Collections.emptyList());
+        new LottoNumberPackage(Collections.emptyList());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void LottoGame_for_insufficient_length_of_integer_array() {
-        new LottoGame(Arrays.asList(1, 2, 3, 4, 5));
+        new LottoNumberPackage(Arrays.asList(1, 2, 3, 4, 5));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void LottoGame_for_too_many_length_of_integer_array() {
-        new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        new LottoNumberPackage(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class LottoGameTest {
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
         );
         List lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<LottoNumber> actual = new LottoGame(lottoNumbers).getGameNumbers();
+        List<LottoNumber> actual = new LottoNumberPackage(lottoNumbers).getNumbers();
 
         assertEquals(expected, actual);
     }
@@ -50,10 +50,10 @@ public class LottoGameTest {
     @Test
     public void getMatchedCount_0() {
         List<Integer> gameNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoGame game = new LottoGame(gameNumbers);
+        LottoNumberPackage game = new LottoNumberPackage(gameNumbers);
 
         List<Integer> targetNumbers = Arrays.asList(40, 41, 42, 43, 44, 45);
-        LottoGame targetGame = new LottoGame(targetNumbers);
+        LottoNumberPackage targetGame = new LottoNumberPackage(targetNumbers);
 
         assertEquals(0, game.getMatchedCount(targetGame));
     }
@@ -61,10 +61,10 @@ public class LottoGameTest {
     @Test
     public void getMatchedCount_1() {
         List<Integer> gameNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoGame game = new LottoGame(gameNumbers);
+        LottoNumberPackage game = new LottoNumberPackage(gameNumbers);
 
         List<Integer> targetNumbers = Arrays.asList(1, 41, 42, 43, 44, 45);
-        LottoGame targetGame = new LottoGame(targetNumbers);
+        LottoNumberPackage targetGame = new LottoNumberPackage(targetNumbers);
 
         assertEquals(1, game.getMatchedCount(targetGame));
     }
@@ -72,10 +72,10 @@ public class LottoGameTest {
     @Test
     public void getMatchedCount_6() {
         List<Integer> gameNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoGame game = new LottoGame(gameNumbers);
+        LottoNumberPackage game = new LottoNumberPackage(gameNumbers);
 
         List<Integer> targetNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoGame targetGame = new LottoGame(targetNumbers);
+        LottoNumberPackage targetGame = new LottoNumberPackage(targetNumbers);
 
         assertEquals(6, game.getMatchedCount(targetGame));
     }
@@ -83,7 +83,7 @@ public class LottoGameTest {
     @Test
     public void contains() {
         List<Integer> gameNumbers = getRangedNumbers(MINIMUM_LOTTO_NUMBER, LOTTO_GAME_SIZE);
-        LottoGame game = new LottoGame(gameNumbers);
+        LottoNumberPackage game = new LottoNumberPackage(gameNumbers);
 
         for(int curTargetNumber : gameNumbers) {
             assertTrue(game.contains(new LottoNumber(curTargetNumber)));

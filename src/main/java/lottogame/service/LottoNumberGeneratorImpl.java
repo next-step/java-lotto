@@ -1,7 +1,7 @@
 package lottogame.service;
 
 import lottogame.domain.LottoNumber;
-import lottogame.domain.LottoGame;
+import lottogame.domain.LottoNumberPackage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,13 +16,13 @@ public class LottoNumberGeneratorImpl implements LottoNumberGenerator {
                                                         .collect(Collectors.toList());
 
     @Override
-    public LottoGame generate() {
-        return new LottoGame(getLottoNumbers());
+    public LottoNumberPackage generate() {
+        return new LottoNumberPackage(getLottoNumbers());
     }
 
     @Override
-    public List<LottoGame> generate(long count) {
-        List<LottoGame> lottoNumbers = new ArrayList<>();
+    public List<LottoNumberPackage> generate(long count) {
+        List<LottoNumberPackage> lottoNumbers = new ArrayList<>();
 
         for(long i = 0; i < count; ++i) {
             lottoNumbers.add(generate());
@@ -35,7 +35,7 @@ public class LottoNumberGeneratorImpl implements LottoNumberGenerator {
         Collections.shuffle(numberPool);
 
         return numberPool.stream()
-                        .limit(LottoGame.LOTTO_GAME_SIZE)
+                        .limit(LottoNumberPackage.LOTTO_GAME_SIZE)
                         .sorted()
                         .collect(Collectors.toList());
     }

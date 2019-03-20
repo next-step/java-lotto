@@ -1,7 +1,7 @@
 package lottogame.view;
 
 import lottogame.domain.LottoTicket;
-import lottogame.domain.LottoGame;
+import lottogame.domain.LottoNumberPackage;
 import lottogame.domain.LottoResult;
 import lottogame.domain.PurchaseCount;
 
@@ -22,7 +22,7 @@ public class ResultView {
         System.out.println("\n" + purchaseCount.getValue() + PURCHASE_RESULT_TITLE);
     }
 
-    private static void showPurchasedLottoNumbers(List<LottoGame> purchasedLottoNumbers) {
+    private static void showPurchasedLottoNumbers(List<LottoNumberPackage> purchasedLottoNumbers) {
         Optional.ofNullable(purchasedLottoNumbers)
                 .orElse(Collections.emptyList())
                 .forEach(System.out::println);
@@ -33,11 +33,11 @@ public class ResultView {
         showWinningStatistics(result);
     }
 
-    static void showWinningResultTitle() {
+    private static void showWinningResultTitle() {
         System.out.println(WINNING_RESULT_TITLE);
     }
 
-    static void showWinningStatistics(LottoResult result) {
+    private static void showWinningStatistics(LottoResult result) {
         System.out.println(result.getWinningResultString());
         System.out.println(result.getProfitRateString());
     }

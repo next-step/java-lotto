@@ -1,10 +1,10 @@
 package lottogame.service;
 
-import lottogame.domain.LottoGame;
+import lottogame.domain.LottoNumberPackage;
 
 import java.util.List;
 
 public interface LottoNumberGenerator {
-    LottoGame generate();
-    List<LottoGame> generate(long count);
+    LottoNumberPackage generate();
+    List<LottoNumberPackage> generate(long count);
 }
