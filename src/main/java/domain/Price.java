@@ -17,7 +17,6 @@ public class Price {
     }
 
     public BigDecimal totalRateByWinning(BigDecimal totalAmountByWinning) {
-        BigDecimal test = totalAmountByWinning.divide(BigDecimal.valueOf(totalAmount), 2, RoundingMode.HALF_UP);
-        return test;
+        return totalAmountByWinning.divide(BigDecimal.valueOf(totalAmount), 2, RoundingMode.HALF_UP);
     }
 }

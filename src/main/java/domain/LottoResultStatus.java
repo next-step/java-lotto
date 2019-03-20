@@ -32,6 +32,4 @@ public enum LottoResultStatus {
     public static BigDecimal getWinnersPriceByStatus(int matchCount, LottoResultStatus status) {
         return BigDecimal.valueOf(matchCount * status.winnersPrice);
     }
-
-    //TODO :: http://woowabros.github.io/tools/2017/07/10/java-enum-uses.html
 }

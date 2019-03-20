@@ -3,17 +3,17 @@ package domain;
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> numbers;
+    private Numbers numbers;
 
     public static Lotto generateLotto(List<Integer> integers) {
         Lotto lotto = new Lotto();
-        lotto.numbers = integers;
+        lotto.numbers = new Numbers(integers);
         return lotto;
     }
 
     public LottoResultStatus getLottoResultStatus(int[] winningNumbers) {
         int containsWinningNumberCount = 0;
-        for(int number : winningNumbers) {
+        for (int number : winningNumbers) {
             if(numbers.contains(number))
                 containsWinningNumberCount ++;
         }
@@ -21,12 +21,15 @@ public class Lotto {
         return setResultByContainCount(containsWinningNumberCount);
     }
 
-    private LottoResultStatus setResultByContainCount(int count) {
-        int matchCount = count < 3 ? 2 : count;
+    private LottoResultStatus setResultByContainCount(int matchCount) {
+        if ( matchCount < 3) {
+            return LottoResultStatus.NONE;
+        }
+
         return LottoResultStatus.of(matchCount);
     }
 
-    public List<Integer> getNumbers() {
+    public Numbers getNumbers() {
        return this.numbers;
     }
 
