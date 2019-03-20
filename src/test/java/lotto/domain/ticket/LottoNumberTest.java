@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoNumberTest {
     @Test
-    public void 숫자_범위_넘어갈_경우_IllegalArgumentException() {
+    public void 생성_시_숫자_범위_넘어갈_경우_IllegalArgumentException() {
         // given
         int underMinNumber = LottoNumber.MIN_NUMBER - 1;
         int overMaxNumber = LottoNumber.MAX_NUMBER + 1;
@@ -26,8 +26,8 @@ public class LottoNumberTest {
         LottoNumber different = new LottoNumber(2);
 
         // when
-        boolean shouldBeTrue = target.equalsTo(same);
-        boolean shouldBeFalse = target.equalsTo(different);
+        boolean shouldBeTrue = target.isEqualTo(same);
+        boolean shouldBeFalse = target.isEqualTo(different);
 
         // then
         assertThat(shouldBeTrue).isTrue();

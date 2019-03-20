@@ -22,7 +22,7 @@ public class LottoNumber {
         return MIN_NUMBER <= number && number <= MAX_NUMBER;
     }
 
-    boolean equalsTo(LottoNumber lottoNumber) {
+    boolean isEqualTo(LottoNumber lottoNumber) {
         return this.number == lottoNumber.number;
     }
 }
