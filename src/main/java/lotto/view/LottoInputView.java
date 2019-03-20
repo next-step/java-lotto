@@ -1,17 +1,15 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.vo.LottoNo;
 import lotto.vo.LottoWinningNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoInputView {
 
@@ -38,7 +36,7 @@ public class LottoInputView {
         return scanner.nextInt();
     }
 
-    public static List<String[]> inputDirectNumbers(int directAmount) {
+    public static List<String[]> inputDirectNumbers(int directAmount) throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
 
@@ -79,13 +77,7 @@ public class LottoInputView {
             throw new IllegalArgumentException("패턴 불일치");
         }
 
-        String[] numbers = inputValue.split(", ");
-
-        if (numbers.length != Lotto.LOTTO_NUM_COUNT) {
-            throw new IllegalArgumentException("숫자 개수 안맞음");
-        }
-
-        return numbers;
+        return inputValue.split(", ");
     }
 
     /**
@@ -93,28 +85,12 @@ public class LottoInputView {
      * 정수형 리스트로 리턴
      *
      * @param winningNumbers 당첨번호 string[]
-     * @param bonusNumber 보너스번호
+     * @param bonusNumber    보너스번호
      * @return 당첨번호 list
      * @throws IllegalArgumentException
      */
     public static LottoWinningNumber createWinningNumbers(String[] winningNumbers, int bonusNumber) throws IllegalArgumentException {
-
-        Set<Integer> duplicateNumbers = Stream.of(winningNumbers)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        duplicateNumbers.add(bonusNumber);
-
-        //중복 입력 체크
-        if (duplicateNumbers.size() != Lotto.LOTTO_NUM_COUNT + Lotto.LOTTO_BONUS_COUNT) {
-            throw new IllegalArgumentException("중복 당첨숫자 있음");
-        }
-
-        duplicateNumbers.remove(bonusNumber);
-
-        List<LottoNo> numbers = new ArrayList<>();
-        duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
+        List<LottoNo> numbers = LottoMachine.makeDuplicateNumbers(winningNumbers);
 
         return new LottoWinningNumber(numbers, new LottoNo(bonusNumber));
     }

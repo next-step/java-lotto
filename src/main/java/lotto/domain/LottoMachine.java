@@ -1,11 +1,16 @@
 package lotto.domain;
 
-import lotto.dto.*;
+import lotto.dto.LottoProfit;
+import lotto.dto.LottoStatistics;
 import lotto.vo.LottoMatchCount;
 import lotto.vo.LottoNo;
 import lotto.vo.LottoWinningNumber;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoMachine {
 
@@ -67,5 +72,17 @@ public class LottoMachine {
         lottoProfit.calculateProfit(lottoMatchCount);
 
         return lottoStatistics;
+    }
+
+    public static List<LottoNo> makeDuplicateNumbers(String[] winningNumbers) {
+        Set<Integer> duplicateNumbers = Stream.of(winningNumbers)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toSet());
+
+        List<LottoNo> numbers = new ArrayList<>();
+        duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
+
+        return numbers;
     }
 }

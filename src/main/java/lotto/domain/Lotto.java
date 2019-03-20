@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Lotto {
     public static final int LOTTO_NUM_COUNT = 6;
-    public static final int LOTTO_BONUS_COUNT = 1;
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_SECOND_MATCH_COUNT = 5;
 
@@ -16,7 +15,10 @@ public class Lotto {
 
     private boolean matchBonus;
 
-    public Lotto(List<LottoNo> numbers) {
+    public Lotto(List<LottoNo> numbers) throws IllegalArgumentException {
+        if (numbers.size() != LOTTO_NUM_COUNT) {
+            throw new IllegalArgumentException("숫자 개수 안맞음");
+        }
         this.numbers = numbers;
         this.matchCount = 0;
         this.matchBonus = false;

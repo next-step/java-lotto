@@ -5,10 +5,7 @@ import lotto.vo.LottoNo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -56,19 +53,7 @@ public class LottoMarket {
         List<Lotto> lottos = new ArrayList<>();
 
         for (String[] directNumber : directNumbers) {
-            Set<Integer> duplicateNumbers = Stream.of(directNumber)
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .collect(Collectors.toSet());
-
-            //중복 입력 체크
-            if (duplicateNumbers.size() != Lotto.LOTTO_NUM_COUNT) {
-                throw new IllegalArgumentException("중복 입력숫자 있음");
-            }
-
-            List<LottoNo> numbers = new ArrayList<>();
-            duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
-
+            List<LottoNo> numbers = LottoMachine.makeDuplicateNumbers(directNumber);
             Lotto lotto = new Lotto(numbers);
             lottos.add(lotto);
         }

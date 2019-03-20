@@ -26,12 +26,6 @@ public class LottoInputViewTest {
         LottoInputView.splitLottoNumbers(inputValue);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void 지난주당첨번호개수안맞음() {
-        String inputValue = "1, 2, 3, 4";
-        LottoInputView.splitLottoNumbers(inputValue);
-    }
-
     @Test
     public void 당첨로또번호생성() {
         LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(new String[]{"1", "2", "3", "4", "5", "6"}, 7);
