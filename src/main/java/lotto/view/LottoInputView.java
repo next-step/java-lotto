@@ -91,7 +91,8 @@ public class LottoInputView {
      */
     public static LottoWinningNumber createWinningNumbers(String[] winningNumbers, int bonusNumber) throws IllegalArgumentException {
         List<LottoNo> numbers = LottoMachine.makeDuplicateNumbers(winningNumbers);
+        Lotto lotto = new Lotto(numbers);
 
-        return new LottoWinningNumber(numbers, new LottoNo(bonusNumber));
+        return new LottoWinningNumber(lotto, new LottoNo(bonusNumber));
     }
 }

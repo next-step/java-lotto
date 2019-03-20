@@ -26,7 +26,7 @@ public class LottoMachine {
                                                      LottoWinningNumber lottoWinningNumber, LottoProfit lottoProfit) {
 
         //각 당첨 번호별로 체크
-        for (LottoNo number : lottoWinningNumber.getWinningNumber()) {
+        for (LottoNo number : lottoWinningNumber.getWinningNumber().getNumbers()) {
             checkWinningNumber(lottos, number);
         }
 

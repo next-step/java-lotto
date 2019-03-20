@@ -46,6 +46,10 @@ public class Lotto {
         }
     }
 
+    public List<LottoNo> getNumbers() {
+        return numbers;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
