@@ -12,12 +12,12 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto() {
-        validateAndAdd(Stream.generate(LottoNumber::new));
+        validateAndAdd(Stream.generate(LottoNumber::getInstance));
     }
 
     public Lotto(Integer ...numbers){
         validateAndAdd(Arrays.stream(numbers)
-            .map(LottoNumber::new));
+            .map(LottoNumber::getInstance));
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -30,5 +30,15 @@ public class Lotto {
             .limit(limitCount)
             .sorted(Comparator.comparing(LottoNumber::getNumber))
             .forEach(lottoNumbers::add);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public Integer matchCount(Lotto lotto) {
+        return (int) lotto.getLottoNumbers().stream()
+            .filter(this::contains)
+            .count();
     }
 }

@@ -8,15 +8,31 @@ public class LottoNumber {
 
     private Integer number;
 
-    public LottoNumber() {
-        this.number = RandomNumberGenerator.generateNumber(MIN_NUMBER, MAX_NUMBER);
+    private static LottoNumber[] instances = new LottoNumber[MAX_NUMBER + 1];
+
+    public static LottoNumber getInstance(){
+        Integer number = RandomNumberGenerator.generateNumber(MIN_NUMBER, MAX_NUMBER);
+
+        if(instances[number] == null){
+            instances[number] = new LottoNumber(number);
+        }
+
+        return instances[number];
     }
 
-    public LottoNumber(Integer number) {
+    public static LottoNumber getInstance(Integer number){
         if(number < MIN_NUMBER || number > MAX_NUMBER){
             throw new IllegalArgumentException();
         }
 
+        if(instances[number] == null){
+            instances[number] = new LottoNumber(number);
+        }
+
+        return instances[number];
+    }
+
+    private LottoNumber(Integer number) {
         this.number = number;
     }
 

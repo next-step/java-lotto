@@ -6,10 +6,10 @@ import java.util.List;
 public class LottoMachine {
     public static final Integer LOTTO_PRICE = 1000;
 
-    private WinningNumbers winningNumbers;
+    private Lotto winningNumbers;
 
-    public void setWinningNumbers(WinningNumbers winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public void initWinningNumbers(Integer ...number) {
+        winningNumbers = new Lotto(number);
     }
 
     public List<Lotto> purchase(int money) {
@@ -33,13 +33,10 @@ public class LottoMachine {
     }
 
     public Rank calculateRank(Lotto lotto) {
-        return Rank.calculate(calculateMatchCount(lotto));
+        return Rank.calculate(winningNumbers.matchCount(lotto));
     }
 
-    // fixme private 으로 변경하고 싶음
-    public int calculateMatchCount(Lotto lotto) {
-        return (int)lotto.getLottoNumbers().stream()
-            .filter(winningNumbers::contains)
-            .count();
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
     }
 }

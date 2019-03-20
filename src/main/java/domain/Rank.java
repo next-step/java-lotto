@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Rank {
-    First(6, 2000000000L), Second(5, 1500000L),
-    Third(4, 50000L), Fourth(3, 5000L),
-    None(-1, 0L);
+    First(6, "2,000,000,000"), Second(5, "1,500,000"),
+    Third(4, "50,000"), Fourth(3, "5,000"),
+    None(-1, "0");
 
     private Integer matchCount;
-    private Long prizeMoney;
+    private String prizeMoney;
 
-    Rank(Integer matchCount, Long prizeMoney) {
+    Rank(Integer matchCount, String prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
@@ -29,6 +29,10 @@ public enum Rank {
     }
 
     public long getPrizeMoney() {
+        return Long.parseLong(prizeMoney.replace(",", ""));
+    }
+
+    public String getPrizeMoneyForDisplay() {
         return prizeMoney;
     }
 }

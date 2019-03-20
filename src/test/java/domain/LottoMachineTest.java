@@ -16,21 +16,18 @@ public class LottoMachineTest {
     }
 
     @Test
-    public void lotto_hit_count() {
+    public void init_winning_number() {
         LottoMachine lottoMachine = new LottoMachine();
+        lottoMachine.initWinningNumbers(1,2,3,4,5,6);
 
-        Lotto lotto = new Lotto(1,2,3,4,5,6);
-
-        lottoMachine.setWinningNumbers(new WinningNumbers(4,5,6,7,8,9));
-        int matchCount = lottoMachine.calculateMatchCount(lotto);
-
-        assertThat(matchCount).isEqualTo(3);
+        assertThat(lottoMachine.getWinningNumbers()).isNotNull();
+        assertThat(lottoMachine.getWinningNumbers().matchCount(new Lotto(1,2,3,4,5,6))).isEqualTo(6);
     }
 
     @Test
     public void get_rank_from_lotto() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.setWinningNumbers(new WinningNumbers(4,5,6,7,8,9));
+        lottoMachine.initWinningNumbers(4,5,6,7,8,9);
         Rank rank = lottoMachine.calculateRank(new Lotto(1,2,3,4,5,6));
 
         assertThat(rank).isEqualTo(Rank.Fourth);
@@ -39,7 +36,7 @@ public class LottoMachineTest {
     @Test
     public void get_ranks_from_lottos() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.setWinningNumbers(new WinningNumbers(4,5,6,7,8,9));
+        lottoMachine.initWinningNumbers(4,5,6,7,8,9);
 
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(1,2,3,4,5,6));

@@ -25,7 +25,6 @@ public class LottoAnalyzerTest {
         Map<Rank, Long> rankGroup = LottoAnalyzer.makeWinGroup(ranks);
         assertThat(rankGroup.get(Rank.Third)).isEqualTo(1L);
         assertThat(rankGroup.get(Rank.Fourth)).isEqualTo(2L);
-        assertThat(rankGroup.get(Rank.None)).isEqualTo(1L);
     }
 
     @Test
