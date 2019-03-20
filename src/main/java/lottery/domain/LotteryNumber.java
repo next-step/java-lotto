@@ -7,7 +7,7 @@ public class LotteryNumber {
     public static int UPPER_BOUND_INCLUSIVE = 65;
     public static int LOWER_BOUND_INCLUSIVE = 1;
 
-    int number;
+    private int number;
 
     public LotteryNumber(int number) {
         if (LOWER_BOUND_INCLUSIVE > number || UPPER_BOUND_INCLUSIVE < number) {

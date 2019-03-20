@@ -7,7 +7,7 @@ public class LotteryTicket {
 
     public static final int NUMBERS_COUNT = 6;
 
-    List<LotteryNumber> lotteryNumbers;
+    private List<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<Integer> numbers) {
         if (NUMBERS_COUNT != numbers.size()) {
