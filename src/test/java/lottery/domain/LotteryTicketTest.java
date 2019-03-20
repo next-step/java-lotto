@@ -1,7 +1,5 @@
 package lottery.domain;
 
-import lottery.domain.LotteryRank;
-import lottery.domain.LotteryTicket;
 import org.junit.*;
 
 import java.util.stream.Collectors;
@@ -65,6 +63,7 @@ public class LotteryTicketTest {
     @Test
     public void test_toString() {
         final LotteryTicket ticket = createTicket(1, 2, 3, 4, 5, 6);
+
         assertThat(ticket)
                 .hasToString("[1, 2, 3, 4, 5, 6]");
     }
