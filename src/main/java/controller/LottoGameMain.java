@@ -17,6 +17,7 @@ public class LottoGameMain {
         for (Lotto lotto:lottoGame.getLottos()){
             System.out.println(lotto.toString());
         }
+        
 
         Lotto winner = InputView.getWinnerNoByString();
 
