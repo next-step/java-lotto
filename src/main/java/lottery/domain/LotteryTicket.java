@@ -7,6 +7,8 @@ public class LotteryTicket {
 
     public static final int NUMBERS_COUNT = 6;
 
+    public static final int PRICE = 1000;
+
     private List<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<Integer> numbers) {
