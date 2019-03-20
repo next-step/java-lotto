@@ -1,11 +1,7 @@
 package application;
 
-import domain.Number;
+import domain.Winning;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -19,17 +15,12 @@ public class LottoGameTest {
     }
 
     @Test
-    public void 당첨번호입력() {
-        String winningNumber = "1, 2, 3, 4, 5, 6";
-        List<Number> numbers = new ArrayList();
-        Arrays.stream(winningNumber.split(", ")).forEach(v -> numbers.add(new Number(Integer.parseInt(v))));
+    public void 로또게임_당첨금액_입력() {
+        int price = 1000;
+        LottoGame game = new LottoGame(price);
 
-        assertThat(numbers.size()).isEqualTo(6);
-        assertThat(numbers.get(0).getValue()).isEqualTo(1);
-    }
-
-    @Test
-    public void 당첨확인_세개일치() {
-
+        String number = "1, 2, 3, 4, 5, 6";
+        Winning winning = new Winning(number);
+        game.run(winning);
     }
 }

@@ -1,7 +1,7 @@
 package application;
 
 import domain.Lotto;
-import domain.Number;
+import domain.Winning;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,7 @@ public class LottoGame {
         return lottos;
     }
 
-    public void run(List<Number> numbers) {
-
+    public void run(Winning winning) {
     }
 }
 
