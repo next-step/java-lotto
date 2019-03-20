@@ -33,7 +33,9 @@ public class BoundedUniqueNumbersGenerator implements NumbersGenerator {
         final List<Integer> collect = IntStream.rangeClosed(lowerBoundInclusive, upperBoundInclusive)
                 .boxed()
                 .collect(Collectors.toList());
+
         Collections.shuffle(collect, random);
+
         return collect;
     }
 }
