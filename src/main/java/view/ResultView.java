@@ -17,8 +17,7 @@ public class ResultView {
        System.out.println("3개 일치 (5000원)- " +lottoResult.getLottoResults().get(LottoResultStatus.WINNING_NUM_3)+ "개");
        System.out.println("4개 일치 (50000)- " +lottoResult.getLottoResults().get(LottoResultStatus.WINNING_NUM_4)+ "개");
        System.out.println("5개 일치 (1500000원)- " +lottoResult.getLottoResults().get(LottoResultStatus.WINNING_NUM_5)+ "개");
-       System.out.println("6개 일치 (2000000원)- " +lottoResult.getLottoResults().get(LottoResultStatus.WINNING_NUM_6)+ "개");
-
+       System.out.println("6개 일치 (2000000원)- " +lottoResult.getLottoResults().get(LottoResultStatus.WINNING_NUM_6)+ "개\n");
        System.out.println("총 수익률은 "+lottoResult.getBenefitRate()+ "입니다. ");
     }
 }

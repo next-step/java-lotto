@@ -1,9 +1,10 @@
 package domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Price {
-    private static final int ONE_TICKET_PRICE = 1000;
+    private static final int ONE_TICKET_PRICE = 1_000;
 
     private int totalAmount;
 
@@ -16,7 +17,7 @@ public class Price {
     }
 
     public BigDecimal totalRateByWinning(BigDecimal totalAmountByWinning) {
-        BigDecimal test = totalAmountByWinning.divide(BigDecimal.valueOf(totalAmount));
+        BigDecimal test = totalAmountByWinning.divide(BigDecimal.valueOf(totalAmount), 2, RoundingMode.HALF_UP);
         return test;
     }
 }

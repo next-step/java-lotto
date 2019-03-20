@@ -2,15 +2,12 @@ package domain;
 
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-    private static final int WINNING_NUM_3_BENEFIT = 5000;
-    private static final int WINNING_NUM_4_BENEFIT = 50000;
-    private static final int WINNING_NUM_5_BENEFIT = 1500000;
-    private static final int WINNING_NUM_6_BENEFIT = 2000000000;
 
     private List<Lotto> lottos;
     private Map<LottoResultStatus, Integer> lottoResults;
@@ -46,11 +43,10 @@ public class LottoResult {
 
     public void calculateBenefit(Price price) {
         BigDecimal totalAmountByWinning = new BigDecimal(0);
-        totalAmountByWinning = BigDecimal.valueOf((lottoResults.get(LottoResultStatus.WINNING_NUM_3)) * WINNING_NUM_3_BENEFIT);
-        totalAmountByWinning = totalAmountByWinning.add(BigDecimal.valueOf(lottoResults.get(LottoResultStatus.WINNING_NUM_4) * WINNING_NUM_4_BENEFIT));
-        totalAmountByWinning = totalAmountByWinning.add(BigDecimal.valueOf(lottoResults.get(LottoResultStatus.WINNING_NUM_5) * WINNING_NUM_5_BENEFIT));
-        totalAmountByWinning = totalAmountByWinning.add(BigDecimal.valueOf(lottoResults.get(LottoResultStatus.WINNING_NUM_6) * WINNING_NUM_6_BENEFIT));
 
+        for(LottoResultStatus status : LottoResultStatus.values()){
+            totalAmountByWinning = totalAmountByWinning.add(LottoResultStatus.getWinnersPriceByStatus(lottoResults.get(status), status));
+        }
         benefitRate =  price.totalRateByWinning(totalAmountByWinning);
     }
 

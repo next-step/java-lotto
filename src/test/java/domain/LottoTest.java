@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -13,7 +14,7 @@ public class LottoTest {
     @Before
     public void setUp() {
         // 1,2,3,4,5,6 setting
-        ArrayList<Integer> nums = new ArrayList<>();
+        List<Integer> nums = new ArrayList<>();
         for (int i=1 ; i<=6; i++) {
             nums.add(i);
         }

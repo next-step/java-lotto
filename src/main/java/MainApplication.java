@@ -6,7 +6,7 @@ import view.ResultView;
 
 public class MainApplication {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int moneyAmount = InputView.getAmount();
 
         Price price = new Price(moneyAmount);

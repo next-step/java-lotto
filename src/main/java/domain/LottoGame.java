@@ -9,11 +9,12 @@ public class LottoGame {
     private List<Lotto> lottos;
 
     public LottoGame(int lottoCount) {
+        LottoGenerator generator = new LottoGenerator();
         this.lottos = new ArrayList<>();
 
         int i=0;
         while (i < lottoCount) {
-            Lotto lotto = Lotto.generateLotto(LottoGenerator.generateRandomNumber());
+            Lotto lotto = Lotto.generateLotto(generator.generateRandomNumber());
             lottos.add(lotto);
             i ++;
         }

@@ -6,15 +6,15 @@ import org.junit.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
-    private static final int AMOUNT = 14000;
-    private static final int PRICE = 1000;
+    private static final int AMOUNT = 14_000;
+    private static final int PRICE = 1_000;
     private static final int LOTTO_COUNT = AMOUNT / PRICE;
     private LottoGame lottoGame;
     private Price price;
 
     @Before
     public void setUp() {
-        price = new Price(14000);
+        price = new Price(AMOUNT);
         lottoGame = new LottoGame(LOTTO_COUNT);
     }
 
