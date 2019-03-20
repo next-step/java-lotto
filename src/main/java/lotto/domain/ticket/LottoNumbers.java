@@ -13,7 +13,23 @@ public class LottoNumbers {
             throw new IllegalArgumentException("Lotto numbers size must be " + LOTTO_NUMBERS_SIZE);
         }
 
+        if (isNumberDuplicated(numbers)) {
+            throw new IllegalArgumentException("Lotto numbers must be unique");
+        }
+
         this.numbers = convertToLottoNumbers(numbers);
+    }
+
+    private boolean isLottoNumbersSize(List<Integer> numbers) {
+        return LOTTO_NUMBERS_SIZE == numbers.size();
+    }
+
+    private boolean isNumberDuplicated(List<Integer> numbers) {
+        long uniqueNumbersSize = numbers.stream()
+                .distinct()
+                .count();
+
+        return uniqueNumbersSize < LOTTO_NUMBERS_SIZE;
     }
 
     private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
@@ -34,10 +50,6 @@ public class LottoNumbers {
 
     private boolean containsLottoNumber(LottoNumber target) {
         return this.numbers.stream()
-                .anyMatch(number -> number.equalsTo(target));
-    }
-
-    private boolean isLottoNumbersSize(List<Integer> numbers) {
-        return LOTTO_NUMBERS_SIZE == numbers.size();
+                .anyMatch(number -> number.isEqualTo(target));
     }
 }
