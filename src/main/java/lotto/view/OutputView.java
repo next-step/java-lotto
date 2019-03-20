@@ -1,9 +1,19 @@
 package lotto.view;
 
+import lotto.domain.lotto.BasicLotto;
 import lotto.enums.Rank;
 import lotto.view.vo.MatchResult;
 
+import java.util.List;
+
 public class OutputView {
+
+    public static void printLottos(List<BasicLotto> lottos, int manualCount) {
+        System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " +
+            (lottos.size() - manualCount) + "개를 구매했습니다.");
+        lottos.forEach(System.out::println);
+        System.out.println();
+    }
 
     public static void printResultStatistics(MatchResult matchResult) {
         System.out.println("당첨통계");

@@ -5,7 +5,11 @@ import java.util.List;
 public class BasicLotto implements Lotto {
     private Numbers numbers;
 
-    public BasicLotto(List<Integer> numbers) {
+    public BasicLotto(Numbers numbers) {
+        this.numbers = numbers;
+    }
+
+    public BasicLotto(List<LottoNumber> numbers) {
         this.numbers = new Numbers(numbers);
     }
 

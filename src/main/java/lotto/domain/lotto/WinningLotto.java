@@ -2,20 +2,17 @@ package lotto.domain.lotto;
 
 import lotto.enums.Rank;
 
-import java.util.Collections;
-import java.util.List;
-
 public class WinningLotto implements Lotto {
     private Numbers numbers;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
-        Collections.sort(numbers);
-        this.numbers = new Numbers(numbers);
+    public WinningLotto(Numbers numbers, LottoNumber bonusNumber) {
+        numbers.sort();
+        this.numbers = numbers;
         createBonusNumber(bonusNumber);
     }
 
-    private void createBonusNumber(int bonusNumber) {
+    private void createBonusNumber(LottoNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스볼 중복");
         }

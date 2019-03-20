@@ -30,10 +30,10 @@ public class MatchResult {
             .count();
     }
 
-    public long calculateTotalReward() {
-        AtomicLong reward = new AtomicLong(0L);
+    public double calculateTotalReward() {
+        AtomicLong reward = new AtomicLong(0);
         ranks.forEach((key, value) -> reward.addAndGet(key.getTotalReward(value)));
-        return reward.longValue();
+        return reward.doubleValue();
     }
 
     public Map<Rank, Integer> getRanks() {

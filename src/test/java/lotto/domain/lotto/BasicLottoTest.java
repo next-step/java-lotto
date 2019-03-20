@@ -10,11 +10,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BasicLottoTest {
 
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     @Before
     public void setUp() throws Exception {
-        numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        numbers = Arrays.asList(new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
     }
 
     @Test

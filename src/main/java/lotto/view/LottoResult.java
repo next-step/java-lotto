@@ -13,20 +13,15 @@ public class LottoResult {
         matchResult = new MatchResult(winningLotto);
     }
 
-    public static void printLottos(List<BasicLotto> lottos) {
-        lottos.forEach(System.out::println);
-        System.out.println();
-    }
-
     public void generate(List<BasicLotto> lottos) {
         matchResult.calculate(lottos);
         OutputView.printResultStatistics(matchResult);
     }
 
     public String getRewardPercent(int money) {
-        long reward = matchResult.calculateTotalReward();
+        double reward = matchResult.calculateTotalReward();
 
-        double percent = (double) reward / money;
+        double percent = reward / money;
         OutputView.printRewardPercent(percent);
 
         return String.format("%.2f", percent);

@@ -9,7 +9,7 @@ public enum Rank {
     MISS(0, 0);
 
     private int countOfMatch;
-    private int winningMoney;
+    private long winningMoney;
 
     private Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
@@ -33,11 +33,7 @@ public enum Rank {
         return count * winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
+    public long getWinningMoney() {
         return winningMoney;
     }
 
