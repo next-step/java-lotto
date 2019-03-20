@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.enums.LottoRank;
-import lotto.vo.LottoResult;
+import lotto.vo.LottoMatchResult;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -71,8 +71,8 @@ public class LottoTest {
         Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16), otherBonusNumber);
 
         // when
-        LottoResult resultOfFirst = first.getResult(winner);
-        LottoResult resultOfSecond = second.getResult(winner);
+        LottoMatchResult resultOfFirst = first.getResult(winner);
+        LottoMatchResult resultOfSecond = second.getResult(winner);
 
         // then
         assertThat(resultOfFirst.getMatchCount()).isEqualTo(LottoRank.FIRST.getMatchCount());

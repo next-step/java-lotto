@@ -1,10 +1,10 @@
 package lotto.vo;
 
-public class LottoResult {
+public class LottoMatchResult {
     private int matchCount;
     private boolean bonusNumberMatch;
 
-    public LottoResult(int matchCount, boolean bonusNumberMatch) {
+    public LottoMatchResult(int matchCount, boolean bonusNumberMatch) {
         this.matchCount = matchCount;
         this.bonusNumberMatch = bonusNumberMatch;
     }

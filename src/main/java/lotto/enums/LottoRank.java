@@ -1,6 +1,6 @@
 package lotto.enums;
 
-import lotto.vo.LottoResult;
+import lotto.vo.LottoMatchResult;
 
 import java.util.Arrays;
 
@@ -28,7 +28,7 @@ public enum LottoRank {
         return prizeMoney;
     }
 
-    public static LottoRank getRank(LottoResult lottoResult) {
+    public static LottoRank getRank(LottoMatchResult lottoResult) {
         if (SECOND.getMatchCount() == lottoResult.getMatchCount()) {
             return (lottoResult.isBonusNumberMatch() ? SECOND : THIRD);
         }

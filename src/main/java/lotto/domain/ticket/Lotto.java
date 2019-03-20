@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.enums.LottoRank;
-import lotto.vo.LottoResult;
+import lotto.vo.LottoMatchResult;
 
 import java.util.List;
 
@@ -32,10 +32,10 @@ public class Lotto {
         return this.bonusNumber.isEqualTo(target.bonusNumber);
     }
 
-    public LottoResult getResult(Lotto winner) {
+    public LottoMatchResult getResult(Lotto winner) {
         int matchCounts = getMatchCounts(winner);
         boolean bonusNumberSame = isBonusNumberMatch(winner);
 
-        return new LottoResult(matchCounts, bonusNumberSame);
+        return new LottoMatchResult(matchCounts, bonusNumberSame);
     }
 }
