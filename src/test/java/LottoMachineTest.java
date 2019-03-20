@@ -33,6 +33,6 @@ public class LottoMachineTest {
         int tryNo = lottoMachine.getTryNo();
         assertThat(lottoMachine.getTryNo()).isEqualTo(tryNo);
         lottoMachine.machineStart();
-        assertThat(--tryNo);
+        assertThat(lottoMachine.getTryNo()).isEqualTo(--tryNo);
     }
 }
