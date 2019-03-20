@@ -10,6 +10,7 @@ import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTicketMachine;
+import lotto.domain.Prize;
 import org.junit.Test;
 
 public class LottoTest {
@@ -67,15 +68,20 @@ public class LottoTest {
     }
 
     @Test
-    public void 당첨번호_3개부터_6개까지_각_당첨개수_결과를_내는지() {
-        final List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+    public void 당첨결과에_보상순위와_매칭되는_당첨번호보유개수별_결과가_있는지() {
+        final List<Integer> winnerNumbers = Arrays.asList(11, 12, 10, 1, 5, 16);
         final int won = 14000;
 
         LottoTicket lottoTicket = LottoTicketMachine.purchase(won);
 
         Map<Integer, List<Lotto>> lottoResults = lottoTicket.getWinningResult(winnerNumbers);
 
-        assertThat(lottoResults.keySet()).isEqualTo(new HashSet<>(Arrays.asList(3, 4, 5, 6)));
+        assertThat(lottoResults.keySet())
+            .isEqualTo(new HashSet<>(Arrays.asList(
+                Prize.FIRST.getHavingCounts(),
+                Prize.SECOND.getHavingCounts(),
+                Prize.THIRD.getHavingCounts(),
+                Prize.FOURTH.getHavingCounts())));
     }
 
     @Test

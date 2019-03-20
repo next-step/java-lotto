@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Prize;
 
 public class ResultView {
+
     public static void printLottoCounts(final int lottoCounts) {
         System.out.println(lottoCounts + "개를 구매했습니다.");
     }
@@ -23,7 +24,7 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (int i = 3; i <= 6; i++) {
+        for (int i = Prize.FOURTH.getHavingCounts(); i <= Prize.FIRST.getHavingCounts(); i++) {
             StringBuilder statisticsBuilder = new StringBuilder();
 
             statisticsBuilder.append(i).append("개 일치 (")
