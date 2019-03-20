@@ -1,4 +1,4 @@
-package lottery.board;
+package lottery.machine;
 
 import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryRank;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryGameBoard {
+public class LotteryMachine {
 
     private static final int TICKET_PRICE = 1000;
 
@@ -18,11 +18,11 @@ public class LotteryGameBoard {
 
     private List<LotteryTicket> lotteryTickets;
 
-    public LotteryGameBoard() {
+    public LotteryMachine() {
         this(new BoundedUniqueNumbersGenerator(LotteryNumber.LOWER_BOUND_INCLUSIVE, LotteryNumber.UPPER_BOUND_INCLUSIVE));
     }
 
-    public LotteryGameBoard(NumbersGenerator numbersGenerator) {
+    public LotteryMachine(NumbersGenerator numbersGenerator) {
         this.numbersGenerator = numbersGenerator;
     }
 
