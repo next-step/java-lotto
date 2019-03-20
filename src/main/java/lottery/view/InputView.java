@@ -10,8 +10,10 @@ public class InputView {
 
     public static int inputPrice() {
         System.out.println("구매금액을 입력해 주세요");
+
         final int result = sc.nextInt();
         sc.nextLine();
+
         return result;
     }
 
@@ -21,9 +23,11 @@ public class InputView {
 
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
+
         final String[] result = sc.nextLine()
                 .replaceAll(" ", "")
                 .split(",");
+
         System.out.println();
 
         return Arrays.stream(result)

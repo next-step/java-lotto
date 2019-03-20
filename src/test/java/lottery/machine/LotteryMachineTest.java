@@ -1,6 +1,7 @@
 package lottery.machine;
 
 import lottery.domain.LotteryRank;
+import lottery.domain.LotteryWinningStatistics;
 import org.junit.*;
 
 import java.util.Arrays;
@@ -33,7 +34,8 @@ public class LotteryMachineTest {
         final List<Integer> winningNumbers = winningNumbersSupplier.get();
         machine.buyLotteryTicket(2000);
 
-        assertThat(machine.checkWinningNumbers(winningNumbers))
-                .isEqualTo(Arrays.asList(LotteryRank.FIRST, LotteryRank.FIRST));
+        final LotteryWinningStatistics statistics = machine.checkWinningNumbers(winningNumbers);
+        assertThat(statistics.countRank(LotteryRank.FIRST))
+                .isEqualTo(2);
     }
 }

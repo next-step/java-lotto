@@ -1,12 +1,9 @@
 package lottery;
 
 
-import lottery.board.LotteryGameBoard;
-import lottery.domain.LotteryRank;
+import lottery.machine.LotteryMachine;
 import lottery.view.InputView;
 import lottery.view.ResultView;
-
-import java.util.List;
 
 public class Application {
 
@@ -16,14 +13,13 @@ public class Application {
     }
 
     public void run() {
-        LotteryGameBoard board = new LotteryGameBoard();
+        LotteryMachine machine = new LotteryMachine();
         final int price = InputView.inputPrice();
-        final int count = board.buyLotteryTicket(price);
+        final int count = machine.buyLotteryTicket(price);
 
         InputView.viewTicketCount(count);
-        ResultView.viewTickets(board.getTickets());
+        ResultView.viewTickets(machine.getTickets());
 
-        final List<LotteryRank> lotteryRanks = board.checkWinningNumbers(InputView.inputWinningNumbers());
-        ResultView.viewStatistics(price, lotteryRanks);
+        ResultView.viewStatistics(machine.checkWinningNumbers(InputView.inputWinningNumbers()));
     }
 }

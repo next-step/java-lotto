@@ -2,10 +2,11 @@ package lottery.view;
 
 import lottery.domain.LotteryRank;
 import lottery.domain.LotteryTicket;
+import lottery.domain.LotteryWinningStatistics;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -16,32 +17,19 @@ public class ResultView {
             .collect(Collectors.joining("\n")) + "\n");
     }
 
-    public static void viewStatistics(int totalPrice, List<LotteryRank> ranks) {
-        final Map<LotteryRank, Integer> statistics = createStatistics(totalPrice, ranks);
+    public static void viewStatistics(LotteryWinningStatistics statistics) {
+        System.out.println("탕첨통계");
+        System.out.println("---------");
 
-
-        int totalWinningMoney = 0;
-        for (Map.Entry<LotteryRank, Integer> entry : statistics.entrySet()) {
-            totalWinningMoney += (entry.getKey().revenue * entry.getValue());
-            System.out.println(entry.getKey().winningCount + "개 일치 (" + entry.getKey().revenue + ")- " + entry.getValue() + "개");
-        }
-
-        final double v = (double) totalWinningMoney / totalPrice;
-        System.out.printf("총 수익률은 %.2f 입니다", Math.floor(v * 100) / 100);
-    }
-
-    private static Map<LotteryRank, Integer> createStatistics(int totalPrice, List<LotteryRank> ranks) {
-        return Arrays.stream(LotteryRank.values())
+        Arrays.stream(LotteryRank.values())
                 .filter(rank -> rank != LotteryRank.NONE)
-                .collect(Collectors.toMap(
-                        rank -> rank,
-                        rank -> count(ranks, rank)
-                ));
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> viewRank(statistics, rank));
+
+        System.out.printf("총 수익률은 %.2f 입니다", statistics.revenueRate());
     }
 
-    private static int count(List<LotteryRank> ranks, LotteryRank rank) {
-        return (int) ranks.stream()
-                .filter(r -> r == rank)
-                .count();
+    private static void viewRank(LotteryWinningStatistics statistics, LotteryRank rank) {
+        System.out.printf("%d개 일치 (%d원)- %d개\n", rank.winningCount, rank.revenue, statistics.countRank(rank));
     }
 }
