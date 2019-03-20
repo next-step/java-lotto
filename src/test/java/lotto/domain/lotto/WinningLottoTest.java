@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.enums.Rank;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -33,7 +34,7 @@ public class WinningLottoTest {
 
         numbers = Arrays.asList(1, 2, 3, 7, 8, 9);
         WinningLotto winningLotto = new WinningLotto(numbers, 10);
-        assertThat(winningLotto.checkMatchNumbers(lotto)).isEqualTo(3);
+        assertThat(winningLotto.match(lotto)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -43,16 +44,16 @@ public class WinningLottoTest {
 
         numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         WinningLotto winningLotto = new WinningLotto(numbers, 10);
-        assertThat(winningLotto.checkMatchNumbers(lotto)).isEqualTo(6);
+        assertThat(winningLotto.match(lotto)).isEqualTo(Rank.FIRST);
     }
 
     @Test
-    public void 보너스볼_포함_여부_확인() {
+    public void 보너스볼_포함_2등_여부_확인() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 10);
         BasicLotto lotto = new BasicLotto(numbers);
 
         numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         WinningLotto winningLotto = new WinningLotto(numbers, 10);
-        assertTrue(winningLotto.checkBonusNumber(lotto));
+        assertThat(winningLotto.match(lotto)).isEqualTo(Rank.SECOND);
     }
 }
