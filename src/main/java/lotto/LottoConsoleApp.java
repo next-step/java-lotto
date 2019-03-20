@@ -1,28 +1,27 @@
 package lotto;
 
-import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketMachine;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.domain.LottoList;
+import lotto.domain.LottoMachine;
+import lotto.domain.Prize;
+import lotto.view.ConsoleInput;
+import lotto.view.ConsoleOutput;
 
 public class LottoConsoleApp {
 
     public static void main(String[] args) {
-        final int purchaseAmount = InputView.inputPurchaseAmount();
+        final long purchaseAmount = ConsoleInput.inputPurchaseAmount();
 
-        final LottoTicket lottoTicket = LottoTicketMachine.purchase(purchaseAmount);
+        final LottoList lottos = LottoMachine.purchase(purchaseAmount);
 
-        ResultView.printLottoCount(lottoTicket.getLottos().size());
-        ResultView.printLottos(lottoTicket.getLottos());
+        ConsoleOutput.printLottoCount(lottos.size());
+        ConsoleOutput.printLottos(lottos.getLottos());
 
-        final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
-        final Map<Integer, List<Lotto>> winningResult = lottoTicket.getWinningResult(winningNumbers);
+        final Lotto winningLotto = ConsoleInput.inputLastWinningNumbers();
+        final Map<Prize, LottoList> winningResult = LottoMachine.getWinningResult(lottos, winningLotto);
 
-        ResultView.printWinningStatistics(winningResult);
-
-        ResultView.printEarningsRate(lottoTicket.getEarningsRate(winningResult, purchaseAmount));
+        ConsoleOutput.printWinningStatistics(winningResult);
+        ConsoleOutput.printEarningsRate(LottoMachine.getEarningsRate(winningResult, purchaseAmount));
     }
 }

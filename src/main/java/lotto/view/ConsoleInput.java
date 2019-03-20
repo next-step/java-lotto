@@ -3,17 +3,18 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.Lotto;
 
-public class InputView {
+public class ConsoleInput {
 
-    public static int inputPurchaseAmount() {
+    public static long inputPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
 
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputLastWinningNumbers() {
+    public static Lotto inputLastWinningNumbers() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
@@ -25,6 +26,6 @@ public class InputView {
             winningNumbers.add(Integer.parseInt(numbers[i]));
         }
 
-        return winningNumbers;
+        return new Lotto(winningNumbers);
     }
 }

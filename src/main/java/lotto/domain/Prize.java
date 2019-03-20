@@ -7,7 +7,7 @@ public enum Prize {
     FOURTH(3, 5_000);
 
     private int matchingCount;
-    private int money;
+    private long money;
 
     Prize(int matchingCount, int money) {
         this.matchingCount = matchingCount;
@@ -18,7 +18,7 @@ public enum Prize {
         return matchingCount;
     }
 
-    public int getMoney() {
+    public long getMoney() {
         return money;
     }
 
@@ -29,6 +29,6 @@ public enum Prize {
             }
         }
 
-        throw new IllegalArgumentException("NO MATCHED");
+        throw new IllegalArgumentException("NOT EXISTS");
     }
 }

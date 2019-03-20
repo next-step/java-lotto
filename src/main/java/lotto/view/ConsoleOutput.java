@@ -3,9 +3,10 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoList;
 import lotto.domain.Prize;
 
-public class ResultView {
+public class ConsoleOutput {
 
     public static void printLottoCount(final int lottoCount) {
         System.out.println(lottoCount + "개를 구매했습니다.");
@@ -13,26 +14,24 @@ public class ResultView {
 
     public static void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            System.out.println(lotto);
+            System.out.println(lotto.getLottoNumbers());
         }
 
         System.out.println();
     }
 
-    public static void printWinningStatistics(Map<Integer, List<Lotto>> winningResult) {
+    public static void printWinningStatistics(Map<Prize, LottoList> winningResult) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
         for (int i = Prize.FOURTH.getMatchingCount(); i <= Prize.FIRST.getMatchingCount(); i++) {
-            StringBuilder statisticsBuilder = new StringBuilder();
+            Prize prize = Prize.valueOf(i);
+            String output = String.format("%d개 일치(%d원)-%d개", i, prize.getMoney(),winningResult.get(prize).size());
 
-            statisticsBuilder.append(i).append("개 일치 (")
-                .append(Prize.valueOf(i).getMoney()).append("원)-")
-                .append(winningResult.get(i).size()).append("개");
-
-            System.out.println(statisticsBuilder);
+            System.out.println(output);
         }
+
 
         System.out.println();
     }
@@ -40,7 +39,7 @@ public class ResultView {
     public static void printEarningsRate(double earningsRate) {
         System.out.printf("총 수익률은 %.2f입니다", earningsRate);
 
-        if (earningsRate < 1) {
+        if (earningsRate < 1.0) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
     }

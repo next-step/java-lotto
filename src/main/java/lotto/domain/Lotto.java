@@ -34,16 +34,13 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-    public int getContainsCount(final List<Integer> winningNumbers) {
-        int containsCount = 0;
+    public int getContainsCount(final Lotto winningLotto) {
+        Set<Integer> lottoNumbers = new HashSet<>(this.lottoNumbers);
+        Set<Integer> winningNumbers = new HashSet<>(winningLotto.getLottoNumbers());
 
-        for (Integer winningNumber : winningNumbers) {
-            if (this.lottoNumbers.contains(winningNumber)) {
-                containsCount++;
-            }
-        }
+        lottoNumbers.retainAll(winningNumbers);
 
-        return containsCount;
+        return lottoNumbers.size();
     }
 
     public List<Integer> getLottoNumbers() {

@@ -2,11 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.junit.Test;
 
 public class LottoTest {
@@ -22,14 +20,11 @@ public class LottoTest {
 
     @Test
     public void getContainsCount() {
-        Lotto lotto = new Lotto();
-        Set<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
+        Lotto lotto = new Lotto(Arrays.asList(1, 12, 13, 14, 15, 16));
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<Integer> winningNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final int containsCount = lotto.getContainsCount(winningLotto);
 
-        int containsCount = lotto.getContainsCount(winningNumbers);
-        lottoNumbers.retainAll(winningNumbers);
-
-        assertThat(containsCount).isEqualTo(lottoNumbers.size());
+        assertThat(containsCount).isEqualTo(1);
     }
 }
