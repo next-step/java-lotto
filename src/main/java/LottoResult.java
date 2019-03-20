@@ -5,18 +5,9 @@ public class LottoResult {
     private final double totalPrice;
     private int[] matchNumber = new int[7];
 
-    public LottoResult(List<List<Integer>> selectedLottoNumbers, int[] winningNumbers) {
-        totalPrice = selectedLottoNumbers.size() * LottoMachine.LOTTO_PRICE;
-
-        for (int i = 0; i < selectedLottoNumbers.size(); i++) {
-            int match = 0;
-            for (int number : winningNumbers) {
-                if (selectedLottoNumbers.get(i).contains(number)) {
-                    match++;
-                }
-            }
-            matchNumber[match]++;
-        }
+    public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
+        totalPrice = lottos.size() * LottoMachine.LOTTO_PRICE;
+        lottos.forEach(lotto -> matchNumber[lotto.getMatchNumber(winningLotto)]++);
     }
 
     public double getProfit() {

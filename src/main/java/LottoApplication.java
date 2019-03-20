@@ -5,13 +5,12 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine(InputView.getPrice());
         ResultView.printBuyLotto(lottoMachine.getTryNo());
-
-        List<List<Integer>> selectedLottoNumbers = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         while (!lottoMachine.isEnd()) {
-            List<Integer> selectedLottoNumber = lottoMachine.machineStart();
-            selectedLottoNumbers.add(selectedLottoNumber);
-            ResultView.printLottoNumber(selectedLottoNumber);
+            Lotto lotto = lottoMachine.machineStart();
+            lottos.add(lotto);
+            ResultView.printLottoNumber(lotto);
         }
-        ResultView.printStatics(new LottoResult(selectedLottoNumbers, InputView.getWinningNumbers()));
+        ResultView.printStatics(new LottoResult(lottos, InputView.getWinningNumbers()));
     }
 }

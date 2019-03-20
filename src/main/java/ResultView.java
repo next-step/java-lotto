@@ -6,8 +6,8 @@ public class ResultView {
         System.out.println(number + "개를 구입하였습니다.");
     }
 
-    public static void printLottoNumber(List<Integer> lottoNumber) {
-        System.out.println(lottoNumber);
+    public static void printLottoNumber(Lotto lotto) {
+        System.out.println(lotto);
     }
 
     public static void printStatics(LottoResult lottoResult) {

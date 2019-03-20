@@ -1,5 +1,7 @@
+
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     public static int getPrice() {
@@ -7,12 +9,11 @@ public class InputView {
         return new Scanner(System.in).nextInt();
     }
 
-    public static int[] getWinningNumbers() {
+    public static Lotto getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        return Arrays.stream(new Scanner(System.in).nextLine().split(", "))
+        return new Lotto(Arrays.stream(new Scanner(System.in).nextLine().split(", "))
                 .mapToInt(Integer::parseInt)
-                .toArray();
-
+                .boxed()
+                .collect(Collectors.toList()));
     }
 }

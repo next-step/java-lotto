@@ -1,6 +1,3 @@
-
-import java.util.List;
-
 public class LottoMachine {
 
     public static final int LOTTO_PRICE = 1000;
@@ -12,9 +9,9 @@ public class LottoMachine {
         this.lottoGenerator = new LottoGenerator();
     }
 
-    public List<Integer> machineStart() {
+    public Lotto machineStart() {
         tryNo--;
-        return lottoGenerator.createNumbers();
+        return new Lotto(lottoGenerator.createNumbers());
     }
 
     public int getTryNo() {
