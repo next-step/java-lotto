@@ -7,8 +7,8 @@ import lotto.domain.Prize;
 
 public class ResultView {
 
-    public static void printLottoCounts(final int lottoCounts) {
-        System.out.println(lottoCounts + "개를 구매했습니다.");
+    public static void printLottoCount(final int lottoCount) {
+        System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
     public static void printLottos(List<Lotto> lottos) {

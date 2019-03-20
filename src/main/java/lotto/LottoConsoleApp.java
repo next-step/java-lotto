@@ -15,7 +15,7 @@ public class LottoConsoleApp {
 
         final LottoTicket lottoTicket = LottoTicketMachine.purchase(purchaseAmount);
 
-        ResultView.printLottoCounts(lottoTicket.getLottos().size());
+        ResultView.printLottoCount(lottoTicket.getLottos().size());
         ResultView.printLottos(lottoTicket.getLottos());
 
         final List<Integer> winningNumbers = InputView.inputLastWinningNumbers();
