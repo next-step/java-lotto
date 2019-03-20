@@ -1,37 +1,21 @@
 package lotto.view;
 
-import lotto.domain.lotto.BasicLotto;
-import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 import lotto.view.vo.MatchResult;
 
-import java.util.List;
-
 public class OutputView {
 
-    public static void generateResult(List<BasicLotto> lottos, WinningLotto winningLotto) {
-        for (BasicLotto lotto : lottos) {
-            int matchCount = winningLotto.checkMatchNumbers(lotto);
-            calculateMatchCount(matchCount);
+    public static void printResultStatistics(MatchResult matchResult) {
+        System.out.println("당첨통계");
+        System.out.println("-------");
+
+        for (Rank rank : Rank.values()) {
+            System.out.println(rank.toString() + matchResult.getRanks().get(rank));
         }
     }
 
-    private static void calculateMatchCount(int matchCount) {
-        for (Rank rank : Rank.values()) {
-            if (matchCount == rank.getCountOfMatch()) {
-                MatchResult.addMatchCount(rank.getCountOfMatch());
-            }
-        }
-    }
-
-    public static String getRewardPercent(int money) {
-        int reward = 0;
-
-        for (Rank rank : Rank.values()) {
-            reward += (rank.getWinningMoney() * MatchResult.getMatchCount(rank.getCountOfMatch()));
-        }
-
-        double percent = (double) reward / money;
-        return String.format("%.2f", percent);
+    public static void printRewardPercent(double percent) {
+        System.out.println("총 수익률은 " + String.format("%.2f", percent) + "입니다.");
+        System.out.println("수익률이 1이면 본전");
     }
 }

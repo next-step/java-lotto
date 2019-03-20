@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,13 +14,7 @@ public class BasicLottoTest {
 
     @Before
     public void setUp() throws Exception {
-        numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(5);
-        numbers.add(6);
+        numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test

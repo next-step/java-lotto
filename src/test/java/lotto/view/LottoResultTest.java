@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OutputViewTest {
+public class LottoResultTest {
 
     @Test
     public void 열개_모두_5등일경우_수익률_5배() {
@@ -24,10 +24,11 @@ public class OutputViewTest {
         scanner = new Scanner("1, 3, 5, 8, 9, 10");
         List<Integer> winningLottoNumbers
             = InputView.getWinningLottoNumbers("지난 주 당첨 번호를 입력해 주세요.", ",", scanner);
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, 20);
 
-        OutputView.generateResult(lottos, winningLotto);
+        LottoResult lottoResult = new LottoResult(winningLotto);
+        lottoResult.generate(lottos);
 
-        assertThat(OutputView.getRewardPercent(money)).isEqualTo("5.00");
+        assertThat(lottoResult.getRewardPercent(money)).isEqualTo("5.00");
     }
 }
