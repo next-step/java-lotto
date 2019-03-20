@@ -10,37 +10,6 @@ import org.junit.Test;
 public class LottoVendingMachineTest {
 
   @Test
-  public void test_game() {
-
-    // Given
-    Money purchaseAmount = new Money(1000);
-
-    int firstMatchNumber = 3;
-    int secondMatchNumber = 12;
-    int thirdMatchNumber = 25;
-    int fourthMatchNumber = 36;
-    int fifthMatchNumber = 40;
-    int sixthMatchNumber = 19;
-    TestNumberGenerator testNumberGenerator = new TestNumberGenerator(
-        firstMatchNumber,
-        secondMatchNumber,
-        thirdMatchNumber,
-        fourthMatchNumber,
-        fifthMatchNumber,
-        sixthMatchNumber);
-
-    TestConsoleInputView testInputView = new TestConsoleInputView(purchaseAmount, testNumberGenerator.generate());
-
-    // When
-    LottoVendingMachine lottoVendingMachine
-        = new LottoVendingMachine(testInputView, testNumberGenerator);
-    String yield = lottoVendingMachine.game();
-
-    // Then
-    assertThat(yield).isEqualTo("2000000.00");
-  }
-
-  @Test
   public void test_purchaseLotto_by_inputMoney() {
 
     // Given
