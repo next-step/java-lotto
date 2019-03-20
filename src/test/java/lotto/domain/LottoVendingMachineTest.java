@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.view.TestConsoleInputView;
 import org.junit.Test;
 
 public class LottoVendingMachineTest {
@@ -302,7 +301,8 @@ public class LottoVendingMachineTest {
     Money winMoney = new Money(5000);
 
     // When
-    String yield = LottoVendingMachine.yield(purchaseMoney, winMoney);
+    LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
+    String yield = lottoVendingMachine.yield(purchaseMoney, winMoney);
 
     // Then
     assertThat(yield).isEqualTo("0.36");

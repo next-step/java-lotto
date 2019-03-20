@@ -14,18 +14,10 @@ public class Lotto {
     return this.numbers;
   }
 
-  int winMatch(List<Number> winNumbers) {
+  public int winMatch(List<Number> winNumbers) {
 
-    int matchCount = 0;
-
-    for (Number lottoNumber : numbers) {
-      for (Number winNumber : winNumbers) {
-        if (lottoNumber.equals(winNumber)) {
-          matchCount++;
-        }
-      }
-    }
-
-    return matchCount;
+    return (int)winNumbers.stream()
+        .filter(winNumber -> numbers.contains(winNumber))
+        .count();
   }
 }
