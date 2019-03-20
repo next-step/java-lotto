@@ -6,6 +6,7 @@ import java.util.Objects;
 
 class LottoNumber {
     private static final Map<Integer, LottoNumber> lottoNos = new HashMap<>();
+
     static {
         for (int i = 1; i < 46; i++) {
             lottoNos.put(i, new LottoNumber(i));

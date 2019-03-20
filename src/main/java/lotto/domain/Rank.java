@@ -26,10 +26,6 @@ public enum Rank {
         return winningMoney;
     }
 
-    public Money prize(int countOfMatchLotto) {
-        return new Money(countOfMatchLotto * winningMoney);
-    }
-
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         if (countOfMatch < WINNING_MIN_COUNT) {
             return MISS;
