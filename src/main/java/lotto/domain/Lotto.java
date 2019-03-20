@@ -1,14 +1,18 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.LottoRandomNumberGenerator;
 
 public class Lotto {
+
+    public static final int LOTTO_SIZE = 6;
     private List<Integer> lottoNumbers;
 
     public Lotto() {
-        this.lottoNumbers = new ArrayList<>();
         this.publish();
     }
 
@@ -17,17 +21,17 @@ public class Lotto {
     }
 
     private List<Integer> publish() {
-        for (int i = 0; i < 6; i++) {
-            int randomNumber = LottoRandomNumberGenerator.next();
+        Set<Integer> numbers = new HashSet<>(LOTTO_SIZE);
 
-            while(this.lottoNumbers.contains(randomNumber)) {
-                randomNumber = LottoRandomNumberGenerator.next();
-            }
-
-            this.lottoNumbers.add(randomNumber);
+        while (numbers.size() < LOTTO_SIZE) {
+            numbers.add(LottoRandomNumberGenerator.next());
         }
 
-        return lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(numbers);
+
+        Collections.shuffle(this.lottoNumbers);
+
+        return this.lottoNumbers;
     }
 
     public int getContainsCount(final List<Integer> winningNumbers) {

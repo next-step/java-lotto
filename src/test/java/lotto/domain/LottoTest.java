@@ -12,6 +12,15 @@ import org.junit.Test;
 public class LottoTest {
 
     @Test
+    public void publish() {
+        Lotto lotto = new Lotto();
+
+        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+
+        assertThat(new HashSet<>(lottoNumbers).size()).isEqualTo(Lotto.LOTTO_SIZE);
+    }
+
+    @Test
     public void getContainsCount() {
         Lotto lotto = new Lotto();
         Set<Integer> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
