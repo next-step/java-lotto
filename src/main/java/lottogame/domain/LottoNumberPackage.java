@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
+import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
+
 /**
  * 로또 1게임
  */
@@ -55,13 +58,13 @@ public class LottoNumberPackage implements InputValidatable<List<Integer>> {
     }
 
     @Override
-    public boolean isInvalid(List<Integer> lottoNumbers) {
-        return lottoNumbers == null || lottoNumbers.size() != LOTTO_GAME_SIZE;
+    public boolean isInvalid(List<Integer> target) {
+        return target == null || target.size() != LOTTO_GAME_SIZE;
     }
 
     @Override
     public String getInvalidMessage() {
-        return null;
+        return MINIMUM_LOTTO_NUMBER + "에서 " + MAXIMUM_LOTTO_NUMBER + "까지 중복없이 숫자 " + LOTTO_GAME_SIZE + "개를 입력하세요.";
     }
 
     @Override
