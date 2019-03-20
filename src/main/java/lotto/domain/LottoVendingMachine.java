@@ -1,41 +1,25 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import lotto.view.ConsoleInputView;
+import lotto.view.ConsoleResultView;
 
-class LottoVendingMachine {
+public class LottoVendingMachine {
 
   private static final int LOTTE_PRICE = 1000;
 
-  private InputView inputView;
   private NumberGenerator numberGenerator;
 
-  LottoVendingMachine() {
-    this.inputView = new InputView();
+  public LottoVendingMachine() {
     this.numberGenerator = new NumberGenerator();
   }
 
-  LottoVendingMachine(InputView inputView, NumberGenerator numberGenerator) {
-    this.inputView = inputView;
+  public LottoVendingMachine(NumberGenerator numberGenerator) {
     this.numberGenerator = numberGenerator;
   }
 
-  String game() {
-
-    Money purchaseMoney = inputView.inputPurchaseAmount();
-    List<Lotto> purchaseLottoList = purchaseLotto(purchaseMoney);
-
-    List<Number> winNumber = inputView.inputWinNumbers();
-
-    ResultView.printResultTitle();
-
-    Money winMoney = totalWinMoney(purchaseLottoList, winNumber);
-    return yield(purchaseMoney, winMoney);
-  }
-
-  List<Lotto> purchaseLotto(Money purchaseAmount) {
+  public List<Lotto> purchaseLotto(Money purchaseAmount) {
 
     int issueCount = (int)purchaseAmount.amount() / LOTTE_PRICE;
 
@@ -48,7 +32,7 @@ class LottoVendingMachine {
     return lottoList;
   }
 
-  Money totalWinMoney(List<Lotto> lottoList, List<Number> winNumbers) {
+  public Money totalWinMoney(List<Lotto> lottoList, List<Number> winNumbers) {
 
     Money totalWinMoney = new Money(0);
     for (int matchCount = 3; matchCount <= 6; matchCount++) {
@@ -60,7 +44,7 @@ class LottoVendingMachine {
     return totalWinMoney;
   }
 
-  Money winMoney(int matchCount, long winCount) {
+  public Money winMoney(int matchCount, long winCount) {
 
     Money winMoney;
     switch(matchCount) {
@@ -81,7 +65,7 @@ class LottoVendingMachine {
     }
     System.out.println(winMoney);
 
-    ResultView.printMatchWinCount(matchCount, winMoney, winCount);
+    ConsoleResultView.printMatchWinCount(matchCount, winMoney, winCount);
     return winMoney.count(winCount);
   }
 
@@ -91,11 +75,11 @@ class LottoVendingMachine {
         .count();
   }
 
-  static String yield(Money purchaseMoney, Money winMoney) {
+  public String yield(Money purchaseMoney, Money winMoney) {
 
     String yield = winMoney.division(purchaseMoney);
 
-    ResultView.printYield(yield);
+    ConsoleResultView.printYield(yield);
     return yield;
   }
 }

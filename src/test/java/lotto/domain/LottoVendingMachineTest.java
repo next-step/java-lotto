@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.view.TestInputView;
+import lotto.view.TestConsoleInputView;
 import org.junit.Test;
 
 public class LottoVendingMachineTest {
@@ -29,7 +29,7 @@ public class LottoVendingMachineTest {
         fifthMatchNumber,
         sixthMatchNumber);
 
-    TestInputView testInputView = new TestInputView(purchaseAmount, testNumberGenerator.generate());
+    TestConsoleInputView testInputView = new TestConsoleInputView(purchaseAmount, testNumberGenerator.generate());
 
     // When
     LottoVendingMachine lottoVendingMachine

@@ -1,18 +1,15 @@
 package lotto.view;
 
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Scanner;
-import lotto.Money;
-import lotto.Number;
+import lotto.domain.Money;
+import lotto.domain.Number;
 
-public class TestInputView extends InputView {
+public class TestConsoleInputView extends ConsoleInputView {
 
   private Money money;
   private List<Number> winNumbers;
 
-  public TestInputView(Money money, List<Number> winNumbers) {
+  public TestConsoleInputView(Money money, List<Number> winNumbers) {
     this.money = money;
     this.winNumbers = winNumbers;
   }

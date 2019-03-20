@@ -2,10 +2,10 @@ package lotto.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.Money;
-import lotto.Number;
+import lotto.domain.Money;
+import lotto.domain.Number;
 
-public class ResultView {
+public class ConsoleResultView {
 
   public static void printIssueLottoNumbers(List<Number> numbers) {
 
