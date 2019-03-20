@@ -7,12 +7,11 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.Money;
 import lotto.domain.Number;
+import lotto.domain.WinStats;
 
 public class ConsoleView {
 
   private static final ConsoleInputView consoleInputView = new ConsoleInputView();
-
-  private static final LottoVendingMachine lottoVendingMachine = new LottoVendingMachine();
 
   public static void main(String[] args) {
 
@@ -22,16 +21,35 @@ public class ConsoleView {
     String winNumberString = consoleInputView.inputWinNumbers();
     List<Number> winNumber = winNumbers(winNumberString);
 
-    ConsoleResultView.printResultTitle();
-
-    Money winMoney = lottoVendingMachine.totalWinMoney(purchaseLottoList, winNumber);
-    lottoVendingMachine.yield(new Money(insertMoney), winMoney);
+    winState(insertMoney, purchaseLottoList, winNumber);
   }
 
-  public static List<Lotto> issueLotto(int insertMoney) {
+  private static void winState(
+      int insertMoney,
+      List<Lotto> purchaseLottoList,
+      List<Number> winNumber) {
+    ConsoleResultView.printResultTitle();
+
+    WinStats winStats = new WinStats(purchaseLottoList, winNumber);
+    winStats.total();
+
+    ConsoleResultView.printMatchWinCount(
+        3, winStats.getThreeWinMoney(), winStats.getThreeWinCount());
+    ConsoleResultView.printMatchWinCount(
+        4, winStats.getFourWinMoney(), winStats.getFourWinCount());
+    ConsoleResultView.printMatchWinCount(
+        5, winStats.getFiveWinMoney(), winStats.getFiveWinCount());
+    ConsoleResultView.printMatchWinCount(
+        6, winStats.getSixWinMoney(), winStats.getSixWinCount());
+
+    String yield = winStats.yield(new Money(insertMoney));
+    ConsoleResultView.printYield(yield);
+  }
+
+  private static List<Lotto> issueLotto(int insertMoney) {
 
     Money purchaseMoney = new Money(insertMoney);
-    List<Lotto> purchaseLottoList = lottoVendingMachine.purchaseLotto(purchaseMoney);
+    List<Lotto> purchaseLottoList = new LottoVendingMachine().purchaseLotto(purchaseMoney);
     for (Lotto lotto : purchaseLottoList) {
       ConsoleResultView.printIssueLottoNumbers(lotto.getNumbers());
     }
@@ -39,9 +57,9 @@ public class ConsoleView {
     return purchaseLottoList;
   }
 
-  public static List<Number> winNumbers(String winNumberString) {
+  private static List<Number> winNumbers(String winNumberString) {
 
-    String[] winNumberArray = winNumberString.split(", ");
+    String[] winNumberArray = winNumberString.split(",");
     return Arrays.stream(winNumberArray)
         .map(Number::new)
         .collect(Collectors.toList());

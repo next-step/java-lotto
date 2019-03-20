@@ -10,16 +10,17 @@ public class Money {
     this.value = value;
   }
 
-  void sum(Money money) {
+  public Money sum(Money money) {
     this.value += money.value;
-  }
-
-  Money count(long winCount) {
-    this.value *= winCount;
     return this;
   }
 
-  String division(Money winMoney) {
+  public Money count(WinCount winCount) {
+    this.value *= winCount.count();
+    return this;
+  }
+
+  public String division(Money winMoney) {
     return String.format("%.2f", (float)this.value / winMoney.value);
   }
 
@@ -45,7 +46,7 @@ public class Money {
     return value + "";
   }
 
-  long amount() {
+  public long amount() {
     return value;
   }
 }

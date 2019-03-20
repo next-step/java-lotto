@@ -11,7 +11,7 @@ public class Number {
   }
 
   public Number(String value) {
-    this.value = Integer.parseInt(value);
+    this.value = Integer.parseInt(value.trim());
   }
 
   @Override

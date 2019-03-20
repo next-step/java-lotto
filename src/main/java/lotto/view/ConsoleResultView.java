@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Money;
 import lotto.domain.Number;
+import lotto.domain.WinCount;
 
 public class ConsoleResultView {
 
@@ -16,9 +17,9 @@ public class ConsoleResultView {
     System.out.println("[" + numbersString + "]");
   }
 
-  public static void printMatchWinCount(int matchCount, Money winMoney, long winCount) {
+  public static void printMatchWinCount(int matchCount, Money winMoney, WinCount winCount) {
 
-    System.out.println(matchCount + "개 일치 (" + winMoney + "원) - " + winCount +"개");
+    System.out.println(matchCount + "개 일치 (" + winMoney + "원) - " + winCount.count() +"개");
   }
 
   public static void printYield(String yield) {
