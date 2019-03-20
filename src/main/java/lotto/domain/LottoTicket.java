@@ -34,12 +34,12 @@ public class LottoTicket {
             for (Lotto lotto : this.lottos) {
                 int containsCount = lotto.getContainsCount(winningNumbers);
 
-                if (containsCount == prize.getHavingCounts()) {
+                if (containsCount == prize.getMatchingCount()) {
                     winningLottos.add(lotto);
                 }
             }
 
-            lottoResult.put(prize.getHavingCounts(), winningLottos);
+            lottoResult.put(prize.getMatchingCount(), winningLottos);
         }
 
         return lottoResult;
@@ -48,7 +48,7 @@ public class LottoTicket {
     public double getEarningsRate(final Map<Integer, List<Lotto>> lottoResult, final int purchaseAmount) {
         int totalPrizeMoney = 0;
         for (Prize prize : Prize.values()) {
-            totalPrizeMoney += lottoResult.get(prize.getHavingCounts()).size() * prize.getMoney();
+            totalPrizeMoney += lottoResult.get(prize.getMatchingCount()).size() * prize.getMoney();
         }
 
         return totalPrizeMoney / (double) purchaseAmount;

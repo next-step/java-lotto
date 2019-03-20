@@ -24,11 +24,11 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (int i = Prize.FOURTH.getHavingCounts(); i <= Prize.FIRST.getHavingCounts(); i++) {
+        for (int i = Prize.FOURTH.getMatchingCount(); i <= Prize.FIRST.getMatchingCount(); i++) {
             StringBuilder statisticsBuilder = new StringBuilder();
 
             statisticsBuilder.append(i).append("개 일치 (")
-                .append(Prize.havingCountsOf(i).getMoney()).append("원)-")
+                .append(Prize.valueOf(i).getMoney()).append("원)-")
                 .append(winningResult.get(i).size()).append("개");
 
             System.out.println(statisticsBuilder);

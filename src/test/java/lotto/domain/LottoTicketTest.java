@@ -45,7 +45,7 @@ public class LottoTicketTest {
             .getWinningResult(winningLotto.getLottoNumbers());
 
         for (Prize prize : Prize.values()) {
-            assertThat(lottoResult.get(prize.getHavingCounts()).size()).isEqualTo(1);
+            assertThat(lottoResult.get(prize.getMatchingCount()).size()).isEqualTo(1);
         }
     }
 
@@ -67,7 +67,7 @@ public class LottoTicketTest {
 
         int totalPrizeMoney = 0;
         for (Prize prize : Prize.values()) {
-            totalPrizeMoney += lottoResult.get(prize.getHavingCounts()).size() * prize.getMoney();
+            totalPrizeMoney += lottoResult.get(prize.getMatchingCount()).size() * prize.getMoney();
         }
 
         assertThat(lottoTicket.getEarningsRate(lottoResult, purchaseAmount)).isEqualTo(totalPrizeMoney / purchaseAmount);
@@ -97,7 +97,7 @@ public class LottoTicketTest {
 
         int totalPrizeMoney = 0;
         for (Prize prize : Prize.values()) {
-            totalPrizeMoney += lottoResult.get(prize.getHavingCounts()).size() * prize.getMoney();
+            totalPrizeMoney += lottoResult.get(prize.getMatchingCount()).size() * prize.getMoney();
         }
 
         double result = lottoTicket.getEarningsRate(lottoResult, purchaseAmount);

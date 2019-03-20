@@ -78,10 +78,10 @@ public class LottoTest {
 
         assertThat(lottoResults.keySet())
             .isEqualTo(new HashSet<>(Arrays.asList(
-                Prize.FIRST.getHavingCounts(),
-                Prize.SECOND.getHavingCounts(),
-                Prize.THIRD.getHavingCounts(),
-                Prize.FOURTH.getHavingCounts())));
+                Prize.FIRST.getMatchingCount(),
+                Prize.SECOND.getMatchingCount(),
+                Prize.THIRD.getMatchingCount(),
+                Prize.FOURTH.getMatchingCount())));
     }
 
     @Test

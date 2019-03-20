@@ -6,25 +6,25 @@ public enum Prize {
     THIRD(4, 50_000),
     FOURTH(3, 5_000);
 
-    private int havingCounts;
+    private int matchingCount;
     private int money;
 
-    Prize(int havingCounts, int money) {
-        this.havingCounts = havingCounts;
+    Prize(int matchingCount, int money) {
+        this.matchingCount = matchingCount;
         this.money = money;
     }
 
-    public int getHavingCounts() {
-        return havingCounts;
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
     public int getMoney() {
         return money;
     }
 
-    public static Prize havingCountsOf(int hasWinningNumberCounts) {
+    public static Prize valueOf(int matchingCount) {
         for (Prize prize : Prize.values()) {
-            if (prize.havingCounts == hasWinningNumberCounts) {
+            if (prize.matchingCount == matchingCount) {
                 return prize;
             }
         }
