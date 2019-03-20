@@ -10,8 +10,8 @@ public class Money {
     this.value = value;
   }
 
-  void add(Money threeMatchWinMoney) {
-    this.value += threeMatchWinMoney.value;
+  void sum(Money money) {
+    this.value += money.value;
   }
 
   Money count(long winCount) {

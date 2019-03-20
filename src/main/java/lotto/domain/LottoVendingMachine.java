@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.view.ConsoleInputView;
 import lotto.view.ConsoleResultView;
 
 public class LottoVendingMachine {
@@ -38,7 +37,7 @@ public class LottoVendingMachine {
     for (int matchCount = 3; matchCount <= 6; matchCount++) {
 
       long winCount = winCount(matchCount, lottoList, winNumbers);
-      totalWinMoney.add(winMoney(matchCount, winCount));
+      totalWinMoney.sum(winMoney(matchCount, winCount));
     }
 
     return totalWinMoney;
