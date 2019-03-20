@@ -1,14 +1,27 @@
 package lotto.domain.ticket;
 
 import lotto.enums.LottoRank;
+import lotto.vo.LottoResult;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
+    @Test
+    public void 생성_시_보너스_번호가_로또번호와_중복되면_IllegalArgumentException() {
+        // given
+        int bonusNumber = 45;
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, bonusNumber);
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumbers, bonusNumber));
+    }
+
     @Test
     public void matchCount_구하기() {
         // given
@@ -39,11 +52,33 @@ public class LottoTest {
         Lotto different = new Lotto(lottoNumbers, otherBonusNumber);
 
         // when
-        boolean shouldBeTrue = target.isBonusNumberSame(same);
-        boolean shouldBeFalse = target.isBonusNumberSame(different);
+        boolean shouldBeTrue = target.isBonusNumberMatch(same);
+        boolean shouldBeFalse = target.isBonusNumberMatch(different);
 
         // then
         assertThat(shouldBeTrue).isTrue();
         assertThat(shouldBeFalse).isFalse();
+    }
+
+    @Test
+    public void 로또_결과_가져오기() {
+        // given
+        int bonusNumber = 45;
+        int otherBonusNumber = 44;
+
+        Lotto winner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto first = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16), otherBonusNumber);
+
+        // when
+        LottoResult resultOfFirst = first.getResult(winner);
+        LottoResult resultOfSecond = second.getResult(winner);
+
+        // then
+        assertThat(resultOfFirst.getMatchCount()).isEqualTo(LottoRank.FIRST.getMatchCount());
+        assertThat(resultOfFirst.isBonusNumberMatch()).isTrue();
+
+        assertThat(resultOfSecond.getMatchCount()).isEqualTo(LottoRank.SECOND.getMatchCount());
+        assertThat(resultOfSecond.isBonusNumberMatch()).isFalse();
     }
 }

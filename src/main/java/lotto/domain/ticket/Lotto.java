@@ -1,6 +1,8 @@
 package lotto.domain.ticket;
 
 import lotto.enums.LottoRank;
+import lotto.vo.LottoResult;
+
 import java.util.List;
 
 public class Lotto {
@@ -8,21 +10,32 @@ public class Lotto {
     private final LottoNumber bonusNumber;
 
     public Lotto(List<Integer> lottoNumbers, int bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("Lotto number must be unique");
+        }
+
         this.lottoNumbers = new LottoNumbers(lottoNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public int getMatchCounts(Lotto target) {
+    int getMatchCounts(Lotto target) {
         int matchCounts = this.lottoNumbers.getNumberOfDuplicatedNumbers(target.lottoNumbers);
 
-        if ((LottoRank.THIRD.getMatchCount() == matchCounts) && (isBonusNumberSame(target))) {
+        if ((LottoRank.THIRD.getMatchCount() == matchCounts) && (isBonusNumberMatch(target))) {
             return LottoRank.SECOND.getMatchCount();
         }
 
         return matchCounts;
     }
 
-    public boolean isBonusNumberSame(Lotto target) {
-        return this.bonusNumber.equalsTo(target.bonusNumber);
+    boolean isBonusNumberMatch(Lotto target) {
+        return this.bonusNumber.isEqualTo(target.bonusNumber);
+    }
+
+    public LottoResult getResult(Lotto winner) {
+        int matchCounts = getMatchCounts(winner);
+        boolean bonusNumberSame = isBonusNumberMatch(winner);
+
+        return new LottoResult(matchCounts, bonusNumberSame);
     }
 }
