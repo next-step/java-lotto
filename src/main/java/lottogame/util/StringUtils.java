@@ -2,6 +2,7 @@ package lottogame.util;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringUtils {
 
@@ -28,45 +29,10 @@ public class StringUtils {
         return sb.toString();
     }
 
-    public static int parseInt(String s) {
-        return Optional.ofNullable(s)
-                        .map(String::trim)
-                        .map(StringUtils::getInteger)
-                        .orElse(0);
-    }
-
-    public static long parseLong(String s) {
-        return Optional.ofNullable(s)
-                .map(String::trim)
-                .map(StringUtils::getLong)
-                .orElse(0L);
-    }
-
-
-    public static Integer getInteger(String str) {
-        try {
-            return Integer.valueOf(str);
-        } catch(Exception e) {
-            return 0;
-        }
-    }
-
-    public static Long getLong(String str) {
-        try {
-            return Long.valueOf(str);
-        } catch(Exception e) {
-            return 0L;
-        }
-    }
-
     public static List<Integer> parseIntegerList(String[] strings) {
-        return Optional.ofNullable(strings)
-                        .filter(array -> array.length > 0)
-                        .map(Arrays::asList)
-                        .orElse(Collections.emptyList())
-                        .stream()
-                        .filter(s -> !StringUtils.isEmpty(s))
-                        .map(StringUtils::getInteger)
+        return Arrays.stream(strings)
+                        .filter(string -> !StringUtils.isEmpty(string))
+                        .map(Integer::parseInt)
                         .collect(Collectors.toList());
     }
 

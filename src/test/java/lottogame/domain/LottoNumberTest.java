@@ -32,12 +32,12 @@ public class LottoNumberTest {
     }
 
     @Test
-    public void equals() {
-        List<Integer> expectedNumbers = getValidLottoNumbers();
+    public void equalsNumber() {
+        List<Integer> validLottoNumbers = getValidLottoNumbers();
 
-        for( int expected : expectedNumbers ) {
-            lottoNumber = new LottoNumber(expected);
-            assertTrue(lottoNumber.equals(expected));
+        for( int curNumber : validLottoNumbers ) {
+            lottoNumber = new LottoNumber(curNumber);
+            assertTrue(lottoNumber.equalsNumber(curNumber));
         }
     }
 

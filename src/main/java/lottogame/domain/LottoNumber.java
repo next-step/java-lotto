@@ -24,7 +24,7 @@ public class LottoNumber {
         return number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER;
     }
 
-    public boolean equals(int number) {
+    public boolean equalsNumber(int number) {
         return this.number == number;
     }
 

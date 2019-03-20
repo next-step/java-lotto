@@ -18,7 +18,7 @@ public class InputView {
 
     public static PurchaseAmount getPurchaseAmount() {
         showPurchaseAmountInputMessage();
-        return new PurchaseAmount(StringUtils.parseLong(getInputLine()));
+        return new PurchaseAmount(Long.parseLong(getInputLine()));
     }
 
     static void showPurchaseAmountInputMessage() {
@@ -27,11 +27,15 @@ public class InputView {
 
     public static WinningNumbers getWinningNumbers() {
         showWinningNumbersInputMessage();
-        return new WinningNumbers(new LottoGame(getInputLine().split(NUMBER_DELIMETER)));
+        return new WinningNumbers(getLottoGame());
     }
 
     static void showWinningNumbersInputMessage() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    static LottoGame getLottoGame() {
+        return new LottoGame(StringUtils.parseIntegerList(getInputLine().split(NUMBER_DELIMETER)));
     }
 
     static String getInputLine() {

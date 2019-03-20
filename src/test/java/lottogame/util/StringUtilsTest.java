@@ -44,29 +44,13 @@ public class StringUtilsTest {
         assertEquals("abcdabcdabcd", StringUtils.repeat("abcd", 3));
     }
 
-    @Test
-    public void parseInt() {
-        assertEquals(0, StringUtils.parseInt(null));
-        assertEquals(0, StringUtils.parseInt(""));
-        assertEquals(0, StringUtils.parseInt("a"));
-        assertEquals(12345, StringUtils.parseInt("12345"));
-        assertEquals(Integer.MAX_VALUE+1, StringUtils.parseInt(String.valueOf(Integer.MAX_VALUE+1)));
-        assertEquals(Integer.MIN_VALUE-1, StringUtils.parseInt(String.valueOf(Integer.MIN_VALUE-1)));
-    }
-
-    @Test
-    public void parseLong() {
-        assertEquals(0L, StringUtils.parseLong(null));
-        assertEquals(0L, StringUtils.parseLong(""));
-        assertEquals(0L, StringUtils.parseLong("a"));
-        assertEquals(0L, StringUtils.parseInt(String.valueOf(Long.MAX_VALUE+1)));
-        assertEquals(0L, StringUtils.parseInt(String.valueOf(Long.MIN_VALUE-1)));
-        assertEquals(12345L, StringUtils.parseInt("12345"));
+    @Test(expected = NullPointerException.class)
+    public void parseIntegerList_for_null() {
+        assertEquals(Collections.emptyList(), StringUtils.parseIntegerList(null));
     }
 
     @Test
     public void parseIntegerList_for_empty_arrays() {
-        assertEquals(Collections.emptyList(), StringUtils.parseIntegerList(null));
         assertEquals(Collections.emptyList(), StringUtils.parseIntegerList(new String[]{}));
         assertEquals(Collections.emptyList(), StringUtils.parseIntegerList(new String[]{""}));
         assertEquals(Collections.emptyList(), StringUtils.parseIntegerList(new String[]{"", "", ""}));

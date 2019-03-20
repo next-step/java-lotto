@@ -8,30 +8,27 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final PurchaseAmount purchaseAmount;
-    private final PurchaseCount purchaseCount;
+    private final PurchaseInfo purchaseInfo;
     private final List<LottoGame> automaticNumbers;
+    private LottoNumberGenerator lottoNumberGenerator;
 
-    private static final LottoNumberGenerator lottoNumberGenerator = new LottoNumberGeneratorImpl();
-
-    public LottoTicket(PurchaseAmount purchaseAmount) {
-        this.purchaseAmount = purchaseAmount;
-        purchaseCount = new PurchaseCount(purchaseAmount.getLottoCount());
-        automaticNumbers = lottoNumberGenerator.generate(purchaseCount.getValue());
+    public LottoTicket(PurchaseInfo purchaseInfo, LottoNumberGenerator lottoNumberGenerator) {
+        this.purchaseInfo = purchaseInfo;
+        this.lottoNumberGenerator = lottoNumberGenerator;
+        automaticNumbers = this.lottoNumberGenerator.generate(purchaseInfo.getPurchaseCount().getValue());
     }
 
-    LottoTicket(PurchaseAmount purchaseAmount, List<LottoGame> automaticNumbers) {
-        this.purchaseAmount = purchaseAmount;
-        purchaseCount = new PurchaseCount(purchaseAmount.getLottoCount());
+    LottoTicket(PurchaseInfo purchaseInfo, List<LottoGame> automaticNumbers) {
+        this.purchaseInfo = purchaseInfo;
         this.automaticNumbers = automaticNumbers;
     }
 
     public PurchaseAmount getPurchaseAmount() {
-        return purchaseAmount;
+        return purchaseInfo.getPurchaseAmount();
     }
 
     public PurchaseCount getPurchaseCount() {
-        return purchaseCount;
+        return purchaseInfo.getPurchaseCount();
     }
 
     public List<LottoGame> getAutomaticNumbers() {

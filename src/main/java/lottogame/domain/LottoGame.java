@@ -1,8 +1,5 @@
 package lottogame.domain;
 
-import lottogame.util.StringUtils;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -14,14 +11,6 @@ public class LottoGame {
 
     private final List<LottoNumber> gameNumbers;
 
-    public LottoGame(String[] lottoNumbers) {
-        if (isInvalid(lottoNumbers)) {
-            throw new IllegalArgumentException();
-        }
-
-        gameNumbers = getGameNumbers(lottoNumbers);
-    }
-
     public LottoGame(List<Integer> lottoNumbers) {
         if (isInvalid(lottoNumbers)) {
             throw new IllegalArgumentException();
@@ -30,28 +19,14 @@ public class LottoGame {
         gameNumbers = getGameNumbers(lottoNumbers);
     }
 
-    static boolean isInvalid(String[] lottoNumbers) {
-        return lottoNumbers == null || lottoNumbers.length != LOTTO_GAME_SIZE;
-    }
-
-    static boolean isInvalid(List<Integer> lottoNumbers) {
+    private boolean isInvalid(List<Integer> lottoNumbers) {
         return lottoNumbers == null || lottoNumbers.size() != LOTTO_GAME_SIZE;
     }
 
-    static List<LottoNumber> getGameNumbers(String[] strings) {
-        return getGameNumbers(
-                Optional.ofNullable(strings)
-                        .map(StringUtils::parseIntegerList)
-                        .orElse(Collections.emptyList())
-        );
-    }
-
-    static List<LottoNumber> getGameNumbers(List<Integer> integers) {
-        return Optional.ofNullable(integers)
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    private List<LottoNumber> getGameNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList());
     }
 
     List<LottoNumber> getGameNumbers() {
@@ -59,12 +34,17 @@ public class LottoGame {
     }
 
     public int getMatchedCount(LottoGame targetNumbers) {
-        return (int) Optional.ofNullable(targetNumbers)
-                .map(LottoGame::getGameNumbers)
-                .orElse(Collections.emptyList())
-                .stream()
-                .filter(this::contains)
-                .count();
+
+        if( targetNumbers == null ||
+            targetNumbers.getGameNumbers() == null ||
+            targetNumbers.getGameNumbers().size() <= 0 ) {
+            return 0;
+        }
+
+        return (int)targetNumbers.getGameNumbers()
+                                 .stream()
+                                 .filter(this::contains)
+                                 .count();
     }
 
     public boolean contains(LottoNumber targetNumber) {
