@@ -7,28 +7,26 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-//        LottoMachine lottoMachine = new LottoMachine();
-//        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(3000);
-//
-//        System.out.println(lottoTickets.toString());
+
         int amount = InputView.getAmount();
 
-        OutputView.numberOfTickets(amount);
+        OutputView.printTicketCount(amount);
 
+        LottoMachine lottoMachine = new LottoMachine(new UserLottoTicketGenerator());
 
-        LottoMachine lottoMachine = new LottoMachine(new LottoRandomNumGenerator());
+        List<LottoTicket> buyLottoTickets = lottoMachine.buyLottoTicket(amount);
 
-        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(amount);
+        //랜덤값출력
+        OutputView.printBuyLottoTickets(buyLottoTickets);
 
-        OutputView.buyLottoNumberPrint(lottoTickets);
+        //지난주번호 입력
+        List<Integer> winningNumber = Utils.parseToIntegerList(InputView.getWinningNumber());
 
-//        List<Integer> winningNumber = InputView.getwinningNumber();
+        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber);
+        //결과저장, 비교
+        LotteryResults lotteryResults = new LotteryResults(winingLottoTicket, buyLottoTickets, amount);
 
-
-
-
-//        OutputView.printWinningNumber(winningNumber);
-
+        OutputView.printLotteryResult(lotteryResults);
 
     }
 }

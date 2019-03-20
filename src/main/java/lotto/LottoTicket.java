@@ -10,7 +10,7 @@ public class LottoTicket {
     }
 
 
-    public List<Integer> getBuyLottoNumbers() {
+    public List<Integer> getLottoTicket() {
         return buyLottoNumbers;
     }
 

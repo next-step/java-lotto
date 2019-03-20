@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoRandomNumGenerator implements LottoNumGenerator {
+public class UserLottoTicketGenerator {
     private static final int LOTTO_TOTAL_NUM = 45;
     private static final int LOTTO_TICKET_LIMIT_NUM = 6;
     private static final int LOTTO_TICKET_MIN_NUM = 1;
     private final List<Integer> lottoNumbers;
 
-    public LottoRandomNumGenerator() {
+    public UserLottoTicketGenerator() {
         this.lottoNumbers = createNumbers();
     }
 
-    protected void shuffleNum(List<Integer> lottoNumbers) {
+    public void shuffleNum(List<Integer> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
     }
 
-    @Override
     public List<Integer> generateTicket() {
         List<Integer> ticket = new ArrayList<>();
         shuffleNum(lottoNumbers);
