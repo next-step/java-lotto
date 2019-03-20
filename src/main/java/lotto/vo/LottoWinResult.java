@@ -3,20 +3,21 @@ package lotto.vo;
 import lotto.enums.LottoRank;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoWinResult {
     private Map<LottoRank, Long> wins = new EnumMap<>(LottoRank.class);
 
-    LottoWinResult(long[] matchCounts) {
-        LottoRank[] lottoRanks = LottoRank.values();
-
-        for (LottoRank lottoRank : lottoRanks) {
-            wins.put(lottoRank, matchCounts[lottoRank.getMatchCount()]);
-        }
+    public LottoWinResult(List<LottoRank> lottoRanks) {
+        lottoRanks.forEach(lottoRank -> {
+            long lottoRankCount = getLottoRankCount(lottoRank);
+            this.wins.put(lottoRank, lottoRankCount + 1);
+        });
     }
 
-    long get(LottoRank lottoRank) {
-        return wins.get(lottoRank);
+    public long getLottoRankCount(LottoRank lottoRank) {
+        Long lottoRankCount = this.wins.get(lottoRank);
+        return (null == lottoRankCount ? 0 : lottoRankCount);
     }
 }
