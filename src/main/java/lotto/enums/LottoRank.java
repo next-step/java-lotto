@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import lotto.vo.LottoMatchResult;
+import lotto.vo.Money;
 
 import java.util.Arrays;
 
@@ -13,11 +14,11 @@ public enum LottoRank {
     FAIL(0, 0);
 
     private int matchCount;
-    private long prizeMoney;
+    private Money prizeMoney;
 
     LottoRank(int matchCount, long prizeMoney) {
         this.matchCount = matchCount;
-        this.prizeMoney = prizeMoney;
+        this.prizeMoney = new Money(prizeMoney);
     }
 
     public int getMatchCount() {
@@ -25,7 +26,7 @@ public enum LottoRank {
     }
 
     public long getPrizeMoney() {
-        return prizeMoney;
+        return prizeMoney.getAmount();
     }
 
     public static LottoRank getRank(LottoMatchResult lottoResult) {
