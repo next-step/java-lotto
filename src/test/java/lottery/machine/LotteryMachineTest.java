@@ -30,11 +30,10 @@ public class LotteryMachineTest {
     public void test_로또_구매_지정번호_당첨_1등_2개() {
         Supplier<List<Integer>> winningNumbersSupplier = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
         LotteryMachine machine = new LotteryMachine(size -> winningNumbersSupplier.get());
-
-        final List<Integer> winningNumbers = winningNumbersSupplier.get();
         machine.buyLotteryTicket(2000);
 
-        final LotteryWinningStatistics statistics = machine.checkWinningNumbers(winningNumbers);
+        LotteryWinningStatistics statistics = machine.raffle(winningNumbersSupplier.get(), 10);
+
         assertThat(statistics.countRank(LotteryRank.FIRST))
                 .isEqualTo(2);
     }

@@ -3,6 +3,7 @@ package lottery.machine;
 import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryWinningStatistics;
+import lottery.domain.WinningTicket;
 import lottery.supplier.BoundedUniqueNumbersGenerator;
 import lottery.supplier.NumbersGenerator;
 
@@ -32,11 +33,11 @@ public class LotteryMachine {
         return lotteryTickets.size();
     }
 
-    public LotteryWinningStatistics checkWinningNumbers(List<Integer> winningNumbers) {
-        return new LotteryWinningStatistics(new LotteryTicket(winningNumbers), this.lotteryTickets);
-    }
-
     public List<LotteryTicket> getTickets() {
         return this.lotteryTickets;
+    }
+
+    public LotteryWinningStatistics raffle(List<Integer> winningNumbers, int bonusNumber) {
+        return new LotteryWinningStatistics(new WinningTicket(winningNumbers, bonusNumber), this.lotteryTickets);
     }
 }
