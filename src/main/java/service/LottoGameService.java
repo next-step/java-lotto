@@ -1,30 +1,54 @@
 package service;
 
+import application.LottoGame;
 import application.LottoGameResult;
+import domain.Calculator;
+import domain.Winning;
+import view.InputPriceView;
+import view.InputWinningView;
+import view.LottoView;
+import view.OutputResultView;
 
-import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class LottoGameService {
-    private static final int LOTTO_MATCH_MIN_COUNT = 3;
 
-    public static double calculate(List<Integer> lottoGameResults, int price) {
-        int profit = 0;
-        for (int i = 0; i < lottoGameResults.size(); i++) {
-            profit += sum(lottoGameResults, i);
-        }
-        return format(divide(profit, price));
+    private LottoGame game;
+    private Calculator calculator;
+
+    public LottoGameService(InputPriceView view, Calculator calculator) {
+        game = new LottoGame(view.getPrice(), new Random());
+        this.calculator = calculator;
     }
 
-    private static double format(double number) {
-        return Double.valueOf(new DecimalFormat("#.##").format(number));
+    public List<LottoView> getPurchasedLottos() {
+        return game.getLottos();
     }
 
-    private static double divide(int result, int price) {
-        return (result / (double) price);
+    public int getPurchaseCount() {
+        return game.getSize();
     }
 
-    private static int sum(List<Integer> results, int index) {
-        return results.get(index) * LottoGameResult.match(index + LOTTO_MATCH_MIN_COUNT).getReward();
+    public OutputResultView start(InputWinningView view) {
+        List<Integer> result = game.run(new Winning(view.getWinning()));
+
+        List<Integer> score = mergeScore(result);
+        double profit = calculator.result(score, game.getPrice());
+
+        return new OutputResultView(score, profit);
+    }
+
+    private List<Integer> mergeScore(List<Integer> result) {
+        List<Integer> score = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+        result.stream()
+                .filter(matchCount -> LottoGameResult.isInRange(matchCount))
+                .forEach(matchCount -> score.set(matchCount, plus(score, matchCount)));
+        return score;
+    }
+
+    private int plus(List<Integer> score, Integer v) {
+        return score.get(v) + 1;
     }
 }
