@@ -1,5 +1,6 @@
 package lotto.domain.ticket;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,14 @@ public class LottoNumbers {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    List<Integer> getNumbers() {
+        List<Integer> lottoNumbers = this.numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     int getNumberOfDuplicatedNumbers(LottoNumbers target) {

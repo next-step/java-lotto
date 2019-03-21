@@ -42,7 +42,7 @@ public class LottoNumberParserTest {
         Lotto lotto = LottoNumberParser.parse(lottoNumbersString, 45);
 
         // then
-        assertThat(lotto.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
         assertThat(lotto.getBonusNumber()).isEqualTo(bonusNumber);
     }
 }

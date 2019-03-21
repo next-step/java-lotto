@@ -17,6 +17,14 @@ public class Lotto {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
+    public List<Integer> getLottoNumbers() {
+        return this.lottoNumbers.getNumbers();
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber.getNumber();
+    }
+
     int getMatchCounts(Lotto target) {
         return this.lottoNumbers.getNumberOfDuplicatedNumbers(target.lottoNumbers);
     }
