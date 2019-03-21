@@ -26,8 +26,11 @@ public class InputView {
     public static List<Numbers> getManualLottoNumbers(String question, String regex, Scanner scanner, int manualCount) {
         System.out.println(question);
         List<Numbers> manualLottoNumbers = new ArrayList<>();
+
+        readString(scanner);
+        scanner.nextLine();
+
         for (int i = 0; i < manualCount; i++) {
-            readString(scanner);
             Numbers numbers = new Numbers(Arrays.stream(split(scanner.nextLine(), regex))
                 .map(String::trim)
                 .map(Integer::parseInt)
@@ -69,8 +72,8 @@ public class InputView {
 
     private static void readString(Scanner scanner) {
         while (!scanner.hasNext()) {
-            scanner.next();
-            System.err.print("지난 주 당첨 번호를 입력해 주세요.> ");
+            scanner.nextLine();
+            System.err.print("번호를 입력해 주세요.> ");
         }
     }
 }
