@@ -25,4 +25,9 @@ public class LottoNumber {
     boolean isEqualTo(LottoNumber lottoNumber) {
         return this.number == lottoNumber.number;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

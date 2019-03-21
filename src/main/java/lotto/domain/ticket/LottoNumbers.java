@@ -52,4 +52,9 @@ public class LottoNumbers {
         return this.numbers.stream()
                 .anyMatch(number -> number.isEqualTo(target));
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

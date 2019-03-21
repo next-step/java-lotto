@@ -38,4 +38,9 @@ public class Lotto {
 
         return new LottoMatchResult(matchCounts, bonusNumberSame);
     }
+
+    @Override
+    public String toString() {
+        return this.lottoNumbers.toString() + " / " + bonusNumber;
+    }
 }
