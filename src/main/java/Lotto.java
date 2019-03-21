@@ -8,13 +8,9 @@ public class Lotto {
     }
 
     public int getMatchNumber(Lotto winningLotto) {
-        return (int) winningLotto.getLottoNumbers().stream()
+        return (int) winningLotto.lottoNumbers.stream()
                 .filter(number -> this.lottoNumbers.contains(number))
                 .count();
-    }
-
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
     }
 
     @Override
