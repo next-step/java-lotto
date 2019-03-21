@@ -9,7 +9,7 @@ public class LotteryTicket {
 
     public static final int PRICE = 1000;
 
-    private List<LotteryNumber> lotteryNumbers;
+    List<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<Integer> numbers) {
         if (NUMBERS_COUNT != numbers.size()) {
@@ -18,16 +18,6 @@ public class LotteryTicket {
         this.lotteryNumbers = numbers.stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    public LotteryRank getWinningRank(LotteryTicket winningTicket) {
-        return LotteryRank.generate(countWinningNumbers(winningTicket));
-    }
-
-    private int countWinningNumbers(LotteryTicket ticket) {
-        return (int) lotteryNumbers.stream()
-                .filter(lotteryNumber -> ticket.lotteryNumbers.contains(lotteryNumber))
-                .count();
     }
 
     @Override
