@@ -21,7 +21,7 @@ public class LottoVendingMachineTest {
   }
 
   @Test
-  public void test_winLotto_threeNumber() {
+  public void test_winMatch_threeNumber() {
 
     // Given
     int firstMatchNumber = 3;
@@ -51,7 +51,7 @@ public class LottoVendingMachineTest {
   }
 
   @Test
-  public void test_winLotto_fourNumber() {
+  public void test_winMatch_fourNumber() {
 
     // Given
     int firstMatchNumber = 3;
@@ -82,7 +82,7 @@ public class LottoVendingMachineTest {
   }
 
   @Test
-  public void test_winLotto_fiveNumber() {
+  public void test_winMatch_fiveNumber() {
 
     // Given
     int firstMatchNumber = 3;
@@ -114,7 +114,7 @@ public class LottoVendingMachineTest {
   }
 
   @Test
-  public void test_winLotto_sixNumber() {
+  public void test_winMatch_sixNumber() {
 
     // Given
     int firstMatchNumber = 3;
