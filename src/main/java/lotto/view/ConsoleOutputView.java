@@ -17,6 +17,10 @@ public class ConsoleOutputView {
     private ConsoleOutputView() {
     }
 
+    public static void printEmptyLine() {
+        System.out.println();
+    }
+
     public static void printNumberOfLottos(long numberOfLottos) {
         System.out.println(numberOfLottos + "개를 구매했습니다.");
     }
