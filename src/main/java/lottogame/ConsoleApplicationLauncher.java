@@ -12,8 +12,9 @@ public class ConsoleApplicationLauncher {
         LottoTicket lottoTicket = new LottoTicket(new PurchaseInfo(purchaseAmount), new LottoNumberGeneratorImpl());
         ResultView.showPurchasedResult(lottoTicket);
 
-        WinningInfo winningNumbers = InputView.getWinningNumbers();
-        LottoResult lottoResult = new LottoResult(lottoTicket, winningNumbers);
+        LottoNumberPackage winningNumbers = InputView.getWinningNumbers();
+        LottoNumber bonusNumber = InputView.getBonusNumber();
+        LottoResult lottoResult = new LottoResult(lottoTicket, new WinningInfo(winningNumbers, bonusNumber));
         ResultView.showWinningResult(lottoResult);
     }
 }

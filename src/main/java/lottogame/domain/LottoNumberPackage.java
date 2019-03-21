@@ -1,10 +1,11 @@
 package lottogame.domain;
 
 import lottogame.validator.InputValidatable;
+import org.apache.commons.lang3.ArrayUtils;
+import spark.utils.CollectionUtils;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
@@ -13,35 +14,37 @@ import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 /**
  * 로또 1게임
  */
-public class LottoNumberPackage implements InputValidatable<List<Integer>> {
+public class LottoNumberPackage implements InputValidatable<Set<Integer>> {
 
     public static final int LOTTO_GAME_SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final LinkedHashSet<LottoNumber> numbers;
 
-    public LottoNumberPackage(List<Integer> lottoNumbers) {
-        if (isInvalid(lottoNumbers)) {
-            throw new IllegalArgumentException();
-        }
-
+    public LottoNumberPackage(Set<Integer> lottoNumbers) {
+        validate(lottoNumbers);
         numbers = getNumbers(lottoNumbers);
     }
 
-    private List<LottoNumber> getNumbers(List<Integer> numbers) {
+    private LinkedHashSet<LottoNumber> getNumbers(Set<Integer> numbers) {
         return numbers.stream()
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toList());
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    List<LottoNumber> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return numbers;
     }
 
-    public int getMatchedCount(LottoNumberPackage targetNumbers) {
+    public MatchStatus getMatchStatus(WinningInfo winningNumbers) {
+        return new MatchStatus(
+            getMatchedCount(winningNumbers.getNumbers()),
+            isBonusNumberMatched(winningNumbers.getBonusNumber())
+        );
+    }
 
-        if( targetNumbers == null ||
-            targetNumbers.getNumbers() == null ||
-            targetNumbers.getNumbers().size() <= 0 ) {
+    int getMatchedCount(LottoNumberPackage targetNumbers) {
+        if(Objects.isNull(targetNumbers) ||
+           CollectionUtils.isEmpty(targetNumbers.getNumbers())) {
             return 0;
         }
 
@@ -51,6 +54,10 @@ public class LottoNumberPackage implements InputValidatable<List<Integer>> {
                                  .count();
     }
 
+    private boolean isBonusNumberMatched(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     public boolean contains(LottoNumber targetNumber) {
         return Optional.ofNullable(targetNumber)
                 .filter(numbers::contains)
@@ -58,7 +65,7 @@ public class LottoNumberPackage implements InputValidatable<List<Integer>> {
     }
 
     @Override
-    public boolean isInvalid(List<Integer> target) {
+    public boolean isInvalid(Set<Integer> target) {
         return target == null || target.size() != LOTTO_GAME_SIZE;
     }
 

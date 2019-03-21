@@ -29,11 +29,11 @@ public class StringUtils {
         return sb.toString();
     }
 
-    public static List<Integer> parseIntegerList(String[] strings) {
+    public static Set<Integer> parseIntegerSet(String[] strings) {
         return Arrays.stream(strings)
-                        .filter(string -> !StringUtils.isEmpty(string))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList());
+                .filter(string -> !StringUtils.isEmpty(string))
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
     }
 
     public static String removeWhitespace(String string) {

@@ -12,6 +12,7 @@ import java.util.Optional;
 public class ResultView {
     static final String PURCHASE_RESULT_TITLE = "개를 구매했습니다.";
     static final String WINNING_RESULT_TITLE = "\n당첨 통계\n----------";
+    public static final String BONUS_BALL_MATCHED = "보너스 볼 일치";
 
     public static void showPurchasedResult(LottoTicket lottoGame) {
         showPurchaseResultTitle(lottoGame.getPurchaseCount());
