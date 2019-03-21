@@ -17,8 +17,16 @@ public class Money {
         return amount < MIN_MONEY;
     }
 
-
     public long getAmount() {
         return this.amount;
+    }
+
+
+    public boolean isEqualTo(Money target) {
+        return this.amount == target.amount;
+    }
+
+    public boolean isLargerThan(Money target) {
+        return target.amount < this.amount;
     }
 }

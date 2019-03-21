@@ -55,7 +55,7 @@ public class LottoRunnerTest {
 
         // then
         int realNumberOfLottos = lottoBundle.getLottos().size();
-        long realCost = LottoMachine.LOTTO_PRICE * realNumberOfLottos;
+        long realCost = LottoMachine.LOTTO_PRICE.getAmount() * realNumberOfLottos;
         long realTotalPrizeMoney = LottoRank.SECOND.getPrizeMoney() + LottoRank.THIRD.getPrizeMoney();
 
         assertThat(totalProfitRate).isEqualTo(realTotalPrizeMoney / realCost);

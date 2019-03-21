@@ -16,7 +16,7 @@ public class LottoProfit {
 
     private Money getCostFromLottoWinResult(LottoWinResult lottoWinResult) {
         long numberOfLottos = getNumberOfLottos(lottoWinResult);
-        long costAmount = LottoMachine.LOTTO_PRICE * numberOfLottos;
+        long costAmount = LottoMachine.LOTTO_PRICE .getAmount()* numberOfLottos;
 
         return new Money(costAmount);
     }

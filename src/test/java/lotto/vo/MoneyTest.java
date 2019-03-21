@@ -31,4 +31,31 @@ public class MoneyTest {
         // then
         assertThat(money.getAmount()).isEqualTo(amount);
     }
+
+    @Test
+    public void 금액이_더_큰지_비교() {
+        // given
+        Money thousand = new Money(1_000);
+        Money hundred = new Money(100);
+
+        // when
+        boolean isLarger = thousand.isLargerThan(hundred);
+
+        // then
+        assertThat(isLarger).isTrue();
+    }
+
+    @Test
+    public void 금액이_같은지_비교() {
+        // given
+        int amount = 1_000;
+        Money money1 = new Money(amount);
+        Money money2 = new Money(amount);
+
+        // when
+        boolean shouldBeTrue = money1.isEqualTo(money2);
+
+        // then
+        assertThat(shouldBeTrue).isTrue();
+    }
 }
