@@ -1,9 +1,6 @@
 package lotto.application;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPaper;
-import lotto.domain.WinningStatistics;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -13,9 +10,8 @@ public class LottoService {
     private static final String NUMBER_SEPARATOR = ", ";
 
     public LottoPaper issue(final int amount) {
-        final int numberOfLottoToPurchase = amount / Lotto.PRICE;
         return new LottoPaper(
-                IntStream.rangeClosed(1, numberOfLottoToPurchase)
+                IntStream.rangeClosed(1, getNumberOfLottoToPurchase(amount))
                         .mapToObj(time -> Lotto.automatic())
                         .collect(Collectors.toList())
         );
@@ -26,10 +22,17 @@ public class LottoService {
         return new ResultView(new WinningStatisticsView(statistics.get()), statistics.getRoi());
     }
 
+    private int getNumberOfLottoToPurchase(final int amount) {
+        return (int) Money.from(amount)
+                .divide(Lotto.PRICE)
+                ;
+    }
+
     private LottoNumbers getLottoNumbers(final String lottoNumbers) {
         return new LottoNumbers(
                 Arrays.stream(lottoNumbers.split(NUMBER_SEPARATOR))
                         .map(Integer::valueOf)
+                        .map(LottoNumber::from)
                         .collect(Collectors.toList())
         );
     }

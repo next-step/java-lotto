@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class Lotto {
-    public static final int PRICE = 1_000;
+    public static final Money PRICE = Money.from(1_000);
 
     private final LottoNumbers numbers;
 
@@ -14,7 +14,7 @@ public class Lotto {
     }
 
     public static Lotto automatic() {
-        return new Lotto(LottoNumbers.randomNumbers());
+        return new Lotto(LottoNumbersGenerator.randomNumbers());
     }
 
     public long howManyMatches(final LottoNumbers winningNumber) {

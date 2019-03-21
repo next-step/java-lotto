@@ -19,7 +19,7 @@ public class WinningStatisticsTest {
         final double roi = winningStatistics.getRoi();
 
         // then
-        assertThat(roi).isEqualTo(WinningOrder.FIRST_PLACE.getAmount() / Lotto.PRICE);
+        assertThat(roi).isEqualTo(WinningOrder.FIRST_PLACE.getAmount().divide(Lotto.PRICE));
     }
 
     @Test

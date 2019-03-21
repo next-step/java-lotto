@@ -1,9 +1,6 @@
 package lotto.application;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoPaper;
-import lotto.domain.WinningOrder;
+import lotto.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,7 +40,7 @@ public class LottoServiceTest {
     @Test
     public void 여섯_개_일치() {
         // given
-        final LottoNumbers lottoNumbers = LottoNumbers.randomNumbers();
+        final LottoNumbers lottoNumbers = LottoNumbersGenerator.randomNumbers();
         final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(lottoNumbers)));
         final String winningNumber = lottoNumbersToString(lottoNumbers);
 
@@ -51,7 +48,7 @@ public class LottoServiceTest {
         final ResultView view = lottoService.viewResults(lottoPaper, winningNumber);
 
         // then
-        assertThat(view.getRoi()).isEqualTo(WinningOrder.FIRST_PLACE.getAmount() / Lotto.PRICE);
+        assertThat(view.getRoi()).isEqualTo(WinningOrder.FIRST_PLACE.getAmount().divide(Lotto.PRICE));
     }
 
     private String lottoNumbersToString(final LottoNumbers lottoNumbers) {
