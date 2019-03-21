@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LuckyLotto;
 import lotto.domain.MatchLotto;
 import lotto.domain.MyLotto;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
