@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoStore;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Ticket;
 import lotto.domain.lotto.WinningLotto;
 import lotto.utils.ManualLottoGenerator;
 import lotto.utils.TestRandomLottoGenerator;
@@ -10,7 +10,6 @@ import lotto.view.vo.MatchResult;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,29 +20,17 @@ public class LottoResultTest {
     public void 열개_모두_5등일경우_수익률_5배() {
         int money = 10000;
         int manualCount = 3;
-        List<Numbers> manualLottoNumbers = new ArrayList<>();
-        Numbers numbers = new Numbers(Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        ));
-        manualLottoNumbers.add(numbers);
-        manualLottoNumbers.add(numbers);
-        manualLottoNumbers.add(numbers);
+        List<Ticket> manualLottoNumbers = new ArrayList<>();
+        Ticket ticket = new Ticket(1, 2, 3, 4, 5, 6);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
-        Numbers winningLottoNumbers = new Numbers(Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(8),
-            new LottoNumber(9),
-            new LottoNumber(10)
-        ));
+        Ticket winningLottoTicket = new Ticket(1, 2, 3, 7, 8 ,9);
 
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, new LottoNumber(20));
+        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(20));
         MatchResult matchResult = new MatchResult(winningLotto);
 
         matchResult.calculate(lottoStore.getLottos());

@@ -1,15 +1,23 @@
 package lotto.domain.lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Numbers {
+public class Ticket {
     private List<LottoNumber> numbers;
 
-    public Numbers(List<LottoNumber> numbers) {
+    public Ticket(List<LottoNumber> numbers) {
         this.numbers = numbers;
+    }
+
+    public Ticket(int... numbers) {
+        this.numbers = new ArrayList<>();
+        for (int i : numbers) {
+            this.numbers.add(new LottoNumber(i));
+        }
     }
 
     public void sort() {
@@ -20,7 +28,7 @@ public class Numbers {
         return this.numbers.contains(number);
     }
 
-    public int matchCount(Numbers target) {
+    public int matchCount(Ticket target) {
         int matchCount = 0;
         for (LottoNumber number : target.numbers) {
             matchCount += count(number);
@@ -38,8 +46,8 @@ public class Numbers {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Numbers numbers1 = (Numbers) o;
-        return Objects.equals(numbers, numbers1.numbers);
+        Ticket ticket1 = (Ticket) o;
+        return Objects.equals(numbers, ticket1.numbers);
     }
 
     @Override

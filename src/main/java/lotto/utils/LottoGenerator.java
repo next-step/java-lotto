@@ -1,11 +1,11 @@
 package lotto.utils;
 
 import lotto.domain.lotto.BasicLotto;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Ticket;
 
 public interface LottoGenerator {
 
     BasicLotto generate();
 
-    BasicLotto generate(Numbers numbers);
+    BasicLotto generate(Ticket ticket);
 }

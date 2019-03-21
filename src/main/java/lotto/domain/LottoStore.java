@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lotto.BasicLotto;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Ticket;
 import lotto.utils.LottoGenerator;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class LottoStore {
     private LottoGenerator manualLottoGenerator;
     private LottoGenerator randomLottoGenerator;
 
-    public LottoStore(LottoGenerator manualLottoGenerator, LottoGenerator randomLottoGenerator, int money, List<Numbers> manualLottoNumbers) {
+    public LottoStore(LottoGenerator manualLottoGenerator, LottoGenerator randomLottoGenerator, int money, List<Ticket> manualLottoNumbers) {
         this.manualLottoGenerator = manualLottoGenerator;
         this.randomLottoGenerator = randomLottoGenerator;
         lottos = new ArrayList<>();
@@ -22,7 +22,7 @@ public class LottoStore {
         buyRandomLottos(tryCount);
     }
 
-    private void buyManualLottos(List<Numbers> manualLottoNumbers) {
+    private void buyManualLottos(List<Ticket> manualLottoNumbers) {
         manualLottoNumbers.forEach(numbers -> lottos.add(manualLottoGenerator.generate(numbers)));
     }
 

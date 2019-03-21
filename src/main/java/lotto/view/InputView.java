@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,20 +23,20 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Numbers> getManualLottoNumbers(String question, String regex, Scanner scanner, int manualCount) {
+    public static List<Ticket> getManualLottoNumbers(String question, String regex, Scanner scanner, int manualCount) {
         System.out.println(question);
-        List<Numbers> manualLottoNumbers = new ArrayList<>();
+        List<Ticket> manualLottoNumbers = new ArrayList<>();
 
         readString(scanner);
         scanner.nextLine();
 
         for (int i = 0; i < manualCount; i++) {
-            Numbers numbers = new Numbers(Arrays.stream(split(scanner.nextLine(), regex))
+            Ticket ticket = new Ticket(Arrays.stream(split(scanner.nextLine(), regex))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
-            manualLottoNumbers.add(numbers);
+            manualLottoNumbers.add(ticket);
         }
         return manualLottoNumbers;
     }
@@ -51,12 +51,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Numbers getWinningLottoNumbers(String question, String regex, Scanner scanner) {
+    public static Ticket getWinningLottoNumbers(String question, String regex, Scanner scanner) {
         System.out.println(question);
         readString(scanner);
         String str = scanner.nextLine();
 
-        return new Numbers(Arrays.stream(str.split(regex))
+        return new Ticket(Arrays.stream(str.split(regex))
             .map(String::trim)
             .map(Integer::parseInt)
             .map(LottoNumber::new)

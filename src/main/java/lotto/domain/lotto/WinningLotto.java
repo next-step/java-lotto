@@ -3,17 +3,17 @@ package lotto.domain.lotto;
 import lotto.enums.Rank;
 
 public class WinningLotto implements Lotto {
-    private Numbers numbers;
+    private Ticket ticket;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Numbers numbers, LottoNumber bonusNumber) {
-        numbers.sort();
-        this.numbers = numbers;
+    public WinningLotto(Ticket ticket, LottoNumber bonusNumber) {
+        ticket.sort();
+        this.ticket = ticket;
         createBonusNumber(bonusNumber);
     }
 
     private void createBonusNumber(LottoNumber bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
+        if (ticket.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스볼 중복");
         }
         this.bonusNumber = bonusNumber;
@@ -24,15 +24,15 @@ public class WinningLotto implements Lotto {
     }
 
     private int checkMatchNumbers(BasicLotto lotto) {
-        return numbers.matchCount(lotto.getNumbers());
+        return ticket.matchCount(lotto.getTicket());
     }
 
     private boolean checkBonusNumber(BasicLotto lotto) {
-        return lotto.getNumbers().contains(bonusNumber);
+        return lotto.getTicket().contains(bonusNumber);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return ticket.toString();
     }
 }

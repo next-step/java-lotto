@@ -3,22 +3,22 @@ package lotto.domain.lotto;
 import java.util.List;
 
 public class BasicLotto implements Lotto {
-    private Numbers numbers;
+    private Ticket ticket;
 
-    public BasicLotto(Numbers numbers) {
-        this.numbers = numbers;
+    public BasicLotto(Ticket ticket) {
+        this.ticket = ticket;
     }
 
     public BasicLotto(List<LottoNumber> numbers) {
-        this.numbers = new Numbers(numbers);
+        this.ticket = new Ticket(numbers);
     }
 
-    public Numbers getNumbers() {
-        return numbers;
+    public Ticket getTicket() {
+        return ticket;
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return ticket.toString();
     }
 }

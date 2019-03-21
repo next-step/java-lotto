@@ -2,7 +2,7 @@ package lotto.view.vo;
 
 import lotto.domain.LottoStore;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Ticket;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 import lotto.utils.ManualLottoGenerator;
@@ -10,7 +10,6 @@ import lotto.utils.TestRandomLottoGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -21,29 +20,17 @@ public class MatchResultTest {
     public void 로또_매칭_결과_저장_테스트() {
         int money = 10000;
         int manualCount = 3;
-        List<Numbers> manualLottoNumbers = new ArrayList<>();
-        Numbers numbers = new Numbers(Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        ));
-        manualLottoNumbers.add(numbers);
-        manualLottoNumbers.add(numbers);
-        manualLottoNumbers.add(numbers);
+        List<Ticket> manualLottoNumbers = new ArrayList<>();
+        Ticket ticket = new Ticket(1, 2, 3, 4, 5, 6);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
-        Numbers winningLottoNumbers = new Numbers(Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(7)
-        ));
+        Ticket winningLottoTicket = new Ticket(1, 2, 3, 4, 5, 7);
 
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, new LottoNumber(6));
+        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(6));
         MatchResult matchResult = new MatchResult(winningLotto);
 
         matchResult.calculate(lottoStore.getLottos());
@@ -55,29 +42,17 @@ public class MatchResultTest {
     public void 매칭_결과를_바탕으로_수익률_계산() {
         int money = 10000;
         int manualCount = 3;
-        List<Numbers> manualLottoNumbers = new ArrayList<>();
-        Numbers numbers = new Numbers(Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        ));
-        manualLottoNumbers.add(numbers);
-        manualLottoNumbers.add(numbers);
-        manualLottoNumbers.add(numbers);
+        List<Ticket> manualLottoNumbers = new ArrayList<>();
+        Ticket ticket = new Ticket(1, 2, 3, 4, 5, 6);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
-        Numbers winningLottoNumbers = new Numbers(Arrays.asList(new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(7)
-        ));
+        Ticket winningLottoTicket = new Ticket(1, 2, 3, 4, 5, 7);
 
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, new LottoNumber(6));
+        WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(6));
         MatchResult matchResult = new MatchResult(winningLotto);
 
         matchResult.calculate(lottoStore.getLottos());

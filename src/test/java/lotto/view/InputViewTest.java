@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.lotto.Numbers;
+import lotto.domain.lotto.Ticket;
 import org.junit.Test;
 
 import java.util.Scanner;
@@ -24,9 +24,9 @@ public class InputViewTest {
     public void 문자열_입력_테스트_전체_커버() {
         Scanner scanner = new Scanner("1, 2, 3, 4, 5, 6");
         String question = "지난 주 당첨 번호를 입력해 주세요.";
-        Numbers winningLottoNumbers =
+        Ticket winningLottoTicket =
             InputView.getWinningLottoNumbers(question, ",", scanner);
 
-        assertThat(winningLottoNumbers.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(winningLottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }
