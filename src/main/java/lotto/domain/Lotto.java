@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
     public static final int LOTTO_NUM_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_SECOND_MATCH_COUNT = 5;
@@ -43,7 +45,7 @@ public class Lotto {
 
         List<LottoNo> numbers = new ArrayList<>();
         allNumber.subList(0, 6)
-                .forEach(number -> numbers.add(LottoMachine.getLottoNoInstance(number)));
+                .forEach(number -> numbers.add(lottoMachine.getLottoNoInstance(number)));
 
         return numbers;
     }

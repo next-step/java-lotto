@@ -18,6 +18,8 @@ import static spark.Spark.*;
 
 public class WebApplication {
 
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
     private static List<Lotto> lottos;
     private static LottoProfit lottoProfit;
 
@@ -63,7 +65,7 @@ public class WebApplication {
             LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(splitWinningNumbers, bonusNumber);
 
             //당첨통계
-            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, lottoWinningNumber, lottoProfit);
+            LottoStatistics lottoStatistics = lottoMachine.getLottoStatistics(lottos, lottoWinningNumber, lottoProfit);
 
             WebOutputView webOutputView = new WebOutputView();
             Map<String, Object> model = new HashMap<>();

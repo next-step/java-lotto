@@ -7,6 +7,8 @@ import java.util.List;
 
 public class LottoMarket {
 
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
     /**
      * 구매한 개수만큼 로또 생성
      *
@@ -30,7 +32,7 @@ public class LottoMarket {
         List<Lotto> lottos = new ArrayList<>();
 
         for (String[] directNumber : directNumbers) {
-            List<LottoNo> numbers = LottoMachine.makeDuplicateNumbers(directNumber);
+            List<LottoNo> numbers = lottoMachine.makeDuplicateNumbers(directNumber);
             Lotto lotto = new Lotto(numbers);
             lottos.add(lotto);
         }

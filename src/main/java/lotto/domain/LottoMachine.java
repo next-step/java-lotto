@@ -11,14 +11,21 @@ import java.util.stream.Stream;
 
 public class LottoMachine {
 
+    private static LottoMachine lottoMachine;
+
     private static Map<Integer, LottoNo> lottoNoInstanceMap = new HashMap<>();
 
-    public static LottoNo getLottoNoInstance(int number) throws IllegalArgumentException {
+    private LottoMachine() {
+    }
+
+    public LottoNo getLottoNoInstance(int number) throws IllegalArgumentException {
         if (lottoNoInstanceMap.get(number) != null) {
             return lottoNoInstanceMap.get(number);
         }
 
-        return new LottoNo(number);
+        lottoNoInstanceMap.put(number, new LottoNo(number));
+
+        return lottoNoInstanceMap.get(number);
     }
 
     /**
@@ -29,8 +36,8 @@ public class LottoMachine {
      * @param lottoProfit        수익율 dto
      * @return 당첨통계 dto
      */
-    public static LottoStatistics getLottoStatistics(List<Lotto> lottos,
-                                                     LottoWinningNumber lottoWinningNumber, LottoProfit lottoProfit) {
+    public LottoStatistics getLottoStatistics(List<Lotto> lottos,
+                                              LottoWinningNumber lottoWinningNumber, LottoProfit lottoProfit) {
 
         //각 당첨 번호별로 체크
         for (LottoNo number : lottoWinningNumber.getWinningNumber().getNumbers()) {
@@ -52,7 +59,7 @@ public class LottoMachine {
      * @param lottos 구매한 로또들
      * @param number 당첨로또 번호 한개
      */
-    public static void checkWinningNumber(List<Lotto> lottos, LottoNo number) {
+    public void checkWinningNumber(List<Lotto> lottos, LottoNo number) {
         for (Lotto lotto : lottos) {
             lotto.incrementMatchCount(number);
         }
@@ -65,7 +72,7 @@ public class LottoMachine {
      * @param lottos 구매한 로또들
      * @return 로또 통계 dto
      */
-    public static LottoStatistics checkWinningLotto(List<Lotto> lottos, LottoProfit lottoProfit) {
+    public LottoStatistics checkWinningLotto(List<Lotto> lottos, LottoProfit lottoProfit) {
         LottoMatchCount lottoMatchCount = new LottoMatchCount();
 
         LottoStatistics lottoStatistics = new LottoStatistics(lottoProfit, lottoMatchCount);
@@ -81,7 +88,7 @@ public class LottoMachine {
         return lottoStatistics;
     }
 
-    public static List<LottoNo> makeDuplicateNumbers(String[] winningNumbers) {
+    public List<LottoNo> makeDuplicateNumbers(String[] winningNumbers) {
         Set<Integer> duplicateNumbers = Stream.of(winningNumbers)
                 .mapToInt(Integer::parseInt)
                 .boxed()
@@ -91,5 +98,12 @@ public class LottoMachine {
         duplicateNumbers.forEach(number -> numbers.add(getLottoNoInstance(number)));
 
         return numbers;
+    }
+
+    public static LottoMachine getInstance() {
+        if (lottoMachine == null) {
+            lottoMachine = new LottoMachine();
+        }
+        return lottoMachine;
     }
 }

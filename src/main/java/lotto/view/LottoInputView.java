@@ -13,6 +13,8 @@ import java.util.regex.Pattern;
 
 public class LottoInputView {
 
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
     public static int inputBuyAmount() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
@@ -90,9 +92,9 @@ public class LottoInputView {
      * @throws IllegalArgumentException
      */
     public static LottoWinningNumber createWinningNumbers(String[] winningNumbers, int bonusNumber) throws IllegalArgumentException {
-        List<LottoNo> numbers = LottoMachine.makeDuplicateNumbers(winningNumbers);
+        List<LottoNo> numbers = lottoMachine.makeDuplicateNumbers(winningNumbers);
         Lotto lotto = new Lotto(numbers);
 
-        return new LottoWinningNumber(lotto, LottoMachine.getLottoNoInstance(bonusNumber));
+        return new LottoWinningNumber(lotto, lottoMachine.getLottoNoInstance(bonusNumber));
     }
 }

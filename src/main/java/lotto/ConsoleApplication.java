@@ -12,6 +12,9 @@ import lotto.vo.LottoWinningNumber;
 import java.util.List;
 
 public class ConsoleApplication {
+
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
     public static void main(String[] args) {
         doLottery();
     }
@@ -52,7 +55,7 @@ public class ConsoleApplication {
             LottoWinningNumber lottoWinningNumber = LottoInputView.createWinningNumbers(splitWinningNumbers, bonusNumber);
 
             //당첨등수 확인
-            LottoStatistics lottoStatistics = LottoMachine.getLottoStatistics(lottos, lottoWinningNumber, lottoProfit);
+            LottoStatistics lottoStatistics = lottoMachine.getLottoStatistics(lottos, lottoWinningNumber, lottoProfit);
 
             //통계자료 view
             LottoOutputView.showWinningStatistics(lottoStatistics);

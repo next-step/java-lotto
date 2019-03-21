@@ -9,11 +9,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
 
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
+
     @Test
     public void 당첨번호체크() {
-        Lotto lotto = new Lotto(Arrays.asList(LottoMachine.getLottoNoInstance(1), LottoMachine.getLottoNoInstance(2), LottoMachine.getLottoNoInstance(3),
-                LottoMachine.getLottoNoInstance(4), LottoMachine.getLottoNoInstance(5), LottoMachine.getLottoNoInstance(6)));
-        LottoMachine.checkWinningNumber(Arrays.asList(lotto), LottoMachine.getLottoNoInstance(1));
+        Lotto lotto = new Lotto(Arrays.asList(lottoMachine.getLottoNoInstance(1), lottoMachine.getLottoNoInstance(2), lottoMachine.getLottoNoInstance(3),
+                lottoMachine.getLottoNoInstance(4), lottoMachine.getLottoNoInstance(5), lottoMachine.getLottoNoInstance(6)));
+        lottoMachine.checkWinningNumber(Arrays.asList(lotto), lottoMachine.getLottoNoInstance(1));
         assertThat(lotto.getMatchCount()).isEqualTo(1);
     }
 }
