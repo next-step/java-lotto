@@ -9,16 +9,13 @@ public class LottoTicket {
         this.buyLottoNumbers = buyLottoNumbers;
     }
 
-
     public List<Integer> getLottoTicket() {
         return buyLottoNumbers;
     }
 
-
     public Integer get(int index) {
         return buyLottoNumbers.get(index);
     }
-
 
     @Override
     public String toString() {

@@ -19,8 +19,6 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-
-
     private int getSalesQuantity(int amount) {
         return amount / 1000;
     }

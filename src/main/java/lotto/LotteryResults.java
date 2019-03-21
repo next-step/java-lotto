@@ -6,45 +6,45 @@ import java.util.Map;
 
 public class LotteryResults {
 
-    private Map<LottoRank, Integer> lottoResultMap;
-
+    private Map<LottoRank, Integer> lottoResults;
     private double amount;
-
 
     public LotteryResults(WiningLottoTicket winingLottoTicket, List<LottoTicket> buyLottoTickets, int amount) {
         this.amount = amount;
-        this.lottoResultMap = new HashMap<>();
-        initLottoResultMap();
+        this.lottoResults = initLottoResultMap();
         saveLotteryResult(winingLottoTicket, buyLottoTickets);
     }
 
-    public Map<LottoRank, Integer> getLottoResultMap() {
-        return lottoResultMap;
+    public Map<LottoRank, Integer> getLottoResults() {
+        return lottoResults;
     }
 
-    private void initLottoResultMap() {
+    private Map<LottoRank, Integer> initLottoResultMap() {
+        lottoResults = new HashMap<>();
         for (LottoRank rank : LottoRank.values()) {
-            lottoResultMap.put(rank, 0);
+            lottoResults.put(rank, 0);
         }
-
+        return lottoResults;
     }
 
     private void saveLotteryResult(WiningLottoTicket winingLottoTicket, List<LottoTicket> buyLottoTickets) {
         for (LottoTicket buyLottoTicket : buyLottoTickets) {
-            int countNum = winingLottoTicket.checkLottoNumber(buyLottoTicket);
-            LottoRank rank = LottoRank.valueOf(countNum);
-            lottoResultMap.put(rank, lottoResultMap.get(rank) + 1);
+            LottoRank rank = getLottoRank(winingLottoTicket, buyLottoTicket);
+            lottoResults.put(rank, lottoResults.get(rank) + 1);
         }
     }
 
-    private int getTotalPrize() {
-        int totalPrize = 0;
+    private LottoRank getLottoRank(WiningLottoTicket winingLottoTicket, LottoTicket buyLottoTicket) {
+        int countNum = winingLottoTicket.checkLottoNumber(buyLottoTicket);
+        return LottoRank.valueOf(countNum);
+    }
 
+    public int getTotalPrize() {
+        int totalPrize = 0;
         for (LottoRank rank : LottoRank.values()) {
-            int money = totalPrizeCalculator(rank, lottoResultMap.get(rank));
+            int money = totalPrizeCalculator(rank, lottoResults.get(rank));
             totalPrize += money;
         }
-
         return totalPrize;
     }
 

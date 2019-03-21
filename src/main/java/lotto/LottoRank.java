@@ -25,9 +25,13 @@ public enum LottoRank {
 
     public static LottoRank valueOf(int countOfMatch) {
         for (LottoRank rank : LottoRank.values()) {
-            if (rank.getCountOfMatch() == countOfMatch)
+            if (rank.isMatch(countOfMatch))
                 return rank;
         }
-        return MISS ;
+        return MISS;
+    }
+
+    private boolean isMatch(int countOfMatch) {
+        return this.countOfMatch==countOfMatch;
     }
 }

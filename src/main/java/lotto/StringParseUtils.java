@@ -3,7 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Utils {
+public class StringParseUtils {
 
     public static List<Integer> parseToIntegerList(String inputNumber) {
         List<Integer> winningNumber = new ArrayList<>();

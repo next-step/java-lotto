@@ -4,9 +4,9 @@ import org.junit.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 
 public class UserLottoTicketGeneratorTest {
@@ -18,8 +18,9 @@ public class UserLottoTicketGeneratorTest {
             Collections.sort(lottoNumbers);
         }
     }
+
     @Test
-    public void  내가찍은_6개_번호가_있다() {
+    public void 내가찍은_6개_번호가_있다() {
         TestUserLottoTicketGenerator testRandomNumGenerator = new TestUserLottoTicketGenerator();
 
         LottoMachine lottoMachine = new LottoMachine(testRandomNumGenerator);
@@ -33,16 +34,25 @@ public class UserLottoTicketGeneratorTest {
     }
 
     @Test
-    public void 랜덤_번호_사이즈_및_중복_숫자_생성_확인() {
+    public void 랜덤_번호_사이즈() {
         UserLottoTicketGenerator userLottoTicketGenerator = new UserLottoTicketGenerator();
         List<Integer> integers = userLottoTicketGenerator.generateTicket();
-        List<Integer> integers1 = userLottoTicketGenerator.generateTicket();
         assertThat(integers.size()).isEqualTo(6);
 
     }
 
-
-
-
+    @Test
+    public void 사용자가_작성한_번호는_6개모두_중복되지않는다() {
+        //given
+        int expectedCount = 6;
+        UserLottoTicketGenerator user = new UserLottoTicketGenerator();
+        //when
+        List<Integer> pickedTickets = user.generateTicket();
+        //then
+        List<Integer> distinctTickets = pickedTickets.stream()
+            .distinct() // 중복 제거
+            .collect(Collectors.toList());
+        assertThat(distinctTickets.size()).isEqualTo(expectedCount);
+    }
 
 }

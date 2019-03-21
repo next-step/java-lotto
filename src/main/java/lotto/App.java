@@ -20,7 +20,7 @@ public class App {
         OutputView.printBuyLottoTickets(buyLottoTickets);
 
         //지난주번호 입력
-        List<Integer> winningNumber = Utils.parseToIntegerList(InputView.getWinningNumber());
+        List<Integer> winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
 
         WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber);
         //결과저장, 비교

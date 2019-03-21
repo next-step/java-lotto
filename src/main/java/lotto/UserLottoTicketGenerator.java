@@ -8,10 +8,15 @@ public class UserLottoTicketGenerator {
     private static final int LOTTO_TOTAL_NUM = 45;
     private static final int LOTTO_TICKET_LIMIT_NUM = 6;
     private static final int LOTTO_TICKET_MIN_NUM = 1;
+
     private final List<Integer> lottoNumbers;
 
     public UserLottoTicketGenerator() {
         this.lottoNumbers = createNumbers();
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public void shuffleNum(List<Integer> lottoNumbers) {
