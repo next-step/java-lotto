@@ -1,7 +1,6 @@
-package infrastructure;
+package domain;
 
 import application.LottoGameResult;
-import domain.Calculator;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -27,8 +26,8 @@ public class LottoCalculator implements Calculator {
         return Double.valueOf(new DecimalFormat("#.##").format(number));
     }
 
-    private static double divide(int result, int price) {
-        return (result / (double) price);
+    private static double divide(int profit, int price) {
+        return (profit / (double) price);
     }
 
     private static int multiple(int number, int count) {

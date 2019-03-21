@@ -23,10 +23,11 @@ public class Console {
 
     public static void showResult(OutputResultView view) {
         System.out.println(RESULT_TOP_COMMENT);
-        printResult(view, 3);
-        printResult(view, 4);
-        printResult(view, 5);
-        printResult(view, 6);
+        printResult(view, LottoGameResult.THREE.getValue());
+        printResult(view, LottoGameResult.FOUR.getValue());
+        printResult(view, LottoGameResult.FIVE.getValue());
+        printResult(view, LottoGameResult.SIX.getValue());
+
         emptyLine();
         System.out.printf(RESULT_PROFIT_COMMENT, view.getProfit());
     }

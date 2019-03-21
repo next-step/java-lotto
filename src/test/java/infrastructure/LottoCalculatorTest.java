@@ -1,5 +1,6 @@
 package infrastructure;
 
+import domain.LottoCalculator;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,7 +12,8 @@ public class LottoCalculatorTest {
     @Test
     public void 수익률계산() {
         int price = 1000;
-        List<Integer> results = Arrays.asList(1);
+        List<Integer> results = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+        results.set(3, 1);
 
         LottoCalculator calculator = new LottoCalculator();
         double profit = calculator.result(results, price);
@@ -22,7 +24,8 @@ public class LottoCalculatorTest {
     @Test
     public void 수익률계산_소수() {
         int price = 14000;
-        List<Integer> results = Arrays.asList(1);
+        List<Integer> results = Arrays.asList(0, 0, 0, 0, 0, 0, 0);
+        results.set(3, 1);
 
         LottoCalculator calculator = new LottoCalculator();
         double profit = calculator.result(results, price);

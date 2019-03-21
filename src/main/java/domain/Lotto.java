@@ -11,24 +11,25 @@ public class Lotto {
     private List<Number> numbers = new ArrayList();
 
     public Lotto(Random random) {
-        sort(sub(shuffle(getRandomNumbers(), random))).forEach(v -> numbers.add(new Number(v)));
+        sort(sub(shuffle(getRandomNumbers(), random)))
+                .forEach(v -> numbers.add(new Number(v)));
     }
 
-    private List<Integer> sort(List<Integer> numbers) {
+    private static List<Integer> sort(List<Integer> numbers) {
         Collections.sort(numbers);
         return numbers;
     }
 
-    private List<Integer> shuffle(List<Integer> numbers, Random random) {
+    private static List<Integer> shuffle(List<Integer> numbers, Random random) {
         Collections.shuffle(numbers, random);
         return numbers;
     }
 
-    private List<Integer> getRandomNumbers() {
+    private static List<Integer> getRandomNumbers() {
         return IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM).boxed().collect(Collectors.toList());
     }
 
-    private List<Integer> sub(List<Integer> numbers) {
+    private static List<Integer> sub(List<Integer> numbers) {
         return numbers.subList(0, LOTTO_RANGE);
     }
 

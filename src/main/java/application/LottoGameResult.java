@@ -3,11 +3,13 @@ package application;
 import java.util.Arrays;
 
 public enum LottoGameResult {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 1_500_000),
+    SIX(6, 2_000_000_000);
 
+    private static final int LOTTO_MIN_VALUE = 3;
+    private static final int LOTTO_MAX_VALUE = 6;
     private int value;
     private int reward;
 
@@ -33,7 +35,7 @@ public enum LottoGameResult {
     }
 
     public static boolean isInRange(int number) {
-        return number >= 3 && number <= 6;
+        return number >= LOTTO_MIN_VALUE && number <= LOTTO_MAX_VALUE;
     }
 
     public int getReward() {
