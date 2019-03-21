@@ -2,8 +2,7 @@ package lotto.domain.lotto;
 
 import lotto.enums.Rank;
 
-public class WinningLotto implements Lotto {
-    private Ticket ticket;
+public class WinningLotto extends Lotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(Ticket ticket, LottoNumber bonusNumber) {
@@ -24,11 +23,11 @@ public class WinningLotto implements Lotto {
     }
 
     private int checkMatchNumbers(BasicLotto lotto) {
-        return ticket.matchCount(lotto.getTicket());
+        return ticket.matchCount(lotto.ticket);
     }
 
     private boolean checkBonusNumber(BasicLotto lotto) {
-        return lotto.getTicket().contains(bonusNumber);
+        return lotto.ticket.contains(bonusNumber);
     }
 
     @Override

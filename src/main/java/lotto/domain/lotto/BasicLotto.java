@@ -2,8 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.List;
 
-public class BasicLotto implements Lotto {
-    private Ticket ticket;
+public class BasicLotto extends Lotto {
 
     public BasicLotto(Ticket ticket) {
         this.ticket = ticket;

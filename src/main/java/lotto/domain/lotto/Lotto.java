@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
-public interface Lotto {
+public abstract class Lotto {
 
+    protected Ticket ticket;
 }
