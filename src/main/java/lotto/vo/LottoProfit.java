@@ -31,15 +31,15 @@ public class LottoProfit {
                 .sum();
     }
 
-    public long getCost() {
+    long getCost() {
         return this.cost;
     }
 
-    public long getTotalPrizeMoney() {
+    long getTotalPrizeMoney() {
         return this.totalPrizeMoney;
     }
 
-    public double getTotalProfitRate() {
+    double getTotalProfitRate() {
         return (double) this.totalPrizeMoney / this.cost;
     }
 }
