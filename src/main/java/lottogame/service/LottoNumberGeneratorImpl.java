@@ -2,9 +2,11 @@ package lottogame.service;
 
 import lottogame.domain.LottoNumber;
 import lottogame.domain.LottoNumberPackage;
-import org.apache.commons.lang.math.LongRange;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
