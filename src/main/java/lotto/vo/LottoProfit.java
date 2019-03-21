@@ -6,17 +6,19 @@ import lotto.enums.LottoRank;
 import java.util.Arrays;
 
 public class LottoProfit {
-    private final long cost;
-    private final long totalPrizeMoney;
+    private final Money cost;
+    private final Money totalPrizeMoney;
 
     public LottoProfit(LottoWinResult lottoWinResult) {
         this.cost = getCostFromLottoWinResult(lottoWinResult);
         this.totalPrizeMoney = getTotalPrizeMoneyFromLottoWinResult(lottoWinResult);
     }
 
-    private long getCostFromLottoWinResult(LottoWinResult lottoWinResult) {
+    private Money getCostFromLottoWinResult(LottoWinResult lottoWinResult) {
         long numberOfLottos = getNumberOfLottos(lottoWinResult);
-        return LottoMachine.LOTTO_PRICE * numberOfLottos;
+        long costAmount = LottoMachine.LOTTO_PRICE * numberOfLottos;
+
+        return new Money(costAmount);
     }
 
     private long getNumberOfLottos(LottoWinResult lottoWinResult) {
@@ -25,21 +27,23 @@ public class LottoProfit {
                 .sum();
     }
 
-    private long getTotalPrizeMoneyFromLottoWinResult(LottoWinResult lottoWinResult) {
-        return Arrays.asList(LottoRank.values()).stream()
+    private Money getTotalPrizeMoneyFromLottoWinResult(LottoWinResult lottoWinResult) {
+        long totalPrizeMoneyAmount = Arrays.asList(LottoRank.values()).stream()
                 .mapToLong(lottoRank -> lottoRank.getPrizeMoney() * lottoWinResult.getLottoRankCount(lottoRank))
                 .sum();
+
+        return new Money(totalPrizeMoneyAmount);
     }
 
     long getCost() {
-        return this.cost;
+        return cost.getAmount();
     }
 
     long getTotalPrizeMoney() {
-        return this.totalPrizeMoney;
+        return totalPrizeMoney.getAmount();
     }
 
     double getTotalProfitRate() {
-        return (double) this.totalPrizeMoney / this.cost;
+        return (double) this.totalPrizeMoney.getAmount() / this.cost.getAmount();
     }
 }
