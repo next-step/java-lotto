@@ -2,10 +2,12 @@ package lotto.view;
 
 import lotto.domain.ticket.LottoBundle;
 import lotto.enums.LottoRank;
-import lotto.vo.LottoResult;
+import lotto.vo.LottoGameResult;
+import lotto.vo.LottoWinResult;
 
+import java.io.PrintStream;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 
 public class ConsoleOutputView {
@@ -24,28 +26,28 @@ public class ConsoleOutputView {
         System.out.println();
     }
 
-    public static void printWinStatistics(LottoResult lottoResult) {
-
+    public static void printStatistics(LottoGameResult lottoGameResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
-        lottoRanks.sort(Comparator.reverseOrder());
-
-        lottoRanks.forEach(lottoRank -> {
-            long numberOfWin = lottoResult.getNumberOfWin(lottoRank);
-            printLottoRankResults(lottoRank, numberOfWin);
-        });
-
-        System.out.printf("총 수익률은 %,.2f입니다.%n", lottoResult.getTotalProfitRate());
+        printLottoWinResult(lottoGameResult.getLottoWinResult());
+        printTotalProfitRate(lottoGameResult);
     }
 
-    private static void printLottoRankResults(LottoRank lottoRank, long numberOfWin) {
-        String resultFormat = (LottoRank.SECOND == lottoRank ? SECOND_RESULT_FORMAT : COMMON_RESULT_FORMAT);
-        int matchCount = (LottoRank.SECOND == lottoRank ?
-                LottoRank.SECOND.getMatchCount() - LottoRank.BONUS_NUMBER_MATCH_COUNT : lottoRank.getMatchCount());
+    private static void printLottoWinResult(LottoWinResult lottoWinResult) {
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
+        Collections.reverse(lottoRanks);
 
-        System.out.printf(resultFormat,
-                matchCount, lottoRank.getPrizeMoney(), numberOfWin);
+        lottoRanks.forEach(lottoRank -> {
+            long lottoRankCount = lottoWinResult.getLottoRankCount(lottoRank);
+            String resultFormat = ((LottoRank.SECOND == lottoRank) ? SECOND_RESULT_FORMAT : COMMON_RESULT_FORMAT);
+
+            System.out.printf(resultFormat,
+                    lottoRank.getMatchCount(), lottoRank.getPrizeMoney(), lottoRankCount);
+        });
+    }
+
+    private static PrintStream printTotalProfitRate(LottoGameResult lottoGameResult) {
+        return System.out.printf("총 수익률은 %.2f입니다", lottoGameResult.getTotalProfitRate());
     }
 }
