@@ -1,27 +1,35 @@
 package lotto.domain;
 
-import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.LottoBundle;
+import lotto.domain.lotto.Ticket;
 import lotto.utils.LottoGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
     private static final int LOTTO_PRICE = 1000;
+    private LottoGenerator manualLottoGenerator;
+    private LottoGenerator randomLottoGenerator;
+    private int tryCount;
 
-    private LottoGenerator lottoGenerator;
-
-    public LottoStore(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoStore(LottoGenerator manualLottoGenerator, LottoGenerator randomLottoGenerator, int money, List<Ticket> manualLottoNumbers) {
+        this.manualLottoGenerator = manualLottoGenerator;
+        this.randomLottoGenerator = randomLottoGenerator;
+        tryCount = convertMoneyToTryCount(money) - manualLottoNumbers.size();
     }
 
-    public List<BasicLotto> buyLottos(int money) {
-        int tryCount = convertMoneyToTryCount(money);
-        List<BasicLotto> lottos = new ArrayList<>();
-        for (int i = 0; i < tryCount; i++) {
-            lottos.add(new BasicLotto(this.lottoGenerator.generate()));
+    public LottoBundle buyManualLottos(List<Ticket> manualLottoNumbers) {
+        LottoBundle lottoBundle = new LottoBundle();
+        manualLottoNumbers.forEach(numbers -> lottoBundle.add(manualLottoGenerator.generate(numbers)));
+        return lottoBundle;
+    }
+
+    public LottoBundle buyRandomLottos() {
+        LottoBundle lottoBundle = new LottoBundle();
+        for (int i = 0; i < this.tryCount; i++) {
+            lottoBundle.add(this.randomLottoGenerator.generate());
         }
-        return lottos;
+        return lottoBundle;
     }
 
     private int convertMoneyToTryCount(int money) {

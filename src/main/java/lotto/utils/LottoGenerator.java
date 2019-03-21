@@ -1,8 +1,11 @@
 package lotto.utils;
 
-import java.util.List;
+import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.Ticket;
 
 public interface LottoGenerator {
 
-    List<Integer> generate();
+    BasicLotto generate();
+
+    BasicLotto generate(Ticket ticket);
 }

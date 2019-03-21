@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.vo.MatchResult;
-
-import java.util.List;
 
 public class LottoResult {
     private MatchResult matchResult;
@@ -13,20 +11,15 @@ public class LottoResult {
         matchResult = new MatchResult(winningLotto);
     }
 
-    public static void printLottos(List<BasicLotto> lottos) {
-        lottos.forEach(System.out::println);
-        System.out.println();
-    }
-
-    public void generate(List<BasicLotto> lottos) {
-        matchResult.calculate(lottos);
+    public void generate(LottoBundle lottoBundle) {
+        matchResult.calculate(lottoBundle);
         OutputView.printResultStatistics(matchResult);
     }
 
     public String getRewardPercent(int money) {
-        long reward = matchResult.calculateTotalReward();
+        double reward = matchResult.calculateTotalReward();
 
-        double percent = (double) reward / money;
+        double percent = reward / money;
         OutputView.printRewardPercent(percent);
 
         return String.format("%.2f", percent);
