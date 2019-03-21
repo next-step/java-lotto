@@ -1,17 +1,15 @@
 package lotto.view;
 
-import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.LottoBundle;
 import lotto.enums.Rank;
 import lotto.view.vo.MatchResult;
 
-import java.util.List;
-
 public class OutputView {
 
-    public static void printLottos(List<BasicLotto> lottos, int manualCount) {
+    public static void printLottos(LottoBundle lottoBundle, int manualCount) {
         System.out.println("\n수동으로 " + manualCount + "장, 자동으로 " +
-            (lottos.size() - manualCount) + "개를 구매했습니다.");
-        lottos.forEach(System.out::println);
+            (lottoBundle.getLottos().size() - manualCount) + "개를 구매했습니다.");
+        lottoBundle.getLottos().forEach(System.out::println);
         System.out.println();
     }
 

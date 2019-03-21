@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoStore;
-import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Ticket;
 import lotto.domain.lotto.WinningLotto;
@@ -27,9 +27,10 @@ public class ConsoleApplication {
         LottoStore lottoStore =
             new LottoStore(new ManualLottoGenerator(), new RandomLottoGenerator(), money, manualLottoNumbers);
 
-        List<BasicLotto> lottos = lottoStore.getLottos();
+        LottoBundle lottoBundle = lottoStore.buyManualLottos(manualLottoNumbers);
+        lottoBundle.addAll(lottoStore.buyRandomLottos());
 
-        OutputView.printLottos(lottos, manualCount);
+        OutputView.printLottos(lottoBundle, manualCount);
 
         Ticket winningLottoTicket =
             InputView.getWinningLottoNumbers("지난 주 당첨 번호를 입력해 주세요.",
@@ -40,7 +41,7 @@ public class ConsoleApplication {
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(bonusNumber));
 
         LottoResult lottoResult = new LottoResult(winningLotto);
-        lottoResult.generate(lottos);
+        lottoResult.generate(lottoBundle);
         lottoResult.getRewardPercent(money);
     }
 }

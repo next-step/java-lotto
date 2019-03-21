@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.Ticket;
 import lotto.utils.ManualLottoGenerator;
 import lotto.utils.TestRandomLottoGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoStoreTest {
 
@@ -38,8 +37,10 @@ public class LottoStoreTest {
         manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
+        LottoBundle lottos = lottoStore.buyManualLottos(manualLottoNumbers);
+        lottos.addAll(lottoStore.buyRandomLottos());
 
-        assertThat(lottoStore.getLottos().size()).isEqualTo(10);
+        assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 
     @Test
@@ -53,8 +54,26 @@ public class LottoStoreTest {
         manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
+        LottoBundle lottos = lottoStore.buyManualLottos(manualLottoNumbers);
+        lottos.addAll(lottoStore.buyRandomLottos());
 
+        assertThat(lottos.getLottos().get(0).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 
-        assertThat(lottoStore.getLottos().get(0).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    @Test
+    public void 수동_로또_생성_테스트() {
+        int money = 10000;
+        int manualCount = 3;
+        List<Ticket> manualLottoNumbers = new ArrayList<>();
+        Ticket ticket = new Ticket(1, 2, 3, 4, 5, 6);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
+        manualLottoNumbers.add(ticket);
+
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
+        LottoBundle lottoBundle = lottoStore.buyManualLottos(manualLottoNumbers);
+
+        assertThat(lottoBundle.getLottos().size()).isEqualTo(3);
+        assertThat(lottoBundle.getLottos().get(0).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

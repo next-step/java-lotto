@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.vo.MatchResult;
-
-import java.util.List;
 
 public class LottoResult {
     private MatchResult matchResult;
@@ -13,8 +11,8 @@ public class LottoResult {
         matchResult = new MatchResult(winningLotto);
     }
 
-    public void generate(List<BasicLotto> lottos) {
-        matchResult.calculate(lottos);
+    public void generate(LottoBundle lottoBundle) {
+        matchResult.calculate(lottoBundle);
         OutputView.printResultStatistics(matchResult);
     }
 

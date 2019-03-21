@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoStore;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Ticket;
 import lotto.domain.lotto.WinningLotto;
@@ -27,16 +28,18 @@ public class LottoResultTest {
         manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
+        LottoBundle lottoBundle = lottoStore.buyManualLottos(manualLottoNumbers);
+        lottoBundle.addAll(lottoStore.buyRandomLottos());
 
-        Ticket winningLottoTicket = new Ticket(1, 2, 3, 7, 8 ,9);
+        Ticket winningLottoTicket = new Ticket(1, 2, 3, 7, 8, 9);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(20));
         MatchResult matchResult = new MatchResult(winningLotto);
 
-        matchResult.calculate(lottoStore.getLottos());
+        matchResult.calculate(lottoBundle);
 
         LottoResult lottoResult = new LottoResult(winningLotto);
-        lottoResult.generate(lottoStore.getLottos());
+        lottoResult.generate(lottoBundle);
 
         assertThat(lottoResult.getRewardPercent(money)).isEqualTo("5.00");
     }

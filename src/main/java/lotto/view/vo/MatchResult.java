@@ -1,12 +1,11 @@
 package lotto.view.vo;
 
-import lotto.domain.lotto.BasicLotto;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -20,12 +19,12 @@ public class MatchResult {
         Arrays.stream(Rank.values()).forEach(rank -> ranks.put(rank, 0));
     }
 
-    public void calculate(List<BasicLotto> lottos) {
-        ranks.forEach((key, value) -> ranks.put(key, match(lottos, key)));
+    public void calculate(LottoBundle lottoBundle) {
+        ranks.forEach((key, value) -> ranks.put(key, match(lottoBundle, key)));
     }
 
-    private int match(List<BasicLotto> lottos, Rank matchRank) {
-        return (int) lottos.stream()
+    private int match(LottoBundle lottoBundle, Rank matchRank) {
+        return (int) lottoBundle.getLottos().stream()
             .filter(lotto -> matchRank.equals(winningLotto.match(lotto)))
             .count();
     }

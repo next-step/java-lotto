@@ -1,6 +1,7 @@
 package lotto.view.vo;
 
 import lotto.domain.LottoStore;
+import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Ticket;
 import lotto.domain.lotto.WinningLotto;
@@ -27,13 +28,15 @@ public class MatchResultTest {
         manualLottoNumbers.add(ticket);
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
+        LottoBundle lottos = lottoStore.buyManualLottos(manualLottoNumbers);
+        lottos.addAll(lottoStore.buyRandomLottos());
 
         Ticket winningLottoTicket = new Ticket(1, 2, 3, 4, 5, 7);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(6));
         MatchResult matchResult = new MatchResult(winningLotto);
 
-        matchResult.calculate(lottoStore.getLottos());
+        matchResult.calculate(lottos);
 
         assertThat(matchResult.getRanks().get(Rank.SECOND)).isEqualTo(10);
     }
@@ -50,12 +53,15 @@ public class MatchResultTest {
 
         LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
+        LottoBundle lottoBundle = lottoStore.buyManualLottos(manualLottoNumbers);
+        lottoBundle.addAll(lottoStore.buyRandomLottos());
+
         Ticket winningLottoTicket = new Ticket(1, 2, 3, 4, 5, 7);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(6));
         MatchResult matchResult = new MatchResult(winningLotto);
 
-        matchResult.calculate(lottoStore.getLottos());
+        matchResult.calculate(lottoBundle);
 
         assertThat(matchResult.calculateTotalReward()).isEqualTo(300_000_000L);
     }

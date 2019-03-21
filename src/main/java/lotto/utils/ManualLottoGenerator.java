@@ -7,7 +7,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public BasicLotto generate() {
-        return new BasicLotto(new Ticket(null));
+        return new BasicLotto(new Ticket());
     }
 
     @Override
