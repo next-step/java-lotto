@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
 public class LottoMachine {
+
     public static final long LOTTO_UNIT_PRICE = 1000;
 
     public static LottoList purchase(final long purchaseAmount) {
@@ -14,23 +14,24 @@ public class LottoMachine {
         return new LottoList((int) (purchaseAmount / LOTTO_UNIT_PRICE));
     }
 
-    public static Map<Prize, LottoList> getWinningResult(final LottoList lottos, final Lotto winningLotto) {
-        Map<Prize, LottoList> lottoResult = new HashMap<>();
+    public static WinningResults getWinningResults(final LottoList lottos, final Lotto winningLotto) {
+        WinningResults winningResults = new WinningResults();
 
-        for (Prize prize : Prize.values()) {
-            LottoList winningLottos = lottos.find(prize, winningLotto);
-
-            lottoResult.put(prize, winningLottos);
+        Prize[] prizes = Prize.values();
+        for (int i = 0; i < prizes.length; i++) {
+            winningResults.put(prizes[i], new WinningResult(prizes[i], lottos.find(prizes[i], winningLotto)));
         }
 
-        return lottoResult;
+        return winningResults;
     }
 
-    public static double getEarningsRate(final Map<Prize, LottoList> lottoResult, final long purchaseAmount) {
+    public static double getEarningsRate(final WinningResults winningResults, final long purchaseAmount) {
         long totalPrizeMoney = 0;
 
-        for (Prize prize : Prize.values()) {
-            totalPrizeMoney += lottoResult.get(prize).size() * prize.getMoney();
+        Set<Prize> winningResultsKeys = winningResults.keySet();
+
+        for (Prize prize : winningResultsKeys) {
+            totalPrizeMoney += prize.getMoney() * winningResults.get(prize).getMatchingCount();
         }
 
         return totalPrizeMoney / (double) purchaseAmount;

@@ -39,7 +39,7 @@ public class LottoList {
         return this.lottos.add(lotto);
     }
 
-    LottoList find(Prize prize, Lotto winningLotto) {
+    int find(Prize prize, Lotto winningLotto) {
         LottoList winningLottos = new LottoList();
 
         for (Lotto lotto : this.lottos) {
@@ -50,6 +50,6 @@ public class LottoList {
             }
         }
 
-        return winningLottos;
+        return winningLottos.size();
     }
 }

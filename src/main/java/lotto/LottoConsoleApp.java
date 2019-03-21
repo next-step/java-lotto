@@ -3,11 +3,9 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.LottoMachine;
-import lotto.domain.Prize;
+import lotto.domain.WinningResults;
 import lotto.view.ConsoleInput;
 import lotto.view.ConsoleOutput;
-
-import java.util.Map;
 
 public class LottoConsoleApp {
 
@@ -20,9 +18,9 @@ public class LottoConsoleApp {
         ConsoleOutput.printLottos(lottos);
 
         final Lotto winningLotto = ConsoleInput.inputLastWinningNumbers();
-        final Map<Prize, LottoList> winningResult = LottoMachine.getWinningResult(lottos, winningLotto);
+        final WinningResults winningResults = LottoMachine.getWinningResults(lottos, winningLotto);
 
-        ConsoleOutput.printWinningStatistics(winningResult);
-        ConsoleOutput.printEarningsRate(LottoMachine.getEarningsRate(winningResult, purchaseAmount));
+        ConsoleOutput.printWinningStatistics(winningResults);
+        ConsoleOutput.printEarningsRate(LottoMachine.getEarningsRate(winningResults, purchaseAmount));
     }
 }

@@ -1,11 +1,13 @@
 package lotto.view;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
-import lotto.domain.Prize;
-
-import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.domain.Prize;
+import lotto.domain.WinningResults;
 
 public class ConsoleOutput {
 
@@ -25,18 +27,23 @@ public class ConsoleOutput {
         System.out.println();
     }
 
-    public static void printWinningStatistics(Map<Prize, LottoList> winningResult) {
+    public static void printWinningStatistics(WinningResults winningResults) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (int i = Prize.FOURTH.getMatchingCount(); i <= Prize.FIRST.getMatchingCount(); i++) {
-            Prize prize = Prize.valueOf(i);
-            String output = String.format("%d개 일치(%d원)-%d개", i, prize.getMoney(),winningResult.get(prize).size());
+        Set<Prize> reversedKeyPrizes= new TreeSet<>(Collections.reverseOrder());
+        reversedKeyPrizes.addAll(winningResults.keySet());
+
+        for (Prize prize : reversedKeyPrizes) {
+            String output = String.format(
+                "%d개 일치(%d원)-%d개",
+                prize.getMatchingCount(),
+                prize.getMoney(),
+                winningResults.get(prize).getMatchingCount());
 
             System.out.println(output);
         }
-
 
         System.out.println();
     }

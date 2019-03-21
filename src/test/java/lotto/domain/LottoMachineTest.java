@@ -1,12 +1,12 @@
 package lotto.domain;
 
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 public class LottoMachineTest {
 
@@ -43,23 +43,30 @@ public class LottoMachineTest {
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
         final LottoList lottos = new LottoList(Arrays.asList(
-                winningLotto,
-                new Lotto(Arrays.asList(
+                winningLotto, // 6개 일치
+                new Lotto(Arrays.asList( // 4개 일치
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(44), new LottoNumber(45))),
-                new Lotto(Arrays.asList(
+                new Lotto(Arrays.asList( // 4개 일치
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(44), new LottoNumber(45))),
-                new Lotto(Arrays.asList(
+                new Lotto(Arrays.asList( // 3개 일치
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)))));
 
-        Map<Prize, LottoList> lottoResult = LottoMachine.getWinningResult(lottos, winningLotto);
+        final WinningResults winningResults = LottoMachine.getWinningResults(lottos, winningLotto);
 
-        assertThat(lottoResult.get(Prize.FOURTH).size()).isEqualTo(1);
-        assertThat(lottoResult.get(Prize.THIRD).size()).isEqualTo(2);
-        assertThat(lottoResult.get(Prize.SECOND).size()).isEqualTo(0);
-        assertThat(lottoResult.get(Prize.FIRST).size()).isEqualTo(1);
+        Map<Prize, WinningResult> expectedWinningResults = new HashMap<>();
+        expectedWinningResults.put(Prize.FOURTH, new WinningResult(Prize.FOURTH, 1));
+        expectedWinningResults.put(Prize.THIRD, new WinningResult(Prize.THIRD, 2));
+        expectedWinningResults.put(Prize.SECOND, new WinningResult(Prize.SECOND, 0));
+        expectedWinningResults.put(Prize.FIRST, new WinningResult(Prize.FIRST, 1));
+
+        for (Prize prize : Prize.values()) {
+            assertThat(winningResults.get(prize).getMatchingCount())
+                .isEqualTo(expectedWinningResults.get(prize).getMatchingCount());
+        }
+
     }
 
     @Test
@@ -72,73 +79,18 @@ public class LottoMachineTest {
         final LottoList lottos = new LottoList(Arrays.asList(
                 winningLotto,
                 new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(44), new LottoNumber(45))),
+                        new LottoNumber(21), new LottoNumber(22), new LottoNumber(23),
+                        new LottoNumber(24), new LottoNumber(25), new LottoNumber(26))),
                 new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(44), new LottoNumber(45))),
+                        new LottoNumber(31), new LottoNumber(32), new LottoNumber(33),
+                        new LottoNumber(34), new LottoNumber(35), new LottoNumber(36))),
                 new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(40), new LottoNumber(41), new LottoNumber(42),
                         new LottoNumber(43), new LottoNumber(44), new LottoNumber(45)))));
 
-        Map<Prize, LottoList> lottoResult = LottoMachine.getWinningResult(lottos, winningLotto);
+        WinningResults lottoResults = LottoMachine.getWinningResults(lottos, winningLotto);
 
-        long totalPrizeMoney = 0;
-
-        for (Prize prize : Prize.values()) {
-            totalPrizeMoney += lottoResult.get(prize).size() * prize.getMoney();
-        }
-
-        assertThat(LottoMachine.getEarningsRate(lottoResult, purchaseAmount)).isEqualTo((double) totalPrizeMoney / purchaseAmount);
-    }
-
-    @Test
-    public void getEarningsRate_10개구매_3개일치_1개() {
-        final long purchaseAmount = 10000;
-
-        final Lotto winningLotto = new Lotto(Arrays.asList(
-                new LottoNumber(45), new LottoNumber(44), new LottoNumber(43),
-                new LottoNumber(42), new LottoNumber(41), new LottoNumber(40)));
-
-        final LottoList lottos = new LottoList(Arrays.asList(
-                winningLotto,
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),
-                new Lotto(Arrays.asList(
-                        new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))));
-
-        Map<Prize, LottoList> lottoResult = LottoMachine.getWinningResult(lottos, winningLotto);
-
-        long totalPrizeMoney = 0;
-        for (Prize prize : Prize.values()) {
-            totalPrizeMoney += lottoResult.get(prize).size() * prize.getMoney();
-        }
-
-        double result = LottoMachine.getEarningsRate(lottoResult, purchaseAmount);
-
-        assertThat(result).isEqualTo((double) totalPrizeMoney / purchaseAmount);
+        assertThat(LottoMachine.getEarningsRate(lottoResults, purchaseAmount))
+            .isEqualTo(Prize.FIRST.getMoney() / (double) purchaseAmount);
     }
 }

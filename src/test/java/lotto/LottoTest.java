@@ -3,9 +3,7 @@ package lotto;
 import lotto.domain.*;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,19 +35,5 @@ public class LottoTest {
             Set<LottoNumber> lottoNumbers = new HashSet<>(lotto.getLottoNumbers());
             assertThat(lottoNumbers.size()).isEqualTo(6);
         }
-    }
-
-    @Test
-    public void 당첨결과에_보상순위와_매칭되는_당첨번호보유개수별_결과가_있는지() {
-        final Lotto winningLotto = new Lotto();
-
-        final int won = 14000;
-
-        final LottoList lottos = LottoMachine.purchase(won);
-
-        Map<Prize, LottoList> lottoResults = LottoMachine.getWinningResult(lottos, winningLotto);
-
-        assertThat(lottoResults.keySet()).isEqualTo(
-                new HashSet<>(Arrays.asList(Prize.FIRST, Prize.SECOND, Prize.THIRD, Prize.FOURTH)));
     }
 }
