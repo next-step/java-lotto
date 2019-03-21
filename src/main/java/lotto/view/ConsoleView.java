@@ -61,7 +61,7 @@ public class ConsoleView {
 
     String[] winNumberArray = winNumberString.split(",");
     return Arrays.stream(winNumberArray)
-        .map(Number::new)
+        .map(winNumber -> new Number(Integer.parseInt(winNumber.trim())))
         .collect(Collectors.toList());
   }
 }

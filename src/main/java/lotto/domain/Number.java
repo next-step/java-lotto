@@ -10,10 +10,6 @@ public class Number {
     this.value = value;
   }
 
-  public Number(String value) {
-    this.value = Integer.parseInt(value.trim());
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
