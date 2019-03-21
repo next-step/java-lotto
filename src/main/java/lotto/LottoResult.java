@@ -1,30 +1,31 @@
 package lotto;
 
+import lotto.domain.MatchLotto;
+
 public class LottoResult {
 
-    private static final int LOTTO_SIZE = 7;
-
-    private int[] matchCount;
+    private MatchLotto matchLotto;
 
     public LottoResult() {
-        matchCount = new int[LOTTO_SIZE];
+        this.matchLotto = new MatchLotto();
     }
 
-    public void addMatchCount(int i) {
-        matchCount[i]++;
+    public void addMatchCount(int matchCount) {
+        this.matchLotto.addMatchCount(matchCount);
     }
 
-    public int[] checkResult() {
-        return matchCount;
+    public MatchLotto checkResult() {
+        return matchLotto;
     }
 
     public double calculateRate(int money) {
-        double rate = 0;
+        long prizeMoney = matchLotto.sumPrizeMoney();
+        return (double) prizeMoney / money;
+    }
 
-        for (Prize prize : Prize.values()) {
-            rate += prize.calculatePrizeMoney(matchCount);
+    public void addBonusCount(boolean matchBonus) {
+        if (matchBonus) {
+            this.matchLotto.addBonusCount();
         }
-        rate /= money;
-        return rate;
     }
 }

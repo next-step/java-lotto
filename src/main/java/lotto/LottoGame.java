@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LuckyLotto;
+import lotto.domain.MyLotto;
 import lotto.util.LottoBasicNumber;
 import lotto.util.LottoGenerator;
 
@@ -10,33 +12,34 @@ public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private List<Lotto> lottos;
+    private List<MyLotto> myLottos;
     private LottoGenerator lottoGenerator;
 
     public LottoGame() {
-        this.lottos = new ArrayList<>();
+        this.myLottos = new ArrayList<>();
         this.lottoGenerator = new LottoGenerator();
     }
 
-    public LottoGame(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public LottoGame(List<MyLotto> myLottos) {
+        this.myLottos = myLottos;
         this.lottoGenerator = new LottoGenerator();
     }
 
-    public List<Lotto> buy(int money) {
+    public List<MyLotto> buy(int money) {
         int tickets = money / LOTTO_PRICE;
 
         for (int i = 0; i < tickets; i++) {
-            lottos.add(new Lotto(lottoGenerator.generate(LottoBasicNumber.numbers)));
+            myLottos.add(new MyLotto(lottoGenerator.generate(LottoBasicNumber.numbers)));
         }
-        return lottos;
+        return myLottos;
     }
 
-    public LottoResult checkLuckyCount(Lotto luckyNumbers) {
+    public LottoResult checkLuckyCount(LuckyLotto luckyLotto) {
         LottoResult lottoResult = new LottoResult();
 
-        for (Lotto lotto : lottos) {
-            lottoResult.addMatchCount(lotto.matchNumbers(luckyNumbers));
+        for (MyLotto myLotto : myLottos) {
+            lottoResult.addMatchCount(myLotto.matchNumbers(luckyLotto));
+            lottoResult.addBonusCount(myLotto.getMatchBonus());
         }
         return lottoResult;
     }

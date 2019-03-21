@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.Lotto;
+import lotto.domain.LuckyLotto;
+import lotto.domain.MyLotto;
 import lotto.LottoGame;
 import lotto.LottoResult;
 
@@ -12,12 +13,12 @@ public class ConsoleMain {
         OutputView.issueLottoTickets(money);
 
         LottoGame lottoGame = new LottoGame();
-        List<Lotto> lottos = lottoGame.buy(money);
-        OutputView.printLottoNumbers(lottos);
+        List<MyLotto> myLottos = lottoGame.buy(money);
+        OutputView.printLottoNumbers(myLottos);
 
-        Lotto luckyNumbers = InputView.inputLuckyNumbers();
-        LottoResult lottoResult = lottoGame.checkLuckyCount(luckyNumbers);
-        OutputView.printMatchCount(lottoResult.checkResult());
+        LuckyLotto luckyLotto = InputView.inputLuckyNumbers();
+        LottoResult lottoResult = lottoGame.checkLuckyCount(luckyLotto);
+        OutputView.printResult(lottoResult.checkResult());
 
         double rate = lottoResult.calculateRate(money);
         OutputView.printRate(rate);

@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.Lotto;
+import lotto.domain.LuckyLotto;
+import lotto.domain.MyLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,15 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Lotto inputLuckyNumbers() {
+    public static LuckyLotto inputLuckyNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String[] numbers = scanner.nextLine().split(", ");
 
-        return new Lotto(parseInt(numbers));
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+
+        return new LuckyLotto(parseInt(numbers), bonusNumber);
     }
 
     private static List<Integer> parseInt(String[] numbers) {

@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.LuckyLotto;
+import lotto.domain.MatchLotto;
+import lotto.domain.MyLotto;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,9 +16,9 @@ public class LottoGameTest {
     public void 로또구매하기() {
         LottoGame lottoGame = new LottoGame();
         int money = 4000;
-        List<Lotto> lottos = lottoGame.buy(money);
+        List<MyLotto> myLottos = lottoGame.buy(money);
 
-        assertThat(lottos.size()).isEqualTo(4);
+        assertThat(myLottos.size()).isEqualTo(4);
     }
 
     @Test
@@ -25,14 +28,14 @@ public class LottoGameTest {
         for (int i = 0; i < 6; i++) {
             luckyNumbers.add(i + 1);
         }
-        Lotto lotto = new Lotto(luckyNumbers);
+        LuckyLotto luckyLotto = new LuckyLotto(luckyNumbers, 7);
 
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(lotto);
-        LottoGame lottoGame = new LottoGame(lottos);
+        List<MyLotto> myLottos = new ArrayList<>();
+        myLottos.add(new MyLotto(luckyNumbers));
+        LottoGame lottoGame = new LottoGame(myLottos);
 
-        LottoResult lottoResult = lottoGame.checkLuckyCount(lotto);
-        int[] matchCount = lottoResult.checkResult();
-        assertThat(matchCount[6]).isEqualTo(1);
+        LottoResult lottoResult = lottoGame.checkLuckyCount(luckyLotto);
+        MatchLotto matchLotto = lottoResult.checkResult();
+        assertThat(matchLotto.getMatchCounts()[6]).isEqualTo(1);
     }
 }

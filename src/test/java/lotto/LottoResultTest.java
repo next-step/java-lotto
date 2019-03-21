@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.MatchLotto;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,8 +14,8 @@ public class LottoResultTest {
         lottoResult.addMatchCount(5);
         lottoResult.addMatchCount(3);
 
-        int[] result = lottoResult.checkResult();
-
+        MatchLotto matchLotto = lottoResult.checkResult();
+        int[] result = matchLotto.getMatchCounts();
         assertThat(result[5]).isEqualTo(2);
         assertThat(result[3]).isEqualTo(1);
         assertThat(result[4]).isEqualTo(0);

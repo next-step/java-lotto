@@ -14,7 +14,6 @@ public class LottoGeneratorTest {
         List<Integer> lotto = lottoGenerator.generate(LottoBasicNumber.numbers);
 
         for (int i = 0; i < lotto.size() - 1; i++) {
-            System.out.println(lotto.get(i));
             assertThat(lotto.get(i)).isLessThan(lotto.get(i + 1));
         }
     }
