@@ -5,7 +5,7 @@ public class LottoGame {
         return new PurchaseHistory(payment, lottoGenerator);
     }
 
-    public static StatisticsResult analyse(final PurchaseHistory purchaseHistory, final Lotto previousWinningLotto) {
+    public static StatisticsResult analyse(final PurchaseHistory purchaseHistory, final WinningLotto previousWinningLotto) {
         return new StatisticsResult(purchaseHistory, previousWinningLotto);
     }
 }

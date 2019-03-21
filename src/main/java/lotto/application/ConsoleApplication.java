@@ -17,8 +17,9 @@ public class ConsoleApplication {
 
         OutputView.printPurchaseResult(purchase);
 
-        List<Integer> previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
-        Lotto previousWinningLotto = new FixedLottoGenerator(previousWinningLottoNumbers).generateLotto();
+        String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
+        int bonusBallNumber = InputView.inputBonusBall(scanner);
+        WinningLotto previousWinningLotto = (WinningLotto) new FixedLottoGenerator(previousWinningLottoNumbers, bonusBallNumber).generateLotto();
 
         StatisticsResult statisticsResult = LottoGame.analyse(purchase, previousWinningLotto);
 

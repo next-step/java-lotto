@@ -24,10 +24,6 @@ public class LottoNumber {
         return temp == LottoGenerator.BASE_INDEX ? new LottoNumber(LottoNumber.MAXIMUM_NUMBER) : new LottoNumber(temp);
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

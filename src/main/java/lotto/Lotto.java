@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Lotto {
     public static final int SIZE_LIMIT = 6;
-    public static final int UNIT_PRICE = 1000;
-    private List<LottoNumber> numbers;
+    public static final int UNIT_PRICE = 1_000;
+    protected List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
         if (hasDuplicate(numbers)) {
@@ -30,6 +30,10 @@ public class Lotto {
                 .stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    public boolean isMatchingBonusBall(WinningLotto winningLotto) {
+        return numbers.stream().anyMatch(number -> number.equals(winningLotto.bonusBall));
     }
 
     @Override

@@ -10,13 +10,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PrizeTest {
 
     @Test
-    public void 일치개수5개_2등() {
+    public void 일치개수5개_보너스일치_2등() {
         // given
         int countOfMatch = 5;
         // when
-        Prize prize = Prize.fromNumberOfMatch(countOfMatch);
+        Prize prize = Prize.fromNumberOfMatch(countOfMatch, true);
         // then
         assertThat(prize).isEqualByComparingTo(Prize.SECOND_PRIZE);
+    }
+
+    @Test
+    public void 일치개수5개__3등() {
+        // given
+        int countOfMatch = 5;
+        // when
+        Prize prize = Prize.fromNumberOfMatch(countOfMatch, false);
+        // then
+        assertThat(prize).isEqualByComparingTo(Prize.THIRD_PRIZE);
     }
 
     @Test
