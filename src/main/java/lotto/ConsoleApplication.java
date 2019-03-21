@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMarket;
-import lotto.dto.LottoProfit;
+import lotto.domain.LottoProfit;
 import lotto.dto.LottoStatistics;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -31,7 +31,7 @@ public class ConsoleApplication {
             List<Lotto> lottos = LottoMarket.createDirectNumbers(directNumbers);
 
             //구매수익 set
-            LottoProfit lottoProfit = new LottoProfit((buyAmount - (directCount * Lotto.LOTTO_PRICE)) / Lotto.LOTTO_PRICE, directCount, buyAmount);
+            LottoProfit lottoProfit = new LottoProfit(directCount, buyAmount);
 
             //구매 갯수 출력
             LottoOutputView.showBuyCount(lottoProfit);

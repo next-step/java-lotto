@@ -2,7 +2,12 @@ package lotto.domain;
 
 import lotto.vo.LottoNo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
     public static final int LOTTO_NUM_COUNT = 6;
@@ -22,6 +27,25 @@ public class Lotto {
         this.numbers = numbers;
         this.matchCount = 0;
         this.matchBonus = false;
+    }
+
+    /**
+     * 각 로또별 번호 생성
+     *
+     * @return 한 로또의 번호들
+     */
+    public static List<LottoNo> createNumbers() throws IllegalArgumentException {
+        List<Integer> allNumber = IntStream.rangeClosed(LottoNo.LOTTO_NO_MIN, LottoNo.LOTTO_NO_MAX)
+                .boxed()
+                .collect(toList());
+
+        Collections.shuffle(allNumber);
+
+        List<LottoNo> numbers = new ArrayList<>();
+        allNumber.subList(0, 6)
+                .forEach(number -> numbers.add(LottoMachine.getLottoNoInstance(number)));
+
+        return numbers;
     }
 
     /**

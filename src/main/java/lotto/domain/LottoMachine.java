@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.LottoProfit;
 import lotto.dto.LottoStatistics;
 import lotto.vo.LottoMatchCount;
 import lotto.vo.LottoNo;
