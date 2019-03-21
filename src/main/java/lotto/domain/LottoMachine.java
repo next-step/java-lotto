@@ -6,13 +6,21 @@ import lotto.vo.LottoMatchCount;
 import lotto.vo.LottoNo;
 import lotto.vo.LottoWinningNumber;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoMachine {
+
+    private static Map<Integer, LottoNo> lottoNoInstanceMap = new HashMap<>();
+
+    public static LottoNo getLottoNoInstance(int number) throws IllegalArgumentException {
+        if (lottoNoInstanceMap.get(number) != null) {
+            return lottoNoInstanceMap.get(number);
+        }
+
+        return new LottoNo(number);
+    }
 
     /**
      * 당첨번호로 통계 dto 생성
@@ -81,7 +89,7 @@ public class LottoMachine {
                 .collect(Collectors.toSet());
 
         List<LottoNo> numbers = new ArrayList<>();
-        duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
+        duplicateNumbers.forEach(number -> numbers.add(getLottoNoInstance(number)));
 
         return numbers;
     }

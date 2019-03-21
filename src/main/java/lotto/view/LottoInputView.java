@@ -93,6 +93,6 @@ public class LottoInputView {
         List<LottoNo> numbers = LottoMachine.makeDuplicateNumbers(winningNumbers);
         Lotto lotto = new Lotto(numbers);
 
-        return new LottoWinningNumber(lotto, new LottoNo(bonusNumber));
+        return new LottoWinningNumber(lotto, LottoMachine.getLottoNoInstance(bonusNumber));
     }
 }

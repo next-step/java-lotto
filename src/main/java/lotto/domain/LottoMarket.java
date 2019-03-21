@@ -40,7 +40,7 @@ public class LottoMarket {
 
         List<LottoNo> numbers = new ArrayList<>();
         allNumber.subList(0, 6)
-                .forEach(number -> numbers.add(new LottoNo(number)));
+                .forEach(number -> numbers.add(LottoMachine.getLottoNoInstance(number)));
 
         return numbers;
     }
