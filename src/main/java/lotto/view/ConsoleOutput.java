@@ -1,10 +1,11 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.Prize;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ConsoleOutput {
 
@@ -12,9 +13,13 @@ public class ConsoleOutput {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLottoNumbers());
+    public static void printLottos(LottoList lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            String output = lotto.getLottoNumbers().stream()
+                    .map(lottoNumber -> lottoNumber.getValue().toString())
+                    .collect(Collectors.joining(", "));
+
+            System.out.println(output);
         }
 
         System.out.println();

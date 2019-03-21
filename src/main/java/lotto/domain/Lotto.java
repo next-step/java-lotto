@@ -1,49 +1,45 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import lotto.LottoRandomNumberGenerator;
+
+import java.util.*;
 
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
         this.publish();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    private List<Integer> publish() {
-        Set<Integer> numbers = new HashSet<>(LOTTO_SIZE);
+    private List<LottoNumber> publish() {
+        Set<LottoNumber> numbers = new HashSet<>(LOTTO_SIZE);
 
         while (numbers.size() < LOTTO_SIZE) {
             numbers.add(LottoRandomNumberGenerator.next());
         }
 
         this.lottoNumbers = new ArrayList<>(numbers);
-
         Collections.shuffle(this.lottoNumbers);
 
         return this.lottoNumbers;
     }
 
     public int getContainsCount(final Lotto winningLotto) {
-        Set<Integer> lottoNumbers = new HashSet<>(this.lottoNumbers);
-        Set<Integer> winningNumbers = new HashSet<>(winningLotto.getLottoNumbers());
+        Set<LottoNumber> lottoNumbers = new HashSet<>(this.lottoNumbers);
+        Set<LottoNumber> winningNumbers = new HashSet<>(winningLotto.getLottoNumbers());
 
         lottoNumbers.retainAll(winningNumbers);
 
         return lottoNumbers.size();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
@@ -52,5 +48,18 @@ public class Lotto {
         return "Lotto{" +
             "lottoNumbers=" + lottoNumbers +
             '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

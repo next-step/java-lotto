@@ -1,12 +1,13 @@
 package lotto;
 
-import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.LottoMachine;
 import lotto.domain.Prize;
 import lotto.view.ConsoleInput;
 import lotto.view.ConsoleOutput;
+
+import java.util.Map;
 
 public class LottoConsoleApp {
 
@@ -16,7 +17,7 @@ public class LottoConsoleApp {
         final LottoList lottos = LottoMachine.purchase(purchaseAmount);
 
         ConsoleOutput.printLottoCount(lottos.size());
-        ConsoleOutput.printLottos(lottos.getLottos());
+        ConsoleOutput.printLottos(lottos);
 
         final Lotto winningLotto = ConsoleInput.inputLastWinningNumbers();
         final Map<Prize, LottoList> winningResult = LottoMachine.getWinningResult(lottos, winningLotto);
