@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class MoneyTest {
     @Test
-    public void 돈은_0_보다_커야함() {
+    public void 돈은_양수_이어야함() {
         // given
         long positive = 1;
         long zero = 0;
@@ -16,7 +16,7 @@ public class MoneyTest {
         // when
         // then
         new Money(positive);
-        assertThatIllegalArgumentException().isThrownBy(() -> new Money(zero));
+        new Money(zero);
         assertThatIllegalArgumentException().isThrownBy(() -> new Money(negative));
     }
 
