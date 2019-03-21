@@ -18,7 +18,7 @@ public class OutputView {
         System.out.println("-------");
 
         for (Rank rank : Rank.values()) {
-            System.out.println(rank.toString() + matchResult.getRanks().get(rank));
+            System.out.println(rank.toString() + matchResult.getCountInfo().getCounts().get(rank));
         }
     }
 

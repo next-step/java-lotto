@@ -38,7 +38,7 @@ public class MatchResultTest {
 
         matchResult.calculate(lottos);
 
-        assertThat(matchResult.getRanks().get(Rank.SECOND)).isEqualTo(10);
+        assertThat(matchResult.getCountInfo().getCounts().get(Rank.SECOND)).isEqualTo(10);
     }
 
     @Test
