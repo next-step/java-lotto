@@ -2,7 +2,8 @@ package lotto.domain;
 
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Numbers;
-import lotto.utils.TestLottoGenerator;
+import lotto.utils.ManualLottoGenerator;
+import lotto.utils.TestRandomLottoGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class LottoStoreTest {
         manualLottoNumbers.add(numbers);
         manualLottoNumbers.add(numbers);
 
-        LottoStore lottoStore = new LottoStore(new TestLottoGenerator(), money, manualLottoNumbers);
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
     }
 
     @Test
@@ -48,7 +49,7 @@ public class LottoStoreTest {
         manualLottoNumbers.add(numbers);
         manualLottoNumbers.add(numbers);
 
-        LottoStore lottoStore = new LottoStore(new TestLottoGenerator(), money, manualLottoNumbers);
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
         assertThat(lottoStore.getLottos().size()).isEqualTo(10);
     }
@@ -69,7 +70,7 @@ public class LottoStoreTest {
         manualLottoNumbers.add(numbers);
         manualLottoNumbers.add(numbers);
 
-        LottoStore lottoStore = new LottoStore(new TestLottoGenerator(), money, manualLottoNumbers);
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
 
         assertThat(lottoStore.getLottos().get(0).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");

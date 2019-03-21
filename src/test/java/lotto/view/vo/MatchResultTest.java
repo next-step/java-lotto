@@ -5,7 +5,8 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Numbers;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
-import lotto.utils.TestLottoGenerator;
+import lotto.utils.ManualLottoGenerator;
+import lotto.utils.TestRandomLottoGenerator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class MatchResultTest {
         manualLottoNumbers.add(numbers);
         manualLottoNumbers.add(numbers);
 
-        LottoStore lottoStore = new LottoStore(new TestLottoGenerator(), money, manualLottoNumbers);
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
         Numbers winningLottoNumbers = new Numbers(Arrays.asList(new LottoNumber(1),
             new LottoNumber(2),
@@ -66,7 +67,7 @@ public class MatchResultTest {
         manualLottoNumbers.add(numbers);
         manualLottoNumbers.add(numbers);
 
-        LottoStore lottoStore = new LottoStore(new TestLottoGenerator(), money, manualLottoNumbers);
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
         Numbers winningLottoNumbers = new Numbers(Arrays.asList(new LottoNumber(1),
             new LottoNumber(2),

@@ -10,23 +10,25 @@ import java.util.List;
 public class LottoStore {
     private static final int LOTTO_PRICE = 1000;
     List<BasicLotto> lottos;
-    private LottoGenerator lottoGenerator;
+    private LottoGenerator manualLottoGenerator;
+    private LottoGenerator randomLottoGenerator;
 
-    public LottoStore(LottoGenerator lottoGenerator, int money, List<Numbers> manualLottoNumbers) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoStore(LottoGenerator manualLottoGenerator, LottoGenerator randomLottoGenerator, int money, List<Numbers> manualLottoNumbers) {
+        this.manualLottoGenerator = manualLottoGenerator;
+        this.randomLottoGenerator = randomLottoGenerator;
         lottos = new ArrayList<>();
         int tryCount = convertMoneyToTryCount(money) - manualLottoNumbers.size();
-        addManualLottos(manualLottoNumbers);
-        buyLottos(tryCount);
+        buyManualLottos(manualLottoNumbers);
+        buyRandomLottos(tryCount);
     }
 
-    private void addManualLottos(List<Numbers> manualLottoNumbers) {
-        manualLottoNumbers.forEach(numbers -> lottos.add(new BasicLotto(numbers)));
+    private void buyManualLottos(List<Numbers> manualLottoNumbers) {
+        manualLottoNumbers.forEach(numbers -> lottos.add(manualLottoGenerator.generate(numbers)));
     }
 
-    private void buyLottos(int count) {
+    private void buyRandomLottos(int count) {
         for (int i = 0; i < count; i++) {
-            lottos.add(new BasicLotto(this.lottoGenerator.generate()));
+            lottos.add(this.randomLottoGenerator.generate());
         }
     }
 

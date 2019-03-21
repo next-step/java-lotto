@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.lotto.Numbers;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;

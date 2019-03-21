@@ -4,7 +4,8 @@ import lotto.domain.LottoStore;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Numbers;
 import lotto.domain.lotto.WinningLotto;
-import lotto.utils.TestLottoGenerator;
+import lotto.utils.ManualLottoGenerator;
+import lotto.utils.TestRandomLottoGenerator;
 import lotto.view.vo.MatchResult;
 import org.junit.Test;
 
@@ -32,7 +33,7 @@ public class LottoResultTest {
         manualLottoNumbers.add(numbers);
         manualLottoNumbers.add(numbers);
 
-        LottoStore lottoStore = new LottoStore(new TestLottoGenerator(), money, manualLottoNumbers);
+        LottoStore lottoStore = new LottoStore(new ManualLottoGenerator(), new TestRandomLottoGenerator(), money, manualLottoNumbers);
 
         Numbers winningLottoNumbers = new Numbers(Arrays.asList(new LottoNumber(1),
             new LottoNumber(2),
