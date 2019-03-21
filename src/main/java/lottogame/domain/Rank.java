@@ -29,6 +29,10 @@ public enum Rank {
         return String.format(WINNING_RESULT_STRING_FORMAT, matchedCount, extraMessage, winningMoney);
     }
 
+    public int getMatchedCount() {
+        return matchedCount;
+    }
+
     public long getWinningMoney() {
         return winningMoney;
     }

@@ -45,7 +45,7 @@ public class LottoNumberPackage implements InputValidatable<Set<Integer>> {
     int getMatchedCount(LottoNumberPackage targetNumbers) {
         if(Objects.isNull(targetNumbers) ||
            CollectionUtils.isEmpty(targetNumbers.getNumbers())) {
-            return 0;
+            return Rank.MISS.getMatchedCount();
         }
 
         return (int)targetNumbers.getNumbers()
