@@ -1,6 +1,6 @@
 package lotto.parser;
 
-import lotto.domain.Lotto;
+import lotto.domain.ticket.Lotto;
 import org.junit.Test;
 
 import java.util.List;
@@ -33,15 +33,16 @@ public class LottoNumberParserTest {
     }
 
     @Test
-    public void 콤마_단위로_나뉘어진_로또번호_Lotto로_변환() {
+    public void 문자열을_로또객체로_변환() {
         // given
         String lottoNumbersString = "1, 2, 3, 4, 5, 6";
+        String bonusNumberString = "45";
 
         // when
-        Lotto lotto = LottoNumberParser.parse(lottoNumbersString);
+        Lotto lotto = LottoNumberParser.parse(lottoNumbersString, bonusNumberString);
 
         // then
-        assertThat(lotto.getNumbers())
-                .containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.getBonusNumber()).isEqualTo(Integer.parseInt(bonusNumberString));
     }
 }

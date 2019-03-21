@@ -1,23 +1,37 @@
 package lotto.domain;
 
-import lotto.vo.LottoResult;
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoBundle;
+import lotto.enums.LottoRank;
+import lotto.vo.LottoGameResult;
+import lotto.vo.LottoMatchResult;
+import lotto.vo.LottoWinResult;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoRunner {
     private LottoRunner() {
     }
 
-    public static LottoResult runLotto(Lotto winner, LottoBundle lottoBundle) {
-        return new LottoResult(getMatchCounts(winner, lottoBundle));
+    public static LottoGameResult runLotto(Lotto winner, LottoBundle lottoBundle) {
+        List<LottoMatchResult> lottoMatchResults = getLottoMatchResults(winner, lottoBundle);
+        List<LottoRank> lottoRanks = getLottoRanks(lottoMatchResults);
+
+        return new LottoGameResult(new LottoWinResult(lottoRanks));
     }
 
-    static long[] getMatchCounts(Lotto winner, LottoBundle lottoBundle) {
-        long[] result = new long[Lotto.TOTAL_LOTTO_NUMBERS + 1];
+    private static List<LottoMatchResult> getLottoMatchResults(Lotto winner, LottoBundle lottoBundle) {
+        List<Lotto> lottos = lottoBundle.getLottos();
 
-        lottoBundle.getLottos().forEach(lotto -> {
-            int numberOfDuplicatedNumbers = lotto.getNumberOfDuplicatedNumbers(winner);
-            result[numberOfDuplicatedNumbers]++;
-        });
+        return lottos.stream()
+                .map(lotto -> lotto.getResult(winner))
+                .collect(Collectors.toList());
+    }
 
-        return result;
+    private static List<LottoRank> getLottoRanks(List<LottoMatchResult> lottoMatchResults) {
+        return lottoMatchResults.stream()
+                .map(LottoRank::getRank)
+                .collect(Collectors.toList());
     }
 }

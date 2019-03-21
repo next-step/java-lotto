@@ -1,6 +1,6 @@
 package lotto.parser;
 
-import lotto.domain.Lotto;
+import lotto.domain.ticket.Lotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,8 +10,8 @@ public class LottoNumberParser {
     private LottoNumberParser() {
     }
 
-    public static Lotto parse(String lottoNumbersString) {
-        return new Lotto(parseToIntList(lottoNumbersString));
+    public static Lotto parse(String lottoNumbersString, String bonusNumber) {
+        return new Lotto(parseToIntList(lottoNumbersString), Integer.parseInt(bonusNumber));
     }
 
     static List<Integer> parseToIntList(String lottoNumbersString) {

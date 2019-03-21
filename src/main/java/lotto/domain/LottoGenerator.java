@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.LottoNumbers;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -7,32 +11,35 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-    private static final int NUMBER_OF_LOTTO_NUMBERS = 6;
-
     private LottoGenerator() {
     }
 
     public static Lotto generate() {
-        return new Lotto(getSortedLottoNumbers());
+        List<Integer> unsortedLottoNumbers = getUnsortedLottoNumbers();
+
+        List<Integer> lottoNumbers = extractSortedLottoNumbers(unsortedLottoNumbers);
+        int bonusNumber = unsortedLottoNumbers.get(LottoNumbers.LOTTO_NUMBERS_SIZE);
+
+        return new Lotto(lottoNumbers, bonusNumber);
     }
 
-    private static List<Integer> getSortedLottoNumbers() {
-        List<Integer> lottoNumbers = getUnsortedLottoNumbers();
-        sort(lottoNumbers);
-        return lottoNumbers;
+    private static List<Integer> extractSortedLottoNumbers(List<Integer> unsortedLottoNumbers) {
+        List<Integer> sortedLottoNumbers = unsortedLottoNumbers.subList(0, LottoNumbers.LOTTO_NUMBERS_SIZE);
+        sort(sortedLottoNumbers);
+
+        return sortedLottoNumbers;
     }
 
     private static void sort(List<Integer> lottoNumbers) {
         lottoNumbers.sort(Comparator.naturalOrder());
     }
 
-
     private static List<Integer> getUnsortedLottoNumbers() {
-        return getShuffledAllLottoNumbers().subList(0, NUMBER_OF_LOTTO_NUMBERS);
+        return getShuffledAllLottoNumbers().subList(0, LottoNumbers.LOTTO_NUMBERS_SIZE + 1);
     }
 
     static List<Integer> getAllLottoNumbers() {
-        return IntStream.rangeClosed(Lotto.MIN_NUMBER, Lotto.MAX_NUMBER)
+        return IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
     }
@@ -43,5 +50,4 @@ public class LottoGenerator {
 
         return allLottoNumbers;
     }
-
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoBundle;
+import lotto.vo.Money;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +23,7 @@ public class LottoMachineTest {
     @Test
     public void 금액_만큼_로또를_구매하기_잔액없는경우() {
         // given
-        int money = 10_000;
+        Money money = new Money(10_000);
 
         // when
         LottoBundle lottoBundle = LottoMachine.buyLottos(money);
@@ -33,7 +35,7 @@ public class LottoMachineTest {
     @Test
     public void 금액_만큼_로또를_구매하기_잔액있는경우() {
         // given
-        int money = 10_500;
+        Money money = new Money(10_500);
 
         // when
         LottoBundle lottoBundle = LottoMachine.buyLottos(money);
@@ -43,9 +45,9 @@ public class LottoMachineTest {
     }
 
     @Test
-    public void 금액이_음수인_경우_IllegalArgumentException() {
+    public void 로또를_구매할_수_있는_금액이_아닌_경우_IllegalArgumentException() {
         // given
-        int money = -1_000;
+        Money money = new Money(500);
 
         //when
         //then

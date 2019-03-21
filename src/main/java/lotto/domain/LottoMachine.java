@@ -1,13 +1,25 @@
 package lotto.domain;
 
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoBundle;
+import lotto.vo.Money;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 public class LottoMachine {
-    public static final int PRICE_OF_LOTTO = 1_000;
+    public static final Money LOTTO_PRICE = new Money(1_000);
 
     private LottoMachine() {
+    }
+
+    public static LottoBundle buyLottos(Money money) {
+        if (LOTTO_PRICE.isLargerThan(money)) {
+            throw new IllegalArgumentException("Input money must be more than " + LOTTO_PRICE.getAmount());
+        }
+
+        return getLottos(getNumberOfAffordableLottos(money));
     }
 
     static LottoBundle getLottos(long numberOfLotto) {
@@ -18,15 +30,7 @@ public class LottoMachine {
         return new LottoBundle(lottos);
     }
 
-    public static LottoBundle buyLottos(long money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("money must be positive");
-        }
-
-        return getLottos(getNumberOfAffordableLottos(money));
-    }
-
-    public static long getNumberOfAffordableLottos(long money) {
-        return money / PRICE_OF_LOTTO;
+    public static long getNumberOfAffordableLottos(Money money) {
+        return money.getAmount() / LOTTO_PRICE.getAmount();
     }
 }
