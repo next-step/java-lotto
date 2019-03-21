@@ -72,15 +72,59 @@ public class WinStatsTest {
 
     // Given
     Money purchaseMoney = new Money(14000);
-    Money winMoney = new Money(5000);
 
-    TestWinStats winStats = new TestWinStats();
-    winStats.setTotalWinMoney(winMoney);
+    int firstMatchNumber = 3;
+    int secondMatchNumber = 12;
+    int thirdMatchNumber = 25;
+    int fourthMatchNumber = 36;
+    int fifthMatchNumber = 40;
+    int sixthMatchNumber = 19;
+
+    List<Lotto> lottoList = Arrays.asList(
+        LottoVendingMachineTest.generateLotto(
+            5,
+            firstMatchNumber,
+            secondMatchNumber,
+            42,
+            thirdMatchNumber,
+            31),
+        LottoVendingMachineTest.generateLotto(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            1,
+            14),
+        LottoVendingMachineTest.generateLotto(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            fifthMatchNumber,
+            45),
+        LottoVendingMachineTest.generateLotto(
+            firstMatchNumber,
+            secondMatchNumber,
+            thirdMatchNumber,
+            fourthMatchNumber,
+            fifthMatchNumber,
+            sixthMatchNumber)
+    );
+    List<Number> winNumbers = new TestNumberGenerator(
+        fifthMatchNumber,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
+        sixthMatchNumber).generate();
+
+    WinStats winStats = new WinStats(lottoList, winNumbers);
+    winStats.total();
 
     // When
     String yield = winStats.yield(purchaseMoney);
 
     // Then
-    assertThat(yield).isEqualTo("0.36");
+    assertThat(yield).isEqualTo("142968.20");
   }
 }
