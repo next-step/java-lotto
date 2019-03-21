@@ -34,7 +34,7 @@ public class InputView {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    static LottoNumberPackage getLottoGame() {
+    private static LottoNumberPackage getLottoGame() {
         return new LottoNumberPackage(StringUtils.parseIntegerSet(getInputLine().split(NUMBER_DELIMETER)));
     }
 
@@ -47,7 +47,7 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    static String getInputLine() {
+    private static String getInputLine() {
         return StringUtils.removeWhitespace(scanner.nextLine());
     }
 }
