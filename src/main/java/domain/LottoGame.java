@@ -1,25 +1,35 @@
 package domain;
 
-import view.InputView;
-import view.ResultView;
+import util.RandomUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static util.Constants.PRICE_OF_LOTTO;
 
 public class LottoGame {
+    private int money;
     private Lottos lottos;
 
-    public LottoGame(int numberOfLotto) {
-        this.lottos = new Lottos(numberOfLotto);
+    public LottoGame(int money) {
+        this.money = money;
+        this.lottos = createLottos(money);
     }
 
-    public Lottos getLottos() {
-        return this.lottos;
+    private Lottos createLottos(int money) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < money / PRICE_OF_LOTTO; i++) {
+            lottos.add(new Lotto(RandomUtils.createNumbers()));
+        }
+
+        return new Lottos(lottos);
     }
 
-    public static void main(String[] args) {
-        int numberOfLottos = InputView.getNumberOfLottos();
+    public LottoResult lottery(Lotto answer) {
+        return lottos.lottery(money, answer);
+    }
 
-        LottoGame lottoGame = new LottoGame(numberOfLottos);
-        ResultView.printLottos(lottoGame.getLottos());
-
-        Lotto winLotto = InputView.getWinLotto();
+    public List<Lotto> getLottos() {
+        return this.lottos.getLottos();
     }
 }

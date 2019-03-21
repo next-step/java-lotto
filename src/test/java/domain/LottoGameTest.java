@@ -1,4 +1,5 @@
-import domain.LottoGame;
+package domain;
+
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,18 +19,5 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(money);
 
         assertThat(lottoGame.getLottos().size()).isEqualTo(10);
-    }
-
-    @Test
-    public void 로또를_생성() {
-        int money = 10000;
-        LottoGame lottoGame = new LottoGame(money);
-
-        assertThat(lottoGame.getLottos().size()).isEqualTo(10);
-    }
-
-    @Test
-    public void name() {
-
     }
 }

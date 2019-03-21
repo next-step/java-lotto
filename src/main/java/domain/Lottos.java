@@ -1,22 +1,32 @@
 package domain;
 
-import java.util.ArrayList;
+import util.WinType;
+
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
-    public Lottos(int numberOfLotto) {
-        for (int i = 0; i < numberOfLotto; i++) {
-            lottos.add(new Lotto());
-        }
+    Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
+    List<Lotto> getLottos() {
         return lottos;
     }
 
-    public int size() {
+    int size() {
         return lottos.size();
+    }
+
+    LottoResult lottery(int money, Lotto answer) {
+        Map<WinType, Long> map = lottos.stream()
+                .map(it -> it.lottery(answer))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        return new LottoResult(money, map);
     }
 }
