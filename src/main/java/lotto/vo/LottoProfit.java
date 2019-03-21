@@ -29,7 +29,7 @@ public class LottoProfit {
 
     private Money getTotalPrizeMoneyFromLottoWinResult(LottoWinResult lottoWinResult) {
         long totalPrizeMoneyAmount = Arrays.asList(LottoRank.values()).stream()
-                .mapToLong(lottoRank -> lottoRank.getPrizeMoney() * lottoWinResult.getLottoRankCount(lottoRank))
+                .mapToLong(lottoRank -> lottoRank.getTotalPrizeMoneyOfLottoRank(lottoWinResult))
                 .sum();
 
         return new Money(totalPrizeMoneyAmount);

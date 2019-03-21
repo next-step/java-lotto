@@ -1,6 +1,7 @@
 package lotto.enums;
 
 import lotto.vo.LottoMatchResult;
+import lotto.vo.LottoWinResult;
 import lotto.vo.Money;
 
 import java.util.Arrays;
@@ -38,5 +39,10 @@ public enum LottoRank {
                 .filter(lottoRank -> (lottoRank.matchCount == lottoResult.getMatchCount()))
                 .findFirst()
                 .orElse(FAIL);
+    }
+
+    public long getTotalPrizeMoneyOfLottoRank(LottoWinResult lottoWinResult) {
+        long lottoRankCount = lottoWinResult.getLottoRankCount(this);
+        return this.getPrizeMoney() * lottoRankCount;
     }
 }
