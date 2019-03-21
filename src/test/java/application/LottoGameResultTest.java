@@ -2,6 +2,7 @@ package application;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class LottoGameResultTest {
     public void 모두맞췄을경우_출력확인() {
         List<Integer> result = Arrays.asList(6);
 
-        assertThat(LottoGameResult.match(result.get(0)).getReward()).isEqualTo("2000000000원");
+        assertThat(LottoGameResult.match(result.get(0)).getReward()).isEqualTo(2000000000);
     }
 
     @Test(expected = IllegalArgumentException.class)
