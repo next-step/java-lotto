@@ -36,7 +36,7 @@ public class ConsoleResultView {
     public static void printRankGroup(Map<Rank, Long> rankGroup){
         for (Rank rank : rankGroup.keySet()) {
             String str = rank.getMatchCount() + "개 일치 ";
-            str += "(" + rank.getPrizeMoneyForDisplay() + "원) ";
+            str += "(" + rank.getPrizeMoneyForDisplay() + ") ";
             str += "- " + rankGroup.get(rank) + "개";
             System.out.println(str);
         }
