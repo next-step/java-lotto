@@ -7,9 +7,14 @@ public class LottoMachine {
     public static final Integer LOTTO_PRICE = 1000;
 
     private Lotto winningNumbers;
+    private LottoNumber bonusNumber;
 
     public void initWinningNumbers(Integer ...number) {
         winningNumbers = new Lotto(number);
+    }
+
+    public void initBonusNumber(Integer number) {
+        bonusNumber = LottoNumber.getInstance(number);
     }
 
     public List<Lotto> purchase(int money) {
@@ -33,10 +38,20 @@ public class LottoMachine {
     }
 
     public Rank calculateRank(Lotto lotto) {
-        return Rank.calculate(winningNumbers.matchCount(lotto));
+        if(winningNumbers == null || bonusNumber == null){
+            throw new IllegalStateException();
+        }
+
+        return Rank.calculate(
+            winningNumbers.matchCount(lotto),
+            lotto.contains(bonusNumber));
     }
 
     public Lotto getWinningNumbers() {
         return winningNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

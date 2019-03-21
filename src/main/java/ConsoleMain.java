@@ -13,6 +13,7 @@ public class ConsoleMain {
         ConsoleResultView.printLottosInfo(lottos);
 
         lottoMachine.initWinningNumbers(ConsoleInputView.inputWinningNumbers());
+        lottoMachine.initBonusNumber(ConsoleInputView.inputBonusNumber());
 
         List<Rank> ranks = lottoMachine.calculateRanks(lottos);
         ConsoleResultView.printTotalResult(

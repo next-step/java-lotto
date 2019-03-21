@@ -11,6 +11,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LottoAnalyzerTest {
     private List<Rank> ranks = new ArrayList<>();
+    private Long totalPrize;
 
     @Before
     public void setUp() {
@@ -18,6 +19,8 @@ public class LottoAnalyzerTest {
         ranks.add(Rank.Fourth);
         ranks.add(Rank.Fourth);
         ranks.add(Rank.None);
+
+        totalPrize = ranks.stream().mapToLong(Rank::getPrizeMoney).sum();
     }
 
     @Test
@@ -30,12 +33,13 @@ public class LottoAnalyzerTest {
     @Test
     public void calculate_prize_money() {
         Long prizeMoney = LottoAnalyzer.calculatePrizeMoney(ranks);
-        assertThat(prizeMoney).isEqualTo(60000L);
+        assertThat(prizeMoney).isEqualTo(totalPrize);
     }
 
     @Test
     public void calculate_profit_rate() {
         Double profitRate = LottoAnalyzer.calculateProfitRate(ranks);
-        assertThat(profitRate).isEqualTo(15.0);
+        assertThat(profitRate).isEqualTo(
+            totalPrize.doubleValue() / (ranks.size() * LottoMachine.LOTTO_PRICE));
     }
 }

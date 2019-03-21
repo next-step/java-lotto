@@ -18,4 +18,10 @@ public class ConsoleInputView {
 
         return StringParser.strToIntegerArray(str);
     }
+
+    public static Integer inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+
+        return scanner.nextInt();
+    }
 }

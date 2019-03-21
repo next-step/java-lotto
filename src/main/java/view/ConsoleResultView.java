@@ -29,17 +29,25 @@ public class ConsoleResultView {
     public static void printTotalResult(Map<Rank, Long> rankGroup, Double profitRate){
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printRankGroup(rankGroup);
+        printMatches(rankGroup);
         printProfitRate(profitRate);
     }
 
-    public static void printRankGroup(Map<Rank, Long> rankGroup){
+    public static void printMatches(Map<Rank, Long> rankGroup){
         for (Rank rank : rankGroup.keySet()) {
-            String str = rank.getMatchCount() + "개 일치 ";
-            str += "(" + rank.getPrizeMoneyForDisplay() + ") ";
-            str += "- " + rankGroup.get(rank) + "개";
-            System.out.println(str);
+            System.out.println(printMatch(rank, rankGroup.get(rank)));
         }
+    }
+
+    private static String printMatch(Rank rank, Long value) {
+        String str = rank.getMatchCount() + "개 일치";
+        if(rank.isMatchBonus()){
+            str += ", 보너스 볼 일치";
+        }
+        str += "(" + rank.getPrizeMoneyForDisplay() + ")";
+        str += " - " + value + "개";
+
+        return str;
     }
 
     public static void printProfitRate(Double profitRate){
