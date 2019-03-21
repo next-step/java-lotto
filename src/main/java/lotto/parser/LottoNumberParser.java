@@ -10,8 +10,8 @@ public class LottoNumberParser {
     private LottoNumberParser() {
     }
 
-    public static Lotto parse(String lottoNumbersString, int bonusNumber) {
-        return new Lotto(parseToIntList(lottoNumbersString), bonusNumber);
+    public static Lotto parse(String lottoNumbersString, String bonusNumber) {
+        return new Lotto(parseToIntList(lottoNumbersString), Integer.parseInt(bonusNumber));
     }
 
     static List<Integer> parseToIntList(String lottoNumbersString) {
