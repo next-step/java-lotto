@@ -18,6 +18,6 @@ public class LottoWinResult {
 
     public long getLottoRankCount(LottoRank lottoRank) {
         Long lottoRankCount = this.wins.get(lottoRank);
-        return (null == lottoRankCount ? 0 : lottoRankCount);
+        return ((null == lottoRankCount) ? 0 : lottoRankCount);
     }
 }
