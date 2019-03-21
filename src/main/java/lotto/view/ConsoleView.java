@@ -16,7 +16,7 @@ public class ConsoleView {
   public static void main(String[] args) {
 
     int insertMoney = consoleInputView.inputPurchaseAmount();
-    List<Lotto> purchaseLottoList = issueLotto(insertMoney);
+    List<Lotto> purchaseLottoList = generateLotto(insertMoney);
 
     String winNumberString = consoleInputView.inputWinNumbers();
     List<Number> winNumber = winNumbers(winNumberString);
@@ -39,7 +39,7 @@ public class ConsoleView {
     ConsoleResultView.printYield(yield);
   }
 
-  private static List<Lotto> issueLotto(int insertMoney) {
+  private static List<Lotto> generateLotto(int insertMoney) {
 
     Money purchaseMoney = new Money(insertMoney);
     List<Lotto> purchaseLottoList = new LottoVendingMachine().purchaseLotto(purchaseMoney);
