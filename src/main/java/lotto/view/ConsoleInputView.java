@@ -16,11 +16,8 @@ public class ConsoleInputView {
         return scanner.nextLine();
     }
 
-    public static int inputBonusNumber(Scanner scanner) {
+    public static String inputBonusNumber(Scanner scanner) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String bonusNumber = scanner.nextLine();
-        System.out.println();
-
-        return Integer.parseInt(bonusNumber);
+        return scanner.nextLine();
     }
 }
