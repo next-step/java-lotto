@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.lotto.Ticket;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,5 +29,13 @@ public class InputViewTest {
             InputView.getWinningLottoNumbers(question, ",", scanner);
 
         assertThat(winningLottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    @Test
+    public void 매뉴얼_로또_입력_테스트() {
+        Scanner scanner = new Scanner("1, 2, 3, 4, 5, 6\n 1, 2, 3, 4, 5, 6");
+        List<Ticket> manualLottoNumbers =
+            InputView.getManualLottoNumbers("\n수동으로 구매할 번호를 입력해 주세요.", ",", scanner, 2, false);
+        System.out.println(manualLottoNumbers.size());
     }
 }

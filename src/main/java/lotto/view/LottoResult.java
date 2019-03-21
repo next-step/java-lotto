@@ -11,9 +11,11 @@ public class LottoResult {
         matchResult = new MatchResult(winningLotto);
     }
 
-    public void generate(LottoBundle lottoBundle) {
+    public MatchResult generate(LottoBundle lottoBundle) {
         matchResult.calculate(lottoBundle);
         OutputView.printResultStatistics(matchResult);
+
+        return matchResult;
     }
 
     public String getRewardPercent(int money) {

@@ -23,12 +23,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Ticket> getManualLottoNumbers(String question, String regex, Scanner scanner, int manualCount) {
+    public static List<Ticket> getManualLottoNumbers(String question, String regex, Scanner scanner, int manualCount, Boolean isConsole) {
         System.out.println(question);
         List<Ticket> manualLottoNumbers = new ArrayList<>();
 
         readString(scanner);
-        scanner.nextLine();
+        if (isConsole)
+            scanner.nextLine();
 
         for (int i = 0; i < manualCount; i++) {
             Ticket ticket = new Ticket(Arrays.stream(split(scanner.nextLine(), regex))

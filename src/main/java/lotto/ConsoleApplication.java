@@ -22,7 +22,7 @@ public class ConsoleApplication {
         int money = InputView.getMoney("구입금액을 입력해 주세요. ", scanner);
         int manualCount = InputView.getManualCount("\n수동으로 구매할 로또 수를 입력해 주세요.", scanner);
         List<Ticket> manualLottoNumbers =
-            InputView.getManualLottoNumbers("\n수동으로 구매할 번호를 입력해 주세요.", REGEX, scanner, manualCount);
+            InputView.getManualLottoNumbers("\n수동으로 구매할 번호를 입력해 주세요.", REGEX, scanner, manualCount, true);
 
         LottoStore lottoStore =
             new LottoStore(new ManualLottoGenerator(), new RandomLottoGenerator(), money, manualLottoNumbers);
