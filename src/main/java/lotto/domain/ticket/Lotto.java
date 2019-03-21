@@ -1,6 +1,5 @@
 package lotto.domain.ticket;
 
-import lotto.enums.LottoRank;
 import lotto.vo.LottoMatchResult;
 
 import java.util.List;
@@ -19,13 +18,7 @@ public class Lotto {
     }
 
     int getMatchCounts(Lotto target) {
-        int matchCounts = this.lottoNumbers.getNumberOfDuplicatedNumbers(target.lottoNumbers);
-
-        if ((LottoRank.THIRD.getMatchCount() == matchCounts) && (isBonusNumberMatch(target))) {
-            return LottoRank.SECOND.getMatchCount();
-        }
-
-        return matchCounts;
+        return this.lottoNumbers.getNumberOfDuplicatedNumbers(target.lottoNumbers);
     }
 
     boolean isBonusNumberMatch(Lotto target) {
