@@ -15,8 +15,8 @@ public class Money {
     return this;
   }
 
-  public Money count(WinCount winCount) {
-    this.value *= winCount.count();
+  public Money count(long count) {
+    this.value *= count;
     return this;
   }
 

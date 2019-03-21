@@ -33,14 +33,7 @@ public class ConsoleView {
     WinStats winStats = new WinStats(purchaseLottoList, winNumber);
     winStats.total();
 
-    ConsoleResultView.printMatchWinCount(
-        3, winStats.getThreeWinMoney(), winStats.getThreeWinCount());
-    ConsoleResultView.printMatchWinCount(
-        4, winStats.getFourWinMoney(), winStats.getFourWinCount());
-    ConsoleResultView.printMatchWinCount(
-        5, winStats.getFiveWinMoney(), winStats.getFiveWinCount());
-    ConsoleResultView.printMatchWinCount(
-        6, winStats.getSixWinMoney(), winStats.getSixWinCount());
+    ConsoleResultView.printMatchWinCount(winStats.getWinCounts());
 
     String yield = winStats.yield(new Money(insertMoney));
     ConsoleResultView.printYield(yield);
