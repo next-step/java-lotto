@@ -1,23 +1,20 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class FixedLottoGenerator implements LottoGenerator {
-    private List<Integer> baseNumbers =
-            IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-                    .boxed()
-                    .collect(Collectors.toList());
-    private int customIndex;
+    private List<LottoNumber> numbers;
 
-    public FixedLottoGenerator(int baseNumber) {
-        this.customIndex = baseNumber - 2;
+    public FixedLottoGenerator(final List<Integer> numbers) {
+        this.numbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
     }
 
     @Override
     public Lotto generateLotto() {
-        customIndex++;
-        return new Lotto(baseNumbers.subList(customIndex, customIndex + Lotto.SIZE_LIMIT));
+        List<LottoNumber> newNumbers = new ArrayList<>(numbers);
+        numbers = numbers.stream().map(LottoNumber::increase).collect(Collectors.toList());
+        return new Lotto(newNumbers);
     }
 }

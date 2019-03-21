@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomLottoGenerator implements LottoGenerator {
-    private List<Integer> baseNumbers() {
-        return IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-                .boxed()
+    private static List<LottoNumber> baseNumbers() {
+        return IntStream.range(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     public Lotto generateLotto() {
-        List<Integer> baseNumbers = baseNumbers();
+        List<LottoNumber> baseNumbers = baseNumbers();
         Collections.shuffle(baseNumbers);
         return new Lotto(baseNumbers.subList(BASE_INDEX, Lotto.SIZE_LIMIT));
     }

@@ -1,9 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PurchaseHistory {
     private final int payment;
@@ -19,15 +17,6 @@ public class PurchaseHistory {
         for (int i = 0; i < numberOfLotto; i++) {
             lottos.add(lottoGenerator.generateLotto());
         }
-    }
-
-    public StatisticsResult compareWith(Lotto previousWinningLotto) {
-        Map<Prize, Integer> prizeCount = new HashMap<>();
-        for (Lotto lotto : lottos) {
-            Prize prize = Prize.fromNumberOfMatch(lotto.countNumberOfMatch(previousWinningLotto));
-            prizeCount.put(prize, prizeCount.getOrDefault(prize, 0) + 1);
-        }
-        return new StatisticsResult(payment, prizeCount);
     }
 
     private boolean isNotEnoughMoney() {

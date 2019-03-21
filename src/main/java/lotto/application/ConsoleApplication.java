@@ -1,26 +1,28 @@
 package lotto.application;
 
-import lotto.Lotto;
-import lotto.PurchaseHistory;
-import lotto.RandomLottoGenerator;
-import lotto.StatisticsResult;
+import lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         int amount = InputView.inputPurchaseAmount(scanner);
-        PurchaseHistory purchase = new PurchaseHistory(amount, randomLottoGenerator);
+        PurchaseHistory purchase = LottoGame.purchase(amount, randomLottoGenerator);
 
         OutputView.printPurchaseResult(purchase);
 
-        Lotto previousWinningLotto = InputView.inputPreviousWinningLotto(scanner);
-        StatisticsResult statisticsResult = purchase.compareWith(previousWinningLotto);
+        List<Integer> previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
+        Lotto previousWinningLotto = new FixedLottoGenerator(previousWinningLottoNumbers).generateLotto();
+
+        StatisticsResult statisticsResult = LottoGame.analyse(purchase, previousWinningLotto);
 
         OutputView.printStatisticsResult(statisticsResult);
+        scanner.close();
     }
 }

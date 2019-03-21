@@ -1,18 +1,12 @@
 package lotto;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public enum Prize {
-    NO_PRIZE(0, 0L),
-    FOURTH_PRIZE(3, 5000L),
-    THIRD_PRIZE(4, 50000L),
-    SECOND_PRIZE(5, 1500000L),
-    FIRST_PRIZE(6, 2000000000L);
+    NO_PRIZE(0, 0),
+    FOURTH_PRIZE(3, 5_000),
+    THIRD_PRIZE(4, 50_000),
+    SECOND_PRIZE(5, 1_500_000),
+    FIRST_PRIZE(6, 2_000_000_000);
 
-    private static final Map<Integer, Prize> PRIZE_MAP =
-            Stream.of(values()).collect(Collectors.toMap(e -> e.numberOfMatch, e -> e));
     private final int numberOfMatch;
     private final long prizeMoney;
 
@@ -21,11 +15,13 @@ public enum Prize {
         this.prizeMoney = prizeMoney;
     }
 
-    public static Prize fromNumberOfMatch(int number) {
-        if (!PRIZE_MAP.containsKey(number)) {
-            return Prize.NO_PRIZE;
+    public static Prize fromNumberOfMatch(int numberOfMatch) {
+        for (Prize prize : values()) {
+            if (prize.numberOfMatch == numberOfMatch) {
+                return prize;
+            }
         }
-        return PRIZE_MAP.get(number);
+        return NO_PRIZE;
     }
 
     public long calculatePrizeMoneyBy(int count) {

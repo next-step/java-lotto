@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.Lotto;
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -21,12 +19,12 @@ public class InputView {
         }
     }
 
-    public static Lotto inputPreviousWinningLotto(Scanner scanner) {
+    public static List<Integer> inputPreviousWinningLotto(Scanner scanner) {
         try {
             System.out.println(PREVIOUS_WINNING_LOTTO_INPUT_MENT);
             scanner.nextLine();
             String temp = scanner.nextLine();
-            return new Lotto(convert(temp));
+            return convert(temp);
         } catch (NumberFormatException e) {
             e.printStackTrace();
             throw new RuntimeException(FORMAT_ERROR_MENT);

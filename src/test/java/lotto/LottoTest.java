@@ -14,7 +14,7 @@ public class LottoTest {
         // given
         List<Integer> invalidNumbers = Arrays.asList(1, 1, 2, 3, 4, 5);
         // when
-        Lotto lotto = new Lotto(invalidNumbers);
+        Lotto lotto = new FixedLottoGenerator(invalidNumbers).generateLotto();
         // then
     }
 
@@ -23,7 +23,7 @@ public class LottoTest {
         // given
         List<Integer> invalidNumbers = Arrays.asList(1, 7, 8, 2, 3, 4, 5);
         // when
-        Lotto lotto = new Lotto(invalidNumbers);
+        Lotto lotto = new FixedLottoGenerator(invalidNumbers).generateLotto();
         // then
     }
 
@@ -32,8 +32,8 @@ public class LottoTest {
         // given
         List<Integer> currentLottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> previousLottoNumbers = Arrays.asList(1, 3, 5, 7, 9, 11);
-        Lotto currentLotto = new Lotto(currentLottoNumbers);
-        Lotto previousLotto = new Lotto(previousLottoNumbers);
+        Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
+        Lotto previousLotto = new FixedLottoGenerator(previousLottoNumbers).generateLotto();
         // when
         int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
         // then
