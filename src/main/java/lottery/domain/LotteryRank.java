@@ -23,15 +23,19 @@ public enum LotteryRank {
         return Arrays.stream(values())
                 .filter(rank -> {
                     if (countWinningNumbers == 5) {
-                        if (matchBonus) {
-                            return rank == SECOND;
-                        }
-
-                        return rank == THIRD;
+                        return filterFiveMatches(matchBonus, rank);
                     }
                     return rank.winningCount == countWinningNumbers;
                 })
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    private static boolean filterFiveMatches(boolean matchBonus, LotteryRank rank) {
+        if (matchBonus) {
+            return rank == SECOND;
+        }
+
+        return rank == THIRD;
     }
 }
