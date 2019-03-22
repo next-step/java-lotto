@@ -10,7 +10,6 @@ import lotto.enums.Rank;
 import lotto.utils.ManualLottoGenerator;
 import lotto.utils.RandomLottoGenerator;
 import lotto.view.LottoResult;
-import lotto.view.dto.ResultResponseDTO;
 import lotto.view.vo.MatchResult;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -66,11 +65,9 @@ public class WebApplication {
 
             LottoResult lottoResult = new LottoResult(winningLotto);
             MatchResult matchResult = lottoResult.generate(lottoBundle);
-            List<ResultResponseDTO> results = new ArrayList<>();
+            List<String> results = new ArrayList<>();
             for (Rank rank : Rank.values()) {
-                ResultResponseDTO result =
-                    new ResultResponseDTO(rank.toString(), matchResult.getCountInfo().getCounts().get(rank).toString());
-                results.add(result);
+                results.add(rank.toString() + matchResult.getCountInfo().getCounts().get(rank).toString());
             }
 
             model.put("matchResult", results);
