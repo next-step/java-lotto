@@ -4,17 +4,17 @@ import java.util.List;
 
 public class Lotto {
 
-  private List<Number> numbers;
+  private List<Integer> numbers;
 
-  public Lotto(List<Number> numbers) {
+  public Lotto(List<Integer> numbers) {
     this.numbers = numbers;
   }
 
-  public List<Number> getNumbers() {
+  public List<Integer> getNumbers() {
     return this.numbers;
   }
 
-  public int winMatch(List<Number> winNumbers) {
+  public int winMatch(List<Integer> winNumbers) {
 
     return (int)winNumbers.stream()
         .filter(winNumber -> numbers.contains(winNumber))

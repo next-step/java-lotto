@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.view.ConsoleResultView;
 
 class NumberGenerator {
 
@@ -14,10 +13,10 @@ class NumberGenerator {
   private static final int FROM_INDEX = 0;
   private static final int TO_INDEX = 6;
 
-  List<Number> generate() {
+  List<Integer> generate() {
 
-    List<Number> numbers = IntStream.range(START_NUMBER, END_NUMBER)
-        .mapToObj(Number::new)
+    List<Integer> numbers = IntStream.range(START_NUMBER, END_NUMBER)
+        .boxed()
         .collect(Collectors.toList());
     Collections.shuffle(numbers);
 

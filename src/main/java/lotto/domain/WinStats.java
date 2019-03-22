@@ -9,13 +9,13 @@ public class WinStats {
   private List<WinCount> winCounts;
 
   private List<Lotto> lottos;
-  private List<Number> winNumbers;
+  private List<Integer> winNumbers;
 
   public WinStats() {
 
   }
 
-  public WinStats(List<Lotto> lottos, List<Number> winNumbers) {
+  public WinStats(List<Lotto> lottos, List<Integer> winNumbers) {
     this.lottos = lottos;
     this.winNumbers = winNumbers;
   }

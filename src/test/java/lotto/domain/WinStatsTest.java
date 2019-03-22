@@ -21,36 +21,36 @@ public class WinStatsTest {
     int sixthMatchNumber = 19;
 
     List<Lotto> lottoList = Arrays.asList(
-        LottoVendingMachineTest.generateLotto(
+        new Lotto(Arrays.asList(
             5,
             firstMatchNumber,
             secondMatchNumber,
             42,
             thirdMatchNumber,
-            31),
-        LottoVendingMachineTest.generateLotto(
+            31)),
+        new Lotto(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             1,
-            14),
-        LottoVendingMachineTest.generateLotto(
+            14)),
+        new Lotto(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            45),
-        LottoVendingMachineTest.generateLotto(
+            45)),
+        new Lotto(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            sixthMatchNumber)
+            sixthMatchNumber))
     );
-    List<Number> winNumbers = new TestNumberGenerator(
+    List<Integer> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
@@ -81,36 +81,36 @@ public class WinStatsTest {
     int sixthMatchNumber = 19;
 
     List<Lotto> lottoList = Arrays.asList(
-        LottoVendingMachineTest.generateLotto(
+        new Lotto(Arrays.asList(
             5,
             firstMatchNumber,
             secondMatchNumber,
             42,
             thirdMatchNumber,
-            31),
-        LottoVendingMachineTest.generateLotto(
+            31)),
+        new Lotto(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             1,
-            14),
-        LottoVendingMachineTest.generateLotto(
+            14)),
+        new Lotto(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            45),
-        LottoVendingMachineTest.generateLotto(
+            45)),
+        new Lotto(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            sixthMatchNumber)
+            sixthMatchNumber))
     );
-    List<Number> winNumbers = new TestNumberGenerator(
+    List<Integer> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,

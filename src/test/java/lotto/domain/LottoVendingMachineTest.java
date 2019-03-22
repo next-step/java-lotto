@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 
@@ -28,20 +29,20 @@ public class LottoVendingMachineTest {
     int secondMatchNumber = 12;
     int thirdMatchNumber = 25;
 
-    Lotto lotto = generateLotto(
+    Lotto lotto = new Lotto(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         2,
         19,
-        15);
-    List<Number> winNumbers = new TestNumberGenerator(
+        15));
+    List<Integer> winNumbers = Arrays.asList(
         5,
         firstMatchNumber,
         secondMatchNumber,
         42,
         thirdMatchNumber,
-        31).generate();
+        31);
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -59,20 +60,20 @@ public class LottoVendingMachineTest {
     int thirdMatchNumber = 25;
     int fourthMatchNumber = 36;
 
-    Lotto lotto = generateLotto(
+    Lotto lotto = new Lotto(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         19,
-        15);
-    List<Number> winNumbers = new TestNumberGenerator(
+        15));
+    List<Integer> winNumbers = Arrays.asList(
         5,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        31).generate();
+        31);
 
     // When
       int matchingCount = lotto.winMatch(winNumbers);
@@ -91,20 +92,20 @@ public class LottoVendingMachineTest {
     int fourthMatchNumber = 36;
     int fifthMatchNumber = 40;
 
-    Lotto lotto = generateLotto(
+    Lotto lotto = new Lotto(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         fifthMatchNumber,
-        15);
-    List<Number> winNumbers = new TestNumberGenerator(
+        15));
+    List<Integer> winNumbers = Arrays.asList(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        31).generate();
+        31);
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -124,45 +125,25 @@ public class LottoVendingMachineTest {
     int fifthMatchNumber = 40;
     int sixthMatchNumber = 19;
 
-    Lotto lotto = generateLotto(
+    Lotto lotto = new Lotto(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         fifthMatchNumber,
+        sixthMatchNumber));
+    List<Integer> winNumbers = Arrays.asList(
+        fifthMatchNumber,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
         sixthMatchNumber);
-    List<Number> winNumbers = new TestNumberGenerator(
-        fifthMatchNumber,
-        firstMatchNumber,
-        secondMatchNumber,
-        fourthMatchNumber,
-        thirdMatchNumber,
-        sixthMatchNumber).generate();
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
 
     // Then
     assertThat(matchingCount).isEqualTo(6);
-  }
-
-  public static Lotto generateLotto(
-      int firstMatchNumber,
-      int secondMatchNumber,
-      int thirdMatchNumber,
-      int fourthMatchNumber,
-      int fifthMatchNumber,
-      int sixthMatchNumber) {
-
-    return new Lotto(
-        new TestNumberGenerator(
-            firstMatchNumber,
-            secondMatchNumber,
-            thirdMatchNumber,
-            fourthMatchNumber,
-            fifthMatchNumber,
-            sixthMatchNumber
-        ).generate()
-    );
   }
 }

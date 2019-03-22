@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoVendingMachine;
 import lotto.domain.Money;
-import lotto.domain.Number;
 import lotto.domain.WinStats;
 
 public class ConsoleView {
@@ -19,7 +18,7 @@ public class ConsoleView {
     List<Lotto> purchaseLottoList = generateLotto(insertMoney);
 
     String winNumberString = consoleInputView.inputWinNumbers();
-    List<Number> winNumber = winNumbers(winNumberString);
+    List<Integer> winNumber = winNumbers(winNumberString);
 
     winState(insertMoney, purchaseLottoList, winNumber);
   }
@@ -27,7 +26,7 @@ public class ConsoleView {
   private static void winState(
       int insertMoney,
       List<Lotto> purchaseLottoList,
-      List<Number> winNumber) {
+      List<Integer> winNumber) {
     ConsoleResultView.printResultTitle();
 
     WinStats winStats = new WinStats(purchaseLottoList, winNumber);
@@ -50,11 +49,11 @@ public class ConsoleView {
     return purchaseLottoList;
   }
 
-  private static List<Number> winNumbers(String winNumberString) {
+  private static List<Integer> winNumbers(String winNumberString) {
 
     String[] winNumberArray = winNumberString.split(",");
     return Arrays.stream(winNumberArray)
-        .map(winNumber -> new Number(Integer.parseInt(winNumber.trim())))
+        .map(winNumber -> Integer.parseInt(winNumber.trim()))
         .collect(Collectors.toList());
   }
 }

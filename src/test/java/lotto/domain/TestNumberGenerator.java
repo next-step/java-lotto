@@ -5,7 +5,7 @@ import java.util.List;
 
 class TestNumberGenerator extends NumberGenerator {
 
-  private List<Number> numbers;
+  private List<Integer> numbers;
 
   TestNumberGenerator(
       int firstMatchNumber,
@@ -16,17 +16,17 @@ class TestNumberGenerator extends NumberGenerator {
       int sixthMatchNumber) {
 
     this.numbers = Arrays.asList(
-        new Number(firstMatchNumber),
-        new Number(secondMatchNumber),
-        new Number(thirdMatchNumber),
-        new Number(fourthMatchNumber),
-        new Number(fifthMatchNumber),
-        new Number(sixthMatchNumber)
+        firstMatchNumber,
+        secondMatchNumber,
+        thirdMatchNumber,
+        fourthMatchNumber,
+        fifthMatchNumber,
+        sixthMatchNumber
     );
   }
 
   @Override
-  List<Number> generate() {
+  List<Integer> generate() {
     return this.numbers;
   }
 }
