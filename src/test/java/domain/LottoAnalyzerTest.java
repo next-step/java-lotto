@@ -24,20 +24,20 @@ public class LottoAnalyzerTest {
     }
 
     @Test
-    public void get_rank_grouping() {
+    public void 순위목록을_그룹핑한다() {
         Map<Rank, Long> rankGroup = LottoAnalyzer.makeWinGroup(ranks);
         assertThat(rankGroup.get(Rank.Third)).isEqualTo(1L);
         assertThat(rankGroup.get(Rank.Fourth)).isEqualTo(2L);
     }
 
     @Test
-    public void calculate_prize_money() {
+    public void 총_당첨금을_계산한다() {
         Long prizeMoney = LottoAnalyzer.calculatePrizeMoney(ranks);
         assertThat(prizeMoney).isEqualTo(totalPrize);
     }
 
     @Test
-    public void calculate_profit_rate() {
+    public void 수익률을_계산한다() {
         Double profitRate = LottoAnalyzer.calculateProfitRate(ranks);
         assertThat(profitRate).isEqualTo(
             totalPrize.doubleValue() / (ranks.size() * LottoMachine.LOTTO_PRICE));
