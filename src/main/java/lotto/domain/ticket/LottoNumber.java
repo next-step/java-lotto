@@ -7,7 +7,7 @@ public class LottoNumber {
     private final int number;
 
     LottoNumber(int number) {
-        if (!isLottoNumber(number)) {
+        if (!isValidNumber(number)) {
             throw new IllegalArgumentException("Lotto number must be between " + MIN_NUMBER + " and " + MAX_NUMBER);
         }
 
@@ -18,7 +18,7 @@ public class LottoNumber {
         return number;
     }
 
-    private boolean isLottoNumber(int number) {
+    private boolean isValidNumber(int number) {
         return MIN_NUMBER <= number && number <= MAX_NUMBER;
     }
 
