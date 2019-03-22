@@ -11,7 +11,7 @@ public interface InputGettable<T,O> {
             showInputMessage();
             returnObject = getReturnObject(parameters);
         } catch(Exception e) {
-            System.out.println(e + "\n");
+            System.out.println(e);
             return get(parameters);
         }
 
