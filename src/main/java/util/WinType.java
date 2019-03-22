@@ -1,21 +1,26 @@
 package util;
 
 public enum WinType {
-    LOSE(0, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    FIRST(6, 2_000_000_000),
+    SECOND(6, 1_500_000),
+    THIRD(5, 150_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    LOSE(0, 0);
 
-    private int count;
-    private int reward;
+    private long count;
+    private int prize;
 
-    WinType(int count, int reward) {
+    WinType(long count, int prize) {
         this.count = count;
-        this.reward = reward;
+        this.prize = prize;
     }
 
-    public static WinType findByCount(int count) {
+    public int calculatePrize(long value) {
+        return (int) (value * this.prize);
+    }
+
+    public static WinType findByCount(long count) {
         for (WinType type : values()) {
             if (type.count == count) {
                 return type;
@@ -24,7 +29,7 @@ public enum WinType {
         return LOSE;
     }
 
-    public int getReward() {
-        return reward;
+    public long getCount() {
+        return this.count;
     }
 }

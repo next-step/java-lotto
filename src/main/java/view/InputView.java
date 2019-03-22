@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.Numbers;
 
 import java.util.Scanner;
 
@@ -18,10 +19,10 @@ public class InputView {
         return result;
     }
 
-    static Lotto getWinLotto() {
+    static Numbers getWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winLotto = scanner.nextLine();
 
-        return new Lotto(winLotto.split(","));
+        return Numbers.of(winLotto.split(","));
     }
 }

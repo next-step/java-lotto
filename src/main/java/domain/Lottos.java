@@ -18,13 +18,9 @@ public class Lottos {
         return lottos;
     }
 
-    int size() {
-        return lottos.size();
-    }
-
-    LottoResult lottery(int money, Lotto answer) {
+    LottoResult figure(int money, Numbers winNumbers) {
         Map<WinType, Long> map = lottos.stream()
-                .map(it -> it.lottery(answer))
+                .map(it -> it.figure(winNumbers))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoResult(money, map);

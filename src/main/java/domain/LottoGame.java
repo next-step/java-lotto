@@ -1,17 +1,18 @@
 package domain;
 
-import util.RandomUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static util.Constants.PRICE_OF_LOTTO;
 
 public class LottoGame {
+
     private int money;
     private Lottos lottos;
 
     public LottoGame(int money) {
+        assert money > PRICE_OF_LOTTO;
+
         this.money = money;
         this.lottos = createLottos(money);
     }
@@ -19,14 +20,14 @@ public class LottoGame {
     private Lottos createLottos(int money) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money / PRICE_OF_LOTTO; i++) {
-            lottos.add(new Lotto(RandomUtils.createNumbers()));
+            lottos.add(Lotto.createAuto());
         }
 
         return new Lottos(lottos);
     }
 
-    public LottoResult lottery(Lotto answer) {
-        return lottos.lottery(money, answer);
+    public LottoResult figure(Numbers winNumbers) {
+        return lottos.figure(money, winNumbers);
     }
 
     public List<Lotto> getLottos() {

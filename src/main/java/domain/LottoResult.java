@@ -24,7 +24,7 @@ public class LottoResult {
 
     private int getWinMoney() {
         return resultMap.entrySet().stream()
-                .mapToInt(it -> (int) (it.getKey().getReward() * it.getValue()))
+                .mapToInt(it -> it.getKey().calculatePrize(it.getValue()))
                 .sum();
     }
 }
