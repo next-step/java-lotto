@@ -19,18 +19,15 @@ public class LottoNumberTest {
     }
 
     @Test
-    public void equalsTo_테스트() {
+    public void LottoNumber_get_메서드는_같은_LottoNumber_객체_사용() {
         // given
-        LottoNumber target = new LottoNumber(1);
-        LottoNumber same = new LottoNumber(1);
-        LottoNumber different = new LottoNumber(2);
+        int lottoNumber = LottoNumber.MAX_NUMBER;
 
         // when
-        boolean shouldBeTrue = target.isEqualTo(same);
-        boolean shouldBeFalse = target.isEqualTo(different);
+        LottoNumber target = LottoNumber.get(lottoNumber);
+        LottoNumber same = LottoNumber.get(lottoNumber);
 
         // then
-        assertThat(shouldBeTrue).isTrue();
-        assertThat(shouldBeFalse).isFalse();
+        assertThat(target == same).isTrue();
     }
 }
