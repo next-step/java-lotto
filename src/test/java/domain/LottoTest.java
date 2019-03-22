@@ -6,15 +6,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     @Test
-    public void 여섯개의_번호를_가진다() {
+    public void 자동추첨시_여섯개의_번호를_리턴한다() {
         Lotto lotto = new Lotto();
         assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 번호가_6개가_아닐시_예외가_발생한다() {
+        new Lotto(1,2,3,4,5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 중복된_값을_가지면_예외가_발생한다() {
+        new Lotto(1,2,3,3,4,5);
+    }
+
     @Test
-    public void 중복되지_않은_번호를_가진다() {
-        Lotto lotto = new Lotto(1,2,3,4,4,5,6,6);
-        assertThat(lotto.getLottoNumbers()).doesNotHaveDuplicates();
+    public void 번호는_정렬되어_있다() {
+        Lotto lotto = new Lotto(6,5,4,3,2,1);
+        assertThat(lotto.getLottoNumbers()).isSorted();
     }
 
     @Test

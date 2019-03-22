@@ -2,7 +2,7 @@ package domain;
 
 import util.RandomNumberGenerator;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
     private static final Integer MIN_NUMBER = 1;
     private static final Integer MAX_NUMBER = 45;
 
@@ -11,13 +11,7 @@ public class LottoNumber {
     private static LottoNumber[] instances = new LottoNumber[MAX_NUMBER + 1];
 
     public static LottoNumber getInstance(){
-        Integer number = RandomNumberGenerator.generateNumber(MIN_NUMBER, MAX_NUMBER);
-
-        if(instances[number] == null){
-            instances[number] = new LottoNumber(number);
-        }
-
-        return instances[number];
+        return getInstance(RandomNumberGenerator.generateNumber(MIN_NUMBER, MAX_NUMBER));
     }
 
     public static LottoNumber getInstance(Integer number){
@@ -62,5 +56,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return number.hashCode();
+    }
+
+    @Override
+    public int compareTo(LottoNumber otherLottoNumber) {
+        return number.compareTo(otherLottoNumber.getNumber());
     }
 }

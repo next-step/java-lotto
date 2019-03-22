@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Lotto {
@@ -12,11 +9,17 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public Lotto() {
-        validateAndAdd(Stream.generate(LottoNumber::getInstance));
+        sort(Stream.generate(LottoNumber::getInstance)
+            .distinct()
+            .limit(limitCount));
     }
 
     public Lotto(Integer ...numbers){
-        validateAndAdd(Arrays.stream(numbers)
+        if(Arrays.stream(numbers).distinct().count() != limitCount){
+            throw new IllegalArgumentException();
+        }
+
+        sort(Arrays.stream(numbers)
             .map(LottoNumber::getInstance));
     }
 
@@ -24,10 +27,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private void validateAndAdd(Stream<LottoNumber> lottoNumberStream){
+    private void sort(Stream<LottoNumber> lottoNumberStream){
         lottoNumberStream
-            .distinct()
-            .limit(limitCount)
             .sorted(Comparator.comparing(LottoNumber::getNumber))
             .forEach(lottoNumbers::add);
     }
