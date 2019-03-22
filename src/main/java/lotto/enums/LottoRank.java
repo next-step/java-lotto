@@ -23,7 +23,7 @@ public enum LottoRank {
         this.prizeMoney = new Money(prizeMoney);
     }
 
-    Money getPrizeMoney() {
+    public Money getPrizeMoney() {
         return prizeMoney;
     }
 
