@@ -36,7 +36,7 @@ public class LottoNumberParserTest {
     }
 
     @Test
-    public void 문자열을_당첨_로또_객체로_변환() {
+    public void 문자열을_WinningLotto_객체로_변환() {
         // given
         String lottoNumbersString = "1, 2, 3, 4, 5, 6";
         String bonusNumberString = "45";
