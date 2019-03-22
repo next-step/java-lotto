@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain;
 
 import java.util.Map;
 import java.util.stream.Collectors;

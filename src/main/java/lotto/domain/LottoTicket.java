@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,18 +6,18 @@ import java.util.stream.Collectors;
 public class LottoTicket {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
-        if (!isLottoNumbersSize(numbers)) {
-            throw new IllegalArgumentException("Lotto numbers size must be " + LOTTO_NUMBERS_SIZE);
+    public LottoTicket(List<Integer> lottoNumbers) {
+        if (!isLottoNumbersSize(lottoNumbers)) {
+            throw new IllegalArgumentException("Lotto lottoNumbers size must be " + LOTTO_NUMBERS_SIZE);
         }
 
-        if (isNumberDuplicated(numbers)) {
-            throw new IllegalArgumentException("Lotto numbers must be unique");
+        if (isNumberDuplicated(lottoNumbers)) {
+            throw new IllegalArgumentException("Lotto lottoNumbers must be unique");
         }
 
-        this.numbers = convertToLottoNumbers(numbers);
+        this.lottoNumbers = convertToLottoNumbers(lottoNumbers);
     }
 
     private boolean isLottoNumbersSize(List<Integer> numbers) {
@@ -41,19 +41,19 @@ public class LottoTicket {
     int getNumberOfDuplicatedNumbers(LottoTicket target) {
         int numberOfDuplicatedNumbers = 0;
 
-        for (LottoNumber targetNumber : target.numbers) {
+        for (LottoNumber targetNumber : target.lottoNumbers) {
             numberOfDuplicatedNumbers += (containsLottoNumber(targetNumber) ? 1 : 0);
         }
 
         return numberOfDuplicatedNumbers;
     }
 
-    private boolean containsLottoNumber(LottoNumber target) {
-        return this.numbers.contains(target);
+    boolean containsLottoNumber(LottoNumber target) {
+        return this.lottoNumbers.contains(target);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return this.lottoNumbers.toString();
     }
 }
