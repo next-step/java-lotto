@@ -2,6 +2,8 @@ package lotto.vo;
 
 import lotto.domain.Lotto;
 
+import java.util.List;
+
 public class LottoWinningNumber {
     private Lotto winningNumber;
 
@@ -15,6 +17,21 @@ public class LottoWinningNumber {
 
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
+    }
+
+    public List<Lotto> checkWinningNumber(List<Lotto> lottos) {
+        winningNumber.getNumbers()
+                .forEach(number -> checkWinningNumber(lottos, number));
+
+        return lottos;
+    }
+
+    public void checkWinningNumber(List<Lotto> lottos, LottoNo number) {
+        lottos.forEach(lotto -> lotto.incrementMatchCount(number));
+    }
+
+    public void checkBonus(List<Lotto> lottos) {
+        lottos.forEach(lotto -> lotto.checkBonus(bonusNumber));
     }
 
     public Lotto getWinningNumber() {

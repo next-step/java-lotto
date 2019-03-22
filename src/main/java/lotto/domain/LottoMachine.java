@@ -39,30 +39,11 @@ public class LottoMachine {
     public LottoStatistics getLottoStatistics(List<Lotto> lottos,
                                               LottoWinningNumber lottoWinningNumber, LottoProfit lottoProfit) {
 
-        //각 당첨 번호별로 체크
-        for (LottoNo number : lottoWinningNumber.getWinningNumber().getNumbers()) {
-            checkWinningNumber(lottos, number);
-        }
-
-        //보너스 번호 체크
-        for (Lotto lotto : lottos) {
-            lotto.checkBonus(lottoWinningNumber.getBonusNumber());
-        }
+        lottoWinningNumber.checkWinningNumber(lottos);
+        lottoWinningNumber.checkBonus(lottos);
 
         //노출 통계자료 생성
         return checkWinningLotto(lottos, lottoProfit);
-    }
-
-    /**
-     * 당첨번호 하나로 구매한 로또들에 맞은 번호가 있는지 체크
-     *
-     * @param lottos 구매한 로또들
-     * @param number 당첨로또 번호 한개
-     */
-    public void checkWinningNumber(List<Lotto> lottos, LottoNo number) {
-        for (Lotto lotto : lottos) {
-            lotto.incrementMatchCount(number);
-        }
     }
 
     /**
