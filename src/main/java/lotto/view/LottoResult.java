@@ -13,17 +13,13 @@ public class LottoResult {
 
     public MatchResult generate(LottoBundle lottoBundle) {
         matchResult.calculate(lottoBundle);
-        OutputView.printResultStatistics(matchResult);
 
         return matchResult;
     }
 
-    public String getRewardPercent(int money) {
+    public double getRewardPercent(int money) {
         double reward = matchResult.calculateTotalReward();
 
-        double percent = reward / money;
-        OutputView.printRewardPercent(percent);
-
-        return String.format("%.2f", percent);
+        return reward / money;
     }
 }

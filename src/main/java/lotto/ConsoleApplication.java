@@ -10,6 +10,7 @@ import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.LottoResult;
 import lotto.view.OutputView;
+import lotto.view.vo.MatchResult;
 
 import java.util.List;
 import java.util.Scanner;
@@ -41,7 +42,8 @@ public class ConsoleApplication {
         WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(bonusNumber));
 
         LottoResult lottoResult = new LottoResult(winningLotto);
-        lottoResult.generate(lottoBundle);
-        lottoResult.getRewardPercent(money);
+        MatchResult matchResult = lottoResult.generate(lottoBundle);
+        OutputView.printResultStatistics(matchResult);
+        OutputView.printRewardPercent(lottoResult.getRewardPercent(money));
     }
 }
