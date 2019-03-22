@@ -21,7 +21,6 @@ public class Money {
         return this.amount;
     }
 
-
     public boolean isEqualTo(Money target) {
         return this.amount == target.amount;
     }
