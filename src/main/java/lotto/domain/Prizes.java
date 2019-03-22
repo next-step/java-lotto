@@ -2,10 +2,10 @@ package lotto.domain;
 
 public enum Prizes {
 
-  THREE(3, 5 * 1000),
-  FOUR(4, 50 * 1000),
-  FIVE(5, 1500 * 1000),
-  SIX(6, 2 * 1000 * 1000 * 1000),
+  THREE(3, 5_000),
+  FOUR(4, 50_000),
+  FIVE(5, 1500_000),
+  SIX(6, 2_000_000_000),
   ;
 
   private int matchCount;

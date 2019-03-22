@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoVendingMachine {
 
-  private static final int LOTTE_PRICE = 1000;
+  private static final int LOTTE_PRICE = 1_000;
 
   private NumberGenerator numberGenerator;
 
