@@ -1,19 +1,19 @@
 import java.util.List;
 
 public class WinningLotto {
-    private List<Integer> lotto;
+    private Lotto lotto;
     private int bonusNumber;
 
     public WinningLotto(List<Integer> lotto, int bonusNumber) {
-        this.lotto = lotto;
+        this.lotto = new Lotto(lotto);
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getLotto() {
-        return lotto;
+    public boolean isMatchBonusNumber(List<Integer> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    public int getMatchNumber(List<Integer> userLotto) {
+        return lotto.getMatchNumber(userLotto);
     }
 }

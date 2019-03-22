@@ -11,7 +11,6 @@ public class LottoApplication {
             lottos.add(lotto);
             ResultView.printLottoNumber(lotto);
         }
-
         ResultView.printStatics(new LottoResult(lottos, new WinningLotto(InputView.getWinningNumbers(), InputView.getBonusNumber())));
     }
 }

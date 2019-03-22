@@ -1,28 +1,25 @@
 import java.util.List;
 
 public class Lotto {
-    private List<Integer> lottoNumbers;
+    private List<Integer> lotto;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(List<Integer> lotto) {
+        this.lotto = lotto;
     }
 
     public Rank getRank(WinningLotto winningLotto) {
-        return Rank.valueOf(getMatchNumber(winningLotto.getLotto()), isMatchBonusNumber(winningLotto.getBonusNumber()));
+        return Rank.valueOf(winningLotto.getMatchNumber(lotto), winningLotto.isMatchBonusNumber(lotto));
     }
 
-    private int getMatchNumber(List<Integer> winningLotto) {
-        return (int) winningLotto.stream()
-                .filter(number -> this.lottoNumbers.contains(number))
+
+    public int getMatchNumber(List<Integer> lotto) {
+        return (int) this.lotto.stream()
+                .filter(number -> lotto.contains(number))
                 .count();
-    }
-
-    private boolean isMatchBonusNumber(int bonusNumber) {
-        return this.lottoNumbers.contains(bonusNumber);
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.toString();
+        return lotto.toString();
     }
 }
