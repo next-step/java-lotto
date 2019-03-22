@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.Arrays;
 
 public class ResultView {
 
@@ -11,12 +11,17 @@ public class ResultView {
     }
 
     public static void printStatics(LottoResult lottoResult) {
+        Rank[] ranks = Rank.values();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + lottoResult.getMatchNumber(3));
-        System.out.println("4개 일치 (50000원)- " + lottoResult.getMatchNumber(4));
-        System.out.println("5개 일치 (1500000원)- " + lottoResult.getMatchNumber(5));
-        System.out.println("6개 일치 (2000000000원)-" + lottoResult.getMatchNumber(6));
+        Arrays.stream(ranks)
+                .filter(rank -> rank.getCountOfMatch() != 0)
+                .forEach(rank -> {
+                    System.out.println(rank.getCountOfMatch()
+                            + "개 일치 (" + rank.getWinningMoney() + ") - "
+                            + lottoResult.getMatchNumber(rank));
+                });
+
         System.out.println("총 수익률은 " + lottoResult.getProfit() + "입니다.");
     }
 }

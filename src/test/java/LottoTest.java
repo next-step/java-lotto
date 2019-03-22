@@ -10,10 +10,9 @@ public class LottoTest {
     @Test
     public void 당첨번호_매칭확인() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getMatchNumber(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(0);
-        assertThat(lotto.getMatchNumber(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)))).isEqualTo(1);
-        assertThat(lotto.getMatchNumber(new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10, 11)))).isEqualTo(2);
-        assertThat(lotto.getMatchNumber(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)))).isEqualTo(5);
-        assertThat(lotto.getMatchNumber(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
+        assertThat(lotto.getRank(new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12)),13)).isEqualTo(Rank.MISS);
+        assertThat(lotto.getRank(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),13)).isEqualTo(Rank.THIRD);
+        assertThat(lotto.getRank(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),1)).isEqualTo(Rank.SECOND);
+        assertThat(lotto.getRank(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),8)).isEqualTo(Rank.FIRST);
     }
 }

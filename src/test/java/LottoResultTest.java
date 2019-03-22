@@ -27,12 +27,18 @@ public class LottoResultTest {
                 new Lotto(Arrays.asList(13, 14, 18, 21, 23, 35)),
                 new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)),
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
-        lottoResult = new LottoResult(lottos, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoResult = new LottoResult(lottos, new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 44);
 
     }
 
     @Test
     public void 수익률_일치() {
         assertThat(lottoResult.getProfit()).isEqualTo(0.35);
+    }
+
+    @Test
+    public void 매칭개수_일치() {
+        assertThat(lottoResult.getMatchNumber(Rank.FIFTH)).isEqualTo(1);
+        assertThat(lottoResult.getMatchNumber(Rank.FIRST)).isEqualTo(0);
     }
 }
