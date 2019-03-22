@@ -1,8 +1,8 @@
 package lottogame.view;
 
 import lottogame.domain.LottoNumberPackage;
+import lottogame.domain.LottoNumber;
 import lottogame.domain.PurchaseAmount;
-import lottogame.domain.WinningInfo;
 import lottogame.util.StringUtils;
 
 import java.util.Scanner;
@@ -25,9 +25,9 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static WinningInfo getWinningNumbers() {
+    public static LottoNumberPackage getWinningNumbers() {
         showWinningNumbersInputMessage();
-        return new WinningInfo(getLottoGame());
+        return getLottoGame();
     }
 
     private static void showWinningNumbersInputMessage() {
@@ -35,7 +35,16 @@ public class InputView {
     }
 
     private static LottoNumberPackage getLottoGame() {
-        return new LottoNumberPackage(StringUtils.parseIntegerList(getInputLine().split(NUMBER_DELIMETER)));
+        return new LottoNumberPackage(StringUtils.parseIntegerSet(getInputLine().split(NUMBER_DELIMETER)));
+    }
+
+    public static LottoNumber getBonusNumber() {
+        showBonusNumberInputMessage();
+        return new LottoNumber(Integer.parseInt(getInputLine()));
+    }
+
+    private static void showBonusNumberInputMessage() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     private static String getInputLine() {

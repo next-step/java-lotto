@@ -11,17 +11,17 @@ public class PurchaseAmountTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor_of_PurchaseAmount_for_0() {
-        new PurchaseAmount(0).getValue();
+        new PurchaseAmount(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor_of_PurchaseAmount_for_less_than_minimum_value() {
-        new PurchaseAmount(LOTTO_PRICE-1).getValue();
+        new PurchaseAmount(LOTTO_PRICE-1);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor_of_PurchaseAmount_for_more_than_maximum_value() {
-        new PurchaseAmount(Long.MAX_VALUE).getValue();
+        new PurchaseAmount(Long.MAX_VALUE);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class PurchaseAmountTest {
 
         purchaseAmount = new PurchaseAmount(expected);
 
-        assertEquals( expected, purchaseAmount.getValue());
+        assertEquals(expected, purchaseAmount.getValue());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class PurchaseAmountTest {
 
         purchaseAmount = new PurchaseAmount(expected);
 
-        assertEquals( expected, purchaseAmount.getValue());
+        assertEquals(expected, purchaseAmount.getValue());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class PurchaseAmountTest {
 
         purchaseAmount = new PurchaseAmount(expected);
 
-        assertEquals( expected, purchaseAmount.getValue());
+        assertEquals(expected, purchaseAmount.getValue());
     }
 
     @Test

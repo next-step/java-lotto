@@ -27,16 +27,15 @@ public class LottoResult {
     }
 
     private String getWinningResultString(Rank key) {
-        return String.format("%d개 일치 (%d원)- %d개\n",
-                key.getCountOfMatch(),
-                key.getWinningMoney(),
+        return String.format("%s- %d개\n",
+                key.getWinningResultMessage(),
                 getWinningCount(key) );
     }
 
     Map<Rank, Long> getWinningCountPerRank() {
         return getAutomaticNumbers().stream()
-                                    .map(gameNumber -> gameNumber.getMatchedCount(winningNumbers.getWinningNumbers()))
-                                    .collect(Collectors.groupingBy(Rank::valueOf, Collectors.counting()));
+                .map(gameNumber -> gameNumber.getMatchStatus(winningNumbers))
+                .collect(Collectors.groupingBy(Rank::valueOf, Collectors.counting()));
     }
 
     private List<LottoNumberPackage> getAutomaticNumbers() {
