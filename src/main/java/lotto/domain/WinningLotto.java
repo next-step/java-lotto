@@ -5,7 +5,7 @@ import lotto.vo.LottoMatchResult;
 import java.util.List;
 
 public class WinningLotto {
-    private final LottoTicket lottoNumbers;
+    private final Lotto lottoNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(List<Integer> lottoNumbers, int bonusNumber) {
@@ -13,19 +13,19 @@ public class WinningLotto {
             throw new IllegalArgumentException("WinningLotto number must be unique");
         }
 
-        this.lottoNumbers = new LottoTicket(lottoNumbers);
+        this.lottoNumbers = new Lotto(lottoNumbers);
         this.bonusNumber = LottoNumber.get(bonusNumber);
     }
 
-    int getMatchCounts(LottoTicket ticket) {
+    int getMatchCounts(Lotto ticket) {
         return this.lottoNumbers.getNumberOfDuplicatedNumbers(ticket);
     }
 
-    boolean isBonusNumberMatch(LottoTicket ticket) {
+    boolean isBonusNumberMatch(Lotto ticket) {
         return ticket.containsLottoNumber(this.bonusNumber);
     }
 
-    public LottoMatchResult getMacthResult(LottoTicket ticket) {
+    public LottoMatchResult getMatchResult(Lotto ticket) {
         int matchCounts = getMatchCounts(ticket);
         boolean bonusNumberSame = isBonusNumberMatch(ticket);
 

@@ -27,9 +27,9 @@ public class WinningLottoTest {
         // given
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
 
-        LottoTicket six = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket five = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 16));
-        LottoTicket two = new LottoTicket(Arrays.asList(1, 2, 13, 14, 15, 16));
+        Lotto six = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto five = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16));
+        Lotto two = new Lotto(Arrays.asList(1, 2, 13, 14, 15, 16));
 
         // when
         int shouldBeSix = winningLotto.getMatchCounts(six);
@@ -48,8 +48,8 @@ public class WinningLottoTest {
         int bonusNumber = 45;
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
 
-        LottoTicket same = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
-        LottoTicket different = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto same = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
+        Lotto different = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
         boolean shouldBeTrue = winningLotto.isBonusNumberMatch(same);
@@ -66,18 +66,15 @@ public class WinningLottoTest {
         int bonusNumber = 45;
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
 
-        LottoTicket first = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket second = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
+        Lotto first = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
 
         // when
-        LottoMatchResult resultOfFirst = winningLotto.getMacthResult(first);
-        LottoMatchResult resultOfSecond = winningLotto.getMacthResult(second);
+        LottoMatchResult resultOfFirst = winningLotto.getMatchResult(first);
+        LottoMatchResult resultOfSecond = winningLotto.getMatchResult(second);
 
         // then
-        assertThat(resultOfFirst.getMatchCount()).isEqualTo(LottoRank.FIRST.getMatchCount());
-        assertThat(resultOfFirst.isBonusNumberMatch()).isFalse();
-
-        assertThat(resultOfSecond.getMatchCount()).isEqualTo(LottoRank.SECOND.getMatchCount());
-        assertThat(resultOfSecond.isBonusNumberMatch()).isTrue();
+        assertThat(LottoRank.getRankOf(resultOfFirst)).isEqualByComparingTo(LottoRank.FIRST);
+        assertThat(LottoRank.getRankOf(resultOfSecond)).isEqualByComparingTo(LottoRank.SECOND);
     }
 }
