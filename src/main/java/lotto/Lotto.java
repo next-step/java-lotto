@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
     public static final int SIZE_LIMIT = 6;
-    public static final int UNIT_PRICE = 1000;
+    public static final int UNIT_PRICE = 1_000;
     private List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
@@ -25,11 +25,15 @@ public class Lotto {
         return numbers.size() != SIZE_LIMIT;
     }
 
-    public int countNumberOfMatch(Lotto anotherLotto) {
-        return (int) anotherLotto.numbers
+    public int countNumberOfMatch(WinningLotto anotherLotto) {
+        return (int) numbers
                 .stream()
-                .filter(numbers::contains)
+                .filter(number -> anotherLotto.getLotto().numbers.contains(number))
                 .count();
+    }
+
+    public boolean isAnyMatchingBonusBall(WinningLotto winningLotto) {
+        return numbers.stream().anyMatch(winningLotto::isMatchingBonusBall);
     }
 
     @Override
