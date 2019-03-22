@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoTicket {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoTicket(List<Integer> numbers) {
         if (!isLottoNumbersSize(numbers)) {
             throw new IllegalArgumentException("Lotto numbers size must be " + LOTTO_NUMBERS_SIZE);
         }
@@ -47,7 +47,7 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    int getNumberOfDuplicatedNumbers(LottoNumbers target) {
+    int getNumberOfDuplicatedNumbers(LottoTicket target) {
         int numberOfDuplicatedNumbers = 0;
 
         for (LottoNumber targetNumber : target.numbers) {

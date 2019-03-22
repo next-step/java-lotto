@@ -5,7 +5,7 @@ import lotto.vo.LottoMatchResult;
 import java.util.List;
 
 public class Lotto {
-    private final LottoNumbers lottoNumbers;
+    private final LottoTicket lottoNumbers;
     private final LottoNumber bonusNumber;
 
     public Lotto(List<Integer> lottoNumbers, int bonusNumber) {
@@ -13,7 +13,7 @@ public class Lotto {
             throw new IllegalArgumentException("Lotto number must be unique");
         }
 
-        this.lottoNumbers = new LottoNumbers(lottoNumbers);
+        this.lottoNumbers = new LottoTicket(lottoNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
