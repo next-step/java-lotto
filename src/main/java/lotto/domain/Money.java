@@ -4,20 +4,18 @@ import java.util.Objects;
 
 public class Money {
 
-  private long value;
+  private final long value;
 
   public Money(long value) {
     this.value = value;
   }
 
   public Money sum(Money money) {
-    this.value += money.value;
-    return this;
+    return new Money(this.value + money.value);
   }
 
   public Money count(long count) {
-    this.value *= count;
-    return this;
+    return new Money(this.value * count);
   }
 
   public String division(Money winMoney) {

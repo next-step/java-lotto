@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class NumberGenerator {
+public class NumberGenerator {
 
   private static final int START_NUMBER = 1;
   private static final int END_NUMBER = 45;
@@ -13,7 +13,7 @@ class NumberGenerator {
   private static final int FROM_INDEX = 0;
   private static final int TO_INDEX = 6;
 
-  List<Integer> generate() {
+  public List<Integer> generate() {
 
     List<Integer> numbers = IntStream.range(START_NUMBER, END_NUMBER)
         .boxed()

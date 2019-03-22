@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,11 +9,12 @@ public class WinStats {
 
   private List<WinCount> winCounts;
 
-  private List<Lotto> lottos;
-  private List<Integer> winNumbers;
+  private final List<Lotto> lottos;
+  private final List<Integer> winNumbers;
 
   public WinStats() {
-
+    this.lottos = new ArrayList<>();
+    this.winNumbers = new ArrayList<>();
   }
 
   public WinStats(List<Lotto> lottos, List<Integer> winNumbers) {

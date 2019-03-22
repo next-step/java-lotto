@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class WinCount {
 
-  private Prizes prizes;
-  private long count = 0;
+  private final Prizes prizes;
+  private final long count;
 
   public WinCount(Prizes prizes, long count) {
     this.prizes = prizes;

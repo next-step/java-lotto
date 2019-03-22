@@ -12,13 +12,15 @@ public class LottoVendingMachineTest {
   public void test_purchaseLotto_by_inputMoney() {
 
     // Given
-    Money purchaseAmount = new Money(14000);
+    int insertMoney = 14000;
 
     // When
-    List<Lotto> lottoList = new LottoVendingMachine().purchaseLotto(purchaseAmount);
+    Money purchaseAmount = new Money(insertMoney);
+    MyLottos myLottos = new LottoVendingMachine().purchaseLotto(purchaseAmount);
 
     // Then
-    assertThat(lottoList.size()).isEqualTo(14);
+    assertThat(myLottos.getBuyMoney().amount()).isEqualTo(insertMoney);
+    assertThat(myLottos.getLottos().size()).isEqualTo(14);
   }
 
   @Test

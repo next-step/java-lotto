@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
 
-  private List<Integer> numbers;
+  private final List<Integer> numbers;
 
   public Lotto(List<Integer> numbers) {
     this.numbers = numbers;
@@ -17,7 +17,7 @@ public class Lotto {
   public int winMatch(List<Integer> winNumbers) {
 
     return (int)winNumbers.stream()
-        .filter(winNumber -> numbers.contains(winNumber))
+        .filter(numbers::contains)
         .count();
   }
 }

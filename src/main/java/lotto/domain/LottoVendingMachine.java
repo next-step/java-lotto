@@ -13,16 +13,16 @@ public class LottoVendingMachine {
     this.numberGenerator = new NumberGenerator();
   }
 
-  public List<Lotto> purchaseLotto(Money purchaseAmount) {
+  public MyLottos purchaseLotto(Money purchaseAmount) {
 
     int issueCount = (int)purchaseAmount.amount() / LOTTE_PRICE;
 
-    List<Lotto> lottoList = new ArrayList<>();
+    List<Lotto> lottos = new ArrayList<>();
     for (int index = 0; index < issueCount; index++) {
 
       Lotto newLotto = new Lotto(numberGenerator.generate());
-      lottoList.add(newLotto);
+      lottos.add(newLotto);
     }
-    return lottoList;
+    return new MyLottos(purchaseAmount, lottos);
   }
 }

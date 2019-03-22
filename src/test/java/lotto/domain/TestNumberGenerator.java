@@ -26,7 +26,7 @@ class TestNumberGenerator extends NumberGenerator {
   }
 
   @Override
-  List<Integer> generate() {
+  public List<Integer> generate() {
     return this.numbers;
   }
 }
