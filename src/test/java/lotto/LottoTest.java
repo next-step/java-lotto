@@ -2,9 +2,6 @@ package lotto;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -31,9 +28,9 @@ public class LottoTest {
     public void 로또2개_번호일치_3개() {
         // given
         String currentLottoNumbers = "1, 2, 3, 4, 5, 6";
-        String previousLottoNumbers = "(1, 3, 5, 7, 9, 11";
+        String previousLottoNumbers = "1, 3, 5, 7, 9, 11";
         Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
-        Lotto previousLotto = new FixedLottoGenerator(previousLottoNumbers).generateLotto();
+        WinningLotto previousLotto = new FixedLottoGenerator(previousLottoNumbers).generateWinningLotto();
         // when
         int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
         // then
@@ -57,10 +54,10 @@ public class LottoTest {
         String previousLottoNumbers = "1, 2, 3, 4, 5, 7";
         int bonusNumber = 6;
         Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
-        WinningLotto previousLotto = (WinningLotto) new FixedLottoGenerator(previousLottoNumbers, bonusNumber).generateLotto();
+        WinningLotto previousLotto = new FixedLottoGenerator(previousLottoNumbers, bonusNumber).generateWinningLotto();
         // when
         int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
-        boolean isMatchingBonus = currentLotto.isMatchingBonusBall(previousLotto);
+        boolean isMatchingBonus = currentLotto.isAnyMatchingBonusBall(previousLotto);
         // then
         assertThat(numberOfSame).isEqualTo(5);
         assertThat(isMatchingBonus).isTrue();

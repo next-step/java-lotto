@@ -1,9 +1,6 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class InputView {
     private static final String PURCHASE_AMOUNT_INPUT_MENT = "구입금액을 입력해 주세요.";

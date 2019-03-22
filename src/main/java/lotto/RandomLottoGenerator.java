@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class RandomLottoGenerator implements LottoGenerator {
     private static List<LottoNumber> baseNumbers() {
         return IntStream.range(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 

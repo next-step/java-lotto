@@ -15,21 +15,18 @@ public class FixedLottoGenerator implements LottoGenerator {
 
     public FixedLottoGenerator(final String numbers, int bonusBall) {
         this.numbers = convertToLottoNumber(convertToInt(numbers));
-        this.bonusBall = new LottoNumber(bonusBall);
+        this.bonusBall = LottoNumber.valueOf(bonusBall);
     }
 
     @Override
     public Lotto generateLotto() {
         List<LottoNumber> newNumbers = new ArrayList<>(numbers);
         numbers = numbers.stream().map(LottoNumber::increase).collect(Collectors.toList());
-        if(isWinningLotto()) {
-            return new WinningLotto(newNumbers.subList(BASE_INDEX, Lotto.SIZE_LIMIT), bonusBall);
-        }
         return new Lotto(newNumbers);
     }
 
-    private boolean isWinningLotto() {
-        return this.bonusBall != null;
+    public WinningLotto generateWinningLotto() {
+        return new WinningLotto(generateLotto(), bonusBall);
     }
 
     private List<Integer> convertToInt(String str) {
@@ -40,6 +37,6 @@ public class FixedLottoGenerator implements LottoGenerator {
     }
 
     private List<LottoNumber> convertToLottoNumber(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        return numbers.stream().map(LottoNumber::valueOf).collect(Collectors.toList());
     }
 }

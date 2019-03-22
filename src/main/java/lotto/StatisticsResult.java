@@ -18,7 +18,7 @@ public class StatisticsResult {
     private Map<Prize, Integer> calculatePrizeCount(List<Lotto> lottos, WinningLotto previousWinningLotto) {
         Map<Prize, Integer> temp = new HashMap<>();
         for (Lotto lotto : lottos) {
-            Prize prize = Prize.fromNumberOfMatch(lotto.countNumberOfMatch(previousWinningLotto), lotto.isMatchingBonusBall(previousWinningLotto));
+            Prize prize = Prize.valueOf(lotto.countNumberOfMatch(previousWinningLotto), lotto.isAnyMatchingBonusBall(previousWinningLotto));
             temp.put(prize, temp.getOrDefault(prize, DEFAULT_COUNT) + COUNT_UNIT);
         }
         return temp;

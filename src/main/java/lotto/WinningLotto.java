@@ -1,19 +1,26 @@
 package lotto;
 
-import java.util.List;
+public class WinningLotto {
+    private final Lotto lotto;
+    private final LottoNumber bonusBall;
 
-public class WinningLotto extends Lotto{
-    protected final LottoNumber bonusBall;
-
-    public WinningLotto(final List<LottoNumber> numbers, final LottoNumber bonusBall) {
-        super(numbers);
-        if(hasDuplicate(bonusBall)) {
+    public WinningLotto(final Lotto lotto, final LottoNumber bonusBall) {
+        this.lotto = lotto;
+        if (hasDuplicate(bonusBall)) {
             throw new IllegalArgumentException("로또번호는 중복될 수 없습니다.");
         }
         this.bonusBall = bonusBall;
     }
 
     private boolean hasDuplicate(LottoNumber bonusBall) {
-        return numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+        return lotto.numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+    }
+
+    public boolean isMatchingBonusBall(LottoNumber anotherNumber) {
+        return bonusBall.equals(anotherNumber);
+    }
+
+    public Lotto getLotto() {
+        return lotto;
     }
 }

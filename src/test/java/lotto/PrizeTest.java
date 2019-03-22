@@ -14,7 +14,7 @@ public class PrizeTest {
         // given
         int countOfMatch = 5;
         // when
-        Prize prize = Prize.fromNumberOfMatch(countOfMatch, true);
+        Prize prize = Prize.valueOf(countOfMatch, true);
         // then
         assertThat(prize).isEqualByComparingTo(Prize.SECOND_PRIZE);
     }
@@ -24,7 +24,7 @@ public class PrizeTest {
         // given
         int countOfMatch = 5;
         // when
-        Prize prize = Prize.fromNumberOfMatch(countOfMatch, false);
+        Prize prize = Prize.valueOf(countOfMatch, false);
         // then
         assertThat(prize).isEqualByComparingTo(Prize.THIRD_PRIZE);
     }

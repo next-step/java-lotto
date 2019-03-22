@@ -2,8 +2,6 @@ package lotto;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -13,7 +11,7 @@ public class StatisticsResultTest {
         // given
         FixedLottoGenerator fixedLottoGenerator = new FixedLottoGenerator("1, 2, 3, 4, 5, 6");
         PurchaseHistory purchaseHistory = new PurchaseHistory(5000, fixedLottoGenerator);
-        WinningLotto lotto = (WinningLotto) new FixedLottoGenerator("1, 2, 3, 40, 41, 42").generateLotto();
+        WinningLotto lotto = new FixedLottoGenerator("1, 2, 3, 40, 41, 42").generateWinningLotto();
         // when
         StatisticsResult statisticsResult = new StatisticsResult(purchaseHistory, lotto);
         // then
@@ -25,7 +23,7 @@ public class StatisticsResultTest {
         // given
         FixedLottoGenerator fixedLottoGenerator = new FixedLottoGenerator("1, 2, 3, 4, 5, 6");
         PurchaseHistory purchaseHistory = new PurchaseHistory(2000, fixedLottoGenerator);
-        WinningLotto lotto = (WinningLotto) new FixedLottoGenerator("1, 2, 3, 40, 41, 42").generateLotto();
+        WinningLotto lotto = new FixedLottoGenerator("1, 2, 3, 40, 41, 42").generateWinningLotto();
         // when
         StatisticsResult statisticsResult = new StatisticsResult(purchaseHistory, lotto);
         // then
@@ -37,7 +35,7 @@ public class StatisticsResultTest {
         // given
         FixedLottoGenerator fixedLottoGenerator = new FixedLottoGenerator("1, 2, 3, 4, 5, 6");
         PurchaseHistory purchaseHistory = new PurchaseHistory(2000, fixedLottoGenerator);
-        WinningLotto lotto = (WinningLotto) new FixedLottoGenerator("1, 2, 3, 4, 5, 8", 6).generateLotto();
+        WinningLotto lotto = new FixedLottoGenerator("1, 2, 3, 4, 5, 8", 6).generateWinningLotto();
         // when
         StatisticsResult statisticsResult = new StatisticsResult(purchaseHistory, lotto);
         // then
