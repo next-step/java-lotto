@@ -9,7 +9,7 @@ public class LotteryTicket {
 
     public static final int PRICE = 1000;
 
-    List<LotteryNumber> lotteryNumbers;
+    private final List<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<Integer> numbers) {
         if (NUMBERS_COUNT != numbers.size()) {

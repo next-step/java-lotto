@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class LotteryWinningStatistics {
 
-    private Map<LotteryRank, Integer> rankCountMap;
+    private final Map<LotteryRank, Integer> rankCountMap;
 
     public LotteryWinningStatistics(WinningTicket winningTicket, List<LotteryTicket> tickets) {
         rankCountMap = convertToRankCountMap(convertToRanks(winningTicket, tickets));

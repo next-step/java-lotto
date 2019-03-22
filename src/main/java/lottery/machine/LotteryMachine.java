@@ -7,13 +7,14 @@ import lottery.domain.WinningTicket;
 import lottery.supplier.BoundedUniqueNumbersGenerator;
 import lottery.supplier.NumbersGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LotteryMachine {
 
-    private NumbersGenerator numbersGenerator;
+    private final NumbersGenerator numbersGenerator;
 
     private List<LotteryTicket> lotteryTickets;
 
@@ -30,11 +31,12 @@ public class LotteryMachine {
         this.lotteryTickets = IntStream.range(0, ticketCount)
                 .mapToObj(i -> new LotteryTicket(numbersGenerator.nextNumbers(LotteryTicket.NUMBERS_COUNT)))
                 .collect(Collectors.toList());
+
         return lotteryTickets.size();
     }
 
     public List<LotteryTicket> getTickets() {
-        return this.lotteryTickets;
+        return new ArrayList<>(this.lotteryTickets);
     }
 
     public LotteryWinningStatistics raffle(List<Integer> winningNumbers, int bonusNumber) {
