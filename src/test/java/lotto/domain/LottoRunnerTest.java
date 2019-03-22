@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ticket.Lotto;
-import lotto.domain.ticket.LottoBundle;
 import lotto.enums.LottoRank;
 import lotto.vo.LottoGameResult;
 import lotto.vo.LottoWinResult;
@@ -17,10 +15,10 @@ public class LottoRunnerTest {
         // given
         int bonusNumber = 45;
         int differentBonusNumber = 44;
-        Lotto winner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
-        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16), bonusNumber);
-        Lotto third = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16), differentBonusNumber);
-        Lotto fail = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16), bonusNumber);
+        WinningLotto winner = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
+        Lotto third = new Lotto(Arrays.asList(1, 2, 3, 4, 5, differentBonusNumber));
+        Lotto fail = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(second, third, fail, fail));
 
@@ -29,12 +27,12 @@ public class LottoRunnerTest {
         LottoWinResult lottoWinResult = lottoGameResult.getLottoWinResult();
 
         // then
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FIRST)).isEqualTo(0);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FIFTH)).isEqualTo(0);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FAIL)).isEqualTo(2);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FIRST)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FIFTH)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FAIL)).isEqualTo(2);
     }
 
     @Test
@@ -42,10 +40,11 @@ public class LottoRunnerTest {
         // given
         int bonusNumber = 45;
         int differentBonusNumber = 44;
-        Lotto winner = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
-        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16), bonusNumber);
-        Lotto third = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 16), differentBonusNumber);
-        Lotto fail = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16), bonusNumber);
+
+        WinningLotto winner = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
+        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
+        Lotto third = new Lotto(Arrays.asList(1, 2, 3, 4, 5, differentBonusNumber));
+        Lotto fail = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(second, third, fail, fail));
 
@@ -56,7 +55,8 @@ public class LottoRunnerTest {
         // then
         int realNumberOfLottos = lottoBundle.getLottos().size();
         long realCost = LottoMachine.LOTTO_PRICE.getAmount() * realNumberOfLottos;
-        long realTotalPrizeMoney = LottoRank.SECOND.getPrizeMoney() + LottoRank.THIRD.getPrizeMoney();
+        long realTotalPrizeMoney = LottoRank.SECOND.getPrizeMoney().getAmount() +
+                LottoRank.THIRD.getPrizeMoney().getAmount();
 
         assertThat(totalProfitRate).isEqualTo(realTotalPrizeMoney / realCost);
     }
