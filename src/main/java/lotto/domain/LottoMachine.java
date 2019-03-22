@@ -28,7 +28,7 @@ public class LottoMachine {
         return new LottoBundle(lottos);
     }
 
-    public static long getNumberOfAffordableLottos(Money money) {
+    private static long getNumberOfAffordableLottos(Money money) {
         return money.getAmount() / LOTTO_PRICE.getAmount();
     }
 }
