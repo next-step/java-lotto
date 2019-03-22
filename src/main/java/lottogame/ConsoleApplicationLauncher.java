@@ -5,16 +5,21 @@ import lottogame.service.LottoNumberGeneratorImpl;
 import lottogame.view.InputView;
 import lottogame.view.ResultView;
 
+import java.util.List;
+
 public class ConsoleApplicationLauncher {
 
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = InputView.getPurchaseAmount();
-        LottoTicket lottoTicket = new LottoTicket(new PurchaseInfo(purchaseAmount), new LottoNumberGeneratorImpl());
-        ResultView.showPurchasedResult(lottoTicket);
+        PurchaseCount purchaseCount = InputView.getPurchaseCount(purchaseAmount.getLottoCount());
+        List<LottoNumberPackage> manualNumbers = InputView.getManualNumbers(purchaseCount.getManualCount());
+
+        LottoTicket lottoTicket = new LottoTicket(new PurchaseInfo(purchaseAmount, purchaseCount), manualNumbers, new LottoNumberGeneratorImpl());
+        ResultView.showPurchaseResult(lottoTicket);
 
         LottoNumberPackage winningNumbers = InputView.getWinningNumbers();
-        LottoNumber bonusNumber = InputView.getBonusNumber();
-        LottoResult lottoResult = new LottoResult(lottoTicket, new WinningInfo(winningNumbers, bonusNumber));
+        WinningInfo winningInfo = InputView.getWinningInfoByBonusNumber(winningNumbers);
+        LottoResult lottoResult = new LottoResult(lottoTicket, winningInfo);
         ResultView.showWinningResult(lottoResult);
     }
 }

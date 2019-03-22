@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import lottogame.service.LottoNumberPool;
 import org.junit.Test;
 
 import java.util.Set;
@@ -29,9 +30,10 @@ public class WinningInfoTest {
         assertEquals(bonusNumber, winningInfo.getBonusNumber());
     }
 
-    private Set<Integer> getRangedNumbers(int from, int to) {
+    private Set<LottoNumber> getRangedNumbers(int from, int to) {
         return IntStream.rangeClosed(from, to)
                 .boxed()
+                .map(LottoNumberPool::getLottoNumber)
                 .collect(Collectors.toSet());
     }
 }

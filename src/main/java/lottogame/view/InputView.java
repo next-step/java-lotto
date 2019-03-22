@@ -1,14 +1,14 @@
 package lottogame.view;
 
-import lottogame.domain.LottoNumberPackage;
-import lottogame.domain.LottoNumber;
-import lottogame.domain.PurchaseAmount;
-import lottogame.util.StringUtils;
+import lottogame.domain.*;
+import lottogame.inputgetter.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class InputView {
-    static final String NUMBER_DELIMETER = ",";
+    public static final String NUMBER_DELIMETER = ",";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -17,37 +17,30 @@ public class InputView {
     }
 
     public static PurchaseAmount getPurchaseAmount() {
-        showPurchaseAmountInputMessage();
-        return new PurchaseAmount(Long.parseLong(getInputLine()));
+        return new PurchaseAmountInputGetter().get();
     }
 
-    private static void showPurchaseAmountInputMessage() {
-        System.out.println("구입금액을 입력해 주세요.");
+    public static PurchaseCount getPurchaseCount(long count) {
+        return new PurchaseCountInputGetter().get(count);
+    }
+
+    public static List<LottoNumberPackage> getManualNumbers(long count) {
+       return new ManualNumbersInputGetter().get(count);
     }
 
     public static LottoNumberPackage getWinningNumbers() {
-        showWinningNumbersInputMessage();
-        return getLottoGame();
+        return new WinningNumberInputGetter().get();
     }
 
-    private static void showWinningNumbersInputMessage() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+    public static WinningInfo getWinningInfoByBonusNumber(LottoNumberPackage winningNumbers) {
+        return new BonusNumberInputGetter().get(winningNumbers);
     }
 
-    private static LottoNumberPackage getLottoGame() {
-        return new LottoNumberPackage(StringUtils.parseIntegerSet(getInputLine().split(NUMBER_DELIMETER)));
-    }
+    public static InputLine getInputLine() {
+        String inputLine = scanner.nextLine();
 
-    public static LottoNumber getBonusNumber() {
-        showBonusNumberInputMessage();
-        return new LottoNumber(Integer.parseInt(getInputLine()));
-    }
-
-    private static void showBonusNumberInputMessage() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-    }
-
-    private static String getInputLine() {
-        return StringUtils.removeWhitespace(scanner.nextLine());
+        return Optional.ofNullable(inputLine)
+                        .map(InputLine::new)
+                        .get();
     }
 }

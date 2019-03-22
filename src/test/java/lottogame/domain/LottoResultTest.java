@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import lottogame.service.LottoNumberPool;
 import org.junit.Test;
 
 import java.util.*;
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
 public class LottoResultTest {
 
     private LottoResult lottoResult;
-    private Set<Integer> winningNumbers = getSet(Arrays.asList(40, 41, 42, 43, 44, 45));
+    private Set<LottoNumber> winningNumbers = getSet(Arrays.asList(40, 41, 42, 43, 44, 45));
     private int bonusNumber = 7;
 
     @Test
@@ -126,18 +127,19 @@ public class LottoResultTest {
         return new LottoNumberPackage(getSet(integers));
     }
 
-    private Set<Integer> getSet(List<Integer> integers) {
+    private Set<LottoNumber> getSet(List<Integer> integers) {
         return integers.stream()
+                .map(LottoNumberPool::getLottoNumber)
                 .collect(Collectors.toSet());
     }
 
     private LottoResult getLottoResult(long purchaseAmount,
                                        List<LottoNumberPackage> automaticNumbers,
-                                       Set<Integer> winningNumbers,
+                                       Set<LottoNumber> winningNumbers,
                                        int bonusNumber) {
 
         PurchaseAmount purchaseAmountObj = new PurchaseAmount(purchaseAmount);
         WinningInfo winningNumbersObj = new WinningInfo(new LottoNumberPackage(winningNumbers), new LottoNumber(bonusNumber));
-        return new LottoResult(new LottoTicket(new PurchaseInfo(purchaseAmountObj), automaticNumbers), winningNumbersObj);
+        return new LottoResult(new LottoTicket(new PurchaseInfo(purchaseAmountObj, new PurchaseCount(purchaseAmountObj.getLottoCount(), 0)), automaticNumbers), winningNumbersObj);
     }
 }

@@ -6,7 +6,10 @@ import org.junit.Test;
 
 import java.util.Set;
 
+import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
+import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 import static lottogame.domain.LottoNumberPackage.LOTTO_GAME_SIZE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -31,12 +34,12 @@ public class LottoNumberGeneratorImplTest {
     public void getLottoNumbers() {
         lottoNumberGenerator = new LottoNumberGeneratorImpl();
 
-        Set<Integer> lottoNumbers = lottoNumberGenerator.getLottoNumbers();
+        Set<LottoNumber> lottoNumbers = lottoNumberGenerator.getLottoNumbers();
         System.out.println(lottoNumbers);
 
         assertEquals(LOTTO_GAME_SIZE, lottoNumbers.size());
-        for(int curNumber : lottoNumbers) {
-            assertEquals(curNumber, new LottoNumber(curNumber).getNumber());
+        for(LottoNumber curNumber : lottoNumbers) {
+            assertThat(curNumber.getNumber()).isBetween(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER);
         }
     }
 

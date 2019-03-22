@@ -5,9 +5,9 @@ public class PurchaseInfo {
     private PurchaseAmount purchaseAmount;
     private PurchaseCount purchaseCount;
 
-    public PurchaseInfo(PurchaseAmount purchaseAmount) {
+    public PurchaseInfo(PurchaseAmount purchaseAmount, PurchaseCount purchaseCount) {
         this.purchaseAmount = purchaseAmount;
-        purchaseCount = new PurchaseCount(purchaseAmount.getLottoCount());
+        this.purchaseCount = purchaseCount;
     }
 
     public PurchaseAmount getPurchaseAmount() {
@@ -16,5 +16,9 @@ public class PurchaseInfo {
 
     public PurchaseCount getPurchaseCount() {
         return purchaseCount;
+    }
+
+    public long getAutomaticCount() {
+        return purchaseCount.getAutomaticCount();
     }
 }

@@ -10,21 +10,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class ResultView {
-    static final String PURCHASE_RESULT_TITLE = "개를 구매했습니다.";
     static final String WINNING_RESULT_TITLE = "\n당첨 통계\n----------";
     public static final String BONUS_BALL_MATCHED = "보너스 볼 일치";
 
-    public static void showPurchasedResult(LottoTicket lottoGame) {
+    public static void showPurchaseResult(LottoTicket lottoGame) {
         showPurchaseResultTitle(lottoGame.getPurchaseCount());
-        showPurchasedLottoNumbers(lottoGame.getAutomaticNumbers());
+        showPurchasedLottoNumbers(lottoGame.getGameNumbers());
     }
 
     static void showPurchaseResultTitle(PurchaseCount purchaseCount) {
-        System.out.println("\n" + purchaseCount.getValue() + PURCHASE_RESULT_TITLE);
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.", purchaseCount.getManualCount(), purchaseCount.getAutomaticCount()));
     }
 
-    private static void showPurchasedLottoNumbers(List<LottoNumberPackage> purchasedLottoNumbers) {
-        Optional.ofNullable(purchasedLottoNumbers)
+    private static void showPurchasedLottoNumbers(List<LottoNumberPackage> purchasedNumbers) {
+        Optional.ofNullable(purchasedNumbers)
                 .orElse(Collections.emptyList())
                 .forEach(System.out::println);
     }

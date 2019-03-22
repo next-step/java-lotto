@@ -39,7 +39,7 @@ public class LottoResult {
     }
 
     private List<LottoNumberPackage> getAutomaticNumbers() {
-        return lottoTicket.getAutomaticNumbers();
+        return lottoTicket.getGameNumbers();
     }
 
     long getWinningCount(Rank key) {
