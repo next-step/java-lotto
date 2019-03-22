@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.ticket.LottoBundle;
+import lotto.domain.LottoBundle;
 import lotto.enums.LottoRank;
 import lotto.vo.LottoGameResult;
 import lotto.vo.LottoWinResult;
@@ -21,8 +21,8 @@ public class ConsoleOutputView {
         System.out.println();
     }
 
-    public static void printNumberOfLottos(long numberOfLottos) {
-        System.out.println(numberOfLottos + "개를 구매했습니다.");
+    public static void printNumberOfLottos(LottoBundle lottoBundle) {
+        System.out.println(lottoBundle.getLottos().size() + "개를 구매했습니다.");
     }
 
     public static void printLottos(LottoBundle lottoBundle) {
@@ -43,11 +43,11 @@ public class ConsoleOutputView {
         Collections.reverse(lottoRanks);
 
         lottoRanks.forEach(lottoRank -> {
-            long lottoRankCount = lottoWinResult.getLottoRankCount(lottoRank);
+            long lottoRankCount = lottoWinResult.getLottoRankCountOf(lottoRank);
             String resultFormat = ((LottoRank.SECOND == lottoRank) ? SECOND_RESULT_FORMAT : COMMON_RESULT_FORMAT);
 
             System.out.printf(resultFormat,
-                    lottoRank.getMatchCount(), lottoRank.getPrizeMoney(), lottoRankCount);
+                    lottoRank.getMatchCount(), lottoRank.getPrizeMoney().getAmount(), lottoRankCount);
         });
     }
 
