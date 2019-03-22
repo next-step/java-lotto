@@ -1,6 +1,7 @@
 package lottery.machine;
 
 import lottery.domain.LotteryRank;
+import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryWinningStatistics;
 import org.junit.*;
 
@@ -36,5 +37,13 @@ public class LotteryMachineTest {
 
         assertThat(statistics.countRank(LotteryRank.FIRST))
                 .isEqualTo(2);
+    }
+
+    @Test
+    public void test_티켓목록_복사본_불일치() {
+        LotteryMachine machine = new LotteryMachine();
+        machine.buyLotteryTicket(1000);
+        assertThat(machine.getTickets())
+                .isNotSameAs(machine.getTickets());
     }
 }
