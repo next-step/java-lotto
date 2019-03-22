@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
+    public Lotto(List<Integer> lottoNumbers) {
         if (!isLottoNumbersSize(lottoNumbers)) {
             throw new IllegalArgumentException("Lotto lottoNumbers size must be " + LOTTO_NUMBERS_SIZE);
         }
@@ -38,7 +38,7 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    int getNumberOfDuplicatedNumbers(LottoTicket target) {
+    int getNumberOfDuplicatedNumbers(Lotto target) {
         int numberOfDuplicatedNumbers = 0;
 
         for (LottoNumber targetNumber : target.lottoNumbers) {
