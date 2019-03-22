@@ -1,8 +1,11 @@
 package lotto.parser;
 
-import lotto.domain.ticket.Lotto;
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+import lotto.vo.LottoMatchResult;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,16 +36,17 @@ public class LottoNumberParserTest {
     }
 
     @Test
-    public void 문자열을_로또객체로_변환() {
+    public void 문자열을_당첨_로또_객체로_변환() {
         // given
         String lottoNumbersString = "1, 2, 3, 4, 5, 6";
         String bonusNumberString = "45";
 
         // when
-        Lotto lotto = LottoNumberParser.parse(lottoNumbersString, bonusNumberString);
+        WinningLotto winner = LottoNumberParser.parse(lottoNumbersString, bonusNumberString);
 
         // then
-        assertThat(lotto.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.getBonusNumber()).isEqualTo(Integer.parseInt(bonusNumberString));
+        LottoMatchResult matchResult = winner.getMatchResult(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45)));
+        assertThat(matchResult.getMatchCount()).isEqualTo(5);
+        assertThat(matchResult.isBonusNumberMatch()).isTrue();
     }
 }
