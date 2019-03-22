@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 class TestNumberGenerator extends NumberGenerator {
 
-  private List<Integer> numbers;
+  private Set<Integer> numbers;
 
   TestNumberGenerator(
       int firstMatchNumber,
@@ -15,18 +16,18 @@ class TestNumberGenerator extends NumberGenerator {
       int fifthMatchNumber,
       int sixthMatchNumber) {
 
-    this.numbers = Arrays.asList(
+    this.numbers = new HashSet<>(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         fifthMatchNumber,
         sixthMatchNumber
-    );
+    ));
   }
 
   @Override
-  public List<Integer> generate() {
+  public Set<Integer> generate() {
     return this.numbers;
   }
 }

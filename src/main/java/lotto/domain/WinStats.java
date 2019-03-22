@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinStats {
@@ -10,9 +10,9 @@ public class WinStats {
   private List<WinCount> winCounts;
 
   private final MyLottos myLottos;
-  private final List<Integer> winNumbers;
+  private final Set<Integer> winNumbers;
 
-  public WinStats(MyLottos myLottos, List<Integer> winNumbers) {
+  public WinStats(MyLottos myLottos, Set<Integer> winNumbers) {
     this.myLottos = myLottos;
     this.winNumbers = winNumbers;
 

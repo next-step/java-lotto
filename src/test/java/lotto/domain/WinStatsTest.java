@@ -3,7 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.junit.Test;
 
 public class WinStatsTest {
@@ -21,38 +23,38 @@ public class WinStatsTest {
     int sixthMatchNumber = 19;
 
     List<Lotto> lottos = Arrays.asList(
-        new Lotto(Arrays.asList(
+        new Lotto(new HashSet<>(Arrays.asList(
             5,
             firstMatchNumber,
             secondMatchNumber,
             42,
             thirdMatchNumber,
-            31)),
-        new Lotto(Arrays.asList(
+            31))),
+        new Lotto(new HashSet<>(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             1,
-            14)),
-        new Lotto(Arrays.asList(
+            14))),
+        new Lotto(new HashSet<>(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            45)),
-        new Lotto(Arrays.asList(
+            45))),
+        new Lotto(new HashSet<>(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            sixthMatchNumber))
+            sixthMatchNumber)))
     );
     MyLottos myLottos = new MyLottos(new Money(4000), lottos);
 
-    List<Integer> winNumbers = new TestNumberGenerator(
+    Set<Integer> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
@@ -82,38 +84,38 @@ public class WinStatsTest {
     int sixthMatchNumber = 19;
 
     List<Lotto> lottoList = Arrays.asList(
-        new Lotto(Arrays.asList(
+        new Lotto(new HashSet<>(Arrays.asList(
             5,
             firstMatchNumber,
             secondMatchNumber,
             42,
             thirdMatchNumber,
-            31)),
-        new Lotto(Arrays.asList(
+            31))),
+        new Lotto(new HashSet<>(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             1,
-            14)),
-        new Lotto(Arrays.asList(
+            14))),
+        new Lotto(new HashSet<>(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            45)),
-        new Lotto(Arrays.asList(
+            45))),
+        new Lotto(new HashSet<>(Arrays.asList(
             firstMatchNumber,
             secondMatchNumber,
             thirdMatchNumber,
             fourthMatchNumber,
             fifthMatchNumber,
-            sixthMatchNumber))
+            sixthMatchNumber)))
     );
     MyLottos myLottos = new MyLottos(purchaseMoney, lottoList);
 
-    List<Integer> winNumbers = new TestNumberGenerator(
+    Set<Integer> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,

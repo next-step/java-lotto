@@ -3,7 +3,8 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.Test;
 
 public class LottoVendingMachineTest {
@@ -31,20 +32,20 @@ public class LottoVendingMachineTest {
     int secondMatchNumber = 12;
     int thirdMatchNumber = 25;
 
-    Lotto lotto = new Lotto(Arrays.asList(
+    Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         2,
         19,
-        15));
-    List<Integer> winNumbers = Arrays.asList(
+        15)));
+    Set<Integer> winNumbers = new HashSet<>(Arrays.asList(
         5,
         firstMatchNumber,
         secondMatchNumber,
         42,
         thirdMatchNumber,
-        31);
+        31));
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -62,20 +63,20 @@ public class LottoVendingMachineTest {
     int thirdMatchNumber = 25;
     int fourthMatchNumber = 36;
 
-    Lotto lotto = new Lotto(Arrays.asList(
+    Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         19,
-        15));
-    List<Integer> winNumbers = Arrays.asList(
+        15)));
+    Set<Integer> winNumbers = new HashSet<>(Arrays.asList(
         5,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        31);
+        31));
 
     // When
       int matchingCount = lotto.winMatch(winNumbers);
@@ -94,20 +95,20 @@ public class LottoVendingMachineTest {
     int fourthMatchNumber = 36;
     int fifthMatchNumber = 40;
 
-    Lotto lotto = new Lotto(Arrays.asList(
+    Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         fifthMatchNumber,
-        15));
-    List<Integer> winNumbers = Arrays.asList(
+        15)));
+    Set<Integer> winNumbers = new HashSet<>(Arrays.asList(
         fifthMatchNumber,
         firstMatchNumber,
         secondMatchNumber,
         fourthMatchNumber,
         thirdMatchNumber,
-        31);
+        31));
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);
@@ -127,20 +128,20 @@ public class LottoVendingMachineTest {
     int fifthMatchNumber = 40;
     int sixthMatchNumber = 19;
 
-    Lotto lotto = new Lotto(Arrays.asList(
+    Lotto lotto = new Lotto(new HashSet<>(Arrays.asList(
         firstMatchNumber,
         secondMatchNumber,
         thirdMatchNumber,
         fourthMatchNumber,
         fifthMatchNumber,
+        sixthMatchNumber)));
+    Set<Integer> winNumbers = new HashSet<>(Arrays.asList(
+        fifthMatchNumber,
+        firstMatchNumber,
+        secondMatchNumber,
+        fourthMatchNumber,
+        thirdMatchNumber,
         sixthMatchNumber));
-    List<Integer> winNumbers = Arrays.asList(
-        fifthMatchNumber,
-        firstMatchNumber,
-        secondMatchNumber,
-        fourthMatchNumber,
-        thirdMatchNumber,
-        sixthMatchNumber);
 
     // When
     int matchingCount = lotto.winMatch(winNumbers);

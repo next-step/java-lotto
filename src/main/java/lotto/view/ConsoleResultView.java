@@ -1,12 +1,13 @@
 package lotto.view;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.WinCount;
 
 public class ConsoleResultView {
 
-  public static void printIssueLottoNumbers(List<Integer> numbers) {
+  public static void printIssueLottoNumbers(Set<Integer> numbers) {
 
     String numbersString = numbers.stream()
         .map(Number::toString)

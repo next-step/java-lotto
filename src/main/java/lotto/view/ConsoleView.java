@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoVendingMachine;
@@ -19,12 +19,12 @@ public class ConsoleView {
     MyLottos myLottos = generateLotto(insertMoney);
 
     String winNumberString = consoleInputView.inputWinNumbers();
-    List<Integer> winNumber = winNumbers(winNumberString);
+    Set<Integer> winNumber = winNumbers(winNumberString);
 
     winState(myLottos, winNumber);
   }
 
-  private static void winState(MyLottos myLottos, List<Integer> winNumber) {
+  private static void winState(MyLottos myLottos, Set<Integer> winNumber) {
 
     ConsoleResultView.printResultTitle();
 
@@ -46,11 +46,11 @@ public class ConsoleView {
     return myLottos;
   }
 
-  private static List<Integer> winNumbers(String winNumberString) {
+  private static Set<Integer> winNumbers(String winNumberString) {
 
     String[] winNumberArray = winNumberString.split(",");
     return Arrays.stream(winNumberArray)
         .map(winNumber -> Integer.parseInt(winNumber.trim()))
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
   }
 }
