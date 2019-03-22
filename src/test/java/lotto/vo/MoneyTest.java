@@ -58,4 +58,17 @@ public class MoneyTest {
         // then
         assertThat(shouldBeTrue).isTrue();
     }
+
+    @Test
+    public void 금액_곱하기_연산() {
+        // given
+        int amount = 1_000;
+        Money money = new Money(amount);
+
+        // when
+        money = money.multiply(10);
+
+        // then
+        assertThat(money.getAmount()).isEqualTo(amount * 10);
+    }
 }

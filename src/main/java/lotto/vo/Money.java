@@ -29,4 +29,8 @@ public class Money {
     public boolean isLargerThan(Money target) {
         return target.amount < this.amount;
     }
+
+    public Money multiply(long i) {
+        return new Money(this.amount * i);
+    }
 }
