@@ -22,16 +22,19 @@ public class OutputView {
 
 
     public static void printLotteryResult(LotteryResults lotteryResults) {
+        String format = "%d개 일치 (%d원)-  %d개\n";
         System.out.println("        ------ 당첨통계");
-        System.out.println("3개 일치 (" + LottoRank.FOURTH + "원)-       " + lotteryResults.getLottoResults().get(LottoRank.FOURTH) + "개");
-        System.out.println("4개 일치 (" + LottoRank.THIRD + "원)-      " + lotteryResults.getLottoResults().get(LottoRank.THIRD) + "개");
-        System.out.println("5개 일치 (" + LottoRank.SECOND + "원)-    " + lotteryResults.getLottoResults().get(LottoRank.SECOND) + "개");
-        System.out.println("6개 일치 ("+LottoRank.FIRST+"원)- " + lotteryResults.getLottoResults().get(LottoRank.FIRST) + "개");
+        System.out.printf(
+            format, LottoRank.FOURTH.getCountOfMatch(), LottoRank.FOURTH.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.FOURTH));
+        System.out.printf(
+            format, LottoRank.THIRD.getCountOfMatch(), LottoRank.THIRD.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.THIRD));
+        System.out.printf(
+            format, LottoRank.SECOND.getCountOfMatch(), LottoRank.SECOND.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.SECOND));
+        System.out.printf(
+            format, LottoRank.FIRST.getCountOfMatch(), LottoRank.FIRST.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.FIRST));
         System.out.println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lotteryResults.getProfit()));
 
     }
-
-
 
 
 }
