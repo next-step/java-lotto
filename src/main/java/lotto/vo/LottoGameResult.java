@@ -13,7 +13,7 @@ public class LottoGameResult {
         return this.lottoWinResult;
     }
 
-    public long getTotalPrizeMoney() {
+    public Money getTotalPrizeMoney() {
         return this.lottoProfit.getTotalPrizeMoney();
     }
 
