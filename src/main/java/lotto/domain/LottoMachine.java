@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ticket.Lotto;
-import lotto.domain.ticket.LottoBundle;
 import lotto.vo.Money;
 
 import java.util.List;

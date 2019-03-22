@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoBundle;
 import lotto.vo.Money;
 import org.junit.Test;
 
@@ -8,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoMachineTest {
+
     @Test
     public void 입력값_만큼_로또_가져오기() {
         // given
@@ -51,7 +51,6 @@ public class LottoMachineTest {
 
         //when
         //then
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoMachine.buyLottos(money));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoMachine.buyLottos(money));
     }
 }
