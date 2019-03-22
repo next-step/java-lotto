@@ -12,12 +12,13 @@ public class ConsoleMain {
         ConsoleResultView.printLottoCount(lottos);
         ConsoleResultView.printLottosInfo(lottos);
 
-        lottoMachine.initWinningNumbers(ConsoleInputView.inputWinningNumbers());
-        lottoMachine.initBonusNumber(ConsoleInputView.inputBonusNumber());
+        Lotto winningNumbers = new Lotto(ConsoleInputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.getInstance(ConsoleInputView.inputBonusNumber());
+        lottoMachine.initWinningLotto(new WinningLotto(winningNumbers, bonusNumber));
 
-        List<Rank> ranks = lottoMachine.calculateRanks(lottos);
+        LottoResult lottoResult = lottoMachine.createLottoResult(lottos);
         ConsoleResultView.printTotalResult(
-            LottoAnalyzer.makeWinGroup(ranks),
-            LottoAnalyzer.calculateProfitRate(ranks));
+            lottoResult.getRankGroup(),
+            lottoResult.calculateProfitRate());
     }
 }

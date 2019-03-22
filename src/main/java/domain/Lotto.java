@@ -14,13 +14,17 @@ public class Lotto {
             .limit(limitCount));
     }
 
-    public Lotto(Integer ...numbers){
-        if(Arrays.stream(numbers).distinct().count() != limitCount){
+    public Lotto(List<Integer> numbers){
+        if(numbers.stream().distinct().count() != limitCount){
             throw new IllegalArgumentException();
         }
 
-        sort(Arrays.stream(numbers)
+        sort(numbers.stream()
             .map(LottoNumber::getInstance));
+    }
+
+    public Lotto(Integer ...numbers){
+        this(Arrays.asList(numbers));
     }
 
     public List<LottoNumber> getLottoNumbers() {
