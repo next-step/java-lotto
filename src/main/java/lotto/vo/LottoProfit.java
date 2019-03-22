@@ -11,7 +11,7 @@ public class LottoProfit {
 
     public LottoProfit(LottoWinResult lottoWinResult) {
         this.cost = getCostFromLottoWinResult(lottoWinResult);
-        this.totalPrizeMoney = getTotalPrizeMoneyFromLottoWinResult(lottoWinResult);
+        this.totalPrizeMoney = getTotalPrizeMoneyOf(lottoWinResult);
     }
 
     private Money getCostFromLottoWinResult(LottoWinResult lottoWinResult) {
@@ -23,27 +23,31 @@ public class LottoProfit {
 
     private long getNumberOfLottos(LottoWinResult lottoWinResult) {
         return Arrays.asList(LottoRank.values()).stream()
-                .mapToLong(lottoWinResult::getLottoRankCount)
+                .mapToLong(lottoWinResult::getLottoRankCountOf)
                 .sum();
     }
 
-    private Money getTotalPrizeMoneyFromLottoWinResult(LottoWinResult lottoWinResult) {
+    private Money getTotalPrizeMoneyOf(LottoWinResult lottoWinResult) {
         long totalPrizeMoneyAmount = Arrays.asList(LottoRank.values()).stream()
-                .mapToLong(lottoRank -> lottoRank.getTotalPrizeMoneyOfLottoRank(lottoWinResult))
+                .map(lottoRank -> {
+                    long lottoRankCount = lottoWinResult.getLottoRankCountOf(lottoRank);
+                    return lottoRank.getTotalPrizeMoneyOfLottoRank(lottoRankCount);
+                })
+                .mapToLong(Money::getAmount)
                 .sum();
 
         return new Money(totalPrizeMoneyAmount);
     }
 
-    long getCost() {
-        return cost.getAmount();
+    public Money getCost() {
+        return cost;
     }
 
-    long getTotalPrizeMoney() {
-        return totalPrizeMoney.getAmount();
+    public Money getTotalPrizeMoney() {
+        return totalPrizeMoney;
     }
 
-    double getTotalProfitRate() {
+    public double getTotalProfitRate() {
         return (double) this.totalPrizeMoney.getAmount() / this.cost.getAmount();
     }
 }
