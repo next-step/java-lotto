@@ -73,9 +73,9 @@
 			<th><h3 class="text-center">당첨 통계</h3></th>
 		</thead>
 		<tbody>
-			{{#each matchResult}}
+			{{#each matchResult.countInfo.counts}}
 			<tr>
-				<th>{{this}}</th>
+				<th>{{@key}} {{this}}</th>
 			</tr>
 			{{/each}}
 		</tbody>

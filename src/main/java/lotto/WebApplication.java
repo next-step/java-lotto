@@ -65,12 +65,7 @@ public class WebApplication {
 
             LottoResult lottoResult = new LottoResult(winningLotto);
             MatchResult matchResult = lottoResult.generate(lottoBundle);
-            List<String> results = new ArrayList<>();
-            for (Rank rank : Rank.values()) {
-                results.add(rank.toString() + matchResult.getCountInfo().getCounts().get(rank).toString());
-            }
-
-            model.put("matchResult", results);
+            model.put("matchResult", matchResult);
             model.put("rewardPercent", lottoResult.getRewardPercent(money));
             return render(model, "/result.html");
         });
