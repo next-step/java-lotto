@@ -28,11 +28,10 @@ public class ConsoleView {
 
     ConsoleResultView.printResultTitle();
 
-    WinStats winStats = new WinStats(myLottos.getLottos(), winNumber);
-    winStats.total();
+    WinStats winStats = new WinStats(myLottos, winNumber);
     ConsoleResultView.printMatchWinCount(winStats.getWinCounts());
 
-    String yield = winStats.yield(myLottos.getBuyMoney());
+    String yield = winStats.yield();
     ConsoleResultView.printYield(yield);
   }
 

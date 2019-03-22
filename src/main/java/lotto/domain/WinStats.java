@@ -9,20 +9,17 @@ public class WinStats {
 
   private List<WinCount> winCounts;
 
-  private final List<Lotto> lottos;
+  private final MyLottos myLottos;
   private final List<Integer> winNumbers;
 
-  public WinStats() {
-    this.lottos = new ArrayList<>();
-    this.winNumbers = new ArrayList<>();
-  }
-
-  public WinStats(List<Lotto> lottos, List<Integer> winNumbers) {
-    this.lottos = lottos;
+  public WinStats(MyLottos myLottos, List<Integer> winNumbers) {
+    this.myLottos = myLottos;
     this.winNumbers = winNumbers;
+
+    total();
   }
 
-  public void total() {
+  private void total() {
 
     this.winCounts = Arrays.stream(Prizes.values())
         .map(prizes -> new WinCount(prizes, winCount(prizes)))
@@ -35,7 +32,7 @@ public class WinStats {
 
   private long winCount(Prizes prizes) {
 
-    return this.lottos.stream()
+    return this.myLottos.getLottos().stream()
         .filter(lotto -> lotto.winMatch(this.winNumbers) == prizes.getMatchCount())
         .count();
   }
@@ -48,8 +45,8 @@ public class WinStats {
         .get();
   }
 
-  public String yield(Money purchaseMoney) {
-    return getTotalWinMoney().division(purchaseMoney);
+  public String yield() {
+    return myLottos.yield(getTotalWinMoney());
   }
 
 }

@@ -19,4 +19,8 @@ public class MyLottos {
   public List<Lotto> getLottos() {
     return lottos;
   }
+
+  public String yield(Money totalWinMoney) {
+    return totalWinMoney.division(buyMoney);
+  }
 }

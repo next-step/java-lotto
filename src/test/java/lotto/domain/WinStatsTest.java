@@ -20,7 +20,7 @@ public class WinStatsTest {
     int fifthMatchNumber = 40;
     int sixthMatchNumber = 19;
 
-    List<Lotto> lottoList = Arrays.asList(
+    List<Lotto> lottos = Arrays.asList(
         new Lotto(Arrays.asList(
             5,
             firstMatchNumber,
@@ -50,6 +50,8 @@ public class WinStatsTest {
             fifthMatchNumber,
             sixthMatchNumber))
     );
+    MyLottos myLottos = new MyLottos(new Money(4000), lottos);
+
     List<Integer> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
@@ -59,8 +61,7 @@ public class WinStatsTest {
         sixthMatchNumber).generate();
 
     // When
-    WinStats winStats = new WinStats(lottoList, winNumbers);
-    winStats.total();
+    WinStats winStats = new WinStats(myLottos, winNumbers);
     Money winMoney = winStats.getTotalWinMoney();
 
     // Then
@@ -110,6 +111,8 @@ public class WinStatsTest {
             fifthMatchNumber,
             sixthMatchNumber))
     );
+    MyLottos myLottos = new MyLottos(purchaseMoney, lottoList);
+
     List<Integer> winNumbers = new TestNumberGenerator(
         fifthMatchNumber,
         firstMatchNumber,
@@ -118,11 +121,9 @@ public class WinStatsTest {
         thirdMatchNumber,
         sixthMatchNumber).generate();
 
-    WinStats winStats = new WinStats(lottoList, winNumbers);
-    winStats.total();
-
     // When
-    String yield = winStats.yield(purchaseMoney);
+    WinStats winStats = new WinStats(myLottos, winNumbers);
+    String yield = winStats.yield();
 
     // Then
     assertThat(yield).isEqualTo("142968.20");
