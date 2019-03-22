@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ticket.Lotto;
-import lotto.domain.ticket.LottoNumber;
-import lotto.domain.ticket.LottoTicket;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,19 +11,14 @@ public class LottoGenerator {
     }
 
     public static Lotto generate() {
-        List<Integer> unsortedLottoNumbers = getUnsortedLottoNumbers();
-
-        List<Integer> lottoNumbers = extractSortedLottoNumbers(unsortedLottoNumbers);
-        int bonusNumber = unsortedLottoNumbers.get(LottoTicket.LOTTO_NUMBERS_SIZE);
-
-        return new Lotto(lottoNumbers, bonusNumber);
+        return new Lotto(getSortedLottoNumbers());
     }
 
-    private static List<Integer> extractSortedLottoNumbers(List<Integer> unsortedLottoNumbers) {
-        List<Integer> sortedLottoNumbers = unsortedLottoNumbers.subList(0, LottoTicket.LOTTO_NUMBERS_SIZE);
-        sort(sortedLottoNumbers);
+    private static List<Integer> getSortedLottoNumbers() {
+        List<Integer> lottoNumbers = getUnsortedLottoNumbers();
+        sort(lottoNumbers);
 
-        return sortedLottoNumbers;
+        return lottoNumbers;
     }
 
     private static void sort(List<Integer> lottoNumbers) {
@@ -35,7 +26,7 @@ public class LottoGenerator {
     }
 
     private static List<Integer> getUnsortedLottoNumbers() {
-        return getShuffledAllLottoNumbers().subList(0, LottoTicket.LOTTO_NUMBERS_SIZE + 1);
+        return getShuffledAllLottoNumbers().subList(0, Lotto.LOTTO_NUMBERS_SIZE);
     }
 
     static List<Integer> getAllLottoNumbers() {

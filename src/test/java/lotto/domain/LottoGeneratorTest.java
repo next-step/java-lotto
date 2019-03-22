@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoNumber;
 import org.junit.Test;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class LottoGeneratorTest {
 
     @Test
     public void 로또_번호_정상_생성() {
-        // 비정상 경우는 test: lotto.domain.ticket 테스트에서 걸림
+        // 비정상 경우는 Lotto, LottoNumber 테스트에서 걸림
         LottoGenerator.generate();
     }
 }
