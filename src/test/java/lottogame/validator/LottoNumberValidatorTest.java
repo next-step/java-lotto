@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 public class LottoNumberValidatorTest {
 
-    LottoNumberValidator validator = new LottoNumberValidator();
+    private final LottoNumberValidator validator = new LottoNumberValidator();
     
     @Test
     public void isValid_for_null() {

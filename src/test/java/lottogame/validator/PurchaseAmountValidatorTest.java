@@ -6,7 +6,8 @@ import static lottogame.domain.PurchaseAmount.LOTTO_PRICE;
 import static org.junit.Assert.*;
 
 public class PurchaseAmountValidatorTest {
-    PurchaseAmountValidator validator = new PurchaseAmountValidator();
+
+    private PurchaseAmountValidator validator = new PurchaseAmountValidator();
 
     @Test
     public void isValid_for_null() {

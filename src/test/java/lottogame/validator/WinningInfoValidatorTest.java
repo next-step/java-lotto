@@ -20,7 +20,7 @@ public class WinningInfoValidatorTest {
     private LottoNumberPackage winningNumbers;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         winningNumbers = new LottoNumberPackage(getRangedNumbers(1, 6));
     }
 

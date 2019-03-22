@@ -6,7 +6,7 @@ import lottogame.validator.Validatable;
 
 public class InputLine {
 
-    private String line;
+    private final String line;
 
     private final Validatable<String> validator = new InputLineValidator();
 

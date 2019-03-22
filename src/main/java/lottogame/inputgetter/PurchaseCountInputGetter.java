@@ -6,8 +6,8 @@ import lottogame.view.InputView;
 public class PurchaseCountInputGetter implements InputGettable<PurchaseCount, Long> {
 
     @Override
-    public PurchaseCount getReturnObject(Long... object) {
-        return new PurchaseCount(object[0], InputView.getInputLine());
+    public PurchaseCount getReturnObject(Long... parameters) {
+        return new PurchaseCount(parameters[0], InputView.getInputLine());
     }
 
     @Override

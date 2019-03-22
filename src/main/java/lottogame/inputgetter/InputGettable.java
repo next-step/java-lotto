@@ -1,11 +1,11 @@
 package lottogame.inputgetter;
 
-public interface InputGettable<T,O> {
-    T getReturnObject(O... object);
+public interface InputGettable<R, P> {
+    R getReturnObject(P... parameters);
     void showInputMessage();
 
-    default T get(O... parameters){
-        T returnObject = null;
+    default R get(P... parameters){
+        R returnObject;
 
         try {
             showInputMessage();

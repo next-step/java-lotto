@@ -6,7 +6,7 @@ import lottogame.view.InputView;
 public class WinningNumberInputGetter implements InputGettable<LottoNumberPackage, Object> {
 
     @Override
-    public LottoNumberPackage getReturnObject(Object[] object) {
+    public LottoNumberPackage getReturnObject(Object[] parameters) {
         return new LottoNumberPackage(InputView.getInputLine());
     }
 

@@ -11,7 +11,7 @@ public class LottoNumberPool {
     private static final List<LottoNumber> lottoNumberPool =
             IntStream.rangeClosed(LottoNumber.MINIMUM_LOTTO_NUMBER, LottoNumber.MAXIMUM_LOTTO_NUMBER)
                     .boxed()
-                    .map(number -> new LottoNumber(number))
+                    .map(LottoNumber::new)
                     .collect(Collectors.toList());
 
     public static LottoNumber getLottoNumber(int number) {

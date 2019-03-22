@@ -1,7 +1,7 @@
 package lottogame.util;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Optional;
 
 public class StringUtils {
 
@@ -13,12 +13,12 @@ public class StringUtils {
         return !isEmpty(s);
     }
 
-    public static boolean isEmpty(List<String> strs) {
-        return strs == null || strs.size() <= 0;
+    public static boolean isEmpty(List<String> strings) {
+        return strings == null || strings.size() <= 0;
     }
 
-    public static boolean isEmpty(String[] strs) {
-        return strs == null || strs.length <= 0;
+    public static boolean isEmpty(String[] strings) {
+        return strings == null || strings.length <= 0;
     }
 
     public static String repeat(String s, int count) {

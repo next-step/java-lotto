@@ -20,7 +20,7 @@ public class LottoResult {
 
         Arrays.stream(Rank.values())
                 .filter(rank -> rank.getWinningMoney() > 0)
-                .map(rank -> getWinningResultString(rank))
+                .map(this::getWinningResultString)
                 .forEach(stringBuilder::append);
 
         return stringBuilder.toString();

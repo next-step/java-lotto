@@ -7,9 +7,9 @@ public class PurchaseAmount {
 
     public static final long LOTTO_PRICE = 1_000;
 
-    private long value;
+    private final long value;
 
-    private Validatable<Long> validator = new PurchaseAmountValidator();
+    private final Validatable<Long> validator = new PurchaseAmountValidator();
 
     public PurchaseAmount(InputLine inputLine) {
         this(Long.parseLong(inputLine.getLine()));

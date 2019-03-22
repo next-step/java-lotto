@@ -1,17 +1,14 @@
 package lottogame.domain;
 
-import lottogame.service.LottoNumberGeneratorImpl;
 import lottogame.service.LottoNumberPool;
-import lottogame.util.StringUtils;
 import lottogame.validator.LottoNumberPackageValidator;
 import lottogame.validator.Validatable;
 import spark.utils.CollectionUtils;
 
 import java.util.*;
-import java.util.function.LongToDoubleFunction;
 import java.util.stream.Collectors;
 
-import static lottogame.view.InputView.NUMBER_DELIMETER;
+import static lottogame.view.InputView.NUMBER_DELIMITER;
 
 /**
  * 로또 1게임
@@ -24,7 +21,7 @@ public class LottoNumberPackage {
     private final Validatable<Set<LottoNumber>> validator = new LottoNumberPackageValidator();
 
     public LottoNumberPackage(InputLine inputLine) {
-        this(getNumbers(inputLine.getLine().split(NUMBER_DELIMETER)));
+        this(getNumbers(inputLine.getLine().split(NUMBER_DELIMITER)));
     }
 
     public LottoNumberPackage(Set<LottoNumber> numbers) {

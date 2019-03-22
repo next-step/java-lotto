@@ -2,7 +2,7 @@ package lottogame.validator;
 
 public class PurchaseCountValidator implements Validatable<Long> {
 
-    private long count;
+    private final long count;
 
     public PurchaseCountValidator(long count) {
         this.count = count;

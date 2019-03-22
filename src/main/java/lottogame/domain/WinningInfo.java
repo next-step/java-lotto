@@ -8,7 +8,7 @@ public class WinningInfo {
     private final LottoNumberPackage numbers;
     private final LottoNumber bonusNumber;
 
-    private Validatable<WinningInfo> validator = new WinningInfoValidator();
+    private final Validatable<WinningInfo> validator = new WinningInfoValidator();
 
     public WinningInfo(LottoNumberPackage numbers, InputLine inputLine) {
         this(numbers, new LottoNumber(Integer.parseInt(inputLine.getLine())));

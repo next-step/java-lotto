@@ -6,7 +6,7 @@ import lottogame.view.InputView;
 public class PurchaseAmountInputGetter implements InputGettable<PurchaseAmount,Object> {
 
     @Override
-    public PurchaseAmount getReturnObject(Object[] object) {
+    public PurchaseAmount getReturnObject(Object[] parameters) {
         return new PurchaseAmount(InputView.getInputLine());
     }
 

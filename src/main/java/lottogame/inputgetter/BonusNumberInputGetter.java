@@ -7,8 +7,8 @@ import lottogame.view.InputView;
 public class BonusNumberInputGetter implements InputGettable<WinningInfo, LottoNumberPackage> {
 
     @Override
-    public WinningInfo getReturnObject(LottoNumberPackage... object) {
-        return new WinningInfo(object[0], InputView.getInputLine());
+    public WinningInfo getReturnObject(LottoNumberPackage... parameters) {
+        return new WinningInfo(parameters[0], InputView.getInputLine());
     }
 
     @Override

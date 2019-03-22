@@ -11,7 +11,7 @@ public class ManualNumbersInputGetter implements InputGettable<List<LottoNumberP
 
     @Override
     public List<LottoNumberPackage> getReturnObject(Long... parameters) {
-        return LongStream.rangeClosed(1, parameters[0].longValue())
+        return LongStream.rangeClosed(1, parameters[0])
                     .mapToObj(number -> new LottoNumberPackage(InputView.getInputLine()))
                     .collect(Collectors.toList());
     }

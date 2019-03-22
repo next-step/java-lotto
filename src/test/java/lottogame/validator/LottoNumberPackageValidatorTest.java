@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class LottoNumberPackageValidatorTest {
 
-    LottoNumberPackageValidator validator = new LottoNumberPackageValidator();
+    private LottoNumberPackageValidator validator = new LottoNumberPackageValidator();
 
     @Test
     public void isValid_for_null() {

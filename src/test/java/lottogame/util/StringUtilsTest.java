@@ -27,7 +27,7 @@ public class StringUtilsTest {
 
     @Test
     public void isEmpty_for_list() {
-        assertFalse(StringUtils.isEmpty(Arrays.asList("a")));
+        assertFalse(StringUtils.isEmpty(Collections.singletonList("a")));
         assertFalse(StringUtils.isEmpty(Arrays.asList("a", "b", "c")));
     }
 

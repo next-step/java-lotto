@@ -2,8 +2,8 @@ package lottogame.domain;
 
 public class PurchaseInfo {
 
-    private PurchaseAmount purchaseAmount;
-    private PurchaseCount purchaseCount;
+    private final PurchaseAmount purchaseAmount;
+    private final PurchaseCount purchaseCount;
 
     public PurchaseInfo(PurchaseAmount purchaseAmount, PurchaseCount purchaseCount) {
         this.purchaseAmount = purchaseAmount;

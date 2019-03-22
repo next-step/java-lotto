@@ -15,9 +15,9 @@ public enum Rank {
     static final int MATCHED_COUNT_TO_CHECK_BONUS_NUMBER = 5;
     static final String WINNING_RESULT_STRING_FORMAT = "%d개 일치, %s(%d원)";
 
-    private int matchedCount;
-    private long winningMoney;
-    private String winningResultMessage;
+    private final int matchedCount;
+    private final long winningMoney;
+    private final String winningResultMessage;
 
     Rank(int matchedCount, long winningMoney, String extraMessage) {
         this.matchedCount = matchedCount;
