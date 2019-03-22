@@ -21,7 +21,8 @@ public class Numbers {
     }
 
     public static Numbers of(int... numbers) {
-        return new Numbers(new HashSet<>(Ints.asList(numbers)));
+        Set<Integer> numberSet = new HashSet<>(Ints.asList(numbers));
+        return new Numbers(numberSet);
     }
 
     public static Numbers of(String[] numbers) {
@@ -29,6 +30,7 @@ public class Numbers {
                 .mapToInt(it -> Integer.parseInt(StringUtils.trimWhitespace(it)))
                 .boxed()
                 .collect(Collectors.toSet());
+
         return new Numbers(numberSet);
     }
 
@@ -38,9 +40,9 @@ public class Numbers {
                 .count() == 0;
     }
 
-    long sameNumberCount(Numbers newNumbers) {
+    long count(Numbers numbers) {
         return this.numbers.stream()
-                .filter(it -> newNumbers.hasNumber(it))
+                .filter(it -> numbers.hasNumber(it))
                 .count();
     }
 

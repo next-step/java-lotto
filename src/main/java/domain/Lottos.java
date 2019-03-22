@@ -1,11 +1,15 @@
 package domain;
 
+import util.RandomUtils;
 import util.WinType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import static util.Constants.PRICE_OF_LOTTO;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -14,13 +18,22 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    static Lottos createLottos(int money) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < money / PRICE_OF_LOTTO; i++) {
+            lottos.add(Lotto.of(Numbers.of(RandomUtils.createNumbers())));
+        }
+
+        return new Lottos(lottos);
+    }
+
     List<Lotto> getLottos() {
         return lottos;
     }
 
-    LottoResult figure(int money, Numbers winNumbers) {
+    LottoResult figure(int money, WinningLotto winningLotto) {
         Map<WinType, Long> map = lottos.stream()
-                .map(it -> it.figure(winNumbers))
+                .map(it -> it.figure(winningLotto))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoResult(money, map);

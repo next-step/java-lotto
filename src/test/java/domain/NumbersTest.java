@@ -23,6 +23,6 @@ public class NumbersTest {
         Numbers numbers = Numbers.of(1, 2, 3, 4, 5, 6);
         Numbers newNumbers = Numbers.of(1, 2, 3, 4, 5, 10);
 
-        assertThat(numbers.sameNumberCount(newNumbers)).isEqualTo(5);
+        assertThat(numbers.count(newNumbers)).isEqualTo(5);
     }
 }
