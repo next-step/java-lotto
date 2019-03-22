@@ -7,12 +7,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Rank getRank(Lotto winningLotto, int bonusNumber) {
-        return Rank.valueOf(getMatchNumber(winningLotto), isMatchBonusNumber(bonusNumber));
+    public Rank getRank(WinningLotto winningLotto) {
+        return Rank.valueOf(getMatchNumber(winningLotto.getLotto()), isMatchBonusNumber(winningLotto.getBonusNumber()));
     }
 
-    private int getMatchNumber(Lotto winningLotto) {
-        return (int) winningLotto.lottoNumbers.stream()
+    private int getMatchNumber(List<Integer> winningLotto) {
+        return (int) winningLotto.stream()
                 .filter(number -> this.lottoNumbers.contains(number))
                 .count();
     }

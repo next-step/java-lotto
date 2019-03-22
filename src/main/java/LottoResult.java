@@ -4,19 +4,17 @@ import java.util.List;
 public class LottoResult {
     private final int TOTAL_PRICE;
     private final List<Lotto> lottos;
-    private final Lotto winningLoto;
-    private final int bonusNumber;
+    private final WinningLotto winningLotto;
 
-    public LottoResult(List<Lotto> lottos, Lotto winningLoto, int bonusNumber) {
+    public LottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
         this.TOTAL_PRICE = lottos.size() * LottoMachine.LOTTO_PRICE;
         this.lottos = lottos;
-        this.winningLoto = winningLoto;
-        this.bonusNumber = bonusNumber;
+        this.winningLotto = winningLotto;
     }
 
     public int getMatchNumber(Rank rank) {
         return (int) lottos.stream()
-                .filter(lotto -> lotto.getRank(winningLoto, bonusNumber) == rank)
+                .filter(lotto -> lotto.getRank(winningLotto) == rank)
                 .count();
     }
 
