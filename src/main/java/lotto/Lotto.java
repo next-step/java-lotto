@@ -5,7 +5,7 @@ import java.util.List;
 public class Lotto {
     public static final int SIZE_LIMIT = 6;
     public static final int UNIT_PRICE = 1_000;
-    protected List<LottoNumber> numbers;
+    private List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
         if (hasDuplicate(numbers)) {
