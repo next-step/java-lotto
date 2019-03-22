@@ -4,11 +4,11 @@ import lotto.domain.LottoStore;
 import lotto.domain.lotto.LottoBundle;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Ticket;
+import lotto.domain.lotto.TicketMachine;
 import lotto.domain.lotto.WinningLotto;
 import lotto.enums.Rank;
 import lotto.utils.ManualLottoGenerator;
 import lotto.utils.RandomLottoGenerator;
-import lotto.view.InputView;
 import lotto.view.LottoResult;
 import lotto.view.dto.ResultResponseDTO;
 import lotto.view.vo.MatchResult;
@@ -16,10 +16,10 @@ import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
@@ -42,12 +42,12 @@ public class WebApplication {
             Map<String, Object> model = new HashMap<>();
             money = Integer.parseInt(req.queryParams("inputMoney"));
             int manualCount = Integer.parseInt(req.queryParams("manualCount"));
-            List<Ticket> manualLottoNumbers = InputView.getManualLottoNumbers("", REGEX, new Scanner(req.queryParams("manualNumber")), manualCount, false);
-
+            List<String> manualLottoNumbers = Arrays.asList(req.queryParams("manualNumber").split("\\n"));
+            List<Ticket> manualLottoTickets = TicketMachine.generateTickets(manualLottoNumbers, REGEX);
             LottoStore lottoStore =
-                new LottoStore(new ManualLottoGenerator(), new RandomLottoGenerator(), money, manualLottoNumbers);
+                new LottoStore(new ManualLottoGenerator(), new RandomLottoGenerator(), money, manualLottoTickets);
 
-            lottoBundle = lottoStore.buyManualLottos(manualLottoNumbers);
+            lottoBundle = lottoStore.buyManualLottos(manualLottoTickets);
             lottoBundle.addAll(lottoStore.buyRandomLottos());
 
             model.put("lottos", lottoBundle.getLottos());
@@ -58,9 +58,9 @@ public class WebApplication {
 
         post("/matchLotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            Ticket winningLottoTicket =
-                InputView.getWinningLottoNumbers("", REGEX, new Scanner(req.queryParams("winningNumber")));
-            int bonusNumber = InputView.getBonusNumber("", new Scanner(req.queryParams("bonusNumber")));
+            String winningLottoNumber = req.queryParams("winningNumber");
+            Ticket winningLottoTicket = TicketMachine.generateTicket(winningLottoNumber, REGEX);
+            int bonusNumber = Integer.parseInt(req.queryParams("bonusNumber"));
 
             WinningLotto winningLotto = new WinningLotto(winningLottoTicket, new LottoNumber(bonusNumber));
 
