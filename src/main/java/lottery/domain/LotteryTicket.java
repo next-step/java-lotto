@@ -16,6 +16,7 @@ public class LotteryTicket {
             throw new IllegalArgumentException();
         }
         this.lotteryNumbers = numbers.stream()
+                .sorted()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());
     }
