@@ -19,8 +19,8 @@ public class WinningTicket {
                 .filter(winningNumber -> ticket.lotteryNumbers.contains(winningNumber))
                 .count();
 
-        final boolean contains = ticket.lotteryNumbers.contains(bonusNumber);
+        final boolean matchBonus = ticket.lotteryNumbers.contains(bonusNumber);
 
-        return LotteryRank.generate(count, contains);
+        return LotteryRank.generate(count, matchBonus);
     }
 }
