@@ -1,6 +1,7 @@
 package lottery;
 
 
+import lottery.domain.Money;
 import lottery.machine.LotteryMachine;
 import lottery.view.InputView;
 import lottery.view.ResultView;
@@ -16,8 +17,9 @@ public class Application {
 
     public void run() {
         LotteryMachine machine = new LotteryMachine();
-        int price = InputView.inputPrice();
-        int count = machine.buyLotteryTicket(price);
+
+        final Money price = InputView.inputPrice();
+        final int count = machine.buyLotteryTicket(price);
 
         InputView.viewTicketCount(count);
         ResultView.viewTickets(machine.getTickets());

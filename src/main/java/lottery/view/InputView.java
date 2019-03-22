@@ -1,5 +1,7 @@
 package lottery.view;
 
+import lottery.domain.Money;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -8,13 +10,13 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final Scanner sc = new Scanner(System.in);
 
-    public static int inputPrice() {
+    public static Money inputPrice() {
         System.out.println("구매금액을 입력해 주세요");
 
         final int result = sc.nextInt();
         sc.nextLine();
 
-        return result;
+        return new Money(result);
     }
 
     public static void viewTicketCount(int count) {

@@ -4,6 +4,7 @@ import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryTicket;
 import lottery.domain.LotteryWinningStatistics;
 import lottery.domain.WinningTicket;
+import lottery.domain.Money;
 import lottery.supplier.BoundedUniqueNumbersGenerator;
 import lottery.supplier.NumbersGenerator;
 
@@ -26,8 +27,8 @@ public class LotteryMachine {
         this.numbersGenerator = numbersGenerator;
     }
 
-    public int buyLotteryTicket(int price) {
-        final int ticketCount = price / LotteryTicket.PRICE;
+    public int buyLotteryTicket(Money price) {
+        final int ticketCount = price.divide(LotteryTicket.PRICE);
         this.lotteryTickets = IntStream.range(0, ticketCount)
                 .mapToObj(i -> new LotteryTicket(numbersGenerator.nextNumbers(LotteryTicket.NUMBERS_COUNT)))
                 .collect(Collectors.toList());
