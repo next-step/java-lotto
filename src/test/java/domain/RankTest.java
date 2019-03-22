@@ -12,8 +12,11 @@ public class RankTest {
     }
 
     @Test
-    public void 보너스_번호를_맞추면_2등이_된다() {
+    public void 보너스_번호가_순위에_영향을_미친다() {
         assertThat(Rank.calculate(5, true)).isEqualTo(Rank.Second);
         assertThat(Rank.calculate(5, false)).isEqualTo(Rank.Third);
+
+        assertThat(Rank.calculate(4, false)).isEqualTo(Rank.Fourth);
+        assertThat(Rank.calculate(4, true)).isEqualTo(Rank.Fourth);
     }
 }

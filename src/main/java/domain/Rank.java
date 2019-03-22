@@ -10,7 +10,7 @@ public enum Rank {
     Second(5, true, 3_000_000),
     Third(5, false, 1_500_000),
     Fourth(4, false, 50_000),
-    Fifth(3, false, 5000),
+    Fifth(3, false, 5_000),
     None(-1, false, 0);
 
     private int matchCount;
@@ -22,15 +22,6 @@ public enum Rank {
         this.matchCount = matchCount;
         this.matchBonus = matchBonus;
         this.prizeMoney = prizeMoney;
-    }
-
-    public static Rank calculate(int matchCount, boolean matchBonus) {
-        Optional<Rank> rank = Arrays.stream(Rank.values())
-            .filter(r -> r.matchCount == matchCount)
-            .filter(r -> r.matchBonus == matchBonus)
-            .findFirst();
-
-        return rank.orElse(None);
     }
 
     public int getMatchCount() {
@@ -48,5 +39,21 @@ public enum Rank {
     public String getPrizeMoneyForDisplay() {
         NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.KOREA);
         return currency.format(prizeMoney);
+    }
+
+    public static Rank calculate(int matchCount, boolean matchBonus) {
+        Optional<Rank> rank = Arrays.stream(Rank.values())
+            .filter(r -> calculateRule(r, matchCount, matchBonus))
+            .findFirst();
+
+        return rank.orElse(None);
+    }
+
+    private static boolean calculateRule(Rank rank, int matchCount, boolean matchBonus) {
+        if(rank == Second) {
+            return rank.matchCount == matchCount && rank.matchBonus == matchBonus;
+        }
+
+        return rank.matchCount == matchCount;
     }
 }
