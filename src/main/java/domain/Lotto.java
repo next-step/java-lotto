@@ -18,15 +18,7 @@ public class Lotto {
                 containsWinningNumberCount ++;
         }
 
-        return setResultByContainCount(containsWinningNumberCount);
-    }
-
-    private LottoResultStatus setResultByContainCount(int matchCount) {
-        if ( matchCount < 3) {
-            return LottoResultStatus.NONE;
-        }
-
-        return LottoResultStatus.of(matchCount);
+        return LottoResultStatus.findByMatchCount(containsWinningNumberCount);
     }
 
     public Numbers getNumbers() {
