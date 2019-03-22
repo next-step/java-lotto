@@ -30,4 +30,15 @@ public class LottoNumberTest {
         // then
         assertThat(target == same).isTrue();
     }
+
+    @Test
+    public void 로또_숫자_범위를_넘어가는_수를_가져오려고_하면_IllegalArgumentException() {
+        int underMinNumber = LottoNumber.MIN_NUMBER - 1;
+        int overMaxNumber = LottoNumber.MAX_NUMBER + 1;
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.get(underMinNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.get(overMaxNumber));
+    }
 }

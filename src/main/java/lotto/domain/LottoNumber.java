@@ -1,17 +1,12 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
-
-    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS =
-            IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-                    .boxed()
-                    .collect(Collectors.toMap(i -> i, LottoNumber::new));
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
 
     private final int number;
 
@@ -24,7 +19,15 @@ public class LottoNumber {
     }
 
     public static LottoNumber get(int number) {
-        return LOTTO_NUMBERS.get(number);
+        LottoNumber lottoNumber = LOTTO_NUMBERS.get(number);
+        return ((null == lottoNumber) ? put(number) : lottoNumber);
+    }
+
+    private static LottoNumber put(int number) {
+        LottoNumber lottoNumber = new LottoNumber(number);
+        LOTTO_NUMBERS.put(number, lottoNumber);
+
+        return lottoNumber;
     }
 
     private boolean isValidNumber(int number) {
