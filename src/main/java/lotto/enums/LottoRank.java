@@ -23,6 +23,10 @@ public enum LottoRank {
         this.prizeMoney = new Money(prizeMoney);
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public Money getPrizeMoney() {
         return prizeMoney;
     }
