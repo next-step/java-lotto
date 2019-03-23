@@ -39,4 +39,8 @@ public class Money {
   public int hashCode() {
     return Objects.hash(amount);
   }
+
+  public double yield(Money insertMoney) {
+    return (double)this.amount / insertMoney.amount;
+  }
 }

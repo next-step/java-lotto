@@ -17,4 +17,8 @@ public class WinStats {
         .reduce(Money::sum)
         .orElse(new Money(0));
   }
+
+  public String yield(Money insertMoney) {
+    return String.format("%.2f", totalReward().yield(insertMoney));
+  }
 }
