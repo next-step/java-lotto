@@ -2,14 +2,14 @@ package lotto.view.vo;
 
 import lotto.enums.Rank;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CountInfo {
     Map<Rank, Integer> counts;
 
     public CountInfo() {
-        counts = new HashMap<>();
+        counts = new LinkedHashMap<>();
     }
 
     public void put(Rank key, Integer value) {

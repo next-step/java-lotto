@@ -1,13 +1,8 @@
 package lotto.view;
 
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Ticket;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -23,26 +18,17 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Ticket> getManualLottoNumbers(String question, String regex, Scanner scanner, int manualCount) {
+    public static List<String> getManualLottoNumbers(String question, Scanner scanner, int manualCount) {
         System.out.println(question);
-        List<Ticket> manualLottoNumbers = new ArrayList<>();
+        List<String> manualNumbers = new ArrayList<>();
 
         readString(scanner);
         scanner.nextLine();
 
         for (int i = 0; i < manualCount; i++) {
-            Ticket ticket = new Ticket(Arrays.stream(split(scanner.nextLine(), regex))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
-            manualLottoNumbers.add(ticket);
+            manualNumbers.add(scanner.nextLine());
         }
-        return manualLottoNumbers;
-    }
-
-    private static String[] split(String string, String regex) {
-        return string.split(regex);
+        return manualNumbers;
     }
 
     public static int getBonusNumber(String question, Scanner scanner) {
@@ -51,16 +37,11 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static Ticket getWinningLottoNumbers(String question, String regex, Scanner scanner) {
+    public static String getWinningLottoNumbers(String question, Scanner scanner) {
         System.out.println(question);
         readString(scanner);
-        String str = scanner.nextLine();
 
-        return new Ticket(Arrays.stream(str.split(regex))
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()));
+        return scanner.nextLine();
     }
 
     private static void readInteger(Scanner scanner) {

@@ -41,6 +41,6 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(winningLotto);
         lottoResult.generate(lottoBundle);
 
-        assertThat(lottoResult.getRewardPercent(money)).isEqualTo("5.00");
+        assertThat(lottoResult.getRewardPercent(money)).isEqualTo(5.0);
     }
 }
