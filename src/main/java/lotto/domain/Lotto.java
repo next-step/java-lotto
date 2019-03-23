@@ -45,6 +45,10 @@ public class Lotto {
         return this.lottoNumbers.contains(target);
     }
 
+    public boolean isEqualTo(Lotto target) {
+        return (LOTTO_NUMBERS_SIZE == getNumberOfDuplicatedNumbers(target));
+    }
+
     @Override
     public String toString() {
         return this.lottoNumbers.toString();
