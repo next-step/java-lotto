@@ -13,7 +13,7 @@ public class LottoStoreTest {
     Money insertMoney = new Money(1000);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney);
+    int lottoQuantity = LottoStore.buy(insertMoney).size();
 
     // Then
     assertThat(lottoQuantity).isEqualTo(1);
@@ -26,7 +26,7 @@ public class LottoStoreTest {
     Money insertMoney = new Money(1500);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney);
+    int lottoQuantity = LottoStore.buy(insertMoney).size();
 
     // Then
     assertThat(lottoQuantity).isEqualTo(1);
@@ -49,7 +49,7 @@ public class LottoStoreTest {
     Money insertMoney = new Money(14000);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney);
+    int lottoQuantity = LottoStore.buy(insertMoney).size();
 
     // Then
     assertThat(lottoQuantity).isEqualTo(14);
