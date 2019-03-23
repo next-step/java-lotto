@@ -7,14 +7,15 @@ import java.util.stream.Collectors;
 
 public class MyLottos {
 
+  private final Money buyMoney;
   private final List<Lotto> lottos;
 
-  public MyLottos(List<Lotto> lottos) {
+  public MyLottos(Money buyMoney, List<Lotto> lottos) {
+    this.buyMoney = buyMoney;
     this.lottos = lottos;
   }
 
   public WinStats winStats(WinNumbers winNumbers) {
-
     return new WinStats(winResults(winNumbers));
   }
 
@@ -32,5 +33,9 @@ public class MyLottos {
         .count();
 
     return new WinResult(winMoney, winCount);
+  }
+
+  public String yield(Money totalReward) {
+    return String.format("%.2f", totalReward.yield(buyMoney));
   }
 }

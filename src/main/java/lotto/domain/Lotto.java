@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -18,5 +19,12 @@ public class Lotto {
 
   public long matchCount(WinNumbers winNumbers) {
     return winNumbers.matchCount(lottoNumbers);
+  }
+
+  public String numbers() {
+
+    return this.lottoNumbers.stream()
+        .map(LottoNumber::toString)
+        .collect(Collectors.joining(", "));
   }
 }

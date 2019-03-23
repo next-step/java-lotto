@@ -13,4 +13,12 @@ public class WinResult {
   public Money reward() {
     return winMoney.totalWinMoney(winCount);
   }
+
+  public boolean isWinMoney(WinMoney winMoney) {
+    return this.winMoney == winMoney;
+  }
+
+  public long getWinCount() {
+    return winCount;
+  }
 }

@@ -18,7 +18,12 @@ public class WinStats {
         .orElse(new Money(0));
   }
 
-  public String yield(Money insertMoney) {
-    return String.format("%.2f", totalReward().yield(insertMoney));
+  public long getWinCount(WinMoney winMoney) {
+
+    return winResults.stream()
+        .filter(winResult -> winResult.isWinMoney(winMoney))
+        .findFirst()
+        .orElse(new WinResult(winMoney, 0))
+        .getWinCount();
   }
 }

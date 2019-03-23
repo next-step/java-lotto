@@ -10,6 +10,47 @@ import org.junit.Test;
 
 public class MyLottosTest {
 
+
+  @Test
+  public void test_yield_zeroMatch() {
+
+    // Given
+    Lotto lotto1 = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
+    Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
+    Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
+    Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
+    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+
+    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(2, 13, 27, 41, 40, 5));
+    WinStats winStats = myLottos.winStats(winNumbers);
+
+    // When
+    String yield = myLottos.yield(winStats.totalReward());
+
+    // Then
+    assertThat(yield).isEqualTo("0.00");
+  }
+
+  @Test
+  public void test_yield_all_oneMatch() {
+
+    // Given
+    Lotto lotto1 = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
+    Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
+    Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
+    Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
+    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+
+    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
+    WinStats winStats = myLottos.winStats(winNumbers);
+
+    // When
+    String yield = myLottos.yield(winStats.totalReward());
+
+    // Then
+    assertThat(yield).isEqualTo("500388.75");
+  }
+
   @Test
   public void test_winResults() {
 
@@ -18,7 +59,7 @@ public class MyLottosTest {
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
-    MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
@@ -39,7 +80,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
@@ -60,7 +101,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(3, 1, 28, 41, 32, 26));
-    MyLottos myLottos = new MyLottos(Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     WinMoney winMoney = WinMoney.SIX;
@@ -78,7 +119,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 38, 10, 42, 17, 4));
     WinMoney winMoney = WinMoney.THREE;
@@ -96,7 +137,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(1, 38, 10, 7, 17, 45));
     WinMoney winMoney = WinMoney.THREE;

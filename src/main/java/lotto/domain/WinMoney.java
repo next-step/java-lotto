@@ -16,6 +16,14 @@ public enum WinMoney {
     this.winMoney = winMoney;
   }
 
+  public int getMatchCount() {
+    return matchCount;
+  }
+
+  public long getWinMoney() {
+    return winMoney;
+  }
+
   public boolean isWinLotto(Lotto lotto, WinNumbers winNumbers) {
     return lotto.matchCount(winNumbers) == matchCount;
   }

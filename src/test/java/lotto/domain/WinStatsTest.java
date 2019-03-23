@@ -17,7 +17,7 @@ public class WinStatsTest {
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
-    MyLottos myLottos = new MyLottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
@@ -36,7 +36,7 @@ public class WinStatsTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
@@ -55,7 +55,7 @@ public class WinStatsTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(2, 41, 13, 31, 26, 18));
-    MyLottos myLottos = new MyLottos(Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 

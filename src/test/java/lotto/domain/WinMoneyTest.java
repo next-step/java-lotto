@@ -52,7 +52,7 @@ public class WinMoneyTest {
 
     // Then
     assertThat(totalWinMoney).isNotNull();
-    assertThat(totalWinMoney).isEqualTo(5_000 * winCount);
+    assertThat(totalWinMoney).isEqualTo(new Money(5_000 * winCount));
   }
 
   @Test
@@ -67,6 +67,6 @@ public class WinMoneyTest {
 
     // Then
     assertThat(totalWinMoney).isNotNull();
-    assertThat(totalWinMoney).isEqualTo(0);
+    assertThat(totalWinMoney).isEqualTo(new Money(0));
   }
 }
