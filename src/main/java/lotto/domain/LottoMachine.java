@@ -4,14 +4,10 @@ import java.util.Set;
 
 public class LottoMachine {
 
-    public static final long LOTTO_UNIT_PRICE = 1000;
-
     public static LottoList purchase(final long purchaseAmount) {
-        if (purchaseAmount < LOTTO_UNIT_PRICE) {
-            throw new IllegalArgumentException(LOTTO_UNIT_PRICE + " OR MORE");
-        }
+        LottoMoney lottoMoney = new LottoMoney(purchaseAmount);
 
-        return new LottoList((int) (purchaseAmount / LOTTO_UNIT_PRICE));
+        return new LottoList(lottoMoney.countOfLotto());
     }
 
     public static WinningResults getWinningResults(final LottoList lottos, final Lotto winningLotto) {
