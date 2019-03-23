@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class LottoList {
 
@@ -27,10 +28,6 @@ public class LottoList {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return this.lottos;
-    }
-
     public int size() {
         return this.lottos.size();
     }
@@ -51,5 +48,14 @@ public class LottoList {
         }
 
         return winningLottos.size();
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottos);
+    }
+
+    public void forEach(Consumer<Lotto> printConsumer) {
+        lottos.forEach(printConsumer);
     }
 }

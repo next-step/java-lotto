@@ -3,9 +3,7 @@ package lotto.view;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
-import lotto.domain.Lotto;
 import lotto.domain.LottoList;
-import java.util.stream.Collectors;
 import lotto.domain.Prize;
 import lotto.domain.WinningResults;
 
@@ -16,18 +14,14 @@ public class ConsoleOutput {
     }
 
     public static void printLottos(LottoList lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            String output = lotto.getLottoNumbers().stream()
-                    .map(lottoNumber -> lottoNumber.getValue().toString())
-                    .collect(Collectors.joining(", "));
 
-            System.out.println(output);
-        }
+        lottos.forEach(System.out::println);
 
         System.out.println();
     }
 
     public static void printWinningStatistics(WinningResults winningResults) {
+
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");

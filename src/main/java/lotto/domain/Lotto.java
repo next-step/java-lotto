@@ -20,7 +20,7 @@ public class Lotto {
 
         this.lottoNumbers = new HashSet<>(lottoNumbers);
 
-        if (lottoNumbers.size() != LOTTO_SIZE) {
+        if (this.lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("HAS UNIQUE " + LOTTO_SIZE + " LOTTO NUMBERS");
         }
     }
@@ -47,15 +47,9 @@ public class Lotto {
         return count;
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     @Override
-    public String toString() {
-        return "Lotto{" +
-            "lottoNumbers=" + lottoNumbers +
-            '}';
+    public String toString(){
+        return lottoNumbers.toString();
     }
 
     @Override
