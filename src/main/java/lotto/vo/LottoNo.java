@@ -3,8 +3,8 @@ package lotto.vo;
 import java.util.Objects;
 
 public class LottoNo implements Comparable<LottoNo> {
-    private static final int LOTTO_NO_MIN = 1;
-    private static final int LOTTO_NO_MAX = 45;
+    public static final int LOTTO_NO_MIN = 1;
+    public static final int LOTTO_NO_MAX = 45;
     private int number;
 
     public LottoNo(int number) throws IllegalArgumentException {

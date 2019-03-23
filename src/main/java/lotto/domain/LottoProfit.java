@@ -1,23 +1,24 @@
-package lotto.dto;
+package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoPrize;
 import lotto.vo.LottoMatchCount;
 
 public class LottoProfit {
     private double profit;
 
-    private int buyCount;
+    private int buyAutoCount;
+
+    private int buyDirectCount;
 
     private int buyAmount;
 
     private int changeAmount;
 
-    public LottoProfit(int buyCount, int buyAmount) {
+    public LottoProfit(int buyDirectCount, int buyAmount) {
         this.profit = 0.0d;
-        this.buyCount = buyCount;
+        this.buyAutoCount = (buyAmount - (buyDirectCount * Lotto.LOTTO_PRICE)) / Lotto.LOTTO_PRICE;
+        this.buyDirectCount = buyDirectCount;
         this.buyAmount = buyAmount;
-        this.changeAmount = buyAmount - buyCount * Lotto.LOTTO_PRICE;
+        this.changeAmount = buyAmount - (this.buyAutoCount + buyDirectCount) * Lotto.LOTTO_PRICE;
     }
 
     /**
@@ -37,7 +38,11 @@ public class LottoProfit {
         return profit;
     }
 
-    public int getBuyCount() {
-        return buyCount;
+    public int getBuyAutoCount() {
+        return buyAutoCount;
+    }
+
+    public int getBuyDirectCount() {
+        return buyDirectCount;
     }
 }

@@ -3,13 +3,11 @@ package lotto.domain;
 import lotto.vo.LottoNo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.toList;
 
 public class LottoMarket {
+
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
 
     /**
      * 구매한 개수만큼 로또 생성
@@ -17,33 +15,28 @@ public class LottoMarket {
      * @param buyCount 구매개수
      * @return 구매한 로또들
      */
-    public static List<Lotto> createLottos(int buyCount) throws IllegalArgumentException {
-        List<Lotto> lottos = new ArrayList<>();
-
+    public static List<Lotto> createLottos(List<Lotto> lottos, int buyCount) throws IllegalArgumentException {
         //로또 번호생성
         for (int i = 0; i < buyCount; i++) {
-            Lotto lotto = new Lotto(createNumbers());
+            Lotto lotto = new Lotto(Lotto.createNumbers());
             lottos.add(lotto);
         }
         return lottos;
     }
 
     /**
-     * 각 로또별 번호 생성
-     *
-     * @return 한 로또의 번호들
+     * 수동입력 로또 생성
      */
-    public static List<LottoNo> createNumbers() throws IllegalArgumentException {
-        List<Integer> allNumber = IntStream.rangeClosed(1, 45)
-                .boxed()
-                .collect(toList());
+    public static List<Lotto> createDirectNumbers(List<String[]> directNumbers) throws IllegalArgumentException {
 
-        Collections.shuffle(allNumber);
+        List<Lotto> lottos = new ArrayList<>();
 
-        List<LottoNo> numbers = new ArrayList<>();
-        allNumber.subList(0, 6)
-                .forEach(number -> numbers.add(new LottoNo(number)));
+        for (String[] directNumber : directNumbers) {
+            List<LottoNo> numbers = lottoMachine.makeDuplicateNumbers(directNumber);
+            Lotto lotto = new Lotto(numbers);
+            lottos.add(lotto);
+        }
 
-        return numbers;
+        return lottos;
     }
 }

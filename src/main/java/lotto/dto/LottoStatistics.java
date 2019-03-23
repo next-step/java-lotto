@@ -1,6 +1,7 @@
 package lotto.dto;
 
 import lotto.domain.LottoPrize;
+import lotto.domain.LottoProfit;
 import lotto.vo.LottoMatchCount;
 
 public class LottoStatistics {

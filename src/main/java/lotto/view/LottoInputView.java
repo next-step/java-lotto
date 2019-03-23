@@ -1,19 +1,19 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.vo.LottoNo;
 import lotto.vo.LottoWinningNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoInputView {
+
+    private static LottoMachine lottoMachine = LottoMachine.getInstance();
 
     public static int inputBuyAmount() throws IllegalArgumentException {
         Scanner scanner = new Scanner(System.in);
@@ -29,6 +29,26 @@ public class LottoInputView {
         }
 
         return buyAmount;
+    }
+
+    public static int inputDirectAmount() throws IllegalArgumentException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+
+        return scanner.nextInt();
+    }
+
+    public static List<String[]> inputDirectNumbers(int directAmount) throws IllegalArgumentException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+
+        List<String[]> directNumbers = new ArrayList<>();
+        for (int i = 0; i < directAmount; i++) {
+            String inputNumbers = scanner.nextLine();
+            directNumbers.add(splitLottoNumbers(inputNumbers));
+        }
+
+        return directNumbers;
     }
 
     /**
@@ -50,22 +70,16 @@ public class LottoInputView {
     }
 
     /**
-     * 당첨번호 예외 체크
+     * 입력번호 예외 체크
      */
-    public static String[] splitWinningNumbers(String inputValue) throws IllegalArgumentException {
+    public static String[] splitLottoNumbers(String inputValue) throws IllegalArgumentException {
         Pattern pattern = Pattern.compile("^([0-9]+,\\s)+[0-9]+$");
         Matcher matcher = pattern.matcher(inputValue.trim());
         if (!matcher.find()) {
             throw new IllegalArgumentException("패턴 불일치");
         }
 
-        String[] winningNumbers = inputValue.split(", ");
-
-        if (winningNumbers.length != Lotto.LOTTO_NUM_COUNT) {
-            throw new IllegalArgumentException("당첨숫자 개수 안맞음");
-        }
-
-        return winningNumbers;
+        return inputValue.split(", ");
     }
 
     /**
@@ -73,29 +87,14 @@ public class LottoInputView {
      * 정수형 리스트로 리턴
      *
      * @param winningNumbers 당첨번호 string[]
-     * @param bonusNumber 보너스번호
+     * @param bonusNumber    보너스번호
      * @return 당첨번호 list
      * @throws IllegalArgumentException
      */
     public static LottoWinningNumber createWinningNumbers(String[] winningNumbers, int bonusNumber) throws IllegalArgumentException {
+        List<LottoNo> numbers = lottoMachine.makeDuplicateNumbers(winningNumbers);
+        Lotto lotto = new Lotto(numbers);
 
-        Set<Integer> duplicateNumbers = Stream.of(winningNumbers)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        duplicateNumbers.add(bonusNumber);
-
-        //중복 입력 체크
-        if (duplicateNumbers.size() != Lotto.LOTTO_NUM_COUNT + Lotto.LOTTO_BONUS_COUNT) {
-            throw new IllegalArgumentException("중복 당첨숫자 있음");
-        }
-
-        duplicateNumbers.remove(bonusNumber);
-
-        List<LottoNo> numbers = new ArrayList<>();
-        duplicateNumbers.forEach(number -> numbers.add(new LottoNo(number)));
-
-        return new LottoWinningNumber(numbers, new LottoNo(bonusNumber));
+        return new LottoWinningNumber(lotto, lottoMachine.getLottoNoInstance(bonusNumber));
     }
 }
