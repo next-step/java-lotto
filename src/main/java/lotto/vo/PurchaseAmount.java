@@ -1,4 +1,4 @@
-package lotto;
+package lotto.vo;
 
 public class PurchaseAmount {
     public static final int LOTTERY_PRICE = 1_000;

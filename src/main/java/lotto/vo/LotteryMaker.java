@@ -1,4 +1,4 @@
-package lotto;
+package lotto.vo;
 
 import lotto.utils.RandomUtils;
 
