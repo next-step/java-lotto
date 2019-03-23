@@ -1,6 +1,7 @@
 package application;
 
 import domain.Winning;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class LottoGameTest {
     }
 
     @Test
+    @Ignore
     public void 보너스볼_입력() {
         int price = 1000;
         LottoGame game = new LottoGame(price, new Random(6));
