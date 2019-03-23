@@ -10,12 +10,13 @@ public class LottoMachine {
         return new LottoList(lottoMoney.countOfLotto());
     }
 
-    public static WinningResults getWinningResults(final LottoList lottos, final Lotto winningLotto) {
+    public static WinningResults getWinningResults(final LottoList lottos, final WinningLotto winningLotto) {
         WinningResults winningResults = new WinningResults();
 
         Prize[] prizes = Prize.values();
         for (int i = 0; i < prizes.length; i++) {
-            winningResults.put(prizes[i], new WinningResult(prizes[i], lottos.find(prizes[i], winningLotto)));
+            winningResults.put(prizes[i],
+                    new WinningResult(prizes[i], lottos.find(prizes[i], winningLotto)));
         }
 
         return winningResults;
@@ -27,7 +28,7 @@ public class LottoMachine {
         Set<Prize> winningResultsKeys = winningResults.keySet();
 
         for (Prize prize : winningResultsKeys) {
-            totalPrizeMoney += prize.getMoney() * winningResults.get(prize).getMatchingCount();
+            totalPrizeMoney += prize.getMoney() * winningResults.get(prize).getMatchCount();
         }
 
         return totalPrizeMoney / (double) purchaseAmount;

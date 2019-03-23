@@ -38,12 +38,14 @@ public class LottoMachineTest {
 
     @Test
     public void getWinningResult() {
-        final Lotto winningLotto = new Lotto(Arrays.asList(
+        final Lotto anyLotto = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
+        final WinningLotto winningLotto = new WinningLotto(anyLotto);
+
         final LottoList lottos = new LottoList(Arrays.asList(
-                winningLotto, // 6개 일치
+                anyLotto, // 6개 일치
                 new Lotto(Arrays.asList( // 4개 일치
                         new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                         new LottoNumber(4), new LottoNumber(44), new LottoNumber(45))),
@@ -63,21 +65,25 @@ public class LottoMachineTest {
         expectedWinningResults.put(Prize.FIRST, new WinningResult(Prize.FIRST, 1));
 
         for (Prize prize : Prize.values()) {
-            assertThat(winningResults.get(prize).getMatchingCount())
-                .isEqualTo(expectedWinningResults.get(prize).getMatchingCount());
+            assertThat(winningResults.get(prize).getMatchCount())
+                .isEqualTo(expectedWinningResults.get(prize).getMatchCount());
         }
 
     }
 
     @Test
     public void getEarningsRate() {
+
         final long purchaseAmount = 4000;
-        final Lotto winningLotto = new Lotto(Arrays.asList(
+
+        final Lotto anyLotto = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
+        final WinningLotto winningLotto = new WinningLotto(anyLotto);
+
         final LottoList lottos = new LottoList(Arrays.asList(
-                winningLotto,
+                anyLotto,
                 new Lotto(Arrays.asList(
                         new LottoNumber(21), new LottoNumber(22), new LottoNumber(23),
                         new LottoNumber(24), new LottoNumber(25), new LottoNumber(26))),

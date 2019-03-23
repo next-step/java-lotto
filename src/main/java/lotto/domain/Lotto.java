@@ -1,45 +1,53 @@
 package lotto.domain;
 
-import lotto.LottoRandomNumberGenerator;
-
 import java.util.*;
 
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-    private List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this.publish();
+
+        this.lottoNumbers = new HashSet<>();
+
+        while (lottoNumbers.size() != LOTTO_SIZE) {
+            lottoNumbers.add(new LottoNumber());
+        }
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
+
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("HAS UNIQUE " + LOTTO_SIZE + " LOTTO NUMBERS");
+        }
     }
 
-    private List<LottoNumber> publish() {
-        Set<LottoNumber> numbers = new HashSet<>(LOTTO_SIZE);
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 
-        while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(LottoRandomNumberGenerator.next());
+    public int countMatches(Lotto anyLotto) {
+        int count = 0;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            count = this.countMatches(anyLotto, count, lottoNumber);
         }
 
-        this.lottoNumbers = new ArrayList<>(numbers);
-        Collections.shuffle(this.lottoNumbers);
-
-        return this.lottoNumbers;
+        return count;
     }
 
-    public int getContainsCount(final Lotto winningLotto) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>(this.lottoNumbers);
-        Set<LottoNumber> winningNumbers = new HashSet<>(winningLotto.getLottoNumbers());
+    private int countMatches(Lotto anyLotto, int count, LottoNumber lottoNumber) {
+        if (anyLotto.contains(lottoNumber)) {
+            count++;
+        }
 
-        lottoNumbers.retainAll(winningNumbers);
-
-        return lottoNumbers.size();
+        return count;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

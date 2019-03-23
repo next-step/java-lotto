@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoList;
-import lotto.domain.LottoMachine;
-import lotto.domain.WinningResults;
+import lotto.domain.*;
 import lotto.view.ConsoleInput;
 import lotto.view.ConsoleOutput;
 
@@ -17,7 +14,7 @@ public class LottoConsoleApp {
         ConsoleOutput.printLottoCount(lottos.size());
         ConsoleOutput.printLottos(lottos);
 
-        final Lotto winningLotto = ConsoleInput.inputLastWinningNumbers();
+        final WinningLotto winningLotto = ConsoleInput.inputLastWinningNumbers();
         final WinningResults winningResults = LottoMachine.getWinningResults(lottos, winningLotto);
 
         ConsoleOutput.printWinningStatistics(winningResults);

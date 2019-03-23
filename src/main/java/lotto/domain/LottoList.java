@@ -39,13 +39,13 @@ public class LottoList {
         return this.lottos.add(lotto);
     }
 
-    int find(Prize prize, Lotto winningLotto) {
+    int find(Prize prize, WinningLotto winningLotto) {
         LottoList winningLottos = new LottoList();
 
         for (Lotto lotto : this.lottos) {
-            int containsCount = lotto.getContainsCount(winningLotto);
+            int countOfMatch = winningLotto.countMatch(lotto);
 
-            if (containsCount == prize.getMatchingCount()) {
+            if (countOfMatch == prize.getMatchingCount()) {
                 winningLottos.add(lotto);
             }
         }

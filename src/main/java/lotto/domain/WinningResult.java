@@ -2,18 +2,14 @@ package lotto.domain;
 
 public class WinningResult{
     private Prize prize;
-    private int matchingCount;
+    private int matchCount;
 
-    public WinningResult(Prize prize, int matchingCount) {
+    public WinningResult(Prize prize, int matchCount) {
         this.prize = prize;
-        this.matchingCount = matchingCount;
+        this.matchCount = matchCount;
     }
 
-    public Prize getPrize() {
-        return prize;
-    }
-
-    public int getMatchingCount() {
-        return matchingCount;
+    public int getMatchCount() {
+        return matchCount;
     }
 }

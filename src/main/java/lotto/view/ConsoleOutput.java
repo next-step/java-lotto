@@ -40,7 +40,7 @@ public class ConsoleOutput {
                 "%d개 일치(%d원)-%d개",
                 prize.getMatchingCount(),
                 prize.getMoney(),
-                winningResults.get(prize).getMatchingCount());
+                winningResults.get(prize).getMatchCount());
 
             System.out.println(output);
         }
