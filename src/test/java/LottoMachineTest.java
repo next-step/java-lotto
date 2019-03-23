@@ -1,8 +1,6 @@
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 
 public class LottoMachineTest {
@@ -11,28 +9,22 @@ public class LottoMachineTest {
     @Test
     public void 가격만큼_기회생성() {
         int price = 14000;
-        LottoMachine lottoMachine = new LottoMachine(price);
-        assertThat(lottoMachine.getTryNo()).isEqualTo(price / LOTTO_PRICE);
+        assertThat(new LottoMachine(new LottoMoney(price)).getTryNo()).isEqualTo(price / LOTTO_PRICE);
     }
 
     @Test
-    public void 가격만큼_번호생성() {
+    public void 가격만큼_로또생성() {
         int price = 14000;
-        LottoMachine lottoMachine = new LottoMachine(price);
-        assertFalse(lottoMachine.isEnd());
-        for (int i = 0; i < price / LOTTO_PRICE; i++) {
-            lottoMachine.machineStart();
-        }
-        assertTrue(lottoMachine.isEnd());
+        assertThat(new LottoMachine(new LottoMoney(price)).generateLotto()).hasSize(price / LOTTO_PRICE);
+
     }
 
     @Test
-    public void 번호생성시_기회감소() {
+    public void 번호_생성완료시_기회없음() {
         int price = 14000;
-        LottoMachine lottoMachine = new LottoMachine(price);
-        int tryNo = lottoMachine.getTryNo();
-        assertThat(lottoMachine.getTryNo()).isEqualTo(tryNo);
-        lottoMachine.machineStart();
-        assertThat(lottoMachine.getTryNo()).isEqualTo(--tryNo);
+        LottoMachine lottoMachine = new LottoMachine(new LottoMoney(price));
+        lottoMachine.generateLotto();
+
+        assertThat(lottoMachine.getTryNo()).isEqualTo(0);
     }
 }

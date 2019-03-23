@@ -25,7 +25,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if(matchBonus && countOfMatch == SECOND.countOfMatch) {
+        if (matchBonus && countOfMatch == SECOND.countOfMatch) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())

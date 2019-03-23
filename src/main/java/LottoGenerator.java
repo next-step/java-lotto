@@ -7,20 +7,20 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private static final List<Integer> LOTTO_NUMBERS;
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final List<LottoNumber> LOTTO_NUMBERS;
+    private static final int FIRST_INDEX = 0;
+    private static final int LOTTO_SIZE = 6;
 
     static {
-        LOTTO_NUMBERS = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .boxed()
+        LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.LOTTO_MIN_NUMBER, LottoNumber.LOTTO_MAX_NUMBER)
+                .mapToObj(lottoNumber -> new LottoNumber(lottoNumber))
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> createNumbers() {
+    public static List<LottoNumber> createLotto() {
         Collections.shuffle(LOTTO_NUMBERS);
-        List<Integer> selectedNumbers = LOTTO_NUMBERS.subList(0, 6);
-        Collections.sort(selectedNumbers);
-        return new ArrayList<>(selectedNumbers);
+        List lotto = LOTTO_NUMBERS.subList(FIRST_INDEX, LOTTO_SIZE);
+        Collections.sort(lotto);
+        return new ArrayList<>(lotto);
     }
 }

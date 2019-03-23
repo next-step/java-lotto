@@ -7,7 +7,7 @@ public class RankTest {
 
     @Test
     public void 등수_가져오기() {
-        assertThat(Rank.valueOf(5,true)).isEqualTo(Rank.SECOND);
-        assertThat(Rank.valueOf(5,false)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
     }
 }

@@ -1,24 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoMachine {
 
-    public static final int LOTTO_PRICE = 1000;
-    private LottoGenerator lottoGenerator;
     private int tryNo;
 
-    public LottoMachine(int price) {
-        this.tryNo = price / LOTTO_PRICE;
-        this.lottoGenerator = new LottoGenerator();
+    public LottoMachine(LottoMoney lottoMoney) {
+        this.tryNo = lottoMoney.count();
     }
 
-    public Lotto machineStart() {
+    public List<Lotto> generateLotto() {
+        List<Lotto> autoLottos = new ArrayList<>();
+
+        while (tryNo > 0) {
+            autoLottos.add(new Lotto(LottoGenerator.createLotto()));
+            nextTry();
+        }
+
+        return autoLottos;
+    }
+
+    private void nextTry() {
         tryNo--;
-        return new Lotto(lottoGenerator.createNumbers());
     }
 
     public int getTryNo() {
         return tryNo;
-    }
-
-    public boolean isEnd() {
-        return tryNo == 0;
     }
 }
