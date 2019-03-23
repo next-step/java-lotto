@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class LottoNumberTest {
+public class LottoNumbesTest {
 
     @Test
     public void initLottoNumbersTest() {
-        assertThat(new LottoNumber().lottoNumber.size()).isEqualTo(6);
+        assertThat(new LottoNumbes().lottoNumber.size()).isEqualTo(6);
     }
 }

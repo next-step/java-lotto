@@ -1,5 +1,6 @@
 package util;
 
+import domain.LottoRank;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,11 +13,11 @@ public class CalculatorTest {
 
     @Test
     public void yieldCalculatorTest() {
-        Map<Integer, Integer> produceResults = new HashMap<>();
-        produceResults.put(3, 1);
-        produceResults.put(4, 0);
-        produceResults.put(5, 1);
-        //1505000 / 100000) * 100
+        Map<LottoRank, Integer> produceResults = new HashMap<>();
+        produceResults.put(LottoRank.THREE, 1);
+        produceResults.put(LottoRank.FOUR, 0);
+        produceResults.put(LottoRank.FIVE, 1);
+
         assertThat(Calculator.yieldCalculator(produceResults, 100000)).isEqualTo(15.05);
     }
 

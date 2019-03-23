@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumbes {
     private static final int MIN_LOTTO_NUMBER = 0;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MAX_LOTTO_NUMBER_COUNT = 6;
     public List<Integer> lottoNumber;
 
-    public LottoNumber() {
+    public LottoNumbes() {
         this.lottoNumber = this.createLotto(this.initLottoNumbers());
     }
 

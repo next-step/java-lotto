@@ -1,16 +1,17 @@
 package util;
 
-import domain.PrizeMoney;
+import domain.LottoRank;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Calculator {
 
-    public static double yieldCalculator(Map<Integer, Integer> produceResults, int investment) {
-        int revenue = nullToZero(produceResults.get(3)) * PrizeMoney.THREE.getPrice()
-                    + nullToZero(produceResults.get(4)) * PrizeMoney.FOUR.getPrice()
-                    + nullToZero(produceResults.get(5)) * PrizeMoney.FIVE.getPrice()
-                    + nullToZero(produceResults.get(6)) * PrizeMoney.SIX.getPrice();
+    public static double yieldCalculator(Map<LottoRank, Integer> produceResult, int investment) {
+        int revenue = Arrays.stream(LottoRank.values())
+                            .mapToInt(lottoRank -> lottoRank.calculatePrize(nullToZero(produceResult.get(lottoRank))))
+                            .sum();
+
         return (double) revenue / investment;
     }
 

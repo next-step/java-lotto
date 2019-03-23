@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,14 +27,19 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<Integer> winningNumbers = new ArrayList<>();
         try {
-            for (String number : new Scanner(System.in).nextLine().split(SEPARATOR)) {
-                winningNumbers.add(Integer.parseInt(number.trim()));
-            }
-            if (winningNumbers.size() < MAX_LOTTO_NUMBER_COUNT) {
+            String [] numbers = new Scanner(System.in).nextLine().split(SEPARATOR);
+
+            if (numbers.length != MAX_LOTTO_NUMBER_COUNT) {
                 System.out.println("당첨 번호는 6개 입니다.");
+                return Collections.emptyList();
+            }
+
+            for (String number : numbers) {
+                winningNumbers.add(Integer.parseInt(number.trim()));
             }
         } catch (NumberFormatException e) {
             System.out.println("숫자가 아닙니다.");
+            return Collections.emptyList();
         }
         return winningNumbers;
     }

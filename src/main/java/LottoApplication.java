@@ -1,6 +1,6 @@
 import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
+import domain.LottoNumbes;
+import domain.LottoMatch;
 import util.Calculator;
 import view.InputView;
 import view.ResultView;
@@ -15,18 +15,18 @@ public class LottoApplication {
 
         List<Lotto> lottos = new ArrayList<>();
         while (lottoCount-- > 0) {
-            Lotto lotto = new Lotto(new LottoNumber().lottoNumber);
+            Lotto lotto = new Lotto(new LottoNumbes().lottoNumber);
             lottos.add(lotto);
             ResultView.printLotto(lotto.getLotto());
         }
 
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        if (winningNumbers == null) {
+        if (winningNumbers.isEmpty()) {
             return;
         }
 
-        Lottos lottoDomain = new Lottos(lottos, winningNumbers);
-        ResultView.statisticsWinner(lottoDomain.produceResults());
-        ResultView.printYield(Calculator.yieldCalculator(lottoDomain.produceResults(), money));
+        LottoMatch lottoMatch = new LottoMatch(lottos, winningNumbers);
+        ResultView.statisticsWinner(lottoMatch.produceResult());
+        ResultView.printYield(Calculator.yieldCalculator(lottoMatch.produceResult(), money));
     }
 }
