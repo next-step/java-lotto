@@ -11,21 +11,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteryMachineTest {
 
     private static LotteryMachine lotteryMachine;
+    private  LotteryNumberSet lotteryNumberSet;
 
     @Before
     public void setUp() {
-        lotteryMachine = new LotteryMachine(new LotteryNumberSet() {
-            @Override
-            List<Integer> suffle(List<Integer> lotteryNumbers) {
-                return Arrays.asList(1,2,3,4,5,6);
-            }
-        });
+        lotteryMachine = new LotteryMachine();
+        lotteryNumberSet = new LotteryNumberSet();
     }
 
     @Test
     public void 로또한장구입() {
         List<Lottery> myLotto = lotteryMachine.purchaseLotteries(1000);
-        assertThat(myLotto.get(0).toString()).isEqualTo(new Lottery(Arrays.asList(1,2,3,4,5,6)).toString());
+        assertThat(myLotto.size()).isEqualTo(1);
     }
 
     @Test
@@ -36,18 +33,18 @@ public class LotteryMachineTest {
 
     @Test
     public void 당첨조회한장() {
-        List<Lottery> lotteries = lotteryMachine.purchaseLotteries(1000);
-        LotteryResult result = lotteryMachine.checkWinning(lotteries, Arrays.asList(1,2,3,4,5,6));
-        assertThat(result).isEqualTo(new LotteryResult(Arrays.asList(6)));
+        Lottery mockNumbers = new Lottery(Arrays.asList(5,6,7,8,9,10));
+        List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(4,5,6,7,8,9)));
 
-        result = lotteryMachine.checkWinning(lotteries, Arrays.asList(4,5,6,7,8,9));
-        assertThat(result).isEqualTo(new LotteryResult(Arrays.asList(3)));
+        LotteryResult result = lotteryMachine.checkWinning(lotteries, mockNumbers);
+        assertThat(result).isEqualTo(new LotteryResult(Arrays.asList(2)));
     }
 
     @Test
     public void 당첨조회두장() {
-        lotteryMachine.purchaseLotteries(2000);
-        LotteryResult result = lotteryMachine.checkWinning(lotteryMachine.getLotteries(), Arrays.asList(1,2,3,4,5,6));
-        assertThat(result).isEqualTo(new LotteryResult(Arrays.asList(6,6)));
+        List<Lottery> lotteries = Arrays.asList(new Lottery(Arrays.asList(1,3,5,7,9,11)), new Lottery(Arrays.asList(15,28,30,35,41,45)));
+        LotteryResult result = lotteryMachine.checkWinning(lotteries, new Lottery(Arrays.asList(5,6,7,8,9,10)));
+        assertThat(result).isEqualTo(new LotteryResult(Arrays.asList(4,6)));
     }
+
 }
