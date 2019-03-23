@@ -1,5 +1,8 @@
 package lotto.web;
 
+import lotto.domain.Lotto;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,12 +10,18 @@ import java.util.regex.Pattern;
 
 public class WebInputView {
 
-    public static List<String[]> inputDirectNumbers(String inputNumber) throws IllegalArgumentException {
+    public static List<String[]> inputDirectNumbers(String inputNumber, int buyAmount) throws IllegalArgumentException {
+        if (StringUtils.isBlank(inputNumber)) {
+            return new ArrayList<>();
+        }
+
         String[] lines = inputNumber.split("\r\n");
 
         List<String[]> directNumbers = new ArrayList<>();
-        for (String line : lines) {
-            directNumbers.add(splitLottoNumbers(line));
+
+        //구매금액보다 수동입력갯수가 크지 않도록 제한
+        for (int i = 0; i < buyAmount / Lotto.LOTTO_PRICE; i++) {
+            directNumbers.add(splitLottoNumbers(lines[i]));
         }
 
         return directNumbers;

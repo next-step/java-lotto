@@ -33,7 +33,7 @@ public class WebApplication {
             int buyAmount = Integer.parseInt(req.queryParams("inputMoney"));
 
             //수동구매번호
-            List<String[]> directNumbers = WebInputView.inputDirectNumbers(req.queryParams("manualNumber"));
+            List<String[]> directNumbers = WebInputView.inputDirectNumbers(req.queryParams("manualNumber"), buyAmount);
 
             //수동입력 번호 생성
             lottos = LottoMarket.createDirectNumbers(directNumbers);
