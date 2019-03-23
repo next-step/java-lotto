@@ -3,7 +3,6 @@ package lotto.parser;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
-import lotto.vo.LottoMatchResult;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -45,13 +44,26 @@ public class LottoNumberParserTest {
     }
 
     @Test
+    public void 문자열을_Lotto_객체로_변환() {
+        // given
+        String lottoNumbersString = "1, 2, 3, 4, 5, 6";
+
+        // when
+        Lotto lotto = LottoNumberParser.parseLotto(lottoNumbersString);
+
+        // then
+        Lotto sameAsLotto = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.isEqualTo(sameAsLotto)).isTrue();
+    }
+
+    @Test
     public void 문자열을_WinningLotto_객체로_변환() {
         // given
         String lottoNumbersString = "1, 2, 3, 4, 5, 6";
         String bonusNumberString = "45";
 
         // when
-        WinningLotto winner = LottoNumberParser.parse(lottoNumbersString, bonusNumberString);
+        WinningLotto winner = LottoNumberParser.parseWinningLotto(lottoNumbersString, bonusNumberString);
 
         // then
         WinningLotto sameAsWinner = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(45));

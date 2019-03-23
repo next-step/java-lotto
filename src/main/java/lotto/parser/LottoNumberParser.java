@@ -1,5 +1,6 @@
 package lotto.parser;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
 
@@ -11,8 +12,12 @@ public class LottoNumberParser {
     private LottoNumberParser() {
     }
 
-    public static WinningLotto parse(String lottoNumbersString, String bonusNumber) {
+    public static WinningLotto parseWinningLotto(String lottoNumbersString, String bonusNumber) {
         return new WinningLotto(parseLottoNumbers(lottoNumbersString), parseLottoNumber(bonusNumber));
+    }
+
+    public static Lotto parseLotto(String lottoNumbers) {
+        return new Lotto(parseLottoNumbers(lottoNumbers));
     }
 
     static LottoNumber parseLottoNumber(String bonusNumber) {
