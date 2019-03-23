@@ -16,7 +16,7 @@ public class LottoCalculatorTest {
         results.set(3, 1);
 
         LottoCalculator calculator = new LottoCalculator();
-        double profit = calculator.result(results, price);
+        double profit = calculator.run(results, price);
 
         assertThat(profit).isEqualTo(5);
     }
@@ -28,7 +28,7 @@ public class LottoCalculatorTest {
         results.set(3, 1);
 
         LottoCalculator calculator = new LottoCalculator();
-        double profit = calculator.result(results, price);
+        double profit = calculator.run(results, price);
 
         assertThat(profit).isEqualTo(0.36);
     }

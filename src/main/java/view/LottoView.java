@@ -1,17 +1,17 @@
 package view;
 
-import domain.Number;
+import domain.LottoNumber;
 
 import java.util.List;
 
 public class LottoView {
-    List<Number> numbers;
+    List<LottoNumber> lottoNumbers;
 
-    public LottoView(List<Number> numbers) {
-        this.numbers = numbers;
+    public LottoView(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

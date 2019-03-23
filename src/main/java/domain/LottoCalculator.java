@@ -3,23 +3,20 @@ package domain;
 import application.LottoGameResult;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.List;
 
-public class LottoCalculator implements Calculator {
-    private static final int LOTTO_MATCH_MIN_COUNT = 3;
-    private static final int LOTTO_SIZE = 6;
+import static application.LottoGameResult.multiple;
 
-    public double result(List<Integer> lottoGameResults, int price) {
-        return format(divide(sum(lottoGameResults), price));
+public class LottoCalculator implements Calculator {
+    public double run(List<Integer> score, int price) {
+        return format(divide(sum(score), price));
     }
 
-    private static int sum(List<Integer> lottoGameResults) {
-        int profit = 0;
-        for (int i = LOTTO_MATCH_MIN_COUNT; i < LOTTO_SIZE; i++) {
-            profit += multiple(i, lottoGameResults.get(i));
-        }
-
-        return profit;
+    public static int sum(List<Integer> scores) {
+        return Arrays.stream(LottoGameResult.values())
+                .mapToInt(v -> multiple(v.getValue(), scores.get(v.getValue())))
+                .sum();
     }
 
     private static double format(double number) {
@@ -30,7 +27,4 @@ public class LottoCalculator implements Calculator {
         return (profit / (double) price);
     }
 
-    private static int multiple(int number, int count) {
-        return LottoGameResult.calculate(number, count);
-    }
 }

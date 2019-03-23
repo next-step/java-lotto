@@ -7,7 +7,6 @@ import view.OutputResultView;
 import java.util.List;
 
 public class Console {
-
     private static final String PURCHASE_COMMENT = "를 구매했습니다.";
     private static final String RESULT_TOP_COMMENT = "당첨 통계";
     private static final String RESULT_VALUE_COMMENT = "%d개 일치 (%d원) - %d개";
@@ -18,7 +17,7 @@ public class Console {
     }
 
     public static void showLottoNumber(List<LottoView> buyedLottos) {
-        buyedLottos.stream().forEach(v -> System.out.println(v.getNumbers()));
+        buyedLottos.stream().forEach(v -> System.out.println(v.getLottoNumbers()));
     }
 
     public static void showResult(OutputResultView view) {

@@ -26,7 +26,7 @@ public enum LottoGameResult {
         return Arrays.stream(LottoGameResult.values()).filter(v -> v.value == number).findFirst().get();
     }
 
-    public static int calculate(int number, int count) {
+    public static int multiple(int number, int count) {
         return match(number).reward * count;
     }
 

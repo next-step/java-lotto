@@ -3,5 +3,5 @@ package domain;
 import java.util.List;
 
 public interface Calculator {
-    double result(List<Integer> result, int input);
+    double run(List<Integer> input, int option);
 }

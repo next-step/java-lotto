@@ -2,10 +2,14 @@ package domain;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
     private int value;
 
-    public Number(int value) {
+    public LottoNumber(int value) {
+        if (value < 1 || value > 45) {
+            throw new IllegalArgumentException();
+        }
+
         this.value = value;
     }
 
@@ -22,8 +26,8 @@ public class Number {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Number number = (Number) o;
-        return value == number.value;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return value == lottoNumber.value;
     }
 
     @Override

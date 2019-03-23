@@ -22,7 +22,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(LottoGenerator.run(new Random()));
 
         assertThat(lotto).isNotNull();
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
 
 }

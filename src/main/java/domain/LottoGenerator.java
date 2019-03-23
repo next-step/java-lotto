@@ -11,12 +11,12 @@ public class LottoGenerator {
     private static final int LOTTO_MAX_NUM = 45;
     private static final int LOTTO_RANGE = 6;
 
-    public static List<Number> run(Random random) {
+    public static List<LottoNumber> run(Random random) {
         return toNumber(sort(sub(shuffle(getRandomNumbers(), random))));
     }
 
-    private static List<Number> toNumber(List<Integer> numbers) {
-        return numbers.stream().map(v -> new Number(v)).collect(Collectors.toList());
+    private static List<LottoNumber> toNumber(List<Integer> numbers) {
+        return numbers.stream().map(v -> new LottoNumber(v)).collect(Collectors.toList());
     }
 
     private static List<Integer> sort(List<Integer> numbers) {

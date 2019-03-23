@@ -8,15 +8,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
-    protected List<Number> numbers;
+    protected List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Number> numbers) {
-        this.numbers = numbers;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException();
+        }
+        this.lottoNumbers = lottoNumbers;
     }
 
     public Lotto(String numbers) {
         this(split(numbers)
-                .map(v -> (new Number(toInt(v))))
+                .map(v -> (new LottoNumber(toInt(v))))
                 .collect(Collectors.toList()));
     }
 
@@ -28,15 +31,15 @@ public class Lotto {
         return Arrays.stream(number.split(", "));
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public LottoView toView() {
-        return new LottoView(numbers);
+        return new LottoView(lottoNumbers);
     }
 
-    public boolean contains(Number number) {
-        return numbers.contains(number);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

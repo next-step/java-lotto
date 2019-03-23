@@ -10,8 +10,8 @@ public class WinningTest {
         String number = "1, 2, 3, 4, 5, 6";
         Winning winning = new Winning(number);
 
-        assertThat(winning.getNumbers().size()).isEqualTo(6);
-        assertThat(winning.getNumbers().get(0).getValue()).isEqualTo(1);
+        assertThat(winning.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(winning.getLottoNumbers().iterator().next().getValue()).isEqualTo(1);
     }
 
     @Test
