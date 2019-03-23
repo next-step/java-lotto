@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LotteryMaker {
+public class LotteryGenerator {
     public static final int LOTTERY_NUMBER = 6;
     List lotteryNumbers;
 
-    public LotteryMaker() {
+    public LotteryGenerator() {
         lotteryNumbers = new ArrayList<>();
         lottoMake();
     }
