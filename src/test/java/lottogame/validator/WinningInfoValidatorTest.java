@@ -3,7 +3,6 @@ package lottogame.validator;
 import lottogame.domain.LottoNumber;
 import lottogame.domain.LottoNumberPackage;
 import lottogame.domain.WinningInfo;
-import lottogame.service.LottoNumberPool;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,11 +47,11 @@ public class WinningInfoValidatorTest {
     private Set<LottoNumber> getRangedNumbers(int from, int to) {
         return IntStream.rangeClosed(from, to)
                 .boxed()
-                .map(LottoNumberPool::getLottoNumber)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toSet());
     }
 
     private WinningInfo getWinningInfo(int bonusNumber) {
-        return new WinningInfo(winningNumbers, new LottoNumber(bonusNumber));
+        return new WinningInfo(winningNumbers, LottoNumber.getInstance(bonusNumber));
     }
 }

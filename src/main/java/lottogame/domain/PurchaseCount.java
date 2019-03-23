@@ -17,6 +17,10 @@ public class PurchaseCount {
         this.manualCount = manualCount;
     }
 
+    public long getCount() {
+        return count;
+    }
+
     public long getManualCount() {
         return manualCount;
     }

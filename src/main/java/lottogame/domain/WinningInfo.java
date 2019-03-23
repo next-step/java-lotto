@@ -11,7 +11,7 @@ public class WinningInfo {
     private final Validatable<WinningInfo> validator = new WinningInfoValidator();
 
     public WinningInfo(LottoNumberPackage numbers, InputLine inputLine) {
-        this(numbers, new LottoNumber(Integer.parseInt(inputLine.getLine())));
+        this(numbers, LottoNumber.getInstance(Integer.parseInt(inputLine.getLine())));
     }
 
     public WinningInfo(LottoNumberPackage numbers, LottoNumber bonusNumber) {

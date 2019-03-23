@@ -2,7 +2,7 @@ package lottogame.domain;
 
 import java.util.Arrays;
 
-import static lottogame.view.ResultView.BONUS_BALL_MATCHED;
+import static lottogame.view.ConsoleResultView.BONUS_BALL_MATCHED;
 
 public enum Rank {
     MISS(0, 0, ""),

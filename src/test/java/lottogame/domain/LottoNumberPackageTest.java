@@ -1,6 +1,5 @@
 package lottogame.domain;
 
-import lottogame.service.LottoNumberPool;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -68,8 +67,8 @@ public class LottoNumberPackageTest {
     public void LottoGame_for_integers() {
         Set<LottoNumber> expected = getSet(
             Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                LottoNumber.getInstance(1), LottoNumber.getInstance(2), LottoNumber.getInstance(3),
+                LottoNumber.getInstance(4), LottoNumber.getInstance(5), LottoNumber.getInstance(6)
             )
         );
         Set<LottoNumber> lottoNumbers = getRangedNumbers(1, 6);
@@ -95,7 +94,7 @@ public class LottoNumberPackageTest {
         LottoNumberPackage game = new LottoNumberPackage(gameNumbers);
 
         Set<LottoNumber> targetNumbers = getRangedNumbers(41, 45);
-        targetNumbers.add(new LottoNumber(1));
+        targetNumbers.add(LottoNumber.getInstance(1));
         LottoNumberPackage targetGame = new LottoNumberPackage(targetNumbers);
 
         assertEquals(1, game.getMatchedCount(targetGame));
@@ -135,7 +134,7 @@ public class LottoNumberPackageTest {
     private Set<LottoNumber> getRangedNumbers(int from, int to) {
         return IntStream.rangeClosed(from, to)
                 .boxed()
-                .map(LottoNumberPool::getLottoNumber)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

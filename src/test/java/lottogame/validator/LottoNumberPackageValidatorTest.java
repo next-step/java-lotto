@@ -1,15 +1,12 @@
 package lottogame.validator;
 
 import lottogame.domain.LottoNumber;
-import lottogame.service.LottoNumberPool;
 import org.junit.Test;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
-import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 import static lottogame.domain.LottoNumberPackage.LOTTO_GAME_SIZE;
 import static org.junit.Assert.*;
 
@@ -40,7 +37,7 @@ public class LottoNumberPackageValidatorTest {
     private Set<LottoNumber> getRangedNumbers(int from, int to) {
         return IntStream.rangeClosed(from, to)
                 .boxed()
-                .map(LottoNumberPool::getLottoNumber)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toSet());
     }
 }

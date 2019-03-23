@@ -5,41 +5,29 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private final LottoTicket lottoTicket;
-    private final WinningInfo winningNumbers;
+    private final PurchaseAmount purchaseAmount;
     private final Map<Rank,Long> winningCountPerRank;
 
-    public LottoResult(LottoTicket lottoTicket, WinningInfo winningNumbers) {
-        this.lottoTicket = lottoTicket;
-        this.winningNumbers = winningNumbers;
-        winningCountPerRank = getWinningCountPerRank();
-    }
-
-    public String getWinningResultString() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        Arrays.stream(Rank.values())
-                .filter(rank -> rank.getWinningMoney() > 0)
-                .map(this::getWinningResultString)
-                .forEach(stringBuilder::append);
-
-        return stringBuilder.toString();
-    }
-
-    private String getWinningResultString(Rank key) {
-        return String.format("%s- %d개\n",
-                key.getWinningResultMessage(),
-                getWinningCount(key) );
+    public LottoResult(LottoResultMaker resultMaker) {
+        purchaseAmount = resultMaker.getPurchaseAmount();
+        winningCountPerRank = resultMaker.getWinningCountPerRank();
     }
 
     Map<Rank, Long> getWinningCountPerRank() {
-        return getAutomaticNumbers().stream()
-                .map(gameNumber -> gameNumber.getMatchStatus(winningNumbers))
-                .collect(Collectors.groupingBy(Rank::valueOf, Collectors.counting()));
+        return winningCountPerRank;
     }
 
-    private List<LottoNumberPackage> getAutomaticNumbers() {
-        return lottoTicket.getGameNumbers();
+    public List<String> getWinningResultStrings() {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.getWinningMoney() > 0)
+                .map(this::getWinningResultString)
+                .collect(Collectors.toList());
+    }
+
+    private String getWinningResultString(Rank key) {
+        return String.format("%s- %d개",
+                key.getWinningResultMessage(),
+                getWinningCount(key) );
     }
 
     long getWinningCount(Rank key) {
@@ -53,11 +41,7 @@ public class LottoResult {
     }
 
     private double getProfitRate() {
-         return ((double)getTotalWinningMoney() / (double)getPurchaseAmount().getValue());
-    }
-
-    private PurchaseAmount getPurchaseAmount() {
-        return lottoTicket.getPurchaseAmount();
+         return ((double)getTotalWinningMoney() / (double)purchaseAmount.getValue());
     }
 
     public long getTotalWinningMoney() {

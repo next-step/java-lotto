@@ -1,6 +1,5 @@
 package lottogame.domain;
 
-import lottogame.service.LottoNumberPool;
 import org.junit.Test;
 
 import java.util.*;
@@ -129,16 +128,22 @@ public class LottoResultTest {
 
     private Set<LottoNumber> getSet(List<Integer> integers) {
         return integers.stream()
-                .map(LottoNumberPool::getLottoNumber)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toSet());
     }
 
-    private LottoResult getLottoResult(long purchaseAmount,
-                                       List<LottoNumberPackage> automaticNumbers,
+    private LottoResultMaker getLottoResultMaker(long purchaseAmount,
+                                       List<LottoNumberPackage> gameNumbers,
                                        Set<LottoNumber> winningNumbers) {
 
         PurchaseAmount purchaseAmountObj = new PurchaseAmount(purchaseAmount);
-        WinningInfo winningNumbersObj = new WinningInfo(new LottoNumberPackage(winningNumbers), new LottoNumber(7));
-        return new LottoResult(new LottoTicket(new PurchaseInfo(purchaseAmountObj, new PurchaseCount(purchaseAmountObj.getLottoCount(), 0)), automaticNumbers), winningNumbersObj);
+        WinningInfo winningInfo = new WinningInfo(new LottoNumberPackage(winningNumbers), LottoNumber.getInstance(7));
+        return new LottoResultMaker(new LottoTicket(new PurchaseInfo(purchaseAmountObj, new PurchaseCount(purchaseAmountObj.getLottoCount(), 0)), gameNumbers), winningInfo);
+    }
+
+    private LottoResult getLottoResult(long purchaseAmount,
+                                       List<LottoNumberPackage> gameNumbers,
+                                       Set<LottoNumber> winningNumbers) {
+        return new LottoResult(getLottoResultMaker(purchaseAmount, gameNumbers, winningNumbers));
     }
 }

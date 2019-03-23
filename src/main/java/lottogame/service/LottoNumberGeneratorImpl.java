@@ -36,7 +36,7 @@ public class LottoNumberGeneratorImpl implements LottoNumberGenerator {
         return numberPool.stream()
                 .limit(LottoNumberPackage.LOTTO_GAME_SIZE)
                 .sorted()
-                .map(LottoNumberPool::getLottoNumber)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

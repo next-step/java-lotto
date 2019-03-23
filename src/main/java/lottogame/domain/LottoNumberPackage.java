@@ -1,6 +1,5 @@
 package lottogame.domain;
 
-import lottogame.service.LottoNumberPool;
 import lottogame.validator.LottoNumberPackageValidator;
 import lottogame.validator.Validatable;
 import spark.utils.CollectionUtils;
@@ -8,7 +7,7 @@ import spark.utils.CollectionUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lottogame.view.InputView.NUMBER_DELIMITER;
+import static lottogame.view.ConsoleInputView.NUMBER_DELIMITER;
 
 /**
  * 로또 1게임
@@ -32,7 +31,7 @@ public class LottoNumberPackage {
     private static Set<LottoNumber> getNumbers(String[] numbers) {
         return Arrays.stream(numbers)
                     .map(Integer::parseInt)
-                    .map(LottoNumberPool::getLottoNumber)
+                    .map(LottoNumber::getInstance)
                     .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -40,10 +39,10 @@ public class LottoNumberPackage {
         return numbers;
     }
 
-    public MatchStatus getMatchStatus(WinningInfo winningNumbers) {
+    public MatchStatus getMatchStatus(WinningInfo winningInfo) {
         return new MatchStatus(
-            getMatchedCount(winningNumbers.getNumbers()),
-            isBonusNumberMatched(winningNumbers.getBonusNumber())
+            getMatchedCount(winningInfo.getNumbers()),
+            isBonusNumberMatched(winningInfo.getBonusNumber())
         );
     }
 

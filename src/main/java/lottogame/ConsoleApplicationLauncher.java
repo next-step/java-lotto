@@ -2,24 +2,24 @@ package lottogame;
 
 import lottogame.domain.*;
 import lottogame.service.LottoNumberGeneratorImpl;
-import lottogame.view.InputView;
-import lottogame.view.ResultView;
+import lottogame.view.ConsoleInputView;
+import lottogame.view.ConsoleResultView;
 
 import java.util.List;
 
 public class ConsoleApplicationLauncher {
 
     public static void main(String[] args) {
-        PurchaseAmount purchaseAmount = InputView.getPurchaseAmount();
-        PurchaseCount purchaseCount = InputView.getPurchaseCount(purchaseAmount.getLottoCount());
-        List<LottoNumberPackage> manualNumbers = InputView.getManualNumbers(purchaseCount.getManualCount());
+        PurchaseAmount purchaseAmount = ConsoleInputView.getPurchaseAmount();
+        PurchaseCount purchaseCount = ConsoleInputView.getPurchaseCount(purchaseAmount.getLottoCount());
+        List<LottoNumberPackage> manualNumbers = ConsoleInputView.getManualNumbers(purchaseCount.getManualCount());
 
         LottoTicket lottoTicket = new LottoTicket(new PurchaseInfo(purchaseAmount, purchaseCount), manualNumbers, new LottoNumberGeneratorImpl());
-        ResultView.showPurchaseResult(lottoTicket);
+        ConsoleResultView.showPurchaseResult(lottoTicket);
 
-        LottoNumberPackage winningNumbers = InputView.getWinningNumbers();
-        WinningInfo winningInfo = InputView.getWinningInfoByBonusNumber(winningNumbers);
-        LottoResult lottoResult = new LottoResult(lottoTicket, winningInfo);
-        ResultView.showWinningResult(lottoResult);
+        LottoNumberPackage winningNumbers = ConsoleInputView.getWinningNumbers();
+        WinningInfo winningInfo = ConsoleInputView.getWinningInfoByBonusNumber(winningNumbers);
+        LottoResult lottoResult = new LottoResult(new LottoResultMaker(lottoTicket, winningInfo));
+        ConsoleResultView.showWinningResult(lottoResult);
     }
 }
