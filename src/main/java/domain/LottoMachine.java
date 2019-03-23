@@ -1,15 +1,17 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
     public static final Integer LOTTO_PRICE = 1000;
 
-    private Lotto winningNumbers;
+    private WinningLotto winningLotto;
 
-    public void initWinningNumbers(Integer ...number) {
-        winningNumbers = new Lotto(number);
+    public void initWinningLotto(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
     public List<Lotto> purchase(int money) {
@@ -23,20 +25,17 @@ public class LottoMachine {
         return lottos;
     }
 
-    public List<Rank> calculateRanks(List<Lotto> lottos){
-        List<Rank> ranks = new ArrayList<>();
-        lottos.stream()
-            .map(this::calculateRank)
-            .forEach(ranks::add);
+    public LottoResult createLottoResult(List<Lotto> lottos){
+        if(winningLotto == null) {
+            throw new IllegalArgumentException();
+        }
 
-        return ranks;
+        return lottos.stream()
+            .map(winningLotto::matchLotto)
+            .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
     }
 
-    public Rank calculateRank(Lotto lotto) {
-        return Rank.calculate(winningNumbers.matchCount(lotto));
-    }
-
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
+    public LottoResult createLottoResult(Lotto ...lottos){
+        return createLottoResult(Arrays.asList(lottos));
     }
 }

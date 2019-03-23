@@ -2,49 +2,36 @@ package domain;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
     @Test
-    public void buy_lotto_using_money_until_you_can() {
+    public void 가능한_개수만큼_로또를_구매한다() {
         LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> lottos = lottoMachine.purchase(14000);
         assertThat(lottos).hasSize(14);
     }
 
-    @Test
-    public void init_winning_number() {
+    @Test(expected = IllegalStateException.class)
+    public void 당첨번호가_설정되지_않았는데_순위를_얻어오면_예외가_발생한다() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.initWinningNumbers(1,2,3,4,5,6);
 
-        assertThat(lottoMachine.getWinningNumbers()).isNotNull();
-        assertThat(lottoMachine.getWinningNumbers().matchCount(new Lotto(1,2,3,4,5,6))).isEqualTo(6);
+        lottoMachine.createLottoResult(new Lotto(1,2,3,4,5,6));
     }
 
     @Test
-    public void get_rank_from_lotto() {
+    public void 로또들의_결과를_생성한다() {
         LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.initWinningNumbers(4,5,6,7,8,9);
-        Rank rank = lottoMachine.calculateRank(new Lotto(1,2,3,4,5,6));
+        lottoMachine.initWinningLotto(
+            new WinningLotto(new Lotto(1,2,3,4,5,6), LottoNumber.getInstance(7)));
 
-        assertThat(rank).isEqualTo(Rank.Fourth);
-    }
+        LottoResult lottoResult = lottoMachine.createLottoResult(
+            new Lotto(1,2,3,4,5,6),
+            new Lotto(1,2,3,4,5,6),
+            new Lotto(1,2,3,4,5,7));
 
-    @Test
-    public void get_ranks_from_lottos() {
-        LottoMachine lottoMachine = new LottoMachine();
-        lottoMachine.initWinningNumbers(4,5,6,7,8,9);
-
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(1,2,3,4,5,6));
-        lottos.add(new Lotto(1,2,3,4,5,6));
-
-        List<Rank> ranks = lottoMachine.calculateRanks(lottos);
-
-        assertThat(ranks).hasSize(2);
-        assertThat(ranks).allMatch(r -> r == Rank.Fourth);
+        assertThat(lottoResult).isNotNull();
     }
 }
