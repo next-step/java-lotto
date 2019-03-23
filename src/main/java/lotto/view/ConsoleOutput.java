@@ -1,11 +1,12 @@
 package lotto.view;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
 import lotto.domain.LottoList;
 import lotto.domain.Prize;
 import lotto.domain.WinningResults;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ConsoleOutput {
 
@@ -30,6 +31,10 @@ public class ConsoleOutput {
         reversedKeyPrizes.addAll(winningResults.keySet());
 
         for (Prize prize : reversedKeyPrizes) {
+            if (!prize.isInTop5()) {
+                continue;
+            }
+
             String output = String.format(
                 prize + " - %d개",
                 winningResults.get(prize).getMatchCount());

@@ -14,7 +14,7 @@ public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> values = new HashMap<>();
     static {
-        for (int i = MIN; i < MAX; i++) {
+        for (int i = MIN; i <= MAX; i++) {
             values.put(i, new LottoNumber(i));
         }
     }

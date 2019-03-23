@@ -32,44 +32,13 @@ public class LottoList {
         return this.lottos.size();
     }
 
-    boolean add(Lotto lotto) {
-        return this.lottos.add(lotto);
-    }
-
-    int find(Prize prize, WinningLotto winningLotto) {
+    int count(Prize targetPrize, WinningLotto winningLotto) {
         int count = 0;
 
         for (Lotto lotto : this.lottos) {
-
-            count = count(count, prize, winningLotto, lotto);
-        }
-
-        return count;
-    }
-
-    private int count(int count, Prize targetPrize, WinningLotto winningLotto, Lotto lotto) {
-        if (targetPrize == Prize.SECOND) {
-            if (winningLotto.countMatch(lotto) == targetPrize.getCountOfMatch()
-                    && winningLotto.matchBonus(lotto)) {
-
-                return ++count;
+            if (winningLotto.calculatePrize(lotto) == targetPrize) {
+                count++;
             }
-
-            return count;
-        }
-
-        if (targetPrize == Prize.THIRD) {
-            if (winningLotto.countMatch(lotto) == targetPrize.getCountOfMatch()
-                    && !winningLotto.matchBonus(lotto)) {
-
-                return ++count;
-            }
-
-            return count;
-        }
-
-        if (winningLotto.countMatch(lotto) == targetPrize.getCountOfMatch()) {
-            return ++count;
         }
 
         return count;

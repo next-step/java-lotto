@@ -13,7 +13,7 @@ public class WinningLotto {
         this.lotto = lotto;
     }
 
-    public int countMatch(Lotto anyLotto) {
+    public int countMatches(Lotto anyLotto) {
         int count = 0;
 
         count += lotto.countMatches(anyLotto);
@@ -23,5 +23,12 @@ public class WinningLotto {
 
     public boolean matchBonus(Lotto anyLotto) {
         return anyLotto.contains(bonus);
+    }
+
+    public Prize calculatePrize(Lotto anyLotto) {
+        int count = this.countMatches(anyLotto);
+        boolean matchBonus = this.matchBonus(anyLotto);
+
+        return Prize.valueOf(count, matchBonus);
     }
 }
