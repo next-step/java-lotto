@@ -3,17 +3,17 @@ import java.util.List;
 
 public class LottoResult {
     private final int TOTAL_PRICE;
-    private final List<Lotto> lottos;
+    private final List<Lotto> lotto;
     private final WinningLotto winningLotto;
 
-    public LottoResult(List<Lotto> lottos, WinningLotto winningLotto) {
-        this.TOTAL_PRICE = lottos.size() * LottoMachine.LOTTO_PRICE;
-        this.lottos = lottos;
+    public LottoResult(List<Lotto> lotto, WinningLotto winningLotto) {
+        this.TOTAL_PRICE = lotto.size() * LottoMachine.LOTTO_PRICE;
+        this.lotto = lotto;
         this.winningLotto = winningLotto;
     }
 
     public int getMatchNumber(Rank rank) {
-        return (int) lottos.stream()
+        return (int) lotto.stream()
                 .filter(lotto -> lotto.getRank(winningLotto) == rank)
                 .count();
     }
