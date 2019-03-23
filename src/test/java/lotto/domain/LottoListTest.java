@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoListTest {
 
     @Test
-    public void LottoTicket() {
+    public void 로또_10개_발급() {
         final int lottosCount = 10;
 
         LottoList lottoList = new LottoList(lottosCount);
@@ -16,11 +16,7 @@ public class LottoListTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void LottoTicket_로또_발급_갯수가_0이하() {
-        final int lottosCount = 0;
-
-        LottoList lottoList = new LottoList(lottosCount);
-
-        assertThat(lottoList.size()).isEqualTo(lottosCount);
+    public void 로또_0개_발급() {
+        new LottoList(0);
     }
 }

@@ -1,17 +1,26 @@
 package lotto.domain;
 
+import lotto.LottoNumberGenerator;
+
 import java.util.Objects;
 
 public class LottoNumber {
-    private Integer value;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
-    public LottoNumber(Integer value) {
-        if (value < 1) {
-            throw new IllegalArgumentException("1 OR MORE");
+    private int value;
+
+    public LottoNumber() {
+        this.value = LottoNumberGenerator.generate(MIN, MAX);
+    }
+
+    public LottoNumber(int value) {
+        if (value < MIN) {
+            throw new IllegalArgumentException(MIN +" OR MORE");
         }
 
-        if (value > 45) {
-            throw new IllegalArgumentException("45 OR LESS");
+        if (value > MAX) {
+            throw new IllegalArgumentException(MAX + " OR LESS");
         }
 
         this.value = value;
