@@ -15,4 +15,8 @@ public class Lotto {
     }
     this.lottoNumbers = lottoNumbers;
   }
+
+  public long matchCount(WinNumbers winNumbers) {
+    return winNumbers.matchCount(lottoNumbers);
+  }
 }
