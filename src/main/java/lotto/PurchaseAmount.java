@@ -1,18 +1,18 @@
 package lotto;
 
 public class PurchaseAmount {
-    public static final int LOTTO_PRICE = 1_000;
-    private final int lottoCnt;
+    public static final int LOTTERY_PRICE = 1_000;
+    private final int lotteryTickets;
 
     public PurchaseAmount(String money) {
         this(toInt(money));
     }
 
     public PurchaseAmount(int money) {
-        if (money < LOTTO_PRICE) {
+        if (money < LOTTERY_PRICE) {
             throw new IllegalArgumentException();
         }
-        lottoCnt = money / LOTTO_PRICE;
+        lotteryTickets = money / LOTTERY_PRICE;
     }
 
     private static int toInt(String money) {
@@ -20,6 +20,6 @@ public class PurchaseAmount {
     }
 
     public int getLotto() {
-        return lottoCnt;
+        return lotteryTickets;
     }
 }
