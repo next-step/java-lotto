@@ -9,7 +9,7 @@ public class OutputView {
 
     public static void printPurchasedLotties(List<Lottery> lotteries) {
         System.out.println(lotteries.size() + "개를 구입하였습니다");
-        lotteries.forEach(lottery -> System.out.println(lottery.getNumbers()));
+        lotteries.forEach(lottery -> System.out.println(lottery.getString()));
     }
 
     public static void printWinningResult(LotteryResult lotteryResult) {
