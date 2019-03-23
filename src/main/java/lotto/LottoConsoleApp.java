@@ -9,15 +9,16 @@ public class LottoConsoleApp {
     public static void main(String[] args) {
         final long purchaseAmount = ConsoleInput.inputPurchaseAmount();
 
-        final LottoList lottos = LottoMachine.purchase(purchaseAmount);
+        LottoMoney lottoMoney = new LottoMoney(purchaseAmount);
+        final LottoList lottos = new LottoList(lottoMoney.countOfLotto());
 
         ConsoleOutput.printLottoCount(lottos.size());
         ConsoleOutput.printLottos(lottos);
 
         final WinningLotto winningLotto = ConsoleInput.inputLastWinningNumbers();
-        final WinningResults winningResults = LottoMachine.getWinningResults(lottos, winningLotto);
+        final WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
 
         ConsoleOutput.printWinningStatistics(winningResults);
-        ConsoleOutput.printEarningsRate(LottoMachine.getEarningsRate(winningResults, purchaseAmount));
+        ConsoleOutput.printEarningsRate(lottoMoney.calculateEarningsRate(winningResults));
     }
 }

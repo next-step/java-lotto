@@ -37,17 +37,42 @@ public class LottoList {
     }
 
     int find(Prize prize, WinningLotto winningLotto) {
-        LottoList winningLottos = new LottoList();
+        int count = 0;
 
         for (Lotto lotto : this.lottos) {
-            int countOfMatch = winningLotto.countMatch(lotto);
 
-            if (countOfMatch == prize.getMatchingCount()) {
-                winningLottos.add(lotto);
-            }
+            count = count(count, prize, winningLotto, lotto);
         }
 
-        return winningLottos.size();
+        return count;
+    }
+
+    private int count(int count, Prize targetPrize, WinningLotto winningLotto, Lotto lotto) {
+        if (targetPrize == Prize.SECOND) {
+            if (winningLotto.countMatch(lotto) == targetPrize.getCountOfMatch()
+                    && winningLotto.matchBonus(lotto)) {
+
+                return ++count;
+            }
+
+            return count;
+        }
+
+        if (targetPrize == Prize.THIRD) {
+            if (winningLotto.countMatch(lotto) == targetPrize.getCountOfMatch()
+                    && !winningLotto.matchBonus(lotto)) {
+
+                return ++count;
+            }
+
+            return count;
+        }
+
+        if (winningLotto.countMatch(lotto) == targetPrize.getCountOfMatch()) {
+            return ++count;
+        }
+
+        return count;
     }
 
     @Override

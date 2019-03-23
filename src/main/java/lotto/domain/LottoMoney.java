@@ -15,4 +15,8 @@ public class LottoMoney {
     public int countOfLotto() {
         return (int) (this.money / LOTTO_UNIT_PRICE);
     }
+
+    public double calculateEarningsRate(final WinningResults winningResults) {
+        return winningResults.calculateEarningsRate(money);
+    }
 }

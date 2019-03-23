@@ -23,4 +23,16 @@ public class WinningResults {
     public Set<Prize> keySet() {
         return winningResults.keySet();
     }
+
+    public double calculateEarningsRate(final long money) {
+        long totalPrizeMoney = 0;
+
+        Set<Prize> winningResultsKeys = winningResults.keySet();
+
+        for (Prize prize : winningResultsKeys) {
+            totalPrizeMoney += prize.getMoney() * winningResults.get(prize).getMatchCount();
+        }
+
+        return totalPrizeMoney / (double) money;
+    }
 }

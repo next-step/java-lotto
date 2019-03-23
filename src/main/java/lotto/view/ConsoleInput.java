@@ -29,6 +29,9 @@ public class ConsoleInput {
             winningNumbers.add(new LottoNumber(Integer.parseInt(numbers[i])));
         }
 
-        return new WinningLotto(new Lotto(winningNumbers));
+        System.out.println("보너스 볼을 입력해 주세요.");
+        LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
+
+        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 }

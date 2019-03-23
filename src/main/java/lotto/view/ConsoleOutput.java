@@ -32,7 +32,7 @@ public class ConsoleOutput {
         for (Prize prize : reversedKeyPrizes) {
             String output = String.format(
                 "%d개 일치(%d원)-%d개",
-                prize.getMatchingCount(),
+                prize.getCountOfMatch(),
                 prize.getMoney(),
                 winningResults.get(prize).getMatchCount());
 
