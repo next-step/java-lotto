@@ -2,6 +2,10 @@ package lotto.domain;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -40,5 +44,23 @@ public class LottoNumberTest {
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(underMinNumber));
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(overMaxNumber));
+    }
+
+    @Test
+    public void sort_동작_확인() {
+        // given
+        LottoNumber two = new LottoNumber(2);
+        LottoNumber four = new LottoNumber(4);
+        LottoNumber one = new LottoNumber(1);
+
+        List<LottoNumber> lottoNumbers = Arrays.asList(two, four, one);
+
+        // when
+        lottoNumbers.sort(Comparator.naturalOrder());
+
+        // then
+        assertThat(lottoNumbers.get(0)).isEqualByComparingTo(one);
+        assertThat(lottoNumbers.get(1)).isEqualByComparingTo(two);
+        assertThat(lottoNumbers.get(2)).isEqualByComparingTo(four);
     }
 }

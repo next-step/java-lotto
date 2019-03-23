@@ -14,29 +14,30 @@ public class LottoGenerator {
         return new Lotto(getSortedLottoNumbers());
     }
 
-    private static List<Integer> getSortedLottoNumbers() {
-        List<Integer> lottoNumbers = getUnsortedLottoNumbers();
+    private static List<LottoNumber> getSortedLottoNumbers() {
+        List<LottoNumber> lottoNumbers = getUnsortedLottoNumbers();
         sort(lottoNumbers);
 
         return lottoNumbers;
     }
 
-    private static void sort(List<Integer> lottoNumbers) {
+    private static void sort(List<LottoNumber> lottoNumbers) {
         lottoNumbers.sort(Comparator.naturalOrder());
     }
 
-    private static List<Integer> getUnsortedLottoNumbers() {
+    private static List<LottoNumber> getUnsortedLottoNumbers() {
         return getShuffledAllLottoNumbers().subList(0, Lotto.LOTTO_NUMBERS_SIZE);
     }
 
-    static List<Integer> getAllLottoNumbers() {
+    static List<LottoNumber> getAllLottoNumbers() {
         return IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                 .boxed()
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
     }
 
-    private static List<Integer> getShuffledAllLottoNumbers() {
-        List<Integer> allLottoNumbers = getAllLottoNumbers();
+    private static List<LottoNumber> getShuffledAllLottoNumbers() {
+        List<LottoNumber> allLottoNumbers = getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
         return allLottoNumbers;

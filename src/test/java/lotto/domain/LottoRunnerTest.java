@@ -6,6 +6,8 @@ import lotto.vo.LottoWinResult;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,10 +17,11 @@ public class LottoRunnerTest {
         // given
         int bonusNumber = 45;
         int differentBonusNumber = 44;
-        WinningLotto winner = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
-        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
-        Lotto third = new Lotto(Arrays.asList(1, 2, 3, 4, 5, differentBonusNumber));
-        Lotto fail = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16));
+
+        WinningLotto winner = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(bonusNumber));
+        Lotto second = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, bonusNumber));
+        Lotto third = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, differentBonusNumber));
+        Lotto fail = new Lotto(getLottoNumbers(11, 12, 13, 14, 15, 16));
 
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(second, third, fail, fail));
 
@@ -41,10 +44,10 @@ public class LottoRunnerTest {
         int bonusNumber = 45;
         int differentBonusNumber = 44;
 
-        WinningLotto winner = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
-        Lotto second = new Lotto(Arrays.asList(1, 2, 3, 4, 5, bonusNumber));
-        Lotto third = new Lotto(Arrays.asList(1, 2, 3, 4, 5, differentBonusNumber));
-        Lotto fail = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16));
+        WinningLotto winner = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(bonusNumber));
+        Lotto second = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, bonusNumber));
+        Lotto third = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, differentBonusNumber));
+        Lotto fail = new Lotto(getLottoNumbers(11, 12, 13, 14, 15, 16));
 
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(second, third, fail, fail));
 
@@ -61,4 +64,9 @@ public class LottoRunnerTest {
         assertThat(totalProfitRate).isEqualTo(realTotalPrizeMoney / realCost);
     }
 
+    private List<LottoNumber> getLottoNumbers(int... numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(Collectors.toList());
+    }
 }

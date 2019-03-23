@@ -1,14 +1,13 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         if (!isLottoNumbersSize(lottoNumbers)) {
             throw new IllegalArgumentException("Lotto lottoNumbers size must be " + LOTTO_NUMBERS_SIZE);
         }
@@ -17,25 +16,19 @@ public class Lotto {
             throw new IllegalArgumentException("Lotto lottoNumbers must be unique");
         }
 
-        this.lottoNumbers = convertToLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private boolean isLottoNumbersSize(List<Integer> numbers) {
+    private boolean isLottoNumbersSize(List<LottoNumber> numbers) {
         return LOTTO_NUMBERS_SIZE == numbers.size();
     }
 
-    private boolean isNumberDuplicated(List<Integer> numbers) {
+    private boolean isNumberDuplicated(List<LottoNumber> numbers) {
         long uniqueNumbersSize = numbers.stream()
                 .distinct()
                 .count();
 
         return uniqueNumbersSize < LOTTO_NUMBERS_SIZE;
-    }
-
-    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::getInstance)
-                .collect(Collectors.toList());
     }
 
     int getNumberOfDuplicatedNumbers(Lotto target) {

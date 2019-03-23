@@ -12,9 +12,9 @@ public class LottoGeneratorTest {
     @Test
     public void 모든_로또_숫자_생성() {
         // given
-        List<Integer> allLottoNumbers =
+        List<LottoNumber> allLottoNumbers =
                 IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
-                        .boxed()
+                        .mapToObj(LottoNumber::getInstance)
                         .collect(Collectors.toList());
 
         // when

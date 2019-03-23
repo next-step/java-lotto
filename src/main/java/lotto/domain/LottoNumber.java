@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
     private static final Map<Integer, LottoNumber> LOTTO_NUMBERS = new HashMap<>();
@@ -32,6 +31,11 @@ public class LottoNumber {
 
     private boolean isValidNumber(int number) {
         return MIN_NUMBER <= number && number <= MAX_NUMBER;
+    }
+
+    @Override
+    public int compareTo(LottoNumber target) {
+        return this.number - target.number;
     }
 
     @Override
