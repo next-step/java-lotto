@@ -12,9 +12,11 @@ import java.util.Map;
 @Getter
 @EqualsAndHashCode
 public class LotteryResult {
-    private static final Integer INIT_RANK = 0;
+    private static final int INIT_RANK = 0;
+    private static final int ONE_GAME_MONEY = 1000;
+    public static final int PERCENT_VALUE = 100;
+    public static final double FLOATING_VALUE = 100.0;
     private Map<Integer, Integer> resultDatas = new HashMap<>();
-
     private double earningRates;
 
     public LotteryResult(List<Integer> comparedResults) {
@@ -44,10 +46,10 @@ public class LotteryResult {
 
     @ToString
     public enum RANK {
-        FOURTH(3, 5000),
-        THIRD(4, 50000),
-        SECOND(5, 1500000),
-        FIRST(6, 2000000000);
+        FOURTH(4, 5_000),
+        THIRD(3, 50_000),
+        SECOND(2, 1_500_000),
+        FIRST(1, 2_000_000_000);
 
         private Integer matched;
         private Integer price;
@@ -55,10 +57,6 @@ public class LotteryResult {
         RANK(Integer matched, Integer price) {
             this.matched = matched;
             this.price = price;
-        }
-
-        public String getKey() {
-            return name();
         }
 
         public Integer getMatched() {
@@ -70,12 +68,12 @@ public class LotteryResult {
         }
 
     }
-    //TODO : 추후 리팩토링 하겠습니다.
+
     private double earningRates(List<Integer> comparedResults) {
-        Integer earnedMoney = 0;
+        Integer priceMoney = 0;
         for (RANK rank : RANK.values()) {
-            earnedMoney += rank.getPrice() * getResultDatas().get(rank.getMatched());
+            priceMoney += rank.getPrice() * getResultDatas().get(rank.getMatched());
         }
-        return Math.floor((double) earnedMoney/(1000 * comparedResults.size())*100)/100.0;
+        return Math.floor((double) priceMoney / (ONE_GAME_MONEY * comparedResults.size()) * PERCENT_VALUE) / FLOATING_VALUE;
     }
 }
