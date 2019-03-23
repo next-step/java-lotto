@@ -11,13 +11,18 @@ public class LottoTest {
     private Lotto lotto;
 
     @Before
-    public void init() {
-        lotto = new Lotto(Arrays.asList(16, 26, 32, 35, 37, 39));
+    public void lottoTest() {
+        lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 3, 5, 15, 30, 31)));
     }
 
     @Test
-    public void createLottoTest() {
-        assertThat(this.lotto.getLotto().size()).isEqualTo(6);
+    public void isContains_false_Test() {
+        assertThat(lotto.isContains(2)).isFalse();
+    }
+
+    @Test
+    public void isContains_true_Test() {
+        assertThat(lotto.isContains(1)).isTrue();
     }
 
 }

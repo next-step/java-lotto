@@ -3,7 +3,9 @@ package domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -13,19 +15,20 @@ public class LottoMatchTest {
 
     @Before
     public void initLottos() {
-        this.lotto.add(new Lotto(Arrays.asList(16, 26, 32, 35, 37, 39)));
-        this.lotto.add(new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)));
-        this.lotto.add(new Lotto(Arrays.asList(13, 14, 16, 38, 42, 45)));
-        this.lotto.add(new Lotto(Arrays.asList(7, 11, 30, 40, 42, 43)));
-        this.lotto.add(new Lotto(Arrays.asList(1, 8, 11, 31, 41, 42)));
-        this.lotto.add(new Lotto(Arrays.asList(1, 8, 11, 32, 38, 45)));
+        this.lotto.add(new Lotto(new LottoNumbers(Arrays.asList(16, 26, 32, 35, 37, 39))));
+        this.lotto.add(new Lotto(new LottoNumbers(Arrays.asList(3, 5, 11, 16, 32, 38))));
+        this.lotto.add(new Lotto(new LottoNumbers(Arrays.asList(13, 14, 16, 38, 42, 45))));
+        this.lotto.add(new Lotto(new LottoNumbers(Arrays.asList(7, 11, 30, 40, 42, 43))));
+        this.lotto.add(new Lotto(new LottoNumbers(Arrays.asList(1, 8, 11, 31, 41, 42))));
+        this.lotto.add(new Lotto(new LottoNumbers(Arrays.asList(1, 8, 11, 32, 38, 45))));
     }
 
-    @Test
+        @Test
     public void 로또_한장_두개_일치() {
         List<Lotto> lotto = new ArrayList<>();
-        lotto.add(new Lotto(Arrays.asList(16, 26, 32, 35, 37, 39)));
+        lotto.add(new Lotto(new LottoNumbers(Arrays.asList(16, 26, 32, 35, 37, 39))));
         List<Integer> winningNumbers = Arrays.asList(16, 26, 36, 40, 44, 45);
+
         LottoMatch lottoMatch = new LottoMatch(lotto, winningNumbers);
         assertThat(lottoMatch.produceResult().get(LottoRank.NONE)).isEqualTo(1);
     }
@@ -33,8 +36,9 @@ public class LottoMatchTest {
     @Test
     public void 로또_한장_세개_일치() {
         List<Lotto> lotto = new ArrayList<>();
-        lotto.add(new Lotto(Arrays.asList(16, 26, 32, 35, 37, 39)));
+        lotto.add(new Lotto(new LottoNumbers(Arrays.asList(16, 26, 32, 35, 37, 39))));
         List<Integer> winningNumbers = Arrays.asList(16, 26, 35, 40, 44, 45);
+
         LottoMatch lottoMatch = new LottoMatch(lotto, winningNumbers);
         assertThat(lottoMatch.produceResult().get(LottoRank.THREE)).isEqualTo(1);
     }
