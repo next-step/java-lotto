@@ -4,6 +4,7 @@ import lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleApplication {
@@ -16,7 +17,7 @@ public class ConsoleApplication {
 
         OutputView.printPurchaseResult(purchase);
 
-        String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
+        List<Integer> previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
         int bonusBallNumber = InputView.inputBonusBall(scanner);
         WinningLotto previousWinningLotto = new FixedLottoGenerator(previousWinningLottoNumbers, bonusBallNumber).generateWinningLotto();
 

@@ -1,6 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Scanner;
+
+import static lotto.util.InputUtil.convertToInt;
+import static lotto.util.InputUtil.split;
 
 public class InputView {
     private static final String PURCHASE_AMOUNT_INPUT_MENT = "구입금액을 입력해 주세요.";
@@ -17,11 +21,11 @@ public class InputView {
         }
     }
 
-    public static String inputPreviousWinningLotto(Scanner scanner) {
+    public static List<Integer> inputPreviousWinningLotto(Scanner scanner) {
         try {
             System.out.println(PREVIOUS_WINNING_LOTTO_INPUT_MENT);
             scanner.nextLine();
-            return scanner.nextLine();
+            return convertToInt(split(scanner.nextLine()));
         } catch (NumberFormatException e) {
             e.printStackTrace();
             throw new RuntimeException(FORMAT_ERROR_MENT);

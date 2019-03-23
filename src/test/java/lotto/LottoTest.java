@@ -32,7 +32,7 @@ public class LottoTest {
         Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
         WinningLotto previousLotto = new FixedLottoGenerator(previousLottoNumbers).generateWinningLotto();
         // when
-        int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
+        int numberOfSame = previousLotto.countNumberOfMatch(currentLotto);
         // then
         assertThat(numberOfSame).isEqualTo(3);
     }
@@ -56,8 +56,8 @@ public class LottoTest {
         Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
         WinningLotto previousLotto = new FixedLottoGenerator(previousLottoNumbers, bonusNumber).generateWinningLotto();
         // when
-        int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
-        boolean isMatchingBonus = currentLotto.isAnyMatchingBonusBall(previousLotto);
+        int numberOfSame = previousLotto.countNumberOfMatch(currentLotto);
+        boolean isMatchingBonus = previousLotto.isAnyMatchingBonusBall(currentLotto);
         // then
         assertThat(numberOfSame).isEqualTo(5);
         assertThat(isMatchingBonus).isTrue();

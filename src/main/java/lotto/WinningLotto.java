@@ -6,18 +6,18 @@ public class WinningLotto {
 
     public WinningLotto(final Lotto lotto, final LottoNumber bonusBall) {
         this.lotto = lotto;
-        if (hasDuplicate(bonusBall)) {
+        if (lotto.hasBonusBall(bonusBall)) {
             throw new IllegalArgumentException("로또번호는 중복될 수 없습니다.");
         }
         this.bonusBall = bonusBall;
     }
 
-    private boolean hasDuplicate(LottoNumber bonusBall) {
-        return lotto.numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
+    public int countNumberOfMatch(Lotto anotherLotto) {
+        return lotto.countNumberOfMatch(anotherLotto);
     }
 
-    public boolean isMatchingBonusBall(LottoNumber anotherNumber) {
-        return bonusBall.equals(anotherNumber);
+    public boolean isAnyMatchingBonusBall(Lotto anotherLotto) {
+        return anotherLotto.hasBonusBall(bonusBall);
     }
 
     public Lotto getLotto() {

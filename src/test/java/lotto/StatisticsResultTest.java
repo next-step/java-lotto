@@ -34,8 +34,8 @@ public class StatisticsResultTest {
     public void 보너스볼2등_수익30000000원() {
         // given
         FixedLottoGenerator fixedLottoGenerator = new FixedLottoGenerator("1, 2, 3, 4, 5, 6");
-        PurchaseHistory purchaseHistory = new PurchaseHistory(2000, fixedLottoGenerator);
-        WinningLotto lotto = new FixedLottoGenerator("1, 2, 3, 4, 5, 8", 6).generateWinningLotto();
+        PurchaseHistory purchaseHistory = new PurchaseHistory(1000, fixedLottoGenerator);
+        WinningLotto lotto = new FixedLottoGenerator("1, 2, 3, 4, 5, 11", 6).generateWinningLotto();
         // when
         StatisticsResult statisticsResult = new StatisticsResult(purchaseHistory, lotto);
         // then

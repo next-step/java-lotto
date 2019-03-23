@@ -25,15 +25,15 @@ public class Lotto {
         return numbers.size() != SIZE_LIMIT;
     }
 
-    public int countNumberOfMatch(WinningLotto anotherLotto) {
+    public int countNumberOfMatch(Lotto anotherLotto) {
         return (int) numbers
                 .stream()
-                .filter(number -> anotherLotto.getLotto().numbers.contains(number))
+                .filter(number -> anotherLotto.numbers.contains(number))
                 .count();
     }
 
-    public boolean isAnyMatchingBonusBall(WinningLotto winningLotto) {
-        return numbers.stream().anyMatch(winningLotto::isMatchingBonusBall);
+    public boolean hasBonusBall(LottoNumber bonusBall) {
+        return numbers.stream().anyMatch(lottoNumber -> lottoNumber.equals(bonusBall));
     }
 
     @Override

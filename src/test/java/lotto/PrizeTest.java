@@ -30,7 +30,7 @@ public class PrizeTest {
     }
 
     @Test
-    public void 일등2개_상금계산() {
+    public void 일등1개_사등1개_상금계산() {
         // given
         long sum = 0L;
         Map<Prize, Integer> prizeCount = new HashMap<>();
@@ -41,6 +41,6 @@ public class PrizeTest {
             sum += prize.calculatePrizeMoneyBy(prizeCount.getOrDefault(prize, 0));
         }
         // then
-        assertThat(sum).isEqualTo(4000005000L);
+        assertThat(sum).isEqualTo(4000050000L);
     }
 }

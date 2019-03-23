@@ -3,34 +3,40 @@ package lotto;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
-    private static Map<Integer, LottoNumber> cachedLottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> cachedLottoNumbers = new HashMap<>();
     private final int number;
 
+    static {
+        IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+                .boxed()
+                .forEach(number -> cachedLottoNumbers.put(number, new LottoNumber(number)));
+    }
+
     private LottoNumber(int number) {
-        if (isInvalidNumber(number)) {
-            throw new IllegalArgumentException("로또번호는 1~45 사이에 있어야 합니다.");
-        }
         this.number = number;
     }
 
     public static LottoNumber valueOf(final int number) {
-        LottoNumber foundLottoNumber = cachedLottoNumbers.getOrDefault(number, new LottoNumber(number));
-        cachedLottoNumbers.putIfAbsent(number, foundLottoNumber);
-        return foundLottoNumber;
+        if (isInvalidNumber(number)) {
+            throw new IllegalArgumentException("로또번호는 1~45 사이에 있어야 합니다.");
+        }
+        return cachedLottoNumbers.get(number);
     }
 
-    private boolean isInvalidNumber(int number) {
+    private static boolean isInvalidNumber(int number) {
         return number > MAXIMUM_NUMBER || MINIMUM_NUMBER > number;
     }
 
     public LottoNumber increase() {
-        int increasingNumber = this.number + MINIMUM_NUMBER;
-        int temp = increasingNumber % LottoNumber.MAXIMUM_NUMBER;
-        return temp == LottoGenerator.BASE_INDEX ? LottoNumber.valueOf(LottoNumber.MAXIMUM_NUMBER) : LottoNumber.valueOf(temp);
+        if(this.number == MAXIMUM_NUMBER) {
+            return valueOf(MINIMUM_NUMBER);
+        }
+        return valueOf(this.number + MINIMUM_NUMBER);
     }
 
     @Override

@@ -1,20 +1,21 @@
 package lotto;
 
+import lotto.util.InputUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FixedLottoGenerator implements LottoGenerator {
     private List<LottoNumber> numbers;
     private LottoNumber bonusBall;
 
-    public FixedLottoGenerator(final String numbers) {
-        this.numbers = convertToLottoNumber(convertToInt(numbers));
+    public FixedLottoGenerator(final List<Integer> numbers) {
+        this.numbers = convertToLottoNumber(numbers);
     }
 
-    public FixedLottoGenerator(final String numbers, int bonusBall) {
-        this.numbers = convertToLottoNumber(convertToInt(numbers));
+    public FixedLottoGenerator(final List<Integer> numbers, int bonusBall) {
+        this.numbers = convertToLottoNumber(numbers);
         this.bonusBall = LottoNumber.valueOf(bonusBall);
     }
 
@@ -27,13 +28,6 @@ public class FixedLottoGenerator implements LottoGenerator {
 
     public WinningLotto generateWinningLotto() {
         return new WinningLotto(generateLotto(), bonusBall);
-    }
-
-    private List<Integer> convertToInt(String str) {
-        return Stream.of(str.split(", "))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
     }
 
     private List<LottoNumber> convertToLottoNumber(List<Integer> numbers) {
