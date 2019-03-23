@@ -26,11 +26,11 @@ public class ConsoleInput {
         List<LottoNumber> winningNumbers = new ArrayList<>();
 
         for (int i = 0; i < numbers.length; i++) {
-            winningNumbers.add(new LottoNumber(Integer.parseInt(numbers[i])));
+            winningNumbers.add(LottoNumber.of(Integer.parseInt(numbers[i])));
         }
 
         System.out.println("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusNumber = new LottoNumber(scanner.nextInt());
+        LottoNumber bonusNumber = LottoNumber.of(scanner.nextInt());
 
         return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }

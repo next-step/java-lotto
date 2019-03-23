@@ -12,7 +12,7 @@ public class Lotto {
         this.lottoNumbers = new HashSet<>();
 
         while (lottoNumbers.size() != LOTTO_SIZE) {
-            lottoNumbers.add(new LottoNumber());
+            lottoNumbers.add(LottoNumber.of());
         }
     }
 

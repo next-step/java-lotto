@@ -8,11 +8,9 @@ public class LottoListTest {
 
     @Test
     public void 로또_10개_발급() {
-        final int lottosCount = 10;
+        LottoList lottoList = new LottoList(10);
 
-        LottoList lottoList = new LottoList(lottosCount);
-
-        assertThat(lottoList.size()).isEqualTo(lottosCount);
+        assertThat(lottoList.size()).isEqualTo(10);
     }
 
     @Test(expected = RuntimeException.class)
