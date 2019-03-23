@@ -13,10 +13,12 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    //TODO : 여기 고쳐야되는데 왜 이러는걸까... ㅎㅎ
+    //TODO : 아래의 if가 없으면 오류가 난다 ! ㅠㅠ
     public static List<Integer> inputWinningNumbers() {
         System.out.println("당첨번호를 입력해주세요");
-        scanner.nextLine().split(",");
+        if(scanner.nextLine().isEmpty()) {
+            //return convertInts(scanner.nextLine().split(","));
+        }
         return convertInts(scanner.nextLine().split(","));
     }
 
