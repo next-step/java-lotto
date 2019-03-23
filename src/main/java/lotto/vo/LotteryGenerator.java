@@ -31,4 +31,8 @@ public class LotteryGenerator {
         Collections.sort(lotteryNumbers);
         return lotteryNumbers;
     }
+
+    public BonusNumber addBonusNumber() {
+        return new BonusNumber(lotteryNumbers);
+    }
 }

@@ -11,4 +11,11 @@ public class LotteryGeneratorTest {
         LotteryGenerator lotteryGenerator = new LotteryGenerator();
         assertThat(lotteryGenerator.lotteryNumbers()).hasSize(6);
     }
+
+    @Test
+    public void 로또한장당_생성되는_보너스번호() {
+        LotteryGenerator lottery = new LotteryGenerator();
+        BonusNumber bonusNumber = lottery.addBonusNumber();
+        assertThat(bonusNumber.bonusNumber).isGreaterThan(0);
+    }
 }
