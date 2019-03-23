@@ -3,13 +3,18 @@ package lotto;
 public class LottoMoney {
 
     private static final int LOTTO_PRICE = 1_000;
+    private int money;
 
-    public static int buy(int money) {
+    public LottoMoney(int money) {
         checkMinimumAmount(money);
-        return money / LOTTO_PRICE;
+        this.money = money;
     }
 
-    private static void checkMinimumAmount(int money) {
+    public int buy() {
+        return this.money / LOTTO_PRICE;
+    }
+
+    private void checkMinimumAmount(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException();
         }
