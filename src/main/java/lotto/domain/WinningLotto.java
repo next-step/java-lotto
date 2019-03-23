@@ -14,7 +14,7 @@ public class WinningLotto {
         }
 
         this.lottoNumbers = new Lotto(lottoNumbers);
-        this.bonusNumber = LottoNumber.get(bonusNumber);
+        this.bonusNumber = LottoNumber.getInstance(bonusNumber);
     }
 
     int getMatchCounts(Lotto ticket) {

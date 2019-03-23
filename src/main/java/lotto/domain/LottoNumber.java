@@ -18,7 +18,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber get(int number) {
+    public static LottoNumber getInstance(int number) {
         LottoNumber lottoNumber = LOTTO_NUMBERS.get(number);
         return ((null == lottoNumber) ? put(number) : lottoNumber);
     }

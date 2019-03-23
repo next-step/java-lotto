@@ -24,8 +24,8 @@ public class LottoNumberTest {
         int lottoNumber = LottoNumber.MAX_NUMBER;
 
         // when
-        LottoNumber target = LottoNumber.get(lottoNumber);
-        LottoNumber same = LottoNumber.get(lottoNumber);
+        LottoNumber target = LottoNumber.getInstance(lottoNumber);
+        LottoNumber same = LottoNumber.getInstance(lottoNumber);
 
         // then
         assertThat(target == same).isTrue();
@@ -38,7 +38,7 @@ public class LottoNumberTest {
 
         // when
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.get(underMinNumber));
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.get(overMaxNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(underMinNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(overMaxNumber));
     }
 }

@@ -34,7 +34,7 @@ public class Lotto {
 
     private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::get)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
     }
 
