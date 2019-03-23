@@ -3,11 +3,6 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoVendingMachine;
-import lotto.domain.Money;
-import lotto.domain.MyLottos;
-import lotto.domain.WinStats;
 
 public class ConsoleView {
 
@@ -15,6 +10,7 @@ public class ConsoleView {
 
   public static void main(String[] args) {
 
+    /*
     int insertMoney = consoleInputView.inputPurchaseAmount();
     MyLottos myLottos = generateLotto(insertMoney);
 
@@ -22,8 +18,10 @@ public class ConsoleView {
     Set<Integer> winNumber = winNumbers(winNumberString);
 
     winState(myLottos, winNumber);
+    */
   }
 
+  /*
   private static void winState(MyLottos myLottos, Set<Integer> winNumber) {
 
     ConsoleResultView.printResultTitle();
@@ -33,8 +31,11 @@ public class ConsoleView {
 
     String yield = winStats.yield();
     ConsoleResultView.printYield(yield);
-  }
 
+  }
+  */
+
+  /*
   private static MyLottos generateLotto(int insertMoney) {
 
     Money purchaseMoney = new Money(insertMoney);
@@ -44,8 +45,11 @@ public class ConsoleView {
     }
 
     return myLottos;
-  }
 
+  }
+  */
+
+  /*
   private static Set<Integer> winNumbers(String winNumberString) {
 
     String[] winNumberArray = winNumberString.split(",");
@@ -53,4 +57,5 @@ public class ConsoleView {
         .map(winNumber -> Integer.parseInt(winNumber.trim()))
         .collect(Collectors.toSet());
   }
+  */
 }
