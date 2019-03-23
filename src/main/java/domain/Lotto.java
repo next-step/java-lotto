@@ -1,39 +1,42 @@
 package domain;
 
-import java.util.*;
+import view.LottoView;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lotto {
-    private static final int LOTTO_MIN_NUM = 1;
-    private static final int LOTTO_MAX_NUM = 45;
-    private static final int LOTTO_RANGE = 6;
-    private List<Number> numbers = new ArrayList();
+    protected List<Number> numbers;
 
-    public Lotto(Random random) {
-        sort(sub(shuffle(getRandomNumbers(), random)))
-                .forEach(v -> numbers.add(new Number(v)));
+    public Lotto(List<Number> numbers) {
+        this.numbers = numbers;
     }
 
-    private static List<Integer> sort(List<Integer> numbers) {
-        Collections.sort(numbers);
-        return numbers;
+    public Lotto(String numbers) {
+        this(split(numbers)
+                .map(v -> (new Number(toInt(v))))
+                .collect(Collectors.toList()));
     }
 
-    private static List<Integer> shuffle(List<Integer> numbers, Random random) {
-        Collections.shuffle(numbers, random);
-        return numbers;
+    private static int toInt(String v) {
+        return Integer.parseInt(v);
     }
 
-    private static List<Integer> getRandomNumbers() {
-        return IntStream.range(LOTTO_MIN_NUM, LOTTO_MAX_NUM).boxed().collect(Collectors.toList());
-    }
-
-    private static List<Integer> sub(List<Integer> numbers) {
-        return numbers.subList(0, LOTTO_RANGE);
+    private static Stream<String> split(String number) {
+        return Arrays.stream(number.split(", "));
     }
 
     public List<Number> getNumbers() {
         return numbers;
+    }
+
+    public LottoView toView() {
+        return new LottoView(numbers);
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
     }
 }

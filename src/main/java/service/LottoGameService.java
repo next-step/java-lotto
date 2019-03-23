@@ -23,14 +23,6 @@ public class LottoGameService {
         this.calculator = calculator;
     }
 
-    public List<LottoView> getPurchasedLottos() {
-        return game.getLottos();
-    }
-
-    public int getPurchaseCount() {
-        return game.getSize();
-    }
-
     public OutputResultView start(InputWinningView view) {
         List<Integer> result = game.run(new Winning(view.getWinning()));
 
@@ -38,6 +30,14 @@ public class LottoGameService {
         double profit = calculator.result(score, game.getPrice());
 
         return new OutputResultView(score, profit);
+    }
+
+    public List<LottoView> getPurchasedLottos() {
+        return game.getLottos();
+    }
+
+    public int getPurchaseCount() {
+        return game.getSize();
     }
 
     private List<Integer> mergeScore(List<Integer> result) {

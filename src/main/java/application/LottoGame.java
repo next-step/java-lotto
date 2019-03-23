@@ -1,6 +1,7 @@
 package application;
 
 import domain.Lotto;
+import domain.LottoGenerator;
 import domain.Winning;
 import view.LottoView;
 
@@ -17,11 +18,11 @@ public class LottoGame {
     public LottoGame(int price, Random random) {
         this.price = price;
         IntStream.range(0, getCount(price)).boxed()
-                .forEach(v -> lottos.add(new Lotto(random)));
+                .forEach(v -> lottos.add(new Lotto(LottoGenerator.run(random))));
     }
 
     public List<LottoView> getLottos() {
-        return lottos.stream().map(v -> new LottoView(v.getNumbers())).collect(Collectors.toList());
+        return lottos.stream().map(v -> v.toView()).collect(Collectors.toList());
     }
 
     private int getCount(int price) {
@@ -38,7 +39,7 @@ public class LottoGame {
 
     public List<Integer> run(Winning winning) {
         List<Integer> results = new ArrayList();
-        lottos.stream().forEach(v -> results.add(winning.compare(v.getNumbers())));
+        lottos.stream().forEach(lotto -> results.add(winning.compare(lotto)));
         return results;
     }
 }

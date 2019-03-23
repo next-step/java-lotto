@@ -19,10 +19,10 @@ public class WinningTest {
         String number = "1, 2, 3, 4, 5, 6";
         Winning winning = new Winning(number);
 
-        String number2 = "1, 2, 3, 14, 15, 16";
-        Winning compare = new Winning(number2);
+        String lottoNumber = "1, 2, 3, 14, 15, 16";
+        Lotto lotto = new Lotto(lottoNumber);
 
-        int result = winning.compare(compare.getNumbers());
+        int result = winning.compare(lotto);
 
         assertThat(result).isEqualTo(3);
     }
@@ -32,10 +32,10 @@ public class WinningTest {
         String number = "1, 2, 3, 4, 5, 6";
         Winning winning = new Winning(number);
 
-        String number2 = "1, 2, 3, 4, 15, 16";
-        Winning compare = new Winning(number2);
+        String lottoNumber = "1, 2, 3, 4, 15, 16";
+        Lotto lotto = new Lotto(lottoNumber);
 
-        int result = winning.compare(compare.getNumbers());
+        int result = winning.compare(lotto);
 
         assertThat(result).isEqualTo(4);
     }

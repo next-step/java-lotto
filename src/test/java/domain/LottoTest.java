@@ -19,7 +19,7 @@ public class LottoTest {
 
     @Test
     public void 로또한장구매() {
-        Lotto lotto = new Lotto(new Random());
+        Lotto lotto = new Lotto(LottoGenerator.run(new Random()));
 
         assertThat(lotto).isNotNull();
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
