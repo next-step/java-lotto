@@ -47,7 +47,7 @@ public class LotteryWinningStatistics {
     private int getWinningMoney() {
         return rankCountMap.entrySet()
                 .stream()
-                .reduce(0, (money, entry) -> money + (entry.getValue() * entry.getKey().revenue),
+                .reduce(0, (money, entry) -> money + (entry.getValue() * entry.getKey().winningMoney),
                         (money1, money2) -> money1 + money2);
     }
 

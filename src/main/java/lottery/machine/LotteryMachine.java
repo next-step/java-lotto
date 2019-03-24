@@ -1,10 +1,6 @@
 package lottery.machine;
 
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryWinningStatistics;
-import lottery.domain.WinningTicket;
-import lottery.domain.Money;
+import lottery.domain.*;
 import lottery.supplier.BoundedUniqueNumbersGenerator;
 import lottery.supplier.NumbersGenerator;
 
@@ -27,20 +23,21 @@ public class LotteryMachine {
         this.numbersGenerator = numbersGenerator;
     }
 
-    public int buyLotteryTicket(Money price) {
-        final int ticketCount = price.divide(LotteryTicket.PRICE);
-        this.lotteryTickets = IntStream.range(0, ticketCount)
+    public TicketCount buyLotteryTicket(Money price) {
+        final TicketCount ticketCount = new TicketCount(price);
+
+        this.lotteryTickets = IntStream.range(0, ticketCount.count)
                 .mapToObj(i -> new LotteryTicket(numbersGenerator.nextNumbers(LotteryTicket.NUMBERS_COUNT)))
                 .collect(Collectors.toList());
 
-        return lotteryTickets.size();
+        return ticketCount;
     }
 
     public List<LotteryTicket> getTickets() {
         return new ArrayList<>(this.lotteryTickets);
     }
 
-    public LotteryWinningStatistics raffle(List<Integer> winningNumbers, int bonusNumber) {
-        return new LotteryWinningStatistics(new WinningTicket(winningNumbers, bonusNumber), this.lotteryTickets);
+    public LotteryWinningStatistics raffle(WinningTicket winningTicket) {
+        return new LotteryWinningStatistics(winningTicket, this.lotteryTickets);
     }
 }
