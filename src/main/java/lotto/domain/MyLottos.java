@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.awt.event.WindowStateListener;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MyLottos {
@@ -19,23 +21,20 @@ public class MyLottos {
     return new WinStats(buyMoney, winResults(winNumbers));
   }
 
-  public List<WinResult> winResults(WinNumbers winNumbers) {
+  public Map<WinMoney, Long> winResults(WinNumbers winNumbers) {
 
-    return Arrays.stream(WinMoney.values())
-        .map(winMoney -> countWinLotto(winNumbers, winMoney))
-        .collect(Collectors.toList());
+    Map<WinMoney, Long> winResult = new HashMap<>();
+
+    Arrays.stream(WinMoney.values())
+        .forEach(winMoney -> winResult.put(winMoney, countWinLotto(winNumbers, winMoney)));
+
+    return winResult;
   }
 
-  public WinResult countWinLotto(WinNumbers winNumbers, WinMoney winMoney) {
+  public Long countWinLotto(WinNumbers winNumbers, WinMoney winMoney) {
 
-    long winCount = lottos.stream()
+    return lottos.stream()
         .filter(lotto -> winMoney.isWinLotto(lotto, winNumbers))
         .count();
-
-    return new WinResult(winMoney, winCount);
-  }
-
-  public Money getBuyMoney() {
-    return buyMoney;
   }
 }

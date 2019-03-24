@@ -1,21 +1,21 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
 
 public class WinStats {
 
   private Money buyMoney;
-  private List<WinResult> winResults;
+  private Map<WinMoney, Long> winResults;
 
-  public WinStats(Money buyMoney, List<WinResult> winResults) {
+  public WinStats(Money buyMoney, Map<WinMoney, Long> winResults) {
     this.buyMoney = buyMoney;
     this.winResults = winResults;
   }
 
   public Money totalReward() {
 
-    return winResults.stream()
-        .map(WinResult::reward)
+    return winResults.entrySet().stream()
+        .map(winResult -> winResult.getKey().totalWinMoney(winResult.getValue()))
         .reduce(Money::sum)
         .orElse(new Money(0));
   }
@@ -25,11 +25,6 @@ public class WinStats {
   }
 
   public long getWinCount(WinMoney winMoney) {
-
-    return winResults.stream()
-        .filter(winResult -> winResult.isWinMoney(winMoney))
-        .findFirst()
-        .orElse(new WinResult(winMoney, 0))
-        .getWinCount();
+    return winResults.get(winMoney);
   }
 }
