@@ -34,9 +34,10 @@ public class ConsoleResultView {
     }
 
     public static void printMatches(Map<Rank, Long> rankGroup){
-        for (Rank rank : rankGroup.keySet()) {
-            System.out.println(printMatch(rank, rankGroup.get(rank)));
-        }
+        rankGroup.keySet().stream()
+            .filter(r -> r != Rank.None)
+            .map(r -> printMatch(r, rankGroup.get(r)))
+            .forEach(System.out::println);
     }
 
     private static String printMatch(Rank rank, Long value) {

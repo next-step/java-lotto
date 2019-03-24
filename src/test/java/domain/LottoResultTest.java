@@ -2,10 +2,13 @@ package domain;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    private Rank[] ranks = { Rank.First, Rank.First, Rank.Second, Rank.None };
+    private List<Rank> ranks = Arrays.asList(Rank.First, Rank.First, Rank.Second, Rank.None);
     private LottoResult lottoResult = new LottoResult(ranks);
 
     @Test
@@ -15,13 +18,8 @@ public class LottoResultTest {
     }
 
     @Test
-    public void 당첨되지_않은_복권은_저장하지_않는다() {
-        assertThat(lottoResult.count(Rank.None)).isEqualTo(0);
-    }
-
-    @Test
     public void 로또를_구매한_금액을_계산한다() {
-        assertThat(lottoResult.calculateInvestMoney()).isEqualTo(ranks.length * LottoMachine.LOTTO_PRICE);
+        assertThat(lottoResult.calculateInvestMoney()).isEqualTo(ranks.size() * LottoMachine.LOTTO_PRICE);
     }
 
     @Test
@@ -38,6 +36,6 @@ public class LottoResultTest {
 
         Double profitRate = lottoResult.calculateProfitRate();
         assertThat(profitRate).isEqualTo(
-            totalPrize.doubleValue() / (ranks.length * LottoMachine.LOTTO_PRICE));
+            totalPrize.doubleValue() / (ranks.size() * LottoMachine.LOTTO_PRICE));
     }
 }

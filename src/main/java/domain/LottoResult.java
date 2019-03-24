@@ -8,7 +8,6 @@ public class LottoResult {
 
     public LottoResult(List<Rank> ranks){
         rankGroup = ranks.stream()
-            .filter(r -> r != Rank.None)
             .sorted(Comparator.comparing(Rank::getMatchCount))
             .collect(Collectors.groupingBy(r -> r, Collectors.counting()));
     }
