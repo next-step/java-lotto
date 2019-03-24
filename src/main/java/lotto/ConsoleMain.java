@@ -9,6 +9,7 @@ import lotto.view.ConsoleOutputView;
 import lotto.vo.LottoGameResult;
 import lotto.vo.Money;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleMain {
@@ -18,18 +19,26 @@ public class ConsoleMain {
 
         try (Scanner scanner = new Scanner(System.in)) {
             long purchaseAmount = ConsoleInputView.inputMoney(scanner);
-            lottoBundle = LottoMachine.buyLottos(new Money(purchaseAmount));
+            ConsoleOutputView.printEmptyLine();
 
+            long manualTimes = ConsoleInputView.inputManualTimes(scanner);
+            ConsoleOutputView.printEmptyLine();
+
+            List<String> manualLottos = ConsoleInputView.inputManualLottos(scanner, manualTimes);
+            LottoBundle manualLottoBundle = LottoNumberParser.parseLottoBundle(manualLottos);
+            ConsoleOutputView.printEmptyLine();
+
+            lottoBundle = LottoMachine.buyLottos(manualLottoBundle, new Money(purchaseAmount));
             ConsoleOutputView.printNumberOfLottos(lottoBundle);
             ConsoleOutputView.printLottos(lottoBundle);
 
             String winnerNumbersString = ConsoleInputView.inputWinnerNumbers(scanner);
             String bonusNumber = ConsoleInputView.inputBonusNumber(scanner);
-            winner = LottoNumberParser.parse(winnerNumbersString, bonusNumber);
+            winner = LottoNumberParser.parseWinningLotto(winnerNumbersString, bonusNumber);
+            ConsoleOutputView.printEmptyLine();
         }
 
         LottoGameResult lottoGameResult = LottoRunner.runLotto(winner, lottoBundle);
-        ConsoleOutputView.printEmptyLine();
         ConsoleOutputView.printStatistics(lottoGameResult);
     }
 }
