@@ -9,6 +9,7 @@ import java.util.*;
 import static lotto.controller.LotteryGame.main;
 import static lotto.domain.Lotteries.initialization;
 import static org.assertj.core.api.Assertions.assertThat;
+import static util.Random.generationRandom;
 
 
 public class LotteryTest {
@@ -74,6 +75,13 @@ public class LotteryTest {
         lotteries.makeRanks(1, ranks);
 
         assertThat(ranks.get("first")).isEqualTo(1);
+    }
+
+    @Test
+    public void 랜덤값_생성개수_테스트() {
+        Set<Integer> random = generationRandom();
+
+        assertThat(random.size()).isEqualTo(6);
     }
 
     @Test
