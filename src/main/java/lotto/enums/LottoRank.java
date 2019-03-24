@@ -6,20 +6,20 @@ import lotto.vo.Money;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(6, BonusNumberMatchOption.NOT, 2_000_000_000),
-    SECOND(5, BonusNumberMatchOption.MUST, 30_000_000),
-    THIRD(5,  BonusNumberMatchOption.NOT, 1_500_000),
-    FOURTH(4, BonusNumberMatchOption.OPTIONAL, 50_000),
-    FIFTH(3, BonusNumberMatchOption.OPTIONAL, 5_000),
-    FAIL(0, BonusNumberMatchOption.OPTIONAL, 0);
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5,  false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000),
+    FAIL(0, false, 0);
 
     private final int matchCount;
-    private final BonusNumberMatchOption bonusNumberMatchOption;
+    private final boolean checkBonusNumber;
     private final Money prizeMoney;
 
-    LottoRank(int matchCount, BonusNumberMatchOption bonusNumberMatchOption, long prizeMoney) {
+    LottoRank(int matchCount, boolean checkBonusNumber, long prizeMoney) {
         this.matchCount = matchCount;
-        this.bonusNumberMatchOption = bonusNumberMatchOption;
+        this.checkBonusNumber = checkBonusNumber;
         this.prizeMoney = new Money(prizeMoney);
     }
 
@@ -40,10 +40,13 @@ public enum LottoRank {
 
     private boolean isLottoMatchResultMatch(LottoMatchResult result) {
         int matchCountOfResult = result.getMatchCount();
-        boolean isBonusNumberMatch = result.isBonusNumberMatch();
+        boolean isMatchCountMatch = (this.matchCount == matchCountOfResult);
 
-        return this.matchCount == matchCountOfResult &&
-                this.bonusNumberMatchOption.bonusNumberMatchCheck(isBonusNumberMatch);
+        if (!this.checkBonusNumber) {
+            return isMatchCountMatch;
+        }
+
+        return isMatchCountMatch && result.isBonusNumberMatch();
     }
 
     public Money getTotalPrizeMoneyOfLottoRank(long lottoRankCount) {
