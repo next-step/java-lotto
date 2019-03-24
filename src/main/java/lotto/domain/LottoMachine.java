@@ -20,6 +20,24 @@ public class LottoMachine {
         return getLottos(getNumberOfAffordableLottos(money));
     }
 
+    public static LottoBundle buyLottos(LottoBundle manualLottoBundle, Money money) {
+        if (!isMoneyEnough(manualLottoBundle, money)) {
+            throw new IllegalArgumentException("You can't buy lottos with this money");
+        }
+
+        long numberOfAutoLottos = getNumberOfAutoLottos(manualLottoBundle, money);
+        LottoBundle autoLottoBundle = getLottos(numberOfAutoLottos);
+
+        manualLottoBundle.join(autoLottoBundle);
+
+        return manualLottoBundle;
+    }
+
+    private static boolean isMoneyEnough(LottoBundle lottoBundle, Money money) {
+        List<Lotto> lottos = lottoBundle.getLottos();
+        return lottos.size() <= getNumberOfAffordableLottos(money);
+    }
+
     static LottoBundle getLottos(long numberOfLotto) {
         List<Lotto> lottos = LongStream.range(0, numberOfLotto)
                 .mapToObj(i -> LottoGenerator.generate())
@@ -30,5 +48,12 @@ public class LottoMachine {
 
     private static long getNumberOfAffordableLottos(Money money) {
         return money.getAmount() / LOTTO_PRICE.getAmount();
+    }
+
+    private static long getNumberOfAutoLottos(LottoBundle manualLottoBundle, Money money) {
+        long numberOfTotalLottos = getNumberOfAffordableLottos(money);
+        List<Lotto> manualLottos = manualLottoBundle.getLottos();
+
+        return numberOfTotalLottos - manualLottos.size();
     }
 }
