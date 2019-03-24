@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.WiningLottoTicket;
 import org.junit.Test;
 
 import java.util.Arrays;

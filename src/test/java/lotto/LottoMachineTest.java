@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
 import org.junit.Test;
 
 import java.util.List;

@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.WiningLottoTicket;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

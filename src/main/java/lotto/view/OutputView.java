@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.LotteryResults;
 import lotto.LottoRank;
-import lotto.LottoTicket;
+import lotto.domain.LottoTicket;
 
 import java.util.List;
 

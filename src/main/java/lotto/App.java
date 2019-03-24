@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.WiningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,6 +23,7 @@ public class App {
 
         //지난주번호 입력
         List<Integer> winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
+
 
         WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber);
         //결과저장, 비교
