@@ -34,9 +34,6 @@ public class RankCount {
 
     @Override
     public String toString() {
-        return "RankCount{" +
-                "rank=" + rank +
-                ", matchCount=" + matchCount +
-                '}';
+        return rank + " - " + matchCount + "개";
     }
 }

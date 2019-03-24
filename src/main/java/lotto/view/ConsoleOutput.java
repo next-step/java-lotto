@@ -35,11 +35,7 @@ public class ConsoleOutput {
                 continue;
             }
 
-            String output = String.format(
-                rank + " - %d개",
-                matchResults.get(rank).getMatchCount());
-
-            System.out.println(output);
+            System.out.println(matchResults.get(rank));
         }
 
         System.out.println();
