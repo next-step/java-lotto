@@ -7,13 +7,17 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-
-        lottoNumbers = new HashSet<>();
-
-        while (lottoNumbers.size() != LOTTO_SIZE) {
-            lottoNumbers.add(LottoNumber.of());
+    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
+    static {
+        for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
+            LOTTO_NUMBERS.add(LottoNumber.of(i));
         }
+    }
+
+    public Lotto() {
+        Collections.shuffle(LOTTO_NUMBERS);
+
+        lottoNumbers = new HashSet<>(LOTTO_NUMBERS.subList(0, LOTTO_SIZE));
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -59,14 +63,18 @@ public class Lotto {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return lottoNumbers.toString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }

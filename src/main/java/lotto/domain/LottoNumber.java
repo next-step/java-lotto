@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.LottoNumberGenerator;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -33,10 +31,6 @@ public class LottoNumber {
 
     public static LottoNumber of(String value) {
         return values.get(Integer.parseInt(value));
-    }
-
-    public static LottoNumber of() {
-        return values.get(LottoNumberGenerator.generate(MIN, MAX));
     }
 
     private LottoNumber(int value) {
