@@ -26,6 +26,10 @@ public class WinningLotto extends LottoTicket{
         return this.bonusBall.number == lottoBall.number;
     }
 
+    private static Integer toInt(String number) {
+        return Integer.parseInt(number);
+    }
+
     @Override
     public String toString() {
         return super.toString();

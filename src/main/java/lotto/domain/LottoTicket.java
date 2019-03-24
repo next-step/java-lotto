@@ -40,7 +40,7 @@ public class LottoTicket {
             count = contains(count, winningLotto, lottoBall);
         }
 
-        if (count == 5) {
+        if (count == LottoRank.MATCH_COUNT_FIVE) {
             bonusMatch = matchBonusNumber(winningLotto);
         }
 

@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
 public class LottoMoney {
 
     private static final int LOTTO_PRICE = 1_000;
-    private int money;
+    public final int money;
 
     public LottoMoney(int money) {
         checkMinimumAmount(money);

@@ -7,10 +7,6 @@ import java.util.List;
 
 public class LottoMachine {
 
-    public static LottoTicket issueTicket() {
-        return new LottoTicket(LottoAutoGenerator.random());
-    }
-
     public static List<LottoTicket> issueTickets(int ticketCount) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
