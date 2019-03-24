@@ -1,6 +1,7 @@
 package lotto.parser;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoBundle;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
 
@@ -16,7 +17,15 @@ public class LottoNumberParser {
         return new WinningLotto(parseLottoNumbers(lottoNumbersString), parseLottoNumber(bonusNumber));
     }
 
-    public static Lotto parseLotto(String lottoNumbers) {
+    public static LottoBundle parseLottoBundle(List<String> lottos) {
+        List<Lotto> parsedLottos = lottos.stream()
+                .map(LottoNumberParser::parseLotto)
+                .collect(Collectors.toList());
+
+        return new LottoBundle(parsedLottos);
+    }
+
+    static Lotto parseLotto(String lottoNumbers) {
         return new Lotto(parseLottoNumbers(lottoNumbers));
     }
 
