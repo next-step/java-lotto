@@ -3,11 +3,12 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMatcher {
 
     public static final int DEFAULT_COUNT = 0;
-    public final HashMap<LottoRank, Integer> rankResult;
+    public final Map<LottoRank, Integer> rankResult;
 
     public LottoMatcher(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         rankResult = aggregateRank(lottoTickets, winningLotto);
@@ -17,8 +18,8 @@ public class LottoMatcher {
         return LottoRank.valueOf(lottoTicket.matchCount(winningLotto), lottoTicket.isBonusMatch());
     }
 
-    private HashMap<LottoRank, Integer> aggregateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        HashMap<LottoRank, Integer> rankResult = initialize();
+    private Map<LottoRank, Integer> aggregateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
+        Map<LottoRank, Integer> rankResult = initialize();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = checkRank(lottoTicket, winningLotto);
@@ -27,8 +28,8 @@ public class LottoMatcher {
         return rankResult;
     }
 
-    private HashMap<LottoRank, Integer> initialize() {
-        HashMap<LottoRank, Integer> rankResult = new HashMap<>();
+    private Map<LottoRank, Integer> initialize() {
+        Map<LottoRank, Integer> rankResult = new HashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
             if (lottoRank == LottoRank.MISS) continue;
             rankResult.put(lottoRank, DEFAULT_COUNT);

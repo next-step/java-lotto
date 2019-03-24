@@ -32,10 +32,7 @@ public enum LottoRank{
     }
 
     private static boolean checkRank(int number, LottoRank lottoRank) {
-        if (lottoRank.matchCount == number) {
-            return true;
-        }
-        return false;
+        return lottoRank.matchCount == number;
     }
 
     private static LottoRank checkBonusRank(boolean matchBonus) {

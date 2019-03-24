@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class EarningRate {
 
@@ -11,7 +12,7 @@ public class EarningRate {
         this.rate = (double) winningMoney / lottoMoney.money;
     }
 
-    private long sumWinningMoney(HashMap<LottoRank, Integer> rankResult) {
+    private long sumWinningMoney(Map<LottoRank, Integer> rankResult) {
         long winningMoney = 0;
         for (LottoRank lottoRank : rankResult.keySet()) {
             winningMoney += lottoRank.money * rankResult.get(lottoRank);
