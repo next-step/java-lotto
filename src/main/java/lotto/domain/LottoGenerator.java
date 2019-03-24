@@ -14,7 +14,7 @@ public class LottoGenerator {
   public static Set<LottoNumber> generate() {
 
     List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.MINIMUM, LottoNumber.MAXIMUM)
-        .mapToObj(LottoNumber::new)
+        .mapToObj(LottoNumber::getInstance)
         .collect(Collectors.toList());
     Collections.shuffle(lottoNumbers);
 

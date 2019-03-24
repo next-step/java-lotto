@@ -13,7 +13,10 @@ public class WinNumbersTest {
 
     // Given
     Set<LottoNumber> lottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 19);
-    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(1, 32, 10, 4, 26, 28));
+
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 32, 10, 4, 26, 28);
+    LottoNumber additionNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
 
     // When
     long matchCount = winNumbers.matchCount(lottoNumbers);
@@ -27,7 +30,10 @@ public class WinNumbersTest {
 
     // Given
     Set<LottoNumber> lottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 19);
-    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(1, 38, 10, 7, 17, 45));
+
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 38, 10, 7, 17, 45);
+    LottoNumber additionNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
 
     // When
     long matchCount = winNumbers.matchCount(lottoNumbers);

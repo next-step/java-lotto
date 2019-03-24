@@ -21,8 +21,9 @@ public class ConsoleView {
     int insertMoney = consoleInputView.inputPurchaseAmount();
     MyLottos myLottos = buyLottos(insertMoney);
 
-    String winNumberString = consoleInputView.inputWinNumbers();
-    WinNumbers winNumbers = winNumbers(winNumberString);
+    String inputWinNumbers = consoleInputView.inputWinNumbers();
+    String inputAdditionNumber = consoleInputView.inputWinNumbers();
+    WinNumbers winNumbers = winNumbers(inputWinNumbers, inputAdditionNumber);
 
     winState(myLottos, winNumbers);
   }
@@ -50,13 +51,14 @@ public class ConsoleView {
 
   }
 
-  private static WinNumbers winNumbers(String winNumberString) {
+  private static WinNumbers winNumbers(String inputWinNumbers, String inputAdditionNumber) {
 
-    String[] winNumberArray = winNumberString.split(",");
+    String[] winNumberArray = inputWinNumbers.split(",");
     Set<LottoNumber> winNumbers = Arrays.stream(winNumberArray)
-        .map(winNumber -> new LottoNumber(Integer.parseInt(winNumber.trim())))
+        .map(winNumber -> LottoNumber.getInstance(Integer.parseInt(winNumber.trim())))
         .collect(Collectors.toSet());
 
-    return new WinNumbers(winNumbers);
+    LottoNumber additionalNumber = LottoNumber.getInstance(Integer.parseInt(inputAdditionNumber.trim()));
+    return new WinNumbers(winNumbers, additionalNumber);
   }
 }

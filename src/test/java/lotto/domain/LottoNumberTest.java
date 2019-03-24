@@ -13,7 +13,7 @@ public class LottoNumberTest {
     int number = 0;
 
     // When
-    new LottoNumber(number);
+    LottoNumber.getInstance(number);
   }
 
   @Test
@@ -23,7 +23,7 @@ public class LottoNumberTest {
     int number = 23;
 
     // When
-    LottoNumber lottoNumber = new LottoNumber(number);
+    LottoNumber lottoNumber = LottoNumber.getInstance(number);
 
     // Then
     assertThat(lottoNumber).isNotNull();
@@ -36,6 +36,6 @@ public class LottoNumberTest {
     int number = 50;
 
     // When
-    new LottoNumber(number);
+    LottoNumber.getInstance(number);
   }
 }

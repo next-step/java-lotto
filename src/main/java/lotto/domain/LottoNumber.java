@@ -1,38 +1,38 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoNumber {
+
+  private static final Map<Integer, LottoNumber> reusableLottoNumber = new HashMap<>();
 
   public final static int MINIMUM = 1;
   public final static int MAXIMUM = 45;
 
   private final int number;
 
-  public LottoNumber(int number) {
-
-    if (number < MINIMUM || number > MAXIMUM) {
-      throw new IllegalArgumentException();
-    }
+  private LottoNumber(int number) {
 
     this.number = number;
+    if (isInvalidRange(number < MINIMUM, number > MAXIMUM)) {
+      throw new IllegalArgumentException();
+    }
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+  public static LottoNumber getInstance(int number) {
+
+    if(!reusableLottoNumber.containsKey(number)) {
+
+      LottoNumber lottoNumber= new LottoNumber(number);
+      reusableLottoNumber.put(number, lottoNumber);
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    LottoNumber that = (LottoNumber) o;
-    return number == that.number;
+
+    return reusableLottoNumber.get(number);
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(number);
+  private boolean isInvalidRange(boolean b, boolean b2) {
+    return b || b2;
   }
 
   @Override

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 import org.junit.Test;
 
 public class WinStatsTest {
@@ -21,7 +22,9 @@ public class WinStatsTest {
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
     MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
-    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    LottoNumber additionNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
 
     WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
@@ -42,7 +45,9 @@ public class WinStatsTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
     MyLottos myLottos = new MyLottos(buyMoney, Collections.singletonList(lotto));
 
-    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    LottoNumber additionNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
 
     WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
@@ -63,7 +68,9 @@ public class WinStatsTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(2, 41, 13, 31, 26, 18));
     MyLottos myLottos = new MyLottos(buyMoney, Collections.singletonList(lotto));
 
-    WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    LottoNumber additionNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
 
     WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
