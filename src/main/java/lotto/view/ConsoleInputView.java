@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInputView {
+    private static final int MIN_MANUAL_TIMES = 1;
+
     private ConsoleInputView() {
     }
 
@@ -19,9 +21,13 @@ public class ConsoleInputView {
     }
 
     public static List<String> inputManualLottos(Scanner scanner, long times) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
         List<String> lottos = new ArrayList<>();
+
+        if (times < MIN_MANUAL_TIMES) {
+            return lottos;
+        }
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         for (int i = 0; i < times; i++) {
             String lottoNumbers = scanner.nextLine();
