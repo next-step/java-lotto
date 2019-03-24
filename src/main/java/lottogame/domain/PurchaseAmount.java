@@ -11,8 +11,8 @@ public class PurchaseAmount {
 
     private final Validatable<Long> validator = new PurchaseAmountValidator();
 
-    public PurchaseAmount(InputLine inputLine) {
-        this(Long.parseLong(inputLine.getLine()));
+    public PurchaseAmount(String inputLine) {
+        this(Long.parseLong(inputLine));
     }
 
     public PurchaseAmount(long value) {

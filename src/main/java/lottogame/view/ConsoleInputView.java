@@ -1,10 +1,14 @@
 package lottogame.view;
 
-import lottogame.domain.*;
-import lottogame.inputgetter.*;
+import lottogame.domain.LottoNumberPackage;
+import lottogame.domain.PurchaseAmount;
+import lottogame.domain.PurchaseCount;
+import lottogame.domain.WinningInfo;
+import lottogame.util.StringUtils;
+import lottogame.validator.InputLineValidator;
+import lottogame.validator.Validatable;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
@@ -13,6 +17,7 @@ public class ConsoleInputView {
     public static final String NUMBER_DELIMITER = ",";
 
     private static Scanner scanner = new Scanner(System.in);
+    private final static Validatable<String> validator = new InputLineValidator();
 
     public ConsoleInputView(Scanner scanner) {
         ConsoleInputView.scanner = scanner;
@@ -65,11 +70,9 @@ public class ConsoleInputView {
         System.out.println("\n보너스 볼을 입력해 주세요.");
     }
 
-    public static InputLine getInputLine() {
+    public static String getInputLine() {
         String inputLine = scanner.nextLine();
-
-        return Optional.ofNullable(inputLine)
-                        .map(InputLine::new)
-                        .get();
+        validator.validate(inputLine);
+        return StringUtils.removeWhitespace(inputLine);
     }
 }

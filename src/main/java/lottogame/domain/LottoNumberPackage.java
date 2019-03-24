@@ -19,8 +19,8 @@ public class LottoNumberPackage {
     private final Set<LottoNumber> numbers;
     private final Validatable<Set<LottoNumber>> validator = new LottoNumberPackageValidator();
 
-    public LottoNumberPackage(InputLine inputLine) {
-        this(getNumbers(inputLine.getLine().split(NUMBER_DELIMITER)));
+    public LottoNumberPackage(String inputLine) {
+        this(getNumbers(inputLine.split(NUMBER_DELIMITER)));
     }
 
     public LottoNumberPackage(Set<LottoNumber> numbers) {

@@ -16,29 +16,29 @@ public class LottoNumberPackageTest {
 
     @Test(expected = NullPointerException.class)
     public void LottoGame_for_null_InputLine() {
-        new LottoNumberPackage((InputLine)null);
+        new LottoNumberPackage((String)null);
     }
 
     @Test(expected = NumberFormatException.class)
     public void LottoGame_for_string_inputLine() {
-        new LottoNumberPackage(new InputLine("aaa"));
+        new LottoNumberPackage("aaa");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void LottoGame_for_InputLine_smaller_than_LOTTO_GAME_SIZE() {
-        new LottoNumberPackage(new InputLine("1, 2, 3, 4, 5"));
+        new LottoNumberPackage("1, 2, 3, 4, 5");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void LottoGame_for_InputLine_larger_than_LOTTO_GAME_SIZE() {
-        new LottoNumberPackage(new InputLine("1, 2, 3, 4, 5, 6, 7"));
+        new LottoNumberPackage("1, 2, 3, 4, 5, 6, 7");
     }
 
     @Test
     public void LottoGame_for_InputLine() {
         Set<LottoNumber> expected = getRangedNumbers(1, 6);
 
-        LottoNumberPackage lottoNumberPackage = new LottoNumberPackage(new InputLine("1, 2, 3, 4, 5, 6"));
+        LottoNumberPackage lottoNumberPackage = new LottoNumberPackage("1,2,3,4,5,6");
 
         assertEquals(expected.toString(), lottoNumberPackage.getNumbers().toString());
     }

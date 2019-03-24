@@ -7,8 +7,8 @@ public class PurchaseCount {
     private final long count;
     private final long manualCount;
 
-    public PurchaseCount(long count, InputLine inputLine) {
-        this(count, Long.parseLong(inputLine.getLine()));
+    public PurchaseCount(long count, String inputLine) {
+        this(count, Long.parseLong(inputLine));
     }
 
     public PurchaseCount(long count, long manualCount) {
