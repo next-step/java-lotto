@@ -23,7 +23,7 @@ public class WinningLottoTest {
                         LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
                         LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))), LottoNumber.of(45));
 
-        assertThat(winningLotto.calculatePrize(secondLotto)).isEqualTo(Rank.SECOND);
-        assertThat(winningLotto.calculatePrize(thirdLotto)).isEqualTo(Rank.THIRD);
+        assertThat(winningLotto.determineRank(secondLotto)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.determineRank(thirdLotto)).isEqualTo(Rank.THIRD);
     }
 }

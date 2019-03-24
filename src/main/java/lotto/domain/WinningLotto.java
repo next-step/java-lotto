@@ -25,7 +25,7 @@ public class WinningLotto {
         return anyLotto.contains(bonus);
     }
 
-    public Rank calculatePrize(Lotto anyLotto) {
+    public Rank determineRank(Lotto anyLotto) {
         int count = this.countMatches(anyLotto);
         boolean matchBonus = this.matchBonus(anyLotto);
 

@@ -25,14 +25,14 @@ public class WinningResults {
     }
 
     public double calculateEarningsRate(final long money) {
-        long totalPrizeMoney = 0;
+        long totalWinningMoney = 0;
 
-        Set<Rank> winningResultsKeys = winningResults.keySet();
+        Set<Rank> ranks = winningResults.keySet();
 
-        for (Rank rank : winningResultsKeys) {
-            totalPrizeMoney += rank.getMoney() * winningResults.get(rank).getMatchCount();
+        for (Rank rank : ranks) {
+            totalWinningMoney += rank.calculateWinningMoney(winningResults.get(rank));
         }
 
-        return totalPrizeMoney / (double) money;
+        return totalWinningMoney / (double) money;
     }
 }

@@ -54,6 +54,10 @@ public enum Rank {
         return true;
     }
 
+    public long calculateWinningMoney(RankCount rankCount) {
+        return rankCount.calculate(money);
+    }
+
     @Override
     public String toString() {
         String output = String.format("%d개 일치(%d원)", countOfMatch, money);

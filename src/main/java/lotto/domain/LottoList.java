@@ -38,7 +38,7 @@ public class LottoList {
         int count = 0;
 
         for (Lotto lotto : lottos) {
-            if (winningLotto.calculatePrize(lotto) == targetRank) {
+            if (winningLotto.determineRank(lotto) == targetRank) {
                 count++;
             }
         }

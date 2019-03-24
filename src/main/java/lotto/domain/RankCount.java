@@ -15,6 +15,10 @@ public class RankCount {
         return matchCount;
     }
 
+    public long calculate(long money) {
+        return matchCount * money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
