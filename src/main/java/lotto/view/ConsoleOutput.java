@@ -1,13 +1,12 @@
 package lotto.view;
 
+import lotto.domain.LottoList;
+import lotto.domain.Prize;
+import lotto.domain.WinningResults;
+
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
-import lotto.domain.Lotto;
-import lotto.domain.LottoList;
-import java.util.stream.Collectors;
-import lotto.domain.Prize;
-import lotto.domain.WinningResults;
 
 public class ConsoleOutput {
 
@@ -16,18 +15,14 @@ public class ConsoleOutput {
     }
 
     public static void printLottos(LottoList lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            String output = lotto.getLottoNumbers().stream()
-                    .map(lottoNumber -> lottoNumber.getValue().toString())
-                    .collect(Collectors.joining(", "));
 
-            System.out.println(output);
-        }
+        lottos.forEach(System.out::println);
 
         System.out.println();
     }
 
     public static void printWinningStatistics(WinningResults winningResults) {
+
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -36,11 +31,13 @@ public class ConsoleOutput {
         reversedKeyPrizes.addAll(winningResults.keySet());
 
         for (Prize prize : reversedKeyPrizes) {
+            if (!prize.isInTop5()) {
+                continue;
+            }
+
             String output = String.format(
-                "%d개 일치(%d원)-%d개",
-                prize.getMatchingCount(),
-                prize.getMoney(),
-                winningResults.get(prize).getMatchingCount());
+                prize + " - %d개",
+                winningResults.get(prize).getMatchCount());
 
             System.out.println(output);
         }

@@ -1,31 +1,42 @@
 package lotto.domain;
 
+import lotto.LottoNumberGenerator;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-    private Integer value;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
-    public LottoNumber(Integer value) {
-        if (value < 1) {
-            throw new IllegalArgumentException("1 OR MORE");
+    private final int value;
+
+    private static final Map<Integer, LottoNumber> values = new HashMap<>();
+    static {
+        for (int i = MIN; i <= MAX; i++) {
+            values.put(i, new LottoNumber(i));
+        }
+    }
+
+    public static LottoNumber of(Integer value) {
+        if (value < MIN) {
+            throw new IllegalArgumentException(MIN +" OR MORE");
         }
 
-        if (value > 45) {
-            throw new IllegalArgumentException("45 OR LESS");
+        if (value > MAX) {
+            throw new IllegalArgumentException(MAX + " OR LESS");
         }
 
+        return values.get(value);
+    }
+
+    public static LottoNumber of() {
+        return values.get(LottoNumberGenerator.generate(MIN, MAX));
+    }
+
+    private LottoNumber(int value) {
         this.value = value;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return "LottoNumber{" +
-                "value=" + value +
-                '}';
     }
 
     @Override
@@ -39,5 +50,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }

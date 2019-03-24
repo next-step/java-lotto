@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class LottoList {
 
@@ -27,29 +28,28 @@ public class LottoList {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return this.lottos;
-    }
-
     public int size() {
         return this.lottos.size();
     }
 
-    boolean add(Lotto lotto) {
-        return this.lottos.add(lotto);
-    }
-
-    int find(Prize prize, Lotto winningLotto) {
-        LottoList winningLottos = new LottoList();
+    int count(Prize targetPrize, WinningLotto winningLotto) {
+        int count = 0;
 
         for (Lotto lotto : this.lottos) {
-            int containsCount = lotto.getContainsCount(winningLotto);
-
-            if (containsCount == prize.getMatchingCount()) {
-                winningLottos.add(lotto);
+            if (winningLotto.calculatePrize(lotto) == targetPrize) {
+                count++;
             }
         }
 
-        return winningLottos.size();
+        return count;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottos);
+    }
+
+    public void forEach(Consumer<Lotto> printConsumer) {
+        lottos.forEach(printConsumer);
     }
 }
