@@ -12,8 +12,6 @@ public class LottoStore {
 
   private final static int LOTTO_AMOUNT = 1_000;
 
-  private final static int FROM_INDEX = 0;
-
   public static List<Lotto> buy(Money insertMoney) {
 
     int buyQuantity = insertMoney.buy(LOTTO_AMOUNT);
@@ -21,19 +19,9 @@ public class LottoStore {
     List<Lotto> lottos = new ArrayList<>();
     for(int buyIndex = 0; buyIndex < buyQuantity; buyIndex++) {
 
-      Set<LottoNumber> lottoNumbers = generateLottoNumbers();
+      Set<LottoNumber> lottoNumbers = LottoGenerator.generate();
       lottos.add(new Lotto(lottoNumbers));
     }
     return lottos;
-  }
-
-  private static Set<LottoNumber> generateLottoNumbers() {
-
-    List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.MINIMUM, LottoNumber.MAXIMUM)
-        .mapToObj(LottoNumber::new)
-        .collect(Collectors.toList());
-    Collections.shuffle(lottoNumbers);
-
-    return new HashSet<>(lottoNumbers.subList(FROM_INDEX, FROM_INDEX + Lotto.NUMBERS_SIZE));
   }
 }
