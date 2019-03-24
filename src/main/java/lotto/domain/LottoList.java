@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoList {
 
@@ -17,10 +19,10 @@ public class LottoList {
             throw new IllegalArgumentException("1 OR MORE");
         }
 
-        this.lottos = new ArrayList<>(lottosCount);
+        lottos = new ArrayList<>(lottosCount);
 
         for (int i = 0; i < lottosCount; i++) {
-            this.lottos.add(new Lotto());
+            lottos.add(new Lotto());
         }
     }
 
@@ -29,13 +31,13 @@ public class LottoList {
     }
 
     public int size() {
-        return this.lottos.size();
+        return lottos.size();
     }
 
     int count(Prize targetPrize, WinningLotto winningLotto) {
         int count = 0;
 
-        for (Lotto lotto : this.lottos) {
+        for (Lotto lotto : lottos) {
             if (winningLotto.calculatePrize(lotto) == targetPrize) {
                 count++;
             }
@@ -44,12 +46,25 @@ public class LottoList {
         return count;
     }
 
+    public void forEach(Consumer<Lotto> printConsumer) {
+        lottos.forEach(printConsumer);
+    }
+
+    public boolean add(Lotto lotto) {
+        return lottos.add(lotto);
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottos);
     }
 
-    public void forEach(Consumer<Lotto> printConsumer) {
-        lottos.forEach(printConsumer);
+    private Stream<Lotto> stream() {
+        return lottos.stream();
+    }
+
+    public static LottoList merge(LottoList a, LottoList b) {
+        return new LottoList(Stream.concat(a.stream(), b.stream())
+            .collect(Collectors.toList()));
     }
 }

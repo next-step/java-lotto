@@ -17,4 +17,14 @@ public class LottoListTest {
     public void 로또_0개_발급() {
         new LottoList(0);
     }
+
+    @Test
+    public void 로또_2개_합치기() {
+        LottoList lottoList1 = new LottoList(1);
+        LottoList lottoList2 = new LottoList(1);
+
+        LottoList mergeList = LottoList.merge(lottoList1, lottoList2);
+
+        assertThat(mergeList.size()).isEqualTo(2);
+    }
 }
