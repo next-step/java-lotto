@@ -71,7 +71,6 @@ public class LottoNumberParserTest {
         assertThat(winner.isEqualTo(sameAsWinner)).isTrue();
     }
 
-
     @Test
     public void 문자열을_LottoBundle_객체로_변환() {
         // given
@@ -93,6 +92,7 @@ public class LottoNumberParserTest {
         assertThat(lottos.get(1).isEqualTo(lotto2)).isTrue();
         assertThat(lottos.get(2).isEqualTo(lotto3)).isTrue();
     }
+
     private List<LottoNumber> getLottoNumbers(int... numbers) {
         return Arrays.stream(numbers)
                 .mapToObj(LottoNumber::getInstance)
