@@ -1,36 +1,23 @@
 package lotto;
 
-import lotto.util.InputUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FixedLottoGenerator implements LottoGenerator {
-    private List<LottoNumber> numbers;
-    private LottoNumber bonusBall;
+import static lotto.util.InputUtil.convertToInt;
+import static lotto.util.InputUtil.split;
 
-    public FixedLottoGenerator(final List<Integer> numbers) {
-        this.numbers = convertToLottoNumber(numbers);
-    }
+public class FixedLottoGenerator extends LottoGenerator {
+    private Set<LottoNumber> numbers;
 
-    public FixedLottoGenerator(final List<Integer> numbers, int bonusBall) {
-        this.numbers = convertToLottoNumber(numbers);
-        this.bonusBall = LottoNumber.valueOf(bonusBall);
+    public FixedLottoGenerator(final String numbers) {
+        this.numbers = convertToLottoNumber(convertToInt(split(numbers)));
     }
 
     @Override
     public Lotto generateLotto() {
-        List<LottoNumber> newNumbers = new ArrayList<>(numbers);
-        numbers = numbers.stream().map(LottoNumber::increase).collect(Collectors.toList());
+        Set<LottoNumber> newNumbers = new HashSet<>(numbers);
+        numbers = numbers.stream().map(LottoNumber::increase).collect(Collectors.toSet());
         return new Lotto(newNumbers);
-    }
-
-    public WinningLotto generateWinningLotto() {
-        return new WinningLotto(generateLotto(), bonusBall);
-    }
-
-    private List<LottoNumber> convertToLottoNumber(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::valueOf).collect(Collectors.toList());
     }
 }

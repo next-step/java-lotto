@@ -1,40 +1,36 @@
 package lotto.view;
 
-import lotto.Lotto;
+import lotto.LottosResult;
 import lotto.Prize;
-import lotto.PurchaseHistory;
-import lotto.StatisticsResult;
+import lotto.PurchasedLottos;
 
 import java.text.DecimalFormat;
-import java.util.List;
+import java.text.MessageFormat;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class OutputView {
     private static final String DIVISION_LINE = "---------";
-    private static final String NUMBER_OF_LOTTO_MENT = "를 구매했습니다.";
     private static final String WINNING_STATISTICS_INTRODUCTION_MENT = "당첨 통계";
     private static final String NUMBER_UNIT_MENT = "개";
     private static final String RATE_OF_RETURN_FIRST_MENT = "총 수익률은 ";
     private static final String RATE_OF_RETURN_SECOND_MENT = "입니다.";
 
-    public static void printPurchaseResult(PurchaseHistory purchase) {
-        producePurchaseHistoryResult(purchase.getLottos());
+    public static void printPurchaseResult(PurchasedLottos purchase) {
+        producePurchaseHistoryResult(purchase);
     }
 
-    private static void producePurchaseHistoryResult(List<Lotto> lottos) {
-        System.out.print(lottos.size());
-        System.out.print(NUMBER_UNIT_MENT);
-        System.out.println(NUMBER_OF_LOTTO_MENT);
-
-        lottos.stream().forEach(System.out::println);
+    private static void producePurchaseHistoryResult(PurchasedLottos purchase) {
+        String purchaseResult = "수동으로 {0}개, 자동으로 {1}개를 구매했습니다.";
+        System.out.println(MessageFormat.format(purchaseResult, purchase.getNumberOfManualLotto(), purchase.getLottos().size() - purchase.getNumberOfManualLotto()));
+        purchase.getLottos().forEach(System.out::println);
     }
 
-    public static void printStatisticsResult(StatisticsResult statisticsResult) {
+    public static void printStatisticsResult(LottosResult lottosResult) {
         System.out.println(WINNING_STATISTICS_INTRODUCTION_MENT);
         System.out.println(DIVISION_LINE);
-        producePrizeCountResult(statisticsResult.getPrizeCount());
-        produceRateOfReturnResult(statisticsResult.getRateOfReturn());
+        producePrizeCountResult(lottosResult.getPrizeCount());
+        produceRateOfReturnResult(lottosResult.getRateOfReturn());
     }
 
     private static void producePrizeCountResult(Map<Prize, Integer> prizeCount) {

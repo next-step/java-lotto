@@ -11,19 +11,24 @@ public class ConsoleApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
+        LottoGenerator randomLottoGenerator = RandomLottoGenerator.getInstance();
+        LottoGame lottoGame = LottoGame.getInstance(randomLottoGenerator);
+
         int amount = InputView.inputPurchaseAmount(scanner);
-        PurchaseHistory purchase = LottoGame.purchase(amount, randomLottoGenerator);
+        Money payment = new Money(amount);
+
+        int numberOfManualLotto = InputView.inputNumberOfManualLotto(scanner);
+        List<String> manualLotto = InputView.inputManualLotto(scanner, numberOfManualLotto);
+        PurchasedLottos purchase = lottoGame.purchase(payment, manualLotto);
 
         OutputView.printPurchaseResult(purchase);
 
-        List<Integer> previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
+        String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
         int bonusBallNumber = InputView.inputBonusBall(scanner);
-        WinningLotto previousWinningLotto = new FixedLottoGenerator(previousWinningLottoNumbers, bonusBallNumber).generateWinningLotto();
+        WinningLotto previousWinningLotto = randomLottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
+        LottosResult lottosResult = lottoGame.analyse(purchase, previousWinningLotto, payment);
 
-        StatisticsResult statisticsResult = LottoGame.analyse(purchase, previousWinningLotto);
-
-        OutputView.printStatisticsResult(statisticsResult);
+        OutputView.printStatisticsResult(lottosResult);
         scanner.close();
     }
 }

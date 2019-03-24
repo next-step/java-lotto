@@ -9,13 +9,14 @@ public class LottoNumber {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
     private static final Map<Integer, LottoNumber> cachedLottoNumbers = new HashMap<>();
-    private final int number;
 
     static {
         IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                 .boxed()
                 .forEach(number -> cachedLottoNumbers.put(number, new LottoNumber(number)));
     }
+
+    private final int number;
 
     private LottoNumber(int number) {
         this.number = number;
@@ -33,7 +34,7 @@ public class LottoNumber {
     }
 
     public LottoNumber increase() {
-        if(this.number == MAXIMUM_NUMBER) {
+        if (this.number == MAXIMUM_NUMBER) {
             return valueOf(MINIMUM_NUMBER);
         }
         return valueOf(this.number + MINIMUM_NUMBER);

@@ -9,10 +9,10 @@ public enum Prize {
     NO_PRIZE(0, 0, false);
 
     private final int numberOfMatch;
-    private final long prizeMoney;
+    private final int prizeMoney;
     private final boolean isMatchingBonus;
 
-    Prize(int numberOfMatch, long prizeMoney, boolean isMatchingBonus) {
+    Prize(int numberOfMatch, int prizeMoney, boolean isMatchingBonus) {
         this.numberOfMatch = numberOfMatch;
         this.prizeMoney = prizeMoney;
         this.isMatchingBonus = isMatchingBonus;
@@ -28,13 +28,13 @@ public enum Prize {
     }
 
     private boolean isEqual(int numberOfMatch, boolean isMatchingBonus) {
-        if(numberOfMatch == Prize.SECOND_PRIZE.numberOfMatch) {
+        if (numberOfMatch == Prize.SECOND_PRIZE.numberOfMatch) {
             return this.numberOfMatch == numberOfMatch && this.isMatchingBonus == isMatchingBonus;
         }
         return this.numberOfMatch == numberOfMatch;
     }
 
-    public long calculatePrizeMoneyBy(int count) {
+    public int calculatePrizeMoneyBy(int count) {
         return count * prizeMoney;
     }
 
