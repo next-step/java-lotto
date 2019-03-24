@@ -1,40 +1,46 @@
 package domain;
 
-import java.util.*;
-import java.util.stream.Stream;
+import util.RandomNumberGenerator;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     private static final Integer limitCount = 6;
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        sort(Stream.generate(LottoNumber::getInstance)
-            .distinct()
-            .limit(limitCount));
-    }
-
-    public Lotto(List<Integer> numbers){
-        if(numbers.stream().distinct().count() != limitCount){
+    private Lotto(Set<LottoNumber> lottoNumbers) {
+        if(lottoNumbers.size() != limitCount){
             throw new IllegalArgumentException();
         }
 
-        sort(numbers.stream()
-            .map(LottoNumber::getInstance));
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(Integer ...numbers){
-        this(Arrays.asList(numbers));
+    public static Lotto auto() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        while(lottoNumbers.size() < limitCount) {
+            lottoNumbers.add(LottoNumber.of(RandomNumberGenerator.generateNumber(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)));
+        }
+
+        return new Lotto(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public static Lotto manual(List<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        for (Integer number : numbers) {
+            lottoNumbers.add(LottoNumber.of(number));
+        }
+
+        return new Lotto(lottoNumbers);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    private void sort(Stream<LottoNumber> lottoNumberStream){
-        lottoNumberStream
-            .sorted(Comparator.comparing(LottoNumber::getNumber))
-            .forEach(lottoNumbers::add);
     }
 
     public boolean contains(LottoNumber lottoNumber) {

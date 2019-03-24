@@ -2,6 +2,7 @@ package view;
 
 import util.StringParser;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInputView {
@@ -12,11 +13,11 @@ public class ConsoleInputView {
         return scanner.nextInt();
     }
 
-    public static Integer[] inputWinningNumbers(){
+    public static List<Integer> inputWinningNumbers(){
         System.out.println("지난 주 당첨번호를 입력해주세요.");
         String str = scanner.next();
 
-        return StringParser.strToIntegerArray(str);
+        return StringParser.strToIntegerList(str);
     }
 
     public static Integer inputBonusNumber() {

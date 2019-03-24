@@ -1,17 +1,19 @@
 package domain;
 
+import java.util.List;
+
 public class WinningLotto {
 
     private Lotto winningNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public WinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
         if(winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
 
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+        this.winningNumbers = Lotto.manual(winningNumbers);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public Rank matchLotto(Lotto lotto) {

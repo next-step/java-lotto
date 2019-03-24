@@ -12,10 +12,6 @@ public class LottoResult {
             .collect(Collectors.groupingBy(r -> r, Collectors.counting()));
     }
 
-    public LottoResult(Rank ...ranks) {
-        this(Arrays.asList(ranks));
-    }
-
     public Map<Rank, Long> getRankGroup() {
         return rankGroup;
     }

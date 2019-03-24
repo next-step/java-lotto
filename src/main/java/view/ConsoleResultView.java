@@ -17,6 +17,7 @@ public class ConsoleResultView {
         for (Lotto lotto : lottos) {
             String str = "[" ;
             str += (lotto.getLottoNumbers().stream()
+                .sorted()
                 .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ")));

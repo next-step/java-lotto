@@ -12,9 +12,8 @@ public class ConsoleMain {
         ConsoleResultView.printLottoCount(lottos);
         ConsoleResultView.printLottosInfo(lottos);
 
-        Lotto winningNumbers = new Lotto(ConsoleInputView.inputWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.getInstance(ConsoleInputView.inputBonusNumber());
-        lottoMachine.initWinningLotto(new WinningLotto(winningNumbers, bonusNumber));
+        WinningLotto winningLotto = new WinningLotto(ConsoleInputView.inputWinningNumbers(), ConsoleInputView.inputBonusNumber());
+        lottoMachine.initWinningLotto(winningLotto);
 
         LottoResult lottoResult = lottoMachine.createLottoResult(lottos);
         ConsoleResultView.printTotalResult(

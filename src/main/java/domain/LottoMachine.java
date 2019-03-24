@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.auto());
         }
 
         return lottos;
@@ -27,15 +26,11 @@ public class LottoMachine {
 
     public LottoResult createLottoResult(List<Lotto> lottos){
         if(winningLotto == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException();
         }
 
         return lottos.stream()
             .map(winningLotto::matchLotto)
             .collect(Collectors.collectingAndThen(Collectors.toList(), LottoResult::new));
-    }
-
-    public LottoResult createLottoResult(Lotto ...lottos){
-        return createLottoResult(Arrays.asList(lottos));
     }
 }

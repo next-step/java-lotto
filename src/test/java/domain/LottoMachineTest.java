@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,19 +19,19 @@ public class LottoMachineTest {
     public void 당첨번호가_설정되지_않았는데_순위를_얻어오면_예외가_발생한다() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        lottoMachine.createLottoResult(new Lotto(1,2,3,4,5,6));
+        lottoMachine.createLottoResult(Arrays.asList(Lotto.manual(Arrays.asList(1,2,3,4,5,6))));
     }
 
     @Test
     public void 로또들의_결과를_생성한다() {
         LottoMachine lottoMachine = new LottoMachine();
         lottoMachine.initWinningLotto(
-            new WinningLotto(new Lotto(1,2,3,4,5,6), LottoNumber.getInstance(7)));
+            new WinningLotto(Arrays.asList(1,2,3,4,5,6), 7));
 
         LottoResult lottoResult = lottoMachine.createLottoResult(
-            new Lotto(1,2,3,4,5,6),
-            new Lotto(1,2,3,4,5,6),
-            new Lotto(1,2,3,4,5,7));
+            Arrays.asList(Lotto.manual(Arrays.asList(1,2,3,4,5,6)),
+                Lotto.manual(Arrays.asList(1,2,3,4,5,6)),
+                Lotto.manual(Arrays.asList(1,2,3,4,5,7))));
 
         assertThat(lottoResult).isNotNull();
     }
