@@ -12,7 +12,7 @@ public class LottoMatcher {
 
         for (Rank rank : ranks) {
             winningResults.put(
-                rank, new WinningResult(rank, lottos.count(rank, winningLotto)));
+                rank, new RankCount(rank, lottos.count(rank, winningLotto)));
         }
 
         return winningResults;

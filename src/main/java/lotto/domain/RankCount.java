@@ -2,11 +2,11 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class WinningResult{
+public class RankCount {
     private Rank rank;
     private int matchCount;
 
-    public WinningResult(Rank rank, int matchCount) {
+    public RankCount(Rank rank, int matchCount) {
         this.rank = rank;
         this.matchCount = matchCount;
     }
@@ -19,7 +19,7 @@ public class WinningResult{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WinningResult that = (WinningResult) o;
+        RankCount that = (RankCount) o;
         return matchCount == that.matchCount && rank == that.rank;
     }
 
@@ -30,7 +30,7 @@ public class WinningResult{
 
     @Override
     public String toString() {
-        return "WinningResult{" +
+        return "RankCount{" +
                 "rank=" + rank +
                 ", matchCount=" + matchCount +
                 '}';

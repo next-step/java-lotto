@@ -6,18 +6,18 @@ import java.util.TreeMap;
 
 public class WinningResults {
 
-    private Map<Rank, WinningResult> winningResults;
+    private Map<Rank, RankCount> winningResults;
 
     public WinningResults() {
         winningResults = new TreeMap<>();
     }
 
-    public WinningResult get(Rank rank) {
+    public RankCount get(Rank rank) {
         return winningResults.get(rank);
     }
 
-    protected WinningResult put(Rank rank, WinningResult winningResult) {
-        return winningResults.put(rank, winningResult);
+    protected RankCount put(Rank rank, RankCount rankCount) {
+        return winningResults.put(rank, rankCount);
     }
 
     public Set<Rank> keySet() {
