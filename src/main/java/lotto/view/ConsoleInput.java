@@ -51,7 +51,7 @@ public class ConsoleInput {
                 String[] numbers = input.split(", ");
 
                 for (int i = 0; i < numbers.length; i++) {
-                    lottoNumbers.add(LottoNumber.of(Integer.parseInt(numbers[i])));
+                    lottoNumbers.add(LottoNumber.from(Integer.parseInt(numbers[i])));
                 }
 
                 lottoList.add(new Lotto(lottoNumbers));
@@ -87,7 +87,7 @@ public class ConsoleInput {
 
         while (bonusNumber == null) {
             try {
-                bonusNumber = LottoNumber.of(scanner.nextLine());
+                bonusNumber = LottoNumber.from(scanner.nextLine());
             } catch (RuntimeException exception) {
                 System.err.println(exception.getMessage());
                 System.out.println("보너스 볼 입력이 잘못 되었습니다.");

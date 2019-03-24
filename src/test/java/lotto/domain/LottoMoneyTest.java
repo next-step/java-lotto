@@ -30,22 +30,22 @@ public class LottoMoneyTest {
         final LottoMoney lottoMoney = new LottoMoney(money);
 
         final Lotto anyLotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
 
         final WinningLotto winningLotto = new WinningLotto(anyLotto);
 
         final LottoList lottos = new LottoList(Arrays.asList(
                 anyLotto,
                 new Lotto(Arrays.asList(
-                        LottoNumber.of(21), LottoNumber.of(22), LottoNumber.of(23),
-                        LottoNumber.of(24), LottoNumber.of(25), LottoNumber.of(26))),
+                        LottoNumber.from(21), LottoNumber.from(22), LottoNumber.from(23),
+                        LottoNumber.from(24), LottoNumber.from(25), LottoNumber.from(26))),
                 new Lotto(Arrays.asList(
-                        LottoNumber.of(31), LottoNumber.of(32), LottoNumber.of(33),
-                        LottoNumber.of(34), LottoNumber.of(35), LottoNumber.of(36))),
+                        LottoNumber.from(31), LottoNumber.from(32), LottoNumber.from(33),
+                        LottoNumber.from(34), LottoNumber.from(35), LottoNumber.from(36))),
                 new Lotto(Arrays.asList(
-                        LottoNumber.of(40), LottoNumber.of(41), LottoNumber.of(42),
-                        LottoNumber.of(43), LottoNumber.of(44), LottoNumber.of(45)))));
+                        LottoNumber.from(40), LottoNumber.from(41), LottoNumber.from(42),
+                        LottoNumber.from(43), LottoNumber.from(44), LottoNumber.from(45)))));
 
         WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
 

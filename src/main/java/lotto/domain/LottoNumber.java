@@ -17,7 +17,7 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber of(Integer value) {
+    public static LottoNumber from(Integer value) {
         if (value < MIN) {
             throw new IllegalArgumentException(MIN +" OR MORE");
         }
@@ -29,7 +29,7 @@ public class LottoNumber {
         return values.get(value);
     }
 
-    public static LottoNumber of(String value) {
+    public static LottoNumber from(String value) {
         return values.get(Integer.parseInt(value));
     }
 

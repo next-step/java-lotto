@@ -10,7 +10,7 @@ public class Lotto {
     private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
     static {
         for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
-            LOTTO_NUMBERS.add(LottoNumber.of(i));
+            LOTTO_NUMBERS.add(LottoNumber.from(i));
         }
     }
 
@@ -33,7 +33,7 @@ public class Lotto {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (int i = 0; i < numbers.length; i++) {
-            lottoNumbers.add(LottoNumber.of(numbers[i]));
+            lottoNumbers.add(LottoNumber.from(numbers[i]));
         }
 
         this.lottoNumbers = new HashSet<>(lottoNumbers);
