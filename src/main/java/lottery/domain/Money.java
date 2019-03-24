@@ -3,7 +3,8 @@ package lottery.domain;
 import java.util.Objects;
 
 public class Money {
-    private final int amount;
+
+    public final int amount;
 
     public Money(int amount) {
         this.amount = amount;
@@ -22,7 +23,7 @@ public class Money {
         return Objects.hash(amount);
     }
 
-    public int divide(int dividend) {
-        return this.amount / dividend;
+    public Money divide(int dividend) {
+        return new Money(this.amount / dividend);
     }
 }

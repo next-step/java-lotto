@@ -9,6 +9,7 @@ public class MoneyTest {
     @Test
     public void test_동일성() {
         Money money = new Money(1000);
+
         assertThat(money)
                 .isEqualTo(new Money(1000));
         assertThat(money)
@@ -18,7 +19,8 @@ public class MoneyTest {
     @Test
     public void test_나누기() {
         Money money = new Money(14000);
+
         assertThat(money.divide(1000))
-            .isEqualTo(14);
+            .isEqualTo(new Money(14));
     }
 }
