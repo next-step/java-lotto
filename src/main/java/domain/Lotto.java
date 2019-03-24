@@ -1,15 +1,18 @@
 package domain;
 
-import java.util.List;
-
 public class Lotto {
-    private List<Integer> lotto;
+    private LottoNumbers lotto;
 
-    public Lotto(List<Integer> lottoNumber) {
+    public Lotto(LottoNumbers lottoNumber) {
         this.lotto = lottoNumber;
     }
 
-    public List<Integer> getLotto() {
-        return lotto;
+    public boolean isContains(Integer winningNumber) {
+        return lotto.isContains(winningNumber);
+    }
+
+    @Override
+    public String toString() {
+        return lotto.toString();
     }
 }

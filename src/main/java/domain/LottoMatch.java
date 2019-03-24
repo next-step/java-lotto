@@ -29,7 +29,7 @@ public class LottoMatch {
     private int calculateMatchCount(Lotto lotto) {
         int matchCount = 0;
         for (Integer winningNumber : this.winningNumbers) {
-            if (lotto.getLotto().contains(winningNumber)) {
+            if (lotto.isContains(winningNumber)) {
                 matchCount++;
             }
         }

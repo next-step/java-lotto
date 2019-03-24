@@ -1,9 +1,9 @@
 package view;
 
+import domain.Lotto;
 import domain.LottoRank;
 import util.Calculator;
 
-import java.util.List;
 import java.util.Map;
 
 public class ResultView {
@@ -16,8 +16,8 @@ public class ResultView {
         return lottoCount;
     }
 
-    public static void printLotto(List<Integer> lotto) {
-        System.out.println(lotto.toString());
+    public static void printLotto(Lotto lotto) {
+        System.out.println(lotto);
     }
 
     public static void statisticsWinner(Map<LottoRank, Integer> produceResult) {
