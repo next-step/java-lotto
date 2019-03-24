@@ -9,7 +9,7 @@ public class Lotto {
 
     public Lotto() {
 
-        this.lottoNumbers = new HashSet<>();
+        lottoNumbers = new HashSet<>();
 
         while (lottoNumbers.size() != LOTTO_SIZE) {
             lottoNumbers.add(LottoNumber.of());
@@ -25,8 +25,19 @@ public class Lotto {
         }
     }
 
+    public Lotto(String[] numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < numbers.length; i++) {
+            lottoNumbers.add(LottoNumber.of(numbers[i]));
+        }
+
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
+        new Lotto(lottoNumbers);
+    }
+
     public boolean contains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public int countMatches(Lotto anyLotto) {

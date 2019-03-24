@@ -12,6 +12,11 @@ public class LottoMoney {
         this.money = money;
     }
 
+    public LottoMoney(String money) {
+        this.money = Long.parseLong(money);
+        new LottoMoney(this.money);
+    }
+
     public int countOfLotto() {
         return (int) (this.money / LOTTO_UNIT_PRICE);
     }

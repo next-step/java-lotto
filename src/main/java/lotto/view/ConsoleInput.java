@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
 
@@ -12,11 +13,23 @@ import spark.utils.StringUtils;
 
 public class ConsoleInput {
 
-    public static long inputPurchaseAmount() {
+    public static LottoMoney inputPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
 
-        return scanner.nextInt();
+        LottoMoney lottoMoney = null;
+
+        while (lottoMoney == null) {
+            try {
+                lottoMoney = new LottoMoney(scanner.nextLine());
+            } catch (RuntimeException exception) {
+                System.err.println(exception.getMessage());
+                System.out.println("구입금액이 잘못 입력되었습니다.");
+                System.out.println("다시 구입금액을 입력해 주세요.");
+            }
+        }
+
+        return lottoMoney;
     }
 
     public static LottoList inputManualLottos(final int limitLottoCount) {
@@ -34,13 +47,19 @@ public class ConsoleInput {
 
             List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-            String[] numbers = input.split(", ");
+            try {
+                String[] numbers = input.split(", ");
 
-            for (int i = 0; i < numbers.length; i++) {
-                lottoNumbers.add(LottoNumber.of(Integer.parseInt(numbers[i])));
+                for (int i = 0; i < numbers.length; i++) {
+                    lottoNumbers.add(LottoNumber.of(Integer.parseInt(numbers[i])));
+                }
+
+                lottoList.add(new Lotto(lottoNumbers));
+            } catch (RuntimeException exception) {
+                System.err.println(exception.getMessage());
+                System.out.println("로또 번호 입력이 잘못 되었습니다.");
+                System.out.println("다시 수동으로 구매할 번호를 입력해 주세요.");
             }
-
-            lottoList.add(new Lotto(lottoNumbers));
         }
 
         return lottoList;
@@ -48,19 +67,34 @@ public class ConsoleInput {
 
     public static WinningLotto inputLastWinningNumbers() {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
 
-        String[] numbers = input.split(", ");
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-
-        for (int i = 0; i < numbers.length; i++) {
-            winningNumbers.add(LottoNumber.of(Integer.parseInt(numbers[i])));
+        Lotto winningLotto = null;
+        while (winningLotto == null) {
+            try {
+                winningLotto = new Lotto(input.split(", "));
+            } catch (RuntimeException exception) {
+                System.err.println(exception.getMessage());
+                System.out.println("지난 주 당첨 번호 입력이 잘못 되었습니다.");
+                System.out.println("다시 지난 주 당첨 번호를 입력해 주세요.");
+            }
         }
 
+        LottoNumber bonusNumber = null;
         System.out.println("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusNumber = LottoNumber.of(scanner.nextInt());
 
-        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
+        while (bonusNumber == null) {
+            try {
+                bonusNumber = LottoNumber.of(scanner.nextLine());
+            } catch (RuntimeException exception) {
+                System.err.println(exception.getMessage());
+                System.out.println("보너스 볼 입력이 잘못 되었습니다.");
+                System.out.println("다시 보너스 볼을 입력해 주세요.");
+            }
+        }
+
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 }

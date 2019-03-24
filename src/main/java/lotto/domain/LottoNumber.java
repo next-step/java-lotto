@@ -31,6 +31,10 @@ public class LottoNumber {
         return values.get(value);
     }
 
+    public static LottoNumber of(String value) {
+        return values.get(Integer.parseInt(value));
+    }
+
     public static LottoNumber of() {
         return values.get(LottoNumberGenerator.generate(MIN, MAX));
     }
