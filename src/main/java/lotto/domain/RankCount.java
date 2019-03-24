@@ -11,10 +11,6 @@ public class RankCount {
         this.matchCount = matchCount;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
     public long calculate(long money) {
         return matchCount * money;
     }
