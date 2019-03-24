@@ -9,9 +9,9 @@ import java.util.List;
 
 @EqualsAndHashCode
 @ToString
-//TODO : 사이즈 6인 것 체크하는 로직 필요
 public class LotteryNumber {
 
+    public static final int ONE_GAME_NUMBERS_SIZE = 6;
     private List<Integer> numbers;
 
     public LotteryNumber() {
@@ -19,14 +19,14 @@ public class LotteryNumber {
     }
 
     public LotteryNumber(List<Integer> inputNumbers) {
-        System.out.println("하 제발요 ㅠㅠ " + inputNumbers.toString());
+        if(inputNumbers.size() != ONE_GAME_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("잘못 입력하신 것 같군요..");
+        }
         numbers = inputNumbers;
     }
 
     public List<Integer> extractRandomNumbers() {
-        numbers = sort(splitNumbers(suffle(LotteryNumberSet.lotteryNumbers)));
-        System.out.println("이번엔 여기가?   " + numbers.toString());
-        return numbers;
+        return sort(splitNumbers(suffle(LotteryNumberSet.lotteryNumbers)));
     }
 
     List<Integer> suffle(List<Integer> lotteryNumbers) {
@@ -39,21 +39,8 @@ public class LotteryNumber {
     }
 
     private List<Integer> splitNumbers(List<Integer> suffledNumbers) {
-        return suffledNumbers.subList(0, 6);
-    }
-
-    public int countMatchedNumber(int matchedNumberCount, int winningNumber) {
-        if(isContains(numbers, winningNumber)) {
-            matchedNumberCount++;
-        }
-        return matchedNumberCount;
-    }
-
-    private boolean isContains(List<Integer> lotteryNumbers,int winningNumber) {
-        if(lotteryNumbers.contains(winningNumber)) {
-            return true;
-        }
-        return false;
+        this.numbers = new ArrayList<>(suffledNumbers.subList(0, 6));
+        return numbers;
     }
 
     public String getStringForPrint() {
