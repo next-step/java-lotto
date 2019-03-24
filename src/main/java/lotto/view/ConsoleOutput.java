@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoList;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.WinningResults;
 
 import java.util.Collections;
@@ -27,17 +27,17 @@ public class ConsoleOutput {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Set<Prize> reversedKeyPrizes= new TreeSet<>(Collections.reverseOrder());
-        reversedKeyPrizes.addAll(winningResults.keySet());
+        Set<Rank> reversedKeyRanks = new TreeSet<>(Collections.reverseOrder());
+        reversedKeyRanks.addAll(winningResults.keySet());
 
-        for (Prize prize : reversedKeyPrizes) {
-            if (!prize.isInTop5()) {
+        for (Rank rank : reversedKeyRanks) {
+            if (!rank.isInTop5()) {
                 continue;
             }
 
             String output = String.format(
-                prize + " - %d개",
-                winningResults.get(prize).getMatchCount());
+                rank + " - %d개",
+                winningResults.get(rank).getMatchCount());
 
             System.out.println(output);
         }

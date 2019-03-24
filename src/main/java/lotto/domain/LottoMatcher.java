@@ -8,11 +8,11 @@ public class LottoMatcher {
     public static WinningResults calculateWinningResults(final LottoList lottos, final WinningLotto winningLotto) {
         WinningResults winningResults = new WinningResults();
 
-        List<Prize> prizes = Arrays.asList(Prize.values());
+        List<Rank> ranks = Arrays.asList(Rank.values());
 
-        for (Prize prize : prizes) {
+        for (Rank rank : ranks) {
             winningResults.put(
-                    prize, new WinningResult(prize, lottos.count(prize, winningLotto)));
+                rank, new WinningResult(rank, lottos.count(rank, winningLotto)));
         }
 
         return winningResults;

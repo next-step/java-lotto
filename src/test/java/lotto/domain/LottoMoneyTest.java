@@ -50,6 +50,6 @@ public class LottoMoneyTest {
         WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
 
         assertThat(lottoMoney.calculateEarningsRate(winningResults))
-                .isEqualTo(Prize.FIRST.getMoney() / (double) money);
+                .isEqualTo(Rank.FIRST.getMoney() / (double) money);
     }
 }

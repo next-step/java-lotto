@@ -25,10 +25,10 @@ public class WinningLotto {
         return anyLotto.contains(bonus);
     }
 
-    public Prize calculatePrize(Lotto anyLotto) {
+    public Rank calculatePrize(Lotto anyLotto) {
         int count = this.countMatches(anyLotto);
         boolean matchBonus = this.matchBonus(anyLotto);
 
-        return Prize.valueOf(count, matchBonus);
+        return Rank.valueOf(count, matchBonus);
     }
 }

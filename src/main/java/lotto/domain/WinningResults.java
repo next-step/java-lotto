@@ -6,31 +6,31 @@ import java.util.TreeMap;
 
 public class WinningResults {
 
-    private Map<Prize, WinningResult> winningResults;
+    private Map<Rank, WinningResult> winningResults;
 
     public WinningResults() {
         winningResults = new TreeMap<>();
     }
 
-    public WinningResult get(Prize prize) {
-        return winningResults.get(prize);
+    public WinningResult get(Rank rank) {
+        return winningResults.get(rank);
     }
 
-    protected WinningResult put(Prize prize, WinningResult winningResult) {
-        return winningResults.put(prize, winningResult);
+    protected WinningResult put(Rank rank, WinningResult winningResult) {
+        return winningResults.put(rank, winningResult);
     }
 
-    public Set<Prize> keySet() {
+    public Set<Rank> keySet() {
         return winningResults.keySet();
     }
 
     public double calculateEarningsRate(final long money) {
         long totalPrizeMoney = 0;
 
-        Set<Prize> winningResultsKeys = winningResults.keySet();
+        Set<Rank> winningResultsKeys = winningResults.keySet();
 
-        for (Prize prize : winningResultsKeys) {
-            totalPrizeMoney += prize.getMoney() * winningResults.get(prize).getMatchCount();
+        for (Rank rank : winningResultsKeys) {
+            totalPrizeMoney += rank.getMoney() * winningResults.get(rank).getMatchCount();
         }
 
         return totalPrizeMoney / (double) money;

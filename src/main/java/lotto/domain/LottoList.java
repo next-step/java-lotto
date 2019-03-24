@@ -34,11 +34,11 @@ public class LottoList {
         return lottos.size();
     }
 
-    int count(Prize targetPrize, WinningLotto winningLotto) {
+    int count(Rank targetRank, WinningLotto winningLotto) {
         int count = 0;
 
         for (Lotto lotto : lottos) {
-            if (winningLotto.calculatePrize(lotto) == targetPrize) {
+            if (winningLotto.calculatePrize(lotto) == targetRank) {
                 count++;
             }
         }

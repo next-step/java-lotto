@@ -8,8 +8,8 @@ public class WinningResultTest {
 
     @Test
     public void 당첨결과_동등비교() {
-        WinningResult winningResult = new WinningResult(Prize.FIRST, 1);
+        WinningResult winningResult = new WinningResult(Rank.FIRST, 1);
 
-        assertThat(winningResult).isEqualTo(new WinningResult(Prize.FIRST, 1));
+        assertThat(winningResult).isEqualTo(new WinningResult(Rank.FIRST, 1));
     }
 }

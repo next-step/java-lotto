@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Objects;
 
 public class WinningResult{
-    private Prize prize;
+    private Rank rank;
     private int matchCount;
 
-    public WinningResult(Prize prize, int matchCount) {
-        this.prize = prize;
+    public WinningResult(Rank rank, int matchCount) {
+        this.rank = rank;
         this.matchCount = matchCount;
     }
 
@@ -20,19 +20,18 @@ public class WinningResult{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningResult that = (WinningResult) o;
-        return matchCount == that.matchCount &&
-                prize == that.prize;
+        return matchCount == that.matchCount && rank == that.rank;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prize, matchCount);
+        return Objects.hash(rank, matchCount);
     }
 
     @Override
     public String toString() {
         return "WinningResult{" +
-                "prize=" + prize +
+                "rank=" + rank +
                 ", matchCount=" + matchCount +
                 '}';
     }
