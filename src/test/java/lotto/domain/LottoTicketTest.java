@@ -38,6 +38,15 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(lottoBalls);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 번호중복_확인() {
+        List<LottoBall> lottoBalls = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            lottoBalls.add(new LottoBall(1));
+        }
+        LottoTicket lottoTicket = new LottoTicket(lottoBalls);
+    }
+
     @Test
     public void 일치개수_확인() {
         List<LottoBall> lottoBalls = new ArrayList<>();

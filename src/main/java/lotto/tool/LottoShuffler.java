@@ -7,12 +7,7 @@ import java.util.List;
 
 public class LottoShuffler {
 
-    public static void shuffle2(List<LottoBall> numbers) {
-        Collections.shuffle(numbers);
-    }
-
-    public static void shuffle(List<Integer> numbers) {
+    public static void shuffle(List<LottoBall> numbers) {
         Collections.shuffle(numbers);
     }
 }
-

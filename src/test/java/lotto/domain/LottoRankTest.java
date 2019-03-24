@@ -8,13 +8,13 @@ public class LottoRankTest {
 
     @Test
     public void 일등구하기() {
-        LottoRank lottoRank = LottoRank.valueOf(1, false);
-        assertThat(lottoRank.number).isEqualTo(1);
+        LottoRank lottoRank = LottoRank.valueOf(6, false);
+        assertThat(lottoRank.matchCount).isEqualTo(6);
     }
 
     @Test
     public void 보너스Rank_구하기() {
-        LottoRank lottoRank = LottoRank.valueOf(2, true);
-        assertThat(lottoRank.number).isEqualTo(2);
+        LottoRank lottoRank = LottoRank.valueOf(5, true);
+        assertThat(lottoRank.matchCount).isEqualTo(5);
     }
 }

@@ -11,9 +11,14 @@ public class LottoTicket {
     private boolean bonusMatch;
 
     public LottoTicket(List<LottoBall> lottoBalls) {
+        validateLottoBalls(lottoBalls);
+        this.lottoBalls = lottoBalls;
+    }
+
+    private void validateLottoBalls(List<LottoBall> lottoBalls) {
         checkNullOrEmpty(lottoBalls);
         checkSize(lottoBalls);
-        this.lottoBalls = lottoBalls;
+        checkDuplication(lottoBalls);
     }
 
     private boolean checkNullOrEmpty(List<LottoBall> lottoBalls) {
@@ -28,6 +33,19 @@ public class LottoTicket {
             error();
         }
         return true;
+    }
+
+    private boolean checkDuplication(List<LottoBall> lottoBalls) {
+        for (int i = 1; i < lottoBalls.size(); i++) {
+            isDuplicated(lottoBalls.get(i-1), lottoBalls.get(i));
+        }
+        return false;
+    }
+
+    protected void isDuplicated(LottoBall lottoBall, LottoBall lottoBall1) {
+        if (lottoBall.compareTo(lottoBall1) == LottoBall.DUPLICATED) {
+            error();
+        }
     }
 
     private void error() {

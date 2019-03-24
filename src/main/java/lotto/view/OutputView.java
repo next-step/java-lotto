@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class OutputView {
+
+    public static final int ZERO = 0;
+
     public static void printTicketCount(LottoMoney lottoMoney) {
         System.out.println(lottoMoney.buy() + "개를 구매했습니다.");
     }
@@ -29,12 +32,12 @@ public class OutputView {
         if (lottoRank == LottoRank.MISS) return;
 
         if (lottoRank.money == LottoRank.SECOND.money) {
-            System.out.println(lottoRank.number + "개 일치, 보너스 볼 일치("
+            System.out.println(lottoRank.matchCount + "개 일치, 보너스 볼 일치("
                     + lottoRank.money + "원) - " + lottoMatcher.rankResult.get(lottoRank) + "개");
             return;
         }
 
-        System.out.println(lottoRank.number + "개 일치 ("
+        System.out.println(lottoRank.matchCount + "개 일치 ("
                 + lottoRank.money + "원) - " + lottoMatcher.rankResult.get(lottoRank) + "개");
     }
 
@@ -58,7 +61,7 @@ public class OutputView {
 
     public static void printEarningRate(EarningRate earningRate) {
         String result = "총 수익률은 " + earningRate.toString() + "입니다.";
-        if (earningRate.getRate() < 0) {
+        if (earningRate.getRate() < ZERO) {
             result += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         System.out.println(result);

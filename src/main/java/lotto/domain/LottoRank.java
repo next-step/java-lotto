@@ -10,23 +10,21 @@ public enum LottoRank{
 
     public static final int MATCH_COUNT_FIVE = 5;
 
-    public final int number;
+    public final int matchCount;
     public final long money;
 
-    LottoRank(int number, long money) {
-        this.number = number;
+    LottoRank(int matchCount, long money) {
+        this.matchCount = matchCount;
         this.money = money;
     }
 
-
-
-    public static LottoRank valueOf(int number, boolean matchBonus) {
-        if (number == MATCH_COUNT_FIVE) {
+    public static LottoRank valueOf(int matchCount, boolean matchBonus) {
+        if (matchCount == MATCH_COUNT_FIVE) {
             return checkBonusRank(matchBonus);
         }
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            if (checkRank(number, lottoRank)) {
+            if (checkRank(matchCount, lottoRank)) {
                 return lottoRank;
             }
         }
@@ -34,7 +32,7 @@ public enum LottoRank{
     }
 
     private static boolean checkRank(int number, LottoRank lottoRank) {
-        if (lottoRank.number == number) {
+        if (lottoRank.matchCount == number) {
             return true;
         }
         return false;

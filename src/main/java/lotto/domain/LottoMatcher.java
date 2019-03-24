@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoMatcher {
 
+    public static final int DEFAULT_COUNT = 0;
     public final HashMap<LottoRank, Integer> rankResult;
 
     public LottoMatcher(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
@@ -21,8 +22,7 @@ public class LottoMatcher {
 
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = checkRank(lottoTicket, winningLotto);
-            rankResult.computeIfPresent(lottoRank, (LottoRank key, Integer value) -> ++value);
-//            rankResult.putIfAbsent(lottoRank, 1);
+            rankResult.computeIfPresent(lottoRank, (LottoRank key, Integer matchCount) -> ++matchCount);
         }
         return rankResult;
     }
@@ -31,7 +31,7 @@ public class LottoMatcher {
         HashMap<LottoRank, Integer> rankResult = new HashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
             if (lottoRank == LottoRank.MISS) continue;
-            rankResult.put(lottoRank, 0);
+            rankResult.put(lottoRank, DEFAULT_COUNT);
         }
         return rankResult;
     }

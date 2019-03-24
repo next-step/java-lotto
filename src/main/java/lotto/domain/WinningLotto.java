@@ -1,17 +1,24 @@
 package lotto.domain;
 
+import lotto.tool.LottoAutoGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang3.math.NumberUtils.toInt;
-
-public class WinningLotto extends LottoTicket{
+public class WinningLotto extends LottoTicket {
 
     private final LottoBall bonusBall;
 
     public WinningLotto(String[] winningNumbers, String bonusNumber) {
         super(toLottoBalls(winningNumbers));
         this.bonusBall = new LottoBall(toInt(bonusNumber));
+        checkDuplication();
+    }
+
+    private void checkDuplication() {
+        for (LottoBall lottoBall : this.lottoBalls) {
+            super.isDuplicated(lottoBall, bonusBall);
+        }
     }
 
     private static List<LottoBall> toLottoBalls(String[] winningNumbers) {
@@ -19,7 +26,7 @@ public class WinningLotto extends LottoTicket{
         for (String winningNumber : winningNumbers) {
             lottoBalls.add(new LottoBall(toInt(winningNumber)));
         }
-        return lottoBalls;
+        return LottoAutoGenerator.sort(lottoBalls);
     }
 
     public boolean matchBonusNumber(LottoBall lottoBall) {

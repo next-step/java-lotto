@@ -15,7 +15,6 @@ public class LottoMachineTest {
 
     @Test
     public void 로또한장_발급하기() {
-//        LottoTicket lottoTicket = LottoMachine.issueTicket();
         List<LottoTicket> lottoTickets = LottoMachine.issueTickets(1);
         System.out.println(lottoTickets.get(0).toString());
         assertThat(lottoTickets.get(0) != null).isEqualTo(true);

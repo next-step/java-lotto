@@ -14,7 +14,7 @@ public class LottoShufflerTest {
         for (int i = 0; i < 6; i++) {
             lottoBalls.add(new LottoBall(i + 1));
         }
-        LottoShuffler.shuffle2(lottoBalls);
+        LottoShuffler.shuffle(lottoBalls);
 
         for (LottoBall lottoBall : lottoBalls) {
             System.out.println(lottoBall.number);

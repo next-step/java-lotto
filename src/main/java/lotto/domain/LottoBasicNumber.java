@@ -5,12 +5,12 @@ import java.util.List;
 
 public class LottoBasicNumber {
 
-    public static final List<Integer> basicNumbers;
+    public static final List<LottoBall> basicNumbers;
 
     static {
         basicNumbers = new ArrayList<>();
-        for (int i = 1; i < 45; i++) {
-            basicNumbers.add(i);
+        for (int i = LottoBall.MIN_LOTTO_NUMBER; i <= LottoBall.MAX_LOTTO_NUMBER; i++) {
+            basicNumbers.add(new LottoBall(i));
         }
     }
 }

@@ -8,8 +8,8 @@ public class LottoBasicNumberTest {
     @Test
     public void 로또_45개번호_확인() {
         int i = 0;
-        for (Integer basicNumber : LottoBasicNumber.basicNumbers) {
-            assertThat(basicNumber).isEqualTo(++i);
+        for (LottoBall lottoBalls : LottoBasicNumber.basicNumbers) {
+            assertThat(lottoBalls.number).isEqualTo(++i);
         }
     }
 }
