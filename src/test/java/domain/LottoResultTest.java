@@ -11,14 +11,15 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoResultTest {
-    private static final int totalAmount = 1_000;
-    private static final int[] inputWinningNumbers = {1,3,5,6,7,8};
+    private static final int TOTAL_AMOUNT = 1_000;
+    private static final String INPUT_WINNING_NUMBERS = "1,3,5,6,7,8";
+    private static final int INPUT_BONUs_NUMBER = 9;
     private LottoResult lottoResult;
-    private Price price;
+    private Money money;
 
     @Before
     public void setUp() {
-        price = new Price(totalAmount);
+        money = new Money(TOTAL_AMOUNT);
 
         //3장 중 1장만 1등으로 되도록 확인.
         List<Integer> lottoNumbers= Arrays.asList(1,3,5,6,7,8);
@@ -29,13 +30,12 @@ public class LottoResultTest {
                                         , Lotto.generateLotto(lottoNumbers2)
                                         , Lotto.generateLotto(lottoNumbers3));
 
-        lottoResult = new LottoResult(lottos, inputWinningNumbers);
+        lottoResult = new LottoResult(lottos, new WinningLotto(INPUT_WINNING_NUMBERS, INPUT_BONUs_NUMBER));
     }
 
     @Test
-    public void LOTTO_RESULT_() {
-        lottoResult.calculateBenefit(price);
-        assertThat(lottoResult.getBenefitRate())
-                .isEqualTo(LottoResultStatus.getWinnersPriceByStatus(1, LottoResultStatus.WINNING_NUM_6).divide(BigDecimal.valueOf(totalAmount), 2, RoundingMode.HALF_UP));
+    public void 로또_수익률_계산() {
+        assertThat(lottoResult.calculateBenefit(money))
+                .isEqualTo(LottoResultStatus.getWinnersPriceByStatus(1, LottoResultStatus.WINNING_NUM_6).divide(BigDecimal.valueOf(TOTAL_AMOUNT), 2, RoundingMode.HALF_UP));
     }
 }

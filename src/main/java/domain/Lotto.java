@@ -3,26 +3,32 @@ package domain;
 import java.util.List;
 
 public class Lotto {
-    private Numbers numbers;
+    private static final int BONUS_AVAILABLE_MATCH_COUNT = 5;
+    private LottoNumbers lottoNumbers;
 
     public static Lotto generateLotto(List<Integer> integers) {
         Lotto lotto = new Lotto();
-        lotto.numbers = new Numbers(integers);
+        lotto.lottoNumbers = new LottoNumbers(integers);
         return lotto;
     }
 
-    public LottoResultStatus getLottoResultStatus(int[] winningNumbers) {
+    public LottoResultStatus getLottoResultStatus(WinningLotto winningLotto) {
         int containsWinningNumberCount = 0;
-        for (int number : winningNumbers) {
-            if(numbers.contains(number))
+        boolean bonusYn = false;
+        for (int number : winningLotto.getWinningNumber()) {
+            if(lottoNumbers.contains(number))
                 containsWinningNumberCount ++;
         }
 
-        return LottoResultStatus.findByMatchCount(containsWinningNumberCount);
+        if( containsWinningNumberCount == BONUS_AVAILABLE_MATCH_COUNT && lottoNumbers.contains(winningLotto.getBonusNumber())) {
+            bonusYn = true;
+        }
+
+        return LottoResultStatus.findByMatchCount(containsWinningNumberCount, bonusYn);
     }
 
-    public Numbers getNumbers() {
-       return this.numbers;
+    public LottoNumbers getLottoNumbers() {
+       return this.lottoNumbers;
     }
 
 }

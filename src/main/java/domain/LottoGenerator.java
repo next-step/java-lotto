@@ -32,6 +32,7 @@ public class LottoGenerator {
             lottoNumberRange.add(i);
             i ++;
         }
+
         return lottoNumberRange;
     }
 }

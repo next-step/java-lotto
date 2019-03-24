@@ -20,16 +20,9 @@ public class LottoGame {
         }
     }
 
-    public LottoResult playingLotto(String inputWinningNumbers, Price price) {
-        int[] intWinningNumbers = convertingWinningNumbers(inputWinningNumbers);
-        LottoResult lottoGameResult =  new LottoResult(lottos, intWinningNumbers);
-        lottoGameResult.calculateBenefit(price);
+    public LottoResult playingLotto(WinningLotto winningLotto) {
+        LottoResult lottoGameResult =  new LottoResult(lottos, winningLotto);
         return lottoGameResult;
-    }
-
-    public int[] convertingWinningNumbers(String winningNumbers) {
-        String[] stringWinningNumbers = winningNumbers.replace(" ","").split(",");
-        return Arrays.stream(stringWinningNumbers).mapToInt(str-> Integer.parseInt(str)).toArray();
     }
 
     public List<Lotto> lottos() {

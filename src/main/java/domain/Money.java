@@ -3,12 +3,16 @@ package domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Price {
+public class Money {
     private static final int ONE_TICKET_PRICE = 1_000;
 
     private int totalAmount;
 
-    public Price(int amount) {
+    public Money(int amount) {
+        if (amount < ONE_TICKET_PRICE) {
+            throw new IllegalArgumentException();
+        }
+
         totalAmount = amount;
     }
 
