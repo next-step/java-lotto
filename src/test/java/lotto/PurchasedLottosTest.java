@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.service.LottoGame;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,8 +15,8 @@ public class PurchasedLottosTest {
 
     @Before
     public void setUp() throws Exception {
-        RandomLottoGenerator randomLottoGenerator = RandomLottoGenerator.getInstance();
-        lottoGame = LottoGame.getInstance(randomLottoGenerator);
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+        lottoGame = LottoGame.getInstance(lottoGenerator);
     }
 
     @Test

@@ -13,7 +13,7 @@ public class LottoTest {
 
     @Before
     public void setUp() throws Exception {
-        lottoGenerator = new RandomLottoGenerator();
+        lottoGenerator = new LottoGenerator();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -21,7 +21,7 @@ public class LottoTest {
         // given
         String invalidNumbers = "1, 1, 2, 3, 4, 5";
         // when
-        Lotto lotto = new FixedLottoGenerator(invalidNumbers).generateLotto();
+        Lotto lotto = lottoGenerator.generateLotto(invalidNumbers);
         // then
     }
 
@@ -30,7 +30,7 @@ public class LottoTest {
         // given
         String invalidNumbers = "1, 7, 8, 2, 3, 4, 5";
         // when
-        Lotto lotto = new FixedLottoGenerator(invalidNumbers).generateLotto();
+        Lotto lotto = lottoGenerator.generateLotto(invalidNumbers);
         // then
     }
 
@@ -50,7 +50,6 @@ public class LottoTest {
     @Test
     public void 로또랜덤생성() {
         // given
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         // when
         PurchasedLottos purchaseHistory = new PurchasedLottos(new Money(3000), new ArrayList<>(), lottoGenerator);
         System.out.println(purchaseHistory.getLottos());

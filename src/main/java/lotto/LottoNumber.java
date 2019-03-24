@@ -33,13 +33,6 @@ public class LottoNumber {
         return number > MAXIMUM_NUMBER || MINIMUM_NUMBER > number;
     }
 
-    public LottoNumber increase() {
-        if (this.number == MAXIMUM_NUMBER) {
-            return valueOf(MINIMUM_NUMBER);
-        }
-        return valueOf(this.number + MINIMUM_NUMBER);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

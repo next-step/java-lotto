@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Prize {
     FIRST_PRIZE(6, 2_000_000_000, false),
     SECOND_PRIZE(5, 30_000_000, true),
@@ -19,12 +21,10 @@ public enum Prize {
     }
 
     public static Prize valueOf(int numberOfMatch, boolean isMatchingBonus) {
-        for (Prize prize : values()) {
-            if (prize.isEqual(numberOfMatch, isMatchingBonus)) {
-                return prize;
-            }
-        }
-        return NO_PRIZE;
+        return Arrays.stream(values())
+                .filter(prize -> prize.isEqual(numberOfMatch, isMatchingBonus))
+                .findFirst()
+                .orElse(NO_PRIZE);
     }
 
     private boolean isEqual(int numberOfMatch, boolean isMatchingBonus) {

@@ -1,4 +1,6 @@
-package lotto;
+package lotto.service;
+
+import lotto.*;
 
 import java.util.List;
 

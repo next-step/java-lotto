@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.*;
+import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,8 +12,8 @@ public class ConsoleApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        LottoGenerator randomLottoGenerator = RandomLottoGenerator.getInstance();
-        LottoGame lottoGame = LottoGame.getInstance(randomLottoGenerator);
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
+        LottoGame lottoGame = LottoGame.getInstance(lottoGenerator);
 
         int amount = InputView.inputPurchaseAmount(scanner);
         Money payment = new Money(amount);
@@ -25,7 +26,7 @@ public class ConsoleApplication {
 
         String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
         int bonusBallNumber = InputView.inputBonusBall(scanner);
-        WinningLotto previousWinningLotto = randomLottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
+        WinningLotto previousWinningLotto = lottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
         LottosResult lottosResult = lottoGame.analyse(purchase, previousWinningLotto, payment);
 
         OutputView.printStatisticsResult(lottosResult);
