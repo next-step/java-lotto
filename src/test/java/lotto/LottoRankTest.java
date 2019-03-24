@@ -9,11 +9,9 @@ public class LottoRankTest {
 
     @Test
     public void 파라미터가_LottoRank의_countOfMatch와_같다면_그_타입_반환() {
-        LottoRank lottoRank = LottoRank.valueOf(3);
+        LottoRank lottoRank = LottoRank.valueOf(3, false);
         assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
     }
-
-
 
 
 }

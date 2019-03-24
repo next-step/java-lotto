@@ -10,7 +10,7 @@ public class StringParseUtils {
 
         String[] split = inputNumber.trim().split(",");
         for (String str : split) {
-            winningNumber.add(Integer.parseInt(str));
+            winningNumber.add(Integer.parseInt(str.trim()));
         }
         return winningNumber;
     }

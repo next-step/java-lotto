@@ -24,10 +24,15 @@ public class App {
         //지난주번호 입력
         List<Integer> winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
 
+        //보너스볼 입력
+        int bonusBall = InputView.getBonusBall();
 
-        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber);
+        //위닝로또
+        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber, bonusBall);
+
         //결과저장, 비교
         LotteryResults lotteryResults = new LotteryResults(winingLottoTicket, buyLottoTickets, amount);
+
 
         OutputView.printLotteryResult(lotteryResults);
 

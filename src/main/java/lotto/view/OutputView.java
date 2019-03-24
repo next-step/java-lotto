@@ -25,6 +25,8 @@ public class OutputView {
         String format = "%d개 일치 (%d원)-  %d개\n";
         System.out.println("        ------ 당첨통계");
         System.out.printf(
+            format, LottoRank.FIFTH.getCountOfMatch(), LottoRank.FIFTH.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.FIFTH));
+        System.out.printf(
             format, LottoRank.FOURTH.getCountOfMatch(), LottoRank.FOURTH.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.FOURTH));
         System.out.printf(
             format, LottoRank.THIRD.getCountOfMatch(), LottoRank.THIRD.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.THIRD));
@@ -35,6 +37,4 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lotteryResults.getProfit()));
 
     }
-
-
 }
