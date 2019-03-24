@@ -45,21 +45,12 @@ public class Lotto {
     }
 
     public int countMatches(Lotto anyLotto) {
-        int count = 0;
+        Set<LottoNumber> lottoNumbers = new HashSet<>(this.lottoNumbers);
+        Set<LottoNumber> anyLottoNumbers = new HashSet<>(anyLotto.lottoNumbers);
 
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            count = this.countMatches(anyLotto, count, lottoNumber);
-        }
+        lottoNumbers.retainAll(anyLottoNumbers);
 
-        return count;
-    }
-
-    private int countMatches(Lotto anyLotto, int count, LottoNumber lottoNumber) {
-        if (anyLotto.contains(lottoNumber)) {
-            count++;
-        }
-
-        return count;
+        return lottoNumbers.size();
     }
 
     @Override
