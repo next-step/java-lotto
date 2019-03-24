@@ -4,11 +4,12 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 public enum LottoRank {
-    THREE(3, value -> value * 5_000),
-    FOUR(4, value -> value * 50_000),
-    FIVE(5, value -> value * 1_500_000),
-    SIX(6, value -> value * 2_000_000_000),
-    NONE(0, value -> 0);
+    FIRST(6, value -> value * 2_000_000_000),
+    SECOND(5, value -> value * 30_000_000),
+    THIRD(5, value -> value * 1_500_000),
+    FOURTH(4, value -> value * 50_000),
+    FIFTH(3, value -> value * 5_000),
+    MISS(0, value -> 0);
 
     private int matchCount;
     private Function<Integer, Integer> prizes;
@@ -18,12 +19,17 @@ public enum LottoRank {
         this.prizes = prizes;
     }
 
-    public static LottoRank findMatchCount(Integer matchCount) {
+    public static LottoRank findMatchCount(Integer matchCount, boolean isContainsBonus) {
+        if (matchCount == LottoRank.SECOND.getMatchCount() && isContainsBonus) {
+            return LottoRank.SECOND;
+        }
+
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchCount() == matchCount)
+                .filter(lottoRank -> lottoRank.getMatchCount() == matchCount && !lottoRank.equals(SECOND))
                 .findAny()
-                .orElse(LottoRank.NONE);
+                .orElse(LottoRank.MISS);
     }
+
 
     public int getMatchCount() {
         return this.matchCount;

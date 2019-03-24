@@ -2,6 +2,7 @@ import domain.Lotto;
 import domain.LottoNumbers;
 import domain.LottoMatch;
 import util.Calculator;
+import util.Console;
 import util.Generator;
 import view.InputView;
 import view.ResultView;
@@ -28,6 +29,16 @@ public class LottoApplication {
         if (winningNumbers.isEmpty()) {
             return;
         }
+
+        int bonusBall = InputView.inputBonusBall();
+        if (bonusBall == 0) {
+            return;
+        }
+        if (winningNumbers.contains(bonusBall)) {
+            Console.print("당첨번호와 보너스볼 숫자가 같을 수 없습니다.");
+            return;
+        }
+        winningNumbers.add(bonusBall);
 
         LottoMatch lottoMatch = new LottoMatch(lottos, winningNumbers);
         ResultView.statisticsWinner(lottoMatch.produceResult());
