@@ -7,10 +7,7 @@ public interface RankPrintable {
     RankPrintable NONE = new RankPrintable() {
         @Override
         public void makeRanksForPrint(Map<String, Integer> ranks) {
-            ranks.put("first", 0);
-            ranks.put("second", 0);
-            ranks.put("third", 0);
-            ranks.put("fourth", 0);
+            return;
         }
     };
 

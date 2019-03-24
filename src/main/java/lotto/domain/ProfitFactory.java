@@ -3,19 +3,19 @@ package lotto.domain;
 public class ProfitFactory {
 
     public static Profitable profit(int rank) {
-        if (rank == 6) {
+        if (rank == 1) {
             return new FirstRank();
         }
 
-        if (rank == 5) {
+        if (rank == 2) {
             return new SecondRank();
         }
 
-        if (rank == 4) {
+        if (rank == 3) {
             return new ThirdRank();
         }
 
-        if (rank == 3) {
+        if (rank == 4) {
             return new FourthRank();
         }
 
