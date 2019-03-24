@@ -21,7 +21,7 @@ public class LottoMoney {
         return (int) (this.money / LOTTO_UNIT_PRICE);
     }
 
-    public double calculateEarningsRate(final WinningResults winningResults) {
-        return winningResults.calculateEarningsRate(money);
+    public double calculateEarningsRate(final MatchResults matchResults) {
+        return matchResults.calculateEarningsRate(money);
     }
 }

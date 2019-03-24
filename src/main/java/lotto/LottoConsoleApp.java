@@ -29,9 +29,9 @@ public class LottoConsoleApp {
         ConsoleOutput.printLottos(totalLottos);
 
         final WinningLotto winningLotto = ConsoleInput.inputLastWinningNumbers();
-        final WinningResults winningResults = LottoMatcher.calculateWinningResults(totalLottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(totalLottos, winningLotto);
 
-        ConsoleOutput.printWinningStatistics(winningResults);
-        ConsoleOutput.printEarningsRate(lottoMoney.calculateEarningsRate(winningResults));
+        ConsoleOutput.printWinningStatistics(matchResults);
+        ConsoleOutput.printEarningsRate(lottoMoney.calculateEarningsRate(matchResults));
     }
 }

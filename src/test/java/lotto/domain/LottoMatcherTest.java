@@ -28,13 +28,13 @@ public class LottoMatcherTest {
                         LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
                         LottoNumber.from(43), LottoNumber.from(44), LottoNumber.from(45)))));
 
-        final WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        assertThat(winningResults.get(Rank.FIRST)).isEqualTo(new RankCount(Rank.FIRST, 1));
-        assertThat(winningResults.get(Rank.SECOND)).isEqualTo(new RankCount(Rank.SECOND, 0));
-        assertThat(winningResults.get(Rank.THIRD)).isEqualTo(new RankCount(Rank.THIRD, 0));
-        assertThat(winningResults.get(Rank.FOURTH)).isEqualTo(new RankCount(Rank.FOURTH, 2));
-        assertThat(winningResults.get(Rank.FIFTH)).isEqualTo(new RankCount(Rank.FIFTH, 1));
+        assertThat(matchResults.get(Rank.FIRST)).isEqualTo(new RankCount(Rank.FIRST, 1));
+        assertThat(matchResults.get(Rank.SECOND)).isEqualTo(new RankCount(Rank.SECOND, 0));
+        assertThat(matchResults.get(Rank.THIRD)).isEqualTo(new RankCount(Rank.THIRD, 0));
+        assertThat(matchResults.get(Rank.FOURTH)).isEqualTo(new RankCount(Rank.FOURTH, 2));
+        assertThat(matchResults.get(Rank.FIFTH)).isEqualTo(new RankCount(Rank.FIFTH, 1));
     }
 
     @Test
@@ -57,12 +57,12 @@ public class LottoMatcherTest {
                         LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
                         LottoNumber.from(43), LottoNumber.from(44), LottoNumber.from(45)))));
 
-        final WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        assertThat(winningResults.get(Rank.FIRST)).isEqualTo(new RankCount(Rank.FIRST, 1));
-        assertThat(winningResults.get(Rank.SECOND)).isEqualTo(new RankCount(Rank.SECOND, 1));
-        assertThat(winningResults.get(Rank.THIRD)).isEqualTo(new RankCount(Rank.THIRD, 0));
-        assertThat(winningResults.get(Rank.FOURTH)).isEqualTo(new RankCount(Rank.FOURTH, 1));
-        assertThat(winningResults.get(Rank.FIFTH)).isEqualTo(new RankCount(Rank.FIFTH, 1));
+        assertThat(matchResults.get(Rank.FIRST)).isEqualTo(new RankCount(Rank.FIRST, 1));
+        assertThat(matchResults.get(Rank.SECOND)).isEqualTo(new RankCount(Rank.SECOND, 1));
+        assertThat(matchResults.get(Rank.THIRD)).isEqualTo(new RankCount(Rank.THIRD, 0));
+        assertThat(matchResults.get(Rank.FOURTH)).isEqualTo(new RankCount(Rank.FOURTH, 1));
+        assertThat(matchResults.get(Rank.FIFTH)).isEqualTo(new RankCount(Rank.FIFTH, 1));
     }
 }

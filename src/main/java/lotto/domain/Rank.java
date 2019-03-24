@@ -54,7 +54,7 @@ public enum Rank {
         return true;
     }
 
-    public long calculateWinningMoney(RankCount rankCount) {
+    public long calculateReward(RankCount rankCount) {
         return rankCount.calculate(money);
     }
 

@@ -47,9 +47,9 @@ public class LottoMoneyTest {
                         LottoNumber.from(40), LottoNumber.from(41), LottoNumber.from(42),
                         LottoNumber.from(43), LottoNumber.from(44), LottoNumber.from(45)))));
 
-        WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        assertThat(lottoMoney.calculateEarningsRate(winningResults))
+        assertThat(lottoMoney.calculateEarningsRate(matchResults))
                 .isEqualTo(Rank.FIRST.getMoney() / (double) money);
     }
 }
