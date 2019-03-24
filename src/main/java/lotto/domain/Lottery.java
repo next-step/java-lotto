@@ -10,21 +10,11 @@ public class Lottery {
         this.lottery = generationLotto(lotteryNumber);
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(this.lottery);
-    }
-
     public Set<Integer> generationLotto(Set<Integer> random) {
         for(int i = 0; i < LOTTO_LENGTH ; i++) {
             this.lottery = random;
         }
 
-        return this.lottery;
-    }
-
-    // 중복생성 테스트용
-    public Set<Integer> getLottery() {
         return this.lottery;
     }
 
@@ -42,7 +32,18 @@ public class Lottery {
         if (this.lottery.contains(number)) {
             matchCount++;
         }
+
         return matchCount;
+    }
+
+    // 중복생성 테스트용
+    public Set<Integer> getLottery() {
+        return this.lottery;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.lottery);
     }
 }
 

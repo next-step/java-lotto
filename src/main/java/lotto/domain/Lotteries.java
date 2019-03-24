@@ -18,22 +18,60 @@ public class Lotteries {
     private List<Lottery> lotteries;
     private int purchaseQuantity;
 
-    public Lotteries(String purchaseAmount) {
-        this.lotteries = new ArrayList<>();
-        this.purchaseQuantity = Integer.parseInt(purchaseAmount) / LOTTO_AMOUNT;
-
-        checkPurchaseValidation(purchaseAmount);
-        generationAllLotto();
-    }
-
     public Lotteries(int purchaseQuantity) {
         this(String.valueOf(purchaseQuantity));
+    }
+
+    public Lotteries(String purchaseAmount) {
+        this.lotteries = new ArrayList<>();
+
+        checkPurchaseValidation(purchaseAmount);
+        this.purchaseQuantity = Integer.parseInt(purchaseAmount) / LOTTO_AMOUNT;
+
+        generationAllLotto();
     }
 
     public void generationAllLotto() {
         for(int i = 0; i < this.purchaseQuantity; i++) {
             this.lotteries.add(new Lottery(generationRandom()));
         }
+    }
+
+    public double calculateProfit(LotteryMachine lotteryMachine) {
+        int totalProfit = INITIALIZATION_NUMBER;
+
+        for (int i = 0, n = lotteriesSize(); i < n; i++) {
+            totalProfit += lotteryMachine.countProfit(this.lotteries.get(i));
+        }
+
+        double profitRate = (double)totalProfit / ((double)(this.purchaseQuantity * LOTTO_AMOUNT));
+
+        return Math.round(profitRate * 100) / 100.0;
+    }
+
+    public Map<String, Integer> makeAllLotteriesRank(LotteryMachine lotteryMachine) {
+        int rank;
+        Map<String, Integer> ranks = new HashMap<>();
+        initialization(ranks);
+
+        for (int i = 0; i < this.lotteries.size(); i++) {
+            rank = lotteryMachine.rankLottery(lotteries.get(i));
+            makeRanks(rank, ranks);
+        }
+
+        return ranks;
+    }
+
+    public static void initialization(Map<String, Integer> ranks) {
+        ranks.put("first", INITIALIZATION_NUMBER);
+        ranks.put("second", INITIALIZATION_NUMBER);
+        ranks.put("third", INITIALIZATION_NUMBER);
+        ranks.put("fourth", INITIALIZATION_NUMBER);
+    }
+
+    public void makeRanks(int rank, Map<String, Integer> ranks) {
+        RankPrintable rankPrintable = makeRanksForPrint(rank);
+        rankPrintable.makeRanksForPrint(ranks);
     }
 
     public static void checkPurchaseValidation(String purchaseAmount) {
@@ -54,16 +92,6 @@ public class Lotteries {
         return this.lotteries.size();
     }
 
-    public int calculateProfit(LotteryMachine lotteryMachine) {
-        int totalProfit = INITIALIZATION_NUMBER;
-
-        for (int i = 0; i < lotteriesSize(); i++) {
-            totalProfit += lotteryMachine.countProfit(this.lotteries.get(i));
-        }
-
-        return totalProfit;
-    }
-
     public StringBuilder toStringAllLotteries() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -75,28 +103,4 @@ public class Lotteries {
         return stringBuilder;
     }
 
-    public static void initialization(Map<String, Integer> ranks) {
-        ranks.put("first", INITIALIZATION_NUMBER);
-        ranks.put("second", INITIALIZATION_NUMBER);
-        ranks.put("third", INITIALIZATION_NUMBER);
-        ranks.put("fourth", INITIALIZATION_NUMBER);
-    }
-
-    public Map<String, Integer> makeAllLotteriesRank(LotteryMachine lotteryMachine) {
-        int rank;
-        Map<String, Integer> ranks = new HashMap<>();
-        initialization(ranks);
-
-        for (int i = 0; i < this.lotteries.size(); i++) {
-            rank = lotteryMachine.rankLottery(lotteries.get(i));
-            makeRanks(rank, ranks);
-        }
-
-        return ranks;
-    }
-
-    public void makeRanks(int rank, Map<String, Integer> ranks) {
-        RankPrintable rankPrintable = makeRanksForPrint(rank);
-        rankPrintable.makeRanksForPrint(ranks);
-    }
 }
