@@ -20,7 +20,8 @@ public class WinStatsTest {
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
-    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+    Lotto lotto5 = new Lotto(intArrayToLottoNumbers(4, 42, 14, 23, 28, 19));
+    MyLottos myLottos = new MyLottos(new Money(5000), Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5));
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -33,7 +34,7 @@ public class WinStatsTest {
 
     // Then
     assertThat(totalReward).isNotNull();
-    assertThat(totalReward).isEqualTo(new Money(5_000 + 50_000 + 1_500_000 + 2_000_000_000));
+    assertThat(totalReward).isEqualTo(new Money(5_000 + 50_000 + 1_500_000 + 30_000_000 + 2_000_000_000));
   }
 
   @Test

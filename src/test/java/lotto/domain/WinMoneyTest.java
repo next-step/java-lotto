@@ -28,6 +28,82 @@ public class WinMoneyTest {
   }
 
   @Test
+  public void test_isWinLotto_fiveWin_true() {
+
+    // Given
+    Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
+
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
+    LottoNumber lottoNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+
+    WinMoney winMoney = WinMoney.FIVE;
+
+    // When
+    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+
+    // Then
+    assertThat(result).isTrue();
+  }
+
+  @Test
+  public void test_isWinLotto_fiveWin_false() {
+
+    // Given
+    Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
+
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
+    LottoNumber lottoNumber = LottoNumber.getInstance(19);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+
+    WinMoney winMoney = WinMoney.FIVE;
+
+    // When
+    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+
+    // Then
+    assertThat(result).isFalse();
+  }
+
+  @Test
+  public void test_isWinLotto_fiveOneWin_true() {
+
+    // Given
+    Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
+
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
+    LottoNumber lottoNumber = LottoNumber.getInstance(19);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+
+    WinMoney winMoney = WinMoney.FIVE_ONE;
+
+    // When
+    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+
+    // Then
+    assertThat(result).isTrue();
+  }
+
+  @Test
+  public void test_isWinLotto_fiveOneWin_false() {
+
+    // Given
+    Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
+
+    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
+    LottoNumber lottoNumber = LottoNumber.getInstance(23);
+    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+
+    WinMoney winMoney = WinMoney.FIVE_ONE;
+
+    // When
+    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+
+    // Then
+    assertThat(result).isFalse();
+  }
+
+  @Test
   public void test_isWinLotto_false() {
 
     // Given

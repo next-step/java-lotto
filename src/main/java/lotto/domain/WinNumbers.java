@@ -14,13 +14,20 @@ public class WinNumbers {
     }
 
     this.winNumbers = winNumbers;
+
+    if (winNumbers.contains(additionNumber)) {
+      throw new IllegalArgumentException();
+    }
     this.additionNumber = additionNumber;
   }
 
   public long matchCount(Set<LottoNumber> lottoNumbers) {
-
     return winNumbers.stream()
         .filter(lottoNumbers::contains)
         .count();
+  }
+
+  public boolean additionMatch(Set<LottoNumber> lottoNumbers) {
+    return lottoNumbers.contains(additionNumber);
   }
 }

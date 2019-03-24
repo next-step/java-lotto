@@ -22,7 +22,7 @@ public class ConsoleView {
     MyLottos myLottos = buyLottos(insertMoney);
 
     String inputWinNumbers = consoleInputView.inputWinNumbers();
-    String inputAdditionNumber = consoleInputView.inputWinNumbers();
+    int inputAdditionNumber = consoleInputView.inputAdditionNumber();
     WinNumbers winNumbers = winNumbers(inputWinNumbers, inputAdditionNumber);
 
     winState(myLottos, winNumbers);
@@ -51,14 +51,14 @@ public class ConsoleView {
 
   }
 
-  private static WinNumbers winNumbers(String inputWinNumbers, String inputAdditionNumber) {
+  private static WinNumbers winNumbers(String inputWinNumbers, int inputAdditionNumber) {
 
     String[] winNumberArray = inputWinNumbers.split(",");
     Set<LottoNumber> winNumbers = Arrays.stream(winNumberArray)
         .map(winNumber -> LottoNumber.getInstance(Integer.parseInt(winNumber.trim())))
         .collect(Collectors.toSet());
 
-    LottoNumber additionalNumber = LottoNumber.getInstance(Integer.parseInt(inputAdditionNumber.trim()));
+    LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
     return new WinNumbers(winNumbers, additionalNumber);
   }
 }

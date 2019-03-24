@@ -21,4 +21,10 @@ public class ConsoleInputView {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     return this.scanner.next();
   }
+
+  public int inputAdditionNumber() {
+
+    System.out.println("보너스 볼을 입력해 주세요.");
+    return this.scanner.nextInt();
+  }
 }

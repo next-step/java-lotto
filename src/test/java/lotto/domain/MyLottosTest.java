@@ -75,10 +75,11 @@ public class MyLottosTest {
 
     // Then
     assertThat(winResults).isNotNull();
-    assertThat(winResults.size()).isEqualTo(4);
+    assertThat(winResults.size()).isEqualTo(5);
     assertThat(winResults.get(WinMoney.THREE)).isEqualTo(1);
     assertThat(winResults.get(WinMoney.FOUR)).isEqualTo(1);
     assertThat(winResults.get(WinMoney.FIVE)).isEqualTo(1);
+    assertThat(winResults.get(WinMoney.FIVE_ONE)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.SIX)).isEqualTo(1);
   }
 
@@ -98,10 +99,11 @@ public class MyLottosTest {
 
     // Then
     assertThat(winResults).isNotNull();
-    assertThat(winResults.size()).isEqualTo(4);
+    assertThat(winResults.size()).isEqualTo(5);
     assertThat(winResults.get(WinMoney.THREE)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.FOUR)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.FIVE)).isEqualTo(0);
+    assertThat(winResults.get(WinMoney.FIVE_ONE)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.SIX)).isEqualTo(1);
   }
 

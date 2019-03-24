@@ -21,6 +21,11 @@ public class Lotto {
     return winNumbers.matchCount(lottoNumbers);
   }
 
+
+  public boolean additionMatch(WinNumbers winNumbers) {
+    return winNumbers.additionMatch(lottoNumbers);
+  }
+
   public String numbers() {
 
     return this.lottoNumbers.stream()
