@@ -2,6 +2,8 @@ package lottery;
 
 
 import lottery.domain.Money;
+import lottery.domain.TicketCount;
+import lottery.domain.WinningTicket;
 import lottery.machine.LotteryMachine;
 import lottery.view.InputView;
 import lottery.view.ResultView;
@@ -19,14 +21,12 @@ public class Application {
         LotteryMachine machine = new LotteryMachine();
 
         final Money price = InputView.inputPrice();
-        final int count = machine.buyLotteryTicket(price);
-
+        final TicketCount count = machine.buyLotteryTicket(price);
         InputView.viewTicketCount(count);
         ResultView.viewTickets(machine.getTickets());
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        WinningTicket winningTicket = InputView.inputWinningTicket();
 
-        ResultView.viewStatistics(machine.raffle(winningNumbers, bonusNumber));
+        ResultView.viewStatistics(machine.raffle(winningTicket));
     }
 }
