@@ -1,7 +1,6 @@
 package util;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Random {
     private static final int LOTTO_LENGTH = 6;
@@ -10,12 +9,14 @@ public class Random {
 
 
     public static Set<Integer> generationRandom() {
-        Set<Integer> random = new HashSet<>();
+        List<Integer> random = new ArrayList<>();
 
-        for (int i = 0; i < LOTTO_LENGTH; i++) {
-            random.add((int)(Math.random() * LOTTO_MAX_VALUE) + INITIALIZATION_RANDOM_NUMBER);
+        for (int i = 0; i < LOTTO_MAX_VALUE; i++) {
+            random.add(i);
         }
 
-        return random;
+        Collections.shuffle(random);
+
+        return new HashSet<>(random.subList(0, 6));
     }
 }
