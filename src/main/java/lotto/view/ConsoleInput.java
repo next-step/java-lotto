@@ -1,14 +1,11 @@
 package lotto.view;
 
+import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoList;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import spark.utils.StringUtils;
 
 public class ConsoleInput {
@@ -45,16 +42,9 @@ public class ConsoleInput {
                 break;
             }
 
-            List<LottoNumber> lottoNumbers = new ArrayList<>();
-
             try {
-                String[] numbers = input.split(", ");
+                lottoList.add(new Lotto(input.split(", ")));
 
-                for (int i = 0; i < numbers.length; i++) {
-                    lottoNumbers.add(LottoNumber.from(Integer.parseInt(numbers[i])));
-                }
-
-                lottoList.add(new Lotto(lottoNumbers));
             } catch (RuntimeException exception) {
                 System.err.println(exception.getMessage());
                 System.out.println("로또 번호 입력이 잘못 되었습니다.");
@@ -69,12 +59,11 @@ public class ConsoleInput {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = scanner.nextLine();
 
-        Lotto winningLotto = null;
-        while (winningLotto == null) {
+        Lotto lotto = null;
+        while (lotto == null) {
             try {
-                winningLotto = new Lotto(input.split(", "));
+                lotto = new Lotto(scanner.nextLine().split(", "));
             } catch (RuntimeException exception) {
                 System.err.println(exception.getMessage());
                 System.out.println("지난 주 당첨 번호 입력이 잘못 되었습니다.");
@@ -82,12 +71,12 @@ public class ConsoleInput {
             }
         }
 
-        LottoNumber bonusNumber = null;
         System.out.println("보너스 볼을 입력해 주세요.");
 
-        while (bonusNumber == null) {
+        WinningLotto winningLotto = null;
+        while (winningLotto == null) {
             try {
-                bonusNumber = LottoNumber.from(scanner.nextLine());
+                winningLotto = new WinningLotto(lotto, LottoNumber.from(scanner.nextLine()));
             } catch (RuntimeException exception) {
                 System.err.println(exception.getMessage());
                 System.out.println("보너스 볼 입력이 잘못 되었습니다.");
@@ -95,6 +84,6 @@ public class ConsoleInput {
             }
         }
 
-        return new WinningLotto(winningLotto, bonusNumber);
+        return winningLotto;
     }
 }

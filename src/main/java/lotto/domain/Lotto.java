@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -30,11 +31,9 @@ public class Lotto {
     }
 
     public Lotto(String[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int i = 0; i < numbers.length; i++) {
-            lottoNumbers.add(LottoNumber.from(numbers[i]));
-        }
+        List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+            .map(number -> LottoNumber.from(number.trim()))
+            .collect(Collectors.toList());
 
         this.lottoNumbers = new HashSet<>(lottoNumbers);
         new Lotto(lottoNumbers);

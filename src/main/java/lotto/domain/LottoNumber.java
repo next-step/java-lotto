@@ -30,7 +30,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(String value) {
-        return values.get(Integer.parseInt(value));
+        return values.get(Integer.parseInt(value.trim()));
     }
 
     private LottoNumber(int value) {

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class LottoMoney {
     public static final long LOTTO_UNIT_PRICE = 1_000;
     private final long money;
@@ -13,7 +15,11 @@ public class LottoMoney {
     }
 
     public LottoMoney(String money) {
-        this.money = Long.parseLong(money);
+        if (StringUtils.isEmpty(money.trim())) {
+            throw new IllegalArgumentException(LOTTO_UNIT_PRICE + " OR MORE");
+        }
+
+        this.money = Long.parseLong(money.trim());
         new LottoMoney(this.money);
     }
 

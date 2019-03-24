@@ -5,6 +5,10 @@ public class WinningLotto {
     private LottoNumber bonus;
 
     public WinningLotto(Lotto lotto, LottoNumber bonus) {
+        if (lotto.contains(bonus)) {
+            throw new IllegalArgumentException("BONUS NUMBER MUST NOT BE INCLUDED");
+        }
+
         this.lotto = lotto;
         this.bonus = bonus;
     }
