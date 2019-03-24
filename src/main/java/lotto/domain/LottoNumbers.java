@@ -1,11 +1,15 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int TOTAL_NUMBER_OF_THE_LOTTO = 6;
+
+    private static final String NUMBER_SEPARATOR = ", ";
 
     private final List<LottoNumber> values;
 
@@ -15,8 +19,23 @@ public class LottoNumbers {
         this.values = new ArrayList<>(values);
     }
 
+    public LottoNumbers(final String values) {
+        this(
+                Arrays.stream(values.split(NUMBER_SEPARATOR))
+                        .map(Integer::valueOf)
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList())
+        );
+    }
+
     public List<LottoNumber> get() {
         return new ArrayList<>(this.values);
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.values
+                .contains(lottoNumber)
+                ;
     }
 
     long howManyMatches(final LottoNumbers winningNumber) {

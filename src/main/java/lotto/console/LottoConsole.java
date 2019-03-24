@@ -17,7 +17,7 @@ public class LottoConsole {
     public static void run(final LottoService lottoService) {
         final LottoPaper lottoPaper = lottoService.issue(enterAmount());
         printLottoPaper(lottoPaper);
-        final ResultView resultView = lottoService.viewResults(lottoPaper, enterWinningNumber());
+        final ResultView resultView = lottoService.viewResults(lottoPaper, enterWinningNumber(), enterBonusNumber());
         printResult(resultView);
     }
 
@@ -30,6 +30,11 @@ public class LottoConsole {
         CONSOLE_SCANNER.nextLine();
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return CONSOLE_SCANNER.nextLine();
+    }
+
+    private static int enterBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return CONSOLE_SCANNER.nextInt();
     }
 
     private static void printLottoPaper(final LottoPaper lottoPaper) {
@@ -71,8 +76,7 @@ public class LottoConsole {
 
     private static String changeToStatisticsPrintFormat(final Map.Entry<WinningOrder, Long> entry) {
         return new StringBuilder()
-                .append(entry.getKey().getCondition())
-                .append("개 일치")
+                .append(entry.getKey().getPhrase())
                 .append(" (")
                 .append(entry.getKey().getAmount())
                 .append("원)- ")

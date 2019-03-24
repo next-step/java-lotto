@@ -1,11 +1,13 @@
 package lotto.application;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPaper;
+import lotto.domain.WinningOrder;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,24 +40,26 @@ public class LottoServiceTest {
     }
 
     @Test
-    public void 여섯_개_일치() {
+    public void 한_장_구입해서_일등() {
         // given
-        final LottoNumbers lottoNumbers = LottoNumbersGenerator.randomNumbers();
-        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(lottoNumbers)));
-        final String winningNumber = lottoNumbersToString(lottoNumbers);
+        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(new LottoNumbers("1, 2, 3, 4, 5, 6"))));
 
         // when
-        final ResultView view = lottoService.viewResults(lottoPaper, winningNumber);
+        final ResultView view = lottoService.viewResults(lottoPaper, "1, 2, 3, 4, 5, 6", 7);
 
         // then
         assertThat(view.getRoi()).isEqualTo(WinningOrder.FIRST_PLACE.getAmount().divide(Lotto.PRICE));
     }
 
-    private String lottoNumbersToString(final LottoNumbers lottoNumbers) {
-        return lottoNumbers.get()
-                .stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "))
-                ;
+    @Test
+    public void 한_장_구입해서_이등() {
+        // given
+        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(new LottoNumbers("1, 2, 3, 4, 5, 6"))));
+
+        // when
+        final ResultView view = lottoService.viewResults(lottoPaper, "1, 2, 3, 4, 5, 7", 6);
+
+        // then
+        assertThat(view.getRoi()).isEqualTo(WinningOrder.SECOND_PLACE.getAmount().divide(Lotto.PRICE));
     }
 }

@@ -23,6 +23,10 @@ public class Lotto {
                 ;
     }
 
+    public WinningOrder winResult(final WinningNumber winningNumber) {
+        return winningNumber.winResult(this.numbers);
+    }
+
     public LottoNumbers getNumbers() {
         return numbers;
     }
