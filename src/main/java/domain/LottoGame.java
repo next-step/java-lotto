@@ -1,52 +1,43 @@
 package domain;
 
-import view.InputView;
-
 import java.util.*;
 
 public class LottoGame {
 
-    int lottoCount;
-    private List<Lotto> lottos;
-    private Lotto winner;
-    private List<LottoResult> lottoResult = new ArrayList<LottoResult>();
+    private List<Lotto> userLottos;
+    private Map<Integer, Integer> profit = new HashMap<>();
+
 
     public LottoGame(int lottoCount) {
-        this.lottoCount = lottoCount;
-        lottos = new ArrayList<Lotto>(lottoCount);
+        userLottos = new ArrayList<Lotto>(lottoCount);
 
         for (int i = 0 ; i < lottoCount ; i++) {
-            lottos.add(new Lotto());
+            userLottos.add(new Lotto());
         }
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
+    public Map<Integer, Integer> getMultipleResults(WinningLotto winningLotto) {
 
-    public int getLottoCount(){
-        return lottoCount;
-    }
+        Map<Integer, Integer> totalResults = new HashMap<>();
+        totalResults.put(3,0);
+        totalResults.put(4,0);
+        totalResults.put(5,0);
+        totalResults.put(6,0);
 
-    public List<LottoResult> calculateMatch(List<Lotto> lottos, Lotto winner) {
-        for(Lotto lotto:lottos){
-            int numberOfMatch = compareSingleLotto(lotto, winner);
-            lottoResult.add(new LottoResult(numberOfMatch,1));
+        for(Lotto userLotto : userLottos) {
+            LottoResult result = new LottoResult(winningLotto, userLotto);
+            int numberOfMatch = result.getNumberOfMatch();
+            if(numberOfMatch >= 3) {
+                totalResults.put(numberOfMatch, totalResults.get(numberOfMatch) + 1);
+            }
         }
-        return lottoResult;
+        System.out.println(totalResults.toString());
+        return totalResults;
     }
 
-    private int compareSingleLotto(Lotto first, Lotto second) {
-        List<Integer> numbers = first.getNumbers();
-        int numberOfMatch = 0;
-        for(int number : numbers) {
-            if (second.getNumbers().contains(number)) numberOfMatch++;
-        }
-        return numberOfMatch;
+    public void printUserLottos() {
+        System.out.println(userLottos.toString());
     }
 
 
-    public List<LottoResult> getLottoResult() {
-        return lottoResult;
-    }
 }

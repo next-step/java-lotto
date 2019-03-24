@@ -1,12 +1,11 @@
 package controller;
 
-import domain.Lotto;
 import domain.LottoGame;
-import domain.LottoResult;
+import domain.WinningLotto;
 import view.InputView;
 import view.ResultView;
 
-import java.util.List;
+import java.util.Map;
 
 public class LottoGameMain {
 
@@ -14,16 +13,14 @@ public class LottoGameMain {
         int lottoCount = InputView.getLottoCountFromInputMoney();
         LottoGame lottoGame = new LottoGame(lottoCount);
 
-        for (Lotto lotto:lottoGame.getLottos()){
-            System.out.println(lotto.toString());
-        }
-        
+        lottoGame.printUserLottos();
 
-        Lotto winner = InputView.getWinnerNoByString();
+        WinningLotto winningLotto = InputView.getWinnerNoByString();
 
-        List<LottoResult> result = lottoGame.calculateMatch(lottoGame.getLottos(), winner);
+        Map<Integer, Integer> result = lottoGame.getMultipleResults(winningLotto);
 
-        ResultView.printProfitStatics(result);
+        ResultView.printWinningStatistics(result);
         ResultView.printProfitRate(result, lottoCount * 1000);
+
     }
 }

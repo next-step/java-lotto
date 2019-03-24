@@ -16,8 +16,8 @@ public class Lotto {
 
      public Lotto(){
           Set<Integer> tmpNumbers = new HashSet<>();
-          while( tmpNumbers.size() < SINGLE_LOTTO_SIZE){
-               tmpNumbers.add( (int) (Math.random() * LOTTO_MAX_BOUND) + 1 );
+          while(tmpNumbers.size() < SINGLE_LOTTO_SIZE){
+               tmpNumbers.add((int)(Math.random() * LOTTO_MAX_BOUND) + 1);
           }
           numbers = new ArrayList<>(tmpNumbers);
           Collections.sort(numbers);
@@ -27,9 +27,13 @@ public class Lotto {
           return numbers;
      }
 
-
      @Override
      public String toString() {
           return numbers.toString();
      }
+
+     public boolean contains(int number) {
+          return numbers.contains(number);
+     }
+
 }

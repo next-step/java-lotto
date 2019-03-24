@@ -1,6 +1,8 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoMoney;
+import domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +14,31 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
 
-        int lottoCount = scanner.nextInt() / 1000;
+        LottoMoney money = new LottoMoney(scanner.nextInt());
 
-        System.out.println(lottoCount + "개를 구매했습니다");
-        return lottoCount;
+        System.out.println(money.getNumberOfLotto() + "개를 구매했습니다");
+        return money.getNumberOfLotto();
     }
 
 
-    public static Lotto getWinnerNoByString() {
-        Lotto winner;
+    public static WinningLotto getWinnerNoByString() {
+        WinningLotto winner;
         List<Integer> speicifedNumbers = new ArrayList<>();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.(,로 숫자 구분)");
         Scanner scanner = new Scanner(System.in);
         String[] inputs = splitStringToWinner(scanner.nextLine());
 
-        for(String input:inputs) {
+        for(String input : inputs) {
             speicifedNumbers.add(Integer.parseInt(input));
         }
 
-        winner = new Lotto(speicifedNumbers);
+        winner = new WinningLotto(speicifedNumbers);
         return winner;
     }
 
     private static String[] splitStringToWinner(String input) {
         return input.split(",");
     }
+
 
 }
