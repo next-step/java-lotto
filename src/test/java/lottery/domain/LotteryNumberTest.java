@@ -9,8 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryNumberTest {
 
-    private  LotteryNumberSet lotteryNumberSet = new LotteryNumberSet();
-
     @Test
     public void 자동값테스트() {
         LotteryNumber number = new LotteryNumber() {
@@ -21,7 +19,11 @@ public class LotteryNumberTest {
         };
         List<Integer> result = number.extractRandomNumbers();
         assertThat(result).isEqualTo(Arrays.asList(1,2,3,4,5,6));
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 당첨번호_입력_테스트() {
+        new LotteryNumber(Arrays.asList(1,2,3,4));
     }
 
     @Test
