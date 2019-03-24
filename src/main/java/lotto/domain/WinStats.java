@@ -4,9 +4,11 @@ import java.util.List;
 
 public class WinStats {
 
+  private Money buyMoney;
   private List<WinResult> winResults;
 
-  public WinStats(List<WinResult> winResults) {
+  public WinStats(Money buyMoney, List<WinResult> winResults) {
+    this.buyMoney = buyMoney;
     this.winResults = winResults;
   }
 
@@ -16,6 +18,10 @@ public class WinStats {
         .map(WinResult::reward)
         .reduce(Money::sum)
         .orElse(new Money(0));
+  }
+
+  public String yield() {
+    return String.format("%.2f", totalReward().yield(buyMoney));
   }
 
   public long getWinCount(WinMoney winMoney) {

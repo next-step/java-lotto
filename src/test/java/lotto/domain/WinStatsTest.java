@@ -13,6 +13,8 @@ public class WinStatsTest {
   public void test_totalReward() {
 
     // Given
+    Money buyMoney = new Money(4000);
+
     Lotto lotto1 = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
@@ -21,7 +23,7 @@ public class WinStatsTest {
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
-    WinStats winStats = new WinStats(myLottos.winResults(winNumbers));
+    WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
     // When
     Money totalReward = winStats.totalReward();
@@ -35,12 +37,14 @@ public class WinStatsTest {
   public void test_totalReward_sizMatch_one() {
 
     // Given
+    Money buyMoney = new Money(1000);
+
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(buyMoney, Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
-    WinStats winStats = new WinStats(myLottos.winResults(winNumbers));
+    WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
     // When
     Money totalReward = winStats.totalReward();
@@ -54,12 +58,14 @@ public class WinStatsTest {
   public void test_totalReward_zero() {
 
     // Given
+    Money buyMoney = new Money(1000);
+
     Lotto lotto = new Lotto(intArrayToLottoNumbers(2, 41, 13, 31, 26, 18));
-    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(buyMoney, Collections.singletonList(lotto));
 
     WinNumbers winNumbers = new WinNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
 
-    WinStats winStats = new WinStats(myLottos.winResults(winNumbers));
+    WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
     // When
     Money totalReward = winStats.totalReward();

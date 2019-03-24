@@ -16,7 +16,7 @@ public class MyLottos {
   }
 
   public WinStats winStats(WinNumbers winNumbers) {
-    return new WinStats(winResults(winNumbers));
+    return new WinStats(buyMoney, winResults(winNumbers));
   }
 
   public List<WinResult> winResults(WinNumbers winNumbers) {
@@ -35,7 +35,7 @@ public class MyLottos {
     return new WinResult(winMoney, winCount);
   }
 
-  public String yield(Money totalReward) {
-    return String.format("%.2f", totalReward.yield(buyMoney));
+  public Money getBuyMoney() {
+    return buyMoney;
   }
 }

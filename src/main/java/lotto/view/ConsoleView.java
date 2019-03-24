@@ -34,7 +34,7 @@ public class ConsoleView {
     WinStats winStats = myLottos.winStats(winNumber);
     ConsoleResultView.printMatchWinCount(winStats);
 
-    String yield = myLottos.yield(winStats.totalReward());
+    String yield = winStats.yield();
     ConsoleResultView.printYield(yield);
   }
 

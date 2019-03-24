@@ -25,7 +25,7 @@ public class MyLottosTest {
     WinStats winStats = myLottos.winStats(winNumbers);
 
     // When
-    String yield = myLottos.yield(winStats.totalReward());
+    String yield = winStats.yield();
 
     // Then
     assertThat(yield).isEqualTo("0.00");
@@ -45,7 +45,7 @@ public class MyLottosTest {
     WinStats winStats = myLottos.winStats(winNumbers);
 
     // When
-    String yield = myLottos.yield(winStats.totalReward());
+    String yield = winStats.yield();
 
     // Then
     assertThat(yield).isEqualTo("500388.75");
