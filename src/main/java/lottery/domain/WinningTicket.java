@@ -4,23 +4,21 @@ import java.util.List;
 
 public class WinningTicket {
 
-    private LotteryTicket winningTicket;
+    private LotteryTicket winningNumbersTicket;
 
     private LotteryNumber bonusNumber;
 
     public WinningTicket(List<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbersTicket = new LotteryTicket(winningNumbers);
         this.bonusNumber = new LotteryNumber(bonusNumber);
-        this.winningTicket = new LotteryTicket(winningNumbers);
     }
 
     public LotteryRank raffle(LotteryTicket ticket) {
-        final int count = (int) winningTicket.lotteryNumbers
+        final int matchCount = (int) winningNumbersTicket.lotteryNumbers
                 .stream()
                 .filter(winningNumber -> ticket.lotteryNumbers.contains(winningNumber))
                 .count();
 
-        final boolean matchBonus = ticket.lotteryNumbers.contains(bonusNumber);
-
-        return LotteryRank.generate(count, matchBonus);
+        return LotteryRank.generate(matchCount, ticket.lotteryNumbers.contains(bonusNumber));
     }
 }
