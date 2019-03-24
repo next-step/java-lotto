@@ -42,7 +42,7 @@ public class LottoServiceTest {
     @Test
     public void 한_장_구입해서_일등() {
         // given
-        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(new LottoNumbers("1, 2, 3, 4, 5, 6"))));
+        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))));
 
         // when
         final ResultView view = lottoService.viewResults(lottoPaper, "1, 2, 3, 4, 5, 6", 7);
@@ -54,7 +54,7 @@ public class LottoServiceTest {
     @Test
     public void 한_장_구입해서_이등() {
         // given
-        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(new LottoNumbers("1, 2, 3, 4, 5, 6"))));
+        final LottoPaper lottoPaper = new LottoPaper(Arrays.asList(Lotto.manual(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)))));
 
         // when
         final ResultView view = lottoService.viewResults(lottoPaper, "1, 2, 3, 4, 5, 7", 6);

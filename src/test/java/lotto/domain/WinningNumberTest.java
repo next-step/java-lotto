@@ -2,13 +2,15 @@ package lotto.domain;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningNumberTest {
     @Test(expected = IllegalArgumentException.class)
     public void 당첨_번호와_추가_번호가_중복() {
         // given
-        final LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         // when
         // then
@@ -18,7 +20,7 @@ public class WinningNumberTest {
     @Test
     public void 일등() {
         // given
-        final LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         final WinningNumber winningNumber = new WinningNumber(lottoNumbers, LottoNumber.from(7));
 
         // when
@@ -31,8 +33,8 @@ public class WinningNumberTest {
     @Test
     public void 이등() {
         // given
-        final LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        final LottoNumbers numbers = new LottoNumbers("1, 2, 3, 4, 5, 7");
+        final LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumbers numbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
         final WinningNumber winningNumber = new WinningNumber(numbers, LottoNumber.from(6));
 
         // when

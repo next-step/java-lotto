@@ -2,10 +2,13 @@ package lotto.application;
 
 import lotto.domain.*;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoService {
+    private static final String NUMBER_SEPARATOR = ", ";
+
     public LottoPaper issue(final int amount) {
         return new LottoPaper(
                 IntStream.rangeClosed(1, getNumberOfLottoToPurchase(amount))
@@ -26,6 +29,14 @@ public class LottoService {
     }
 
     private WinningNumber getWinningNumber(final String lottoNumbers, final int bonusNumber) {
-        return new WinningNumber(new LottoNumbers(lottoNumbers), LottoNumber.from(bonusNumber));
+        return new WinningNumber(getLottoNumbers(lottoNumbers), LottoNumber.from(bonusNumber));
+    }
+
+    private LottoNumbers getLottoNumbers(final String lottoNumbers) {
+        return new LottoNumbers(
+                Arrays.stream(lottoNumbers.split(NUMBER_SEPARATOR))
+                        .map(Integer::valueOf)
+                        .collect(Collectors.toList())
+        );
     }
 }

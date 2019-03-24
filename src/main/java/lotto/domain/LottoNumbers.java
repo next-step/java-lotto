@@ -1,30 +1,26 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int TOTAL_NUMBER_OF_THE_LOTTO = 6;
 
-    private static final String NUMBER_SEPARATOR = ", ";
+    private final Set<LottoNumber> values;
 
-    private final List<LottoNumber> values;
-
-    public LottoNumbers(final List<LottoNumber> values) {
+    private LottoNumbers(final Set<LottoNumber> values) {
         validate(values);
-        Collections.sort(values);
-        this.values = new ArrayList<>(values);
+        this.values = new TreeSet<>(values);
     }
 
-    public LottoNumbers(final String values) {
+    public LottoNumbers(final List<Integer> values) {
         this(
-                Arrays.stream(values.split(NUMBER_SEPARATOR))
-                        .map(Integer::valueOf)
+                values.stream()
                         .map(LottoNumber::from)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toSet())
         );
     }
 
@@ -46,23 +42,8 @@ public class LottoNumbers {
                 ;
     }
 
-    private void validate(final List<LottoNumber> values) {
-        checkTotalNumber(values);
-        checkDuplicateNumbers(values);
-    }
-
-    private void checkTotalNumber(final List<LottoNumber> values) {
+    private void validate(final Set<LottoNumber> values) {
         if (values.size() != TOTAL_NUMBER_OF_THE_LOTTO) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void checkDuplicateNumbers(final List<LottoNumber> values) {
-        final long count = values.stream()
-                .distinct()
-                .count()
-                ;
-        if (count < values.size()) {
             throw new IllegalArgumentException();
         }
     }
