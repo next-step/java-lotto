@@ -53,12 +53,17 @@ public class ConsoleView {
 
   private static WinNumbers winNumbers(String inputWinNumbers, int inputAdditionNumber) {
 
+    Set<LottoNumber> winNumbers = convertStringToLottoNumbers(inputWinNumbers);
+    LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
+
+    return new WinNumbers(winNumbers, additionalNumber);
+  }
+
+  private static Set<LottoNumber> convertStringToLottoNumbers(String inputWinNumbers) {
+
     String[] winNumberArray = inputWinNumbers.split(",");
-    Set<LottoNumber> winNumbers = Arrays.stream(winNumberArray)
+    return Arrays.stream(winNumberArray)
         .map(winNumber -> LottoNumber.getInstance(Integer.parseInt(winNumber.trim())))
         .collect(Collectors.toSet());
-
-    LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
-    return new WinNumbers(winNumbers, additionalNumber);
   }
 }
