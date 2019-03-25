@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
 public class LottoResultTest {
 
     private LottoResult lottoResult;
-    private Set<Integer> winningNumbers = getSet(Arrays.asList(40, 41, 42, 43, 44, 45));
-    private int bonusNumber = 7;
+    private final Set<LottoNumber> winningNumbers = getSet(Arrays.asList(40, 41, 42, 43, 44, 45));
+    private final int bonusNumber = 7;
 
     @Test
     public void test_MISS_rank() {
@@ -22,7 +22,7 @@ public class LottoResultTest {
                 getLottoGame(Arrays.asList(1, 2, bonusNumber, 4, 40, 41))
         );
 
-        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers, bonusNumber);
+        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
         Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
         System.out.println(winningCountPerRank);
 
@@ -40,7 +40,7 @@ public class LottoResultTest {
             getLottoGame(Arrays.asList(1, 2, bonusNumber, 43, 44, 45))
         );
 
-        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers, bonusNumber);
+        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
         Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
         System.out.println(winningCountPerRank);
 
@@ -59,7 +59,7 @@ public class LottoResultTest {
             getLottoGame(Arrays.asList(40, 41, 3, 4, 44, 45))
         );
 
-        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers, bonusNumber);
+        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
         Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
         System.out.println(winningCountPerRank);
 
@@ -79,7 +79,7 @@ public class LottoResultTest {
             getLottoGame(Arrays.asList(40, 41, 42, 43, 44, 6))
         );
 
-        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers, bonusNumber);
+        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
         Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
         System.out.println(winningCountPerRank);
 
@@ -99,7 +99,7 @@ public class LottoResultTest {
                 getLottoGame(Arrays.asList(40, 41, 42, 43, 44, bonusNumber))
         );
 
-        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers, bonusNumber);
+        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);
         Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
         System.out.println(winningCountPerRank);
 
@@ -110,11 +110,11 @@ public class LottoResultTest {
 
     @Test
     public void getWinningCountPerRank_FIRST() {
-        List<LottoNumberPackage> gameNumbers = Arrays.asList(
-            getLottoGame(Arrays.asList(40, 41, 42, 43, 44, 45))
+        List<LottoNumberPackage> gameNumbers = Collections.singletonList(
+                getLottoGame(Arrays.asList(40, 41, 42, 43, 44, 45))
         );
 
-        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers, bonusNumber);        Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
+        lottoResult = getLottoResult(gameNumbers.size() * LOTTO_PRICE, gameNumbers, winningNumbers);        Map<Rank, Long> winningCountPerRank = lottoResult.getWinningCountPerRank();
         System.out.println(winningCountPerRank);
 
         assertEquals(gameNumbers.size(), winningCountPerRank.get(Rank.FIRST).longValue());
@@ -126,18 +126,24 @@ public class LottoResultTest {
         return new LottoNumberPackage(getSet(integers));
     }
 
-    private Set<Integer> getSet(List<Integer> integers) {
+    private Set<LottoNumber> getSet(List<Integer> integers) {
         return integers.stream()
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toSet());
     }
 
-    private LottoResult getLottoResult(long purchaseAmount,
-                                       List<LottoNumberPackage> automaticNumbers,
-                                       Set<Integer> winningNumbers,
-                                       int bonusNumber) {
+    private LottoResultMaker getLottoResultMaker(long purchaseAmount,
+                                       List<LottoNumberPackage> gameNumbers,
+                                       Set<LottoNumber> winningNumbers) {
 
         PurchaseAmount purchaseAmountObj = new PurchaseAmount(purchaseAmount);
-        WinningInfo winningNumbersObj = new WinningInfo(new LottoNumberPackage(winningNumbers), new LottoNumber(bonusNumber));
-        return new LottoResult(new LottoTicket(new PurchaseInfo(purchaseAmountObj), automaticNumbers), winningNumbersObj);
+        WinningInfo winningInfo = new WinningInfo(new LottoNumberPackage(winningNumbers), LottoNumber.getInstance(7));
+        return new LottoResultMaker(new LottoTicket(new PurchaseInfo(purchaseAmountObj, new PurchaseCount(purchaseAmountObj.getLottoCount(), 0)), gameNumbers), winningInfo);
+    }
+
+    private LottoResult getLottoResult(long purchaseAmount,
+                                       List<LottoNumberPackage> gameNumbers,
+                                       Set<LottoNumber> winningNumbers) {
+        return new LottoResult(getLottoResultMaker(purchaseAmount, gameNumbers, winningNumbers));
     }
 }

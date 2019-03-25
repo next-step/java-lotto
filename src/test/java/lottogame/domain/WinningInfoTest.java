@@ -13,7 +13,7 @@ public class WinningInfoTest {
     @Test(expected = IllegalArgumentException.class)
     public void constructor_of_WinningInfo_for_duplicated_bonus_number() {
         LottoNumberPackage lottoNumberPackage = new LottoNumberPackage(getRangedNumbers(1, 6));
-        LottoNumber bonusNumber = new LottoNumber(1);
+        LottoNumber bonusNumber = LottoNumber.getInstance(1);
 
         new WinningInfo(lottoNumberPackage, bonusNumber);
     }
@@ -21,7 +21,7 @@ public class WinningInfoTest {
     @Test
     public void constructor_of_WinningInfo() {
         LottoNumberPackage lottoNumberPackage = new LottoNumberPackage(getRangedNumbers(1, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.getInstance(7);
 
         WinningInfo winningInfo = new WinningInfo(lottoNumberPackage, bonusNumber);
 
@@ -29,9 +29,10 @@ public class WinningInfoTest {
         assertEquals(bonusNumber, winningInfo.getBonusNumber());
     }
 
-    private Set<Integer> getRangedNumbers(int from, int to) {
+    private Set<LottoNumber> getRangedNumbers(int from, int to) {
         return IntStream.rangeClosed(from, to)
                 .boxed()
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toSet());
     }
 }

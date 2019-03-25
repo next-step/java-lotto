@@ -30,13 +30,14 @@ public class LottoNumberGeneratorImpl implements LottoNumberGenerator {
                         .collect(Collectors.toList());
     }
 
-    Set<Integer> getLottoNumbers() {
+    Set<LottoNumber> getLottoNumbers() {
         Collections.shuffle(numberPool);
 
         return numberPool.stream()
-                        .limit(LottoNumberPackage.LOTTO_GAME_SIZE)
-                        .sorted()
-                        .collect(Collectors.toCollection(LinkedHashSet::new));
+                .limit(LottoNumberPackage.LOTTO_GAME_SIZE)
+                .sorted()
+                .map(LottoNumber::getInstance)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public static List<Integer> getNumberPool() {

@@ -8,18 +8,17 @@ import java.util.List;
 public class LottoTicket {
 
     private final PurchaseInfo purchaseInfo;
-    private final List<LottoNumberPackage> automaticNumbers;
-    private LottoNumberGenerator lottoNumberGenerator;
+    private final List<LottoNumberPackage> gameNumbers;
 
-    public LottoTicket(PurchaseInfo purchaseInfo, LottoNumberGenerator lottoNumberGenerator) {
+    public LottoTicket(PurchaseInfo purchaseInfo, List<LottoNumberPackage> manualNumbers, LottoNumberGenerator lottoNumberGenerator) {
         this.purchaseInfo = purchaseInfo;
-        this.lottoNumberGenerator = lottoNumberGenerator;
-        automaticNumbers = this.lottoNumberGenerator.generate(purchaseInfo.getPurchaseCount().getValue());
+        gameNumbers = manualNumbers;
+        gameNumbers.addAll(lottoNumberGenerator.generate(purchaseInfo.getAutomaticCount()));
     }
 
-    LottoTicket(PurchaseInfo purchaseInfo, List<LottoNumberPackage> automaticNumbers) {
+    LottoTicket(PurchaseInfo purchaseInfo, List<LottoNumberPackage> gameNumbers) {
         this.purchaseInfo = purchaseInfo;
-        this.automaticNumbers = automaticNumbers;
+        this.gameNumbers = gameNumbers;
     }
 
     public PurchaseAmount getPurchaseAmount() {
@@ -30,7 +29,7 @@ public class LottoTicket {
         return purchaseInfo.getPurchaseCount();
     }
 
-    public List<LottoNumberPackage> getAutomaticNumbers() {
-        return Collections.unmodifiableList(automaticNumbers);
+    public List<LottoNumberPackage> getGameNumbers() {
+        return Collections.unmodifiableList(gameNumbers);
     }
 }

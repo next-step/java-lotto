@@ -2,8 +2,8 @@ package lottogame.domain;
 
 public class MatchStatus {
 
-    final private int matchedCount;
-    final private boolean bonusNumberMatched;
+    private final int matchedCount;
+    private final boolean bonusNumberMatched;
 
     public MatchStatus(int matchedCount, boolean bonusNumberMatched) {
         this.matchedCount = matchedCount;

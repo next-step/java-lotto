@@ -9,6 +9,66 @@ public class PurchaseAmountTest {
 
     private PurchaseAmount purchaseAmount;
 
+    @Test(expected = NumberFormatException.class)
+    public void constructor_of_PurchaseAmount_for_null_String() {
+        new PurchaseAmount(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_PurchaseAmount_for_empty_String() {
+        new PurchaseAmount("");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_PurchaseAmount_for_string_String() {
+        new PurchaseAmount("aaa");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_PurchaseAmount_for_zero_LOTTO_PRICE_String() {
+        new PurchaseAmount("0");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_PurchaseAmount_for_smaller_than_minimum_value_String() {
+        new PurchaseAmount(String.valueOf(LOTTO_PRICE - 1));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor_of_PurchaseAmount_for_bigger_than_maximum_value_String() {
+        new PurchaseAmount(String.valueOf(Long.MAX_VALUE));
+    }
+
+    @Test
+    public void constructor_of_PurchaseAmount_for_LOTTO_PRICE_String() {
+        long expected = LOTTO_PRICE;
+
+        PurchaseAmount purchaseAmount = new PurchaseAmount(new String(String.valueOf(expected)));
+
+        assertEquals(expected, purchaseAmount.getValue());
+        assertEquals(expected/LOTTO_PRICE, purchaseAmount.getLottoCount());
+    }
+
+    @Test
+    public void constructor_of_PurchaseAmount_for_10_times_of_LOTTO_PRICE_String() {
+        long expected = LOTTO_PRICE * 10 + (LOTTO_PRICE-1);
+
+        PurchaseAmount purchaseAmount = new PurchaseAmount(new String(String.valueOf(expected)));
+
+        assertEquals(expected, purchaseAmount.getValue());
+        assertEquals(expected/LOTTO_PRICE, purchaseAmount.getLottoCount());
+    }
+
+    @Test
+    public void constructor_of_PurchaseAmount_for_maximum_value_String() {
+        long expected = Long.MAX_VALUE-1;
+
+        PurchaseAmount purchaseAmount = new PurchaseAmount(new String(String.valueOf(expected)));
+
+        assertEquals(expected, purchaseAmount.getValue());
+        assertEquals(expected/LOTTO_PRICE, purchaseAmount.getLottoCount());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void constructor_of_PurchaseAmount_for_0() {
         new PurchaseAmount(0);
@@ -31,6 +91,7 @@ public class PurchaseAmountTest {
         purchaseAmount = new PurchaseAmount(expected);
 
         assertEquals(expected, purchaseAmount.getValue());
+        assertEquals(expected/LOTTO_PRICE, purchaseAmount.getLottoCount());
     }
 
     @Test
@@ -40,6 +101,7 @@ public class PurchaseAmountTest {
         purchaseAmount = new PurchaseAmount(expected);
 
         assertEquals(expected, purchaseAmount.getValue());
+        assertEquals(expected/LOTTO_PRICE, purchaseAmount.getLottoCount());
     }
 
     @Test
@@ -49,6 +111,7 @@ public class PurchaseAmountTest {
         purchaseAmount = new PurchaseAmount(expected);
 
         assertEquals(expected, purchaseAmount.getValue());
+        assertEquals(expected/LOTTO_PRICE, purchaseAmount.getLottoCount());
     }
 
     @Test

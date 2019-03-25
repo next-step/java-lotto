@@ -1,33 +1,37 @@
 package lottogame.domain;
 
-import lottogame.validator.InputValidatable;
-import org.apache.commons.lang3.ArrayUtils;
+import lottogame.validator.LottoNumberPackageValidator;
+import lottogame.validator.Validatable;
 import spark.utils.CollectionUtils;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static lottogame.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
-import static lottogame.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
+import static lottogame.view.ConsoleInputView.NUMBER_DELIMITER;
 
 /**
  * 로또 1게임
  */
-public class LottoNumberPackage implements InputValidatable<Set<Integer>> {
+public class LottoNumberPackage {
 
     public static final int LOTTO_GAME_SIZE = 6;
 
-    private final LinkedHashSet<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
+    private final Validatable<Set<LottoNumber>> validator = new LottoNumberPackageValidator();
 
-    public LottoNumberPackage(Set<Integer> lottoNumbers) {
-        validate(lottoNumbers);
-        numbers = getNumbers(lottoNumbers);
+    public LottoNumberPackage(String inputLine) {
+        this(getNumbers(inputLine.split(NUMBER_DELIMITER)));
     }
 
-    private LinkedHashSet<LottoNumber> getNumbers(Set<Integer> numbers) {
-        return numbers.stream()
-                    .map(LottoNumber::new)
+    public LottoNumberPackage(Set<LottoNumber> numbers) {
+        validator.validate(numbers);
+        this.numbers = numbers;
+    }
+
+    private static Set<LottoNumber> getNumbers(String[] numbers) {
+        return Arrays.stream(numbers)
+                    .map(Integer::parseInt)
+                    .map(LottoNumber::getInstance)
                     .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -35,10 +39,10 @@ public class LottoNumberPackage implements InputValidatable<Set<Integer>> {
         return numbers;
     }
 
-    public MatchStatus getMatchStatus(WinningInfo winningNumbers) {
+    public MatchStatus getMatchStatus(WinningInfo winningInfo) {
         return new MatchStatus(
-            getMatchedCount(winningNumbers.getNumbers()),
-            isBonusNumberMatched(winningNumbers.getBonusNumber())
+            getMatchedCount(winningInfo.getNumbers()),
+            isBonusNumberMatched(winningInfo.getBonusNumber())
         );
     }
 
@@ -62,16 +66,6 @@ public class LottoNumberPackage implements InputValidatable<Set<Integer>> {
         return Optional.ofNullable(targetNumber)
                 .filter(numbers::contains)
                 .isPresent();
-    }
-
-    @Override
-    public boolean isInvalid(Set<Integer> target) {
-        return target == null || target.size() != LOTTO_GAME_SIZE;
-    }
-
-    @Override
-    public String getInvalidMessage() {
-        return MINIMUM_LOTTO_NUMBER + "에서 " + MAXIMUM_LOTTO_NUMBER + "까지 중복없이 숫자 " + LOTTO_GAME_SIZE + "개를 입력하세요.";
     }
 
     @Override
