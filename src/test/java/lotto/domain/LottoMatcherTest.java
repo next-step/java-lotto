@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.dto.Money;
 import lotto.dto.UserLotto;
-import lotto.rule.LottoSetUp;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +14,6 @@ public class LottoMatcherTest {
 
     @Before
     public void setUp() {
-        LottoSetUp.setUpLottoRule(6, 6, 1000);
         lotto = new Lotto(new Money(1000));
     }
 

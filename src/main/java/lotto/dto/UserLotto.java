@@ -21,4 +21,8 @@ public class UserLotto {
         return this.userLotto;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s 개를 구매했습니다.", this.ticketCount);
+    }
 }

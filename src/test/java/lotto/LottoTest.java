@@ -4,7 +4,6 @@ import lotto.domain.Lotto;
 import lotto.dto.Money;
 import lotto.dto.UserLotto;
 import lotto.dto.WinningLotto;
-import lotto.rule.LottoSetUp;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +18,6 @@ public class LottoTest {
 
     @Before
     public void setUp() {
-        LottoSetUp.setUpLottoRule(6,45,1000);
         lotto = new Lotto(new Money(2555));
     }
 

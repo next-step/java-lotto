@@ -7,12 +7,12 @@ import lotto.dto.UserLotto;
 import java.util.List;
 
 public class ResultView {
+    public static void resultUserTicketCount(UserLotto userLotto) {
+        System.out.println(userLotto.toString());
+    }
 
     public static void resultUserLotto(UserLotto userLotto) {
-        System.out.println(userLotto.getTicketCount() + "개를 구매했습니다.");
-
         List<LottoTicket> lottoTickets = userLotto.getUserLotto();
-
         for (LottoTicket ticket : lottoTickets) {
             System.out.println(ticket.toString());
         }

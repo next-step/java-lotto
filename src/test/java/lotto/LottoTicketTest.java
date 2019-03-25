@@ -1,8 +1,8 @@
 package lotto;
 import lotto.domain.LottoTicket;
-import lotto.rule.LottoSetUp;
 import org.junit.Before;
-import org.junit.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,9 +14,8 @@ public class LottoTicketTest {
         ticket = new LottoTicket();
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void 로또티켓_예외처리(){
-        LottoSetUp.setUpLottoRule(6,1,1000);
-        LottoTicket ticket = new LottoTicket();
+    public void 유저로또티켓_확인(){
+        List<Integer> numbers = ticket.getTicket();
+        assertThat(numbers).hasSize(6);
     }
 }

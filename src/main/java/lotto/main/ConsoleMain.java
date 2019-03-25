@@ -2,7 +2,7 @@ package lotto.main;
 
 import lotto.domain.Lotto;
 import lotto.dto.Money;
-import lotto.rule.LottoSetUp;
+import lotto.dto.UserLotto;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -12,12 +12,14 @@ public class ConsoleMain {
         Money money = InputView.inputUserMoney();
 
         //buy lotto
-        LottoSetUp.setUpLottoRule(6, 45, 1000);
         Lotto lotto = new Lotto(money);
         lotto.buy();
 
         //result lotto
-        ResultView.resultUserLotto(lotto.getUserLotto());
+        UserLotto userLotto = lotto.getUserLotto();
+        ResultView.resultUserTicketCount(userLotto);
+        ResultView.resultUserLotto(userLotto);
+
         lotto.winningLotto(InputView.inputWinningLotto());
         ResultView.resultMatch(lotto.result());
     }
