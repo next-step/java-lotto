@@ -30,4 +30,16 @@ public class AutoLottoGeneratorTest {
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
         lottoGenerator.generate();
     }
+
+    @Test
+    public void 자동_LottoBundle_생성() {
+        // given
+        int numberOfLottos = 5;
+
+        // when
+        LottoBundle lottoBundle = AutoLottoGenerator.generateLottoBundle(5);
+
+        //then
+        assertThat(lottoBundle.getLottos()).hasSize(numberOfLottos);
+    }
 }

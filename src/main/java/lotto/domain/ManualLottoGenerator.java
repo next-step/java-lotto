@@ -16,6 +16,15 @@ public class ManualLottoGenerator implements LottoGenerator {
         return toLotto(lotto);
     }
 
+    public static LottoBundle generateLottoBundle(List<String> lottos) {
+        List<Lotto> manualLottos = lottos.stream()
+                .map(ManualLottoGenerator::new)
+                .map(ManualLottoGenerator::generate)
+                .collect(Collectors.toList());
+
+        return new LottoBundle(manualLottos);
+    }
+
     private Lotto toLotto(String lottoNumbers) {
         return new Lotto(parseLottoNumbers(lottoNumbers));
     }
