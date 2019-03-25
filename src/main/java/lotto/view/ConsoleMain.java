@@ -9,9 +9,10 @@ public class ConsoleMain {
     public static void main(String[] args) {
 
         LottoMoney lottoMoney = InputView.inputMoney();
-        OutputView.printTicketCount(lottoMoney);
+        List<String[]> manualLottoNumbers = InputView.inputManualLottoNumbers();
+        OutputView.printTicketCount(lottoMoney, manualLottoNumbers.size());
 
-        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney.buy());
+        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
         OutputView.printTickets(lottoTickets);
 
         WinningLotto winningLotto = InputView.inputWinningNumbers();
