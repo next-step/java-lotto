@@ -24,23 +24,29 @@ public class WinningLottoTest {
     }
 
     @Test
-    public void matchCount_구하기() {
+    public void matchCount_구하기_모든_로또_번호가_겹치는_경우() {
         // given
         WinningLotto winningLotto = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(45));
-
-        Lotto six = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto five = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 16));
-        Lotto two = new Lotto(getLottoNumbers(1, 2, 13, 14, 15, 16));
+        Lotto lotto = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
 
         // when
-        int shouldBeSix = winningLotto.getMatchCounts(six);
-        int shouldBeFive = winningLotto.getMatchCounts(five);
-        int shouldBeTwo = winningLotto.getMatchCounts(two);
+        int shouldBeSix = winningLotto.getMatchCounts(lotto);
 
         // then
         assertThat(shouldBeSix).isEqualTo(6);
-        assertThat(shouldBeFive).isEqualTo(5);
-        assertThat(shouldBeTwo).isEqualTo(2);
+    }
+
+    @Test
+    public void matchCount_구하기_모든_로또_번호가_겹치지_않는_경우() {
+        // given
+        WinningLotto winningLotto = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(45));
+        Lotto lotto = new Lotto(getLottoNumbers(11, 12, 13, 14, 15, 16));
+
+        // when
+        int shouldBeZero = winningLotto.getMatchCounts(lotto);
+
+        // then
+        assertThat(shouldBeZero).isEqualTo(0);
     }
 
     @Test
@@ -48,35 +54,58 @@ public class WinningLottoTest {
         // given
         int bonusNumber = 45;
         WinningLotto winningLotto = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(bonusNumber));
-
-        Lotto same = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, bonusNumber));
-        Lotto different = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lotto lotto  = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, bonusNumber));
 
         // when
-        boolean shouldBeTrue = winningLotto.isBonusNumberMatch(same);
-        boolean shouldBeFalse = winningLotto.isBonusNumberMatch(different);
+        boolean shouldBeTrue = winningLotto.isBonusNumberMatch(lotto);
 
         // then
         assertThat(shouldBeTrue).isTrue();
+    }
+
+    @Test
+    public void 보너스_번호가_불일치하는지_확인() {
+        // given
+        int bonusNumber = 45;
+        WinningLotto winningLotto = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(bonusNumber));
+        Lotto lotto = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
+
+        // when
+        boolean shouldBeFalse = winningLotto.isBonusNumberMatch(lotto);
+
+        // then
         assertThat(shouldBeFalse).isFalse();
     }
 
     @Test
-    public void 로또_결과_가져오기() {
+    public void 로또_결과_가져오기_2등() {
         // given
         int bonusNumber = 45;
         WinningLotto winningLotto = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(bonusNumber));
 
-        Lotto first = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
         Lotto second = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, bonusNumber));
 
         // when
-        LottoMatchResult resultOfFirst = winningLotto.getMatchResult(first);
         LottoMatchResult resultOfSecond = winningLotto.getMatchResult(second);
 
         // then
-        assertThat(LottoRank.getRankOf(resultOfFirst)).isEqualByComparingTo(LottoRank.FIRST);
         assertThat(LottoRank.getRankOf(resultOfSecond)).isEqualByComparingTo(LottoRank.SECOND);
+    }
+
+    @Test
+    public void 로또_결과_가져오기_3등() {
+        // given
+        int bonusNumber = 45;
+        WinningLotto winningLotto = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(bonusNumber));
+
+        Lotto third = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 16));
+
+
+        // when
+        LottoMatchResult resultOfThird = winningLotto.getMatchResult(third);
+
+        // then
+        assertThat(LottoRank.getRankOf(resultOfThird)).isEqualByComparingTo(LottoRank.THIRD);
     }
 
     private List<LottoNumber> getLottoNumbers(int... numbers) {

@@ -9,14 +9,10 @@ public class MoneyTest {
     @Test
     public void 돈은_양수_이어야함() {
         // given
-        long positive = 1;
-        long zero = 0;
         long negative = -1;
 
         // when
         // then
-        new Money(positive);
-        new Money(zero);
         assertThatIllegalArgumentException().isThrownBy(() -> new Money(negative));
     }
 

@@ -8,20 +8,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
     @Test
-    public void LottoResult에서_순위_가져오기() {
+    public void LottoResult에서_순위_가져오기_2등() {
         // given
         LottoMatchResult second = new LottoMatchResult(5, true);
-        LottoMatchResult third = new LottoMatchResult(5, false);
-        LottoMatchResult fail = new LottoMatchResult(2, true);
 
         // when
         LottoRank shouldBeSecond = LottoRank.getRankOf(second);
-        LottoRank shouldBeThird = LottoRank.getRankOf(third);
-        LottoRank shouldBeFail = LottoRank.getRankOf(fail);
 
         // then
         assertThat(shouldBeSecond).isEqualByComparingTo(LottoRank.SECOND);
+    }
+
+    @Test
+    public void LottoResult에서_순위_가져오기_3등() {
+        // given
+        LottoMatchResult third = new LottoMatchResult(5, false);
+
+        // when
+        LottoRank shouldBeThird = LottoRank.getRankOf(third);
+
+        // then
         assertThat(shouldBeThird).isEqualByComparingTo(LottoRank.THIRD);
+    }
+
+    @Test
+    public void LottoResult에서_순위_가져오기_꽝() {
+        // given
+        LottoMatchResult fail = new LottoMatchResult(2, false);
+
+        // when
+        LottoRank shouldBeFail = LottoRank.getRankOf(fail);
+
+        // then
         assertThat(shouldBeFail).isEqualByComparingTo(LottoRank.FAIL);
     }
 

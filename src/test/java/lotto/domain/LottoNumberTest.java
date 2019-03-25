@@ -11,15 +11,23 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoNumberTest {
     @Test
-    public void 생성_시_숫자_범위_넘어갈_경우_IllegalArgumentException() {
+    public void 생성_시_숫자_범위_초과인_경우_IllegalArgumentException() {
         // given
-        int underMinNumber = LottoNumber.MIN_NUMBER - 1;
         int overMaxNumber = LottoNumber.MAX_NUMBER + 1;
 
         // when
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(underMinNumber));
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(overMaxNumber));
+    }
+
+    @Test
+    public void 생성_시_숫자_범위_미만인_경우_IllegalArgumentException() {
+        // given
+        int underMinNumber = LottoNumber.MIN_NUMBER - 1;
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(underMinNumber));
     }
 
     @Test
@@ -36,14 +44,22 @@ public class LottoNumberTest {
     }
 
     @Test
-    public void 로또_숫자_범위를_넘어가는_수를_가져오려고_하면_IllegalArgumentException() {
-        int underMinNumber = LottoNumber.MIN_NUMBER - 1;
+    public void 로또_숫자_범위_초과인_수를_가져오려고_하면_IllegalArgumentException() {
         int overMaxNumber = LottoNumber.MAX_NUMBER + 1;
 
         // when
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(underMinNumber));
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(overMaxNumber));
+    }
+
+    @Test
+    public void 로또_숫자_범위_미만인_수를_가져오려고_하면_IllegalArgumentException() {
+        // given
+        int underMinNumber = LottoNumber.MIN_NUMBER - 1;
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.getInstance(underMinNumber));
     }
 
     @Test
@@ -59,8 +75,6 @@ public class LottoNumberTest {
         lottoNumbers.sort(Comparator.naturalOrder());
 
         // then
-        assertThat(lottoNumbers.get(0)).isEqualByComparingTo(one);
-        assertThat(lottoNumbers.get(1)).isEqualByComparingTo(two);
-        assertThat(lottoNumbers.get(2)).isEqualByComparingTo(four);
+        assertThat(lottoNumbers).containsSequence(one, two, four);
     }
 }

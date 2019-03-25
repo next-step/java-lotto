@@ -10,17 +10,23 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     @Test
-    public void 생성_시_로또_숫자의_수가_6개가_넘어가면_IllegalArgumentException() {
+    public void 생성_시_로또_숫자의_수가_6개_초과면_IllegalArgumentException() {
         // given
-        List<LottoNumber> fiveNumbers = getLottoNumbers(1, 2, 3, 4, 5);
-        List<LottoNumber> sixNumbers = getLottoNumbers(1, 2, 3, 4, 5, 6);
         List<LottoNumber> sevenNumbers = getLottoNumbers(1, 2, 3, 4, 5, 6, 7);
 
         // when
         // then
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(fiveNumbers));
-        new Lotto(sixNumbers);
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(sevenNumbers));
+    }
+
+    @Test
+    public void 생성_시_로또_숫자의_수가_6개_미만이면_IllegalArgumentException() {
+        // given
+        List<LottoNumber> fiveNumbers = getLottoNumbers(1, 2, 3, 4, 5);
+
+        // when
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(fiveNumbers));
     }
 
     @Test
@@ -34,18 +40,28 @@ public class LottoTest {
     }
 
     @Test
-    public void 서로_겹치는_숫자_갯수_구하기() {
+    public void 로또_숫자가_모두_겹치는_경우_겹치는_수_구하기() {
         // given
         Lotto lottoNumbers = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
         Lotto six = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto zero = new Lotto(getLottoNumbers(11, 12, 13, 14, 15, 16));
 
         // when
         int shouldBeSix = lottoNumbers.getNumberOfDuplicatedNumbers(six);
-        int shouldBeZero = lottoNumbers.getNumberOfDuplicatedNumbers(zero);
 
         // then
         assertThat(shouldBeSix).isEqualTo(6);
+    }
+
+    @Test
+    public void 로또_숫자가_겹치지_않는_경우_겹치는_수_구하기() {
+        // given
+        Lotto lottoNumbers = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
+        Lotto zero = new Lotto(getLottoNumbers(11, 12, 13, 14, 15, 16));
+
+        // when
+        int shouldBeZero = lottoNumbers.getNumberOfDuplicatedNumbers(zero);
+
+        // then
         assertThat(shouldBeZero).isEqualTo(0);
     }
 
