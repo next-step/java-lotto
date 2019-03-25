@@ -11,7 +11,7 @@ public class LotteryTicket {
 
     public static final int NUMBERS_COUNT = 6;
 
-    final Set<LotteryNumber> lotteryNumbers;
+    private final Set<LotteryNumber> lotteryNumbers;
 
     public LotteryTicket(List<Integer> numbers) {
         this.lotteryNumbers = numbers.stream()
@@ -27,5 +27,17 @@ public class LotteryTicket {
     @Override
     public String toString() {
         return lotteryNumbers.toString();
+    }
+
+    int countMatchNumbers(LotteryTicket target) {
+        return (int) this.lotteryNumbers
+                .stream()
+                .filter(number -> target.contains(number))
+                .count();
+    }
+
+    boolean contains(LotteryNumber number) {
+        return this.lotteryNumbers
+                .contains(number);
     }
 }

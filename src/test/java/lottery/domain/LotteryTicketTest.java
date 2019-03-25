@@ -24,6 +24,21 @@ public class LotteryTicketTest {
     }
 
     @Test
+    public void test_매칭() {
+        LotteryTicket ticket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(ticket.contains(LotteryNumber.of(1)))
+                .isTrue();
+    }
+
+    @Test
+    public void test_매칭되는_로또번호_갯수() {
+        LotteryTicket ticket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThat(ticket.countMatchNumbers(new LotteryTicket(Arrays.asList(4, 5, 6, 7, 8, 9))))
+                .isEqualTo(3);
+    }
+
+    @Test
     public void test_toString() {
         final LotteryTicket ticket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 

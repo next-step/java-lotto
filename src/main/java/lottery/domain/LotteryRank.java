@@ -3,6 +3,7 @@ package lottery.domain;
 import java.util.Arrays;
 
 public enum LotteryRank {
+
     FIRST(6, 2_000_000_000) {
         @Override
         protected boolean match(int winningCount, boolean matchBonus) {
