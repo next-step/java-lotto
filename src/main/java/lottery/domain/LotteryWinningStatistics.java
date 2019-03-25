@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class LotteryWinningStatistics {
 
-    private Map<LotteryRank, Integer> rankCountMap;
+    private final Map<LotteryRank, Integer> rankCountMap;
 
-    public LotteryWinningStatistics(LotteryTicket winningTicket, List<LotteryTicket> tickets) {
+    public LotteryWinningStatistics(WinningTicket winningTicket, List<LotteryTicket> tickets) {
         rankCountMap = convertToRankCountMap(convertToRanks(winningTicket, tickets));
     }
 
@@ -27,9 +27,9 @@ public class LotteryWinningStatistics {
                 .count();
     }
 
-    private List<LotteryRank> convertToRanks(LotteryTicket winningTicket, List<LotteryTicket> tickets) {
+    private List<LotteryRank> convertToRanks(WinningTicket winningTicket, List<LotteryTicket> tickets) {
         return tickets.stream()
-                .map(lotteryTicket -> lotteryTicket.getWinningRank(winningTicket))
+                .map(lotteryTicket -> winningTicket.raffle(lotteryTicket))
                 .collect(Collectors.toList());
     }
 
@@ -47,7 +47,7 @@ public class LotteryWinningStatistics {
     private int getWinningMoney() {
         return rankCountMap.entrySet()
                 .stream()
-                .reduce(0, (money, entry) -> money + (entry.getValue() * entry.getKey().revenue),
+                .reduce(0, (money, entry) -> money + (entry.getValue() * entry.getKey().winningMoney),
                         (money1, money2) -> money1 + money2);
     }
 

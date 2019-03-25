@@ -30,6 +30,10 @@ public class ResultView {
     }
 
     private static void viewRank(LotteryWinningStatistics statistics, LotteryRank rank) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", rank.winningCount, rank.revenue, statistics.countRank(rank));
+        System.out.printf("%d개 일치%s(%d원)- %d개\n",
+                rank.matchCount,
+                rank == LotteryRank.SECOND ? ", 보너스 볼 일치" : " ",
+                rank.winningMoney,
+                statistics.countRank(rank));
     }
 }

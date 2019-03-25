@@ -1,18 +1,17 @@
 package lottery.machine;
 
-import lottery.domain.LotteryNumber;
-import lottery.domain.LotteryTicket;
-import lottery.domain.LotteryWinningStatistics;
+import lottery.domain.*;
 import lottery.supplier.BoundedUniqueNumbersGenerator;
 import lottery.supplier.NumbersGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LotteryMachine {
 
-    private NumbersGenerator numbersGenerator;
+    private final NumbersGenerator numbersGenerator;
 
     private List<LotteryTicket> lotteryTickets;
 
@@ -24,19 +23,21 @@ public class LotteryMachine {
         this.numbersGenerator = numbersGenerator;
     }
 
-    public int buyLotteryTicket(int price) {
-        final int ticketCount = price / LotteryTicket.PRICE;
-        this.lotteryTickets = IntStream.range(0, ticketCount)
+    public TicketCount buyLotteryTicket(Money price) {
+        final TicketCount ticketCount = new TicketCount(price);
+
+        this.lotteryTickets = IntStream.range(0, ticketCount.count)
                 .mapToObj(i -> new LotteryTicket(numbersGenerator.nextNumbers(LotteryTicket.NUMBERS_COUNT)))
                 .collect(Collectors.toList());
-        return lotteryTickets.size();
-    }
 
-    public LotteryWinningStatistics checkWinningNumbers(List<Integer> winningNumbers) {
-        return new LotteryWinningStatistics(new LotteryTicket(winningNumbers), this.lotteryTickets);
+        return ticketCount;
     }
 
     public List<LotteryTicket> getTickets() {
-        return this.lotteryTickets;
+        return new ArrayList<>(this.lotteryTickets);
+    }
+
+    public LotteryWinningStatistics raffle(WinningTicket winningTicket) {
+        return new LotteryWinningStatistics(winningTicket, this.lotteryTickets);
     }
 }

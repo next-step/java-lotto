@@ -1,9 +1,14 @@
 package lottery;
 
 
+import lottery.domain.Money;
+import lottery.domain.TicketCount;
+import lottery.domain.WinningTicket;
 import lottery.machine.LotteryMachine;
 import lottery.view.InputView;
 import lottery.view.ResultView;
+
+import java.util.List;
 
 public class Application {
 
@@ -14,12 +19,14 @@ public class Application {
 
     public void run() {
         LotteryMachine machine = new LotteryMachine();
-        final int price = InputView.inputPrice();
-        final int count = machine.buyLotteryTicket(price);
 
+        final Money price = InputView.inputPrice();
+        final TicketCount count = machine.buyLotteryTicket(price);
         InputView.viewTicketCount(count);
         ResultView.viewTickets(machine.getTickets());
 
-        ResultView.viewStatistics(machine.checkWinningNumbers(InputView.inputWinningNumbers()));
+        WinningTicket winningTicket = InputView.inputWinningTicket();
+
+        ResultView.viewStatistics(machine.raffle(winningTicket));
     }
 }
