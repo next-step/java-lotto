@@ -1,39 +1,34 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WiningLottoTicket {
-    private List<Integer> winingNumber;
-    private int bonusNumber;
+    private LottoTicket winingNumber;
+    private LottoNumber bonusNumber;
 
 
-    public WiningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
+    public WiningLottoTicket(LottoTicket winningNumber, LottoNumber bonusNumber) {
         this.winingNumber = winningNumber;
-        if (winningNumber.contains(bonusNumber)) {
+        if (winningNumber.getLottoTicket().contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스숫자 중복");
         }
         this.bonusNumber = bonusNumber;
     }
 
 
-    public int checkLottoNumber(LottoTicket lottoTicket) {
+    public int checkLottoNumber(LottoTicket userLottoTicket) {
         int matchCont = 0;
-        for (Integer lottoNumber : lottoTicket.getLottoTicket()) {
-            if (winingNumber.contains(lottoNumber)) {
+        for (LottoNumber userLottoNumber: userLottoTicket.getLottoTicket()) {
+            if (winingNumber.getLottoTicket().contains(userLottoNumber)) {
                 matchCont++;
             }
         }
         return matchCont;
     }
 
-    public boolean checkBonusNumber(LottoTicket buyLottoTicket) {
-        return buyLottoTicket.getLottoTicket().contains(bonusNumber);
+    public boolean checkBonusNumber(LottoTicket buyUserLottoTicket) {
+        return buyUserLottoTicket.getLottoTicket().contains(this.bonusNumber);
     }
 
-    public List<Integer> getWiningNumber() {
+    public LottoTicket getWiningNumber() {
         return winingNumber;
     }
-
-
-
 }

@@ -1,19 +1,21 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    private List<Integer> buyLottoNumbers;
+    private List<LottoNumber> buyLottoNumbers;
 
-    public LottoTicket(List<Integer> buyLottoNumbers) {
+    public LottoTicket(List<LottoNumber> buyLottoNumbers) {
         this.buyLottoNumbers = buyLottoNumbers;
     }
 
-    public List<Integer> getLottoTicket() {
+
+    public List<LottoNumber> getLottoTicket() {
         return buyLottoNumbers;
     }
 
-    public Integer get(int index) {
+    public LottoNumber get(int index) {
         return buyLottoNumbers.get(index);
     }
 
@@ -22,4 +24,14 @@ public class LottoTicket {
         return " " +
             buyLottoNumbers +
             " ";
-    }}
+    }
+
+
+    public static LottoTicket of(List<Integer> asList) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer integer : asList) {
+            lottoNumbers.add(LottoNumber.getBasicNumber(integer));
+        }
+        return new LottoTicket(lottoNumbers);
+    }
+}

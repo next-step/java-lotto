@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -16,9 +18,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static int getBonusBall() {
+    public static LottoNumber getBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        int inputNumber = scanner.nextInt();
+        return new LottoNumber(inputNumber);
     }
 }

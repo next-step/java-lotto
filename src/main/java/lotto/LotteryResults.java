@@ -30,16 +30,16 @@ public class LotteryResults {
         return lottoResults;
     }
 
-    private void saveLotteryResult(WiningLottoTicket winingLottoTicket, List<LottoTicket> buyLottoTickets) {
-        for (LottoTicket buyLottoTicket : buyLottoTickets) {
+    private void saveLotteryResult(WiningLottoTicket winingLottoTicket, List<LottoTicket> buyUserLottoTickets) {
+        for (LottoTicket buyLottoTicket : buyUserLottoTickets) {
             LottoRank rank = getLottoRank(winingLottoTicket, buyLottoTicket);
             lottoResults.put(rank, lottoResults.get(rank) + 1);
         }
     }
 
-    private LottoRank getLottoRank(WiningLottoTicket winingLottoTicket, LottoTicket buyLottoTicket) {
-        int countNum = winingLottoTicket.checkLottoNumber(buyLottoTicket);
-        boolean isBonusNumber = winingLottoTicket.checkBonusNumber(buyLottoTicket);
+    private LottoRank getLottoRank(WiningLottoTicket winingLottoTicket, LottoTicket userLottoTicket) {
+        int countNum = winingLottoTicket.checkLottoNumber(userLottoTicket);
+        boolean isBonusNumber = winingLottoTicket.checkBonusNumber(userLottoTicket);
         return LottoRank.valueOf(countNum,isBonusNumber);
     }
 

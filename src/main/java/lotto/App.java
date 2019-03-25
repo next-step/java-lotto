@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.WiningLottoTicket;
 import lotto.view.InputView;
@@ -22,10 +23,10 @@ public class App {
         OutputView.printBuyLottoTickets(buyLottoTickets);
 
         //지난주번호 입력
-        List<Integer> winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
+        LottoTicket winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
 
         //보너스볼 입력
-        int bonusBall = InputView.getBonusBall();
+        LottoNumber bonusBall = InputView.getBonusBall();;
 
         //위닝로또
         WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber, bonusBall);
