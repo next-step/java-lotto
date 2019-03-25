@@ -21,22 +21,37 @@ public class LottoMachine {
         return getAutoLottoBundle(getNumberOfAffordableLottos(money));
     }
 
-    public static LottoBundle buyLottos(LottoBundle manualLottoBundle, Money money) {
-        if (!isMoneyEnough(manualLottoBundle, money)) {
+    public static LottoBundle buyLottos(List<String> manualLottos, Money money) {
+        if (!isMoneyEnough(manualLottos.size(), money)) {
             throw new IllegalArgumentException("You can't buy lottos with this money");
         }
 
-        long numberOfAutoLottos = getNumberOfAutoLottos(manualLottoBundle, money);
+        return getTotalLottoBundle(manualLottos, money);
+    }
+
+    private static boolean isMoneyEnough(long numberOfLottos, Money money) {
+        return numberOfLottos <= getNumberOfAffordableLottos(money);
+    }
+
+    private static LottoBundle getTotalLottoBundle(List<String> manualLottos, Money money) {
+        LottoBundle manualLottoBundle = getManualLottoBundle(manualLottos);
+
+        long numberOfAutoLottos = getNumberOfAutoLottos(manualLottos.size(), money);
         LottoBundle autoLottoBundle = getAutoLottoBundle(numberOfAutoLottos);
 
         manualLottoBundle.join(autoLottoBundle);
-
         return manualLottoBundle;
     }
 
-    private static boolean isMoneyEnough(LottoBundle lottoBundle, Money money) {
-        List<Lotto> lottos = lottoBundle.getLottos();
-        return lottos.size() <= getNumberOfAffordableLottos(money);
+    private static LottoBundle getManualLottoBundle(List<String> manualLottos) {
+        return new LottoBundle(getManualLottos(manualLottos));
+    }
+
+    private static List<Lotto> getManualLottos(List<String> manualLottos) {
+        return manualLottos.stream()
+                .map(ManualLottoGenerator::new)
+                .map(ManualLottoGenerator::generate)
+                .collect(Collectors.toList());
     }
 
     static LottoBundle getAutoLottoBundle(long numberOfLotto) {
@@ -51,10 +66,8 @@ public class LottoMachine {
         return money.getAmount() / LOTTO_PRICE.getAmount();
     }
 
-    private static long getNumberOfAutoLottos(LottoBundle manualLottoBundle, Money money) {
+    private static long getNumberOfAutoLottos(long numberOfManualLottos, Money money) {
         long numberOfTotalLottos = getNumberOfAffordableLottos(money);
-        List<Lotto> manualLottos = manualLottoBundle.getLottos();
-
-        return numberOfTotalLottos - manualLottos.size();
+        return numberOfTotalLottos - numberOfManualLottos;
     }
 }
