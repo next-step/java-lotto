@@ -10,19 +10,6 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoMachineTest {
-
-    @Test
-    public void 입력값_만큼_자동_로또_가져오기() {
-        // given
-        int numberOfLottos = 5;
-
-        // when
-        LottoBundle lottoBundle = LottoMachine.getAutoLottoBundle(5);
-
-        // then
-        assertThat(lottoBundle.getLottos()).hasSize(numberOfLottos);
-    }
-
     @Test
     public void 로또를_구매할_수_있는_금액이_아닌_경우_IllegalArgumentException() {
         // given
