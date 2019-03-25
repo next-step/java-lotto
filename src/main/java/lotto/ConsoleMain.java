@@ -25,10 +25,9 @@ public class ConsoleMain {
             ConsoleOutputView.printEmptyLine();
 
             List<String> manualLottos = ConsoleInputView.inputManualLottos(scanner, manualTimes);
-            LottoBundle manualLottoBundle = LottoNumberParser.parseLottoBundle(manualLottos);
             ConsoleOutputView.printEmptyLine();
 
-            lottoBundle = LottoMachine.buyLottos(manualLottoBundle, new Money(purchaseAmount));
+            lottoBundle = LottoMachine.buyLottos(manualLottos, new Money(purchaseAmount));
             ConsoleOutputView.printNumberOfLottos(lottoBundle);
             ConsoleOutputView.printLottos(lottoBundle);
 
