@@ -1,15 +1,15 @@
 package lotto.vo;
 
-public class PurchaseAmount {
+public class Money {
     public static final int LOTTERY_PRICE = 1_000;
     private final int lotteryTickets;
     private final int money;
 
-    public PurchaseAmount(String money) {
+    public Money(String money) {
         this(toInt(money));
     }
 
-    public PurchaseAmount(int money) {
+    public Money(int money) {
         if (money < LOTTERY_PRICE) {
             throw new IllegalArgumentException();
         }
@@ -25,7 +25,7 @@ public class PurchaseAmount {
         return lotteryTickets;
     }
 
-    public double yield(PurchaseAmount revenue) {
+    public double yield(Money revenue) {
         return (double)((revenue.money * 100) / money)/100;
     }
 }
