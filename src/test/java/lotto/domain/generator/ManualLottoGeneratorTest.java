@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.generator;
 
+import lotto.domain.*;
 import org.junit.Test;
 
 import java.util.Arrays;

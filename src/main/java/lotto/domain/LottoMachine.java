@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.generator.HalfManualLottoGenerator;
 import lotto.vo.Money;
 
 import java.util.List;

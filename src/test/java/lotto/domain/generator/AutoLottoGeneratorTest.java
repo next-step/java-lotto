@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.generator;
 
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumber;
 import org.junit.Test;
 
 import java.util.List;
