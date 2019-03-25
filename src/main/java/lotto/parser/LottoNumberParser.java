@@ -25,7 +25,7 @@ public class LottoNumberParser {
         return new LottoBundle(parsedLottos);
     }
 
-    static Lotto parseLotto(String lottoNumbers) {
+    public static Lotto parseLotto(String lottoNumbers) {
         return new Lotto(parseLottoNumbers(lottoNumbers));
     }
 
