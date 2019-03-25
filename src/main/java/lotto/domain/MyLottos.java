@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 public class MyLottos {
 
   private final Money buyMoney;
-  private final List<Lotto> lottos;
+  private final Lottos lottos;
 
-  public MyLottos(Money buyMoney, List<Lotto> lottos) {
+  public MyLottos(Money buyMoney, Lottos lottos) {
     this.buyMoney = buyMoney;
     this.lottos = lottos;
   }
@@ -26,15 +26,8 @@ public class MyLottos {
     Map<WinMoney, Long> winResult = new HashMap<>();
 
     Arrays.stream(WinMoney.values())
-        .forEach(winMoney -> winResult.put(winMoney, countWinLotto(winNumbers, winMoney)));
+        .forEach(winMoney -> winResult.put(winMoney, lottos.countWinLotto(winNumbers, winMoney)));
 
     return winResult;
-  }
-
-  public Long countWinLotto(WinNumbers winNumbers, WinMoney winMoney) {
-
-    return lottos.stream()
-        .filter(lotto -> winMoney.isWinLotto(lotto, winNumbers))
-        .count();
   }
 }

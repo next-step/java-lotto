@@ -2,18 +2,20 @@ package lotto.domain;
 
 public enum WinMoney {
 
-  THREE(3, 5_000),
-  FOUR(4, 50_000),
-  FIVE(5, 1_500_000),
-  FIVE_ONE(5, 30_000_000),
-  SIX(6, 2_000_000_000),
+  THREE(3, false, 5_000),
+  FOUR(4, false, 50_000),
+  FIVE(5, false, 1_500_000),
+  FIVE_ONE(5, true, 30_000_000),
+  SIX(6, false, 2_000_000_000),
   ;
 
   private int matchCount;
+  private boolean hasBonus;
   private long winMoney;
 
-  WinMoney(int matchCount, long winMoney) {
+  WinMoney(int matchCount, boolean hasBonus, long winMoney) {
     this.matchCount = matchCount;
+    this.hasBonus = hasBonus;
     this.winMoney = winMoney;
   }
 

@@ -20,7 +20,10 @@ public class MyLottosTest {
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
-    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+    MyLottos myLottos = new MyLottos(
+        new Money(4000),
+        new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4))
+    );
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(2, 13, 27, 41, 40, 5);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -42,7 +45,10 @@ public class MyLottosTest {
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
-    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+    MyLottos myLottos = new MyLottos(
+        new Money(4000),
+        new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4))
+    );
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -64,7 +70,10 @@ public class MyLottosTest {
     Lotto lotto2 = new Lotto(intArrayToLottoNumbers(4, 30, 14, 32, 28, 19));
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
-    MyLottos myLottos = new MyLottos(new Money(4000), Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+    MyLottos myLottos = new MyLottos(
+        new Money(4000),
+        new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4))
+    );
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -88,7 +97,10 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(
+        new Money(1000),
+        new Lottos(Collections.singletonList(lotto))
+    );
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -112,7 +124,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(3, 1, 28, 41, 32, 26));
-    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
+    Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
     Set<LottoNumber> winLottoNumber = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -120,7 +132,7 @@ public class MyLottosTest {
     WinMoney winMoney = WinMoney.SIX;
 
     // When
-    Long winCount = myLottos.countWinLotto(winNumbers, winMoney);
+    Long winCount = lottos.countWinLotto(winNumbers, winMoney);
 
     // Then
     assertThat(winCount).isEqualTo(0);
@@ -131,7 +143,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
+    Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 38, 10, 42, 17, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -139,7 +151,7 @@ public class MyLottosTest {
     WinMoney winMoney = WinMoney.THREE;
 
     // When
-    Long winCount = myLottos.countWinLotto(winNumbers, winMoney);
+    Long winCount = lottos.countWinLotto(winNumbers, winMoney);
 
     // Then
     assertThat(winCount).isEqualTo(1);
@@ -150,7 +162,7 @@ public class MyLottosTest {
 
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(new Money(1000), Collections.singletonList(lotto));
+    Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 38, 10, 7, 17, 45);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -159,7 +171,7 @@ public class MyLottosTest {
     WinMoney winMoney = WinMoney.THREE;
 
     // When
-    Long winCount = myLottos.countWinLotto(winNumbers, winMoney);
+    Long winCount = lottos.countWinLotto(winNumbers, winMoney);
 
     // Then
     assertThat(winCount).isEqualTo(0);

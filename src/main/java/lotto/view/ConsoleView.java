@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.MyLottos;
 import lotto.domain.WinNumbers;
@@ -47,7 +48,7 @@ public class ConsoleView {
       ConsoleResultView.printIssueLottoNumbers(lotto);
     }
 
-    return new MyLottos(buyMoney, lottos);
+    return new MyLottos(buyMoney, new Lottos(lottos));
 
   }
 

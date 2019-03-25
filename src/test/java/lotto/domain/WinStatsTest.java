@@ -21,7 +21,10 @@ public class WinStatsTest {
     Lotto lotto3 = new Lotto(intArrayToLottoNumbers(4, 15, 14, 32, 25, 19));
     Lotto lotto4 = new Lotto(intArrayToLottoNumbers(4, 42, 1, 15, 21, 19));
     Lotto lotto5 = new Lotto(intArrayToLottoNumbers(4, 42, 14, 23, 28, 19));
-    MyLottos myLottos = new MyLottos(new Money(5000), Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5));
+    MyLottos myLottos = new MyLottos(
+        new Money(5000),
+        new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5))
+    );
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -44,7 +47,7 @@ public class WinStatsTest {
     Money buyMoney = new Money(1000);
 
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    MyLottos myLottos = new MyLottos(buyMoney, Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(buyMoney, new Lottos(Collections.singletonList(lotto)));
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
@@ -67,7 +70,7 @@ public class WinStatsTest {
     Money buyMoney = new Money(1000);
 
     Lotto lotto = new Lotto(intArrayToLottoNumbers(2, 41, 13, 31, 26, 18));
-    MyLottos myLottos = new MyLottos(buyMoney, Collections.singletonList(lotto));
+    MyLottos myLottos = new MyLottos(buyMoney, new Lottos(Collections.singletonList(lotto)));
 
     Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
     LottoNumber additionNumber = LottoNumber.getInstance(23);
