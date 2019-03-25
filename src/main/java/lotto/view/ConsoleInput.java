@@ -33,17 +33,17 @@ public class ConsoleInput {
         Scanner scanner = new Scanner(System.in);
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        LottoList lottoList = new LottoList();
+        LottoList manualLottos = new LottoList();
 
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
-            if (StringUtils.isBlank(input) || lottoList.size() == limitLottoCount) {
+            if (StringUtils.isBlank(input) || manualLottos.size() == limitLottoCount) {
                 break;
             }
 
             try {
-                lottoList.add(new Lotto(input.split(", ")));
+                manualLottos.add(new Lotto(input.split(", ")));
 
             } catch (RuntimeException exception) {
                 System.err.println(exception.getMessage());
@@ -52,7 +52,7 @@ public class ConsoleInput {
             }
         }
 
-        return lottoList;
+        return new LottoList(limitLottoCount, manualLottos);
     }
 
     public static WinningLotto inputLastWinningNumbers() {

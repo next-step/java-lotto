@@ -7,12 +7,14 @@ public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
+    private boolean isManual;
 
     public Lotto() {
         List<LottoNumber> candidates = new ArrayList<>(LottoNumber.values());
         Collections.shuffle(candidates);
 
-        lottoNumbers = new HashSet<>(candidates.subList(0, LOTTO_SIZE));
+        this.lottoNumbers = new HashSet<>(candidates.subList(0, LOTTO_SIZE));
+        this.isManual = false;
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -22,6 +24,8 @@ public class Lotto {
         if (this.lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("HAS UNIQUE " + LOTTO_SIZE + " LOTTO NUMBERS");
         }
+
+        this.isManual = true;
     }
 
     public Lotto(String[] numbers) {
@@ -30,6 +34,8 @@ public class Lotto {
             .collect(Collectors.toList());
 
         this.lottoNumbers = new HashSet<>(lottoNumbers);
+        this.isManual = true;
+
         new Lotto(lottoNumbers);
     }
 
@@ -44,6 +50,14 @@ public class Lotto {
         lottoNumbers.retainAll(anyLottoNumbers);
 
         return lottoNumbers.size();
+    }
+
+    public boolean isManual() {
+        return isManual;
+    }
+
+    public boolean isAuto() {
+        return !isManual;
     }
 
     @Override

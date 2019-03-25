@@ -15,19 +15,33 @@ public class LottoList {
         this.lottos = new ArrayList<>();
     }
 
-    public LottoList(final int lottosCount) {
-        if (lottosCount < 1) {
+    public LottoList(final int lottoSize) {
+        if (lottoSize < 1) {
             throw new IllegalArgumentException("1 OR MORE");
         }
 
-        lottos = new ArrayList<>(lottosCount);
+        lottos = new ArrayList<>(lottoSize);
 
-        IntStream.range(0, lottosCount)
+        IntStream.range(0, lottoSize)
             .forEach(i -> lottos.add(new Lotto()));
     }
 
-    public LottoList(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public LottoList(List<Lotto> manualLottos) {
+        this.lottos = manualLottos;
+    }
+
+    public LottoList(int totalLottoSize, LottoList manualLottos) {
+        int manualLottoSize = manualLottos.size();
+
+        if (totalLottoSize < manualLottoSize) {
+            throw new IllegalArgumentException("TOO MANY LOTTO");
+        }
+
+        lottos = new ArrayList<>(totalLottoSize);
+        lottos.addAll(manualLottos.lottos);
+
+        IntStream.range(0, totalLottoSize - manualLottoSize)
+            .forEach(i -> lottos.add(new Lotto()));
     }
 
     public int size() {
@@ -52,6 +66,18 @@ public class LottoList {
 
     public boolean add(Lotto lotto) {
         return lottos.add(lotto);
+    }
+
+    public long sizeOfManuals() {
+        return lottos.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
+    public long sizeOfAutos() {
+        return lottos.stream()
+            .filter(Lotto::isAuto)
+            .count();
     }
 
     @Override

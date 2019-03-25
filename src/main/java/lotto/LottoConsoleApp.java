@@ -9,27 +9,13 @@ public class LottoConsoleApp {
     public static void main(String[] args) {
         final LottoMoney lottoMoney = ConsoleInput.inputPurchaseAmount();
 
-        final LottoList manualLottos = ConsoleInput.inputManualLottos(lottoMoney.countOfLotto());
-        int leftLottosCount = lottoMoney.countOfLotto() - manualLottos.size();
+        final LottoList lottos = ConsoleInput.inputManualLottos(lottoMoney.countOfLotto());
 
-        LottoList totalLottos = null;
-        if (leftLottosCount > 0) {
-            final LottoList autoLottos = new LottoList(leftLottosCount);
-            ConsoleOutput.printLottoCount(manualLottos.size(), autoLottos.size());
-
-            totalLottos = LottoList.merge(manualLottos, autoLottos);
-        }
-
-        if (leftLottosCount == 0) {
-            ConsoleOutput.printLottoCount(manualLottos.size(), 0);
-
-            totalLottos = manualLottos;
-        }
-
-        ConsoleOutput.printLottos(totalLottos);
+        ConsoleOutput.printLottoCount(lottos.sizeOfManuals(), lottos.sizeOfAutos());
+        ConsoleOutput.printLottos(lottos);
 
         final WinningLotto winningLotto = ConsoleInput.inputLastWinningNumbers();
-        final MatchResults matchResults = LottoMatcher.calculateMatchResults(totalLottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
         ConsoleOutput.printWinningStatistics(matchResults);
         ConsoleOutput.printEarningsRate(lottoMoney.calculateEarningsRate(matchResults));

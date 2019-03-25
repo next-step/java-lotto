@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public class ConsoleOutput {
 
-    public static void printLottoCount(int manualLottoCount, final int autoLottoCount) {
+    public static void printLottoCount(final long manualLottoCount, final long autoLottoCount) {
         System.out.println(String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
     }
 
