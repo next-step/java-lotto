@@ -1,7 +1,5 @@
 package lotto.parser;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
 import lotto.domain.LottoNumber;
 import lotto.domain.WinningLotto;
 import org.junit.Test;
@@ -45,19 +43,6 @@ public class LottoNumberParserTest {
     }
 
     @Test
-    public void 문자열을_Lotto_객체로_변환() {
-        // given
-        String lottoNumbersString = "1, 2, 3, 4, 5, 6";
-
-        // when
-        Lotto lotto = LottoNumberParser.parseLotto(lottoNumbersString);
-
-        // then
-        Lotto sameAsLotto = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.isEqualTo(sameAsLotto)).isTrue();
-    }
-
-    @Test
     public void 문자열을_WinningLotto_객체로_변환() {
         // given
         String lottoNumbersString = "1, 2, 3, 4, 5, 6";
@@ -69,28 +54,6 @@ public class LottoNumberParserTest {
         // then
         WinningLotto sameAsWinner = new WinningLotto(getLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.getInstance(45));
         assertThat(winner.isEqualTo(sameAsWinner)).isTrue();
-    }
-
-    @Test
-    public void 문자열을_LottoBundle_객체로_변환() {
-        // given
-        List<String> lottosString = Arrays.asList(
-                "1, 2, 3, 4, 5, 6",
-                "11, 12, 13, 14, 15, 16",
-                "21, 22, 23, 24, 25, 26");
-
-        // when
-        LottoBundle lottoBundle = LottoNumberParser.parseLottoBundle(lottosString);
-
-        // then
-        List<Lotto> lottos = lottoBundle.getLottos();
-        Lotto lotto1 = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(getLottoNumbers(11, 12, 13, 14, 15, 16));
-        Lotto lotto3 = new Lotto(getLottoNumbers(21, 22, 23, 24, 25, 26));
-
-        assertThat(lottos.get(0).isEqualTo(lotto1)).isTrue();
-        assertThat(lottos.get(1).isEqualTo(lotto2)).isTrue();
-        assertThat(lottos.get(2).isEqualTo(lotto3)).isTrue();
     }
 
     private List<LottoNumber> getLottoNumbers(int... numbers) {
