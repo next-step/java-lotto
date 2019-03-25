@@ -12,11 +12,11 @@ public class WinNumbersTest {
   public void test_winNumber_additionNumber_containInWinNumbers() {
 
     // Given
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 32, 10, 4, 26, 28);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 32, 10, 4, 26, 28));
     LottoNumber additionNumber = LottoNumber.getInstance(10);
 
     // When
-    new WinNumbers(winLottoNumbers, additionNumber);
+    new WinNumbers(winningNumbers, additionNumber);
   }
 
   @Test
@@ -25,9 +25,9 @@ public class WinNumbersTest {
     // Given
     Set<LottoNumber> lottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 19);
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 32, 10, 4, 26, 28);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 32, 10, 4, 26, 28));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
     long matchCount = winNumbers.matchCount(lottoNumbers);
@@ -42,9 +42,9 @@ public class WinNumbersTest {
     // Given
     Set<LottoNumber> lottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 19);
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 38, 10, 7, 17, 45);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 38, 10, 7, 17, 45));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
     long matchCount = winNumbers.matchCount(lottoNumbers);
@@ -59,9 +59,9 @@ public class WinNumbersTest {
     // Given
     Set<LottoNumber> lottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 19);
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 32, 10, 4, 26, 28);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 32, 10, 4, 26, 28));
     LottoNumber additionNumber = LottoNumber.getInstance(42);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
     boolean isAdditionMatch = winNumbers.additionMatch(lottoNumbers);
@@ -76,9 +76,9 @@ public class WinNumbersTest {
     // Given
     Set<LottoNumber> lottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 19);
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 32, 10, 4, 26, 28);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 32, 10, 4, 26, 28));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
     boolean isAdditionMatch = winNumbers.additionMatch(lottoNumbers);

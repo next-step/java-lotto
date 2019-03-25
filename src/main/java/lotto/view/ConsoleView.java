@@ -12,6 +12,7 @@ import lotto.domain.Money;
 import lotto.domain.MyLottos;
 import lotto.domain.WinNumbers;
 import lotto.domain.WinStats;
+import lotto.domain.WinningNumbers;
 
 public class ConsoleView {
 
@@ -54,10 +55,10 @@ public class ConsoleView {
 
   private static WinNumbers winNumbers(String inputWinNumbers, int inputAdditionNumber) {
 
-    Set<LottoNumber> winNumbers = convertStringToLottoNumbers(inputWinNumbers);
+    WinningNumbers winningNumbers = new WinningNumbers(convertStringToLottoNumbers(inputWinNumbers));
     LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
 
-    return new WinNumbers(winNumbers, additionalNumber);
+    return new WinNumbers(winningNumbers, additionalNumber);
   }
 
   private static Set<LottoNumber> convertStringToLottoNumbers(String inputWinNumbers) {

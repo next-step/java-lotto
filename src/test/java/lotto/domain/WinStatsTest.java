@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
 import org.junit.Test;
 
 public class WinStatsTest {
@@ -26,9 +25,9 @@ public class WinStatsTest {
         new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5))
     );
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
@@ -49,9 +48,9 @@ public class WinStatsTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
     MyLottos myLottos = new MyLottos(buyMoney, new Lottos(Collections.singletonList(lotto)));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 
@@ -72,9 +71,9 @@ public class WinStatsTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(2, 41, 13, 31, 26, 18));
     MyLottos myLottos = new MyLottos(buyMoney, new Lottos(Collections.singletonList(lotto)));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     WinStats winStats = new WinStats(buyMoney, myLottos.winResults(winNumbers));
 

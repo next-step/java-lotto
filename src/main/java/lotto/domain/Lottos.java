@@ -13,7 +13,7 @@ public class Lottos {
   public Long countWinLotto(WinNumbers winNumbers, WinMoney winMoney) {
 
     return lottos.stream()
-        .filter(lotto -> winMoney.isWinLotto(lotto, winNumbers))
+        .filter(lotto -> winMoney == lotto.isWinLotto(winNumbers))
         .count();
   }
 }

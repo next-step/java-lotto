@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 import org.junit.Test;
 
 public class MyLottosTest {
@@ -25,9 +24,9 @@ public class MyLottosTest {
         new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4))
     );
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(2, 13, 27, 41, 40, 5);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(2, 13, 27, 41, 40, 5));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
     WinStats winStats = myLottos.winStats(winNumbers);
 
     // When
@@ -50,9 +49,9 @@ public class MyLottosTest {
         new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4))
     );
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
     WinStats winStats = myLottos.winStats(winNumbers);
 
     // When
@@ -75,9 +74,9 @@ public class MyLottosTest {
         new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4))
     );
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
     Map<WinMoney, Long> winResults = myLottos.winResults(winNumbers);
@@ -102,9 +101,9 @@ public class MyLottosTest {
         new Lottos(Collections.singletonList(lotto))
     );
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
     Map<WinMoney, Long> winResults = myLottos.winResults(winNumbers);
@@ -126,9 +125,9 @@ public class MyLottosTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(3, 1, 28, 41, 32, 26));
     Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-    Set<LottoNumber> winLottoNumber = intArrayToLottoNumbers(19, 14, 28, 42, 32, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 14, 28, 42, 32, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumber, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
     WinMoney winMoney = WinMoney.SIX;
 
     // When
@@ -145,9 +144,9 @@ public class MyLottosTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
     Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(19, 38, 10, 42, 17, 4);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(19, 38, 10, 42, 17, 4));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
     WinMoney winMoney = WinMoney.THREE;
 
     // When
@@ -164,9 +163,9 @@ public class MyLottosTest {
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
     Lottos lottos = new Lottos(Collections.singletonList(lotto));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 38, 10, 7, 17, 45);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 38, 10, 7, 17, 45));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     WinMoney winMoney = WinMoney.THREE;
 

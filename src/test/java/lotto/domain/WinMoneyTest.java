@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.domain.LottoTest.intArrayToLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Set;
 import org.junit.Test;
 
 public class WinMoneyTest {
@@ -14,17 +13,17 @@ public class WinMoneyTest {
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 32, 10, 4, 26, 28);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 32, 10, 4, 26, 28));
     LottoNumber lottoNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, lottoNumber);
 
     WinMoney winMoney = WinMoney.THREE;
 
     // When
-    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+    WinMoney resultMoney = lotto.isWinLotto(winNumbers);
 
     // Then
-    assertThat(result).isTrue();
+    assertThat(resultMoney).isEqualTo(winMoney);
   }
 
   @Test
@@ -33,36 +32,17 @@ public class WinMoneyTest {
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(4, 42, 14, 32, 28, 21));
     LottoNumber lottoNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, lottoNumber);
 
     WinMoney winMoney = WinMoney.FIVE;
 
     // When
-    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+    WinMoney resultMoney = lotto.isWinLotto(winNumbers);
 
     // Then
-    assertThat(result).isTrue();
-  }
-
-  @Test
-  public void test_isWinLotto_fiveWin_false() {
-
-    // Given
-    Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
-    LottoNumber lottoNumber = LottoNumber.getInstance(19);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
-
-    WinMoney winMoney = WinMoney.FIVE;
-
-    // When
-    boolean result = winMoney.isWinLotto(lotto, winNumbers);
-
-    // Then
-    assertThat(result).isFalse();
+    assertThat(resultMoney).isEqualTo(winMoney);
   }
 
   @Test
@@ -71,36 +51,17 @@ public class WinMoneyTest {
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(4, 42, 14, 32, 28, 21));
     LottoNumber lottoNumber = LottoNumber.getInstance(19);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, lottoNumber);
 
     WinMoney winMoney = WinMoney.FIVE_ONE;
 
     // When
-    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+    WinMoney resultMoney = lotto.isWinLotto(winNumbers);
 
     // Then
-    assertThat(result).isTrue();
-  }
-
-  @Test
-  public void test_isWinLotto_fiveOneWin_false() {
-
-    // Given
-    Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(4, 42, 14, 32, 28, 21);
-    LottoNumber lottoNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, lottoNumber);
-
-    WinMoney winMoney = WinMoney.FIVE_ONE;
-
-    // When
-    boolean result = winMoney.isWinLotto(lotto, winNumbers);
-
-    // Then
-    assertThat(result).isFalse();
+    assertThat(resultMoney).isEqualTo(winMoney);
   }
 
   @Test
@@ -109,17 +70,15 @@ public class WinMoneyTest {
     // Given
     Lotto lotto = new Lotto(intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
 
-    Set<LottoNumber> winLottoNumbers = intArrayToLottoNumbers(1, 38, 10, 7, 17, 45);
+    WinningNumbers winningNumbers = new WinningNumbers(intArrayToLottoNumbers(1, 38, 10, 7, 17, 45));
     LottoNumber additionNumber = LottoNumber.getInstance(23);
-    WinNumbers winNumbers = new WinNumbers(winLottoNumbers, additionNumber);
-
-    WinMoney winMoney = WinMoney.THREE;
+    WinNumbers winNumbers = new WinNumbers(winningNumbers, additionNumber);
 
     // When
-    boolean result = winMoney.isWinLotto(lotto, winNumbers);
+    WinMoney resultMoney = lotto.isWinLotto(winNumbers);
 
     // Then
-    assertThat(result).isFalse();
+    assertThat(resultMoney).isNull();
   }
 
   @Test
