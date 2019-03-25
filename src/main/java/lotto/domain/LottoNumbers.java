@@ -5,14 +5,9 @@ import lotto.Utils;
 import java.util.*;
 
 public class LottoNumbers {
-    public static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
-
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-        checkNumberSize(lottoNumbers);
-    }
 
     public LottoNumbers(Integer[] lottoNumbers) {
         Set<LottoNumber> inputNumbers = new HashSet<>();
