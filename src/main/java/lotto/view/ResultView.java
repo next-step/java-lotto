@@ -3,7 +3,6 @@ package lotto.view;
 public class ResultView {
     public void printPurchaseTicketCount(int tickets) {
         System.out.println(String.format("%s를 구매했습니다.", tickets));
-        System.out.println("[8, 21, 23, 42, 42]");
     }
 
     public void winningNumberStatistics() {

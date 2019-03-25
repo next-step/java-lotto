@@ -1,17 +1,23 @@
 package lotto;
 
-import lotto.view.InputVIew;
 import lotto.view.ResultView;
+import lotto.vo.Lottery;
+import lotto.vo.LotteryGame;
+import lotto.vo.Money;
+import lotto.vo.WinningNumber;
+
+import java.util.Arrays;
 
 public class LotteryMain {
     public static void main(String[] args) {
-        InputVIew inputVIew = new InputVIew();
-        inputVIew.printPurchaseAmount();
+
+        int tickets = new Money(1000).getLotto();// inputVIew.printPurchaseAmount();
 
         ResultView resultView = new ResultView();
-        resultView.printPurchaseTicketCount(14);
+        resultView.printPurchaseTicketCount(tickets);
+        LotteryGame game = new LotteryGame(tickets);
 
-        inputVIew.printWinningNumber();
+        game.getWinningStatistics(new WinningNumber(Lottery.toLotteries(Arrays.asList(1, 2, 3, 4, 5, 6))));//inputVIew.printWinningNumber();
 
         resultView.winningNumberStatistics();
         resultView.revenueRate(0.24);

@@ -5,10 +5,11 @@ import lotto.utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LotteryGenerator {
     public static final int LOTTERY_NUMBER = 6;
-    List lotteryNumbers;
+    List<Integer> lotteryNumbers;
 
     public LotteryGenerator() {
         lotteryNumbers = new ArrayList<>();
@@ -29,10 +30,32 @@ public class LotteryGenerator {
 
     public List<Integer> lotteryNumbers() {
         Collections.sort(lotteryNumbers);
+        printLottoNumber();
         return lotteryNumbers;
+    }
+
+    public Lottery lotteryNumbers2() {
+        Collections.sort(lotteryNumbers);
+        printLottoNumber();
+        return Lottery.toLotteries(lotteryNumbers);
+    }
+
+    private void printLottoNumber() {
+        String result = lotteryNumbers.stream()
+                .map(n -> String.valueOf(n))
+                .collect(Collectors.joining(",", "[", "]"));
+        System.out.println(result);
     }
 
     public BonusNumber addBonusNumber() {
         return new BonusNumber(lotteryNumbers);
+    }
+
+    @Override
+    public String toString() {
+
+        return "LotteryGenerator{" +
+                "lotteryNumbers=" + lotteryNumbers +
+                '}';
     }
 }
