@@ -38,6 +38,11 @@ public class InputView {
             }
 
             for (String number : numbers) {
+                int lottoNumber = Integer.parseInt(number.trim());
+                if (lottoNumber < Constant.MIN_LOTTO_NUMBER || lottoNumber > Constant.MAX_LOTTO_NUMBER) {
+                    Console.lottoRangeExceptionMessage();
+                    return Collections.emptyList();
+                }
                 winningNumbers.add(Integer.parseInt(number.trim()));
             }
         } catch (NumberFormatException e) {
@@ -52,7 +57,8 @@ public class InputView {
         int bonusBall;
         try {
             bonusBall = new Scanner(System.in).nextInt();
-            if (bonusBall < Constant.MIN_LOTTO_NUMBER && bonusBall > Constant.MAX_LOTTO_NUMBER) {
+            if (bonusBall < Constant.MIN_LOTTO_NUMBER || bonusBall > Constant.MAX_LOTTO_NUMBER) {
+                Console.lottoRangeExceptionMessage();
                 return 0;
             }
         } catch (NumberFormatException e) {
@@ -61,6 +67,4 @@ public class InputView {
         }
         return bonusBall;
     }
-
-
 }

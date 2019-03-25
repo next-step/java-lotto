@@ -1,6 +1,7 @@
 import domain.Lotto;
-import domain.LottoNumbers;
 import domain.LottoMatch;
+import domain.LottoNumbers;
+import domain.WinningNumbers;
 import util.Calculator;
 import util.Console;
 import util.Generator;
@@ -16,9 +17,9 @@ public class LottoApplication {
         if (money == 0) {
             return;
         }
-        int lottoCount = ResultView.purchaseLottoCount(money);
 
         List<Lotto> lottos = new ArrayList<>();
+        int lottoCount = ResultView.purchaseLottoCount(money);
         while (lottoCount-- > 0) {
             Lotto lotto = new Lotto(new LottoNumbers(Generator.lottoNumbers()));
             lottos.add(lotto);
@@ -34,13 +35,14 @@ public class LottoApplication {
         if (bonusBall == 0) {
             return;
         }
+
         if (winningNumbers.contains(bonusBall)) {
             Console.print("당첨번호와 보너스볼 숫자가 같을 수 없습니다.");
             return;
         }
-        winningNumbers.add(bonusBall);
 
-        LottoMatch lottoMatch = new LottoMatch(lottos, winningNumbers);
+        WinningNumbers winningNumbers1 = new WinningNumbers(winningNumbers, bonusBall);
+        LottoMatch lottoMatch = new LottoMatch(lottos, winningNumbers1);
         ResultView.statisticsWinner(lottoMatch.produceResult());
         ResultView.printYield(Calculator.yieldCalculator(lottoMatch.produceResult(), money));
     }
