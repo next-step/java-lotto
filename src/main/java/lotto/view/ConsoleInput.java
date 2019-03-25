@@ -38,7 +38,7 @@ public class ConsoleInput {
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
-            if (StringUtils.isEmpty(input.trim()) || lottoList.size() == limitLottoCount) {
+            if (StringUtils.isBlank(input) || lottoList.size() == limitLottoCount) {
                 break;
             }
 

@@ -15,7 +15,7 @@ public class LottoMoney {
     }
 
     public LottoMoney(String money) {
-        if (StringUtils.isEmpty(money.trim())) {
+        if (StringUtils.isBlank(money)) {
             throw new IllegalArgumentException(LOTTO_UNIT_PRICE + " OR MORE");
         }
 
