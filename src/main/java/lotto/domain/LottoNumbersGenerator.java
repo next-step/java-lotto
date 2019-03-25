@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumbersGenerator {
-    private static final List<LottoNumber> LOTTO_NUMBERS;
+    private static final List<Integer> LOTTO_NUMBERS;
 
     static {
         LOTTO_NUMBERS = IntStream.rangeClosed(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER)
-                .mapToObj(LottoNumber::from)
+                .boxed()
                 .collect(Collectors.toList())
         ;
     }

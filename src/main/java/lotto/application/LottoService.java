@@ -17,8 +17,8 @@ public class LottoService {
         );
     }
 
-    public ResultView viewResults(final LottoPaper lottoPaper, final String winningNumber) {
-        final WinningStatistics statistics = lottoPaper.viewResults(getLottoNumbers(winningNumber));
+    public ResultView viewResults(final LottoPaper lottoPaper, final String winningNumber, final int bonusNumber) {
+        final WinningStatistics statistics = lottoPaper.viewResults(getWinningNumber(winningNumber, bonusNumber));
         return new ResultView(new WinningStatisticsView(statistics.get()), statistics.getRoi());
     }
 
@@ -28,11 +28,14 @@ public class LottoService {
                 ;
     }
 
+    private WinningNumber getWinningNumber(final String lottoNumbers, final int bonusNumber) {
+        return new WinningNumber(getLottoNumbers(lottoNumbers), LottoNumber.from(bonusNumber));
+    }
+
     private LottoNumbers getLottoNumbers(final String lottoNumbers) {
         return new LottoNumbers(
                 Arrays.stream(lottoNumbers.split(NUMBER_SEPARATOR))
                         .map(Integer::valueOf)
-                        .map(LottoNumber::from)
                         .collect(Collectors.toList())
         );
     }

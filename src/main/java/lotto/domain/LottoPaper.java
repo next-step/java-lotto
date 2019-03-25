@@ -12,12 +12,11 @@ public class LottoPaper {
         this.values = new ArrayList<>(values);
     }
 
-    public WinningStatistics viewResults(final LottoNumbers winningNumber) {
+    public WinningStatistics viewResults(final WinningNumber winningNumber) {
         return new WinningStatistics(
                 this.values
                         .stream()
-                        .map(value -> value.howManyMatches(winningNumber))
-                        .map(WinningOrder::from)
+                        .map(value -> value.winResult(winningNumber))
                         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
         );
     }
