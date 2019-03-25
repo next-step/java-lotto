@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoList {
@@ -21,9 +22,8 @@ public class LottoList {
 
         lottos = new ArrayList<>(lottosCount);
 
-        for (int i = 0; i < lottosCount; i++) {
-            lottos.add(new Lotto());
-        }
+        IntStream.range(0, lottosCount)
+            .forEach(i -> lottos.add(new Lotto()));
     }
 
     public LottoList(List<Lotto> lottos) {
