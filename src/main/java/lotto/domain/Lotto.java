@@ -8,17 +8,11 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
 
-    private static final List<LottoNumber> LOTTO_NUMBERS = new ArrayList<>();
-    static {
-        for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
-            LOTTO_NUMBERS.add(LottoNumber.from(i));
-        }
-    }
-
     public Lotto() {
-        Collections.shuffle(LOTTO_NUMBERS);
+        List<LottoNumber> candidates = new ArrayList<>(LottoNumber.values());
+        Collections.shuffle(candidates);
 
-        lottoNumbers = new HashSet<>(LOTTO_NUMBERS.subList(0, LOTTO_SIZE));
+        lottoNumbers = new HashSet<>(candidates.subList(0, LOTTO_SIZE));
     }
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -32,7 +26,7 @@ public class Lotto {
 
     public Lotto(String[] numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-            .map(number -> LottoNumber.from(number.trim()))
+            .map(number -> LottoNumber.valueOf(number.trim()))
             .collect(Collectors.toList());
 
         this.lottoNumbers = new HashSet<>(lottoNumbers);

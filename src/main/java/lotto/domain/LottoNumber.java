@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class LottoNumber {
             .forEach(i -> values.put(i, new LottoNumber(i)));
     }
 
-    public static LottoNumber from(Integer value) {
+    public static LottoNumber valueOf(Integer value) {
         if (value < MIN) {
             throw new IllegalArgumentException(MIN +" OR MORE");
         }
@@ -29,7 +30,11 @@ public class LottoNumber {
         return values.get(value);
     }
 
-    public static LottoNumber from(String value) {
+    public static Collection<LottoNumber> values() {
+        return values.values();
+    }
+
+    public static LottoNumber valueOf(String value) {
         return values.get(Integer.parseInt(value.trim()));
     }
 

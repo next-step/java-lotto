@@ -76,7 +76,7 @@ public class ConsoleInput {
         WinningLotto winningLotto = null;
         while (winningLotto == null) {
             try {
-                winningLotto = new WinningLotto(lotto, LottoNumber.from(scanner.nextLine()));
+                winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(scanner.nextLine()));
             } catch (RuntimeException exception) {
                 System.err.println(exception.getMessage());
                 System.out.println("보너스 볼 입력이 잘못 되었습니다.");

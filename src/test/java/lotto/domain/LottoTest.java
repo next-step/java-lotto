@@ -11,12 +11,12 @@ public class LottoTest {
     @Test
     public void 당첨번호_일치개수_2개() {
         final Lotto winningLotto = new Lotto(Arrays.asList(
-                LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         final Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.from(11), LottoNumber.from(12), LottoNumber.from(10),
-                LottoNumber.from(16), LottoNumber.from(5), LottoNumber.from(6)));
+                LottoNumber.valueOf(11), LottoNumber.valueOf(12), LottoNumber.valueOf(10),
+                LottoNumber.valueOf(16), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         final int containsCount = winningLotto.countMatches(lotto);
 

@@ -30,22 +30,22 @@ public class LottoMoneyTest {
         final LottoMoney lottoMoney = new LottoMoney(money);
 
         final Lotto anyLotto = new Lotto(Arrays.asList(
-                LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         final WinningLotto winningLotto = new WinningLotto(anyLotto);
 
         final LottoList lottos = new LottoList(Arrays.asList(
                 anyLotto,
                 new Lotto(Arrays.asList(
-                        LottoNumber.from(21), LottoNumber.from(22), LottoNumber.from(23),
-                        LottoNumber.from(24), LottoNumber.from(25), LottoNumber.from(26))),
+                        LottoNumber.valueOf(21), LottoNumber.valueOf(22), LottoNumber.valueOf(23),
+                        LottoNumber.valueOf(24), LottoNumber.valueOf(25), LottoNumber.valueOf(26))),
                 new Lotto(Arrays.asList(
-                        LottoNumber.from(31), LottoNumber.from(32), LottoNumber.from(33),
-                        LottoNumber.from(34), LottoNumber.from(35), LottoNumber.from(36))),
+                        LottoNumber.valueOf(31), LottoNumber.valueOf(32), LottoNumber.valueOf(33),
+                        LottoNumber.valueOf(34), LottoNumber.valueOf(35), LottoNumber.valueOf(36))),
                 new Lotto(Arrays.asList(
-                        LottoNumber.from(40), LottoNumber.from(41), LottoNumber.from(42),
-                        LottoNumber.from(43), LottoNumber.from(44), LottoNumber.from(45)))));
+                        LottoNumber.valueOf(40), LottoNumber.valueOf(41), LottoNumber.valueOf(42),
+                        LottoNumber.valueOf(43), LottoNumber.valueOf(44), LottoNumber.valueOf(45)))));
 
         MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
