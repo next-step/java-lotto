@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 
 public class LotteryWinningStatistics {
 
-    private final Map<LotteryRank, Integer> rankCountMap;
+    private final Map<LotteryRank, TicketCount> rankCountMap;
 
     public LotteryWinningStatistics(WinningTicket winningTicket, List<LotteryTicket> tickets) {
         rankCountMap = convertToRankCountMap(convertToRanks(winningTicket, tickets));
     }
 
-    private Map<LotteryRank, Integer> convertToRankCountMap(List<LotteryRank> ranks) {
+    private Map<LotteryRank, TicketCount> convertToRankCountMap(List<LotteryRank> ranks) {
         return Arrays.stream(LotteryRank.values())
                 .collect(Collectors.toMap(
                         rank -> rank,
@@ -21,10 +21,10 @@ public class LotteryWinningStatistics {
                 ));
     }
 
-    private int count(List<LotteryRank> ranks, LotteryRank rank) {
-        return (int) ranks.stream()
+    private TicketCount count(List<LotteryRank> ranks, LotteryRank rank) {
+        return new TicketCount((int) ranks.stream()
                 .filter(r -> r == rank)
-                .count();
+                .count());
     }
 
     private List<LotteryRank> convertToRanks(WinningTicket winningTicket, List<LotteryTicket> tickets) {
@@ -33,27 +33,28 @@ public class LotteryWinningStatistics {
                 .collect(Collectors.toList());
     }
 
-    public int countRank(LotteryRank rank) {
+    public TicketCount countRank(LotteryRank rank) {
         return rankCountMap.get(rank);
     }
 
-    public double revenueRate() {
-        double totalPrice = countTickets() * LotteryTicket.PRICE;
-        double rate = getWinningMoney() / totalPrice;
-
-        return Math.floor(rate * 100) / 100;
+    public RevenueRate revenueRate() {
+        return new RevenueRate(getWinningMoney(), totalTicketsPrice());
     }
 
-    private int getWinningMoney() {
+    private Money getWinningMoney() {
         return rankCountMap.entrySet()
                 .stream()
-                .reduce(0, (money, entry) -> money + (entry.getValue() * entry.getKey().winningMoney),
-                        (money1, money2) -> money1 + money2);
+                .reduce(new Money(0),
+                        (sum, entry) -> sum.add(entry.getValue().multiply(entry.getKey().winningMoney.amount).amount),
+                        (sum1, sum2) -> sum1.add(sum2.amount));
     }
 
-    private int countTickets() {
+    private Money totalTicketsPrice() {
         return rankCountMap.entrySet()
                 .stream()
-                .reduce(0, (count, entry) -> count + entry.getValue(), (count1, count2) -> count1 + count2);
+                .reduce(new TicketCount(0),
+                        (sum, entry) -> sum.add(entry.getValue().amount),
+                        (count1, count2) -> count1.add(count2.amount))
+                .getPrice();
     }
 }

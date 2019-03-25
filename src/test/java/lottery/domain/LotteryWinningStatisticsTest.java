@@ -18,10 +18,10 @@ public class LotteryWinningStatisticsTest {
                 10, Arrays.asList(11, 12, 13, 14, 15, 16));
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
-        assertThat(statistics.countRank(LotteryRank.NONE))
+        assertThat(statistics.countRank(LotteryRank.NONE).amount)
                 .isEqualTo(10);
 
-        assertThat(statistics.revenueRate())
+        assertThat(statistics.revenueRate().rate)
                 .isEqualTo(0.00);
     }
 
@@ -35,12 +35,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.FIRST))
+        assertThat(statistics.countRank(LotteryRank.FIRST).amount)
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE))
+        assertThat(statistics.countRank(LotteryRank.NONE).amount)
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate())
+        assertThat(statistics.revenueRate().rate)
                 .isEqualTo(200_000.00);
     }
 
@@ -54,12 +54,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.SECOND))
+        assertThat(statistics.countRank(LotteryRank.SECOND).amount)
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE))
+        assertThat(statistics.countRank(LotteryRank.NONE).amount)
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate())
+        assertThat(statistics.revenueRate().rate)
                 .isEqualTo(3_000.0);
     }
 
@@ -72,12 +72,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.THIRD))
+        assertThat(statistics.countRank(LotteryRank.THIRD).amount)
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE))
+        assertThat(statistics.countRank(LotteryRank.NONE).amount)
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate())
+        assertThat(statistics.revenueRate().rate)
                 .isEqualTo(150.00);
     }
 
@@ -90,14 +90,13 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.FOURTH))
+        assertThat(statistics.countRank(LotteryRank.FOURTH).amount)
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE))
+        assertThat(statistics.countRank(LotteryRank.NONE).amount)
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate())
+        assertThat(statistics.revenueRate().rate)
                 .isEqualTo(5.00);
-        // 0.50
     }
 
     @Test
@@ -109,12 +108,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.FIFTH))
+        assertThat(statistics.countRank(LotteryRank.FIFTH).amount)
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE))
+        assertThat(statistics.countRank(LotteryRank.NONE).amount)
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate())
+        assertThat(statistics.revenueRate().rate)
                 .isEqualTo(0.50);
     }
 
@@ -122,6 +121,7 @@ public class LotteryWinningStatisticsTest {
         final List<LotteryTicket> result = IntStream.range(0, losingTicketSize)
                 .mapToObj(i -> new LotteryTicket(losingNumbers))
                 .collect(Collectors.toList());
+
         result.addAll(designatedNumbersTicket);
         return result;
     }
