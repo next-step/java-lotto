@@ -11,15 +11,20 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public int matchCount(WinningLotto winningLotto) {
-        return lottoNumbers.matchCount(winningLotto);
+    public int matchCount(LottoNumbers luckyNumbers) {
+        return lottoNumbers.matchCount(luckyNumbers);
     }
 
-    public Winning prize(WinningLotto winningLotto) {
-        return lottoNumbers.matchResult(winningLotto);
+    public int prize(LottoNumbers luckyNumbers) {
+        return WinningType.getPrize(lottoNumbers.matchCount(luckyNumbers));
     }
 
-    public Winning rank(WinningLotto winningLotto) {
-        return lottoNumbers.matchResult(winningLotto);
+    public int rank(LottoNumbers luckyNumbers) {
+        return WinningType.getRank(lottoNumbers.matchCount(luckyNumbers));
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.printLottoNumbers();
     }
 }
