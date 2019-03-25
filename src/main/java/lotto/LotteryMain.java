@@ -17,7 +17,7 @@ public class LotteryMain {
         resultView.printPurchaseTicketCount(tickets);
         LotteryGame game = new LotteryGame(tickets);
 
-        Lottery inputLottery = Lottery.toLotteries(Arrays.asList(inputVIew.printWinningNumber().split(",")).stream().map(Integer::valueOf).collect(Collectors.toList()));
+        Lottery inputLottery = Lottery.toLotteries(Arrays.asList(inputVIew.printWinningNumber().split(LotteryGenerator.FORMAT_COMMA)).stream().map(Integer::valueOf).collect(Collectors.toList()));
         Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
 
         resultView.winningNumberStatistics(ranks);

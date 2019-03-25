@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class LotteryGenerator {
     public static final int LOTTERY_NUMBER = 6;
+    public static final String FORMAT_COMMA = ",";
+    public static final String FORMAT_PREFIX_BRACKET = "[";
+    public static final String FORMAT_SUFFIX_BRACKET = "]";
     List<Integer> lotteryNumbers;
 
     public LotteryGenerator() {
@@ -37,7 +40,7 @@ public class LotteryGenerator {
     private void printLottoNumber() {
         String result = lotteryNumbers.stream()
                 .map(n -> String.valueOf(n))
-                .collect(Collectors.joining(",", "[", "]"));
+                .collect(Collectors.joining(FORMAT_COMMA, FORMAT_PREFIX_BRACKET, FORMAT_SUFFIX_BRACKET));
         System.out.println(result);
     }
 
