@@ -5,7 +5,7 @@ import lotto.domain.LotteryMachine;
 
 import java.util.Map;
 
-public class Statistics {
+public class ProfitRate {
 
     public static void printStatistics(Lotteries lotteries, LotteryMachine lotteryMachine) {
         System.out.println("당첨 통계");
