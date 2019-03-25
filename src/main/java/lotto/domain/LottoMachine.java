@@ -40,7 +40,7 @@ public class LottoMachine {
 
     static LottoBundle getLottos(long numberOfLotto) {
         List<Lotto> lottos = LongStream.range(0, numberOfLotto)
-                .mapToObj(i -> LottoGenerator.generate())
+                .mapToObj(i -> AutoLottoGenerator.generate())
                 .collect(Collectors.toList());
 
         return new LottoBundle(lottos);

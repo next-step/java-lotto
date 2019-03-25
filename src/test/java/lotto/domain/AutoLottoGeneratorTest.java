@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoGeneratorTest {
+public class AutoLottoGeneratorTest {
     @Test
     public void 모든_로또_숫자_생성() {
         // given
@@ -19,13 +19,13 @@ public class LottoGeneratorTest {
 
         // when
         // then
-        assertThat(LottoGenerator.getAllLottoNumbers())
+        assertThat(AutoLottoGenerator.getAllLottoNumbers())
                 .containsExactlyElementsOf(allLottoNumbers);
     }
 
     @Test
     public void 로또_번호_정상_생성() {
         // 비정상 경우는 Lotto, LottoNumber 테스트에서 걸림
-        LottoGenerator.generate();
+        AutoLottoGenerator.generate();
     }
 }
