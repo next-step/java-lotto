@@ -10,7 +10,7 @@ public class WinningTicket {
 
     public WinningTicket(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbersTicket = new LotteryTicket(winningNumbers);
-        this.bonusNumber = new LotteryNumber(bonusNumber);
+        this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 
     public LotteryRank raffle(LotteryTicket ticket) {

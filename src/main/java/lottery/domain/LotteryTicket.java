@@ -16,7 +16,7 @@ public class LotteryTicket {
     public LotteryTicket(List<Integer> numbers) {
         this.lotteryNumbers = numbers.stream()
                 .sorted()
-                .map(LotteryNumber::new)
+                .map(LotteryNumber::of)
                 .collect(Collectors.toCollection(() -> new TreeSet<>()));
 
         if (this.lotteryNumbers.size() != NUMBERS_COUNT) {

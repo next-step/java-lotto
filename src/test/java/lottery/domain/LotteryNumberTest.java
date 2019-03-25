@@ -8,39 +8,39 @@ public class LotteryNumberTest {
 
     @Test(expected = IllegalArgumentException.class )
     public void test_1보다_작은_숫자_생성_불가능() {
-        new LotteryNumber(0);
+        LotteryNumber.of(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void test_65보다_큰_숫자_생성_불가능() {
-        new LotteryNumber(66);
+        LotteryNumber.of(66);
     }
 
     @Test
     public void test_동일성() {
-        LotteryNumber lotteryNumber = new LotteryNumber(5);
+        LotteryNumber lotteryNumber = LotteryNumber.of(5);
 
         assertThat(lotteryNumber)
-                .isEqualTo(new LotteryNumber(5));
-        assertThat(lotteryNumber)
-                .hasSameHashCodeAs(new LotteryNumber(5));
+                .isSameAs(LotteryNumber.of(5))
+                .isEqualTo(LotteryNumber.of(5))
+                .hasSameHashCodeAs(LotteryNumber.of(5));
     }
 
     @Test
     public void test_toString() {
-        assertThat(new LotteryNumber(1))
+        assertThat(LotteryNumber.of(1))
                 .hasToString("1");
     }
 
     @Test
     public void test_대소비교() {
-        LotteryNumber lotteryNumber = new LotteryNumber(5);
+        LotteryNumber lotteryNumber = LotteryNumber.of(5);
 
-        assertThat(lotteryNumber.compareTo(new LotteryNumber(6)))
+        assertThat(lotteryNumber.compareTo(LotteryNumber.of(6)))
                 .isEqualTo(-1);
-        assertThat(lotteryNumber.compareTo(new LotteryNumber(5)))
+        assertThat(lotteryNumber.compareTo(LotteryNumber.of(5)))
                 .isEqualTo(0);
-        assertThat(lotteryNumber.compareTo(new LotteryNumber(4)))
+        assertThat(lotteryNumber.compareTo(LotteryNumber.of(4)))
                 .isEqualTo(1);
     }
 }

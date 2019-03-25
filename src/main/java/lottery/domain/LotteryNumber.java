@@ -1,20 +1,43 @@
 package lottery.domain;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
+
+    private static Map<Integer, LotteryNumber> cache;
 
     public static int UPPER_BOUND_INCLUSIVE = 65;
     public static int LOWER_BOUND_INCLUSIVE = 1;
 
+    static {
+        cache = IntStream.rangeClosed(LOWER_BOUND_INCLUSIVE, UPPER_BOUND_INCLUSIVE)
+            .boxed()
+            .collect(Collectors.toMap(
+                    n -> n,
+                    n -> new LotteryNumber(n)
+            ));
+    }
+
     private final int number;
 
-    public LotteryNumber(int number) {
+    private LotteryNumber(int number) {
         if (LOWER_BOUND_INCLUSIVE > number || UPPER_BOUND_INCLUSIVE < number) {
             throw new IllegalArgumentException("number range is " + LOWER_BOUND_INCLUSIVE +
                     " to " + UPPER_BOUND_INCLUSIVE);
         }
         this.number = number;
+    }
+
+    public static LotteryNumber of(int number) {
+        return cache.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey() == number)
+                .map(e -> e.getValue())
+                .findAny()
+                .orElse(new LotteryNumber(number));
     }
 
     @Override
