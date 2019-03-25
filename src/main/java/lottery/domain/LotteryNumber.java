@@ -1,5 +1,6 @@
 package lottery.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -7,19 +8,10 @@ import java.util.stream.IntStream;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
 
-    private static Map<Integer, LotteryNumber> cache;
+    private static Map<Integer, LotteryNumber> cache = new HashMap<>();
 
     public static int UPPER_BOUND_INCLUSIVE = 65;
     public static int LOWER_BOUND_INCLUSIVE = 1;
-
-    static {
-        cache = IntStream.rangeClosed(LOWER_BOUND_INCLUSIVE, UPPER_BOUND_INCLUSIVE)
-            .boxed()
-            .collect(Collectors.toMap(
-                    n -> n,
-                    n -> new LotteryNumber(n)
-            ));
-    }
 
     private final int number;
 
@@ -32,12 +24,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     }
 
     public static LotteryNumber of(int number) {
-        return cache.entrySet()
-                .stream()
-                .filter(entry -> entry.getKey() == number)
-                .map(e -> e.getValue())
-                .findAny()
-                .orElse(new LotteryNumber(number));
+        return cache.computeIfAbsent(number, key -> new LotteryNumber(key));
     }
 
     @Override
