@@ -20,13 +20,27 @@ public class LotteryNumberTest {
     public void test_동일성() {
         LotteryNumber lotteryNumber = new LotteryNumber(5);
 
-        assertThat(lotteryNumber).isEqualTo(new LotteryNumber(5));
-        assertThat(lotteryNumber).hasSameHashCodeAs(new LotteryNumber(5));
+        assertThat(lotteryNumber)
+                .isEqualTo(new LotteryNumber(5));
+        assertThat(lotteryNumber)
+                .hasSameHashCodeAs(new LotteryNumber(5));
     }
 
     @Test
     public void test_toString() {
         assertThat(new LotteryNumber(1))
                 .hasToString("1");
+    }
+
+    @Test
+    public void test_대소비교() {
+        LotteryNumber lotteryNumber = new LotteryNumber(5);
+
+        assertThat(lotteryNumber.compareTo(new LotteryNumber(6)))
+                .isEqualTo(-1);
+        assertThat(lotteryNumber.compareTo(new LotteryNumber(5)))
+                .isEqualTo(0);
+        assertThat(lotteryNumber.compareTo(new LotteryNumber(4)))
+                .isEqualTo(1);
     }
 }

@@ -2,7 +2,7 @@ package lottery.domain;
 
 import java.util.Objects;
 
-public class LotteryNumber {
+public class LotteryNumber implements Comparable<LotteryNumber> {
 
     public static int UPPER_BOUND_INCLUSIVE = 65;
     public static int LOWER_BOUND_INCLUSIVE = 1;
@@ -33,5 +33,10 @@ public class LotteryNumber {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(LotteryNumber o) {
+        return Integer.compare(this.number, o.number);
     }
 }
