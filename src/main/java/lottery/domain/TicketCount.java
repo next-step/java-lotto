@@ -4,10 +4,14 @@ import java.util.Objects;
 
 public class TicketCount {
 
-    public final int count;
+    public final int amount;
 
     public TicketCount(Money money) {
-        this.count = money.divide(LotteryTicket.PRICE).amount;
+        this(money.divide(LotteryTicket.TICKET_PRICE.amount).amount);
+    }
+
+    public TicketCount(int amount) {
+        this.amount = amount;
     }
 
     @Override
@@ -15,11 +19,27 @@ public class TicketCount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TicketCount count1 = (TicketCount) o;
-        return count == count1.count;
+        return amount == count1.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(count);
+        return Objects.hash(amount);
+    }
+
+    public Money getPrice() {
+        return LotteryTicket.TICKET_PRICE.times(this.amount);
+    }
+
+    public TicketCount add(int amount) {
+        return new TicketCount(this.amount + amount);
+    }
+
+    public TicketCount subtract(int minuend) {
+        return new TicketCount(this.amount - minuend);
+    }
+
+    public TicketCount multiply(int mulplier) {
+        return new TicketCount(this.amount * mulplier);
     }
 }
