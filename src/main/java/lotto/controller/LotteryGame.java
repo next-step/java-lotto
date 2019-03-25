@@ -1,13 +1,12 @@
 package lotto.controller;
 
 import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
 import lotto.domain.LotteryMachine;
 
 import java.util.*;
 
 import static lotto.view.Lottery.printLotteries;
-import static lotto.view.Statistics.printStatistics;
+import static lotto.view.ProfitRate.printStatistics;
 import static util.Random.generationRandom;
 
 public class LotteryGame {

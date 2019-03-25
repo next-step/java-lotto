@@ -7,9 +7,10 @@ import org.junit.Test;
 import java.util.*;
 
 import static lotto.controller.LotteryGame.main;
-import static lotto.domain.Lotteries.initialization;
+import static lotto.domain.Lotteries.initialize;
 import static org.assertj.core.api.Assertions.assertThat;
 import static util.Random.generationRandom;
+import static util.Random.makeNumber;
 
 
 public class LotteryTest {
@@ -68,9 +69,8 @@ public class LotteryTest {
     @Test
     public void 랭크_저장_테스트() {
         Lotteries lotteries = new Lotteries("15000");
-        Map<String, Integer> ranks = new HashMap<>();
 
-        initialization(ranks);
+        Map<String, Integer> ranks = initialize();
 
         lotteries.makeRanks(1, ranks);
 
@@ -82,6 +82,13 @@ public class LotteryTest {
         Set<Integer> random = generationRandom();
 
         assertThat(random.size()).isEqualTo(6);
+    }
+
+    @Test
+    public void 로또_생성전_랜덤개수_생성_테스트() {
+        List<Integer> numbers = makeNumber();
+
+        assertThat(numbers.size()).isEqualTo(45);
     }
 
     @Test

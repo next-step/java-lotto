@@ -40,7 +40,8 @@ public class Lotteries {
     public double calculateProfit(LotteryMachine lotteryMachine) {
         int totalProfit = INITIALIZATION_NUMBER;
 
-        for (int i = 0, n = lotteriesSize(); i < n; i++) {
+        int lotterySize = lotteriesSize();
+        for (int i = 0; i < lotterySize; i++) {
             totalProfit += lotteryMachine.countProfit(this.lotteries.get(i));
         }
 
@@ -50,23 +51,26 @@ public class Lotteries {
     }
 
     public Map<String, Integer> makeAllLotteriesRank(LotteryMachine lotteryMachine) {
-        int rank;
-        Map<String, Integer> ranks = new HashMap<>();
-        initialization(ranks);
+        Map<String, Integer> ranks = initialize();
 
-        for (int i = 0; i < this.lotteries.size(); i++) {
-            rank = lotteryMachine.rankLottery(lotteries.get(i));
-            makeRanks(rank, ranks);
+        int lotteriesSize = this.lotteries.size();
+        for (int i = 0; i < lotteriesSize; i++) {
+            Ranking ranking = lotteryMachine.rankLottery(lotteries.get(i));
+            makeRanks(ranking.getRank(), ranks);
         }
 
         return ranks;
     }
 
-    public static void initialization(Map<String, Integer> ranks) {
+    public static Map<String, Integer> initialize() {
+        Map<String, Integer> ranks = new HashMap<>();
+
         ranks.put("first", INITIALIZATION_NUMBER);
         ranks.put("second", INITIALIZATION_NUMBER);
         ranks.put("third", INITIALIZATION_NUMBER);
         ranks.put("fourth", INITIALIZATION_NUMBER);
+
+        return ranks;
     }
 
     public void makeRanks(int rank, Map<String, Integer> ranks) {
