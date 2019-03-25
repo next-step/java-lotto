@@ -6,37 +6,35 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoGenerator {
-    private AutoLottoGenerator() {
-    }
-
-    public static Lotto generate() {
+public class AutoLottoGenerator implements LottoGenerator {
+    @Override
+    public Lotto generate() {
         return new Lotto(getSortedLottoNumbers());
     }
 
-    private static List<LottoNumber> getSortedLottoNumbers() {
+    private List<LottoNumber> getSortedLottoNumbers() {
         List<LottoNumber> lottoNumbers = getUnsortedLottoNumbers();
         sort(lottoNumbers);
 
         return lottoNumbers;
     }
 
-    private static void sort(List<LottoNumber> lottoNumbers) {
+    private void sort(List<LottoNumber> lottoNumbers) {
         lottoNumbers.sort(Comparator.naturalOrder());
     }
 
-    private static List<LottoNumber> getUnsortedLottoNumbers() {
+    private List<LottoNumber> getUnsortedLottoNumbers() {
         return getShuffledAllLottoNumbers().subList(0, Lotto.LOTTO_NUMBERS_SIZE);
     }
 
-    static List<LottoNumber> getAllLottoNumbers() {
+    List<LottoNumber> getAllLottoNumbers() {
         return IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
                 .boxed()
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList());
     }
 
-    private static List<LottoNumber> getShuffledAllLottoNumbers() {
+    private List<LottoNumber> getShuffledAllLottoNumbers() {
         List<LottoNumber> allLottoNumbers = getAllLottoNumbers();
         Collections.shuffle(allLottoNumbers);
 
