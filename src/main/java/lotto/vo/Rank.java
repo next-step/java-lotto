@@ -16,6 +16,14 @@ public enum Rank {
         this.reward = reward;
     }
 
+    public int getNumberOfMatches() {
+        return numberOfMatches;
+    }
+
+    public int getReward() {
+        return reward;
+    }
+
     static Rank valueOf(int matchCount) {
         if (matchCount < 3) {
             return FAILURE;

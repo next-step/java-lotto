@@ -1,17 +1,25 @@
 package lotto.view;
 
+import lotto.vo.Rank;
+
+import java.util.Map;
+
 public class ResultView {
     public void printPurchaseTicketCount(int tickets) {
         System.out.println(String.format("%s를 구매했습니다.", tickets));
     }
 
-    public void winningNumberStatistics() {
+    public void winningNumberStatistics(Map<Rank, Integer> ranks)  {
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.println(perStatistics(3, 5000, 1));
-        System.out.println(perStatistics(4, 50000, 0));
-        System.out.println(perStatistics(5, 1500000, 0));
-        System.out.println(perStatistics(6, 2000000000, 0));
+        printNumberOfWinningCount(Rank.FOURTH_PLACE, ranks);
+        printNumberOfWinningCount(Rank.THIRD_PLACE, ranks);
+        printNumberOfWinningCount(Rank.SECOND_PLACE, ranks);
+        printNumberOfWinningCount(Rank.FIRST_PLACE, ranks);
+    }
+
+    public void printNumberOfWinningCount(Rank rank, Map<Rank, Integer> ranks){
+        System.out.println(perStatistics(rank.getNumberOfMatches(), rank.getReward(), ranks.get(rank) == null? 0 : ranks.get(rank)));
     }
 
     public String perStatistics(int matchedNumber, int winningAmount, int winningNumber) {
