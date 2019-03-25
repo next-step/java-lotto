@@ -1,6 +1,8 @@
 package lotto.vo;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Map;
 
 public enum Rank {
     FIRST_PLACE(6, 2_000_000_000),
@@ -32,5 +34,19 @@ public enum Rank {
                 .filter(v -> matchCount == v.numberOfMatches)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("error"));
+    }
+
+    public static int sumRevenue(Map<Rank, Integer> ranks){
+        int sumRevenue = 0;
+        if(ranks.containsKey(FIRST_PLACE)){
+            sumRevenue = ranks.get(FIRST_PLACE) * FIRST_PLACE.getReward();
+        } else if (ranks.containsKey(SECOND_PLACE)) {
+            sumRevenue = ranks.get(SECOND_PLACE) * SECOND_PLACE.getReward();
+        }else if(ranks.containsKey(THIRD_PLACE)){
+            sumRevenue = ranks.get(THIRD_PLACE) * THIRD_PLACE.getReward();
+        }else if(ranks.containsKey(FOURTH_PLACE)){
+            sumRevenue = ranks.get(FOURTH_PLACE) * FOURTH_PLACE.getReward();
+        }
+        return sumRevenue;
     }
 }

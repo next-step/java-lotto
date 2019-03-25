@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ResultView {
     public void printPurchaseTicketCount(int tickets) {
-        System.out.println(String.format("%s를 구매했습니다.", tickets));
+        System.out.println(String.format("%s개를 구매했습니다.", tickets));
     }
 
     public void winningNumberStatistics(Map<Rank, Integer> ranks)  {

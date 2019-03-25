@@ -1,23 +1,26 @@
 package lotto;
 
+import lotto.view.InputVIew;
 import lotto.view.ResultView;
 import lotto.vo.*;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LotteryMain {
     public static void main(String[] args) {
-
-        int tickets = new Money(1000).getLotto();// inputVIew.printPurchaseAmount();
+        InputVIew inputVIew = new InputVIew();
+        int tickets = new Money(inputVIew.printPurchaseAmount()).getLotto();
 
         ResultView resultView = new ResultView();
         resultView.printPurchaseTicketCount(tickets);
         LotteryGame game = new LotteryGame(tickets);
 
-        Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(Lottery.toLotteries(Arrays.asList(1, 2, 3, 4, 5, 6))));//inputVIew.printWinningNumber();
+        Lottery inputLottery = Lottery.toLotteries(Arrays.asList(inputVIew.printWinningNumber().split(",")).stream().map(Integer::valueOf).collect(Collectors.toList()));
+        Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
 
         resultView.winningNumberStatistics(ranks);
-        resultView.revenueRate(new Money(5000).yield(new Money(10000)));
+        resultView.revenueRate(game.getRevenue());
     }
 }
