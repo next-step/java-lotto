@@ -13,7 +13,7 @@ public class LotteryGame {
 
     private void createTicket(int tickets) {
         for (int i = 0; i < tickets; i++) {
-            lotteries.add(new LotteryGenerator().lotteryNumbers2());
+            lotteries.add(new LotteryGenerator().lotteryNumbers());
         }
     }
 

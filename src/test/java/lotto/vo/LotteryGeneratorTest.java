@@ -9,7 +9,8 @@ public class LotteryGeneratorTest {
     @Test
     public void 로또한장당_생성되는_로또번호() {
         LotteryGenerator lotteryGenerator = new LotteryGenerator();
-        assertThat(lotteryGenerator.lotteryNumbers()).hasSize(6);
+        Lottery lottery = lotteryGenerator.lotteryNumbers();
+        assertThat(lottery.getLotto().size()).isEqualTo(6);
     }
 
     @Test

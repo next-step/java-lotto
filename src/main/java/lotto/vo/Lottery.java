@@ -12,6 +12,10 @@ public class Lottery {
         this.lotto = lotto;
     }
 
+    public Set<Integer> getLotto() {
+        return lotto;
+    }
+
     public static Lottery toLotteries(List<Integer> lotteryNumbers) {
         Set<Integer> lotto = new HashSet<>();
         for (Integer number : lotteryNumbers) {

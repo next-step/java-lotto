@@ -28,13 +28,7 @@ public class LotteryGenerator {
             lotteryNumbers.add(randomNumber);
     }
 
-    public List<Integer> lotteryNumbers() {
-        Collections.sort(lotteryNumbers);
-        printLottoNumber();
-        return lotteryNumbers;
-    }
-
-    public Lottery lotteryNumbers2() {
+    public Lottery lotteryNumbers() {
         Collections.sort(lotteryNumbers);
         printLottoNumber();
         return Lottery.toLotteries(lotteryNumbers);
@@ -49,13 +43,5 @@ public class LotteryGenerator {
 
     public BonusNumber addBonusNumber() {
         return new BonusNumber(lotteryNumbers);
-    }
-
-    @Override
-    public String toString() {
-
-        return "LotteryGenerator{" +
-                "lotteryNumbers=" + lotteryNumbers +
-                '}';
     }
 }
