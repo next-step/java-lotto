@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int MIN = 1;
@@ -12,9 +13,8 @@ public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> values = new HashMap<>();
     static {
-        for (int i = MIN; i <= MAX; i++) {
-            values.put(i, new LottoNumber(i));
-        }
+        IntStream.rangeClosed(MIN, MAX)
+            .forEach(i -> values.put(i, new LottoNumber(i)));
     }
 
     public static LottoNumber from(Integer value) {
