@@ -17,7 +17,7 @@ public class LottoMachineTest {
         int numberOfLottos = 5;
 
         // when
-        LottoBundle lottoBundle = LottoMachine.getLottos(5);
+        LottoBundle lottoBundle = LottoMachine.getAutoLottoBundle(5);
 
         // then
         assertThat(lottoBundle.getLottos()).hasSize(numberOfLottos);

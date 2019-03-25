@@ -8,6 +8,7 @@ import java.util.stream.LongStream;
 
 public class LottoMachine {
     public static final Money LOTTO_PRICE = new Money(1_000);
+    private static final LottoGenerator lottoGenerator = new AutoLottoGenerator();
 
     private LottoMachine() {
     }
@@ -17,7 +18,7 @@ public class LottoMachine {
             throw new IllegalArgumentException("Input money must be more than " + LOTTO_PRICE.getAmount());
         }
 
-        return getLottos(getNumberOfAffordableLottos(money));
+        return getAutoLottoBundle(getNumberOfAffordableLottos(money));
     }
 
     public static LottoBundle buyLottos(LottoBundle manualLottoBundle, Money money) {
@@ -26,7 +27,7 @@ public class LottoMachine {
         }
 
         long numberOfAutoLottos = getNumberOfAutoLottos(manualLottoBundle, money);
-        LottoBundle autoLottoBundle = getLottos(numberOfAutoLottos);
+        LottoBundle autoLottoBundle = getAutoLottoBundle(numberOfAutoLottos);
 
         manualLottoBundle.join(autoLottoBundle);
 
@@ -38,9 +39,9 @@ public class LottoMachine {
         return lottos.size() <= getNumberOfAffordableLottos(money);
     }
 
-    static LottoBundle getLottos(long numberOfLotto) {
+    static LottoBundle getAutoLottoBundle(long numberOfLotto) {
         List<Lotto> lottos = LongStream.range(0, numberOfLotto)
-                .mapToObj(i -> AutoLottoGenerator.generate())
+                .mapToObj(i -> lottoGenerator.generate())
                 .collect(Collectors.toList());
 
         return new LottoBundle(lottos);
