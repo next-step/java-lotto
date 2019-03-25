@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoGenerator implements LottoGenerator {
+    private static final int FIRST_INDEX = 0;
+
     @Override
     public Lotto generate() {
         return new Lotto(getSortedLottoNumbers());
@@ -24,7 +26,7 @@ public class AutoLottoGenerator implements LottoGenerator {
     }
 
     private List<LottoNumber> getUnsortedLottoNumbers() {
-        return getShuffledAllLottoNumbers().subList(0, Lotto.LOTTO_NUMBERS_SIZE);
+        return getShuffledAllLottoNumbers().subList(FIRST_INDEX, Lotto.LOTTO_NUMBERS_SIZE);
     }
 
     List<LottoNumber> getAllLottoNumbers() {
