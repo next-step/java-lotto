@@ -19,7 +19,7 @@ public class LottoProfitTest {
 
         // when
         LottoProfit lottoProfit = new LottoProfit(lottoWinResult);
-        long cost = lottoProfit.getCost();
+        long cost = lottoProfit.getCost().getAmount();
 
         // then
         assertThat(cost).isEqualTo(LottoMachine.LOTTO_PRICE.getAmount() * lottoRanks.size());
@@ -34,11 +34,16 @@ public class LottoProfitTest {
 
         // when
         LottoProfit lottoProfit = new LottoProfit(lottoWinResult);
-        long totalPrizeMoney = lottoProfit.getTotalPrizeMoney();
+        Money totalPrizeMoney = lottoProfit.getTotalPrizeMoney();
 
         // then
-        assertThat(totalPrizeMoney)
-                .isEqualTo(lottoRanks.stream().mapToLong(LottoRank::getPrizeMoney).sum());
+        long realTotalPrizeMoney = lottoRanks.stream()
+                .map(lottoRank -> lottoRank.getPrizeMoney())
+                .mapToLong(Money::getAmount)
+                .sum();
+
+        assertThat(totalPrizeMoney.getAmount())
+                .isEqualTo(realTotalPrizeMoney);
     }
 
     @Test
@@ -53,8 +58,12 @@ public class LottoProfitTest {
         double totalProfitRate = lottoProfit.getTotalProfitRate();
 
         // then
-        long realTotalPrizeMoney = lottoRanks.stream().mapToLong(LottoRank::getPrizeMoney).sum();
+        long realTotalPrizeMoney = lottoRanks.stream()
+                .map(lottoRank -> lottoRank.getPrizeMoney())
+                .mapToLong(Money::getAmount)
+                .sum();
         long realCost = LottoMachine.LOTTO_PRICE.getAmount() * lottoRanks.size();
+
         assertThat(totalProfitRate).isEqualTo((double) realTotalPrizeMoney / realCost);
     }
 }

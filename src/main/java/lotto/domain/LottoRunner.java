@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.ticket.Lotto;
-import lotto.domain.ticket.LottoBundle;
 import lotto.enums.LottoRank;
 import lotto.vo.LottoGameResult;
 import lotto.vo.LottoMatchResult;
@@ -14,24 +12,24 @@ public class LottoRunner {
     private LottoRunner() {
     }
 
-    public static LottoGameResult runLotto(Lotto winner, LottoBundle lottoBundle) {
+    public static LottoGameResult runLotto(WinningLotto winner, LottoBundle lottoBundle) {
         List<LottoMatchResult> lottoMatchResults = getLottoMatchResults(winner, lottoBundle);
         List<LottoRank> lottoRanks = getLottoRanks(lottoMatchResults);
 
         return new LottoGameResult(new LottoWinResult(lottoRanks));
     }
 
-    private static List<LottoMatchResult> getLottoMatchResults(Lotto winner, LottoBundle lottoBundle) {
+    private static List<LottoMatchResult> getLottoMatchResults(WinningLotto winner, LottoBundle lottoBundle) {
         List<Lotto> lottos = lottoBundle.getLottos();
 
         return lottos.stream()
-                .map(lotto -> lotto.getResult(winner))
+                .map(winner::getMatchResult)
                 .collect(Collectors.toList());
     }
 
     private static List<LottoRank> getLottoRanks(List<LottoMatchResult> lottoMatchResults) {
         return lottoMatchResults.stream()
-                .map(LottoRank::getRank)
+                .map(LottoRank::getRankOf)
                 .collect(Collectors.toList());
     }
 }

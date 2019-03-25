@@ -19,11 +19,11 @@ public class LottoWinResultTest {
         LottoWinResult lottoWinResult = new LottoWinResult(lottoRanks);
 
         // then
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.SECOND)).isEqualTo(0);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FIFTH)).isEqualTo(0);
-        assertThat(lottoWinResult.getLottoRankCount(LottoRank.FAIL)).isEqualTo(2);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.SECOND)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FIFTH)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoRankCountOf(LottoRank.FAIL)).isEqualTo(2);
     }
 }

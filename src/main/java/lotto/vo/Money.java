@@ -21,12 +21,15 @@ public class Money {
         return this.amount;
     }
 
-
     public boolean isEqualTo(Money target) {
         return this.amount == target.amount;
     }
 
     public boolean isLargerThan(Money target) {
         return target.amount < this.amount;
+    }
+
+    public Money multiply(long i) {
+        return new Money(this.amount * i);
     }
 }

@@ -9,14 +9,10 @@ public class MoneyTest {
     @Test
     public void 돈은_양수_이어야함() {
         // given
-        long positive = 1;
-        long zero = 0;
         long negative = -1;
 
         // when
         // then
-        new Money(positive);
-        new Money(zero);
         assertThatIllegalArgumentException().isThrownBy(() -> new Money(negative));
     }
 
@@ -57,5 +53,18 @@ public class MoneyTest {
 
         // then
         assertThat(shouldBeTrue).isTrue();
+    }
+
+    @Test
+    public void 금액_곱하기_연산() {
+        // given
+        int amount = 1_000;
+        Money money = new Money(amount);
+
+        // when
+        money = money.multiply(10);
+
+        // then
+        assertThat(money.getAmount()).isEqualTo(amount * 10);
     }
 }

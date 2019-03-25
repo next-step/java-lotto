@@ -1,6 +1,7 @@
 package lotto.parser;
 
-import lotto.domain.ticket.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,19 +11,20 @@ public class LottoNumberParser {
     private LottoNumberParser() {
     }
 
-    public static Lotto parse(String lottoNumbersString, String bonusNumber) {
-        return new Lotto(parseToIntList(lottoNumbersString), Integer.parseInt(bonusNumber));
+    public static WinningLotto parseWinningLotto(String lottoNumbersString, String bonusNumber) {
+        return new WinningLotto(parseLottoNumbers(lottoNumbersString), parseLottoNumber(bonusNumber));
+    }
+    static LottoNumber parseLottoNumber(String bonusNumber) {
+        return LottoNumber.getInstance(parseInt(bonusNumber));
     }
 
-    static List<Integer> parseToIntList(String lottoNumbersString) {
-        lottoNumbersString = removeWhiteSpace(lottoNumbersString);
-
-        return Arrays.stream(lottoNumbersString.split(","))
-                    .map(Integer::parseInt)
+    static List<LottoNumber> parseLottoNumbers(String lottoNumbers) {
+        return Arrays.stream(lottoNumbers.split(","))
+                    .map(LottoNumberParser::parseLottoNumber)
                     .collect(Collectors.toList());
     }
 
-    static String removeWhiteSpace(String source) {
-        return source.replaceAll("\\s+", "");
+    private static int parseInt(String source) {
+        return Integer.parseInt(source.trim());
     }
 }

@@ -11,12 +11,12 @@ public class LottoWinResult {
 
     public LottoWinResult(List<LottoRank> lottoRanks) {
         lottoRanks.forEach(lottoRank -> {
-            long lottoRankCount = getLottoRankCount(lottoRank);
+            long lottoRankCount = getLottoRankCountOf(lottoRank);
             this.wins.put(lottoRank, lottoRankCount + 1);
         });
     }
 
-    public long getLottoRankCount(LottoRank lottoRank) {
+    public long getLottoRankCountOf(LottoRank lottoRank) {
         Long lottoRankCount = this.wins.get(lottoRank);
         return ((null == lottoRankCount) ? 0 : lottoRankCount);
     }
