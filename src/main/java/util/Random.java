@@ -6,7 +6,7 @@ public class Random {
     private static final int LOTTO_MAX_VALUE = 45;
 
 
-    public static Set<Integer> generationRandom() {
+    public static Set<Integer> generateRandom() {
         List<Integer> random = makeNumber();
 
         Collections.shuffle(random);
