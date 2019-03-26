@@ -7,7 +7,7 @@ public class RevenueRate {
     public final double rate;
 
     public RevenueRate(Money revenue, Money myMoney) {
-        if (myMoney.amount == 0) {
+        if (myMoney == Money.ZERO) {
             throw new ArithmeticException();
         }
 

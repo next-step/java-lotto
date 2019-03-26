@@ -29,7 +29,7 @@ public class LotteryMachine {
     }
 
     public List<LotteryTicket> buyLotteryTicket(Money price, List<LotteryTicket> selectedTickets) {
-        final TicketCount randomTicketCount = new TicketCount(price).subtract(selectedTickets.size());
+        final TicketCount randomTicketCount = TicketCount.of(price).subtract(selectedTickets.size());
 
         this.lotteryTickets = new ArrayList<>(selectedTickets);
         this.lotteryTickets.addAll(IntStream.range(0, randomTicketCount.amount)

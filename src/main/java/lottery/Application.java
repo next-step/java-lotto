@@ -25,8 +25,8 @@ public class Application {
         final List<LotteryTicket> selectedTickets = InputView.inputSelectTickets();
         final List<LotteryTicket> boughtTickets = machine.buyLotteryTicket(price, selectedTickets);
 
-        ResultView.viewTicketCount(new TicketCount(boughtTickets.size()),
-                new TicketCount(selectedTickets.size()));
+        ResultView.viewTicketCount(TicketCount.valueOf(boughtTickets.size()),
+                TicketCount.valueOf(selectedTickets.size()));
         ResultView.viewTickets(boughtTickets);
 
         final WinningTicket winningTicket = InputView.inputWinningTicket();

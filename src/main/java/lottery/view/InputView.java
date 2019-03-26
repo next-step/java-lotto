@@ -19,12 +19,12 @@ public class InputView {
     public static Money inputPrice() {
         System.out.println("구매금액을 입력해 주세요");
 
-        return new Money(nextInt());
+        return Money.valueOf(nextInt());
     }
 
     public static List<LotteryTicket> inputSelectTickets() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요");
-        TicketCount count = new TicketCount(nextInt());
+        TicketCount count = TicketCount.valueOf(nextInt());
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요");
         return IntStream.range(0, count.amount)

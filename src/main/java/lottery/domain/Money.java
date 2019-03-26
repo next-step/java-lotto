@@ -4,10 +4,16 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final Money ZERO = new Money(0);
+
     public final int amount;
 
-    public Money(int amount) {
+    private Money(int amount) {
         this.amount = amount;
+    }
+
+    public static Money valueOf(int amount) {
+        return amount == 0 ? ZERO : new Money(amount);
     }
 
     @Override
@@ -24,14 +30,14 @@ public class Money {
     }
 
     public Money add(int addend) {
-        return new Money(this.amount + addend);
+        return Money.valueOf(this.amount + addend);
     }
 
     public Money times(int multiplier) {
-        return new Money(this.amount * multiplier);
+        return Money.valueOf(this.amount * multiplier);
     }
 
-    public Money divide(int dividend) {
-        return new Money(this.amount / dividend);
+    public Money divide(int divisor) {
+        return Money.valueOf(this.amount / divisor);
     }
 }

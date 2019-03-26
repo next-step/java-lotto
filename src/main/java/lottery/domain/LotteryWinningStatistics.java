@@ -18,14 +18,14 @@ public class LotteryWinningStatistics {
                 .map(winningTicket::raffle)
                 .collect(Collectors.toMap(
                         rank -> rank,
-                        rank -> new TicketCount(1),
+                        rank -> TicketCount.valueOf(1),
                         (count1, count2) -> count1.add(count2.amount),
                         () -> new EnumMap<>(LotteryRank.class)
                 ));
     }
 
     public TicketCount countRank(LotteryRank rank) {
-        return rankCountMap.getOrDefault(rank, new TicketCount(0));
+        return rankCountMap.getOrDefault(rank, TicketCount.ZERO);
     }
 
     public RevenueRate revenueRate() {
@@ -35,15 +35,15 @@ public class LotteryWinningStatistics {
     private Money getWinningMoney() {
         return rankCountMap.entrySet()
                 .stream()
-                .reduce(new Money(0),
-                        (sum, entry) -> sum.add(entry.getValue().multiply(entry.getKey().winningMoney.amount).amount),
+                .reduce(Money.ZERO,
+                        (sum, entry) -> sum.add(entry.getValue().times(entry.getKey().winningMoney.amount).amount),
                         (sum1, sum2) -> sum1.add(sum2.amount));
     }
 
     private Money totalTicketsPrice() {
         return rankCountMap.entrySet()
                 .stream()
-                .reduce(new TicketCount(0),
+                .reduce(TicketCount.ZERO,
                         (sum, entry) -> sum.add(entry.getValue().amount),
                         (count1, count2) -> count1.add(count2.amount))
                 .getPrice();

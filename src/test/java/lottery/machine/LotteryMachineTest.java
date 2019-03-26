@@ -14,7 +14,7 @@ public class LotteryMachineTest {
     @Test
     public void test_로또_구매_only_랜덤번호() {
         LotteryMachine machine = new LotteryMachine();
-        Money price = new Money(14000);
+        Money price = Money.valueOf(14000);
 
         assertThat(machine.buyLotteryTicket(price))
                 .hasSize(14);
@@ -26,7 +26,7 @@ public class LotteryMachineTest {
         List<LotteryTicket> selectedTickets = createSelectedTickets(
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 Arrays.asList(7, 8, 9, 10, 11, 12));
-        Money price = new Money(2000);
+        Money price = Money.valueOf(2000);
 
         assertThat(machine.buyLotteryTicket(price, selectedTickets))
                 .hasSize(2)
@@ -40,7 +40,7 @@ public class LotteryMachineTest {
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 Arrays.asList(7, 8, 9, 10, 11, 12));
 
-        Money price = new Money(14000);
+        Money price = Money.valueOf(14000);
         assertThat(machine.buyLotteryTicket(price, selectedTickets))
             .hasSize(14)
             .containsAll(selectedTickets);
@@ -54,11 +54,11 @@ public class LotteryMachineTest {
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        machine.buyLotteryTicket(new Money(2000), selectedTickets);
+        machine.buyLotteryTicket(Money.valueOf(2000), selectedTickets);
         LotteryWinningStatistics statistics = machine.raffle(winningTicket);
 
         assertThat(statistics.countRank(LotteryRank.FIRST))
-                .isEqualTo(new TicketCount(2));
+                .isEqualTo(TicketCount.valueOf(2));
     }
 
     private List<LotteryTicket> createSelectedTickets(List<Integer> ...numbers) {
@@ -75,7 +75,7 @@ public class LotteryMachineTest {
                 Arrays.asList(1, 2, 3, 4, 5, 6),
                 Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(machine.buyLotteryTicket(new Money(2000), selectedTickets))
+        assertThat(machine.buyLotteryTicket(Money.valueOf(2000), selectedTickets))
                 .isNotSameAs(selectedTickets);
     }
 }

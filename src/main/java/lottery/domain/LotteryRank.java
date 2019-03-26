@@ -47,7 +47,7 @@ public enum LotteryRank {
 
     LotteryRank(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
-        this.winningMoney = new Money(winningMoney);
+        this.winningMoney = Money.valueOf(winningMoney);
     }
 
     protected abstract boolean match(int winningCount, boolean matchBonus);
