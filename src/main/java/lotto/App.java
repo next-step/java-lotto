@@ -1,32 +1,41 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.UserLottoTickets;
+import lotto.domain.WiningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {
 
-        int amount = InputView.getAmount();
+        Money money = new Money(InputView.getAmount());
 
-        OutputView.printTicketCount(amount);
+        OutputView.printTicketCount(money);
 
         LottoMachine lottoMachine = new LottoMachine(new UserLottoTicketGenerator());
 
-        List<LottoTicket> buyLottoTickets = lottoMachine.buyLottoTicket(amount);
+        UserLottoTickets buyLottoTickets = lottoMachine.buyLottoTicket(money);
 
         //랜덤값출력
         OutputView.printBuyLottoTickets(buyLottoTickets);
 
         //지난주번호 입력
-        List<Integer> winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
+        LottoTicket winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
 
-        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber);
+        //보너스넘버 입력
+        LottoNumber bonusBall = InputView.getBonusNumber();
+
+        //위닝로또
+        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningNumber, bonusBall);
+
         //결과저장, 비교
-        LotteryResults lotteryResults = new LotteryResults(winingLottoTicket, buyLottoTickets, amount);
+        LotteryResults lotteryResults = new LotteryResults(winingLottoTicket, buyLottoTickets);
 
         OutputView.printLotteryResult(lotteryResults);
+
+        OutputView.printProfit(money.getProfit(lotteryResults));
 
     }
 }

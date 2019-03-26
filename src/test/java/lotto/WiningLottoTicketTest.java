@@ -1,8 +1,9 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.WiningLottoTicket;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,12 +12,16 @@ public class WiningLottoTicketTest {
     @Test
     public void 당첨_번호_포함된_개수_반환() {
         //given
-        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(6, 3, 1, 10, 45, 30));
+        LottoTicket winningLottoTicket =  LottoTicket.of(1, 2, 3, 4, 5, 6);
+        LottoTicket userLottoTicket = LottoTicket.of(1, 2, 3, 4, 8, 9);
+        WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningLottoTicket, LottoNumber.getBasicNumber(7));
+
         //when
-        int matchCount = winingLottoTicket.checkLottoNumber(lottoTicket);
+        int matchCount = winingLottoTicket.matchLottoNumber(userLottoTicket);
+
         //then
-        assertThat(matchCount).isEqualTo(3);
+        assertThat(matchCount).isEqualTo(4);
     }
+
 
 }

@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,13 +25,13 @@ public class UserLottoTicketGenerator {
         Collections.shuffle(lottoNumbers);
     }
 
-    public List<Integer> generateTicket() {
-        List<Integer> ticket = new ArrayList<>();
-        shuffleNum(lottoNumbers);
-        for (int i = 0; i < LOTTO_TICKET_LIMIT_NUM; i++) {
-            ticket.add(lottoNumbers.get(i));
-        }
+    public List<LottoNumber> generateTicket() {
         Collections.sort(lottoNumbers);
+        List<LottoNumber> ticket = new ArrayList<>();
+        shuffleNum(lottoNumbers);
+        for (int i = LOTTO_TICKET_MIN_NUM - 1; i < LOTTO_TICKET_LIMIT_NUM; i++) {
+            ticket.add(LottoNumber.getBasicNumber(lottoNumbers.get(i)));
+        }
         return ticket;
 
     }

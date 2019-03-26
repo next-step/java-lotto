@@ -1,7 +1,7 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import lotto.domain.LottoTicket;
+import lotto.domain.UserLottoTickets;
 
 public class LottoMachine {
     private UserLottoTicketGenerator lottoNumGenerator;
@@ -10,16 +10,11 @@ public class LottoMachine {
         this.lottoNumGenerator = userLottoTicketGenerator;
     }
 
-    public List<LottoTicket> buyLottoTicket(int amount) {
-        int salesQuantity = getSalesQuantity(amount);
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    public UserLottoTickets buyLottoTicket(Money money) {
+        UserLottoTickets userLottoTickets = new UserLottoTickets();
+        int salesQuantity =  money.getBuyTicketsCount();
         for (int i = 0; i < salesQuantity; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
+            userLottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
         }
-        return lottoTickets;
-    }
-
-    private int getSalesQuantity(int amount) {
-        return amount / 1000;
-    }
-}
+        return userLottoTickets;
+    }}
