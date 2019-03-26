@@ -10,13 +10,12 @@ public class ConsoleMain {
         LottoMachine lottoMachine = new LottoMachine();
 
         LottoMoney lottoMoney = new LottoMoney(ConsoleInputView.inputPrice());
-        LottoPaper lottoPaper = new LottoPaper(lottoMoney);
+        List<Integer[]> manualNumbers = ConsoleInputView.inputManualLottoNumbers(ConsoleInputView.inputManualLottoCount());
+        LottoGenerator lottoGenerator = new DefaultLottoGenerator(lottoMoney, manualNumbers);
 
-        lottoPaper.fillManuals(ConsoleInputView.inputManualLottoNumbers(ConsoleInputView.inputManualLottoCount()));
-
-        List<Lotto> lottos = lottoMachine.purchase(lottoPaper);
+        List<Lotto> lottos = lottoGenerator.generate();
         
-        ConsoleResultView.printLottoCount(lottoPaper);
+        ConsoleResultView.printLottoCount(manualNumbers.size(), lottoMoney.getLottoCount() - manualNumbers.size());
         ConsoleResultView.printLottosInfo(lottos);
 
         WinningLotto winningLotto = new WinningLotto(ConsoleInputView.inputWinningNumbers(), ConsoleInputView.inputBonusNumber());
