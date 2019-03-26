@@ -7,6 +7,9 @@ public class LottoTicket {
     private final List<LottoNumber> buyLottoNumbers;
 
     public LottoTicket(List<LottoNumber> buyLottoNumbers) {
+        if (buyLottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("6자리 숫자여야 합니다.");
+        }
         this.buyLottoNumbers = buyLottoNumbers;
     }
 
