@@ -36,9 +36,9 @@ public class LotteryResults {
     }
 
     private static LottoRank getLottoRank(WiningLottoTicket winingLottoTicket, LottoTicket userLottoTicket) {
-        int countNum = winingLottoTicket.checkLottoNumber(userLottoTicket);
+        int matchNumberCount = winingLottoTicket.matchLottoNumber(userLottoTicket);
         boolean isBonusNumber = winingLottoTicket.checkBonusNumber(userLottoTicket);
-        return LottoRank.valueOf(countNum,isBonusNumber);
+        return LottoRank.valueOf(matchNumberCount,isBonusNumber);
     }
 
 

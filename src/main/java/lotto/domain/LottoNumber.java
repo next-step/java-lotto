@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
@@ -19,21 +20,20 @@ public class LottoNumber {
     private final int basicNumber;
 
     private LottoNumber(int basicNumber) {
-        if (isCheckDigits(basicNumber)) {
+        if (isNotLottoNumber(basicNumber)) {
             throw new IllegalArgumentException("로또 기본 숫자범위 다름  1 ~ 45의 값");
         }
         this.basicNumber = basicNumber;
     }
 
     public static LottoNumber getBasicNumber(int number) {
-        if (basicLottoNumbers.get(number) == null) {
-            throw new IllegalArgumentException("로또 기본 숫자범위 다름  1 ~ 45의 값");
-        }
-        return basicLottoNumbers.get(number);
+
+        return Optional.ofNullable(basicLottoNumbers.get(number))
+            .orElseThrow(() -> new IllegalArgumentException("로또 기본 숫자범위 다름  1 ~ 45의 값"));
     }
 
 
-    private boolean isCheckDigits(int basicNumber) {
+    private boolean isNotLottoNumber(int basicNumber) {
         return basicNumber < BASIC_LOTTO_MIN_NUMBER || basicNumber > BASIC_LOTTO_MAX_NUMBER;
     }
 

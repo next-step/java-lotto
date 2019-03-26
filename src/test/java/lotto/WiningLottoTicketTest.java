@@ -17,7 +17,7 @@ public class WiningLottoTicketTest {
         WiningLottoTicket winingLottoTicket = new WiningLottoTicket(winningLottoTicket, LottoNumber.getBasicNumber(7));
 
         //when
-        int matchCount = winingLottoTicket.checkLottoNumber(userLottoTicket);
+        int matchCount = winingLottoTicket.matchLottoNumber(userLottoTicket);
 
         //then
         assertThat(matchCount).isEqualTo(4);

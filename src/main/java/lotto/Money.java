@@ -5,7 +5,7 @@ import java.util.Map;
 public class Money {
 
     private final int money;
-    private int TICKET_PRICE = 1_000;
+    private static final int TICKET_PRICE = 1_000;
 
     public Money(int money) {
         this.money = money;

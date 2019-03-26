@@ -14,7 +14,7 @@ public class WiningLottoTicket {
     }
 
 
-    public int checkLottoNumber(LottoTicket userLottoTicket) {
+    public int matchLottoNumber(LottoTicket userLottoTicket) {
         int matchCont = 0;
         for (LottoNumber userLottoNumber: userLottoTicket.getLottoTicket()) {
             if (winingNumber.isContainsNumber(userLottoNumber)) {
