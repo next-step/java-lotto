@@ -10,20 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryMachine {
+public class LotteryVendingMachine {
 
     public static final Money TICKET_PRICE = Money.valueOf(1000);
 
     private final NumbersGenerator numbersGenerator;
 
-    private List<LotteryTicket> lotteryTickets;
-
-    public LotteryMachine() {
-        this.numbersGenerator = new BoundedUniqueRandomNumbersGenerator(LotteryNumber.LOWER_BOUND_INCLUSIVE, LotteryNumber.UPPER_BOUND_INCLUSIVE);
-    }
-
-    public LotteryWinningStatistics raffle(WinningTicket winningTicket) {
-        return new LotteryWinningStatistics(winningTicket, this.lotteryTickets);
+    public LotteryVendingMachine(NumbersGenerator numbersGenerator) {
+        this.numbersGenerator = numbersGenerator;
     }
 
     public List<LotteryTicket> buyLotteryTicket(Money price) {
@@ -34,12 +28,12 @@ public class LotteryMachine {
         TicketCount selectedTicketCount = TicketCount.valueOf(selectedTickets.size());
         TicketCount randomTicketCount = howManyCanBuy(price).subtract(selectedTicketCount);
 
-        this.lotteryTickets = new ArrayList<>(selectedTickets);
-        this.lotteryTickets.addAll(IntStream.range(0, randomTicketCount.getAmount())
+        List<LotteryTicket> result = new ArrayList<>(selectedTickets);
+        result.addAll(IntStream.range(0, randomTicketCount.getAmount())
                 .mapToObj(i -> new LotteryTicket(numbersGenerator.nextNumbers(LotteryTicket.NUMBERS_COUNT)))
                 .collect(Collectors.toList()));
 
-        return new ArrayList<>(this.lotteryTickets);
+        return result;
     }
 
     public static TicketCount howManyCanBuy(Money price) {

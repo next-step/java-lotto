@@ -27,7 +27,7 @@ public class ResultView {
     }
 
     public static void viewStatistics(LotteryWinningStatistics statistics) {
-        System.out.println("탕첨통계");
+        System.out.println("당첨통계");
         System.out.println("---------");
 
         Arrays.stream(LotteryRank.values())
@@ -40,9 +40,9 @@ public class ResultView {
 
     private static void viewRank(LotteryWinningStatistics statistics, LotteryRank rank) {
         System.out.printf("%d개 일치%s(%d원)- %d개\n",
-                rank.matchCount,
+                rank.getMatchCount(),
                 rank == LotteryRank.SECOND ? ", 보너스 볼 일치" : " ",
-                LotteryRank.getWinningMoney(rank, TicketCount.ONE),
+                rank.getWinningMoney(TicketCount.ONE).getAmount(),
                 statistics.countRank(rank).getAmount());
     }
 }
