@@ -25,4 +25,8 @@ public class RevenueRate {
     public double getRate() {
         return this.rate;
     }
+
+    public int percentage() {
+        return (int) (rate * 100);
+    }
 }
