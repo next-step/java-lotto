@@ -1,6 +1,6 @@
 package lottery.domain;
 
-import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,31 +10,22 @@ public class LotteryWinningStatistics {
     private final Map<LotteryRank, TicketCount> rankCountMap;
 
     public LotteryWinningStatistics(WinningTicket winningTicket, List<LotteryTicket> tickets) {
-        rankCountMap = convertToRankCountMap(convertToRanks(winningTicket, tickets));
+        rankCountMap = convertToRankCountMap(winningTicket, tickets);
     }
 
-    private Map<LotteryRank, TicketCount> convertToRankCountMap(List<LotteryRank> ranks) {
-        return Arrays.stream(LotteryRank.values())
+    private Map<LotteryRank, TicketCount> convertToRankCountMap(WinningTicket winningTicket, List<LotteryTicket> tickets) {
+        return tickets.stream()
+                .map(winningTicket::raffle)
                 .collect(Collectors.toMap(
                         rank -> rank,
-                        rank -> count(ranks, rank)
+                        rank -> new TicketCount(1),
+                        (count1, count2) -> count1.add(count2.amount),
+                        () -> new EnumMap<>(LotteryRank.class)
                 ));
     }
 
-    private TicketCount count(List<LotteryRank> ranks, LotteryRank rank) {
-        return new TicketCount((int) ranks.stream()
-                .filter(r -> r == rank)
-                .count());
-    }
-
-    private List<LotteryRank> convertToRanks(WinningTicket winningTicket, List<LotteryTicket> tickets) {
-        return tickets.stream()
-                .map(lotteryTicket -> winningTicket.raffle(lotteryTicket))
-                .collect(Collectors.toList());
-    }
-
     public TicketCount countRank(LotteryRank rank) {
-        return rankCountMap.get(rank);
+        return rankCountMap.getOrDefault(rank, new TicketCount(0));
     }
 
     public RevenueRate revenueRate() {
