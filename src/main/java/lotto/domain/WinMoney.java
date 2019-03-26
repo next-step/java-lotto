@@ -1,22 +1,27 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum WinMoney {
 
-  THREE(3, 5_000),
-  FOUR(4, 50_000),
-  FIVE(5, 1_500_000),
-  SIX(6, 2_000_000_000),
+  THREE(3, false, 5_000),
+  FOUR(4, false, 50_000),
+  FIVE(5, false, 1_500_000),
+  FIVE_ONE(5, true, 30_000_000),
+  SIX(6, false, 2_000_000_000),
   ;
 
-  private int matchCount;
+  private long matchCount;
+  private boolean hasBonus;
   private long winMoney;
 
-  WinMoney(int matchCount, long winMoney) {
+  WinMoney(long matchCount, boolean hasBonus, long winMoney) {
     this.matchCount = matchCount;
+    this.hasBonus = hasBonus;
     this.winMoney = winMoney;
   }
 
-  public int getMatchCount() {
+  public long getMatchCount() {
     return matchCount;
   }
 
@@ -24,8 +29,12 @@ public enum WinMoney {
     return winMoney;
   }
 
-  public boolean isWinLotto(Lotto lotto, WinNumbers winNumbers) {
-    return lotto.matchCount(winNumbers) == matchCount;
+  public static WinMoney of(long matchCount, boolean hasBonus) {
+
+    return Arrays.stream(WinMoney.values())
+        .filter(winMoney -> winMoney.matchCount == matchCount && winMoney.hasBonus == hasBonus)
+        .findFirst()
+        .orElse(null);
   }
 
   public Money totalWinMoney(long winCount) {

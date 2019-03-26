@@ -18,8 +18,9 @@ public class ConsoleResultView {
 
     Arrays.stream(WinMoney.values())
         .forEach(winMoney -> System.out.printf(
-            "%d개 일치 (%d원) - %d개\n",
+            "%d개 일치%s (%d원) - %d개\n",
             winMoney.getMatchCount(),
+            winMoney == WinMoney.FIVE_ONE ? ", 보너스 볼 일치" : "",
             winMoney.getWinMoney(),
             winStats.getWinCount(winMoney)
         ));

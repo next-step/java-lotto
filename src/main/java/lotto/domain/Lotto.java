@@ -17,8 +17,18 @@ public class Lotto {
     this.lottoNumbers = lottoNumbers;
   }
 
+  public WinMoney isWinLotto(WinNumbers winNumbers) {
+    return WinMoney.of(matchCount(winNumbers), additionMatch(winNumbers));
+
+  }
+
   public long matchCount(WinNumbers winNumbers) {
     return winNumbers.matchCount(lottoNumbers);
+  }
+
+
+  public boolean additionMatch(WinNumbers winNumbers) {
+    return winNumbers.additionMatch(lottoNumbers);
   }
 
   public String numbers() {

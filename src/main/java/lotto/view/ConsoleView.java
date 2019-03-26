@@ -7,10 +7,12 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStore;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.MyLottos;
 import lotto.domain.WinNumbers;
 import lotto.domain.WinStats;
+import lotto.domain.WinningNumbers;
 
 public class ConsoleView {
 
@@ -21,8 +23,9 @@ public class ConsoleView {
     int insertMoney = consoleInputView.inputPurchaseAmount();
     MyLottos myLottos = buyLottos(insertMoney);
 
-    String winNumberString = consoleInputView.inputWinNumbers();
-    WinNumbers winNumbers = winNumbers(winNumberString);
+    String inputWinNumbers = consoleInputView.inputWinNumbers();
+    int inputAdditionNumber = consoleInputView.inputAdditionNumber();
+    WinNumbers winNumbers = winNumbers(inputWinNumbers, inputAdditionNumber);
 
     winState(myLottos, winNumbers);
   }
@@ -34,7 +37,7 @@ public class ConsoleView {
     WinStats winStats = myLottos.winStats(winNumber);
     ConsoleResultView.printMatchWinCount(winStats);
 
-    String yield = myLottos.yield(winStats.totalReward());
+    String yield = winStats.yield();
     ConsoleResultView.printYield(yield);
   }
 
@@ -46,17 +49,23 @@ public class ConsoleView {
       ConsoleResultView.printIssueLottoNumbers(lotto);
     }
 
-    return new MyLottos(buyMoney, lottos);
+    return new MyLottos(buyMoney, new Lottos(lottos));
 
   }
 
-  private static WinNumbers winNumbers(String winNumberString) {
+  private static WinNumbers winNumbers(String inputWinNumbers, int inputAdditionNumber) {
 
-    String[] winNumberArray = winNumberString.split(",");
-    Set<LottoNumber> winNumbers = Arrays.stream(winNumberArray)
-        .map(winNumber -> new LottoNumber(Integer.parseInt(winNumber.trim())))
+    WinningNumbers winningNumbers = new WinningNumbers(convertStringToLottoNumbers(inputWinNumbers));
+    LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
+
+    return new WinNumbers(winningNumbers, additionalNumber);
+  }
+
+  private static Set<LottoNumber> convertStringToLottoNumbers(String inputWinNumbers) {
+
+    String[] winNumberArray = inputWinNumbers.split(",");
+    return Arrays.stream(winNumberArray)
+        .map(winNumber -> LottoNumber.getInstance(Integer.parseInt(winNumber.trim())))
         .collect(Collectors.toSet());
-
-    return new WinNumbers(winNumbers);
   }
 }

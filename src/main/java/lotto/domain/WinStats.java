@@ -1,29 +1,30 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Map;
 
 public class WinStats {
 
-  private List<WinResult> winResults;
+  private Money buyMoney;
+  private Map<WinMoney, Long> winResults;
 
-  public WinStats(List<WinResult> winResults) {
+  public WinStats(Money buyMoney, Map<WinMoney, Long> winResults) {
+    this.buyMoney = buyMoney;
     this.winResults = winResults;
   }
 
   public Money totalReward() {
 
-    return winResults.stream()
-        .map(WinResult::reward)
+    return winResults.entrySet().stream()
+        .map(winResult -> winResult.getKey().totalWinMoney(winResult.getValue()))
         .reduce(Money::sum)
         .orElse(new Money(0));
   }
 
-  public long getWinCount(WinMoney winMoney) {
+  public String yield() {
+    return String.format("%.2f", totalReward().yield(buyMoney));
+  }
 
-    return winResults.stream()
-        .filter(winResult -> winResult.isWinMoney(winMoney))
-        .findFirst()
-        .orElse(new WinResult(winMoney, 0))
-        .getWinCount();
+  public long getWinCount(WinMoney winMoney) {
+    return winResults.get(winMoney);
   }
 }

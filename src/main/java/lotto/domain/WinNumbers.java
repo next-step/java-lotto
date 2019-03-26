@@ -4,21 +4,26 @@ import java.util.Set;
 
 public class WinNumbers {
 
-  private final Set<LottoNumber> winNumbers;
+  private final WinningNumbers winningNumbers;
+  private final LottoNumber additionNumber;
 
-  public WinNumbers(Set<LottoNumber> winNumbers) {
+  public WinNumbers(WinningNumbers winningNumbers, LottoNumber additionNumber) {
 
-    if (winNumbers.size() != Lotto.NUMBERS_SIZE) {
+    this.winningNumbers = winningNumbers;
+
+    if (winningNumbers.isContain(additionNumber)) {
       throw new IllegalArgumentException();
     }
-
-    this.winNumbers = winNumbers;
+    this.additionNumber = additionNumber;
   }
 
   public long matchCount(Set<LottoNumber> lottoNumbers) {
-
-    return winNumbers.stream()
-        .filter(lottoNumbers::contains)
+    return lottoNumbers.stream()
+        .filter(winningNumbers::isContain)
         .count();
+  }
+
+  public boolean additionMatch(Set<LottoNumber> lottoNumbers) {
+    return lottoNumbers.contains(additionNumber);
   }
 }
