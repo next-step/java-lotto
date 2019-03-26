@@ -1,5 +1,6 @@
 package lotto.tool;
 
+import lotto.domain.LottoBundle;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoTicket;
 import org.junit.Test;
@@ -52,23 +53,21 @@ public class LottoMachineTest {
         manualLottoNumbers.add(manual1);
         manualLottoNumbers.add(manual2);
         LottoMoney lottoMoney = new LottoMoney(10000);
-        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.toString());
-        }
-        assertThat(lottoTickets.size()).isEqualTo(10);
+        LottoBundle lottoBundle = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+        assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
     }
 
     @Test
     public void 수동_0장_자동_혼합() {
         List<String[]> manualLottoNumbers = new ArrayList<>();
         LottoMoney lottoMoney = new LottoMoney(10000);
-        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+//        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+        LottoBundle lottoBundle = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoBundle.getTickets()) {
             System.out.println(lottoTicket.toString());
         }
-        assertThat(lottoTickets.size()).isEqualTo(10);
+        assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
     }
 }

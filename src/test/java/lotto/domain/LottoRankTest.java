@@ -17,4 +17,10 @@ public class LottoRankTest {
         LottoRank lottoRank = LottoRank.valueOf(5, true);
         assertThat(lottoRank.matchCount).isEqualTo(5);
     }
+
+    @Test
+    public void 수익률_구하기() {
+        long winningMoney = LottoRank.calculateWinningMoney(LottoRank.FIFTH, 1);
+        assertThat(winningMoney).isEqualTo(5000);
+    }
 }

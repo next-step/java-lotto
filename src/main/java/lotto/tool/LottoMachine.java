@@ -1,6 +1,7 @@
 package lotto.tool;
 
 import lotto.domain.LottoBall;
+import lotto.domain.LottoBundle;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoTicket;
 
@@ -11,15 +12,17 @@ public class LottoMachine {
 
     public static final int LOTTO_MANUAL_DEFAULT_COUNT = 0;
 
-    public static List<LottoTicket> issueTickets(LottoMoney lottoMoney, List<String[]> manualLottoNumbers) {
-        int totalCount = lottoMoney.buy();
-        int manualCount = manualLottoNumbers.size();
-        int autoCount = lottoMoney.buy() - manualCount;
-
-        checkManualTicketCount(totalCount, manualCount);
+    public static LottoBundle issueTickets(LottoMoney lottoMoney, List<String[]> manualLottoNumbers) {
+        //TODO : 한가지 일만 하도록 변경 ( 수동티켓 발급 가능여부 판단, 수동티켓 발급하기 , 자동티켓 발급하기 )
+        //TODO : 콘솔에서 각각 호출하도록 변경하는게 좋은건가?
+        checkManualTicketCount(lottoMoney.buy(), manualLottoNumbers.size());
         List<LottoTicket> lottoTickets = issueManualTickets(manualLottoNumbers);
 
-        for (int i = 0; i < autoCount; i++) {
+        return new LottoBundle(issueAutoTickets(lottoTickets, lottoMoney.buy() - manualLottoNumbers.size()));
+    }
+
+    private static List<LottoTicket> issueAutoTickets(List<LottoTicket> lottoTickets, int autoIssueCount) {
+        for (int i = 0; i < autoIssueCount; i++) {
             lottoTickets.add(new LottoTicket(LottoAutoGenerator.random()));
         }
         return lottoTickets;

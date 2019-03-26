@@ -12,12 +12,12 @@ public class ConsoleMain {
         List<String[]> manualLottoNumbers = InputView.inputManualLottoNumbers();
         OutputView.printTicketCount(lottoMoney, manualLottoNumbers.size());
 
-        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
-        OutputView.printTickets(lottoTickets);
+        LottoBundle lottoBundle = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+        OutputView.printTickets(lottoBundle);
 
         WinningLotto winningLotto = InputView.inputWinningNumbers();
 
-        LottoMatcher lottoMatcher = new LottoMatcher(lottoTickets, winningLotto);
+        LottoMatcher lottoMatcher = new LottoMatcher(lottoBundle, winningLotto);
         OutputView.printRankResult(lottoMatcher);
 
         EarningRate earningRate = new EarningRate(lottoMatcher, lottoMoney);
