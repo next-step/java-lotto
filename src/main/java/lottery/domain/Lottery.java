@@ -3,8 +3,6 @@ package lottery.domain;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.List;
-
 @ToString
 @EqualsAndHashCode
 public class Lottery {
@@ -13,24 +11,20 @@ public class Lottery {
     public Lottery() {
         this.lotteryNumber = new LotteryNumber();
     }
-
-    public Lottery(List<Integer> inputNumbers) {
-        this.lotteryNumber = new LotteryNumber(inputNumbers);
-    }
-
-    public Lottery(List<Integer> inputNumbers, int bonusNumber) {
-        this.lotteryNumber = new LotteryNumber(inputNumbers, bonusNumber);
+    
+    public Lottery(LotteryNumber inputNumbers) {
+        this.lotteryNumber = inputNumbers;
     }
 
     public String getString() {
         return lotteryNumber.getStringForPrint();
     }
 
-    public int winCheck(Lottery winningLottery) {
+    public RANK winCheck(Lottery winningLottery) {
         return passWinCheck(lotteryNumber, winningLottery.lotteryNumber);
     }
 
-    private int passWinCheck(LotteryNumber purchasedNumbers, LotteryNumber winningNumbers) {
+    private RANK passWinCheck(LotteryNumber purchasedNumbers, LotteryNumber winningNumbers) {
         return purchasedNumbers.compareNumbers(winningNumbers);
     }
 }
