@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,23 @@ public class ConsoleView {
     winState(myLottos, winNumbers);
   }
 
+  private static List<Lotto> manualLotto(int buyQuantity) {
+
+    int manualQuantity = consoleInputView.inputManualQuantity();
+    if (manualQuantity > buyQuantity) {
+      throw new IllegalArgumentException();
+    }
+
+    List<String> inputLottoNumbers = new ArrayList<>();
+    if (manualQuantity > 0) {
+      consoleInputView.inputManualNumbers(manualQuantity);
+    }
+    return inputLottoNumbers.stream()
+        .map(ConsoleView::convertStringToLottoNumbers)
+        .map(Lotto::new)
+        .collect(Collectors.toList());
+  }
+
   private static void winState(MyLottos myLottos, WinNumbers winNumber) {
 
     ConsoleResultView.printResultTitle();
@@ -44,7 +62,11 @@ public class ConsoleView {
   private static MyLottos buyLottos(int insertMoney) {
 
     Money buyMoney = new Money(insertMoney);
-    Lottos lottos = LottoStore.buy(buyMoney);
+    int buyQuantity = LottoStore.quantity(buyMoney);
+
+    List<Lotto> manualLottos = manualLotto(insertMoney);
+    int autoQuantity = buyQuantity - manualLottos.size();
+    Lottos lottos = LottoStore.buy(autoQuantity, manualLottos);
     for (Lotto lotto : lottos.getLottos()) {
       ConsoleResultView.printIssueLottoNumbers(lotto);
     }
@@ -61,10 +83,11 @@ public class ConsoleView {
     return new WinNumbers(winningNumbers, additionalNumber);
   }
 
-  private static Set<LottoNumber> convertStringToLottoNumbers(String inputWinNumbers) {
+  private static Set<LottoNumber> convertStringToLottoNumbers(String inputLottoNumbers) {
 
-    String[] winNumberArray = inputWinNumbers.split(",");
+    String[] winNumberArray = inputLottoNumbers.split(",");
     return Arrays.stream(winNumberArray)
+        .filter(winNumber -> !winNumber.trim().isEmpty())
         .map(winNumber -> LottoNumber.getInstance(Integer.parseInt(winNumber.trim())))
         .collect(Collectors.toSet());
   }
