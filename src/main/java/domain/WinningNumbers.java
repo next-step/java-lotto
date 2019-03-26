@@ -1,31 +1,19 @@
 package domain;
 
-import java.util.List;
-
 public class WinningNumbers {
-    private List<Integer> winningNumbers;
+    private LottoNumbers winningNumbers;
     private int bonusBall;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusBall) {
+    public WinningNumbers(LottoNumbers winningNumbers, int bonusBall) {
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBall;
     }
 
     public int calcMatchCount(Lotto lotto) {
-        int matchCount = 0;
-        for (Integer inputWinningNumber : winningNumbers) {
-            if (lotto.isContains(inputWinningNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+        return winningNumbers.calcMatchCount(lotto);
     }
 
-    public boolean isContainsBonusBall(int matchCount, Lotto lotto) {
-        boolean isContainsBonusBall = false;
-        if (matchCount == LottoRank.SECOND.getMatchCount()) {
-            isContainsBonusBall = lotto.isContains(this.bonusBall);
-        }
-        return isContainsBonusBall;
+    public boolean isContainsBonusBall(Lotto lotto) {
+        return lotto.isContains(this.bonusBall);
     }
 }

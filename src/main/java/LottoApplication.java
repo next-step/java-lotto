@@ -1,7 +1,4 @@
-import domain.Lotto;
-import domain.LottoMatch;
-import domain.LottoNumbers;
-import domain.WinningNumbers;
+import domain.*;
 import util.Calculator;
 import util.Console;
 import util.Generator;
@@ -9,7 +6,9 @@ import view.InputView;
 import view.ResultView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoApplication {
     public static void main(String[] args) {
@@ -21,13 +20,19 @@ public class LottoApplication {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = ResultView.purchaseLottoCount(money);
         while (lottoCount-- > 0) {
-            Lotto lotto = new Lotto(new LottoNumbers(Generator.lottoNumbers()));
-            lottos.add(lotto);
-            ResultView.printLotto(lotto);
+            try {
+                Lotto lotto = new Lotto(new LottoNumbers(Generator.lottoNumbers()));
+                lottos.add(lotto);
+                ResultView.printLotto(lotto);
+            } catch (Exception e) {
+                return;
+            }
         }
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        if (winningNumbers.isEmpty()) {
+        LottoNumbers lottoNumbers;
+        try {
+            lottoNumbers = new LottoNumbers(InputView.inputWinningNumbers());
+        } catch (Exception e) {
             return;
         }
 
@@ -36,14 +41,20 @@ public class LottoApplication {
             return;
         }
 
-        if (winningNumbers.contains(bonusBall)) {
+        if (lottoNumbers.isContains(bonusBall)) {
             Console.print("당첨번호와 보너스볼 숫자가 같을 수 없습니다.");
             return;
         }
 
-        WinningNumbers winningNumbers1 = new WinningNumbers(winningNumbers, bonusBall);
-        LottoMatch lottoMatch = new LottoMatch(lottos, winningNumbers1);
-        ResultView.statisticsWinner(lottoMatch.produceResult());
-        ResultView.printYield(Calculator.yieldCalculator(lottoMatch.produceResult(), money));
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
+
+        Map<LottoRank, Integer> produceResult = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            LottoRank lottoMatchCount = new LottoMatch(winningNumbers).matchResult(lotto);
+            produceResult.putIfAbsent(lottoMatchCount, Calculator.nullToZero(produceResult.get(lottoMatchCount)) + 1);
+        }
+
+        ResultView.statisticsWinner(produceResult);
+        ResultView.printYield(Calculator.yieldCalculator(produceResult, money));
     }
 }

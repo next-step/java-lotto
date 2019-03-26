@@ -1,7 +1,7 @@
 package view;
 
 import util.Console;
-import util.Constant;
+import util.Generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,23 +31,11 @@ public class InputView {
         List<Integer> winningNumbers = new ArrayList<>();
         try {
             String [] numbers = new Scanner(System.in).nextLine().split(SEPARATOR);
-
-            if (numbers.length != Constant.MAX_LOTTO_NUMBER_COUNT) {
-                Console.print("당첨 번호는 6개 입니다.");
-                return Collections.emptyList();
-            }
-
             for (String number : numbers) {
-                int lottoNumber = Integer.parseInt(number.trim());
-                if (lottoNumber < Constant.MIN_LOTTO_NUMBER || lottoNumber > Constant.MAX_LOTTO_NUMBER) {
-                    Console.lottoRangeExceptionMessage();
-                    return Collections.emptyList();
-                }
                 winningNumbers.add(Integer.parseInt(number.trim()));
             }
         } catch (NumberFormatException e) {
             Console.numberFormatExceptionMessage();
-            return Collections.emptyList();
         }
         return winningNumbers;
     }
@@ -57,7 +45,7 @@ public class InputView {
         int bonusBall;
         try {
             bonusBall = new Scanner(System.in).nextInt();
-            if (bonusBall < Constant.MIN_LOTTO_NUMBER || bonusBall > Constant.MAX_LOTTO_NUMBER) {
+            if (bonusBall < Generator.MIN_LOTTO_NUMBER || bonusBall > Generator.MAX_LOTTO_NUMBER) {
                 Console.lottoRangeExceptionMessage();
                 return 0;
             }

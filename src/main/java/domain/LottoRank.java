@@ -19,13 +19,13 @@ public enum LottoRank {
         this.prizes = prizes;
     }
 
-    public static LottoRank findMatchCount(Integer matchCount, boolean isContainsBonus) {
-        if (matchCount == LottoRank.SECOND.matchCount && isContainsBonus) {
+    public static LottoRank findMatchCount(Integer matchCount, boolean isContainsBonusBall) {
+        if (matchCount == LottoRank.SECOND.matchCount && isContainsBonusBall) {
             return LottoRank.SECOND;
         }
 
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchCount() == matchCount && !lottoRank.equals(SECOND))
+                .filter(lottoRank -> lottoRank.matchCount == matchCount && !lottoRank.equals(SECOND))
                 .findAny()
                 .orElse(LottoRank.MISS);
     }
