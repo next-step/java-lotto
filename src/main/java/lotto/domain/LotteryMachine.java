@@ -3,8 +3,7 @@ package lotto.domain;
 import java.util.Set;
 
 public class LotteryMachine {
-    private static final int MINIMUM_MATCH_LOTTO = 3;
-    private static final int ZERO = 0;
+
     private Set<Integer> winnerLottery;
 
     public LotteryMachine(Set<Integer> lottery) {
@@ -19,14 +18,6 @@ public class LotteryMachine {
 
     public Ranking rankLottery (Lottery lottery) {
         int count = lottery.matchLottery(this.winnerLottery);
-        MatchingCount matchingCount;
-
-        if(count < MINIMUM_MATCH_LOTTO) {
-            matchingCount = MatchingCount.valueOf(ZERO);
-            return matchingCount.getRank();
-        }
-
-        matchingCount = MatchingCount.valueOf(count);
-        return matchingCount.getRank();
+        return MatchingCount.getRank(count);
     }
 }
