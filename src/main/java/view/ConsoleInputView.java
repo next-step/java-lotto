@@ -1,9 +1,7 @@
 package view;
 
-import domain.NumberSet;
 import util.StringParser;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -22,17 +20,17 @@ public class ConsoleInputView {
         return scanner.nextInt();
     }
 
-    public static List<NumberSet> inputManualLottoNumbers(Integer count){
+    public static List<Integer[]> inputManualLottoNumbers(Integer count){
         System.out.println("수동으로 구매할 로또 번호를 입력해 주세요.");
 
         return IntStream.range(0, count)
-            .mapToObj(i -> NumberSet.fill(StringParser.strToIntegerArray(scanner.next())))
+            .mapToObj(i -> StringParser.strToIntegerArray(scanner.next()))
             .collect(Collectors.toList());
     }
 
-    public static NumberSet inputWinningNumbers(){
+    public static Integer[] inputWinningNumbers(){
         System.out.println("지난 주 당첨번호를 입력해주세요.");
-        return NumberSet.fill(StringParser.strToIntegerArray(scanner.next()));
+        return StringParser.strToIntegerArray(scanner.next());
     }
 
     public static Integer inputBonusNumber() {

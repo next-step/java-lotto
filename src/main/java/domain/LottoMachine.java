@@ -12,12 +12,6 @@ public class LottoMachine {
         this.winningLotto = winningLotto;
     }
 
-    public List<Lotto> purchase(LottoPaper lottoPaper) {
-        return lottoPaper.getElements().stream()
-            .map(Lotto::create)
-            .collect(Collectors.toList());
-    }
-
     public LottoResult createLottoResult(List<Lotto> lottos){
         if(winningLotto == null) {
             throw new IllegalStateException();

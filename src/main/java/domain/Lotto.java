@@ -2,43 +2,44 @@ package domain;
 
 import util.RandomNumberGenerator;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final Integer limitCount = 6;
+    private static final Integer LIMIT_COUNT = 6;
 
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
-        if(lottoNumbers.size() != limitCount){
+        if(lottoNumbers.size() != LIMIT_COUNT){
             throw new IllegalArgumentException();
         }
 
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto create(NumberSet numberSet) {
-        if(numberSet.isEmpty()) {
-            return auto();
-        }
+    public static Lotto create() {
+        return auto();
+    }
 
-        return manual(numberSet);
+    public static Lotto create(Integer ...numbers) {
+        return manual(numbers);
     }
 
     private static Lotto auto() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-        while(lottoNumbers.size() < limitCount) {
+        while(lottoNumbers.size() < LIMIT_COUNT) {
             lottoNumbers.add(LottoNumber.of(RandomNumberGenerator.generateNumber(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)));
         }
 
         return new Lotto(lottoNumbers);
     }
 
-    private static Lotto manual(NumberSet numberSet) {
-        return new Lotto(numberSet.getNumbers().stream()
+    private static Lotto manual(Integer[] numbers) {
+        return new Lotto(Arrays.stream(numbers)
             .map(LottoNumber::of)
             .collect(Collectors.toSet()));
     }
@@ -55,5 +56,23 @@ public class Lotto {
         return (int) lotto.getLottoNumbers().stream()
             .filter(this::contains)
             .count();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+
+        if(obj == this) {
+            return true;
+        }
+
+        if(obj.getClass() == getClass()) {
+            Lotto lotto = (Lotto) obj;
+            return lottoNumbers.equals(lotto.lottoNumbers);
+        }
+
+        return false;
     }
 }
