@@ -9,14 +9,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConsoleResultView {
-    public static void printLottoCount(List<Lotto> lottos){
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottoCount(Integer manualCount, Integer autoCount){
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다\n", manualCount, autoCount);
     }
 
     public static void printLottosInfo(List<Lotto> lottos){
         for (Lotto lotto : lottos) {
             String str = "[" ;
             str += (lotto.getLottoNumbers().stream()
+                .sorted()
                 .map(LottoNumber::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(", ")));
@@ -34,9 +35,10 @@ public class ConsoleResultView {
     }
 
     public static void printMatches(Map<Rank, Long> rankGroup){
-        for (Rank rank : rankGroup.keySet()) {
-            System.out.println(printMatch(rank, rankGroup.get(rank)));
-        }
+        rankGroup.keySet().stream()
+            .filter(r -> r != Rank.None)
+            .map(r -> printMatch(r, rankGroup.get(r)))
+            .forEach(System.out::println);
     }
 
     private static String printMatch(Rank rank, Long value) {

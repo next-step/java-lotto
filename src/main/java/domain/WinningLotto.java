@@ -5,13 +5,17 @@ public class WinningLotto {
     private Lotto winningNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public WinningLotto(Integer[] winningNumbers, Integer bonusNumber) {
+        this.winningNumbers = Lotto.create(winningNumbers);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
+
+        duplicateCheck();
+    }
+
+    private void duplicateCheck() {
         if(winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
-
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
     }
 
     public Rank matchLotto(Lotto lotto) {

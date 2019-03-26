@@ -1,29 +1,28 @@
 package domain;
 
-import util.RandomNumberGenerator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber>{
-    private static final Integer MIN_NUMBER = 1;
-    private static final Integer MAX_NUMBER = 45;
+    public static final Integer MIN_NUMBER = 1;
+    public static final Integer MAX_NUMBER = 45;
 
-    private Integer number;
+    private final Integer number;
 
-    private static LottoNumber[] instances = new LottoNumber[MAX_NUMBER + 1];
+    private static Map<Integer, LottoNumber> instances = new HashMap<>();
 
-    public static LottoNumber getInstance(){
-        return getInstance(RandomNumberGenerator.generateNumber(MIN_NUMBER, MAX_NUMBER));
+    static {
+        IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+            .forEach(i -> instances.put(i, new LottoNumber(i)));
     }
 
-    public static LottoNumber getInstance(Integer number){
+    public static LottoNumber of(Integer number){
         if(number < MIN_NUMBER || number > MAX_NUMBER){
             throw new IllegalArgumentException();
         }
 
-        if(instances[number] == null){
-            instances[number] = new LottoNumber(number);
-        }
-
-        return instances[number];
+        return instances.get(number);
     }
 
     private LottoNumber(Integer number) {

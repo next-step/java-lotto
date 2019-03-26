@@ -2,26 +2,20 @@ package domain;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    private Rank[] ranks = { Rank.First, Rank.First, Rank.Second, Rank.None };
-    private LottoResult lottoResult = new LottoResult(ranks);
+    private List<Lotto> lottos = Arrays.asList(Lotto.create(1,2,3,4,5,6), Lotto.create(1,2,3,4,5,7));
+    private WinningLotto winningLotto = new WinningLotto(new Integer[]{1,2,3,4,5,6}, 7);
+    private LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
     @Test
-    public void 순위를_그룹핑_한다() {
-        assertThat(lottoResult.count(Rank.First)).isEqualTo(2);
+    public void 로또번호와_당첨번호를_통해_결과를_생성한다() {
+        assertThat(lottoResult.count(Rank.First)).isEqualTo(1);
         assertThat(lottoResult.count(Rank.Second)).isEqualTo(1);
-    }
-
-    @Test
-    public void 당첨되지_않은_복권은_저장하지_않는다() {
-        assertThat(lottoResult.count(Rank.None)).isEqualTo(0);
-    }
-
-    @Test
-    public void 로또를_구매한_금액을_계산한다() {
-        assertThat(lottoResult.calculateInvestMoney()).isEqualTo(ranks.length * LottoMachine.LOTTO_PRICE);
     }
 
     @Test
@@ -30,14 +24,5 @@ public class LottoResultTest {
 
         Long prizeMoney = lottoResult.calculatePrizeMoney();
         assertThat(prizeMoney).isEqualTo(totalPrize);
-    }
-
-    @Test
-    public void 수익률을_계산한다() {
-        Long totalPrize = Rank.First.getPrizeMoney() * 2 + Rank.Second.getPrizeMoney();
-
-        Double profitRate = lottoResult.calculateProfitRate();
-        assertThat(profitRate).isEqualTo(
-            totalPrize.doubleValue() / (ranks.length * LottoMachine.LOTTO_PRICE));
     }
 }

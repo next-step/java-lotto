@@ -6,15 +6,11 @@ import java.util.stream.Collectors;
 public class LottoResult {
     private Map<Rank, Long> rankGroup;
 
-    public LottoResult(List<Rank> ranks){
-        rankGroup = ranks.stream()
-            .filter(r -> r != Rank.None)
+    public LottoResult(List<Lotto> lottos, WinningLotto winningLotto){
+        rankGroup = lottos.stream()
+            .map(winningLotto::matchLotto)
             .sorted(Comparator.comparing(Rank::getMatchCount))
             .collect(Collectors.groupingBy(r -> r, Collectors.counting()));
-    }
-
-    public LottoResult(Rank ...ranks) {
-        this(Arrays.asList(ranks));
     }
 
     public Map<Rank, Long> getRankGroup() {
@@ -29,15 +25,5 @@ public class LottoResult {
         return rankGroup.keySet().stream()
             .mapToLong(r -> r.getPrizeMoney() * rankGroup.get(r))
             .sum();
-    }
-
-    public Long calculateInvestMoney() {
-        return rankGroup.keySet().stream()
-            .mapToLong(r -> rankGroup.get(r) * LottoMachine.LOTTO_PRICE)
-            .sum();
-    }
-
-    public Double calculateProfitRate() {
-        return calculatePrizeMoney().doubleValue() / calculateInvestMoney().doubleValue();
     }
 }
