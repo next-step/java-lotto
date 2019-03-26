@@ -3,20 +3,15 @@ package lotto.dto;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMatchResultTest {
-
-    LottoMatchResult lottoMatchResult;
     Map<LottoResult, Integer> map;
 
     @Before
     public void setUp() {
-        lottoMatchResult = new LottoMatchResult(new Money(1000));
-
         map = new HashMap<LottoResult, Integer>();
         for (LottoResult result : LottoResult.values()) {
             map.put(result, 0);
@@ -32,7 +27,6 @@ public class LottoMatchResultTest {
 
     @Test
     public void enumMap테스트() {
-        //3,4,5,6
         LottoResult result = LottoResult.THREE;
         assertThat(map.get(result)).isEqualTo(0);
     }

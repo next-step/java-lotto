@@ -5,20 +5,20 @@ import lotto.domain.LottoTicket;
 import java.util.List;
 
 public class UserLotto {
-    private List<LottoTicket> userLotto;
-    private int ticketCount;
+    private static List<LottoTicket> userLotto;
+    private static int ticketCount;
 
-    public UserLotto(int ticketCount, List<LottoTicket> userLotto) {
-        this.userLotto = userLotto;
-        this.ticketCount = ticketCount;
+    public static void createUserLotto(List<LottoTicket> tickets, int count) {
+        userLotto = tickets;
+        ticketCount = count;
     }
 
-    public int getTicketCount() {
-        return this.ticketCount;
+    public static List<LottoTicket> getUserLotto() {
+        return userLotto;
     }
 
-    public List<LottoTicket> getUserLotto() {
-        return this.userLotto;
+    public static int getTicketCount() {
+        return ticketCount;
     }
 
     @Override

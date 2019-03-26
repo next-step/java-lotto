@@ -1,17 +1,17 @@
 package lotto.dto;
 
 public class Money {
-    private final static int LOTTO_PRICE = 1000;
-    private int money;
+    private final static int LOTTO_PRICE = 1_000;
+    private static int money;
 
-    public Money(int money) {
-        if (money < LOTTO_PRICE) {
+    public static void inputUserMoney(int userMoney) {
+        if (userMoney < LOTTO_PRICE) {
             throw new IllegalArgumentException();
         }
-        this.money = money;
+        money = userMoney;
     }
 
-    public int getMoney() {
-        return this.money;
+    public static int getMoney() {
+        return money;
     }
 }

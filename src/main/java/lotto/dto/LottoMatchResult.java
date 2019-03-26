@@ -4,60 +4,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoMatchResult {
-    private Map<LottoResult, Integer> matchTable;
-    private Money money;
+    private static Map<LottoResult, Integer> matchTable;
 
-    public LottoMatchResult(Money money) {
-        this.money = money;
+    public static void createMatchTable() {
         matchTable = new HashMap<LottoResult, Integer>(4);
-
         for (LottoResult result : LottoResult.values()) {
             matchTable.put(result, 0);
         }
     }
 
-    public void addMatchResult(int matchCount) {
-        String matchString = matchNumberToString(matchCount);
+    public static void addMatchResult(int matchCount) {
+        for (LottoResult result : LottoResult.values()) {
+            addMatchCount(matchCount, result);
+        }
+    }
 
-        if (matchString != "NOTHING") {
-            LottoResult result = LottoResult.valueOf(matchString);
+    public static void addMatchCount(int matchCount, LottoResult result) {
+        if (result.matchCount == matchCount) {
             matchTable.put(result, matchTable.get(result) + 1);
         }
     }
 
-    public String matchNumberToString(int matchCount) {
-        switch (matchCount) {
-            case 3:
-                return "THREE";
-            case 4:
-                return "FOUR";
-            case 5:
-                return "FIVE";
-            case 6:
-                return "SIX";
-            default:
-                return "NOTHING";
-        }
+    public static Map<LottoResult, Integer> getMatchTable() {
+        return matchTable;
     }
 
-    @Override
-    public String toString() {
+    public static String printLottResult() {
         StringBuilder sb = new StringBuilder();
-        double totalPrice = 0;
-
-        for (LottoResult lottoType : matchTable.keySet()) {
-            int userMatchCount = matchTable.get(lottoType);
-            totalPrice += (lottoType.money * userMatchCount);
-            sb.append(String.format("%s개 일치 (%s원)- %s개\n", lottoType.matchCount, lottoType.money, userMatchCount));
-        }
-
-        sb.append(String.format("총 수익률은 %.2f입니다.", (int) (totalPrice / money.getMoney() * 100) / 100.0));
+        sb.append(UserLottoResult.userLottoResult());
+        sb.append(UserLottoResult.userLottRateOfResult());
         return sb.toString();
     }
 }
 
 enum LottoResult {
-    THREE(3, 5000), FOUR(4, 50000), FIVE(5, 1500000), SIX(6, 2000000000);
+    THREE(3, 5_000), FOUR(4, 50_000), FIVE(5, 1_500_000), SIX(6, 2_000_000_000);
     public final int matchCount;
     public final int money;
 

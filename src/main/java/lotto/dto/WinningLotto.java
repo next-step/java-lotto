@@ -3,13 +3,13 @@ package lotto.dto;
 import java.util.List;
 
 public class WinningLotto {
-    private List<Integer> winningLotto;
+    private static List<Integer> winningLotto;
 
-    public WinningLotto(List<Integer> winningLotto) {
-        this.winningLotto = winningLotto;
+    public static void createWinningLotto(List<Integer> numbers) {
+        winningLotto = numbers;
     }
 
-    public List<Integer> getWinningLotto(){
-        return this.winningLotto;
+    public static List<Integer> getWinningLotto() {
+        return winningLotto;
     }
 }
