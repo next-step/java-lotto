@@ -72,7 +72,7 @@ body {
 				<th><h3 class="text-center">당첨 통계</h3></th>
 			</thead>
 		<tbody>
-			<tr>
+			<!-- <tr>
 				<th>3개 일치 (5000원)- 3개</th>
 			</tr>
 			<tr>
@@ -86,10 +86,15 @@ body {
 			</tr>
 			<tr>
 				<th>6개 일치 (2000000000원)- 0개</th>
-			</tr>
+			</tr> -->
+			{{#each ranks as |rank|}}
+				<tr>
+					<th>{{matchCount}}개 일치{{matchBonus}}({{winningMoney}})- {{winningCount}}개</th>
+				</tr>
+			{{/each}}
 		</tbody>
 		<tfoot>
-			<th><h4 class="text-center">총 수익률은 20%입니다.</h4></th>
+			<th><h4 class="text-center">총 수익률은 {{revenueRate}}%입니다.</h4></th>
 		</tfoot>
 	</table>
 </pre>
