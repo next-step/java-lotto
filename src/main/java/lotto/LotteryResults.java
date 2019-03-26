@@ -10,10 +10,8 @@ import java.util.Map;
 public class LotteryResults {
 
     private Map<LottoRank, Integer> lottoResults;
-    private double amount;
 
-    public LotteryResults(WiningLottoTicket winingLottoTicket, UserLottoTickets buyLottoTickets, int amount) {
-        this.amount = amount;
+    public LotteryResults(WiningLottoTicket winingLottoTicket, UserLottoTickets buyLottoTickets) {
         this.lottoResults = initLottoResultMap();
         saveLotteryResult(winingLottoTicket, buyLottoTickets);
     }
@@ -43,23 +41,6 @@ public class LotteryResults {
         return LottoRank.valueOf(countNum,isBonusNumber);
     }
 
-    public int getTotalPrize() {
-        int totalPrize = 0;
-        for (LottoRank rank : LottoRank.values()) {
-            int money = totalPrizeCalculator(rank, lottoResults.get(rank));
-            totalPrize += money;
-        }
-        return totalPrize;
-    }
-
-    private int totalPrizeCalculator(LottoRank rank, Integer integer) {
-        return rank.getWinningMoney() * integer;
-    }
-
-    public double getProfit() {
-        int totalPrice = getTotalPrize();
-        return totalPrice / amount;
-    }
 
 
 }

@@ -7,8 +7,6 @@ import lotto.domain.WiningLottoTicket;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,10 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LotteryResultsTest {
     private LotteryResults lotteryResults;
     //4등티켓 2개와 3등 1개  2등 1개
-    private List<LottoTicket> lottoTickets;
     private WiningLottoTicket winingLottoTicket;
-    private int amount = 10000;
-
 
     @Before
     public void setUp() throws Exception {
@@ -35,7 +30,7 @@ public class LotteryResultsTest {
         userLottoTickets.add(fourthTicket2);
         userLottoTickets.add(secondTicket);
         userLottoTickets.add(ThirdTicket);
-        lotteryResults = new LotteryResults(winingLottoTicket, userLottoTickets, amount);
+        lotteryResults = new LotteryResults(winingLottoTicket, userLottoTickets);
     }
 
     @Test
@@ -44,23 +39,5 @@ public class LotteryResultsTest {
         assertThat(lotteryResults.getLottoResults().get(LottoRank.THIRD)).isEqualTo(1);
     }
 
-    @Test
-    public void 당첨_4등_2개_2등_1개_3등_1개_일때_TotalPrize() {
-        // 50000 + 50000 + 30_000_000 + 1_500_000    = 31600000
-        assertThat(lotteryResults.getTotalPrize()).isEqualTo(31600000);
-    }
 
-    @Test
-    public void 수익률_계산() {
-        // 10000원을 투자,   31600000 원을 이득 보았을때
-        double profit = lotteryResults.getProfit();
-
-        // 10000원을 투자 31600000원을 을 이득보았을때 수익률
-        double amount = 10000;
-
-        // 50000 + 50000 + 30_000_000 + 1_500_000    = 31600000
-        int total = LottoRank.FOURTH.getWinningMoney() + LottoRank.FOURTH.getWinningMoney() + LottoRank.THIRD.getWinningMoney()+ LottoRank.SECOND.getWinningMoney();
-
-        assertThat(total / amount).isEqualTo(profit);
-    }
 }

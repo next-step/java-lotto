@@ -23,4 +23,5 @@ public class WiningLottoTicketTest {
         assertThat(matchCount).isEqualTo(4);
     }
 
+
 }

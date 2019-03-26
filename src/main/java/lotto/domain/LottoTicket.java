@@ -19,6 +19,10 @@ public class LottoTicket {
         return buyLottoNumbers.get(index);
     }
 
+    public boolean isContainsNumber(LottoNumber bonusNumber) {
+        return buyLottoNumbers.contains(bonusNumber);
+    }
+
     @Override
     public String toString() {
         return " " +
@@ -32,5 +36,4 @@ public class LottoTicket {
             lottoNumbers.add(LottoNumber.getBasicNumber(integer));
         }
         return new LottoTicket(lottoNumbers);
-    }
-}
+    }}

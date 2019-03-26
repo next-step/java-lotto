@@ -27,7 +27,7 @@ public class UserLottoTicketGeneratorTest {
 
         LottoMachine lottoMachine = new LottoMachine(testRandomNumGenerator);
 //        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(1000);
-        UserLottoTickets userLottoTickets = lottoMachine.buyLottoTicket(1000);
+        UserLottoTickets userLottoTickets = lottoMachine.buyLottoTicket(new Money(1000));
 
         assertThat(userLottoTickets.getUserLottoTickets().size()).isEqualTo(1);
         LottoTicket lottoTicket = userLottoTickets.getUserLottoTickets().get(0);

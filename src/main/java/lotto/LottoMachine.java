@@ -10,16 +10,11 @@ public class LottoMachine {
         this.lottoNumGenerator = userLottoTicketGenerator;
     }
 
-    public UserLottoTickets buyLottoTicket(int amount) {
+    public UserLottoTickets buyLottoTicket(Money money) {
         UserLottoTickets userLottoTickets = new UserLottoTickets();
-        int salesQuantity = getSalesQuantity(amount);
+        int salesQuantity =  money.getBuyTicketsCount();
         for (int i = 0; i < salesQuantity; i++) {
             userLottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
         }
         return userLottoTickets;
-    }
-
-    private int getSalesQuantity(int amount) {
-        return amount / 1_000;
-    }
-}
+    }}

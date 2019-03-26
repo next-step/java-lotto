@@ -2,14 +2,15 @@ package lotto.view;
 
 import lotto.LotteryResults;
 import lotto.LottoRank;
+import lotto.Money;
 import lotto.domain.LottoTicket;
 import lotto.domain.UserLottoTickets;
 
 public class OutputView {
 
 
-    public static void printTicketCount(int amount) {
-        System.out.println(amount / 1_000 + "개를 구매했습니다.");
+    public static void printTicketCount(Money money) {
+        System.out.println(money.getBuyTicketsCount() + "개를 구매했습니다.");
     }
 
 
@@ -33,8 +34,12 @@ public class OutputView {
             format, LottoRank.SECOND.getCountOfMatch(), LottoRank.SECOND.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.SECOND));
         System.out.printf(
             format, LottoRank.FIRST.getCountOfMatch(), LottoRank.FIRST.getWinningMoney(), lotteryResults.getLottoResults().get(LottoRank.FIRST));
-        System.out.println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lotteryResults.getProfit()));
 
+
+    }
+
+    public static void printProfit(double profit) {
+        System.out.println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profit));
     }
 
 

@@ -17,8 +17,8 @@ public class LottoMachineTest {
     @Test
     public void 받은가격_만큼의_로또티켓_생성() {
         LottoMachine lottoMachine = new LottoMachine(new UserLottoTicketGenerator());
-        UserLottoTickets userLottoTickets = lottoMachine.buyLottoTicket(10000);
-        UserLottoTickets userLottoTickets2 = lottoMachine.buyLottoTicket(2000);
+        UserLottoTickets userLottoTickets = lottoMachine.buyLottoTicket(new Money(10000));
+        UserLottoTickets userLottoTickets2 = lottoMachine.buyLottoTicket(new Money(2000));
 
         assertThat(userLottoTickets.getUserLottoTickets().size()).isEqualTo(10);
         assertThat(userLottoTickets2.getUserLottoTickets().size()).isEqualTo(2);
