@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.generator;
 
+import lotto.domain.*;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -21,6 +22,21 @@ public class ManualLottoGeneratorTest {
         // then
         Lotto lotto = new Lotto(getLottoNumbers(1, 2, 3, 4, 5, 6));
         assertThat(generatedLotto.isEqualTo(lotto)).isTrue();
+    }
+
+    @Test
+    public void 수동_LottoBundle_생성() {
+        // given
+        List<String> lottos = Arrays.asList(
+                "1, 2, 3, 4, 5, 6",
+                "11, 12, 13, 14, 15, 16",
+                "21, 22, 23, 24, 25, 26");
+
+        // when
+        LottoBundle lottoBundle = ManualLottoGenerator.generateLottoBundle(lottos);
+
+        // then
+        assertThat(lottoBundle.getLottos()).hasSize(3);
     }
 
     private List<LottoNumber> getLottoNumbers(int... numbers) {

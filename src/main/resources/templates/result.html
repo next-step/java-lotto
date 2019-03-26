@@ -67,31 +67,82 @@ body {
 	</div>
 </form>
 <pre class="pre-scrollable">
-	<table class="table">
+	<table id="statistics-table" class="table">
 			<thead>
 				<th><h3 class="text-center">당첨 통계</h3></th>
 			</thead>
 		<tbody>
-			<tr>
-				<th>3개 일치 (5000원)- 3개</th>
-			</tr>
-			<tr>
-				<th>4개 일치 (50000원)- 1개</th>
-			</tr>
-			<tr>
-				<th>5개 일치 (1500000원)- 0개</th>
-			</tr>
- 			<tr>
-				<th>5개 일치, 보너스 볼 일치(30000000원)- 0개</th>
-			</tr>
-			<tr>
-				<th>6개 일치 (2000000000원)- 0개</th>
-			</tr>
 		</tbody>
 		<tfoot>
-			<th><h4 class="text-center">총 수익률은 20%입니다.</h4></th>
+		<th><h4 class="text-center">총 수익률은 <span id="profitRate"></span>%입니다.</h4></th>
 		</tfoot>
 	</table>
 </pre>
+
+
+<script>
+	window.onload = () => {
+		statistics.init();
+	}
+
+	let lottoRanks = [];
+    {{#lottoRanks}}
+        lottoRanks.push({
+			rank: "{{this}}",
+			matchCount: {{matchCount}},
+            prizeMoney: {{#prizeMoney}}{{amount}}{{/prizeMoney}}
+	    });
+    {{/lottoRanks}}
+	lottoRanks.reverse();
+	lottoRanks.splice(0,1);
+
+	let wins = {};
+	{{#result}}
+	    {{#each wins}}
+		    wins["{{@key}}"] = {{this}};
+	    {{/each}}
+	{{/result}}
+
+	let profitRate = {{profitRate}};
+
+	let statistics = {
+		statisticsTableBody: null,
+		profitRate: null,
+
+		init() {
+			this.statisticsTableBody = document.querySelector("#statistics-table tbody");
+			this.profitRate = document.getElementById("profitRate");
+
+			this.drawStatistics(wins);
+			this.drawProfitRate(profitRate);
+		},
+
+		drawStatistics(wins) {
+			let statisticsTrs = lottoRanks.map(rank => {
+				let resultMessage = this.getResultMessage(rank, wins);
+
+ 				return `<tr><th>${resultMessage}</th></tr>`;
+			})
+			.join(" ");
+
+			this.statisticsTableBody.innerHTML = statisticsTrs;
+		},
+
+		getResultMessage(rank, wins) {
+			let countOfRank = ((undefined === wins[rank.rank]) ? 0 : wins[rank.rank]);
+
+			if ("SECOND" === rank.rank) {
+				return `${rank.matchCount}개 일치, 보너스 볼 일치(${rank.prizeMoney}원)- ${countOfRank}개`;
+			}
+
+			return `${rank.matchCount}개 일치 (${rank.prizeMoney}원)- ${countOfRank}개`;
+		},
+
+		drawProfitRate(profitRate) {
+			this.profitRate.innerText = profitRate.toFixed(2);
+		}
+	};
+
+</script>
 </body>
 </html>

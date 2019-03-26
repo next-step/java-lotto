@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.generator;
 
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumber;
 import org.junit.Test;
 
 import java.util.List;
@@ -29,5 +31,17 @@ public class AutoLottoGeneratorTest {
         // 비정상 경우는 Lotto, LottoNumber 테스트에서 걸림
         LottoGenerator lottoGenerator = new AutoLottoGenerator();
         lottoGenerator.generate();
+    }
+
+    @Test
+    public void 자동_LottoBundle_생성() {
+        // given
+        int numberOfLottos = 5;
+
+        // when
+        LottoBundle lottoBundle = AutoLottoGenerator.generateLottoBundle(5);
+
+        //then
+        assertThat(lottoBundle.getLottos()).hasSize(numberOfLottos);
     }
 }

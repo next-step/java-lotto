@@ -1,4 +1,8 @@
-package lotto.domain;
+package lotto.domain.generator;
+
+import lotto.domain.Lotto;
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +18,15 @@ public class ManualLottoGenerator implements LottoGenerator {
     @Override
     public Lotto generate() {
         return toLotto(lotto);
+    }
+
+    public static LottoBundle generateLottoBundle(List<String> lottos) {
+        List<Lotto> manualLottos = lottos.stream()
+                .map(ManualLottoGenerator::new)
+                .map(ManualLottoGenerator::generate)
+                .collect(Collectors.toList());
+
+        return new LottoBundle(manualLottos);
     }
 
     private Lotto toLotto(String lottoNumbers) {
