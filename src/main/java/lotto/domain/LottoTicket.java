@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    private List<LottoNumber> buyLottoNumbers;
+    private final List<LottoNumber> buyLottoNumbers;
 
     public LottoTicket(List<LottoNumber> buyLottoNumbers) {
         this.buyLottoNumbers = buyLottoNumbers;
@@ -26,10 +26,9 @@ public class LottoTicket {
             " ";
     }
 
-
-    public static LottoTicket of(List<Integer> asList) {
+    public static LottoTicket of(int ... ints) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer integer : asList) {
+        for (Integer integer : ints) {
             lottoNumbers.add(LottoNumber.getBasicNumber(integer));
         }
         return new LottoTicket(lottoNumbers);

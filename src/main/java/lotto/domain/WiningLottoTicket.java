@@ -27,8 +27,4 @@ public class WiningLottoTicket {
     public boolean checkBonusNumber(LottoTicket buyUserLottoTicket) {
         return buyUserLottoTicket.getLottoTicket().contains(this.bonusNumber);
     }
-
-    public LottoTicket getWiningNumber() {
-        return winingNumber;
-    }
 }

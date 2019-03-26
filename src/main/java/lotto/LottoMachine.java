@@ -1,29 +1,25 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
-
-import java.util.ArrayList;
-import java.util.List;
+import lotto.domain.UserLottoTickets;
 
 public class LottoMachine {
     private UserLottoTicketGenerator lottoNumGenerator;
-    private List<LottoTicket> lottoTickets;
 
     public LottoMachine(UserLottoTicketGenerator userLottoTicketGenerator) {
         this.lottoNumGenerator = userLottoTicketGenerator;
     }
 
-    public List<LottoTicket> buyLottoTicket(int amount) {
+    public UserLottoTickets buyLottoTicket(int amount) {
+        UserLottoTickets userLottoTickets = new UserLottoTickets();
         int salesQuantity = getSalesQuantity(amount);
-        lottoTickets = new ArrayList<>();
         for (int i = 0; i < salesQuantity; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
+            userLottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
         }
-        return lottoTickets;
+        return userLottoTickets;
     }
 
-
     private int getSalesQuantity(int amount) {
-        return amount / 1000;
+        return amount / 1_000;
     }
 }

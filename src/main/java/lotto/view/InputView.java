@@ -18,10 +18,10 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static LottoNumber getBonusBall() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+    public static LottoNumber getBonusNumber() {
+        System.out.println("보너스 숫자 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         int inputNumber = scanner.nextInt();
-        return new LottoNumber(inputNumber);
+        return LottoNumber.getBasicNumber(inputNumber);
     }
 }

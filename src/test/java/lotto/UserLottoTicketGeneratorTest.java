@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.UserLottoTickets;
 import org.junit.Test;
 
 import java.util.*;
@@ -25,10 +26,11 @@ public class UserLottoTicketGeneratorTest {
         TestUserLottoTicketGenerator testRandomNumGenerator = new TestUserLottoTicketGenerator();
 
         LottoMachine lottoMachine = new LottoMachine(testRandomNumGenerator);
-        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(1000);
+//        List<LottoTicket> lottoTickets = lottoMachine.buyLottoTicket(1000);
+        UserLottoTickets userLottoTickets = lottoMachine.buyLottoTicket(1000);
 
-        assertThat(lottoTickets.size()).isEqualTo(1);
-        LottoTicket lottoTicket = lottoTickets.get(0);
+        assertThat(userLottoTickets.getUserLottoTickets().size()).isEqualTo(1);
+        LottoTicket lottoTicket = userLottoTickets.getUserLottoTickets().get(0);
         assertThat(lottoTicket.get(0)).isEqualTo(LottoNumber.getBasicNumber(1)); // 순서가 섞이지 않아 값 검증 가능
         assertThat(lottoTicket.get(2)).isEqualTo(LottoNumber.getBasicNumber(3));
         assertThat(lottoTicket.get(5)).isEqualTo(LottoNumber.getBasicNumber(6));

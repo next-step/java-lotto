@@ -3,19 +3,18 @@ package lotto.view;
 import lotto.LotteryResults;
 import lotto.LottoRank;
 import lotto.domain.LottoTicket;
-
-import java.util.List;
+import lotto.domain.UserLottoTickets;
 
 public class OutputView {
 
 
     public static void printTicketCount(int amount) {
-        System.out.println(amount / 1000 + "개를 구매했습니다.");
+        System.out.println(amount / 1_000 + "개를 구매했습니다.");
     }
 
 
-    public static void printBuyLottoTickets(List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public static void printBuyLottoTickets(UserLottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getUserLottoTickets()) {
             System.out.println(lottoTicket.toString());
         }
     }
@@ -37,4 +36,6 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", lotteryResults.getProfit()));
 
     }
+
+
 }

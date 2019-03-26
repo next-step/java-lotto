@@ -25,7 +25,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(int countOfMatch, boolean bonusNumber) {
-        if (countOfMatch < FIFTH.getCountOfMatch()) {
+        if (countOfMatch < FIFTH.countOfMatch) {
             return MISS;
         }
         LottoRank rank = valueOf(countOfMatch);

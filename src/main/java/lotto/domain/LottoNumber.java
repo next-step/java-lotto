@@ -7,31 +7,35 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
+    public static final int BASIC_LOTTO_MIN_NUMBER = 1;
+    public static final int BASIC_LOTTO_MAX_NUMBER = 45;
     private static final Map<Integer, LottoNumber> basicLottoNumbers = new HashMap<>();
-    static{
-        IntStream.range(1, 46)
+
+    static {
+        IntStream.rangeClosed(BASIC_LOTTO_MIN_NUMBER, BASIC_LOTTO_MAX_NUMBER)
             .forEach(basicNumber -> basicLottoNumbers.put(basicNumber, new LottoNumber(basicNumber)));
     }
 
     private final int basicNumber;
 
-
-    public LottoNumber(int basicNumber) {
-        this.basicNumber = basicNumber;
-        if (isCheckDigits(this.basicNumber)) {
+    private LottoNumber(int basicNumber) {
+        if (isCheckDigits(basicNumber)) {
             throw new IllegalArgumentException("로또 기본 숫자범위 다름  1 ~ 45의 값");
         }
+        this.basicNumber = basicNumber;
     }
 
-    public static LottoNumber getBasicNumber(int parseInt) {
-
-        return basicLottoNumbers.get(parseInt);
+    public static LottoNumber getBasicNumber(int number) {
+        if (basicLottoNumbers.get(number) == null) {
+            throw new IllegalArgumentException("로또 기본 숫자범위 다름  1 ~ 45의 값");
+        }
+        return basicLottoNumbers.get(number);
     }
+
 
     private boolean isCheckDigits(int basicNumber) {
-        return basicNumber < 1 || basicNumber > 45;
+        return basicNumber < BASIC_LOTTO_MIN_NUMBER || basicNumber > BASIC_LOTTO_MAX_NUMBER;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -49,6 +53,6 @@ public class LottoNumber {
     @Override
     public String toString() {
         return "" +
-            + basicNumber + "";
+            +basicNumber + "";
     }
 }
