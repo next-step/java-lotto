@@ -46,31 +46,37 @@ public class LotteryResult {
 
     @ToString
     public enum RANK {
-        FOURTH(4, 5_000),
-        THIRD(3, 50_000),
-        SECOND(2, 1_500_000),
-        FIRST(1, 2_000_000_000);
+        FIFTH(3, 5_000, "3개"),
+        FOURTH(4, 5_0000, "4개"),
+        THIRD(5, 1_500_000, "5개"),
+        SECOND(51, 3_000_000, "5개 일치, 보너스 볼"),
+        FIRST(6, 2_000_000_000, "6개");
 
-        private Integer matched;
-        private Integer price;
+        private int matched;
+        private int price;
+        private String matchedInfo;
 
-        RANK(Integer matched, Integer price) {
+        RANK(int matched, int price, String matchedInfo) {
             this.matched = matched;
             this.price = price;
+            this.matchedInfo = matchedInfo;
         }
 
-        public Integer getMatched() {
+        public int getMatched() {
             return matched;
         }
 
-        public Integer getPrice() {
+        public int getPrice() {
             return price;
         }
 
+        public String getMatchedInfo() {
+            return matchedInfo;
+        }
     }
 
     private double earningRates(List<Integer> comparedResults) {
-        Integer priceMoney = 0;
+        int priceMoney = 0;
         for (RANK rank : RANK.values()) {
             priceMoney += rank.getPrice() * getResultDatas().get(rank.getMatched());
         }

@@ -12,7 +12,7 @@ public class ConsoleMain {
 
         OutputView.printPurchasedLotties(lotteryMachine.purchaseLotteries(InputView.inputMoney()));
 
-        LotteryResult lotteryResult = lotteryMachine.checkWinning(lotteryMachine.getLotteries(), new Lottery(InputView.inputWinningNumbers()));
+        LotteryResult lotteryResult = lotteryMachine.checkWinning(lotteryMachine.getLotteries(), new Lottery(InputView.inputWinningNumbers(), InputView.inputBonusNumber()));
         OutputView.printWinningResult(lotteryResult);
     }
 }

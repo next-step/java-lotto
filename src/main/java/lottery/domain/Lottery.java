@@ -18,6 +18,10 @@ public class Lottery {
         this.lotteryNumber = new LotteryNumber(inputNumbers);
     }
 
+    public Lottery(List<Integer> inputNumbers, int bonusNumber) {
+        this.lotteryNumber = new LotteryNumber(inputNumbers, bonusNumber);
+    }
+
     public String getString() {
         return lotteryNumber.getStringForPrint();
     }
