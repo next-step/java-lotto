@@ -9,19 +9,19 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public static void viewStatistics(Map<String, Object> model, LotteryWinningStatistics statistics) {
-        model.put("ranks", convertToValue(statistics));
-        model.put("revenueRate", (int) (statistics.revenueRate().rate * 100));
+        model.put("ranks", convertToRankMaps(statistics));
+        model.put("revenueRate", statistics.revenueRate().percentage());
     }
 
-    private static List<Map<String, Object>> convertToValue(LotteryWinningStatistics statistics) {
+    private static List<Map<String, Object>> convertToRankMaps(LotteryWinningStatistics statistics) {
         return Arrays.stream(LotteryRank.values())
                 .filter(rank -> rank != LotteryRank.NONE)
                 .sorted(Comparator.reverseOrder())
-                .map(rank -> convertRank(statistics, rank))
+                .map(rank -> convertToRankMap(statistics, rank))
                 .collect(Collectors.toList());
     }
 
-    private static Map<String, Object> convertRank(LotteryWinningStatistics statistics, LotteryRank rank) {
+    private static Map<String, Object> convertToRankMap(LotteryWinningStatistics statistics, LotteryRank rank) {
         Map<String, Object> map = new HashMap<>();
         map.put("matchCount", rank.matchCount);
         map.put("matchBonus", rank == LotteryRank.SECOND ? ", 보너스 볼 일치" : " ");
