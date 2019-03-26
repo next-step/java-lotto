@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,15 +12,10 @@ public class LottoMachine {
         this.winningLotto = winningLotto;
     }
 
-    public List<Lotto> purchase(int money) {
-        int count = money / LOTTO_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.auto());
-        }
-
-        return lottos;
+    public List<Lotto> purchase(LottoPaper lottoPaper) {
+        return lottoPaper.getElements().stream()
+            .map(Lotto::create)
+            .collect(Collectors.toList());
     }
 
     public LottoResult createLottoResult(List<Lotto> lottos){

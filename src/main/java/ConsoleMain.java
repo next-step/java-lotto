@@ -2,14 +2,21 @@ import domain.*;
 import view.ConsoleInputView;
 import view.ConsoleResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleMain {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        List<Lotto> lottos = lottoMachine.purchase(ConsoleInputView.inputPrice());
-        ConsoleResultView.printLottoCount(lottos);
+        LottoMoney lottoMoney = new LottoMoney(ConsoleInputView.inputPrice());
+        LottoPaper lottoPaper = new LottoPaper(lottoMoney);
+
+        lottoPaper.fillManuals(ConsoleInputView.inputManualLottoNumbers(ConsoleInputView.inputManualLottoCount()));
+
+        List<Lotto> lottos = lottoMachine.purchase(lottoPaper);
+        
+        ConsoleResultView.printLottoCount(lottoPaper);
         ConsoleResultView.printLottosInfo(lottos);
 
         WinningLotto winningLotto = new WinningLotto(ConsoleInputView.inputWinningNumbers(), ConsoleInputView.inputBonusNumber());

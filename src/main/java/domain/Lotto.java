@@ -3,8 +3,8 @@ package domain;
 import util.RandomNumberGenerator;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final Integer limitCount = 6;
@@ -19,7 +19,15 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto auto() {
+    public static Lotto create(NumberSet numberSet) {
+        if(numberSet.isEmpty()) {
+            return auto();
+        }
+
+        return manual(numberSet);
+    }
+
+    private static Lotto auto() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         while(lottoNumbers.size() < limitCount) {
@@ -29,14 +37,10 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto manual(List<Integer> numbers) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        for (Integer number : numbers) {
-            lottoNumbers.add(LottoNumber.of(number));
-        }
-
-        return new Lotto(lottoNumbers);
+    private static Lotto manual(NumberSet numberSet) {
+        return new Lotto(numberSet.getNumbers().stream()
+            .map(LottoNumber::of)
+            .collect(Collectors.toSet()));
     }
 
     public Set<LottoNumber> getLottoNumbers() {

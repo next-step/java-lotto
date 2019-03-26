@@ -2,6 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.LottoNumber;
+import domain.LottoPaper;
 import domain.Rank;
 
 import java.util.List;
@@ -9,8 +10,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConsoleResultView {
-    public static void printLottoCount(List<Lotto> lottos){
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+    public static void printLottoCount(LottoPaper lottoPaper){
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다\n", lottoPaper.getManualCount(), lottoPaper.getAutoCount());
     }
 
     public static void printLottosInfo(List<Lotto> lottos){
