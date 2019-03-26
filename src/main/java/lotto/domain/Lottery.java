@@ -7,10 +7,10 @@ public class Lottery {
     private Set<Integer> lottery;
 
     public Lottery(Set<Integer> lotteryNumber) {
-        this.lottery = generationLotto(lotteryNumber);
+        this.lottery = generationLottery(lotteryNumber);
     }
 
-    public Set<Integer> generationLotto(Set<Integer> random) {
+    public Set<Integer> generationLottery(Set<Integer> random) {
         for(int i = 0; i < LOTTO_LENGTH ; i++) {
             this.lottery = random;
         }

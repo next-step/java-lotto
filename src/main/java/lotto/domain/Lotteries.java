@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static lotto.domain.RankPrintableFactory.makeRanksForPrint;
-import static util.Random.generationRandom;
+import static util.Random.generateRandom;
 
 public class Lotteries {
     private static final int LOTTO_AMOUNT = 1000;
@@ -28,12 +28,12 @@ public class Lotteries {
         checkPurchaseValidation(purchaseAmount);
         this.purchaseQuantity = Integer.parseInt(purchaseAmount) / LOTTO_AMOUNT;
 
-        generationAllLotto();
+        generateLotteries();
     }
 
-    public void generationAllLotto() {
+    public void generateLotteries() {
         for(int i = 0; i < this.purchaseQuantity; i++) {
-            this.lotteries.add(new Lottery(generationRandom()));
+            this.lotteries.add(new Lottery(generateRandom()));
         }
     }
 
@@ -51,7 +51,7 @@ public class Lotteries {
     }
 
     public Map<String, Integer> makeAllLotteriesRank(LotteryMachine lotteryMachine) {
-        Map<String, Integer> ranks = initialize();
+        Map<String, Integer> ranks = getsInitializedMap();
 
         int lotteriesSize = this.lotteries.size();
         for (int i = 0; i < lotteriesSize; i++) {
@@ -62,7 +62,7 @@ public class Lotteries {
         return ranks;
     }
 
-    public static Map<String, Integer> initialize() {
+    public static Map<String, Integer> getsInitializedMap() {
         Map<String, Integer> ranks = new HashMap<>();
 
         ranks.put("first", INITIALIZATION_NUMBER);

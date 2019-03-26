@@ -8,7 +8,7 @@ public class Lottery {
 
         Lotteries lotteries = new Lotteries(purchaseAmount);
 
-        lotteries.generationAllLotto();
+        lotteries.generateLotteries();
 
         StringBuilder printFormatLotteries = lotteries.toStringAllLotteries();
 
