@@ -12,7 +12,7 @@ public class LottoStore {
 
   private final static int LOTTO_AMOUNT = 1_000;
 
-  public static List<Lotto> buy(Money insertMoney) {
+  public static Lottos buy(Money insertMoney) {
 
     int buyQuantity = insertMoney.buy(LOTTO_AMOUNT);
 
@@ -22,6 +22,6 @@ public class LottoStore {
       Set<LottoNumber> lottoNumbers = LottoGenerator.generate();
       lottos.add(new Lotto(lottoNumbers));
     }
-    return lottos;
+    return new Lottos(lottos);
   }
 }
