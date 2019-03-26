@@ -10,33 +10,15 @@ public class TicketCountTest {
     public void test_생성() {
         TicketCount count = TicketCount.valueOf(14);
 
-        assertThat(count.amount)
+        assertThat(count.getAmount())
                 .isEqualTo(14);
-    }
-
-    @Test
-    public void test_돈으로_생성() {
-        Money money = Money.valueOf(14000);
-        TicketCount count = TicketCount.of(money);
-
-        assertThat(count.amount)
-                .isEqualTo(14);
-    }
-
-    @Test
-    public void test_금액() {
-        Money money = Money.valueOf(14000);
-        TicketCount count = TicketCount.of(money);
-
-        assertThat(count.getPrice())
-                .isEqualTo(money);
     }
 
     @Test
     public void test_덧셈() {
         TicketCount count = TicketCount.valueOf(14);
 
-        assertThat(count.add(6))
+        assertThat(count.add(TicketCount.valueOf(6)))
                 .isEqualTo(TicketCount.valueOf(20));
     }
 
@@ -44,7 +26,7 @@ public class TicketCountTest {
     public void test_뺄셈() {
         TicketCount count = TicketCount.valueOf(14);
 
-        assertThat(count.subtract(4))
+        assertThat(count.subtract(TicketCount.valueOf(4)))
                 .isEqualTo(TicketCount.valueOf(10));
     }
 
@@ -52,18 +34,16 @@ public class TicketCountTest {
     public void test_곱셈() {
         TicketCount count = TicketCount.valueOf(14);
 
-        assertThat(count.times(2))
+        assertThat(count.times(TicketCount.valueOf(2)))
                 .isEqualTo(TicketCount.valueOf(28));
     }
 
     @Test
     public void test_동일성() {
         Money money = Money.valueOf(14000);
-        TicketCount count = TicketCount.of(money);
 
-        assertThat(count)
-                .isEqualTo(TicketCount.of(money));
-        assertThat(count)
-                .hasSameHashCodeAs(TicketCount.of(money));
+        assertThat(money)
+                .isEqualTo(Money.valueOf(14000))
+                .hasSameHashCodeAs(Money.valueOf(14000));
     }
 }

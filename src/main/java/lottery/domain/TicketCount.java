@@ -6,18 +6,37 @@ public class TicketCount {
 
     public static final TicketCount ZERO = new TicketCount(0);
 
-    public final int amount;
+    public static final TicketCount ONE = new TicketCount(1);
+
+    private final int amount;
 
     private TicketCount(int amount) {
         this.amount = amount;
     }
 
-    public static TicketCount of(Money money) {
-        return valueOf(money.divide(LotteryTicket.TICKET_PRICE.amount).amount);
+    public static TicketCount valueOf(int amount) {
+        if (amount == 0) {
+            return ZERO;
+        } else if (amount == 1) {
+            return ONE;
+        }
+        return new TicketCount(amount);
     }
 
-    public static TicketCount valueOf(int amount) {
-        return amount == 0 ? ZERO : new TicketCount(amount);
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public TicketCount add(TicketCount addend) {
+        return TicketCount.valueOf(this.amount + addend.amount);
+    }
+
+    public TicketCount subtract(TicketCount subtrahend) {
+        return TicketCount.valueOf(this.amount - subtrahend.amount);
+    }
+
+    public TicketCount times(TicketCount multiplier) {
+        return TicketCount.valueOf(this.amount * multiplier.amount);
     }
 
     @Override
@@ -31,21 +50,5 @@ public class TicketCount {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public Money getPrice() {
-        return LotteryTicket.TICKET_PRICE.times(this.amount);
-    }
-
-    public TicketCount add(int addend) {
-        return TicketCount.valueOf(this.amount + addend);
-    }
-
-    public TicketCount subtract(int subtrahend) {
-        return TicketCount.valueOf(this.amount - subtrahend);
-    }
-
-    public TicketCount times(int multiplier) {
-        return TicketCount.valueOf(this.amount * multiplier);
     }
 }

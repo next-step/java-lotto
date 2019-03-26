@@ -4,7 +4,7 @@ public class RevenueRate {
 
     private final int FLOOR_DIGITS = 100;
 
-    public final double rate;
+    private final double rate;
 
     public RevenueRate(Money revenue, Money myMoney) {
         if (myMoney == Money.ZERO) {
@@ -19,6 +19,10 @@ public class RevenueRate {
     }
 
     private double cal(Money revenue, Money myMoney) {
-        return (double) revenue.amount / myMoney.amount;
+        return (double) revenue.getAmount() / myMoney.getAmount();
+    }
+
+    public double getRate() {
+        return this.rate;
     }
 }

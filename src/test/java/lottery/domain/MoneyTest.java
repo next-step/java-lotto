@@ -20,7 +20,7 @@ public class MoneyTest {
     public void test_덧셈() {
         Money money = Money.valueOf(1000);
 
-        assertThat(money.add(1000))
+        assertThat(money.add(money))
                 .isEqualTo(Money.valueOf(2000));
     }
 
@@ -28,7 +28,7 @@ public class MoneyTest {
     public void test_곱셈() {
         Money money = Money.valueOf(1000);
 
-        assertThat(money.times(14))
+        assertThat(money.times(Money.valueOf(14)))
                 .isEqualTo(Money.valueOf(14000));
     }
 
@@ -36,7 +36,7 @@ public class MoneyTest {
     public void test_나눗셈() {
         Money money = Money.valueOf(14000);
 
-        assertThat(money.divide(1000))
+        assertThat(money.divide(Money.valueOf(1000)))
             .isEqualTo(Money.valueOf(14));
     }
 
@@ -44,6 +44,6 @@ public class MoneyTest {
     public void test_0으로_나눔() {
         Money money = Money.valueOf(14000);
 
-        money.divide(0);
+        money.divide(Money.ZERO);
     }
 }

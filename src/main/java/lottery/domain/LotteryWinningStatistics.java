@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import lottery.machine.LotteryMachine;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class LotteryWinningStatistics {
                 .collect(Collectors.toMap(
                         rank -> rank,
                         rank -> TicketCount.valueOf(1),
-                        (count1, count2) -> count1.add(count2.amount),
+                        (count1, count2) -> count1.add(count2),
                         () -> new EnumMap<>(LotteryRank.class)
                 ));
     }
@@ -36,16 +38,15 @@ public class LotteryWinningStatistics {
         return rankCountMap.entrySet()
                 .stream()
                 .reduce(Money.ZERO,
-                        (sum, entry) -> sum.add(entry.getValue().times(entry.getKey().winningMoney.amount).amount),
-                        (sum1, sum2) -> sum1.add(sum2.amount));
+                        (sum, entry) -> sum.add(LotteryRank.getWinningMoney(entry.getKey(), entry.getValue())),
+                        (sum1, sum2) -> sum1.add(sum2));
     }
 
     private Money totalTicketsPrice() {
-        return rankCountMap.entrySet()
+        return LotteryMachine.howMuchIs(rankCountMap.entrySet()
                 .stream()
                 .reduce(TicketCount.ZERO,
-                        (sum, entry) -> sum.add(entry.getValue().amount),
-                        (count1, count2) -> count1.add(count2.amount))
-                .getPrice();
+                        (sum, entry) -> sum.add(entry.getValue()),
+                        (count1, count2) -> count1.add(count2)));
     }
 }

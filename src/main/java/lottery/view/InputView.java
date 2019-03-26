@@ -27,7 +27,7 @@ public class InputView {
         TicketCount count = TicketCount.valueOf(nextInt());
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요");
-        return IntStream.range(0, count.amount)
+        return IntStream.range(0, count.getAmount())
                 .mapToObj(i -> new LotteryTicket(inputTicketNumbers()))
                 .collect(Collectors.toList());
     }

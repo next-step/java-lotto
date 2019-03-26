@@ -9,7 +9,7 @@ public class RevenueRateTest {
     @Test
     public void test_수익률_계산() {
         RevenueRate revenueRate = new RevenueRate(Money.valueOf(5000), Money.valueOf(14000));
-        assertThat(revenueRate.rate)
+        assertThat(revenueRate.getRate())
             .isEqualTo(0.35);
     }
 

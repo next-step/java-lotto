@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 public class ResultView {
 
     public static void viewTicketCount(TicketCount boughtCount, TicketCount selectedCount) {
-        TicketCount randomCount = boughtCount.subtract(selectedCount.amount);
+        TicketCount randomCount = boughtCount.subtract(selectedCount);
 
-        System.out.println("수동으로" + selectedCount.amount +
-                "장, 자동으로" + randomCount.amount + "개를 구매했습니다.");
+        System.out.println("수동으로" + selectedCount.getAmount() +
+                "장, 자동으로" + randomCount.getAmount() + "개를 구매했습니다.");
     }
 
     public static void viewTickets(List<LotteryTicket> tickets) {
@@ -35,14 +35,14 @@ public class ResultView {
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> viewRank(statistics, rank));
 
-        System.out.printf("총 수익률은 %.2f 입니다", statistics.revenueRate().rate);
+        System.out.printf("총 수익률은 %.2f 입니다", statistics.revenueRate().getRate());
     }
 
     private static void viewRank(LotteryWinningStatistics statistics, LotteryRank rank) {
         System.out.printf("%d개 일치%s(%d원)- %d개\n",
                 rank.matchCount,
                 rank == LotteryRank.SECOND ? ", 보너스 볼 일치" : " ",
-                rank.winningMoney.amount,
-                statistics.countRank(rank).amount);
+                LotteryRank.getWinningMoney(rank, TicketCount.ONE),
+                statistics.countRank(rank).getAmount());
     }
 }

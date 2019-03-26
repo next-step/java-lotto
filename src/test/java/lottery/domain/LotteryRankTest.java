@@ -43,4 +43,10 @@ public class LotteryRankTest {
         assertThat(LotteryRank.generate(2, true))
                 .isEqualTo(LotteryRank.NONE);
     }
+
+    @Test
+    public void test_당첨금액() {
+        assertThat(LotteryRank.values())
+                .allMatch(rank -> rank.getWinningMoney(TicketCount.ONE) == rank.winningMoney);
+    }
 }

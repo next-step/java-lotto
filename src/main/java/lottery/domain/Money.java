@@ -6,7 +6,7 @@ public class Money {
 
     public static final Money ZERO = new Money(0);
 
-    public final int amount;
+    private final int amount;
 
     private Money(int amount) {
         this.amount = amount;
@@ -14,6 +14,22 @@ public class Money {
 
     public static Money valueOf(int amount) {
         return amount == 0 ? ZERO : new Money(amount);
+    }
+
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public Money add(Money addend) {
+        return Money.valueOf(this.amount + addend.amount);
+    }
+
+    public Money times(Money multiplier) {
+        return Money.valueOf(this.amount * multiplier.amount);
+    }
+
+    public Money divide(Money divisor) {
+        return Money.valueOf(this.amount / divisor.amount);
     }
 
     @Override
@@ -27,17 +43,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public Money add(int addend) {
-        return Money.valueOf(this.amount + addend);
-    }
-
-    public Money times(int multiplier) {
-        return Money.valueOf(this.amount * multiplier);
-    }
-
-    public Money divide(int divisor) {
-        return Money.valueOf(this.amount / divisor);
     }
 }

@@ -78,4 +78,21 @@ public class LotteryMachineTest {
         assertThat(machine.buyLotteryTicket(Money.valueOf(2000), selectedTickets))
                 .isNotSameAs(selectedTickets);
     }
+
+    @Test
+    public void test_돈을_제시했을때_얼마나_구매할_수_있는지() {
+        Money money = Money.valueOf(14000);
+
+        assertThat(LotteryMachine.howManyCanBuy(money))
+                .isEqualTo(TicketCount.valueOf(14));
+    }
+
+    @Test
+    public void test_갯수를_제시했을때_가격이_얼마나_되는지() {
+        TicketCount count = TicketCount.valueOf(14);
+
+        assertThat(LotteryMachine.howMuchIs(count))
+                .isEqualTo(Money.valueOf(14000));
+
+    }
 }

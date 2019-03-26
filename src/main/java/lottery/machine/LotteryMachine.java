@@ -12,6 +12,8 @@ import java.util.stream.IntStream;
 
 public class LotteryMachine {
 
+    public static final Money TICKET_PRICE = Money.valueOf(1000);
+
     private final NumbersGenerator numbersGenerator;
 
     private List<LotteryTicket> lotteryTickets;
@@ -29,13 +31,24 @@ public class LotteryMachine {
     }
 
     public List<LotteryTicket> buyLotteryTicket(Money price, List<LotteryTicket> selectedTickets) {
-        final TicketCount randomTicketCount = TicketCount.of(price).subtract(selectedTickets.size());
+        TicketCount selectedTicketCount = TicketCount.valueOf(selectedTickets.size());
+        TicketCount randomTicketCount = howManyCanBuy(price).subtract(selectedTicketCount);
 
         this.lotteryTickets = new ArrayList<>(selectedTickets);
-        this.lotteryTickets.addAll(IntStream.range(0, randomTicketCount.amount)
+        this.lotteryTickets.addAll(IntStream.range(0, randomTicketCount.getAmount())
                 .mapToObj(i -> new LotteryTicket(numbersGenerator.nextNumbers(LotteryTicket.NUMBERS_COUNT)))
                 .collect(Collectors.toList()));
 
         return new ArrayList<>(this.lotteryTickets);
+    }
+
+    public static TicketCount howManyCanBuy(Money price) {
+        int money = price.getAmount();
+        return TicketCount.valueOf(money / TICKET_PRICE.getAmount());
+    }
+
+    public static Money howMuchIs(TicketCount amountWantedBuy) {
+        int count = amountWantedBuy.getAmount();
+        return Money.valueOf(count * TICKET_PRICE.getAmount());
     }
 }

@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class LotteryTicket {
 
-    public static final Money TICKET_PRICE = Money.valueOf(1000);
-
     public static final int NUMBERS_COUNT = 6;
 
     private final Set<LotteryNumber> lotteryNumbers;

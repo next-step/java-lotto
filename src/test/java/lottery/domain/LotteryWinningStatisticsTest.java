@@ -18,10 +18,10 @@ public class LotteryWinningStatisticsTest {
                 10, Arrays.asList(11, 12, 13, 14, 15, 16));
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
-        assertThat(statistics.countRank(LotteryRank.NONE).amount)
+        assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
                 .isEqualTo(10);
 
-        assertThat(statistics.revenueRate().rate)
+        assertThat(statistics.revenueRate().getRate())
                 .isEqualTo(0.00);
     }
 
@@ -35,12 +35,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.FIRST).amount)
+        assertThat(statistics.countRank(LotteryRank.FIRST).getAmount())
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE).amount)
+        assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate().rate)
+        assertThat(statistics.revenueRate().getRate())
                 .isEqualTo(200_000.00);
     }
 
@@ -54,12 +54,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.SECOND).amount)
+        assertThat(statistics.countRank(LotteryRank.SECOND).getAmount())
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE).amount)
+        assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate().rate)
+        assertThat(statistics.revenueRate().getRate())
                 .isEqualTo(3_000.0);
     }
 
@@ -72,12 +72,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.THIRD).amount)
+        assertThat(statistics.countRank(LotteryRank.THIRD).getAmount())
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE).amount)
+        assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate().rate)
+        assertThat(statistics.revenueRate().getRate())
                 .isEqualTo(150.00);
     }
 
@@ -90,12 +90,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.FOURTH).amount)
+        assertThat(statistics.countRank(LotteryRank.FOURTH).getAmount())
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE).amount)
+        assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate().rate)
+        assertThat(statistics.revenueRate().getRate())
                 .isEqualTo(5.00);
     }
 
@@ -108,12 +108,12 @@ public class LotteryWinningStatisticsTest {
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
-        assertThat(statistics.countRank(LotteryRank.FIFTH).amount)
+        assertThat(statistics.countRank(LotteryRank.FIFTH).getAmount())
                 .isEqualTo(1);
-        assertThat(statistics.countRank(LotteryRank.NONE).amount)
+        assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
                 .isEqualTo(9);
 
-        assertThat(statistics.revenueRate().rate)
+        assertThat(statistics.revenueRate().getRate())
                 .isEqualTo(0.50);
     }
 
