@@ -16,4 +16,12 @@ public class Lottos {
         .filter(lotto -> winMoney == lotto.isWinLotto(winNumbers))
         .count();
   }
+
+  public List<Lotto> getLottos() {
+    return lottos;
+  }
+
+  public int getQuantity() {
+    return lottos.size();
+  }
 }

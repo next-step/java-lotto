@@ -44,12 +44,12 @@ public class ConsoleView {
   private static MyLottos buyLottos(int insertMoney) {
 
     Money buyMoney = new Money(insertMoney);
-    List<Lotto> lottos = LottoStore.buy(buyMoney);
-    for (Lotto lotto : lottos) {
+    Lottos lottos = LottoStore.buy(buyMoney);
+    for (Lotto lotto : lottos.getLottos()) {
       ConsoleResultView.printIssueLottoNumbers(lotto);
     }
 
-    return new MyLottos(buyMoney, new Lottos(lottos));
+    return new MyLottos(buyMoney, lottos);
 
   }
 

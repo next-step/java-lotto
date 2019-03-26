@@ -13,10 +13,10 @@ public class LottoStoreTest {
     Money insertMoney = new Money(1000);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney).size();
+    Lottos lottos = LottoStore.buy(insertMoney);
 
     // Then
-    assertThat(lottoQuantity).isEqualTo(1);
+    assertThat(lottos.getQuantity()).isEqualTo(1);
   }
 
   @Test
@@ -26,10 +26,10 @@ public class LottoStoreTest {
     Money insertMoney = new Money(1500);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney).size();
+    Lottos lottos = LottoStore.buy(insertMoney);
 
     // Then
-    assertThat(lottoQuantity).isEqualTo(1);
+    assertThat(lottos.getQuantity()).isEqualTo(1);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -49,9 +49,9 @@ public class LottoStoreTest {
     Money insertMoney = new Money(14000);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney).size();
+    Lottos lottos = LottoStore.buy(insertMoney);
 
     // Then
-    assertThat(lottoQuantity).isEqualTo(14);
+    assertThat(lottos.getQuantity()).isEqualTo(14);
   }
 }
