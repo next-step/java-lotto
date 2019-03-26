@@ -7,9 +7,9 @@ import org.junit.Test;
 import java.util.*;
 
 import static lotto.controller.LotteryGame.main;
-import static lotto.domain.Lotteries.initialize;
+import static lotto.domain.Lotteries.getsInitializedMap;
 import static org.assertj.core.api.Assertions.assertThat;
-import static util.Random.generationRandom;
+import static util.Random.generateRandom;
 import static util.Random.makeNumber;
 
 
@@ -70,7 +70,7 @@ public class LotteryTest {
     public void 랭크_저장_테스트() {
         Lotteries lotteries = new Lotteries("15000");
 
-        Map<String, Integer> ranks = initialize();
+        Map<String, Integer> ranks = getsInitializedMap();
 
         lotteries.makeRanks(1, ranks);
 
@@ -79,7 +79,7 @@ public class LotteryTest {
 
     @Test
     public void 랜덤값_생성개수_테스트() {
-        Set<Integer> random = generationRandom();
+        Set<Integer> random = generateRandom();
 
         assertThat(random.size()).isEqualTo(6);
     }

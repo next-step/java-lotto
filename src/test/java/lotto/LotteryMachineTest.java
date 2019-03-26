@@ -16,7 +16,7 @@ public class LotteryMachineTest {
         Lottery lottery = new Lottery(lotteryNumber);
 
         Set<Integer> winnerLottery = new HashSet<>(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
-        lottery.generationLotto(winnerLottery);
+        lottery.generationLottery(winnerLottery);
 
         assertThat(lottery.matchNumber(3, 4)).isEqualTo(4);
     }
@@ -29,9 +29,9 @@ public class LotteryMachineTest {
 
         LotteryMachine lotteryMachine = new LotteryMachine(winnerLottery);
 
-        lottery.generationLotto(inputLottery);
+        lottery.generationLottery(inputLottery);
 
-        assertThat(lotteryMachine.rankLottery(lottery)).isEqualTo(1);
+        assertThat(lotteryMachine.rankLottery(lottery)).isEqualTo(Ranking.FIRST_CLASS);
     }
 
     @Test
@@ -43,8 +43,8 @@ public class LotteryMachineTest {
 
         LotteryMachine lotteryMachine = new LotteryMachine(winnerLottery);
 
-        lottery.generationLotto(inputLottery);
+        lottery.generationLottery(inputLottery);
 
-        assertThat(lotteryMachine.countProfit(lottery)).isEqualTo(50000);
+        assertThat(lotteryMachine.countProfit(lottery)).isEqualTo(5000);
     }
 }
