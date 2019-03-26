@@ -32,7 +32,8 @@ public class Lotto {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         while(lottoNumbers.size() < LIMIT_COUNT) {
-            lottoNumbers.add(LottoNumber.of(RandomNumberGenerator.generateNumber(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)));
+            lottoNumbers.add(LottoNumber.of(
+                RandomNumberGenerator.generateNumber(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)));
         }
 
         return new Lotto(lottoNumbers);

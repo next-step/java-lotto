@@ -25,4 +25,10 @@ public class LottoMoneyTest {
     public void 할당량_이상_구매하면_예외가_발생한다() {
         new LottoMoney(200_000);
     }
+
+    @Test
+    public void 수익률을_계산한다() {
+        LottoMoney lottoMoney = new LottoMoney(10_000);
+        assertThat(lottoMoney.calculateProfitRate(10_000_000L)).isEqualTo(1000.0);
+    }
 }

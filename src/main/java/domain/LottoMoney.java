@@ -1,9 +1,9 @@
 package domain;
 
 public class LottoMoney {
-    public static final Integer LOTTO_PRICE = 1_000;
-    public static final Integer MINIMUM_PRICE = LOTTO_PRICE * 1;
-    public static final Integer MAXIMUM_PRICE = LOTTO_PRICE * 100;
+    private static final Integer LOTTO_PRICE = 1_000;
+    private static final Integer MINIMUM_PRICE = LOTTO_PRICE * 1;
+    private static final Integer MAXIMUM_PRICE = LOTTO_PRICE * 100;
 
     private final Integer money;
 
@@ -35,5 +35,9 @@ public class LottoMoney {
         if(money > MAXIMUM_PRICE) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public Double calculateProfitRate(Long prizeMoney) {
+        return prizeMoney.doubleValue() / money.doubleValue();
     }
 }
