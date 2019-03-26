@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Generator {
-    private static final int MIN_LOTTO_NUMBER = 0;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int MAX_LOTTO_NUMBER_COUNT = 6;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MAX_LOTTO_NUMBER_COUNT = 6;
 
     public static List<Integer> lottoNumbers() {
-        return createLotto(initLottoNumbers());
+        return createLotto(initLottoNumbers(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
     }
 
-    private static List<Integer> initLottoNumbers() {
+    private static List<Integer> initLottoNumbers(int minNumber, int maxNumber) {
         List<Integer> lottoNumbers = new ArrayList<>();
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER).forEach(i -> lottoNumbers.add(i + 1));
+        IntStream.range(minNumber, maxNumber + 1).forEach(i -> lottoNumbers.add(i));
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
     }

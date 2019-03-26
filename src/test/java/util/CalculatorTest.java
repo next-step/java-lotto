@@ -14,10 +14,9 @@ public class CalculatorTest {
     @Test
     public void yieldCalculatorTest() {
         Map<LottoRank, Integer> produceResults = new HashMap<>();
-        produceResults.put(LottoRank.THREE, 1);
-        produceResults.put(LottoRank.FOUR, 0);
-        produceResults.put(LottoRank.FIVE, 1);
-
+        produceResults.put(LottoRank.FIFTH, 1);
+        produceResults.put(LottoRank.FOURTH, 0);
+        produceResults.put(LottoRank.THIRD, 1);
         assertThat(Calculator.yieldCalculator(produceResults, 100000)).isEqualTo(15.05);
     }
 

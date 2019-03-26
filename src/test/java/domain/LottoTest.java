@@ -11,7 +11,7 @@ public class LottoTest {
     private Lotto lotto;
 
     @Before
-    public void lottoTest() {
+    public void lottoTest() throws Exception {
         lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 3, 5, 15, 30, 31)));
     }
 
