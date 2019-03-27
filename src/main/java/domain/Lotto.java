@@ -76,4 +76,13 @@ public class Lotto {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+            .sorted()
+            .map(LottoNumber::getNumber)
+            .map(String::valueOf)
+            .collect(Collectors.joining(", "));
+    }
 }
