@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.*;
+import lotto.generator.IntegratedLottoGenerator;
 import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -12,22 +13,24 @@ public class ConsoleApplication {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
-        LottoGame lottoGame = LottoGame.getInstance(lottoGenerator);
+        LottoGame lottoGame = LottoGame.getInstance();
 
         int amount = InputView.inputPurchaseAmount(scanner);
         Money payment = new Money(amount);
 
         int numberOfManualLotto = InputView.inputNumberOfManualLotto(scanner);
-        List<String> manualLotto = InputView.inputManualLotto(scanner, numberOfManualLotto);
-        PurchasedLottos purchase = lottoGame.purchase(payment, manualLotto);
+        List<String> inputManualLottos = InputView.inputManualLotto(scanner, numberOfManualLotto);
+        LottoOrder lottoOrder = new LottoOrder(payment, inputManualLottos);
 
-        OutputView.printPurchaseResult(purchase);
+        IntegratedLottoGenerator integeratedLottoGenerator = new IntegratedLottoGenerator(lottoOrder);
+        Lottos purchasedLottos = lottoGame.purchase(integeratedLottoGenerator);
+
+        OutputView.printPurchaseResult(purchasedLottos, numberOfManualLotto);
 
         String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
         int bonusBallNumber = InputView.inputBonusBall(scanner);
-        WinningLotto previousWinningLotto = lottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
-        LottosResult lottosResult = lottoGame.analyse(purchase, previousWinningLotto, payment);
+        WinningLotto previousWinningLotto = integeratedLottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
+        LottosResult lottosResult = lottoGame.analyse(purchasedLottos, previousWinningLotto, lottoOrder);
 
         OutputView.printStatisticsResult(lottosResult);
         scanner.close();

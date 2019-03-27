@@ -32,15 +32,15 @@ public class PrizeTest {
     @Test
     public void 일등1개_사등1개_상금계산() {
         // given
-        long sum = 0L;
+        int sum = 0;
         Map<Prize, Integer> prizeCount = new HashMap<>();
-        prizeCount.put(Prize.FIRST_PRIZE, 2);
+        prizeCount.put(Prize.FIRST_PRIZE, 1);
         prizeCount.put(Prize.FOURTH_PRIZE, 1);
         // when
         for (Prize prize : Prize.values()) {
             sum += prize.calculatePrizeMoneyBy(prizeCount.getOrDefault(prize, 0));
         }
         // then
-        assertThat(sum).isEqualTo(4000050000L);
+        assertThat(sum).isEqualTo(2000050000);
     }
 }

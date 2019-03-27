@@ -7,14 +7,14 @@ public class LottosResult {
     public static final int DEFAULT_COUNT = 0;
     public static final int COUNT_UNIT = 1;
     private final Map<Prize, Integer> prizeCount;
-    private final double rateOfReturn;
+    private double rateOfReturn;
 
-    public LottosResult(PurchasedLottos purchasedLottos, WinningLotto previousWinningLotto, Money payment) {
+    public LottosResult(Lottos purchasedLottos, WinningLotto previousWinningLotto, LottoOrder lottoOrder) {
         this.prizeCount = calculatePrizeCount(purchasedLottos, previousWinningLotto);
-        this.rateOfReturn = calculateRateOfReturn(payment);
+        this.rateOfReturn = calculateRateOfReturn(lottoOrder);
     }
 
-    private Map<Prize, Integer> calculatePrizeCount(PurchasedLottos purchasedLottos, WinningLotto previousWinningLotto) {
+    private Map<Prize, Integer> calculatePrizeCount(Lottos purchasedLottos, WinningLotto previousWinningLotto) {
         Map<Prize, Integer> temp = new HashMap<>();
         for (Lotto lotto : purchasedLottos.getLottos()) {
             Prize prize = Prize.valueOf(previousWinningLotto.countNumberOfMatch(lotto), previousWinningLotto.isAnyMatchingBonusBall(lotto));
@@ -24,14 +24,11 @@ public class LottosResult {
     }
 
     private Money addTotalPrizeMoney() {
-        return new Money(prizeCount.keySet()
-                .stream()
-                .map(prize -> prize.calculatePrizeMoneyBy(prizeCount.get(prize)))
-                .reduce(0, (x, y) -> x + y));
+        return Money.addTotalPrizeMoney(prizeCount);
     }
 
-    private double calculateRateOfReturn(Money payment) {
-        return payment.calculateRateOfReturn(addTotalPrizeMoney());
+    private double calculateRateOfReturn(LottoOrder lottoOrder) {
+        return lottoOrder.calculateRateOfReturn(addTotalPrizeMoney());
     }
 
     public Map<Prize, Integer> getPrizeCount() {

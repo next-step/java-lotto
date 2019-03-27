@@ -1,25 +1,26 @@
 package lotto.service;
 
-import lotto.*;
-
-import java.util.List;
+import lotto.LottoOrder;
+import lotto.Lottos;
+import lotto.LottosResult;
+import lotto.WinningLotto;
+import lotto.generator.LottoGenerator;
 
 public class LottoGame {
-    private LottoGenerator lottoGenerator;
+    private static LottoGame lottoGame = new LottoGame();
 
-    private LottoGame(LottoGenerator lottoGenerator) {
-        this.lottoGenerator = lottoGenerator;
+    private LottoGame() {
     }
 
-    public static LottoGame getInstance(LottoGenerator lottoGenerator) {
-        return new LottoGame(lottoGenerator);
+    public static LottoGame getInstance() {
+        return lottoGame;
     }
 
-    public PurchasedLottos purchase(final Money payment, final List<String> manualLottos) {
-        return new PurchasedLottos(payment, manualLottos, lottoGenerator);
+    public Lottos purchase(LottoGenerator lottoGenerator) {
+        return lottoGenerator.generateLottos();
     }
 
-    public LottosResult analyse(final PurchasedLottos purchaseHistory, final WinningLotto previousWinningLotto, final Money payment) {
-        return new LottosResult(purchaseHistory, previousWinningLotto, payment);
+    public LottosResult analyse(final Lottos purchasedLottos, final WinningLotto previousWinningLotto, final LottoOrder lottoOrder) {
+        return new LottosResult(purchasedLottos, previousWinningLotto, lottoOrder);
     }
 }

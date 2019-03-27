@@ -1,8 +1,8 @@
 package lotto.view;
 
+import lotto.Lottos;
 import lotto.LottosResult;
 import lotto.Prize;
-import lotto.PurchasedLottos;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
@@ -16,13 +16,13 @@ public class OutputView {
     private static final String RATE_OF_RETURN_FIRST_MENT = "총 수익률은 ";
     private static final String RATE_OF_RETURN_SECOND_MENT = "입니다.";
 
-    public static void printPurchaseResult(PurchasedLottos purchase) {
-        producePurchaseHistoryResult(purchase);
+    public static void printPurchaseResult(Lottos purchase, int numberOfManualLotto) {
+        producePurchaseHistoryResult(purchase, numberOfManualLotto);
     }
 
-    private static void producePurchaseHistoryResult(PurchasedLottos purchase) {
+    private static void producePurchaseHistoryResult(Lottos purchase, int numberOfManualLotto) {
         String purchaseResult = "수동으로 {0}개, 자동으로 {1}개를 구매했습니다.";
-        System.out.println(MessageFormat.format(purchaseResult, purchase.getNumberOfManualLotto(), purchase.getLottos().size() - purchase.getNumberOfManualLotto()));
+        System.out.println(MessageFormat.format(purchaseResult, numberOfManualLotto, purchase.getSize() - numberOfManualLotto));
         purchase.getLottos().forEach(System.out::println);
     }
 
