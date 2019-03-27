@@ -30,26 +30,26 @@ public class LottoMoneyTest {
         final LottoMoney lottoMoney = new LottoMoney(money);
 
         final Lotto anyLotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         final WinningLotto winningLotto = new WinningLotto(anyLotto);
 
         final LottoList lottos = new LottoList(Arrays.asList(
                 anyLotto,
                 new Lotto(Arrays.asList(
-                        LottoNumber.of(21), LottoNumber.of(22), LottoNumber.of(23),
-                        LottoNumber.of(24), LottoNumber.of(25), LottoNumber.of(26))),
+                        LottoNumber.valueOf(21), LottoNumber.valueOf(22), LottoNumber.valueOf(23),
+                        LottoNumber.valueOf(24), LottoNumber.valueOf(25), LottoNumber.valueOf(26))),
                 new Lotto(Arrays.asList(
-                        LottoNumber.of(31), LottoNumber.of(32), LottoNumber.of(33),
-                        LottoNumber.of(34), LottoNumber.of(35), LottoNumber.of(36))),
+                        LottoNumber.valueOf(31), LottoNumber.valueOf(32), LottoNumber.valueOf(33),
+                        LottoNumber.valueOf(34), LottoNumber.valueOf(35), LottoNumber.valueOf(36))),
                 new Lotto(Arrays.asList(
-                        LottoNumber.of(40), LottoNumber.of(41), LottoNumber.of(42),
-                        LottoNumber.of(43), LottoNumber.of(44), LottoNumber.of(45)))));
+                        LottoNumber.valueOf(40), LottoNumber.valueOf(41), LottoNumber.valueOf(42),
+                        LottoNumber.valueOf(43), LottoNumber.valueOf(44), LottoNumber.valueOf(45)))));
 
-        WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        assertThat(lottoMoney.calculateEarningsRate(winningResults))
-                .isEqualTo(Prize.FIRST.getMoney() / (double) money);
+        assertThat(lottoMoney.calculateEarningsRate(matchResults))
+                .isEqualTo(Rank.FIRST.getMoney() / (double) money);
     }
 }

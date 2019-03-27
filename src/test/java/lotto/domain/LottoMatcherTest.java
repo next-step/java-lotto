@@ -11,58 +11,58 @@ public class LottoMatcherTest {
     @Test
     public void 당첨결과_보너스번호없음() {
         final Lotto anyLotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
         final WinningLotto winningLotto = new WinningLotto(anyLotto);
 
         final LottoList lottos = new LottoList(Arrays.asList(
                 anyLotto, // 6개 일치
                 new Lotto(Arrays.asList( // 4개 일치
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(44), LottoNumber.of(45))),
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(44), LottoNumber.valueOf(45))),
                 new Lotto(Arrays.asList( // 4개 일치
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(44), LottoNumber.of(45))),
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(44), LottoNumber.valueOf(45))),
                 new Lotto(Arrays.asList( // 3개 일치
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(43), LottoNumber.of(44), LottoNumber.of(45)))));
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(43), LottoNumber.valueOf(44), LottoNumber.valueOf(45)))));
 
-        final WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        assertThat(winningResults.get(Prize.FIRST)).isEqualTo(new WinningResult(Prize.FIRST, 1));
-        assertThat(winningResults.get(Prize.SECOND)).isEqualTo(new WinningResult(Prize.SECOND, 0));
-        assertThat(winningResults.get(Prize.THIRD)).isEqualTo(new WinningResult(Prize.THIRD, 0));
-        assertThat(winningResults.get(Prize.FOURTH)).isEqualTo(new WinningResult(Prize.FOURTH, 2));
-        assertThat(winningResults.get(Prize.FIFTH)).isEqualTo(new WinningResult(Prize.FIFTH, 1));
+        assertThat(matchResults.get(Rank.FIRST)).isEqualTo(new RankCount(Rank.FIRST, 1));
+        assertThat(matchResults.get(Rank.SECOND)).isEqualTo(new RankCount(Rank.SECOND, 0));
+        assertThat(matchResults.get(Rank.THIRD)).isEqualTo(new RankCount(Rank.THIRD, 0));
+        assertThat(matchResults.get(Rank.FOURTH)).isEqualTo(new RankCount(Rank.FOURTH, 2));
+        assertThat(matchResults.get(Rank.FIFTH)).isEqualTo(new RankCount(Rank.FIFTH, 1));
     }
 
     @Test
     public void 당첨결과_보너스번호있음() {
         final Lotto anyLotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
 
-        final WinningLotto winningLotto = new WinningLotto(anyLotto, LottoNumber.of(43));
+        final WinningLotto winningLotto = new WinningLotto(anyLotto, LottoNumber.valueOf(43));
 
         final LottoList lottos = new LottoList(Arrays.asList(
                 anyLotto, // 6개 일치
                 new Lotto(Arrays.asList( // 5개 일치 + 보너스 번호 일치
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(43))),
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(43))),
                 new Lotto(Arrays.asList( // 4개 일치
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(44), LottoNumber.of(45))),
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(44), LottoNumber.valueOf(45))),
                 new Lotto(Arrays.asList( // 3개 일치
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(43), LottoNumber.of(44), LottoNumber.of(45)))));
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(43), LottoNumber.valueOf(44), LottoNumber.valueOf(45)))));
 
-        final WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        assertThat(winningResults.get(Prize.FIRST)).isEqualTo(new WinningResult(Prize.FIRST, 1));
-        assertThat(winningResults.get(Prize.SECOND)).isEqualTo(new WinningResult(Prize.SECOND, 1));
-        assertThat(winningResults.get(Prize.THIRD)).isEqualTo(new WinningResult(Prize.THIRD, 0));
-        assertThat(winningResults.get(Prize.FOURTH)).isEqualTo(new WinningResult(Prize.FOURTH, 1));
-        assertThat(winningResults.get(Prize.FIFTH)).isEqualTo(new WinningResult(Prize.FIFTH, 1));
+        assertThat(matchResults.get(Rank.FIRST)).isEqualTo(new RankCount(Rank.FIRST, 1));
+        assertThat(matchResults.get(Rank.SECOND)).isEqualTo(new RankCount(Rank.SECOND, 1));
+        assertThat(matchResults.get(Rank.THIRD)).isEqualTo(new RankCount(Rank.THIRD, 0));
+        assertThat(matchResults.get(Rank.FOURTH)).isEqualTo(new RankCount(Rank.FOURTH, 1));
+        assertThat(matchResults.get(Rank.FIFTH)).isEqualTo(new RankCount(Rank.FIFTH, 1));
     }
 }

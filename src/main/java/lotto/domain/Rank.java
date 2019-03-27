@@ -1,25 +1,20 @@
 package lotto.domain;
 
-public enum Prize {
-    FIRST(6, 2_000_000_000),
+public enum Rank {
+    FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    SIXTH(2, 0),
-    SEVENTH(1, 0),
-    NONE(0, 0);
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    SIXTH(2, 0, false),
+    SEVENTH(1, 0, false),
+    NONE(0, 0, false);
 
     private int countOfMatch;
     private long money;
     private boolean hasBonus;
 
-    Prize(int countOfMatch, int money) {
-        this.countOfMatch = countOfMatch;
-        this.money = money;
-    }
-
-    Prize(int countOfMatch, long money, boolean hasBonus) {
+    Rank(int countOfMatch, long money, boolean hasBonus) {
         this.countOfMatch = countOfMatch;
         this.money = money;
         this.hasBonus = hasBonus;
@@ -33,18 +28,18 @@ public enum Prize {
         return money;
     }
 
-    public static Prize valueOf(int matchingCount, boolean hasBonus) {
-        for (Prize prize : Prize.values()) {
-            if (matchingCount == Prize.SECOND.getCountOfMatch()) {
+    public static Rank valueOf(int matchingCount, boolean hasBonus) {
+        for (Rank rank : Rank.values()) {
+            if (matchingCount == Rank.SECOND.getCountOfMatch()) {
                 if (hasBonus) {
-                    return Prize.SECOND;
+                    return Rank.SECOND;
                 }
 
-                return Prize.THIRD;
+                return Rank.THIRD;
             }
 
-            if (prize.countOfMatch == matchingCount) {
-                return prize;
+            if (rank.countOfMatch == matchingCount) {
+                return rank;
             }
         }
 
@@ -52,11 +47,15 @@ public enum Prize {
     }
 
     public boolean isInTop5() {
-        if (this == Prize.NONE || this == Prize.SEVENTH || this == Prize.SIXTH) {
+        if (this == Rank.NONE || this == Rank.SEVENTH || this == Rank.SIXTH) {
             return false;
         }
 
         return true;
+    }
+
+    public long calculateReward(RankCount rankCount) {
+        return rankCount.calculate(money);
     }
 
     @Override

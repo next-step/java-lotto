@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import lotto.LottoNumberGenerator;
-
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     public static final int MIN = 1;
@@ -14,12 +14,11 @@ public class LottoNumber {
 
     private static final Map<Integer, LottoNumber> values = new HashMap<>();
     static {
-        for (int i = MIN; i <= MAX; i++) {
-            values.put(i, new LottoNumber(i));
-        }
+        IntStream.rangeClosed(MIN, MAX)
+            .forEach(i -> values.put(i, new LottoNumber(i)));
     }
 
-    public static LottoNumber of(Integer value) {
+    public static LottoNumber valueOf(Integer value) {
         if (value < MIN) {
             throw new IllegalArgumentException(MIN +" OR MORE");
         }
@@ -31,8 +30,12 @@ public class LottoNumber {
         return values.get(value);
     }
 
-    public static LottoNumber of() {
-        return values.get(LottoNumberGenerator.generate(MIN, MAX));
+    public static Collection<LottoNumber> values() {
+        return values.values();
+    }
+
+    public static LottoNumber valueOf(String value) {
+        return values.get(Integer.parseInt(value.trim()));
     }
 
     private LottoNumber(int value) {

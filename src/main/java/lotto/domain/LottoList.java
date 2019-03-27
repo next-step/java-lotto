@@ -3,6 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoList {
 
@@ -12,31 +15,44 @@ public class LottoList {
         this.lottos = new ArrayList<>();
     }
 
-    public LottoList(final int lottosCount) {
-        if (lottosCount < 1) {
+    public LottoList(final int lottoSize) {
+        if (lottoSize < 1) {
             throw new IllegalArgumentException("1 OR MORE");
         }
 
-        this.lottos = new ArrayList<>(lottosCount);
+        lottos = new ArrayList<>(lottoSize);
 
-        for (int i = 0; i < lottosCount; i++) {
-            this.lottos.add(new Lotto());
-        }
+        IntStream.range(0, lottoSize)
+            .forEach(i -> lottos.add(new Lotto()));
     }
 
-    public LottoList(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public LottoList(List<Lotto> manualLottos) {
+        this.lottos = manualLottos;
+    }
+
+    public LottoList(int totalLottoSize, LottoList manualLottos) {
+        int manualLottoSize = manualLottos.size();
+
+        if (totalLottoSize < manualLottoSize) {
+            throw new IllegalArgumentException("TOO MANY LOTTO");
+        }
+
+        lottos = new ArrayList<>(totalLottoSize);
+        lottos.addAll(manualLottos.lottos);
+
+        IntStream.range(0, totalLottoSize - manualLottoSize)
+            .forEach(i -> lottos.add(new Lotto()));
     }
 
     public int size() {
-        return this.lottos.size();
+        return lottos.size();
     }
 
-    int count(Prize targetPrize, WinningLotto winningLotto) {
+    int count(Rank targetRank, WinningLotto winningLotto) {
         int count = 0;
 
-        for (Lotto lotto : this.lottos) {
-            if (winningLotto.calculatePrize(lotto) == targetPrize) {
+        for (Lotto lotto : lottos) {
+            if (winningLotto.determineRank(lotto) == targetRank) {
                 count++;
             }
         }
@@ -44,12 +60,37 @@ public class LottoList {
         return count;
     }
 
+    public void forEach(Consumer<Lotto> printConsumer) {
+        lottos.forEach(printConsumer);
+    }
+
+    public boolean add(Lotto lotto) {
+        return lottos.add(lotto);
+    }
+
+    public long sizeOfManuals() {
+        return lottos.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
+    public long sizeOfAutos() {
+        return lottos.stream()
+            .filter(Lotto::isAuto)
+            .count();
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottos);
     }
 
-    public void forEach(Consumer<Lotto> printConsumer) {
-        lottos.forEach(printConsumer);
+    private Stream<Lotto> stream() {
+        return lottos.stream();
+    }
+
+    public static LottoList merge(LottoList a, LottoList b) {
+        return new LottoList(Stream.concat(a.stream(), b.stream())
+            .collect(Collectors.toList()));
     }
 }

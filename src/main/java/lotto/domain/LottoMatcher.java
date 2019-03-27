@@ -1,20 +1,17 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class LottoMatcher {
 
-    public static WinningResults calculateWinningResults(final LottoList lottos, final WinningLotto winningLotto) {
-        WinningResults winningResults = new WinningResults();
+    public static MatchResults calculateMatchResults(final LottoList lottos, final WinningLotto winningLotto) {
+        MatchResults matchResults = new MatchResults();
 
-        List<Prize> prizes = Arrays.asList(Prize.values());
+        Rank[] ranks = Rank.values();
 
-        for (Prize prize : prizes) {
-            winningResults.put(
-                    prize, new WinningResult(prize, lottos.count(prize, winningLotto)));
+        for (Rank rank : ranks) {
+            matchResults.put(
+                rank, new RankCount(rank, lottos.count(rank, winningLotto)));
         }
 
-        return winningResults;
+        return matchResults;
     }
 }

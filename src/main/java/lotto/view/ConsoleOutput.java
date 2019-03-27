@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoList;
-import lotto.domain.Prize;
-import lotto.domain.WinningResults;
+import lotto.domain.Rank;
+import lotto.domain.MatchResults;
 
 import java.util.Collections;
 import java.util.Set;
@@ -10,8 +10,8 @@ import java.util.TreeSet;
 
 public class ConsoleOutput {
 
-    public static void printLottoCount(final int lottoCount) {
-        System.out.println(lottoCount + "개를 구매했습니다.");
+    public static void printLottoCount(final long manualLottoCount, final long autoLottoCount) {
+        System.out.println(String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
     }
 
     public static void printLottos(LottoList lottos) {
@@ -21,25 +21,21 @@ public class ConsoleOutput {
         System.out.println();
     }
 
-    public static void printWinningStatistics(WinningResults winningResults) {
+    public static void printWinningStatistics(MatchResults matchResults) {
 
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Set<Prize> reversedKeyPrizes= new TreeSet<>(Collections.reverseOrder());
-        reversedKeyPrizes.addAll(winningResults.keySet());
+        Set<Rank> reversedKeyRanks = new TreeSet<>(Collections.reverseOrder());
+        reversedKeyRanks.addAll(matchResults.keySet());
 
-        for (Prize prize : reversedKeyPrizes) {
-            if (!prize.isInTop5()) {
+        for (Rank rank : reversedKeyRanks) {
+            if (!rank.isInTop5()) {
                 continue;
             }
 
-            String output = String.format(
-                prize + " - %d개",
-                winningResults.get(prize).getMatchCount());
-
-            System.out.println(output);
+            System.out.println(matchResults.get(rank));
         }
 
         System.out.println();

@@ -11,19 +11,19 @@ public class WinningLottoTest {
     @Test
     public void 순위결정() {
         final Lotto secondLotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(45)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(45)));
 
         final Lotto thirdLotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(10)));
+                LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(10)));
 
         final WinningLotto winningLotto
                 = new WinningLotto(new Lotto(Arrays.asList(
-                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))), LottoNumber.of(45));
+                        LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                        LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))), LottoNumber.valueOf(45));
 
-        assertThat(winningLotto.calculatePrize(secondLotto)).isEqualTo(Prize.SECOND);
-        assertThat(winningLotto.calculatePrize(thirdLotto)).isEqualTo(Prize.THIRD);
+        assertThat(winningLotto.determineRank(secondLotto)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.determineRank(thirdLotto)).isEqualTo(Rank.THIRD);
     }
 }

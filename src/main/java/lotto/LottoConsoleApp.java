@@ -7,18 +7,17 @@ import lotto.view.ConsoleOutput;
 public class LottoConsoleApp {
 
     public static void main(String[] args) {
-        final long purchaseAmount = ConsoleInput.inputPurchaseAmount();
+        final LottoMoney lottoMoney = ConsoleInput.inputPurchaseAmount();
 
-        LottoMoney lottoMoney = new LottoMoney(purchaseAmount);
-        final LottoList lottos = new LottoList(lottoMoney.countOfLotto());
+        final LottoList lottos = ConsoleInput.inputManualLottos(lottoMoney.countOfLotto());
 
-        ConsoleOutput.printLottoCount(lottos.size());
+        ConsoleOutput.printLottoCount(lottos.sizeOfManuals(), lottos.sizeOfAutos());
         ConsoleOutput.printLottos(lottos);
 
         final WinningLotto winningLotto = ConsoleInput.inputLastWinningNumbers();
-        final WinningResults winningResults = LottoMatcher.calculateWinningResults(lottos, winningLotto);
+        final MatchResults matchResults = LottoMatcher.calculateMatchResults(lottos, winningLotto);
 
-        ConsoleOutput.printWinningStatistics(winningResults);
-        ConsoleOutput.printEarningsRate(lottoMoney.calculateEarningsRate(winningResults));
+        ConsoleOutput.printWinningStatistics(matchResults);
+        ConsoleOutput.printEarningsRate(lottoMoney.calculateEarningsRate(matchResults));
     }
 }

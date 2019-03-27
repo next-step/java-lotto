@@ -5,6 +5,10 @@ public class WinningLotto {
     private LottoNumber bonus;
 
     public WinningLotto(Lotto lotto, LottoNumber bonus) {
+        if (lotto.contains(bonus)) {
+            throw new IllegalArgumentException("BONUS NUMBER MUST NOT BE INCLUDED");
+        }
+
         this.lotto = lotto;
         this.bonus = bonus;
     }
@@ -25,10 +29,10 @@ public class WinningLotto {
         return anyLotto.contains(bonus);
     }
 
-    public Prize calculatePrize(Lotto anyLotto) {
+    public Rank determineRank(Lotto anyLotto) {
         int count = this.countMatches(anyLotto);
         boolean matchBonus = this.matchBonus(anyLotto);
 
-        return Prize.valueOf(count, matchBonus);
+        return Rank.valueOf(count, matchBonus);
     }
 }
