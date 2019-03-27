@@ -1,8 +1,11 @@
 package lotto.tool;
 
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoTicket;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,18 +17,71 @@ public class LottoMachineTest {
     //  -> lottoBalls 전달 -> LottoTicket에 담아서 반환
 
     @Test
-    public void 로또한장_발급하기() {
-        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(1);
-        System.out.println(lottoTickets.get(0).toString());
-        assertThat(lottoTickets.get(0) != null).isEqualTo(true);
+    public void 수동발급장수_가능확인() {
+        LottoMoney lottoMoney = new LottoMoney(3_000);
+        boolean isPossible = LottoMachine.checkManualTicketCount(lottoMoney.buy(), 0);
+        assertThat(isPossible).isEqualTo(true);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 수동장수_범위초과_에러확인() {
+        LottoMoney lottoMoney = new LottoMoney(3_000);
+        boolean isPossible = LottoMachine.checkManualTicketCount(lottoMoney.buy(), 10);
+        assertThat(isPossible).isEqualTo(true);
     }
 
     @Test
-    public void 로또_5장_발급() {
-        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(5);
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public void 수동_자동_혼합() {
+        String[] manual1 = {"1","2","3","4","5","6"};
+        String[] manual2 = {"11","12","13","14","15","16"};
+        List<String[]> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(manual1);
+        manualLottoNumbers.add(manual2);
+        LottoMoney lottoMoney = new LottoMoney(10000);
+
+        LottoBundle lottoBundle = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+        assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
+    }
+
+    @Test
+    public void 수동_0장_자동_혼합() {
+        List<String[]> manualLottoNumbers = new ArrayList<>();
+        LottoMoney lottoMoney = new LottoMoney(10000);
+//        List<LottoTicket> lottoTickets = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+        LottoBundle lottoBundle = LottoMachine.issueTickets(lottoMoney, manualLottoNumbers);
+
+        for (LottoTicket lottoTicket : lottoBundle.getTickets()) {
             System.out.println(lottoTicket.toString());
         }
-        assertThat(lottoTickets.size()).isEqualTo(5);
+        assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
+    }
+
+
+    @Test
+    public void 수동티켓발급() {
+        String[] manual1 = {"1","2","3","4","5","6"};
+        String[] manual2 = {"11","12","13","14","15","16"};
+        List<String[]> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(manual1);
+        manualLottoNumbers.add(manual2);
+
+        LottoMoney lottoMoney = new LottoMoney(2_000);
+
+        List<LottoTicket> lottoTickets = LottoMachine.generateManualTickets(new LottoManualGenerator(manualLottoNumbers, lottoMoney));
+        assertThat(lottoTickets.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void 수동_자동_혼합2() {
+        String[] manual1 = {"1","2","3","4","5","6"};
+        String[] manual2 = {"11","12","13","14","15","16"};
+        List<String[]> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(manual1);
+        manualLottoNumbers.add(manual2);
+        LottoMoney lottoMoney = new LottoMoney(10000);
+
+//        LottoBundle lottoBundle = LottoMachine.issueLottoTickets(lottoMoney, manualLottoNumbers);
+        LottoBundle lottoBundle = LottoMachine.issueLottoTickets(lottoMoney, manualLottoNumbers);
+        assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
     }
 }

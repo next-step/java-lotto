@@ -22,9 +22,11 @@ public class EarningRateTest {
         String bonusNumber = "6";
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         List<LottoTicket> lottoTickets = Arrays.asList(new LottoTicket(lottoBalls));
+        LottoBundle lottoBundle = new LottoBundle(lottoTickets);
 
-        LottoMatcher lottoMatcher = new LottoMatcher(lottoTickets, winningLotto);
+        LottoMatcher lottoMatcher = new LottoMatcher(lottoBundle, winningLotto);
         LottoMoney lottoMoney = new LottoMoney(1_000);
+
         EarningRate earningRate = new EarningRate(lottoMatcher, lottoMoney);
         System.out.println(earningRate.toString());
         assertThat(earningRate.toString()).isEqualTo("30000.00");
@@ -41,8 +43,9 @@ public class EarningRateTest {
         String bonusNumber = "6";
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         List<LottoTicket> lottoTickets = Arrays.asList(new LottoTicket(lottoBalls));
+        LottoBundle lottoBundle = new LottoBundle(lottoTickets);
 
-        LottoMatcher lottoMatcher = new LottoMatcher(lottoTickets, winningLotto);
+        LottoMatcher lottoMatcher = new LottoMatcher(lottoBundle, winningLotto);
         LottoMoney lottoMoney = new LottoMoney(10_300);
         EarningRate earningRate = new EarningRate(lottoMatcher, lottoMoney);
         System.out.println(earningRate.toString());

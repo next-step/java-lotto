@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Map;
+
 public enum LottoRank{
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -32,10 +34,7 @@ public enum LottoRank{
     }
 
     private static boolean checkRank(int number, LottoRank lottoRank) {
-        if (lottoRank.matchCount == number) {
-            return true;
-        }
-        return false;
+        return lottoRank.matchCount == number;
     }
 
     private static LottoRank checkBonusRank(boolean matchBonus) {
@@ -43,5 +42,9 @@ public enum LottoRank{
             return SECOND;
         }
         return THIRD;
+    }
+
+    public static long calculateWinningMoney(LottoRank lottoRank, int count) {
+        return lottoRank.money * count;
     }
 }

@@ -9,7 +9,6 @@ public class LottoBall implements Comparable<LottoBall> {
     private static final int SWITCH_POSITION = 1;
     private static final int STAY_POSITION = -1;
 
-
     public final int number;
 
     public LottoBall(int number) {

@@ -1,20 +1,23 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class EarningRate {
 
     private final double rate;
 
     public EarningRate(LottoMatcher lottoMatcher, LottoMoney lottoMoney) {
-        long winningMoney = sumWinningMoney(lottoMatcher.rankResult);
-        this.rate = (double) winningMoney / lottoMoney.money;
+        this.rate = calculateRate(lottoMoney, sumWinningMoney(lottoMatcher.getRankResult()));
     }
 
-    private long sumWinningMoney(HashMap<LottoRank, Integer> rankResult) {
+    private double calculateRate(LottoMoney lottoMoney, double winningMoney) {
+         return winningMoney / lottoMoney.money;
+    }
+
+    private long sumWinningMoney(Map<LottoRank, Integer> rankResult) {
         long winningMoney = 0;
         for (LottoRank lottoRank : rankResult.keySet()) {
-            winningMoney += lottoRank.money * rankResult.get(lottoRank);
+            winningMoney += LottoRank.calculateWinningMoney(lottoRank, rankResult.get(lottoRank));
         }
         return winningMoney;
     }
