@@ -5,6 +5,7 @@ public class RankPrintableFactory {
     static final int SECOND = 2;
     static final int THIRD = 3;
     static final int FOURTH = 4;
+    static final int FIFTH = 5;
 
     public static RankPrintable makeRanksForPrint(int rank) {
         if(rank == FIRST) {
@@ -21,6 +22,10 @@ public class RankPrintableFactory {
 
         if(rank == FOURTH) {
             return new Fourth();
+        }
+
+        if(rank == FIFTH) {
+            return new Fifth();
         }
 
         return RankPrintable.NONE;

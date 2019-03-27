@@ -41,3 +41,10 @@ class Fourth implements RankPrintable {
     }
 }
 
+class Fifth implements RankPrintable {
+    @Override
+    public void makeRanksForPrint(Map<String, Integer> ranks) {
+        ranks.put("fifth", ranks.get("fifth") + 1);
+    }
+}
+

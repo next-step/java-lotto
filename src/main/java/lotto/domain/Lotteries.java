@@ -69,6 +69,7 @@ public class Lotteries {
         ranks.put("second", INITIALIZATION_NUMBER);
         ranks.put("third", INITIALIZATION_NUMBER);
         ranks.put("fourth", INITIALIZATION_NUMBER);
+        ranks.put("fifth", INITIALIZATION_NUMBER);
 
         return ranks;
     }
