@@ -1,5 +1,9 @@
 package view;
 
+import domain.Lotto;
+import domain.LottoGameResult;
+import domain.LottoProfit;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -8,32 +12,32 @@ public class ResultView {
 
     private final static Map<Integer, Integer> PROFIT_VALUE = new HashMap<>();
     static {
-        PROFIT_VALUE.put(3, 5000);
-        PROFIT_VALUE.put(4, 50000);
-        PROFIT_VALUE.put(5, 1500000);
-        PROFIT_VALUE.put(6, 2000000000);
+        PROFIT_VALUE.put(LottoProfit.fourth.getNumberOfMatch(), LottoProfit.fourth.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.third.getNumberOfMatch(), LottoProfit.third.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.second.getNumberOfMatch(), LottoProfit.second.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.first.getNumberOfMatch(), LottoProfit.first.getPrizeMoney());
     }
 
-    public static void printWinningStatistics(Map<Integer, Integer> result){
-        System.out.println("¥Á√∑ ≈Î∞Ë\n-----------");
-        Iterator<Integer> keys = result.keySet().iterator();
+    public static void printWinningStatistics(LottoGameResult result){
+        System.out.println("ÎãπÏ≤® ÌÜµÍ≥Ñ\n-----------");
+        Iterator<Integer> keys = result.getGameResult().keySet().iterator();
         while (keys.hasNext()) {
             int key = keys.next();
-            System.out.println(key + "∞≥ ¿œƒ° (" + PROFIT_VALUE.get(key) +
-                    ")ø¯ - " + result.get(key) + "∞≥");
+            System.out.println(key + "Í∞ú ÏùºÏπò (" + PROFIT_VALUE.get(key) +
+                    ")Ïõê - " + result.getGameResult().get(key) + "Í∞ú");
         }
     }
 
-    public static void printProfitRate(Map<Integer, Integer> result, int inputMoney){
+    public static void printProfitRate(LottoGameResult result, int inputMoney){
         double totalProfit = 0.0;
 
-        Iterator<Integer> keys = result.keySet().iterator();
+        Iterator<Integer> keys = result.getGameResult().keySet().iterator();
         while (keys.hasNext()) {
             int key = keys.next();
-            totalProfit += (double) PROFIT_VALUE.get(key) * result.get(key);
+            totalProfit += (double) PROFIT_VALUE.get(key) * result.getGameResult().get(key);
         }
 
-        System.out.println("√— ºˆ¿Õ∑¸¿∫ " + totalProfit / (double) inputMoney + "¿‘¥œ¥Ÿ.");
+        System.out.println("Ï¥ù ÏàòÏùµÎ•†ÏùÄ " + totalProfit / (double) inputMoney + "ÏûÖÎãàÎã§.");
     }
 
 }

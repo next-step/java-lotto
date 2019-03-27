@@ -10,21 +10,21 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public static int getLottoCountFromInputMoney() {
-        System.out.println("±¸ÀÔ±İ¾×À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+    public static LottoMoney getLottoCountFromInputMoney() {
+        System.out.println("êµ¬ì…ê¸ˆì•¡ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
         Scanner scanner = new Scanner(System.in);
 
         LottoMoney money = new LottoMoney(scanner.nextInt());
 
-        System.out.println(money.getNumberOfLotto() + "°³¸¦ ±¸¸ÅÇß½À´Ï´Ù");
-        return money.getNumberOfLotto();
+        System.out.println(money.getNumberOfLotto() + "ê°œë¥¼ êµ¬ë§¤í–ˆìŠµë‹ˆë‹¤");
+        return money;
     }
 
 
     public static WinningLotto getWinnerNoByString() {
         WinningLotto winner;
         List<Integer> speicifedNumbers = new ArrayList<>();
-        System.out.println("Áö³­ ÁÖ ´çÃ· ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.(,·Î ¼ıÀÚ ±¸ºĞ)");
+        System.out.println("ì§€ë‚œ ì£¼ ë‹¹ì²¨ ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.(,ë¡œ ìˆ«ì êµ¬ë¶„)");
         Scanner scanner = new Scanner(System.in);
         String[] inputs = splitStringToWinner(scanner.nextLine());
 

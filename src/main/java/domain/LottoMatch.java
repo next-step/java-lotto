@@ -3,7 +3,7 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LottoResult {
+public class LottoMatch {
     private int numberOfMatch;
     private int profitMoney;
 
@@ -19,7 +19,7 @@ public class LottoResult {
         PROFIT_VALUE.put(6, 2000000000);
     }
 
-    public LottoResult(WinningLotto winningLotto, Lotto userLotto){
+    public LottoMatch(WinningLotto winningLotto, Lotto userLotto){
         this.numberOfMatch = winningLotto.match(userLotto);
         this.profitMoney = PROFIT_VALUE.get(numberOfMatch);
     }

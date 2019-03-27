@@ -6,8 +6,14 @@ public class Lotto {
 
      final static int SINGLE_LOTTO_SIZE = 6;
      final static int LOTTO_MAX_BOUND = 45;
+     final static List<Integer> LOTTO_NUMBERS = new ArrayList<>(LOTTO_MAX_BOUND);
+     static {
+          for(int i = 0 ; i < LOTTO_MAX_BOUND ; i++) {
+               LOTTO_NUMBERS.add(i+1);
+          }
+     }
 
-     private List<Integer> numbers;
+     private List<Integer> numbers = new ArrayList<>();
 
      public Lotto(List<Integer> numbers){
           this.numbers = numbers;
@@ -15,11 +21,13 @@ public class Lotto {
      }
 
      public Lotto(){
-          Set<Integer> tmpNumbers = new HashSet<>();
-          while(tmpNumbers.size() < SINGLE_LOTTO_SIZE){
-               tmpNumbers.add((int)(Math.random() * LOTTO_MAX_BOUND) + 1);
+
+          Collections.shuffle(LOTTO_NUMBERS);
+
+          for(int i = 0 ; i < SINGLE_LOTTO_SIZE ; i++) {
+               numbers.add(LOTTO_NUMBERS.get(i));
           }
-          numbers = new ArrayList<>(tmpNumbers);
+
           Collections.sort(numbers);
      }
 
