@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryMachineTest {
     final Set<Integer> lotteryNumber = new HashSet<>(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
+    static final int BONUS_NUMBER = 7;
 
     @Test
     public void 로또_맞춘_개수_테스트() {
@@ -20,6 +21,7 @@ public class LotteryMachineTest {
 
         assertThat(lottery.matchNumber(3, 4)).isEqualTo(4);
     }
+
     @Test
     public void 로또_일등_테스트() {
         Lottery lottery = new Lottery(lotteryNumber);
@@ -27,7 +29,7 @@ public class LotteryMachineTest {
         Set<Integer> inputLottery = new HashSet<>(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
         Set<Integer> winnerLottery = new HashSet<>(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
 
-        LotteryMachine lotteryMachine = new LotteryMachine(winnerLottery);
+        LotteryMachine lotteryMachine = new LotteryMachine(winnerLottery, BONUS_NUMBER);
 
         lottery.generationLottery(inputLottery);
 
@@ -41,7 +43,7 @@ public class LotteryMachineTest {
         Set<Integer> inputLottery = new HashSet<>(new ArrayList<>(Arrays.asList(1,2,3,4,5,6)));
         Set<Integer> winnerLottery = new HashSet<>(new ArrayList<>(Arrays.asList(1,2,3,11,12,13)));
 
-        LotteryMachine lotteryMachine = new LotteryMachine(winnerLottery);
+        LotteryMachine lotteryMachine = new LotteryMachine(winnerLottery, BONUS_NUMBER);
 
         lottery.generationLottery(inputLottery);
 

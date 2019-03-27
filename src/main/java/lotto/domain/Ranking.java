@@ -2,10 +2,11 @@ package lotto.domain;
 
 public enum Ranking {
 
-    FIRST_CLASS(1, 6, 2000000000),
-    SECOND_CLASS(2, 5, 1500000),
-    THIRD_CLASS(3, 4, 50000),
-    FOURTH_CLASS(4, 3, 5000),
+    FIRST_CLASS(1, 6, 2_000_000_000),
+    SECOND_CLASS(2, 5, 3_000_000),
+    THIRD_CLASS(3, 5, 1_500_000),
+    FOURTH_CLASS(4, 4, 50_000),
+    FIFTH_CLASS(5, 3, 5_000),
     ZERO_CLASS(0, 0, 0);
 
     private int rank;
