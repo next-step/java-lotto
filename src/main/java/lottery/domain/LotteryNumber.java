@@ -50,7 +50,6 @@ public class LotteryNumber {
         return isSizeCorrect(new HashSet<>(inputNumbers));
     }
 
-    // TODO : 여기 for문은 도저히 어떻게 해야 없어지려는지 모르겠습니다.
     public boolean isNotBetween(List<Integer> inputNumbers) {
         for (Integer inputNumber : inputNumbers) {
             if(BETWEEN_NUMBER_MIN > inputNumber | BETWEEN_NUMBER_MAX < inputNumber) {

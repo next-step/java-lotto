@@ -13,10 +13,24 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputWinningNumbers() {
-        System.out.println("당첨번호를 입력해주세요");
+    public static int inputManualValue() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+        return scanner.nextInt();
+    }
+
+    public static List<List<Integer>> inputManualNumbers(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         if(scanner.nextLine().isEmpty()) {
         }
+        List<List<Integer>> manualNumbers = new ArrayList<>(count);
+        for (int index = 0; index < count; index++) {
+            manualNumbers.add(convertInts(scanner.nextLine().split(",")));
+        }
+        return manualNumbers;
+    }
+
+    public static List<Integer> inputWinningNumbers() {
+        System.out.println("당첨번호를 입력해주세요");
         return convertInts(scanner.nextLine().split(","));
     }
 

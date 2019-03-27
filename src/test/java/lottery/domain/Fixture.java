@@ -9,6 +9,7 @@ public class Fixture {
     public static LotteryNumber createDefaultLotteryNumber = new LotteryNumber(numbers);
     public static Lottery oneToSixLottery = new Lottery(createDefaultLotteryNumber);
     public static Lottery oneToSixBonusBallLottery = new Lottery(new LotteryNumber(numbers,7));
+    public static List<List<Integer>> manualNumbers = Arrays.asList(numbers);
 
     public static LotteryNumber createLotteryNumber(List<Integer> inputNumbers) {
         return new LotteryNumber(inputNumbers);
