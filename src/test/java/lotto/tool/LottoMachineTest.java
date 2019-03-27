@@ -31,21 +31,6 @@ public class LottoMachineTest {
     }
 
     @Test
-    public void 수동으로_티켓발행하기() {
-        String[] manual1 = {"1","2","3","4","5","6"};
-        String[] manual2 = {"11","12","13","14","15","16"};
-        List<String[]> manualLottoNumbers = new ArrayList<>();
-        manualLottoNumbers.add(manual1);
-        manualLottoNumbers.add(manual2);
-
-        List<LottoTicket> lottoTickets = LottoMachine.issueManualTickets(manualLottoNumbers);
-        for (LottoTicket lottoTicket : lottoTickets) {
-            System.out.println(lottoTicket.toString());
-        }
-        assertThat(lottoTickets.size()).isEqualTo(2);
-    }
-
-    @Test
     public void 수동_자동_혼합() {
         String[] manual1 = {"1","2","3","4","5","6"};
         String[] manual2 = {"11","12","13","14","15","16"};
@@ -68,6 +53,35 @@ public class LottoMachineTest {
         for (LottoTicket lottoTicket : lottoBundle.getTickets()) {
             System.out.println(lottoTicket.toString());
         }
+        assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
+    }
+
+
+    @Test
+    public void 수동티켓발급() {
+        String[] manual1 = {"1","2","3","4","5","6"};
+        String[] manual2 = {"11","12","13","14","15","16"};
+        List<String[]> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(manual1);
+        manualLottoNumbers.add(manual2);
+
+        LottoMoney lottoMoney = new LottoMoney(2_000);
+
+        List<LottoTicket> lottoTickets = LottoMachine.generateManualTickets(new LottoManualGenerator(manualLottoNumbers, lottoMoney));
+        assertThat(lottoTickets.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void 수동_자동_혼합2() {
+        String[] manual1 = {"1","2","3","4","5","6"};
+        String[] manual2 = {"11","12","13","14","15","16"};
+        List<String[]> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(manual1);
+        manualLottoNumbers.add(manual2);
+        LottoMoney lottoMoney = new LottoMoney(10000);
+
+//        LottoBundle lottoBundle = LottoMachine.issueLottoTickets(lottoMoney, manualLottoNumbers);
+        LottoBundle lottoBundle = LottoMachine.issueLottoTickets(lottoMoney, manualLottoNumbers);
         assertThat(lottoBundle.getTickets().size()).isEqualTo(10);
     }
 }

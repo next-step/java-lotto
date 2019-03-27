@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Deprecated
 public class LottoAutoGenerator {
 
     public static List<LottoBall> random() {
