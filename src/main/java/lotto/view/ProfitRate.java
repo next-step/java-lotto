@@ -12,10 +12,11 @@ public class ProfitRate {
 
         Map<String, Integer> ranks = lotteries.makeAllLotteriesRank(lotteryMachine);
 
-        System.out.println("3개 일치 (5000원) " + ranks.get("fourth"));
-        System.out.println("4개 일치 (50000원) " + ranks.get("third"));
-        System.out.println("5개 일치 (150000원) " + ranks.get("second"));
-        System.out.println("6개 일치 (2000000000) " + ranks.get("first"));
+        System.out.println("3개 일치 (5000원) " + ranks.get("fifth"));
+        System.out.println("4개 일치 (50000원) " + ranks.get("fourth"));
+        System.out.println("5개 일치 (150000원) " + ranks.get("third"));
+        System.out.println("5개 일치, 보너스 볼 일치 (3000000원) " + ranks.get("second"));
+        System.out.println("6개 일치 (2000000000원) " + ranks.get("first"));
 
         System.out.println("총 수익률은 " + lotteries.calculateProfit(lotteryMachine) + " 입니다.");
     }
