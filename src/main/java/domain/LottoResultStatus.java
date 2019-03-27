@@ -39,4 +39,9 @@ public enum LottoResultStatus {
     public static BigDecimal getWinnersPriceByStatus(int lottoCount, LottoResultStatus status) {
         return BigDecimal.valueOf(lottoCount * status.winnersPrice);
     }
+
+    public String findDescription() {
+        return this.description;
+    }
+
 }

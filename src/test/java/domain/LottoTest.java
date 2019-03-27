@@ -19,7 +19,8 @@ public class LottoTest {
         for (int i=1 ; i<=6; i++) {
             nums.add(i);
         }
-        lotto = Lotto.generateLotto(nums);
+        LottoNumbers numbers = new LottoNumbers(nums);
+        lotto = new Lotto(numbers);
     }
 
     @Test

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public class LottoNumberGenerator {
     private static final int LOTTO_RANGE_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUMBER = 46;
     private List<Integer> lottoRangeNumbers;
 
-    public LottoGenerator() {
+    public LottoNumberGenerator() {
         lottoRangeNumbers = makeLottoNumberRange();
     }
 
@@ -23,7 +23,7 @@ public class LottoGenerator {
 
         return new LottoNumbers(lottoNum);
     }
-    // TODO :: https://github.com/next-step/java-lotto/pull/139
+
     private static List<Integer> makeLottoNumberRange() {
         List<Integer> lottoNumberRange = new ArrayList<>();
 

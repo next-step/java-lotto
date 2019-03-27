@@ -16,7 +16,7 @@ public class LottoNumbers {
     }
 
     public boolean contains(int number) {
-        return numbers.stream().map(num -> num.equals(number)).findFirst().isPresent();
+        return numbers.stream().map(num -> num.equals(new Number(number))).anyMatch(num -> num.equals(true));
     }
 
     public String toString() {

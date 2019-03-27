@@ -26,9 +26,10 @@ public class LottoResultTest {
         List<Integer> lottoNumbers2= Arrays.asList(9,10,11,12,13,14);
         List<Integer> lottoNumbers3= Arrays.asList(9,10,11,12,13,14);
 
-        List<Lotto> lottos = Arrays.asList(Lotto.generateLotto(lottoNumbers)
-                                        , Lotto.generateLotto(lottoNumbers2)
-                                        , Lotto.generateLotto(lottoNumbers3));
+        LottoNumbers numbers1 = new LottoNumbers(lottoNumbers);
+        LottoNumbers numbers2 = new LottoNumbers(lottoNumbers2);
+        LottoNumbers numbers3 = new LottoNumbers(lottoNumbers3);
+        List<Lotto> lottos = Arrays.asList(new Lotto(numbers1), new Lotto(numbers2), new Lotto(numbers3));
 
         lottoResult = new LottoResult(lottos, new WinningLotto(INPUT_WINNING_NUMBERS, INPUT_BONUs_NUMBER));
     }
