@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.BonusBall;
+
 import java.util.*;
 
 public class Lottery {
@@ -26,6 +28,14 @@ public class Lottery {
         }
 
         return matchCount;
+    }
+
+    public boolean hasBonusNumber(BonusBall bonusNumber) {
+        if(this.lottery.contains(bonusNumber)) {
+            return true;
+        }
+
+        return false;
     }
 
     public int matchNumber(int matchCount, int number) {
