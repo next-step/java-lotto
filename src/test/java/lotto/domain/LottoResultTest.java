@@ -11,7 +11,7 @@ public class LottoResultTest {
 
     @Test
     public void 결과에따른수익률() {
-        String inputMoney = "14000";
+        int inputMoney = 14000;
         Money money = new Money(inputMoney);
         int quantity = money.purchaseQuantity();
         LottoNumbers luckyNumbers = new LottoNumbers(new Integer[]{1, 2, 3, 7, 8, 9});

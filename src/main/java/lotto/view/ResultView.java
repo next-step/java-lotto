@@ -4,7 +4,9 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningType;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -22,11 +24,12 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원) - " + lottoResult.matchLottoCount(WinningType.MATCH_COUNT_THREE));
-        System.out.println("4개 일치 (50000원) - " + lottoResult.matchLottoCount(WinningType.MATCH_COUNT_FOUR));
-        System.out.println("5개 일치 (1500000원) - " + lottoResult.matchLottoCount(WinningType.MATCH_COUNT_FIVE));
-        System.out.println("6개 일치 (2000000000원) - " + lottoResult.matchLottoCount(WinningType.MATCH_COUNT_SIX));
-
+        List<WinningType> winningTypes = Arrays.stream(WinningType.values())
+                .filter(winningType -> winningType.getMatchCount() > 0)
+                .collect(Collectors.toList());
+        for(WinningType winningType : winningTypes) {
+            System.out.println(winningType.getMatchCount() + "개 일치 (" + winningType.getPrize() + ") - " + lottoResult.matchLottoCount(winningType.getMatchCount()));
+        }
     }
 
     public void printEarningsRate(double earningsRate) {

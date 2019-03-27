@@ -3,6 +3,8 @@ package lotto.domain;
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int RETURN_ONE = 1;
+    public static final int RETURN_ZERO = 0;
 
     private final int number;
 
@@ -19,12 +21,13 @@ public class LottoNumber {
 
     public int compareNumber(LottoNumber lottoNumber) {
         if(number == lottoNumber.getNumber()) {
-            return 1;
+            return RETURN_ONE;
         }
-        return 0;
+        return RETURN_ZERO;
     }
 
-    public String printLottoNumber() {
+    @Override
+    public String toString() {
         return String.valueOf(number);
     }
 }

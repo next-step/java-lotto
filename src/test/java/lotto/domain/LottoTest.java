@@ -47,7 +47,7 @@ public class LottoTest {
     public void lotto의_당첨금() {
         Lotto lotto = new Lotto(new LottoNumbers(lottoNumber));
         LottoNumbers luckyNumbers = new LottoNumbers(winningNumber);
-        int result = lotto.prize(luckyNumbers);
+        int result = lotto.getPrize(luckyNumbers).getPrize();
         assertThat(result).isEqualTo(1500000);
     }
 
@@ -55,7 +55,7 @@ public class LottoTest {
     public void lotto의_등수() {
         Lotto lotto = new Lotto(new LottoNumbers(lottoNumber));
         LottoNumbers luckyNumbers = new LottoNumbers(winningNumber);
-        int result = lotto.rank(luckyNumbers);
+        int result = lotto.getRank(luckyNumbers).getRank();
         assertThat(result).isEqualTo(2);
     }
 

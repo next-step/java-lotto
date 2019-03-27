@@ -6,6 +6,7 @@ import java.util.*;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int MATCH_COUNT_INIT = 0;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -24,12 +25,12 @@ public class LottoNumbers {
         }
     }
 
-    int size() {
+    public int size() {
         return lottoNumbers.size();
     }
 
     int matchCount(LottoNumbers luckyNumbers) {
-        int matchCount = 0;
+        int matchCount = MATCH_COUNT_INIT;
         for (LottoNumber number : lottoNumbers) {
             matchCount += luckyNumbers.contains(number);
         }
@@ -45,36 +46,8 @@ public class LottoNumbers {
         return result;
     }
 
-    public String printLottoNumbers() {
-        List<Integer> sortNumbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            sortNumbers.add(Utils.toInt(lottoNumber.printLottoNumber()));
-        }
-        Collections.sort(sortNumbers);
-        if (lottoNumbers == null)
-            return "null";
-        int iMax = lottoNumbers.size() - 1;
-        if (iMax == -1)
-            return "[]";
-
-        StringBuilder b = new StringBuilder();
-        b.append('[');
-        int i = 0;
-        for (Integer number : sortNumbers) {
-            b.append(number);
-            if (i == iMax)
-                return b.append(']').toString();
-            b.append(", ");
-            i++;
-        }
-        /*for (LottoNumber lottoNumber : lottoNumbers) {
-            b.append(lottoNumber.printLottoNumber());
-            if (i == iMax)
-                return b.append(']').toString();
-            b.append(", ");
-            i++;
-        }*/
-
-        return null;
+    @Override
+    public String toString() {
+        return Utils.printLottoNumbers(lottoNumbers);
     }
 }

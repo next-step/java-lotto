@@ -16,11 +16,11 @@ public class LottoResult {
     }
 
     private int totalPrize() {
-        int total = 0;
+        int totalPrize = INIT_ZERO;
         for (Lotto lotto : lottos) {
-            total += lotto.prize(luckyNumbers);
+            totalPrize += lotto.getPrize(luckyNumbers).getPrize();
         }
-        return total;
+        return totalPrize;
     }
 
 

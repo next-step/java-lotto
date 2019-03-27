@@ -15,7 +15,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String inputMoney = scanner.nextLine();
 
-        Money money = new Money(inputMoney);
+        Money money = new Money(Utils.toInt(inputMoney));
         int quantity = money.purchaseQuantity();
         System.out.println(quantity + "개를 구매했습니다.");
         return money;

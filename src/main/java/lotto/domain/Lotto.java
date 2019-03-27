@@ -15,16 +15,16 @@ public class Lotto {
         return lottoNumbers.matchCount(luckyNumbers);
     }
 
-    public int prize(LottoNumbers luckyNumbers) {
-        return WinningType.getPrize(lottoNumbers.matchCount(luckyNumbers));
+    public WinningType getPrize(LottoNumbers luckyNumbers) {
+        return WinningType.findByMatchCount(matchCount(luckyNumbers));
     }
 
-    public int rank(LottoNumbers luckyNumbers) {
-        return WinningType.getRank(lottoNumbers.matchCount(luckyNumbers));
+    public WinningType getRank(LottoNumbers luckyNumbers) {
+        return WinningType.findByMatchCount(matchCount(luckyNumbers));
     }
 
     @Override
     public String toString() {
-        return lottoNumbers.printLottoNumbers();
+        return lottoNumbers.toString();
     }
 }

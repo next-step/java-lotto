@@ -1,19 +1,17 @@
 package lotto.domain;
 
-import lotto.Utils;
-
 public class Money {
-    private final String money;
+    private final int money;
     public static final int LOTTO_PRICE = 1_000;
 
-    public Money(String money) {
-        if(Utils.toInt(money) < LOTTO_PRICE) {
+    public Money(int money) {
+        if(money < LOTTO_PRICE) {
             throw new IllegalArgumentException();
         }
         this.money = money;
     }
 
     public int purchaseQuantity() {
-        return Utils.toInt(money) / LOTTO_PRICE;
+        return money / LOTTO_PRICE;
     }
 }
