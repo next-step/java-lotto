@@ -2,6 +2,7 @@ package lottery.application;
 
 import lottery.domain.Lottery;
 import lottery.domain.LotteryMachine;
+import lottery.domain.LotteryNumber;
 import lottery.domain.LotteryResult;
 import lottery.view.InputView;
 import lottery.view.OutputView;
@@ -12,7 +13,8 @@ public class ConsoleMain {
 
         OutputView.printPurchasedLotties(lotteryMachine.purchaseLotteries(InputView.inputMoney()));
 
-        LotteryResult lotteryResult = lotteryMachine.checkWinning(lotteryMachine.getLotteries(), new Lottery(InputView.inputWinningNumbers()));
+        LotteryNumber winningNumber = new LotteryNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        LotteryResult lotteryResult = lotteryMachine.checkWinning(lotteryMachine.getLotteries(), new Lottery(winningNumber));
         OutputView.printWinningResult(lotteryResult);
     }
 }
