@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_NUMBER_SIZE = 6;
     private List<Number> numbers;
 
     public LottoNumbers(List<Integer> numbers) {
@@ -16,8 +16,7 @@ public class LottoNumbers {
     }
 
     public boolean contains(int number) {
-        return numbers.stream().map(num -> num.numberCompare(number)).collect(Collectors.toList())
-                .contains(true);
+        return numbers.stream().map(num -> num.equals(number)).findFirst().isPresent();
     }
 
     public String toString() {

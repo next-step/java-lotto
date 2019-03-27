@@ -12,7 +12,7 @@ public class LottoNumbersTest {
     private LottoNumbers lottoNumbers;
 
     @Before
-    public void SET_UP() {
+    public void setUp() {
         List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
         lottoNumbers = new LottoNumbers(numbers);
     }

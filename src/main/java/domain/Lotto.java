@@ -1,14 +1,12 @@
 package domain;
 
-import java.util.List;
-
 public class Lotto {
     private static final int BONUS_AVAILABLE_MATCH_COUNT = 5;
     private LottoNumbers lottoNumbers;
 
-    public static Lotto generateLotto(List<Integer> integers) {
+    public static Lotto generateLotto(LottoNumbers integers) {
         Lotto lotto = new Lotto();
-        lotto.lottoNumbers = new LottoNumbers(integers);
+        lotto.lottoNumbers = integers;
         return lotto;
     }
 
