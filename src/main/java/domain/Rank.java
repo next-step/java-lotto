@@ -11,7 +11,7 @@ public enum Rank {
     Third(5, false, 1_500_000),
     Fourth(4, false, 50_000),
     Fifth(3, false, 5_000),
-    None(-1, false, 0);
+    None(0, false, 0);
 
     private int matchCount;
     private boolean matchBonus;

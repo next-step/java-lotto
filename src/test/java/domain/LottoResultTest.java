@@ -20,7 +20,7 @@ public class LottoResultTest {
 
     @Test
     public void 총_당첨금을_계산한다() {
-        Long totalPrize = Rank.First.getPrizeMoney() * 2 + Rank.Second.getPrizeMoney();
+        Long totalPrize = Rank.First.getPrizeMoney() + Rank.Second.getPrizeMoney();
 
         Long prizeMoney = lottoResult.calculatePrizeMoney();
         assertThat(prizeMoney).isEqualTo(totalPrize);
