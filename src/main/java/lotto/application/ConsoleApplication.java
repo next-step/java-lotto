@@ -30,7 +30,7 @@ public class ConsoleApplication {
         String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
         int bonusBallNumber = InputView.inputBonusBall(scanner);
         WinningLotto previousWinningLotto = integeratedLottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
-        LottosResult lottosResult = lottoGame.analyse(purchasedLottos, previousWinningLotto, lottoOrder);
+        LottosResult lottosResult = lottoGame.analyse(purchasedLottos, previousWinningLotto, payment);
 
         OutputView.printStatisticsResult(lottosResult);
         scanner.close();

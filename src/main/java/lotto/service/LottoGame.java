@@ -1,9 +1,6 @@
 package lotto.service;
 
-import lotto.LottoOrder;
-import lotto.Lottos;
-import lotto.LottosResult;
-import lotto.WinningLotto;
+import lotto.*;
 import lotto.generator.LottoGenerator;
 
 public class LottoGame {
@@ -20,7 +17,7 @@ public class LottoGame {
         return lottoGenerator.generateLottos();
     }
 
-    public LottosResult analyse(final Lottos purchasedLottos, final WinningLotto previousWinningLotto, final LottoOrder lottoOrder) {
-        return new LottosResult(purchasedLottos, previousWinningLotto, lottoOrder);
+    public LottosResult analyse(final Lottos purchasedLottos, final WinningLotto previousWinningLotto, final Money payment) {
+        return new LottosResult(purchasedLottos, previousWinningLotto, payment);
     }
 }

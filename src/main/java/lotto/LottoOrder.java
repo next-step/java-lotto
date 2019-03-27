@@ -33,8 +33,4 @@ public class LottoOrder {
     public List<String> getManualLottos() {
         return manualLottos;
     }
-
-    public double calculateRateOfReturn(Money addTotalPrizeMoney) {
-        return payment.calculateRateOfReturn(addTotalPrizeMoney);
-    }
 }
