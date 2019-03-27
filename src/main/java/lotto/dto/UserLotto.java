@@ -5,24 +5,22 @@ import lotto.domain.LottoTicket;
 import java.util.List;
 
 public class UserLotto {
-    private static List<LottoTicket> userLotto;
-    private static int ticketCount;
+    private List<LottoTicket> tickets;
 
-    public static void createUserLotto(List<LottoTicket> tickets, int count) {
-        userLotto = tickets;
-        ticketCount = count;
+    public UserLotto(List<LottoTicket> tickets) {
+        this.tickets = tickets;
     }
 
-    public static List<LottoTicket> getUserLotto() {
-        return userLotto;
+    public List<LottoTicket> getTickets() {
+        return tickets;
     }
 
-    public static int getTicketCount() {
-        return ticketCount;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s 개를 구매했습니다.", this.ticketCount);
+    public LottoMatchResult getLottoMatchResult(WinningLotto winningLotto) {
+        LottoMatchResult lottoMatchResult = new LottoMatchResult();
+        for (LottoTicket lottoTicket : tickets) {
+            lottoTicket.addTicketMatchCount(winningLotto);
+            lottoMatchResult.match(lottoTicket.getMatchCount());
+        }
+        return lottoMatchResult;
     }
 }

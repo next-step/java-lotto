@@ -1,20 +1,18 @@
 package lotto.view;
 
-import lotto.dto.Money;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    public static void inputUserMoney() {
+    public static long getUserMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        Money.inputUserMoney(scanner.nextInt());
+        return scanner.nextLong();
     }
 
-    public static List<Integer> inputWinningLotto() {
+    public static List<Integer> getWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         return split(scanner.nextLine().split(","));

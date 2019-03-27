@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator implements ILottoGenerator{
+public class LottoGeneratorFixture implements ILottoGenerator{
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int LOTTO_NUMBER_BOUND = 45;
+    private static final int LOTTO_NUMBER_BOUND = 6;
 
     @Override
     public List<Integer> createLottoNumbers() {

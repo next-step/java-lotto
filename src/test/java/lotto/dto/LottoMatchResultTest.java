@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.domain.LottoTicket;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,73 +9,59 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMatchResultTest {
-    Map<LottoResult, Integer> map;
-
-    @Before
-    public void setUp() {
-        map = new HashMap<LottoResult, Integer>();
-        for (LottoResult result : LottoResult.values()) {
-            map.put(result, 0);
-        }
-    }
-
     @Test
     public void enum테스트() {
-        LottoResult result = LottoResult.valueOf("THREE");
+        LottoMatchType result = LottoMatchType.valueOf("THREE");
         assertThat(result.matchCount).isEqualTo(3);
-        assertThat(LottoResult.THREE.matchCount).isEqualTo(3);
+        assertThat(LottoMatchType.THREE.matchCount).isEqualTo(3);
     }
 
     @Test
     public void enumMap테스트() {
-        LottoResult result = LottoResult.THREE;
-        assertThat(map.get(result)).isEqualTo(0);
+        LottoMatchResult matchResult = new LottoMatchResult();
+        LottoMatchType result = LottoMatchType.THREE;
+        assertThat(matchResult.getMatchTable().get(result)).isEqualTo(0);
     }
 
     @Test
-    public void addMatchResult테스트() {
-        String matchString = matchNumberToString(3);
-        LottoResult result = LottoResult.valueOf(matchString);
-        map.put(result, map.get(result) + 1);
-        map.put(result, map.get(result) + 1);
-
-        assertThat(map.get(result)).isEqualTo(2);
+    public void 매치테이블_3개_값확인(){
+        LottoMatchResult matchResult = new LottoMatchResult();
+        matchResult.match(3);
+        matchResult.match(3);
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.THREE)).isEqualTo(2);
     }
 
     @Test
-    public void addMatchResult_셋팅되지않은값() {
-        String matchString = matchNumberToString(1);
-        assertThat(matchString).isEqualTo("NOTHING");
-
-        if (matchString != "NOTHING") {
-            LottoResult result = LottoResult.valueOf(matchString);
-            assertThat(result).isNull();
-        }
+    public void 매치테이블_값확인(){
+        LottoMatchResult matchResult = new LottoMatchResult();
+        matchResult.match(3);
+        matchResult.match(4);
+        matchResult.match(5);
+        matchResult.match(6);
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.THREE)).isEqualTo(1);
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.FOUR)).isEqualTo(1);
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.FIVE)).isEqualTo(1);
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.SIX)).isEqualTo(1);
     }
 
-    public String matchNumberToString(int matchCount) {
-        switch (matchCount) {
-            case 3:
-                return "THREE";
-            case 4:
-                return "FOUR";
-            case 5:
-                return "FIVE";
-            case 6:
-                return "SIX";
-            default:
-                return "NOTHING";
-        }
+    @Test
+    public void 수익율값테스트_3개_1번매치(){
+        LottoMatchResult matchResult = new LottoMatchResult();
+        matchResult.match(3);
+        //matchResult.match(3);
+
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.THREE)).isEqualTo(1);
+        assertThat(matchResult.getLottoMatchRateOfResult(14000)).isEqualTo(0.35);
+        assertThat(matchResult.getLottoMatchRateOfResult(5000)).isEqualTo(1);
+        assertThat(matchResult.getLottoMatchRateOfResult(50000)).isEqualTo(0.1);
     }
-}
 
-enum LottoResult {
-    THREE(3, 5000), FOUR(4, 50000), FIVE(5, 1500000), SIX(6, 2000000000);
-    public final int matchCount;
-    public final int money;
+    @Test
+    public void 수익율값테스트_3개_5개_1번매치(){
+        LottoMatchResult matchResult = new LottoMatchResult();
+        matchResult.match(3);
 
-    private LottoResult(int matchCount, int money) {
-        this.matchCount = matchCount;
-        this.money = money;
+        assertThat(matchResult.getMatchTable().get(LottoMatchType.THREE)).isEqualTo(1);
+        assertThat(matchResult.getLottoMatchRateOfResult(1000)).isEqualTo(5);
     }
 }
