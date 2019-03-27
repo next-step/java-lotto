@@ -15,12 +15,12 @@ public class NumberTest {
     @Test
     public void 숫자_일치여부_확인_일치할_때() {
         Number number = new Number(6);
-        assertThat(number.equals(6)).isEqualTo(true);
+        assertThat(number.equals(new Number(6))).isEqualTo(true);
     }
 
     @Test
     public void 숫자_일치여부_확인_불일치할_때() {
         Number number = new Number(7);
-        assertThat(number.equals(6)).isEqualTo(false);
+        assertThat(number.equals(new Number(6))).isEqualTo(false);
     }
 }
