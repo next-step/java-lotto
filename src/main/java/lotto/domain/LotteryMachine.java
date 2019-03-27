@@ -1,13 +1,16 @@
 package lotto.domain;
 
+import lotto.BonusBall;
+
 import java.util.Set;
 
 public class LotteryMachine {
-
     private Set<Integer> winnerLottery;
+    private BonusBall bonusBall;
 
-    public LotteryMachine(Set<Integer> lottery) {
+    public LotteryMachine(Set<Integer> lottery, int bonusNumber) {
         this.winnerLottery = lottery;
+        this.bonusBall = new BonusBall(bonusNumber);
     }
 
     public int countProfit(Lottery lottery) {
@@ -17,7 +20,6 @@ public class LotteryMachine {
     }
 
     public Ranking rankLottery (Lottery lottery) {
-        int count = lottery.matchLottery(this.winnerLottery);
-        return MatchingCount.getRank(count);
+        return MatchingCount.getRank(lottery.matchLottery(this.winnerLottery), lottery.hasBonusNumber(this.bonusBall));
     }
 }
