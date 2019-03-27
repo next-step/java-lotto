@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Prize {
     FIRST_PRIZE(6, 2_000_000_000, false),
     SECOND_PRIZE(5, 30_000_000, true),
@@ -9,29 +11,30 @@ public enum Prize {
     NO_PRIZE(0, 0, false);
 
     private final int numberOfMatch;
-    private final long prizeMoney;
+    private final int prizeMoney;
     private final boolean isMatchingBonus;
 
-    Prize(int numberOfMatch, long prizeMoney, boolean isMatchingBonus) {
+    Prize(int numberOfMatch, int prizeMoney, boolean isMatchingBonus) {
         this.numberOfMatch = numberOfMatch;
         this.prizeMoney = prizeMoney;
         this.isMatchingBonus = isMatchingBonus;
     }
 
     public static Prize valueOf(int numberOfMatch, boolean isMatchingBonus) {
-        for (Prize prize : values()) {
-            if (prize.isEqual(numberOfMatch, isMatchingBonus)) {
-                return prize;
-            }
-        }
-        return NO_PRIZE;
+        return Arrays.stream(values())
+                .filter(prize -> prize.isEqual(numberOfMatch, isMatchingBonus))
+                .findFirst()
+                .orElse(NO_PRIZE);
     }
 
     private boolean isEqual(int numberOfMatch, boolean isMatchingBonus) {
-        return this.numberOfMatch == numberOfMatch && this.isMatchingBonus == isMatchingBonus;
+        if (numberOfMatch == Prize.SECOND_PRIZE.numberOfMatch) {
+            return this.numberOfMatch == numberOfMatch && this.isMatchingBonus == isMatchingBonus;
+        }
+        return this.numberOfMatch == numberOfMatch;
     }
 
-    public long calculatePrizeMoneyBy(int count) {
+    public int calculatePrizeMoneyBy(int count) {
         return count * prizeMoney;
     }
 

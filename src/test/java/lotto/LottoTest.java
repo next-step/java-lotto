@@ -1,17 +1,19 @@
 package lotto;
 
+import lotto.generator.AutoLottoGenerator;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LottoTest {
+
     @Test(expected = IllegalArgumentException.class)
     public void 로또생성_번호중복예외발생() {
         // given
         String invalidNumbers = "1, 1, 2, 3, 4, 5";
         // when
-        Lotto lotto = new FixedLottoGenerator(invalidNumbers).generateLotto();
+        Lotto lotto = new AutoLottoGenerator(1).generateLotto(invalidNumbers);
         // then
     }
 
@@ -20,7 +22,7 @@ public class LottoTest {
         // given
         String invalidNumbers = "1, 7, 8, 2, 3, 4, 5";
         // when
-        Lotto lotto = new FixedLottoGenerator(invalidNumbers).generateLotto();
+        Lotto lotto = new AutoLottoGenerator(1).generateLotto(invalidNumbers);
         // then
     }
 
@@ -29,10 +31,11 @@ public class LottoTest {
         // given
         String currentLottoNumbers = "1, 2, 3, 4, 5, 6";
         String previousLottoNumbers = "1, 3, 5, 7, 9, 11";
-        Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
-        WinningLotto previousLotto = new FixedLottoGenerator(previousLottoNumbers).generateWinningLotto();
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(1);
+        Lotto currentLotto = autoLottoGenerator.generateLotto(currentLottoNumbers);
+        WinningLotto previousLotto = autoLottoGenerator.generateWinningLotto(previousLottoNumbers, 12);
         // when
-        int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
+        int numberOfSame = previousLotto.countNumberOfMatch(currentLotto);
         // then
         assertThat(numberOfSame).isEqualTo(3);
     }
@@ -40,9 +43,8 @@ public class LottoTest {
     @Test
     public void 로또랜덤생성() {
         // given
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
         // when
-        PurchaseHistory purchaseHistory = new PurchaseHistory(3000, randomLottoGenerator);
+        Lottos purchaseHistory = new AutoLottoGenerator(3).generateLottos();
         System.out.println(purchaseHistory.getLottos());
         // then
     }
@@ -53,11 +55,12 @@ public class LottoTest {
         String currentLottoNumbers = "1, 2, 3, 4, 5, 6";
         String previousLottoNumbers = "1, 2, 3, 4, 5, 7";
         int bonusNumber = 6;
-        Lotto currentLotto = new FixedLottoGenerator(currentLottoNumbers).generateLotto();
-        WinningLotto previousLotto = new FixedLottoGenerator(previousLottoNumbers, bonusNumber).generateWinningLotto();
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(1);
+        Lotto currentLotto = autoLottoGenerator.generateLotto(currentLottoNumbers);
+        WinningLotto previousLotto = autoLottoGenerator.generateWinningLotto(previousLottoNumbers, bonusNumber);
         // when
-        int numberOfSame = currentLotto.countNumberOfMatch(previousLotto);
-        boolean isMatchingBonus = currentLotto.isAnyMatchingBonusBall(previousLotto);
+        int numberOfSame = previousLotto.countNumberOfMatch(currentLotto);
+        boolean isMatchingBonus = previousLotto.isAnyMatchingBonusBall(currentLotto);
         // then
         assertThat(numberOfSame).isEqualTo(5);
         assertThat(isMatchingBonus).isTrue();
