@@ -13,9 +13,10 @@ public class LottoResult {
         this.lottos = lottos;
         this.lottoResults = new HashMap<>();
         initMap();
-        lottos.stream()
-                .map(lotto -> lotto.getLottoResultStatus(winningNumbers))
-                .forEach(this::updateLottoResult);
+
+        for (Lotto lotto : lottos) {
+            updateLottoResult(winningNumbers.result(lotto));
+        }
     }
 
     public List<Lotto> getLottos(){

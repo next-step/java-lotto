@@ -3,13 +3,19 @@ package domain;
 import java.util.Objects;
 
 public class Number {
+    private static final int MININUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 46;
     private Integer number;
 
-    public Number(Integer number) {
-        if (number < 1 || number > 46) {
+    private Number(Integer number) {
+        if (number < MININUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException();
         }
         this.number = number;
+    }
+
+    public static Number createInstance(Integer integerNumber) {
+        return new Number(integerNumber);
     }
 
     @Override

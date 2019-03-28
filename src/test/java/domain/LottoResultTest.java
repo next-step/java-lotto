@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoResultTest {
     private static final int TOTAL_AMOUNT = 1_000;
-    private static final String INPUT_WINNING_NUMBERS = "1,3,5,6,7,8";
+    private static final String[] INPUT_WINNING_NUMBERS = new String[]{"1","3","5","6","7","8"};
     private static final int INPUT_BONUs_NUMBER = 9;
     private LottoResult lottoResult;
     private Money money;
@@ -26,9 +26,9 @@ public class LottoResultTest {
         List<Integer> lottoNumbers2= Arrays.asList(9,10,11,12,13,14);
         List<Integer> lottoNumbers3= Arrays.asList(9,10,11,12,13,14);
 
-        LottoNumbers numbers1 = new LottoNumbers(lottoNumbers);
-        LottoNumbers numbers2 = new LottoNumbers(lottoNumbers2);
-        LottoNumbers numbers3 = new LottoNumbers(lottoNumbers3);
+        LottoNumbers numbers1 = LottoNumbers.createInstance(lottoNumbers);
+        LottoNumbers numbers2 = LottoNumbers.createInstance(lottoNumbers2);
+        LottoNumbers numbers3 = LottoNumbers.createInstance(lottoNumbers3);
         List<Lotto> lottos = Arrays.asList(new Lotto(numbers1), new Lotto(numbers2), new Lotto(numbers3));
 
         lottoResult = new LottoResult(lottos, new WinningLotto(INPUT_WINNING_NUMBERS, INPUT_BONUs_NUMBER));

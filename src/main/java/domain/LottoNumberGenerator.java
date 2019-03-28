@@ -21,7 +21,7 @@ public class LottoNumberGenerator {
             lottoNum.add(this.lottoRangeNumbers.get(i));
         }
 
-        return new LottoNumbers(lottoNum);
+        return LottoNumbers.createInstance(lottoNum);
     }
 
     private static List<Integer> makeLottoNumberRange() {

@@ -1,26 +1,41 @@
 package domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WinningLotto {
-    private int[] winningNumber;
-    private int bonusNumber;
+    private static final int BONUS_AVAILABLE_MATCH_COUNT = 5;
 
-    public WinningLotto(String inputWinnigNumber, int bonusNumber) {
-        this.winningNumber = convertToInt(inputWinnigNumber);
-        this.bonusNumber = bonusNumber;
+    private LottoNumbers winningNumber;
+    private Number bonusNumber;
+
+    public WinningLotto(String[] inputWinnigNumber, int bonusNumber) {
+        this.winningNumber = convertToLottoNumbers(inputWinnigNumber);
+        this.bonusNumber = Number.createInstance(bonusNumber);
     }
 
-    private int[] convertToInt(String inputWinningNumber) {
-        String[] stringWinningNumbers = inputWinningNumber.replace(" ","").split(",");
-        return Arrays.stream(stringWinningNumbers).mapToInt(str-> Integer.parseInt(str)).toArray();
+    private LottoNumbers convertToLottoNumbers(String[] inputWinningNumber) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String str: inputWinningNumber) {
+            numbers.add(Integer.parseInt(str));
+        }
+
+        return LottoNumbers.createInstance(numbers);
     }
 
-    public int[] getWinningNumber() {
-        return winningNumber;
-    }
+    public LottoResultStatus result(Lotto lotto) { //1,2,3,4,5
+        int countainsWinningNumberCount = 0;
 
-    public int getBonusNumber() {
-        return bonusNumber;
+        for( Number number : winningNumber.getNumbers()) {
+            if(lotto.getLottoNumbers().contains(number)) {
+                countainsWinningNumberCount++;
+            }
+        }
+
+        if (countainsWinningNumberCount == BONUS_AVAILABLE_MATCH_COUNT && lotto.getLottoNumbers().contains(bonusNumber)) {
+            return  LottoResultStatus.findByMatchCount(countainsWinningNumberCount, true);
+        }
+
+        return LottoResultStatus.findByMatchCount(countainsWinningNumberCount, false);
     }
 }

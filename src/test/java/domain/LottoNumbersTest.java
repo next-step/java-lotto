@@ -14,16 +14,16 @@ public class LottoNumbersTest {
     @Before
     public void setUp() {
         List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-        lottoNumbers = new LottoNumbers(numbers);
+        lottoNumbers = LottoNumbers.createInstance(numbers);
     }
 
     @Test
     public void 로또번호에_winning번호_포함되어있음() {
-        assertThat(lottoNumbers.contains(1)).isEqualTo(true);
+        assertThat(lottoNumbers.contains(Number.createInstance(1))).isEqualTo(true);
     }
 
     @Test
     public void 로또번호에_winning번호_미포함되어있음() {
-        assertThat(lottoNumbers.contains(10)).isEqualTo(false);
+        assertThat(lottoNumbers.contains(Number.createInstance(10))).isEqualTo(false);
     }
 }

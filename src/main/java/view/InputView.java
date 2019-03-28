@@ -11,11 +11,11 @@ public class InputView {
         return inputAmount;
     }
 
-    public static String getWinningNumbers() {
+    public static String[] getWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String winningNumbers = scanner.nextLine();
-        return winningNumbers;
+        return winningNumbers.replace(" ","").split(",");
     }
 
     public static int getBonusNumber() {

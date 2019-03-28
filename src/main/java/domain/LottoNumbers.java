@@ -7,16 +7,21 @@ public class LottoNumbers {
     public static final int LOTTO_NUMBER_SIZE = 6;
     private List<Number> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+    private LottoNumbers(List<Integer> inputNumbers) {
+        List<Number> list = inputNumbers.stream().map(Number::createInstance).collect(Collectors.toList());
+        this.numbers = list;
+    }
+
+    public static LottoNumbers createInstance(List<Integer> inputNumbers) {
+        if (inputNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException();
         }
 
-        this.numbers = numbers.stream().map(Number::new).collect(Collectors.toList());
+        return new LottoNumbers(inputNumbers);
     }
 
-    public boolean contains(int number) {
-        return numbers.stream().map(num -> num.equals(new Number(number))).anyMatch(num -> num.equals(true));
+    public boolean contains(Number number) {
+        return numbers.stream().map(num -> num.equals(number)).anyMatch(num -> num.equals(true));
     }
 
     public String toString() {
@@ -25,5 +30,9 @@ public class LottoNumbers {
         numbers.forEach(number -> resultString.append(number.toString()+" "));
         resultString.append("]");
         return resultString.toString();
+    }
+
+    public List<Number> getNumbers() {
+        return numbers;
     }
 }
