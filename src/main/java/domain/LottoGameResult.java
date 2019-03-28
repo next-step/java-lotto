@@ -9,10 +9,10 @@ public class LottoGameResult {
 
     LottoGameResult() {
         gameResult = new HashMap<>();
-        gameResult.put(LottoProfit.fourth.getNumberOfMatch(), 0);
-        gameResult.put(LottoProfit.third.getNumberOfMatch(), 0);
-        gameResult.put(LottoProfit.second.getNumberOfMatch(), 0);
-        gameResult.put(LottoProfit.first.getNumberOfMatch(), 0);
+        gameResult.put(LottoProfit.FOURTH.getNumberOfMatch(), 0);
+        gameResult.put(LottoProfit.THIRD.getNumberOfMatch(), 0);
+        gameResult.put(LottoProfit.SECOND.getNumberOfMatch(), 0);
+        gameResult.put(LottoProfit.FIRST.getNumberOfMatch(), 0);
     }
 
     public void getMultipleResults(WinningLotto winningLotto, List<Lotto> userLottos) {

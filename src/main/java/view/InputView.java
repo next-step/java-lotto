@@ -32,7 +32,10 @@ public class InputView {
             speicifedNumbers.add(Integer.parseInt(input));
         }
 
-        winner = new WinningLotto(speicifedNumbers);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = scanner.nextInt();
+
+        winner = new WinningLotto(speicifedNumbers, bonusNumber);
         return winner;
     }
 

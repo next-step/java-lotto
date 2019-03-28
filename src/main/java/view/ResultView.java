@@ -12,10 +12,10 @@ public class ResultView {
 
     private final static Map<Integer, Integer> PROFIT_VALUE = new HashMap<>();
     static {
-        PROFIT_VALUE.put(LottoProfit.fourth.getNumberOfMatch(), LottoProfit.fourth.getPrizeMoney());
-        PROFIT_VALUE.put(LottoProfit.third.getNumberOfMatch(), LottoProfit.third.getPrizeMoney());
-        PROFIT_VALUE.put(LottoProfit.second.getNumberOfMatch(), LottoProfit.second.getPrizeMoney());
-        PROFIT_VALUE.put(LottoProfit.first.getNumberOfMatch(), LottoProfit.first.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.FOURTH.getNumberOfMatch(), LottoProfit.FOURTH.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.THIRD.getNumberOfMatch(), LottoProfit.THIRD.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.SECOND.getNumberOfMatch(), LottoProfit.SECOND.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.FIRST.getNumberOfMatch(), LottoProfit.FIRST.getPrizeMoney());
     }
 
     public static void printWinningStatistics(LottoGameResult result){
