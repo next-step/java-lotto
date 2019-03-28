@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class LotteryResult {
     private static final int ONE_GAME_MONEY = 1000;
     public static final int PERCENT_VALUE = 100;
     public static final double FLOATING_VALUE = 100.0;
-    private Map<RANK, Integer> resultDatas = new HashMap<>();
+    private Map<RANK, Integer> resultDatas = new LinkedHashMap<>();
     private double earningRates;
 
     public LotteryResult(List<RANK> comparedResults) {
