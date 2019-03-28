@@ -29,6 +29,10 @@ public class Money {
         return (amount / TICKET_PRICE) < manualTicketCount;
     }
 
+    public int getTotalTicketCount() {
+        return amount / TICKET_PRICE;
+    }
+
     public int getManualTicketCount() {
         return manualTicketCount;
     }
