@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.console;
 
 import java.util.Scanner;
 import lotto.domain.Lotto;
