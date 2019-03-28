@@ -2,10 +2,7 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Utils {
     public static int toInt(String purchase) {
@@ -41,5 +38,14 @@ public class Utils {
         }
 
         return null;
+    }
+
+    public static Set<LottoNumber> arraysToSet(Integer[] arrays) {
+        Set<LottoNumber> inputNumbers = new HashSet<>();
+        for(Integer number : arrays) {
+            inputNumbers.add(new LottoNumber(number));
+        }
+
+        return inputNumbers;
     }
 }
