@@ -8,13 +8,28 @@ import java.util.List;
 
 public class StringParseUtils {
 
-    public static LottoTicket parseToIntegerList(String inputNumber) {
+    public static LottoTicket parseToLottoTicket(String inputNumber) {
+        List<LottoNumber> winingNumbers = getLottoNumbers(inputNumber);
+
+        return new LottoTicket(winingNumbers);
+    }
+
+    private static List<LottoNumber> getLottoNumbers(String inputNumber) {
         List<LottoNumber> winingNumbers = new ArrayList<>();
         String[] split = inputNumber.trim().split(",");
         for (String str : split) {
             winingNumbers.add(LottoNumber.getBasicNumber(Integer.parseInt(str.trim())));
         }
-
-        return new LottoTicket(winingNumbers);
+        return winingNumbers;
     }
+
+    public static List<LottoTicket> parseToLottoTickets(String[] inputManualNumbers) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (String oneLineIsTicket : inputManualNumbers) {
+            List<LottoNumber> parseToNewInputNumbers = getLottoNumbers(oneLineIsTicket);
+            lottoTickets.add(new LottoTicket(parseToNewInputNumbers));
+        }
+        return lottoTickets;
+    }
+
 }
