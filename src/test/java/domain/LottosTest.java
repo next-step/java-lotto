@@ -1,8 +1,10 @@
 package domain;
 
 import org.junit.Test;
+import util.WinType;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,8 +18,8 @@ public class LottosTest {
                 Lotto.of(Numbers.of(34, 42, 18, 43, 1, 2))
         ));
 
-        LottoResult result = lottos.figure(4000, new WinningLotto(Numbers.of(5, 33, 1, 43, 41, 32), 12));
+        Map<WinType, Long> map = lottos.figure(new WinningLotto(Numbers.of(5, 33, 1, 43, 41, 32), 12));
 
-        assertThat(result.getYield()).isEqualTo(500000.0f);
+        assertThat(map.get(WinType.FIRST)).isEqualTo(1);
     }
 }

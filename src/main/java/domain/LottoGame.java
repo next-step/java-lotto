@@ -16,7 +16,7 @@ public class LottoGame {
     }
 
     public LottoResult figure(WinningLotto winningLotto) {
-        return lottos.figure(money, winningLotto);
+        return new LottoResult(money, lottos.figure(winningLotto));
     }
 
     public List<Lotto> getLottos() {

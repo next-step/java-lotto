@@ -31,11 +31,9 @@ public class Lottos {
         return lottos;
     }
 
-    LottoResult figure(int money, WinningLotto winningLotto) {
-        Map<WinType, Long> map = lottos.stream()
+    Map<WinType, Long> figure(WinningLotto winningLotto) {
+        return lottos.stream()
                 .map(it -> it.figure(winningLotto))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        return new LottoResult(money, map);
     }
 }
