@@ -14,7 +14,7 @@ public class ConsoleMain {
             inputManualValue = InputView.inputManualValue();
         }
 
-        OutputView.printPurchasedLotties(lotteryMachine.purchaseLotteries(new Money(inputMoney), inputManualValue, InputView.inputManualNumbers(inputManualValue)));
+        OutputView.printPurchasedLotties(lotteryMachine.purchaseLotteries(new Money(inputMoney, inputManualValue), InputView.inputManualNumbers(inputManualValue)));
 
         LotteryNumber winningNumber = new LotteryNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         LotteryResult lotteryResult = lotteryMachine.checkWinning(lotteryMachine.getLotteries(), new Lottery(winningNumber));

@@ -37,18 +37,18 @@ public class LotteryMachineTest {
 
     @Test
     public void 수동자동_섞어서구입() {
-        List<Lottery> result = lotteryMachine.purchaseLotteries(new Money(5000), 1, Fixture.manualNumbers);
+        List<Lottery> result = lotteryMachine.purchaseLotteries(new Money(5000, 1), Fixture.manualNumbers);
         assertThat(result.size()).isEqualTo(5);
         assertThat(result.get(4)).isEqualTo(Fixture.oneToSixLottery);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 낸돈보다_많이사려함_체크() {
-        lotteryMachine.purchaseLotteries(new Money(5000), 6, Fixture.manualNumbers);
+        lotteryMachine.purchaseLotteries(new Money(5000, 6), Fixture.manualNumbers);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void 수동개수랑_로또용지랑_안맞음_체크() {
-        lotteryMachine.purchaseLotteries(new Money(5000), 4, Fixture.manualNumbers);
+        lotteryMachine.purchaseLotteries(new Money(5000, 4), Fixture.manualNumbers);
     }
 }
