@@ -10,7 +10,7 @@ public class OutputView {
 
 
     public static void printTicketCount(Money money) {
-        System.out.println(money.getBuyTicketsCount() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + money.getManualTicketCount()+"개 "  +"자동으로 "+ money.getBuyAutoTicketsCount() + "개를 구매했습니다.");
     }
 
 
