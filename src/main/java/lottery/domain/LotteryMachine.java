@@ -14,15 +14,10 @@ public class LotteryMachine {
         return lotteries;
     }
 
-    public List<Lottery> purchaseLotteries(int inputMoney) {
-        for (int purchase = 0; purchase < new Money(inputMoney).purchaseCount(); purchase++) {
-            lotteries.add(purchaseLottery());
-        }
+    public List<Lottery> purchaseLotteries(Money purchaseMoney, List<List<Integer>> manualNumbers) {
+        lotteries.addAll(new RandomGenetator(purchaseMoney).generate());
+        lotteries.addAll( new ManualGenerator(manualNumbers, purchaseMoney).generate());
         return lotteries;
-    }
-
-    private Lottery purchaseLottery() {
-        return new Lottery();
     }
 
     public LotteryResult checkWinning(List<Lottery> lotteries, Lottery winningNumbers) {
