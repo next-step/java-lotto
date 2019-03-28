@@ -1,7 +1,9 @@
 package lotto.service;
 
-import lotto.*;
-import lotto.generator.LottoGenerator;
+import lotto.domain.Lottos;
+import lotto.domain.LottosResult;
+import lotto.domain.WinningLotto;
+import lotto.domain.generator.LottoGenerator;
 
 public class LottoGame {
     private static LottoGame lottoGame = new LottoGame();
@@ -17,7 +19,7 @@ public class LottoGame {
         return lottoGenerator.generateLottos();
     }
 
-    public LottosResult analyse(final Lottos purchasedLottos, final WinningLotto previousWinningLotto, final Money payment) {
-        return new LottosResult(purchasedLottos, previousWinningLotto, payment);
+    public LottosResult analyse(final Lottos purchasedLottos, final WinningLotto previousWinningLotto) {
+        return new LottosResult(purchasedLottos, previousWinningLotto);
     }
 }

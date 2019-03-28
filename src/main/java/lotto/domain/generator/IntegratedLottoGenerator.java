@@ -1,7 +1,7 @@
-package lotto.generator;
+package lotto.domain.generator;
 
-import lotto.LottoOrder;
-import lotto.Lottos;
+import lotto.domain.LottoOrder;
+import lotto.domain.Lottos;
 
 public class IntegratedLottoGenerator implements LottoGenerator {
     private int numberOfAutoLottos;

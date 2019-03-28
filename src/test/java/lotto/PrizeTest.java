@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Prize;
 import org.junit.Test;
 
 import java.util.HashMap;

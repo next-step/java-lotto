@@ -1,7 +1,8 @@
 package lotto.application;
 
-import lotto.*;
-import lotto.generator.IntegratedLottoGenerator;
+import lotto.domain.*;
+import lotto.domain.generator.IntegratedLottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -29,8 +30,8 @@ public class ConsoleApplication {
 
         String previousWinningLottoNumbers = InputView.inputPreviousWinningLotto(scanner);
         int bonusBallNumber = InputView.inputBonusBall(scanner);
-        WinningLotto previousWinningLotto = integeratedLottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
-        LottosResult lottosResult = lottoGame.analyse(purchasedLottos, previousWinningLotto, payment);
+        WinningLotto previousWinningLotto = LottoGenerator.generateWinningLotto(previousWinningLottoNumbers, bonusBallNumber);
+        LottosResult lottosResult = lottoGame.analyse(purchasedLottos, previousWinningLotto);
 
         OutputView.printStatisticsResult(lottosResult);
         scanner.close();
