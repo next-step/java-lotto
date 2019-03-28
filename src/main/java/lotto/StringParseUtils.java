@@ -8,7 +8,7 @@ import java.util.List;
 
 public class StringParseUtils {
 
-    public static LottoTicket parseToIntegerList(String inputNumber) {
+    public static LottoTicket parseToLottoTicket(String inputNumber) {
         List<LottoNumber> winingNumbers = getLottoNumbers(inputNumber);
 
         return new LottoTicket(winingNumbers);
@@ -23,7 +23,7 @@ public class StringParseUtils {
         return winingNumbers;
     }
 
-    public static List<LottoTicket> parseToIntegerList3(String[] inputManualNumbers) {
+    public static List<LottoTicket> parseToLottoTickets(String[] inputManualNumbers) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (String oneLineIsTicket : inputManualNumbers) {
             List<LottoNumber> parseToNewInputNumbers = getLottoNumbers(oneLineIsTicket);

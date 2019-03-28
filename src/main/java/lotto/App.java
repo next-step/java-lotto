@@ -22,7 +22,7 @@ public class App {
         //수동으로 구매할 번호를 입력해 주세요.
         String[] manualTicketNumbers = InputView.getManualTicketNumber(money.getManualTicketCount());
 
-        List<LottoTicket> manualTickets = StringParseUtils.parseToIntegerList3(manualTicketNumbers);
+        List<LottoTicket> manualTickets = StringParseUtils.parseToLottoTickets(manualTicketNumbers);
 
         //수동 자동 티켓 구매수 출력
         OutputView.printTicketCount(money);
@@ -35,7 +35,7 @@ public class App {
         OutputView.printBuyLottoTickets(buyLottoTickets);
 
         //지난주번호 입력
-        LottoTicket winningNumber = StringParseUtils.parseToIntegerList(InputView.getWinningNumber());
+        LottoTicket winningNumber = StringParseUtils.parseToLottoTicket(InputView.getWinningNumber());
 
         //보너스넘버 입력
         LottoNumber bonusBall = InputView.getBonusNumber();
