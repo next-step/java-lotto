@@ -42,6 +42,10 @@ public class LotteryNumber {
         this.bonusNumber = bonusNumber;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     public boolean isSizeCorrect(Collection value) {
         return value.size() != ONE_GAME_NUMBERS_SIZE;
     }
@@ -107,7 +111,7 @@ public class LotteryNumber {
         }
         return count;
     }
-    
+
     private boolean checkBonusNumber(LotteryNumber winningLotteryNumber, int count) {
         if(count == SECOND_RANK_CHECK_VALUE) {
             return isContains(winningLotteryNumber.bonusNumber);
