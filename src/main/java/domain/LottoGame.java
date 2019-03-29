@@ -5,13 +5,13 @@ import java.util.List;
 import static util.Constants.PRICE_OF_LOTTO;
 
 public class LottoGame {
-    private int money;
+    private Money money;
     private Lottos lottos;
 
     public LottoGame(int money) {
         assert money > PRICE_OF_LOTTO;
 
-        this.money = money;
+        this.money = Money.of(money);
         this.lottos = Lottos.createLottos(money);
     }
 
