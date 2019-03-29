@@ -28,13 +28,7 @@ public class Money {
         this.amount = amount;
     }
 
-    public int getTryAutoTicketsCount(int manualTicketCount) {
-        if (validManualTicketCount(manualTicketCount)) {
-            throw new IllegalArgumentException("수동구입 개수는 구입금액보다 많을 수 없습니다.");
-        }
-        this.manualTicketCount = manualTicketCount;
-        return (amount / TICKET_PRICE) - manualTicketCount;
-    }
+
 
 
     private boolean validAmount(int amount) {
@@ -51,6 +45,10 @@ public class Money {
 
     public int getManualTicketCount() {
         return manualTicketCount;
+    }
+
+    public int getAutoTicketCount() {
+        return this.amount / TICKET_PRICE - manualTicketCount;
     }
 
     public int getBuyAutoTicketsCount() {

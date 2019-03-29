@@ -19,17 +19,27 @@ public class WebService {
     }
 
     public static UserLottoTickets createUserLottoTickets(Money money, Request req) {
+
         String manualNumber = req.queryParams("manualNumber");
         String[] manualNumbers = manualNumber.split("\n");
         List<LottoTicket> manualTicket = StringParseUtils.parseToLottoTickets(manualNumbers);
         LottoMachine lottoMachine = new LottoMachine(new UserLottoTicketGenerator());
-        return lottoMachine.buyLottoTicket(money, manualTicket);
+        UserLottoTickets userLottoTickets = lottoMachine.buyLottoTicket(money);
+
+        lottoMachine.addManualTickets(manualTicket,userLottoTickets);
+
+        return userLottoTickets;
     }
 
-    public static Money createMoney(Request req) {
+    public static Money createMoney(Request req, int manualNumberCount) {
         String inputMoney = req.queryParams("inputMoney");
         int money = Integer.parseInt(inputMoney);
-        return new Money(money);
+        return new Money(money,manualNumberCount);
     }
 
+    public static int manualLottoCount(Request req) {
+        String manualNumber = req.queryParams("manualNumber");
+        String[] manualNumbers = manualNumber.split("\n");
+        return manualNumbers.length;
+    }
 }

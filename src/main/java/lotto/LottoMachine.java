@@ -12,18 +12,18 @@ public class LottoMachine {
         this.lottoNumGenerator = userLottoTicketGenerator;
     }
 
-    public UserLottoTickets buyLottoTicket(Money money, List<LottoTicket> manualTickets) {
+    public UserLottoTickets buyLottoTicket(Money money) {
         UserLottoTickets userLottoTickets = new UserLottoTickets();
-        addManualTickets(manualTickets, userLottoTickets);
 
-        int salesQuantity =  money.getTryAutoTicketsCount(manualTickets.size());
+        int salesQuantity =  money.getAutoTicketCount();
         for (int i = 0; i < salesQuantity; i++) {
             userLottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
         }
         return userLottoTickets;
     }
 
-    private void addManualTickets(List<LottoTicket> manualTickets, UserLottoTickets userLottoTickets) {
+
+    public void addManualTickets(List<LottoTicket> manualTickets, UserLottoTickets userLottoTickets) {
         for (LottoTicket manualTicket : manualTickets) {
             userLottoTickets.add(manualTicket);
         }

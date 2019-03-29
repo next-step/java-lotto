@@ -22,7 +22,8 @@ public class WebApp {
 
         post("/buyLotto", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            Money money = WebService.createMoney(req);
+
+            Money money = WebService.createMoney(req, WebService.manualLottoCount(req));
             UserLottoTickets userLottoTickets = WebService.createUserLottoTickets(money, req);
 
             req.session().attribute("userLottoTickets", userLottoTickets);
