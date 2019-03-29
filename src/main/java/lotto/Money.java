@@ -5,7 +5,7 @@ import java.util.Map;
 public class Money {
 
     private final int amount;
-    private final int manualTicketCount;
+    private int manualTicketCount;
 
     private static final int TICKET_PRICE = 1_000;
 
@@ -21,6 +21,16 @@ public class Money {
 
     }
 
+    public Money(int amount) {
+        if (validAmount(amount)) {
+            throw new IllegalArgumentException("구입 금액은 1_000 단위 입니다.");
+        }
+        this.amount = amount;
+    }
+
+
+
+
     private boolean validAmount(int amount) {
         return (amount % TICKET_PRICE) != 0;
     }
@@ -29,8 +39,16 @@ public class Money {
         return (amount / TICKET_PRICE) < manualTicketCount;
     }
 
+    public int getTotalTicketCount() {
+        return amount / TICKET_PRICE;
+    }
+
     public int getManualTicketCount() {
         return manualTicketCount;
+    }
+
+    public int getAutoTicketCount() {
+        return this.amount / TICKET_PRICE - manualTicketCount;
     }
 
     public int getBuyAutoTicketsCount() {

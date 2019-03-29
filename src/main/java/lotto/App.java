@@ -29,7 +29,8 @@ public class App {
 
         LottoMachine lottoMachine = new LottoMachine(new UserLottoTicketGenerator());
 
-        UserLottoTickets buyLottoTickets = lottoMachine.buyLottoTicket(money,manualTickets);
+        UserLottoTickets buyLottoTickets = lottoMachine.buyLottoTicket(money);
+        lottoMachine.addManualTickets(manualTickets,buyLottoTickets);
 
         ////수동으로  + 자동 구매 티켓 번호 출력
         OutputView.printBuyLottoTickets(buyLottoTickets);

@@ -17,7 +17,7 @@ public class MoneyTest {
     @Test
     public void 티켓_구매_수() {
         Money money = new Money(3000);
-        assertThat(money.getBuyTicketsCount()).isEqualTo(3);
+        assertThat(money.getTotalTicketCount()).isEqualTo(3);
     }
 
     @Before
