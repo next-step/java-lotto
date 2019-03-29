@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.Lottos;
-import lotto.LottosResult;
-import lotto.Prize;
+import lotto.domain.Lottos;
+import lotto.domain.LottosResult;
+import lotto.domain.Prize;
 
 import java.text.DecimalFormat;
 import java.text.MessageFormat;

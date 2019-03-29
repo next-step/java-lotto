@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Set;
 
@@ -31,6 +31,10 @@ public class Lotto {
 
     @Override
     public String toString() {
+        return numbers + "";
+    }
+
+    public String getNumbers() {
         return numbers + "";
     }
 }

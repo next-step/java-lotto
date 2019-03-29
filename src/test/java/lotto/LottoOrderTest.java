@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoOrder;
+import lotto.domain.Money;
 import org.junit.Test;
 
 import java.util.ArrayList;

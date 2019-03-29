@@ -1,11 +1,15 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Map;
 
 public class Money {
+    public static int ZERO = 0;
     private int amount;
 
     public Money(int amount) {
+        if (amount <= ZERO) {
+            throw new IllegalArgumentException("금액은 음수 또는 0일 수 없습니다.");
+        }
         this.amount = amount;
     }
 

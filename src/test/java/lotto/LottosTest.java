@@ -1,7 +1,8 @@
 package lotto;
 
-import lotto.generator.AutoLottoGenerator;
-import lotto.generator.LottoGenerator;
+import lotto.domain.Lottos;
+import lotto.domain.generator.AutoLottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

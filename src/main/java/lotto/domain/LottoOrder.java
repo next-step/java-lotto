@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
@@ -32,9 +32,5 @@ public class LottoOrder {
 
     public List<String> getManualLottos() {
         return manualLottos;
-    }
-
-    public double calculateRateOfReturn(Money addTotalPrizeMoney) {
-        return payment.calculateRateOfReturn(addTotalPrizeMoney);
     }
 }
