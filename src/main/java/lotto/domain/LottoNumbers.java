@@ -37,15 +37,13 @@ public class LottoNumbers {
     }
 
     private int contains(LottoNumber lottoNumber) {
-        int result = MATCH_COUNT_INIT;
-        for(LottoNumber number : lottoNumbers) {
-            result += number.compareNumber(lottoNumber);
-        }
-        return result;
+        return (int) lottoNumbers.stream()
+                .filter(number -> number.compareNumber(lottoNumber) > 0)
+                .count();
     }
 
-    boolean isMatchBonus(LottoNumber bonusNumber) {
-        int result = contains(bonusNumber);
+    boolean isMatchBonus(WinningLottoNumbers winningLottoNumbers) {
+        int result = winningLottoNumbers.containBonus(lottoNumbers);
         return (result == MATCH_COUNT_ONE);
     }
 

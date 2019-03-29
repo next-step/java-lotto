@@ -3,12 +3,9 @@ package lotto;
 import lotto.domain.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Utils {
-    public static int toInt(String purchase) {
-        return Integer.parseInt(purchase);
-    }
-
     public static String[] stringSplitWithDelimiter(String original, String delimiter) {
         original = original.replaceAll("\\s", "");
         return original.split(delimiter);
@@ -17,7 +14,7 @@ public class Utils {
     public static String printLottoNumbers(Set<LottoNumber> lottoNumbers) {
         List<Integer> sortNumbers = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            sortNumbers.add(Utils.toInt(lottoNumber.toString()));
+            sortNumbers.add(Integer.parseInt(lottoNumber.toString()));
         }
         Collections.sort(sortNumbers);
         if (lottoNumbers == null)
@@ -41,11 +38,9 @@ public class Utils {
     }
 
     public static Set<LottoNumber> arraysToSet(Integer[] arrays) {
-        Set<LottoNumber> inputNumbers = new HashSet<>();
-        for(Integer number : arrays) {
-            inputNumbers.add(new LottoNumber(number));
-        }
-
-        return inputNumbers;
+        Set<LottoNumber> inputNumbres = Arrays.stream(arrays)
+                .map(LottoNumber::new).collect(Collectors.toSet());
+        return inputNumbres;
     }
+
 }

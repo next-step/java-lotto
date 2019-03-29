@@ -18,8 +18,9 @@ public class LottoResultTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(new LottoNumbers(new Integer[]{1, 2, 3, 7, 8, 10})));
         LottoNumber bonusNumber = new LottoNumber(10);
-        LottoResult lottoResult = new LottoResult(lottos, luckyNumbers, bonusNumber);
-        double result = lottoResult.earningsRate(quantity);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(luckyNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningLottoNumbers);
+        double result = lottoResult.earningsRate();
         assertThat(result).isEqualTo(3000);
     }
 
@@ -29,7 +30,8 @@ public class LottoResultTest {
         lottos.add(new Lotto(new LottoNumbers(new Integer[]{1, 2, 3, 4, 5, 6})));
         LottoNumbers luckyNumbers = new LottoNumbers(new Integer[]{1, 2, 3, 7, 8, 9});
         LottoNumber bonusNumber = new LottoNumber(10);
-        LottoResult lottoResult = new LottoResult(lottos, luckyNumbers, bonusNumber);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(luckyNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningLottoNumbers);
         int count = lottoResult.matchLottoWithBonusCount(3, false);
         assertThat(count).isEqualTo(1);
     }
@@ -40,7 +42,8 @@ public class LottoResultTest {
         LottoNumber bonusNumber = new LottoNumber(10);
         lottos.add(new Lotto(new LottoNumbers(new Integer[]{1, 2, 3, 7, 8, 10})));
         LottoNumbers luckyNumbers = new LottoNumbers(new Integer[]{1, 2, 3, 7, 8, 9});
-        LottoResult lottoResult = new LottoResult(lottos, luckyNumbers, bonusNumber);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(luckyNumbers, bonusNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningLottoNumbers);
         int count = lottoResult.matchLottoWithBonusCount(5, true);
         assertThat(count).isEqualTo(1);
     }

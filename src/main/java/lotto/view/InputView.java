@@ -16,7 +16,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String inputMoney = scanner.nextLine();
 
-        Money money = new Money(Utils.toInt(inputMoney));
+        Money money = new Money(Integer.parseInt(inputMoney));
         int quantity = money.purchaseQuantity();
         System.out.println(quantity + "개를 구매했습니다.");
         return money;
@@ -30,7 +30,7 @@ public class InputView {
         String[] winnerStringNumbers = Utils.stringSplitWithDelimiter(winner, ",");
         List<Integer> winnerNumbers = new ArrayList<>();
         for (String winnerNumber : winnerStringNumbers) {
-            winnerNumbers.add(Utils.toInt(winnerNumber));
+            winnerNumbers.add(Integer.parseInt(winnerNumber));
         }
 
         return new LottoNumbers(winnerNumbers.toArray(new Integer[0]));
@@ -41,6 +41,6 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String bonusBall = scanner.nextLine();
-        return new LottoNumber(Utils.toInt(bonusBall));
+        return new LottoNumber(Integer.parseInt(bonusBall));
     }
 }

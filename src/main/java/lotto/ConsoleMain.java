@@ -21,8 +21,9 @@ public class ConsoleMain {
 
 
         LottoNumbers luckyNumbers = inputView.lastWeekLuckyNumbers();
-        LottoResult lottoResult = new LottoResult(lottos, luckyNumbers, bonusBall);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(luckyNumbers, bonusBall);
+        LottoResult lottoResult = new LottoResult(lottos, winningLottoNumbers);
         resultView.printLottoResult(lottoResult);
-        resultView.printEarningsRate(lottoResult.earningsRate(quantity));
+        resultView.printEarningsRate(lottoResult.earningsRate());
     }
 }

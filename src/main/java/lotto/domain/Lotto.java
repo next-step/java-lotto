@@ -12,22 +12,18 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public int matchCount(LottoNumbers luckyNumbers) {
-        return lottoNumbers.matchCount(luckyNumbers);
+    public int matchCount(WinningLottoNumbers winningLottoNumbers) {
+        return winningLottoNumbers.matchCount(lottoNumbers);
     }
 
-    public WinningType getPrize(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
-        return WinningType.findByMatchCountAndMatchBonus(matchCount(luckyNumbers), isCheckMatchBonus(luckyNumbers, bonusNumber));
+    public WinningType getWinningType(WinningLottoNumbers winningLottoNumbers) {
+        int matchCount = winningLottoNumbers.matchCount(lottoNumbers);
+        return WinningType.findByMatchCountAndMatchBonus(matchCount, isCheckMatchBonus(matchCount, winningLottoNumbers));
     }
 
-    public WinningType getRank(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
-        return WinningType.findByMatchCountAndMatchBonus(matchCount(luckyNumbers), isCheckMatchBonus(luckyNumbers, bonusNumber));
-    }
-
-    public boolean isCheckMatchBonus(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
-        int matchCount = lottoNumbers.matchCount(luckyNumbers);
+    public boolean isCheckMatchBonus(int matchCount, WinningLottoNumbers winningLottoNumbers) {
         if(matchCount == CHECK_LOTTO_MATCH_COUNT) {
-            return lottoNumbers.isMatchBonus(bonusNumber);
+            return lottoNumbers.isMatchBonus(winningLottoNumbers);
         }
         return false;
     }
