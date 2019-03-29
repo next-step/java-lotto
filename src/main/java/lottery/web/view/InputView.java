@@ -12,10 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lottery.view.InputView.replace;
-import static lottery.view.InputView.split;
-import static lottery.view.InputView.toIntegers;
-
 public class InputView {
 
     private static final String LINE_SEPARATOR = "\r\n";
@@ -25,8 +21,8 @@ public class InputView {
     }
 
     public static List<LotteryTicket> inputSelectTickets(Request req) {
-        return Arrays.stream(splitLine(replace(req.queryParams("manualNumber"))))
-                .map(line -> new LotteryTicket(toIntegers(split(line))))
+        return Arrays.stream(splitLine((req.queryParams("manualNumber"))))
+                .map(line -> LotteryTicket.generate(line))
                 .collect(Collectors.toList());
     }
 
@@ -38,10 +34,12 @@ public class InputView {
         NumbersGenerator generator = new BoundedUniqueRandomNumbersGenerator(LotteryNumber.LOWER_BOUND_INCLUSIVE, LotteryNumber.UPPER_BOUND_INCLUSIVE);
         List<Integer> list = generator.nextNumbers(LotteryTicket.NUMBERS_COUNT + 1);
 
-        List<Integer> winningNumbers = list.stream()
-                .limit(LotteryTicket.NUMBERS_COUNT)
-                .collect(Collectors.toList());
 
-        return new WinningTicket(winningNumbers, list.get(list.size() - 1));
+        LotteryTicket winningNumbersTicket = new LotteryTicket(list.stream()
+                .limit(LotteryTicket.NUMBERS_COUNT)
+                .collect(Collectors.toList()));
+
+        LotteryNumber bonusNumber = LotteryNumber.of(list.get(list.size() - 1));
+        return new WinningTicket(winningNumbersTicket, bonusNumber);
     }
 }
