@@ -1,16 +1,14 @@
 package lottery.domain;
 
-import java.util.List;
-
 public class WinningTicket {
 
     private LotteryTicket winningNumbersTicket;
 
     private LotteryNumber bonusNumber;
 
-    public WinningTicket(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbersTicket = new LotteryTicket(winningNumbers);
-        this.bonusNumber = LotteryNumber.of(bonusNumber);
+    public WinningTicket(LotteryTicket ticket, LotteryNumber bonusNumber) {
+        this.winningNumbersTicket = ticket;
+        this.bonusNumber = bonusNumber;
     }
 
     public LotteryRank raffle(LotteryTicket ticket) {
