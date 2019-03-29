@@ -11,11 +11,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryWinningStatisticsTest {
 
+    final LotteryNumber bonusNumber = LotteryNumber.of(10);
+    final WinningTicket winningTicket =
+            new WinningTicket(LotteryTicket.generate("1, 2, 3, 4, 5, 6"), bonusNumber);
+
+    final LotteryTicket losingTicket = LotteryTicket.generate("11, 12, 13, 14, 15, 16");
+
     @Test
     public void test_티켓_10개_당첨_없음() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        List<LotteryTicket> myTickets = createTickets(Arrays.asList(),
-                10, Arrays.asList(11, 12, 13, 14, 15, 16));
+        List<LotteryTicket> myTickets = createTicketsWithLosingTickets(
+                Arrays.asList(), 10);
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
         assertThat(statistics.countRank(LotteryRank.NONE).getAmount())
@@ -27,11 +32,9 @@ public class LotteryWinningStatisticsTest {
 
     @Test
     public void test_티켓_10개중_1등_1개() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket firstRankTicket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        List<LotteryTicket> myTickets = createTickets(Arrays.asList(firstRankTicket),
-                9, Arrays.asList(11, 12, 13, 14, 15, 16));
+        LotteryTicket firstRankTicket = LotteryTicket.generate("1, 2, 3, 4, 5, 6");
+        List<LotteryTicket> myTickets = createTicketsWithLosingTickets(
+                Arrays.asList(firstRankTicket), 9);
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
@@ -46,11 +49,9 @@ public class LotteryWinningStatisticsTest {
 
     @Test
     public void test_티켓_10개중_2등_1개() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket secondRankTicket = new LotteryTicket(Arrays.asList(2, 3, 4, 5, 6, 10));
-
-        List<LotteryTicket> myTickets = createTickets(Arrays.asList(secondRankTicket),
-                9, Arrays.asList(11, 12, 13, 14, 15, 16));
+        LotteryTicket secondRankTicket = LotteryTicket.generate("2, 3, 4, 5, 6, 10");
+        List<LotteryTicket> myTickets = createTicketsWithLosingTickets(
+                Arrays.asList(secondRankTicket), 9);
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
@@ -65,10 +66,9 @@ public class LotteryWinningStatisticsTest {
 
     @Test
     public void test_티켓_10개중_3등_1개() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket thirdRankTicket = new LotteryTicket(Arrays.asList(2, 3, 4, 5, 6, 7));
-        List<LotteryTicket> myTickets = createTickets(Arrays.asList(thirdRankTicket),
-                9, Arrays.asList(11, 12, 13, 14, 15, 16));
+        LotteryTicket thirdRankTicket = LotteryTicket.generate("2, 3, 4, 5, 6, 7");
+        List<LotteryTicket> myTickets = createTicketsWithLosingTickets(
+                Arrays.asList(thirdRankTicket), 9);
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
@@ -83,10 +83,9 @@ public class LotteryWinningStatisticsTest {
 
     @Test
     public void test_티켓_10개중_4등_1개() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket fourthRankTicket = new LotteryTicket(Arrays.asList(3, 4, 5, 6, 7, 8));
-        List<LotteryTicket> myTickets = createTickets(Arrays.asList(fourthRankTicket),
-                9, Arrays.asList(11, 12, 13, 14, 15, 16));
+        LotteryTicket fourthRankTicket = LotteryTicket.generate("3, 4, 5, 6, 7, 8");
+        List<LotteryTicket> myTickets = createTicketsWithLosingTickets(
+                Arrays.asList(fourthRankTicket), 9);
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
@@ -101,10 +100,9 @@ public class LotteryWinningStatisticsTest {
 
     @Test
     public void test_티켓_10개중_5등_1개() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket fifthRankTicket = new LotteryTicket(Arrays.asList(4, 5, 6, 7, 8, 9));
-        List<LotteryTicket> myTickets = createTickets(Arrays.asList(fifthRankTicket),
-                9, Arrays.asList(11, 12, 13, 14, 15, 16));
+        LotteryTicket fifthRankTicket = LotteryTicket.generate("4, 5, 6, 7, 8, 9");
+        List<LotteryTicket> myTickets = createTicketsWithLosingTickets(
+                Arrays.asList(fifthRankTicket), 9);
 
         LotteryWinningStatistics statistics = new LotteryWinningStatistics(winningTicket, myTickets);
 
@@ -117,9 +115,9 @@ public class LotteryWinningStatisticsTest {
                 .isEqualTo(0.50);
     }
 
-    private List<LotteryTicket> createTickets(List<LotteryTicket> designatedNumbersTicket, int losingTicketSize, List<Integer> losingNumbers) {
+    private List<LotteryTicket> createTicketsWithLosingTickets(List<LotteryTicket> designatedNumbersTicket, int losingTicketSize) {
         final List<LotteryTicket> result = IntStream.range(0, losingTicketSize)
-                .mapToObj(i -> new LotteryTicket(losingNumbers))
+                .mapToObj(i -> losingTicket)
                 .collect(Collectors.toList());
 
         result.addAll(designatedNumbersTicket);
