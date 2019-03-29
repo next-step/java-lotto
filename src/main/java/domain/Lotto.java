@@ -1,63 +1,55 @@
 package domain;
 
-import util.WinType;
+import com.sun.deploy.util.StringUtils;
 
-import java.util.HashSet;
-import java.util.Random;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static util.Constants.LOTTO_NUMBER;
-import static util.Constants.LOTTO_NUMBER_RANGE_HIGH;
 
 public class Lotto {
-    private static final Random RANDOM = new Random();
+    private Set<LottoNo> numbers;
 
-    private Numbers numbers;
-    private Integer bonus;
-
-    private Lotto(Numbers numbers, int bonus) {
-        assert isValidBonus(numbers, bonus);
+    private Lotto(Set<LottoNo> numbers) {
+        assert numbers.size() == LOTTO_NUMBER;
 
         this.numbers = numbers;
-        this.bonus = bonus;
     }
 
-    public static Lotto of(Numbers numbers, int bonus) {
-        return new Lotto(numbers, bonus);
+    public static Lotto of(int... numbers) {
+        Set<LottoNo> numberSet = Arrays.stream(numbers)
+                .mapToObj(it -> LottoNo.of(it))
+                .collect(Collectors.toSet());
+
+        return new Lotto(numberSet);
     }
 
-    public static Lotto createAuto() {
-        return new Lotto(createNumbers(), createBonus());
+    public static Lotto of(String[] numbers) {
+        Set<LottoNo> numberSet = Arrays.stream(numbers)
+                .mapToInt(it -> Integer.parseInt(StringUtils.trimWhitespace(it)))
+                .mapToObj(it -> LottoNo.of(it))
+                .collect(Collectors.toSet());
+
+        return new Lotto(numberSet);
     }
 
-    boolean isValidBonus(Numbers numbers, int bonus) {
-        return !numbers.hasNumber(bonus);
+    long count(Lotto numbers) {
+        return this.numbers.stream()
+                .filter(it -> numbers.hasNumber(it))
+                .count();
     }
 
-    public WinType figure(Numbers lotteryNumbers) {
-        long count = this.numbers.sameNumberCount(lotteryNumbers);
-        if (count == WinType.THIRD.getCount() && lotteryNumbers.hasNumber(bonus)) {
-            return WinType.SECOND;
-        }
-
-        return WinType.findByCount(count);
+    boolean hasNumber(LottoNo number) {
+        return this.numbers.contains(number);
     }
 
-    public Numbers getNumbers() {
-        return this.numbers;
+    boolean hasNumber(int number) {
+        return this.numbers.contains(number);
     }
 
-    private static Numbers createNumbers() {
-        Set<Integer> numbers = new HashSet<>();
-        while (numbers.size() < LOTTO_NUMBER) {
-            numbers.add(createBonus());
-        }
-        int[] numbersArray = numbers.stream().mapToInt(Number::intValue).toArray();
-
-        return Numbers.of(numbersArray);
-    }
-
-    private static int createBonus() {
-        return RANDOM.nextInt(LOTTO_NUMBER_RANGE_HIGH) + 1;
+    @Override
+    public String toString() {
+        return this.numbers.toString();
     }
 }

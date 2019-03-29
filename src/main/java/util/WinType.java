@@ -29,7 +29,7 @@ public enum WinType {
         return LOSE;
     }
 
-    public long getCount() {
-        return this.count;
+    public boolean isThird() {
+        return this.count == 5;
     }
 }

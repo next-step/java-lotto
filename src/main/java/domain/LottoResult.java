@@ -5,10 +5,15 @@ import util.WinType;
 import java.util.Map;
 
 public class LottoResult {
-    private long money;
+    private Money money;
     private Map<WinType, Long> resultMap;
 
-    LottoResult(long money, Map<WinType, Long> result) {
+    LottoResult(int money, Map<WinType, Long> result) {
+        this.money = Money.of(money);
+        this.resultMap = result;
+    }
+
+    LottoResult(Money money, Map<WinType, Long> result) {
         this.money = money;
         this.resultMap = result;
     }
@@ -19,12 +24,12 @@ public class LottoResult {
     }
 
     public float getYield() {
-        return getWinMoney() / money;
+        return money.getYield(getWinMoney());
     }
 
-    private int getWinMoney() {
-        return resultMap.entrySet().stream()
+    private Money getWinMoney() {
+        return Money.of(resultMap.entrySet().stream()
                 .mapToInt(it -> it.getKey().calculatePrize(it.getValue()))
-                .sum();
+                .sum());
     }
 }

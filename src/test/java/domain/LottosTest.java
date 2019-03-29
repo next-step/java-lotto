@@ -1,8 +1,10 @@
 package domain;
 
 import org.junit.Test;
+import util.WinType;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,14 +12,36 @@ public class LottosTest {
     @Test
     public void 로또_당첨_확인() {
         Lottos lottos = new Lottos(Arrays.asList(
-                Lotto.of(Numbers.of(15, 22, 18, 43, 41, 2), 4),
-                Lotto.of(Numbers.of(5, 33, 1, 43, 41, 32), 22),
-                Lotto.of(Numbers.of(2, 32, 18, 4, 42, 6), 11),
-                Lotto.of(Numbers.of(34, 42, 18, 43, 1, 2), 24)
+                Lotto.of(15, 22, 18, 43, 41, 2),
+                Lotto.of(5, 33, 1, 43, 41, 32),
+                Lotto.of(2, 32, 18, 4, 42, 6),
+                Lotto.of(34, 42, 18, 43, 1, 2)
         ));
 
-        LottoResult result = lottos.figure(4000, Numbers.of(5, 33, 1, 43, 41, 32));
+        Map<WinType, Long> map = lottos.figure(new WinningLotto(Lotto.of(5, 33, 1, 43, 41, 32), LottoNo.of(12)));
 
-        assertThat(result.getYield()).isEqualTo(500000.0f);
+        assertThat(map.get(WinType.FIRST)).isEqualTo(1);
+    }
+
+
+    @Test
+    public void 문자로_입력시_정상동작() {
+        String input = "1,2,3,4,5,6";
+        Lotto numbers = Lotto.of(input.split(","));
+
+        assertThat(numbers.hasNumber(LottoNo.of((1)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((2)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((3)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((4)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((5)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((6)))).isTrue();
+    }
+
+    @Test
+    public void 같은_번호_갯수_카운트() {
+        Lotto numbers = Lotto.of(1, 2, 3, 4, 5, 6);
+        Lotto newNumbers = Lotto.of(1, 2, 3, 4, 5, 10);
+
+        assertThat(numbers.count(newNumbers)).isEqualTo(5);
     }
 }
