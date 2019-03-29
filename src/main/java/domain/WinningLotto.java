@@ -3,18 +3,18 @@ package domain;
 import util.WinType;
 
 public class WinningLotto {
-    private Numbers numbers;
+    private Lotto lotto;
     private Integer bonus;
 
-    public WinningLotto(Numbers numbers, Integer bonus) {
-        assert !numbers.hasNumber(bonus);
+    public WinningLotto(Lotto lotto, int bonus) {
+        assert !lotto.hasNumber(bonus);
 
-        this.numbers = numbers;
+        this.lotto = lotto;
         this.bonus = bonus;
     }
 
-    WinType figure(Numbers numbers) {
-        long count = this.numbers.count(numbers);
+    WinType figure(Lotto numbers) {
+        long count = this.lotto.count(numbers);
         WinType type = WinType.findByCount(count);
 
         if (type.isThird() && numbers.hasNumber(bonus)) {

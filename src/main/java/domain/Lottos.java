@@ -21,7 +21,7 @@ public class Lottos {
     static Lottos createLottos(int money) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money / PRICE_OF_LOTTO; i++) {
-            lottos.add(Lotto.of(Numbers.of(RandomUtils.createNumbers())));
+            lottos.add(Lotto.of(RandomUtils.createNumbers()));
         }
 
         return new Lottos(lottos);
@@ -33,7 +33,7 @@ public class Lottos {
 
     Map<WinType, Long> figure(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(it -> it.figure(winningLotto))
+                .map(it -> winningLotto.figure(it))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }

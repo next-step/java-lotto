@@ -2,7 +2,6 @@ package view;
 
 import domain.LottoGame;
 import domain.LottoResult;
-import domain.Numbers;
 import domain.WinningLotto;
 
 public class ConsoleMain {

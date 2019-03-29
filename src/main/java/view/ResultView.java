@@ -12,7 +12,7 @@ public class ResultView {
     }
 
     private static void printLotto(Lotto lotto) {
-        System.out.println(lotto.getNumbers());
+        System.out.println(lotto);
     }
 
     static void printResult(LottoResult result) {

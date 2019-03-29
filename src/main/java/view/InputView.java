@@ -1,6 +1,6 @@
 package view;
 
-import domain.Numbers;
+import domain.Lotto;
 import domain.WinningLotto;
 
 import java.util.Scanner;
@@ -22,7 +22,7 @@ public class InputView {
     static WinningLotto getWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputWinningNumbers = scanner.nextLine();
-        Numbers numbers = Numbers.of(inputWinningNumbers.split(","));
+        Lotto numbers = Lotto.of(inputWinningNumbers.split(","));
 
         System.out.println("보너스 볼을 입력해 주세요.");
         String inputBonus = scanner.nextLine();
