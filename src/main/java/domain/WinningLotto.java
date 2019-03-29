@@ -4,9 +4,9 @@ import util.WinType;
 
 public class WinningLotto {
     private Lotto lotto;
-    private Integer bonus;
+    private LottoNo bonus;
 
-    public WinningLotto(Lotto lotto, int bonus) {
+    public WinningLotto(Lotto lotto, LottoNo bonus) {
         assert !lotto.hasNumber(bonus);
 
         this.lotto = lotto;

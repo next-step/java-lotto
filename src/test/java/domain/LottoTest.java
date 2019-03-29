@@ -10,7 +10,7 @@ public class LottoTest {
     @Test
     public void 당첨_1등() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 6), LottoNo.of(10));
 
         WinType type = winningLotto.figure(lotto);
 
@@ -20,7 +20,7 @@ public class LottoTest {
     @Test
     public void 당첨_2등() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 7), 6);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 7), LottoNo.of(6));
 
         WinType type = winningLotto.figure(lotto);
 
@@ -30,7 +30,7 @@ public class LottoTest {
     @Test
     public void 당첨_3등() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 7), 10);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 5, 7), LottoNo.of(10));
 
         WinType type = winningLotto.figure(lotto);
 
@@ -40,7 +40,7 @@ public class LottoTest {
     @Test
     public void 당첨_4등() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 24, 7), 10);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 4, 24, 7), LottoNo.of(10));
 
         WinType type = winningLotto.figure(lotto);
 
@@ -50,7 +50,7 @@ public class LottoTest {
     @Test
     public void 당첨_5등() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 22, 24, 7), 10);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(1, 2, 3, 22, 24, 7), LottoNo.of(10));
 
         WinType type = winningLotto.figure(lotto);
 
@@ -60,7 +60,7 @@ public class LottoTest {
     @Test
     public void 실패() {
         Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
-        WinningLotto winningLotto = new WinningLotto(Lotto.of(12, 2, 3, 22, 24, 7), 10);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(12, 2, 3, 22, 24, 7), LottoNo.of(10));
 
         WinType type = winningLotto.figure(lotto);
 

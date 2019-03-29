@@ -1,49 +1,47 @@
 package domain;
 
-import com.google.common.primitives.Ints;
 import com.sun.deploy.util.StringUtils;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static util.Constants.*;
+import static util.Constants.LOTTO_NUMBER;
 
 public class Lotto {
-    private Set<Integer> numbers;
+    private Set<LottoNo> numbers;
 
-    private Lotto(Set<Integer> numbers) {
+    private Lotto(Set<LottoNo> numbers) {
         assert numbers.size() == LOTTO_NUMBER;
-        assert isValidRange(numbers);
 
         this.numbers = numbers;
     }
 
     public static Lotto of(int... numbers) {
-        Set<Integer> numberSet = new HashSet<>(Ints.asList(numbers));
-        return new Lotto(numberSet);
-    }
-
-    public static Lotto of(String[] numbers) {
-        Set<Integer> numberSet = Arrays.stream(numbers)
-                .mapToInt(it -> Integer.parseInt(StringUtils.trimWhitespace(it)))
-                .boxed()
+        Set<LottoNo> numberSet = Arrays.stream(numbers)
+                .mapToObj(it -> LottoNo.of(it))
                 .collect(Collectors.toSet());
 
         return new Lotto(numberSet);
     }
 
-    private boolean isValidRange(Set<Integer> numbers) {
-        return numbers.stream()
-                .filter(it -> it < LOTTO_NUMBER_RANGE_LOW && it > LOTTO_NUMBER_RANGE_HIGH)
-                .count() == 0;
+    public static Lotto of(String[] numbers) {
+        Set<LottoNo> numberSet = Arrays.stream(numbers)
+                .mapToInt(it -> Integer.parseInt(StringUtils.trimWhitespace(it)))
+                .mapToObj(it -> LottoNo.of(it))
+                .collect(Collectors.toSet());
+
+        return new Lotto(numberSet);
     }
 
     long count(Lotto numbers) {
         return this.numbers.stream()
                 .filter(it -> numbers.hasNumber(it))
                 .count();
+    }
+
+    boolean hasNumber(LottoNo number) {
+        return this.numbers.contains(number);
     }
 
     boolean hasNumber(int number) {

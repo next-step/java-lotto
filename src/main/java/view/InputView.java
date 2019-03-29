@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoNo;
 import domain.WinningLotto;
 
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class InputView {
 
         System.out.println("보너스 볼을 입력해 주세요.");
         String inputBonus = scanner.nextLine();
-        Integer bonus = Integer.parseInt(inputBonus);
+        LottoNo bonus = LottoNo.of(Integer.parseInt(inputBonus));
 
         return new WinningLotto(numbers, bonus);
     }

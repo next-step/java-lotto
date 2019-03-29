@@ -18,7 +18,7 @@ public class LottosTest {
                 Lotto.of(34, 42, 18, 43, 1, 2)
         ));
 
-        Map<WinType, Long> map = lottos.figure(new WinningLotto(Lotto.of(5, 33, 1, 43, 41, 32), 12));
+        Map<WinType, Long> map = lottos.figure(new WinningLotto(Lotto.of(5, 33, 1, 43, 41, 32), LottoNo.of(12)));
 
         assertThat(map.get(WinType.FIRST)).isEqualTo(1);
     }
@@ -29,12 +29,12 @@ public class LottosTest {
         String input = "1,2,3,4,5,6";
         Lotto numbers = Lotto.of(input.split(","));
 
-        assertThat(numbers.hasNumber(1)).isTrue();
-        assertThat(numbers.hasNumber(2)).isTrue();
-        assertThat(numbers.hasNumber(3)).isTrue();
-        assertThat(numbers.hasNumber(4)).isTrue();
-        assertThat(numbers.hasNumber(5)).isTrue();
-        assertThat(numbers.hasNumber(6)).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((1)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((2)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((3)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((4)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((5)))).isTrue();
+        assertThat(numbers.hasNumber(LottoNo.of((6)))).isTrue();
     }
 
     @Test
