@@ -1,26 +1,22 @@
 package domain;
 
-
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
-
     private List<Lotto> lottos;
     private Map<LottoResultStatus, Integer> lottoResults;
-    private BigDecimal benefitRate;
 
-    public LottoResult(List<Lotto> lottos, int[] winningNumbers) {
+    public LottoResult(List<Lotto> lottos, WinningLotto winningNumbers) {
         this.lottos = lottos;
-        this.benefitRate = BigDecimal.valueOf(0);
         this.lottoResults = new HashMap<>();
         initMap();
-        lottos.stream()
-                .map(lotto -> lotto.getLottoResultStatus(winningNumbers))
-                .forEach(this::updateLottoResult);
+
+        for (Lotto lotto : lottos) {
+            updateLottoResult(winningNumbers.result(lotto));
+        }
     }
 
     public List<Lotto> getLottos(){
@@ -37,20 +33,20 @@ public class LottoResult {
         lottoResults.put(status, lottoResults.get(status) + 1);
     }
 
-    public Map<LottoResultStatus, Integer> getLottoResults() {
-        return lottoResults;
+    public Integer getLottoResult(LottoResultStatus resultStatus) {
+        if (lottoResults.get(resultStatus) == null) {
+            return 0;
+        }
+
+        return lottoResults.get(resultStatus);
     }
 
-    public void calculateBenefit(Price price) {
+    public BigDecimal calculateBenefit(Money money) {
         BigDecimal totalAmountByWinning = new BigDecimal(0);
 
         for(LottoResultStatus status : LottoResultStatus.values()){
             totalAmountByWinning = totalAmountByWinning.add(LottoResultStatus.getWinnersPriceByStatus(lottoResults.get(status), status));
         }
-        benefitRate =  price.totalRateByWinning(totalAmountByWinning);
-    }
-
-    public BigDecimal getBenefitRate() {
-        return benefitRate;
+        return money.totalRateByWinning(totalAmountByWinning);
     }
 }

@@ -1,28 +1,13 @@
 package domain;
 
-import java.util.List;
-
 public class Lotto {
-    private Numbers numbers;
+    private LottoNumbers lottoNumbers;
 
-    public static Lotto generateLotto(List<Integer> integers) {
-        Lotto lotto = new Lotto();
-        lotto.numbers = new Numbers(integers);
-        return lotto;
+    public Lotto (LottoNumbers numbers) {
+        this.lottoNumbers = numbers;
     }
 
-    public LottoResultStatus getLottoResultStatus(int[] winningNumbers) {
-        int containsWinningNumberCount = 0;
-        for (int number : winningNumbers) {
-            if(numbers.contains(number))
-                containsWinningNumberCount ++;
-        }
-
-        return LottoResultStatus.findByMatchCount(containsWinningNumberCount);
+    public LottoNumbers getLottoNumbers() {
+        return this.lottoNumbers;
     }
-
-    public Numbers getNumbers() {
-       return this.numbers;
-    }
-
 }
