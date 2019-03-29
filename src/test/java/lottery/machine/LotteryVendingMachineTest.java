@@ -30,9 +30,9 @@ public class LotteryVendingMachineTest {
     @Test
     public void test_로또_구매_only_지정번호() {
         LotteryVendingMachine machine = new LotteryVendingMachine(numbersGenerator);
-        List<LotteryTicket> selectedTickets = createSelectedTickets(
-                Arrays.asList(1, 2, 3, 4, 5, 6),
-                Arrays.asList(7, 8, 9, 10, 11, 12));
+        List<LotteryTicket> selectedTickets = createSelectedTickets("1, 2, 3, 4, 5, 6",
+                "7, 8, 9, 10, 11, 12");
+
         Money price = Money.valueOf(2000);
 
         assertThat(machine.buyLotteryTicket(price, selectedTickets))
@@ -43,9 +43,8 @@ public class LotteryVendingMachineTest {
     @Test
     public void test_로또_구매_지정번호_with_랜덤번호() {
         LotteryVendingMachine machine = new LotteryVendingMachine(numbersGenerator);
-        List<LotteryTicket> selectedTickets = createSelectedTickets(
-                Arrays.asList(1, 2, 3, 4, 5, 6),
-                Arrays.asList(7, 8, 9, 10, 11, 12));
+        List<LotteryTicket> selectedTickets = createSelectedTickets( "1, 2, 3, 4, 5, 6",
+                "7, 8, 9, 10, 11, 12");
 
         Money price = Money.valueOf(14000);
         assertThat(machine.buyLotteryTicket(price, selectedTickets))
@@ -53,10 +52,10 @@ public class LotteryVendingMachineTest {
             .containsAll(selectedTickets);
     }
 
-    private List<LotteryTicket> createSelectedTickets(List<Integer> ...numbers) {
+    private List<LotteryTicket> createSelectedTickets(String ...numbers) {
         return Arrays.asList(numbers)
                 .stream()
-                .map(LotteryTicket::new)
+                .map(LotteryTicket::generate)
                 .collect(Collectors.toList());
     }
 
