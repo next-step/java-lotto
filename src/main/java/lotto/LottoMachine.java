@@ -16,7 +16,7 @@ public class LottoMachine {
         UserLottoTickets userLottoTickets = new UserLottoTickets();
         addManualTickets(manualTickets, userLottoTickets);
 
-        int salesQuantity =  money.getBuyAutoTicketsCount();
+        int salesQuantity =  money.getTryAutoTicketsCount(manualTickets.size());
         for (int i = 0; i < salesQuantity; i++) {
             userLottoTickets.add(new LottoTicket(lottoNumGenerator.generateTicket()));
         }

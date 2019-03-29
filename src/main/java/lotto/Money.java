@@ -5,7 +5,7 @@ import java.util.Map;
 public class Money {
 
     private final int amount;
-    private final int manualTicketCount;
+    private int manualTicketCount;
 
     private static final int TICKET_PRICE = 1_000;
 
@@ -20,6 +20,22 @@ public class Money {
         this.manualTicketCount = manualTicketCount;
 
     }
+
+    public Money(int amount) {
+        if (validAmount(amount)) {
+            throw new IllegalArgumentException("구입 금액은 1_000 단위 입니다.");
+        }
+        this.amount = amount;
+    }
+
+    public int getTryAutoTicketsCount(int manualTicketCount) {
+        if (validManualTicketCount(manualTicketCount)) {
+            throw new IllegalArgumentException("수동구입 개수는 구입금액보다 많을 수 없습니다.");
+        }
+        this.manualTicketCount = manualTicketCount;
+        return (amount / TICKET_PRICE) - manualTicketCount;
+    }
+
 
     private boolean validAmount(int amount) {
         return (amount % TICKET_PRICE) != 0;
