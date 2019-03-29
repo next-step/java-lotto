@@ -36,17 +36,17 @@ public class InputView {
         return toIntegers(split(replace(sc.nextLine())));
     }
 
-    private static List<Integer> toIntegers(String[] lines) {
+    public static List<Integer> toIntegers(String[] lines) {
         return Arrays.stream(lines)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    private static String[] split(String line) {
+    public static String[] split(String line) {
         return line.split(SEPARATOR);
     }
 
-    private static String replace(String line) {
+    public static String replace(String line) {
         return line.replaceAll(REMOVE_REGEX, "");
     }
 
