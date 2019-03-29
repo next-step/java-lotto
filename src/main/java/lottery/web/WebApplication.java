@@ -1,7 +1,12 @@
 package lottery.web;
 
-import lottery.domain.*;
-import lottery.machine.LotteryMachine;
+import lottery.domain.LotteryTicket;
+import lottery.domain.LotteryWinningStatistics;
+import lottery.domain.Money;
+import lottery.domain.WinningTicket;
+import lottery.machine.LotteryRaffleMachine;
+import lottery.machine.LotteryVendingMachine;
+import lottery.supplier.BoundedUniqueRandomNumbersGenerator;
 import lottery.web.view.InputView;
 import lottery.web.view.ResultView;
 import spark.ModelAndView;
@@ -12,13 +17,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lottery.domain.LotteryNumber.LOWER_BOUND_INCLUSIVE;
+import static lottery.domain.LotteryNumber.UPPER_BOUND_INCLUSIVE;
 import static spark.Spark.*;
 
 public class WebApplication {
 
-    static final TemplateEngine templateEngine = new HandlebarsTemplateEngine();
+    static final TemplateEngine templateEngine;
 
-    static final LotteryMachine machine = new LotteryMachine();
+    static final LotteryVendingMachine vendingMachine;
+
+    static {
+        templateEngine = new HandlebarsTemplateEngine();
+        vendingMachine = new LotteryVendingMachine(
+                new BoundedUniqueRandomNumbersGenerator(LOWER_BOUND_INCLUSIVE, UPPER_BOUND_INCLUSIVE));
+    }
 
     public static void main(String[] args) {
         port(8080);
@@ -32,11 +45,12 @@ public class WebApplication {
         post("/buyLotto", (req, res) -> {
             final Money price = InputView.inputPrice(req);
             final List<LotteryTicket> selectedTickets = InputView.inputSelectTickets(req);
-            final List<LotteryTicket> boughtTickets = machine.buyLotteryTicket(price, selectedTickets);
+            final List<LotteryTicket> boughtTickets = vendingMachine.buyLotteryTicket(price, selectedTickets);
+            final LotteryRaffleMachine raffleMachine = new LotteryRaffleMachine(boughtTickets);
 
-            Map<String, Object> model = new HashMap<>();
+            final Map<String, Object> model = new HashMap<>();
             final WinningTicket winningTicket = InputView.inputWinningTicket();
-            LotteryWinningStatistics statistics = machine.raffle(winningTicket);
+            final LotteryWinningStatistics statistics = raffleMachine.raffle(winningTicket);
 
             ResultView.viewStatistics(model, statistics);
 

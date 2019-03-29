@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lottery.view.InputView.replaceEmpty;
-import static lottery.view.InputView.splitNumber;
+import static lottery.view.InputView.replace;
+import static lottery.view.InputView.split;
 import static lottery.view.InputView.toIntegers;
 
 public class InputView {
@@ -21,12 +21,12 @@ public class InputView {
     private static final String LINE_SEPARATOR = "\r\n";
 
     public static Money inputPrice(Request req) {
-        return new Money(Integer.parseInt(req.queryParams("inputMoney")));
+        return Money.valueOf(Integer.parseInt(req.queryParams("inputMoney")));
     }
 
     public static List<LotteryTicket> inputSelectTickets(Request req) {
-        return Arrays.stream(splitLine(replaceEmpty(req.queryParams("manualNumber"))))
-                .map(line -> new LotteryTicket(toIntegers(splitNumber(line))))
+        return Arrays.stream(splitLine(replace(req.queryParams("manualNumber"))))
+                .map(line -> new LotteryTicket(toIntegers(split(line))))
                 .collect(Collectors.toList());
     }
 

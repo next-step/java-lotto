@@ -2,6 +2,7 @@ package lottery.web.view;
 
 import lottery.domain.LotteryRank;
 import lottery.domain.LotteryWinningStatistics;
+import lottery.domain.TicketCount;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,10 +24,10 @@ public class ResultView {
 
     private static Map<String, Object> convertToRankMap(LotteryWinningStatistics statistics, LotteryRank rank) {
         Map<String, Object> map = new HashMap<>();
-        map.put("matchCount", rank.matchCount);
+        map.put("matchCount", rank.getMatchCount());
         map.put("matchBonus", rank == LotteryRank.SECOND ? ", 보너스 볼 일치" : " ");
-        map.put("winningMoney", rank.winningMoney.amount);
-        map.put("winningCount", statistics.countRank(rank).amount);
+        map.put("winningMoney", rank.getWinningMoney(TicketCount.ONE).getAmount());
+        map.put("winningCount", statistics.countRank(rank).getAmount());
         return map;
     }
 }
