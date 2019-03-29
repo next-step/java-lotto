@@ -38,7 +38,7 @@ public class LottoNumber {
         return values.get(Integer.parseInt(value.trim()));
     }
 
-    private LottoNumber(int value) {
+    public LottoNumber(int value) {
         this.value = value;
     }
 

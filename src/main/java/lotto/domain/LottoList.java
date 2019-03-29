@@ -89,8 +89,12 @@ public class LottoList {
         return lottos.stream();
     }
 
-    public static LottoList merge(LottoList a, LottoList b) {
-        return new LottoList(Stream.concat(a.stream(), b.stream())
+    public static LottoList merge(LottoList lottoList1, LottoList lottoList2) {
+        return new LottoList(Stream.concat(lottoList1.stream(), lottoList2.stream())
             .collect(Collectors.toList()));
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

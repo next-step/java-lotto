@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.view.ConsoleInput;
-import lotto.view.ConsoleOutput;
+import lotto.console.ConsoleInput;
+import lotto.console.ConsoleOutput;
 
 public class LottoConsoleApp {
 
