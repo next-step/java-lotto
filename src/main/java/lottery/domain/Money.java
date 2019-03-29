@@ -4,10 +4,32 @@ import java.util.Objects;
 
 public class Money {
 
-    public final int amount;
+    public static final Money ZERO = new Money(0);
 
-    public Money(int amount) {
+    private final int amount;
+
+    private Money(int amount) {
         this.amount = amount;
+    }
+
+    public static Money valueOf(int amount) {
+        return amount == 0 ? ZERO : new Money(amount);
+    }
+
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public Money add(Money addend) {
+        return Money.valueOf(this.amount + addend.amount);
+    }
+
+    public Money times(Money multiplier) {
+        return Money.valueOf(this.amount * multiplier.amount);
+    }
+
+    public Money divide(Money divisor) {
+        return Money.valueOf(this.amount / divisor.amount);
     }
 
     @Override
@@ -21,9 +43,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
-    }
-
-    public Money divide(int dividend) {
-        return new Money(this.amount / dividend);
     }
 }

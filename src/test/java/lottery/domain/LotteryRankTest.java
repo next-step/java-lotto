@@ -2,6 +2,10 @@ package lottery.domain;
 
 import org.junit.*;
 
+import java.util.Arrays;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryRankTest {
@@ -42,5 +46,11 @@ public class LotteryRankTest {
                 .isEqualTo(LotteryRank.NONE);
         assertThat(LotteryRank.generate(2, true))
                 .isEqualTo(LotteryRank.NONE);
+    }
+
+    @Test
+    public void test_당첨금액() {
+        assertThat(LotteryRank.values())
+                .allMatch(rank -> rank.getWinningMoney(TicketCount.ONE).equals(rank.winningMoney));
     }
 }

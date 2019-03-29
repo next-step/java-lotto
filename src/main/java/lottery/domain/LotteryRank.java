@@ -3,6 +3,7 @@ package lottery.domain;
 import java.util.Arrays;
 
 public enum LotteryRank {
+
     FIRST(6, 2_000_000_000) {
         @Override
         protected boolean match(int winningCount, boolean matchBonus) {
@@ -40,21 +41,29 @@ public enum LotteryRank {
         }
     };
 
-    public final int matchCount;
+    protected final int matchCount;
 
-    public final int winningMoney;
+    protected final Money winningMoney;
 
     LotteryRank(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
-        this.winningMoney = winningMoney;
+        this.winningMoney = Money.valueOf(winningMoney);
     }
-
-    protected abstract boolean match(int winningCount, boolean matchBonus);
 
     public static LotteryRank generate(int countWinningNumbers, boolean matchBonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.match(countWinningNumbers, matchBonus))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    protected abstract boolean match(int winningCount, boolean matchBonus);
+
+    public Money getWinningMoney(TicketCount count) {
+        return this.winningMoney.times(Money.valueOf(count.getAmount()));
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
     }
 }

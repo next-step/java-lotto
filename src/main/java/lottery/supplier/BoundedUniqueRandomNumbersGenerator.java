@@ -6,14 +6,14 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class BoundedUniqueNumbersGenerator implements NumbersGenerator {
+public class BoundedUniqueRandomNumbersGenerator implements NumbersGenerator {
 
     private final Random random;
 
     private final int lowerBoundInclusive;
     private final int upperBoundInclusive;
 
-    public BoundedUniqueNumbersGenerator(int lowerBoundInclusive, int upperBoundInclusive) {
+    public BoundedUniqueRandomNumbersGenerator(int lowerBoundInclusive, int upperBoundInclusive) {
         if (lowerBoundInclusive > upperBoundInclusive) {
             throw new IllegalArgumentException("lowerBoundInclusive must be less than or equal to upperBoundInclusive");
         }

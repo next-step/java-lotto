@@ -10,15 +10,11 @@ public class WinningTicket {
 
     public WinningTicket(List<Integer> winningNumbers, int bonusNumber) {
         this.winningNumbersTicket = new LotteryTicket(winningNumbers);
-        this.bonusNumber = new LotteryNumber(bonusNumber);
+        this.bonusNumber = LotteryNumber.of(bonusNumber);
     }
 
     public LotteryRank raffle(LotteryTicket ticket) {
-        final int matchCount = (int) winningNumbersTicket.lotteryNumbers
-                .stream()
-                .filter(winningNumber -> ticket.lotteryNumbers.contains(winningNumber))
-                .count();
-
-        return LotteryRank.generate(matchCount, ticket.lotteryNumbers.contains(bonusNumber));
+        return LotteryRank.generate(winningNumbersTicket.countMatchNumbers(ticket),
+                ticket.contains(bonusNumber));
     }
 }
