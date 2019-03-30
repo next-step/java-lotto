@@ -12,8 +12,8 @@ public class LotteryGame {
 
     public LotteryGame(int tickets) {
         this.tickets = tickets;
-        lotteries = new ArrayList<>();
-        ranks = new HashMap<>();
+        this.lotteries = new ArrayList<>();
+        this.ranks = new HashMap<>();
         createTicket(tickets);
     }
 

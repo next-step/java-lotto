@@ -13,7 +13,7 @@ public class Money {
         if (money < LOTTERY_PRICE) {
             throw new IllegalArgumentException();
         }
-        lotteryTickets = money / LOTTERY_PRICE;
+        this.lotteryTickets = money / LOTTERY_PRICE;
         this.money = money;
     }
 
