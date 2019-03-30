@@ -1,11 +1,9 @@
 package lotto.tool;
 
-import lotto.domain.LottoBall;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoTicket;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoManualGenerator implements LottoGenerator {
@@ -39,12 +37,6 @@ public class LottoManualGenerator implements LottoGenerator {
     }
 
     private LottoTicket generateLottoTicket(String[] lottoNumbers) {
-        return new LottoTicket(sort(LottoMachine.toLottoBalls(lottoNumbers)));
-    }
-
-    @Override
-    public List<LottoBall> sort(List<LottoBall> lottoBalls) {
-        Collections.sort(lottoBalls);
-        return lottoBalls;
+        return new LottoTicket(LottoMachine.sort(LottoMachine.toLottoBalls(lottoNumbers)));
     }
 }

@@ -31,16 +31,10 @@ public class LottoRandomGenerator implements LottoGenerator {
         for (int j = 0; j < LottoTicket.LOTTO_SIZE; j++) {
             lottoBalls.add(LottoBasicNumber.basicNumbers.get(j));
         }
-        sort(lottoBalls);
-        lottoTickets.add(new LottoTicket(lottoBalls));
+        lottoTickets.add(new LottoTicket(LottoMachine.sort(lottoBalls)));
     }
 
     private void shuffle() {
         LottoShuffler.shuffle(LottoBasicNumber.basicNumbers);
-    }
-
-    @Override
-    public List<LottoBall> sort(List<LottoBall> lottoBalls) {
-        return null;
     }
 }

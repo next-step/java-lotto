@@ -11,10 +11,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
-    //TODO : 로또한장 발급,  여러장 발급
-
-    //숫자전달 -> LottoAutoGenerator
-    //  -> lottoBalls 전달 -> LottoTicket에 담아서 반환
 
     @Test
     public void 수동발급장수_가능확인() {

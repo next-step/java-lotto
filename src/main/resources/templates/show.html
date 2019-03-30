@@ -65,7 +65,7 @@ body {
 <form class="form-show" method="post" action="/matchLotto">
 	<div class="form-show-div form-group">
 		<label for="winningNumber">지난 주 당첨 번호</label>
-		<input type="text" id="inputMoney" class="form-control"
+		<input type="text" id="winningNumber" class="form-control"
 				name="winningNumber" placeholder="1,2,3,4,5,6" required autofocus>
 	</div>
 	<div class="form-show-div form-group">
@@ -73,38 +73,29 @@ body {
     	<input type="text" class="form-control" id="bonusNumber" 
     		name="bonusNumber" required autofocus>
   	</div>
+<!--	<div class="form-show-div form-group">
+		<input type="hidden" class="form-control" id="lottoTickets" name="lottoTickets" value={{lottoTickets}} >
+		<input type="hidden" class="form-control" id="ticketCount" name="ticketCount" value={{ticketCount}} >
+	</div>-->
 	<div class="submit-button">
 		<button class="btn btn-lg btn-primary btn-block" type="submit">당첨 번호</button>
 	</div>
 </form>
 <pre class="pre-scrollable">
-	<h4 class="text-center"><5개를 구매 하셨습니다></h4>
+	<h4 class="text-center"><{{ticketCount}}개를 구매 하셨습니다></h4>
 	<table class="table">
 		<thead>
 			<th></th>
 			<th class="text-center">로또 번호</th>
 		</thead>
 		<tbody>
-		<tr>
-			<th>1</th>
-			<td>[8, 21, 23, 41, 42, 43]</td>
-		</tr>
-		<tr>
-			<th>2</th>
-			<td>[3, 5, 11, 16, 32, 38]</td>
-		</tr>
-		<tr>
-			<th>3</th>
-			<td>[7, 11, 16, 35, 36, 44]</td>
-		</tr>
-		<tr>
-			<th>4</th>
-			<td>[1, 8, 11, 31, 41, 42]</td>
-		</tr>
-		<tr>
-			<th>5</th>
-			<td>[13, 14, 16, 38, 42, 45]</td>
-		</tr>
+		<!-- dto 만들어서 index, String format으로 담아서 넘기자-->
+			{{#lottoTickets}}
+			<tr>
+				<th>{{@index}}</th>
+				<td>{{this}}</td>
+			</tr>
+			{{/lottoTickets}}
 		</tbody>
 	</table>
 </pre>

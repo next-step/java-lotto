@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.console;
 
 import lotto.domain.*;
 import lotto.tool.LottoMachine;
