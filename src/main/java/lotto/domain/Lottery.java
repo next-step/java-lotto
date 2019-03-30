@@ -1,44 +1,57 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Set;
 
 public class Lottery {
     public static final int LOTTO_LENGTH = 6;
-    private Set<Integer> lottery;
+    private Set<LotteryNo> lottery;
 
-    public Lottery(Set<Integer> lotteryNumber) {
+    public Lottery(Set<LotteryNo> lotteryNumber) {
         this.lottery = generationLottery(lotteryNumber);
+
+        checkLotterySize(lotteryNumber);
     }
 
-    public Set<Integer> generationLottery(Set<Integer> random) {
-        for(int i = 0; i < LOTTO_LENGTH ; i++) {
+    private void checkLotterySize(Set<LotteryNo> lotteryNumber) {
+        if (lotteryNumber.size() < LOTTO_LENGTH) {
+           throw new IllegalArgumentException();
+        }
+    }
+
+    public Set<LotteryNo> generationLottery(Set<LotteryNo> random) {
+        for (int i = 0; i < LOTTO_LENGTH ; i++) {
             this.lottery = random;
         }
 
         return this.lottery;
     }
 
-    public int matchLottery(Set<Integer> winnerLottery) {
+    public int matchLottery(Lottery winnerLottery) {
         int matchCount = 0;
 
-        for (Integer number : winnerLottery) {
+        for (LotteryNo number : winnerLottery.lottery) {
             matchCount = matchNumber(matchCount, number);
         }
 
         return matchCount;
     }
 
-    public int matchNumber(int matchCount, int number) {
-        if (this.lottery.contains(number)) {
+    public int matchNumber(int matchCount, LotteryNo number) {
+        if (contain(number)) {
             matchCount++;
         }
 
         return matchCount;
     }
 
-    // 중복생성 테스트용
-    public Set<Integer> getLottery() {
-        return this.lottery;
+    public boolean contain(LotteryNo number) {
+        for (LotteryNo lotteryNo : this.lottery) {
+            if (lotteryNo.getNumber() == number.getNumber()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

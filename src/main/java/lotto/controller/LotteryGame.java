@@ -1,7 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.Lotteries;
-import lotto.domain.LotteryMachine;
+import lotto.domain.LotteryNo;
+import lotto.domain.WinnerLottery;
 
 import java.util.*;
 
@@ -13,12 +14,13 @@ public class LotteryGame {
 
     public static void main() {
         String inputMoney = "30000";
+        int bonusNumber = 7;
 
-        Set<Integer> winnerNumber = generateRandom();
-        LotteryMachine lotteryMachine = new LotteryMachine(winnerNumber);
+        Set<LotteryNo> winnerNumber = generateRandom();
         Lotteries lotteries = new Lotteries(inputMoney);
+        WinnerLottery winnerLottery = new WinnerLottery(winnerNumber, bonusNumber);
         printLotteries(inputMoney);
 
-        printStatistics(lotteries, lotteryMachine);
+        printStatistics(lotteries, winnerLottery);
     }
 }
