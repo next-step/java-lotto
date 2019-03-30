@@ -7,7 +7,7 @@ public class Lotto {
         this.lotto = lottoNumber;
     }
 
-    public boolean isContains(Integer winningNumber) {
+    public boolean isContains(LottoNo winningNumber) {
         return lotto.isContains(winningNumber);
     }
 
@@ -15,4 +15,5 @@ public class Lotto {
     public String toString() {
         return lotto.toString();
     }
+
 }

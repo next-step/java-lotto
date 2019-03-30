@@ -1,7 +1,7 @@
 package view;
 
+import domain.LottoNo;
 import util.Console;
-import util.Generator;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -22,11 +22,7 @@ public class InputView {
 
     public static int inputBonusBall() throws InputMismatchException {
         Console.print("보너스 볼을 입력해 주세요.");
-        int bonusBall = new Scanner(System.in).nextInt();
-        if (bonusBall < Generator.MIN_LOTTO_NUMBER || bonusBall > Generator.MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또 범위를 벗어났습니다.");
-        }
-        return bonusBall;
+        return new Scanner(System.in).nextInt();
     }
 
     public static int buyManualLotto() throws InputMismatchException {
@@ -38,11 +34,11 @@ public class InputView {
         Console.print("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static List<Integer> scanLottoNumbers() throws NumberFormatException {
-        List<Integer> lottoNumbers = new ArrayList<>();
+    public static List<LottoNo> scanLottoNumbers() throws NumberFormatException {
+        List<LottoNo> lottoNumbers = new ArrayList<>();
         String [] numbers = new Scanner(System.in).nextLine().split(SEPARATOR);
         for (String number : numbers) {
-            lottoNumbers.add(Integer.parseInt(number.trim()));
+            lottoNumbers.add(new LottoNo(Integer.parseInt(number.trim())));
         }
         return lottoNumbers;
     }

@@ -5,16 +5,15 @@ import util.Generator;
 import java.util.List;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumbers;
+    private List<LottoNo> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<LottoNo> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.validationLottoNumbers();
     }
 
     private void validationLottoNumbers() {
         this.checkLottoNumberCount();
-        this.checkLottoNumberRange();
     }
 
     private void checkLottoNumberCount() {
@@ -23,21 +22,19 @@ public class LottoNumbers {
         }
     }
 
-    private void checkLottoNumberRange() {
-        for (Integer lottoNumber : this.lottoNumbers) {
-            if (lottoNumber < Generator.MIN_LOTTO_NUMBER || lottoNumber > Generator.MAX_LOTTO_NUMBER) {
-                throw new IllegalArgumentException("로또 범위를 벗어났습니다.");
+    public boolean isContains(LottoNo winningNumber) {
+        boolean isContains = false;
+        for (LottoNo lottoNumber : this.lottoNumbers) {
+            if (lottoNumber.toString().equals(winningNumber.toString())) {
+                isContains = true;
             }
         }
-    }
-
-    public boolean isContains(int winningNumber) {
-        return this.lottoNumbers.contains(winningNumber);
+        return isContains;
     }
 
     public int calcMatchCount(Lotto lotto) {
         int matchCount = 0;
-        for (Integer lottoNumber : this.lottoNumbers) {
+        for (LottoNo lottoNumber : this.lottoNumbers) {
             if (lotto.isContains(lottoNumber)) {
                 matchCount++;
             }

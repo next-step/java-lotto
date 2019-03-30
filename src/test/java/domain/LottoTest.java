@@ -11,18 +11,18 @@ public class LottoTest {
     private Lotto lotto;
 
     @Before
-    public void lottoTest() throws Exception {
-        lotto = new Lotto(new LottoNumbers(Arrays.asList(1, 3, 5, 15, 30, 31)));
+    public void lottoTest() {
+        lotto = new Lotto(new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(3), new LottoNo(5), new LottoNo(15), new LottoNo(30), new LottoNo(31))));
     }
 
     @Test
     public void isContains_false_Test() {
-        assertThat(lotto.isContains(2)).isFalse();
+        assertThat(lotto.isContains(new LottoNo(2))).isFalse();
     }
 
     @Test
     public void isContains_true_Test() {
-        assertThat(lotto.isContains(1)).isTrue();
+        assertThat(lotto.isContains(new LottoNo(1))).isTrue();
     }
 
 }
