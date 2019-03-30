@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class LotteryGame {
     public static final int ADD_RANK_COUNT = 1;
-    public static final int INITIAL_FOR_EACH = 0;
     public static final int INITIAL_NUMBER = 0;
     List<Lottery> lotteries;
     Map<Rank, Integer> ranks;
@@ -21,14 +21,14 @@ public class LotteryGame {
     }
 
     private void createTicket(int tickets) {
-        for (int i = INITIAL_FOR_EACH; i < tickets; i++) {
+        IntStream.range(INITIAL_NUMBER, tickets).forEach(i->{
             lotteries.add(new LotteryGenerator().lotteryNumbers());
-        }
+        });
     }
 
     public Map<Rank, Integer> getWinningStatistics(WinningNumber winningNumber) {
-        for (int i = INITIAL_FOR_EACH; i < lotteries.size(); i++) {
-            Rank rank = winningNumber.match(lotteries.get(i));
+        for (Lottery lottery : lotteries) {
+            Rank rank = winningNumber.match(lottery);
             ranks.put(rank, getRanks(rank));
         }
         return ranks;
