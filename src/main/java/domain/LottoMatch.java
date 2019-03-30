@@ -18,6 +18,4 @@ public class LottoMatch {
     private boolean calculateMatchResult(Lotto lotto) {
         return this.winningNumbers.isContainsBonusBall(lotto);
     }
-
 }
-

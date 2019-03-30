@@ -17,7 +17,7 @@ public class CalculatorTest {
         produceResults.put(LottoRank.FIFTH, 1);
         produceResults.put(LottoRank.FOURTH, 0);
         produceResults.put(LottoRank.THIRD, 1);
-        assertThat(Calculator.yieldCalculator(produceResults, 100000)).isEqualTo(15.05);
+        assertThat(Calculator.yieldCalculator(produceResults, 10)).isEqualTo(150.5);
     }
 
     @Test

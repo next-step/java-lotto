@@ -8,13 +8,10 @@ import util.Console;
 import java.util.Map;
 
 public class ResultView {
-    private static final int THOUSAND_UNiTS = 1000;
     private static final int DEFAULT = 1;
 
-    public static int purchaseLottoCount(int money) {
-        int lottoCount = money / THOUSAND_UNiTS;
-        Console.print(lottoCount + "개를 구매했습니다.");
-        return lottoCount;
+    public static void purchaseLottoCount(int manualLottoPaper, int autoLottoPaper) {
+        Console.print("수동으로 " + manualLottoPaper + "장, 자동으로 " + autoLottoPaper + "개를 구매했습니다.");
     }
 
     public static void printLotto(Lotto lotto) {
