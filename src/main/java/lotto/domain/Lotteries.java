@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.RankPrintableFactory.makeRanksForPrint;
 import static util.Random.generateRandom;
 
 public class Lotteries {
@@ -37,12 +36,12 @@ public class Lotteries {
         }
     }
 
-    public double calculateProfit(LotteryMachine lotteryMachine) {
+    public double calculateProfit(WinnerLottery winnerLottery) {
         int totalProfit = INITIALIZATION_NUMBER;
 
         int lotterySize = lotteriesSize();
         for (int i = 0; i < lotterySize; i++) {
-            totalProfit += lotteryMachine.countProfit(this.lotteries.get(i));
+            totalProfit += Ranking.getProfit(this.lotteries.get(i), winnerLottery);
         }
 
         double profitRate = (double)totalProfit / ((double)(this.purchaseQuantity * LOTTO_AMOUNT));
@@ -50,13 +49,13 @@ public class Lotteries {
         return Math.round(profitRate * 100) / 100.0;
     }
 
-    public Map<String, Integer> makeAllLotteriesRank(LotteryMachine lotteryMachine) {
+    public Map<String, Integer> makeAllLotteriesRank(WinnerLottery winnerLottery) {
         Map<String, Integer> ranks = getsInitializedMap();
 
         int lotteriesSize = this.lotteries.size();
         for (int i = 0; i < lotteriesSize; i++) {
-            Ranking ranking = lotteryMachine.rankLottery(lotteries.get(i));
-            makeRanks(ranking.getRank(), ranks);
+            Ranking ranking = winnerLottery.rankLottery(lotteries.get(i));
+            ranking.makeRanks(ranks);
         }
 
         return ranks;
@@ -74,21 +73,16 @@ public class Lotteries {
         return ranks;
     }
 
-    public void makeRanks(int rank, Map<String, Integer> ranks) {
-        RankPrintable rankPrintable = makeRanksForPrint(rank);
-        rankPrintable.makeRanksForPrint(ranks);
-    }
-
     public static void checkPurchaseValidation(String purchaseAmount) {
-        if(LOTTO_AMOUNT < MINIMUM_INPUT_AMOUNT) {
+        if (LOTTO_AMOUNT < MINIMUM_INPUT_AMOUNT) {
             throw  new IllegalArgumentException();
         }
 
-        if(StringUtils.isEmpty(purchaseAmount)) {
+        if (StringUtils.isEmpty(purchaseAmount)) {
             throw new IllegalArgumentException();
         }
 
-        if(Integer.parseInt(purchaseAmount) < LOTTO_AMOUNT) {
+        if (Integer.parseInt(purchaseAmount) < LOTTO_AMOUNT) {
             throw new IllegalArgumentException();
         }
     }
