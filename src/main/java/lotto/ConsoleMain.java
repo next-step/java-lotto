@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleMain {
@@ -13,6 +12,7 @@ public class ConsoleMain {
 
         InputView inputView = new InputView();
         Money money = inputView.printUserInputMoney();
+        LottoNumber bonusBall = inputView.printInputBonusBall();
         int quantity = money.purchaseQuantity();
 
         List<Lotto> lottos = LottoMachine.createLotto(quantity);
@@ -21,8 +21,9 @@ public class ConsoleMain {
 
 
         LottoNumbers luckyNumbers = inputView.lastWeekLuckyNumbers();
-        LottoResult lottoResult = new LottoResult(lottos, luckyNumbers);
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(luckyNumbers, bonusBall);
+        LottoResult lottoResult = new LottoResult(lottos, winningLottoNumbers);
         resultView.printLottoResult(lottoResult);
-        resultView.printEarningsRate(lottoResult.earningsRate(quantity));
+        resultView.printEarningsRate(lottoResult.earningsRate());
     }
 }

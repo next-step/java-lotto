@@ -2,19 +2,17 @@ package lotto.domain;
 
 import lotto.Utils;
 
-import java.util.*;
+import java.util.Set;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBER_SIZE = 6;
-    public static final int MATCH_COUNT_INIT = 0;
+    private static final int MATCH_COUNT_INIT = 0;
+    private static final int MATCH_COUNT_ONE = 1;
 
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(Integer[] lottoNumbers) {
-        Set<LottoNumber> inputNumbers = new HashSet<>();
-        for(Integer number : lottoNumbers) {
-            inputNumbers.add(new LottoNumber(number));
-        }
+        Set<LottoNumber> inputNumbers = Utils.arraysToSet(lottoNumbers);
         this.lottoNumbers = inputNumbers;
         checkNumberSize(inputNumbers);
     }
@@ -38,12 +36,15 @@ public class LottoNumbers {
         return matchCount;
     }
 
-    int contains(LottoNumber lottoNumber) {
-        int result = 0;
-        for(LottoNumber number : lottoNumbers) {
-            result += number.compareNumber(lottoNumber);
-        }
-        return result;
+    private int contains(LottoNumber lottoNumber) {
+        return (int) lottoNumbers.stream()
+                .filter(number -> number.compareNumber(lottoNumber) > 0)
+                .count();
+    }
+
+    boolean isMatchBonus(WinningLottoNumbers winningLottoNumbers) {
+        int result = winningLottoNumbers.containBonus(lottoNumbers);
+        return (result == MATCH_COUNT_ONE);
     }
 
     @Override

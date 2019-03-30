@@ -2,16 +2,10 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Utils {
-    public static int toInt(String purchase) {
-        return Integer.parseInt(purchase);
-    }
-
     public static String[] stringSplitWithDelimiter(String original, String delimiter) {
         original = original.replaceAll("\\s", "");
         return original.split(delimiter);
@@ -20,7 +14,7 @@ public class Utils {
     public static String printLottoNumbers(Set<LottoNumber> lottoNumbers) {
         List<Integer> sortNumbers = new ArrayList<>();
         for (LottoNumber lottoNumber : lottoNumbers) {
-            sortNumbers.add(Utils.toInt(lottoNumber.toString()));
+            sortNumbers.add(Integer.parseInt(lottoNumber.toString()));
         }
         Collections.sort(sortNumbers);
         if (lottoNumbers == null)
@@ -42,4 +36,11 @@ public class Utils {
 
         return null;
     }
+
+    public static Set<LottoNumber> arraysToSet(Integer[] arrays) {
+        Set<LottoNumber> inputNumbres = Arrays.stream(arrays)
+                .map(LottoNumber::new).collect(Collectors.toSet());
+        return inputNumbres;
+    }
+
 }
