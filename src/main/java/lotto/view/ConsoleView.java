@@ -1,11 +1,10 @@
 package lotto.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoManualGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
@@ -40,11 +39,11 @@ public class ConsoleView {
 
     List<String> inputLottoNumbers = new ArrayList<>();
     if (manualQuantity > 0) {
-      consoleInputView.inputManualNumbers(manualQuantity);
+      inputLottoNumbers = consoleInputView.inputManualNumbers(manualQuantity);
     }
+
     return inputLottoNumbers.stream()
-        .map(ConsoleView::convertStringToLottoNumbers)
-        .map(Lotto::new)
+        .map(LottoManualGenerator::generate)
         .collect(Collectors.toList());
   }
 
@@ -77,18 +76,9 @@ public class ConsoleView {
 
   private static WinNumbers winNumbers(String inputWinNumbers, int inputAdditionNumber) {
 
-    WinningNumbers winningNumbers = new WinningNumbers(convertStringToLottoNumbers(inputWinNumbers));
+    WinningNumbers winningNumbers = new WinningNumbers(LottoManualGenerator.generateLottoNumbers(inputWinNumbers));
     LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
 
     return new WinNumbers(winningNumbers, additionalNumber);
-  }
-
-  private static Set<LottoNumber> convertStringToLottoNumbers(String inputLottoNumbers) {
-
-    String[] winNumberArray = inputLottoNumbers.split(",");
-    return Arrays.stream(winNumberArray)
-        .filter(winNumber -> !winNumber.trim().isEmpty())
-        .map(winNumber -> LottoNumber.getInstance(Integer.parseInt(winNumber.trim())))
-        .collect(Collectors.toSet());
   }
 }

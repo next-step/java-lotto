@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LottoStore {
 
@@ -10,13 +9,11 @@ public class LottoStore {
 
   public static Lottos buy(int autoQuantity, List<Lotto> manualLottos) {
 
-    List<Lotto> lottos = new ArrayList<>();
-    for(int buyIndex = 0; buyIndex < autoQuantity; buyIndex++) {
+    LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
 
-      Set<LottoNumber> lottoNumbers = LottoGenerator.generate();
-      lottos.add(new Lotto(lottoNumbers));
-    }
+    List<Lotto> lottos = new ArrayList<>();
     lottos.addAll(manualLottos);
+    lottos.addAll(lottoAutoGenerator.generate(autoQuantity));
     return new Lottos(lottos);
   }
 
