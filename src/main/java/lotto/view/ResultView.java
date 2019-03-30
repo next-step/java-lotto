@@ -5,11 +5,13 @@ import lotto.vo.Rank;
 import java.util.Map;
 
 public class ResultView {
+    public static final int WIN_RATE = 1;
+
     public void printPurchaseTicketCount(int tickets) {
         System.out.println(String.format("%s개를 구매했습니다.", tickets));
     }
 
-    public void winningNumberStatistics(Map<Rank, Integer> ranks)  {
+    public void winningNumberStatistics(Map<Rank, Integer> ranks) {
         System.out.println("당첨통계");
         System.out.println("---------");
         printNumberOfWinningCount(Rank.FOURTH_PLACE, ranks);
@@ -18,8 +20,8 @@ public class ResultView {
         printNumberOfWinningCount(Rank.FIRST_PLACE, ranks);
     }
 
-    public void printNumberOfWinningCount(Rank rank, Map<Rank, Integer> ranks){
-        System.out.println(perStatistics(rank.getNumberOfMatches(), rank.getReward(), ranks.get(rank) == null? 0 : ranks.get(rank)));
+    public void printNumberOfWinningCount(Rank rank, Map<Rank, Integer> ranks) {
+        System.out.println(perStatistics(rank.getNumberOfMatches(), rank.getReward(), ranks.get(rank) == null ? 0 : ranks.get(rank)));
     }
 
     public String perStatistics(int matchedNumber, int winningAmount, int winningNumber) {
@@ -27,7 +29,7 @@ public class ResultView {
     }
 
     public void revenueRate(double rate) {
-        String benefitResult = rate >= 1 ? "이득이" : "손해";
+        String benefitResult = rate >= WIN_RATE ? "이득이" : "손해";
         System.out.println(String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", String.valueOf(rate), benefitResult));
     }
 }

@@ -1,6 +1,5 @@
 package lotto.vo;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -11,6 +10,7 @@ public enum Rank {
     FOURTH_PLACE(3, 5_000),
     FAILURE(0, 0);
 
+    public static final int MINIMUM_WINNING_NUMBER = 3;
     int numberOfMatches, reward;
 
     Rank(int numberOfMatches, int reward) {
@@ -27,13 +27,13 @@ public enum Rank {
     }
 
     static Rank valueOf(int matchCount) {
-        if (matchCount < 3) {
+        if (matchCount < MINIMUM_WINNING_NUMBER) {
             return FAILURE;
         }
         return Arrays.stream(values())
                 .filter(v -> matchCount == v.numberOfMatches)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("error"));
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static int sumRevenue(Map<Rank, Integer> ranks){
