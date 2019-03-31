@@ -1,97 +1,39 @@
 package lotto.domain;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static util.Random.generateRandom;
 
 public class Lotteries {
-    private static final int LOTTO_AMOUNT = 1000;
-    private static final int MINIMUM_INPUT_AMOUNT = 1;
-    private static final int INITIALIZATION_NUMBER = 0;
-
     private List<Lottery> lotteries;
-    private int purchaseQuantity;
 
-    public Lotteries(int purchaseQuantity) {
-        this(String.valueOf(purchaseQuantity));
-    }
-
-    public Lotteries(String purchaseAmount) {
+    public Lotteries() {
         this.lotteries = new ArrayList<>();
-
-        checkPurchaseValidation(purchaseAmount);
-        this.purchaseQuantity = Integer.parseInt(purchaseAmount) / LOTTO_AMOUNT;
-
-        generateLotteries();
     }
 
-    public void generateLotteries() {
-        for(int i = 0; i < this.purchaseQuantity; i++) {
-            this.lotteries.add(new Lottery(generateRandom()));
-        }
+    public Lotteries addLottery(Lottery lottery) {
+        this.lotteries.add(lottery);
+        return this;
     }
 
-    public double calculateProfit(WinnerLottery winnerLottery) {
-        int totalProfit = INITIALIZATION_NUMBER;
-
-        int lotterySize = lotteriesSize();
-        for (int i = 0; i < lotterySize; i++) {
-            totalProfit += Ranking.getProfit(this.lotteries.get(i), winnerLottery);
-        }
-
-        double profitRate = (double)totalProfit / ((double)(this.purchaseQuantity * LOTTO_AMOUNT));
-
-        return Math.round(profitRate * 100) / 100.0;
+    public void add(Lottery lottery) {
+        this.lotteries.add(lottery);
     }
 
-    public Map<String, Integer> makeAllLotteriesRank(WinnerLottery winnerLottery) {
-        Map<String, Integer> ranks = getsInitializedMap();
-
-        int lotteriesSize = this.lotteries.size();
-        for (int i = 0; i < lotteriesSize; i++) {
-            Ranking ranking = winnerLottery.rankLottery(lotteries.get(i));
-            ranking.makeRanks(ranks);
-        }
-
-        return ranks;
+    public Lottery get(int index) {
+        return this.lotteries.get(index);
     }
 
-    public static Map<String, Integer> getsInitializedMap() {
-        Map<String, Integer> ranks = new HashMap<>();
-
-        ranks.put("first", INITIALIZATION_NUMBER);
-        ranks.put("second", INITIALIZATION_NUMBER);
-        ranks.put("third", INITIALIZATION_NUMBER);
-        ranks.put("fourth", INITIALIZATION_NUMBER);
-        ranks.put("fifth", INITIALIZATION_NUMBER);
-
-        return ranks;
-    }
-
-    public static void checkPurchaseValidation(String purchaseAmount) {
-        if (LOTTO_AMOUNT < MINIMUM_INPUT_AMOUNT) {
-            throw  new IllegalArgumentException();
-        }
-
-        if (StringUtils.isEmpty(purchaseAmount)) {
-            throw new IllegalArgumentException();
-        }
-
-        if (Integer.parseInt(purchaseAmount) < LOTTO_AMOUNT) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public int lotteriesSize() {
+    public int size() {
         return this.lotteries.size();
     }
 
-    public StringBuilder toStringAllLotteries() {
+    public void addAll(Lotteries lotteries) {
+        for (int i = 0; i < lotteries.size(); i++) {
+            this.lotteries.add(lotteries.get(i));
+        }
+    }
+
+    public StringBuilder toStringLotteries() {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Lottery lottery : this.lotteries) {
@@ -101,5 +43,4 @@ public class Lotteries {
 
         return stringBuilder;
     }
-
 }
