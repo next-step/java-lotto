@@ -1,47 +1,45 @@
-import domain.Lotto;
-import domain.LottoNumbers;
-import domain.LottoMatch;
-import util.Calculator;
+import domain.*;
+import domain.generator.AutoLotto;
+import domain.generator.ManualLotto;
 import util.Console;
-import util.Generator;
 import view.InputView;
 import view.ResultView;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        int money = InputView.inputMoney();
-        if (money == 0) {
+        try {
+            Money money = new Money(InputView.inputMoney());
+            int manualLottoPaper = InputView.buyManualLotto();
+
+            List<Lotto> lottos = new ArrayList<>();
+
+            for (int i = 0; i < manualLottoPaper; i++) {
+                InputView.inputManualLottoNumbers();
+                lottos.add(new ManualLotto(InputView.scanLottoNumbers()).generate());
+            }
+
+            ResultView.purchaseLottoCount(manualLottoPaper, money.calcBalance(manualLottoPaper));
+
+            for (int i = 0; i < money.calcBalance(manualLottoPaper); i++) {
+                Lotto lotto = new AutoLotto().generate();
+                ResultView.printLotto(lotto);
+                lottos.add(lotto);
+            }
+
+            InputView.inputWinningNumbers();
+            WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.convertToLottoNo(InputView.scanLottoNumbers()), InputView.inputBonusBall());
+            LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
+            ResultView.statisticsWinner(lottoResult);
+            ResultView.printYield(new Profit(lottoResult).calcProfile(money.calcPaper()));
+        } catch (InputMismatchException | NumberFormatException e) {
+            Console.numberFormatExceptionMessage();
+        } catch (Exception e) {
+            Console.print(e.getMessage());
             return;
         }
-        int lottoCount = ResultView.purchaseLottoCount(money);
-
-        List<Lotto> lottos = new ArrayList<>();
-        while (lottoCount-- > 0) {
-            Lotto lotto = new Lotto(new LottoNumbers(Generator.lottoNumbers()));
-            lottos.add(lotto);
-            ResultView.printLotto(lotto);
-        }
-
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        if (winningNumbers.isEmpty()) {
-            return;
-        }
-
-        int bonusBall = InputView.inputBonusBall();
-        if (bonusBall == 0) {
-            return;
-        }
-        if (winningNumbers.contains(bonusBall)) {
-            Console.print("당첨번호와 보너스볼 숫자가 같을 수 없습니다.");
-            return;
-        }
-        winningNumbers.add(bonusBall);
-
-        LottoMatch lottoMatch = new LottoMatch(lottos, winningNumbers);
-        ResultView.statisticsWinner(lottoMatch.produceResult());
-        ResultView.printYield(Calculator.yieldCalculator(lottoMatch.produceResult(), money));
     }
 }
