@@ -3,13 +3,18 @@ package domain;
 import util.Generator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private List<LottoNo> lottoNumbers;
 
-    public LottoNumbers(List<LottoNo> lottoNumbers) {
+    private LottoNumbers(List<LottoNo> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.validationLottoNumbers();
+    }
+
+    public static LottoNumbers convertToLottoNo(List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream().map(number -> LottoNo.of(number)).collect(Collectors.toList()));
     }
 
     private void validationLottoNumbers() {
@@ -23,23 +28,11 @@ public class LottoNumbers {
     }
 
     public boolean isContains(LottoNo winningNumber) {
-        boolean isContains = false;
-        for (LottoNo lottoNumber : this.lottoNumbers) {
-            if (lottoNumber.toString().equals(winningNumber.toString())) {
-                isContains = true;
-            }
-        }
-        return isContains;
+        return this.lottoNumbers.contains(winningNumber);
     }
 
     public int calcMatchCount(Lotto lotto) {
-        int matchCount = 0;
-        for (LottoNo lottoNumber : this.lottoNumbers) {
-            if (lotto.isContains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+        return lotto.matchCount(this.lottoNumbers);
     }
 
     @Override

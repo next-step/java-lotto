@@ -13,13 +13,13 @@ public class LottoResultTest {
 
     @Before
     public void initLottoResult() {
-        LottoNumbers firstLotto = new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6)));
-        LottoNumbers secondLotto = new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(8)));
-        LottoNumbers thirdLotto = new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(12)));
-        LottoNumbers fourthLotto = new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(9), new LottoNo(12)));
-        LottoNumbers fifthLotto = new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(7), new LottoNo(9), new LottoNo(12)));
+        LottoNumbers firstLotto = LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers secondLotto = LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 4, 5, 8));
+        LottoNumbers thirdLotto = LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 4, 5, 12));
+        LottoNumbers fourthLotto = LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 4, 9, 12));
+        LottoNumbers fifthLotto = LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 7, 9, 12));
         List<Lotto> lottos = Arrays.asList(new Lotto(firstLotto), new Lotto(secondLotto), new Lotto(thirdLotto), new Lotto(fourthLotto), new Lotto(fifthLotto));
-        WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6))), new LottoNo(8));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 4, 5, 6)), 8);
         lottoResult = new LottoResult(lottos, winningNumbers);
     }
 

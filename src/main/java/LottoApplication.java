@@ -31,8 +31,7 @@ public class LottoApplication {
             }
 
             InputView.inputWinningNumbers();
-            WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(InputView.scanLottoNumbers()), new LottoNo(InputView.inputBonusBall()));
-
+            WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.convertToLottoNo(InputView.scanLottoNumbers()), InputView.inputBonusBall());
             LottoResult lottoResult = new LottoResult(lottos, winningNumbers);
             ResultView.statisticsWinner(lottoResult);
             ResultView.printYield(new Profit(lottoResult).calcProfile(money.calcPaper()));

@@ -17,13 +17,13 @@ public class LottoMatchTest {
 
     @Before
     public void initLottoMatchTest() {
-        this.lotto = new Lotto(new LottoNumbers(Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6))));
+        this.lotto = new Lotto(LottoNumbers.convertToLottoNo(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     public void 로또_2개일치() {
-        List<LottoNo> lottoNos = Arrays.asList(new LottoNo(1), new LottoNo(10), new LottoNo(11), new LottoNo(12), new LottoNo(13), new LottoNo(14));
-        WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(lottoNos), new LottoNo(15));
+        List<Integer> lottoNos = Arrays.asList(1, 10, 11, 12, 13, 14);
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.convertToLottoNo(lottoNos), 15);
         LottoRank lottoMatchCount = new LottoMatch(winningNumbers).matchResult(lotto);
         produceResult.putIfAbsent(lottoMatchCount, Calculator.nullToZero(produceResult.get(lottoMatchCount)) + 1);
         assertThat(produceResult.get(LottoRank.MISS)).isEqualTo(1);
@@ -31,8 +31,8 @@ public class LottoMatchTest {
 
     @Test
     public void 로또_5개일치_보너스볼_일치() {
-        List<LottoNo> lottoNos = Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(10));
-        WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(lottoNos), new LottoNo(6));
+        List<Integer> lottoNos = Arrays.asList(1, 2, 3, 4, 5, 10);
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.convertToLottoNo(lottoNos), 6);
         LottoRank lottoMatchCount = new LottoMatch(winningNumbers).matchResult(lotto);
         produceResult.putIfAbsent(lottoMatchCount, Calculator.nullToZero(produceResult.get(lottoMatchCount)) + 1);
         assertThat(produceResult.get(LottoRank.SECOND)).isEqualTo(1);
@@ -40,8 +40,8 @@ public class LottoMatchTest {
 
     @Test
     public void 로또_5개일치() {
-        List<LottoNo> lottoNos = Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(10));
-        WinningNumbers winningNumbers = new WinningNumbers(new LottoNumbers(lottoNos), new LottoNo(15));
+        List<Integer> lottoNos = Arrays.asList(1, 2, 3, 4, 5, 14);
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.convertToLottoNo(lottoNos), 15);
         LottoRank lottoMatchCount = new LottoMatch(winningNumbers).matchResult(lotto);
         produceResult.putIfAbsent(lottoMatchCount, Calculator.nullToZero(produceResult.get(lottoMatchCount)) + 1);
         assertThat(produceResult.get(LottoRank.THIRD)).isEqualTo(1);

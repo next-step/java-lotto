@@ -9,6 +9,6 @@ public class AutoLotto implements LottosGenerator {
 
     @Override
     public Lotto generate() {
-        return new Lotto(new LottoNumbers(Generator.lottoNumbers()));
+        return new Lotto(LottoNumbers.convertToLottoNo(Generator.lottoNumbers()));
     }
 }
