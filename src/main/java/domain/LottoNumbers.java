@@ -1,41 +1,38 @@
 package domain;
 
-import util.Console;
 import util.Generator;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private List<Integer> lottoNumbers;
+    private List<LottoNo> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) throws Exception {
+    private LottoNumbers(List<LottoNo> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.validationLottoNumbers();
     }
 
-    private void validationLottoNumbers() throws Exception {
+    public static LottoNumbers convertToLottoNo(List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream().map(number -> LottoNo.of(number)).collect(Collectors.toList()));
+    }
+
+    private void validationLottoNumbers() {
         this.checkLottoNumberCount();
-        this.checkLottoNumberRange();
     }
 
-    private void checkLottoNumberCount() throws Exception {
+    private void checkLottoNumberCount() {
         if (this.lottoNumbers.size() != Generator.MAX_LOTTO_NUMBER_COUNT) {
-            Console.print("당첨 번호는 6개 입니다.");
-            throw new Exception();
+            throw new IllegalArgumentException("당첨 번호는 6개 입니다.");
         }
     }
 
-    private void checkLottoNumberRange() throws Exception {
-        for (Integer lottoNumber : this.lottoNumbers) {
-            if (lottoNumber < Generator.MIN_LOTTO_NUMBER || lottoNumber > Generator.MAX_LOTTO_NUMBER) {
-                Console.lottoRangeExceptionMessage();
-                throw new Exception();
-            }
-        }
-    }
-
-    public boolean isContains(int winningNumber) {
+    public boolean isContains(LottoNo winningNumber) {
         return this.lottoNumbers.contains(winningNumber);
+    }
+
+    public int calcMatchCount(Lotto lotto) {
+        return lotto.matchCount(this.lottoNumbers);
     }
 
     @Override
@@ -43,13 +40,4 @@ public class LottoNumbers {
         return lottoNumbers.toString();
     }
 
-    public int calcMatchCount(Lotto lotto) {
-        int matchCount = 0;
-        for (Integer lottoNumber : this.lottoNumbers) {
-            if (lotto.isContains(lottoNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
-    }
 }
