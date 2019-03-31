@@ -14,7 +14,7 @@ public class LotteryNo {
     }
 
     private static void checkLotteryNo(int number) {
-        if(number < 1 || number > 45) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException();
         }
     }
@@ -29,8 +29,8 @@ public class LotteryNo {
         return new HashSet<>(lotteryNos);
     }
 
-    public int getNumber() {
-        return this.number;
+    public static boolean isEqual(LotteryNo number, LotteryNo lotteryNo) {
+        return lotteryNo.number == number.number;
     }
 
     @Override
