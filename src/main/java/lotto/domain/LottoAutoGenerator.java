@@ -10,7 +10,13 @@ public class LottoAutoGenerator implements LottoGenerator{
 
   private final static int FROM_INDEX = 0;
 
-  public Lotto generate() {
+  private int quantity;
+
+  public LottoAutoGenerator(int quantity) {
+    this.quantity = quantity;
+  }
+
+  public Lotto generateLotto() {
 
     List<LottoNumber> lottoNumbers = IntStream.range(LottoNumber.MINIMUM, LottoNumber.MAXIMUM)
         .mapToObj(LottoNumber::getInstance)
@@ -24,10 +30,11 @@ public class LottoAutoGenerator implements LottoGenerator{
     );
   }
 
-  public List<Lotto> generate(int quantity) {
+  @Override
+  public List<Lotto> generate() {
 
     return IntStream.range(0, quantity)
-        .mapToObj(index -> generate())
+        .mapToObj(index -> generateLotto())
         .collect(Collectors.toList());
   }
 

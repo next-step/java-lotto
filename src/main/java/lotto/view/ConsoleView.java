@@ -42,9 +42,8 @@ public class ConsoleView {
       inputLottoNumbers = consoleInputView.inputManualNumbers(manualQuantity);
     }
 
-    return inputLottoNumbers.stream()
-        .map(LottoManualGenerator::generate)
-        .collect(Collectors.toList());
+    LottoManualGenerator lottoGenerator = new LottoManualGenerator(inputLottoNumbers);
+    return lottoGenerator.generate();
   }
 
   private static void winState(MyLottos myLottos, WinNumbers winNumber) {

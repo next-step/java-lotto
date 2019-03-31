@@ -9,11 +9,10 @@ public class LottoStore {
 
   public static Lottos buy(int autoQuantity, List<Lotto> manualLottos) {
 
-    LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+    List<Lotto> lottos = new ArrayList<>(manualLottos);
 
-    List<Lotto> lottos = new ArrayList<>();
-    lottos.addAll(manualLottos);
-    lottos.addAll(lottoAutoGenerator.generate(autoQuantity));
+    LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator(autoQuantity);
+    lottos.addAll(lottoAutoGenerator.generate());
     return new Lottos(lottos);
   }
 
