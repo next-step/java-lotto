@@ -1,27 +1,31 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoStore {
 
   private final static int LOTTO_AMOUNT = 1_000;
 
-  public static List<Lotto> buy(Money insertMoney) {
+  public static Lottos buy(int buyQuantity, List<String> inputLottoNumbers) {
 
-    int buyQuantity = insertMoney.buy(LOTTO_AMOUNT);
+    List<Lotto> manualLottos = generateManualLottos(inputLottoNumbers);
+    manualLottos.addAll(generateAutoLottos(buyQuantity - manualLottos.size()));
+    return new Lottos(manualLottos);
+  }
 
-    List<Lotto> lottos = new ArrayList<>();
-    for(int buyIndex = 0; buyIndex < buyQuantity; buyIndex++) {
+  private static List<Lotto> generateManualLottos(List<String> inputLottoNumbers) {
 
-      Set<LottoNumber> lottoNumbers = LottoGenerator.generate();
-      lottos.add(new Lotto(lottoNumbers));
-    }
-    return lottos;
+    LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(inputLottoNumbers);
+    return lottoManualGenerator.generate();
+  }
+
+  private static List<Lotto> generateAutoLottos(int quantity) {
+
+    LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator(quantity);
+    return lottoAutoGenerator.generate();
+  }
+
+  public static int quantity(Money buyMoney) {
+    return buyMoney.buy(LOTTO_AMOUNT);
   }
 }

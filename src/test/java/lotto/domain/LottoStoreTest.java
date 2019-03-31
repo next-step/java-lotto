@@ -2,6 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
 
 public class LottoStoreTest {
@@ -10,26 +13,26 @@ public class LottoStoreTest {
   public void test_insertMoney_1000() {
 
     // Given
-    Money insertMoney = new Money(1000);
+    Money buyMoney = new Money(1000);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney).size();
+    int buyQuantity = LottoStore.quantity(buyMoney);
 
     // Then
-    assertThat(lottoQuantity).isEqualTo(1);
+    assertThat(buyQuantity).isEqualTo(1);
   }
 
   @Test
   public void test_insertMoney_1500() {
 
     // Given
-    Money insertMoney = new Money(1500);
+    Money buyMoney = new Money(1500);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney).size();
+    int buyQuantity = LottoStore.quantity(buyMoney);
 
     // Then
-    assertThat(lottoQuantity).isEqualTo(1);
+    assertThat(buyQuantity).isEqualTo(1);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -39,7 +42,7 @@ public class LottoStoreTest {
     Money insertMoney = new Money(500);
 
     // When
-    LottoStore.buy(insertMoney);
+    LottoStore.quantity(insertMoney);
   }
 
   @Test
@@ -49,9 +52,50 @@ public class LottoStoreTest {
     Money insertMoney = new Money(14000);
 
     // When
-    int lottoQuantity = LottoStore.buy(insertMoney).size();
+    int buyQuantity = LottoStore.quantity(insertMoney);
 
     // Then
-    assertThat(lottoQuantity).isEqualTo(14);
+    assertThat(buyQuantity).isEqualTo(14);
+  }
+
+  @Test
+  public void test_buy_autoAndManual_test() {
+
+    // Given
+    int buyQuantity = 2;
+    List<String> inputLottoNumbers = Collections.singletonList("4, 42, 14, 32, 28, 19");
+
+    // When
+    Lottos lottos = LottoStore.buy(buyQuantity, inputLottoNumbers);
+
+    // Then
+    assertThat(lottos.getQuantity()).isEqualTo(2);
+  }
+
+  @Test
+  public void test_buy_autoOnly_test() {
+
+    // Given
+    int autoQuantity = 5;
+
+    // When
+    Lottos lottos = LottoStore.buy(autoQuantity, new ArrayList<>());
+
+    // Then
+    assertThat(lottos.getQuantity()).isEqualTo(autoQuantity);
+  }
+
+  @Test
+  public void test_buy_manualOnly_test() {
+
+    // Given
+    int buyQuantity = 1;
+    List<String> inputLottoNumbers = Collections.singletonList("4, 42, 14, 32, 28, 19");
+
+    // When
+    Lottos lottos = LottoStore.buy(buyQuantity, inputLottoNumbers);
+
+    // Then
+    assertThat(lottos.getQuantity()).isEqualTo(1);
   }
 }
