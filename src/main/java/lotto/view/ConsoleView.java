@@ -30,7 +30,7 @@ public class ConsoleView {
     winState(myLottos, winNumbers);
   }
 
-  private static List<Lotto> manualLotto(int buyQuantity) {
+  private static List<String> inputManualLotto(int buyQuantity) {
 
     int manualQuantity = consoleInputView.inputManualQuantity();
     if (manualQuantity > buyQuantity) {
@@ -42,8 +42,7 @@ public class ConsoleView {
       inputLottoNumbers = consoleInputView.inputManualNumbers(manualQuantity);
     }
 
-    LottoManualGenerator lottoGenerator = new LottoManualGenerator(inputLottoNumbers);
-    return lottoGenerator.generate();
+    return inputLottoNumbers;
   }
 
   private static void winState(MyLottos myLottos, WinNumbers winNumber) {
@@ -62,9 +61,8 @@ public class ConsoleView {
     Money buyMoney = new Money(insertMoney);
     int buyQuantity = LottoStore.quantity(buyMoney);
 
-    List<Lotto> manualLottos = manualLotto(insertMoney);
-    int autoQuantity = buyQuantity - manualLottos.size();
-    Lottos lottos = LottoStore.buy(autoQuantity, manualLottos);
+    List<String> inputLottoNumbers = inputManualLotto(buyQuantity);
+    Lottos lottos = LottoStore.buy(buyQuantity, inputLottoNumbers);
     for (Lotto lotto : lottos.getLottos()) {
       ConsoleResultView.printIssueLottoNumbers(lotto);
     }

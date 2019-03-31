@@ -62,12 +62,11 @@ public class LottoStoreTest {
   public void test_buy_autoAndManual_test() {
 
     // Given
-    int autoQuantity = 1;
-    Lotto lotto = new Lotto(LottoTest.intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    List<Lotto> manualLottos = Collections.singletonList(lotto);
+    int buyQuantity = 2;
+    List<String> inputLottoNumbers = Collections.singletonList("4, 42, 14, 32, 28, 19");
 
     // When
-    Lottos lottos = LottoStore.buy(autoQuantity, manualLottos);
+    Lottos lottos = LottoStore.buy(buyQuantity, inputLottoNumbers);
 
     // Then
     assertThat(lottos.getQuantity()).isEqualTo(2);
@@ -90,12 +89,11 @@ public class LottoStoreTest {
   public void test_buy_manualOnly_test() {
 
     // Given
-    int autoQuantity = 0;
-    Lotto lotto = new Lotto(LottoTest.intArrayToLottoNumbers(4, 42, 14, 32, 28, 19));
-    List<Lotto> manualLottos = Collections.singletonList(lotto);
+    int buyQuantity = 1;
+    List<String> inputLottoNumbers = Collections.singletonList("4, 42, 14, 32, 28, 19");
 
     // When
-    Lottos lottos = LottoStore.buy(autoQuantity, manualLottos);
+    Lottos lottos = LottoStore.buy(buyQuantity, inputLottoNumbers);
 
     // Then
     assertThat(lottos.getQuantity()).isEqualTo(1);
