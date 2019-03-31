@@ -6,7 +6,12 @@ import org.junit.Test;
 public class LotteryNoTest {
 
     @Test(expected = IllegalArgumentException.class)
-    public void  일부터_사십오의_숫자_입력시_에러_검사() {
+    public void  사십오의_이상의_숫자_입력시_에러_검사() {
         new LotteryNo(46);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void  일이하의_숫자_입력시_에러_검사() {
+        new LotteryNo(-1);
     }
 }
