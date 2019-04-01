@@ -15,19 +15,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class BonusBallTest {
     static final int BONUS_NUMBER = 13;
-    static final Ranking second_ranking = Ranking.getRank(5, true);
-    static final Ranking third_ranking = Ranking.getRank(5, false);
+    static final Ranking SECOND_RANKING = Ranking.getRank(5, true);
+    static final Ranking THIRD_RANKING = Ranking.getRank(5, false);
 
     final Lottery lottery = new Lottery(makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
     @Test
     public void 보너스_랭크_반환값_테스트() {
-        Java6Assertions.assertThat(second_ranking).isEqualTo(SECOND_CLASS);
+        Java6Assertions.assertThat(SECOND_RANKING).isEqualTo(SECOND_CLASS);
     }
 
     @Test
     public void 삼등_랭크_반환값_테스트() {
-        Java6Assertions.assertThat(third_ranking).isEqualTo(THIRD_CLASS);
+        Java6Assertions.assertThat(THIRD_RANKING).isEqualTo(THIRD_CLASS);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class BonusBallTest {
         final Lottery winnerNumber = new Lottery(makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 13)));
         final WinnerLottery winnerLottery = new WinnerLottery(winnerNumber, BONUS_NUMBER);
 
-        Java6Assertions.assertThat(second_ranking.getProfit(lottery, winnerLottery)).isEqualTo(3_000_000);
+        Java6Assertions.assertThat(SECOND_RANKING.getProfit(lottery, winnerLottery)).isEqualTo(3_000_000);
     }
 
     @Test
