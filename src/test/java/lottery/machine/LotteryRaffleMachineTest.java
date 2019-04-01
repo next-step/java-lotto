@@ -13,10 +13,11 @@ public class LotteryRaffleMachineTest {
 
     @Test
     public void test_추첨_1등_2개() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        List<LotteryTicket> tickets = createTickets(
-                Arrays.asList(1, 2, 3, 4, 5, 6),
-                Arrays.asList(1, 2, 3, 4, 5, 6));
+        LotteryTicket firstRankNumbersTicket = LotteryTicket.generate("1, 2, 3, 4, 5, 6");
+        WinningTicket winningTicket = new WinningTicket(
+                firstRankNumbersTicket, LotteryNumber.of(10));
+        List<LotteryTicket> tickets = Arrays.asList(
+                firstRankNumbersTicket, firstRankNumbersTicket);
 
         LotteryRaffleMachine storage = new LotteryRaffleMachine(tickets);
 
@@ -24,12 +25,5 @@ public class LotteryRaffleMachineTest {
 
         assertThat(statistics.countRank(LotteryRank.FIRST))
                 .isEqualTo(TicketCount.valueOf(2));
-    }
-
-    private List<LotteryTicket> createTickets(List<Integer> ...numbers) {
-        return Arrays.asList(numbers)
-                .stream()
-                .map(LotteryTicket::new)
-                .collect(Collectors.toList());
     }
 }

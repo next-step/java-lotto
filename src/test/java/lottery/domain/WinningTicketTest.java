@@ -8,10 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinningTicketTest {
 
+    final LotteryNumber bonusNumber = LotteryNumber.of(10);
+    final WinningTicket winningTicket =
+            new WinningTicket(LotteryTicket.generate("1, 2, 3, 4, 5, 6"), bonusNumber);
+
     @Test
     public void test_당첨_1등() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket myTicket = new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LotteryTicket myTicket = LotteryTicket.generate("1, 2, 3, 4, 5, 6");
 
         assertThat(winningTicket.raffle(myTicket))
                 .isEqualTo(LotteryRank.FIRST);
@@ -19,8 +22,7 @@ public class WinningTicketTest {
 
     @Test
     public void test_당첨_2등() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket myTicket = new LotteryTicket(Arrays.asList(2, 3, 4, 5, 6, 10));
+        LotteryTicket myTicket = LotteryTicket.generate("2, 3, 4, 5, 6, " + bonusNumber);
 
         assertThat(winningTicket.raffle(myTicket))
                 .isEqualTo(LotteryRank.SECOND);
@@ -28,8 +30,7 @@ public class WinningTicketTest {
 
     @Test
     public void test_당첨_3등() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket myTicket = new LotteryTicket(Arrays.asList(2, 3, 4, 5, 6, 7));
+        LotteryTicket myTicket = LotteryTicket.generate("2, 3, 4, 5, 6, 7");
 
         assertThat(winningTicket.raffle(myTicket))
                 .isEqualTo(LotteryRank.THIRD);
@@ -37,8 +38,7 @@ public class WinningTicketTest {
 
     @Test
     public void test_당첨_4등() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket myTicket = new LotteryTicket(Arrays.asList(3, 4, 5, 6, 7, 8));
+        LotteryTicket myTicket = LotteryTicket.generate("3, 4, 5, 6, 7, 8");
 
         assertThat(winningTicket.raffle(myTicket))
                 .isEqualTo(LotteryRank.FOURTH);
@@ -46,8 +46,7 @@ public class WinningTicketTest {
 
     @Test
     public void test_당첨_5등() {
-        WinningTicket winningTicket = new WinningTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-        LotteryTicket myTicket = new LotteryTicket(Arrays.asList(4, 5, 6, 7, 8, 9));
+        LotteryTicket myTicket = LotteryTicket.generate("4, 5, 6, 7, 8, 9");
 
         assertThat(winningTicket.raffle(myTicket))
                 .isEqualTo(LotteryRank.FIFTH);

@@ -12,10 +12,6 @@ public class InputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    private static final String SEPARATOR = ",";
-
-    private static final String REMOVE_REGEX = " ";
-
     public static Money inputPrice() {
         System.out.println("구매금액을 입력해 주세요");
 
@@ -28,43 +24,25 @@ public class InputView {
 
         System.out.println("수동으로 구매할 번호를 입력해 주세요");
         return IntStream.range(0, count.getAmount())
-                .mapToObj(i -> new LotteryTicket(inputTicketNumbers()))
+                .mapToObj(i -> LotteryTicket.generate(sc.nextLine()))
                 .collect(Collectors.toList());
-    }
-
-    private static List<Integer> inputTicketNumbers() {
-        return toIntegers(split(replace(sc.nextLine())));
-    }
-
-    private static List<Integer> toIntegers(String[] lines) {
-        return Arrays.stream(lines)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private static String[] split(String line) {
-        return line.split(SEPARATOR);
-    }
-
-    private static String replace(String line) {
-        return line.replaceAll(REMOVE_REGEX, "");
     }
 
     public static WinningTicket inputWinningTicket() {
         return new WinningTicket(inputWinningNumbersTicket(), inputBonusNumber());
     }
 
-    private static List<Integer> inputWinningNumbersTicket() {
+    private static LotteryTicket inputWinningNumbersTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
-        List<Integer> result = inputTicketNumbers();
+        LotteryTicket result = LotteryTicket.generate(sc.nextLine());
         System.out.println();
 
         return result;
     }
 
-    private static int inputBonusNumber() {
+    private static LotteryNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        int result = nextInt();
+        LotteryNumber result = LotteryNumber.of(nextInt());
         System.out.println();
 
         return result;
