@@ -76,37 +76,25 @@ body {
 	<div class="submit-button">
 		<button class="btn btn-lg btn-primary btn-block" type="submit">당첨 번호</button>
 	</div>
+
+	<pre class="pre-scrollable">
+		<h4 class="text-center"><{{lottoPaper}}개를 구매 하셨습니다></h4>
+		<table class="table">
+			<thead>
+				<th></th>
+				<th class="text-center">로또 번호</th>
+			</thead>
+			<tbody>
+			{{#lottos}}
+			 <tr>
+				 <th>{{@index}}</th>
+				 <td>{{.}}</td>
+				 <input type="hidden" name="lottos" value="{{.}}"/>
+			 </tr>
+			{{/lottos}}
+			</tbody>
+		</table>
+	</pre>
 </form>
-<pre class="pre-scrollable">
-	<h4 class="text-center"><5개를 구매 하셨습니다></h4>
-	<table class="table">
-		<thead>
-			<th></th>
-			<th class="text-center">로또 번호</th>
-		</thead>
-		<tbody>
-		<tr>
-			<th>1</th>
-			<td>[8, 21, 23, 41, 42, 43]</td>
-		</tr>
-		<tr>
-			<th>2</th>
-			<td>[3, 5, 11, 16, 32, 38]</td>
-		</tr>
-		<tr>
-			<th>3</th>
-			<td>[7, 11, 16, 35, 36, 44]</td>
-		</tr>
-		<tr>
-			<th>4</th>
-			<td>[1, 8, 11, 31, 41, 42]</td>
-		</tr>
-		<tr>
-			<th>5</th>
-			<td>[13, 14, 16, 38, 42, 45]</td>
-		</tr>
-		</tbody>
-	</table>
-</pre>
 </body>
 </html>
