@@ -1,16 +1,21 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lottery;
+import lotto.domain.LotteryNo;
+import lotto.domain.Ranking;
+import lotto.domain.TotalLotteries;
 import org.junit.Test;
+import util.Random;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static lotto.controller.LotteryGame.main;
-import static lotto.domain.TotalLotteries.getsInitializedMap;
 import static lotto.domain.LotteryNo.makeLotteryNos;
+import static lotto.domain.TotalLotteries.getsInitializedMap;
 import static org.assertj.core.api.Assertions.assertThat;
-import static util.Random.generateRandom;
-import static util.Random.makeNumber;
 
 
 public class LotteryTest {
@@ -67,14 +72,16 @@ public class LotteryTest {
 
     @Test
     public void 랜덤값_생성개수_테스트() {
-        Lottery random = generateRandom();
+        Random random = new Random();
+        Lottery randomLottery = random.generateRandom();
 
-        assertThat(random.getLotterySize()).isEqualTo(6);
+        assertThat(randomLottery.getLotterySize()).isEqualTo(6);
     }
 
     @Test
     public void 로또_생성전_랜덤개수_생성_테스트() {
-        List<LotteryNo> numbers = makeNumber();
+        Random random = new Random();
+        List<LotteryNo> numbers = random.makeNumber();
 
         assertThat(numbers.size()).isEqualTo(45);
     }

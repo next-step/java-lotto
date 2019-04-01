@@ -12,8 +12,10 @@ public class AutoLotteries {
     }
 
     public Lotteries generateAutoLotteries() {
+        Random random = new Random();
+
         for (int i = 0; i < this.quantity; i++) {
-            this.autoLotteries.add(Random.generateRandom());
+            this.autoLotteries.add(random.generateRandom());
         }
 
         return this.autoLotteries;
