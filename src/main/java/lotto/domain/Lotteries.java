@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotteries {
     private List<Lottery> lotteries;
@@ -28,19 +29,15 @@ public class Lotteries {
     }
 
     public void addAll(Lotteries lotteries) {
-        for (int i = 0; i < lotteries.size(); i++) {
+        int lotterySize = lotteries.size();
+        for (int i = 0; i < lotterySize; i++) {
             this.lotteries.add(lotteries.get(i));
         }
     }
 
-    public StringBuilder toStringLotteries() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Lottery lottery : this.lotteries) {
-            stringBuilder.append(lottery.toString());
-            stringBuilder.append("\n");
-        }
-
-        return stringBuilder;
+    public String toStringLotteries() {
+    return lotteries.stream()
+            .map(lottery -> lottery.toString())
+            .collect(Collectors.joining("\n"));
     }
 }

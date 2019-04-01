@@ -84,7 +84,7 @@ public class TotalLotteries {
     }
 
 
-    public StringBuilder toStringTotalLotteries() {
+    public String toStringTotalLotteries() {
         return this.lotteries.toStringLotteries();
     }
 }

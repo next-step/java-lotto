@@ -13,7 +13,7 @@ public class ManualLottery {
         return this.manualLotteries = manualLotteries;
     }
 
-    public StringBuilder toStringManualLotteries() {
+    public String toStringManualLotteries() {
         return this.manualLotteries.toStringLotteries();
     }
 
