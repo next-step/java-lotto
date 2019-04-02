@@ -12,6 +12,7 @@ public class ResultView {
 
     private final static Map<Integer, Integer> PROFIT_VALUE = new HashMap<>();
     static {
+        PROFIT_VALUE.put(LottoProfit.FIFTH.getNumberOfMatch(), LottoProfit.FOURTH.getPrizeMoney());
         PROFIT_VALUE.put(LottoProfit.FOURTH.getNumberOfMatch(), LottoProfit.FOURTH.getPrizeMoney());
         PROFIT_VALUE.put(LottoProfit.THIRD.getNumberOfMatch(), LottoProfit.THIRD.getPrizeMoney());
         PROFIT_VALUE.put(LottoProfit.SECOND.getNumberOfMatch(), LottoProfit.SECOND.getPrizeMoney());

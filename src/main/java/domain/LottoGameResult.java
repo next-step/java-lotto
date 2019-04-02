@@ -9,6 +9,7 @@ public class LottoGameResult {
 
     LottoGameResult() {
         gameResult = new HashMap<>();
+        gameResult.put(LottoProfit.FIFTH.getNumberOfMatch(), 0);
         gameResult.put(LottoProfit.FOURTH.getNumberOfMatch(), 0);
         gameResult.put(LottoProfit.THIRD.getNumberOfMatch(), 0);
         gameResult.put(LottoProfit.SECOND.getNumberOfMatch(), 0);
@@ -19,12 +20,12 @@ public class LottoGameResult {
 
         for(Lotto userLotto : userLottos) {
             LottoMatch result = new LottoMatch(winningLotto, userLotto);
-            int numberOfMatch = result.getNumberOfMatch();
-            if(numberOfMatch >= 3) {
+            int numberOfMatch = result.getProfit().getNumberOfMatch();
+            System.out.println(numberOfMatch);
+            if(numberOfMatch >= LottoProfit.valueOf("FIFTH").getNumberOfMatch() ) {
                 gameResult.put(numberOfMatch, gameResult.get(numberOfMatch) + 1);
             }
         }
-        System.out.println(gameResult.toString());
     }
 
     public Map<Integer, Integer> getGameResult() {

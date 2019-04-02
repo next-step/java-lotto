@@ -7,8 +7,6 @@ import domain.WinningLotto;
 import view.InputView;
 import view.ResultView;
 
-import java.util.Map;
-
 public class LottoGameMain {
 
     public static void main(String args[]) {
@@ -17,7 +15,7 @@ public class LottoGameMain {
 
         lottoGame.printUserLottos();
 
-        WinningLotto winningLotto = InputView.getWinnerNoByString();
+        WinningLotto winningLotto = InputView.getWinnerNoByInput();
 
         LottoGameResult result = lottoGame.getMultipleResults(winningLotto);
 

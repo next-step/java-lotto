@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum LottoProfit {
 
     MISS(0,0),
@@ -8,6 +10,8 @@ public enum LottoProfit {
     THIRD(5,1_500_000),
     SECOND(5, 30_000_000),
     FIRST(6,2_000_000_000);
+
+    private static final int WINNING_MIN_MATCH = 3;
 
     private int numberOfMatch;
     private int prizeMoney;
@@ -26,8 +30,24 @@ public enum LottoProfit {
     }
 
     public static LottoProfit valueOf(int numberOfMatch, boolean matchBonusNo) {
-        //TODO 일치하는 수 -> 로또 등수로 변경
-        return null;
+        if (numberOfMatch < WINNING_MIN_MATCH) {
+            return MISS;
+        }
+
+        if (SECOND.matchCount(numberOfMatch) && matchBonusNo) {
+            return SECOND;
+        }
+
+        for (LottoProfit profit : values()) {
+            if (profit.matchCount(numberOfMatch)) {
+                return profit;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    private boolean matchCount(int numberOfMatch) {
+        return this.numberOfMatch == numberOfMatch;
     }
 
 }

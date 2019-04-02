@@ -14,17 +14,18 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int match(Lotto userLotto) {
+    public LottoProfit match(Lotto userLotto) {
         int count = 0;
 
         for (int number : numbers) {
             if (contains(userLotto, number)) count++;
         }
 
-        if (contains(userLotto, bonusNumber)) {
-            count++;
+        if (count == (LottoProfit.THIRD.getNumberOfMatch() - 1) && contains(userLotto, bonusNumber)) {
+            return LottoProfit.SECOND;
         }
-        return count;
+
+        return LottoProfit.valueOf(count, false);
     }
 
     private boolean contains(Lotto userLotto, int number) {

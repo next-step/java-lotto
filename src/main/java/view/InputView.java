@@ -21,22 +21,25 @@ public class InputView {
     }
 
 
-    public static WinningLotto getWinnerNoByString() {
-        WinningLotto winner;
-        List<Integer> speicifedNumbers = new ArrayList<>();
+    public static WinningLotto getWinnerNoByInput() {
+
         System.out.println("지난 주 당첨 번호를 입력해 주세요.(,로 숫자 구분)");
         Scanner scanner = new Scanner(System.in);
         String[] inputs = splitStringToWinner(scanner.nextLine());
 
+        List<Integer> speicifedNumbers = new ArrayList<>();
         for(String input : inputs) {
-            speicifedNumbers.add(Integer.parseInt(input));
+            speicifedNumbers.add(toInt(input));
         }
 
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = scanner.nextInt();
 
-        winner = new WinningLotto(speicifedNumbers, bonusNumber);
-        return winner;
+        return new WinningLotto(speicifedNumbers, bonusNumber);
+    }
+
+    private static int toInt(String input) {
+        return Integer.parseInt(input);
     }
 
     private static String[] splitStringToWinner(String input) {
