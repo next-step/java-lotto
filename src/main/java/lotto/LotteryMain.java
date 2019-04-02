@@ -26,13 +26,13 @@ public class LotteryMain {
     }
 
     public static List<Integer> getLottery(String winningLottoNumber) {
-        return Arrays.asList(toInt(winningLottoNumber))
+        return Arrays.asList(splitComma(winningLottoNumber))
                 .stream()
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
 
-    public static String[] toInt(String winningLottoNumber) {
+    public static String[] splitComma(String winningLottoNumber) {
         return winningLottoNumber.split(LotteryGenerator.FORMAT_COMMA);
     }
 }
