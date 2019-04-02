@@ -3,40 +3,38 @@ package lotto.application;
 import lotto.domain.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoService {
     private static final String NUMBER_SEPARATOR = ", ";
+    private static final int ROI_SCALE = 2;
 
-    public LottoPaper issue(final int amount) {
-        return new LottoPaper(
-                IntStream.rangeClosed(1, getNumberOfLottoToPurchase(amount))
-                        .mapToObj(time -> Lotto.automatic())
-                        .collect(Collectors.toList())
-        );
+    public LottoPaper issue(final int amount, final List<String> manualNumbers) {
+        return LottoPaper.issue(Money.from(amount), getLottoNumbers(manualNumbers));
     }
 
     public ResultView viewResults(final LottoPaper lottoPaper, final String winningNumber, final int bonusNumber) {
         final WinningStatistics statistics = lottoPaper.viewResults(getWinningNumber(winningNumber, bonusNumber));
-        return new ResultView(new WinningStatisticsView(statistics.get()), statistics.getRoi());
-    }
-
-    private int getNumberOfLottoToPurchase(final int amount) {
-        return (int) Money.from(amount)
-                .divide(Lotto.PRICE)
-                ;
+        return new ResultView(new WinningStatisticsView(statistics.get()), statistics.getRoi(ROI_SCALE).doubleValue());
     }
 
     private WinningNumber getWinningNumber(final String lottoNumbers, final int bonusNumber) {
         return new WinningNumber(getLottoNumbers(lottoNumbers), LottoNumber.from(bonusNumber));
     }
 
+    private List<LottoNumbers> getLottoNumbers(final List<String> manualNumbers) {
+        return manualNumbers.stream()
+                .map(this::getLottoNumbers)
+                .collect(Collectors.toList())
+                ;
+    }
+
     private LottoNumbers getLottoNumbers(final String lottoNumbers) {
         return new LottoNumbers(
                 Arrays.stream(lottoNumbers.split(NUMBER_SEPARATOR))
-                        .map(Integer::valueOf)
-                        .collect(Collectors.toList())
+                        .mapToInt(Integer::valueOf)
+                        .toArray()
         );
     }
 }

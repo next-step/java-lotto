@@ -30,6 +30,6 @@ public class LottoNumberTest {
         final LottoNumber lottoNumber = LottoNumber.from(number);
 
         // then
-        assertThat(lottoNumber.get()).isEqualTo(number);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(number));
     }
 }

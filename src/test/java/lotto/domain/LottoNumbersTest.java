@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.Test;
 
-import java.util.Arrays;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumbersTest {
     @Test(expected = IllegalArgumentException.class)
@@ -10,7 +10,7 @@ public class LottoNumbersTest {
         // given
         // when
         // then
-        new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        new LottoNumbers(1, 2, 3, 4, 5, 6, 7);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -18,6 +18,31 @@ public class LottoNumbersTest {
         // given
         // when
         // then
-        new LottoNumbers(Arrays.asList(1, 1, 1, 1, 1, 1));
+        new LottoNumbers(1, 1, 1, 1, 1, 1);
+    }
+
+    @Test
+    public void 가지고_있는_로또_번호인_경우() {
+        // given
+        final int lottoNumber = 1;
+        final LottoNumbers lottoNumbers = new LottoNumbers(lottoNumber, 2, 3, 4, 5, 6);
+
+        // when
+        final boolean contains = lottoNumbers.contains(LottoNumber.from(lottoNumber));
+
+        // then
+        assertThat(contains).isTrue();
+    }
+
+    @Test
+    public void 여섯_개_일치() {
+        // given
+        final LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+
+        // when
+        final long howManyMatches = lottoNumbers.howManyMatches(lottoNumbers);
+
+        // then
+        assertThat(howManyMatches).isEqualTo(6);
     }
 }

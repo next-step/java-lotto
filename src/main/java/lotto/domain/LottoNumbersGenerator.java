@@ -17,6 +17,11 @@ public class LottoNumbersGenerator {
 
     public static LottoNumbers randomNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return new LottoNumbers(LOTTO_NUMBERS.subList(0, LottoNumbers.TOTAL_NUMBER_OF_THE_LOTTO));
+        return new LottoNumbers(
+                LOTTO_NUMBERS.subList(0, LottoNumbers.TOTAL_NUMBER_OF_THE_LOTTO)
+                        .stream()
+                        .mapToInt(Integer::valueOf)
+                        .toArray()
+        );
     }
 }

@@ -4,47 +4,57 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-public class Money {
-    public static final Money ZERO = new Money(0);
-    public static final Money ONE = new Money(1);
+public class Money implements Comparable<Money> {
+    public static final Money ZERO = new Money(BigDecimal.ZERO);
+    public static final Money ONE = new Money(BigDecimal.ONE);
 
-    private static final int MINIMUM = 0;
-    private static final int SCALE = 2;
+    private static final int DEFAULT_SCALE = 0;
+    private static final RoundingMode DEFAULT_ROUNDING_MODE = RoundingMode.FLOOR;
 
-    private long value;
+    private BigDecimal value;
 
-    private Money(final long value) {
+    private Money(final BigDecimal value) {
         validate(value);
         this.value = value;
     }
 
     public static Money from(final long value) {
-        return new Money(value);
+        return new Money(BigDecimal.valueOf(value));
     }
 
-    public long get() {
-        return value;
+    public Money add(final Money money) {
+        return new Money(this.value.add(money.value));
+    }
+
+    public Money subtract(final Money money) {
+        return new Money(this.value.subtract(money.value));
     }
 
     public Money multiply(final long multiplicand) {
-        return new Money(
-                BigDecimal.valueOf(this.value)
-                        .multiply(BigDecimal.valueOf(multiplicand))
-                        .longValue()
-        );
+        return new Money(this.value.multiply(BigDecimal.valueOf(multiplicand)));
     }
 
-    public double divide(final Money money) {
-        return BigDecimal.valueOf(this.value)
-                .divide(BigDecimal.valueOf(money.value), SCALE, RoundingMode.FLOOR)
-                .doubleValue()
-                ;
+    public BigDecimal divide(final Money money) {
+        return divide(money, DEFAULT_SCALE, DEFAULT_ROUNDING_MODE);
     }
 
-    private void validate(final long value) {
-        if (value < MINIMUM) {
+    public BigDecimal divide(final Money money, final int scale) {
+        return divide(money, scale, DEFAULT_ROUNDING_MODE);
+    }
+
+    public BigDecimal divide(final Money money, final int scale, final RoundingMode roundingMode) {
+        return this.value.divide(money.value, scale, roundingMode);
+    }
+
+    private void validate(final BigDecimal value) {
+        if (value.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public int compareTo(final Money o) {
+        return this.value.compareTo(o.value);
     }
 
     @Override
@@ -52,7 +62,7 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final Money money = (Money) o;
-        return value == money.value;
+        return Objects.equals(value, money.value);
     }
 
     @Override
@@ -62,6 +72,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return value.toString();
     }
 }
