@@ -14,7 +14,9 @@ public class ResultView {
         System.out.println(lotto.toString());
     }
 
-    public void printLottos(List<Lotto> lottos) {
+    public void printLottos(List<Lotto> lottos, int quantity, int manualQuantity) {
+        System.out.println();
+        System.out.println("수동으로 " + manualQuantity + "장, 자동으로 " + (quantity - manualQuantity) + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             printLotto(lotto);
         }
@@ -38,16 +40,16 @@ public class ResultView {
     }
 
     private String printBonus(LottoResult lottoResult, WinningType winningType) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(winningType.getMatchCount());
-        sb.append("개 일치");
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(winningType.getMatchCount());
+        buffer.append("개 일치");
         if(winningType.isMatchBonus()) {
-            sb.append(", 보너스 볼 일치");
+            buffer.append(", 보너스 볼 일치");
         }
-        sb.append(" (");
-        sb.append(winningType.getPrize());
-        sb.append(") - ");
-        sb.append(lottoResult.matchLottoWithBonusCount(winningType.getMatchCount(), winningType.isMatchBonus()));
-        return sb.toString();
+        buffer.append(" (");
+        buffer.append(winningType.getPrize());
+        buffer.append(") - ");
+        buffer.append(lottoResult.matchLottoWithBonusCount(winningType.getMatchCount(), winningType.isMatchBonus()));
+        return buffer.toString();
     }
 }

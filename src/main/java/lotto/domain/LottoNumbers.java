@@ -17,9 +17,14 @@ public class LottoNumbers {
         checkNumberSize(inputNumbers);
     }
 
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+        checkNumberSize(lottoNumbers);
+    }
+
     private void checkNumberSize(Set<LottoNumber> lottoNumbers) {
-        if(lottoNumbers.size() < LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException();
+        if(lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("번호의 갯수가 맞지 않습니다.");
         }
     }
 
@@ -36,7 +41,7 @@ public class LottoNumbers {
         return matchCount;
     }
 
-    private int contains(LottoNumber lottoNumber) {
+    public int contains(LottoNumber lottoNumber) {
         return (int) lottoNumbers.stream()
                 .filter(number -> number.compareNumber(lottoNumber) > 0)
                 .count();

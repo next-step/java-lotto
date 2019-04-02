@@ -9,6 +9,9 @@ public class WinningLottoNumbers {
     public WinningLottoNumbers(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
         this.luckyNumbers = luckyNumbers;
         this.bonusNumber = bonusNumber;
+        if(luckyNumbers.contains(bonusNumber) > 0) {
+            throw new IllegalArgumentException("보너스볼이 당첨번호와 중복됩니다.");
+        }
     }
 
     public int matchCount(LottoNumbers lottoNumbers) {
