@@ -8,7 +8,7 @@ public class BonusBall {
     }
 
     public void checkBonusBallValidation(Lottery winnerLottery) {
-        if(winnerLottery.contain(this.bonusNumber)) {
+        if (winnerLottery.contain(this.bonusNumber)) {
             throw new IllegalArgumentException();
         }
     }

@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Set;
 
+import static lotto.domain.LotteryNo.isEqual;
+
 public class Lottery {
     public static final int LOTTO_LENGTH = 6;
     private Set<LotteryNo> lottery;
@@ -13,7 +15,7 @@ public class Lottery {
     }
 
     private void checkLotterySize(Set<LotteryNo> lotteryNumber) {
-        if (lotteryNumber.size() < LOTTO_LENGTH) {
+        if (lotteryNumber.size() != LOTTO_LENGTH) {
            throw new IllegalArgumentException();
         }
     }
@@ -46,12 +48,16 @@ public class Lottery {
 
     public boolean contain(LotteryNo number) {
         for (LotteryNo lotteryNo : this.lottery) {
-            if (lotteryNo.getNumber() == number.getNumber()) {
+            if(isEqual(number, lotteryNo)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public int getLotterySize() {
+        return this.lottery.size();
     }
 
     @Override

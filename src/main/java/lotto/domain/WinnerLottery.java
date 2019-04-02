@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import java.util.Set;
-
 public class WinnerLottery {
     private Lottery winnerLottery;
     private LotteryNo bonusBall;
 
-    public WinnerLottery(Set<LotteryNo> winnerLottery, int bonusBall) {
-        this.winnerLottery = new Lottery(winnerLottery);
+    public WinnerLottery(Lottery winnerLottery, int bonusBall) {
+        this.winnerLottery = winnerLottery;
         this.bonusBall = new LotteryNo(bonusBall);
     }
 

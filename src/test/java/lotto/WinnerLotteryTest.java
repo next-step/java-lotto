@@ -18,7 +18,7 @@ public class WinnerLotteryTest {
         Lottery lottery = new Lottery(lotteryNumber);
 
         final Set<LotteryNo> inputLottery = makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Set<LotteryNo> winner = makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lottery winner = new Lottery(makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
         WinnerLottery winnerLottery = new WinnerLottery(winner, BONUS_NUMBER);
 

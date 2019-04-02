@@ -24,7 +24,7 @@ public class RankTest {
     @Test
     public void 로또_금액_반환_테스트() {
         final Set<LotteryNo> lotteryNumbers = makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Set<LotteryNo> winnerNumbers = makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lottery winnerNumbers = new Lottery(makeLotteryNos(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Lottery lottery = new Lottery(lotteryNumbers);
         WinnerLottery winnerLottery = new WinnerLottery(winnerNumbers, BONUS_NUMBER);
 
