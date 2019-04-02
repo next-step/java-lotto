@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LotteryGenerator {
-    public static final int LOTTERY_NUMBER = 6;
+    private static final int LOTTERY_NUMBER = 6;
     public static final String FORMAT_COMMA = ",";
-    public static final String FORMAT_PREFIX_BRACKET = "[";
-    public static final String FORMAT_SUFFIX_BRACKET = "]";
-    List<Integer> lotteryNumbers;
+    private static final String FORMAT_PREFIX_BRACKET = "[";
+    private static final String FORMAT_SUFFIX_BRACKET = "]";
+    private List<Integer> lotteryNumbers;
 
     public LotteryGenerator() {
         this.lotteryNumbers = new ArrayList<>();

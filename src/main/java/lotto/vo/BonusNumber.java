@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BonusNumber {
     public static final int INITIAL_NUMBER = 0;
-    int bonusNumber;
+    private int bonusNumber;
 
     public BonusNumber(List lotteryNumbers) {
         int randomNumber = RandomUtils.random();

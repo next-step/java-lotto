@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LotteryGame {
-    public static final int ADD_RANK_COUNT = 1;
-    public static final int INITIAL_NUMBER = 0;
-    List<Lottery> lotteries;
-    Map<Rank, Integer> ranks;
+    private static final int ADD_RANK_COUNT = 1;
+    private static final int INITIAL_NUMBER = 0;
+    private List<Lottery> lotteries;
+    private  Map<Rank, Integer> ranks;
     private int tickets;
 
     public LotteryGame(int tickets) {

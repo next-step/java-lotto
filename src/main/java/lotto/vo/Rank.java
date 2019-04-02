@@ -11,7 +11,7 @@ public enum Rank {
     FAILURE(0, 0);
 
     public static final int MINIMUM_WINNING_NUMBER = 3;
-    int numberOfMatches, reward;
+    private int numberOfMatches, reward;
 
     Rank(int numberOfMatches, int reward) {
         this.numberOfMatches = numberOfMatches;
