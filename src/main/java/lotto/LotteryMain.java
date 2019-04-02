@@ -5,6 +5,7 @@ import lotto.view.ResultView;
 import lotto.vo.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -17,10 +18,21 @@ public class LotteryMain {
         resultView.printPurchaseTicketCount(tickets);
         LotteryGame game = new LotteryGame(tickets);
 
-        Lottery inputLottery = Lottery.toLotteries(Arrays.asList(inputVIew.winningNumber().split(LotteryGenerator.FORMAT_COMMA)).stream().map(Integer::valueOf).collect(Collectors.toList()));
+        Lottery inputLottery = Lottery.toLotteries(getLottery(inputVIew.winningNumber()));
         Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
 
         resultView.winningNumberStatistics(ranks);
         resultView.revenueRate(game.getRevenue());
+    }
+
+    public static List<Integer> getLottery(String winningLottoNumber) {
+        return Arrays.asList(toInt(winningLottoNumber))
+                .stream()
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    public static String[] toInt(String winningLottoNumber) {
+        return winningLottoNumber.split(LotteryGenerator.FORMAT_COMMA);
     }
 }
