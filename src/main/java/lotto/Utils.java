@@ -1,9 +1,9 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumberGenerator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Utils {
     public static String[] stringSplitWithDelimiter(String original, String delimiter) {
@@ -38,8 +38,12 @@ public class Utils {
     }
 
     public static Set<LottoNumber> arraysToSet(Integer[] arrays) {
-        Set<LottoNumber> inputNumbres = Arrays.stream(arrays)
-                .map(LottoNumber::new).collect(Collectors.toSet());
+        LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.getInstance();
+        Set<LottoNumber> inputNumbres = new HashSet<>();
+        for (Integer i : arrays) {
+            LottoNumber lottoNumber = lottoNumberGenerator.valueOf(i);
+            inputNumbres.add(lottoNumber);
+        }
         return inputNumbres;
     }
 

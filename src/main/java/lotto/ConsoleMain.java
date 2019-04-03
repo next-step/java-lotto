@@ -12,15 +12,23 @@ public class ConsoleMain {
 
         InputView inputView = new InputView();
         Money money = inputView.printUserInputMoney();
-        LottoNumber bonusBall = inputView.printInputBonusBall();
+
         int quantity = money.purchaseQuantity();
 
-        List<Lotto> lottos = LottoMachine.createLotto(quantity);
-        ResultView resultView = new ResultView();
-        resultView.printLottos(lottos);
+        int manualQuantity = inputView.printManualLottoQuantity(quantity);
+        int autoQuantity = quantity - manualQuantity;
+        List<String> manualLottos = inputView.inputManualLottoNumbers(manualQuantity);
 
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.getAllLotto(autoQuantity, manualLottos);
+
+        ResultView resultView = new ResultView();
+        resultView.printLottos(lottos, quantity, manualQuantity);
 
         LottoNumbers luckyNumbers = inputView.lastWeekLuckyNumbers();
+
+        LottoNumber bonusBall = inputView.printInputBonusBall();
+
         WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(luckyNumbers, bonusBall);
         LottoResult lottoResult = new LottoResult(lottos, winningLottoNumbers);
         resultView.printLottoResult(lottoResult);
