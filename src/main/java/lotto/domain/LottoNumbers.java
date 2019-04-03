@@ -35,20 +35,20 @@ public class LottoNumbers {
     int matchCount(LottoNumbers luckyNumbers) {
         int matchCount = MATCH_COUNT_INIT;
         for (LottoNumber number : lottoNumbers) {
-            matchCount += luckyNumbers.contains(number);
+            matchCount += luckyNumbers.compare(number);
         }
 
         return matchCount;
     }
 
-    public int contains(LottoNumber lottoNumber) {
+    public int compare(LottoNumber lottoNumber) {
         return (int) lottoNumbers.stream()
                 .filter(number -> number.compareNumber(lottoNumber) > 0)
                 .count();
     }
 
     boolean isMatchBonus(WinningLottoNumbers winningLottoNumbers) {
-        int result = winningLottoNumbers.containBonus(lottoNumbers);
+        int result = winningLottoNumbers.compareBonus(lottoNumbers);
         return (result == MATCH_COUNT_ONE);
     }
 

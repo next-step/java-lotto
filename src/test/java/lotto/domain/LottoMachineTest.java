@@ -9,18 +9,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
     @Test
-    public void 로또생성() {
-        String[] lottoNumber = {"1", "2", "3", "4", "5", "6"};
-        LottoMachine lottoMachine = new LottoMachine(1, 0, null);
-        List<Lotto> lottos = lottoMachine.autoCreateLotto();
+    public void 자동로또생성() {
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.autoCreateLotto(1);
         assertThat(lottos).hasSize(1);
     }
 
     @Test
-    public void n장로또생성() {
-        String[] lottoNumber = {"1", "2", "3", "4", "5", "6"};
-        LottoMachine lottoMachine = new LottoMachine(5, 0, null);
-        List<Lotto> lottos = lottoMachine.autoCreateLotto();
+    public void n장자동로또생성() {
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.autoCreateLotto(5);
         assertThat(lottos).hasSize(5);
     }
 
@@ -29,8 +27,8 @@ public class LottoMachineTest {
         String lottonumber = "1, 2, 3, 4, 5, 6";
         List<String> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(lottonumber);
-        LottoMachine lottoMachine = new LottoMachine(1, 1, lottoNumbers);
-        List<Lotto> lottos = lottoMachine.getAllLotto();
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.getAllLotto(0, lottoNumbers);
         assertThat(lottos).hasSize(1);
     }
 }

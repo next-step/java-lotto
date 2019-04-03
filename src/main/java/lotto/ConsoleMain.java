@@ -16,10 +16,11 @@ public class ConsoleMain {
         int quantity = money.purchaseQuantity();
 
         int manualQuantity = inputView.printManualLottoQuantity(quantity);
+        int autoQuantity = quantity - manualQuantity;
         List<String> manualLottos = inputView.inputManualLottoNumbers(manualQuantity);
 
-        LottoMachine lottoMachine = new LottoMachine(quantity, manualQuantity, manualLottos);
-        List<Lotto> lottos = lottoMachine.getAllLotto();
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.getAllLotto(autoQuantity, manualLottos);
 
         ResultView resultView = new ResultView();
         resultView.printLottos(lottos, quantity, manualQuantity);

@@ -9,7 +9,7 @@ public class WinningLottoNumbers {
     public WinningLottoNumbers(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
         this.luckyNumbers = luckyNumbers;
         this.bonusNumber = bonusNumber;
-        if(luckyNumbers.contains(bonusNumber) > 0) {
+        if(luckyNumbers.compare(bonusNumber) > 0) {
             throw new IllegalArgumentException("보너스볼이 당첨번호와 중복됩니다.");
         }
     }
@@ -18,7 +18,7 @@ public class WinningLottoNumbers {
         return lottoNumbers.matchCount(luckyNumbers);
     }
 
-    public int containBonus(Set<LottoNumber> lottoNumbers) {
+    public int compareBonus(Set<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(lottoNumber -> lottoNumber.compareNumber(bonusNumber) > 0)
                 .count();

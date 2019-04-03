@@ -2,7 +2,11 @@ package lotto.domain;
 
 import lotto.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
@@ -12,19 +16,15 @@ public class LottoMachine {
     private static final int MAX_LOTTO_NUMBER = 46;
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int REMOVE_INDEX = 0;
-    private final int autoQuantity;
-    private final List<String> manualNumbers;
 
-    public LottoMachine(int quantity, int manualQuantity, List<String> manualNumbers) {
-        this.autoQuantity = quantity - manualQuantity;
-        this.manualNumbers = manualNumbers;
+    public LottoMachine() {
     }
 
-    public List<Lotto> autoCreateLotto() {
+    List<Lotto> autoCreateLotto(int autoQuantity) {
         int count = ZERO_INIT;
         List<Lotto> lottos = new ArrayList<>();
         while(count < autoQuantity) {
-            lottos.add(new Lotto(new LottoNumbers(generateLottoNumber().toArray(new Integer[0]))));
+            lottos.add(createLotto(generateLottoNumber()));
             count++;
         }
         return lottos;
@@ -43,28 +43,34 @@ public class LottoMachine {
         return numbers;
     }
 
-    private List<Lotto> createManualLotto() {
+    private List<Lotto> createManualLotto(List<String> manualNumbers) {
         List<Lotto> manualLottos = new ArrayList<>();
-        LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.getInstance();
         for (String manualNumber : manualNumbers) {
-            String[] splitStr = Utils.stringSplitWithDelimiter(manualNumber, ",");
-            LottoNumber[] numbers = Arrays.stream(splitStr)
-                    .map(Integer::valueOf)
-                    .map(lottoNumberGenerator::valueOf)
-                    .toArray(LottoNumber[]::new);
-
-            Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(numbers));
-            manualLottos.add(new Lotto(new LottoNumbers(lottoNumbers)));
+            Lotto lotto = createLotto(manualNumberToLottoNumbers(manualNumber));
+            manualLottos.add(lotto);
         }
 
         return manualLottos;
     }
 
-    public List<Lotto> getAllLotto() {
+    private List<Integer> manualNumberToLottoNumbers(String manualNumber) {
+        String[] splitStr = Utils.stringSplitWithDelimiter(manualNumber, ",");
+        return Arrays.stream(splitStr)
+                .map(Integer::valueOf)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public List<Lotto> getAllLotto(int autoQuantity, List<String> manualNumbers) {
         List<Lotto> totalLotto = new ArrayList<>();
-        totalLotto.addAll(autoCreateLotto());
-        totalLotto.addAll(createManualLotto());
+        totalLotto.addAll(autoCreateLotto(autoQuantity));
+        totalLotto.addAll(createManualLotto(manualNumbers));
 
         return totalLotto;
+    }
+
+    private Lotto createLotto(List<Integer> numbers) {
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers.toArray(new Integer[0]));
+        return new Lotto(lottoNumbers);
     }
 }
