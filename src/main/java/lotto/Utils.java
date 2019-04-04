@@ -47,4 +47,16 @@ public class Utils {
         return inputNumbres;
     }
 
+    public static Set<LottoNumber> arrayToSet(String[] arrays) {
+        Integer[] tmp = Arrays.stream(arrays)
+                .map(Integer::valueOf)
+                .toArray(Integer[]::new);
+        LottoNumberGenerator lottoNumberGenerator = LottoNumberGenerator.getInstance();
+        Set<LottoNumber> inputNumbres = new HashSet<>();
+        for (Integer i : tmp) {
+            LottoNumber lottoNumber = lottoNumberGenerator.valueOf(i);
+            inputNumbres.add(lottoNumber);
+        }
+        return inputNumbres;
+    }
 }

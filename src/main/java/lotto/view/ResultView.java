@@ -39,7 +39,7 @@ public class ResultView {
         System.out.println("총 수익률은 " + earningsRate + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
-    private String printBonus(LottoResult lottoResult, WinningType winningType) {
+    public String printBonus(LottoResult lottoResult, WinningType winningType) {
         StringBuffer buffer = new StringBuffer();
         buffer.append(winningType.getMatchCount());
         buffer.append("개 일치");

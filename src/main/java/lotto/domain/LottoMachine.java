@@ -45,6 +45,10 @@ public class LottoMachine {
 
     private List<Lotto> createManualLotto(List<String> manualNumbers) {
         List<Lotto> manualLottos = new ArrayList<>();
+        if(manualNumbers == null || manualNumbers.size() == 0) {
+            return manualLottos;
+        }
+
         for (String manualNumber : manualNumbers) {
             Lotto lotto = createLotto(manualNumberToLottoNumbers(manualNumber));
             manualLottos.add(lotto);
