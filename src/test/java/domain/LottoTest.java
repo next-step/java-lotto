@@ -16,11 +16,4 @@ public class LottoTest {
         assertEquals(6, lotto.getNumbers().size());
     }
 
-    @Test
-    public void calculateLottoMatch() {
-        //input: List<Lotto> lottos, Lotto winner
-        // output: Map<int, int> -> 3,x 4, x 5, x 6, x
-
-        //TODO
-    }
 }

@@ -5,8 +5,8 @@ import java.util.List;
 
 public class WinningLotto {
 
-    List<Integer> numbers;
-    int bonusNumber;
+    private List<Integer> numbers;
+    private int bonusNumber;
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this.numbers = numbers;
@@ -18,7 +18,7 @@ public class WinningLotto {
         int count = 0;
 
         for (int number : numbers) {
-            if (contains(userLotto, number)) count++;
+            count = count + addCount(userLotto, number);
         }
 
         if (count == (LottoProfit.THIRD.getNumberOfMatch() - 1) && contains(userLotto, bonusNumber)) {
@@ -26,6 +26,13 @@ public class WinningLotto {
         }
 
         return LottoProfit.valueOf(count, false);
+    }
+
+    private int addCount(Lotto userLotto, int number) {
+        if (contains(userLotto, number)) {
+            return 1;
+        }
+        return 0;
     }
 
     private boolean contains(Lotto userLotto, int number) {

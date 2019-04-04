@@ -12,7 +12,8 @@ public class ResultView {
 
     private final static Map<Integer, Integer> PROFIT_VALUE = new HashMap<>();
     static {
-        PROFIT_VALUE.put(LottoProfit.FIFTH.getNumberOfMatch(), LottoProfit.FOURTH.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.MISS.getNumberOfMatch(), LottoProfit.MISS.getPrizeMoney());
+        PROFIT_VALUE.put(LottoProfit.FIFTH.getNumberOfMatch(), LottoProfit.FIFTH.getPrizeMoney());
         PROFIT_VALUE.put(LottoProfit.FOURTH.getNumberOfMatch(), LottoProfit.FOURTH.getPrizeMoney());
         PROFIT_VALUE.put(LottoProfit.THIRD.getNumberOfMatch(), LottoProfit.THIRD.getPrizeMoney());
         PROFIT_VALUE.put(LottoProfit.SECOND.getNumberOfMatch(), LottoProfit.SECOND.getPrizeMoney());
@@ -21,21 +22,20 @@ public class ResultView {
 
     public static void printWinningStatistics(LottoGameResult result){
         System.out.println("당첨 통계\n-----------");
-        Iterator<Integer> keys = result.getGameResult().keySet().iterator();
-        while (keys.hasNext()) {
-            int key = keys.next();
-            System.out.println(key + "개 일치 (" + PROFIT_VALUE.get(key) +
-                    ")원 - " + result.getGameResult().get(key) + "개");
+
+        for (LottoProfit profit : LottoProfit.values()) {
+            int key = profit.getNumberOfMatch();
+            System.out.println(profit.getNumberOfMatch() + "개 일치 (" + profit.getPrizeMoney() +
+                    ")원 - " + result.getFrequencyOfResult(profit) + "개");
         }
     }
 
     public static void printProfitRate(LottoGameResult result, int inputMoney){
         double totalProfit = 0.0;
 
-        Iterator<Integer> keys = result.getGameResult().keySet().iterator();
-        while (keys.hasNext()) {
-            int key = keys.next();
-            totalProfit += (double) PROFIT_VALUE.get(key) * result.getGameResult().get(key);
+        for (LottoProfit profit : LottoProfit.values()) {
+            int key = profit.getNumberOfMatch();
+            totalProfit += (double) result.getFrequencyOfResult(profit) * profit.getPrizeMoney();
         }
 
         System.out.println("총 수익률은 " + totalProfit / (double) inputMoney + "입니다.");

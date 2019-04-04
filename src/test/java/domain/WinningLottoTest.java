@@ -25,7 +25,7 @@ public class WinningLottoTest
     }
 
     @Test
-    public void winningSecond_withBonusNo () {
+    public void WinningSecondWithBonusNo () {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1,2,3,4,5,6),7);
         Lotto userLotto = new Lotto(Arrays.asList(1,2,3,4,7,10));
 
