@@ -1,11 +1,17 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum LottoProfit {
 
-    fourth(3,5000),
-    third(4,50000),
-    second(5,1500000),
-    first(6,2000000000);
+    MISS(0,0),
+    FIFTH(3,5_000),
+    FOURTH(4,50_000),
+    THIRD(5,1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6,2_000_000_000);
+
+    private static final int WINNING_MIN_MATCH = 3;
 
     private int numberOfMatch;
     private int prizeMoney;
@@ -21,6 +27,27 @@ public enum LottoProfit {
 
     public int getNumberOfMatch() {
         return numberOfMatch;
+    }
+
+    public static LottoProfit valueOf(int numberOfMatch, boolean matchBonusNo) {
+        if (numberOfMatch < WINNING_MIN_MATCH) {
+            return MISS;
+        }
+
+        if (SECOND.matchCount(numberOfMatch) && matchBonusNo) {
+            return SECOND;
+        }
+
+        for (LottoProfit profit : values()) {
+            if (profit.matchCount(numberOfMatch)) {
+                return profit;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    private boolean matchCount(int numberOfMatch) {
+        return this.numberOfMatch == numberOfMatch;
     }
 
 }
