@@ -1,6 +1,8 @@
 package lotto.application;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoPaper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,40 +42,46 @@ public class LottoServiceTest {
     @Test
     public void 한_장_구입해서_일등() {
         // given
-        final LottoPaper lottoPaper = LottoPaper.issue(Lotto.PRICE, Arrays.asList(new LottoNumbers(1, 2, 3, 4, 5, 6)));
+        final LottoPaper lottoPaper = new LottoPaper(
+                Arrays.asList(
+                        Lotto.manual(new LottoNumbers(1, 2, 3, 4, 5, 6))
+                )
+        );
 
         // when
         final ResultView view = lottoService.viewResults(lottoPaper, "1, 2, 3, 4, 5, 6", 7);
 
         // then
-        assertThat(view.getRoi()).isEqualTo(WinningOrder.FIRST_PLACE.getAmount().divide(Lotto.PRICE).doubleValue());
+        assertThat(view.getRoi()).isEqualTo(2_000_000);
     }
 
     @Test
     public void 한_장_구입해서_이등() {
         // given
-        final LottoPaper lottoPaper = LottoPaper.issue(Lotto.PRICE, Arrays.asList(new LottoNumbers(1, 2, 3, 4, 5, 6)));
+        final LottoPaper lottoPaper = new LottoPaper(
+                Arrays.asList(
+                        Lotto.manual(new LottoNumbers(1, 2, 3, 4, 5, 6))
+                )
+        );
 
         // when
         final ResultView view = lottoService.viewResults(lottoPaper, "1, 2, 3, 4, 5, 7", 6);
 
         // then
-        assertThat(view.getRoi()).isEqualTo(WinningOrder.SECOND_PLACE.getAmount().divide(Lotto.PRICE).doubleValue());
+        assertThat(view.getRoi()).isEqualTo(30_000);
     }
 
     @Test
     public void 여섯_장_구입해서_오등_한_장() {
         // given
-        final Money amount = Money.from(6_000);
-        final LottoPaper lottoPaper = LottoPaper.issue(
-                amount,
+        final LottoPaper lottoPaper = new LottoPaper(
                 Arrays.asList(
-                        new LottoNumbers(1, 2, 3, 4, 5, 6),
-                        new LottoNumbers(11, 12, 13, 14, 15, 16),
-                        new LottoNumbers(11, 12, 13, 14, 15, 16),
-                        new LottoNumbers(11, 12, 13, 14, 15, 16),
-                        new LottoNumbers(11, 12, 13, 14, 15, 16),
-                        new LottoNumbers(11, 12, 13, 14, 15, 16)
+                        Lotto.manual(new LottoNumbers(1, 2, 3, 4, 5, 6)),
+                        Lotto.manual(new LottoNumbers(11, 12, 13, 14, 15, 16)),
+                        Lotto.manual(new LottoNumbers(11, 12, 13, 14, 15, 16)),
+                        Lotto.manual(new LottoNumbers(11, 12, 13, 14, 15, 16)),
+                        Lotto.manual(new LottoNumbers(11, 12, 13, 14, 15, 16)),
+                        Lotto.manual(new LottoNumbers(11, 12, 13, 14, 15, 16))
                 )
         );
 

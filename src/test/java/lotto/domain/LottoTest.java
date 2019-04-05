@@ -56,7 +56,7 @@ public class LottoTest {
     }
 
     @Test
-    public void 일등_당() {
+    public void 일등_당첨() {
         // given
         final LottoNumbers numbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
         final Lotto lotto = Lotto.manual(numbers);
