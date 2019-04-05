@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.vo.LotteryGenerator;
 import lotto.vo.Rank;
 
 import java.util.Map;
@@ -9,6 +10,9 @@ public class ResultView {
 
     public void printPurchaseTicketCount(int tickets) {
         System.out.println(String.format("%s개를 구매했습니다.", tickets));
+        for (int i = 0; i < tickets; i++) {
+            System.out.println(new LotteryGenerator().printLottoNumber());
+        }
     }
 
     public void winningNumberStatistics(Map<Rank, Integer> ranks) {
