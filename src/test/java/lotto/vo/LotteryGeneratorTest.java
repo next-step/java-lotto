@@ -9,14 +9,7 @@ public class LotteryGeneratorTest {
     @Test
     public void 로또한장당_생성되는_로또번호() {
         LotteryGenerator lotteryGenerator = new LotteryGenerator();
-        Lottery lottery = lotteryGenerator.lotteryNumbers();
-        assertThat(lottery.getLotto().size()).isEqualTo(6);
-    }
-
-    @Test
-    public void 로또한장당_생성되는_보너스번호() {
-        LotteryGenerator lottery = new LotteryGenerator();
-        BonusNumber bonusNumber = lottery.addBonusNumber();
-        assertThat(bonusNumber.bonusNumber).isGreaterThan(0);
+        LotteryNumber lottery = lotteryGenerator.lottoMake();
+        assertThat(lottery.lotteryNumber.size()).isEqualTo(6);
     }
 }
