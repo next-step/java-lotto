@@ -33,7 +33,7 @@ public class Money {
     }
 
     public double getProfit(Ranks ranks) {
-        int revenue = (int) Rank.sumProfit(ranks);
+        int revenue = Rank.sumProfit(ranks);
         if (revenue > Const.INITIAL_NUMBER)
             return new Money(money).yield(new Money(revenue));
         return Const.INITIAL_NUMBER;

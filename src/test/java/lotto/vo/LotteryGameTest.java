@@ -19,7 +19,7 @@ public class LotteryGameTest {
     @Test
     public void 로또_생성() {
         //When
-       Ranks rankIntegerMap = lotteryGame.getWinningStatistics(ConstTest.lottery1);
+        Ranks rankIntegerMap = lotteryGame.getWinningStatistics(ConstTest.lottery1);
 
         //Then
         assertThat(rankIntegerMap.rankPerWinningCount(Rank.FIRST_PLACE)).isGreaterThanOrEqualTo(0);
