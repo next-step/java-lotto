@@ -4,8 +4,7 @@ import lotto.utils.Const;
 import lotto.vo.LotteryNumbers;
 import lotto.vo.Money;
 import lotto.vo.Rank;
-
-import java.util.Map;
+import lotto.vo.Ranks;
 
 public class ResultView {
     public void printPurchaseTicketCount(Money money) {
@@ -13,17 +12,16 @@ public class ResultView {
         System.out.println(String.format("%s개를 구매했습니다.", tickets));
     }
 
-    public void winningNumberStatistics(Map<Rank, Integer> ranks) {
+    public void winningNumberStatistics(Ranks ranks) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        printNumberOfWinningCount(Rank.FOURTH_PLACE, ranks);
-        printNumberOfWinningCount(Rank.THIRD_PLACE, ranks);
-        printNumberOfWinningCount(Rank.SECOND_PLACE, ranks);
-        printNumberOfWinningCount(Rank.FIRST_PLACE, ranks);
+        printNumberOfWinningCount(ranks);
     }
 
-    public void printNumberOfWinningCount(Rank rank, Map<Rank, Integer> ranks) {
-        System.out.println(perStatistics(rank.getNumberOfMatches(), rank.getReward(), ranks.get(rank) == null ? Const.FAILURE_TO_WIN : ranks.get(rank)));
+    public void printNumberOfWinningCount(Ranks ranks) {
+        for(Rank rank : Rank.values()){
+            System.out.println(perStatistics(rank.getNumberOfMatches(), rank.getReward(), ranks.rankPerWinningCount(rank)));
+        }
     }
 
     public String perStatistics(int matchedNumber, int winningAmount, int winningNumber) {

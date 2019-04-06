@@ -3,9 +3,13 @@ package lotto;
 import lotto.utils.Const;
 import lotto.view.InputVIew;
 import lotto.view.ResultView;
-import lotto.vo.*;
+import lotto.vo.LotteryGame;
+import lotto.vo.LotteryNumber;
+import lotto.vo.Money;
+import lotto.vo.Ranks;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LotteryMain {
@@ -19,7 +23,7 @@ public class LotteryMain {
         resultView.printLottoNumber(game.getLottoNumber());
 
         LotteryNumber inputLottery = new LotteryNumber(getLottery(inputVIew.winningNumber()));
-        Map<Rank, Integer> ranks = game.getWinningStatistics(inputLottery);
+        Ranks ranks = game.getWinningStatistics(inputLottery);
         resultView.winningNumberStatistics(ranks);
 //        resultView.revenueRate(game.getRevenue());
     }

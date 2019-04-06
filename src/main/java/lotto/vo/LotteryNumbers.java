@@ -2,12 +2,9 @@ package lotto.vo;
 
 import lotto.utils.Const;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LotteryNumbers {
-    Map<Rank, Integer> ranks;
     private List<LotteryNumber> lotteryNumbers;
 
     public LotteryNumbers(List<LotteryNumber> lotteryNumbers) {
@@ -27,20 +24,26 @@ public class LotteryNumbers {
         return lotteryNumberBuilder.toString();
     }
 
-    public Map<Rank, Integer> getRank(LotteryNumber winningNumber) {
-        ranks = new HashMap<>();
-        for (LotteryNumber lottery : lotteryNumbers) {
-            Rank rank = getRank(winningNumber, lottery);
-            ranks.put(rank, getRanks(rank));
+    public Ranks getRanks(LotteryNumber winningNumber) {
+        Map<Rank, Integer> ranks = getRankIntegerMap();
+        for (LotteryNumber currentLottery : lotteryNumbers) {
+            Rank resultRank = getRank(winningNumber, currentLottery);
+            ranks.put(resultRank, ranks.get(resultRank));
         }
+        return new Ranks(ranks);
+    }
+
+    private Map<Rank, Integer> getRankIntegerMap() {
+        Map<Rank, Integer> ranks = new HashMap<>();
+        ranks.put(Rank.FIRST_PLACE, Const.INITIAL_NUMBER);
+        ranks.put(Rank.SECOND_PLACE, Const.INITIAL_NUMBER);
+        ranks.put(Rank.THIRD_PLACE, Const.INITIAL_NUMBER);
+        ranks.put(Rank.FOURTH_PLACE, Const.INITIAL_NUMBER);
+        ranks.put(Rank.FAILURE, Const.INITIAL_NUMBER);
         return ranks;
     }
 
-    private Rank getRank(LotteryNumber winningNumber, LotteryNumber lottery) {
-        return winningNumber.match(lottery);
-    }
-
-    private int getRanks(Rank rank) {
-        return !ranks.containsKey(rank) ? Const.ADD_NUMBER : ranks.get(rank) + Const.ADD_NUMBER;
+    private Rank getRank(LotteryNumber winningNumber, LotteryNumber currentLottery) {
+        return winningNumber.match(currentLottery);
     }
 }

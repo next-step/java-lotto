@@ -4,8 +4,6 @@ import lotto.utils.ConstTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryGameTest {
@@ -21,9 +19,9 @@ public class LotteryGameTest {
     @Test
     public void 로또_생성() {
         //When
-        Map<Rank, Integer> rankIntegerMap = lotteryGame.getWinningStatistics(ConstTest.lottery1);
+       Ranks rankIntegerMap = lotteryGame.getWinningStatistics(ConstTest.lottery1);
 
         //Then
-        assertThat(rankIntegerMap).isNotEmpty();
+        assertThat(rankIntegerMap.rankPerWinningCount(Rank.FIRST_PLACE)).isGreaterThanOrEqualTo(0);
     }
 }

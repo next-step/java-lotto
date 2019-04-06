@@ -1,7 +1,5 @@
 package lotto.vo;
 
-import java.util.Map;
-
 public class LotteryGame {
     private LotteryNumbers lotteryNumbers;
 
@@ -17,7 +15,7 @@ public class LotteryGame {
         return new LotteryGenerator().lotteryGenerator(money);
     }
 
-    public Map<Rank, Integer> getWinningStatistics(LotteryNumber winningNumber) {
-        return lotteryNumbers.getRank(winningNumber);
+    public Ranks getWinningStatistics(LotteryNumber winningNumber) {
+        return lotteryNumbers.getRanks(winningNumber);
     }
 }
