@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class WinningStatisticsTest {
         final WinningStatistics winningStatistics = new WinningStatistics(values);
 
         // when
-        final double roi = winningStatistics.getRoi();
+        final BigDecimal roi = winningStatistics.getRoi(0);
 
         // then
         assertThat(roi).isEqualTo(WinningOrder.FIRST_PLACE.getAmount().divide(Lotto.PRICE));
@@ -29,9 +30,9 @@ public class WinningStatisticsTest {
         final WinningStatistics winningStatistics = new WinningStatistics(values);
 
         // when
-        final double roi = winningStatistics.getRoi();
+        final BigDecimal roi = winningStatistics.getRoi(0);
 
         // then
-        assertThat(roi).isEqualTo(0);
+        assertThat(roi).isEqualTo(BigDecimal.ZERO);
     }
 }

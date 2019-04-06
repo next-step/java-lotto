@@ -26,10 +26,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return NUMBERS[value];
     }
 
-    public int get() {
-        return value;
-    }
-
     private static void validate(final int value) {
         if (value < MINIMUM_NUMBER || value > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException();

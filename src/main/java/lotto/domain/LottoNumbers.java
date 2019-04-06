@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -16,10 +13,10 @@ public class LottoNumbers {
         this.values = new TreeSet<>(values);
     }
 
-    public LottoNumbers(final List<Integer> values) {
+    public LottoNumbers(final int... values) {
         this(
-                values.stream()
-                        .map(LottoNumber::from)
+                Arrays.stream(values)
+                        .mapToObj(LottoNumber::from)
                         .collect(Collectors.toSet())
         );
     }
@@ -34,7 +31,7 @@ public class LottoNumbers {
                 ;
     }
 
-    long howManyMatches(final LottoNumbers winningNumber) {
+    public long howManyMatches(final LottoNumbers winningNumber) {
         return this.values
                 .stream()
                 .filter(value -> winningNumber.values.contains(value))

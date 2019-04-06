@@ -7,15 +7,16 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoPaper;
 import lotto.domain.WinningOrder;
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class LottoConsole {
     private static final Scanner CONSOLE_SCANNER = new Scanner(System.in);
 
     public static void run(final LottoService lottoService) {
-        final LottoPaper lottoPaper = lottoService.issue(enterAmount());
+        final int amount = enterAmount();
+        final int manualCount = enterManualCount();
+        final List<String> manualNumbers = enterManualNumbers(manualCount);
+        final LottoPaper lottoPaper = lottoService.issue(amount, manualNumbers);
         printLottoPaper(lottoPaper);
         final ResultView resultView = lottoService.viewResults(lottoPaper, enterWinningNumber(), enterBonusNumber());
         printResult(resultView);
@@ -26,8 +27,22 @@ public class LottoConsole {
         return CONSOLE_SCANNER.nextInt();
     }
 
-    private static String enterWinningNumber() {
+    private static int enterManualCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        return CONSOLE_SCANNER.nextInt();
+    }
+
+    private static List<String> enterManualNumbers(final int manualCount) {
         CONSOLE_SCANNER.nextLine();
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        final List<String> result = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            result.add(CONSOLE_SCANNER.nextLine());
+        }
+        return result;
+    }
+
+    private static String enterWinningNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return CONSOLE_SCANNER.nextLine();
     }
@@ -38,13 +53,24 @@ public class LottoConsole {
     }
 
     private static void printLottoPaper(final LottoPaper lottoPaper) {
-        System.out.println(lottoPaper.getLottoSize() + "개를 구매했습니다.");
+        printPurchaseHistory(lottoPaper);
         lottoPaper.get()
                 .stream()
                 .map(LottoConsole::changeToLottoPrintFormat)
                 .forEach(System.out::println)
         ;
     }
+
+    private static void printPurchaseHistory(final LottoPaper lottoPaper) {
+        System.out.println(
+                "\n수동으로 "
+                        + lottoPaper.getManualSize()
+                        + "장, 자동으로 "
+                        + lottoPaper.getAutomaticSize()
+                        + "개를 구매했습니다."
+        );
+    }
+
 
     private static void printResult(final ResultView resultView) {
         System.out.println("\n당첨 통계");
@@ -64,7 +90,11 @@ public class LottoConsole {
     }
 
     private static void printRoi(final double roi) {
-        System.out.println("총 수익률은 " + roi + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println(
+                "총 수익률은 "
+                        + String.format("%.2f", roi)
+                        + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"
+        );
     }
 
     private static String changeToLottoPrintFormat(final Lotto lotto) {
@@ -76,7 +106,7 @@ public class LottoConsole {
 
     private static String changeToStatisticsPrintFormat(final Map.Entry<WinningOrder, Long> entry) {
         return new StringBuilder()
-                .append(entry.getKey().getPhrase())
+                .append(changeToWinningOrderPrintFormat(entry.getKey()))
                 .append(" (")
                 .append(entry.getKey().getAmount())
                 .append("원)- ")
@@ -84,5 +114,21 @@ public class LottoConsole {
                 .append("개")
                 .toString()
                 ;
+    }
+
+    private static String changeToWinningOrderPrintFormat(final WinningOrder winningOrder) {
+        if (winningOrder == WinningOrder.FIRST_PLACE) {
+            return "6개 일치";
+        }
+        if (winningOrder == WinningOrder.SECOND_PLACE) {
+            return "5개 일치, 보너스 볼 일치";
+        }
+        if (winningOrder == WinningOrder.THIRD_PLACE) {
+            return "5개 일치";
+        }
+        if (winningOrder == WinningOrder.FOURTH_PLACE) {
+            return "4개 일치";
+        }
+        return "3개 일치";
     }
 }

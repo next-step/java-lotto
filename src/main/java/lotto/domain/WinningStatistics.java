@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +19,10 @@ public class WinningStatistics {
         return new HashMap<>(values);
     }
 
-    public double getRoi() {
-        return getTotalAmount().divide(getDivisor());
+    public BigDecimal getRoi(final int scale) {
+        return getTotalAmount()
+                .divide(getDivisor(), scale)
+                ;
     }
 
     private Map<WinningOrder, Long> initialize() {
@@ -29,13 +32,13 @@ public class WinningStatistics {
     }
 
     private Money getTotalAmount() {
-        return Money.from(
-                this.values
-                        .entrySet()
-                        .stream()
-                        .mapToLong(value -> value.getKey().getAmount().get() * value.getValue())
-                        .sum()
-        );
+        return this.values
+                .entrySet()
+                .stream()
+                .map(value -> value.getKey().getAmount().multiply(value.getValue()))
+                .reduce(Money::add)
+                .orElse(Money.ZERO)
+                ;
     }
 
     private Money getDivisor() {

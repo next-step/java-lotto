@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoPaper {
@@ -12,13 +11,12 @@ public class LottoPaper {
         this.values = new ArrayList<>(values);
     }
 
-    public WinningStatistics viewResults(final WinningNumber winningNumber) {
-        return new WinningStatistics(
-                this.values
-                        .stream()
-                        .map(value -> value.winResult(winningNumber))
-                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-        );
+    public List<WinningOrder> viewResults(final WinningNumber winningNumber) {
+        return this.values
+                .stream()
+                .map(value -> value.winResult(winningNumber))
+                .collect(Collectors.toList())
+                ;
     }
 
     public List<Lotto> get() {
@@ -27,5 +25,21 @@ public class LottoPaper {
 
     public int getLottoSize() {
         return this.values.size();
+    }
+
+    public long getAutomaticSize() {
+        return this.values
+                .stream()
+                .filter(Lotto::isAutomatic)
+                .count()
+                ;
+    }
+
+    public long getManualSize() {
+        return this.values
+                .stream()
+                .filter(Lotto::isManual)
+                .count()
+                ;
     }
 }
