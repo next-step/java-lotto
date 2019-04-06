@@ -15,4 +15,5 @@ public class ConstTest {
     public static final LotteryNumber lottery1 = new LotteryNumber(lottoNumberManual1);
     public static final Set<Integer> lottoNumberManual2 = new HashSet<>(Arrays.asList(2, 10, 28, 34, 35, 44));
     public static final LotteryNumber lottery2 = new LotteryNumber(lottoNumberManual2);
+    public static final LotteryNumber lotteryForth = new LotteryNumber( new HashSet<>(Arrays.asList(1, 2, 3, 20, 30, 40)));
 }

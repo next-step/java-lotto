@@ -1,7 +1,8 @@
 package lotto.vo;
 
+import lotto.utils.Const;
+
 import java.util.Arrays;
-import java.util.Map;
 
 public enum Rank {
     FIRST_PLACE(6, 2_000_000_000),
@@ -18,14 +19,6 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public int getNumberOfMatches() {
-        return numberOfMatches;
-    }
-
-    public int getReward() {
-        return reward;
-    }
-
     static Rank valueOf(int matchCount) {
         if (matchCount < MINIMUM_WINNING_NUMBER) {
             return FAILURE;
@@ -36,17 +29,21 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static int sumRevenue(Map<Rank, Integer> ranks){
-        int sumRevenue = 0;
-        if(ranks.containsKey(FIRST_PLACE)){
-            sumRevenue = ranks.get(FIRST_PLACE) * FIRST_PLACE.getReward();
-        } else if (ranks.containsKey(SECOND_PLACE)) {
-            sumRevenue = ranks.get(SECOND_PLACE) * SECOND_PLACE.getReward();
-        }else if(ranks.containsKey(THIRD_PLACE)){
-            sumRevenue = ranks.get(THIRD_PLACE) * THIRD_PLACE.getReward();
-        }else if(ranks.containsKey(FOURTH_PLACE)){
-            sumRevenue = ranks.get(FOURTH_PLACE) * FOURTH_PLACE.getReward();
+    public static int sumProfit(Ranks ranks) {
+        int sumProfit = Const.INITIAL_NUMBER;
+        for (Rank rank : Rank.values()) {
+            if (rank.getReward() > Const.INITIAL_NUMBER) {
+                sumProfit += ranks.rankPerWinningCount(rank) * rank.getReward();
+            }
         }
-        return sumRevenue;
+        return sumProfit;
+    }
+
+    public int getNumberOfMatches() {
+        return numberOfMatches;
+    }
+
+    public int getReward() {
+        return reward;
     }
 }

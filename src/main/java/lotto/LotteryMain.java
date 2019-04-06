@@ -15,22 +15,23 @@ import java.util.stream.Collectors;
 public class LotteryMain {
     public static void main(String[] args) {
         InputVIew inputVIew = new InputVIew();
-
-        Money money = new Money(inputVIew.purchaseAmount());
         ResultView resultView = new ResultView();
-        resultView.printPurchaseTicketCount(money);
+        Money money = new Money(inputVIew.purchaseAmount());
         LotteryGame game = new LotteryGame(money);
+
+        resultView.printPurchaseTicketCount(money);
         resultView.printLottoNumber(game.getLottoNumber());
 
         LotteryNumber inputLottery = new LotteryNumber(getLottery(inputVIew.winningNumber()));
         Ranks ranks = game.getWinningStatistics(inputLottery);
         resultView.winningNumberStatistics(ranks);
-//        resultView.revenueRate(game.getRevenue());
+
+        double profit = money.getProfit(ranks);
+        resultView.revenueRate(profit);
     }
 
     public static Set<Integer> getLottery(String winningLottoNumber) {
-        return Arrays.asList(splitComma(winningLottoNumber))
-                .stream()
+        return Arrays.stream(splitComma(winningLottoNumber))
                 .map(Integer::valueOf)
                 .collect(Collectors.toSet());
     }
