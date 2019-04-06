@@ -9,7 +9,7 @@ public class LotteryGeneratorTest {
     @Test
     public void 로또한장당_생성되는_로또번호() {
         LotteryGenerator lotteryGenerator = new LotteryGenerator();
-        LotteryNumber lottery = lotteryGenerator.lottoMake();
-        assertThat(lottery.lotteryNumber.size()).isEqualTo(6);
+        LotteryNumbers lottery = lotteryGenerator.lotteryGenerator(new Money(1000));
+        assertThat(lottery.lotteryNumbersCount()).isEqualTo(1);
     }
 }

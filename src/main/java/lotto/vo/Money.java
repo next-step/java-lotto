@@ -22,7 +22,7 @@ public class Money {
         return Integer.parseInt(money);
     }
 
-    public int getLotto() {
+    public int buyingTicketCount() {
         return lotteryTickets;
     }
 

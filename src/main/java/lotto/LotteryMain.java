@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LotteryMain {
     public static void main(String[] args) {
         InputVIew inputVIew = new InputVIew();
-        int tickets = new Money(inputVIew.purchaseAmount()).getLotto();
+        int tickets = new Money(inputVIew.purchaseAmount()).buyingTicketCount();
 
         ResultView resultView = new ResultView();
         resultView.printPurchaseTicketCount(tickets);
@@ -33,6 +33,6 @@ public class LotteryMain {
     }
 
     public static String[] splitComma(String winningLottoNumber) {
-        return winningLottoNumber.split(LotteryGenerator.FORMAT_COMMA);
+        return winningLottoNumber.split(LotteryNumbers.FORMAT_COMMA);
     }
 }
