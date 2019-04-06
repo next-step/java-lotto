@@ -1,5 +1,6 @@
 package lotto.vo;
 
+import lotto.utils.ConstTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,23 +13,25 @@ public class RankTest {
     LotteryNumber winningNumber;
 
     @Before
-    public void setUp() throws Exception {
-        winningNumber =  new LotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    public void setUp() {
+        winningNumber = new LotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     public void 당첨_1등() {
-        Rank rank = winningNumber.match(LotteryNumberTest.lottery1);
+        //When
+        Rank rank = winningNumber.match(ConstTest.lottery1);
+
+        //Then
         assertThat(rank).isEqualTo(Rank.FIRST_PLACE);
     }
 
     @Test
     public void 당첨_실패() {
-        Rank rank = winningNumber.match(LotteryNumberTest.lottery2);
-        assertThat(rank).isEqualTo(Rank.FAILURE);
-    }
+        //When
+        Rank rank = winningNumber.match(ConstTest.lottery2);
 
-    @Test
-    public void 당첨통계_4등() {
+        //Then
+        assertThat(rank).isEqualTo(Rank.FAILURE);
     }
 }

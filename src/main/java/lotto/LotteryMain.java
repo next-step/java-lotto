@@ -5,10 +5,7 @@ import lotto.view.InputVIew;
 import lotto.view.ResultView;
 import lotto.vo.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LotteryMain {
@@ -22,9 +19,8 @@ public class LotteryMain {
         resultView.printLottoNumber(game.getLottoNumber());
 
         LotteryNumber inputLottery = new LotteryNumber(getLottery(inputVIew.winningNumber()));
-//        Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
-
-//        resultView.winningNumberStatistics(ranks);
+        Map<Rank, Integer> ranks = game.getWinningStatistics(inputLottery);
+        resultView.winningNumberStatistics(ranks);
 //        resultView.revenueRate(game.getRevenue());
     }
 
