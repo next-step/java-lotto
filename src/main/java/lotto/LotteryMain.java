@@ -17,7 +17,8 @@ public class LotteryMain {
         Money money = new Money(inputVIew.purchaseAmount());
         ResultView resultView = new ResultView();
         resultView.printPurchaseTicketCount(money);
-        LotteryGame game = new LotteryGame(money.buyingTicketCount());
+        LotteryGame game = new LotteryGame(money);
+        resultView.printLottoNumber(game.getLottoNumber());
 
         Lottery inputLottery = Lottery.toLotteries(getLottery(inputVIew.winningNumber()));
         Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));

@@ -11,11 +11,21 @@ public class LotteryGame {
     private List<Lottery> lotteries;
     private Map<Rank, Integer> ranks;
     private int tickets;
+    private LotteryNumbers lotteryNumbers;
 
-    public LotteryGame(int tickets) {
-        this.tickets = tickets;
+    public LotteryGame(Money money) {
+        this.tickets = money.buyingTicketCount();
         this.lotteries = new ArrayList<>();
         this.ranks = new HashMap<>();
+        lotteryNumbers = lotteryGenerator(money);
+    }
+
+    public LotteryNumbers getLottoNumber() {
+        return lotteryNumbers;
+    }
+
+    private LotteryNumbers lotteryGenerator(Money money) {
+        return new LotteryGenerator().lotteryGenerator(money);
     }
 
     public Map<Rank, Integer> getWinningStatistics(WinningNumber winningNumber) {

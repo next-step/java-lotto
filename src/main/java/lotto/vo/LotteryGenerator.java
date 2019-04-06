@@ -25,7 +25,6 @@ public class LotteryGenerator {
     private LotteryNumber lottoMake() {
         List<Integer> lotteryFullNumbers = createLotteryNumbers();
         Collections.shuffle(lotteryFullNumbers);
-        Collections.sort(lotteryFullNumbers);
         return LotteryNumber.toObject(split6digit(lotteryFullNumbers));
     }
 

@@ -5,4 +5,8 @@ public class Const {
     public static final String FORMAT_COMMA = ",";
     public static final String FORMAT_PREFIX_BRACKET = "[";
     public static final String FORMAT_SUFFIX_BRACKET = "]";
+    public static final String FORMAT_ENTER = "\n";
+
+    public static final int WIN_STANDARD = 1;
+    public static final int FAILURE_TO_WIN = 0;
 }

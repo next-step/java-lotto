@@ -1,5 +1,7 @@
 package lotto.vo;
 
+import lotto.utils.Const;
+
 import java.util.List;
 
 public class LotteryNumbers {
@@ -16,8 +18,8 @@ public class LotteryNumbers {
     @Override
     public String toString() {
         StringBuilder lotteryNumberBuilder = new StringBuilder();
-        for(LotteryNumber lotteryNumber : lotteryNumbers){
-            lotteryNumberBuilder.append(lotteryNumber);
+        for (LotteryNumber lotteryNumber : lotteryNumbers) {
+            lotteryNumberBuilder.append(lotteryNumber).append(Const.FORMAT_ENTER);
         }
         return lotteryNumberBuilder.toString();
     }
