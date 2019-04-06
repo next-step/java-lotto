@@ -9,4 +9,6 @@ public class Const {
 
     public static final int WIN_STANDARD = 1;
     public static final int FAILURE_TO_WIN = 0;
+    public static final int INITIAL_NUMBER = 0;
+    public static final int ADD_NUMBER = 1;
 }

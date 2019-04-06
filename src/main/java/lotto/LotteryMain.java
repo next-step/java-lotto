@@ -8,6 +8,7 @@ import lotto.vo.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LotteryMain {
@@ -20,18 +21,18 @@ public class LotteryMain {
         LotteryGame game = new LotteryGame(money);
         resultView.printLottoNumber(game.getLottoNumber());
 
-        Lottery inputLottery = Lottery.toLotteries(getLottery(inputVIew.winningNumber()));
-        Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
+        LotteryNumber inputLottery = new LotteryNumber(getLottery(inputVIew.winningNumber()));
+//        Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
 
-        resultView.winningNumberStatistics(ranks);
-        resultView.revenueRate(game.getRevenue());
+//        resultView.winningNumberStatistics(ranks);
+//        resultView.revenueRate(game.getRevenue());
     }
 
-    public static List<Integer> getLottery(String winningLottoNumber) {
+    public static Set<Integer> getLottery(String winningLottoNumber) {
         return Arrays.asList(splitComma(winningLottoNumber))
                 .stream()
                 .map(Integer::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public static String[] splitComma(String winningLottoNumber) {

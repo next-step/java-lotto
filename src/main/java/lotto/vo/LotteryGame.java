@@ -8,7 +8,7 @@ import java.util.Map;
 public class LotteryGame {
     private static final int ADD_RANK_COUNT = 1;
     private static final int INITIAL_NUMBER = 0;
-    private List<Lottery> lotteries;
+    private List<LotteryNumber> lotteries;
     private Map<Rank, Integer> ranks;
     private int tickets;
     private LotteryNumbers lotteryNumbers;
@@ -28,8 +28,8 @@ public class LotteryGame {
         return new LotteryGenerator().lotteryGenerator(money);
     }
 
-    public Map<Rank, Integer> getWinningStatistics(WinningNumber winningNumber) {
-        for (Lottery lottery : lotteries) {
+    public Map<Rank, Integer> getWinningStatistics(LotteryNumber winningNumber) {
+        for (LotteryNumber lottery : lotteries) {
             Rank rank = winningNumber.match(lottery);
             ranks.put(rank, getRanks(rank));
         }
