@@ -9,7 +9,16 @@ public class LotteryNumbers {
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    public int lotteryNumbersCount(){
+    public int lotteryNumbersCount() {
         return lotteryNumbers.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder lotteryNumberBuilder = new StringBuilder();
+        for(LotteryNumber lotteryNumber : lotteryNumbers){
+            lotteryNumberBuilder.append(lotteryNumber);
+        }
+        return lotteryNumberBuilder.toString();
     }
 }
