@@ -65,7 +65,7 @@ body {
 <form class="form-show" method="post" action="/matchLotto">
 	<div class="form-show-div form-group">
 		<label for="winningNumber">지난 주 당첨 번호</label>
-		<input type="text" id="inputMoney" class="form-control"
+		<input type="text" id="winningNumber" class="form-control"
 				name="winningNumber" placeholder="1,2,3,4,5,6" required autofocus>
 	</div>
 	<div class="form-show-div form-group">
@@ -78,33 +78,19 @@ body {
 	</div>
 </form>
 <pre class="pre-scrollable">
-	<h4 class="text-center"><5개를 구매 하셨습니다></h4>
+	<h4 class="text-center"><{{#manualQuantity}}수동으로 {{manualQuantity}}개, {{/manualQuantity}}자동으로 {{autoQuantity}}개를 구매 하셨습니다></h4>
 	<table class="table">
 		<thead>
 			<th></th>
 			<th class="text-center">로또 번호</th>
 		</thead>
 		<tbody>
+		{{#lottos}}
 		<tr>
-			<th>1</th>
-			<td>[8, 21, 23, 41, 42, 43]</td>
+			<th>{{@index }}</th>
+			<td>{{.}}</td>
 		</tr>
-		<tr>
-			<th>2</th>
-			<td>[3, 5, 11, 16, 32, 38]</td>
-		</tr>
-		<tr>
-			<th>3</th>
-			<td>[7, 11, 16, 35, 36, 44]</td>
-		</tr>
-		<tr>
-			<th>4</th>
-			<td>[1, 8, 11, 31, 41, 42]</td>
-		</tr>
-		<tr>
-			<th>5</th>
-			<td>[13, 14, 16, 38, 42, 45]</td>
-		</tr>
+		{{/lottos}}
 		</tbody>
 	</table>
 </pre>
