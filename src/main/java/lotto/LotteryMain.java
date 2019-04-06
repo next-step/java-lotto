@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.utils.Const;
 import lotto.view.InputVIew;
 import lotto.view.ResultView;
 import lotto.vo.*;
@@ -12,11 +13,11 @@ import java.util.stream.Collectors;
 public class LotteryMain {
     public static void main(String[] args) {
         InputVIew inputVIew = new InputVIew();
-        int tickets = new Money(inputVIew.purchaseAmount()).buyingTicketCount();
 
+        Money money = new Money(inputVIew.purchaseAmount());
         ResultView resultView = new ResultView();
-        resultView.printPurchaseTicketCount(tickets);
-        LotteryGame game = new LotteryGame(tickets);
+        resultView.printPurchaseTicketCount(money);
+        LotteryGame game = new LotteryGame(money.buyingTicketCount());
 
         Lottery inputLottery = Lottery.toLotteries(getLottery(inputVIew.winningNumber()));
         Map<Rank, Integer> ranks = game.getWinningStatistics(new WinningNumber(inputLottery));
@@ -33,6 +34,6 @@ public class LotteryMain {
     }
 
     public static String[] splitComma(String winningLottoNumber) {
-        return winningLottoNumber.split(LotteryNumbers.FORMAT_COMMA);
+        return winningLottoNumber.split(Const.FORMAT_COMMA);
     }
 }

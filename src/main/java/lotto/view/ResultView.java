@@ -9,11 +9,14 @@ import java.util.Map;
 public class ResultView {
     public static final int WIN_RATE = 1;
 
-    public void printPurchaseTicketCount(int tickets) {
+    public void printPurchaseTicketCount(Money money) {
+        int tickets = money.buyingTicketCount();
         System.out.println(String.format("%s개를 구매했습니다.", tickets));
-        for (int i = 0; i < tickets; i++) {
-            System.out.println(new LotteryGenerator().lotteryGenerator(new Money(tickets)));
-        }
+        lotteryGenerator(money);
+    }
+
+    private void lotteryGenerator(Money money) {
+        new LotteryGenerator().lotteryGenerator(money);
     }
 
     public void winningNumberStatistics(Map<Rank, Integer> ranks) {

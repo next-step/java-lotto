@@ -1,18 +1,26 @@
 package lotto.vo;
 
+import lotto.utils.Const;
+
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LotteryNumber {
-    private static final int LOTTERY_NUMBER = 6;
-    Set<Integer> lotteryNumber;
+    private Set<Integer> lotteryNumber;
 
     public LotteryNumber(Set<Integer> lotteryNumber) {
-        if (lotteryNumber.size() < LOTTERY_NUMBER)
+        if (lotteryNumber.size() < Const.LOTTERY_NUMBER)
             throw new IllegalArgumentException();
         this.lotteryNumber = lotteryNumber;
     }
 
-    public static LotteryNumber toObject(Set<Integer> integers) {
+    static LotteryNumber toObject(Set<Integer> integers) {
         return new LotteryNumber(integers);
+    }
+
+    public String toString() {
+        return lotteryNumber.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(Const.FORMAT_COMMA, Const.FORMAT_PREFIX_BRACKET, Const.FORMAT_SUFFIX_BRACKET));
     }
 }
