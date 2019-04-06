@@ -22,11 +22,15 @@ public class LotteryNumber {
     }
 
     public String toString() {
-        List<Integer> convertLotteryNumber = new ArrayList<>(lotteryNumber);
-        Collections.sort(convertLotteryNumber);
-        return convertLotteryNumber
+        return convertLotteryNumber()
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(Const.FORMAT_COMMA, Const.FORMAT_PREFIX_BRACKET, Const.FORMAT_SUFFIX_BRACKET));
+    }
+
+    private List<Integer> convertLotteryNumber() {
+        List<Integer> convertLotteryNumber = new ArrayList<>(lotteryNumber);
+        Collections.sort(convertLotteryNumber);
+        return convertLotteryNumber;
     }
 }
