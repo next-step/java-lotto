@@ -2,17 +2,13 @@ package lotto.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.LottoManualGenerator;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoStore;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.MyLottos;
 import lotto.domain.WinNumbers;
 import lotto.domain.WinStats;
-import lotto.domain.WinningNumbers;
 
 public class ConsoleView {
 
@@ -25,7 +21,7 @@ public class ConsoleView {
 
     String inputWinNumbers = consoleInputView.inputWinNumbers();
     int inputAdditionNumber = consoleInputView.inputAdditionNumber();
-    WinNumbers winNumbers = winNumbers(inputWinNumbers, inputAdditionNumber);
+    WinNumbers winNumbers = WinNumbers.of(inputWinNumbers, inputAdditionNumber);
 
     winState(myLottos, winNumbers);
   }
@@ -68,14 +64,5 @@ public class ConsoleView {
     }
 
     return new MyLottos(buyMoney, lottos);
-
-  }
-
-  private static WinNumbers winNumbers(String inputWinNumbers, int inputAdditionNumber) {
-
-    WinningNumbers winningNumbers = new WinningNumbers(LottoManualGenerator.generateLottoNumbers(inputWinNumbers));
-    LottoNumber additionalNumber = LottoNumber.getInstance(inputAdditionNumber);
-
-    return new WinNumbers(winningNumbers, additionalNumber);
   }
 }
