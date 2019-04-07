@@ -31,7 +31,7 @@ public class Lotto {
     return winNumbers.additionMatch(lottoNumbers);
   }
 
-  public String numbers() {
+  public String getNumbers() {
 
     return this.lottoNumbers.stream()
         .map(LottoNumber::toString)
