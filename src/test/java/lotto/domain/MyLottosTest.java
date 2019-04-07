@@ -87,7 +87,7 @@ public class MyLottosTest {
     assertThat(winResults.get(WinMoney.THREE)).isEqualTo(1);
     assertThat(winResults.get(WinMoney.FOUR)).isEqualTo(1);
     assertThat(winResults.get(WinMoney.FIVE)).isEqualTo(1);
-    assertThat(winResults.get(WinMoney.FIVE_ONE)).isEqualTo(0);
+    assertThat(winResults.get(WinMoney.FIVE_BONUS)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.SIX)).isEqualTo(1);
   }
 
@@ -114,7 +114,7 @@ public class MyLottosTest {
     assertThat(winResults.get(WinMoney.THREE)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.FOUR)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.FIVE)).isEqualTo(0);
-    assertThat(winResults.get(WinMoney.FIVE_ONE)).isEqualTo(0);
+    assertThat(winResults.get(WinMoney.FIVE_BONUS)).isEqualTo(0);
     assertThat(winResults.get(WinMoney.SIX)).isEqualTo(1);
   }
 

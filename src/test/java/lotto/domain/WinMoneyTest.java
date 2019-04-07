@@ -55,7 +55,7 @@ public class WinMoneyTest {
     LottoNumber lottoNumber = LottoNumber.getInstance(19);
     WinNumbers winNumbers = new WinNumbers(winningNumbers, lottoNumber);
 
-    WinMoney winMoney = WinMoney.FIVE_ONE;
+    WinMoney winMoney = WinMoney.FIVE_BONUS;
 
     // When
     WinMoney resultMoney = lotto.isWinLotto(winNumbers);

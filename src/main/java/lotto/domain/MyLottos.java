@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MyLottos {
@@ -26,5 +27,13 @@ public class MyLottos {
         .forEach(winMoney -> winResult.put(winMoney, lottos.countWinLotto(winNumbers, winMoney)));
 
     return winResult;
+  }
+
+  public int getBuyQuantity() {
+    return this.lottos.getQuantity();
+  }
+
+  public List<Lotto> getLottos() {
+    return this.lottos.getLottos();
   }
 }

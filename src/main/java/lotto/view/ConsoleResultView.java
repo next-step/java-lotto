@@ -1,9 +1,6 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.WinMoney;
 import lotto.domain.WinStats;
@@ -11,7 +8,7 @@ import lotto.domain.WinStats;
 public class ConsoleResultView {
 
   public static void printIssueLottoNumbers(Lotto lotto) {
-    System.out.println("[" + lotto.numbers() + "]");
+    System.out.println("[" + lotto.getNumbers() + "]");
   }
 
   public static void printMatchWinCount(WinStats winStats) {
@@ -20,7 +17,7 @@ public class ConsoleResultView {
         .forEach(winMoney -> System.out.printf(
             "%d개 일치%s (%d원) - %d개\n",
             winMoney.getMatchCount(),
-            winMoney == WinMoney.FIVE_ONE ? ", 보너스 볼 일치" : "",
+            winMoney == WinMoney.FIVE_BONUS ? ", 보너스 볼 일치" : "",
             winMoney.getWinMoney(),
             winStats.getWinCount(winMoney)
         ));
