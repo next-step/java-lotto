@@ -30,6 +30,7 @@ public enum LottoProfit {
     }
 
     public static LottoProfit valueOf(int numberOfMatch, boolean matchBonusNo) {
+
         if (numberOfMatch < WINNING_MIN_MATCH) {
             return MISS;
         }
@@ -45,6 +46,7 @@ public enum LottoProfit {
         }
         throw new IllegalArgumentException();
     }
+
 
     private boolean matchCount(int numberOfMatch) {
         return this.numberOfMatch == numberOfMatch;

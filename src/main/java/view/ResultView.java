@@ -1,11 +1,9 @@
 package view;
 
-import domain.Lotto;
 import domain.LottoGameResult;
 import domain.LottoProfit;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class ResultView {
@@ -26,7 +24,7 @@ public class ResultView {
         for (LottoProfit profit : LottoProfit.values()) {
             int key = profit.getNumberOfMatch();
             System.out.println(profit.getNumberOfMatch() + "개 일치 (" + profit.getPrizeMoney() +
-                    ")원 - " + result.getFrequencyOfResult(profit) + "개");
+                    ")원 - " + result.getWinningCountOfResult(profit) + "개");
         }
     }
 
@@ -35,7 +33,7 @@ public class ResultView {
 
         for (LottoProfit profit : LottoProfit.values()) {
             int key = profit.getNumberOfMatch();
-            totalProfit += (double) result.getFrequencyOfResult(profit) * profit.getPrizeMoney();
+            totalProfit += (double) result.getWinningCountOfResult(profit) * profit.getPrizeMoney();
         }
 
         System.out.println("총 수익률은 " + totalProfit / (double) inputMoney + "입니다.");
