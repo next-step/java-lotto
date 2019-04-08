@@ -46,4 +46,8 @@ public enum Rank {
     public int getReward() {
         return reward;
     }
+
+    public static Rank getRank(LotteryNumber winningNumber, LotteryNumber currentLottery) {
+        return winningNumber.match(currentLottery);
+    }
 }

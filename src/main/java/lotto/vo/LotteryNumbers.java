@@ -2,7 +2,6 @@ package lotto.vo;
 
 import lotto.utils.Const;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,25 +26,11 @@ public class LotteryNumbers {
     }
 
     public Ranks getRanks(LotteryNumber winningNumber) {
-        Map<Rank, Integer> ranks = getRankIntegerMap();
+        Map<Rank, Integer> ranks = Ranks.getRankIntegerMap();
         for (LotteryNumber currentLottery : lotteryNumbers) {
-            Rank resultRank = getRank(winningNumber, currentLottery);
-            ranks.put(resultRank, ranks.get(resultRank) + 1);
+            Rank resultRank = Rank.getRank(winningNumber, currentLottery);
+            ranks.put(resultRank, ranks.get(resultRank) + Const.ADD_NUMBER);
         }
         return new Ranks(ranks);
-    }
-
-    private Map<Rank, Integer> getRankIntegerMap() {
-        Map<Rank, Integer> ranks = new HashMap<>();
-        ranks.put(Rank.FIRST_PLACE, Const.INITIAL_NUMBER);
-        ranks.put(Rank.SECOND_PLACE, Const.INITIAL_NUMBER);
-        ranks.put(Rank.THIRD_PLACE, Const.INITIAL_NUMBER);
-        ranks.put(Rank.FOURTH_PLACE, Const.INITIAL_NUMBER);
-        ranks.put(Rank.FAILURE, Const.INITIAL_NUMBER);
-        return ranks;
-    }
-
-    private Rank getRank(LotteryNumber winningNumber, LotteryNumber currentLottery) {
-        return winningNumber.match(currentLottery);
     }
 }
