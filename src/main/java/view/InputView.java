@@ -46,9 +46,9 @@ public class InputView {
 
     }
 
-    public static void printNumberOfLottos(LottoMoney money, List<Lotto> userLottos) {
-        System.out.println("수동으로 "+ userLottos.size() + "개, 자동으로 "
-                + (money.getNumberOfLotto() - userLottos.size()) + "개를 구매했습니다");
+    public static void printNumberOfLottos(LottoMoney money, int manualLottoCount) {
+        System.out.println("수동으로 "+ manualLottoCount + "개, 자동으로 "
+                + (money.getNumberOfLotto() - manualLottoCount) + "개를 구매했습니다");
     }
 
 

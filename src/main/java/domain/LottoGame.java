@@ -4,17 +4,22 @@ import java.util.*;
 
 public class LottoGame {
 
-    private LottoMoney money;
     private List<Lotto> userLottos;
+
+    public LottoGame(LottoMoney money) {
+        userLottos = new ArrayList<>();
+        for(int i = 0 ; i < money.getNumberOfLotto() ; i++) {
+            userLottos.add(new Lotto());
+        }
+    }
 
     public LottoGame(LottoMoney money, List<Lotto> userLottosByInput) {
 
         userLottos = new ArrayList<>();
 
-        this.money = money;
         userLottos.addAll(userLottosByInput);
 
-        for (int i = 0 ; i < (money.getNumberOfLotto() - userLottos.size()) ; i++) {
+        for (int i = 0 ; i < (money.getNumberOfLotto() - userLottosByInput.size()) ; i++) {
             userLottos.add(new Lotto());
         }
     }
@@ -29,5 +34,11 @@ public class LottoGame {
         System.out.println(userLottos.toString());
     }
 
+    public int getNumberOfUserLottos() {
+        return userLottos.size();
+    }
 
+    public List<Lotto> getUserLottos() {
+        return userLottos;
+    }
 }

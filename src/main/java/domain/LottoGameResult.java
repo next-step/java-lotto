@@ -30,7 +30,4 @@ public class LottoGameResult {
         return gameResult.get(profit);
     }
 
-    public Map<LottoProfit, Integer> getGameResult() {
-        return gameResult;
-    }
 }
