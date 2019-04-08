@@ -13,7 +13,7 @@ public class LotteryGeneratorTest {
         LotteryNumbers lottery = lotteryGenerator.lotteryGenerator(new Money(1000));
 
         //When
-        int lottoSize = lottery.lotteryNumbersCount();
+        int lottoSize = lottery.getLotteryNumbersCount();
 
         //Then
         assertThat(lottoSize).isEqualTo(1);

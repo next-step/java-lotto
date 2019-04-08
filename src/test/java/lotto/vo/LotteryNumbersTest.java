@@ -14,7 +14,7 @@ public class LotteryNumbersTest {
     @Test
     public void 티켓갯수에_따라_로또번호생성() {
         //When
-        int lotteryNumberCount = lotteryNumbers.lotteryNumbersCount();
+        int lotteryNumberCount = lotteryNumbers.getLotteryNumbersCount();
 
         //Then
         assertThat(lotteryNumberCount).isEqualTo(2);

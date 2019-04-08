@@ -13,7 +13,7 @@ public class LotteryNumbers {
         this.lotteryNumbers = lotteryNumbers;
     }
 
-    public int lotteryNumbersCount() {
+    public int getLotteryNumbersCount() {
         return lotteryNumbers.size();
     }
 
