@@ -13,7 +13,7 @@ public class LottoMachine {
         List<Lotto> autoLottos = new ArrayList<>();
 
         while (tryNo > 0) {
-            autoLottos.add(new Lotto(LottoGenerator.createLotto()));
+            autoLottos.add(LottoGenerator.createLotto());
             nextTry();
         }
 

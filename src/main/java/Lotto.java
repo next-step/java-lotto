@@ -1,8 +1,9 @@
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_SIZE = 6;
+    public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
@@ -10,6 +11,15 @@ public class Lotto {
             new IllegalArgumentException();
         }
         this.lotto = lotto;
+    }
+
+    public Lotto(int... lottoNumbers) {
+        if (lottoNumbers.length != LOTTO_SIZE) {
+            new IllegalArgumentException();
+        }
+        this.lotto = Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int getMatchNumber(Lotto targetLotto) {
@@ -20,6 +30,10 @@ public class Lotto {
 
     public boolean isMatchBonusNumber(LottoNumber bonusNumber) {
         return lotto.contains(bonusNumber);
+    }
+
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 
     @Override

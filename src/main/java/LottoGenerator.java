@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,10 +15,10 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> createLotto() {
+    public static Lotto createLotto() {
         Collections.shuffle(LOTTO_NUMBERS);
         List lotto = LOTTO_NUMBERS.subList(FIRST_INDEX, LOTTO_SIZE);
         Collections.sort(lotto);
-        return new ArrayList<>(lotto);
+        return new Lotto(lotto);
     }
 }
