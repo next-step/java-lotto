@@ -9,7 +9,7 @@ public class Money {
     private final int money;
 
     public Money(String money) {
-        this(toInt(money));
+        this(Integer.parseInt(money));
     }
 
     public Money(int money) {
@@ -18,10 +18,6 @@ public class Money {
         }
         this.lotteryTickets = money / LOTTERY_PRICE;
         this.money = money;
-    }
-
-    private static int toInt(String money) {
-        return Integer.parseInt(money);
     }
 
     public int buyingTicketCount() {
