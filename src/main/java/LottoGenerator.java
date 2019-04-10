@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class LottoGenerator {
 
     public static Lotto createLotto() {
         Collections.shuffle(LOTTO_NUMBERS);
-        List lotto = LOTTO_NUMBERS.subList(FIRST_INDEX, LOTTO_SIZE);
+        List lotto = new ArrayList(LOTTO_NUMBERS.subList(FIRST_INDEX, LOTTO_SIZE));
         Collections.sort(lotto);
         return new Lotto(lotto);
     }

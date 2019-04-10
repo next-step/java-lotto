@@ -3,19 +3,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RankCount {
-    private static Map<Rank, Integer> rankCount = new HashMap<>();
+    private  Map<Rank, Integer> rankCount = new HashMap<>();
 
-    static {
+    public RankCount() {
         Arrays.stream(Rank.values())
                 .forEach(rank -> rankCount.put(rank, 0));
     }
 
-    public static void countPlusOne(Rank rank) {
+    public void countPlusOne(Rank rank) {
         int previousCount = rankCount.get(rank);
         rankCount.put(rank, previousCount + 1);
     }
 
-    public static double getWinningMoney() {
+    public double getWinningMoney() {
         double sum = 0;
         for (Rank rank : rankCount.keySet()) {
             sum += rank.getWinningMoney() * rankCount.get(rank);
@@ -24,7 +24,7 @@ public class RankCount {
         return sum;
     }
 
-    public static int getRankCount(Rank rank) {
+    public int getRankCount(Rank rank) {
         return rankCount.get(rank);
     }
 }

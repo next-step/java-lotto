@@ -4,8 +4,8 @@ public class WinningLotto {
     private Lotto lotto;
     private LottoNumber bonusNumber;
 
-    public WinningLotto(List<LottoNumber> lotto, int bonusNumber) {
-        this.lotto = new Lotto(lotto);
+    public WinningLotto(Lotto lotto, int bonusNumber) {
+        this.lotto = lotto;
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 

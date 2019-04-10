@@ -6,6 +6,6 @@ public class ConsoleMain {
         ResultView.printBuyLotto(lottoMachine.getTryNo());
         List<Lotto> lottos = lottoMachine.generateLotto();
         ResultView.printLottos(lottos);
-        ResultView.printStatics(new LottoResult(lottos, new WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber())));
+        ResultView.printStatics(new LottoResult(lottos, new WinningLotto(new Lotto(InputView.inputWinningNumbers()), InputView.inputBonusNumber())));
     }
 }
