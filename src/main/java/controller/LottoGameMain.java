@@ -11,14 +11,9 @@ public class LottoGameMain {
     public static void main(String args[]) {
         LottoMoney money = InputView.getLottoCountFromInputMoney();
         int manualLottoCount = InputView.getNumberOfManualLottos();
-        LottoGame lottoGame;
 
-        if (manualLottoCount > 0) {
-            List<Lotto> userLottos = InputView.getUserLottos(manualLottoCount);
-            lottoGame = new LottoGame(money, userLottos);
-        } else {
-            lottoGame = new LottoGame(money);
-        }
+        List<Lotto> userLottos = InputView.getUserLottos(manualLottoCount);
+        LottoGame lottoGame = new LottoGame(money, userLottos);
 
         InputView.printNumberOfLottos(money, manualLottoCount);
         lottoGame.printUserLottos();

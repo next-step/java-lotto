@@ -4,22 +4,20 @@ import java.util.*;
 
 public class LottoGame {
 
-    private List<Lotto> userLottos;
-
-    public LottoGame(LottoMoney money) {
-        userLottos = new ArrayList<>();
-        for(int i = 0 ; i < money.getNumberOfLotto() ; i++) {
-            userLottos.add(new Lotto());
-        }
-    }
+    private List<Lotto> userLottos = new ArrayList<>();
 
     public LottoGame(LottoMoney money, List<Lotto> userLottosByInput) {
+        int manualLottoCount = 0;
+        if (userLottosByInput != null) {
+            userLottos.addAll(userLottosByInput);
+            manualLottoCount = userLottosByInput.size();
+        }
+        addLottos(money.getNumberOfLotto() - manualLottoCount);
+    }
 
-        userLottos = new ArrayList<>();
 
-        userLottos.addAll(userLottosByInput);
-
-        for (int i = 0 ; i < (money.getNumberOfLotto() - userLottosByInput.size()) ; i++) {
+    private void addLottos(int numberOfLottos) {
+        for (int i = 0 ; i < numberOfLottos ; i++) {
             userLottos.add(new Lotto());
         }
     }

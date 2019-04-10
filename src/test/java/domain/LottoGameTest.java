@@ -28,7 +28,7 @@ public class LottoGameTest {
 
     @Test
     public void 완전자동생성() {
-        LottoGame lottoGame = new LottoGame(new LottoMoney(5000));
+        LottoGame lottoGame = new LottoGame(new LottoMoney(5000), null);
         lottoGame.printUserLottos();
         assertThat(lottoGame.getNumberOfUserLottos()).isEqualTo(5);
     }
