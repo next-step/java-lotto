@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoGameResult {
     private Map<LottoProfit, Integer> gameResult;
 
-    LottoGameResult() {
+    public LottoGameResult() {
         gameResult = new HashMap<>();
         gameResult.put(LottoProfit.MISS, 0);
         gameResult.put(LottoProfit.FIFTH, 0);
@@ -26,11 +26,8 @@ public class LottoGameResult {
         }
     }
 
-    public int getFrequencyOfResult(LottoProfit profit) {
+    public int getWinningCountOfResult(LottoProfit profit) {
         return gameResult.get(profit);
     }
 
-    public Map<LottoProfit, Integer> getGameResult() {
-        return gameResult;
-    }
 }

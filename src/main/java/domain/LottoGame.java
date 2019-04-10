@@ -4,12 +4,20 @@ import java.util.*;
 
 public class LottoGame {
 
-    private List<Lotto> userLottos;
+    private List<Lotto> userLottos = new ArrayList<>();
 
-    public LottoGame(int lottoCount) {
-        userLottos = new ArrayList<>(lottoCount);
+    public LottoGame(LottoMoney money, List<Lotto> userLottosByInput) {
+        int manualLottoCount = 0;
+        if (userLottosByInput != null) {
+            userLottos.addAll(userLottosByInput);
+            manualLottoCount = userLottosByInput.size();
+        }
+        addLottos(money.getNumberOfLotto() - manualLottoCount);
+    }
 
-        for (int i = 0 ; i < lottoCount ; i++) {
+
+    private void addLottos(int numberOfLottos) {
+        for (int i = 0 ; i < numberOfLottos ; i++) {
             userLottos.add(new Lotto());
         }
     }
@@ -24,5 +32,11 @@ public class LottoGame {
         System.out.println(userLottos.toString());
     }
 
+    public int getNumberOfUserLottos() {
+        return userLottos.size();
+    }
 
+    public List<Lotto> getUserLottos() {
+        return userLottos;
+    }
 }
