@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class ResultView {
@@ -6,17 +8,37 @@ public class ResultView {
         System.out.println(number + "개를 구입하였습니다.");
     }
 
-    public static void printLottoNumber(Lotto lotto) {
-        System.out.println(lotto);
+    public static void printLottos(List<Lotto> lottos) {
+        lottos.stream()
+                .forEach(System.out::println);
+        System.out.println();
     }
 
     public static void printStatics(LottoResult lottoResult) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + lottoResult.getMatchNumber(3));
-        System.out.println("4개 일치 (50000원)- " + lottoResult.getMatchNumber(4));
-        System.out.println("5개 일치 (1500000원)- " + lottoResult.getMatchNumber(5));
-        System.out.println("6개 일치 (2000000000원)-" + lottoResult.getMatchNumber(6));
+
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCountOfMatch() != 0)
+                .sorted(Comparator.reverseOrder())
+                .forEach(rank -> System.out.println(getStaticText(rank, lottoResult.rankCount(rank))));
+
         System.out.println("총 수익률은 " + lottoResult.getProfit() + "입니다.");
+    }
+
+
+    private static String getStaticText(Rank rank, int count) {
+        String bonusMatchText = "";
+        if (Rank.SECOND == rank) {
+            bonusMatchText = ", 보너스 볼 일치";
+        }
+
+        return new StringBuilder().append(rank.getCountOfMatch())
+                .append("개 일치")
+                .append(bonusMatchText)
+                .append(" (" + rank.getWinningMoney())
+                .append("원) - ")
+                .append(count)
+                .append("개").toString();
     }
 }

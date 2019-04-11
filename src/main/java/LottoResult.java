@@ -1,24 +1,27 @@
-import java.util.List;
+import java.util.*;
 
 public class LottoResult {
-    private static final int[] REWARD = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
-    private final double totalPrice;
-    private int[] matchNumber = new int[7];
+    private final int TOTAL_PRICE;
+    private RankCount rankCount = new RankCount();;
 
-    public LottoResult(List<Lotto> lottos, Lotto winningLotto) {
-        totalPrice = lottos.size() * LottoMachine.LOTTO_PRICE;
-        lottos.forEach(lotto -> matchNumber[lotto.getMatchNumber(winningLotto)]++);
+    public LottoResult(List<Lotto> userLotto, WinningLotto winningLotto) {
+        this.TOTAL_PRICE = userLotto.size() * LottoMoney.LOTTO_PRICE;
+        createRanks(userLotto, winningLotto);
+    }
+
+    private void createRanks(List<Lotto> userLotto, WinningLotto winningLotto) {
+        userLotto.stream()
+                .forEach(lotto -> {
+                    Rank rank = Rank.valueOf(winningLotto.getMatchNumber(lotto), winningLotto.isMatchBonusNumber(lotto));
+                    rankCount.countPlusOne(rank);
+                });
     }
 
     public double getProfit() {
-        double sum = 0;
-        for (int i = 3; i <= 6; i++) {
-            sum += (matchNumber[i] * REWARD[i]);
-        }
-        return Math.floor(sum / totalPrice * 100) / 100.0;
+        return Math.floor(rankCount.getWinningMoney() / TOTAL_PRICE * 100) / 100.0;
     }
 
-    public int getMatchNumber(int number) {
-        return matchNumber[number];
+    public int rankCount(Rank rank) {
+        return rankCount.getRankCount(rank);
     }
 }
