@@ -1,6 +1,7 @@
 package view;
 
 import domain.LottoGameResult;
+import domain.LottoMoney;
 import domain.LottoProfit;
 
 public class ResultView {
@@ -15,14 +16,8 @@ public class ResultView {
         }
     }
 
-    public static void printProfitRate(LottoGameResult result, int inputMoney){
-        double totalProfit = 0.0;
-
-        for (LottoProfit profit : LottoProfit.values()) {
-            totalProfit += (double) result.getWinningCountOfResult(profit) * profit.getPrizeMoney();
-        }
-
-        System.out.println("총 수익률은 " + totalProfit / (double) inputMoney + "입니다.");
+    public static void printProfitRate(LottoGameResult result, LottoMoney money){
+        System.out.println("총 수익률은 " + result.getProfitRate(money) + "입니다.");
     }
 
 }

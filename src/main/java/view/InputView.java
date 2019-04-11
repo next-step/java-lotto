@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 
 public class InputView {
 
-    public static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static LottoMoney getLottoCountFromInputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -56,7 +56,7 @@ public class InputView {
         return new WinningLotto(specifiedNumbers, scanner.nextInt());
     }
 
-    private static List<Integer> splitStringToLotto(String input) {
+    public static List<Integer> splitStringToLotto(String input) {
         return Arrays.stream(input.split(","))
                      .mapToInt(Integer::valueOf)
                      .boxed()

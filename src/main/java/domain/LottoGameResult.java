@@ -30,4 +30,12 @@ public class LottoGameResult {
         return gameResult.get(profit);
     }
 
+    public double getProfitRate(LottoMoney money) {
+        double totalProfit = 0.0;
+        for (LottoProfit profit : LottoProfit.values()) {
+            totalProfit += (double) getWinningCountOfResult(profit) * profit.getPrizeMoney();
+        }
+        return totalProfit;
+    }
+
 }

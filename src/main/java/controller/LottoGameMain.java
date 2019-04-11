@@ -23,7 +23,7 @@ public class LottoGameMain {
         LottoGameResult result = lottoGame.getMultipleResults(winningLotto);
 
         ResultView.printWinningStatistics(result);
-        ResultView.printProfitRate(result, money.getMoney());
+        ResultView.printProfitRate(result, money);
 
     }
 }
