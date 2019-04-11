@@ -7,10 +7,7 @@ import lotto.domain.TotalLotteries;
 import org.junit.Test;
 import util.Random;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static lotto.controller.LotteryGame.main;
 import static lotto.domain.LotteryNo.makeLotteryNos;
@@ -48,7 +45,7 @@ public class LotteryTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void 로또_중복_입력_테스트() {
-        final Set<LotteryNo> lotteryNumber = makeLotteryNos(Arrays.asList(1, 1, 2, 3, 4, 5, 6));
+        final Set<LotteryNo> lotteryNumber = makeLotteryNos(Arrays.asList(1, 1, 3, 4, 5, 6));
 
         new Lottery(lotteryNumber);
     }

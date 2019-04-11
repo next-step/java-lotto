@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import util.Random;
 
 import java.util.Arrays;
 
@@ -44,8 +45,9 @@ public class LotteryGame {
 
         WinnerLottery winnerLottery = new WinnerLottery(winnerNumber, bonusNumber);
         AutoLotteries autoLotteries = new AutoLotteries(totalLotteries.countPurchaseQuantity(), ManualLotteriesCount);
+        Random random = new Random();
 
-        totalLotteries.generateLotteries(manualLottery.generateManualLotteries(lotteries), autoLotteries.generateAutoLotteries());
+        totalLotteries.generateLotteries(manualLottery.generateManualLotteries(lotteries), autoLotteries.generateAutoLotteries(random));
 
         printNumberLotteries(manualLottery.getManualLotteriesSize(), autoLotteries.getAutoLotteriesSize());
         printLotteries(totalLotteries);

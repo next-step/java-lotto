@@ -1,12 +1,16 @@
 package lotto.domain;
 
-import java.util.Set;
+import java.util.*;
 
 import static lotto.domain.LotteryNo.isEqual;
 
 public class Lottery {
     public static final int LOTTO_LENGTH = 6;
     private Set<LotteryNo> lottery;
+
+    public Lottery() {
+        this.lottery = new HashSet<>();
+    }
 
     public Lottery(Set<LotteryNo> lotteryNumber) {
         this.lottery = generationLottery(lotteryNumber);
@@ -58,6 +62,21 @@ public class Lottery {
 
     public int getLotterySize() {
         return this.lottery.size();
+    }
+
+    public String[] separateLottery(String lotteries) {
+        return lotteries.split("\r\n");
+    }
+
+    public Lottery makeLotteryByInput(String inputNumbers) {
+        String[] lotteryNumbers = inputNumbers.split(",");
+
+        Set<LotteryNo> lottery = new HashSet<>();
+        for (String lotteryNumber : lotteryNumbers) {
+            lottery.add(new LotteryNo(Integer.parseInt(lotteryNumber)));
+        }
+
+        return new Lottery(lottery);
     }
 
     @Override
