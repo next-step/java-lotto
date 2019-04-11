@@ -11,8 +11,7 @@ public class AutoLotteries {
         this.quantity = totalQuantity - manualQuantity;
     }
 
-    public Lotteries generateAutoLotteries() {
-        Random random = new Random();
+    public Lotteries generateAutoLotteries(Random random) {
 
         for (int i = 0; i < this.quantity; i++) {
             this.autoLotteries.add(random.generateRandom());
