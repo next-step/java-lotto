@@ -30,7 +30,7 @@ public class RankTest {
     @Test
     public void 당첨_2등() {
         //When
-        Rank rank = winningNumber.match2(ConstTest.LOTTERY_ACCORDANCE_FIVE_HAS_BONUS);
+        Rank rank = winningNumber.match(ConstTest.LOTTERY_ACCORDANCE_FIVE_HAS_BONUS);
 
         //Then
         assertThat(rank).isEqualTo(Rank.SECOND_PLACE);

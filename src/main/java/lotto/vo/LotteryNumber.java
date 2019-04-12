@@ -66,11 +66,6 @@ public class LotteryNumber {
 
     public Rank match(LotteryNumber userLotto) {
         int matchCount = containsCount(userLotto);
-        return Rank.valueOf(matchCount);
-    }
-
-    public Rank match2(LotteryNumber userLotto) {
-        int matchCount = containsCount(userLotto);
         return Rank.valueOf2(matchCount, userLotto.isBonus(bonusNumber));
     }
 }
