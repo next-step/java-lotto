@@ -32,6 +32,19 @@ public enum Rank {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    static Rank valueOf2(int matchCount, boolean isBonus) {
+        if (matchCount < MINIMUM_WINNING_NUMBER) {
+            return FAILURE;
+        }else if (matchCount < MINIMUM_WINNING_NUMBER && isBonus) {
+            return SECOND_PLACE;
+        }
+        return Arrays.stream(values())
+                .filter(v -> matchCount == v.numberOfMatches)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+
     public static int sumProfit(Ranks ranks) {
         int sumProfit = Const.INITIAL_NUMBER;
         for (Rank rank : Rank.values()) {

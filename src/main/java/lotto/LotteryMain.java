@@ -22,7 +22,8 @@ public class LotteryMain {
         resultView.printPurchaseTicketCount(money);
         resultView.printLottoNumber(game.getLottoNumber());
 
-        LotteryNumber inputLottery = new LotteryNumber(getLottery(inputVIew.winningNumber()));
+        LotteryNumber inputLottery = new LotteryNumber(getLottery(inputVIew.winningNumber()), inputVIew.bonusBall());
+
         Ranks ranks = game.getWinningStatistics(inputLottery);
         resultView.winningNumberStatistics(ranks);
 

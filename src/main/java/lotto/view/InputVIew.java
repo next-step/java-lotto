@@ -14,4 +14,10 @@ public class InputVIew {
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
+
+    public int bonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
 }

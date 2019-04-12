@@ -20,12 +20,19 @@ public class ResultView {
 
     public void printNumberOfWinningCount(Ranks ranks) {
         for(Rank rank : Rank.values()){
+            if(rank ==Rank.SECOND_PLACE){
+                System.out.println(perStatisticsSecond(rank.getNumberOfMatches(), rank.getReward(), ranks.rankPerWinningCount(rank)));
+            }
             System.out.println(perStatistics(rank.getNumberOfMatches(), rank.getReward(), ranks.rankPerWinningCount(rank)));
         }
     }
 
     public String perStatistics(int matchedNumber, int winningAmount, int winningNumber) {
         return String.format("%d개 일치(%d원)- %d개", matchedNumber, winningAmount, winningNumber);
+    }
+
+    public String perStatisticsSecond(int matchedNumber, int winningAmount, int winningNumber) {
+        return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", matchedNumber, winningAmount, winningNumber);
     }
 
     public void revenueRate(double rate) {
