@@ -11,7 +11,7 @@ public class LotteryGenerator {
     private static final int TO_LOTTERY_INDEX = 6;
 
     public LotteryNumbers lotteryGenerator(Money money) {
-        return new LotteryNumbers(toNumbers(money.buyingTicketCount()));
+        return new LotteryNumbers(toNumbers(money.divide(money)));
     }
 
     private List<LotteryNumber> toNumbers(int ticketCount) {

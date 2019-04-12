@@ -18,9 +18,6 @@ public class Money {
         this.money = money;
     }
 
-    public int buyingTicketCount() {
-        return money / LOTTERY_PRICE;
-    }
 
     public double yield(Money revenue) {
         return (double) ((revenue.money * PERCENT) / money) / PERCENT;
@@ -31,5 +28,9 @@ public class Money {
         if (revenue > Const.INITIAL_NUMBER)
             return new Money(money).yield(new Money(revenue));
         return Const.INITIAL_NUMBER;
+    }
+
+    public int divide(Money inputMoney) {
+        return inputMoney.money / LOTTERY_PRICE;
     }
 }

@@ -8,7 +8,7 @@ import lotto.vo.Ranks;
 
 public class ResultView {
     public void printPurchaseTicketCount(Money money) {
-        int tickets = money.buyingTicketCount();
+        int tickets = money.divide(money);
         System.out.println(String.format("%s개를 구매했습니다.", tickets));
     }
 
