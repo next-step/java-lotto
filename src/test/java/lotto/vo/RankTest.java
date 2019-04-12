@@ -14,13 +14,14 @@ public class RankTest {
 
     @Before
     public void setUp() {
-        winningNumber = new LotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        //Given
+        winningNumber = new LotteryNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
     }
 
     @Test
     public void 당첨_1등() {
         //When
-        Rank rank = winningNumber.match(ConstTest.lottery1);
+        Rank rank = winningNumber.match(ConstTest.LOTTERY_NUMBER_DEFAULT);
 
         //Then
         assertThat(rank).isEqualTo(Rank.FIRST_PLACE);
@@ -29,7 +30,7 @@ public class RankTest {
     @Test
     public void 당첨_실패() {
         //When
-        Rank rank = winningNumber.match(ConstTest.lottery2);
+        Rank rank = winningNumber.match(ConstTest.LOTTERY_ACCORDANCE_TWO);
 
         //Then
         assertThat(rank).isEqualTo(Rank.FAILURE);

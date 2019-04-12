@@ -18,6 +18,7 @@ public class Ranks {
         rankMappers.put(Rank.SECOND_PLACE, Const.INITIAL_NUMBER);
         rankMappers.put(Rank.THIRD_PLACE, Const.INITIAL_NUMBER);
         rankMappers.put(Rank.FOURTH_PLACE, Const.INITIAL_NUMBER);
+        rankMappers.put(Rank.FIFTH_PLACE, Const.INITIAL_NUMBER);
         rankMappers.put(Rank.FAILURE, Const.INITIAL_NUMBER);
         return rankMappers;
     }

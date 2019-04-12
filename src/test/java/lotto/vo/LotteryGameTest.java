@@ -7,19 +7,17 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LotteryGameTest {
-    private Money money;
     private LotteryGame lotteryGame;
 
     @Before
     public void setUp() {
-        money = new Money(10_100);
-        lotteryGame = new LotteryGame(money);
+        lotteryGame = new LotteryGame(ConstTest.MONEY_MILLION);
     }
 
     @Test
     public void 로또_생성() {
         //When
-        Ranks rankIntegerMap = lotteryGame.getWinningStatistics(ConstTest.lottery1);
+        Ranks rankIntegerMap = lotteryGame.getWinningStatistics(ConstTest.LOTTERY_NUMBER_DEFAULT);
 
         //Then
         assertThat(rankIntegerMap.rankPerWinningCount(Rank.FIRST_PLACE)).isGreaterThanOrEqualTo(0);

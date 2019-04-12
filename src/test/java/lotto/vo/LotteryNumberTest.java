@@ -15,7 +15,7 @@ public class LotteryNumberTest {
     @Test
     public void 로또생성() {
         //When
-        String result = ConstTest.lottery1.toString();
+        String result = ConstTest.LOTTERY_NUMBER_DEFAULT.toString();
 
         //Then
         assertThat("[1,2,3,4,5,6]").isEqualTo(result);
@@ -31,5 +31,15 @@ public class LotteryNumberTest {
 
         //Then
         new LotteryNumber(lottoNumbers);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 로또에_보너스넘버가_있으면_에러() {
+        //Given
+        Set<Integer> resultLottoNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 6;
+
+        //When
+        new LotteryNumber(resultLottoNumbers, bonusNumber);
     }
 }
