@@ -18,7 +18,6 @@ public class LottoGameResult {
     }
 
     public void getMultipleResults(WinningLotto winningLotto, List<Lotto> userLottos) {
-
         for(Lotto userLotto : userLottos) {
             LottoMatch result = new LottoMatch(winningLotto, userLotto);
             LottoProfit profit = result.getProfit();
@@ -35,7 +34,7 @@ public class LottoGameResult {
         for (LottoProfit profit : LottoProfit.values()) {
             totalProfit += (double) getWinningCountOfResult(profit) * profit.getPrizeMoney();
         }
-        return totalProfit;
+        return totalProfit / money.getMoney();
     }
 
 }

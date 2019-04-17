@@ -72,6 +72,8 @@ body {
 				<th><h3 class="text-center">당첨 통계</h3></th>
 			</thead>
 		<tbody>
+			{{#results}}
+			<!--
 			<tr>
 				<th>3개 일치 (5000원)- {{FIFTH}}개</th>
 			</tr>
@@ -87,6 +89,11 @@ body {
 			<tr>
 				<th>6개 일치 (2000000000원)- {{FIRST}}개</th>
 			</tr>
+			-->
+			<tr>
+				<th>{{.}}</th>
+			</tr>
+			{{/results}}
 		</tbody>
 		<tfoot>
 			<th><h4 class="text-center">총 수익률은 {{profitRate}}%입니다.</h4></th>

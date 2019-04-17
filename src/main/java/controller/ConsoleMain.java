@@ -6,7 +6,7 @@ import view.ResultView;
 
 import java.util.List;
 
-public class LottoGameMain {
+public class ConsoleMain {
 
     public static void main(String args[]) {
         LottoMoney money = InputView.getLottoCountFromInputMoney();
