@@ -6,7 +6,7 @@ import view.ResultView;
 
 import java.util.List;
 
-public class LottoGameMain {
+public class ConsoleMain {
 
     public static void main(String args[]) {
         LottoMoney money = InputView.getLottoCountFromInputMoney();
@@ -23,7 +23,7 @@ public class LottoGameMain {
         LottoGameResult result = lottoGame.getMultipleResults(winningLotto);
 
         ResultView.printWinningStatistics(result);
-        ResultView.printProfitRate(result, money.getMoney());
+        ResultView.printProfitRate(result, money);
 
     }
 }
