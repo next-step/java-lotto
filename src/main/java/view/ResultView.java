@@ -3,8 +3,8 @@ package view;
 public class ResultView {
     public static final int WIN_STANDARD = 1;
 
-    public void printPurchaseTicketCount() {
-        System.out.println(String.format("%s개를 구매했습니다.", 14));
+    public void printPurchaseTicketCount(int count) {
+        System.out.println(String.format("%s개를 구매했습니다.", count));
     }
 
     public void winningNumberStatistics() {

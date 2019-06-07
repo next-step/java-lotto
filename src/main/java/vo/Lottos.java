@@ -12,4 +12,9 @@ public class Lottos {
     public int count() {
         return lottos.size();
     }
+
+    @Override
+    public String toString() {
+        return lottos+"";
+    }
 }

@@ -34,4 +34,9 @@ public class LottoNumber {
         return Optional.ofNullable(lottoNos.get(number))
                 .orElseThrow(IllegalArgumentException::new);
     }
+
+    @Override
+    public String toString() {
+        return no + "";
+    }
 }
