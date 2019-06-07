@@ -1,23 +1,36 @@
 package view;
 
+import vo.MatchingResult;
+import vo.MatchingResults;
+
 public class ResultView {
     public static final int WIN_STANDARD = 1;
+    public static final String NEWLINE = System.getProperty("line.separator");
+    public static final String LOTTO_REPORT_HEADER = "당첨 통계" + NEWLINE + "----" + NEWLINE;
 
     public void printPurchaseTicketCount(int count) {
         System.out.println(String.format("%s개를 구매했습니다.", count));
     }
 
-    public void winningNumberStatistics() {
-        System.out.println("당첨통계");
-        System.out.println("---------");
+    public static void show(MatchingResults result) {
+        StringBuilder sb = new StringBuilder(LOTTO_REPORT_HEADER);
+
+        Iterable<MatchingResult> matchingResults = result.getResults();
+        for (MatchingResult matchingResult : matchingResults) {
+            appendByMatch(sb, matchingResult);
+        }
+        sb.append("총 수익률은 ");
+        sb.append(result.getProfit());
+        sb.append("%입니다.");
+
+        System.out.println(sb.toString());
     }
 
-    public String perStatistics(int matchedNumber, int winningAmount, int winningNumber) {
-        return String.format("%d개 일치(%d원)- %d개", matchedNumber, winningAmount, winningNumber);
-    }
-
-    public void revenueRate(double rate) {
-        String benefitResult = rate >= WIN_STANDARD ? "이득이" : "손해";
-        System.out.println(String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", String.valueOf(rate), benefitResult));
+    private static void appendByMatch(StringBuilder sb, MatchingResult matchingResult) {
+        sb.append(matchingResult.getDisplayText());
+        sb.append(" - ");
+        sb.append(matchingResult.getCountOfMatchingLotto());
+        sb.append("개");
+        sb.append(NEWLINE);
     }
 }
