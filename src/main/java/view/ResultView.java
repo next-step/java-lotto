@@ -1,11 +1,5 @@
 package view;
 
-import lotto.utils.Const;
-import lotto.vo.LotteryNumbers;
-import lotto.vo.Money;
-import lotto.vo.Rank;
-import lotto.vo.Ranks;
-
 public class ResultView {
     public static final int WIN_STANDARD = 1;
 
