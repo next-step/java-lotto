@@ -7,3 +7,18 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## Test기능목록
+- Money
+  - 입력한 금액이 1000원 미만이면 exception
+- Number
+- Numbers
+  - 1~45까지의 넘버생성
+- Lottery
+  - 6개 이하면 에러처리
+  - Collections.shuffle()
+  - 당첨번호
+- Rank(통계)
+  - 3개일치 1개
+  - 4개일치 0개
+  - 총 수익률 계산
