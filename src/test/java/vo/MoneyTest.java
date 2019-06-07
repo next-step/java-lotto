@@ -22,4 +22,19 @@ public class MoneyTest {
         //Then
         assertThat(usingLotteryCount).isEqualTo(14);
     }
+
+    @Test
+    public void sum() {
+        Money money = new Money(10000);
+        Money actual = money.sum(new Money(5000));
+        assertThat(actual).isEqualTo(new Money(15000));
+    }
+
+    @Test
+    public void profitRate() {
+        Money prize = new Money(10000);
+        Money investMoney = new Money(1000);
+        double profitRate = investMoney.profitRate(prize);
+        assertThat(profitRate).isEqualTo(10);
+    }
 }
