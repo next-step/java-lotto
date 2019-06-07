@@ -90,4 +90,8 @@ public class Lotto {
         sb.append(System.getProperty("line.separator"));
         return sb.toString();
     }
+
+    public int size() {
+        return lotto.size();
+    }
 }
