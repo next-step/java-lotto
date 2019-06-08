@@ -9,8 +9,8 @@ public class Money {
     }
 
     public Money(int money) {
-//        if (money < LOTTERY_MONEY)
-//            throw new IllegalArgumentException();
+        if (money < LOTTERY_MONEY)
+            throw new IllegalArgumentException();
         this.money = money;
     }
 
