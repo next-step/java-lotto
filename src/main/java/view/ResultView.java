@@ -4,7 +4,6 @@ import vo.MatchingResult;
 import vo.MatchingResults;
 
 public class ResultView {
-    public static final int WIN_STANDARD = 1;
     public static final String NEWLINE = System.getProperty("line.separator");
     public static final String LOTTO_REPORT_HEADER = "당첨 통계" + NEWLINE + "----" + NEWLINE;
 
