@@ -9,13 +9,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int count() {
-        return lottos.size();
-    }
-
     @Override
     public String toString() {
-        return lottos+"";
+        lottos.stream().forEach(System.out::println);
+        return "";
     }
 
     public MatchingResults match(WinningLotto winningLotto) {
@@ -24,5 +21,9 @@ public class Lottos {
             result.add(winningLotto.match(userLotto));
         }
         return result;
+    }
+
+    public int count() {
+        return lottos.size();
     }
 }

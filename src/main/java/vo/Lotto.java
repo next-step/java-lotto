@@ -3,6 +3,7 @@ package vo;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -16,26 +17,6 @@ public class Lotto {
 
         this.lotto = lotto;
     }
-
-    public int match(Lotto otherLotto) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lotto) {
-            count += matchCount(otherLotto, lottoNumber);
-        }
-        return count;
-    }
-
-    private int matchCount(Lotto otherLotto, LottoNumber lottoNumber) {
-        if (otherLotto.contains(lottoNumber)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    boolean contains(LottoNumber lottoNumber) {
-        return lotto.contains(lottoNumber);
-    }
-
 
     public static Lotto of(Set<Integer> numbers) {
         Set<LottoNumber> lotto = new HashSet<>();
@@ -66,6 +47,25 @@ public class Lotto {
         return new Lotto(lotto);
     }
 
+    public int match(Lotto otherLotto) {
+        int count = 0;
+        for (LottoNumber lottoNumber : lotto) {
+            count += matchCount(otherLotto, lottoNumber);
+        }
+        return count;
+    }
+
+    private int matchCount(Lotto otherLotto, LottoNumber lottoNumber) {
+        if (otherLotto.contains(lottoNumber)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    boolean contains(LottoNumber lottoNumber) {
+        return lotto.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,14 +81,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (LottoNumber lottoNumber : lotto) {
-            sb.append(lottoNumber + ",");
-        }
-        sb.append("]");
-        sb.append(System.getProperty("line.separator"));
-        return sb.toString();
+        return lotto
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(",", "[", "]"));
     }
 
     public int size() {
