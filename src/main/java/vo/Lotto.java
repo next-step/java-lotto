@@ -38,13 +38,16 @@ public class Lotto {
         if (Objects.isNull(text)) {
             throw new IllegalArgumentException();
         }
+        return new Lotto(splitComma(text));
+    }
 
+    private static Set<LottoNumber> splitComma(String text) {
         String[] values = text.split(",");
         Set<LottoNumber> lotto = new HashSet<>();
         for (String value : values) {
             lotto.add(LottoNumber.of(value));
         }
-        return new Lotto(lotto);
+        return lotto;
     }
 
     public int match(Lotto otherLotto) {

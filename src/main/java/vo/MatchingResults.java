@@ -15,6 +15,7 @@ public class MatchingResults {
         results.add(new MatchingResult(Rank.SECOND_PLACE));
         results.add(new MatchingResult(Rank.THIRD_PLACE));
         results.add(new MatchingResult(Rank.FOURTH_PLACE));
+        results.add(new MatchingResult(Rank.FIFTH_PLACE));
     }
 
     void add(Rank rank) {
