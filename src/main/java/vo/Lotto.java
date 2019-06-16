@@ -1,8 +1,6 @@
 package vo;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -19,7 +17,7 @@ public class Lotto {
     }
 
     public static Lotto of(Set<Integer> numbers) {
-        Set<LottoNumber> lotto = new HashSet<>();
+        Set<LottoNumber> lotto = new LinkedHashSet<>();
         for (Integer number : numbers) {
             lotto.add(LottoNumber.of(number));
         }
@@ -27,7 +25,7 @@ public class Lotto {
     }
 
     public static Lotto of(Integer... numbers) {
-        Set<LottoNumber> lotto = new HashSet<>();
+        Set<LottoNumber> lotto = new LinkedHashSet<>();
         for (Integer number : numbers) {
             lotto.add(LottoNumber.of(number));
         }
@@ -43,7 +41,7 @@ public class Lotto {
 
     private static Set<LottoNumber> splitComma(String text) {
         String[] values = text.split(",");
-        Set<LottoNumber> lotto = new HashSet<>();
+        Set<LottoNumber> lotto = new LinkedHashSet<>();
         for (String value : values) {
             lotto.add(LottoNumber.of(value));
         }
@@ -84,10 +82,9 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lotto
-                .stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(",", "[", "]"));
+        List<LottoNumber> lottoNumbers = new ArrayList(lotto);
+        Collections.sort(lottoNumbers);
+        return lottoNumbers.toString();
     }
 
     public int size() {

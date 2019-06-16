@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +23,7 @@ public class LottoTest {
     @Test
     public void of_Set() {
         //Give
-        HashSet lotto = new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LinkedHashSet lotto = new LinkedHashSet(Arrays.asList(1, 2, 3, 4, 5, 6));
         //When
         Lotto resultLotto = Lotto.ofComma("1,2,3,4,5,6");
         //Then
