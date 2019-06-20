@@ -30,4 +30,5 @@ public class StringCalculatorTest {
     assertThat(StringCalculator.calculate(input)).isEqualTo(result);
   }
 
+
 }
