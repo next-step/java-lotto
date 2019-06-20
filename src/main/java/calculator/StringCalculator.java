@@ -1,18 +1,23 @@
 package calculator;
 
-import calculator.utils.StringUtils;
 import java.util.Arrays;
 
 public class StringCalculator {
 
-  public static final String STRING_CALCULATOR_DELIIMITER = ",|:";
 
   public static int calculate(String input) {
     if (isBlank(input)) {
       return 0;
     }
-    String[] numbers = StringUtils.splitInputValue(STRING_CALCULATOR_DELIIMITER, input);
+    String[] numbers = separate(input);
     return sum(numbers);
+  }
+
+  private static String[] separate(String input) {
+    if (CustomSeparator.isCustomSeparatorCase(input)) {
+      return CustomSeparator.separate(input);
+    }
+    return DefaultSeparator.separate(input);
   }
 
   private static int sum(String[] numbers) {

@@ -30,5 +30,17 @@ public class StringCalculatorTest {
     assertThat(StringCalculator.calculate(input)).isEqualTo(result);
   }
 
+  @Test
+  public void 커스텀_구분자로_분리한후_합을리턴한다() {
+    String input="//;\n1;2;3";
+    assertThat(StringCalculator.calculate(input)).isEqualTo(6);
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"//;\\n1;2;3$true" , "1,2$false"}, delimiter = '$')
+  public void 커스텀식이지확인(String input,boolean result) {
+    assertThat(CustomSeparator.isCustomSeparatorCase(input)).isEqualTo(result);
+  }
+
 
 }
