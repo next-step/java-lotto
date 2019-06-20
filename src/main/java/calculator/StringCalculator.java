@@ -5,12 +5,13 @@ import java.util.Arrays;
 public class StringCalculator {
 
 
-  public static int calculate(String input) {
+  public static int calculate(String input) throws Exception {
     if (isBlank(input)) {
       return 0;
     }
-    String[] numbers = separate(input);
-    return sum(numbers);
+    String[] tokens = separate(input);
+    Validator.validate(tokens);
+    return sum(tokens);
   }
 
   private static String[] separate(String input) {
@@ -20,8 +21,8 @@ public class StringCalculator {
     return DefaultSeparator.separate(input);
   }
 
-  private static int sum(String[] numbers) {
-    return Arrays.stream(numbers)
+  private static int sum(String[] tokens) {
+    return Arrays.stream(tokens)
         .mapToInt(Integer::parseInt)
         .sum();
   }
