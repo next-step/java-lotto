@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class CalculateTest {
     private List<String> convertSource;
+    private List<Integer> sumList;
 
     @BeforeEach
     void setUp() {
@@ -30,6 +31,11 @@ public class CalculateTest {
         convertSource.add("1");
         convertSource.add("2");
         convertSource.add("3");
+
+        sumList = new ArrayList<>();
+        sumList.add(1);
+        sumList.add(2);
+        sumList.add(3);
     }
 
 
@@ -39,5 +45,12 @@ public class CalculateTest {
     void convertIntegerList(int convertTarget) {
         Calculate calculate = new Calculate();
         assertThat(calculate.convertToInteger(convertSource).contains(convertTarget)).isTrue();
+    }
+
+    @DisplayName("List의 숫자를 하나씩 합산")
+    @Test
+    void sum() {
+        Calculate calculate = new Calculate();
+        assertThat(calculate.sum(sumList)).isEqualTo(3);
     }
 }
