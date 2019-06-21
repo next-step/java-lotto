@@ -16,6 +16,7 @@ public class InputTest {
     }
 
     @Test
+    @DisplayName("사용자 입력값이 빈 값(null, '')인지 확인")
     void isEmpty() {
         Input input1 = new Input("");
         assertThat(input1.isEmpty()).isTrue();
