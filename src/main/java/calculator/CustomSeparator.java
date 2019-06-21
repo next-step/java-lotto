@@ -7,6 +7,7 @@ public class CustomSeparator {
 
   private final static int CUSTOM_DELIMITER_INDEX = 1;
   private final static int CUSTOM_TEXT_GROUP_INDEX = 2;
+  private final static String CUSTOM_CASE_START_WORD = "//";
 
   public static Tokens separate(String input) throws Exception {
     Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
@@ -19,7 +20,7 @@ public class CustomSeparator {
   }
 
   public static boolean isCustomSeparatorCase(String input) {
-    return input.startsWith("//");
+    return input.startsWith(CUSTOM_CASE_START_WORD);
   }
 
 }
