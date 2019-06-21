@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringCalculator {
 
     private static String DELIMITER = "[,:]";
@@ -22,6 +25,10 @@ public class StringCalculator {
     }
 
     public static String pickCustomDelimiterFrom(String input) {
-        return null;
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            return m.group(1);
+        }
+        return DELIMITER;
     }
 }
