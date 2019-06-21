@@ -7,15 +7,32 @@ import static java.util.stream.Collectors.toList;
 
 public class Numbers {
 
-  private List<String> numbers;
+  private List<Integer> numbers;
 
   public Numbers(List<String> numbers) {
-    this.numbers = trim(numbers);
+    this.numbers = initNumbers(numbers);
+    validateNumber(this.numbers);
+  }
+
+  private List<Integer> initNumbers(List<String> numbers) {
+    return trim(numbers).stream()
+        .map(Integer::valueOf)
+        .collect(toList());
+  }
+
+  private void validateNumber(List<Integer> numbers) {
+    if (isNegative(numbers)) {
+      throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
+    }
+  }
+
+  private boolean isNegative(List<Integer> numbers) {
+    return numbers.stream()
+        .anyMatch(i -> i < 0);
   }
 
   public int sum() {
     return numbers.stream()
-        .map(Integer::valueOf)
         .reduce(0, Integer::sum);
   }
 
