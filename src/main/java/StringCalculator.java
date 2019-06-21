@@ -20,10 +20,6 @@ public class StringCalculator {
         return input.split(DELIMITER);
     }
 
-    public static boolean hasCustomDelimiter(String input) {
-        return input.split("\n").length == 2;
-    }
-
     public static String pickCustomDelimiterFrom(String input) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
