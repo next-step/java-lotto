@@ -35,7 +35,7 @@ public class StringAdditionCalculator {
         }
         final String[] splitString = tokens.split(regexOfDelimiter);
         if (this.hasNegativeNumber(splitString)) {
-            throw new RuntimeException();
+            throw new RuntimeException("All numbers must be greater than or equal to " + ZERO);
         }
         return Stream.of(splitString)
                 .map(Integer::parseInt)

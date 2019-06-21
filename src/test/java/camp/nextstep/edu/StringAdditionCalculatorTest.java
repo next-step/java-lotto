@@ -112,7 +112,8 @@ class StringAdditionCalculatorTest {
         // given
         // when
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> stringAdditionCalculator.calculate(givenString));
-        // then
+                .isThrownBy(() -> stringAdditionCalculator.calculate(givenString))
+                // then
+                .withMessageContaining("must be greater than or equal to 0");
     }
 }
