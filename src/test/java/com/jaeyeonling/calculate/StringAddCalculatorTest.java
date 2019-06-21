@@ -2,6 +2,7 @@ package com.jaeyeonling.calculate;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -29,6 +30,19 @@ class StringAddCalculatorTest {
     void should_return_inputValue_when_oneValue(final String source) {
         final int result = StringAddCalculator.execute(source);
         final int expected = Integer.parseInt(source);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("쉼표 구분자 입력 시 계산")
+    @ParameterizedTest
+    @CsvSource({
+            "'1,2,3',6",
+            "'1,2,3,4',10"
+            ,"'1,2,3,4,10',20"
+    })
+    void should_return_addValue_when_expression(final String source, final int expected) {
+        final int result = StringAddCalculator.execute(source);
 
         assertThat(result).isEqualTo(expected);
     }
