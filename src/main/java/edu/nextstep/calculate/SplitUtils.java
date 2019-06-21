@@ -38,4 +38,8 @@ public class SplitUtils {
 
         return customerSplit;
     }
+
+    public static List<String> inputDataSplit(String inputData) {
+        return null;
+    }
 }

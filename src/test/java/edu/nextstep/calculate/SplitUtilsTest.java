@@ -26,12 +26,20 @@ public class SplitUtilsTest {
         assertThat(SplitUtils.commonSplit(inputData).contains("1")).isTrue();
     }
 
-    @DisplayName(" 커스텀 구분자를 기준으로 나누기")
+    @DisplayName("커스텀 구분자를 기준으로 나누기")
     @ParameterizedTest
     @ValueSource(strings = {"//;\n1;2;3", "//-\n1-2-3"})
     void customSplit(String inputData) {
 
         assertThat(SplitUtils.customSplit(inputData).contains("1")).isTrue();
+    }
+
+    @DisplayName("커스텀, 일반 모두 포함된 구분자를 기준으로 나누기")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "//;\n1;2;3", "//-\n1-2-3"})
+    void intputDataSplit(String inputData) {
+
+        assertThat(SplitUtils.inputDataSplit(inputData).contains("1")).isTrue();
     }
 
 }
