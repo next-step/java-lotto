@@ -44,10 +44,13 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "-1,2,3",
-            "a,b,c"
+            "a,b,c",
+            "//,b,c",
+            "\n,b,c",
     })
     public void sumByWrongInputThenFail(String wrongInput) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> StringCalculator.calculator(wrongInput));
     }
 }
+
