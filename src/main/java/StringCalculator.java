@@ -1,6 +1,6 @@
 public class StringCalculator {
 
-    private static String DELIMETER = "[,:]";
+    private static String DELIMITER = "[,:]";
 
     public static boolean isEmpty(String input) {
         return null == input || "".equals(input.trim());
@@ -14,6 +14,6 @@ public class StringCalculator {
     }
 
     public static String[] split(String input) {
-        return input.split(DELIMETER);
+        return input.split(DELIMITER);
     }
 }
