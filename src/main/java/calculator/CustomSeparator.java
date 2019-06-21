@@ -8,9 +8,10 @@ public class CustomSeparator {
   private final static int CUSTOM_DELIMITER_INDEX = 1;
   private final static int CUSTOM_TEXT_GROUP_INDEX = 2;
   private final static String CUSTOM_CASE_START_WORD = "//";
+  private final static String CUSTOM_REGEX_PATTERN = "//(.)\n(.*)";
 
   public static Tokens separate(String input) throws Exception {
-    Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+    Matcher m = Pattern.compile(CUSTOM_REGEX_PATTERN).matcher(input);
     if (!m.find()) {
       return new Tokens(new String[]{});
     }
