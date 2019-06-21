@@ -6,30 +6,30 @@ import java.util.Arrays;
 
 class Expression {
 
-    private static final String CUSTOM_PREFIX = "//";
     static final String NEW_LINE = "\n";
+    private static final String CUSTOM_PREFIX = "//";
 
     private final Separator separator;
-    private final String expression;
+    private final ExpressionValue value;
 
     private Expression(final Separator separator,
-                       final String expression) {
+                       final ExpressionValue value) {
         this.separator = separator;
-        this.expression = expression;
+        this.value = value;
     }
 
     public static Expression of(final String expression) {
         return new Expression(
                 Separator.of(expression),
-                expression);
+                ExpressionValue.of(expression));
     }
 
     public int execute() {
-        if (StringUtils.isNullOrBlank(expression)) {
+        if (value.isEmpty()) {
             return 0;
         }
 
-        return Arrays.stream(separator.split(getValue()))
+        return Arrays.stream(value.split(separator))
                 .mapToInt(this::parseInt)
                 .sum();
     }
@@ -45,15 +45,5 @@ class Expression {
 
     static boolean isCustomExpression(final String expression) {
         return expression.startsWith(CUSTOM_PREFIX);
-    }
-
-    private String getValue() {
-        if (isCustomExpression(expression)) {
-            final String[] splitExpression = expression.split(NEW_LINE);
-
-            return splitExpression[1];
-        }
-
-        return expression;
     }
 }
