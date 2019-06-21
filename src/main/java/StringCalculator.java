@@ -12,6 +12,6 @@ public class StringCalculator {
     }
 
     public static String[] split(String input) {
-        return null;
+        return input.split(",");
     }
 }
