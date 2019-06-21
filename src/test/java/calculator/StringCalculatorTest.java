@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,18 +26,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class StringCalculatorTest {
 
+    private String[] result;
+
+    @BeforeEach
+    void setUp() {
+        result = new String[]{"1", "2"};
+    }
+
     @Test
     @DisplayName("사용자 입력값 확인")
     void isEmptyInput() {
-        String input = "";
-        assertThat(StringCalculator.isEmpty(input)).isTrue();
+        assertThat(StringCalculator.isEmpty("")).isTrue();
     }
 
     @Test
     @DisplayName("사용자 입력값 split (with comma)")
     void split() {
         String input = "1,2";
-        String[] result = {"1", "2"};
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
@@ -44,7 +50,6 @@ public class StringCalculatorTest {
     @DisplayName("사용자 입력값 split (with colon)")
     void split2() {
         String input = "1:2";
-        String[] result = {"1", "2"};
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
@@ -52,7 +57,6 @@ public class StringCalculatorTest {
     @DisplayName("사용자 입력값 split (with custom delimiter")
     void split3() {
         String input = "//;\n1;2";
-        String[] result = {"1", "2"};
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
