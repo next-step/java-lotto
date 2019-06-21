@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * 2. 입력값 split
  *   - ",", ":"
  *   - "custom": ex) "//;\n1;2;3"
-*  3. split 한 후, 숫자로 변경
+ * 3. split 한 후, 숫자로 변경
  * 4. 숫자가 아닌 경우 (runtimeException)
  * 5. 음수인 경우 (runtimeException)
  */
@@ -64,31 +64,21 @@ public class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("input에서 custom DELIMITER를 뽑아내기")
-    void pickCustomDelimiterFromInput() {
-        String input = "//;\n1;2";
-        assertThat(StringCalculator.pickCustomDelimiterFrom(input)).isEqualTo(";");
-    }
-
-    @Test
     @DisplayName("add 구현")
     void add() {
-        String[] input = {"1", "2"};
-        assertThat(StringCalculator.add(input)).isEqualTo(3);
+        assertThat(StringCalculator.add("1,2")).isEqualTo(3);
     }
 
     @Test
     @DisplayName("add에 숫자가 아닌 input 넣을시 RuntimeException")
     void add_throwRuntimeException() {
-        String[] input = {"a", "2"};
-        assertThrows(RuntimeException.class, () -> StringCalculator.add(input));
+        assertThrows(RuntimeException.class, () -> StringCalculator.add("a"));
     }
 
     @Test
     @DisplayName("add에 음수를 input으로 넣을시 RuntimeException")
     void add_throwRuntimeException2() {
-        String[] input = {"-1", "2"};
-        assertThrows(RuntimeException.class, () -> StringCalculator.add(input));
+        assertThrows(RuntimeException.class, () -> StringCalculator.add("-1"));
     }
 
 }

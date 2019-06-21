@@ -18,22 +18,25 @@ public class StringCalculator {
     }
 
     public static String[] split(String input) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            return m.group(2).split(customDelimiter);
+        }
         return input.split(DEFAULT_DELIMITER);
     }
 
-    public static String pickCustomDelimiterFrom(String input) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-        if (m.find()) {
-            return m.group(1);
+    public static int add(String input) {
+        if (isEmpty(input)) {
+            return 0;
         }
-        return DEFAULT_DELIMITER;
-    }
 
-    public static int add(String[] input) {
-        return Stream.of(input).mapToInt(str -> {
+        String[] stringNumbers = split(input);
+
+        return Stream.of(stringNumbers).mapToInt(stringNumber -> {
             int result;
             try {
-                result = Integer.valueOf(str);
+                result = Integer.valueOf(stringNumber);
                 if (result < 0) throw new RuntimeException("음수는 넣을수 없습니다.");
             } catch(NumberFormatException e) {
                 throw new RuntimeException("숫자가 아닙니다.");
