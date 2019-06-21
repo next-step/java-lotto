@@ -8,12 +8,12 @@ public final class StringAddCalculator {
 
     private StringAddCalculator() { }
 
-    public static int execute(String source) {
-        if (source == null || source.isBlank()) {
+    public static int execute(final String expression) {
+        if (expression == null || expression.isBlank()) {
             return 0;
         }
 
-        return Arrays.stream(source.split(SEPARATOR))
+        return Arrays.stream(expression.split(SEPARATOR))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
