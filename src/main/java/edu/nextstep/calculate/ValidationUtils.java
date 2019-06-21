@@ -11,4 +11,8 @@ package edu.nextstep.calculate;
  * create date  : 2019-06-22 02:13
  */
 public class ValidationUtils {
+
+    public static boolean isSpace(String inputData) {
+        return "".equals(inputData);
+    }
 }
