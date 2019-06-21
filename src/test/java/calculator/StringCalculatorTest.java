@@ -20,4 +20,11 @@ public class StringCalculatorTest {
     int result = StringCalculator.splitAndSum("1, 2, 3");
     assertThat(result).isEqualTo(6);
   }
+
+  @DisplayName("쉼표와 콜론 구분자로 입력")
+  @Test
+  public void splitAndSum_comma_colon() {
+    int result = StringCalculator.splitAndSum("1:2,3");
+    assertThat(result).isEqualTo(6);
+  }
 }

@@ -3,10 +3,10 @@ package calculator;
 public class StringCalculator {
 
   public static int splitAndSum(String input) {
-    String[] strings = input.split(",");
+    String[] numbers = input.split("[,:]");
     int result = 0;
-    for (String num : strings) {
-      result += Integer.valueOf(num.trim());
+    for (String number : numbers) {
+      result += Integer.valueOf(number.trim());
     }
     return result;
   }
