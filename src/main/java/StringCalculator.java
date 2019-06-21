@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
 
-    private static String DELIMITER = "[,:]";
+    private static String DEFAULT_DELIMITER = "[,:]";
 
     public static boolean isEmpty(String input) {
         return null == input || "".equals(input.trim());
@@ -17,7 +17,7 @@ public class StringCalculator {
     }
 
     public static String[] split(String input) {
-        return input.split(DELIMITER);
+        return input.split(DEFAULT_DELIMITER);
     }
 
     public static String pickCustomDelimiterFrom(String input) {
@@ -25,6 +25,6 @@ public class StringCalculator {
         if (m.find()) {
             return m.group(1);
         }
-        return DELIMITER;
+        return DEFAULT_DELIMITER;
     }
 }
