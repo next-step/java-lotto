@@ -1,6 +1,7 @@
 class Formula {
     private final static String SPLIT_REGEX_COMMA = ",";
     private final static String SPLIT_REGEX_COLON = ":";
+    private final static String SEPARATOR_REGEX = "(\\\\n)";
     private final String formula;
     
     Formula(String formula) {
@@ -12,7 +13,7 @@ class Formula {
     }
     
     String getCustomSeparator() {
-        String customSeparator = formula.split("n")[0];
-        return customSeparator.substring(customSeparator.length() - 2, customSeparator.length() - 1);
+        String customSeparator = formula.split(SEPARATOR_REGEX)[0];
+        return customSeparator.substring(customSeparator.length() - 1, customSeparator.length());
     }
 }

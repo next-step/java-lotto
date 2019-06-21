@@ -7,7 +7,7 @@ class FormulaTest {
 //    - 콜론만으로 구분된 문자열이 들어온 경우 : 분리 가능
 //    - 쉼표와 콜론이 섞여있는 경우 : 분리 가능
 //    - 쉼표와 콜론과 숫자가 아닌 문자열이 포함된 경우 : 불가능
-    private static final String[] RESULT_NUMBERS = {"1", "2", "3"};;
+    private static final String[] RESULT_NUMBERS = {"1", "2", "3"};
     
     @Test
     @DisplayName("쉼표만으로 구분된 문자열이 들어온 경우 : 분리 가능")
