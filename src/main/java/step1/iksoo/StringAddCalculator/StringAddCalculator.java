@@ -4,71 +4,58 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-	private String text;
+    private String text;
 
-	public void StrngAddCalculator(String text) {
-		this.text = text;
-	}
+    public int add(String text) {
+        this.text = text;
+        if (isNotAddable(this.text)) {
+            return 0;
+        }
 
-	public int add(String text) throws Exception {
-		this.text = text;
+        return addString(this.text);
+    }
 
-		if (isEmpty()) {
-			return 0;
-		}
+    private boolean isNotAddable(String text) {
+        if (text == null || text.isEmpty() || isContainsMinus(text)) {
+            return true;
+        }
+        return false;
+    }
 
-		if (isCustomDelimiter()) {
-			return addStringCustom();
-		}
+    private boolean isContainsMinus(String text) {
+        String[] tokens = makeToken(text);
+        boolean isMinus = false;
+        for (int i = 0; i < tokens.length; i++) {
+            isMinus = isMinus || Integer.parseInt(tokens[i]) < 0 ? true : false;
+        }
+        return isIllegalArgument(isMinus);
+    }
 
-		return addString();
-	}
+    private boolean isIllegalArgument(boolean isMinus) {
+        if (isMinus) {
+            throw new IllegalArgumentException("마이너스는 입력할 수 없어요.");
+        }
+        return false;
+    }
 
-	private boolean isEmpty() {
-		if (this.text == null || this.text.isEmpty()) {
-			return true;
-		}
-		return false;
-	}
+    private int addString(String text) {
+        String[] tokens = makeToken(text);
 
-	private boolean isCustomDelimiter() {
-		if (this.text.contains("//") && this.text.contains("\n")) {
-			return true;
-		}
-		return false;
-	}
+        int sumTokens = 0;
+        for (int i = 0; i < tokens.length; i++) {
+            sumTokens += Integer.parseInt(tokens[i]);
+        }
 
-	private int addStringCustom() {
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(this.text);
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			String[] tokens = m.group(2).split(customDelimiter);
-			return addStringArray(tokens);
-		}
-		return -1;
-	}
+        return sumTokens;
+    }
 
-	private int addString() throws Exception {
-		String[] tokens = this.text.split(",|:");
-		if (isStringMinus(tokens)) {
-			throw new IllegalArgumentException();
-		}
-		return addStringArray(tokens);
-	}
-
-	private boolean isStringMinus(String[] tokens) throws Exception {
-		for (int i = 0; i < tokens.length; i++) {
-			if (Integer.parseInt(tokens[i]) < 0)
-				return true;
-		}
-		return false;
-	}
-
-	private int addStringArray(String[] tokens) {
-		int sumTokens = 0;
-		for (int i = 0; i < tokens.length; i++) {
-			sumTokens += Integer.parseInt(tokens[i]);
-		}
-		return sumTokens;
-	}
+    private String[] makeToken(String text) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] tokens = m.group(2).split(customDelimiter);
+            return tokens;
+        }
+        return text.split(",|:");
+    }
 }
