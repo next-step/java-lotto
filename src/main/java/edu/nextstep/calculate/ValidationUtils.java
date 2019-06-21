@@ -18,7 +18,7 @@ public class ValidationUtils {
     private static final String REGEX_PATTERN_NUMBER = "[0-9]+$";
 
     public static boolean isSpace(String inputData) {
-        return "".equals(inputData);
+        return ("".equals(inputData) || inputData == null);
     }
 
     public static boolean isNumber(String number) {
@@ -37,20 +37,5 @@ public class ValidationUtils {
         if(isNegativeNumber(Integer.parseInt(inValidChar))) {
             throw new RuntimeException("숫자가 0보다 작습니다. [" + inValidChar +"]");
         }
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
     }
 }
