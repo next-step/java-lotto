@@ -9,23 +9,17 @@ public class StringCalculator {
     if (isBlank(input)) {
       return 0;
     }
-    String[] tokens = separate(input);
-    Validator.validate(tokens);
-    return sum(tokens);
+    Tokens tokens = separate(input);
+    return tokens.sum();
   }
 
-  private static String[] separate(String input) {
+  private static Tokens separate(String input) throws Exception {
     if (CustomSeparator.isCustomSeparatorCase(input)) {
       return CustomSeparator.separate(input);
     }
     return DefaultSeparator.separate(input);
   }
 
-  private static int sum(String[] tokens) {
-    return Arrays.stream(tokens)
-        .mapToInt(Integer::parseInt)
-        .sum();
-  }
 
   private static boolean isBlank(String input) {
     return input == null || "".equals(input.trim());

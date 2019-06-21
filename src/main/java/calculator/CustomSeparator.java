@@ -8,14 +8,14 @@ public class CustomSeparator {
   private final static int CUSTOM_DELIMITER_INDEX = 1;
   private final static int CUSTOM_TEXT_GROUP_INDEX = 2;
 
-  public static String[] separate(String input) {
+  public static Tokens separate(String input) throws Exception {
     Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
     if (!m.find()) {
-      return new String[]{};
+      return new Tokens(new String[]{});
     }
     String customDelimiter = m.group(CUSTOM_DELIMITER_INDEX);
     String[] numbers = m.group(CUSTOM_TEXT_GROUP_INDEX).split(customDelimiter);
-    return numbers;
+    return new Tokens(numbers);
   }
 
   public static boolean isCustomSeparatorCase(String input) {
