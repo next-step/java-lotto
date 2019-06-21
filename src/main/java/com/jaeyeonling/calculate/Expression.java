@@ -24,14 +24,14 @@ class Expression {
     }
 
     int execute() {
-        if (isCustomExpression()) {
+        if (isCustom()) {
             return execute(getSeparatorPart(), getValuePart());
         }
 
         return execute(expression);
     }
 
-    private boolean isCustomExpression() {
+    private boolean isCustom() {
         return expression.contains(StringUtils.NEW_LINE);
     }
 
