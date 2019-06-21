@@ -1,5 +1,6 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class StringCalculator {
 
@@ -29,6 +30,14 @@ public class StringCalculator {
     }
 
     public static int add(String[] input) {
-        return 0;
+        return Stream.of(input).mapToInt(str -> {
+            int result;
+            try {
+                result = Integer.valueOf(str);
+            } catch(NumberFormatException e) {
+                throw new RuntimeException("숫자가 아닙니다.");
+            }
+            return result;
+        }).reduce(0, Integer::sum);
     }
 }
