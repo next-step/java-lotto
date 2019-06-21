@@ -2,12 +2,15 @@ package camp.nextstep.edu.calculator;
 
 public class StringAdditionCalculator {
 
+    private static final String EMPTY_STRING = "";
+    private static final int ZERO = 0;
+
     public int calculate(String input) {
         if (input == null) {
-            return 0;
+            return ZERO;
         }
-        if ("".equals(input)) {
-            return 0;
+        if (EMPTY_STRING.equals(input)) {
+            return ZERO;
         }
         return Integer.parseInt(input);
     }
