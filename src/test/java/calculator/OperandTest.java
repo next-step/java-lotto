@@ -63,4 +63,12 @@ public class OperandTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(Operand.MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION);
     }
+
+    @Test
+    @DisplayName("Operand는 객체끼리 더할 수 있다.")
+    void add_Operand() {
+        Operand operand1 = Operand.of(10);
+        Operand operand2 = Operand.of(20);
+        assertThat(operand1.add(operand2)).isEqualTo(Operand.of(10 + 20));
+    }
 }

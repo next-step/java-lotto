@@ -9,15 +9,9 @@ public class Calculator {
         }
 
         Splitter splitter = new Splitter();
-        List<Operand> operands = splitter.extractOperands(input);
-        return sum(operands);
-    }
-
-    private int sum(List<Operand> operands) {
-        int result = 0;
-        for (Operand operand : operands) {
-            result += operand.convert();
-        }
-        return result;
+        List<Operand> inputOperands = splitter.extractOperands(input);
+        Operands operands = new Operands(inputOperands);
+        Operand sum = operands.sum();
+        return sum.convert();
     }
 }
