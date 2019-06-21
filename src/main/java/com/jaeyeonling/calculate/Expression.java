@@ -22,7 +22,16 @@ public class Expression {
         }
 
         return Arrays.stream(separator.separate(expression))
-                .mapToInt(Integer::parseInt)
+                .mapToInt(this::parseInt)
                 .sum();
+    }
+
+    private int parseInt(final String s) {
+        final int value = Integer.parseInt(s);
+        if (value < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        return value;
     }
 }
