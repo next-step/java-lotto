@@ -4,22 +4,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NumberTest {
+public class StringNumberTest {
 
 
     @Test
     @DisplayName("더하기")
     public void numberTest() {
-        Number six = new Number(6);
-        Number three = new Number(3);
-        Number nine = six.add(three);
+        StringNumber six = new StringNumber("6");
+        StringNumber three = new StringNumber("3");
+        StringNumber nine = six.add(three);
 
-        assertThat(nine).isEqualTo(new Number(9));
+        assertThat(nine).isEqualTo(new StringNumber("9"));
     }
 
     @Test
     @DisplayName("같은 Number인지 확인")
     public void equality() {
-        assertThat(new Number(5)).isEqualTo(new Number(5));
+        assertThat(new StringNumber("5")).isEqualTo(new StringNumber("5"));
     }
 }
