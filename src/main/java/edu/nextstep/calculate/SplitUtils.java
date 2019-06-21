@@ -22,6 +22,15 @@ public class SplitUtils {
     private static final int CUSTOM_SPLIT_FRIST_GROUP = 1;
     private static final int CUSTOM_SPLIT_SECOND_GROUP = 2;
 
+    public static List<String> inputDataSplit(String inputData) {
+        Matcher m = Pattern.compile(REGEX_CUSTOM_SPLIT).matcher(inputData);
+
+        if (m.find()) {
+            return customSplit(inputData);
+        }
+        return commonSplit(inputData);
+    }
+
     public static List<String> commonSplit(String inputData) {
         return Arrays.asList(inputData.split(",|:"));
     }
@@ -37,9 +46,5 @@ public class SplitUtils {
         }
 
         return customerSplit;
-    }
-
-    public static List<String> inputDataSplit(String inputData) {
-        return null;
     }
 }
