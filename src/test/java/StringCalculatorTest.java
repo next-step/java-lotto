@@ -33,7 +33,7 @@ public class StringCalculatorTest {
     @DisplayName("사용자 입력값 계산")
     void calculate() {
         String input = "";
-        assertThat(StringCalculator.calculate(input)).isEqualTo(111);
+        assertThat(StringCalculator.calculate(input)).isEqualTo(0);
     }
 
 
