@@ -14,7 +14,13 @@ final class StringCalculator {
         }
 
         if (expression.startsWith("//")) {
-            return 6;
+            final String[] splitExpression = expression.split("\n");
+            final String separator = splitExpression[0].substring(2);
+            final String value = splitExpression[1];
+
+            return Arrays.stream(value.split(separator))
+                    .mapToInt(Integer::parseInt)
+                    .sum();
         }
 
         return Arrays.stream(expression.split(SEPARATOR))
