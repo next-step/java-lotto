@@ -5,10 +5,10 @@ import java.util.regex.Pattern;
 
 public class Input {
 
-    private static String DEFAULT_DELIMITER = "[,:]";
+    private static final String DEFAULT_DELIMITER = "[,:]";
     private String input;
 
-    public Input(String input) {
+    public Input(final String input) {
         this.input = input;
     }
 

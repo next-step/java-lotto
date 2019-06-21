@@ -4,19 +4,19 @@ import java.util.stream.Stream;
 
 public class StringCalculator {
 
-    static boolean isEmpty(Input input) {
+    static boolean isEmpty(final Input input) {
         return input.isEmpty();
     }
 
-    static String[] split(Input input) {
+    static String[] split(final Input input) {
         return input.split();
     }
 
-    static int parse(StringNumber stringNumber) {
+    static int parse(final StringNumber stringNumber) {
         return stringNumber.parse();
     }
 
-    public static int add(Input input) {
+    public static int add(final Input input) {
         if (input.isEmpty()) return 0;
         return Stream.of(input.split())
                 .mapToInt(str -> StringCalculator.parse(new StringNumber(str)))

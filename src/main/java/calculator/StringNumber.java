@@ -2,12 +2,12 @@ package calculator;
 
 public class StringNumber {
 
-    private static String NOT_A_NUMBER_EXCEPTION_MESSAGE = "숫자가 아닙니다.";;
-    private static String CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수는 넣을수 없습니다.";
+    private static final String NOT_A_NUMBER_EXCEPTION_MESSAGE = "숫자가 아닙니다.";;
+    private static final String CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수는 넣을수 없습니다.";
 
     private final String stringNumber;
 
-    public StringNumber(String stringNumber) {
+    public StringNumber(final String stringNumber) {
         this.stringNumber = stringNumber;
     }
 
