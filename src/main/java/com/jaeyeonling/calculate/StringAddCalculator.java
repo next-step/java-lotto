@@ -21,12 +21,15 @@ public final class StringAddCalculator {
             final String separator = splitExpression[0].substring(2);
             final String value = splitExpression[1];
 
-            return Arrays.stream(value.split(separator))
-                    .mapToInt(Integer::parseInt)
-                    .sum();
+            return execute(separator, value);
         }
 
-        return Arrays.stream(expression.split(SEPARATOR))
+        return execute(SEPARATOR, expression);
+    }
+
+    private static int execute(final String separator,
+                                final String expression) {
+        return Arrays.stream(expression.split(separator))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
