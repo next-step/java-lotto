@@ -1,13 +1,17 @@
 package com.jaeyeonling.calculate;
 
+import com.jaeyeonling.calculate.utils.StringUtils;
+
 import java.util.Arrays;
 
 class Expression {
 
-    private static final int ZERO = 0;
-    private static final String DEFAULT_SEPARATOR = ",|:";
-    private static final String NEW_LINE = "\n";
+    private static final String DEFAULT_SEPARATOR_REGEX = ",|:";
+    private static final Separator<String> DEFAULT_SEPARATOR = new StringSplitSeparator(DEFAULT_SEPARATOR_REGEX);
+
     private static final String CUSTOM_PREFIX = "//";
+    private static final int SEPARATOR_INDEX = 0;
+    private static final int VALUE_INDEX = 1;
 
     private final String expression;
 
@@ -15,50 +19,54 @@ class Expression {
         this.expression = expression;
     }
 
+    boolean isInvalid() {
+        return StringUtils.isNullOrBlank(expression);
+    }
+
     int execute() {
-        if (isInvalid()) {
-            return ZERO;
+        if (isCustomExpression()) {
+            return execute(getSeparatorPart(), getValuePart());
         }
 
-        final String separator = getSeparator();
-        final String value = getValue();
+        return execute(expression);
+    }
 
+    private boolean isCustomExpression() {
+        return expression.contains(StringUtils.NEW_LINE);
+    }
+
+    private String[] splitExpression() {
+        return expression.split(StringUtils.NEW_LINE);
+    }
+
+    private String getSeparatorPart() {
+        final String separatorPart = splitExpression()[SEPARATOR_INDEX];
+        return separatorPart.substring(CUSTOM_PREFIX.length());
+    }
+
+    private String getValuePart() {
+        return splitExpression()[VALUE_INDEX];
+    }
+
+    private static int execute(final String value) {
+        return execute(DEFAULT_SEPARATOR, new CalculateValue(value));
+    }
+
+    private static int execute(final String separator,
+                               final String value) {
+        return execute(new StringSplitSeparator(separator), new CalculateValue(value));
+    }
+
+    private static int execute(final Separator<String> separator,
+                               final CalculateValue value) {
         return Arrays.stream(value.split(separator))
-                .mapToInt(this::parseInt)
+                .mapToInt(Expression::parseInt)
                 .sum();
     }
 
-    private String getSeparator() {
-        if (isCustom()) {
-            final String[] splitExpression = expression.split(NEW_LINE);
-
-            return splitExpression[0].substring(2);
-        }
-
-        return DEFAULT_SEPARATOR;
-    }
-
-    private String getValue() {
-        if (isCustom()) {
-            final String[] splitExpression = expression.split(NEW_LINE);
-
-            return splitExpression[1];
-        }
-
-        return expression;
-    }
-
-    private boolean isCustom() {
-        return expression.startsWith(CUSTOM_PREFIX);
-    }
-
-    private boolean isInvalid() {
-        return expression == null || expression.isBlank();
-    }
-
-    private int parseInt(final String s) {
+    private static int parseInt(final String s) {
         final int parsedValue = Integer.parseInt(s);
-        if (parsedValue < ZERO) {
+        if (parsedValue < 0) {
             throw new IllegalArgumentException();
         }
 
