@@ -53,6 +53,14 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
+    @Test
+    @DisplayName("사용자 입력값 split (with custom delimiter")
+    void split3() {
+        String input = "//;\\n1;2";
+        String[] result = {"1", "2"};
+        assertThat(StringCalculator.split(input)).containsExactly(result);
+    }
+
 
 
 }
