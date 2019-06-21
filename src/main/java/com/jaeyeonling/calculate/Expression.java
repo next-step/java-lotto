@@ -1,5 +1,7 @@
 package com.jaeyeonling.calculate;
 
+import com.jaeyeonling.calculate.utils.StringUtils;
+
 import java.util.Arrays;
 
 class Expression {
@@ -23,7 +25,7 @@ class Expression {
     }
 
     public int execute() {
-        if (isInvalidExpression()) {
+        if (StringUtils.isNullOrBlank(expression)) {
             return 0;
         }
 
@@ -39,10 +41,6 @@ class Expression {
         }
 
         return parsedValue;
-    }
-
-    private boolean isInvalidExpression() {
-        return expression == null || expression.isBlank();
     }
 
     static boolean isCustomExpression(final String expression) {

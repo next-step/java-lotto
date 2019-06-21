@@ -1,5 +1,7 @@
 package com.jaeyeonling.calculate;
 
+import com.jaeyeonling.calculate.utils.StringUtils;
+
 class Separator {
 
     private static final String DEFAULT_SEPARATOR = ",|:";
@@ -11,7 +13,7 @@ class Separator {
     }
 
     static Separator of(final String expression) {
-        if (expression == null) {
+        if (StringUtils.isNullOrBlank(expression)) {
             return new Separator(DEFAULT_SEPARATOR);
         }
         if (!Expression.isCustomExpression(expression)) {
