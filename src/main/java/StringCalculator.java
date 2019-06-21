@@ -34,6 +34,7 @@ public class StringCalculator {
             int result;
             try {
                 result = Integer.valueOf(str);
+                if (result < 0) throw new RuntimeException("음수는 넣을수 없습니다.");
             } catch(NumberFormatException e) {
                 throw new RuntimeException("숫자가 아닙니다.");
             }
