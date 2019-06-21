@@ -56,11 +56,15 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("사용자 입력값 split (with custom delimiter")
     void split3() {
-        String input = "//;\\n1;2";
+        String input = "//;\n1;2";
         String[] result = {"1", "2"};
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
-
-
+    @Test
+    @DisplayName("사용자 입력값에 custom DELIMITER 있는지 확인")
+    void hasCustomDelimiter() {
+        String input = "//;\n1;2";
+        assertThat(StringCalculator.hasCustomDelimiter(input)).isTrue();
+    }
 }
