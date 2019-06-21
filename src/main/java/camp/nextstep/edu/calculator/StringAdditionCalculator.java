@@ -17,13 +17,19 @@ public class StringAdditionCalculator {
         if (EMPTY_STRING.equals(input)) {
             return ZERO;
         }
-        if (!input.contains(DELIMITER_COMMA) && !input.contains(DELIMITER_COLON)) {
+        if (this.hasOnlyOneNumber(input)) {
             return Integer.parseInt(input);
         }
         final String[] splitString = input.split(REGEX_DELIMITERS);
         return Stream.of(splitString)
                 .map(Integer::parseInt)
                 .reduce(ZERO, Integer::sum);
+    }
+
+    private boolean hasOnlyOneNumber(String input) {
+        final boolean containsComma = input.contains(DELIMITER_COMMA);
+        final boolean containsColon = input.contains(DELIMITER_COLON);
+        return !containsComma && !containsColon;
     }
 
 }
