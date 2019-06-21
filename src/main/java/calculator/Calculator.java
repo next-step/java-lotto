@@ -11,7 +11,7 @@ public class Calculator {
     private static final String REGEX_OF_CUSTOM_SEPARATOR = "//(.)\n(.*)";
     private static final String REGEX_OF_NATURAL_NUMBER = "-?\\d+";
 
-    public static int calculate(String input) {
+    public int calculate(String input) {
         if (input == null || input.trim().isEmpty()) {
             return 0;
         }
@@ -20,7 +20,7 @@ public class Calculator {
         return sum(elementsOninput);
     }
 
-    private static String[] splitBySeparator(String input) {
+    private String[] splitBySeparator(String input) {
         String[] elementsOninput = input.split(REGEX_OF_DEFAULT_SEPARATOR);
 
         Matcher matcher = Pattern.compile(REGEX_OF_CUSTOM_SEPARATOR).matcher(input);
@@ -31,7 +31,7 @@ public class Calculator {
         return elementsOninput;
     }
 
-    private static int sum(String[] elementsOninput) {
+    private int sum(String[] elementsOninput) {
         int result = 0;
         for (String element : elementsOninput) {
             validateOperandIsNumber(element);
@@ -43,14 +43,14 @@ public class Calculator {
     }
 
 
-    private static void validateOperandIsNumber(String operand) {
+    private void validateOperandIsNumber(String operand) {
         if (!operand.matches(REGEX_OF_NATURAL_NUMBER)) {
             StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NOT_NUMBER_EXCEPTION).append(operand);
             throw new IllegalArgumentException(String.valueOf(exceptionMessage));
         }
     }
 
-    private static void validateOperandIsPositive(int operand) {
+    private void validateOperandIsPositive(int operand) {
         if (operand < 0) {
             StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION).append(operand);
             throw new IllegalArgumentException(String.valueOf(exceptionMessage));
