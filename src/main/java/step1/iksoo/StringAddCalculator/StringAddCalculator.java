@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
-
 	private String text;
 
 	public void StrngAddCalculator(String text) {
@@ -12,31 +11,57 @@ public class StringAddCalculator {
 	}
 
 	public int add(String text) throws Exception {
-		if (text == null || text.isEmpty()) {
+		this.text = text;
+
+		if (isEmpty()) {
 			return 0;
 		}
 
-		this.text = text;
-
-		if (this.text.contains("//") && this.text.contains("\n")) {
+		if (isCustomDelimiter()) {
 			return addStringCustom();
 		}
 
 		return addString();
 	}
 
+	private boolean isEmpty() {
+		if (this.text == null || this.text.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isCustomDelimiter() {
+		if (this.text.contains("//") && this.text.contains("\n")) {
+			return true;
+		}
+		return false;
+	}
+
+	private int addStringCustom() {
+		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(this.text);
+		if (m.find()) {
+			String customDelimiter = m.group(1);
+			String[] tokens = m.group(2).split(customDelimiter);
+			return addStringArray(tokens);
+		}
+		return -1;
+	}
+
 	private int addString() throws Exception {
 		String[] tokens = this.text.split(",|:");
-		isStringMinus(tokens);
+		if (isStringMinus(tokens)) {
+			throw new IllegalArgumentException();
+		}
 		return addStringArray(tokens);
 	}
 
-	private void isStringMinus(String[] tokens) throws Exception {
+	private boolean isStringMinus(String[] tokens) throws Exception {
 		for (int i = 0; i < tokens.length; i++) {
 			if (Integer.parseInt(tokens[i]) < 0)
-				throw new IllegalArgumentException();
+				return true;
 		}
-
+		return false;
 	}
 
 	private int addStringArray(String[] tokens) {
@@ -45,16 +70,5 @@ public class StringAddCalculator {
 			sumTokens += Integer.parseInt(tokens[i]);
 		}
 		return sumTokens;
-	}
-
-	private int addStringCustom() {
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(this.text);
-		if (m.find()) {
-			String customDelimiter = m.group(1);
-			String[] tokens = m.group(2).split(customDelimiter);
-			// 덧셈 구현
-			return addStringArray(tokens);
-		}
-		return -1;
 	}
 }
