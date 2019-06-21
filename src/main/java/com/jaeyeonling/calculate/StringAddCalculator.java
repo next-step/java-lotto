@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public final class StringAddCalculator {
 
-    private static final String SEPARATOR = ",";
+    private static final String SEPARATOR = ",|:";
 
     private StringAddCalculator() { }
 
