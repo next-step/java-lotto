@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     static final String MESSAGE_OF_NOT_NUMBER_EXCEPTION = "피연산자는 숫자여야 합니다: ";
+    static final String MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION = "피연산자는 0 또는 자연수여야 합니다.";
 
     private static final String REGEX_OF_DEFAULT_SEPARATOR = "[,:]";
     private static final String REGEX_OF_CUSTOM_SEPARATOR = "//(.)\n(.*)";
@@ -29,15 +30,25 @@ public class Calculator {
     private static int sum(String[] elementsOninput) {
         int result = 0;
         for (String element : elementsOninput) {
-            validateElementIsNumber(element);
-            result += Integer.parseInt(element);
+            validateOperandIsNumber(element);
+            int operand = Integer.parseInt(element);
+            result += operand;
+            validateOperandIsPositive(operand);
         }
         return result;
     }
 
-    private static void validateElementIsNumber(String element) {
-        if (!element.matches(REGEX_OF_NATURAL_NUMBER)) {
-            StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NOT_NUMBER_EXCEPTION).append(element);
+
+    private static void validateOperandIsNumber(String operand) {
+        if (!operand.matches(REGEX_OF_NATURAL_NUMBER)) {
+            StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NOT_NUMBER_EXCEPTION).append(operand);
+            throw new IllegalArgumentException(String.valueOf(exceptionMessage));
+        }
+    }
+
+    private static void validateOperandIsPositive(int operand) {
+        if (operand < 0) {
+            StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION).append(operand);
             throw new IllegalArgumentException(String.valueOf(exceptionMessage));
         }
     }

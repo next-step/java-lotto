@@ -48,6 +48,23 @@ public class CalculatorTest {
     void check_NotNumberParam_ExceptionThrown(String input) {
         assertThatThrownBy(() -> Calculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-        .hasMessageContaining(Calculator.MESSAGE_OF_NOT_NUMBER_EXCEPTION);
+                .hasMessageContaining(Calculator.MESSAGE_OF_NOT_NUMBER_EXCEPTION);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1,-1,3",
+            "10:20:-30",
+            "-4,2:3",
+            "15:-5,-1,",
+            "//a\n1a-14a3",
+            "//!\n-1!20!30",
+            "//;\n-9;25;35"
+    })
+    @DisplayName("음수 값이 전달되면 예외를 발생시킨다.")
+    void check_NegativeNumberParam_ExceptionThrown(String input) {
+        assertThatThrownBy(() -> Calculator.calculate(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(Calculator.MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION);
     }
 }
