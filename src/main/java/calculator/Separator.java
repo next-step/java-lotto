@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,11 +12,17 @@ public class Separator {
   private static final Pattern PATTERNS = Pattern.compile(DELIMITER_PATTERN);
   private static final String CUSTOM_DELIMITER_START = "//";
   private static final String DELIMITER = "[,:]";
+  private static final String DEFAULT_VALUE = "0";
 
   public static List<String> split(String input) {
+    if (validateInput(input)) {
+      return Collections.singletonList(DEFAULT_VALUE);
+    }
+
     if (isCustomDelimiter(input)) {
       return splitCustom(input);
     }
+
     return Arrays.asList(input.split(DELIMITER));
   }
 
@@ -35,5 +42,9 @@ public class Separator {
 
   public static boolean isCustomDelimiter(String input) {
     return input.startsWith(CUSTOM_DELIMITER_START);
+  }
+
+  public static boolean validateInput(String input) {
+    return input == null || input.isEmpty();
   }
 }

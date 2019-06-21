@@ -27,4 +27,10 @@ public class SeparatorTest {
     assertThat(Separator.split("1,2:3"))
         .containsExactly("1","2","3");
   }
+
+  @DisplayName("null 이나 빈문자 체크")
+  @Test
+  public void validateInput() {
+    assertThat(Separator.validateInput("")).isTrue();
+  }
 }
