@@ -21,4 +21,10 @@ public class Calculate {
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
     }
+
+    public int sum(List<Integer> sumList) {
+        return sumList.stream()
+                .reduce((integer1, integer2) -> integer1 + integer2)
+                .get();
+    }
 }

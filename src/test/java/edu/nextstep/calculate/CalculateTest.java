@@ -51,6 +51,6 @@ public class CalculateTest {
     @Test
     void sum() {
         Calculate calculate = new Calculate();
-        assertThat(calculate.sum(sumList)).isEqualTo(3);
+        assertThat(calculate.sum(sumList)).isEqualTo(6);
     }
 }
