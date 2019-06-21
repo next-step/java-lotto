@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExpressionTest {
 
-
     @Test
     void createExpressionByDefaultExpression() {
         String inputOfString = "1,2,3";
