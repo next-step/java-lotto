@@ -1,5 +1,6 @@
 package StringAddCalculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,4 +23,13 @@ public class StringNumberTest {
     public void equality() {
         assertThat(new StringNumber("5")).isEqualTo(new StringNumber("5"));
     }
+
+    @Test
+    @DisplayName("숫자가 아닐 경우")
+    public void rightNumber() {
+        Assertions.assertThrows(NumberFormatException.class, () -> {
+            new StringNumber(",");
+        });
+    }
+
 }

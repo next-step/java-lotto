@@ -4,21 +4,25 @@ import java.util.Objects;
 
 public class StringNumber {
 
-
-    private final String number;
+    private final String StringNumber;
+    private int intNumber;
 
     public StringNumber(String number) {
-        this.number = number;
+        this.intNumber = convertInt(number);
+        this.StringNumber = number;
     }
 
-    public StringNumber add(StringNumber addedNumber) {
-        int numberInt = toInt();
-        int addedInt = addedNumber.toInt();
-        return new StringNumber(Integer.toString(numberInt + addedInt));
+    public StringNumber add(StringNumber addedStringNumber) {
+        int added = addedStringNumber.toInt();
+        return new StringNumber(Integer.toString(this.intNumber + added));
     }
 
     public int toInt() {
-        return Integer.parseInt(this.number);
+        return this.intNumber;
+    }
+
+    private int convertInt(String number) {
+        return Integer.parseInt(number);
     }
 
     @Override
@@ -26,18 +30,18 @@ public class StringNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringNumber that = (StringNumber) o;
-        return Objects.equals(number, that.number);
+        return Objects.equals(StringNumber, that.StringNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(StringNumber);
     }
 
     @Override
     public String toString() {
         return "StringNumber{" +
-                "number='" + number + '\'' +
+                "number='" + StringNumber + '\'' +
                 '}';
     }
 }
