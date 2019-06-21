@@ -25,6 +25,8 @@ public class SplitterTest {
     @DisplayName("기본 구분자로 결합된 숫자들을 분리한다.")
     void split_NaturalNumbers_WithDefaultSeparators(String input) {
         Splitter splitter = new Splitter();
-        assertThat(splitter.extractOperands(input)).containsExactly(1, 2, 3);
+        assertThat(splitter.extractOperands(input)).containsExactly(Operand.of(1),
+                Operand.of(2),
+                Operand.of(3));
     }
 }

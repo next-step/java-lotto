@@ -92,7 +92,7 @@ public class CalculatorTest {
     void check_NotNumberParam_ExceptionThrown(String input) {
         assertThatThrownBy(() -> calculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(Splitter.MESSAGE_OF_NOT_NUMBER_EXCEPTION);
+                .hasMessageContaining(Operand.MESSAGE_OF_NOT_NUMBER_EXCEPTION);
     }
 
     @ParameterizedTest
@@ -109,6 +109,6 @@ public class CalculatorTest {
     void check_NegativeNumberParam_ExceptionThrown(String input) {
         assertThatThrownBy(() -> calculator.calculate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(Splitter.MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION);
+                .hasMessageContaining(Operand.MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION);
     }
 }

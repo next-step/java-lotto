@@ -9,14 +9,14 @@ public class Calculator {
         }
 
         Splitter splitter = new Splitter();
-        List<Integer> operands = splitter.extractOperands(input);
+        List<Operand> operands = splitter.extractOperands(input);
         return sum(operands);
     }
 
-    private int sum(List<Integer> operands) {
+    private int sum(List<Operand> operands) {
         int result = 0;
-        for (Integer operand : operands) {
-            result += operand;
+        for (Operand operand : operands) {
+            result += operand.convert();
         }
         return result;
     }
