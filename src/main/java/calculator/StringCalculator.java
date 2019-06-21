@@ -1,26 +1,15 @@
 package calculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
 
 public class StringCalculator {
 
   public static int splitAndSum(String input) {
-    Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-    int result = 0;
-    if (m.find()) {
-      String customDelimeter = m.group(1);
-      String[] numbers= m.group(2).split(customDelimeter);
-      for (String number : numbers) {
-        result += Integer.valueOf(number.trim());
-      }
-    } else {
-      String[] numbers = input.split("[,:]");
-      for (String number : numbers) {
-        result += Integer.valueOf(number.trim());
-      }
-    }
+    List<String> numbers = Separator.split(input);
 
-    return result;
+    return numbers.stream()
+        .map(String::trim)
+        .map(Integer::valueOf)
+        .reduce(0, Integer::sum);
   }
 }

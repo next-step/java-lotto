@@ -20,4 +20,11 @@ public class SeparatorTest {
     assertThat(Separator.splitCustom("//;\n1;2;3"))
         .containsExactly("1","2","3");
   }
+
+  @DisplayName("쉼표와 콜론 구분자로 입력")
+  @Test
+  public void splitAndSum_comma_colon() {
+    assertThat(Separator.split("1,2:3"))
+        .containsExactly("1","2","3");
+  }
 }

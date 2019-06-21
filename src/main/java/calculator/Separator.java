@@ -10,6 +10,14 @@ public class Separator {
   private static final String DELIMITER_PATTERN = "//(.)\n(.*)";
   private static final Pattern PATTERNS = Pattern.compile(DELIMITER_PATTERN);
   private static final String CUSTOM_DELIMITER_START = "//";
+  private static final String DELIMITER = "[,:]";
+
+  public static List<String> split(String input) {
+    if (isCustomDelimiter(input)) {
+      return splitCustom(input);
+    }
+    return Arrays.asList(input.split(DELIMITER));
+  }
 
   public static List<String> splitCustom(String input) {
     Matcher matcher = PATTERNS.matcher(input);
