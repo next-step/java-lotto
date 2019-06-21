@@ -5,9 +5,7 @@ import java.util.stream.Stream;
 public class StringAdditionCalculator {
 
     private static final String EMPTY_STRING = "";
-    private static final String DELIMITER_COMMA = ",";
-    private static final String DELIMITER_COLON = ":";
-    private static final String REGEX_DELIMITERS = "[" + DELIMITER_COMMA + DELIMITER_COLON + "]";
+    private static final String REGEX_DELIMITERS = "[,:]";
     private static final String PREFIX_OF_CUSTOM_DELIMITER = "//";
     private static final int ZERO = 0;
     private static final int INDEX_OF_CUSTOM_DELIMITER = 2;
