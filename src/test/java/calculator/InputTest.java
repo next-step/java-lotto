@@ -11,5 +11,8 @@ public class InputTest {
     void isEmpty() {
         Input input1 = new Input("");
         assertThat(input1.isEmpty()).isTrue();
+
+        Input input2 = new Input(null);
+        assertThat(input2.isEmpty()).isTrue();
     }
 }

@@ -9,6 +9,6 @@ public class Input {
     }
 
     public boolean isEmpty() {
-        return false;
+        return null == input || "".equals(input.trim());
     }
 }
