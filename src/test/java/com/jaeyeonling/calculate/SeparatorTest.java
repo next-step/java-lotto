@@ -12,7 +12,7 @@ class SeparatorTest {
     void should_split_when_basic_expression() {
         final String expression = "1:2,3";
 
-        final Separator separator = new Separator(expression);
+        final Separator separator = Separator.of(expression);
 
         final String[] separateValue = separator.separate(expression);
 
@@ -24,7 +24,7 @@ class SeparatorTest {
     void should_split_when_custom_expression() {
         final String expression = "//Q\n1Q2Q3Q4Q10";
 
-        final Separator separator = new Separator(expression);
+        final Separator separator = Separator.of(expression);
 
         final String[] separateValue = separator.separate(expression);
 
