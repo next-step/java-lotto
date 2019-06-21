@@ -1,3 +1,7 @@
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * 기능 요구사항 :
@@ -8,6 +12,7 @@
  * - 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
  *
  * 1. 사용자 입력 받기
+ *   - "" 공백이나 null 입력시 0 return
  * 2. 입력값 split
  *   - ",", ":"
  *   - "custom": ex) "//;\n1;2;3"
@@ -16,6 +21,13 @@
  * 5. 음수인 경우 (runtimeException)
  */
 public class StringCalculatorTest {
+
+    @Test
+    @DisplayName("사용자 입력값 확인")
+    void isEmptyInput() {
+        String input = "";
+        assertThat(StringCalculator.isEmpty(input)).isTrue();
+    }
 
 
 
