@@ -2,25 +2,24 @@ package com.jaeyeonling.calculate;
 
 import java.util.Arrays;
 
-public class Expression {
+class Expression {
 
-    private static final String SEPARATOR = ",|:";
     private static final String CUSTOM_PREFIX = "//";
-    private static final String NEW_LINE = "\n";
+    static final String NEW_LINE = "\n";
 
-    private final String separator;
-    private final String value;
+    private final Separator separator;
+    private final String expression;
 
-    private Expression(final String separator,
-                       final String value) {
+    private Expression(final Separator separator,
+                       final String expression) {
         this.separator = separator;
-        this.value = value;
+        this.expression = expression;
     }
 
     public static Expression of(final String expression) {
         return new Expression(
-                getSeparator(expression),
-                getValue(expression));
+                Separator.of(expression),
+                expression);
     }
 
     public int execute() {
@@ -28,7 +27,7 @@ public class Expression {
             return 0;
         }
 
-        return Arrays.stream(value.split(separator))
+        return Arrays.stream(separator.split(getValue()))
                 .mapToInt(this::parseInt)
                 .sum();
     }
@@ -43,14 +42,14 @@ public class Expression {
     }
 
     private boolean isInvalidExpression() {
-        return value == null || value.isBlank();
+        return expression == null || expression.isBlank();
     }
 
-    private static boolean isCustomExpression(final String expression) {
+    static boolean isCustomExpression(final String expression) {
         return expression.startsWith(CUSTOM_PREFIX);
     }
 
-    private static String getValue(final String expression) {
+    private String getValue() {
         if (isCustomExpression(expression)) {
             final String[] splitExpression = expression.split(NEW_LINE);
 
@@ -58,15 +57,5 @@ public class Expression {
         }
 
         return expression;
-    }
-
-    private static String getSeparator(final String expression) {
-        if (isCustomExpression(expression)) {
-            final String[] splitExpression = expression.split(NEW_LINE);
-
-            return splitExpression[0].substring(2);
-        }
-
-        return SEPARATOR;
     }
 }
