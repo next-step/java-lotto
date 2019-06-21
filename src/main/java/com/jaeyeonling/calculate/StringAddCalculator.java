@@ -5,6 +5,8 @@ import java.util.Arrays;
 public final class StringAddCalculator {
 
     private static final String SEPARATOR = ",|:";
+    private static final String CUSTOM_PREFIX = "//";
+    private static final String NEW_LINE = "\n";
 
     private StringAddCalculator() { }
 
@@ -13,8 +15,8 @@ public final class StringAddCalculator {
             return 0;
         }
 
-        if (expression.startsWith("//")) {
-            final String[] splitExpression = expression.split("\n");
+        if (expression.startsWith(CUSTOM_PREFIX)) {
+            final String[] splitExpression = expression.split(NEW_LINE);
 
             final String separator = splitExpression[0].substring(2);
             final String value = splitExpression[1];
