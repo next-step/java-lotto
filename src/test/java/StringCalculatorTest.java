@@ -84,4 +84,11 @@ public class StringCalculatorTest {
         assertThrows(RuntimeException.class, () -> StringCalculator.add(input));
     }
 
+    @Test
+    @DisplayName("add에 음수를 input으로 넣을시 RuntimeException")
+    void add_throwRuntimeException2() {
+        String[] input = {"-1", "2"};
+        assertThrows(RuntimeException.class, () -> StringCalculator.add(input));
+    }
+
 }
