@@ -7,8 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class StringAdditionCalculatorTest {
     private StringAdditionCalculator stringAdditionCalculator;
@@ -76,5 +78,19 @@ class StringAdditionCalculatorTest {
         final int actual = stringAdditionCalculator.calculate(givenString);
         // then
         assertThat(actual).isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "-1,2,3",
+            "//;\n-1;2;3"
+    })
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다")
+    void calculateShouldThrowRuntimeExceptionWhenGivenStringContainsNegativeNumber(String givenString) {
+        // given
+        // when
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stringAdditionCalculator.calculate(givenString));
+        // then
     }
 }

@@ -31,6 +31,9 @@ public class StringAdditionCalculator {
 
     private int resolve(String regexOfDelimiter, String tokens) {
         final String[] splitString = tokens.split(regexOfDelimiter);
+        if (Stream.of(splitString).map(Integer::parseInt).anyMatch(a -> a < 0)) {
+            throw new RuntimeException();
+        }
         return Stream.of(splitString)
                 .map(Integer::parseInt)
                 .reduce(ZERO, Integer::sum);
