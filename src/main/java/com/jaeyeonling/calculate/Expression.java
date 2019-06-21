@@ -2,11 +2,21 @@ package com.jaeyeonling.calculate;
 
 import java.util.Arrays;
 
-public final class Expression {
+public class Expression {
 
     private static final String SEPARATOR = ",|:";
 
-    public static int execute(final String expression) {
+    private final String expression;
+
+    private Expression(final String expression) {
+        this.expression = expression;
+    }
+
+    public static Expression of(final String expression) {
+        return new Expression(expression);
+    }
+
+    public int execute() {
         if (expression.isEmpty()) {
             return 0;
         }

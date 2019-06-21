@@ -12,7 +12,7 @@ class ExpressionTest {
     @DisplayName("빈 값을 입력 시 0을 반환한다.")
     @Test
     void should_return_zero_when_empty() {
-        final int returnValue = Expression.execute("");
+        final int returnValue = Expression.of("").execute();
 
         assertThat(returnValue).isEqualTo(0);
     }
@@ -25,7 +25,7 @@ class ExpressionTest {
             "'1:2,3',6"
     })
     void should_expected_sum_when_add(final String expression, final int expected) {
-        final int returnValue = Expression.execute(expression);
+        final int returnValue = Expression.of(expression).execute();
 
         assertThat(returnValue).isEqualTo(expected);
     }
@@ -38,7 +38,7 @@ class ExpressionTest {
             "'//Q\n1Q2Q3Q4Q10',20",
     })
     void should_expected_sum_when_custom_separator_add(final String expression, final int expected) {
-        final int returnValue = Expression.execute(expression);
+        final int returnValue = Expression.of(expression).execute();
 
         assertThat(returnValue).isEqualTo(expected);
     }
