@@ -2,7 +2,6 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,22 +13,22 @@ public class Separator {
   private static final String DELIMITER = "[,:]";
   private static final String DEFAULT_VALUE = "0";
 
-  public static List<String> split(String input) {
+  public static Numbers split(String input) {
     if (validateInput(input)) {
-      return Collections.singletonList(DEFAULT_VALUE);
+      return new Numbers(Collections.singletonList(DEFAULT_VALUE));
     }
 
     if (isCustomDelimiter(input)) {
       return splitCustom(input);
     }
 
-    return Arrays.asList(input.split(DELIMITER));
+    return new Numbers(Arrays.asList(input.split(DELIMITER)));
   }
 
-  public static List<String> splitCustom(String input) {
+  public static Numbers splitCustom(String input) {
     Matcher matcher = PATTERNS.matcher(input);
     if (matcher.find()) {
-      return Arrays.asList(getStrings(matcher));
+      return new Numbers(Arrays.asList(getStrings(matcher)));
     }
 
     throw new IllegalArgumentException("잘못된 입력입니다. : " + input);
