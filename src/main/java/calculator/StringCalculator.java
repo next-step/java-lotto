@@ -7,8 +7,6 @@ public class StringCalculator {
             return 0;
         }
         Expression expression = Expression.from(inputOfString);
-        expression.checkTokens();
-
         return sum(getNumbers(expression));
     }
 

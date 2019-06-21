@@ -12,7 +12,7 @@ public class Expression {
     private String delimiter;
     private String tokens;
 
-    public Expression(String delimiter, String tokens) {
+    private Expression(String delimiter, String tokens) {
         this.delimiter = delimiter;
         this.tokens = tokens;
     }
@@ -31,18 +31,11 @@ public class Expression {
         return inputOfString.startsWith(PREFIX_CUSTOM_HAS_DELIMITER);
     }
 
-    public void checkTokens() {
-        Pattern compile = Pattern.compile("^\\d+((" + delimiter + ")\\d+)*$");
-        if (!compile.matcher(tokens).matches()) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
-    }
-
-    public String getDelimiter() {
+    String getDelimiter() {
         return delimiter;
     }
 
-    public String getTokens() {
+    String getTokens() {
         return tokens;
     }
 
