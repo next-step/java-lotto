@@ -20,7 +20,7 @@ public class StringAdditionCalculator {
         if (input == null) {
             return ZERO;
         }
-        if (this.isFormatOfCustomDelimiter(input)) {
+        if (this.isValidFormatOfCustomDelimiter(input)) {
             final char customDelimiterCharacter = input.charAt(INDEX_OF_CUSTOM_DELIMITER);
             final String customDelimiter = String.valueOf(customDelimiterCharacter);
             final String restOfInput = input.substring(INDEX_OF_BEGINNING_TOKENS);
@@ -42,7 +42,7 @@ public class StringAdditionCalculator {
                 .reduce(ZERO, Integer::sum);
     }
 
-    private boolean isFormatOfCustomDelimiter(String input) {
+    private boolean isValidFormatOfCustomDelimiter(String input) {
         return input.startsWith(PREFIX_OF_CUSTOM_DELIMITER)
                 && input.length() >= MINIMUM_LENGTH_OF_CUSTOM_DELIMITER_INPUT
                 && Objects.equals(NEW_LINE_CHARACTER, input.charAt(INDEX_OF_POSTFIX_CUSTOM_DELIMITER));
