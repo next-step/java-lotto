@@ -15,18 +15,21 @@ public class Number {
     }
 
     public static Number of(String number) {
-        int result = 0;
+        int result;
         try{
             result = Integer.parseInt(number);
         }catch (NumberFormatException e){
             throw new IllegalArgumentException("잘못된 문자열 입니다.");
         }
-
         return new Number(result);
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public Number add(Number number) {
+        return new Number(this.number + number.number);
     }
 
     @Override
@@ -47,9 +50,5 @@ public class Number {
         return "Number{" +
                 "number=" + number +
                 '}';
-    }
-
-    public Number add(Number number) {
-        return new Number(this.number + number.number);
     }
 }
