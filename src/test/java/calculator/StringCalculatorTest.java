@@ -34,54 +34,48 @@ public class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("사용자 입력값 확인")
-    void isEmptyInput() {
-        assertThat(StringCalculator.isEmpty("")).isTrue();
-    }
-
-    @Test
     @DisplayName("사용자 입력값 split (with comma)")
     void split() {
-        String input = "1,2";
-        assertThat(StringCalculator.split(input)).containsExactly(result);
+        assertThat(StringCalculator.split(new Input("1,2"))).containsExactly(result);
     }
 
     @Test
     @DisplayName("사용자 입력값 split (with colon)")
     void split2() {
-        String input = "1:2";
+        Input input = new Input("1:2");
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
     @Test
     @DisplayName("사용자 입력값 split (with custom delimiter")
     void split3() {
-        String input = "//;\n1;2";
+        Input input = new Input("//;\n1;2");
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
     @Test
     @DisplayName("add 구현")
     void add() {
-        assertThat(StringCalculator.add("1,2")).isEqualTo(3);
+        assertThat(StringCalculator.add(new Input("1,2"))).isEqualTo(3);
     }
 
     @Test
     @DisplayName("사용자 입력값이 null이나 공백")
     void add_null_or_empty_input() {
-        assertThat(StringCalculator.add("")).isEqualTo(0);
-        assertThat(StringCalculator.add(null)).isEqualTo(0);
+        assertThat(StringCalculator.add(new Input(""))).isEqualTo(0);
+        assertThat(StringCalculator.add(new Input(null))).isEqualTo(0);
+        assertThat(StringCalculator.add(new Input())).isEqualTo(0);
     }
 
     @Test
     @DisplayName("add에 숫자가 아닌 input 넣을시 RuntimeException")
     void add_throwRuntimeException() {
-        assertThrows(RuntimeException.class, () -> StringCalculator.add("a"));
+        assertThrows(RuntimeException.class, () -> StringCalculator.add(new Input("a")));
     }
 
     @Test
     @DisplayName("add에 음수를 input으로 넣을시 RuntimeException")
     void add_throwRuntimeException2() {
-        assertThrows(RuntimeException.class, () -> StringCalculator.add("-1"));
+        assertThrows(RuntimeException.class, () -> StringCalculator.add(new Input("-1")));
     }
 }
