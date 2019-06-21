@@ -13,4 +13,11 @@ public class StringCalculatorTest {
     int result = StringCalculator.splitAndSum("1");
     assertThat(result).isEqualTo(1);
   }
+
+  @DisplayName("쉼표 구분자로 입력")
+  @Test
+  public void splitAndSumComma() {
+    int result = StringCalculator.splitAndSum("1, 2, 3");
+    assertThat(result).isEqualTo(6);
+  }
 }
