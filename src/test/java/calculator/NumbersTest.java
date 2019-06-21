@@ -11,6 +11,6 @@ class NumbersTest {
         String[] numbersOfString = {"1","2","3"};
         Numbers numbers = Numbers.from(numbersOfString);
         assertThat(numbers).isNotNull();
-        assertThat(numbers.getNumbers()).containsExactly(1,2,3);
+        assertThat(numbers.getNumbers()).containsExactly(new Number(1),new Number(2),new Number(3));
     }
 }
