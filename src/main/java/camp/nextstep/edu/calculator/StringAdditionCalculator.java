@@ -31,12 +31,18 @@ public class StringAdditionCalculator {
 
     private int resolve(String regexOfDelimiter, String tokens) {
         final String[] splitString = tokens.split(regexOfDelimiter);
-        if (Stream.of(splitString).map(Integer::parseInt).anyMatch(a -> a < 0)) {
+        if (this.hasNegativeNumber(splitString)) {
             throw new RuntimeException();
         }
         return Stream.of(splitString)
                 .map(Integer::parseInt)
                 .reduce(ZERO, Integer::sum);
+    }
+
+    private boolean hasNegativeNumber(String[] splitString) {
+        return Stream.of(splitString)
+                .map(Integer::parseInt)
+                .anyMatch(number -> number < ZERO);
     }
 
 }
