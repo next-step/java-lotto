@@ -45,6 +45,14 @@ public class StringCalculatorTest {
         assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
+    @Test
+    @DisplayName("사용자 입력값 split (with colon)")
+    void split2() {
+        String input = "1:2";
+        String[] result = {"1", "2"};
+        assertThat(StringCalculator.split(input)).containsExactly(result);
+    }
+
 
 
 }
