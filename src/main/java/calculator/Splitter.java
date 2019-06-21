@@ -1,6 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +11,11 @@ public class Splitter {
     private static final String REGEX_OF_CUSTOM_SEPARATOR = "//(.)\n(.*)";
 
     public List<Operand> extractOperands(String input) {
+        if (isEmpty(input)) {
+            Operand zero = Operand.of(0);
+            return Collections.singletonList(zero);
+        }
+
         List<Operand> operands = new ArrayList<>();
         String[] elementsOnInput = split(input);
 
@@ -17,7 +23,11 @@ public class Splitter {
             Operand operand = Operand.of(element);
             operands.add(operand);
         }
-        return operands;
+        return Collections.unmodifiableList(operands);
+    }
+
+    private boolean isEmpty(String input) {
+        return input == null || input.trim().isEmpty();
     }
 
     private String[] split(String input) {
