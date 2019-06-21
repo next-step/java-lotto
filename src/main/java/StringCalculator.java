@@ -1,5 +1,7 @@
 public class StringCalculator {
 
+    private static String DELIMETER = "[,:]";
+
     public static boolean isEmpty(String input) {
         return null == input || "".equals(input.trim());
     }
@@ -12,6 +14,6 @@ public class StringCalculator {
     }
 
     public static String[] split(String input) {
-        return input.split(",");
+        return input.split(DELIMETER);
     }
 }
