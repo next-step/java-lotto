@@ -84,5 +84,4 @@ public class StringCalculatorTest {
     void add_throwRuntimeException2() {
         assertThrows(RuntimeException.class, () -> StringCalculator.add("-1"));
     }
-
 }
