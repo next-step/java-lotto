@@ -12,7 +12,7 @@ public class Calculator {
     private static final String REGEX_OF_NATURAL_NUMBER = "-?\\d+";
 
     public static int calculate(String input) {
-        if (input == null) {
+        if (input == null || input.trim().isEmpty()) {
             return 0;
         }
 

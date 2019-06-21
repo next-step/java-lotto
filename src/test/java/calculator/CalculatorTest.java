@@ -44,6 +44,27 @@ public class CalculatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
+            "",
+            " ",
+            "   ",
+            "       "
+    })
+    @DisplayName("빈 문자열이 입력되면 0으로 계산한다.")
+    void sum_Empty_Calculated(String input) {
+        int calculatedValue = Calculator.calculate(input);
+        assertThat(calculatedValue).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("숫자 하나가 입력되면 입력된 숫자로 계산한다.")
+    void sum_OneParam_Calculated() {
+        String input = "10";
+        int calculatedValue = Calculator.calculate(input);
+        assertThat(calculatedValue).isEqualTo(Integer.valueOf(input));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
             "1,b,3",
             "10:20:!",
             "^,2:3",
