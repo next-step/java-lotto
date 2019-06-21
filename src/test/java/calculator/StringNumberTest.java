@@ -25,5 +25,4 @@ class StringNumberTest {
     void parse_throwRuntimeException2() {
         assertThrows(RuntimeException.class, () -> new StringNumber("-1").parse());
     }
-
 }
