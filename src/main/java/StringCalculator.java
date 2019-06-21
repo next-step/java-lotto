@@ -1,6 +1,6 @@
 public class StringCalculator {
 
     public static boolean isEmpty(String input) {
-        return false;
+        return null == input || "".equals(input.trim());
     }
 }
