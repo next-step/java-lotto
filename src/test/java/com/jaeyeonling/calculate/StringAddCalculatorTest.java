@@ -46,4 +46,19 @@ class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(expected);
     }
+
+    @DisplayName("쉼표 또는 콜론 구분자 입력 시 계산")
+    @ParameterizedTest
+    @CsvSource({
+            "'1,2:3',6",
+            "'1,2,3:4',10"
+            ,"'1:2:3,4,10',20"
+    })
+    void should_return_addValue_when_commaAndColonExpression(final String source, final int expected) {
+        final int result = StringAddCalculator.execute(source);
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+
 }
