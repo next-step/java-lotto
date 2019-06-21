@@ -1,6 +1,6 @@
 package edu.nextstep.calculate;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,6 +16,6 @@ import java.util.List;
 public class SplitUtils {
 
     public static List<String> commonSplit(String inputData) {
-        return null;
+        return Arrays.asList(inputData.split(",|:"));
     }
 }
