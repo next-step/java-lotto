@@ -4,9 +4,6 @@ import java.util.stream.Stream;
 
 public class StringCalculator {
 
-    private static String NOT_A_NUMBER_EXCEPTION_MESSAGE = "숫자가 아닙니다.";;
-    private static String CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수는 넣을수 없습니다.";
-
     static boolean isEmpty(Input input) {
         return input.isEmpty();
     }
@@ -15,22 +12,14 @@ public class StringCalculator {
         return input.split();
     }
 
-    static int parse(String stringNumber) {
-        int result = 0;
-        try {
-            result = Integer.valueOf(stringNumber);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(NOT_A_NUMBER_EXCEPTION_MESSAGE);
-        }
-
-        if (result < 0) throw new RuntimeException(CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
-        return result;
+    static int parse(StringNumber stringNumber) {
+        return stringNumber.parse();
     }
 
     public static int add(Input input) {
-        if (isEmpty(input)) return 0;
-        return Stream.of(split(input))
-                .mapToInt(StringCalculator::parse)
+        if (input.isEmpty()) return 0;
+        return Stream.of(input.split())
+                .mapToInt(str -> StringCalculator.parse(new StringNumber(str)))
                 .reduce(0, Integer::sum);
     }
 }

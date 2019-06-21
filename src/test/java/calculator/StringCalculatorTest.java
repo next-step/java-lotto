@@ -26,6 +26,40 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class StringCalculatorTest {
 
+    private String[] result;
+
+    @BeforeEach
+    void setUp() {
+        result = new String[]{"1", "2"};
+    }
+
+    @Test
+    @DisplayName("사용자 입력값 빈 값인지 Test")
+    void isEmpty() {
+        assertThat(StringCalculator.isEmpty(new Input(""))).isTrue();
+        assertThat(StringCalculator.isEmpty(new Input("1"))).isFalse();
+    }
+
+    @Test
+    @DisplayName("사용자 입력값 split (with comma)")
+    void split() {
+        assertThat(StringCalculator.split(new Input("1,2"))).containsExactly(result);
+    }
+
+    @Test
+    @DisplayName("사용자 입력값 split (with colon)")
+    void split2() {
+        Input input = new Input("1:2");
+        assertThat(StringCalculator.split(input)).containsExactly(result);
+    }
+
+    @Test
+    @DisplayName("사용자 입력값 split (with custom delimiter")
+    void split3() {
+        Input input = new Input("//;\n1;2");
+        assertThat(StringCalculator.split(input)).containsExactly(result);
+    }
+
     @Test
     @DisplayName("add 구현")
     void add() {
@@ -37,7 +71,6 @@ public class StringCalculatorTest {
     void add_null_or_empty_input() {
         assertThat(StringCalculator.add(new Input(""))).isEqualTo(0);
         assertThat(StringCalculator.add(new Input(null))).isEqualTo(0);
-        assertThat(StringCalculator.add(new Input())).isEqualTo(0);
     }
 
     @Test
