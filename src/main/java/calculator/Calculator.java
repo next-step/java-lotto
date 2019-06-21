@@ -12,6 +12,10 @@ public class Calculator {
     private static final String REGEX_OF_NATURAL_NUMBER = "-?\\d+";
 
     public static int calculate(String input) {
+        if (input == null) {
+            return 0;
+        }
+
         String[] elementsOninput = splitBySeparator(input);
         return sum(elementsOninput);
     }

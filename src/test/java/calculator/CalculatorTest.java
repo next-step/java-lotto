@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,6 +33,13 @@ public class CalculatorTest {
     void sum_NaturalNumbers_WithCustomSeparators_Calculated(String input, int expectedResult) {
         int calculatedValue = Calculator.calculate(input);
         assertThat(calculatedValue).isEqualTo(expectedResult);
+    }
+
+    @Test
+    @DisplayName("null이 입력되면 0으로 계산한다.")
+    void sum_Null_Calculated() {
+        int calculatedValue = Calculator.calculate(null);
+        assertThat(calculatedValue).isEqualTo(0);
     }
 
     @ParameterizedTest
