@@ -1,10 +1,5 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
-
 public class StringCalculator {
 
     public static int calculator(String inputOfString) {
@@ -21,12 +16,12 @@ public class StringCalculator {
         return (inputOfString == null || inputOfString.isEmpty());
     }
 
-    private static List<Integer> getNumbers(Expression expression) {
+    private static Numbers getNumbers(Expression expression) {
         return expression.numbers();
     }
 
-    private static int sum(List<Integer> numbersOfString) {
-        return numbersOfString.stream().reduce(0, Integer::sum);
+    private static int sum(Numbers numbers) {
+        return numbers.sum();
     }
 
 }

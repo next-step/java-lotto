@@ -1,11 +1,7 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static java.util.stream.Collectors.toList;
 
 public class Expression {
 
@@ -37,7 +33,7 @@ public class Expression {
 
     public void checkTokens() {
         Pattern compile = Pattern.compile("^\\d+((" + delimiter + ")\\d+)*$");
-        if(!compile.matcher(tokens).matches()){
+        if (!compile.matcher(tokens).matches()) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
@@ -50,14 +46,8 @@ public class Expression {
         return tokens;
     }
 
-    public List<Integer> numbers() {
-        return parseIntArray(tokens.split(delimiter));
+    public Numbers numbers() {
+        return Numbers.from(tokens.split(delimiter));
     }
 
-    private static List<Integer> parseIntArray(String[] numbersOfString) {
-        return Arrays.stream(numbersOfString)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(toList());
-    }
 }
