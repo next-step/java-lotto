@@ -18,4 +18,8 @@ public class SplitUtils {
     public static List<String> commonSplit(String inputData) {
         return Arrays.asList(inputData.split(",|:"));
     }
+
+    public static List<String> customSplit(String inputData) {
+        return null;
+    }
 }
