@@ -1,5 +1,7 @@
 package com.jaeyeonling.calculate;
 
+import java.util.Arrays;
+
 public final class StringAddCalculator {
 
     private StringAddCalculator() { }
@@ -9,6 +11,8 @@ public final class StringAddCalculator {
             return 0;
         }
 
-        return Integer.parseInt(source);
+        return Arrays.stream(source.split(","))
+                .mapToInt(Integer::parseInt)
+                .sum();
     }
 }
