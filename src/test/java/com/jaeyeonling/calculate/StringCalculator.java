@@ -1,8 +1,10 @@
 package com.jaeyeonling.calculate;
 
-public class StringCalculator {
+final class StringCalculator {
 
-    public static int add(String s) {
+    private StringCalculator() { }
+
+    static int add(String expression) {
         return 0;
     }
 }
