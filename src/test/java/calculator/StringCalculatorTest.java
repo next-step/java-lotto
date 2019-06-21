@@ -33,13 +33,6 @@ public class StringCalculatorTest {
     }
 
     @Test
-    @DisplayName("사용자 입력값 계산")
-    void calculate() {
-        String input = "";
-        assertThat(StringCalculator.add(input)).isEqualTo(0);
-    }
-
-    @Test
     @DisplayName("사용자 입력값 split (with comma)")
     void split() {
         String input = "1,2";
@@ -67,6 +60,13 @@ public class StringCalculatorTest {
     @DisplayName("add 구현")
     void add() {
         assertThat(StringCalculator.add("1,2")).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("사용자 입력값이 null이나 공백")
+    void add_null_or_empty_input() {
+        assertThat(StringCalculator.add("")).isEqualTo(0);
+        assertThat(StringCalculator.add(null)).isEqualTo(0);
     }
 
     @Test
