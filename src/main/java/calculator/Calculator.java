@@ -16,24 +16,24 @@ public class Calculator {
             return 0;
         }
 
-        String[] elementsOninput = splitBySeparator(input);
-        return sum(elementsOninput);
+        String[] elementsOnInput = splitBySeparator(input);
+        return sum(elementsOnInput);
     }
 
     private String[] splitBySeparator(String input) {
-        String[] elementsOninput = input.split(REGEX_OF_DEFAULT_SEPARATOR);
+        String[] elementsOnInput = input.split(REGEX_OF_DEFAULT_SEPARATOR);
 
         Matcher matcher = Pattern.compile(REGEX_OF_CUSTOM_SEPARATOR).matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
-            elementsOninput = matcher.group(2).split(customDelimiter);
+            elementsOnInput = matcher.group(2).split(customDelimiter);
         }
-        return elementsOninput;
+        return elementsOnInput;
     }
 
-    private int sum(String[] elementsOninput) {
+    private int sum(String[] elementsOnInput) {
         int result = 0;
-        for (String element : elementsOninput) {
+        for (String element : elementsOnInput) {
             validateOperandIsNumber(element);
             int operand = Integer.parseInt(element);
             result += operand;
