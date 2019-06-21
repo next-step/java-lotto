@@ -27,4 +27,8 @@ public class StringCalculator {
         }
         return DEFAULT_DELIMITER;
     }
+
+    public static int add(String[] input) {
+        return 0;
+    }
 }

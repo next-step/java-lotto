@@ -67,4 +67,11 @@ public class StringCalculatorTest {
         String input = "//;\n1;2";
         assertThat(StringCalculator.pickCustomDelimiterFrom(input)).isEqualTo(";");
     }
+
+    @Test
+    @DisplayName("add 구현")
+    void add() {
+        String[] input = {"1", "2"};
+        assertThat(StringCalculator.add(input)).isEqualTo(3);
+    }
 }
