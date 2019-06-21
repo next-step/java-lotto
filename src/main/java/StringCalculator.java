@@ -18,6 +18,6 @@ public class StringCalculator {
     }
 
     public static boolean hasCustomDelimiter(String input) {
-        return false;
+        return input.split("\n").length == 2;
     }
 }
