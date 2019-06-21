@@ -5,6 +5,8 @@ import java.util.Arrays;
 public class Expression {
 
     private static final String SEPARATOR = ",|:";
+    private static final String CUSTOM_PREFIX = "//";
+    private static final String NEW_LINE = "\n";
 
     private final String separator;
     private final String expression;
@@ -15,12 +17,12 @@ public class Expression {
     }
 
     public static Expression of(final String expression) {
-        if (!expression.startsWith("//")) {
+        if (!expression.startsWith(CUSTOM_PREFIX)) {
             return new Expression(SEPARATOR, expression);
         }
 
-        final String[] splitExpression = expression.split("\n");
-        final String separator = splitExpression[0].substring(2);
+        final String[] splitExpression = expression.split(NEW_LINE);
+        final String separator = splitExpression[0].substring(CUSTOM_PREFIX.length());
         final String value = splitExpression[1];
 
         return new Expression(separator, value);
