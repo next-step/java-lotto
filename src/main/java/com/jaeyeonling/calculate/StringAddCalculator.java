@@ -11,24 +11,46 @@ public final class StringAddCalculator {
     private StringAddCalculator() { }
 
     public static int execute(final String expression) {
-        if (expression == null || expression.isBlank()) {
+        if (isInvalidExpression(expression)) {
             return 0;
         }
 
-        if (expression.startsWith(CUSTOM_PREFIX)) {
+        final String separator = getSeparator(expression);
+        final String value = getValue(expression);
+
+        return execute(separator, value);
+    }
+
+    private static String getValue(String expression) {
+        if (isCustomExpression(expression)) {
             final String[] splitExpression = expression.split(NEW_LINE);
 
-            final String separator = splitExpression[0].substring(2);
-            final String value = splitExpression[1];
-
-            return execute(separator, value);
+            return splitExpression[1];
         }
 
-        return execute(SEPARATOR, expression);
+        return expression;
+    }
+
+    private static String getSeparator(String expression) {
+        if (isCustomExpression(expression)) {
+            final String[] splitExpression = expression.split(NEW_LINE);
+
+            return splitExpression[0].substring(2);
+        }
+
+        return SEPARATOR;
+    }
+
+    private static boolean isCustomExpression(String expression) {
+        return expression.startsWith(CUSTOM_PREFIX);
+    }
+
+    private static boolean isInvalidExpression(String expression) {
+        return expression == null || expression.isBlank();
     }
 
     private static int execute(final String separator,
-                                final String expression) {
+                               final String expression) {
         return Arrays.stream(expression.split(separator))
                 .mapToInt(StringAddCalculator::parseInt)
                 .sum();
