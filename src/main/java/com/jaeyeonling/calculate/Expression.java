@@ -24,15 +24,18 @@ class Expression {
     }
 
     int execute() {
-        if (isCustom()) {
-            return execute(getSeparatorPart(), getValuePart());
+        if (isNotCustom()) {
+            return execute(expression);
         }
 
-        return execute(expression);
+        final Separator<String> separator = new StringSplitSeparator(getSeparatorPart());
+        final CalculateValue value = new CalculateValue(getValuePart());
+
+        return execute(separator, value);
     }
 
-    private boolean isCustom() {
-        return expression.contains(StringUtils.NEW_LINE);
+    private boolean isNotCustom() {
+        return !expression.contains(StringUtils.NEW_LINE);
     }
 
     private String[] splitExpression() {
@@ -50,11 +53,6 @@ class Expression {
 
     private static int execute(final String value) {
         return execute(DEFAULT_SEPARATOR, new CalculateValue(value));
-    }
-
-    private static int execute(final String separator,
-                               final String value) {
-        return execute(new StringSplitSeparator(separator), new CalculateValue(value));
     }
 
     private static int execute(final Separator<String> separator,
