@@ -9,7 +9,7 @@ class SeparatorTest {
 
     @DisplayName("기본 구분자로 split 한다.")
     @Test
-    void should_return_default_separator_when_basic_expression() {
+    void should_split_when_basic_expression() {
         final String expression = "1:2,3";
 
         final Separator separator = new Separator(expression);
