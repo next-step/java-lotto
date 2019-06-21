@@ -6,12 +6,15 @@ import java.util.stream.Collectors;
 
 public class Calculator {
 
-    public static final String DEFAULT_DELIMITER = "[,:]";
+    private static final String DEFAULT_DELIMITER = "[,:]";
+    public static final String CUSTOM_DELIMITER_START_SYMBOL = "//";
+    public static final String CUSTOM_DELIMITER_END_SYMBOL = "\\n";
+    public static final int BLANK_VALUE = 0;
 
     public static int process(String input) {
 
         if (isBlank(input)) {
-            return 0;
+            return BLANK_VALUE;
         }
 
         List<Integer> numbers = refineInput(input);
@@ -40,6 +43,13 @@ public class Calculator {
 
     private static List<String> split(String input) {
 
+        if (input.startsWith(CUSTOM_DELIMITER_START_SYMBOL)) {
+            int endIndex = input.indexOf(CUSTOM_DELIMITER_END_SYMBOL);
+            String customDelimiter = input.substring(CUSTOM_DELIMITER_START_SYMBOL.length(), endIndex);
+            int startTokenIndex = endIndex + CUSTOM_DELIMITER_END_SYMBOL.length();
+
+            return Arrays.asList(input.substring(startTokenIndex).split(customDelimiter));
+        }
         return Arrays.asList(input.split(DEFAULT_DELIMITER));
     }
 
