@@ -28,7 +28,7 @@ public class SplitUtilsTest {
 
     @DisplayName(" 커스텀 구분자를 기준으로 나누기")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\\n1;2;3", "//-\\n1-2-3"})
+    @ValueSource(strings = {"//;\n1;2;3", "//-\n1-2-3"})
     void customSplit(String inputData) {
 
         assertThat(SplitUtils.customSplit(inputData).contains("1")).isTrue();
