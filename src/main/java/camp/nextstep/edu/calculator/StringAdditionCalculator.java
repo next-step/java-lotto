@@ -1,5 +1,7 @@
 package camp.nextstep.edu.calculator;
 
+import java.util.stream.Stream;
+
 public class StringAdditionCalculator {
 
     private static final String EMPTY_STRING = "";
@@ -12,7 +14,12 @@ public class StringAdditionCalculator {
         if (EMPTY_STRING.equals(input)) {
             return ZERO;
         }
-        return Integer.parseInt(input);
+        if (!input.contains(",")) {
+            return Integer.parseInt(input);
+        }
+        return Stream.of(input.split(","))
+                .map(Integer::parseInt)
+                .reduce(0, Integer::sum);
     }
 
 }

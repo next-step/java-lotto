@@ -3,6 +3,7 @@ package camp.nextstep.edu;
 import camp.nextstep.edu.calculator.StringAdditionCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -42,5 +43,16 @@ class StringAdditionCalculatorTest {
         final int actual = stringAdditionCalculator.calculate(givenString);
         // then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다")
+    void calculateShouldReturnSumOfNumbersWhenGivenStringIsTwoNumberSeparatedByComma() {
+        // given
+        final String givenString = "1,2";
+        // when
+        final int actual = stringAdditionCalculator.calculate(givenString);
+        // then
+        assertThat(actual).isEqualTo(3);
     }
 }
