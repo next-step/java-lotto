@@ -2,6 +2,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
@@ -74,4 +76,12 @@ public class StringCalculatorTest {
         String[] input = {"1", "2"};
         assertThat(StringCalculator.add(input)).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("add에 숫자가 아닌 input 넣을시 RuntimeException")
+    void add_throwRuntimeException() {
+        String[] input = {"a", "2"};
+        assertThrows(RuntimeException.class, () -> StringCalculator.add(input));
+    }
+
 }
