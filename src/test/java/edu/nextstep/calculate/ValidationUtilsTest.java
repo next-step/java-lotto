@@ -28,7 +28,7 @@ class ValidationUtilsTest {
     @Test
     void isNumber() {
 
-        assertThat(ValidationUtils.isNumber(1)).isTrue();
+        assertThat(ValidationUtils.isNumber("1")).isTrue();
     }
 
 

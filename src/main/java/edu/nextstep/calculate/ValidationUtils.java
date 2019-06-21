@@ -1,5 +1,8 @@
 package edu.nextstep.calculate;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * author       : gwonbyeong-yun <sksggg123>
  * ------------------------------------------
@@ -12,7 +15,14 @@ package edu.nextstep.calculate;
  */
 public class ValidationUtils {
 
+    private static final String REGEX_PATTERN_NUMBER = "[0-9]+$";
+
     public static boolean isSpace(String inputData) {
         return "".equals(inputData);
+    }
+
+    public static boolean isNumber(String number) {
+        Matcher m = Pattern.compile(REGEX_PATTERN_NUMBER).matcher(number);
+        return m.find() ? true : false;
     }
 }
