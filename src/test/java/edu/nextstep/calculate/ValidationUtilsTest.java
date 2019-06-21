@@ -24,5 +24,12 @@ class ValidationUtilsTest {
         assertThat(ValidationUtils.isSpace("")).isTrue();
     }
 
+    @DisplayName("숫자가 맞는지 체크")
+    @Test
+    void isNumber() {
+
+        assertThat(ValidationUtils.isNumber(1)).isTrue();
+    }
+
 
 }
