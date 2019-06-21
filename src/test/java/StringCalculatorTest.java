@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * 기능 요구사항 :
@@ -34,6 +35,14 @@ public class StringCalculatorTest {
     void calculate() {
         String input = "";
         assertThat(StringCalculator.calculate(input)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("사용자 입력값 split (with comma)")
+    void split() {
+        String input = "1,2";
+        String[] result = {"1", "2"};
+        assertThat(StringCalculator.split(input)).containsExactly(result);
     }
 
 

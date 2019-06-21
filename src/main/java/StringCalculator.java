@@ -10,4 +10,8 @@ public class StringCalculator {
         }
         return 0;
     }
+
+    public static String[] split(String input) {
+        return null;
+    }
 }
