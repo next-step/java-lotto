@@ -3,7 +3,6 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,6 +25,6 @@ public class SplitterTest {
     @DisplayName("기본 구분자로 결합된 숫자들을 분리한다.")
     void split_NaturalNumbers_WithDefaultSeparators(String input) {
         Splitter splitter = new Splitter();
-        assertThat(splitter.split(input)).containsExactly("1", "2", "3");
+        assertThat(splitter.extractOperands(input)).containsExactly(1, 2, 3);
     }
 }
