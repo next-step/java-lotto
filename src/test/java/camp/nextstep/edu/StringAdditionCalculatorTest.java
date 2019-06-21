@@ -4,7 +4,9 @@ import camp.nextstep.edu.calculator.StringAdditionCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -25,5 +27,21 @@ class StringAdditionCalculatorTest {
         final int actual = stringAdditionCalculator.calculate(givenString);
         // then
         assertThat(actual).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "0,0",
+            "1,1",
+            "2,2",
+            "3,3"
+    })
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다")
+    void calculateShouldReturnOriginNumberWhenGivenStringIsOnlyOneNumber(String givenString, int expected) {
+        // given
+        // when
+        final int actual = stringAdditionCalculator.calculate(givenString);
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 }
