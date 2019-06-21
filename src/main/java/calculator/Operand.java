@@ -8,7 +8,9 @@ public class Operand {
     static final String MESSAGE_OF_NOT_NUMBER_EXCEPTION = "피연산자는 숫자여야 합니다: ";
     static final String MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION = "피연산자는 0 또는 자연수여야 합니다.";
 
+    static final int MINIMUM_VALUE = 0;
     private static final String REGEX_OF_NATURAL_NUMBER = "-?\\d+";
+
     private static final Map<Integer, Operand> CACHE = new HashMap<>();
     private int value;
 
@@ -16,14 +18,14 @@ public class Operand {
         this.value = value;
     }
 
-    public static Operand of(int value) {
+    static Operand of(int value) {
         validateOperandIsPositive(value);
         Operand operand = CACHE.getOrDefault(value, new Operand(value));
         CACHE.putIfAbsent(value, operand);
         return operand;
     }
 
-    public static Operand of(String value) {
+    static Operand of(String value) {
         validateOperandIsNumber(value);
         int numberOfValue = Integer.parseInt(value);
         return Operand.of(numberOfValue);
@@ -37,13 +39,13 @@ public class Operand {
     }
 
     private static void validateOperandIsPositive(int operand) {
-        if (operand < 0) {
+        if (operand < MINIMUM_VALUE) {
             StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NEGATIVE_NUMBER_EXCEPTION).append(operand);
             throw new IllegalArgumentException(String.valueOf(exceptionMessage));
         }
     }
 
-    public Operand add(Operand other) {
+    Operand add(Operand other) {
         return Operand.of(this.value + other.value);
     }
 
@@ -60,7 +62,7 @@ public class Operand {
         return Objects.hash(value);
     }
 
-    public int convert() {
+    int convert() {
         return value;
     }
 }

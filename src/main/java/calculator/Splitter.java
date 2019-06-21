@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Splitter {
+class Splitter {
     private static final String REGEX_OF_DEFAULT_SEPARATOR = "[,:]";
     private static final String REGEX_OF_CUSTOM_SEPARATOR = "//(.)\n(.*)";
 
-    public List<Operand> extractOperands(String input) {
+    List<Operand> extractOperands(String input) {
         if (isEmpty(input)) {
-            Operand zero = Operand.of(0);
-            return Collections.singletonList(zero);
+            Operand operand = Operand.of(Operand.MINIMUM_VALUE);
+            return Collections.singletonList(operand);
         }
 
         List<Operand> operands = new ArrayList<>();
