@@ -26,25 +26,16 @@ public class SplitUtils {
         Matcher m = Pattern.compile(REGEX_CUSTOM_SPLIT).matcher(inputData);
 
         if (m.find()) {
-            return customSplit(inputData);
+            String customDelimiter = m.group(CUSTOM_SPLIT_FRIST_GROUP);
+            String[] tokens = m.group(CUSTOM_SPLIT_SECOND_GROUP).split(customDelimiter);
+
+            return Arrays.asList(tokens);
         }
+
         return commonSplit(inputData);
     }
 
     public static List<String> commonSplit(String inputData) {
         return Arrays.asList(inputData.split(",|:"));
-    }
-
-    public static List<String> customSplit(String inputData) {
-        Matcher m = Pattern.compile(REGEX_CUSTOM_SPLIT).matcher(inputData);
-        List<String> customerSplit = new ArrayList<>();
-
-        if (m.find()) {
-            String customDelimiter = m.group(CUSTOM_SPLIT_FRIST_GROUP);
-            String[] tokens = m.group(CUSTOM_SPLIT_SECOND_GROUP).split(customDelimiter);
-            customerSplit = new ArrayList<>(Arrays.asList(tokens));
-        }
-
-        return customerSplit;
     }
 }
