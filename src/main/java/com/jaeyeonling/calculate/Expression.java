@@ -1,7 +1,5 @@
 package com.jaeyeonling.calculate;
 
-import com.jaeyeonling.calculate.utils.StringUtils;
-
 import java.util.Arrays;
 
 class Expression {
