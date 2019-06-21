@@ -82,9 +82,20 @@ class StringAdditionCalculatorTest {
 
     @Test
     @DisplayName("커스텀 구분자 포맷에서 \n 문자가 입력되지 않은 경우 RuntimeException 예외가 발생해야 한다")
-    void calculatorCustomDelimiterWhenGivenStringHasIllegalFormat() {
+    void calculatorCustomDelimiterShouldThrowRuntimeExceptionWhenGivenStringHasIllegalFormat() {
         // given
         final String givenString = "//;\t1;2;3";
+        // when
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stringAdditionCalculator.calculate(givenString));
+        // then
+    }
+
+    @Test
+    @DisplayName("기본 구분자를 사용하지 않지만, 주어진 문자열 길이가 4보다 작은 경우 RuntimeException 예외가 발생해야 한다")
+    void calculatorCustomDelimiterShouldThrowRuntimeExceptionWhenGivenStringLengthIsLessThan4() {
+        // given
+        final String givenString = "//;";
         // when
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> stringAdditionCalculator.calculate(givenString));

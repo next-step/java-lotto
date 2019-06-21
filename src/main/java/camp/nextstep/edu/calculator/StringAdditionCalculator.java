@@ -16,10 +16,9 @@ public class StringAdditionCalculator {
         if (input == null) {
             return ZERO;
         }
-        if (EMPTY_STRING.equals(input)) {
-            return ZERO;
-        }
-        if (input.startsWith(PREFIX_OF_CUSTOM_DELIMITER) && Objects.equals('\n', input.charAt(3))) {
+        if (input.startsWith(PREFIX_OF_CUSTOM_DELIMITER)
+                && input.length() >= 4
+                && Objects.equals('\n', input.charAt(3))) {
             final char customDelimiterCharacter = input.charAt(INDEX_OF_CUSTOM_DELIMITER);
             final String customDelimiter = String.valueOf(customDelimiterCharacter);
             final String restOfInput = input.substring(INDEX_OF_BEGINNING_TOKENS);
@@ -29,6 +28,9 @@ public class StringAdditionCalculator {
     }
 
     private int resolve(String regexOfDelimiter, String tokens) {
+        if (EMPTY_STRING.equals(tokens)) {
+            return ZERO;
+        }
         final String[] splitString = tokens.split(regexOfDelimiter);
         if (this.hasNegativeNumber(splitString)) {
             throw new RuntimeException();
