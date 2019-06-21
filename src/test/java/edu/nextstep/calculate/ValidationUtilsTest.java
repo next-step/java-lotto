@@ -47,7 +47,7 @@ class ValidationUtilsTest {
     void validationNumber(String inValidChar) {
 
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
-           ValidationUtils.validationNumber(inValidChar);
+            ValidationUtils.validationNumber(inValidChar);
         });
     }
 

@@ -29,4 +29,28 @@ public class ValidationUtils {
     public static boolean isNegativeNumber(int number) {
         return number < 0 ? true : false;
     }
+
+    public static void validationNumber(String inValidChar) {
+        if(!isNumber(inValidChar)) {
+            throw new RuntimeException("숫자 형식이 아닙니다. [" + inValidChar +"]");
+        }
+        if(isNegativeNumber(Integer.parseInt(inValidChar))) {
+            throw new RuntimeException("숫자가 0보다 작습니다. [" + inValidChar +"]");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
