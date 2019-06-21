@@ -18,4 +18,16 @@ class SeparatorTest {
 
         assertThat(separateValue).containsExactly("1", "2", "3");
     }
+
+    @DisplayName("커스텀 구분자로 split 한다.")
+    @Test
+    void should_split_when_custom_expression() {
+        final String expression = "//Q\n1Q2Q3Q4Q10";
+
+        final Separator separator = new Separator(expression);
+
+        final String[] separateValue = separator.separate(expression);
+
+        assertThat(separateValue).containsExactly("1", "2", "3", "4");
+    }
 }
