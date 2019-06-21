@@ -17,10 +17,6 @@ public class ValidationUtils {
 
     private static final String REGEX_PATTERN_NUMBER = "[0-9]+$";
 
-    public static boolean isSpace(String inputData) {
-        return ("".equals(inputData) || inputData == null);
-    }
-
     public static boolean isNumber(String number) {
         Matcher m = Pattern.compile(REGEX_PATTERN_NUMBER).matcher(number);
         return m.find() ? true : false;
