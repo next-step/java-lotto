@@ -1,10 +1,11 @@
 package calculator;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 class Splitter {
     private static final String REGEX_OF_DEFAULT_SEPARATOR = "[,:]";
@@ -16,13 +17,11 @@ class Splitter {
             return Collections.singletonList(operand);
         }
 
-        List<Operand> operands = new ArrayList<>();
         String[] elementsOnInput = split(input);
+        List<Operand> operands = Arrays.stream(elementsOnInput)
+                .map(Operand::of)
+                .collect(Collectors.toList());
 
-        for (String element : elementsOnInput) {
-            Operand operand = Operand.of(element);
-            operands.add(operand);
-        }
         return Collections.unmodifiableList(operands);
     }
 
