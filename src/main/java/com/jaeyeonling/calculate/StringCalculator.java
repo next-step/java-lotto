@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 final class StringCalculator {
 
+    private static final String SEPARATOR = ",|:";
+
     private StringCalculator() { }
 
     static int add(final String expression) {
@@ -11,7 +13,7 @@ final class StringCalculator {
             return 0;
         }
 
-        return Arrays.stream(expression.split(",|:"))
+        return Arrays.stream(expression.split(SEPARATOR))
                 .mapToInt(Integer::parseInt)
                 .sum();
     }
