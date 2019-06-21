@@ -44,14 +44,4 @@ class ExpressionTest {
 
         assertThat(returnValue).isEqualTo(expected);
     }
-
-    @DisplayName("음수를 전달하는 경우 RuntimeException 예외를 throw 한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "1,2,-3"
-    })
-    void should_throw_RuntimeException_when_negative(final String expression) {
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> Expression.of(expression).execute());
-    }
 }
