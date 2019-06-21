@@ -41,7 +41,7 @@ public class CalculateTest {
 
     @DisplayName("String List를 Integer List로 변환")
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3})
+    @ValueSource(ints = {1, 2, 3})
     void convertIntegerList(int convertTarget) {
         Calculate calculate = new Calculate();
         assertThat(calculate.convertToInteger(convertSource).contains(convertTarget)).isTrue();

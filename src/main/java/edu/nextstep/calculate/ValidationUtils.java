@@ -27,11 +27,11 @@ public class ValidationUtils {
     }
 
     public static void validationNumber(String inValidChar) {
-        if(!isNumber(inValidChar)) {
-            throw new RuntimeException("숫자 형식이 아닙니다. [" + inValidChar +"]");
+        if (!isNumber(inValidChar)) {
+            throw new RuntimeException("숫자 형식이 아닙니다. [" + inValidChar + "]");
         }
-        if(isNegativeNumber(Integer.parseInt(inValidChar))) {
-            throw new RuntimeException("숫자가 0보다 작습니다. [" + inValidChar +"]");
+        if (isNegativeNumber(Integer.parseInt(inValidChar))) {
+            throw new RuntimeException("숫자가 0보다 작습니다. [" + inValidChar + "]");
         }
     }
 }

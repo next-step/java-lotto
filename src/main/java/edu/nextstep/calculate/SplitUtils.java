@@ -23,7 +23,7 @@ public class SplitUtils {
     private static final int CUSTOM_SPLIT_SECOND_GROUP = 2;
 
     public static List<String> inputDataSplit(String inputData) {
-        if(isSpace(inputData)) {
+        if (isSpace(inputData)) {
             return Arrays.asList(SPACE_FORMAT_DEFAULT_SUM_NUMBER);
         }
 
