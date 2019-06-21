@@ -1,5 +1,6 @@
 package camp.nextstep.edu.calculator;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class StringAdditionCalculator {
@@ -18,7 +19,7 @@ public class StringAdditionCalculator {
         if (EMPTY_STRING.equals(input)) {
             return ZERO;
         }
-        if (input.startsWith(PREFIX_OF_CUSTOM_DELIMITER)) {
+        if (input.startsWith(PREFIX_OF_CUSTOM_DELIMITER) && Objects.equals('\n', input.charAt(3))) {
             final char customDelimiterCharacter = input.charAt(INDEX_OF_CUSTOM_DELIMITER);
             final String customDelimiter = String.valueOf(customDelimiterCharacter);
             final String restOfInput = input.substring(INDEX_OF_BEGINNING_TOKENS);

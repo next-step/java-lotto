@@ -80,6 +80,17 @@ class StringAdditionCalculatorTest {
         assertThat(actual).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자 포맷에서 \n 문자가 입력되지 않은 경우 RuntimeException 예외가 발생해야 한다")
+    void calculatorCustomDelimiterWhenGivenStringHasIllegalFormat() {
+        // given
+        final String givenString = "//;\t1;2;3";
+        // when
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stringAdditionCalculator.calculate(givenString));
+        // then
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
             "-1,2,3",
