@@ -2,6 +2,9 @@ package calculator;
 
 public class StringNumber {
 
+    private static String NOT_A_NUMBER_EXCEPTION_MESSAGE = "숫자가 아닙니다.";;
+    private static String CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE = "음수는 넣을수 없습니다.";
+
     private final String stringNumber;
 
     public StringNumber(String stringNumber) {
@@ -9,6 +12,14 @@ public class StringNumber {
     }
 
     public int parse() {
-        return 0;
+        int result;
+        try {
+            result = Integer.valueOf(stringNumber);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(NOT_A_NUMBER_EXCEPTION_MESSAGE);
+        }
+
+        if (result < 0) throw new RuntimeException(CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+        return result;
     }
 }
