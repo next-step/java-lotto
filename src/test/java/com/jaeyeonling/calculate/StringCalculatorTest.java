@@ -30,4 +30,14 @@ class StringCalculatorTest {
         assertThat(returnValue).isEqualTo(expected);
     }
 
+    @DisplayName("커스텀 구분자로 문자열 입력 시 합을 반환한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\n1;2;3',6"
+    })
+    void should_expected_sum_when_custom_separator_add(final String expression, final int expected) {
+        final int returnValue = StringCalculator.add(expression);
+
+        assertThat(returnValue).isEqualTo(expected);
+    }
 }
