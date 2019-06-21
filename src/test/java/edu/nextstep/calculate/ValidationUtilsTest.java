@@ -20,13 +20,6 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  */
 class ValidationUtilsTest {
 
-    @DisplayName("문자열의 유효성체크 (공백)")
-    @Test
-    void isSpace() {
-
-        assertThat(ValidationUtils.isSpace("")).isTrue();
-    }
-
     @DisplayName("숫자가 맞는지 체크")
     @Test
     void isNumber() {

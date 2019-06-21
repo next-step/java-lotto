@@ -1,6 +1,7 @@
 package edu.nextstep.calculate;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -32,6 +33,13 @@ public class SplitUtilsTest {
     void intputDataSplit(String inputData) {
 
         assertThat(SplitUtils.inputDataSplit(inputData).contains("1")).isTrue();
+    }
+
+    @DisplayName("문자열의 유효성체크 (공백)")
+    @Test
+    void isSpace() {
+
+        assertThat(SplitUtils.isSpace("")).isTrue();
     }
 
 }
