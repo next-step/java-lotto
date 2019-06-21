@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class StringAddCalculatorTest {
 
@@ -71,5 +72,19 @@ class StringAddCalculatorTest {
         final int result = StringAddCalculator.execute(source);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+
+    @DisplayName("음수 입력 시 예외처리")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "-1,2,3",
+            "1,2,-3",
+            "1,2,-3,4,5"
+    })
+    void should_return_addValue_when_customExpression(final String source) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringAddCalculator.execute(source);
+        });
     }
 }
