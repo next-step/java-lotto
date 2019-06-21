@@ -17,6 +17,17 @@ public class StringAdditionCalculator {
         if (EMPTY_STRING.equals(input)) {
             return ZERO;
         }
+        if (input.startsWith("//")) {
+            String customDelimiter = String.valueOf(input.charAt(2));
+            String rest = input.substring(5);
+            if (!rest.contains(customDelimiter)) {
+                return Integer.parseInt(rest);
+            }
+            final String[] splitString = rest.split(customDelimiter);
+            return Stream.of(splitString)
+                    .map(Integer::parseInt)
+                    .reduce(ZERO, Integer::sum);
+        }
         if (this.hasOnlyOneNumber(input)) {
             return Integer.parseInt(input);
         }
