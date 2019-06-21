@@ -1,7 +1,11 @@
 package calculator;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.stream.Collectors.toList;
 
 public class Expression {
 
@@ -46,7 +50,14 @@ public class Expression {
         return tokens;
     }
 
-    public String[] numbers() {
-        return tokens.split(delimiter);
+    public List<Integer> numbers() {
+        return parseIntArray(tokens.split(delimiter));
+    }
+
+    private static List<Integer> parseIntArray(String[] numbersOfString) {
+        return Arrays.stream(numbersOfString)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(toList());
     }
 }

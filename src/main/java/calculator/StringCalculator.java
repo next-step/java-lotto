@@ -22,15 +22,7 @@ public class StringCalculator {
     }
 
     private static List<Integer> getNumbers(Expression expression) {
-        String[] numbers = expression.numbers();
-        return parseIntArray(numbers);
-    }
-
-    private static List<Integer> parseIntArray(String[] numbersOfString) {
-        return Arrays.stream(numbersOfString)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(toList());
+        return expression.numbers();
     }
 
     private static int sum(List<Integer> numbersOfString) {
