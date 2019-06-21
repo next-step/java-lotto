@@ -31,5 +31,12 @@ class ValidationUtilsTest {
         assertThat(ValidationUtils.isNumber("1")).isTrue();
     }
 
+    @DisplayName("음수인지 체크")
+    @Test
+    void isNegativeNumber() {
+
+        assertThat(ValidationUtils.isNegativeNumber("-1")).isTrue();
+    }
+
 
 }
