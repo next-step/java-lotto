@@ -10,13 +10,6 @@ public class StringCalculator {
         return null == input || "".equals(input.trim());
     }
 
-    public static int calculate(String input) {
-        if (isEmpty(input)) {
-            return 0;
-        }
-        return 0;
-    }
-
     public static String[] split(String input) {
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (m.find()) {
