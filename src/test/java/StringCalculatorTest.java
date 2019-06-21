@@ -67,4 +67,11 @@ public class StringCalculatorTest {
         String input = "//;\n1;2";
         assertThat(StringCalculator.hasCustomDelimiter(input)).isTrue();
     }
+
+    @Test
+    @DisplayName("input에서 custom DELIMITER를 뽑아내기")
+    void pickCustomDelimiterFromInput() {
+        String input = "//;\n1;2";
+        assertThat(StringCalculator.pickCustomDelimiterFrom(input)).isEqualTo(";");
+    }
 }

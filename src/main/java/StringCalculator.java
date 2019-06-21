@@ -20,4 +20,8 @@ public class StringCalculator {
     public static boolean hasCustomDelimiter(String input) {
         return input.split("\n").length == 2;
     }
+
+    public static String pickCustomDelimiterFrom(String input) {
+        return null;
+    }
 }
