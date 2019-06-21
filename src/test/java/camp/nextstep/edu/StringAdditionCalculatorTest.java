@@ -71,7 +71,7 @@ class StringAdditionCalculatorTest {
     @DisplayName("\"//\"와 \"\\n\" 문자 사이에 커스텀 구분자를 지정할 수 있다")
     void calculatorGetCustomDelimiterBetweenDoubleSlashAndNewLine() {
         // given
-        final String givenString = "//;\\n1;2;3";
+        final String givenString = "//;\n1;2;3";
         // when
         final int actual = stringAdditionCalculator.calculate(givenString);
         // then

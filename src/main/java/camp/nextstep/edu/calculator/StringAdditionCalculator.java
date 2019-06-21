@@ -8,7 +8,10 @@ public class StringAdditionCalculator {
     private static final String DELIMITER_COMMA = ",";
     private static final String DELIMITER_COLON = ":";
     private static final String REGEX_DELIMITERS = "[" + DELIMITER_COMMA + DELIMITER_COLON + "]";
+    private static final String PREFIX_OF_CUSTOM_DELIMITER = "//";
     private static final int ZERO = 0;
+    private static final int INDEX_OF_CUSTOM_DELIMITER = 2;
+    private static final int INDEX_OF_BEGINNING_TOKENS = 4;
 
     public int calculate(String input) {
         if (input == null) {
@@ -17,30 +20,20 @@ public class StringAdditionCalculator {
         if (EMPTY_STRING.equals(input)) {
             return ZERO;
         }
-        if (input.startsWith("//")) {
-            String customDelimiter = String.valueOf(input.charAt(2));
-            String rest = input.substring(5);
-            if (!rest.contains(customDelimiter)) {
-                return Integer.parseInt(rest);
-            }
-            final String[] splitString = rest.split(customDelimiter);
-            return Stream.of(splitString)
-                    .map(Integer::parseInt)
-                    .reduce(ZERO, Integer::sum);
+        if (input.startsWith(PREFIX_OF_CUSTOM_DELIMITER)) {
+            final char customDelimiterCharacter = input.charAt(INDEX_OF_CUSTOM_DELIMITER);
+            final String customDelimiter = String.valueOf(customDelimiterCharacter);
+            final String restOfInput = input.substring(INDEX_OF_BEGINNING_TOKENS);
+            return this.resolve(customDelimiter, restOfInput);
         }
-        if (this.hasOnlyOneNumber(input)) {
-            return Integer.parseInt(input);
-        }
-        final String[] splitString = input.split(REGEX_DELIMITERS);
+        return this.resolve(REGEX_DELIMITERS, input);
+    }
+
+    private int resolve(String regexOfDelimiter, String tokens) {
+        final String[] splitString = tokens.split(regexOfDelimiter);
         return Stream.of(splitString)
                 .map(Integer::parseInt)
                 .reduce(ZERO, Integer::sum);
-    }
-
-    private boolean hasOnlyOneNumber(String input) {
-        final boolean containsComma = input.contains(DELIMITER_COMMA);
-        final boolean containsColon = input.contains(DELIMITER_COLON);
-        return !containsComma && !containsColon;
     }
 
 }
