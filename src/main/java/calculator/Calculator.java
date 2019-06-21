@@ -4,9 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
+    static final String MESSAGE_OF_NOT_NUMBER_EXCEPTION = "피연산자는 숫자여야 합니다: ";
 
     private static final String REGEX_OF_DEFAULT_SEPARATOR = "[,:]";
     private static final String REGEX_OF_CUSTOM_SEPARATOR = "//(.)\n(.*)";
+    private static final String REGEX_OF_NATURAL_NUMBER = "-?\\d+";
 
     public static int calculate(String input) {
         String[] elementsOninput = splitBySeparator(input);
@@ -27,8 +29,16 @@ public class Calculator {
     private static int sum(String[] elementsOninput) {
         int result = 0;
         for (String element : elementsOninput) {
+            validateElementIsNumber(element);
             result += Integer.parseInt(element);
         }
         return result;
+    }
+
+    private static void validateElementIsNumber(String element) {
+        if (!element.matches(REGEX_OF_NATURAL_NUMBER)) {
+            StringBuilder exceptionMessage = new StringBuilder(MESSAGE_OF_NOT_NUMBER_EXCEPTION).append(element);
+            throw new IllegalArgumentException(String.valueOf(exceptionMessage));
+        }
     }
 }
