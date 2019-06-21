@@ -35,7 +35,7 @@ class ValidationUtilsTest {
     @Test
     void isNegativeNumber() {
 
-        assertThat(ValidationUtils.isNegativeNumber("-1")).isTrue();
+        assertThat(ValidationUtils.isNegativeNumber(-1)).isTrue();
     }
 
 

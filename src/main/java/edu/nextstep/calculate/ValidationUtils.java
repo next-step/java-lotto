@@ -25,4 +25,8 @@ public class ValidationUtils {
         Matcher m = Pattern.compile(REGEX_PATTERN_NUMBER).matcher(number);
         return m.find() ? true : false;
     }
+
+    public static boolean isNegativeNumber(int number) {
+        return number < 0 ? true : false;
+    }
 }
