@@ -35,14 +35,26 @@ public class StringAddCalculatorTest {
 	}
 
 	@Test
-	public void add_custom_구분자() throws Exception {
+	public void add_custom_구분자1() throws Exception {
 		assertThat(cal.add("//;\n1;2;3")).isEqualTo(6);
+	}
+
+	@Test
+	public void add_custom_구분자2() throws Exception {
+		assertThat(cal.add("//~\n3~4~5")).isEqualTo(12);
 	}
 
 	@Test
 	public void add_negative() throws Exception {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
 			cal.add("-1,2,3");
+		});
+	}
+
+	@Test
+	public void add_onlyString() throws Exception {
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			cal.add("1,가,3");
 		});
 	}
 }
