@@ -60,5 +60,16 @@ class StringAddCalculatorTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    @DisplayName("커스텀 구분자 입력 시 계산")
+    @ParameterizedTest
+    @CsvSource({
+            "'//;\\n1;2;3\"',6",
+            "'//q\\n1q2q3q4\"',10"
+            ,"'//wow\\n1wow2wow3wow4wow5\"',20"
+    })
+    void should_return_addValue_when_customExpression(final String source, final int expected) {
+        final int result = StringAddCalculator.execute(source);
 
+        assertThat(result).isEqualTo(expected);
+    }
 }
