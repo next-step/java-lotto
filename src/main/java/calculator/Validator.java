@@ -11,7 +11,7 @@ public class Validator {
   }
 
   private static void checkNatureNumber(String token) throws Exception {
-    if (!Pattern.matches("^[a-zA-Z0-9]*$", token) || Integer.parseInt(token) < 0) {
+    if (!Pattern.matches("^[0-9]*$", token)) {
       throw new RuntimeException("자연수만 들어올수 있습니다.");
     }
   }
