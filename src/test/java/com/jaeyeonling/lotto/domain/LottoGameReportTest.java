@@ -1,5 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.config.Env;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -56,6 +57,32 @@ class LottoGameReportTest {
 
         // then
         assertThat(totalPrizeMoney).isEqualTo(expect);
+    }
+
+    @DisplayName("수익률 계산")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1,
+            2,
+            100,
+            5000
+    })
+    void should_return_returnOnInvestment(final int matchCount) {
+        // given
+        final LottoPrize prize = LottoPrize.JACKPOT;
+        final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
+        matchCountByRank.put(prize, matchCount);
+
+        final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
+
+        final int totalBuyingMoney = matchCount * Env.PRICE_OF_LOTTO;
+
+        // when
+        final Money returnOnInvestment = lottoGameReport.getReturnOnInvestment();
+        final Money expect = new Money(prize.getPrizeMoney() / totalBuyingMoney);
+
+        // then
+        assertThat(returnOnInvestment).isEqualTo(expect);
     }
 
 }

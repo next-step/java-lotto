@@ -25,6 +25,10 @@ public class LottoGameReport {
         return matchCountByLottoPrize.getOrDefault(prize, Env.DEFAULT_MATCH_COUNT);
     }
 
+    public Money getReturnOnInvestment() {
+        return null;
+    }
+
     private int getWinningMoney(final LottoPrize prize) {
         return getMatchCount(prize) * prize.getPrizeMoney();
     }
