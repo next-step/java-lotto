@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class Lotto implements Dealable {
 
-    private static final Money LOTTO_PRICE = new Money(Env.PRICE_OF_LOTTO);
-    
+    static final Money LOTTO_PRICE = new Money(Env.PRICE_OF_LOTTO);
+
     private final List<LottoNumber> lottoNumbers;
 
     Lotto(final Set<LottoNumber> lottoNumbers) {
