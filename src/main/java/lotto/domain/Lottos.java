@@ -20,10 +20,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public long getLastWeekNumbersCorrectCount(int correctCount, LastWeekNumbers lastWeekNumbers) {
+    public long getWonNumbersCorrectCount(int correctCount, WonNumbers wonNumbers) {
 
         return lottos.stream()
-                .filter(lotto -> lotto.isLottoNumberMatchesCorrectCount(correctCount, lastWeekNumbers))
+                .filter(lotto -> lotto.isLottoNumberMatchesCorrectCount(correctCount, wonNumbers))
                 .count();
     }
 

@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTest {
 
     @Test
+    @DisplayName("toString 포맷 테스트 ")
     void lottoToString() {
 
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);

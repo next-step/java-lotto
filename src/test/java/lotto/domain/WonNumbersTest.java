@@ -11,22 +11,22 @@ import java.util.stream.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class LastWeekNumbersTest {
+class WonNumbersTest {
 
     @Test
     void parse() {
 
-        LastWeekNumbers lastWeekNumbers = new LastWeekNumbers("1, 2, 3, 4, 5, 6");
-        assertThat(lastWeekNumbers).isEqualTo(new LastWeekNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6");
+        assertThat(wonNumbers).isEqualTo(new WonNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest
     @MethodSource
     @NullAndEmptySource
-    void parseIllegalArgumentException(List<Integer> lastWeekNumbers) {
+    void parseIllegalArgumentException(List<Integer> wonNumbers) {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LastWeekNumbers(lastWeekNumbers));
+                .isThrownBy(() -> new WonNumbers(wonNumbers));
     }
 
     private static Stream<Arguments> parseIllegalArgumentException() {

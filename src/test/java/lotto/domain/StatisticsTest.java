@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -9,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StatisticsTest {
 
-    private LastWeekNumbers lastWeekNumbers = new LastWeekNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private WonNumbers wonNumbers = new WonNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
     private Lottos lottos = new Lottos(Arrays.asList(
             new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
             new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
@@ -27,7 +26,7 @@ class StatisticsTest {
             new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44))
     ));
 
-    private Statistics statistics = new Statistics(lastWeekNumbers, lottos);
+    private Statistics statistics = new Statistics(wonNumbers, lottos);
 
     @Test
     void getWinAmount() {

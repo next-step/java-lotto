@@ -13,10 +13,10 @@ public class Statistics {
     private final List<Statistic> statistics;
     private final int purchaseAmount;
 
-    public Statistics(LastWeekNumbers lastWeekNumbers, Lottos lottos) {
+    public Statistics(WonNumbers wonNumbers, Lottos lottos) {
 
         this.statistics = PRIZE_INFOS.stream()
-                .map(prizeInfo -> new Statistic(prizeInfo, lottos.getLastWeekNumbersCorrectCount(prizeInfo.getMatchCount(), lastWeekNumbers)))
+                .map(prizeInfo -> new Statistic(prizeInfo, lottos.getWonNumbersCorrectCount(prizeInfo.getMatchCount(), wonNumbers)))
                 .collect(Collectors.toList());
         this.purchaseAmount = lottos.getLottoCount() * AMOUNT_PER_LOTTO;
     }

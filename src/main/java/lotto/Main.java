@@ -14,8 +14,8 @@ public class Main {
         ResultView.printPurchasedLottoCount(lottos.getLottoCount());
         ResultView.printLottosNumber(lottos);
 
-        LastWeekNumbers lastWeekNumbers = new LastWeekNumbers(InputView.askLastWeekNumbers());
-        Statistics statistics = new Statistics(lastWeekNumbers, lottos);
+        WonNumbers wonNumbers = new WonNumbers(InputView.askWonNumbers());
+        Statistics statistics = new Statistics(wonNumbers, lottos);
         ResultView.printStatistics(statistics);
     }
 }

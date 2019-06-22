@@ -1,27 +1,25 @@
 package lotto.domain;
 
-import lotto.domain.*;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
-import static lotto.domain.Lottos.AMOUNT_PER_LOTTO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottosTest {
 
-    @Test
-    void getLottoCount() {
+    @ParameterizedTest(name = "로또개수 확인. 구매금액={0}, 로또 수={1}")
+    @CsvSource(value = {"14000,14", "3333, 3"})
+    void getLottoCount(int purchaseAmount, int expectedLottoCount) {
 
-        int purchaseAmount = 14000;
         Lottos lottos = new Lottos(purchaseAmount);
-        assertThat(lottos.getLottoCount()).isEqualTo(purchaseAmount / AMOUNT_PER_LOTTO);
+        assertThat(lottos.getLottoCount()).isEqualTo(expectedLottoCount);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "구매금액이 0 이하일 경우 IllegalArgumentException 발생")
     @ValueSource(ints = {0, -1})
     void getLottosCountIsLowerEqualsThan0(int purchaseAmount) {
 
@@ -29,9 +27,9 @@ class LottosTest {
                 .isThrownBy(() -> new Lottos(purchaseAmount));
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "지난주 우승번호와 일차하는 개수 확인. 일치개수={0}")
     @ValueSource(ints = {3, 4, 5, 6})
-    void getLastWeekNumbersCorrectCount(int correctCount) {
+    void getWonNumbersCorrectCount(int correctCount) {
 
         Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)),
@@ -40,7 +38,7 @@ class LottosTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         ));
 
-        LastWeekNumbers lastWeekNumbers = new LastWeekNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottos.getLastWeekNumbersCorrectCount(correctCount, lastWeekNumbers)).isEqualTo(1);
+        WonNumbers wonNumbers = new WonNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottos.getWonNumbersCorrectCount(correctCount, wonNumbers)).isEqualTo(1);
     }
 }

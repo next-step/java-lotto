@@ -17,7 +17,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static String askLastWeekNumbers() {
+    public static String askWonNumbers() {
 
         printStream.println(ASK_LAST_WEEK_NUMBERS_MESSAGE);
         return scanner.next();
