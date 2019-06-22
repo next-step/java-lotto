@@ -13,6 +13,13 @@ public class LottoGame {
 
     public List<Lotto> buy(final Money money) {
         final List<Lotto> lottos = new ArrayList<>();
+        while (money.isCanBuy(Lotto.LOTTO_PRICE)) {
+            final Lotto lotto = lottoGenerator.generate();
+
+            money.buy(lotto);
+
+            lottos.add(lotto);
+        }
 
         return lottos;
     }
