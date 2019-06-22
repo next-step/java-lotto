@@ -18,18 +18,18 @@ public enum LottoPrize {
         this.prizeMoney = prizeMoney;
     }
 
+    public static LottoPrize valueOf(final int countOfMatch) {
+        return Arrays.stream(values())
+                .filter(prize -> prize.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(LOSE);
+    }
+
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
     public long getPrizeMoney() {
         return prizeMoney;
-    }
-
-    public static LottoPrize valueOf(final int countOfMatch) {
-        return Arrays.stream(values())
-                .filter(prize -> prize.countOfMatch == countOfMatch)
-                .findFirst()
-                .orElse(LOSE);
     }
 }
