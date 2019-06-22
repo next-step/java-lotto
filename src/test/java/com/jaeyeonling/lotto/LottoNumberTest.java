@@ -31,4 +31,12 @@ class LottoNumberTest {
             new LottoNumber(Env.MIN_LOTTO_NUMBER - 1);
         });
     }
+
+    @DisplayName("LottoNumber 최대 값(" + Env.MIN_LOTTO_NUMBER + ") 보다 높은 값 생성 시 예외처리")
+    @Test
+    void should_throw_illegalArgumentException_when_longerThanMax() {
+        assertThatExceptionOfType(LottoNumberShorterThanMinException.class).isThrownBy(() -> {
+            new LottoNumber(Env.MAX_LOTTO_NUMBER + 1);
+        });
+    }
 }
