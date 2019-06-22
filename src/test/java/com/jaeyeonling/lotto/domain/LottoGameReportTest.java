@@ -51,7 +51,7 @@ class LottoGameReportTest {
         final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
 
         // when
-        final Money totalPrizeMoney = lottoGameReport.getTotalPrizeMoney(LottoPrize.JACKPOT);
+        final Money totalPrizeMoney = lottoGameReport.getTotalPrizeMoney();
 
         // then
         assertThat(totalPrizeMoney).isEqualTo(new Money(prize.getPrizeMoney() * matchCount));
