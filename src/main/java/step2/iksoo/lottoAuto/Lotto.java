@@ -51,4 +51,18 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(LOTTO_SIZE, luckyNumbers);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return LOTTO_SIZE == lotto.LOTTO_SIZE &&
+                Objects.equals(lottery, lotto.lottery);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(LOTTO_SIZE, lottery);
+    }
 }
