@@ -82,6 +82,20 @@ class LottoTest {
         assertThat(countOfMatch).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
     }
 
+    @DisplayName("Lotto 를 돈으로 구매")
+    @Test
+    void can_buy_lotto_by_money() {
+        // given
+        final Money money = new Money(Env.PRICE_OF_LOTTO);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+
+        // when
+        final Lotto lotto = new Lotto(lottoNumbers);
+
+        // then
+        money.buy(lotto);
+    }
+
     private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumber) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= countOfLottoNumber; lottoNumber++) {
