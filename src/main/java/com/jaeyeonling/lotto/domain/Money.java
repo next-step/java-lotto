@@ -7,13 +7,13 @@ import java.util.Objects;
 
 public class Money {
 
-    private int money;
+    private double money;
 
     Money() {
         this(Env.MINIMUM_MONEY);
     }
 
-    public Money(final int money) {
+    public Money(final double money) {
         this.money = money;
     }
 
