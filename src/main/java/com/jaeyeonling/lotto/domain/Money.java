@@ -21,10 +21,14 @@ public class Money {
     }
 
     private void spend(final Money price) {
-        if (this.money - price.money < Env.MINIMUM_MONEY) {
+        if (isLowMoney(price)) {
             throw new ArithmeticException();
         }
         this.money -= price.money;
+    }
+
+    private boolean isLowMoney(final Money price) {
+        return this.money - price.money < Env.MINIMUM_MONEY;
     }
 
     @Override
