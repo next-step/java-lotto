@@ -22,10 +22,10 @@
 - [ ] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환
     - [x] TEST FAIL
     - [x] TEST PASS
-    - [ ] REFACTORING
+    - [x] REFACTORING
 - [ ] 구분자를 컴마(,) 이외에 콜론(:)을 사용 가능
-    - [ ] TEST FAIL
-    - [ ] TEST PASS
+    - [x] TEST FAIL
+    - [x] TEST PASS
     - [ ] REFACTORING
 - [ ] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정 가능
     - [ ] TEST FAIL
