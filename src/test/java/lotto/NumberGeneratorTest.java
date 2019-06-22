@@ -26,4 +26,10 @@ public class NumberGeneratorTest {
     List<Integer> numbers = new RandomNumberGenerator().generate(6);
     assertThat(numbers.size()).isEqualTo(6);
   }
+
+  @Test
+  void mockNumberGenerate() {
+    List<Integer> numbers = new MockNumberGenerator().generate(6);
+    assertThat(numbers).contains(1,2,3,4,5,6);
+  }
 }
