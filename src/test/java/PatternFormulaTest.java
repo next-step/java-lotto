@@ -9,17 +9,42 @@ class PatternFormulaTest {
     private final static String MIX_TEST_FORMULA = "1,2:3";
     private final static String FORMULA_WITH_CUSTOM_SEPARATOR = "//;\n1;2;3";
     private final static String FORMULA_WITH_INCORRECT_SEPARATOR = "//;\n1;2;3*4";
+    private final static String INCORRECT_CUSTOM_SEPARATOR_FORMULA = "//\n1;2;3";
     private final static String CUSTOM_SEPARATOR = ";";
+    private final static String NUMBER_FORMULA = "1;2;3";
     
     @Test
     @DisplayName("커스텀 구분자를 구분해낸다.")
-    void separateCustomSeparator() {
+    void separateCustomSeparatorTest() {
         //Given
         PatternFormula formula = new PatternFormula(FORMULA_WITH_CUSTOM_SEPARATOR);
         //When
         String customSeparator = formula.getCustomSeparator();
         //Then
         Assertions.assertThat(customSeparator).isEqualTo(CUSTOM_SEPARATOR);
+    }
+    
+    @Test
+    @DisplayName("커스텀 구분자를 구분해낼 수 없는 문자열이면 IllegalArgumentsException")
+    void separateCustomSeparatorExceptionTest() {
+        //Given
+        PatternFormula formula = new PatternFormula(INCORRECT_CUSTOM_SEPARATOR_FORMULA);
+        //When
+        //Then
+        Assertions.assertThatIllegalArgumentException()
+          .isThrownBy(() -> formula.getCustomSeparator())
+          .withMessage(ErrorMessage.INCORRECT_CUSTOM_SEPARATE.getMessage());
+    }
+    
+    @Test
+    @DisplayName("구분자 부분이 제외된 나머지 문자열을 구분해낸다.")
+    void getFormulaTest() {
+        //Given
+        PatternFormula formula = new PatternFormula(FORMULA_WITH_CUSTOM_SEPARATOR);
+        //When
+        String customSeparator = formula.getNumberFormula();
+        //Then
+        Assertions.assertThat(customSeparator).isEqualTo(NUMBER_FORMULA);
     }
     
     @Test
