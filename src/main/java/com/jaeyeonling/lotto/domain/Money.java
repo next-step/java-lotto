@@ -16,7 +16,12 @@ public class Money {
         this.money = money;
     }
 
-    public void buy(final Dealable item) {
+    void buy(final Dealable item) {
+        spend(item.getPrice());
+    }
+
+    private void spend(final Money price) {
+        this.money -= price.money;
     }
 
     @Override
