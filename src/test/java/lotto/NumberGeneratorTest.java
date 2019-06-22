@@ -20,4 +20,10 @@ public class NumberGeneratorTest {
 
     assertThat(numbers.size()).isEqualTo(6);
   }
+
+  @Test
+  void randomNumberGenerate() {
+    List<Integer> numbers = new RandomNumberGenerator().generate(6);
+    assertThat(numbers.size()).isEqualTo(6);
+  }
 }
