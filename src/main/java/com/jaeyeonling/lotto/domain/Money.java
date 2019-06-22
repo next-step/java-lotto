@@ -21,6 +21,10 @@ public class Money {
         spend(item.getPrice());
     }
 
+    boolean isCanBuy(final Dealable item) {
+        return false;
+    }
+
     private void spend(final Money price) {
         if (isLowMoney(price)) {
             throw new LowMoneyException(money, price.money);

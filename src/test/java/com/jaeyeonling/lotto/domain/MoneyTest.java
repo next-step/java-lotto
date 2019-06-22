@@ -28,6 +28,27 @@ class MoneyTest {
         assertThat(money).isEqualTo(expect);
     }
 
+    @DisplayName("Money 로 물건 구매 가능 여부 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1_000,
+            20_000,
+            500_000,
+            1_000_000
+    })
+    void should_return_true_when_canBuy(final int balanceValue) {
+        // given
+        final Money money = new Money(balanceValue);
+        final Money itemPrice = new Money(balanceValue);
+        final Dealable item = () -> itemPrice;
+
+        // when
+        final boolean isCanBuy = money.isCanBuy(item);
+
+        // then
+        assertThat(isCanBuy).isTrue();
+    }
+
     @DisplayName("Money 로 물건 구매 시 잔액 차감 확인")
     @ParameterizedTest
     @CsvSource({
