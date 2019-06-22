@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public class StringCalculator {
 
-    private static final String REGEX_SPLIT_STRING = ":|,";
+    private static final String REGEX_SPLIT_STRING = "[:,]";
     private static final String CUSTOM_SEPARATOR_PREFIX = "//";
     private static final String CUSTOM_SEPARATOR_SUFFIX = "\n";
     private static final String EMPTY_STRING = "";
@@ -16,17 +16,21 @@ public class StringCalculator {
             return ZERO;
         }
 
+        return sum(split(string));
+    }
+
+    private String[] split(String string) {
         if (hasCustomSeparator(string)) {
-            return Stream.of(string
+            return string
                     .replace(CUSTOM_SEPARATOR_PREFIX, EMPTY_STRING)
                     .replace(CUSTOM_SEPARATOR_SUFFIX, EMPTY_STRING)
-                    .split(REGEX_SPLIT_STRING + "|" + getCustomSeparator(string)))
-                    .filter(e -> !e.isEmpty())
-                    .mapToInt(Integer::parseInt)
-                    .sum();
+                    .split(String.format("%s|%s", REGEX_SPLIT_STRING, getCustomSeparator(string)));
         }
+        return string.split(REGEX_SPLIT_STRING);
+    }
 
-        return Stream.of(string.split(REGEX_SPLIT_STRING)).mapToInt(Integer::parseInt).sum();
+    private int sum(String[] string) {
+        return Stream.of(string).filter(character -> !character.isEmpty()).mapToInt(Integer::parseInt).sum();
     }
 
     private String getCustomSeparator(String string) {
