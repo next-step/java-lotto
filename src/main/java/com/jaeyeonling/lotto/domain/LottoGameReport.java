@@ -26,10 +26,28 @@ public class LottoGameReport {
     }
 
     public Money getReturnOnInvestment() {
-        return null;
+        return new Money(getWinningMoney() / getBuyingMoney());
     }
 
     private int getWinningMoney(final LottoPrize prize) {
         return getMatchCount(prize) * prize.getPrizeMoney();
+    }
+
+    private double getBuyingMoney() {
+        return matchCountByLottoPrize.values()
+                .stream()
+                .mapToDouble(this::getPriceOfLotto)
+                .sum();
+    }
+
+    private double getWinningMoney() {
+        return matchCountByLottoPrize.keySet()
+                .stream()
+                .mapToDouble(this::getWinningMoney)
+                .sum();
+    }
+
+    private double getPriceOfLotto(final int count) {
+        return count * Env.PRICE_OF_LOTTO;
     }
 }
