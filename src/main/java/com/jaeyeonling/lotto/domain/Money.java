@@ -21,6 +21,9 @@ public class Money {
     }
 
     private void spend(final Money price) {
+        if (this.money - price.money < Env.MINIMUM_MONEY) {
+            throw new ArithmeticException();
+        }
         this.money -= price.money;
     }
 
