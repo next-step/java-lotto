@@ -20,7 +20,7 @@ class LottoAnalyzerTest {
             4,
             5
     })
-    void create(final int analyzeCount) {
+    void should_return_matchCountOnReport_by_lottoAnalyzer(final int analyzeCount) {
         // given
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
@@ -39,4 +39,5 @@ class LottoAnalyzerTest {
         // then
         assertThat(matchCount).isEqualTo(analyzeCount);
     }
+
 }
