@@ -7,7 +7,7 @@ public class LottoGame {
 
     private final LottoGenerator lottoGenerator;
 
-    LottoGame() {
+    public LottoGame() {
         this(new RandomLottoGenerator());
     }
 

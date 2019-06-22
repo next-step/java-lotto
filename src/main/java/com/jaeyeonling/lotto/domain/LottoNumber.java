@@ -10,7 +10,7 @@ public class LottoNumber {
 
     private final int number;
 
-    LottoNumber(final int number) {
+    public LottoNumber(final int number) {
         if (number < Env.MIN_LOTTO_NUMBER) {
             throw new LottoNumberShorterThanMinException(number);
         }

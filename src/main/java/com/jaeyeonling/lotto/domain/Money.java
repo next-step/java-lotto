@@ -13,7 +13,7 @@ public class Money {
         this(Env.MINIMUM_MONEY);
     }
 
-    Money(final int money) {
+    public Money(final int money) {
         this.money = money;
     }
 
