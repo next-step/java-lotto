@@ -21,4 +21,6 @@ public interface Env {
 
     int LOSE_COUNT_OF_MATCH = 0;
     int LOSE_PRIZE_MONEY = 0;
+
+    int MINIMUM_MONEY = 0;
 }

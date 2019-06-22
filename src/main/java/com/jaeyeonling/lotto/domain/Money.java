@@ -1,13 +1,22 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.config.Env;
+
 import java.util.Objects;
 
 public class Money {
 
     private int money;
 
+    Money() {
+        this(Env.MINIMUM_MONEY);
+    }
+
     Money(final int money) {
         this.money = money;
+    }
+
+    public void buy(final Dealable item) {
     }
 
     @Override
