@@ -22,18 +22,9 @@ class LottoAnalyzerTest {
     })
     void should_return_matchCountOnReport_by_lottoAnalyzer(final int analyzeCount) {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
-        final Lotto lotto = new Lotto(lottoNumbers);
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
+        final LottoGameReport report = getLottoGameReport(analyzeCount);
 
         // when
-        for (int i = 0; i < analyzeCount; i++) {
-            lottoAnalyzer.analyze(lotto);
-        }
-        final LottoGameReport report = lottoAnalyzer.getReport();
         final int matchCount = report.getMatchCount(LottoPrize.JACKPOT);
 
         // then
@@ -49,20 +40,10 @@ class LottoAnalyzerTest {
     })
     void should_return_totalPrizeMoneyOnReport_by_lottoAnalyzer(final int analyzeCount) {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
-        final Lotto lotto = new Lotto(lottoNumbers);
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
+        final LottoGameReport report = getLottoGameReport(analyzeCount);
 
         // when
-        for (int i = 0; i < analyzeCount; i++) {
-            lottoAnalyzer.analyze(lotto);
-        }
-        final LottoGameReport report = lottoAnalyzer.getReport();
         final Money totalPrizeMoney = report.getTotalPrizeMoney();
-
         final Money expect = new Money(LottoPrize.JACKPOT.getPrizeMoney() * analyzeCount);
 
         // then
@@ -79,6 +60,18 @@ class LottoAnalyzerTest {
     })
     void should_return_returnOnInvestment_by_lottoAnalyzer(final int analyzeCount) {
         // given
+        final LottoGameReport report = getLottoGameReport(analyzeCount);
+        final int totalBuyingMoney = analyzeCount * Env.PRICE_OF_LOTTO;
+
+        // when
+        final Money returnOnInvestment = report.getReturnOnInvestment();
+        final Money expect = new Money(LottoPrize.JACKPOT.getPrizeMoney() * analyzeCount / totalBuyingMoney);
+
+        // then
+        assertThat(returnOnInvestment).isEqualTo(expect);
+    }
+
+    private LottoGameReport getLottoGameReport(final int analyzeCount) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
@@ -86,18 +79,10 @@ class LottoAnalyzerTest {
         final Lotto lotto = new Lotto(lottoNumbers);
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
 
-        final int totalBuyingMoney = analyzeCount * Env.PRICE_OF_LOTTO;
-
-        // when
         for (int i = 0; i < analyzeCount; i++) {
             lottoAnalyzer.analyze(lotto);
         }
-        final LottoGameReport report = lottoAnalyzer.getReport();
-        final Money returnOnInvestment = report.getReturnOnInvestment();
 
-        final Money expect = new Money(LottoPrize.JACKPOT.getPrizeMoney() * analyzeCount / totalBuyingMoney);
-
-        // then
-        assertThat(returnOnInvestment).isEqualTo(expect);
+        return lottoAnalyzer.getReport();
     }
 }
