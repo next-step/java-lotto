@@ -7,10 +7,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MoneyTest {
 
-    @DisplayName("생성")
+    @DisplayName("Money 잔액 확인")
     @Test
-    void create() {
-        final Money money = new Money();
-        assertThat(money).isNotNull();
+    void should_return_balance() {
+        // given
+        final int balanceValue = 1000;
+
+        // when
+        final Money money = new Money(balanceValue);
+        final Money balance = money.getBalance();
+        final Money expect = new Money(balanceValue);
+
+        // then
+        assertThat(balance).isEqualTo(expect);
     }
+
 }
