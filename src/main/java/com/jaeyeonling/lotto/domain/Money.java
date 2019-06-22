@@ -1,17 +1,14 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import com.jaeyeonling.lotto.exception.LowMoneyException;
 
 import java.util.Objects;
 
 public class Money {
 
-    private long money;
+    private static final int MINIMUM = 0;
 
-    Money() {
-        this(Env.MINIMUM_MONEY);
-    }
+    private long money;
 
     public Money(final long money) {
         this.money = money;
@@ -34,7 +31,7 @@ public class Money {
     }
 
     private boolean isLowMoney(final Money price) {
-        return this.money - price.money < Env.MINIMUM_MONEY;
+        return this.money - price.money < Money.MINIMUM;
     }
 
     @Override

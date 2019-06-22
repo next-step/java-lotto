@@ -1,16 +1,14 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
-
 import java.util.Arrays;
 
 public enum LottoPrize {
 
-    LOSE(Env.LOSE_COUNT_OF_MATCH, Env.LOSE_PRIZE_MONEY),
-    FOURTH(Env.FOURTH_COUNT_OF_MATCH,  Env.FOURTH_PRIZE_MONEY),
-    THIRD(Env.THIRD_COUNT_OF_MATCH, Env.THIRD_PRIZE_MONEY),
-    SECOND(Env.SECOND_COUNT_OF_MATCH, Env.SECOND_PRIZE_MONEY),
-    JACKPOT(Env.JACKPOT_COUNT_OF_MATCH, Env.JACKPOT_PRIZE_MONEY);
+    LOSE(0, 0),
+    FOURTH(3, 5_000),
+    THIRD(4, 50_000),
+    SECOND(5, 1_500_000),
+    JACKPOT(6, 2_000_000_000);
 
     private final int countOfMatch;
     private final long prizeMoney;

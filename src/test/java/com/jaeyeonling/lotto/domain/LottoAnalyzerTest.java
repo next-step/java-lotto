@@ -1,8 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -60,7 +58,7 @@ class LottoAnalyzerTest {
     void should_return_returnOnInvestment_by_lottoAnalyzer(final int analyzeCount) {
         // given
         final LottoGameReport report = getLottoGameReport(analyzeCount);
-        final int totalBuyingMoney = analyzeCount * Env.PRICE_OF_LOTTO;
+        final int totalBuyingMoney = analyzeCount * Lotto.PRICE;
 
         // when
         final double returnOnInvestment = report.getReturnOnInvestment();
@@ -72,7 +70,7 @@ class LottoAnalyzerTest {
 
     private LottoGameReport getLottoGameReport(final int analyzeCount) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
+        for (int lottoNumber = LottoNumber.MIN; lottoNumber <= Lotto.COUNT_OF_LOTTO_NUMBER; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
         }
         final Lotto lotto = new Lotto(lottoNumbers);

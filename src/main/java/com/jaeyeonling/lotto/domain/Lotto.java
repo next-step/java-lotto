@@ -1,6 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import com.jaeyeonling.lotto.exception.InvalidCountOfLottoNumberException;
 
 import java.util.List;
@@ -9,13 +8,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto implements Dealable {
+    public static final int COUNT_OF_LOTTO_NUMBER = 6;
+    static final int PRICE = 1_000;
 
-    static final Money LOTTO_PRICE = new Money(Env.PRICE_OF_LOTTO);
+    static final Money LOTTO_PRICE = new Money(Lotto.PRICE);
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO) {
+        if (lottoNumbers.size() != Lotto.COUNT_OF_LOTTO_NUMBER) {
             throw new InvalidCountOfLottoNumberException(lottoNumbers.size());
         }
 

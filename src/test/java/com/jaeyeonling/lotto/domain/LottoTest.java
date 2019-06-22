@@ -1,6 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import com.jaeyeonling.lotto.exception.InvalidCountOfLottoNumberException;
 import com.jaeyeonling.lotto.exception.LowMoneyException;
 import org.assertj.core.api.Assertions;
@@ -15,11 +14,11 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
-    @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 가지게 생성")
+    @DisplayName("Lotto 생성 시 LottoNumber " + Lotto.COUNT_OF_LOTTO_NUMBER  + "개 가지게 생성")
     @Test
     void should_create_lotto_when_correct_lottoNumber() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
         final Lotto lotto = new Lotto(lottoNumbers);
@@ -28,11 +27,11 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
-    @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 보다 적을 시 예외처리")
+    @DisplayName("Lotto 생성 시 LottoNumber " + Lotto.COUNT_OF_LOTTO_NUMBER  + "개 보다 적을 시 예외처리")
     @Test
     void should_throw_InvalidCountOfLottoNumberException_lotto_when_shorterThan_countOfLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO - 1);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER - 1);
 
         // when / then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
@@ -41,11 +40,11 @@ class LottoTest {
                 });
     }
 
-    @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 보다 클 시 예외처리")
+    @DisplayName("Lotto 생성 시 LottoNumber " + Lotto.COUNT_OF_LOTTO_NUMBER  + "개 보다 클 시 예외처리")
     @Test
     void should_throw_InvalidCountOfLottoNumberException_lotto_when_longerThan_countOfLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO + 1);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
 
         // when / then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
@@ -58,7 +57,7 @@ class LottoTest {
     @Test
     void should_return_true_when_equals_sameLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
         final Lotto target = new Lotto(lottoNumbers);
@@ -72,7 +71,7 @@ class LottoTest {
     @Test
     void should_allMatch_countOfMatch() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         final Lotto target = new Lotto(lottoNumbers);
         final Lotto expect = new Lotto(lottoNumbers);
@@ -81,15 +80,15 @@ class LottoTest {
         final int countOfMatch = target.countOfMatch(expect);
 
         // then
-        assertThat(countOfMatch).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        assertThat(countOfMatch).isEqualTo(Lotto.COUNT_OF_LOTTO_NUMBER);
     }
 
     @DisplayName("Lotto 를 돈으로 구매")
     @Test
     void can_buy_lotto_by_money() {
         // given
-        final Money money = new Money(Env.PRICE_OF_LOTTO);
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        final Money money = new Money(Lotto.PRICE);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
         final Lotto lotto = new Lotto(lottoNumbers);
@@ -102,8 +101,8 @@ class LottoTest {
     @Test
     void should_throw_LowMoneyException_when_lowBalance() {
         // given
-        final Money money = new Money(Env.PRICE_OF_LOTTO - 1);
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        final Money money = new Money(Lotto.PRICE - 1);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
         final Lotto lotto = new Lotto(lottoNumbers);
 
         // when / then
@@ -115,7 +114,7 @@ class LottoTest {
 
     private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumber) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= countOfLottoNumber; lottoNumber++) {
+        for (int lottoNumber = LottoNumber.MIN; lottoNumber <= countOfLottoNumber; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
         }
 

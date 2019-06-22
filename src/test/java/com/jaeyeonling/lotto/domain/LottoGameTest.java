@@ -1,6 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,14 +18,14 @@ class LottoGameTest {
     void should_return_oneLotto_when_buy() {
         // given
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
+        for (int lottoNumber = 1; lottoNumber <= Lotto.COUNT_OF_LOTTO_NUMBER; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
         }
 
         final Lotto lotto = new Lotto(lottoNumbers);
         final LottoGame lottoGame = new LottoGame(() -> lotto);
 
-        final Money money = new Money(Env.PRICE_OF_LOTTO);
+        final Money money = new Money(Lotto.PRICE);
 
         // when
         final List<Lotto> lottos = lottoGame.buy(money);
@@ -47,7 +46,7 @@ class LottoGameTest {
         // given
         final LottoGame lottoGame = new LottoGame();
 
-        final Money money = new Money(Env.PRICE_OF_LOTTO * buyCount);
+        final Money money = new Money(Lotto.PRICE * buyCount);
 
         // when
         final List<Lotto> lottos = lottoGame.buy(money);

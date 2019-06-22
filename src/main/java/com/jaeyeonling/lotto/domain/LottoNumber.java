@@ -1,6 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import com.jaeyeonling.lotto.exception.LottoNumberLongerThanMaxException;
 import com.jaeyeonling.lotto.exception.LottoNumberShorterThanMinException;
 
@@ -8,13 +7,16 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int MIN = 1;
+    public static final int MAX = 45;
+
     private final int number;
 
     public LottoNumber(final int number) {
-        if (number < Env.MIN_LOTTO_NUMBER) {
+        if (number < LottoNumber.MIN) {
             throw new LottoNumberShorterThanMinException(number);
         }
-        if (number > Env.MAX_LOTTO_NUMBER) {
+        if (number > LottoNumber.MAX) {
             throw new LottoNumberLongerThanMaxException(number);
         }
 

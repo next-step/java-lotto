@@ -1,6 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -66,7 +65,7 @@ class LottoGameReportTest {
         final LottoPrize prize = LottoPrize.FOURTH;
         final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
 
-        final int totalBuyingMoney = matchCount * Env.PRICE_OF_LOTTO;
+        final int totalBuyingMoney = matchCount * Lotto.PRICE;
 
         // when
         final double returnOnInvestment = lottoGameReport.getReturnOnInvestment();

@@ -1,10 +1,10 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.config.Env;
-
 import java.util.Map;
 
 public class LottoGameReport {
+
+    private static final int DEFAULT_MATCH_COUNT = 0;
 
     private final Map<LottoPrize, Integer> matchCountByLottoPrize;
 
@@ -22,7 +22,7 @@ public class LottoGameReport {
     }
 
     public int getMatchCount(final LottoPrize prize) {
-        return matchCountByLottoPrize.getOrDefault(prize, Env.DEFAULT_MATCH_COUNT);
+        return matchCountByLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
     }
 
     public double getReturnOnInvestment() {
@@ -33,21 +33,21 @@ public class LottoGameReport {
         return getMatchCount(prize) * prize.getPrizeMoney();
     }
 
-    private double getBuyingMoney() {
+    private long getBuyingMoney() {
         return matchCountByLottoPrize.values()
                 .stream()
-                .mapToDouble(this::getPriceOfLotto)
+                .mapToLong(this::getPriceOfLotto)
                 .sum();
     }
 
-    private double getWinningMoney() {
+    private long getWinningMoney() {
         return matchCountByLottoPrize.keySet()
                 .stream()
-                .mapToDouble(this::getWinningMoney)
+                .mapToLong(this::getWinningMoney)
                 .sum();
     }
 
-    private double getPriceOfLotto(final int count) {
-        return count * Env.PRICE_OF_LOTTO;
+    private long getPriceOfLotto(final int count) {
+        return count * Lotto.PRICE;
     }
 }
