@@ -13,14 +13,14 @@ public enum LottoPrize {
     JACKPOT(Env.JACKPOT_COUNT_OF_MATCH, Env.JACKPOT_PRIZE_MONEY);
 
     private final int countOfMatch;
-    private final int prizeMoney;
+    private final long prizeMoney;
 
     LottoPrize(final int countOfMatch, final int prizeMoney) {
         this.countOfMatch = countOfMatch;
         this.prizeMoney = prizeMoney;
     }
 
-    int getPrizeMoney() {
+    long getPrizeMoney() {
         return prizeMoney;
     }
 

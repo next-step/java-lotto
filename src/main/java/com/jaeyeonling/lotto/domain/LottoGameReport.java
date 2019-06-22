@@ -13,9 +13,9 @@ public class LottoGameReport {
     }
 
     public Money getTotalPrizeMoney() {
-        final int money = matchCountByLottoPrize.keySet()
+        final long money = matchCountByLottoPrize.keySet()
                 .stream()
-                .mapToInt(this::getWinningMoney)
+                .mapToLong(this::getWinningMoney)
                 .sum();
 
         return new Money(money);
@@ -29,7 +29,7 @@ public class LottoGameReport {
         return new Money(getWinningMoney() / getBuyingMoney());
     }
 
-    private int getWinningMoney(final LottoPrize prize) {
+    private long getWinningMoney(final LottoPrize prize) {
         return getMatchCount(prize) * prize.getPrizeMoney();
     }
 
