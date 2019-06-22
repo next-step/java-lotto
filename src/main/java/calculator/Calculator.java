@@ -6,4 +6,7 @@ package calculator;
  * Github : http://github.com/wyparks2
  */
 public class Calculator {
+    public int add(String text) {
+        return text == null || text.isEmpty() ? 0 : Integer.valueOf(text);
+    }
 }
