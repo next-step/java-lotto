@@ -8,7 +8,7 @@ public class Number {
     private int number;
 
     Number(int number) {
-        if(number < 0){
+        if (number < 0) {
             throw new IllegalArgumentException("숫자는 " + MIN + "보다 커야합니다.");
         }
         this.number = number;
@@ -16,9 +16,9 @@ public class Number {
 
     public static Number of(String number) {
         int result;
-        try{
+        try {
             result = Integer.parseInt(number);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 문자열 입니다.");
         }
         return new Number(result);
