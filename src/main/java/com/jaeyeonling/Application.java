@@ -13,12 +13,6 @@ import java.util.List;
 public class Application {
 
     public static void main(final String... args) {
-        final Application application = new Application();
-
-        application.run();
-    }
-
-    private void run() {
         final LottoGame lottoGame = new LottoGame();
 
         final Money money = ConsoleInputView.readMoney();
