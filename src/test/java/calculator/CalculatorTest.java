@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -10,23 +11,24 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class CalculatorTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "입력값이 null 또는 공백일 때 0을 리턴. inputValue=`{0}`")
     @NullAndEmptySource
-    void empty(String input) {
+    void empty(String inputValue) {
 
-        int result = Calculator.process(input);
+        int result = Calculator.process(inputValue);
         assertThat(result).isZero();
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "입력값이 한 자리수 일 때 그대로 리턴. inputValue={0}")
     @ValueSource(strings = {"3", "0"})
-    void single(String input) {
+    void single(String inputValue) {
 
-        int result = Calculator.process(input);
-        assertThat(result).isEqualTo(Integer.parseInt(input));
+        int result = Calculator.process(inputValue);
+        assertThat(result).isEqualTo(Integer.parseInt(inputValue));
     }
 
     @Test
+    @DisplayName("입력값이 두 자리수 일 때 더한 값을 리턴")
     void doubles() {
 
         int result = Calculator.process("4,5");
@@ -34,6 +36,7 @@ class CalculatorTest {
     }
 
     @Test
+    @DisplayName("입력값이 세 자리수 일 때 더한 값을 리턴")
     void triple() {
 
         int result = Calculator.process("1,2,3");
@@ -41,6 +44,7 @@ class CalculatorTest {
     }
 
     @Test
+    @DisplayName("입력값에 콤마와 콜론이 있을 때 더한 값을 리턴")
     void commaAndColon() {
 
         int result = Calculator.process("1,2:3");
@@ -48,33 +52,26 @@ class CalculatorTest {
     }
 
     @Test
+    @DisplayName("입력값에 커스텀 구분자가 있을 때 더한 값을 리턴")
     void customDelimiters() {
 
         int result = Calculator.process("//;\\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"a", "word"})
-    void containsWord(String input) {
+    @ParameterizedTest(name = "입력값에 문자가 있을 때 RuntimeException 발생")
+    @ValueSource(strings = {"a", "word", "1,2,three"})
+    void containsWord(String inputValue) {
 
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> Calculator.process(input));
+                .isThrownBy(() -> Calculator.process(inputValue));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"-1"})
-    void containsNegative(String input) {
+    @ParameterizedTest(name = "입력값에 음수가 있을 때 RuntimeException 발생")
+    @ValueSource(strings = {"-1", "1,2,-1"})
+    void containsNegative(String inputValue) {
 
         assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> Calculator.process(input));
-    }
-
-    @Test
-    void commaWithNegative() {
-
-        String input = "1,-12";
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> Calculator.process(input));
+                .isThrownBy(() -> Calculator.process(inputValue));
     }
 }
