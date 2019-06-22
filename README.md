@@ -7,3 +7,31 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현 기능 목록
+
+### step 1 - 문자열 덧셈 계산기
+- [ ] 빈 문자열 또는 null 값을 입력할 경우 0을 반환
+    - [ ] TEST FAIL
+    - [ ] TEST PASS
+    - [ ] REFACTORING
+- [ ] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환
+    - [ ] TEST FAIL
+    - [ ] TEST PASS
+    - [ ] REFACTORING
+- [ ] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환
+    - [ ] TEST FAIL
+    - [ ] TEST PASS
+    - [ ] REFACTORING
+- [ ] 구분자를 컴마(,) 이외에 콜론(:)을 사용 가능
+    - [ ] TEST FAIL
+    - [ ] TEST PASS
+    - [ ] REFACTORING
+- [ ] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정 가능
+    - [ ] TEST FAIL
+    - [ ] TEST PASS
+    - [ ] REFACTORING
+- [ ] 음수를 전달할 경우 RuntimeException 예외가 발생
+    - [ ] TEST FAIL
+    - [ ] TEST PASS
+    - [ ] REFACTORING
