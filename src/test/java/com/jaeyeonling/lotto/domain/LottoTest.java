@@ -17,12 +17,7 @@ class LottoTest {
     @Test
     void should_create_lotto_when_correct_lottoNumber() {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        // when
-        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
 
         // then
         new Lotto(lottoNumbers);
@@ -32,12 +27,7 @@ class LottoTest {
     @Test
     void should_throw_InvalidCountOfLottoNumberException_lotto_when_shorterThan_countOfLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        // when
-        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO - 1; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO - 1);
 
         // then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
@@ -50,12 +40,7 @@ class LottoTest {
     @Test
     void should_throw_InvalidCountOfLottoNumberException_lotto_when_longerThan_countOfLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        // when
-        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO + 1; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO + 1);
 
         // then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
@@ -68,11 +53,7 @@ class LottoTest {
     @Test
     void should_return_true_when_equals_sameLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
 
         // when
         final Lotto target = new Lotto(lottoNumbers);
@@ -86,11 +67,7 @@ class LottoTest {
     @Test
     void should_allMatch_countOfMatch() {
         // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
-        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
 
         final Lotto target = new Lotto(lottoNumbers);
         final Lotto expect = new Lotto(lottoNumbers);
@@ -102,4 +79,13 @@ class LottoTest {
         assertThat(target.countOfMatch(expect)).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
     }
 
+    private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumbe) {
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        for (int lottoNumber = 1; lottoNumber <= countOfLottoNumbe; lottoNumber++) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+
+        return lottoNumbers;
+    }
 }
