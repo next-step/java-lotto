@@ -8,11 +8,14 @@ import java.util.regex.Pattern;
  * Blog : http://wyparks2.github.io
  * Github : http://github.com/wyparks2
  */
-public class Calculator {
+public final class Calculator {
+    private Calculator() {
+    }
+
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
-    public int add(String text) {
+    public static int add(String text) {
         String[] tokens = split(text);
 
         int total = 0;
@@ -28,11 +31,11 @@ public class Calculator {
         return total;
     }
 
-    private boolean isNegative(Integer number) {
+    private static boolean isNegative(Integer number) {
         return number < 0;
     }
 
-    private String[] split(String text) {
+    private static  String[] split(String text) {
         if (text == null || text.isEmpty()) {
             return new String[0];
         }
