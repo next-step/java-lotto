@@ -10,6 +10,8 @@ public class InputView {
     }
 
     public static int inputNumber() {
-        return in.nextInt();
+        int inputNum = in.nextInt();
+        in.nextLine();
+        return inputNum;
     }
 }

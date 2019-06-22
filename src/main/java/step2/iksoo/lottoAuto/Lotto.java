@@ -1,28 +1,44 @@
 package step2.iksoo.lottoAuto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import static java.lang.Math.toIntExact;
 
 public class Lotto {
     private final int LOTTO_SIZE = 6;
 
     private List<Integer> luckyNumbers;
 
-    public Lotto() {
+    protected Lotto() {
         this.luckyNumbers = new ArrayList<>();
         this.makeLotto();
     }
 
-    private void makeLotto() {
-        this.luckyNumbers = new RandomNumberCreator().getLotto(this.LOTTO_SIZE);
+    protected Lotto(List<Integer> numbers) {
+        this.luckyNumbers = numbers;
+        Collections.sort(this.luckyNumbers);
     }
 
-    public boolean isNumSize(int numSize) {
+    private void makeLotto() {
+        this.luckyNumbers = new RandomNumberCreator().getLotto(this.LOTTO_SIZE);
+        Collections.sort(this.luckyNumbers);
+    }
+
+    protected int checkNumberOfMatches(List<Integer> winNumbers) {
+        return toIntExact(winNumbers
+                .stream()
+                .filter(number -> this.luckyNumbers.contains(number))
+                .count());
+    }
+
+    protected boolean isNumSize(int numSize) {
         return this.luckyNumbers.size() == numSize;
     }
 
-    public void printLotto() {
+    protected void printLotto() {
         OutputView.printTextln(this.luckyNumbers);
     }
 

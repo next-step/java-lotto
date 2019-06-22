@@ -11,13 +11,18 @@ public class Lottos {
         this.printLotto();
     }
 
-    private void printLotto() {
+    protected void printLotto() {
         IntStream.range(0, this.lottos.size())
                 .forEach(n -> this.lottos.get(n).printLotto());
         OutputView.printBlankLine();
     }
 
-    public void checkLotteryWinner(List<Integer> winnerNumbers) {
-
+    protected int[] checkLotteryWin(List<Integer> winnerNumbers) {
+        int[] lottoPrize = new int[winnerNumbers.size()+1];
+        this.lottos
+                .stream()
+                .map(lotto -> {return lotto.checkNumberOfMatches(winnerNumbers);})
+                .forEach(x-> lottoPrize[x]++);
+        return lottoPrize;
     }
 }
