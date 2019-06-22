@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
  * Github : http://github.com/wyparks2
  */
 public final class StringAddCalculator {
-    private StringAddCalculator() {
-    }
-
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+
+    private StringAddCalculator() {
+    }
 
     public static int calculate(String text) {
         String[] tokens = split(text);
