@@ -50,7 +50,6 @@ class LottoAnalyzerTest {
         assertThat(totalPrizeMoney).isEqualTo(expect);
     }
 
-
     @DisplayName("로또 정보를 분석 후 수익률 확인")
     @ParameterizedTest
     @ValueSource(ints = {
