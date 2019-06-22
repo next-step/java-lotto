@@ -15,11 +15,9 @@ class MoneyTest {
 
         // when
         final Money money = new Money(balanceValue);
-        final Money balance = money.getBalance();
         final Money expect = new Money(balanceValue);
 
         // then
-        assertThat(balance).isEqualTo(expect);
+        assertThat(money).isEqualTo(expect);
     }
-
 }

@@ -10,10 +10,6 @@ public class Money {
         this.money = money;
     }
 
-    Money getBalance() {
-        return new Money(money);
-    }
-
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
