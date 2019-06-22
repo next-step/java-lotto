@@ -21,6 +21,7 @@ public final class ConsoleOutputView {
     }
 
     public static void printReport(final LottoGameReport report) {
+        ConsoleOutputView.newline();
         printWinningReportHeader();
         printWinningReportMatchTemplate(report);
         printWinningReportFooter(report);

@@ -22,6 +22,7 @@ public final class ConsoleInputView {
     }
 
     public static Lotto readWinningLotto() {
+        ConsoleOutputView.newline();
         final String winningLottoValue = readStringWithMessage(Env.READ_WINNING_LOTTO_NUMBER_MESSAGE);
 
         final Set<LottoNumber> lottoNumbers = Arrays.stream(splitWinningLottoNumber(winningLottoValue))
