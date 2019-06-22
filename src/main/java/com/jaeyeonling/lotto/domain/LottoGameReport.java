@@ -11,10 +11,19 @@ public class LottoGameReport {
     }
 
     public Money getTotalPrizeMoney() {
-        return null;
+        final int money = matchCountByLottoPrize.keySet()
+                .stream()
+                .mapToInt(this::getWinningMoney)
+                .sum();
+
+        return new Money(money);
     }
 
     public int getMatchCount(final LottoPrize prize) {
         return matchCountByLottoPrize.getOrDefault(prize, 0);
+    }
+
+    private int getWinningMoney(final LottoPrize prize) {
+        return getMatchCount(prize) * prize.getPrizeMoney();
     }
 }
