@@ -13,7 +13,7 @@ public class Lotto {
 
     Lotto(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO) {
-            throw new InvalidCountOfLottoNumberException();
+            throw new InvalidCountOfLottoNumberException(lottoNumbers.size());
         }
 
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
