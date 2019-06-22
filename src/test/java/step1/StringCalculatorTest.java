@@ -1,6 +1,7 @@
 package step1;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -33,5 +34,14 @@ public class StringCalculatorTest {
         //when
         //Then
         assertThat(calculator.calculate(inputString)).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void 숫자_두개를_컴마_구분자로_입력할_경우_두_숫자의_합을_반환한다() {
+        //given
+        String inputString = "-1,2";
+        //when
+        //Then
+        assertThat(calculator.calculate(inputString)).isEqualTo(1);
     }
 }
