@@ -1,5 +1,7 @@
 package vo;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST_PLACE(6, "6개 일치 (2000000000원)", 2_000_000_000),
     SECOND_PLACE(6, "5개 일치, 보너스 볼 일치(30000000원)", 30_000_000),
@@ -22,18 +24,15 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean isBonusNumberCorrect) {
-        if (countOfMatch < WINNING_MIN_COUNT) {
-            return FAILURE;
-        }
         if (countOfMatch == WINNING_CORRECT_5 && isBonusNumberCorrect){
             return SECOND_PLACE;
         }
-        for (Rank rank : values()) {
-            if (rank.matchCount(countOfMatch)) {
-                return rank;
-            }
-        }
-        throw new IllegalArgumentException(countOfMatch + "는 유효하지 않은 값입니다.");
+
+        return Arrays.stream(values())
+                .filter(rank -> rank != Rank.SECOND_PLACE)
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(Rank.FAILURE);
     }
 
     public String getDisplayText() {
