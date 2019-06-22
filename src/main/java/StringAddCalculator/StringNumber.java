@@ -1,22 +1,24 @@
 package StringAddCalculator;
-
 import java.util.Objects;
 
 public class StringNumber {
 
-    private int intNumber;
+    private int number;
+
+    public StringNumber() {
+    }
 
     public StringNumber(String number) {
-        this.intNumber = convertInt(number);
+        this.number = convertInt(number);
     }
 
     public StringNumber add(StringNumber addedStringNumber) {
         int added = addedStringNumber.toInt();
-        return new StringNumber(Integer.toString(this.intNumber + added));
+        return new StringNumber(Integer.toString(this.number + added));
     }
 
     public int toInt() {
-        return this.intNumber;
+        return this.number;
     }
 
     private int convertInt(String number) {
@@ -29,18 +31,18 @@ public class StringNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringNumber that = (StringNumber) o;
-        return intNumber == that.intNumber;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(intNumber);
+        return Objects.hash(number);
     }
 
     @Override
     public String toString() {
         return "StringNumber{" +
-                "intNumber=" + intNumber +
+                "number=" + number +
                 '}';
     }
 }
