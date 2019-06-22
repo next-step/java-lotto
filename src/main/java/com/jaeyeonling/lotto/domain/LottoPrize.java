@@ -1,7 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import java.util.Arrays;
-
 public enum LottoPrize {
 
     LOSE(0, 0),
@@ -11,11 +9,15 @@ public enum LottoPrize {
     JACKPOT(6, 20_0000_0000);
 
     private final int countOfMatch;
-    private final int prize;
+    private final int prizeMoney;
 
-    LottoPrize(final int countOfMatch, final int prize) {
+    LottoPrize(final int countOfMatch, final int prizeMoney) {
         this.countOfMatch = countOfMatch;
-        this.prize = prize;
+        this.prizeMoney = prizeMoney;
+    }
+
+    int getPrizeMoney() {
+        return prizeMoney;
     }
 
     public static LottoPrize valueOf(final int countOfMatch) {
