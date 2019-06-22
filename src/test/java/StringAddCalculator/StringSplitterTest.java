@@ -15,9 +15,9 @@ public class StringSplitterTest {
     }
 
     @Test
-    @DisplayName("(:) 으로 숫자를 나눈다")
+    @DisplayName("(:) 또는 (,) 으로 숫자를 나눈다")
     public void splitColon() {
-        String[] numbers = StringSplitter.split("4:5:6:7");
+        String[] numbers = StringSplitter.split("4,5:6:7");
         assertThat(numbers).containsExactly("4", "5", "6", "7");
     }
 
