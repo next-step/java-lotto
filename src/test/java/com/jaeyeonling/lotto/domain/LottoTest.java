@@ -2,6 +2,7 @@ package com.jaeyeonling.lotto.domain;
 
 import com.jaeyeonling.lotto.config.Env;
 import com.jaeyeonling.lotto.exception.InvalidCountOfLottoNumberException;
+import com.jaeyeonling.lotto.exception.LowMoneyException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTest {
 
@@ -94,6 +96,23 @@ class LottoTest {
 
         // then
         money.buy(lotto);
+    }
+
+    @DisplayName("Lotto 를 적은 돈으로 구매 시 예외처리")
+    @Test
+    void should_throw_LowMoneyException_when_lowBalance() {
+        // given
+        final Money money = new Money(Env.PRICE_OF_LOTTO - 1);
+        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+
+        // when
+        final Lotto lotto = new Lotto(lottoNumbers);
+
+        // then
+        assertThatExceptionOfType(LowMoneyException.class)
+                .isThrownBy(() -> {
+                    money.buy(lotto);
+                });
     }
 
     private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumber) {
