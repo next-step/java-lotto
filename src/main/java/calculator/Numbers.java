@@ -1,9 +1,10 @@
 package calculator;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static calculator.Number.DEFAULT;
+import static calculator.Number.ZERO;
 import static java.util.stream.Collectors.toList;
 
 public class Numbers {
@@ -22,10 +23,12 @@ public class Numbers {
     }
 
     public int sum() {
-        return numbers.stream().reduce(new Number(DEFAULT), Number::add).getNumber();
+        return numbers.stream()
+                .reduce(ZERO, Number::add)
+                .getNumber();
     }
 
-    public List<Number> getNumbers() {
-        return numbers;
+    List<Number> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }
