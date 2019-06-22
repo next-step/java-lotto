@@ -40,4 +40,32 @@ class LottoAnalyzerTest {
         assertThat(matchCount).isEqualTo(analyzeCount);
     }
 
+    @DisplayName("로또 정보를 분석 후 당첨 금액 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1,
+            4,
+            5
+    })
+    void should_return_totalPrizeMoneyOnReport_by_lottoAnalyzer(final int analyzeCount) {
+        // given
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+        final Lotto lotto = new Lotto(lottoNumbers);
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
+
+        // when
+        for (int i = 0; i < analyzeCount; i++) {
+            lottoAnalyzer.analyze(lotto);
+        }
+        final LottoGameReport report = lottoAnalyzer.getReport();
+        final Money totalPrizeMoney = report.getTotalPrizeMoney();
+
+        final Money expect = new Money(LottoPrize.JACKPOT.getPrizeMoney() * analyzeCount);
+
+        // then
+        assertThat(totalPrizeMoney).isEqualTo(expect);
+    }
 }
