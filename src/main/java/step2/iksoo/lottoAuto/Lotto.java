@@ -7,19 +7,23 @@ import java.util.Objects;
 public class Lotto {
     private final int LOTTO_SIZE = 6;
 
-    private List<Integer> lottery;
+    private List<Integer> luckyNumbers;
 
     public Lotto() {
-        lottery = new ArrayList<>();
-        makeLotto();
+        this.luckyNumbers = new ArrayList<>();
+        this.makeLotto();
     }
 
     private void makeLotto() {
-        this.lottery = new RandomNumberCreator().getLotto(LOTTO_SIZE);
+        this.luckyNumbers = new RandomNumberCreator().getLotto(this.LOTTO_SIZE);
     }
 
     public boolean isNumSize(int numSize) {
-        return this.lottery.size() == numSize;
+        return this.luckyNumbers.size() == numSize;
+    }
+
+    public void printLotto() {
+        OutputView.printTextln(this.luckyNumbers);
     }
 
     @Override
@@ -28,11 +32,11 @@ public class Lotto {
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
         return LOTTO_SIZE == lotto.LOTTO_SIZE &&
-                Objects.equals(lottery, lotto.lottery);
+                Objects.equals(luckyNumbers, lotto.luckyNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(LOTTO_SIZE, lottery);
+        return Objects.hash(LOTTO_SIZE, luckyNumbers);
     }
 }
