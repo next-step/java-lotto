@@ -36,6 +36,19 @@ public class Lotto {
         return lottoNumberPool.subList(0, 6);
     }
 
+    public boolean isLottoNumberMatchesCorrectCount(int correctCount, LastWeekNumbers lastWeekNumbers) {
+
+        return getLastWeekNumbersContainsCount(lastWeekNumbers) == correctCount;
+    }
+
+    private long getLastWeekNumbersContainsCount(LastWeekNumbers lastWeekNumbers) {
+
+        return lastWeekNumbers.getLastWeekNumbers()
+                .stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
 

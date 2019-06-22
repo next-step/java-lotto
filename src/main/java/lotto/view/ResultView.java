@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.Lottos;
+import lotto.*;
 
 import java.io.PrintStream;
 
@@ -9,6 +9,12 @@ public class ResultView {
     private static final PrintStream printStream = System.out;
 
     private static final String PURCHASED_LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String STATISTICS_MESSAGE = "당첨 통계\n---------";
+    private static final String GAIN = "이득";
+    private static final String LOSS = "손해";
+
+    private static final String STATISTIC_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String EARN_RATE_FORMAT = "총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     public static void printPurchasedLottoCount(int lottoCount) {
 
@@ -17,6 +23,24 @@ public class ResultView {
 
     public static void printLottosNumber(Lottos lottos) {
 
-        printStream.print(lottos.toString());
+        printStream.println(lottos.toString());
+    }
+
+    public static void printStatistics(Statistics statistics) {
+
+        printStream.println(STATISTICS_MESSAGE);
+        statistics.getStatistics().forEach(ResultView::printStatistic);
+        printEarnRate(statistics);
+    }
+
+    private static void printStatistic(Statistic statistic) {
+
+        printStream.println(String.format(STATISTIC_MESSAGE_FORMAT, statistic.getMatchCount(), statistic.getPrizeMoney(), statistic.getPrizeCount()));
+    }
+
+    private static void printEarnRate(Statistics statistic) {
+
+        printStream.println(String.format(EARN_RATE_FORMAT, statistic.getEarnRate(), statistic.isGain() ? GAIN : LOSS));
+
     }
 }

@@ -6,13 +6,25 @@ import java.util.stream.IntStream;
 
 public class Lottos {
 
-    static final int AMOUNT_PER_LOTTO = 1000;
+    public static final int AMOUNT_PER_LOTTO = 1000;
     private final List<Lotto> lottos;
 
     public Lottos(int purchaseAmount) {
 
         validate(purchaseAmount);
         lottos = IntStream.range(0, purchaseAmount / AMOUNT_PER_LOTTO).mapToObj(i -> new Lotto()).collect(Collectors.toList());
+    }
+
+    public Lottos(List<Lotto> lottos) {
+
+        this.lottos = lottos;
+    }
+
+    public long getLastWeekNumbersCorrectCount(int correctCount, LastWeekNumbers lastWeekNumbers) {
+
+        return lottos.stream()
+                .filter(lotto -> lotto.isLottoNumberMatchesCorrectCount(correctCount, lastWeekNumbers))
+                .count();
     }
 
     public int getLottoCount() {
