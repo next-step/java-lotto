@@ -13,8 +13,8 @@ public class LottoInputView {
 
     try {
       Scanner scanner = new Scanner(System.in);
-      int purchaseAmount = scanner.nextInt();
-      return purchaseAmount;
+      int paid = scanner.nextInt();
+      return paid;
     } catch(InputMismatchException e) {
       throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
     }
