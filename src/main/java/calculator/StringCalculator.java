@@ -8,6 +8,6 @@ public class StringCalculator {
             return 0;
         }
 
-        return Stream.of(string.split(":")).mapToInt(Integer::parseInt).sum();
+        return Stream.of(string.split(":|,")).mapToInt(Integer::parseInt).sum();
     }
 }
