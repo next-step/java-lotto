@@ -11,7 +11,7 @@ public class LottoGameReport {
     }
 
     public Money getTotalPrizeMoney(final LottoPrize prize) {
-        return null;
+        return new Money(getMatchCount(prize) * prize.getPrizeMoney());
     }
 
     public int getMatchCount(final LottoPrize prize) {
