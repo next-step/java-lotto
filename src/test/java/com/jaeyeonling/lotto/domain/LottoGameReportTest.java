@@ -20,18 +20,21 @@ class LottoGameReportTest {
             100,
             5000
     })
-    void should_return_matchCount_by_prize(final int matchCount) {
+    void should_return_matchCount(final int matchCount) {
         // given
+        final LottoPrize prize = LottoPrize.JACKPOT;
         final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
-        matchCountByRank.put(LottoPrize.JACKPOT, matchCount);
+        matchCountByRank.put(prize, matchCount);
 
         final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
 
         // when
-        final int target = lottoGameReport.getMatchCount(LottoPrize.JACKPOT);
+        final int target = lottoGameReport.getMatchCount(prize);
 
         // then
         assertThat(target).isEqualTo(matchCount);
     }
+
+
 
 }
