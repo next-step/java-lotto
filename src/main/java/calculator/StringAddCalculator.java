@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
  * Blog : http://wyparks2.github.io
  * Github : http://github.com/wyparks2
  */
-public final class Calculator {
-    private Calculator() {
+public final class StringAddCalculator {
+    private StringAddCalculator() {
     }
 
     private static final String DELIMITER = ",|:";
     private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
-    public static int add(String text) {
+    public static int calculate(String text) {
         String[] tokens = split(text);
 
         int total = 0;
