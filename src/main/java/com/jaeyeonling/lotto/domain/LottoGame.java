@@ -1,5 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
@@ -10,7 +11,9 @@ public class LottoGame {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> buy() {
-        return List.of(lottoGenerator.generate());
+    public List<Lotto> buy(final Money money) {
+        final List<Lotto> lottos = new ArrayList<>();
+
+        return lottos;
     }
 }
