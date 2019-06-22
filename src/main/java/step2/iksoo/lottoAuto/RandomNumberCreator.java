@@ -27,15 +27,15 @@ public class RandomNumberCreator {
         Collections.shuffle(this.shuffleNum);
     }
 
+    private int getLottoNumber(int i) {
+        return this.shuffleNum.get(i);
+    }
+
     public List<Integer> getLotto(int length) {
         return IntStream.range(0, length)
                 .boxed()
                 .map(n -> getLottoNumber(n))
                 .collect(Collectors.toList());
-    }
-
-    private int getLottoNumber(int i) {
-        return this.shuffleNum.get(i);
     }
 
     @Override
