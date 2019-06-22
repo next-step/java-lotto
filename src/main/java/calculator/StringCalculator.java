@@ -13,11 +13,22 @@ public class StringCalculator {
 
     public int splitAndSum(String string) {
 
+        validation(string);
+
         if (string == null || string.isEmpty()) {
             return ZERO;
         }
 
         return sum(split(string));
+    }
+
+    private void validation(String string) {
+        if (string.contains("-"))
+            throw new IllegalArgumentException();
+    }
+
+    private int sum(String[] string) {
+        return Stream.of(string).filter(character -> !character.isEmpty()).mapToInt(Integer::parseInt).sum();
     }
 
     private String[] split(String string) {
@@ -28,10 +39,6 @@ public class StringCalculator {
                     .split(String.format(STRING_FORMAT, REGEX_SPLIT_STRING, getCustomSeparator(string)));
         }
         return string.split(REGEX_SPLIT_STRING);
-    }
-
-    private int sum(String[] string) {
-        return Stream.of(string).filter(character -> !character.isEmpty()).mapToInt(Integer::parseInt).sum();
     }
 
     private String getCustomSeparator(String string) {
