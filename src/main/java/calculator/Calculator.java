@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by wyparks2@gmail.com on 2019-06-20
  * Blog : http://wyparks2.github.io
@@ -7,6 +10,7 @@ package calculator;
  */
 public class Calculator {
     private static final String DELIMITER = ",|:";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
 
     public int add(String text) {
         String[] tokens = split(text);
@@ -20,6 +24,16 @@ public class Calculator {
     }
 
     private String[] split(String text) {
-        return text == null || text.isEmpty() ? new String[0] : text.split(DELIMITER);
+        if (text == null || text.isEmpty()) {
+            return new String[0];
+        }
+
+        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
+        }
+
+        return text.split(DELIMITER);
     }
 }

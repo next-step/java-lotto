@@ -53,8 +53,11 @@ public class CalculatorTest {
         assertThat(calculator.add(input)).isEqualTo(expected);
     }
 
+    @Test
+    void add_커스텀_구분자() {
+        assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
+    }
 
-    // TODO “//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.
 
     // TODO 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.
 }
