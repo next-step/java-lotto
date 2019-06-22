@@ -9,7 +9,9 @@ public class LottoRunner {
     int paid = LottoInputView.askPurchaseAmount();
     System.out.println(paid > 0);
 
-    List<Lotto> lottos = LottoGenerator.generate(paid);
+    LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
+
+    List<Lotto> lottos = lottoGenerator.generate(paid);
     int amount = lottos.size();
 
     LottoOutputView.print(amount);
