@@ -69,8 +69,8 @@ class LottoGameReportTest {
         final int totalBuyingMoney = matchCount * Env.PRICE_OF_LOTTO;
 
         // when
-        final Money returnOnInvestment = lottoGameReport.getReturnOnInvestment();
-        final Money expect = new Money(prize.getPrizeMoney() * matchCount / totalBuyingMoney);
+        final double returnOnInvestment = lottoGameReport.getReturnOnInvestment();
+        final double expect = prize.getPrizeMoney() * matchCount / totalBuyingMoney;
 
         // then
         assertThat(returnOnInvestment).isEqualTo(expect);

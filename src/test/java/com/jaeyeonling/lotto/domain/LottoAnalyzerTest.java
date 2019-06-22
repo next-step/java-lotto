@@ -64,8 +64,8 @@ class LottoAnalyzerTest {
         final int totalBuyingMoney = analyzeCount * Env.PRICE_OF_LOTTO;
 
         // when
-        final Money returnOnInvestment = report.getReturnOnInvestment();
-        final Money expect = new Money(LottoPrize.JACKPOT.getPrizeMoney() * analyzeCount / totalBuyingMoney);
+        final double returnOnInvestment = report.getReturnOnInvestment();
+        final double expect = LottoPrize.JACKPOT.getPrizeMoney() * analyzeCount / totalBuyingMoney;
 
         // then
         assertThat(returnOnInvestment).isEqualTo(expect);
