@@ -87,7 +87,7 @@ class LottoTest {
     @Test
     void can_buy_lotto_by_money() {
         // given
-        final Money money = new Money(Lotto.PRICE);
+        final Money money = new Money(Lotto.PRICE_VALUE);
         final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
@@ -101,7 +101,7 @@ class LottoTest {
     @Test
     void should_throw_LowMoneyException_when_lowBalance() {
         // given
-        final Money money = new Money(Lotto.PRICE - 1);
+        final Money money = new Money(Lotto.PRICE_VALUE - 1);
         final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
         final Lotto lotto = new Lotto(lottoNumbers);
 

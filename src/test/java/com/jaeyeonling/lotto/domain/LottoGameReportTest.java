@@ -65,7 +65,7 @@ class LottoGameReportTest {
         final LottoPrize prize = LottoPrize.FOURTH;
         final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
 
-        final int totalBuyingMoney = matchCount * Lotto.PRICE;
+        final int totalBuyingMoney = matchCount * Lotto.PRICE_VALUE;
 
         // when
         final double returnOnInvestment = lottoGameReport.getReturnOnInvestment();

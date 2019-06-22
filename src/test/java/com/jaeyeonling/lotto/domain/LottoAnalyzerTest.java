@@ -58,7 +58,7 @@ class LottoAnalyzerTest {
     void should_return_returnOnInvestment_by_lottoAnalyzer(final int analyzeCount) {
         // given
         final LottoGameReport report = getLottoGameReport(analyzeCount);
-        final int totalBuyingMoney = analyzeCount * Lotto.PRICE;
+        final int totalBuyingMoney = analyzeCount * Lotto.PRICE_VALUE;
 
         // when
         final double returnOnInvestment = report.getReturnOnInvestment();

@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class Lotto implements Dealable {
     public static final int COUNT_OF_LOTTO_NUMBER = 6;
-    static final int PRICE = 1_000;
+    static final int PRICE_VALUE = 1_000;
 
-    static final Money LOTTO_PRICE = new Money(Lotto.PRICE);
+    static final Money PRICE = new Money(PRICE_VALUE);
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -33,7 +33,7 @@ public class Lotto implements Dealable {
 
     @Override
     public Money getPrice() {
-        return LOTTO_PRICE;
+        return PRICE;
     }
 
     @Override

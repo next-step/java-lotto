@@ -25,7 +25,7 @@ class LottoGameTest {
         final Lotto lotto = new Lotto(lottoNumbers);
         final LottoGame lottoGame = new LottoGame(() -> lotto);
 
-        final Money money = new Money(Lotto.PRICE);
+        final Money money = new Money(Lotto.PRICE_VALUE);
 
         // when
         final List<Lotto> lottos = lottoGame.buy(money);
@@ -46,7 +46,7 @@ class LottoGameTest {
         // given
         final LottoGame lottoGame = new LottoGame();
 
-        final Money money = new Money(Lotto.PRICE * buyCount);
+        final Money money = new Money(Lotto.PRICE_VALUE * buyCount);
 
         // when
         final List<Lotto> lottos = lottoGame.buy(money);

@@ -48,6 +48,6 @@ public class LottoGameReport {
     }
 
     private long getPriceOfLotto(final int count) {
-        return count * Lotto.PRICE;
+        return count * Lotto.PRICE_VALUE;
     }
 }
