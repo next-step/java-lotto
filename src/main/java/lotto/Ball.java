@@ -1,11 +1,14 @@
 package lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Ball {
 
     static final int MIN_NUMBER = 1;
     static final int MAX_NUMBER = 45;
+    private static Map<Integer, Ball> CACHE = new HashMap<>();
     private int number;
 
     private Ball(int number) {
@@ -14,6 +17,9 @@ public class Ball {
 
     public static Ball of(int number) {
         validateNumber(number);
+        if (CACHE.containsKey(number)) {
+            return CACHE.get(number);
+        }
         return new Ball(number);
     }
 
