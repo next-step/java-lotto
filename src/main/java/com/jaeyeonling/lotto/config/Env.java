@@ -38,7 +38,7 @@ public interface Env {
 
     /* View */
     String WINNING_LOTTO_NUMBER_SEPARATOR = ",";
-    String READ_MONEY_MESSAGE = "구입금액을 임력해 주세요.";
+    String READ_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     String READ_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     String BUYING_ALERT_MESSAGE = "%d개를 구매했습니다.";
