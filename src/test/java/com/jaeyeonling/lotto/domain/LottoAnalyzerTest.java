@@ -4,7 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -76,10 +78,15 @@ class LottoAnalyzerTest {
         final Lotto lotto = new Lotto(lottoNumbers);
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
 
+        return lottoAnalyzer.analyze(getLottos(analyzeCount, lotto));
+    }
+
+    private List<Lotto> getLottos(final int analyzeCount, final Lotto lotto) {
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < analyzeCount; i++) {
-            lottoAnalyzer.analyze(lotto);
+            lottos.add(lotto);
         }
 
-        return lottoAnalyzer.getReport();
+        return lottos;
     }
 }

@@ -1,34 +1,46 @@
 package com.jaeyeonling.lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class LottoAnalyzer {
 
-    private final Map<LottoPrize, Integer> matchCountByLottoPrize = new ConcurrentHashMap<>();
+    private static final int DEFAULT_MATCH_COUNT = 0;
+    private static final int INCREMENT_MATCH_COUNT = 1;
+
     private final Lotto winningLotto;
 
     public LottoAnalyzer(final Lotto winningLotto) {
         this.winningLotto = winningLotto;
     }
 
-    public void analyze(final List<Lotto> lottos) {
-        lottos.forEach(this::analyze);
+    public LottoGameReport analyze(final List<Lotto> lottos) {
+        return getLottoGameReport(lottos);
     }
 
-    public void analyze(final Lotto lotto) {
-        final int countOfMatch = winningLotto.countOfMatch(lotto);
-        final LottoPrize prize = LottoPrize.valueOf(countOfMatch);
-
-        incrementMatchCount(prize);
+    private LottoGameReport getLottoGameReport(final List<Lotto> lottos) {
+        return new LottoGameReport(getMatchCountByLottoPrize(lottos));
     }
 
-    private void incrementMatchCount(final LottoPrize prize) {
-        matchCountByLottoPrize.put(prize, matchCountByLottoPrize.getOrDefault(prize, 0) + 1);
+    private Map<LottoPrize, Integer> getMatchCountByLottoPrize(final List<Lotto> lottos) {
+        final Map<LottoPrize, Integer> matchCountByLottoPrize = new HashMap<>();
+        for (final Lotto lotto : lottos) {
+            final int countOfMatch = getCountOfMatch(lotto);
+            final LottoPrize prize = getLottoPrize(countOfMatch);
+
+            final int currentMatchCount = matchCountByLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
+            matchCountByLottoPrize.put(prize, currentMatchCount + INCREMENT_MATCH_COUNT);
+        }
+
+        return matchCountByLottoPrize;
     }
 
-    public LottoGameReport getReport() {
-        return new LottoGameReport(matchCountByLottoPrize);
+    private LottoPrize getLottoPrize(final int countOfMatch) {
+        return LottoPrize.valueOf(countOfMatch);
+    }
+
+    private int getCountOfMatch(final Lotto lotto) {
+        return winningLotto.countOfMatch(lotto);
     }
 }

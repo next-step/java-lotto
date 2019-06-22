@@ -29,9 +29,7 @@ public class Application {
         final Lotto winningLotto = ConsoleInputView.readWinningLotto();
         final LottoAnalyzer analyzer = new LottoAnalyzer(winningLotto);
 
-        analyzer.analyze(lottos);
-
-        final LottoGameReport report = analyzer.getReport();
+        final LottoGameReport report = analyzer.analyze(lottos);
         ConsoleOutputView.printReport(report);
     }
 }
