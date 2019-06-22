@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class Input {
 
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final String DEFAULT_DELIMITER = "[,:]";
     private String input;
 
@@ -19,10 +20,10 @@ public class Input {
     }
 
     String[] split() {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            return m.group(2).split(customDelimiter);
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(input);
+        if (matcher.find()) {
+            String customDelimiter = matcher.group(1);
+            return matcher.group(2).split(customDelimiter);
         }
         return input.split(DEFAULT_DELIMITER);
     }
