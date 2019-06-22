@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -29,18 +30,21 @@ class StatisticsTest {
     private Statistics statistics = new Statistics(wonNumbers, lottos);
 
     @Test
+    @DisplayName("총 당청금 확인")
     void getWinAmount() {
 
         assertThat(statistics.getWinAmount()).isEqualTo(5000);
     }
 
     @Test
+    @DisplayName("수익률 계산")
     void getEarnRate() {
 
         assertThat(statistics.getEarnRate()).isEqualTo(0.35);
     }
 
     @Test
+    @DisplayName("이득/손해 판단")
     void isGain() {
 
         assertThat(statistics.isGain()).isFalse();
