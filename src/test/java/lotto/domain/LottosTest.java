@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.StubLottoGenerator;
+import lotto.domain.generator.StubLottosGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -31,12 +33,14 @@ class LottosTest {
     @ValueSource(ints = {3, 4, 5, 6})
     void getWonNumbersCorrectCount(int correctCount) {
 
-        Lottos lottos = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 12, 13)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 13)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
-        ));
+        Lottos lottos = new Lottos(new StubLottosGenerator(
+                Arrays.asList(
+                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 11, 12, 13))),
+                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 12, 13))),
+                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 13))),
+                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                )
+        ), 6);
 
         WonNumbers wonNumbers = new WonNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottos.getWonNumbersCorrectCount(correctCount, wonNumbers)).isEqualTo(1);

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.generator.StubLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class LottoTest {
     void lottoToString() {
 
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(new StubLottoGenerator(lottoNumbers));
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

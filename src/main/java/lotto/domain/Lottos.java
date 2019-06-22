@@ -1,23 +1,24 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottosGenerator;
+import lotto.domain.generator.RandomLottosGenerator;
+
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Lottos {
 
-    public static final int AMOUNT_PER_LOTTO = 1000;
+    private static final int AMOUNT_PER_LOTTO = 1000;
     private final List<Lotto> lottos;
 
     public Lottos(int purchaseAmount) {
 
-        validate(purchaseAmount);
-        lottos = IntStream.range(0, purchaseAmount / AMOUNT_PER_LOTTO).mapToObj(i -> new Lotto()).collect(Collectors.toList());
+        this(new RandomLottosGenerator(), purchaseAmount);
     }
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(LottosGenerator lottosGenerator, int purchaseAmount) {
 
-        this.lottos = lottos;
+        validate(purchaseAmount);
+        lottos = lottosGenerator.generate(purchaseAmount / AMOUNT_PER_LOTTO);
     }
 
     public long getWonNumbersCorrectCount(int correctCount, WonNumbers wonNumbers) {
