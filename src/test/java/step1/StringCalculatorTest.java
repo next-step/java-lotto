@@ -54,4 +54,14 @@ public class StringCalculatorTest {
         //Then
         assertThat(calculator.calculate(inputString)).isEqualTo(4);
     }
+
+    @Test
+    void 커스텀_구분자를_지정할_수_있다() {
+        //Given
+        String inputString = "//;\n1;2;3";
+        //When
+        //Then
+        assertThat(calculator.calculate(inputString)).isEqualTo(6);
+
+    }
 }

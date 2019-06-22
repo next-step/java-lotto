@@ -28,8 +28,8 @@
     - [x] TEST PASS
     - [ ] REFACTORING
 - [ ] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정 가능
-    - [ ] TEST FAIL
-    - [ ] TEST PASS
+    - [x] TEST FAIL
+    - [x] TEST PASS
     - [ ] REFACTORING
 - [ ] 음수를 전달할 경우 RuntimeException 예외가 발생
     - [ ] TEST FAIL
