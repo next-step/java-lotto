@@ -1,6 +1,7 @@
 package step2.iksoo.lottoAuto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -9,6 +10,19 @@ public class LottoMain {
 
     public static void main(String[] args) {
         Lottos lottos = new Lottos(buyLotto(lottoOrder()));
+        List<Integer> winnerNumbers = getKnowWinnerNumbers();
+        lottos.checkLotteryWinner(winnerNumbers);
+    }
+
+    private static List<Integer> getKnowWinnerNumbers() {
+        OutputView.printTextln("지난 주 당첨 번호를 입력해 주세요.");
+        String[] numbers = InputView.inputText().replace(" ", "").split(",");
+
+        List<Integer> winnerNumbers = new ArrayList<>();
+        for(String number :numbers){
+            winnerNumbers.add(Integer.parseInt(number));
+        }
+        return winnerNumbers;
     }
 
     private static int lottoOrder() {

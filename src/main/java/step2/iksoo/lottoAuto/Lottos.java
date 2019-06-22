@@ -16,4 +16,8 @@ public class Lottos {
                 .forEach(n -> this.lottos.get(n).printLotto());
         OutputView.printBlankLine();
     }
+
+    public void checkLotteryWinner(List<Integer> winnerNumbers) {
+
+    }
 }
