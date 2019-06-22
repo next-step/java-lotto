@@ -1,4 +1,4 @@
-package com.jaeyeonling.lotto;
+package com.jaeyeonling.lotto.domain;
 
 import com.jaeyeonling.lotto.config.Env;
 import com.jaeyeonling.lotto.exception.LottoNumberLongerThanMaxException;
