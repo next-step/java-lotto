@@ -28,12 +28,30 @@ class LottoTest {
 
     @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 보다 적을 시 예외처리")
     @Test
-    void should_throw_InvalidCountOfLottoNumberException_lotto_when_correct_lottoNumber() {
+    void should_throw_InvalidCountOfLottoNumberException_lotto_when_shorterThan_countOfLotto() {
         // given
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         // when
         for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO - 1; lottoNumber++) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+
+        // then
+        Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
+                .isThrownBy(() -> {
+                    new Lotto(lottoNumbers);
+                });
+    }
+
+    @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 보다 클 시 예외처리")
+    @Test
+    void should_throw_InvalidCountOfLottoNumberException_lotto_when_longerThan_countOfLotto() {
+        // given
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        // when
+        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO + 1; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
         }
 
