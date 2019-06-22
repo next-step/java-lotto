@@ -16,7 +16,7 @@ public class Statistics {
     public Statistics(WonNumbers wonNumbers, Lottos lottos) {
 
         this.statistics = PRIZE_INFOS.stream()
-                .map(prizeInfo -> new Statistic(prizeInfo, lottos.getWonNumbersCorrectCount(prizeInfo.getMatchCount(), wonNumbers)))
+                .map(prizeInfo -> Statistic.of(prizeInfo, lottos.getWonNumbersCorrectCount(prizeInfo.getMatchCount(), wonNumbers)))
                 .collect(Collectors.toList());
         this.purchaseAmount = lottos.getLottoCount() * AMOUNT_PER_LOTTO;
     }

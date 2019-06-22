@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Lottos {
 
-    private static final int AMOUNT_PER_LOTTO = 1000;
+    public static final int AMOUNT_PER_LOTTO = 1000;
     private final List<Lotto> lottos;
 
     public Lottos(int purchaseAmount) {

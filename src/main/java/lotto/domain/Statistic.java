@@ -2,13 +2,15 @@ package lotto.domain;
 
 public class Statistic {
 
-    private final PrizeInfo prizeInfo;
-    private final long prizeCount;
+    private PrizeInfo prizeInfo;
+    private long prizeCount;
 
-    public Statistic(PrizeInfo prizeInfo, long prizeCount) {
+    public static Statistic of(PrizeInfo prizeInfo, long prizeCount) {
 
-        this.prizeInfo = prizeInfo;
-        this.prizeCount = prizeCount;
+        Statistic statistic = new Statistic();
+        statistic.prizeInfo = prizeInfo;
+        statistic.prizeCount = prizeCount;
+        return statistic;
     }
 
     public int getMatchCount() {
@@ -27,6 +29,7 @@ public class Statistic {
     }
 
     public long getEarnMoney() {
+
         return getPrizeMoney() * getPrizeCount();
     }
 }

@@ -12,14 +12,13 @@ public class WonNumbers {
 
     public WonNumbers(String wonNumbersValue) {
 
-        this.wonNumbers = parse(wonNumbersValue);
-        validate();
-    }
+        if (wonNumbersValue == null || wonNumbersValue.isEmpty()) {
+            throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
+        }
 
-    public WonNumbers(List<Integer> wonNumbers) {
-
+        List<Integer> wonNumbers = parse(wonNumbersValue);
+        validate(wonNumbers);
         this.wonNumbers = wonNumbers;
-        validate();
     }
 
     private List<Integer> parse(String wonNumbersValue) {
@@ -30,10 +29,10 @@ public class WonNumbers {
                 .collect(Collectors.toList());
     }
 
-    private void validate() {
+    private void validate(List<Integer> wonNumbers) {
 
         if (wonNumbers == null || wonNumbers.size() != MUST_LOTTO_COUNT) {
-            throw new IllegalArgumentException("로또 개수는 " + MUST_LOTTO_COUNT + "개 여야 합니다.");
+            throw new IllegalArgumentException("우승번호 개수는 " + MUST_LOTTO_COUNT + "개 여야 합니다.");
         }
     }
 

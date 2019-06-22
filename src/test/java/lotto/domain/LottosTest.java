@@ -42,7 +42,7 @@ class LottosTest {
                 )
         ), 6);
 
-        WonNumbers wonNumbers = new WonNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6");
         assertThat(lottos.getWonNumbersCorrectCount(correctCount, wonNumbers)).isEqualTo(1);
     }
 }
