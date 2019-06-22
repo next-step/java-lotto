@@ -20,6 +20,10 @@ public class Lotto {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
+    int countOfMatch(final Lotto expect) {
+        return 0;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {

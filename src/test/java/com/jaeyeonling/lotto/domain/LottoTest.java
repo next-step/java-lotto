@@ -82,5 +82,24 @@ class LottoTest {
         assertThat(target).isEqualTo(expect);
     }
 
+    @DisplayName("Lotto 의 lottoNumber 매칭 갯수 확인")
+    @Test
+    void should_allMatch_countOfMatch() {
+        // given
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+
+        final Lotto target = new Lotto(lottoNumbers);
+        final Lotto expect = new Lotto(lottoNumbers);
+
+        // when
+        final int countOfMatch = target.countOfMatch(expect);
+
+        // then
+        assertThat(target.countOfMatch(expect)).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+    }
 
 }
