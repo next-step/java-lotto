@@ -15,7 +15,7 @@ public class Accumulator {
     }
     
     public static int accumulate(final String[] numbers) {
-        if (Arrays.stream(numbers).anyMatch(number -> isNumeric(number))) {
+        if (Arrays.stream(numbers).anyMatch(number -> !isNumeric(number))) {
             throw new RuntimeException(ErrorMessage.INCORRECT_VALUE.getMessage());
         }
         return accumulate(Arrays.stream(numbers).mapToInt(number -> Integer.parseInt(number)).toArray());

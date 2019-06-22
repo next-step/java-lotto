@@ -8,7 +8,6 @@ class PatternFormulaTest {
     private final static String COLON_TEST_FORMULA = "1:2:3";
     private final static String MIX_TEST_FORMULA = "1,2:3";
     private final static String FORMULA_WITH_CUSTOM_SEPARATOR = "//;\n1;2;3";
-    private final static String FORMULA_WITH_INCORRECT_SEPARATOR = "//;\n1;2;3*4";
     private final static String INCORRECT_CUSTOM_SEPARATOR_FORMULA = "//\n1;2;3";
     private final static String INCORRECT_CUSTOM_SEPARATOR_FORMULA2 = "//aa\n1;2;3";
     private final static String CUSTOM_SEPARATOR = ";";
@@ -108,9 +107,4 @@ class PatternFormulaTest {
           .isThrownBy(() -> new PatternFormula(NOT_FORMULA))
           .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
-    
-//      - "//"와 "\n" 은 있으나 사이에 문자가 없는 경우
-//    - "//"와 "\n" 뒤에 숫자만 있는 경우 : 해당 숫자
-//    - "//"와 "\n" 뒤에 숫자와 쉼표(,), 콜론(:) 이 구분자로 존재하는 경우 : 쉼표(,), 콜론(:) 을 구분자로 하여 덧셈 진행
-//    - "//"와 "\n" 뒤에 쉼표(,), 콜론(:) 이외의 문자열로 구분자가 존재하는 경우 : 불가
 }
