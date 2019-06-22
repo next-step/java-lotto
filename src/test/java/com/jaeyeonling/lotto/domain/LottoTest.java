@@ -19,8 +19,11 @@ class LottoTest {
         // given
         final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
 
+        // when
+        final Lotto lotto = new Lotto(lottoNumbers);
+
         // then
-        new Lotto(lottoNumbers);
+        assertThat(lotto).isNotNull();
     }
 
     @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 보다 적을 시 예외처리")
@@ -29,7 +32,7 @@ class LottoTest {
         // given
         final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO - 1);
 
-        // then
+        // when / then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
                 .isThrownBy(() -> {
                     new Lotto(lottoNumbers);
@@ -42,7 +45,7 @@ class LottoTest {
         // given
         final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO + 1);
 
-        // then
+        // when / then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
                 .isThrownBy(() -> {
                     new Lotto(lottoNumbers);
@@ -81,7 +84,6 @@ class LottoTest {
 
     private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumber) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
-
         for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= countOfLottoNumber; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
         }
