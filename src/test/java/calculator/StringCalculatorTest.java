@@ -43,8 +43,8 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void name() {
-        Stream.of("//;\n1;2;3;".replace("//", "").replace("\n", "").split(";")).forEach(System.out::println);
+    void add_custom_separator_and_comma_colon() {
+        assertThat(stringCalculator.splitAndSum("//;\n1;2:3,4")).isEqualTo(10);
     }
 }
 

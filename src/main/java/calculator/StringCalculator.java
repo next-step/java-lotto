@@ -5,9 +5,10 @@ import java.util.stream.Stream;
 public class StringCalculator {
 
     private static final String REGEX_SPLIT_STRING = ":|,";
-    private static final int ZERO = 0;
     private static final String CUSTOM_SEPARATOR_PREFIX = "//";
     private static final String CUSTOM_SEPARATOR_SUFFIX = "\n";
+    private static final String EMPTY_STRING = "";
+    private static final int ZERO = 0;
 
     public int splitAndSum(String string) {
 
@@ -17,9 +18,9 @@ public class StringCalculator {
 
         if (hasCustomSeparator(string)) {
             return Stream.of(string
-                    .replace("//", "")
-                    .replace("\n", "")
-                    .split(getCustomSeparator(string)))
+                    .replace(CUSTOM_SEPARATOR_PREFIX, EMPTY_STRING)
+                    .replace(CUSTOM_SEPARATOR_SUFFIX, EMPTY_STRING)
+                    .split(REGEX_SPLIT_STRING + "|" + getCustomSeparator(string)))
                     .filter(e -> !e.isEmpty())
                     .mapToInt(Integer::parseInt)
                     .sum();
