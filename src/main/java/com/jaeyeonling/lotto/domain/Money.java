@@ -22,7 +22,7 @@ public class Money {
     }
 
     boolean isCanBuy(final Dealable item) {
-        return false;
+        return !isLowMoney(item.getPrice());
     }
 
     private void spend(final Money price) {
