@@ -52,6 +52,6 @@ class LottoGameTest {
         final List<Lotto> lottos = lottoGame.buy(money);
 
         // then
-        assertThat(lottos.size()).isEqualTo(buyCount);
+        assertThat(lottos).hasSize(buyCount);
     }
 }
