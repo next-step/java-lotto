@@ -12,12 +12,8 @@ class Separators {
     String[] getSplitStrings(String formula) {
         return formula.split("[" + separators + "]");
     }
+    
+    boolean has(String separator) {
+        return separators.contains(separator);
+    }
 }
-
-// 1. 1,2:3;4 -> [1], [2:3;4]
-    // 2. 1 -> [1]
-    // 3. 2:3;4 -> [2:3], [4]
-      // 4. 2:3 -> [2], [3]
-        // 5. 2 -> [2]
-        // 6. 3 -> [3]
-      // 7. 4 -> [4]
