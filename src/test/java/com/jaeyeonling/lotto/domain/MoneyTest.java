@@ -36,7 +36,7 @@ class MoneyTest {
             500_000,
             1_000_000
     })
-    void should_return_true_when_canBuy(final int balanceValue) {
+    void should_return_true_when_enoughMoney(final int balanceValue) {
         // given
         final Money money = new Money(balanceValue);
         final Money itemPrice = new Money(balanceValue);
@@ -47,6 +47,27 @@ class MoneyTest {
 
         // then
         assertThat(isCanBuy).isTrue();
+    }
+
+    @DisplayName("Money 로 물건 구매 불가능 여부 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1_000,
+            20_000,
+            500_000,
+            1_000_000
+    })
+    void should_return_false_when_lowBalance(final int balanceValue) {
+        // given
+        final Money money = new Money(balanceValue - 1);
+        final Money itemPrice = new Money(balanceValue);
+        final Dealable item = () -> itemPrice;
+
+        // when
+        final boolean isCanBuy = money.isCanBuy(item);
+
+        // then
+        assertThat(isCanBuy).isFalse();
     }
 
     @DisplayName("Money 로 물건 구매 시 잔액 차감 확인")
