@@ -21,7 +21,9 @@ public class Lotto {
     }
 
     int countOfMatch(final Lotto expect) {
-        return 0;
+        return (int) lottoNumbers.stream()
+                .filter(expect.lottoNumbers::contains)
+                .count();
     }
 
     @Override
