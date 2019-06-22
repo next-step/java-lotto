@@ -10,6 +10,10 @@ public class LottoGameReport {
         this.matchCountByLottoPrize = matchCountByLottoPrize;
     }
 
+    public Money getTotalPrizeMoney(final LottoPrize prize) {
+        return null;
+    }
+
     public int getMatchCount(final LottoPrize prize) {
         return matchCountByLottoPrize.getOrDefault(prize, 0);
     }
