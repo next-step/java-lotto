@@ -76,7 +76,7 @@ class LottoTest {
         final int countOfMatch = target.countOfMatch(expect);
 
         // then
-        assertThat(target.countOfMatch(expect)).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
+        assertThat(countOfMatch).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
     }
 
     private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumbe) {
