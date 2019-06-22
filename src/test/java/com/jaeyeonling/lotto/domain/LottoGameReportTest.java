@@ -1,7 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -35,6 +34,27 @@ class LottoGameReportTest {
         assertThat(target).isEqualTo(matchCount);
     }
 
+    @DisplayName("상금 별 상금 반환")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1,
+            2,
+            100,
+            5000
+    })
+    void should_return_totalPrizeMoney(final int matchCount) {
+        // given
+        final LottoPrize prize = LottoPrize.JACKPOT;
+        final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
+        matchCountByRank.put(prize, matchCount);
 
+        final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
+
+        // when
+        final Money totalPrizeMoney = lottoGameReport.getTotalPrizeMoney(LottoPrize.JACKPOT);
+
+        // then
+        assertThat(totalPrizeMoney).isEqualTo(new Money(prize.getPrizeMoney() * matchCount));
+    }
 
 }
