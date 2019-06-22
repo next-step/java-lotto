@@ -1,6 +1,6 @@
 package calculator;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,18 +13,23 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Github : http://github.com/wyparks2
  */
 public class CalculatorTest {
+
+    private Calculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        this.calculator = new Calculator();
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     void add_공백_또는_null_입력시_0반환(String input) {
-        Calculator calculator = new Calculator();
-
         assertThat(calculator.add(input)).isEqualTo(0);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3", "10", "100", "0"})
     void add_숫자_하나를_문자열로_입력할경우_해당숫자를_반환(String input) {
-        Calculator calculator = new Calculator();
         int expected = Integer.valueOf(input);
 
         assertThat(calculator.add(input)).isEqualTo(expected);
