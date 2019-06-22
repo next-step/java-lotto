@@ -14,7 +14,7 @@ public class ResultView {
     private static final String LOSS = "손해";
 
     private static final String STATISTIC_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
-    private static final String EARN_RATE_FORMAT = "총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String EARN_RATE_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     public static void printPurchasedLottoCount(int lottoCount) {
 
