@@ -79,10 +79,10 @@ class LottoTest {
         assertThat(countOfMatch).isEqualTo(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
     }
 
-    private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumbe) {
+    private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumber) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-        for (int lottoNumber = 1; lottoNumber <= countOfLottoNumbe; lottoNumber++) {
+        for (int lottoNumber = Env.MIN_LOTTO_NUMBER; lottoNumber <= countOfLottoNumber; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
         }
 
