@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class LottoTest {
 
     @DisplayName("Lotto 생성 시 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 가지게 생성")
@@ -62,6 +64,23 @@ class LottoTest {
                 });
     }
 
+    @DisplayName("Lotto 가 같은 값을 가질 경우 같은 객체 확인")
+    @Test
+    void should_return_true_when_equals_sameLotto() {
+        // given
+        final Set<LottoNumber> lottoNumbers = new HashSet<>();
+
+        for (int lottoNumber = 1; lottoNumber <= Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO; lottoNumber++) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+
+        // when
+        final Lotto target = new Lotto(lottoNumbers);
+        final Lotto expect = new Lotto(lottoNumbers);
+
+        // then
+        assertThat(target).isEqualTo(expect);
+    }
 
 
 }
