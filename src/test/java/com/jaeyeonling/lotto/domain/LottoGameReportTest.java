@@ -52,9 +52,10 @@ class LottoGameReportTest {
 
         // when
         final Money totalPrizeMoney = lottoGameReport.getTotalPrizeMoney();
+        final Money expect = new Money(prize.getPrizeMoney() * matchCount);
 
         // then
-        assertThat(totalPrizeMoney).isEqualTo(new Money(prize.getPrizeMoney() * matchCount));
+        assertThat(totalPrizeMoney).isEqualTo(expect);
     }
 
 }
