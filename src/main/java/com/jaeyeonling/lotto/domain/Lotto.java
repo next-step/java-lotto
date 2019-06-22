@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto implements Dealable {
+
     public static final int COUNT_OF_LOTTO_NUMBER = 6;
     static final int PRICE_VALUE = 1_000;
 
