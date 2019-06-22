@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * Created by wyparks2@gmail.com on 2019-06-20
@@ -58,6 +59,9 @@ public class CalculatorTest {
         assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
     }
 
-
-    // TODO 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.
+    @Test
+    void add_음수_예외발생() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.add("0,-1,3"));
+    }
 }

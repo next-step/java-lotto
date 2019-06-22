@@ -17,10 +17,19 @@ public class Calculator {
 
         int total = 0;
         for (String token : tokens) {
-            total = total + Integer.valueOf(token);
+            Integer number = Integer.valueOf(token);
+            if (isNegative(number)) {
+                throw new RuntimeException();
+            }
+
+            total = total + number;
         }
 
         return total;
+    }
+
+    private boolean isNegative(Integer number) {
+        return number < 0;
     }
 
     private String[] split(String text) {
