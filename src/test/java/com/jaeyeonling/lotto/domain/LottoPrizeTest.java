@@ -15,4 +15,11 @@ public class LottoPrizeTest {
         assertThat(LottoPrize.valueOf(Env.FOURTH_COUNT_OF_MATCH).getPrizeMoney()).isEqualTo(Env.FOURTH_PRIZE_MONEY);
         assertThat(LottoPrize.valueOf(Env.LOSE_COUNT_OF_MATCH).getPrizeMoney()).isEqualTo(Env.LOSE_PRIZE_MONEY);
     }
+
+    @DisplayName("갯수 매칭되지 않을 때 꽝 확인 ")
+    @Test
+    void should_return_lose_when_notMatchCountOfMatch() {
+        assertThat(LottoPrize.valueOf(Env.LOSE_COUNT_OF_MATCH - 1).getPrizeMoney()).isEqualTo(Env.LOSE_PRIZE_MONEY);
+        assertThat(LottoPrize.valueOf(Env.JACKPOT_COUNT_OF_MATCH + 1).getPrizeMoney()).isEqualTo(Env.LOSE_PRIZE_MONEY);
+    }
 }
