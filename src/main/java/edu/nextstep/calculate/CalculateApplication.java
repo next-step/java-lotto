@@ -41,7 +41,8 @@ public class CalculateApplication {
                     .peek(s -> ValidationUtils.validationNumber(s))
                     .collect(Collectors.toList());
 
-            System.out.println(calculate.sum(calculate.convertToInteger(calculateData)));
+            List<Integer> convertedList = calculate.convertToInteger(calculateData);
+            System.out.println(calculate.sum(convertedList));
         }
     }
 }
