@@ -6,7 +6,7 @@ import com.jaeyeonling.lotto.exception.LottoNumberShorterThanMinException;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
@@ -19,6 +19,11 @@ public class LottoNumber {
         }
 
         this.number = number;
+    }
+
+    @Override
+    public int compareTo(final LottoNumber o) {
+        return number - o.number;
     }
 
     @Override
