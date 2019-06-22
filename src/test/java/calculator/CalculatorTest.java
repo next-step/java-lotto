@@ -1,7 +1,9 @@
 package calculator;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -35,8 +37,14 @@ public class CalculatorTest {
         assertThat(calculator.add(input)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(
+            value = {"1,2:3", "2,3:5", "0,1:1"},
+            delimiter = ':')
+    void add_콤마구분자(String input, int expected) {
+        assertThat(calculator.add(input)).isEqualTo(expected);
+    }
 
-    // TODO 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.
 
     // TODO 구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.
 
