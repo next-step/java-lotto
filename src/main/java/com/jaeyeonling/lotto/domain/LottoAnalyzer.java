@@ -1,5 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,6 +11,10 @@ public class LottoAnalyzer {
 
     public LottoAnalyzer(final Lotto winningLotto) {
         this.winningLotto = winningLotto;
+    }
+
+    public void analyze(final List<Lotto> lottos) {
+        lottos.forEach(this::analyze);
     }
 
     public void analyze(final Lotto lotto) {
