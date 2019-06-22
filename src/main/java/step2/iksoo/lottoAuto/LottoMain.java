@@ -7,10 +7,8 @@ import java.util.stream.IntStream;
 public class LottoMain {
     private static final int PRICE_OF_LOTTO = 1000;
 
-    private static Lottos lottos;
-
     public static void main(String[] args) {
-        lottos = new Lottos(buyLotto(lottoOrder()));
+        Lottos lottos = new Lottos(buyLotto(lottoOrder()));
     }
 
     private static int lottoOrder() {

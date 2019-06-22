@@ -14,5 +14,6 @@ public class Lottos {
     private void printLotto() {
         IntStream.range(0, this.lottos.size())
                 .forEach(n -> this.lottos.get(n).printLotto());
+        OutputView.printBlankLine();
     }
 }
