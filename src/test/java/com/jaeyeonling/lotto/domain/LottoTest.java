@@ -11,7 +11,7 @@ class LottoTest {
 
     @DisplayName("Lotto 는 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "를 가진다.")
     @Test
-    void create() {
+    void should_create_lotto_when_correct_lottoNumber() {
         // given
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
 
@@ -21,7 +21,9 @@ class LottoTest {
         }
 
         // then
-        final Lotto lotto = new Lotto(lottoNumbers);
+        new Lotto(lottoNumbers);
     }
+
+
 
 }
