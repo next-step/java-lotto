@@ -14,4 +14,11 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(Env.MIN_LOTTO_NUMBER);
         assertThat(lottoNumber).isNotNull();
     }
+
+    @DisplayName("LottoNumber 최대 값(" + Env.MAX_LOTTO_NUMBER + ") 생성")
+    @Test
+    void should_return_lottoNumber_when_maxLottoNumber() {
+        LottoNumber lottoNumber = new LottoNumber(Env.MAX_LOTTO_NUMBER);
+        assertThat(lottoNumber).isNotNull();
+    }
 }
