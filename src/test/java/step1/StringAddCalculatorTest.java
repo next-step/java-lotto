@@ -26,7 +26,8 @@ public class StringAddCalculatorTest {
         "1,2:3",
         "3,2,1",
         "3:1:2",
-        "//;\n1;2;3"
+        "//;\n1;2;3",
+        "6"
     })
     @DisplayName("ok")
     void ok(String input) {
