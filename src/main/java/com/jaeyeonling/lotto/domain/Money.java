@@ -1,6 +1,7 @@
 package com.jaeyeonling.lotto.domain;
 
 import com.jaeyeonling.lotto.config.Env;
+import com.jaeyeonling.lotto.exception.LowMoneyException;
 
 import java.util.Objects;
 
@@ -22,9 +23,10 @@ public class Money {
 
     private void spend(final Money price) {
         if (isLowMoney(price)) {
-            throw new ArithmeticException();
+            throw new LowMoneyException(money, price.money);
         }
-        this.money -= price.money;
+
+        money -= price.money;
     }
 
     private boolean isLowMoney(final Money price) {
@@ -47,5 +49,10 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(money);
     }
 }

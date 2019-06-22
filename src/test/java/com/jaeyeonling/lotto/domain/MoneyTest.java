@@ -1,5 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.LowMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +56,7 @@ class MoneyTest {
         final Dealable item = () -> price;
 
         // when / then
-        assertThatExceptionOfType(ArithmeticException.class)
+        assertThatExceptionOfType(LowMoneyException.class)
                 .isThrownBy(() -> {
                     money.buy(item);
                 });
