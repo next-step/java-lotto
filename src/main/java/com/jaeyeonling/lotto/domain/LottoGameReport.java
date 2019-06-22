@@ -13,12 +13,7 @@ public class LottoGameReport {
     }
 
     public Money getTotalPrizeMoney() {
-        final long money = matchCountByLottoPrize.keySet()
-                .stream()
-                .mapToLong(this::getWinningMoney)
-                .sum();
-
-        return new Money(money);
+        return new Money(getTotalPrizeMoneyValue());
     }
 
     public int getMatchCount(final LottoPrize prize) {
@@ -26,10 +21,17 @@ public class LottoGameReport {
     }
 
     public double getReturnOnInvestment() {
-        return getWinningMoney() / getBuyingMoney();
+        return getTotalPrizeMoneyValue() / getBuyingMoney();
     }
 
-    private long getWinningMoney(final LottoPrize prize) {
+    private long getTotalPrizeMoneyValue() {
+        return matchCountByLottoPrize.keySet()
+                .stream()
+                .mapToLong(this::getPrizeMoney)
+                .sum();
+    }
+
+    private long getPrizeMoney(final LottoPrize prize) {
         return getMatchCount(prize) * prize.getPrizeMoney();
     }
 
@@ -37,13 +39,6 @@ public class LottoGameReport {
         return matchCountByLottoPrize.values()
                 .stream()
                 .mapToLong(this::getPriceOfLotto)
-                .sum();
-    }
-
-    private long getWinningMoney() {
-        return matchCountByLottoPrize.keySet()
-                .stream()
-                .mapToLong(this::getWinningMoney)
                 .sum();
     }
 
