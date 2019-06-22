@@ -9,7 +9,7 @@ import java.util.Set;
 
 class LottoTest {
 
-    @DisplayName("Lotto 는 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "를 가진다.")
+    @DisplayName("Lotto 는 LottoNumber " + Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO  + "개 생성")
     @Test
     void should_create_lotto_when_correct_lottoNumber() {
         // given
