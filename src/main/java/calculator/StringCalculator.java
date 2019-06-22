@@ -13,11 +13,11 @@ public class StringCalculator {
 
     public int splitAndSum(String string) {
 
-        validation(string);
-
         if (string == null || string.isEmpty()) {
             return ZERO;
         }
+
+        validation(string);
 
         return sum(split(string));
     }
