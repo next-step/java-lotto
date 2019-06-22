@@ -28,22 +28,27 @@ class LottoNumberTest {
     @DisplayName("LottoNumber 최소 값(" + Env.MIN_LOTTO_NUMBER + ") 보다 낮은 값 생성 시 예외처리")
     @Test
     void should_throw_LottoNumberShorterThanMinException_when_shorterThanMin() {
-        assertThatExceptionOfType(LottoNumberShorterThanMinException.class).isThrownBy(() -> {
-            new LottoNumber(Env.MIN_LOTTO_NUMBER - 1);
-        });
+        assertThatExceptionOfType(LottoNumberShorterThanMinException.class)
+                .isThrownBy(() -> {
+                    new LottoNumber(Env.MIN_LOTTO_NUMBER - 1);
+                });
     }
 
     @DisplayName("LottoNumber 최대 값(" + Env.MIN_LOTTO_NUMBER + ") 보다 높은 값 생성 시 예외처리")
     @Test
     void should_throw_LottoNumberLongerThanMaxException_when_longerThanMax() {
-        assertThatExceptionOfType(LottoNumberLongerThanMaxException.class).isThrownBy(() -> {
-            new LottoNumber(Env.MAX_LOTTO_NUMBER + 1);
-        });
+        assertThatExceptionOfType(LottoNumberLongerThanMaxException.class)
+                .isThrownBy(() -> {
+                    new LottoNumber(Env.MAX_LOTTO_NUMBER + 1);
+                });
     }
 
     @DisplayName("LottoNumber 가 같은 값을 가질 경우 같은 객체 확인")
     @Test
     void should_return_true_when_equals_sameLottoNumber() {
-        assertThat(new LottoNumber(Env.MAX_LOTTO_NUMBER)).isEqualTo(new LottoNumber(Env.MAX_LOTTO_NUMBER));
+        final LottoNumber target = new LottoNumber(Env.MAX_LOTTO_NUMBER);
+        final LottoNumber expect = new LottoNumber(Env.MAX_LOTTO_NUMBER);
+
+        assertThat(target).isEqualTo(expect);
     }
 }
