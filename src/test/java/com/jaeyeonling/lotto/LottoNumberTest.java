@@ -1,6 +1,7 @@
 package com.jaeyeonling.lotto;
 
 import com.jaeyeonling.lotto.config.Env;
+import com.jaeyeonling.lotto.exception.LottoNumberLongerThanMaxException;
 import com.jaeyeonling.lotto.exception.LottoNumberShorterThanMinException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ class LottoNumberTest {
     @DisplayName("LottoNumber 최대 값(" + Env.MIN_LOTTO_NUMBER + ") 보다 높은 값 생성 시 예외처리")
     @Test
     void should_throw_illegalArgumentException_when_longerThanMax() {
-        assertThatExceptionOfType(LottoNumberShorterThanMinException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(LottoNumberLongerThanMaxException.class).isThrownBy(() -> {
             new LottoNumber(Env.MAX_LOTTO_NUMBER + 1);
         });
     }
