@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Number {
     private static final int MIN = 0;
-    static final int DEFAULT = 0;
+    static final Number ZERO = new Number(MIN);
     private int number;
 
     Number(int number) {
