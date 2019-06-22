@@ -23,10 +23,7 @@ class LottoGameReportTest {
     void should_return_matchCount(final int matchCount) {
         // given
         final LottoPrize prize = LottoPrize.JACKPOT;
-        final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
-        matchCountByRank.put(prize, matchCount);
-
-        final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
+        final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
 
         // when
         final int target = lottoGameReport.getMatchCount(prize);
@@ -46,10 +43,7 @@ class LottoGameReportTest {
     void should_return_totalPrizeMoney(final int matchCount) {
         // given
         final LottoPrize prize = LottoPrize.JACKPOT;
-        final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
-        matchCountByRank.put(prize, matchCount);
-
-        final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
+        final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
 
         // when
         final Money totalPrizeMoney = lottoGameReport.getTotalPrizeMoney();
@@ -70,10 +64,7 @@ class LottoGameReportTest {
     void should_return_returnOnInvestment(final int matchCount) {
         // given
         final LottoPrize prize = LottoPrize.FOURTH;
-        final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
-        matchCountByRank.put(prize, matchCount);
-
-        final LottoGameReport lottoGameReport = new LottoGameReport(matchCountByRank);
+        final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
 
         final int totalBuyingMoney = matchCount * Env.PRICE_OF_LOTTO;
 
@@ -85,4 +76,10 @@ class LottoGameReportTest {
         assertThat(returnOnInvestment).isEqualTo(expect);
     }
 
+    private LottoGameReport getLottoGameReport(final int matchCount, final LottoPrize prize) {
+        final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
+        matchCountByRank.put(prize, matchCount);
+
+        return new LottoGameReport(matchCountByRank);
+    }
 }
