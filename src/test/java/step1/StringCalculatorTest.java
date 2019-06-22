@@ -1,17 +1,19 @@
 package step1;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringCalculatorTest {
 
-    @Test
-    void 빈_문자열_또는_null_값을_입력할_경우_0을_반환한다() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 빈_문자열_또는_null_값을_입력할_경우_0을_반환한다(String inputString) {
+        //given
         StringCalculator calculator = new StringCalculator();
-        String blank = "";
-
-        assertThat(calculator.calculate(blank)).isEqualTo(0);
-        assertThat(calculator.calculate(null)).isEqualTo(0);
+        //when
+        //Then
+        assertThat(calculator.calculate(inputString)).isEqualTo(0);
     }
 }
