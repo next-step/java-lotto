@@ -31,6 +31,7 @@ public class StringAddCalculatorTest {
     @DisplayName("ok")
     void ok(String input) {
         assertThat(StringAddCalculator.of().calculate(input)).isEqualTo(6);
+
     }
 
 }

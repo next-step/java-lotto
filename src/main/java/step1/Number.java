@@ -25,4 +25,5 @@ public class Number {
     public int getNumber() {
         return number;
     }
+
 }
