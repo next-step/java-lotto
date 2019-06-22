@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringCalculatorTest {
 
-    StringCalculator stringCalculator;
+    private StringCalculator stringCalculator;
 
     @BeforeEach
     void setUp() {
