@@ -35,4 +35,15 @@ public interface Env {
     /* Report */
     int DEFAULT_MATCH_COUNT = 0;
 
+
+    /* View */
+    String WINNING_LOTTO_NUMBER_SEPARATOR = ",";
+    String READ_MONEY_MESSAGE = "구입금액을 임력해 주세요.";
+    String READ_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+
+    String BUYING_ALERT_MESSAGE = "%d개를 구매했습니다.";
+    String WINNING_REPORT_HEADER = "당첨 통계\n---------";
+    String WINNING_REPORT_MATCH_TEMPLATE = "%d개 일치 (%d원) - %d개";
+    String WINNING_REPORT_FOOTER = "총 수익률은 %f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
 }
