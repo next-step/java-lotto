@@ -5,6 +5,7 @@ public interface Env {
     int MIN_LOTTO_NUMBER = 1;
     int MAX_LOTTO_NUMBER = 45;
 
+    int PRICE_OF_LOTTO = 1_000;
     int COUNT_OF_LOTTO_NUMBER_IN_LOTTO = 6;
 
     int JACKPOT_COUNT_OF_MATCH = 6;
@@ -23,4 +24,5 @@ public interface Env {
     int LOSE_PRIZE_MONEY = 0;
 
     int MINIMUM_MONEY = 0;
+
 }

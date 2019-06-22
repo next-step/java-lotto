@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class Lotto {
+public class Lotto implements Dealable {
 
+    private static final Money LOTTO_PRICE = new Money(Env.PRICE_OF_LOTTO);
     private final List<LottoNumber> lottoNumbers;
 
     Lotto(final Set<LottoNumber> lottoNumbers) {
@@ -24,6 +25,11 @@ public class Lotto {
         return (int) lottoNumbers.stream()
                 .filter(expect.lottoNumbers::contains)
                 .count();
+    }
+
+    @Override
+    public Money getPrice() {
+        return LOTTO_PRICE;
     }
 
     @Override
