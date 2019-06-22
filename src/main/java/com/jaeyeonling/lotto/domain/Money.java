@@ -7,13 +7,13 @@ import java.util.Objects;
 
 public class Money {
 
-    private double money;
+    private long money;
 
     Money() {
         this(Env.MINIMUM_MONEY);
     }
 
-    public Money(final double money) {
+    public Money(final long money) {
         this.money = money;
     }
 
