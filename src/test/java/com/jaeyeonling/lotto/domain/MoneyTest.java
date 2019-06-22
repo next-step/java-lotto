@@ -42,10 +42,10 @@ class MoneyTest {
         final Money itemPrice = new Money(balanceValue);
 
         // when
-        final boolean isCanBuy = money.isCanBuy(itemPrice);
+        final boolean canBuy = money.canBuy(itemPrice);
 
         // then
-        assertThat(isCanBuy).isTrue();
+        assertThat(canBuy).isTrue();
     }
 
     @DisplayName("Money 로 물건 구매 불가능 여부 확인")
@@ -62,10 +62,10 @@ class MoneyTest {
         final Money itemPrice = new Money(balanceValue);
 
         // when
-        final boolean isCanBuy = money.isCanBuy(itemPrice);
+        final boolean canBuy = money.canBuy(itemPrice);
 
         // then
-        assertThat(isCanBuy).isFalse();
+        assertThat(canBuy).isFalse();
     }
 
     @DisplayName("Money 로 물건 구매 시 잔액 차감 확인")

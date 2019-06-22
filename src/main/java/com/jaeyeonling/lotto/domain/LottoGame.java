@@ -17,7 +17,7 @@ public class LottoGame {
 
     public List<Lotto> buy(final Money money) {
         final List<Lotto> lottos = new ArrayList<>();
-        while (money.isCanBuy(Lotto.PRICE)) {
+        while (money.canBuy(Lotto.PRICE)) {
             final Lotto lotto = lottoGenerator.generate();
 
             money.buy(lotto);
