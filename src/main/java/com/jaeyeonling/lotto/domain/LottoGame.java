@@ -7,11 +7,10 @@ public class LottoGame {
 
     private final LottoGenerator lottoGenerator;
 
-
     LottoGame() {
         this(new RandomLottoGenerator());
     }
-    
+
     LottoGame(final LottoGenerator lottoGenerator) {
         this.lottoGenerator = lottoGenerator;
     }
