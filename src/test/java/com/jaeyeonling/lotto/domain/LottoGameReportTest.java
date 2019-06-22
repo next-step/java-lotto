@@ -34,7 +34,7 @@ class LottoGameReportTest {
         assertThat(target).isEqualTo(matchCount);
     }
 
-    @DisplayName("상금 별 상금 반환")
+    @DisplayName("당첨 별 상금 반환")
     @ParameterizedTest
     @ValueSource(ints = {
             1,
