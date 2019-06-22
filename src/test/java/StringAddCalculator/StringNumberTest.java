@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringNumberTest {
 
@@ -16,6 +17,14 @@ public class StringNumberTest {
         StringNumber nine = six.add(three);
 
         assertThat(nine).isEqualTo(new StringNumber("9"));
+    }
+
+    @Test
+    @DisplayName("음수의 경우 예외처리")
+    public void negativeException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new StringNumber("-1");
+        });
     }
 
     @Test

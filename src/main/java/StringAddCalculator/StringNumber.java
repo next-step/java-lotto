@@ -5,11 +5,11 @@ public class StringNumber {
 
     private int number;
 
-    public StringNumber() {
-    }
+    public StringNumber(String stringNumber) {
+        int number = convertInt(stringNumber);
 
-    public StringNumber(String number) {
-        this.number = convertInt(number);
+        verifyNegative(number);
+        this.number = number;
     }
 
     public StringNumber add(StringNumber addedStringNumber) {
@@ -23,6 +23,10 @@ public class StringNumber {
 
     private int convertInt(String number) {
         return Integer.parseInt(number);
+    }
+
+    private void verifyNegative(int checked){
+        if(checked < 0) throw new IllegalArgumentException("음수는 사용할 수 없습니다.");
     }
 
 
