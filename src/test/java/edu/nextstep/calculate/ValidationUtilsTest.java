@@ -23,14 +23,12 @@ class ValidationUtilsTest {
     @DisplayName("숫자가 맞는지 체크")
     @Test
     void isNumber() {
-
         assertThat(ValidationUtils.isNumber("1")).isTrue();
     }
 
     @DisplayName("음수인지 체크")
     @Test
     void isNegativeNumber() {
-
         assertThat(ValidationUtils.isNegativeNumber(-1)).isTrue();
     }
 
@@ -38,7 +36,6 @@ class ValidationUtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1", "a"})
     void validationNumber(String inValidChar) {
-
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             ValidationUtils.validationNumber(inValidChar);
         });

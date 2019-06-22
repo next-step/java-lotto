@@ -23,7 +23,6 @@ public class SplitUtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
     void commonSplit(String inputData) {
-
         assertThat(SplitUtils.commonSplit(inputData).contains("1")).isTrue();
     }
 
@@ -31,14 +30,12 @@ public class SplitUtilsTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "//;\n1;2;3", "//-\n1-2-3"})
     void intputDataSplit(String inputData) {
-
         assertThat(SplitUtils.inputDataSplit(inputData).contains("1")).isTrue();
     }
 
     @DisplayName("문자열의 유효성체크 (공백)")
     @Test
     void isSpace() {
-
         assertThat(SplitUtils.isSpace("")).isTrue();
     }
 
