@@ -15,5 +15,6 @@ public class LottoRunner {
     int amount = lottos.size();
 
     LottoOutputView.print(amount);
+    LottoOutputView.print(lottos);
   }
 }
