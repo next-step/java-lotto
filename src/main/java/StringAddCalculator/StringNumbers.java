@@ -13,7 +13,9 @@ public class StringNumbers {
     }
 
     public StringNumber sum() {
-        return numbers.stream().reduce((a, b) -> a.add(b)).get();
+        return numbers.stream()
+                .reduce((number1, number2) -> number1.add(number2))
+                .get();
     }
 
     private List<StringNumber> buildList(String[] numbers) {
