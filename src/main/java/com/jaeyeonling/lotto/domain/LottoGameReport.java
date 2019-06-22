@@ -1,5 +1,7 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.config.Env;
+
 import java.util.Map;
 
 public class LottoGameReport {
@@ -20,7 +22,7 @@ public class LottoGameReport {
     }
 
     public int getMatchCount(final LottoPrize prize) {
-        return matchCountByLottoPrize.getOrDefault(prize, 0);
+        return matchCountByLottoPrize.getOrDefault(prize, Env.DEFAULT_MATCH_COUNT);
     }
 
     private int getWinningMoney(final LottoPrize prize) {
