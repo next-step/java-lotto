@@ -69,7 +69,7 @@ class LottoGameReportTest {
     })
     void should_return_returnOnInvestment(final int matchCount) {
         // given
-        final LottoPrize prize = LottoPrize.JACKPOT;
+        final LottoPrize prize = LottoPrize.FOURTH;
         final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
         matchCountByRank.put(prize, matchCount);
 
@@ -79,7 +79,7 @@ class LottoGameReportTest {
 
         // when
         final Money returnOnInvestment = lottoGameReport.getReturnOnInvestment();
-        final Money expect = new Money(prize.getPrizeMoney() / totalBuyingMoney);
+        final Money expect = new Money(prize.getPrizeMoney() * matchCount / totalBuyingMoney);
 
         // then
         assertThat(returnOnInvestment).isEqualTo(expect);
