@@ -28,7 +28,7 @@ public class StringCalculator {
     }
 
     private int sum(String[] string) {
-        return Stream.of(string).filter(character -> !character.isEmpty()).mapToInt(Integer::parseInt).sum();
+        return Stream.of(string).filter(s -> !s.isEmpty()).mapToInt(Integer::parseInt).sum();
     }
 
     private String[] split(String string) {
