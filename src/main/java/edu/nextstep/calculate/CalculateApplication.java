@@ -42,7 +42,7 @@ public class CalculateApplication {
                     .collect(Collectors.toList());
 
             List<Integer> convertedList = calculate.convertToInteger(calculateData);
-            System.out.println(calculate.sum(convertedList));
+            System.out.println("합계 : " + calculate.sum(convertedList));
         }
     }
 }
