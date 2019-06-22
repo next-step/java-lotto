@@ -3,7 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PatternFormulaTest {
-    private final static String REGEX = "(\\/\\/;\\\\n)?((\\d+)(,|:|;))+(\\d+)";
+    private final static String REGEX = "(\\/\\/.\\\\n)?((\\d+)(,|:|,))+(\\d+)";
     private final static String COMMA_TEST_FORMULA = "1,2,3";
     private final static String COLON_TEST_FORMULA = "1:2:3";
     private final static String MIX_TEST_FORMULA = "1,2:3";
@@ -33,7 +33,7 @@ class PatternFormulaTest {
         //Then
         Assertions.assertThatIllegalArgumentException()
           .isThrownBy(() -> new PatternFormula(INCORRECT_CUSTOM_SEPARATOR_FORMULA))
-          .withMessage(ErrorMessage.INCORRECT_CUSTOM_SEPARATE.getMessage());
+          .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
     
     @Test
@@ -44,7 +44,7 @@ class PatternFormulaTest {
         //Then
         Assertions.assertThatIllegalArgumentException()
           .isThrownBy(() -> new PatternFormula(INCORRECT_CUSTOM_SEPARATOR_FORMULA2))
-          .withMessage(ErrorMessage.INCORRECT_CUSTOM_SEPARATE.getMessage());
+          .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
     
     @Test

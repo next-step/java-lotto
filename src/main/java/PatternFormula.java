@@ -1,7 +1,7 @@
 import java.util.regex.Pattern;
 
 public class PatternFormula {
-    private final static String PATTERN_FORMULA_REGEX = "(\\/\\/;\\\\n)?((\\d+)(,|:|;))+(\\d+)";
+    private final static String PATTERN_FORMULA_REGEX = "(\\/\\/.\\n)?((\\d+)(,|:|.))+(\\d+)";
     private final static String DEFAULT_SEPARATORS = ",:"; 
     private final static String ENTER_REGEX = "(\\n)";
     private final static String CUSTOM_SEPARATOR_REGEX = "(\\/\\/.)";
@@ -24,9 +24,7 @@ public class PatternFormula {
     }
     
     private static boolean matchPattern(String patternFormula) {
-        return Pattern.compile(PATTERN_FORMULA_REGEX)
-          .matcher(patternFormula)
-          .find();
+        return patternFormula.matches(PATTERN_FORMULA_REGEX);
     }
     
     private static String getCustomSeparator(String patternFormula) {
