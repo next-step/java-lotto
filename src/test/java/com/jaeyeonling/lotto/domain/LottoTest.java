@@ -104,11 +104,9 @@ class LottoTest {
         // given
         final Money money = new Money(Env.PRICE_OF_LOTTO - 1);
         final Set<LottoNumber> lottoNumbers = getLottoNumbers(Env.COUNT_OF_LOTTO_NUMBER_IN_LOTTO);
-
-        // when
         final Lotto lotto = new Lotto(lottoNumbers);
 
-        // then
+        // when / then
         assertThatExceptionOfType(LowMoneyException.class)
                 .isThrownBy(() -> {
                     money.buy(lotto);
