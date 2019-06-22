@@ -1,6 +1,7 @@
 package com.jaeyeonling.lotto;
 
 import com.jaeyeonling.lotto.config.Env;
+import com.jaeyeonling.lotto.exception.LottoNumberShorterThanMinException;
 
 public class LottoNumber {
 
@@ -8,9 +9,9 @@ public class LottoNumber {
 
     LottoNumber(final int number) {
         if (number < Env.MIN_LOTTO_NUMBER) {
-            throw new IllegalArgumentException();
+            throw new LottoNumberShorterThanMinException(number);
         }
-        
+
         this.number = number;
     }
 }
