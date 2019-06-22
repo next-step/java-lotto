@@ -1,22 +1,22 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.Lottos.AMOUNT_PER_LOTTO;
-import static lotto.WinInfo.WIN_INFOS;
+import static lotto.domain.Lottos.AMOUNT_PER_LOTTO;
+import static lotto.domain.PrizeInfo.PRIZE_INFOS;
 
 public class Statistics {
 
-    private static final int BASE = 1;
+    private static final double BASE = 1.0;
 
     private final List<Statistic> statistics;
     private final int purchaseAmount;
 
     public Statistics(LastWeekNumbers lastWeekNumbers, Lottos lottos) {
 
-        this.statistics = WIN_INFOS.stream()
-                .map(winInfo -> new Statistic(winInfo, lottos.getLastWeekNumbersCorrectCount(winInfo.getMatchCount(), lastWeekNumbers)))
+        this.statistics = PRIZE_INFOS.stream()
+                .map(prizeInfo -> new Statistic(prizeInfo, lottos.getLastWeekNumbersCorrectCount(prizeInfo.getMatchCount(), lastWeekNumbers)))
                 .collect(Collectors.toList());
         this.purchaseAmount = lottos.getLottoCount() * AMOUNT_PER_LOTTO;
     }

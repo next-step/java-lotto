@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
-public enum WinInfo {
+public enum PrizeInfo {
 
     THREE(3, 5000),
     FOUR(4, 50000),
@@ -10,12 +10,12 @@ public enum WinInfo {
     SIX(6, 2000000000),
     ;
 
-    public static final List<WinInfo> WIN_INFOS = Collections.unmodifiableList(Arrays.asList(THREE, FOUR, FIVE, SIX));
+    public static final List<PrizeInfo> PRIZE_INFOS = Collections.unmodifiableList(Arrays.asList(THREE, FOUR, FIVE, SIX));
 
     private final int matchCount;
     private final int prizeMoney;
 
-    WinInfo(int matchCount, int prizeMoney) {
+    PrizeInfo(int matchCount, int prizeMoney) {
 
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;

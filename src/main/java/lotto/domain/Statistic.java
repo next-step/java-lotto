@@ -1,24 +1,24 @@
-package lotto;
+package lotto.domain;
 
 public class Statistic {
 
-    private final WinInfo winInfo;
+    private final PrizeInfo prizeInfo;
     private final long prizeCount;
 
-    public Statistic(WinInfo winInfo, long prizeCount) {
+    public Statistic(PrizeInfo prizeInfo, long prizeCount) {
 
-        this.winInfo = winInfo;
+        this.prizeInfo = prizeInfo;
         this.prizeCount = prizeCount;
     }
 
     public int getMatchCount() {
 
-        return winInfo.getMatchCount();
+        return prizeInfo.getMatchCount();
     }
 
     public int getPrizeMoney() {
 
-        return winInfo.getPrizeMoney();
+        return prizeInfo.getPrizeMoney();
     }
 
     public long getPrizeCount() {

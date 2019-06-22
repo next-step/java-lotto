@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.*;
+import lotto.domain.*;
 
 import java.io.PrintStream;
 

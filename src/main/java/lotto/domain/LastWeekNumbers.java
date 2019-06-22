@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,7 +32,7 @@ public class LastWeekNumbers {
 
     private void validate() {
 
-        if (this.lastWeekNumbers.size() != MUST_LOTTO_COUNT) {
+        if (lastWeekNumbers == null || lastWeekNumbers.size() != MUST_LOTTO_COUNT) {
             throw new IllegalArgumentException("로또 개수는 " + MUST_LOTTO_COUNT + "개 여야 합니다.");
         }
     }
