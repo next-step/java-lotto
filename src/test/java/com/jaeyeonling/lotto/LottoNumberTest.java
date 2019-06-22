@@ -40,4 +40,10 @@ class LottoNumberTest {
             new LottoNumber(Env.MAX_LOTTO_NUMBER + 1);
         });
     }
+
+    @DisplayName("LottoNumber 가 같은 값을 가질 경우 같은 객체 확인")
+    @Test
+    void should_return_true_when_equals_sameLottoNumber() {
+        assertThat(new LottoNumber(Env.MAX_LOTTO_NUMBER)).isEqualTo(new LottoNumber(Env.MAX_LOTTO_NUMBER));
+    }
 }
