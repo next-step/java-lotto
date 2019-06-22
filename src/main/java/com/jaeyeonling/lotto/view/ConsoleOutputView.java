@@ -27,6 +27,18 @@ public final class ConsoleOutputView {
         printWinningReportFooter(report);
     }
 
+    public static void print(final Object message) {
+        CONSOLE.println(message);
+    }
+
+    public static void newline() {
+        CONSOLE.println();
+    }
+
+    private static void printWinningReportHeader() {
+        ConsoleOutputView.print(Env.WINNING_REPORT_HEADER);
+    }
+
     private static void printWinningReportMatchTemplate(final LottoGameReport report) {
         Arrays.stream(LottoPrize.values())
                 .forEach(prize -> printWinningReportMatchTemplate(prize, report));
@@ -38,18 +50,6 @@ public final class ConsoleOutputView {
                 prize.getCountOfMatch(), prize.getPrizeMoney(), report.getMatchCount(prize));
 
         ConsoleOutputView.print(message);
-    }
-
-    public static void print(final Object message) {
-        CONSOLE.println(message);
-    }
-
-    public static void newline() {
-        CONSOLE.println();
-    }
-
-    private static void printWinningReportHeader() {
-        ConsoleOutputView.print(Env.WINNING_REPORT_HEADER);
     }
 
     private static void printWinningReportFooter(final LottoGameReport report) {
