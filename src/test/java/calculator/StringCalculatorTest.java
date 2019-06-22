@@ -3,7 +3,7 @@ package calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -43,6 +43,11 @@ public class StringCalculatorTest {
     @Test
     void add_custom_separator_and_comma_colon() {
         assertThat(stringCalculator.splitAndSum("//;\n1;2:3,4")).isEqualTo(10);
+    }
+
+    @Test
+    void validate() {
+        assertThatIllegalArgumentException().isThrownBy(() -> stringCalculator.splitAndSum("-1,4,4"));
     }
 }
 
