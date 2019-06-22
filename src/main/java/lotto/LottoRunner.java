@@ -3,6 +3,8 @@ package lotto;
 public class LottoRunner {
 
   public static void main(String[] args) {
-    System.out.println("lotto runner");
+
+    int amount = LottoInputView.askPurchaseAmount();
+    System.out.println(amount > 0);
   }
 }
