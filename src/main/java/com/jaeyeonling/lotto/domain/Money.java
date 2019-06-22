@@ -21,8 +21,8 @@ public class Money {
         spend(item.getPrice());
     }
 
-    boolean isCanBuy(final Dealable item) {
-        return !isLowMoney(item.getPrice());
+    boolean isCanBuy(final Money price) {
+        return !isLowMoney(price);
     }
 
     private void spend(final Money price) {

@@ -40,10 +40,9 @@ class MoneyTest {
         // given
         final Money money = new Money(balanceValue);
         final Money itemPrice = new Money(balanceValue);
-        final Dealable item = () -> itemPrice;
 
         // when
-        final boolean isCanBuy = money.isCanBuy(item);
+        final boolean isCanBuy = money.isCanBuy(itemPrice);
 
         // then
         assertThat(isCanBuy).isTrue();
@@ -61,10 +60,9 @@ class MoneyTest {
         // given
         final Money money = new Money(balanceValue - 1);
         final Money itemPrice = new Money(balanceValue);
-        final Dealable item = () -> itemPrice;
 
         // when
-        final boolean isCanBuy = money.isCanBuy(item);
+        final boolean isCanBuy = money.isCanBuy(itemPrice);
 
         // then
         assertThat(isCanBuy).isFalse();
