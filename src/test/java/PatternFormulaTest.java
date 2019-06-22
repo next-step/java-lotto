@@ -10,6 +10,7 @@ class PatternFormulaTest {
     private final static String FORMULA_WITH_CUSTOM_SEPARATOR = "//;\n1;2;3";
     private final static String FORMULA_WITH_INCORRECT_SEPARATOR = "//;\n1;2;3*4";
     private final static String INCORRECT_CUSTOM_SEPARATOR_FORMULA = "//\n1;2;3";
+    private final static String INCORRECT_CUSTOM_SEPARATOR_FORMULA2 = "//aa\n1;2;3";
     private final static String CUSTOM_SEPARATOR = ";";
     private final static String NUMBER_FORMULA = "1;2;3";
     
@@ -29,6 +30,18 @@ class PatternFormulaTest {
     void separateCustomSeparatorExceptionTest() {
         //Given
         PatternFormula formula = new PatternFormula(INCORRECT_CUSTOM_SEPARATOR_FORMULA);
+        //When
+        //Then
+        Assertions.assertThatIllegalArgumentException()
+          .isThrownBy(() -> formula.getCustomSeparator())
+          .withMessage(ErrorMessage.INCORRECT_CUSTOM_SEPARATE.getMessage());
+    }
+    
+    @Test
+    @DisplayName("커스텀 구분자가 2자리 이상인 경우 : 불가")
+    void test() {
+        //Given
+        PatternFormula formula = new PatternFormula(INCORRECT_CUSTOM_SEPARATOR_FORMULA2);
         //When
         //Then
         Assertions.assertThatIllegalArgumentException()
@@ -89,16 +102,5 @@ class PatternFormulaTest {
         boolean patternMatch = formula.matchPattern(REGEX);
         //Then
         Assertions.assertThat(patternMatch).isTrue();
-    }
-    
-    @Test
-    @DisplayName("쉼표, 콜론, 커스텀 구분자, 숫자 외 다른 문자열이 포함된 경우 : 분리 불가")
-    void throwExceptionTest() {
-        //Given
-        PatternFormula formula = new PatternFormula(FORMULA_WITH_INCORRECT_SEPARATOR);
-        //When
-        boolean patternMatch = formula.matchPattern(REGEX);
-        //Then
-        Assertions.assertThat(patternMatch).isFalse();
     }
 }

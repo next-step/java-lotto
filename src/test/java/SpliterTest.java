@@ -11,8 +11,6 @@ class SpliterTest {
     @Test
     @DisplayName("위의 기준으로 분리가 가능하면 쉼표와 콜론으로 문자열을 분리한다.")
     void separateTest() {
-        //Given
-        PatternFormula formula = new PatternFormula(CUSTOM_SEPARATOR_FORMULA);
         Spliter spliter = new Spliter(COMMA, COLON);
         //When
         String[] splitNumbers = spliter.split(CUSTOM_SEPARATOR_FORMULA);

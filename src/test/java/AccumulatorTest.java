@@ -6,8 +6,12 @@ public class AccumulatorTest {
     @Test
     @DisplayName("분리된 숫자의 합을 반환.")
     void accumulateTest() {
+        //Given
         int[] testData = {1, 2, 3};
-        int result = 6;
-        Assertions.assertThat(Accumulator.accumulate(testData)).isEqualTo(result);
+        int expectedResult = 6;
+        //When
+        int result = Accumulator.accumulate(testData);
+        //Then
+        Assertions.assertThat(result).isEqualTo(expectedResult);
     }
 }

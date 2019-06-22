@@ -1,5 +1,4 @@
 public class Spliter {
-    private final static String ENTER_REGEX = "(\\n)";
     private final static String SEPARATOR_JOINER = "";
     private final static int SEPARATOR_INDEX = 0;
     private final static int FORMULA_INDEX = 1;
@@ -11,12 +10,6 @@ public class Spliter {
     }
     
     public String[] split(final String formula) {
-        return separators.getSplitStrings(separateFormulaAndSeparator(formula));
-    }
-    
-    private String separateFormulaAndSeparator(final String formula) {
-        final String[] splitStrings = formula.split(ENTER_REGEX);
-        separators.add(splitStrings[SEPARATOR_INDEX]);
-        return splitStrings[FORMULA_INDEX];
+        return separators.getSplitStrings(formula);
     }
 }
