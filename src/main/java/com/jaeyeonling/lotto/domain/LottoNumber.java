@@ -13,10 +13,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(final int number) {
-        if (number < LottoNumber.MIN) {
+        if (number < MIN) {
             throw new LottoNumberShorterThanMinException(number);
         }
-        if (number > LottoNumber.MAX) {
+        if (number > MAX) {
             throw new LottoNumberLongerThanMaxException(number);
         }
 

@@ -17,7 +17,7 @@ public class Lotto implements Dealable {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != Lotto.COUNT_OF_LOTTO_NUMBER) {
+        if (lottoNumbers.size() != COUNT_OF_LOTTO_NUMBER) {
             throw new InvalidCountOfLottoNumberException(lottoNumbers.size());
         }
 

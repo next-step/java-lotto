@@ -19,7 +19,7 @@ public class Money {
     }
 
     boolean canBuy(final Money price) {
-        return this.money - price.money >= Money.MINIMUM;
+        return this.money - price.money >= MINIMUM;
     }
 
     private void spend(final Money price) {
