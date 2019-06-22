@@ -12,8 +12,8 @@
 
 ### step 1 - 문자열 덧셈 계산기
 - [ ] 빈 문자열 또는 null 값을 입력할 경우 0을 반환
-    - [ ] TEST FAIL
-    - [ ] TEST PASS
+    - [x] TEST FAIL
+    - [x] TEST PASS
     - [ ] REFACTORING
 - [ ] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환
     - [ ] TEST FAIL
