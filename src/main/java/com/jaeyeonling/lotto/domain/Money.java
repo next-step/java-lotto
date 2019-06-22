@@ -19,19 +19,15 @@ public class Money {
     }
 
     boolean canBuy(final Money price) {
-        return !isLowMoney(price);
+        return this.money - price.money > Money.MINIMUM;
     }
 
     private void spend(final Money price) {
-        if (isLowMoney(price)) {
+        if (!canBuy(price)) {
             throw new LowMoneyException(money, price.money);
         }
 
         money -= price.money;
-    }
-
-    private boolean isLowMoney(final Money price) {
-        return this.money - price.money < Money.MINIMUM;
     }
 
     @Override
