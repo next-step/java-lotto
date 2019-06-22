@@ -28,20 +28,20 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void add_input_string_with_colon(){
+    void add_input_string_with_colon() {
         assertThat(stringCalculator.splitAndSum("1:2:3")).isEqualTo(6);
     }
 
 
     @Test
-    void add_input_string_with_comma(){
+    void add_input_string_with_comma() {
         assertThat(stringCalculator.splitAndSum("1,2,3")).isEqualTo(6);
     }
 
 
-
-
-
-
-
+    @Test
+    void add_custom_separator() {
+        assertThat(stringCalculator.splitAndSum("//;\n1;2;3")).isEqualTo(6);
+    }
 }
+
