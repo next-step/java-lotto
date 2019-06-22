@@ -6,6 +6,8 @@ package calculator;
  * Github : http://github.com/wyparks2
  */
 public class Calculator {
+    private static final String DELIMITER = ",|:";
+
     public int add(String text) {
         String[] tokens = split(text);
 
@@ -18,6 +20,6 @@ public class Calculator {
     }
 
     private String[] split(String text) {
-        return text == null || text.isEmpty() ? new String[0] : text.split(",");
+        return text == null || text.isEmpty() ? new String[0] : text.split(DELIMITER);
     }
 }

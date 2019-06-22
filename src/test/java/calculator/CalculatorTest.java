@@ -45,8 +45,14 @@ public class CalculatorTest {
         assertThat(calculator.add(input)).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @CsvSource(
+            value = {"1,2:3=6", "2,3:5=10", "0,1:1=2"},
+            delimiter = '=')
+    void add_콤마_또는_콜론_구분자(String input, int expected) {
+        assertThat(calculator.add(input)).isEqualTo(expected);
+    }
 
-    // TODO 구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.
 
     // TODO “//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.
 
