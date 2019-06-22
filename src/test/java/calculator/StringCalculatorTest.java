@@ -21,4 +21,9 @@ public class StringCalculatorTest {
         assertThat(stringCalculator.splitAndSum("")).isEqualTo(0);
     }
 
+    @Test
+    void add_input_string(){
+        assertThat(stringCalculator.splitAndSum("1:2:3")).isEqualTo(6);
+    }
+
 }
