@@ -1,4 +1,6 @@
-package lotto;
+package lotto.model;
+
+import lotto.exception.InvalidCountOfLottoException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +17,7 @@ public class Lotto {
     public static Lotto from(List<Number> numbers) {
         numbers = removeDuplicateNumbers(numbers);
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(String.format("%d개의 로또번호를 입력해주세요.", LOTTO_SIZE));
+            throw new InvalidCountOfLottoException(numbers.size());
         }
         return new Lotto(numbers);
     }
