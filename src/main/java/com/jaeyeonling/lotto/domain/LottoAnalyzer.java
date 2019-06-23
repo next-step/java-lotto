@@ -16,10 +16,6 @@ public class LottoAnalyzer {
     }
 
     public LottoGameReport analyze(final List<Lotto> lottos) {
-        return getLottoGameReport(lottos);
-    }
-
-    private LottoGameReport getLottoGameReport(final List<Lotto> lottos) {
         return new LottoGameReport(getMatchCountByLottoPrize(lottos));
     }
 
