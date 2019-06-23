@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
 
@@ -11,12 +12,21 @@ public class LottoNumbers {
     this.lottoNumbers = lottoNumbers;
   }
 
-  public Object getSize() {
+  public int getSize() {
     return lottoNumbers.size();
   }
 
   public List<LottoNumber> getValues() {
     return lottoNumbers;
+  }
+
+  public int countSameNumber(LottoNumbers numbers) {
+    int twoLottoNumbersCount = this.getSize() + numbers.getSize();
+    int deDuplicationCount = (int) Stream.of(this.getValues(), numbers.getValues())
+        .flatMap(x -> x.stream())
+        .distinct()
+        .count();
+    return twoLottoNumbersCount - deDuplicationCount;
   }
 
   @Override
@@ -42,4 +52,5 @@ public class LottoNumbers {
         "lottoNumbers=" + lottoNumbers +
         '}';
   }
+
 }
