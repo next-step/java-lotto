@@ -9,7 +9,11 @@ public class StringSplitter {
     private static final String DEFAULT_SEPARATOR = "[,:]";
     private static final Pattern CUSTOM_SEPARATOR = compile("//(.)\n(.*)");
 
-    public static String[] splitString(String inputString) {
+    public static Elements splitToElements(String inputString) {
+        return Elements.from(splitToArray(inputString));
+    }
+
+    public static String[] splitToArray(String inputString) {
         String[] elements = inputString.split(DEFAULT_SEPARATOR);
         Matcher m = CUSTOM_SEPARATOR.matcher(inputString);
         if(m.find()) {
