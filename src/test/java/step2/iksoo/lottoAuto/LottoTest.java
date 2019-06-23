@@ -21,7 +21,7 @@ public class LottoTest {
     }
 
     @Test
-    void 숫자_여섯개() {
+    void 로또_구입완료() {
         assertThat(lotto.isNumSize(LOTTO_SIZE)).isTrue();
     }
 
