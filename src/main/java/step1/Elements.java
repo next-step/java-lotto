@@ -6,7 +6,11 @@ import java.util.List;
 public class Elements {
     private List<Element> elements;
 
-    public Elements(List<Element> inputString) {
+    private Elements(List<Element> inputString) {
         this.elements = new ArrayList<>(inputString);
+    }
+
+    public static Elements from(List<Element> testElements) {
+        return new Elements(testElements);
     }
 }
