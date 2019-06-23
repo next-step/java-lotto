@@ -1,7 +1,6 @@
 package lotto.model;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -15,7 +14,16 @@ public class LottoTicket {
         return new LottoTicket(lottos);
     }
 
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public LottoResult result(Lotto winningLotto) {
+        List<Prize> prizes = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            prizes.add(Prize.of(lotto.getMatchCount(winningLotto)));
+        }
+        return LottoResult.of(prizes);
     }
 }

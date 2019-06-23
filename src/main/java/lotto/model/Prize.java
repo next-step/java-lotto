@@ -23,20 +23,6 @@ public enum Prize {
                 .filter(prize1 -> prize1.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE);
-
         return result;
     }
-
-    public static Prize of(Lotto lotto, Lotto winningLotto) {
-
-        int matchCount = lotto.matchCount(winningLotto);
-
-        Prize result = Arrays.stream(Prize.values())
-                .filter(prize1 -> prize1.matchCount == matchCount)
-                .findFirst()
-                .orElse(NONE);
-
-        return result;
-    }
-
 }
