@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
 
@@ -12,5 +13,12 @@ public class LottoMachine {
             lottos.add(LottoGenerator.generate());
         }
         return LottoTicket.of(lottos);
+    }
+
+    public static Lotto getWinningLotto(List<Integer> inputNumbers) {
+        List<Number> numbers = inputNumbers.stream()
+                .map(Number::of)
+                .collect(Collectors.toList());
+        return LottoGenerator.generate(numbers);
     }
 }

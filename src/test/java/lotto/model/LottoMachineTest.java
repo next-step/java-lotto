@@ -4,6 +4,10 @@ import lotto.exception.MinimumAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static lotto.model.LottoTest.ofLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -12,6 +16,17 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 // 3. 당첨 결과 확인
 // 2. void - > 당첨 로또번호
 public class LottoMachineTest {
+
+    @DisplayName("당첨번호를 생성합니다")
+    @Test
+    void createWinningLotto() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        Lotto winningLotto = LottoMachine.getWinningLotto(numbers);
+
+        assertThat(winningLotto).isNotNull();
+        assertThat(winningLotto).isEqualTo(ofLotto(1, 2, 3, 4, 5, 6));
+    }
 
     @DisplayName("한개의 로또를 구매한다")
     @Test
@@ -23,7 +38,7 @@ public class LottoMachineTest {
         assertThat(result.getLottos()).hasSize(1);
     }
 
-    @DisplayName("14000원이면 로또를 구매할 수 없다.")
+    @DisplayName("14000원이면 로또를 구매할 수 없다")
     @Test
     void buyManyLottoWithMoney() {
         Money money = Money.wons(14000);
@@ -33,7 +48,7 @@ public class LottoMachineTest {
         assertThat(lottoTicket.getLottos()).hasSize(14);
     }
 
-    @DisplayName("0원이면 로또를 구매할 수 없다.")
+    @DisplayName("0원이면 로또를 구매할 수 없다")
     @Test
     void buyLottoWithZeroMoney() {
         Money money = Money.wons(0);
