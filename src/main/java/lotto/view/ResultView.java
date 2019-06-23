@@ -1,4 +1,11 @@
 package lotto.view;
 
-public interface ResultView {
+import lotto.common.Outer;
+
+public class ResultView {
+    private Outer outer;
+
+    public ResultView(Outer outer) {
+        this.outer = outer;
+    }
 }

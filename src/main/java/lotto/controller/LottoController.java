@@ -13,6 +13,8 @@ public class LottoController {
     }
     
     public void runBuyingLottoProcess() {
+        consoleInputView.printCashAnswer();
+        int cashPayment = consoleInputView.getUserInputCashPayment();
     }
     
     public void runResultProcess() {
