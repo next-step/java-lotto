@@ -1,21 +1,19 @@
 package lotto;
 
-import lotto.model.LottoTicket;
 import lotto.model.*;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class Application {
+
     public static void main(String[] args) {
-        System.out.println("구입할 금액을 입력하세요.");
-        Money money = Money.wons(14000);
+        Money money = InputView.askOfAmount();
+
         LottoTicket lottoTicket = LottoMachine.buy(money);
+        OutputView.printLottoTicket(lottoTicket);
 
-        System.out.println("당첨번호를 입력하세요.");
-        String input = "1,2,3,4,5,6";
+        Lotto winningLotto = LottoMachine.getWinningLotto(InputView.askOfWinningNumbers());
 
-
-
-
-        LottoGenerator.generate();
-
+        OutputView.printReport(lottoTicket.result(winningLotto));
     }
 }
