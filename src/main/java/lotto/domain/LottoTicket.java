@@ -33,4 +33,8 @@ public class LottoTicket {
       throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
     }
   }
+
+  public int winNumberSize(List<Integer> winNumber) {
+    return 0;
+  }
 }
