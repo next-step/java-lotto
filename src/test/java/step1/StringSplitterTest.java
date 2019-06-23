@@ -5,13 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringSplitterTest {
+
     @Test
-    void 문자열_분할기를_생성한다() {
+    void 입력된_문자열을_규칙에_따라_분할한다() {
         //Given
-        StringSplitter splitter = new StringSplitter();
+        String inputString = "1,2,3";
+        String[] expectedResult = new String[]{"1", "2", "3"};
 
         //When
+        String[] splitResult = StringSplitter.splitString(inputString);
+
         //Then
-        assertThat(splitter).isNotNull();
+        assertThat(splitResult).isEqualTo(expectedResult);
     }
 }
