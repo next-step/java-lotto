@@ -1,4 +1,6 @@
-package lotto;
+package lotto.model;
+
+import lotto.exception.InvalidNumberException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +8,8 @@ import java.util.Objects;
 
 public class Number {
 
-    static final int MIN = 1;
-    static final int MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
     private static Map<Integer, Number> CACHE = new HashMap<>();
     private int number;
 
@@ -25,7 +27,7 @@ public class Number {
 
     private static void validateNumber(int number) {
         if (number < MIN || number > MAX) {
-            throw new IllegalArgumentException(String.format("로또숫자는 %d ~ %d 사이입니다.", MIN, MAX));
+            throw new InvalidNumberException(number);
         }
     }
 
