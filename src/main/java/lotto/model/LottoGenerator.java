@@ -15,8 +15,8 @@ public class LottoGenerator {
 
     static {
         NUMBERS = IntStream.rangeClosed(MIN, MAX)
-                            .mapToObj(Number::of)
-                            .collect(toList());
+                .mapToObj(Number::of)
+                .collect(toList());
     }
 
     public static Lotto generate() {
