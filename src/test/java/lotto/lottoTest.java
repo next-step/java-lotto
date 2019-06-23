@@ -61,4 +61,23 @@ public class lottoTest {
         assertThat(lotto.getResultText()).isEqualTo(resultText);
     }
 
+    @Test
+    @DisplayName("총 수익룰 계산 기능 구현")
+    void lottoRateOfReturn(){
+        LottoGames lottoGames = new LottoGames();
+        String LastWeekWinnerNumber = "6,13,23,29,35,42";
+        Integer[][] testLottoSet = {
+                {6,13,23,30,36,43},
+                {1,5,7,8,9,19},
+                {22,23,34,35,36,45}
+        };
+        for(Integer[] lottos : testLottoSet){
+            List<Integer> lottoNumber = Arrays.asList(lottos);
+            Lotto lotto = new Lotto(lottoNumber);
+            lotto.winnerCheck(LastWeekWinnerNumber);
+            lottoGames.setLotto(lotto);
+        }
+        assertThat(lottoGames.rateOfReturn()).isEqualTo(166.67);
+    }
+
 }
