@@ -6,10 +6,10 @@ public class LottoGameReport {
 
     private static final int DEFAULT_MATCH_COUNT = 0;
 
-    private final Map<LottoPrize, Integer> matchCountByLottoPrize;
+    private final Map<LottoPrize, Integer> countOfEachLottoPrize;
 
-    public LottoGameReport(final Map<LottoPrize, Integer> matchCountByLottoPrize) {
-        this.matchCountByLottoPrize = matchCountByLottoPrize;
+    public LottoGameReport(final Map<LottoPrize, Integer> countOfEachLottoPrize) {
+        this.countOfEachLottoPrize = countOfEachLottoPrize;
     }
 
     public Money getTotalPrizeMoney() {
@@ -17,7 +17,7 @@ public class LottoGameReport {
     }
 
     public int getMatchCountByPrize(final LottoPrize prize) {
-        return matchCountByLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
+        return countOfEachLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
     }
 
     public double getReturnOnInvestment() {
@@ -25,7 +25,7 @@ public class LottoGameReport {
     }
 
     private long calculateTotalPrizeMoneyValue() {
-        return matchCountByLottoPrize.keySet()
+        return countOfEachLottoPrize.keySet()
                 .stream()
                 .mapToLong(this::calculatePrizeMoney)
                 .sum();
@@ -36,7 +36,7 @@ public class LottoGameReport {
     }
 
     private long calculateBuyingMoney() {
-        return matchCountByLottoPrize.values()
+        return countOfEachLottoPrize.values()
                 .stream()
                 .mapToLong(this::calculatePriceOfLotto)
                 .sum();

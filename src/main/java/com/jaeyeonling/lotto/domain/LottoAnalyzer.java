@@ -16,27 +16,27 @@ public class LottoAnalyzer {
     }
 
     public LottoGameReport analyze(final List<Lotto> lottos) {
-        return new LottoGameReport(generateMatchCountByLottoPrize(lottos));
+        return new LottoGameReport(countOfEachLottoPrizeByLottos(lottos));
     }
 
-    private Map<LottoPrize, Integer> generateMatchCountByLottoPrize(final List<Lotto> lottos) {
-        final Map<LottoPrize, Integer> matchCountByLottoPrize = new HashMap<>();
+    private Map<LottoPrize, Integer> countOfEachLottoPrizeByLottos(final List<Lotto> lottos) {
+        final Map<LottoPrize, Integer> countOfEachLottoPrize = new HashMap<>();
         for (final Lotto lotto : lottos) {
-            final LottoPrize prize = findLottoPrizeByLotto(lotto);
-            incrementPrizeMatchCount(matchCountByLottoPrize, prize);
+            final LottoPrize prize = matchWithWinningLotto(lotto);
+            countLottoPrize(countOfEachLottoPrize, prize);
         }
 
-        return matchCountByLottoPrize;
+        return countOfEachLottoPrize;
     }
 
-    private LottoPrize findLottoPrizeByLotto(final Lotto lotto) {
+    private LottoPrize matchWithWinningLotto(final Lotto lotto) {
         final int countOfMatch = winningLotto.countOfMatch(lotto);
         return LottoPrize.valueOf(countOfMatch);
     }
 
-    private void incrementPrizeMatchCount(final Map<LottoPrize, Integer> matchCountByLottoPrize,
-                                          final LottoPrize prize) {
-        final int currentMatchCount = matchCountByLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
-        matchCountByLottoPrize.put(prize, currentMatchCount + INCREMENT_MATCH_COUNT);
+    private void countLottoPrize(final Map<LottoPrize, Integer> countOfEachLottoPrize,
+                                 final LottoPrize prize) {
+        final int currentMatchCount = countOfEachLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
+        countOfEachLottoPrize.put(prize, currentMatchCount + INCREMENT_MATCH_COUNT);
     }
 }
