@@ -1,29 +1,26 @@
 package lotto.domain;
 
-import java.util.*;
-
 public enum PrizeInfo {
 
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000),
+    THREE(PrizeRule.THREE, 5000),
+    FOUR(PrizeRule.FOUR, 50000),
+    FIVE(PrizeRule.FIVE, 1500000),
+    FIVE_WITH_BONUS(PrizeRule.FIVE_WITH_BONUS, 1500000),
+    SIX(PrizeRule.SIX, 2000000000),
     ;
 
-    public static final List<PrizeInfo> PRIZE_INFOS = Collections.unmodifiableList(Arrays.asList(THREE, FOUR, FIVE, SIX));
-
-    private final int matchCount;
+    private final PrizeRule prizeRule;
     private final int prizeMoney;
 
-    PrizeInfo(int matchCount, int prizeMoney) {
+    PrizeInfo(PrizeRule prizeRule, int prizeMoney) {
 
-        this.matchCount = matchCount;
+        this.prizeRule = prizeRule;
         this.prizeMoney = prizeMoney;
     }
 
-    public int getMatchCount() {
+    public PrizeRule getPrizeRule() {
 
-        return matchCount;
+        return prizeRule;
     }
 
     public int getPrizeMoney() {

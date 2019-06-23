@@ -14,7 +14,9 @@ public class Main {
         ResultView.printPurchasedLottoCount(purchaseAmount.getPurchasedLottosCount());
         ResultView.printLottosNumber(lottos);
 
-        WonNumbers wonNumbers = new WonNumbers(InputView.askWonNumbers());
+        String wonNormalNumbers = InputView.askWonNormalNumbers();
+        String wonBousNumbers = InputView.askWonNormalNumbers();
+        WonNumbers wonNumbers = new WonNumbers(InputView.askWonNormalNumbers(), InputView.askWonBonusNumbers());
         Statistics statistics = new Statistics(wonNumbers, lottos);
         ResultView.printStatistics(statistics);
     }

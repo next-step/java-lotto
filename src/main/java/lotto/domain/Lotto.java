@@ -24,17 +24,27 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean countCorrectsByCompareWonNumbers(int corrects, WonNumbers wonNumbers) {
+    public boolean isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
 
-        return countContainingWonNumbers(wonNumbers) == corrects;
+        if (prizeRule.hasBonusNumber()) {
+            return isMatchNormalNumberCount(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
+                    isMatchBonusNumber(wonNumbers.getWonBonusNumbers());
+        }
+
+        return isMatchNormalNumberCount(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers());
     }
 
-    private long countContainingWonNumbers(WonNumbers wonNumbers) {
+    private boolean isMatchNormalNumberCount(int normalNumberCount, List<Integer> wonNormalNumbers) {
 
-        return wonNumbers.getWonNumbers()
+        return wonNormalNumbers
                 .stream()
                 .filter(lottoNumbers::contains)
-                .count();
+                .count() == normalNumberCount;
+    }
+
+    private boolean isMatchBonusNumber(int wonBonusNumber) {
+
+        return lottoNumbers.contains(wonBonusNumber);
     }
 
     private void sortLottoNumberAsc(List<Integer> lottoNumbers) {

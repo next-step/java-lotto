@@ -2,24 +2,28 @@ package lotto.domain;
 
 import lotto.utils.LottoNumberValidator;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class WonNumbers {
 
     private static final String DELIMITER = ",";
 
-    private final List<Integer> wonNumbers;
+    private final List<Integer> wonNormalNumbers;
+    private final int wonBonusNumbers;
 
-    public WonNumbers(String wonNumbersValue) {
+    public WonNumbers(String wonNormalNumbersValue, String wonBonusNumbers) {
 
-        if (wonNumbersValue == null || wonNumbersValue.isEmpty()) {
+        if (wonNormalNumbersValue == null || wonNormalNumbersValue.isEmpty()) {
             throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
         }
 
-        List<Integer> wonNumbers = parse(wonNumbersValue);
-        LottoNumberValidator.validate(wonNumbers);
-        this.wonNumbers = wonNumbers;
+        List<Integer> wonNormalNumbers = parse(wonNormalNumbersValue);
+        LottoNumberValidator.validate(wonNormalNumbers);
+        // TODO
+        this.wonNormalNumbers = wonNormalNumbers;
+        this.wonBonusNumbers = Integer.parseInt(wonBonusNumbers);
     }
 
     private List<Integer> parse(String wonNumbersValue) {
@@ -30,23 +34,13 @@ public class WonNumbers {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getWonNumbers() {
+    public List<Integer> getWonNormalNumbers() {
 
-        return wonNumbers;
+        return wonNormalNumbers;
     }
 
-    @Override
-    public boolean equals(Object o) {
+    public int getWonBonusNumbers() {
 
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WonNumbers that = (WonNumbers) o;
-        return Objects.equals(wonNumbers, that.wonNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(wonNumbers);
+        return wonBonusNumbers;
     }
 }

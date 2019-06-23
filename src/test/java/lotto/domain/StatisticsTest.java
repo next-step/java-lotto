@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StatisticsTest {
 
-    private WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6");
+    private WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6", "7");
     private List<Lotto> stubLottos = Arrays.asList(
             new Lotto(new StubLottoGenerator(Arrays.asList(8, 21, 23, 41, 42, 43))),
             new Lotto(new StubLottoGenerator(Arrays.asList(3, 5, 11, 16, 32, 38))),
