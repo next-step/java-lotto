@@ -20,20 +20,27 @@ public class LottoMachineTest {
     @Test
     void buyLottoWithMoney() {
         Money money = Money.wons(1000);
-        assertThat(LottoMachine.sellTo(money)).hasSize(1);
+
+        LottoTicket result = LottoMachine.sellTo(money);
+
+        assertThat(result.getLottos()).hasSize(1);
     }
 
     @DisplayName("14000원이면 로또를 구매할 수 없다.")
     @Test
     void buyManyLottoWithMoney() {
         Money money = Money.wons(14000);
-        assertThat(LottoMachine.sellTo(money)).hasSize(14);
+
+        LottoTicket lottoTicket = LottoMachine.sellTo(money);
+
+        assertThat(lottoTicket.getLottos()).hasSize(14);
     }
 
     @DisplayName("0원이면 로또를 구매할 수 없다.")
     @Test
     void buyLottoWithZeroMoney() {
         Money money = Money.wons(0);
+
         assertThatExceptionOfType(MinimumAmountException.class)
                 .isThrownBy(() -> LottoMachine.sellTo(money));
     }

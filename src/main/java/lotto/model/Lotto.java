@@ -3,11 +3,13 @@ package lotto.model;
 import lotto.exception.InvalidCountOfLottoException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int LOTTO_SIZE = 6;
+    public static final Money PRICE = Money.wons(1000);
+    public static final int SIZE = 6;
     private final List<Number> numbers;
 
     private Lotto(List<Number> numbers) {
@@ -16,7 +18,7 @@ public class Lotto {
 
     public static Lotto from(List<Number> numbers) {
         numbers = removeDuplicateNumbers(numbers);
-        if (numbers.size() != LOTTO_SIZE) {
+        if (numbers.size() != SIZE) {
             throw new InvalidCountOfLottoException(numbers.size());
         }
         return new Lotto(numbers);
@@ -27,5 +29,26 @@ public class Lotto {
                 .distinct()
                 .collect(Collectors.toList());
         return numbers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+
+    @Override
+    public String
+    toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
