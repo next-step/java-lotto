@@ -14,7 +14,7 @@ public class ElementTest {
         Element element = new Element(testValue);
         //When
         //Then
-        assertThat(element.value).isEqualTo(1);
+        assertThat(element.value).isEqualTo(testValue);
     }
 
     @Test
@@ -34,30 +34,32 @@ public class ElementTest {
         Element element = Element.from(testValue);
         //When
         //Then
-        assertThat(element.value).isEqualTo(1);
+        assertThat(element.value).isEqualTo(Integer.parseInt(testValue));
     }
 
     @Test
     void 음수값이_전달될_경우_RuntimeException이_발생한다() {
         //Given
-        String testValue = "-1";
+        int testValue = -1;
         //When
         //Then
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
                     Element.from(testValue);
-                }).withMessageContaining("음수");
+                }).withMessageContaining(Element.ALERT_FOR_NEGATIVE_NUMBER);
     }
 
     @Test
     void 문자값이_전달될_경우_RuntimeException이_발생한다() {
         //Given
-        String testValue = "안녕!? 내 이름은 문자야 :)";
+        String invalidString = "안녕!? 내 이름은 문자야 :)";
+        String negativeString = "-1";
         //When
         //Then
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> {
-                    Element.from(testValue);
-                }).withMessageContaining("0 이상의 자연수");
+                    Element.from(invalidString);
+                    Element.from(negativeString);
+                }).withMessageContaining(Element.ALERT_FOR_INVALID_INPUT_VALUE);
     }
 }
