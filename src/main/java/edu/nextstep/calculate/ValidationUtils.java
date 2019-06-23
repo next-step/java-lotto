@@ -19,18 +19,18 @@ public class ValidationUtils {
 
     public static boolean isNumber(String number) {
         Matcher m = Pattern.compile(REGEX_PATTERN_NUMBER).matcher(number);
-        return m.find() ? true : false;
+        return m.find();
     }
 
-    public static boolean isNegativeNumber(int number) {
-        return number < 0 ? true : false;
+    public static boolean hasNegativeNumber(int number) {
+        return number < 0;
     }
 
     public static void validationNumber(String inValidChar) {
         if (!isNumber(inValidChar)) {
             throw new RuntimeException("숫자 형식이 아닙니다. [" + inValidChar + "]");
         }
-        if (isNegativeNumber(Integer.parseInt(inValidChar))) {
+        if (hasNegativeNumber(Integer.parseInt(inValidChar))) {
             throw new RuntimeException("숫자가 0보다 작습니다. [" + inValidChar + "]");
         }
     }
