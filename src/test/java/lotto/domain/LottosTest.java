@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
-    @ParameterizedTest(name = "지난주 우승번호와 일치하는 개수 확인. 일치개수={0}")
+    @ParameterizedTest(name = "당첨 여부 확인. 당첨 Rule={0}")
     @MethodSource
     void countCorrectsByCompareWonNumbers(PrizeRule prizeRule) {
 
@@ -34,8 +34,7 @@ class LottosTest {
     private static Stream<Arguments> countCorrectsByCompareWonNumbers() {
 
         return Stream.of(
-                Arguments.of(PrizeRule.FIVE)
-//                Arrays.stream(PrizeRule.values()).map(Arguments::of).toArray(Arguments[]::new)
+                Arrays.stream(PrizeRule.values()).map(Arguments::of).toArray(Arguments[]::new)
         );
     }
 }

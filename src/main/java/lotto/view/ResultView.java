@@ -14,6 +14,7 @@ public class ResultView {
     private static final String LOSS = "손해";
 
     private static final String STATISTIC_MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String STATISTIC_HAS_BONUS_BALL_MESSAGE_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String EARN_RATE_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     public static void printPurchasedLottoCount(int lottoCount) {
@@ -35,7 +36,11 @@ public class ResultView {
 
     private static void printStatistic(Statistic statistic) {
 
-        printStream.println(String.format(STATISTIC_MESSAGE_FORMAT, statistic.getMatchCount(), statistic.getPrizeMoney(), statistic.getPrizeCount()));
+        if (statistic.getPrizeRule().hasBonusNumber()) {
+            printStream.println(String.format(STATISTIC_HAS_BONUS_BALL_MESSAGE_FORMAT, statistic.getPrizeRule().getNormalNumberCount(), statistic.getPrizeMoney(), statistic.getPrizeCount()));
+            return;
+        }
+        printStream.println(String.format(STATISTIC_MESSAGE_FORMAT, statistic.getPrizeRule().getNormalNumberCount(), statistic.getPrizeMoney(), statistic.getPrizeCount()));
     }
 
     private static void printEarnRate(Statistics statistic) {

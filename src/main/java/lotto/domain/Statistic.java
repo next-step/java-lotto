@@ -13,7 +13,7 @@ public class Statistic {
         return statistic;
     }
 
-    public PrizeRule getMatchCount() {
+    public PrizeRule getPrizeRule() {
 
         return prizeInfo.getPrizeRule();
     }
