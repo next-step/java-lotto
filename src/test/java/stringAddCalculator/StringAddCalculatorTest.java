@@ -40,7 +40,6 @@ class StringAddCalculatorTest {
         assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
     }
 
-    @Test
     public void add_negative() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             calculator.add("-1,2,3");
@@ -71,29 +70,4 @@ class StringAddCalculatorTest {
     void excuteAdd() {
         int result = calculator.excuteAdd(new int[]{1, 2, 3});
         assertThat(result).isEqualTo(6);
-    }
-
-    @Test
-    void arrayStringToArrayInt() {
-        int[] result = calculator.arrayStringToArrayInt(new String[]{"1", "2", "3"});
-        assertThat(result).contains(1, 2, 3);
-    }
-
-    @Test
-    void splitString() {
-        String[] result = calculator.splitString("1:2:3", ":");
-        assertThat(result).contains("1", "2", "3");
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    void isNullOrBlank(String input) {
-        boolean result = calculator.isNullOrBlank(input);
-        assertThat(result).isTrue();
-    }
-
-    @Test
-    void isMinusValue() {
-        assertThatIllegalArgumentException().isThrownBy(() -> calculator.isMinusValue(-1));
-    }
 }
