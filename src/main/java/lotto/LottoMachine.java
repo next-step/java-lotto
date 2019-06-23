@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoMachine {
@@ -18,4 +19,8 @@ public class LottoMachine {
         }
     }
 
+    public List<Integer> getGameNumber() {
+        Collections.shuffle(this.lottoNumbers);
+        return this.lottoNumbers.subList(0,6);
+    }
 }
