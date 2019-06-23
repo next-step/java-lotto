@@ -21,14 +21,19 @@ public final class StringAddCalculator {
         int total = 0;
         for (String token : tokens) {
             Integer number = Integer.valueOf(token);
-            if (isNegative(number)) {
-                throw new RuntimeException();
-            }
+
+            ifNegativeNumberThrowException(number);
 
             total = total + number;
         }
 
         return total;
+    }
+
+    private static void ifNegativeNumberThrowException(Integer number) {
+        if (isNegative(number)) {
+            throw new RuntimeException();
+        }
     }
 
     private static boolean isNegative(Integer number) {
