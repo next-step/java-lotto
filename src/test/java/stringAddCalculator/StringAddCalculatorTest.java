@@ -1,6 +1,7 @@
 package stringAddCalculator;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
@@ -20,4 +21,15 @@ class StringAddCalculatorTest {
     public void add_null_또는_빈문자(String param) {
         assertThat(calculator.add(param)).isEqualTo(0);
     }
+
+    @Test
+    public void add_숫자하나() {
+        assertThat(calculator.add("1")).isEqualTo(1);
+    }
+
+    @Test
+    public void add_쉼표구분자() {
+        assertThat(calculator.add("1,2")).isEqualTo(3);
+    }
+
 }
