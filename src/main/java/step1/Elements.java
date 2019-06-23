@@ -18,4 +18,11 @@ public class Elements {
                 .map(Element::from)
                 .collect(Collectors.toList()));
     }
+
+    public int sum() {
+        return elements.stream()
+                .map(Element::getValue)
+                .reduce(0, Integer::sum);
+    }
+
 }

@@ -14,7 +14,7 @@ public class ElementTest {
         Element element = new Element(testValue);
         //When
         //Then
-        assertThat(element.value).isEqualTo(testValue);
+        assertThat(element.getValue()).isEqualTo(testValue);
     }
 
     @Test
@@ -24,7 +24,7 @@ public class ElementTest {
         Element element = Element.from(testValue);
         //When
         //Then
-        assertThat(element.value).isEqualTo(testValue);
+        assertThat(element.getValue()).isEqualTo(testValue);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ElementTest {
         Element element = Element.from(testValue);
         //When
         //Then
-        assertThat(element.value).isEqualTo(Integer.parseInt(testValue));
+        assertThat(element.getValue()).isEqualTo(Integer.parseInt(testValue));
     }
 
     @Test

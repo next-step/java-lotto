@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ElementsTest {
 
-    public static final String COMMA = ",";
+    private static final String COMMA = ",";
 
     @Test
     void 요소들을_리스트로_생성한다() {
@@ -19,5 +19,19 @@ public class ElementsTest {
 
         //Then
         assertThat(elements).isNotNull();
+    }
+
+    @Test
+    void 요소들의_합을_구한다() {
+        //Given
+        String testElementsFromInputString = "1,2,3,4,5";
+        String[] testElements = testElementsFromInputString.split(COMMA);
+
+        //When
+        Elements elements = Elements.from(testElements);
+        int result = elements.sum();
+
+        //Then
+        assertThat(result).isEqualTo(15);
     }
 }

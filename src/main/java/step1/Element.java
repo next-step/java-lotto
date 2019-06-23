@@ -6,7 +6,7 @@ public class Element {
     static final String REGEX_ALLOWS_NUMBERS_ONLY = "[0-9]\\d*";
     static final int MINIMUM_ALLOWED_VALUE = 0;
 
-    int value;
+    private int value;
 
     public Element(int value) {
         this.value = value;
@@ -24,5 +24,9 @@ public class Element {
             throw new RuntimeException(ALERT_FOR_INVALID_INPUT_VALUE);
         }
         return Element.from(Integer.parseInt(inputString));
+    }
+
+    public int getValue() {
+        return value;
     }
 }
