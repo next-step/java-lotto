@@ -1,7 +1,5 @@
 package calculator;
 
-import jdk.internal.joptsimple.internal.Strings;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +18,7 @@ public final class StringAddCalculator {
     }
 
     public static int calculate(String text) {
-        if (Strings.isNullOrEmpty(text)) {
+        if (isNullOrEmpty(text)) {
             return ZERO;
         }
 
@@ -59,5 +57,9 @@ public final class StringAddCalculator {
         }
 
         return text.split(DELIMITER);
+    }
+
+    private static boolean isNullOrEmpty(String target) {
+        return target == null || target.isEmpty();
     }
 }
