@@ -4,14 +4,20 @@ public class StringCalculator {
     private static final int EMPTY_NUM = 0;
 
     int add(String value) {
+
         if (isNull(value)) {
             return EMPTY_NUM;
         }
         if (isEmpty(value)) {
             return EMPTY_NUM;
         }
+        int num = stringToNum(value);
 
-        return -1;
+        return num;
+    }
+
+    int stringToNum(String value) {
+        return Integer.parseInt(value);
     }
 
     boolean isNull(String value) {

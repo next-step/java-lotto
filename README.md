@@ -37,3 +37,4 @@
   전달받는 경우 RuntimeException 예외를 throw gksek.
 * 음수를 전달받는 경우 RuntimeException 예외를 throw 한다. 
   @Test(expected=RuntimeException.class) // 특정 예외가 발생하면 테스트 성공
+

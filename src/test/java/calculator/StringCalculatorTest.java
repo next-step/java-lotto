@@ -1,6 +1,7 @@
 package calculator;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,12 +19,12 @@ public class StringCalculatorTest {
         assertThat(cal.add(null)).isEqualTo(0);
         assertThat(cal.add(" ")).isEqualTo(0);
     }
-/*
+
     @Test
     public void add_숫자하나() throws Exception {
         assertThat(cal.add("1")).isEqualTo(1);
     }
-
+/*
     @Test
     public void add_쉼표구분자() throws Exception {
         assertThat(cal.add("1,2")).isEqualTo(3);
