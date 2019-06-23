@@ -50,4 +50,15 @@ public class lottoTest {
         assertThat(lotto.getWinnerPrice()).isEqualTo(20000000);
     }
 
+    @Test
+    @DisplayName("당청에 따른 결과를 반환하는 기능 테스트")
+    void lottoWinnerResult(){
+        String LastWeekWinnerNumber = "6,13,23,29,35,42";
+        String resultText = "6개 일치 20000000";
+        List<Integer> lottoNumber = Arrays.asList(new Integer[]{6,13,23,29,35,42});
+        Lotto lotto = new Lotto(lottoNumber);
+        lotto.winnerCheck(LastWeekWinnerNumber);
+        assertThat(lotto.getResultText()).isEqualTo(resultText);
+    }
+
 }

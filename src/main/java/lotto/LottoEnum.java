@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum LottoEnum {
 
-    Winner3("Winner3", 5000),
-    Winner4("Winner4", 50000),
-    Winner5("Winner5", 1500000),
-    Winner6("Winner6", 20000000),
+    Winner3("3개 일치 ", 5000),
+    Winner4("4개 일치 ", 50000),
+    Winner5("5개 일치 ", 1500000),
+    Winner6("6개 일치 ", 20000000),
     EMPTY("", 0);
 
     private String winnerCount;

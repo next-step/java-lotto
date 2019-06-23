@@ -4,10 +4,9 @@ import java.util.List;
 
 public class Lotto {
 
-    private static final int lottoDefaulWinnertPrice = 5000;
     private static final int lottoIsWinnerNumberCount = 1;
     private static final int lottoIsNotWinnerNumberCount = 0;
-    private static final String lottoIsWinnerPriceEnumPrefix = "Winner";
+    private static final String lottoIsWinnerPriceEnumSuffix = "개 일치 ";
     private static final String lastWeekWinNumDelimiter = ",";
     private List <Integer> lottoGameNumber;
     private int winnerNumberCount = 0;
@@ -45,8 +44,10 @@ public class Lotto {
     }
 
     private String createFindPriceKey(){
-        return lottoIsWinnerPriceEnumPrefix + winnerNumberCount;
+        return winnerNumberCount + lottoIsWinnerPriceEnumSuffix;
     }
 
-
+    public String getResultText() {
+        return createFindPriceKey() + winnerNumPrice();
+    }
 }
