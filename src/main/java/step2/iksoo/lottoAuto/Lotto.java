@@ -11,17 +11,15 @@ public class Lotto {
     private List<Integer> luckyNumbers;
 
     Lotto() {
-        this.luckyNumbers = new ArrayList<>();
-        this.makeLotto();
+        this(new RandomNumberCreator().getLotto(LOTTO_SIZE));
     }
 
     Lotto(List<Integer> numbers) {
         this.luckyNumbers = numbers;
-        Collections.sort(this.luckyNumbers);
+        sortLotto();
     }
 
-    private void makeLotto() {
-        this.luckyNumbers = new RandomNumberCreator().getLotto(this.LOTTO_SIZE);
+    private void sortLotto() {
         Collections.sort(this.luckyNumbers);
     }
 
