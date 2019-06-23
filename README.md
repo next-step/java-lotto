@@ -11,41 +11,47 @@
 ## 구현 기능 목록
 
 ### step 1 - 문자열 덧셈 계산기
-- [ ] 빈 문자열 또는 null 값을 입력할 경우 0을 반환
+- [x] 빈 문자열 또는 null 값을 입력할 경우 0을 반환
     - [x] TEST FAIL
     - [x] TEST PASS
     - [x] REFACTORING
-- [ ] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환
+- [x] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환
     - [x] TEST FAIL
     - [x] TEST PASS
     - [x] REFACTORING
-- [ ] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환
+- [x] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환
     - [x] TEST FAIL
     - [x] TEST PASS
     - [x] REFACTORING
-- [ ] 구분자를 컴마(,) 이외에 콜론(:)을 사용 가능
+- [x] 구분자를 컴마(,) 이외에 콜론(:)을 사용 가능
     - [x] TEST FAIL
     - [x] TEST PASS
     - [x] REFACTORING
-- [ ] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정 가능
+- [x] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정 가능
     - [x] TEST FAIL
     - [x] TEST PASS
     - [x] REFACTORING
-- [ ] 음수를 전달할 경우 RuntimeException 예외가 발생
+- [x] 음수를 전달할 경우 RuntimeException 예외가 발생
     - [x] TEST FAIL
     - [x] TEST PASS
     - [x] REFACTORING
-- [ ] 분할된 각 입력값을 객체(Element)로 분할
+- [x] 분할된 각 입력값을 객체(Element)로 분할
     - [x] TEST - 정수로 Element 생성
     - [x] TEST - 문자열로 Element 생성
     - [x] TEST - 음수값 전달될 경우 RuntimeException 발생
     - [x] TEST - 숫자 아닌 값 전달될 경우 RuntimeException 발생
     - [x] REFACTORING
-- [ ] Element의 일급 컬렉션(Elements) 생성
+- [x] Element의 일급 컬렉션(Elements) 생성
     - [x] TEST - Elements를 List로 생성
     - [x] TEST - 요소들의 합을 구하는 메서드 추가
     - [x] REFACTORING
-- [ ] 입력값 분할하는 메서드를 객체(StringSplitter)로 분할
+- [x] 입력값 분할하는 메서드를 객체(StringSplitter)로 분할
     - [x] TEST - StringSplitter 생성
     - [x] TEST - 입력된 문자열을 규칙에 따라 분할하여 배열로 반환
     - [x] TEST - 규칙에 따라 분할된 배열을 Elements 객체로 반환
+    - [x] REFACTORING
+- [x] 외부로 위임된 StringCalculator 안의 메서드들 정리
+
+
+### step1 - 이슈
+- Element 객체를 불변 객체로 만들 필요가 있을지
