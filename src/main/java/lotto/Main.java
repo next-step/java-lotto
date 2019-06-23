@@ -11,7 +11,7 @@ public class Main {
         PurchaseAmount purchaseAmount = new PurchaseAmount(InputView.askPurchaseAmount());
         Lottos lottos = new Lottos(purchaseAmount);
 
-        ResultView.printPurchasedLottoCount(purchaseAmount.getPurchasedLottoCount());
+        ResultView.printPurchasedLottoCount(purchaseAmount.getPurchasedLottosCount());
         ResultView.printLottosNumber(lottos);
 
         WonNumbers wonNumbers = new WonNumbers(InputView.askWonNumbers());

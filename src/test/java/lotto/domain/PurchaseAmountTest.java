@@ -14,7 +14,7 @@ class PurchaseAmountTest {
     void getLottoCount(int purchaseAmountValue, int expectedLottoCount) {
 
         PurchaseAmount purchaseAmount = new PurchaseAmount(purchaseAmountValue);
-        assertThat(purchaseAmount.getPurchasedLottoCount()).isEqualTo(expectedLottoCount);
+        assertThat(purchaseAmount.getPurchasedLottosCount()).isEqualTo(expectedLottoCount);
     }
 
     @ParameterizedTest(name = "구매금액이 0 이하일 경우 IllegalArgumentException 발생")

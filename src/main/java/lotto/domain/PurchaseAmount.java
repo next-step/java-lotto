@@ -11,7 +11,7 @@ public class PurchaseAmount {
         this.purchaseAmount = purchaseAmount;
     }
 
-    public int getPurchasedLottoCount() {
+    public int getPurchasedLottosCount() {
 
         return purchaseAmount / AMOUNT_PER_LOTTO;
     }
