@@ -61,8 +61,7 @@ public class LottoTest {
     }
 
     private List<Number> ofNumbers(int count) {
-        return IntStream
-                .rangeClosed(1, count)
+        return IntStream.rangeClosed(1, count)
                 .mapToObj(Number::of)
                 .collect(toList());
     }

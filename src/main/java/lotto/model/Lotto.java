@@ -2,13 +2,14 @@ package lotto.model;
 
 import lotto.exception.InvalidCountOfLottoException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final Money PRICE = Money.wons(1000);
+    public static final int PRICE_VALUE = 1_000;
+    public static final Money PRICE = Money.wons(PRICE_VALUE);
     public static final int SIZE = 6;
     private final List<Number> numbers;
 
@@ -17,24 +18,28 @@ public class Lotto {
     }
 
     public static Lotto from(List<Number> numbers) {
-        numbers = removeDuplicateNumbers(numbers);
-        if (numbers.size() != SIZE) {
-            throw new InvalidCountOfLottoException(numbers.size());
-        }
+        validateLottoSize(numbers);
+        Collections.sort(numbers);
         return new Lotto(numbers);
     }
 
-    private static List<Number> removeDuplicateNumbers(List<Number> numbers) {
-        numbers = numbers.stream()
+    private static void validateLottoSize(List<Number> numbers) {
+        int numbersSize = (int) numbers.stream()
                 .distinct()
-                .collect(Collectors.toList());
-        return numbers;
+                .count();
+        if (numbersSize != SIZE) {
+            throw new InvalidCountOfLottoException(numbersSize);
+        }
     }
 
     public int getMatchCount(Lotto other) {
         return (int) other.numbers.stream()
-                .filter(number -> numbers.contains(number))
+                .filter(numbers::contains)
                 .count();
+    }
+
+    public List<Number> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override
@@ -51,8 +56,7 @@ public class Lotto {
     }
 
     @Override
-    public String
-    toString() {
+    public String toString() {
         return "Lotto{" +
                 "numbers=" + numbers +
                 '}';
