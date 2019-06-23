@@ -99,4 +99,18 @@ class LottoTest {
                     money.buy(lotto);
                 });
     }
+
+    @DisplayName("Lotto 에 해당 번호 포함 확인 ")
+    @Test
+    void should_return_contains() {
+        // given
+        final Lotto lotto = new FixtureLotto();
+        final LottoNumber lottoNumber = new LottoNumber(1);
+
+        // when
+        boolean isContains = lotto.contains(lottoNumber);
+
+        // then
+        assertThat(isContains).isTrue();
+    }
 }
