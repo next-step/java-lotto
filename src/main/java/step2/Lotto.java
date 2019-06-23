@@ -1,23 +1,39 @@
 package step2;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
-    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
-    private static final Integer LOTTO_MIN_NUMBER = 1;
-    private static final Integer LOTTO_MAX_NUMBER = 49;
-    private static final Integer LOTTO_NUMBER_SIZE = 6;
+    private final List<Integer> lottoNumbers;
 
-    static {
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            LOTTO_NUMBERS.add(i);
-        }
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public static List<Integer> create() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE);
+    public static Lotto create() {
+        return LottoGenerator.autoGenerateLotto();
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

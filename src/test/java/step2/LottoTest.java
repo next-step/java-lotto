@@ -12,7 +12,18 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성")
     void lotto() {
-        List<Integer> lottoNumbers = Lotto.create();
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        Lotto lotto = Lotto.create();
+        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("로또 당첨 비교, equalsAndHashCode")
+    void equals_lotto() {
+        Lotto lotto = Lotto.create();
+
+        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        Lotto newLotto = new Lotto(lottoNumbers);
+
+        assertThat(lotto).isEqualTo(newLotto);
     }
 }
