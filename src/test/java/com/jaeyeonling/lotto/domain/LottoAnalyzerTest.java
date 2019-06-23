@@ -1,5 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.ConflictLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoAnalyzerTest {
 
@@ -95,7 +96,7 @@ class LottoAnalyzerTest {
         final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when / then
-        assertThatIllegalStateException().isThrownBy(() -> {
+        assertThatExceptionOfType(ConflictLottoNumberException.class).isThrownBy(() -> {
             new LottoAnalyzer(winningLotto, bonusLottoNumber);
         });
     }

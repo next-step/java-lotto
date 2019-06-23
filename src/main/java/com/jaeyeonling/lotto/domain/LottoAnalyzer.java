@@ -1,5 +1,7 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.ConflictLottoNumberException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class LottoAnalyzer {
     public LottoAnalyzer(final Lotto winningLotto,
                          final LottoNumber bonusLottoNumber) {
         if (winningLotto.contains(bonusLottoNumber)) {
-            throw new IllegalStateException();
+            throw new ConflictLottoNumberException(bonusLottoNumber);
         }
 
         this.winningLotto = winningLotto;
