@@ -1,5 +1,6 @@
+package accumulate;
+
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 public class Accumulator {
     private final static String NUMBER_REGEX = "^[0-9]*";

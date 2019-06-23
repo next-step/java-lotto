@@ -1,3 +1,7 @@
+package accumulate;
+
+import accumulate.ErrorMessage;
+import accumulate.PatternFormula;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +12,7 @@ class PatternFormulaTest {
     void separateCustomSeparatorTest() {
         //Given
         PatternFormula formula = new PatternFormula("//;\n1;2;3");
-        //When`
+        //When
         boolean hasCustomSeparator = formula.hasCustomSeparator(";");
         //Then
         Assertions.assertThat(hasCustomSeparator).isTrue();

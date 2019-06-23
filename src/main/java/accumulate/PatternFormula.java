@@ -1,3 +1,5 @@
+package accumulate;
+
 import java.util.regex.Pattern;
 
 public class PatternFormula {

@@ -1,3 +1,5 @@
+package accumulate;
+
 import java.util.Objects;
 
 public class NumberFormula {
