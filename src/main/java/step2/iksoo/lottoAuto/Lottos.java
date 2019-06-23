@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Lottos {
-    private final int[] LOTTO_PRIZE = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
-
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottoList) {
