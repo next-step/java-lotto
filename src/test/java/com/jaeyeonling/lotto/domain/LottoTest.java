@@ -18,7 +18,7 @@ class LottoTest {
     @Test
     void should_create_lotto_when_correct_lottoNumber() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
         final Lotto lotto = new Lotto(lottoNumbers);
@@ -31,7 +31,7 @@ class LottoTest {
     @Test
     void should_throw_InvalidCountOfLottoNumberException_lotto_when_shorterThan_countOfLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER - 1);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER - 1);
 
         // when / then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
@@ -44,7 +44,7 @@ class LottoTest {
     @Test
     void should_throw_InvalidCountOfLottoNumberException_lotto_when_longerThan_countOfLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
 
         // when / then
         Assertions.assertThatExceptionOfType(InvalidCountOfLottoNumberException.class)
@@ -57,7 +57,7 @@ class LottoTest {
     @Test
     void should_return_true_when_equals_sameLotto() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
         final Lotto target = new Lotto(lottoNumbers);
@@ -71,7 +71,7 @@ class LottoTest {
     @Test
     void should_allMatch_countOfMatch() {
         // given
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         final Lotto target = new Lotto(lottoNumbers);
         final Lotto expect = new Lotto(lottoNumbers);
@@ -88,7 +88,7 @@ class LottoTest {
     void can_buy_lotto_by_money() {
         // given
         final Money money = new Money(Lotto.PRICE_VALUE);
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
 
         // when
         final Lotto lotto = new Lotto(lottoNumbers);
@@ -102,7 +102,7 @@ class LottoTest {
     void should_throw_LowMoneyException_when_lowBalance() {
         // given
         final Money money = new Money(Lotto.PRICE_VALUE - 1);
-        final Set<LottoNumber> lottoNumbers = getLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
+        final Set<LottoNumber> lottoNumbers = generateLottoNumbers(Lotto.COUNT_OF_LOTTO_NUMBER);
         final Lotto lotto = new Lotto(lottoNumbers);
 
         // when / then
@@ -112,7 +112,7 @@ class LottoTest {
                 });
     }
 
-    private Set<LottoNumber> getLottoNumbers(final int countOfLottoNumber) {
+    private Set<LottoNumber> generateLottoNumbers(final int countOfLottoNumber) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int lottoNumber = LottoNumber.MIN; lottoNumber <= countOfLottoNumber; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));

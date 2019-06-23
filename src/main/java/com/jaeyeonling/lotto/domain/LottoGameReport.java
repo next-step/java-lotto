@@ -13,36 +13,36 @@ public class LottoGameReport {
     }
 
     public Money getTotalPrizeMoney() {
-        return new Money(getTotalPrizeMoneyValue());
+        return new Money(calculateTotalPrizeMoneyValue());
     }
 
-    public int getMatchCount(final LottoPrize prize) {
+    public int getMatchCountByPrize(final LottoPrize prize) {
         return matchCountByLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
     }
 
     public double getReturnOnInvestment() {
-        return getTotalPrizeMoneyValue() / getBuyingMoney();
+        return calculateTotalPrizeMoneyValue() / calculateBuyingMoney();
     }
 
-    private long getTotalPrizeMoneyValue() {
+    private long calculateTotalPrizeMoneyValue() {
         return matchCountByLottoPrize.keySet()
                 .stream()
-                .mapToLong(this::getPrizeMoney)
+                .mapToLong(this::calculatePrizeMoney)
                 .sum();
     }
 
-    private long getPrizeMoney(final LottoPrize prize) {
-        return getMatchCount(prize) * prize.getPrizeMoney();
+    private long calculatePrizeMoney(final LottoPrize prize) {
+        return getMatchCountByPrize(prize) * prize.getPrizeMoney();
     }
 
-    private long getBuyingMoney() {
+    private long calculateBuyingMoney() {
         return matchCountByLottoPrize.values()
                 .stream()
-                .mapToLong(this::getPriceOfLotto)
+                .mapToLong(this::calculatePriceOfLotto)
                 .sum();
     }
 
-    private long getPriceOfLotto(final int count) {
+    private long calculatePriceOfLotto(final int count) {
         return count * Lotto.PRICE_VALUE;
     }
 }

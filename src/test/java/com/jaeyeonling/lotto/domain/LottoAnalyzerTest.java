@@ -22,10 +22,10 @@ class LottoAnalyzerTest {
     })
     void should_return_matchCountOnReport_by_lottoAnalyzer(final int analyzeCount) {
         // given
-        final LottoGameReport report = getLottoGameReport(analyzeCount);
+        final LottoGameReport report = generateLottoGameReport(analyzeCount);
 
         // when
-        final int matchCount = report.getMatchCount(LottoPrize.JACKPOT);
+        final int matchCount = report.getMatchCountByPrize(LottoPrize.JACKPOT);
 
         // then
         assertThat(matchCount).isEqualTo(analyzeCount);
@@ -40,7 +40,7 @@ class LottoAnalyzerTest {
     })
     void should_return_totalPrizeMoneyOnReport_by_lottoAnalyzer(final int analyzeCount) {
         // given
-        final LottoGameReport report = getLottoGameReport(analyzeCount);
+        final LottoGameReport report = generateLottoGameReport(analyzeCount);
 
         // when
         final Money totalPrizeMoney = report.getTotalPrizeMoney();
@@ -59,7 +59,7 @@ class LottoAnalyzerTest {
     })
     void should_return_returnOnInvestment_by_lottoAnalyzer(final int analyzeCount) {
         // given
-        final LottoGameReport report = getLottoGameReport(analyzeCount);
+        final LottoGameReport report = generateLottoGameReport(analyzeCount);
         final int totalBuyingMoney = analyzeCount * Lotto.PRICE_VALUE;
 
         // when
@@ -70,7 +70,7 @@ class LottoAnalyzerTest {
         assertThat(returnOnInvestment).isEqualTo(expect);
     }
 
-    private LottoGameReport getLottoGameReport(final int analyzeCount) {
+    private LottoGameReport generateLottoGameReport(final int analyzeCount) {
         final Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (int lottoNumber = LottoNumber.MIN; lottoNumber <= Lotto.COUNT_OF_LOTTO_NUMBER; lottoNumber++) {
             lottoNumbers.add(new LottoNumber(lottoNumber));
@@ -78,10 +78,10 @@ class LottoAnalyzerTest {
         final Lotto lotto = new Lotto(lottoNumbers);
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
 
-        return lottoAnalyzer.analyze(getLottos(analyzeCount, lotto));
+        return lottoAnalyzer.analyze(generateLottos(analyzeCount, lotto));
     }
 
-    private List<Lotto> getLottos(final int analyzeCount, final Lotto lotto) {
+    private List<Lotto> generateLottos(final int analyzeCount, final Lotto lotto) {
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < analyzeCount; i++) {
             lottos.add(lotto);

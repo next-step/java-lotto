@@ -22,10 +22,10 @@ class LottoGameReportTest {
     void should_return_matchCount(final int matchCount) {
         // given
         final LottoPrize prize = LottoPrize.JACKPOT;
-        final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
+        final LottoGameReport lottoGameReport = generateLottoGameReport(matchCount, prize);
 
         // when
-        final int target = lottoGameReport.getMatchCount(prize);
+        final int target = lottoGameReport.getMatchCountByPrize(prize);
 
         // then
         assertThat(target).isEqualTo(matchCount);
@@ -42,7 +42,7 @@ class LottoGameReportTest {
     void should_return_totalPrizeMoney(final int matchCount) {
         // given
         final LottoPrize prize = LottoPrize.JACKPOT;
-        final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
+        final LottoGameReport lottoGameReport = generateLottoGameReport(matchCount, prize);
 
         // when
         final Money totalPrizeMoney = lottoGameReport.getTotalPrizeMoney();
@@ -63,7 +63,7 @@ class LottoGameReportTest {
     void should_return_returnOnInvestment(final int matchCount) {
         // given
         final LottoPrize prize = LottoPrize.FOURTH;
-        final LottoGameReport lottoGameReport = getLottoGameReport(matchCount, prize);
+        final LottoGameReport lottoGameReport = generateLottoGameReport(matchCount, prize);
 
         final int totalBuyingMoney = matchCount * Lotto.PRICE_VALUE;
 
@@ -75,7 +75,7 @@ class LottoGameReportTest {
         assertThat(returnOnInvestment).isEqualTo(expect);
     }
 
-    private LottoGameReport getLottoGameReport(final int matchCount, final LottoPrize prize) {
+    private LottoGameReport generateLottoGameReport(final int matchCount, final LottoPrize prize) {
         final Map<LottoPrize, Integer> matchCountByRank = new HashMap<>();
         matchCountByRank.put(prize, matchCount);
 

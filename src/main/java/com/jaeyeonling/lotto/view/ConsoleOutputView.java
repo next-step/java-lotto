@@ -51,7 +51,7 @@ public final class ConsoleOutputView {
     private static void printWinningReportMatchTemplate(final LottoPrize prize,
                                                         final LottoGameReport report) {
         final String message = String.format(WINNING_REPORT_MATCH_TEMPLATE,
-                prize.getCountOfMatch(), prize.getPrizeMoney(), report.getMatchCount(prize));
+                prize.getCountOfMatch(), prize.getPrizeMoney(), report.getMatchCountByPrize(prize));
 
         ConsoleOutputView.print(message);
     }
