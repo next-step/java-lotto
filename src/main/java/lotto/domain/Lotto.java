@@ -8,11 +8,12 @@ import java.util.List;
 
 public class Lotto {
 
+    private static final RandomLottoGenerator RANDOM_LOTTO_GENERATOR = new RandomLottoGenerator();
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
 
-        this(new RandomLottoGenerator());
+        this(RANDOM_LOTTO_GENERATOR);
     }
 
     public Lotto(LottoGenerator lottoGenerator) {
@@ -26,11 +27,11 @@ public class Lotto {
 
     public boolean isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
 
-        return isMatchNormalNumberCount(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
-                isMatchBonusNumber(prizeRule.hasBonusNumber(), wonNumbers.getWonBonusNumberValue());
+        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
+                isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getWonBonusNumberValue());
     }
 
-    private boolean isMatchNormalNumberCount(int normalNumberCount, List<Integer> wonNormalNumbers) {
+    private boolean isMatchNormalNumberRule(int normalNumberCount, List<Integer> wonNormalNumbers) {
 
         return wonNormalNumbers
                 .stream()
@@ -38,7 +39,7 @@ public class Lotto {
                 .count() == normalNumberCount;
     }
 
-    private boolean isMatchBonusNumber(boolean hasBonusNumber, int wonBonusNumber) {
+    private boolean isMatchBonusRule(boolean hasBonusNumber, int wonBonusNumber) {
 
         return hasBonusNumber == lottoNumbers.contains(wonBonusNumber);
     }

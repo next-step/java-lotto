@@ -2,25 +2,25 @@ package lotto.domain;
 
 public enum PrizeRule {
 
-    THREE(3, 0),
-    FOUR(4, 0),
-    FIVE(5, 0),
-    FIVE_WITH_BONUS(5, 1),
-    SIX(6, 0),
+    THREE(3, false),
+    FOUR(4, false),
+    FIVE(5, false),
+    FIVE_WITH_BONUS(5, true),
+    SIX(6, false),
     ;
 
     private final int normalNumberCount;
-    private final int bonusNumberCount;
+    private final boolean hasBonusNumber;
 
-    PrizeRule(int normalNumberCount, int bonusNumberCount) {
+    PrizeRule(int normalNumberCount, boolean hasBonusNumber) {
 
         this.normalNumberCount = normalNumberCount;
-        this.bonusNumberCount = bonusNumberCount;
+        this.hasBonusNumber = hasBonusNumber;
     }
 
     public boolean hasBonusNumber() {
 
-        return bonusNumberCount > 0;
+        return hasBonusNumber;
     }
 
     public int getNormalNumberCount() {
