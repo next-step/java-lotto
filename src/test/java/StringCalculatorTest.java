@@ -36,5 +36,11 @@ public class StringCalculatorTest {
         assertThat(cal.add("1,2:3")).isEqualTo(6);
     }
 
+    @Test
+    @DisplayName("custom_구분자")
+    public void add_custom_구분자() throws Exception {
+        assertThat(cal.add("//;\n1;2;3")).isEqualTo(6);
+    }
+
 
 }
