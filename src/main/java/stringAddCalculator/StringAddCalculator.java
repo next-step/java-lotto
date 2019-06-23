@@ -1,7 +1,6 @@
 package stringAddCalculator;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class StringAddCalculator {
 
@@ -19,7 +18,7 @@ public class StringAddCalculator {
     }
 
     private String[] splitString(String inputText) {
-        return inputText.split(",");
+        return inputText.split(",|:");
     }
 
     private boolean isNullOrBlank(String inputText) {

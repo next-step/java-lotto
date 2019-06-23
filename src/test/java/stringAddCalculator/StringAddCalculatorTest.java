@@ -27,4 +27,9 @@ class StringAddCalculatorTest {
         assertThat(calculator.add("1,2")).isEqualTo(3);
     }
 
+    @Test
+    public void add_쉼표_또는_콜론_구분자() {
+        assertThat(calculator.add("1,2:3")).isEqualTo(6);
+    }
+
 }
