@@ -58,11 +58,11 @@
 
 ### step2 - 로또(자동)
 - [ ] 로또번호(LottoNumber) 객체 생성
-    - [ ] TEST - 로또번호를 자동으로 생성한다 (Collections.shuffle())
-    - [ ] TEST - 생성된 로또번호를 정렬한다 (Collections.sort())
     - [ ] TEST - 로또번호의 범위는 1~45의 자연수
     - [ ] REFACTORING
 - [ ] 로또복권(LottoTicket) 객체 생성
+    - [ ] TEST - 로또번호를 자동으로 생성한다 (Collections.shuffle())
+    - [ ] TEST - 생성된 로또번호를 정렬한다 (Collections.sort())
     - [ ] TEST - 로또복권의 로또번호는 중복이 없다
     - [ ] TEST - 당첨번호와 비교해서 일치하는 개수를 반환한다 (ArrayList.contains())
     - [ ] REFACTORING

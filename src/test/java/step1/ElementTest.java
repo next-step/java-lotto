@@ -8,16 +8,6 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class ElementTest {
 
     @Test
-    void 쪼개진_입력문자열의_요소는_값을_가진다() {
-        //Given
-        int testValue = 1;
-        Element element = new Element(testValue);
-        //When
-        //Then
-        assertThat(element.getValue()).isEqualTo(testValue);
-    }
-
-    @Test
     void 정수로_Element를_생성할_수_있다() {
         //Given
         int testValue = 1;
