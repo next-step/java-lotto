@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
 
     public static final int MIN = 1;
     public static final int MAX = 45;
@@ -19,10 +19,10 @@ public class Number {
 
     public static Number of(int number) {
         validateNumber(number);
-        if (CACHE.containsKey(number)) {
-            return CACHE.get(number);
+        if (!CACHE.containsKey(number)) {
+            CACHE.put(number, new Number(number));
         }
-        return new Number(number);
+        return CACHE.get(number);
     }
 
     private static void validateNumber(int number) {
@@ -46,8 +46,11 @@ public class Number {
 
     @Override
     public String toString() {
-        return "Number{" +
-                "number=" + number +
-                '}';
+        return String.valueOf(number);
+    }
+
+    @Override
+    public int compareTo(Number other) {
+        return Integer.compare(number, other.number);
     }
 }
