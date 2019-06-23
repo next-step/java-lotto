@@ -12,8 +12,7 @@ public class LottoMain {
         OutputView.printLottos(lottos.getLottos());
 
         List<Integer> winNumbers = getKnowWinnerNumbers();
-        int[] resultLottery = lottos.checkLotteryWin(winNumbers);
-        int amoutPrize = OutputView.printResult(resultLottery);
+        int amoutPrize = OutputView.printResult(lottos.checkLotteryWin(winNumbers));
         OutputView.printRateProfit(lottos.calculateRateProfit(amoutPrize));
     }
 

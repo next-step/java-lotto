@@ -1,6 +1,9 @@
 package step2.iksoo.lottoAuto;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -13,13 +16,23 @@ public class Lottos {
         return this.lottos;
     }
 
-    public int[] checkLotteryWin(List<Integer> winnerNumbers) {
-        int[] wonLotterys = new int[winnerNumbers.size() + 1];
+    public Map<Integer, Integer> checkLotteryWin(List<Integer> winnerNumbers) {
+        Map<Integer, Integer> map = Stream.of(new Integer[][]{
+                {0, 0},
+                {1, 0},
+                {2, 0},
+                {3, 0},
+                {4, 0},
+                {5, 0},
+                {6, 0}
+        }).collect(Collectors.toMap(p -> p[0], p -> p[1]));
+
         this.lottos
                 .stream()
                 .map(lotto -> lotto.checkNumberOfMatches(winnerNumbers))
-                .forEach(x -> wonLotterys[x]++);
-        return wonLotterys;
+                .filter(x -> x >= 3)
+                .forEach(x -> map.put(x, map.get(x) + 1));
+        return map;
     }
 
     public double calculateRateProfit(int amoutPrize) {

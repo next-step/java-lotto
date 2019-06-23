@@ -1,11 +1,10 @@
 package step2.iksoo.lottoAuto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class OutputView {
-    private static final int[] lottoPrize = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
-
     public static void printBlankLine() {
         System.out.println();
     }
@@ -36,11 +35,12 @@ public class OutputView {
         printBlankLine();
     }
 
-    public static int printResult(int[] resultWinners) {
-        int sumPrize = IntStream.range(0, resultWinners.length)
-                .filter(matchesNumber -> matchesNumber >= 3)
-                .peek(matchesNumber -> printTextln(matchesNumber + "개 일치 (" + lottoPrize[matchesNumber] + "원)- " + resultWinners[matchesNumber] + "개"))
-                .map(matchesNumber -> lottoPrize[matchesNumber] * resultWinners[matchesNumber])
+    public static int printResult(Map<Integer, Integer> resultWinners) {
+        LottoPrize[] lottoPrize = LottoPrize.values();
+
+        int sumPrize = IntStream.range(3, resultWinners.size())
+                .peek(matchesNumber -> printTextln(matchesNumber + "개 일치 (" + lottoPrize[matchesNumber].getGradePrize() + "원)- " + resultWinners.get(matchesNumber) + "개"))
+                .map(matchesNumber -> lottoPrize[matchesNumber].getGradePrize() * resultWinners.get(matchesNumber))
                 .sum();
         return sumPrize;
     }
