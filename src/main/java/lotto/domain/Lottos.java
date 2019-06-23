@@ -7,20 +7,17 @@ import java.util.List;
 
 public class Lottos {
 
-    public static final int AMOUNT_PER_LOTTO = 1000;
     private final List<Lotto> lottos;
 
-    public Lottos(int purchaseAmount) {
+    public Lottos(PurchaseAmount purchaseAmount) {
 
         this(new RandomLottosGenerator(), purchaseAmount);
     }
 
-    public Lottos(LottosGenerator lottosGenerator, int purchaseAmount) {
+    public Lottos(LottosGenerator lottosGenerator, PurchaseAmount purchaseAmount) {
 
-        validatePurchaseAmount(purchaseAmount);
-        int lottoCount = purchaseAmount / AMOUNT_PER_LOTTO;
-        lottos = lottosGenerator.generate(lottoCount);
-        validateGeneratedLottosCount(lottoCount);
+        this.lottos = lottosGenerator.generate(purchaseAmount.getPurchasedLottoCount());
+        validateGeneratedLottosCount(purchaseAmount.getPurchasedLottoCount());
     }
 
     public long getWonNumbersCorrectCount(int correctCount, WonNumbers wonNumbers) {
@@ -33,16 +30,6 @@ public class Lottos {
     public int getLottoCount() {
 
         return lottos.size();
-    }
-
-    private void validatePurchaseAmount(int purchaseAmount) {
-
-        if (purchaseAmount <= 0) {
-            throw new IllegalArgumentException("로또를 구매할 수 없습니다. 구매금액=" + purchaseAmount);
-        }
-        if (purchaseAmount % AMOUNT_PER_LOTTO != 0) {
-            throw new IllegalArgumentException("로또구매는 " + AMOUNT_PER_LOTTO + "원 단위로만 가능합니다. 구매금액=" + purchaseAmount);
-        }
     }
 
     private void validateGeneratedLottosCount(int lottoCount) {

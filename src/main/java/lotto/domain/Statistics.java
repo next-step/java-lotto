@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.Lottos.AMOUNT_PER_LOTTO;
+import static lotto.domain.PurchaseAmount.AMOUNT_PER_LOTTO;
 import static lotto.domain.PrizeInfo.PRIZE_INFOS;
 
 public class Statistics {
