@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Lottos {
+    private final int[] LOTTO_PRIZE = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
+
     private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottoList) {
@@ -18,11 +20,17 @@ public class Lottos {
     }
 
     protected int[] checkLotteryWin(List<Integer> winnerNumbers) {
-        int[] lottoPrize = new int[winnerNumbers.size()+1];
+        int[] wonLotterys = new int[winnerNumbers.size() + 1];
         this.lottos
                 .stream()
-                .map(lotto -> {return lotto.checkNumberOfMatches(winnerNumbers);})
-                .forEach(x-> lottoPrize[x]++);
-        return lottoPrize;
+                .map(lotto -> {
+                    return lotto.checkNumberOfMatches(winnerNumbers);
+                })
+                .forEach(x -> wonLotterys[x]++);
+        return wonLotterys;
+    }
+
+    protected double calculateRateProfit(int amoutPrize) {
+        return Math.round((amoutPrize / this.lottos.size() / 1000.0) * 100.0) / 100.0;
     }
 }

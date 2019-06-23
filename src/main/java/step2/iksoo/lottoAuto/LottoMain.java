@@ -9,9 +9,10 @@ public class LottoMain {
 
     public static void main(String[] args) {
         Lottos lottos = new Lottos(buyLotto(lottoOrder()));
-        List<Integer> winnerNumbers = getKnowWinnerNumbers();
-        int[] resultWinners = lottos.checkLotteryWin(winnerNumbers);
-        OutputView.printResult(resultWinners);
+        List<Integer> winNumbers = getKnowWinnerNumbers();
+        int[] resultLottery = lottos.checkLotteryWin(winNumbers);
+        int amoutPrize = OutputView.printResult(resultLottery);
+        OutputView.printRateProfit(lottos.calculateRateProfit(amoutPrize));
     }
 
     private static List<Integer> getKnowWinnerNumbers() {

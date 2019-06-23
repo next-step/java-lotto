@@ -3,6 +3,7 @@ package step2.iksoo.lottoAuto;
 import java.util.stream.IntStream;
 
 public class OutputView {
+    private static final int[] lottoPrize = {0, 0, 0, 5000, 50000, 1500000, 2000000000};
 
     public static void printBlankLine() {
         System.out.println();
@@ -28,11 +29,18 @@ public class OutputView {
         System.out.println(text);
     }
 
-    public static void printResult(int[] resultWinners) {
-        IntStream.range(0, resultWinners.length)
+    public static int printResult(int[] resultWinners) {
+        int sumPrize = IntStream.range(0, resultWinners.length)
                 .filter(matchesNumber -> matchesNumber >= 3)
-                .forEach(matchesNumber -> printTextln(matchesNumber + "개 일치 (" + "원)- " + resultWinners[matchesNumber] + "개"));
+                .peek(matchesNumber -> printTextln(matchesNumber + "개 일치 (" + lottoPrize[matchesNumber] + "원)- " + resultWinners[matchesNumber] + "개"))
+                .map(matchesNumber -> {
+                    return lottoPrize[matchesNumber] * resultWinners[matchesNumber];
+                })
+                .sum();
+        return sumPrize;
+    }
 
-        printTextln("총 수익률은 xxx입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    public static void printRateProfit(double calculateRateProfit) {
+        printTextln("총 수익률은 " + calculateRateProfit + "입니다.");
     }
 }

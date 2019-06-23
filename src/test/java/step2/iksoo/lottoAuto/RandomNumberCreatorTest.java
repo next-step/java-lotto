@@ -26,7 +26,7 @@ public class RandomNumberCreatorTest {
 
     @Test
     void create_45까지_숫자() {
-        IntStream.range(0,LOTTO_SIZE)
+        IntStream.range(0, LOTTO_SIZE)
                 .boxed()
                 .peek(e -> assertThat(fullNumber).contains(randomCreator.getLotto(LOTTO_SIZE).get(e)));
     }
