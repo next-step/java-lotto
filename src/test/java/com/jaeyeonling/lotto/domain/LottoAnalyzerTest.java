@@ -69,7 +69,7 @@ class LottoAnalyzerTest {
         assertThat(returnOnInvestment).isEqualTo(expect);
     }
 
-    @DisplayName("로또 정보를 분석 후 수익률 확인")
+    @DisplayName("로또 2등 당첨 테스트 ")
     @Test
     void should_return_second() {
         // given
