@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import lotto.utils.LottoNumberValidator;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class WonNumbers {
 
     private static final String DELIMITER = ",";
-    private static final int MUST_LOTTO_COUNT = 6;
 
     private final List<Integer> wonNumbers;
 
@@ -17,7 +18,7 @@ public class WonNumbers {
         }
 
         List<Integer> wonNumbers = parse(wonNumbersValue);
-        validate(wonNumbers);
+        LottoNumberValidator.validate(wonNumbers);
         this.wonNumbers = wonNumbers;
     }
 
@@ -27,13 +28,6 @@ public class WonNumbers {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-    }
-
-    private void validate(List<Integer> wonNumbers) {
-
-        if (wonNumbers == null || wonNumbers.size() != MUST_LOTTO_COUNT) {
-            throw new IllegalArgumentException("우승번호 개수는 " + MUST_LOTTO_COUNT + "개 여야 합니다.");
-        }
     }
 
     public List<Integer> getWonNumbers() {

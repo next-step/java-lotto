@@ -17,8 +17,10 @@ public class Lottos {
 
     public Lottos(LottosGenerator lottosGenerator, int purchaseAmount) {
 
-        validate(purchaseAmount);
-        lottos = lottosGenerator.generate(purchaseAmount / AMOUNT_PER_LOTTO);
+        validatePurchaseAmount(purchaseAmount);
+        int lottoCount = purchaseAmount / AMOUNT_PER_LOTTO;
+        lottos = lottosGenerator.generate(lottoCount);
+        validateGeneratedLottosCount(lottoCount);
     }
 
     public long getWonNumbersCorrectCount(int correctCount, WonNumbers wonNumbers) {
@@ -33,10 +35,20 @@ public class Lottos {
         return lottos.size();
     }
 
-    private void validate(int purchaseAmount) {
+    private void validatePurchaseAmount(int purchaseAmount) {
 
         if (purchaseAmount <= 0) {
             throw new IllegalArgumentException("로또를 구매할 수 없습니다. 구매금액=" + purchaseAmount);
+        }
+        if (purchaseAmount % AMOUNT_PER_LOTTO != 0) {
+            throw new IllegalArgumentException("로또구매는 " + AMOUNT_PER_LOTTO + "원 단위로만 가능합니다. 구매금액=" + purchaseAmount);
+        }
+    }
+
+    private void validateGeneratedLottosCount(int lottoCount) {
+
+        if (lottos.size() != lottoCount) {
+            throw new IllegalStateException("생성된 로또 개수가 유효하지 않습니다. 생성된 개수=" + lottos.size() + ", 기대한 개수=" + lottoCount);
         }
     }
 
