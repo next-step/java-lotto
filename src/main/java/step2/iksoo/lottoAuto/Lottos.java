@@ -35,7 +35,7 @@ public class Lottos {
         return map;
     }
 
-    public double calculateRateProfit(int amoutPrize) {
-        return Math.round((amoutPrize / this.lottos.size() / 1000.0) * 100.0) / 100.0;
+    public double calculateRateProfit(int amoutPrize, int orderPrice) {
+        return (double) amoutPrize / orderPrice;
     }
 }

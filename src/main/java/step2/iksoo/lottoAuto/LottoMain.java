@@ -7,13 +7,15 @@ import java.util.stream.IntStream;
 public class LottoMain {
     private static final int PRICE_OF_LOTTO = 1000;
 
+    private static int orderPrice;
+
     public static void main(String[] args) {
         Lottos lottos = new Lottos(buyLotto(lottoOrder()));
         OutputView.printLottos(lottos.getLottos());
 
         List<Integer> winNumbers = getKnowWinnerNumbers();
         int amoutPrize = OutputView.printResult(lottos.checkLotteryWin(winNumbers));
-        OutputView.printRateProfit(lottos.calculateRateProfit(amoutPrize));
+        OutputView.printRateProfit(lottos.calculateRateProfit(amoutPrize, orderPrice));
     }
 
     private static List<Integer> getKnowWinnerNumbers() {
@@ -29,7 +31,8 @@ public class LottoMain {
 
     private static int lottoOrder() {
         OutputView.printAskOrder();
-        return InputView.inputNumber() / PRICE_OF_LOTTO;
+        orderPrice = InputView.inputNumber();
+        return orderPrice / PRICE_OF_LOTTO;
     }
 
     private static List<Lotto> buyLotto(int orderCount) {
