@@ -1,6 +1,9 @@
 package step2.domain;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoStatistics {
@@ -10,6 +13,20 @@ public class LottoStatistics {
     public LottoStatistics(Money money, List<Lotto> lottos) {
         this.seedMoney = money;
         this.lottos = lottos;
+    }
+
+    public Map<LottoRank, List<Lotto>> getMyRanks(final WinningLotto winningLotto) {
+        Map<LottoRank, List<Lotto>> rankMap = new HashMap<>();
+        for (Lotto lotto : lottos) {
+            LottoRank rank = lotto.matchLotto(winningLotto);
+            List<Lotto> lottos = rankMap.getOrDefault(rank, new ArrayList<>());
+            lottos.add(lotto);
+            rankMap.put(rank, lottos);
+        }
+        return rankMap;
+//        return lottos.stream()
+//                     .map(lotto -> lotto.matchLotto(winningLotto))
+//                     .collect(Collectors.groupingBy(lottos -> Collectors.groupingBy(lotto -> Lotto::matchLotto)));
     }
 
     public List<LottoRank> checkMyRanks(final WinningLotto winningLotto) {

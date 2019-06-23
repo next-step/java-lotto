@@ -3,20 +3,22 @@ package step2.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    SIX(6, new Money(2000000000L), "1등"),
-    FIVE(5, new Money(1500000L), "2등"),
-    FOUR(4, new Money(50000L), "3등"),
-    THREE(3, new Money(5000L), "4등"),
-    NO_RANK(2, new Money(0L), "5등 이하");
+    SIX(6, new Money(2000000000L), 1, "6개 일치 (2000000000원)"),
+    FIVE(5, new Money(1500000L), 2, "5개 일치 (1500000원)"),
+    FOUR(4, new Money(50000L), 3, "4개 일치 (50000원)"),
+    THREE(3, new Money(5000L), 4, "3개 일치 (5000원)"),
+    NO_RANK(2, new Money(0L), 5, "");
 
     private final Integer matchCount;
     private final Money money;
-    private final String rank;
+    private final Integer rank;
+    private final String etc;
 
-    LottoRank(Integer matchCount, Money money, String rank) {
+    LottoRank(Integer matchCount, Money money, Integer rank, String etc) {
         this.matchCount = matchCount;
         this.money = money;
         this.rank = rank;
+        this.etc = etc;
     }
 
     public static LottoRank matchOf(final int matchCount) {
@@ -28,5 +30,9 @@ public enum LottoRank {
 
     public Money getMoney() {
         return money;
+    }
+
+    public String getEtc() {
+        return etc;
     }
 }
