@@ -10,7 +10,7 @@ class QuantityTest {
   public void 수량은0보다작을수없다() {
     assertThatThrownBy(() -> {
       new Quantity(-1);
-    }).isInstanceOf(RuntimeException.class)
+    }).isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining("수량은 0보다 커야 합니다.");
   }
 }
