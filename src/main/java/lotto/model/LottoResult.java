@@ -32,7 +32,6 @@ public class LottoResult {
 
     public double getRateOfReturn() {
         return (double) getTotalMoney() / totalMoneyOfBuyLotto();
-
     }
 
     private long getPrizeMoney(Prize prize) {
