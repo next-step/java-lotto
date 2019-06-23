@@ -12,14 +12,25 @@ public enum LottoPrize {
 
     private final int countOfMatch;
     private final long prizeMoney;
+    private final boolean matchBonus;
 
-    LottoPrize(final int countOfMatch, final int prizeMoney) {
-        this.countOfMatch = countOfMatch;
-        this.prizeMoney = prizeMoney;
+    LottoPrize(final int countOfMatch,
+               final int prizeMoney) {
+        this(countOfMatch, prizeMoney, false);
     }
 
-    public static LottoPrize valueOf(final int countOfMatch) {
+    LottoPrize(final int countOfMatch,
+               final int prizeMoney,
+               final boolean matchBonus) {
+        this.countOfMatch = countOfMatch;
+        this.prizeMoney = prizeMoney;
+        this.matchBonus = matchBonus;
+    }
+
+    public static LottoPrize valueOf(final int countOfMatch,
+                                     final boolean matchBonus) {
         return Arrays.stream(values())
+                .filter(prize -> prize.matchBonus == matchBonus)
                 .filter(prize -> prize.countOfMatch == countOfMatch)
                 .findFirst()
                 .orElse(LOSE);

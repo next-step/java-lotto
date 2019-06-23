@@ -38,7 +38,9 @@ public class LottoAnalyzer {
 
     private LottoPrize matchWithWinningLotto(final Lotto lotto) {
         final int countOfMatch = winningLotto.countOfMatch(lotto);
-        return LottoPrize.valueOf(countOfMatch);
+        final boolean matchBonus = lotto.contains(bonusLottoNumber);
+
+        return LottoPrize.valueOf(countOfMatch, matchBonus);
     }
 
     private void countLottoPrize(final Map<LottoPrize, Integer> countOfEachLottoPrize,
