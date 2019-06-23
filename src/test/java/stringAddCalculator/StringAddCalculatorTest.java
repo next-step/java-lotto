@@ -23,11 +23,6 @@ class StringAddCalculatorTest {
     }
 
     @Test
-    public void add_숫자하나() {
-        assertThat(calculator.add("1")).isEqualTo(1);
-    }
-
-    @Test
     public void add_쉼표구분자() {
         assertThat(calculator.add("1,2")).isEqualTo(3);
     }

@@ -1,17 +1,28 @@
 package stringAddCalculator;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class StringAddCalculator {
 
     public int add(String inputText) {
-        if (inputText == null || inputText.isBlank()) {
+        if (isNullOrBlank(inputText)) {
             return 0;
         }
+        String[] StringNumbers = splitString(inputText);
+        int[] intNumbers = arrayStringToArrayInt(StringNumbers);
+        return Arrays.stream(intNumbers).sum();
+    }
 
-        int result = 0;
-        String[] StringNumbers = inputText.split(",");
-        for (String number : StringNumbers) {
-            result += Integer.parseInt(number);
-        }
-        return result;
+    private int[] arrayStringToArrayInt(String[] stringNumbers) {
+        return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).toArray();
+    }
+
+    private String[] splitString(String inputText) {
+        return inputText.split(",");
+    }
+
+    private boolean isNullOrBlank(String inputText) {
+        return inputText == null || inputText.isBlank();
     }
 }
