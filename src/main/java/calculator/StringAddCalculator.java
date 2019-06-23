@@ -1,5 +1,7 @@
 package calculator;
 
+import jdk.internal.joptsimple.internal.Strings;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,15 +12,25 @@ import java.util.regex.Pattern;
  */
 public final class StringAddCalculator {
     private static final String DELIMITER = ",|:";
-    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final String CUSTOM_DELIMITER_REX = "//(.)\n(.*)";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REX);
+    private static final int ZERO = 0;
 
     private StringAddCalculator() {
     }
 
     public static int calculate(String text) {
+        if (Strings.isNullOrEmpty(text)) {
+            return ZERO;
+        }
+
         String[] tokens = split(text);
 
-        int total = 0;
+        return sum(tokens);
+    }
+
+    private static int sum(String[] tokens) {
+        int total = ZERO;
         for (String token : tokens) {
             Integer number = Integer.valueOf(token);
 
@@ -26,26 +38,21 @@ public final class StringAddCalculator {
 
             total = total + number;
         }
-
         return total;
     }
 
     private static void ifNegativeNumberThrowException(Integer number) {
         if (isNegative(number)) {
-            throw new RuntimeException();
+            throw new RuntimeException("음수는 허용하지 않습니다.");
         }
     }
 
     private static boolean isNegative(Integer number) {
-        return number < 0;
+        return number < ZERO;
     }
 
-    private static  String[] split(String text) {
-        if (text == null || text.isEmpty()) {
-            return new String[0];
-        }
-
-        Matcher matcher = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(text);
+    private static String[] split(String text) {
+        Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(text);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
