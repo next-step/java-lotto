@@ -20,10 +20,10 @@ public class Lottos {
         validateGeneratedLottosCount(purchaseAmount.getPurchasedLottosCount());
     }
 
-    public long getWonNumbersCorrectCount(int correctCount, WonNumbers wonNumbers) {
+    public long countCorrectsByCompareWonNumbers(int corrects, WonNumbers wonNumbers) {
 
         return lottos.stream()
-                .filter(lotto -> lotto.isLottoNumberMatchesCorrectCount(correctCount, wonNumbers))
+                .filter(lotto -> lotto.countCorrectsByCompareWonNumbers(corrects, wonNumbers))
                 .count();
     }
 

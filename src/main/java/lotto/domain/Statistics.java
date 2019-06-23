@@ -15,9 +15,7 @@ public class Statistics {
 
     public Statistics(WonNumbers wonNumbers, Lottos lottos) {
 
-        this.statistics = PRIZE_INFOS.stream()
-                .map(prizeInfo -> Statistic.of(prizeInfo, lottos.getWonNumbersCorrectCount(prizeInfo.getMatchCount(), wonNumbers)))
-                .collect(Collectors.toList());
+        this.statistics = createStatistics(wonNumbers, lottos);
         this.purchaseAmount = lottos.getLottoCount() * AMOUNT_PER_LOTTO;
     }
 
@@ -44,5 +42,12 @@ public class Statistics {
     private double floorEarnRate(double earnRate) {
 
         return Math.floor(earnRate * 100) / 100.0;
+    }
+
+    private List<Statistic> createStatistics(WonNumbers wonNumbers, Lottos lottos) {
+
+        return PRIZE_INFOS.stream()
+                .map(prizeInfo -> Statistic.of(prizeInfo, lottos.countCorrectsByCompareWonNumbers(prizeInfo.getMatchCount(), wonNumbers)))
+                .collect(Collectors.toList());
     }
 }

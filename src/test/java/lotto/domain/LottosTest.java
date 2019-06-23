@@ -12,9 +12,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottosTest {
 
-    @ParameterizedTest(name = "지난주 우승번호와 일차하는 개수 확인. 일치개수={0}")
+    @ParameterizedTest(name = "지난주 우승번호와 일치하는 개수 확인. 일치개수={0}")
     @ValueSource(ints = {3, 4, 5, 6})
-    void getWonNumbersCorrectCount(int correctCount) {
+    void countCorrectsByCompareWonNumbers(int corrects) {
 
         List<Lotto> stubLottos = Arrays.asList(
                 new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 11, 12, 13))),
@@ -25,6 +25,6 @@ class LottosTest {
         Lottos lottos = new Lottos(new StubLottosGenerator(stubLottos), new PurchaseAmount(stubLottos.size() * PurchaseAmount.AMOUNT_PER_LOTTO));
 
         WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6");
-        assertThat(lottos.getWonNumbersCorrectCount(correctCount, wonNumbers)).isEqualTo(1);
+        assertThat(lottos.countCorrectsByCompareWonNumbers(corrects, wonNumbers)).isEqualTo(1);
     }
 }

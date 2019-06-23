@@ -24,12 +24,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean isLottoNumberMatchesCorrectCount(int correctCount, WonNumbers wonNumbers) {
+    public boolean countCorrectsByCompareWonNumbers(int corrects, WonNumbers wonNumbers) {
 
-        return getWonNumbersContainsCount(wonNumbers) == correctCount;
+        return countContainingWonNumbers(wonNumbers) == corrects;
     }
 
-    private long getWonNumbersContainsCount(WonNumbers wonNumbers) {
+    private long countContainingWonNumbers(WonNumbers wonNumbers) {
 
         return wonNumbers.getWonNumbers()
                 .stream()
