@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottos {
+    static final int DEFAULT_PRICE = 1000;
     private final static int CANT_BUYABLE_COUNT = 0;
     private final static int START_NUMBER = 0;
     
@@ -26,7 +27,7 @@ public class Lottos {
     }
     
     private int getBuyableCount(int cashPayment) {
-        int buyableCount = cashPayment / Lotto.DEFAULT_PRICE;
+        int buyableCount = cashPayment / DEFAULT_PRICE;
         if (buyableCount <= CANT_BUYABLE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
         }

@@ -1,6 +1,11 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class Lotto {
-    public static final int DEFAULT_PRICE = 1000;
-    private LottoNumbers lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
+    
+    public Lotto() {
+        this.lottoNumbers = lottoNumbers;
+    }
 }
