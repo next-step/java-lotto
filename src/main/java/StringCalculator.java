@@ -1,27 +1,21 @@
+import java.util.List;
+
 public class StringCalculator {
 
     public int calculate(String equation) {
-        String[] operands = equation.split(":|,");
+        Extractor extractor = new Extractor(equation);
 
+        List<Integer> numbers = extractor.getOperands(extractor.getDelimiter());
+
+        return plusAll(numbers);
+    }
+
+    private int plusAll(List<Integer> numbers) {
         int result = 0;
-        for (String operand : operands) {
-            result += convertToInt(operand);
+        for (Integer number : numbers) {
+            result += number;
         }
 
         return result;
-    }
-
-    private int convertToInt(String operand) {
-        int converted = Integer.parseInt(operand);
-
-        checkValidInput(converted);
-
-        return converted;
-    }
-
-    private void checkValidInput(int input) {
-        if (input < 0) {
-            throw new RuntimeException();
-        }
     }
 }

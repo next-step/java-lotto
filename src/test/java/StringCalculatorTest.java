@@ -33,6 +33,13 @@ public class StringCalculatorTest {
     }
 
     @Test
+    void 커스텀_구분자를_이용_연산() {
+        int result = mCalculator.calculate("//delimiter\n1delimiter2");
+
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
     void 빈칸_입력시() {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             mCalculator.calculate("");
