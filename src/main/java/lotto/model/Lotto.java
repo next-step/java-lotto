@@ -51,4 +51,14 @@ public class Lotto {
                 "numbers=" + numbers +
                 '}';
     }
+
+    public int getMatchCount(Lotto other) {
+        int result = 0;
+        for (Number number : other.numbers) {
+            if(numbers.contains(number)){
+                result ++;
+            }
+        }
+        return result;
+    }
 }

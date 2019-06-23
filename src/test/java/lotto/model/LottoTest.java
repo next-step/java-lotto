@@ -16,6 +16,15 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
+    @DisplayName("로또번호가 6개 일치하는 경우")
+    @Test
+    void matchCountToOtherLotto() {
+        Lotto lotto = ofLotto(1, 2, 3, 4, 5, 6);
+        Lotto otherLotto = ofLotto(1, 2, 3, 4, 5, 6);
+        int matchCount = lotto.getMatchCount(otherLotto);
+        assertThat(matchCount).isEqualTo(6);
+    }
+
     @DisplayName("6개의 숫자를 가진 로또를 생성한다")
     @Test
     void createLottoWithSixBall() {
