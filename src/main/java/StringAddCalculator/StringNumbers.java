@@ -15,7 +15,7 @@ public class StringNumbers {
     public StringNumber sum() {
         return numbers.stream()
                 .reduce((number1, number2) -> number1.add(number2))
-                .get();
+                .orElseThrow(RuntimeException::new);
     }
 
     private List<StringNumber> buildList(String[] numbers) {
