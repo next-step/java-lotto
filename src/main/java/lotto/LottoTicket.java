@@ -11,12 +11,15 @@ public class LottoTicket {
   public LottoTicket(List<Integer> numbers) {
     validateNumberSize(numbers);
     validateDuplicate(numbers);
-    for (int number : numbers) {
-      if (number < 1 || number > 45) {
-        throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 입력할 수 있습니다.");
-      }
-    }
+    validateNumbersRange(numbers);
     this.numbers = numbers;
+  }
+
+  private void validateNumbersRange(List<Integer> numbers) {
+    boolean match = numbers.stream().anyMatch(number -> number < 1 || number > 45);
+    if (match) {
+      throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 입력할 수 있습니다.");
+    }
   }
 
   private void validateDuplicate(List<Integer> numbers) {
