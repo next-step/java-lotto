@@ -21,4 +21,11 @@ public class LottoGameTest {
     assertThatIllegalArgumentException()
         .isThrownBy(() -> LottoStore.buyLottoCount("0"));
   }
+
+  @DisplayName("로또 금액 단위에 맞지 않는 금액 입력시 예외 발생")
+  @Test
+  void validateInputTwo() {
+    assertThatIllegalArgumentException()
+        .isThrownBy(() -> LottoStore.buyLottoCount("3500"));
+  }
 }
