@@ -12,10 +12,6 @@ public class LottoAnalyzer {
     private final Lotto winningLotto;
     private LottoNumber bonusLottoNumber;
 
-    public LottoAnalyzer(final Lotto winningLotto) {
-        this.winningLotto = winningLotto;
-    }
-
     public LottoAnalyzer(final Lotto winningLotto,
                          final LottoNumber bonusLottoNumber) {
         this.winningLotto = winningLotto;

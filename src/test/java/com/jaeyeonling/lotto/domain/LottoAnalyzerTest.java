@@ -88,7 +88,7 @@ class LottoAnalyzerTest {
 
     private LottoGameReport generateLottoGameReport(final int analyzeCount) {
         final Lotto lotto = new FixtureLotto();
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto, new LottoNumber(LottoNumber.MAX));
 
         return lottoAnalyzer.analyze(generateLottos(analyzeCount, lotto));
     }
