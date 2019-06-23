@@ -35,6 +35,12 @@ public class LottoTicket {
   }
 
   public int winNumberSize(List<Integer> winNumber) {
-    return 0;
+    int result = 0;
+    for (int number : winNumber) {
+      if (numbers.contains(number)) {
+        result++;
+      }
+    }
+    return result;
   }
 }
