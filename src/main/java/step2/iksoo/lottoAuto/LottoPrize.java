@@ -18,8 +18,4 @@ public enum LottoPrize {
     public int getGradePrize() {
         return this.gradePrize;
     }
-
-    public int sumCurrentPrizeAmout(int numberOfWons) {
-        return this.gradePrize * numberOfWons;
-    }
 }

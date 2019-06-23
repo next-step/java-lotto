@@ -10,15 +10,18 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toCollection;
 
 public class RandomNumberCreator {
-    private List<Integer> shuffleNum;
+    private static int START_NUMBER = 1;
+    private static int END_NUMBER = 45;
+
+    private static List<Integer> shuffleNum;
 
     public RandomNumberCreator() {
         insertSequentialNumbers();
         shuffleNumbers();
     }
 
-    private void insertSequentialNumbers() {
-        shuffleNum = IntStream.rangeClosed(1, 45)
+    private static void insertSequentialNumbers() {
+        shuffleNum = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
                 .boxed()
                 .collect(toCollection(ArrayList::new));
     }
@@ -27,14 +30,9 @@ public class RandomNumberCreator {
         Collections.shuffle(this.shuffleNum);
     }
 
-    private int getLottoNumber(int i) {
-        return this.shuffleNum.get(i);
-    }
-
     public List<Integer> getLotto(int length) {
-        return IntStream.range(0, length)
-                .boxed()
-                .map(n -> getLottoNumber(n))
+        return this.shuffleNum.stream()
+                .limit(length)
                 .collect(Collectors.toList());
     }
 
