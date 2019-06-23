@@ -38,12 +38,10 @@ public class StringCalculatorTest {
     public void add_custom_구분자() throws Exception {
         assertThat(cal.add("//;\n1;2;3")).isEqualTo(6);
     }
-/*
-    @Test
+
+    @Test(expected=RuntimeException.class)
     public void add_negative() throws Exception {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            cal.add("-1,2,3");
-        });
+        cal.add("-1,2,3");
     }
-*/
+
 }

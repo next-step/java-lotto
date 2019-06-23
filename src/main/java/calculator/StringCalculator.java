@@ -39,19 +39,27 @@ public class StringCalculator {
     }
 
     int stringToNum(String val) {
-        return Integer.parseInt(val);
+        int num = Integer.parseInt(val);
+        checkNegativeNum(num);
+        return num;
     }
 
-    boolean isNull(String value) {
-        if (value == null) {
+    void checkNegativeNum(int val) throws RuntimeException {
+        if (0 > val) {
+            throw new RuntimeException("음수는 허용하지 않습니다.");
+        }
+    }
+
+    boolean isNull(String val) {
+        if (val == null) {
             return true;
         }
         return false;
     }
 
-    boolean isEmpty(String value) {
-        value = value.trim();
-        if (value.isEmpty()) {
+    boolean isEmpty(String val) {
+        val = val.trim();
+        if (val.isEmpty()) {
             return true;
         }
         return false;
