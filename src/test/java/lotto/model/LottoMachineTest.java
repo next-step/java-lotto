@@ -7,12 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-
 // 1. n개의 로또를 생성한다.
 // 2. 당첨 번호를 생성한다. 당첨번호는 수동
 // 3. 당첨 결과 확인
-
-// 1. Money -> LottoTicket 을 준다.
 // 2. void - > 당첨 로또번호
 public class LottoMachineTest {
 
@@ -21,7 +18,7 @@ public class LottoMachineTest {
     void buyLottoWithMoney() {
         Money money = Money.wons(1000);
 
-        LottoTicket result = LottoMachine.sellTo(money);
+        LottoTicket result = LottoMachine.buy(money);
 
         assertThat(result.getLottos()).hasSize(1);
     }
@@ -31,7 +28,7 @@ public class LottoMachineTest {
     void buyManyLottoWithMoney() {
         Money money = Money.wons(14000);
 
-        LottoTicket lottoTicket = LottoMachine.sellTo(money);
+        LottoTicket lottoTicket = LottoMachine.buy(money);
 
         assertThat(lottoTicket.getLottos()).hasSize(14);
     }
@@ -42,6 +39,6 @@ public class LottoMachineTest {
         Money money = Money.wons(0);
 
         assertThatExceptionOfType(MinimumAmountException.class)
-                .isThrownBy(() -> LottoMachine.sellTo(money));
+                .isThrownBy(() -> LottoMachine.buy(money));
     }
 }

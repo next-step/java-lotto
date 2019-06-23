@@ -9,7 +9,7 @@ import static lotto.model.Lotto.SIZE;
 import static lotto.model.Number.MAX;
 import static lotto.model.Number.MIN;
 
-public class NumberGenerator {
+public class LottoGenerator {
 
     private static final List<Number> NUMBERS;
 
@@ -19,9 +19,13 @@ public class NumberGenerator {
                             .collect(toList());
     }
 
-    public static Lotto getLotto() {
+    public static Lotto generate() {
         shuffle();
         return Lotto.from(getNumbers());
+    }
+
+    public static Lotto generate(List<Number> numbers) {
+        return Lotto.from(numbers);
     }
 
     private static void shuffle() {
