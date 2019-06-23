@@ -1,7 +1,6 @@
 package calculator;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,12 +33,12 @@ public class StringCalculatorTest {
     public void add_쉼표_또는_콜론_구분자() throws Exception {
         assertThat(cal.add("1,2:3")).isEqualTo(6);
     }
-/*
+
     @Test
     public void add_custom_구분자() throws Exception {
         assertThat(cal.add("//;\n1;2;3")).isEqualTo(6);
     }
-
+/*
     @Test
     public void add_negative() throws Exception {
         assertThatIllegalArgumentException().isThrownBy(() -> {
