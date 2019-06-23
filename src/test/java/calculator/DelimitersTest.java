@@ -1,17 +1,34 @@
 package calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DelimitersTest {
+    Delimiters delimiters;
+    Delimiter commaDelimiter;
+    Delimiter colonDelimiter;
+
+    @BeforeEach
+    void setUp() {
+        delimiters = new Delimiters();
+        commaDelimiter = new Delimiter(",");
+        colonDelimiter = new Delimiter(":");
+    }
+
     @Test
     @DisplayName("기본 생성자는 ',' 및 ':' 를 갖고있다")
     void constructor() {
-        Delimiters delimiters = new Delimiters();
-        Delimiter commaDelimiter = new Delimiter(",");
-        Delimiter colonDelimiter = new Delimiter(":");
         assertThat(delimiters.getDelimiters()).contains(commaDelimiter, colonDelimiter);
+    }
+
+    @Test
+    @DisplayName("생성자를 추가 할 수 있다")
+    void addDelimiter() {
+        Delimiters newDelimiters = delimiters.addDelimiter("-");
+        Delimiter newDelimiter = new Delimiter("-");
+        assertThat(newDelimiters.getDelimiters()).contains(commaDelimiter, colonDelimiter, newDelimiter);
     }
 }
