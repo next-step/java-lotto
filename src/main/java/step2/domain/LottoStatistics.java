@@ -24,9 +24,6 @@ public class LottoStatistics {
             rankMap.put(rank, lottos);
         }
         return rankMap;
-//        return lottos.stream()
-//                     .map(lotto -> lotto.matchLotto(winningLotto))
-//                     .collect(Collectors.groupingBy(lottos -> Collectors.groupingBy(lotto -> Lotto::matchLotto)));
     }
 
     public List<LottoRank> checkMyRanks(final WinningLotto winningLotto) {

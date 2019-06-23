@@ -20,18 +20,15 @@ public class Lotto {
     }
 
     public LottoRank matchLotto(WinningLotto lotto) {
-        int matchCount = 0;
-        for (int number : lottoNumbers) {
-            matchCount += match(number, lotto.getLotto());
-        }
-        return LottoRank.matchOf(matchCount);
+        final long matchCount = lottoNumbers.stream()
+                                            .filter(number -> match(number, lotto.getLotto()))
+                                            .count();
+
+        return LottoRank.matchOf((int) matchCount);
     }
 
-    private int match(int answerNumber, Lotto lotto) {
-        if (lotto.lottoNumbers.contains(answerNumber)) {
-            return 1;
-        }
-        return 0;
+    private boolean match(final int answerNumber, final Lotto lotto) {
+        return lotto.lottoNumbers.contains(answerNumber);
     }
 
     @Override
