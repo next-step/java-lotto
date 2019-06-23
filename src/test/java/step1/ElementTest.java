@@ -23,4 +23,24 @@ public class ElementTest {
         //Then
         assertThat(element.value).isEqualTo(1);
     }
+
+    @Test
+    void 정수로_Element를_생성할_수_있다() {
+        //Given
+        int testValue = 1;
+        Element element = Element.from(testValue);
+        //When
+        //Then
+        assertThat(element.value).isEqualTo(testValue);
+    }
+
+    @Test
+    void 문자열로_Element를_생성할_수_있다() {
+        //Given
+        String testValue = "1";
+        Element element = Element.from(testValue);
+        //When
+        //Then
+        assertThat(element.value).isEqualTo(1);
+    }
 }
