@@ -5,19 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.Math.toIntExact;
-
 public class Lotto {
-    private final int LOTTO_SIZE = 6;
+    private static final int LOTTO_SIZE = 6;
 
     private List<Integer> luckyNumbers;
 
-    protected Lotto() {
+    Lotto() {
         this.luckyNumbers = new ArrayList<>();
         this.makeLotto();
     }
 
-    protected Lotto(List<Integer> numbers) {
+    Lotto(List<Integer> numbers) {
         this.luckyNumbers = numbers;
         Collections.sort(this.luckyNumbers);
     }
@@ -27,19 +25,19 @@ public class Lotto {
         Collections.sort(this.luckyNumbers);
     }
 
-    protected int checkNumberOfMatches(List<Integer> winNumbers) {
-        return toIntExact(winNumbers
+    public int checkNumberOfMatches(List<Integer> winNumbers) {
+        return (int) luckyNumbers
                 .stream()
-                .filter(number -> this.luckyNumbers.contains(number))
-                .count());
+                .filter(winNumbers::contains)
+                .count();
     }
 
-    protected boolean isNumSize(int numSize) {
+    public boolean isNumSize(int numSize) {
         return this.luckyNumbers.size() == numSize;
     }
 
-    protected void printLotto() {
-        OutputView.printTextln(this.luckyNumbers);
+    public List<Integer> getLotto() {
+        return this.luckyNumbers;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package step2.iksoo.lottoAuto;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class OutputView {
@@ -29,13 +30,17 @@ public class OutputView {
         System.out.println(text);
     }
 
+    public static void printLottos(List<Lotto> lottos) {
+        IntStream.range(0, lottos.size())
+                .forEach(n -> printTextln(lottos.get(n).getLotto()));
+        printBlankLine();
+    }
+
     public static int printResult(int[] resultWinners) {
         int sumPrize = IntStream.range(0, resultWinners.length)
                 .filter(matchesNumber -> matchesNumber >= 3)
                 .peek(matchesNumber -> printTextln(matchesNumber + "개 일치 (" + lottoPrize[matchesNumber] + "원)- " + resultWinners[matchesNumber] + "개"))
-                .map(matchesNumber -> {
-                    return lottoPrize[matchesNumber] * resultWinners[matchesNumber];
-                })
+                .map(matchesNumber -> lottoPrize[matchesNumber] * resultWinners[matchesNumber])
                 .sum();
         return sumPrize;
     }

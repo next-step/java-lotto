@@ -9,6 +9,8 @@ public class LottoMain {
 
     public static void main(String[] args) {
         Lottos lottos = new Lottos(buyLotto(lottoOrder()));
+        OutputView.printLottos(lottos.getLottos());
+
         List<Integer> winNumbers = getKnowWinnerNumbers();
         int[] resultLottery = lottos.checkLotteryWin(winNumbers);
         int amoutPrize = OutputView.printResult(resultLottery);
