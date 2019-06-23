@@ -15,4 +15,13 @@ public class LottoNumberTest {
           .isThrownBy(() -> new LottoNumber(0))
           .withMessage(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.message());
     }
+    
+    @Test
+    @DisplayName("로또 번호 45 초과 입력불가")
+    void maxNumberTest() {
+        //Given
+        Assertions.assertThatIllegalArgumentException()
+          .isThrownBy(() -> new LottoNumber(46))
+          .withMessage(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.message());
+    }
 }

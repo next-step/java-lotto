@@ -22,6 +22,10 @@ public class LottoNumbersMaker {
     
     public static List<LottoNumber> getNewLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(SUB_START_POINT, SUB_END_POINT);
+        List<LottoNumber> newLottoNumbers = IntStream.range(SUB_START_POINT, SUB_END_POINT)
+          .mapToObj(i -> lottoNumbers.get(i).getCopied())
+          .collect(Collectors.toList());
+        Collections.sort(newLottoNumbers);
+        return newLottoNumbers;
     }
 }

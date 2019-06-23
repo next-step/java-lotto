@@ -1,20 +1,24 @@
 package lotto.controller;
 
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
     private InputView consoleInputView;
     private ResultView consoleResultView;
+    private Lottos lottos;
     
     public LottoController(InputView consoleInputView, ResultView consoleResultView) {
         this.consoleInputView = consoleInputView;
         this.consoleResultView = consoleResultView;
+        lottos = new Lottos();
     }
     
     public void runBuyingLottoProcess() {
         consoleInputView.printCashAnswer();
-        int cashPayment = consoleInputView.getUserInputCashPayment();
+        lottos.buyLottos(consoleInputView.getUserInputCashPayment());
+        consoleInputView.printLottos(lottos);
     }
     
     public void runResultProcess() {

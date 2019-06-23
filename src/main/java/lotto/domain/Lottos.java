@@ -34,4 +34,9 @@ public class Lottos {
         
         return buyableCount;
     }
+    
+    @Override
+    public String toString() {
+        return lottos + "";
+    }
 }
