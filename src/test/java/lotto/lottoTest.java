@@ -2,7 +2,9 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,4 +27,27 @@ public class lottoTest {
         List<Integer> lottoNum = lottoMachine.getGameNumber();
         assertThat(lottoNum.size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("입력한 당첨번호와 3개일치 테스트")
+    void lottoWinning(){
+        String LastWeekWinnerNumber = "1,2,3,13,35,42";
+        List<Integer> lottoNumber = Arrays.asList(new Integer[]{6,13,23,29,35,42});
+        Lotto lotto = new Lotto(lottoNumber);
+        lotto.winnerCheck(LastWeekWinnerNumber);
+        assertThat(lotto.getWinnerNumberCount()).isEqualTo(3);
+        assertThat(lotto.getWinnerPrice()).isEqualTo(5000);
+    }
+
+    @Test
+    @DisplayName("입력한 당첨번호와 6개일치 테스트")
+    void lottoWinningAll(){
+        String LastWeekWinnerNumber = "6,13,23,29,35,42";
+        List<Integer> lottoNumber = Arrays.asList(new Integer[]{6,13,23,29,35,42});
+        Lotto lotto = new Lotto(lottoNumber);
+        lotto.winnerCheck(LastWeekWinnerNumber);
+        assertThat(lotto.getWinnerNumberCount()).isEqualTo(6);
+        assertThat(lotto.getWinnerPrice()).isEqualTo(20000000);
+    }
+
 }
