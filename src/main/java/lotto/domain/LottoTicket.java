@@ -34,13 +34,9 @@ public class LottoTicket {
     }
   }
 
-  public int winNumberSize(List<Integer> winNumber) {
-    int result = 0;
-    for (int number : winNumber) {
-      if (numbers.contains(number)) {
-        result++;
-      }
-    }
-    return result;
+  public long winNumberSize(List<Integer> winNumber) {
+    return winNumber.stream()
+        .filter(numbers::contains)
+        .count();
   }
 }
