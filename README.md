@@ -47,4 +47,5 @@
     - [x] REFACTORING
 - [ ] 입력값 분할하는 메서드를 객체(StringSplitter)로 분할
     - [x] TEST - StringSplitter 생성
-    - [x] TEST - 입력된 문자열을 규칙에 따라 분할
+    - [x] TEST - 입력된 문자열을 규칙에 따라 분할하여 배열로 반환
+    - [x] TEST - 규칙에 따라 분할된 배열을 Elements 객체로 반환

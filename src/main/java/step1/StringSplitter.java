@@ -16,7 +16,7 @@ public class StringSplitter {
     public static String[] splitToArray(String inputString) {
         String[] elements = inputString.split(DEFAULT_SEPARATOR);
         Matcher m = CUSTOM_SEPARATOR.matcher(inputString);
-        if(m.find()) {
+        if (m.find()) {
             String customSeparator = m.group(1);
             elements = m.group(2).split(customSeparator);
         }

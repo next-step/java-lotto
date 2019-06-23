@@ -27,7 +27,7 @@ public class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"-1,-1", "0,0", "1,1"})
+    @CsvSource({"0,0", "1,1"})
     void 숫자_하나를_문자열로_입력할_경우_해당_숫자를_반환한다(String inputString, int expectedResult) {
         //Given
         //When
@@ -38,19 +38,19 @@ public class StringCalculatorTest {
     @Test
     void 숫자_두개를_컴마_구분자로_입력할_경우_두_숫자의_합을_반환한다() {
         //Given
-        String inputString = "-1,2";
+        String inputString = "1,2";
         //When
         //Then
-        assertThat(calculator.calculate(inputString)).isEqualTo(1);
+        assertThat(calculator.calculate(inputString)).isEqualTo(3);
     }
 
     @Test
     void 구분자를_컴마_이외에_콜론을_사용_가능하다() {
         //Given
-        String inputString = "-1:2,3";
+        String inputString = "1:2,3";
         //When
         //Then
-        assertThat(calculator.calculate(inputString)).isEqualTo(4);
+        assertThat(calculator.calculate(inputString)).isEqualTo(6);
     }
 
     @Test
