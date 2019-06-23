@@ -14,6 +14,10 @@ public class LottoAnalyzer {
 
     public LottoAnalyzer(final Lotto winningLotto,
                          final LottoNumber bonusLottoNumber) {
+        if (winningLotto.contains(bonusLottoNumber)) {
+            throw new IllegalStateException();
+        }
+
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
     }
