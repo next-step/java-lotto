@@ -1,6 +1,7 @@
 package com.jaeyeonling.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -66,6 +67,23 @@ class LottoAnalyzerTest {
 
         // then
         assertThat(returnOnInvestment).isEqualTo(expect);
+    }
+
+    @DisplayName("로또 정보를 분석 후 수익률 확인")
+    @Test
+    void should_return_second() {
+        // given
+        final Lotto winningLotto = new FixtureLotto();
+        final Lotto expectLotto = new FixtureLotto(LottoNumber.MIN + 1);
+
+        final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
+
+        // when
+        final LottoAnalyzer analyzer = new LottoAnalyzer(winningLotto, bonusLottoNumber);
+        final LottoGameReport report = analyzer.analyze(List.of(expectLotto));
+
+        // then
+        assertThat(report.getMatchCountByPrize(LottoPrize.SECOND)).isEqualTo(1);
     }
 
     private LottoGameReport generateLottoGameReport(final int analyzeCount) {

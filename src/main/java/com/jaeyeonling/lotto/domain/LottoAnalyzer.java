@@ -10,9 +10,16 @@ public class LottoAnalyzer {
     private static final int INCREMENT_MATCH_COUNT = 1;
 
     private final Lotto winningLotto;
+    private LottoNumber bonusLottoNumber;
 
     public LottoAnalyzer(final Lotto winningLotto) {
         this.winningLotto = winningLotto;
+    }
+
+    public LottoAnalyzer(final Lotto winningLotto,
+                         final LottoNumber bonusLottoNumber) {
+        this.winningLotto = winningLotto;
+        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public LottoGameReport analyze(final List<Lotto> lottos) {
