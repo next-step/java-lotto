@@ -52,6 +52,36 @@
     - [x] REFACTORING
 - [x] 외부로 위임된 StringCalculator 안의 메서드들 정리
 
-
 ### step1 - 이슈
 - Element 객체를 불변 객체로 만들 필요가 있을지
+
+
+### step2 - 로또(자동)
+- [ ] 로또번호(LottoNumber) 객체 생성
+    - [ ] TEST - 로또번호를 자동으로 생성한다 (Collections.shuffle())
+    - [ ] TEST - 생성된 로또번호를 정렬한다 (Collections.sort())
+    - [ ] TEST - 로또번호의 범위는 1~45의 자연수
+    - [ ] REFACTORING
+- [ ] 로또복권(LottoTicket) 객체 생성
+    - [ ] TEST - 로또복권의 로또번호는 중복이 없다
+    - [ ] TEST - 당첨번호와 비교해서 일치하는 개수를 반환한다 (ArrayList.contains())
+    - [ ] REFACTORING
+- [ ] 당첨번호(LuckyNumber) 객체 생성
+    - [ ] TEST - 입력받은 당첨번호로 일급 컬렉션을 생성한다
+    - [ ] REFACTORING
+- [ ] 로또자동판매기(LottoSeller) 객체 생성
+    - [ ] TEST - 금액을 입력 받아 구입할 로또 복권 개수를 반환한다
+    - [ ] TEST - 구입할 개수만큼 로또복권을 생성한다
+    - [ ] TEST - 각 일치 개수 별 당첨된 복권의 개수를 반환한다
+    - [ ] TEST - 생성된 로또복권의 수익률을 계산한다
+    - [ ] REFACTORING
+- [ ] InputView 객체 생성
+    - [ ] TEST - 구입 금액을 입력받고, 출력한다
+    - [ ] TEST - 구매 개수를 LottoSeller로 부터 반환받아서 출력한다
+    - [ ] TEST - 구매 개수만큼 생성된 로또복권들을 출력한다
+    - [ ] TEST - 지난주 당첨 번호를 입력 받는다
+    - [ ] REFACTORING
+- [ ] OutputView 객체 생성
+    - [ ] TEST - 각 일치 개수 별 당첨된 복권의 개수를 LottoSeller로 부터 반환받아서 출력한다
+    - [ ] TEST - 총 수익률을 LottoSeller로 부터 반환받아서 출력한다.
+    - [ ] REFACTORING

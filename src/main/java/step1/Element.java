@@ -10,7 +10,7 @@ public class Element {
 
     private int value;
 
-    public Element(int value) {
+    private Element(int value) {
         this.value = value;
     }
 
