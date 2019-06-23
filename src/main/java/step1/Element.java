@@ -26,6 +26,10 @@ public class Element {
         return Element.from(Integer.parseInt(inputString));
     }
 
+    public Element add(Element element) {
+        return Element.from(this.getValue() + element.getValue());
+    }
+
     public int getValue() {
         return value;
     }

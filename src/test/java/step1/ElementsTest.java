@@ -29,9 +29,9 @@ public class ElementsTest {
 
         //When
         Elements elements = Elements.from(testElements);
-        int result = elements.sum();
+        Element result = elements.sum();
 
         //Then
-        assertThat(result).isEqualTo(15);
+        assertThat(result.getValue()).isEqualTo(15);
     }
 }

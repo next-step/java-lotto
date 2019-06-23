@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Elements {
     private List<Element> elements;
 
-    Elements(List<Element> inputString) {
+    private Elements(List<Element> inputString) {
         this.elements = new ArrayList<>(inputString);
     }
 
@@ -19,10 +19,10 @@ public class Elements {
                 .collect(Collectors.toList()));
     }
 
-    public int sum() {
+    public Element sum() {
         return elements.stream()
-                .map(Element::getValue)
-                .reduce(0, Integer::sum);
+                .reduce(Element::add)
+                .get();
     }
 
 }
