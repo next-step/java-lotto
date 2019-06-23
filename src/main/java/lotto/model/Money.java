@@ -6,22 +6,25 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final Money ZERO = new Money(0);
     private long amount;
 
-    private Money(int amount) {
+    private Money(long amount) {
         this.amount = amount;
     }
 
-    public static Money wons(int amount) {
+    public static Money wons(long amount) {
         if (amount < 0) {
             throw new MinimumAmountException(amount);
         }
         return new Money(amount);
     }
 
-    public long getAmount() {
-        return amount;
+    public long countAvailableLotto() {
+        long count = amount / Lotto.PRICE.amount;
+        if (count <= 0) {
+            throw new MinimumAmountException(amount);
+        }
+        return count;
     }
 
     @Override
@@ -42,13 +45,5 @@ public class Money {
         return "Money{" +
                 "amount=" + amount +
                 '}';
-    }
-
-    public long countAvailable(Money other) {
-        long count = amount / other.amount;
-        if(count <= 0){
-            throw new MinimumAmountException(amount);
-        }
-        return count;
     }
 }
