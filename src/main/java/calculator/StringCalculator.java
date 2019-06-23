@@ -2,22 +2,34 @@ package calculator;
 
 public class StringCalculator {
     private static final int EMPTY_NUM = 0;
+    private static final String COMMA_DELIMITER = ",";
+    private static final String COMMA_OR_COLON_DELIMITER = ",|:";
 
-    int add(String value) {
+    int result;
 
-        if (isNull(value)) {
+    int add(String val) {
+
+        if (isNull(val)) {
             return EMPTY_NUM;
         }
-        if (isEmpty(value)) {
+        if (isEmpty(val)) {
             return EMPTY_NUM;
         }
-        int num = stringToNum(value);
+        String[] numStrings = stringToNumStrings(val, COMMA_OR_COLON_DELIMITER);
+        for (String numStr : numStrings) {
+            int num = stringToNum(numStr);
+            result += num;
+        }
 
-        return num;
+        return result;
     }
 
-    int stringToNum(String value) {
-        return Integer.parseInt(value);
+    String[] stringToNumStrings(String val, String delimiter) {
+        return val.split(delimiter);
+    }
+
+    int stringToNum(String val) {
+        return Integer.parseInt(val);
     }
 
     boolean isNull(String value) {
