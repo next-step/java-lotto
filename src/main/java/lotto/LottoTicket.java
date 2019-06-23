@@ -10,10 +10,14 @@ public class LottoTicket {
 
   public LottoTicket(List<Integer> numbers) {
     validateNumberSize(numbers);
+    validateDuplicate(numbers);
+    this.numbers = numbers;
+  }
+
+  private void validateDuplicate(List<Integer> numbers) {
     if (new HashSet<>(numbers).size() != LOTTO_NUMBER_SIZE) {
       throw new IllegalArgumentException("중복된 숫자가 입력될 수 없습니다.");
     }
-    this.numbers = numbers;
   }
 
   private void validateNumberSize(List<Integer> numbers) {
