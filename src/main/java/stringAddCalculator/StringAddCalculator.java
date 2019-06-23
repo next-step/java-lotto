@@ -1,6 +1,8 @@
 package stringAddCalculator;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
@@ -8,20 +10,48 @@ public class StringAddCalculator {
         if (isNullOrBlank(inputText)) {
             return 0;
         }
-        String[] StringNumbers = splitString(inputText);
+
+        String delimiter = getDelimiter(inputText);
+        String tokens = getTokens(inputText);
+        String[] StringNumbers = splitString(tokens, delimiter);
         int[] intNumbers = arrayStringToArrayInt(StringNumbers);
+
+        return excuteAdd(intNumbers);
+    }
+
+    Matcher getMatcher(String inputText) {
+        return Pattern.compile("//(.)\n(.*)").matcher(inputText);
+    }
+
+    String getTokens(String inputText) {
+        Matcher m = getMatcher(inputText);
+        if (m.find()) {
+            return m.group(2);
+        }
+        return inputText;
+    }
+
+    String getDelimiter(String inputText) {
+        Matcher m = getMatcher(inputText);
+        if (m.find()) {
+            return m.group(1);
+        }
+        return ",|:";
+    }
+
+    int excuteAdd(int[] intNumbers) {
         return Arrays.stream(intNumbers).sum();
     }
 
-    private int[] arrayStringToArrayInt(String[] stringNumbers) {
+    int[] arrayStringToArrayInt(String[] stringNumbers) {
         return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).toArray();
     }
 
-    private String[] splitString(String inputText) {
-        return inputText.split(",|:");
+    String[] splitString(String inputText, String delimiter) {
+        return inputText.split( delimiter);
     }
 
-    private boolean isNullOrBlank(String inputText) {
+    boolean isNullOrBlank(String inputText) {
         return inputText == null || inputText.isBlank();
     }
 }
