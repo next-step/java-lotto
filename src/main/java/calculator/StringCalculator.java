@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public class StringCalculator {
     private static final int EMPTY_NUM = 0;
-    private static final String COMMA_DELIMITER = ",";
     private static final String COMMA_OR_COLON_DELIMITER = ",|:";
-    private static final String COMSTOM_REG_EX = "//(.)\\n(.*)";
+    private static final String COMSTOM_REGEX = "//(.)\\n(.*)";
+    private static final String NUMBER_REGEX = "^[0-9]*$";
 
     int result;
 
@@ -21,6 +21,7 @@ public class StringCalculator {
         }
         String[] numStrings = stringToNumStrings(val);
         for (String numStr : numStrings) {
+            checkNumgerString(numStr);
             int num = stringToNum(numStr);
             result += num;
         }
@@ -28,8 +29,14 @@ public class StringCalculator {
         return result;
     }
 
+    void checkNumgerString(String val) throws RuntimeException {
+        if (!Pattern.matches(NUMBER_REGEX, val)) {
+            throw new RuntimeException("계산할 문자열은 숫자형태만 허용합니다.");
+        }
+    }
+
     String[] stringToNumStrings(String val) {
-        Matcher matcher = Pattern.compile(COMSTOM_REG_EX).matcher(val);
+        Matcher matcher = Pattern.compile(COMSTOM_REGEX).matcher(val);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
             return matcher.group(2).split(customDelimiter);
@@ -46,7 +53,7 @@ public class StringCalculator {
 
     void checkNegativeNum(int val) throws RuntimeException {
         if (0 > val) {
-            throw new RuntimeException("음수는 허용하지 않습니다.");
+            throw new RuntimeException("계산할 문자열에 음수는 허용하지 않습니다.");
         }
     }
 

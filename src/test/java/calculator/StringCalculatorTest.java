@@ -44,4 +44,9 @@ public class StringCalculatorTest {
         cal.add("-1,2,3");
     }
 
+    @Test(expected=RuntimeException.class)
+    public void add_not_number() throws Exception {
+        cal.add("aaaa,2,3");
+    }
+
 }
