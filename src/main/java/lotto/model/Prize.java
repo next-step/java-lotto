@@ -11,18 +11,25 @@ public enum Prize {
     NONE(0, 0);
 
     private final int matchCount;
-    private final int prize;
+    private final long money;
 
     Prize(int matchCount, int money) {
         this.matchCount = matchCount;
-        this.prize = money;
+        this.money = money;
     }
 
     public static Prize of(int matchCount) {
-        Prize result = Arrays.stream(Prize.values())
+        return Arrays.stream(Prize.values())
                 .filter(prize1 -> prize1.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE);
-        return result;
+    }
+
+    public long getMoney() {
+        return money;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }

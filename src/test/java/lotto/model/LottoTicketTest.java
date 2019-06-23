@@ -20,7 +20,7 @@ public class LottoTicketTest {
                 ofLotto(1, 2, 3, 4, 5, 6),
                 ofLotto(1, 2, 3, 4, 5, 7)
         );
-        LottoTicket lottoTicket = LottoTicket.of( lottos);
+        LottoTicket lottoTicket = LottoTicket.of(lottos);
 
         LottoResult lottoResult = lottoTicket.result(winningLotto);
 

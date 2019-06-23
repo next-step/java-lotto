@@ -11,10 +11,6 @@ import static lotto.model.LottoTest.ofLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-// 1. n개의 로또를 생성한다.
-// 2. 당첨 번호를 생성한다. 당첨번호는 수동
-// 3. 당첨 결과 확인
-// 2. void - > 당첨 로또번호
 public class LottoMachineTest {
 
     @DisplayName("당첨번호를 생성합니다")
@@ -38,10 +34,10 @@ public class LottoMachineTest {
         assertThat(result.getLottos()).hasSize(1);
     }
 
-    @DisplayName("14000원이면 로또를 구매할 수 없다")
+    @DisplayName("14500원이면 로또를 14개 구매한다")
     @Test
     void buyManyLottoWithMoney() {
-        Money money = Money.wons(14000);
+        Money money = Money.wons(14500);
 
         LottoTicket lottoTicket = LottoMachine.buy(money);
 
