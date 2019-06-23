@@ -16,7 +16,9 @@ public class StringCalculator {
         int result = 0;
         for (String numStr : stringToNumStrings(val)) {
             checkNumberString(numStr);
-            result += stringToNum(numStr);
+            int num = stringToNum(numStr);
+            checkNegativeNum(num);
+            result += num;
         }
         return result;
     }
@@ -31,9 +33,7 @@ public class StringCalculator {
     }
 
     private int stringToNum(String val) {
-        int num = Integer.parseInt(val);
-        checkNegativeNum(num);
-        return num;
+        return Integer.parseInt(val);
     }
 
     private String removalWhitespace(String val) {
