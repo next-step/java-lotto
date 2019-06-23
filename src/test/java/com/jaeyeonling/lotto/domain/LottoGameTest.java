@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,13 +14,7 @@ class LottoGameTest {
     @DisplayName("로또 게임 1개 구매")
     @Test
     void should_return_oneLotto_when_buy() {
-        // given
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = 1; lottoNumber <= Lotto.COUNT_OF_LOTTO_NUMBER; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
-
-        final Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = new FixtureLotto();
         final LottoGame lottoGame = new LottoGame(() -> lotto);
 
         final Money money = new Money(Lotto.PRICE_VALUE);

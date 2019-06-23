@@ -5,9 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -71,11 +69,7 @@ class LottoAnalyzerTest {
     }
 
     private LottoGameReport generateLottoGameReport(final int analyzeCount) {
-        final Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int lottoNumber = LottoNumber.MIN; lottoNumber <= Lotto.COUNT_OF_LOTTO_NUMBER; lottoNumber++) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
-        }
-        final Lotto lotto = new Lotto(lottoNumbers);
+        final Lotto lotto = new FixtureLotto();
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto);
 
         return lottoAnalyzer.analyze(generateLottos(analyzeCount, lotto));
