@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class LottoMachine {
 
     public static LottoTicket buy(Money money) {
-        long count = money.countAvailable(Lotto.PRICE);
+        long count = money.countAvailableLotto();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(LottoGenerator.generate());

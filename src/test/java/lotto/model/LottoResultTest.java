@@ -10,10 +10,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    @DisplayName("1등 2개, 2등 당첨 1개 인경우")
+    @DisplayName("총 당첨 금액을 확인한다")
     @Test
-    void getLottoResult() {
-        List<Prize> prizes =Arrays.asList(
+    void getLottoResult_totalAmount() {
+        List<Prize> prizes = Arrays.asList(
+                Prize.FIRST,
+                Prize.SECOND);
+        long totalAmount = Prize.FIRST.getMoney() + Prize.SECOND.getMoney();
+
+        LottoResult result = LottoResult.of(prizes);
+
+        assertThat(result.getTotalMoney()).isEqualTo(totalAmount);
+    }
+
+    @DisplayName("당첨된 등수의 개수를 확인한다")
+    @Test
+    void getLottoResult_count() {
+        List<Prize> prizes = Arrays.asList(
                 Prize.FIRST,
                 Prize.FIRST,
                 Prize.SECOND);
@@ -24,4 +37,16 @@ public class LottoResultTest {
         assertThat(result.getCount(Prize.SECOND)).isEqualTo(1);
     }
 
+    @DisplayName("당첨된 로또가 없는 경우")
+    @Test
+    void getPrizeSummary() {
+        List<Prize> prizes = Arrays.asList(
+                Prize.NONE,
+                Prize.NONE);
+
+        LottoResult result = LottoResult.of(prizes);
+
+        assertThat(result.getCount(Prize.NONE)).isEqualTo(2);
+        assertThat(result.getTotalMoney()).isEqualTo(0);
+    }
 }
