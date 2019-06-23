@@ -33,7 +33,7 @@
            // tokens 들로 덧셈 구현
       }
 * 특정 양수의 숫자를 전달받아 기존에 있던 숫자에 덧셈을 한다.
-* 문자열 계산기에 숫자 이외의 값(null 과 빈문자열은 0으로 치환한다) 
+* 문자열 계산기에 숫자 이외의 값
   전달받는 경우 RuntimeException 예외를 throw.
 * 음수를 전달받는 경우 RuntimeException 예외를 throw 한다. 
   @Test(expected=RuntimeException.class) // 특정 예외가 발생하면 테스트 성공

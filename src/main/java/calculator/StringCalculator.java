@@ -13,9 +13,8 @@ public class StringCalculator {
         if (isNull(val) || isEmpty(val)) {
             return EMPTY_NUM;
         }
-        String[] numStrings = stringToNumStrings(val);
         int result = 0;
-        for (String numStr : numStrings) {
+        for (String numStr : stringToNumStrings(val)) {
             checkNumberString(numStr);
             result += stringToNum(numStr);
         }
@@ -37,6 +36,10 @@ public class StringCalculator {
         return num;
     }
 
+    private String removalWhitespace(String val) {
+        return val.trim();
+    }
+
     private void checkNumberString(String val) throws RuntimeException {
         if (!Pattern.matches(NUMBER_REGEX, val)) {
             throw new RuntimeException("계산할 문자열은 숫자형태만 허용합니다.");
@@ -50,22 +53,17 @@ public class StringCalculator {
     }
 
     private boolean isNull(String val) {
-        if (val == null) {
-            return true;
-        }
-        return false;
+        return val == null;
     }
 
     private boolean isEmpty(String val) {
-        val = val.trim();
-        if (val.isEmpty()) {
-            return true;
-        }
-        return false;
+        val = removalWhitespace(val);
+        return val.isEmpty();
     }
 
     public static void main(String[] args) {
         StringCalculator cal = new StringCalculator();
+        System.out.println("null 계산기 결과]"+cal.add(null));
         System.out.println("[쉼표 또는 콜론 계산기 결과]"+cal.add("1,2:3:4,5"));
         System.out.println("[쉼표 또는 콜론 계산기 결과]"+cal.add("//;\n1;2;3"));
     }
