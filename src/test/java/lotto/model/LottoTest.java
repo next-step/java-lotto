@@ -3,11 +3,14 @@ package lotto.model;
 import lotto.exception.InvalidCountOfLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
+import static lotto.model.Lotto.SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -16,15 +19,19 @@ public class LottoTest {
     @DisplayName("6개의 숫자를 가진 로또를 생성한다")
     @Test
     void createLottoWithSixBall() {
-        Lotto lotto = Lotto.from(ofNumbersByRange(1, 6));
+        Lotto lotto = Lotto.from(ofNumbers(SIZE));
         assertThat(lotto).isNotNull();
     }
 
     @DisplayName("로또 넘버가 6개가 아닌 경우 exception")
-    @Test
-    void createLottoByLessOrMoreNumberThenFail() {
+    @ParameterizedTest
+    @ValueSource(ints = {
+            SIZE - 1,
+            SIZE + 1,
+    })
+    void createLottoByLessOrMoreNumberThenFail(int numberCount) {
         assertThatExceptionOfType(InvalidCountOfLottoException.class)
-                .isThrownBy(() -> Lotto.from(ofNumbersByRange(1, 7)));
+                .isThrownBy(() -> Lotto.from(ofNumbers(numberCount)));
     }
 
     @DisplayName("로또 넘버가 중복인 경우 exception")
@@ -34,15 +41,19 @@ public class LottoTest {
                 .isThrownBy(() -> Lotto.from(ofNumbers(1, 2, 3, 4, 5, 5)));
     }
 
-    private List<Number> ofNumbers(int... numbers) {
+    static Lotto ofLotto(int... numbers) {
+        return Lotto.from(ofNumbers(numbers));
+    }
+
+    static List<Number> ofNumbers(int... numbers) {
         return IntStream.of(numbers)
                 .mapToObj(Number::of)
                 .collect(toList());
     }
 
-    private List<Number> ofNumbersByRange(int start, int end) {
+    private List<Number> ofNumbers(int count) {
         return IntStream
-                .rangeClosed(start, end)
+                .rangeClosed(1, count)
                 .mapToObj(Number::of)
                 .collect(toList());
     }
