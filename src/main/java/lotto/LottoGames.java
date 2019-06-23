@@ -7,10 +7,10 @@ public class LottoGames {
 
     private static final int lottoOneGamePrice = 1000;
 
-    private static List <Lotto> lottos;
+    private List <Lotto> lottos;
 
-    public LottoGames() {
-        lottos = new ArrayList <>();
+    public LottoGames(List <Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public void setLotto(Lotto lotto) {
