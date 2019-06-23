@@ -18,15 +18,18 @@ public class StringCalculator {
         if (isEmpty(inputString)) {
             return VALUE_FOR_EMPTY_INPUT;
         }
+        return sumElements(inputStringSplitter(inputString));
+    }
+
+    private String[] inputStringSplitter(String inputString) {
+        String[] elements = inputString.split(DEFAULT_SEPARATOR);
 
         Matcher m = CUSTOM_SEPARATOR.matcher(inputString);
-
         if(m.find()) {
             String customSeparator = m.group(1);
-            String[] elements = m.group(2).split(customSeparator);
-            return sumElements(elements);
+            elements = m.group(2).split(customSeparator);
         }
-        return sumElements(inputString.split(DEFAULT_SEPARATOR));
+        return elements;
     }
 
     private int sumElements(String[] elements) {
