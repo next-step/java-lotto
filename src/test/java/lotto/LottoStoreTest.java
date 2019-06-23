@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoGameTest {
+public class LottoStoreTest {
 
   @DisplayName("로또 구입")
   @Test

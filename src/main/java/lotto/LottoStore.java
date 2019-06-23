@@ -9,7 +9,7 @@ public class LottoStore {
     if (price % LOTTO_PRICE != 0) {
       throw new IllegalArgumentException(LOTTO_PRICE + "원 단위로 입력해야 합니다.");
     }
-    return validateInput(input) / LOTTO_PRICE;
+    return price / LOTTO_PRICE;
   }
 
   private static int validateInput(final String input) {
@@ -19,6 +19,5 @@ public class LottoStore {
     }
     return price;
   }
-
 
 }
