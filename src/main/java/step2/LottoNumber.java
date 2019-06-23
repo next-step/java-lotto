@@ -11,7 +11,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber from(int number) {
+    public static LottoNumber from(Integer number) {
         return new LottoNumber(number);
     }
 
