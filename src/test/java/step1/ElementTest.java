@@ -48,4 +48,16 @@ public class ElementTest {
                     Element.from(testValue);
                 }).withMessageContaining("음수");
     }
+
+    @Test
+    void 문자값이_전달될_경우_RuntimeException이_발생한다() {
+        //Given
+        String testValue = "안녕!? 내 이름은 문자야 :)";
+        //When
+        //Then
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    Element.from(testValue);
+                }).withMessageContaining("0 이상의 자연수");
+    }
 }

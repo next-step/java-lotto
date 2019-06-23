@@ -15,6 +15,9 @@ public class Element {
     }
 
     public static Element from(String inputString) {
+        if (!inputString.matches("[0-9]\\d*")) {
+            throw new RuntimeException("0 이상의 자연수만 가능합니다.");
+        }
         return Element.from(Integer.parseInt(inputString));
     }
 }
