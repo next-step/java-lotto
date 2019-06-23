@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -10,6 +11,7 @@ public class LottoNumbers {
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
     this.lottoNumbers = lottoNumbers;
+    Collections.sort(lottoNumbers);
   }
 
   public int getSize() {

@@ -11,6 +11,10 @@ public class Lottos {
     makeLottos(quantity);
   }
 
+  public Lottos(List<Lotto> purchasedLottos) {
+    lottos = purchasedLottos;
+  }
+
   private void makeLottos(Quantity quantity) {
     for (int i = 0; i < quantity.getValue(); i++) {
       lottos.add(new Lotto());
@@ -21,5 +25,7 @@ public class Lottos {
     return new Quantity(lottos.size());
   }
 
-
+  public List<Lotto> getPurchasedLotto() {
+    return lottos;
+  }
 }
