@@ -7,7 +7,7 @@ public class AccumulatorTest {
     @DisplayName("분리된 숫자의 합을 반환.")
     void accumulateTest() {
         //Given
-        int[] numbers = {1, 2, 3};
+        String[] numbers = {"1", "2", "3"};
         int expectedResult = 6;
         //When
         int result = Accumulator.accumulate(numbers);
@@ -30,7 +30,7 @@ public class AccumulatorTest {
     @DisplayName("음수면 : 불가능")
     void test() {
         //Given
-        int[] minus = {-1, 0, 1};
+        String[] minus = {"-1", "0", "1"};
         //When
         //Then
         Assertions.assertThatThrownBy(() -> Accumulator.accumulate(minus)).isInstanceOf(RuntimeException.class);
