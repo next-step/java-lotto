@@ -1,21 +1,22 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum LottoEnum {
 
-    Winner3("3개 일치 ", 5000),
-    Winner4("4개 일치 ", 50000),
-    Winner5("5개 일치 ", 1500000),
-    Winner6("6개 일치 ", 20000000),
-    EMPTY("", 0);
+    Winner3("3개 일치 ", Arrays.asList(5000, 0)),
+    Winner4("4개 일치 ", Arrays.asList(50000, 1)),
+    Winner5("5개 일치 ", Arrays.asList(1500000, 2)),
+    Winner6("6개 일치 ", Arrays.asList(20000000, 3)),
+    EMPTY("", Arrays.asList(0, 0));
 
     private String winnerCount;
-    private int price;
+    private List<Integer> summary;
 
-    LottoEnum(String winnerCount, int price) {
+    LottoEnum(String winnerCount, List<Integer> summary) {
         this.winnerCount = winnerCount;
-        this.price = price;
+        this.summary = summary;
     }
 
     public static LottoEnum findByPrice(String winnerCount) {
@@ -29,8 +30,12 @@ public enum LottoEnum {
         return this.winnerCount.contains(winnerCount);
     }
 
-    public int getPrice() {
-        return price;
+    public int price() {
+        return summary.get(0);
+    }
+
+    public int summaryNumber(){
+        return summary.get(1);
     }
 
 }

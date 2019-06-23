@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class lottoTest {
     void lottoMachine() {
         LottoMachine lottoMachine = new LottoMachine();
         for (int i = 1; i <= 45; i++){
-            assertThat(lottoMachine.lottoNumbers).contains(i);
+            assertThat(lottoMachine.autoLottoNumber()).contains(i);
         }
     }
 
@@ -24,7 +25,7 @@ public class lottoTest {
     @DisplayName("6개 번호를 랜덤으로 추출 테스트")
     void lottoRandomNumber(){
         LottoMachine lottoMachine = new LottoMachine();
-        List<Integer> lottoNum = lottoMachine.getGameNumber();
+        List<Integer> lottoNum = lottoMachine.autoLottoNumber();
         assertThat(lottoNum.size()).isEqualTo(6);
     }
 
@@ -64,20 +65,21 @@ public class lottoTest {
     @Test
     @DisplayName("총 수익룰 계산 기능 구현")
     void lottoRateOfReturn(){
-        LottoGames lottoGames = new LottoGames();
         String LastWeekWinnerNumber = "6,13,23,29,35,42";
         Integer[][] testLottoSet = {
                 {6,13,23,30,36,43},
                 {1,5,7,8,9,19},
                 {22,23,34,35,36,45}
         };
-        for(Integer[] lottos : testLottoSet){
-            List<Integer> lottoNumber = Arrays.asList(lottos);
+        List<Lotto> lottos = new ArrayList <>();
+        for(Integer[] tempLottos : testLottoSet){
+            List<Integer> lottoNumber = Arrays.asList(tempLottos);
             Lotto lotto = new Lotto(lottoNumber);
             lotto.winnerCheck(LastWeekWinnerNumber);
-            lottoGames.setLotto(lotto);
+            lottos.add(lotto);
         }
-        assertThat(lottoGames.rateOfReturn()).isEqualTo(166.67);
+        LottoGames lottoGames = new LottoGames(lottos);
+        assertThat(lottoGames.rateOfReturn()).isEqualTo(1.67);
     }
 
 }

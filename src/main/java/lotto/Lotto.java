@@ -1,6 +1,8 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -40,11 +42,17 @@ public class Lotto {
     }
 
     private int winnerNumPrice() {
-        return LottoEnum.findByPrice(createFindPriceKey()).getPrice();
+        return LottoEnum.findByPrice(createFindPriceKey()).price();
     }
 
     private String createFindPriceKey(){
         return winnerNumberCount + lottoIsWinnerPriceEnumSuffix;
+    }
+
+    public String lottoNumber(){
+        return lottoGameNumber.stream()
+                .map(num -> Integer.toString(num))
+                .collect(Collectors.joining(","));
     }
 
     public String getResultText() {

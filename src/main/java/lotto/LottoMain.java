@@ -10,9 +10,10 @@ public class LottoMain {
 
         List<Lotto> lottos = new ArrayList <>();
         LottoMachine lottoMachine = new LottoMachine();
+
         int lottoGameCount = inputLottoGames / 1000;
         for(int i=0; i<lottoGameCount; i++){
-            Lotto lotto = new Lotto(lottoMachine.getGameNumber());
+            Lotto lotto = new Lotto(lottoMachine.autoLottoNumber());
             lottos.add(lotto);
         }
         OutputView.printPurchaseLottoNumber(lottos);
@@ -23,5 +24,7 @@ public class LottoMain {
         }
 
         LottoGames lottoGames = new LottoGames(lottos);
+        OutputView.printWinnerSummary(lottoGames.getSummaryWinnerCounts());
+        OutputView.printRateOfReturn(lottoGames.rateOfReturn());
    }
 }

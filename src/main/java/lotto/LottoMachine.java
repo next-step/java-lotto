@@ -6,21 +6,19 @@ import java.util.List;
 
 public class LottoMachine {
 
-    List <Integer> lottoNumbers;
-
-    public LottoMachine() {
-        createLottoMachine();
+    public List<Integer> autoLottoNumber() {
+        List<Integer> lottoNumbers = createLottoMachine();
+        Collections.shuffle(lottoNumbers);
+        List<Integer> lottoGameNumbers = lottoNumbers.subList(0,6);
+        Collections.sort(lottoGameNumbers);
+        return lottoGameNumbers;
     }
 
-    private void createLottoMachine() {
-        this.lottoNumbers = new ArrayList <>();
+    private List<Integer> createLottoMachine() {
+        List<Integer> lottoNumbers = new ArrayList <>();
         for (int i = 1; i <= 45; i++) {
-            this.lottoNumbers.add(i);
+            lottoNumbers.add(i);
         }
-    }
-
-    public List<Integer> getGameNumber() {
-        Collections.shuffle(this.lottoNumbers);
-        return this.lottoNumbers.subList(0,6);
+        return lottoNumbers;
     }
 }
