@@ -23,7 +23,7 @@ public class LottoAnalyzer {
         final Map<LottoPrize, Integer> matchCountByLottoPrize = new HashMap<>();
         for (final Lotto lotto : lottos) {
             final LottoPrize prize = findLottoPrizeByLotto(lotto);
-            incrementMatchCount(matchCountByLottoPrize, prize);
+            incrementPrizeMatchCount(matchCountByLottoPrize, prize);
         }
 
         return matchCountByLottoPrize;
@@ -34,8 +34,8 @@ public class LottoAnalyzer {
         return LottoPrize.valueOf(countOfMatch);
     }
 
-    private void incrementMatchCount(final Map<LottoPrize, Integer> matchCountByLottoPrize,
-                                     final LottoPrize prize) {
+    private void incrementPrizeMatchCount(final Map<LottoPrize, Integer> matchCountByLottoPrize,
+                                          final LottoPrize prize) {
         final int currentMatchCount = matchCountByLottoPrize.getOrDefault(prize, DEFAULT_MATCH_COUNT);
         matchCountByLottoPrize.put(prize, currentMatchCount + INCREMENT_MATCH_COUNT);
     }
