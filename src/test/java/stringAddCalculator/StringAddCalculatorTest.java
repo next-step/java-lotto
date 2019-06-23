@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.regex.Matcher;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class StringAddCalculatorTest {
@@ -37,6 +38,13 @@ class StringAddCalculatorTest {
     @Test
     void add_custom_구분자() {
         assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @Test
+    public void add_negative() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            calculator.add("-1,2,3");
+        });
     }
 
     @Test
@@ -82,5 +90,10 @@ class StringAddCalculatorTest {
     void isNullOrBlank(String input) {
         boolean result = calculator.isNullOrBlank(input);
         assertThat(result).isTrue();
+    }
+
+    @Test
+    void isMinusValue() {
+        assertThatIllegalArgumentException().isThrownBy(() -> calculator.isMinusValue(-1));
     }
 }

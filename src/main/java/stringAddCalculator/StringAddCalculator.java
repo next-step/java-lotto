@@ -44,7 +44,7 @@ public class StringAddCalculator {
     }
 
     int[] arrayStringToArrayInt(String[] stringNumbers) {
-        return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).toArray();
+        return Arrays.stream(stringNumbers).mapToInt(Integer::parseInt).filter(this::isMinusValue).toArray();
     }
 
     String[] splitString(String inputText, String delimiter) {
@@ -53,5 +53,12 @@ public class StringAddCalculator {
 
     boolean isNullOrBlank(String inputText) {
         return inputText == null || inputText.isBlank();
+    }
+
+    public boolean isMinusValue(int number) {
+        if(number < 0){
+            throw new IllegalArgumentException();
+        }
+        return true;
     }
 }
