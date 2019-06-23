@@ -3,16 +3,9 @@ package step1;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ElementTest {
-    @Test
-    void 쪼개진_입력문자열의_요소를_생성한다() {
-        //Given
-        Element element = new Element();
-        //When
-        //Then
-        assertThat(element).isNotNull();
-    }
 
     @Test
     void 쪼개진_입력문자열의_요소는_값을_가진다() {
@@ -42,5 +35,17 @@ public class ElementTest {
         //When
         //Then
         assertThat(element.value).isEqualTo(1);
+    }
+
+    @Test
+    void 음수값이_전달될_경우_RuntimeException이_발생한다() {
+        //Given
+        String testValue = "-1";
+        //When
+        //Then
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    Element.from(testValue);
+                }).withMessageContaining("음수");
     }
 }
