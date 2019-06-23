@@ -26,9 +26,9 @@ public class Lotto implements Dealable {
                 .collect(Collectors.toList());
     }
 
-    int countOfMatch(final Lotto expect) {
+    int countOfMatch(final Lotto comparisonTarget) {
         return (int) lottoNumbers.stream()
-                .filter(expect.lottoNumbers::contains)
+                .filter(comparisonTarget.lottoNumbers::contains)
                 .count();
     }
 
