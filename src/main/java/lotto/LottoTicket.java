@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoTicket {
@@ -9,6 +10,9 @@ public class LottoTicket {
 
   public LottoTicket(List<Integer> numbers) {
     validateNumberSize(numbers);
+    if (new HashSet<>(numbers).size() != LOTTO_NUMBER_SIZE) {
+      throw new IllegalArgumentException("중복된 숫자가 입력될 수 없습니다.");
+    }
     this.numbers = numbers;
   }
 
