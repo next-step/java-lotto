@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.RandomLottoGenerator;
-import lotto.utils.LottoNumberValidator;
+import lotto.domain.validator.LottoNumberValidator;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Lotto {
 
         if (prizeRule.hasBonusNumber()) {
             return isMatchNormalNumberCount(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
-                    isMatchBonusNumber(wonNumbers.getWonBonusNumbers());
+                    isMatchBonusNumber(wonNumbers.getWonBonusNumberValue());
         }
 
         return isMatchNormalNumberCount(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers());

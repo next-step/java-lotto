@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import lotto.utils.LottoNumberValidator;
+import lotto.domain.validator.LottoNumberValidator;
+import lotto.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,19 +12,19 @@ public class WonNumbers {
     private static final String DELIMITER = ",";
 
     private final List<Integer> wonNormalNumbers;
-    private final int wonBonusNumbers;
+    private final int wonBonusNumberValue;
 
-    public WonNumbers(String wonNormalNumbersValue, String wonBonusNumbers) {
+    public WonNumbers(String wonNormalNumbersValue, String wonBonusNumberValue) {
 
-        if (wonNormalNumbersValue == null || wonNormalNumbersValue.isEmpty()) {
-            throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
-        }
+        validateInputs(wonNormalNumbersValue, wonBonusNumberValue);
 
         List<Integer> wonNormalNumbers = parse(wonNormalNumbersValue);
         LottoNumberValidator.validate(wonNormalNumbers);
-        // TODO
         this.wonNormalNumbers = wonNormalNumbers;
-        this.wonBonusNumbers = Integer.parseInt(wonBonusNumbers);
+
+        int wonBonusNumber = Integer.parseInt(wonBonusNumberValue);
+        LottoNumberValidator.validateNumber(wonBonusNumber);
+        this.wonBonusNumberValue = wonBonusNumber;
     }
 
     private List<Integer> parse(String wonNumbersValue) {
@@ -39,8 +40,15 @@ public class WonNumbers {
         return wonNormalNumbers;
     }
 
-    public int getWonBonusNumbers() {
+    public int getWonBonusNumberValue() {
 
-        return wonBonusNumbers;
+        return wonBonusNumberValue;
+    }
+
+    private void validateInputs(String wonNormalNumbersValue, String wonBonusNumbers) {
+
+        if (StringUtils.isBlank(wonNormalNumbersValue) || StringUtils.isBlank(wonBonusNumbers)) {
+            throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
+        }
     }
 }
