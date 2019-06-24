@@ -7,12 +7,17 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class PrizeTest {
 
     @Test
-    void win() {
-        Prize.win(3);
-        Prize.win(3);
-        Prize.win(4);
+    void test_valueOf() {
+        assertThat(Prize.valueOf(0)).isEqualTo(Prize.LOSE);
+        assertThat(Prize.valueOf(3)).isEqualTo(Prize.FOURTH);
+    }
 
-        assertThat(Prize.PRIZE.get(3).get(1)).isEqualTo(2);
-        assertThat(Prize.PRIZE.get(4).get(1)).isEqualTo(1);
+    @Test
+    void test_getters() {
+        assertThat(Prize.valueOf(0).getCountOfWinningNumbers()).isEqualTo(0);
+        assertThat(Prize.valueOf(0).getPrizeMoney()).isEqualTo(0);
+
+        assertThat(Prize.valueOf(3).getCountOfWinningNumbers()).isEqualTo(3);
+        assertThat(Prize.valueOf(3).getPrizeMoney()).isEqualTo(5000);
     }
 }
