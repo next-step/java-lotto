@@ -64,4 +64,13 @@ class LotteryApplicationTest {
         final Set<Integer> actual = lotteryApplication.createLottery();
         assertThat(actual).hasSize(6);
     }
+
+    @Test
+    @DisplayName("생성된 로또의 숫자는 1~45 범위 안에 있어야 합니다")
+    void createLottery() {
+        final Set<Integer> actual = lotteryApplication.createLottery();
+        assertThat(actual)
+                .filteredOn(value -> value >= 1 && value <= 45)
+                .hasSize(6);
+    }
 }
