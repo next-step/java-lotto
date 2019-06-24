@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.exception.InvalidCountOfLottoException;
+import lotto.exception.NumbersIsEmptyException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +20,9 @@ public class Lotto {
     }
 
     public static Lotto from(List<Number> numbers) {
+        if(numbers == null){
+            throw new NumbersIsEmptyException();
+        }
         validateLottoSize(numbers);
         Collections.sort(numbers);
         return new Lotto(numbers);
