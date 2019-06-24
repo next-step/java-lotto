@@ -1,6 +1,21 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoPublisher {
+
+    private int purchaseAmount;
+    private List<Lotto> publishLotto;
+
+    public LottoPublisher(int purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+        this.purchaseAmount = purchaseAmount;
+        this.publishLotto = publishLottos(getBuyLottoCount());
+    }
+
+    public LottoPublisher() {
+    }
 
     void validatePurchaseAmount(int amount) throws IllegalArgumentException {
         if (amount <= 0) {
@@ -9,5 +24,25 @@ public class LottoPublisher {
         if (0 < amount%1000) {
             throw new IllegalArgumentException("투입금액은 1000으로 나누었을때 나머지가 없어야 합니다.");
         }
+    }
+
+    int getBuyLottoCount() {
+        return purchaseAmount/Lotto.AMOUNT;
+    }
+
+    private List<Lotto> publishLottos(int buyCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int count = 0; count < buyCount; count++) {
+            lottos.add(new Lotto());
+        }
+        return lottos;
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
+
+    public List<Lotto> getPublishLotto() {
+        return publishLotto;
     }
 }
