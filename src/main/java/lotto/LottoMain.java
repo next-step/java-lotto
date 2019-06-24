@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMain {
@@ -8,23 +7,15 @@ public class LottoMain {
     public static void main(String[] arg) {
         int inputLottoGames = InputView.inputLotteGames();
 
-        List<Lotto> lottos = new ArrayList <>();
-        LottoMachine lottoMachine = new LottoMachine();
-
-        int lottoGameCount = inputLottoGames / 1000;
-        for(int i=0; i<lottoGameCount; i++){
-            Lotto lotto = new Lotto(lottoMachine.autoLottoNumber());
-            lottos.add(lotto);
-        }
+        LottoGamesExecute lottoGamesExecute = new LottoGamesExecute(inputLottoGames);
+        List <Lotto> lottos = lottoGamesExecute.extractLottoNumbers();
         OutputView.printPurchaseLottoNumber(lottos);
 
         String inputLastWeekLottoNumber = InputView.inputLastWeekLottoNumber();
-        for(Lotto lotto : lottos){
-            lotto.winnerCheck(inputLastWeekLottoNumber);
-        }
+        LottoGames lottoGames = lottoGamesExecute.lottoGameResult(inputLastWeekLottoNumber);
+        OutputView outputView = new OutputView(lottoGames);
+        outputView.printWinnerSummary();
+        outputView.printRateOfReturn();
+    }
 
-        LottoGames lottoGames = new LottoGames(lottos);
-        OutputView.printWinnerSummary(lottoGames.getSummaryWinnerCounts());
-        OutputView.printRateOfReturn(lottoGames.rateOfReturn());
-   }
 }

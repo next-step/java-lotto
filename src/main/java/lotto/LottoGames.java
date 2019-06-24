@@ -1,53 +1,41 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGames {
 
-    private static final int lottoOneGamePrice = 1000;
-    private static final int summaryInitNumber = 0;
-    private static int summaryCount = 4;
-    private static final String summaryEnumSuffix = "개 일치 ";
-    private static List <Integer> summaryWinnerCounts;
-
+    private static final int LOTTO_ONE_GAME_PRICE = 1000;
     private List <Lotto> lottos;
 
     public LottoGames(List <Lotto> lottos) {
-        createSummaryWinnerCounts();
         this.lottos = lottos;
     }
 
     public double rateOfReturn() {
-        return Math.round((sumWinnerPrice() / (float) totalLottoGamePrice()) * 100) / 100.0;
+        return Math.floor((sumWinnerPrice() / (float) sumLottoGamesPurchasePrice()) * 100) / 100.0;
+    }
+
+    public int lottoSummaryWinnerCount(int eventWinnerPrice) {
+        return lottos.stream()
+                .filter(lotto -> isEventWinnerPrice(lotto, eventWinnerPrice))
+                .collect(Collectors.toList()).size();
+    }
+
+    private boolean isEventWinnerPrice(Lotto lotto, int eventWinnerPrice) {
+        return winnerPrice(lotto) == eventWinnerPrice;
     }
 
     private int sumWinnerPrice() {
-        return lottos.stream().mapToInt(lotto -> lotto.getWinnerPrice()).sum();
+        return lottos.stream().mapToInt(lotto -> winnerPrice(lotto)).sum();
     }
 
-    private int totalLottoGamePrice() {
-        return lottoOneGamePrice * lottos.size();
+    private int winnerPrice(Lotto lotto) {
+        return LottoEnum.findByPrice(lotto.getWinnerNumberCount()).price();
     }
 
-    private void createSummaryWinnerCounts() {
-        summaryWinnerCounts = new ArrayList <>();
-        while (summaryCount > summaryInitNumber) {
-            summaryWinnerCounts.add(summaryInitNumber);
-            summaryCount--;
-        }
-    }
-
-    public List <Integer> getSummaryWinnerCounts() {
-        for (Lotto lotto : lottos) {
-            String summaryWinnerKey = lotto.getWinnerNumberCount() + summaryEnumSuffix;
-            int summaryIndex = LottoEnum.findByPrice(summaryWinnerKey).summaryNumber();
-            int summaryPrice = LottoEnum.findByPrice(summaryWinnerKey).price();
-            if(summaryPrice > 0){
-                summaryWinnerCounts.set(summaryIndex, summaryWinnerCounts.get(summaryIndex) + 1);
-            }
-        }
-        return summaryWinnerCounts;
+    private int sumLottoGamesPurchasePrice() {
+        return LOTTO_ONE_GAME_PRICE * lottos.size();
     }
 
 }
