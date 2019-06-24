@@ -8,7 +8,17 @@ package edu.nextstep.calculate;
  * | blog         : sksggg123.github.io     |
  * ------------------------------------------
  * project      : java-lotto
- * create date  : 2019-06-24 01:26
+ * create date  : 2019-06-24 21:44
  */
-public class Input {
+public class RawData {
+
+    private String rawData;
+
+    public RawData(String rawData) {
+        this.rawData = rawData;
+    }
+
+    public String getRawData() {
+        return this.rawData;
+    }
 }
