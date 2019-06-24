@@ -39,6 +39,13 @@ public class LotteryApplication {
         return rewardType.reward;
     }
 
+    public double calculateEarningsRate(int investment, long reward) {
+        if (investment == 0) {
+            throw new IllegalArgumentException("'investment' must be greater than or equal to 0");
+        }
+        return 0;
+    }
+
     public enum RewardType {
         SIX_NUMBERS_MATCHED(6, 2000000000),
         FIVE_NUMBERS_MATCHED(5, 1500000),

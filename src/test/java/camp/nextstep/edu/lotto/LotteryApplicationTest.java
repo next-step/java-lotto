@@ -213,4 +213,11 @@ class LotteryApplicationTest {
         // then
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("투자원금이 0원 이면 IllegalArgumentException 을 발생시킵니다")
+    void calculateEarningsRate() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.calculateEarningsRate(0, 5000));
+    }
 }
