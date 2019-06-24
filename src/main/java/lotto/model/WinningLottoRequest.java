@@ -1,10 +1,10 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import lotto.exception.DuplicateLottoNumberException;
+
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class WinningLottoRequest {
 
@@ -17,11 +17,15 @@ public class WinningLottoRequest {
     }
 
     public static WinningLottoRequest of(String numbers, int bonus) {
-        List<Number> number = Arrays.stream(numbers.trim().split(","))
+        List<Integer> numberList = Arrays.stream(numbers.trim().split(","))
+                .distinct()
                 .map(Integer::new)
-                .map(Number::of)
                 .collect(Collectors.toList());
-        return new WinningLottoRequest(number, Number.of(bonus));
+
+        if(numberList.contains(bonus)){
+            throw new DuplicateLottoNumberException(numbers, bonus);
+        }
+        return new WinningLottoRequest(numberList.stream().map(Number::of).collect(Collectors.toList()), Number.of(bonus));
     }
 
     List<Number> getNumbers() {
