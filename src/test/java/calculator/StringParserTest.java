@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringParserTest {
     @Test
@@ -44,15 +43,6 @@ public class StringParserTest {
     void parseAdditionalDelimiter() {
         String input = "//;\n1;2;3";
         StringParser stringParser = new StringParser(input);
-        assertThat(stringParser.parseAdditionalDelimiter()).isEqualTo(";");
-    }
-
-    @Test
-    @DisplayName("파싱 불가능한 스트링은 에러")
-    void parseAdditionalDelimiter_invalid() {
-        String input = "1,2,3";
-        StringParser stringParser = new StringParser(input);
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(stringParser::parseAdditionalDelimiter);
+        assertThat(stringParser.parseByDelimiter()).contains("1", "2", "3");
     }
 }

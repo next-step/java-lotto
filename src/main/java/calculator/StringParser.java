@@ -9,24 +9,35 @@ public class StringParser {
     public static final String ADDITIONAL_DELIMITER_REGEX = "//(.)\n(.*)";
     private Matcher additionalDelimiterMatcher;
     private String input;
+    private Delimiters delimiters;
 
     public StringParser(String input) {
         this.input = input;
         additionalDelimiterMatcher = Pattern.compile(ADDITIONAL_DELIMITER_REGEX).matcher(input);
+        delimiters = new Delimiters();
+        parseAndReSetInput();
     }
 
-    public boolean hasAdditionalDelimiter() {
+    private boolean hasAdditionalDelimiter() {
         return additionalDelimiterMatcher.find();
     }
 
-    public List<String> parseByDelimiter() {
-        return Arrays.asList(input.split(",|:"));
+    private String parseAdditionalDelimiter() {
+        return additionalDelimiterMatcher.group(1);
     }
 
-    public String parseAdditionalDelimiter() {
-        if (!hasAdditionalDelimiter()) {
-            throw new RuntimeException("추가적인 구분자가 없는 String 입니다");
+    private String removedAdditionalDelimiterString() {
+        return additionalDelimiterMatcher.group(2);
+    }
+
+    private void parseAndReSetInput() {
+        if (hasAdditionalDelimiter()) {
+            delimiters = delimiters.addDelimiter(parseAdditionalDelimiter());
+            this.input = removedAdditionalDelimiterString();
         }
-        return additionalDelimiterMatcher.group(1);
+    }
+
+    public List<String> parseByDelimiter() {
+        return Arrays.asList(input.split(delimiters.getDelimitersRegexString()));
     }
 }
