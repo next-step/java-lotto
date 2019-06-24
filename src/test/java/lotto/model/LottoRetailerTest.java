@@ -13,6 +13,6 @@ public class LottoRetailerTest {
     @DisplayName("수량에 따른 자동 구매")
     public void buyLottoTest() {
         Order order = new Order(2000);
-        assertThat(LottoRetailer.buyAutoPick(order).size()).isEqualTo(2);
+        assertThat(LottoRetailer.buyAutoPick(order).getLottos().size()).isEqualTo(2);
     }
 }

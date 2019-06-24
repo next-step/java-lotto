@@ -25,7 +25,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(lottoNumbers);
         WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 
-        Map<Long, Integer> aggregate = lottos.aggregate(winnerNumbers);
+        Aggregate aggregate = lottos.check(winnerNumbers);
 
         assertThat(aggregate.get(0)).isEqualTo(1);
         assertThat(aggregate.get(3)).isEqualTo(2);

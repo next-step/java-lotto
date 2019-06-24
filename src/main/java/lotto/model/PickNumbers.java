@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PickNumbers extends LottoNumbers{
@@ -8,6 +9,7 @@ public class PickNumbers extends LottoNumbers{
 
     public PickNumbers(List<Integer> numbers) {
         super(numbers);
+        Collections.sort(numbers);
         this.numbers = numbers;
     }
 
@@ -15,5 +17,11 @@ public class PickNumbers extends LottoNumbers{
         return Math.toIntExact(this.numbers.stream()
                 .filter(number -> winningNumber.contains(number))
                 .count());
+    }
+
+    @Override
+    public String toString() {
+        return "" + numbers;
+
     }
 }
