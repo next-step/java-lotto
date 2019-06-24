@@ -11,15 +11,30 @@ public class PrizeTest {
     @DisplayName("로또 번호가 일치하는 개수에 따른 당첨결과를 반환한다")
     @ParameterizedTest
     @CsvSource({
-            "6, FIRST",
-            "5, SECOND",
-            "4, THIRD",
-            "3, FOURTH",
-            "2, NONE",
-            "1, NONE",
-            "0, NONE",
+            "6, false, FIRST",
+            "5, true,  SECOND",
+            "5, false, THIRD",
+            "4, false, FOURTH",
+            "3, false, FIFTH",
+            "2, false, NONE",
+            "0, false, NONE",
     })
-    void prize(int matchCount, Prize prize) {
+    void prize(int matchCount, boolean existBonus, Prize prize) {
         assertThat(Prize.of(matchCount)).isEqualTo(prize);
+    }
+
+    @DisplayName("로또 번호가 일치하는 개수에 따른 당첨결과를 반환한다")
+    @ParameterizedTest
+    @CsvSource({
+            "6, false, FIRST",
+            "5, true,  SECOND",
+            "5, false, THIRD",
+            "4, false, FOURTH",
+            "3, false, FIFTH",
+            "2, false, NONE",
+            "0, false, NONE",
+    })
+    void prize2(int matchCount, boolean existBonus, Prize prize) {
+        assertThat(Prize.of(matchCount, existBonus)).isEqualTo(prize);
     }
 }

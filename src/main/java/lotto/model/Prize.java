@@ -8,7 +8,7 @@ public enum Prize {
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
-    FIVE(3, 5_000),
+    FIFTH(3, 5_000),
     NONE(0, 0);
 
     private final int matchCount;
@@ -25,6 +25,19 @@ public enum Prize {
                 .findFirst()
                 .orElse(NONE);
     }
+
+    public static Prize of(int matchCount, boolean existBonus) {
+        return Arrays.stream(Prize.values())
+                .filter(prize -> {
+                    if (Prize.SECOND == prize) {
+                        return prize.getMatchCount() == matchCount && existBonus;
+                    }
+                    return prize.getMatchCount() == matchCount;
+                })
+                .findFirst()
+                .orElse(Prize.NONE);
+    }
+
 
     public long getMoney() {
         return money;

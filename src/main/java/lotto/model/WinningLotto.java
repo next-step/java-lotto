@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class WinningLotto {
@@ -17,18 +16,9 @@ public class WinningLotto {
     }
 
     public Prize getResultOf(Lotto lotto) {
-        int count = this.lotto.getMatchCount(lotto);
-        boolean existBonus = (lotto.hasBonus(number));
-
-        return Arrays.stream(Prize.values())
-                .filter(prize -> {
-                    if(Prize.SECOND == prize) {
-                        return prize.getMatchCount() == count && existBonus;
-                    }
-                    return prize.getMatchCount() == count;
-                })
-                .findFirst()
-                .orElse(Prize.NONE);
+        int matchCount = this.lotto.getMatchCount(lotto);
+        boolean existBonus = lotto.hasBonusNumber(number);
+        return Prize.of(matchCount, existBonus);
     }
 
     @Override
