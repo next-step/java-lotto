@@ -39,7 +39,7 @@ public class LottoGameTest {
 
 
     @Test
-    void makeLotto() {
+    void getAutoLottoNumber() {
         List<Integer> lotto = new ArrayList<>();
         List<Integer> element = new ArrayList<>();
 
