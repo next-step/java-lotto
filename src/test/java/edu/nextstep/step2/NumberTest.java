@@ -1,5 +1,11 @@
 package edu.nextstep.step2;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
 /**
  * author       : gwonbyeong-yun <sksggg123>
  * ------------------------------------------
@@ -10,5 +16,13 @@ package edu.nextstep.step2;
  * project      : java-lotto
  * create date  : 2019-06-24 22:48
  */
-public class Number {
+public class NumberTest {
+
+    @DisplayName("객체 생성시 원시타입이 위배되는지 확인 - 0이하 예외처리")
+    @Test
+    void validNumber() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+           Number number = new Number(0);
+        });
+    }
 }
