@@ -18,35 +18,31 @@ public class Lotto {
 
     public Lotto(LottoGenerator lottoGenerator) {
 
-        List<Integer> lottoNumbers = lottoGenerator.generate();
-        LottoNumberValidator.validate(lottoNumbers);
-        sortLottoNumberAsc(lottoNumbers);
+        List<Integer> generatedLottoNumbers = lottoGenerator.generate();
+        LottoNumberValidator.validate(generatedLottoNumbers);
 
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = generatedLottoNumbers;
     }
 
     public boolean isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
 
-        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
-                isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getWonBonusNumberValue());
+        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers()) &&
+                isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getBonusNumbers());
     }
 
-    private boolean isMatchNormalNumberRule(int normalNumberCount, List<Integer> wonNormalNumbers) {
+    private boolean isMatchNormalNumberRule(int normalNumberCount, List<WonNumber> normalWonNumbers) {
 
-        return wonNormalNumbers
-                .stream()
+        return normalWonNumbers.stream()
+                .map(WonNumber::getNumber)
                 .filter(lottoNumbers::contains)
                 .count() == normalNumberCount;
     }
 
-    private boolean isMatchBonusRule(boolean hasBonusNumber, int wonBonusNumber) {
+    private boolean isMatchBonusRule(boolean hasBonusNumber, List<WonNumber> bonusWonNumbers) {
 
-        return hasBonusNumber == lottoNumbers.contains(wonBonusNumber);
-    }
-
-    private void sortLottoNumberAsc(List<Integer> lottoNumbers) {
-
-        lottoNumbers.sort(Integer::compareTo);
+        return hasBonusNumber == bonusWonNumbers.stream()
+                .map(WonNumber::getNumber)
+                .anyMatch(lottoNumbers::contains);
     }
 
     @Override

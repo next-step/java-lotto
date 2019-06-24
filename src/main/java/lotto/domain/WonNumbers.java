@@ -11,8 +11,7 @@ public class WonNumbers {
 
     private static final String DELIMITER = ",";
 
-    private final List<Integer> wonNormalNumbers;
-    private final int wonBonusNumberValue;
+    private final List<WonNumber> wonNumbers;
 
     public WonNumbers(String wonNormalNumbersValue, String wonBonusNumberValue) {
 
@@ -20,11 +19,21 @@ public class WonNumbers {
 
         List<Integer> wonNormalNumbers = parse(wonNormalNumbersValue);
         LottoNumberValidator.validate(wonNormalNumbers);
-        this.wonNormalNumbers = wonNormalNumbers;
 
         int wonBonusNumber = Integer.parseInt(wonBonusNumberValue);
         LottoNumberValidator.validateNumber(wonBonusNumber);
-        this.wonBonusNumberValue = wonBonusNumber;
+
+        this.wonNumbers = createWonNumbers(wonNormalNumbers, wonBonusNumber);
+    }
+
+    private List<WonNumber> createWonNumbers(List<Integer> wonNormalNumbers, int wonBonusNumber) {
+
+        List<WonNumber> wonNumbers = wonNormalNumbers.stream()
+                .map(WonNumber::ofNormalNumber)
+                .collect(Collectors.toList());
+        wonNumbers.add(WonNumber.ofBonusNumber(wonBonusNumber));
+
+        return wonNumbers;
     }
 
     private List<Integer> parse(String wonNumbersValue) {
@@ -35,20 +44,20 @@ public class WonNumbers {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getWonNormalNumbers() {
-
-        return wonNormalNumbers;
-    }
-
-    public int getWonBonusNumberValue() {
-
-        return wonBonusNumberValue;
-    }
-
     private void validateInputs(String wonNormalNumbersValue, String wonBonusNumbers) {
 
         if (StringUtils.isBlank(wonNormalNumbersValue) || StringUtils.isBlank(wonBonusNumbers)) {
             throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
         }
+    }
+
+    public List<WonNumber> getNormalNumbers() {
+
+        return wonNumbers.stream().filter(wonNumber -> !wonNumber.isBonusNumber()).collect(Collectors.toList());
+    }
+
+    public List<WonNumber> getBonusNumbers() {
+
+        return wonNumbers.stream().filter(WonNumber::isBonusNumber).collect(Collectors.toList());
     }
 }

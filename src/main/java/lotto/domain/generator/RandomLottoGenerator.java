@@ -15,6 +15,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
         List<Integer> lottoNumberPool = IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumberPool);
+        sortLottoNumberAsc(lottoNumberPool);
         return choiceLottoNumbers(lottoNumberPool);
     }
 
@@ -23,4 +24,8 @@ public class RandomLottoGenerator implements LottoGenerator {
         return lottoNumberPool.subList(CHOICE_START_INDEX, CHOICE_END_INDEX);
     }
 
+    private void sortLottoNumberAsc(List<Integer> lottoNumbers) {
+
+        lottoNumbers.sort(Integer::compareTo);
+    }
 }
