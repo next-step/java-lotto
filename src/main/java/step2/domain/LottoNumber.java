@@ -23,10 +23,6 @@ public class LottoNumber {
         }
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
