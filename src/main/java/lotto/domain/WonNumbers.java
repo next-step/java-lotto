@@ -51,11 +51,16 @@ public class WonNumbers {
 
     public List<WonNumber> getNormalNumbers() {
 
-        return wonNumbers.stream().filter(wonNumber -> !wonNumber.isBonusNumber()).collect(Collectors.toList());
+        return wonNumbers.stream()
+                .filter(wonNumber -> !wonNumber.isBonusNumber())
+                .collect(Collectors.toList());
     }
 
-    public List<WonNumber> getBonusNumbers() {
+    public WonNumber getBonusNumber() {
 
-        return wonNumbers.stream().filter(WonNumber::isBonusNumber).collect(Collectors.toList());
+        return wonNumbers.stream()
+                .filter(WonNumber::isBonusNumber)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("보너스번호가 존재하지 않습니다."));
     }
 }

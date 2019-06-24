@@ -26,7 +26,7 @@ class WonNumbersTest {
                 WonNumber.ofNormalNumber(5),
                 WonNumber.ofNormalNumber(6));
 
-        assertThat(wonNumbers.getBonusNumbers()).containsExactly(WonNumber.ofBonusNumber(7));
+        assertThat(wonNumbers.getBonusNumber()).isEqualTo(WonNumber.ofBonusNumber(7));
     }
 
     @ParameterizedTest(name = "우승번호 객체 생성 시 유효하지 않다면 IllegalArgumentException 발생. [{index}] 일반번호={0}, 보너스번호={1}")

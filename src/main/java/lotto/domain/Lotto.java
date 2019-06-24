@@ -34,7 +34,7 @@ public class Lotto {
 
         if (prizeRule.hasBonusNumber()) {
             return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers()) &&
-                    isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getBonusNumbers());
+                    isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getBonusNumber());
         }
         return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers());
     }
@@ -47,11 +47,9 @@ public class Lotto {
                 .count() == normalNumberCount;
     }
 
-    private boolean isMatchBonusRule(boolean hasBonusNumber, List<WonNumber> bonusWonNumbers) {
+    private boolean isMatchBonusRule(boolean hasBonusNumber, WonNumber bonusWonNumbers) {
 
-        return hasBonusNumber == bonusWonNumbers.stream()
-                .map(WonNumber::getNumber)
-                .anyMatch(lottoNumbers::contains);
+        return hasBonusNumber == lottoNumbers.contains(bonusWonNumbers.getNumber());
     }
 
     @Override
