@@ -65,4 +65,15 @@ class LotteryApplicationTest {
                 .withMessageContaining("must not be null");
     }
 
+    @Test
+    @DisplayName("구매한 로또가 null 이면 IllegalArgumentException 을 발생시킵니다")
+    void score2() {
+        // given
+        final Lottery lottery = Lottery.randomizedInstance();
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.score(null, lottery))
+                // then
+                .withMessageContaining("must not be null");
+    }
 }

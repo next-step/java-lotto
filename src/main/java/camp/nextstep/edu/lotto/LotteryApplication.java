@@ -29,6 +29,9 @@ public class LotteryApplication {
     }
 
     public int score(Lottery lottery, Lottery winningLottery) {
+        if (lottery == null) {
+            throw new IllegalArgumentException("'lottery' must not be null");
+        }
         if (winningLottery == null) {
             throw new IllegalArgumentException("'winningLottery' must not be null");
         }
