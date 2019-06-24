@@ -21,7 +21,7 @@ public class LottoStoreTest {
     @DisplayName("로또 14장 구입")
     void lotto() {
         LottoStore lottoStore = new LottoStore();
-        List<Lotto> lottos = lottoStore.buyLotto(new Money(14000L));
+        Lottos lottos = lottoStore.buyLotto(new Money(14000L));
         assertThat(lottos.size()).isEqualTo(14);
     }
 }

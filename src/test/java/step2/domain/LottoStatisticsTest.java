@@ -14,7 +14,7 @@ public class LottoStatisticsTest {
     void benefit_percent_1st() {
         LottoStore lottoStore = new LottoStore();
         Money money = new Money(1000L);
-        List<Lotto> lottos = lottoStore.buyLotto(money, new LottoGenerator() {
+        Lottos lottos = lottoStore.buyLotto(money, new LottoGenerator() {
             @Override
             public Lotto generate() {
                 return new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6)));
@@ -31,7 +31,7 @@ public class LottoStatisticsTest {
     void benefit_percent_4th() {
         LottoStore lottoStore = new LottoStore();
         Money money = new Money(1000L);
-        List<Lotto> lottos = lottoStore.buyLotto(money, new LottoGenerator() {
+        Lottos lottos = lottoStore.buyLotto(money, new LottoGenerator() {
             @Override
             public Lotto generate() {
                 return new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(10), LottoNumber.create(11), LottoNumber.create(12)));
@@ -48,7 +48,7 @@ public class LottoStatisticsTest {
     void benefit_percent_no_rank() {
         LottoStore lottoStore = new LottoStore();
         Money money = new Money(1000L);
-        List<Lotto> lottos = lottoStore.buyLotto(money, new LottoGenerator() {
+        Lottos lottos = lottoStore.buyLotto(money, new LottoGenerator() {
             @Override
             public Lotto generate() {
                 return new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(21), LottoNumber.create(14), LottoNumber.create(15), LottoNumber.create(16)));
@@ -65,7 +65,7 @@ public class LottoStatisticsTest {
     void check_my_rank() {
         LottoStore lottoStore = new LottoStore();
         Money money = new Money(1000L);
-        List<Lotto> lottos = lottoStore.buyLotto(money, new LottoGenerator() {
+        Lottos lottos = lottoStore.buyLotto(money, new LottoGenerator() {
             @Override
             public Lotto generate() {
                 return new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6)));
