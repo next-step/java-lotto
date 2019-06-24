@@ -8,11 +8,13 @@
     - [X] 전달된 인자값(int type)과 일치하는지 확인
 - [ ] ExtractionNumber 객체 추가 (Lotto와는 1:다)
     - [X] ExtractionNumber는 6개의 리스트로 이루어진다.
-    - [X] 6개의 리스트를 반환하는 기능이 있어야 한다.
-    - [X] 전달된 인자값(int type)을 보유하고 있는지 확인한다.
+    ~~- [X] 6개의 리스트를 반환하는 기능이 있어야 한다.~~
+    ~~- [X] 전달된 인자값(int type)을 보유하고 있는지 확인한다.~~
 - [ ] LotteryNumber 객체 추가
-    - [ ] ExtractionNumber는 6개의 리스트로 이루어진다.
-    - [ ] 6개의 리스트를 반환하는 기능이 있어야 한다.
+    - [X] LotteryNumber 6개의 리스트로 이루어진다.
+    ~~- [X] 6개의 리스트를 반환하는 기능이 있어야 한다.~~
+    - [X] 전달된 인자값(int type)을 보유하고 있는지 확인한다.
+    - [ ] ExtractionNumber는 객체에 당첨번호 카운트 반환는다.
 - [ ] Lotto 객체 추가
     - [ ] LotteryNumber의 Number리스트와 각 index별 당첨번호 확인하는 기능
     
