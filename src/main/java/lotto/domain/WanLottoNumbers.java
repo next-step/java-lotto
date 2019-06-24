@@ -6,29 +6,27 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinLottoNumbers {
+public class WanLottoNumbers {
     private final static String SEPARATOR = ",";
     private LottoNumbers winLottoNumbers;
     
-    public WinLottoNumbers(String winLottoNumber) {
-        String[] winNumbers = winLottoNumber.split(SEPARATOR);
-        List<LottoNumber> lottoNumbers = Arrays.stream(winNumbers)
+    public WanLottoNumbers(final String winLottoNumber) {
+        final String[] winNumbers = winLottoNumber.split(SEPARATOR);
+        final List<LottoNumber> lottoNumbers = Arrays.stream(winNumbers)
             .map(String::trim)
             .filter(StringUtils::isNumeric)
             .mapToInt(lottoNumber -> Integer.parseInt(lottoNumber.trim()))
-            .mapToObj(lottoNumber -> new LottoNumber(lottoNumber))
+            .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
         
         winLottoNumbers = new LottoNumbers(lottoNumbers);
     }
     
-    public void getResult(BuyingLottos lottos) {}
-    
     public LottoNumbers getLotto() {
         return winLottoNumbers;
     }
     
-    public int getMatchedNumberCount(LottoNumbers lottoNumbers) {
+    int getMatchedNumberCount(final LottoNumbers lottoNumbers) {
         return winLottoNumbers.getMatchedNumberCount(lottoNumbers);
     }
 }

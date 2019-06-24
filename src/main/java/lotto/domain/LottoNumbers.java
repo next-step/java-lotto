@@ -9,11 +9,11 @@ public class LottoNumbers {
     private final static int LOTTO_NUMBER_COUNT = 6;
     private List<LottoNumber> lottoNumbers;
     
-    public LottoNumbers() {
+    LottoNumbers() {
         this.lottoNumbers = LottoNumbersMaker.getNewLottoNumbers();
     }
     
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         if (!checkDuplicateNumber(lottoNumbers)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.message());
         }
@@ -29,7 +29,7 @@ public class LottoNumbers {
           .count() == lottoNumbers.size();
     }
     
-    public int getMatchedNumberCount(LottoNumbers lottoNumbers) { 
+    public int getMatchedNumberCount(final LottoNumbers lottoNumbers) { 
         return this.lottoNumbers.stream()
             .filter(lottoNumbers::contains)
             .mapToInt(lottoNumber -> 1)

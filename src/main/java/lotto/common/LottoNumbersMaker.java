@@ -16,16 +16,15 @@ public class LottoNumbersMaker {
     
     static {
         lottoNumbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-          .mapToObj(i -> new LottoNumber(i))
+          .mapToObj(LottoNumber::new)
           .collect(Collectors.toList());
     }
     
     public static List<LottoNumber> getNewLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        List<LottoNumber> newLottoNumbers = IntStream.range(SUB_START_POINT, SUB_END_POINT)
+        return IntStream.range(SUB_START_POINT, SUB_END_POINT)
           .mapToObj(i -> lottoNumbers.get(i).getCopied())
+          .sorted()
           .collect(Collectors.toList());
-        Collections.sort(newLottoNumbers);
-        return newLottoNumbers;
     }
 }

@@ -4,7 +4,7 @@ public class OwnPrize {
     private final WinNumbersCount winNumbersCount;
     private final EarningsRate earningsRate;
     
-    public OwnPrize(WinNumbersCount winNumbersCount, CashPayments cashPayments) {
+    OwnPrize(final WinNumbersCount winNumbersCount, final CashPayments cashPayments) {
         this.winNumbersCount = winNumbersCount;
         earningsRate = new EarningsRate(cashPayments.getEarningsRate(winNumbersCount.getTotalPrizeMoney()));
     }

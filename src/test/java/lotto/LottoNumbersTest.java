@@ -3,7 +3,7 @@ package lotto;
 import lotto.common.ErrorMessage;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumber;
-import lotto.domain.WinLottoNumbers;
+import lotto.domain.WanLottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -46,10 +46,10 @@ class LottoNumbersTest {
         List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers("1,2,3,7,8,9");
+        WanLottoNumbers wanLottoNumbers = new WanLottoNumbers("1,2,3,7,8,9");
         LottoNumbers lotto = new LottoNumbers(lottoNumbers);
         //When
-        int matchedCount = lotto.getMatchedNumberCount(winLottoNumbers.getLotto());
+        int matchedCount = lotto.getMatchedNumberCount(wanLottoNumbers.getLotto());
         //Then
         Assertions.assertThat(matchedCount).isEqualTo(3);
     }

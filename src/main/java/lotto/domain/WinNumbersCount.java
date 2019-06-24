@@ -14,8 +14,8 @@ public class WinNumbersCount {
         Arrays.stream(Prize.values()).forEach(prize -> winNumbersCount.put(prize, DEFAULT_WIN_COUNT));
     }
     
-    public int addWinCount(int matchCount) {
-        Prize matchPrize = Prize.getPrize(matchCount);
+    public int addWinCount(final int matchCount) {
+        final Prize matchPrize = Prize.getPrize(matchCount);
         if (matchPrize == null) {
             return 0;
         }
@@ -30,11 +30,6 @@ public class WinNumbersCount {
           .mapToLong(prize -> winNumbersCount.get(prize) * prize.getPrizeMoney())
           .reduce(Long::sum)
           .orElseThrow(RuntimeException::new);
-    }
-    
-    public Map<Prize, Integer> getWinNumbersCount() {
-        final Map<Prize, Integer> winNumbersCount = this.winNumbersCount;
-        return winNumbersCount;
     }
     
     public Set<Prize> getPrizes() {

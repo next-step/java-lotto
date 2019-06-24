@@ -9,10 +9,10 @@ import lotto.view.ResultView;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        Outer outer = new ConsoleOuter();
-        InputView inputView = new InputView(new ConsoleInputer(), outer);
-        ResultView consoleResultView = new ResultView(outer);
-        LottoController controller = new LottoController(inputView, consoleResultView);
+        final Outer outer = new ConsoleOuter();
+        final InputView inputView = new InputView(new ConsoleInputer(), outer);
+        final ResultView consoleResultView = new ResultView(outer);
+        final LottoController controller = new LottoController(inputView, consoleResultView);
         
         controller.runBuyingLottoProcess();
         controller.runResultProcess();

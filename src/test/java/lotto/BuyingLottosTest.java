@@ -8,7 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.OwnPrize;
-import lotto.domain.WinLottoNumbers;
+import lotto.domain.WanLottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,13 +53,13 @@ class BuyingLottosTest {
     @DisplayName("당첨 정보를 구한다.")
     void getWinPrizeTest() {
         //Given
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers("1,2,3,4,5,6");
+        WanLottoNumbers wanLottoNumbers = new WanLottoNumbers("1,2,3,4,5,6");
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(new LottoNumbers(getNewLottoNumbers(1, 2, 3, 7, 8, 9)));
         lottoNumbersList.add(new LottoNumbers(getNewLottoNumbers(1, 2, 3, 4, 8, 9)));
         BuyingLottos buyingLottos = new BuyingLottos(new Lottos(lottoNumbersList), new CashPayments(5000));
         //When
-        OwnPrize ownPrize = buyingLottos.getOwnPrize(winLottoNumbers);
+        OwnPrize ownPrize = buyingLottos.getOwnPrize(wanLottoNumbers);
         //Then
         Assertions.assertThat(ownPrize.isEqualsEarningRate(new EarningsRate(11.0))).isTrue();
     }

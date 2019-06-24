@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.common.ErrorMessage;
-
 import java.util.Arrays;
 
 public enum Prize {

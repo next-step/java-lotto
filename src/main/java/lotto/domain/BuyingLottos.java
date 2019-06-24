@@ -15,7 +15,7 @@ public class BuyingLottos {
         this.cashPayments = cashPayments;
     }
     
-    public Lottos buyLottos(int cashPayment) {
+    public Lottos buyLottos(final int cashPayment) {
         cashPayments = new CashPayments(cashPayment);
         lottos = new Lottos(IntStream.range(START_NUMBER, Lottos.getBuyableCount(cashPayment))
             .mapToObj(i -> new LottoNumbers())
@@ -23,9 +23,8 @@ public class BuyingLottos {
         return lottos;
     }
     
-    public OwnPrize getOwnPrize(WinLottoNumbers winLottoNumbers) {
-        OwnPrize ownPrize = new OwnPrize(lottos.getWinNumbersCount(winLottoNumbers), cashPayments);
-        return ownPrize;
+    public OwnPrize getOwnPrize(final WanLottoNumbers wanLottoNumbers) {
+        return new OwnPrize(lottos.getWinNumbersCount(wanLottoNumbers), cashPayments);
     }
     
     @Override

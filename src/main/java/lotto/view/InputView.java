@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.common.Inputer;
 import lotto.common.Outer;
-import lotto.domain.Lottos;
 
 public class InputView {
     private final static String CASH_COUNT_ANSWER = "구입금액을 입력해 주세요.";

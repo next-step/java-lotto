@@ -1,18 +1,18 @@
 package lotto;
 
 import lotto.common.ErrorMessage;
-import lotto.domain.WinLottoNumbers;
+import lotto.domain.WanLottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinLottoNumbersNumbersTest {
+class WanLottoNumbersNumbersTest {
     @Test
     @DisplayName("입력된 숫자의 총 숫자 갯수가 6개가 아니면 에러")
     void checkWinNumberCountTest() {
         //Then
         Assertions.assertThatIllegalArgumentException()
-            .isThrownBy(() -> new WinLottoNumbers("1,2,3,4,5"))
+            .isThrownBy(() -> new WanLottoNumbers("1,2,3,4,5"))
             .withMessage(ErrorMessage.LOTTO_NUMBER_COUNT_ERROR.message());
     }
     
@@ -21,7 +21,7 @@ class WinLottoNumbersNumbersTest {
     void checkRangeLottoNumberTest() {
         //Then
         Assertions.assertThatIllegalArgumentException()
-            .isThrownBy(() -> new WinLottoNumbers("1,2,3,4,5,46"))
+            .isThrownBy(() -> new WanLottoNumbers("1,2,3,4,5,46"))
             .withMessage(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.message());
     }
     

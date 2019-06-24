@@ -10,7 +10,7 @@ public class LottoNumber implements Comparable {
     
     private int lottoNumber;
     
-    public LottoNumber(int lottoNumber) {
+    public LottoNumber(final int lottoNumber) {
         if (!isInNumberRange(lottoNumber)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.message());
         }

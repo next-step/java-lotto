@@ -13,16 +13,15 @@ public class ResultView {
         this.outer = outer;
     }
     
-    public void printLottos(BuyingLottos lottos) {
+    public void printLottos(final BuyingLottos lottos) {
         outer.print(lottos.toString());        
     }
     
     public void printResult(OwnPrize ownPrize) {
         WinNumbersCount winNumbersCount = ownPrize.getWinNumbersCount();
-        winNumbersCount.getPrizes().stream()
-          .forEach(prize -> 
+        winNumbersCount.getPrizes().forEach(prize -> 
             outer.print(getMatchesString(prize, winNumbersCount.getMatchedCountAt(prize)))
-          );
+        );
         outer.print("총 수익률은 " + ownPrize.getEarningsRate().toString() + "입니다.");
     }
     

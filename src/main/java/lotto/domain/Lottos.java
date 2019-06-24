@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    static final int DEFAULT_PRICE = 1000;
+    private static final int DEFAULT_PRICE = 1000;
     private final static int CANT_BUYABLE_COUNT = 0;
     
     private List<LottoNumbers> lottoNumbers;
@@ -15,12 +15,12 @@ public class Lottos {
         this(new ArrayList<>());
     }
     
-    public Lottos(List<LottoNumbers> lottoNumbers) {
+    public Lottos(final List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
     
-    public static int getBuyableCount(int cashPayment) {
-        int buyableCount = cashPayment / DEFAULT_PRICE;
+    public static int getBuyableCount(final int cashPayment) {
+        final int buyableCount = cashPayment / DEFAULT_PRICE;
         if (buyableCount <= CANT_BUYABLE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
         }
@@ -28,10 +28,10 @@ public class Lottos {
         return buyableCount;
     }
     
-    public WinNumbersCount getWinNumbersCount(WinLottoNumbers winLottoNumbers) {
+    WinNumbersCount getWinNumbersCount(final WanLottoNumbers wanLottoNumbers) {
         WinNumbersCount winNumbersCount = new WinNumbersCount();
         lottoNumbers.forEach(lotto -> 
-            winNumbersCount.addWinCount(winLottoNumbers.getMatchedNumberCount(lotto))
+            winNumbersCount.addWinCount(wanLottoNumbers.getMatchedNumberCount(lotto))
         );
         return winNumbersCount;
     }
