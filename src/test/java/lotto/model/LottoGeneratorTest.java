@@ -17,7 +17,7 @@ public class LottoGeneratorTest {
   @ValueSource(ints = {15000, 15010})
   @DisplayName("로또 생성")
   void generate(int paid) {
-    List<Lotto> lottos = new LottoGenerator(new MockNumberGenerator()).generate(paid);
-    assertThat(lottos.size()).isEqualTo(15);
+    Lottos lottos = new LottoGenerator(new MockNumberGenerator()).generate(paid);
+    assertThat(lottos.getCount()).isEqualTo(15);
   }
 }

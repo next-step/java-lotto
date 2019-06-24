@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.LottoGenerator;
-import lotto.model.Prize;
-import lotto.model.RandomNumberGenerator;
+import lotto.model.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -19,14 +16,13 @@ public class LottoRunner {
 
     LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
 
-    List<Lotto> lottos = lottoGenerator.generate(paid);
-    int amount = lottos.size();
+    Lottos lottos = lottoGenerator.generate(paid);
 
-    LottoOutputView.print(amount);
+    LottoOutputView.printCountOf(lottos);
     LottoOutputView.print(lottos);
 
     List<Integer> winningNumbers = LottoInputView.askWinningNumbers();
-    List<Integer> winningNumbersCounts = lottos.stream().mapToInt(lotto -> lotto.hasHowMany(winningNumbers)).boxed().collect(toList());
+    List<Integer> countOfMatchingNumbers = lottos.getCountOfMatchingNumbers(winningNumbers);
 
 //    winningNumbersCounts.forEach(Prize::win);
 

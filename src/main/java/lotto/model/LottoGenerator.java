@@ -12,11 +12,13 @@ public class LottoGenerator {
     this.numberGenerator = numberGenerator;
   }
 
-  public List<Lotto> generate(int paid) {
+  public Lottos generate(int paid) {
     int amount = paid / Lotto.price;
-    return IntStream.range(0, amount)
+    List<Lotto> lottos = IntStream.range(0, amount)
             .mapToObj((int value) -> new Lotto(numberGenerator.generate(6)))
             .collect(Collectors.toList());
+
+    return new Lottos(lottos);
   }
 
   public Lotto generate(List<Integer> winningNumbers) {

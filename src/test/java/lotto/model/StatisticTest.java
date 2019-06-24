@@ -5,18 +5,17 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class StatisticTest {
 
     @Test
-    void test_get_count_of_winning_numbers_from_lotto() {
+    void test_get_count_of_matching_numbers_from_lottos() {
         LottoGenerator lottoGenerator = new LottoGenerator(new MockNumberGenerator());
-        List<Lotto> lottos = lottoGenerator.generate(2000);
+        Lottos lottos = lottoGenerator.generate(2000);
 
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
-        List<Integer> count_of_matching_numbers = lottos.stream().mapToInt(lotto -> lotto.hasHowMany(winningNumbers)).boxed().collect(toList());
+        List<Integer> count_of_matching_numbers = lottos.getCountOfMatchingNumbers(winningNumbers);
 
         assertThat(count_of_matching_numbers).containsExactly(6, 6);
     }

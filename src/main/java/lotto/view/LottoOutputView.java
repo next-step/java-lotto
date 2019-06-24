@@ -1,19 +1,20 @@
 package lotto.view;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Prize;
 
 import java.util.List;
 import java.util.Map;
 
 public class LottoOutputView {
-  public static void print(int amount) {
-    String msg = amount + "개를 구매했습니다.";
+  public static void printCountOf(Lottos lottos) {
+    String msg = lottos.getCount() + "개를 구매했습니다.";
     System.out.println(msg);
   }
 
-  public static void print(List<Lotto> lottos) {
-    lottos.forEach(System.out::println);
+  public static void print(Lottos lottos) {
+    System.out.println(lottos);
   }
 
   public static void printWinnings() {
