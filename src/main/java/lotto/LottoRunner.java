@@ -6,8 +6,6 @@ import lotto.view.LottoOutputView;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class LottoRunner {
 
   public static void main(String[] args) {

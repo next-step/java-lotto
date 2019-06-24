@@ -14,11 +14,8 @@ public class Analyzer {
     }
 
     public void analyze(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            int countOfMatchingNumbers = lotto.hasHowMany(winningNumbers);
-            Prize prize = Prize.valueOf(countOfMatchingNumbers);
-            countPrize(prize);
-        }
+        List<Integer> countsOfMatchingNumbers = lottos.getCountOfMatchingNumbers(winningNumbers);
+        countsOfMatchingNumbers.forEach(count -> countPrize(Prize.valueOf(count)));
     }
 
     private void countPrize(Prize prize) {
