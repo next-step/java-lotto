@@ -12,6 +12,7 @@ public class WinningNumbers extends LottoNumbers{
         this.numbers = numbers;
     }
 
-
-
+    public boolean contains(Integer pickNumber) {
+        return this.numbers.contains(pickNumber);
+    }
 }
