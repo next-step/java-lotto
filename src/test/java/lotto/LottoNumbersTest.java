@@ -25,4 +25,13 @@ public class LottoNumbersTest {
             new LottoNumbers(numbers);
         });
     }
+
+    @Test
+    @DisplayName("6개의 숫자가 아닐 경우 예외처리")
+    public void lessThanSixNumberExceptionTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
+        });
+    }
 }
