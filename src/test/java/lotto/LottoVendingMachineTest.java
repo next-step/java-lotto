@@ -11,7 +11,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoVendingMachineTest {
-    LottoVendingMachine lottoVendingMachine;
+    private LottoVendingMachine lottoVendingMachine;
 
     @BeforeEach
     void setUp() {
@@ -24,13 +24,6 @@ class LottoVendingMachineTest {
     void howManyLotto(int amount) {
         int result = this.lottoVendingMachine.howManyLotto(amount);
         assertThat(result).isEqualTo(amount / this.lottoVendingMachine.getUnitPrice());
-    }
-
-    @Test
-    @DisplayName("로또를 생성한다.")
-    void createLotto() {
-        Lotto result = lottoVendingMachine.createLotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(result).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

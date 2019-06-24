@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    List<Integer> lotto;
+    private List<Integer> lotto;
 
     public Lotto() {
     }
@@ -14,9 +14,9 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    public boolean valideLottoNumber(List<Integer> lotto){
-        int cnt = (int) lotto.stream().distinct().filter(x -> x > 0 && x <=45).count();
-        if (cnt != 6){
+    public boolean valideLottoNumber(List<Integer> lotto) {
+        int cnt = (int) lotto.stream().distinct().filter(x -> x > 0 && x <= 45).count();
+        if (cnt != 6) {
             throw new IllegalArgumentException();
         }
         return true;
