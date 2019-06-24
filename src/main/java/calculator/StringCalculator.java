@@ -3,7 +3,7 @@ package calculator;
 public class StringCalculator {
 
     public static int calculator(String inputOfString) {
-        if(checkEmpty(inputOfString)){
+        if (checkEmpty(inputOfString)) {
             return 0;
         }
         Expression expression = Expression.from(inputOfString);
