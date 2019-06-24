@@ -15,13 +15,6 @@ public class LottoMachine {
         return LottoTicket.of(lottos);
     }
 
-    public static Lotto getWinningLotto(List<Integer> inputNumbers) {
-        List<Number> numbers = inputNumbers.stream()
-                .map(Number::of)
-                .collect(Collectors.toList());
-        return LottoGenerator.generate(numbers);
-    }
-
     public static WinningLotto getWinningLotto(WinningLottoRequest winningLottoRequest) {
         Lotto lotto = LottoGenerator.generate(winningLottoRequest.getNumbers());
         return WinningLotto.generate(lotto, winningLottoRequest.getBonus());
