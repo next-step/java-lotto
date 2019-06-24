@@ -21,10 +21,6 @@ public class LottoGamesExecute {
         return lottos;
     }
 
-    private int createLottoGameCount() {
-        return inputLottoGames / 1000;
-    }
-
     public LottoGames lottoGameResult(String inputLastWeekLottoNumber) {
         for (Lotto lotto : lottos) {
             lotto.winnerCheck(inputLastWeekLottoNumber);
@@ -32,4 +28,9 @@ public class LottoGamesExecute {
         LottoGames lottoGames = new LottoGames(lottos);
         return lottoGames;
     }
+
+    private int createLottoGameCount() {
+        return inputLottoGames / 1000;
+    }
+
 }
