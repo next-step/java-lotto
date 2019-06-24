@@ -22,6 +22,14 @@ public class NaturalNumber implements Comparable<NaturalNumber> {
         return value;
     }
 
+    public NaturalNumber divideBy(NaturalNumber naturalNumber) {
+        if (naturalNumber == null) {
+            throw new IllegalArgumentException("'naturalNumber' must not be null");
+        }
+        final int quotient = value / naturalNumber.value;
+        return new NaturalNumber(quotient);
+    }
+
     @Override
     public String toString() {
         return "NaturalNumber{" +
@@ -48,13 +56,5 @@ public class NaturalNumber implements Comparable<NaturalNumber> {
             throw new IllegalArgumentException("'naturalNumber' must not be null");
         }
         return Integer.compare(value, naturalNumber.value);
-    }
-
-    public NaturalNumber divideBy(NaturalNumber naturalNumber) {
-        if (naturalNumber == null) {
-            throw new IllegalArgumentException("'naturalNumber' must not be null");
-        }
-        final int quotient = value / naturalNumber.value;
-        return new NaturalNumber(quotient);
     }
 }

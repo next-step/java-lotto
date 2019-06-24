@@ -8,8 +8,8 @@ import camp.nextstep.edu.lotto.view.ConsoleResultView;
 import camp.nextstep.edu.lotto.view.InputView;
 import camp.nextstep.edu.lotto.view.ResultView;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class LotteryApplication {
@@ -41,7 +41,6 @@ public class LotteryApplication {
         } catch (Exception ex) {
             System.out.println("Exception occurred while running LotteryApplication. message: " + ex.getMessage());
         }
-
     }
 
     public void run() {
@@ -50,7 +49,7 @@ public class LotteryApplication {
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
-        final EnumMap<RewardType, Integer> rewardMap = lotteryController.getResult(purchasedLotteries, winningNumbers);
+        final Map<RewardType, Integer> rewardMap = lotteryController.getResult(purchasedLotteries, winningNumbers);
         final long sumOfRewards = lotteryController.sumAllRewards(rewardMap);
         final double earningsRate = lotteryController.calculateEarningsRate(investment, sumOfRewards);
         resultView.printResults(rewardMap, earningsRate);

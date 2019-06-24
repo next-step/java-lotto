@@ -25,30 +25,8 @@ public class LotteryController {
                 .collect(Collectors.toList());
     }
 
-    private NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
-        if (investment == null) {
-            throw new IllegalArgumentException("'investment' must not be null");
-        }
-        return investment.divideBy(PRICE_OF_LOTTERY);
-    }
-
-    private int countScore(Lottery lottery, Lottery winningLottery) {
-        if (lottery == null) {
-            throw new IllegalArgumentException("'lottery' must not be null");
-        }
-        if (winningLottery == null) {
-            throw new IllegalArgumentException("'winningLottery' must not be null");
-        }
-        return lottery.score(winningLottery);
-    }
-
-    public long getReward(int score) {
-        final RewardType rewardType = RewardType.from(score);
-        return rewardType.getReward();
-    }
-
-    public EnumMap<RewardType, Integer> getResult(List<Lottery> purchasedLotteries, Set<Integer> winningNumbers) {
-        final Lottery winningLottery = this.createWinningLottery(winningNumbers);
+    public Map<RewardType, Integer> getResult(List<Lottery> purchasedLotteries, Set<Integer> winningNumberSet) {
+        final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
 
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, 0);
@@ -67,10 +45,6 @@ public class LotteryController {
         return rewardMap;
     }
 
-    private Lottery createWinningLottery(Set<Integer> winningNumberSet) {
-        return Lottery.customizedInstance(winningNumberSet);
-    }
-
     public double calculateEarningsRate(int investment, long reward) {
         if (investment <= ZERO) {
             throw new IllegalArgumentException("'investment' must be greater than " + ZERO);
@@ -86,5 +60,22 @@ public class LotteryController {
                 .stream()
                 .map(entry -> entry.getKey().getReward() * entry.getValue())
                 .reduce(0L, Long::sum);
+    }
+
+    private NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
+        if (investment == null) {
+            throw new IllegalArgumentException("'investment' must not be null");
+        }
+        return investment.divideBy(PRICE_OF_LOTTERY);
+    }
+
+    private int countScore(Lottery lottery, Lottery winningLottery) {
+        if (lottery == null) {
+            throw new IllegalArgumentException("'lottery' must not be null");
+        }
+        if (winningLottery == null) {
+            throw new IllegalArgumentException("'winningLottery' must not be null");
+        }
+        return lottery.score(winningLottery);
     }
 }
