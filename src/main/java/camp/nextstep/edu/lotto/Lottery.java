@@ -17,13 +17,13 @@ public class Lottery {
 
     private Lottery(Set<Integer> numberSet) {
         if (numberSet == null) {
-            throw new IllegalArgumentException("'winningNumberSet' must not be null");
+            throw new IllegalArgumentException("'numberSet' must not be null");
         }
         if (numberSet.size() != SIZE) {
-            throw new IllegalArgumentException("size of 'winningNumberSet' must be equal to " + SIZE);
+            throw new IllegalArgumentException("size of 'numberSet' must be equal to " + SIZE);
         }
         if (numberSet.stream().anyMatch(number -> number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER)) {
-            throw new IllegalArgumentException("'winningNumberSet' must be a number between 1 and 50");
+            throw new IllegalArgumentException("'numberSet' must be a number between 1 and 50");
         }
         this.numberSet = new HashSet<>(numberSet);
     }

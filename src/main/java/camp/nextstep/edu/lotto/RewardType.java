@@ -21,7 +21,7 @@ public enum RewardType {
 
     public static RewardType from(int score) {
         if (score < MINIMUM_SCORE) {
-            throw new IllegalArgumentException("'score' must be greater than or equal to 0");
+            throw new IllegalArgumentException("'score' must be greater than or equal to " + MINIMUM_SCORE);
         }
         return Arrays.stream(RewardType.values())
                 .filter(value -> value.score == score)
