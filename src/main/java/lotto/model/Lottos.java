@@ -7,9 +7,9 @@ import java.util.Map;
 public class Lottos {
 
 
-    private List<LottoNumbers> lottoNumbers;
+    private List<PickNumbers> lottoNumbers;
 
-    public Lottos(List<LottoNumbers> lottos) {
+    public Lottos(List<PickNumbers> lottos) {
         lottoNumbers = lottos;
     }
 
