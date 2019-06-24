@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.BoughtLottos;
+import lotto.domain.BuyingLottos;
 import lotto.domain.WinLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -8,24 +8,24 @@ import lotto.view.ResultView;
 public class LottoController {
     private InputView consoleInputView;
     private ResultView consoleResultView;
-    private BoughtLottos boughtLottos;
+    private BuyingLottos buyingLottos;
     private WinLottoNumbers winLottoNumbers;
     
     public LottoController(InputView consoleInputView, ResultView consoleResultView) {
         this.consoleInputView = consoleInputView;
         this.consoleResultView = consoleResultView;
-        boughtLottos = new BoughtLottos();
+        buyingLottos = new BuyingLottos();
     }
     
     public void runBuyingLottoProcess() {
         consoleInputView.printCashAnswer();
-        boughtLottos.buyLottos(consoleInputView.getUserInputCashPayment());
-        consoleResultView.printLottos(boughtLottos);
+        buyingLottos.buyLottos(consoleInputView.getUserInputCashPayment());
+        consoleResultView.printLottos(buyingLottos);
     }
     
     public void runResultProcess() {
         consoleInputView.printWinNumberAnswer();
         winLottoNumbers = new WinLottoNumbers(consoleInputView.getUserInputWinNumber());
-//        winLottoNumbers.getResult(boughtLottos);
+        consoleResultView.printResult(buyingLottos.getOwnPrize(winLottoNumbers));
     }
 }

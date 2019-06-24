@@ -1,7 +1,9 @@
 package lotto;
 
 import lotto.common.ErrorMessage;
-import lotto.domain.BoughtLottos;
+import lotto.domain.BuyingLottos;
+import lotto.domain.CashPayments;
+import lotto.domain.EarningsRate;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
@@ -17,12 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class BoughtLottosTest {
-    private BoughtLottos boughtLottos;
+class BuyingLottosTest {
+    private BuyingLottos buyingLottos;
     
     @BeforeEach
     void setUp() {
-        boughtLottos = new BoughtLottos();
+        buyingLottos = new BuyingLottos();
     }
     
     @Test
@@ -32,7 +34,7 @@ class BoughtLottosTest {
         int cashPayment = 999;
         //Then
         Assertions.assertThatIllegalArgumentException()
-            .isThrownBy(() -> boughtLottos.buyLottos(cashPayment))
+            .isThrownBy(() -> buyingLottos.buyLottos(cashPayment))
             .withMessage(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
     }
     
@@ -42,7 +44,7 @@ class BoughtLottosTest {
         //Given
         int cashPayment = 5000;
         //When
-        Lottos lottos = boughtLottos.buyLottos(cashPayment);
+        Lottos lottos = buyingLottos.buyLottos(cashPayment);
         //Then
         Assertions.assertThat(lottos.getLottoSize()).isEqualTo(5);
     }
@@ -55,11 +57,11 @@ class BoughtLottosTest {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(new LottoNumbers(getNewLottoNumbers(1, 2, 3, 7, 8, 9)));
         lottoNumbersList.add(new LottoNumbers(getNewLottoNumbers(1, 2, 3, 4, 8, 9)));
-        BoughtLottos boughtLottos = new BoughtLottos(new Lottos(lottoNumbersList));
+        BuyingLottos buyingLottos = new BuyingLottos(new Lottos(lottoNumbersList), new CashPayments(5000));
         //When
-        OwnPrize ownPrize = boughtLottos.getOwnPrize(winLottoNumbers);
+        OwnPrize ownPrize = buyingLottos.getOwnPrize(winLottoNumbers);
         //Then
-        Assertions.assertThat(ownPrize.getEarningsRate()).isEqualTo(27.5);
+        Assertions.assertThat(ownPrize.isEqualsEarningRate(new EarningsRate(11.0))).isTrue();
     }
     
     private static List<LottoNumber> getNewLottoNumbers(int... lottoNumbers) {

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class WinNumbersCount {
     private final static int DEFAULT_WIN_COUNT = 0;
@@ -15,8 +16,32 @@ public class WinNumbersCount {
     
     public int addWinCount(int matchCount) {
         Prize matchPrize = Prize.getPrize(matchCount);
+        if (matchPrize == null) {
+            return 0;
+        }
+        
         int nowCount = winNumbersCount.get(matchPrize);
-        winNumbersCount.put(matchPrize, nowCount++);
+        winNumbersCount.put(matchPrize, ++nowCount);
         return nowCount;
+    }
+    
+    public long getTotalPrizeMoney() {
+        return winNumbersCount.keySet().stream()
+          .mapToLong(prize -> winNumbersCount.get(prize) * prize.getPrizeMoney())
+          .reduce(Long::sum)
+          .orElseThrow(RuntimeException::new);
+    }
+    
+    public Map<Prize, Integer> getWinNumbersCount() {
+        final Map<Prize, Integer> winNumbersCount = this.winNumbersCount;
+        return winNumbersCount;
+    }
+    
+    public Set<Prize> getPrizes() {
+        return winNumbersCount.keySet();
+    }
+    
+    public int getMatchedCountAt(Prize prize) {
+        return winNumbersCount.get(prize);
     }
 }

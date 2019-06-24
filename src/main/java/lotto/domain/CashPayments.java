@@ -11,4 +11,8 @@ public class CashPayments {
     public CashPayments(int price) {
         this.price = price;
     }
+    
+    public double getEarningsRate(long totalPrize) {
+        return totalPrize / (double) price;
+    }
 }

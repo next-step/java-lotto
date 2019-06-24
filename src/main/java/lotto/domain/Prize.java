@@ -22,6 +22,14 @@ public enum Prize {
         return Arrays.stream(Prize.values())
             .filter(prize -> prize.matchCount == matchCount)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.PRIZE_COUNT_MESSAGE.message()));
+            .orElse(null);
+    }
+    
+    public int getMatchCount() {
+        return matchCount;
+    }
+    
+    public long getPrizeMoney() {
+        return prizeMoney;
     }
 }

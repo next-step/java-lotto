@@ -22,7 +22,7 @@ public class WinLottoNumbers {
         winLottoNumbers = new LottoNumbers(lottoNumbers);
     }
     
-    public void getResult(BoughtLottos lottos) {}
+    public void getResult(BuyingLottos lottos) {}
     
     public LottoNumbers getLotto() {
         return winLottoNumbers;

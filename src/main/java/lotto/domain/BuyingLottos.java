@@ -3,15 +3,16 @@ package lotto.domain;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class BoughtLottos {
+public class BuyingLottos {
     private final static int START_NUMBER = 0;
     private Lottos lottos;
     private CashPayments cashPayments;
     
-    public BoughtLottos() {}
+    public BuyingLottos() {}
     
-    public BoughtLottos(Lottos lottos) {
+    public BuyingLottos(Lottos lottos, CashPayments cashPayments) {
         this.lottos = lottos;
+        this.cashPayments = cashPayments;
     }
     
     public Lottos buyLottos(int cashPayment) {
