@@ -23,6 +23,15 @@ class WinningNumbersTest {
     }
 
     @Test
+    @DisplayName("범위를 넘어서 숫자 예외처리")
+    public void rangeException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            List<Integer> numbers = Arrays.asList(1, 50, 3, 3, 5, 6);
+            new WinningNumbers(numbers);
+        });
+    }
+
+    @Test
     @DisplayName("6개의 숫자가 아닐 경우 예외처리")
     public void lessThanSixNumberExceptionTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {

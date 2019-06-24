@@ -5,11 +5,26 @@ import java.util.List;
 
 public class LottoNumbers {
 
+    static final int MIN = 1;
+    static final int MAX = 45;
     private final static int LOTTO_NUMBER_SIZE = 6;
 
     public LottoNumbers(List<Integer> numbers) {
         verifySize(numbers);
         verifyDuplicationNumber(numbers);
+        verifyNumberRange(numbers);
+    }
+
+    private void verifyNumberRange(List<Integer> numbers) {
+        for (Integer number : numbers) {
+            verifyNumber(number);
+        }
+    }
+
+    private void verifyNumber(int number) {
+        if(number < MIN || number > MAX) {
+            throw new IllegalArgumentException("1~45 범위에서만 생성 가능 합니다.");
+        }
     }
 
     private void verifySize(List<Integer> numbers) {
