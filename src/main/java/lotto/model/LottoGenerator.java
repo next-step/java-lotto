@@ -19,4 +19,8 @@ public class LottoGenerator {
             .mapToObj((int value) -> new Lotto(numberGenerator.generate(6)))
             .collect(Collectors.toList());
   }
+
+  public Lotto generate(List<Integer> winningNumbers) {
+    return new Lotto(winningNumbers);
+  }
 }

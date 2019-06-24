@@ -22,5 +22,7 @@ public class LottoRunner {
 
     LottoOutputView.print(amount);
     LottoOutputView.print(lottos);
+
+    Lotto winningLotto = lottoGenerator.generate(LottoInputView.askWinningNumbers());
   }
 }
