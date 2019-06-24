@@ -1,5 +1,7 @@
 package camp.nextstep.edu.lotto;
 
+import org.assertj.core.data.Offset;
+import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,8 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class LotteryApplicationTest {
 
@@ -216,8 +217,39 @@ class LotteryApplicationTest {
 
     @Test
     @DisplayName("투자원금이 0원 이면 IllegalArgumentException 을 발생시킵니다")
-    void calculateEarningsRate() {
+    void calculateEarningsRate1() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> lotteryApplication.calculateEarningsRate(0, 5000));
+    }
+
+    @Test
+    @DisplayName("수익금이 0원 미만인 경우 IllegalArgumentException 을 발생시킵니다")
+    void calculateEarningsRate2() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.calculateEarningsRate(5000, -1));
+    }
+
+    @Test
+    @DisplayName("수익금이 0원 이면 0을 반환합니다")
+    void calculateEarningsRate3() {
+        // given
+        final int investment = 5000;
+        final long reward = 0;
+        // when
+        final double actual = lotteryApplication.calculateEarningsRate(investment, reward);
+        // then
+        assertThat(actual).isCloseTo(0, Percentage.withPercentage(1));
+    }
+
+    @Test
+    @DisplayName("투자원금과 수익금을 입력하면 수익금 / 투자원금의 값을 반환합니다")
+    void calculateEarningsRate4() {
+        // given
+        final int investment = 10000;
+        final long reward = 100000;
+        // when
+        final double actual = lotteryApplication.calculateEarningsRate(investment, reward);
+        // then
+        assertThat(actual).isCloseTo(10, Percentage.withPercentage(1));
     }
 }
