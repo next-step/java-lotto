@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 public class LottoTicketGenerator {
     static final int BASIC_LOTTO_SIZE = 6;
 
-    public static LottoTicket issue() {
+    static LottoTicket issue() {
         return new LottoTicket(pickLottoBalls(generateLottoBalls()));
     }
 
