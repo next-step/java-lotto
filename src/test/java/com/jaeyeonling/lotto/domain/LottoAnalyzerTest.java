@@ -87,20 +87,7 @@ class LottoAnalyzerTest {
         // then
         assertThat(report.getMatchCountByPrize(LottoPrize.SECOND)).isEqualTo(1);
     }
-
-    @DisplayName("당첨번호와 보너스 번호 충돌 시 예외처리 ")
-    @Test
-    void should_throw_ConflictLottoNumberException() {
-        // given
-        final Lotto winningLotto = new FixtureLotto();
-        final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER);
-
-        // when / then
-        assertThatExceptionOfType(ConflictLottoNumberException.class).isThrownBy(() -> {
-            new LottoAnalyzer(winningLotto, bonusLottoNumber);
-        });
-    }
-
+    
     private LottoGameReport generateLottoGameReport(final int analyzeCount) {
         final Lotto lotto = new FixtureLotto();
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto, new LottoNumber(LottoNumber.MAX));
