@@ -1,5 +1,13 @@
 public class StringAddCalculator {
     public int add(String string) {
-        return 0;
+        if (isInvalidString(string)) {
+            return 0;
+        }
+
+        return -1;
+    }
+
+    private boolean isInvalidString(String string) {
+        return string == null || string.equals("");
     }
 }
