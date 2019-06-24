@@ -9,6 +9,6 @@ public class Calculator {
         Operands operands = new Operands(inputOperands);
         Operand result = operands.sum();
 
-        return result.convert();
+        return result.getValue();
     }
 }
