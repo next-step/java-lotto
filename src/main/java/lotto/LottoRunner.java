@@ -19,13 +19,15 @@ public class LottoRunner {
     Lottos lottos = lottoGenerator.generate(paid);
 
     LottoOutputView.printCountOf(lottos);
-    LottoOutputView.print(lottos);
+    LottoOutputView.printPickedNumbersOf(lottos);
 
     List<Integer> winningNumbers = LottoInputView.askWinningNumbers();
-    List<Integer> countOfMatchingNumbers = lottos.getCountOfMatchingNumbers(winningNumbers);
+    Analyzer analyzer = new Analyzer(winningNumbers);
+    analyzer.analyze(lottos);
 
-//    winningNumbersCounts.forEach(Prize::win);
+    LottoOutputView.print(analyzer);
 
-    LottoOutputView.printWinnings();
+
+    //LottoOutputView.printWinnings();
   }
 }
