@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoSeller {
@@ -12,11 +13,14 @@ public class LottoSeller {
     }
 
     public List<LottoTicket> issueLottoTicket(int numberOfTicketsToBuy) {
-        //LottoTickets 생성
-        //LottoTickets에 발행된 티켓 추가
-            //LottoTicketGenerator.issue();
-        //LottoTickets 반환
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
+        for(int i = 0; i < numberOfTicketsToBuy; i++) {
+            lottoTickets.add(LottoTicketGenerator.issue());
+        }
+        return lottoTickets;
+
+        //TODO: Q. 구입한 로또복권의 목록인 List<LottoTicket> 도 일급컬렉션으로 만들 필요가 있을지 헷갈립니다..
     }
 
     private void validationInputMoney(int inputMoney) {
