@@ -29,6 +29,10 @@ public enum RewardType {
                 .orElse(UNKNOWN);
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public long getReward() {
         return reward;
     }

@@ -3,6 +3,7 @@ package camp.nextstep.edu.lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottery {
     private static final int SIZE = 6;
@@ -44,5 +45,9 @@ public class Lottery {
         return (int) numberSet.stream()
                 .filter(lottery.numberSet::contains)
                 .count();
+    }
+
+    public Stream<Integer> stream() {
+        return numberSet.stream();
     }
 }
