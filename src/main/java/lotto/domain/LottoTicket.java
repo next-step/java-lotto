@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoTicket {
 
@@ -38,5 +39,18 @@ public class LottoTicket {
     return winNumber.stream()
         .filter(numbers::contains)
         .count();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    LottoTicket that = (LottoTicket) o;
+    return Objects.equals(numbers, that.numbers);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(numbers);
   }
 }
