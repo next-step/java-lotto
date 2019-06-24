@@ -55,7 +55,7 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(LottoTicketGenerator.pickLottoBalls(testLottoTicket));
 
         //When
-        long result = lottoTicket.getNumberOfLuckyNumber(luckyNumber);
+        long result = lottoTicket.getNumberOfMatchedLuckyNumber(luckyNumber);
 
         //Then
         assertThat(result).isEqualTo(3);

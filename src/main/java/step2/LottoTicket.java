@@ -33,7 +33,7 @@ public class LottoTicket {
         }
     }
 
-    public long getNumberOfLuckyNumber(LuckyNumber luckyNumber) {
+    public long getNumberOfMatchedLuckyNumber(LuckyNumber luckyNumber) {
         List<Integer> luckNumberLastWeek =
                 luckyNumber.getLuckyNumber()
                         .stream()
