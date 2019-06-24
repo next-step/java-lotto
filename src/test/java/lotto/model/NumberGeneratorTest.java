@@ -1,5 +1,7 @@
-package lotto;
+package lotto.model;
 
+import lotto.model.MockNumberGenerator;
+import lotto.model.RandomNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

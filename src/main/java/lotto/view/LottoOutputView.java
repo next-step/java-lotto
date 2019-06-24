@@ -1,4 +1,6 @@
-package lotto;
+package lotto.view;
+
+import lotto.model.Lotto;
 
 import java.util.List;
 

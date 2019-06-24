@@ -1,5 +1,11 @@
 package lotto;
 
+import lotto.model.Lotto;
+import lotto.model.LottoGenerator;
+import lotto.model.RandomNumberGenerator;
+import lotto.view.LottoInputView;
+import lotto.view.LottoOutputView;
+
 import java.util.List;
 
 public class LottoRunner {
