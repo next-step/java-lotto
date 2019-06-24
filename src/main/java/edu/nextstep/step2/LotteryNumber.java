@@ -1,6 +1,7 @@
 package edu.nextstep.step2;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -29,11 +30,17 @@ public class LotteryNumber {
                 .isPresent();
     }
 
+    public int compareMatchNumberCount(ExtractionNumber exNumber) {
+        return exNumber.stream()
+                .filter(compareSourceNumber -> this.contains(compareSourceNumber.getNumber()))
+                .collect(Collectors.toList())
+                .size();
+    }
+
     private void validSize(List<Number> lotteryNumber) {
         if(lotteryNumber.size() != LIST_VALID_SIZE) {
             throw new IllegalArgumentException("전달된 숫자가 6개가 아닙니다.");
         }
     }
-
 
 }

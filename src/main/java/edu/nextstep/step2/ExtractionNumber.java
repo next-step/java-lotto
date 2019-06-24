@@ -1,6 +1,7 @@
 package edu.nextstep.step2;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -20,6 +21,10 @@ public class ExtractionNumber {
     public ExtractionNumber(List<Number> exNumber) {
             validSize(exNumber);
             this.exNumber = exNumber;
+    }
+
+    public Stream<Number> stream() {
+        return exNumber.stream();
     }
 
     private void validSize(List<Number> exNumber) {

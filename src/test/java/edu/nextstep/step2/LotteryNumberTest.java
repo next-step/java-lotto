@@ -54,4 +54,23 @@ public class LotteryNumberTest {
         LotteryNumber lotteryNumber = new LotteryNumber(numbers);
         assertThat(lotteryNumber.contains(number)).isTrue();
     }
+
+    @DisplayName("ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.")
+    @Test
+    void contains() {
+        numbers.add(new Number(6));
+        LotteryNumber lotteryNumber = new LotteryNumber(numbers);
+
+        List<Number> compareNumber = new ArrayList<>();
+
+        compareNumber.add(new Number(2));
+        compareNumber.add(new Number(4));
+        compareNumber.add(new Number(6));
+        compareNumber.add(new Number(8));
+        compareNumber.add(new Number(10));
+        compareNumber.add(new Number(12));
+        ExtractionNumber exNumber = new ExtractionNumber(compareNumber);
+
+        assertThat(lotteryNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);
+    }
 }
