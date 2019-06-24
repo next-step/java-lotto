@@ -1,3 +1,5 @@
+package accumulate;
+
 class Separators {
     private String separators;
     

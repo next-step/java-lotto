@@ -1,3 +1,5 @@
+package accumulate;
+
 public class Spliter {
     private final static String SEPARATOR_JOINER = "";
     private final static int SEPARATOR_INDEX = 0;

@@ -1,3 +1,5 @@
+package accumulate;
+
 import java.util.Scanner;
 
 public class AccumulatorRunner {
