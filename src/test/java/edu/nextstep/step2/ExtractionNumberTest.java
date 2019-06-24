@@ -3,6 +3,9 @@ package edu.nextstep.step2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,5 +44,14 @@ public class ExtractionNumberTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             ExtractionNumber exNumber = new ExtractionNumber(numbers);
         });
+    }
+
+    @DisplayName("전달된 인자값(int type)을 보유하고 있는지 확인한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    void contains(int number) {
+        numbers.add(new Number(6));
+        ExtractionNumber exNumber = new ExtractionNumber(numbers);
+        assertThat(exNumber.contains(number)).isTrue();
     }
 }

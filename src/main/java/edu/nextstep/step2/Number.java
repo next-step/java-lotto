@@ -34,4 +34,8 @@ public class Number {
             throw new IllegalArgumentException("45이하의 수가 와야합니다.");
         }
     }
+
+    public boolean comapreTo(int sourceNumber) {
+        return this.number == sourceNumber;
+    }
 }

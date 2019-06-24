@@ -34,4 +34,11 @@ public class NumberTest {
         Number number = new Number(1);
         assertThat(number.getNumber()).isEqualTo(1);
     }
+
+    @DisplayName("전달된 인자값(int type)과 일치하는지 확인")
+    @Test
+    void compareTo() {
+        Number number = new Number(1);
+        assertThat(number.comapreTo(1)).isTrue();
+    }
 }
