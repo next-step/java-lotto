@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
@@ -12,8 +11,8 @@ public class WinningLotto {
         this.number = number;
     }
 
-    public static WinningLotto generate(List<Number> lotto, Number number) {
-        return new WinningLotto(Lotto.from(lotto), number);
+    public static WinningLotto generate(Lotto lotto, Number number) {
+        return new WinningLotto(lotto, number);
     }
 
     @Override
