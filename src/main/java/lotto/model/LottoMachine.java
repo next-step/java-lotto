@@ -2,12 +2,11 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoMachine {
 
     public static LottoTicket buy(Money money) {
-        long count = money.countAvailableLotto();
+        long count = money.countAvailable(Lotto.getPrice());
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(LottoGenerator.generate());
