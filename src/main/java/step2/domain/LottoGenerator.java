@@ -11,7 +11,7 @@ public abstract class LottoGenerator {
 
     static {
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            LOTTO_NUMBERS.add(new LottoNumber(i));
+            LOTTO_NUMBERS.add(LottoNumber.create(i));
         }
     }
 
