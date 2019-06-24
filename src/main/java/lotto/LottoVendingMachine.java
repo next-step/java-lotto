@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoVendingMachine {
     private List<Lotto> lottos;
@@ -35,5 +36,12 @@ public class LottoVendingMachine {
 
     public int getUnitPrice() {
         return UNIT_PRICE;
+    }
+
+    public List<Integer> resultLottoGames(List<Integer> result) {
+        return lottos.stream()
+                .filter(lotto -> lotto.howManySameLottoNumber(result) >= 3)
+                .map(x -> x.howManySameLottoNumber(result))
+                .collect(Collectors.toList());
     }
 }

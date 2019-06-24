@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -40,5 +41,10 @@ class LottoVendingMachineTest {
         assertThat(lottoVendingMachine.size()).isEqualTo(4);
     }
 
-
+    @Test
+    void fullResultQuery() {
+        lottoVendingMachine.createLottos(4, () -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> result = lottoVendingMachine.resultLottoGames(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(result).contains(6, 6, 6, 6, 6);
+    }
 }
