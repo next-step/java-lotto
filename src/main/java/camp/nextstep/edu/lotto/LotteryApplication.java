@@ -28,7 +28,7 @@ public class LotteryApplication {
         return Lottery.customizedInstance(winningNumberSet);
     }
 
-    public int score(Lottery lottery, Lottery winningLottery) {
+    public int countScore(Lottery lottery, Lottery winningLottery) {
         if (lottery == null) {
             throw new IllegalArgumentException("'lottery' must not be null");
         }

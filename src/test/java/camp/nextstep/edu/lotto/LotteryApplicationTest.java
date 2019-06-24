@@ -61,7 +61,7 @@ class LotteryApplicationTest {
         final Lottery lottery = Lottery.randomizedInstance();
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.score(lottery, null))
+                .isThrownBy(() -> lotteryApplication.countScore(lottery, null))
                 // then
                 .withMessageContaining("must not be null");
     }
@@ -73,7 +73,7 @@ class LotteryApplicationTest {
         final Lottery lottery = Lottery.randomizedInstance();
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.score(null, lottery))
+                .isThrownBy(() -> lotteryApplication.countScore(null, lottery))
                 // then
                 .withMessageContaining("must not be null");
     }
@@ -85,7 +85,7 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(11, 12, 13, 14, 15, 16));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(21, 22, 23, 24, 25, 26));
         final int expected = 0;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
     @Test
@@ -94,7 +94,7 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(1, 12, 13, 14, 15, 16));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(1, 22, 23, 24, 25, 26));
         final int expected = 1;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
     @Test
@@ -103,7 +103,7 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(1, 2, 13, 14, 15, 16));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(1, 2, 23, 24, 25, 26));
         final int expected = 2;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
     @Test
@@ -112,7 +112,7 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 14, 15, 16));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 24, 25, 26));
         final int expected = 3;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
     @Test
@@ -121,7 +121,7 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 15, 16));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 25, 26));
         final int expected = 4;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
     @Test
@@ -130,7 +130,7 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 16));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 26));
         final int expected = 5;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
     @Test
@@ -139,15 +139,15 @@ class LotteryApplicationTest {
         final Set<Integer> givenNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         final Set<Integer> winningNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         final int expected = 6;
-        this.testScore(givenNumberSet, winningNumberSet, expected);
+        this.testCountScore(givenNumberSet, winningNumberSet, expected);
     }
 
-    private void testScore(Set<Integer> givenNumberSet, Set<Integer> winningNumberSet, int expected) {
+    private void testCountScore(Set<Integer> givenNumberSet, Set<Integer> winningNumberSet, int expected) {
         // given
         final Lottery lottery = Lottery.customizedInstance(givenNumberSet);
         final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
         // when
-        final int actual = lotteryApplication.score(lottery, winningLottery);
+        final int actual = lotteryApplication.countScore(lottery, winningLottery);
         // then
         assertThat(actual).isEqualTo(expected);
     }
