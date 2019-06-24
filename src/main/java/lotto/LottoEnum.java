@@ -20,7 +20,7 @@ public enum LottoEnum {
 
     public static LottoEnum findByPrice(int winnerCount) {
         return Arrays.stream(LottoEnum.values())
-                .filter(itemarray -> itemarray.hasDataGroup(winnerCount))
+                .filter(itemArray -> itemArray.hasDataGroup(winnerCount))
                 .findAny()
                 .orElse(EMPTY);
     }
