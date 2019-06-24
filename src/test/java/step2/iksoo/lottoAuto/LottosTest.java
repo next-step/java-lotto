@@ -31,6 +31,6 @@ public class LottosTest {
 
     @Test
     public void 로또수익률() {
-        assertThat(custom_lottos.calculateRateProfit(PRIZE_AMT, 3000)).isEqualTo(501.67);
+        assertThat(custom_lottos.calculateRateProfit(PRIZE_AMT, 3_000)).isEqualTo(501.67);
     }
 }

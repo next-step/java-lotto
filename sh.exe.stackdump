@@ -1,7 +1,0 @@
-Exception: STATUS_ACCESS_VIOLATION at eip=6100791B
-eax=F0000015 ebx=61007912 ecx=0080CD10 edx=773F6C04 esi=003F0095 edi=F0000015
-ebp=10000000 esp=0080CD5C program=C:\Program Files\Git\usr\bin\sh.exe, pid 112956, thread 
-cs=001B ds=0023 es=0023 fs=003B gs=0000 ss=0023
-Stack trace:
-Frame     Function  Args
-     35 [sh] sh 112956 fork: child -1 - forked process 112596 died unexpectedly, retry 0, exit code 0xC0000005, errno 11
