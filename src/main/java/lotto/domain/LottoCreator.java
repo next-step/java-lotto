@@ -5,19 +5,23 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_SIZE;
 
 public class LottoCreator {
 
+  private static final int LOTTO_RANGE_START = 1;
+  private static final int LOTTO_RANGE_END = 45;
+  private static final int START_INDEX = 0;
   private static final List<Integer> numberRange;
 
   static {
-    numberRange = IntStream.rangeClosed(1, 45)
+    numberRange = IntStream.rangeClosed(LOTTO_RANGE_START, LOTTO_RANGE_END)
         .boxed()
         .collect(toList());
   }
 
   public static LottoTicket create() {
     Collections.shuffle(numberRange);
-    return new LottoTicket(numberRange.subList(0, 6));
+    return new LottoTicket(numberRange.subList(START_INDEX, LOTTO_NUMBER_SIZE));
   }
 }
