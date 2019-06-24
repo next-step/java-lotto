@@ -16,7 +16,7 @@ public class Lottos {
         return this.lottos;
     }
 
-    public Map<Integer, Integer> checkLotteryWin(List<Integer> winnerNumbers) {
+    public Map<Integer, Integer> checkLotteryWin(List<Integer> winnerNumbers) {    	
         Map<Integer, Integer> map = Stream.of(new Integer[][]{
                 {0, 0},
                 {1, 0},
