@@ -1,6 +1,7 @@
 package edu.nextstep.step2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,5 +27,9 @@ public class Lotto {
         return lotto.stream()
                 .map(extractionNumber -> lotteryNumber.compareMatchNumberCount(extractionNumber))
                 .collect(Collectors.toList());
+    }
+
+    public List<ExtractionNumber> getExtractOfLotto() {
+        return Collections.unmodifiableList(lotto);
     }
 }
