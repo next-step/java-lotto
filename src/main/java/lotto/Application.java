@@ -12,12 +12,12 @@ public class Application {
         LottoTicket lottoTicket = LottoMachine.buy(Money.wons(inputOfAmount));
         OutputView.printLottoTicket(lottoTicket);
 
-        String number = "1,2,3,3,4,5";
-        int bonus = 7;
+        String inputOfNumbers =InputView.askOfWinningNumbers();
+        int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(inputOfNumbers, inputOfBonusNumber);
 
-        Lotto winningLotto = LottoMachine.getWinningLotto(InputView.askOfWinningNumbers());
-        WinningLotto winningLotto2 = LottoMachine.getWinningLotto(WinningLottoRequest.of(number, bonus));
+        WinningLotto winningLotto = LottoMachine.getWinningLotto(winningLottoRequest);
 
-//        OutputView.printReport(lottoTicket.result(winningLotto));
+        OutputView.printReport(lottoTicket.result(winningLotto));
     }
 }
