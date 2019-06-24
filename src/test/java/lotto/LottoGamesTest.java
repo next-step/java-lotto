@@ -31,7 +31,7 @@ public class LottoGamesTest {
         };
         lottoWinnerCheck(testLottoSet);
         LottoGames lottoGames = new LottoGames(lottos);
-        assertThat(lottoGames.rateOfReturn()).isEqualTo(1.66);
+        assertThat(lottoGames.rateOfReturn(3000)).isEqualTo(1.66);
     }
 
     @Test
