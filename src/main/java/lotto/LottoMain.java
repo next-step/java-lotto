@@ -13,9 +13,8 @@ public class LottoMain {
 
         String inputLastWeekLottoNumber = InputView.inputLastWeekLottoNumber();
         LottoGames lottoGames = lottoGamesExecute.lottoGameResult(inputLastWeekLottoNumber);
-        OutputView outputView = new OutputView(lottoGames);
-        outputView.printWinnerSummary();
-        outputView.printRateOfReturn();
+        OutputView.printWinnerSummary(lottoGames);
+        OutputView.printRateOfReturn();
     }
 
 }

@@ -5,11 +5,7 @@ import java.util.List;
 public class OutputView {
 
     private static int DEFAULT_LOTTO_WINNER_TYPE = 4;
-    private LottoGames lottoGames;
-
-    public OutputView(LottoGames lottoGames) {
-        this.lottoGames = lottoGames;
-    }
+    private static LottoGames lottoGames;
 
     static void printPurchaseLottoNumber(List <Lotto> lottos) {
         for (Lotto lotto : lottos) {
@@ -17,17 +13,18 @@ public class OutputView {
         }
     }
 
-    void printWinnerSummary() {
+    static void printWinnerSummary(LottoGames inputLottoGamess) {
+        lottoGames = inputLottoGamess;
         for (int i = 0; i < DEFAULT_LOTTO_WINNER_TYPE; i++) {
             System.out.println(summaryPrintGenerator(i));
         }
     }
 
-    void printRateOfReturn() {
+    static void printRateOfReturn() {
         System.out.println("총 수익률은 " + lottoGames.rateOfReturn() + " 입니다.");
     }
 
-    private String summaryPrintGenerator(int eventWinnerCount) {
+    private static String summaryPrintGenerator(int eventWinnerCount) {
         int printNumber = eventWinnerCount + 3;
         int lottoWinnerPrice = LottoEnum.findByPrice(printNumber).price();
 
