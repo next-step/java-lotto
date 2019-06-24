@@ -1,5 +1,6 @@
 package edu.nextstep.step2;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,8 +20,8 @@ public class ExtractionNumber {
     private List<Number> exNumber;
 
     public ExtractionNumber(List<Number> exNumber) {
-            validSize(exNumber);
-            this.exNumber = exNumber;
+        validSize(exNumber);
+        this.exNumber = new ArrayList<>(exNumber);
     }
 
     public Stream<Number> stream() {
@@ -28,7 +29,7 @@ public class ExtractionNumber {
     }
 
     private void validSize(List<Number> exNumber) {
-        if(exNumber.size() != LIST_VALID_SIZE) {
+        if (exNumber.size() != LIST_VALID_SIZE) {
             throw new IllegalArgumentException("전달된 숫자가 6개가 아닙니다.");
         }
     }

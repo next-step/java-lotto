@@ -31,7 +31,7 @@ public class ExtractionNumberTest {
         Number number3 = new Number(3);
         Number number4 = new Number(4);
         Number number5 = new Number(5);
-        numbers = new ArrayList<>(Arrays.asList(number1,number2,number3,number4,number5));
+        numbers = new ArrayList<>(Arrays.asList(number1, number2, number3, number4, number5));
 
     }
 

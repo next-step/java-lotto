@@ -1,5 +1,6 @@
 package edu.nextstep.step2;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class LotteryNumber {
 
     public LotteryNumber(List<Number> lotteryNumber) {
         validSize(lotteryNumber);
-        this.lotteryNumber = lotteryNumber;
+        this.lotteryNumber = new ArrayList<>(lotteryNumber);
     }
 
     public boolean contains(int number) {
@@ -38,7 +39,7 @@ public class LotteryNumber {
     }
 
     private void validSize(List<Number> lotteryNumber) {
-        if(lotteryNumber.size() != LIST_VALID_SIZE) {
+        if (lotteryNumber.size() != LIST_VALID_SIZE) {
             throw new IllegalArgumentException("전달된 숫자가 6개가 아닙니다.");
         }
     }
