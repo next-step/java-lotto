@@ -33,4 +33,11 @@ public class StringParserTest {
         String input = "1,2,3:4:5";
         assertThat(StringParser.parseByDelimiter(input)).contains("1", "2", "3", "4", "5");
     }
+
+    @Test
+    @DisplayName("입력받은 스트링에서 구분자가 있으면 파싱한다")
+    void parseDelimiter() {
+        String input = "//;\n1;2;3";
+        assertThat(StringParser.parseDelimiter(input)).isEqualTo(";");
+    }
 }
