@@ -1,5 +1,9 @@
 package edu.nextstep.calculate;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * author       : gwonbyeong-yun <sksggg123>
  * ------------------------------------------
@@ -10,15 +14,15 @@ package edu.nextstep.calculate;
  * project      : java-lotto
  * create date  : 2019-06-24 21:44
  */
-public class RawData {
+public class Input {
 
-    private String rawData;
+    private List<String> input;
 
-    public RawData(String rawData) {
-        this.rawData = rawData;
+    public Input(List<String> input) {
+        this.input = new ArrayList<>(input);
     }
 
-    public String getRawData() {
-        return this.rawData;
+    public List<String> getInputData() {
+        return Collections.unmodifiableList(this.input);
     }
 }
