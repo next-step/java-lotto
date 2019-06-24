@@ -33,9 +33,21 @@ public class LotteryApplication {
         return lottery.score(winningLottery);
     }
 
-    public int getPrize(int score) {
+    public long getReward(int score) {
         if (score < 0) {
             throw new IllegalArgumentException("'score' must be greater than or equal to 0");
+        }
+        if (score == 3) {
+            return 5000;
+        }
+        if (score == 4) {
+            return 50000;
+        }
+        if (score == 5) {
+            return 1500000;
+        }
+        if (score == 6) {
+            return 2000000000;
         }
         return 0;
     }

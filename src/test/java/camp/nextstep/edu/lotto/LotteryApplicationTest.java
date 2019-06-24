@@ -159,8 +159,59 @@ class LotteryApplicationTest {
         final int score = -1;
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.getPrize(score))
+                .isThrownBy(() -> lotteryApplication.getReward(score))
                 // then
                 .withMessageContaining("must be greater than or equal to");
+    }
+
+    @Test
+    @DisplayName("한 개도 일치하지 않는 경우 0원을 반환합니다")
+    void prize1() {
+        this.testGetReward(0, 0);
+    }
+
+    @Test
+    @DisplayName("한 개 일치하는 경우 0 원 을 반환합니다")
+    void prize2() {
+        this.testGetReward(1, 0);
+    }
+
+    @Test
+    @DisplayName("두 개 일치하는 경우 0 원 을 반환합니다")
+    void prize3() {
+        this.testGetReward(2, 0);
+    }
+
+    @Test
+    @DisplayName("세 개 일치하는 경우 5000 원 을 반환합니다")
+    void prize4() {
+        this.testGetReward(3, 5000);
+    }
+
+    @Test
+    @DisplayName("네 개 일치하는 경우 50000 원 을 반환합니다")
+    void prize5() {
+        this.testGetReward(4, 50000);
+    }
+
+    @Test
+    @DisplayName("다섯 개 일치하는 경우 1500000 원 을 반환합니다")
+    void prize6() {
+        this.testGetReward(5, 1500000);
+    }
+
+    @Test
+    @DisplayName("여섯 개 일치하는 경우 2000000000 원 을 반환합니다")
+    void prize7() {
+        this.testGetReward(6, 2000000000);
+    }
+
+    private void testGetReward(int score, int expected) {
+        // given
+        final int givenScore = score;
+        // when
+        final long actual = lotteryApplication.getReward(givenScore);
+        // then
+        assertThat(actual).isEqualTo(expected);
     }
 }
