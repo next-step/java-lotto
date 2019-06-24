@@ -17,6 +17,10 @@
     - [X] ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.
 - [X] Lotto 객체 추가
     - [X] LotteryNumber의 Number리스트와 각 index별 당첨번호 확인하는 기능
+- [ ] Money 객체 추가
+    - [ ] 입력받은 급액 / 1000을 통해 ExtractionNumber 클래스 생성
+- [ ] RandomUtils 클래스  추가
+    - [ ] 1~45까지의 숫자 중 6개의 Number 객체 리스트를 반환 받는다.
     
     
     
