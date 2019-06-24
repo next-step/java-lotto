@@ -39,4 +39,10 @@ public class Lottery {
     public static Lottery customizedInstance(Set<Integer> numberSet) {
         return new Lottery(numberSet);
     }
+
+    public int score(Lottery lottery) {
+        return (int) numberSet.stream()
+                .filter(lottery.numberSet::contains)
+                .count();
+    }
 }
