@@ -5,18 +5,27 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    private static final Integer LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public Lotto(Lotto lotto) {
+        validateSize(lotto.lottoNumbers);
         this.lottoNumbers = lotto.getLottoNumbers();
     }
 
-    public static Lotto create(LottoGenerator generator) {
-        return generator.generate();
+    private void validateSize(final List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개가 필요합니다. 입력된 로또 번호 갯수 : " + lottoNumbers.size());
+        }
+    }
+
+    public static Lotto create() {
+        return LottoGenerator.generate();
     }
 
     public List<LottoNumber> getLottoNumbers() {

@@ -7,13 +7,15 @@ public class LottoStore {
     public static final Money LOTTO_PRICE = new Money(1000L);
 
     public Lottos buyLotto(final Money money) {
-        return buyLotto(money, new AutoLottoGenerator());
-    }
-
-    public Lottos buyLotto(final Money money, final LottoGenerator generator) {
         validateMoney(money);
         final int quantity = getLottoQuantity(money);
-        return makeLottos(quantity, generator);
+        return makeLottos(quantity);
+    }
+
+    public Lottos buyLotto(final Money money, ChooseLottos chooseLottos) {
+        validateMoney(money);
+        final int quantity = getLottoQuantity(money);
+        return new Lottos(chooseLottos.receiveLottos(quantity));
     }
 
     private void validateMoney(final Money money) {
@@ -26,9 +28,9 @@ public class LottoStore {
         return (int) (money.getMoney() / LOTTO_PRICE.getMoney());
     }
 
-    private Lottos makeLottos(final int quantity, final LottoGenerator generator) {
+    private Lottos makeLottos(final int quantity) {
         return new Lottos(IntStream.range(0, quantity)
-                                   .mapToObj(i -> Lotto.create(generator))
+                                   .mapToObj(i -> Lotto.create())
                                    .collect(Collectors.toList()));
     }
 }
