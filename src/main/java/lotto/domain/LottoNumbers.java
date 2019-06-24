@@ -5,15 +5,15 @@ import lotto.common.LottoNumbersMaker;
 
 import java.util.List;
 
-public class Lotto {
+public class LottoNumbers {
     private final static int LOTTO_NUMBER_COUNT = 6;
     private List<LottoNumber> lottoNumbers;
     
-    public Lotto() {
+    public LottoNumbers() {
         this.lottoNumbers = LottoNumbersMaker.getNewLottoNumbers();
     }
     
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         if (!checkDuplicateNumber(lottoNumbers)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.message());
         }
@@ -29,8 +29,20 @@ public class Lotto {
           .count() == lottoNumbers.size();
     }
     
+    public int getMatchedNumberCount(LottoNumbers lottoNumbers) { 
+        return this.lottoNumbers.stream()
+            .filter(lottoNumbers::contains)
+            .mapToInt(lottoNumber -> 1)
+            .sum();
+    }
+    
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+    
     @Override
     public String toString() {
         return "\n(" + lottoNumbers + ")";
     }
+    
 }

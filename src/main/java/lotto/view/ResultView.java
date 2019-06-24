@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.common.Outer;
-import lotto.domain.Lottos;
+import lotto.domain.BoughtLottos;
 
 public class ResultView {
     private Outer outer;
@@ -10,7 +10,7 @@ public class ResultView {
         this.outer = outer;
     }
     
-    public void printLottos(Lottos lottos) {
+    public void printLottos(BoughtLottos lottos) {
         outer.print(lottos.toString());        
     }
 }

@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinLotto {
+public class WinLottoNumbers {
     private final static String SEPARATOR = ",";
-    private Lotto lotto;
+    private LottoNumbers winLottoNumbers;
     
-    public WinLotto(String winLottoNumber) {
+    public WinLottoNumbers(String winLottoNumber) {
         String[] winNumbers = winLottoNumber.split(SEPARATOR);
         List<LottoNumber> lottoNumbers = Arrays.stream(winNumbers)
             .map(String::trim)
@@ -19,6 +19,16 @@ public class WinLotto {
             .mapToObj(lottoNumber -> new LottoNumber(lottoNumber))
             .collect(Collectors.toList());
         
-        lotto = new Lotto(lottoNumbers);
+        winLottoNumbers = new LottoNumbers(lottoNumbers);
+    }
+    
+    public void getResult(BoughtLottos lottos) {}
+    
+    public LottoNumbers getLotto() {
+        return winLottoNumbers;
+    }
+    
+    public int getMatchedNumberCount(LottoNumbers lottoNumbers) {
+        return winLottoNumbers.getMatchedNumberCount(lottoNumbers);
     }
 }

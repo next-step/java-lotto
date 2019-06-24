@@ -1,14 +1,20 @@
 package lotto;
 
 import lotto.common.ErrorMessage;
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.OwnPrize;
+import lotto.domain.WinLottoNumbers;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 class LottosTest {
     private Lottos lottos;
@@ -19,22 +25,13 @@ class LottosTest {
     }
     
     @Test
-    @DisplayName("금액이 1,000원 미만이면 구매할 수 없다.")
-    void buyUnderMinimumPriceTest() {
-        //Then
-        Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> lottos.buyLottos(999))
-          .withMessage(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
-    }
-
-    @Test
-    @DisplayName("입력한 금액과 맞는 매수의 로또를 구매한다.")
-    void boughtLottosCountTest() {
+    @DisplayName("구매할 수 있는 횟수를 구한다.")
+    void getBuyableCount() {
         //Given
         int cashPayment = 5000;
         //When
-        List<Lotto> boughtLottos = lottos.buyLottos(cashPayment);
+        int buyableCount = Lottos.getBuyableCount(cashPayment);
         //Then
-        Assertions.assertThat(boughtLottos.size()).isEqualTo(5);
+        Assertions.assertThat(buyableCount).isEqualTo(5);
     }
 }
