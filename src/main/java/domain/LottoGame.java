@@ -1,5 +1,6 @@
 package domain;
 
+import view.InputVeiw;
 import view.ResultView;
 
 import java.util.ArrayList;
@@ -12,10 +13,11 @@ public class LottoGame {
     private static ArrayList<ArrayList<Integer>> lotto = null;
     private static ArrayList<Integer> element = null;
     private static ArrayList<Integer> randomNumber = null;
+    private static ArrayList<Integer> prvLottoNumber;
 
     public static void run(int numofLotto) {
         getAutoLottoNumber(numofLotto);
-
+        prvLottoNumber= InputVeiw.inputLastLottoNumber();
     }
 
     private static void getAutoLottoNumber(int numofLotto) {
@@ -42,5 +44,9 @@ public class LottoGame {
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
             element.add(randomNumber.get(i));
         }
+    }
+
+    public static void showResult() {
+
     }
 }

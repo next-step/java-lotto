@@ -9,5 +9,6 @@ public class LottoGameMain {
         int numofLotto = InputVeiw.userInput();
 
         LottoGame.run(numofLotto);
+        LottoGame.showResult();
     }
 }

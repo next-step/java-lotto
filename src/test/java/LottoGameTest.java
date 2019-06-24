@@ -85,4 +85,10 @@ public class LottoGameTest {
 
         assertThat(result).isEqualTo("0.35");
     }
+
+    @Test
+    void removeBlankAndSplit() {
+        String input ="1, 2, 3, 4, 5, 6";
+        assertThat(input.replaceAll(" ", "").split(",")).containsExactly("1","2","3","4","5","6");
+    }
 }
