@@ -4,6 +4,7 @@ import camp.nextstep.edu.lotto.domain.Lottery;
 import camp.nextstep.edu.lotto.domain.NaturalNumber;
 import camp.nextstep.edu.lotto.domain.RewardType;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +32,7 @@ public class LotteryController {
         return investment.divideBy(PRICE_OF_LOTTERY);
     }
 
-    public int countScore(Lottery lottery, Lottery winningLottery) {
+    private int countScore(Lottery lottery, Lottery winningLottery) {
         if (lottery == null) {
             throw new IllegalArgumentException("'lottery' must not be null");
         }
@@ -46,12 +47,32 @@ public class LotteryController {
         return rewardType.getReward();
     }
 
-    public Lottery createWinningLottery(Set<Integer> winningNumberSet) {
+    public EnumMap<RewardType, Integer> getResult(List<Lottery> purchasedLotteries, Set<Integer> winningNumbers) {
+        final Lottery winningLottery = this.createWinningLottery(winningNumbers);
+
+        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
+        rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, 0);
+        rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, 0);
+        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, 0);
+        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, 0);
+
+        purchasedLotteries.stream()
+                .map(lottery -> this.countScore(lottery, winningLottery))
+                .forEach(score -> {
+                    final RewardType rewardType = RewardType.from(score);
+                    final int current = rewardMap.getOrDefault(rewardType, 0);
+                    rewardMap.put(rewardType, current + 1);
+                });
+
+        return rewardMap;
+    }
+
+    private Lottery createWinningLottery(Set<Integer> winningNumberSet) {
         return Lottery.customizedInstance(winningNumberSet);
     }
 
     public double calculateEarningsRate(int investment, long reward) {
-        if (investment == ZERO) {
+        if (investment <= ZERO) {
             throw new IllegalArgumentException("'investment' must be greater than " + ZERO);
         }
         if (reward < ZERO) {

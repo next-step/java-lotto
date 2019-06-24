@@ -2,7 +2,6 @@ package camp.nextstep.edu.lotto;
 
 import camp.nextstep.edu.lotto.controller.LotteryController;
 import camp.nextstep.edu.lotto.domain.Lottery;
-import camp.nextstep.edu.lotto.domain.NaturalNumber;
 import camp.nextstep.edu.lotto.domain.RewardType;
 import camp.nextstep.edu.lotto.view.ConsoleInputView;
 import camp.nextstep.edu.lotto.view.ConsoleResultView;
@@ -51,20 +50,7 @@ public class LotteryApplication {
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
-        final Lottery winningLottery = lotteryController.createWinningLottery(winningNumbers);
-        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
-        rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, 0);
-        rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, 0);
-        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, 0);
-        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, 0);
-
-        purchasedLotteries.stream()
-                .map(lottery -> lotteryController.countScore(lottery, winningLottery))
-                .forEach(score -> {
-                    final RewardType rewardType = RewardType.from(score);
-                    final int current = rewardMap.getOrDefault(rewardType, 0);
-                    rewardMap.put(rewardType, current + 1);
-                });
+        final EnumMap<RewardType, Integer> rewardMap = lotteryController.getResult(purchasedLotteries, winningNumbers);
         final long sumOfRewards = lotteryController.sumAllRewards(rewardMap);
         final double earningsRate = lotteryController.calculateEarningsRate(investment, sumOfRewards);
         resultView.printResults(rewardMap, earningsRate);
