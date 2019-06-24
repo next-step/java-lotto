@@ -1,7 +1,10 @@
 package step2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoSeller {
     static final int PRICE_OF_A_LOTTO_TICKET = 1000;
@@ -22,6 +25,44 @@ public class LottoSeller {
 
         //TODO: Q. 구입한 로또복권의 목록인 List<LottoTicket> 도 일급컬렉션으로 만들 필요가 있을지 헷갈립니다..
     }
+
+    public void lottoResult(List<LottoTicket> lottoTickets, LuckyNumber luckyNumber) {
+
+        int fourthPlace = 0;
+        int thirdPlace = 0;
+        int secondPlace = 0;
+        int firstPlace = 0;
+
+        for (LottoTicket ticket : lottoTickets) {
+            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 3) {
+                fourthPlace++;
+            }
+            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 4) {
+                thirdPlace++;
+            }
+            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 5) {
+                secondPlace++;
+            }
+            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 6) {
+                firstPlace++;
+            }
+        }
+    }
+
+    public long getNumberOfMatchedToLuckyNumber(LottoTicket lottoTicket, LuckyNumber luckyNumber) {
+        List<Integer> luckNumberLastWeek =
+                luckyNumber.getLuckyNumber()
+                        .stream()
+                        .map(LottoNumber::getNumber)
+                        .collect(Collectors.toList());
+        return lottoTicket.getLottoTicket().stream()
+                .map(LottoNumber::getNumber)
+                .filter(i -> luckNumberLastWeek.contains(i))
+                .count();
+
+        //TODO: Q. 이 부분을 어떻게 구현하면 좋을지 궁금합니다..
+    }
+
 
     private void validationInputMoney(int inputMoney) {
         if (inputMoney < PRICE_OF_A_LOTTO_TICKET) {

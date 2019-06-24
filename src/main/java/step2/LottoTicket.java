@@ -33,19 +33,19 @@ public class LottoTicket {
         }
     }
 
-    public long getNumberOfMatchedLuckyNumber(LuckyNumber luckyNumber) {
-        List<Integer> luckNumberLastWeek =
-                luckyNumber.getLuckyNumber()
-                        .stream()
-                        .map(LottoNumber::getNumber)
-                        .collect(Collectors.toList());
-        return lottoTicket.stream()
-                .map(LottoNumber::getNumber)
-                .filter(i -> luckNumberLastWeek.contains(i))
-                .count();
-
-        //TODO: Q. 이 부분을 어떻게 구현하면 좋을지 궁금합니다..
-    }
+//    public long getNumberOfMatchedToLuckyNumber(LuckyNumber luckyNumber) {
+//        List<Integer> luckNumberLastWeek =
+//                luckyNumber.getLuckyNumber()
+//                        .stream()
+//                        .map(LottoNumber::getNumber)
+//                        .collect(Collectors.toList());
+//        return lottoTicket.stream()
+//                .map(LottoNumber::getNumber)
+//                .filter(i -> luckNumberLastWeek.contains(i))
+//                .count();
+//
+//        //TODO: Q. 이 부분을 어떻게 구현하면 좋을지 궁금합니다..
+//    }
 
     public List<LottoNumber> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);

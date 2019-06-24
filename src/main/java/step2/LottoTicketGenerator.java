@@ -3,13 +3,12 @@ package step2;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicketGenerator {
     static final int BASIC_LOTTO_SIZE = 6;
 
     static LottoTicket issue() {
-        return new LottoTicket(pickLottoBalls(generateLottoBalls()));
+        return new LottoTicket(pickLottoBalls(LottoBalls.getLottoBalls()));
     }
 
     static List<LottoNumber> pickLottoBalls(List<Integer> lottoBalls) {
@@ -25,10 +24,4 @@ public class LottoTicketGenerator {
         Collections.shuffle(lottoBalls);
     }
 
-    static List<Integer> generateLottoBalls() {
-        return IntStream
-                .rangeClosed(LottoNumber.MINIMUM_LOTTO_NUMBER, LottoNumber.MAXIMUM_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-    }
 }
