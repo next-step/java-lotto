@@ -6,11 +6,7 @@ import java.util.List;
 
 public class LottoRetailer {
 
-    private final static Integer UNIT_PRICE = 1000;
-
-    public static List<LottoNumbers> buy(int orderAmount ) {
-        verifyBuyMinimum(orderAmount);
-        int quantity = getAvailableNumberToBuy(orderAmount);
+    public static List<LottoNumbers> buyAutoPick(int quantity) {
 
         List<LottoNumbers> list = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
@@ -19,16 +15,4 @@ public class LottoRetailer {
         }
         return list;
     }
-
-    private static void verifyBuyMinimum(int orderAmount) {
-        if(orderAmount < UNIT_PRICE) {
-            throw new IllegalArgumentException("이걸론 한장도 못사");
-        }
-    }
-
-    private static int getAvailableNumberToBuy(int orderAmount) {
-        return orderAmount / UNIT_PRICE;
-    }
-
-
 }
