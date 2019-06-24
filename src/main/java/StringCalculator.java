@@ -23,7 +23,7 @@ public class StringCalculator {
 
     // 구분자가 ",", ":" 일때 계산하는 함수
     private static int splitAndSum(String input) {
-        String[] result"" = input.split(SEPARATOR);
+        String[] result = input.split(SEPARATOR);
         if (checkNagative(result))
             throw new RuntimeException("입력값이 잘못되었습니다. 입력값 중에 음수가 있습니다.");
         return getTotalSum(result);
