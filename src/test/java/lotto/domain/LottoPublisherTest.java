@@ -45,10 +45,22 @@ public class LottoPublisherTest {
         for (int i = 0 ; i < pubchasePublisher.getBuyLottoCount(); i++) {
             List<Integer> numbers = pubchasePublisher.getPublishLotto().get(i).getNumbers();
             List<String> strNumbers = new ArrayList<>();
-            for (int j = 0 ; j < 6; j++) {
+            for (int j = 0 ; j < Lotto.MAX_LOTTO_NUM_COUNT; j++) {
                 strNumbers.add(numbers.get(j).toString());
             }
             System.out.println((i+1)+"로또번호["+String.join(",", strNumbers)+"]");
         }
+    }
+
+    @Test
+    void 생성자에당첨번호로또생성_유효성검사() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            WinnerLotto nullInput = new WinnerLotto(null);
+            WinnerLotto fiveNumbers = new WinnerLotto("1,2,3,4,5");
+            WinnerLotto notNumber = new WinnerLotto("1,2,3,aaa,5,6");
+            WinnerLotto overLottoRange = new WinnerLotto("1,2,3,46,5,6");
+            WinnerLotto sameNumber = new WinnerLotto("1,2,3,4,5,5");
+        });
+
     }
 }
