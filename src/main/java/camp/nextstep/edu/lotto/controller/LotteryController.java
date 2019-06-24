@@ -6,6 +6,7 @@ import camp.nextstep.edu.lotto.domain.RewardType;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -43,6 +44,10 @@ public class LotteryController {
         return rewardType.getReward();
     }
 
+    public Lottery createWinningLottery(Set<Integer> winningNumberSet) {
+        return Lottery.customizedInstance(winningNumberSet);
+    }
+
     public double calculateEarningsRate(int investment, long reward) {
         if (investment == ZERO) {
             throw new IllegalArgumentException("'investment' must be greater than " + ZERO);
@@ -53,7 +58,7 @@ public class LotteryController {
         return reward / (double) investment;
     }
 
-    private long sumAllRewards(Map<RewardType, Integer> rewardMap) {
+    public long sumAllRewards(Map<RewardType, Integer> rewardMap) {
         return rewardMap.entrySet()
                 .stream()
                 .map(entry -> entry.getKey().getReward() * entry.getValue())

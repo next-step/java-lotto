@@ -1,8 +1,9 @@
 package camp.nextstep.edu.lotto.view;
 
-import java.util.List;
+import java.util.Set;
 
 public interface InputView {
-    int inputBudget();
-    List<Integer> inputWinningNumbers();
+    int inputInvestment();
+
+    Set<Integer> inputWinningNumbers();
 }
