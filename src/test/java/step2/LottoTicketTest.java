@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -18,7 +19,10 @@ public class LottoTicketTest {
         //Then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new LottoTicket(overlapNumbers);
+                    new LottoTicket(overlapNumbers
+                            .stream()
+                            .map(LottoNumber::from)
+                            .collect(Collectors.toList()));
                 }).withMessageContaining(LottoTicket.ALERT_NUMBER_OVERLAP);
     }
 
@@ -32,8 +36,12 @@ public class LottoTicketTest {
         //Then
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    new LottoTicket(lackOfNumbers);
-                    new LottoTicket(excessOfNumbers);
+                    new LottoTicket(lackOfNumbers.stream()
+                            .map(LottoNumber::from)
+                            .collect(Collectors.toList()));
+                    new LottoTicket(excessOfNumbers.stream()
+                            .map(LottoNumber::from)
+                            .collect(Collectors.toList()));
                 }).withMessageContaining(LottoTicket.AlERT_DIFFERENT_SIZE_OF_NUMBERS);
     }
 

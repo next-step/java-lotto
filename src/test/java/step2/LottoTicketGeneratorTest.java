@@ -49,7 +49,7 @@ public class LottoTicketGeneratorTest {
         List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
 
         //When
-        List<Integer> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
+        List<LottoNumber> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
 
         //Then
         assertThat(lotto.size()).isEqualTo(LottoTicketGenerator.BASIC_LOTTO_SIZE);
@@ -61,9 +61,9 @@ public class LottoTicketGeneratorTest {
         List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
 
         //When
-        List<Integer> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
+        List<LottoNumber> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
 
         //Then
-        assertThat(lotto.get(LottoTicketGenerator.BASIC_LOTTO_SIZE - 1)).isGreaterThan(lotto.get(0));
+        assertThat(lotto.get(LottoTicketGenerator.BASIC_LOTTO_SIZE - 1).getNumber()).isGreaterThan(lotto.get(0).getNumber());
     }
 }

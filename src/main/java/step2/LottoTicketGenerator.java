@@ -12,11 +12,12 @@ public class LottoTicketGenerator {
         return new LottoTicket(pickLottoBalls(generateLottoBalls()));
     }
 
-    static List<Integer> pickLottoBalls(List<Integer> lottoBalls) {
+    static List<LottoNumber> pickLottoBalls(List<Integer> lottoBalls) {
         shuffleLottoBalls(lottoBalls);
         return lottoBalls.stream()
                 .limit(BASIC_LOTTO_SIZE)
                 .sorted()
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 
