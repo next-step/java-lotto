@@ -1,4 +1,4 @@
-package camp.nextstep.edu.lotto;
+package camp.nextstep.edu.lotto.controller;
 
 import camp.nextstep.edu.lotto.domain.Lottery;
 import camp.nextstep.edu.lotto.domain.NaturalNumber;
@@ -12,15 +12,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LotteryApplicationTest {
+class LotteryControllerTest {
 
-    private LotteryApplication lotteryApplication;
+    private LotteryController lotteryController;
 
     @BeforeEach
     void setup() {
-        lotteryApplication = new LotteryApplication();
+        lotteryController = new LotteryController();
     }
 
     @Test
@@ -29,7 +30,7 @@ class LotteryApplicationTest {
         // given
         final NaturalNumber investment = NaturalNumber.from(14000);
         // when
-        final NaturalNumber numberOfLotteries = lotteryApplication.calculateNumberOfAvailableLotteries(investment);
+        final NaturalNumber numberOfLotteries = lotteryController.calculateNumberOfAvailableLotteries(investment);
         // then
         assertThat(numberOfLotteries).isEqualTo(NaturalNumber.from(14));
     }
@@ -40,7 +41,7 @@ class LotteryApplicationTest {
         // given
         final NaturalNumber naturalNumber = NaturalNumber.from(0);
         // when
-        final List<Lottery> lottery = lotteryApplication.purchase(naturalNumber);
+        final List<Lottery> lottery = lotteryController.purchase(naturalNumber);
         // then
         assertThat(lottery).hasSize(0);
     }
@@ -51,7 +52,7 @@ class LotteryApplicationTest {
         // given
         final NaturalNumber naturalNumber = NaturalNumber.from(14);
         // when
-        final List<Lottery> lottery = lotteryApplication.purchase(naturalNumber);
+        final List<Lottery> lottery = lotteryController.purchase(naturalNumber);
         // then
         assertThat(lottery).hasSize(14);
     }
@@ -63,7 +64,7 @@ class LotteryApplicationTest {
         final Lottery lottery = Lottery.randomizedInstance();
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.countScore(lottery, null))
+                .isThrownBy(() -> lotteryController.countScore(lottery, null))
                 // then
                 .withMessageContaining("must not be null");
     }
@@ -75,7 +76,7 @@ class LotteryApplicationTest {
         final Lottery lottery = Lottery.randomizedInstance();
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.countScore(null, lottery))
+                .isThrownBy(() -> lotteryController.countScore(null, lottery))
                 // then
                 .withMessageContaining("must not be null");
     }
@@ -148,7 +149,7 @@ class LotteryApplicationTest {
         final Lottery lottery = Lottery.customizedInstance(givenNumberSet);
         final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
         // when
-        final int actual = lotteryApplication.countScore(lottery, winningLottery);
+        final int actual = lotteryController.countScore(lottery, winningLottery);
         // then
         assertThat(actual).isEqualTo(expected);
     }
@@ -160,7 +161,7 @@ class LotteryApplicationTest {
         final int score = -1;
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.getReward(score))
+                .isThrownBy(() -> lotteryController.getReward(score))
                 // then
                 .withMessageContaining("must be greater than or equal to");
     }
@@ -211,7 +212,7 @@ class LotteryApplicationTest {
         // given
         final int givenScore = score;
         // when
-        final long actual = lotteryApplication.getReward(givenScore);
+        final long actual = lotteryController.getReward(givenScore);
         // then
         assertThat(actual).isEqualTo(expected);
     }
@@ -220,14 +221,14 @@ class LotteryApplicationTest {
     @DisplayName("투자원금이 0원 이면 IllegalArgumentException 을 발생시킵니다")
     void calculateEarningsRate1() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.calculateEarningsRate(0, 5000));
+                .isThrownBy(() -> lotteryController.calculateEarningsRate(0, 5000));
     }
 
     @Test
     @DisplayName("수익금이 0원 미만인 경우 IllegalArgumentException 을 발생시킵니다")
     void calculateEarningsRate2() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.calculateEarningsRate(5000, -1));
+                .isThrownBy(() -> lotteryController.calculateEarningsRate(5000, -1));
     }
 
     @Test
@@ -237,7 +238,7 @@ class LotteryApplicationTest {
         final int investment = 5000;
         final long reward = 0;
         // when
-        final double actual = lotteryApplication.calculateEarningsRate(investment, reward);
+        final double actual = lotteryController.calculateEarningsRate(investment, reward);
         // then
         assertThat(actual).isCloseTo(0, Percentage.withPercentage(1));
     }
@@ -249,7 +250,7 @@ class LotteryApplicationTest {
         final int investment = 10000;
         final long reward = 100000;
         // when
-        final double actual = lotteryApplication.calculateEarningsRate(investment, reward);
+        final double actual = lotteryController.calculateEarningsRate(investment, reward);
         // then
         assertThat(actual).isCloseTo(10, Percentage.withPercentage(1));
     }

@@ -1,14 +1,15 @@
-package camp.nextstep.edu.lotto;
+package camp.nextstep.edu.lotto.controller;
 
 import camp.nextstep.edu.lotto.domain.Lottery;
 import camp.nextstep.edu.lotto.domain.NaturalNumber;
 import camp.nextstep.edu.lotto.domain.RewardType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryApplication {
+public class LotteryController {
 
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int ZERO = 0;
@@ -50,5 +51,12 @@ public class LotteryApplication {
             throw new IllegalArgumentException("'reward' must be greater than or equal to " + ZERO);
         }
         return reward / (double) investment;
+    }
+
+    private long sumAllRewards(Map<RewardType, Integer> rewardMap) {
+        return rewardMap.entrySet()
+                .stream()
+                .map(entry -> entry.getKey().getReward() * entry.getValue())
+                .reduce(0L, Long::sum);
     }
 }
