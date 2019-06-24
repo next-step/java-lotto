@@ -12,7 +12,7 @@ public class LottoTicketTest {
     @Test
     void 로또복권을_생성한다() {
         //Given
-        LottoTicket lottoTicket = LottoTicket.issue();
+        LottoTicket lottoTicket = LottoTicketGenerator.issue();
         //When
         //Then
         assertThat(lottoTicket.getLottoTicket().size()).isEqualTo(LottoTicket.BASIC_LOTTO_SIZE);
@@ -21,7 +21,7 @@ public class LottoTicketTest {
     @Test
     void 로또번호_1부터_45까지를_생성하여_리스트에_담는다() {
         //Given
-        List<Integer> lottoBalls = LottoTicket.generateLottoBalls();
+        List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
 
         //When
         //Then
@@ -37,7 +37,7 @@ public class LottoTicketTest {
         testNumbers.add(3);
 
         //When
-        LottoTicket.shuffleLottoBalls(testNumbers);
+        LottoTicketGenerator.shuffleLottoBalls(testNumbers);
 
         //Then
 //        assertThat(testNumbers.get(0)).isNotEqualTo(1);
@@ -47,10 +47,10 @@ public class LottoTicketTest {
     @Test
     void 로또번호가_담긴_리스트로부터_6개의_숫자를_추출하여_리스트에_담는다() {
         //Given
-        List<Integer> lottoBalls = LottoTicket.generateLottoBalls();
+        List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
 
         //When
-        List<Integer> lotto = LottoTicket.pickLottoBalls(lottoBalls);
+        List<Integer> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
 
         //Then
         assertThat(lotto.size()).isEqualTo(LottoTicket.BASIC_LOTTO_SIZE);
@@ -59,10 +59,10 @@ public class LottoTicketTest {
     @Test
     void 추출된_6개의_숫자를_오름차순으로_정렬한다() {
         //Given
-        List<Integer> lottoBalls = LottoTicket.generateLottoBalls();
+        List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
 
         //When
-        List<Integer> lotto = LottoTicket.pickLottoBalls(lottoBalls);
+        List<Integer> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
 
         //Then
         assertThat(lotto.get(LottoTicket.BASIC_LOTTO_SIZE - 1)).isGreaterThan(lotto.get(0));
