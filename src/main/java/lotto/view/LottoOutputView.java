@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
-import lotto.model.Prize;
+import lotto.model.*;
 
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class LottoOutputView {
   public static void printCountOf(Lottos lottos) {
@@ -13,14 +11,14 @@ public class LottoOutputView {
     System.out.println(msg);
   }
 
-  public static void print(Lottos lottos) {
-    System.out.println(lottos);
+  public static void printPickedNumbersOf(Lottos lottos) {
+    lottos.getLottos().forEach(System.out::println);
   }
 
-  public static void printWinnings() {
-//    Map<Integer, List<Integer>> prize = Prize.PRIZE;
-//    prize.forEach((winningCount, status) -> {
-//      System.out.println(winningCount + "개 일치 (" + status.valueOf(0) + "원) - " + status.valueOf(1) + "개");
-//    });
+  public static void print(Analyzer analyzer) {
+    Map<Prize, Integer> prizeStatus = analyzer.getPrizeStatus();
+    Stream.of(Prize.values()).filter(prize -> prize != Prize.LOSE).forEach(prize -> {
+      System.out.println(String.format("%d개 일치 (%d원) - %d개", prize.getCountOfMatchingNumbers(), prize.getPrizeMoney(), prizeStatus.getOrDefault(prize, 0)));
+    });
   }
 }
