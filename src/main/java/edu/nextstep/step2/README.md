@@ -1,22 +1,22 @@
 # 2단계 - 로또(자동)
 
 ## 요구사항 분석
-- [ ] Number 객체 추가 (ExtractionNumber와는 1:다)
+- [X] Number 객체 추가 (ExtractionNumber와는 1:다)
     - [X] Number는 0이하의 수이면 안된다.
     - [X] 1~45 까지의 숫자만 허용한다.
     - [X] 숫자(원시타임) 반환 기능이 있어야 한다.
     - [X] 전달된 인자값(int type)과 일치하는지 확인
-- [ ] ExtractionNumber 객체 추가 (Lotto와는 1:다)
+- [X] ExtractionNumber 객체 추가 (Lotto와는 1:다)
     - [X] ExtractionNumber는 6개의 리스트로 이루어진다.
     ~~- [X] 6개의 리스트를 반환하는 기능이 있어야 한다.~~
     ~~- [X] 전달된 인자값(int type)을 보유하고 있는지 확인한다.~~
-- [ ] LotteryNumber 객체 추가
+- [X] LotteryNumber 객체 추가
     - [X] LotteryNumber 6개의 리스트로 이루어진다.
     ~~- [X] 6개의 리스트를 반환하는 기능이 있어야 한다.~~
     - [X] 전달된 인자값(int type)을 보유하고 있는지 확인한다.
-    - [ ] ExtractionNumber는 객체에 당첨번호 카운트 반환는다.
-- [ ] Lotto 객체 추가
-    - [ ] LotteryNumber의 Number리스트와 각 index별 당첨번호 확인하는 기능
+    - [X] ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.
+- [X] Lotto 객체 추가
+    - [X] LotteryNumber의 Number리스트와 각 index별 당첨번호 확인하는 기능
     
     
     
