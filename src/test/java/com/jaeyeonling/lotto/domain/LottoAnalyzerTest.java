@@ -70,7 +70,10 @@ class LottoAnalyzerTest {
 
     private LottoGameReport generateLottoGameReport(final int analyzeCount) {
         final Lotto lotto = new FixtureLotto();
-        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto, new LottoNumber(LottoNumber.MAX));
+        final LottoNumber lottoNumber = new LottoNumber(LottoNumber.MAX);
+        final WinningLotto winningLotto = new WinningLotto(lotto, lottoNumber);
+
+        final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(winningLotto);
 
         return lottoAnalyzer.analyze(generateLottos(analyzeCount, lotto));
     }

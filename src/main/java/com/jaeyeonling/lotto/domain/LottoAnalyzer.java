@@ -1,7 +1,5 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.exception.ConflictLottoNumberException;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,17 +9,10 @@ public class LottoAnalyzer {
     private static final int DEFAULT_MATCH_COUNT = 0;
     private static final int INCREMENT_MATCH_COUNT = 1;
 
-    private final Lotto winningLotto;
-    private LottoNumber bonusLottoNumber;
+    private final WinningLotto winningLotto;
 
-    public LottoAnalyzer(final Lotto winningLotto,
-                         final LottoNumber bonusLottoNumber) {
-        if (winningLotto.contains(bonusLottoNumber)) {
-            throw new ConflictLottoNumberException(bonusLottoNumber);
-        }
-
+    public LottoAnalyzer(final WinningLotto winningLotto) {
         this.winningLotto = winningLotto;
-        this.bonusLottoNumber = bonusLottoNumber;
     }
 
     public LottoGameReport analyze(final List<Lotto> lottos) {
@@ -31,18 +22,11 @@ public class LottoAnalyzer {
     private Map<LottoPrize, Integer> countOfEachLottoPrizeByLottos(final List<Lotto> lottos) {
         final Map<LottoPrize, Integer> countOfEachLottoPrize = new HashMap<>();
         for (final Lotto lotto : lottos) {
-            final LottoPrize prize = matchWithWinningLotto(lotto);
+            final LottoPrize prize = winningLotto.match(lotto);
             countLottoPrize(countOfEachLottoPrize, prize);
         }
 
         return countOfEachLottoPrize;
-    }
-
-    private LottoPrize matchWithWinningLotto(final Lotto lotto) {
-        final int countOfMatch = winningLotto.countOfMatch(lotto);
-        final boolean matchBonus = lotto.contains(bonusLottoNumber);
-
-        return LottoPrize.valueOf(countOfMatch, matchBonus);
     }
 
     private void countLottoPrize(final Map<LottoPrize, Integer> countOfEachLottoPrize,

@@ -6,6 +6,7 @@ import com.jaeyeonling.lotto.domain.LottoGame;
 import com.jaeyeonling.lotto.domain.LottoGameReport;
 import com.jaeyeonling.lotto.domain.LottoNumber;
 import com.jaeyeonling.lotto.domain.Money;
+import com.jaeyeonling.lotto.domain.WinningLotto;
 import com.jaeyeonling.lotto.view.ConsoleInputView;
 import com.jaeyeonling.lotto.view.ConsoleOutputView;
 
@@ -21,10 +22,12 @@ public class Application {
 
         ConsoleOutputView.printBuyingLotto(lottos);
 
-        final Lotto winningLotto = ConsoleInputView.readWinningLotto();
-        final LottoNumber bonusLottoNumber = ConsoleInputView.readBonusLottoNumber();
+        final Lotto inputWinningLotto = ConsoleInputView.readWinningLotto();
+        final LottoNumber inputBonusLottoNumber = ConsoleInputView.readBonusLottoNumber();
 
-        final LottoAnalyzer analyzer = new LottoAnalyzer(winningLotto, bonusLottoNumber);
+        final WinningLotto winningLotto = new WinningLotto(inputWinningLotto, inputBonusLottoNumber);
+
+        final LottoAnalyzer analyzer = new LottoAnalyzer(winningLotto);
 
         final LottoGameReport report = analyzer.analyze(lottos);
         ConsoleOutputView.printReport(report);
