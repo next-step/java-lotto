@@ -8,7 +8,7 @@ import java.util.Set;
 public class LottoTicket {
 
     static final String ALERT_NUMBER_OVERLAP = "중복된 로또 번호가 존재합니다.";
-    public static final String AlERT_DIFFERENT_SIZE_OF_NUMBERS = "로또번호의 개수가 6개가 아닙니다.";
+    static final String AlERT_DIFFERENT_SIZE_OF_NUMBERS = "로또번호의 개수가 6개가 아닙니다.";
     private final List<Integer> lottoTicket;
 
     LottoTicket(List<Integer> lottoTicket) {
