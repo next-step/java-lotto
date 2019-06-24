@@ -21,4 +21,9 @@ public class LottoMachine {
                 .collect(Collectors.toList());
         return LottoGenerator.generate(numbers);
     }
+
+    public static WinningLotto getWinningLotto(WinningLottoRequest winningLottoRequest) {
+        Lotto lotto = LottoGenerator.generate(winningLottoRequest.getNumbers());
+        return WinningLotto.generate(lotto, winningLottoRequest.getBonus());
+    }
 }
