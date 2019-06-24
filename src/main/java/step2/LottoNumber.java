@@ -1,7 +1,9 @@
 package step2;
 
 public class LottoNumber {
-    public static final String ALERT_OUT_OF_RANGE_OF_LOTTO_NUMBER = "로또번호는 1부터 45까지의 자연수만 가능합니다.";
+    static final String ALERT_OUT_OF_RANGE_OF_LOTTO_NUMBER = "로또번호는 1부터 45까지의 자연수만 가능합니다.";
+    static final int MINIMUM_LOTTO_NUMBER = 1;
+    static final int MAXIMUM_LOTTO_NUMBER = 45;
     private int number;
 
     private LottoNumber(int number) {
@@ -16,7 +18,7 @@ public class LottoNumber {
     }
 
     private boolean isOutOfRange(int number) {
-        return number < 1 || number > 45;
+        return number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER;
     }
 
     public int getNumber() {

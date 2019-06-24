@@ -1,39 +1,37 @@
 package step2;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoTicket {
 
+    static final int NUMBER_OF_BASIC_LOTTO_NUMBER = 6;
     private final List<Integer> lottoTicket;
 
-    public LottoTicket(List<Integer> lottoTicket) {
+    private LottoTicket(List<Integer> lottoTicket) {
         this.lottoTicket = lottoTicket;
     }
 
     public static LottoTicket from() {
-        List<Integer> lottoBalls = pickSixBalls(generateLottoBalls());
-        return new LottoTicket(lottoBalls);
+        return new LottoTicket(pickSixBalls(generateLottoBalls()));
     }
 
-    public static List<Integer> pickSixBalls(List<Integer> lottoBalls) {
-        return lottoBalls.stream()
-                .limit(6)
+    static List<Integer> pickSixBalls(Stream<Integer> lottoBalls) {
+        return lottoBalls
+                .limit(NUMBER_OF_BASIC_LOTTO_NUMBER)
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> generateLottoBalls() {
-        List<Integer> lottoBalls = new ArrayList<>();
-        for (int i = 0; i < 45; i++) {
-            lottoBalls.add(i);
-        }
-        Collections.shuffle(lottoBalls);
-        return lottoBalls;
+    static Stream<Integer> generateLottoBalls() {
+        return IntStream
+                .rangeClosed(LottoNumber.MINIMUM_LOTTO_NUMBER, LottoNumber.MAXIMUM_LOTTO_NUMBER)
+                .boxed();
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
     }
 }
