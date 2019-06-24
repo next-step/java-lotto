@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
-    @DisplayName("로또번호가 6개 일치하는 경우")
+    @DisplayName("로또번호가 6개 일치한다")
     @Test
     void matchCountToOtherLotto() {
         Lotto lotto = ofLotto(1, 2, 3, 4, 5, 6);

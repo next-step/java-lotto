@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoMachineTest {
 
-    @DisplayName("당첨번호를 생성합니다")
+    @DisplayName("당첨번호를 생성하는데 성공한다")
     @Test
     void createWinningLotto() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -24,7 +24,7 @@ public class LottoMachineTest {
         assertThat(winningLotto).isEqualTo(ofLotto(1, 2, 3, 4, 5, 6));
     }
 
-    @DisplayName("한개의 로또를 구매한다")
+    @DisplayName("한개의 로또를 구매에 성공한다")
     @Test
     void buyLottoWithMoney() {
         Money money = Money.wons(1000);

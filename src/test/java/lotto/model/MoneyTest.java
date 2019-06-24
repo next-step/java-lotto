@@ -10,20 +10,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 
-    @DisplayName("돈을 생성한다")
+    @DisplayName("돈을 생성하는데 성공한다")
     @Test
     void createMoney() {
         assertThat(Money.wons(1000)).isEqualTo(Money.wons(1000));
     }
 
-    @DisplayName("돈이 음수일 경우 에러발생")
+    @DisplayName("돈이 음수일 경우 exception")
     @Test
     void noNaturalMoneyThenFail() {
         Assertions.assertThatIllegalArgumentException()
                 .isThrownBy(() -> Money.wons(-1));
     }
 
-    @DisplayName("1개의 로또를 구매 가능")
+    @DisplayName("1개의 로또를 구매한다")
     @ParameterizedTest
     @ValueSource(ints = {
             1000,
