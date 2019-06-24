@@ -49,42 +49,18 @@ public class StringAddCalculatorTest {
         assertThat(output).isEqualTo(8);
     }
 
+    @Test
+    void 문자열_입력시_커스텀_구분자로_나눠_합_리턴() {
+        String input = "//;\n1;2;3";
+        int output = StringAddCalculator.calculator(input);
+        assertThat(output).isEqualTo(6);
+    }
 
-//    @BeforeEach
-//    public void setup() {
-//        cal = new StringAddCalculator();
-//    }
-//
-//    @Test
-//    public void add_null_또는_빈문자() throws Exception {
-//        assertThat(cal.add(null)).isEqualTo(0);
-//        assertThat(cal.add("")).isEqualTo(0);
-//    }
-//
-//    @Test
-//    public void add_숫자하나() throws Exception {
-//        assertThat(cal.add("1")).isEqualTo(1);
-//    }
-//
-//    @Test
-//    public void add_쉼표구분자() throws Exception {
-//        assertThat(cal.add("1,2")).isEqualTo(3);
-//    }
-//
-//    @Test
-//    public void add_쉼표_또는_콜론_구분자() throws Exception {
-//        assertThat(cal.add("1,2:3")).isEqualTo(6);
-//    }
-//
-//    @Test
-//    public void add_custom_구분자() throws Exception {
-//        assertThat(cal.add("//;\n1;2;3")).isEqualTo(6);
-//    }
-//
-//    @Test
-//    public void add_negative() throws Exception {
-//        assertThatIllegalArgumentException().isThrownBy(() -> {
-//            cal.add("-1,2,3");
-//        });
-//    }
+    //@Test
+    void 문자열_숫자_음수_입력시_예외() {
+        String input = "-1,2,3";
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringAddCalculator.calculator(input);
+        });
+    }
 }
