@@ -53,7 +53,14 @@ class LotteryApplicationTest {
 
     @Test
     @DisplayName("로또를 생성하면, 6개의 숫자로 이루어진 Integer Set 을 반환해야합니다")
-    void createLottery() {
+    void createLottery_sizeIsEqualToSix() {
+        final Set<Integer> actual = lotteryApplication.createLottery();
+        assertThat(actual).hasSize(6);
+    }
+
+    @Test
+    @DisplayName("생성된 로또의 숫자는 중복되지 않아야 합니다")
+    void createLottery_numbersShouldNotBeDuplicated() {
         final Set<Integer> actual = lotteryApplication.createLottery();
         assertThat(actual).hasSize(6);
     }
