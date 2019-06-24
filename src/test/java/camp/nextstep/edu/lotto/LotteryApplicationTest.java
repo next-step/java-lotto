@@ -31,12 +31,23 @@ class LotteryApplicationTest {
 
     @Test
     @DisplayName("0을 입력할 경우 0개의 로또를 반환합니다")
-    void purchase() {
+    void purchase_zero() {
         // given
         final NaturalNumber naturalNumber = NaturalNumber.from(0);
         // when
         final List<Set<Integer>> lottery = lotteryApplication.purchase(naturalNumber);
         // then
         assertThat(lottery).hasSize(0);
+    }
+
+    @Test
+    @DisplayName("양수를 입력할 경우 해당 숫자만큼의 로또를 반환합니다")
+    void purchase() {
+        // given
+        final NaturalNumber naturalNumber = NaturalNumber.from(14);
+        // when
+        final List<Set<Integer>> lottery = lotteryApplication.purchase(naturalNumber);
+        // then
+        assertThat(lottery).hasSize(14);
     }
 }

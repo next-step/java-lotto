@@ -1,8 +1,10 @@
 package camp.nextstep.edu.lotto;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LotteryApplication {
 
@@ -16,6 +18,9 @@ public class LotteryApplication {
     }
 
     public List<Set<Integer>> purchase(NaturalNumber numberOfLotteries) {
-        return Collections.emptyList();
+        final int value = numberOfLotteries.value();
+        return IntStream.range(0, value)
+                .mapToObj(number -> new HashSet<Integer>())
+                .collect(Collectors.toList());
     }
 }
