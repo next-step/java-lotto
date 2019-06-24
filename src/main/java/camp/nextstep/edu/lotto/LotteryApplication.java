@@ -23,7 +23,7 @@ public class LotteryApplication {
     public List<Set<Integer>> purchase(NaturalNumber numberOfLotteries) {
         final int value = numberOfLotteries.value();
         return IntStream.range(0, value)
-                .mapToObj(number -> new HashSet<Integer>())
+                .mapToObj(number -> createLottery())
                 .collect(Collectors.toList());
     }
 
