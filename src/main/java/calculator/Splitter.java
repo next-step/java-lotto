@@ -11,7 +11,7 @@ class Splitter {
     private static final String REGEX_OF_DEFAULT_SEPARATOR = "[,:]";
     private static final String REGEX_OF_CUSTOM_SEPARATOR = "//(.)\n(.*)";
 
-    List<Operand> extractOperands(String input) {
+    static List<Operand> extractOperands(String input) {
         if (isEmpty(input)) {
             Operand operand = Operand.of(Operand.MINIMUM_VALUE);
             return Collections.singletonList(operand);
@@ -25,11 +25,11 @@ class Splitter {
         return Collections.unmodifiableList(operands);
     }
 
-    private boolean isEmpty(String input) {
+    private static boolean isEmpty(String input) {
         return input == null || input.trim().isEmpty();
     }
 
-    private String[] split(String input) {
+    private static String[] split(String input) {
         String[] elementsOnInput = input.split(REGEX_OF_DEFAULT_SEPARATOR);
 
         Matcher matcher = Pattern.compile(REGEX_OF_CUSTOM_SEPARATOR).matcher(input);
