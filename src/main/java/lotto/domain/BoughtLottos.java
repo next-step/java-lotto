@@ -16,8 +16,7 @@ public class BoughtLottos {
     
     public Lottos buyLottos(int cashPayment) {
         cashPayments = new CashPayments(cashPayment);
-        int buyableCount = Lottos.getBuyableCount(cashPayment);
-        lottos = new Lottos(IntStream.range(START_NUMBER, buyableCount)
+        lottos = new Lottos(IntStream.range(START_NUMBER, Lottos.getBuyableCount(cashPayment))
             .mapToObj(i -> new LottoNumbers())
             .collect(Collectors.toList()));
         return lottos;

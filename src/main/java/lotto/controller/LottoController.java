@@ -26,6 +26,6 @@ public class LottoController {
     public void runResultProcess() {
         consoleInputView.printWinNumberAnswer();
         winLottoNumbers = new WinLottoNumbers(consoleInputView.getUserInputWinNumber());
-        winLottoNumbers.getResult(boughtLottos);
+//        winLottoNumbers.getResult(boughtLottos);
     }
 }
