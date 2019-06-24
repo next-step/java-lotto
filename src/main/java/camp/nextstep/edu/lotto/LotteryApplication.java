@@ -40,11 +40,11 @@ public class LotteryApplication {
     }
 
     public double calculateEarningsRate(int investment, long reward) {
-        if (investment == 0) {
-            throw new IllegalArgumentException("'investment' must be greater than 0");
+        if (investment == ZERO) {
+            throw new IllegalArgumentException("'investment' must be greater than " + ZERO);
         }
-        if (reward < 0) {
-            throw new IllegalArgumentException("'reward' must be greater than or equal to 0");
+        if (reward < ZERO) {
+            throw new IllegalArgumentException("'reward' must be greater than or equal to " + ZERO);
         }
         return reward / (double) investment;
     }
