@@ -13,20 +13,20 @@ public class Lottos {
         lottoNumbers = lottos;
     }
 
-    public Map<Integer, Integer> aggregate(LottoNumbers winnerNumbers) {
+    public Map<Long, Integer> aggregate(WinningNumbers winnerNumbers) {
 
-//        Map<Integer, Integer> map = new HashMap<>();
-//        for (LottoNumbers lottoNumber : lottoNumbers) {
-//            int matchCount = lottoNumber.compare(winnerNumbers);
-//            Integer integer = map.get(matchCount);
-//            if(integer == null) {
-//                map.put(matchCount, 1);
-//            }
-//            else {
-//                integer++;
-//                map.put(matchCount, integer);
-//            }
-//        }
-        return null;
+        Map<Long, Integer> map = new HashMap<>();
+        for (PickNumbers pickNumbers : lottoNumbers) {
+            long matchCount = pickNumbers.compare(winnerNumbers);
+            Integer integer = map.get(matchCount);
+            if(integer == null) {
+                map.put(matchCount, 1);
+            }
+            else {
+                integer++;
+                map.put(matchCount, integer);
+            }
+        }
+        return map;
     }
 }
