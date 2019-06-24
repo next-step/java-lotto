@@ -63,5 +63,4 @@ public class ConsoleResultView implements ResultView {
         final long reward = rewardType.getReward();
         return String.format(MESSAGE_FORMAT_OF_ONE_LOTTERY_RESULT, score, reward, numberOfLotteries);
     }
-
 }

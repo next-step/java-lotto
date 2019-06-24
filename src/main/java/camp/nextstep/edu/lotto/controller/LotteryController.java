@@ -15,10 +15,13 @@ public class LotteryController {
 
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int ZERO = 0;
+    private static final int COUNT_UNIT = 1;
+    private static final int COUNT_DEFAULT = 0;
+    private static final long IDENTITY_LONG = 0L;
 
     public List<Lottery> purchase(int investment) {
         final NaturalNumber naturalNumberInvestment = NaturalNumber.from(investment);
-        final NaturalNumber naturalNumberOfLotteries = this.calculateNumberOfAvailableLotteries(naturalNumberInvestment);
+        final NaturalNumber naturalNumberOfLotteries = naturalNumberInvestment.divideBy(PRICE_OF_LOTTERY);
         final int numberOfLotteries = naturalNumberOfLotteries.value();
         return IntStream.range(ZERO, numberOfLotteries)
                 .mapToObj(number -> Lottery.randomizedInstance())
@@ -29,17 +32,17 @@ public class LotteryController {
         final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
 
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
-        rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, 0);
-        rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, 0);
-        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, 0);
-        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, 0);
+        rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, COUNT_DEFAULT);
+        rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, COUNT_DEFAULT);
+        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, COUNT_DEFAULT);
+        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, COUNT_DEFAULT);
 
         purchasedLotteries.stream()
-                .map(lottery -> this.countScore(lottery, winningLottery))
+                .map(lottery -> lottery.score(winningLottery))
                 .forEach(score -> {
                     final RewardType rewardType = RewardType.from(score);
-                    final int current = rewardMap.getOrDefault(rewardType, 0);
-                    rewardMap.put(rewardType, current + 1);
+                    final int current = rewardMap.getOrDefault(rewardType, COUNT_DEFAULT);
+                    rewardMap.put(rewardType, current + COUNT_UNIT);
                 });
 
         return rewardMap;
@@ -59,23 +62,6 @@ public class LotteryController {
         return rewardMap.entrySet()
                 .stream()
                 .map(entry -> entry.getKey().getReward() * entry.getValue())
-                .reduce(0L, Long::sum);
-    }
-
-    private NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
-        if (investment == null) {
-            throw new IllegalArgumentException("'investment' must not be null");
-        }
-        return investment.divideBy(PRICE_OF_LOTTERY);
-    }
-
-    private int countScore(Lottery lottery, Lottery winningLottery) {
-        if (lottery == null) {
-            throw new IllegalArgumentException("'lottery' must not be null");
-        }
-        if (winningLottery == null) {
-            throw new IllegalArgumentException("'winningLottery' must not be null");
-        }
-        return lottery.score(winningLottery);
+                .reduce(IDENTITY_LONG, Long::sum);
     }
 }
