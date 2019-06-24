@@ -24,7 +24,16 @@ public class LottoMachineTest {
         assertThat(winningLotto).isEqualTo(ofLotto(1, 2, 3, 4, 5, 6));
     }
 
-    @DisplayName("한개의 로또를 구매에 성공한다")
+    @DisplayName("로또 구매에 실패한다")
+    @Test
+    void buyLottoWithZeroMoney() {
+        Money money = Money.wons(0);
+
+        assertThatExceptionOfType(MinimumAmountException.class)
+                .isThrownBy(() -> LottoMachine.buy(money));
+    }
+
+    @DisplayName("1개의 로또 구매에 성공한다")
     @Test
     void buyLottoWithMoney() {
         Money money = Money.wons(1000);
@@ -34,7 +43,7 @@ public class LottoMachineTest {
         assertThat(result.getLottos()).hasSize(1);
     }
 
-    @DisplayName("14500원이면 로또를 14개 구매한다")
+    @DisplayName("14개의 로또 구매에 성공한다")
     @Test
     void buyManyLottoWithMoney() {
         Money money = Money.wons(14500);
@@ -42,14 +51,5 @@ public class LottoMachineTest {
         LottoTicket lottoTicket = LottoMachine.buy(money);
 
         assertThat(lottoTicket.getLottos()).hasSize(14);
-    }
-
-    @DisplayName("0원이면 로또를 구매할 수 없다")
-    @Test
-    void buyLottoWithZeroMoney() {
-        Money money = Money.wons(0);
-
-        assertThatExceptionOfType(MinimumAmountException.class)
-                .isThrownBy(() -> LottoMachine.buy(money));
     }
 }

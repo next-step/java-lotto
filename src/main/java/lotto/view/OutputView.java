@@ -21,11 +21,11 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("--------------------------");
         for (Prize prize : Prize.values()) {
-            String printMessage = (prize.equals(Prize.SECOND))? RESULT_PRIZE_SECOND_MESSAGE : RESULT_PRIZE_MESSAGE;
+            String printMessage = (prize.equals(Prize.SECOND)) ? RESULT_PRIZE_SECOND_MESSAGE : RESULT_PRIZE_MESSAGE;
             System.out.println(String.format(printMessage,
-                                            prize.getMatchCount(),
-                                            prize.getMoney(),
-                                            result.getCount(prize)));
+                    prize.getMatchCount(),
+                    prize.getMoney(),
+                    result.getCount(prize)));
         }
         System.out.println(String.format("총 수익률은 %f 입니다.", result.getRateOfReturn()));
     }

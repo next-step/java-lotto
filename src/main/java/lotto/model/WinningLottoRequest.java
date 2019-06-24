@@ -2,9 +2,12 @@ package lotto.model;
 
 import lotto.exception.DuplicateLottoNumberException;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 public class WinningLottoRequest {
 
@@ -16,16 +19,26 @@ public class WinningLottoRequest {
         this.bonus = bonus;
     }
 
-    public static WinningLottoRequest of(String numbers, int bonus) {
-        List<Integer> numberList = Arrays.stream(numbers.trim().split(","))
+    public static WinningLottoRequest of(String inputOfNumbers, int bonus) {
+        duplicatedLottoNumber(parseNumbers(inputOfNumbers), bonus);
+
+        List<Number> numbers = parseNumbers(inputOfNumbers).stream()
+                .map(Number::of)
+                .collect(toList());
+        return new WinningLottoRequest(numbers, Number.of(bonus));
+    }
+
+    private static List<Integer> parseNumbers(String numbers) {
+        return Arrays.stream(numbers.trim().split(","))
                 .distinct()
                 .map(Integer::new)
-                .collect(Collectors.toList());
+                .collect(toList());
+    }
 
-        if(numberList.contains(bonus)){
-            throw new DuplicateLottoNumberException(numbers, bonus);
+    private static void duplicatedLottoNumber(List<Integer> numberList, int bonus) {
+        if ((numberList.size() < Lotto.SIZE) || (numberList.contains(bonus))) {
+            throw new DuplicateLottoNumberException(numberList, bonus);
         }
-        return new WinningLottoRequest(numberList.stream().map(Number::of).collect(Collectors.toList()), Number.of(bonus));
     }
 
     List<Number> getNumbers() {

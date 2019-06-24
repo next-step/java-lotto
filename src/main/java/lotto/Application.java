@@ -12,7 +12,7 @@ public class Application {
         LottoTicket lottoTicket = LottoMachine.buy(Money.wons(inputOfAmount));
         OutputView.printLottoTicket(lottoTicket);
 
-        String inputOfNumbers =InputView.askOfWinningNumbers();
+        String inputOfNumbers = InputView.askOfWinningNumbers();
         int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
         WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(inputOfNumbers, inputOfBonusNumber);
 
