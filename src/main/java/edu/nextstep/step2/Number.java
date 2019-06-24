@@ -21,6 +21,10 @@ public class Number {
         this.number = number;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     private void validNumber(int number) {
         if (number < START_RANGE_NUMBER) {
             throw new IllegalArgumentException("0보다 큰 수가 와야합니다.");
