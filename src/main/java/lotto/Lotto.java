@@ -8,10 +8,10 @@ public class Lotto {
     private static final int LOTTO_IS_WINNER_NUMBER_COUNT = 1;
     private static final int LOTTO_ISNOT_WINNER_NUMBER_COUNT = 0;
     static final String LAST_WEEK_WINNUM_DELIMITER = ",";
-    private List <Integer> lottoGameNumbers;
+    private List<Integer> lottoGameNumbers;
     private int winnerNumberCount = 0;
 
-    public Lotto(List <Integer> lottoGameNumbers) {
+    public Lotto(List<Integer> lottoGameNumbers) {
         this.lottoGameNumbers = lottoGameNumbers;
     }
 

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGamesTest {
 
     private String LastWeekWinnerNumber;
-    private List <Lotto> lottos;
+    private List<Lotto> lottos;
 
     @BeforeEach
     void setUp() {
@@ -51,7 +51,7 @@ public class LottoGamesTest {
 
     private void lottoWinnerCheck(Integer[][] testLottoSet) {
         for (Integer[] tempLottos : testLottoSet) {
-            List <Integer> lottoNumber = Arrays.asList(tempLottos);
+            List<Integer> lottoNumber = Arrays.asList(tempLottos);
             Lotto lotto = new Lotto(lottoNumber);
             lotto.winnerCheck(LastWeekWinnerNumber);
             lottos.add(lotto);

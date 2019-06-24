@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoGamesExecute {
 
     private int inputLottoGames;
-    private List <Lotto> lottos;
+    private List<Lotto> lottos;
 
     public LottoGamesExecute(int inputLottoGames) {
         this.inputLottoGames = inputLottoGames;

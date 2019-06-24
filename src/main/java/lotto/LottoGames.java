@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 public class LottoGames {
 
     private static final int LOTTO_ONE_GAME_PRICE = 1000;
-    private List <Lotto> lottos;
+    private List<Lotto> lottos;
 
-    public LottoGames(List <Lotto> lottos) {
+    public LottoGames(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 

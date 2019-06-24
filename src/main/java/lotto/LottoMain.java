@@ -8,7 +8,7 @@ public class LottoMain {
         int inputLottoGames = InputView.inputLotteGames();
 
         LottoGamesExecute lottoGamesExecute = new LottoGamesExecute(inputLottoGames);
-        List <Lotto> lottos = lottoGamesExecute.extractLottoNumbers();
+        List<Lotto> lottos = lottoGamesExecute.extractLottoNumbers();
         OutputView.printPurchaseLottoNumber(lottos);
 
         String inputLastWeekLottoNumber = InputView.inputLastWeekLottoNumber();
