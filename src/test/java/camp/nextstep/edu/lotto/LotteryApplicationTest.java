@@ -23,7 +23,7 @@ class LotteryApplicationTest {
         final int investment = -1;
         // when then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryApplication.calculateNumberOfAvailableLottery(investment));
+                .isThrownBy(() -> lotteryApplication.calculateNumberOfAvailableLotteries(investment));
     }
 
     @Test
@@ -32,7 +32,7 @@ class LotteryApplicationTest {
         // given
         final int investment = 14000;
         // when
-        final int numberOfLotteries = lotteryApplication.calculateNumberOfAvailableLottery(investment);
+        final int numberOfLotteries = lotteryApplication.calculateNumberOfAvailableLotteries(investment);
         // then
         assertThat(numberOfLotteries).isEqualTo(14);
     }
