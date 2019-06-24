@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringAdderCalculatorTest {
     @Test
@@ -20,5 +21,32 @@ public class StringAdderCalculatorTest {
         String input = "1:1:1,1,1";
         StringAdderCalculator stringAdderCalculator = new StringAdderCalculator(input);
         assertThat(stringAdderCalculator.calculate().getNumber()).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("음수가 있으면 에러")
+    void validationError() {
+        String input = "-1:1:1,1,1";
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
+                new StringAdderCalculator(input)
+        );
+    }
+
+    @Test
+    @DisplayName("숫자가 아니면 에러")
+    void validationError2() {
+        String input = "1:1:d,1,1";
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
+                new StringAdderCalculator(input)
+        );
+    }
+
+    @Test
+    @DisplayName("공백이면 에러")
+    void validationError3() {
+        String input = "1:1:,1,1";
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() ->
+                new StringAdderCalculator(input)
+        );
     }
 }
