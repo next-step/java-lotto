@@ -8,7 +8,7 @@ public class PositiveNumber {
 
     public PositiveNumber(int number) {
         if (number < MIN_NUMBER_INPUT) {
-            throw new IllegalArgumentException("음수는 계산할 수 없습니다.");
+            throw new RuntimeException("음수는 계산할 수 없습니다.");
         }
         this.number = number;
     }

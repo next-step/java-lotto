@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class PositiveNumberTest {
     @Test
@@ -17,7 +17,7 @@ public class PositiveNumberTest {
     @Test
     @DisplayName("최소값 미만으로 생성시 오류")
     void constructor2() {
-        assertThatIllegalArgumentException()
+        assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> new PositiveNumber(PositiveNumber.MIN_NUMBER_INPUT - 1));
     }
 }
