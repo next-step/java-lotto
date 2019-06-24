@@ -7,7 +7,7 @@ import java.util.List;
 public class LottoMachine {
 
     public static List<Integer> autoLottoNumber() {
-        List <Integer> lottoNumbers = createLottoMachine();
+        List<Integer> lottoNumbers = createLottoMachine();
         Collections.shuffle(lottoNumbers);
         return lottoNumbersSort(lottoNumbers.subList(0, 6));
     }

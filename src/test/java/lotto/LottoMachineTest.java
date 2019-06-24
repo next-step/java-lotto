@@ -29,7 +29,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("6개 번호를 랜덤으로 추출 테스트")
     void lottoRandomNumber() {
-        List <Integer> lottoNum = lottoMachine.autoLottoNumber();
+        List<Integer> lottoNum = lottoMachine.autoLottoNumber();
         assertThat(lottoNum.size()).isEqualTo(6);
     }
 
