@@ -46,10 +46,8 @@ public class LotteryApplication {
     }
 
     public void run() {
-        final int investmentValue = inputView.inputInvestment();
-        final NaturalNumber investment = NaturalNumber.from(investmentValue);
-        final NaturalNumber numberOfAvailableLotteries = lotteryController.calculateNumberOfAvailableLotteries(investment);
-        final List<Lottery> purchasedLotteries = lotteryController.purchase(numberOfAvailableLotteries);
+        final int investment = inputView.inputInvestment();
+        final List<Lottery> purchasedLotteries = lotteryController.purchase(investment);
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
@@ -68,7 +66,7 @@ public class LotteryApplication {
                     rewardMap.put(rewardType, current + 1);
                 });
         final long sumOfRewards = lotteryController.sumAllRewards(rewardMap);
-        final double earningsRate = lotteryController.calculateEarningsRate(investmentValue, sumOfRewards);
+        final double earningsRate = lotteryController.calculateEarningsRate(investment, sumOfRewards);
         resultView.printResults(rewardMap, earningsRate);
     }
 }

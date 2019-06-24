@@ -15,18 +15,20 @@ public class LotteryController {
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int ZERO = 0;
 
-    public NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
+    public List<Lottery> purchase(int investment) {
+        final NaturalNumber naturalNumberInvestment = NaturalNumber.from(investment);
+        final NaturalNumber naturalNumberOfLotteries = this.calculateNumberOfAvailableLotteries(naturalNumberInvestment);
+        final int numberOfLotteries = naturalNumberOfLotteries.value();
+        return IntStream.range(ZERO, numberOfLotteries)
+                .mapToObj(number -> Lottery.randomizedInstance())
+                .collect(Collectors.toList());
+    }
+
+    private NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
         if (investment == null) {
             throw new IllegalArgumentException("'investment' must not be null");
         }
         return investment.divideBy(PRICE_OF_LOTTERY);
-    }
-
-    public List<Lottery> purchase(NaturalNumber numberOfLotteries) {
-        final int value = numberOfLotteries.value();
-        return IntStream.range(ZERO, value)
-                .mapToObj(number -> Lottery.randomizedInstance())
-                .collect(Collectors.toList());
     }
 
     public int countScore(Lottery lottery, Lottery winningLottery) {
