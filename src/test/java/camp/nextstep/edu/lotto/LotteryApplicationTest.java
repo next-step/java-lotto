@@ -128,4 +128,16 @@ class LotteryApplicationTest {
                 // then
                 .withMessageContaining("between 1 and 50");
     }
+
+    @Test
+    @DisplayName("6개의 숫자가 모두 1~45 범위 안에 드는 경우 당첨 로또를 반환합니다")
+    void createWinningLottery4() {
+        // given
+        final List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        // when
+        final Set<Integer> actual = lotteryApplication.createWinningLottery(givenNumberSet);
+        // then
+        assertThat(actual).containsExactly(1, 2, 3, 4, 5, 6);
+    }
 }
