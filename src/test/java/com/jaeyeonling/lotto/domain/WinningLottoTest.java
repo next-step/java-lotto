@@ -29,7 +29,6 @@ class WinningLottoTest {
     void should_return_jackpot() {
         // given
         final Lotto lotto = new FixtureLotto();
-
         final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
 
         // when
@@ -40,4 +39,18 @@ class WinningLottoTest {
         assertThat(prize).isEqualTo(LottoPrize.JACKPOT);
     }
 
+    @DisplayName("로또 2등 당첨 테스트 ")
+    @Test
+    void should_return_second() {
+        // given
+        final Lotto expectLotto = new FixtureLotto(LottoNumber.MIN + 1);
+        final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
+
+        // when
+        final WinningLotto winningLotto = new WinningLotto(new FixtureLotto(), bonusLottoNumber);
+        final LottoPrize prize = winningLotto.match(expectLotto);
+
+        // then
+        assertThat(prize).isEqualTo(LottoPrize.SECOND);
+    }
 }
