@@ -1,5 +1,6 @@
 package camp.nextstep.edu.lotto;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,5 +23,12 @@ public class LotteryApplication {
         return IntStream.range(0, value)
                 .mapToObj(number -> new HashSet<Integer>())
                 .collect(Collectors.toList());
+    }
+
+    public Set<Integer> createLottery() {
+        List<Integer> candidates = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        Collections.shuffle(candidates);
+        List<Integer> selectedNumbers = candidates.subList(0, 6);
+        return new HashSet<>(selectedNumbers);
     }
 }

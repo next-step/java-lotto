@@ -50,4 +50,11 @@ class LotteryApplicationTest {
         // then
         assertThat(lottery).hasSize(14);
     }
+
+    @Test
+    @DisplayName("로또를 생성하면, 6개의 숫자로 이루어진 Integer Set 을 반환해야합니다")
+    void createLottery() {
+        final Set<Integer> actual = lotteryApplication.createLottery();
+        assertThat(actual).hasSize(6);
+    }
 }
