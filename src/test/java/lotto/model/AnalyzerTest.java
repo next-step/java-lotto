@@ -1,6 +1,7 @@
 package lotto.model;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -23,18 +24,11 @@ public class AnalyzerTest {
         analyzer = new Analyzer(winningNumbers);
     }
 
-    @Test
+    @RepeatedTest(value = 5)
     void analyze() {
         analyzer.analyze(lottos);
         Map<Prize, Integer> status = analyzer.getPrizeStatus();
-        Set<Map.Entry<Prize, Integer>> entries = status.entrySet();
-        Iterator<Map.Entry<Prize, Integer>> iterator = entries.iterator();
 
-        Map.Entry<Prize, Integer> entry = iterator.next();
-        Prize prize = entry.getKey();
-        int count = entry.getValue();
-
-        assertThat(prize.getCountOfMatchingNumbers()).isEqualTo(5);
-        assertThat(count).isEqualTo(1);
+        assertThat(status.get(Prize.valueOf(5))).isEqualTo(1);
     }
 }
