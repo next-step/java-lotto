@@ -13,7 +13,6 @@ public class LottoRunner {
   public static void main(String[] args) {
 
     int paid = LottoInputView.askPurchaseAmount();
-    System.out.println(paid > 0);
 
     LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
 
