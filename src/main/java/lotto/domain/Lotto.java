@@ -32,8 +32,11 @@ public class Lotto {
 
     public boolean isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
 
-        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers()) &&
-                isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getBonusNumbers());
+        if (prizeRule.hasBonusNumber()) {
+            return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers()) &&
+                    isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getBonusNumbers());
+        }
+        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers());
     }
 
     private boolean isMatchNormalNumberRule(int normalNumberCount, List<WonNumber> normalWonNumbers) {

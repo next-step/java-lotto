@@ -48,27 +48,26 @@ class LottosTest {
         );
     }
 
-    @ParameterizedTest(name = "당첨 여부 확인. 당첨 Rule={0}")
+    @ParameterizedTest(name = "당첨 여부 확인. 당첨 Rule={0}, 로또번호={1}")
     @MethodSource
-    void countCorrectsByCompareWonNumbers(PrizeRule prizeRule) {
+    void countCorrectsByCompareWonNumbers(PrizeRule prizeRule, List<Integer> lottoNumbers) {
 
-        List<Lotto> stubLottos = Arrays.asList(
-                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 11, 12, 13))), // 3
-                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 12, 13))), // 4
-                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 13))), // 5
-                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 7))), // 5 + 1
-                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)))); // 6
+        WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6", "13");
 
+        List<Lotto> stubLottos = Arrays.asList(new Lotto(new StubLottoGenerator(lottoNumbers)));
         Lottos lottos = new Lottos(new StubLottosGenerator(stubLottos), new PurchaseAmount(stubLottos.size() * PurchaseAmount.AMOUNT_PER_LOTTO), Collections.emptyList());
 
-        WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6", "7");
-        assertThat(lottos.isMatchPrizeRule(prizeRule, wonNumbers)).isEqualTo(1);
+        assertThat(lottos.isMatchPrizeRule(prizeRule, wonNumbers)).isOne();
     }
 
     private static Stream<Arguments> countCorrectsByCompareWonNumbers() {
 
         return Stream.of(
-                Arrays.stream(PrizeRule.values()).map(Arguments::of).toArray(Arguments[]::new)
+                Arguments.of(PrizeRule.THREE, Arrays.asList(1, 2, 3, 11, 12, 13)),
+                Arguments.of(PrizeRule.FOUR, Arrays.asList(1, 2, 3, 4, 12, 13)),
+                Arguments.of(PrizeRule.FIVE, Arrays.asList(1, 2, 3, 4, 5, 7)),
+                Arguments.of(PrizeRule.FIVE_WITH_BONUS, Arrays.asList(1, 2, 3, 4, 5, 13)),
+                Arguments.of(PrizeRule.SIX, Arrays.asList(1, 2, 3, 4, 5, 6))
         );
     }
 }
