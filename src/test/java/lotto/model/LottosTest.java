@@ -1,6 +1,7 @@
 package lotto.model;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -20,7 +21,14 @@ public class LottosTest {
     }
 
     @Test
+    @DisplayName("로또의 개수")
     void getCount() {
         assertThat(lottos.getCount()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("로또를 사는데 사용한 금액")
+    void getUsedAmount() {
+        assertThat(lottos.getUsedAmount()).isEqualTo(2000);
     }
 }

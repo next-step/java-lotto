@@ -26,4 +26,8 @@ public class Lottos {
                 .boxed()
                 .collect(Collectors.toList());
     }
+
+    public int getUsedAmount() {
+        return 0;
+    }
 }
