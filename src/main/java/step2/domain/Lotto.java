@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
@@ -15,7 +15,7 @@ public class Lotto {
         return generator.generate();
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
 
@@ -27,7 +27,7 @@ public class Lotto {
         return LottoRank.matchOf((int) matchCount);
     }
 
-    private boolean match(final int answerNumber, final Lotto lotto) {
+    private boolean match(final LottoNumber answerNumber, final Lotto lotto) {
         return lotto.lottoNumbers.contains(answerNumber);
     }
 

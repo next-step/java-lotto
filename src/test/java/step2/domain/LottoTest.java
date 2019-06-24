@@ -21,7 +21,7 @@ public class LottoTest {
     void equals_lotto() {
         Lotto lotto = Lotto.create(new AutoLottoGenerator());
 
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
         Lotto newLotto = new Lotto(lottoNumbers);
 
         assertThat(lotto).isEqualTo(newLotto);
