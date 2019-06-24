@@ -28,6 +28,6 @@ public class Lottos {
     }
 
     public int getUsedAmount() {
-        return 0;
+        return Lotto.price * this.lottos.size();
     }
 }
