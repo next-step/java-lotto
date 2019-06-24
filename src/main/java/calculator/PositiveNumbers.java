@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,6 @@ public class PositiveNumbers {
     }
 
     public List<PositiveNumber> getPositiveNumbers() {
-        return positiveNumbers;
+        return Collections.unmodifiableList(positiveNumbers);
     }
 }
