@@ -4,17 +4,22 @@ import java.util.List;
 
 public class LottoMain {
 
-    public static void main(String[] arg) {
-        int inputLottoGames = InputView.inputLotteGames();
+    private static final int LOTTO_ONE_GAME_PRICE = 1000;
 
-        LottoGamesExecute lottoGamesExecute = new LottoGamesExecute(inputLottoGames);
-        List<Lotto> lottos = lottoGamesExecute.extractLottoNumbers();
+    public static void main(String[] arg) {
+        int inputLottoGamePrice = InputView.inputLotteGames();
+        LottoGamesExecute lottoGamesExecute = new LottoGamesExecute();
+        List<Lotto> lottos = lottoGamesExecute.extractLottoNumbers(createLottoGameCount(inputLottoGamePrice));
         OutputView.printPurchaseLottoNumber(lottos);
 
         String inputLastWeekLottoNumber = InputView.inputLastWeekLottoNumber();
         LottoGames lottoGames = lottoGamesExecute.lottoGameResult(inputLastWeekLottoNumber);
         OutputView.printWinnerSummary(lottoGames);
-        OutputView.printRateOfReturn();
+        OutputView.printRateOfReturn(inputLottoGamePrice);
+    }
+
+    private static int createLottoGameCount(int inputLottoGames) {
+        return inputLottoGames / LOTTO_ONE_GAME_PRICE;
     }
 
 }

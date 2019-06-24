@@ -7,21 +7,21 @@ public class OutputView {
     private static int DEFAULT_LOTTO_WINNER_TYPE = 4;
     private static LottoGames lottoGames;
 
-    static void printPurchaseLottoNumber(List <Lotto> lottos) {
+    static void printPurchaseLottoNumber(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.lottoNumber());
         }
     }
 
-    static void printWinnerSummary(LottoGames inputLottoGamess) {
-        lottoGames = inputLottoGamess;
+    static void printWinnerSummary(LottoGames inputLottoGames) {
+        lottoGames = inputLottoGames;
         for (int i = 0; i < DEFAULT_LOTTO_WINNER_TYPE; i++) {
             System.out.println(summaryPrintGenerator(i));
         }
     }
 
-    static void printRateOfReturn() {
-        System.out.println("총 수익률은 " + lottoGames.rateOfReturn() + " 입니다.");
+    static void printRateOfReturn(int intputLotteGamePrice) {
+        System.out.println("총 수익률은 " + lottoGames.rateOfReturn(intputLotteGamePrice) + " 입니다.");
     }
 
     private static String summaryPrintGenerator(int eventWinnerCount) {

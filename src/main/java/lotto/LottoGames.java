@@ -5,15 +5,14 @@ import java.util.stream.Collectors;
 
 public class LottoGames {
 
-    private static final int LOTTO_ONE_GAME_PRICE = 1000;
     private List<Lotto> lottos;
 
     public LottoGames(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public double rateOfReturn() {
-        return Math.floor((sumWinnerPrice() / (float) sumLottoGamesPurchasePrice()) * 100) / 100.0;
+    public double rateOfReturn(int inputLottoGamePrice) {
+        return Math.floor((sumWinnerPrice() / (float) inputLottoGamePrice) * 100) / 100.0;
     }
 
     public int lottoSummaryWinnerCount(int eventWinnerPrice) {
@@ -32,10 +31,6 @@ public class LottoGames {
 
     private int winnerPrice(Lotto lotto) {
         return LottoEnum.findByPrice(lotto.getWinnerNumberCount()).price();
-    }
-
-    private int sumLottoGamesPurchasePrice() {
-        return LOTTO_ONE_GAME_PRICE * lottos.size();
     }
 
 }

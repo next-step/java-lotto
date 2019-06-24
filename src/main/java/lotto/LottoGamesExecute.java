@@ -5,16 +5,14 @@ import java.util.List;
 
 public class LottoGamesExecute {
 
-    private int inputLottoGames;
     private List<Lotto> lottos;
 
-    public LottoGamesExecute(int inputLottoGames) {
-        this.inputLottoGames = inputLottoGames;
+    public LottoGamesExecute() {
+        lottos = new ArrayList <>();
     }
 
-    public List<Lotto> extractLottoNumbers() {
-        lottos = new ArrayList <>();
-        for (int i = 0; i < createLottoGameCount(); i++) {
+    public List<Lotto> extractLottoNumbers(int inputLottoGameCount) {
+        for (int i = 0; i < inputLottoGameCount; i++) {
             lottos.add(new Lotto(LottoMachine.autoLottoNumber()));
         }
         return lottos;
@@ -26,10 +24,6 @@ public class LottoGamesExecute {
         }
         LottoGames lottoGames = new LottoGames(lottos);
         return lottoGames;
-    }
-
-    private int createLottoGameCount() {
-        return inputLottoGames / 1000;
     }
 
 }
