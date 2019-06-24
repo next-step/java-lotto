@@ -4,29 +4,29 @@ import java.util.stream.Stream;
 
 public enum Prize {
 
-    FIRST(6,2000000000),
-    SECOND(5,1500000),
-    THIRD(4,50000),
+    LOSE(0, 0),
     FOURTH(3,5000),
-    LOSE(0, 0);
+    THIRD(4,50000),
+    SECOND(5,1500000),
+    FIRST(6,2000000000);
 
-    private int countOfWinningNumbers;
+    private int countOfMatchingNumbers;
     private int prizeMoney;
 
     Prize(int countOfWinningNumbers, int prizeMoney) {
-        this.countOfWinningNumbers = countOfWinningNumbers;
+        this.countOfMatchingNumbers = countOfWinningNumbers;
         this.prizeMoney = prizeMoney;
     }
 
-    public static Prize valueOf(int countOfWinningNumbers) {
+    public static Prize valueOf(int countOfMatchingNumbers) {
         return Stream.of(Prize.values())
-                .filter(prize -> prize.countOfWinningNumbers == countOfWinningNumbers)
+                .filter(prize -> prize.countOfMatchingNumbers == countOfMatchingNumbers)
                 .findFirst()
                 .orElse(LOSE);
     }
 
-    public int getCountOfWinningNumbers() {
-        return countOfWinningNumbers;
+    public int getCountOfMatchingNumbers() {
+        return countOfMatchingNumbers;
     }
 
     public int getPrizeMoney() {
