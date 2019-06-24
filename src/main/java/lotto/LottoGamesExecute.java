@@ -12,11 +12,10 @@ public class LottoGamesExecute {
         this.inputLottoGames = inputLottoGames;
     }
 
-    public List <Lotto> extractLottoNumbers() {
+    public List<Lotto> extractLottoNumbers() {
         lottos = new ArrayList <>();
-        LottoMachine lottoMachine = new LottoMachine();
         for (int i = 0; i < createLottoGameCount(); i++) {
-            lottos.add(new Lotto(lottoMachine.autoLottoNumber()));
+            lottos.add(new Lotto(LottoMachine.autoLottoNumber()));
         }
         return lottos;
     }
