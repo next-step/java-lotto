@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Prizes {
 
@@ -11,7 +10,7 @@ public class Prizes {
         this.prizes = prizes;
     }
 
-    public int total() {
+    public int getProfits() {
         return prizes.stream().map(Prize::getPrizeMoney).reduce(0, Integer::sum);
     }
 }
