@@ -10,6 +10,10 @@ public class Lotto {
     this.generatedNumbers = generatedNumbers;
   }
 
+  public int hasHowMany(List<Integer> winningNumbers) {
+    return generatedNumbers.stream().reduce(0, (a, b) -> winningNumbers.contains(b) ? a + 1 : a);
+  }
+
   @Override
   public String toString() {
     return generatedNumbers.toString();

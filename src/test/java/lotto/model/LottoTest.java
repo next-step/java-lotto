@@ -29,15 +29,10 @@ public class LottoTest {
     List<Integer> winningNumbers = Arrays.asList(1, 2, 4, 14, 16);
     List<Integer> lottoNumbers = new MockNumberGenerator().generate(6);
 
-    System.out.println(lottoNumbers);
+    List<Lotto> myLottos = Arrays.asList(new Lotto(lottoNumbers));
 
-    int result = winningNumbers.stream().reduce(0, (a, b) -> {
-      if(lottoNumbers.contains(b)) {
-        return a + 1;
-      }
-      return a;
+    myLottos.forEach(lotto -> {
+      System.out.println(lotto.hasHowMany(winningNumbers));
     });
-
-    assertThat(result).isEqualTo(3);
   }
 }
