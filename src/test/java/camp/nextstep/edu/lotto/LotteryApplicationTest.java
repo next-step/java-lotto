@@ -102,4 +102,30 @@ class LotteryApplicationTest {
                 // then
                 .withMessageContaining("must be equal to");
     }
+
+    @Test
+    @DisplayName("6개의 숫자를 입력했지만 1보다 작은 숫자가 존재하는 경우 IllegalArgumentException 을 발생시킵니다")
+    void createWinningLottery2() {
+        // given
+        final List<Integer> numberList = Arrays.asList(0, 1, 2, 3, 4, 5);
+        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.createWinningLottery(givenNumberSet))
+                // then
+                .withMessageContaining("between 1 and 50");
+    }
+
+    @Test
+    @DisplayName("6개의 숫자를 입력했지만 45보다 큰 숫자가 존재하는 경우 IllegalArgumentException 을 발생시킵니다")
+    void createWinningLottery3() {
+        // given
+        final List<Integer> numberList = Arrays.asList(46, 1, 2, 3, 4, 5);
+        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.createWinningLottery(givenNumberSet))
+                // then
+                .withMessageContaining("between 1 and 50");
+    }
 }

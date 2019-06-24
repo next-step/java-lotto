@@ -9,7 +9,9 @@ public class LotteryApplication {
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int SIZE = 6;
     private static final int ZERO = 0;
-    private static final List<Integer> CANDIDATE_NUMBERS = IntStream.rangeClosed(1, 45)
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final List<Integer> CANDIDATE_NUMBERS = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
             .boxed()
             .collect(Collectors.toList());
 
@@ -40,6 +42,10 @@ public class LotteryApplication {
         }
         if (winningNumberSet.size() != SIZE) {
             throw new IllegalArgumentException("size of 'winningNumberSet' must be equal to " + SIZE);
+        }
+        if (winningNumberSet.stream()
+                .anyMatch(number -> number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER)) {
+            throw new IllegalArgumentException("'winningNumberSet' must be a number between 1 and 50");
         }
         return new HashSet<>(winningNumberSet);
     }
