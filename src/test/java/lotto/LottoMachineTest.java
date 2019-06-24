@@ -20,8 +20,9 @@ public class LottoMachineTest {
     @Test
     @DisplayName("1~45개 숫자를 가지는 로또 기계 생성 테스트")
     void lottoMachine() {
+        List<Integer> createLootoMachine = lottoMachine.createLottoMachine();
         for (int i = 1; i <= 45; i++) {
-            assertThat(lottoMachine.createLottoMachine()).contains(i);
+            assertThat(createLootoMachine).contains(i);
         }
     }
 
