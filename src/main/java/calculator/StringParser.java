@@ -7,16 +7,16 @@ import java.util.regex.Pattern;
 
 public class StringParser {
     public static final String ADDITIONAL_DELIMITER_REGEX = "//(.)\n(.*)";
-    private Matcher matcher;
+    private Matcher additionalDelimiterMatcher;
     private String input;
 
     public StringParser(String input) {
         this.input = input;
-        matcher = Pattern.compile(ADDITIONAL_DELIMITER_REGEX).matcher(input);
+        additionalDelimiterMatcher = Pattern.compile(ADDITIONAL_DELIMITER_REGEX).matcher(input);
     }
 
     public boolean hasAdditionalDelimiter() {
-        return matcher.find();
+        return additionalDelimiterMatcher.find();
     }
 
     public List<String> parseByDelimiter() {
@@ -27,6 +27,6 @@ public class StringParser {
         if (!hasAdditionalDelimiter()) {
             throw new RuntimeException("추가적인 구분자가 없는 String 입니다");
         }
-        return matcher.group(1);
+        return additionalDelimiterMatcher.group(1);
     }
 }
