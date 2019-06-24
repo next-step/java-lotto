@@ -151,4 +151,16 @@ class LotteryApplicationTest {
         // then
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("입력한 점수가 0보다 작으면 IllegalArgumentException 을 발생시킵니다")
+    void prize() {
+        // given
+        final int score = -1;
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.getPrize(score))
+                // then
+                .withMessageContaining("must be greater than or equal to");
+    }
 }
