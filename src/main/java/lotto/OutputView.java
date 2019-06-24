@@ -31,7 +31,7 @@ public class OutputView {
         int printNumber = eventWinnerCount + 3;
         int lottoWinnerPrice = LottoEnum.findByPrice(printNumber).price();
 
-        StringBuffer printText = new StringBuffer();
+        StringBuilder printText = new StringBuilder();
         printText.append(printNumber);
         printText.append("개 일치 (");
         printText.append(lottoWinnerPrice);
