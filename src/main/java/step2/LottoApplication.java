@@ -1,5 +1,6 @@
 package step2;
 
+import step2.domain.BonusNumber;
 import step2.domain.LottoStatistics;
 import step2.domain.LottoStore;
 import step2.domain.Lottos;
@@ -16,8 +17,9 @@ public class LottoApplication {
         OutputView.printBuyLotto(lottos);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
+        BonusNumber bonusNumber = InputView.inputBonusNumber();
 
         LottoStatistics statistics = new LottoStatistics(money, lottos);
-        OutputView.printLottoStatistics(winningLotto, statistics);
+        OutputView.printLottoStatistics(winningLotto.addBounsNumber(bonusNumber), statistics);
     }
 }

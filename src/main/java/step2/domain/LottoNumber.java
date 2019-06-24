@@ -6,7 +6,7 @@ import static step2.domain.LottoGenerator.LOTTO_MAX_NUMBER;
 import static step2.domain.LottoGenerator.LOTTO_MIN_NUMBER;
 
 public class LottoNumber {
-    private final Integer number;
+    protected final Integer number;
 
     public LottoNumber(Integer number) {
         validateLottoNumber(number);
@@ -25,7 +25,7 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
+//        if (this == o) { return true; }
         if (o == null || getClass() != o.getClass()) { return false; }
         LottoNumber that = (LottoNumber) o;
         return Objects.equals(number, that.number);

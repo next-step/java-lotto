@@ -33,15 +33,46 @@ public class Lotto {
     }
 
     public LottoRank matchLotto(WinningLotto lotto) {
-        final long matchCount = lottoNumbers.stream()
-                                            .filter(number -> match(number, lotto.getLotto()))
-                                            .count();
+        final long matchCount = matchCount(lotto.getLotto());
+        LottoRank rank = LottoRank.matchOf((int) matchCount);
 
-        return LottoRank.matchOf((int) matchCount);
+        if (!LottoRank.THIRD.equals(rank)) {
+            return rank;
+        }
+
+        BonusNumber bonusNumber = lotto.getBonusNumber()
+                                       .orElseThrow(() -> new IllegalArgumentException("bonus number 가 필요합니다."));
+        return matchBonus(rank, bonusNumber);
     }
 
-    private boolean match(final LottoNumber answerNumber, final Lotto lotto) {
-        return lotto.lottoNumbers.contains(answerNumber);
+    private long matchCount(final Lotto lotto) {
+        return this.lottoNumbers.stream()
+                                .filter(number -> match(number, lotto))
+                                .count();
+    }
+
+    private boolean match(final LottoNumber number, final Lotto lotto) {
+        return lotto.lottoNumbers
+                    .stream()
+                    .anyMatch(lottoNumber -> lottoNumber.equals(number));
+    }
+
+    private LottoRank matchBonus(final LottoRank rank, final BonusNumber bonusNumber) {
+        validateBonusTrack(rank);
+
+        boolean isMatchedBonusNumber = this.lottoNumbers.stream()
+                                                        .anyMatch(number -> number.equals(bonusNumber));
+        if (isMatchedBonusNumber) {
+            return LottoRank.SECOND;
+        }
+
+        return rank;
+    }
+
+    private void validateBonusTrack(final LottoRank rank) {
+        if (!LottoRank.THIRD.equals(rank)) {
+            throw new IllegalArgumentException("보너스 번호 매칭은 5개 번호를 맞추었을때 가능합니다.");
+        }
     }
 
     @Override

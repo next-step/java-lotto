@@ -3,11 +3,12 @@ package step2.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    SIX(6, new Money(2_000_000_000L), 1, "6개 일치 (2000000000원)"),
-    FIVE(5, new Money(1_500_000L), 2, "5개 일치 (1500000원)"),
-    FOUR(4, new Money(50_000L), 3, "4개 일치 (50000원)"),
-    THREE(3, new Money(5_000L), 4, "3개 일치 (5000원)"),
-    NO_RANK(2, new Money(0L), 5, "");
+    FIRST(6, new Money(2_000_000_000L), 1, "6개 일치 (2000000000원)"),
+    SECOND(5, new Money(3_000_000L), 2, "5개 일치, 보너스 볼 일치 (3000000원)"),
+    THIRD(5, new Money(1_500_000L), 3, "5개 일치 (1500000원)"),
+    FOURTH(4, new Money(50_000L), 4, "4개 일치 (50000원)"),
+    FIFTH(3, new Money(5_000L), 5, "3개 일치 (5000원)"),
+    NO_RANK(2, new Money(0L), 6, "");
 
     private final Integer matchCount;
     private final Money money;
@@ -26,6 +27,10 @@ public enum LottoRank {
                      .filter(lottoRank -> lottoRank.matchCount == matchCount)
                      .findFirst()
                      .orElse(NO_RANK);
+    }
+
+    public Integer getMatchCount() {
+        return matchCount;
     }
 
     public Money getMoney() {
