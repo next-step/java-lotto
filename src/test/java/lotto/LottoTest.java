@@ -1,7 +1,24 @@
 package lotto;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class LottoTest {
 
+    @Test
+    void valideLottoNumberException() {
+        Lotto lotto = new Lotto();
+        assertThatIllegalArgumentException().isThrownBy(() -> lotto.valideLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+    }
+
+    @Test
+    void valideLottoNumberOk() {
+        Lotto lotto = new Lotto();
+        boolean result = lotto.valideLottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(result).isTrue();
+    }
 }
