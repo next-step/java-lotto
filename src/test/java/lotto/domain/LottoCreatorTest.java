@@ -10,6 +10,6 @@ public class LottoCreatorTest {
   @DisplayName("로또 생성 테스트")
   @Test
   void create() {
-    assertThat(LottoCreator.create()).isInstanceOf(LottoTicket.class);
+    assertThat(new LottoCreator().create()).isInstanceOf(LottoTicket.class);
   }
 }

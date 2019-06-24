@@ -10,7 +10,7 @@ public class LottoTickets {
   public LottoTickets(int count) {
     lottoTickets = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      lottoTickets.add(LottoCreator.create());
+      lottoTickets.add(new LottoCreator().create());
     }
   }
 
@@ -24,5 +24,9 @@ public class LottoTickets {
       ranks.add(lottoTicket.winNumberSize(winNumber));
     }
     return ranks;
+  }
+
+  public List<LottoTicket> getTickets() {
+    return lottoTickets;
   }
 }

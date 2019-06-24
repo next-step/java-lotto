@@ -12,15 +12,15 @@ public class LottoCreator {
   private static final int LOTTO_RANGE_START = 1;
   private static final int LOTTO_RANGE_END = 45;
   private static final int START_INDEX = 0;
-  private static final List<Integer> numberRange;
+  private final List<Integer> numberRange;
 
-  static {
+  public LottoCreator() {
     numberRange = IntStream.rangeClosed(LOTTO_RANGE_START, LOTTO_RANGE_END)
         .boxed()
         .collect(toList());
   }
 
-  public static LottoTicket create() {
+  public LottoTicket create() {
     Collections.shuffle(numberRange);
     return new LottoTicket(numberRange.subList(START_INDEX, LOTTO_NUMBER_SIZE));
   }
