@@ -4,10 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LotteryApplicationTest {
 
@@ -72,5 +75,18 @@ class LotteryApplicationTest {
         assertThat(actual)
                 .filteredOn(value -> value >= 1 && value <= 45)
                 .hasSize(6);
+    }
+
+    @Test
+    @DisplayName("6개 미만의 숫자를 입력할 경우 IllegalArgumentException 을 발생시킵니다")
+    void createWinningLottery() {
+        // given
+        final List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5);
+        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.createWinningLottery(givenNumberSet))
+                // then
+                .withMessageContaining("must be equal to");
     }
 }

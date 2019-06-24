@@ -22,7 +22,7 @@ public class LotteryApplication {
 
     public List<Set<Integer>> purchase(NaturalNumber numberOfLotteries) {
         final int value = numberOfLotteries.value();
-        return IntStream.range(0, value)
+        return IntStream.range(ZERO, value)
                 .mapToObj(number -> createLottery())
                 .collect(Collectors.toList());
     }
@@ -32,5 +32,15 @@ public class LotteryApplication {
         Collections.shuffle(allNumbers);
         final List<Integer> selectedNumbers = allNumbers.subList(ZERO, SIZE);
         return new HashSet<>(selectedNumbers);
+    }
+
+    public Set<Integer> createWinningLottery(Set<Integer> winningNumberSet) {
+        if (winningNumberSet == null) {
+            throw new IllegalArgumentException("'winningNumberSet' must not be null");
+        }
+        if (winningNumberSet.size() != SIZE) {
+            throw new IllegalArgumentException("size of 'winningNumberSet' must be equal to " + SIZE);
+        }
+        return new HashSet<>(winningNumberSet);
     }
 }
