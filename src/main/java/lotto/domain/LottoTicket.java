@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class LottoTicket {
     validateDuplicate(numbers);
     validateNumbersRange(numbers);
     this.numbers = numbers;
+    Collections.sort(numbers);
   }
 
   private void validateNumbersRange(List<Integer> numbers) {
@@ -35,10 +37,11 @@ public class LottoTicket {
     }
   }
 
-  public long winNumberSize(List<Integer> winNumber) {
-    return winNumber.stream()
-        .filter(numbers::contains)
-        .count();
+  public Rank winNumberSize(List<Integer> winNumber) {
+    return Rank.getInstance(
+        winNumber.stream()
+            .filter(numbers::contains)
+            .count());
   }
 
   @Override
@@ -52,5 +55,10 @@ public class LottoTicket {
   @Override
   public int hashCode() {
     return Objects.hash(numbers);
+  }
+
+  @Override
+  public String toString() {
+    return numbers.toString();
   }
 }
