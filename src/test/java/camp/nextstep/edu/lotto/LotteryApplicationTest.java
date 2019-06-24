@@ -78,7 +78,6 @@ class LotteryApplicationTest {
                 .withMessageContaining("must not be null");
     }
 
-
     @Test
     @DisplayName("구입한 로또와 당첨 로또의 일치하는 숫자 개수를 반환합니다 : 0개")
     void score3() {

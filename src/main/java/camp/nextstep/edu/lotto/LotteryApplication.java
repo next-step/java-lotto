@@ -1,5 +1,6 @@
 package camp.nextstep.edu.lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -34,21 +35,35 @@ public class LotteryApplication {
     }
 
     public long getReward(int score) {
-        if (score < 0) {
-            throw new IllegalArgumentException("'score' must be greater than or equal to 0");
+        final RewardType rewardType = RewardType.from(score);
+        return rewardType.reward;
+    }
+
+    public enum RewardType {
+        SIX_NUMBERS_MATCHED(6, 2000000000),
+        FIVE_NUMBERS_MATCHED(5, 1500000),
+        FOUR_NUMBERS_MATCHED(4, 50000),
+        THREE_NUMBERS_MATCHED(3, 5000),
+        UNKNOWN(0, 0);
+
+        public static final int MINIMUM_SCORE = 0;
+
+        private final int score;
+        private final long reward;
+
+        RewardType(int score, int reward) {
+            this.score = score;
+            this.reward = reward;
         }
-        if (score == 3) {
-            return 5000;
+
+        public static RewardType from(int score) {
+            if (score < MINIMUM_SCORE) {
+                throw new IllegalArgumentException("'score' must be greater than or equal to 0");
+            }
+            return Arrays.stream(RewardType.values())
+                    .filter(value -> value.score == score)
+                    .findFirst()
+                    .orElse(UNKNOWN);
         }
-        if (score == 4) {
-            return 50000;
-        }
-        if (score == 5) {
-            return 1500000;
-        }
-        if (score == 6) {
-            return 2000000000;
-        }
-        return 0;
     }
 }
