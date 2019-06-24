@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,12 @@ public class LottoRetailer {
 
         List<LottoNumbers> list = new ArrayList<>();
         for (int i = 0; i < order.getAvailableNumberToBuy(); i++) {
-            list.add(new LottoNumbers(NumberGenerator.autoGenerate()));
+            list.add(new LottoNumbers(NumbersGenerator.autoGenerate()));
         }
         return list;
+    }
+
+    public static LottoNumbers anounceWinningNumbers() {
+        return new LottoNumbers(NumbersGenerator.autoGenerate());
     }
 }
