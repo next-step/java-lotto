@@ -10,6 +10,10 @@ import java.util.stream.IntStream;
 public class LotteryApplication {
 
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
+    private static final int BEGIN_NUMBER = 1;
+    private static final int END_NUMBER = 45;
+    private static final int SIZE = 6;
+    private static final int ZERO = 0;
 
     public NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
         if (investment == null) {
@@ -26,9 +30,9 @@ public class LotteryApplication {
     }
 
     public Set<Integer> createLottery() {
-        List<Integer> candidates = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        final List<Integer> candidates = IntStream.rangeClosed(BEGIN_NUMBER, END_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(candidates);
-        List<Integer> selectedNumbers = candidates.subList(0, 6);
+        final List<Integer> selectedNumbers = candidates.subList(ZERO, SIZE);
         return new HashSet<>(selectedNumbers);
     }
 }
