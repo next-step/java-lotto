@@ -1,8 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
-import com.jaeyeonling.lotto.exception.ConflictLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoAnalyzerTest {
 
@@ -71,23 +68,6 @@ class LottoAnalyzerTest {
         assertThat(returnOnInvestment).isEqualTo(expect);
     }
 
-    @DisplayName("로또 2등 당첨 테스트 ")
-    @Test
-    void should_return_second() {
-        // given
-        final Lotto winningLotto = new FixtureLotto();
-        final Lotto expectLotto = new FixtureLotto(LottoNumber.MIN + 1);
-
-        final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
-
-        // when
-        final LottoAnalyzer analyzer = new LottoAnalyzer(winningLotto, bonusLottoNumber);
-        final LottoGameReport report = analyzer.analyze(List.of(expectLotto));
-
-        // then
-        assertThat(report.getMatchCountByPrize(LottoPrize.SECOND)).isEqualTo(1);
-    }
-    
     private LottoGameReport generateLottoGameReport(final int analyzeCount) {
         final Lotto lotto = new FixtureLotto();
         final LottoAnalyzer lottoAnalyzer = new LottoAnalyzer(lotto, new LottoNumber(LottoNumber.MAX));
