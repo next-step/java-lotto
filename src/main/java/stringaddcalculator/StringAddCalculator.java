@@ -5,13 +5,21 @@ import java.util.List;
 public class StringAddCalculator {
 
     public int add(String text) {
-        if (text == null || text.isEmpty()) {
+        if (isEmpty(text)) {
             return 0;
         }
-        return Numbers.of(split(text)).sum();
+        return sum(split(text));
+    }
+
+    public boolean isEmpty(String text) {
+        return text == null || text.isEmpty();
     }
 
     private List<Integer> split(String text) {
         return StringSpliter.of(text).split();
+    }
+
+    public int sum(List<Integer> numbers) {
+        return Numbers.of(numbers).sum();
     }
 }

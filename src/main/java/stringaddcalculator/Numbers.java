@@ -3,6 +3,8 @@ package stringaddcalculator;
 import java.util.List;
 
 public class Numbers {
+    private static final Integer ZERO = 0;
+
     private List<Integer> numbers;
 
     private Numbers(List<Integer> numbers) {
@@ -22,7 +24,7 @@ public class Numbers {
 
     private boolean isNegative(List<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(number -> number < 0);
+                .anyMatch(number -> number < ZERO);
     }
 
     public int sum() {
