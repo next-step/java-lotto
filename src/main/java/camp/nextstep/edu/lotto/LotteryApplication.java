@@ -1,7 +1,6 @@
 package camp.nextstep.edu.lotto;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,10 +21,6 @@ public class LotteryApplication {
         return IntStream.range(ZERO, value)
                 .mapToObj(number -> Lottery.randomizedInstance())
                 .collect(Collectors.toList());
-    }
-
-    public Lottery createWinningLottery(Set<Integer> winningNumberSet) {
-        return Lottery.customizedInstance(winningNumberSet);
     }
 
     public int countScore(Lottery lottery, Lottery winningLottery) {
