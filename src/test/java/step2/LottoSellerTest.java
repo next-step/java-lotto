@@ -54,18 +54,18 @@ public class LottoSellerTest {
 
     @Test
     void 당첨번호와_일치한_개수별로_당첨된_복권의_개수를_반환한다() {
-        //Given
-        LottoSeller lottoSeller = new LottoSeller();
-        List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LuckyNumber luckyNumber = LuckyNumber.from(testLuckyNumber);
-
-        List<Integer> matchesThreeNumbers = Arrays.asList(1, 3, 5, 7, 9, 11);
-        LottoTicket ticketMatchesThreeNumbers = new LottoTicket(LottoTicketGenerator.pickLottoBalls(matchesThreeNumbers));
-
-        ticketMatchesThreeNumbers.getNumberOfMatchedToLuckyNumber(luckyNumber);
-
-        //When
-        lottoSeller.return
-        //Then
+//        //Given
+//        LottoSeller lottoSeller = new LottoSeller();
+//        List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+//        LuckyNumber luckyNumber = LuckyNumber.from(testLuckyNumber);
+//
+//        List<Integer> matchesThreeNumbers = Arrays.asList(1, 3, 5, 7, 9, 11);
+//        LottoTicket ticketMatchesThreeNumbers = new LottoTicket(LottoTicketGenerator.pickLottoBalls(matchesThreeNumbers));
+//
+//        ticketMatchesThreeNumbers.getNumberOfMatchedToLuckyNumber(luckyNumber);
+//
+//        //When
+//        lottoSeller.return
+//        //Then
     }
 }

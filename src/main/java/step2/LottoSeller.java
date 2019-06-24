@@ -1,9 +1,7 @@
 package step2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoSeller {
@@ -28,25 +26,6 @@ public class LottoSeller {
 
     public void lottoResult(List<LottoTicket> lottoTickets, LuckyNumber luckyNumber) {
 
-        int fourthPlace = 0;
-        int thirdPlace = 0;
-        int secondPlace = 0;
-        int firstPlace = 0;
-
-        for (LottoTicket ticket : lottoTickets) {
-            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 3) {
-                fourthPlace++;
-            }
-            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 4) {
-                thirdPlace++;
-            }
-            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 5) {
-                secondPlace++;
-            }
-            if (getNumberOfMatchedToLuckyNumber(ticket, luckyNumber) == 6) {
-                firstPlace++;
-            }
-        }
     }
 
     public long getNumberOfMatchedToLuckyNumber(LottoTicket lottoTicket, LuckyNumber luckyNumber) {
