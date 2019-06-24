@@ -41,7 +41,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 번호 출력을 위한 리스트를 스트링으로 변환 테스트")
     void lottoNumber() {
-        Lotto lotto = new Lotto(Arrays.asList(new Integer[]{1,2,3,4,5,6}));
+        Lotto lotto = new Lotto(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6}));
         assertThat(lotto.lottoNumber()).isEqualTo("1,2,3,4,5,6");
     }
 
