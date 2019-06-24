@@ -5,8 +5,7 @@ import lotto.domain.generator.StubLottosGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +28,7 @@ class StatisticsTest {
             new Lotto(new StubLottoGenerator(Arrays.asList(17, 21, 29, 37, 42, 45))),
             new Lotto(new StubLottoGenerator(Arrays.asList(3, 8, 27, 30, 35, 44)))
     );
-    private Lottos lottos = new Lottos(new StubLottosGenerator(stubLottos), new PurchaseAmount(stubLottos.size() * PurchaseAmount.AMOUNT_PER_LOTTO));
+    private Lottos lottos = new Lottos(new StubLottosGenerator(stubLottos), new PurchaseAmount(stubLottos.size() * PurchaseAmount.AMOUNT_PER_LOTTO), Collections.emptyList());
 
     private Statistics statistics = new Statistics(wonNumbers, lottos);
 

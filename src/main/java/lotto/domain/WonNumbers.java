@@ -1,15 +1,13 @@
 package lotto.domain;
 
-import lotto.domain.validator.LottoNumberValidator;
+import lotto.domain.validator.LottoValidator;
 import lotto.utils.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WonNumbers {
-
-    private static final String DELIMITER = ",";
 
     private final List<WonNumber> wonNumbers;
 
@@ -17,30 +15,19 @@ public class WonNumbers {
 
         validateInputs(wonNormalNumbersValue, wonBonusNumberValue);
 
-        List<Integer> wonNormalNumbers = parse(wonNormalNumbersValue);
-        LottoNumberValidator.validate(wonNormalNumbers);
+        List<Integer> wonNormalNumbers = LottoParser.parse(wonNormalNumbersValue);
+        LottoValidator.validateNumbers(wonNormalNumbers);
 
         int wonBonusNumber = Integer.parseInt(wonBonusNumberValue);
-        LottoNumberValidator.validateNumber(wonBonusNumber);
+        LottoValidator.validateNumber(wonBonusNumber);
 
         this.wonNumbers = createWonNumbers(wonNormalNumbers, wonBonusNumber);
     }
 
     private List<WonNumber> createWonNumbers(List<Integer> wonNormalNumbers, int wonBonusNumber) {
 
-        List<WonNumber> wonNumbers = wonNormalNumbers.stream()
-                .map(WonNumber::ofNormalNumber)
-                .collect(Collectors.toList());
-        wonNumbers.add(WonNumber.ofBonusNumber(wonBonusNumber));
-
-        return wonNumbers;
-    }
-
-    private List<Integer> parse(String wonNumbersValue) {
-
-        return Arrays.stream(wonNumbersValue.split(DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
+        return Stream.concat(wonNormalNumbers.stream().map(WonNumber::ofNormalNumber),
+                             Stream.of(wonBonusNumber).map(WonNumber::ofBonusNumber))
                 .collect(Collectors.toList());
     }
 

@@ -2,22 +2,32 @@ package lotto.domain;
 
 import lotto.domain.generator.LottosGenerator;
 import lotto.domain.generator.RandomLottosGenerator;
+import lotto.domain.validator.LottoValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
 
+    private static final RandomLottosGenerator RANDOM_LOTTOS_GENERATOR = new RandomLottosGenerator();
     private final List<Lotto> lottos;
 
-    public Lottos(PurchaseAmount purchaseAmount) {
+    public Lottos(PurchaseAmount purchaseAmount, List<String> manualNumbers) {
 
-        this(new RandomLottosGenerator(), purchaseAmount);
+        this(RANDOM_LOTTOS_GENERATOR, purchaseAmount, manualNumbers);
     }
 
-    public Lottos(LottosGenerator lottosGenerator, PurchaseAmount purchaseAmount) {
+    public Lottos(LottosGenerator lottosGenerator, PurchaseAmount purchaseAmount, List<String> manualNumbers) {
 
-        this.lottos = lottosGenerator.generate(purchaseAmount.getPurchasedLottosCount());
-        validateGeneratedLottosCount(purchaseAmount.getPurchasedLottosCount());
+        List<Lotto> lottos = new ArrayList<>();
+        for (String manualNumber : manualNumbers) {
+            List<Integer> lottoNumber = LottoParser.parse(manualNumber);
+            LottoValidator.validateNumbers(lottoNumber);
+            lottos.add(new Lotto(lottoNumber));
+        }
+        lottos.addAll(lottosGenerator.generate(purchaseAmount.getPurchasedLottosCount() - manualNumbers.size()));
+        LottoValidator.validateLottosCount(lottos.size(), purchaseAmount.getPurchasedLottosCount());
+        this.lottos = lottos;
     }
 
     public long isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
@@ -32,11 +42,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    private void validateGeneratedLottosCount(int lottosCount) {
+    List<Lotto> getLottos() {
 
-        if (lottos.size() != lottosCount) {
-            throw new IllegalStateException("생성된 로또 개수가 유효하지 않습니다. 생성된 개수=" + lottos.size() + ", 기대한 개수=" + lottosCount);
-        }
+        return lottos;
     }
 
     @Override

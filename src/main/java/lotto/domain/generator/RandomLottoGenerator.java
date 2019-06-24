@@ -13,10 +13,12 @@ public class RandomLottoGenerator implements LottoGenerator {
     @Override
     public List<Integer> generate() {
 
-        List<Integer> lottoNumberPool = IntStream.range(LOTTO_START_NUMBER, LOTTO_END_NUMBER).boxed().collect(Collectors.toList());
+        List<Integer> lottoNumberPool = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_END_NUMBER).boxed().collect(Collectors.toList());
         Collections.shuffle(lottoNumberPool);
-        sortLottoNumberAsc(lottoNumberPool);
-        return choiceLottoNumbers(lottoNumberPool);
+        List<Integer> chosenLottoNumber = choiceLottoNumbers(lottoNumberPool);
+        sortLottoNumberAsc(chosenLottoNumber);
+
+        return chosenLottoNumber;
     }
 
     private List<Integer> choiceLottoNumbers(List<Integer> lottoNumberPool) {
