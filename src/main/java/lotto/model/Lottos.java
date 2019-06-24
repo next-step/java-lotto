@@ -1,11 +1,8 @@
 package lotto.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
-
 
     private List<PickNumbers> lottoNumbers;
 
@@ -13,20 +10,11 @@ public class Lottos {
         lottoNumbers = lottos;
     }
 
-    public Map<Long, Integer> aggregate(WinningNumbers winnerNumbers) {
-
-        Map<Long, Integer> map = new HashMap<>();
+    public Aggregate aggregate(WinningNumbers winnerNumbers) {
+        Aggregate aggregate = new Aggregate();
         for (PickNumbers pickNumbers : lottoNumbers) {
-            long matchCount = pickNumbers.compare(winnerNumbers);
-            Integer integer = map.get(matchCount);
-            if(integer == null) {
-                map.put(matchCount, 1);
-            }
-            else {
-                integer++;
-                map.put(matchCount, integer);
-            }
+            aggregate.put(pickNumbers.compare(winnerNumbers));
         }
-        return map;
+        return aggregate;
     }
 }
