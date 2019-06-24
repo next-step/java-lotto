@@ -22,11 +22,12 @@ public class Lotto {
         Collections.sort(this.luckyNumbers);
     }
 
-    public int checkNumberOfMatches(List<Integer> winNumbers) {
-        return (int) luckyNumbers
+    public Rank checkNumberOfMatches(List<Integer> winNumbers, int bonusBall) {
+        int countOfMatch = (int) luckyNumbers
                 .stream()
                 .filter(winNumbers::contains)
                 .count();
+        return Rank.valueOf(countOfMatch, luckyNumbers.contains(bonusBall));
     }
 
     public boolean isNumSize(int numSize) {
