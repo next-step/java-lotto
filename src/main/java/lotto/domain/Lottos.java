@@ -4,8 +4,10 @@ import lotto.domain.generator.LottosGenerator;
 import lotto.domain.generator.RandomLottosGenerator;
 import lotto.domain.validator.LottoValidator;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -19,15 +21,22 @@ public class Lottos {
 
     public Lottos(LottosGenerator lottosGenerator, PurchaseAmount purchaseAmount, List<String> manualNumbers) {
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (String manualNumber : manualNumbers) {
-            List<Integer> lottoNumber = LottoParser.parse(manualNumber);
-            LottoValidator.validateNumbers(lottoNumber);
-            lottos.add(new Lotto(lottoNumber));
-        }
-        lottos.addAll(lottosGenerator.generate(purchaseAmount.getPurchasedLottosCount() - manualNumbers.size()));
+        List<Lotto> lottos = Stream.of(buildManualLotto(manualNumbers),
+                                       generateAutoLotto(lottosGenerator, purchaseAmount.getPurchasedLottosCount() - manualNumbers.size()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
         LottoValidator.validateLottosCount(lottos.size(), purchaseAmount.getPurchasedLottosCount());
         this.lottos = lottos;
+    }
+
+    private List<Lotto> buildManualLotto(List<String> manualNumbers) {
+
+        return manualNumbers.stream().map(LottoParser::parse).map(Lotto::new).collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateAutoLotto(LottosGenerator lottosGenerator, int autoCount) {
+
+        return lottosGenerator.generate(autoCount);
     }
 
     public long isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {

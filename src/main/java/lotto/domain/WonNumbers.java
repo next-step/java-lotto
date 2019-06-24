@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.domain.validator.LottoValidator;
 import lotto.utils.StringUtils;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,9 +26,20 @@ public class WonNumbers {
 
     private List<WonNumber> createWonNumbers(List<Integer> wonNormalNumbers, int wonBonusNumber) {
 
-        return Stream.concat(wonNormalNumbers.stream().map(WonNumber::ofNormalNumber),
-                             Stream.of(wonBonusNumber).map(WonNumber::ofBonusNumber))
+        return Stream.of(buildWonNormalNumbers(wonNormalNumbers),
+                         buildWonBonusNumber(wonBonusNumber))
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
+    }
+
+    private List<WonNumber> buildWonNormalNumbers(List<Integer> wonNormalNumbers) {
+
+        return wonNormalNumbers.stream().map(WonNumber::ofNormalNumber).collect(Collectors.toList());
+    }
+
+    private List<WonNumber> buildWonBonusNumber(int wonBonusNumber) {
+
+        return Collections.singletonList(WonNumber.ofBonusNumber(wonBonusNumber));
     }
 
     private void validateInputs(String wonNormalNumbersValue, String wonBonusNumbers) {
