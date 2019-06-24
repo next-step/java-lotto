@@ -19,9 +19,7 @@ public class Number implements Comparable<Number> {
 
     public static Number of(int number) {
         validateNumber(number);
-        if (!CACHE.containsKey(number)) {
-            CACHE.put(number, new Number(number));
-        }
+        CACHE.computeIfAbsent(number, (key) -> new Number(number));
         return CACHE.get(number);
     }
 

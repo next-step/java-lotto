@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.exception.InvalidCountOfLottoException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class Lotto {
     private final List<Number> numbers;
 
     private Lotto(List<Number> numbers) {
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public static Lotto from(List<Number> numbers) {

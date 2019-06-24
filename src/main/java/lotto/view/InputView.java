@@ -11,7 +11,6 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-
     public static Money askOfAmount() {
         System.out.println("구입할 금액을 입력하세요.");
         int inputOfAmount = scanner.nextInt();
