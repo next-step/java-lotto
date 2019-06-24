@@ -17,7 +17,11 @@ public class WinningLotto {
         this.bonusLottoNumber = bonusLottoNumber;
     }
 
-    LottoPrize match(final Lotto lotto) {
-        return null;
+    LottoPrize match(final Lotto comparisonTarget) {
+        final int countOfMatch = winningLotto.countOfMatch(comparisonTarget);
+        final boolean matchBonus = comparisonTarget.contains(bonusLottoNumber);
+
+        return LottoPrize.valueOf(countOfMatch, matchBonus);
     }
 }
+
