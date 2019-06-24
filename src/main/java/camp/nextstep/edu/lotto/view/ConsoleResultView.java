@@ -40,6 +40,7 @@ public class ConsoleResultView implements ResultView {
     public void printResults(Map<RewardType, Integer> rewardMap, double earningsRate) {
         final String formattedRewards = rewardMap.entrySet()
                 .stream()
+                .filter(entry -> entry.getKey() != RewardType.UNKNOWN)
                 .map(entry -> {
                     final RewardType rewardType = entry.getKey();
                     final int numberOfLotteries = entry.getValue();

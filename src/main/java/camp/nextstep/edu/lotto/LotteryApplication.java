@@ -62,7 +62,6 @@ public class LotteryApplication {
 
         purchasedLotteries.stream()
                 .map(lottery -> lotteryController.countScore(lottery, winningLottery))
-                .filter(score -> score > 3)
                 .forEach(score -> {
                     final RewardType rewardType = RewardType.from(score);
                     final int current = rewardMap.getOrDefault(rewardType, 0);
