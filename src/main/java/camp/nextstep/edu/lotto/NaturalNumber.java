@@ -2,7 +2,7 @@ package camp.nextstep.edu.lotto;
 
 import java.util.Objects;
 
-public class NaturalNumber {
+public class NaturalNumber implements Comparable<NaturalNumber> {
     private static final int ZERO = 0;
 
     private final int value;
@@ -16,6 +16,10 @@ public class NaturalNumber {
 
     public static NaturalNumber from(int value) {
         return new NaturalNumber(value);
+    }
+
+    public int value() {
+        return value;
     }
 
     @Override
@@ -36,5 +40,21 @@ public class NaturalNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(NaturalNumber naturalNumber) {
+        if (naturalNumber == null) {
+            throw new IllegalArgumentException("'naturalNumber' must not be null");
+        }
+        return Integer.compare(value, naturalNumber.value);
+    }
+
+    public NaturalNumber divideBy(NaturalNumber naturalNumber) {
+        if (naturalNumber == null) {
+            throw new IllegalArgumentException("'naturalNumber' must not be null");
+        }
+        final int quotient = value / naturalNumber.value;
+        return new NaturalNumber(quotient);
     }
 }

@@ -2,13 +2,12 @@ package camp.nextstep.edu.lotto;
 
 public class LotteryApplication {
 
-    private static final int MINIMUM_INVESTMENT = 0;
-    private static final int PRICE_OF_LOTTERY = 1000;
+    private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
 
-    public int calculateNumberOfAvailableLotteries(int investment) {
-        if (investment < MINIMUM_INVESTMENT) {
-            throw new IllegalArgumentException("'investment' must be greater than " + MINIMUM_INVESTMENT);
+    public NaturalNumber calculateNumberOfAvailableLotteries(NaturalNumber investment) {
+        if (investment == null) {
+            throw new IllegalArgumentException("'investment' must not be null");
         }
-        return investment / PRICE_OF_LOTTERY;
+        return investment.divideBy(PRICE_OF_LOTTERY);
     }
 }
