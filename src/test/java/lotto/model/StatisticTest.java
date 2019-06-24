@@ -29,17 +29,4 @@ public class StatisticTest {
         assertThat(prize.name()).isEqualTo("FIRST");
         assertThat(prize.getPrizeMoney()).isEqualTo(2000000000);
     }
-
-    @Test
-    void test_total_prize_money() {
-        List<Integer> count_of_matching_numbers = Arrays.asList(1, 3, 6);
-
-        List<Prize> prizes = count_of_matching_numbers.stream()
-                .map(Prize::valueOf)
-                .collect(toList());
-
-        int total = prizes.stream().map(Prize::getPrizeMoney).reduce(0, Integer::sum);
-
-        assertThat(total).isEqualTo(2000005000);
-    }
 }
