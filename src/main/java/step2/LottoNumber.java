@@ -1,5 +1,7 @@
 package step2;
 
+import java.util.Objects;
+
 public class LottoNumber {
     static final String ALERT_OUT_OF_RANGE_OF_LOTTO_NUMBER = "로또번호는 1부터 45까지의 자연수만 가능합니다.";
     static final int MINIMUM_LOTTO_NUMBER = 1;
@@ -23,6 +25,19 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 
     @Override

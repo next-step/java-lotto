@@ -2,11 +2,12 @@ package step2;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-
     static final String ALERT_NUMBER_OVERLAP = "중복된 로또 번호가 존재합니다.";
     static final String AlERT_DIFFERENT_SIZE_OF_NUMBERS = "로또번호의 개수가 6개가 아닙니다.";
+
     private final List<LottoNumber> lottoTicket;
 
     LottoTicket(List<LottoNumber> lottoTicket) {
@@ -30,6 +31,20 @@ public class LottoTicket {
         if (SizeOfLottoTicket != LottoTicketGenerator.BASIC_LOTTO_SIZE) {
             throw new IllegalArgumentException(ALERT_NUMBER_OVERLAP);
         }
+    }
+
+    public long getNumberOfLuckyNumber(LuckyNumber luckyNumber) {
+        List<Integer> luckNumberLastWeek =
+                luckyNumber.getLuckyNumber()
+                        .stream()
+                        .map(LottoNumber::getNumber)
+                        .collect(Collectors.toList());
+        return lottoTicket.stream()
+                .map(LottoNumber::getNumber)
+                .filter(i -> luckNumberLastWeek.contains(i))
+                .count();
+
+        //TODO: Q. 이 부분을 어떻게 구현하면 좋을지 궁금합니다..
     }
 
     public List<LottoNumber> getLottoTicket() {

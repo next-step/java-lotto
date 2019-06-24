@@ -63,7 +63,7 @@
 - [ ] 로또복권(LottoTicket) 객체 생성
     - [x] TEST - 로또복권의 로또번호는 중복이 없다
     - [x] TEST - 로또복권의 로또번호는 6개다
-    - [ ] TEST - 당첨번호와 비교해서 일치하는 개수를 반환한다 (ArrayList.contains())
+    - [x] TEST - 당첨번호와 비교해서 일치하는 개수를 반환한다 (ArrayList.contains())
     - [ ] REFACTORING
 - [ ] 로또복권생성기(LottoTicketGenerator) 객체 생성
     - [x] TEST - 로또번호(1~45)가 담긴 리스트를 생성한다
@@ -72,7 +72,7 @@
     - [x] TEST - 선택된 로또번호를 정렬한다 (Collections.sort())
     - [ ] REFACTORING
 - [ ] 당첨번호(LuckyNumber) 객체 생성
-    - [ ] TEST - 입력받은 당첨번호로 일급 컬렉션을 생성한다
+    - [x] TEST - 입력받은 당첨번호로 일급 컬렉션을 생성한다
     - [ ] REFACTORING
 - [ ] 로또자동판매기(LottoSeller) 객체 생성
     - [ ] TEST - 금액을 입력 받아 구입할 로또 복권 개수를 반환한다
