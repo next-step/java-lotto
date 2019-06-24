@@ -28,4 +28,11 @@ public class LotteryApplication {
         return Lottery.customizedInstance(winningNumberSet);
     }
 
+    public int score(Lottery lottery, Lottery winningLottery) {
+        if (winningLottery == null) {
+            throw new IllegalArgumentException("'winningLottery' must not be null");
+        }
+        return 0;
+    }
+
 }

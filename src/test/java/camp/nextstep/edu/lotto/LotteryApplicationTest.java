@@ -3,11 +3,13 @@ package camp.nextstep.edu.lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LotteryApplicationTest {
 
@@ -49,6 +51,18 @@ class LotteryApplicationTest {
         final List<Lottery> lottery = lotteryApplication.purchase(naturalNumber);
         // then
         assertThat(lottery).hasSize(14);
+    }
+
+    @Test
+    @DisplayName("당첨 로또가 null 이면 IllegalArgumentException 을 발생시킵니다")
+    void score1() {
+        // given
+        final Lottery lottery = Lottery.randomizedInstance();
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.score(lottery, null))
+                // then
+                .withMessageContaining("must not be null");
     }
 
 }
