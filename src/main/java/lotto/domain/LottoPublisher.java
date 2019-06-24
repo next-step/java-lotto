@@ -14,6 +14,10 @@ public class LottoPublisher {
         this.publishLotto = publishLottos(getBuyLottoCount());
     }
 
+    public LottoPublisher(List<Lotto> publishLotto) {
+        this.publishLotto = publishLotto;
+    }
+
     public LottoPublisher() {
     }
 
@@ -28,6 +32,15 @@ public class LottoPublisher {
 
     int getBuyLottoCount() {
         return purchaseAmount/Lotto.AMOUNT;
+    }
+
+    List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto) {
+        List<Rank> lottoRanks = new ArrayList<>();
+        for (Lotto lotto : publishLotto) {
+            lotto.setRank(winnerLotto.getNumbers());
+            lottoRanks.add(lotto.getRank());
+        }
+        return lottoRanks;
     }
 
     private List<Lotto> publishLottos(int buyCount) {
