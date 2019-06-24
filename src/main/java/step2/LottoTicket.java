@@ -4,31 +4,37 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoTicket {
 
-    static final int NUMBER_OF_BASIC_LOTTO_NUMBER = 6;
+    static final int BASIC_LOTTO_SIZE = 6;
     private final List<Integer> lottoTicket;
 
     private LottoTicket(List<Integer> lottoTicket) {
         this.lottoTicket = lottoTicket;
     }
 
-    public static LottoTicket from() {
-        return new LottoTicket(pickSixBalls(generateLottoBalls()));
+    public static LottoTicket issue() {
+        return new LottoTicket(pickLottoBalls(generateLottoBalls()));
     }
 
-    static List<Integer> pickSixBalls(Stream<Integer> lottoBalls) {
-        return lottoBalls
-                .limit(NUMBER_OF_BASIC_LOTTO_NUMBER)
+    static List<Integer> pickLottoBalls(List<Integer> lottoBalls) {
+        shuffleLottoBalls(lottoBalls);
+        return lottoBalls.stream()
+                .limit(BASIC_LOTTO_SIZE)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
-    static Stream<Integer> generateLottoBalls() {
+    static void shuffleLottoBalls(List<Integer> lottoBalls) {
+        Collections.shuffle(lottoBalls);
+    }
+
+    static List<Integer> generateLottoBalls() {
         return IntStream
                 .rangeClosed(LottoNumber.MINIMUM_LOTTO_NUMBER, LottoNumber.MAXIMUM_LOTTO_NUMBER)
-                .boxed();
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getLottoTicket() {
