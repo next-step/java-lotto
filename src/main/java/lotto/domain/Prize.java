@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
-    THREE_NUMBER_MATCH(3, 5000),
-    FOUR_NUMBER_MATCH(4, 50000),
-    FIVE_NUMBER_MATCH(5, 1500000),
-    SIX_NUMBER_MATCH(6, 2000000000);
+    THREE_NUMBER_MATCH(3, 5_000),
+    FOUR_NUMBER_MATCH(4, 50_000),
+    FIVE_NUMBER_MATCH(5, 1_500_000),
+    SIX_NUMBER_MATCH(6, 2_000_000_000);
     
     private int matchCount;
     private long prizeMoney;
