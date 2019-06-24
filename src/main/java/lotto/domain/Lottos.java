@@ -37,6 +37,6 @@ public class Lottos {
     
     @Override
     public String toString() {
-        return lottos + "";
+        return (lottos + "").replace("[", "").replace("]", "");
     }
 }

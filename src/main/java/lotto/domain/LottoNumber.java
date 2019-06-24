@@ -9,14 +9,14 @@ public class LottoNumber implements Comparable {
     private int lottoNumber;
     
     public LottoNumber(int lottoNumber) {
-        if (!isInNumberRange()) {
+        if (!isInNumberRange(lottoNumber)) {
             throw new IllegalArgumentException(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.message());
         }
         this.lottoNumber = lottoNumber;
     }
     
-    public boolean isInNumberRange() {
-        return lottoNumber >= MIN_NUMBER || lottoNumber <= MAX_NUMBER;
+    private static boolean isInNumberRange(int lottoNumber) {
+        return lottoNumber >= MIN_NUMBER && lottoNumber <= MAX_NUMBER;
     }
     
     public boolean isBig(LottoNumber inputLottoNumber) {
@@ -35,6 +35,6 @@ public class LottoNumber implements Comparable {
     
     @Override
     public String toString() {
-        return "" + lottoNumber;
+        return lottoNumber + "";
     }
 }
