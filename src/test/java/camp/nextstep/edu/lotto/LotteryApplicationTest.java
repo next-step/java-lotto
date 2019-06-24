@@ -89,4 +89,17 @@ class LotteryApplicationTest {
                 // then
                 .withMessageContaining("must be equal to");
     }
+
+    @Test
+    @DisplayName("6개 초과의 숫자를 입력할 경우 IllegalArgumentException 을 발생시킵니다")
+    void createWinningLottery1() {
+        // given
+        final List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        // when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lotteryApplication.createWinningLottery(givenNumberSet))
+                // then
+                .withMessageContaining("must be equal to");
+    }
 }
