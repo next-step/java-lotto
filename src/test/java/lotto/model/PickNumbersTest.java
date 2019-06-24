@@ -1,7 +1,5 @@
-package lotto;
+package lotto.model;
 
-import lotto.model.PickNumbers;
-import lotto.model.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,8 +30,8 @@ public class PickNumbersTest {
     }
 
     @Test
-    @DisplayName("번호 비교")
-    public void campareNumbers() {
+    @DisplayName("당첨 번호와 일치 개수")
+    public void compareNumbers() {
         PickNumbers lotto1 = new PickNumbers(Arrays.asList(1, 2, 3, 9, 10, 12));
         WinningNumbers lotto2 = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 15));
         assertThat(lotto1.compare(lotto2)).isEqualTo(3);

@@ -11,7 +11,9 @@ public class PickNumbers extends LottoNumbers{
         this.numbers = numbers;
     }
 
-    public int compare(WinningNumbers winningNumber) {
-        return 3;
+    public long compare(WinningNumbers winningNumber) {
+        return this.numbers.stream()
+                .filter(number -> winningNumber.contains(number))
+                .count();
     }
 }
