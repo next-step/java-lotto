@@ -4,6 +4,9 @@ import com.jaeyeonling.lotto.exception.ConflictLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class WinningLottoTest {
@@ -21,6 +24,20 @@ class WinningLottoTest {
         });
     }
 
+    @DisplayName("로또 1등 당첨 테스트 ")
+    @Test
+    void should_return_jackpot() {
+        // given
+        final Lotto lotto = new FixtureLotto();
 
+        final LottoNumber bonusLottoNumber = new LottoNumber(Lotto.COUNT_OF_LOTTO_NUMBER + 1);
+
+        // when
+        final WinningLotto winningLotto = new WinningLotto(lotto, bonusLottoNumber);
+        final LottoPrize prize = winningLotto.match(lotto);
+
+        // then
+        assertThat(prize).isEqualTo(LottoPrize.JACKPOT);
+    }
 
 }

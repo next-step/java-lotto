@@ -16,4 +16,8 @@ public class WinningLotto {
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
     }
+
+    LottoPrize match(final Lotto lotto) {
+        return null;
+    }
 }
