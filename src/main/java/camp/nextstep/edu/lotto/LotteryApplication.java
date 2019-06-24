@@ -8,6 +8,6 @@ public class LotteryApplication {
         if (investment < MINIMUM_INVESTMENT) {
             throw new IllegalArgumentException("'investment' must be greater than " + MINIMUM_INVESTMENT);
         }
-        return 0;
+        return investment / 1000;
     }
 }
