@@ -27,11 +27,4 @@ public class ExtractionNumber {
             throw new IllegalArgumentException("전달된 숫자가 6개가 아닙니다.");
         }
     }
-
-    public boolean contains(int number) {
-        return exNumber.stream()
-                .filter(sourceNumber -> sourceNumber.comapreTo(number))
-                .findFirst()
-                .isPresent();
-    }
 }

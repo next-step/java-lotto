@@ -22,6 +22,13 @@ public class LotteryNumber {
         this.lotteryNumber = lotteryNumber;
     }
 
+    public boolean contains(int number) {
+        return lotteryNumber.stream()
+                .filter(sourceNumber -> sourceNumber.comapreTo(number))
+                .findFirst()
+                .isPresent();
+    }
+
     private void validSize(List<Number> lotteryNumber) {
         if(lotteryNumber.size() != LIST_VALID_SIZE) {
             throw new IllegalArgumentException("전달된 숫자가 6개가 아닙니다.");
