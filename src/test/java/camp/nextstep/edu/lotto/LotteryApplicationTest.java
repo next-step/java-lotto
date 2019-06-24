@@ -1,6 +1,7 @@
 package camp.nextstep.edu.lotto;
 
-import org.assertj.core.data.Offset;
+import camp.nextstep.edu.lotto.domain.Lottery;
+import camp.nextstep.edu.lotto.domain.NaturalNumber;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

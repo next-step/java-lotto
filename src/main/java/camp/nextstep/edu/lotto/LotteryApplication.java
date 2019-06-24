@@ -1,5 +1,9 @@
 package camp.nextstep.edu.lotto;
 
+import camp.nextstep.edu.lotto.domain.Lottery;
+import camp.nextstep.edu.lotto.domain.NaturalNumber;
+import camp.nextstep.edu.lotto.domain.RewardType;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

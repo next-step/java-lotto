@@ -1,4 +1,4 @@
-package camp.nextstep.edu.lotto;
+package camp.nextstep.edu.lotto.domain;
 
 import java.util.Arrays;
 
