@@ -31,4 +31,10 @@ class DelimitersTest {
         Delimiter newDelimiter = new Delimiter("-");
         assertThat(newDelimiters.getDelimiters()).contains(commaDelimiter, colonDelimiter, newDelimiter);
     }
+
+    @Test
+    @DisplayName("구분자로 이루어진 regex 스트링을 반환한다")
+    void getDelimitersRegexString() {
+        assertThat(delimiters.getDelimitersRegexString()).isEqualTo(",|:");
+    }
 }

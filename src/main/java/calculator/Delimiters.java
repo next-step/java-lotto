@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class Delimiters {
     private List<Delimiter> delimiters;
 
@@ -25,5 +27,12 @@ public class Delimiters {
 
     public List<Delimiter> getDelimiters() {
         return Collections.unmodifiableList(delimiters);
+    }
+
+    public String getDelimitersRegexString() {
+        List<String> delimiterStrings = delimiters.stream()
+                .map(Delimiter::getDelimiter)
+                .collect(toList());
+        return String.join("|", delimiterStrings);
     }
 }
