@@ -34,12 +34,14 @@ public class CalculateApplication {
     }
 
     public void run() {
-        for (String inputCalculateData : inputData) {
-            List<String> calculateData = SplitUtils.inputDataSplit(inputCalculateData).stream()
-                    .peek(splitData -> ValidationUtils.validationNumber(splitData))
-                    .collect(Collectors.toList());
 
-            List<Integer> convertedList = Calculate.convertToInteger(calculateData);
+        for (String inputCalculateData : inputData) {
+            Input calculateData = new Input(SplitUtils.inputDataSplit(inputCalculateData).stream()
+                    .peek(splitData -> ValidationUtils.validationNumber(splitData))
+                    .collect(Collectors.toList()));
+
+
+            List<Integer> convertedList = Calculate.convertToInteger(calculateData.getInputData());
             System.out.println("합계 : " + Calculate.sum(convertedList));
         }
     }
