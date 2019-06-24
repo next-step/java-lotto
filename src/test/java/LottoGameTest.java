@@ -6,18 +6,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
-    String price = "14000";
+    int price = 14000;
     String result;
-    int numberOfLotto;
 
 
     @BeforeEach
     void setup() {
-        result = price.substring(0, price.length() - 3);
-        numberOfLotto = Integer.parseInt(result);
+        String priceStr = String.valueOf(price);
+        result = priceStr.substring(0, priceStr.length() - 3);
+
     }
 
     @Test
@@ -29,8 +30,13 @@ public class LottoGameTest {
     @Test
     @DisplayName("1000원보다 낮은 가격 입력이 되었을때 exception")
     void checkPrice() {
-        assertThat(result.isEmpty()).isFalse();
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+                    if (Integer.parseInt(result)>1000)
+                        throw new IllegalArgumentException("입력값이 잘못되었습니다. 가격을 다시 한번 입력해주세요.");
+                }
+        );
     }
+
 
     @Test
     void makeLotto() {
@@ -42,6 +48,7 @@ public class LottoGameTest {
         }
 
         Collections.shuffle(element);
+        int numberOfLotto = Integer.parseInt(result);
 
         for (int i = 0; i < numberOfLotto; i++) {
             lotto.add(element.get(i));
@@ -73,8 +80,8 @@ public class LottoGameTest {
         int first = 0;
 
         int total = (5000 * forth) + (50000 * third) + (1500000 * second) + (2000000000 * first);
-        double revenue = total / (double)Integer.parseInt(price);
-        String result = String.valueOf(revenue).substring(0,4);
+        double revenue = total / (double) price;
+        String result = String.valueOf(revenue).substring(0, 4);
 
         assertThat(result).isEqualTo("0.35");
     }
