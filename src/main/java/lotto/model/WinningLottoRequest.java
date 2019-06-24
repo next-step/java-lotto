@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -10,12 +11,17 @@ public class WinningLottoRequest {
     private final List<Number> numbers;
     private final Number bonus;
 
-    public WinningLottoRequest(String numbers, int bonus) {
-        this.numbers = Arrays.stream(numbers.trim().split(","))
+    public WinningLottoRequest(List<Number> numbers, Number bonus) {
+        this.numbers = new ArrayList<>(numbers);
+        this.bonus = bonus;
+    }
+
+    public static WinningLottoRequest of(String numbers, int bonus) {
+        List<Number> number = Arrays.stream(numbers.trim().split(","))
                 .map(Integer::new)
                 .map(Number::of)
                 .collect(Collectors.toList());
-        this.bonus = Number.of(bonus);
+        return new WinningLottoRequest(number, Number.of(bonus));
     }
 
     List<Number> getNumbers() {

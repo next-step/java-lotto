@@ -13,7 +13,7 @@ public class WinningLottoRequestTest {
         String numbers = "1,2,3,4,5,6";
         int bonus = 7;
 
-        WinningLottoRequest winningLottoRequest = new WinningLottoRequest(numbers, bonus);
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(numbers, bonus);
 
         assertThat(winningLottoRequest.getNumbers()).contains(Number.of(1), Number.of(2), Number.of(3), Number.of(4));
         assertThat(winningLottoRequest.getBonus()).isEqualTo(Number.of(7));
