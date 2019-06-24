@@ -5,16 +5,16 @@ import java.util.List;
 
 public class LottoRetailer {
 
-    public static List<LottoNumbers> buyAutoPick(Order order) {
+    public static List<PickNumbers> buyAutoPick(Order order) {
 
-        List<LottoNumbers> list = new ArrayList<>();
+        List<PickNumbers> list = new ArrayList<>();
         for (int i = 0; i < order.getAvailableNumberToBuy(); i++) {
-            list.add(new LottoNumbers(NumbersGenerator.autoGenerate()));
+            list.add(new PickNumbers(NumbersGenerator.autoGenerate()));
         }
         return list;
     }
 
-    public static LottoNumbers anounceWinningNumbers() {
-        return new LottoNumbers(NumbersGenerator.autoGenerate());
+    public static WinningNumbers anounceWinningNumbers() {
+        return new WinningNumbers(NumbersGenerator.autoGenerate());
     }
 }
