@@ -1,4 +1,4 @@
-package camp.nextstep.edu;
+package camp.nextstep.edu.calculator;
 
 import camp.nextstep.edu.calculator.StringAdditionCalculator;
 import org.junit.jupiter.api.BeforeEach;
