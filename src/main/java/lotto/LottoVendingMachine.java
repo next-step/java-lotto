@@ -1,6 +1,8 @@
 package lotto;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,12 @@ public class LottoVendingMachine {
 
     public LottoVendingMachine() {
         this.lottos = new ArrayList<>();
+    }
+
+    public LottoVendingMachine buyLottos(int amount, LottoGenerator lottoGenerator){
+        int buyLottoCnt = this.howManyLotto(amount);
+        this.createLottos(buyLottoCnt, lottoGenerator);
+        return this;
     }
 
     public int howManyLotto(int amount) {
@@ -38,10 +46,15 @@ public class LottoVendingMachine {
         return UNIT_PRICE;
     }
 
-    public List<Integer> resultLottoGames(List<Integer> result) {
+    public List<Integer> resultLottoGames(String result) {
+        List<Integer> winningNumbers = getIntegers(result);
         return lottos.stream()
-                .filter(lotto -> lotto.howManySameLottoNumber(result) >= 3)
-                .map(x -> x.howManySameLottoNumber(result))
+                .filter(lotto -> lotto.howManySameLottoNumber(winningNumbers) >= 3)
+                .map(x -> x.howManySameLottoNumber(winningNumbers))
                 .collect(Collectors.toList());
+    }
+
+    private List<Integer> getIntegers(String result) {
+        return Arrays.stream(result.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 }

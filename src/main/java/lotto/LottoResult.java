@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class LottoResult {
     private List<Integer> lottoResult;
-    private Map<Integer, Integer> PRIZE_MONEY;
+    public Map<Integer, Integer> PRIZE_MONEY;
 
 
     public LottoResult(List<Integer> lottoResult) {

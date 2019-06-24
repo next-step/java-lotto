@@ -24,6 +24,21 @@ public class Lotto {
         return true;
     }
 
+    public int howManySameLottoNumber(List<Integer> result) {
+        this.valideLottoNumber(result);
+        List<Integer> temp = new ArrayList<>(result);
+        temp.addAll(this.lotto);
+        long count = temp.stream().distinct().count();
+        if (count == LOTTO_BASE_BOUND) {
+            return LOTTO_BASE_BOUND;
+        }
+        return (int) count - LOTTO_BASE_BOUND;
+    }
+
+    public List<Integer> getLotto() {
+        return lotto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,15 +50,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto);
-    }
-
-    public int howManySameLottoNumber(List<Integer> result) {
-        List<Integer> temp = new ArrayList<>(result);
-        temp.addAll(this.lotto);
-        long count = temp.stream().distinct().count();
-        if (count == LOTTO_BASE_BOUND) {
-            return LOTTO_BASE_BOUND;
-        }
-        return (int) count - LOTTO_BASE_BOUND;
     }
 }
