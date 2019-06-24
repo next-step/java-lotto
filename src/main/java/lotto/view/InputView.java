@@ -1,7 +1,5 @@
 package lotto.view;
 
-import lotto.model.Money;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -11,11 +9,11 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static Money askOfAmount() {
+    public static int askOfAmount() {
         System.out.println("구입할 금액을 입력하세요.");
         int inputOfAmount = scanner.nextInt();
         nextLine();
-        return Money.wons(inputOfAmount);
+        return inputOfAmount;
     }
 
     public static List<Integer> askOfWinningNumbers() {
