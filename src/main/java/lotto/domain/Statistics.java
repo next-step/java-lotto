@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.Lottos.AMOUNT_PER_LOTTO;
-import static lotto.domain.PrizeInfo.PRIZE_INFOS;
+import static lotto.domain.PurchaseAmount.AMOUNT_PER_LOTTO;
 
 public class Statistics {
 
@@ -15,9 +15,7 @@ public class Statistics {
 
     public Statistics(WonNumbers wonNumbers, Lottos lottos) {
 
-        this.statistics = PRIZE_INFOS.stream()
-                .map(prizeInfo -> Statistic.of(prizeInfo, lottos.getWonNumbersCorrectCount(prizeInfo.getMatchCount(), wonNumbers)))
-                .collect(Collectors.toList());
+        this.statistics = createStatistics(wonNumbers, lottos);
         this.purchaseAmount = lottos.getLottoCount() * AMOUNT_PER_LOTTO;
     }
 
@@ -44,5 +42,12 @@ public class Statistics {
     private double floorEarnRate(double earnRate) {
 
         return Math.floor(earnRate * 100) / 100.0;
+    }
+
+    private List<Statistic> createStatistics(WonNumbers wonNumbers, Lottos lottos) {
+
+        return Arrays.stream(PrizeInfo.values())
+                .map(prizeInfo -> Statistic.of(prizeInfo, lottos.isMatchPrizeRule(prizeInfo.getPrizeRule(), wonNumbers)))
+                .collect(Collectors.toList());
     }
 }

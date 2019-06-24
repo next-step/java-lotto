@@ -3,46 +3,38 @@ package lotto.domain;
 import lotto.domain.generator.StubLottoGenerator;
 import lotto.domain.generator.StubLottosGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottosTest {
 
-    @ParameterizedTest(name = "로또개수 확인. 구매금액={0}, 로또 수={1}")
-    @CsvSource(value = {"14000,14", "3333, 3"})
-    void getLottoCount(int purchaseAmount, int expectedLottoCount) {
+    @ParameterizedTest(name = "당첨 여부 확인. 당첨 Rule={0}")
+    @MethodSource
+    void countCorrectsByCompareWonNumbers(PrizeRule prizeRule) {
 
-        Lottos lottos = new Lottos(purchaseAmount);
-        assertThat(lottos.getLottoCount()).isEqualTo(expectedLottoCount);
+        List<Lotto> stubLottos = Arrays.asList(
+                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 11, 12, 13))), // 3
+                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 12, 13))), // 4
+                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 13))), // 5
+                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 7))), // 5 + 1
+                new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)))); // 6
+
+        Lottos lottos = new Lottos(new StubLottosGenerator(stubLottos), new PurchaseAmount(stubLottos.size() * PurchaseAmount.AMOUNT_PER_LOTTO));
+
+        WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6", "7");
+        assertThat(lottos.isMatchPrizeRule(prizeRule, wonNumbers)).isEqualTo(1);
     }
 
-    @ParameterizedTest(name = "구매금액이 0 이하일 경우 IllegalArgumentException 발생")
-    @ValueSource(ints = {0, -1})
-    void getLottosCountIsLowerEqualsThan0(int purchaseAmount) {
+    private static Stream<Arguments> countCorrectsByCompareWonNumbers() {
 
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Lottos(purchaseAmount));
-    }
-
-    @ParameterizedTest(name = "지난주 우승번호와 일차하는 개수 확인. 일치개수={0}")
-    @ValueSource(ints = {3, 4, 5, 6})
-    void getWonNumbersCorrectCount(int correctCount) {
-
-        Lottos lottos = new Lottos(new StubLottosGenerator(
-                Arrays.asList(
-                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 11, 12, 13))),
-                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 12, 13))),
-                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 13))),
-                        new Lotto(new StubLottoGenerator(Arrays.asList(1, 2, 3, 4, 5, 6)))
-                )
-        ), 6);
-
-        WonNumbers wonNumbers = new WonNumbers("1, 2, 3, 4, 5, 6");
-        assertThat(lottos.getWonNumbersCorrectCount(correctCount, wonNumbers)).isEqualTo(1);
+        return Stream.of(
+                Arrays.stream(PrizeRule.values()).map(Arguments::of).toArray(Arguments[]::new)
+        );
     }
 }

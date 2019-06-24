@@ -2,35 +2,51 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.RandomLottoGenerator;
+import lotto.domain.validator.LottoNumberValidator;
 
 import java.util.List;
 
 public class Lotto {
 
+    private static final RandomLottoGenerator RANDOM_LOTTO_GENERATOR = new RandomLottoGenerator();
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
 
-        this(new RandomLottoGenerator());
+        this(RANDOM_LOTTO_GENERATOR);
     }
 
     public Lotto(LottoGenerator lottoGenerator) {
 
-        this.lottoNumbers = lottoGenerator.generate();
-        this.lottoNumbers.sort(Integer::compareTo);
+        List<Integer> lottoNumbers = lottoGenerator.generate();
+        LottoNumberValidator.validate(lottoNumbers);
+        sortLottoNumberAsc(lottoNumbers);
+
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean isLottoNumberMatchesCorrectCount(int correctCount, WonNumbers wonNumbers) {
+    public boolean isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
 
-        return getWonNumbersContainsCount(wonNumbers) == correctCount;
+        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
+                isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getWonBonusNumberValue());
     }
 
-    private long getWonNumbersContainsCount(WonNumbers wonNumbers) {
+    private boolean isMatchNormalNumberRule(int normalNumberCount, List<Integer> wonNormalNumbers) {
 
-        return wonNumbers.getWonNumbers()
+        return wonNormalNumbers
                 .stream()
                 .filter(lottoNumbers::contains)
-                .count();
+                .count() == normalNumberCount;
+    }
+
+    private boolean isMatchBonusRule(boolean hasBonusNumber, int wonBonusNumber) {
+
+        return hasBonusNumber == lottoNumbers.contains(wonBonusNumber);
+    }
+
+    private void sortLottoNumberAsc(List<Integer> lottoNumbers) {
+
+        lottoNumbers.sort(Integer::compareTo);
     }
 
     @Override

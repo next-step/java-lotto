@@ -13,9 +13,9 @@ public class Statistic {
         return statistic;
     }
 
-    public int getMatchCount() {
+    public PrizeRule getPrizeRule() {
 
-        return prizeInfo.getMatchCount();
+        return prizeInfo.getPrizeRule();
     }
 
     public int getPrizeMoney() {

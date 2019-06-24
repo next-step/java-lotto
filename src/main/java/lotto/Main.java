@@ -8,13 +8,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int purchaseAmount = InputView.askPurchaseAmount();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(InputView.askPurchaseAmount());
         Lottos lottos = new Lottos(purchaseAmount);
 
-        ResultView.printPurchasedLottoCount(lottos.getLottoCount());
+        ResultView.printPurchasedLottoCount(purchaseAmount.getPurchasedLottosCount());
         ResultView.printLottosNumber(lottos);
 
-        WonNumbers wonNumbers = new WonNumbers(InputView.askWonNumbers());
+        String wonNormalNumbers = InputView.askWonNormalNumbers();
+        String wonBonusNumbers = InputView.askWonBonusNumbers();
+        WonNumbers wonNumbers = new WonNumbers(wonNormalNumbers, wonBonusNumbers);
         Statistics statistics = new Statistics(wonNumbers, lottos);
         ResultView.printStatistics(statistics);
     }

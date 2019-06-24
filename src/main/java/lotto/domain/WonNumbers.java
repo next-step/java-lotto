@@ -1,24 +1,30 @@
 package lotto.domain;
 
-import java.util.*;
+import lotto.domain.validator.LottoNumberValidator;
+import lotto.utils.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class WonNumbers {
 
     private static final String DELIMITER = ",";
-    private static final int MUST_LOTTO_COUNT = 6;
 
-    private final List<Integer> wonNumbers;
+    private final List<Integer> wonNormalNumbers;
+    private final int wonBonusNumberValue;
 
-    public WonNumbers(String wonNumbersValue) {
+    public WonNumbers(String wonNormalNumbersValue, String wonBonusNumberValue) {
 
-        if (wonNumbersValue == null || wonNumbersValue.isEmpty()) {
-            throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
-        }
+        validateInputs(wonNormalNumbersValue, wonBonusNumberValue);
 
-        List<Integer> wonNumbers = parse(wonNumbersValue);
-        validate(wonNumbers);
-        this.wonNumbers = wonNumbers;
+        List<Integer> wonNormalNumbers = parse(wonNormalNumbersValue);
+        LottoNumberValidator.validate(wonNormalNumbers);
+        this.wonNormalNumbers = wonNormalNumbers;
+
+        int wonBonusNumber = Integer.parseInt(wonBonusNumberValue);
+        LottoNumberValidator.validateNumber(wonBonusNumber);
+        this.wonBonusNumberValue = wonBonusNumber;
     }
 
     private List<Integer> parse(String wonNumbersValue) {
@@ -29,30 +35,20 @@ public class WonNumbers {
                 .collect(Collectors.toList());
     }
 
-    private void validate(List<Integer> wonNumbers) {
+    public List<Integer> getWonNormalNumbers() {
 
-        if (wonNumbers == null || wonNumbers.size() != MUST_LOTTO_COUNT) {
-            throw new IllegalArgumentException("우승번호 개수는 " + MUST_LOTTO_COUNT + "개 여야 합니다.");
+        return wonNormalNumbers;
+    }
+
+    public int getWonBonusNumberValue() {
+
+        return wonBonusNumberValue;
+    }
+
+    private void validateInputs(String wonNormalNumbersValue, String wonBonusNumbers) {
+
+        if (StringUtils.isBlank(wonNormalNumbersValue) || StringUtils.isBlank(wonBonusNumbers)) {
+            throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
         }
-    }
-
-    public List<Integer> getWonNumbers() {
-
-        return wonNumbers;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WonNumbers that = (WonNumbers) o;
-        return Objects.equals(wonNumbers, that.wonNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(wonNumbers);
     }
 }
