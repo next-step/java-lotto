@@ -13,14 +13,14 @@ public class MoneyTest {
     @DisplayName("돈을 생성하는데 성공한다")
     @Test
     void createMoney() {
-        assertThat(Money.wons(1000)).isEqualTo(Money.wons(1000));
+        assertThat(Money.won(1000)).isEqualTo(Money.won(1000));
     }
 
     @DisplayName("돈이 음수일 경우 exception")
     @Test
     void noNaturalMoneyThenFail() {
         Assertions.assertThatIllegalArgumentException()
-                .isThrownBy(() -> Money.wons(-1));
+                .isThrownBy(() -> Money.won(-1));
     }
 
     @DisplayName("1개의 로또를 구매한다")
@@ -30,7 +30,7 @@ public class MoneyTest {
             1500
     })
     void countAvailable(long amount) {
-        Money money = Money.wons(amount);
+        Money money = Money.won(amount);
 
         long count = money.countAvailable(Lotto.getPrice());
 

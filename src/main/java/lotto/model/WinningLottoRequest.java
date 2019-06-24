@@ -2,15 +2,13 @@ package lotto.model;
 
 import lotto.exception.DuplicateLottoNumberException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
 public class WinningLottoRequest {
 
+    private static final String NUMBERS_SEPARATOR = ",";
     private final List<Number> numbers;
     private final Number bonus;
 
@@ -29,7 +27,7 @@ public class WinningLottoRequest {
     }
 
     private static List<Integer> parseNumbers(String numbers) {
-        return Arrays.stream(numbers.trim().split(","))
+        return Arrays.stream(numbers.trim().split(NUMBERS_SEPARATOR))
                 .distinct()
                 .map(Integer::new)
                 .collect(toList());
@@ -42,7 +40,7 @@ public class WinningLottoRequest {
     }
 
     List<Number> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     Number getBonus() {

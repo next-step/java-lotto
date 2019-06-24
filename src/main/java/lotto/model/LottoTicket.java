@@ -9,7 +9,7 @@ public class LottoTicket {
     private List<Lotto> lottos;
 
     private LottoTicket(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public static LottoTicket of(List<Lotto> lottos) {

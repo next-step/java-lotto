@@ -9,7 +9,8 @@ public class Application {
     public static void main(String[] args) {
         int inputOfAmount = InputView.askOfAmount();
 
-        LottoTicket lottoTicket = LottoMachine.buy(Money.wons(inputOfAmount));
+        Money moneyToBuy = Money.won(inputOfAmount);
+        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy);
         OutputView.printLottoTicket(lottoTicket);
 
         String inputOfNumbers = InputView.askOfWinningNumbers();

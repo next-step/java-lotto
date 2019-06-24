@@ -12,7 +12,7 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money wons(long amount) {
+    public static Money won(long amount) {
         if (amount < 0) {
             throw new MinimumAmountException(amount);
         }

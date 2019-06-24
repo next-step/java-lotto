@@ -37,7 +37,7 @@ public class Lotto {
     }
 
     static Money getPrice() {
-        return Money.wons(Lotto.PRICE);
+        return Money.won(Lotto.PRICE);
     }
 
     public int getMatchCount(Lotto other) {
