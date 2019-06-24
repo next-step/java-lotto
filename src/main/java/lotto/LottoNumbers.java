@@ -6,10 +6,12 @@ import java.util.List;
 public class LottoNumbers {
 
     private final static int LOTTO_NUMBER_SIZE = 6;
-    
+    private List<Integer> numbers;
+
     public LottoNumbers(List<Integer> numbers) {
         verifySize(numbers);
         verifyDuplicationNumber(numbers);
+        this.numbers = numbers;
     }
 
     private void verifySize(List<Integer> numbers) {
