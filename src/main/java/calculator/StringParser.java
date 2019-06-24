@@ -1,7 +1,6 @@
 package calculator;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +36,9 @@ public class StringParser {
         }
     }
 
-    public List<String> parseByDelimiter() {
-        return Arrays.asList(input.split(delimiters.getDelimitersRegexString()));
+    public PositiveNumbers parseByDelimiter() {
+        return new PositiveNumbers(
+                Arrays.asList(input.split(delimiters.getDelimitersRegexString()))
+        );
     }
 }
