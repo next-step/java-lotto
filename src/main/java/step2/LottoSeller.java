@@ -26,6 +26,9 @@ public class LottoSeller {
 
     public void lottoResult(List<LottoTicket> lottoTickets, LuckyNumber luckyNumber) {
 
+        for (LottoTicket ticket : lottoTickets) {
+            LottoRank.from(getNumberOfMatchedToLuckyNumber(ticket, luckyNumber));
+        }
     }
 
     public long getNumberOfMatchedToLuckyNumber(LottoTicket lottoTicket, LuckyNumber luckyNumber) {

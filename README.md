@@ -80,6 +80,8 @@
     - [ ] TEST - 각 일치 개수 별 당첨된 복권의 개수를 반환한다
     - [ ] TEST - 생성된 로또복권의 수익률을 계산한다
     - [ ] REFACTORING
+- [ ] 당첨결과를 매칭할 Enum(LottoRank) 객체 생성
+    - [ ] REFACTORING
 - [ ] InputView 객체 생성
     - [ ] TEST - 구입 금액을 입력받고, 출력한다
     - [ ] TEST - 구매 개수를 LottoSeller로 부터 반환받아서 출력한다
