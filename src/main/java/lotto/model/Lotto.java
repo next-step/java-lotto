@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public static Lotto from(List<Number> numbers) {
-        if(numbers == null){
+        if (numbers == null) {
             throw new NumbersIsEmptyException();
         }
         validateLottoSize(numbers);
@@ -41,6 +41,10 @@ public class Lotto {
         return (int) other.numbers.stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    public boolean hasBonusNumber(Number number) {
+        return numbers.contains(number);
     }
 
     public List<Number> getNumbers() {
@@ -65,9 +69,5 @@ public class Lotto {
         return "Lotto{" +
                 "numbers=" + numbers +
                 '}';
-    }
-
-    public boolean hasBonusNumber(Number number) {
-        return numbers.contains(number);
     }
 }

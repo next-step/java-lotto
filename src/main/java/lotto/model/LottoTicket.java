@@ -16,10 +16,10 @@ public class LottoTicket {
         return new LottoTicket(lottos);
     }
 
-    public LottoResult result(Lotto winningLotto) {
+    public LottoResult result(WinningLotto winningLotto) {
         List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            prizes.add(Prize.of(lotto.getMatchCount(winningLotto)));
+            prizes.add(winningLotto.getResultOf(lotto));
         }
         return LottoResult.of(prizes);
     }

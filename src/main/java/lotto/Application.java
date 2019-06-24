@@ -18,6 +18,6 @@ public class Application {
         Lotto winningLotto = LottoMachine.getWinningLotto(InputView.askOfWinningNumbers());
         WinningLotto winningLotto2 = LottoMachine.getWinningLotto(WinningLottoRequest.of(number, bonus));
 
-        OutputView.printReport(lottoTicket.result(winningLotto));
+//        OutputView.printReport(lottoTicket.result(winningLotto));
     }
 }

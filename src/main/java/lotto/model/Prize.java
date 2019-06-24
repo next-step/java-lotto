@@ -19,25 +19,19 @@ public enum Prize {
         this.money = money;
     }
 
-    public static Prize of(int matchCount) {
-        return Arrays.stream(Prize.values())
-                .filter(prize1 -> prize1.matchCount == matchCount)
-                .findFirst()
-                .orElse(NONE);
-    }
-
     public static Prize of(int matchCount, boolean existBonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> {
-                    if (Prize.SECOND == prize) {
-                        return prize.getMatchCount() == matchCount && existBonus;
-                    }
-                    return prize.getMatchCount() == matchCount;
-                })
+                .filter(prize -> prize.isMatchPrize(matchCount, existBonus))
                 .findFirst()
                 .orElse(Prize.NONE);
     }
 
+    private boolean isMatchPrize(int matchCount, boolean existBonus) {
+        if (this == SECOND) {
+            return this.getMatchCount() == matchCount && existBonus;
+        }
+        return this.getMatchCount() == matchCount;
+    }
 
     public long getMoney() {
         return money;
