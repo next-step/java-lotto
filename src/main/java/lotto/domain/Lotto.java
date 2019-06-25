@@ -19,14 +19,12 @@ public class Lotto {
 
     public Lotto(LottoGenerator lottoGenerator) {
 
-        List<Integer> generatedLottoNumbers = lottoGenerator.generate();
-        LottoValidator.validateNumbers(generatedLottoNumbers);
-
-        this.lottoNumbers = generatedLottoNumbers;
+        this(lottoGenerator.generate());
     }
 
     public Lotto(List<Integer> lottoNumbers) {
 
+        LottoValidator.validateNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 

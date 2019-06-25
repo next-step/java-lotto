@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.generator.LottosGenerator;
 import lotto.domain.generator.RandomLottosGenerator;
 import lotto.domain.validator.LottoValidator;
+import lotto.utils.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;

@@ -31,7 +31,7 @@ public class LottoValidator {
     private static void validateNumber(List<Integer> lottoNumbers) {
 
         if (lottoNumbers.stream().anyMatch(lottoNumber -> lottoNumber < LOTTO_START_NUMBER || lottoNumber > LOTTO_END_NUMBER)) {
-            throw new IllegalArgumentException("로또번호는 " + LOTTO_START_NUMBER + " 이상,  " + LOTTO_END_NUMBER + " 이하 여야 합니다.");
+            throw new IllegalArgumentException("로또번호는 " + LOTTO_START_NUMBER + " 이상, " + LOTTO_END_NUMBER + " 이하 여야 합니다.");
         }
     }
 

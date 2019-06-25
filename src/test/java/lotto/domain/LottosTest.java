@@ -3,13 +3,13 @@ package lotto.domain;
 import lotto.domain.generator.StubLottoGenerator;
 import lotto.domain.generator.StubLottosGenerator;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottosTest {
 
@@ -45,6 +45,23 @@ class LottosTest {
                              Arrays.asList(new Lotto(Arrays.asList(20, 21, 22, 23, 24, 25)),
                                            new Lotto(Arrays.asList(30, 31, 32, 33, 34, 35)),
                                            new Lotto(Arrays.asList(40, 41, 42, 43, 44, 45))))
+        );
+    }
+
+    @ParameterizedTest(name = "로또 수동 생성시 Exception 발생. manualNumbers={0}")
+    @EmptySource
+    @MethodSource
+    void newLottoInstanceOccurredException(List<String> manualNumbers) {
+
+        assertThatThrownBy(() -> new Lottos(new StubLottosGenerator(Collections.emptyList()), new PurchaseAmount(PurchaseAmount.AMOUNT_PER_LOTTO), manualNumbers))
+                .isInstanceOfAny(IllegalArgumentException.class, IllegalStateException.class);
+    }
+
+    private static Stream<Arguments> newLottoInstanceOccurredException() {
+
+        return Stream.of(
+                Arguments.of(Arrays.asList("100, 101, 102, 103, 104, 105")),
+                Arguments.of(Arrays.asList("1"))
         );
     }
 
