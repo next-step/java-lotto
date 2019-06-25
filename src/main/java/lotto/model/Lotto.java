@@ -14,7 +14,7 @@ public class Lotto {
 
   public int getCountOfMatchingNumbers(List<Integer> winningNumbers) {
     return generatedNumbers.stream()
-            .reduce(0, (a, b) -> winningNumbers.contains(b) ? a + 1 : a);
+            .reduce(0, (countOfMatchingNumber, lottoNumber) -> winningNumbers.contains(lottoNumber) ? countOfMatchingNumber + 1 : countOfMatchingNumber);
   }
 
   @Override
