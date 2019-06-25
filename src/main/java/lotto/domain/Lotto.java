@@ -1,10 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import lotto.strategy.LottoNumberStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
     static private int PRICE_LOTTO_TICKET = 1000;

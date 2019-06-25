@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class NumberChecker {
     private LottoTicket winnerNumbers;
