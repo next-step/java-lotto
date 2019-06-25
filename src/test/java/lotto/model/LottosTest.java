@@ -30,7 +30,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또를 사는데 사용한 금액")
     void getUsedAmount() {
-        assertThat(lottos.getUsedAmount()).isEqualTo(2000);
+        assertThat(lottos.getBuyingMoney()).isEqualTo(2000);
     }
 
     @Test
