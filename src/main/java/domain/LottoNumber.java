@@ -9,19 +9,21 @@ public class LottoNumber {
 
     private ArrayList<Integer> lottoElement = null;
 
-    // 생성자를 호출하면 랜덤번호를 생성하여 lottoElement에 로또번호를 추가
+    // 생성자를 호출하면 lottoElement에 로또번호를 생성하여 추가
     public LottoNumber() {
+        lottoElement = new ArrayList<>();
+        for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
+            lottoElement.add(getRandomNumber().get(i));
+        }
+    }
+
+    private ArrayList<Integer> getRandomNumber() {
         ArrayList<Integer> randomNumber = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
             randomNumber.add(i);
         }
-
         Collections.shuffle(randomNumber);
-
-        lottoElement = new ArrayList<>();
-        for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
-            lottoElement.add(randomNumber.get(i));
-        }
+        return randomNumber;
     }
 
     public ArrayList<Integer> getElement() {
@@ -29,10 +31,10 @@ public class LottoNumber {
     }
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교
-    public int comparePrvNumber(int[] prvLottoNumber) {
+    public int compareWinningNumber(int[] winningLottoNumber) {
         int numofWin = 0;
-        for (int i = 0; i < prvLottoNumber.length; ++i) {
-            numofWin = lottoElement.contains(prvLottoNumber[i]) ? numofWin + 1 : numofWin;
+        for (int i = 0; i < winningLottoNumber.length; ++i) {
+            numofWin = lottoElement.contains(winningLottoNumber[i]) ? numofWin + 1 : numofWin;
         }
         return numofWin;
     }
