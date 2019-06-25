@@ -78,7 +78,7 @@ class LotteryTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lottery.customizedInstance(givenNumberSet))
                 // then
-                .withMessageContaining("between 1 and 50");
+                .withMessageContaining("between 1 and 45");
     }
 
     @Test
@@ -91,7 +91,7 @@ class LotteryTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Lottery.customizedInstance(givenNumberSet))
                 // then
-                .withMessageContaining("between 1 and 50");
+                .withMessageContaining("between 1 and 45");
     }
 
     @Test

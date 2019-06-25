@@ -26,7 +26,7 @@ class LotteryServiceImplTest {
         // given
         final int investment = 0;
         // when
-        final List<Lottery> lottery = lotteryServiceImpl.purchase(0);
+        final Lotteries lottery = lotteryServiceImpl.purchase(investment);
         // then
         assertThat(lottery).hasSize(0);
     }
@@ -37,7 +37,7 @@ class LotteryServiceImplTest {
         // given
         final int investment = 14000;
         // when
-        final List<Lottery> lottery = lotteryServiceImpl.purchase(investment);
+        final Lotteries lottery = lotteryServiceImpl.purchase(investment);
         // then
         assertThat(lottery).hasSize(14);
     }

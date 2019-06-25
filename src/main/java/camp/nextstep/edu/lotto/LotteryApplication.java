@@ -1,5 +1,6 @@
 package camp.nextstep.edu.lotto;
 
+import camp.nextstep.edu.lotto.domain.Lotteries;
 import camp.nextstep.edu.lotto.domain.LotteryServiceImpl;
 import camp.nextstep.edu.lotto.domain.Lottery;
 import camp.nextstep.edu.lotto.domain.RewardType;
@@ -45,7 +46,7 @@ public class LotteryApplication {
 
     public void run() {
         final int investment = inputView.inputInvestment();
-        final List<Lottery> purchasedLotteries = lotteryServiceImpl.purchase(investment);
+        final Lotteries purchasedLotteries = lotteryServiceImpl.purchase(investment);
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();

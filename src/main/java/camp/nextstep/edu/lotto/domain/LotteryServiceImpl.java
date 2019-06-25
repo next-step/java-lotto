@@ -16,22 +16,23 @@ public class LotteryServiceImpl implements LotteryService {
     private static final long IDENTITY_LONG = 0L;
 
     @Override
-    public List<Lottery> purchase(int investment) {
+    public Lotteries purchase(int investment) {
         final NaturalNumber naturalNumberInvestment = NaturalNumber.from(investment);
         final NaturalNumber naturalNumberOfLotteries = naturalNumberInvestment.divideBy(PRICE_OF_LOTTERY);
         final int numberOfLotteries = naturalNumberOfLotteries.value();
-        return IntStream.range(ZERO, numberOfLotteries)
+        final List<Lottery> lotteryList = IntStream.range(ZERO, numberOfLotteries)
                 .mapToObj(number -> Lottery.randomizedInstance())
                 .collect(Collectors.toList());
+        return Lotteries.from(lotteryList);
     }
 
     @Override
-    public Map<RewardType, Integer> getResult(List<Lottery> purchasedLotteries, Set<Integer> winningNumberSet) {
+    public Map<RewardType, Integer> getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet) {
         final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
         return this.resolveRewards(purchasedLotteries, winningLottery);
     }
 
-    private Map<RewardType, Integer> resolveRewards(List<Lottery> purchasedLotteries, Lottery winningLottery) {
+    private Map<RewardType, Integer> resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery) {
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, COUNT_DEFAULT);
         rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, COUNT_DEFAULT);

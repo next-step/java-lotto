@@ -1,9 +1,9 @@
 package camp.nextstep.edu.lotto.view;
 
+import camp.nextstep.edu.lotto.domain.Lotteries;
 import camp.nextstep.edu.lotto.domain.Lottery;
 import camp.nextstep.edu.lotto.domain.RewardType;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -22,7 +22,7 @@ public class ConsoleResultView implements ResultView {
     private static final String MESSAGE_FORMAT_OF_ONE_LOTTERY_RESULT = "%d개 일치 (%d원)- %d개";
 
     @Override
-    public void printPurchasedLotteries(List<Lottery> lotteries) {
+    public void printPurchasedLotteries(Lotteries lotteries) {
         final String formattedMessage = String.format(MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES, lotteries.size());
         final String formattedLotteries = lotteries.stream()
                 .map(this::formatLottery)
