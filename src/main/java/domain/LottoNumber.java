@@ -10,14 +10,6 @@ public class LottoNumber {
     private ArrayList<Integer> lottoElement = null;
 
     public LottoNumber() {
-        getLottoElementNumber();
-    }
-
-    public ArrayList<Integer> getElement() {
-        return lottoElement;
-    }
-
-    public void getLottoElementNumber() {
         ArrayList<Integer> randomNumber = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
             randomNumber.add(i);
@@ -29,6 +21,10 @@ public class LottoNumber {
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
             lottoElement.add(randomNumber.get(i));
         }
+    }
+
+    public ArrayList<Integer> getElement() {
+        return lottoElement;
     }
 
     public int comparePrvNumber(int[] prvLottoNumber) {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputVeiw {
-    private final static int MINIUM_PRICE = 1000;
+    public final static int MINIMUM_PRICE = 1000;
     private final static int ONE_UNIT_OF_LOTTO = 6;
     private final static String SEPARATOR_REST = ",";
     private final static String SEPARATOR_BLANK = " ";
@@ -20,8 +20,8 @@ public class InputVeiw {
         return price;
     }
 
-    private static boolean checkPrice(int price) {
-        return price < MINIUM_PRICE;
+    public static boolean checkPrice(int price) {
+        return price < MINIMUM_PRICE;
     }
 
     public static int[] inputPrvLottoNumber() {
@@ -41,8 +41,8 @@ public class InputVeiw {
         return inputNumber;
     }
 
-    private static boolean checkPrvStr(String input) {
-        return input.length() == ONE_UNIT_OF_LOTTO;
+    public static boolean checkPrvStr(String input) {
+        return !(input.length() == ONE_UNIT_OF_LOTTO);
     }
 
     public static String[] removeBlankAndSplit(String input) {

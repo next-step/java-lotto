@@ -4,8 +4,10 @@ import domain.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.InputVeiw;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,8 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
     int price = 14000;
-    String result;
-    LottoNumber lottoNumber;
+    String count;
     LottoResult lottoResult;
     LottoGame lottoGame;
 
@@ -23,85 +24,64 @@ public class LottoGameTest {
     @BeforeEach
     void setup() {
         String priceStr = String.valueOf(price);
-        result = priceStr.substring(0, priceStr.length() - 3);
-
+        count = priceStr.substring(0, priceStr.length() - 3);
+        lottoGame = new LottoGame(price);
     }
 
     @Test
     @DisplayName("가격을 숫자로 자르기")
     void substringPricetoNumber() {
-        assertThat(result).isEqualTo("14");
+        assertThat(lottoGame.substringPricetoNumber(price)).isEqualTo(14);
     }
 
     @Test
     @DisplayName("1000원보다 낮은 가격 입력이 되었을때 exception")
     void checkPrice() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-                    if (price > 1000)
-                        throw new IllegalArgumentException("입력값이 잘못되었습니다. 가격을 다시 한번 입력해주세요.");
-                }
-        );
+            if(InputVeiw.checkPrice(price))
+                    throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");;
+        });
     }
-
     @Test
-    void getAutoLottoNumber() {
-        List<Integer> lotto = new ArrayList<>();
-        List<Integer> element = new ArrayList<>();
-
-        for (int i = 1; i <= 45; i++) {
-            element.add(i);
-        }
-
-        Collections.shuffle(element);
-        int numberOfLotto = Integer.parseInt(result);
-
-        for (int i = 0; i < numberOfLotto; i++) {
-            lotto.add(element.get(i));
-        }
-
-        Collections.sort(lotto);
+    @DisplayName("지난 당첨번호를 잘못 입력했을 때 exception")
+    void checkPrvStr(){
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            if(InputVeiw.checkPrvStr("12345"))
+                throw new IllegalArgumentException("입력이 잘못되었습니다. 지난 당첨 번호를 다시 한번 입력해주세요.");
+        });
     }
-
     @Test
-    void getNumberofWin() {
+    @DisplayName("지난 당첨번호와 당청 번호 비교 ")
+    void comparePrvNumber(){
         int numofWin = 0;
-        List<Integer> lotto = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            lotto.add(i);
+        int [] prvLottoNumber={1,2,3,4,5,6};
+        ArrayList<Integer> lottoElement= new ArrayList<>();
+        for (int i = 1; i <= prvLottoNumber.length; i++) {
+            lottoElement.add(i);
         }
-
-        for (int i = 1; i <= 45; i++) {
-            if (lotto.contains(i))
-                ++numofWin;
+        for (int i = 0; i < prvLottoNumber.length; ++i) {
+            numofWin = lottoElement.contains(prvLottoNumber[i]) ? numofWin + 1 : numofWin;
         }
         assertThat(numofWin).isEqualTo(6);
     }
 
     @Test
-    void getRevenue() {
-        int forth = 1;
-        int third = 0;
-        int second = 0;
-        int first = 0;
-
-        int total = (5000 * forth) + (50000 * third) + (1500000 * second) + (2000000000 * first);
-        double revenue = total / (double) price;
-        String result = String.valueOf(revenue).substring(0, 4);
-
-        assertThat(result).isEqualTo("0.35");
-    }
-
-    @Test
+    @DisplayName("공백문자 제거 및 , 기준으로 문자열 split ")
     void removeBlankAndSplit() {
         String input = "1, 2, 3, 4, 5, 6";
         assertThat(input.replaceAll(" ", "").split(",")).containsExactly("1", "2", "3", "4", "5", "6");
     }
+
     @Test
-    void getPercentOfRevenue(){
-        double revenue = 2332.323;
-        String[] result=String.valueOf(revenue).split("\\.");
-        String percent = result[0] +"."+result[1].substring(0,2);
+    @DisplayName("수익률을 소수점 2자리까지 만들기")
+    void getPercentOfRevenue() {
+        double revenue = 2332.323487;
+        String[] result = String.valueOf(revenue).split("\\.");
+        String percent = null;
+        if (result[1].length() == 1)
+            percent = result[0] + "." + result[1].substring(0, 1);
+        if (result[1].length() > 1)
+            percent = result[0] + "." + result[1].substring(0, 2);
         assertThat(percent).isEqualTo("2332.32");
     }
-
 }

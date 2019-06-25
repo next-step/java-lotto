@@ -21,6 +21,10 @@ public class LottoGame {
         lotto = new ArrayList<LottoNumber>();
     }
 
+    public ArrayList<LottoNumber> getLotto() {
+        return lotto;
+    }
+
     public void run() {
         getAutoLottoNumber();
         prvLottoNumber = InputVeiw.inputPrvLottoNumber();
@@ -35,7 +39,7 @@ public class LottoGame {
         ResultView.printLottoNumber(lotto);
     }
 
-    private int substringPricetoNumber(int price) {
+    public int substringPricetoNumber(int price) {
         String priceString = String.valueOf(price);
         return Integer.parseInt(priceString.substring(0, priceString.length() - SUBSTR_RANGE));
     }
