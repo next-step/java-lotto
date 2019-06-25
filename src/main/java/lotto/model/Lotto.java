@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Lotto {
 
-    public static final int PRICE = 1_000;
+    public static final Money PRICE = Money.won(1_000);
     public static final int SIZE = 6;
     private final List<Number> numbers;
 
@@ -34,10 +34,6 @@ public class Lotto {
         if (numbersSize != SIZE) {
             throw new InvalidCountOfLottoException(numbersSize);
         }
-    }
-
-    static Money getPrice() {
-        return Money.won(Lotto.PRICE);
     }
 
     public int getMatchCount(Lotto other) {

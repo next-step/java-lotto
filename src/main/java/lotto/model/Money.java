@@ -23,7 +23,7 @@ public class Money {
     public long countAvailable(Money money) {
         long count = this.amount / money.amount;
         if (count <= 0) {
-            throw new MinimumAmountException(money.amount);
+            throw new MinimumAmountException(amount);
         }
         return count;
     }
