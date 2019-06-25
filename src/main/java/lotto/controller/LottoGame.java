@@ -8,6 +8,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LottoGame {
@@ -23,7 +24,10 @@ public class LottoGame {
     List<Integer> winNumbers = InputView.winNumbers(scanner);
     List<Rank> ranks = lottoTickets.winNumberSize(winNumbers);
 
-    ResultView.printRanks(LottoStatistics.statistics(ranks));
+    Map<Rank, Long> statistics = LottoStatistics.statistics(ranks);
+    ResultView.printRanks(statistics);
+
+    ResultView.printProfitRate(LottoStatistics.profitRate(inputPrice, statistics));
 
     scanner.close();
   }

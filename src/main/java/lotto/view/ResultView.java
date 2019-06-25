@@ -25,9 +25,11 @@ public class ResultView {
     System.out.println("---------");
     Stream.of(Rank.values())
         .filter(rank -> rank.getCountOfMatch() > 0)
-        .forEach(rank -> {
-          System.out.println(rank.getCountOfMatch() + "개 일치 ("
-              + rank.getWinningMoney() + "원) - " + ranks.getOrDefault(rank, DEFAULT_VALUE) + "개");
-        });
+        .forEach(rank -> System.out.println(rank.getCountOfMatch() + "개 일치 ("
+            + rank.getWinningMoney() + "원) - " + ranks.getOrDefault(rank, DEFAULT_VALUE) + "개"));
+  }
+
+  public static void printProfitRate(double rate) {
+    System.out.printf("총 수익률은 %.2f 입니다.", rate);
   }
 }
