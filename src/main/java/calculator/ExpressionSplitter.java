@@ -9,11 +9,11 @@ public class ExpressionSplitter {
 
     private static final String CUSTOM_SEPARATOR_EX_PATTERN = "//(.)\n(.*)";
 
-    private static final String CHAR_CLASS_WRAPPING_FORMAT = "[%s]";
-
     private static final int INDEX_OF_EXTRACTED_SEPARATOR = 1;
 
     private static final int INDEX_OF_EXTRACTED_EXPRESSION = 2;
+
+    private static final String CHAR_CLASS_WRAPPING_FORMAT = "[%s]";
 
     private String separator;
 

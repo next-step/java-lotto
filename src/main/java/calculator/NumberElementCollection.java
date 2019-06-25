@@ -15,10 +15,6 @@ public class NumberElementCollection {
                 .collect(Collectors.toList());
     }
 
-    public int size() {
-        return elements.size();
-    }
-
     private boolean isNotEmpty(String value){
         return !value.trim().isEmpty();
     }
