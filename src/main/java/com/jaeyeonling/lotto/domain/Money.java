@@ -15,6 +15,10 @@ public class Money {
         this.money = money;
     }
 
+    public long getMoney() {
+        return money;
+    }
+
     public void buy(final Dealable item) {
         spend(item.getPrice());
     }
