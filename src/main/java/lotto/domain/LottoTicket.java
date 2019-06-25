@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
@@ -35,6 +36,16 @@ public class LottoTicket {
 
     public List<Long> findAll() {
         return new ArrayList<>(lottoNumbers);
+    }
+
+    public String getLottoTicketNumbers() {
+        return String.join(", ", getNumbers());
+    }
+
+    private List<String> getNumbers() {
+        return lottoNumbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override
