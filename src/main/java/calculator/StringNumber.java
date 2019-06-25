@@ -12,14 +12,13 @@ public class StringNumber {
     }
 
     public int parse() {
-        int result;
         try {
-            result = Integer.valueOf(stringNumber);
+            int result = Integer.valueOf(stringNumber);
+            if (result < 0) throw new RuntimeException(CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
+
+            return result;
         } catch (NumberFormatException e) {
             throw new RuntimeException(NOT_A_NUMBER_EXCEPTION_MESSAGE);
         }
-
-        if (result < 0) throw new RuntimeException(CANNOT_USE_NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
-        return result;
     }
 }

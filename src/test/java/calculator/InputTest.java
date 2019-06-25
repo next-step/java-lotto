@@ -3,6 +3,9 @@ package calculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -15,14 +18,12 @@ public class InputTest {
         result = new String[]{"1", "2"};
     }
 
-    @Test
+    @ParameterizedTest
+    @NullAndEmptySource
     @DisplayName("사용자 입력값이 빈 값(null, '')인지 확인")
-    void isEmpty() {
-        Input input1 = new Input("");
-        assertThat(input1.isEmpty()).isTrue();
-
-        Input input2 = new Input(null);
-        assertThat(input2.isEmpty()).isTrue();
+    void isEmpty(String value) {
+        Input input = new Input(value);
+        assertThat(input.isEmpty()).isTrue();
     }
 
     @Test
