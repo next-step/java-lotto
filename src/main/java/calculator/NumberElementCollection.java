@@ -6,11 +6,12 @@ import java.util.stream.Collectors;
 
 public class NumberElementCollection {
 
-    List<String> elements;
+    List<NumberElement> elements;
 
     public NumberElementCollection(String[] source){
         this.elements = Arrays.stream(source)
                 .filter(this::isNotEmpty)
+                .map(NumberElement::new)
                 .collect(Collectors.toList());
     }
 
@@ -22,14 +23,9 @@ public class NumberElementCollection {
         return !value.trim().isEmpty();
     }
 
-    public int sum() {
-
-        int sum = 0;
-
-        for(String element : elements){
-            sum += Integer.parseInt(element);
-        }
-
-        return sum;
+    public NumberElement sum() {
+        return elements.stream().reduce(new NumberElement(), (part, element) -> part.add(element));
     }
+
+
 }

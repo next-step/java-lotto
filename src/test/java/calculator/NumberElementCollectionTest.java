@@ -14,20 +14,22 @@ class NumberElementCollectionTest {
 
     @ParameterizedTest
     @MethodSource("provideSum")
-    void sum(String[] source, int expectSum) {
+    void sum(String[] source, NumberElement expectSum) {
 
         NumberElementCollection elements = new NumberElementCollection(source);
 
-        int total = elements.sum();
+        NumberElement total = elements.sum();
 
         assertThat(total).isEqualTo(expectSum);
     }
 
     private static Stream<Arguments> provideSum() {
         return Stream.of(
-                Arguments.of(new String[]{"1"}, 1),
-                Arguments.of(new String[]{"4", "11"}, 15),
-                Arguments.of(new String[]{"8", "1", "50"}, 59)
+                Arguments.of(new String[]{"1"}, new NumberElement(1)),
+                Arguments.of(new String[]{"4", "11"}, new NumberElement(15)),
+                Arguments.of(new String[]{"8", "1", "50"}, new NumberElement(59))
         );
     }
+
+
 }
