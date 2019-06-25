@@ -23,26 +23,22 @@ public class Statistics {
         .collect(Collectors.toList()));
   }
 
-  public Rewards getRewards() {
-    return rewards;
-  }
-
-  int getSameNumberCount(int boundaryCount) {
-    List<Lotto> purchasedLotto = purchasedLottos.getPurchasedLotto();
-    return (int) purchasedLotto.stream()
-        .map(lotto -> lotto.countSameNumber(lastWeekWinLotto))
-        .filter(value -> value == boundaryCount)
-        .count();
+  private int getSameNumberCount(int boundaryCount) {
+    return purchasedLottos.getSameNumberCount(lastWeekWinLotto, boundaryCount);
   }
 
   public double getYield() {
     double income = rewards.getIncome();
     int expense = getExpense(purchasedLottos.getQuantity());
-    return Math.floor((income / expense) * 100) / 100.0;
+    return Math.floor((income / expense) * 100) / 100;
   }
 
   private int getExpense(Quantity quantity) {
     return quantity.getValue() * Money.LOTTO_PRICE;
+  }
+
+  public List<Reward> getRewards() {
+    return rewards.getRewards();
   }
 
 }

@@ -10,12 +10,11 @@ public class Rewards {
     this.rewards = rewards;
   }
 
-  public List<Reward> getReward() {
-    return rewards;
-  }
-
   public double getIncome() {
     return rewards.stream().mapToDouble(Reward::getRewardMoney).sum();
   }
 
+  public List<Reward> getRewards() {
+    return rewards;
+  }
 }

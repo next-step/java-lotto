@@ -15,7 +15,6 @@ import lotto.Statistics;
 public class OutputView {
 
   public static final String NUMBERS_DELIMITER = ", ";
-  public static final String LAST_WEEK_LOTTO_NUMBERS_DELIMITER = ",";
   public static final String PURCHASE_COUNT_FORMAT = "%d 개를 구매했습니다.";
   public static final String LOTTO_NUMBERS_FORMAT = "[ %s ]";
   public static final String LOTTO_REWARDS_FORMAT = "%d개 일치 (%d원) - %d개";
@@ -48,19 +47,15 @@ public class OutputView {
     printBlankLine();
   }
 
-  public static void printStatistics(Lottos lottos, String lastWeekWinLottoNumber) {
+  public static void printStatistics(Statistics statistics) {
     printBlankLine();
-    Lotto lastWeekWinLotto = getLastWeekWinLotto(lastWeekWinLottoNumber);
-    Statistics statistics = new Statistics(lottos, lastWeekWinLotto);
-    Rewards rewards = statistics.getRewards();
-    printRewards(rewards.getReward());
+    printRewards(statistics.getRewards());
     printYield(statistics.getYield());
-
   }
 
   private static void printYield(double yield) {
     String word = yield > 1 ? PROFIT : LOSS;
-    System.out.printf(INCOME_RATE_FORMAT,yield,word);
+    System.out.printf(INCOME_RATE_FORMAT, yield, word);
   }
 
   private static void printRewards(List<Reward> rewards) {
@@ -71,15 +66,6 @@ public class OutputView {
     System.out.printf(LOTTO_REWARDS_FORMAT, reward.getBoundaryCount(), reward.getPrize(),
         reward.getMatchedCount());
     printBlankLine();
-  }
-
-  private static Lotto getLastWeekWinLotto(String lastWeekWinLottoNumber) {
-    List<Integer> numbers = Arrays
-        .stream(lastWeekWinLottoNumber.split(LAST_WEEK_LOTTO_NUMBERS_DELIMITER))
-        .map(number -> number.trim())
-        .map(Integer::parseInt)
-        .collect(Collectors.toList());
-    return new Lotto(numbers);
   }
 
 }

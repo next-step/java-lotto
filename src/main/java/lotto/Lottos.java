@@ -29,4 +29,11 @@ public class Lottos {
     return lottos;
   }
 
+  public int getSameNumberCount(Lotto lastWeekWinLotto, int boundaryCount) {
+    return (int) lottos.stream()
+        .map(lotto -> lotto.countSameNumber(lastWeekWinLotto))
+        .filter(value -> value == boundaryCount)
+        .count();
+  }
+
 }
