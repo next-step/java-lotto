@@ -32,6 +32,15 @@ public class NumberElement {
         return new NumberElement(value + element.value);
     }
 
+    public boolean isZero() {
+        return value == 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,9 +52,5 @@ public class NumberElement {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    public boolean isZero() {
-        return value == 0;
     }
 }

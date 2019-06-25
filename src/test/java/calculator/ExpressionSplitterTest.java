@@ -93,7 +93,8 @@ public class ExpressionSplitterTest {
                 Arguments.of("//.\n1.2.3", 3),
                 Arguments.of("//+\n1+2", 2),
                 Arguments.of("//*\n1*", 1),
-                Arguments.of("//-\n-1", 2)
+                Arguments.of("//-\n-1", 2),
+                Arguments.of("//-\n1-2-3", 3)
         );
     }
 }
