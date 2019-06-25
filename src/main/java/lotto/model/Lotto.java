@@ -9,7 +9,18 @@ public class Lotto {
 
 
     public Lotto(List<Integer> numbers) {
+        validate(numbers);
         this.numbers = numbers;
+    }
+
+    private void validate(List<Integer> numbers) {
+        if(!hasSixNumbers(numbers)){
+           throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean hasSixNumbers(List<Integer> numbers) {
+        return numbers.size() == 6;
     }
 
 
