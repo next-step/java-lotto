@@ -20,8 +20,4 @@ public class LottoGenerator {
 
     return new Lottos(lottos);
   }
-
-  public Lotto generate(List<Integer> winningNumbers) {
-    return new Lotto(winningNumbers);
-  }
 }
