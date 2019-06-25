@@ -15,7 +15,7 @@ public class Lottos {
     public LottoAggregator matching(WinningNumbers winnerNumbers) {
         LottoAggregator lottoAggregator = new LottoAggregator();
         for (PickNumbers pickNumbers : lottoNumbers) {
-            lottoAggregator.put(pickNumbers.compare(winnerNumbers));
+            lottoAggregator.put(winnerNumbers.compare(pickNumbers));
         }
         return lottoAggregator;
     }

@@ -13,10 +13,8 @@ public class PickNumbers extends LottoNumbers{
         this.numbers = numbers;
     }
 
-    public int compare(WinningNumbers winningNumber) {
-        return Math.toIntExact(this.numbers.stream()
-                .filter(number -> winningNumber.contains(number))
-                .count());
+    public boolean contains(Integer winningNumber) {
+        return this.numbers.contains(winningNumber);
     }
 
     @Override

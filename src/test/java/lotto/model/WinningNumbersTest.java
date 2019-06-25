@@ -41,16 +41,12 @@ class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호에 포함되어 있는 경우")
-    void contains() {
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningNumbers.contains(3)).isTrue();
+    @DisplayName("당첨 번호와 일치 개수")
+    public void compareNumbers() {
+        PickNumbers pickNumbers = new PickNumbers(Arrays.asList(1, 2, 3, 9, 10, 12));
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 15));
+        assertThat(winningNumbers.compare(pickNumbers)).isEqualTo(3);
     }
 
-    @Test
-    @DisplayName("당첨 번호에 포함되어 있지 않는 경우")
-    void notContains() {
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(winningNumbers.contains(10)).isFalse();
-    }
+
 }

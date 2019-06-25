@@ -39,10 +39,16 @@ public class PickNumbersTest {
     }
 
     @Test
-    @DisplayName("당첨 번호와 일치 개수")
-    public void compareNumbers() {
-        PickNumbers lotto1 = new PickNumbers(Arrays.asList(1, 2, 3, 9, 10, 12));
-        WinningNumbers lotto2 = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 15));
-        assertThat(lotto1.compare(lotto2)).isEqualTo(3);
+    @DisplayName("당첨 번호에 포함되어 있는 경우")
+    void contains() {
+        PickNumbers pickNumbers = new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(pickNumbers.contains(3)).isTrue();
+    }
+
+    @Test
+    @DisplayName("당첨 번호에 포함되어 있지 않는 경우")
+    void notContains() {
+        PickNumbers pickNumbers = new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(pickNumbers.contains(10)).isFalse();
     }
 }
