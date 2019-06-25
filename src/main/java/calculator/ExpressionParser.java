@@ -10,8 +10,9 @@ public class ExpressionParser {
             return new NumberElementCollection(new String[0]);
         }
 
-        SeparateStringExtractor separateStringExtractor = new SeparateStringExtractor(expression);
+        ExpressionSplitter expressionSplitter = new ExpressionSplitter(expression);
+        String[] elements = expressionSplitter.split();
 
-        return new NumberElementCollection(separateStringExtractor.getExpression().split(separateStringExtractor.getSeparator()));
+        return new NumberElementCollection(elements);
     }
 }

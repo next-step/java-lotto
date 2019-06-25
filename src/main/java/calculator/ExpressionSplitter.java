@@ -3,7 +3,7 @@ package calculator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SeparateStringExtractor {
+public class ExpressionSplitter {
 
     private static final String DEFAULT_SEPARATOR_PATTERN = ":|,";
 
@@ -12,7 +12,7 @@ public class SeparateStringExtractor {
     private String expression;
 
 
-    public SeparateStringExtractor(String expression) {
+    public ExpressionSplitter(String expression) {
 
         this.separator = DEFAULT_SEPARATOR_PATTERN;
         this.expression = expression;
@@ -24,7 +24,8 @@ public class SeparateStringExtractor {
 
         if(m.find()){
             /**
-             * 추출된 구분자가 정규식 메타문자인 경우 발생 할 오류를 회피하기 위해 [Character class|https://docs.oracle.com/javase/tutorial/essential/regex/char_classes.html]로 만들어서 반환
+             * 추출된 구분자가 정규식 메타문자인 경우 발생 할 오류를 회피하기 위해
+             * [Character class|https://docs.oracle.com/javase/tutorial/essential/regex/char_classes.html]로 만들어서 반환
              */
             separator = String.format("[%s]", m.group(1));
             this.expression = m.group(2);
@@ -37,5 +38,9 @@ public class SeparateStringExtractor {
 
     public String getExpression(){
         return expression;
+    }
+
+    public String[] split() {
+        return expression.split(separator);
     }
 }
