@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottosTest {
+public class LottoResultMatcherTest {
 
     @Test
     @DisplayName("로또 맞춰보기")
@@ -17,11 +17,11 @@ public class LottosTest {
         List<PickNumbers> lottoNumbers = Arrays.asList(
                 new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 9))
         );
-        Lottos lottos = new Lottos(lottoNumbers);
+        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottoNumbers);
         WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When
-        LottoAggregator lottoAggregator = lottos.matching(winnerNumbers);
+        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winnerNumbers);
 
         //Then
         assertThat(lottoAggregator.get(LottoRank.FIRST)).isEqualTo(1);
@@ -35,11 +35,11 @@ public class LottosTest {
         List<PickNumbers> lottoNumbers = Arrays.asList(
                 new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 10))
         );
-        Lottos lottos = new Lottos(lottoNumbers);
+        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottoNumbers);
         WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When
-        LottoAggregator lottoAggregator = lottos.matching(winnerNumbers);
+        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winnerNumbers);
 
         //Then
         assertThat(lottoAggregator.get(LottoRank.SECOND)).isEqualTo(1);

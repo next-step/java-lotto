@@ -11,18 +11,18 @@ public class LottoAplication {
     public static void main(String[] args) {
 
         Order orderAmount = InputView.inputOrderAmount();
-        Lottos lottos = LottoRetailer.buyAutoPick(orderAmount);
-        ResultView.printPickedLottoNumbers(lottos);
+        LottoResultMatcher lottoResultMatcher = LottoStore.buyAutoPick(orderAmount);
+        ResultView.printPickedLottoNumbers(lottoResultMatcher);
 
-        int handPickCount = InputView.handPickCount();
-
-        List<Integer> handPickNumbers = InputView.inputHandPickNumber();
+//        int handPickCount = InputView.handPickCount();
+//
+//        List<Integer> handPickNumbers = InputView.inputHandPickNumber();
 
         List<Integer> numbers = InputView.inputWinningNumber();
         int bonusNumber = InputView.winningBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
-        LottoAggregator lottoAggregator = lottos.matching(winningNumbers);
+        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winningNumbers);
         ResultView.printResult(lottoAggregator);
     }
 }

@@ -19,15 +19,15 @@ public class Order {
     }
 
     public int getAutoPickCount() {
-        return getAvailableNumberToBuy() - handPickCount;
+        return this.getAvailableNumberToBuy() - handPickCount;
     }
 
-    private int getAvailableNumberToBuy() {
+    public int getAvailableNumberToBuy() {
         return this.orderAmount / UNIT_PRICE;
     }
 
     private void verifyHanPickCount(int handPickCount) {
-        if(getAvailableNumberToBuy() < handPickCount) {
+        if(this.getAvailableNumberToBuy() < handPickCount) {
             throw new IllegalArgumentException("그렇게는 구매할 수 없습니다. 돈을 더 내세요.");
         }
     }

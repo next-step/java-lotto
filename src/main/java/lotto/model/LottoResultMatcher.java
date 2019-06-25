@@ -3,12 +3,12 @@ package lotto.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Lottos {
+public class LottoResultMatcher {
 
     private final static String STRING_ENTER = "\n";
     private List<PickNumbers> lottoNumbers;
 
-    public Lottos(List<PickNumbers> lottos) {
+    public LottoResultMatcher(List<PickNumbers> lottos) {
         lottoNumbers = lottos;
     }
 
