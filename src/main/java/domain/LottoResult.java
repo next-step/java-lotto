@@ -45,7 +45,6 @@ public class LottoResult {
 
         revenue = total / lottoPrice;
         ResultView.printResult(getPercentOfRevenue(), makeListOfWinner());
-
     }
 
     // 계산된 수익율을 퍼센티지로 표현 (소수 2자리까지/ 단, 소수 한자리 일경우 한자리만 표현되도록 )
@@ -57,7 +56,6 @@ public class LottoResult {
         if (result[1].length() > SUBSTR_POINT_ONE)
             percent = result[0] + "." + result[1].substring(0, SUBSTR_POINT_TWO);
         return Double.parseDouble(percent);
-
     }
 
     // hashmap 활용하여 등수별 count 수를 저장 (출력용)
