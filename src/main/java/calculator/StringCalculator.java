@@ -1,5 +1,7 @@
 package calculator;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,11 +55,7 @@ public class StringCalculator {
     }
 
     private boolean isEmptyOrNull(String val) {
-        if (val == null) {
-            return true;
-        }
-        val = removalWhitespace(val);
-        return val.isEmpty();
+        return StringUtils.isBlank(val);
     }
 
     public static void main(String[] args) {
