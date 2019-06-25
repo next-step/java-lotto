@@ -30,7 +30,7 @@ public class LottoTest {
     List<Lotto> myLottos = Arrays.asList(new Lotto(lottoNumbers));
 
     List<Integer> matchingCount = myLottos.stream()
-            .mapToInt(lotto -> lotto.hasHowMany(winningNumbers))
+            .mapToInt(lotto -> lotto.getCountOfMatchingNumbers(winningNumbers))
             .boxed()
             .collect(Collectors.toList());
 

@@ -30,7 +30,7 @@ public class Lottos {
 
     public List<Integer> getCountOfMatchingNumbers(List<Integer> winningNumbers) {
         return this.lottos.stream()
-                .mapToInt(lotto -> lotto.hasHowMany(winningNumbers))
+                .mapToInt(lotto -> lotto.getCountOfMatchingNumbers(winningNumbers))
                 .boxed()
                 .collect(toList());
     }
