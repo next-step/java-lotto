@@ -9,8 +9,7 @@ public class LottoLauncher {
   public static void start() {
     Scanner scanner = new Scanner(System.in);
 
-    InputView.askPurchaseAmount();
-    int purchaseAmount = scanner.nextInt();
+    int purchaseAmount = InputView.askPurchaseAmount();
     int lottoQuantity = new Money(purchaseAmount).getAvailableQuantity();
     Quantity quantity = new Quantity(lottoQuantity);
     OutputView.printPurchasedLottoQuantity(quantity);
@@ -18,8 +17,7 @@ public class LottoLauncher {
     Lottos purchasedLottos = Store.buyLottos(quantity);
     OutputView.printPurchasedLottosNumber(purchasedLottos);
 
-    InputView.askLastWeekWinLottoNumber();
-    String lastWeekWinLottoNumber = scanner.next();
+    String lastWeekWinLottoNumber = InputView.askLastWeekWinLottoNumber();
 
     OutputView.printStatistics(purchasedLottos, lastWeekWinLottoNumber);
   }
