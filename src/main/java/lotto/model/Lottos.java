@@ -2,9 +2,11 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
+    private final static String STRING_ENTER = "\n";
     private List<PickNumbers> pickNumbers;
 
     public Lottos() {
@@ -22,5 +24,13 @@ public class Lottos {
 
     public void merge(Lottos handPickLottos) {
         this.pickNumbers.addAll(handPickLottos.getPickNumbers());
+    }
+
+    @Override
+    public String toString() {
+        List<String> lottos = this.pickNumbers.stream()
+                .map(pickNumbers -> pickNumbers.toString())
+                .collect(Collectors.toList());
+        return String.join(STRING_ENTER, lottos);
     }
 }

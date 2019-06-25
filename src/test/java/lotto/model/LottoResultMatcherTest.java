@@ -14,10 +14,10 @@ public class LottoResultMatcherTest {
     public void checkLotts() {
 
         //Given
-        List<PickNumbers> lottoNumbers = Arrays.asList(
-                new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 9))
-        );
-        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottoNumbers);
+        Lottos lottos = new Lottos();
+        lottos.add(new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 9)));
+
+        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
         WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When
@@ -32,10 +32,10 @@ public class LottoResultMatcherTest {
     public void checkBonusLotts() {
 
         //Given
-        List<PickNumbers> lottoNumbers = Arrays.asList(
-                new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 10))
-        );
-        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottoNumbers);
+        Lottos lottos = new Lottos();
+        lottos.add(new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 10)));
+
+        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
         WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When

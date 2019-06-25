@@ -10,13 +10,15 @@ public class LottoAplication {
 
     public static void main(String[] args) {
 
-        Order orderAmount = InputView.inputOrderAmount();
-        LottoResultMatcher lottoResultMatcher = LottoStore.buyAutoPick(orderAmount);
-        ResultView.printPickedLottoNumbers(lottoResultMatcher);
+        Order order = InputView.inputOrder();
+        Lottos handPickLottos = InputView.askHandPickLottoNumber(order.getHandPickCount());
 
-//        int handPickCount = InputView.handPickCount();
-//
-//        List<Integer> handPickNumbers = InputView.inputHandPickNumber();
+        LottoStore lottoStore = new LottoStore(order, handPickLottos);
+        Lottos lottos = lottoStore.buyAutoPick();
+
+        ResultView.printPickedLottoNumbers(lottos);
+
+        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
 
         List<Integer> numbers = InputView.inputWinningNumber();
         int bonusNumber = InputView.winningBonusNumber();
