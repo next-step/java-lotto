@@ -1,7 +1,7 @@
 package calculator;
 
 public class ExpressionParser {
-    public static NumberElements parse(String expression) {
-        return new NumberElements(expression.split(":"));
+    public static NumberElementCollection parse(String expression) {
+        return new NumberElementCollection(expression.split(":"));
     }
 }

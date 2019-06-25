@@ -2,11 +2,11 @@ package calculator;
 
 import java.util.List;
 
-public class NumberElements {
+public class NumberElementCollection {
 
     String[] elements;
 
-    public NumberElements(String[] elements){
+    public NumberElementCollection(String[] elements){
         this.elements = elements;
     }
 

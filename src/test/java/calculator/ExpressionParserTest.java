@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,17 +17,32 @@ public class ExpressionParserTest {
     @MethodSource("provideParseWithColonResource")
     void parseWithColon(String expression, int expectSize) {
 
-        NumberElements elements = ExpressionParser.parse(expression);
+        NumberElementCollection elements = ExpressionParser.parse(expression);
 
         assertThat(elements.size()).isEqualTo(expectSize);
     }
-
-
 
     private static Stream<Arguments> provideParseWithColonResource() {
         return Stream.of(
                 Arguments.of("1:2", 2),
                 Arguments.of("1:2:3", 3)
+        );
+    }
+
+    @DisplayName("콜론으로 시작하거나 종료하는 표현식")
+    @ParameterizedTest
+    @MethodSource("provideParseWithColonStartOrEnd")
+    void parseWithColonStartOrEnd(String expression, int expectSize) {
+
+        NumberElementCollection elements = ExpressionParser.parse(expression);
+
+        assertThat(elements.size()).isEqualTo(expectSize);
+    }
+
+    private static Stream<Arguments> provideParseWithColonStartOrEnd() {
+        return Stream.of(
+                Arguments.of(":2", 1),
+                Arguments.of("1:2:", 2)
         );
     }
 }
