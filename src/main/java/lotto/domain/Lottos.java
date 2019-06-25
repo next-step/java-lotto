@@ -31,7 +31,10 @@ public class Lottos {
 
     private List<Lotto> buildManualLotto(List<String> manualNumbers) {
 
-        return manualNumbers.stream().map(LottoParser::parse).map(Lotto::new).collect(Collectors.toList());
+        return manualNumbers.stream()
+                .map(LottoParser::parse)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 
     private List<Lotto> generateAutoLotto(LottosGenerator lottosGenerator, int autoCount) {
