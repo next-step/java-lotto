@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
 
-  public static final int price = 1000;
+  public static final int price = 1_000;
   private final List<Integer> generatedNumbers;
 
   public Lotto(List<Integer> generatedNumbers) {
