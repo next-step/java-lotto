@@ -41,13 +41,13 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
     
-    @Override
-    public String toString() {
-        return "\n(" + lottoNumbers + ")";
-    }
-    
     public boolean haveBonusNumber(BonusNumber bonusNumber) {
         LottoNumber bonusLottoNumber = bonusNumber.getLottoNumber();
         return lottoNumbers.contains(bonusLottoNumber);
+    }
+    
+    @Override
+    public String toString() {
+        return "\n(" + lottoNumbers + ")";
     }
 }
