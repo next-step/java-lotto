@@ -12,17 +12,15 @@ public class WinnerLotto {
     private static final String WIN_NUMBER_DELIMITER = ",";
     private static final String NUMBER_REGEX = "^[0-9]+$";
 
-    private String inputNumbers;
     private List<Integer> numbers;
 
     public WinnerLotto(String inputNumbers) {
         validateInputStringNumbers(inputNumbers);
-        this.inputNumbers = inputNumbers;
-        this.numbers = winNumbers();
+        this.numbers = winNumbers(inputNumbers);
     }
 
-    private List<Integer> winNumbers() {
-        String[] strNumbers = this.inputNumbers.split(WIN_NUMBER_DELIMITER);
+    private List<Integer> winNumbers(String inputNumbers) {
+        String[] strNumbers = inputNumbers.split(WIN_NUMBER_DELIMITER);
         List<Integer> numbers = new ArrayList<>();
         for (int index = 0; index < strNumbers.length; index++) {
             numbers.add(Integer.parseInt(strNumbers[index]));
