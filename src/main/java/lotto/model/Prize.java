@@ -4,40 +4,29 @@ import java.util.Arrays;
 
 public enum Prize {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    NONE(0, 0);
+    FIRST(6, false, Money.won(2_000_000_000)),
+    SECOND(5, true, Money.won(30_000_000)),
+    THIRD(5, false, Money.won(1_500_000)),
+    FOURTH(4, false, Money.won(50_000)),
+    FIFTH(3, false, Money.won(5_000)),
+    NONE(0, false, Money.ZERO);
 
     private final int matchCount;
-    private final long money;
+    private final boolean existBonus;
+    private final Money money;
 
-    Prize(int matchCount, int money) {
+    Prize(int matchCount, boolean existBonus, Money money) {
         this.matchCount = matchCount;
+        this.existBonus = existBonus;
         this.money = money;
     }
 
-    public static Prize of(int matchCount, boolean existBonus) {
+    static Prize of(int matchCount, boolean existBonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.isMatchPrize(matchCount, existBonus))
+                .filter(prize -> prize.matchCount == matchCount && prize.existBonus == existBonus)
                 .findFirst()
-                .orElse(Prize.NONE);
+                .orElse(NONE);
     }
 
-    private boolean isMatchPrize(int matchCount, boolean existBonus) {
-        if (this == SECOND) {
-            return this.getMatchCount() == matchCount && existBonus;
-        }
-        return this.getMatchCount() == matchCount;
-    }
 
-    public long getMoney() {
-        return money;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
 }

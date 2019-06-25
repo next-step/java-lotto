@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final Money ZERO = Money.won(0);
     private long amount;
 
     private Money(long amount) {

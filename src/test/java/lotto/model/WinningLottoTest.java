@@ -21,7 +21,7 @@ public class WinningLottoTest {
 
     @DisplayName("보너스 번호가 중복일 시 에러")
     @Test
-    void generateDublicatedBonusNumberThenFail() {
+    void generateDuplicateBonusNumberThenFail() {
         String numbers = "1,2,3,4,5,6";
         int bonus = 6;
         assertThatExceptionOfType(DuplicateLottoNumberException.class)
