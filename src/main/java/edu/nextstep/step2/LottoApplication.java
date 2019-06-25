@@ -1,5 +1,12 @@
 package edu.nextstep.step2;
 
+import edu.nextstep.step2.utils.RandomNumberUtils;
+import edu.nextstep.step2.view.InputView;
+import edu.nextstep.step2.domain.LotteryNumber;
+import edu.nextstep.step2.domain.Lotto;
+import edu.nextstep.step2.domain.Money;
+import edu.nextstep.step2.view.ResultView;
+
 import java.util.List;
 
 /**

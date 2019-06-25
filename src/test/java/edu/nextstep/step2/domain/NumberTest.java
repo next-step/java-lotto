@@ -1,9 +1,7 @@
-package edu.nextstep.step2;
+package edu.nextstep.step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -24,7 +22,7 @@ public class NumberTest {
     @Test
     void validNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           Number number = new Number(0);
+            Number number = new Number(0);
         });
     }
 

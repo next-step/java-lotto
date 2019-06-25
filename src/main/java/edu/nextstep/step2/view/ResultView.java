@@ -1,4 +1,10 @@
-package edu.nextstep.step2;
+package edu.nextstep.step2.view;
+
+import edu.nextstep.step2.Operator;
+import edu.nextstep.step2.domain.ExtractionNumber;
+import edu.nextstep.step2.domain.Lotto;
+import edu.nextstep.step2.domain.Money;
+import edu.nextstep.step2.domain.Number;
 
 import java.util.*;
 import java.util.stream.Collectors;

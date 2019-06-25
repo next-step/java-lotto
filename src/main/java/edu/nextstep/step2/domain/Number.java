@@ -1,4 +1,4 @@
-package edu.nextstep.step2;
+package edu.nextstep.step2.domain;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>

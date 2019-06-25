@@ -1,4 +1,4 @@
-package edu.nextstep.step2;
+package edu.nextstep.step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

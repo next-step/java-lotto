@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * project      : java-lotto
  * create date  : 2019-06-25 01:53
  */
-public enum  Operator {
+public enum Operator {
 
     THREE(3, 5000),
     FOUR(4, 50000),

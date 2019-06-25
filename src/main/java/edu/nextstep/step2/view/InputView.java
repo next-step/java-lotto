@@ -1,4 +1,8 @@
-package edu.nextstep.step2;
+package edu.nextstep.step2.view;
+
+import edu.nextstep.step2.domain.LotteryNumber;
+import edu.nextstep.step2.domain.Money;
+import edu.nextstep.step2.domain.Number;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +48,7 @@ public class InputView {
 
     private static List<Number> splitLotteryNumber(String lottery) {
 
-        return Arrays.stream(lottery.replaceAll(SPACE,"").split(COMMA))
+        return Arrays.stream(lottery.replaceAll(SPACE, "").split(COMMA))
                 .filter(splitString -> !"".equals(splitString))
                 .map(Integer::parseInt)
                 .map(number -> new Number(number))
