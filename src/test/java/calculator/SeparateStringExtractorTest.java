@@ -18,7 +18,7 @@ public class SeparateStringExtractorTest {
     @MethodSource("provideExtractionSeparator")
     void extractionSeparator(String expression, String expectSeparator) {
 
-        String separator = SeparateStringExtractor.execute(expression);
+        String separator = new SeparateStringExtractor(expression).getSeparator();
 
         assertThat(separator).isEqualTo(expectSeparator);
     }
