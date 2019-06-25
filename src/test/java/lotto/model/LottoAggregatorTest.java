@@ -20,6 +20,7 @@ public class LottoAggregatorTest {
     public void test() {
         LottoAggregator lottoAggregator = new LottoAggregator();
         lottoAggregator.put(LottoRank.FOURTH);
-        assertThat(lottoAggregator.getRateOfReturn()).isEqualTo(50);
+        lottoAggregator.put(LottoRank.THIRD);
+        assertThat(lottoAggregator.getRateOfReturn()).isEqualTo(775);
     }
 }

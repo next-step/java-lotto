@@ -21,14 +21,14 @@ public class LottoAggregator {
     }
 
     public double getRateOfReturn() {
-        int totalReturnMoney = getTotalReturnMoney();
+        Long totalReturnMoney = getTotalReturnMoney();
         int orderMoney = getOrderMoney();
         return totalReturnMoney / orderMoney;
     }
 
-    private int getTotalReturnMoney() {
+    private Long getTotalReturnMoney() {
         return lottoResult.keySet().stream()
-                .mapToInt(rank -> rank.getPrizeMoney() * this.get(rank))
+                .mapToLong(rank -> rank.getPrizeMoney() * this.get(rank))
                 .sum();
     }
 
