@@ -7,6 +7,10 @@ public class ExpressionParser {
             return new NumberElementCollection(new String[0]);
         }
 
-        return new NumberElementCollection(expression.split(":"));
+        if(expression.indexOf(":") >= 0){
+            return new NumberElementCollection(expression.split(":"));
+        }
+
+        return new NumberElementCollection(expression.split(","));
     }
 }
