@@ -6,6 +6,10 @@ public class LottoTicket {
     private List<Integer> ticket;
 
     public LottoTicket(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("로또의 숫자는 6개이여야 합니다.");
+        }
+
         this.ticket = numbers;
     }
 
