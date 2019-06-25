@@ -16,4 +16,10 @@ public class LottoStatistics {
             Collectors.counting()));
   }
 
+  public static double profitRate(int price, Map<Rank, Long> ranks) {
+    return ranks.entrySet()
+        .stream()
+        .mapToLong(rank -> rank.getKey().getWinningMoney() * rank.getValue())
+        .sum() / price;
+  }
 }
