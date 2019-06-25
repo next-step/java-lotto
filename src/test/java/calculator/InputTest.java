@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -20,9 +19,7 @@ public class InputTest {
     }
 
     @ParameterizedTest
-    @NullSource
-    @EmptySource
-    @ValueSource(strings = {"", "   "})
+    @NullAndEmptySource
     @DisplayName("사용자 입력값이 빈 값(null, '')인지 확인")
     void isEmpty(String value) {
         Input input = new Input(value);
