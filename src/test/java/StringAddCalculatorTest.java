@@ -18,4 +18,16 @@ public class StringAddCalculatorTest {
         assertThat(cal.add(null)).isEqualTo(0);
         assertThat(cal.add("")).isEqualTo(0);
     }
+
+    @Test
+    public void testAddCommaDelimiter() throws Exception {
+        assertThat(cal.add("1,2")).isEqualTo(3);
+    }
+
+    @Test
+    public void testAddCommaOrColonDelimiter() throws Exception {
+        assertThat(cal.add("1,2:3")).isEqualTo(6);
+    }
+
+
 }
