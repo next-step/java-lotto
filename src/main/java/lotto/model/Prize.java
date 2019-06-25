@@ -23,10 +23,20 @@ public enum Prize {
 
     static Prize of(int matchCount, boolean existBonus) {
         return Arrays.stream(Prize.values())
-                .filter(prize -> prize.matchCount == matchCount && prize.existBonus == existBonus)
+                .filter(prize -> prize.isMatchPrize(matchCount, existBonus))
                 .findFirst()
                 .orElse(NONE);
     }
 
+    private boolean isMatchPrize(int matchCount, boolean existBonus) {
+        return isMatchCount(matchCount) && hasBonus(existBonus);
+    }
 
+    private boolean isMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
+    private boolean hasBonus(boolean existBonus) {
+        return this.existBonus == existBonus;
+    }
 }
