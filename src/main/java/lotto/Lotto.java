@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -8,14 +9,32 @@ public class Lotto {
 
   private LottoNumbers lottoNumbers;
 
+  public static final String LAST_WEEK_LOTTO_NUMBERS_DELIMITER = ",";
+
   public Lotto() {
     this.lottoNumbers = new NumbersBox().getLottoNumbers();
   }
 
   public Lotto(List<Integer> autoNumber) {
-    lottoNumbers = new LottoNumbers(autoNumber.stream()
+    lottoNumbers = makeLottoNumbers(autoNumber);
+  }
+
+  public Lotto(String input) {
+    lottoNumbers = makeLottoNumbers(getLastWeekWinLotto(input));
+  }
+
+  private LottoNumbers makeLottoNumbers(List<Integer> autoNumber) {
+    return new LottoNumbers(autoNumber.stream()
         .map(LottoNumber::new)
         .collect(Collectors.toList()));
+  }
+
+  private List<Integer> getLastWeekWinLotto(String lastWeekWinLottoNumber) {
+    return Arrays
+        .stream(lastWeekWinLottoNumber.split(LAST_WEEK_LOTTO_NUMBERS_DELIMITER))
+        .map(number -> number.trim())
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
   }
 
   public LottoNumbers getNumbers() {

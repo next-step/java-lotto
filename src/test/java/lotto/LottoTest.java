@@ -17,9 +17,15 @@ class LottoTest {
   }
 
   @Test
-  public void 수동으로입력어로_lotto를_만들수있다() {
+  public void 수동입력으로_lotto를_만들수있다_List() {
     List<Integer> autoNumber = makeList("1,2,3,4,5,6");
     assertThat(new Lotto(autoNumber)).isEqualTo(new Lotto(autoNumber));
+  }
+
+  @Test
+  public void 수동입력으로_lotto를_만들수있다_String() {
+    String input = "1,2,3,4,5,6";
+    assertThat(new Lotto(input)).isEqualTo(new Lotto(input));
   }
 
   @Test
