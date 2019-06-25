@@ -14,7 +14,7 @@ class StringToLottoTransferTest {
         // when
         final Lotto lotto = StringToLottoTransfer.transform("1,2,3,4,5,6");
 
-        // thenK
+        // then
         assertThat(lotto).isNotNull();
     }
 }
