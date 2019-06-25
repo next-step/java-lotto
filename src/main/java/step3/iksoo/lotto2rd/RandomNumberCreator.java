@@ -1,13 +1,10 @@
 package step3.iksoo.lotto2rd;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.toCollection;
 
 public class RandomNumberCreator {
     public static final int START_NUMBER = 1;
@@ -23,7 +20,7 @@ public class RandomNumberCreator {
     private static void insertSequentialNumbers() {
         shuffleNum = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
                 .boxed()
-                .collect(toCollection(ArrayList::new));
+                .collect(Collectors.toList());
     }
 
     private void shuffleNumbers() {

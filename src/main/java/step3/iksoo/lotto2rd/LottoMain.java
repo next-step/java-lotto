@@ -10,14 +10,15 @@ public class LottoMain {
     private static int orderPrice;
 
     public static void main(String[] args) {
-        Lottoes lottos = new Lottoes(buyLotto(lottoOrder()));
-        OutputView.printLottos(lottos.getLottoes());
+        Lottoes lottoes = new Lottoes(buyLotto(lottoOrder()));
+        OutputView.printLottos(lottoes.getLottoes());
 
         List<Integer> winNumbers = getKnowWinnerNumbers();
         int bonusBall = getKnowBonusBall();
 
-        int amountPrize = OutputView.printResult(lottos.checkLotteryWin(winNumbers, bonusBall));
-        OutputView.printRateProfit(lottos.calculateRateProfit(amountPrize, orderPrice));
+        MatchResult matchResult = new MatchResult(lottoes.checkLotteryWin(winNumbers, bonusBall));
+        OutputView.printResult(matchResult.getMatchResult());
+        OutputView.printRateProfit(matchResult.calculateRateProfit(orderPrice));
     }
 
     private static int lottoOrder() {

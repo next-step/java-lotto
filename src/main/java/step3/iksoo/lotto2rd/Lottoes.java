@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 public class Lottoes {
     private List<Lotto> lottoes;
 
-    Lottoes(List<Lotto> lottoList) {
-        this.lottoes = lottoList;
+    Lottoes(List<Lotto> lottoes) {
+        this.lottoes = lottoes;
     }
 
     public List<Lotto> getLottoes() {
@@ -32,9 +32,5 @@ public class Lottoes {
                 .forEach(rank -> matchResult.put(rank, matchResult.get(rank) + 1));
 
         return matchResult;
-    }
-
-    public double calculateRateProfit(int amoutPrize, int orderPrice) {
-        return (double) amoutPrize / orderPrice;
     }
 }
