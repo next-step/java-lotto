@@ -13,21 +13,23 @@ public class LottoTest {
     @Test
     @DisplayName("입력한 당첨번호와 3개일치 테스트")
     void lottoWinning() {
+        boolean matchBonus = false;
         Lotto lotto = new Lotto(Arrays.asList(new Integer[]{6, 13, 23, 29, 35, 42}));
         String LastWeekWinnerNumber = "1,2,3,13,35,42";
-        lotto.winnerCheck(LastWeekWinnerNumber);
+        lotto.winnerCheck(LastWeekWinnerNumber, "36");
         assertThat(lotto.getWinnerNumberCount()).isEqualTo(3);
-        assertThat(LottoEnum.findByPrice(lotto.getWinnerNumberCount()).price()).isEqualTo(5000);
+        assertThat(LottoEnum.findByPrice(lotto.getWinnerNumberCount(), matchBonus).price()).isEqualTo(5000);
     }
 
     @Test
     @DisplayName("입력한 당첨번호와 6개일치 테스트")
     void lottoWinningAll() {
+        boolean matchBonus = false;
         Lotto lotto = new Lotto(Arrays.asList(new Integer[]{6, 13, 23, 29, 35, 42}));
         String LastWeekWinnerNumber = "6,13,23,29,35,42";
-        lotto.winnerCheck(LastWeekWinnerNumber);
+        lotto.winnerCheck(LastWeekWinnerNumber, "36");
         assertThat(lotto.getWinnerNumberCount()).isEqualTo(6);
-        assertThat(LottoEnum.findByPrice(lotto.getWinnerNumberCount()).price()).isEqualTo(20000000);
+        assertThat(LottoEnum.findByPrice(lotto.getWinnerNumberCount(), matchBonus).price()).isEqualTo(200000000);
     }
 
     @Test
