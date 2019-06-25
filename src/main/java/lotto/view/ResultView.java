@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.model.LottoAggregator;
 import lotto.model.LottoRank;
 import lotto.model.LottoResultMatcher;
+import lotto.model.Lottos;
 
 import java.util.Arrays;
 
@@ -12,8 +13,8 @@ public class ResultView {
     static final String RESULT_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %f 입니다.";
 
-    public static void printPickedLottoNumbers(LottoResultMatcher lottoResultMatcher) {
-        System.out.println(lottoResultMatcher.toString());
+    public static void printPickedLottoNumbers(Lottos lottos) {
+        System.out.println(lottos.toString());
     }
 
     public static void printResult(LottoAggregator lottoAggregator) {
