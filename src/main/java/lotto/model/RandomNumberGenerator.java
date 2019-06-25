@@ -18,6 +18,7 @@ public class RandomNumberGenerator implements NumberGenerator {
             .distinct()
             .limit(6)
             .boxed()
+            .sorted()
             .collect(Collectors.toList());
   }
 }
