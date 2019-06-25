@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -44,5 +46,15 @@ public class ExpressionParserTest {
                 Arguments.of(":2", 1),
                 Arguments.of("1:2:", 2)
         );
+    }
+
+    @DisplayName("빈값 입력 테스트")
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"  ", "\t"})
+    void parseEmptyValues(String expression) {
+        NumberElementCollection elements = ExpressionParser.parse(expression);
+
+        assertThat(elements.size()).isEqualTo(0);
     }
 }
