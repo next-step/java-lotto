@@ -7,9 +7,14 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 
+  private static final int LOTTO_NUMBER_COUNT = 6;
+
   List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+    }
     this.lottoNumbers = lottoNumbers;
     Collections.sort(lottoNumbers);
   }
