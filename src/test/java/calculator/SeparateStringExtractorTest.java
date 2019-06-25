@@ -27,8 +27,8 @@ public class SeparateStringExtractorTest {
         return Stream.of(
                 Arguments.of("//;\n", ";"),
                 Arguments.of("//+\n", "+"),
-                Arguments.of("//**\n", "**"),
-                Arguments.of("//;+\n", ";+")
+                Arguments.of("//*\n", "*"),
+                Arguments.of("//-\n", "-")
         );
     }
 }
