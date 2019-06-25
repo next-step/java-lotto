@@ -1,8 +1,8 @@
 package lotto.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class Lottos {
@@ -21,13 +21,11 @@ public class Lottos {
         return Lotto.price * this.lottos.size();
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     @Override
     public String toString() {
-        return this.lottos.stream().map(lotto -> lotto.toString()).collect(Collectors.joining(System.lineSeparator()));
+        return this.lottos.stream()
+                .map(Lotto::toString)
+                .collect(joining(System.lineSeparator()));
     }
 
     public List<Integer> getCountOfMatchingNumbers(List<Integer> winningNumbers) {

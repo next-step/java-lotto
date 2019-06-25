@@ -29,7 +29,7 @@ public class LottosTest {
 
     @Test
     @DisplayName("로또를 사는데 사용한 금액")
-    void getUsedAmount() {
+    void getBuyingMoney() {
         assertThat(lottos.getBuyingMoney()).isEqualTo(2000);
     }
 
@@ -39,6 +39,7 @@ public class LottosTest {
         List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
         List<Integer> counts = this.lottos.getCountOfMatchingNumbers(winningNumbers);
 
-        System.out.println(counts);
+        assertThat(counts.size()).isEqualTo(2);
+        assertThat(counts).contains(6, 4);
     }
 }
