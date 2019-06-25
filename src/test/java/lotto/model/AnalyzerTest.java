@@ -29,7 +29,7 @@ public class AnalyzerTest {
         Report report = analyzer.analyze(lottos);
         Map<Prize, Integer> status = report.getPrizeStatus();
 
-        assertThat(status.get(Prize.valueOf(5))).isEqualTo(1);
+        assertThat(status.get(Prize.SECOND)).isEqualTo(1);
     }
 
     @Test
