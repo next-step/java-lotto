@@ -2,6 +2,7 @@ package calculator;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class StringCalculator {
@@ -9,6 +10,7 @@ public class StringCalculator {
     private static final String REGEX_SPLIT_STRING = "[:,]";
     private static final String CUSTOM_SEPARATOR_PREFIX = "//";
     private static final String CUSTOM_SEPARATOR_SUFFIX = "\n";
+    private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\\n(.*)";
     private static final String EMPTY_STRING = "";
     private static final String STRING_FORMAT = "%s|%s";
     private static final int ZERO = 0;
@@ -25,11 +27,11 @@ public class StringCalculator {
     }
 
     private void validate(String string) {
-        if (isNegativeNumber(string))
+        if (hasNegativeNumber(string))
             throw new IllegalArgumentException();
     }
 
-    private boolean isNegativeNumber(String string) {
+    private boolean hasNegativeNumber(String string) {
         return string.contains("-");
     }
 
@@ -52,9 +54,8 @@ public class StringCalculator {
     }
 
     private boolean hasCustomSeparator(String string) {
-        if (string.contains(CUSTOM_SEPARATOR_PREFIX) && string.contains(CUSTOM_SEPARATOR_SUFFIX)) {
-            return string.indexOf(CUSTOM_SEPARATOR_PREFIX) < string.indexOf(CUSTOM_SEPARATOR_SUFFIX);
-        }
-        return false;
+        return Pattern.compile(CUSTOM_SEPARATOR_REGEX)
+                .matcher(string)
+                .find();
     }
 }
