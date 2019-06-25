@@ -1,7 +1,8 @@
 package lotto.view;
 
+import lotto.model.Lottos;
 import lotto.model.Order;
-import lotto.model.WinningNumbers;
+import lotto.model.PickNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,16 +13,10 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static Order inputOrderAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        scanner = new Scanner(System.in);
-//        return new Order(scanner.nextInt());
-        int handPickCount = handPickCount();
-        for (int i = 0; i < handPickCount; i++) {
-
-        }
-
-        return null;
+    public static Order inputOrder() {
+        Integer amount = askAmount();
+        int handPickCount = askhandPickCount();
+        return new Order(amount, handPickCount);
     }
 
 
@@ -31,11 +26,30 @@ public class InputView {
         return splitNumbers(scanner.nextLine());
     }
 
-
-
     public static int winningBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    private static Integer askAmount() {
+        System.out.println("구입금액을 입력해 주세요.");
+        scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    public static Lottos askHandPickLottoNumber(int handPickCount) {
+        Lottos lottos = new Lottos();
+        for (int i = 0; i < handPickCount; i++) {
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+            scanner = new Scanner(System.in);
+            lottos.add(new PickNumbers(splitNumbers(scanner.nextLine())));
+        }
+        return lottos;
+    }
+
+    private static int askhandPickCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextInt();
     }
 
@@ -45,16 +59,4 @@ public class InputView {
                 .boxed()
                 .collect(Collectors.toList());
     }
-
-    private static List<Integer> inputHandPickNumber() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        scanner = new Scanner(System.in);
-        return splitNumbers(scanner.nextLine());
-    }
-
-    private static int handPickCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
-    }
-
 }

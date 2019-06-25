@@ -18,6 +18,10 @@ public class Order {
         this.handPickCount = handPickCount;
     }
 
+    public int getHandPickCount() {
+        return handPickCount;
+    }
+
     public int getAutoPickCount() {
         return this.getAvailableNumberToBuy() - handPickCount;
     }
