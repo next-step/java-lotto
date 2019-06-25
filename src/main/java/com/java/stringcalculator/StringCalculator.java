@@ -7,7 +7,7 @@ public class StringCalculator {
 	static final String CUSTOM_EXPRESSSION = "//(.)\n(.*)";
 	static final Pattern pattern = Pattern.compile(CUSTOM_EXPRESSSION);
 
-	public static int calculator(String input) {
+	public int calculator(String input) {
 		if (input == null || input.isEmpty()) {
 			return 0;
 		}
@@ -20,7 +20,7 @@ public class StringCalculator {
 		return sum;
 	}
 
-	public static String[] Separator(String input) {
+	private String[] Separator(String input) {
 		Matcher matcher = pattern.matcher(input);
 		if (isCustomSeparator(matcher)) {
 			return customSeparator(matcher);
@@ -28,27 +28,27 @@ public class StringCalculator {
 		return defaultSeparator(input);
 	}
 
-	public static String[] defaultSeparator(String input) {
+	private String[] defaultSeparator(String input) {
 		return input.split(",|:");
 	}
 
-	public static String[] customSeparator(Matcher matcher) {
+	private String[] customSeparator(Matcher matcher) {
 		String customDelimiter = matcher.group(1);
 		return matcher.group(2).split(customDelimiter);
 	}
 
-	public static boolean isCustomSeparator(Matcher matcher) {
+	private boolean isCustomSeparator(Matcher matcher) {
 		return matcher.find();
 	}
 
-	public static int numberValidator(String number) {
+	private int numberValidator(String number) {
 		if (isNumber(number) && isNegative(number)) {
 			throw new RuntimeException();
 		}
 		return Integer.parseInt(number);
 	}
 
-	public static boolean isNumber(String number) {
+	private boolean isNumber(String number) {
 		try {
 			Integer.parseInt(number);
 			return true;
@@ -57,7 +57,7 @@ public class StringCalculator {
 		}
 	}
 
-	public static boolean isNegative(String number) {
+	private boolean isNegative(String number) {
 		return Integer.parseInt(number) < 0 ? true : false;
 	}
 
