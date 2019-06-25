@@ -11,13 +11,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LotteryServiceTest {
+class LotteryServiceImplTest {
 
-    private LotteryService lotteryService;
+    private LotteryServiceImpl lotteryServiceImpl;
 
     @BeforeEach
     void setup() {
-        lotteryService = new LotteryService();
+        lotteryServiceImpl = new LotteryServiceImpl();
     }
 
     @Test
@@ -26,7 +26,7 @@ class LotteryServiceTest {
         // given
         final int investment = 0;
         // when
-        final List<Lottery> lottery = lotteryService.purchase(0);
+        final List<Lottery> lottery = lotteryServiceImpl.purchase(0);
         // then
         assertThat(lottery).hasSize(0);
     }
@@ -37,7 +37,7 @@ class LotteryServiceTest {
         // given
         final int investment = 14000;
         // when
-        final List<Lottery> lottery = lotteryService.purchase(investment);
+        final List<Lottery> lottery = lotteryServiceImpl.purchase(investment);
         // then
         assertThat(lottery).hasSize(14);
     }
@@ -49,7 +49,7 @@ class LotteryServiceTest {
         rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, 1);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryService.calculateEarningsRate(0, rewardMap));
+                .isThrownBy(() -> lotteryServiceImpl.calculateEarningsRate(0, rewardMap));
     }
 
     @Test
@@ -59,7 +59,7 @@ class LotteryServiceTest {
         final int investment = 5000;
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         // when
-        final double actual = lotteryService.calculateEarningsRate(investment, rewardMap);
+        final double actual = lotteryServiceImpl.calculateEarningsRate(investment, rewardMap);
         // then
         assertThat(actual).isCloseTo(0, Percentage.withPercentage(1));
     }
@@ -72,7 +72,7 @@ class LotteryServiceTest {
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, 2);
         // when
-        final double actual = lotteryService.calculateEarningsRate(investment, rewardMap);
+        final double actual = lotteryServiceImpl.calculateEarningsRate(investment, rewardMap);
         // then
         assertThat(actual).isCloseTo(10, Percentage.withPercentage(1));
     }
