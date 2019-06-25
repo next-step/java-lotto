@@ -23,7 +23,7 @@ public class WinnerLotto {
 
     private List<Integer> winNumbers() {
         String[] strNumbers = this.inputNumbers.split(WIN_NUMBER_DELIMITER);
-        numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (int index = 0; index < strNumbers.length; index++) {
             numbers.add(Integer.parseInt(strNumbers[index]));
         }
