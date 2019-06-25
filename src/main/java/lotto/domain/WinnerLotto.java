@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class WinnerLotto {
     private static final String WIN_NUMBER_DELIMITER = ",";
-    private static final String NUMBER_REGEX = "^[0-9]*$";
+    private static final String NUMBER_REGEX = "^[0-9]+$";
 
     private String inputNumbers;
     private List<Integer> numbers;

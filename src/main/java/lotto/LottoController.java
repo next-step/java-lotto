@@ -29,7 +29,7 @@ public class LottoController {
                 rankReward.getGainRankCounts()[Rank.THIRD.ordinal()]);
         view.printRankGuide(LottoResultView.FIRST_RANK_GUIDE,
                 rankReward.getGainRankCounts()[Rank.FIRST.ordinal()]);
-        
+
         view.printRevenueRatioGuide(lottoPublisher.getRevenueRatio(
                 rankReward.getRewardWinningMoney()),
                 RevenueRatio.valueOf(lottoPublisher.getRevenueRatio(
