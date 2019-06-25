@@ -20,13 +20,6 @@ public class NumbersBox {
             .collect(Collectors.toList()));
   }
 
-  public static List<LottoNumber> getLottoNumbers2() {
-    return
-        numbersBox.stream()
-            .limit(SELECT_LOTTO_NUMBER_COUNT)
-            .collect(Collectors.toList());
-  }
-
   private static void initBox() {
     fillLottoBox();
     shakeLottoBox();
