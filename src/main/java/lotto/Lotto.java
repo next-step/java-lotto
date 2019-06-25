@@ -45,8 +45,6 @@ public class Lotto {
     return lottoNumbers;
   }
 
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
