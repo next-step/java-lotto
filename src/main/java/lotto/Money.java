@@ -12,8 +12,8 @@ public class Money {
     this.money = money;
   }
 
-  public Quantity getAvailableQuantity() {
-    return new Quantity(money / LOTTO_PRICE);
+  public int getAvailableQuantity() {
+    return money / LOTTO_PRICE;
   }
 
 }

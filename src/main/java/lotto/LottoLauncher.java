@@ -11,8 +11,8 @@ public class LottoLauncher {
 
     InputView.askPurchaseAmount();
     int purchaseAmount = scanner.nextInt();
-
-    Quantity quantity = new Money(purchaseAmount).getAvailableQuantity();
+    int lottoQuantity = new Money(purchaseAmount).getAvailableQuantity();
+    Quantity quantity = new Quantity(lottoQuantity);
     OutputView.printPurchasedLottoQuantity(quantity);
 
     Lottos purchasedLottos = Store.buyLottos(quantity);
