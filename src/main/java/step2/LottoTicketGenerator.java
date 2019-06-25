@@ -11,6 +11,10 @@ public class LottoTicketGenerator {
         return new LottoTicket(pickLottoBalls(LottoBalls.getLottoBalls()));
     }
 
+    static LottoTicket issue(List<LottoNumber> lottoTicket) {
+        return new LottoTicket(lottoTicket);
+    }
+
     static List<LottoNumber> pickLottoBalls(List<Integer> lottoBalls) {
         shuffleLottoBalls(lottoBalls);
         return lottoBalls.stream()

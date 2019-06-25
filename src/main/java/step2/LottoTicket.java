@@ -2,7 +2,7 @@ package step2;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class LottoTicket {
     static final String ALERT_NUMBER_OVERLAP = "중복된 로또 번호가 존재합니다.";
@@ -24,7 +24,7 @@ public class LottoTicket {
 
     private void validationNumberOverlap(List<LottoNumber> lottoTicket) {
         long SizeOfLottoTicket = lottoTicket.stream()
-                .mapToInt(LottoNumber::getNumber)
+                .mapToLong(LottoNumber::getNumber)
                 .distinct()
                 .count();
 
@@ -33,21 +33,34 @@ public class LottoTicket {
         }
     }
 
-//    public long getNumberOfMatchedToLuckyNumber(LuckyNumber luckyNumber) {
-//        List<Integer> luckNumberLastWeek =
-//                luckyNumber.getLuckyNumber()
-//                        .stream()
-//                        .map(LottoNumber::getNumber)
-//                        .collect(Collectors.toList());
-//        return lottoTicket.stream()
-//                .map(LottoNumber::getNumber)
-//                .filter(i -> luckNumberLastWeek.contains(i))
-//                .count();
-//
-//        //TODO: Q. 이 부분을 어떻게 구현하면 좋을지 궁금합니다..
-//    }
+    public int getNumberOfMatchedToLuckyNumber(LottoTicket luckyNumber) {
+        return (int) luckyNumber.getLottoTicket().stream()
+                .filter(lottoTicket::contains)
+                .count();
+    }
 
     public List<LottoNumber> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoTicket, that.lottoTicket);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTicket);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "lottoTicket=" + lottoTicket +
+                '}';
     }
 }

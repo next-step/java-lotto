@@ -45,19 +45,4 @@ public class LottoTicketTest {
                             .collect(Collectors.toList()));
                 }).withMessageContaining(LottoTicket.AlERT_DIFFERENT_SIZE_OF_NUMBERS);
     }
-
-    @Test
-    void 당첨번호와_비교하여_같은_숫자의_개수를_반환한다() {
-        //Given
-        List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<Integer> testLottoTicket = Arrays.asList(1, 3, 5, 7, 9, 11);
-        LuckyNumber luckyNumber = LuckyNumber.from(testLuckyNumber);
-        LottoTicket lottoTicket = new LottoTicket(LottoTicketGenerator.pickLottoBalls(testLottoTicket));
-
-        //When
-        long result = lottoTicket.getNumberOfMatchedToLuckyNumber(luckyNumber);
-
-        //Then
-        assertThat(result).isEqualTo(3);
-    }
 }

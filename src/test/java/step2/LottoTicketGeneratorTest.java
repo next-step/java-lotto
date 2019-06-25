@@ -20,7 +20,7 @@ public class LottoTicketGeneratorTest {
     @Test
     void 로또번호_1부터_45까지를_생성하여_리스트에_담는다() {
         //Given
-        List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
+        List<Integer> lottoBalls = LottoBalls.getLottoBalls();
 
         //When
         //Then
@@ -46,7 +46,7 @@ public class LottoTicketGeneratorTest {
     @Test
     void 로또번호가_담긴_리스트로부터_6개의_숫자를_추출하여_리스트에_담는다() {
         //Given
-        List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
+        List<Integer> lottoBalls = LottoBalls.getLottoBalls();
 
         //When
         List<LottoNumber> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
@@ -58,7 +58,7 @@ public class LottoTicketGeneratorTest {
     @Test
     void 추출된_6개의_숫자를_오름차순으로_정렬한다() {
         //Given
-        List<Integer> lottoBalls = LottoTicketGenerator.generateLottoBalls();
+        List<Integer> lottoBalls = LottoBalls.getLottoBalls();
 
         //When
         List<LottoNumber> lotto = LottoTicketGenerator.pickLottoBalls(lottoBalls);
