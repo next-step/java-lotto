@@ -25,10 +25,10 @@ public class SeparateStringExtractorTest {
 
     private static Stream<Arguments> provideExtractionSeparator() {
         return Stream.of(
-                Arguments.of("//;\n", ";"),
-                Arguments.of("//+\n", "+"),
-                Arguments.of("//*\n", "*"),
-                Arguments.of("//-\n", "-")
+                Arguments.of("//;\n", "[;]"),
+                Arguments.of("//+\n", "[+]"),
+                Arguments.of("//*\n", "[*]"),
+                Arguments.of("//-\n", "[-]")
         );
     }
 }

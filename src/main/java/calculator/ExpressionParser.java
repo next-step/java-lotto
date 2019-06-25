@@ -2,7 +2,7 @@ package calculator;
 
 public class ExpressionParser {
 
-    private static final String SEPARATOR_PATTERN = ":|,";
+
 
     public static NumberElementCollection parse(String expression) {
 
@@ -10,6 +10,8 @@ public class ExpressionParser {
             return new NumberElementCollection(new String[0]);
         }
 
-        return new NumberElementCollection(expression.split(SEPARATOR_PATTERN));
+        SeparateStringExtractor separateStringExtractor = new SeparateStringExtractor(expression);
+
+        return new NumberElementCollection(separateStringExtractor.getExpression().split(separateStringExtractor.getSeparator()));
     }
 }
