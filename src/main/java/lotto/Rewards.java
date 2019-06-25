@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.util.Collections.unmodifiableList;
+
 import java.util.List;
 
 public class Rewards {
@@ -15,6 +17,6 @@ public class Rewards {
   }
 
   public List<Reward> getRewards() {
-    return rewards;
+    return unmodifiableList(rewards);
   }
 }

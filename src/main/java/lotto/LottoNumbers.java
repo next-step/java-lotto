@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.util.Collections.unmodifiableList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +26,7 @@ public class LottoNumbers {
   }
 
   public List<LottoNumber> getValues() {
-    return lottoNumbers;
+    return unmodifiableList(lottoNumbers);
   }
 
   public int countSameNumber(LottoNumbers numbers) {
