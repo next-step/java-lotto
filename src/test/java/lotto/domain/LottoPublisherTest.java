@@ -13,22 +13,34 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoPublisherTest {
     private LottoPublisher publisher;
-    private LottoPublisher pubchasePublisher;
+    private LottoPublisher purchasePublisher;
+    private LottoPublisher rankPublisher;
+    private LottoPublisher revenueRatioPublisher;
+    private RankReward rankReward;
     private List<Rank> ranks;
+    private RankReward revenueRatioReward;
+    private List<Rank> revenueRatioRanks;
 
     @BeforeEach
     void setUp() {
         publisher = new LottoPublisher();
-        pubchasePublisher = new LottoPublisher(14000);
+        purchasePublisher = new LottoPublisher(14000);
 
         String winNumberStr = "1,2,3,4,5,6";
         List<Lotto> lottos = new ArrayList<>();
         Integer[] same_numbers_5 = {1,2,3,7,8,9};
-        Integer[] same_numbers_0 = {1,2,9,10,11,12};
+        Integer[] same_numbers_0_0 = {1,2,9,10,11,12};
+        Integer[] same_numbers_0_1 = {1,2,9,10,11,12};
         lottos.add(new Lotto(Arrays.asList(same_numbers_5)));
-        lottos.add(new Lotto(Arrays.asList(same_numbers_0)));
-        LottoPublisher rankPublisher = new LottoPublisher(lottos);
+        lottos.add(new Lotto(Arrays.asList(same_numbers_0_0)));
+        lottos.add(new Lotto(Arrays.asList(same_numbers_0_1)));
+        rankPublisher = new LottoPublisher(lottos);
         ranks = rankPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
+        rankReward = new RankReward(ranks);
+        revenueRatioPublisher = new LottoPublisher(3000, lottos);
+        revenueRatioRanks = revenueRatioPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
+        revenueRatioReward = new RankReward(revenueRatioRanks);
+
     }
 
     @Test
@@ -42,18 +54,18 @@ public class LottoPublisherTest {
 
     @Test
     void 구매한로또개수확인() {
-        assertThat(pubchasePublisher.getBuyLottoCount()).isEqualTo(14);
+        assertThat(purchasePublisher.getBuyLottoCount()).isEqualTo(14);
     }
 
     @Test
     void 생성자금액만큼로또생성() {
-        assertThat(pubchasePublisher.getPublishLotto().size()).isEqualTo(14);
+        assertThat(purchasePublisher.getPublishLotto().size()).isEqualTo(14);
     }
 
     @Test
     void 생성한로또숫자콘솔출력() {
-        for (int i = 0 ; i < pubchasePublisher.getBuyLottoCount(); i++) {
-            List<Integer> numbers = pubchasePublisher.getPublishLotto().get(i).getNumbers();
+        for (int i = 0 ; i < purchasePublisher.getBuyLottoCount(); i++) {
+            List<Integer> numbers = purchasePublisher.getPublishLotto().get(i).getNumbers();
             List<String> strNumbers = new ArrayList<>();
             for (int j = 0 ; j < Lotto.MAX_LOTTO_NUM_COUNT; j++) {
                 strNumbers.add(numbers.get(j).toString());
@@ -81,12 +93,17 @@ public class LottoPublisherTest {
 
     @Test
     void rankReward_당첨된로또카운드확인_당첨금액확인() {
-        RankReward rankReward = new RankReward(ranks);
         assertThat(rankReward.getGainRankCounts()[Rank.FIRST.ordinal()]).isEqualTo(0);
         assertThat(rankReward.getGainRankCounts()[Rank.THIRD.ordinal()]).isEqualTo(0);
         assertThat(rankReward.getGainRankCounts()[Rank.FOURTH.ordinal()]).isEqualTo(0);
         assertThat(rankReward.getGainRankCounts()[Rank.FIFTH.ordinal()]).isEqualTo(1);
-        assertThat(rankReward.getGainRankCounts()[Rank.NONE.ordinal()]).isEqualTo(1);
+        assertThat(rankReward.getGainRankCounts()[Rank.NONE.ordinal()]).isEqualTo(2);
         assertThat(rankReward.getRewardWinningMoney()).isEqualTo(5000);
+    }
+
+    @Test
+    void getRevenueRatio_수익률구하기() {
+        double revenueRatio = revenueRatioPublisher.getRevenueRatio(revenueRatioReward.getRewardWinningMoney());
+        assertThat(RevenueRatio.valueOf(revenueRatio)).isEqualTo(RevenueRatio.PROFIT);
     }
 }

@@ -18,6 +18,11 @@ public class LottoPublisher {
         this.publishLotto = publishLotto;
     }
 
+    public LottoPublisher(int purchaseAmount, List<Lotto> publishLotto) {
+        this.purchaseAmount = purchaseAmount;
+        this.publishLotto = publishLotto;
+    }
+
     public LottoPublisher() {
     }
 
@@ -41,6 +46,13 @@ public class LottoPublisher {
             lottoRanks.add(lotto.getRank());
         }
         return lottoRanks;
+    }
+
+    double getRevenueRatio(int rewardWinningMoney) {
+        double revenueRatio = (double)rewardWinningMoney / (double)purchaseAmount;
+        revenueRatio = Double.parseDouble(String.format("%.2f", revenueRatio));
+
+        return revenueRatio;
     }
 
     private List<Lotto> publishLottos(int buyCount) {
