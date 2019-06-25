@@ -1,8 +1,8 @@
 package lotto.view;
 
+import static java.util.stream.Collectors.joining;
+
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.Lotto;
 import lotto.LottoNumber;
 import lotto.LottoNumbers;
 import lotto.Lottos;
@@ -32,17 +32,17 @@ public class OutputView {
 
   public static void printPurchasedLottosNumber(Lottos lottos) {
     printBlankLine();
-    List<Lotto> purchasedLotto = lottos.getPurchasedLotto();
-    purchasedLotto.stream().forEach(lotto -> printLotto(lotto));
+    List<LottoNumbers> purchasedLottoNumbers = lottos.getPurchasedLottoNumbers();
+    purchasedLottoNumbers.stream().forEach(lottoNumbers -> printLottoNumbers(lottoNumbers));
   }
 
-  private static void printLotto(Lotto lotto) {
-    LottoNumbers numbers = lotto.getNumbers();
-    String result = numbers.getValues().stream()
+  private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+    String lottoNumber = lottoNumbers.getValues()
+        .stream()
         .map(LottoNumber::getValue)
         .map(number -> number.toString())
-        .collect(Collectors.joining(NUMBERS_DELIMITER));
-    System.out.printf(LOTTO_NUMBERS_FORMAT, result);
+        .collect(joining(NUMBERS_DELIMITER));
+    System.out.printf(LOTTO_NUMBERS_FORMAT, lottoNumber);
     printBlankLine();
   }
 

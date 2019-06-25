@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -25,8 +26,8 @@ public class Lottos {
     return new Quantity(lottos.size());
   }
 
-  public List<Lotto> getPurchasedLotto() {
-    return lottos;
+  public List<LottoNumbers> getPurchasedLottoNumbers() {
+    return lottos.stream().map(Lotto::getNumbers).collect(Collectors.toList());
   }
 
   public int getSameNumberCount(Lotto lastWeekWinLotto, int boundaryCount) {
