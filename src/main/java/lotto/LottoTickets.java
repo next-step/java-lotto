@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoTickets {
     private List<LottoTicket> tickets;
@@ -15,19 +13,13 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public Map<Integer,Integer> checkWin(LottoTicket ticket) {
-        HashMap<Integer, Integer> result = new HashMap<>();
+    public LottoResult checkWin(LottoTicket winner) {
+        LottoResult lottoResult = new LottoResult();
 
-        for (LottoTicket lottoTicket : tickets) {
-            int matchCount = lottoTicket.correctWith(ticket);
-
-            if (result.containsKey(matchCount)) {
-                result.put(matchCount, result.get(matchCount) + 1);
-            } else {
-                result.put(matchCount, 1);
-            }
+        for (LottoTicket ticket : tickets) {
+            lottoResult.add(ticket.correctWith(winner));
         }
 
-        return result;
+        return lottoResult;
     }
 }

@@ -43,8 +43,8 @@ public class LottoTest {
 
     @Test
     void 일치한_숫자를_체크한다() {
-        Map<Integer, Integer> result = lotto.checkWin(ticket, tickets);
+        LottoResult result = lotto.checkWin(ticket, tickets);
 
-        assertThat(result.get(6)).isEqualTo(3);
+        assertThat(result.numOf(6)).isEqualTo(3);
     }
 }

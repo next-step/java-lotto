@@ -14,7 +14,7 @@ public class Lotto {
         this.ownTickets = input_price / PRICE_LOTTO_TICKET;
     }
 
-    public Map<Integer,Integer> checkWin(LottoTicket winner, List<LottoTicket> purchased) {
+    public LottoResult checkWin(LottoTicket winner, List<LottoTicket> purchased) {
         LottoTickets tickets = new LottoTickets(purchased);
         return tickets.checkWin(winner);
     }

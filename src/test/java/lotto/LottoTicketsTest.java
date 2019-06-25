@@ -27,7 +27,7 @@ public class LottoTicketsTest {
 
     @Test
     void 당첨티켓과_비교하여_당첨수를_반환한다() {
-        Map<Integer, Integer> result = tickets.checkWin(ticket);
-        assertThat(result.get(6)).isEqualTo(2);
+        LottoResult result = tickets.checkWin(ticket);
+        assertThat(result.numOf(6)).isEqualTo(2);
     }
 }
