@@ -24,7 +24,7 @@ public class Lottery {
             throw new IllegalArgumentException("size of 'numberSet' must be equal to " + SIZE);
         }
         if (numberSet.stream().anyMatch(number -> number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER)) {
-            throw new IllegalArgumentException("'numberSet' must be a number between 1 and 50");
+            throw new IllegalArgumentException("'numberSet' must be a number between " + MINIMUM_NUMBER + " and " + MAXIMUM_NUMBER);
         }
         this.numberSet = new HashSet<>(numberSet);
     }
