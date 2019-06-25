@@ -1,20 +1,33 @@
 package calculator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NumberElementCollectionTest {
 
-    @Test
-    void sum() {
+    @ParameterizedTest
+    @MethodSource("provideSum")
+    void sum(String[] source, int expectSum) {
 
-        String[] source = {"1", "2"};
         NumberElementCollection elements = new NumberElementCollection(source);
 
         int total = elements.sum();
 
-        assertThat(total).isEqualTo(3);
+        assertThat(total).isEqualTo(expectSum);
+    }
+
+    private static Stream<Arguments> provideSum() {
+        return Stream.of(
+                Arguments.of(new String[]{"1"}, 1),
+                Arguments.of(new String[]{"4", "11"}, 15),
+                Arguments.of(new String[]{"8", "1", "50"}, 59)
+        );
     }
 }
