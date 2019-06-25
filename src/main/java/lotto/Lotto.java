@@ -12,7 +12,7 @@ public class Lotto {
   public static final String LAST_WEEK_LOTTO_NUMBERS_DELIMITER = ",";
 
   public Lotto() {
-    this.lottoNumbers = new NumbersBox().getLottoNumbers();
+    this.lottoNumbers = NumbersBox.getLottoNumbers();
   }
 
   public Lotto(List<Integer> autoNumber) {
