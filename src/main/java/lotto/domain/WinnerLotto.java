@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +46,7 @@ public class WinnerLotto {
     }
 
     private void checkInputNullOrEmpty(String input) throws IllegalArgumentException {
-        if (input == null || input.trim().isEmpty()) {
+        if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("당첨된 숫자를 입력해주세요.");
         }
     }
