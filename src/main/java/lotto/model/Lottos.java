@@ -12,12 +12,12 @@ public class Lottos {
         lottoNumbers = lottos;
     }
 
-    public LottoResult matching(WinningNumbers winnerNumbers) {
-        LottoResult lottoResult = new LottoResult();
+    public LottoAggregator matching(WinningNumbers winnerNumbers) {
+        LottoAggregator lottoAggregator = new LottoAggregator();
         for (PickNumbers pickNumbers : lottoNumbers) {
-            lottoResult.put(pickNumbers.compare(winnerNumbers));
+            lottoAggregator.put(pickNumbers.compare(winnerNumbers));
         }
-        return lottoResult;
+        return lottoAggregator;
     }
 
     public List<PickNumbers> getLottos() {

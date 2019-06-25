@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Arrays;
 
-public enum LottoLevels {
+public enum LottoRank {
 
     BOOM(0, 0),
     FOURTH(3, 5000),
@@ -13,14 +13,14 @@ public enum LottoLevels {
     private int matchCount;
     private int prizeMoney;
 
-    LottoLevels(int matchCount, int prizeMoney) {
+    LottoRank(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoLevels match(int matchCount) {
-        return Arrays.stream(LottoLevels.values())
-                .filter(level -> level.matchCount == matchCount)
+    public static LottoRank match(int matchCount) {
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
                 .orElse(BOOM);
     }

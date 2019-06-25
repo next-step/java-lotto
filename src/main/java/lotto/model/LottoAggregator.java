@@ -3,22 +3,22 @@ package lotto.model;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class LottoResult {
+public class LottoAggregator {
 
-    private Map<LottoLevels, Integer> map;
+    private Map<LottoRank, Integer> lottoResult;
 
-    public LottoResult() {
-        map = new EnumMap<>(LottoLevels.class);
+    public LottoAggregator() {
+        lottoResult = new EnumMap<>(LottoRank.class);
     }
 
     public void put(int matchingCount) {
-        LottoLevels match = LottoLevels.match(matchingCount);
-        Integer count = map.getOrDefault(match, 0);
-        map.put(match, ++count);
+        LottoRank match = LottoRank.match(matchingCount);
+        Integer count = lottoResult.getOrDefault(match, 0);
+        lottoResult.put(match, ++count);
     }
 
-    public int get(LottoLevels level) {
-        return map.getOrDefault(level, 0);
+    public int get(LottoRank rank) {
+        return lottoResult.getOrDefault(rank, 0);
     }
 
     public double getRateOfReturn() {
@@ -28,13 +28,13 @@ public class LottoResult {
     }
 
     private int getTotalReturnMoney() {
-        return map.keySet().stream()
-                .mapToInt(level -> level.getPrizeMoney() * this.get(level))
+        return lottoResult.keySet().stream()
+                .mapToInt(rank -> rank.getPrizeMoney() * this.get(rank))
                 .sum();
     }
 
     private int getBoughtCount() {
-        return map.keySet().stream()
+        return lottoResult.keySet().stream()
                 .mapToInt(this::get)
                 .sum();
     }

@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.model.LottoResult;
-import lotto.model.LottoLevels;
+import lotto.model.LottoAggregator;
+import lotto.model.LottoRank;
 import lotto.model.Lottos;
 
 import java.util.Arrays;
@@ -15,20 +15,20 @@ public class ResultView {
         System.out.println(lottos.toString());
     }
 
-    public static void printResult(LottoResult lottoResult) {
+    public static void printResult(LottoAggregator lottoAggregator) {
         System.out.println("당첨 통계");
         System.out.println("---------------");
 
-        Arrays.asList(LottoLevels.values()).stream()
-                .forEach(level -> printEachMessage(level, lottoResult));
-        System.out.println(String.format(RATE_OF_RETURN_MESSAGE, lottoResult.getRateOfReturn()));
+        Arrays.asList(LottoRank.values()).stream()
+                .forEach(level -> printEachMessage(level, lottoAggregator));
+        System.out.println(String.format(RATE_OF_RETURN_MESSAGE, lottoAggregator.getRateOfReturn()));
     }
 
-    private static void printEachMessage(LottoLevels level, LottoResult lottoResult) {
+    private static void printEachMessage(LottoRank level, LottoAggregator lottoAggregator) {
         String message = String.format(RESULT_MESSAGE,
                 level.getMatchCount(),
                 level.getPrizeMoney(),
-                lottoResult.get(level)
+                lottoAggregator.get(level)
         );
         System.out.println(message);
     }

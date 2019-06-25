@@ -25,12 +25,12 @@ public class LottosTest {
         WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
 
         //When
-        LottoResult lottoResult = lottos.matching(winnerNumbers);
+        LottoAggregator lottoAggregator = lottos.matching(winnerNumbers);
 
         //Then
-        assertThat(lottoResult.get(LottoLevels.FIRST)).isEqualTo(1);
-        assertThat(lottoResult.get(LottoLevels.THIRD)).isEqualTo(1);
-        assertThat(lottoResult.get(LottoLevels.FOURTH)).isEqualTo(2);
-        assertThat(lottoResult.get(LottoLevels.BOOM)).isEqualTo(1);
+        assertThat(lottoAggregator.get(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoAggregator.get(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(lottoAggregator.get(LottoRank.FOURTH)).isEqualTo(2);
+        assertThat(lottoAggregator.get(LottoRank.BOOM)).isEqualTo(1);
     }
 }

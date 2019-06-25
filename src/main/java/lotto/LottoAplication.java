@@ -14,7 +14,7 @@ public class LottoAplication {
 
         WinningNumbers winningNumbers = InputView.inputWinningNumber();
 
-        LottoResult lottoResult = lottos.matching(winningNumbers);
-        ResultView.printResult(lottoResult);
+        LottoAggregator lottoAggregator = lottos.matching(winningNumbers);
+        ResultView.printResult(lottoAggregator);
     }
 }
