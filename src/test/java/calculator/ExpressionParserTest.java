@@ -57,4 +57,12 @@ public class ExpressionParserTest {
 
         assertThat(elements.size()).isEqualTo(0);
     }
+
+    @DisplayName("콤마 구분자가 포함된 표현식")
+    @Test
+    void parseWithComma(){
+        NumberElementCollection elements = ExpressionParser.parse("1,2");
+
+        assertThat(elements.size()).isEqualTo(2);
+    }
 }
