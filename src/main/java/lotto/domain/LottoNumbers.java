@@ -37,4 +37,8 @@ public class LottoNumbers {
 
         return LottoRank.match(matched);
     }
+
+    public int size() {
+        return lottoNumbers.size();
+    }
 }
