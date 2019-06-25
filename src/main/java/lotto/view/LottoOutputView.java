@@ -15,10 +15,19 @@ public class LottoOutputView {
     System.out.println(lottos);
   }
 
-  public static void print(Analyzer analyzer) {
-    Map<Prize, Integer> prizeStatus = analyzer.getPrizeStatus();
-    Stream.of(Prize.values()).filter(prize -> prize != Prize.LOSE).forEach(prize -> {
-      System.out.println(String.format("%d개 일치 (%d원) - %d개", prize.getCountOfMatchingNumbers(), prize.getPrizeMoney(), prizeStatus.getOrDefault(prize, 0)));
-    });
+  public static void print(Report report) {
+    printResultOf(report.getPrizeStatus());
+    print(report.rateOfReturn());
+  }
+
+  private static void printResultOf(Map<Prize, Integer> prizeStatus) {
+    Stream.of(Prize.values())
+            .filter(prize -> prize != Prize.LOSE)
+            .forEach(prize -> System.out.println(
+                    String.format("%d개 일치 (%d원) - %d개", prize.getCountOfMatchingNumbers(), prize.getPrizeMoney(), prizeStatus.getOrDefault(prize, 0))));
+  }
+
+  private static void print(double rateOfReturn) {
+    System.out.println(String.format("총 수익률은 %.2f 입니다.", rateOfReturn));
   }
 }
