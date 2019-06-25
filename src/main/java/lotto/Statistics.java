@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class Statistics {
 
+  private static final int ROUNDING_DIGIT = 100;
+
   private Lottos purchasedLottos;
   private Lotto lastWeekWinLotto;
   private Rewards rewards;
@@ -30,7 +32,7 @@ public class Statistics {
   public double getYield() {
     double income = rewards.getIncome();
     int expense = getExpense(purchasedLottos.getQuantity());
-    return Math.floor((income / expense) * 100) / 100;
+    return Math.floor((income / expense) * ROUNDING_DIGIT) / ROUNDING_DIGIT;
   }
 
   private int getExpense(Quantity quantity) {
