@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.LottoRetailer;
-import lotto.model.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

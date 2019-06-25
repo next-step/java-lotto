@@ -13,8 +13,4 @@ public class LottoRetailer {
         }
         return new Lottos(buyPickNumbers);
     }
-
-//    public static WinningNumbers anounceWinningNumbers() {
-//        return new WinningNumbers(NumbersGenerator.autoGenerate(),);
-//    }
 }
