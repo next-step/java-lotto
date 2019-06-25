@@ -12,10 +12,18 @@ public class Lottos {
         lottoNumbers = lottos;
     }
 
+//    public LottoAggregator matching(WinningNumbers winnerNumbers) {
+//        LottoAggregator lottoAggregator = new LottoAggregator();
+//        for (PickNumbers pickNumbers : lottoNumbers) {
+//            lottoAggregator.put(winnerNumbers.compare(pickNumbers));
+//        }
+//        return lottoAggregator;
+//    }
+
     public LottoAggregator matching(WinningNumbers winnerNumbers) {
         LottoAggregator lottoAggregator = new LottoAggregator();
         for (PickNumbers pickNumbers : lottoNumbers) {
-            lottoAggregator.put(winnerNumbers.compare(pickNumbers));
+            lottoAggregator.put(winnerNumbers.match(pickNumbers));
         }
         return lottoAggregator;
     }

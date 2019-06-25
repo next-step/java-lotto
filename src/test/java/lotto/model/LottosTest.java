@@ -15,10 +15,6 @@ public class LottosTest {
 
         //Given
         List<PickNumbers> lottoNumbers = Arrays.asList(
-                new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new PickNumbers(Arrays.asList(2, 3, 4, 5, 6, 7)),
-                new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new PickNumbers(Arrays.asList(10, 11, 12, 13, 14, 15)),
                 new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 9))
         );
         Lottos lottos = new Lottos(lottoNumbers);
@@ -29,8 +25,23 @@ public class LottosTest {
 
         //Then
         assertThat(lottoAggregator.get(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(lottoAggregator.get(LottoRank.THIRD)).isEqualTo(1);
-        assertThat(lottoAggregator.get(LottoRank.FOURTH)).isEqualTo(2);
-        assertThat(lottoAggregator.get(LottoRank.BOOM)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("로또 보너스번호 포함 맞춰보기")
+    public void checkBonusLotts() {
+
+        //Given
+        List<PickNumbers> lottoNumbers = Arrays.asList(
+                new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 10))
+        );
+        Lottos lottos = new Lottos(lottoNumbers);
+        WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
+
+        //When
+        LottoAggregator lottoAggregator = lottos.matching(winnerNumbers);
+
+        //Then
+        assertThat(lottoAggregator.get(LottoRank.SECOND)).isEqualTo(1);
     }
 }

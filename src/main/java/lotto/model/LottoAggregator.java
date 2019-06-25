@@ -11,10 +11,9 @@ public class LottoAggregator {
         lottoResult = new EnumMap<>(LottoRank.class);
     }
 
-    public void put(int matchingCount) {
-        LottoRank match = LottoRank.match(matchingCount);
-        Integer count = lottoResult.getOrDefault(match, 0);
-        lottoResult.put(match, ++count);
+    public void put(LottoRank rank) {
+        Integer count = lottoResult.getOrDefault(rank, 0);
+        lottoResult.put(rank, ++count);
     }
 
     public int get(LottoRank rank) {
