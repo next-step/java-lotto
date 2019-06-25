@@ -18,7 +18,7 @@ public class Lottos {
     }
 
     public double getBuyingMoney() {
-        return Lotto.price * this.lottos.size();
+        return Lotto.PRICE * this.lottos.size();
     }
 
     @Override

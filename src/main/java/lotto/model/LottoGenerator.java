@@ -13,7 +13,7 @@ public class LottoGenerator {
   }
 
   public Lottos generate(int paid) {
-    int amount = paid / Lotto.price;
+    int amount = paid / Lotto.PRICE;
     List<Lotto> lottos = IntStream.range(0, amount)
             .mapToObj((int value) -> new Lotto(numberGenerator.generate(6)))
             .collect(Collectors.toList());

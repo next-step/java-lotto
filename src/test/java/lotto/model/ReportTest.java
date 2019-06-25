@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -35,7 +34,7 @@ public class ReportTest {
     @Test
     void rateOfReturn() {
         double total = Prize.FIRST.getPrizeMoney() + Prize.FOURTH.getPrizeMoney();
-        double buyingMoney = Lotto.price * 2;
+        double buyingMoney = Lotto.PRICE * 2;
         assertThat(report.rateOfReturn()).isEqualTo(total / buyingMoney);
     }
 
@@ -46,6 +45,6 @@ public class ReportTest {
 
     @Test
     void buyingMoney() {
-        assertThat(report.buyingMoney()).isEqualTo(Lotto.price * 2);
+        assertThat(report.buyingMoney()).isEqualTo(Lotto.PRICE * 2);
     }
 }
