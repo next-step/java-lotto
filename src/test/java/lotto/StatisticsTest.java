@@ -30,15 +30,6 @@ class StatisticsTest {
   }
 
   @Test
-  public void 일치하는숫자가있는_로또갯수를_구해온다() {
-
-    assertThat(statistics.getSameNumberCount(3)).isEqualTo(1);
-    assertThat(statistics.getSameNumberCount(4)).isEqualTo(0);
-    assertThat(statistics.getSameNumberCount(5)).isEqualTo(0);
-
-  }
-
-  @Test
   public void 수익률을구해온다() {
     assertThat(statistics.getYield()).isEqualTo(1.66);
 
