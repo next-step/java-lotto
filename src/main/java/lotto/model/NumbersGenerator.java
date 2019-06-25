@@ -8,12 +8,12 @@ import java.util.stream.IntStream;
 public class NumbersGenerator {
 
     public static List<Integer> autoGenerate() {
-        List<Integer> numbers = IntStream.rangeClosed(1, 45)
+        List<Integer> numbers = IntStream.rangeClosed(LottoNumbers.MIN, LottoNumbers.MAX)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numbers);
         return numbers.stream()
-                .limit(6)
+                .limit(LottoNumbers.LOTTO_NUMBER_SIZE)
                 .collect(Collectors.toList());
    }
 }

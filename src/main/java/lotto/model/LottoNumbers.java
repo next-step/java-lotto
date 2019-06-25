@@ -7,7 +7,7 @@ public class LottoNumbers {
 
     static final int MIN = 1;
     static final int MAX = 45;
-    private final static int LOTTO_NUMBER_SIZE = 6;
+    final static int LOTTO_NUMBER_SIZE = 6;
 
     public LottoNumbers(List<Integer> numbers) {
         verifySize(numbers);

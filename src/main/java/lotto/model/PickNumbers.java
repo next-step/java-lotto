@@ -21,7 +21,7 @@ public class PickNumbers extends LottoNumbers{
 
     @Override
     public String toString() {
-        return "" + numbers;
+        return numbers.toString();
 
     }
 }

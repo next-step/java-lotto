@@ -1,10 +1,7 @@
 package lotto.model;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoResult {
 
@@ -32,7 +29,7 @@ public class LottoResult {
 
     private int getTotalReturnMoney() {
         return map.keySet().stream()
-                .mapToInt(k -> k.getPrizeMoney() * this.get(k))
+                .mapToInt(level -> level.getPrizeMoney() * this.get(level))
                 .sum();
     }
 
