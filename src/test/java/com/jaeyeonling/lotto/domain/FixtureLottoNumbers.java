@@ -4,12 +4,14 @@ import java.util.HashSet;
 
 public class FixtureLottoNumbers extends HashSet<LottoNumber> {
 
-    FixtureLottoNumbers() {
-        this(Lotto.COUNT_OF_LOTTO_NUMBER);
+    FixtureLottoNumbers(final int countOfLottoNumber) {
+        this(LottoNumber.MIN, countOfLottoNumber);
     }
 
-    FixtureLottoNumbers(final int countOfLottoNumber) {
-        for (int lottoNumber = LottoNumber.MIN; lottoNumber <= countOfLottoNumber; lottoNumber++) {
+    FixtureLottoNumbers(final int startLottoNumber,
+                        final int countOfLottoNumber) {
+        final int endLottoNumber = startLottoNumber + countOfLottoNumber - LottoNumber.MIN;
+        for (int lottoNumber = startLottoNumber; lottoNumber <= endLottoNumber; lottoNumber++) {
             add(new LottoNumber(lottoNumber));
         }
     }

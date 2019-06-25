@@ -13,6 +13,7 @@ public final class ConsoleOutputView {
     private static final String BUYING_ALERT_MESSAGE = "%d개를 구매했습니다.";
     private static final String WINNING_REPORT_HEADER = "당첨 통계\n---------";
     private static final String WINNING_REPORT_MATCH_TEMPLATE = "%d개 일치 (%d원) - %d개";
+    private static final String WINNING_REPORT_BONUS_TEMPLATE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String WINNING_REPORT_FOOTER = "총 수익률은 %f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private static final PrintStream CONSOLE = System.out;
@@ -50,10 +51,14 @@ public final class ConsoleOutputView {
 
     private static void printWinningReportMatchTemplate(final LottoPrize prize,
                                                         final LottoGameReport report) {
-        final String message = String.format(WINNING_REPORT_MATCH_TEMPLATE,
+        final String message = String.format(getWinningReportTemplate(prize),
                 prize.getCountOfMatch(), prize.getPrizeMoney(), report.getMatchCountByPrize(prize));
 
         ConsoleOutputView.print(message);
+    }
+
+    private static String getWinningReportTemplate(final LottoPrize prize) {
+        return prize.isMatchBonus() ? WINNING_REPORT_BONUS_TEMPLATE : WINNING_REPORT_MATCH_TEMPLATE;
     }
 
     private static void printWinningReportFooter(final LottoGameReport report) {

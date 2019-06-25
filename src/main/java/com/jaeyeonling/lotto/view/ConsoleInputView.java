@@ -14,6 +14,7 @@ public final class ConsoleInputView {
     private static final String WINNING_LOTTO_NUMBER_SEPARATOR = ",";
     private static final String READ_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String READ_WINNING_LOTTO_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String READ_BONUS_LOTTO_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner CONSOLE = new Scanner(System.in);
 
@@ -35,6 +36,12 @@ public final class ConsoleInputView {
                 .collect(Collectors.toSet());
 
         return new Lotto(lottoNumbers);
+    }
+
+    public static LottoNumber readBonusLottoNumber() {
+        final int bonusLottoNumberValue = readIntWithMessage(READ_BONUS_LOTTO_NUMBER_MESSAGE);
+
+        return new LottoNumber(bonusLottoNumberValue);
     }
 
     private static String[] splitWinningLottoNumber(final String winningLottoNumber) {
