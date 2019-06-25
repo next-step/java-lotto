@@ -1,8 +1,7 @@
-package lotto.generator;
+package lotto.model.generator;
 
 import lotto.model.Lotto;
 import lotto.model.Number;
-import lotto.model.generator.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +21,7 @@ public class NumberGeneratorTest {
         assertThat(number).contains(ofNumbers(1, 2, 3, 4, 5, 6));
     }
 
-    private Number[] ofNumbers(int... numbers) {
+    public static Number[] ofNumbers(int... numbers) {
         return IntStream.of(numbers)
                 .mapToObj(Number::of)
                 .toArray(Number[]::new);

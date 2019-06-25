@@ -1,9 +1,9 @@
 package lotto;
 
-import lotto.model.*;
-import lotto.model.generator.WinningGenerator;
+import lotto.model.LottoMachine;
+import lotto.model.Money;
+import lotto.model.WinningLotto;
 import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class Application {
 
