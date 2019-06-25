@@ -1,13 +1,13 @@
 package step2.iksoo.lottoAuto;
 
 public enum LottoPrize {
-    zero(0),
-    one(0),
-    two(0),
-    three(5000),
-    four(50000),
-    five(1500000),
-    six(2000000000);
+    ZERO(0),
+    ONE(0),
+    TWO(0),
+    THREE(5_000),
+    FOUR(50_000),
+    FIVE(1_500_000),
+    SIX(2_000_000_000);
 
     private int gradePrize;
 

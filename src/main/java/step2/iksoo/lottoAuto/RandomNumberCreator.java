@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toCollection;
 
 public class RandomNumberCreator {
-    private static int START_NUMBER = 1;
-    private static int END_NUMBER = 45;
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 45;
 
     private static List<Integer> shuffleNum;
 
