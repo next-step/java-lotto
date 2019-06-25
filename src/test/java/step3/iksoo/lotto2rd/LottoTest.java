@@ -24,8 +24,8 @@ public class LottoTest {
     }
 
     @Test
-    void 로또맞은_개수_4개() {
-        List<Integer> WINNER_NUMBERS = Arrays.asList(3, 8, 19, 22, 34, 42);
-        assertThat(lotto.checkNumberOfMatches(WINNER_NUMBERS)).isEqualTo(4);
+    void 로또_2등() {
+        List<Integer> WINNER_NUMBERS = Arrays.asList(3, 8, 19, 26, 34, 42);
+        assertThat(lotto.checkNumberOfMatches(WINNER_NUMBERS, 17)).isEqualTo(Rank.SECOND);
     }
 }
