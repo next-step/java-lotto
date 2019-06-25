@@ -31,9 +31,10 @@ public class LottoApplication {
         // 당첨 번호
         LotteryNumber lotteryNumber = InputView.inputLotteryNumber();
 
-        // 당첨 이력
+        // 당첨 카운트
         List<Integer> matchCount = lotto.getMatchCountExtractNumberFromLotteryNumber(lotteryNumber);
 
-
+        // 당첨내역 출력
+        ResultView.printResult(matchCount, money);
     }
 }

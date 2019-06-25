@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  */
 public class Lotto {
 
+    private static final int MATCH_LIMIT_COUNT = 3;
     private List<ExtractionNumber> lotto;
 
     public Lotto(List<ExtractionNumber> lotto) {
@@ -26,6 +27,7 @@ public class Lotto {
     public List<Integer> getMatchCountExtractNumberFromLotteryNumber(LotteryNumber lotteryNumber) {
         return lotto.stream()
                 .map(extractionNumber -> lotteryNumber.compareMatchNumberCount(extractionNumber))
+                .filter(count -> count >= MATCH_LIMIT_COUNT)
                 .collect(Collectors.toList());
     }
 

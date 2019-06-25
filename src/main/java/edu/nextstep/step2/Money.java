@@ -23,6 +23,10 @@ public class Money {
         return this.extractCount;
     }
 
+    public int getInputMoney() {
+        return this.extractCount * DIVID_NUMBER;
+    }
+
     private void validMoney(int extractCount) {
         if (extractCount < DIVID_NUMBER) {
             throw new IllegalArgumentException("투입금액이 적습니다.");
