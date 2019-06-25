@@ -10,13 +10,9 @@ public class NumberElementCollection {
 
     public NumberElementCollection(String[] source){
         this.elements = Arrays.stream(source)
-                .filter(this::isNotEmpty)
                 .map(NumberElement::new)
+                .filter(number -> !number.isZero())
                 .collect(Collectors.toList());
-    }
-
-    private boolean isNotEmpty(String value){
-        return !value.trim().isEmpty();
     }
 
     public NumberElement sum() {

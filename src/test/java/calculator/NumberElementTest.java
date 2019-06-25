@@ -43,6 +43,6 @@ class NumberElementTest {
     void parseNegativeException(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new NumberElement("-1");
-        });
+        }).withMessageStartingWith("음수");
     }
 }
