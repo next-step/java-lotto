@@ -35,16 +35,16 @@ public class ReportTest {
     void rateOfReturn() {
         double total = Prize.FIRST.getPrizeMoney() + Prize.FOURTH.getPrizeMoney();
         double buyingMoney = Lotto.PRICE * 2;
-        assertThat(report.rateOfReturn()).isEqualTo(total / buyingMoney);
+        assertThat(report.getRateOfReturn()).isEqualTo(total / buyingMoney);
     }
 
     @Test
     void totalProfits() {
-        assertThat(report.totalProfits()).isEqualTo(Prize.FIRST.getPrizeMoney() + Prize.FOURTH.getPrizeMoney());
+        assertThat(report.getTotalProfits()).isEqualTo(Prize.FIRST.getPrizeMoney() + Prize.FOURTH.getPrizeMoney());
     }
 
     @Test
     void buyingMoney() {
-        assertThat(report.buyingMoney()).isEqualTo(Lotto.PRICE * 2);
+        assertThat(report.getBuyingMoney()).isEqualTo(Lotto.PRICE * 2);
     }
 }

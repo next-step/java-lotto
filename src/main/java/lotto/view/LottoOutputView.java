@@ -17,7 +17,7 @@ public class LottoOutputView {
 
   public static void print(Report report) {
     printResultOf(report.getPrizeStatus());
-    print(report.rateOfReturn());
+    print(report.getRateOfReturn());
   }
 
   private static void printResultOf(Map<Prize, Integer> prizeStatus) {

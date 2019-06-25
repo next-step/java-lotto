@@ -16,11 +16,11 @@ public class Report {
         return prizeStatus;
     }
 
-    public double rateOfReturn() {
-        return totalProfits() / buyingMoney();
+    public double getRateOfReturn() {
+        return getTotalProfits() / getBuyingMoney();
     }
 
-    public double totalProfits() {
+    double getTotalProfits() {
         return prizeStatus.keySet().stream().mapToDouble(prize -> {
             int prizeMoney = prize.getPrizeMoney();
             int count = prizeStatus.get(prize);
@@ -28,7 +28,7 @@ public class Report {
         }).sum();
     }
 
-    public double buyingMoney() {
+    double getBuyingMoney() {
         return lottos.getBuyingMoney();
     }
 }
