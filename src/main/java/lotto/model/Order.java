@@ -3,7 +3,6 @@ package lotto.model;
 public class Order {
 
     private final static Integer UNIT_PRICE = 1000;
-
     private int orderAmount;
 
     public Order(int orderAmount) {
