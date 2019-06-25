@@ -1,4 +1,7 @@
+package com.java.stringcalculator;
 import org.junit.jupiter.api.Test;
+
+import com.java.stringcalculator.StringCalculator;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -29,6 +32,13 @@ public class StringCalculatorTest {
     @Test
     public void 쉼표_콜론_구분자_숫자_두개_입력시_합계를_반환(){
         input = "1:3,1";
+        int sum = StringCalculator.calculator(input);
+        assertThat(sum).isEqualTo(5);
+    }
+    
+    @Test
+    public void 커스텀_구분자_숫자_두개_입력시_합계를_반환(){
+        input = "//;\n2;3";
         int sum = StringCalculator.calculator(input);
         assertThat(sum).isEqualTo(5);
     }
