@@ -23,6 +23,13 @@ public class NumberElementCollection {
     }
 
     public int sum() {
-        return 3;
+
+        int sum = 0;
+
+        for(String element : elements){
+            sum += Integer.parseInt(element);
+        }
+
+        return sum;
     }
 }
