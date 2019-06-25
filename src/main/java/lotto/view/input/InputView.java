@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface InputView {
     Long getPurchaseAmount();
-    List<Long> getWinningTicket();
+    List<String> readWinningNumbers();
 }

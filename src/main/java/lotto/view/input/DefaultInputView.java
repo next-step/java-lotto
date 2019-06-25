@@ -20,8 +20,8 @@ public class DefaultInputView implements InputView {
     }
 
     @Override
-    public List<Long> getWinningTicket() {
+    public List<String> readWinningNumbers() {
         System.out.println(MESSAGE_WINNING_NUMBERS);
-        return commandLineReader.readCsvLongValues();
+        return commandLineReader.readCsv();
     }
 }
