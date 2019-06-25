@@ -27,16 +27,7 @@ public class LottoGameTest {
     void substringPricetoNumber() {
         assertThat(lottoGame.substringPricetoNumber(price)).isEqualTo(14);
     }
-
-    @Test
-    @DisplayName("1000원보다 낮은 가격 입력이 되었을때 exception")
-    void checkPrice() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            if (InputVeiw.checkPrice(price))
-                throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");
-        });
-    }
-
+    
     @Test
     @DisplayName("지난 당첨번호를 잘못 입력했을 때 exception")
     void checkPrvStr() {

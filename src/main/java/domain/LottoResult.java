@@ -92,10 +92,10 @@ public class LottoResult {
 
     // 수익율이 이익인지 손해인지 판단 (출력용)
     public static String judgeResult() {
-        if (revenue > 0)
+        if (revenue > 1)
             return "이익";
-        if (revenue < 0)
-            return "손해";
-        return null;
+        if (revenue == 1)
+            return "본전치기";
+        return "손해";
     }
 }

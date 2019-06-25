@@ -44,7 +44,7 @@ public class InputVeiw {
 
     // 입력받은 지난 당첨번호가 6자리인지 확인
     public static boolean checkPrvStr(String input) {
-        return !(input.length() == ONE_UNIT_OF_LOTTO);
+        return (input.length() == ONE_UNIT_OF_LOTTO);
     }
 
     // 공백 문자 제거 및 ","  기준으로 지난 당첨번호를 split
