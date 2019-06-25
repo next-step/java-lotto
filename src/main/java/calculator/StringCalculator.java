@@ -10,7 +10,7 @@ public class StringCalculator {
     private static final String NUMBER_REGEX = "^[0-9]*$";
 
     int add(String val) {
-        if (isNull(val) || isEmpty(val)) {
+        if (isEmptyOrNull(val)) {
             return EMPTY_NUM;
         }
         int result = 0;
@@ -52,11 +52,10 @@ public class StringCalculator {
         }
     }
 
-    private boolean isNull(String val) {
-        return val == null;
-    }
-
-    private boolean isEmpty(String val) {
+    private boolean isEmptyOrNull(String val) {
+        if (val == null) {
+            return true;
+        }
         val = removalWhitespace(val);
         return val.isEmpty();
     }
