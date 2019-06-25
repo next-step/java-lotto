@@ -8,8 +8,7 @@ public class NumberElement {
     int value;
 
     public NumberElement(String value){
-        String nullSafeValue = Optional.ofNullable(value).orElse("0");
-        this.value = isEmpty(nullSafeValue) ? 0 : Integer.parseInt(nullSafeValue);
+        this.value = isEmpty(value) ? 0 : Integer.parseInt(value);
     }
 
     public NumberElement(int value) {
@@ -25,7 +24,7 @@ public class NumberElement {
     }
 
     private boolean isEmpty(String value){
-        return value.trim().isEmpty();
+        return value == null || value.trim().isEmpty();
     }
 
     @Override
