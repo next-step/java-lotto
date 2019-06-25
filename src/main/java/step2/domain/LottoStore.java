@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,7 +16,7 @@ public class LottoStore {
     public Lottos buyLotto(final Money money, ChooseLottos chooseLottos) {
         validateMoney(money);
         final int quantity = getLottoQuantity(money);
-        return new Lottos(chooseLottos.receiveLottos(quantity));
+        return new Lottos(giveLottos(chooseLottos, quantity));
     }
 
     private void validateMoney(final Money money) {
@@ -32,5 +33,9 @@ public class LottoStore {
         return new Lottos(IntStream.range(0, quantity)
                                    .mapToObj(i -> Lotto.create())
                                    .collect(Collectors.toList()));
+    }
+
+    private List<Lotto> giveLottos(final ChooseLottos chooseLottos, final int quantity) {
+        return chooseLottos.getLottos().subList(0, quantity);
     }
 }

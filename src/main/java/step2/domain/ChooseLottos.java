@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChooseLottos {
     private final List<Lotto> lottos;
@@ -9,7 +10,9 @@ public class ChooseLottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> receiveLottos(final int quantity) {
-        return lottos.subList(0, quantity);
+    public List<Lotto> getLottos() {
+        return lottos.stream()
+                     .map(Lotto::new)
+                     .collect(Collectors.toList());
     }
 }
