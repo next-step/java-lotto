@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.util.Collections.unmodifiableList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -7,19 +9,16 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 
+  private static final int LOTTO_NUMBER_COUNT = 6;
+
   List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+      throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+    }
     this.lottoNumbers = lottoNumbers;
     Collections.sort(lottoNumbers);
-  }
-
-  public int getSize() {
-    return lottoNumbers.size();
-  }
-
-  public List<LottoNumber> getValues() {
-    return lottoNumbers;
   }
 
   public int countSameNumber(LottoNumbers numbers) {
@@ -29,6 +28,22 @@ public class LottoNumbers {
         .distinct()
         .count();
     return twoLottoNumbersCount - deDuplicationCount;
+  }
+
+  public boolean hasBonusNumber(int bonusNumber) {
+    return lottoNumbers.stream()
+        .map(LottoNumber::getValue)
+        .filter(a -> a == bonusNumber)
+        .findAny()
+        .isPresent();
+  }
+
+  public int getSize() {
+    return lottoNumbers.size();
+  }
+
+  public List<LottoNumber> getValues() {
+    return unmodifiableList(lottoNumbers);
   }
 
   @Override

@@ -1,21 +1,43 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
+  public static final String INPUT_NUMBERS_DELIMITER = ",";
   private LottoNumbers lottoNumbers;
 
   public Lotto() {
-    this.lottoNumbers = new NumbersBox().getLottoNumbers();
+    this.lottoNumbers = NumbersBox.getLottoNumbers();
   }
 
   public Lotto(List<Integer> autoNumber) {
-    lottoNumbers = new LottoNumbers(autoNumber.stream()
+    lottoNumbers = makeLottoNumbers(autoNumber);
+  }
+
+  public Lotto(String input) {
+    lottoNumbers = makeLottoNumbers(parseInputNumbers(input));
+  }
+
+  private List<Integer> parseInputNumbers(String inputNumbers) {
+    return Arrays
+        .stream(inputNumbers.split(INPUT_NUMBERS_DELIMITER))
+        .map(number -> number.trim())
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
+  }
+
+  private LottoNumbers makeLottoNumbers(List<Integer> autoNumber) {
+    return new LottoNumbers(autoNumber.stream()
         .map(LottoNumber::new)
         .collect(Collectors.toList()));
+  }
+
+  public int countSameNumber(Lotto lotto) {
+    return lottoNumbers.countSameNumber(lotto.getNumbers());
   }
 
   public LottoNumbers getNumbers() {
@@ -46,7 +68,7 @@ public class Lotto {
         '}';
   }
 
-  public int countSameNumber(Lotto lotto) {
-    return lottoNumbers.countSameNumber(lotto.getNumbers());
+  public boolean hasBonusNumber(int bonusNumber) {
+    return lottoNumbers.hasBonusNumber(bonusNumber);
   }
 }

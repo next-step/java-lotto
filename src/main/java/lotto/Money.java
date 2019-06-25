@@ -6,14 +6,14 @@ public class Money {
   private int money;
 
   public Money(int money) {
-    if(money < 0 ) {
+    if (money < 0) {
       throw new IllegalArgumentException("금액은 0보다 커야 합니다.");
     }
     this.money = money;
   }
 
-  public Quantity getAvailableQuantity() {
-    return new Quantity(money/LOTTO_PRICE);
+  public int getAvailableQuantity() {
+    return money / LOTTO_PRICE;
   }
 
 }

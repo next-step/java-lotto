@@ -1,28 +1,24 @@
 package lotto;
 
-import java.util.Scanner;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoLauncher {
 
   public static void start() {
-    Scanner scanner = new Scanner(System.in);
-
-    InputView.askPurchaseAmount();
-    int purchaseAmount = scanner.nextInt();
-
-    Quantity quantity = new Money(purchaseAmount).getAvailableQuantity();
+    int purchaseAmount = InputView.askPurchaseAmount();
+    int lottoQuantity = new Money(purchaseAmount).getAvailableQuantity();
+    Quantity quantity = new Quantity(lottoQuantity);
     OutputView.printPurchasedLottoQuantity(quantity);
 
     Lottos purchasedLottos = Store.buyLottos(quantity);
     OutputView.printPurchasedLottosNumber(purchasedLottos);
+    int bonusBallNumber = InputView.askBonusBallNumber();
 
-    InputView.askLastWeekWinLottoNumber();
-    String lastWeekWinLottoNumber = scanner.next();
-
-    OutputView.printStatistics(purchasedLottos,lastWeekWinLottoNumber);
-
+    String lastWeekWinLottoNumber = InputView.askLastWeekWinLottoNumber();
+    LastWeekWinLotto LastWinLotto = new LastWeekWinLotto(lastWeekWinLottoNumber, bonusBallNumber);
+    Statistics statistics = new Statistics(purchasedLottos, LastWinLotto);
+    OutputView.printStatistics(statistics);
   }
 
   public static void main(String[] args) {

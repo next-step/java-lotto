@@ -7,10 +7,14 @@ public class Quantity {
   private int quantity;
 
   public Quantity(int quantity) {
-    if(quantity < 0) {
+    if (quantity < 0) {
       throw new IllegalArgumentException("수량은 0보다 커야 합니다.");
     }
     this.quantity = quantity;
+  }
+
+  public int getValue() {
+    return quantity;
   }
 
   @Override
@@ -30,7 +34,4 @@ public class Quantity {
     return Objects.hash(quantity);
   }
 
-  public int getValue() {
-    return quantity;
-  }
 }

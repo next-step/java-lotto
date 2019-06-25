@@ -1,7 +1,10 @@
 package lotto;
 
+import static java.util.Collections.unmodifiableList;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -21,11 +24,31 @@ public class Lottos {
     }
   }
 
-  public Quantity getQuantity(){
+  public List<LottoNumbers> getPurchasedLottoNumbers() {
+    return lottos.stream().map(Lotto::getNumbers).collect(Collectors.toList());
+  }
+
+  public int getSameNumberCount(Lotto lastWeekWinLotto, int boundaryCount) {
+    return (int) lottos.stream()
+        .map(lotto -> lotto.countSameNumber(lastWeekWinLotto))
+        .filter(value -> value == boundaryCount)
+        .count();
+  }
+
+  public int getSameNumberCount(Lotto lastWeekWinLotto, int boundaryCount, int bonusNum) {
+    return (int) lottos.stream()
+        .map(lotto -> lotto.countSameNumber(lastWeekWinLotto))
+        .filter(value -> value == boundaryCount)
+        .filter(value -> value == boundaryCount)
+        .count();
+  }
+
+  public Quantity getQuantity() {
     return new Quantity(lottos.size());
   }
 
-  public List<Lotto> getPurchasedLotto() {
-    return lottos;
+  public List<Lotto> getLottos() {
+    return unmodifiableList(lottos);
   }
+
 }
