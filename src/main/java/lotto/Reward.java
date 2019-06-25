@@ -10,20 +10,20 @@ public class Reward {
     this.prizeInformation = prizeInfo;
   }
 
-  public int getBoundaryCount() {
-    return prizeInformation.getBoundaryCount();
+  public int getRewardMoney() {
+    return matchedCount * getPrize();
   }
 
   public int getPrize() {
     return prizeInformation.getPrize();
   }
 
-  public int getMatchedCount() {
-    return matchedCount;
+  public int getBoundaryCount() {
+    return prizeInformation.getBoundaryCount();
   }
 
-  public int getRewardMoney() {
-    return matchedCount * getPrize();
+  public int getMatchedCount() {
+    return matchedCount;
   }
 
 }

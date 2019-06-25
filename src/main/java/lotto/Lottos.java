@@ -22,10 +22,6 @@ public class Lottos {
     }
   }
 
-  public Quantity getQuantity() {
-    return new Quantity(lottos.size());
-  }
-
   public List<LottoNumbers> getPurchasedLottoNumbers() {
     return lottos.stream().map(Lotto::getNumbers).collect(Collectors.toList());
   }
@@ -35,6 +31,10 @@ public class Lottos {
         .map(lotto -> lotto.countSameNumber(lastWeekWinLotto))
         .filter(value -> value == boundaryCount)
         .count();
+  }
+
+  public Quantity getQuantity() {
+    return new Quantity(lottos.size());
   }
 
 }

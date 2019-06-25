@@ -13,6 +13,10 @@ public class Quantity {
     this.quantity = quantity;
   }
 
+  public int getValue() {
+    return quantity;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -28,10 +32,6 @@ public class Quantity {
   @Override
   public int hashCode() {
     return Objects.hash(quantity);
-  }
-
-  public int getValue() {
-    return quantity;
   }
 
 }

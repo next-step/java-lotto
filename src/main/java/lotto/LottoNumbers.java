@@ -21,14 +21,6 @@ public class LottoNumbers {
     Collections.sort(lottoNumbers);
   }
 
-  public int getSize() {
-    return lottoNumbers.size();
-  }
-
-  public List<LottoNumber> getValues() {
-    return unmodifiableList(lottoNumbers);
-  }
-
   public int countSameNumber(LottoNumbers numbers) {
     int twoLottoNumbersCount = this.getSize() + numbers.getSize();
     int deDuplicationCount = (int) Stream.of(this.getValues(), numbers.getValues())
@@ -36,6 +28,14 @@ public class LottoNumbers {
         .distinct()
         .count();
     return twoLottoNumbersCount - deDuplicationCount;
+  }
+
+  public int getSize() {
+    return lottoNumbers.size();
+  }
+
+  public List<LottoNumber> getValues() {
+    return unmodifiableList(lottoNumbers);
   }
 
   @Override

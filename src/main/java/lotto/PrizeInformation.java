@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
-
 public enum PrizeInformation {
 
   THREE(3, 5000),
@@ -23,10 +21,6 @@ public enum PrizeInformation {
 
   public int getPrize() {
     return prize;
-  }
-
-  public static void main(String[] args) {
-    Arrays.stream(PrizeInformation.values()).forEach(a -> System.out.println(a.getPrize()));
   }
 
 }
