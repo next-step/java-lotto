@@ -52,10 +52,25 @@ public class LottoPublisher {
     public List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto) {
         List<Rank> lottoRanks = new ArrayList<>();
         for (Lotto lotto : publishLotto) {
-            lotto.setRank(winnerLotto.getNumbers());
-            lottoRanks.add(lotto.getRank());
+            Rank rank = getRank(winnerLotto.getNumbers(), lotto.getNumbers());
+            lottoRanks.add(rank);
         }
         return lottoRanks;
+    }
+
+    private Rank getRank(List<Integer> winNumbers, List<Integer> numbers) {
+        int sameWinNumberCount = 0;
+        for (Integer winNumber : winNumbers) {
+            sameWinNumberCount = getSameWinNumbers(numbers, winNumber, sameWinNumberCount);
+        }
+        return Rank.valueOf(sameWinNumberCount);
+    }
+
+    private int getSameWinNumbers(List<Integer> numbers, Integer winNumber, int sameWinNumberCount) {
+        if (numbers.contains(winNumber)) {
+            sameWinNumberCount++;
+        }
+        return sameWinNumberCount;
     }
 
     public List<List<Integer>> getLottosNumbers() {
