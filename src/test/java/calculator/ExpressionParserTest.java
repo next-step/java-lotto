@@ -73,4 +73,5 @@ public class ExpressionParserTest {
 
         assertThat(elements.size()).isEqualTo(3);
     }
+
 }
