@@ -1,24 +1,35 @@
 package lotto.model;
 
+import java.util.Arrays;
+
 public enum LottoLevels {
 
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    ALL(6, 2000000000);
+    BOOM(0, 0),
+    FOURTH(3, 5000),
+    THIRD(4, 50000),
+    SECOND(5, 1500000),
+    FIRST(6, 2000000000);
 
+    private int matchCount;
+    private int prizeMoney;
 
-    private static int count;
-
-    LottoLevels(int i, int i1) {
+    LottoLevels(int matchCount, int prizeMoney) {
+        this.matchCount = matchCount;
+        this.prizeMoney = prizeMoney;
     }
-    public void count() {
-        count++;
+
+    public static LottoLevels match(int matchCount) {
+        return Arrays.stream(LottoLevels.values())
+                .filter(level -> level.matchCount == matchCount)
+                .findFirst()
+                .orElse(BOOM);
     }
-    public int value() {
-        return count;
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
     }
 }
