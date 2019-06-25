@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,28 +8,27 @@ public class Statistics {
   private static final int ROUNDING_DIGIT = 100;
 
   private Lottos purchasedLottos;
-  private Lotto lastWeekWinLotto;
+  private LastWeekWinLotto lastWeekWinLotto;
   private Rewards rewards;
 
-  public Statistics(Lottos lottos, Lotto lastWeekWinLotto) {
+  public Statistics(Lottos lottos, LastWeekWinLotto lastWeekWinLotto) {
     this.purchasedLottos = lottos;
     this.lastWeekWinLotto = lastWeekWinLotto;
     this.rewards = initReward();
   }
 
   private Rewards initReward() {
-    return new Rewards(Arrays.stream(PrizeInformation.values())
-        .map(prizeInfo ->
-            new Reward(prizeInfo, getSameNumberCount(prizeInfo.getBoundaryCount())))
-        .collect(Collectors.toList()));
+    return new Rewards(rankResult());
   }
 
-  private int getSameNumberCount(int boundaryCount) {
-    return purchasedLottos.getSameNumberCount(lastWeekWinLotto, boundaryCount);
+  public List<Rank> rankResult() {
+    return purchasedLottos.getLottos().stream()
+        .map(number -> lastWeekWinLotto.getResult(number))
+        .collect(Collectors.toList());
   }
 
   public double getYield() {
-    double income = rewards.getIncome();
+    double income = rewards.totalIncome();
     int expense = getExpense(purchasedLottos.getQuantity());
     return Math.floor((income / expense) * ROUNDING_DIGIT) / ROUNDING_DIGIT;
   }
@@ -39,8 +37,8 @@ public class Statistics {
     return quantity.getValue() * Money.LOTTO_PRICE;
   }
 
-  public List<Reward> getRewards() {
-    return rewards.getRewards();
+  public Rewards getRewards() {
+    return rewards;
   }
 
 }

@@ -7,9 +7,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+  public static final String INPUT_NUMBERS_DELIMITER = ",";
   private LottoNumbers lottoNumbers;
-
-  public static final String LAST_WEEK_LOTTO_NUMBERS_DELIMITER = ",";
 
   public Lotto() {
     this.lottoNumbers = NumbersBox.getLottoNumbers();
@@ -20,21 +19,21 @@ public class Lotto {
   }
 
   public Lotto(String input) {
-    lottoNumbers = makeLottoNumbers(getLastWeekWinLotto(input));
+    lottoNumbers = makeLottoNumbers(parseInputNumbers(input));
+  }
+
+  private List<Integer> parseInputNumbers(String inputNumbers) {
+    return Arrays
+        .stream(inputNumbers.split(INPUT_NUMBERS_DELIMITER))
+        .map(number -> number.trim())
+        .map(Integer::parseInt)
+        .collect(Collectors.toList());
   }
 
   private LottoNumbers makeLottoNumbers(List<Integer> autoNumber) {
     return new LottoNumbers(autoNumber.stream()
         .map(LottoNumber::new)
         .collect(Collectors.toList()));
-  }
-
-  private List<Integer> getLastWeekWinLotto(String lastWeekWinLottoNumber) {
-    return Arrays
-        .stream(lastWeekWinLottoNumber.split(LAST_WEEK_LOTTO_NUMBERS_DELIMITER))
-        .map(number -> number.trim())
-        .map(Integer::parseInt)
-        .collect(Collectors.toList());
   }
 
   public int countSameNumber(Lotto lotto) {
@@ -69,4 +68,7 @@ public class Lotto {
         '}';
   }
 
+  public boolean hasBonusNumber(int bonusNumber) {
+    return lottoNumbers.hasBonusNumber(bonusNumber);
+  }
 }

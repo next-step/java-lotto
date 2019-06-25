@@ -7,8 +7,8 @@ public class LastWeekWinLotto {
   private LottoNumbers lottoNumbers;
   private int bonusNumber;
 
-  public LastWeekWinLotto(String inputWinLottoNumber , int bonusNumber) {
-   lottoNumbers = new Lotto(inputWinLottoNumber).getNumbers();
+  public LastWeekWinLotto(String inputWinLottoNumber, int bonusNumber) {
+    lottoNumbers = new Lotto(inputWinLottoNumber).getNumbers();
     this.bonusNumber = bonusNumber;
   }
 

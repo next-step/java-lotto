@@ -30,6 +30,14 @@ public class LottoNumbers {
     return twoLottoNumbersCount - deDuplicationCount;
   }
 
+  public boolean hasBonusNumber(int bonusNumber) {
+    return lottoNumbers.stream()
+        .map(LottoNumber::getValue)
+        .filter(a -> a == bonusNumber)
+        .findAny()
+        .isPresent();
+  }
+
   public int getSize() {
     return lottoNumbers.size();
   }

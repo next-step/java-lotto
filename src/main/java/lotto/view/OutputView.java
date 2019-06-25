@@ -2,12 +2,14 @@ package lotto.view;
 
 import static java.util.stream.Collectors.joining;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.LottoNumber;
 import lotto.LottoNumbers;
 import lotto.Lottos;
 import lotto.Quantity;
-import lotto.Reward;
+import lotto.Rank;
+import lotto.Rewards;
 import lotto.Statistics;
 
 public class OutputView {
@@ -16,6 +18,7 @@ public class OutputView {
   public static final String PURCHASE_COUNT_FORMAT = "%d 개를 구매했습니다.";
   public static final String LOTTO_NUMBERS_FORMAT = "[ %s ]";
   public static final String LOTTO_REWARDS_FORMAT = "%d개 일치 (%d원) - %d개";
+  public static final String LOTTO_SECOND_REWARDS_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
   public static final String INCOME_RATE_FORMAT = "총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
   public static final String PROFIT = "이익";
   public static final String LOSS = "손해";
@@ -52,14 +55,17 @@ public class OutputView {
     printYield(statistics.getYield());
   }
 
-  private static void printRewards(List<Reward> rewards) {
-    rewards.stream().forEach(reward -> printReward(reward));
+  private static void printRewards(Rewards rewards) {
+    Arrays.stream(Rank.values()).forEach(rank -> printReward(rank, rewards.getRankCount(rank)));
   }
 
-  private static void printReward(Reward reward) {
-    System.out.printf(LOTTO_REWARDS_FORMAT, reward.getBoundaryCount(), reward.getPrize(),
-        reward.getMatchedCount());
+  private static void printReward(Rank rank, int rankCount) {
     printBlankLine();
+    if(rank.isSecond(rank)) {
+      System.out.printf(LOTTO_SECOND_REWARDS_FORMAT, rank.getBoundaryCount(), rank.getPrize(), rankCount);
+      return;
+    }
+    System.out.printf(LOTTO_REWARDS_FORMAT, rank.getBoundaryCount(), rank.getPrize(), rankCount);
   }
 
   private static void printYield(double yield) {

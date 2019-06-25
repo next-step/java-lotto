@@ -16,7 +16,7 @@ public class LottoLauncher {
     int bonusBallNumber = InputView.askBonusBallNumber();
 
     String lastWeekWinLottoNumber = InputView.askLastWeekWinLottoNumber();
-    Lotto LastWinLotto = new Lotto(lastWeekWinLottoNumber);
+    LastWeekWinLotto LastWinLotto = new LastWeekWinLotto(lastWeekWinLottoNumber, bonusBallNumber);
     Statistics statistics = new Statistics(purchasedLottos, LastWinLotto);
     OutputView.printStatistics(statistics);
   }

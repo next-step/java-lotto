@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum Rank {
 
   FIRST(6, 2000000000),
-  SECOND(5, 30000000,true),
+  SECOND(5, 30000000, true),
   THIRD(5, 1500000),
   FOURTH(4, 50000),
   FIFTH(3, 5000),
@@ -16,7 +16,7 @@ public enum Rank {
   private boolean bonusMatch;
 
   Rank(int boundaryCount, int prize) {
-    this(boundaryCount,prize,false);
+    this(boundaryCount, prize, false);
   }
 
   Rank(int boundaryCount, int prize, boolean bonusMatch) {
@@ -27,10 +27,14 @@ public enum Rank {
 
   public static Rank valueOf(int countOfMatch, boolean matchBonus) {
     return Arrays.stream(Rank.values())
-        .filter(rank -> rank.boundaryCount== countOfMatch)
-        .filter(rank -> rank.bonusMatch== matchBonus)
+        .filter(rank -> rank.boundaryCount == countOfMatch)
+        .filter(rank -> rank.bonusMatch == matchBonus)
         .findFirst()
         .orElse(Rank.MISS);
+  }
+
+  public boolean isSecond(Rank rank) {
+    return rank == Rank.SECOND;
   }
 
   public int getBoundaryCount() {
