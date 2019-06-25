@@ -17,18 +17,18 @@ public class Report {
     }
 
     public double getRateOfReturn() {
-        return getTotalProfits() / getBuyingMoney();
+        return ((double) getTotalProfits() / getBuyingMoney());
     }
 
-    double getTotalProfits() {
-        return prizeStatus.keySet().stream().mapToDouble(prize -> {
+    int getTotalProfits() {
+        return prizeStatus.keySet().stream().mapToInt(prize -> {
             int prizeMoney = prize.getPrizeMoney();
             int count = prizeStatus.get(prize);
             return prizeMoney * count;
         }).sum();
     }
 
-    double getBuyingMoney() {
+    int getBuyingMoney() {
         return lottos.getBuyingMoney();
     }
 }

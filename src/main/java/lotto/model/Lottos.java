@@ -17,7 +17,7 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public double getBuyingMoney() {
+    public int getBuyingMoney() {
         return Lotto.PRICE * this.lottos.size();
     }
 
