@@ -1,5 +1,7 @@
 package calculator;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.stream.Stream;
 
 public class StringCalculator {
@@ -13,18 +15,22 @@ public class StringCalculator {
 
     public int splitAndSum(String string) {
 
-        if (string == null || string.isEmpty()) {
+        if (StringUtils.isEmpty(string)) {
             return ZERO;
         }
 
-        validation(string);
+        validate(string);
 
         return sum(split(string));
     }
 
-    private void validation(String string) {
-        if (string.contains("-"))
+    private void validate(String string) {
+        if (isNegativeNumber(string))
             throw new IllegalArgumentException();
+    }
+
+    private boolean isNegativeNumber(String string) {
+        return string.contains("-");
     }
 
     private int sum(String[] string) {
