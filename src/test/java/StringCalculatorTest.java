@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,7 +42,7 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("custom_구분자")
     void add_custom_구분자() throws Exception {
-        assertThat(cal.add("//;\\n1;2;4")).isEqualTo(7);
+        assertThat(cal.add("//;\n1;2;4")).isEqualTo(7);
     }
 
     @Test
@@ -52,7 +54,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void getSumofArray() {
+    void getTotalSum() {
         String[] inputs ={"1","2","3"};
         int sum = 0;
         for (int i = 0; i < inputs.length; ++i) {
@@ -61,6 +63,4 @@ public class StringCalculatorTest {
         }
         assertThat(sum).isEqualTo(6);
     }
-
-
 }
