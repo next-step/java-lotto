@@ -14,6 +14,10 @@ public class LottoAplication {
         Lottos lottos = LottoRetailer.buyAutoPick(orderAmount);
         ResultView.printPickedLottoNumbers(lottos);
 
+        int handPickCount = InputView.handPickCount();
+
+        List<Integer> handPickNumbers = InputView.inputHandPickNumber();
+
         List<Integer> numbers = InputView.inputWinningNumber();
         int bonusNumber = InputView.winningBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
