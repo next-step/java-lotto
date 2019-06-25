@@ -26,7 +26,10 @@ public class LotteryService {
 
     public Map<RewardType, Integer> getResult(List<Lottery> purchasedLotteries, Set<Integer> winningNumberSet) {
         final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
+        return this.resolveRewards(purchasedLotteries, winningLottery);
+    }
 
+    private Map<RewardType, Integer> resolveRewards(List<Lottery> purchasedLotteries, Lottery winningLottery) {
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, COUNT_DEFAULT);
         rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, COUNT_DEFAULT);
@@ -46,7 +49,10 @@ public class LotteryService {
 
     public double calculateEarningsRate(int investment, Map<RewardType, Integer> rewardMap) {
         final double reward = this.sumAllRewards(rewardMap);
+        return this.resolveEarningRate(investment, reward);
+    }
 
+    private double resolveEarningRate(int investment, double reward) {
         if (investment <= ZERO) {
             throw new IllegalArgumentException("'investment' must be greater than " + ZERO);
         }
