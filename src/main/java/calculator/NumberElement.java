@@ -1,13 +1,15 @@
 package calculator;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class NumberElement {
 
     int value;
 
     public NumberElement(String value){
-        this.value = Integer.parseInt(value);
+        String nullSafeValue = Optional.ofNullable(value).orElse("0");
+        this.value = isEmpty(nullSafeValue) ? 0 : Integer.parseInt(nullSafeValue);
     }
 
     public NumberElement(int value) {
@@ -20,6 +22,10 @@ public class NumberElement {
 
     public NumberElement add(NumberElement element) {
         return new NumberElement(value + element.value);
+    }
+
+    private boolean isEmpty(String value){
+        return value.trim().isEmpty();
     }
 
     @Override
