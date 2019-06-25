@@ -21,9 +21,9 @@ public class LottoRunner {
 
     List<Integer> winningNumbers = LottoInputView.askWinningNumbers();
     Analyzer analyzer = new Analyzer(winningNumbers);
-    analyzer.analyze(lottos);
+    Report report = analyzer.analyze(lottos);
 
-    LottoOutputView.print(analyzer);
+    LottoOutputView.print(report);
 
 
     //LottoOutputView.printWinnings();

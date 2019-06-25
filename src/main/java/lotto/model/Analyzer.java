@@ -7,23 +7,20 @@ import java.util.Map;
 public class Analyzer {
 
     private final List<Integer> winningNumbers;
-    private final Map<Prize, Integer> prizeStatus = new HashMap<>();
 
     public Analyzer(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
     }
 
-    public void analyze(Lottos lottos) {
+    public Report analyze(Lottos lottos) {
         List<Integer> countsOfMatchingNumbers = lottos.getCountOfMatchingNumbers(winningNumbers);
-        countsOfMatchingNumbers.forEach(count -> countPrize(Prize.valueOf(count)));
+        final Map<Prize, Integer> prizeStatus = new HashMap<>();
+        countsOfMatchingNumbers.forEach(count -> increasePrizeCount(Prize.valueOf(count), prizeStatus));
+        return new Report(prizeStatus, lottos);
     }
 
-    private void countPrize(Prize prize) {
+    private void increasePrizeCount(Prize prize, Map<Prize, Integer> prizeStatus) {
         int currentCount = prizeStatus.getOrDefault(prize, 0);
         prizeStatus.put(prize, currentCount + 1);
-    }
-
-    public Map<Prize, Integer> getPrizeStatus() {
-        return prizeStatus;
     }
 }

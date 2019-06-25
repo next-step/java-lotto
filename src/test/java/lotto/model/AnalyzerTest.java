@@ -26,8 +26,8 @@ public class AnalyzerTest {
 
     @RepeatedTest(value = 5)
     void analyze() {
-        analyzer.analyze(lottos);
-        Map<Prize, Integer> status = analyzer.getPrizeStatus();
+        Report report = analyzer.analyze(lottos);
+        Map<Prize, Integer> status = report.getPrizeStatus();
 
         assertThat(status.get(Prize.valueOf(5))).isEqualTo(1);
     }
