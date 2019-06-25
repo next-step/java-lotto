@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoTicket;
-
 public class PurchaseAmount {
-    private static final Long MAX_PURCHASE_AMOUNT = 100000000L;
+    private static final Long TICKET_PRICE = 1000L;
 
     private Long purchaseAmount;
 
@@ -17,18 +15,12 @@ public class PurchaseAmount {
     }
 
     private void validate(Long purchaseAmount) {
-        if (purchaseAmount == null || purchaseAmount == 0L || purchaseAmount > MAX_PURCHASE_AMOUNT) {
-            throw new IllegalArgumentException("Invalid purchase amount");
+        if (purchaseAmount == null || purchaseAmount == 0L) {
+            throw new IllegalArgumentException("Must be greater than 0");
         }
     }
 
     public int getNumberOfTickets() {
-        return (int) (purchaseAmount / LottoTicket.PRICE);
+        return (int) (purchaseAmount / TICKET_PRICE);
     }
-
-    public long getPurchaseAmount() {
-        return purchaseAmount;
-    }
-
-    public long getUsedPurchaseAmount() { return getNumberOfTickets() * LottoTicket.PRICE; }
 }
