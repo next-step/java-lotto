@@ -44,8 +44,8 @@ public class ExpressionSplitterTest {
 
     private static Stream<Arguments> provideParseWithColonStartOrEnd() {
         return Stream.of(
-                Arguments.of(":2", 1),
-                Arguments.of("1:2:", 2)
+                Arguments.of(":2", 2),  // 구분자 맨 앞에오는 경우 빈문자열이 배열 맨앞에 포함된다.
+                Arguments.of("1:2:", 2) // 구분자가 맨 뒤에오는 경우 맨뒤에 빈문자열이 없다.
         );
     }
 
@@ -56,7 +56,7 @@ public class ExpressionSplitterTest {
     void parseEmptyValues(String expression) {
         String[] elements = new ExpressionSplitter(expression).split();
 
-        assertThat(elements.length).isEqualTo(0);
+        assertThat(elements.length).isEqualTo(1);   // null 또는 공백문자는 빈문자열 1개를 포함하는 배열로 반환
     }
 
     @DisplayName("콤마 구분자가 포함된 표현식")
@@ -93,7 +93,7 @@ public class ExpressionSplitterTest {
                 Arguments.of("//.\n1.2.3", 3),
                 Arguments.of("//+\n1+2", 2),
                 Arguments.of("//*\n1*", 1),
-                Arguments.of("//-\n-1", 1)
+                Arguments.of("//-\n-1", 2)
         );
     }
 }

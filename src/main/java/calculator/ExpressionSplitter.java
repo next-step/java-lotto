@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,24 +24,25 @@ public class ExpressionSplitter {
     public ExpressionSplitter(String expression) {
 
         this.separator = DEFAULT_SEPARATOR_PATTERN;
-        this.expression = expression;
+        this.expression = Optional.ofNullable(expression).orElse("");
+
 
         /**
          * 커스텀 구분자가 지정된 경우 구분자와 표현식 추출
          */
-        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_EX_PATTERN).matcher(expression);
+        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_EX_PATTERN).matcher(this.expression);
 
         if(m.find()){
             /**
              * 추출된 구분자가 정규식 메타문자인 경우 발생 할 오류를 회피하기 위해
              * [Character class|https://docs.oracle.com/javase/tutorial/essential/regex/char_classes.html]로 만들어서 반환
              */
-            separator = String.format(CHAR_CLASS_WRAPPING_FORMAT, m.group(INDEX_OF_EXTRACTED_SEPARATOR));
+            this.separator = String.format(CHAR_CLASS_WRAPPING_FORMAT, m.group(INDEX_OF_EXTRACTED_SEPARATOR));
             this.expression = m.group(INDEX_OF_EXTRACTED_EXPRESSION);
         }
     }
 
     public String[] split() {
-        return expression.split(separator);
+        return expression.trim().split(separator);
     }
 }
