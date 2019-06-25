@@ -8,6 +8,7 @@ public class LottoStore {
     public LottoStore(Order order, Lottos handPickLottos) {
         this.order = order;
         this.lottos = handPickLottos;
+        verifyHanPickCountLimit();
     }
 
     public Lottos buyAutoPick() {
