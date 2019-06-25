@@ -10,14 +10,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGeneratorTest {
 
-    @DisplayName("랜덤한 로또번호를 생성합니다.")
+    @DisplayName("랜덤한 로또번호를 생성에 성공한다")
     @Test
-    void createLotto() {
+    void createLottoSuccess() {
         Lotto lotto = LottoGenerator.generate();
         assertThat(lotto).isNotNull();
     }
 
-    @DisplayName("수동으로 번호를 생성한다")
+    @DisplayName("수동으로 번호를 생성하는데 성공한다")
     @Test
     void generateLotto() {
         List<Number> numbers = LottoTest.ofNumbers(1, 2, 3, 4, 5, 6);

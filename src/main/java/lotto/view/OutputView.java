@@ -7,6 +7,9 @@ import lotto.model.Prize;
 
 public class OutputView {
 
+    public static final String RESULT_PRIZE_MESSAGE = "%d개 일치 (%d원)- %d개";
+    public static final String RESULT_PRIZE_SECOND_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
+
     public static void printLottoTicket(LottoTicket lottoTicket) {
         lottoTicket.getLottos()
                 .stream()
@@ -18,11 +21,12 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("--------------------------");
         for (Prize prize : Prize.values()) {
-            System.out.println(String.format("%d개 일치 (%d원)- %d개",
+            String printMessage = (prize.equals(Prize.SECOND)) ? RESULT_PRIZE_SECOND_MESSAGE : RESULT_PRIZE_MESSAGE;
+            System.out.println(String.format(printMessage,
                     prize.getMatchCount(),
                     prize.getMoney(),
                     result.getCount(prize)));
         }
-        System.out.println(String.format("총 수익률은 %f입니다.", result.getRateOfReturn()));
+        System.out.println(String.format("총 수익률은 %f 입니다.", result.getRateOfReturn()));
     }
 }

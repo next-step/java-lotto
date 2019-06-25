@@ -11,10 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
 
-    @DisplayName("로또티켓의 당첨결과를 반환: 1등 2개")
+    @DisplayName("1등 2개의 로또티켓의 당첨결과를 반환한다")
     @Test
     void getResult() {
-        Lotto winningLotto = ofLotto(1, 2, 3, 4, 5, 6);
+        WinningLotto winningLotto = WinningLotto.generate(
+                ofLotto(1, 2, 3, 4, 5, 6),
+                Number.of(7));
+
         List<Lotto> lottos = Arrays.asList(
                 ofLotto(1, 2, 3, 4, 5, 6),
                 ofLotto(1, 2, 3, 4, 5, 6),
@@ -28,7 +31,7 @@ public class LottoTicketTest {
         assertThat(lottoResult.getCount(Prize.SECOND)).isEqualTo(1);
     }
 
-    @DisplayName("1개 로또를 가진 로또 티켓으로 생성")
+    @DisplayName("1개 로또를 가진 로또 티켓으로 생성한다")
     @Test
     void createTicket() {
         List<Lotto> lottos = Arrays.asList(ofLotto(1, 2, 3, 4, 5, 6));
@@ -36,7 +39,7 @@ public class LottoTicketTest {
         assertThat(lottoTicket.getLottos()).hasSize(1);
     }
 
-    @DisplayName("2개 로또를 가진 로또 티켓으로 생성")
+    @DisplayName("2개 로또를 가진 로또 티켓으로 생성한다")
     @Test
     void createTicketByManyLotto() {
         List<Lotto> lottos = Arrays.asList(

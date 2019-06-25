@@ -7,12 +7,17 @@ import lotto.view.OutputView;
 public class Application {
 
     public static void main(String[] args) {
-        Money money = InputView.askOfAmount();
+        int inputOfAmount = InputView.askOfAmount();
 
-        LottoTicket lottoTicket = LottoMachine.buy(money);
+        Money moneyToBuy = Money.won(inputOfAmount);
+        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy);
         OutputView.printLottoTicket(lottoTicket);
 
-        Lotto winningLotto = LottoMachine.getWinningLotto(InputView.askOfWinningNumbers());
+        String inputOfNumbers = InputView.askOfWinningNumbers();
+        int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
+        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(inputOfNumbers, inputOfBonusNumber);
+
+        WinningLotto winningLotto = LottoMachine.getWinningLotto(winningLottoRequest);
 
         OutputView.printReport(lottoTicket.result(winningLotto));
     }

@@ -1,23 +1,27 @@
 package lotto.model;
 
 import lotto.exception.InvalidCountOfLottoException;
+import lotto.exception.NumbersIsEmptyException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
 
-    public static final int PRICE_VALUE = 1_000;
-    public static final Money PRICE = Money.wons(PRICE_VALUE);
+    public static final int PRICE = 1_000;
     public static final int SIZE = 6;
     private final List<Number> numbers;
 
     private Lotto(List<Number> numbers) {
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public static Lotto from(List<Number> numbers) {
+        if (numbers == null) {
+            throw new NumbersIsEmptyException();
+        }
         validateLottoSize(numbers);
         Collections.sort(numbers);
         return new Lotto(numbers);
@@ -32,10 +36,18 @@ public class Lotto {
         }
     }
 
+    static Money getPrice() {
+        return Money.won(Lotto.PRICE);
+    }
+
     public int getMatchCount(Lotto other) {
         return (int) other.numbers.stream()
                 .filter(numbers::contains)
                 .count();
+    }
+
+    public boolean hasBonusNumber(Number number) {
+        return numbers.contains(number);
     }
 
     public List<Number> getNumbers() {

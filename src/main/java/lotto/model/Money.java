@@ -12,17 +12,17 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money wons(long amount) {
+    public static Money won(long amount) {
         if (amount < 0) {
             throw new MinimumAmountException(amount);
         }
         return new Money(amount);
     }
 
-    public long countAvailableLotto() {
-        long count = amount / Lotto.PRICE.amount;
+    public long countAvailable(Money money) {
+        long count = this.amount / money.amount;
         if (count <= 0) {
-            throw new MinimumAmountException(amount);
+            throw new MinimumAmountException(money.amount);
         }
         return count;
     }

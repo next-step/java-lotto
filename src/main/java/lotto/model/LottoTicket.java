@@ -8,18 +8,18 @@ public class LottoTicket {
 
     private List<Lotto> lottos;
 
-    public LottoTicket(List<Lotto> lottos) {
-        this.lottos = lottos;
+    private LottoTicket(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public static LottoTicket of(List<Lotto> lottos) {
         return new LottoTicket(lottos);
     }
 
-    public LottoResult result(Lotto winningLotto) {
+    public LottoResult result(WinningLotto winningLotto) {
         List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            prizes.add(Prize.of(lotto.getMatchCount(winningLotto)));
+            prizes.add(winningLotto.getResultOf(lotto));
         }
         return LottoResult.of(prizes);
     }

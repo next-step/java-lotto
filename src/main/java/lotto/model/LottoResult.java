@@ -39,7 +39,7 @@ public class LottoResult {
     }
 
     private long totalMoneyOfBuyLotto() {
-        return countTotalOfBuyLotto() * Lotto.PRICE_VALUE;
+        return countTotalOfBuyLotto() * Lotto.PRICE;
     }
 
     private int countTotalOfBuyLotto() {

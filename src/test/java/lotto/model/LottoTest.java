@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.exception.InvalidCountOfLottoException;
+import lotto.exception.NumbersIsEmptyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
-    @DisplayName("로또번호가 6개 일치하는 경우")
+    @DisplayName("로또번호가 6개 일치한다")
     @Test
     void matchCountToOtherLotto() {
         Lotto lotto = ofLotto(1, 2, 3, 4, 5, 6);
@@ -45,9 +46,16 @@ public class LottoTest {
 
     @DisplayName("로또 넘버가 중복인 경우 exception")
     @Test
-    void duplicatedLottoNumber() {
+    void duplicatedLottoNumberThenFail() {
         assertThatExceptionOfType(InvalidCountOfLottoException.class)
                 .isThrownBy(() -> Lotto.from(ofNumbers(1, 2, 3, 4, 5, 5)));
+    }
+
+    @DisplayName("로또 번호가 없을 시 exception")
+    @Test
+    void validateNumbersIsEmptyThenFail() {
+        assertThatExceptionOfType(NumbersIsEmptyException.class)
+                .isThrownBy(() -> Lotto.from(null));
     }
 
     static Lotto ofLotto(int... numbers) {
