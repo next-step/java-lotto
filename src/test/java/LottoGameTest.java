@@ -1,3 +1,6 @@
+import domain.LottoGame;
+import domain.LottoNumber;
+import domain.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +15,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoGameTest {
     int price = 14000;
     String result;
+    LottoNumber lottoNumber;
+    LottoResult lottoResult;
+    LottoGame lottoGame;
 
 
     @BeforeEach
@@ -31,12 +37,11 @@ public class LottoGameTest {
     @DisplayName("1000원보다 낮은 가격 입력이 되었을때 exception")
     void checkPrice() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-                    if (Integer.parseInt(result)>1000)
+                    if (price > 1000)
                         throw new IllegalArgumentException("입력값이 잘못되었습니다. 가격을 다시 한번 입력해주세요.");
                 }
         );
     }
-
 
     @Test
     void getAutoLottoNumber() {
@@ -88,7 +93,15 @@ public class LottoGameTest {
 
     @Test
     void removeBlankAndSplit() {
-        String input ="1, 2, 3, 4, 5, 6";
-        assertThat(input.replaceAll(" ", "").split(",")).containsExactly("1","2","3","4","5","6");
+        String input = "1, 2, 3, 4, 5, 6";
+        assertThat(input.replaceAll(" ", "").split(",")).containsExactly("1", "2", "3", "4", "5", "6");
     }
+    @Test
+    void getPercentOfRevenue(){
+        double revenue = 2332.323;
+        String[] result=String.valueOf(revenue).split("\\.");
+        String percent = result[0] +"."+result[1].substring(0,2);
+        assertThat(percent).isEqualTo("2332.32");
+    }
+
 }

@@ -6,9 +6,10 @@ import view.InputVeiw;
 public class LottoGameMain {
 
     public static void main(String[] args) {
-        int numofLotto = InputVeiw.userInput();
+        int price = InputVeiw.userInput();
 
-        LottoGame.run(numofLotto);
-        LottoGame.showResult();
+        LottoGame lottoGame = new LottoGame(price);
+        lottoGame.run();
+        lottoGame.showResult();
     }
 }
