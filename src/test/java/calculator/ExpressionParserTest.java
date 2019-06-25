@@ -65,4 +65,12 @@ public class ExpressionParserTest {
 
         assertThat(elements.size()).isEqualTo(2);
     }
+
+    @DisplayName("콤마와 콜론이 함께 포함된 표현식")
+    @Test
+    void parseWithCommaAndColon(){
+        NumberElementCollection elements = ExpressionParser.parse("1,2:3");
+
+        assertThat(elements.size()).isEqualTo(3);
+    }
 }
