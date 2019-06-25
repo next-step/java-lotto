@@ -21,8 +21,9 @@ public class LottoResultTest {
     @DisplayName("수익률")
     public void test() {
         LottoResult lottoResult = new LottoResult();
+        lottoResult.put(3);
+        lottoResult.put(3);
         lottoResult.put(4);
-        lottoResult.put(4);
-        assertThat(lottoResult.getRateOfReturn()).isEqualTo(10);
+        assertThat(lottoResult.getRateOfReturn()).isEqualTo(20);
     }
 }
