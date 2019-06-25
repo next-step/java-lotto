@@ -19,14 +19,14 @@ public class NumberGenerator {
                 .collect(toList());
     }
 
-    public static List<Number> peek(int count) {
+    public List<Number> peek(int count) {
         List<Number> numbers = IntStream.range(0, count)
-                .mapToObj(NumberGenerator::getNumber)
+                .mapToObj(this::getNumber)
                 .collect(toList());
         return new ArrayList<>(numbers);
     }
 
-    private static Number getNumber(int num) {
+    private Number getNumber(int num) {
         return numbers.get(num);
     }
 

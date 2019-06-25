@@ -13,10 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class NumberGeneratorTest {
 
+    NumberGenerator numberGenerator = new NumberGenerator();
+
     @DisplayName("로또 숫자를 " + Lotto.SIZE + "개 추출한다")
     @Test
     void searchNumbers() {
-        List<Number> number = NumberGenerator.peek(Lotto.SIZE);
+        List<Number> number = numberGenerator.peek(Lotto.SIZE);
         assertThat(number).contains(ofNumbers(1, 2, 3, 4, 5, 6));
     }
 

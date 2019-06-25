@@ -4,6 +4,7 @@ import lotto.exception.MinimumAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,5 +39,13 @@ public class LottoMachineTest {
         List<Lotto> buyLottos = lottoMachine.buyLotto(money);
 
         assertThat(buyLottos).hasSize(2);
+    }
+
+    @DisplayName("로또 한장을 수동으로 구매한다")
+    @Test
+    void buyManualLotto() {
+        List<String> numbersOfLotto = Arrays.asList("1,2,3,4,5,6");
+        List<Lotto> buyLottos = lottoMachine.buyLotto2(numbersOfLotto);
+        assertThat(buyLottos).hasSize(1);
     }
 }
