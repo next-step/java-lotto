@@ -14,7 +14,25 @@ public class PurchaseAmountTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     PurchaseAmount.of(0L);
-                }).withMessageMatching("Must be greater than 0");
+                }).withMessageMatching("Invalid purchase amount");
+    }
+
+    @Test
+    @DisplayName("구입금액이 0보다 작은경우 예외처리를 확인한다")
+    void checkException2() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    PurchaseAmount.of(0L);
+                }).withMessageMatching("Invalid purchase amount");
+    }
+
+    @Test
+    @DisplayName("최대 구입가능금액 이상인경우 예외처리를 확인한다")
+    void checkException3() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    PurchaseAmount.of(100000001L);
+                }).withMessageMatching("Invalid purchase amount");
     }
 
     @Test
