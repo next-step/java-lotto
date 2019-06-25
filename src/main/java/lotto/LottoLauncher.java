@@ -13,6 +13,7 @@ public class LottoLauncher {
 
     Lottos purchasedLottos = Store.buyLottos(quantity);
     OutputView.printPurchasedLottosNumber(purchasedLottos);
+    int bonusBallNumber = InputView.askBonusBallNumber();
 
     String lastWeekWinLottoNumber = InputView.askLastWeekWinLottoNumber();
     Lotto LastWinLotto = new Lotto(lastWeekWinLottoNumber);
