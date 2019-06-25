@@ -1,6 +1,10 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.domain.LottoRank;
+import step2.domain.LottoSeller;
+import step2.domain.LottoTicket;
+import step2.domain.LottoTicketGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

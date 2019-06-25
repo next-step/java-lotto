@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ public enum LottoRank {
     SECOND_PLACE(5, 1500000),
     THIRD_PLACE(4, 50000),
     FOURTH_PLACE(3, 5000),
-    LOSER(2, 0);
+    LOSER(0, 0);
 
     private int numberOfMatchedToLuckyNumber;
     private int prizeMoney;
@@ -18,7 +18,7 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank from(long countMatchedNumbers) {
+    public static LottoRank from(int countMatchedNumbers) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.numberOfMatchedToLuckyNumber == countMatchedNumbers)
                 .findFirst()

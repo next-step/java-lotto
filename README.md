@@ -77,18 +77,18 @@
 - [ ] 로또자동판매기(LottoSeller) 객체 생성
     - [x] TEST - 금액을 입력 받아 구입할 로또 복권 개수를 반환한다
     - [x] TEST - 구입할 개수만큼 로또복권을 생성한다
-    - [ ] TEST - 각 일치 개수 별 당첨된 복권의 개수를 반환한다
-    - [ ] TEST - 생성된 로또복권의 수익률을 계산한다
+    - [x] TEST - 각 일치 개수 별 당첨된 복권의 개수를 반환한다
+    - [x] TEST - 생성된 로또복권의 수익률을 계산한다
     - [ ] REFACTORING
 - [ ] 당첨결과를 매칭할 Enum(LottoRank) 객체 생성
-    - [ ] REFACTORING
+    - [x] REFACTORING
 - [ ] InputView 객체 생성
-    - [ ] TEST - 구입 금액을 입력받고, 출력한다
-    - [ ] TEST - 구매 개수를 LottoSeller로 부터 반환받아서 출력한다
-    - [ ] TEST - 구매 개수만큼 생성된 로또복권들을 출력한다
-    - [ ] TEST - 지난주 당첨 번호를 입력 받는다
+    - [x] TEST - 구입 금액을 입력받고, 출력한다
+    - [x] TEST - 구매 개수를 LottoSeller로 부터 반환받아서 출력한다
+    - [x] TEST - 구매 개수만큼 생성된 로또복권들을 출력한다
+    - [x] TEST - 지난주 당첨 번호를 입력 받는다
     - [ ] REFACTORING
 - [ ] OutputView 객체 생성
-    - [ ] TEST - 각 일치 개수 별 당첨된 복권의 개수를 LottoSeller로 부터 반환받아서 출력한다
+    - [x] TEST - 각 일치 개수 별 당첨된 복권의 개수를 LottoSeller로 부터 반환받아서 출력한다
     - [ ] TEST - 총 수익률을 LottoSeller로 부터 반환받아서 출력한다.
     - [ ] REFACTORING

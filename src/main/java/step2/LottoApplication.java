@@ -1,5 +1,8 @@
 package step2;
 
+import step2.domain.LottoRank;
+import step2.domain.LottoSeller;
+import step2.domain.LottoTicket;
 import step2.view.InputView;
 import step2.view.OutputView;
 
