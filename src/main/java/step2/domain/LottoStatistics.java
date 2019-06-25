@@ -12,14 +12,14 @@ public class LottoStatistics {
         this.lottos = lottos;
     }
 
-    public List<LottoRank> checkMyRanks(final WinningLotto winningLotto) {
+    public List<LottoRank> getMyRanks(final WinningLotto winningLotto) {
         return lottos.getLottos().stream()
-                     .map(lotto -> lotto.matchLotto(winningLotto))
+                     .map(lotto -> lotto.matchLottoNumber(winningLotto))
                      .collect(Collectors.toList());
     }
 
     public double getBenefitPercent(final WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = checkMyRanks(winningLotto);
+        List<LottoRank> lottoRanks = getMyRanks(winningLotto);
         final long totalBenefit = lottoRanks.stream()
                                             .map(LottoRank::getMoney)
                                             .mapToLong(Money::getMoney)

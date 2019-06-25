@@ -18,7 +18,7 @@ public class LottoRankTest {
 
         LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
         WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6))));
-        assertThat(lottoStatistics.checkMyRanks(winningLotto).get(0)).isEqualTo(LottoRank.FIRST);
+        assertThat(lottoStatistics.getMyRanks(winningLotto).get(0)).isEqualTo(LottoRank.FIRST);
     }
 
 }

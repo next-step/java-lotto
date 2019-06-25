@@ -21,7 +21,7 @@ public class OutputView {
     public static void printLottoStatistics(WinningLotto winningLotto, LottoStatistics lottoStatistics) {
         System.out.println("\n당첨 통계\n---------");
 
-        Map<Integer, List<LottoRank>> groupByRanks = lottoStatistics.checkMyRanks(winningLotto)
+        Map<Integer, List<LottoRank>> groupByRanks = lottoStatistics.getMyRanks(winningLotto)
                                                                     .stream()
                                                                     .collect(Collectors.groupingBy(LottoRank::getRank));
 
