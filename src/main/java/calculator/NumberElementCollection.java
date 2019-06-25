@@ -21,4 +21,8 @@ public class NumberElementCollection {
     private boolean isNotEmpty(String value){
         return !value.trim().isEmpty();
     }
+
+    public int sum() {
+        return 0;
+    }
 }
