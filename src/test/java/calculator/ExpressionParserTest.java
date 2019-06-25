@@ -74,4 +74,23 @@ public class ExpressionParserTest {
         assertThat(elements.size()).isEqualTo(3);
     }
 
+    @DisplayName("다양한 커스텀 구분자 테스트")
+    @ParameterizedTest
+    @MethodSource("provideExtractionSeparator")
+    void extractionSeparator(String expression, int expectSize) {
+
+        NumberElementCollection elements = ExpressionParser.parse(expression);
+
+        assertThat(elements.size()).isEqualTo(expectSize);
+    }
+
+    private static Stream<Arguments> provideExtractionSeparator() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", 3),
+                Arguments.of("//+\n1+2", 2),
+                Arguments.of("//*\n1*", 1),
+                Arguments.of("//-\n-1", 1)
+        );
+    }
+
 }
