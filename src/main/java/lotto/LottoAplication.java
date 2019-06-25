@@ -16,6 +16,7 @@ public class LottoAplication {
         LottoStore lottoStore = new LottoStore(order, handPickLottos);
         Lottos lottos = lottoStore.buyAutoPick();
 
+        ResultView.printBuyLottoCount(order);
         ResultView.printPickedLottoNumbers(lottos);
 
         LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
