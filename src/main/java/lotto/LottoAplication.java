@@ -4,6 +4,8 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoAplication {
 
     public static void main(String[] args) {
@@ -12,7 +14,9 @@ public class LottoAplication {
         Lottos lottos = LottoRetailer.buyAutoPick(orderAmount);
         ResultView.printPickedLottoNumbers(lottos);
 
-        WinningNumbers winningNumbers = InputView.inputWinningNumber();
+        List<Integer> numbers = InputView.inputWinningNumber();
+        int bonusNumber = InputView.winningBonusNumber();
+        WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
         LottoAggregator lottoAggregator = lottos.matching(winningNumbers);
         ResultView.printResult(lottoAggregator);

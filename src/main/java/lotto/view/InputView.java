@@ -18,16 +18,20 @@ public class InputView {
     }
 
 
-    public static WinningNumbers inputWinningNumber() {
+    public static List<Integer> inputWinningNumber() {
         System.out.println("당첨번호를 입력하세요.");
         Scanner scanner = new Scanner(System.in);
         String stringNumbers = scanner.nextLine();
-        List<Integer> numbers = Arrays.stream(stringNumbers.split(","))
+        return Arrays.stream(stringNumbers.split(","))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
-        return new WinningNumbers(numbers, 1);
+    }
 
+    public static int winningBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
 }

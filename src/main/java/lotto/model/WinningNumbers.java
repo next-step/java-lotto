@@ -24,7 +24,7 @@ public class WinningNumbers extends LottoNumbers{
 
     private void verifyBonusDuplication(List<Integer> numbers, Integer bonusNumber) {
         if(numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("이미 번호가 뽑혀있습니다.");
+            throw new IllegalArgumentException("이미 번호가 뽑혀있습니다. ");
         }
     }
 
