@@ -3,7 +3,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringAddCalculatorTest {
     private StringAddCalculator cal;
@@ -29,5 +28,8 @@ public class StringAddCalculatorTest {
         assertThat(cal.add("1,2:3")).isEqualTo(6);
     }
 
-
+    @Test
+    public void testAddCustomDelimiter() throws Exception {
+        assertThat(cal.add("//;\n1;2;3")).isEqualTo(6);
+    }
 }
