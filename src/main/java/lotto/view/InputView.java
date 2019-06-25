@@ -26,7 +26,7 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
-        return new WinningNumbers(numbers);
+        return new WinningNumbers(numbers, 1);
 
     }
 

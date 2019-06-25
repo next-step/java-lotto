@@ -12,13 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WinningNumbersTest {
 
+    private int BONUS_NUMBER = 10;
 
     @Test
     @DisplayName("중복된 숫자 예외처리")
     public void duplicationTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             List<Integer> numbers = Arrays.asList(1, 2, 3, 3, 5, 6);
-            new WinningNumbers(numbers);
+            new WinningNumbers(numbers, BONUS_NUMBER);
         });
     }
 
@@ -27,7 +28,7 @@ class WinningNumbersTest {
     public void rangeException() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             List<Integer> numbers = Arrays.asList(1, 50, 3, 3, 5, 6);
-            new WinningNumbers(numbers);
+            new WinningNumbers(numbers, BONUS_NUMBER);
         });
     }
 
@@ -35,8 +36,8 @@ class WinningNumbersTest {
     @DisplayName("6개의 숫자가 아닐 경우 예외처리")
     public void lessThanSixNumberExceptionTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5));
-            new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
+            new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5), BONUS_NUMBER);
+            new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 7), BONUS_NUMBER);
         });
     }
 
@@ -44,8 +45,16 @@ class WinningNumbersTest {
     @DisplayName("당첨 번호와 일치 개수")
     public void compareNumbers() {
         PickNumbers pickNumbers = new PickNumbers(Arrays.asList(1, 2, 3, 9, 10, 12));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 15));
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 15), BONUS_NUMBER);
         assertThat(winningNumbers.compare(pickNumbers)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("보너스 넘버가 중복일 경우 예외처리")
+    public void bonusDuplicationException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, BONUS_NUMBER), BONUS_NUMBER);
+        });
     }
 
 

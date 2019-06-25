@@ -22,7 +22,7 @@ public class LottosTest {
                 new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 9))
         );
         Lottos lottos = new Lottos(lottoNumbers);
-        WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9));
+        WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When
         LottoAggregator lottoAggregator = lottos.matching(winnerNumbers);

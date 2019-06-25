@@ -21,7 +21,7 @@ public class LottoNumbers {
         }
     }
 
-    private void verifyNumber(int number) {
+    void verifyNumber(int number) {
         if(number < MIN || number > MAX) {
             throw new IllegalArgumentException("1~45 범위에서만 생성 가능 합니다.");
         }

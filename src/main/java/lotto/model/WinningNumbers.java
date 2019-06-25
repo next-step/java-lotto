@@ -6,10 +6,14 @@ public class WinningNumbers extends LottoNumbers{
 
 
     private List<Integer> numbers;
+    private Integer bonusNumber;
 
-    public WinningNumbers(List<Integer> numbers) {
+    public WinningNumbers(List<Integer> numbers, Integer bonusNumber) {
         super(numbers);
+        verifyNumber(bonusNumber);
+        verifyBonusDuplication(numbers, bonusNumber);
         this.numbers = numbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public int compare(PickNumbers pickNumbers) {
@@ -17,4 +21,11 @@ public class WinningNumbers extends LottoNumbers{
                 .filter(number -> pickNumbers.contains(number))
                 .count());
     }
+
+    private void verifyBonusDuplication(List<Integer> numbers, Integer bonusNumber) {
+        if(numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("이미 번호가 뽑혀있습니다.");
+        }
+    }
+
 }
