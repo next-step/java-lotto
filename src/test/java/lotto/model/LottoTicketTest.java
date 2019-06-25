@@ -15,7 +15,7 @@ public class LottoTicketTest {
     @DisplayName("1등 2개의 로또티켓의 당첨결과를 반환한다")
     @Test
     void getResult() {
-        WinningLotto winningLotto = WinningLotto.generate(
+        WinningLotto winningLotto = WinningLotto.of(
                 ofLotto(1, 2, 3, 4, 5, 6),
                 Number.of(7));
 

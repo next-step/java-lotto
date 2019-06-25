@@ -1,33 +1,20 @@
 package lotto.model;
 
-import lotto.exception.DuplicateLottoNumberException;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto lotto;
-    private final Number number;
+    private final Number bonus;
 
-    public WinningLotto(Lotto lotto, Number number) {
+    public WinningLotto(Lotto lotto, Number bonus) {
         this.lotto = lotto;
-        this.number = number;
+        this.bonus = bonus;
     }
 
-    public static WinningLotto generate(String inputOfNumber, int inputOfBonus) {
-        List<Number> numbers = Arrays.stream(inputOfNumber.trim().split(","))
-                .map(Integer::parseInt)
-                .map(Number::of)
-                .collect(Collectors.toList());
+    public static WinningLotto of(Lotto lotto, Number bonus) {
+        return new WinningLotto(lotto, bonus);
 
-        Lotto lotto = Lotto.from(numbers);
-        Number number = Number.of(inputOfBonus);
-        if(lotto.hasBonusNumber(number)){
-            throw new DuplicateLottoNumberException(inputOfBonus);
-        }
-        return new WinningLotto(lotto, number);
+
     }
 
     Lotto getLotto() {
@@ -35,7 +22,7 @@ public class WinningLotto {
     }
 
     Number getNumber() {
-        return number;
+        return bonus;
     }
 
     @Override
@@ -44,19 +31,19 @@ public class WinningLotto {
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
         return Objects.equals(lotto, that.lotto) &&
-                Objects.equals(number, that.number);
+                Objects.equals(bonus, that.bonus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto, number);
+        return Objects.hash(lotto, bonus);
     }
 
     @Override
     public String toString() {
         return "WinningLotto{" +
                 "lotto=" + lotto +
-                ", number=" + number +
+                ", bonus=" + bonus +
                 '}';
     }
 }

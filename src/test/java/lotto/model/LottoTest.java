@@ -58,7 +58,7 @@ public class LottoTest {
                 .isThrownBy(() -> Lotto.from(null));
     }
 
-    static Lotto ofLotto(int... numbers) {
+    public static Lotto ofLotto(int... numbers) {
         return Lotto.from(ofNumbers(numbers));
     }
 
