@@ -1,6 +1,6 @@
 package camp.nextstep.edu.lotto;
 
-import camp.nextstep.edu.lotto.controller.LotteryController;
+import camp.nextstep.edu.lotto.domain.LotteryService;
 import camp.nextstep.edu.lotto.domain.Lottery;
 import camp.nextstep.edu.lotto.domain.RewardType;
 import camp.nextstep.edu.lotto.view.ConsoleInputView;
@@ -13,25 +13,25 @@ import java.util.Map;
 import java.util.Set;
 
 public class LotteryApplication {
-    private final LotteryController lotteryController;
+    private final LotteryService lotteryService;
     private final InputView inputView;
     private final ResultView resultView;
 
-    public LotteryApplication(LotteryController lotteryController,
+    public LotteryApplication(LotteryService lotteryService,
                               InputView inputView,
                               ResultView resultView) {
-        this.lotteryController = lotteryController;
+        this.lotteryService = lotteryService;
         this.inputView = inputView;
         this.resultView = resultView;
     }
 
     public static void main(String[] args) {
-        final LotteryController lotteryController = new LotteryController();
+        final LotteryService lotteryService = new LotteryService();
         final InputView consoleInputView = new ConsoleInputView();
         final ResultView consoleResultView = new ConsoleResultView();
 
         final LotteryApplication lotteryApplication = new LotteryApplication(
-                lotteryController,
+                lotteryService,
                 consoleInputView,
                 consoleResultView
         );
@@ -45,13 +45,13 @@ public class LotteryApplication {
 
     public void run() {
         final int investment = inputView.inputInvestment();
-        final List<Lottery> purchasedLotteries = lotteryController.purchase(investment);
+        final List<Lottery> purchasedLotteries = lotteryService.purchase(investment);
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
-        final Map<RewardType, Integer> rewardMap = lotteryController.getResult(purchasedLotteries, winningNumbers);
-        final long sumOfRewards = lotteryController.sumAllRewards(rewardMap);
-        final double earningsRate = lotteryController.calculateEarningsRate(investment, sumOfRewards);
+        final Map<RewardType, Integer> rewardMap = lotteryService.getResult(purchasedLotteries, winningNumbers);
+        final long sumOfRewards = lotteryService.sumAllRewards(rewardMap);
+        final double earningsRate = lotteryService.calculateEarningsRate(investment, sumOfRewards);
         resultView.printResults(rewardMap, earningsRate);
     }
 }

@@ -1,6 +1,5 @@
-package camp.nextstep.edu.lotto.controller;
+package camp.nextstep.edu.lotto.domain;
 
-import camp.nextstep.edu.lotto.domain.Lottery;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,13 +10,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class LotteryControllerTest {
+class LotteryServiceTest {
 
-    private LotteryController lotteryController;
+    private LotteryService lotteryService;
 
     @BeforeEach
     void setup() {
-        lotteryController = new LotteryController();
+        lotteryService = new LotteryService();
     }
 
     @Test
@@ -26,7 +25,7 @@ class LotteryControllerTest {
         // given
         final int investment = 0;
         // when
-        final List<Lottery> lottery = lotteryController.purchase(0);
+        final List<Lottery> lottery = lotteryService.purchase(0);
         // then
         assertThat(lottery).hasSize(0);
     }
@@ -37,7 +36,7 @@ class LotteryControllerTest {
         // given
         final int investment = 14000;
         // when
-        final List<Lottery> lottery = lotteryController.purchase(investment);
+        final List<Lottery> lottery = lotteryService.purchase(investment);
         // then
         assertThat(lottery).hasSize(14);
     }
@@ -46,14 +45,14 @@ class LotteryControllerTest {
     @DisplayName("투자원금이 0원 이면 IllegalArgumentException 을 발생시킵니다")
     void calculateEarningsRate1() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryController.calculateEarningsRate(0, 5000));
+                .isThrownBy(() -> lotteryService.calculateEarningsRate(0, 5000));
     }
 
     @Test
     @DisplayName("수익금이 0원 미만인 경우 IllegalArgumentException 을 발생시킵니다")
     void calculateEarningsRate2() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryController.calculateEarningsRate(5000, -1));
+                .isThrownBy(() -> lotteryService.calculateEarningsRate(5000, -1));
     }
 
     @Test
@@ -63,7 +62,7 @@ class LotteryControllerTest {
         final int investment = 5000;
         final long reward = 0;
         // when
-        final double actual = lotteryController.calculateEarningsRate(investment, reward);
+        final double actual = lotteryService.calculateEarningsRate(investment, reward);
         // then
         assertThat(actual).isCloseTo(0, Percentage.withPercentage(1));
     }
@@ -75,7 +74,7 @@ class LotteryControllerTest {
         final int investment = 10000;
         final long reward = 100000;
         // when
-        final double actual = lotteryController.calculateEarningsRate(investment, reward);
+        final double actual = lotteryService.calculateEarningsRate(investment, reward);
         // then
         assertThat(actual).isCloseTo(10, Percentage.withPercentage(1));
     }

@@ -1,8 +1,4 @@
-package camp.nextstep.edu.lotto.controller;
-
-import camp.nextstep.edu.lotto.domain.Lottery;
-import camp.nextstep.edu.lotto.domain.NaturalNumber;
-import camp.nextstep.edu.lotto.domain.RewardType;
+package camp.nextstep.edu.lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -11,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LotteryController {
+public class LotteryService {
 
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int ZERO = 0;
