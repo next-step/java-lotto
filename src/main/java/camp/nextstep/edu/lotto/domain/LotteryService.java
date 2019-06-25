@@ -44,7 +44,9 @@ public class LotteryService {
         return rewardMap;
     }
 
-    public double calculateEarningsRate(int investment, long reward) {
+    public double calculateEarningsRate(int investment, Map<RewardType, Integer> rewardMap) {
+        final double reward = this.sumAllRewards(rewardMap);
+
         if (investment <= ZERO) {
             throw new IllegalArgumentException("'investment' must be greater than " + ZERO);
         }
@@ -54,7 +56,7 @@ public class LotteryService {
         return reward / (double) investment;
     }
 
-    public long sumAllRewards(Map<RewardType, Integer> rewardMap) {
+    private long sumAllRewards(Map<RewardType, Integer> rewardMap) {
         return rewardMap.entrySet()
                 .stream()
                 .map(entry -> entry.getKey().getReward() * entry.getValue())

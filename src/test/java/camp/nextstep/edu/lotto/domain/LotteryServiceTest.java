@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.EnumMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,15 +45,11 @@ class LotteryServiceTest {
     @Test
     @DisplayName("투자원금이 0원 이면 IllegalArgumentException 을 발생시킵니다")
     void calculateEarningsRate1() {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryService.calculateEarningsRate(0, 5000));
-    }
+        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
+        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, 1);
 
-    @Test
-    @DisplayName("수익금이 0원 미만인 경우 IllegalArgumentException 을 발생시킵니다")
-    void calculateEarningsRate2() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lotteryService.calculateEarningsRate(5000, -1));
+                .isThrownBy(() -> lotteryService.calculateEarningsRate(0, rewardMap));
     }
 
     @Test
@@ -60,9 +57,9 @@ class LotteryServiceTest {
     void calculateEarningsRate3() {
         // given
         final int investment = 5000;
-        final long reward = 0;
+        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         // when
-        final double actual = lotteryService.calculateEarningsRate(investment, reward);
+        final double actual = lotteryService.calculateEarningsRate(investment, rewardMap);
         // then
         assertThat(actual).isCloseTo(0, Percentage.withPercentage(1));
     }
@@ -72,9 +69,10 @@ class LotteryServiceTest {
     void calculateEarningsRate4() {
         // given
         final int investment = 10000;
-        final long reward = 100000;
+        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
+        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, 2);
         // when
-        final double actual = lotteryService.calculateEarningsRate(investment, reward);
+        final double actual = lotteryService.calculateEarningsRate(investment, rewardMap);
         // then
         assertThat(actual).isCloseTo(10, Percentage.withPercentage(1));
     }

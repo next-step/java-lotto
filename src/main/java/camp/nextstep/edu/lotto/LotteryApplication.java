@@ -50,8 +50,7 @@ public class LotteryApplication {
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
         final Map<RewardType, Integer> rewardMap = lotteryService.getResult(purchasedLotteries, winningNumbers);
-        final long sumOfRewards = lotteryService.sumAllRewards(rewardMap);
-        final double earningsRate = lotteryService.calculateEarningsRate(investment, sumOfRewards);
+        final double earningsRate = lotteryService.calculateEarningsRate(investment, rewardMap);
         resultView.printResults(rewardMap, earningsRate);
     }
 }
