@@ -17,4 +17,17 @@ class LottosTest {
         assertThat(lottos.getPickNumbers().size()).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("합치기")
+    public void merge() {
+        Lottos lottos1 = new Lottos();
+        lottos1.add(new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        Lottos lottos2 = new Lottos();
+        lottos2.add(new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        lottos1.merge(lottos2);;
+        assertThat(lottos1.getPickNumbers().size()).isEqualTo(2);
+    }
+
 }

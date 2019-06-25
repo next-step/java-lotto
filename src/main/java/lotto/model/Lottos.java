@@ -19,4 +19,8 @@ public class Lottos {
     public List<PickNumbers> getPickNumbers() {
         return pickNumbers;
     }
+
+    public void merge(Lottos handPickLottos) {
+        this.pickNumbers.addAll(handPickLottos.getPickNumbers());
+    }
 }
