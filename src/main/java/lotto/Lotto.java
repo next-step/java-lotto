@@ -5,12 +5,10 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int LOTTO_IS_WINNER_NUMBER_COUNT = 1;
-    private static final int LOTTO_ISNOT_WINNER_NUMBER_COUNT = 0;
-    private static final int LOTTO_DEFAULT_SIZE = 6;
     static final String LAST_WEEK_WINNUM_DELIMITER = ",";
     private List<Integer> lottoGameNumbers;
     private int winnerNumberCount = 0;
+    private int bonusNumberCount = 0;
 
     public Lotto(List<Integer> lottoGameNumbers) {
         this.lottoGameNumbers = lottoGameNumbers;
@@ -21,10 +19,15 @@ public class Lotto {
         return winnerNumberCount;
     }
 
-    public void winnerCheck(String lastWeekWinnerNumber) {
+    public int getBonusNumberCount() {
+        return bonusNumberCount;
+    }
+
+    public void winnerCheck(String lastWeekWinnerNumber, String lastWeekBonusNumber) {
         String[] lastWeekwinNumbers = lastWeekWinnerNumber.split(LAST_WEEK_WINNUM_DELIMITER);
         for (String winNumber : lastWeekwinNumbers) {
             winnerNumberCount += isWinnerNumber(winNumber);
+            bonusNumberCount += isWinnerNumber(lastWeekBonusNumber);
         }
     }
 
@@ -36,9 +39,9 @@ public class Lotto {
 
     private int isWinnerNumber(String winNumber) {
         if (lottoGameNumbers.contains(Integer.parseInt(winNumber))) {
-            return LOTTO_IS_WINNER_NUMBER_COUNT;
+            return NumberEnum.LOTTO_IS_WINNER_NUMBER_COUNT.value();
         }
-        return LOTTO_ISNOT_WINNER_NUMBER_COUNT;
+        return NumberEnum.LOTTO_ISNOT_WINNER_NUMBER_COUNT.value();
     }
 
     private void lottoNumberValidationCheck() {
@@ -48,7 +51,7 @@ public class Lotto {
     }
 
     private boolean islottoNumberWrongSize() {
-        return lottoGameNumbers.size() != LOTTO_DEFAULT_SIZE;
+        return lottoGameNumbers.size() != NumberEnum.LOTTO_DEFAULT_SIZE.value();
     }
 
     private boolean islottoNumberDuplicate() {

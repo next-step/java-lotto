@@ -13,11 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGamesTest {
 
     private String LastWeekWinnerNumber;
+    private String LastWeekBonusNumber;
     private List<Lotto> lottos;
 
     @BeforeEach
     void setUp() {
         LastWeekWinnerNumber = "6,13,23,29,35,42";
+        LastWeekBonusNumber = "3";
         lottos = new ArrayList <>();
     }
 
@@ -49,11 +51,25 @@ public class LottoGamesTest {
         assertThat(lottoGames.lottoSummaryWinnerCount(50000)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("지정된 당첨금액에 맞는 당첨 게임 수 계산 테스트(보너스 포함)")
+    void lottoSummaryWinnerCountBonus() {
+        Integer[][] testLottoSet = {
+                {3, 6, 13, 23, 29, 35},
+                {1, 5, 7, 29, 35, 42},
+                {6, 13, 23, 29, 36, 45}
+        };
+        lottoWinnerCheck(testLottoSet);
+        LottoGames lottoGames = new LottoGames(lottos);
+        assertThat(lottoGames.lottoSummaryWinnerCount(50000)).isEqualTo(1);
+        assertThat(lottoGames.lottoSummaryWinnerCount(30000000)).isEqualTo(1);
+    }
+
     private void lottoWinnerCheck(Integer[][] testLottoSet) {
         for (Integer[] tempLottos : testLottoSet) {
             List<Integer> lottoNumber = Arrays.asList(tempLottos);
             Lotto lotto = new Lotto(lottoNumber);
-            lotto.winnerCheck(LastWeekWinnerNumber);
+            lotto.winnerCheck(LastWeekWinnerNumber, LastWeekBonusNumber);
             lottos.add(lotto);
         }
     }

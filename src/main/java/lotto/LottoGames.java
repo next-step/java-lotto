@@ -30,7 +30,14 @@ public class LottoGames {
     }
 
     private int winnerPrice(Lotto lotto) {
-        return LottoEnum.findByPrice(lotto.getWinnerNumberCount()).price();
+        return LottoEnum.findByPrice(
+                lotto.getWinnerNumberCount(),
+                isBonusWinner(lotto.getBonusNumberCount())
+        ).price();
+    }
+
+    private boolean isBonusWinner(int bonusNumberCount) {
+        return bonusNumberCount > 0;
     }
 
 }

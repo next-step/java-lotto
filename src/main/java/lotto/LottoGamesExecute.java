@@ -18,9 +18,9 @@ public class LottoGamesExecute {
         return lottos;
     }
 
-    public LottoGames lottoGameResult(String inputLastWeekLottoNumber) {
+    public LottoGames lottoGameResult(String inputLastWeekLottoNumber, String inputLastWeekBonusNumber) {
         for (Lotto lotto : lottos) {
-            lotto.winnerCheck(inputLastWeekLottoNumber);
+            lotto.winnerCheck(inputLastWeekLottoNumber, inputLastWeekBonusNumber);
         }
         LottoGames lottoGames = new LottoGames(lottos);
         return lottoGames;

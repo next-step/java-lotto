@@ -16,4 +16,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
+    public static String inputLastWeekBonusNumber() {
+        System.out.println("지난 주 보너스 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
 }
