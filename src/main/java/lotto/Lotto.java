@@ -37,9 +37,15 @@ public class Lotto {
         .collect(Collectors.toList());
   }
 
+  public int countSameNumber(Lotto lotto) {
+    return lottoNumbers.countSameNumber(lotto.getNumbers());
+  }
+
   public LottoNumbers getNumbers() {
     return lottoNumbers;
   }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -63,10 +69,6 @@ public class Lotto {
     return "Lotto{" +
         "lottoNumbers=" + lottoNumbers +
         '}';
-  }
-
-  public int countSameNumber(Lotto lotto) {
-    return lottoNumbers.countSameNumber(lotto.getNumbers());
   }
 
 }
