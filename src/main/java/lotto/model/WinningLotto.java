@@ -1,6 +1,11 @@
 package lotto.model;
 
+import lotto.exception.DuplicateLottoNumberException;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -11,14 +16,26 @@ public class WinningLotto {
         this.number = number;
     }
 
-    public static WinningLotto generate(Lotto lotto, Number number) {
+    public static WinningLotto generate(String inputOfNumber, int inputOfBonus) {
+        List<Number> numbers = Arrays.stream(inputOfNumber.trim().split(","))
+                .map(Integer::parseInt)
+                .map(Number::of)
+                .collect(Collectors.toList());
+
+        Lotto lotto = Lotto.from(numbers);
+        Number number = Number.of(inputOfBonus);
+        if(lotto.hasBonusNumber(number)){
+            throw new DuplicateLottoNumberException(inputOfBonus);
+        }
         return new WinningLotto(lotto, number);
     }
 
-    public Prize getResultOf(Lotto lotto) {
-        int matchCount = this.lotto.getMatchCount(lotto);
-        boolean existBonus = lotto.hasBonusNumber(number);
-        return Prize.of(matchCount, existBonus);
+    Lotto getLotto() {
+        return lotto;
+    }
+
+    Number getNumber() {
+        return number;
     }
 
     @Override
@@ -29,7 +46,6 @@ public class WinningLotto {
         return Objects.equals(lotto, that.lotto) &&
                 Objects.equals(number, that.number);
     }
-
 
     @Override
     public int hashCode() {

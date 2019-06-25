@@ -10,15 +10,14 @@ public class Application {
         int inputOfAmount = InputView.askOfAmount();
 
         Money moneyToBuy = Money.won(inputOfAmount);
-        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy);
-        OutputView.printLottoTicket(lottoTicket);
+//        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy);
+//        OutputView.printLottoTicket(lottoTicket);
 
         String inputOfNumbers = InputView.askOfWinningNumbers();
         int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
-        WinningLottoRequest winningLottoRequest = WinningLottoRequest.of(inputOfNumbers, inputOfBonusNumber);
 
-        WinningLotto winningLotto = LottoMachine.getWinningLotto(winningLottoRequest);
+        WinningLotto winningLotto = WinningLotto.generate(inputOfNumbers, inputOfBonusNumber);
 
-        OutputView.printReport(lottoTicket.result(winningLotto));
+//        OutputView.printReport(lottoTicket.result(winningLotto));
     }
 }
