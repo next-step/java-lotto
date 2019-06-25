@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -15,11 +14,21 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoPublisherTest {
     private LottoPublisher publisher;
     private LottoPublisher pubchasePublisher;
+    private List<Rank> ranks;
 
     @BeforeEach
     void setUp() {
         publisher = new LottoPublisher();
         pubchasePublisher = new LottoPublisher(14000);
+
+        String winNumberStr = "1,2,3,4,5,6";
+        List<Lotto> lottos = new ArrayList<>();
+        Integer[] same_numbers_5 = {1,2,3,7,8,9};
+        Integer[] same_numbers_0 = {1,2,9,10,11,12};
+        lottos.add(new Lotto(Arrays.asList(same_numbers_5)));
+        lottos.add(new Lotto(Arrays.asList(same_numbers_0)));
+        LottoPublisher rankPublisher = new LottoPublisher(lottos);
+        ranks = rankPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
     }
 
     @Test
@@ -66,15 +75,18 @@ public class LottoPublisherTest {
 
     @Test
     void 당첨숫자와일치하는로또숫자개수로Lotto의Rank확인() {
-        String winNumberStr = "1,2,3,4,5,6";
-        List<Lotto> lottos = new ArrayList<>();
-        Integer[] same_numbers_5 = {1,2,3,7,8,9};
-        Integer[] same_numbers_0 = {1,2,9,10,11,12};
-        lottos.add(new Lotto(Arrays.asList(same_numbers_5)));
-        lottos.add(new Lotto(Arrays.asList(same_numbers_0)));
-        LottoPublisher rankPublisher = new LottoPublisher(lottos);
-        List<Rank> ranks = rankPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
         assertThat(ranks.get(0)).isEqualTo(Rank.FIFTH);
         assertThat(ranks.get(1)).isEqualTo(Rank.NONE);
+    }
+
+    @Test
+    void rankReward_당첨된로또카운드확인_당첨금액확인() {
+        RankReward rankReward = new RankReward(ranks);
+        assertThat(rankReward.getGainRankCounts()[Rank.FIRST.ordinal()]).isEqualTo(0);
+        assertThat(rankReward.getGainRankCounts()[Rank.THIRD.ordinal()]).isEqualTo(0);
+        assertThat(rankReward.getGainRankCounts()[Rank.FOURTH.ordinal()]).isEqualTo(0);
+        assertThat(rankReward.getGainRankCounts()[Rank.FIFTH.ordinal()]).isEqualTo(1);
+        assertThat(rankReward.getGainRankCounts()[Rank.NONE.ordinal()]).isEqualTo(1);
+        assertThat(rankReward.getRewardWinningMoney()).isEqualTo(5000);
     }
 }
