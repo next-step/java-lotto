@@ -9,6 +9,7 @@ public class LottoNumber {
 
     private ArrayList<Integer> lottoElement = null;
 
+    // 생성자를 호출하면 랜덤번호를 생성하여 lottoElement에 로또번호를 추가
     public LottoNumber() {
         ArrayList<Integer> randomNumber = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
@@ -27,6 +28,7 @@ public class LottoNumber {
         return lottoElement;
     }
 
+    // 로또 자동 생성 번호와 지난 당첨 번호를 비교
     public int comparePrvNumber(int[] prvLottoNumber) {
         int numofWin = 0;
         for (int i = 0; i < prvLottoNumber.length; ++i) {

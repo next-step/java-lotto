@@ -1,15 +1,10 @@
 import domain.LottoGame;
-import domain.LottoNumber;
-import domain.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputVeiw;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -17,7 +12,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class LottoGameTest {
     int price = 14000;
     String count;
-    LottoResult lottoResult;
     LottoGame lottoGame;
 
 
@@ -38,24 +32,26 @@ public class LottoGameTest {
     @DisplayName("1000원보다 낮은 가격 입력이 되었을때 exception")
     void checkPrice() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            if(InputVeiw.checkPrice(price))
-                    throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");;
+            if (InputVeiw.checkPrice(price))
+                throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");
         });
     }
+
     @Test
     @DisplayName("지난 당첨번호를 잘못 입력했을 때 exception")
-    void checkPrvStr(){
+    void checkPrvStr() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            if(InputVeiw.checkPrvStr("12345"))
+            if (InputVeiw.checkPrvStr("12345"))
                 throw new IllegalArgumentException("입력이 잘못되었습니다. 지난 당첨 번호를 다시 한번 입력해주세요.");
         });
     }
+
     @Test
     @DisplayName("지난 당첨번호와 당청 번호 비교 ")
-    void comparePrvNumber(){
+    void comparePrvNumber() {
         int numofWin = 0;
-        int [] prvLottoNumber={1,2,3,4,5,6};
-        ArrayList<Integer> lottoElement= new ArrayList<>();
+        int[] prvLottoNumber = {1, 2, 3, 4, 5, 6};
+        ArrayList<Integer> lottoElement = new ArrayList<>();
         for (int i = 1; i <= prvLottoNumber.length; i++) {
             lottoElement.add(i);
         }

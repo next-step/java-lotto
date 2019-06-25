@@ -20,6 +20,7 @@ public class InputVeiw {
         return price;
     }
 
+    // 입력받은 로또 구입 가격을 체크
     public static boolean checkPrice(int price) {
         return price < MINIMUM_PRICE;
     }
@@ -41,10 +42,12 @@ public class InputVeiw {
         return inputNumber;
     }
 
+    // 입력받은 지난 당첨번호가 6자리인지 확인
     public static boolean checkPrvStr(String input) {
         return !(input.length() == ONE_UNIT_OF_LOTTO);
     }
 
+    // 공백 문자 제거 및 ","  기준으로 지난 당첨번호를 split
     public static String[] removeBlankAndSplit(String input) {
         return input.replaceAll(SEPARATOR_BLANK, SEPARATOR_NOTHING).split(SEPARATOR_REST);
     }
