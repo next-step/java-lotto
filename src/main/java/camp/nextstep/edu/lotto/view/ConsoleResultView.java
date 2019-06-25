@@ -33,6 +33,7 @@ public class ConsoleResultView implements ResultView {
 
     private String formatLottery(Lottery lottery) {
         return lottery.stream()
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER_LOTTERY, PREFIX_LOTTERY, POSTFIX_LOTTERY));
     }
