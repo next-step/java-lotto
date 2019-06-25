@@ -7,6 +7,14 @@ public class ExpressionSplitter {
 
     private static final String DEFAULT_SEPARATOR_PATTERN = ":|,";
 
+    private static final String CUSTOM_SEPARATOR_EX_PATTERN = "//(.)\n(.*)";
+
+    private static final String CHAR_CLASS_WRAPPING_FORMAT = "[%s]";
+
+    private static final int INDEX_OF_EXTRACTED_SEPARATOR = 1;
+
+    private static final int INDEX_OF_EXTRACTED_EXPRESSION = 2;
+
     private String separator;
 
     private String expression;
@@ -20,24 +28,16 @@ public class ExpressionSplitter {
         /**
          * 커스텀 구분자가 지정된 경우 구분자와 표현식 추출
          */
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        Matcher m = Pattern.compile(CUSTOM_SEPARATOR_EX_PATTERN).matcher(expression);
 
         if(m.find()){
             /**
              * 추출된 구분자가 정규식 메타문자인 경우 발생 할 오류를 회피하기 위해
              * [Character class|https://docs.oracle.com/javase/tutorial/essential/regex/char_classes.html]로 만들어서 반환
              */
-            separator = String.format("[%s]", m.group(1));
-            this.expression = m.group(2);
+            separator = String.format(CHAR_CLASS_WRAPPING_FORMAT, m.group(INDEX_OF_EXTRACTED_SEPARATOR));
+            this.expression = m.group(INDEX_OF_EXTRACTED_EXPRESSION);
         }
-    }
-
-    public String getSeparator(){
-        return separator;
-    }
-
-    public String getExpression(){
-        return expression;
     }
 
     public String[] split() {
