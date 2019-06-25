@@ -19,9 +19,4 @@ public class Lottos {
     public int size() {
         return lottos.size();
     }
-
-    public Lottos add(Lotto lotto) {
-        lottos.add(lotto);
-        return new Lottos(lottos);
-    }
 }

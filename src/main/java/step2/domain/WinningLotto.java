@@ -10,11 +10,6 @@ public class WinningLotto {
         this.lotto = lotto;
     }
 
-    private WinningLotto(Lotto lotto, BonusNumber bonusNumber) {
-        this.lotto = lotto;
-        this.bonusNumber = bonusNumber;
-    }
-
     public Lotto getLotto() {
         return new Lotto(lotto);
     }
@@ -23,7 +18,7 @@ public class WinningLotto {
         return Optional.ofNullable(bonusNumber);
     }
 
-    public WinningLotto addBounsNumber(BonusNumber bonusNumber) {
-        return new WinningLotto(lotto, bonusNumber);
+    public void addBonusNumber(BonusNumber bonusNumber) {
+        this.bonusNumber = bonusNumber;
     }
 }

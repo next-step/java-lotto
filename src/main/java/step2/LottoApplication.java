@@ -18,8 +18,9 @@ public class LottoApplication {
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
         BonusNumber bonusNumber = InputView.inputBonusNumber();
+        winningLotto.addBonusNumber(bonusNumber);
 
         LottoStatistics statistics = new LottoStatistics(money, lottos);
-        OutputView.printLottoStatistics(winningLotto.addBounsNumber(bonusNumber), statistics);
+        OutputView.printLottoStatistics(winningLotto, statistics);
     }
 }

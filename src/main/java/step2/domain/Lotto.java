@@ -33,8 +33,8 @@ public class Lotto {
     }
 
     public LottoRank matchLotto(WinningLotto lotto) {
-        final long matchCount = matchCount(lotto.getLotto());
-        LottoRank rank = LottoRank.matchOf((int) matchCount);
+        final long count = matchCount(lotto.getLotto());
+        LottoRank rank = LottoRank.matchOf((int) count);
 
         if (!LottoRank.THIRD.equals(rank)) {
             return rank;

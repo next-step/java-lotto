@@ -10,31 +10,35 @@ public enum LottoRank {
     FIFTH(3, new Money(5_000L), 5, "3개 일치 (5000원)"),
     NO_RANK(2, new Money(0L), 6, "");
 
-    private final Integer matchCount;
+    private final Integer countOfMatch;
     private final Money money;
     private final Integer rank;
     private final String etc;
 
-    LottoRank(Integer matchCount, Money money, Integer rank, String etc) {
-        this.matchCount = matchCount;
+    LottoRank(Integer countOfMatch, Money money, Integer rank, String etc) {
+        this.countOfMatch = countOfMatch;
         this.money = money;
         this.rank = rank;
         this.etc = etc;
     }
 
-    public static LottoRank matchOf(final int matchCount) {
+    public static LottoRank matchOf(final int count) {
+        if (count == THIRD.countOfMatch) {
+            return THIRD;
+        }
+
         return Arrays.stream(LottoRank.values())
-                     .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                     .filter(lottoRank -> lottoRank.countOfMatch == count)
                      .findFirst()
                      .orElse(NO_RANK);
     }
 
-    public Integer getMatchCount() {
-        return matchCount;
-    }
-
     public Money getMoney() {
         return money;
+    }
+
+    public Integer getRank() {
+        return rank;
     }
 
     public String getEtc() {

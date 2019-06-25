@@ -2,6 +2,7 @@ package step2.ui;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import step2.domain.Lotto;
 import step2.domain.LottoRank;
@@ -19,13 +20,15 @@ public class OutputView {
 
     public static void printLottoStatistics(WinningLotto winningLotto, LottoStatistics lottoStatistics) {
         System.out.println("\n당첨 통계\n---------");
-        Map<LottoRank, Lottos> rankListMap = lottoStatistics.getMyRanks(winningLotto);
-        for (LottoRank rank : LottoRank.values()) {
-            if (LottoRank.NO_RANK.equals(rank)) {
-                continue;
-            }
-            System.out.println(rank.getEtc() + " - " + rankListMap.getOrDefault(rank, new Lottos(List.of())).size() + "개");
-        }
+
+        Map<Integer, List<LottoRank>> groupByRanks = lottoStatistics.checkMyRanks(winningLotto)
+                                                                    .stream()
+                                                                    .collect(Collectors.groupingBy(LottoRank::getRank));
+
+        groupByRanks.entrySet()
+                    .stream()
+                    .filter(rank -> rank.getKey() > LottoRank.NO_RANK.getRank())
+                    .forEach(entry -> System.out.println(entry.getValue().get(0).getEtc() + " - " + entry.getValue().size() + "개"));
 
         System.out.printf("총 수익률은 %.2f 입니다.", lottoStatistics.getBenefitPercent(winningLotto));
     }
