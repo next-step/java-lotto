@@ -13,5 +13,4 @@ public class InputView {
     System.out.println(QUESTION_LAST_WEEK_LOTTO_NUMBER);
   }
 
-
 }

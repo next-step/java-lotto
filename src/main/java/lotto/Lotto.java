@@ -49,4 +49,5 @@ public class Lotto {
   public int countSameNumber(Lotto lotto) {
     return lottoNumbers.countSameNumber(lotto.getNumbers());
   }
+
 }

@@ -26,5 +26,4 @@ public class Reward {
     return matchedCount * getPrize();
   }
 
-
 }

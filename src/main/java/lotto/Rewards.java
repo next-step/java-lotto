@@ -17,4 +17,5 @@ public class Rewards {
   public double getIncome() {
     return rewards.stream().mapToDouble(Reward::getRewardMoney).sum();
   }
+
 }

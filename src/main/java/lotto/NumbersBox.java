@@ -26,7 +26,6 @@ public class NumbersBox {
   private void initBox() {
     fillLottoBox();
     shakeLottoBox();
-
   }
 
   private void fillLottoBox() {

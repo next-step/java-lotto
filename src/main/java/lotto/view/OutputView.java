@@ -81,4 +81,5 @@ public class OutputView {
         .collect(Collectors.toList());
     return new Lotto(numbers);
   }
+
 }

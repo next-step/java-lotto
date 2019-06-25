@@ -21,8 +21,7 @@ public class LottoLauncher {
     InputView.askLastWeekWinLottoNumber();
     String lastWeekWinLottoNumber = scanner.next();
 
-    OutputView.printStatistics(purchasedLottos,lastWeekWinLottoNumber);
-
+    OutputView.printStatistics(purchasedLottos, lastWeekWinLottoNumber);
   }
 
   public static void main(String[] args) {

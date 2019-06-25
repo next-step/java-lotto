@@ -21,11 +21,12 @@ public class Lottos {
     }
   }
 
-  public Quantity getQuantity(){
+  public Quantity getQuantity() {
     return new Quantity(lottos.size());
   }
 
   public List<Lotto> getPurchasedLotto() {
     return lottos;
   }
+
 }

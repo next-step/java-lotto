@@ -38,7 +38,7 @@ public class Statistics {
   public double getYield() {
     double income = rewards.getIncome();
     int expense = getExpense(purchasedLottos.getQuantity());
-    return Math.floor((income/expense) * 100) / 100.0;
+    return Math.floor((income / expense) * 100) / 100.0;
   }
 
   private int getExpense(Quantity quantity) {
