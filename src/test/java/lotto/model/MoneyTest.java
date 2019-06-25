@@ -31,9 +31,7 @@ public class MoneyTest {
     })
     void countAvailable(long amount) {
         Money money = Money.won(amount);
-
-        long count = money.countAvailable(Lotto.getPrice());
-
+        long count = money.countAvailable(Lotto.PRICE);
         assertThat(count).isEqualTo(1);
     }
 }
