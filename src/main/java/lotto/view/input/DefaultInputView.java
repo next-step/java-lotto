@@ -1,6 +1,7 @@
 package lotto.view.input;
 
-import java.util.List;
+import lotto.domain.LottoTicket;
+import lotto.domain.PurchaseAmount;
 
 public class DefaultInputView implements InputView {
 
@@ -14,14 +15,14 @@ public class DefaultInputView implements InputView {
     }
 
     @Override
-    public Long getPurchaseAmount() {
+    public PurchaseAmount getPurchaseAmount() {
         System.out.println(MESSAGE_PURCHASE_AMOUNT);
-        return commandLineReader.readNumber();
+        return PurchaseAmount.of(commandLineReader.readNumber());
     }
 
     @Override
-    public List<String> readWinningNumbers() {
+    public LottoTicket getWinningTicket() {
         System.out.println(MESSAGE_WINNING_NUMBERS);
-        return commandLineReader.readCsv();
+        return LottoTicket.of(commandLineReader.readCsvLongValues());
     }
 }

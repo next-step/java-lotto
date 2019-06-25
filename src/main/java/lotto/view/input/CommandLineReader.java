@@ -3,6 +3,7 @@ package lotto.view.input;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CommandLineReader {
 
@@ -18,11 +19,13 @@ public class CommandLineReader {
         return csvStringReader.parseInput(scanner.next());
     }
 
-    public static class NumberReader {
-        private final Long MAX_NUMBER = 100000000L;
+    public List<Long> readCsvLongValues() {
+        return readCsv().stream().map(Long::parseLong).collect(Collectors.toList());
+    }
 
+    public static class NumberReader {
         public Long parseInput(Long num) {
-            if (num == null || num < 0 || num > MAX_NUMBER) {
+            if (num == null || num < 0) {
                 throw new IllegalArgumentException("Invalid input");
             }
             return num;

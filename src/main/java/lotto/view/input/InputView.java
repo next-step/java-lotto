@@ -1,8 +1,11 @@
 package lotto.view.input;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.PurchaseAmount;
+
 import java.util.List;
 
 public interface InputView {
-    Long getPurchaseAmount();
-    List<String> readWinningNumbers();
+    PurchaseAmount getPurchaseAmount();
+    LottoTicket getWinningTicket();
 }
