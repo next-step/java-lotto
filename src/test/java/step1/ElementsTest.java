@@ -9,19 +9,6 @@ public class ElementsTest {
     private static final String COMMA = ",";
 
     @Test
-    void 요소들을_리스트로_생성한다() {
-        //Given
-        String testElementsFromInputString = "1,2,3,4,5";
-        String[] testElements = testElementsFromInputString.split(COMMA);
-
-        //When
-        Elements elements = Elements.from(testElements);
-
-        //Then
-        assertThat(elements).isNotNull();
-    }
-
-    @Test
     void 요소들의_합을_구한다() {
         //Given
         String testElementsFromInputString = "1,2,3,4,5";
