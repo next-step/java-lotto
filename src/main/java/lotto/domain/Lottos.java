@@ -30,9 +30,11 @@ public class Lottos {
     
     WinNumbersCount getWinNumbersCount(final WanLottoNumbers wanLottoNumbers) {
         WinNumbersCount winNumbersCount = new WinNumbersCount();
-        lottoNumbers.forEach(lotto -> 
-            winNumbersCount.addWinCount(wanLottoNumbers.getMatchedNumberCount(lotto))
-        );
+        lottoNumbers.forEach(lotto -> {
+            final int matchedNumberCount = wanLottoNumbers.getMatchedNumberCount(lotto);
+            final boolean isMatchedBonus = wanLottoNumbers.isMatchedBonus(lotto);
+            winNumbersCount.addWinCount(matchedNumberCount, isMatchedBonus);
+        });
         return winNumbersCount;
     }
     

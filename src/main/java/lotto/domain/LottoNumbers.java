@@ -46,4 +46,8 @@ public class LottoNumbers {
         return "\n(" + lottoNumbers + ")";
     }
     
+    public boolean haveBonusNumber(BonusNumber bonusNumber) {
+        LottoNumber bonusLottoNumber = bonusNumber.getLottoNumber();
+        return lottoNumbers.contains(bonusLottoNumber);
+    }
 }

@@ -9,8 +9,13 @@ import java.util.stream.Collectors;
 public class WanLottoNumbers {
     private final static String SEPARATOR = ",";
     private LottoNumbers winLottoNumbers;
+    private BonusNumber bonusNumber;
     
-    public WanLottoNumbers(final String winLottoNumber) {
+    public WanLottoNumbers(String winLottoNumber) {
+        this(winLottoNumber, 0);
+    }
+    
+    public WanLottoNumbers(final String winLottoNumber, final int bonasNumber) {
         final String[] winNumbers = winLottoNumber.split(SEPARATOR);
         final List<LottoNumber> lottoNumbers = Arrays.stream(winNumbers)
             .map(String::trim)
@@ -19,7 +24,8 @@ public class WanLottoNumbers {
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
         
-        winLottoNumbers = new LottoNumbers(lottoNumbers);
+        this.winLottoNumbers = new LottoNumbers(lottoNumbers);
+        this.bonusNumber = new BonusNumber(bonasNumber);
     }
     
     public LottoNumbers getLotto() {
@@ -28,5 +34,9 @@ public class WanLottoNumbers {
     
     int getMatchedNumberCount(final LottoNumbers lottoNumbers) {
         return winLottoNumbers.getMatchedNumberCount(lottoNumbers);
+    }
+    
+    public boolean isMatchedBonus(LottoNumbers lotto) {
+        return lotto.haveBonusNumber(bonusNumber);
     }
 }

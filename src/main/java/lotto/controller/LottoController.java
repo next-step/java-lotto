@@ -4,6 +4,7 @@ import lotto.domain.BuyingLottos;
 import lotto.domain.WanLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.view.WinNumbers;
 
 public class LottoController {
     private InputView inputView;
@@ -22,8 +23,8 @@ public class LottoController {
     }
     
     public void runResultProcess() {
-        inputView.printWinNumberAnswer();
-        WanLottoNumbers wanLottoNumbers = new WanLottoNumbers(inputView.getUserInputWinNumber());
+        WinNumbers winNumbers = inputView.getUserInputWinNumber();
+        WanLottoNumbers wanLottoNumbers = new WanLottoNumbers(winNumbers.getWinNumbers(), winNumbers.getBonasWinNumber());
         resultView.printResult(buyingLottos.getOwnPrize(wanLottoNumbers));
     }
 }
