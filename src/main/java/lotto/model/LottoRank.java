@@ -40,4 +40,8 @@ public enum LottoRank {
     public int getPrizeMoney() {
         return prizeMoney;
     }
+
+    public boolean isBonus() {
+        return isBonus;
+    }
 }
