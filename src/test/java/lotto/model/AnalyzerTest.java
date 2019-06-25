@@ -31,4 +31,14 @@ public class AnalyzerTest {
 
         assertThat(status.get(Prize.valueOf(5))).isEqualTo(1);
     }
+
+    @Test
+    void increasePrizeCount() {
+        List<Integer> countsOfMatchingNumbers = Arrays.asList(3);
+        final Map<Prize, Integer> prizeStatus = new HashMap<>();
+        countsOfMatchingNumbers.forEach(count -> analyzer.increasePrizeCount(Prize.valueOf(count), prizeStatus));
+
+        assertThat(prizeStatus.get(Prize.valueOf(3))).isEqualTo(1);
+        assertThat(prizeStatus.size()).isEqualTo(1);
+    }
 }

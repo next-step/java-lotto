@@ -19,7 +19,7 @@ public class Analyzer {
         return new Report(prizeStatus, lottos);
     }
 
-    private void increasePrizeCount(Prize prize, Map<Prize, Integer> prizeStatus) {
+    void increasePrizeCount(Prize prize, Map<Prize, Integer> prizeStatus) {
         int currentCount = prizeStatus.getOrDefault(prize, 0);
         prizeStatus.put(prize, currentCount + 1);
     }
