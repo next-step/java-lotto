@@ -35,11 +35,21 @@ public class LottoPublisher {
         }
     }
 
-    int getBuyLottoCount() {
-        return purchaseAmount/Lotto.AMOUNT;
+    private List<Lotto> publishLottos(int buyCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int count = 0; count < buyCount; count++) {
+            lottos.add(new Lotto());
+        }
+        return lottos;
     }
 
-    List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto) {
+    public double getRevenueRatio(int rewardWinningMoney) {
+        if (rewardWinningMoney == 0)
+            return 0d;
+        return (double)rewardWinningMoney / (double)purchaseAmount;
+    }
+
+    public List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto) {
         List<Rank> lottoRanks = new ArrayList<>();
         for (Lotto lotto : publishLotto) {
             lotto.setRank(winnerLotto.getNumbers());
@@ -48,19 +58,16 @@ public class LottoPublisher {
         return lottoRanks;
     }
 
-    double getRevenueRatio(int rewardWinningMoney) {
-        double revenueRatio = (double)rewardWinningMoney / (double)purchaseAmount;
-        revenueRatio = Double.parseDouble(String.format("%.2f", revenueRatio));
-
-        return revenueRatio;
+    public List<List<Integer>> getLottosNumbers() {
+        List<List<Integer>> lottosNumbers = new ArrayList<>();
+        for (Lotto lotto : publishLotto) {
+            lottosNumbers.add(lotto.getNumbers());
+        }
+        return lottosNumbers;
     }
 
-    private List<Lotto> publishLottos(int buyCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int count = 0; count < buyCount; count++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+    public int getBuyLottoCount() {
+        return purchaseAmount/Lotto.AMOUNT;
     }
 
     public int getPurchaseAmount() {
