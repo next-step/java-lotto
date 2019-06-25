@@ -13,12 +13,11 @@ public class LottoController {
     public LottoController(final InputView inputView, final ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
-        buyingLottos = new BuyingLottos();
     }
     
     public void runBuyingLottoProcess() {
         inputView.printCashAnswer();
-        buyingLottos.buyLottos(inputView.getUserInputCashPayment());
+        buyingLottos = new BuyingLottos(inputView.getUserInputCashPayment());
         resultView.printLottos(buyingLottos);
     }
     

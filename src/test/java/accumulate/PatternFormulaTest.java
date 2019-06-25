@@ -11,7 +11,7 @@ class PatternFormulaTest {
     @DisplayName("커스텀 구분자를 구분해낸다.")
     void separateCustomSeparatorTest() {
         //Given
-        PatternFormula formula = new PatternFormula("//;\n1;2;3");
+        PatternFormula formula = new PatternFormula("//;\\n1;2;3");
         //When
         boolean hasCustomSeparator = formula.hasCustomSeparator(";");
         //Then
@@ -32,7 +32,7 @@ class PatternFormulaTest {
     void test() {
         //Then
         Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> new PatternFormula("//aa\n1;2;3"))
+          .isThrownBy(() -> new PatternFormula("//aa\\n1;2;3"))
           .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
     
@@ -40,7 +40,7 @@ class PatternFormulaTest {
     @DisplayName("구분자 부분이 제외된 나머지 문자열을 구분해낸다.")
     void getFormulaTest() {
         //Given
-        PatternFormula formula = new PatternFormula("//;\n1;2;3");
+        PatternFormula formula = new PatternFormula("//;\\n1;2;3");
         //When
         //Then
         Assertions.assertThat(formula.equalsNumberFormula("1;2;3")).isTrue();
@@ -78,7 +78,7 @@ class PatternFormulaTest {
     @DisplayName("쉼표, 콜론 외의 커스텀 구분자가 함께 들어온 경우 : 분리 가능")
     void canSplitMixedFormulaTest() {
         //Given
-        PatternFormula formula = new PatternFormula("//;\n1;2;3");
+        PatternFormula formula = new PatternFormula("//;\\n1;2;3");
         //Then
         Assertions.assertThat(formula).isNotNull();
     }

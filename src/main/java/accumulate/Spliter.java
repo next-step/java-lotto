@@ -2,8 +2,6 @@ package accumulate;
 
 public class Spliter {
     private final static String SEPARATOR_JOINER = "";
-    private final static int SEPARATOR_INDEX = 0;
-    private final static int FORMULA_INDEX = 1;
     
     private final Separators separators;
     

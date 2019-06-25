@@ -3,9 +3,9 @@ package accumulate;
 import java.util.regex.Pattern;
 
 public class PatternFormula {
-    private final static String PATTERN_FORMULA_REGEX = "(\\/\\/.\\n)?((\\d+)(,|:|.))+(\\d+)";
+    private final static String PATTERN_FORMULA_REGEX = "(\\/\\/.\\\\(n))?((\\d+)(,|:|.))+(\\d+)";
     private final static String DEFAULT_SEPARATORS = ",:"; 
-    private final static String ENTER_REGEX = "(\\n)";
+    private final static String ENTER_REGEX = "(\\\\n)";
     private final static String CUSTOM_SEPARATOR_REGEX = "(\\/\\/.)";
     private final static int SEPARATOR_INDEX = 0;
     private final static int NUMBER_FORMULA_INDEX = 1;

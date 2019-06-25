@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
+    NOT_MATCH(0, 0),
     THREE_NUMBER_MATCH(3, 5_000),
     FOUR_NUMBER_MATCH(4, 50_000),
     FIVE_NUMBER_MATCH(5, 1_500_000),
@@ -20,7 +21,7 @@ public enum Prize {
         return Arrays.stream(Prize.values())
             .filter(prize -> prize.matchCount == matchCount)
             .findFirst()
-            .orElse(null);
+            .orElse(Prize.NOT_MATCH);
     }
     
     public int getMatchCount() {

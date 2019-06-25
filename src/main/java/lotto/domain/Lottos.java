@@ -19,8 +19,8 @@ public class Lottos {
         this.lottoNumbers = lottoNumbers;
     }
     
-    public static int getBuyableCount(final int cashPayment) {
-        final int buyableCount = cashPayment / DEFAULT_PRICE;
+    public static int getBuyableCount(final CashPayments cashPayment) {
+        final int buyableCount = cashPayment.getBuyablecount(DEFAULT_PRICE);
         if (buyableCount <= CANT_BUYABLE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
         }
