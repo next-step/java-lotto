@@ -28,7 +28,7 @@ public class Lottoes {
         this.lottoes
                 .stream()
                 .map(lotto -> lotto.checkNumberOfMatches(winnerNumbers, bonusBall))
-                .filter(rank -> rank.getCountOfMatch() >= 3)
+                .filter(rank -> rank.getCountOfMatch() >= Rank.FIFTH.getCountOfMatch())
                 .forEach(rank -> matchResult.put(rank, matchResult.get(rank) + 1));
 
         return matchResult;
