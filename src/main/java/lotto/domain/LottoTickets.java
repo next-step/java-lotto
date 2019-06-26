@@ -17,4 +17,6 @@ public class LottoTickets {
     public List<LottoTicket> findAll() {
         return new ArrayList<>(lottoTickets);
     }
+
+    public long count() { return lottoTickets.size(); }
 }
