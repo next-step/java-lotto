@@ -3,7 +3,6 @@ package step3.iksoo.lotto2rd;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public enum Rank {
@@ -39,7 +38,7 @@ public enum Rank {
     public static List<Rank> winValues() {
         return Arrays.stream(values())
                 .sorted(Comparator.reverseOrder())
-                .filter(n -> n.getCountOfMatch() > 0)
+                .filter(n -> n.getCountOfMatch() > FAIL.getCountOfMatch())
                 .collect(Collectors.toList());
     }
 
