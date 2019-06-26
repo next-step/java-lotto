@@ -3,6 +3,7 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
@@ -26,6 +27,12 @@ public class Lotto {
 
     public static Lotto create() {
         return LottoGenerator.generate();
+    }
+
+    public static Lotto convertNumbersToLotto(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                                .map(LottoNumber::new)
+                                .collect(Collectors.toList()));
     }
 
     public List<LottoNumber> getLottoNumbers() {
