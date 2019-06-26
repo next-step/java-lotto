@@ -15,6 +15,8 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또의 숫자는 6개이여야 합니다.");
         }
 
+        Collections.sort(numbers);
+
         this.ticket = numbers;
     }
 

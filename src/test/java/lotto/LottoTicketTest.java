@@ -29,6 +29,14 @@ public class LottoTicketTest {
     }
 
     @Test
+    void 숫자들을_순서대로_바꾼다() {
+        List<Integer> sampleNumbers = Arrays.asList(4, 3, 2, 1, 5, 6);
+        LottoTicket compared = new LottoTicket(sampleNumbers);
+
+        assertThat(compared).isEqualTo(ticket);
+    }
+
+    @Test
     void 문자열형태를_순서대로_숫자열로_바꾼다() {
         String sampleNumbers = "4, 3, 2, 1, 5, 6";
         LottoTicket compared = new LottoTicket(sampleNumbers);
