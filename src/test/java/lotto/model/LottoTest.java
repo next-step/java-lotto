@@ -1,11 +1,14 @@
 package lotto.model;
 
+import lotto.exception.ConflictLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LottoTest {
@@ -19,5 +22,14 @@ public class LottoTest {
 
     Lotto lotto = new Lotto(lottoNumbers);
     assertThat(lotto.contains(value)).isTrue();
+  }
+
+  @Test
+  @DisplayName("로또 번호 중에 중복되는 번호가 있는지 확인")
+  void conflictLottoNumber() {
+    assertThatExceptionOfType(ConflictLottoNumberException.class).isThrownBy(() -> {
+      List<Integer> lottoNumbers = Arrays.asList(1,2,3,3,2,1);
+      new Lotto(lottoNumbers);
+    });
   }
 }
