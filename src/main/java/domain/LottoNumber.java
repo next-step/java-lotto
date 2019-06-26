@@ -45,7 +45,7 @@ public class LottoNumber {
 
     private int checkBonusBall(int bonusball, int countsResult) {
         if ((countsResult == LottoData.THIRD_WINNER.getMatch() && lottoElement.contains(bonusball))) {
-            countsResult = 0;
+            countsResult = 0; // 보너스 볼을 포함하는 4등 카운트 초기화 
             LottoData.setBonusBallCount(EXIST_BONUS_BALL);
         }
         return countsResult;

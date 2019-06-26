@@ -11,6 +11,7 @@ public class LottoResult {
 
     private static double winningRevenue;
     private static Integer[] countsOfWinningResult;
+    private static Map<Integer, Integer> WinnerGroup;
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
     public static void getCountsWinningResult(ArrayList<LottoNumber> lottoNumber, int[] winnigNumber, int bonusBall, int purchaseAmount) {
@@ -19,6 +20,7 @@ public class LottoResult {
             countsOfWinningResult[i] = lottoNumber.get(i).compareWinningNumber(winnigNumber, bonusBall);
         }
         calculatorTotalWinningRevenue(purchaseAmount);
+        MakeWinnersGroup();
     }
 
     private static void calculatorTotalWinningRevenue(int lottoPrice) {
@@ -46,15 +48,17 @@ public class LottoResult {
         return Double.parseDouble(percent);
     }
 
-    // hashmap 활용하여 등수별 count 수를 저장 (출력용)
     public static Map<Integer, Integer> getWinnerGroup() {
-        Map<Integer, Integer> countOfWinner = new HashMap<>();
-        countOfWinner.put(LottoData.FIRST_WINNER.getPrize(), (int) LottoData.FIRST_WINNER.getCountWinner());
-        countOfWinner.put(LottoData.SECOND_WINNER.getPrize(), (int) LottoData.SECOND_WINNER.getCountWinner());
-        countOfWinner.put(LottoData.THIRD_WINNER.getPrize(), (int) LottoData.THIRD_WINNER.getCountWinner());
-        countOfWinner.put(LottoData.FORTH_WINNER.getPrize(), (int) LottoData.FORTH_WINNER.getCountWinner());
-        countOfWinner.put(LottoData.BOBUS_SECOND_WINNER.getPrize(), (int) LottoData.BOBUS_SECOND_WINNER.getCountWinner());
-        return countOfWinner;
+        return WinnerGroup;
+    }
+
+    private static void MakeWinnersGroup() {
+        WinnerGroup = new HashMap<>();
+        WinnerGroup.put(LottoData.FIRST_WINNER.getPrize(), (int) LottoData.FIRST_WINNER.getCountWinner());
+        WinnerGroup.put(LottoData.SECOND_WINNER.getPrize(), (int) LottoData.SECOND_WINNER.getCountWinner());
+        WinnerGroup.put(LottoData.THIRD_WINNER.getPrize(), (int) LottoData.THIRD_WINNER.getCountWinner());
+        WinnerGroup.put(LottoData.FORTH_WINNER.getPrize(), (int) LottoData.FORTH_WINNER.getCountWinner());
+        WinnerGroup.put(LottoData.BOBUS_SECOND_WINNER.getPrize(), (int) LottoData.BOBUS_SECOND_WINNER.getCountWinner());
     }
 
     // 수익율이 이익인지 손해인지 판단 (출력용)
