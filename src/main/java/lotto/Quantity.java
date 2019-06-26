@@ -13,6 +13,14 @@ public class Quantity {
     this.quantity = quantity;
   }
 
+  public Quantity minus(Quantity quantity) {
+    int result = this.quantity - quantity.getValue();
+    if(result < 0 ) {
+      throw new IllegalArgumentException("총량 보다 클 수 없습니다.");
+    }
+    return new Quantity(result);
+  }
+
   public int getValue() {
     return quantity;
   }

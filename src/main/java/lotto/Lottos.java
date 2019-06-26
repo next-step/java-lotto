@@ -3,8 +3,10 @@ package lotto;
 import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -14,8 +16,14 @@ public class Lottos {
     makeLottos(quantity);
   }
 
-  public Lottos(List<Lotto> purchasedLottos) {
-    lottos = purchasedLottos;
+  public Lottos(List<String> manualLottoNumbers) {
+    manualLottoNumbers.stream()
+        .forEach(numbers ->lottos.add(new Lotto(numbers)));
+  }
+
+  public Lottos(Lottos autoLottos, Lottos manualLottos) {
+    lottos.addAll(autoLottos.getLottos());
+    lottos.addAll(manualLottos.getLottos());
   }
 
   private void makeLottos(Quantity quantity) {

@@ -14,8 +14,8 @@ public class Lotto {
     this.lottoNumbers = NumbersBox.getLottoNumbers();
   }
 
-  public Lotto(List<Integer> autoNumber) {
-    lottoNumbers = makeLottoNumbers(autoNumber);
+  public Lotto(List<Integer> manualNumber) {
+    lottoNumbers = makeLottoNumbers(manualNumber);
   }
 
   public Lotto(String input) {
@@ -30,8 +30,8 @@ public class Lotto {
         .collect(Collectors.toList());
   }
 
-  private LottoNumbers makeLottoNumbers(List<Integer> autoNumber) {
-    return new LottoNumbers(autoNumber.stream()
+  private LottoNumbers makeLottoNumbers(List<Integer> manualNumber) {
+    return new LottoNumbers(manualNumber.stream()
         .map(LottoNumber::new)
         .collect(Collectors.toList()));
   }
