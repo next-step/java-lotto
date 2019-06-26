@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lottoes {
     private List<Lotto> lottoes;
@@ -21,8 +19,7 @@ public class Lottoes {
     public Map<Rank, Integer> checkLotteryWin(List<Integer> winnerNumbers, int bonusBall) {
         Map<Rank, Integer> matchResult = new HashMap<>();
 
-        Rank[] ranks = Rank.values();
-        Arrays.stream(ranks)
+        Arrays.stream(Rank.values())
                 .forEach(rank -> matchResult.put(rank, 0));
 
         this.lottoes
