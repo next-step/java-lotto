@@ -31,7 +31,7 @@ class CashPaymentsTest {
         //Given
         int defaultPrice = 1000;
         //When
-        int buyableCount = cashPayments.getBuyablecount(defaultPrice);
+        int buyableCount = cashPayments.getBuyableCount(defaultPrice);
         //Then
         Assertions.assertThat(buyableCount).isEqualTo(5);
     }

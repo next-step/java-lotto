@@ -20,7 +20,7 @@ public class Lottos {
     }
     
     public static int getBuyableCount(final CashPayments cashPayment) {
-        final int buyableCount = cashPayment.getBuyablecount(DEFAULT_PRICE);
+        final int buyableCount = cashPayment.getBuyableCount(DEFAULT_PRICE);
         if (buyableCount <= CANT_BUYABLE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
         }
