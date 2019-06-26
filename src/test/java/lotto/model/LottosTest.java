@@ -32,15 +32,4 @@ public class LottosTest {
     void getBuyingMoney() {
         assertThat(lottos.getBuyingMoney()).isEqualTo(2000);
     }
-
-    @Test
-    @DisplayName("로또 당첨번호 개수 List 확인")
-    void count_of_matching_numbers() {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
-        Lotto winningLotto = LottoGenerator.generate(winningNumbers);
-        List<Integer> counts = this.lottos.getCountOfMatchingNumbers(winningLotto);
-
-        assertThat(counts.size()).isEqualTo(2);
-        assertThat(counts).contains(6, 4);
-    }
 }

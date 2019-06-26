@@ -28,13 +28,6 @@ public class Lottos {
                 .collect(joining(System.lineSeparator()));
     }
 
-    public List<Integer> getCountOfMatchingNumbers(Lotto winningLotto) {
-        return this.lottos.stream()
-                .mapToInt(lotto -> lotto.getCountOfMatchingNumbers(winningLotto))
-                .boxed()
-                .collect(toList());
-    }
-
     public List<Prize> matches(WinningLotto winningLotto) {
         return this.lottos.stream().map(lotto -> lotto.matches(winningLotto)).collect(toList());
     }
