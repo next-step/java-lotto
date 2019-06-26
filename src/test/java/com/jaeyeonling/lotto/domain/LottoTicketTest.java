@@ -4,7 +4,7 @@ import com.jaeyeonling.lotto.exception.EmptyLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ class LottoTicketTest {
         assertThat(lottoTicket).isNotNull();
     }
 
-    @DisplayName("Lotto Ticket 생성 시 LottoNumbers 빈값 예외처리 ")
+    @DisplayName("Lotto Ticket 생성 시 LottoNumbers null 예외처리 ")
     @ParameterizedTest
-    @NullAndEmptySource
+    @NullSource
     void should_throw_NullPointerException_when_invalid_lottoNumbers(final List<String> invalidLottoNumbers) {
         assertThatExceptionOfType(EmptyLottoNumberException.class)
                 .isThrownBy(() -> {
