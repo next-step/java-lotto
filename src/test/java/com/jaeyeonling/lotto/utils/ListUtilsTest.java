@@ -2,6 +2,8 @@ package com.jaeyeonling.lotto.utils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
@@ -19,5 +21,14 @@ class ListUtilsTest {
 
         assertThat(joinList).containsAll(list1);
         assertThat(joinList).containsAll(list2);
+    }
+
+    @DisplayName("리스트 빈 값 확인 테스트 ")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void should_return_true_when_nullOrEmpty(final List<?> nullOrEmpty) {
+        final boolean result = ListUtils.isNullOrEmpty(nullOrEmpty);
+
+        assertThat(result).isTrue();
     }
 }

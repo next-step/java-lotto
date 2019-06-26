@@ -19,6 +19,10 @@ public final class ListUtils {
         return concatList;
     }
 
+    public static boolean isNullOrEmpty(final List<?> list) {
+        return false;
+    }
+
     private static <E> List<E> createList(final List<E> list1,
                                           final List<E> list2) {
         if (isRandomAccess(list1) && isRandomAccess(list1)) {
