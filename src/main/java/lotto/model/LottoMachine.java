@@ -21,7 +21,7 @@ public class LottoMachine {
         }
 
         Money amountOfRandomLotto = purchaseRequest.getMoney();
-        int numberOfBuyLotto = (int) amountOfRandomLotto.countAvailable(Lotto.PRICE);
+        int numberOfBuyLotto = amountOfRandomLotto.countAvailableLotto();
         if (numberOfBuyLotto > 0) {
             lottos.addAll(buyRandomLotto(numberOfBuyLotto));
         }

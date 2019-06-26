@@ -1,14 +1,18 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoResult;
-import lotto.model.LottoTicket;
-import lotto.model.Prize;
+import lotto.model.*;
 
 public class OutputView {
 
     public static final String RESULT_PRIZE_MESSAGE = "%d개 일치 (%s원)- %d개";
     public static final String RESULT_PRIZE_SECOND_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원)- %d개";
+
+    public static void printNumberOfBuyLotto(PurchaseRequest purchaseRequest) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+                purchaseRequest.countOfManualLotto(),
+                purchaseRequest.countOfRandomLotto()));
+        System.out.println();
+    }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
         lottoTicket.getLottos()

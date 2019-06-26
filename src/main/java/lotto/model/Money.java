@@ -20,13 +20,14 @@ public class Money {
         return new Money(amount);
     }
 
-    public long countAvailable(Money money) {
-        return this.amount / money.amount;
-    }
-
     static Money calculateTotal(long count) {
         return Lotto.PRICE.times(count);
     }
+
+    public int countAvailableLotto() {
+        return (int) (this.amount / Lotto.PRICE.amount);
+    }
+
 
     public Money plus(Money money) {
         return new Money(this.amount + money.amount);

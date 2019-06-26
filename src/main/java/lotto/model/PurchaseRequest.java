@@ -25,6 +25,10 @@ public class PurchaseRequest {
         return hasManualLotto() ? manualLottoInfo.size() : MIN_MANUAL_LOTTO_SIZE;
     }
 
+    public int countOfRandomLotto() {
+        return money.countAvailableLotto() - countOfManualLotto();
+    }
+
     public void spend(Money money) {
         this.money = this.money.subtract(money);
     }
