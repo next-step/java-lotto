@@ -16,6 +16,15 @@ public class LottoTicket {
         return new LottoTicket(lottos);
     }
 
+    public LottoResult result(WinningLotto winningLotto) {
+        List<Prize> prizes = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            Prize prize =  winningLotto.match(lotto);
+            prizes.add(prize);
+        }
+        return LottoResult.of(prizes);
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }

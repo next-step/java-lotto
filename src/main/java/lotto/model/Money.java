@@ -21,11 +21,30 @@ public class Money {
     }
 
     public long countAvailable(Money money) {
-        long count = this.amount / money.amount;
-        if (count <= 0) {
-            throw new MinimumAmountException(amount);
+        return this.amount / money.amount;
+    }
+
+    static Money calculateTotal(long count) {
+        return Lotto.PRICE.times(count);
+    }
+
+    public Money plus(Money money) {
+        return new Money(this.amount + money.amount);
+    }
+
+    public Money times(long count) {
+        return new Money(amount * count);
+    }
+
+    public Money subtract(Money money) {
+        return new Money(amount - money.amount);
+    }
+
+    public double divide(Money money) {
+        if (Money.ZERO.amount == money.amount) {
+            return 0;
         }
-        return count;
+        return (double) this.amount / money.amount;
     }
 
     @Override
@@ -43,20 +62,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money{" +
-                "amount=" + amount +
-                '}';
-    }
-
-    public Money plus(Money money) {
-        return Money.won(this.amount + money.amount);
-    }
-
-    public Money times(long count) {
-        return Money.won(amount * count);
-    }
-
-    public Money subtract(Money money) {
-        return Money.won(amount - money.amount);
+        return String.valueOf(amount);
     }
 }

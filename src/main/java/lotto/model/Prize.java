@@ -39,4 +39,13 @@ public enum Prize {
     private boolean hasBonus(boolean existBonus) {
         return this.existBonus == existBonus;
     }
+
+    public Money getMoney() {
+        return money;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
 }

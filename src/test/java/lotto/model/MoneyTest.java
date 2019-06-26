@@ -31,7 +31,19 @@ public class MoneyTest {
     })
     void countAvailable(long amount) {
         Money money = Money.won(amount);
+
         long count = money.countAvailable(Lotto.PRICE);
+
         assertThat(count).isEqualTo(1);
+    }
+
+    @DisplayName("로또 구입한 총 금액")
+    @Test
+    void calculateTotalByBuyLotto() {
+        int count = 5;
+
+        Money result =Money.calculateTotal(count);
+
+        assertThat(result).isEqualTo(Money.won(5000));
     }
 }

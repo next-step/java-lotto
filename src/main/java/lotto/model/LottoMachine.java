@@ -8,35 +8,35 @@ import lotto.model.generator.WinningGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.LongStream;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private List lottos = new ArrayList();
+    private List<Lotto> lottos = new ArrayList<>();
 
-    public List<Lotto> buy(Money money, List<String> inputOfManualLotto) {
-        lottos.addAll(generateManualLotto(inputOfManualLotto));
-
-        Money money2 =money.subtract(Lotto.PRICE.times(inputOfManualLotto.size()));
-        lottos.addAll(generateRandomLotto(money2));
-        return lottos;
-    }
-
-    List<Lotto> generateManualLotto(List<String> inputOfLotto) {
-        List lottos = new ArrayList();
-        for (String numbersOfLotto : inputOfLotto) {
-            ManualGenerator manualGenerator = new ManualGenerator(numbersOfLotto);
-            lottos.add(manualGenerator.generator());
+    public LottoTicket buy(PurchaseRequest purchaseRequest) {
+        if (purchaseRequest.hasManualLotto()) {
+            lottos.addAll(buyManualLotto(purchaseRequest.getManualLottoInfo()));
+            purchaseRequest.spend(Lotto.PRICE.times(purchaseRequest.countOfManualLotto()));
         }
-        return lottos;
+
+        Money amountOfRandomLotto = purchaseRequest.getMoney();
+        int numberOfBuyLotto = (int) amountOfRandomLotto.countAvailable(Lotto.PRICE);
+        if (numberOfBuyLotto > 0) {
+            lottos.addAll(buyRandomLotto(numberOfBuyLotto));
+        }
+        return LottoTicket.of(lottos);
     }
 
-    List<Lotto> generateRandomLotto(Money money) {
-        long numberOfBuyLotto = money.countAvailable(Lotto.PRICE);
+    List<Lotto> buyManualLotto(List<String> inputOfLotto) {
+        return inputOfLotto.stream()
+                .map(lotto -> new ManualGenerator(lotto).generator())
+                .collect(Collectors.toList());
+    }
 
+    List<Lotto> buyRandomLotto(int numberOfBuyLotto) {
         LottoGenerator lottoGenerator = new RandomLottoGenerator();
-
-        return LongStream.range(0, numberOfBuyLotto)
+        return IntStream.range(0, numberOfBuyLotto)
                 .mapToObj((value) -> lottoGenerator.generator())
                 .collect(Collectors.toList());
     }

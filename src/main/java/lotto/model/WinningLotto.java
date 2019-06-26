@@ -13,8 +13,6 @@ public class WinningLotto {
 
     public static WinningLotto of(Lotto lotto, Number bonus) {
         return new WinningLotto(lotto, bonus);
-
-
     }
 
     Lotto getLotto() {
@@ -23,6 +21,10 @@ public class WinningLotto {
 
     Number getNumber() {
         return bonus;
+    }
+
+    public Prize match(Lotto lotto) {
+        return Prize.of(this.lotto.getMatchCount(lotto), lotto.hasBonusNumber(bonus));
     }
 
     @Override
