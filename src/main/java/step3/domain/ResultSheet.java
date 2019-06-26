@@ -12,11 +12,11 @@ public class ResultSheet {
         this.resultSheet = resultSheet;
     }
 
-    public static ResultSheet getResult(List<LottoTicket> lottoTickets, LottoTicket luckyNumber) {
+    public static ResultSheet getResult(List<LottoTicket> lottoTickets, LottoTicket luckyNumber, int bonusNumber) {
         Map<LottoRank, Integer> lottoResultMap = new HashMap<>();
 
         for (LottoTicket ticket : lottoTickets) {
-            LottoRank lottoRank = LottoRank.from(ticket.getNumberOfMatchedToLuckyNumber(luckyNumber));
+            LottoRank lottoRank = LottoRank.from(ticket.getNumberOfMatchedToLuckyNumber(luckyNumber), ticket.isBonusNumberMatched(bonusNumber));
             int numberOfTicketsCorrespondingToRank = lottoResultMap.getOrDefault(lottoRank, 0);
             lottoResultMap.put(lottoRank, ++numberOfTicketsCorrespondingToRank);
         }
@@ -36,6 +36,13 @@ public class ResultSheet {
                 .stream()
                 .count();
     }
+
+//    public boolean isMatchedBonusNumber() {
+//        return resultSheet.keySet().stream()
+//                .map(LottoRank::getNumberOfMatchingNumber)
+//                .filter(integer -> integer == 5)
+//                .filter()
+//    }
 
     public Map<LottoRank, Integer> getResultMap() {
         return resultSheet;

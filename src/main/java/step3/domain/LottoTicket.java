@@ -22,11 +22,31 @@ public class LottoTicket {
                 .count();
     }
 
+//    public int getNumberOfMatchedToLuckyNumber(LottoTicket luckyNumber, int bonusNumber) {
+//        int numberOfMatchedToLuckyNumber = (int) luckyNumber.getLottoTicket()
+//                .stream()
+//                .filter(lottoTicket::contains)
+//                .count();
+//
+//        if (numberOfMatchedToLuckyNumber == 5 && isBonusNumberMatched(bonusNumber)) {
+//            return 5;
+//        }
+//
+//        return numberOfMatchedToLuckyNumber;
+//    }
+
+    public boolean isBonusNumberMatched(int bonusNumber) {
+        return lottoTicket.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .anyMatch(i -> i == bonusNumber);
+    }
+
     private void validationNumberSize(List<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LottoTicketGenerator.BASIC_LOTTO_SIZE) {
             throw new IllegalArgumentException(AlERT_DIFFERENT_SIZE_OF_NUMBERS);
         }
     }
+
     private void validationNumberOverlap(List<LottoNumber> lottoTicket) {
         long SizeOfLottoTicket = lottoTicket.stream()
                 .mapToLong(LottoNumber::getNumber)
@@ -41,7 +61,6 @@ public class LottoTicket {
     public List<LottoNumber> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
     }
-
 
     @Override
     public boolean equals(Object o) {
