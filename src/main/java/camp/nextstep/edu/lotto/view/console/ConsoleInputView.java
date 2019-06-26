@@ -1,4 +1,6 @@
-package camp.nextstep.edu.lotto.view;
+package camp.nextstep.edu.lotto.view.console;
+
+import camp.nextstep.edu.lotto.view.InputView;
 
 import java.util.Scanner;
 import java.util.Set;

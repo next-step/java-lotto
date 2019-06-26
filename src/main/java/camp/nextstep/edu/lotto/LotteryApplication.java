@@ -1,13 +1,14 @@
 package camp.nextstep.edu.lotto;
 
-import camp.nextstep.edu.lotto.domain.Lotteries;
-import camp.nextstep.edu.lotto.domain.LotteryService;
-import camp.nextstep.edu.lotto.domain.RewardType;
-import camp.nextstep.edu.lotto.domain.SimpleLotteryService;
-import camp.nextstep.edu.lotto.view.ConsoleInputView;
-import camp.nextstep.edu.lotto.view.ConsoleResultView;
+import camp.nextstep.edu.lotto.domain.*;
 import camp.nextstep.edu.lotto.view.InputView;
 import camp.nextstep.edu.lotto.view.ResultView;
+import camp.nextstep.edu.lotto.view.console.ConsoleInputView;
+import camp.nextstep.edu.lotto.view.console.ConsoleResultView;
+import camp.nextstep.edu.lotto.view.console.formatter.Formatter;
+import camp.nextstep.edu.lotto.view.console.formatter.LotteriesFormatter;
+import camp.nextstep.edu.lotto.view.console.formatter.LotteryFormatter;
+import camp.nextstep.edu.lotto.view.console.formatter.LotteryNumberFormatter;
 
 import java.util.Map;
 import java.util.Set;
@@ -26,9 +27,13 @@ public class LotteryApplication {
     }
 
     public static void main(String[] args) {
+        final Formatter<LotteryNumber> lotteryNumberFormatter = new LotteryNumberFormatter();
+        final Formatter<Lottery> lotteryFormatter = new LotteryFormatter(lotteryNumberFormatter);
+        final Formatter<Lotteries> lotteriesFormatter = new LotteriesFormatter(lotteryFormatter);
+
         final LotteryService simpleLotteryService = new SimpleLotteryService();
         final InputView consoleInputView = new ConsoleInputView();
-        final ResultView consoleResultView = new ConsoleResultView();
+        final ResultView consoleResultView = new ConsoleResultView(lotteriesFormatter);
 
         final LotteryApplication lotteryApplication = new LotteryApplication(
                 simpleLotteryService,

@@ -28,7 +28,10 @@ public class SimpleLotteryService implements LotteryService {
 
     @Override
     public Map<RewardType, Integer> getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet) {
-        final Lottery winningLottery = Lottery.customizedInstance(winningNumberSet);
+        final Set<LotteryNumber> winningLotteryNumberSet = winningNumberSet.stream()
+                .map(LotteryNumber::from)
+                .collect(Collectors.toSet());
+        final Lottery winningLottery = Lottery.customizedInstance(winningLotteryNumberSet);
         return this.resolveRewards(purchasedLotteries, winningLottery);
     }
 

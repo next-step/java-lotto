@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -18,7 +18,7 @@ class LotteryTest {
     void createLottery_sizeIsEqualToSix() {
         final Lottery actual = Lottery.randomizedInstance();
 
-        final Set<Integer> numberSet = this.getNumberSet(actual);
+        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
         assertThat(numberSet).hasSize(6);
     }
 
@@ -27,7 +27,7 @@ class LotteryTest {
     void createLottery_numbersShouldNotBeDuplicated() {
         final Lottery actual = Lottery.randomizedInstance();
 
-        final Set<Integer> numberSet = this.getNumberSet(actual);
+        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
         assertThat(numberSet).hasSize(6);
     }
 
@@ -36,9 +36,10 @@ class LotteryTest {
     void createLottery() {
         final Lottery actual = Lottery.randomizedInstance();
 
-        final Set<Integer> numberSet = this.getNumberSet(actual);
+        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
         assertThat(numberSet)
-                .filteredOn(value -> value >= 1 && value <= 45)
+                .filteredOn(lotteryNumber -> lotteryNumber.compareTo(LotteryNumber.min()) >= 0)
+                .filteredOn(lotteryNumber -> lotteryNumber.compareTo(LotteryNumber.max()) <= 0)
                 .hasSize(6);
     }
 
@@ -46,11 +47,10 @@ class LotteryTest {
     @DisplayName("6개 미만의 숫자를 입력할 경우 IllegalArgumentException 을 발생시킵니다")
     void createWinningLottery() {
         // given
-        final List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5);
-        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        final Set<LotteryNumber> givenLotteryNumberSet = this.createLotteryNumberSet(1, 2, 3, 4, 5);
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lottery.customizedInstance(givenNumberSet))
+                .isThrownBy(() -> Lottery.customizedInstance(givenLotteryNumberSet))
                 // then
                 .withMessageContaining("must be equal to");
     }
@@ -59,57 +59,43 @@ class LotteryTest {
     @DisplayName("6개 초과의 숫자를 입력할 경우 IllegalArgumentException 을 발생시킵니다")
     void createWinningLottery1() {
         // given
-        final List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        final Set<LotteryNumber> givenLotteryNumberSet = this.createLotteryNumberSet(1, 2, 3, 4, 5, 6, 7);
         // when
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lottery.customizedInstance(givenNumberSet))
+                .isThrownBy(() -> Lottery.customizedInstance(givenLotteryNumberSet))
                 // then
                 .withMessageContaining("must be equal to");
-    }
-
-    @Test
-    @DisplayName("6개의 숫자를 입력했지만 1보다 작은 숫자가 존재하는 경우 IllegalArgumentException 을 발생시킵니다")
-    void createWinningLottery2() {
-        // given
-        final List<Integer> numberList = Arrays.asList(0, 1, 2, 3, 4, 5);
-        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
-        // when
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lottery.customizedInstance(givenNumberSet))
-                // then
-                .withMessageContaining("between 1 and 45");
-    }
-
-    @Test
-    @DisplayName("6개의 숫자를 입력했지만 45보다 큰 숫자가 존재하는 경우 IllegalArgumentException 을 발생시킵니다")
-    void createWinningLottery3() {
-        // given
-        final List<Integer> numberList = Arrays.asList(46, 1, 2, 3, 4, 5);
-        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
-        // when
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> Lottery.customizedInstance(givenNumberSet))
-                // then
-                .withMessageContaining("between 1 and 45");
     }
 
     @Test
     @DisplayName("6개의 숫자가 모두 1~45 범위 안에 드는 경우 당첨 로또를 반환합니다")
     void createWinningLottery4() {
         // given
-        final List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
-        final Set<Integer> givenNumberSet = new HashSet<>(numberList);
+        final Set<LotteryNumber> givenLotteryNumberSet = this.createLotteryNumberSet(1, 2, 3, 4, 5, 6);
         // when
-        final Lottery actual = Lottery.customizedInstance(givenNumberSet);
+        final Lottery actual = Lottery.customizedInstance(givenLotteryNumberSet);
         // then
-        final Set<Integer> numberSet = this.getNumberSet(actual);
-        assertThat(numberSet).containsExactly(1, 2, 3, 4, 5, 6);
+        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
+        assertThat(numberSet).contains(
+                LotteryNumber.from(1),
+                LotteryNumber.from(2),
+                LotteryNumber.from(3),
+                LotteryNumber.from(4),
+                LotteryNumber.from(5),
+                LotteryNumber.from(6)
+        );
     }
 
-    private Set<Integer> getNumberSet(Lottery lottery) {
+    private Set<LotteryNumber> createLotteryNumberSet(Integer... numbers) {
+        final List<Integer> numberList = Arrays.asList(numbers);
+        return numberList.stream()
+                .map(LotteryNumber::from)
+                .collect(Collectors.toSet());
+    }
+
+    private Set<LotteryNumber> getLotteryNumberSet(Lottery lottery) {
         try {
-            return (Set<Integer>) ReflectionUtils.tryToReadFieldValue(Lottery.class, "numberSet", lottery).get();
+            return (Set<LotteryNumber>) ReflectionUtils.tryToReadFieldValue(Lottery.class, "numberSet", lottery).get();
         } catch (Exception ignored) {
             throw new AssertionError();
         }
