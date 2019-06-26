@@ -35,5 +35,4 @@ class CashPaymentsTest {
         //Then
         Assertions.assertThat(buyableCount).isEqualTo(5);
     }
-
 }

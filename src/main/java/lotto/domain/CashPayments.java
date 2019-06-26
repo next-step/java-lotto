@@ -2,7 +2,6 @@ package lotto.domain;
 
 public class CashPayments {
     private int price;
-    private int buyableCount;
     
     public CashPayments(final int price) {
         this.price = price;

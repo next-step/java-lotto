@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WanLottoNumbers {
-    private final static String SEPARATOR = ",";
     private final static int EMPTY_BONUS_NUMBER = 0;
     private LottoNumbers winLottoNumbers;
     private BonusNumber bonusNumber;
@@ -17,15 +16,7 @@ public class WanLottoNumbers {
     }
     
     public WanLottoNumbers(final String winLottoNumber, final int bonusNumber) {
-        final String[] winNumbers = winLottoNumber.split(SEPARATOR);
-        final List<LottoNumber> lottoNumbers = Arrays.stream(winNumbers)
-            .map(String::trim)
-            .filter(StringUtils::isNumeric)
-            .mapToInt(lottoNumber -> Integer.parseInt(lottoNumber.trim()))
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
-        
-        this.winLottoNumbers = new LottoNumbers(lottoNumbers);
+        this.winLottoNumbers = new LottoNumbers(winLottoNumber);
         this.bonusNumber = new BonusNumber(bonusNumber);
     }
     

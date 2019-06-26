@@ -9,14 +9,14 @@ public class Lottos {
     public static final int DEFAULT_PRICE = 1000;
     private final static int CANT_BUYABLE_COUNT = 0;
     
-    private List<LottoNumbers> lottoNumbers;
+    private List<LottoNumbers> lottos;
     
     public Lottos() {
         this(new ArrayList<>());
     }
     
-    public Lottos(final List<LottoNumbers> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lottos(final List<LottoNumbers> lottos) {
+        this.lottos = lottos;
     }
     
     public static int getBuyableCount(final CashPayments cashPayment) {
@@ -30,7 +30,7 @@ public class Lottos {
     
     WinNumbersCount getWinNumbersCount(final WanLottoNumbers wanLottoNumbers) {
         WinNumbersCount winNumbersCount = new WinNumbersCount();
-        lottoNumbers.forEach(lotto -> {
+        lottos.forEach(lotto -> {
             final int matchedNumberCount = wanLottoNumbers.getMatchedNumberCount(lotto);
             final boolean isMatchedBonus = wanLottoNumbers.isMatchedBonus(lotto);
             winNumbersCount.addWinCount(matchedNumberCount, isMatchedBonus);
@@ -39,11 +39,16 @@ public class Lottos {
     }
     
     public int getLottoSize() {
-        return lottoNumbers.size();
+        return lottos.size();
+    }
+    
+    public boolean hasLottoNumbers(LottoNumbers lottoNumbers) {
+        return lottos.stream()
+                .anyMatch(numbers -> numbers.isEqualsTo(lottoNumbers));
     }
     
     @Override
     public String toString() {
-        return (lottoNumbers + "").replace("[", "").replace("]", "");
+        return (lottos + "").replace("[", "").replace("]", "");
     }
 }

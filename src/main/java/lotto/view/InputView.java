@@ -3,8 +3,12 @@ package lotto.view;
 import static lotto.view.common.Answers.*;
 import lotto.common.Inputer;
 import lotto.common.Outer;
-import lotto.view.data.LottoBuyingInfo;
+import lotto.domain.SelfInputCount;
 import lotto.view.data.WinNumbers;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
     private Inputer inputer;
@@ -15,16 +19,12 @@ public class InputView {
         this.outer = outer;
     }
     
-    public LottoBuyingInfo getLottoBuyingInfo() {
-        return new LottoBuyingInfo(getUserInputCashPayment(), getUserInputSelfInputNumberCount());
-    }
-    
-    private int getUserInputCashPayment() {
+    public int getInputCashPayment() {
         outer.print(CASH_PAYMENT.getAnswer());
         return inputer.inputNumber();
     }
     
-    private int getUserInputSelfInputNumberCount() {
+    public int getInputSelfInputNumberCount() {
         outer.print(SELF_INPUT_COUNT.getAnswer());
         return inputer.inputNumber();
     }
@@ -46,5 +46,12 @@ public class InputView {
     private int getBonusNumber() {
         outer.print(WIN_BONUS_NUMBER.getAnswer());
         return inputer.inputNumber();
+    }
+    
+    public List<String> getInputSelfLottoNumbers(final SelfInputCount selfInputCount) {
+        outer.print(SELF_INPUT_NUMBER.getAnswer());
+        return IntStream.range(0, selfInputCount.getSelfInputCount())
+          .mapToObj(i -> inputer.inputString())
+          .collect(Collectors.toList());
     }
 }

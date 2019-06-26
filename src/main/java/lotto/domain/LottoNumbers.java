@@ -2,16 +2,37 @@ package lotto.domain;
 
 import lotto.common.ErrorMessage;
 import lotto.common.LottoNumbersMaker;
+import lotto.common.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumbers {
+    private final static String SEPARATOR = ",";
     private final static int LOTTO_NUMBER_COUNT = 6;
+    private final static int START_NUMBER = 0;
     
     private List<LottoNumber> lottoNumbers;
     
     LottoNumbers() {
         this.lottoNumbers = LottoNumbersMaker.getNewLottoNumbers();
+    }
+    
+    public LottoNumbers(final String lottoNumbersStr) {
+        this(lottoNumbersStr.split(SEPARATOR));
+    }
+    
+    public LottoNumbers(final String[] lottoNumbersArr) {
+        this(
+          Arrays.stream(lottoNumbersArr)
+            .map(String::trim)
+            .filter(StringUtils::isNumeric)
+            .mapToInt(lottoNumber -> Integer.parseInt(lottoNumber.trim()))
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList())
+        );
     }
     
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
@@ -45,6 +66,17 @@ public class LottoNumbers {
         LottoNumber bonusLottoNumber = bonusNumber.getLottoNumber();
         return lottoNumbers.contains(bonusLottoNumber);
     }
+    
+    public boolean isEqualsTo(LottoNumbers lottoNumbers) {
+        return lottoNumbers.isEqualsTo(this.lottoNumbers);
+    }
+    
+    private boolean isEqualsTo(List<LottoNumber> lottoNumbers) {
+        return IntStream.range(START_NUMBER, lottoNumbers.size())
+                .allMatch(i -> this.lottoNumbers.get(i).equals(lottoNumbers.get(i)));
+    }
+    
+    
     
     @Override
     public String toString() {
