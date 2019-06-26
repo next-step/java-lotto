@@ -1,22 +1,18 @@
 package com.jaeyeonling.lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ManualLottoGenerator implements LottoGenerator {
 
-    private final List<Lotto> lottos;
+    private final Iterator<Lotto> lottos;
 
     ManualLottoGenerator(final List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
-    }
-
-    ManualLottoGenerator(final LottoTicket lottoTicket) {
-        this(lottoTicket.getLottos());
+        this.lottos = lottos.iterator();
     }
 
     @Override
     public Lotto generate() {
-        return null;
+        return lottos.next();
     }
 }
