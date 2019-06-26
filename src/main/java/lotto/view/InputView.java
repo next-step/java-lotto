@@ -1,12 +1,12 @@
 package lotto.view;
 
+import static lotto.view.common.Answers.*;
 import lotto.common.Inputer;
 import lotto.common.Outer;
+import lotto.view.data.LottoBuyingInfo;
+import lotto.view.data.WinNumbers;
 
 public class InputView {
-    private final static String CASH_COUNT_ANSWER = "구입금액을 입력해 주세요.";
-    private final static String WIN_NUMBER_ANSWER = "지난 주 당첨 번호를 입력해 주세요.(ex. 1,2,3,4,5,6)";
-    private final static String WIN_BONUS_NUMBER_ANSWER = "보너스 볼을 입력해 주세요.";
     private Inputer inputer;
     private Outer outer;
     
@@ -15,29 +15,36 @@ public class InputView {
         this.outer = outer;
     }
     
-    public void printCashAnswer() {
-        outer.print(CASH_COUNT_ANSWER);
+    public LottoBuyingInfo getLottoBuyingInfo() {
+        return new LottoBuyingInfo(getUserInputCashPayment(), getUserInputSelfInputNumberCount());
     }
     
-    public void printWinNumberAnswer() {
-        outer.print(WIN_NUMBER_ANSWER);
-    }
-    
-    public int getUserInputCashPayment() {
+    private int getUserInputCashPayment() {
+        outer.print(CASH_PAYMENT.getAnswer());
         return inputer.inputNumber();
     }
     
+    private int getUserInputSelfInputNumberCount() {
+        outer.print(SELF_INPUT_COUNT.getAnswer());
+        return inputer.inputNumber();
+    }
+    
+    // 수동로또번호입력받기
+    
+    
+    
+    
     public WinNumbers getUserInputWinNumber() {    
-        return new WinNumbers(getWinNumbers(), getBonasNumber());
+        return new WinNumbers(getWinNumbers(), getBonusNumber());
     }
     
     private String getWinNumbers() {
-        outer.print(WIN_NUMBER_ANSWER);
+        outer.print(WIN_NUMBER.getAnswer());
         return inputer.inputString();
     }
     
-    private int getBonasNumber() {
-        outer.print(WIN_BONUS_NUMBER_ANSWER);
+    private int getBonusNumber() {
+        outer.print(WIN_BONUS_NUMBER.getAnswer());
         return inputer.inputNumber();
     }
 }

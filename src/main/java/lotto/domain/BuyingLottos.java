@@ -19,6 +19,8 @@ public class BuyingLottos {
         this.cashPayments = cashPayments;
     }
     
+    
+    
     public Lottos buyLottos(final CashPayments cashPayment) {
         lottos = new Lottos(IntStream.range(START_NUMBER, Lottos.getBuyableCount(cashPayment))
             .mapToObj(i -> new LottoNumbers())
@@ -33,5 +35,9 @@ public class BuyingLottos {
     @Override
     public String toString() {
         return lottos.toString();
+    }
+    
+    public static boolean canBuyingSelfLotto(final int cashPayment, final int selfCount) {
+        return selfCount <= Lottos.getBuyableCount(new CashPayments(cashPayment));
     }
 }

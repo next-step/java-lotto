@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private static final int DEFAULT_PRICE = 1000;
+    public static final int DEFAULT_PRICE = 1000;
     private final static int CANT_BUYABLE_COUNT = 0;
     
     private List<LottoNumbers> lottoNumbers;

@@ -8,14 +8,15 @@ import java.util.stream.Collectors;
 
 public class WanLottoNumbers {
     private final static String SEPARATOR = ",";
+    private final static int EMPTY_BONUS_NUMBER = 0;
     private LottoNumbers winLottoNumbers;
     private BonusNumber bonusNumber;
     
-    public WanLottoNumbers(String winLottoNumber) {
-        this(winLottoNumber, 0);
+    public WanLottoNumbers(final String winLottoNumber) {
+        this(winLottoNumber, EMPTY_BONUS_NUMBER);
     }
     
-    public WanLottoNumbers(final String winLottoNumber, final int bonasNumber) {
+    public WanLottoNumbers(final String winLottoNumber, final int bonusNumber) {
         final String[] winNumbers = winLottoNumber.split(SEPARATOR);
         final List<LottoNumber> lottoNumbers = Arrays.stream(winNumbers)
             .map(String::trim)
@@ -25,7 +26,7 @@ public class WanLottoNumbers {
             .collect(Collectors.toList());
         
         this.winLottoNumbers = new LottoNumbers(lottoNumbers);
-        this.bonusNumber = new BonusNumber(bonasNumber);
+        this.bonusNumber = new BonusNumber(bonusNumber);
     }
     
     public LottoNumbers getLotto() {

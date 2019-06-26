@@ -9,6 +9,7 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.OwnPrize;
 import lotto.domain.WanLottoNumbers;
+import lotto.view.data.LottoBuyingInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -50,5 +51,16 @@ class BuyingLottosTest {
         return IntStream.of(lottoNumbers)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
+    }
+    
+    @Test
+    @DisplayName("입력한 금액만큼 수동구매가 가능하다.")
+    void canBuyingSelfLottoSuccessTest() {
+        //Given
+        LottoBuyingInfo lottoBuyingInfo = new LottoBuyingInfo(5000, 5);
+        //When
+        boolean canBuyingSelfLotto = BuyingLottos.canBuyingSelfLotto(lottoBuyingInfo.getCashPayment(), lottoBuyingInfo.getSelfCount());
+        //Then
+        Assertions.assertThat(canBuyingSelfLotto).isTrue();
     }
 }
