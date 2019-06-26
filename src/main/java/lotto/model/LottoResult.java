@@ -8,11 +8,12 @@ public class LottoResult {
     private int winningCount4;
     private int winningCount3;
 
-    public LottoResult(int winningCount6, int winningCount5, int winningCount4, int winningCount3) {
-        this.winningCount6 = winningCount6;
-        this.winningCount5 = winningCount5;
-        this.winningCount4 = winningCount4;
-        this.winningCount3 = winningCount3;
+    public void addWinningCount(int winningCount){
+
+        if (winningCount == 3){
+            winningCount3++;
+        }
+
     }
 
     public int getWinningCount6() {

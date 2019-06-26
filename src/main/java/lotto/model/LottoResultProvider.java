@@ -14,7 +14,8 @@ public class LottoResultProvider {
     }
 
     public LottoResult getResult() {
-        this.lottos.stream().map(lotto -> lotto.getWinningCount(this.winningNumbers));
-        return null;
+        LottoResult lottoResult = new LottoResult();
+        this.lottos.forEach(lotto -> lottoResult.addWinningCount(lotto.getWinningCount(this.winningNumbers)));
+        return lottoResult;
     }
 }
