@@ -12,6 +12,7 @@ public class AnalyzerTest {
 
     private Analyzer analyzer;
     private Lottos lottos;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
@@ -21,11 +22,14 @@ public class AnalyzerTest {
         lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
         List<Integer> winningNumbers = Arrays.asList(1,3,5,6,9);
-        Lotto winningLotto = LottoGenerator.generate(winningNumbers);
+        Lotto lottoWithWinningNumbers = LottoGenerator.generate(winningNumbers);
+
+        int bonusNumber = 3;
+        winningLotto = new WinningLotto(lottoWithWinningNumbers, bonusNumber);
         analyzer = new Analyzer(winningLotto);
     }
 
-    @RepeatedTest(value = 5)
+    @Test
     void analyze() {
         Report report = analyzer.analyze(lottos);
         Map<Prize, Integer> status = report.getPrizeStatus();
@@ -35,11 +39,12 @@ public class AnalyzerTest {
 
     @Test
     void increasePrizeCount() {
-        List<Integer> countsOfMatchingNumbers = Arrays.asList(3);
         final Map<Prize, Integer> prizeStatus = new HashMap<>();
-        countsOfMatchingNumbers.forEach(count -> analyzer.increasePrizeCount(Prize.valueOf(count), prizeStatus));
 
-        assertThat(prizeStatus.get(Prize.valueOf(3))).isEqualTo(1);
-        assertThat(prizeStatus.size()).isEqualTo(1);
+        List<Prize> prizes = lottos.matches(winningLotto);
+        prizes.forEach(prize -> analyzer.increasePrizeCount(prize, prizeStatus));
+
+        assertThat(prizeStatus.get(Prize.SECOND)).isEqualTo(1);
+        assertThat(prizeStatus.size()).isEqualTo(2);
     }
 }
