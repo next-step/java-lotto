@@ -1,8 +1,6 @@
 package camp.nextstep.edu.lotto.domain;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,9 +9,6 @@ public class SimpleLotteryService implements LotteryService {
 
     private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int ZERO = 0;
-    private static final int COUNT_UNIT = 1;
-    private static final int COUNT_DEFAULT = 0;
-    private static final long IDENTITY_LONG = 0L;
 
     @Override
     public Lotteries purchase(int investment) {
@@ -27,7 +22,7 @@ public class SimpleLotteryService implements LotteryService {
     }
 
     @Override
-    public Map<RewardType, Integer> getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet) {
+    public LotteriesReward getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet) {
         final Set<LotteryNumber> winningLotteryNumberSet = winningNumberSet.stream()
                 .map(LotteryNumber::from)
                 .collect(Collectors.toSet());
@@ -35,27 +30,22 @@ public class SimpleLotteryService implements LotteryService {
         return this.resolveRewards(purchasedLotteries, winningLottery);
     }
 
-    private Map<RewardType, Integer> resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery) {
-        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
-        rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, COUNT_DEFAULT);
-        rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, COUNT_DEFAULT);
-        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, COUNT_DEFAULT);
-        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, COUNT_DEFAULT);
+    private LotteriesReward resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery) {
+        final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
 
         purchasedLotteries.stream()
                 .map(lottery -> lottery.score(winningLottery))
                 .forEach(score -> {
                     final RewardType rewardType = RewardType.from(score);
-                    final int current = rewardMap.getOrDefault(rewardType, COUNT_DEFAULT);
-                    rewardMap.put(rewardType, current + COUNT_UNIT);
+                    lotteriesReward.add(rewardType);
                 });
 
-        return rewardMap;
+        return lotteriesReward;
     }
 
     @Override
-    public double calculateEarningsRate(int investment, Map<RewardType, Integer> rewardMap) {
-        final double reward = this.sumAllRewards(rewardMap);
+    public double calculateEarningsRate(int investment, LotteriesReward lotteriesReward) {
+        final double reward = lotteriesReward.sumAllRewards();
         return this.resolveEarningRate(investment, reward);
     }
 
@@ -67,12 +57,5 @@ public class SimpleLotteryService implements LotteryService {
             throw new IllegalArgumentException("'reward' must be greater than or equal to " + ZERO);
         }
         return reward / (double) investment;
-    }
-
-    private long sumAllRewards(Map<RewardType, Integer> rewardMap) {
-        return rewardMap.entrySet()
-                .stream()
-                .map(entry -> entry.getKey().getReward() * entry.getValue())
-                .reduce(IDENTITY_LONG, Long::sum);
     }
 }

@@ -1,11 +1,11 @@
 package camp.nextstep.edu.lotto.view.console;
 
 import camp.nextstep.edu.lotto.domain.Lotteries;
+import camp.nextstep.edu.lotto.domain.LotteriesReward;
 import camp.nextstep.edu.lotto.domain.RewardType;
 import camp.nextstep.edu.lotto.view.ResultView;
 import camp.nextstep.edu.lotto.view.console.formatter.Formatter;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConsoleResultView implements ResultView {
@@ -33,8 +33,8 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void printResults(Map<RewardType, Integer> rewardMap, double earningsRate) {
-        final String formattedRewards = rewardMap.entrySet()
+    public void printResults(LotteriesReward lotteriesReward, double earningsRate) {
+        final String formattedRewards = lotteriesReward.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey() != RewardType.UNKNOWN)
                 .map(entry -> {

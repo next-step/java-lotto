@@ -54,8 +54,8 @@ public class LotteryApplication {
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
-        final Map<RewardType, Integer> rewardMap = simpleLotteryService.getResult(purchasedLotteries, winningNumbers);
-        final double earningsRate = simpleLotteryService.calculateEarningsRate(investment, rewardMap);
-        resultView.printResults(rewardMap, earningsRate);
+        final LotteriesReward lotteriesReward = simpleLotteryService.getResult(purchasedLotteries, winningNumbers);
+        final double earningsRate = simpleLotteryService.calculateEarningsRate(investment, lotteriesReward);
+        resultView.printResults(lotteriesReward, earningsRate);
     }
 }
