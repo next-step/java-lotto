@@ -1,16 +1,23 @@
 package lotto.util;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoGenerator {
+import static java.util.Collections.shuffle;
+import static java.util.Collections.sort;
 
-    public static List<Integer> generate() {
-        List<Integer> lotteryNumbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
-        Collections.shuffle(lotteryNumbers);
-        Collections.sort(lotteryNumbers);
-        return lotteryNumbers.subList(0,6);
+class LottoGenerator {
+
+    private static final int LOTTO_FIRST_NUMBER = 0;
+    private static final int LOTTO_LAST_NUMBER = 6;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+
+    static List<Integer> generate() {
+        List<Integer> lotteryNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
+        shuffle(lotteryNumbers);
+        sort(lotteryNumbers);
+        return lotteryNumbers.subList(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER);
     }
 }

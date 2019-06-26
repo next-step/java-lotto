@@ -2,24 +2,19 @@ package lotto.util;
 
 import lotto.model.Lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketBox {
 
     private static final int TICKET_PRICE = 1000;
 
     public static List<Lotto> buy(int amount) {
-
-        int lottoCount = amount / TICKET_PRICE;
-
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (; lottoCount > 0; lottoCount--) {
-            lottos.add(new Lotto(LottoGenerator.generate()));
-        }
-
-        return lottos;
+        return IntStream.rangeClosed(1, amount / TICKET_PRICE)
+                .boxed()
+                .map(e -> new Lotto(LottoGenerator.generate()))
+                .collect(Collectors.toList());
     }
 
 }
