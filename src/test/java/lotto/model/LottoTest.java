@@ -22,4 +22,11 @@ class LottoTest {
         List<Integer> numbers = Arrays.asList(1, 4, 2);
         assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void getWinningCount() {
+        List<Integer> numbers = Arrays.asList(1, 4, 5, 6, 7, 20);
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.getWinningCount(Arrays.asList(1,4,5,6,7,8))).isEqualTo(5);
+    }
 }

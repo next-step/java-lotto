@@ -14,8 +14,8 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if(!hasSixNumbers(numbers)){
-           throw new IllegalArgumentException();
+        if (!hasSixNumbers(numbers)) {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -26,5 +26,17 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public int getWinningCount(List<Integer> winningNumbers) {
+
+        int winningCount = 0;
+
+        for (Integer winnerNumber : winningNumbers) {
+            if (this.numbers.contains(winnerNumber)) {
+                winningCount++;
+            }
+        }
+        return winningCount;
     }
 }
