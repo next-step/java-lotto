@@ -13,6 +13,10 @@ public class LottoWinningResult {
         return new LottoWinningResult(winningResultMap);
     }
 
+    public long getWinningCount(LottoWinningAmount lottoWinningAmount) {
+        return winningResultMap.getOrDefault(lottoWinningAmount, 0L);
+    }
+
     public long getTotalWinningAmount() {
         return winningResultMap.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().getWinningAmount() * entry.getValue())
