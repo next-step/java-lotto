@@ -16,12 +16,4 @@ public class WinningLotto {
 
         return Prize.valueOf(countOfMatchingNumbers, hasBonusNumber);
     }
-
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
-    }
 }

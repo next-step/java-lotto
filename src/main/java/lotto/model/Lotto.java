@@ -26,13 +26,6 @@ public class Lotto {
     return this.generatedNumbers.contains(number);
   }
 
-  public Prize matches(WinningLotto winningLotto) {
-    int countOfMatchingNumbers = getCountOfMatchingNumbers(winningLotto.getLotto());
-    boolean hasBonusNumber = this.contains(winningLotto.getBonusNumber());
-
-    return Prize.valueOf(countOfMatchingNumbers, hasBonusNumber);
-  }
-
   @Override
   public String toString() {
     return generatedNumbers.toString();
