@@ -36,4 +36,12 @@ public enum RewardType {
     public long getReward() {
         return reward;
     }
+
+    @Override
+    public String toString() {
+        return "RewardType{" +
+                "score=" + score +
+                ", reward=" + reward +
+                '}';
+    }
 }

@@ -1,9 +1,6 @@
 package camp.nextstep.edu.lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Lottery {
@@ -42,5 +39,25 @@ public class Lottery {
 
     public Stream<LotteryNumber> stream() {
         return numberSet.stream();
+    }
+
+    @Override
+    public String toString() {
+        return "Lottery{" +
+                "numberSet=" + numberSet +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottery lottery = (Lottery) o;
+        return numberSet.equals(lottery.numberSet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberSet);
     }
 }

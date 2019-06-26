@@ -2,6 +2,7 @@ package camp.nextstep.edu.lotto.domain;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class LotteriesReward {
@@ -44,5 +45,25 @@ public class LotteriesReward {
                 .stream()
                 .map(entry -> entry.getKey().getReward() * entry.getValue())
                 .reduce(IDENTITY_LONG, Long::sum);
+    }
+
+    @Override
+    public String toString() {
+        return "LotteriesReward{" +
+                "rewardMap=" + rewardMap +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteriesReward that = (LotteriesReward) o;
+        return rewardMap.equals(that.rewardMap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rewardMap);
     }
 }
