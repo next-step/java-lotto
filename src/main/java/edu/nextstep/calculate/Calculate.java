@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
  */
 public class Calculate {
 
-    public List<Integer> convertToInteger(List<String> convertSource) {
+    public static List<Integer> convertToInteger(List<String> convertSource) {
         return convertSource.stream()
-                .map(s -> Integer.parseInt(s))
+                .map(soucreData -> Integer.parseInt(soucreData))
                 .collect(Collectors.toList());
     }
 
-    public int sum(List<Integer> sumList) {
-        return sumList.stream()
+    public static int sum(List<Integer> sumTargets) {
+        return sumTargets.stream()
                 .reduce((integer1, integer2) -> integer1 + integer2)
                 .get();
     }

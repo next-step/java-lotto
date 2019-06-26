@@ -29,7 +29,7 @@ class ValidationUtilsTest {
     @DisplayName("음수인지 체크")
     @Test
     void isNegativeNumber() {
-        assertThat(ValidationUtils.isNegativeNumber(-1)).isTrue();
+        assertThat(ValidationUtils.hasNegativeNumber(-1)).isTrue();
     }
 
     @DisplayName("음수 or 숫자가아니면 RuntimeException 처리")

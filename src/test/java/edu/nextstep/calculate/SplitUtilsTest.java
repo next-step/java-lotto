@@ -3,9 +3,11 @@ package edu.nextstep.calculate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -19,9 +21,23 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SplitUtilsTest {
 
-    @DisplayName(" ',' ':' 을 기준으로 나누기")
+    @DisplayName(" ':' 을 기준으로 나누기")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3"})
+    @ValueSource(strings = {"1:2:3"})
+    void colonSplit(String inputData) {
+        assertThat(SplitUtils.commonSplit(inputData).contains("1")).isTrue();
+    }
+
+    @DisplayName(" ',' 을 기준으로 나누기")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3"})
+    void commaSplit(String inputData) {
+        assertThat(SplitUtils.commonSplit(inputData).contains("1")).isTrue();
+    }
+
+    @DisplayName(" ':' 과 ',' 을 기준으로 나누기")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2:3"})
     void commonSplit(String inputData) {
         assertThat(SplitUtils.commonSplit(inputData).contains("1")).isTrue();
     }
@@ -36,7 +52,13 @@ public class SplitUtilsTest {
     @DisplayName("문자열의 유효성체크 (공백)")
     @Test
     void isSpace() {
-        assertThat(SplitUtils.isSpace("")).isTrue();
+        assertThat(SplitUtils.isSpaceOrNull("")).isTrue();
+    }
+
+    @DisplayName("문자열의 유효성체크 (null)")
+    @Test
+    void isNull() {
+        assertThat(SplitUtils.isSpaceOrNull(null)).isTrue();
     }
 
 }

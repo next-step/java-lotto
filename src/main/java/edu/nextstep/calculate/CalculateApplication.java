@@ -15,11 +15,9 @@ import java.util.stream.Collectors;
  * create date  : 2019-06-22 03:10
  */
 public class CalculateApplication {
-    private Calculate calculate;
     private List<String> inputData;
 
     public CalculateApplication() {
-        this.calculate = new Calculate();
         this.inputData = new ArrayList<>();
     }
 
@@ -36,13 +34,15 @@ public class CalculateApplication {
     }
 
     public void run() {
-        for (String inputCalculateData : inputData) {
-            List<String> calculateData = SplitUtils.inputDataSplit(inputCalculateData).stream()
-                    .peek(s -> ValidationUtils.validationNumber(s))
-                    .collect(Collectors.toList());
 
-            List<Integer> convertedList = calculate.convertToInteger(calculateData);
-            System.out.println("합계 : " + calculate.sum(convertedList));
+        for (String inputCalculateData : inputData) {
+            Input calculateData = new Input(SplitUtils.inputDataSplit(inputCalculateData).stream()
+                    .peek(splitData -> ValidationUtils.validationNumber(splitData))
+                    .collect(Collectors.toList()));
+
+
+            List<Integer> convertedList = Calculate.convertToInteger(calculateData.getInputData());
+            System.out.println("합계 : " + Calculate.sum(convertedList));
         }
     }
 }
