@@ -14,22 +14,22 @@ public class NumberGeneratorTest {
   void makeNumbers() {
     List<Integer> numbers = new Random().ints(1, 46)
             .distinct()
-            .limit(6)
+            .limit(Lotto.COUNT_OF_NUMBERS)
             .boxed()
             .collect(Collectors.toList());
 
-    assertThat(numbers.size()).isEqualTo(6);
+    assertThat(numbers.size()).isEqualTo(Lotto.COUNT_OF_NUMBERS);
   }
 
   @Test
   void randomNumberGenerate() {
-    List<Integer> numbers = new RandomNumberGenerator().generate(6);
-    assertThat(numbers.size()).isEqualTo(6);
+    List<Integer> numbers = new RandomNumberGenerator().generate(Lotto.COUNT_OF_NUMBERS);
+    assertThat(numbers.size()).isEqualTo(Lotto.COUNT_OF_NUMBERS);
   }
 
   @Test
   void mockNumberGenerate() {
-    List<Integer> numbers = new MockNumberGenerator().generate(6);
+    List<Integer> numbers = new MockNumberGenerator().generate(Lotto.COUNT_OF_NUMBERS);
     assertThat(numbers).contains(1,2,3,4,5,6);
   }
 }
