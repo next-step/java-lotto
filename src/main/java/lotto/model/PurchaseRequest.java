@@ -24,11 +24,11 @@ public class PurchaseRequest {
         return !(manualLottoInfo == null || manualLottoInfo.isEmpty());
     }
 
-    public boolean hasManualLotto() {
+    boolean hasManualLotto() {
         return hasManualLotto(manualLottoInfo);
     }
 
-    public boolean hasRandomLotto() {
+    boolean hasRandomLotto() {
         return money.countAvailableByLotto() > MIN_MANUAL_LOTTO_SIZE;
     }
 
