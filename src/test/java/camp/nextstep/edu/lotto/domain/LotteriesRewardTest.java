@@ -41,18 +41,24 @@ class LotteriesRewardTest implements LotteriesRewardHelper {
     @Test
     @DisplayName("보상 합계가 잘 계산되어야합니다 - 2등")
     void sumAllRewards2() {
-        this.testSumAllRewards(RewardType.FIVE_NUMBERS_MATCHED, 1_500_000);
+        this.testSumAllRewards(RewardType.FIVE_NUMBERS_AND_BONUS_MATCHED, 30_000_000);
     }
 
     @Test
     @DisplayName("보상 합계가 잘 계산되어야합니다 - 3등")
     void sumAllRewards3() {
-        this.testSumAllRewards(RewardType.FOUR_NUMBERS_MATCHED, 50_000);
+        this.testSumAllRewards(RewardType.FIVE_NUMBERS_MATCHED, 1_500_000);
     }
 
     @Test
     @DisplayName("보상 합계가 잘 계산되어야합니다 - 4등")
     void sumAllRewards4() {
+        this.testSumAllRewards(RewardType.FOUR_NUMBERS_MATCHED, 50_000);
+    }
+
+    @Test
+    @DisplayName("보상 합계가 잘 계산되어야합니다 - 5등")
+    void sumAllRewards5() {
         this.testSumAllRewards(RewardType.THREE_NUMBERS_MATCHED, 5_000);
     }
 
