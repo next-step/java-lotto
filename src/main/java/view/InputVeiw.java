@@ -5,9 +5,20 @@ import java.util.Scanner;
 public class InputVeiw {
     public final static int MINIMUM_PRICE = 1000;
     private final static int ONE_UNIT_OF_LOTTO = 6;
-    private final static String SEPARATOR_REST = ",";
-    private final static String SEPARATOR_BLANK = " ";
-    private final static String SEPARATOR_NOTHING = "";
+
+    private enum Sperator {
+        REST(","), BLANK(" "), NOTHING("");
+
+        private String value;
+
+        private Sperator(String input) {
+            value = input;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 
     public static int userInput() {
         Scanner scanner = new Scanner(System.in);
@@ -48,6 +59,6 @@ public class InputVeiw {
     }
 
     public static String[] removeBlankAndSplit(String input) {
-        return input.replaceAll(SEPARATOR_BLANK, SEPARATOR_NOTHING).split(SEPARATOR_REST);
+        return input.replaceAll(Sperator.BLANK.getValue(), Sperator.NOTHING.getValue()).split(Sperator.REST.getValue());
     }
 }
