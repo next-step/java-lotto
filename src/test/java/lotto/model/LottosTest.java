@@ -32,4 +32,16 @@ public class LottosTest {
     void getBuyingMoney() {
         assertThat(lottos.getBuyingMoney()).isEqualTo(2000);
     }
+
+    @Test
+    @DisplayName("로또 matching 개수와 bonus number에 따른 Prize 리턴")
+    void matches() {
+        final Lotto lottoWithWinningNumbers = new Lotto(Arrays.asList(1,2,3,4,5,22));
+        final int bonusNumber = 5;
+        final WinningLotto winningLotto = new WinningLotto(lottoWithWinningNumbers, bonusNumber);
+        List<Prize> prizes = lottos.matches(winningLotto);
+
+        assertThat(prizes.size()).isEqualTo(2);
+        assertThat(prizes).contains(Prize.SECOND, Prize.FOURTH);
+    }
 }
