@@ -23,4 +23,21 @@ class LottoNumbersTest {
         .hasMessageContaining("로또 번호는 6개여야 합니다.");
   }
 
+
+  @Test
+  public void 로또숫자는_중독되면_안된다() {
+    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    lottoNumbers.add(new LottoNumber(1));
+    lottoNumbers.add(new LottoNumber(2));
+    lottoNumbers.add(new LottoNumber(3));
+    lottoNumbers.add(new LottoNumber(4));
+    lottoNumbers.add(new LottoNumber(5));
+    lottoNumbers.add(new LottoNumber(5));
+
+    assertThatThrownBy(() -> {
+      new LottoNumbers(lottoNumbers);
+    }).isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("로또 번호는 중복되면 안됩니다.");
+  }
+
 }
