@@ -28,9 +28,9 @@ public class Lottos {
                 .collect(joining(System.lineSeparator()));
     }
 
-    public List<Integer> getCountOfMatchingNumbers(List<Integer> winningNumbers) {
+    public List<Integer> getCountOfMatchingNumbers(Lotto winningLotto) {
         return this.lottos.stream()
-                .mapToInt(lotto -> lotto.getCountOfMatchingNumbers(winningNumbers))
+                .mapToInt(lotto -> lotto.getCountOfMatchingNumbers(winningLotto))
                 .boxed()
                 .collect(toList());
     }

@@ -21,7 +21,8 @@ public class AnalyzerTest {
         lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
         List<Integer> winningNumbers = Arrays.asList(1,3,5,6,9);
-        analyzer = new Analyzer(winningNumbers);
+        Lotto winningLotto = LottoGenerator.generate(winningNumbers);
+        analyzer = new Analyzer(winningLotto);
     }
 
     @RepeatedTest(value = 5)

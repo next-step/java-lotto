@@ -12,9 +12,17 @@ public class Lotto {
     this.generatedNumbers = generatedNumbers;
   }
 
-  public int getCountOfMatchingNumbers(List<Integer> winningNumbers) {
+  public int getCountOfMatchingNumbers(Lotto winningLotto) {
     return generatedNumbers.stream()
-            .reduce(0, (countOfMatchingNumber, lottoNumber) -> winningNumbers.contains(lottoNumber) ? countOfMatchingNumber + 1 : countOfMatchingNumber);
+            .reduce(0, (countOfMatchingNumber, lottoNumber) -> winningLotto.contains(lottoNumber) ? countOfMatchingNumber + 1 : countOfMatchingNumber);
+  }
+
+  public List<Integer> getGeneratedNumbers() {
+    return generatedNumbers;
+  }
+
+  public boolean contains(int number) {
+    return this.generatedNumbers.contains(number);
   }
 
   @Override
