@@ -1,6 +1,10 @@
 package lotto.model;
 
+import lotto.exception.ConflictLottoNumberException;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -10,6 +14,9 @@ public class Lotto {
   private final List<Integer> generatedNumbers;
 
   public Lotto(List<Integer> generatedNumbers) {
+    if (hasConflictNumber(generatedNumbers)) {
+      throw new ConflictLottoNumberException();
+    }
     this.generatedNumbers = generatedNumbers;
   }
 
@@ -20,6 +27,11 @@ public class Lotto {
 
   public boolean contains(int number) {
     return this.generatedNumbers.contains(number);
+  }
+
+  boolean hasConflictNumber(List<Integer> numbers) {
+    final Set<Integer> temp = new HashSet<>();
+    return !numbers.stream().allMatch(temp::add);
   }
 
   @Override
