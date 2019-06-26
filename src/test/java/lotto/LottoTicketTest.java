@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfCountException;
+import lotto.exception.OutOfMaxNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class LottoTicketTest {
 
 	@DisplayName("허용된 개수 이상 입력")
 	@Test
-	void addOverLimit() {
+	void addOverCount() {
 		int[] numbers = {1, 2, 3, 4, 5, 6};
 		LottoTicket ticket = new LottoTicket();
 
@@ -33,6 +34,17 @@ class LottoTicketTest {
 		}
 
 		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
+			ticket.add(7);
+		});
+	}
+
+	@DisplayName("허용된 숫자 이상 입력")
+	@Test
+	void addOverLimit() {
+		LottoTicket ticket = new LottoTicket();
+		ticket.add(LottoTicket.MAX_NUMBER + 1);
+
+		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
 			ticket.add(7);
 		});
 	}
