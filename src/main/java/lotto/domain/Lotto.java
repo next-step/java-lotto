@@ -4,14 +4,14 @@ import java.util.*;
 
 public class Lotto {
 
-    protected List<Integer> numbers;
+    protected LottoNumber lottoNumber;
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(LottoNumber lottoNumber) {
+        this.lottoNumber = lottoNumber;
     }
 
     public Lotto() {
-        this(new ArrayList<>());
+        this(new LottoNumber());
     }
 
     void checkAnotherNumberLength(List<Integer> numbers) throws IllegalArgumentException {
@@ -24,13 +24,18 @@ public class Lotto {
         }
     }
 
-    Rank getRank(List<Integer> winNumbers) {
-        List<Integer> sameWinNumbers = numbers;
-        sameWinNumbers.retainAll(winNumbers);
-        return Rank.valueOf(sameWinNumbers.size());
+    Rank getRank(LottoNumber winLottoNumber, Integer bonusNumber) {
+        boolean matchBonus = false;
+        if (lottoNumber.getNumbers().contains(bonusNumber)) {
+            matchBonus = true;
+        }
+        List<Integer> sameWinNumbers = new ArrayList<>();
+        sameWinNumbers.addAll(lottoNumber.getNumbers());
+        sameWinNumbers.retainAll(winLottoNumber.getNumbers());
+        return Rank.valueOf(sameWinNumbers.size(), matchBonus);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public LottoNumber getLottoNumber() {
+        return lottoNumber;
     }
 }

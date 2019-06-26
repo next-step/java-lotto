@@ -12,16 +12,17 @@ public class WinnerLotto extends Lotto {
 
     public WinnerLotto(String inputNumbers) {
         validateInputStringNumbers(inputNumbers);
-        super.numbers = winNumbers(inputNumbers);
+        super.lottoNumber = winLottoNumber(inputNumbers);
     }
 
-    private List<Integer> winNumbers(String inputNumbers) {
+    private LottoNumber winLottoNumber(String inputNumbers) {
         String[] stringNumbers = inputNumbers.split(WIN_NUMBER_DELIMITER);
         List<Integer> numbers = new ArrayList<>();
         for (String stringNumber : stringNumbers) {
             numbers.add(Integer.parseInt(stringNumber));
         }
-        return numbers;
+        LottoNumber winLottoNumber = new LottoNumber(numbers);
+        return winLottoNumber;
     }
 
     private void validateInputStringNumbers(String input) throws IllegalArgumentException {
@@ -31,7 +32,6 @@ public class WinnerLotto extends Lotto {
         List<Integer> numbers = new ArrayList<>();
         for (String stringNumber : stringNumbers) {
             checkNumberValue(stringNumber);
-            checkLottoNumberRange(stringNumber);
             numbers.add(Integer.parseInt(stringNumber));
         }
         checkAnotherNumberLength(numbers);
@@ -39,13 +39,6 @@ public class WinnerLotto extends Lotto {
 
     String[] getStrNumbers(String strNumbers) {
         return strNumbers.split(WIN_NUMBER_DELIMITER);
-    }
-
-    void checkLottoNumberRange(String value) throws IllegalArgumentException {
-        int lottoNumber = Integer.parseInt(value);
-        if (LottoNumber.MIN_LOTTO_NUM > lottoNumber || LottoNumber.MAX_LOTTO_NUM < lottoNumber) {
-            throw new IllegalArgumentException("1부터 45사이의 숫자만 당첨숫자로 인정이 됩니다.");
-        }
     }
 
     void checkInputNullOrEmpty(String input) throws IllegalArgumentException {

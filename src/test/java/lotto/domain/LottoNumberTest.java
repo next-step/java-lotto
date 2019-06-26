@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +37,14 @@ public class LottoNumberTest {
             eachOtherNumbers.add(number);
         }
         assertThat(eachOtherNumbers.size()).isEqualTo(45);
+    }
+
+    @Test
+    void 잘못된숫자범위로또번호_IllegalArgumentException() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            lottoNumber.checkLottoNumberRange(0);
+            lottoNumber.checkLottoNumberRange(46);
+        });
     }
 
 }

@@ -35,15 +35,6 @@ public class WinnerLottoTest {
     }
 
     @Test
-    void 잘못된숫자범위로또번호_IllegalArgumentException() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            for (String wrongStringNumber : wrongStringNumbers) {
-                winnerLotto.checkLottoNumberRange(wrongStringNumber);
-            }
-        });
-    }
-
-    @Test
     void 빈문자열_NULL_공백문자열_IllegalArgumentException() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             winnerLotto.checkInputNullOrEmpty("");
@@ -85,7 +76,7 @@ public class WinnerLottoTest {
 
     @Test
     void 정상적인로또번호입력() {
-        assertThat(winnerLotto.getNumbers().size()).isEqualTo(6);
+        assertThat(winnerLotto.getLottoNumber().getNumbers().size()).isEqualTo(6);
     }
 
 }

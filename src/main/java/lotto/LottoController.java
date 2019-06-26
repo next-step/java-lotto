@@ -16,8 +16,11 @@ public class LottoController {
         view.printPublishLottoNumbers(view.getLottosNumbers(lottoPublisher.getPublishLotto()));
 
         view.printWinnerNumbersGuide();
+        WinnerLotto winnerLotto = new WinnerLotto(view.getInputWinnerNumbers());
+        view.printBonusNumberGuide();
+        BonusNumber bonusNumber = new BonusNumber(view.getInputBonusNumber());
         RankReward rankReward = new RankReward(lottoPublisher.getPublishLottoRanks(
-                new WinnerLotto(view.getInputWinnerNumbers())));
+                winnerLotto, bonusNumber.getNumber()));
 
         view.printWinnerStatisticsGuide();
         view.printRankGuide(rankReward.getGainRanksCounts());

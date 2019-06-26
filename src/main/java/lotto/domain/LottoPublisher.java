@@ -34,7 +34,7 @@ public class LottoPublisher {
         List<Lotto> lottos = new ArrayList<>();
         for (int count = 0; count < buyCount; count++) {
             LottoNumber lottoNumber = new LottoNumber();
-            lottos.add(new Lotto(lottoNumber.getNumbers()));
+            lottos.add(new Lotto(lottoNumber));
         }
         return lottos;
     }
@@ -45,10 +45,10 @@ public class LottoPublisher {
         return (double)rewardWinningMoney / (double)getPurchaseAmount();
     }
 
-    public List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto) {
+    public List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto, Integer bonusNumber) {
         List<Rank> lottoRanks = new ArrayList<>();
         for (Lotto lotto : publishLotto) {
-            Rank rank = lotto.getRank(winnerLotto.getNumbers());
+            Rank rank = lotto.getRank(winnerLotto.lottoNumber, bonusNumber);
             lottoRanks.add(rank);
         }
         return lottoRanks;

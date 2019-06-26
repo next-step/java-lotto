@@ -34,16 +34,23 @@ public class LottoTest {
     }
 
     @Test
-    void getRank_5등확인() {
+    void getRank_보너스볼일치2등_보너스볼불일치_3등() {
         List<Integer> numbers = new ArrayList<>();
         for (int index=0; index < LottoNumber.MAX_LOTTO_NUM_COUNT; index++) {
             numbers.add(index+1);
         }
-        lotto = new Lotto(numbers);
+        LottoNumber lottoNumber = new LottoNumber(numbers);
+        lotto = new Lotto(lottoNumber);
         List<Integer> winNumbers = new ArrayList<>();
         winNumbers.add(1);
         winNumbers.add(2);
         winNumbers.add(3);
-        assertThat(lotto.getRank(winNumbers)).isEqualTo(Rank.FIFTH);
+        winNumbers.add(4);
+        winNumbers.add(5);
+        winNumbers.add(7);
+        LottoNumber winLottoNumber = new LottoNumber(winNumbers);
+
+        assertThat(lotto.getRank(winLottoNumber, 6)).isEqualTo(Rank.SECOND);
+        assertThat(lotto.getRank(winLottoNumber, 8)).isEqualTo(Rank.THIRD);
     }
 }

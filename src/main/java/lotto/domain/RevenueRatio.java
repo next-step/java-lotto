@@ -33,4 +33,12 @@ public enum RevenueRatio {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "RevenueRatio{" +
+                "ratio=" + ratio +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

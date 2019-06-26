@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class LottoResultView {
     private static final String PURCHASE_AMOUNT_GUIDE = "구입금액을 입력해주세요";
     private static final String BUY_LOTTO_COUNT_GUIDE = "개를 구매했습니다.";
     private static final String WINNER_NUMBER_GUIDE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_GUIDE = "보너스 볼을 입력해 주세요.";
     private static final String WINNER_STATISTIC_GUIDE = "당첨통계";
     private static final String SEPARATE_GUIDE = "------------------";
     private static final String REVENUE_RATIO_GUIDE_1 = "총 수익률은 ";
@@ -35,25 +37,24 @@ public class LottoResultView {
         printGuideStr(buyCount + BUY_LOTTO_COUNT_GUIDE);
     }
 
-    public void printPublishLottoNumbers(List<List<Integer>> lottosNumbers) {
-        for (int index = 0 ; index < lottosNumbers.size(); index++) {
-            List<Integer> numbers = lottosNumbers.get(index);
-            printGuideStr("["+String.join(",", strNumbers(numbers))+"]");
+    public void printPublishLottoNumbers(List<LottoNumber> lottosNumbers) {
+        for (LottoNumber lottoNumber : lottosNumbers) {
+            printGuideStr("["+String.join(",", strNumbers(lottoNumber))+"]");
         }
     }
 
-    public List<List<Integer>> getLottosNumbers(List<Lotto> publishLotto) {
-        List<List<Integer>> lottosNumbers = new ArrayList<>();
+    public List<LottoNumber> getLottosNumbers(List<Lotto> publishLotto) {
+        List<LottoNumber> lottosNumbers = new ArrayList<>();
         for (Lotto lotto : publishLotto) {
-            lottosNumbers.add(lotto.getNumbers());
+            lottosNumbers.add(lotto.getLottoNumber());
         }
         return lottosNumbers;
     }
 
-    private List<String> strNumbers(List<Integer> numbers) {
+    private List<String> strNumbers(LottoNumber numbers) {
         List<String> strNumbers = new ArrayList<>();
-        for (int index = 0 ; index < numbers.size(); index++) {
-            strNumbers.add(numbers.get(index).toString());
+        for (Integer number : numbers.getNumbers()) {
+            strNumbers.add(number.toString());
         }
         return strNumbers;
     }
@@ -63,9 +64,18 @@ public class LottoResultView {
         printGuideStr(WINNER_NUMBER_GUIDE);
     }
 
+    public void printBonusNumberGuide() {
+        printGuideStr(BONUS_NUMBER_GUIDE);
+    }
+
     public String getInputWinnerNumbers() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public int getInputBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     public void printWinnerStatisticsGuide() {

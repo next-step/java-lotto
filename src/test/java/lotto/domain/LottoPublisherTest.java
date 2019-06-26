@@ -31,14 +31,14 @@ public class LottoPublisherTest {
         Integer[] same_numbers_5 = {1,2,3,7,8,9};
         Integer[] same_numbers_0_0 = {1,2,9,10,11,12};
         Integer[] same_numbers_0_1 = {1,2,9,10,11,12};
-        lottos.add(new Lotto(Arrays.asList(same_numbers_5)));
-        lottos.add(new Lotto(Arrays.asList(same_numbers_0_0)));
-        lottos.add(new Lotto(Arrays.asList(same_numbers_0_1)));
+        lottos.add(new Lotto(new LottoNumber(Arrays.asList(same_numbers_5))));
+        lottos.add(new Lotto(new LottoNumber(Arrays.asList(same_numbers_0_0))));
+        lottos.add(new Lotto(new LottoNumber(Arrays.asList(same_numbers_0_1))));
         rankPublisher = new LottoPublisher(lottos);
-        ranks = rankPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
+        ranks = rankPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr), 7);
         rankReward = new RankReward(ranks);
         revenueRatioPublisher = new LottoPublisher(3000);
-        revenueRatioRanks = revenueRatioPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
+        revenueRatioRanks = revenueRatioPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr), 7);
         revenueRatioReward = new RankReward(revenueRatioRanks);
 
     }
@@ -60,18 +60,6 @@ public class LottoPublisherTest {
     @Test
     void 생성자금액만큼로또생성() {
         assertThat(purchasePublisher.getPublishLotto().size()).isEqualTo(14);
-    }
-
-    @Test
-    void 생성한로또숫자콘솔출력() {
-        for (int i = 0 ; i < purchasePublisher.getPublishLotto().size(); i++) {
-            List<Integer> numbers = purchasePublisher.getPublishLotto().get(i).getNumbers();
-            List<String> strNumbers = new ArrayList<>();
-            for (int j = 0 ; j < LottoNumber.MAX_LOTTO_NUM_COUNT; j++) {
-                strNumbers.add(numbers.get(j).toString());
-            }
-            System.out.println((i+1)+"로또번호["+String.join(",", strNumbers)+"]");
-        }
     }
 
     @Test

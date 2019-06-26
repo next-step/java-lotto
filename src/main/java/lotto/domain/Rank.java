@@ -1,12 +1,11 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
     FOURTH(4, 50_000),
     FIFTH(3, 5_000),
@@ -20,7 +19,13 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank valueOf(int countOfMatch) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (matchBonus && (countOfMatch == Rank.SECOND.getCountOfMatch())) {
+            return Rank.SECOND;
+        }
+        if (!matchBonus && (countOfMatch == Rank.THIRD.getCountOfMatch())) {
+            return  Rank.THIRD;
+        }
         Optional<Rank> result = Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
 
