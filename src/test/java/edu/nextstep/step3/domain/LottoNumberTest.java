@@ -1,7 +1,5 @@
 package edu.nextstep.step3.domain;
 
-import edu.nextstep.step2.domain.LottoNumber;
-import edu.nextstep.step2.domain.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
