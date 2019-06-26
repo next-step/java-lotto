@@ -2,28 +2,19 @@ package lotto.domain;
 
 public class WinningLotto {
     private Lotto winningLotto;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     public WinningLotto(Lotto winningLotto, int bonusNumber) {
         this.winningLotto = winningLotto;
-        if (this.winningLotto.contains(bonusNumber)) {
+        if (this.winningLotto.contains(LottoNumber.of(bonusNumber))) {
             throw new IllegalArgumentException();
         }
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public int match(Lotto userLotto) {
+    public Rank match(Lotto userLotto) {
         int matchCount = winningLotto.match(userLotto);
-        if (matchCount == 6) {
-            return 1;
-        }
         boolean matchBonus = userLotto.contains(bonusNumber);
-        if (matchCount == 5 && matchBonus) {
-            return 2;
-        }
-        if (matchCount > 2) {
-            return 6 - matchCount + 2;
-        }
-        return 0;
+        return Rank.of(matchCount, matchBonus);
     }
 }

@@ -1,15 +1,14 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    private final Set<Integer> lotto;
+    private final Set<LottoNumber> lotto;
 
-    public Lotto(Set<Integer> lotto) {
+    private Lotto(Set<LottoNumber> lotto) {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
@@ -19,50 +18,37 @@ public class Lotto {
 
     public int match(Lotto target) {
         int count = 0;
-        for (Integer lottoNumber : lotto) {
+        for (LottoNumber lottoNumber : lotto) {
             count += target.increment(lottoNumber);
         }
         return count;
     }
 
-    int increment(int lottoNumber) {
+    int increment(LottoNumber lottoNumber) {
         if (contains(lottoNumber)) {
             return 1;
         }
         return 0;
     }
 
-    boolean contains(int lottoNumber) {
+    boolean contains(LottoNumber lottoNumber) {
         return lotto.contains(lottoNumber);
     }
 
-    public static Lotto of(Set<Integer> numbers) {
-        Set<Integer> lotto = new LinkedHashSet<>();
+    public static Lotto of(List<Integer> numbers) {
+        Set<LottoNumber> lotto = new HashSet<>();
         for (Integer number : numbers) {
-            lotto.add(number);
+            lotto.add(LottoNumber.of(number));
         }
         return new Lotto(lotto);
     }
 
-    public static Lotto of(Integer... numbers) {
-        Set<Integer> lotto = new LinkedHashSet<>();
-        for (Integer number : numbers) {
-            lotto.add(number);
-        }
-        return new Lotto(lotto);
-    }
-
-    public static Lotto ofComma(String text) {
-        if (Objects.isNull(text)) {
-            throw new IllegalArgumentException();
-        }
-
-        String[] values = text.split(",");
-        Set<Integer> lotto = new LinkedHashSet<>();
-        for (String value : values) {
-            lotto.add(Integer.parseInt(value.trim()));
-        }
-        return new Lotto(lotto);
+    public static Lotto ofComma(String value) {
+        String[] values = value.split(",");
+        return new Lotto(
+                Arrays.stream(values)
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet()));
     }
 
     @Override
