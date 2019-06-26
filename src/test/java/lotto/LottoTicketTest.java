@@ -42,10 +42,9 @@ class LottoTicketTest {
 	@Test
 	void addOverLimit() {
 		LottoTicket ticket = new LottoTicket();
-		ticket.add(LottoTicket.MAX_NUMBER + 1);
 
 		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
-			ticket.add(7);
+			ticket.add(LottoTicket.MAX_NUMBER + 1);
 		});
 	}
 }
