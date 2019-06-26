@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.ConflictLottoNumberException;
+import lotto.exception.DuplicatetLottoNumberException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Lotto {
 
   public Lotto(List<Integer> generatedNumbers) {
     if (hasConflictNumber(generatedNumbers)) {
-      throw new ConflictLottoNumberException();
+      throw new DuplicatetLottoNumberException();
     }
     this.generatedNumbers = generatedNumbers;
   }
