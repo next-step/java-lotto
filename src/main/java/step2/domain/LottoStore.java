@@ -8,6 +8,8 @@ public class LottoStore {
     private static final Money LOTTO_PRICE = new Money(1_000L);
     private static final LottoStore INSTANCE = new LottoStore();
 
+    private LottoStore() {}
+
     public static LottoStore getInstance() {
         return INSTANCE;
     }
