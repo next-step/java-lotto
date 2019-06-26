@@ -36,7 +36,7 @@ class LottoStoreTest {
                 "2,3,4,5,6,7",
                 "3,4,5,6,7,8"
         );
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        final LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
         final Money money = new Money(lottoNumbers.size() * Lotto.PRICE_VALUE);
 
         final List<Lotto> lottos = LottoStore.buyManual(money, lottoTicket);
@@ -53,7 +53,7 @@ class LottoStoreTest {
                 "2,3,4,5,6,7",
                 "3,4,5,6,7,8"
         );
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        final LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
         final Money money = new Money(0);
 
         assertThatExceptionOfType(LowMoneyException.class)

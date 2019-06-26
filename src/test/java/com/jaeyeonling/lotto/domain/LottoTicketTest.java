@@ -22,7 +22,7 @@ class LottoTicketTest {
                 "3 ,4 , 5 ,  6 ,  7 , 8"
         );
 
-        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        final LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
 
         assertThat(lottoTicket).isNotNull();
     }
@@ -33,7 +33,7 @@ class LottoTicketTest {
     void should_throw_NullPointerException_when_invalid_lottoNumbers(final List<String> invalidLottoNumbers) {
         assertThatExceptionOfType(EmptyLottoNumberException.class)
                 .isThrownBy(() -> {
-                    new LottoTicket(invalidLottoNumbers);
+                    LottoTicket.of(invalidLottoNumbers);
                 });
     }
 
