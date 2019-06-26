@@ -42,10 +42,6 @@ public class Lotto {
         return Rank.valueOf(countOfMatch, luckyNumbers.contains(bonusBall));
     }
 
-    public boolean isNumSize(int numSize) {
-        return this.luckyNumbers.size() == numSize;
-    }
-
     public List<Integer> getLotto() {
         return this.luckyNumbers;
     }

@@ -9,8 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private final int LOTTO_SIZE = 6;
-
     private Lotto lotto;
 
     @BeforeEach
@@ -20,7 +18,7 @@ public class LottoTest {
 
     @Test
     void 로또_구입완료() {
-        assertThat(lotto.isNumSize(LOTTO_SIZE)).isTrue();
+        assertThat(lotto.getLotto().size()).isEqualTo(Lotto.LOTTO_SIZE);
     }
 
     @Test
