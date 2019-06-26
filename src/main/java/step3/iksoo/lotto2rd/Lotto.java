@@ -14,8 +14,20 @@ public class Lotto {
     }
 
     Lotto(List<Integer> numbers) {
-        this.luckyNumbers = numbers;
+        this.luckyNumbers = solveDuplicated(numbers);
         sortLotto();
+    }
+
+    private List<Integer> solveDuplicated(List<Integer> numbers) {
+        int nonDuplicatedCount = (int) numbers.stream()
+                .distinct()
+                .count();
+
+        if (nonDuplicatedCount < LOTTO_SIZE) {
+            throw new IllegalArgumentException("숫자가 중복되어 입력되었습니다.");
+        }
+
+        return numbers;
     }
 
     private void sortLotto() {
