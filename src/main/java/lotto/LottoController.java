@@ -13,8 +13,7 @@ public class LottoController {
         LottoPublisher lottoPublisher = new LottoPublisher(view.getInputAmout());
         view.printBuyLottoCountGuide(lottoPublisher.getPublishLotto().size());
 
-        view.printPublishLottoNumbers(lottoPublisher.getPublishLotto().size(),
-                lottoPublisher.getLottosNumbers());
+        view.printPublishLottoNumbers(view.getLottosNumbers(lottoPublisher.getPublishLotto()));
 
         view.printWinnerNumbersGuide();
         RankReward rankReward = new RankReward(lottoPublisher.getPublishLottoRanks(

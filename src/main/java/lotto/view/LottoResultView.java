@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.Rank;
 
 import java.util.ArrayList;
@@ -34,11 +35,19 @@ public class LottoResultView {
         printGuideStr(buyCount + BUY_LOTTO_COUNT_GUIDE);
     }
 
-    public void printPublishLottoNumbers(int buyLottoCount, List<List<Integer>> lottosNumbers) {
-        for (int index = 0 ; index < buyLottoCount; index++) {
+    public void printPublishLottoNumbers(List<List<Integer>> lottosNumbers) {
+        for (int index = 0 ; index < lottosNumbers.size(); index++) {
             List<Integer> numbers = lottosNumbers.get(index);
             printGuideStr("["+String.join(",", strNumbers(numbers))+"]");
         }
+    }
+
+    public List<List<Integer>> getLottosNumbers(List<Lotto> publishLotto) {
+        List<List<Integer>> lottosNumbers = new ArrayList<>();
+        for (Lotto lotto : publishLotto) {
+            lottosNumbers.add(lotto.getNumbers());
+        }
+        return lottosNumbers;
     }
 
     private List<String> strNumbers(List<Integer> numbers) {

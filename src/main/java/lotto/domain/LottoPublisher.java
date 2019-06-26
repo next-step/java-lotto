@@ -54,14 +54,6 @@ public class LottoPublisher {
         return lottoRanks;
     }
 
-    public List<List<Integer>> getLottosNumbers() {
-        List<List<Integer>> lottosNumbers = new ArrayList<>();
-        for (Lotto lotto : publishLotto) {
-            lottosNumbers.add(lotto.getNumbers());
-        }
-        return lottosNumbers;
-    }
-
     public int getPurchaseAmount() {
         return publishLotto.size() * ONE_LOTTO_AMOUNT;
     }
