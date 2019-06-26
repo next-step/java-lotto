@@ -34,7 +34,7 @@ class SimpleLotteryServiceTest {
     @DisplayName("양수를 입력할 경우 해당 숫자 / 1000 만큼의 로또를 반환합니다")
     void purchase() {
         // given
-        final int investment = 14000;
+        final int investment = 14_000;
         // when
         final Lotteries lottery = simpleLotteryService.purchase(investment);
         // then
@@ -55,7 +55,7 @@ class SimpleLotteryServiceTest {
     @DisplayName("수익금이 0원 이면 0을 반환합니다")
     void calculateEarningsRate3() {
         // given
-        final int investment = 5000;
+        final int investment = 5_000;
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         // when
         final double actual = simpleLotteryService.calculateEarningsRate(investment, rewardMap);
@@ -67,7 +67,7 @@ class SimpleLotteryServiceTest {
     @DisplayName("투자원금과 수익금을 입력하면 수익금 / 투자원금의 값을 반환합니다")
     void calculateEarningsRate4() {
         // given
-        final int investment = 10000;
+        final int investment = 10_000;
         final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
         rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, 2);
         // when
