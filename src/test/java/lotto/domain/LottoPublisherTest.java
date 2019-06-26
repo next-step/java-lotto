@@ -77,7 +77,6 @@ public class LottoPublisherTest {
     @Test
     void 생성자에당첨번호로또생성_유효성검사() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            WinnerLotto nullInput = new WinnerLotto(null);
             WinnerLotto fiveNumbers = new WinnerLotto("1,2,3,4,5");
             WinnerLotto notNumber = new WinnerLotto("1,2,3,aaa,5,6");
             WinnerLotto overLottoRange = new WinnerLotto("1,2,3,46,5,6");

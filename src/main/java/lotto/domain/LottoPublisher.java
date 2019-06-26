@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoPublisher {
+
+    static final int ONE_LOTTO_AMOUNT = 1000;
 
     private int purchaseAmount;
     private List<Lotto> publishLotto;
@@ -84,7 +85,7 @@ public class LottoPublisher {
     }
 
     public int getBuyLottoCount() {
-        return purchaseAmount/Lotto.AMOUNT;
+        return purchaseAmount / ONE_LOTTO_AMOUNT;
     }
 
     public int getPurchaseAmount() {
