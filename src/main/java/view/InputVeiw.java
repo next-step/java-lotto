@@ -34,7 +34,7 @@ public class InputVeiw {
         String input = scanner.nextLine();
         String[] result = removeBlankAndSplit(input);
 
-        if (checkPrvStr(Arrays.toString(result))) {
+        if (checkPrvStr(result)) {
             throw new IllegalArgumentException("입력이 잘못되었습니다. 지난 당첨 번호를 다시 한번 입력해주세요.");
         }
 
@@ -45,8 +45,8 @@ public class InputVeiw {
     }
 
     // 입력받은 지난 당첨번호가 6자리인지 확인
-    private static boolean checkPrvStr(String input) {
-        return convertArraytoStr(input).length() != ONE_UNIT_OF_LOTTO;
+    private static boolean checkPrvStr(String[] input) {
+        return input.length != ONE_UNIT_OF_LOTTO;
     }
 
 
@@ -54,7 +54,7 @@ public class InputVeiw {
         return input.replaceAll(SEPARATOR_BLANK, SEPARATOR_NOTHING).split(SEPARATOR_REST);
     }
 
-    private static String convertArraytoStr(String input){
+    private static String convertArraytoStr(String input) {
         return input.substring(1, input.length() - 1).replace(SEPARATOR_REST_WITH_BLANK, SEPARATOR_NOTHING);
     }
 }

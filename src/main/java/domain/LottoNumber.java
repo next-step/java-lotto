@@ -11,9 +11,11 @@ public class LottoNumber {
 
     // 생성자를 호출하면 lottoElement에 로또번호를 생성하여 추가
     public LottoNumber() {
+        ArrayList<Integer> randomNumber = getRandomNumber();
+
         lottoElement = new ArrayList<>();
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
-            lottoElement.add(getRandomNumber().get(i));
+            lottoElement.add(randomNumber.get(i));
         }
     }
 
