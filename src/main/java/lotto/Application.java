@@ -9,8 +9,6 @@ import java.util.List;
 
 public class Application {
 
-    private static final LottoMachine lottoMachine = new LottoMachine();
-
     public static void main(String[] args) {
         int inputOfAmount = InputView.askOfAmount();
         Money moneyToBuy = Money.won(inputOfAmount);
@@ -19,7 +17,8 @@ public class Application {
         PurchaseRequest purchaseRequest = PurchaseRequest.of(moneyToBuy, manual);
         OutputView.printNumberOfBuyLotto(purchaseRequest);
 
-        LottoTicket lottoTicket = lottoMachine.buy(purchaseRequest);
+        LottoMachine lottoMachine = LottoMachine.generate(purchaseRequest);
+        LottoTicket lottoTicket = lottoMachine.buy();
         OutputView.printLottoTicket(lottoTicket);
 
         String inputOfNumbers = InputView.askOfWinningNumbers();

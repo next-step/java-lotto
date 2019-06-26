@@ -14,7 +14,7 @@ import static lotto.model.LottoTest.ofLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class ManualGeneratorTest {
+class ManualLottoGeneratorTest {
 
     @DisplayName("수동으로 로또를 생성한다")
     @ParameterizedTest
@@ -23,7 +23,7 @@ class ManualGeneratorTest {
             "1, 2, 3, 4, 5, 6"
     })
     void createManualLotto(String numberOfLotto) {
-        LottoGenerator lottoGenerator = new ManualGenerator(Arrays.asList(numberOfLotto));
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(Arrays.asList(numberOfLotto));
 
         List<Lotto> lottos = lottoGenerator.generator();
 
@@ -35,6 +35,6 @@ class ManualGeneratorTest {
     @NullAndEmptySource
     void createManualLottoFail(List<String> numberOfLotto) {
         assertThatExceptionOfType(NumbersIsEmptyException.class)
-                .isThrownBy(() -> new ManualGenerator(numberOfLotto));
+                .isThrownBy(() -> new ManualLottoGenerator(numberOfLotto));
     }
 }
