@@ -21,7 +21,7 @@ public class ResultView {
         System.out.println("---------");
         System.out.println(LottoData.FORTH_WINNER.getMatch() + "개 일치 (" + LottoData.FORTH_WINNER.getPrize() + "원)- " + LottoResult.getWinnerGroup().get(LottoData.FORTH_WINNER.getPrize()) + "개");
         System.out.println(LottoData.THIRD_WINNER.getMatch() + "개 일치 (" + LottoData.THIRD_WINNER.getPrize() + "원)- " + LottoResult.getWinnerGroup().get(LottoData.THIRD_WINNER.getPrize()) + "개");
-        System.out.println(LottoData.BOBUS_SECOND_WINNER.getMatch() + "개 일치 보너스 볼 일치(" + LottoData.BOBUS_SECOND_WINNER.getPrize() + "원)- " + LottoResult.getWinnerGroup().get(LottoData.BOBUS_SECOND_WINNER.getPrize()) + "개");
+        System.out.println(LottoData.BONUS_SECOND_WINNER.getMatch() + "개 일치 보너스 볼 일치(" + LottoData.BONUS_SECOND_WINNER.getPrize() + "원)- " + LottoResult.getWinnerGroup().get(LottoData.BONUS_SECOND_WINNER.getPrize()) + "개");
         System.out.println(LottoData.SECOND_WINNER.getMatch() + "개 일치 (" + LottoData.SECOND_WINNER.getPrize() + "원)- " + LottoResult.getWinnerGroup().get(LottoData.SECOND_WINNER.getPrize()) + "개");
         System.out.println(LottoData.FIRST_WINNER.getMatch() + "개 일치 (" + LottoData.FIRST_WINNER.getPrize() + "원)- " + LottoResult.getWinnerGroup().get(LottoData.FIRST_WINNER.getPrize()) + "개");
         System.out.print("총 수익률은  " + LottoResult.getPercentOfRevenue() + "입니다. 기준이 1이기 때문에 결과적으로 " + LottoResult.judgeResult() + "라는 의미임)");

@@ -28,7 +28,7 @@ public class LottoResult {
 
         double totalWinningPrize = (LottoData.FIRST_WINNER.getCountWinner() * LottoData.FIRST_WINNER.getPrize()) + (LottoData.SECOND_WINNER.getCountWinner() * LottoData.SECOND_WINNER.getPrize())
                 + (LottoData.THIRD_WINNER.getCountWinner() * LottoData.THIRD_WINNER.getPrize()) + (LottoData.FORTH_WINNER.getCountWinner() * LottoData.FORTH_WINNER.getPrize())
-                + (LottoData.BOBUS_SECOND_WINNER.getCountWinner() * LottoData.BOBUS_SECOND_WINNER.getPrize());
+                + (LottoData.BONUS_SECOND_WINNER.getCountWinner() * LottoData.BONUS_SECOND_WINNER.getPrize());
 
         winningRevenue = getRevenue(totalWinningPrize, lottoPrice);
     }
@@ -58,7 +58,7 @@ public class LottoResult {
         WinnerGroup.put(LottoData.SECOND_WINNER.getPrize(), (int) LottoData.SECOND_WINNER.getCountWinner());
         WinnerGroup.put(LottoData.THIRD_WINNER.getPrize(), (int) LottoData.THIRD_WINNER.getCountWinner());
         WinnerGroup.put(LottoData.FORTH_WINNER.getPrize(), (int) LottoData.FORTH_WINNER.getCountWinner());
-        WinnerGroup.put(LottoData.BOBUS_SECOND_WINNER.getPrize(), (int) LottoData.BOBUS_SECOND_WINNER.getCountWinner());
+        WinnerGroup.put(LottoData.BONUS_SECOND_WINNER.getPrize(), (int) LottoData.BONUS_SECOND_WINNER.getCountWinner());
     }
 
     // 수익율이 이익인지 손해인지 판단 (출력용)

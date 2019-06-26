@@ -23,7 +23,7 @@ public enum LottoData {
             return countsOfWinningResultConvertList.stream().filter(x -> x.equals(match)).count();
         }
     },
-    BOBUS_SECOND_WINNER(30000000, 5) {
+    BONUS_SECOND_WINNER(30000000, 5) {
         public long getCountWinner() {
             return bonusBallCount;
         }
