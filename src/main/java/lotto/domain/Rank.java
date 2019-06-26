@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
     FIRST(6, 2000000000),
     THIRD(5, 1500000),
@@ -24,17 +28,11 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        if (Rank.FIRST.getCountOfMatch() == countOfMatch) {
-            return Rank.FIRST;
-        }
-        if (Rank.THIRD.getCountOfMatch() == countOfMatch) {
-            return Rank.THIRD;
-        }
-        if (Rank.FOURTH.getCountOfMatch() == countOfMatch) {
-            return Rank.FOURTH;
-        }
-        if (Rank.FIFTH.getCountOfMatch() == countOfMatch) {
-            return Rank.FIFTH;
+        List<Rank> result = Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
+                .collect(Collectors.toList());
+        if (result.size() == 1) {
+            return result.get(0);
         }
         return Rank.NONE;
     }
