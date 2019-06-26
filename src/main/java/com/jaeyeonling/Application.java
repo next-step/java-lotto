@@ -2,9 +2,10 @@ package com.jaeyeonling;
 
 import com.jaeyeonling.lotto.domain.Lotto;
 import com.jaeyeonling.lotto.domain.LottoAnalyzer;
-import com.jaeyeonling.lotto.domain.LottoGame;
 import com.jaeyeonling.lotto.domain.LottoGameReport;
 import com.jaeyeonling.lotto.domain.LottoNumber;
+import com.jaeyeonling.lotto.domain.LottoStore;
+import com.jaeyeonling.lotto.domain.LottoTicket;
 import com.jaeyeonling.lotto.domain.Money;
 import com.jaeyeonling.lotto.domain.WinningLotto;
 import com.jaeyeonling.lotto.utils.ListUtils;
@@ -16,12 +17,11 @@ import java.util.List;
 public class Application {
 
     public static void main(final String... args) {
-        final LottoGame lottoGame = new LottoGame();
-
         final Money money = ConsoleInputView.readMoney();
+        final LottoTicket lottoTicket = ConsoleInputView.readLottoTicket();
 
-        final List<Lotto> manualLottos = ConsoleInputView.readManualLottos(money);
-        final List<Lotto> autoLottos = lottoGame.buy(money);
+        final List<Lotto> manualLottos = LottoStore.buyManual(money, lottoTicket);
+        final List<Lotto> autoLottos = LottoStore.buyAutoByRemainingMoney(money);
 
         ConsoleOutputView.printBuyingLotto(manualLottos, autoLottos);
 

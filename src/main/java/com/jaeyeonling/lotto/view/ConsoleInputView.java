@@ -2,12 +2,11 @@ package com.jaeyeonling.lotto.view;
 
 import com.jaeyeonling.lotto.domain.Lotto;
 import com.jaeyeonling.lotto.domain.LottoNumber;
+import com.jaeyeonling.lotto.domain.LottoTicket;
 import com.jaeyeonling.lotto.domain.Money;
-import com.jaeyeonling.lotto.exception.LowMoneyException;
 import com.jaeyeonling.lotto.utils.StringToLottoTransfer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,15 +27,25 @@ public final class ConsoleInputView {
         return new Money(moneyValue);
     }
 
-    public static List<Lotto> readManualLottos(final Money money) {
-        ConsoleOutputView.newline();
-
-        final int countOfBuyLotto = readCountOfBuyLotto(money);
-        if (countOfBuyLotto < 1) {
-            return Collections.emptyList();
+    public static LottoTicket readLottoTicket() {
+        final int countOfBuyLotto = readIntWithMessage(READ_COUNT_OF_BUY_LOTTO);
+        if (countOfBuyLotto < LottoTicket.MIN) {
+            return LottoTicket.empty();
         }
 
-        return readManualLottos(money, countOfBuyLotto);
+        return LottoTicket.of(readManualLottoNumbers(countOfBuyLotto));
+    }
+
+    private static List<String> readManualLottoNumbers(final int countOfBuyLotto) {
+        final List<String> lottoNumbers = new ArrayList<>();
+
+        ConsoleOutputView.newline();
+        ConsoleOutputView.print(READ_MANUAL_LOTTO_NUMBERS);
+        for (int i = 0; i < countOfBuyLotto; i++) {
+            lottoNumbers.add(readString());
+        }
+
+        return lottoNumbers;
     }
 
     public static Lotto readWinningLotto() {
@@ -51,32 +60,6 @@ public final class ConsoleInputView {
         final int bonusLottoNumberValue = readIntWithMessage(READ_BONUS_LOTTO_NUMBER_MESSAGE);
 
         return new LottoNumber(bonusLottoNumberValue);
-    }
-
-    private static List<Lotto> readManualLottos(final Money money,
-                                                final int countOfBuyLotto) {
-        final List<Lotto> manualBuyLottos = new ArrayList<>();
-
-        ConsoleOutputView.newline();
-        ConsoleOutputView.print(READ_MANUAL_LOTTO_NUMBERS);
-        for (int i = 0; i < countOfBuyLotto; i++) {
-            final String manualLottoNumbers = readString();
-            final Lotto manualLotto = StringToLottoTransfer.transform(manualLottoNumbers);
-
-            manualBuyLottos.add(manualLotto);
-            money.buy(manualLotto);
-        }
-
-        return manualBuyLottos;
-    }
-
-    private static int readCountOfBuyLotto(final Money money) {
-        final int countOfBuyLotto = readIntWithMessage(READ_COUNT_OF_BUY_LOTTO);
-        if (!money.canBuy(Lotto.PRICE, countOfBuyLotto)) {
-            throw new LowMoneyException(money.getMoney(), Lotto.PRICE.getMoney() * countOfBuyLotto);
-        }
-
-        return countOfBuyLotto;
     }
 
     private static String readStringWithMessage(final String message) {
