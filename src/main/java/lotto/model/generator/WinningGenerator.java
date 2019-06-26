@@ -4,6 +4,7 @@ import lotto.exception.DuplicateLottoNumberException;
 import lotto.model.Lotto;
 import lotto.model.Number;
 import lotto.model.WinningLotto;
+import lotto.utils.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,11 +14,7 @@ import static java.util.stream.Collectors.toList;
 public class WinningGenerator {
 
     public static WinningLotto generate(String numbers, int inputOfBonus) {
-        List<Number> numberList = Arrays.stream(numbers.trim().split(","))
-                .map(Integer::parseInt)
-                .map(Number::of)
-                .collect(toList());
-        Lotto lotto = Lotto.from(numberList);
+        Lotto lotto = Lotto.from(StringUtils.parseNumbers(numbers));
         Number bonus = Number.of(inputOfBonus);
         duplicateBonusNumber(lotto, bonus);
         return new WinningLotto(lotto, bonus);
