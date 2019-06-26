@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomNumberCreator {
-    public static final int START_NUMBER = 1;
-    public static final int END_NUMBER = 45;
+    public final int START_NUMBER = 1;
+    public final int END_NUMBER = 45;
 
-    private static List<Integer> shuffleNum;
+    private List<Integer> shuffleNum;
 
     public RandomNumberCreator() {
         insertSequentialNumbers();
         shuffleNumbers();
     }
 
-    private static void insertSequentialNumbers() {
+    private void insertSequentialNumbers() {
         shuffleNum = IntStream.rangeClosed(START_NUMBER, END_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());

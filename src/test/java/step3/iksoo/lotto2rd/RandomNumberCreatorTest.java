@@ -16,6 +16,6 @@ public class RandomNumberCreatorTest {
         List<Integer> lotto = randomCreator.getLotto(Lotto.LOTTO_SIZE);
         IntStream.range(0, Lotto.LOTTO_SIZE)
                 .boxed()
-                .peek(e -> assertThat(lotto.get(e)).isBetween(RandomNumberCreator.START_NUMBER, RandomNumberCreator.END_NUMBER));
+                .peek(e -> assertThat(lotto.get(e)).isBetween(randomCreator.START_NUMBER, randomCreator.END_NUMBER));
     }
 }

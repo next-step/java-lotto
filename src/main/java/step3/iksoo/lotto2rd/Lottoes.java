@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Lottoes {
-    private static final int PRICE_OF_LOTTO = 1000;
+    private final int PRICE_OF_LOTTO = 1000;
 
     private List<Lotto> lottoes;
 
