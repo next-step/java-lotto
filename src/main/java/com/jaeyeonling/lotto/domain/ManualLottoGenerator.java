@@ -13,9 +13,17 @@ public class ManualLottoGenerator implements LottoGenerator {
         this.lottos = lottos.iterator();
     }
 
+    ManualLottoGenerator(final LottoTicket lottoTicket) {
+        this(lottoTicket.getLottos());
+    }
+
+    public boolean hasNext() {
+        return lottos.hasNext();
+    }
+
     @Override
     public Lotto generate() {
-        if (!lottos.hasNext()) {
+        if (!hasNext()) {
             throw new NoSuchLottoException();
         }
 

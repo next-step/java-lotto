@@ -24,7 +24,17 @@ public final class LottoStore {
 
     public static List<Lotto> buyManual(final Money money,
                                         final LottoTicket lottoTicket) {
+        final ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoTicket);
 
-        return null;
+        final List<Lotto> lottos = new ArrayList<>();
+        while (manualLottoGenerator.hasNext()) {
+            final Lotto lotto = manualLottoGenerator.generate();
+
+            money.buy(lotto);
+
+            lottos.add(lotto);
+        }
+
+        return lottos;
     }
 }
