@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.List;
 
-public class WinningNumbers extends LottoNumbers{
+public class WinningNumbers extends LottoNumbers {
 
 
     private List<Integer> numbers;
@@ -16,16 +16,11 @@ public class WinningNumbers extends LottoNumbers{
         this.bonusNumber = bonusNumber;
     }
 
-    public int compare(PickNumbers pickNumbers) {
-        return Math.toIntExact(this.numbers.stream()
-                .filter(number -> pickNumbers.contains(number))
-                .count());
-    }
-
     public LottoRank match(PickNumbers pickNumbers) {
         int matchCount = Math.toIntExact(this.numbers.stream()
                 .filter(number -> pickNumbers.contains(number))
                 .count());
+
         return LottoRank.match(matchCount, hasBonus(pickNumbers));
     }
 
@@ -33,11 +28,9 @@ public class WinningNumbers extends LottoNumbers{
         return pickNumbers.contains(bonusNumber);
     }
 
-
     private void verifyBonusDuplication(List<Integer> numbers, Integer bonusNumber) {
-        if(numbers.contains(bonusNumber)) {
+        if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("이미 번호가 뽑혀있습니다. ");
         }
     }
-
 }

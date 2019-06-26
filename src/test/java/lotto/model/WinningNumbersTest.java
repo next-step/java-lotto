@@ -44,9 +44,9 @@ class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호와 일치 개수")
     public void compareNumbers() {
-        PickNumbers pickNumbers = new PickNumbers(Arrays.asList(1, 2, 3, 9, 10, 12));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 7, 8, 15), BONUS_NUMBER);
-        assertThat(winningNumbers.compare(pickNumbers)).isEqualTo(3);
+        PickNumbers pickNumbers = new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), BONUS_NUMBER);
+        assertThat(winningNumbers.match(pickNumbers)).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
