@@ -1,7 +1,12 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.view.LottoIO;
+
 public class LottoRunner {
     public static void main(String[] args) {
-        Lotto lotto = new Lotto(14000);
+        LottoIO io = new LottoIO();
+        Lotto lotto = new Lotto(io.getNumOfPurchased());
+        lotto.start(io);
     }
 }

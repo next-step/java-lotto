@@ -1,16 +1,18 @@
 package lotto;
 
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
-    static private List<Integer> INPUT_SAMPLE_NUMBERS = Arrays.asList(1,2,3,4,5,6);
+    static final private List<Integer> INPUT_SAMPLE_NUMBERS = Arrays.asList(1,2,3,4,5,6);
     private LottoTicket ticket;
     private LottoTickets tickets;
 
@@ -29,5 +31,10 @@ public class LottoTicketsTest {
     void 당첨티켓과_비교하여_당첨수를_반환한다() {
         LottoResult result = tickets.checkWin(ticket);
         assertThat(result.numOf(6)).isEqualTo(2);
+    }
+
+    @Test
+    void to_string() {
+        assertThat(tickets.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]");
     }
 }

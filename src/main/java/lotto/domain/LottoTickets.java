@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoTickets {
+    static final public String DELEIMITER_STRING = "\n";
+
     private List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -21,5 +23,17 @@ public class LottoTickets {
         }
 
         return lottoResult;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (LottoTicket ticket : tickets) {
+            builder.append(ticket.toString());
+            builder.append(DELEIMITER_STRING);
+        }
+
+        return builder.substring(0, builder.length()-DELEIMITER_STRING.length());
     }
 }

@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.NumberChecker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

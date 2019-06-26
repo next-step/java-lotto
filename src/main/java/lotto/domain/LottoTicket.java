@@ -1,14 +1,28 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
+    static private String DELIMITER_NUMBERS = ", ";
+
     private List<Integer> ticket;
 
     public LottoTicket(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("로또의 숫자는 6개이여야 합니다.");
+        }
+
+        this.ticket = numbers;
+    }
+
+    public LottoTicket(String lottoNumbers) {
+        String[] rawNumbers = lottoNumbers.split(DELIMITER_NUMBERS);
+
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (String number : rawNumbers) {
+            numbers.add(Integer.parseInt(number));
         }
 
         this.ticket = numbers;
@@ -43,5 +57,21 @@ public class LottoTicket {
     public int hashCode() {
 
         return Objects.hash(ticket);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+
+        for (Integer number : ticket) {
+            builder.append(number).append(", ");
+        }
+
+        int max = builder.length();
+        builder.delete(max - DELIMITER_NUMBERS.length(), max);
+        builder.append("]");
+
+        return builder.toString();
     }
 }
