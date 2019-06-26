@@ -5,6 +5,7 @@ import edu.nextstep.step3.domain.Lotto;
 import edu.nextstep.step3.domain.LottoNumber;
 import edu.nextstep.step3.domain.Number;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ public class ResultView {
     private static final String COMMA = ",";
     private static final String SUFFIX = "]";
     private static final String MESSAGE_FORMAT = "%d개 일치 (%d원)- %d개";
+    private static final String BONUS_MESSAGE_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String INCOME_MESSAGE_FORMAT = "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottoInfo(Lotto lotto) {
@@ -36,16 +38,24 @@ public class ResultView {
                 .forEach(System.out::println);
     }
 
-    public static void printLotteryCount(Map<Integer, Integer> matchCount) {
-        System.out.println("\n당첨 통계\n-------");
-        Rank.getRanks().stream()
-                .filter(rank -> rank != Rank.ZERO)
-                .map(rank -> String.format(MESSAGE_FORMAT, rank.getMatch(), rank.getLotteryMoney(), matchCount.get(rank.getMatch())))
-                .forEach(System.out::println);
-    }
-
     public static void printIncome(double income) {
         System.out.println(String.format(INCOME_MESSAGE_FORMAT, income));
+    }
+
+    public static void printLotteryCount(Map<LottoNumber, Rank> lotteryInfo) {
+        System.out.println("\n당첨 통계\n-------");
+        Arrays.stream(Rank.values())
+                .filter(ranks -> ranks != Rank.ZERO)
+                .map(ranks ->
+                        combineLotteryResultMessage(ranks.getMatch(), ranks.getLotteryMoney(), Rank.matchOfCount(lotteryInfo, ranks), ranks.getBonusRank())
+                ).forEach(System.out::println);
+    }
+
+    private static String combineLotteryResultMessage(int count, int money, int matchCount, boolean bonus) {
+        if (bonus) {
+            return String.format(BONUS_MESSAGE_FORMAT, count, money, matchCount);
+        }
+        return String.format(MESSAGE_FORMAT, count, money, matchCount);
     }
 
     private static String combineExtractNumber(LottoNumber lottoNumber) {
