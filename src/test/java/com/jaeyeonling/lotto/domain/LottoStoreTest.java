@@ -3,6 +3,8 @@ package com.jaeyeonling.lotto.domain;
 import com.jaeyeonling.lotto.exception.LowMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -58,5 +60,24 @@ class LottoStoreTest {
                 .isThrownBy(() -> {
                     LottoStore.buyManual(money, lottoTicket);
                 });
+    }
+
+    @DisplayName("로또 게임 자동 구매 갯수 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1,
+            10,
+            300,
+            400
+    })
+    void should_equals_lottoCount_when_buyAutoByRemainingMoney(final int buyCount) {
+        // given
+        final Money money = new Money(Lotto.PRICE_VALUE * buyCount);
+
+        // when
+        final List<Lotto> lottos = LottoStore.buyAutoByRemainingMoney(money);
+
+        // then
+        assertThat(lottos).hasSize(buyCount);
     }
 }
