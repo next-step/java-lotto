@@ -19,7 +19,8 @@ class LottoGenerator {
     static Lotto generate() {
         List<Integer> lotteryNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
         shuffle(lotteryNumbers);
-        sort(lotteryNumbers);
-        return new Lotto(lotteryNumbers.subList(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER));
+        List<Integer> pickNumbers = lotteryNumbers.subList(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER);
+        sort(pickNumbers);
+        return new Lotto(pickNumbers);
     }
 }
