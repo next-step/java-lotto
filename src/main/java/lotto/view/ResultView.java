@@ -38,8 +38,8 @@ public class ResultView {
         System.out.println(message);
     }
 
-    private static String checkBonusMessage(boolean isbonus) {
-        if(isbonus) {
+    private static String checkBonusMessage(boolean isBonus) {
+        if(isBonus) {
             return RESULT_BONUS_MESSAGE;
         }
         return RESULT_MESSAGE;
