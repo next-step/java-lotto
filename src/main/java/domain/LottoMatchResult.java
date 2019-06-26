@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 
-public class LottoResult {
+public class LottoMatchResult {
 
     private static Integer[] countsOfWinningResult;
 

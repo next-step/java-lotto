@@ -2,7 +2,6 @@ package controller;
 
 import domain.LottoGame;
 import domain.LottoNumber;
-import domain.LottoWinnigCalculator;
 import view.InputVeiw;
 import view.ResultView;
 

@@ -30,7 +30,7 @@ public class LottoGame {
     }
 
     public void showWinningResult(int[] winningNumber) {
-        Integer[] result = LottoResult.getCountsWinningResult(lotto, winningNumber, price);
+        Integer[] result = LottoMatchResult.getCountsWinningResult(lotto, winningNumber, price);
         LottoWinnigCalculator.calculatorTotalWinningRevenue(result, price);
     }
 }

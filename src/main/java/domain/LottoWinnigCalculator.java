@@ -2,33 +2,20 @@ package domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoWinnigCalculator {
-    private final static int FIRST_WINNING_PRIZE = 2000000000;
-    private final static int SECOND_WINNING_PRIZE = 1500000;
-    private final static int THIRD_WINNING_PRIZE = 50000;
-    private final static int FORTH_WINNING_PRIZE = 5000;
-
-    public final static int FIRST_WINNING_POINT = 6;
-    public final static int SECOND_WINNING_POINT = 5;
-    public final static int THIRD_WINNING_POINT = 4;
-    public final static int FORTH_WINNING_POINT = 3;
-
     private final static int SUBSTR_POINT_ONE = 1;
     private final static int SUBSTR_POINT_TWO = 2;
 
     private static double winningRevenue;
 
-    private static List<Integer> countsOfWinningResultConvertList;
-
     // 당첨번호 갯수에 따라서 당첨금 계산
     public static void calculatorTotalWinningRevenue(Integer[] countsOfWinningResult, int lottoPrice) {
-        countsOfWinningResultConvertList = Arrays.asList(countsOfWinningResult); //당첨 번호 갯수에 따라서 몇등인지 확인하기 위하여  Array -> List 로 변환
+        LottoData.setCountsOfWinningResultConvertList(Arrays.asList(countsOfWinningResult)); //당첨 번호 갯수에 따라서 몇등인지 확인하기 위하여  Array -> List 로 변환
 
-        double totalWinningPrize = (getCountFirstWinner() * FIRST_WINNING_PRIZE) + (getCountSecondWinner() * SECOND_WINNING_PRIZE)
-                + (getCountThirdWinner() * THIRD_WINNING_PRIZE) + (getCountForthWinner() * FORTH_WINNING_PRIZE);
+        double totalWinningPrize = (LottoData.FIRST_WINNER.getCountWinner() * LottoData.FIRST_WINNER.getPrize()) + (LottoData.SECOND_WINNER.getCountWinner() * LottoData.SECOND_WINNER.getPrize())
+                + (LottoData.THIRD_WINNER.getCountWinner() * LottoData.THIRD_WINNER.getPrize()) + (LottoData.FORTH_WINNER.getCountWinner() * LottoData.FORTH_WINNER.getPrize());
 
         winningRevenue = getRevenue(totalWinningPrize, lottoPrice);
     }
@@ -51,31 +38,11 @@ public class LottoWinnigCalculator {
     // hashmap 활용하여 등수별 count 수를 저장 (출력용)
     public static Map<Integer, Integer> getWinnerGroup() {
         Map<Integer, Integer> countOfWinner = new HashMap<>();
-        countOfWinner.put(FIRST_WINNING_PRIZE, (int) getCountFirstWinner());
-        countOfWinner.put(SECOND_WINNING_PRIZE, (int) getCountSecondWinner());
-        countOfWinner.put(THIRD_WINNING_PRIZE, (int) getCountThirdWinner());
-        countOfWinner.put(FORTH_WINNING_PRIZE, (int) getCountForthWinner());
+        countOfWinner.put(LottoData.FIRST_WINNER.getPrize(), (int) LottoData.FIRST_WINNER.getCountWinner());
+        countOfWinner.put(LottoData.SECOND_WINNER.getPrize(), (int) LottoData.SECOND_WINNER.getCountWinner());
+        countOfWinner.put(LottoData.THIRD_WINNER.getPrize(), (int) LottoData.THIRD_WINNER.getCountWinner());
+        countOfWinner.put(LottoData.FORTH_WINNER.getPrize(), (int) LottoData.FORTH_WINNER.getCountWinner());
         return countOfWinner;
-    }
-
-    // 1등 count 확인 (stream 활용)
-    private static long getCountFirstWinner() {
-        return countsOfWinningResultConvertList.stream().filter(x -> x.equals(FIRST_WINNING_POINT)).count();
-    }
-
-    // 2등 count 확인
-    private static long getCountSecondWinner() {
-        return countsOfWinningResultConvertList.stream().filter(x -> x.equals(SECOND_WINNING_POINT)).count();
-    }
-
-    // 3등 count 확인
-    private static long getCountThirdWinner() {
-        return countsOfWinningResultConvertList.stream().filter(x -> x.equals(THIRD_WINNING_POINT)).count();
-    }
-
-    // 4등 count 확인
-    private static long getCountForthWinner() {
-        return countsOfWinningResultConvertList.stream().filter(x -> x.equals(FORTH_WINNING_POINT)).count();
     }
 
     // 수익율이 이익인지 손해인지 판단 (출력용)
@@ -83,7 +50,7 @@ public class LottoWinnigCalculator {
         if (winningRevenue > 1)
             return "이익";
         if (winningRevenue == 1)
-            return "본전치기";
+            return "본전";
         return "손해";
     }
 }
