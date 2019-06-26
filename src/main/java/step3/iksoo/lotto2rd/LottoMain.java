@@ -2,11 +2,8 @@ package step3.iksoo.lotto2rd;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class LottoMain {
-    private static final int PRICE_OF_LOTTO = 1000;
-
     private static int orderPrice;
 
     public static void main(String[] args) {
@@ -25,7 +22,7 @@ public class LottoMain {
     private static int lottoOrder() {
         OutputView.printAskOrder();
         orderPrice = InputView.inputNumber();
-        return orderPrice / PRICE_OF_LOTTO;
+        return orderPrice;
     }
 
     private static List<Integer> getKnowWinnerNumbers() {
@@ -45,7 +42,9 @@ public class LottoMain {
 
         winnerNumbers.stream()
                 .filter(number -> number == bonusBall)
-                .peek(dos -> {throw new IllegalArgumentException("보너스볼 번호가 당첨 번호의 숫자와 동일합니다.");})
+                .peek(dos -> {
+                    throw new IllegalArgumentException("보너스볼 번호가 당첨 번호의 숫자와 동일합니다.");
+                })
                 .findAny();
 
         return bonusBall;

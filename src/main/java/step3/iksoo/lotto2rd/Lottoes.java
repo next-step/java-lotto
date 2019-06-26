@@ -4,15 +4,17 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class Lottoes {
+    private static final int PRICE_OF_LOTTO = 1000;
+
     private List<Lotto> lottoes;
 
-    Lottoes(int orderCount) {
-        this.lottoes = buyLotto(orderCount);
+    Lottoes(int orderPrice) {
+        this.lottoes = buyLotto(orderPrice);
     }
 
-    private List<Lotto> buyLotto(int orderCount) {
+    private List<Lotto> buyLotto(int orderPrice) {
         List<Lotto> lottoBox = new ArrayList<>();
-        IntStream.range(0, orderCount)
+        IntStream.range(0, orderPrice / PRICE_OF_LOTTO)
                 .boxed()
                 .forEach(n -> lottoBox.add(new Lotto()));
         return lottoBox;
