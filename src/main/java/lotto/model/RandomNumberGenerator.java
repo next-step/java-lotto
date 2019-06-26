@@ -10,7 +10,6 @@ public class RandomNumberGenerator implements NumberGenerator {
   private static final int START_INCLUSIVE = 1;
   private static final int END_EXCLUSIVE = 46;
 
-
   public RandomNumberGenerator() {
     this.random = new Random();
   }
@@ -19,7 +18,7 @@ public class RandomNumberGenerator implements NumberGenerator {
   public List<Integer> generate(int limit) {
     return random.ints(START_INCLUSIVE, END_EXCLUSIVE)
             .distinct()
-            .limit(6)
+            .limit(Lotto.COUNT_OF_NUMBERS)
             .boxed()
             .sorted()
             .collect(Collectors.toList());
