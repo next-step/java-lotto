@@ -1,8 +1,6 @@
 import domain.LottoGame;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import view.InputVeiw;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +18,6 @@ public class LottoGameTest {
 
         lottoGame = new LottoGame(purchasePrice);
     }
-
 
     @Test
     void 로또_구매가격체크() {
@@ -62,9 +59,11 @@ public class LottoGameTest {
     }
 
     @Test
-    void 지난_당첨번호와_비교() {
+    void 지난_당첨번호와_비교_보너스볼_매치_여부_확인() {
         int wingingCount = 0;
-        int[] prvLottoNumber = {1, 2, 3, 4, 5, 7};
+        int[] prvLottoNumber = {1, 2, 3, 4, 8, 7};
+        int bonusBall = 5;
+        int countBonusBall = 0;
         ArrayList<Integer> lottoElement = new ArrayList<>();
         for (int i = 1; i <= prvLottoNumber.length; i++) {
             lottoElement.add(i);
@@ -72,12 +71,16 @@ public class LottoGameTest {
         for (int i = 0; i < prvLottoNumber.length; ++i) {
             wingingCount = lottoElement.contains(prvLottoNumber[i]) ? wingingCount + 1 : wingingCount;
         }
-        assertThat(wingingCount).isEqualTo(5);
+        assertThat(wingingCount).isEqualTo(4);
+
+        if (wingingCount == 4 && lottoElement.contains(bonusBall)) {
+            ++countBonusBall;
+        }
+        assertThat(countBonusBall).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("수익률을 소수점 2자리까지 만들기")
-    void getPercentOfRevenue() {
+    void 수익률을_소수점_2자리까지_만들기() {
         double revenue = 2332.323487;
         String[] result = String.valueOf(revenue).split("\\.");
         String percent = null;

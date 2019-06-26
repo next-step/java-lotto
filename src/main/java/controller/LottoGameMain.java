@@ -17,7 +17,8 @@ public class LottoGameMain {
         ResultView.printLottoNumber(lottoNumber);
 
         int[] winningNumber = InputVeiw.inputPrvLottoNumber();
-        lottoGame.showWinningResult(winningNumber);
+        int bonusBall = InputVeiw.inputBonusBall();
+        lottoGame.showWinningResult(winningNumber, bonusBall);
         ResultView.printResult();
     }
 }

@@ -3,7 +3,7 @@ package view;
 import java.util.Scanner;
 
 public class InputVeiw {
-    public final static int MINIMUM_PRICE = 1000;
+    private final static int MINIMUM_PRICE = 1000;
     private final static int ONE_UNIT_OF_LOTTO = 6;
 
     private enum Sperator {
@@ -51,6 +51,13 @@ public class InputVeiw {
             inputNumber[i] = Integer.parseInt(result[i]);
         }
         return inputNumber;
+    }
+
+    public static int inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int bonusBall= scanner.nextInt();
+        return bonusBall;
     }
 
     // 입력받은 지난 당첨번호가 6자리인지 확인

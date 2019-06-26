@@ -22,9 +22,15 @@ public enum LottoData {
         public long getCountWinner() {
             return countsOfWinningResultConvertList.stream().filter(x -> x.equals(match)).count();
         }
+    },
+    BOBUS_SECOND_WINNER(30000000, 5) {
+        public long getCountWinner() {
+            return bonusBallCount;
+        }
     };
 
     int prize, match;
+    static int bonusBallCount;
     private static List<Integer> countsOfWinningResultConvertList;
 
     private LottoData(int prize, int match) {
@@ -38,6 +44,10 @@ public enum LottoData {
 
     public int getMatch() {
         return match;
+    }
+
+    public static void setBonusBallCount(int count) {
+        bonusBallCount = count;
     }
 
     public static void setCountsOfWinningResultConvertList(List<Integer> result) {

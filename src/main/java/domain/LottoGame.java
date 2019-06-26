@@ -29,7 +29,7 @@ public class LottoGame {
         return Integer.parseInt(priceString.substring(0, priceString.length() - SUBSTR_RANGE));
     }
 
-    public void showWinningResult(int[] winningNumber) {
-        LottoWinnigCalculator.getCountsWinningResult(lotto, winningNumber,price);
+    public void showWinningResult(int[] winningNumber, int bonusBall) {
+        LottoResult.getCountsWinningResult(lotto, winningNumber, bonusBall, price);
     }
 }
