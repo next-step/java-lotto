@@ -19,7 +19,7 @@ public class ResultView {
     }
 
     public static void printBuyLottoCount(Order order) {
-        System.out.println(String.format(COUNT_MESSAGE, order.getHandPickCount(), order.getAutoPickCount()));
+        System.out.println(String.format(COUNT_MESSAGE, order.getHandPickCount(), order.autoPickCount()));
     }
 
     public static void printResult(LottoAggregator lottoAggregator) {

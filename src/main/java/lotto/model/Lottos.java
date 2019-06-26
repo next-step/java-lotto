@@ -22,6 +22,10 @@ public class Lottos {
         return pickNumbers;
     }
 
+    public int size() {
+        return pickNumbers.size();
+    }
+
     public void merge(Lottos handPickLottos) {
         this.pickNumbers.addAll(handPickLottos.getPickNumbers());
     }

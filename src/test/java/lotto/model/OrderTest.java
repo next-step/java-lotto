@@ -12,7 +12,7 @@ class OrderTest {
     @DisplayName("주문 가능 수량")
     void getAvailableNumberToBuy() {
         Order order = new Order(14000);
-        assertThat(order.getAutoPickCount()).isEqualTo(14);
+        assertThat(order.autoPickCount()).isEqualTo(14);
     }
 
     @Test
@@ -35,6 +35,6 @@ class OrderTest {
     @DisplayName("자동으로 생성할 개수")
     public void autoPickNumber() {
         Order order = new Order(2000, 1);
-        assertThat(order.getAutoPickCount()).isEqualTo(1);
+        assertThat(order.autoPickCount()).isEqualTo(1);
     }
 }

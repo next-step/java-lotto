@@ -22,7 +22,11 @@ public class Order {
         return handPickCount;
     }
 
-    public int getAutoPickCount() {
+    public boolean isAvailable(Lottos handPickLottos) {
+        return handPickCount != handPickLottos.size();
+    }
+
+    public int autoPickCount() {
         return this.getAvailableNumberToBuy() - handPickCount;
     }
 
@@ -41,4 +45,5 @@ public class Order {
             throw new IllegalArgumentException("이걸론 한장도 못사");
         }
     }
+
 }
