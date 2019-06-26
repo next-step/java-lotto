@@ -47,4 +47,16 @@ public class Money {
                 "amount=" + amount +
                 '}';
     }
+
+    public Money plus(Money money) {
+        return Money.won(this.amount + money.amount);
+    }
+
+    public Money times(long count) {
+        return Money.won(amount * count);
+    }
+
+    public Money subtract(Money money) {
+        return Money.won(amount - money.amount);
+    }
 }
