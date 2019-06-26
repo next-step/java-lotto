@@ -13,4 +13,8 @@ public class LottoResultProvider {
         this.winningNumbers = winningNubmers;
     }
 
+    public LottoResult getResult() {
+        this.lottos.stream().map(lotto -> lotto.getWinningCount(this.winningNumbers));
+        return null;
+    }
 }
