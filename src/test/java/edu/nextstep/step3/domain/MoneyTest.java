@@ -1,6 +1,5 @@
 package edu.nextstep.step3.domain;
 
-import edu.nextstep.step2.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
