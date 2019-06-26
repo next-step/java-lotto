@@ -16,9 +16,4 @@ public class LottoResultMatcher {
         return lottoAggregator;
     }
 
-    public Lottos getLottos() {
-        return lottos;
-    }
-
-
 }
