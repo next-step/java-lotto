@@ -13,4 +13,23 @@ public class LottoResult {
     public LottoResult(List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;
     }
+
+    public long match(LottoRank lottoRank) {
+        return lottoRanks.stream()
+                .filter(rank -> rank == lottoRank)
+                .count();
+    }
+
+    public double calculateYields() {
+        if (lottoRanks.isEmpty()) {
+            return 0;
+        }
+
+        int purchasedTotal = lottoRanks.size() * 1000;
+        int prizesTotal = lottoRanks.stream()
+                .map(LottoRank::getPrizes)
+                .reduce(0, Integer::sum);
+
+        return prizesTotal / purchasedTotal;
+    }
 }
