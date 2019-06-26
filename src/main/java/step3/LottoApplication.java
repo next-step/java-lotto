@@ -1,6 +1,5 @@
 package step3;
 
-import step3.domain.LottoRank;
 import step3.domain.LottoSeller;
 import step3.domain.LottoTicket;
 import step3.domain.ResultSheet;
@@ -8,7 +7,6 @@ import step3.view.InputView;
 import step3.view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoApplication {
 
