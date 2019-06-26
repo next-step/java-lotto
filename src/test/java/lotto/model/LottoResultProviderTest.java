@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoResultTest {
+public class LottoResultProviderTest {
 
     @Test
     void getThreeCorrectResult() {
@@ -18,7 +18,7 @@ public class LottoResultTest {
         lottos.add(new Lotto(Arrays.asList(6, 7, 20, 25, 30, 37))); // 3개 적중
         lottos.add(new Lotto(Arrays.asList(1, 2, 5, 6, 20, 21))); // 4개 적중
 
-        LottoResult lottoResult = new LottoResult(lottos, Arrays.asList(1, 4, 5, 6, 20, 25));
-        assertThat(lottoResult.getThreeCorrectResult()).isEqualTo(1);
+        LottoResultProvider lottoResultProvider = new LottoResultProvider(lottos, Arrays.asList(1, 4, 5, 6, 20, 25));
+        assertThat(lottoResultProvider.getThreeCorrectResult()).isEqualTo(1);
     }
 }
