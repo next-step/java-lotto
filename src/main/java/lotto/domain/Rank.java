@@ -28,7 +28,6 @@ public enum Rank {
         }
         Optional<Rank> result = Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
-
         if (result.isPresent()) {
             return result.get();
         }

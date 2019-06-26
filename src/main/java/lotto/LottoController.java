@@ -6,28 +6,27 @@ import lotto.view.LottoResultView;
 public class LottoController {
 
     public static void main(String[] args) {
-
         LottoResultView view = new LottoResultView();
         view.printPurchaseAmountGuide();
 
-        LottoPublisher lottoPublisher = new LottoPublisher(view.getInputAmout());
-        view.printBuyLottoCountGuide(lottoPublisher.getPublishLotto().size());
+        LottoPublisher publisher = new LottoPublisher(view.getInputAmout());
+        view.printBuyLottoCountGuide(publisher.getPublishLotto().size());
 
-        view.printPublishLottoNumbers(view.getLottosNumbers(lottoPublisher.getPublishLotto()));
+        view.printPublishLottoNumbers(view.getLottosNumbers(publisher.getPublishLotto()));
 
         view.printWinnerNumbersGuide();
         WinnerLotto winnerLotto = new WinnerLotto(view.getInputWinnerNumbers());
         view.printBonusNumberGuide();
         BonusNumber bonusNumber = new BonusNumber(view.getInputBonusNumber());
-        RankReward rankReward = new RankReward(lottoPublisher.getPublishLottoRanks(
+        RankReward rankReward = new RankReward(publisher.getPublishLottoRanks(
                 winnerLotto, bonusNumber.getNumber()));
 
         view.printWinnerStatisticsGuide();
         view.printRankGuide(rankReward.getGainRanksCounts());
 
-        view.printRevenueRatioGuide(lottoPublisher.getRevenueRatio(
+        view.printRevenueRatioGuide(publisher.getRevenueRatio(
                 rankReward.getRewardWinningMoney()),
-                RevenueRatio.valueOf(lottoPublisher.getRevenueRatio(
+                RevenueRatio.valueOf(publisher.getRevenueRatio(
                         rankReward.getRewardWinningMoney())).getName());
     }
 }

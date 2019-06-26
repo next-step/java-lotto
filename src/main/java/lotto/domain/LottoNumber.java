@@ -13,7 +13,7 @@ public class LottoNumber {
     private List<Integer> numbers;
 
     public LottoNumber() {
-        this.numbers = publishLottoNumbers();
+        this.numbers = publishLottoNumber();
     }
 
     public LottoNumber(List<Integer> numbers) {
@@ -21,7 +21,7 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    private List<Integer> publishLottoNumbers() {
+    private List<Integer> publishLottoNumber() {
         List<Integer> lottoAllNumbers = createLottoAllNumbers();
         List<Integer> lottoNums = new ArrayList();
         for (int index = 0; index < MAX_LOTTO_NUM_COUNT; index++) {
