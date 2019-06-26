@@ -31,22 +31,22 @@ public class LottoApplication {
         InputView.printExtractNumber(money.getNumberOfExtract());
 
         // 투입 금액에 따른 로또 개수발행
-        Lotto lotto = RandomNumberUtils.getLotto(money);
+        Lotto lottoTikets = RandomNumberUtils.getLotto(money);
 
         // 발행된 로또 출력
-        ResultView.printLottoInfo(lotto);
+        ResultView.printLottoInfo(lottoTikets);
 
         // 당첨 번호
-        String lotteryNumber = InputView.inputLotteryNumber();
-        LottoNumber lottery = LottoNumber.createLotteryNumber(lotteryNumber);
+        String lotto = InputView.inputLotteryNumber();
+        LottoNumber lottery = LottoNumber.createLotteryNumber(lotto);
 
         // 당첨 카운트
-        List<Integer> matchCount = lotto.getMatchCountExtractNumberFromLotteryNumber(lottery);
+        List<Integer> matchCount = lottoTikets.getMatchCountExtractNumberFromLotteryNumber(lottery);
 
         // 당첨내역 출력
-        ResultView.printLotteryCount(lotto.getIncomeMatchCount(lottery));
+        ResultView.printLotteryCount(lottoTikets.getIncomeMatchCount(lottery));
 
         // 당첨 금액
-        ResultView.printIncome(lotto.sumIncome(matchCount, money));
+        ResultView.printIncome(lottoTikets.sumIncome(matchCount, money));
     }
 }
