@@ -28,16 +28,13 @@ public class RandomNumberUtils {
     private static final int EXTRACT_COUNT = 6;
     private static List<Integer> randomNumbers;
 
-    public static void initNumber() {
+    static {
         randomNumbers = IntStream
                 .rangeClosed(VALUE_NUMBER_START_RANGE, VALUE_NUMBER_END_RANGE)
                 .boxed()
                 .collect(Collectors.toList());
     }
-
     public static Lotto getLotto(Money money) {
-        initNumber();
-
         List<LottoNumber> exNumber = new ArrayList<>();
         int extractCount = money.getNumberOfExtract();
         for (int i = 0; i < extractCount; i++) {
