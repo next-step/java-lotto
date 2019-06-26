@@ -30,7 +30,6 @@ public class AutoLottoNumbersGenerator implements LottoNumbersGenerator {
 
         return tempNumbers.stream()
                 .limit(MAX_SIZE)
-//                .sorted()
                 .collect(Collectors.toList());
     }
 }
