@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.Lotto;
+import lotto.util.LottoResultProvider;
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ public class Main {
     public static void main(String[] args) {
         List<Lotto> lottos = buy(InputPurchaseAmount());
         viewLotto(lottos);
-        inputWinnerNumber();
+        LottoResultProvider.getLottoResult(lottos,inputWinnerNumber()).getResult();
     }
 }
