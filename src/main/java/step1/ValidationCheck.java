@@ -12,4 +12,9 @@ public class ValidationCheck {
         return 1;
     }
 
+    public void checkNegative(int inputNumbers) {
+        if(inputNumbers < 0){
+            throw new IllegalArgumentException("음수를 포함한 덧셈은 불가합니다.");
+        }
+    }
 }
