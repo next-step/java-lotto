@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.strategy.LottoNumberStrategy;
 import lotto.strategy.LottoRandomStrategy;
 import lotto.view.LottoIO;
-import lotto.view.LottoInputInterface;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
@@ -11,7 +10,13 @@ import java.util.ArrayList;
 public class Lotto {
     static private int PRICE_LOTTO_TICKET = 1000;
 
-    public void start(LottoIO io) {
+    private LottoIO io;
+
+    public Lotto(LottoIO io) {
+        this.io = io;
+    }
+
+    public void start() {
         int willBuyTickets = io.getNumOfPurchased() / PRICE_LOTTO_TICKET;
         LottoTickets tickets = generate(willBuyTickets, new LottoRandomStrategy());
         ResultView.println(tickets.toString());
