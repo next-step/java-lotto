@@ -52,7 +52,7 @@ class ManualLottoGeneratorTest {
         assertThat(lottos).containsAll(expect);
     }
 
-    @DisplayName("로또 수동 생성 갯수 넘을 때 예외처리 ")
+    @DisplayName("로또 수동 생성 갯수 초과하여 생성할 때 예외처리 ")
     @ParameterizedTest
     @ValueSource(ints = {
             1,

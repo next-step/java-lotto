@@ -6,7 +6,7 @@ public class NoSuchLottoException extends NoSuchElementException {
 
     private static final String ERROR_MESSAGE = "로또를 찾을 수 없습니다.";
 
-    private NoSuchLottoException() {
+    public NoSuchLottoException() {
         super(ERROR_MESSAGE);
     }
 }

@@ -1,5 +1,7 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.NoSuchLottoException;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,6 +15,10 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generate() {
+        if (!lottos.hasNext()) {
+            throw new NoSuchLottoException();
+        }
+
         return lottos.next();
     }
 }
