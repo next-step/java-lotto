@@ -8,7 +8,7 @@ import edu.nextstep.step3.domain.Number;
 import edu.nextstep.step3.view.InputView;
 import edu.nextstep.step3.view.ResultView;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -45,13 +45,17 @@ public class LottoApplication {
         String bonus = InputView.inputBonusNumber();
         Number bonusNumber = new Number(Integer.parseInt(bonus));
 
-        // 당첨 카운트
-        List<Integer> matchCount = lottoTikets.getMatchCountExtractNumberFromLotteryNumber(lottery);
+        // 보너스 번호와 당첨번호 중복 여부 확인
+        if (lottery.contains(bonusNumber.getNumber())) {
+            throw new IllegalArgumentException("중복된 번호 입니다.");
+        }
 
         // 당첨내역 출력
-        ResultView.printLotteryCount(lottoTikets.getIncomeMatchCount(lottery));
+        Map<LottoNumber, Rank> incomeInfo = lottoTikets.addBonusNumberMatchLotto(lottoTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
+        ResultView.printLotteryCount(incomeInfo);
 
         // 당첨 금액
-        ResultView.printIncome(lottoTikets.sumIncome(matchCount, money));
+        double income = (double) lottoTikets.fetchIncome(incomeInfo) / (double) money.getInputMoney();
+        ResultView.printIncome(income);
     }
 }
