@@ -1,5 +1,7 @@
 package calculator;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public class StringCalculator {
     private static final String NUMBER_REGEX = "^[0-9]*$";
 
     int add(String val) {
-        if (isNull(val) || isEmpty(val)) {
+        if (isEmptyOrNull(val)) {
             return EMPTY_NUM;
         }
         int result = 0;
@@ -52,13 +54,8 @@ public class StringCalculator {
         }
     }
 
-    private boolean isNull(String val) {
-        return val == null;
-    }
-
-    private boolean isEmpty(String val) {
-        val = removalWhitespace(val);
-        return val.isEmpty();
+    private boolean isEmptyOrNull(String val) {
+        return StringUtils.isBlank(val);
     }
 
     public static void main(String[] args) {
