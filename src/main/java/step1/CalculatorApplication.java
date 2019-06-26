@@ -2,16 +2,27 @@ package step1;
 
 public class CalculatorApplication {
     private InputView inputView;
-    private static StringAddCalculator stringAddCalculator;
 
-    private CalculatorApplication(){
+    private CalculatorApplication() {
         this.inputView = new InputView();
-        this.stringAddCalculator = new StringAddCalculator();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         CalculatorApplication app = new CalculatorApplication();
-        stringAddCalculator .inputNumberCheck(app.inputView.inputNumbers());
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
+        SplitDomain splitDomain = new SplitDomain();
+
+        String inputNumber = app.inputView.inputNumbers();
+        int possibleCalculateNumber = stringAddCalculator.checkInputNumber(inputNumber);
+
+        if (possibleCalculateNumber == 0) {
+            System.out.println(possibleCalculateNumber);
+        }
+        if (possibleCalculateNumber != 0) {
+            int[] numberToAdd = splitDomain.checkSplitInputNumber(inputNumber);
+            stringAddCalculator.add(numberToAdd);
+        }
+
 
     }
 }
