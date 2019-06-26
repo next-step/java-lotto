@@ -20,14 +20,6 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public static Rank valueOf(int countOfMatch) {
         Optional<Rank> result = Arrays.stream(Rank.values())
                 .filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
@@ -36,6 +28,14 @@ public enum Rank {
             return result.get();
         }
         return Rank.NONE;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 
     @Override

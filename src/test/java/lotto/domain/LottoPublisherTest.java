@@ -37,7 +37,7 @@ public class LottoPublisherTest {
         rankPublisher = new LottoPublisher(lottos);
         ranks = rankPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
         rankReward = new RankReward(ranks);
-        revenueRatioPublisher = new LottoPublisher(3000, lottos);
+        revenueRatioPublisher = new LottoPublisher(3000);
         revenueRatioRanks = revenueRatioPublisher.getPublishLottoRanks(new WinnerLotto(winNumberStr));
         revenueRatioReward = new RankReward(revenueRatioRanks);
 
@@ -54,7 +54,7 @@ public class LottoPublisherTest {
 
     @Test
     void 구매한로또개수확인() {
-        assertThat(purchasePublisher.getBuyLottoCount()).isEqualTo(14);
+        assertThat(purchasePublisher.getPublishLotto().size()).isEqualTo(14);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class LottoPublisherTest {
 
     @Test
     void 생성한로또숫자콘솔출력() {
-        for (int i = 0 ; i < purchasePublisher.getBuyLottoCount(); i++) {
+        for (int i = 0 ; i < purchasePublisher.getPublishLotto().size(); i++) {
             List<Integer> numbers = purchasePublisher.getPublishLotto().get(i).getNumbers();
             List<String> strNumbers = new ArrayList<>();
             for (int j = 0 ; j < LottoNumber.MAX_LOTTO_NUM_COUNT; j++) {

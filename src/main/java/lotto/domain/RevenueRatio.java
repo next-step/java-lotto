@@ -13,14 +13,6 @@ public enum RevenueRatio {
         this.name = name;
     }
 
-    public double getRatio() {
-        return ratio;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public static RevenueRatio valueOf(double ratio) {
         if (RevenueRatio.LOSS.getRatio() >= ratio) {
             return RevenueRatio.LOSS;
@@ -31,6 +23,14 @@ public enum RevenueRatio {
         if (RevenueRatio.PROFIT.getRatio() <= ratio) {
             return RevenueRatio.PROFIT;
         }
-        return null;
+        return RevenueRatio.LOSS;
+    }
+
+    public double getRatio() {
+        return ratio;
+    }
+
+    public String getName() {
+        return name;
     }
 }

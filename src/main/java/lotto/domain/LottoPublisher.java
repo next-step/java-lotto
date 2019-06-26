@@ -7,21 +7,14 @@ public class LottoPublisher {
 
     static final int ONE_LOTTO_AMOUNT = 1000;
 
-    private int purchaseAmount;
     private List<Lotto> publishLotto;
 
     public LottoPublisher(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
-        this.publishLotto = publishLottos(getBuyLottoCount());
+        this.publishLotto = publishLottos(purchaseAmount / 1000);
     }
 
     public LottoPublisher(List<Lotto> publishLotto) {
-        this.publishLotto = publishLotto;
-    }
-
-    public LottoPublisher(int purchaseAmount, List<Lotto> publishLotto) {
-        this.purchaseAmount = purchaseAmount;
         this.publishLotto = publishLotto;
     }
 
@@ -49,7 +42,7 @@ public class LottoPublisher {
     public double getRevenueRatio(int rewardWinningMoney) {
         if (rewardWinningMoney == 0)
             return 0d;
-        return (double)rewardWinningMoney / (double)purchaseAmount;
+        return (double)rewardWinningMoney / (double)getPurchaseAmount();
     }
 
     public List<Rank> getPublishLottoRanks(WinnerLotto winnerLotto) {
@@ -84,12 +77,12 @@ public class LottoPublisher {
         return lottosNumbers;
     }
 
-    public int getBuyLottoCount() {
-        return purchaseAmount / ONE_LOTTO_AMOUNT;
-    }
+//    public int getBuyLottoCount() {
+//        return publishLotto.size();
+//    }
 
     public int getPurchaseAmount() {
-        return purchaseAmount;
+        return publishLotto.size() * ONE_LOTTO_AMOUNT;
     }
 
     public List<Lotto> getPublishLotto() {

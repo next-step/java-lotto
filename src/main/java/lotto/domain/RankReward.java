@@ -24,8 +24,8 @@ public class RankReward {
 
     public int getRewardWinningMoney() {
         int rewardWinningMoney = 0;
-        for (Rank rank : Rank.values()) {
-            rewardWinningMoney += gainRanksCounts.get(rank) * rank.getWinningMoney();
+        for (Rank gainRanks : getGainRanksCounts().keySet()) {
+            rewardWinningMoney += gainRanksCounts.get(gainRanks) * gainRanks.getWinningMoney();
         }
         return rewardWinningMoney;
     }
