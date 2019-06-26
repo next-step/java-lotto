@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class InputVeiw {
     public final static int MINIMUM_PRICE = 1000;
     private final static int ONE_UNIT_OF_LOTTO = 6;
-    private final static String SEPARATOR_REST_WITH_BLANK = ", ";
     private final static String SEPARATOR_REST = ",";
     private final static String SEPARATOR_BLANK = " ";
     private final static String SEPARATOR_NOTHING = "";

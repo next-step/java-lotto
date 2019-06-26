@@ -5,58 +5,74 @@ import org.junit.jupiter.api.Test;
 import view.InputVeiw;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
-    int price = 14000;
+    int purchasePrice = 14000;
     String count;
     LottoGame lottoGame;
 
-
     @BeforeEach
     void setup() {
-        String priceStr = String.valueOf(price);
-        count = priceStr.substring(0, priceStr.length() - 3);
-        lottoGame = new LottoGame(price);
+
+        lottoGame = new LottoGame(purchasePrice);
     }
 
+
     @Test
-    @DisplayName("가격을 숫자로 자르기")
-    void substringPricetoNumber() {
-        assertThat(lottoGame.substringPricetoNumber(price)).isEqualTo(14);
-    }
-    
-    @Test
-    @DisplayName("지난 당첨번호를 잘못 입력했을 때 exception")
-    void checkPrvStr() {
+    void 로또_구매가격체크() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            if (InputVeiw.checkPrvStr("12345"))
+            if (purchasePrice < 1000) {
                 throw new IllegalArgumentException("입력이 잘못되었습니다. 지난 당첨 번호를 다시 한번 입력해주세요.");
+            }
         });
     }
 
     @Test
-    @DisplayName("지난 당첨번호와 당청 번호 비교 ")
-    void comparePrvNumber() {
-        int numofWin = 0;
-        int[] prvLottoNumber = {1, 2, 3, 4, 5, 6};
+    void 구매가격_로또개수_추출() {
+        String priceStr = String.valueOf(purchasePrice);
+        count = priceStr.substring(0, priceStr.length() - 3);
+        assertThat(Integer.parseInt(count)).isEqualTo(14);
+    }
+
+    @Test
+    void 지난_당첨번호_체크() {
+        int[] arr = {1, 2, 3, 4, 5};
+        int size = arr.length;
+        assertThat(size != 6).isTrue();
+    }
+
+    @Test
+    void 공백제거_문자열_자르기() {
+        String first_input = "1, 2, 3, 4, 5, 6";
+        String[] splitResut = first_input.replaceAll(" ", "").split(",");
+        assertThat(splitResut).containsExactly("1", "2", "3", "4", "5", "6");
+    }
+
+    @Test
+    void 배열을_문자열로_변환() {
+        int[] arr = {1, 2, 3, 4, 5, 6};
+        String temp = Arrays.toString(arr);
+        System.out.println(temp);
+        String arrayToStr = temp.substring(1, temp.length() - 1).replace(", ", "");
+        assertThat(arrayToStr).isEqualTo("123456");
+    }
+
+    @Test
+    void 지난_당첨번호와_비교() {
+        int wingingCount = 0;
+        int[] prvLottoNumber = {1, 2, 3, 4, 5, 7};
         ArrayList<Integer> lottoElement = new ArrayList<>();
         for (int i = 1; i <= prvLottoNumber.length; i++) {
             lottoElement.add(i);
         }
         for (int i = 0; i < prvLottoNumber.length; ++i) {
-            numofWin = lottoElement.contains(prvLottoNumber[i]) ? numofWin + 1 : numofWin;
+            wingingCount = lottoElement.contains(prvLottoNumber[i]) ? wingingCount + 1 : wingingCount;
         }
-        assertThat(numofWin).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("공백문자 제거 및 , 기준으로 문자열 split ")
-    void removeBlankAndSplit() {
-        String input = "1, 2, 3, 4, 5, 6";
-        assertThat(input.replaceAll(" ", "").split(",")).containsExactly("1", "2", "3", "4", "5", "6");
+        assertThat(wingingCount).isEqualTo(5);
     }
 
     @Test
