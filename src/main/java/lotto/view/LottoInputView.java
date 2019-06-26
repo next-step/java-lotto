@@ -14,6 +14,7 @@ public class LottoInputView {
 
   private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
   private static final String WINNING_NUMBERS_MESSAGE = "지난 주 당첨번호를 입력해 주세요.";
+  private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
   private static final String NOT_A_NUMBER_INPUT_ERROR_MESSAGE = "숫자로 제대로 입력해주세요.";
   private static final String DELIMITER_FOR_WINNING_NUMBERS = ",( )?";
 
@@ -41,6 +42,17 @@ public class LottoInputView {
               .collect(toList());
 
       return LottoGenerator.generate(winningNumbers);
+    } catch(InputMismatchException e) {
+      throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
+    }
+  }
+
+  public static int askBonusNumber() {
+    print(BONUS_NUMBER_MESSAGE);
+
+    try {
+      Scanner scanner = new Scanner(System.in);
+      return scanner.nextInt();
     } catch(InputMismatchException e) {
       throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
     }

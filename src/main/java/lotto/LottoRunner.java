@@ -17,6 +17,7 @@ public class LottoRunner {
     LottoOutputView.printPickedNumbersOf(lottos);
 
     Lotto winningLotto = LottoInputView.askWinningNumbers();
+    int bonusNumber = LottoInputView.askBonusNumber();
 
     Analyzer analyzer = new Analyzer(winningLotto);
     Report report = analyzer.analyze(lottos);
