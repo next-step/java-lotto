@@ -11,7 +11,7 @@ class LottoGeneratorTest {
     @Test
     @RepeatedTest(10)
     void generate() {
-        LottoGenerator.generate().forEach(number -> assertThat(number).isBetween(1, 45));
+        LottoGenerator.generate().getNumbers().forEach(number -> assertThat(number).isBetween(1, 45));
     }
 
 

@@ -1,5 +1,7 @@
 package lotto.util;
 
+import lotto.model.Lotto;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,10 +16,10 @@ class LottoGenerator {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    static List<Integer> generate() {
+    static Lotto generate() {
         List<Integer> lotteryNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).boxed().collect(Collectors.toList());
         shuffle(lotteryNumbers);
         sort(lotteryNumbers);
-        return lotteryNumbers.subList(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER);
+        return new Lotto(lotteryNumbers.subList(LOTTO_FIRST_NUMBER, LOTTO_LAST_NUMBER));
     }
 }

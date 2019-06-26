@@ -13,7 +13,7 @@ public class LottoTicketBox {
     public static List<Lotto> buy(int amount) {
         return IntStream.rangeClosed(1, amount / TICKET_PRICE)
                 .boxed()
-                .map(e -> new Lotto(LottoGenerator.generate()))
+                .map(e -> LottoGenerator.generate())
                 .collect(Collectors.toList());
     }
 
