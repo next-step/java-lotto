@@ -25,7 +25,7 @@ public class OutputView {
   public static final int BREAK_EVEN_POINT = 1;
 
   public static void printPurchasedLottoQuantity(Quantity manualQuantity, Quantity autoQuantity) {
-    System.out.printf(PURCHASE_COUNT_FORMAT, manualQuantity.getValue(),autoQuantity.getValue());
+    System.out.printf(PURCHASE_COUNT_FORMAT, manualQuantity.getValue(), autoQuantity.getValue());
     printBlankLine();
   }
 
@@ -61,8 +61,9 @@ public class OutputView {
 
   private static void printReward(Rank rank, int rankCount) {
     printBlankLine();
-    if(rank.isSecond(rank)) {
-      System.out.printf(LOTTO_SECOND_REWARDS_FORMAT, rank.getBoundaryCount(), rank.getPrize(), rankCount);
+    if (rank.isSecond(rank)) {
+      System.out
+          .printf(LOTTO_SECOND_REWARDS_FORMAT, rank.getBoundaryCount(), rank.getPrize(), rankCount);
       return;
     }
     System.out.printf(LOTTO_REWARDS_FORMAT, rank.getBoundaryCount(), rank.getPrize(), rankCount);

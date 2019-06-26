@@ -18,7 +18,7 @@ public class LastWeekWinLotto {
   }
 
   private void duplicateNumberCheck() {
-    if(lottoNumbers.hasBonusNumber(bonusNumber)) {
+    if (lottoNumbers.hasBonusNumber(bonusNumber)) {
       throw new IllegalArgumentException("당첨 번호와 보너스볼 번호가 일치할 수 업습니다.");
     }
   }

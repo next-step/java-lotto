@@ -14,9 +14,9 @@ public class LottoLauncher {
     Quantity autoLottoQuantity = totalQuantity.minus(manualLottoQuantity);
     List<String> manualLottoNumbers = getManualLottoNumbers(manualLottoQuantity);
 
-    OutputView.printPurchasedLottoQuantity(manualLottoQuantity,autoLottoQuantity);
+    OutputView.printPurchasedLottoQuantity(manualLottoQuantity, autoLottoQuantity);
 
-    Lottos purchasedLottos = Store.buyLottos(autoLottoQuantity,manualLottoNumbers);
+    Lottos purchasedLottos = Store.buyLottos(autoLottoQuantity, manualLottoNumbers);
     OutputView.printPurchasedLottosNumber(purchasedLottos);
 
     String lastWeekWinLottoNumber = InputView.askLastWeekWinLottoNumber();

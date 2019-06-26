@@ -13,15 +13,15 @@ public class Store {
   }
 
   public static Lottos buyLottos(Quantity autoQuantity, List<String> manualLottoNumbers) {
-    if(isEmpty(manualLottoNumbers)) {
+    if (isEmpty(manualLottoNumbers)) {
       return buyAutoLottos(autoQuantity);
     }
     Lottos autoLottos = buyAutoLottos(autoQuantity);
     Lottos manualLottos = buyManualLottos(manualLottoNumbers);
-    return new Lottos(autoLottos,manualLottos);
+    return new Lottos(autoLottos, manualLottos);
   }
 
   private static boolean isEmpty(List<String> manualLottoNumbers) {
-    return manualLottoNumbers == null || manualLottoNumbers.size()==0;
+    return manualLottoNumbers == null || manualLottoNumbers.size() == 0;
   }
 }

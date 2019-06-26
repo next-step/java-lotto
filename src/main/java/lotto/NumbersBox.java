@@ -26,7 +26,7 @@ public class NumbersBox {
   }
 
   private static void fillLottoBox() {
-    if(numbersBox.size() > 0) {
+    if (numbersBox.size() > 0) {
       return;
     }
     for (int i = 1; i <= BOUNDARY_LOTTO_NUMBER; i++) {
