@@ -34,4 +34,8 @@ public class Lottos {
                 .boxed()
                 .collect(toList());
     }
+
+    public List<Prize> matches(WinningLotto winningLotto) {
+        return this.lottos.stream().map(lotto -> lotto.matches(winningLotto)).collect(toList());
+    }
 }
