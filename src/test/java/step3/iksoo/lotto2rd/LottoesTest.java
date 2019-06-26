@@ -25,6 +25,6 @@ public class LottoesTest {
     public void 로또결과_1등_한명_당첨() {
         List<Integer> WINNER_NUMBERS = Arrays.asList(4, 5, 6, 7, 8, 9);
         int bonusBall = 5;
-        assertThat(customLottoes.checkLotteryWin(WINNER_NUMBERS, bonusBall).get(6)).isEqualTo(1);
+        assertThat(customLottoes.checkLotteryWin(WINNER_NUMBERS, bonusBall).get(Rank.FIRST)).isEqualTo(1);
     }
 }
