@@ -1,6 +1,5 @@
 package edu.nextstep.step3;
 
-import edu.nextstep.step2.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +21,23 @@ class RankTest {
     @Test
     void getValues() {
         assertThat(Rank.getRanks().get(0) == Rank.THREE).isTrue();
+    }
+
+    @DisplayName("match 값을 얻는다.")
+    @Test
+    void getMatch() {
+        assertThat(Rank.getRanks().get(0).getMatch()).isEqualTo(0);
+    }
+
+    @DisplayName("money 값을 얻는다.")
+    @Test
+    void getMoney() {
+        assertThat(Rank.getRanks().get(5).getLotteryMoney()).isEqualTo(2_000_000_000);
+    }
+
+    @DisplayName("bonus 여부를 얻는다.")
+    @Test
+    void getBonus() {
+        assertThat(Rank.getRanks().get(4).getBonusRank()).isTrue();
     }
 }
