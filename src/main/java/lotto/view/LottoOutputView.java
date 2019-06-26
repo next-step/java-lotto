@@ -36,11 +36,11 @@ public class LottoOutputView {
   }
 
   private static void printRewardWith(Prize prize, Map<Prize, Integer> prizeStatus) {
-    if (prize.equals(Prize.SECOND)) {
-      System.out.printf(REWARD_FORMAT_FOR_SECOND_PRIZE, prize.getCountOfMatchingNumbers(), prize.getPrizeMoney(), prizeStatus.getOrDefault(prize, 0));
-      return;
-    }
-    System.out.printf(REWARD_FORMAT_FOR_COMMON_PRIZE, prize.getCountOfMatchingNumbers(), prize.getPrizeMoney(), prizeStatus.getOrDefault(prize, 0));
+    System.out.printf(getRewardFormat(prize), prize.getCountOfMatchingNumbers(), prize.getPrizeMoney(), prizeStatus.getOrDefault(prize, 0));
+  }
+
+  private static String getRewardFormat(Prize prize) {
+    return (prize.equals(Prize.SECOND)) ? REWARD_FORMAT_FOR_SECOND_PRIZE : REWARD_FORMAT_FOR_COMMON_PRIZE;
   }
 
   private static void printLineBreak() {
