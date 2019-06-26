@@ -14,6 +14,18 @@ public class LottoResult {
             winningCount3++;
         }
 
+        if (winningCount == 4){
+            winningCount4++;
+        }
+
+        if (winningCount == 5){
+            winningCount5++;
+        }
+
+        if (winningCount == 6){
+            winningCount6++;
+        }
+
     }
 
     public int getWinningCount6() {
