@@ -10,7 +10,6 @@ import camp.nextstep.edu.lotto.view.console.formatter.LotteriesFormatter;
 import camp.nextstep.edu.lotto.view.console.formatter.LotteryFormatter;
 import camp.nextstep.edu.lotto.view.console.formatter.LotteryNumberFormatter;
 
-import java.util.Map;
 import java.util.Set;
 
 public class LotteryApplication {
@@ -54,7 +53,8 @@ public class LotteryApplication {
         resultView.printPurchasedLotteries(purchasedLotteries);
 
         final Set<Integer> winningNumbers = inputView.inputWinningNumbers();
-        final LotteriesReward lotteriesReward = simpleLotteryService.getResult(purchasedLotteries, winningNumbers);
+        final Integer bonusNumber = inputView.inputBonusNumber();
+        final LotteriesReward lotteriesReward = simpleLotteryService.getResult(purchasedLotteries, winningNumbers, bonusNumber);
         final double earningsRate = simpleLotteryService.calculateEarningsRate(investment, lotteriesReward);
         resultView.printResults(lotteriesReward, earningsRate);
     }

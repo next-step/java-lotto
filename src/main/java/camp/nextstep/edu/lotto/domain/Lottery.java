@@ -37,6 +37,13 @@ public class Lottery {
                 .count();
     }
 
+    public boolean hasBonus(LotteryNumber lotteryNumber) {
+        if (lotteryNumber == null) {
+            throw new IllegalArgumentException("'lotteryNumber' must not be null");
+        }
+        return numberSet.contains(lotteryNumber);
+    }
+
     public Stream<LotteryNumber> stream() {
         return numberSet.stream();
     }

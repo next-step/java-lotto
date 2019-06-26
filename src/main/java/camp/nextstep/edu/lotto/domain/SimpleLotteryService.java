@@ -22,25 +22,31 @@ public class SimpleLotteryService implements LotteryService {
     }
 
     @Override
-    public LotteriesReward getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet) {
+    public LotteriesReward getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet, Integer bonusNumber) {
         final Set<LotteryNumber> winningLotteryNumberSet = winningNumberSet.stream()
                 .map(LotteryNumber::from)
                 .collect(Collectors.toSet());
         final Lottery winningLottery = Lottery.customizedInstance(winningLotteryNumberSet);
-        return this.resolveRewards(purchasedLotteries, winningLottery);
+        final LotteryNumber bonusLotteryNumber = LotteryNumber.from(bonusNumber);
+        return this.resolveRewards(purchasedLotteries, winningLottery, bonusLotteryNumber);
     }
 
-    private LotteriesReward resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery) {
+    private LotteriesReward resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery, LotteryNumber bonusNumber) {
         final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
 
         purchasedLotteries.stream()
-                .map(lottery -> lottery.score(winningLottery))
-                .forEach(score -> {
-                    final RewardType rewardType = RewardType.from(score);
+                .forEach(lottery -> {
+                    final RewardType rewardType = this.resolveReward(lottery, winningLottery, bonusNumber);
                     lotteriesReward.add(rewardType);
                 });
 
         return lotteriesReward;
+    }
+
+    private RewardType resolveReward(Lottery lottery, Lottery winningLottery, LotteryNumber bonusNumber) {
+        int score = lottery.score(winningLottery);
+        boolean hasBonus = lottery.hasBonus(bonusNumber);
+        return RewardType.from(score, hasBonus);
     }
 
     @Override
