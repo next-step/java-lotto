@@ -5,10 +5,10 @@ import java.util.List;
 
 public class LottoMachine {
 
-    public List<Lotto> issue(int issueCount){
+    public List<Lotto> issue(int issueCount) {
         List<Lotto> lottos = new ArrayList<>();
 
-        for(int i = 0; i < issueCount; i++){
+        for (int i = 0; i < issueCount; i++) {
             lottos.add(new Lotto());
         }
         return lottos;

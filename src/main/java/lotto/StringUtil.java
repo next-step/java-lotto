@@ -9,7 +9,7 @@ public class StringUtil {
         return inputWinningNumbers.trim().split("\\s*" + "," + "\\s*");
     }
 
-    public static List<Integer> convertIntList(String[] strings){
+    public static List<Integer> convertIntList(String[] strings) {
         return Arrays.stream(strings).map(Integer::parseInt).collect(Collectors.toList());
 
     }
