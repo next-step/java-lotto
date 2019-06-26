@@ -3,22 +3,19 @@ package step3.iksoo.lotto2rd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoesTest {
-    private Lottoes customLottoes;
+    private Lottoes customLottoes = new Lottoes(0);
 
     @BeforeEach
     public void setUp() {
-        List<Lotto> lottoCustom = new ArrayList<>();
-        lottoCustom.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoCustom.add(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
-        lottoCustom.add(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)));
-        customLottoes = new Lottoes(lottoCustom);
+        customLottoes.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        customLottoes.add(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        customLottoes.add(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)));
     }
 
     @Test

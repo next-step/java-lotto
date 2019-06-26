@@ -1,19 +1,25 @@
 package step3.iksoo.lotto2rd;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class Lottoes {
     private List<Lotto> lottoes;
 
-    Lottoes(List<Lotto> lottoes) {
-        this.lottoes = lottoes;
+    Lottoes(int orderCount) {
+        this.lottoes = buyLotto(orderCount);
     }
 
-    public List<Lotto> getLottoes() {
-        return this.lottoes;
+    private List<Lotto> buyLotto(int orderCount) {
+        List<Lotto> lottoBox = new ArrayList<>();
+        IntStream.range(0, orderCount)
+                .boxed()
+                .forEach(n -> lottoBox.add(new Lotto()));
+        return lottoBox;
+    }
+
+    public void add(Lotto lotto) {
+        this.lottoes.add(lotto);
     }
 
     public Map<Rank, Integer> checkLotteryWin(List<Integer> winnerNumbers, int bonusBall) {
@@ -29,5 +35,9 @@ public class Lottoes {
                 .forEach(rank -> matchResult.put(rank, matchResult.get(rank) + 1));
 
         return matchResult;
+    }
+
+    public List<Lotto> getLottoes() {
+        return this.lottoes;
     }
 }

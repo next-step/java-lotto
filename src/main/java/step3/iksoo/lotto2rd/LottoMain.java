@@ -10,7 +10,8 @@ public class LottoMain {
     private static int orderPrice;
 
     public static void main(String[] args) {
-        Lottoes lottoes = new Lottoes(buyLotto(lottoOrder()));
+        Lottoes lottoes = new Lottoes(lottoOrder());
+        OutputView.printOrderCheck(lottoes.getLottoes().size());
         OutputView.printLottos(lottoes.getLottoes());
 
         List<Integer> winNumbers = getKnowWinnerNumbers();
@@ -25,16 +26,6 @@ public class LottoMain {
         OutputView.printAskOrder();
         orderPrice = InputView.inputNumber();
         return orderPrice / PRICE_OF_LOTTO;
-    }
-
-    private static List<Lotto> buyLotto(int orderCount) {
-        List<Lotto> lottoBox = new ArrayList<>();
-        IntStream.range(0, orderCount)
-                .boxed()
-                .forEach(n -> lottoBox.add(new Lotto()));
-
-        OutputView.printOrderCheck(lottoBox.size());
-        return lottoBox;
     }
 
     private static List<Integer> getKnowWinnerNumbers() {
