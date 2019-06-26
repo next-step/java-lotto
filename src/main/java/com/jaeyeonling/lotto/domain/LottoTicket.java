@@ -21,5 +21,7 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-
+    List<Lotto> getLottos() {
+        return lottos;
+    }
 }

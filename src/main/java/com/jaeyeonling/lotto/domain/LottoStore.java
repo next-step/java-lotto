@@ -21,4 +21,10 @@ public final class LottoStore {
 
         return lottos;
     }
+
+    public static List<Lotto> buyManual(final Money money,
+                                        final LottoTicket lottoTicket) {
+
+        return null;
+    }
 }
