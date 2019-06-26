@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public enum Rank {
@@ -28,12 +29,20 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch) {
-        List<Rank> result = Arrays.stream(Rank.values())
-                .filter(rank -> rank.getCountOfMatch() == countOfMatch)
-                .collect(Collectors.toList());
-        if (result.size() == 1) {
-            return result.get(0);
+        Optional<Rank> result = Arrays.stream(Rank.values())
+                .filter(rank -> rank.getCountOfMatch() == countOfMatch).findFirst();
+
+        if (result.isPresent()) {
+            return result.get();
         }
         return Rank.NONE;
+    }
+
+    @Override
+    public String toString() {
+        return "Rank{" +
+                "countOfMatch=" + countOfMatch +
+                ", winningMoney=" + winningMoney +
+                '}';
     }
 }
