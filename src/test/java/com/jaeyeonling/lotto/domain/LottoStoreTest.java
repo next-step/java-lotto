@@ -13,7 +13,7 @@ class LottoStoreTest {
 
     @DisplayName("자동 구매 테스트")
     @Test
-    void should_return_buyAotoLottos_when_buyAutoByRemainingMoney() {
+    void should_return_buyAutoLottos_when_buyAutoByRemainingMoney() {
         // given
         final int countOfLotto = 10;
         final Money money = new Money(countOfLotto * Lotto.PRICE_VALUE);
