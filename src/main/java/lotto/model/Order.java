@@ -31,13 +31,13 @@ public class Order {
     }
 
     private void verifyHanPickCount(int handPickCount) {
-        if(this.getAvailableNumberToBuy() < handPickCount) {
+        if (this.getAvailableNumberToBuy() < handPickCount) {
             throw new IllegalArgumentException("그렇게는 구매할 수 없습니다. 돈을 더 내세요.");
         }
     }
 
     private void verifyBuyMinimum(int orderAmount) {
-        if(orderAmount < UNIT_PRICE) {
+        if (orderAmount < UNIT_PRICE) {
             throw new IllegalArgumentException("이걸론 한장도 못사");
         }
     }

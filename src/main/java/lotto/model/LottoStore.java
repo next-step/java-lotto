@@ -18,8 +18,9 @@ public class LottoStore {
         }
         return this.lottos;
     }
+
     private void verifyHanPickCountLimit() {
-        if(this.order.getHandPickCount() < this.lottos.getPickNumbers().size()) {
+        if (this.order.getHandPickCount() < this.lottos.getPickNumbers().size()) {
             throw new IllegalArgumentException("주문 보다 더 많은 숫자를 입력할 수 없습니다.");
         }
     }

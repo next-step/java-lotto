@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 
-public class PickNumbers extends LottoNumbers{
+public class PickNumbers extends LottoNumbers {
 
     private List<Integer> numbers;
 

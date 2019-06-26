@@ -26,7 +26,7 @@ class LottosTest {
         Lottos lottos2 = new Lottos();
         lottos2.add(new PickNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-        lottos1.merge(lottos2);;
+        lottos1.merge(lottos2);
         assertThat(lottos1.getPickNumbers().size()).isEqualTo(2);
     }
 

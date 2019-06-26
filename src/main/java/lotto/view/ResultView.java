@@ -1,6 +1,9 @@
 package lotto.view;
 
-import lotto.model.*;
+import lotto.model.LottoAggregator;
+import lotto.model.LottoRank;
+import lotto.model.Lottos;
+import lotto.model.Order;
 
 import java.util.Arrays;
 
@@ -39,7 +42,7 @@ public class ResultView {
     }
 
     private static String checkBonusMessage(boolean isBonus) {
-        if(isBonus) {
+        if (isBonus) {
             return RESULT_BONUS_MESSAGE;
         }
         return RESULT_MESSAGE;

@@ -20,5 +20,5 @@ public class NumbersGenerator {
         return numbers.stream()
                 .limit(LottoNumbers.LOTTO_NUMBER_SIZE)
                 .collect(Collectors.toList());
-   }
+    }
 }
