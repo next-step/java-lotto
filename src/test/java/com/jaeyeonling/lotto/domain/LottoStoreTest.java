@@ -1,11 +1,13 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.LowMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoStoreTest {
 
@@ -41,4 +43,20 @@ class LottoStoreTest {
         assertThat(lottoTicket.getLottos()).containsAll(lottos);
     }
 
+    @DisplayName("수동 구매 시 잔액 부족 예외처리")
+    @Test
+    void should_return_LowMoneyException_when_buyManual() {
+        final List<String> lottoNumbers = List.of(
+                "1,2,3,4,5,6",
+                "2,3,4,5,6,7",
+                "3,4,5,6,7,8"
+        );
+        final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        final Money money = new Money(0);
+
+        assertThatExceptionOfType(LowMoneyException.class)
+                .isThrownBy(() -> {
+                    LottoStore.buyManual(money, lottoTicket);
+                });
+    }
 }
