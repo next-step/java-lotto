@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class WinningLotto {
+
     private final Lotto lotto;
     private final Number bonus;
 

@@ -17,7 +17,7 @@ public class LottoMachineTest {
     @DisplayName("잔액 부족으로 로또 구매 실패")
     @Test
     void buyLottoFail() {
-        purchaseRequest = new PurchaseRequest(Money.won(500), null);
+        purchaseRequest = PurchaseRequest.of(Money.won(500), null);
         LottoTicket lottoTicket = lottoMachine.buy(purchaseRequest);
         assertThat(lottoTicket.getLottos()).hasSize(0);
     }
@@ -25,7 +25,7 @@ public class LottoMachineTest {
     @DisplayName("로또 한장을 자동으로 구매한다")
     @Test
     void buyLottoSuccess() {
-        purchaseRequest = new PurchaseRequest(Money.won(1000), null);
+        purchaseRequest = PurchaseRequest.of(Money.won(1000), null);
 
         LottoTicket buyLottos = lottoMachine.buy(purchaseRequest);
 
@@ -36,7 +36,7 @@ public class LottoMachineTest {
     @Test
     void buyManualLotto() {
         List<String> numbersOfLotto = Arrays.asList("1,2,3,4,5,6");
-        purchaseRequest = new PurchaseRequest(Money.won(1000), numbersOfLotto);
+        purchaseRequest = PurchaseRequest.of(Money.won(1000), numbersOfLotto);
 
         LottoTicket buyLottos = lottoMachine.buy(purchaseRequest);
 
@@ -45,12 +45,12 @@ public class LottoMachineTest {
                 .contains(ofNumbers(1, 2, 3, 4, 5, 6));
     }
 
-    @DisplayName("수동으로 1장, 자동으로 1장 구매한다")
+    @DisplayName("수동으로 1장, 자동으로 2장 구매한다")
     @Test
     void buyMultiLotto() {
         Money money = Money.won(3000);
         List<String> numbersOfLotto = Arrays.asList("1,2,3,4,5,6");
-        PurchaseRequest purchaseRequest = new PurchaseRequest(money, numbersOfLotto);
+        PurchaseRequest purchaseRequest = PurchaseRequest.of(money, numbersOfLotto);
 
         LottoTicket lottoTicket = lottoMachine.buy(purchaseRequest);
 

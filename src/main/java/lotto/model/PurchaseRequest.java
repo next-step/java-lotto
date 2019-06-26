@@ -8,17 +8,24 @@ public class PurchaseRequest {
     private Money money;
     private List<String> manualLottoInfo;
 
-    PurchaseRequest(Money money, List<String> manualLottoInfo) {
+    private PurchaseRequest(Money money, List<String> manualLottoInfo) {
         this.money = money;
         this.manualLottoInfo = manualLottoInfo;
     }
 
     public static PurchaseRequest of(Money money, List<String> manualLottoInfo) {
+        if (hasManualLotto(manualLottoInfo)) {
+            money = money.subtract(Money.calculateTotalByLotto(manualLottoInfo.size()));
+        }
         return new PurchaseRequest(money, manualLottoInfo);
     }
 
-    public boolean hasManualLotto() {
+    private static boolean hasManualLotto(List<String> manualLottoInfo) {
         return !(manualLottoInfo == null || manualLottoInfo.isEmpty());
+    }
+
+    public boolean hasManualLotto() {
+        return hasManualLotto(manualLottoInfo);
     }
 
     public int countOfManualLotto() {
@@ -26,11 +33,7 @@ public class PurchaseRequest {
     }
 
     public int countOfRandomLotto() {
-        return money.countAvailableLotto() - countOfManualLotto();
-    }
-
-    public void spend(Money money) {
-        this.money = this.money.subtract(money);
+        return money.countAvailableByLotto() - countOfManualLotto();
     }
 
     public Money getMoney() {
@@ -40,4 +43,5 @@ public class PurchaseRequest {
     public List<String> getManualLottoInfo() {
         return manualLottoInfo;
     }
+
 }

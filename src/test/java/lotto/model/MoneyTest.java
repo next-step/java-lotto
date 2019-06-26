@@ -32,7 +32,7 @@ public class MoneyTest {
     void countAvailable(long amount) {
         Money money = Money.won(amount);
 
-        long count = money.countAvailableLotto();
+        long count = money.countAvailableByLotto();
 
         assertThat(count).isEqualTo(1);
     }
@@ -42,7 +42,7 @@ public class MoneyTest {
     void calculateTotalByBuyLotto() {
         int count = 5;
 
-        Money result =Money.calculateTotal(count);
+        Money result =Money.calculateTotalByLotto(count);
 
         assertThat(result).isEqualTo(Money.won(5000));
     }

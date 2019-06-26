@@ -24,7 +24,7 @@ public class LottoResult {
     }
 
     Money calculateTotalBuyMoney() {
-        return Money.calculateTotal(lottoCount);
+        return Money.calculateTotalByLotto(lottoCount);
     }
 
     Money calculateTotalWinningMoney() {

@@ -2,6 +2,8 @@ package lotto.model.generator;
 
 import lotto.model.Lotto;
 
+import java.util.List;
+
 public interface LottoGenerator {
-    Lotto generator();
+    List<Lotto> generator();
 }

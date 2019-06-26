@@ -2,25 +2,29 @@ package lotto.model.generator;
 
 import lotto.exception.NumbersIsEmptyException;
 import lotto.model.Lotto;
-import lotto.model.Number;
+import lotto.model.PurchaseRequest;
 import lotto.utils.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ManualGenerator implements LottoGenerator {
 
-    private final List<Number> numbers;
+    private List<String> numbers;
 
-    public ManualGenerator(String numberOfLotto) {
-        if (numberOfLotto == null || numberOfLotto.isEmpty()) {
+    public ManualGenerator(List<String> numbers) {
+        if (numbers == null || numbers.isEmpty()) {
             throw new NumbersIsEmptyException();
         }
-        this.numbers = StringUtils.parseNumbers(numberOfLotto);
+        this.numbers = numbers;
     }
 
     @Override
-    public Lotto generator() {
-        return Lotto.from(numbers);
+    public List<Lotto> generator() {
+        return numbers.stream()
+                .map(StringUtils::parseNumbers)
+                .map(Lotto::from)
+                .collect(Collectors.toList());
     }
 }

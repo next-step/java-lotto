@@ -20,28 +20,28 @@ public class Money {
         return new Money(amount);
     }
 
-    static Money calculateTotal(long count) {
+    static Money calculateTotalByLotto(long count) {
         return Lotto.PRICE.times(count);
     }
 
-    public int countAvailableLotto() {
+    public int countAvailableByLotto() {
         return (int) (this.amount / Lotto.PRICE.amount);
     }
 
 
-    public Money plus(Money money) {
+    Money plus(Money money) {
         return new Money(this.amount + money.amount);
     }
 
-    public Money times(long count) {
+    Money times(long count) {
         return new Money(amount * count);
     }
 
-    public Money subtract(Money money) {
+    Money subtract(Money money) {
         return new Money(amount - money.amount);
     }
 
-    public double divide(Money money) {
+    double divide(Money money) {
         if (Money.ZERO.amount == money.amount) {
             return 0;
         }

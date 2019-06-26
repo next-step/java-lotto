@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.model.generator.WinningGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,12 +19,12 @@ public class Application {
         PurchaseRequest purchaseRequest = PurchaseRequest.of(moneyToBuy, manual);
         OutputView.printNumberOfBuyLotto(purchaseRequest);
 
-        LottoTicket lottoTicket = lottoMachine.buy(PurchaseRequest.of(moneyToBuy, manual));
+        LottoTicket lottoTicket = lottoMachine.buy(purchaseRequest);
         OutputView.printLottoTicket(lottoTicket);
 
         String inputOfNumbers = InputView.askOfWinningNumbers();
         int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
-        WinningLotto winningLotto = LottoMachine.generateWinningLotto(inputOfNumbers, inputOfBonusNumber);
+        WinningLotto winningLotto = WinningGenerator.generate(inputOfNumbers, inputOfBonusNumber);
 
         LottoResult result = lottoTicket.result(winningLotto);
         OutputView.printReport(result);
