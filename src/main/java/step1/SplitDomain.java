@@ -5,6 +5,12 @@ import java.util.regex.Pattern;
 
 public class SplitDomain {
 
+    private ValidationCheck validationCheck = new ValidationCheck();
+    private static final String CUSTOM_SPLIT = "//(.)\n(.*)";
+    private static final int CUSTOM_FIRST_GROUP = 1;
+    private static final int CUSTOM_SECOND_GROUP = 2;
+
+
     public int[] checkSplitInputNumber(String inputNumbers) {
         if (!inputNumbers.contains(",") && !inputNumbers.contains(":")) {
             return customizeSplitInputNumber(inputNumbers);
@@ -27,7 +33,7 @@ public class SplitDomain {
             return changeType(basicSplitInputNumber);
         }
         if (inputNumbers.contains(":")) {
-            String[] basicSplitInputNumber = inputNumbers.split(",");
+            String[] basicSplitInputNumber = inputNumbers.split(":");
             return changeType(basicSplitInputNumber);
         }
 
@@ -35,10 +41,10 @@ public class SplitDomain {
     }
 
     public int[] customizeSplitInputNumber(String inputNumbers) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputNumbers);
+        Matcher m = Pattern.compile(CUSTOM_SPLIT).matcher(inputNumbers);
         if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] customizeNumber = m.group(2).split(customDelimiter);
+            String customDelimiter = m.group(CUSTOM_FIRST_GROUP);
+            String[] customizeNumber = m.group(CUSTOM_SECOND_GROUP).split(customDelimiter);
             return changeType(customizeNumber);
         }
         return onlyOneInputNumber(inputNumbers);
@@ -51,9 +57,12 @@ public class SplitDomain {
 
     private int[] changeType(String[] splitNumber) {
         int[] inputNumbers = new int[splitNumber.length];
+
         for (int index = 0; index < splitNumber.length; index++) {
             inputNumbers[index] = Integer.parseInt(splitNumber[index]);
+            validationCheck.checkNegative(inputNumbers[index]);
         }
+
         return inputNumbers;
     }
 
