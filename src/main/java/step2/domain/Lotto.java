@@ -5,30 +5,69 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> lottoNumbers;
+    private static final Integer LOTTO_NUMBERS_SIZE = 6;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static Lotto create(LottoGenerator generator) {
-        return generator.generate();
+    public Lotto(Lotto lotto) {
+        validateSize(lotto.lottoNumbers);
+        this.lottoNumbers = lotto.getLottoNumbers();
     }
 
-    public List<Integer> getLottoNumbers() {
+    private void validateSize(final List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개가 필요합니다. 입력된 로또 번호 갯수 : " + lottoNumbers.size());
+        }
+    }
+
+    public static Lotto create() {
+        return LottoGenerator.generate();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
 
-    public LottoRank matchLotto(WinningLotto lotto) {
-        final long matchCount = lottoNumbers.stream()
-                                            .filter(number -> match(number, lotto.getLotto()))
-                                            .count();
+    public LottoRank matchLottoNumber(WinningLotto lotto) {
+        final long count = matchCount(lotto.getLotto());
+        LottoRank rank = LottoRank.matchOf((int) count);
 
-        return LottoRank.matchOf((int) matchCount);
+        if (isStopBonusTrack(rank)) {
+            return rank;
+        }
+
+        BonusNumber bonusNumber = lotto.getBonusNumber().orElseThrow(() -> new IllegalArgumentException("bonus number 가 필요합니다."));
+        return matchBonusNumber(rank, bonusNumber);
     }
 
-    private boolean match(final int answerNumber, final Lotto lotto) {
-        return lotto.lottoNumbers.contains(answerNumber);
+    private long matchCount(final Lotto lotto) {
+        return this.lottoNumbers.stream()
+                                .filter(lotto.lottoNumbers::contains)
+                                .count();
+    }
+
+    private boolean isStopBonusTrack(LottoRank rank) {
+        return !LottoRank.THIRD.equals(rank);
+    }
+
+    private LottoRank matchBonusNumber(final LottoRank rank, final BonusNumber bonusNumber) {
+        validateBonusTrack(rank);
+
+        if (this.lottoNumbers.contains(bonusNumber)) {
+            return LottoRank.SECOND;
+        }
+
+        return rank;
+    }
+
+    private void validateBonusTrack(final LottoRank rank) {
+        if (!LottoRank.THIRD.equals(rank)) {
+            throw new IllegalArgumentException("보너스 번호 매칭은 5개 번호를 맞추었을때 가능합니다.");
+        }
     }
 
     @Override

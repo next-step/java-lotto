@@ -1,8 +1,8 @@
 package step1;
 
-import org.junit.jupiter.api.Test;
+import java.util.List;
 
-import com.sun.tools.javac.util.List;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

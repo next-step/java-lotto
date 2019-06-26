@@ -7,14 +7,16 @@ import java.util.stream.IntStream;
 public class LottoStore {
     public static final Money LOTTO_PRICE = new Money(1000L);
 
-    public List<Lotto> buyLotto(final Money money) {
-        return buyLotto(money, new AutoLottoGenerator());
-    }
-
-    public List<Lotto> buyLotto(final Money money, final LottoGenerator generator) {
+    public Lottos buyLotto(final Money money) {
         validateMoney(money);
         final int quantity = getLottoQuantity(money);
-        return makeLottos(quantity, generator);
+        return makeLottos(quantity);
+    }
+
+    public Lottos buyLotto(final Money money, ChooseLottos chooseLottos) {
+        validateMoney(money);
+        final int quantity = getLottoQuantity(money);
+        return new Lottos(giveLottos(chooseLottos, quantity));
     }
 
     private void validateMoney(final Money money) {
@@ -27,9 +29,13 @@ public class LottoStore {
         return (int) (money.getMoney() / LOTTO_PRICE.getMoney());
     }
 
-    private List<Lotto> makeLottos(final int quantity, final LottoGenerator generator) {
-        return IntStream.range(0, quantity)
-                        .mapToObj(i -> Lotto.create(generator))
-                        .collect(Collectors.toList());
+    private Lottos makeLottos(final int quantity) {
+        return new Lottos(IntStream.range(0, quantity)
+                                   .mapToObj(i -> Lotto.create())
+                                   .collect(Collectors.toList()));
+    }
+
+    private List<Lotto> giveLottos(final ChooseLottos chooseLottos, final int quantity) {
+        return chooseLottos.getLottos().subList(0, quantity);
     }
 }
