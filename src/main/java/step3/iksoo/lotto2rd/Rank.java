@@ -39,15 +39,17 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank[] ranks = values();
         return Arrays.stream(ranks)
-                .filter(n -> n.getCountOfMatch() == countOfMatch)
-                .map(n -> {
-                    if (n.getCountOfMatch() == THIRD.getCountOfMatch()) {
-                        return matchBonus ? SECOND : THIRD;
-                    }
-                    return n;
-                })
+                .sorted(Comparator.reverseOrder())
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .map(rank -> checkRank(rank, matchBonus))
                 .findAny()
                 .orElse(Rank.FAIL);
+    }
+
+    private static Rank checkRank(Rank rank, boolean matchBonus) {
+        if(rank == THIRD && matchBonus)
+            return SECOND;
+        return rank;
     }
 
     public int prizeAmount(int winCount) {
