@@ -16,12 +16,17 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
 
+    public int getNumberOfMatchedToLuckyNumber(LottoTicket luckyNumber) {
+        return (int) luckyNumber.getLottoTicket().stream()
+                .filter(lottoTicket::contains)
+                .count();
+    }
+
     private void validationNumberSize(List<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LottoTicketGenerator.BASIC_LOTTO_SIZE) {
             throw new IllegalArgumentException(AlERT_DIFFERENT_SIZE_OF_NUMBERS);
         }
     }
-
     private void validationNumberOverlap(List<LottoNumber> lottoTicket) {
         long SizeOfLottoTicket = lottoTicket.stream()
                 .mapToLong(LottoNumber::getNumber)
@@ -31,12 +36,6 @@ public class LottoTicket {
         if (SizeOfLottoTicket != LottoTicketGenerator.BASIC_LOTTO_SIZE) {
             throw new IllegalArgumentException(ALERT_NUMBER_OVERLAP);
         }
-    }
-
-    public int getNumberOfMatchedToLuckyNumber(LottoTicket luckyNumber) {
-        return (int) luckyNumber.getLottoTicket().stream()
-                .filter(lottoTicket::contains)
-                .count();
     }
 
     public List<LottoNumber> getLottoTicket() {

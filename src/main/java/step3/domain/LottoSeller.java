@@ -31,18 +31,6 @@ public class LottoSeller {
         return LottoTicketGenerator.issue(lottoTicket);
     }
 
-//    public static Map<LottoRank, List<LottoTicket>> getLottoResult(List<LottoTicket> lottoTickets, LottoTicket luckyNumber) {
-//        Map<LottoRank, List<LottoTicket>> lottoResultMap = new HashMap<>();
-//
-//        for (LottoTicket ticket : lottoTickets) {
-//            LottoRank lottoRank = LottoRank.from(ticket.getNumberOfMatchedToLuckyNumber(luckyNumber));
-//            List<LottoTicket> ticketsCorrespondingToRank = lottoResultMap.getOrDefault(lottoRank, new ArrayList<>());
-//            ticketsCorrespondingToRank.add(ticket);
-//            lottoResultMap.put(lottoRank, ticketsCorrespondingToRank);
-//        }
-//        return lottoResultMap;
-//    }
-
     private static void validationInputMoney(int inputMoney) {
         if (inputMoney < PRICE_OF_A_LOTTO_TICKET) {
             throw new IllegalArgumentException(ALERT_MISSING_MONEY);

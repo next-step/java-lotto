@@ -22,7 +22,7 @@ public class LottoApplication {
         LottoTicket luckyNumber = LottoSeller.getLuckyNumber(InputView.askLuckyNumber());
         ResultSheet result = ResultSheet.getResult(lottoTickets, luckyNumber);
 
-        OutputView.printResult(result, numberOfTicketsToBuy);
+        OutputView.printResult(result);
     }
 }
 
