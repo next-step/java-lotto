@@ -1,5 +1,7 @@
 package calculator;
 
+import model.NumberElementCollection;
+
 public class ExpressionParser {
 
     public static NumberElementCollection parse(String expression) {
