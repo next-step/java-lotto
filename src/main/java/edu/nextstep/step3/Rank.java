@@ -1,7 +1,10 @@
 package edu.nextstep.step3;
 
+import edu.nextstep.step3.domain.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -37,12 +40,20 @@ public enum Rank {
         Rank[] rankType = Rank.values();
         return Arrays.stream(rankType)
                 .filter(rank -> rank.match == rankNumber)
+                .filter(rank -> !rank.getBonusRank())
                 .findFirst()
                 .orElse(Rank.ZERO);
     }
 
     public static List<Rank> getRanks() {
         return Arrays.stream(Rank.values()).collect(Collectors.toList());
+    }
+
+    public static int matchOfCount(Map<LottoNumber, Rank> lotteryInfo, Rank rank) {
+        return lotteryInfo.values().stream()
+                .filter(value -> value.getMatch() == rank.getMatch())
+                .collect(Collectors.toList())
+                .size();
     }
 
     public int getLotteryMoney() {
@@ -56,5 +67,4 @@ public enum Rank {
     public boolean getBonusRank() {
         return this.bonusRank;
     }
-
 }
