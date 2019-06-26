@@ -2,6 +2,7 @@ package edu.nextstep.step3;
 
 import edu.nextstep.step3.domain.Lotto;
 import edu.nextstep.step3.domain.LottoNumber;
+import edu.nextstep.step3.domain.LottoStore;
 import edu.nextstep.step3.domain.Money;
 import edu.nextstep.step3.utils.RandomNumberUtils;
 import edu.nextstep.step3.view.InputView;
@@ -31,7 +32,7 @@ public class LottoApplication {
         InputView.printExtractNumber(money.getNumberOfExtract());
 
         // 투입 금액에 따른 로또 개수발행
-        Lotto lottoTikets = RandomNumberUtils.getLotto(money);
+        Lotto lottoTikets = LottoStore.publishLotto(money);
 
         // 발행된 로또 출력
         ResultView.printLottoInfo(lottoTikets);
