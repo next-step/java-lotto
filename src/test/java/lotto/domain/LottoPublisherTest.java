@@ -93,11 +93,11 @@ public class LottoPublisherTest {
 
     @Test
     void rankReward_당첨된로또카운드확인_당첨금액확인() {
-        assertThat(rankReward.getGainRankCounts()[Rank.FIRST.ordinal()]).isEqualTo(0);
-        assertThat(rankReward.getGainRankCounts()[Rank.THIRD.ordinal()]).isEqualTo(0);
-        assertThat(rankReward.getGainRankCounts()[Rank.FOURTH.ordinal()]).isEqualTo(0);
-        assertThat(rankReward.getGainRankCounts()[Rank.FIFTH.ordinal()]).isEqualTo(1);
-        assertThat(rankReward.getGainRankCounts()[Rank.NONE.ordinal()]).isEqualTo(2);
+        assertThat(rankReward.getGainRanksCounts().get(Rank.FIRST)).isEqualTo(0);
+        assertThat(rankReward.getGainRanksCounts().get(Rank.THIRD)).isEqualTo(0);
+        assertThat(rankReward.getGainRanksCounts().get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(rankReward.getGainRanksCounts().get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(rankReward.getGainRanksCounts().get(Rank.NONE)).isEqualTo(2);
         assertThat(rankReward.getRewardWinningMoney()).isEqualTo(5000);
     }
 
