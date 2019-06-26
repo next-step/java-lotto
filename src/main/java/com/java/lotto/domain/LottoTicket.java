@@ -6,11 +6,17 @@ import java.util.List;
 public class LottoTicket {
     List<Integer> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers){
+    public LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public String getLottoNumbers(){
+    public String lottoNumbersToString() {
         return lottoNumbers.toString();
     }
+
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
+
 }
