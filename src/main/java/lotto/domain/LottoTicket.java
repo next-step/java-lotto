@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
+    public static final Long PRICE = 1000L;
+
     private List<Long> lottoNumbers;
 
     private LottoTicket(List<Long> lottoNumbers) {
@@ -40,6 +42,10 @@ public class LottoTicket {
 
     public String getLottoTicketNumbers() {
         return String.join(", ", getNumbers());
+    }
+
+    public boolean existNumber(long number) {
+        return lottoNumbers.contains(number);
     }
 
     private List<String> getNumbers() {

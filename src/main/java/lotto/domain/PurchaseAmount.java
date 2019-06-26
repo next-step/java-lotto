@@ -2,7 +2,6 @@ package lotto.domain;
 
 public class PurchaseAmount {
     private static final Long MAX_PURCHASE_AMOUNT = 100000000L;
-    private static final Long TICKET_PRICE = 1000L;
 
     private Long purchaseAmount;
 
@@ -22,10 +21,12 @@ public class PurchaseAmount {
     }
 
     public int getNumberOfTickets() {
-        return (int) (purchaseAmount / TICKET_PRICE);
+        return (int) (purchaseAmount / LottoTicket.PRICE);
     }
 
     public long getPurchaseAmount() {
         return purchaseAmount;
     }
+
+    public long getUsedPurchaseAmount() { return getNumberOfTickets() * LottoTicket.PRICE; }
 }
