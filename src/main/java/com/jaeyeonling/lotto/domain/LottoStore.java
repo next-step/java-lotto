@@ -12,11 +12,7 @@ public final class LottoStore {
     public static List<Lotto> buyAutoByRemainingMoney(final Money money) {
         final List<Lotto> lottos = new ArrayList<>();
         while (money.canBuy(Lotto.PRICE)) {
-            final Lotto lotto = RANDOM_LOTTO_GENERATOR.generate();
-
-            money.buy(lotto);
-
-            lottos.add(lotto);
+            lottos.add(buyLotto(money, RANDOM_LOTTO_GENERATOR));
         }
 
         return lottos;
@@ -28,13 +24,17 @@ public final class LottoStore {
 
         final List<Lotto> lottos = new ArrayList<>();
         while (manualLottoGenerator.hasNext()) {
-            final Lotto lotto = manualLottoGenerator.generate();
-
-            money.buy(lotto);
-
-            lottos.add(lotto);
+            lottos.add(buyLotto(money, manualLottoGenerator));
         }
 
         return lottos;
+    }
+
+    private static Lotto buyLotto(final Money money,
+                                  final LottoGenerator lottoGenerator) {
+        final Lotto lotto = lottoGenerator.generate();
+        money.buy(lotto);
+
+        return lotto;
     }
 }
