@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.model.Number;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -21,8 +22,8 @@ public class LottoAplication {
 
         LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
 
-        List<Integer> numbers = InputView.inputWinningNumber();
-        int bonusNumber = InputView.winningBonusNumber();
+        List<Number> numbers = InputView.inputWinningNumber();
+        Number bonusNumber = InputView.winningBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
         LottoAggregator lottoAggregator = lottoResultMatcher.matching(winningNumbers);

@@ -5,12 +5,11 @@ import java.util.List;
 public class WinningNumbers extends LottoNumbers {
 
 
-    private List<Integer> numbers;
-    private Integer bonusNumber;
+    private List<Number> numbers;
+    private Number bonusNumber;
 
-    public WinningNumbers(List<Integer> numbers, Integer bonusNumber) {
+    public WinningNumbers(List<Number> numbers, Number bonusNumber) {
         super(numbers);
-        verifyNumber(bonusNumber);
         verifyBonusDuplication(numbers, bonusNumber);
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
@@ -28,7 +27,7 @@ public class WinningNumbers extends LottoNumbers {
         return pickNumbers.contains(bonusNumber);
     }
 
-    private void verifyBonusDuplication(List<Integer> numbers, Integer bonusNumber) {
+    private void verifyBonusDuplication(List<Number> numbers, Number bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("이미 번호가 뽑혀있습니다. ");
         }

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Lottos;
+import lotto.model.Number;
 import lotto.model.Order;
 import lotto.model.PickNumbers;
 
@@ -20,21 +21,18 @@ public class InputView {
     }
 
 
-    public static List<Integer> inputWinningNumber() {
+    public static List<Number> inputWinningNumber() {
         System.out.println("당첨번호를 입력하세요.");
-        scanner = new Scanner(System.in);
         return splitNumbers(scanner.nextLine());
     }
 
-    public static int winningBonusNumber() {
+    public static Number winningBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return new Number(scanner.nextInt());
     }
 
     private static Integer askAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
@@ -53,10 +51,10 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    private static List<Integer> splitNumbers(String stringNumbers) {
+    private static List<Number> splitNumbers(String stringNumbers) {
         return Arrays.stream(stringNumbers.split(","))
                 .mapToInt(Integer::parseInt)
-                .boxed()
+                .mapToObj(Number::new)
                 .collect(Collectors.toList());
     }
 }

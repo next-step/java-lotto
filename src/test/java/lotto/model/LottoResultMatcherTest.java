@@ -14,14 +14,35 @@ public class LottoResultMatcherTest {
     public void checkLotts() {
 
         //Given
-        Lottos lottos = new Lottos();
-        lottos.add(new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 9)));
+        PickNumbers pickNumbers = new PickNumbers(
+                Arrays.asList(
+                        new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6)
+                )
+        );
 
+        WinningNumbers winningNumbers = new WinningNumbers(
+                Arrays.asList(
+                        new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6)
+                ),
+                new Number(7)
+        );
+
+        Lottos lottos = new Lottos();
+        lottos.add(pickNumbers);
         LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
-        WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When
-        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winnerNumbers);
+        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winningNumbers);
 
         //Then
         assertThat(lottoAggregator.get(LottoRank.FIRST)).isEqualTo(1);
@@ -32,14 +53,35 @@ public class LottoResultMatcherTest {
     public void checkBonusLotts() {
 
         //Given
-        Lottos lottos = new Lottos();
-        lottos.add(new PickNumbers(Arrays.asList(4, 5, 6, 7, 8, 10)));
+        PickNumbers pickNumbers = new PickNumbers(
+                Arrays.asList(
+                        new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6)
+                )
+        );
 
+        WinningNumbers winningNumbers = new WinningNumbers(
+                Arrays.asList(
+                        new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(10)
+                ),
+                new Number(6)
+        );
+
+        Lottos lottos = new Lottos();
+        lottos.add(pickNumbers);
         LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
-        WinningNumbers winnerNumbers = new WinningNumbers(Arrays.asList(4, 5, 6, 7, 8, 9), 10);
 
         //When
-        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winnerNumbers);
+        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winningNumbers);
 
         //Then
         assertThat(lottoAggregator.get(LottoRank.SECOND)).isEqualTo(1);
