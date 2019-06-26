@@ -10,11 +10,15 @@ public class InputView {
 
   public static int inputPrice(Scanner scanner) {
     System.out.println("구입금액을 입력해주세요.");
-    try {
-      return Integer.valueOf(scanner.nextLine());
-    } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+    return Integer.valueOf(
+        validateInput(scanner.nextLine()));
+  }
+
+  private static String validateInput(String input) {
+    if (input.isEmpty()) {
+      throw new IllegalArgumentException("잘못된 입력입니다.");
     }
+    return input;
   }
 
   public static List<Integer> winNumbers(Scanner scanner) {

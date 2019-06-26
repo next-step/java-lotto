@@ -16,6 +16,6 @@ public class LottoStatisticsTest {
         Rank.getInstance(4),
         Rank.getInstance(3));
     assertThat(LottoStatistics.profitRate(14000, LottoStatistics.statistics(ranks)))
-        .isEqualTo(55/14);
+        .isEqualTo(55/LottoStore.buyLottoCount(14000));
   }
 }

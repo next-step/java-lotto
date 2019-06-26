@@ -12,8 +12,8 @@ public class LottoTicketsTest {
   @Test
   void winNumberSize() {
     LottoTickets lottoTickets = new LottoTickets(Arrays.asList(
-        new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-        new LottoTicket(Arrays.asList(1, 2, 3, 7, 10, 20))));
+        new LottoTicket(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6))),
+        new LottoTicket(new LottoNumber(Arrays.asList(1, 2, 3, 7, 10, 20)))));
     List<Integer> winNumber = Arrays.asList(1, 2, 3, 6, 33, 40);
 
     List<Rank> ranks = Arrays.asList(
