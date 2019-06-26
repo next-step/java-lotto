@@ -70,5 +70,4 @@ public class Lotto {
                 "numbers=" + numbers +
                 '}';
     }
-
 }

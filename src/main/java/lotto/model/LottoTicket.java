@@ -19,7 +19,7 @@ public class LottoTicket {
     public LottoResult result(WinningLotto winningLotto) {
         List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Prize prize =  winningLotto.match(lotto);
+            Prize prize = winningLotto.match(lotto);
             prizes.add(prize);
         }
         return LottoResult.of(prizes);
