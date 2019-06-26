@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * project      : java-lotto
  * create date  : 2019-06-25 02:27
  */
-class OperatorTest {
+class RankTest {
 
     @DisplayName("Values 값을 얻는다.")
     @Test
     void getValues() {
-        assertThat(Operator.getOperators().get(0) == Operator.THREE).isTrue();
+        assertThat(Rank.getRanks().get(0) == Rank.THREE).isTrue();
     }
 }

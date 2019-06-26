@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -23,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  * project      : java-lotto
  * create date  : 2019-06-24 23:24
  */
-public class LotteryNumberTest {
+public class LottoNumberTest {
 
     private List<Number> numbers;
 
@@ -42,8 +43,17 @@ public class LotteryNumberTest {
     @Test
     void validSize() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LotteryNumber exNumber = new LotteryNumber(numbers);
-        });
+            LottoNumber exNumber = new LottoNumber(numbers);
+        }).withMessageContaining("전달된 숫자가 6개가 아닙니다.");
+    }
+
+    @DisplayName("리스트에 중복된 숫자 제거하기")
+    @Test
+    void validDuplicate() {
+        numbers.add(new Number(5));
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            LottoNumber exNumber = new LottoNumber(numbers);
+        }).withMessageContaining("전달된 숫자가 6개가 아닙니다.");
     }
 
     @DisplayName("전달된 인자값(int type)을 보유하고 있는지 확인한다.")
@@ -51,15 +61,15 @@ public class LotteryNumberTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void contains(int number) {
         numbers.add(new Number(6));
-        LotteryNumber lotteryNumber = new LotteryNumber(numbers);
-        assertThat(lotteryNumber.contains(number)).isTrue();
+        LottoNumber lottoNumber = new LottoNumber(numbers);
+        assertThat(lottoNumber.contains(number)).isTrue();
     }
 
     @DisplayName("ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.")
     @Test
     void contains() {
         numbers.add(new Number(6));
-        LotteryNumber lotteryNumber = new LotteryNumber(numbers);
+        LottoNumber lottoNumber = new LottoNumber(numbers);
 
         List<Number> compareNumber = new ArrayList<>();
 
@@ -69,8 +79,19 @@ public class LotteryNumberTest {
         compareNumber.add(new Number(8));
         compareNumber.add(new Number(10));
         compareNumber.add(new Number(12));
-        ExtractionNumber exNumber = new ExtractionNumber(compareNumber);
+        LottoNumber exNumber = new LottoNumber(compareNumber);
 
-        assertThat(lotteryNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);
+        assertThat(lottoNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);
+    }
+
+    @DisplayName("당첨번호 생성하는 기능")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void createLotteryNumber(int number) {
+        LottoNumber lottoNumber = LottoNumber.createLotteryNumber("1,2,3,4,5,6");
+        assertThat(lottoNumber.stream()
+                .map(Number::getNumber)
+                .collect(Collectors.toList()).contains(number)
+        );
     }
 }

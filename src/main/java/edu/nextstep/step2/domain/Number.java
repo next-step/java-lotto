@@ -25,6 +25,10 @@ public class Number {
         return this.number;
     }
 
+    public boolean comapreTo(int sourceNumber) {
+        return this.number == sourceNumber;
+    }
+
     private void validNumber(int number) {
         if (number < START_RANGE_NUMBER) {
             throw new IllegalArgumentException("0보다 큰 수가 와야합니다.");
@@ -33,9 +37,5 @@ public class Number {
         if (number > FINAL_RANGE_NUMBER) {
             throw new IllegalArgumentException("45이하의 수가 와야합니다.");
         }
-    }
-
-    public boolean comapreTo(int sourceNumber) {
-        return this.number == sourceNumber;
     }
 }

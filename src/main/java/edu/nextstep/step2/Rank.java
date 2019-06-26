@@ -14,8 +14,9 @@ import java.util.stream.Collectors;
  * project      : java-lotto
  * create date  : 2019-06-25 01:53
  */
-public enum Operator {
+public enum Rank {
 
+    ZERO(0, 0),
     THREE(3, 5000),
     FOUR(4, 50000),
     FIVE(5, 1500000),
@@ -24,21 +25,21 @@ public enum Operator {
     private int match;
     private int lotteryMoney;
 
-    Operator(int match, int lotteryMoney) {
+    Rank(int match, int lotteryMoney) {
         this.match = match;
         this.lotteryMoney = lotteryMoney;
     }
 
-    public static Operator matchCheck(int operator) {
-        Operator[] operatorType = Operator.values();
-        return Arrays.stream(operatorType)
-                .filter(oper -> oper.match == operator)
+    public static Rank matchCheck(int rankNumber) {
+        Rank[] rankType = Rank.values();
+        return Arrays.stream(rankType)
+                .filter(rank -> rank.match == rankNumber)
                 .findFirst()
-                .get();
+                .orElse(Rank.ZERO);
     }
 
-    public static List<Operator> getOperators() {
-        return Arrays.stream(Operator.values()).collect(Collectors.toList());
+    public static List<Rank> getRanks() {
+        return Arrays.stream(Rank.values()).collect(Collectors.toList());
     }
 
     public int getLotteryMoney() {

@@ -2,7 +2,7 @@ package edu.nextstep.step2;
 
 import edu.nextstep.step2.utils.RandomNumberUtils;
 import edu.nextstep.step2.view.InputView;
-import edu.nextstep.step2.domain.LotteryNumber;
+import edu.nextstep.step2.domain.LottoNumber;
 import edu.nextstep.step2.domain.Lotto;
 import edu.nextstep.step2.domain.Money;
 import edu.nextstep.step2.view.ResultView;
@@ -27,7 +27,8 @@ public class LottoApplication {
 
     public void run() {
         // 금액 투입
-        Money money = InputView.inputMoney();
+        Money money = new Money(InputView.inputMoney());
+        InputView.printExtractNumber(money.getNumberOfExtract());
 
         // 투입 금액에 따른 로또 개수발행
         Lotto lotto = RandomNumberUtils.getLotto(money);
@@ -36,12 +37,16 @@ public class LottoApplication {
         ResultView.printLottoInfo(lotto);
 
         // 당첨 번호
-        LotteryNumber lotteryNumber = InputView.inputLotteryNumber();
+        String lotteryNumber = InputView.inputLotteryNumber();
+        LottoNumber lottery = LottoNumber.createLotteryNumber(lotteryNumber);
 
         // 당첨 카운트
-        List<Integer> matchCount = lotto.getMatchCountExtractNumberFromLotteryNumber(lotteryNumber);
+        List<Integer> matchCount = lotto.getMatchCountExtractNumberFromLotteryNumber(lottery);
 
         // 당첨내역 출력
-        ResultView.printResult(matchCount, money);
+        ResultView.printLotteryCount(lotto.getIncomeMatchCount(lottery));
+
+        // 당첨 금액
+        ResultView.printIncome(lotto.sumIncome(matchCount, money));
     }
 }

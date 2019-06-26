@@ -1,6 +1,6 @@
 package edu.nextstep.step2.utils;
 
-import edu.nextstep.step2.domain.ExtractionNumber;
+import edu.nextstep.step2.domain.LottoNumber;
 import edu.nextstep.step2.domain.Lotto;
 import edu.nextstep.step2.domain.Money;
 import edu.nextstep.step2.domain.Number;
@@ -26,19 +26,19 @@ public class RandomNumberUtils {
     private static final int VALUE_NUMBER_START_RANGE = 1;
     private static final int VALUE_NUMBER_END_RANGE = 45;
     private static final int EXTRACT_COUNT = 6;
-    private static List<Integer> randomNumber;
+    private static List<Integer> randomNumbers;
 
     public static void initNumber() {
-        randomNumber = new ArrayList<>(IntStream
+        randomNumbers = IntStream
                 .rangeClosed(VALUE_NUMBER_START_RANGE, VALUE_NUMBER_END_RANGE)
                 .boxed()
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     public static Lotto getLotto(Money money) {
         initNumber();
 
-        List<ExtractionNumber> exNumber = new ArrayList<>();
+        List<LottoNumber> exNumber = new ArrayList<>();
         int extractCount = money.getNumberOfExtract();
         for (int i = 0; i < extractCount; i++) {
             exNumber.add(getExtractNumber());
@@ -46,16 +46,16 @@ public class RandomNumberUtils {
         return new Lotto(exNumber);
     }
 
-    private static ExtractionNumber getExtractNumber() {
+    private static LottoNumber getExtractNumber() {
         shuffle();
         List<Number> numbers = new ArrayList<>();
         for (int i = 0; i < EXTRACT_COUNT; i++) {
-            numbers.add(new Number(randomNumber.get(i)));
+            numbers.add(new Number(randomNumbers.get(i)));
         }
-        return new ExtractionNumber(numbers);
+        return new LottoNumber(numbers);
     }
 
     private static void shuffle() {
-        Collections.shuffle(randomNumber);
+        Collections.shuffle(randomNumbers);
     }
 }

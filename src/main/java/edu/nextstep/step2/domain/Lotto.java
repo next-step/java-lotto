@@ -1,8 +1,8 @@
 package edu.nextstep.step2.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import edu.nextstep.step2.Rank;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -18,20 +18,67 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int MATCH_LIMIT_COUNT = 3;
-    private List<ExtractionNumber> lotto;
+    private List<LottoNumber> lotto;
 
-    public Lotto(List<ExtractionNumber> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
         this.lotto = new ArrayList<>(lotto);
     }
 
-    public List<Integer> getMatchCountExtractNumberFromLotteryNumber(LotteryNumber lotteryNumber) {
+    public List<Integer> getMatchCountExtractNumberFromLotteryNumber(LottoNumber lottoNumbers) {
+        return getMatchCount(getMatchLottoNumberCountFromlotteryNumber(lottoNumbers));
+    }
+
+    public Map<Integer, Integer> getIncomeMatchCount(LottoNumber lottoNumbers) {
+        return convertListToMap(getMatchLottoNumberCountFromlotteryNumber(lottoNumbers));
+    }
+
+    public double sumIncome(List<Integer> rank, Money money) {
+        Map<Integer, Integer> count = convertListToMap(rank);
+        int totalIncome = Rank.getRanks().stream()
+                .mapToInt(rankNumber -> printStatisticsResult(rankNumber, count))
+                .sum();
+
+        return (double) totalIncome / (double) money.getInputMoney();
+    }
+
+    public List<LottoNumber> getExtractOfLotto() {
+        return Collections.unmodifiableList(lotto);
+    }
+
+    private List<Integer> getMatchLottoNumberCountFromlotteryNumber(LottoNumber lottoNumbers) {
         return lotto.stream()
-                .map(extractionNumber -> lotteryNumber.compareMatchNumberCount(extractionNumber))
+                .map(lottoNumber -> lottoNumbers.compareMatchNumberCount(lottoNumber))
                 .filter(count -> count >= MATCH_LIMIT_COUNT)
                 .collect(Collectors.toList());
     }
 
-    public List<ExtractionNumber> getExtractOfLotto() {
-        return Collections.unmodifiableList(lotto);
+    private List<Integer> getMatchCount(List<Integer> matchCount) {
+        return matchCount.stream()
+                .peek(count -> Rank.matchCheck(count))
+                .collect(Collectors.toList());
+    }
+
+    private Map<Integer, Integer> convertListToMap(List<Integer> rank) {
+        Map<Integer, Integer> countMap = new HashMap<>();
+
+        Rank.getRanks().forEach(rankValue -> {
+            countMap.put(rankValue.getMatch(), checkValueSize(rank, rankValue.getMatch()));
+        });
+
+        return countMap;
+    }
+
+    private int checkValueSize(List<Integer> rank, int matchNumber) {
+        return rank.stream()
+                .filter(rankNumber -> rankNumber == matchNumber)
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    private int printStatisticsResult(Rank rank, Map<Integer, Integer> count) {
+        int rankLotteryNumber = rank.getMatch();
+        int matchCount = count.containsKey(rankLotteryNumber) ? count.get(rankLotteryNumber) : 0;
+
+        return matchCount * Rank.matchCheck(rankLotteryNumber).getLotteryMoney();
     }
 }
