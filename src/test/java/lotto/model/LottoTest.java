@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.ConflictLottoNumberException;
+import lotto.exception.DuplicatetLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,7 +27,7 @@ public class LottoTest {
   @Test
   @DisplayName("로또 번호 중에 중복되는 번호가 있는지 확인")
   void conflictLottoNumber() {
-    assertThatExceptionOfType(ConflictLottoNumberException.class).isThrownBy(() -> {
+    assertThatExceptionOfType(DuplicatetLottoNumberException.class).isThrownBy(() -> {
       List<Integer> lottoNumbers = Arrays.asList(1,2,3,3,2,1);
       new Lotto(lottoNumbers);
     });
