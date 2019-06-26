@@ -28,22 +28,6 @@ public class LottoTicketGeneratorTest {
     }
 
     @Test
-    void 생성된_로또번호_45개를_섞는다() {
-        //Given
-        List<Integer> testNumbers = new ArrayList<>();
-        testNumbers.add(1);
-        testNumbers.add(2);
-        testNumbers.add(3);
-
-        //When
-        LottoTicketGenerator.shuffleLottoBalls(testNumbers);
-
-        //Then
-//        assertThat(testNumbers.get(0)).isNotEqualTo(1);
-        //TODO: 이 테스트는 완전하지 않습니다. 셔플링을 어떻게 테스트하면 좋을까요
-    }
-
-    @Test
     void 로또번호가_담긴_리스트로부터_6개의_숫자를_추출하여_리스트에_담는다() {
         //Given
         List<Integer> lottoBalls = LottoBalls.getLottoBalls();
