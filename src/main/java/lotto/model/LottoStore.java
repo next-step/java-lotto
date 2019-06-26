@@ -12,8 +12,9 @@ public class LottoStore {
     }
 
     public Lottos buyAutoPick() {
+        NumbersGenerator numbersGenerator = new NumbersGenerator();
         for (int i = 0; i < order.getAutoPickCount(); i++) {
-            lottos.add(new PickNumbers(NumbersGenerator.autoGenerate()));
+            lottos.add(new PickNumbers(numbersGenerator.autoGenerate()));
         }
         return this.lottos;
     }

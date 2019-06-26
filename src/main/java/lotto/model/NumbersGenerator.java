@@ -7,10 +7,15 @@ import java.util.stream.IntStream;
 
 public class NumbersGenerator {
 
-    public static List<Integer> autoGenerate() {
-        List<Integer> numbers = IntStream.rangeClosed(LottoNumbers.MIN, LottoNumbers.MAX)
+    private List<Integer> numbers;
+
+    public NumbersGenerator() {
+        numbers = IntStream.rangeClosed(LottoNumbers.MIN, LottoNumbers.MAX)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public List<Integer> autoGenerate() {
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(LottoNumbers.LOTTO_NUMBER_SIZE)
