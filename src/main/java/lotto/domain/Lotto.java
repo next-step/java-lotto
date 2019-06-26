@@ -27,6 +27,21 @@ public class Lotto {
         }
     }
 
+    Rank getRank(List<Integer> winNumbers) {
+        int sameWinNumberCount = 0;
+        for (Integer winNumber : winNumbers) {
+            sameWinNumberCount = getSameWinNumbers(winNumber, sameWinNumberCount);
+        }
+        return Rank.valueOf(sameWinNumberCount);
+    }
+
+    private int getSameWinNumbers(Integer winNumber, int sameWinNumberCount) {
+        if (numbers.contains(winNumber)) {
+            sameWinNumberCount++;
+        }
+        return sameWinNumberCount;
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
