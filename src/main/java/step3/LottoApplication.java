@@ -20,8 +20,9 @@ public class LottoApplication {
         OutputView.printLottoTickets(lottoTickets);
 
         LottoTicket luckyNumber = LottoSeller.getLuckyNumber(InputView.askLuckyNumber());
-        ResultSheet result = ResultSheet.getResult(lottoTickets, luckyNumber);
+        int bonusNumber = InputView.askBonusNumber();
 
+        ResultSheet result = ResultSheet.getResult(lottoTickets, luckyNumber, bonusNumber);
         OutputView.printResult(result);
     }
 }

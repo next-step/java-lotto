@@ -22,7 +22,6 @@ public enum LottoRank {
     public static LottoRank from(int countMatchedNumbers, boolean isMatchedToBonusNumber) {
         if (countMatchedNumbers == 5 && isMatchedToBonusNumber) {
             return Arrays.stream(LottoRank.values())
-//                    .filter(lottoRank -> lottoRank.numberOfMatchedToLuckyNumber == countMatchedNumbers)
                     .filter(lottoRank -> lottoRank.prizeMoney == 30_000_000)
                     .findFirst()
                     .get();

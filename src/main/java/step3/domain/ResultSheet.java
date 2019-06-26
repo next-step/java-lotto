@@ -37,13 +37,6 @@ public class ResultSheet {
                 .count();
     }
 
-//    public boolean isMatchedBonusNumber() {
-//        return resultSheet.keySet().stream()
-//                .map(LottoRank::getNumberOfMatchingNumber)
-//                .filter(integer -> integer == 5)
-//                .filter()
-//    }
-
     public Map<LottoRank, Integer> getResultMap() {
         return resultSheet;
     }

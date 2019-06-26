@@ -28,6 +28,11 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public static int askBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
     private static void printBlackLine() {
         System.out.println();
     }
