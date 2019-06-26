@@ -10,7 +10,7 @@ public class MoneyTest {
   @Test
   public void 금액에따른갯수를_리턴한다() {
     int money = 14000;
-    assertThat(new Money(money).getAvailableQuantity()).isEqualTo(new Quantity(14));
+    assertThat(new Money(money).getAvailableQuantity()).isEqualTo(14);
   }
 
   @Test
