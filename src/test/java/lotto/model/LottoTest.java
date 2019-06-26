@@ -25,8 +25,7 @@ class LottoTest {
 
     @Test
     void getWinningCount() {
-        List<Integer> numbers = Arrays.asList(1, 4, 5, 6, 7, 20);
-        Lotto lotto = new Lotto(numbers);
-        assertThat(lotto.getWinningCount(Arrays.asList(1,4,5,6,7,8))).isEqualTo(5);
+        Lotto lotto = new Lotto(Arrays.asList(1, 4, 5, 6, 7, 20));
+        assertThat(lotto.getWinningCount(Arrays.asList(1, 4, 5, 6, 7, 8))).isEqualTo(5);
     }
 }

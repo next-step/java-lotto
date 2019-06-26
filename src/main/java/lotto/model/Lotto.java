@@ -4,9 +4,7 @@ import java.util.List;
 
 public class Lotto {
 
-
     private List<Integer> numbers;
-
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
@@ -23,20 +21,11 @@ public class Lotto {
         return numbers.size() == 6;
     }
 
-
     public List<Integer> getNumbers() {
         return numbers;
     }
 
     public int getWinningCount(List<Integer> winningNumbers) {
-
-        int winningCount = 0;
-
-        for (Integer winnerNumber : winningNumbers) {
-            if (this.numbers.contains(winnerNumber)) {
-                winningCount++;
-            }
-        }
-        return winningCount;
+        return (int) winningNumbers.stream().filter(winnerNumber -> this.numbers.contains(winnerNumber)).count();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoResultTestProviderTest {
+public class LottoResultProviderTest {
 
     @Test
     void getThreeCorrectResult() {
