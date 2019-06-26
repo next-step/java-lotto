@@ -12,7 +12,7 @@ public class LottoMachine {
         if (purchaseRequest.hasManualLotto()) {
             lottos.addAll(buyManualLotto(purchaseRequest));
         }
-        if (purchaseRequest.countOfRandomLotto() > 0) {
+        if (purchaseRequest.hasRandomLotto()) {
             lottos.addAll(buyRandomLotto(purchaseRequest));
         }
         return LottoTicket.of(lottos);

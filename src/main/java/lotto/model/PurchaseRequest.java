@@ -28,6 +28,10 @@ public class PurchaseRequest {
         return hasManualLotto(manualLottoInfo);
     }
 
+    public boolean hasRandomLotto() {
+        return money.countAvailableByLotto() > MIN_MANUAL_LOTTO_SIZE;
+    }
+
     public int countOfManualLotto() {
         return hasManualLotto() ? manualLottoInfo.size() : MIN_MANUAL_LOTTO_SIZE;
     }
@@ -43,5 +47,4 @@ public class PurchaseRequest {
     public List<String> getManualLottoInfo() {
         return manualLottoInfo;
     }
-
 }
