@@ -50,7 +50,7 @@ public class WinnerLotto {
     }
 
     private void checkNumbersLength(String[] numbers) throws IllegalArgumentException {
-        if (numbers.length != Lotto.MAX_LOTTO_NUM_COUNT) {
+        if (numbers.length != LottoNumber.MAX_LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("6개의 숫자를 쉼표(,)로 구분하여 입력해주세요.");
         }
     }
@@ -63,7 +63,7 @@ public class WinnerLotto {
 
     private void checkLottoNumberRange(String val) throws IllegalArgumentException {
         int lottoNumber = Integer.parseInt(val);
-        if (Lotto.MIN_LOTTO_NUM > lottoNumber || Lotto.MAX_LOTTO_NUM < lottoNumber) {
+        if (LottoNumber.MIN_LOTTO_NUM > lottoNumber || LottoNumber.MAX_LOTTO_NUM < lottoNumber) {
             throw new IllegalArgumentException("1부터 45사이의 숫자만 당첨숫자로 인정이 됩니다.");
         }
     }
@@ -73,7 +73,7 @@ public class WinnerLotto {
         for (int index = 0; index < numbers.length; index++) {
             anotherNums.add(numbers[index]);
         }
-        if (anotherNums.size() != Lotto.MAX_LOTTO_NUM_COUNT) {
+        if (anotherNums.size() != LottoNumber.MAX_LOTTO_NUM_COUNT) {
             throw new IllegalArgumentException("1부터 45사이의 서로 다른 6개의 숫자만 당첨숫자로 인정이 됩니다.");
         }
     }

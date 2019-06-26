@@ -67,7 +67,7 @@ public class LottoPublisherTest {
         for (int i = 0 ; i < purchasePublisher.getBuyLottoCount(); i++) {
             List<Integer> numbers = purchasePublisher.getPublishLotto().get(i).getNumbers();
             List<String> strNumbers = new ArrayList<>();
-            for (int j = 0 ; j < Lotto.MAX_LOTTO_NUM_COUNT; j++) {
+            for (int j = 0 ; j < LottoNumber.MAX_LOTTO_NUM_COUNT; j++) {
                 strNumbers.add(numbers.get(j).toString());
             }
             System.out.println((i+1)+"로또번호["+String.join(",", strNumbers)+"]");

@@ -39,23 +39,10 @@ public class LottoPublisher {
     private List<Lotto> publishLottos(int buyCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int count = 0; count < buyCount; count++) {
-            lottos.add(new Lotto(publishNumbers()));
+            LottoNumber lottoNumber = new LottoNumber();
+            lottos.add(new Lotto(lottoNumber.getNumbers()));
         }
         return lottos;
-    }
-
-    private List<Integer> publishNumbers() {
-        List<Integer> numbers = new ArrayList();
-        for (int lottoNum = Lotto.MIN_LOTTO_NUM; lottoNum <= Lotto.MAX_LOTTO_NUM; lottoNum++) {
-            numbers.add(lottoNum);
-        }
-        Collections.shuffle(numbers);
-        List<Integer> lottoNums = new ArrayList();
-        for (int index = 0; index < Lotto.MAX_LOTTO_NUM_COUNT; index++) {
-            lottoNums.add(numbers.get(index));
-        }
-        Collections.sort(lottoNums);
-        return lottoNums;
     }
 
     public double getRevenueRatio(int rewardWinningMoney) {
