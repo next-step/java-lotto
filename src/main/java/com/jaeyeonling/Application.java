@@ -8,7 +8,6 @@ import com.jaeyeonling.lotto.domain.LottoStore;
 import com.jaeyeonling.lotto.domain.LottoTicket;
 import com.jaeyeonling.lotto.domain.Money;
 import com.jaeyeonling.lotto.domain.WinningLotto;
-import com.jaeyeonling.lotto.utils.ListUtils;
 import com.jaeyeonling.lotto.view.ConsoleInputView;
 import com.jaeyeonling.lotto.view.ConsoleOutputView;
 
@@ -20,10 +19,8 @@ public class Application {
         final Money money = ConsoleInputView.readMoney();
         final LottoTicket lottoTicket = ConsoleInputView.readLottoTicket();
 
-        final List<Lotto> manualLottos = LottoStore.buyManual(money, lottoTicket);
-        final List<Lotto> autoLottos = LottoStore.buyAutoByRemainingMoney(money);
-
-        ConsoleOutputView.printBuyingLotto(manualLottos, autoLottos);
+        final List<Lotto> lottos = LottoStore.buy(money, lottoTicket);
+        ConsoleOutputView.printBuyingLotto(lottoTicket.lottoSize(), lottos);
 
         final Lotto inputWinningLotto = ConsoleInputView.readWinningLotto();
         final LottoNumber inputBonusLottoNumber = ConsoleInputView.readBonusLottoNumber();
@@ -32,7 +29,7 @@ public class Application {
 
         final LottoAnalyzer analyzer = new LottoAnalyzer(winningLotto);
 
-        final LottoGameReport report = analyzer.analyze(ListUtils.concat(manualLottos, autoLottos));
+        final LottoGameReport report = analyzer.analyze(lottos);
          ConsoleOutputView.printReport(report);
     }
 }

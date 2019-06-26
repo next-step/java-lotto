@@ -17,16 +17,16 @@ public class ManualLottoGenerator extends PaymentLottoGenerator {
         this(lottoTicket.getLottos());
     }
 
-    public boolean hasNext() {
-        return lottos.hasNext();
-    }
-
     @Override
-    Lotto generate() {
+    protected Lotto generate() {
         if (!hasNext()) {
             throw new NoSuchLottoException();
         }
 
         return lottos.next();
+    }
+
+    private boolean hasNext() {
+        return lottos.hasNext();
     }
 }

@@ -2,7 +2,7 @@ package com.jaeyeonling.lotto.domain;
 
 abstract class PaymentLottoGenerator implements LottoGenerator {
 
-    abstract Lotto generate();
+    protected abstract Lotto generate();
 
     @Override
     public Lotto generate(final Money money) {

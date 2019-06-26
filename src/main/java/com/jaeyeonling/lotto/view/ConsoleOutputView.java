@@ -20,12 +20,11 @@ public final class ConsoleOutputView {
 
     private ConsoleOutputView() { }
 
-    public static void printBuyingLotto(final List<Lotto> manualLottos,
-                                        final List<Lotto> autoLottos) {
+    public static void printBuyingLotto(final int manualLottoSize,
+                                        final List<Lotto> lottos) {
         ConsoleOutputView.newline();
-        print(String.format(BUYING_ALERT_MESSAGE, manualLottos.size(), autoLottos.size()));
-        manualLottos.forEach(ConsoleOutputView::print);
-        autoLottos.forEach(ConsoleOutputView::print);
+        print(String.format(BUYING_ALERT_MESSAGE, manualLottoSize, lottos.size() - manualLottoSize));
+        lottos.forEach(ConsoleOutputView::print);
     }
 
     public static void printReport(final LottoGameReport report) {

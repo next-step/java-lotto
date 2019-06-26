@@ -27,7 +27,6 @@ class LottoStoreTest {
         assertThat(lottos).hasSize(countOfLotto);
     }
 
-
     @DisplayName("수동 구매 테스트")
     @Test
     void should_return_buyManualLottos_when_buyManual() {
@@ -39,7 +38,7 @@ class LottoStoreTest {
         final LottoTicket lottoTicket = LottoTicket.of(lottoNumbers);
         final Money money = new Money(lottoNumbers.size() * Lotto.PRICE_VALUE);
 
-        final List<Lotto> lottos = LottoStore.buyManual(money, lottoTicket);
+        final List<Lotto> lottos = LottoStore.buy(money, lottoTicket);
 
         assertThat(lottos).hasSameSizeAs(lottoNumbers);
         assertThat(lottoTicket.getLottos()).containsAll(lottos);
@@ -58,7 +57,7 @@ class LottoStoreTest {
 
         assertThatExceptionOfType(LowMoneyException.class)
                 .isThrownBy(() -> {
-                    LottoStore.buyManual(money, lottoTicket);
+                    LottoStore.buy(money, lottoTicket);
                 });
     }
 

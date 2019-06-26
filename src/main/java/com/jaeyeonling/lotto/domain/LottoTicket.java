@@ -39,6 +39,10 @@ public class LottoTicket {
         return EMPTY;
     }
 
+    public int lottoSize() {
+        return lottos.size();
+    }
+
     List<Lotto> getLottos() {
         return lottos;
     }

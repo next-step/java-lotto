@@ -9,29 +9,26 @@ public final class LottoStore {
 
     private LottoStore() { }
 
+    public static List<Lotto> buy(final Money money,
+                                  final LottoTicket lottoTicket) {
+        final LottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoTicket);
+
+        final List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoTicket.lottoSize(); i++) {
+            lottos.add(manualLottoGenerator.generate(money));
+        }
+
+        lottos.addAll(buyAutoByRemainingMoney(money));
+
+        return lottos;
+    }
+
     public static List<Lotto> buyAutoByRemainingMoney(final Money money) {
         final List<Lotto> lottos = new ArrayList<>();
         while (money.canBuy(Lotto.PRICE)) {
-            lottos.add(buyLotto(money, RANDOM_LOTTO_GENERATOR));
+            lottos.add(RANDOM_LOTTO_GENERATOR.generate(money));
         }
 
         return lottos;
-    }
-
-    public static List<Lotto> buyManual(final Money money,
-                                        final LottoTicket lottoTicket) {
-        final ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoTicket);
-
-        final List<Lotto> lottos = new ArrayList<>();
-        while (manualLottoGenerator.hasNext()) {
-            lottos.add(buyLotto(money, manualLottoGenerator));
-        }
-
-        return lottos;
-    }
-
-    private static Lotto buyLotto(final Money money,
-                                  final LottoGenerator lottoGenerator) {
-        return lottoGenerator.generate(money);
     }
 }
