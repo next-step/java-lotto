@@ -3,7 +3,6 @@ package step3.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ResultSheet {
 
@@ -28,9 +27,14 @@ public class ResultSheet {
         return resultSheet.keySet()
                 .stream()
                 .map(LottoRank::getPrizeMoney)
-                .reduce(((prize1, prize2) -> prize1 + prize2))
+                .reduce(Integer::sum)
                 .get();
+    }
 
+    public int getTotalTicketsBought() {
+        return (int) resultSheet.values()
+                .stream()
+                .count();
     }
 
     public Map<LottoRank, Integer> getResultMap() {

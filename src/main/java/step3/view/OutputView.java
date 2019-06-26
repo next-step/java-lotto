@@ -35,7 +35,7 @@ public class OutputView {
         }
 
         System.out.println(String.format(MESSAGE_FOR_EARNING_RATE,
-                (double) result.getTotalPrizeMoney() / (numberOfTotalTickets * PRICE_FOR_A_LOTTO_TICKET)));
+                (double) result.getTotalPrizeMoney() / result.getTotalTicketsBought()));
     }
 
 }
