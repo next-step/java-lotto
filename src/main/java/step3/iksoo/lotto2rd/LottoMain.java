@@ -14,7 +14,7 @@ public class LottoMain {
         OutputView.printLottos(lottoes.getLottoes());
 
         List<Integer> winNumbers = getKnowWinnerNumbers();
-        int bonusBall = getKnowBonusBall();
+        int bonusBall = getKnowBonusBall(winNumbers);
 
         MatchResult matchResult = new MatchResult(lottoes.checkLotteryWin(winNumbers, bonusBall));
         OutputView.printResult(matchResult.getMatchResult());
@@ -48,8 +48,15 @@ public class LottoMain {
         return winnerNumbers;
     }
 
-    private static int getKnowBonusBall() {
+    private static int getKnowBonusBall(List<Integer> winnerNumbers) {
         OutputView.printAskBonusBall();
-        return InputView.inputNumber();
+        int bonusBall = InputView.inputNumber();
+
+        winnerNumbers.stream()
+                .filter(number -> number == bonusBall)
+                .peek(dos -> {throw new IllegalArgumentException("보너스볼 번호가 당첨 번호의 숫자와 동일합니다.");})
+                .findAny();
+
+        return bonusBall;
     }
 }
