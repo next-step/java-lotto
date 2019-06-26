@@ -3,7 +3,6 @@ package edu.nextstep.step3.domain;
 import edu.nextstep.step3.Rank;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -52,12 +51,5 @@ public class Lotto {
 
     public List<LottoNumber> getExtractOfLotto() {
         return Collections.unmodifiableList(lotto);
-    }
-
-    private int checkValueSize(List<Integer> rank, int matchNumber) {
-        return rank.stream()
-                .filter(rankNumber -> rankNumber == matchNumber)
-                .collect(Collectors.toList())
-                .size();
     }
 }
