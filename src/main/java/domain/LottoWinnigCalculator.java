@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +10,19 @@ public class LottoWinnigCalculator {
     private final static int SUBSTR_POINT_TWO = 2;
 
     private static double winningRevenue;
+    private static Integer[] countsOfWinningResult;
+
+    // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
+    public static void getCountsWinningResult(ArrayList<LottoNumber> lottoNumber, int[] winnigNumber, int purchaseAmount) {
+        countsOfWinningResult = new Integer[lottoNumber.size()];
+        for (int i = 0; i < lottoNumber.size(); i++) {
+            countsOfWinningResult[i] = lottoNumber.get(i).compareWinningNumber(winnigNumber);
+        }
+        calculatorTotalWinningRevenue(purchaseAmount);
+    }
 
     // 당첨번호 갯수에 따라서 당첨금 계산
-    public static void calculatorTotalWinningRevenue(Integer[] countsOfWinningResult, int lottoPrice) {
+    public static void calculatorTotalWinningRevenue(int lottoPrice) {
         LottoData.setCountsOfWinningResultConvertList(Arrays.asList(countsOfWinningResult)); //당첨 번호 갯수에 따라서 몇등인지 확인하기 위하여  Array -> List 로 변환
 
         double totalWinningPrize = (LottoData.FIRST_WINNER.getCountWinner() * LottoData.FIRST_WINNER.getPrize()) + (LottoData.SECOND_WINNER.getCountWinner() * LottoData.SECOND_WINNER.getPrize())
