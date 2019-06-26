@@ -4,7 +4,7 @@ import edu.nextstep.step3.domain.Lotto;
 import edu.nextstep.step3.domain.LottoNumber;
 import edu.nextstep.step3.domain.LottoStore;
 import edu.nextstep.step3.domain.Money;
-import edu.nextstep.step3.utils.RandomNumberUtils;
+import edu.nextstep.step3.domain.Number;
 import edu.nextstep.step3.view.InputView;
 import edu.nextstep.step3.view.ResultView;
 
@@ -40,6 +40,10 @@ public class LottoApplication {
         // 당첨 번호
         String lotto = InputView.inputLotteryNumber();
         LottoNumber lottery = LottoNumber.createLotteryNumber(lotto);
+
+        // 보너스 번호
+        String bonus = InputView.inputBonusNumber();
+        Number bonusNumber = new Number(Integer.parseInt(bonus));
 
         // 당첨 카운트
         List<Integer> matchCount = lottoTikets.getMatchCountExtractNumberFromLotteryNumber(lottery);

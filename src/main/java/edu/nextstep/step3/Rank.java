@@ -16,18 +16,21 @@ import java.util.stream.Collectors;
  */
 public enum Rank {
 
-    ZERO(0, 0),
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+    ZERO(0, 0, false),
+    THREE(3, 5_000, false),
+    FOUR(4, 50_000, false),
+    FIVE(5, 1_500_000, false),
+    BONUS(5, 30_000_000, true),
+    SIX(6, 2_000_000_000, false);
 
     private int match;
     private int lotteryMoney;
+    private boolean bonusRank;
 
-    Rank(int match, int lotteryMoney) {
+    Rank(int match, int lotteryMoney, boolean bonusRank) {
         this.match = match;
         this.lotteryMoney = lotteryMoney;
+        this.bonusRank = bonusRank;
     }
 
     public static Rank matchCheck(int rankNumber) {
@@ -48,6 +51,10 @@ public enum Rank {
 
     public int getMatch() {
         return this.match;
+    }
+
+    public boolean getBonusRank() {
+        return this.bonusRank;
     }
 
 }
