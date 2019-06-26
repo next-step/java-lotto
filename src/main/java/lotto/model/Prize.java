@@ -21,10 +21,6 @@ public enum Prize {
         this.hasBonusBall = hasBonusBall;
     }
 
-    public static Prize valueOf(int countOfMatchingNumbers) {
-        return valueOf(countOfMatchingNumbers, false);
-    }
-
     public static Prize valueOf(int countOfMatchingNumbers, boolean hasBonusBall) {
         return Stream.of(Prize.values())
                 .filter(prize -> prize.countOfMatchingNumbers == countOfMatchingNumbers)
