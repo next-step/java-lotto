@@ -29,8 +29,8 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 문자열형태를_숫자열로_바꾼다() {
-        String sampleNumbers = "1, 2, 3, 4, 5, 6";
+    void 문자열형태를_순서대로_숫자열로_바꾼다() {
+        String sampleNumbers = "4, 3, 2, 1, 5, 6";
         LottoTicket compared = new LottoTicket(sampleNumbers);
 
         assertThat(compared).isEqualTo(ticket);

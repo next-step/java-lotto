@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,8 @@ public class LottoTicket {
         for (String number : rawNumbers) {
             numbers.add(Integer.parseInt(number));
         }
+
+        Collections.sort(numbers);
 
         this.ticket = numbers;
     }
