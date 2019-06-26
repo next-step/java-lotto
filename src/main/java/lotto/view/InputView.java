@@ -35,17 +35,28 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int numberOfBuy = scanner.nextInt();
         nextLine();
+
         List<String> manualOfNumbers = new ArrayList<>();
         if (numberOfBuy > 0) {
-            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-            while (true) {
-                String numbers = scanner.nextLine();
-                manualOfNumbers.add(numbers);
-                if (manualOfNumbers.size() == numberOfBuy) {
-                    break;
-                }
-            }
+            manualOfNumbers = writeManualNumbers(numberOfBuy);
         }
         return manualOfNumbers;
+    }
+
+    private static List<String> writeManualNumbers(int numberOfBuy) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List inputNumbers = new ArrayList();
+        while (true) {
+            String numbers = scanner.nextLine();
+            inputNumbers.add(numbers);
+            if (finishInput(numberOfBuy, inputNumbers.size())) {
+                break;
+            }
+        }
+        return inputNumbers;
+    }
+
+    private static boolean finishInput(int numberOfBuy, int numbersSize) {
+        return numbersSize == numberOfBuy;
     }
 }
