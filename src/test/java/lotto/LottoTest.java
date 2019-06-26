@@ -1,14 +1,12 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.strategy.LottoOrderedStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,9 +22,9 @@ public class LottoTest {
     @BeforeEach
     void setUp() {
         orderedNumbers = new LottoOrderedStrategy().generate();
-        lotto = new Lotto(INPUT_PURCHASED_PRICE);
+        lotto = new Lotto();
         ticket = new LottoTicket(orderedNumbers);
-        tickets = lotto.generate(new LottoOrderedStrategy());
+        tickets = lotto.generate(3, new LottoOrderedStrategy());
     }
 
     @Test

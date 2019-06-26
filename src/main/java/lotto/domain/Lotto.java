@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.strategy.LottoNumberStrategy;
 import lotto.strategy.LottoRandomStrategy;
+import lotto.view.LottoIO;
 import lotto.view.LottoInputInterface;
 import lotto.view.ResultView;
 
@@ -11,8 +12,8 @@ public class Lotto {
     static private int PRICE_LOTTO_TICKET = 1000;
 
     public void start(LottoIO io) {
-        int willBuytickets = io.getNumOfPurchased() / PRICE_LOTTO_TICKET;
-        LottoTickets tickets = generate(willBuytickets, new LottoRandomStrategy());
+        int willBuyTickets = io.getNumOfPurchased() / PRICE_LOTTO_TICKET;
+        LottoTickets tickets = generate(willBuyTickets, new LottoRandomStrategy());
         ResultView.println(tickets.toString());
 
         LottoTicket winner = new LottoTicket(io.getWinnerNumbers());

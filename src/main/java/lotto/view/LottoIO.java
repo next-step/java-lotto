@@ -15,5 +15,16 @@ public class LottoIO implements LottoInputInterface, LottoOutputInterface {
 
     @Override
     public void printResult(LottoResult result) {
+        println("당첨 통계");
+        println("---------");
+        println(result.getResultOf(3));
+        println(result.getResultOf(4));
+        println(result.getResultOf(5));
+        println(result.getResultOf(6));
+        println("총 수익률은 " + result.getProfitRate() + "입니다.");
+    }
+
+    private void println(String message) {
+        System.out.println(message);
     }
 }

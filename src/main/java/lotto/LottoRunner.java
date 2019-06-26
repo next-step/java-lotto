@@ -5,8 +5,7 @@ import lotto.view.LottoIO;
 
 public class LottoRunner {
     public static void main(String[] args) {
-        LottoIO io = new LottoIO();
-        Lotto lotto = new Lotto(io.getNumOfPurchased());
-        lotto.start(io);
+        Lotto lotto = new Lotto();
+        lotto.start(new LottoIO());
     }
 }

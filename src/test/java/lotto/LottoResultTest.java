@@ -14,20 +14,16 @@ public class LottoResultTest {
     @BeforeEach
     void setUp() {
         lottoResult = new LottoResult();
+        lottoResult.add(COUNT_OF_CORRECT_NUMBER);
     }
 
     @Test
-    void 특정개수맞춘티켓이_최초면_1를_추가한다() {
-        lottoResult.add(COUNT_OF_CORRECT_NUMBER);
-
-        assertThat(lottoResult.numOf(COUNT_OF_CORRECT_NUMBER)).isEqualTo(1);
+    void 특정개수맞춘티켓에대한_정보를_출력한다() {
+        assertThat(lottoResult.getResultOf(3)).isEqualTo("3개 일치 (5000원)- 1개");
     }
 
     @Test
-    void 특정개수맞춘티켓이_이미존재하면_1를_추가한다() {
-        lottoResult.add(COUNT_OF_CORRECT_NUMBER);
-        lottoResult.add(COUNT_OF_CORRECT_NUMBER);
-
-        assertThat(lottoResult.numOf(COUNT_OF_CORRECT_NUMBER)).isEqualTo(2);
+    void 수익률() {
+        assertThat(lottoResult.getProfitRate()).isEqualTo(5);
     }
 }
