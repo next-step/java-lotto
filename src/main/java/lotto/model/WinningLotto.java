@@ -10,6 +10,10 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public Prize matches(Lotto lotto) {
+        return null;
+    }
+
     public Lotto getLotto() {
         return lotto;
     }
