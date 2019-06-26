@@ -2,30 +2,28 @@ package lotto.model;
 
 public class LottoResult {
 
-
-    private int winningCount6;
-    private int winningCount5;
-    private int winningCount4;
     private int winningCount3;
+    private int winningCount4;
+    private int winningCount5;
+    private int winningCount6;
 
-    public void addWinningCount(int winningCount){
+    public void addWinningCount(int winningCount) {
 
-        if (winningCount == 3){
+        if (winningCount == 3) {
             winningCount3++;
         }
 
-        if (winningCount == 4){
+        if (winningCount == 4) {
             winningCount4++;
         }
 
-        if (winningCount == 5){
+        if (winningCount == 5) {
             winningCount5++;
         }
 
-        if (winningCount == 6){
+        if (winningCount == 6) {
             winningCount6++;
         }
-
     }
 
     public int getWinningCount6() {

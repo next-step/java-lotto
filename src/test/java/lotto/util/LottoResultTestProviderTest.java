@@ -1,7 +1,6 @@
 package lotto.util;
 
 import lotto.model.Lotto;
-import lotto.util.LottoResultProvider;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -23,10 +22,10 @@ public class LottoResultTestProviderTest {
         lottos.add(new Lotto(Arrays.asList(1, 2, 5, 6, 20, 21))); // 4개 적중
         lottos.add(new Lotto(Arrays.asList(1, 2, 5, 6, 20, 21))); // 4개 적중
 
-        LottoResultProvider lottoResultProvider = new LottoResultProvider(lottos, Arrays.asList(1, 4, 5, 6, 20, 25));
-        assertThat(lottoResultProvider.getResult().getWinningCount3()).isEqualTo(1);
-        assertThat(lottoResultProvider.getResult().getWinningCount4()).isEqualTo(4);
-        assertThat(lottoResultProvider.getResult().getWinningCount5()).isEqualTo(1);
-        assertThat(lottoResultProvider.getResult().getWinningCount6()).isEqualTo(0);
+        List<Integer> winningNumbers = Arrays.asList(1, 4, 5, 6, 20, 25);
+        assertThat(LottoResultProvider.getResult(lottos, winningNumbers).getWinningCount3()).isEqualTo(1);
+        assertThat(LottoResultProvider.getResult(lottos, winningNumbers).getWinningCount4()).isEqualTo(4);
+        assertThat(LottoResultProvider.getResult(lottos, winningNumbers).getWinningCount5()).isEqualTo(1);
+        assertThat(LottoResultProvider.getResult(lottos, winningNumbers).getWinningCount6()).isEqualTo(0);
     }
 }

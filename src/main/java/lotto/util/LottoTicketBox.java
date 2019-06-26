@@ -16,5 +16,4 @@ public class LottoTicketBox {
                 .map(e -> LottoGenerator.generate())
                 .collect(Collectors.toList());
     }
-
 }
