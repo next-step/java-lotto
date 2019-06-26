@@ -1,11 +1,15 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.EmptyLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTicketTest {
 
@@ -21,6 +25,16 @@ class LottoTicketTest {
         final LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         assertThat(lottoTicket).isNotNull();
+    }
+
+    @DisplayName("Lotto Ticket 생성 시 LottoNumbers 빈값 예외처리 ")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void should_throw_NullPointerException_when_invalid_lottoNumbers(final List<String> invalidLottoNumbers) {
+        assertThatExceptionOfType(EmptyLottoNumberException.class)
+                .isThrownBy(() -> {
+                    new LottoTicket(invalidLottoNumbers);
+                });
     }
 
 }
