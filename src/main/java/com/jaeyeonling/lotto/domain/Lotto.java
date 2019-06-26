@@ -12,7 +12,7 @@ public class Lotto implements Dealable {
     public static final int COUNT_OF_LOTTO_NUMBER = 6;
     static final int PRICE_VALUE = 1_000;
 
-    static final Money PRICE = new Money(PRICE_VALUE);
+    public static final Money PRICE = new Money(PRICE_VALUE);
 
     private final List<LottoNumber> lottoNumbers;
 
