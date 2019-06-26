@@ -12,8 +12,8 @@ public class LottoRankTest {
     @Test
     @DisplayName("당첨 등수 1등")
     void check_my_rank() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
+        LottoStore lottoStore = LottoStore.getInstance();
+        Money money = new Money(1_000L);
         Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6))))));
 
         LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);

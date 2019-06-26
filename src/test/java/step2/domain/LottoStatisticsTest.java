@@ -12,8 +12,8 @@ public class LottoStatisticsTest {
     @Test
     @DisplayName("수익률 계산 [1등]")
     void benefit_percent_1st() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
+        LottoStore lottoStore = LottoStore.getInstance();
+        Money money = new Money(1_000L);
         Lotto lotto = Lotto.create();
         Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(lotto)));
 
@@ -25,8 +25,8 @@ public class LottoStatisticsTest {
     @Test
     @DisplayName("수익률 계산 [2등], 보너스 번호 맞춤")
     void benefit_percent_2th() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
+        LottoStore lottoStore = LottoStore.getInstance();
+        Money money = new Money(1_000L);
         Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(13))))));
 
         LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
@@ -38,8 +38,8 @@ public class LottoStatisticsTest {
     @Test
     @DisplayName("수익률 계산 [3등], 보너스 번호 못맞춤")
     void benefit_percent_3th() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
+        LottoStore lottoStore = LottoStore.getInstance();
+        Money money = new Money(1_000L);
         Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(13))))));
 
         LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
@@ -51,8 +51,8 @@ public class LottoStatisticsTest {
     @Test
     @DisplayName("수익률 계산 [당첨 실패]")
     void benefit_percent_no_rank() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
+        LottoStore lottoStore = LottoStore.getInstance();
+        Money money = new Money(1_000L);
         Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(13), LottoNumber.create(11), LottoNumber.create(12), LottoNumber.create(14))))));
 
         LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);

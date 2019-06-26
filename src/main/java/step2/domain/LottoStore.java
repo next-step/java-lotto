@@ -5,7 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStore {
-    public static final Money LOTTO_PRICE = new Money(1000L);
+    private static final Money LOTTO_PRICE = new Money(1_000L);
+    private static final LottoStore INSTANCE = new LottoStore();
+
+    public static LottoStore getInstance() {
+        return INSTANCE;
+    }
 
     public Lottos buyLotto(final Money money) {
         validateMoney(money);

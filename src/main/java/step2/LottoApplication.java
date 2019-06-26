@@ -12,7 +12,7 @@ import step2.ui.OutputView;
 public class LottoApplication {
     public static void main(String[] args) {
         Money money = InputView.inputMoney();
-        LottoStore lottoStore = new LottoStore();
+        LottoStore lottoStore = LottoStore.getInstance();
         Lottos lottos = lottoStore.buyLotto(money);
         OutputView.printBuyLotto(lottos);
 
