@@ -20,10 +20,10 @@ public class LottoStore {
         return makeLottos(quantity);
     }
 
-    public Lottos buyLotto(final Money money, ChooseLottos chooseLottos) {
+    public Lottos buyLotto(final Money money, Lottos selectionNumberLottos) {
         validateMoney(money);
         final int quantity = getLottoQuantity(money);
-        return new Lottos(giveLottos(chooseLottos, quantity));
+        return new Lottos(giveLottos(selectionNumberLottos, quantity));
     }
 
     private void validateMoney(final Money money) {
@@ -42,7 +42,7 @@ public class LottoStore {
                                    .collect(Collectors.toList()));
     }
 
-    private List<Lotto> giveLottos(final ChooseLottos chooseLottos, final int quantity) {
-        return chooseLottos.getLottos().subList(0, quantity);
+    private List<Lotto> giveLottos(final Lottos selectionNumberLottos, final int quantity) {
+        return selectionNumberLottos.getLottos().subList(0, quantity);
     }
 }
