@@ -18,10 +18,6 @@ public class Lotto {
             .reduce(0, (countOfMatchingNumber, lottoNumber) -> winningLotto.contains(lottoNumber) ? countOfMatchingNumber + 1 : countOfMatchingNumber);
   }
 
-  public List<Integer> getGeneratedNumbers() {
-    return generatedNumbers;
-  }
-
   public boolean contains(int number) {
     return this.generatedNumbers.contains(number);
   }
