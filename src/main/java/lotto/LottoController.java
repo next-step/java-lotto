@@ -21,14 +21,7 @@ public class LottoController {
                 new WinnerLotto(view.getInputWinnerNumbers())));
 
         view.printWinnerStatisticsGuide();
-        view.printRankGuide(LottoResultView.FIFTH_RANK_GUIDE,
-                rankReward.getGainRankCounts()[Rank.FIFTH.ordinal()]);
-        view.printRankGuide(LottoResultView.FOURTH_RANK_GUIDE,
-                rankReward.getGainRankCounts()[Rank.FOURTH.ordinal()]);
-        view.printRankGuide(LottoResultView.THIRD_RANK_GUIDE,
-                rankReward.getGainRankCounts()[Rank.THIRD.ordinal()]);
-        view.printRankGuide(LottoResultView.FIRST_RANK_GUIDE,
-                rankReward.getGainRankCounts()[Rank.FIRST.ordinal()]);
+        view.printRankGuide(rankReward.getGainRankCounts());
 
         view.printRevenueRatioGuide(lottoPublisher.getRevenueRatio(
                 rankReward.getRewardWinningMoney()),

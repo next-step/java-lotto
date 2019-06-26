@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,10 +15,13 @@ public class LottoResultView {
     private static final String REVENUE_RATIO_GUIDE_1 = "총 수익률은 ";
     private static final String REVENUE_RATIO_GUIDE_2 = "입니다.(기준이 1이기 때문에 결과적으로 ";
     private static final String REVENUE_RATIO_GUIDE_3 = "라는 의미임)";
-    public static final String FIFTH_RANK_GUIDE = "3개 일치 (5000원)- ";
-    public static final String FOURTH_RANK_GUIDE = "4개 일치 (50000원)- ";
-    public static final String THIRD_RANK_GUIDE = "5개 일치 (1500000원)- ";
-    public static final String FIRST_RANK_GUIDE = "6개 일치 (2000000000원)- ";
+    private static final String RANK_GUIDE_1 = "개 일치 (";
+    private static final String RANK_GUIDE_2 = "원)- ";
+    private static final String RANK_GUIDE_3 = "개";
+//    public static final String FIFTH_RANK_GUIDE = "3개 일치 (5000원)- ";
+//    public static final String FOURTH_RANK_GUIDE = "4개 일치 (50000원)- ";
+//    public static final String THIRD_RANK_GUIDE = "5개 일치 (1500000원)- ";
+//    public static final String FIRST_RANK_GUIDE = "6개 일치 (2000000000원)- ";
 
 
     public void printPurchaseAmountGuide() {
@@ -64,8 +69,17 @@ public class LottoResultView {
         printGuideStr(SEPERATE_GUIDE);
     }
 
-    public void printRankGuide(String rankGuide, int count) {
-        printGuideStr(rankGuide+count+"개");
+    public void printRankGuide(int[] rankCounts) {
+
+        for (int index = 0; index < Rank.values().length - 1; index++) {
+            printGuideStr(Rank.values()[index].getCountOfMatch()
+                    +RANK_GUIDE_1
+                    +Rank.values()[index].getWinningMoney()
+                    +RANK_GUIDE_2
+                    +rankCounts[index]
+                    +RANK_GUIDE_3);
+        }
+
     }
 
     public void printRevenueRatioGuide(double ratio, String ratioName) {

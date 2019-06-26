@@ -22,12 +22,12 @@ public class Lotto {
     }
 
     private List<Integer> publishNumbers() {
-        List numbers = new ArrayList();
+        List<Integer> numbers = new ArrayList();
         for (int lottoNum = MIN_LOTTO_NUM; lottoNum <= MAX_LOTTO_NUM; lottoNum++) {
             numbers.add(lottoNum);
         }
         Collections.shuffle(numbers);
-        List lottoNums = new ArrayList();
+        List<Integer> lottoNums = new ArrayList();
         for (int index = 0; index < MAX_LOTTO_NUM_COUNT; index++) {
             lottoNums.add(numbers.get(index));
         }
