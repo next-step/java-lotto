@@ -9,6 +9,9 @@ public class RankTest {
     public void 당첨_1등() {
         Rank rank = Rank.of(6, false);
         assertThat(rank).isEqualTo(Rank.FIRST);
+
+        rank = Rank.of(6, true);
+        assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -24,8 +27,15 @@ public class RankTest {
     }
 
     @Test
-    public void 당첨_5등() {
-        Rank rank = Rank.of(3, false);
+    public void 당첨_45등() {
+        Rank rank = Rank.of(4, true);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+        rank = Rank.of(4, false);
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+
+        rank = Rank.of(3, true);
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+        rank = Rank.of(3, false);
         assertThat(rank).isEqualTo(Rank.FIFTH);
     }
 
