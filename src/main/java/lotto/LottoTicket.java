@@ -1,6 +1,19 @@
 package lotto;
 
+import lotto.exception.DuplicateNumberException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoTicket {
-	public void add(int i) {
+
+	List<Integer> numbers = new ArrayList<>();
+
+	public void add(int number) {
+		if(numbers.contains(number)){
+			throw new DuplicateNumberException();
+		}
+
+		numbers.add(number);
 	}
 }
