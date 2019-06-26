@@ -5,7 +5,7 @@ import com.jaeyeonling.lotto.exception.NoSuchLottoException;
 import java.util.Iterator;
 import java.util.List;
 
-public class ManualLottoGenerator implements LottoGenerator {
+public class ManualLottoGenerator extends PaymentLottoGenerator {
 
     private final Iterator<Lotto> lottos;
 
@@ -22,7 +22,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public Lotto generate() {
+    Lotto generate() {
         if (!hasNext()) {
             throw new NoSuchLottoException();
         }

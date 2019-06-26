@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoGenerator implements LottoGenerator {
+public class RandomLottoGenerator extends PaymentLottoGenerator {
 
     private static final List<LottoNumber> LOTTO_NUMBERS =
             IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
@@ -15,9 +15,8 @@ public class RandomLottoGenerator implements LottoGenerator {
             .collect(Collectors.toList());
 
     @Override
-    public Lotto generate() {
+    Lotto generate() {
         shuffle();
-
         return new Lotto(randomLottoNumbers());
     }
 

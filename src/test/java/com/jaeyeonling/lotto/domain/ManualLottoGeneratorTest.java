@@ -20,7 +20,7 @@ class ManualLottoGeneratorTest {
         final Lotto lotto = new FixtureLotto();
         final LottoGenerator manualLottoGenerator = new ManualLottoGenerator(List.of(lotto));
 
-        final Lotto expect = manualLottoGenerator.generate();
+        final Lotto expect = manualLottoGenerator.generate(new Money());
 
         assertThat(lotto).isEqualTo(expect);
     }
@@ -44,7 +44,7 @@ class ManualLottoGeneratorTest {
 
         final List<Lotto> expect = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            expect.add(manualLottoGenerator.generate());
+            expect.add(manualLottoGenerator.generate(new Money(count * Lotto.PRICE_VALUE)));
         }
 
         assertThat(lottos).hasSize(count);
@@ -71,7 +71,7 @@ class ManualLottoGeneratorTest {
         assertThatExceptionOfType(NoSuchLottoException.class)
                 .isThrownBy(() -> {
                     for (int i = 0; i < count + 1; i++) {
-                        manualLottoGenerator.generate();
+                        manualLottoGenerator.generate(new Money());
                     }
                 });
     }

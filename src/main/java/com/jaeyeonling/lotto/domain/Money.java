@@ -11,6 +11,10 @@ public class Money {
 
     private long money;
 
+    public Money() {
+        this(MINIMUM);
+    }
+
     public Money(final long money) {
         this.money = money;
     }

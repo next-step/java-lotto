@@ -32,9 +32,6 @@ public final class LottoStore {
 
     private static Lotto buyLotto(final Money money,
                                   final LottoGenerator lottoGenerator) {
-        final Lotto lotto = lottoGenerator.generate();
-        money.buy(lotto);
-
-        return lotto;
+        return lottoGenerator.generate(money);
     }
 }
