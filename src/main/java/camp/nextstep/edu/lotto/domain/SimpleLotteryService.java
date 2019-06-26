@@ -28,6 +28,9 @@ public class SimpleLotteryService implements LotteryService {
                 .collect(Collectors.toSet());
         final Lottery winningLottery = Lottery.customizedInstance(winningLotteryNumberSet);
         final LotteryNumber bonusLotteryNumber = LotteryNumber.from(bonusNumber);
+        if (winningLottery.hasBonus(bonusLotteryNumber)) {
+            throw new IllegalArgumentException("'bonusNumber' must not be contained in numbers of winningLottery");
+        }
         return this.resolveRewards(purchasedLotteries, winningLottery, bonusLotteryNumber);
     }
 
