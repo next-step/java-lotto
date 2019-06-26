@@ -1,16 +1,11 @@
 package edu.nextstep.step3.domain;
 
-import edu.nextstep.step2.domain.Lotto;
-import edu.nextstep.step2.domain.LottoNumber;
-import edu.nextstep.step2.domain.Money;
-import edu.nextstep.step2.domain.Number;
+import edu.nextstep.step3.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,40 +43,44 @@ public class LottoTest {
         lotteryNumbers.add(new Number(7));
     }
 
-    @DisplayName("LotteryNumber의 Number리스트와 각 index별 당첨번호 확인하는 기능")
+    @DisplayName("발행된 로또번호들과 당첨로또를 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
-    void getMatchCountExtractNumberFromLotteryNumber() {
+    void getLotteryLottoNumberResultCount() {
         LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(numbers));
         LottoNumber lotteryNumber = new LottoNumber(new ArrayList<>(numbers));
+        Lotto lotto = new Lotto(Arrays.asList(lottoNumber));
 
-        Lotto lotto = new Lotto(Arrays.asList(lotteryNumber));
-        assertThat(lotto
-                .getMatchCountExtractNumberFromLotteryNumber(lottoNumber)
-                .get(0)).isEqualTo(6);
+        assertThat(lotto.getLotteryLottoNumberResultCount(lotteryNumber).get(lottoNumber)).isEqualTo(Rank.SIX);
     }
 
-    @DisplayName("당첨순위 별 결과같 반환")
+    @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
-    void getIncomeMatchCount() {
-        LottoNumber lottoNumber = new LottoNumber(numbers);
-        LottoNumber lotteryNumber = new LottoNumber(lotteryNumbers);
-
+    void addBonusNumberMatchLotto() {
+        Number bonus = new Number(6);
+        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(numbers));
+        LottoNumber lotteryNumber = new LottoNumber(new ArrayList<>(lotteryNumbers));
         Lotto lotto = new Lotto(Arrays.asList(lottoNumber));
-        assertThat(
-                lotto.getIncomeMatchCount(lotteryNumber).get(5)
-        ).isEqualTo(1);
+
+        Map<LottoNumber, Rank> lotteryInfo = new HashMap<>();
+        lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+
+        assertThat(lotto.addBonusNumberMatchLotto(lotteryInfo, bonus).get(lottoNumber)).isEqualTo(Rank.BONUS);
     }
 
     @DisplayName("당첨 금액 반환")
     @Test
-    void sumIncome() {
-        LottoNumber lottoNumber = new LottoNumber(numbers);
-        LottoNumber lotteryNumber = new LottoNumber(lotteryNumbers);
+    void fetchIncome() {
+        Number bonus = new Number(6);
+        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(numbers));
+        LottoNumber lotteryNumber = new LottoNumber(new ArrayList<>(lotteryNumbers));
         Lotto lotto = new Lotto(Arrays.asList(lottoNumber));
-        Money money = new Money(1000);
 
-        List<Integer> ranks = lotto.getMatchCountExtractNumberFromLotteryNumber(lotteryNumber);
+        Map<LottoNumber, Rank> lotteryInfo = new HashMap<>();
+        lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
 
-        assertThat(lotto.sumIncome(ranks, money)).isEqualTo((double) 1500000 / 1000);
+        Map<LottoNumber, Rank> incomeInfo = lotto.addBonusNumberMatchLotto(lotteryInfo, bonus);
+        lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+
+        assertThat(lotto.fetchIncome(incomeInfo)).isEqualTo(30_000_000);
     }
 }
