@@ -1,28 +1,42 @@
 package step1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CalculatorApplication {
-    private InputView inputView;
+    private List<String> inputData;
 
     private CalculatorApplication() {
-        this.inputView = new InputView();
+        this.inputData = new ArrayList<>();
     }
 
     public static void main(String[] args) {
         CalculatorApplication app = new CalculatorApplication();
+        app.inputData.add("1,2,3");
+        app.inputData.add("1:2:3");
+        app.inputData.add("1,2:3");
+        app.inputData.add("//;\n1;2;3");
+        app.inputData.add("");
+        app.inputData.add(null);
+
+        app.startCalculation();
+    }
+
+    private void startCalculation() {
+
         StringAddCalculator stringAddCalculator = new StringAddCalculator();
         SplitDomain splitDomain = new SplitDomain();
 
-        String inputNumber = app.inputView.inputNumbers();
-        int possibleCalculateNumber = stringAddCalculator.checkInputNumber(inputNumber);
+        for(String data: inputData){
+            int possibleCalculateNumber = stringAddCalculator.checkInputNumber(data);
+            int resultView = possibleCalculateNumber;
 
-        if (possibleCalculateNumber == 0) {
-            System.out.println(possibleCalculateNumber);
+            if (possibleCalculateNumber != 0) {
+                int[] numberToAdd = splitDomain.checkSplitInputNumber(data);
+                resultView = stringAddCalculator.add(numberToAdd);
+            }
+
+            System.out.println(resultView);
         }
-        if (possibleCalculateNumber != 0) {
-            int[] numberToAdd = splitDomain.checkSplitInputNumber(inputNumber);
-            stringAddCalculator.add(numberToAdd);
-        }
-
-
     }
 }
