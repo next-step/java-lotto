@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class InputVeiw {
     public final static int MINIMUM_PRICE = 1000;
     private final static int ONE_UNIT_OF_LOTTO = 6;
+    private final static String SEPARATOR_REST_WITH_BLANK = ", ";
     private final static String SEPARATOR_REST = ",";
     private final static String SEPARATOR_BLANK = " ";
     private final static String SEPARATOR_NOTHING = "";
@@ -21,8 +22,7 @@ public class InputVeiw {
         return price;
     }
 
-    // 입력받은 로또 구입 가격을 체크
-    public static boolean checkPrice(int price) {
+    private static boolean checkPrice(int price) {
         return price < MINIMUM_PRICE;
     }
 
@@ -45,12 +45,16 @@ public class InputVeiw {
     }
 
     // 입력받은 지난 당첨번호가 6자리인지 확인
-    public static boolean checkPrvStr(String input) {
-        return input.length() == ONE_UNIT_OF_LOTTO;
+    private static boolean checkPrvStr(String input) {
+        return convertArraytoStr(input).length() != ONE_UNIT_OF_LOTTO;
     }
 
-    // 공백 문자 제거 및 ","  기준으로 지난 당첨번호를 split
+
     public static String[] removeBlankAndSplit(String input) {
         return input.replaceAll(SEPARATOR_BLANK, SEPARATOR_NOTHING).split(SEPARATOR_REST);
+    }
+
+    private static String convertArraytoStr(String input){
+        return input.substring(1, input.length() - 1).replace(SEPARATOR_REST_WITH_BLANK, SEPARATOR_NOTHING);
     }
 }
