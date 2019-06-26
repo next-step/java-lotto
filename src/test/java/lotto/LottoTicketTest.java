@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.exception.DuplicateNumberException;
+import lotto.exception.OutOfCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTicketTest {
 
-	@DisplayName("중복된 번호 입력 테스트")
+	@DisplayName("중복된 번호 입력")
 	@Test
 	void addSameNumber() {
 
@@ -18,6 +19,21 @@ class LottoTicketTest {
 
 		assertThatExceptionOfType(DuplicateNumberException.class).isThrownBy(() -> {
 			ticket.add(1);
+		});
+	}
+
+	@DisplayName("허용된 개수 이상 입력")
+	@Test
+	void addOverLimit() {
+		int[] numbers = {1, 2, 3, 4, 5, 6};
+		LottoTicket ticket = new LottoTicket();
+
+		for(int number : numbers){
+			ticket.add(number);
+		}
+
+		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
+			ticket.add(7);
 		});
 	}
 }
