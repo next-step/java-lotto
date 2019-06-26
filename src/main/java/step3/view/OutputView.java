@@ -14,6 +14,7 @@ public class OutputView {
     private static final int PRIZE_FOR_LOSER = 0;
     private static final String MESSAGE_FOR_LOTTO_RESULT_WITH_BONUS_BALL = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
     private static final int PRIZE_FOR_SECOND_PLACE = 30_000_000;
+    public static final int LOTTO_TICKET_PRICE = 1000;
 
     public static void printNumberOfTickets(int numberOfLottoTicketsToBuy) {
         System.out.println(numberOfLottoTicketsToBuy + "개를 구매했습니다.");
@@ -44,7 +45,7 @@ public class OutputView {
             }
         }
         System.out.println(String.format(MESSAGE_FOR_EARNING_RATE,
-                (double) result.getTotalPrizeMoney() / result.getTotalTicketsBought()));
+                result.getEarningRate()));
     }
 
 }

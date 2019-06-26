@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultSheet {
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private Map<LottoRank, Integer> resultSheet;
 
@@ -23,18 +24,34 @@ public class ResultSheet {
         return new ResultSheet(lottoResultMap);
     }
 
-    public int getTotalPrizeMoney() {
-        return resultSheet.keySet()
+    private int getTotalTicketsBought() {
+        return resultSheet.values()
                 .stream()
-                .map(LottoRank::getPrizeMoney)
                 .reduce(Integer::sum)
                 .get();
     }
 
-    public int getTotalTicketsBought() {
-        return (int) resultSheet.values()
+    private int totalMoneySpentForTickets() {
+        return getTotalTicketsBought() * LOTTO_TICKET_PRICE;
+    }
+
+    private int getNumberOfTicketsCorrespondingToRank(LottoRank lottoRank) {
+        return resultSheet.getOrDefault(lottoRank, 0);
+    }
+
+    private int getEachPrizeMoney(LottoRank lottoRank) {
+        return lottoRank.getPrizeMoney() * this.getNumberOfTicketsCorrespondingToRank(lottoRank);
+    }
+
+    private int getTotalPrizeMoney() {
+        return resultSheet.keySet()
                 .stream()
-                .count();
+                .mapToInt(this::getEachPrizeMoney)
+                .sum();
+    }
+
+    public double getEarningRate() {
+        return getTotalPrizeMoney() / totalMoneySpentForTickets();
     }
 
     public Map<LottoRank, Integer> getResultMap() {

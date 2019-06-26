@@ -22,20 +22,7 @@ public class LottoTicket {
                 .count();
     }
 
-//    public int getNumberOfMatchedToLuckyNumber(LottoTicket luckyNumber, int bonusNumber) {
-//        int numberOfMatchedToLuckyNumber = (int) luckyNumber.getLottoTicket()
-//                .stream()
-//                .filter(lottoTicket::contains)
-//                .count();
-//
-//        if (numberOfMatchedToLuckyNumber == 5 && isBonusNumberMatched(bonusNumber)) {
-//            return 5;
-//        }
-//
-//        return numberOfMatchedToLuckyNumber;
-//    }
-
-    public boolean isBonusNumberMatched(int bonusNumber) {
+    boolean isBonusNumberMatched(int bonusNumber) {
         return lottoTicket.stream()
                 .mapToInt(LottoNumber::getNumber)
                 .anyMatch(i -> i == bonusNumber);

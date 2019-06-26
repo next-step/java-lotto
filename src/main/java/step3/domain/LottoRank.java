@@ -20,9 +20,9 @@ public enum LottoRank {
     }
 
     public static LottoRank from(int countMatchedNumbers, boolean isMatchedToBonusNumber) {
-        if (countMatchedNumbers == 5 && isMatchedToBonusNumber) {
+        if ((countMatchedNumbers == SECOND_PLACE.numberOfMatchedToLuckyNumber) && isMatchedToBonusNumber) {
             return Arrays.stream(LottoRank.values())
-                    .filter(lottoRank -> lottoRank.prizeMoney == 30_000_000)
+                    .filter(lottoRank -> lottoRank.prizeMoney == SECOND_PLACE.prizeMoney)
                     .findFirst()
                     .get();
         }
