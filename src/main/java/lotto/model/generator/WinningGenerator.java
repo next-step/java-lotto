@@ -3,43 +3,29 @@ package lotto.model.generator;
 import lotto.exception.DuplicateLottoNumberException;
 import lotto.model.Lotto;
 import lotto.model.Number;
+import lotto.model.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class WinningGenerator implements LottoGenerator {
+public class WinningGenerator {
 
-    private List<Number> numbers;
-    private int bonus;
-
-    private WinningGenerator(List<Number> numbers, int bonus) {
-        this.numbers = numbers;
-        this.bonus = bonus;
-    }
-
-    public static WinningGenerator generate(String numbers, int bonus) {
+    public static WinningLotto generate(String numbers, int inputOfBonus) {
         List<Number> numberList = Arrays.stream(numbers.trim().split(","))
                 .map(Integer::parseInt)
                 .map(Number::of)
                 .collect(toList());
-        duplicateBonusNumber(numberList, bonus);
-        return new WinningGenerator(numberList, bonus);
+        Lotto lotto = Lotto.from(numberList);
+        Number bonus = Number.of(inputOfBonus);
+        duplicateBonusNumber(lotto, bonus);
+        return new WinningLotto(lotto, bonus);
     }
 
-    private static void duplicateBonusNumber(List<Number> numbers, int bonus) {
-        if (numbers.contains(Number.of(bonus))) {
+    private static void duplicateBonusNumber(Lotto numbers, Number bonus) {
+        if (numbers.hasBonusNumber(bonus)) {
             throw new DuplicateLottoNumberException(bonus);
         }
-    }
-
-    @Override
-    public Lotto generator() {
-        return Lotto.from(numbers);
-    }
-
-    public Number getBonus() {
-        return Number.of(bonus);
     }
 }

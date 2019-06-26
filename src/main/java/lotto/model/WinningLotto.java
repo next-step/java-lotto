@@ -15,11 +15,11 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonus);
     }
 
-    Lotto getLotto() {
+    public Lotto getLotto() {
         return lotto;
     }
 
-    Number getNumber() {
+    public Number getBonus() {
         return bonus;
     }
 

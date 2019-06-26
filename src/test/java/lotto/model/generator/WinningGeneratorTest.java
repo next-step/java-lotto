@@ -1,8 +1,8 @@
 package lotto.model.generator;
 
 import lotto.exception.DuplicateLottoNumberException;
-import lotto.model.Lotto;
 import lotto.model.Number;
+import lotto.model.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +18,10 @@ class WinningGeneratorTest {
         String numbers = "1,2,3,4,5,6";
         int bonus = 7;
 
-        WinningGenerator winningGenerator = WinningGenerator.generate(numbers, bonus);
+        WinningLotto winningLotto = WinningGenerator.generate(numbers, bonus);
 
-        Lotto lotto = winningGenerator.generator();
-        Number numberOfBonus = winningGenerator.getBonus();
-
-        assertThat(lotto).isEqualTo(ofLotto(1, 2, 3, 4, 5, 6));
-        assertThat(numberOfBonus).isEqualTo(Number.of(bonus));
+        assertThat(winningLotto.getLotto()).isEqualTo(ofLotto(1, 2, 3, 4, 5, 6));
+        assertThat(winningLotto.getBonus()).isEqualTo(Number.of(bonus));
     }
 
     @DisplayName("보너스 번호가 중복일 시 에러")

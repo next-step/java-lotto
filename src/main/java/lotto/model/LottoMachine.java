@@ -42,7 +42,6 @@ public class LottoMachine {
     }
 
     public static WinningLotto generateWinningLotto(String inputOfNumbers, int inputOfBonusNumber) {
-        WinningGenerator winningGenerator = WinningGenerator.generate(inputOfNumbers, inputOfBonusNumber);
-        return WinningLotto.of(winningGenerator.generator(), winningGenerator.getBonus());
+        return WinningGenerator.generate(inputOfNumbers, inputOfBonusNumber);
     }
 }
