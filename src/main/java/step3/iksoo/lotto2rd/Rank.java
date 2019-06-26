@@ -1,6 +1,10 @@
 package step3.iksoo.lotto2rd;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(6, 2_000_000_000, "1등"),
@@ -32,6 +36,13 @@ public enum Rank {
         return this.rankName;
     }
 
+    public static List<Rank> winValues() {
+        return Arrays.stream(values())
+                .sorted(Comparator.reverseOrder())
+                .filter(n -> n.getCountOfMatch() > 0)
+                .collect(Collectors.toList());
+    }
+
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank[] ranks = values();
         return Arrays.stream(ranks)
@@ -44,5 +55,9 @@ public enum Rank {
                 })
                 .findAny()
                 .orElse(Rank.FAIL);
+    }
+
+    public int prizeAmount(int winCount) {
+        return this.getWinningMoney() * winCount;
     }
 }

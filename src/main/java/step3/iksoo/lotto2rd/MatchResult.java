@@ -1,7 +1,5 @@
 package step3.iksoo.lotto2rd;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Map;
 
 public class MatchResult {
@@ -16,10 +14,8 @@ public class MatchResult {
     }
 
     public int calculatePrize() {
-        return Arrays.stream(Rank.values())
-                .sorted(Comparator.reverseOrder())
-                .filter(rank -> rank.getCountOfMatch() >= Rank.FIFTH.getCountOfMatch())
-                .mapToInt(rank -> rank.getWinningMoney() * matchResult.get(rank))
+        return Rank.winValues().stream()
+                .mapToInt(rank -> rank.prizeAmount(matchResult.get(rank)))
                 .sum();
     }
 
