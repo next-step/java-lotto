@@ -17,11 +17,11 @@ public class WinningNumbers extends LottoNumbers {
     }
 
     public LottoRank match(PickNumbers pickNumbers) {
-        int matchCount = Math.toIntExact(this.numbers.stream()
-                .filter(number -> pickNumbers.contains(number))
-                .count());
+        long matchCount = this.numbers.stream()
+                .filter(pickNumbers::contains)
+                .count();
 
-        return LottoRank.match(matchCount, hasBonus(pickNumbers));
+        return LottoRank.match((int) matchCount, hasBonus(pickNumbers));
     }
 
     private boolean hasBonus(PickNumbers pickNumbers) {
