@@ -34,9 +34,7 @@ public class LottoNumber {
 
     public boolean contains(int number) {
         return lottoNumbers.stream()
-                .filter(sourceNumber -> sourceNumber.comapreTo(number))
-                .findFirst()
-                .isPresent();
+                .anyMatch(sourceNumber -> sourceNumber.comapreTo(number));
     }
 
     public int compareMatchNumberCount(LottoNumber lottoNumber) {
