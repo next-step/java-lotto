@@ -19,7 +19,11 @@ public class WinningNumbers {
     }
 
     public boolean contains(int number) {
-        return lottoNumbers.getLottoNumbers().contains(new LottoNumber(number));
+        return contains(new LottoNumber(number));
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.getLottoNumbers().contains(lottoNumber);
     }
 
     public int size() {

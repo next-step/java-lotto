@@ -25,7 +25,10 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public void match(WinningNumbers winningNumbers) {
-        lottoTickets.forEach(lottoTicket -> lottoTicket.match(winningNumbers));
+    public LottoResult match(WinningNumbers winningNumbers) {
+        List<LottoRank> lottoRanks = lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.match(winningNumbers))
+                .collect(Collectors.toList());
+        return new LottoResult(lottoRanks);
     }
 }

@@ -19,9 +19,11 @@ public class LottoTicket {
         return lottoNumbers.toString();
     }
 
-    public void match(WinningNumbers winningNumbers) {
-        LottoRank match = lottoNumbers.match(winningNumbers);
+    public LottoRank match(WinningNumbers winningNumbers) {
+        long matchedCount = lottoNumbers.getLottoNumbers().stream()
+                .filter(winningNumbers::contains)
+                .count();
 
-        System.out.println("");
+        return LottoRank.match(matchedCount);
     }
 }
