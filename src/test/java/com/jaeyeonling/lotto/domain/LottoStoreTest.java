@@ -14,9 +14,8 @@ class LottoStoreTest {
     void autoBuy() {
         final int countOfLotto = 10;
         final Money money = new Money(countOfLotto * Lotto.PRICE_VALUE);
-        final LottoStore lottoStore = new LottoStore();
 
-        final List<Lotto> lottos = lottoStore.buyAutoByRemainingMoney(money);
+        final List<Lotto> lottos = LottoStore.buyAutoByRemainingMoney(money);
 
         assertThat(lottos).hasSize(countOfLotto);
     }
