@@ -6,21 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000, "1등"),
-    SECOND(5, 30_000_000, "2등(보너스볼)"),
-    THIRD(5, 1_500_000, "3등"),
-    FOURTH(4, 50_000, "4등"),
-    FIFTH(3, 5_000, "5등"),
-    FAIL(0, 0, "");
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
+    FAIL(0, 0);
 
     private int countOfMatch;
     private int winningMoney;
-    private String rankName;
 
-    Rank(int countOfMatch, int winningMoney, String rankName) {
+    Rank(int countOfMatch, int winningMoney) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
-        this.rankName = rankName;
     }
 
     public int getCountOfMatch() {
@@ -29,10 +27,6 @@ public enum Rank {
 
     public int getWinningMoney() {
         return this.winningMoney;
-    }
-
-    public String getRankName() {
-        return this.rankName;
     }
 
     public static List<Rank> winValues() {
