@@ -12,7 +12,7 @@ public class LottoOutputView {
   }
 
   public static void printPickedNumbersOf(Lottos lottos) {
-    System.out.println(lottos);
+    lottos.getLottos().forEach(System.out::println);
   }
 
   public static void print(Report report) {

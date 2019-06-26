@@ -2,7 +2,6 @@ package lotto.model;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class Lottos {
@@ -21,14 +20,11 @@ public class Lottos {
         return Lotto.PRICE * this.lottos.size();
     }
 
-    @Override
-    public String toString() {
-        return this.lottos.stream()
-                .map(Lotto::toString)
-                .collect(joining(System.lineSeparator()));
-    }
-
     public List<Prize> matches(WinningLotto winningLotto) {
         return this.lottos.stream().map(lotto -> lotto.matches(winningLotto)).collect(toList());
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
