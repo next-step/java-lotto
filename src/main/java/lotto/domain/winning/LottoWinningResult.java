@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.winning;
+
+import lotto.domain.PurchaseAmount;
 
 import java.util.Map;
 

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoTicket;
+
 public class PurchaseAmount {
     private static final Long MAX_PURCHASE_AMOUNT = 100000000L;
 
