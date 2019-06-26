@@ -10,11 +10,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers(){
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public int lottoNumbersCount(){
-        return lottoNumbers.size();
+    public String getLottoNumbers(){
+        return lottoNumbers.toString();
     }
 }
