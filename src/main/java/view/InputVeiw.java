@@ -1,6 +1,5 @@
 package view;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputVeiw {
@@ -49,12 +48,7 @@ public class InputVeiw {
         return input.length != ONE_UNIT_OF_LOTTO;
     }
 
-
     public static String[] removeBlankAndSplit(String input) {
         return input.replaceAll(SEPARATOR_BLANK, SEPARATOR_NOTHING).split(SEPARATOR_REST);
-    }
-
-    private static String convertArraytoStr(String input) {
-        return input.substring(1, input.length() - 1).replace(SEPARATOR_REST_WITH_BLANK, SEPARATOR_NOTHING);
     }
 }

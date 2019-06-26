@@ -34,10 +34,10 @@ public class LottoNumber {
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교
     public int compareWinningNumber(int[] winningLottoNumber) {
-        int numofWin = 0;
+        int wingingCount = 0;
         for (int i = 0; i < winningLottoNumber.length; ++i) {
-            numofWin = lottoElement.contains(winningLottoNumber[i]) ? numofWin + 1 : numofWin;
+            wingingCount = lottoElement.contains(winningLottoNumber[i]) ? wingingCount + 1 : wingingCount;
         }
-        return numofWin;
+        return wingingCount;
     }
 }
