@@ -1,7 +1,7 @@
 package lotto.dto;
 
-import lotto.domain.LottoWinningAmount;
-import lotto.domain.LottoWinningResult;
+import lotto.domain.winning.LottoWinningAmount;
+import lotto.domain.winning.LottoWinningResult;
 import lotto.domain.PurchaseAmount;
 
 public class LottoResultDto {
