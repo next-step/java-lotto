@@ -1,5 +1,6 @@
 package camp.nextstep.edu.lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     }
 
     public static List<LotteryNumber> allNumbers() {
-        return ALL_LOTTERY_NUMBERS;
+        return new ArrayList<>(ALL_LOTTERY_NUMBERS);
     }
 
     public int value() {
