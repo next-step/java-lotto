@@ -4,6 +4,7 @@ import lotto.domain.Rank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class LottoResultView {
@@ -64,13 +65,13 @@ public class LottoResultView {
         printGuideStr(SEPARATE_GUIDE);
     }
 
-    public void printRankGuide(int[] rankCounts) {
+    public void printRankGuide(Map<Rank, Integer> rankCounts) {
         for (int index = 0; index < Rank.values().length - 1; index++) {
             printGuideStr(Rank.values()[index].getCountOfMatch()
                     +RANK_GUIDE_1
                     +Rank.values()[index].getWinningMoney()
                     +RANK_GUIDE_2
-                    +rankCounts[index]
+                    +rankCounts.get(Rank.values()[index])
                     +RANK_GUIDE_3);
         }
 

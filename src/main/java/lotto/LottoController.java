@@ -21,7 +21,7 @@ public class LottoController {
                 new WinnerLotto(view.getInputWinnerNumbers())));
 
         view.printWinnerStatisticsGuide();
-        view.printRankGuide(rankReward.getGainRankCounts());
+        view.printRankGuide(rankReward.getGainRanksCounts());
 
         view.printRevenueRatioGuide(lottoPublisher.getRevenueRatio(
                 rankReward.getRewardWinningMoney()),
