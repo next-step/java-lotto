@@ -3,6 +3,7 @@ package step2.domain;
 import java.util.Objects;
 
 public class Money {
+    private static final int NO_MONEY = 0;
     private final Long money;
 
     public Money(Long money) {
@@ -11,7 +12,7 @@ public class Money {
     }
 
     private void validateMoney(Long money) {
-        if (money < 0) {
+        if (money < NO_MONEY) {
             throw new IllegalArgumentException("마이너스 금액은 입력할 수 없습니다.");
         }
     }
