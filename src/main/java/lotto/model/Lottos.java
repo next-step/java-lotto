@@ -22,7 +22,7 @@ public class Lottos {
         return pickNumbers;
     }
 
-    public int size() {
+    int size() {
         return pickNumbers.size();
     }
 
@@ -33,7 +33,7 @@ public class Lottos {
     @Override
     public String toString() {
         List<String> lottos = this.pickNumbers.stream()
-                .map(pickNumbers -> pickNumbers.toString())
+                .map(PickNumbers::toString)
                 .collect(Collectors.toList());
         return String.join(STRING_ENTER, lottos);
     }

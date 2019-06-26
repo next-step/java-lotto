@@ -1,22 +1,14 @@
 package lotto.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinningNumbersTest {
-
-    private List<Number> numbers;
-
-    @BeforeEach
-    void setUp() {
-    }
 
     @Test
     @DisplayName("당첨 번호와 일치 개수")

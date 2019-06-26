@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class Number implements Comparable<Number>{
+public class Number implements Comparable<Number> {
 
     static final int MIN = 1;
     static final int MAX = 45;
@@ -14,13 +14,13 @@ public class Number implements Comparable<Number>{
         this.number = number;
     }
 
-    void verifyNumber(int number) {
+    private void verifyNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException("1~45 범위에서만 생성 가능 합니다.");
         }
     }
 
-    public int value() {
+    private int value() {
         return number;
     }
 
@@ -30,6 +30,11 @@ public class Number implements Comparable<Number>{
         if (o == null || getClass() != o.getClass()) return false;
         Number number1 = (Number) o;
         return number == number1.number;
+    }
+
+    @Override
+    public String toString() {
+        return number + "";
     }
 
     @Override
