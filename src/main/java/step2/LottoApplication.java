@@ -17,8 +17,13 @@ public class LottoApplication {
         LottoStore lottoStore = LottoStore.getInstance();
 
         final Money money = new Money(InputView.inputMoney());
-        Lottos lottos = lottoStore.buyLotto(money);
-        OutputView.printBuyLotto(lottos);
+        final int directInputCount = InputView.inputCountOfBuyLottoTicket();
+        final List<List<Integer>> lottoNumbers = InputView.inputLottoNumbers(directInputCount);
+
+        final Lottos selectedNumberLottos = Lottos.createByNumbers(lottoNumbers);
+        Lottos lottos = lottoStore.buyLotto(money, selectedNumberLottos);
+        final int countOfselectedLottos = selectedNumberLottos.size();
+        OutputView.printBuyLotto(lottos, money, countOfselectedLottos);
 
         final List<Integer> numbers = InputView.inputWinningLottoNumbers();
         BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());

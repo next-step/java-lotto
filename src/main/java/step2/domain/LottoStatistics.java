@@ -13,7 +13,8 @@ public class LottoStatistics {
     }
 
     public List<LottoRank> getMyRanks(final WinningLotto winningLotto) {
-        return lottos.getLottos().stream()
+        return lottos.getLottos()
+                     .stream()
                      .map(lotto -> lotto.matchLottoNumber(winningLotto))
                      .collect(Collectors.toList());
     }

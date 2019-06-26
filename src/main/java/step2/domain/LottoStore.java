@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStore {
-    private static final Money LOTTO_PRICE = new Money(1_000L);
+    public static final Money LOTTO_PRICE = new Money(1_000L);
     private static final LottoStore INSTANCE = new LottoStore();
 
     private LottoStore() {}
@@ -17,13 +17,18 @@ public class LottoStore {
     public Lottos buyLotto(final Money money) {
         validateMoney(money);
         final int quantity = getLottoQuantity(money);
-        return makeLottos(quantity);
+        final List<Lotto> lottos = createLottos(quantity);
+        return salesLottos(lottos, quantity);
     }
 
-    public Lottos buyLotto(final Money money, Lottos selectionNumberLottos) {
+    public Lottos buyLotto(final Money money, Lottos selectedNumberLottos) {
         validateMoney(money);
-        final int quantity = getLottoQuantity(money);
-        return new Lottos(giveLottos(selectionNumberLottos, quantity));
+        final Money cost = money.getCost(LOTTO_PRICE, selectedNumberLottos.size());
+        final Money restMoney = money.subtractMoney(cost);
+
+        final int quantity = getLottoQuantity(restMoney);
+        final List<Lotto> lottos = createLottos(quantity);
+        return selectedNumberLottos.appendLottos(salesLottos(lottos, quantity));
     }
 
     private void validateMoney(final Money money) {
@@ -36,13 +41,13 @@ public class LottoStore {
         return (int) (money.getMoney() / LOTTO_PRICE.getMoney());
     }
 
-    private Lottos makeLottos(final int quantity) {
-        return new Lottos(IntStream.range(0, quantity)
-                                   .mapToObj(i -> Lotto.create())
-                                   .collect(Collectors.toList()));
+    private List<Lotto> createLottos(final int quantity) {
+        return IntStream.range(0, quantity)
+                        .mapToObj(i -> Lotto.create())
+                        .collect(Collectors.toList());
     }
 
-    private List<Lotto> giveLottos(final Lottos selectionNumberLottos, final int quantity) {
-        return selectionNumberLottos.getLottos().subList(0, quantity);
+    private Lottos salesLottos(final List<Lotto> lottos, final int quantity) {
+        return new Lottos(lottos.subList(0, quantity));
     }
 }

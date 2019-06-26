@@ -21,6 +21,14 @@ public class Money {
         return money;
     }
 
+    public Money subtractMoney(final Money money) {
+        return new Money(this.money - money.money);
+    }
+
+    public Money getCost(final Money lottoPrice, final int count) {
+        return new Money(lottoPrice.money * count);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
