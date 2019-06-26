@@ -20,7 +20,7 @@ public final class ListUtils {
     }
 
     public static boolean isNullOrEmpty(final List<?> list) {
-        return false;
+        return list == null || list.isEmpty();
     }
 
     private static <E> List<E> createList(final List<E> list1,
