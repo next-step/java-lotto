@@ -20,13 +20,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class BuyingLottosTest {
-    private BuyingLottos buyingLottos;
-    
-    @BeforeEach
-    void setUp() {
-        buyingLottos = new BuyingLottos();
-    }
-    
     @Test
     @DisplayName("금액이 1,000원 미만이면 구매할 수 없다.")
     void buyUnderMinimumPriceTest() {
@@ -34,19 +27,8 @@ class BuyingLottosTest {
         int cashPayment = 999;
         //Then
         Assertions.assertThatIllegalArgumentException()
-            .isThrownBy(() -> buyingLottos.buyLottos(cashPayment))
+            .isThrownBy(() -> new BuyingLottos(cashPayment))
             .withMessage(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
-    }
-    
-    @Test
-    @DisplayName("입력한 금액과 맞는 매수의 로또를 구매한다.")
-    void boughtLottosCountTest() {
-        //Given
-        int cashPayment = 5000;
-        //When
-        Lottos lottos = buyingLottos.buyLottos(cashPayment);
-        //Then
-        Assertions.assertThat(lottos.getLottoSize()).isEqualTo(5);
     }
     
     @Test

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class LottoNumbers {
     private final static int LOTTO_NUMBER_COUNT = 6;
+    
     private List<LottoNumber> lottoNumbers;
     
     LottoNumbers() {
@@ -40,9 +41,13 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
     
+    public boolean haveBonusNumber(BonusNumber bonusNumber) {
+        LottoNumber bonusLottoNumber = bonusNumber.getLottoNumber();
+        return lottoNumbers.contains(bonusLottoNumber);
+    }
+    
     @Override
     public String toString() {
         return "\n(" + lottoNumbers + ")";
     }
-    
 }

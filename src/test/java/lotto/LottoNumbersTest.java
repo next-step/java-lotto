@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.common.ErrorMessage;
+import lotto.domain.BonusNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoNumber;
 import lotto.domain.WanLottoNumbers;
@@ -41,7 +42,7 @@ class LottoNumbersTest {
     
     @Test
     @DisplayName("당첨번호와 몇 개의 번호가 일치하는지 구한다.")
-    void test() {
+    void countWinNumbersTest() {
         //Given
         List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
             .map(LottoNumber::new)
@@ -52,5 +53,20 @@ class LottoNumbersTest {
         int matchedCount = lotto.getMatchedNumberCount(wanLottoNumbers.getLotto());
         //Then
         Assertions.assertThat(matchedCount).isEqualTo(3);
+    }
+    
+    @Test
+    @DisplayName("인입되는 번호를 가지고 있는지 리턴한다.")
+    void haveBonusNumberTest() {
+        //Given
+        BonusNumber bonusNumber = new BonusNumber(1);
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+          .map(LottoNumber::new)
+          .collect(Collectors.toList());
+        LottoNumbers lotto = new LottoNumbers(lottoNumbers);
+        //When
+        boolean haveBonusNumber = lotto.haveBonusNumber(bonusNumber);
+        //Then
+        Assertions.assertThat(haveBonusNumber).isTrue();
     }
 }

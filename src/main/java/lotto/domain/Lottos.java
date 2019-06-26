@@ -19,8 +19,8 @@ public class Lottos {
         this.lottoNumbers = lottoNumbers;
     }
     
-    public static int getBuyableCount(final int cashPayment) {
-        final int buyableCount = cashPayment / DEFAULT_PRICE;
+    public static int getBuyableCount(final CashPayments cashPayment) {
+        final int buyableCount = cashPayment.getBuyablecount(DEFAULT_PRICE);
         if (buyableCount <= CANT_BUYABLE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
         }
@@ -30,9 +30,11 @@ public class Lottos {
     
     WinNumbersCount getWinNumbersCount(final WanLottoNumbers wanLottoNumbers) {
         WinNumbersCount winNumbersCount = new WinNumbersCount();
-        lottoNumbers.forEach(lotto -> 
-            winNumbersCount.addWinCount(wanLottoNumbers.getMatchedNumberCount(lotto))
-        );
+        lottoNumbers.forEach(lotto -> {
+            final int matchedNumberCount = wanLottoNumbers.getMatchedNumberCount(lotto);
+            final boolean isMatchedBonus = wanLottoNumbers.isMatchedBonus(lotto);
+            winNumbersCount.addWinCount(matchedNumberCount, isMatchedBonus);
+        });
         return winNumbersCount;
     }
     

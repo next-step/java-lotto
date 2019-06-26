@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.CashPayments;
 import lotto.domain.Lottos;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ class LottosTest {
     @DisplayName("구매할 수 있는 횟수를 구한다.")
     void getBuyableCount() {
         //Given
-        int cashPayment = 5000;
+        CashPayments cashPayment = new CashPayments(5000);
         //When
         int buyableCount = Lottos.getBuyableCount(cashPayment);
         //Then

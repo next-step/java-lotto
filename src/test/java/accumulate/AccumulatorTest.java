@@ -26,7 +26,6 @@ public class AccumulatorTest {
         //When
         //Then
         Assertions.assertThatThrownBy(() -> Accumulator.accumulate(notNumbers)).isInstanceOf(RuntimeException.class);
-        
     }
     
     @Test

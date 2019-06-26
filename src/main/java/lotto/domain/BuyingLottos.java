@@ -8,15 +8,18 @@ public class BuyingLottos {
     private Lottos lottos;
     private CashPayments cashPayments;
     
-    public BuyingLottos() {}
+    public BuyingLottos(int cashPayments) {
+        CashPayments cashPayment = new CashPayments(cashPayments);
+        lottos = buyLottos(cashPayment);
+        this.cashPayments = new CashPayments(cashPayments);
+    }
     
     public BuyingLottos(Lottos lottos, CashPayments cashPayments) {
         this.lottos = lottos;
         this.cashPayments = cashPayments;
     }
     
-    public Lottos buyLottos(final int cashPayment) {
-        cashPayments = new CashPayments(cashPayment);
+    public Lottos buyLottos(final CashPayments cashPayment) {
         lottos = new Lottos(IntStream.range(START_NUMBER, Lottos.getBuyableCount(cashPayment))
             .mapToObj(i -> new LottoNumbers())
             .collect(Collectors.toList()));
