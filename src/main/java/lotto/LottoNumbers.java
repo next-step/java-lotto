@@ -14,11 +14,27 @@ public class LottoNumbers {
   List<LottoNumber> lottoNumbers;
 
   public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    validate(lottoNumbers);
+    this.lottoNumbers = lottoNumbers;
+    Collections.sort(lottoNumbers);
+  }
+
+  private void validate(List<LottoNumber> lottoNumbers) {
+    lottoNumberCountCheck(lottoNumbers);
+    repeatedNumberCheck(lottoNumbers);
+  }
+
+  private void lottoNumberCountCheck(List<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
       throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
     }
-    this.lottoNumbers = lottoNumbers;
-    Collections.sort(lottoNumbers);
+  }
+
+  private void repeatedNumberCheck(List<LottoNumber> lottoNumbers) {
+    long distinctCount = lottoNumbers.stream().map(LottoNumber::getValue).distinct().count();
+    if (lottoNumbers.size() > distinctCount) {
+      throw new IllegalArgumentException("로또 번호는 중복되면 안됩니다.");
+    }
   }
 
   public int countSameNumber(LottoNumbers numbers) {

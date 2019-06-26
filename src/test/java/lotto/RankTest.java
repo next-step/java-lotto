@@ -1,5 +1,7 @@
 package lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -18,9 +20,10 @@ class RankTest {
     list.add(rank2);
 
     Integer sum = list.stream().map(Rank::getPrize).reduce(0, Integer::sum);
-    System.out.println(sum);
+    assertThat(sum).isEqualTo(30010000);
+
     long count = list.stream().filter(a -> a == Rank.FIFTH).count();
-    System.out.println(count);
+    assertThat(count).isEqualTo(2);
   }
 
 }

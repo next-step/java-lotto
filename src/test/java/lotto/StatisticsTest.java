@@ -15,11 +15,11 @@ class StatisticsTest {
   public void setup() {
     LastWeekWinLotto lastWeekWinLotto = new LastWeekWinLotto("1,2,3,4,5,6", 20);
 
-    Lotto purchaseLotto1 = new Lotto("1,2,3,4,5,20");
-    Lotto purchaseLotto2 = new Lotto("1,2,3,14,17,18");
-    Lotto purchaseLotto3 = new Lotto("1,2,3,4,8,9");
+    String purchaseLotto1 = "1,2,3,4,5,20";
+    String purchaseLotto2 = "1,2,3,14,17,18";
+    String purchaseLotto3 = "1,2,3,4,8,9";
 
-    List<Lotto> purchasedLotto = new ArrayList<>();
+    List<String> purchasedLotto = new ArrayList<>();
     purchasedLotto.add(purchaseLotto1);
     purchasedLotto.add(purchaseLotto2);
     purchasedLotto.add(purchaseLotto3);

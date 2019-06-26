@@ -14,8 +14,14 @@ public class Lottos {
     makeLottos(quantity);
   }
 
-  public Lottos(List<Lotto> purchasedLottos) {
-    lottos = purchasedLottos;
+  public Lottos(List<String> manualLottoNumbers) {
+    manualLottoNumbers.stream()
+        .forEach(numbers -> lottos.add(new Lotto(numbers)));
+  }
+
+  public Lottos(Lottos autoLottos, Lottos manualLottos) {
+    lottos.addAll(autoLottos.getLottos());
+    lottos.addAll(manualLottos.getLottos());
   }
 
   private void makeLottos(Quantity quantity) {
