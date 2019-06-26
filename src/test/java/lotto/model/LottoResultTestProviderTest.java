@@ -20,5 +20,8 @@ public class LottoResultTestProviderTest {
 
         LottoResultProvider lottoResultProvider = new LottoResultProvider(lottos, Arrays.asList(1, 4, 5, 6, 20, 25));
         assertThat(lottoResultProvider.getResult().getWinningCount3()).isEqualTo(1);
+        assertThat(lottoResultProvider.getResult().getWinningCount4()).isEqualTo(1);
+        assertThat(lottoResultProvider.getResult().getWinningCount5()).isEqualTo(1);
+        assertThat(lottoResultProvider.getResult().getWinningCount6()).isEqualTo(1);
     }
 }
