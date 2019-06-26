@@ -28,7 +28,9 @@ public class InputView {
     }
 
     public static WinningNumbers secondQuestionAndReturnAnswer() {
-        System.out.println(FIRST_QUESTION_MESSAGE);
+        newLine();
+
+        System.out.println(SECOND_QUESTION_MESSAGE);
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().replaceAll(" ", "");
@@ -38,5 +40,9 @@ public class InputView {
                 .collect(Collectors.toList());
 
         return new WinningNumbers(winningNumbers);
+    }
+
+    private static void newLine() {
+        System.out.println();
     }
 }
