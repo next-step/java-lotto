@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class LottoTest {
     private Lotto lotto;
     private List<Integer> overRangeNumbers;
@@ -29,5 +31,19 @@ public class LottoTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             lotto.checkAnotherNumberLength(overRangeNumbers);
         });
+    }
+
+    @Test
+    void getRank_5등확인() {
+        List<Integer> numbers = new ArrayList<>();
+        for (int index=0; index < LottoNumber.MAX_LOTTO_NUM_COUNT; index++) {
+            numbers.add(index+1);
+        }
+        lotto = new Lotto(numbers);
+        List<Integer> winNumbers = new ArrayList<>();
+        winNumbers.add(1);
+        winNumbers.add(2);
+        winNumbers.add(3);
+        assertThat(lotto.getRank(winNumbers)).isEqualTo(Rank.FIFTH);
     }
 }

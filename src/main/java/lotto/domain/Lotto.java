@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lotto {
 
@@ -28,18 +27,9 @@ public class Lotto {
     }
 
     Rank getRank(List<Integer> winNumbers) {
-        int sameWinNumberCount = 0;
-        for (Integer winNumber : winNumbers) {
-            sameWinNumberCount = getSameWinNumbers(winNumber, sameWinNumberCount);
-        }
-        return Rank.valueOf(sameWinNumberCount);
-    }
-
-    private int getSameWinNumbers(Integer winNumber, int sameWinNumberCount) {
-        if (numbers.contains(winNumber)) {
-            sameWinNumberCount++;
-        }
-        return sameWinNumberCount;
+        List<Integer> sameWinNumbers = numbers;
+        sameWinNumbers.retainAll(winNumbers);
+        return Rank.valueOf(sameWinNumbers.size());
     }
 
     public List<Integer> getNumbers() {
