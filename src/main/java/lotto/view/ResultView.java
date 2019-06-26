@@ -26,6 +26,6 @@ public class ResultView {
     }
     
     private String getMatchesString(Prize prize, int matchedCount) {
-        return prize.getMatchCount() + "개 일치 " + "(" + prize.getPrizeMoney() + "원)" + "- " + matchedCount + "개";
+        return prize.getInfo() + matchedCount + " 개";
     }
 }

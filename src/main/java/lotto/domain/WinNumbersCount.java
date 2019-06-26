@@ -14,8 +14,8 @@ public class WinNumbersCount {
         Arrays.stream(Prize.values()).forEach(prize -> winNumbersCount.put(prize, DEFAULT_WIN_COUNT));
     }
     
-    public int addWinCount(final int matchCount) {
-        final Prize matchPrize = Prize.getPrize(matchCount);
+    public int addWinCount(final int matchCount, final boolean isMatchedBonus) {
+        final Prize matchPrize = Prize.getPrize(matchCount, isMatchedBonus);
         if (matchPrize == null) {
             return 0;
         }
@@ -23,6 +23,10 @@ public class WinNumbersCount {
         int nowCount = winNumbersCount.get(matchPrize);
         winNumbersCount.put(matchPrize, ++nowCount);
         return nowCount;
+    }
+    
+    public int addWinCount(final int matchCount) {
+        return this.addWinCount(matchCount, false);
     }
     
     public long getTotalPrizeMoney() {

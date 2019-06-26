@@ -12,7 +12,7 @@ class PrizeTest {
         //Given
         int matchCount = 3;
         //When
-        Prize prize = Prize.getPrize(matchCount);
+        Prize prize = Prize.getPrize(matchCount, false);
         //Then
         Assertions.assertThat(prize).isEqualTo(Prize.THREE_NUMBER_MATCH);
     }
