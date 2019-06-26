@@ -1,5 +1,6 @@
 package com.jaeyeonling.lotto.domain;
 
+import com.jaeyeonling.lotto.exception.NoSuchLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ManualLottoGeneratorTest {
 
@@ -47,5 +50,30 @@ class ManualLottoGeneratorTest {
 
         assertThat(lottos).hasSize(count);
         assertThat(lottos).containsAll(expect);
+    }
+
+    @DisplayName("로또 수동 생성 갯수 넘을 때 예외처리 ")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1,
+            2,
+            23,
+            50,
+            1000
+    })
+    void should_throw_NoSuchLottoException_when_generate(final int count) {
+        final List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new FixtureLotto());
+        }
+
+        final LottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottos);
+
+        assertThatExceptionOfType(NoSuchLottoException.class)
+                .isThrownBy(() -> {
+                    for (int i = 0; i < count + 1; i++) {
+                        manualLottoGenerator.generate();
+                    }
+                });
     }
 }
