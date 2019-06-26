@@ -1,11 +1,16 @@
 package lotto.model;
 
+import lotto.exception.ConflictLottoNumberException;
+
 public class WinningLotto {
 
     private final Lotto lotto;
     private final int bonusNumber;
 
     public WinningLotto(Lotto lotto, int bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
+            throw new ConflictLottoNumberException();
+        }
         this.lotto = lotto;
         this.bonusNumber = bonusNumber;
     }
