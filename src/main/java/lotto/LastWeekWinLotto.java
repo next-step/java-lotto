@@ -10,6 +10,17 @@ public class LastWeekWinLotto {
   public LastWeekWinLotto(String inputWinLottoNumber, int bonusNumber) {
     lottoNumbers = new Lotto(inputWinLottoNumber).getNumbers();
     this.bonusNumber = bonusNumber;
+    validate();
+  }
+
+  private void validate() {
+    duplicateNumberCheck();
+  }
+
+  private void duplicateNumberCheck() {
+    if(lottoNumbers.hasBonusNumber(bonusNumber)) {
+      throw new IllegalArgumentException("당첨 번호와 보너스볼 번호가 일치할 수 업습니다.");
+    }
   }
 
   public Rank getResult(Lotto lotto) {
