@@ -22,6 +22,6 @@ public class LottoController {
 	}
 
 	public void lottery(InputDialog input, ResultViewer viewer) {
-
+		viewer.render();
 	}
 }
