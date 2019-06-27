@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CashPaymentsTest {
-    private CashPayments cashPayments;   
+    private CashPayments cashPayments;
     
     @BeforeEach
     void setUp() {

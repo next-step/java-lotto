@@ -24,7 +24,7 @@ public class Lottos {
         if (buyableCount <= CANT_BUYABLE_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
         }
-
+        
         return buyableCount;
     }
     
@@ -45,7 +45,7 @@ public class Lottos {
     
     public boolean hasLottoNumbers(LottoNumbers lottoNumbers) {
         return lottos.stream()
-                .anyMatch(numbers -> numbers.isEqualsTo(lottoNumbers));
+            .anyMatch(numbers -> numbers.isEqualsTo(lottoNumbers));
     }
     
     @Override

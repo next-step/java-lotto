@@ -23,8 +23,8 @@ class PatternFormulaTest {
     void separateCustomSeparatorExceptionTest() {
         //Then
         Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> new PatternFormula("//\n1;2;3"))
-          .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
+            .isThrownBy(() -> new PatternFormula("//\n1;2;3"))
+            .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
     
     @Test
@@ -32,8 +32,8 @@ class PatternFormulaTest {
     void test() {
         //Then
         Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> new PatternFormula("//aa\\n1;2;3"))
-          .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
+            .isThrownBy(() -> new PatternFormula("//aa\\n1;2;3"))
+            .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
     
     @Test
@@ -53,7 +53,7 @@ class PatternFormulaTest {
         //Then
         Assertions.assertThat(formula).isNotNull();
     }
-        
+    
     @Test
     @DisplayName("콜론만으로 구분된 문자열이 들어온 경우 : 분리 가능")
     void catSplitColonTest() {
@@ -86,7 +86,7 @@ class PatternFormulaTest {
     void separateNon() {
         //Then
         Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> new PatternFormula("asdgasf"))
-          .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
+            .isThrownBy(() -> new PatternFormula("asdgasf"))
+            .withMessage(ErrorMessage.INCORRECT_VALUE.getMessage());
     }
 }

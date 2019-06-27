@@ -29,14 +29,14 @@ public class BuyingLottos {
     
     private List<LottoNumbers> makeLottoNumbers(int count) {
         return IntStream.range(START_NUMBER, count)
-          .mapToObj(i -> new LottoNumbers())
-          .collect(Collectors.toList());
+            .mapToObj(i -> new LottoNumbers())
+            .collect(Collectors.toList());
     }
     
     private List<LottoNumbers> makeLottoNumbers(List<String> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(LottoNumbers::new)
-                .collect(Collectors.toList());
+            .map(LottoNumbers::new)
+            .collect(Collectors.toList());
     }
     
     public Lottos buyLottos(List<String> selfLottoNumbers) {

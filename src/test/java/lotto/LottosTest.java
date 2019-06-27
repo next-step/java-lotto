@@ -15,7 +15,7 @@ class LottosTest {
     private Lottos lottos;
     
     @BeforeEach
-    void setUp() { 
+    void setUp() {
         lottos = new Lottos();
     }
     
@@ -37,8 +37,8 @@ class LottosTest {
         String hasNumbers = "1,2,3,4,5,6";
         String notHasNumbers = "4,5,6,7,8,9";
         Lottos lottos = new Lottos(Arrays.asList(
-          new LottoNumbers(hasNumbers),
-          new LottoNumbers("2,3,4,5,6,7"))
+            new LottoNumbers(hasNumbers),
+            new LottoNumbers("2,3,4,5,6,7"))
         );
         LottoNumbers lottoNumbers = new LottoNumbers(hasNumbers);
         LottoNumbers notHasLottoNumbers = new LottoNumbers(notHasNumbers);

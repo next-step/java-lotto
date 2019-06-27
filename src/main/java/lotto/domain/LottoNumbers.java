@@ -26,12 +26,12 @@ public class LottoNumbers {
     
     public LottoNumbers(final String[] lottoNumbersArr) {
         this(
-          Arrays.stream(lottoNumbersArr)
-            .map(String::trim)
-            .filter(StringUtils::isNumeric)
-            .mapToInt(lottoNumber -> Integer.parseInt(lottoNumber.trim()))
-            .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList())
+            Arrays.stream(lottoNumbersArr)
+                .map(String::trim)
+                .filter(StringUtils::isNumeric)
+                .mapToInt(lottoNumber -> Integer.parseInt(lottoNumber.trim()))
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList())
         );
     }
     
@@ -44,14 +44,14 @@ public class LottoNumbers {
         }
         this.lottoNumbers = lottoNumbers;
     }
-
+    
     private static boolean checkDuplicateNumber(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-          .distinct()
-          .count() == lottoNumbers.size();
+            .distinct()
+            .count() == lottoNumbers.size();
     }
     
-    public int getMatchedNumberCount(final LottoNumbers lottoNumbers) { 
+    public int getMatchedNumberCount(final LottoNumbers lottoNumbers) {
         return this.lottoNumbers.stream()
             .filter(lottoNumbers::contains)
             .mapToInt(lottoNumber -> 1)
@@ -73,7 +73,7 @@ public class LottoNumbers {
     
     private boolean isEqualsTo(List<LottoNumber> lottoNumbers) {
         return IntStream.range(START_NUMBER, lottoNumbers.size())
-                .allMatch(i -> this.lottoNumbers.get(i).equals(lottoNumbers.get(i)));
+            .allMatch(i -> this.lottoNumbers.get(i).equals(lottoNumbers.get(i)));
     }
     
     

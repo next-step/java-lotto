@@ -29,7 +29,7 @@ public class InputView {
         return inputer.inputNumber();
     }
     
-    public WinNumbers getUserInputWinNumber() {    
+    public WinNumbers getUserInputWinNumber() {
         return new WinNumbers(getWinNumbers(), getBonusNumber());
     }
     
@@ -46,7 +46,7 @@ public class InputView {
     public List<String> getInputSelfLottoNumbers(final SelfInputCount selfInputCount) {
         outer.print(SELF_INPUT_NUMBER.getAnswer());
         return IntStream.range(0, selfInputCount.getSelfInputCount())
-          .mapToObj(i -> inputer.inputString())
-          .collect(Collectors.toList());
+            .mapToObj(i -> inputer.inputString())
+            .collect(Collectors.toList());
     }
 }
