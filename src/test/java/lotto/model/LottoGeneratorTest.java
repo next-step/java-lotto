@@ -26,7 +26,7 @@ public class LottoGeneratorTest {
   @Test
   @DisplayName("로또 생성2 generate에 List<Integer> 넘기는 방식")
   void generate2() {
-    Lotto lotto = LottoGenerator.generate(Arrays.asList(1,2,3,4,5,6));
+    Lotto lotto = LottoGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
     assertThat(lotto.contains(1)).isTrue();
   }
 }

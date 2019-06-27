@@ -17,6 +17,6 @@ public class NumberGeneratorTest {
   @Test
   void mockNumberGenerate() {
     List<Integer> numbers = new MockNumberGenerator().generate(Lotto.COUNT_OF_NUMBERS);
-    assertThat(numbers).contains(1,2,3,4,5,6);
+    assertThat(numbers).contains(1, 2, 3, 4, 5, 6);
   }
 }

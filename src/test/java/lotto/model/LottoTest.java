@@ -14,7 +14,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class LottoTest {
 
   @Test
-  @ValueSource(ints = {1,2,3,4,5,6})
+  @ValueSource(ints = {1, 2, 3, 4, 5, 6})
   @DisplayName("로또가 가지고 있는 번호 확인")
   void lottoHasNumbers(int value) {
     NumberGenerator numberGenerator = new MockNumberGenerator();
@@ -28,7 +28,7 @@ public class LottoTest {
   @DisplayName("로또 번호 중에 중복되는 번호가 있는지 확인")
   void conflictLottoNumber() {
     assertThatExceptionOfType(DuplicatetLottoNumberException.class).isThrownBy(() -> {
-      List<Integer> lottoNumbers = Arrays.asList(1,2,3,3,2,1);
+      List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 3, 2, 1);
       new Lotto(lottoNumbers);
     });
   }

@@ -16,12 +16,12 @@ public class AnalyzerTest {
 
     @BeforeEach
     void setUp() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1,3,5,6,9,11));
-        Lotto lotto2 = new Lotto(Arrays.asList(1,3,5,9,11,15));
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 3, 5, 6, 9, 11));
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 3, 5, 9, 11, 15));
 
         lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
-        List<Integer> winningNumbers = Arrays.asList(1,3,5,6,9);
+        List<Integer> winningNumbers = Arrays.asList(1, 3, 5, 6, 9);
         Lotto lottoWithWinningNumbers = LottoGenerator.generate(winningNumbers);
 
         int bonusNumber = 3;
