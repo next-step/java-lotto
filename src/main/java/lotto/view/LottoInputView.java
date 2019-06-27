@@ -1,10 +1,9 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoGenerator;
-import lotto.model.LottoNumber;
-import lotto.model.Money;
+import lotto.exception.InvalidCountOfLottoException;
+import lotto.model.*;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +14,8 @@ import static java.util.stream.Collectors.toList;
 public class LottoInputView {
 
   private static final String PURCHASE_AMOUNT_MESSAGE = "구입금액을 입력해 주세요.";
+  private static final String MANUAL_PURCHASE_QUANTITY_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+  private static final String MANUAL_NUMBERS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
   private static final String WINNING_NUMBERS_MESSAGE = "지난 주 당첨번호를 입력해 주세요.";
   private static final String BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
   private static final String NOT_A_NUMBER_INPUT_ERROR_MESSAGE = "숫자로 제대로 입력해주세요.";
@@ -30,6 +31,48 @@ public class LottoInputView {
     } catch(InputMismatchException e) {
       throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
     }
+  }
+
+  public static Quantity askManualPurchaseQuantity(Money paidMoney) {
+    print(MANUAL_PURCHASE_QUANTITY_MESSAGE);
+
+    try {
+      Scanner scanner = new Scanner(System.in);
+      int count = scanner.nextInt();
+      if (count > paidMoney.getPurchaseableQuantity()) {
+        throw new InvalidCountOfLottoException();
+      }
+
+      return new Quantity(count);
+    } catch(InputMismatchException e) {
+      throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
+    }
+  }
+
+  public static List<List<LottoNumber>> askLottoNumbersToBuyManually(Quantity quantity) {
+    print(MANUAL_NUMBERS_MESSAGE);
+
+    Scanner scanner = new Scanner(System.in);
+    List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
+
+    while(quantity.exists()) {
+      try {
+        String input = scanner.nextLine();
+        List<LottoNumber> lottoNumbers = Stream.of(input.split(DELIMITER_FOR_WINNING_NUMBERS))
+                .mapToInt(Integer::valueOf)
+                .boxed()
+                .sorted()
+                .map(LottoNumber::new)
+                .collect(toList());
+
+        manualLottoNumbers.add(lottoNumbers);
+        quantity.reduce();
+      } catch(InputMismatchException e) {
+        throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
+      }
+    }
+
+    return manualLottoNumbers;
   }
 
   public static Lotto askWinningNumbers() {
