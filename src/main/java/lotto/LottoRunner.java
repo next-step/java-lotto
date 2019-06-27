@@ -7,10 +7,6 @@ import lotto.view.out.MessagePrinter;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 public class LottoRunner {
 
 	public static void main(String args[]) {

@@ -1,10 +1,10 @@
 package lotto;
 
-import calculator.ExpressionParser;
+import common.ExpressionParser;
 import lotto.view.in.InputDialog;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
-import model.NumberElementCollection;
+import common.NumberElementCollection;
 
 public class LottoController {
 

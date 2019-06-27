@@ -1,6 +1,6 @@
 package calculator;
 
-import java.util.Scanner;
+import common.ExpressionParser;
 
 public class CalculatorRunner {
 

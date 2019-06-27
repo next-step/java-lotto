@@ -1,6 +1,4 @@
-package calculator;
-
-import model.NumberElementCollection;
+package common;
 
 public class ExpressionParser {
 

@@ -1,6 +1,6 @@
 package lotto;
 
-import model.NumberElementCollection;
+import common.NumberElementCollection;
 
 import java.util.ArrayList;
 import java.util.List;

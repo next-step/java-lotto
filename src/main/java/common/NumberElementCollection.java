@@ -1,4 +1,4 @@
-package model;
+package common;
 
 import lotto.exception.OutOfCountException;
 

@@ -1,4 +1,4 @@
-package model;
+package common;
 
 import java.util.Objects;
 

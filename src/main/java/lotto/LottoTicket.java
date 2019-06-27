@@ -2,9 +2,7 @@ package lotto;
 
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfMaxNumberException;
-import model.NumberElementCollection;
-
-import java.util.Collections;
+import common.NumberElementCollection;
 
 public class LottoTicket {
 

@@ -1,7 +1,7 @@
 package calculator;
 
-import model.NumberElement;
-import model.NumberElementCollection;
+import common.NumberElement;
+import common.NumberElementCollection;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
