@@ -4,16 +4,24 @@ import lotto.model.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
+import java.util.List;
+
 public class LottoRunner {
 
   public static void main(String[] args) {
 
     Money paidMoney = LottoInputView.askPurchaseAmount();
+    Quantity quantity = LottoInputView.askManualPurchaseQuantity(paidMoney);
+    List<List<LottoNumber>> lottoNumbers = LottoInputView.askLottoNumbersToBuyManually(quantity);
+
+    Lottos manualLottos = LottoGenerator.generateManually(lottoNumbers);
+    paidMoney.makePayment(quantity);
 
     LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
-    Lottos lottos = lottoGenerator.generate(paidMoney);
+    Lottos autoLottos = lottoGenerator.generate(paidMoney);
+    Lottos lottos = lottoGenerator.union(manualLottos, autoLottos);
 
-    LottoOutputView.printCountOf(lottos);
+    LottoOutputView.printCountOf(manualLottos, autoLottos);
     LottoOutputView.printPickedNumbersOf(lottos);
 
     Lotto lottoWithWinningNumbers = LottoInputView.askWinningNumbers();
