@@ -8,13 +8,15 @@ public class LotteryStore {
 
 	private static final int PRICE = 1000;
 
-	public List<LottoTicket> buy(int money) {
+	public LottoWallet buy(int money) {
 
 		int availableCount = money / PRICE;
 
-		return IntStream.range(0, availableCount)
+		List<LottoTicket> tickets = IntStream.range(0, availableCount)
 				.mapToObj(index -> this.issuingTicket())
 				.collect(Collectors.toList());
+
+		return new LottoWallet(tickets, money % PRICE);
 	}
 
 	private LottoTicket issuingTicket(){
