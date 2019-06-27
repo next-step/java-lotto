@@ -36,6 +36,7 @@ public class LottoTicket {
 	}
 
 	public int checkWin(NumberElementCollection winNumbers) {
-		return 4;
+		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumbers);
+		return matchedNumbers.size() == 0 ? 0 : 7 - matchedNumbers.size();
 	}
 }
