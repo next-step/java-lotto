@@ -13,7 +13,8 @@ public class ResultReport {
 	}
 
 	public int countOfResult(LottoResult result) {
-		return Optional.ofNullable(resultStats.get(result)).orElse(0);
+		return Optional.ofNullable(resultStats.get(result))
+				.orElse(0);
 	}
 
 	public int increment(LottoResult result) {

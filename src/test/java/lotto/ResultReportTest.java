@@ -36,4 +36,27 @@ class ResultReportTest {
 				Arguments.of(LottoResult.FAIL, 0)
 		);
 	}
+
+	@DisplayName("다중, 복합 당첨 케이스 상금 확인")
+	@ParameterizedTest
+	@MethodSource("provideComplexResult")
+	void verifyRewardComplex(List<LottoResult> results, int expectReward) {
+		ResultReport report = new ResultReport();
+
+		for(LottoResult result : results){
+			report.increment(result);
+		}
+
+		int totalReward = report.totalReward();
+
+		assertThat(totalReward).isEqualTo(expectReward);
+	}
+
+	private static Stream<Arguments> provideComplexResult(){
+		return Stream.of(
+				Arguments.of(Arrays.asList(LottoResult.WIN_1ST, LottoResult.WIN_2ND), 2001500000),
+				Arguments.of(Arrays.asList(LottoResult.WIN_2ND, LottoResult.WIN_4TH), 1505000),
+				Arguments.of(Arrays.asList(LottoResult.WIN_3RD, LottoResult.WIN_3RD, LottoResult.WIN_4TH, LottoResult.FAIL), 105000)
+		);
+	}
 }
