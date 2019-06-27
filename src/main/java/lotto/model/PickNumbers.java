@@ -1,24 +1,23 @@
 package lotto.model;
 
-import java.util.Collections;
-import java.util.List;
+public class PickNumbers {
 
-public class PickNumbers extends LottoNumbers {
+    private LottoNumbers numbers;
 
-    private List<Number> numbers;
-
-    public PickNumbers(List<Number> numbers) {
-        super(numbers);
-        Collections.sort(numbers);
+    public PickNumbers(LottoNumbers numbers) {
         this.numbers = numbers;
     }
 
-    public boolean contains(Number winningNumber) {
-        return this.numbers.contains(winningNumber);
+    public LottoRank match(WinningNumbers winnerNumbers) {
+        return winnerNumbers.match(numbers);
     }
 
     @Override
     public String toString() {
         return numbers.toString();
+    }
+
+    public boolean contains(Number winningNumber) {
+        return numbers.contains(winningNumber);
     }
 }

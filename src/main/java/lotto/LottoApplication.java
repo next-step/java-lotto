@@ -1,13 +1,11 @@
 package lotto;
 
-import lotto.model.*;
 import lotto.model.Number;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
-public class LottoAplication {
+public class LottoApplication {
 
     public static void main(String[] args) {
 
@@ -20,13 +18,11 @@ public class LottoAplication {
         ResultView.printBuyLottoCount(order);
         ResultView.printPickedLottoNumbers(lottos);
 
-        LottoResultMatcher lottoResultMatcher = new LottoResultMatcher(lottos);
-
-        List<Number> numbers = InputView.inputWinningNumber();
+        LottoNumbers numbers = InputView.inputWinningNumber();
         Number bonusNumber = InputView.winningBonusNumber();
         WinningNumbers winningNumbers = new WinningNumbers(numbers, bonusNumber);
 
-        LottoAggregator lottoAggregator = lottoResultMatcher.matching(winningNumbers);
+        LottoAggregator lottoAggregator = lottos.matchWinningNumber(winningNumbers);
         ResultView.printResult(lottoAggregator);
     }
 }

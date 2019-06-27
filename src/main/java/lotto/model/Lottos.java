@@ -18,6 +18,14 @@ public class Lottos {
         return this;
     }
 
+    public LottoAggregator matchWinningNumber(WinningNumbers winnerNumbers) {
+        LottoAggregator lottoAggregator = new LottoAggregator();
+        for (PickNumbers pickNumbers : pickNumbers) {
+            lottoAggregator.put(pickNumbers.match(winnerNumbers));
+        }
+        return lottoAggregator;
+    }
+
     public List<PickNumbers> getPickNumbers() {
         return pickNumbers;
     }

@@ -15,10 +15,12 @@ public class NumbersGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Number> autoGenerate() {
+    public LottoNumbers autoGenerate() {
         Collections.shuffle(numbers);
-        return numbers.stream()
+        List<Number> numbers = this.numbers.stream()
                 .limit(LottoNumbers.LOTTO_NUMBER_SIZE)
                 .collect(Collectors.toList());
+        return new LottoNumbers(numbers);
+
     }
 }

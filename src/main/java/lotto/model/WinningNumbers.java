@@ -1,33 +1,27 @@
 package lotto.model;
 
-import java.util.List;
-
-public class WinningNumbers extends LottoNumbers {
+public class WinningNumbers {
 
 
-    private List<Number> numbers;
+    private LottoNumbers numbers;
     private Number bonusNumber;
 
-    public WinningNumbers(List<Number> numbers, Number bonusNumber) {
-        super(numbers);
+    public WinningNumbers(LottoNumbers numbers, Number bonusNumber) {
         verifyBonusDuplication(numbers, bonusNumber);
         this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoRank match(PickNumbers pickNumbers) {
-        long matchCount = this.numbers.stream()
-                .filter(pickNumbers::contains)
-                .count();
-
+    public LottoRank match(LottoNumbers pickNumbers) {
+        long matchCount = numbers.matchCount(pickNumbers);
         return LottoRank.match((int) matchCount, hasBonus(pickNumbers));
     }
 
-    private boolean hasBonus(PickNumbers pickNumbers) {
+    private boolean hasBonus(LottoNumbers pickNumbers) {
         return pickNumbers.contains(bonusNumber);
     }
 
-    private void verifyBonusDuplication(List<Number> numbers, Number bonusNumber) {
+    private void verifyBonusDuplication(LottoNumbers numbers, Number bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("이미 번호가 뽑혀있습니다. ");
         }

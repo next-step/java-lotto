@@ -5,24 +5,25 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoStoreTest {
 
-    private List<Number> numbers;
+    private LottoNumbers numbers;
 
     @BeforeEach
     void setUp() {
-        numbers = Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(6)
+        numbers = new LottoNumbers(
+                Arrays.asList(
+                        new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6)
+                )
         );
     }
 

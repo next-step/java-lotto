@@ -45,7 +45,7 @@ class LottoNumbersTest {
         );
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new PickNumbers(tooMany);
+            new LottoNumbers(tooMany);
         });
     }
 
@@ -61,7 +61,7 @@ class LottoNumbersTest {
                 new Number(5)
         );
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new PickNumbers(tooSmall);
+            new LottoNumbers(tooSmall);
         });
     }
 }

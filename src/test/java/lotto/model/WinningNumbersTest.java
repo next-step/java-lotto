@@ -15,7 +15,7 @@ class WinningNumbersTest {
     public void compareNumbers() {
 
 
-        PickNumbers pickNumbers = new PickNumbers(
+        LottoNumbers lottoNumbers = new LottoNumbers(
                 Arrays.asList(
                         new Number(1),
                         new Number(2),
@@ -25,20 +25,21 @@ class WinningNumbersTest {
                         new Number(6)
                 )
         );
-
         WinningNumbers winningNumbers = new WinningNumbers(
-                Arrays.asList(
-                        new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6)
+                new LottoNumbers(
+                        Arrays.asList(
+                                new Number(1),
+                                new Number(2),
+                                new Number(3),
+                                new Number(4),
+                                new Number(5),
+                                new Number(6)
+                        )
                 ),
                 new Number(7)
         );
 
-        assertThat(winningNumbers.match(pickNumbers)).isEqualTo(LottoRank.FIRST);
+        assertThat(winningNumbers.match(lottoNumbers)).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
@@ -46,15 +47,17 @@ class WinningNumbersTest {
     public void bonusDuplicationException() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new WinningNumbers(
-                    Arrays.asList(
-                            new Number(1),
-                            new Number(2),
-                            new Number(3),
-                            new Number(4),
-                            new Number(5),
-                            new Number(6)
+                    new LottoNumbers(
+                            Arrays.asList(
+                                    new Number(1),
+                                    new Number(2),
+                                    new Number(3),
+                                    new Number(4),
+                                    new Number(5),
+                                    new Number(7)
+                            )
                     ),
-                    new Number(6)
+                    new Number(7)
             );
         });
     }
