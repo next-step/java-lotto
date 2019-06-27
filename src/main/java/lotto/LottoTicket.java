@@ -10,6 +10,10 @@ public class LottoTicket {
 
 	NumberElementCollection numbers = new NumberElementCollection(LottoRule.MAX_COUNT);
 
+	private LottoTicket(){
+		// 기본생성자는 클래스메서드에서만 접근
+	}
+
 	private void add(int number) {
 
 		if(numbers.contains(number)){
@@ -45,5 +49,12 @@ public class LottoTicket {
 	@Override
 	public String toString() {
 		return String.format(TO_STRING_FORMAT, numbers);
+	}
+
+	public static LottoTicket of(int[] numbers){
+		LottoTicket ticket = new LottoTicket();
+		ticket.add(numbers);
+
+		return ticket;
 	}
 }

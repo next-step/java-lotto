@@ -23,7 +23,7 @@ class LottoTicketTest {
 	void addSameNumber() {
 
 		int[] numbers = {1, 1, 2, 3, 4, 5};
-		LottoTicket ticket = new LottoTicket();
+		LottoTicket ticket = LottoTicket.of(numbers);
 
 		assertThatExceptionOfType(DuplicateNumberException.class).isThrownBy(() -> {
 			ticket.add(numbers);
@@ -34,7 +34,7 @@ class LottoTicketTest {
 	@Test
 	void addOverCount() {
 		int[] numbers = {1, 2, 3, 4, 5, 6, 7};
-		LottoTicket ticket = new LottoTicket();
+		LottoTicket ticket = LottoTicket.of(numbers);
 
 		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
 			ticket.add(numbers);
@@ -45,7 +45,7 @@ class LottoTicketTest {
 	@Test
 	void addOverLimit() {
 		int[] numbers = {1, 2, 3, 4, 5, LottoRule.MAX_NUMBER + 1};
-		LottoTicket ticket = new LottoTicket();
+		LottoTicket ticket = LottoTicket.of(numbers);
 
 		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
 			ticket.add(numbers);
@@ -57,8 +57,7 @@ class LottoTicketTest {
 	@MethodSource("provideWinNumbers")
 	void checkWin(int[] winNumbers, LottoResult expectResult) {
 		// Arrange
-		LottoTicket ticket = new LottoTicket();
-		ticket.add(new int[]{1, 2, 3, 4, 5, 6});
+		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
 
 		NumberElementCollection numbers = new NumberElementCollection(6);
 		for(int number : winNumbers){
@@ -87,7 +86,7 @@ class LottoTicketTest {
 	@Test
 	void illegalWinNumbers() {
 		// Arrange
-		LottoTicket ticket = new LottoTicket();
+		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
 
 		int[] winNumbers = new int[]{1, 2, 3, 4, 5};
 		NumberElementCollection numbers = new NumberElementCollection(6);
@@ -102,8 +101,7 @@ class LottoTicketTest {
 	@DisplayName("toString 반환 테스트")
 	@Test
 	void verifyToString() {
-		LottoTicket ticket = new LottoTicket();
-		ticket.add(new int[]{1, 2, 3, 4, 5, 6});
+		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
 
 		assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 	}

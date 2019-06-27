@@ -18,15 +18,12 @@ public class TicketMachine {
 
 	public LottoTicket issuingTicket(){
 
-		LottoTicket ticket = new LottoTicket();
 		Collections.shuffle(numberPool);
 
 		int[] numbers = IntStream.range(0, LottoRule.MAX_COUNT)
 				.map(index -> numberPool.get(index))
 				.toArray();
 
-		ticket.add(numbers);
-
-		return ticket;
+		return LottoTicket.of(numbers);
 	}
 }
