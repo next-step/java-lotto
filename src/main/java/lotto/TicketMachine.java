@@ -21,8 +21,11 @@ public class TicketMachine {
 		LottoTicket ticket = new LottoTicket();
 		Collections.shuffle(numberPool);
 
-		IntStream.range(0, LottoRule.MAX_COUNT)
-				.forEach(index -> ticket.add(numberPool.get(index)));
+		int[] numbers = IntStream.range(0, LottoRule.MAX_COUNT)
+				.map(index -> numberPool.get(index))
+				.toArray();
+
+		ticket.add(numbers);
 
 		return ticket;
 	}

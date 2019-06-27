@@ -22,36 +22,33 @@ class LottoTicketTest {
 	@Test
 	void addSameNumber() {
 
+		int[] numbers = {1, 1, 2, 3, 4, 5};
 		LottoTicket ticket = new LottoTicket();
-		ticket.add(1);
 
 		assertThatExceptionOfType(DuplicateNumberException.class).isThrownBy(() -> {
-			ticket.add(1);
+			ticket.add(numbers);
 		});
 	}
 
 	@DisplayName("허용된 개수 이상 입력")
 	@Test
 	void addOverCount() {
-		int[] numbers = {1, 2, 3, 4, 5, 6};
+		int[] numbers = {1, 2, 3, 4, 5, 6, 7};
 		LottoTicket ticket = new LottoTicket();
 
-		for(int number : numbers){
-			ticket.add(number);
-		}
-
 		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
-			ticket.add(7);
+			ticket.add(numbers);
 		});
 	}
 
 	@DisplayName("허용된 숫자 이상 입력")
 	@Test
 	void addOverLimit() {
+		int[] numbers = {1, 2, 3, 4, 5, LottoRule.MAX_NUMBER + 1};
 		LottoTicket ticket = new LottoTicket();
 
 		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
-			ticket.add(LottoRule.MAX_NUMBER + 1);
+			ticket.add(numbers);
 		});
 	}
 
