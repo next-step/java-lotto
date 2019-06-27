@@ -59,4 +59,5 @@ class ResultReportTest {
 				Arguments.of(Arrays.asList(LottoResult.WIN_3RD, LottoResult.WIN_3RD, LottoResult.WIN_4TH, LottoResult.FAIL), 105000)
 		);
 	}
+
 }

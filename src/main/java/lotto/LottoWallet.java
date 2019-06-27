@@ -57,7 +57,6 @@ public class LottoWallet {
 					report.increment(ticket.checkWin(winNumbers));
 				});
 
-
 		return report;
 	}
 }
