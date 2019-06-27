@@ -10,9 +10,9 @@ public class LottoWallet {
 
 	private static final CharSequence NEW_LINE = "\n";
 
-	List<LottoTicket> tickets;
+	private List<LottoTicket> tickets;
 
-	int balance;
+	private int balance;
 
 	public LottoWallet(List<LottoTicket> tickets, int balance){
 		for(LottoTicket ticket : tickets) {

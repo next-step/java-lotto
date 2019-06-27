@@ -11,7 +11,7 @@ public class NumberElement {
     int value;
 
     public NumberElement(String value){
-        this(isEmpty(value) ? 0 : Integer.parseInt(value));
+        this(isEmpty(value.trim()) ? 0 : Integer.parseInt(value.trim()));
     }
 
     public NumberElement(int value) {

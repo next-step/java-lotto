@@ -41,6 +41,10 @@ public enum LottoResult {
 		return reward;
 	}
 
+	public String getCondition() {
+		return condition;
+	}
+
 	public static LottoResult valueOfMatchedCount(int size) {
 		return resultMap.get(size);
 	}

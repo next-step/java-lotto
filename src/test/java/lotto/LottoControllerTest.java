@@ -50,6 +50,7 @@ public class LottoControllerTest {
 
 		// Assertion
 		assertThat(output).contains("당첨통계");
+		assertThat(output).contains("3개 일치 (5000원)- 1개");
 		assertThat(output).contains("총 수익률은 5.00입니다.");
 	}
 
