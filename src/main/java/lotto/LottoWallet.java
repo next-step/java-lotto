@@ -50,6 +50,14 @@ public class LottoWallet {
 	}
 
 	public ResultReport result(NumberElementCollection winNumbers) {
-		return new ResultReport();
+		ResultReport report = new ResultReport();
+
+		tickets.stream()
+				.forEach(ticket -> {
+					report.increment(ticket.checkWin(winNumbers));
+				});
+
+
+		return report;
 	}
 }

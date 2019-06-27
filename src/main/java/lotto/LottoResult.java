@@ -16,6 +16,8 @@ public enum LottoResult {
 	static {
 		resultMap = new HashMap<>();
 		resultMap.put(0, FAIL);
+		resultMap.put(1, FAIL);
+		resultMap.put(2, FAIL);
 		resultMap.put(3, WIN_4TH);
 		resultMap.put(4, WIN_3RD);
 		resultMap.put(5, WIN_2ND);
