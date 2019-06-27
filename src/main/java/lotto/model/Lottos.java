@@ -26,10 +26,6 @@ public class Lottos {
         return pickNumbers.size();
     }
 
-    public void merge(Lottos handPickLottos) {
-        this.pickNumbers.addAll(handPickLottos.getPickNumbers());
-    }
-
     @Override
     public String toString() {
         List<String> lottos = this.pickNumbers.stream()
