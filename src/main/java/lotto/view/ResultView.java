@@ -6,7 +6,6 @@ import lotto.domain.Rank;
 import lotto.domain.WinLotto;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public class ResultView {
@@ -26,7 +25,7 @@ public class ResultView {
     System.out.println("---------");
     Stream.of(Rank.values())
         .filter(rank -> rank.getCountOfMatch() > 0)
-        .forEach(rank -> System.out.println(rank.getCountOfMatch() + "개 일치 ("
+        .forEach(rank -> System.out.println(rank.printString() + " ("
             + rank.getWinningMoney() + "원) - " + winLotto.getOrDefault(rank, DEFAULT_VALUE) + "개"));
   }
 

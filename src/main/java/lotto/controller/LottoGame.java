@@ -22,7 +22,8 @@ public class LottoGame {
     ResultView.printTickets(lottoTickets.getTickets());
 
     List<Integer> winNumbers = InputView.winNumbers(scanner);
-    List<Rank> ranks = lottoTickets.winNumberSize(winNumbers);
+    int bonusNumber = InputView.bonusNumber(scanner);
+    List<Rank> ranks = lottoTickets.winNumberSize(winNumbers, bonusNumber);
 
     WinLotto statistics = LottoStatistics.statistics(ranks);
     ResultView.printRanks(statistics);

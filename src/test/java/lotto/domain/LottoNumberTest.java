@@ -36,7 +36,7 @@ public class LottoNumberTest {
   @Test
   void compareNumbers() {
     LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-    List<Integer> winNumber = Arrays.asList(1, 2, 3, 6, 33, 40);
-    assertThat(lottoNumber.winNumberSize(winNumber)).isEqualTo(Rank.FOURTH);
+    List<Integer> winNumber = Arrays.asList(1, 2, 3, 6, 5, 40);
+    assertThat(lottoNumber.winNumberSize(winNumber, 4)).isEqualTo(Rank.SECOND);
   }
 }

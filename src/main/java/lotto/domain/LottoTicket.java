@@ -12,8 +12,8 @@ public class LottoTicket {
     this.lottoNumber = lottoNumber;
   }
 
-  public Rank winNumberSize(List<Integer> winNumber) {
-    return lottoNumber.winNumberSize(winNumber);
+  public Rank winNumberSize(List<Integer> winNumber, int bonusNumber) {
+    return lottoNumber.winNumberSize(winNumber, bonusNumber);
   }
 
   @Override

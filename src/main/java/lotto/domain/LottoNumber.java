@@ -20,11 +20,12 @@ public class LottoNumber {
     Collections.sort(this.numbers);
   }
 
-  public Rank winNumberSize(List<Integer> winNumber) {
-    return Rank.getInstance(
+  public Rank winNumberSize(List<Integer> winNumber, int bonusNumber) {
+    return Rank.valueOf(
         winNumber.stream()
             .filter(numbers::contains)
-            .count());
+            .count(),
+        numbers.contains(bonusNumber));
   }
 
   private void validateNumbersRange(List<Integer> numbers) {

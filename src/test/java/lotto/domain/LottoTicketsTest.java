@@ -17,9 +17,9 @@ public class LottoTicketsTest {
     List<Integer> winNumber = Arrays.asList(1, 2, 3, 6, 33, 40);
 
     List<Rank> ranks = Arrays.asList(
-        Rank.getInstance(4),
-        Rank.getInstance(3));
+        Rank.valueOf(4, false),
+        Rank.valueOf(3, true));
 
-    assertThat(lottoTickets.winNumberSize(winNumber).equals(ranks)).isTrue();
+    assertThat(lottoTickets.winNumberSize(winNumber, 44).equals(ranks)).isTrue();
   }
 }
