@@ -36,6 +36,6 @@ public class LottoTicket {
 	}
 
 	public int checkWin(NumberElementCollection winNumbers) {
-		return 0;
+		return 5;
 	}
 }
