@@ -13,10 +13,10 @@ public class LottoTicket {
 	NumberElementCollection numbers = new NumberElementCollection(MAX_COUNT);
 
 	public void add(int number) {
+
 		if(numbers.contains(number)){
 			throw new DuplicateNumberException();
 		}
-
 
 		if(number > MAX_NUMBER){
 			throw new OutOfMaxNumberException();
