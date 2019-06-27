@@ -101,7 +101,7 @@ class LottoTicketTest {
 	@DisplayName("toString 반환 테스트")
 	@Test
 	void verifyToString() {
-		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
+		LottoTicket ticket = LottoTicket.of(new int[]{6, 4, 3, 2, 5, 1});
 
 		assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
 	}
