@@ -1,15 +1,17 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum LottoResult {
 
-	WIN_1ST(2000000000, "6개 일치"),
-	WIN_2ND(1500000, "5개 일치"),
-	WIN_3RD(50000, "4개 일치"),
+	FAIL(0),
 	WIN_4TH(5000, "3개 일치"),
-	FAIL(0);
+	WIN_3RD(50000, "4개 일치"),
+	WIN_2ND(1500000, "5개 일치"),
+	WIN_1ST(2000000000, "6개 일치");
 
 	private static Map<Integer, LottoResult> resultMap;
 
@@ -49,4 +51,7 @@ public enum LottoResult {
 		return resultMap.get(size);
 	}
 
+	public static List<LottoResult> winResults(){
+		return Arrays.asList(WIN_4TH, WIN_3RD, WIN_2ND, WIN_1ST);
+	}
 }
