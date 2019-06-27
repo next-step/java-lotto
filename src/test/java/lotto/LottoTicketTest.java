@@ -59,7 +59,7 @@ class LottoTicketTest {
 	@DisplayName("복권 당첨 확인")
 	@ParameterizedTest
 	@MethodSource("provideWinNumbers")
-	void checkWin(int[] winNumbers, int expectRank) {
+	void checkWin(int[] winNumbers, LottoResult expectResult) {
 		// Arrange
 		LottoTicket ticket = new LottoTicket();
 		ticket.add(new int[]{1, 2, 3, 4, 5, 6});
@@ -70,17 +70,17 @@ class LottoTicketTest {
 		}
 
 		// Action
-		int rank = ticket.checkWin(numbers);
+		LottoResult result = ticket.checkWin(numbers);
 
 		// Assertion
-		assertThat(rank).isEqualTo(expectRank);
+		assertThat(result).isEqualTo(expectResult);
 	}
 
 	private static Stream<Arguments> provideWinNumbers(){
 		return Stream.of(
-				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, 0),	// 낙첨
-				Arguments.of(new int[]{1, 2, 3, 7, 8, 9}, 4),		// 4등
-				Arguments.of(new int[]{2, 4, 6, 23, 34, 45}, 4)		// 4등
+				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, LottoResult.FAIL),	// 낙첨
+				Arguments.of(new int[]{1, 2, 3, 7, 8, 9}, LottoResult.WIN_4TH),		// 4등
+				Arguments.of(new int[]{2, 4, 6, 23, 34, 45}, LottoResult.WIN_4TH)	// 4등
 		);
 	}
 }

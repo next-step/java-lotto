@@ -1,12 +1,8 @@
 package lotto;
 
 import lotto.exception.DuplicateNumberException;
-import lotto.exception.OutOfCountException;
 import lotto.exception.OutOfMaxNumberException;
 import model.NumberElementCollection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoTicket {
 
@@ -35,8 +31,8 @@ public class LottoTicket {
 		}
 	}
 
-	public int checkWin(NumberElementCollection winNumbers) {
+	public LottoResult checkWin(NumberElementCollection winNumbers) {
 		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumbers);
-		return matchedNumbers.size() == 0 ? 0 : 7 - matchedNumbers.size();
+		return LottoResult.valueOfMatchedCount(matchedNumbers.size());
 	}
 }
