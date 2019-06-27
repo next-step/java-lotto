@@ -1,5 +1,8 @@
 package calculator;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class StringCalculator {
@@ -7,24 +10,29 @@ public class StringCalculator {
     private static final String REGEX_SPLIT_STRING = "[:,]";
     private static final String CUSTOM_SEPARATOR_PREFIX = "//";
     private static final String CUSTOM_SEPARATOR_SUFFIX = "\n";
+    private static final String CUSTOM_SEPARATOR_REGEX = "//(.)\\n(.*)";
     private static final String EMPTY_STRING = "";
     private static final String STRING_FORMAT = "%s|%s";
     private static final int ZERO = 0;
 
     public int splitAndSum(String string) {
 
-        if (string == null || string.isEmpty()) {
+        if (StringUtils.isEmpty(string)) {
             return ZERO;
         }
 
-        validation(string);
+        validate(string);
 
         return sum(split(string));
     }
 
-    private void validation(String string) {
-        if (string.contains("-"))
+    private void validate(String string) {
+        if (hasNegativeNumber(string))
             throw new IllegalArgumentException();
+    }
+
+    private boolean hasNegativeNumber(String string) {
+        return string.contains("-");
     }
 
     private int sum(String[] string) {
@@ -46,9 +54,8 @@ public class StringCalculator {
     }
 
     private boolean hasCustomSeparator(String string) {
-        if (string.contains(CUSTOM_SEPARATOR_PREFIX) && string.contains(CUSTOM_SEPARATOR_SUFFIX)) {
-            return string.indexOf(CUSTOM_SEPARATOR_PREFIX) < string.indexOf(CUSTOM_SEPARATOR_SUFFIX);
-        }
-        return false;
+        return Pattern.compile(CUSTOM_SEPARATOR_REGEX)
+                .matcher(string)
+                .find();
     }
 }
