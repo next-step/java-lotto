@@ -2,8 +2,12 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoWallet {
+
+	private static final CharSequence NEW_LINE = "\n";
+
 	List<LottoTicket> tickets;
 
 	int balance;
@@ -38,9 +42,8 @@ public class LottoWallet {
 
 	@Override
 	public String toString() {
-		return tickets.stream().collect(StringBuilder::new,
-				(response, element) -> response.append("\n").append(element),
-				(response1, response2) -> response1.append("\n").append(response2.toString()))
-				.toString();
+		return tickets.stream()
+				.map(LottoTicket::toString)
+				.collect(Collectors.joining(NEW_LINE));
 	}
 }
