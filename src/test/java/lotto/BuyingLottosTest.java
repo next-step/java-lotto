@@ -57,6 +57,7 @@ class BuyingLottosTest {
     void canBuyingSelfLottoSuccessTest() {
         //Given
         BuyingLottos buyingLottos = new BuyingLottos(1000);
+        //Then
         Assertions.assertThatIllegalArgumentException()
           .isThrownBy(() -> buyingLottos.setSelfInputCount(2))
           .withMessage(ErrorMessage.OVER_INPUT_SELF_BUYING_COUNT.message());

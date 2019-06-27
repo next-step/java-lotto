@@ -41,7 +41,6 @@ class PatternFormulaTest {
     void getFormulaTest() {
         //Given
         PatternFormula formula = new PatternFormula("//;\\n1;2;3");
-        //When
         //Then
         Assertions.assertThat(formula.equalsNumberFormula("1;2;3")).isTrue();
     }
@@ -51,7 +50,6 @@ class PatternFormulaTest {
     void separateCommaFormulaTest() {
         //Given
         PatternFormula formula = new PatternFormula("1,2,3");
-        //When
         //Then
         Assertions.assertThat(formula).isNotNull();
     }

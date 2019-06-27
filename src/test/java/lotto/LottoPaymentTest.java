@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 public class LottoPaymentTest {
     @Test
-    @DisplayName("")
-    void test() {
+    @DisplayName("구매 횟수를 구한다.")
+    void getBuyableCountTest() {
         //Given
         LottoPayment lottoPayment = new LottoPayment();
         //When

@@ -29,11 +29,6 @@ public class InputView {
         return inputer.inputNumber();
     }
     
-    // 수동로또번호입력받기
-    
-    
-    
-    
     public WinNumbers getUserInputWinNumber() {    
         return new WinNumbers(getWinNumbers(), getBonusNumber());
     }

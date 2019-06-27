@@ -27,11 +27,6 @@ public class BuyingLottos {
         this.cashPayments = cashPayments;
     }
     
-    public Lottos buyLottos() {
-        lottos = new Lottos(makeLottoNumbers(Lottos.getBuyableCount(cashPayments)));
-        return lottos;
-    }
-    
     private List<LottoNumbers> makeLottoNumbers(int count) {
         return IntStream.range(START_NUMBER, count)
           .mapToObj(i -> new LottoNumbers())
@@ -40,7 +35,7 @@ public class BuyingLottos {
     
     private List<LottoNumbers> makeLottoNumbers(List<String> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(numbers -> new LottoNumbers(numbers))
+                .map(LottoNumbers::new)
                 .collect(Collectors.toList());
     }
     
@@ -50,8 +45,7 @@ public class BuyingLottos {
         }
         int selfLottoCount = selfInputCount.getSelfInputCount();
         List<LottoNumbers> selfLottos = makeLottoNumbers(selfLottoNumbers);
-        List<LottoNumbers> authLottos = makeLottoNumbers(Lottos.getBuyableCount(cashPayments) - selfLottoCount);
-        selfLottos.addAll(authLottos);
+        selfLottos.addAll(makeLottoNumbers(Lottos.getBuyableCount(cashPayments) - selfLottoCount));
         lottos = new Lottos(selfLottos);
         return lottos;
     }

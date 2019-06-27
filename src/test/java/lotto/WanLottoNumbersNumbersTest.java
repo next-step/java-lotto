@@ -24,12 +24,4 @@ class WanLottoNumbersNumbersTest {
             .isThrownBy(() -> new WanLottoNumbers("1,2,3,4,5,46"))
             .withMessage(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.message());
     }
-    
-    @Test
-    @DisplayName("")
-    void test() {
-        //Given
-        //When
-        //Then
-    }
 }

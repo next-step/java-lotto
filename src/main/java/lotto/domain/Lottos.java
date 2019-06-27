@@ -35,6 +35,7 @@ public class Lottos {
             final boolean isMatchedBonus = wanLottoNumbers.isMatchedBonus(lotto);
             winNumbersCount.addWinCount(matchedNumberCount, isMatchedBonus);
         });
+        
         return winNumbersCount;
     }
     
