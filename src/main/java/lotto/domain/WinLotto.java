@@ -11,7 +11,7 @@ public class WinLotto {
 
   private Map<Rank, Long> winLotto;
 
-  public WinLotto getWinLottos(List<Rank> ranks) {
+  public WinLotto getWinLotto(List<Rank> ranks) {
     this.winLotto = ranks.stream()
         .collect(groupingBy(
             identity(),
@@ -31,6 +31,6 @@ public class WinLotto {
   }
 
   private static long applyAsLong(Map.Entry<Rank, Long> rank) {
-    return rank.getKey().getWinningMoney() * rank.getValue();
+    return rank.getKey().getMoney(rank.getValue());
   }
 }
