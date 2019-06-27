@@ -38,7 +38,7 @@ public enum LottoResult {
 	}
 
 	public int getReward() {
-		return 0;
+		return reward;
 	}
 
 	public static LottoResult valueOfMatchedCount(int size) {
