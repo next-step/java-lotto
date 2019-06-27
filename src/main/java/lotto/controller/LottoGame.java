@@ -16,9 +16,11 @@ public class LottoGame {
     Scanner scanner = new Scanner(System.in);
     int inputPrice = InputView.inputPrice(scanner);
     int buyLottoCount = LottoStore.buyLottoCount(inputPrice);
-    ResultView.printBuyCount(buyLottoCount);
+    int manualBuyLottoCount = InputView.manualBuyLotto(scanner);
+    LottoTickets tickets = InputView.getLottoTickets(scanner, manualBuyLottoCount);
+    ResultView.printBuyCount(buyLottoCount, manualBuyLottoCount);
 
-    LottoTickets lottoTickets = new LottoTickets(buyLottoCount);
+    LottoTickets lottoTickets = tickets.getLottoTickets(buyLottoCount);
     ResultView.printTickets(lottoTickets.getTickets());
 
     List<Integer> winNumbers = InputView.winNumbers(scanner);

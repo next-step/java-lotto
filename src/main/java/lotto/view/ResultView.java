@@ -12,8 +12,8 @@ public class ResultView {
 
   private static final Long DEFAULT_VALUE = 0L;
 
-  public static void printBuyCount(int count) {
-    System.out.println(count + "개를 구매했습니다.");
+  public static void printBuyCount(int buyLottoCount, int manualBuyLottoCount) {
+    System.out.println("수동으로 " + manualBuyLottoCount + "개, 자동으로 " + buyLottoCount + "개를 구매했습니다.");
   }
 
   public static void printTickets(List<LottoTicket> tickets) {
