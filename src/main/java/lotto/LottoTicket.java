@@ -28,4 +28,14 @@ public class LottoTicket {
 
 		numbers.add(number);
 	}
+
+	public void add(int[] numbers) {
+		for(int number : numbers){
+			this.add(number);
+		}
+	}
+
+	public int checkWin(NumberElementCollection winNumbers) {
+		return 0;
+	}
 }
