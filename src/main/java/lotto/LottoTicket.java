@@ -39,4 +39,8 @@ public class LottoTicket {
 		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumbers);
 		return LottoResult.valueOfMatchedCount(matchedNumbers.size());
 	}
+
+	public boolean verify() {
+		return false;
+	}
 }
