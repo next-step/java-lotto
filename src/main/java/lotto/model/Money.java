@@ -2,7 +2,7 @@ package lotto.model;
 
 public class Money {
 
-    private final int PAID;
+    private int PAID;
 
     public Money(int PAID) {
         this.PAID = PAID;
@@ -10,5 +10,9 @@ public class Money {
 
     public int getPurchaseableQuantity() {
         return this.PAID / Lotto.PRICE;
+    }
+
+    public int makePayment(Quantity quantity) {
+        return this.PAID -= Lotto.PRICE * quantity.QUANTITY;
     }
 }
