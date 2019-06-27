@@ -24,6 +24,10 @@ public class ResultReport {
 	}
 
 	public int totalReward() {
-		return 0;
+		return resultStats.entrySet()
+				.stream()
+				.map(entry -> entry.getKey().getReward() * entry.getValue())
+				.mapToInt(Integer::valueOf)
+				.sum();
 	}
 }
