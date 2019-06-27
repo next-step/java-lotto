@@ -1,6 +1,7 @@
 package lotto;
 
 import model.NumberElementCollection;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoWalletTest {
 
+	@DisplayName("지갑내용 출력 확인")
 	@Test
 	void verifyToString() {
 		// Arrange
@@ -29,6 +31,7 @@ class LottoWalletTest {
 
 	}
 
+	@DisplayName("당첨결과 통계 데이터 확인")
 	@Test
 	void reportOfResult() {
 		// Arrange
