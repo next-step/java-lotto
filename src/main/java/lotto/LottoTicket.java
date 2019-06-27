@@ -32,6 +32,10 @@ public class LottoTicket {
 	}
 
 	public LottoResult checkWin(NumberElementCollection winNumbers) {
+		if(winNumbers.size() < MAX_COUNT){
+			throw new IllegalArgumentException("당첨번호의 개수가 부족합니다.");
+		}
+
 		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumbers);
 		return LottoResult.valueOfMatchedCount(matchedNumbers.size());
 	}
