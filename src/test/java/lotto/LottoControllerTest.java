@@ -26,7 +26,7 @@ public class LottoControllerTest {
 		// Assertion
 		assertThat(output).contains("10개를 구매했습니다.");
 
-		Matcher m = Pattern.compile("(\\[.*?\\])").matcher(output.get(1));
+		Matcher m = Pattern.compile("(\\[.*?\\])").matcher(output.get(2)); // 0 : 공백, 1 : 제목
 		int printedTicketPattern = 0;
 
 		while (m.find()){

@@ -23,10 +23,9 @@ class LottoTicketTest {
 	void addSameNumber() {
 
 		int[] numbers = {1, 1, 2, 3, 4, 5};
-		LottoTicket ticket = LottoTicket.of(numbers);
 
 		assertThatExceptionOfType(DuplicateNumberException.class).isThrownBy(() -> {
-			ticket.add(numbers);
+			LottoTicket.of(numbers);
 		});
 	}
 
@@ -34,10 +33,9 @@ class LottoTicketTest {
 	@Test
 	void addOverCount() {
 		int[] numbers = {1, 2, 3, 4, 5, 6, 7};
-		LottoTicket ticket = LottoTicket.of(numbers);
 
 		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
-			ticket.add(numbers);
+			LottoTicket.of(numbers);
 		});
 	}
 
@@ -45,10 +43,9 @@ class LottoTicketTest {
 	@Test
 	void addOverLimit() {
 		int[] numbers = {1, 2, 3, 4, 5, LottoRule.MAX_NUMBER + 1};
-		LottoTicket ticket = LottoTicket.of(numbers);
 
 		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
-			ticket.add(numbers);
+			LottoTicket.of(numbers);
 		});
 	}
 
