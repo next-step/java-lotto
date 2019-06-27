@@ -101,4 +101,13 @@ class LottoTicketTest {
 		// Action & Assertion
 		assertThatIllegalArgumentException().isThrownBy(() -> {ticket.checkWin(numbers);});
 	}
+
+	@DisplayName("toString 반환 테스트")
+	@Test
+	void verifyToString() {
+		LottoTicket ticket = new LottoTicket();
+		ticket.add(new int[]{1, 2, 3, 4, 5, 6});
+
+		assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+	}
 }

@@ -36,4 +36,11 @@ public class LottoWallet {
 		return balance > 0;
 	}
 
+	@Override
+	public String toString() {
+		return tickets.stream().collect(StringBuilder::new,
+				(response, element) -> response.append("\n").append(element),
+				(response1, response2) -> response1.append("\n").append(response2.toString()))
+				.toString();
+	}
 }
