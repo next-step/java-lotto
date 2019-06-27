@@ -13,7 +13,15 @@ public class LotteryStore {
 		int availableCount = money / PRICE;
 
 		return IntStream.range(0, availableCount)
-				.mapToObj(index -> new LottoTicket())
+				.mapToObj(index -> this.issuingTicket())
 				.collect(Collectors.toList());
+	}
+
+	private LottoTicket issuingTicket(){
+		LottoTicket ticket = new LottoTicket();
+		IntStream.range(1, LottoTicket.MAX_COUNT + 1)
+				.forEach(number -> ticket.add(number));
+
+		return ticket;
 	}
 }

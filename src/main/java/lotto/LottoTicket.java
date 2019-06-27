@@ -8,7 +8,7 @@ public class LottoTicket {
 
 	public static final int MAX_NUMBER = 45;
 
-	private static final int MAX_COUNT = 6;
+	public static final int MAX_COUNT = 6;
 
 	NumberElementCollection numbers = new NumberElementCollection(MAX_COUNT);
 
@@ -41,6 +41,6 @@ public class LottoTicket {
 	}
 
 	public boolean verify() {
-		return false;
+		return numbers.size() == MAX_COUNT;
 	}
 }
