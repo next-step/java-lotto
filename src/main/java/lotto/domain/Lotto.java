@@ -1,25 +1,28 @@
 package lotto.domain;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    private final Set<Integer> lotto;
+    private final List<Integer> numbers;
 
-    public Lotto(Set<Integer> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
+    private Lotto(List<Integer> numbers) {
+        if (isDuplicate(numbers)) {
             throw new IllegalArgumentException();
         }
 
-        this.lotto = lotto;
+        this.numbers = numbers;
+    }
+
+    private boolean isDuplicate(List<Integer> numbers) {
+        Set<Integer> distinctNumbers = new HashSet<>(numbers);
+        return distinctNumbers.size() != LOTTO_SIZE;
     }
 
     public int match(Lotto target) {
         int count = 0;
-        for (Integer lottoNumber : lotto) {
+        for (Integer lottoNumber : numbers) {
             count += target.increment(lottoNumber);
         }
         return count;
@@ -33,19 +36,15 @@ public class Lotto {
     }
 
     boolean contains(int lottoNumber) {
-        return lotto.contains(lottoNumber);
+        return numbers.contains(lottoNumber);
     }
 
-    public static Lotto of(Set<Integer> numbers) {
-        Set<Integer> lotto = new LinkedHashSet<>();
-        for (Integer number : numbers) {
-            lotto.add(number);
-        }
-        return new Lotto(lotto);
+    public static Lotto of(List<Integer> numbers) {
+        return new Lotto(numbers);
     }
 
     public static Lotto of(Integer... numbers) {
-        Set<Integer> lotto = new LinkedHashSet<>();
+        List<Integer> lotto = new ArrayList<>();
         for (Integer number : numbers) {
             lotto.add(number);
         }
@@ -58,7 +57,7 @@ public class Lotto {
         }
 
         String[] values = text.split(",");
-        Set<Integer> lotto = new LinkedHashSet<>();
+        List<Integer> lotto = new ArrayList<>();
         for (String value : values) {
             lotto.add(Integer.parseInt(value.trim()));
         }
@@ -70,18 +69,18 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto1 = (Lotto) o;
-        return Objects.equals(lotto, lotto1.lotto);
+        return Objects.equals(numbers, lotto1.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(numbers);
     }
 
     @Override
     public String toString() {
         return "Lotto{" +
-                "lotto=" + lotto +
+                "numbers=" + numbers +
                 '}';
     }
 }
