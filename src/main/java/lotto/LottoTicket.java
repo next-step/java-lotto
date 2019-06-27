@@ -4,6 +4,8 @@ import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfMaxNumberException;
 import model.NumberElementCollection;
 
+import java.util.Collections;
+
 public class LottoTicket {
 
 	private static final String TO_STRING_FORMAT = "[%s]";
@@ -14,24 +16,28 @@ public class LottoTicket {
 		// 기본생성자는 클래스메서드에서만 접근
 	}
 
-	private void add(int number) {
+	private void add(int value) {
 
-		if(numbers.contains(number)){
+		if(numbers.contains(value)){
 			throw new DuplicateNumberException();
 		}
 
-		if(number > LottoRule.MAX_NUMBER){
+		if(value > LottoRule.MAX_NUMBER){
 			throw new OutOfMaxNumberException();
 		}
 
-		numbers.add(number);
+		numbers.add(value);
+
 	}
 
-	public void add(int[] numbers) {
-		for(int number : numbers){
-			this.add(number);
+	public void add(int[] values) {
+		for(int value : values){
+			this.add(value);
 		}
+
+		numbers.sort();	// 정렬상태 유지
 	}
+
 
 	public LottoResult checkWin(NumberElementCollection winNumbers) {
 		if(winNumbers.size() < LottoRule.MAX_COUNT){

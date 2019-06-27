@@ -71,6 +71,10 @@ public class NumberElementCollection {
         return NumberElementCollection.of(matched);
     }
 
+	public void sort() {
+    	Collections.sort(elements);
+	}
+
     @Override
     public String toString() {
         return elements.stream()

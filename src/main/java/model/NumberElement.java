@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class NumberElement {
+public class NumberElement implements Comparable<NumberElement>{
 
     private static boolean isEmpty(String value){
         return value == null || value.trim().isEmpty();
@@ -11,7 +11,7 @@ public class NumberElement {
     int value;
 
     public NumberElement(String value){
-        this(isEmpty(value.trim()) ? 0 : Integer.parseInt(value.trim()));
+        this(isEmpty(value) ? 0 : Integer.parseInt(value.trim()));
     }
 
     public NumberElement(int value) {
@@ -51,5 +51,19 @@ public class NumberElement {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+
+    @Override
+    public int compareTo(NumberElement element) {
+        if(element == null){
+            return 1;
+        }
+
+        if(this.value == element.value){
+            return 0;
+        }
+
+        return this.value > element.value ? 1 : -1;
     }
 }
