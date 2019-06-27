@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -84,7 +85,7 @@ class BuyingLottosTest {
         buyingLottos.setSelfInputCount(1);
         String lottoNumbers = "1,2,3,4,5,6";
         //When
-        Lottos lottos = buyingLottos.buyLottos(Arrays.asList(lottoNumbers));
+        Lottos lottos = buyingLottos.buyLottos(Collections.singletonList(lottoNumbers));
         //Then
         Assertions.assertThat(lottos.getLottoSize()).isEqualTo(5);
         lottos.hasLottoNumbers(new LottoNumbers(lottoNumbers));

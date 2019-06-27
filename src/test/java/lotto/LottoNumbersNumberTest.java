@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoNumbersNumberTest {
+class LottoNumbersNumberTest {
     @Test
     @DisplayName("로또 번호는 1 미만 입력불가")
     void minNumberTest() {

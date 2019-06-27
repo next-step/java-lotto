@@ -1,11 +1,5 @@
 package lotto.domain;
 
-import lotto.common.StringUtils;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class WanLottoNumbers {
     private final static int EMPTY_BONUS_NUMBER = 0;
     private LottoNumbers winLottoNumbers;

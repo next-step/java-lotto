@@ -2,18 +2,13 @@ package lotto.domain;
 
 import lotto.common.ErrorMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    public static final int DEFAULT_PRICE = 1000;
+    private static final int DEFAULT_PRICE = 1000;
     private final static int CANT_BUYABLE_COUNT = 0;
     
     private List<LottoNumbers> lottos;
-    
-    public Lottos() {
-        this(new ArrayList<>());
-    }
     
     public Lottos(final List<LottoNumbers> lottos) {
         this.lottos = lottos;

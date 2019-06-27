@@ -12,7 +12,7 @@ public class LottoPayment {
         this(DEFAULT_PRICE);
     }
     
-    LottoPayment(int price) {
+    public LottoPayment(int price) {
         this.price = price;
     }
     

@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoPaymentTest {
+class LottoPaymentTest {
     @Test
     @DisplayName("구매 횟수를 구한다.")
     void getBuyableCountTest() {

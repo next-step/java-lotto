@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class BuyableCountTest {
+class BuyableCountTest {
     @Test
     @DisplayName("가지고 있는 수가 인입된 수보다 크거나 같으면 false, 작으면 true 를 반환한다.")
     void isBigTest() {
