@@ -9,7 +9,7 @@ class LotteryStoreTest {
 	@Test
 	void buy() {
 		// Arrange
-		LotteryStore store = new LotteryStore();
+		LotteryStore store = new LotteryStore(new TicketMachine());
 
 		// Action
 		LottoWallet wallet = store.buy(10000);

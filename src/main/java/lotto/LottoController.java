@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.view.in.InputDialog;
+import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
 
 public class LottoController {
@@ -9,8 +10,8 @@ public class LottoController {
 
 	protected LotteryStore store;
 
-	public LottoController(){
-		this.store = new LotteryStore();
+	public LottoController(TicketMachine machine){
+		this.store = new LotteryStore(machine);
 	}
 
 	public void invest(InputDialog input, WalletViewer viewer){
@@ -18,5 +19,9 @@ public class LottoController {
 		this.wallet = store.buy(investment);
 
 		viewer.render(wallet);
+	}
+
+	public void lottery(InputDialog input, ResultViewer viewer) {
+
 	}
 }

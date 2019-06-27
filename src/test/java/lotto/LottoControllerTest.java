@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class LottoControllerTest {
 	void investTest() {
 
 		// Arrange
-		LottoController controller = new LottoController();
+		LottoController controller = new LottoController(new TicketMachine());
 		List<String> output = new ArrayList<>();
 
 		// Action
@@ -33,5 +34,35 @@ public class LottoControllerTest {
 		}
 
 		assertThat(printedTicketPattern).isEqualTo(10);
+	}
+
+	@Test
+	void winTest(){
+		// Arrange
+		int[] manualNumbers = {1, 2, 3, 4, 5, 6};
+		TicketMachine machine = new StaticTicketMachine(manualNumbers);
+		LottoController controller = new LottoController(machine);
+		List<String> output = new ArrayList<>();
+		controller.invest(message -> "1000", new WalletViewer(message -> {}));
+
+		// Action
+		controller.lottery(message -> "1, 2, 3, 10, 11, 12", new ResultViewer(message -> output.add(message)));
+
+		// Assertion
+		assertThat(output).contains("당첨통계");
+	}
+
+	class StaticTicketMachine extends TicketMachine{
+
+		private int[] numbers;
+
+		public StaticTicketMachine(int[] numbers) {
+			this.numbers = numbers;
+		}
+
+		@Override
+		public LottoTicket issuingTicket(){
+			return LottoTicket.of(numbers);
+		}
 	}
 }

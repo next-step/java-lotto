@@ -10,8 +10,8 @@ public class LotteryStore {
 
 	private TicketMachine machine;
 
-	public LotteryStore(){
-		machine = new TicketMachine();
+	public LotteryStore(TicketMachine machine){
+		this.machine = new TicketMachine();
 	}
 
 	public LottoWallet buy(int money) {
