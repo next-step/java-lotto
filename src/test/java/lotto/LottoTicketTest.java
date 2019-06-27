@@ -14,8 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTicketTest {
 
@@ -85,5 +84,21 @@ class LottoTicketTest {
 				Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, LottoResult.WIN_2ND),	// 2등
 				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, LottoResult.WIN_1ST)		// 1등
 		);
+	}
+
+	@DisplayName("기준에 맞지 않는 당첨번호 (개수 부족)")
+	@Test
+	void illegalWinNumbers() {
+		// Arrange
+		LottoTicket ticket = new LottoTicket();
+
+		int[] winNumbers = new int[]{1, 2, 3, 4, 5};
+		NumberElementCollection numbers = new NumberElementCollection(6);
+		for(int number : winNumbers){
+			numbers.add(number);
+		}
+
+		// Action & Assertion
+		assertThatIllegalArgumentException().isThrownBy(() -> {ticket.checkWin(numbers);});
 	}
 }
