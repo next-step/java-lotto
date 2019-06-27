@@ -13,9 +13,13 @@ public class LottoStatisticsTest {
   @Test
   void profitRate() {
     List<Rank> ranks = Arrays.asList(
-        Rank.getInstance(4),
-        Rank.getInstance(3));
+        Rank.valueOf(4, true),
+        Rank.valueOf(3, false));
+
+    long lotteryPrize = 55000;
+    int price = 14000;
+
     assertThat(LottoStatistics.profitRate(14000, LottoStatistics.statistics(ranks)))
-        .isEqualTo(55/14);
+        .isEqualTo(lotteryPrize/price);
   }
 }

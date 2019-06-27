@@ -18,10 +18,10 @@ public class LottoTickets {
     this.lottoTickets = lottoTickets;
   }
 
-  public List<Rank> winNumberSize(List<Integer> winNumber) {
+  public List<Rank> winNumberSize(List<Integer> winNumber, int bonusNumber) {
     List<Rank> ranks = new ArrayList<>();
     for (LottoTicket lottoTicket : lottoTickets) {
-      ranks.add(lottoTicket.winNumberSize(winNumber));
+      ranks.add(lottoTicket.winNumberSize(winNumber, bonusNumber));
     }
     return ranks;
   }
