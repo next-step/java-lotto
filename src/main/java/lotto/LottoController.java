@@ -12,6 +12,10 @@ public class LottoController {
 
 	protected LotteryStore store;
 
+	public LottoController(){
+		this(new TicketMachine());
+	}
+
 	public LottoController(TicketMachine machine){
 		this.store = new LotteryStore(machine);
 	}

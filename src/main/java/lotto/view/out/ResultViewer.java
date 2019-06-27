@@ -17,6 +17,7 @@ public class ResultViewer {
 	 */
 	public void render(ResultReport report, int investment) {
 
+		this.printer.print("");
 		this.printer.print("당첨통계");
 		this.printer.print("------");
 
