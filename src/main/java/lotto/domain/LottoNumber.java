@@ -5,11 +5,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-class LottoNumber {
+public class LottoNumber {
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
+
     private static final Map<Integer, LottoNumber> lottoNos = new HashMap<>();
 
     static {
-        for (int i = 1; i < 46; i++) {
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
             lottoNos.put(i, new LottoNumber(i));
         }
     }
@@ -17,8 +20,8 @@ class LottoNumber {
     private final int no;
 
     private LottoNumber(int no) {
-        if (no < 1 || no > 45) {
-            throw new IllegalArgumentException();
+        if (no < LOTTO_NUMBER_MIN || no > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("로또 번호의 범위를 벗어났습니다.");
         }
 
         this.no = no;
