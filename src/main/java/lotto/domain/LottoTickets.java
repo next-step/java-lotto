@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoTickets {
-    static final public String DELEIMITER_STRING = "\n";
+    static final public String DELIMITER_STRING = "\n";
 
     private List<LottoTicket> tickets;
 
@@ -31,9 +31,9 @@ public class LottoTickets {
 
         for (LottoTicket ticket : tickets) {
             builder.append(ticket.toString());
-            builder.append(DELEIMITER_STRING);
+            builder.append(DELIMITER_STRING);
         }
 
-        return builder.substring(0, builder.length()-DELEIMITER_STRING.length());
+        return builder.substring(0, builder.length() - DELIMITER_STRING.length());
     }
 }
