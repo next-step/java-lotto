@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class ResultReport {
 
-	Map<LottoResult, Integer> resultStats;
+	private Map<LottoResult, Integer> resultStats;
 
 	public ResultReport(){
 		resultStats = new HashMap<>();
@@ -21,5 +21,9 @@ public class ResultReport {
 		resultStats.put(result, ++count);
 
 		return count;
+	}
+
+	public int totalReward() {
+		return 0;
 	}
 }

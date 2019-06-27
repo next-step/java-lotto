@@ -5,11 +5,11 @@ import java.util.Map;
 
 public enum LottoResult {
 
-	WIN_1ST,
-	WIN_2ND,
-	WIN_3RD,
-	WIN_4TH,
-	FAIL;
+	WIN_1ST(2000000000, "6개 일치"),
+	WIN_2ND(1500000, "6개 일치"),
+	WIN_3RD(50000, "6개 일치"),
+	WIN_4TH(5000, "6개 일치"),
+	FAIL(0);
 
 	private static Map<Integer, LottoResult> resultMap;
 
@@ -24,8 +24,25 @@ public enum LottoResult {
 		resultMap.put(6, WIN_1ST);
 	}
 
+	private final int reward;
+
+	private final String condition;
+
+	LottoResult(int reward, String condition) {
+		this.reward = reward;
+		this.condition = condition;
+	}
+
+	LottoResult(int reward) {
+		this(reward, null);
+	}
+
+	public int getReward() {
+		return 0;
+	}
 
 	public static LottoResult valueOfMatchedCount(int size) {
 		return resultMap.get(size);
 	}
+
 }
