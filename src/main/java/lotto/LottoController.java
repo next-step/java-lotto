@@ -16,5 +16,7 @@ public class LottoController {
 	public void invest(InputDialog input, WalletViewer viewer){
 		int investment = Integer.parseInt(input.execute("구입금액을 입력해 주세요."));
 		this.wallet = store.buy(investment);
+
+		viewer.render(wallet);
 	}
 }
