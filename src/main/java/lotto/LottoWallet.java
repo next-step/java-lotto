@@ -1,5 +1,7 @@
 package lotto;
 
+import model.NumberElementCollection;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,5 +47,9 @@ public class LottoWallet {
 		return tickets.stream()
 				.map(LottoTicket::toString)
 				.collect(Collectors.joining(NEW_LINE));
+	}
+
+	public ResultReport result(NumberElementCollection winNumbers) {
+		return new ResultReport();
 	}
 }
