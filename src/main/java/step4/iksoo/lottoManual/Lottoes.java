@@ -9,36 +9,23 @@ public class Lottoes {
     private List<Lotto> lottoes;
 
     Lottoes(int orderPrice, int orderManualLotto) {
-        this.lottoes = buyLotto(orderPrice, orderManualLotto);
+        this.lottoes = buyLotto(orderPrice / PRICE_OF_LOTTO - orderManualLotto);
     }
 
-    private List<Lotto> buyLotto(int orderPrice, int orderManualLotto) {
-        List<Lotto> lottoBox = buyManualLotto(orderManualLotto);
-
-        IntStream.range(0, (orderPrice / PRICE_OF_LOTTO) - orderManualLotto)
+    private List<Lotto> buyLotto(int orderCount) {
+        List<Lotto> lottoBox = new ArrayList<>();
+        IntStream.range(0, orderCount)
                 .boxed()
                 .forEach(n -> lottoBox.add(new Lotto()));
-
-        //OutputView.printOrderCheck(lottoBox.size(), orderManualLotto);
         return lottoBox;
     }
 
-    private List<Lotto> buyManualLotto(int orderManualLotto) {
-        List<Lotto> lottoManual = new ArrayList<Lotto>();
-        OutputView.printAskManualNumbers();
-
-        IntStream.range(0, orderManualLotto)
-                .boxed()
-                .map(n -> new LottoManualSplit(InputView.inputText()))
-                .forEach(lottoManualSplit -> lottoManual.add(new Lotto(lottoManualSplit.getLottoNumbers())));
-        return lottoManual;
+    public void add(List<Lotto> lottoes) {
+        lottoes.stream()
+                .forEach(lotto -> this.lottoes.add(lotto));
     }
 
-    public void add(Lotto lotto) {
-        this.lottoes.add(lotto);
-    }
-
-    public Map<Rank, Integer> checkLotteryWin(List<Integer> winnerNumbers, int bonusBall) {
+    public Map<Rank, Integer> checkLotteryWin(List<LottoNo> winnerNumbers, LottoNo bonusBall) {
         Map<Rank, Integer> matchResult = new HashMap<>();
 
         Arrays.stream(Rank.values())

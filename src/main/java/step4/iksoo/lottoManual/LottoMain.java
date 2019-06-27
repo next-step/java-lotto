@@ -3,6 +3,7 @@ package step4.iksoo.lottoManual;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 public class LottoMain {
     private static int orderPrice;
@@ -11,10 +12,13 @@ public class LottoMain {
     public static void main(String[] args) {
         lottoOrder();
     	Optional<Lottoes> maybeLottoes = Optional.ofNullable(new Lottoes(orderPrice, orderManualLotto));
+        maybeLottoes.get().add(buyManualLotto(orderManualLotto));
+
+        OutputView.printOrderCheck(maybeLottoes.get().getLottoes().size(), orderManualLotto);
         OutputView.printLottos(maybeLottoes.get().getLottoes());
 
-        List<Integer> winNumbers = getKnowWinnerNumbers();
-        int bonusBall = getKnowBonusBall(winNumbers);
+        List<LottoNo> winNumbers = getKnowWinnerNumbers();
+        LottoNo bonusBall = getKnowBonusBall(winNumbers);
 
         Optional<MatchResult> maybeMatchResult = Optional.ofNullable(new MatchResult(maybeLottoes.get().checkLotteryWin(winNumbers, bonusBall)));
         OutputView.printResult(maybeMatchResult.get().getMatchResult());
@@ -29,20 +33,31 @@ public class LottoMain {
         orderManualLotto = InputView.inputNumber();
     }
 
-	private static List<Integer> getKnowWinnerNumbers() {
+    private static List<Lotto> buyManualLotto(int orderManualLotto) {
+        List<Lotto> lottoManual = new ArrayList<>();
+        OutputView.printAskManualNumbers();
+
+        IntStream.range(0, orderManualLotto)
+                .boxed()
+                .map(n -> new LottoManualSplit(InputView.inputText()))
+                .forEach(lottoManualSplit -> lottoManual.add(new Lotto(lottoManualSplit.getLottoNumbers())));
+        return lottoManual;
+    }
+
+	private static List<LottoNo> getKnowWinnerNumbers() {
         OutputView.printAskWinnerNumbers();
         String[] numbers = InputView.inputText().replace(" ", "").split(",");
 
-        List<Integer> winnerNumbers = new ArrayList<>();
+        List<LottoNo> winnerNumbers = new ArrayList<>();
         for (String number : numbers) {
-            winnerNumbers.add(Integer.parseInt(number));
+            winnerNumbers.add(new LottoNo(Integer.parseInt(number)));
         }
         return winnerNumbers;
     }
 
-    private static int getKnowBonusBall(List<Integer> winnerNumbers) {
+    private static LottoNo getKnowBonusBall(List<LottoNo> winnerNumbers) {
         OutputView.printAskBonusBall();
-        int bonusBall = InputView.inputNumber();
+        LottoNo bonusBall = new LottoNo(InputView.inputNumber());
 
         winnerNumbers.stream()
                 .filter(number -> number == bonusBall)

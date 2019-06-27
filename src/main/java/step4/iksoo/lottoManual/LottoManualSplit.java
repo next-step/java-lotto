@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManualSplit {
-    private List<Integer> LottoNumbers;
+    private List<LottoNo> LottoNumbers;
 
     LottoManualSplit(String LottoNumbers) {
         this.LottoNumbers = convertToList(makeLotto(LottoNumbers));
@@ -26,15 +26,15 @@ public class LottoManualSplit {
         return isNormal;
     }
 
-    private List<Integer> convertToList(String[] LottoNumbers) {
-        List<Integer> lotto = new ArrayList<Integer>();
+    private List<LottoNo> convertToList(String[] LottoNumbers) {
+        List<LottoNo> lotto = new ArrayList<>();
         for (int i = 0; i < LottoNumbers.length; i++) {
-            lotto.add(Integer.parseInt(LottoNumbers[i]));
+            lotto.add(new LottoNo(Integer.parseInt(LottoNumbers[i])));
         }
         return lotto;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNo> getLottoNumbers() {
         return this.LottoNumbers;
     }
 }
