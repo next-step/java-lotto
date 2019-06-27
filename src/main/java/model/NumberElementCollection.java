@@ -4,12 +4,15 @@ import lotto.exception.OutOfCountException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class NumberElementCollection {
 
     private static final int NO_LIMIT = -1;
+
+    private static final CharSequence TO_STRING_DELIMITER = ", ";
 
     private final int maxElements;
 
@@ -68,7 +71,18 @@ public class NumberElementCollection {
         return NumberElementCollection.of(matched);
     }
 
+    @Override
+    public String toString() {
+        return elements.stream()
+                .map(NumberElement::toString)
+                .collect(Collectors.joining(TO_STRING_DELIMITER));
+    }
 
+    /**
+     * List 객체를 통해 생성하는 정적 메서드, 클래스 내부에서 반환값으로 생성할 때 사용
+     * @param elements
+     * @return
+     */
     private static NumberElementCollection of(List<NumberElement> elements) {
         NumberElementCollection collection = new NumberElementCollection();
         collection.elements = elements;

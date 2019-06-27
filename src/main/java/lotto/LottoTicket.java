@@ -6,6 +6,7 @@ import model.NumberElementCollection;
 
 public class LottoTicket {
 
+	private static final String TO_STRING_FORMAT = "[%s]";
 
 	NumberElementCollection numbers = new NumberElementCollection(LottoRule.MAX_COUNT);
 
@@ -39,5 +40,10 @@ public class LottoTicket {
 
 	public boolean verify() {
 		return numbers.size() == LottoRule.MAX_COUNT;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(TO_STRING_FORMAT, numbers);
 	}
 }
