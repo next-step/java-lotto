@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.view.domain.LotteryStore;
+import lotto.view.domain.LottoWallet;
+import lotto.view.domain.TicketMachine;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

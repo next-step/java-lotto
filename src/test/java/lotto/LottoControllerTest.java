@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.view.domain.LottoTicket;
+import lotto.view.domain.TicketMachine;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
 import org.junit.jupiter.api.Test;

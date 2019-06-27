@@ -1,5 +1,7 @@
-package lotto;
+package lotto.view.domain;
 
+import lotto.view.model.LottoResult;
+import lotto.view.model.LottoRule;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfMaxNumberException;
 import common.NumberElementCollection;

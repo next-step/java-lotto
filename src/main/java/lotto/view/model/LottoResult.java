@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view.model;
 
 import java.util.Arrays;
 import java.util.HashMap;

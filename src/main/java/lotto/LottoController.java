@@ -1,6 +1,10 @@
 package lotto;
 
 import common.ExpressionParser;
+import lotto.view.domain.LotteryStore;
+import lotto.view.domain.LottoWallet;
+import lotto.view.domain.ResultReport;
+import lotto.view.domain.TicketMachine;
 import lotto.view.in.InputDialog;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;

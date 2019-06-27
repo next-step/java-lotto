@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view.domain;
 
 import common.NumberElementCollection;
 

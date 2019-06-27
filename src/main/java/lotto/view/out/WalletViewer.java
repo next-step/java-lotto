@@ -1,6 +1,6 @@
 package lotto.view.out;
 
-import lotto.LottoWallet;
+import lotto.view.domain.LottoWallet;
 
 public class WalletViewer {
 

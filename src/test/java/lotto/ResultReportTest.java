@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.view.domain.ResultReport;
+import lotto.view.model.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

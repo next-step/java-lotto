@@ -1,6 +1,10 @@
 package lotto;
 
 import common.NumberElementCollection;
+import lotto.view.domain.LottoTicket;
+import lotto.view.domain.LottoWallet;
+import lotto.view.domain.ResultReport;
+import lotto.view.model.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
