@@ -21,4 +21,8 @@ public class LottoGenerator {
 
     return new Lottos(lottos);
   }
+
+  public static Lotto generate(List<Integer> numbers) {
+    return new Lotto(numbers);
+  }
 }

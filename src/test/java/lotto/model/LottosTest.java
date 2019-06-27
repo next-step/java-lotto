@@ -34,12 +34,14 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("로또 당첨번호 개수 List 확인")
-    void count_of_matching_numbers() {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
-        List<Integer> counts = this.lottos.getCountOfMatchingNumbers(winningNumbers);
+    @DisplayName("로또 matching 개수와 bonus number에 따른 Prize 리턴")
+    void matches() {
+        final Lotto lottoWithWinningNumbers = new Lotto(Arrays.asList(1,2,3,4,5,22));
+        final int bonusNumber = 5;
+        final WinningLotto winningLotto = new WinningLotto(lottoWithWinningNumbers, bonusNumber);
+        List<Prize> prizes = lottos.matches(winningLotto);
 
-        assertThat(counts.size()).isEqualTo(2);
-        assertThat(counts).contains(6, 4);
+        assertThat(prizes.size()).isEqualTo(2);
+        assertThat(prizes).contains(Prize.SECOND, Prize.FOURTH);
     }
 }

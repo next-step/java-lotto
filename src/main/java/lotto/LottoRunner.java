@@ -4,8 +4,6 @@ import lotto.model.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
-import java.util.List;
-
 public class LottoRunner {
 
   public static void main(String[] args) {
@@ -18,9 +16,11 @@ public class LottoRunner {
     LottoOutputView.printCountOf(lottos);
     LottoOutputView.printPickedNumbersOf(lottos);
 
-    List<Integer> winningNumbers = LottoInputView.askWinningNumbers();
+    Lotto lottoWithWinningNumbers = LottoInputView.askWinningNumbers();
+    int bonusNumber = LottoInputView.askBonusNumber();
+    WinningLotto winningLotto = new WinningLotto(lottoWithWinningNumbers, bonusNumber);
 
-    Analyzer analyzer = new Analyzer(winningNumbers);
+    Analyzer analyzer = new Analyzer(winningLotto);
     Report report = analyzer.analyze(lottos);
 
     LottoOutputView.print(report);

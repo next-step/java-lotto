@@ -6,16 +6,18 @@ import java.util.Map;
 
 public class Analyzer {
 
-    private final List<Integer> winningNumbers;
+    private final WinningLotto winningLotto;
 
-    public Analyzer(List<Integer> winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public Analyzer(WinningLotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
     public Report analyze(Lottos lottos) {
-        List<Integer> countsOfMatchingNumbers = lottos.getCountOfMatchingNumbers(winningNumbers);
         final Map<Prize, Integer> prizeStatus = new HashMap<>();
-        countsOfMatchingNumbers.forEach(count -> increasePrizeCount(Prize.valueOf(count), prizeStatus));
+
+        List<Prize> prizes = lottos.matches(winningLotto);
+        prizes.forEach(prize -> increasePrizeCount(prize, prizeStatus));
+
         return new Report(prizeStatus, lottos);
     }
 
