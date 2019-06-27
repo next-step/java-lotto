@@ -16,7 +16,7 @@ public class InputView {
 
     public static Order inputOrder() {
         Integer amount = askAmount();
-        int handPickCount = askhandPickCount();
+        int handPickCount = askHandPickCount();
         return new Order(amount, handPickCount);
     }
 
@@ -46,7 +46,7 @@ public class InputView {
         return lottos;
     }
 
-    private static int askhandPickCount() {
+    private static int askHandPickCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return scanner.nextInt();
     }
