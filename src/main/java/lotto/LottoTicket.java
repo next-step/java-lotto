@@ -6,11 +6,8 @@ import model.NumberElementCollection;
 
 public class LottoTicket {
 
-	public static final int MAX_NUMBER = 45;
 
-	public static final int MAX_COUNT = 6;
-
-	NumberElementCollection numbers = new NumberElementCollection(MAX_COUNT);
+	NumberElementCollection numbers = new NumberElementCollection(LottoRule.MAX_COUNT);
 
 	public void add(int number) {
 
@@ -18,7 +15,7 @@ public class LottoTicket {
 			throw new DuplicateNumberException();
 		}
 
-		if(number > MAX_NUMBER){
+		if(number > LottoRule.MAX_NUMBER){
 			throw new OutOfMaxNumberException();
 		}
 
@@ -32,7 +29,7 @@ public class LottoTicket {
 	}
 
 	public LottoResult checkWin(NumberElementCollection winNumbers) {
-		if(winNumbers.size() < MAX_COUNT){
+		if(winNumbers.size() < LottoRule.MAX_COUNT){
 			throw new IllegalArgumentException("당첨번호의 개수가 부족합니다.");
 		}
 
@@ -41,6 +38,6 @@ public class LottoTicket {
 	}
 
 	public boolean verify() {
-		return numbers.size() == MAX_COUNT;
+		return numbers.size() == LottoRule.MAX_COUNT;
 	}
 }

@@ -51,7 +51,7 @@ class LottoTicketTest {
 		LottoTicket ticket = new LottoTicket();
 
 		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
-			ticket.add(LottoTicket.MAX_NUMBER + 1);
+			ticket.add(LottoRule.MAX_NUMBER + 1);
 		});
 	}
 

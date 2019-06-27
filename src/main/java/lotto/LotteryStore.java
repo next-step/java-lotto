@@ -21,7 +21,7 @@ public class LotteryStore {
 
 	private LottoTicket issuingTicket(){
 		LottoTicket ticket = new LottoTicket();
-		IntStream.range(1, LottoTicket.MAX_COUNT + 1)
+		IntStream.range(1, LottoRule.MAX_COUNT + 1)
 				.forEach(number -> ticket.add(number));
 
 		return ticket;
