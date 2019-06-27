@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class NumberElement implements Comparable<NumberElement>{
 
-    int value;
+    private int value;
 
     public NumberElement(String value){
         this(isEmpty(value) ? 0 : Integer.parseInt(value.trim()));
