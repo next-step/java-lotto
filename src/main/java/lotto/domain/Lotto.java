@@ -2,9 +2,10 @@ package lotto.domain;
 
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.generator.RandomLottoGenerator;
-import lotto.domain.validator.LottoNumberValidator;
+import lotto.domain.validator.LottoValidator;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
 
@@ -18,35 +19,50 @@ public class Lotto {
 
     public Lotto(LottoGenerator lottoGenerator) {
 
-        List<Integer> lottoNumbers = lottoGenerator.generate();
-        LottoNumberValidator.validate(lottoNumbers);
-        sortLottoNumberAsc(lottoNumbers);
+        this(lottoGenerator.generate());
+    }
 
+    public Lotto(List<Integer> lottoNumbers) {
+
+        LottoValidator.validateNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public boolean isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
 
-        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getWonNormalNumbers()) &&
-                isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getWonBonusNumberValue());
+        if (prizeRule.hasBonusNumber()) {
+            return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers()) &&
+                    isMatchBonusRule(prizeRule.hasBonusNumber(), wonNumbers.getBonusNumber());
+        }
+        return isMatchNormalNumberRule(prizeRule.getNormalNumberCount(), wonNumbers.getNormalNumbers());
     }
 
-    private boolean isMatchNormalNumberRule(int normalNumberCount, List<Integer> wonNormalNumbers) {
+    private boolean isMatchNormalNumberRule(int normalNumberCount, List<WonNumber> normalWonNumbers) {
 
-        return wonNormalNumbers
-                .stream()
+        return normalWonNumbers.stream()
+                .map(WonNumber::getNumber)
                 .filter(lottoNumbers::contains)
                 .count() == normalNumberCount;
     }
 
-    private boolean isMatchBonusRule(boolean hasBonusNumber, int wonBonusNumber) {
+    private boolean isMatchBonusRule(boolean hasBonusNumber, WonNumber bonusWonNumbers) {
 
-        return hasBonusNumber == lottoNumbers.contains(wonBonusNumber);
+        return hasBonusNumber == lottoNumbers.contains(bonusWonNumbers.getNumber());
     }
 
-    private void sortLottoNumberAsc(List<Integer> lottoNumbers) {
+    @Override
+    public boolean equals(Object o) {
 
-        lottoNumbers.sort(Integer::compareTo);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(lottoNumbers);
     }
 
     @Override

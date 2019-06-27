@@ -1,48 +1,45 @@
 package lotto.domain;
 
-import lotto.domain.validator.LottoNumberValidator;
+import lotto.domain.validator.LottoValidator;
 import lotto.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WonNumbers {
 
-    private static final String DELIMITER = ",";
-
-    private final List<Integer> wonNormalNumbers;
-    private final int wonBonusNumberValue;
+    private final List<WonNumber> wonNumbers;
 
     public WonNumbers(String wonNormalNumbersValue, String wonBonusNumberValue) {
 
         validateInputs(wonNormalNumbersValue, wonBonusNumberValue);
 
-        List<Integer> wonNormalNumbers = parse(wonNormalNumbersValue);
-        LottoNumberValidator.validate(wonNormalNumbers);
-        this.wonNormalNumbers = wonNormalNumbers;
+        List<Integer> wonNormalNumbers = LottoParser.parse(wonNormalNumbersValue);
+        LottoValidator.validateNumbers(wonNormalNumbers);
 
         int wonBonusNumber = Integer.parseInt(wonBonusNumberValue);
-        LottoNumberValidator.validateNumber(wonBonusNumber);
-        this.wonBonusNumberValue = wonBonusNumber;
+        LottoValidator.validateNumber(wonBonusNumber);
+
+        this.wonNumbers = createWonNumbers(wonNormalNumbers, wonBonusNumber);
     }
 
-    private List<Integer> parse(String wonNumbersValue) {
+    private List<WonNumber> createWonNumbers(List<Integer> wonNormalNumbers, int wonBonusNumber) {
 
-        return Arrays.stream(wonNumbersValue.split(DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
+        return Stream.of(buildWonNormalNumbers(wonNormalNumbers),
+                         buildWonBonusNumber(wonBonusNumber))
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getWonNormalNumbers() {
+    private List<WonNumber> buildWonNormalNumbers(List<Integer> wonNormalNumbers) {
 
-        return wonNormalNumbers;
+        return wonNormalNumbers.stream().map(WonNumber::ofNormalNumber).collect(Collectors.toList());
     }
 
-    public int getWonBonusNumberValue() {
+    private List<WonNumber> buildWonBonusNumber(int wonBonusNumber) {
 
-        return wonBonusNumberValue;
+        return Collections.singletonList(WonNumber.ofBonusNumber(wonBonusNumber));
     }
 
     private void validateInputs(String wonNormalNumbersValue, String wonBonusNumbers) {
@@ -50,5 +47,20 @@ public class WonNumbers {
         if (StringUtils.isBlank(wonNormalNumbersValue) || StringUtils.isBlank(wonBonusNumbers)) {
             throw new IllegalArgumentException("입력받은 우승번호가 유효하지 않습니다.");
         }
+    }
+
+    public List<WonNumber> getNormalNumbers() {
+
+        return wonNumbers.stream()
+                .filter(wonNumber -> !wonNumber.isBonusNumber())
+                .collect(Collectors.toList());
+    }
+
+    public WonNumber getBonusNumber() {
+
+        return wonNumbers.stream()
+                .filter(WonNumber::isBonusNumber)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("보너스번호가 존재하지 않습니다."));
     }
 }

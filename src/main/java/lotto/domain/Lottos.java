@@ -2,22 +2,45 @@ package lotto.domain;
 
 import lotto.domain.generator.LottosGenerator;
 import lotto.domain.generator.RandomLottosGenerator;
+import lotto.domain.validator.LottoValidator;
+import lotto.utils.CollectionUtils;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
 
+    private static final RandomLottosGenerator RANDOM_LOTTOS_GENERATOR = new RandomLottosGenerator();
     private final List<Lotto> lottos;
 
-    public Lottos(PurchaseAmount purchaseAmount) {
+    public Lottos(PurchaseAmount purchaseAmount, List<String> manualNumbers) {
 
-        this(new RandomLottosGenerator(), purchaseAmount);
+        this(RANDOM_LOTTOS_GENERATOR, purchaseAmount, manualNumbers);
     }
 
-    public Lottos(LottosGenerator lottosGenerator, PurchaseAmount purchaseAmount) {
+    public Lottos(LottosGenerator lottosGenerator, PurchaseAmount purchaseAmount, List<String> manualNumbers) {
 
-        this.lottos = lottosGenerator.generate(purchaseAmount.getPurchasedLottosCount());
-        validateGeneratedLottosCount(purchaseAmount.getPurchasedLottosCount());
+        List<Lotto> lottos = Stream.of(buildManualLotto(manualNumbers),
+                                       generateAutoLotto(lottosGenerator, purchaseAmount.getPurchasedLottosCount() - manualNumbers.size()))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        LottoValidator.validateLottosCount(lottos.size(), purchaseAmount.getPurchasedLottosCount());
+        this.lottos = lottos;
+    }
+
+    private List<Lotto> buildManualLotto(List<String> manualNumbers) {
+
+        return manualNumbers.stream()
+                .map(LottoParser::parse)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+    }
+
+    private List<Lotto> generateAutoLotto(LottosGenerator lottosGenerator, int autoCount) {
+
+        return lottosGenerator.generate(autoCount);
     }
 
     public long isMatchPrizeRule(PrizeRule prizeRule, WonNumbers wonNumbers) {
@@ -32,11 +55,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    private void validateGeneratedLottosCount(int lottosCount) {
+    List<Lotto> getLottos() {
 
-        if (lottos.size() != lottosCount) {
-            throw new IllegalStateException("생성된 로또 개수가 유효하지 않습니다. 생성된 개수=" + lottos.size() + ", 기대한 개수=" + lottosCount);
-        }
+        return lottos;
     }
 
     @Override
