@@ -1,4 +1,4 @@
-package calculator;
+package common;
 
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -26,7 +26,10 @@ public class ExpressionSplitter {
         this.separator = DEFAULT_SEPARATOR_PATTERN;
         this.expression = Optional.ofNullable(expression).orElse("");
 
+        this.extractCustomSeparator();
+    }
 
+    private void extractCustomSeparator(){
         /**
          * 커스텀 구분자가 지정된 경우 구분자와 표현식 추출
          */
@@ -41,6 +44,7 @@ public class ExpressionSplitter {
             this.expression = m.group(INDEX_OF_EXTRACTED_EXPRESSION);
         }
     }
+
 
     public String[] split() {
         return expression.trim().split(separator);

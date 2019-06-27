@@ -1,4 +1,4 @@
-package calculator;
+package common;
 
 public class ExpressionParser {
 
