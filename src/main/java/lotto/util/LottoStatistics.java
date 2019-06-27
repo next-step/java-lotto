@@ -4,16 +4,11 @@ import lotto.domain.Rank;
 import lotto.domain.WinLotto;
 
 import java.util.List;
-import java.util.Map;
-
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
 
 public class LottoStatistics {
 
   public static WinLotto statistics(List<Rank> ranks) {
-    return new WinLotto().getWinLottos(ranks);
+    return new WinLotto().getWinLotto(ranks);
   }
 
   public static double profitRate(int price, WinLotto winLotto) {
