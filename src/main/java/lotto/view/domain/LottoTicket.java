@@ -1,5 +1,6 @@
 package lotto.view.domain;
 
+import lotto.view.model.LottoNumberCollection;
 import lotto.view.model.LottoResult;
 import lotto.view.model.LottoRule;
 import lotto.exception.DuplicateNumberException;
@@ -10,7 +11,7 @@ public class LottoTicket {
 
 	private static final String TO_STRING_FORMAT = "[%s]";
 
-	NumberElementCollection numbers = new NumberElementCollection(LottoRule.MAX_COUNT);
+	LottoNumberCollection numbers = new LottoNumberCollection();
 
 	private LottoTicket(){
 		// 기본생성자는 클래스메서드에서만 접근

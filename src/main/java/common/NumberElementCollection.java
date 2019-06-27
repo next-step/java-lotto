@@ -4,7 +4,6 @@ import lotto.exception.OutOfCountException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,11 +11,9 @@ public class NumberElementCollection {
 
     private static final int NO_LIMIT = -1;
 
-    private static final CharSequence TO_STRING_DELIMITER = ", ";
-
     private final int maxElements;
 
-    private List<NumberElement> elements;
+    protected List<NumberElement> elements;
 
     public NumberElementCollection(String[] source){
         this.maxElements = NO_LIMIT;
@@ -40,15 +37,6 @@ public class NumberElementCollection {
         return elements.stream().reduce(new NumberElement(), (part, element) -> part.add(element));
     }
 
-
-    public boolean contains(int number) {
-        return this.elements.contains(new NumberElement(number));
-    }
-
-    private boolean contains(NumberElement number) {
-        return this.elements.contains(number);
-    }
-
     public void add(int number) {
         if(maxElements > NO_LIMIT && elements.size() == maxElements){
             throw new OutOfCountException();
@@ -61,25 +49,12 @@ public class NumberElementCollection {
         return this.elements.size();
     }
 
-    /**
-     * 대상 컬렉션과 일치하는 숫자만 포함하는 컬렉션 반환
-     * @param collection
-     * @return
-     */
-    public NumberElementCollection matchNumbers(NumberElementCollection collection) {
-        List<NumberElement> matched = collection.elements.stream().filter(this::contains).collect(Collectors.toList());
-        return NumberElementCollection.of(matched);
+    public boolean contains(int number) {
+        return this.elements.contains(new NumberElement(number));
     }
 
-	public void sort() {
-    	Collections.sort(elements);
-	}
-
-    @Override
-    public String toString() {
-        return elements.stream()
-                .map(NumberElement::toString)
-                .collect(Collectors.joining(TO_STRING_DELIMITER));
+    public boolean contains(NumberElement number) {
+        return this.elements.contains(number);
     }
 
     /**
@@ -87,7 +62,7 @@ public class NumberElementCollection {
      * @param elements
      * @return
      */
-    private static NumberElementCollection of(List<NumberElement> elements) {
+    protected static NumberElementCollection of(List<NumberElement> elements) {
         NumberElementCollection collection = new NumberElementCollection();
         collection.elements = elements;
         return collection;
