@@ -8,6 +8,12 @@ public class LotteryStore {
 
 	private static final int PRICE = 1000;
 
+	private TicketMachine machine;
+
+	public LotteryStore(){
+		machine = new TicketMachine();
+	}
+
 	public LottoWallet buy(int money) {
 
 		int availableCount = money / PRICE;
@@ -20,10 +26,6 @@ public class LotteryStore {
 	}
 
 	private LottoTicket issuingTicket(){
-		LottoTicket ticket = new LottoTicket();
-		IntStream.range(1, LottoRule.MAX_COUNT + 1)
-				.forEach(number -> ticket.add(number));
-
-		return ticket;
+		return this.machine.issuingTicket();
 	}
 }
