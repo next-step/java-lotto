@@ -7,4 +7,8 @@ public class Money {
     public Money(int PAID) {
         this.PAID = PAID;
     }
+
+    public int getPurchaseableQuantity() {
+        return this.PAID / Lotto.PRICE;
+    }
 }
