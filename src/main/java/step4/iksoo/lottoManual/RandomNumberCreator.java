@@ -10,17 +10,17 @@ public class RandomNumberCreator {
     public static final int START_NUMBER = 1;
     public static final int END_NUMBER = 45;
 
-    private List<LottoNo> shuffleNum;
+    private List<Integer> shuffleNum;
 
     public RandomNumberCreator() {
         this.shuffleNum = insertSequentialNumbers();
         shuffleNumbers();
     }
 
-    private List<LottoNo> insertSequentialNumbers() {
-        List<LottoNo> lottoNo = new ArrayList<>();
+    private List<Integer> insertSequentialNumbers() {
+        List<Integer> lottoNo = new ArrayList<>();
         IntStream.rangeClosed(START_NUMBER, END_NUMBER)
-                .forEach(n -> lottoNo.add(new LottoNo(n)));
+                .forEach(number -> lottoNo.add(number));
         return lottoNo;
     }
 
@@ -28,7 +28,7 @@ public class RandomNumberCreator {
         Collections.shuffle(this.shuffleNum);
     }
 
-    public List<LottoNo> getLotto(int length) {
+    public List<Integer> getLotto(int length) {
         return this.shuffleNum.stream()
                 .limit(length)
                 .collect(Collectors.toList());

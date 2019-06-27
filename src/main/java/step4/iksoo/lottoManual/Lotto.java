@@ -14,8 +14,14 @@ public class Lotto {
         this(new RandomNumberCreator().getLotto(LOTTO_SIZE));
     }
 
-    Lotto(List<LottoNo> numbers) {
-        this.luckyNumbers = sortLotto(solveDuplicated(numbers));
+    Lotto(List<Integer> numbers) {
+        this.luckyNumbers = sortLotto(solveDuplicated(convertToLottoNo(numbers)));
+    }
+
+    private List<LottoNo> convertToLottoNo(List<Integer> numbers) {
+        return numbers.stream()
+                .map(number -> new LottoNo(number))
+                .collect(Collectors.toList());
     }
 
     private List<LottoNo> solveDuplicated(List<LottoNo> numbers) {

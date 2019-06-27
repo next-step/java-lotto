@@ -9,10 +9,10 @@ public class Lottoes {
     private List<Lotto> lottoes;
 
     Lottoes(int orderPrice, int orderManualLotto) {
-        this.lottoes = buyLotto(orderPrice / PRICE_OF_LOTTO - orderManualLotto);
+        this.lottoes = buyAutoLotto(orderPrice / PRICE_OF_LOTTO - orderManualLotto);
     }
 
-    private List<Lotto> buyLotto(int orderCount) {
+    private List<Lotto> buyAutoLotto(int orderCount) {
         List<Lotto> lottoBox = new ArrayList<>();
         IntStream.range(0, orderCount)
                 .boxed()
