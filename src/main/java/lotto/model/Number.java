@@ -20,10 +20,6 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    private int value() {
-        return number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,6 +40,6 @@ public class Number implements Comparable<Number> {
 
     @Override
     public int compareTo(Number number) {
-        return this.number - number.value();
+        return this.number - number.number;
     }
 }
