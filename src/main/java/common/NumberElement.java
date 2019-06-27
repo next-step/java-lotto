@@ -4,10 +4,6 @@ import java.util.Objects;
 
 public class NumberElement implements Comparable<NumberElement>{
 
-    private static boolean isEmpty(String value){
-        return value == null || value.trim().isEmpty();
-    }
-
     int value;
 
     public NumberElement(String value){
@@ -65,5 +61,9 @@ public class NumberElement implements Comparable<NumberElement>{
         }
 
         return this.value > element.value ? 1 : -1;
+    }
+
+    private static boolean isEmpty(String value){
+        return value == null || value.trim().isEmpty();
     }
 }
