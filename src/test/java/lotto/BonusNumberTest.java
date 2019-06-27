@@ -12,8 +12,10 @@ class BonusNumberTest {
     void test() {
         //Given
         BonusNumber bonusNumber = new BonusNumber(1);
+        
         //When
         LottoNumber lottoBonusNumber = bonusNumber.getLottoNumber();
+        
         //Then
         Assertions.assertThat(lottoBonusNumber.isEqualsTo(1)).isTrue();
     }

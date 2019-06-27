@@ -15,8 +15,10 @@ class LottosTest {
     void getBuyableCount() {
         //Given
         CashPayments cashPayment = new CashPayments(5000);
+        
         //When
         int buyableCount = Lottos.getBuyableCount(cashPayment);
+        
         //Then
         Assertions.assertThat(buyableCount).isEqualTo(5);
     }
@@ -33,9 +35,11 @@ class LottosTest {
         );
         LottoNumbers lottoNumbers = new LottoNumbers(hasNumbers);
         LottoNumbers notHasLottoNumbers = new LottoNumbers(notHasNumbers);
+        
         //When
         boolean hasLottos = lottos.hasLottoNumbers(lottoNumbers);
         boolean notHasLottos = lottos.hasLottoNumbers(notHasLottoNumbers);
+        
         //Then
         Assertions.assertThat(hasLottos).isTrue();
         Assertions.assertThat(notHasLottos).isFalse();

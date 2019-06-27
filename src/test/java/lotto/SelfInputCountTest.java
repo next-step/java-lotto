@@ -11,9 +11,11 @@ class SelfInputCountTest {
     void test() {
         //Given
         SelfInputCount selfInputCount = new SelfInputCount(1);
+        
         //When
         boolean same = selfInputCount.isSame(1);
         boolean different = selfInputCount.isSame(2);
+        
         //Then
         Assertions.assertThat(same).isTrue();
         Assertions.assertThat(different).isFalse();

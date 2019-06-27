@@ -24,7 +24,7 @@ public class InputView {
         return inputer.inputNumber();
     }
     
-    public int getInputSelfInputNumberCount() {
+    public int getInputSelfInputCount() {
         outer.print(SELF_INPUT_COUNT.getAnswer());
         return inputer.inputNumber();
     }

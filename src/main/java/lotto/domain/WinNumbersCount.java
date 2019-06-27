@@ -17,7 +17,7 @@ public class WinNumbersCount {
     public int addWinCount(final int matchCount, final boolean isMatchedBonus) {
         final Prize matchPrize = Prize.getPrize(matchCount, isMatchedBonus);
         if (matchPrize == null) {
-            return 0;
+            return DEFAULT_WIN_COUNT;
         }
         
         int nowCount = winNumbersCount.get(matchPrize);

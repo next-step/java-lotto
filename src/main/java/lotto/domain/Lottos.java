@@ -3,10 +3,13 @@ package lotto.domain;
 import lotto.common.ErrorMessage;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
     private static final int DEFAULT_PRICE = 1000;
     private final static int CANT_BUYABLE_COUNT = 0;
+    private final static int START_NUMBER = 0;
     
     private List<LottoNumbers> lottos;
     

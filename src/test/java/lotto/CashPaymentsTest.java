@@ -19,8 +19,10 @@ class CashPaymentsTest {
     void test() {
         //Given
         long totalPrizeMoney = 10000;
+        
         //When
         double earningsRate = cashPayments.getEarningsRate(totalPrizeMoney);
+        
         //Then
         Assertions.assertThat(earningsRate).isEqualTo(2.0);
     }
@@ -30,8 +32,10 @@ class CashPaymentsTest {
     void getBuyableCountTest() {
         //Given
         int defaultPrice = 1000;
+        
         //When
         int buyableCount = cashPayments.getBuyableCount(defaultPrice);
+        
         //Then
         Assertions.assertThat(buyableCount).isEqualTo(5);
     }

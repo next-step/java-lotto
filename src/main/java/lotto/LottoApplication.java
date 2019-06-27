@@ -14,7 +14,6 @@ public class LottoApplication {
         final ResultView consoleResultView = new ResultView(outer);
         final LottoController controller = new LottoController(inputView, consoleResultView);
         
-        controller.runBuyingLottoProcess();
-        controller.runResultProcess();
+        controller.run();
     }
 }

@@ -11,10 +11,12 @@ class BuyableCountTest {
     void isBigTest() {
         //Given
         BuyableCount buyableCount = new BuyableCount(2);
+        
         //When
         boolean big = buyableCount.isSmall(1);
         boolean same = buyableCount.isSmall(2);
         boolean small = buyableCount.isSmall(3);
+        
         //Then
         Assertions.assertThat(big).isFalse();
         Assertions.assertThat(same).isFalse();

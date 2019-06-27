@@ -3,11 +3,7 @@ package lotto.common;
 import java.util.Scanner;
 
 public class ConsoleInputer implements Inputer {
-    private static Scanner scanner;
-    
-    static {
-        scanner = new Scanner(System.in);
-    }
+    private static Scanner scanner = new Scanner(System.in);
     
     @Override
     public String inputString() {

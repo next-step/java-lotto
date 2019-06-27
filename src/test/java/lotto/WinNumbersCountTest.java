@@ -11,8 +11,10 @@ class WinNumbersCountTest {
     void plusCountTest() {
         //Given
         int matchCount = 3;
+        
         //When
         WinNumbersCount winNumbersCount = new WinNumbersCount();
+        
         //Then
         Assertions.assertThat(winNumbersCount.addWinCount(matchCount)).isEqualTo(1);
     }
@@ -24,8 +26,10 @@ class WinNumbersCountTest {
         WinNumbersCount winNumbersCount = new WinNumbersCount();
         winNumbersCount.addWinCount(3);
         winNumbersCount.addWinCount(3);
+        
         //When
         long totalPrize = winNumbersCount.getTotalPrizeMoney();
+        
         //Then
         Assertions.assertThat(totalPrize).isEqualTo(10000);
     }

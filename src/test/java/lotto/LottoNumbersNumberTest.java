@@ -30,8 +30,10 @@ class LottoNumbersNumberTest {
     void isEqualsToSuccessTest() {
         //Given
         LottoNumber lottoNumber = new LottoNumber(1);
+        
         //When
         boolean equals = lottoNumber.isEqualsTo(1);
+        
         //Then
         Assertions.assertThat(equals).isTrue();
     }
@@ -41,8 +43,10 @@ class LottoNumbersNumberTest {
     void isEqualsToFailTest() {
         //Given
         LottoNumber lottoNumber = new LottoNumber(1);
+        
         //When
         boolean equals = lottoNumber.isEqualsTo(2);
+        
         //Then
         Assertions.assertThat(equals).isFalse();
     }

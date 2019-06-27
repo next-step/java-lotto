@@ -26,9 +26,10 @@ class BuyingLottosTest {
     void buyUnderMinimumPriceTest() {
         //Given
         int cashPayment = 999;
+        
         //Then
         Assertions.assertThatIllegalArgumentException()
-            .isThrownBy(() -> new BuyingLottos(cashPayment))
+            .isThrownBy(() -> new BuyingLottos.Builder().setCashPayments(cashPayment))
             .withMessage(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
     }
     
@@ -40,9 +41,15 @@ class BuyingLottosTest {
         List<LottoNumbers> lottoNumbersList = new ArrayList<>();
         lottoNumbersList.add(new LottoNumbers(getNewLottoNumbers(1, 2, 3, 7, 8, 9)));
         lottoNumbersList.add(new LottoNumbers(getNewLottoNumbers(1, 2, 3, 4, 8, 9)));
-        BuyingLottos buyingLottos = new BuyingLottos(new Lottos(lottoNumbersList), new CashPayments(5000));
+        BuyingLottos buyingLottos = new BuyingLottos.Builder()
+          .setCashPayments(5000)
+          .setSelfInputCount(2)
+          .buyLottos(Arrays.asList("1,2,3,7,8,9", "1,2,3,4,8,9"))
+          .build();
+        
         //When
         OwnPrize ownPrize = buyingLottos.getOwnPrize(wanLottoNumbers);
+        
         //Then
         Assertions.assertThat(ownPrize.isEqualsEarningRate(new EarningsRate(11.0))).isTrue();
     }
@@ -56,11 +63,12 @@ class BuyingLottosTest {
     @Test
     @DisplayName("구매금액을 초과하는 수동입력 갯수를 입력할 수 없다.")
     void canBuyingSelfLottoSuccessTest() {
-        //Given
-        BuyingLottos buyingLottos = new BuyingLottos(1000);
         //Then
         Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> buyingLottos.setSelfInputCount(2))
+          .isThrownBy(() -> new BuyingLottos.Builder()
+            .setCashPayments(1000)
+            .setSelfInputCount(2)
+            .build())
           .withMessage(ErrorMessage.OVER_INPUT_SELF_BUYING_COUNT.message());
     }
     
@@ -68,12 +76,15 @@ class BuyingLottosTest {
     @DisplayName("사전에 입력했던 수동 로또 갯수와 실제 입력된 로또의 갯수가 다르면 익셉션이 발생한다.")
     void setSelfLottoNumbersTest() {
         //Given
-        BuyingLottos buyingLottos = new BuyingLottos(5000);
-        buyingLottos.setSelfInputCount(3);
         List<String> selfInputNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7");
+        
         //Then
         Assertions.assertThatIllegalArgumentException()
-          .isThrownBy(() -> buyingLottos.buyLottos(selfInputNumbers))
+          .isThrownBy(() -> new BuyingLottos.Builder()
+            .setCashPayments(5000)
+            .setSelfInputCount(3)
+            .buyLottos(selfInputNumbers)
+            .build())
           .withMessage(ErrorMessage.INCORRECT_SELF_LOTTO_NUMBERS.message());
     }
     
@@ -81,13 +92,15 @@ class BuyingLottosTest {
     @DisplayName("로또가 정상적으로 구매된다.")
     void test() {
         //Given
-        BuyingLottos buyingLottos = new BuyingLottos(5000);
-        buyingLottos.setSelfInputCount(1);
         String lottoNumbers = "1,2,3,4,5,6";
-        //When
-        Lottos lottos = buyingLottos.buyLottos(Collections.singletonList(lottoNumbers));
+        BuyingLottos buyingLottos = new BuyingLottos.Builder()
+          .setCashPayments(5000)
+          .setSelfInputCount(1)
+          .buyLottos(Collections.singletonList(lottoNumbers))
+          .build();
+        
         //Then
-        Assertions.assertThat(lottos.getLottoSize()).isEqualTo(5);
-        lottos.hasLottoNumbers(new LottoNumbers(lottoNumbers));
+        Assertions.assertThat(buyingLottos.hasLottoNumbers(lottoNumbers)).isTrue();
+        Assertions.assertThat(buyingLottos.isEqualsLottoSize(5)).isTrue();
     }
 }

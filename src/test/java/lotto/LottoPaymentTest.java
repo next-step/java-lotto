@@ -13,8 +13,10 @@ class LottoPaymentTest {
     void getBuyableCountTest() {
         //Given
         LottoPayment lottoPayment = new LottoPayment();
+        
         //When
         BuyableCount buyableCount = lottoPayment.getBuyableCount(new CashPayments(5000));
+        
         //Then
         Assertions.assertThat(buyableCount.isEqualsTo(5));
     }

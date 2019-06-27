@@ -12,54 +12,74 @@ public class BuyingLottos {
     private Lottos lottos;
     private CashPayments cashPayments;
     private SelfInputCount selfInputCount;
-    private BuyableCount buyableCount;
     
-    public BuyingLottos(int cashPayments) {
-        if (cashPayments < MIN_BUYABLE_PAYMENT) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
+    private BuyingLottos(Builder builder) {
+        this.cashPayments = builder.cashPayments;
+        this.selfInputCount = builder.selfInputCount;
+        this.lottos = builder.lottos;
+    }
+    
+    public static class Builder {
+        private CashPayments cashPayments;
+        private SelfInputCount selfInputCount;
+        private Lottos lottos;
+        private BuyableCount buyableCount;
+    
+        public Builder setCashPayments(int cashPayments) {
+            if (cashPayments < MIN_BUYABLE_PAYMENT) {
+                throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_CASH_PAYMENT.message());
+            }
+            this.cashPayments = new CashPayments(cashPayments);
+            buyableCount = new BuyableCount(cashPayments / MIN_BUYABLE_PAYMENT);
+            return this;
         }
-        this.cashPayments = new CashPayments(cashPayments);
-        buyableCount = new BuyableCount(cashPayments / MIN_BUYABLE_PAYMENT);
+        
+        public Builder setSelfInputCount(int selfInputCount) {
+            if (buyableCount.isSmall(selfInputCount)) {
+                throw new IllegalArgumentException(ErrorMessage.OVER_INPUT_SELF_BUYING_COUNT.message());
+            }
+            this.selfInputCount = new SelfInputCount(selfInputCount);
+            return this;
+        }
+    
+        public Builder buyLottos(List<String> selfLottoNumbers) {
+            if (!selfInputCount.isSame(selfLottoNumbers.size())) {
+                throw new IllegalArgumentException(ErrorMessage.INCORRECT_SELF_LOTTO_NUMBERS.message());
+            }
+            int selfLottoCount = selfInputCount.getSelfInputCount();
+            List<LottoNumbers> selfLottos = makeLottoNumbers(selfLottoNumbers);
+            selfLottos.addAll(makeLottoNumbers(Lottos.getBuyableCount(cashPayments) - selfLottoCount));
+            lottos = new Lottos(selfLottos);
+            return this;
+        }
+        
+        public BuyingLottos build() {
+            return new BuyingLottos(this);
+        }
     }
     
-    public BuyingLottos(Lottos lottos, CashPayments cashPayments) {
-        this.lottos = lottos;
-        this.cashPayments = cashPayments;
-    }
-    
-    private List<LottoNumbers> makeLottoNumbers(int count) {
+    private static List<LottoNumbers> makeLottoNumbers(int count) {
         return IntStream.range(START_NUMBER, count)
             .mapToObj(i -> new LottoNumbers())
             .collect(Collectors.toList());
     }
     
-    private List<LottoNumbers> makeLottoNumbers(List<String> lottoNumbers) {
+    private static List<LottoNumbers> makeLottoNumbers(List<String> lottoNumbers) {
         return lottoNumbers.stream()
             .map(LottoNumbers::new)
             .collect(Collectors.toList());
     }
     
-    public Lottos buyLottos(List<String> selfLottoNumbers) {
-        if (!selfInputCount.isSame(selfLottoNumbers.size())) {
-            throw new IllegalArgumentException(ErrorMessage.INCORRECT_SELF_LOTTO_NUMBERS.message());
-        }
-        int selfLottoCount = selfInputCount.getSelfInputCount();
-        List<LottoNumbers> selfLottos = makeLottoNumbers(selfLottoNumbers);
-        selfLottos.addAll(makeLottoNumbers(Lottos.getBuyableCount(cashPayments) - selfLottoCount));
-        lottos = new Lottos(selfLottos);
-        return lottos;
-    }
-    
-    
     public OwnPrize getOwnPrize(final WanLottoNumbers wanLottoNumbers) {
         return new OwnPrize(lottos.getWinNumbersCount(wanLottoNumbers), cashPayments);
     }
     
-    public void setSelfInputCount(int selfInputCount) {
-        if (buyableCount.isSmall(selfInputCount)) {
-            throw new IllegalArgumentException(ErrorMessage.OVER_INPUT_SELF_BUYING_COUNT.message());
-        }
-        this.selfInputCount = new SelfInputCount(selfInputCount);
+    public boolean hasLottoNumbers(String lottoNumbers) {
+        return lottos.hasLottoNumbers(new LottoNumbers(lottoNumbers));
+    }
+    
+    public boolean isEqualsLottoSize(int size) {
+        return lottos.getLottoSize() == size;
     }
     
     @Override

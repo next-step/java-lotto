@@ -49,8 +49,10 @@ class LottoNumbersTest {
             .collect(Collectors.toList());
         WanLottoNumbers wanLottoNumbers = new WanLottoNumbers("1,2,3,7,8,9");
         LottoNumbers lotto = new LottoNumbers(lottoNumbers);
+        
         //When
         int matchedCount = lotto.getMatchedNumberCount(wanLottoNumbers.getLotto());
+        
         //Then
         Assertions.assertThat(matchedCount).isEqualTo(3);
     }
@@ -64,8 +66,10 @@ class LottoNumbersTest {
           .map(LottoNumber::new)
           .collect(Collectors.toList());
         LottoNumbers lotto = new LottoNumbers(lottoNumbers);
+        
         //When
         boolean haveBonusNumber = lotto.haveBonusNumber(bonusNumber);
+        
         //Then
         Assertions.assertThat(haveBonusNumber).isTrue();
     }
