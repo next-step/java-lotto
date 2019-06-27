@@ -15,12 +15,13 @@ public class RandomNumberGenerator implements NumberGenerator {
   }
 
   @Override
-  public List<Integer> generate(int limit) {
+  public List<LottoNumber> generate(int limit) {
     return random.ints(START_INCLUSIVE, END_EXCLUSIVE)
             .distinct()
             .limit(Lotto.COUNT_OF_NUMBERS)
             .boxed()
             .sorted()
+            .map(LottoNumber::new)
             .collect(Collectors.toList());
   }
 }

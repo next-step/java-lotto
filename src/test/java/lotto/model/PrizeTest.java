@@ -19,6 +19,6 @@ public class PrizeTest {
 
     @Test
     void test_get_prize_money() {
-        assertThat(Prize.SECOND.getPrizeMoney()).isEqualTo(1_500_000);
+        assertThat(Prize.SECOND.getPrizeMoney()).isEqualTo(30_000_000);
     }
 }

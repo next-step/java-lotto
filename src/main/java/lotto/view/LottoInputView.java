@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
+import lotto.model.LottoNumber;
 import lotto.model.Money;
 
 import java.util.InputMismatchException;
@@ -37,9 +38,10 @@ public class LottoInputView {
     try {
       Scanner scanner = new Scanner(System.in);
       String input = scanner.nextLine();
-      List<Integer> winningNumbers = Stream.of(input.split(DELIMITER_FOR_WINNING_NUMBERS))
+      List<LottoNumber> winningNumbers = Stream.of(input.split(DELIMITER_FOR_WINNING_NUMBERS))
               .mapToInt(Integer::valueOf)
               .boxed()
+              .map(LottoNumber::new)
               .collect(toList());
 
       return LottoGenerator.generate(winningNumbers);
@@ -48,12 +50,12 @@ public class LottoInputView {
     }
   }
 
-  public static int askBonusNumber() {
+  public static LottoNumber askBonusNumber() {
     print(BONUS_NUMBER_MESSAGE);
 
     try {
       Scanner scanner = new Scanner(System.in);
-      return scanner.nextInt();
+      return new LottoNumber(scanner.nextInt());
     } catch(InputMismatchException e) {
       throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
     }

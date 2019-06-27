@@ -14,6 +14,5 @@ public class MoneyTest {
         int quantity = money.getPurchaseableQuantity();
 
         assertThat(quantity).isEqualTo(15);
-
     }
 }

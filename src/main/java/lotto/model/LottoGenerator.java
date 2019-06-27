@@ -22,7 +22,7 @@ public class LottoGenerator {
     return new Lottos(lottos);
   }
 
-  public static Lotto generate(List<Integer> numbers) {
+  public static Lotto generate(List<LottoNumber> numbers) {
     return new Lotto(numbers);
   }
 }

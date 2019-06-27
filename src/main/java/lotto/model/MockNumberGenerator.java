@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class MockNumberGenerator implements NumberGenerator {
 
   @Override
-  public List<Integer> generate(int limit) {
-    return IntStream.rangeClosed(1, limit).boxed().collect(Collectors.toList());
+  public List<LottoNumber> generate(int limit) {
+    return IntStream.rangeClosed(1, limit).boxed().map(LottoNumber::new).collect(Collectors.toList());
   }
 }
