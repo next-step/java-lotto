@@ -78,8 +78,9 @@ class LottoTicketTest {
 
 	private static Stream<Arguments> provideWinNumbers(){
 		return Stream.of(
-				Arguments.of(new int[]{1, 2, 3, 7, 8, 9}, 5),
-				Arguments.of(new int[]{2, 4, 6, 23, 34, 45}, 5)
+				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, 0),	// 낙첨
+				Arguments.of(new int[]{1, 2, 3, 7, 8, 9}, 4),		// 4등
+				Arguments.of(new int[]{2, 4, 6, 23, 34, 45}, 4)		// 4등
 		);
 	}
 }
