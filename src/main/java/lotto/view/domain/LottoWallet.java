@@ -10,6 +10,8 @@ public class LottoWallet {
 
 	private static final CharSequence NEW_LINE = "\n";
 
+	private static final int EMPTY_BALANCE = 0;
+
 	private List<LottoTicket> tickets;
 
 	private int balance;
@@ -39,7 +41,7 @@ public class LottoWallet {
 	}
 
 	public boolean hasBalance() {
-		return balance > 0;
+		return balance > EMPTY_BALANCE;
 	}
 
 	@Override

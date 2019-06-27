@@ -13,7 +13,7 @@ public class TicketMachine {
 
 	public TicketMachine(){
 
-		numberPool = IntStream.rangeClosed(1, LottoRule.MAX_NUMBER)
+		numberPool = IntStream.rangeClosed(LottoRule.MIN_NUMBER, LottoRule.MAX_NUMBER)
 				.boxed()
 				.collect(Collectors.toList());
 	}
