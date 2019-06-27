@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
+import lotto.model.Money;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,13 +19,13 @@ public class LottoInputView {
   private static final String NOT_A_NUMBER_INPUT_ERROR_MESSAGE = "숫자로 제대로 입력해주세요.";
   private static final String DELIMITER_FOR_WINNING_NUMBERS = ",( )?";
 
-  public static int askPurchaseAmount() {
+  public static Money askPurchaseAmount() {
     print(PURCHASE_AMOUNT_MESSAGE);
 
     try {
       Scanner scanner = new Scanner(System.in);
       int paid = scanner.nextInt();
-      return paid;
+      return new Money(paid);
     } catch(InputMismatchException e) {
       throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
     }

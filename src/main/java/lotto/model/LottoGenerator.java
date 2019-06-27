@@ -13,9 +13,9 @@ public class LottoGenerator {
     this.numberGenerator = numberGenerator;
   }
 
-  public Lottos generate(int paid) {
-    int amount = paid / Lotto.PRICE;
-    List<Lotto> lottos = IntStream.range(0, amount)
+  public Lottos generate(Money paid) {
+    int quantity = paid.getPurchaseableQuantity();
+    List<Lotto> lottos = IntStream.range(0, quantity)
             .mapToObj((int value) -> new Lotto(numberGenerator.generate(QUANTITY_OF_THE_NUMBER_TO_GENERATE)))
             .collect(Collectors.toList());
 

@@ -8,10 +8,10 @@ public class LottoRunner {
 
   public static void main(String[] args) {
 
-    int paid = LottoInputView.askPurchaseAmount();
+    Money paidMoney = LottoInputView.askPurchaseAmount();
 
     LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
-    Lottos lottos = lottoGenerator.generate(paid);
+    Lottos lottos = lottoGenerator.generate(paidMoney);
 
     LottoOutputView.printCountOf(lottos);
     LottoOutputView.printPickedNumbersOf(lottos);

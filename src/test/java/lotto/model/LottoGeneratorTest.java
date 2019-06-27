@@ -15,11 +15,11 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class LottoGeneratorTest {
 
-  @ParameterizedTest
-  @ValueSource(ints = {15000, 15010})
+  @Test
   @DisplayName("로또 생성")
-  void generate(int paid) {
-    Lottos lottos = new LottoGenerator(new MockNumberGenerator()).generate(paid);
+  void generate() {
+    Money paidMoney = new Money(15000);
+    Lottos lottos = new LottoGenerator(new MockNumberGenerator()).generate(paidMoney);
     assertThat(lottos.getCount()).isEqualTo(15);
   }
 
