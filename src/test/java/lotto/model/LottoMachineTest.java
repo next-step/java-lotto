@@ -3,6 +3,7 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,15 +12,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMachineTest {
 
-    Money moneyToBuy;
-    List<String> numbersOfManual;
+    private Money moneyToBuy;
+    private List<String> numbersOfManual;
 
     @DisplayName("잔액 부족으로 로또 구매 실패")
     @Test
     void buyLottoFail() {
         moneyToBuy = Money.won(500);
-        numbersOfManual = null;
-        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy, null);
+        numbersOfManual = new ArrayList<>();
+
+        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy, numbersOfManual);
+
         assertThat(lottoTicket.getLottos()).hasSize(0);
     }
 
@@ -27,7 +30,7 @@ public class LottoMachineTest {
     @Test
     void buyLottoSuccess() {
         moneyToBuy = Money.won(1000);
-        numbersOfManual = null;
+        numbersOfManual = new ArrayList<>();
 
         LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy, numbersOfManual);
 

@@ -1,8 +1,6 @@
 package lotto.model;
 
-import lotto.model.generator.LottoGenerator;
-import lotto.model.generator.ManualLottoGenerator;
-import lotto.model.generator.RandomLottoGenerator;
+import lotto.model.generator.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ public class LottoMachine {
 
     public static LottoTicket buy(Money money, List<String> numbersOfManual) {
         List<Lotto> lottos = new ArrayList<>();
-        if (!(numbersOfManual == null || numbersOfManual.isEmpty())) {
+        if (!(numbersOfManual.isEmpty())) {
             lottos.addAll(buyManualLotto(numbersOfManual));
             money = money.spendOnLotto(numbersOfManual.size());
         }
@@ -22,12 +20,10 @@ public class LottoMachine {
     }
 
     private static List<Lotto> buyManualLotto(List<String> numbersOfManual) {
-        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(numbersOfManual);
-        return manualLottoGenerator.generator();
+        return new ManualLottoGenerator(numbersOfManual).generator();
     }
 
     private static List<Lotto> buyRandomLotto(Money money) {
-        LottoGenerator randomLottoGenerator = new RandomLottoGenerator(money);
-        return randomLottoGenerator.generator();
+        return new RandomLottoGenerator(money).generator();
     }
 }

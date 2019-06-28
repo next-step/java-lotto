@@ -22,7 +22,7 @@ public class Money {
     }
 
     static double getRateOfReturn(Money prizeMoney, Money totalOfBuyLotto) {
-        return ((prizeMoney.amount / totalOfBuyLotto.amount) * 100.0);
+        return Math.floor((double) prizeMoney.amount / totalOfBuyLotto.amount) * 100.0;
     }
 
     Money sum(Money money) {
