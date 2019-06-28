@@ -2,6 +2,7 @@ package step4;
 
 import step4.domain.LottoSeller;
 import step4.domain.LottoTicket;
+import step4.domain.LottoTickets;
 import step4.domain.ResultSheet;
 import step4.view.InputView;
 import step4.view.OutputView;
@@ -16,7 +17,7 @@ public class LottoApplication {
 
         OutputView.printNumberOfTickets(numberOfTicketsToBuy);
 
-        List<LottoTicket> lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);
+        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);
         OutputView.printLottoTickets(lottoTickets);
 
         LottoTicket luckyNumber = LottoSeller.getLuckyNumber(InputView.askLuckyNumber());

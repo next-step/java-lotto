@@ -1,10 +1,6 @@
 package step4.domain;
 
 import org.junit.jupiter.api.Test;
-import step3.domain.LottoBalls;
-import step3.domain.LottoNumber;
-import step3.domain.LottoTicket;
-import step3.domain.LottoTicketGenerator;
 
 import java.util.List;
 

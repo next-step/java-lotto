@@ -2,6 +2,7 @@ package step4.view;
 
 import step4.domain.LottoRank;
 import step4.domain.LottoTicket;
+import step4.domain.LottoTickets;
 import step4.domain.ResultSheet;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class OutputView {
         System.out.println(numberOfLottoTicketsToBuy + "개를 구매했습니다.");
     }
 
-    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        lottoTickets.stream()
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets().stream()
                 .map(LottoTicket::getLottoTicket)
                 .forEach(System.out::println);
     }

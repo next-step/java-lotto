@@ -13,13 +13,13 @@ public class LottoSeller {
         return inputMoney / PRICE_OF_A_LOTTO_TICKET;
     }
 
-    public static List<LottoTicket> issueLottoTicket(int numberOfTicketsToBuy) {
+    public static LottoTickets issueLottoTicket(int numberOfTicketsToBuy) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < numberOfTicketsToBuy; i++) {
             lottoTickets.add(LottoTicketGenerator.issue());
         }
-        return lottoTickets;
+        return LottoTickets.from(lottoTickets);
     }
 
     public static LottoTicket getLuckyNumber(List<Integer> inputLuckyNumber) {

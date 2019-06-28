@@ -1,10 +1,6 @@
 package step4.domain;
 
 import org.junit.jupiter.api.Test;
-import step3.domain.LottoRank;
-import step3.domain.LottoSeller;
-import step3.domain.LottoTicket;
-import step3.domain.LottoTicketGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +20,7 @@ public class LottoSellerTest {
         int lottoTicketsToBuy = LottoSeller.countLottoTickets(inputMoney);
 
         //Then
-        assertThat(lottoTicketsToBuy).isEqualTo(inputMoney/LottoSeller.PRICE_OF_A_LOTTO_TICKET);
+        assertThat(lottoTicketsToBuy).isEqualTo(inputMoney / LottoSeller.PRICE_OF_A_LOTTO_TICKET);
     }
 
     @Test
@@ -59,7 +55,7 @@ public class LottoSellerTest {
     void 당첨번호와_일치한_번호_개수를_반환한다() {
         //Given
         List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket luckyNumber =LottoSeller.getLuckyNumber(testLuckyNumber);
+        LottoTicket luckyNumber = LottoSeller.getLuckyNumber(testLuckyNumber);
 
         List<Integer> matchesThreeNumbers = Arrays.asList(1, 3, 5, 7, 9, 11);
         LottoTicket ticketMatchesThreeNumbers = new LottoTicket(LottoTicketGenerator.pickLottoBalls(matchesThreeNumbers));
@@ -75,7 +71,7 @@ public class LottoSellerTest {
     void 당첨통계를_반환한다() {
         //Given
         List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket luckyNumber =LottoSeller.getLuckyNumber(testLuckyNumber);
+        LottoTicket luckyNumber = LottoSeller.getLuckyNumber(testLuckyNumber);
 
         List<Integer> matchesFourNumbers = Arrays.asList(1, 2, 3, 4, 7, 8);
         List<Integer> matchesFiveNumbers = Arrays.asList(1, 2, 3, 4, 5, 8);
