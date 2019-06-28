@@ -21,6 +21,21 @@ public class Number {
         this.number = number;
     }
 
+    public static Number of(int number) {
+        if (number < START_RANGE_NUMBER || number > FINAL_RANGE_NUMBER) {
+            throw new IllegalArgumentException("숫자의 범위가 유효하지 않습니다.");
+        }
+        return new Number(number);
+    }
+
+    public static Number of(String numberStr) {
+        int number = Integer.parseInt(numberStr);
+        if (number < START_RANGE_NUMBER || number > FINAL_RANGE_NUMBER) {
+            throw new IllegalArgumentException("숫자의 범위가 유효하지 않습니다.");
+        }
+        return new Number(number);
+    }
+
     public int getNumber() {
         return this.number;
     }
