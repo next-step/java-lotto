@@ -49,11 +49,11 @@ public class LottoInputView {
     }
   }
 
-  public static List<List<LottoNumber>> askLottoNumbersToBuyManually(Quantity quantity) {
+  public static List<Lotto> askLottoNumbersToBuyManually(Quantity quantity, Money paidMoney) {
     print(MANUAL_NUMBERS_MESSAGE);
 
     Scanner scanner = new Scanner(System.in);
-    List<List<LottoNumber>> manualLottoNumbers = new ArrayList<>();
+    List<Lotto> manualLottos = new ArrayList<>();
 
     while(quantity.exists()) {
       try {
@@ -65,14 +65,15 @@ public class LottoInputView {
                 .map(LottoNumber::new)
                 .collect(toList());
 
-        manualLottoNumbers.add(lottoNumbers);
+        manualLottos.add(new Lotto(lottoNumbers));
+        paidMoney.makePayment(quantity);
         quantity.reduce();
       } catch(InputMismatchException e) {
         throw new IllegalArgumentException(NOT_A_NUMBER_INPUT_ERROR_MESSAGE);
       }
     }
 
-    return manualLottoNumbers;
+    return manualLottos;
   }
 
   public static Lotto askWinningNumbers() {
