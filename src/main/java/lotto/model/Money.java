@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final int MIN_NUMBER_OF_BUY_LOTTO = 1;
-    public static final Money ZERO = Money.won(0);
-    private long amount;
+    private static final int MIN_NUMBER_OF_BUY_LOTTO = 1;
+    static final Money ZERO = Money.won(0);
+    private final long amount;
 
     private Money(long amount) {
         this.amount = amount;
@@ -21,16 +21,11 @@ public class Money {
         return new Money(amount);
     }
 
-    static Money buyTotalLotto(long count) {
-        return Lotto.PRICE.times(count);
+    static double getRateOfReturn(Money prizeMoney, Money totalOfBuyLotto) {
+        return ((prizeMoney.amount / totalOfBuyLotto.amount) * 100.0);
     }
 
-    public int countAvailableByLotto() {
-        return (int) (this.amount / Lotto.PRICE.amount);
-    }
-
-
-    Money plus(Money money) {
+    Money sum(Money money) {
         return new Money(this.amount + money.amount);
     }
 
@@ -38,19 +33,16 @@ public class Money {
         return new Money(amount * count);
     }
 
-    double divide(Money money) {
-        if (Money.ZERO.amount == money.amount) {
-            return 0;
-        }
-        return (double) this.amount / money.amount;
+    Money spendOnLotto(long numberOfLotto) {
+        return Money.won(amount - Lotto.PRICE.amount * numberOfLotto);
     }
 
-    public Money spendOnLotto(long numberOfLotto) {
-        return new Money(amount - Lotto.PRICE.amount * numberOfLotto);
-    }
-
-    public boolean hasBuyLotto() {
+    boolean hasBuyLotto() {
         return MIN_NUMBER_OF_BUY_LOTTO <= (amount / Lotto.PRICE.amount);
+    }
+
+    public int countAvailableByLotto() {
+        return (int) (this.amount / Lotto.PRICE.amount);
     }
 
     @Override

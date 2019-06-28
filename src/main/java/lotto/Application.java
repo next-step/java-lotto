@@ -27,6 +27,6 @@ public class Application {
         LottoResult result = lottoTicket.result(winningLotto);
         OutputView.printReport(result);
 
-        OutputView.printRateOfReturn(RateOfReturn.calculate(result));
+        OutputView.printRateOfReturn(result.getRateOfReturn());
     }
 }

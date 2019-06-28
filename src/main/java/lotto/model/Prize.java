@@ -35,6 +35,10 @@ public enum Prize {
         return this != SECOND || existBonus;
     }
 
+    Money sumTotalMoney(long countOfPrize) {
+        return this.money.times(countOfPrize);
+    }
+
     public Money getMoney() {
         return money;
     }

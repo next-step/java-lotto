@@ -1,17 +1,17 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private int lottoCount;
     private Map<Prize, Integer> statisticsByPrize;
 
-    private LottoResult(Map<Prize, Integer> statisticsByPrize, int lottoCount) {
+    private LottoResult(Map<Prize, Integer> statisticsByPrize) {
         this.statisticsByPrize = statisticsByPrize;
-        this.lottoCount = lottoCount;
     }
 
     public static LottoResult of(List<Prize> lottoPrize) {
@@ -20,26 +20,33 @@ public class LottoResult {
             int count = statisticsByPrize.getOrDefault(prize, 0);
             statisticsByPrize.put(prize, ++count);
         }
-        return new LottoResult(statisticsByPrize, lottoPrize.size());
+        return new LottoResult(statisticsByPrize);
     }
 
-    Money calculateTotalBuyMoney() {
-        return Money.buyTotalLotto(lottoCount);
+    static LottoResult of(Prize... lottoPrize) {
+        return of(Arrays.stream(lottoPrize).collect(Collectors.toList()));
     }
 
-    Money calculateTotalWinningMoney() {
+    public double getRateOfReturn() {
+        return Money.getRateOfReturn(calculateTotalPrizeMoney(), calculateTotalMoney());
+    }
+
+    private Money calculateTotalMoney() {
+        long countOfBuyLotto = statisticsByPrize.values()
+                .stream()
+                .reduce(0, Integer::sum);
+        return Lotto.PRICE.times(countOfBuyLotto);
+    }
+
+    private Money calculateTotalPrizeMoney() {
         return statisticsByPrize.keySet()
                 .stream()
-                .map(this::getPrizeMoney)
-                .reduce(Money::plus)
-                .orElse(Money.ZERO);
-    }
-
-    private Money getPrizeMoney(Prize prize) {
-        return prize.getMoney().times(countOfPrize(prize));
+                .map(prize -> prize.sumTotalMoney(this.countOfPrize(prize)))
+                .reduce(Money.ZERO, Money::sum);
     }
 
     public long countOfPrize(Prize prize) {
         return statisticsByPrize.getOrDefault(prize, 0);
     }
+
 }
