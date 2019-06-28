@@ -1,5 +1,6 @@
 package step4.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -20,18 +21,23 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> askNumbersForManualLotto() {
+    public static List<List<Integer>> askNumbersForManualTickets(int numberOfManualTickets) {
         printBlackLine();
         scanner.nextLine();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        String numbersForManualLotto = scanner.nextLine();
-        printBlackLine();
+        List<List<Integer>> manualTickets = new ArrayList<>();
 
-        return Arrays.stream(numbersForManualLotto.split(LUCKY_NUMBER_SEPARATOR))
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
+        for (int i = 0; i < numberOfManualTickets; i++) {
+            String inputString = scanner.nextLine();
+            manualTickets.add(
+                    Arrays.stream(inputString.split(LUCKY_NUMBER_SEPARATOR))
+                            .map(String::trim)
+                            .mapToInt(Integer::parseInt)
+                            .boxed()
+                            .collect(Collectors.toList()));
+        }
+        printBlackLine();
+        return manualTickets;
     }
 
 

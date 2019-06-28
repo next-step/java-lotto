@@ -13,9 +13,12 @@ public class LottoApplication {
         final int numberOfManualTickets = InputView.askNumberOfManualTicket();
         final int numberOfAutoTickets = LottoSeller.countAutoTickets(inputMoney, numberOfManualTickets);
 
+        // 수동으로 구매할 번호 입력
+        List<List<Integer>> manualTickets = InputView.askNumbersForManualTickets(numberOfManualTickets);
+
         OutputView.printNumberOfTickets(numberOfManualTickets, numberOfAutoTickets);
 
-        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfManualTickets, numberOfAutoTickets);
+        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfAutoTickets);
         OutputView.printLottoTickets(lottoTickets);
 
         LuckyTicket luckyTicket = LottoSeller
