@@ -22,10 +22,11 @@ public class LottoTicket {
                 .count();
     }
 
-    boolean isBonusNumberMatched(int bonusNumber) {
-        return lottoTicket.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .anyMatch(i -> i == bonusNumber);
+    boolean isBonusNumberMatched(LottoNumber bonusNumber) {
+//        return lottoTicket.stream()
+//                .mapToInt(LottoNumber::getNumber)
+//                .anyMatch(i -> i == bonusNumber);
+        return lottoTicket.contains(bonusNumber);
     }
 
     private void validationNumberSize(List<LottoNumber> lottoTicket) {
