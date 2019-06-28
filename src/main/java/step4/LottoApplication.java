@@ -13,7 +13,7 @@ public class LottoApplication {
         final int numberOfManualTickets = InputView.askNumberOfManualTicket();
         final int numberOfAutoTickets = LottoSeller.countAutoTickets(inputMoney, numberOfManualTickets);
 
-        List<List<Integer>> manualTickets = InputView.askNumbersForManualTickets(numberOfManualTickets);
+        List<String> manualTickets = InputView.askNumbersForManualTickets(numberOfManualTickets);
         OutputView.printNumberOfTickets(numberOfManualTickets, numberOfAutoTickets);
 
         LottoTickets lottoTickets = LottoSeller.issueLottoTicket(manualTickets, numberOfAutoTickets);
