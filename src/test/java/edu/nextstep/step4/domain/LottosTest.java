@@ -29,21 +29,23 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        numbers = new ArrayList<>();
-        numbers.add(new Number(1));
-        numbers.add(new Number(2));
-        numbers.add(new Number(3));
-        numbers.add(new Number(4));
-        numbers.add(new Number(5));
-        numbers.add(new Number(6));
+        numbers = Arrays.asList(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(6)
+        );
 
-        lotteryNumbers = new ArrayList<>();
-        lotteryNumbers.add(new Number(1));
-        lotteryNumbers.add(new Number(2));
-        lotteryNumbers.add(new Number(3));
-        lotteryNumbers.add(new Number(4));
-        lotteryNumbers.add(new Number(5));
-        lotteryNumbers.add(new Number(7));
+        lotteryNumbers = Arrays.asList(
+                new Number(1),
+                new Number(2),
+                new Number(3),
+                new Number(4),
+                new Number(5),
+                new Number(7)
+        );
     }
 
     @DisplayName("발행된 로또번호들과 당첨로또를 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
