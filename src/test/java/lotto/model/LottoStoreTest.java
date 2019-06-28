@@ -32,7 +32,7 @@ public class LottoStoreTest {
     public void buyLottoTest() {
         Order order = new Order(2000, 1);
         Lottos handPickLottos = new Lottos();
-        handPickLottos.add(new PickNumbers(numbers));
+        handPickLottos.add(numbers);
 
         LottoStore lottoStore = new LottoStore(order, handPickLottos);
 
@@ -44,7 +44,7 @@ public class LottoStoreTest {
     public void moreNumberException() {
         Order order = new Order(2000, 0);
         Lottos handPickLottos = new Lottos();
-        handPickLottos.add(new PickNumbers(numbers));
+        handPickLottos.add(numbers);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new LottoStore(order, handPickLottos);

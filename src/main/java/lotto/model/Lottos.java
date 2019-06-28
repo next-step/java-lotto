@@ -7,26 +7,26 @@ import java.util.stream.Collectors;
 public class Lottos {
 
     private final static String STRING_ENTER = "\n";
-    private List<PickNumbers> pickNumbers;
+    private List<LottoNumbers> pickNumbers;
 
     public Lottos() {
         this.pickNumbers = new ArrayList<>();
     }
 
-    public Lottos add(PickNumbers newPick) {
+    public Lottos add(LottoNumbers newPick) {
         this.pickNumbers.add(newPick);
         return this;
     }
 
     public LottoAggregator matchWinningNumber(WinningNumbers winnerNumbers) {
         LottoAggregator lottoAggregator = new LottoAggregator();
-        for (PickNumbers pickNumbers : pickNumbers) {
-            lottoAggregator.put(pickNumbers.match(winnerNumbers));
+        for (LottoNumbers pickNumbers : pickNumbers) {
+            lottoAggregator.put(winnerNumbers.match(pickNumbers));
         }
         return lottoAggregator;
     }
 
-    public List<PickNumbers> getPickNumbers() {
+    public List<LottoNumbers> getPickNumbers() {
         return pickNumbers;
     }
 
@@ -34,11 +34,4 @@ public class Lottos {
         return pickNumbers.size();
     }
 
-    @Override
-    public String toString() {
-        List<String> lottos = this.pickNumbers.stream()
-                .map(PickNumbers::toString)
-                .collect(Collectors.toList());
-        return String.join(STRING_ENTER, lottos);
-    }
 }

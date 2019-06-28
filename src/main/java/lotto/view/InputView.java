@@ -39,7 +39,7 @@ public class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < handPickCount; i++) {
             scanner = new Scanner(System.in);
-            lottos.add(new PickNumbers(splitNumbers(scanner.nextLine())));
+            lottos.add(splitNumbers(scanner.nextLine()));
         }
         return lottos;
     }
