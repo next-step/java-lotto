@@ -40,7 +40,7 @@ public class LottosTest {
         Lotto lotteryNumber = new Lotto(new ArrayList<>(numbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        assertThat(lottos.getLotteryLottoNumberResultCount(lotteryNumber).get(lottoNumber)).isEqualTo(Rank.SIX);
+        assertThat(lottos.getLotteryLottoNumberResultCount(lotteryNumber).isRank(lottoNumber, Rank.SIX)).isTrue();
     }
 
     @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
@@ -56,7 +56,7 @@ public class LottosTest {
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
         WinInfo winInfo = new WinInfo(lotteryInfo);
 
-        assertThat(lottos.addBonusNumberMatchLotto(winInfo, winLotto).get(lottoNumber)).isEqualTo(Rank.BONUS);
+        assertThat(lottos.addBonusNumberMatchLotto(winInfo, winLotto).isRank(lottoNumber, Rank.BONUS)).isTrue();
     }
 
     @DisplayName("당첨 금액 반환")
