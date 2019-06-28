@@ -30,16 +30,16 @@ public class Lottos {
         return new WinInfo(lottoResultInfo);
     }
 
-    public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
-        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
-        lotteryInfo.keySet()
-                .filter(lotto -> lotteryInfo.get(lotto).getMatch() == Rank.FIVE.getMatch())
-                .filter(lotto -> lotto.contains(winLotto.getBonusNumber()))
-                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
-        return new WinInfo(matchWinInf);
-    }
+//    public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
+//        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
+//        lotteryInfo.keySet()
+//                .filter(lotto -> lotteryInfo.getRank(lotto).getMatch() == Rank.FIVE.getMatch())
+//                .filter(lotto -> lotto.contains(winLotto.getBonusNumber()))
+//                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
+//        return new WinInfo(matchWinInf);
+//    }
 
-    public WinInfo addBonusNumberMatchLotto2(WinInfo lotteryInfo, WinLotto winLotto) {
+    public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
         Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
         lotteryInfo.keySet()
                 .filter(lotto -> lotteryInfo.isRank(lotto, Rank.FIVE))
@@ -50,7 +50,7 @@ public class Lottos {
 
     public int fetchIncome(WinInfo lotteryInfo) {
         return lotteryInfo.keySet()
-                .mapToInt(lotto -> lotteryInfo.get(lotto).getLotteryMoney())
+                .mapToInt(lotto -> lotteryInfo.getRank(lotto).getLotteryMoney())
                 .sum();
     }
 

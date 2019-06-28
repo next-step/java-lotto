@@ -24,7 +24,7 @@ public class WinInfo {
         this.winInfo = winInfo;
     }
 
-    public Rank get(Lotto lotto) {
+    public Rank getRank(Lotto lotto) {
         return this.winInfo.get(lotto);
     }
 
