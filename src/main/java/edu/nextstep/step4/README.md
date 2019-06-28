@@ -3,10 +3,10 @@
 ## 요구사항 분석
 - [X] 수동으로 입력할 로또의 개수를 입력받는다
 - [X] Money 객체에 수동구매 개수를 저장할 인스턴스 변수(원시타입)를 생성 및 저장한다.
-- [ ] 수동으로 입력된 로또 번호를 LottoStore에 인자값 추가하여 전달
-- [ ] LottoStore 로직변경 
-    - [ ] 수동으로 입력한 List<String>의 값을 받아 리스트 size가 1 이상인지 확인
-    - [ ] List<String> 만큼 추가하여 Lotto 생성
+- [X] 수동으로 입력된 로또 번호를 LottoStore에 인자값 추가하여 전달
+- [X] LottoStore 로직변경 
+    - [X] 수동으로 입력한 List<String>의 값을 받아 리스트 size가 1 이상인지 확인
+    - [X] List<String> 만큼 추가하여 Lotto 생성
 
 
 ## 기능 요구사항
