@@ -5,9 +5,6 @@ import step4.domain.LottoTicket;
 import step4.domain.LottoTickets;
 import step4.domain.ResultSheet;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class OutputView {
     private static final String MESSAGE_FOR_TOTAL_NUMBER_OF_LOTTO_BOUGHT = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
     private static final String MESSAGE_FOR_LOTTO_RESULT = "%d개 일치 (%d원) - %d개";
