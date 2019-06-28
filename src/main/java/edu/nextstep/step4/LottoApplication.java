@@ -36,12 +36,11 @@ public class LottoApplication {
         ResultView.printLottoInfo(lottosTikets);
 
         // 당첨 번호
-        String lotto = InputView.inputLotteryNumber();
-        Lotto lottery = Lotto.createLotteryNumber(lotto);
-
+        Lotto lottery = Lotto.createLotteryNumber(InputView.inputLotteryNumber());
         // 보너스 번호
-        String bonus = InputView.inputBonusNumber();
-        Number bonusNumber = Number.of(Integer.parseInt(bonus));
+        Number bonusNumber = Number.of(InputView.inputBonusNumber());
+        // 당첨번호 + 보너스 번호 객체
+        WinLotto win = WinLotto.of(lottery, bonusNumber);
 
         // 보너스 번호와 당첨번호 중복 여부 확인
         if (lottery.contains(bonusNumber.getNumber())) {
@@ -49,7 +48,9 @@ public class LottoApplication {
         }
 
         // 당첨내역 출력
-        Map<Lotto, Rank> incomeInfo = lottosTikets.addBonusNumberMatchLotto(lottosTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
+        Map<Lotto, Rank> incomeInfo = lottosTikets.addBonusNumberMatchLotto(
+                lottosTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
+
         ResultView.printLotteryCount(incomeInfo);
 
         // 당첨 금액
