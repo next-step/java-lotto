@@ -34,7 +34,7 @@ public class LottoMain {
         return orderManualLottoNumbers(orderManualLotto);
     }
 
-    /* buyManualLotto 메소드는 Lottoes로 위임되었습니다. */
+    /* buyManualLotto 메소드는 Lottoes로 위임되었습니다.  */
     private static List<String> orderManualLottoNumbers(int orderManualLotto) {
         List<String> lottoManual = new ArrayList<>();
         OutputView.printAskManualNumbers();
