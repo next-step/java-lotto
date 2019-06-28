@@ -31,8 +31,9 @@ public class LottoGeneratorTest {
   @DisplayName("로또 group 수동생성")
   void generateManually() {
     List<LottoNumber> lottoNumbers = LottoNumberGenerator.generate(Stream.of(1, 2, 3, 4, 5, 6));
-    List<List<LottoNumber>> manualLottoNumbers = Arrays.asList(lottoNumbers);
-    Lottos lottos = LottoGenerator.generateManually(manualLottoNumbers);
+    Lotto manualLotto = new Lotto(lottoNumbers);
+    List<Lotto> manualLottos = Arrays.asList(manualLotto);
+    Lottos lottos = LottoGenerator.generateManually(manualLottos);
 
     assertThat(lottos.getCount()).isEqualTo(1);
   }
