@@ -1,7 +1,5 @@
 package edu.nextstep.step4.domain;
 
-import edu.nextstep.step3.domain.LottoNumber;
-import edu.nextstep.step3.domain.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +43,7 @@ public class LottoTest {
     @Test
     void validSize() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoNumber exNumber = new LottoNumber(numbers);
+            Lotto exNumber = new Lotto(numbers);
         }).withMessageContaining("전달된 숫자가 6개가 아닙니다.");
     }
 
@@ -54,7 +52,7 @@ public class LottoTest {
     void validDuplicate() {
         numbers.add(new Number(5));
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoNumber exNumber = new LottoNumber(numbers);
+            Lotto exNumber = new Lotto(numbers);
         }).withMessageContaining("전달된 숫자가 6개가 아닙니다.");
     }
 
@@ -63,7 +61,7 @@ public class LottoTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void contains(int number) {
         numbers.add(new Number(6));
-        LottoNumber lottoNumber = new LottoNumber(numbers);
+        Lotto lottoNumber = new Lotto(numbers);
         assertThat(lottoNumber.contains(number)).isTrue();
     }
 
@@ -71,7 +69,7 @@ public class LottoTest {
     @Test
     void contains() {
         numbers.add(new Number(6));
-        LottoNumber lottoNumber = new LottoNumber(numbers);
+        Lotto lottoNumber = new Lotto(numbers);
 
         List<Number> compareNumber = new ArrayList<>();
 
@@ -81,7 +79,7 @@ public class LottoTest {
         compareNumber.add(new Number(8));
         compareNumber.add(new Number(10));
         compareNumber.add(new Number(12));
-        LottoNumber exNumber = new LottoNumber(compareNumber);
+        Lotto exNumber = new Lotto(compareNumber);
 
         assertThat(lottoNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);
     }
@@ -90,7 +88,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void createLotteryNumber(int number) {
-        LottoNumber lottoNumber = LottoNumber.createLotteryNumber("1,2,3,4,5,6");
+        Lotto lottoNumber = Lotto.createLotteryNumber("1,2,3,4,5,6");
         assertThat(lottoNumber.stream()
                 .map(Number::getNumber)
                 .collect(Collectors.toList()).contains(number)

@@ -1,6 +1,5 @@
 package edu.nextstep.step4.domain;
 
-import edu.nextstep.step3.domain.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,21 +22,21 @@ public class NumberTest {
     @Test
     void validNumber() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Number number = new Number(0);
+            Number number = Number.of(0);
         });
     }
 
     @DisplayName("객체의 원시타입 숫자를 반환 받기")
     @Test
     void getNumber() {
-        Number number = new Number(1);
+        Number number = Number.of(1);
         assertThat(number.getNumber()).isEqualTo(1);
     }
 
     @DisplayName("전달된 인자값(int type)과 일치하는지 확인")
     @Test
     void compareTo() {
-        Number number = new Number(1);
+        Number number = Number.of(1);
         assertThat(number.comapreTo(1)).isTrue();
     }
 }

@@ -1,9 +1,6 @@
 package edu.nextstep.step4.domain;
 
-import edu.nextstep.step3.Rank;
-import edu.nextstep.step3.domain.Lotto;
-import edu.nextstep.step3.domain.LottoNumber;
-import edu.nextstep.step3.domain.Number;
+import edu.nextstep.step4.enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,41 +48,41 @@ public class LottosTest {
     @DisplayName("발행된 로또번호들과 당첨로또를 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
     void getLotteryLottoNumberResultCount() {
-        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(numbers));
-        LottoNumber lotteryNumber = new LottoNumber(new ArrayList<>(numbers));
-        Lotto lotto = new Lotto(Arrays.asList(lottoNumber));
+        Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lotteryNumber = new Lotto(new ArrayList<>(numbers));
+        Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        assertThat(lotto.getLotteryLottoNumberResultCount(lotteryNumber).get(lottoNumber)).isEqualTo(Rank.SIX);
+        assertThat(lottos.getLotteryLottoNumberResultCount(lotteryNumber).get(lottoNumber)).isEqualTo(Rank.SIX);
     }
 
     @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
     void addBonusNumberMatchLotto() {
         Number bonus = new Number(6);
-        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(numbers));
-        LottoNumber lotteryNumber = new LottoNumber(new ArrayList<>(lotteryNumbers));
-        Lotto lotto = new Lotto(Arrays.asList(lottoNumber));
+        Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
+        Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        Map<LottoNumber, Rank> lotteryInfo = new HashMap<>();
+        Map<Lotto, Rank> lotteryInfo = new HashMap<>();
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
 
-        assertThat(lotto.addBonusNumberMatchLotto(lotteryInfo, bonus).get(lottoNumber)).isEqualTo(Rank.BONUS);
+        assertThat(lottos.addBonusNumberMatchLotto(lotteryInfo, bonus).get(lottoNumber)).isEqualTo(Rank.BONUS);
     }
 
     @DisplayName("당첨 금액 반환")
     @Test
     void fetchIncome() {
         Number bonus = new Number(6);
-        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(numbers));
-        LottoNumber lotteryNumber = new LottoNumber(new ArrayList<>(lotteryNumbers));
-        Lotto lotto = new Lotto(Arrays.asList(lottoNumber));
+        Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
+        Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        Map<LottoNumber, Rank> lotteryInfo = new HashMap<>();
+        Map<Lotto, Rank> lotteryInfo = new HashMap<>();
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
 
-        Map<LottoNumber, Rank> incomeInfo = lotto.addBonusNumberMatchLotto(lotteryInfo, bonus);
+        Map<Lotto, Rank> incomeInfo = lottos.addBonusNumberMatchLotto(lotteryInfo, bonus);
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
 
-        assertThat(lotto.fetchIncome(incomeInfo)).isEqualTo(30_000_000);
+        assertThat(lottos.fetchIncome(incomeInfo)).isEqualTo(30_000_000);
     }
 }
