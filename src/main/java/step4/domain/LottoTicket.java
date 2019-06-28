@@ -23,9 +23,6 @@ public class LottoTicket {
     }
 
     boolean isBonusNumberMatched(LottoNumber bonusNumber) {
-//        return lottoTicket.stream()
-//                .mapToInt(LottoNumber::getNumber)
-//                .anyMatch(i -> i == bonusNumber);
         return lottoTicket.contains(bonusNumber);
     }
 
