@@ -27,24 +27,24 @@ public class OutputView {
     public static void printResult(ResultSheet result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-
         for (LottoRank rank : LottoRank.values()) {
-            if (rank.getPrizeMoney() == SECOND_PLACE_PRIZE) {
-                printResultContent(result, rank, MESSAGE_FOR_ONLY_SECOND_PLACE);
-            }
-            if (rank.getPrizeMoney() != SECOND_PLACE_PRIZE) {
-                printResultContent(result, rank, MESSAGE_FOR_LOTTO_RESULT);
-            }
-            //TODO: Q. else 구문을 안쓰면서도 이 부분을 어떻게 개선할 수 있을지 궁금합니다..!
+            printResultContent(result, rank);
         }
         System.out.println(String.format(MESSAGE_FOR_EARNING_RATE, result.getEarningRate()));
     }
 
-    private static void printResultContent(ResultSheet result, LottoRank rank, String messageFormat) {
-        System.out.println(String.format(messageFormat,
-                rank.getNumberOfMatchingNumber(),
-                rank.getPrizeMoney(),
-                result.getResultMap().getOrDefault(rank, PRIZE_FOR_LOSER)));
+    private static void printResultContent(ResultSheet result, LottoRank rank) {
+        if (rank.getPrizeMoney() == SECOND_PLACE_PRIZE) {
+            System.out.println(String.format(MESSAGE_FOR_ONLY_SECOND_PLACE,
+                    rank.getNumberOfMatchingNumber(),
+                    rank.getPrizeMoney(),
+                    result.getResultMap().getOrDefault(rank, PRIZE_FOR_LOSER)));
+        }
+        if (rank.getPrizeMoney() != SECOND_PLACE_PRIZE) {
+            System.out.println(String.format(MESSAGE_FOR_LOTTO_RESULT,
+                    rank.getNumberOfMatchingNumber(),
+                    rank.getPrizeMoney(),
+                    result.getResultMap().getOrDefault(rank, PRIZE_FOR_LOSER)));
+        }
     }
-
 }
