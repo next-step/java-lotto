@@ -11,7 +11,7 @@ public class LottoBalls {
             .boxed()
             .collect(Collectors.toList());
 
-    public static List<Integer> getLottoBalls() {
+    static List<Integer> getLottoBalls() {
         return lottoBalls;
     }
 }

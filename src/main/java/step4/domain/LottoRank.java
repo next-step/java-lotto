@@ -28,6 +28,7 @@ public enum LottoRank {
         }
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.numberOfMatchedToLuckyNumber == countMatchedNumbers)
+                .filter(lottoRank -> lottoRank.prizeMoney != SECOND_PLACE.prizeMoney)
                 .findFirst()
                 .orElse(LOSER);
     }
