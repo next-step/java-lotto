@@ -42,16 +42,16 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Rank checkNumberOfMatches(List<LottoNo> winNumbers, LottoNo bonusBall) {
+    public Rank checkNumberOfMatches(Lotto winNumbers, LottoNo bonusBall) {
         int countOfMatch = (int) luckyNumbers
                 .stream()
-                .filter(winNumbers::contains)
+                .filter(winNumbers::isContains)
                 .count();
         return Rank.valueOf(countOfMatch, luckyNumbers.contains(bonusBall));
     }
 
-    public boolean isNumSize(int numSize) {
-        return this.luckyNumbers.size() == numSize;
+    public boolean isContains(LottoNo number) {
+        return this.luckyNumbers.contains(number);
     }
 
     public List<Integer> getLotto() {
@@ -65,12 +65,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return LOTTO_SIZE == lotto.LOTTO_SIZE &&
-                Objects.equals(luckyNumbers, lotto.luckyNumbers);
+        return Objects.equals(luckyNumbers, lotto.luckyNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(LOTTO_SIZE, luckyNumbers);
+        return Objects.hash(luckyNumbers);
     }
 }

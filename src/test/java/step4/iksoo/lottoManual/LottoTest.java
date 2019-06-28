@@ -4,13 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
-    private final int LOTTO_SIZE = 6;
-
     private Lotto lotto;
 
     @BeforeEach
@@ -19,13 +17,15 @@ public class LottoTest {
     }
 
     @Test
-    void 로또_구입완료() {
-        assertThat(lotto.isNumSize(LOTTO_SIZE)).isTrue();
+    void 로또_2등() {
+        Lotto WINNER_NUMBERS = new Lotto(Arrays.asList(3, 8, 19, 26, 34, 42));
+        assertThat(lotto.checkNumberOfMatches(WINNER_NUMBERS, new LottoNo(17))).isEqualTo(Rank.SECOND);
     }
 
     @Test
-    void 로또_2등() {
-        List<Integer> WINNER_NUMBERS = Arrays.asList(3, 8, 19, 26, 34, 42);
-        assertThat(lotto.checkNumberOfMatches(WINNER_NUMBERS, 17)).isEqualTo(Rank.SECOND);
+    void 로또_숫자_중복_예외발생() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Lotto(Arrays.asList(3, 8, 17, 26, 34, 17));
+        });
     }
 }

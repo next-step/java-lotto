@@ -10,14 +10,13 @@ public class LottoMain {
     private static int orderManualLotto;
 
     public static void main(String[] args) {
-        lottoOrder();
-    	Optional<Lottoes> maybeLottoes = Optional.ofNullable(new Lottoes(orderPrice, orderManualLotto));
-        maybeLottoes.get().add(buyManualLotto(orderManualLotto));
+        List<String> manualNumbers = lottoOrder();
+    	Optional<Lottoes> maybeLottoes = Optional.ofNullable(new Lottoes(orderPrice, manualNumbers));
 
         OutputView.printOrderCheck(maybeLottoes.get().getLottoes().size(), orderManualLotto);
         OutputView.printLottos(maybeLottoes.get().getLottoes());
 
-        List<LottoNo> winNumbers = getKnowWinnerNumbers();
+        Lotto winNumbers = getKnowWinnerNumbers();
         LottoNo bonusBall = getKnowBonusBall(winNumbers);
 
         Optional<MatchResult> maybeMatchResult = Optional.ofNullable(new MatchResult(maybeLottoes.get().checkLotteryWin(winNumbers, bonusBall)));
@@ -25,42 +24,43 @@ public class LottoMain {
         OutputView.printRateProfit(maybeMatchResult.get().calculateRateProfit(orderPrice));
     }
 
-    private static void lottoOrder() {
+    private static List<String> lottoOrder() {
         OutputView.printAskOrderPrice();
         orderPrice = InputView.inputNumber();
         
         OutputView.printAskManualOrder();
         orderManualLotto = InputView.inputNumber();
+
+        return orderManualLottoNumbers(orderManualLotto);
     }
 
-    private static List<Lotto> buyManualLotto(int orderManualLotto) {
-        List<Lotto> lottoManual = new ArrayList<>();
+    private static List<String> orderManualLottoNumbers(int orderManualLotto) {
+        List<String> lottoManual = new ArrayList<>();
         OutputView.printAskManualNumbers();
 
         IntStream.range(0, orderManualLotto)
                 .boxed()
-                .map(n -> new LottoManualSplit(InputView.inputText()))
-                .forEach(lottoManualSplit -> lottoManual.add(new Lotto(lottoManualSplit.getLottoNumbers())));
+                .forEach(n -> lottoManual.add(InputView.inputText()));
         return lottoManual;
     }
 
-	private static List<LottoNo> getKnowWinnerNumbers() {
+	private static Lotto getKnowWinnerNumbers() {
         OutputView.printAskWinnerNumbers();
         String[] numbers = InputView.inputText().replace(" ", "").split(",");
 
-        List<LottoNo> winnerNumbers = new ArrayList<>();
+        List<Integer> winnerNumbers = new ArrayList<>();
         for (String number : numbers) {
-            winnerNumbers.add(new LottoNo(Integer.parseInt(number)));
+            winnerNumbers.add(Integer.parseInt(number));
         }
-        return winnerNumbers;
+        return new Lotto(winnerNumbers);
     }
 
-    private static LottoNo getKnowBonusBall(List<LottoNo> winnerNumbers) {
+    private static LottoNo getKnowBonusBall(Lotto winnerNumbers) {
         OutputView.printAskBonusBall();
         LottoNo bonusBall = new LottoNo(InputView.inputNumber());
 
-        winnerNumbers.stream()
-                .filter(number -> number == bonusBall)
+        winnerNumbers.getLotto().stream()
+                .filter(number -> number == bonusBall.getNumber())
                 .peek(dos -> {
                     throw new IllegalArgumentException("보너스볼 번호가 당첨 번호의 숫자와 동일합니다.");
                 })

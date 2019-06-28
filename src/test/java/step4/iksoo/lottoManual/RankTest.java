@@ -16,11 +16,6 @@ public class RankTest {
     }
 
     @Test
-    void getRankNameTest() {
-        assertThat(Rank.FIFTH.getRankName()).isEqualTo("5등");
-    }
-
-    @Test
     void _2등_보너스볼() {
         assertThat(Rank.valueOf(5, true).getWinningMoney()).isEqualTo(30_000_000);
     }

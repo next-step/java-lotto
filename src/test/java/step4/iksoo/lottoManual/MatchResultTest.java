@@ -21,9 +21,10 @@ public class MatchResultTest {
         lotto.add(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)));
         lotto.add(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)));
 
-        Lottoes lottoes = new Lottoes(lotto);
+        Lottoes lottoes = new Lottoes();
+        lottoes.add(lotto);
 
-        matchResult = new MatchResult(lottoes.checkLotteryWin(Arrays.asList(4, 5, 6, 7, 8, 10), 9));
+        matchResult = new MatchResult(lottoes.checkLotteryWin(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 10)), new LottoNo(9)));
     }
 
     @Test
