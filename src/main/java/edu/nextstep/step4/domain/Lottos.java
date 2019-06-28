@@ -30,15 +30,6 @@ public class Lottos {
         return new WinInfo(lottoResultInfo);
     }
 
-//    public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
-//        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
-//        lotteryInfo.keySet()
-//                .filter(lotto -> lotteryInfo.getRank(lotto).getMatch() == Rank.FIVE.getMatch())
-//                .filter(lotto -> lotto.contains(winLotto.getBonusNumber()))
-//                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
-//        return new WinInfo(matchWinInf);
-//    }
-
     public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
         Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
         lotteryInfo.keySet()
