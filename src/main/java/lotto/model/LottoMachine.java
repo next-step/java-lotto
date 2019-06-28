@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.generator.LottoGenerator;
 import lotto.model.generator.ManualLottoGenerator;
 import lotto.model.generator.RandomLottoGenerator;
 
@@ -8,24 +9,25 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private ManualLottoGenerator manualLottoGenerator;
-    private RandomLottoGenerator randomLottoGenerator;
-
-    public LottoMachine(ManualLottoGenerator manualLottoGenerator, RandomLottoGenerator randomLottoGenerator) {
-        this.manualLottoGenerator = manualLottoGenerator;
-        this.randomLottoGenerator = randomLottoGenerator;
-    }
-
-    public static LottoMachine generate(PurchaseRequest purchaseRequest) {
-        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(purchaseRequest.getManualLottoInfo());
-        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator(purchaseRequest.getMoney());
-        return new LottoMachine(manualLottoGenerator, randomLottoGenerator);
-    }
-
-    public LottoTicket buy() {
+    public static LottoTicket buy(Money money, List<String> numbersOfManual) {
         List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(manualLottoGenerator.generator());
-        lottos.addAll(randomLottoGenerator.generator());
+        if (!(numbersOfManual == null || numbersOfManual.isEmpty())) {
+            lottos.addAll(buyManualLotto(numbersOfManual));
+            money = money.spendOnLotto(numbersOfManual.size());
+        }
+        if (money.hasBuyLotto()) {
+            lottos.addAll(buyRandomLotto(money));
+        }
         return LottoTicket.of(lottos);
+    }
+
+    private static List<Lotto> buyManualLotto(List<String> numbersOfManual) {
+        LottoGenerator manualLottoGenerator = new ManualLottoGenerator(numbersOfManual);
+        return manualLottoGenerator.generator();
+    }
+
+    private static List<Lotto> buyRandomLotto(Money money) {
+        LottoGenerator randomLottoGenerator = new RandomLottoGenerator(money);
+        return randomLottoGenerator.generator();
     }
 }

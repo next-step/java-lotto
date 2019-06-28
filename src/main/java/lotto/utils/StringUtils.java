@@ -1,21 +1,22 @@
 package lotto.utils;
 
+import lotto.model.Lotto;
 import lotto.model.Number;
 
 import java.util.Arrays;
-import java.util.List;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class StringUtils {
 
-    public static final String LOTTO_NUMBERS_SEPARATOR = ",";
+    public static final String SEPARATOR_OF_LOTTO_NUMBERS = ",";
 
-    public static List<Number> parseNumbers(String numbers) {
-        return Arrays.stream(numbers.split(LOTTO_NUMBERS_SEPARATOR))
+    public static Lotto parseLotto(String numbers) {
+        return Arrays.stream(numbers.split(SEPARATOR_OF_LOTTO_NUMBERS))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(Number::of)
-                .collect(toList());
+                .collect(collectingAndThen(toList(), Lotto::from));
     }
 }

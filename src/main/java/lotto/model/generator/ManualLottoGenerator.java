@@ -5,7 +5,8 @@ import lotto.model.Lotto;
 import lotto.utils.StringUtils;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 
 public class ManualLottoGenerator implements LottoGenerator {
@@ -22,8 +23,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     @Override
     public List<Lotto> generator() {
         return numbers.stream()
-                .map(StringUtils::parseNumbers)
-                .map(Lotto::from)
-                .collect(Collectors.toList());
+                .map(StringUtils::parseLotto)
+                .collect(toList());
     }
 }

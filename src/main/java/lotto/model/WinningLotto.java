@@ -16,7 +16,7 @@ public class WinningLotto {
     }
 
     public static WinningLotto of(String inputOfNumbers, int inputOfBonusNumber) {
-        return of(Lotto.from(StringUtils.parseNumbers(inputOfNumbers)), Number.of(inputOfBonusNumber));
+        return of(StringUtils.parseLotto(inputOfNumbers), Number.of(inputOfBonusNumber));
     }
 
     public static WinningLotto of(Lotto lotto, Number bonus) {

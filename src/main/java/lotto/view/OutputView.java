@@ -7,10 +7,8 @@ public class OutputView {
     public static final String RESULT_PRIZE_MESSAGE = "%d개 일치 (%s원)- %d개";
     public static final String RESULT_PRIZE_SECOND_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원)- %d개";
 
-    public static void printNumberOfBuyLotto(PurchaseRequest purchaseRequest) {
-        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
-                purchaseRequest.countOfManualLotto(),
-                purchaseRequest.countOfRandomLotto()));
+    public static void printNumberOfBuyLotto(long sizeOfManual, long sizeOfRandom) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.", sizeOfManual, sizeOfRandom);
         System.out.println();
     }
 

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final int MIN_NUMBER_OF_BUY_LOTTO = 1;
     public static final Money ZERO = Money.won(0);
     private long amount;
 
@@ -20,7 +21,7 @@ public class Money {
         return new Money(amount);
     }
 
-    static Money calculateTotalByLotto(long count) {
+    static Money buyTotalLotto(long count) {
         return Lotto.PRICE.times(count);
     }
 
@@ -37,15 +38,19 @@ public class Money {
         return new Money(amount * count);
     }
 
-    Money subtract(Money money) {
-        return new Money(amount - money.amount);
-    }
-
     double divide(Money money) {
         if (Money.ZERO.amount == money.amount) {
             return 0;
         }
         return (double) this.amount / money.amount;
+    }
+
+    public Money spendOnLotto(long numberOfLotto) {
+        return new Money(amount - Lotto.PRICE.amount * numberOfLotto);
+    }
+
+    public boolean hasBuyLotto() {
+        return MIN_NUMBER_OF_BUY_LOTTO <= (amount / Lotto.PRICE.amount);
     }
 
     @Override
