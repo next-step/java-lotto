@@ -2,8 +2,12 @@ package StringAddCalculator;
 
 public class StringAddCalculator {
 
+    private final static int CALCULATOR_DEFAULT_VALUE = 0;
+
     public static int add(String formula) {
-        if(isNullOrEmpty(formula)) return 0;
+        if(isNullOrEmpty(formula)) {
+            return CALCULATOR_DEFAULT_VALUE;
+        }
         return additionCalculate(formula);
     }
 
