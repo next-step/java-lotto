@@ -18,7 +18,7 @@ public class LottoApplication {
 
         OutputView.printNumberOfTickets(numberOfManualTickets, numberOfAutoTickets);
 
-        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfAutoTickets);
+        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(manualTickets, numberOfAutoTickets);
         OutputView.printLottoTickets(lottoTickets);
 
         LuckyTicket luckyTicket = LottoSeller

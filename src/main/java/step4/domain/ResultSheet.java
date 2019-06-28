@@ -1,7 +1,6 @@
 package step4.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ResultSheet {
@@ -28,7 +27,7 @@ public class ResultSheet {
         return resultSheet.values()
                 .stream()
                 .reduce(Integer::sum)
-                .get();
+                .orElse(0);
     }
 
     private int totalMoneySpentForTickets() {
@@ -51,7 +50,7 @@ public class ResultSheet {
     }
 
     public double getEarningRate() {
-        return getTotalPrizeMoney() / totalMoneySpentForTickets();
+        return (double) getTotalPrizeMoney() / totalMoneySpentForTickets();
     }
 
     public Map<LottoRank, Integer> getResultMap() {

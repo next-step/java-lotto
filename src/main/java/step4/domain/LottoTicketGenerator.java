@@ -7,8 +7,15 @@ import java.util.stream.Collectors;
 public class LottoTicketGenerator {
     static final int BASIC_LOTTO_SIZE = 6;
 
-    static LottoTicket issue() {
+    static LottoTicket issueAutoTickets() {
         return new LottoTicket(pickLottoBalls(LottoBalls.getLottoBalls()));
+    }
+
+    static LottoTicket issueManualTickets(List<Integer> manualTicket) {
+        return new LottoTicket(manualTicket.stream()
+                .sorted()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()));
     }
 
     static List<LottoNumber> pickLottoBalls(List<Integer> lottoBalls) {

@@ -40,10 +40,8 @@ public class InputView {
         return manualTickets;
     }
 
-
     public static List<Integer> askLuckyNumber() {
         printBlackLine();
-        scanner.nextLine();
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
         String inputLuckyNumber = scanner.nextLine();
         printBlackLine();
