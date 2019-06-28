@@ -11,7 +11,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         List<String> manualNumbers = lottoOrder();
-    	Optional<Lottoes> maybeLottoes = Optional.ofNullable(new Lottoes(orderPrice, manualNumbers));
+    	Optional<Lottoes> maybeLottoes = Optional.of(new Lottoes(orderPrice, manualNumbers));
 
         OutputView.printOrderCheck(maybeLottoes.get().getLottoes().size(), orderManualLotto);
         OutputView.printLottos(maybeLottoes.get().getLottoes());
