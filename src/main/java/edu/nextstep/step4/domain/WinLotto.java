@@ -1,5 +1,7 @@
 package edu.nextstep.step4.domain;
 
+import java.util.stream.Collectors;
+
 /**
  * author       : gwonbyeong-yun <sksggg123>
  * ------------------------------------------
@@ -24,12 +26,15 @@ public class WinLotto {
         return new WinLotto(lottery, bonusNumber);
     }
 
+    public int compareMatchNumberCount(Lotto lotto) {
+        return lotto.stream()
+                .filter(compareSourceNumber -> lottery.contains(compareSourceNumber))
+                .collect(Collectors.toList())
+                .size();
+    }
+
     // Number객체의 데이터변조 가능한 메서드가 없어 getter 사용
     public Number getBonusNumber() {
         return this.bonusNumber;
-    }
-
-    public Lotto getLottery() {
-        return this.lottery;
     }
 }

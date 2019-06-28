@@ -26,7 +26,7 @@ public class Lottos {
         Map<Lotto, Rank> lottoResultInfo = new HashMap<>();
         lotto.stream()
                 .forEach(lotto ->
-                        lottoResultInfo.put(lotto, Rank.matchCheck(lotto.compareMatchNumberCount(winLotto.getLottery()))));
+                        lottoResultInfo.put(lotto, Rank.matchCheck(winLotto.compareMatchNumberCount(lotto))));
         return new WinInfo(lottoResultInfo);
     }
 

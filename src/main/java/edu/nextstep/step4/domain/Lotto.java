@@ -37,13 +37,6 @@ public class Lotto {
                 .anyMatch(sourceNumber -> sourceNumber.equals(number));
     }
 
-    public int compareMatchNumberCount(Lotto lotto) {
-        return lotto.stream()
-                .filter(compareSourceNumber -> this.contains(compareSourceNumber))
-                .collect(Collectors.toList())
-                .size();
-    }
-
     public Stream<Number> stream() {
         return this.lotto.stream();
     }
