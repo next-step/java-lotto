@@ -13,14 +13,20 @@ package edu.nextstep.step4.domain;
 public class Money {
     private static final int MONEY_PER_NUMBER = 1000;
     private int extractCount;
+    private int manualCount;
 
-    public Money(int extractCount) {
+    public Money(int extractCount, int manualCount) {
         validMoney(extractCount);
         this.extractCount = extractCount / MONEY_PER_NUMBER;
+        this.manualCount = manualCount;
     }
 
     public int getNumberOfExtract() {
         return this.extractCount;
+    }
+
+    public int getNumberOfManual() {
+        return this.manualCount;
     }
 
     public int getInputMoney() {
