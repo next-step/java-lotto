@@ -9,7 +9,7 @@ public class LottoMachine {
 
     public static LottoTicket buy(Money money, List<String> numbersOfManual) {
         List<Lotto> lottos = new ArrayList<>();
-        if (!(numbersOfManual.isEmpty())) {
+        if (!numbersOfManual.isEmpty()) {
             lottos.addAll(buyManualLotto(numbersOfManual));
             money = money.spendOnLotto(numbersOfManual.size());
         }

@@ -13,7 +13,7 @@ public class Application {
         Money moneyToBuy = Money.won(inputOfAmount);
         List<String> numbersOfManual = InputView.askManualLotto();
 
-        long sizeOfManual = (numbersOfManual == null || numbersOfManual.isEmpty()) ? 0 : numbersOfManual.size();
+        long sizeOfManual = numbersOfManual.size();
         long sizeOfRandom = moneyToBuy.countAvailableByLotto() - sizeOfManual;
         OutputView.printNumberOfBuyLotto(sizeOfManual, sizeOfRandom);
 
