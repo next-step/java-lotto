@@ -3,6 +3,7 @@ package edu.nextstep.step4.domain;
 import edu.nextstep.step4.utils.RandomNumberUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,15 +19,17 @@ import java.util.stream.Collectors;
  */
 public class LottoStore {
 
-    public static Lottos publishLotto(Money money) {
-        List<Lotto> exNumber = new ArrayList<>();
+    public static Lottos publishLotto(Money money, List<String> manualLottos) {
         int issueNumber = money.getNumberOfExtract();
 
-        for (int i = 0; i < issueNumber; i++) {
-            exNumber.add(issueLottoNumber());
-        }
+        List<Lotto> exLotto = manualLottos.stream()
+                .map(manualLotto -> Lotto.createLotteryNumber(manualLotto))
+                .collect(Collectors.toList());
 
-        return new Lottos(exNumber);
+        for (int i = 0; i < issueNumber; i++) {
+            exLotto.add(issueLottoNumber());
+        }
+        return new Lottos(exLotto);
     }
 
     private static Lotto issueLottoNumber() {
@@ -34,4 +37,5 @@ public class LottoStore {
                 .map(number -> Number.of(number))
                 .collect(Collectors.toList()));
     }
+
 }

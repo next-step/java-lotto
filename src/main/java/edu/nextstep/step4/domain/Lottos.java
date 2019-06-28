@@ -22,21 +22,21 @@ public class Lottos {
         this.lotto = new ArrayList<>(lotto);
     }
 
-    public WinInfo getLotteryLottoNumberResultCount(Lotto lottery) {
+    public WinInfo getLotteryLottoNumberResultCount(WinLotto winLotto) {
         Map<Lotto, Rank> lottoResultInfo = new HashMap<>();
         lotto.stream()
                 .forEach(lotto ->
-                        lottoResultInfo.put(lotto, Rank.matchCheck(lotto.compareMatchNumberCount(lottery))));
+                        lottoResultInfo.put(lotto, Rank.matchCheck(lotto.compareMatchNumberCount(winLotto.getLottery()))));
         return new WinInfo(lottoResultInfo);
     }
 
     public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
-        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
+        Map<Lotto, Rank> matchWinInfo = new HashMap<>(lotteryInfo.getWinInfo());
         lotteryInfo.keySet()
                 .filter(lotto -> lotteryInfo.isRank(lotto, Rank.FIVE))
                 .filter(lotto -> lotto.contains(winLotto.getBonusNumber()))
-                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
-        return new WinInfo(matchWinInf);
+                .forEach(lotto -> matchWinInfo.put(lotto, Rank.BONUS));
+        return new WinInfo(matchWinInfo);
     }
 
     public int fetchIncome(WinInfo lotteryInfo) {
