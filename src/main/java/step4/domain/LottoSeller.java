@@ -22,11 +22,11 @@ public class LottoSeller {
         return LottoTickets.from(lottoTickets);
     }
 
-    public static LottoTicket getLuckyNumber(List<Integer> inputLuckyNumber) {
-        List<LottoNumber> lottoTicket = inputLuckyNumber.stream()
+    public static LuckyTicket getLuckyNumber(List<Integer> inputLuckyNumber, int bonusNumber) {
+        List<LottoNumber> luckyTicket = inputLuckyNumber.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        return LottoTicketGenerator.issue(lottoTicket);
+        return LuckyTicket.of(luckyTicket, LottoNumber.from(bonusNumber));
     }
 
     private static void validationInputMoney(int inputMoney) {

@@ -13,13 +13,13 @@ public class ResultSheet {
         this.resultSheet = resultSheet;
     }
 
-    public static ResultSheet getResult(LottoTickets lottoTickets, LottoTicket luckyNumber, int bonusNumber) {
+    public static ResultSheet getResult(LottoTickets lottoTickets, LuckyTicket luckyTicket) {
         Map<LottoRank, Integer> lottoResultMap = new HashMap<>();
 
         for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
             LottoRank lottoRank = LottoRank.from(
-                    ticket.getNumberOfMatchedToLuckyNumber(luckyNumber),
-                    ticket.isBonusNumberMatched(LottoNumber.from(bonusNumber)));
+                    ticket.getNumberOfMatchedToLuckyNumber(luckyTicket),
+                    ticket.isBonusNumberMatched(luckyTicket));
             int numberOfTicketsCorrespondingToRank = lottoResultMap.getOrDefault(lottoRank, 0);
             lottoResultMap.put(lottoRank, ++numberOfTicketsCorrespondingToRank);
         }

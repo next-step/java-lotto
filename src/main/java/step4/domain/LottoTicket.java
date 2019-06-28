@@ -16,14 +16,14 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
 
-    public int getNumberOfMatchedToLuckyNumber(LottoTicket luckyNumber) {
-        return (int) luckyNumber.getLottoTicket().stream()
+    public int getNumberOfMatchedToLuckyNumber(LuckyTicket luckyTicket) {
+        return (int) luckyTicket.getLuckyNumber().stream()
                 .filter(lottoTicket::contains)
                 .count();
     }
 
-    boolean isBonusNumberMatched(LottoNumber bonusNumber) {
-        return lottoTicket.contains(bonusNumber);
+    boolean isBonusNumberMatched(LuckyTicket luckyTicket) {
+        return luckyTicket.checkBonusNumber(lottoTicket);
     }
 
     private void validationNumberSize(List<LottoNumber> lottoTicket) {

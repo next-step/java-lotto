@@ -1,9 +1,6 @@
 package step4;
 
-import step4.domain.LottoSeller;
-import step4.domain.LottoTicket;
-import step4.domain.LottoTickets;
-import step4.domain.ResultSheet;
+import step4.domain.*;
 import step4.view.InputView;
 import step4.view.OutputView;
 
@@ -14,16 +11,15 @@ public class LottoApplication {
     public static void main(String[] args) {
         final int inputMoney = InputView.askMoneyToInput();
         final int numberOfTicketsToBuy = LottoSeller.countLottoTickets(inputMoney);
-
         OutputView.printNumberOfTickets(numberOfTicketsToBuy);
 
         LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);
         OutputView.printLottoTickets(lottoTickets);
 
-        LottoTicket luckyNumber = LottoSeller.getLuckyNumber(InputView.askLuckyNumber());
-        int bonusNumber = InputView.askBonusNumber();
+        LuckyTicket luckyTicket = LottoSeller
+                .getLuckyNumber(InputView.askLuckyNumber(), InputView.askBonusNumber());
 
-        ResultSheet result = ResultSheet.getResult(lottoTickets, luckyNumber, bonusNumber);
+        ResultSheet result = ResultSheet.getResult(lottoTickets, luckyTicket);
         OutputView.printResult(result);
     }
 }
