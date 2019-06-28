@@ -2,6 +2,7 @@ package edu.nextstep.step4;
 
 import edu.nextstep.step4.domain.Number;
 import edu.nextstep.step4.domain.*;
+import edu.nextstep.step4.enums.Rank;
 import edu.nextstep.step4.view.InputView;
 import edu.nextstep.step4.view.ResultView;
 

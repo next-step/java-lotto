@@ -1,6 +1,6 @@
 package edu.nextstep.step4.view;
 
-import edu.nextstep.step4.Rank;
+import edu.nextstep.step4.enums.Rank;
 import edu.nextstep.step4.domain.Lotto;
 import edu.nextstep.step4.domain.LottoNumber;
 import edu.nextstep.step4.domain.Number;

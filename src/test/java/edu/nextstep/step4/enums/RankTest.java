@@ -1,4 +1,4 @@
-package edu.nextstep.step4;
+package edu.nextstep.step4.enums;
 
 import edu.nextstep.step3.Rank;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,6 @@
 package edu.nextstep.step4.domain;
 
-import edu.nextstep.step4.Rank;
+import edu.nextstep.step4.enums.Rank;
 
 import java.util.*;
 

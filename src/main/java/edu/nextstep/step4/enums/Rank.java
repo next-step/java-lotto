@@ -1,4 +1,4 @@
-package edu.nextstep.step4;
+package edu.nextstep.step4.enums;
 
 import edu.nextstep.step4.domain.LottoNumber;
 
