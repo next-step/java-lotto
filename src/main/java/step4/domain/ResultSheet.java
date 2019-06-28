@@ -17,9 +17,7 @@ public class ResultSheet {
         Map<LottoRank, Integer> lottoResultMap = new HashMap<>();
 
         for (LottoTicket ticket : lottoTickets.getLottoTickets()) {
-            LottoRank lottoRank = LottoRank.from(
-                    ticket.getNumberOfMatchedToLuckyNumber(luckyTicket),
-                    ticket.isBonusNumberMatched(luckyTicket));
+            LottoRank lottoRank = LottoRank.from(ticket, luckyTicket);
             int numberOfTicketsCorrespondingToRank = lottoResultMap.getOrDefault(lottoRank, 0);
             lottoResultMap.put(lottoRank, ++numberOfTicketsCorrespondingToRank);
         }

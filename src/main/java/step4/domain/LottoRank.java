@@ -19,7 +19,9 @@ public enum LottoRank {
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank from(int countMatchedNumbers, boolean isMatchedToBonusNumber) {
+    public static LottoRank from(LottoTicket lottoTicket, LuckyTicket luckyTicket) {
+        int countMatchedNumbers = lottoTicket.getNumberOfMatchedToLuckyNumber(luckyTicket);
+        boolean isMatchedToBonusNumber = lottoTicket.isBonusNumberMatched(luckyTicket);
         if ((countMatchedNumbers == SECOND_PLACE.numberOfMatchedToLuckyNumber) && isMatchedToBonusNumber) {
             return Arrays.stream(LottoRank.values())
                     .filter(lottoRank -> lottoRank.prizeMoney == SECOND_PLACE.prizeMoney)
