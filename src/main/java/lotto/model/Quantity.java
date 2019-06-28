@@ -15,7 +15,7 @@ public class Quantity {
     }
 
     public void reduce() {
-        this.QUANTITY -= 1;
+        if (this.exists()) this.QUANTITY -= 1;
     }
 
     @Override
