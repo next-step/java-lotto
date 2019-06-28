@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private final int NUMBER;
+    private final int number;
 
-    public LottoNumber(int NUMBER) {
-        this.NUMBER = NUMBER;
+    public LottoNumber(int number) {
+        this.number = number;
     }
 
     @Override
@@ -15,16 +15,16 @@ public class LottoNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumber that = (LottoNumber) o;
-        return NUMBER == that.NUMBER;
+        return number == that.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(NUMBER);
+        return Objects.hash(number);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(NUMBER);
+        return String.valueOf(number);
     }
 }
