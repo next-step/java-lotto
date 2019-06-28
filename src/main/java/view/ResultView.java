@@ -15,8 +15,11 @@ public class ResultView {
             appendByMatch(sb, matchingResult);
         }
         sb.append("총 수익률은 ");
-        sb.append(result.getProfit());
-        sb.append("%입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        double profit = result.getProfit();
+        sb.append(profit);
+        sb.append("%입니다.(기준이 1이기 때문에 결과적으로 ");
+        sb.append(profit >= 1 ? "이득" : "손해");
+        sb.append("라는 의미임)");
 
         System.out.println(sb.toString());
     }

@@ -8,15 +8,13 @@ public class LottoGame {
         ResultView resultView = new ResultView();
 
         Money money = new Money(inputView.purchaseAmount());
-//        Money money = new Money(1000);
         resultView.printPurchaseTicketCount(money.lotteryCount());
 
         Lottos lottos = LottoGenerator.generateByMoney(money);
         System.out.println(lottos);
 
-        WinningLotto winningLotto = inputView.winningNumber();
-//        WinningLotto winningLotto = new WinningLotto(Lotto.ofComma("1,2,3,4,5,6"));
-        MatchingResults result = lottos.match(winningLotto);
+        WinningLotto winningNumber = inputView.winningNumber();
+        MatchingResults result = lottos.match(winningNumber);
 
         resultView.show(result);
     }

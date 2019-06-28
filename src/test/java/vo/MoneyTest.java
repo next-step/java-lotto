@@ -29,20 +29,20 @@ public class MoneyTest {
     @Test
     public void sum() {
         //Given
-        Money money = new Money(10000);
+        Money money = new Money(10_000);
 
         //When
-        Money actual = money.sum(new Money(5000));
+        Money actual = money.sum(new Money(5_000));
 
         //Then
-        assertThat(actual).isEqualTo(new Money(15000));
+        assertThat(actual).isEqualTo(new Money(15_000));
     }
 
     @Test
     public void profitRate() {
         //Give
-        Money prize = new Money(10000);
-        Money investMoney = new Money(1000);
+        Money prize = new Money(10_000);
+        Money investMoney = new Money(1_000);
 
         //When
         double profitRate = investMoney.profitRate(prize);

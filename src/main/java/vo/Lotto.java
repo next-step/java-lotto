@@ -1,8 +1,6 @@
 package vo;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -10,7 +8,7 @@ public class Lotto {
 
     private final Set<LottoNumber> lotto;
 
-    public Lotto(Set<LottoNumber> lotto) {
+    private Lotto(Set<LottoNumber> lotto) {
         if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
@@ -19,15 +17,14 @@ public class Lotto {
     }
 
     public static Lotto of(Set<Integer> numbers) {
-        Set<LottoNumber> lotto = new HashSet<>();
-        for (Integer number : numbers) {
-            lotto.add(LottoNumber.of(number));
-        }
+        Set<LottoNumber> lotto = new TreeSet<>(numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet()));
         return new Lotto(lotto);
     }
 
     public static Lotto of(Integer... numbers) {
-        Set<LottoNumber> lotto = new HashSet<>();
+        Set<LottoNumber> lotto = new TreeSet<>();
         for (Integer number : numbers) {
             lotto.add(LottoNumber.of(number));
         }
@@ -38,13 +35,16 @@ public class Lotto {
         if (Objects.isNull(text)) {
             throw new IllegalArgumentException();
         }
+        return new Lotto(splitComma(text));
+    }
 
+    private static Set<LottoNumber> splitComma(String text) {
         String[] values = text.split(",");
-        Set<LottoNumber> lotto = new HashSet<>();
+        Set<LottoNumber> lotto = new TreeSet<>();
         for (String value : values) {
             lotto.add(LottoNumber.of(value));
         }
-        return new Lotto(lotto);
+        return lotto;
     }
 
     public int match(Lotto otherLotto) {
@@ -81,10 +81,7 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return lotto
-                .stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(",", "[", "]"));
+        return lotto.toString();
     }
 
     public int size() {

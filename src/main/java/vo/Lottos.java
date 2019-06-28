@@ -13,6 +13,7 @@ public class Lottos {
     public String toString() {
         lottos.stream().forEach(System.out::println);
         return "";
+//        return lottos.toString();
     }
 
     public MatchingResults match(WinningLotto winningLotto) {

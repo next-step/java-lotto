@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final Map<Integer, LottoNumber> lottoNos = new HashMap<>();
 
     static {
@@ -38,5 +38,10 @@ public class LottoNumber {
     @Override
     public String toString() {
         return String.valueOf(no);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.no - o.no;
     }
 }

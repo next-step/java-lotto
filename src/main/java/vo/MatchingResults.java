@@ -3,6 +3,7 @@ package vo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class MatchingResults {
     private final List<MatchingResult> results = new ArrayList<>();
@@ -11,17 +12,17 @@ public class MatchingResults {
     MatchingResults(int countOfLotto) {
         this.countOfLotto = countOfLotto;
 
-        results.add(new MatchingResult(Rank.FIRST_PLACE));
-        results.add(new MatchingResult(Rank.SECOND_PLACE));
-        results.add(new MatchingResult(Rank.THIRD_PLACE));
+        results.add(new MatchingResult(Rank.FIFTH_PLACE));
         results.add(new MatchingResult(Rank.FOURTH_PLACE));
+        results.add(new MatchingResult(Rank.THIRD_PLACE));
+        results.add(new MatchingResult(Rank.SECOND_PLACE));
+        results.add(new MatchingResult(Rank.FIRST_PLACE));
     }
 
-    void add(Rank rank) {
-        if (rank == null || rank == Rank.FAILURE) {
+    public void add(Rank rank) {
+        if (Objects.isNull(rank) || rank.equals(Rank.FAILURE)) {
             return;
         }
-
         getMatchingResult(rank).match();
     }
 
