@@ -30,12 +30,8 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        Number number1 = new Number(1);
-        Number number2 = new Number(2);
-        Number number3 = new Number(3);
-        Number number4 = new Number(4);
-        Number number5 = new Number(5);
-        numbers = new ArrayList<>(Arrays.asList(number1, number2, number3, number4, number5));
+        numbers = new ArrayList<>(
+                Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5)));
 
     }
 
@@ -50,7 +46,7 @@ public class LottoTest {
     @DisplayName("리스트에 중복된 숫자 제거하기")
     @Test
     void validDuplicate() {
-        numbers.add(new Number(5));
+        numbers.add(Number.of(5));
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Lotto exNumber = new Lotto(numbers);
         }).withMessageContaining("전달된 숫자가 6개가 아닙니다.");
@@ -60,7 +56,7 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void contains(int number) {
-        numbers.add(new Number(6));
+        numbers.add(Number.of(6));
         Lotto lottoNumber = new Lotto(numbers);
         assertThat(lottoNumber.contains(number)).isTrue();
     }
@@ -68,17 +64,17 @@ public class LottoTest {
     @DisplayName("ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.")
     @Test
     void contains() {
-        numbers.add(new Number(6));
+        numbers.add(Number.of(6));
         Lotto lottoNumber = new Lotto(numbers);
 
         List<Number> compareNumber = new ArrayList<>();
 
-        compareNumber.add(new Number(2));
-        compareNumber.add(new Number(4));
-        compareNumber.add(new Number(6));
-        compareNumber.add(new Number(8));
-        compareNumber.add(new Number(10));
-        compareNumber.add(new Number(12));
+        compareNumber.add(Number.of(2));
+        compareNumber.add(Number.of(4));
+        compareNumber.add(Number.of(6));
+        compareNumber.add(Number.of(8));
+        compareNumber.add(Number.of(10));
+        compareNumber.add(Number.of(12));
         Lotto exNumber = new Lotto(compareNumber);
 
         assertThat(lottoNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);

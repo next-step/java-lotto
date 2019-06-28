@@ -31,7 +31,7 @@ public class LottoStore {
 
     private static Lotto issueLottoNumber() {
         return new Lotto(RandomNumberUtils.getExtractNumber().stream()
-                .map(number -> new Number(number))
+                .map(number -> Number.of(number))
                 .collect(Collectors.toList()));
     }
 }

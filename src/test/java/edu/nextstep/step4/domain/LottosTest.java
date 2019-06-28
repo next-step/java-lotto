@@ -27,22 +27,10 @@ public class LottosTest {
     @BeforeEach
     void setUp() {
         numbers = Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(6)
-        );
+                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
 
         lotteryNumbers = Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(7)
-        );
+                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
     }
 
     @DisplayName("발행된 로또번호들과 당첨로또를 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
@@ -58,7 +46,7 @@ public class LottosTest {
     @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
     void addBonusNumberMatchLotto() {
-        Number bonus = new Number(6);
+        Number bonus = Number.of(6);
         Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
         Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
@@ -72,7 +60,7 @@ public class LottosTest {
     @DisplayName("당첨 금액 반환")
     @Test
     void fetchIncome() {
-        Number bonus = new Number(6);
+        Number bonus = Number.of(6);
         Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
         Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));

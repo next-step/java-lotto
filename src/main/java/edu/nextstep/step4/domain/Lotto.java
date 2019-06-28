@@ -64,7 +64,7 @@ public class Lotto {
         return Arrays.stream(lottery.replaceAll(SPACE, "").split(COMMA))
                 .filter(splitString -> !"".equals(splitString))
                 .map(Integer::parseInt)
-                .map(number -> new Number(number))
+                .map(number -> Number.of(number))
                 .collect(Collectors.toList());
     }
 

@@ -32,7 +32,7 @@ public class LottoApplication {
         // 투입 금액에 따른 로또 개수발행
         Lottos lottosTikets = LottoStore.publishLotto(money);
 
-        // 발행된 로또 출력
+        // 발행된 로또 출력R
         ResultView.printLottoInfo(lottosTikets);
 
         // 당첨 번호
@@ -41,7 +41,7 @@ public class LottoApplication {
 
         // 보너스 번호
         String bonus = InputView.inputBonusNumber();
-        Number bonusNumber = new Number(Integer.parseInt(bonus));
+        Number bonusNumber = Number.of(Integer.parseInt(bonus));
 
         // 보너스 번호와 당첨번호 중복 여부 확인
         if (lottery.contains(bonusNumber.getNumber())) {

@@ -26,8 +26,7 @@ public class Lottos {
         Map<Lotto, Rank> lottoResultinfo = new HashMap<>();
         lotto.stream()
                 .forEach(lottoNumber ->
-                        lottoResultinfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lottery)))
-                );
+                        lottoResultinfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lottery))));
         return lottoResultinfo;
     }
 
@@ -37,9 +36,7 @@ public class Lottos {
         cloneInfoMap.keySet().stream()
                 .filter(lotto -> cloneInfoMap.get(lotto).getMatch() == Rank.FIVE.getMatch())
                 .filter(lotto -> lotto.contains(bonusNumber.getNumber()))
-                .forEach(lotto ->
-                        cloneInfoMap.put(lotto, Rank.BONUS)
-                );
+                .forEach(lotto -> cloneInfoMap.put(lotto, Rank.BONUS));
         return cloneInfoMap;
     }
 

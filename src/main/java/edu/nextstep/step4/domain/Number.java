@@ -16,7 +16,7 @@ public class Number {
     private static final int FINAL_RANGE_NUMBER = 45;
     private int number;
 
-    public Number(int number) {
+    private Number(int number) {
         validNumber(number);
         this.number = number;
     }
