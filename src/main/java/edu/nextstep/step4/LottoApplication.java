@@ -32,7 +32,7 @@ public class LottoApplication {
         // 투입 금액에 따른 로또 개수발행
         Lottos lottosTikets = LottoStore.publishLotto(money);
 
-        // 발행된 로또 출력R
+        // 발행된 로또 출력
         ResultView.printLottoInfo(lottosTikets);
 
         // 당첨번호 + 보너스 번호 객체

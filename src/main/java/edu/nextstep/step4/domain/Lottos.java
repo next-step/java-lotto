@@ -23,17 +23,26 @@ public class Lottos {
     }
 
     public WinInfo getLotteryLottoNumberResultCount(Lotto lottery) {
-        Map<Lotto, Rank> lottoResultinfo = new HashMap<>();
+        Map<Lotto, Rank> lottoResultInfo = new HashMap<>();
         lotto.stream()
-                .forEach(lottoNumber ->
-                        lottoResultinfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lottery))));
-        return new WinInfo(lottoResultinfo);
+                .forEach(lotto ->
+                        lottoResultInfo.put(lotto, Rank.matchCheck(lotto.compareMatchNumberCount(lottery))));
+        return new WinInfo(lottoResultInfo);
     }
 
     public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
         Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
         lotteryInfo.keySet()
                 .filter(lotto -> lotteryInfo.get(lotto).getMatch() == Rank.FIVE.getMatch())
+                .filter(lotto -> lotto.contains(winLotto.getBonusNumber()))
+                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
+        return new WinInfo(matchWinInf);
+    }
+
+    public WinInfo addBonusNumberMatchLotto2(WinInfo lotteryInfo, WinLotto winLotto) {
+        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
+        lotteryInfo.keySet()
+                .filter(lotto -> lotteryInfo.isRank(lotto, Rank.FIVE))
                 .filter(lotto -> lotto.contains(winLotto.getBonusNumber()))
                 .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
         return new WinInfo(matchWinInf);

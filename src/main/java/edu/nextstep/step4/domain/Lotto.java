@@ -60,7 +60,6 @@ public class Lotto {
     }
 
     private static List<Number> splitLotteryNumber(String lottery) {
-
         return Arrays.stream(lottery.replaceAll(SPACE, "").split(COMMA))
                 .filter(splitString -> !"".equals(splitString))
                 .map(Integer::parseInt)

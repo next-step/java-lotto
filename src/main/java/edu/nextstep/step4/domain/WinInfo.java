@@ -24,8 +24,12 @@ public class WinInfo {
         this.winInfo = winInfo;
     }
 
-    public Rank get(Lotto lottoNumber) {
-        return this.winInfo.get(lottoNumber);
+    public Rank get(Lotto lotto) {
+        return this.winInfo.get(lotto);
+    }
+
+    public boolean isRank(Lotto lotto, Rank rank) {
+        return this.winInfo.get(lotto).equals(rank);
     }
 
     public Stream<Lotto> keySet() {

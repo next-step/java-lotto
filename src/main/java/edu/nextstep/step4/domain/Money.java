@@ -11,12 +11,12 @@ package edu.nextstep.step4.domain;
  * create date  : 2019-06-25 00:27
  */
 public class Money {
-    private static final int DIVID_NUMBER = 1000;
+    private static final int MONEY_PER_NUMBER = 1000;
     private int extractCount;
 
     public Money(int extractCount) {
         validMoney(extractCount);
-        this.extractCount = extractCount / DIVID_NUMBER;
+        this.extractCount = extractCount / MONEY_PER_NUMBER;
     }
 
     public int getNumberOfExtract() {
@@ -24,11 +24,11 @@ public class Money {
     }
 
     public int getInputMoney() {
-        return this.extractCount * DIVID_NUMBER;
+        return this.extractCount * MONEY_PER_NUMBER;
     }
 
     private void validMoney(int extractCount) {
-        if (extractCount < DIVID_NUMBER) {
+        if (extractCount < MONEY_PER_NUMBER) {
             throw new IllegalArgumentException("투입금액이 적습니다.");
         }
     }

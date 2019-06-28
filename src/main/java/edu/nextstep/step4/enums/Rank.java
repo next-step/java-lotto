@@ -65,6 +65,10 @@ public enum Rank {
         return this.match;
     }
 
+    public boolean getMatch(Rank rank) {
+        return this.equals(rank);
+    }
+
     public boolean getBonusRank() {
         return this.bonusRank;
     }
