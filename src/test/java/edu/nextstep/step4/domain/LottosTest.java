@@ -46,31 +46,33 @@ public class LottosTest {
     @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
     void addBonusNumberMatchLotto() {
-        Number bonus = Number.of(6);
         Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
-        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
+
+        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
+        WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(6));
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
         WinInfo winInfo = new WinInfo(lotteryInfo);
 
-        assertThat(lottos.addBonusNumberMatchLotto(winInfo, bonus).get(lottoNumber)).isEqualTo(Rank.BONUS);
+        assertThat(lottos.addBonusNumberMatchLotto(winInfo, winLotto).get(lottoNumber)).isEqualTo(Rank.BONUS);
     }
 
     @DisplayName("당첨 금액 반환")
     @Test
     void fetchIncome() {
-        Number bonus = Number.of(6);
         Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
-        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
+
+        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
+        WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(6));
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
         WinInfo winInfo = new WinInfo(lotteryInfo);
 
-        WinInfo incomeInfo = lottos.addBonusNumberMatchLotto(winInfo, bonus);
+        WinInfo incomeInfo = lottos.addBonusNumberMatchLotto(winInfo, winLotto);
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
 
         assertThat(lottos.fetchIncome(incomeInfo)).isEqualTo(30_000_000);

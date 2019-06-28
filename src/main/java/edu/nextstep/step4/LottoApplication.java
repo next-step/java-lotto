@@ -35,12 +35,10 @@ public class LottoApplication {
         // 발행된 로또 출력R
         ResultView.printLottoInfo(lottosTikets);
 
-        // 당첨 번호
-        Lotto lottery = Lotto.createLotteryNumber(InputView.inputLotteryNumber());
-        // 보너스 번호
-        Number bonusNumber = Number.of(InputView.inputBonusNumber());
         // 당첨번호 + 보너스 번호 객체
-        WinLotto win = WinLotto.of(lottery, bonusNumber);
+        Lotto lottery = Lotto.createLotteryNumber(InputView.inputLotteryNumber());
+        Number bonusNumber = Number.of(InputView.inputBonusNumber());
+        WinLotto winLotto = WinLotto.of(lottery, bonusNumber);
 
         // 보너스 번호와 당첨번호 중복 여부 확인
         if (lottery.contains(bonusNumber)) {
@@ -49,7 +47,7 @@ public class LottoApplication {
 
         // 당첨내역 출력
         WinInfo winInfo = lottosTikets.addBonusNumberMatchLotto(
-                lottosTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
+                lottosTikets.getLotteryLottoNumberResultCount(lottery), winLotto);
 
         ResultView.printLotteryCount(winInfo);
 

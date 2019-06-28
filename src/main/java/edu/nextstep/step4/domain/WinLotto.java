@@ -23,4 +23,9 @@ public class WinLotto {
     public static WinLotto of(Lotto lottery, Number bonusNumber) {
         return new WinLotto(lottery, bonusNumber);
     }
+
+    // Number객체의 데이터변조 가능한 메서드가 없어 getter 사용
+    public Number getBonusNumber() {
+        return this.bonusNumber;
+    }
 }
