@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.utils.StringUtils;
+
 import java.util.Objects;
 
 public class WinningLotto {
@@ -12,7 +15,14 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
+    public static WinningLotto of(String inputOfNumbers, int inputOfBonusNumber) {
+        return of(Lotto.from(StringUtils.parseNumbers(inputOfNumbers)), Number.of(inputOfBonusNumber));
+    }
+
     public static WinningLotto of(Lotto lotto, Number bonus) {
+        if (lotto.hasBonusNumber(bonus)) {
+            throw new DuplicateLottoNumberException(bonus);
+        }
         return new WinningLotto(lotto, bonus);
     }
 

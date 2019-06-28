@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.model.*;
-import lotto.model.generator.WinningGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,7 +22,8 @@ public class Application {
 
         String inputOfNumbers = InputView.askOfWinningNumbers();
         int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
-        WinningLotto winningLotto = WinningGenerator.generate(inputOfNumbers, inputOfBonusNumber);
+
+        WinningLotto winningLotto = WinningLotto.of(inputOfNumbers, inputOfBonusNumber);
 
         LottoResult result = lottoTicket.result(winningLotto);
         OutputView.printReport(result);
