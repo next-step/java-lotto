@@ -5,6 +5,7 @@ import step4.domain.LottoTicket;
 import step4.domain.LottoTickets;
 import step4.domain.ResultSheet;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
@@ -43,7 +44,7 @@ public class OutputView {
                     rank.getPrizeMoney(),
                     result.getResultMap().getOrDefault(rank, PRIZE_FOR_LOSER)));
         }
-        if (rank.getPrizeMoney() != SECOND_PLACE_PRIZE) {
+        if (rank != LottoRank.LOSER && rank.getPrizeMoney() != SECOND_PLACE_PRIZE) {
             System.out.println(String.format(MESSAGE_FOR_LOTTO_RESULT,
                     rank.getNumberOfMatchingNumber(),
                     rank.getPrizeMoney(),

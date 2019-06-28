@@ -22,4 +22,5 @@ public class LuckyTicket {
 
     boolean checkBonusNumber(List<LottoNumber> lottoTicket) {
         return lottoTicket.contains(bonusNumber);
+    }
 }
