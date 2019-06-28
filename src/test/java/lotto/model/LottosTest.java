@@ -56,6 +56,6 @@ class LottosTest {
         );
         lottos.add(lottoNumbers);
         LottoAggregator lottoAggregator = lottos.matchWinningNumber(winningNumbers);
-        assertThat(lottoAggregator.get(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoAggregator.getCount(LottoRank.FIRST)).isEqualTo(1);
     }
 }

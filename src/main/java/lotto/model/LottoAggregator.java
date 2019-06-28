@@ -12,11 +12,11 @@ public class LottoAggregator {
     }
 
     public void put(LottoRank rank) {
-        Integer count = lottoResult.getOrDefault(rank, 0);
+        Integer count = getCount(rank);
         lottoResult.put(rank, ++count);
     }
 
-    public int get(LottoRank rank) {
+    public int getCount(LottoRank rank) {
         return lottoResult.getOrDefault(rank, 0);
     }
 
@@ -28,13 +28,13 @@ public class LottoAggregator {
 
     private Long getTotalReturnMoney() {
         return lottoResult.keySet().stream()
-                .mapToLong(rank -> rank.getPrizeMoney() * this.get(rank))
+                .mapToLong(rank -> rank.getPrizeMoney() * this.getCount(rank))
                 .sum();
     }
 
     private int getBoughtCount() {
         return lottoResult.keySet().stream()
-                .mapToInt(this::get)
+                .mapToInt(this::getCount)
                 .sum();
     }
 

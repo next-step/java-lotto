@@ -35,7 +35,7 @@ public class ResultView {
         String message = String.format(checkBonusMessage(level.isBonus()),
                 level.getMatchCount(),
                 level.getPrizeMoney(),
-                lottoAggregator.get(level)
+                lottoAggregator.getCount(level)
         );
         System.out.println(message);
     }

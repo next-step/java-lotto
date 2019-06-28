@@ -12,7 +12,7 @@ public class LottoAggregatorTest {
     public void aggregate() {
         LottoAggregator lottoAggregator = new LottoAggregator();
         lottoAggregator.put(LottoRank.FIRST);
-        assertThat(lottoAggregator.get(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoAggregator.getCount(LottoRank.FIRST)).isEqualTo(1);
     }
 
     @Test
