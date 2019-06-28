@@ -10,7 +10,9 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         final int inputMoney = InputView.askMoneyToInput();
-        final int numberOfTicketsToBuy = LottoSeller.countLottoTickets(inputMoney);
+        final int numberOfManualTickets = InputView.askNumberOfManualTicket();
+//        final int numberOfTicketsToBuy = LottoSeller.countLottoTickets(inputMoney);
+
         OutputView.printNumberOfTickets(numberOfTicketsToBuy);
 
         LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);

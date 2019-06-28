@@ -14,6 +14,27 @@ public class InputView {
         return scanner.nextInt();
     }
 
+    public static int askNumberOfManualTicket() {
+        printBlackLine();
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextInt();
+    }
+
+    public static List<Integer> askNumbersForManualLotto() {
+        printBlackLine();
+        scanner.nextLine();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        String numbersForManualLotto = scanner.nextLine();
+        printBlackLine();
+
+        return Arrays.stream(numbersForManualLotto.split(LUCKY_NUMBER_SEPARATOR))
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+
     public static List<Integer> askLuckyNumber() {
         printBlackLine();
         scanner.nextLine();
