@@ -21,8 +21,7 @@ public class LottoSeller {
         for (List<Integer> manualTicket : manualTickets) {
             lottoTickets.add(LottoTicketGenerator.issueManualTickets(manualTicket));
         }
-
-        for (int i = 0; i < numberOfAutoTickets; i++) { //TODO: index i가 사용되지 않고있음
+        for (int i = 0; i < numberOfAutoTickets; i++) { //TODO: index i가 사용되지 않고 있음
             lottoTickets.add(LottoTicketGenerator.issueAutoTickets());
         }
         return LottoTickets.from(lottoTickets);
