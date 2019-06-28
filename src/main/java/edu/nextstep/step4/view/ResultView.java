@@ -1,5 +1,6 @@
 package edu.nextstep.step4.view;
 
+import edu.nextstep.step4.domain.WinInfo;
 import edu.nextstep.step4.enums.Rank;
 import edu.nextstep.step4.domain.Lottos;
 import edu.nextstep.step4.domain.Lotto;
@@ -42,7 +43,7 @@ public class ResultView {
         System.out.println(String.format(INCOME_MESSAGE_FORMAT, income));
     }
 
-    public static void printLotteryCount(Map<Lotto, Rank> lotteryInfo) {
+    public static void printLotteryCount(WinInfo lotteryInfo) {
         System.out.println("\n당첨 통계\n-------");
         Arrays.stream(Rank.values())
                 .filter(ranks -> ranks != Rank.ZERO)

@@ -22,26 +22,25 @@ public class Lottos {
         this.lotto = new ArrayList<>(lotto);
     }
 
-    public Map<Lotto, Rank> getLotteryLottoNumberResultCount(Lotto lottery) {
+    public WinInfo getLotteryLottoNumberResultCount(Lotto lottery) {
         Map<Lotto, Rank> lottoResultinfo = new HashMap<>();
         lotto.stream()
                 .forEach(lottoNumber ->
                         lottoResultinfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lottery))));
-        return lottoResultinfo;
+        return new WinInfo(lottoResultinfo);
     }
 
-    public Map<Lotto, Rank> addBonusNumberMatchLotto(Map<Lotto, Rank> lotteryInfo, Number bonusNumber) {
-        Map<Lotto, Rank> cloneInfoMap = new HashMap<>(lotteryInfo);
-
-        cloneInfoMap.keySet().stream()
-                .filter(lotto -> cloneInfoMap.get(lotto).getMatch() == Rank.FIVE.getMatch())
+    public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, Number bonusNumber) {
+        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
+        lotteryInfo.keySet()
+                .filter(lotto -> lotteryInfo.get(lotto).getMatch() == Rank.FIVE.getMatch())
                 .filter(lotto -> lotto.contains(bonusNumber.getNumber()))
-                .forEach(lotto -> cloneInfoMap.put(lotto, Rank.BONUS));
-        return cloneInfoMap;
+                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
+        return new WinInfo(matchWinInf);
     }
 
-    public int fetchIncome(Map<Lotto, Rank> lotteryInfo) {
-        return lotteryInfo.keySet().stream()
+    public int fetchIncome(WinInfo lotteryInfo) {
+        return lotteryInfo.keySet()
                 .mapToInt(lotto -> lotteryInfo.get(lotto).getLotteryMoney())
                 .sum();
     }

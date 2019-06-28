@@ -48,13 +48,13 @@ public class LottoApplication {
         }
 
         // 당첨내역 출력
-        Map<Lotto, Rank> incomeInfo = lottosTikets.addBonusNumberMatchLotto(
+        WinInfo winInfo = lottosTikets.addBonusNumberMatchLotto(
                 lottosTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
 
-        ResultView.printLotteryCount(incomeInfo);
+        ResultView.printLotteryCount(winInfo);
 
         // 당첨 금액
-        double income = (double) lottosTikets.fetchIncome(incomeInfo) / (double) money.getInputMoney();
+        double income = (double) lottosTikets.fetchIncome(winInfo) / (double) money.getInputMoney();
         ResultView.printIncome(income);
     }
 }

@@ -53,8 +53,9 @@ public class LottosTest {
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+        WinInfo winInfo = new WinInfo(lotteryInfo);
 
-        assertThat(lottos.addBonusNumberMatchLotto(lotteryInfo, bonus).get(lottoNumber)).isEqualTo(Rank.BONUS);
+        assertThat(lottos.addBonusNumberMatchLotto(winInfo, bonus).get(lottoNumber)).isEqualTo(Rank.BONUS);
     }
 
     @DisplayName("당첨 금액 반환")
@@ -67,8 +68,9 @@ public class LottosTest {
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+        WinInfo winInfo = new WinInfo(lotteryInfo);
 
-        Map<Lotto, Rank> incomeInfo = lottos.addBonusNumberMatchLotto(lotteryInfo, bonus);
+        WinInfo incomeInfo = lottos.addBonusNumberMatchLotto(winInfo, bonus);
         lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
 
         assertThat(lottos.fetchIncome(incomeInfo)).isEqualTo(30_000_000);
