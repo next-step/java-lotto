@@ -46,9 +46,8 @@ public class LottoApplication {
         }
 
         // 당첨내역 출력
-        WinInfo winInfo = lottosTikets.addBonusNumberMatchLotto(
-                lottosTikets.getLotteryLottoNumberResultCount(lottery), winLotto);
-
+        WinInfo winInfo = lottosTikets.getLotteryLottoNumberResultCount(lottery);
+        winInfo = lottosTikets.addBonusNumberMatchLotto(winInfo, winLotto);
         ResultView.printLotteryCount(winInfo);
 
         // 당첨 금액
