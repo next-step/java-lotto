@@ -22,11 +22,9 @@ public enum LottoRank {
     public static LottoRank from(LottoTicket lottoTicket, LuckyTicket luckyTicket) {
         int countMatchedNumbers = lottoTicket.getNumberOfMatchedToLuckyNumber(luckyTicket);
         boolean isMatchedToBonusNumber = lottoTicket.isBonusNumberMatched(luckyTicket);
+
         if ((countMatchedNumbers == SECOND_PLACE.numberOfMatchedToLuckyNumber) && isMatchedToBonusNumber) {
-            return Arrays.stream(LottoRank.values())
-                    .filter(lottoRank -> lottoRank.prizeMoney == SECOND_PLACE.prizeMoney)
-                    .findFirst()
-                    .get();
+            return LottoRank.SECOND_PLACE;
         }
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.numberOfMatchedToLuckyNumber == countMatchedNumbers)
