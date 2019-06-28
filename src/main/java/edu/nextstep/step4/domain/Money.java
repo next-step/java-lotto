@@ -17,7 +17,7 @@ public class Money {
 
     public Money(int extractCount, int manualCount) {
         validMoney(extractCount, manualCount);
-        this.extractCount = extractCount / MONEY_PER_NUMBER;
+        this.extractCount = extractCount / MONEY_PER_NUMBER - manualCount;
         this.manualCount = manualCount;
     }
 
