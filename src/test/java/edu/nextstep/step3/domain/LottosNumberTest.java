@@ -1,7 +1,5 @@
-package edu.nextstep.step4.domain;
+package edu.nextstep.step3.domain;
 
-import edu.nextstep.step3.domain.LottoNumber;
-import edu.nextstep.step3.domain.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  * project      : java-lotto
  * create date  : 2019-06-24 23:24
  */
-public class LottoNumberTest {
+public class LottosNumberTest {
 
     private List<Number> numbers;
 

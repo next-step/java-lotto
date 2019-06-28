@@ -1,6 +1,6 @@
 package edu.nextstep.step4.enums;
 
-import edu.nextstep.step4.domain.LottoNumber;
+import edu.nextstep.step4.domain.Lotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +49,7 @@ public enum Rank {
         return Arrays.stream(Rank.values()).collect(Collectors.toList());
     }
 
-    public static int matchOfCount(Map<LottoNumber, Rank> lotteryInfo, Rank rank) {
+    public static int matchOfCount(Map<Lotto, Rank> lotteryInfo, Rank rank) {
         return lotteryInfo.values().stream()
                 .filter(value -> value.getMatch() == rank.getMatch())
                 .collect(Collectors.toList())

@@ -30,14 +30,14 @@ public class LottoApplication {
         InputView.printExtractNumber(money.getNumberOfExtract());
 
         // 투입 금액에 따른 로또 개수발행
-        Lotto lottoTikets = LottoStore.publishLotto(money);
+        Lottos lottosTikets = LottoStore.publishLotto(money);
 
         // 발행된 로또 출력
-        ResultView.printLottoInfo(lottoTikets);
+        ResultView.printLottoInfo(lottosTikets);
 
         // 당첨 번호
         String lotto = InputView.inputLotteryNumber();
-        LottoNumber lottery = LottoNumber.createLotteryNumber(lotto);
+        Lotto lottery = Lotto.createLotteryNumber(lotto);
 
         // 보너스 번호
         String bonus = InputView.inputBonusNumber();
@@ -49,11 +49,11 @@ public class LottoApplication {
         }
 
         // 당첨내역 출력
-        Map<LottoNumber, Rank> incomeInfo = lottoTikets.addBonusNumberMatchLotto(lottoTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
+        Map<Lotto, Rank> incomeInfo = lottosTikets.addBonusNumberMatchLotto(lottosTikets.getLotteryLottoNumberResultCount(lottery), bonusNumber);
         ResultView.printLotteryCount(incomeInfo);
 
         // 당첨 금액
-        double income = (double) lottoTikets.fetchIncome(incomeInfo) / (double) money.getInputMoney();
+        double income = (double) lottosTikets.fetchIncome(incomeInfo) / (double) money.getInputMoney();
         ResultView.printIncome(income);
     }
 }

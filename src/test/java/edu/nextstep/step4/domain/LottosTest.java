@@ -1,6 +1,9 @@
-package edu.nextstep.step3.domain;
+package edu.nextstep.step4.domain;
 
 import edu.nextstep.step3.Rank;
+import edu.nextstep.step3.domain.Lotto;
+import edu.nextstep.step3.domain.LottoNumber;
+import edu.nextstep.step3.domain.Number;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * project      : java-lotto
  * create date  : 2019-06-24 23:53
  */
-public class LottoTest {
+public class LottosTest {
 
     private List<Number> numbers;
     private List<Number> lotteryNumbers;

@@ -18,19 +18,19 @@ import java.util.stream.Collectors;
  */
 public class LottoStore {
 
-    public static Lotto publishLotto(Money money) {
-        List<LottoNumber> exNumber = new ArrayList<>();
+    public static Lottos publishLotto(Money money) {
+        List<Lotto> exNumber = new ArrayList<>();
         int issueNumber = money.getNumberOfExtract();
 
         for (int i = 0; i < issueNumber; i++) {
             exNumber.add(issueLottoNumber());
         }
 
-        return new Lotto(exNumber);
+        return new Lottos(exNumber);
     }
 
-    private static LottoNumber issueLottoNumber() {
-        return new LottoNumber(RandomNumberUtils.getExtractNumber().stream()
+    private static Lotto issueLottoNumber() {
+        return new Lotto(RandomNumberUtils.getExtractNumber().stream()
                 .map(number -> new Number(number))
                 .collect(Collectors.toList()));
     }
