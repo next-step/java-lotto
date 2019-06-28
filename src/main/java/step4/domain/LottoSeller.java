@@ -8,9 +8,9 @@ public class LottoSeller {
     static final int PRICE_OF_A_LOTTO_TICKET = 1000;
     static final String ALERT_MISSING_MONEY = "돈을 넣어주세요. 로또복권은 한 장당 1000원 입니다.";
 
-    public static int countLottoTickets(int inputMoney) {
+    public static int countAutoTickets(int inputMoney, int numberOfManualTickets) {
         validationInputMoney(inputMoney);
-        return inputMoney / PRICE_OF_A_LOTTO_TICKET;
+        return (inputMoney / PRICE_OF_A_LOTTO_TICKET) - numberOfManualTickets;
     }
 
     public static LottoTickets issueLottoTicket(int numberOfTicketsToBuy) {

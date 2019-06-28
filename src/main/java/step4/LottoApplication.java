@@ -11,11 +11,11 @@ public class LottoApplication {
     public static void main(String[] args) {
         final int inputMoney = InputView.askMoneyToInput();
         final int numberOfManualTickets = InputView.askNumberOfManualTicket();
-//        final int numberOfTicketsToBuy = LottoSeller.countLottoTickets(inputMoney);
+        final int numberOfAutoTickets = LottoSeller.countAutoTickets(inputMoney, numberOfManualTickets);
 
-        OutputView.printNumberOfTickets(numberOfTicketsToBuy);
+        OutputView.printNumberOfTickets(numberOfManualTickets, numberOfAutoTickets);
 
-        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);
+        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfManualTickets, numberOfAutoTickets);
         OutputView.printLottoTickets(lottoTickets);
 
         LuckyTicket luckyTicket = LottoSeller
