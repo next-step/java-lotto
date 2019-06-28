@@ -16,7 +16,7 @@ public class Money {
     private int manualCount;
 
     public Money(int extractCount, int manualCount) {
-        validMoney(extractCount);
+        validMoney(extractCount, manualCount);
         this.extractCount = extractCount / MONEY_PER_NUMBER;
         this.manualCount = manualCount;
     }
@@ -33,9 +33,14 @@ public class Money {
         return this.extractCount * MONEY_PER_NUMBER;
     }
 
-    private void validMoney(int extractCount) {
+    private void validMoney(int extractCount, int manualCount) {
         if (extractCount < MONEY_PER_NUMBER) {
             throw new IllegalArgumentException("투입금액이 적습니다.");
+        }
+
+        int extract = (extractCount / MONEY_PER_NUMBER) - manualCount;
+        if (extract < 0) {
+            throw new IllegalArgumentException("투입 금액에 비해 수동생성 가능 개수가 많습니다.");
         }
     }
 }

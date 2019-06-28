@@ -30,7 +30,7 @@ public class MoneyTest {
     void validMoney() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Money money = new Money(999, 0);
-        });
+        }).withMessageContaining("투입금액이 적습니다.");
     }
 
     @DisplayName("Money 객체에 수동생성 카운트 가지고 오기")
@@ -38,5 +38,13 @@ public class MoneyTest {
     void getNumberOfManual() {
         Money money = new Money(10000, 3);
         assertThat(money.getNumberOfManual()).isEqualTo(3);
+    }
+
+    @DisplayName("Money 객체 생성 예외상황 - 수동생성 개수가 생성해야될 로또 개수보다 많을경우")
+    @Test
+    void validManual() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Money money = new Money(1000, 2);
+        }).withMessageContaining("투입 금액에 비해 수동생성 가능 개수가 많습니다.");
     }
 }
