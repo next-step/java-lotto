@@ -8,10 +8,10 @@ public class LottoNumber {
     private final static int ONE_UNIT_OF_LOTTO = 6;
     private final static int EXIST_BONUS_BALL = 1;
 
-    private ArrayList<Integer> lottoElement = null;
+    private ArrayList<Integer> lottoElement;
 
     // 생성자를 호출하면 lottoElement에 로또번호를 생성하여 추가
-    public LottoNumber() {
+    LottoNumber() {
         ArrayList<Integer> randomNumber = getRandomNumber();
 
         lottoElement = new ArrayList<>();
@@ -34,10 +34,10 @@ public class LottoNumber {
     }
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교
-    public int compareWinningNumber(int[] winningLottoNumber, int bonusball) {
+    int compareWinningNumber(int[] winningLottoNumber, int bonusball) {
         int wingingCount = 0;
-        for (int i = 0; i < winningLottoNumber.length; ++i) {
-            wingingCount = lottoElement.contains(winningLottoNumber[i]) ? wingingCount + 1 : wingingCount;
+        for (int value : winningLottoNumber) {
+            wingingCount = lottoElement.contains(value) ? wingingCount + 1 : wingingCount;
         }
 
         return checkBonusBall(bonusball, wingingCount);

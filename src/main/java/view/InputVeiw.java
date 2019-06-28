@@ -65,7 +65,7 @@ public class InputVeiw {
         return input.length != ONE_UNIT_OF_LOTTO;
     }
 
-    public static String[] removeBlankAndSplit(String input) {
+    private static String[] removeBlankAndSplit(String input) {
         return input.replaceAll(Sperator.BLANK.getValue(), Sperator.NOTHING.getValue()).split(Sperator.REST.getValue());
     }
 }

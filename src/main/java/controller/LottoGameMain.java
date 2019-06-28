@@ -2,6 +2,7 @@ package controller;
 
 import domain.LottoGame;
 import domain.LottoNumber;
+import domain.LottoResult;
 import view.InputVeiw;
 import view.ResultView;
 
@@ -18,7 +19,7 @@ public class LottoGameMain {
 
         int[] winningNumber = InputVeiw.inputPrvLottoNumber();
         int bonusBall = InputVeiw.inputBonusBall();
-        lottoGame.showWinningResult(winningNumber, bonusBall);
-        ResultView.printResult();
+        LottoResult gameResult =lottoGame.getWinningResult(winningNumber, bonusBall);
+        ResultView.printResult(gameResult);
     }
 }

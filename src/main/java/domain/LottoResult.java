@@ -9,21 +9,21 @@ public class LottoResult {
     private final static int SUBSTR_POINT_ONE = 1;
     private final static int SUBSTR_POINT_TWO = 2;
 
-    private static double winningRevenue;
-    private static Integer[] countsOfWinningResult;
-    private static Map<Integer, Integer> winnerGroup;
+    private double winningRevenue;
+    private Integer[] countsOfWinningResult;
+    private Map<Integer, Integer> winnerGroup;
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
-    public static void getCountsWinningResult(ArrayList<LottoNumber> lottoNumber, int[] winnigNumber, int bonusBall, int purchaseAmount) {
+    public void getCountsWinningResult(ArrayList<LottoNumber> lottoNumber, int[] winningNumber, int bonusBall, int purchaseAmount) {
         countsOfWinningResult = new Integer[lottoNumber.size()];
         for (int i = 0; i < lottoNumber.size(); i++) {
-            countsOfWinningResult[i] = lottoNumber.get(i).compareWinningNumber(winnigNumber, bonusBall);
+            countsOfWinningResult[i] = lottoNumber.get(i).compareWinningNumber(winningNumber, bonusBall);
         }
         calculatorTotalWinningRevenue(purchaseAmount);
         makeWinnersGroup();
     }
 
-    private static void calculatorTotalWinningRevenue(int lottoPrice) {
+    private void calculatorTotalWinningRevenue(int lottoPrice) {
         LottoData.setCountsOfWinningResultConvertList(Arrays.asList(countsOfWinningResult)); //당첨 번호 갯수에 따라서 몇등인지 확인하기 위하여  Array -> List 로 변환
 
         double totalWinningPrize = (LottoData.FIRST_WINNER.getCountWinner() * LottoData.FIRST_WINNER.getPrize()) + (LottoData.SECOND_WINNER.getCountWinner() * LottoData.SECOND_WINNER.getPrize())
@@ -33,12 +33,12 @@ public class LottoResult {
         winningRevenue = getRevenue(totalWinningPrize, lottoPrice);
     }
 
-    private static double getRevenue(double total, int lottoPrice) {
+    private double getRevenue(double total, int lottoPrice) {
         return total / lottoPrice;
     }
 
     // 계산된 수익율을 퍼센티지로 표현 (소수 2자리까지/ 단, 소수 한자리 일경우 한자리만 표현되도록 )
-    public static Double getPercentOfRevenue() {
+    public Double getPercentOfRevenue() {
         String[] result = String.valueOf(winningRevenue).split("\\.");
         String percent = null;
         if (result[1].length() == SUBSTR_POINT_ONE)
@@ -48,11 +48,11 @@ public class LottoResult {
         return Double.parseDouble(percent);
     }
 
-    public static Map<Integer, Integer> getWinnerGroup() {
+    public Map<Integer, Integer> getWinnerGroup() {
         return winnerGroup;
     }
 
-    private static void makeWinnersGroup() {
+    private void makeWinnersGroup() {
         winnerGroup = new HashMap<>();
         winnerGroup.put(LottoData.FIRST_WINNER.getPrize(), (int) LottoData.FIRST_WINNER.getCountWinner());
         winnerGroup.put(LottoData.SECOND_WINNER.getPrize(), (int) LottoData.SECOND_WINNER.getCountWinner());
@@ -62,7 +62,7 @@ public class LottoResult {
     }
 
     // 수익율이 이익인지 손해인지 판단 (출력용)
-    public static String judgeResult() {
+    public String judgeResult() {
         if (winningRevenue > 1)
             return "이익";
         if (winningRevenue == 1)
