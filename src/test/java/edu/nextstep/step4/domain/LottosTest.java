@@ -37,10 +37,12 @@ public class LottosTest {
     @Test
     void getLotteryLottoNumberResultCount() {
         Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
-        Lotto lotteryNumber = new Lotto(new ArrayList<>(numbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        assertThat(lottos.getLotteryLottoNumberResultCount(lotteryNumber).isRank(lottoNumber, Rank.SIX)).isTrue();
+        Lotto lotteryNumber = new Lotto(new ArrayList<>(numbers));
+        WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(9));
+
+        assertThat(lottos.getLotteryLottoNumberResultCount(winLotto).isRank(lottoNumber, Rank.SIX)).isTrue();
     }
 
     @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
