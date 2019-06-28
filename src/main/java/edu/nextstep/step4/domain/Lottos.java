@@ -34,10 +34,19 @@ public class Lottos {
         Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
         lotteryInfo.keySet()
                 .filter(lotto -> lotteryInfo.get(lotto).getMatch() == Rank.FIVE.getMatch())
-                .filter(lotto -> lotto.contains(bonusNumber.getNumber()))
+                .filter(lotto -> lotto.contains(bonusNumber))
                 .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
         return new WinInfo(matchWinInf);
     }
+
+//    public WinInfo addBonusNumberMatchLotto(WinInfo lotteryInfo, WinLotto winLotto) {
+//        Map<Lotto, Rank> matchWinInf = new HashMap<>(lotteryInfo.getWinInfo());
+//        lotteryInfo.keySet()
+//                .filter(lotto -> lotteryInfo.get(lotto).getMatch() == Rank.FIVE.getMatch())
+//                .filter(lotto -> lotto.contains(winLotto))
+//                .forEach(lotto -> matchWinInf.put(lotto, Rank.BONUS));
+//        return new WinInfo(matchWinInf);
+//    }
 
     public int fetchIncome(WinInfo lotteryInfo) {
         return lotteryInfo.keySet()

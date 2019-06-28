@@ -57,8 +57,16 @@ public class LottoTest {
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
     void contains(int number) {
         numbers.add(Number.of(6));
-        Lotto lottoNumber = new Lotto(numbers);
-        assertThat(lottoNumber.contains(number)).isTrue();
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.contains(Number.of(number))).isTrue();
+    }
+
+    @DisplayName("전달된 인자값(Number type)을 보유하고 있는지 확인한다.")
+    @Test
+    void contains2() {
+        numbers.add(Number.of(6));
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.contains(Number.of(6))).isTrue();
     }
 
     @DisplayName("ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.")
@@ -67,14 +75,8 @@ public class LottoTest {
         numbers.add(Number.of(6));
         Lotto lottoNumber = new Lotto(numbers);
 
-        List<Number> compareNumber = new ArrayList<>();
-
-        compareNumber.add(Number.of(2));
-        compareNumber.add(Number.of(4));
-        compareNumber.add(Number.of(6));
-        compareNumber.add(Number.of(8));
-        compareNumber.add(Number.of(10));
-        compareNumber.add(Number.of(12));
+        List<Number> compareNumber = new ArrayList<>(
+                Arrays.asList(Number.of(2), Number.of(4), Number.of(6), Number.of(8), Number.of(10), Number.of(12)));
         Lotto exNumber = new Lotto(compareNumber);
 
         assertThat(lottoNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);

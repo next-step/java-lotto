@@ -43,7 +43,7 @@ public class LottoApplication {
         WinLotto win = WinLotto.of(lottery, bonusNumber);
 
         // 보너스 번호와 당첨번호 중복 여부 확인
-        if (lottery.contains(bonusNumber.getNumber())) {
+        if (lottery.contains(bonusNumber)) {
             throw new IllegalArgumentException("중복된 번호 입니다.");
         }
 

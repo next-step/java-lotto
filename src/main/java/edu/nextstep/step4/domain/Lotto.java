@@ -21,31 +21,31 @@ public class Lotto {
     private static final int LIST_VALID_SIZE = 6;
     private static final String COMMA = ",";
     private static final String SPACE = " ";
-    private List<Number> lottoNumbers;
+    private List<Number> lotto;
 
-    public Lotto(List<Number> lottoNumbers) {
-        validSize(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    public Lotto(List<Number> lotto) {
+        validSize(lotto);
+        this.lotto = new ArrayList<>(lotto);
     }
 
     public static Lotto createLotteryNumber(String inputLotteryNumber) {
         return new Lotto(splitLotteryNumber(inputLotteryNumber));
     }
 
-    public boolean contains(int number) {
-        return lottoNumbers.stream()
-                .anyMatch(sourceNumber -> sourceNumber.comapreTo(number));
+    public boolean contains(Number number) {
+        return lotto.stream()
+                .anyMatch(sourceNumber -> sourceNumber.equals(number));
     }
 
     public int compareMatchNumberCount(Lotto lotto) {
         return lotto.stream()
-                .filter(compareSourceNumber -> this.contains(compareSourceNumber.getNumber()))
+                .filter(compareSourceNumber -> this.contains(compareSourceNumber))
                 .collect(Collectors.toList())
                 .size();
     }
 
     public Stream<Number> stream() {
-        return this.lottoNumbers.stream();
+        return this.lotto.stream();
     }
 
     private void validSize(List<Number> lotteryNumber) {
