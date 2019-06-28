@@ -67,4 +67,13 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
