@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -45,23 +44,24 @@ public class LottoSellerTest {
         int numberOfTicketsToBuy = LottoSeller.countLottoTickets(inputMoney);
 
         //When
-        List<LottoTicket> lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);
+        LottoTickets lottoTickets = LottoSeller.issueLottoTicket(numberOfTicketsToBuy);
 
         //Then
-        assertThat(lottoTickets.size()).isEqualTo(numberOfTicketsToBuy);
+        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(numberOfTicketsToBuy);
     }
 
     @Test
     void 당첨번호와_일치한_번호_개수를_반환한다() {
         //Given
         List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket luckyNumber = LottoSeller.getLuckyNumber(testLuckyNumber);
+        int bonusNumber = 7;
+        LuckyTicket luckyTicket = LottoSeller.getLuckyNumber(testLuckyNumber, bonusNumber);
 
         List<Integer> matchesThreeNumbers = Arrays.asList(1, 3, 5, 7, 9, 11);
         LottoTicket ticketMatchesThreeNumbers = new LottoTicket(LottoTicketGenerator.pickLottoBalls(matchesThreeNumbers));
 
         //When
-        long result = ticketMatchesThreeNumbers.getNumberOfMatchedToLuckyNumber(luckyNumber);
+        long result = ticketMatchesThreeNumbers.getNumberOfMatchedToLuckyNumber(luckyTicket);
 
         //Then
         assertThat(result).isEqualTo(3);
@@ -71,7 +71,8 @@ public class LottoSellerTest {
     void 당첨통계를_반환한다() {
         //Given
         List<Integer> testLuckyNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTicket luckyNumber = LottoSeller.getLuckyNumber(testLuckyNumber);
+        int bonusNumber = 7;
+        LuckyTicket luckyTicket = LottoSeller.getLuckyNumber(testLuckyNumber, bonusNumber);
 
         List<Integer> matchesFourNumbers = Arrays.asList(1, 2, 3, 4, 7, 8);
         List<Integer> matchesFiveNumbers = Arrays.asList(1, 2, 3, 4, 5, 8);
@@ -85,11 +86,11 @@ public class LottoSellerTest {
         lottoTickets.add(ticketMatchesSixNumbers);
 
         //When
-        Map<LottoRank, List<LottoTicket>> resultMap = LottoSeller.getLottoResult(lottoTickets, luckyNumber);
+        ResultSheet resultMap = ResultSheet.getResult(LottoTickets.from(lottoTickets), luckyTicket);
 
         //Then
-        assertThat(resultMap.get(LottoRank.FIRST_PLACE).get(0)).isEqualTo(ticketMatchesSixNumbers);
-        assertThat(resultMap.get(LottoRank.SECOND_PLACE).get(0)).isEqualTo(ticketMatchesFiveNumbers);
-        assertThat(resultMap.get(LottoRank.THIRD_PLACE).get(0)).isEqualTo(ticketMatchesFourNumbers);
+        assertThat(resultMap.getResultMap().get(LottoRank.FIRST_PLACE)).isEqualTo(1);
+        assertThat(resultMap.getResultMap().get(LottoRank.SECOND_PLACE)).isEqualTo(1);
+        assertThat(resultMap.getResultMap().get(LottoRank.THIRD_PLACE)).isEqualTo(1);
     }
 }
