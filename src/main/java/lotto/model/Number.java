@@ -14,6 +14,10 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void verifyNumber(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException("1~45 범위에서만 생성 가능 합니다.");
@@ -30,7 +34,7 @@ public class Number implements Comparable<Number> {
 
     @Override
     public String toString() {
-        return number + "";
+        return String.valueOf(number);
     }
 
     @Override

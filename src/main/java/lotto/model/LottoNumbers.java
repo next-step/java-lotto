@@ -26,6 +26,10 @@ public class LottoNumbers {
         return this.numbers.contains(number);
     }
 
+    public List<Number> getNumbers() {
+        return numbers;
+    }
+
     private void verifySize(List<Number> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("6개의 숫자만 입력해야 합니다.");

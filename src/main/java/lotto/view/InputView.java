@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.model.LottoNumbers;
+import lotto.model.Lottos;
 import lotto.model.Number;
-import lotto.model.*;
+import lotto.model.Order;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,10 +37,13 @@ public class InputView {
     }
 
     public static Lottos askHandPickLottoNumber(int handPickCount) {
+        scanner.nextLine();
         Lottos lottos = new Lottos();
+        if (handPickCount < 1) {
+            return lottos;
+        }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < handPickCount; i++) {
-            scanner = new Scanner(System.in);
             lottos.add(splitNumbers(scanner.nextLine()));
         }
         return lottos;

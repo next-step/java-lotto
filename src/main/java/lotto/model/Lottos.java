@@ -2,11 +2,9 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final static String STRING_ENTER = "\n";
     private List<LottoNumbers> pickNumbers;
 
     public Lottos() {

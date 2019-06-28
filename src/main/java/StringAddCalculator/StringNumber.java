@@ -43,10 +43,4 @@ public class StringNumber {
         return Objects.hash(number);
     }
 
-    @Override
-    public String toString() {
-        return "StringNumber{" +
-                "number=" + number +
-                '}';
-    }
 }

@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.model.LottoAggregator;
-import lotto.model.LottoRank;
-import lotto.model.Lottos;
-import lotto.model.Order;
+import lotto.model.*;
 
 import java.util.Arrays;
 
@@ -15,7 +12,9 @@ public class ResultView {
     private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %f 입니다.";
 
     public static void printPickedLottoNumbers(Lottos lottos) {
-        System.out.println(lottos.toString());
+        lottos.getPickNumbers().stream()
+                .map(LottoNumbers::getNumbers)
+                .forEach(System.out::println);
     }
 
     public static void printBuyLottoCount(Order order) {
