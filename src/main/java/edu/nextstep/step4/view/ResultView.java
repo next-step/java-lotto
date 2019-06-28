@@ -48,7 +48,11 @@ public class ResultView {
         Arrays.stream(Rank.values())
                 .filter(ranks -> ranks != Rank.ZERO)
                 .map(ranks ->
-                        combineLotteryResultMessage(ranks.getMatch(), ranks.getLotteryMoney(), Rank.matchOfCount(lotteryInfo, ranks), ranks.getBonusRank())
+                        combineLotteryResultMessage(
+                                ranks.getMatch(),
+                                ranks.getLotteryMoney(),
+                                Rank.matchOfCount(lotteryInfo, ranks),
+                                ranks.getBonusRank())
                 ).forEach(System.out::println);
     }
 

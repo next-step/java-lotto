@@ -40,7 +40,7 @@ public class WinInfo {
         return this.winInfo.values().stream();
     }
 
-    protected Map<Lotto, Rank> getWinInfo() {
+    public Map<Lotto, Rank> getWinInfo() {
         return Collections.unmodifiableMap(this.winInfo);
     }
 }

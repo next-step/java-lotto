@@ -2,11 +2,13 @@ package edu.nextstep.step4;
 
 import edu.nextstep.step4.domain.Number;
 import edu.nextstep.step4.domain.*;
+import edu.nextstep.step4.enums.Rank;
 import edu.nextstep.step4.view.InputView;
 import edu.nextstep.step4.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -38,10 +40,11 @@ public class LottoApplication {
             manualLottos = InputView.inputManualNumber(manualCount);
         }
 
+        // 수동생성, 자동생성 개수 출력
         InputView.printExtractNumber(manualCount, money.getNumberOfExtract());
 
         // 투입 금액에 따른 로또 개수발행
-        Lottos lottosTikets = LottoStore.publishLotto(money);
+        Lottos lottosTikets = LottoStore.publishLotto(money, manualLottos);
 
         // 발행된 로또 출력
         ResultView.printLottoInfo(lottosTikets);
@@ -57,7 +60,7 @@ public class LottoApplication {
         }
 
         // 당첨내역 출력
-        WinInfo winInfo = lottosTikets.getLotteryLottoNumberResultCount(lottery);
+        WinInfo winInfo = lottosTikets.getLotteryLottoNumberResultCount(winLotto);
         winInfo = lottosTikets.addBonusNumberMatchLotto(winInfo, winLotto);
         ResultView.printLotteryCount(winInfo);
 

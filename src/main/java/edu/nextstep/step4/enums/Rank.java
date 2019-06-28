@@ -46,15 +46,19 @@ public enum Rank {
                 .orElse(Rank.ZERO);
     }
 
-    public static List<Rank> getRanks() {
-        return Arrays.stream(Rank.values()).collect(Collectors.toList());
-    }
-
     public static int matchOfCount(WinInfo lotteryInfo, Rank rank) {
         return lotteryInfo.values()
-                .filter(value -> value.getMatch() == rank.getMatch())
+                .filter(value -> value.isEqaul(rank))
                 .collect(Collectors.toList())
                 .size();
+    }
+
+    public boolean isEqaul(Rank rank) {
+        return (this.match == rank.match) && (this.bonusRank == rank.bonusRank);
+    }
+
+    public static List<Rank> getRanks() {
+        return Arrays.stream(Rank.values()).collect(Collectors.toList());
     }
 
     public int getLotteryMoney() {

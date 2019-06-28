@@ -28,4 +28,8 @@ public class WinLotto {
     public Number getBonusNumber() {
         return this.bonusNumber;
     }
+
+    public Lotto getLottery() {
+        return this.lottery;
+    }
 }
