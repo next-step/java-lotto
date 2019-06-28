@@ -29,8 +29,7 @@ public class LottoGenerator {
     return new Lotto(numbers);
   }
 
-  public static Lottos generateManually(List<List<LottoNumber>> lottoNumbers) {
-    List<Lotto> lottos = lottoNumbers.stream().map(Lotto::new).collect(toList());
+  public static Lottos generateManually(List<Lotto> lottos) {
     return new Lottos(lottos);
   }
 
