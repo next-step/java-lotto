@@ -2,8 +2,6 @@ package edu.nextstep.step4.domain;
 
 import edu.nextstep.step4.utils.RandomNumberUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

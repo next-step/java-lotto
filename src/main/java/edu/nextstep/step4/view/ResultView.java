@@ -1,15 +1,14 @@
 package edu.nextstep.step4.view;
 
+import edu.nextstep.step4.domain.Lotto;
+import edu.nextstep.step4.domain.Lottos;
+import edu.nextstep.step4.domain.Number;
 import edu.nextstep.step4.domain.WinInfo;
 import edu.nextstep.step4.enums.Rank;
-import edu.nextstep.step4.domain.Lottos;
-import edu.nextstep.step4.domain.Lotto;
-import edu.nextstep.step4.domain.Number;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**

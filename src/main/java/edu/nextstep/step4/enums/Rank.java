@@ -1,11 +1,9 @@
 package edu.nextstep.step4.enums;
 
-import edu.nextstep.step4.domain.Lotto;
 import edu.nextstep.step4.domain.WinInfo;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
