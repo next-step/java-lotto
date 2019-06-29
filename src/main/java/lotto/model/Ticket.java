@@ -43,6 +43,10 @@ public class Ticket {
         return otherSet.size();
     }
 
+    public boolean contains(Ball ball) {
+        return balls.contains(ball);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

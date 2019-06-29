@@ -1,11 +1,10 @@
 package lotto.model;
 
-import lotto.model.Ball;
-import lotto.model.Ticket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -75,5 +74,11 @@ public class TicketTest {
         Ticket otherTicket = Ticket.generateTicket(otherBalls);
 
         assertThat(ticket.match(otherTicket)).isEqualTo(Ticket.SIZE - shiftIndex);
+    }
+
+    @Test
+    @DisplayName("Ticket에 포함된 Ball을 확인할 수 있다.")
+    void check_HasBall() {
+        assertThat(ticket.contains(Ball.valueOf(STARTING_NUMBER))).isTrue();
     }
 }
