@@ -20,7 +20,7 @@ class RankTest {
     @DisplayName("Values 값을 얻는다.")
     @Test
     void getValues() {
-        assertThat(Rank.getRanks().get(0) == Rank.THREE).isTrue();
+        assertThat(Rank.getRanks().get(0) == Rank.ZERO).isTrue();
     }
 
     @DisplayName("match 값을 얻는다.")
