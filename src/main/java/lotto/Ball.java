@@ -13,10 +13,14 @@ public class Ball {
     private int value;
 
     private Ball(int value) {
+        checkRange(value);
+        this.value = value;
+    }
+
+    private void checkRange(int value) {
         if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
             throw new IllegalArgumentException(OUT_OF_RANGE_MESSAGE);
         }
-        this.value = value;
     }
 
     static Ball valueOf(int value) {
