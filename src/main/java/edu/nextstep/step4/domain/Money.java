@@ -12,7 +12,6 @@ package edu.nextstep.step4.domain;
  */
 public class Money {
     private static final int MONEY_PER_NUMBER = 1_000;
-    private static final int MIN_EXTRACT_NUMBER = 0;
     private final int money;
 
     public Money(int inputMoney) {
@@ -24,20 +23,8 @@ public class Money {
         return this.money;
     }
 
-    public int getIssueNumber() {
-        return this.money / MONEY_PER_NUMBER;
-    }
-
-    public boolean checkPurchaseManual(int manualCount) {
-        return ((this.money / MONEY_PER_NUMBER) - manualCount) >= MIN_EXTRACT_NUMBER;
-    }
-
-    public double fetchIncome(WinInfo lotteryInfo) {
-        int income = lotteryInfo.keySet()
-                .mapToInt(lotto -> lotteryInfo.getRank(lotto).getLotteryMoney())
-                .sum();
-
-        return income / this.money;
+    public int getAutoNumber(int manualCount) {
+        return this.money / MONEY_PER_NUMBER - manualCount;
     }
 
     private void validMoney(int inputMoney) {
