@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,11 +24,11 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  */
 public class LottoTest {
 
-    private List<Number> numbers;
+    private Set<Number> numbers;
 
     @BeforeEach
     void setUp() {
-        numbers = new ArrayList<>(
+        numbers = new HashSet<>(
                 Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5)));
 
     }
@@ -76,7 +74,7 @@ public class LottoTest {
         Lotto lottoNumber = Lotto.createLotteryNumber("1,2,3,4,5,6");
         assertThat(lottoNumber.stream()
                 .map(Number::getNumber)
-                .collect(Collectors.toList()).contains(number)
+                .collect(Collectors.toSet()).contains(number)
         );
     }
 }

@@ -21,25 +21,25 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class LottosTest {
 
-    private List<Number> numbers;
-    private List<Number> lotteryNumbers;
+    private Set<Number> numbers;
+    private Set<Number> lotteryNumbers;
 
     @BeforeEach
     void setUp() {
-        numbers = Arrays.asList(
-                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6));
+        numbers = new HashSet<>(Arrays.asList(
+                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6)));
 
-        lotteryNumbers = Arrays.asList(
-                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7));
+        lotteryNumbers = new HashSet<>(Arrays.asList(
+                Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(7)));
     }
 
     @DisplayName("발행된 로또번호들과 당첨로또를 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
     void getLotteryLottoNumberResultCount() {
-        Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lottoNumber = new Lotto(new HashSet<>(numbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        Lotto lotteryNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lotteryNumber = new Lotto(new HashSet<>(numbers));
         WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(9));
 
         assertThat(lottos.getLotteryLottoNumberResultCount(winLotto).isRank(lottoNumber, Rank.SIX)).isTrue();
@@ -48,10 +48,10 @@ public class LottosTest {
     @DisplayName("5개 당첨된 로또들 중 보너스 번호와 비교하여 Map에 LottoNumber와 Rank를 key, value로 반환")
     @Test
     void addBonusNumberMatchLotto() {
-        Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lottoNumber = new Lotto(new HashSet<>(numbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
+        Lotto lotteryNumber = new Lotto(new HashSet<>(lotteryNumbers));
         WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(6));
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
@@ -65,10 +65,10 @@ public class LottosTest {
     @Test
     void fetchIncome() {
         Money money = new Money(1_000);
-        Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
+        Lotto lottoNumber = new Lotto(new HashSet<>(numbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
-        Lotto lotteryNumber = new Lotto(new ArrayList<>(lotteryNumbers));
+        Lotto lotteryNumber = new Lotto(new HashSet<>(lotteryNumbers));
         WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(6));
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();

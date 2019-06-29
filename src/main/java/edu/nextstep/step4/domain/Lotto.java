@@ -1,8 +1,9 @@
 package edu.nextstep.step4.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,11 +22,11 @@ public class Lotto {
     private static final int LIST_VALID_SIZE = 6;
     private static final String COMMA = ",";
     private static final String SPACE = " ";
-    private List<Number> lotto;
+    private Set<Number> lotto;
 
-    public Lotto(List<Number> lotto) {
+    public Lotto(Set<Number> lotto) {
         validSize(lotto);
-        this.lotto = new ArrayList<>(lotto);
+        this.lotto = new HashSet<>(lotto);
     }
 
     public static Lotto createLotteryNumber(String inputLotteryNumber) {
@@ -41,10 +42,9 @@ public class Lotto {
         return this.lotto.stream();
     }
 
-    private void validSize(List<Number> lotteryNumber) {
+    private void validSize(Set<Number> lotteryNumber) {
         int numbers = lotteryNumber.stream()
                 .map(Number::getNumber)
-                .distinct()
                 .collect(Collectors.toList())
                 .size();
         if (numbers != LIST_VALID_SIZE) {
@@ -52,12 +52,12 @@ public class Lotto {
         }
     }
 
-    private static List<Number> splitLotteryNumber(String lottery) {
-        return Arrays.stream(lottery.replaceAll(SPACE, "").split(COMMA))
+    private static Set<Number> splitLotteryNumber(String lottery) {
+        return new HashSet<>(Arrays.stream(lottery.replaceAll(SPACE, "").split(COMMA))
                 .filter(splitString -> !"".equals(splitString))
                 .map(Integer::parseInt)
                 .map(number -> Number.of(number))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet()));
     }
 
     @Override
@@ -68,5 +68,10 @@ public class Lotto {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }
