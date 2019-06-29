@@ -5,9 +5,9 @@ import lotto.exception.ConflictLottoNumberException;
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto, int bonusNumber) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
             throw new ConflictLottoNumberException();
         }

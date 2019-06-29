@@ -7,13 +7,13 @@ import java.util.stream.Stream;
 
 public class LottoOutputView {
 
-  private static final String FORMAT_FOR_BUYING_LOTTOS = "%d 개를 구매했습니다.";
+  private static final String FORMAT_FOR_BUYING_LOTTOS = "수동으로 %d 장, 자동으로 %d 개를 구매했습니다.";
   private static final String FORMAT_FOR_RATE_OF_RETURN = "총 수익률은 %.2f 입니다.";
   private static final String REWARD_FORMAT_FOR_SECOND_PRIZE = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
   private static final String REWARD_FORMAT_FOR_COMMON_PRIZE = "%d개 일치 (%d원) - %d개";
 
-  public static void printCountOf(Lottos lottos) {
-    System.out.printf(FORMAT_FOR_BUYING_LOTTOS, lottos.getCount());
+  public static void printCountOf(Lottos manualLottos, Lottos autoLottos) {
+    System.out.printf(FORMAT_FOR_BUYING_LOTTOS, manualLottos.getCount(), autoLottos.getCount());
     printLineBreak();
   }
 

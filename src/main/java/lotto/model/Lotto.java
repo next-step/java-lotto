@@ -11,9 +11,9 @@ public class Lotto {
   static final int PRICE = 1_000;
   static final int COUNT_OF_NUMBERS = 6;
 
-  private final List<Integer> generatedNumbers;
+  private final List<LottoNumber> generatedNumbers;
 
-  public Lotto(List<Integer> generatedNumbers) {
+  public Lotto(List<LottoNumber> generatedNumbers) {
     if (hasConflictNumber(generatedNumbers)) {
       throw new DuplicatetLottoNumberException();
     }
@@ -21,16 +21,17 @@ public class Lotto {
   }
 
   public int getCountOfMatchingNumbers(Lotto winningLotto) {
-    return generatedNumbers.stream()
-            .reduce(0, (countOfMatchingNumber, lottoNumber) -> winningLotto.contains(lottoNumber) ? countOfMatchingNumber + 1 : countOfMatchingNumber);
+    return (int) generatedNumbers.stream()
+            .filter(winningLotto::contains)
+            .count();
   }
 
-  public boolean contains(int number) {
+  public boolean contains(LottoNumber number) {
     return this.generatedNumbers.contains(number);
   }
 
-  boolean hasConflictNumber(List<Integer> numbers) {
-    final Set<Integer> temp = new HashSet<>();
+  boolean hasConflictNumber(List<LottoNumber> numbers) {
+    final Set<LottoNumber> temp = new HashSet<>();
     return !numbers.stream().allMatch(temp::add);
   }
 

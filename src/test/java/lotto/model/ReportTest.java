@@ -1,11 +1,13 @@
 package lotto.model;
 
+import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -26,8 +28,8 @@ public class ReportTest {
     }
 
     private Lottos getLottos() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10));
-        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 10, 11));
+        Lotto lotto1 = new Lotto(LottoNumberGenerator.generate(Stream.of(1, 2, 3, 8, 9, 10)));
+        Lotto lotto2 = new Lotto(LottoNumberGenerator.generate(Stream.of(1, 2, 3, 4, 10, 11)));
         return new Lottos(Arrays.asList(lotto1, lotto2));
     }
 

@@ -8,16 +8,20 @@ public class LottoRunner {
 
   public static void main(String[] args) {
 
-    int paid = LottoInputView.askPurchaseAmount();
+    Money paidMoney = LottoInputView.askPurchaseAmount();
+    Quantity quantity = LottoInputView.askManualPurchaseQuantity(paidMoney);
+
+    Lottos manualLottos = LottoGenerator.generateManually(LottoInputView.askLottoNumbersToBuyManually(quantity, paidMoney));
 
     LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
-    Lottos lottos = lottoGenerator.generate(paid);
+    Lottos autoLottos = lottoGenerator.generate(paidMoney);
+    Lottos lottos = LottoGenerator.union(manualLottos, autoLottos);
 
-    LottoOutputView.printCountOf(lottos);
+    LottoOutputView.printCountOf(manualLottos, autoLottos);
     LottoOutputView.printPickedNumbersOf(lottos);
 
     Lotto lottoWithWinningNumbers = LottoInputView.askWinningNumbers();
-    int bonusNumber = LottoInputView.askBonusNumber();
+    LottoNumber bonusNumber = LottoInputView.askBonusNumber();
     WinningLotto winningLotto = new WinningLotto(lottoWithWinningNumbers, bonusNumber);
 
     Analyzer analyzer = new Analyzer(winningLotto);

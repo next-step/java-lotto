@@ -1,10 +1,14 @@
 package lotto.model;
 
+import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -16,15 +20,15 @@ public class AnalyzerTest {
 
     @BeforeEach
     void setUp() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1,3,5,6,9,11));
-        Lotto lotto2 = new Lotto(Arrays.asList(1,3,5,9,11,15));
+        Lotto lotto1 = new Lotto(LottoNumberGenerator.generate(Stream.of(1, 3, 5, 6, 9, 11)));
+        Lotto lotto2 = new Lotto(LottoNumberGenerator.generate(Stream.of(1, 3, 5, 9, 11, 15)));
 
         lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
-        List<Integer> winningNumbers = Arrays.asList(1,3,5,6,9);
+        List<LottoNumber> winningNumbers = LottoNumberGenerator.generate(Stream.of(1, 3, 5, 6, 9));
         Lotto lottoWithWinningNumbers = LottoGenerator.generate(winningNumbers);
 
-        int bonusNumber = 3;
+        LottoNumber bonusNumber = new LottoNumber(11);
         winningLotto = new WinningLotto(lottoWithWinningNumbers, bonusNumber);
         analyzer = new Analyzer(winningLotto);
     }
