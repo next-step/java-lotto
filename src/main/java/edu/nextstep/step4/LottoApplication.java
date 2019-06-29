@@ -19,6 +19,7 @@ import java.util.List;
  * create date  : 2019-06-25 01:02
  */
 public class LottoApplication {
+    private static final int CHECK_MANUAL_LOTTO = 0;
     public static void main(String[] args) {
         LottoApplication app = new LottoApplication();
         app.run();
@@ -34,12 +35,12 @@ public class LottoApplication {
 
         // 수동생성 있을 경우 입력받기
         List<String> manualLottos = new ArrayList<>();
-        if (money.checkPurchaseManual(manualCount)) {
+        if (manualCount > CHECK_MANUAL_LOTTO) {
             manualLottos = InputView.inputManualNumber(manualCount);
         }
 
         // 수동생성, 자동생성 개수 출력
-        InputView.printExtractNumber(manualCount, manualCount);
+        InputView.printExtractNumber(manualCount, money.getAutoNumber(manualCount));
 
         // 투입 금액에 따른 로또 개수발행
         Lottos lottosTikets = LottoStore.publishLotto(money, manualLottos);
