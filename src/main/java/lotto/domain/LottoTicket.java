@@ -12,7 +12,7 @@ public class LottoTicket {
 
 	private static final String TO_STRING_FORMAT = "[%s]";
 
-	LottoNumberSet numbers;
+	private LottoNumberSet numbers;
 
 	private LottoTicket(LottoNumberSet numbers){
 		// 기본생성자는 클래스메서드에서만 접근

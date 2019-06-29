@@ -29,7 +29,6 @@ public class LottoController {
 	}
 
 	public void invest(InputDialog input, WalletViewer viewer){
-
 		int investment = Integer.parseInt(input.execute("구입금액을 입력해 주세요."));
 		this.wallet = store.buy(investment);
 
@@ -37,7 +36,6 @@ public class LottoController {
 	}
 
 	public void lottery(InputDialog input, ResultViewer viewer) {
-
 		String inputValue = input.execute("지난 주 당첨 번호를 입력해 주세요.");
 		LottoNumberSet numbers = LottoNumberSet.of(new ExpressionSplitter(inputValue).split());
 

@@ -1,14 +1,11 @@
 package lotto.model;
 
-import common.NumberElement;
-
 public class WinNumber {
 	private LottoNumberSet primaryNumbers;
 
 	private LottoNumber bonusNumber;
 
 	public WinNumber(LottoNumberSet primaryNumbers, LottoNumber bonusNumber) {
-
 		if(bonusNumber == null){
 			throw new IllegalArgumentException("보너스 번호가 필요합니다.");
 		}

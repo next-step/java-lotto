@@ -4,7 +4,7 @@ import lotto.domain.LottoWallet;
 
 public class WalletViewer {
 
-	MessagePrinter printer;
+	private MessagePrinter printer;
 
 	public WalletViewer(MessagePrinter printer) {
 		this.printer = printer;

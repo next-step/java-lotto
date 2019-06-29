@@ -10,7 +10,6 @@ import lotto.view.out.WalletViewer;
 public class LottoRunner {
 
 	public static void main(String args[]) {
-
 		InputDialog dialog = new ConsoleDialog();
 		MessagePrinter printer = new ConsolePrinter();
 

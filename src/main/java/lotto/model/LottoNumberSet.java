@@ -2,9 +2,11 @@ package lotto.model;
 
 import common.NumberElement;
 import lotto.exception.DuplicateNumberException;
-import lotto.exception.OutOfCountException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumberSet {
@@ -14,7 +16,6 @@ public class LottoNumberSet {
 	List<LottoNumber> numbers;
 
 	public LottoNumberSet(List<LottoNumber> numbers) {
-
 		if(numbers.size() != LottoRule.MAX_COUNT) {
 			throw new IllegalArgumentException("로또는 6개의 번호가 필요합니다.");
 		}
@@ -25,7 +26,6 @@ public class LottoNumberSet {
 
 
 	private void add(LottoNumber number) {
-
 		if(numbers == null){
 			this.numbers = new ArrayList<>();
 		}
@@ -35,7 +35,6 @@ public class LottoNumberSet {
 		}
 
 		numbers.add(number);
-
 	}
 
 
@@ -53,7 +52,6 @@ public class LottoNumberSet {
 	 * @return
 	 */
 	public List<NumberElement> matchNumbers(LottoNumberSet collection) {
-
 		List<NumberElement> matched = this.numbers
 				.stream()
 				.filter(number -> collection.contains(number))
