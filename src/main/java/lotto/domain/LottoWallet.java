@@ -57,7 +57,7 @@ public class LottoWallet {
 
 		tickets.stream()
 				.forEach(ticket -> {
-					report.increment(ticket.checkWin(winNumbers));
+					report.increment(ticket.checkWin(winNumbers, bonusNumber));
 				});
 
 		return report;

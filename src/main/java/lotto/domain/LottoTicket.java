@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import common.NumberElement;
 import lotto.model.LottoNumberCollection;
 import lotto.model.LottoResult;
 import lotto.model.LottoRule;
@@ -41,12 +42,25 @@ public class LottoTicket {
 
 
 	public LottoResult checkWin(NumberElementCollection winNumbers) {
+		return this.checkWin(winNumbers, null);
+	}
+
+	public LottoResult checkWin(NumberElementCollection winNumbers, NumberElement bonusNumber) {
 		if(winNumbers.size() < LottoRule.MAX_COUNT){
 			throw new IllegalArgumentException("당첨번호의 개수가 부족합니다.");
 		}
 
 		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumbers);
-		return LottoResult.valueOfMatchedCount(matchedNumbers.size());
+		LottoResult resultBasicMatch = LottoResult.valueOfMatchedCount(matchedNumbers.size());
+
+		if(resultBasicMatch.equals(LottoResult.WIN_3RD)
+				&& bonusNumber != null
+				&& this.numbers.contains(bonusNumber)){
+
+			return LottoResult.WIN_2ND;
+		}
+
+		return resultBasicMatch;
 	}
 
 	public boolean verify() {
