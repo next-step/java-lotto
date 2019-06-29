@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,22 +51,10 @@ public class CalculatorTest {
         assertThat(calculatedValue).isEqualTo(expectedResult);
     }
 
-    @Test
-    @DisplayName("null이 입력되면 0으로 계산한다.")
-    void sum_Null_Calculated() {
-        int calculatedValue = calculator.calculate(null);
-        assertThat(calculatedValue).isEqualTo(0);
-    }
-
     @ParameterizedTest
-    @ValueSource(strings = {
-            "",
-            " ",
-            "   ",
-            "       "
-    })
-    @DisplayName("빈 문자열이 입력되면 0으로 계산한다.")
-    void sum_Empty_Calculated(String input) {
+    @NullAndEmptySource
+    @DisplayName("null 혹은 빈문자열이 입력되면 0으로 계산한다.")
+    void sum_Null_Calculated(String input) {
         int calculatedValue = calculator.calculate(input);
         assertThat(calculatedValue).isEqualTo(0);
     }
