@@ -14,6 +14,11 @@ public class LottoNumberSet {
 	List<LottoNumber> numbers;
 
 	public LottoNumberSet(List<LottoNumber> numbers) {
+
+		if(numbers.size() != LottoRule.MAX_COUNT) {
+			throw new IllegalArgumentException("로또는 6개의 번호가 필요합니다.");
+		}
+
 		numbers.stream().forEach(this::add);
 		Collections.sort(this.numbers);
 	}
@@ -23,10 +28,6 @@ public class LottoNumberSet {
 
 		if(numbers == null){
 			this.numbers = new ArrayList<>();
-		}
-
-		if(numbers.size() == LottoRule.MAX_COUNT){
-			throw new OutOfCountException();
 		}
 
 		if(numbers.contains(number)){

@@ -34,7 +34,7 @@ class LottoTicketTest {
 	void addOverCount() {
 		int[] numbers = {1, 2, 3, 4, 5, 6, 7};
 
-		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
 			LottoTicket.of(numbers);
 		});
 	}
@@ -73,17 +73,6 @@ class LottoTicketTest {
 				Arguments.of(new int[]{1, 2, 3, 4, 5, 12}, 45, LottoResult.WIN_3RD),	// 2등
 				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, 45, LottoResult.WIN_1ST)		// 1등
 		);
-	}
-
-	@DisplayName("기준에 맞지 않는 당첨번호 (개수 부족)")
-	@Test
-	void illegalWinNumbers() {
-		// Arrange
-		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
-		LottoNumberSet numbers = LottoNumberSet.of(new int[]{1, 2, 3, 4, 5});
-
-		// Action & Assertion
-		assertThatIllegalArgumentException().isThrownBy(() -> {new WinNumber(numbers, new LottoNumber(45));});
 	}
 
 	@DisplayName("toString 반환 테스트")
