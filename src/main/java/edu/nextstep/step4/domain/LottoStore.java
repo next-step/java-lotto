@@ -17,13 +17,11 @@ import java.util.stream.Collectors;
  */
 public class LottoStore {
 
-    public static Lottos publishLotto(Money money, List<String> manualLottos) {
+    public static Lottos publishLotto(Money money, List<String> manualLottos, LottoGeneratorImpl lotto) {
         int manualCount = manualLottos.size();
         int issueNumber = calculateIssueNumber(money, manualCount);
 
-        List<Lotto> exLotto = manualLottos.stream()
-                .map(manualLotto -> Lotto.createLotteryNumber(manualLotto))
-                .collect(Collectors.toList());
+        List<Lotto> exLotto = lotto.generate(manualLottos);
 
         for (int i = 0; i < issueNumber; i++) {
             exLotto.add(issueLottoNumber());

@@ -43,7 +43,7 @@ public class LottoApplication {
         InputView.printExtractNumber(manualCount, money.getAutoNumber(manualCount));
 
         // 투입 금액에 따른 로또 개수발행
-        Lottos lottosTikets = LottoStore.publishLotto(money, manualLottos);
+        Lottos lottosTikets = LottoStore.publishLotto(money, manualLottos, new LottoGeneratorImpl());
 
         // 발행된 로또 출력
         ResultView.printLottoInfo(lottosTikets);
