@@ -1,6 +1,6 @@
-package lotto.view.domain;
+package lotto.domain;
 
-import lotto.view.model.LottoRule;
+import lotto.model.LottoRule;
 
 import java.util.Collections;
 import java.util.List;

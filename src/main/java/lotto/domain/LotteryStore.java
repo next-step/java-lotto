@@ -1,4 +1,4 @@
-package lotto.view.domain;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;

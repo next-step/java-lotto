@@ -1,7 +1,7 @@
 package lotto.view.out;
 
-import lotto.view.model.LottoResult;
-import lotto.view.domain.ResultReport;
+import lotto.model.LottoResult;
+import lotto.domain.ResultReport;
 
 public class ResultViewer {
 	MessagePrinter printer;

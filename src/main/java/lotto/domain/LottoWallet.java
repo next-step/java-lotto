@@ -1,5 +1,6 @@
-package lotto.view.domain;
+package lotto.domain;
 
+import common.NumberElement;
 import common.NumberElementCollection;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class LottoWallet {
 				.collect(Collectors.joining(NEW_LINE));
 	}
 
-	public ResultReport result(NumberElementCollection winNumbers) {
+	public ResultReport result(NumberElementCollection winNumbers, NumberElement bonusNumber) {
 		ResultReport report = new ResultReport();
 
 		tickets.stream()
