@@ -55,7 +55,7 @@ public class LottosTest {
         WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(6));
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
-        lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+        lotteryInfo.put(lottoNumber, Rank.matchCheck(winLotto.compareMatchNumberCount(lottoNumber)));
         WinInfo winInfo = new WinInfo(lotteryInfo);
 
         assertThat(lottos.addBonusNumberMatchLotto(winInfo, winLotto).isRank(lottoNumber, Rank.BONUS)).isTrue();
@@ -71,11 +71,11 @@ public class LottosTest {
         WinLotto winLotto = WinLotto.of(lotteryNumber, Number.of(6));
 
         Map<Lotto, Rank> lotteryInfo = new HashMap<>();
-        lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+        lotteryInfo.put(lottoNumber, Rank.matchCheck(winLotto.compareMatchNumberCount(lottoNumber)));
         WinInfo winInfo = new WinInfo(lotteryInfo);
 
         WinInfo incomeInfo = lottos.addBonusNumberMatchLotto(winInfo, winLotto);
-        lotteryInfo.put(lottoNumber, Rank.matchCheck(lottoNumber.compareMatchNumberCount(lotteryNumber)));
+        lotteryInfo.put(lottoNumber, Rank.matchCheck(winLotto.compareMatchNumberCount(lottoNumber)));
 
         assertThat(lottos.fetchIncome(incomeInfo)).isEqualTo(30_000_000);
     }

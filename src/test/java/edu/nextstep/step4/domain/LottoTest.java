@@ -69,19 +69,6 @@ public class LottoTest {
         assertThat(lotto.contains(Number.of(6))).isTrue();
     }
 
-    @DisplayName("ExtractionNumber 객체데이터의 당첨된 카운트 반환는다.")
-    @Test
-    void contains() {
-        numbers.add(Number.of(6));
-        Lotto lottoNumber = new Lotto(numbers);
-
-        List<Number> compareNumber = new ArrayList<>(
-                Arrays.asList(Number.of(2), Number.of(4), Number.of(6), Number.of(8), Number.of(10), Number.of(12)));
-        Lotto exNumber = new Lotto(compareNumber);
-
-        assertThat(lottoNumber.compareMatchNumberCount(exNumber)).isEqualTo(3);
-    }
-
     @DisplayName("당첨번호 생성하는 기능")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6})
