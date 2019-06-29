@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import common.NumberElement;
-import common.NumberElementCollection;
 import lotto.model.WinNumber;
 
 import java.util.ArrayList;

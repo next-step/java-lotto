@@ -2,11 +2,11 @@ package common;
 
 public class ExpressionParser {
 
-    public static NumberElementCollection parse(String expression) {
+    public static NumberCollection parse(String expression) {
 
         ExpressionSplitter expressionSplitter = new ExpressionSplitter(expression);
         String[] elements = expressionSplitter.split();
 
-        return new NumberElementCollection(elements);
+        return new NumberCollection(elements);
     }
 }
