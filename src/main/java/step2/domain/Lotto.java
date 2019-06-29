@@ -29,7 +29,7 @@ public class Lotto {
         return LottoGenerator.generate();
     }
 
-    public static Lotto convertNumbersToLotto(List<Integer> numbers) {
+    public static Lotto create(List<Integer> numbers) {
         return new Lotto(numbers.stream()
                                 .map(LottoNumber::new)
                                 .collect(Collectors.toList()));
@@ -62,19 +62,11 @@ public class Lotto {
     }
 
     private LottoRank matchBonusNumber(final LottoRank rank, final BonusNumber bonusNumber) {
-        validateBonusTrack(rank);
-
         if (this.lottoNumbers.contains(bonusNumber)) {
             return LottoRank.SECOND;
         }
 
         return rank;
-    }
-
-    private void validateBonusTrack(final LottoRank rank) {
-        if (!LottoRank.THIRD.equals(rank)) {
-            throw new IllegalArgumentException("보너스 번호 매칭은 5개 번호를 맞추었을때 가능합니다.");
-        }
     }
 
     @Override

@@ -1,8 +1,8 @@
 package step2.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.function.Function;
+
+import step2.dto.LottosDTO;
 
 public class LottoStore {
     public static final Money LOTTO_PRICE = new Money(1_000L);
@@ -14,40 +14,22 @@ public class LottoStore {
         return INSTANCE;
     }
 
-    public Lottos buyLotto(final Money money) {
+    public Lottos salesLottos(final Money money, final Function<LottoQuantity, Lottos> factory) {
         validateMoney(money);
-        final int quantity = getLottoQuantity(money);
-        final List<Lotto> lottos = createLottos(quantity);
-        return salesLottos(lottos, quantity);
+        final LottoQuantity quantity = money.getLottoQuantity(LOTTO_PRICE);
+        return factory.apply(quantity);
     }
 
-    public Lottos buyLotto(final Money money, Lottos selectedNumberLottos) {
+    public Lottos salesLottos(final Money money, LottosDTO lottosDTO, final Function<LottosDTO, Lottos> factory) {
         validateMoney(money);
-        final Money cost = money.getCost(LOTTO_PRICE, selectedNumberLottos.size());
-        final Money restMoney = money.subtractMoney(cost);
-
-        final int quantity = getLottoQuantity(restMoney);
-        final List<Lotto> lottos = createLottos(quantity);
-        return selectedNumberLottos.appendLottos(salesLottos(lottos, quantity));
+        final LottoQuantity quantity = money.getLottoQuantity(LOTTO_PRICE);
+        quantity.validateLottoSize(lottosDTO.getLottos().size());
+        return factory.apply(lottosDTO);
     }
 
     private void validateMoney(final Money money) {
         if (money.getMoney() < LOTTO_PRICE.getMoney()) {
             throw new IllegalArgumentException("로또는 한 개당 " + LOTTO_PRICE.getMoney() + "원 입니다.");
         }
-    }
-
-    private int getLottoQuantity(final Money money) {
-        return (int) (money.getMoney() / LOTTO_PRICE.getMoney());
-    }
-
-    private List<Lotto> createLottos(final int quantity) {
-        return IntStream.range(0, quantity)
-                        .mapToObj(i -> Lotto.create())
-                        .collect(Collectors.toList());
-    }
-
-    private Lottos salesLottos(final List<Lotto> lottos, final int quantity) {
-        return new Lottos(lottos.subList(0, quantity));
     }
 }

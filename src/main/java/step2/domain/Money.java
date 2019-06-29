@@ -21,12 +21,16 @@ public class Money {
         return money;
     }
 
+    public Money multiplyMoney(final int size) {
+        return new Money(money * size);
+    }
+
     public Money subtractMoney(final Money money) {
         return new Money(this.money - money.money);
     }
 
-    public Money getCost(final Money lottoPrice, final int count) {
-        return new Money(lottoPrice.money * count);
+    public LottoQuantity getLottoQuantity(final Money lottoPrice) {
+        return new LottoQuantity(this.money / lottoPrice.getMoney());
     }
 
     @Override
