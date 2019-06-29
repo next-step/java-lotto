@@ -49,7 +49,8 @@ public class LottoApplication {
 
         // 당첨번호 + 보너스 번호 객체
         Lotto lottery = Lotto.createLotteryNumber(InputView.inputLotteryNumber());
-        Number bonusNumber = Number.of(InputView.inputBonusNumber());
+        int number = Integer.parseInt(InputView.inputBonusNumber());
+        Number bonusNumber = Number.of(number);
         WinLotto winLotto = WinLotto.of(lottery, bonusNumber);
 
         // 보너스 번호와 당첨번호 중복 여부 확인
