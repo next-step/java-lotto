@@ -78,10 +78,10 @@ class LottoWalletTest {
 
 		// Assertion
 		assertThat(report.countOfResult(LottoResult.FAIL)).isEqualTo(5);
-		assertThat(report.countOfResult(LottoResult.WIN_4TH)).isEqualTo(4);
-		assertThat(report.countOfResult(LottoResult.WIN_3RD)).isEqualTo(3);
-		assertThat(report.countOfResult(LottoResult.WIN_2ND)).isEqualTo(2);
-		assertThat(report.countOfResult(LottoResult.WIN_BONUS)).isEqualTo(1);
+		assertThat(report.countOfResult(LottoResult.WIN_5TH)).isEqualTo(4);
+		assertThat(report.countOfResult(LottoResult.WIN_4TH)).isEqualTo(3);
+		assertThat(report.countOfResult(LottoResult.WIN_3RD)).isEqualTo(2);
+		assertThat(report.countOfResult(LottoResult.WIN_2ND)).isEqualTo(1);
 		assertThat(report.countOfResult(LottoResult.WIN_1ST)).isEqualTo(1);
 	}
 }

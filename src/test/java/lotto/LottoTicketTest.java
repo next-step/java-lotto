@@ -72,10 +72,10 @@ class LottoTicketTest {
 	private static Stream<Arguments> provideWinNumbers(){
 		return Stream.of(
 				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, LottoResult.FAIL),	// 낙첨
-				Arguments.of(new int[]{2, 4, 6, 43, 44, 45}, LottoResult.WIN_4TH),	// 4등
-				Arguments.of(new int[]{1, 2, 3, 43, 44, 45}, LottoResult.WIN_4TH),	// 4등
-				Arguments.of(new int[]{1, 2, 3, 4, 44, 45}, LottoResult.WIN_3RD),	// 3등
-				Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, LottoResult.WIN_2ND),	// 2등
+				Arguments.of(new int[]{2, 4, 6, 43, 44, 45}, LottoResult.WIN_5TH),	// 4등
+				Arguments.of(new int[]{1, 2, 3, 43, 44, 45}, LottoResult.WIN_5TH),	// 4등
+				Arguments.of(new int[]{1, 2, 3, 4, 44, 45}, LottoResult.WIN_4TH),	// 3등
+				Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, LottoResult.WIN_3RD),	// 2등
 				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, LottoResult.WIN_1ST)		// 1등
 		);
 	}
