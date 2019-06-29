@@ -1,12 +1,10 @@
 package camp.nextstep.edu.lotto.view;
 
 import camp.nextstep.edu.lotto.domain.Lotteries;
-import camp.nextstep.edu.lotto.domain.RewardType;
-
-import java.util.Map;
+import camp.nextstep.edu.lotto.domain.LotteriesReward;
 
 public interface ResultView {
     void printPurchasedLotteries(Lotteries lotteries);
 
-    void printResults(Map<RewardType, Integer> rewardMap, double earningsRate);
+    void printResults(LotteriesReward lotteriesReward, double earningsRate);
 }

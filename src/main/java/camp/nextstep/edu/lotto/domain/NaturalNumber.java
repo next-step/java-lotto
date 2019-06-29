@@ -31,6 +31,14 @@ public class NaturalNumber implements Comparable<NaturalNumber> {
     }
 
     @Override
+    public int compareTo(NaturalNumber naturalNumber) {
+        if (naturalNumber == null) {
+            throw new IllegalArgumentException("'naturalNumber' must not be null");
+        }
+        return Integer.compare(value, naturalNumber.value);
+    }
+
+    @Override
     public String toString() {
         return "NaturalNumber{" +
                 "value=" + value +
@@ -48,13 +56,5 @@ public class NaturalNumber implements Comparable<NaturalNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public int compareTo(NaturalNumber naturalNumber) {
-        if (naturalNumber == null) {
-            throw new IllegalArgumentException("'naturalNumber' must not be null");
-        }
-        return Integer.compare(value, naturalNumber.value);
     }
 }

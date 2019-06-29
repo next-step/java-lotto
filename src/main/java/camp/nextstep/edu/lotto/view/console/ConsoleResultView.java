@@ -1,18 +1,15 @@
-package camp.nextstep.edu.lotto.view;
+package camp.nextstep.edu.lotto.view.console;
 
 import camp.nextstep.edu.lotto.domain.Lotteries;
-import camp.nextstep.edu.lotto.domain.Lottery;
+import camp.nextstep.edu.lotto.domain.LotteriesReward;
 import camp.nextstep.edu.lotto.domain.RewardType;
+import camp.nextstep.edu.lotto.view.ResultView;
+import camp.nextstep.edu.lotto.view.console.formatter.Formatter;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConsoleResultView implements ResultView {
 
-    private static final String PREFIX_LOTTERY = "[";
-    private static final String POSTFIX_LOTTERY = "]";
-    private static final String DELIMITER_LOTTERY = ", ";
-    private static final String DELIMITER_LOTTERIES = "\n";
     private static final String DELIMITER_REWARDS = "\n";
     private static final String MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES = "%d개를 구매했습니다.";
     private static final String MESSAGE_FORMAT_OF_ALL_LOTTERIES_RESULT = "\n당첨 통계\n" +
@@ -20,27 +17,25 @@ public class ConsoleResultView implements ResultView {
             "%s\n" +
             "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String MESSAGE_FORMAT_OF_ONE_LOTTERY_RESULT = "%d개 일치 (%d원)- %d개";
+    private static final String MESSAGE_FORMAT_OF_BONUS_LOTTERY_RESULT = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
+
+    private final Formatter<Lotteries> lotteriesFormatter;
+
+    public ConsoleResultView(Formatter<Lotteries> lotteriesFormatter) {
+        this.lotteriesFormatter = lotteriesFormatter;
+    }
 
     @Override
     public void printPurchasedLotteries(Lotteries lotteries) {
         final String formattedMessage = String.format(MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES, lotteries.size());
-        final String formattedLotteries = lotteries.stream()
-                .map(this::formatLottery)
-                .collect(Collectors.joining(DELIMITER_LOTTERIES));
+        final String formattedLotteries = lotteriesFormatter.format(lotteries);
         System.out.println(formattedMessage);
         System.out.println(formattedLotteries);
     }
 
-    private String formatLottery(Lottery lottery) {
-        return lottery.stream()
-                .sorted()
-                .map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER_LOTTERY, PREFIX_LOTTERY, POSTFIX_LOTTERY));
-    }
-
     @Override
-    public void printResults(Map<RewardType, Integer> rewardMap, double earningsRate) {
-        final String formattedRewards = rewardMap.entrySet()
+    public void printResults(LotteriesReward lotteriesReward, double earningsRate) {
+        final String formattedRewards = lotteriesReward.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey() != RewardType.UNKNOWN)
                 .map(entry -> {
@@ -62,6 +57,9 @@ public class ConsoleResultView implements ResultView {
     private String formatLotteryResult(RewardType rewardType, int numberOfLotteries) {
         final int score = rewardType.getScore();
         final long reward = rewardType.getReward();
+        if (rewardType == RewardType.FIVE_NUMBERS_AND_BONUS_MATCHED) {
+            return String.format(MESSAGE_FORMAT_OF_BONUS_LOTTERY_RESULT, score, reward, numberOfLotteries);
+        }
         return String.format(MESSAGE_FORMAT_OF_ONE_LOTTERY_RESULT, score, reward, numberOfLotteries);
     }
 }

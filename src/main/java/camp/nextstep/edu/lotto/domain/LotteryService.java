@@ -1,12 +1,11 @@
 package camp.nextstep.edu.lotto.domain;
 
-import java.util.Map;
 import java.util.Set;
 
 public interface LotteryService {
     Lotteries purchase(int investment);
 
-    Map<RewardType, Integer> getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet);
+    LotteriesReward getResult(Lotteries purchasedLotteries, Set<Integer> winningNumberSet, Integer bonusNumber);
 
-    double calculateEarningsRate(int investment, Map<RewardType, Integer> rewardMap);
+    double calculateEarningsRate(int investment, LotteriesReward lotteriesReward);
 }
