@@ -1,11 +1,11 @@
 package lotto;
 
 import common.NumberElement;
-import common.NumberElementCollection;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWallet;
 import lotto.domain.ResultReport;
-import lotto.model.LottoNumberCollection;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumberSet;
 import lotto.model.LottoResult;
 import lotto.model.WinNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -67,13 +67,7 @@ class LottoWalletTest {
 
 		LottoWallet wallet = new LottoWallet(tickets, 0);
 
-		int[] winNumbers = new int[]{1, 2, 3, 4, 5, 6};
-		LottoNumberCollection numbers = new LottoNumberCollection();
-		for(int number : winNumbers){
-			numbers.add(number);
-		}
-
-		WinNumber winNumber = new WinNumber(numbers, new NumberElement(45));
+		WinNumber winNumber = new WinNumber(LottoNumberSet.of(new int[]{1, 2, 3, 4, 5, 6}), new LottoNumber(45));
 
 		// Action
 		ResultReport report = wallet.result(winNumber);

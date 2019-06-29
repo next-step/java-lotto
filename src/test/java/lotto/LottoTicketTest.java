@@ -3,13 +3,9 @@ package lotto;
 import common.NumberElement;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfCountException;
-import lotto.exception.OutOfMaxNumberException;
-import common.NumberElementCollection;
+import lotto.exception.OutOfBoundLottoNumberException;
 import lotto.domain.LottoTicket;
-import lotto.model.LottoNumberCollection;
-import lotto.model.LottoResult;
-import lotto.model.LottoRule;
-import lotto.model.WinNumber;
+import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -48,7 +44,7 @@ class LottoTicketTest {
 	void addOverLimit() {
 		int[] numbers = {1, 2, 3, 4, 5, LottoRule.MAX_NUMBER + 1};
 
-		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
+		assertThatExceptionOfType(OutOfBoundLottoNumberException.class).isThrownBy(() -> {
 			LottoTicket.of(numbers);
 		});
 	}
@@ -59,13 +55,7 @@ class LottoTicketTest {
 	void checkWin(int[] winNumbers, int bonus, LottoResult expectResult) {
 		// Arrange
 		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
-
-		NumberElementCollection numbers = new NumberElementCollection(6);
-		for(int number : winNumbers){
-			numbers.add(number);
-		}
-
-		WinNumber winNumber = new WinNumber(LottoNumberCollection.of(numbers), new NumberElement(bonus));
+		WinNumber winNumber = new WinNumber(LottoNumberSet.of(winNumbers), new LottoNumber(bonus));
 
 		// Action
 		LottoResult result = ticket.checkWin(winNumber);
@@ -90,15 +80,10 @@ class LottoTicketTest {
 	void illegalWinNumbers() {
 		// Arrange
 		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
-
-		int[] winNumbers = new int[]{1, 2, 3, 4, 5};
-		LottoNumberCollection numbers = new LottoNumberCollection();
-		for(int number : winNumbers){
-			numbers.add(number);
-		}
+		LottoNumberSet numbers = LottoNumberSet.of(new int[]{1, 2, 3, 4, 5});
 
 		// Action & Assertion
-		assertThatIllegalArgumentException().isThrownBy(() -> {new WinNumber(numbers, new NumberElement(45));});
+		assertThatIllegalArgumentException().isThrownBy(() -> {new WinNumber(numbers, new LottoNumber(45));});
 	}
 
 	@DisplayName("toString 반환 테스트")

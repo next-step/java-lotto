@@ -1,17 +1,18 @@
 package lotto;
 
 import common.ExpressionParser;
+import common.ExpressionSplitter;
 import common.NumberElement;
 import lotto.domain.LotteryStore;
 import lotto.domain.LottoWallet;
 import lotto.domain.ResultReport;
 import lotto.domain.TicketMachine;
-import lotto.model.LottoNumberCollection;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumberSet;
 import lotto.model.WinNumber;
 import lotto.view.in.InputDialog;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
-import common.NumberElementCollection;
 
 public class LottoController {
 
@@ -38,9 +39,9 @@ public class LottoController {
 	public void lottery(InputDialog input, ResultViewer viewer) {
 
 		String inputValue = input.execute("지난 주 당첨 번호를 입력해 주세요.");
-		LottoNumberCollection numbers = LottoNumberCollection.of(ExpressionParser.parse(inputValue));
+		LottoNumberSet numbers = LottoNumberSet.of(new ExpressionSplitter(inputValue).split());
 
-		NumberElement bonusNumber = new NumberElement(input.execute("보너스 볼을 입력해 주세요."));
+		LottoNumber bonusNumber = new LottoNumber(input.execute("보너스 볼을 입력해 주세요."));
 		WinNumber winNumber = new WinNumber(numbers, bonusNumber);
 
 		ResultReport result = wallet.result(winNumber);

@@ -38,9 +38,7 @@ public class NumberElementCollection {
     }
 
     public void add(int number) {
-        if(maxElements > NO_LIMIT && elements.size() == maxElements){
-            throw new OutOfCountException();
-        }
+
 
         elements.add(new NumberElement(number));
     }
@@ -68,6 +66,8 @@ public class NumberElementCollection {
         return collection;
     }
 
+
+    // TODO : 리펙토링 과정에서 삭제
     public List<NumberElement> getElements() {
         return elements;
     }

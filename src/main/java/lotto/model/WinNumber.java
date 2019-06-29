@@ -3,11 +3,11 @@ package lotto.model;
 import common.NumberElement;
 
 public class WinNumber {
-	private LottoNumberCollection primaryNumbers;
+	private LottoNumberSet primaryNumbers;
 
-	private NumberElement bonusNumber;
+	private LottoNumber bonusNumber;
 
-	public WinNumber(LottoNumberCollection primaryNumbers, NumberElement bonusNumber) {
+	public WinNumber(LottoNumberSet primaryNumbers, LottoNumber bonusNumber) {
 
 		if(primaryNumbers.size() < LottoRule.MAX_COUNT){
 			throw new IllegalArgumentException("당첨번호의 개수가 부족합니다.");
@@ -21,11 +21,11 @@ public class WinNumber {
 		this.bonusNumber = bonusNumber;
 	}
 
-	public LottoNumberCollection getPrimary() {
+	public LottoNumberSet getPrimary() {
 		return primaryNumbers;
 	}
 
-	public NumberElement getBonus() {
+	public LottoNumber getBonus() {
 		return bonusNumber;
 	}
 }
