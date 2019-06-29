@@ -41,20 +41,26 @@ class LottoWalletTest {
 		// Arrange
 		List<LottoTicket> tickets = new ArrayList<>();
 
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 	13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 	13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,   4, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 12, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	5, 45}));
+
 		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	5, 	6}));
 
 		LottoWallet wallet = new LottoWallet(tickets, 0);
@@ -65,14 +71,17 @@ class LottoWalletTest {
 			numbers.add(number);
 		}
 
+		NumberElement bonusNumber = new NumberElement(45);
+
 		// Action
-		ResultReport report = wallet.result(numbers);
+		ResultReport report = wallet.result(numbers, bonusNumber);
 
 		// Assertion
 		assertThat(report.countOfResult(LottoResult.FAIL)).isEqualTo(5);
 		assertThat(report.countOfResult(LottoResult.WIN_4TH)).isEqualTo(4);
 		assertThat(report.countOfResult(LottoResult.WIN_3RD)).isEqualTo(3);
 		assertThat(report.countOfResult(LottoResult.WIN_2ND)).isEqualTo(2);
+		assertThat(report.countOfResult(LottoResult.WIN_BONUS)).isEqualTo(1);
 		assertThat(report.countOfResult(LottoResult.WIN_1ST)).isEqualTo(1);
 	}
 }

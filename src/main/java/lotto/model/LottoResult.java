@@ -8,10 +8,11 @@ import java.util.Map;
 public enum LottoResult {
 
 	FAIL(0),
-	WIN_4TH(5000, "3개 일치"),
-	WIN_3RD(50000, "4개 일치"),
-	WIN_2ND(1500000, "5개 일치"),
-	WIN_1ST(2000000000, "6개 일치");
+	WIN_4TH(5_000, "3개 일치"),
+	WIN_3RD(50_000, "4개 일치"),
+	WIN_2ND(1_500_000, "5개 일치"),
+	WIN_BONUS(30_000_000, "5개 일치, 보너스 볼 일치"),
+	WIN_1ST(2_000_000_000, "6개 일치");
 
 	private static Map<Integer, LottoResult> resultMap;
 
@@ -52,6 +53,6 @@ public enum LottoResult {
 	}
 
 	public static List<LottoResult> winResults(){
-		return Arrays.asList(WIN_4TH, WIN_3RD, WIN_2ND, WIN_1ST);
+		return Arrays.asList(WIN_4TH, WIN_3RD, WIN_2ND, WIN_BONUS, WIN_1ST);
 	}
 }

@@ -38,8 +38,10 @@ public class LottoController {
 		String inputValue = input.execute("지난 주 당첨 번호를 입력해 주세요.");
 		NumberElementCollection numbers = ExpressionParser.parse(inputValue);
 
+		NumberElement bonusNumber = new NumberElement(input.execute("보너스 볼을 입력해 주세요."));
+
 		int investment = wallet.ticketCount() * LotteryStore.PRICE_OF_TICKET; // 투자금 (티켓구입액)
-		ResultReport result = wallet.result(numbers);
+		ResultReport result = wallet.result(numbers, bonusNumber);
 
 		viewer.render(result, investment);
 	}
