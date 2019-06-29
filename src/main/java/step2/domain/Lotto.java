@@ -1,9 +1,13 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static step2.domain.LottoConstant.LOTTO_NUMBERS;
+import static step2.domain.LottoConstant.LOTTO_NUMBER_SIZE;
 
 public class Lotto {
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
@@ -26,7 +30,8 @@ public class Lotto {
     }
 
     public static Lotto create() {
-        return LottoGenerator.generate();
+        Collections.shuffle(LOTTO_NUMBERS);
+        return new Lotto(LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE));
     }
 
     public static Lotto create(List<Integer> numbers) {
