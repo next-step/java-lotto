@@ -64,6 +64,7 @@ public class LottosTest {
     @DisplayName("당첨 금액 반환")
     @Test
     void fetchIncome() {
+        Money money = new Money(1_000);
         Lotto lottoNumber = new Lotto(new ArrayList<>(numbers));
         Lottos lottos = new Lottos(Arrays.asList(lottoNumber));
 
@@ -77,6 +78,6 @@ public class LottosTest {
         WinInfo incomeInfo = lottos.addBonusNumberMatchLotto(winInfo, winLotto);
         lotteryInfo.put(lottoNumber, Rank.matchCheck(winLotto.compareMatchNumberCount(lottoNumber)));
 
-        assertThat(lottos.fetchIncome(incomeInfo)).isEqualTo(30_000_000);
+        assertThat(lottos.fetchIncome(incomeInfo, money)).isEqualTo(30_000);
     }
 }

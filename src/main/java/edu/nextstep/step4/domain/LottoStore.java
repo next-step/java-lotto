@@ -18,7 +18,8 @@ import java.util.stream.Collectors;
 public class LottoStore {
 
     public static Lottos publishLotto(Money money, List<String> manualLottos) {
-        int issueNumber = money.getNumberOfExtract();
+        int manualCount = manualLottos.size();
+        int issueNumber = calculateIssueNumber(money, manualCount);
 
         List<Lotto> exLotto = manualLottos.stream()
                 .map(manualLotto -> Lotto.createLotteryNumber(manualLotto))
@@ -36,4 +37,7 @@ public class LottoStore {
                 .collect(Collectors.toList()));
     }
 
+    private static int calculateIssueNumber(Money money, int manualCount) {
+        return money.getIssueNumber() - manualCount;
+    }
 }

@@ -30,16 +30,16 @@ public class LottoApplication {
         // 수동생성 개수
         int manualCount = InputView.inputManualCount();
         // Money 객체 생성
-        Money money = new Money(inputMoney, manualCount);
+        Money money = new Money(inputMoney);
 
         // 수동생성 있을 경우 입력받기
         List<String> manualLottos = new ArrayList<>();
-        if (money.getNumberOfManual() > 0) {
+        if (money.checkPurchaseManual(manualCount)) {
             manualLottos = InputView.inputManualNumber(manualCount);
         }
 
         // 수동생성, 자동생성 개수 출력
-        InputView.printExtractNumber(manualCount, money.getNumberOfExtract());
+        InputView.printExtractNumber(manualCount, manualCount);
 
         // 투입 금액에 따른 로또 개수발행
         Lottos lottosTikets = LottoStore.publishLotto(money, manualLottos);
@@ -63,7 +63,7 @@ public class LottoApplication {
         ResultView.printLotteryCount(winInfo);
 
         // 당첨 금액
-        double income = (double) lottosTikets.fetchIncome(winInfo) / (double) money.getInputMoney();
+        double income = lottosTikets.fetchIncome(winInfo, money);
         ResultView.printIncome(income);
     }
 }

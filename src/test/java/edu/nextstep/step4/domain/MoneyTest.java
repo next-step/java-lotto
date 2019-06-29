@@ -18,40 +18,18 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
  */
 public class MoneyTest {
 
-    @DisplayName("투입금액 / 10000을 통해 발행 개수를 확인한다.")
-    @Test
-    void getNumberOfExtract() {
-        Money money = new Money(10_000, 0);
-        assertThat(money.getNumberOfExtract()).isEqualTo(10);
-    }
-
-    @DisplayName("투입금액 / 10000, 수동생성 3을 통해 발행 개수를 확인한다.")
-    @Test
-    void getNumberOfExtractMinusManualCount() {
-        Money money = new Money(10_000, 3);
-        assertThat(money.getNumberOfExtract()).isEqualTo(7);
-    }
-
     @DisplayName("Money 객체 생성 예외상황 - 나누는 기준 값보다 작을 경우")
     @Test
     void validMoney() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Money money = new Money(999, 0);
+            Money money = new Money(999);
         }).withMessageContaining("투입금액이 적습니다.");
     }
 
-    @DisplayName("Money 객체에 수동생성 카운트 가지고 오기")
+    @DisplayName("보유한 금액을 통해 수동희망 개수가 가능한지 확인")
     @Test
-    void getNumberOfManual() {
-        Money money = new Money(10_000, 3);
-        assertThat(money.getNumberOfManual()).isEqualTo(3);
-    }
-
-    @DisplayName("Money 객체 생성 예외상황 - 수동생성 개수가 생성해야될 로또 개수보다 많을경우")
-    @Test
-    void validManual() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Money money = new Money(1_000, 2);
-        }).withMessageContaining("투입 금액에 비해 수동생성 가능 개수가 많습니다.");
+    void checkPurchaseManual() {
+        Money money = new Money(1_000);
+        assertThat(money.checkPurchaseManual(2)).isFalse();
     }
 }

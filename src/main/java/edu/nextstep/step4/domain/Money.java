@@ -13,35 +13,36 @@ package edu.nextstep.step4.domain;
 public class Money {
     private static final int MONEY_PER_NUMBER = 1_000;
     private static final int MIN_EXTRACT_NUMBER = 0;
-    private int extractCount;
-    private int manualCount;
+    private final int money;
 
-    public Money(int extractCount, int manualCount) {
-        validMoney(extractCount, manualCount);
-        this.extractCount = extractCount / MONEY_PER_NUMBER - manualCount;
-        this.manualCount = manualCount;
-    }
-
-    public int getNumberOfExtract() {
-        return this.extractCount;
-    }
-
-    public int getNumberOfManual() {
-        return this.manualCount;
+    public Money(int inputMoney) {
+        validMoney(inputMoney);
+        this.money = inputMoney;
     }
 
     public int getInputMoney() {
-        return this.extractCount * MONEY_PER_NUMBER;
+        return this.money;
     }
 
-    private void validMoney(int extractCount, int manualCount) {
-        if (extractCount < MONEY_PER_NUMBER) {
-            throw new IllegalArgumentException("투입금액이 적습니다.");
-        }
+    public int getIssueNumber() {
+        return this.money / MONEY_PER_NUMBER;
+    }
 
-        int extract = (extractCount / MONEY_PER_NUMBER) - manualCount;
-        if (extract < MIN_EXTRACT_NUMBER) {
-            throw new IllegalArgumentException("투입 금액에 비해 수동생성 가능 개수가 많습니다.");
+    public boolean checkPurchaseManual(int manualCount) {
+        return ((this.money / MONEY_PER_NUMBER) - manualCount) >= MIN_EXTRACT_NUMBER;
+    }
+
+    public double fetchIncome(WinInfo lotteryInfo) {
+        int income = lotteryInfo.keySet()
+                .mapToInt(lotto -> lotteryInfo.getRank(lotto).getLotteryMoney())
+                .sum();
+
+        return income / this.money;
+    }
+
+    private void validMoney(int inputMoney) {
+        if (inputMoney < MONEY_PER_NUMBER) {
+            throw new IllegalArgumentException("투입금액이 적습니다.");
         }
     }
 }

@@ -39,10 +39,10 @@ public class Lottos {
         return new WinInfo(matchWinInfo);
     }
 
-    public int fetchIncome(WinInfo lotteryInfo) {
+    public double fetchIncome(WinInfo lotteryInfo, Money money) {
         return lotteryInfo.keySet()
                 .mapToInt(lotto -> lotteryInfo.getRank(lotto).getLotteryMoney())
-                .sum();
+                .sum() / money.getInputMoney();
     }
 
     public List<Lotto> getExtractOfLotto() {
