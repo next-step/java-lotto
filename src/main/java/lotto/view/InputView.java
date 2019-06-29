@@ -56,6 +56,6 @@ public class InputView {
     for (int i = 0; i < buyCount; i++) {
       lottoTickets.add(new LottoTicket(new LottoNumber(splitInput(scanner))));
     }
-    return LottoTickets.getLottoTickets(buyCount, lottoTickets);
+    return new LottoTickets(buyCount, lottoTickets);
   }
 }

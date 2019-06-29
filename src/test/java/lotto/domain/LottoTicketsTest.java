@@ -17,7 +17,7 @@ public class LottoTicketsTest {
     List<LottoTicket> tickets = new ArrayList<>();
     tickets.add(new LottoTicket(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6))));
     tickets.add(new LottoTicket(new LottoNumber(Arrays.asList(1, 2, 3, 7, 10, 20))));
-    LottoTickets lottoTickets = LottoTickets.getLottoTickets(2);
+    LottoTickets lottoTickets = new LottoTickets(2,tickets);
     List<Integer> winNumber = Arrays.asList(1, 2, 3, 6, 33, 40);
 
     List<Rank> ranks = Arrays.asList(
@@ -33,7 +33,7 @@ public class LottoTicketsTest {
     List<LottoTicket> manualTickets = Arrays.asList(
         new LottoTicket(new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6))),
         new LottoTicket(new LottoNumber(Arrays.asList(1, 2, 3, 7, 10, 20))));
-    LottoTickets lottoTickets = LottoTickets.getLottoTickets(10, manualTickets);
+    LottoTickets lottoTickets = new LottoTickets(10, manualTickets);
 
     assertThat(lottoTickets.getTickets()).hasSize(10);
   }
