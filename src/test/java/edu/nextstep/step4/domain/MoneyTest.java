@@ -26,10 +26,10 @@ public class MoneyTest {
         }).withMessageContaining("투입금액이 적습니다.");
     }
 
-    @DisplayName("보유한 금액을 통해 수동희망 개수가 가능한지 확인")
+    @DisplayName("Money 객체 생성 예외상황 - 나누는 기준 값보다 작을 경우")
     @Test
-    void checkPurchaseManual() {
-        Money money = new Money(1_000);
-        assertThat(money.checkPurchaseManual(2)).isFalse();
+    void getAutoNumber() {
+        Money money = new Money(2_000);
+        assertThat(money.getAutoNumber(1)).isEqualTo(1);
     }
 }

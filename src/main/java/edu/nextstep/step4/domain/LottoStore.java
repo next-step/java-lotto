@@ -34,10 +34,10 @@ public class LottoStore {
     private static Lotto issueLottoNumber() {
         return new Lotto(RandomNumberUtils.getExtractNumber().stream()
                 .map(number -> Number.of(number))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
     private static int calculateIssueNumber(Money money, int manualCount) {
-        return money.getIssueNumber() - manualCount;
+        return money.getAutoNumber(manualCount);
     }
 }
