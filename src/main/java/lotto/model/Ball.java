@@ -23,7 +23,7 @@ public class Ball {
         }
     }
 
-    static Ball valueOf(int value) {
+    public static Ball valueOf(int value) {
         Ball ball = CACHE.getOrDefault(value, new Ball(value));
         CACHE.putIfAbsent(value, ball);
         return ball;
