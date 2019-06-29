@@ -21,7 +21,7 @@ public class TicketTest {
     void setUp() {
         balls = new HashSet<>();
         initBalls(balls, STARTING_NUMBER);
-        ticket = new Ticket(balls);
+        ticket = Ticket.generateTicket(balls);
     }
 
     private void initBalls(Set<Ball> balls, int startingNumber) {
@@ -38,10 +38,17 @@ public class TicketTest {
     }
 
     @Test
+    @DisplayName("Ticket을 랜덤하게 생성할 수 있다.")
+    void create_RandomTicket() {
+        Ticket ticket = Ticket.generateRandomTicket();
+        assertThat(ticket).isInstanceOf(Ticket.class);
+    }
+
+    @Test
     @DisplayName("Ticket은 6개보다 많은 로또 번호들로 생성하면 예외를 발생한다.")
     void create_OverSize_ExceptionThrown() {
         balls.add(Ball.valueOf(Ball.MAXIMUM_VALUE));
-        assertThatThrownBy(() -> new Ticket(balls))
+        assertThatThrownBy(() -> Ticket.generateTicket(balls))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(Ticket.OUT_OF_SIZE_MESSAGE);
     }
@@ -50,7 +57,7 @@ public class TicketTest {
     @DisplayName("Ticket 객체는 동등성을 보장한다.")
     void equals_HasSameValue() {
         Set<Ball> otherBalls = new HashSet<>(balls);
-        Ticket otherTicket = new Ticket(otherBalls);
+        Ticket otherTicket = Ticket.generateTicket(otherBalls);
 
         boolean result = ticket.equals(otherTicket);
         assertThat(result).isEqualTo(true);
@@ -63,10 +70,8 @@ public class TicketTest {
         Set<Ball> otherBalls = new HashSet<>();
         initBalls(otherBalls, STARTING_NUMBER + shiftIndex);
 
-        Ticket otherTicket = new Ticket(otherBalls);
+        Ticket otherTicket = Ticket.generateTicket(otherBalls);
 
         assertThat(ticket.match(otherTicket)).isEqualTo(Ticket.SIZE - shiftIndex);
     }
 }
-
-

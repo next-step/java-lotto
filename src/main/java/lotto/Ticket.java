@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Ticket {
     static final String OUT_OF_SIZE_MESSAGE = "Ticket에 담길 수 있는 Ball의 갯수가 아닙니다.";
@@ -10,14 +8,31 @@ public class Ticket {
 
     private final Set<Ball> balls;
 
-    public Ticket(Set<Ball> balls) {
+    private Ticket(Set<Ball> balls) {
         checkSize(balls);
         this.balls = balls;
     }
 
-    private void checkSize(Set<Ball> ballList) {
-        if (ballList.size() != SIZE) {
-            throw new IllegalArgumentException(OUT_OF_SIZE_MESSAGE);
+    public static Ticket generateTicket(Set<Ball> balls) {
+        return new Ticket(balls);
+    }
+
+    public static Ticket generateRandomTicket() {
+        List<Ball> candidates = new ArrayList<>();
+        for (int i = Ball.MINIMUM_VALUE; i <= Ball.MAXIMUM_VALUE; i++) {
+            candidates.add(Ball.valueOf(i));
+        }
+
+        Collections.shuffle(candidates);
+        candidates = candidates.subList(0, SIZE);
+        Set<Ball> balls = new HashSet<>(candidates);
+
+        return new Ticket(balls);
+    }
+
+    private void checkSize(Set<Ball> balls) {
+        if (balls.size() != SIZE) {
+            throw new IllegalArgumentException(OUT_OF_SIZE_MESSAGE + ": " + balls);
         }
     }
 
@@ -41,4 +56,3 @@ public class Ticket {
         return Objects.hash(balls);
     }
 }
-
