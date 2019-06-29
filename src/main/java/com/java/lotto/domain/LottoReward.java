@@ -6,10 +6,10 @@ import java.util.function.UnaryOperator;
 
 public enum LottoReward {
 
-    MATCH_THREE(3, 5000, (count) -> count * 5000),
-    MATCH_FOUR(4, 50000, (count) -> count * 50000),
-    MATCH_FIVE(5, 1500000, (count) -> count * 1500000),
-    MATCH_SIX(6, 2000000000, (count) -> count * 2000000000);
+    MATCH_THREE(3, 5_000, (count) -> count * 5_000),
+    MATCH_FOUR(4, 50_000, (count) -> count * 50_000),
+    MATCH_FIVE(5, 1500_000, (count) -> count * 1_500_000),
+    MATCH_SIX(6, 2_000_000_000, (count) -> count * 2_000_000_000);
 
     Integer matchNumber;
     Integer lottoMoney;

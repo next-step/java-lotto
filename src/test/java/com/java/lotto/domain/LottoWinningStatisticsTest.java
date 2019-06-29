@@ -2,6 +2,7 @@ package com.java.lotto.domain;
 
 import com.java.lotto.exception.OutOfLottoNumberRangeException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,13 +22,13 @@ public class LottoWinningStatisticsTest {
         List<String> manualNumbers = new ArrayList<>();
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("4,5,6,7,8,9");
-//        manualNumbers.add("7,8,9,10,11,12");
         lottoTickets = LottoTicketsGenerator.manualTicketsGenerator(2, manualNumbers);
         lottoWinningStatistics = new LottoWinningStatistics();
     }
 
     @Test
-    void 당첨_번호_입력값중_숫자이외의_값_검증() {
+    @DisplayName("당첨 번호 입력 값 숫자 유효성 검증")
+    void numberValidation() {
         winningNumber = "1,2,3,4,5,a";
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() ->
         {
@@ -36,7 +37,8 @@ public class LottoWinningStatisticsTest {
     }
 
     @Test
-    void 당첨_번호_입력값중_1에서_45_범위에_없는값_검증() {
+    @DisplayName("당첨 번호 입력 값 숫자 범위(1~45) 유효성 검증")
+    void numberRangeValidation() {
         winningNumber = "1,2,3,4,5,50";
         assertThatExceptionOfType(OutOfLottoNumberRangeException.class).isThrownBy(() ->
         {
@@ -45,30 +47,34 @@ public class LottoWinningStatisticsTest {
     }
 
     @Test
-    void 숫자_3개_맞은_로또_찾기() {
+    @DisplayName("로또 3개 맞춤 검증")
+    void isWinningNumberCountThree() {
         winningNumber = "1, 2, 3, 7, 8, 9";
         lottoWinningStatistics.findLottoWinning(LottoNumbersGenerator.manualNumbersGenerator(winningNumber), lottoTickets);
-        assertThat(lottoWinningStatistics.getWinnerCount(3)).isEqualTo(2);
+        assertThat(lottoWinningStatistics.isWinningNumberCount(3)).isEqualTo(2);
     }
 
     @Test
-    void 숫자_4개_맞은_로또_찾기() {
+    @DisplayName("로또 4개 맞춤 검증")
+    void isWinningNumberCountFour() {
         winningNumber = "1, 2, 3, 4, 8, 9";
         lottoWinningStatistics.findLottoWinning(LottoNumbersGenerator.manualNumbersGenerator(winningNumber), lottoTickets);
-        assertThat(lottoWinningStatistics.getWinnerCount(4)).isEqualTo(1);
+        assertThat(lottoWinningStatistics.isWinningNumberCount(4)).isEqualTo(1);
     }
 
     @Test
-    void 숫자_5개_맞은_로또_찾기() {
+    @DisplayName("로또 5개 맞춤 검증")
+    void isWinningNumberCountFive() {
         winningNumber = "1, 2, 3, 4, 5, 8";
         lottoWinningStatistics.findLottoWinning(LottoNumbersGenerator.manualNumbersGenerator(winningNumber), lottoTickets);
-        assertThat(lottoWinningStatistics.getWinnerCount(5)).isEqualTo(1);
+        assertThat(lottoWinningStatistics.isWinningNumberCount(5)).isEqualTo(1);
     }
 
     @Test
-    void 숫자_6개_맞은_로또_찾기() {
+    @DisplayName("로또 6개 맞춤 검증")
+    void isWinningNumberCountSix() {
         winningNumber = "1, 2, 3, 4, 5, 6";
         lottoWinningStatistics.findLottoWinning(LottoNumbersGenerator.manualNumbersGenerator(winningNumber), lottoTickets);
-        assertThat(lottoWinningStatistics.getWinnerCount(6)).isEqualTo(1);
+        assertThat(lottoWinningStatistics.isWinningNumberCount(6)).isEqualTo(1);
     }
 }

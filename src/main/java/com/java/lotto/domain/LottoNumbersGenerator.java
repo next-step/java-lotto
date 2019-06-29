@@ -23,7 +23,7 @@ public class LottoNumbersGenerator {
 
         List<Integer> lottoNumbers = new ArrayList<>();
         for (String number : numbers) {
-            lottoNumbers.add(LottoNumberRangeValidation(numberValidation(number.trim())));
+            lottoNumbers.add(LottoNumberRangeValidation(isNumber(number.trim())));
         }
         return lottoNumbers;
     }
@@ -38,20 +38,12 @@ public class LottoNumbersGenerator {
         return lottoNumbers;
     }
 
-    private static int numberValidation(String number) {
-        if (isNumber(number)) {
-            return Integer.parseInt(number);
-        }
-        throw new IllegalArgumentException();
 
-    }
-
-    private static boolean isNumber(String number) {
+    private static int isNumber(String number) {
         try {
-            Integer.parseInt(number);
-            return true;
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            return false;
+            throw new IllegalArgumentException("입력된 값이 숫자가 아닙니다.");
         }
     }
 

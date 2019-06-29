@@ -2,6 +2,7 @@ package com.java.lotto.domain;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_PRICE = 1000;
@@ -32,18 +33,19 @@ public class Lotto {
         return lottoTickets.count();
     }
 
-    public Map<Integer, Integer> getWinningRecord() {
-        return winningStatistics.getWinningRecord();
+    public Map<LottoReward, Integer> getWinningStatistics() {
+        return winningStatistics.isWinningStatistics();
     }
 
-    public int getWinNumberCount(int matchNumber) {
-        if (winningStatistics.getWinningRecord().get(matchNumber) == null) {
-            return 0;
-        }
-        return winningStatistics.getWinningRecord().get(matchNumber);
+    public float rateOfReturn() {
+        return winningStatistics.rateOfReturn(purchaseAmount);
     }
 
-    public int getLottoPrice() {
-        return purchaseAmount;
+    public Set<LottoReward> rank(){
+        return getWinningStatistics().keySet();
+    }
+
+    public Integer numberOfRank(LottoReward lottoReward){
+        return getWinningStatistics().get(lottoReward);
     }
 }
