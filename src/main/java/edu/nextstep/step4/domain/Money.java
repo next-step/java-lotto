@@ -11,7 +11,8 @@ package edu.nextstep.step4.domain;
  * create date  : 2019-06-25 00:27
  */
 public class Money {
-    private static final int MONEY_PER_NUMBER = 1000;
+    private static final int MONEY_PER_NUMBER = 1_000;
+    private static final int MIN_EXTRACT_NUMBER = 0;
     private int extractCount;
     private int manualCount;
 
@@ -39,7 +40,7 @@ public class Money {
         }
 
         int extract = (extractCount / MONEY_PER_NUMBER) - manualCount;
-        if (extract < 0) {
+        if (extract < MIN_EXTRACT_NUMBER) {
             throw new IllegalArgumentException("투입 금액에 비해 수동생성 가능 개수가 많습니다.");
         }
     }
