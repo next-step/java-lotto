@@ -1,12 +1,12 @@
 package lotto.domain;
 
-import common.NumberElement;
 import lotto.model.LottoNumberCollection;
 import lotto.model.LottoResult;
 import lotto.model.LottoRule;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfMaxNumberException;
 import common.NumberElementCollection;
+import lotto.model.WinNumber;
 
 public class LottoTicket {
 
@@ -41,21 +41,12 @@ public class LottoTicket {
 	}
 
 
-	public LottoResult checkWin(NumberElementCollection winNumbers) {
-		return this.checkWin(winNumbers, null);
-	}
-
-	public LottoResult checkWin(NumberElementCollection winNumbers, NumberElement bonusNumber) {
-		if(winNumbers.size() < LottoRule.MAX_COUNT){
-			throw new IllegalArgumentException("당첨번호의 개수가 부족합니다.");
-		}
-
-		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumbers);
+	public LottoResult checkWin(WinNumber winNumber) {
+		NumberElementCollection matchedNumbers = this.numbers.matchNumbers(winNumber.getPrimary());
 		LottoResult resultBasicMatch = LottoResult.valueOfMatchedCount(matchedNumbers.size());
 
 		if(resultBasicMatch.equals(LottoResult.WIN_3RD)
-				&& bonusNumber != null
-				&& this.numbers.contains(bonusNumber)){
+				&& this.numbers.contains(winNumber.getBonus())){
 
 			return LottoResult.WIN_2ND;
 		}

@@ -5,7 +5,9 @@ import common.NumberElementCollection;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWallet;
 import lotto.domain.ResultReport;
+import lotto.model.LottoNumberCollection;
 import lotto.model.LottoResult;
+import lotto.model.WinNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -66,15 +68,15 @@ class LottoWalletTest {
 		LottoWallet wallet = new LottoWallet(tickets, 0);
 
 		int[] winNumbers = new int[]{1, 2, 3, 4, 5, 6};
-		NumberElementCollection numbers = new NumberElementCollection(6);
+		LottoNumberCollection numbers = new LottoNumberCollection();
 		for(int number : winNumbers){
 			numbers.add(number);
 		}
 
-		NumberElement bonusNumber = new NumberElement(45);
+		WinNumber winNumber = new WinNumber(numbers, new NumberElement(45));
 
 		// Action
-		ResultReport report = wallet.result(numbers, bonusNumber);
+		ResultReport report = wallet.result(winNumber);
 
 		// Assertion
 		assertThat(report.countOfResult(LottoResult.FAIL)).isEqualTo(5);

@@ -67,4 +67,8 @@ public class NumberElementCollection {
         collection.elements = elements;
         return collection;
     }
+
+    public List<NumberElement> getElements() {
+        return elements;
+    }
 }

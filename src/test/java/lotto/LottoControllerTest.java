@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.TicketMachine;
+import lotto.view.in.InputDialog;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
 import org.junit.jupiter.api.Test;
@@ -47,8 +48,10 @@ public class LottoControllerTest {
 		List<String> output = new ArrayList<>();
 		controller.invest(message -> "1000", new WalletViewer(message -> {}));
 
+		InputDialog winNumberInput = message -> (message.contains("당첨 번호") ? "1, 2, 3, 10, 11, 12" : "45");
+
 		// Action
-		controller.lottery(message -> "1, 2, 3, 10, 11, 12", new ResultViewer(message -> output.add(message)));
+		controller.lottery(winNumberInput, new ResultViewer(message -> output.add(message)));
 
 		// Assertion
 		assertThat(output).contains("당첨통계");

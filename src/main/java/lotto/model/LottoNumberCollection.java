@@ -15,6 +15,7 @@ public class LottoNumberCollection extends NumberElementCollection {
 		super(LottoRule.MAX_COUNT);
 	}
 
+
 	/**
 	 * 대상 컬렉션과 일치하는 숫자만 포함하는 컬렉션 반환
 	 * @param collection
@@ -39,6 +40,13 @@ public class LottoNumberCollection extends NumberElementCollection {
 		return elements.stream()
 				.map(NumberElement::toString)
 				.collect(Collectors.joining(TO_STRING_DELIMITER));
+	}
+
+	// TODO : 상속에서 has a 관계로 변경
+	public static LottoNumberCollection of(NumberElementCollection numbers) {
+		LottoNumberCollection collection = new LottoNumberCollection();
+		collection.elements = numbers.getElements();
+		return collection;
 	}
 
 }

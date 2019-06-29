@@ -1,12 +1,15 @@
 package lotto;
 
+import common.NumberElement;
 import lotto.exception.DuplicateNumberException;
 import lotto.exception.OutOfCountException;
 import lotto.exception.OutOfMaxNumberException;
 import common.NumberElementCollection;
 import lotto.domain.LottoTicket;
+import lotto.model.LottoNumberCollection;
 import lotto.model.LottoResult;
 import lotto.model.LottoRule;
+import lotto.model.WinNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -53,7 +56,7 @@ class LottoTicketTest {
 	@DisplayName("복권 당첨 확인")
 	@ParameterizedTest
 	@MethodSource("provideWinNumbers")
-	void checkWin(int[] winNumbers, LottoResult expectResult) {
+	void checkWin(int[] winNumbers, int bonus, LottoResult expectResult) {
 		// Arrange
 		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
 
@@ -62,8 +65,10 @@ class LottoTicketTest {
 			numbers.add(number);
 		}
 
+		WinNumber winNumber = new WinNumber(LottoNumberCollection.of(numbers), new NumberElement(bonus));
+
 		// Action
-		LottoResult result = ticket.checkWin(numbers);
+		LottoResult result = ticket.checkWin(winNumber);
 
 		// Assertion
 		assertThat(result).isEqualTo(expectResult);
@@ -71,12 +76,12 @@ class LottoTicketTest {
 
 	private static Stream<Arguments> provideWinNumbers(){
 		return Stream.of(
-				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, LottoResult.FAIL),	// 낙첨
-				Arguments.of(new int[]{2, 4, 6, 43, 44, 45}, LottoResult.WIN_5TH),	// 4등
-				Arguments.of(new int[]{1, 2, 3, 43, 44, 45}, LottoResult.WIN_5TH),	// 4등
-				Arguments.of(new int[]{1, 2, 3, 4, 44, 45}, LottoResult.WIN_4TH),	// 3등
-				Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, LottoResult.WIN_3RD),	// 2등
-				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, LottoResult.WIN_1ST)		// 1등
+				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, 45, LottoResult.FAIL),	// 낙첨
+				Arguments.of(new int[]{2, 4, 6, 10, 11, 12}, 45, LottoResult.WIN_5TH),	// 4등
+				Arguments.of(new int[]{1, 2, 3, 10, 11, 12}, 45, LottoResult.WIN_5TH),	// 4등
+				Arguments.of(new int[]{1, 2, 3, 4, 11, 12}, 45, LottoResult.WIN_4TH),	// 3등
+				Arguments.of(new int[]{1, 2, 3, 4, 5, 12}, 45, LottoResult.WIN_3RD),	// 2등
+				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, 45, LottoResult.WIN_1ST)		// 1등
 		);
 	}
 
@@ -87,13 +92,13 @@ class LottoTicketTest {
 		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
 
 		int[] winNumbers = new int[]{1, 2, 3, 4, 5};
-		NumberElementCollection numbers = new NumberElementCollection(6);
+		LottoNumberCollection numbers = new LottoNumberCollection();
 		for(int number : winNumbers){
 			numbers.add(number);
 		}
 
 		// Action & Assertion
-		assertThatIllegalArgumentException().isThrownBy(() -> {ticket.checkWin(numbers);});
+		assertThatIllegalArgumentException().isThrownBy(() -> {new WinNumber(numbers, new NumberElement(45));});
 	}
 
 	@DisplayName("toString 반환 테스트")
