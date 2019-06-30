@@ -43,7 +43,7 @@ public class OperandTest {
     @DisplayName("Operand 객체를 숫자로 변환한다.")
     void convert_ToInt() {
         Operand operand = Operand.of(1);
-        assertThat(operand.convert()).isEqualTo(1);
+        assertThat(operand.getValue()).isEqualTo(1);
     }
 
     @ParameterizedTest
