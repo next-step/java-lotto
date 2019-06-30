@@ -8,7 +8,7 @@ import static step2.domain.LottoConstant.LOTTO_MIN_NUMBER;
 public class LottoNumber {
     protected final Integer number;
 
-    public LottoNumber(Integer number) {
+    protected LottoNumber(Integer number) {
         validateLottoNumber(number);
         this.number = number;
     }

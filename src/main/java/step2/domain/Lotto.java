@@ -3,10 +3,12 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static step2.domain.LottoConstant.LOTTO_NUMBERS;
+import static step2.domain.LottoConstant.LOTTO_NUMBERS_ENTRY;
+import static step2.domain.LottoConstant.LOTTO_NUMBERS_MAP;
 import static step2.domain.LottoConstant.LOTTO_NUMBER_SIZE;
 
 public class Lotto {
@@ -30,13 +32,16 @@ public class Lotto {
     }
 
     public static Lotto create() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        return new Lotto(LOTTO_NUMBERS.subList(0, LOTTO_NUMBER_SIZE));
+        Collections.shuffle(LOTTO_NUMBERS_ENTRY);
+        return new Lotto(LOTTO_NUMBERS_ENTRY.stream()
+                                            .map(Map.Entry::getValue)
+                                            .collect(Collectors.toList())
+                                            .subList(0, LOTTO_NUMBER_SIZE));
     }
 
     public static Lotto create(List<Integer> numbers) {
         return new Lotto(numbers.stream()
-                                .map(LottoNumber::new)
+                                .map(LOTTO_NUMBERS_MAP::get)
                                 .collect(Collectors.toList()));
     }
 
