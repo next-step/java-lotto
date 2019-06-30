@@ -24,6 +24,7 @@ public class LottoTicketTest {
         );
         LottoTicket lottoTicket = LottoTicket.of(lottos);
 
+
         LottoResult lottoResult = lottoTicket.result(winningLotto);
 
         assertThat(lottoResult.countOfPrize(Prize.FIRST)).isEqualTo(1);

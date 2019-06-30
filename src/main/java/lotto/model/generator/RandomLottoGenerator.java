@@ -5,22 +5,21 @@ import lotto.model.Money;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
-    private Money money;
+    private long countOfLotto;
     private NumberGenerator numberGenerator;
 
-    public RandomLottoGenerator(Money money) {
-        this.money = money;
+    public RandomLottoGenerator(long countOfLotto) {
+        this.countOfLotto = countOfLotto;
         this.numberGenerator = new NumberGenerator();
     }
 
     @Override
     public List<Lotto> generator() {
         List lottos = new ArrayList<>();
-        for (int i = 0; i < money.countAvailableByLotto(); i++) {
+        for (int i = 0; i < countOfLotto; i++) {
             lottos.add(createLotto());
         }
         return lottos;

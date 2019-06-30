@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.model.*;
+import lotto.model.generator.ManualLottoGenerator;
+import lotto.model.generator.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,14 +12,19 @@ public class Application {
 
     public static void main(String[] args) {
         int inputOfAmount = InputView.askOfAmount();
-        Money moneyToBuy = Money.won(inputOfAmount);
+        Wallet wallet = new Wallet(Money.won(inputOfAmount));
         List<String> numbersOfManual = InputView.askManualLotto();
 
         long sizeOfManual = numbersOfManual.size();
-        long sizeOfRandom = moneyToBuy.countAvailableByLotto() - sizeOfManual;
-        OutputView.printNumberOfBuyLotto(sizeOfManual, sizeOfRandom);
+        long sizeOfRandom = wallet.countAvailableByLotto() - sizeOfManual;
 
-        LottoTicket lottoTicket = LottoMachine.buy(moneyToBuy, numbersOfManual);
+        LottoTicket lottoTicketByManual = LottoStore.buy(wallet, new ManualLottoGenerator(numbersOfManual));
+        LottoTicket lottoTicketByAuto = LottoStore.buy(wallet, new RandomLottoGenerator(sizeOfRandom));
+
+        OutputView.printNumberOfBuyLotto(lottoTicketByManual.countOfLotto(), lottoTicketByAuto.countOfLotto());
+
+        LottoTicket lottoTicket = lottoTicketByAuto.merge(lottoTicketByManual);
+
         OutputView.printLottoTicket(lottoTicket);
 
         String inputOfNumbers = InputView.askOfWinningNumbers();
@@ -26,7 +33,7 @@ public class Application {
 
         LottoResult result = lottoTicket.result(winningLotto);
         OutputView.printReport(result);
-
         OutputView.printRateOfReturn(result.getRateOfReturn());
+
     }
 }

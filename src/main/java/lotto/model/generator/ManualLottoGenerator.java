@@ -2,7 +2,6 @@ package lotto.model.generator;
 
 import lotto.exception.NumbersIsEmptyException;
 import lotto.model.Lotto;
-import lotto.utils.StringUtils;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     @Override
     public List<Lotto> generator() {
         return numbers.stream()
-                .map(StringUtils::parseLotto)
+                .map(Lotto::ofComma)
                 .collect(toList());
     }
 }

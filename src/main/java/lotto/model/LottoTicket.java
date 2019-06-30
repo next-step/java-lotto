@@ -25,6 +25,17 @@ public class LottoTicket {
         return LottoResult.of(prizes);
     }
 
+    public LottoTicket merge(LottoTicket lottoTicket) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(this.lottos);
+        lottos.addAll(lottoTicket.lottos);
+        return of(lottos);
+    }
+
+    public long countOfLotto() {
+        return lottos.size();
+    }
+
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }

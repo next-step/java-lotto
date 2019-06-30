@@ -23,20 +23,6 @@ public class MoneyTest {
                 .isThrownBy(() -> Money.won(-1));
     }
 
-    @DisplayName("1개의 로또를 구매한다")
-    @ParameterizedTest
-    @ValueSource(ints = {
-            1000,
-            1500
-    })
-    void countAvailable(long amount) {
-        Money money = Money.won(amount);
-
-        long count = money.countAvailableByLotto();
-
-        assertThat(count).isEqualTo(1);
-    }
-
     @DisplayName("로또 구입한 총 금액")
     @Test
     void calculateTotalByBuyLotto() {

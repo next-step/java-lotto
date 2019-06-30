@@ -3,16 +3,19 @@ package lotto.model;
 import lotto.exception.InvalidCountOfLottoException;
 import lotto.exception.NumbersIsEmptyException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.LongFunction;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
 
-    public static final Money PRICE = Money.won(1_000);
+    public static final String SEPARATOR_OF_LOTTO_NUMBERS = ",";
     public static final int SIZE = 6;
+
+    static final Money PRICE = Money.won(1_000);
+
     private final List<Number> numbers;
 
     private Lotto(List<Number> numbers) {
@@ -28,6 +31,14 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
+    public static Lotto ofComma(String numbers) {
+        return Arrays.stream(numbers.split(SEPARATOR_OF_LOTTO_NUMBERS))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(Number::of)
+                .collect(collectingAndThen(toList(), Lotto::from));
+    }
+
     private static void validateLottoSize(List<Number> numbers) {
         int numbersSize = (int) numbers.stream()
                 .distinct()
@@ -37,13 +48,13 @@ public class Lotto {
         }
     }
 
-    public int getMatchCount(Lotto other) {
+    int getMatchCount(Lotto other) {
         return (int) other.numbers.stream()
                 .filter(numbers::contains)
                 .count();
     }
 
-    public boolean hasBonusNumber(Number number) {
+    boolean hasBonusNumber(Number number) {
         return numbers.contains(number);
     }
 
