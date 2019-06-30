@@ -19,21 +19,21 @@ public class LottoResultDtoTest {
     void setLottoResult() {
         // given
         LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
-                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L)),
-                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L)),
-                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 15L, 16L)),
-                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 16L)),
-                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)))
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L), 45),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L), 45),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 15L, 16L), 45),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 16L), 45),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45))
         );
-        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45);
         PurchaseAmount purchaseAmount = PurchaseAmount.of(LottoTicket.PRICE * lottoTickets.count());
         // when
-        LottoResultDto lottoResultDto = LottoResultDto.of(lottoWinningResult, purchaseAmount);
-        assertThat(lottoResultDto.getWinningResultMap().get(LottoWinningAmount.THREE_MATCH)).isEqualTo(2);
-        assertThat(lottoResultDto.getWinningResultMap().get(LottoWinningAmount.FOUR_MATCH)).isEqualTo(1);
-        assertThat(lottoResultDto.getWinningResultMap().get(LottoWinningAmount.FIVE_MATCH)).isEqualTo(1);
-        assertThat(lottoResultDto.getWinningResultMap().get(LottoWinningAmount.SIX_MATCH)).isEqualTo(1);
+        LottoResultDto lottoResultDto = LottoResultDto.of(LottoWinningResult.of(lottoTickets, winningTicket), purchaseAmount);
+        LottoWinningResult lottoWinningResult = lottoResultDto.getWinningResult();
+        assertThat(lottoWinningResult.getWinningCount(LottoWinningAmount.THREE_MATCH)).isEqualTo(2);
+        assertThat(lottoWinningResult.getWinningCount(LottoWinningAmount.FOUR_MATCH)).isEqualTo(1);
+        assertThat(lottoWinningResult.getWinningCount(LottoWinningAmount.FIVE_MATCH)).isEqualTo(1);
+        assertThat(lottoWinningResult.getWinningCount(LottoWinningAmount.SIX_MATCH)).isEqualTo(1);
 
         assertThat(lottoResultDto.getEarningRate()).isEqualTo(400312.0);
     }

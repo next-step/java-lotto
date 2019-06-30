@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
@@ -20,7 +21,7 @@ public class DefaultLottoService implements LottoService {
         return lottoTicketGenerator.generate(PurchaseAmount.of(purchaseAmount));
     }
 
-    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount) {
-        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, LottoTicket.of(winningTicket)), PurchaseAmount.of(purchaseAmount));
+    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount, long bonusNumber) {
+        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, LottoTicket.of(winningTicket, bonusNumber)), PurchaseAmount.of(purchaseAmount));
     }
 }

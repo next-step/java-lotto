@@ -8,6 +8,8 @@ import lotto.dto.LottoResultDto;
 import lotto.view.input.InputView;
 import lotto.view.result.ResultView;
 
+import java.util.List;
+
 public class LottoController {
 
     private final InputView inputView;
@@ -35,7 +37,10 @@ public class LottoController {
     }
 
     private void checkWinningAmount() {
-        LottoResultDto lottoResultDto = lottoService.checkWinnintAmount(lottoTickets, inputView.getWinningTicket(), purchaseAmount);
+        List<Long> winningTicket = inputView.getWinningTicket();
+        long bonusNumber =inputView.getBonusNumber();
+
+        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, winningTicket, purchaseAmount, bonusNumber);
         resultView.printResult(lottoResultDto);
     }
 }

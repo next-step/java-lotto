@@ -8,20 +8,20 @@ import lotto.domain.PurchaseAmount;
 import java.util.Map;
 
 public class LottoResultDto {
-    private Map<LottoWinningAmount, Long> winningResultMap;
+    private LottoWinningResult lottoWinningResult;
     private Double earningRate;
 
     private LottoResultDto(LottoWinningResult lottoWinningResult, PurchaseAmount purchaseAmount) {
-        winningResultMap = lottoWinningResult.getWinningResult();
-        earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), purchaseAmount.getUsedPurchaseAmount()).get();
+        this.lottoWinningResult = lottoWinningResult;
+        this.earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), purchaseAmount.getUsedPurchaseAmount()).get();
     }
 
     public static LottoResultDto of(LottoWinningResult lottoWinningResult, PurchaseAmount purchaseAmount) {
         return new LottoResultDto(lottoWinningResult, purchaseAmount);
     }
 
-    public Map<LottoWinningAmount, Long> getWinningResultMap() {
-        return winningResultMap;
+    public LottoWinningResult getWinningResult() {
+        return lottoWinningResult;
     }
 
     public Double getEarningRate() {
