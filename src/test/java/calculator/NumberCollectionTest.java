@@ -1,7 +1,7 @@
 package calculator;
 
 import common.NumberElement;
-import common.NumberElementCollection;
+import common.NumberCollection;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,13 +10,13 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class NumberElementCollectionTest {
+class NumberCollectionTest {
 
     @ParameterizedTest
     @MethodSource("provideSum")
     void sum(String[] source, NumberElement expectSum) {
 
-        NumberElementCollection elements = new NumberElementCollection(source);
+        NumberCollection elements = new NumberCollection(source);
 
         NumberElement total = elements.sum();
 

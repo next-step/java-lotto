@@ -1,6 +1,6 @@
-package lotto.view.domain;
+package lotto.domain;
 
-import common.NumberElementCollection;
+import lotto.model.WinNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +51,12 @@ public class LottoWallet {
 				.collect(Collectors.joining(NEW_LINE));
 	}
 
-	public ResultReport result(NumberElementCollection winNumbers) {
+	public ResultReport result(WinNumber winNumber) {
 		ResultReport report = new ResultReport();
 
 		tickets.stream()
 				.forEach(ticket -> {
-					report.increment(ticket.checkWin(winNumbers));
+					report.increment(ticket.checkWin(winNumber));
 				});
 
 		return report;

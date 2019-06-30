@@ -1,12 +1,9 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
 import lotto.exception.DuplicateNumberException;
-import lotto.exception.OutOfCountException;
-import lotto.exception.OutOfMaxNumberException;
-import common.NumberElementCollection;
-import lotto.view.domain.LottoTicket;
-import lotto.view.model.LottoResult;
-import lotto.view.model.LottoRule;
+import lotto.exception.OutOfBoundLottoNumberException;
+import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,7 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoTicketTest {
 
@@ -35,7 +33,7 @@ class LottoTicketTest {
 	void addOverCount() {
 		int[] numbers = {1, 2, 3, 4, 5, 6, 7};
 
-		assertThatExceptionOfType(OutOfCountException.class).isThrownBy(() -> {
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
 			LottoTicket.of(numbers);
 		});
 	}
@@ -45,7 +43,7 @@ class LottoTicketTest {
 	void addOverLimit() {
 		int[] numbers = {1, 2, 3, 4, 5, LottoRule.MAX_NUMBER + 1};
 
-		assertThatExceptionOfType(OutOfMaxNumberException.class).isThrownBy(() -> {
+		assertThatExceptionOfType(OutOfBoundLottoNumberException.class).isThrownBy(() -> {
 			LottoTicket.of(numbers);
 		});
 	}
@@ -53,17 +51,13 @@ class LottoTicketTest {
 	@DisplayName("복권 당첨 확인")
 	@ParameterizedTest
 	@MethodSource("provideWinNumbers")
-	void checkWin(int[] winNumbers, LottoResult expectResult) {
+	void checkWin(int[] winNumbers, int bonus, LottoResult expectResult) {
 		// Arrange
 		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
-
-		NumberElementCollection numbers = new NumberElementCollection(6);
-		for(int number : winNumbers){
-			numbers.add(number);
-		}
+		WinNumber winNumber = new WinNumber(LottoNumberSet.of(winNumbers), new LottoNumber(bonus));
 
 		// Action
-		LottoResult result = ticket.checkWin(numbers);
+		LottoResult result = ticket.checkWin(winNumber);
 
 		// Assertion
 		assertThat(result).isEqualTo(expectResult);
@@ -71,29 +65,13 @@ class LottoTicketTest {
 
 	private static Stream<Arguments> provideWinNumbers(){
 		return Stream.of(
-				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, LottoResult.FAIL),	// 낙첨
-				Arguments.of(new int[]{2, 4, 6, 43, 44, 45}, LottoResult.WIN_4TH),	// 4등
-				Arguments.of(new int[]{1, 2, 3, 43, 44, 45}, LottoResult.WIN_4TH),	// 4등
-				Arguments.of(new int[]{1, 2, 3, 4, 44, 45}, LottoResult.WIN_3RD),	// 3등
-				Arguments.of(new int[]{1, 2, 3, 4, 5, 45}, LottoResult.WIN_2ND),	// 2등
-				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, LottoResult.WIN_1ST)		// 1등
+				Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, 45, LottoResult.FAIL),	// 낙첨
+				Arguments.of(new int[]{2, 4, 6, 10, 11, 12}, 45, LottoResult.WIN_5TH),	// 4등
+				Arguments.of(new int[]{1, 2, 3, 10, 11, 12}, 45, LottoResult.WIN_5TH),	// 4등
+				Arguments.of(new int[]{1, 2, 3, 4, 11, 12}, 45, LottoResult.WIN_4TH),	// 3등
+				Arguments.of(new int[]{1, 2, 3, 4, 5, 12}, 45, LottoResult.WIN_3RD),	// 2등
+				Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, 45, LottoResult.WIN_1ST)		// 1등
 		);
-	}
-
-	@DisplayName("기준에 맞지 않는 당첨번호 (개수 부족)")
-	@Test
-	void illegalWinNumbers() {
-		// Arrange
-		LottoTicket ticket = LottoTicket.of(new int[]{1, 2, 3, 4, 5, 6});
-
-		int[] winNumbers = new int[]{1, 2, 3, 4, 5};
-		NumberElementCollection numbers = new NumberElementCollection(6);
-		for(int number : winNumbers){
-			numbers.add(number);
-		}
-
-		// Action & Assertion
-		assertThatIllegalArgumentException().isThrownBy(() -> {ticket.checkWin(numbers);});
 	}
 
 	@DisplayName("toString 반환 테스트")

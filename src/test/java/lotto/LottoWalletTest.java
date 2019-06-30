@@ -1,10 +1,13 @@
 package lotto;
 
-import common.NumberElementCollection;
-import lotto.view.domain.LottoTicket;
-import lotto.view.domain.LottoWallet;
-import lotto.view.domain.ResultReport;
-import lotto.view.model.LottoResult;
+import common.NumberElement;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoWallet;
+import lotto.domain.ResultReport;
+import lotto.model.LottoNumber;
+import lotto.model.LottoNumberSet;
+import lotto.model.LottoResult;
+import lotto.model.WinNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,38 +43,41 @@ class LottoWalletTest {
 		// Arrange
 		List<LottoTicket> tickets = new ArrayList<>();
 
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	11, 12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	12, 13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 	13}));
-		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 	13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 10, 11, 12, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,  11, 12, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3,   4, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 12, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 12, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 13}));
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4,	5, 13}));
+
+		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	5, 45}));
+
 		tickets.add(LottoTicket.of(new int[]{1, 2, 3, 	4, 	5, 	6}));
 
 		LottoWallet wallet = new LottoWallet(tickets, 0);
 
-		int[] winNumbers = new int[]{1, 2, 3, 4, 5, 6};
-		NumberElementCollection numbers = new NumberElementCollection(6);
-		for(int number : winNumbers){
-			numbers.add(number);
-		}
+		WinNumber winNumber = new WinNumber(LottoNumberSet.of(new int[]{1, 2, 3, 4, 5, 6}), new LottoNumber(45));
 
 		// Action
-		ResultReport report = wallet.result(numbers);
+		ResultReport report = wallet.result(winNumber);
 
 		// Assertion
 		assertThat(report.countOfResult(LottoResult.FAIL)).isEqualTo(5);
-		assertThat(report.countOfResult(LottoResult.WIN_4TH)).isEqualTo(4);
-		assertThat(report.countOfResult(LottoResult.WIN_3RD)).isEqualTo(3);
-		assertThat(report.countOfResult(LottoResult.WIN_2ND)).isEqualTo(2);
+		assertThat(report.countOfResult(LottoResult.WIN_5TH)).isEqualTo(4);
+		assertThat(report.countOfResult(LottoResult.WIN_4TH)).isEqualTo(3);
+		assertThat(report.countOfResult(LottoResult.WIN_3RD)).isEqualTo(2);
+		assertThat(report.countOfResult(LottoResult.WIN_2ND)).isEqualTo(1);
 		assertThat(report.countOfResult(LottoResult.WIN_1ST)).isEqualTo(1);
 	}
 }

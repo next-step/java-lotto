@@ -1,6 +1,6 @@
-package lotto.view.domain;
+package lotto.domain;
 
-import lotto.view.model.LottoResult;
+import lotto.model.LottoResult;
 
 import java.util.HashMap;
 import java.util.Map;

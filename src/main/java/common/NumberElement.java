@@ -7,10 +7,14 @@ public class NumberElement implements Comparable<NumberElement>{
     private int value;
 
     public NumberElement(String value){
-        this(isEmpty(value) ? 0 : Integer.parseInt(value.trim()));
+        this.setValue(isEmpty(value) ? 0 : Integer.parseInt(value.trim()));
     }
 
     public NumberElement(int value) {
+        this.setValue(value);
+    }
+
+    protected void setValue(int value) {
 
         if(value < 0){
             throw new IllegalArgumentException("음수는 입력 할 수 없습니다.");

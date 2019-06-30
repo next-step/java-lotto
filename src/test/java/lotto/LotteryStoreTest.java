@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.view.domain.LotteryStore;
-import lotto.view.domain.LottoWallet;
-import lotto.view.domain.TicketMachine;
+import lotto.domain.LotteryStore;
+import lotto.domain.LottoWallet;
+import lotto.domain.TicketMachine;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

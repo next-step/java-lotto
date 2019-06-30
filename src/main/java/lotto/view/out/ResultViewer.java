@@ -1,10 +1,11 @@
 package lotto.view.out;
 
-import lotto.view.model.LottoResult;
-import lotto.view.domain.ResultReport;
+import lotto.model.LottoResult;
+import lotto.domain.ResultReport;
 
 public class ResultViewer {
-	MessagePrinter printer;
+
+	private MessagePrinter printer;
 
 	public ResultViewer(MessagePrinter printer) {
 		this.printer = printer;
@@ -16,7 +17,6 @@ public class ResultViewer {
 	 * @param investment	투자금 총액
 	 */
 	public void render(ResultReport report, int investment) {
-
 		this.printer.print("");
 		this.printer.print("당첨통계");
 		this.printer.print("------");
