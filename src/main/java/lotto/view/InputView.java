@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String MESSAGE_OF_INVERST_MONEY = "구입금액을 입력해 주세요.";
-    private static final String MESSAGE_OF_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MESSAGE_OF_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_OF_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-    private static final String SEPARATOR = ", ";
+    private static final String SEPARATOR = ",";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -21,7 +21,7 @@ public class InputView {
         return money;
     }
 
-    public static List<Integer> inputWinningNumber() {
+    public static List<Integer> inputWinningNumbers() {
         System.out.println(MESSAGE_OF_WINNING_NUMBER);
         String numbers = scanner.nextLine();
 

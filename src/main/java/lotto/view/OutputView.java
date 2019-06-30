@@ -9,11 +9,12 @@ import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String MESSAGE_OF_NUMBER_OF_TICKET = "%d개를 구매했습니다.";
-    private static final String FORMAT_OF_TICKET = "[%s+]";
-    private static final String MESSAGE_OF_RESULT_INTRO = "당첨 통계\n---------";
+    private static final String FORMAT_OF_TICKET = "[%s]";
+    private static final String MESSAGE_OF_RESULT_INTRO = "\n당첨 통계\n---------";
     private static final String MESSAGE_OF_WINNING_RESULT = "%d개 일치 (%s원)- %d개";
     private static final String MESSAGE_OF_SECOND_WINNING_RESULT = "%d개 일치, 보너스 볼 일치 (%s원)- %d개";
     private static final String MESSAGE_OF_PROFIT_RATIO = "총 수익률은 %.2f입니다.";
+    private static final String DELIMITER = ", ";
 
     public static void printNumberOfTickets(int numberOfTickets) {
         System.out.println(String.format(MESSAGE_OF_NUMBER_OF_TICKET, numberOfTickets));
@@ -24,7 +25,7 @@ public class OutputView {
 
         String joinedNumbers = numbers.stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(DELIMITER));
 
         System.out.println(String.format(FORMAT_OF_TICKET, joinedNumbers));
     }
@@ -33,16 +34,17 @@ public class OutputView {
         System.out.println(MESSAGE_OF_RESULT_INTRO);
 
         for (Rank rank : Rank.values()) {
+            if (rank.equals(Rank.MISS)) {
+                break;
+            }
             int countOfMatch = rank.getCountOfMatch();
             int winningMoney = rank.getWinningMoney().toInteger();
             int countOfWinning = statistics.getCountOfWinning(rank);
 
-            String outputMessage;
+            String outputMessage = MESSAGE_OF_WINNING_RESULT;
             if (rank.equals(Rank.SECOND)) {
                 outputMessage = MESSAGE_OF_SECOND_WINNING_RESULT;
             }
-            outputMessage = MESSAGE_OF_WINNING_RESULT;
-
             System.out.println(String.format(outputMessage, countOfMatch, winningMoney, countOfWinning));
         }
     }

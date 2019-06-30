@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Money {
-    static final int TICKET_PRICE = 1_000;
+    public static final int TICKET_PRICE = 1_000;
     static final int MINIMUM_VALUE = 0;
     static final double PERCENTAGE_RATIO = 100.0;
     static final String OUT_OF_RANGE_MESSAGE = "Money는 0원 미만이 될 수 없습니다.";
@@ -43,12 +43,13 @@ public class Money {
     }
 
     public int percentageBy(Money operand) {
-        return (int) (((double)value / operand.value) * PERCENTAGE_RATIO);
+        return (int) (((double) value / operand.value) * PERCENTAGE_RATIO);
     }
 
     public int toInteger() {
         return value;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
