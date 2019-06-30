@@ -1,21 +1,13 @@
 package view;
 
-import domain.LottoSet;
+import domain.LottoPaper;
 import domain.LottoResult;
 import domain.Rank;
 import domain.RankCount;
 
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class ResultView {
-
-    public static void printBuyLottoPaper(List<LottoSet> lottoPaper) {
-        System.out.println(lottoPaper.size() + "개를 구매했습니다.");
-
-        lottoPaper.forEach(System.out::println);
-    }
 
     public static void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
@@ -42,5 +34,11 @@ public class ResultView {
                 .append("원) - ")
                 .append(count)
                 .append("개").toString();
+    }
+
+    public static void printBuyLottoPaper(LottoPaper lottoPaper) {
+        System.out.println("수동으로 " + lottoPaper.getManualLottoSetsSize() + "장, 자동으로" + lottoPaper.getAutoLottoSetsSize() + "개를 구매했습니다.");
+
+        lottoPaper.getLottoSets().forEach(System.out::println);
     }
 }

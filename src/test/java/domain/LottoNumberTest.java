@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class LottoNumberTest {
+
     @Test(expected = IllegalArgumentException.class)
     public void 로또_번호는_최대값보다_클_수_없다() {
         new LottoNumber(LottoNumber.LOTTO_MAX_NUMBER + 1);

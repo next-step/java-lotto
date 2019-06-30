@@ -4,19 +4,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class LottoResultTest {
+
     private LottoResult lottoResult;
-    private List<LottoSet> lottoPaper;
+    private LottoPaper lottoPaper;
 
     @Before
     public void setUp() {
         // given
-        lottoPaper = Arrays.asList(
+        lottoPaper = new LottoPaper(Arrays.asList(
                 new LottoSet(8, 21, 23, 41, 42, 43),
                 new LottoSet(3, 5, 11, 16, 32, 38),
                 new LottoSet(7, 11, 16, 35, 36, 44),
@@ -30,7 +29,7 @@ public class LottoResultTest {
                 new LottoSet(2, 8, 9, 18, 19, 21),
                 new LottoSet(13, 14, 18, 21, 23, 35),
                 new LottoSet(17, 21, 29, 37, 42, 45),
-                new LottoSet(3, 8, 27, 30, 35, 44));
+                new LottoSet(3, 8, 27, 30, 35, 44)));
         // when
         lottoResult = new LottoResult(lottoPaper, new WinningLotto(new LottoSet(1, 2, 3, 4, 5, 6), new LottoNumber(44)));
     }

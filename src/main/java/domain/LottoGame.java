@@ -9,8 +9,12 @@ public class LottoGame {
     public static final int TICKET_PRICE = 1000;
     private int tryNo;
 
-    public LottoGame(LottoMoney lottoMoney) {
-        tryNo = lottoMoney.getTryNo();
+    public LottoGame(LottoMoney lottoMoney, int manualBuyNumber) {
+        if(lottoMoney.getTryNo() < manualBuyNumber) {
+            throw new IllegalArgumentException("수동구매 갯수가 구입금액을 초과합니다.");
+        }
+
+        tryNo = lottoMoney.getTryNo() - manualBuyNumber;
     }
 
     public List<LottoSet> start() {
@@ -24,13 +28,11 @@ public class LottoGame {
         return Collections.unmodifiableList(lottoPaper);
     }
 
-    public LottoSet round() {
+    private LottoSet round() {
         return LottoGenerator.getLottoSet();
     }
 
     private boolean isNotEnd() {
         return tryNo > 0;
     }
-
-
 }

@@ -43,5 +43,4 @@ public class LottoSet {
     public String toString() {
         return lottoNumbers.toString();
     }
-
 }

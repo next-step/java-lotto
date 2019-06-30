@@ -6,6 +6,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class LottoGeneratorTest {
+
     @Test
     public void 로또_번호는_6개이다() {
         // when

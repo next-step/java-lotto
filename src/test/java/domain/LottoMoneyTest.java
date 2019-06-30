@@ -1,9 +1,9 @@
 package domain;
 
-import domain.LottoMoney;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class LottoMoneyTest {
 
@@ -12,11 +12,17 @@ public class LottoMoneyTest {
         // when
         new LottoMoney(999);
     }
-    @Test
-    public void 금액에_해당하는_로또_개수() {
-        assertThat(new LottoMoney(1000).getTryNo()).isEqualTo(1);
-        assertThat(new LottoMoney(1500).getTryNo()).isEqualTo(1);
-        assertThat(new LottoMoney(14000).getTryNo()).isEqualTo(14);
 
+    @Test
+    public void 로또_구입_개수_구하기() {
+        // given
+        int price = LottoGame.TICKET_PRICE * 14;
+        LottoMoney lottoMoney = new LottoMoney(price);
+
+        //  when
+        int tryNo = lottoMoney.getTryNo();
+
+        // then
+        assertThat(tryNo, is(14));
     }
 }
