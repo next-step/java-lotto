@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * project      : java-lotto
  * create date  : 2019-06-24 23:53
  */
-public class LottoTest {
+public class LottosTest {
 
     private List<Number> numbers;
     private List<Number> lotteryNumbers;
