@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StatisticsTest {
+class StatisticsTest {
     @ParameterizedTest
     @CsvSource({
             "14000, 0.35",

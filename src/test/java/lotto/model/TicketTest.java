@@ -12,8 +12,8 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class TicketTest {
-    public static final int STARTING_NUMBER = 1;
+class TicketTest {
+    private static final int STARTING_NUMBER = 1;
     private Set<Ball> balls;
     private Ticket ticket;
 

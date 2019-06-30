@@ -42,12 +42,12 @@ public class Money {
         return Money.valueOf(value + operand.value);
     }
 
-    public int percentageBy(Money operand) {
-        return (int) (((double) value / operand.value) * PERCENTAGE_RATIO);
-    }
-
     public int toInteger() {
         return value;
+    }
+
+    int percentageBy(Money operand) {
+        return (int) (((double) value / operand.value) * PERCENTAGE_RATIO);
     }
 
     @Override

@@ -10,8 +10,8 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class WinningTicketTest {
-    public static final int STARTING_NUMBER = 1;
+class WinningTicketTest {
+    private static final int STARTING_NUMBER = 1;
     private Ticket ticket;
 
     @BeforeEach

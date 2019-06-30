@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class BallTest {
+class BallTest {
     @Test
     @DisplayName("Ball.valueOf로 객체를 생성한다.")
     void create_Ball() {

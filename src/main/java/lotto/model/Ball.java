@@ -29,7 +29,7 @@ public class Ball {
         return ball;
     }
 
-    public int toInteger() {
+    int toInteger() {
         return value;
     }
 

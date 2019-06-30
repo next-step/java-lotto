@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RankTest {
+class RankTest {
     @Test
     @DisplayName("1등은 숫자 6개가 일치한다.")
     void determine_1st() {

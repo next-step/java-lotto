@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Objects;
 
 public class WinningTicket {
-    public static final String BONUS_BALL_DUPLICATE_MESSAGE = "Bonus볼이 Ticket에 있는 숫자와 중복됩니다.";
+    static final String BONUS_BALL_DUPLICATE_MESSAGE = "Bonus볼이 Ticket에 있는 숫자와 중복됩니다.";
     private Ticket ticket;
     private Ball bonus;
 

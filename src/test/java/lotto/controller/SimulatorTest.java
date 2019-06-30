@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SimulatorTest {
+class SimulatorTest {
     @ParameterizedTest
     @ValueSource(ints = {14000, 12000, 2494, 142875})
     @DisplayName("Simulator에서 구입 금액에 맞게 여러장의 Ticket을 구매할 수 있다.")
