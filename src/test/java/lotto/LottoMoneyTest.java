@@ -13,13 +13,13 @@ public class LottoMoneyTest {
     @ParameterizedTest
     @ValueSource(ints={-50, -100, -500, -1000})
     public void testIfNegativeValueThenInvokedException(int money) {
-        assertThatIllegalStateException(() -> LottoMoney.of(money));
+        assertThatIllegalStateException().isThrownBy(() -> LottoMoney.of(money));
     }
 
     @DisplayName("로또 금액이 1000원 미만이라면 Exception 이 발생합니다.")
     @ParameterizedTest
     @ValueSource(ints={500, 600, 700, 800, 900})
     public void testIfMoneySmallerThan1000ThenInvokedException(int money) {
-        assertThatIllegalStateException(() -> LottoMoney.of(money));
+        assertThatIllegalStateException().isThrownBy(() -> LottoMoney.of(money));
     }
 }
