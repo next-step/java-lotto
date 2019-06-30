@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class LottoRankCounter {
     private final Map<LottoRank, Integer> countFinder = new HashMap<>();
@@ -15,5 +14,10 @@ public class LottoRankCounter {
 
     public int getCount(LottoRank rank) {
         return countFinder.getOrDefault(rank, 0);
+    }
+
+    public int getTotalLottoMoney(LottoRank rank) {
+        int count = getCount(rank);
+        return rank.getWinningMoney() * count;
     }
 }

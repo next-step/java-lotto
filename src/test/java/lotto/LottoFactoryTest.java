@@ -12,11 +12,12 @@ public class LottoFactoryTest {
     @DisplayName("로또 금액에 맞는 로또 리스트 개수가 나와야 한다.")
     @ParameterizedTest
     @ValueSource(ints={1_000, 5_000, 14_000, 30_000})
-    public void testLottosSize(int lottoAmounts) {
-        LottoFactory lottoFactory = new LottoFactory(lottoAmounts);
+    public void testLottosSize(int intLottoMoney) {
+        LottoMoney lottoMoney = LottoMoney.of(intLottoMoney);
+        LottoFactory lottoFactory = new LottoFactory(lottoMoney);
         List<Lotto> lottos = lottoFactory.createLottos();
 
-        int lottoCounts = lottoAmounts / LottoFactory.SINGLE_LOTTO_AMOUNT;
+        int lottoCounts = lottoMoney.value() / LottoFactory.SINGLE_LOTTO_MONEY;
         assertThat(lottos).hasSize(lottoCounts);
         assertThat(lottoFactory.getLottoCounts()).isEqualTo(lottoCounts);
     }

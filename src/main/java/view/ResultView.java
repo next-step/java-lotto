@@ -1,7 +1,10 @@
+package view;
+
 import lotto.Lotto;
-import lotto.LottoAmount;
+import lotto.LottoRank;
 import lotto.LottoResults;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -9,18 +12,16 @@ public class ResultView {
     private static final String PURCHASE_RESULT_TEXT_FORMAT = "%d개를 구매했습니다.";
     private static final String TOTAL_INCOME_RATE_TEXT_FORMAT = "총 수익률은 %.2f입니다.";
 
-    private ResultView() {
+    private ResultView() {/* prevent creating instance. */}
 
-    }
-
-    public static void printLottoCounts(int rottoCounts) {
-        String purchaseResultText = String.format(PURCHASE_RESULT_TEXT_FORMAT, rottoCounts);
+    public static void printLottoCounts(int lottoCounts) {
+        String purchaseResultText = String.format(PURCHASE_RESULT_TEXT_FORMAT, lottoCounts);
         System.out.println(purchaseResultText);
     }
 
     public static void printLottos(List<Lotto> lottos) {
         lottos.stream()
-                .map(Lotto::getNumbers)
+                .map(Lotto::getLottoNumbers)
                 .forEach(System.out::println);
     }
 
@@ -32,15 +33,15 @@ public class ResultView {
     }
 
     private static void printAverageTexts(LottoResults lottoResults) {
-        for (int count = 3; count < 7; count++) {
-            int lottoAmount = LottoAmount
-                    .getByFitCount(count)
-                    .getAmount();
-
-            int lotteryCount = lottoResults.countLotteryOf(count);
-            String averageText = String.format(AVERAGE_TEXT_FORMAT, count, lottoAmount, lotteryCount);
-            System.out.println(averageText);
-        }
+        Arrays.stream(LottoRank.values())
+              .filter(rank -> rank != LottoRank.MISS)
+              .map(rank -> {
+                  int totalCountOfMatch = lottoResults.totalCountOfMatch(rank);
+                  int lottoWinningMoney = rank.getWinningMoney();
+                  int matchOfCount = rank.getCountOfMatch();
+                  return String.format(AVERAGE_TEXT_FORMAT, matchOfCount, lottoWinningMoney, totalCountOfMatch);
+              })
+              .forEach(System.out::println);
     }
 
     private static void printIncomeRate(LottoResults lottoResults) {

@@ -6,27 +6,35 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoResults {
-    private static final int MAX_LOTTO_FIT_COUNT = 6;
+    private final LottoRankCounter lottoRankCounter;
 
-    private final int[] fitCounts;
     private final float incomeRate;
 
     public LottoResults(String lotteryNumbersString, List<Lotto> lottos) {
-        this.fitCounts = createFitCounts(lotteryNumbersString, lottos);
+        this.lottoRankCounter = createRankCounter(lotteryNumbersString, lottos);
         this.incomeRate = computeIncomeRate(lottos.size());
     }
 
-    private int[] createFitCounts(String lotteryNumbersString, List<Lotto> lottos) {
-        int[] fitCounts = new int[MAX_LOTTO_FIT_COUNT];
+    public float getIncomeRate() {
+        return incomeRate;
+    }
+
+    public int totalCountOfMatch(LottoRank rank) {
+        return lottoRankCounter.getCount(rank);
+    }
+
+    private LottoRankCounter createRankCounter(String lotteryNumbersString, List<Lotto> lottos) {
+        LottoRankCounter rankCounter = new LottoRankCounter();
 
         List<Integer> lotteryNumbers = createLotteryNumbers(lotteryNumbersString);
 
         lottos.stream()
-                .mapToInt(rotto -> rotto.computeCountOfNumberExist(lotteryNumbers))
-                .filter(fitCount -> fitCount > 0)
-                .forEach(fitCount -> fitCounts[fitCount - 1] += 1);
+                .mapToInt(lotto -> lotto.computeCountOfMatch(lotteryNumbers))
+                .filter(countOfMatch -> countOfMatch > 0)
+                .mapToObj(LottoRank::valueOf)
+                .forEach(rankCounter::addCount);
 
-        return fitCounts;
+        return rankCounter;
     }
 
     private List<Integer> createLotteryNumbers(String lotteryNumbersString) {
@@ -38,34 +46,22 @@ public class LottoResults {
     }
 
     private float computeIncomeRate(int countOfLotto) {
-        float totalLottoAmount = IntStream.range(0,6)
-                .map(this::getTotalLottoAmountOf)
-                .sum();
+        float allLottoTotalMoney = IntStream.range(0,6)
+                                          .mapToObj(LottoRank::valueOf)
+                                          .mapToInt(this::getTotalLottoMoneyOf)
+                                          .sum();
 
-        float purchaseAmounts = LottoFactory.SINGLE_LOTTO_AMOUNT * countOfLotto;
-        float rawIncomeRate = totalLottoAmount / purchaseAmounts;
-        return convertDigit2(rawIncomeRate);
+        float purchaseAmounts = LottoFactory.SINGLE_LOTTO_MONEY * countOfLotto;
+        float rawIncomeRate = allLottoTotalMoney / purchaseAmounts;
+        return changeDecimalTwoPoint(rawIncomeRate);
     }
 
-    private float convertDigit2(float value) {
+    private float changeDecimalTwoPoint(float value) {
         String stringValue = String.format("%.02f", value);
         return Float.parseFloat(stringValue);
     }
 
-    private int getTotalLottoAmountOf(int fitIndex) {
-        int lottoFitCount = fitIndex + 1;
-        LottoAmount lottoAmount = LottoAmount.getByFitCount(lottoFitCount);
-        int fitCount = fitCounts[fitIndex];
-
-        return lottoAmount.getAmount() * fitCount;
-    }
-
-    public int countLotteryOf(int fitCount) {
-        int index = fitCount - 1;
-        return fitCounts[index];
-    }
-
-    public float getIncomeRate() {
-        return incomeRate;
+    private int getTotalLottoMoneyOf(LottoRank rank) {
+        return this.lottoRankCounter.getTotalLottoMoney(rank);
     }
 }

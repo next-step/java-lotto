@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    static final int SINGLE_LOTTO_AMOUNT = 1_000;
+    static final int SINGLE_LOTTO_MONEY = 1_000;
 
     private final int lottoCounts;
 
-    public LottoFactory(int lottoAmounts) {
-        this.lottoCounts = lottoAmounts / SINGLE_LOTTO_AMOUNT;
+    public LottoFactory(LottoMoney lottoMoney) {
+        this.lottoCounts = lottoMoney.value() / SINGLE_LOTTO_MONEY;
     }
 
     public List<Lotto> createLottos() {

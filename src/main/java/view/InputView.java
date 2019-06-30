@@ -1,3 +1,5 @@
+package view;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -10,9 +12,9 @@ public class InputView {
         System.out.println(PURCHASE_AMOUNT_GUIDE_TEXT);
 
         Scanner scanner = new Scanner(System.in);
-        String stringRottoAmounts = scanner.nextLine();
+        String stringLottoAmounts = scanner.nextLine();
 
-        return Integer.parseInt(stringRottoAmounts);
+        return Integer.parseInt(stringLottoAmounts);
     }
 
     public static String getLotteryNumbersString() {

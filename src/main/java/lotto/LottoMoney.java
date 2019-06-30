@@ -17,7 +17,7 @@ public class LottoMoney {
         return new LottoMoney(money);
     }
 
-    public int values() {
+    public int value() {
         return money;
     }
 }
