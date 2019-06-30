@@ -9,23 +9,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-class LottoTest {
+class LotteryTest {
 
     @Test
     void getNumbers() {
         List<Integer> numbers = Arrays.asList(1, 4, 5, 6, 7, 8);
-        assertThat(new Lotto(numbers).getNumbers().size()).isEqualTo(6);
+        assertThat(new Lottery(numbers).getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     void validate() {
         List<Integer> numbers = Arrays.asList(1, 4, 2);
-        assertThatThrownBy(() -> new Lotto(numbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottery(numbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void getWinningCount() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 4, 5, 6, 7, 20));
-        assertThat(lotto.getWinningCount(Arrays.asList(1, 4, 5, 6, 7, 8))).isEqualTo(5);
+        Lottery lottery = new Lottery(Arrays.asList(1, 4, 5, 6, 7, 20));
+        assertThat(lottery.getWinningCount(Arrays.asList(1, 4, 5, 6, 7, 8))).isEqualTo(5);
     }
 }
