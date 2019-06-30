@@ -113,6 +113,40 @@ public class LottoWinningResultTest {
     }
 
     @Test
+    @DisplayName("로또번호가 5개 일치하고 보너스번호가 같을때 당첨금을 확인한다")
+    void checkBounsNumber() {
+        // given
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 26L), 27),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L), 45),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L), 45),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L), 45),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L), 45))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 27);
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
+        // when
+        Long winningAmount = lottoWinningResult.getTotalWinningAmount();
+        // then
+        assertThat(winningAmount).isEqualTo(LottoWinningAmount.FIVE_AND_BONUS_MATCH.getWinningAmount());
+    }
+
+    @Test
+    @DisplayName("로또번호가 6개 일치하고 보너스번호가 같을때 당첨금을 확인한다")
+    void checkBounsNumber2() {
+        // given
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 27))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 27);
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
+        // when
+        Long winningAmount = lottoWinningResult.getTotalWinningAmount();
+        // then
+        assertThat(winningAmount).isEqualTo(LottoWinningAmount.SIX_MATCH.getWinningAmount());
+    }
+
+    @Test
     @DisplayName("로또번호가 복합적으로 일치할때 당첨금을 확인한다")
     void checkWinningAmount6() {
         // given

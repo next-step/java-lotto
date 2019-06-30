@@ -1,11 +1,8 @@
 package lotto.dto;
 
 import lotto.domain.winning.EarningRate;
-import lotto.domain.winning.LottoWinningAmount;
 import lotto.domain.winning.LottoWinningResult;
 import lotto.domain.PurchaseAmount;
-
-import java.util.Map;
 
 public class LottoResultDto {
     private LottoWinningResult lottoWinningResult;

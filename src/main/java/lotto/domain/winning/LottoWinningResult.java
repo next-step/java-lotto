@@ -20,8 +20,11 @@ public class LottoWinningResult {
 
     private Map<LottoWinningAmount, Long> createWinningResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
         return lottoTickets.findAll().stream()
-                .map(lottoTicket -> getMatchCount(lottoTicket, winningTicket))
-                .map(LottoWinningAmount::find)
+                .map(lottoTicket -> {
+                    System.out.println(lottoTicket.getBonusNumber().get().equals(winningTicket.getBonusNumber().get()));
+                    return LottoWinningAmount.find(getMatchCount(lottoTicket, winningTicket),
+                                    lottoTicket.getBonusNumber().get().equals(winningTicket.getBonusNumber().get()));}
+                )
                 .collect(Collectors.toMap(o -> o, o -> 1L, Long::sum));
     }
 
@@ -29,10 +32,6 @@ public class LottoWinningResult {
         return lottoTicket.findAll().stream()
                 .filter(winningTicket::existNumber)
                 .count();
-    }
-
-    public Map<LottoWinningAmount, Long> getWinningResult() {
-        return Collections.unmodifiableMap(winningResultMap);
     }
 
     public long getWinningCount(LottoWinningAmount lottoWinningAmount) {
