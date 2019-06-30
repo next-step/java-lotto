@@ -1,5 +1,6 @@
 package lotto.io;
 
+import lotto.model.Lotteries;
 import lotto.model.Lottery;
 import lotto.model.LottoResult;
 
@@ -8,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void viewLotto(List<Lottery> lotteries) {
-        lotteries.forEach(lotto -> System.out.println(lotto.getNumbers().stream().map(Object::toString).collect(Collectors.joining(","))));
+    public static void viewLotto(Lotteries lotteries) {
+        lotteries.getLotteries().forEach(lotto -> System.out.println(lotto.getNumbers().stream().map(Object::toString).collect(Collectors.joining(","))));
     }
 
     public static void viewResult(LottoResult result) {
@@ -21,12 +22,12 @@ public class OutputView {
         System.out.println("6개 일치 (2000000000원)" + result.getWinningCount6());
     }
 
-    public static void viewEarningRate(List<Lottery> lotteries, LottoResult lottoResult) {
+    public static void viewEarningRate(Lotteries lotteries, LottoResult lottoResult) {
         int earning = 0;
         earning += lottoResult.getWinningCount6() * 2000000000;
         earning += lottoResult.getWinningCount5() * 1500000;
         earning += lottoResult.getWinningCount4() * 50000;
         earning += lottoResult.getWinningCount3() * 5000;
-        System.out.println("총 수익률은" + (double) (lotteries.size()) * 1000 / earning + "입니다");
+        System.out.println("총 수익률은" + (double) (lotteries.getLotteries().size()) * 1000 / earning + "입니다");
     }
 }
