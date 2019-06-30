@@ -29,6 +29,10 @@ public class Ball {
         return ball;
     }
 
+    public int toInteger() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

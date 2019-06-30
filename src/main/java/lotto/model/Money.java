@@ -46,6 +46,9 @@ public class Money {
         return (int) (((double)value / operand.value) * PERCENTAGE_RATIO);
     }
 
+    public int toInteger() {
+        return value;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

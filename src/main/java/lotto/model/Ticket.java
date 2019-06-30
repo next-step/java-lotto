@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Ticket {
     static final String OUT_OF_SIZE_MESSAGE = "Ticket에 담길 수 있는 Ball의 갯수가 아닙니다.";
@@ -45,6 +47,12 @@ public class Ticket {
 
     public boolean contains(Ball ball) {
         return balls.contains(ball);
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(balls.stream()
+                .map(Ball::toInteger)
+                .collect(Collectors.toList()));
     }
 
     @Override
