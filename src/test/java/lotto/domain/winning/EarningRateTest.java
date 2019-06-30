@@ -9,20 +9,20 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class EarningRateTest {
 
     @Test
-    @DisplayName("당첨금액이 0원인경우 예외처리를 확인한다")
+    @DisplayName("당첨금액이 -1인경우 예외처리를 확인한다")
     void checkException() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    EarningRate.of(0, 1000);
+                    EarningRate.of(-1, 1000);
                 }).withMessageMatching("Amount must grather than 0");
     }
 
     @Test
-    @DisplayName("구입금액이 0원인경우 예외처리를 확인한다")
+    @DisplayName("구입금액이 -1인경우 예외처리를 확인한다")
     void checkException2() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    EarningRate.of(1000, 0);
+                    EarningRate.of(1000, -1);
                 }).withMessageMatching("Amount must grather than 0");
     }
 

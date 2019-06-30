@@ -20,15 +20,15 @@ public class LottoNumber {
     }
 
     LottoNumber(long number) {
-        validate(number);
         this.number = number;
     }
 
     public static LottoNumber of(long number) {
+        validate(number);
         return lottoNumberPool.get(number);
     }
 
-    private void validate(long number) {
+    private static void validate(long number) {
         if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
             throw new IllegalArgumentException("Invalid lotto number");
         }

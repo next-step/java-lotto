@@ -20,12 +20,12 @@ public class LottoTicketTest {
         List<LottoNumber> lottoNumbers = lottoTicket.findAll();
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
-        assertThat(lottoNumbers.get(0)).isEqualTo(1L);
-        assertThat(lottoNumbers.get(1)).isEqualTo(2L);
-        assertThat(lottoNumbers.get(2)).isEqualTo(3L);
-        assertThat(lottoNumbers.get(3)).isEqualTo(4L);
-        assertThat(lottoNumbers.get(4)).isEqualTo(5L);
-        assertThat(lottoNumbers.get(5)).isEqualTo(6L);
+        assertThat(lottoNumbers.get(0).get()).isEqualTo(1L);
+        assertThat(lottoNumbers.get(1).get()).isEqualTo(2L);
+        assertThat(lottoNumbers.get(2).get()).isEqualTo(3L);
+        assertThat(lottoNumbers.get(3).get()).isEqualTo(4L);
+        assertThat(lottoNumbers.get(4).get()).isEqualTo(5L);
+        assertThat(lottoNumbers.get(5).get()).isEqualTo(6L);
     }
 
     @Test

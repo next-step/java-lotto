@@ -117,13 +117,13 @@ public class LottoWinningResultTest {
     void checkBounsNumber() {
         // given
         LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
-                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 26L), 27),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 26L), 45),
                 LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L), 45),
                 LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L), 45),
                 LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L), 45),
                 LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L), 45))
         );
-        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 27);
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 26);
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
@@ -151,6 +151,7 @@ public class LottoWinningResultTest {
     void checkWinningAmount6() {
         // given
         LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 24L, 25L, 26L), 45),
                 LottoTicket.of(Arrays.asList(1L, 2L, 3L, 24L, 25L, 26L), 45),
                 LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 25L, 26L), 45),
                 LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 25L, 26L), 45),
