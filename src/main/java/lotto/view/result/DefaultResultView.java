@@ -27,6 +27,7 @@ public class DefaultResultView implements ResultView {
         System.out.println(String.format("3개 일치 (%d원)- %d개", LottoWinningAmount.THREE_MATCH.getWinningAmount(), lottoWinningResult.getWinningCount(LottoWinningAmount.THREE_MATCH)));
         System.out.println(String.format("4개 일치 (%d원)- %d개", LottoWinningAmount.FOUR_MATCH.getWinningAmount(),  lottoWinningResult.getWinningCount(LottoWinningAmount.FOUR_MATCH)));
         System.out.println(String.format("5개 일치 (%d원)- %d개", LottoWinningAmount.FIVE_MATCH.getWinningAmount(),  lottoWinningResult.getWinningCount(LottoWinningAmount.FIVE_MATCH)));
+        System.out.println(String.format("5개 일치, 보너스 볼 일치(%d원) - %d개", LottoWinningAmount.FIVE_AND_BONUS_MATCH.getWinningAmount(),  lottoWinningResult.getWinningCount(LottoWinningAmount.FIVE_AND_BONUS_MATCH)));
         System.out.println(String.format("6개 일치 (%d원)- %d개", LottoWinningAmount.SIX_MATCH.getWinningAmount(),  lottoWinningResult.getWinningCount(LottoWinningAmount.SIX_MATCH)));
         System.out.println(String.format("총 수익률은 %.2f입니다.", lottoResultDto.getEarningRate()));
     }

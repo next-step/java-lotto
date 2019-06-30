@@ -3,7 +3,6 @@ package lotto.domain.winning;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,10 +20,9 @@ public class LottoWinningResult {
     private Map<LottoWinningAmount, Long> createWinningResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
         return lottoTickets.findAll().stream()
                 .map(lottoTicket -> {
-                    System.out.println(lottoTicket.getBonusNumber().get().equals(winningTicket.getBonusNumber().get()));
                     return LottoWinningAmount.find(getMatchCount(lottoTicket, winningTicket),
-                                    lottoTicket.getBonusNumber().get().equals(winningTicket.getBonusNumber().get()));}
-                )
+                            lottoTicket.existNumber(winningTicket.getBonusNumber()));
+                })
                 .collect(Collectors.toMap(o -> o, o -> 1L, Long::sum));
     }
 
