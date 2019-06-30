@@ -58,8 +58,22 @@ public class DefaultLottoServiceTest {
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(2000L);
         LottoResultDto lottoResultDto = lottoService.checkWinnintAmount(lottoTickets, Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L), 2000L);
         // then
-        assertThat(lottoResultDto.getThreeMatch().getTicketCount()).isEqualTo(1);
-        assertThat(lottoResultDto.getThreeMatch().getWinningAmount()).isEqualTo(LottoWinningAmount.THREE_MATCH.getWinningAmount());
+        assertThat(lottoResultDto.getWinningResultMap().get(LottoWinningAmount.THREE_MATCH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("수익률을 정상적으로 출력하는지 확인한다")
+    void checkWinningAmount2() {
+        // given
+        LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
+                LottoTickets.of(Arrays.asList(
+                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
+                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
+                ))));
+        // when
+        LottoTickets lottoTickets = lottoService.purchaseLottoTickets(2000L);
+        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L), 2000L);
+        // then
         assertThat(lottoResultDto.getEarningRate()).isEqualTo(2.5);
     }
 }

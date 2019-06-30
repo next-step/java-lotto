@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.winning.LottoWinningChecker;
+import lotto.domain.winning.LottoWinningResult;
 import lotto.dto.LottoResultDto;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class DefaultLottoService implements LottoService {
         return lottoTicketGenerator.generate(PurchaseAmount.of(purchaseAmount));
     }
 
-    public LottoResultDto checkWinnintAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount) {
-        return LottoResultDto.of(LottoWinningChecker.of(lottoTickets, LottoTicket.of(winningTicket)).getWinnigResult(), PurchaseAmount.of(purchaseAmount));
+    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount) {
+        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, LottoTicket.of(winningTicket)), PurchaseAmount.of(purchaseAmount));
     }
 }

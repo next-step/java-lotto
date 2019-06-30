@@ -1,10 +1,14 @@
 package lotto.domain;
 
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.winning.EarningRate;
 import lotto.domain.winning.LottoWinningAmount;
 import lotto.domain.winning.LottoWinningResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,8 +20,16 @@ public class LottoWinningResultTest {
     @DisplayName("로또번호가 모두 일치하지 않을때 당첨금을 확인한다")
     void checkWinningAmount() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        // given
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
         // then
@@ -28,9 +40,15 @@ public class LottoWinningResultTest {
     @DisplayName("로또번호가 3개 일치할때 당첨금을 확인한다")
     void checkWinningAmount2() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.THREE_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
         // then
@@ -41,9 +59,15 @@ public class LottoWinningResultTest {
     @DisplayName("로또번호가 4개 일치할때 당첨금을 확인한다")
     void checkWinningAmount3() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.FOUR_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
         // then
@@ -54,9 +78,15 @@ public class LottoWinningResultTest {
     @DisplayName("로또번호가 5개 일치할때 당첨금을 확인한다")
     void checkWinningAmount4() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.FIVE_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 26L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
         // then
@@ -67,9 +97,15 @@ public class LottoWinningResultTest {
     @DisplayName("로또번호가 6개 일치할때 당첨금을 확인한다")
     void checkWinningAmount5() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.SIX_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
         // then
@@ -80,12 +116,15 @@ public class LottoWinningResultTest {
     @DisplayName("로또번호가 복합적으로 일치할때 당첨금을 확인한다")
     void checkWinningAmount6() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.THREE_MATCH, 2L);
-        winningResultMap.put(LottoWinningAmount.FOUR_MATCH, 2L);
-        winningResultMap.put(LottoWinningAmount.FIVE_MATCH, 1L);
-        winningResultMap.put(LottoWinningAmount.SIX_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 26L)),
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
         Long winningAmount = lottoWinningResult.getTotalWinningAmount();
         // then
@@ -99,11 +138,17 @@ public class LottoWinningResultTest {
     @DisplayName("로또 구입금액 대비 50% 수익률을 확인한다")
     void checkEarningRate() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.THREE_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
-        double earningRate = lottoWinningResult.getEarningRate(PurchaseAmount.of(LottoWinningAmount.THREE_MATCH.getWinningAmount() * 2));
+        double earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), LottoWinningAmount.THREE_MATCH.getWinningAmount() * 2).get();
         // then
         assertThat(earningRate).isEqualTo(0.5);
     }
@@ -112,10 +157,17 @@ public class LottoWinningResultTest {
     @DisplayName("로또 구입금액 대비 0% 수익률을 확인한다")
     void checkEarningRate2() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
-        double earningRate = lottoWinningResult.getEarningRate(PurchaseAmount.of(10000L));
+        double earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), LottoWinningAmount.THREE_MATCH.getWinningAmount() * 2).get();
         // then
         assertThat(earningRate).isEqualTo(0.0);
     }
@@ -124,11 +176,17 @@ public class LottoWinningResultTest {
     @DisplayName("로또 구입금액 대비 100% 수익률을 확인한다")
     void checkEarningRate3() {
         // given
-        Map<LottoWinningAmount, Long> winningResultMap = new HashMap<>();
-        winningResultMap.put(LottoWinningAmount.THREE_MATCH, 1L);
-        LottoWinningResult lottoWinningResult = LottoWinningResult.of(winningResultMap);
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(Arrays.asList(1L, 2L, 3L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L)),
+                LottoTicket.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L)))
+        );
+        LottoTicket winningTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningTicket);
         // when
-        double earningRate = lottoWinningResult.getEarningRate(PurchaseAmount.of(LottoWinningAmount.THREE_MATCH.getWinningAmount()));
+        double earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), LottoWinningAmount.THREE_MATCH.getWinningAmount()).get();
         // then
         assertThat(earningRate).isEqualTo(1.0);
     }
