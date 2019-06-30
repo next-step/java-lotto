@@ -29,6 +29,7 @@ public class Application {
 
         String inputOfNumbers = InputView.askOfWinningNumbers();
         int inputOfBonusNumber = InputView.askOfWinningBonusNumber();
+
         WinningLotto winningLotto = WinningLotto.of(inputOfNumbers, inputOfBonusNumber);
 
         LottoResult result = lottoTicket.result(winningLotto);
