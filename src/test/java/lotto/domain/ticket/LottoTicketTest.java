@@ -17,7 +17,7 @@ public class LottoTicketTest {
         // given
         LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45);
         // when
-        List<Long> lottoNumbers = lottoTicket.findAll();
+        List<LottoNumber> lottoNumbers = lottoTicket.findAll();
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
         assertThat(lottoNumbers.get(0)).isEqualTo(1L);

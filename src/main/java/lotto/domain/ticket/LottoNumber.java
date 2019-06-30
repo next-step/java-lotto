@@ -17,7 +17,6 @@ public class LottoNumber {
                 LongStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
                         .boxed()
                         .collect(Collectors.toMap(o -> o, LottoNumber::new, (o1, o2) -> o1)));
-        System.out.println("init : " + lottoNumberPool);
     }
 
     LottoNumber(long number) {

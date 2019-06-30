@@ -23,7 +23,7 @@ public class DefaultLottoTicketGenerator implements LottoTicketGenerator {
     }
 
     private List<Long> generate() {
-         return LongStream.rangeClosed(LOTTO_NUM_START, LOTTO_NUM_END)
+        return LongStream.rangeClosed(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX)
                 .boxed()
                 .collect(Collectors.toList());
     }
