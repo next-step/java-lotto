@@ -53,4 +53,43 @@ public class MoneyTest {
         Money money = Money.valueOf(input);
         assertThat(money.getNumberOfTicketForPurchase()).isEqualTo(expectedResult);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1000, 5, 5000",
+            "2000, 3, 6000",
+            "3000, 0, 0"
+    })
+    @DisplayName("Money 객체는 배수 연산을 할 수 있다.")
+    void calculate_Multiple(int input, int operand, int expectedResult) {
+        Money money = Money.valueOf(input);
+        money = money.multiple(operand);
+        assertThat(money).isEqualTo(Money.valueOf(expectedResult));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1000, 2000, 3000",
+            "4000, 5000, 9000",
+            "1500, 2000, 3500"
+    })
+    @DisplayName("Money 객체는 덧셈 연산을 할 수 있다.")
+    void calculate_Add(int input, int operand, int expectedResult) {
+        Money money = Money.valueOf(input);
+        Money otherMoney = Money.valueOf(operand);
+        assertThat(money.add(otherMoney)).isEqualTo(Money.valueOf(expectedResult));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1000, 1000, 100",
+            "3000, 2000, 150",
+            "5000, 14000, 35"
+    })
+    @DisplayName("Money 객체는 퍼센트 연산을 할 수 있다.")
+    void calculate_Percentage(int input, int operand, int expectedResult) {
+        Money money = Money.valueOf(input);
+        Money otherMoney = Money.valueOf(operand);
+        assertThat(money.percentageBy(otherMoney)).isEqualTo(expectedResult);
+    }
 }

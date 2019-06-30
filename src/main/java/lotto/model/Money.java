@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Money {
     static final int TICKET_PRICE = 1_000;
     static final int MINIMUM_VALUE = 0;
+    static final double PERCENTAGE_RATIO = 100.0;
     static final String OUT_OF_RANGE_MESSAGE = "Money는 0원 미만이 될 수 없습니다.";
 
     private static final Map<Integer, Money> CACHE = new HashMap<>();
@@ -31,6 +32,18 @@ public class Money {
 
     public int getNumberOfTicketForPurchase() {
         return value / TICKET_PRICE;
+    }
+
+    public Money multiple(int operand) {
+        return Money.valueOf(value * operand);
+    }
+
+    public Money add(Money operand) {
+        return Money.valueOf(value + operand.value);
+    }
+
+    public int percentageBy(Money operand) {
+        return (int) (((double)value / operand.value) * PERCENTAGE_RATIO);
     }
 
     @Override
