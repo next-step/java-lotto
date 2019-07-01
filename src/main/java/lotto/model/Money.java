@@ -7,6 +7,7 @@ import java.util.Objects;
 public class Money {
 
     static final Money ZERO = Money.won(0);
+
     private final long amount;
 
     private Money(long amount) {
@@ -47,6 +48,7 @@ public class Money {
         Money money1 = (Money) o;
         return amount == money1.amount;
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(amount);

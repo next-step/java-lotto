@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class ManualLottoGeneratorTest {
 
-    @DisplayName("수동으로 로또를 생성한다")
+    @DisplayName("수동으로 로또 1개를 생성한다")
     @ParameterizedTest
     @ValueSource(strings = {
             "1,2,3,4,5,6",
@@ -27,6 +27,7 @@ class ManualLottoGeneratorTest {
 
         List<Lotto> lottos = lottoGenerator.generator();
 
+        assertThat(lottos).hasSize(1);
         assertThat(lottos).contains(ofLotto(1, 2, 3, 4, 5, 6));
     }
 

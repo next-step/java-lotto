@@ -8,7 +8,7 @@ public class Wallet {
         this.money = money;
     }
 
-    public void spendOnLotto(long numberOfLotto) {
+    void spendOnLotto(long numberOfLotto) {
         money = money.spendOnLotto(numberOfLotto);
     }
 

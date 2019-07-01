@@ -4,15 +4,14 @@ import lotto.exception.InvalidCountOfLottoException;
 import lotto.exception.NumbersIsEmptyException;
 
 import java.util.*;
-import java.util.function.LongFunction;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class Lotto {
 
-    public static final String SEPARATOR_OF_LOTTO_NUMBERS = ",";
     public static final int SIZE = 6;
+    private static final String SEPARATOR_OF_LOTTO_NUMBERS = ",";
 
     static final Money PRICE = Money.won(1_000);
 

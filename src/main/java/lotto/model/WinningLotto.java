@@ -9,7 +9,7 @@ public class WinningLotto {
     private final Lotto lotto;
     private final Number bonus;
 
-    public WinningLotto(Lotto lotto, Number bonus) {
+    private WinningLotto(Lotto lotto, Number bonus) {
         this.lotto = lotto;
         this.bonus = bonus;
     }
@@ -25,16 +25,16 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonus);
     }
 
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public Number getBonus() {
+    Number getBonus() {
         return bonus;
     }
 
-    public Prize match(Lotto lotto) {
+    Prize match(Lotto lotto) {
         return Prize.of(this.lotto.getMatchCount(lotto), lotto.hasBonusNumber(bonus));
+    }
+
+    Lotto getLotto() {
+        return lotto;
     }
 
     @Override

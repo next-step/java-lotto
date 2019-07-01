@@ -1,19 +1,29 @@
 package lotto.model.generator;
 
 import lotto.model.Lotto;
-import lotto.model.Money;
+import lotto.model.Number;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
     private long countOfLotto;
-    private NumberGenerator numberGenerator;
+    private static final List<Number> numbers;
+
+    static {
+        numbers = IntStream.rangeClosed(Number.MIN, Number.MAX)
+                .mapToObj(Number::of)
+                .collect(toList());
+    }
 
     public RandomLottoGenerator(long countOfLotto) {
         this.countOfLotto = countOfLotto;
-        this.numberGenerator = new NumberGenerator();
     }
 
     @Override
@@ -26,7 +36,8 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     private Lotto createLotto() {
-        numberGenerator.shuffle();
-        return Lotto.from(numberGenerator.peek(Lotto.SIZE));
+        Collections.shuffle(numbers);
+        return numbers.stream().limit(Lotto.SIZE)
+                .collect(collectingAndThen(toList(), Lotto::from));
     }
 }
