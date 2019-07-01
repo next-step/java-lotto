@@ -1,51 +1,53 @@
 package lotto.domain.ticket;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final Integer LOTTO_NUMBERS_SIZE = 6;
+    public static final Integer LOTTO_NUMBERS_SIZE = 6;
     public static final Long PRICE = 1000L;
 
-    private List<Long> lottoNumbers;
-
-    private LottoTicket(List<Long> lottoNumbers) {
+    private List<LottoNumber> lottoNumbers;
+    private LottoNumber bonusNumber;
+    private LottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    public static LottoTicket of(List<Long> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
+    public static LottoTicket of(List<Long> lottoNumbers, long bonusNumber) {
+        return new LottoTicket(lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList()), LottoNumber.of(bonusNumber));
     }
 
-    private void validateSize(List<Long> lottoNumbers) {
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("Count of Lotto numbers must be 6");
         }
     }
 
-    private void validateDuplicate(List<Long> lottoNumbers) {
-        Set<Long> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
         if (nonDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("Lotto numbers can not be duplicated");
         }
     }
 
-    public List<Long> findAll() {
-        return new ArrayList<>(lottoNumbers);
+    public List<LottoNumber> findAll() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public String getLottoTicketNumbers() {
         return String.join(", ", getNumbers());
     }
 
-    public boolean existNumber(long number) {
+    public boolean existNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 
     private List<String> getNumbers() {

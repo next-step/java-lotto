@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface LottoService {
     LottoTickets purchaseLottoTickets(long purchaseAmount);
-    LottoResultDto checkWinnintAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount);
+    LottoResultDto checkWinningAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount, long bonusNumber);
 }
