@@ -45,9 +45,9 @@ public class Simulator {
 
         return statistics;
     }
-
+    /*
     public static double getProfitRate(Statistics statistics, int purchasePrice) {
         Money money = Money.valueOf(purchasePrice);
         return statistics.calculateProfitRate(money);
-    }
+    }*/
 }

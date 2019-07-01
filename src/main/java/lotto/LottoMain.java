@@ -24,6 +24,8 @@ public class LottoMain {
 
         Statistics statistics = Simulator.simulate(tickets, winningTicket);
         OutputView.printResult(statistics);
-        OutputView.printProfitRatio(Simulator.getProfitRate(statistics, purchasePrice));
+
+        double profitRate = statistics.calculateProfitRate(Money.valueOf(purchasePrice));
+        OutputView.printProfitRatio(profitRate);
     }
 }
