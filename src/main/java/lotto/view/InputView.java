@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
@@ -50,12 +51,12 @@ public class InputView {
     return Integer.valueOf(validateInput(scanner.nextLine()));
   }
 
-  public static LottoTickets getLottoTickets(Scanner scanner, int buyCount) {
-    System.out.println("수동으로 구매할 번호를 입력해 주세요");
+  public static LottoTickets getLottoTickets(Scanner scanner, int manualBuyCount) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     List<LottoTicket> lottoTickets = new ArrayList<>();
-    for (int i = 0; i < buyCount; i++) {
-      lottoTickets.add(new LottoTicket(new LottoNumber(splitInput(scanner))));
+    for (int i = 0; i < manualBuyCount; i++) {
+      lottoTickets.add(new LottoTicket(LottoNumbers.of(splitInput(scanner))));
     }
-    return new LottoTickets(buyCount, lottoTickets);
+    return LottoTickets.of(lottoTickets);
   }
 }

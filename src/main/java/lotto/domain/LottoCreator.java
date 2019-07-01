@@ -25,7 +25,7 @@ public class LottoCreator {
     return new LottoTicket(getLottoNumber());
   }
 
-  private LottoNumber getLottoNumber() {
-    return new LottoNumber(numberRange.subList(START_INDEX, LOTTO_NUMBER_SIZE));
+  private LottoNumbers getLottoNumber() {
+    return LottoNumbers.of(numberRange.subList(START_INDEX, LOTTO_NUMBER_SIZE));
   }
 }

@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoStore;
-import lotto.domain.LottoTickets;
-import lotto.domain.Rank;
-import lotto.domain.WinLotto;
+import lotto.domain.*;
 import lotto.util.LottoStatistics;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -20,12 +17,13 @@ public class LottoGame {
     LottoTickets tickets = InputView.getLottoTickets(scanner, manualBuyLottoCount);
     ResultView.printBuyCount(buyLottoCount, manualBuyLottoCount);
 
-    LottoTickets lottoTickets = tickets.getLottoTickets(buyLottoCount);
-    ResultView.printTickets(lottoTickets.getTickets());
+    LottoTickets lottoTickets = LottoTickets.of(buyLottoCount, tickets);
+    ResultView.printTickets(lottoTickets);
 
-    List<Integer> winNumbers = InputView.winNumbers(scanner);
-    int bonusNumber = InputView.bonusNumber(scanner);
-    List<Rank> ranks = lottoTickets.winNumberSize(winNumbers, bonusNumber);
+    LottoNumbers winNumbers = LottoNumbers.of(InputView.winNumbers(scanner));
+    LottoNumber bonusNumber = LottoNumber.of(InputView.bonusNumber(scanner));
+    WinNumber winNumber = new WinNumber(winNumbers, bonusNumber);
+    List<Rank> ranks = lottoTickets.winNumberSize(winNumber);
 
     WinLotto statistics = LottoStatistics.statistics(ranks);
     ResultView.printRanks(statistics);

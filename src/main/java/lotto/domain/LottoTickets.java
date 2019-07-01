@@ -7,16 +7,21 @@ public class LottoTickets {
 
   private List<LottoTicket> tickets = new ArrayList<>();
 
-  public LottoTickets(int buyLottoCount, List<LottoTicket> ticket) {
-    tickets.addAll(ticket);
-
-    int buyCount = buyLottoCount - tickets.size();
-    createLotto(buyCount);
+  private LottoTickets(List<LottoTicket> tickets) {
+    this.tickets = tickets;
   }
 
-  public LottoTickets getLottoTickets(int buyLottoCount) {
-    createLotto(buyLottoCount);
-    return this;
+  private LottoTickets(int buyLottoCount, LottoTickets ticket) {
+    createLotto(buyLottoCount - ticket.size());
+    tickets.addAll(ticket.getTickets());
+  }
+
+  public static LottoTickets of(int buyLottoCount, LottoTickets ticket) {
+    return new LottoTickets(buyLottoCount, ticket);
+  }
+
+  public static LottoTickets of(List<LottoTicket> tickets) {
+    return new LottoTickets(tickets);
   }
 
   private void createLotto(int buyCount) {
@@ -25,15 +30,24 @@ public class LottoTickets {
     }
   }
 
-  public List<Rank> winNumberSize(List<Integer> winNumber, int bonusNumber) {
+  public List<Rank> winNumberSize(WinNumber winNumber) {
     List<Rank> ranks = new ArrayList<>();
     for (LottoTicket lottoTicket : tickets) {
-      ranks.add(lottoTicket.winNumberSize(winNumber, bonusNumber));
+      ranks.add(lottoTicket.winNumberSize(winNumber));
     }
     return ranks;
   }
 
   public List<LottoTicket> getTickets() {
     return tickets;
+  }
+
+  private int size() {
+    return tickets.size();
+  }
+
+  @Override
+  public String toString() {
+    return tickets.toString();
   }
 }

@@ -1,11 +1,10 @@
 package lotto.view;
 
 
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.WinLotto;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 public class ResultView {
@@ -13,11 +12,11 @@ public class ResultView {
   private static final Long DEFAULT_VALUE = 0L;
 
   public static void printBuyCount(int buyLottoCount, int manualBuyLottoCount) {
-    System.out.println("수동으로 " + manualBuyLottoCount + "개, 자동으로 " + buyLottoCount + "개를 구매했습니다.");
+    System.out.println("수동으로 " + manualBuyLottoCount + "개, 자동으로 " + (buyLottoCount - manualBuyLottoCount) + "개를 구매했습니다.");
   }
 
-  public static void printTickets(List<LottoTicket> tickets) {
-    tickets.forEach(System.out::println);
+  public static void printTickets(LottoTickets tickets) {
+    tickets.getTickets().forEach(System.out::println);
   }
 
   public static void printRanks(WinLotto winLotto) {

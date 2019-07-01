@@ -1,19 +1,18 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
 
   static final int LOTTO_NUMBER_SIZE = 6;
-  private final LottoNumber lottoNumber;
+  private final LottoNumbers lottoNumbers;
 
-  public LottoTicket(LottoNumber lottoNumber) {
-    this.lottoNumber = lottoNumber;
+  public LottoTicket(LottoNumbers lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
-  public Rank winNumberSize(List<Integer> winNumber, int bonusNumber) {
-    return lottoNumber.winNumberSize(winNumber, bonusNumber);
+  public Rank winNumberSize(WinNumber winNumber) {
+    return winNumber.match(lottoNumbers);
   }
 
   @Override
@@ -21,16 +20,16 @@ public class LottoTicket {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LottoTicket that = (LottoTicket) o;
-    return Objects.equals(lottoNumber, that.lottoNumber);
+    return Objects.equals(lottoNumbers, that.lottoNumbers);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(lottoNumber);
+    return Objects.hash(lottoNumbers);
   }
 
   @Override
   public String toString() {
-    return lottoNumber.toString();
+    return lottoNumbers.toString();
   }
 }
