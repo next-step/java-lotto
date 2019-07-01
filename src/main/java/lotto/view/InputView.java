@@ -1,5 +1,11 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -24,6 +30,10 @@ public class InputView {
   public static List<Integer> winNumbers(Scanner scanner) {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
+    return splitInput(scanner);
+  }
+
+  private static List<Integer> splitInput(Scanner scanner) {
     return Stream.of(scanner.nextLine().split(","))
         .map(String::trim)
         .mapToInt(Integer::valueOf)
@@ -33,7 +43,20 @@ public class InputView {
 
   public static int bonusNumber(Scanner scanner) {
     System.out.println("보너스 볼을 입력해 주세요.");
-    int bonusNumber = Integer.valueOf(scanner.nextLine());
-    return bonusNumber;
+    return Integer.valueOf(scanner.nextLine());
+  }
+
+  public static int manualBuyLotto(Scanner scanner) {
+    System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    return Integer.valueOf(validateInput(scanner.nextLine()));
+  }
+
+  public static LottoTickets getLottoTickets(Scanner scanner, int manualBuyCount) {
+    System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    List<LottoTicket> lottoTickets = new ArrayList<>();
+    for (int i = 0; i < manualBuyCount; i++) {
+      lottoTickets.add(new LottoTicket(LottoNumbers.of(splitInput(scanner))));
+    }
+    return LottoTickets.of(lottoTickets);
   }
 }

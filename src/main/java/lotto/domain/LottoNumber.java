@@ -1,54 +1,54 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class LottoNumber {
 
-  private static final int MIN = 1;
-  private static final int MAX = 45;
-  static final int LOTTO_NUMBER_SIZE = 6;
+  private static final int LOTTO_NUMBER_MIN = 1;
+  private static final int LOTTO_NUMBER_MAX = 45;
+  private static final Map<Integer, LottoNumber> cache = new HashMap<>();
 
-  private final List<Integer> numbers;
+  private final int number;
 
-  public LottoNumber(List<Integer> numbers) {
-    validateNumberSize(numbers);
-    validateDuplicate(numbers);
-    validateNumbersRange(numbers);
-    this.numbers = numbers;
-    Collections.sort(this.numbers);
-  }
-
-  public Rank winNumberSize(List<Integer> winNumber, int bonusNumber) {
-    return Rank.valueOf(
-        winNumber.stream()
-            .filter(numbers::contains)
-            .count(),
-        numbers.contains(bonusNumber));
-  }
-
-  private void validateNumbersRange(List<Integer> numbers) {
-    boolean match = numbers.stream().anyMatch(number -> number < MIN || number > MAX);
-    if (match) {
-      throw new IllegalArgumentException("1 ~ 45 사이의 숫자만 입력할 수 있습니다.");
+  static {
+    for (int i = LOTTO_NUMBER_MIN; i < LOTTO_NUMBER_MAX + 1; i++) {
+      cache.put(i, new LottoNumber(i));
     }
   }
 
-  private void validateDuplicate(List<Integer> numbers) {
-    if (new HashSet<>(numbers).size() != LOTTO_NUMBER_SIZE) {
-      throw new IllegalArgumentException("중복된 숫자가 입력될 수 없습니다.");
-    }
+  private LottoNumber(int number) {
+    this.number = number;
   }
 
-  private void validateNumberSize(List<Integer> numbers) {
-    if (numbers.size() != LOTTO_NUMBER_SIZE) {
-      throw new IllegalArgumentException("로또 번호는 6자리여야 합니다.");
+  public static LottoNumber of(int number) {
+    LottoNumber lottoNumber = cache.get(number);
+    if (lottoNumber == null) {
+      throw new IllegalArgumentException("로또 번호가 범위내의 숫자가 아닙니다.");
     }
+    return lottoNumber;
+  }
+
+  public static LottoNumber of(String text) {
+    return of(Integer.parseInt(text));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    LottoNumber that = (LottoNumber) o;
+    return number == that.number;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(number);
   }
 
   @Override
   public String toString() {
-    return numbers.toString();
+    return String.valueOf(number);
   }
 }
