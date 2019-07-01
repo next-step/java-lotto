@@ -3,8 +3,6 @@ package lotto.model;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,17 +21,35 @@ public class MoneyTest {
                 .isThrownBy(() -> Money.won(-1));
     }
 
-    @DisplayName("1개의 로또를 구매한다")
-    @ParameterizedTest
-    @ValueSource(ints = {
-            1000,
-            1500
-    })
-    void countAvailable(long amount) {
-        Money money = Money.won(amount);
+    @DisplayName("로또 구입한 총 금액")
+    @Test
+    void calculateTotalByBuyLotto() {
+        int count = 5;
 
-        long count = money.countAvailable(Lotto.getPrice());
+        Money result = Lotto.PRICE.times(count);
 
-        assertThat(count).isEqualTo(1);
+        assertThat(result).isEqualTo(Money.won(5000));
+    }
+
+    @DisplayName("로또 구매한 값 지불한 나머지 금액")
+    @Test
+    void spendOnLotto() {
+        long countOfBuyLotto = 3;
+        Money money = Money.won(5000);
+
+        Money result = money.spendOnLotto(countOfBuyLotto);
+
+        assertThat(result).isEqualTo(Money.won(2000));
+    }
+
+    @DisplayName("구매한 금액과 당첨금이 동일하다")
+    @Test
+    void getRateOfReturn() {
+        Money totalOfBuyMoney = Money.won(5000);
+        Money totalOfPrizeMoney = Money.won(5000);
+
+        double result = Money.getRateOfReturn(totalOfPrizeMoney, totalOfBuyMoney);
+
+        assertThat(result).isEqualTo(1);
     }
 }

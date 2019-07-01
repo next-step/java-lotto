@@ -1,24 +1,40 @@
 package lotto.model;
 
+import lotto.exception.DuplicateLottoNumberException;
+
 import java.util.Objects;
 
 public class WinningLotto {
+
     private final Lotto lotto;
-    private final Number number;
+    private final Number bonus;
 
-    public WinningLotto(Lotto lotto, Number number) {
+    private WinningLotto(Lotto lotto, Number bonus) {
         this.lotto = lotto;
-        this.number = number;
+        this.bonus = bonus;
     }
 
-    public static WinningLotto generate(Lotto lotto, Number number) {
-        return new WinningLotto(lotto, number);
+    public static WinningLotto of(String inputOfNumbers, int inputOfBonusNumber) {
+        return of(Lotto.ofComma(inputOfNumbers), Number.of(inputOfBonusNumber));
     }
 
-    public Prize getResultOf(Lotto lotto) {
-        int matchCount = this.lotto.getMatchCount(lotto);
-        boolean existBonus = lotto.hasBonusNumber(number);
-        return Prize.of(matchCount, existBonus);
+    public static WinningLotto of(Lotto lotto, Number bonus) {
+        if (lotto.hasBonusNumber(bonus)) {
+            throw new DuplicateLottoNumberException(bonus);
+        }
+        return new WinningLotto(lotto, bonus);
+    }
+
+    Number getBonus() {
+        return bonus;
+    }
+
+    Prize match(Lotto lotto) {
+        return Prize.of(this.lotto.getMatchCount(lotto), lotto.hasBonusNumber(bonus));
+    }
+
+    Lotto getLotto() {
+        return lotto;
     }
 
     @Override
@@ -27,20 +43,19 @@ public class WinningLotto {
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
         return Objects.equals(lotto, that.lotto) &&
-                Objects.equals(number, that.number);
+                Objects.equals(bonus, that.bonus);
     }
-
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto, number);
+        return Objects.hash(lotto, bonus);
     }
 
     @Override
     public String toString() {
         return "WinningLotto{" +
                 "lotto=" + lotto +
-                ", number=" + number +
+                ", bonus=" + bonus +
                 '}';
     }
 }

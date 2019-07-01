@@ -1,58 +1,52 @@
 package lotto.model;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private Map<Prize, Integer> countOfEachPrize;
+    private Map<Prize, Integer> statisticsByPrize;
 
-    private LottoResult(Map<Prize, Integer> countOfEachPrize) {
-        this.countOfEachPrize = countOfEachPrize;
+    private LottoResult(Map<Prize, Integer> statisticsByPrize) {
+        this.statisticsByPrize = statisticsByPrize;
     }
 
-    public static LottoResult of(List<Prize> prizes) {
-        Map<Prize, Integer> prizeMap = new EnumMap<>(Prize.class);
-        for (Prize prize : prizes) {
-            int count = prizeMap.getOrDefault(prize, 0);
-            prizeMap.put(prize, ++count);
+    public static LottoResult of(List<Prize> lottoPrize) {
+        Map<Prize, Integer> statisticsByPrize = new EnumMap<>(Prize.class);
+        for (Prize prize : lottoPrize) {
+            int count = statisticsByPrize.getOrDefault(prize, 0);
+            statisticsByPrize.put(prize, ++count);
         }
-        return new LottoResult(prizeMap);
+        return new LottoResult(statisticsByPrize);
     }
 
-    public int getCount(Prize prize) {
-        return countOfEachPrize.getOrDefault(prize, 0);
-    }
-
-    public long getTotalMoney() {
-        return countOfEachPrize.keySet()
-                .stream()
-                .mapToLong(this::getPrizeMoney)
-                .sum();
+    static LottoResult of(Prize... lottoPrize) {
+        return of(Arrays.stream(lottoPrize).collect(Collectors.toList()));
     }
 
     public double getRateOfReturn() {
-        return (double) getTotalMoney() / totalMoneyOfBuyLotto();
+        return Money.getRateOfReturn(calculateTotalPrizeMoney(), calculateTotalMoney());
     }
 
-    private long getPrizeMoney(Prize prize) {
-        return prize.getMoney() * getCount(prize);
-    }
-
-    private long totalMoneyOfBuyLotto() {
-        return countTotalOfBuyLotto() * Lotto.PRICE;
-    }
-
-    private int countTotalOfBuyLotto() {
-        return countOfEachPrize.keySet()
+    private Money calculateTotalMoney() {
+        long countOfBuyLotto = statisticsByPrize.values()
                 .stream()
-                .mapToInt(this::getCount)
-                .sum();
+                .reduce(0, Integer::sum);
+        return Lotto.PRICE.times(countOfBuyLotto);
     }
 
-    @Override
-    public String toString() {
-        return "LottoResult{" +
-                "countOfEachPrize=" + countOfEachPrize +
-                '}';
+    private Money calculateTotalPrizeMoney() {
+        return statisticsByPrize.keySet()
+                .stream()
+                .map(prize -> prize.sumTotalMoney(this.countOfPrize(prize)))
+                .reduce(Money.ZERO, Money::sum);
     }
+
+    public long countOfPrize(Prize prize) {
+        return statisticsByPrize.getOrDefault(prize, 0);
+    }
+
 }

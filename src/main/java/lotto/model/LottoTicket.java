@@ -19,9 +19,21 @@ public class LottoTicket {
     public LottoResult result(WinningLotto winningLotto) {
         List<Prize> prizes = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            prizes.add(winningLotto.getResultOf(lotto));
+            Prize prize = winningLotto.match(lotto);
+            prizes.add(prize);
         }
         return LottoResult.of(prizes);
+    }
+
+    public LottoTicket merge(LottoTicket lottoTicket) {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(this.lottos);
+        lottos.addAll(lottoTicket.lottos);
+        return of(lottos);
+    }
+
+    public long countOfLotto() {
+        return lottos.size();
     }
 
     public List<Lotto> getLottos() {

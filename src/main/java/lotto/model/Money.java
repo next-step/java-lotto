@@ -6,7 +6,9 @@ import java.util.Objects;
 
 public class Money {
 
-    private long amount;
+    static final Money ZERO = Money.won(0);
+
+    private final long amount;
 
     private Money(long amount) {
         this.amount = amount;
@@ -19,12 +21,24 @@ public class Money {
         return new Money(amount);
     }
 
-    public long countAvailable(Money money) {
-        long count = this.amount / money.amount;
-        if (count <= 0) {
-            throw new MinimumAmountException(money.amount);
-        }
-        return count;
+    static double getRateOfReturn(Money prizeMoney, Money totalOfBuyLotto) {
+        return (double) prizeMoney.amount / totalOfBuyLotto.amount;
+    }
+
+    Money sum(Money money) {
+        return new Money(this.amount + money.amount);
+    }
+
+    Money times(long count) {
+        return new Money(amount * count);
+    }
+
+    Money spendOnLotto(long numberOfLotto) {
+        return Money.won(amount - Lotto.PRICE.amount * numberOfLotto);
+    }
+
+    long divide(Money money) {
+        return this.amount / money.amount;
     }
 
     @Override
@@ -42,8 +56,6 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money{" +
-                "amount=" + amount +
-                '}';
+        return String.valueOf(amount);
     }
 }

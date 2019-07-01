@@ -8,9 +8,11 @@ import java.util.Objects;
 
 public class Number implements Comparable<Number> {
 
+    private static final Map<Integer, Number> CACHE = new HashMap<>();
+
     public static final int MIN = 1;
     public static final int MAX = 45;
-    private static Map<Integer, Number> CACHE = new HashMap<>();
+
     private int number;
 
     private Number(int number) {
