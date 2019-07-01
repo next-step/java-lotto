@@ -18,7 +18,7 @@ class SimulatorTest {
     @DisplayName("Simulator에서 구입 금액에 맞게 여러장의 Ticket을 구매할 수 있다.")
     void buy_Tickets(int input) {
         int expectedCount = input / Money.TICKET_PRICE;
-        List<Ticket> tickets = Simulator.buyTickets(input);
+        List<Ticket> tickets = Simulator.buyTicketsWithAutomatic(input, countOfManualTicket);
 
         assertThat(tickets.size()).isEqualTo(expectedCount);
     }
@@ -46,7 +46,7 @@ class SimulatorTest {
     @Test
     @DisplayName("Simulator에서 로또 진행 결과를 Statistics 객체로 반환한다.")
     void simulate_PlayLotto() {
-        List<Ticket> tickets = Simulator.buyTickets(10000);
+        List<Ticket> tickets = Simulator.buyTicketsWithAutomatic(10000, countOfManualTicket);
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
         WinningTicket winningTicket = Simulator.drawWinningTicket(winningNumbers, bonusNumber);

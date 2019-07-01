@@ -20,19 +20,6 @@ public class Ticket {
         return new Ticket(balls);
     }
 
-    public static Ticket generateRandomTicket() {
-        List<Ball> candidates = new ArrayList<>();
-        for (int i = Ball.MINIMUM_VALUE; i <= Ball.MAXIMUM_VALUE; i++) {
-            candidates.add(Ball.valueOf(i));
-        }
-
-        Collections.shuffle(candidates);
-        candidates = candidates.subList(0, SIZE);
-        Set<Ball> balls = new HashSet<>(candidates);
-
-        return new Ticket(balls);
-    }
-
     private void checkSize(Set<Ball> balls) {
         if (balls.size() != SIZE) {
             throw new IllegalArgumentException(OUT_OF_SIZE_MESSAGE + ": " + balls);
