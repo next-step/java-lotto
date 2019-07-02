@@ -33,6 +33,13 @@ public class Lottery {
         return new Lottery(numberSet);
     }
 
+    public static NaturalNumber getAvailableNumberOfLotteries(NaturalNumber investment) {
+        if (investment == null) {
+            throw new IllegalArgumentException("'investment' must not be null");
+        }
+        return investment.divideBy(PRICE);
+    }
+
     public int score(Lottery lottery) {
         if (lottery == null) {
             throw new IllegalArgumentException("'lottery' must not be null");

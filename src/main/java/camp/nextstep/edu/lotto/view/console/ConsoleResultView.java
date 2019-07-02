@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ConsoleResultView implements ResultView {
 
     private static final String DELIMITER_REWARDS = "\n";
-    private static final String MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES = "%d개를 구매했습니다.";
+    private static final String MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String MESSAGE_FORMAT_OF_ALL_LOTTERIES_RESULT = "\n당첨 통계\n" +
             "---------\n" +
             "%s\n" +
@@ -26,8 +26,8 @@ public class ConsoleResultView implements ResultView {
     }
 
     @Override
-    public void printPurchasedLotteries(Lotteries lotteries) {
-        final String formattedMessage = String.format(MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES, lotteries.size());
+    public void printPurchasedLotteries(Lotteries lotteries, int numberOfCustomizedLotteries, int numberOfRandomizedLotteries) {
+        final String formattedMessage = String.format(MESSAGE_FORMAT_OF_PURCHASED_LOTTERIES, numberOfCustomizedLotteries, numberOfRandomizedLotteries);
         final String formattedLotteries = lotteriesFormatter.format(lotteries);
         System.out.println(formattedMessage);
         System.out.println(formattedLotteries);

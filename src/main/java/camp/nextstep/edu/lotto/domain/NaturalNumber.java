@@ -30,6 +30,18 @@ public class NaturalNumber implements Comparable<NaturalNumber> {
         return new NaturalNumber(quotient);
     }
 
+    public NaturalNumber subtract(NaturalNumber naturalNumber) {
+        if (naturalNumber == null) {
+            throw new IllegalArgumentException("'naturalNumber' must not be null");
+        }
+        final int result = value - naturalNumber.value;
+        return new NaturalNumber(result);
+    }
+
+    public boolean isLessThan(NaturalNumber naturalNumber) {
+        return compareTo(naturalNumber) < 0;
+    }
+
     @Override
     public int compareTo(NaturalNumber naturalNumber) {
         if (naturalNumber == null) {

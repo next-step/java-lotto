@@ -1,5 +1,7 @@
 package camp.nextstep.edu.lotto.domain;
 
+import java.util.Objects;
+
 public class WinningLottery {
     private final Lottery lottery;
     private final LotteryNumber bonusNumber;
@@ -29,5 +31,27 @@ public class WinningLottery {
         int score = this.lottery.score(lottery);
         boolean hasBonus = lottery.hasBonus(bonusNumber);
         return RewardType.from(score, hasBonus);
+    }
+
+    @Override
+    public String toString() {
+        return "WinningLottery{" +
+                "lottery=" + lottery +
+                ", bonusNumber=" + bonusNumber +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLottery that = (WinningLottery) o;
+        return lottery.equals(that.lottery) &&
+                bonusNumber.equals(that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottery, bonusNumber);
     }
 }
