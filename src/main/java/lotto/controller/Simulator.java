@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Simulator {
-    private static final String MESSAGE_OF_CANNOT_NEGATIVE_COUNT = "수동으로 뽑을 티켓수는 음수일 수 없습니다.";
-    private static final String MESSAGE_OF_TICKET_COUNT_IS_OVER = "구매할 수 있는 티켓 수량이 아닙니다.";
+    static final String MESSAGE_OF_CANNOT_NEGATIVE_COUNT = "수동으로 뽑을 티켓수는 음수일 수 없습니다.";
+    static final String MESSAGE_OF_TICKET_COUNT_IS_OVER = "구매할 수 있는 티켓 수량이 아닙니다.";
 
     public static List<Ticket> buyTickets(TicketGenerator ticketGenerator, int count) {
         List<Ticket> tickets = new ArrayList<>();
@@ -20,7 +20,7 @@ public class Simulator {
         return tickets;
     }
 
-    public static int getPurchasePrice(int investMoney, int countOfManualTicket) {
+    public static int getPurchasePrice(int investMoney) {
         Money money = Money.valueOf(investMoney);
 
         int numberOfTicket = money.getNumberOfTicketForPurchase();
@@ -66,7 +66,6 @@ public class Simulator {
             Rank rank = winningTicket.getRank(ticket);
             statistics.put(rank);
         }
-
         return statistics;
     }
 }

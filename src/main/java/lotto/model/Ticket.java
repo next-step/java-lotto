@@ -26,12 +26,6 @@ public class Ticket {
         }
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(balls.stream()
-                .map(Ball::toInteger)
-                .collect(Collectors.toList()));
-    }
-
     int match(Ticket other) {
         Set<Ball> otherSet = new HashSet<>(other.balls);
         otherSet.retainAll(balls);

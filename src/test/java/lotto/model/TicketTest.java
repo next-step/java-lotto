@@ -38,13 +38,6 @@ class TicketTest {
     }
 
     @Test
-    @DisplayName("Ticket을 랜덤하게 생성할 수 있다.")
-    void create_RandomTicket() {
-        Ticket ticket = Ticket.generateRandomTicket();
-        assertThat(ticket).isInstanceOf(Ticket.class);
-    }
-
-    @Test
     @DisplayName("Ticket은 6개보다 많은 로또 번호들로 생성하면 예외를 발생한다.")
     void create_OverSize_ExceptionThrown() {
         balls.add(Ball.valueOf(Ball.MAXIMUM_VALUE));
