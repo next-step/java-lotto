@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 public class LottoWinningStatisticsTest {
     LottoTickets lottoTickets;
     String winningNumber;
-    LottoWinningStatistics lottoWinningStatistics;
+    WinningStatistics lottoWinningStatistics;
 
     @BeforeEach
     void setup() {
@@ -23,7 +23,7 @@ public class LottoWinningStatisticsTest {
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("4,5,6,7,8,9");
         lottoTickets = LottoTicketsGenerator.manualTicketsGenerator(2, manualNumbers);
-        lottoWinningStatistics = new LottoWinningStatistics();
+        lottoWinningStatistics = new WinningStatistics();
     }
 
     @Test

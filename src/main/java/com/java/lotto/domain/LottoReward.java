@@ -8,7 +8,8 @@ public enum LottoReward {
 
     MATCH_THREE(3, 5_000, (count) -> count * 5_000),
     MATCH_FOUR(4, 50_000, (count) -> count * 50_000),
-    MATCH_FIVE(5, 1500_000, (count) -> count * 1_500_000),
+    MATCH_FIVE(5, 1_500_000, (count) -> count * 1_500_000),
+    MATCH_FIVE_BONUS(5, 30_000_000, (count) -> count * 30_000_000),
     MATCH_SIX(6, 2_000_000_000, (count) -> count * 2_000_000_000);
 
     Integer matchNumber;
@@ -39,4 +40,6 @@ public enum LottoReward {
     public int getLottoMoney() {
         return this.lottoMoney;
     }
+
+
 }
