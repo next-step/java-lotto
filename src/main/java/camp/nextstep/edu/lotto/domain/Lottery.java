@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class Lottery {
+    public static final NaturalNumber PRICE = NaturalNumber.from(1000);
+
     private static final int SIZE = 6;
     private static final int ZERO = 0;
 

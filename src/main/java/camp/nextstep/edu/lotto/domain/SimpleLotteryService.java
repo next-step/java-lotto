@@ -7,13 +7,12 @@ import java.util.stream.IntStream;
 
 public class SimpleLotteryService implements LotteryService {
 
-    private static final NaturalNumber PRICE_OF_LOTTERY = NaturalNumber.from(1000);
     private static final int ZERO = 0;
 
     @Override
     public Lotteries purchase(int investment) {
         final NaturalNumber naturalNumberInvestment = NaturalNumber.from(investment);
-        final NaturalNumber naturalNumberOfLotteries = naturalNumberInvestment.divideBy(PRICE_OF_LOTTERY);
+        final NaturalNumber naturalNumberOfLotteries = naturalNumberInvestment.divideBy(Lottery.PRICE);
         final int numberOfLotteries = naturalNumberOfLotteries.value();
         final List<Lottery> lotteryList = IntStream.range(ZERO, numberOfLotteries)
                 .mapToObj(number -> Lottery.randomizedInstance())
