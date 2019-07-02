@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.EnumMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ class SimpleLotteryServiceTest implements LotteriesRewardHelper {
         // given
         final int investment = 0;
         // when
-        final Lotteries lottery = simpleLotteryService.purchase(investment);
+        final Lotteries lottery = simpleLotteryService.purchase(investment, Collections.emptyList());
         // then
         assertThat(lottery).hasSize(0);
     }
@@ -36,7 +37,7 @@ class SimpleLotteryServiceTest implements LotteriesRewardHelper {
         // given
         final int investment = 14_000;
         // when
-        final Lotteries lottery = simpleLotteryService.purchase(investment);
+        final Lotteries lottery = simpleLotteryService.purchase(investment, Collections.emptyList());
         // then
         assertThat(lottery).hasSize(14);
     }

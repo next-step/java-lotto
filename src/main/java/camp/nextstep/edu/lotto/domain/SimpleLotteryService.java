@@ -11,17 +11,6 @@ public class SimpleLotteryService implements LotteryService {
     private static final int ZERO = 0;
 
     @Override
-    public Lotteries purchase(int investment) {
-        final NaturalNumber naturalNumberInvestment = NaturalNumber.from(investment);
-        final NaturalNumber naturalNumberOfLotteries = naturalNumberInvestment.divideBy(Lottery.PRICE);
-        final int numberOfLotteries = naturalNumberOfLotteries.value();
-        final List<Lottery> lotteryList = IntStream.range(ZERO, numberOfLotteries)
-                .mapToObj(number -> Lottery.randomizedInstance())
-                .collect(Collectors.toList());
-        return Lotteries.from(lotteryList);
-    }
-
-    @Override
     public void validate(int investment, int numberOfCustomizedLotteries) {
         final NaturalNumber naturalInvestment = NaturalNumber.from(investment);
         final NaturalNumber naturalNumberOfCustomizedLotteries = NaturalNumber.from(numberOfCustomizedLotteries);

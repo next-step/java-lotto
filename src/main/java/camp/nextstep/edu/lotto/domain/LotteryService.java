@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface LotteryService {
-    Lotteries purchase(int investment);
-
     Lotteries purchase(int investment, List<List<Integer>> numbers);
 
     void validate(int investment, int numberOfCustomizedLotteries);
