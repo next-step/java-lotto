@@ -14,7 +14,7 @@ public final class LottoSet {
             throw new IllegalArgumentException("로또 갯수를 바르게 입력해주세요");
         }
 
-        if(new HashSet<LottoNumber>(lottoNumbers).size() != lottoNumbers.size()) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
 
@@ -23,13 +23,9 @@ public final class LottoSet {
     }
 
     public LottoSet(int... lottoNumbers) {
-        if (lottoNumbers.length != LottoGenerator.LOTTO_SIZE) {
-            throw new IllegalArgumentException();
-        }
-
-        this.lottoNumbers = Arrays.stream(lottoNumbers)
+        this(Arrays.stream(lottoNumbers)
                 .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public int countOfMatchNumber(LottoSet winningLotto) {
