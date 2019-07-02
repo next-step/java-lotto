@@ -3,6 +3,8 @@ package camp.nextstep.edu.lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteriesRewardTest implements LotteriesRewardHelper {
@@ -10,22 +12,22 @@ class LotteriesRewardTest implements LotteriesRewardHelper {
     @Test
     @DisplayName("객체가 잘 생성되어야합니다")
     void defaultInstance1() {
-        final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
+        final LotteriesReward lotteriesReward = LotteriesReward.from(Collections.emptyList());
         assertThat(lotteriesReward).isInstanceOf(LotteriesReward.class);
     }
 
     @Test
     @DisplayName("초기값이 잘 지정되어야합니다")
     void defaultInstance2() {
-        final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
-        assertThat(lotteriesReward.entrySet()).hasSize(4);
+        final LotteriesReward lotteriesReward = LotteriesReward.from(Collections.emptyList());
+        assertThat(lotteriesReward.entrySet()).hasSize(5);
     }
 
     @Test
     @DisplayName("보상 합계가 잘 계산되어야합니다 - 아무것도 당첨되지 않은 경우")
     void sumAllRewards0() {
         // given
-        final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
+        final LotteriesReward lotteriesReward = LotteriesReward.from(Collections.emptyList());
         // when
         final long actual = lotteriesReward.sumAllRewards();
         // then
@@ -64,8 +66,7 @@ class LotteriesRewardTest implements LotteriesRewardHelper {
 
     private void testSumAllRewards(RewardType rewardType, int expected) {
         // given
-        final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
-        lotteriesReward.add(rewardType);
+        final LotteriesReward lotteriesReward = LotteriesReward.from(Collections.singletonList(rewardType));
         // when
         final long actual = lotteriesReward.sumAllRewards();
         // then

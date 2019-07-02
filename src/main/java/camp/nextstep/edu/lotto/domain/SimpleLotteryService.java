@@ -35,15 +35,10 @@ public class SimpleLotteryService implements LotteryService {
     }
 
     private LotteriesReward resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery, LotteryNumber bonusNumber) {
-        final LotteriesReward lotteriesReward = LotteriesReward.defaultInstance();
-
-        purchasedLotteries.stream()
-                .forEach(lottery -> {
-                    final RewardType rewardType = this.resolveReward(lottery, winningLottery, bonusNumber);
-                    lotteriesReward.add(rewardType);
-                });
-
-        return lotteriesReward;
+        List<RewardType> rewardTypes = purchasedLotteries.stream()
+                .map(lottery -> this.resolveReward(lottery, winningLottery, bonusNumber))
+                .collect(Collectors.toList());
+        return LotteriesReward.from(rewardTypes);
     }
 
     private RewardType resolveReward(Lottery lottery, Lottery winningLottery, LotteryNumber bonusNumber) {

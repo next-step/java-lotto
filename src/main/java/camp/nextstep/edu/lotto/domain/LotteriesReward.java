@@ -1,14 +1,23 @@
 package camp.nextstep.edu.lotto.domain;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LotteriesReward {
-    private static final int COUNT_DEFAULT = 0;
-    private static final int COUNT_UNIT = 1;
     private static final long IDENTITY_LONG = 0L;
+    private static final Set<RewardType> WINNING_TYPE_SET;
+
+    static {
+        WINNING_TYPE_SET = new HashSet<>(
+                Arrays.asList(
+                        RewardType.SIX_NUMBERS_MATCHED,
+                        RewardType.FIVE_NUMBERS_AND_BONUS_MATCHED,
+                        RewardType.FIVE_NUMBERS_MATCHED,
+                        RewardType.FOUR_NUMBERS_MATCHED,
+                        RewardType.THREE_NUMBERS_MATCHED
+                )
+        );
+    }
 
     private final Map<RewardType, Integer> rewardMap;
 
@@ -19,21 +28,19 @@ public class LotteriesReward {
         this.rewardMap = new EnumMap<>(rewardMap);
     }
 
-    public static LotteriesReward defaultInstance() {
-        final Map<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
-        rewardMap.put(RewardType.SIX_NUMBERS_MATCHED, COUNT_DEFAULT);
-        rewardMap.put(RewardType.FIVE_NUMBERS_MATCHED, COUNT_DEFAULT);
-        rewardMap.put(RewardType.FOUR_NUMBERS_MATCHED, COUNT_DEFAULT);
-        rewardMap.put(RewardType.THREE_NUMBERS_MATCHED, COUNT_DEFAULT);
+    public static LotteriesReward from(List<RewardType> rewardTypes) {
+        final Map<RewardType, Integer> rewardMap = WINNING_TYPE_SET.stream()
+                .collect(Collectors.toMap(
+                        rewardType -> rewardType,
+                        rewardType -> LotteriesReward.count(rewardTypes, rewardType)
+                ));
         return new LotteriesReward(rewardMap);
     }
 
-    public void add(RewardType rewardType) {
-        if (rewardType == null) {
-            throw new IllegalArgumentException("'rewardType' must not be null");
-        }
-        final Integer previous = rewardMap.getOrDefault(rewardType, COUNT_DEFAULT);
-        rewardMap.put(rewardType, previous + COUNT_UNIT);
+    private static int count(List<RewardType> rewardTypes, RewardType rewardType) {
+        return (int) rewardTypes.stream()
+                .filter(type -> type == rewardType)
+                .count();
     }
 
     public Set<Map.Entry<RewardType, Integer>> entrySet() {
