@@ -2,7 +2,7 @@ import domain.*;
 import view.InputView;
 import view.ResultView;
 
-public class ConsoleMain {
+public final class ConsoleMain {
     public static void main(String[] args) {
         int buyPrice = InputView.inputBuyPrice();
         int manualBuyNumber = InputView.inputManualBuyNumber();

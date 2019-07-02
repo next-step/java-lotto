@@ -7,7 +7,7 @@ import domain.RankCount;
 
 import java.util.Comparator;
 
-public class ResultView {
+public final class ResultView {
 
     public static void printLottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class InputView {
+public final class InputView {
 
     public static int inputBuyPrice() {
 

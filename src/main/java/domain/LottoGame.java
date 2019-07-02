@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGame {
+public final class LottoGame {
 
     public static final int TICKET_PRICE = 1000;
     private int tryNo;

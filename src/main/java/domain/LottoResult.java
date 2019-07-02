@@ -2,7 +2,7 @@ package domain;
 
 import java.util.List;
 
-public class LottoResult {
+public final class LottoResult {
     private final int TOTAL_PRICE;
     private RankCount rankCount = new RankCount();
 

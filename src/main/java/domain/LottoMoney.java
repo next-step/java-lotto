@@ -1,6 +1,6 @@
 package domain;
 
-public class LottoMoney {
+public final class LottoMoney {
 
     private int money;
 

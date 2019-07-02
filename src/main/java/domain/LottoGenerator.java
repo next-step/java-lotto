@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public final class LottoGenerator {
     public static final int LOTTO_SIZE = 6;
     private static final List<LottoNumber> lottoNumbers;
 

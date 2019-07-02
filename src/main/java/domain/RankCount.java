@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RankCount {
+public final class RankCount {
     private Map<Rank, Integer> rankCount = new HashMap<>();
 
     public RankCount() {

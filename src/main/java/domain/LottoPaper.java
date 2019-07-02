@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LottoPaper {
+public final class LottoPaper {
     private final List<LottoSet> manualLottoSets = new ArrayList<>();
     private final List<LottoSet> autoLottoSets = new ArrayList<>();
 
