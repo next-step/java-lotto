@@ -25,25 +25,17 @@ public class SimpleLotteryService implements LotteryService {
         final Set<LotteryNumber> winningLotteryNumberSet = winningNumberSet.stream()
                 .map(LotteryNumber::from)
                 .collect(Collectors.toSet());
-        final Lottery winningLottery = Lottery.customizedInstance(winningLotteryNumberSet);
+        final Lottery lottery = Lottery.customizedInstance(winningLotteryNumberSet);
         final LotteryNumber bonusLotteryNumber = LotteryNumber.from(bonusNumber);
-        if (winningLottery.hasBonus(bonusLotteryNumber)) {
-            throw new IllegalArgumentException("'bonusNumber' must not be contained in numbers of winningLottery");
-        }
-        return this.resolveRewards(purchasedLotteries, winningLottery, bonusLotteryNumber);
+        final WinningLottery winningLottery = WinningLottery.of(lottery, bonusLotteryNumber);
+        return this.resolveRewards(purchasedLotteries, winningLottery);
     }
 
-    private LotteriesReward resolveRewards(Lotteries purchasedLotteries, Lottery winningLottery, LotteryNumber bonusNumber) {
-        List<RewardType> rewardTypes = purchasedLotteries.stream()
-                .map(lottery -> this.resolveReward(lottery, winningLottery, bonusNumber))
+    private LotteriesReward resolveRewards(Lotteries purchasedLotteries, WinningLottery winningLottery) {
+        final List<RewardType> rewardTypes = purchasedLotteries.stream()
+                .map(winningLottery::resolveReward)
                 .collect(Collectors.toList());
         return LotteriesReward.from(rewardTypes);
-    }
-
-    private RewardType resolveReward(Lottery lottery, Lottery winningLottery, LotteryNumber bonusNumber) {
-        int score = lottery.score(winningLottery);
-        boolean hasBonus = lottery.hasBonus(bonusNumber);
-        return RewardType.from(score, hasBonus);
     }
 
     @Override

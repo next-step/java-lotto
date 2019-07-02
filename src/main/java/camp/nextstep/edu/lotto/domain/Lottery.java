@@ -34,6 +34,9 @@ public class Lottery {
     }
 
     public int score(Lottery lottery) {
+        if (lottery == null) {
+            throw new IllegalArgumentException("'lottery' must not be null");
+        }
         return (int) numberSet.stream()
                 .filter(lottery.numberSet::contains)
                 .count();
