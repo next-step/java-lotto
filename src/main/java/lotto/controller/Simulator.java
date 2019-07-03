@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Simulator {
-    public static List<Ticket> buyTickets(int investMoney) {
-        Money money = Money.valueOf(investMoney);
+    static final String MESSAGE_OF_CANNOT_NEGATIVE_COUNT = "수동으로 뽑을 티켓수는 음수일 수 없습니다.";
+    static final String MESSAGE_OF_TICKET_COUNT_IS_OVER = "구매할 수 있는 티켓 수량이 아닙니다.";
+
+    public static List<Ticket> buyTickets(TicketGenerator ticketGenerator, int count) {
         List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < money.getNumberOfTicketForPurchase(); i++) {
-            Ticket ticket = Ticket.generateRandomTicket();
+        for (int i = 0; i < count; i++) {
+            Ticket ticket = ticketGenerator.generate();
             tickets.add(ticket);
         }
 
@@ -25,6 +27,28 @@ public class Simulator {
         Money purchasePrice = Money.valueOf(Money.TICKET_PRICE).multiple(numberOfTicket);
 
         return purchasePrice.toInteger();
+    }
+
+    public static int getCountOfAutomaticTicket(int investMoney, int countOfManualTicket) {
+        Money money = Money.valueOf(investMoney);
+        int availableCount = money.getNumberOfTicketForPurchase();
+
+        checkCountOfManualTicket(countOfManualTicket);
+        checkCountIsAvailable(availableCount, countOfManualTicket);
+
+        return availableCount - countOfManualTicket;
+    }
+
+    private static void checkCountOfManualTicket(int countOfManualTicket) {
+        if (countOfManualTicket < 0) {
+            throw new IllegalArgumentException(MESSAGE_OF_CANNOT_NEGATIVE_COUNT);
+        }
+    }
+
+    private static void checkCountIsAvailable(int availableCount, int countOfManualTicket) {
+        if (availableCount < countOfManualTicket) {
+            throw new IllegalArgumentException(MESSAGE_OF_TICKET_COUNT_IS_OVER);
+        }
     }
 
     public static WinningTicket drawWinningTicket(List<Integer> winningNumbers, int bonusNumber) {
@@ -42,12 +66,6 @@ public class Simulator {
             Rank rank = winningTicket.getRank(ticket);
             statistics.put(rank);
         }
-
         return statistics;
-    }
-
-    public static double getProfitRate(Statistics statistics, int purchasePrice) {
-        Money money = Money.valueOf(purchasePrice);
-        return statistics.calculateProfitRate(money);
     }
 }
