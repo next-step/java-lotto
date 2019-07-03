@@ -1,7 +1,9 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGamesExecute {
 
@@ -16,6 +18,18 @@ public class LottoGamesExecute {
             lottos.add(new Lotto(LottoMachine.autoLottoNumber()));
         }
         return lottos;
+    }
+
+    public void manualLottoNumbers(List<String> lottoNumbers){
+        for(String lottoNum : lottoNumbers){
+            lottos.add(
+                new Lotto(
+                    Arrays.stream(lottoNum.split(","))
+                          .map(Integer::parseInt)
+                          .collect(Collectors.toList())
+                )
+            );
+        }
     }
 
     public LottoGames lottoGameResult(String inputLastWeekLottoNumber, String inputLastWeekBonusNumber) {

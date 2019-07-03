@@ -6,6 +6,14 @@ public class OutputView {
 
     private static LottoGames lottoGames;
 
+    static void printGameCount(int autoGameCount, int manualGameCount){
+        String printMessage = "\n수동으로 ".concat(Integer.toString(manualGameCount))
+                                       .concat("장 자동으로 ")
+                                       .concat(Integer.toString(autoGameCount))
+                                       .concat("장을 구매 했습니다.");
+        System.out.println(printMessage);
+    }
+
     static void printPurchaseLottoNumber(List <Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.lottoNumber());
@@ -29,6 +37,7 @@ public class OutputView {
         int lottoWinnerPrice = LottoEnum.findByPrice(printWinnerCount, isBonusWinner(eventWinnerCount)).price();
 
         StringBuilder printText = new StringBuilder();
+        printText.append("\n");
         printText.append(printWinnerCount);
         printText.append("개 일치 ");
         printText.append(printBonusTest(isBonusWinnerState));
