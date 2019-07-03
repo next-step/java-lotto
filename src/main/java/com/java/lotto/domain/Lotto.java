@@ -2,7 +2,6 @@ package com.java.lotto.domain;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Lotto {
 	public static final int LOTTO_PRICE = 1000;
@@ -45,6 +44,6 @@ public class Lotto {
 
 
 	public void winningNumbers(String winningNumbers, int bonusNumber) {
-		winningStatistics.findLottoWinning(new WinningNumbers(winningNumbers, bonusNumber), lottoTickets);
+		winningStatistics.findLottoWinning(new WinningTicket(winningNumbers, bonusNumber), lottoTickets);
 	}
 }

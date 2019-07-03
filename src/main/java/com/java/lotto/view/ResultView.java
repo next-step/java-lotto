@@ -25,7 +25,6 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Map<LottoReward, Integer> reward = lotto.getWinningStatistics();
         for (LottoReward lottoReward : LottoReward.values()) {
             System.out.println(String.format(formatString(lottoReward)
                     , lottoReward.getMatchNumber()

@@ -18,8 +18,5 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottotickets);
     }
-    
-    public Stream<LottoTicket> lottoTicketsStream(){
-    	return lottotickets.stream();
-    }
+
 }

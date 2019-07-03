@@ -1,7 +1,6 @@
 package com.java.lotto.domain;
 
 import java.util.Arrays;
-import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
 public enum LottoReward {
@@ -26,12 +25,18 @@ public enum LottoReward {
         return expression.apply(count);
     }
 
-    public static LottoReward rewardCheck(int matchNumber) {
+    public static LottoReward checkReward(int matchCount, boolean bonus) {
+        return matchCount == 5 && bonus ? LottoReward.MATCH_FIVE_BONUS : LottoReward.checkReward(matchCount);
+    }
+
+    public static LottoReward checkReward(int matchCount) {
         return Arrays.stream(LottoReward.values())
-                .filter(lottoReward -> lottoReward.matchNumber.equals(matchNumber))
+                .filter(lottoReward -> lottoReward.matchNumber.equals(matchCount))
                 .findFirst()
                 .get();
     }
+
+
 
     public int getMatchNumber() {
         return this.matchNumber;

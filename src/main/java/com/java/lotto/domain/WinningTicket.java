@@ -1,15 +1,13 @@
 package com.java.lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-public class WinningNumbers {
-    private List<Integer> winningNumbers;
+public class WinningTicket {
+    private List<Integer> winningTicket;
     private final Integer bonusNumber;
 
-    public WinningNumbers(String winningNumbers, Integer bonusNumber) {
-        this.winningNumbers = LottoNumbersGenerator.manualNumbersGenerator(winningNumbers);
+    public WinningTicket(String winningTicket, Integer bonusNumber) {
+        this.winningTicket = LottoNumbersGenerator.manualNumbersGenerator(winningTicket);
         this.bonusNumber = bonusNumber;
     }
 
@@ -18,7 +16,7 @@ public class WinningNumbers {
     }
 
     public int matchCount(LottoTicket lottoTicket) {
-        return (int) winningNumbers.stream()
+        return (int) winningTicket.stream()
                 .filter(number -> lottoTicket.isMatchNumber(number))
                 .count();
     }
