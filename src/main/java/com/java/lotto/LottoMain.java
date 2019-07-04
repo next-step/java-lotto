@@ -9,12 +9,13 @@ public class LottoMain {
 
     public static void main(String[] args) {
 
-        int purchaseAmount = InputView.purchaseAmount();
-        Lotto lotto = new Lotto(purchaseAmount);
+        Lotto lotto = new Lotto(InputView.purchaseAmount());
         ResultView.outputOfPurchaseList(lotto);
 
-        String winningNumbers = InputView.winningNumber();
-        lotto.findLottoWinning(LottoNumbersGenerator.manualNumbersGenerator(winningNumbers));
+        String winningNumbers = InputView.winningNumbers();
+        int bonusNumber = InputView.bonusNumber();
+
+        lotto.winningNumbers(winningNumbers, bonusNumber);
         ResultView.outputOfWinStats(lotto);
 
     }

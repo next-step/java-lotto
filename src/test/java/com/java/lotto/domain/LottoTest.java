@@ -1,6 +1,7 @@
 package com.java.lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class LottoTest {
     }
 
     @Test
-    void 구입금액_만큼_로또_티켓_구매() {
+    @DisplayName("구입금액 만큼 로또 티켓 구매")
+    void purchaseLotto() {
         List<LottoTicket> lottoTickets = lotto.getLottoTickets();
         assertThat(lottoTickets.size()).isEqualTo(purchaseAmount / Lotto.LOTTO_PRICE);
     }

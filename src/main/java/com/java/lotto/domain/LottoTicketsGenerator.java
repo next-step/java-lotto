@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketsGenerator {
+
     public static LottoTickets automaticTicketsGenerator(int count) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -23,4 +24,5 @@ public class LottoTicketsGenerator {
     public static LottoTicket manualTicketsGenerator(String manualNumbers) {
         return new LottoTicket(LottoNumbersGenerator.manualNumbersGenerator(manualNumbers));
     }
+
 }
