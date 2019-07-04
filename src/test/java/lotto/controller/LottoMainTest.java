@@ -1,5 +1,6 @@
-package lotto;
+package lotto.controller;
 
+import lotto.model.LottoPrice;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class LottoMainTest {
     @DisplayName("로또 생성 시 금액이 1000원단위로 입력 되지 않은 경우 테스트")
     void createLottoGameCount() {
         int gamePrice = 14300;
-        assertThatThrownBy(() -> LottoMain.createLottoGameCount(gamePrice))
+        assertThatThrownBy(() -> new LottoPrice(gamePrice))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("로또 금액은 1000원 단위로 구매 하셔야 합니다.");
     }

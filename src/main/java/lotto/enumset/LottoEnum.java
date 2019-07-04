@@ -1,4 +1,4 @@
-package lotto;
+package lotto.enumset;
 
 import java.util.Arrays;
 
