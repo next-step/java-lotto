@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.List;
-import java.util.function.Function;
 
 import step2.dto.LottosDTO;
 
@@ -27,7 +26,7 @@ public class LottoStore {
     }
 
     private Lottos salesLottos(final Money money, final LottoFactory<LottoQuantity, Lottos> factory) {
-        if (!has1000Won(money)) {
+        if (hasNo1000Won(money)) {
             return factory.apply(new LottoQuantity(0L));
         }
 
@@ -36,7 +35,7 @@ public class LottoStore {
     }
 
     private Lottos salesLottos(final Money money, LottosDTO lottosDTO, final LottoFactory<LottosDTO, Lottos> factory) {
-        if (!has1000Won(money)) {
+        if (hasNo1000Won(money)) {
             return factory.apply(new LottosDTO(List.of()));
         }
 
@@ -45,10 +44,10 @@ public class LottoStore {
         return factory.apply(lottosDTO);
     }
 
-    private boolean has1000Won(final Money money) {
+    private boolean hasNo1000Won(final Money money) {
         if (money.getMoney() < LOTTO_PRICE.getMoney()) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }
