@@ -1,10 +1,9 @@
 package step2.domain;
 
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoPickLottosFactory implements Function<LottoQuantity, Lottos> {
+public class AutoPickLottosFactory implements LottoFactory<LottoQuantity, Lottos> {
 
     @Override
     public Lottos apply(LottoQuantity lottoQuantity) {

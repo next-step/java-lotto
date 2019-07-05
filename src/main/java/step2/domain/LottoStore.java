@@ -26,21 +26,21 @@ public class LottoStore {
         return userPickLottos.addAll(autoPickLottos);
     }
 
-    private Lottos salesLottos(final Money money, final Function<LottoQuantity, Lottos> factory) {
+    private Lottos salesLottos(final Money money, final LottoFactory<LottoQuantity, Lottos> factory) {
         if (!has1000Won(money)) {
             return factory.apply(new LottoQuantity(0L));
         }
 
-        final LottoQuantity quantity = money.getLottoQuantity(LOTTO_PRICE);
+        final var quantity = money.getLottoQuantity(LOTTO_PRICE);
         return factory.apply(quantity);
     }
 
-    public Lottos salesLottos(final Money money, LottosDTO lottosDTO, final Function<LottosDTO, Lottos> factory) {
+    private Lottos salesLottos(final Money money, LottosDTO lottosDTO, final LottoFactory<LottosDTO, Lottos> factory) {
         if (!has1000Won(money)) {
             return factory.apply(new LottosDTO(List.of()));
         }
 
-        final LottoQuantity quantity = money.getLottoQuantity(LOTTO_PRICE);
+        final var quantity = money.getLottoQuantity(LOTTO_PRICE);
         quantity.validateLottoSize(lottosDTO.getLottos().size());
         return factory.apply(lottosDTO);
     }
