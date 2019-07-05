@@ -12,10 +12,9 @@ import step2.domain.WinningLotto;
 
 public class OutputView {
 
-    public static void printBuyLotto(final Lottos userPickLottos, final Lottos autoPickLottos) {
-        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", userPickLottos.size(), autoPickLottos.size());
-        printLottos(userPickLottos);
-        printLottos(autoPickLottos);
+    public static void printBuyLotto(final int userPickCount, final Lottos lottos) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", userPickCount, lottos.size() - userPickCount);
+        printLottos(lottos);
     }
 
     public static void printLottoStatistics(WinningLotto winningLotto, LottoStatistics lottoStatistics) {
