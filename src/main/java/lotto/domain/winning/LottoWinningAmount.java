@@ -1,24 +1,23 @@
 package lotto.domain.winning;
 
 import java.util.Arrays;
-import java.util.function.Function;
 
 public enum LottoWinningAmount {
-    NONE(0, 0, BonusMatch.NONE),
-    THREE_MATCH(3, 5_000, BonusMatch.NONE),
-    FOUR_MATCH(4, 50_000, BonusMatch.NONE),
-    FIVE_MATCH(5, 1_500_000, BonusMatch.NOT_MATCH),
-    FIVE_AND_BONUS_MATCH(5, 30_000_000, BonusMatch.MATCH),
-    SIX_MATCH(6, 2_000_000_000, BonusMatch.NONE);
+    NONE(0, 0, false),
+    THREE_MATCH(3, 5_000, false),
+    FOUR_MATCH(4, 50_000, false),
+    FIVE_MATCH(5, 1_500_000, false),
+    FIVE_AND_BONUS_MATCH(5, 30_000_000, true),
+    SIX_MATCH(6, 2_000_000_000, false);
 
-    private Integer matchCount;
-    private Long winningAmount;
-    private BonusMatch bonusMatch;
+    private int matchCount;
+    private long winningAmount;
+    private boolean bonusNumberMatch;
 
-    LottoWinningAmount(int matchCount, long winningAmount, BonusMatch bonusMatch) {
+    LottoWinningAmount(int matchCount, long winningAmount, boolean bonusNumberMatch) {
         this.matchCount = matchCount;
         this.winningAmount = winningAmount;
-        this.bonusMatch = bonusMatch;
+        this.bonusNumberMatch = bonusNumberMatch;
     }
 
     public long getWinningAmount() {
@@ -32,20 +31,6 @@ public enum LottoWinningAmount {
     }
 
     private static boolean isWinningCondition(LottoWinningAmount amount, long matchCount, boolean bonusNumberMatch) {
-        return amount.matchCount == matchCount && amount.bonusMatch.match(bonusNumberMatch);
-    }
-
-    private enum BonusMatch {
-        NONE(match -> true), MATCH(match -> match == true), NOT_MATCH(match -> match == false);
-
-        private Function<Boolean, Boolean> expr;
-
-        BonusMatch(Function<Boolean, Boolean> expr) {
-            this.expr = expr;
-        }
-
-        public boolean match(boolean bonusMatch) {
-            return expr.apply(bonusMatch);
-        }
+        return amount.matchCount == matchCount && amount.bonusNumberMatch == bonusNumberMatch;
     }
 }

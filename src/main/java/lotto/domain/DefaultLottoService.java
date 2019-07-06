@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.WinningLotto;
 import lotto.domain.winning.LottoWinningResult;
 import lotto.dto.LottoResultDto;
-
-import java.util.List;
 
 public class DefaultLottoService implements LottoService {
 
@@ -21,7 +19,7 @@ public class DefaultLottoService implements LottoService {
         return lottoTicketGenerator.generate(PurchaseAmount.of(purchaseAmount));
     }
 
-    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount, long bonusNumber) {
-        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, LottoTicket.of(winningTicket, bonusNumber)), PurchaseAmount.of(purchaseAmount));
+    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, WinningLotto winningLotto, long purchaseAmount) {
+        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, winningLotto), PurchaseAmount.of(purchaseAmount));
     }
 }

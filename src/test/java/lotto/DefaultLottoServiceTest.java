@@ -2,9 +2,7 @@ package lotto;
 
 import lotto.domain.DefaultLottoService;
 import lotto.domain.LottoService;
-import lotto.domain.ticket.DefaultLottoTicketGenerator;
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.*;
 import lotto.domain.winning.LottoWinningAmount;
 import lotto.dto.LottoResultDto;
 import org.junit.jupiter.api.DisplayName;
@@ -23,8 +21,8 @@ public class DefaultLottoServiceTest {
         // given
         LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
                 LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45),
-                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L), 45)
+                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
+                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
                 ))));
         // when
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(2000L);
@@ -51,12 +49,13 @@ public class DefaultLottoServiceTest {
         // given
         LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
                 LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45),
-                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L), 45)
+                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
+                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
                 ))));
         // when
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(2000L);
-        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L), 2000L, 45);
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L)), LottoNumber.of(45));
+        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, winningLotto, 2000L);
         // then
         assertThat(lottoResultDto.getWinningResult().getWinningCount(LottoWinningAmount.THREE_MATCH)).isEqualTo(1);
     }
@@ -67,12 +66,13 @@ public class DefaultLottoServiceTest {
         // given
         LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
                 LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45),
-                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L), 45)
+                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
+                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
                 ))));
         // when
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(2000L);
-        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L), 2000L, 45);
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(Arrays.asList(1L, 2L, 3L, 14L, 15L, 16L)), LottoNumber.of(45));
+        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, winningLotto, 2000L);
         // then
         assertThat(lottoResultDto.getEarningRate()).isEqualTo(2.5);
     }

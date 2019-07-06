@@ -2,6 +2,7 @@ package lotto.domain.winning;
 
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.WinningLotto;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,27 +10,21 @@ import java.util.stream.Collectors;
 public class LottoWinningResult {
     private Map<LottoWinningAmount, Long> winningResultMap;
 
-    private LottoWinningResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
-        this.winningResultMap = createWinningResult(lottoTickets, winningTicket);
+    private LottoWinningResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        this.winningResultMap = createWinningResult(lottoTickets, winningLotto);
     }
 
-    public static LottoWinningResult of(LottoTickets lottoTickets, LottoTicket winningTicket) {
-        return new LottoWinningResult(lottoTickets, winningTicket);
+    public static LottoWinningResult of(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        return new LottoWinningResult(lottoTickets, winningLotto);
     }
 
-    private Map<LottoWinningAmount, Long> createWinningResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
+    private Map<LottoWinningAmount, Long> createWinningResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
         return lottoTickets.findAll().stream()
                 .map(lottoTicket -> {
-                    return LottoWinningAmount.find(getMatchCount(lottoTicket, winningTicket),
-                            lottoTicket.existNumber(winningTicket.getBonusNumber()));
+                    return LottoWinningAmount.find(winningLotto.getMatchCount(lottoTicket),
+                            winningLotto.matchBonusNumber(lottoTicket));
                 })
-                .collect(Collectors.toMap(o -> o, o -> 1L, Long::sum));
-    }
-
-    private long getMatchCount(LottoTicket lottoTicket, LottoTicket winningTicket) {
-        return lottoTicket.findAll().stream()
-                .filter(winningTicket::existNumber)
-                .count();
+                .collect(Collectors.toMap(winningAmount -> winningAmount, winningAmount -> 1L, Long::sum));
     }
 
     public long getWinningCount(LottoWinningAmount lottoWinningAmount) {
@@ -38,7 +33,7 @@ public class LottoWinningResult {
 
     public long getTotalWinningAmount() {
         return winningResultMap.entrySet().stream()
-                .mapToLong(entry -> entry.getKey().getWinningAmount() * entry.getValue())
+                .mapToLong(winningResult -> winningResult.getKey().getWinningAmount() * winningResult.getValue())
                 .sum();
     }
 }

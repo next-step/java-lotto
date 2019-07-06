@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 public class DefaultLottoTicketGenerator implements LottoTicketGenerator {
-    private static final Long DUMMY_BONUS_NUMBER = 1L;
 
     public LottoTickets generate(PurchaseAmount purchaseAmount) {
         return LottoTickets.of(IntStream.range(0, purchaseAmount.getNumberOfTickets())
@@ -19,7 +18,7 @@ public class DefaultLottoTicketGenerator implements LottoTicketGenerator {
 
     private LottoTicket shuffle(List<Long> lottoNumbers) {
         Collections.shuffle(lottoNumbers);
-        return LottoTicket.of(lottoNumbers.subList(0, LottoTicket.LOTTO_NUMBERS_SIZE), DUMMY_BONUS_NUMBER);
+        return LottoTicket.of(lottoNumbers.subList(0, LottoTicket.LOTTO_NUMBERS_SIZE));
     }
 
     private List<Long> generate() {

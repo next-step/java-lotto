@@ -16,7 +16,7 @@ public class LottoNumber {
         lottoNumberPool = Collections.unmodifiableMap(
                 LongStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
                         .boxed()
-                        .collect(Collectors.toMap(o -> o, LottoNumber::new, (o1, o2) -> o1)));
+                        .collect(Collectors.toMap(number -> number, LottoNumber::new, (number1, number2) -> number1)));
     }
 
     LottoNumber(long number) {

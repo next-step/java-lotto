@@ -8,17 +8,15 @@ public class LottoTicket {
     public static final Long PRICE = 1000L;
 
     private List<LottoNumber> lottoNumbers;
-    private LottoNumber bonusNumber;
-    private LottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-
         this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = bonusNumber;
     }
 
-    public static LottoTicket of(List<Long> lottoNumbers, long bonusNumber) {
-        return new LottoTicket(lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList()), LottoNumber.of(bonusNumber));
+    public static LottoTicket of(List<Long> lottoNumbers) {
+        return new LottoTicket(lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList()));
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -44,10 +42,6 @@ public class LottoTicket {
 
     public boolean existNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
     }
 
     private List<String> getNumbers() {

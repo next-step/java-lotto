@@ -2,8 +2,7 @@ package lotto;
 
 import lotto.domain.DefaultLottoService;
 import lotto.domain.LottoService;
-import lotto.domain.ticket.DefaultLottoTicketGenerator;
-import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.*;
 import lotto.dto.LottoResultDto;
 import lotto.view.input.InputView;
 import lotto.view.result.ResultView;
@@ -37,10 +36,10 @@ public class LottoController {
     }
 
     private void checkWinningAmount() {
-        List<Long> winningTicket = inputView.getWinningTicket();
-        long bonusNumber =inputView.getBonusNumber();
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(inputView.getWinningTicket()),
+                LottoNumber.of(inputView.getBonusNumber()));
 
-        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, winningTicket, purchaseAmount, bonusNumber);
+        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, winningLotto, purchaseAmount);
         resultView.printResult(lottoResultDto);
     }
 }
