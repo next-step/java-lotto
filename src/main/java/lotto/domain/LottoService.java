@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.ticket.WinningLotto;
+import lotto.dto.LottoPurchaseRequestDto;
 import lotto.dto.LottoResultDto;
+import lotto.dto.LottoWinningRequestDto;
 
 public interface LottoService {
-    LottoTickets purchaseLottoTickets(long purchaseAmount);
-    LottoResultDto checkWinningAmount(LottoTickets lottoTickets, WinningLotto winningLotto, long purchaseAmount);
+    LottoTickets purchaseLottoTickets(LottoPurchaseRequestDto lottoPurchaseRequestDto);
+    LottoResultDto checkWinningAmount(LottoWinningRequestDto lottoWinningRequestDto);
 }

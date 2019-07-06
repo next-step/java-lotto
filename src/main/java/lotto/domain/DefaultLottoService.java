@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTicketGenerator;
-import lotto.domain.ticket.LottoTickets;
-import lotto.domain.ticket.WinningLotto;
+import lotto.common.PositiveNumber;
+import lotto.domain.ticket.*;
 import lotto.domain.winning.LottoWinningResult;
+import lotto.dto.LottoPurchaseRequestDto;
 import lotto.dto.LottoResultDto;
+import lotto.dto.LottoWinningRequestDto;
 
 public class DefaultLottoService implements LottoService {
 
@@ -15,11 +15,17 @@ public class DefaultLottoService implements LottoService {
         this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
-    public LottoTickets purchaseLottoTickets(long purchaseAmount) {
-        return lottoTicketGenerator.generate(PurchaseAmount.of(purchaseAmount));
+    public LottoTickets purchaseLottoTickets(LottoPurchaseRequestDto lottoPurchaseRequestDto) {
+        PurchaseAmount purchaseAmount = PurchaseAmount.of(lottoPurchaseRequestDto.getPurchaseAmount().get());
+        LottoTickets manualTickets = LottoTickets.ofManual(lottoPurchaseRequestDto.getManualTicketNumbers());
+        return lottoTicketGenerator.generate(purchaseAmount);
     }
 
-    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, WinningLotto winningLotto, long purchaseAmount) {
-        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, winningLotto), PurchaseAmount.of(purchaseAmount));
+    public LottoResultDto checkWinningAmount(LottoWinningRequestDto lottoWinningRequestDto) {
+        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(lottoWinningRequestDto.getWinningTicket().getCsvLong()),
+                LottoNumber.of(lottoWinningRequestDto.getBonusNumber().get()));
+        LottoTickets purchaseTickets = lottoWinningRequestDto.getPurchaseTickets();
+
+        return LottoResultDto.of(LottoWinningResult.of(purchaseTickets, winningLotto), PositiveNumber.of(purchaseTickets.count()));
     }
 }

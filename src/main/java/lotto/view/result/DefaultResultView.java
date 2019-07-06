@@ -12,8 +12,10 @@ public class DefaultResultView implements ResultView {
 
     @Override
     public void printLottoTickets(LottoTickets lottoTickets) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", 0, 0));
         lottoTickets.findAll().stream()
                 .forEach(lottoTicket -> printLottoTicket(lottoTicket));
+        System.out.println();
     }
 
     private void printLottoTicket(LottoTicket lottoTicket) {

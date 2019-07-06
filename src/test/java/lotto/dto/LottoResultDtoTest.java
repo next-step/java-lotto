@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.common.PositiveNumber;
 import lotto.domain.*;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
@@ -27,8 +28,7 @@ public class LottoResultDtoTest {
                 LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)))
         );
         WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
-        PurchaseAmount purchaseAmount = PurchaseAmount.of(LottoTicket.PRICE * lottoTickets.count());
-        LottoResultDto lottoResultDto = LottoResultDto.of(LottoWinningResult.of(lottoTickets, winningLotto), purchaseAmount);
+        LottoResultDto lottoResultDto = LottoResultDto.of(LottoWinningResult.of(lottoTickets, winningLotto), PositiveNumber.of(lottoTickets.count()));
 
         LottoWinningResult lottoWinningResult = lottoResultDto.getWinningResult();
         assertThat(lottoWinningResult.getWinningCount(LottoWinningAmount.THREE_MATCH)).isEqualTo(2);

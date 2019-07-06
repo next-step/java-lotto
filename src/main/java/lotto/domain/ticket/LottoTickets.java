@@ -1,7 +1,10 @@
 package lotto.domain.ticket;
 
+import lotto.common.Csv;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
@@ -12,6 +15,12 @@ public class LottoTickets {
 
     public static LottoTickets of(List<LottoTicket> lottoTickets) {
         return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets ofManual(List<Csv> manualTickets) {
+        return LottoTickets.of(manualTickets.stream()
+                .map(csv -> LottoTicket.of(csv.getCsvLong()))
+                .collect(Collectors.toList()));
     }
 
     public List<LottoTicket> findAll() {
