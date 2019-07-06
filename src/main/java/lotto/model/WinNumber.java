@@ -6,6 +6,10 @@ public class WinNumber {
 	private LottoNumber bonusNumber;
 
 	public WinNumber(LottoNumberSet primaryNumbers, LottoNumber bonusNumber) {
+		if(primaryNumbers == null){
+			throw new IllegalArgumentException("1등 당첨 번호가 필요합니다.");
+		}
+
 		if(bonusNumber == null){
 			throw new IllegalArgumentException("보너스볼 번호가 필요합니다.");
 		}
