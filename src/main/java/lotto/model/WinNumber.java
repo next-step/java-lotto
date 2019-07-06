@@ -7,7 +7,11 @@ public class WinNumber {
 
 	public WinNumber(LottoNumberSet primaryNumbers, LottoNumber bonusNumber) {
 		if(bonusNumber == null){
-			throw new IllegalArgumentException("보너스 번호가 필요합니다.");
+			throw new IllegalArgumentException("보너스볼 번호가 필요합니다.");
+		}
+
+		if(primaryNumbers.contains(bonusNumber)){
+			throw new IllegalArgumentException("보너스볼 번호는 1등 당첨번호에 포함 될 수 없습니다.");
 		}
 
 		this.primaryNumbers = primaryNumbers;
