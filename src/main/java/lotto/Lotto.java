@@ -9,17 +9,17 @@ public class Lotto {
     private Set<LottoNumber> lotto;
 
     private Lotto(Set<LottoNumber> lotto) {
-        if (lotto.size() != 6){
+        if (lotto.size() != 6) {
             throw new IllegalArgumentException();
         }
         this.lotto = lotto;
     }
 
-    public static Lotto of(List<Integer> lotto){
+    public static Lotto of(List<Integer> lotto) {
         return new Lotto(makeLottoNumberSet(lotto.stream()));
     }
 
-    public static Lotto of(Set<Integer> lotto){
+    public static Lotto of(Set<Integer> lotto) {
         return new Lotto(makeLottoNumberSet(lotto.stream()));
     }
 
