@@ -5,20 +5,20 @@ import java.util.List;
 
 public class LottoTicketsGenerator {
 
-    public static LottoTickets automaticTicketsGenerator(int count) {
+    public static List<LottoTicket> automaticTicketsGenerator(LottoPurchase lottoPurchase) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < lottoPurchase.getCountOfAutoLotto(); i++) {
             lottoTickets.add(new LottoTicket(LottoNumbersGenerator.automaticNumbersGenerator()));
         }
-        return new LottoTickets(lottoTickets);
+        return lottoTickets;
     }
 
-    public static LottoTickets manualTicketsGenerator(int count, List<String> manualNumbers) {
+    public static List<LottoTicket>  manualTicketsGenerator(LottoPurchase lottoPurchase) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(manualTicketsGenerator(manualNumbers.get(i)));
+        for (int i = 0; i < lottoPurchase.getCountOfManualLotto(); i++) {
+            lottoTickets.add(manualTicketsGenerator(lottoPurchase.getManualLottoNumbers(i)));
         }
-        return new LottoTickets(lottoTickets);
+        return lottoTickets;
     }
 
     public static LottoTicket manualTicketsGenerator(String manualNumbers) {

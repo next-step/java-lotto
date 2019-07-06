@@ -1,7 +1,7 @@
 package com.java.lotto.domain;
 
 public class WinningTicket {
-    private LottoTicket winningTicket;
+    private final LottoTicket winningTicket;
     private final Integer bonusNumber;
 
     public WinningTicket(String winningTicket, Integer bonusNumber) {

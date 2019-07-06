@@ -2,10 +2,9 @@ package com.java.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class LottoTickets {
-    private List<LottoTicket> lottotickets;
+    private final List<LottoTicket> lottotickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.lottotickets = tickets;

@@ -31,12 +31,14 @@ public enum LottoReward {
 
     public static LottoReward checkReward(int matchCount) {
         return Arrays.stream(LottoReward.values())
-                .filter(lottoReward -> lottoReward.matchNumber.equals(matchCount))
+                .filter(lottoReward -> lottoReward.isMatchCount(matchCount))
                 .findFirst()
                 .get();
     }
 
-
+    private boolean isMatchCount(int matchCount){
+        return this.matchNumber.equals(matchCount);
+    }
 
     public int getMatchNumber() {
         return this.matchNumber;

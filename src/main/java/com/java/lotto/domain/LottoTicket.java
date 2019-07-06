@@ -2,7 +2,6 @@ package com.java.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class LottoTicket {
