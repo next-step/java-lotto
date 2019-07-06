@@ -23,8 +23,24 @@ public class LottoTest {
 
     @Test
     void lottoCount6Exception() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            Lotto.of(Arrays.asList(1, 2, 3, 4, 5));
-        });
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5)));
+    }
+
+    @Test
+    void match6() {
+        Lotto lotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        int mathchCount = lotto.match(winningLotto);
+        assertThat(mathchCount).isEqualTo(6);
+    }
+
+    @Test
+    void contains() {
+        Lotto lotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        boolean result = lotto.contains(LottoNumber.of(1));
+        assertThat(result).isTrue();
+
+        result = lotto.contains(LottoNumber.of(7));
+        assertThat(result).isFalse();
     }
 }

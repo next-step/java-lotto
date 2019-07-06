@@ -25,11 +25,21 @@ public class Lotto {
 
     private static Set<LottoNumber> makeLottoNumberSet(Stream<Integer> stream) {
         return stream
-                .map(x -> new LottoNumber(x))
+                .map(x -> LottoNumber.of(x))
                 .collect(Collectors.toSet());
     }
 
     public Set<LottoNumber> getLotto() {
         return lotto;
+    }
+
+    public int match(Lotto winningLotto) {
+        return (int) this.lotto.stream()
+                .filter(winningLotto::contains)
+                .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber){
+        return this.lotto.contains(lottoNumber);
     }
 }
