@@ -30,6 +30,9 @@ public class LottoController {
 		int investment = Integer.parseInt(input.execute("구입금액을 입력해 주세요."));
 		this.wallet = store.buy(investment);
 
+		int manualTicketCount = Integer.parseInt(input.execute("수동으로 구매할 로또 수를 입력해 주세요."));
+		this.wallet = store.buy(investment);
+
 		viewer.render(wallet);
 	}
 
