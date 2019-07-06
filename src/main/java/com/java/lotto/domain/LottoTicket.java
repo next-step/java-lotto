@@ -21,8 +21,6 @@ public class LottoTicket {
     }
     
 	public boolean isMatchNumber(Integer number) {
-		return Optional.ofNullable(number)
-				.filter(matchNumber -> lottoNumbers.contains(matchNumber))
-                .isPresent();
+		return lottoNumbers.contains(number);
 	}
 }

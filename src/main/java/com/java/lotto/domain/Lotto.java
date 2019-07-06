@@ -1,10 +1,10 @@
 package com.java.lotto.domain;
 
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
-	public static final int LOTTO_PRICE = 1000;
+	private static final int LOTTO_PRICE = 1000;
+	private static final int ZERO_COUNT = 0;
 
 	private final int purchaseAmount;
 	private final LottoTickets lottoTickets;
@@ -33,15 +33,9 @@ public class Lotto {
 		return winningStatistics.rateOfReturn(purchaseAmount);
 	}
 
-
-	public Map<LottoReward, Integer> getWinningStatistics() {
-		return winningStatistics.getReward();
-	}
-
 	public Integer countByReward(LottoReward lottoReward){
-		return winningStatistics.countByReward(lottoReward) == null ? 0 :winningStatistics.countByReward(lottoReward);
+		return winningStatistics.countByReward(lottoReward) == null ? ZERO_COUNT :winningStatistics.countByReward(lottoReward);
 	}
-
 
 	public void winningNumbers(String winningNumbers, int bonusNumber) {
 		winningStatistics.findLottoWinning(new WinningTicket(winningNumbers, bonusNumber), lottoTickets);

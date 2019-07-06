@@ -35,7 +35,7 @@ public class ResultView {
     }
 
     private static String formatString(LottoReward lottoReward) {
-        return lottoReward.toString().equals(LottoReward.MATCH_FIVE_BONUS) ? BONUS_FORMAT : WIN_STATS_FORMAT;
+        return lottoReward == LottoReward.MATCH_FIVE_BONUS ? BONUS_FORMAT : WIN_STATS_FORMAT;
     }
 
     private static void changeNextLine() {
