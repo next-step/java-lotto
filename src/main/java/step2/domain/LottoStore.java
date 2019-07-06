@@ -2,7 +2,7 @@ package step2.domain;
 
 import java.util.List;
 
-import step2.dto.LottosDTO;
+import step2.dto.LottosDto;
 
 public class LottoStore {
     public static final Money LOTTO_PRICE = new Money(1_000L);
@@ -14,7 +14,7 @@ public class LottoStore {
         return INSTANCE;
     }
 
-    public Lottos salesLottos(final Money money, final LottosDTO lottosDTO) {
+    public Lottos salesLottos(final Money money, final LottosDto lottosDTO) {
         final var userPickLottos = salesLottos(money, lottosDTO, new UserPickLottosFactory());
 
         final var usedMoney = userPickLottos.getTotalPrice();
@@ -34,9 +34,9 @@ public class LottoStore {
         return factory.apply(quantity);
     }
 
-    private Lottos salesLottos(final Money money, LottosDTO lottosDTO, final LottoFactory<LottosDTO, Lottos> factory) {
+    private Lottos salesLottos(final Money money, LottosDto lottosDTO, final LottoFactory<LottosDto, Lottos> factory) {
         if (hasNo1000Won(money)) {
-            return factory.apply(new LottosDTO(List.of()));
+            return factory.apply(new LottosDto(List.of()));
         }
 
         final var quantity = money.getLottoQuantity(LOTTO_PRICE);

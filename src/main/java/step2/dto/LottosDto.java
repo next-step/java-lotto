@@ -2,18 +2,18 @@ package step2.dto;
 
 import java.util.List;
 
-public class LottosDTO {
-    private List<LottoDTO> lottos;
+public class LottosDto {
+    private List<LottoDto> lottos;
 
-    public LottosDTO(List<LottoDTO> lottos) {
+    public LottosDto(List<LottoDto> lottos) {
         this.lottos = lottos;
     }
 
-    public List<LottoDTO> getLottos() {
+    public List<LottoDto> getLottos() {
         return lottos;
     }
 
-    public void setLottos(List<LottoDTO> lottos) {
+    public void setLottos(List<LottoDto> lottos) {
         this.lottos = lottos;
     }
 }

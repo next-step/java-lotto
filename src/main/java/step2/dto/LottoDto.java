@@ -2,10 +2,10 @@ package step2.dto;
 
 import java.util.List;
 
-public class LottoDTO {
+public class LottoDto {
     private List<Integer> lottoNumbers;
 
-    public LottoDTO(List<Integer> lottoNumbers) {
+    public LottoDto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 

@@ -7,8 +7,8 @@ import step2.domain.LottoStore;
 import step2.domain.Lottos;
 import step2.domain.Money;
 import step2.domain.WinningLotto;
-import step2.dto.LottoDTO;
-import step2.dto.LottosDTO;
+import step2.dto.LottoDto;
+import step2.dto.LottosDto;
 import step2.ui.InputView;
 import step2.ui.OutputView;
 
@@ -19,12 +19,12 @@ public class LottoApplication {
         final Money money = new Money(InputView.inputMoney());
 
         final int userPickCount = InputView.inputCountOfUserPickLotto();
-        final LottosDTO lottosDTO = InputView.inputLottoNumbers(userPickCount);
+        final LottosDto lottosDTO = InputView.inputLottoNumbers(userPickCount);
         final Lottos lottos = store.salesLottos(money, lottosDTO);
 
         OutputView.printBuyLotto(userPickCount, lottos);
 
-        final LottoDTO lottoDTO = InputView.inputWinningLottoNumbers();
+        final LottoDto lottoDTO = InputView.inputWinningLottoNumbers();
         final BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
         final WinningLotto winningLotto = new WinningLotto(Lotto.create(lottoDTO.getLottoNumbers()), bonusNumber);
 

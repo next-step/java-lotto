@@ -1,6 +1,8 @@
 package step2.domain;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoStatistics {
@@ -17,6 +19,11 @@ public class LottoStatistics {
                      .stream()
                      .map(lotto -> lotto.matchLottoNumber(winningLotto))
                      .collect(Collectors.toList());
+    }
+
+    public Map<LottoRank, Long> groupingByRank(WinningLotto winningLotto) {
+        return getMyRanks(winningLotto).stream()
+                                       .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public double getBenefitPercent(final WinningLotto winningLotto) {
