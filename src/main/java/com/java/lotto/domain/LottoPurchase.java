@@ -17,6 +17,10 @@ public class LottoPurchase {
         return purchaseAmount;
     }
 
+    public int getCountOfLotto() {
+        return purchaseAmount / LOTTO_PRICE;
+    }
+
     public int getCountOfAutoLotto() {
         return purchaseAmount / LOTTO_PRICE - manualLottoNumbers.size();
     }
