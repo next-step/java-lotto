@@ -6,13 +6,17 @@ package lotto.model;
  */
 public class LottoOrder {
 
+	private static final int PRICE_OF_TICKET = 1000;
+
 	/**
 	 * 주문서 생성
 	 * @param investment 투자금(구입금액)
 	 * @param manualCount 수동입력 구매 수
 	 */
 	public LottoOrder(int investment, int manualCount) {
-
+		if(manualCount * PRICE_OF_TICKET > investment){
+			throw new IllegalArgumentException();
+		}
 	}
 
 	/**
