@@ -1,8 +1,15 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static step2.domain.LottoConstant.LOTTO_NUMBERS_ENTRY;
+import static step2.domain.LottoConstant.LOTTO_NUMBERS_MAP;
+import static step2.domain.LottoConstant.LOTTO_NUMBER_SIZE;
 
 public class Lotto {
     private static final Integer LOTTO_NUMBERS_SIZE = 6;
@@ -25,7 +32,17 @@ public class Lotto {
     }
 
     public static Lotto create() {
-        return LottoGenerator.generate();
+        Collections.shuffle(LOTTO_NUMBERS_ENTRY);
+        return new Lotto(LOTTO_NUMBERS_ENTRY.stream()
+                                            .map(Map.Entry::getValue)
+                                            .collect(Collectors.toList())
+                                            .subList(0, LOTTO_NUMBER_SIZE));
+    }
+
+    public static Lotto create(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                                .map(LOTTO_NUMBERS_MAP::get)
+                                .collect(Collectors.toList()));
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -55,19 +72,11 @@ public class Lotto {
     }
 
     private LottoRank matchBonusNumber(final LottoRank rank, final BonusNumber bonusNumber) {
-        validateBonusTrack(rank);
-
         if (this.lottoNumbers.contains(bonusNumber)) {
             return LottoRank.SECOND;
         }
 
         return rank;
-    }
-
-    private void validateBonusTrack(final LottoRank rank) {
-        if (!LottoRank.THIRD.equals(rank)) {
-            throw new IllegalArgumentException("보너스 번호 매칭은 5개 번호를 맞추었을때 가능합니다.");
-        }
     }
 
     @Override

@@ -12,51 +12,42 @@ public class LottoStatisticsTest {
     @Test
     @DisplayName("수익률 계산 [1등]")
     void benefit_percent_1st() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
-        Lotto lotto = Lotto.create();
-        Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(lotto)));
+        Lottos lottos = new Lottos(List.of(Lotto.create(List.of(1, 2, 3, 4, 5, 6))));
+        LottoStatistics lottoStatistics = new LottoStatistics(new Money(1_000L), lottos);
+        WinningLotto winningLotto = new WinningLotto(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
 
-        LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
-        WinningLotto winningLotto = new WinningLotto(lotto);
         assertThat(lottoStatistics.getBenefitPercent(winningLotto)).isEqualTo(2000000.0);
     }
 
     @Test
     @DisplayName("수익률 계산 [2등], 보너스 번호 맞춤")
     void benefit_percent_2th() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
-        Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(13))))));
+        Lottos lottos = new Lottos(List.of(Lotto.create(List.of(1, 2, 3, 4, 5, 11))));
+        LottoStatistics lottoStatistics = new LottoStatistics(new Money(1_000L), lottos);
+        WinningLotto winningLotto = new WinningLotto(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
+        winningLotto.addBonusNumber(new BonusNumber(11));
 
-        LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6))));
-        winningLotto.addBonusNumber(new BonusNumber(13));
         assertThat(lottoStatistics.getBenefitPercent(winningLotto)).isEqualTo(3000.0);
     }
 
     @Test
     @DisplayName("수익률 계산 [3등], 보너스 번호 못맞춤")
     void benefit_percent_3th() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
-        Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(13))))));
+        Lottos lottos = new Lottos(List.of(Lotto.create(List.of(1, 2, 3, 4, 5, 11))));
+        LottoStatistics lottoStatistics = new LottoStatistics(new Money(1_000L), lottos);
+        WinningLotto winningLotto = new WinningLotto(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
+        winningLotto.addBonusNumber(new BonusNumber(12));
 
-        LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6))));
-        winningLotto.addBonusNumber(new BonusNumber(11));
         assertThat(lottoStatistics.getBenefitPercent(winningLotto)).isEqualTo(1500.0);
     }
 
     @Test
     @DisplayName("수익률 계산 [당첨 실패]")
     void benefit_percent_no_rank() {
-        LottoStore lottoStore = new LottoStore();
-        Money money = new Money(1000L);
-        Lottos lottos = lottoStore.buyLotto(money, new ChooseLottos(List.of(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(13), LottoNumber.create(11), LottoNumber.create(12), LottoNumber.create(14))))));
+        Lottos lottos = new Lottos(List.of(Lotto.create(List.of(1, 2, 10, 11, 12, 13))));
+        LottoStatistics lottoStatistics = new LottoStatistics(new Money(1_000L), lottos);
+        WinningLotto winningLotto = new WinningLotto(Lotto.create(List.of(1, 2, 3, 4, 5, 6)));
 
-        LottoStatistics lottoStatistics = new LottoStatistics(money, lottos);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(LottoNumber.create(1), LottoNumber.create(2), LottoNumber.create(3), LottoNumber.create(4), LottoNumber.create(5), LottoNumber.create(6))));
         assertThat(lottoStatistics.getBenefitPercent(winningLotto)).isEqualTo(0.0);
     }
 

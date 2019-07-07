@@ -3,6 +3,7 @@ package step2.domain;
 import java.util.Objects;
 
 public class Money {
+    private static final int NO_MONEY = 0;
     private final Long money;
 
     public Money(Long money) {
@@ -11,13 +12,25 @@ public class Money {
     }
 
     private void validateMoney(Long money) {
-        if (money < 0) {
+        if (money < NO_MONEY) {
             throw new IllegalArgumentException("마이너스 금액은 입력할 수 없습니다.");
         }
     }
 
     public Long getMoney() {
         return money;
+    }
+
+    public Money multiplyMoney(final int size) {
+        return new Money(money * size);
+    }
+
+    public Money subtractMoney(final Money money) {
+        return new Money(this.money - money.money);
+    }
+
+    public LottoQuantity getLottoQuantity(final Money lottoPrice) {
+        return new LottoQuantity(this.money / lottoPrice.getMoney());
     }
 
     @Override

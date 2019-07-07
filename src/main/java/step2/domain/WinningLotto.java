@@ -10,6 +10,11 @@ public class WinningLotto {
         this.lotto = lotto;
     }
 
+    public WinningLotto(Lotto lotto, BonusNumber bonusNumber) {
+        this.lotto = lotto;
+        this.bonusNumber = bonusNumber;
+    }
+
     public Lotto getLotto() {
         return new Lotto(lotto);
     }

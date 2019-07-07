@@ -33,6 +33,14 @@ public enum LottoRank {
                      .orElse(NO_RANK);
     }
 
+    public static LottoRank rankOf(final int rank) {
+        return Arrays.stream(LottoRank.values())
+                     .filter(lottoRank -> lottoRank.getRank()
+                                                   .equals(rank))
+                     .findFirst()
+                     .orElse(NO_RANK);
+    }
+
     public Money getMoney() {
         return money;
     }

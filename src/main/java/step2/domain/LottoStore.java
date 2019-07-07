@@ -1,41 +1,53 @@
 package step2.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import step2.dto.LottosDto;
 
 public class LottoStore {
-    public static final Money LOTTO_PRICE = new Money(1000L);
+    public static final Money LOTTO_PRICE = new Money(1_000L);
+    private static final LottoStore INSTANCE = new LottoStore();
 
-    public Lottos buyLotto(final Money money) {
-        validateMoney(money);
-        final int quantity = getLottoQuantity(money);
-        return makeLottos(quantity);
+    private LottoStore() {}
+
+    public static LottoStore getInstance() {
+        return INSTANCE;
     }
 
-    public Lottos buyLotto(final Money money, ChooseLottos chooseLottos) {
-        validateMoney(money);
-        final int quantity = getLottoQuantity(money);
-        return new Lottos(giveLottos(chooseLottos, quantity));
+    public Lottos salesLottos(final Money money, final LottosDto lottosDTO) {
+        final var userPickLottos = salesLottos(money, lottosDTO, new UserPickLottosFactory());
+
+        final var usedMoney = userPickLottos.getTotalPrice();
+        final var restMoney = money.subtractMoney(usedMoney);
+
+        final var autoPickLottos = salesLottos(restMoney, new AutoPickLottosFactory());
+
+        return userPickLottos.addAll(autoPickLottos);
     }
 
-    private void validateMoney(final Money money) {
-        if (money.getMoney() < LOTTO_PRICE.getMoney()) {
-            throw new IllegalArgumentException("로또는 한 개당 " + LOTTO_PRICE.getMoney() + "원 입니다.");
+    private Lottos salesLottos(final Money money, final LottoFactory<LottoQuantity, Lottos> factory) {
+        if (hasNo1000Won(money)) {
+            return factory.apply(new LottoQuantity(0L));
         }
+
+        final var quantity = money.getLottoQuantity(LOTTO_PRICE);
+        return factory.apply(quantity);
     }
 
-    private int getLottoQuantity(final Money money) {
-        return (int) (money.getMoney() / LOTTO_PRICE.getMoney());
+    private Lottos salesLottos(final Money money, LottosDto lottosDTO, final LottoFactory<LottosDto, Lottos> factory) {
+        if (hasNo1000Won(money)) {
+            return factory.apply(new LottosDto(List.of()));
+        }
+
+        final var quantity = money.getLottoQuantity(LOTTO_PRICE);
+        quantity.validateLottoSize(lottosDTO.getLottos().size());
+        return factory.apply(lottosDTO);
     }
 
-    private Lottos makeLottos(final int quantity) {
-        return new Lottos(IntStream.range(0, quantity)
-                                   .mapToObj(i -> Lotto.create())
-                                   .collect(Collectors.toList()));
-    }
-
-    private List<Lotto> giveLottos(final ChooseLottos chooseLottos, final int quantity) {
-        return chooseLottos.getLottos().subList(0, quantity);
+    private boolean hasNo1000Won(final Money money) {
+        if (money.getMoney() < LOTTO_PRICE.getMoney()) {
+            return true;
+        }
+        return false;
     }
 }

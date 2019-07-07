@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
 
@@ -14,6 +15,12 @@ public class LottoTest {
     void lotto() {
         Lotto lotto = Lotto.create();
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("공 6개 미만인 경우 로또 생성 실패")
+    void create_fail() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.create(List.of(1, 2, 3, 4, 5)));
     }
 
     @Test

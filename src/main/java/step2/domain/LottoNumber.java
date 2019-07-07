@@ -2,13 +2,13 @@ package step2.domain;
 
 import java.util.Objects;
 
-import static step2.domain.LottoGenerator.LOTTO_MAX_NUMBER;
-import static step2.domain.LottoGenerator.LOTTO_MIN_NUMBER;
+import static step2.domain.LottoConstant.LOTTO_MAX_NUMBER;
+import static step2.domain.LottoConstant.LOTTO_MIN_NUMBER;
 
 public class LottoNumber {
     protected final Integer number;
 
-    public LottoNumber(Integer number) {
+    protected LottoNumber(Integer number) {
         validateLottoNumber(number);
         this.number = number;
     }
