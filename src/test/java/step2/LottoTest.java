@@ -22,8 +22,10 @@ public class LottoTest {
     @Test
     public void 생성_된_로또_자릿수_확인() {
         Lotto lotto = new Lotto();
-        List<Integer> autoLotto = lotto.generateStandardLotto(1).get(0);
-        assertThat(autoLotto.size()).isEqualTo(Lotto.WINNING_NUMBERS_LENGTH);
+        List<List<Integer>> autoLottos = lotto.generateStandardLotto(3);
+        for (List<Integer> autoLotto : autoLottos) {
+            assertThat(autoLotto.size()).isEqualTo(Lotto.WINNING_NUMBERS_LENGTH);
+        }
     }
 
 //    @DisplayName("자동생성 로또 범위 확인: 1 ~ 45")
