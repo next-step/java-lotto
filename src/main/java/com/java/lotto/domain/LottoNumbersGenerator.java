@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbersGenerator {
+	private static final String REGEX_COMMA = ",";
 	private static final int LOTTO_MIN_NUMBER = 1;
 	private static final int LOTTO_MAX_NUMBER = 45;
 
@@ -19,9 +20,8 @@ public class LottoNumbersGenerator {
 	}
 
 	public static List<Integer> manualNumbersGenerator(String manualNumber) {
-		String[] numbers = manualNumber.split(",");
 		List<Integer> lottoNumbers = new ArrayList<>();
-		for (String number : numbers) {
+		for (String number : manualNumber.split(REGEX_COMMA)) {
 			lottoNumbers.add(LottoNumberRangeValidation(isNumber(number.trim())));
 		}
 		return sort(lottoNumbers);

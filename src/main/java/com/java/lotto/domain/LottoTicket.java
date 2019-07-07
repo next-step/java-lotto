@@ -2,7 +2,6 @@ package com.java.lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class LottoTicket {
@@ -21,8 +20,6 @@ public class LottoTicket {
     }
     
 	public boolean isMatchNumber(Integer number) {
-		return Optional.ofNullable(number)
-				.filter(matchNumber -> lottoNumbers.contains(matchNumber))
-                .isPresent();
+		return lottoNumbers.contains(number);
 	}
 }

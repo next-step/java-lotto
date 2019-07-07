@@ -12,18 +12,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class WinningStatisticsTest {
-    LottoTickets lottoTickets;
+    LottoPurchase lottoPurchase;
+    Lotto lotto;
     String winningNumber;
     WinningStatistics winningStatistics;
 
     @BeforeEach
     void setup() {
-        int count = 3;
         List<String> manualNumbers = new ArrayList<>();
         manualNumbers.add("1,2,3,4,5,6");
         manualNumbers.add("7,8,9,11,12,45");
-        lottoTickets = LottoTicketsGenerator.manualTicketsGenerator(2, manualNumbers);
-        winningStatistics = new WinningStatistics();
+        this.lottoPurchase = new LottoPurchase(3000, manualNumbers);
+
+        lotto = new Lotto(lottoPurchase);
     }
 
     @Test
@@ -50,7 +51,8 @@ public class WinningStatisticsTest {
     @DisplayName("로또 3개 맞춤 검증")
     void isWinningNumberCountThree() {
         winningNumber = "1, 2, 3, 7, 8, 9";
-        winningStatistics.findLottoWinning(new WinningTicket(winningNumber, 45), lottoTickets);
+
+        winningStatistics = new WinningStatistics(new WinningTicket(winningNumber, 45), lotto);
         assertThat(winningStatistics.countByReward(3)).isEqualTo(2);
     }
 
@@ -58,7 +60,7 @@ public class WinningStatisticsTest {
     @DisplayName("로또 4개 맞춤 검증")
     void isWinningNumberCountFour() {
         winningNumber = "1, 2, 3, 4, 8, 9";
-        winningStatistics.findLottoWinning(new WinningTicket(winningNumber, 45), lottoTickets);
+        winningStatistics = new WinningStatistics(new WinningTicket(winningNumber, 45), lotto);
         assertThat(winningStatistics.countByReward(4)).isEqualTo(1);
     }
 
@@ -66,7 +68,7 @@ public class WinningStatisticsTest {
     @DisplayName("로또 5개 맞춤 검증")
     void isWinningNumberCountFive() {
         winningNumber = "1, 2, 3, 4, 5, 8";
-        winningStatistics.findLottoWinning(new WinningTicket(winningNumber, 45), lottoTickets);
+        winningStatistics = new WinningStatistics(new WinningTicket(winningNumber, 45), lotto);
         assertThat(winningStatistics.countByReward(5)).isEqualTo(1);
     }
 
@@ -74,7 +76,7 @@ public class WinningStatisticsTest {
     @DisplayName("로또 6개 맞춤 검증")
     void isWinningNumberCountSix() {
         winningNumber = "1, 2, 3, 4, 5, 6";
-        winningStatistics.findLottoWinning(new WinningTicket(winningNumber, 45), lottoTickets);
+        winningStatistics = new WinningStatistics(new WinningTicket(winningNumber, 45), lotto);
         assertThat(winningStatistics.countByReward(6)).isEqualTo(1);
     }
 
@@ -82,7 +84,7 @@ public class WinningStatisticsTest {
     @DisplayName("로또 5개 및 보너스 번호 맞춤 검증")
     void isWinningNumberCountBonus() {
         winningNumber = "7, 8, 9, 11, 12, 44";
-        winningStatistics.findLottoWinning(new WinningTicket(winningNumber, 45), lottoTickets);
+        winningStatistics = new WinningStatistics(new WinningTicket(winningNumber, 45), lotto);
         assertThat(winningStatistics.countByReward(LottoReward.MATCH_FIVE_BONUS)).isEqualTo(1);
     }
 }

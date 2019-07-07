@@ -1,49 +1,37 @@
 package com.java.lotto.domain;
 
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
-	public static final int LOTTO_PRICE = 1000;
 
-	private final int purchaseAmount;
-	private final LottoTickets lottoTickets;
+    private final LottoPurchase lottoPurchase;
+    private final LottoTickets lottoTickets;
 
-	private WinningStatistics winningStatistics;
+    public Lotto(LottoPurchase lottoPurchase) {
+        this.lottoPurchase = lottoPurchase;
+        this.lottoTickets = purchase();
+    }
 
-	public Lotto(int purchaseAmount) {
-		this.purchaseAmount = purchaseAmount;
-		this.lottoTickets = purchase(purchaseAmount);
-		this.winningStatistics = new WinningStatistics();
-	}
+    private LottoTickets purchase() {
+        List<LottoTicket> lottoTickets = LottoTicketsGenerator.manualTicketsGenerator(lottoPurchase);
+        lottoTickets.addAll(LottoTicketsGenerator.automaticTicketsGenerator(lottoPurchase));
+        return new LottoTickets(lottoTickets);
+    }
 
-	private LottoTickets purchase(int purchaseAmount) {
-		return LottoTicketsGenerator.automaticTicketsGenerator(purchaseAmount / LOTTO_PRICE);
-	}
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
+    }
 
-	public List<LottoTicket> getLottoTickets() {
-		return lottoTickets.getLottoTickets();
-	}
+    public int getPurchaseAmount(){
+        return lottoPurchase.getPurchaseAmount();
+    }
 
-	public int getLottoTicketsCount() {
-		return lottoTickets.count();
-	}
+    public int getCountOfAutoLotto(){
+        return lottoPurchase.getCountOfAutoLotto();
+    }
 
-	public float rateOfReturn() {
-		return winningStatistics.rateOfReturn(purchaseAmount);
-	}
+    public int getCountOfManualLotto(){
+        return lottoPurchase.getCountOfManualLotto();
+    }
 
-
-	public Map<LottoReward, Integer> getWinningStatistics() {
-		return winningStatistics.getReward();
-	}
-
-	public Integer countByReward(LottoReward lottoReward){
-		return winningStatistics.countByReward(lottoReward) == null ? 0 :winningStatistics.countByReward(lottoReward);
-	}
-
-
-	public void winningNumbers(String winningNumbers, int bonusNumber) {
-		winningStatistics.findLottoWinning(new WinningTicket(winningNumbers, bonusNumber), lottoTickets);
-	}
 }
