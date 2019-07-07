@@ -18,7 +18,7 @@ public class InputValidationCheck {
         int winningNumberLength = inputWinningNumbers.length;
 
         if (winningNumberLength != Lotto.WINNING_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException("당첨번호는" + winningNumberLength + "개를 입력하셔야 합니다.");
+            throw new IllegalArgumentException("당첨번호는" + Lotto.WINNING_NUMBERS_LENGTH + "개를 입력하셔야 합니다.");
         }
     }
 
