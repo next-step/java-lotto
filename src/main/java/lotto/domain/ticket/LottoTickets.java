@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.common.Csv;
+import lotto.common.PositiveNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class LottoTickets {
 
     public static LottoTickets ofManual(List<Csv> manualTickets) {
         return LottoTickets.of(manualTickets.stream()
-                .map(csv -> LottoTicket.of(csv.getCsvLong()))
+                .map(csv -> LottoTicket.ofManual(LottoNumbers.of(csv.getCsvLong())))
                 .collect(Collectors.toList()));
     }
 
@@ -27,5 +28,17 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public long count() { return lottoTickets.size(); }
+    public PositiveNumber count() { return PositiveNumber.of(lottoTickets.size()); }
+
+    public PositiveNumber getNumberOfAutoTickets() {
+        return PositiveNumber.of(lottoTickets.stream()
+                .filter(LottoTicket::isAutoTicket)
+                .count());
+    }
+
+    public PositiveNumber getNumberOfManualTickets() {
+        return PositiveNumber.of(lottoTickets.stream()
+                .filter(LottoTicket::isManualTicket)
+                .count());
+    }
 }

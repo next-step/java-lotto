@@ -7,6 +7,11 @@ import lotto.dto.LottoPurchaseRequestDto;
 import lotto.dto.LottoResultDto;
 import lotto.dto.LottoWinningRequestDto;
 
+import java.util.Collection;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class DefaultLottoService implements LottoService {
 
     private final LottoTicketGenerator lottoTicketGenerator;
@@ -16,16 +21,21 @@ public class DefaultLottoService implements LottoService {
     }
 
     public LottoTickets purchaseLottoTickets(LottoPurchaseRequestDto lottoPurchaseRequestDto) {
-        PurchaseAmount purchaseAmount = PurchaseAmount.of(lottoPurchaseRequestDto.getPurchaseAmount().get());
+        PurchaseAmount purchaseAmount = PurchaseAmount.ofManual(lottoPurchaseRequestDto.getPurchaseAmount(), lottoPurchaseRequestDto.getManualTicketCount());
+
         LottoTickets manualTickets = LottoTickets.ofManual(lottoPurchaseRequestDto.getManualTicketNumbers());
-        return lottoTicketGenerator.generate(purchaseAmount);
+        LottoTickets autoTickets = lottoTicketGenerator.generate(purchaseAmount.getNumberOfAutoTickets());
+
+        return LottoTickets.of(Stream.of(manualTickets, autoTickets)
+                .flatMap(lottoTicket -> lottoTicket.findAll().stream())
+                .collect(Collectors.toList()));
     }
 
     public LottoResultDto checkWinningAmount(LottoWinningRequestDto lottoWinningRequestDto) {
-        WinningLotto winningLotto = WinningLotto.of(LottoTicket.of(lottoWinningRequestDto.getWinningTicket().getCsvLong()),
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(lottoWinningRequestDto.getWinningTicket().getCsvLong()),
                 LottoNumber.of(lottoWinningRequestDto.getBonusNumber().get()));
         LottoTickets purchaseTickets = lottoWinningRequestDto.getPurchaseTickets();
 
-        return LottoResultDto.of(LottoWinningResult.of(purchaseTickets, winningLotto), PositiveNumber.of(purchaseTickets.count()));
+        return LottoResultDto.of(LottoWinningResult.of(purchaseTickets, winningLotto), purchaseTickets.count());
     }
 }

@@ -2,6 +2,7 @@ package lotto.dto;
 
 import lotto.common.Csv;
 import lotto.common.PositiveNumber;
+import sun.jvm.hotspot.runtime.posix.POSIXSignals;
 
 import java.util.List;
 
@@ -24,5 +25,9 @@ public class LottoPurchaseRequestDto {
 
     public List<Csv> getManualTicketNumbers() {
         return manualTicketNumbers;
+    }
+
+    public PositiveNumber getManualTicketCount() {
+        return PositiveNumber.of(manualTicketNumbers.size());
     }
 }

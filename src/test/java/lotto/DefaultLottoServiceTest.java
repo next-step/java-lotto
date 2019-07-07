@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class DefaultLottoServiceTest {
 
@@ -26,14 +25,14 @@ public class DefaultLottoServiceTest {
 
         LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
                 LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
-                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))),
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L)))
                 ))));
 
         LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(PositiveNumber.of(2000L), Collections.emptyList());
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseRequestDto);
 
-        assertThat(lottoTickets.count()).isEqualTo(2);
+        assertThat(lottoTickets.count().get()).isEqualTo(2);
         assertThat(lottoTickets.findAll().get(0).getLottoTicketNumbers()).isEqualTo("1, 2, 3, 4, 5, 6");
         assertThat(lottoTickets.findAll().get(1).getLottoTicketNumbers()).isEqualTo("7, 8, 9, 10, 11, 12");
     }
@@ -45,7 +44,7 @@ public class DefaultLottoServiceTest {
         LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(PositiveNumber.of(71000L), Collections.emptyList());
         LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseRequestDto);
 
-        assertThat(lottoTickets.count()).isEqualTo(71);
+        assertThat(lottoTickets.count().get()).isEqualTo(71);
     }
 
     @Test
@@ -53,8 +52,8 @@ public class DefaultLottoServiceTest {
     void checkWinningAmount() {
         LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
                 LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
-                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))),
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L)))
                 ))));
 
         LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(PositiveNumber.of(2000L), Collections.emptyList());
@@ -71,8 +70,8 @@ public class DefaultLottoServiceTest {
     void checkWinningAmount2() {
         LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
                 LottoTickets.of(Arrays.asList(
-                        LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)),
-                        LottoTicket.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L))
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))),
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L)))
                 ))));
 
         LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(PositiveNumber.of(2000L), Collections.emptyList());
@@ -82,5 +81,56 @@ public class DefaultLottoServiceTest {
         LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoWinningRequestDto);
 
         assertThat(lottoResultDto.getEarningRate()).isEqualTo(2.5);
+    }
+
+    @Test
+    @DisplayName("수동티켓이 있는경우 전체 발급수를 확인한다")
+    void checkTicketCount() {
+        LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
+                LottoTickets.of(Arrays.asList(
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))),
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L)))
+                ))));
+
+        LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(
+                PositiveNumber.of(3300L),
+                Arrays.asList(Csv.ofString("2,3,4,5,6,7")));
+        LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseRequestDto);
+
+        assertThat(lottoTickets.count().get()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("수동티켓이 있는경우 자동 발급수를 확인한다")
+    void checkTicketCount2() {
+        LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
+                LottoTickets.of(Arrays.asList(
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))),
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L)))
+                ))));
+
+        LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(
+                PositiveNumber.of(3300L),
+                Arrays.asList(Csv.ofString("2,3,4,5,6,7")));
+        LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseRequestDto);
+
+        assertThat(lottoTickets.getNumberOfAutoTickets().get()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("수동티켓이 있는경우 수동 발급수를 확인한다")
+    void checkTicketCount3() {
+        LottoService lottoService = new DefaultLottoService(new MockLottoTicketGenerator(
+                LottoTickets.of(Arrays.asList(
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))),
+                        LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 8L, 9L, 10L, 11L, 12L)))
+                ))));
+
+        LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(
+                PositiveNumber.of(3300L),
+                Arrays.asList(Csv.ofString("2,3,4,5,6,7")));
+        LottoTickets lottoTickets = lottoService.purchaseLottoTickets(lottoPurchaseRequestDto);
+
+        assertThat(lottoTickets.getNumberOfManualTickets().get()).isEqualTo(1);
     }
 }

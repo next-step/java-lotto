@@ -19,10 +19,8 @@ public class LottoWinningResult {
 
     private Map<LottoWinningAmount, Long> createWinningResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
         return lottoTickets.findAll().stream()
-                .map(lottoTicket -> {
-                    return LottoWinningAmount.find(winningLotto.getMatchCount(lottoTicket),
-                            winningLotto.matchBonusNumber(lottoTicket));
-                })
+                .map(lottoTicket -> LottoWinningAmount.find(winningLotto.getMatchCount(lottoTicket),
+                            winningLotto.matchBonusNumber(lottoTicket)))
                 .collect(Collectors.toMap(winningAmount -> winningAmount, winningAmount -> 1L, Long::sum));
     }
 

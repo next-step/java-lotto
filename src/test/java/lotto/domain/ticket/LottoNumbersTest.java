@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LottoTicketTest {
+public class LottoNumbersTest {
 
     @Test
     @DisplayName("로또번호 개수가 6개인경우 정상적으로 생성하는지 확인한다")
     void checkNumberCount() {
-        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        LottoNumbers lottoTicket = LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
         List<LottoNumber> lottoNumbers = lottoTicket.findAll();
 
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -32,7 +32,7 @@ public class LottoTicketTest {
     void checkNumberCount2() throws Exception {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L));
+                    LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L));
                 }).withMessageMatching("Count of Lotto numbers must be 6");
     }
 
@@ -41,7 +41,7 @@ public class LottoTicketTest {
     void checkNumberCount3() throws Exception {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L));
+                    LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L));
                 }).withMessageMatching("Count of Lotto numbers must be 6");
     }
 
@@ -50,14 +50,14 @@ public class LottoTicketTest {
     void checkDuplicatedNumber() throws Exception {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoTicket.of(Arrays.asList(2L, 2L, 3L, 4L, 5L, 6L));
+                    LottoNumbers.of(Arrays.asList(2L, 2L, 3L, 4L, 5L, 6L));
                 }).withMessageMatching("Lotto numbers can not be duplicated");
     }
 
     @Test
     @DisplayName("특정번호가 로또티켓에 존재하는지 확인한다")
     void checkBonusNumber() {
-        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
-        assertTrue(lottoTicket.existNumber(LottoNumber.of(1)));
+        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        assertTrue(lottoNumbers.existNumber(LottoNumber.of(1)));
     }
 }
