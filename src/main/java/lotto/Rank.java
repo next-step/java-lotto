@@ -33,4 +33,15 @@ public enum Rank {
         return this.sameNumberCnt == countOfMatch;
     }
 
+    public int getSameNumberCnt() {
+        return sameNumberCnt;
+    }
+
+    public int getWinningAmount() {
+        return winningAmount;
+    }
+
+    public Money prize(int countOfMatchLotto) {
+        return new Money(countOfMatchLotto * winningAmount);
+    }
 }

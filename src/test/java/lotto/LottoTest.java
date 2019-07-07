@@ -22,6 +22,12 @@ public class LottoTest {
     }
 
     @Test
+    void lottoCreateString() {
+        assertThat(Lotto.of("1,2,3,4,5,6").getLotto())
+                .isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)).getLotto());
+    }
+
+    @Test
     void lottoCount6Exception() {
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5)));
     }

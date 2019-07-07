@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -8,11 +9,19 @@ import java.util.stream.Stream;
 public class Lotto {
     private Set<LottoNumber> lotto;
 
-    private Lotto(Set<LottoNumber> lotto) {
+    public Lotto(Set<LottoNumber> lotto) {
         if (lotto.size() != 6) {
             throw new IllegalArgumentException();
         }
         this.lotto = lotto;
+    }
+
+    public static Lotto of(String lotto) {
+        Set<Integer> lottoSet = Arrays.stream(lotto.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
+        return new Lotto(makeLottoNumberSet(lottoSet.stream()));
     }
 
     public static Lotto of(List<Integer> lotto) {
@@ -39,7 +48,7 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(LottoNumber lottoNumber){
+    public boolean contains(LottoNumber lottoNumber) {
         return this.lotto.contains(lottoNumber);
     }
 }

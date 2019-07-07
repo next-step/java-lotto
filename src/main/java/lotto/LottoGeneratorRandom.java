@@ -8,6 +8,7 @@ public class LottoGeneratorRandom implements LottoGenerator {
     private List<Integer> baseNumbers;
 
     public LottoGeneratorRandom() {
+        baseNumbers = new ArrayList<>();
         for (int i = 1; i <= LOTTO_BOUND; i++) {
             baseNumbers.add(i);
         }

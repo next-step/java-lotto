@@ -19,4 +19,12 @@ public class LottoResult {
     public Integer getValue(Rank rank) {
         return result.get(rank);
     }
+
+    public Money getPrize() {
+        Money prize = new Money(0);
+        for (Rank rank : result.keySet()) {
+            prize = prize.sum(rank.prize(result.get(rank)));
+        }
+        return prize;
+    }
 }
