@@ -10,15 +10,15 @@ public class InputValidationCheck {
 
     public static void checkCash(String cash) {
         if (Integer.parseInt(cash) < Lotto.LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또는" + Lotto.LOTTO_PRICE + " 원 입니다.");
+            throw new IllegalArgumentException("로또는 1장에 " + Lotto.LOTTO_PRICE + " 원 입니다.");
         }
     }
 
     public static void checkWinningNumbers(String[] inputWinningNumbers) {
         int winningNumberLength = inputWinningNumbers.length;
 
-        if (winningNumberLength != Lotto.WINNING_NUMBERS_LENGTH - 1) {
-            throw new IllegalArgumentException("당첨번호는" + winningNumberLength + "개 입력하셔야 합니다.");
+        if (winningNumberLength != Lotto.WINNING_NUMBERS_LENGTH) {
+            throw new IllegalArgumentException("당첨번호는" + winningNumberLength + "개를 입력하셔야 합니다.");
         }
     }
 
