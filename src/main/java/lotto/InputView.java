@@ -16,7 +16,7 @@ public class InputView {
     }
 
     public static int inputBouseNumber() {
-        System.out.println("당첨번호를 입력해 주세요.");
+        System.out.println("보너스번호를 입력해 주세요.");
         return scanner.nextInt();
     }
 }
