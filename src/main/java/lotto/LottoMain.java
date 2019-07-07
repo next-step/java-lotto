@@ -10,9 +10,10 @@ public class LottoMain {
         OutputView.outputLottos(lottoGame.getLottos());
 
         String winningNumber = InputView.inputWinningNumber();
-        Lotto winnigLotto = Lotto.of(winningNumber);
+        int bounsNumber = InputView.inputBouseNumber();
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(winningNumber), LottoNumber.of(bounsNumber));
 
-        LottoResult lottoResult = lottoGame.result(winnigLotto);
+        LottoResult lottoResult = lottoGame.result(winningLotto);
         OutputView.winningNumberPrint(lottoResult);
 
         Money prize = lottoResult.getPrize();

@@ -9,10 +9,10 @@ public class LottoGame {
         this.lottos = lottoNumberRandom.generate(money);
     }
 
-    public LottoResult result(Lotto winningLotto) {
+    public LottoResult result(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
-            int match = winningLotto.match(lotto);
+            int match = winningLotto.getWinLotto().match(lotto);
             result.putRank(Rank.getRank(match));
         }
         return result;
