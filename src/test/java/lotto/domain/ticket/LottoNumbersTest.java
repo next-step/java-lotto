@@ -1,5 +1,6 @@
 package lotto.domain.ticket;
 
+import lotto.common.PositiveNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -58,6 +59,6 @@ public class LottoNumbersTest {
     @DisplayName("특정번호가 로또티켓에 존재하는지 확인한다")
     void checkBonusNumber() {
         LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
-        assertTrue(lottoNumbers.existNumber(LottoNumber.of(1)));
+        assertTrue(lottoNumbers.existNumber(LottoNumber.of(PositiveNumber.of(1))));
     }
 }

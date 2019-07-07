@@ -3,7 +3,7 @@ package lotto.domain.ticket;
 import java.util.List;
 
 public class LottoTicket {
-    public static final Long PRICE = 1000L;
+    public static final long PRICE = 1000L;
 
     private LottoNumbers lottoNumbers;
     private LottoTicketType lottoTicketType;

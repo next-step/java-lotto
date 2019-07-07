@@ -33,7 +33,7 @@ public class DefaultLottoService implements LottoService {
 
     public LottoResultDto checkWinningAmount(LottoWinningRequestDto lottoWinningRequestDto) {
         WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(lottoWinningRequestDto.getWinningTicket().getCsvLong()),
-                LottoNumber.of(lottoWinningRequestDto.getBonusNumber().get()));
+                LottoNumber.of(lottoWinningRequestDto.getBonusNumber()));
         LottoTickets purchaseTickets = lottoWinningRequestDto.getPurchaseTickets();
 
         return LottoResultDto.of(LottoWinningResult.of(purchaseTickets, winningLotto), purchaseTickets.count());

@@ -4,8 +4,8 @@ import lotto.common.PositiveNumber;
 import lotto.domain.ticket.LottoTicket;
 
 public class PurchaseAmount {
-    private static final Long MAX_PURCHASE_AMOUNT = 1_000_000L;
-    private static final Long MIN_PURCHASE_AMOUNT = 1_000L;
+    private static final long MAX_PURCHASE_AMOUNT = 1_000_000L;
+    private static final long MIN_PURCHASE_AMOUNT = 1_000L;
 
     private PositiveNumber manualTicketPurchaseCount;
     private PositiveNumber autoTicketPurchaseCount;

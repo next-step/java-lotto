@@ -23,7 +23,7 @@ public class LottoResultDtoTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 16L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoResultDto lottoResultDto = LottoResultDto.of(LottoWinningResult.of(lottoTickets, winningLotto), lottoTickets.count());
 
         LottoWinningResult lottoWinningResult = lottoResultDto.getWinningResult();

@@ -1,5 +1,7 @@
 package lotto.domain.ticket;
 
+import lotto.common.PositiveNumber;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,7 +17,10 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers of(List<Long> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList()));
+        return new LottoNumbers(lottoNumbers.stream()
+                .map(PositiveNumber::of)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {

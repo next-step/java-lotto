@@ -1,22 +1,17 @@
 package lotto.domain.winning;
 
+import lotto.common.PositiveNumber;
+import lotto.domain.ticket.LottoTicket;
+
 public class EarningRate {
     private Double earningRate;
 
-    private EarningRate(long totalWinningAmount, long usedPurchaseAmount) {
-        validate(totalWinningAmount);
-        validate(usedPurchaseAmount);
-        this.earningRate = (double) totalWinningAmount / usedPurchaseAmount;
+    private EarningRate(PositiveNumber totalWinningAmount, PositiveNumber totalPurchaseAmount) {
+        this.earningRate = (double) totalWinningAmount.get() / totalPurchaseAmount.get();
     }
 
-    private void validate(long amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Amount must grather than 0");
-        }
-    }
-
-    public static EarningRate of(long totalWinningAmount, long usedPurchaseAmount) {
-        return new EarningRate(totalWinningAmount, usedPurchaseAmount);
+    public static EarningRate of(PositiveNumber totalWinningAmount, PositiveNumber purchaseTicketCount) {
+        return new EarningRate(totalWinningAmount, PositiveNumber.of(purchaseTicketCount.get() * LottoTicket.PRICE));
     }
 
     public double get() {

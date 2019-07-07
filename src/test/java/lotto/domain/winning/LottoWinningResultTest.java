@@ -1,5 +1,6 @@
 package lotto.domain.winning;
 
+import lotto.common.PositiveNumber;
 import lotto.domain.ticket.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(21L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(0);
     }
@@ -35,7 +36,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.THREE_MATCH.getWinningAmount());
     }
@@ -50,7 +51,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.FOUR_MATCH.getWinningAmount());
     }
@@ -66,7 +67,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.FIVE_MATCH.getWinningAmount());
     }
@@ -81,7 +82,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.SIX_MATCH.getWinningAmount());
     }
@@ -96,7 +97,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(26));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(26)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.FIVE_AND_BONUS_MATCH.getWinningAmount());
     }
@@ -107,7 +108,7 @@ public class LottoWinningResultTest {
         LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(27));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(27)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.SIX_MATCH.getWinningAmount());
     }
@@ -118,7 +119,7 @@ public class LottoWinningResultTest {
         LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 7L, 8L, 9L)), LottoNumber.of(1));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 7L, 8L, 9L)), LottoNumber.of(PositiveNumber.of(1L)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.THREE_MATCH.getWinningAmount());
     }
@@ -134,7 +135,7 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
         assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.THREE_MATCH.getWinningAmount() * 2 +
                 LottoWinningAmount.FOUR_MATCH.getWinningAmount() * 2 +
@@ -150,11 +151,16 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(2L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(3L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
-                LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))),
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(6L, 22L, 23L, 24L, 25L, 26L))),
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(7L, 22L, 23L, 24L, 25L, 26L))),
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(8L, 22L, 23L, 24L, 25L, 26L))),
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(9L, 22L, 23L, 24L, 25L, 26L))),
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(10L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
-        double earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), LottoWinningAmount.THREE_MATCH.getWinningAmount() * 2).get();
+        double earningRate = EarningRate.of(PositiveNumber.of(lottoWinningResult.getTotalWinningAmount()), PositiveNumber.of(10)).get();
         assertThat(earningRate).isEqualTo(0.5);
     }
 
@@ -168,9 +174,9 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
-        double earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), LottoWinningAmount.THREE_MATCH.getWinningAmount() * 2).get();
+        double earningRate = EarningRate.of(PositiveNumber.of(lottoWinningResult.getTotalWinningAmount()), PositiveNumber.of(2)).get();
         assertThat(earningRate).isEqualTo(0.0);
     }
 
@@ -184,9 +190,9 @@ public class LottoWinningResultTest {
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(4L, 22L, 23L, 24L, 25L, 26L))),
                 LottoTicket.of(LottoNumbers.of(Arrays.asList(5L, 22L, 23L, 24L, 25L, 26L))))
         );
-        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(45));
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L)), LottoNumber.of(PositiveNumber.of(45)));
         LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
-        double earningRate = EarningRate.of(lottoWinningResult.getTotalWinningAmount(), LottoWinningAmount.THREE_MATCH.getWinningAmount()).get();
+        double earningRate = EarningRate.of(PositiveNumber.of(lottoWinningResult.getTotalWinningAmount()), PositiveNumber.of(5)).get();
         assertThat(earningRate).isEqualTo(1.0);
     }
 }

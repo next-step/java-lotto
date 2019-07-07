@@ -1,5 +1,7 @@
 package lotto.domain.ticket;
 
+import lotto.common.PositiveNumber;
+
 public class WinningLotto {
     private LottoNumbers winningTicket;
     private LottoNumber bounsNumber;
@@ -13,10 +15,10 @@ public class WinningLotto {
         return new WinningLotto(winningTicket, bounsNumber);
     }
 
-    public long getMatchCount(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumbers().stream()
+    public PositiveNumber getMatchCount(LottoTicket lottoTicket) {
+        return PositiveNumber.of(lottoTicket.getLottoNumbers().stream()
                 .filter(winningTicket::existNumber)
-                .count();
+                .count());
     }
 
     public boolean matchBonusNumber(LottoTicket lottoTicket) {

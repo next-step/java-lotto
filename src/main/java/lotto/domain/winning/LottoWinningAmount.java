@@ -1,5 +1,7 @@
 package lotto.domain.winning;
 
+import lotto.common.PositiveNumber;
+
 import java.util.Arrays;
 
 public enum LottoWinningAmount {
@@ -10,11 +12,11 @@ public enum LottoWinningAmount {
     THREE_MATCH(3, 5_000, false),
     NONE(0, 0, false);
 
-    private int matchCount;
+    private long matchCount;
     private long winningAmount;
     private boolean bonusNumberMatch;
 
-    LottoWinningAmount(int matchCount, long winningAmount, boolean bonusNumberMatch) {
+    LottoWinningAmount(long matchCount, long winningAmount, boolean bonusNumberMatch) {
         this.matchCount = matchCount;
         this.winningAmount = winningAmount;
         this.bonusNumberMatch = bonusNumberMatch;
@@ -24,19 +26,19 @@ public enum LottoWinningAmount {
         return winningAmount;
     }
 
-    public boolean isWinningCondition(long matchCount, boolean bonusNumberMatch) {
+    public boolean isWinningCondition(PositiveNumber matchCount, boolean bonusNumberMatch) {
         return isSameMatchCount(matchCount) && isBonusCondition(bonusNumberMatch);
     }
 
-    private boolean isSameMatchCount(long matchCount) {
-        return this.matchCount == matchCount;
+    private boolean isSameMatchCount(PositiveNumber matchCount) {
+        return this.matchCount == matchCount.get();
     }
 
     private boolean isBonusCondition(boolean bonusNumberMatch) {
         return this.bonusNumberMatch ? bonusNumberMatch : true;
     }
 
-    public static LottoWinningAmount find(long matchCount, boolean bonusNumberMatch) {
+    public static LottoWinningAmount find(PositiveNumber matchCount, boolean bonusNumberMatch) {
         return Arrays.stream(LottoWinningAmount.values())
                 .filter(amount -> amount.isWinningCondition(matchCount, bonusNumberMatch))
                 .findFirst().orElse(NONE);
