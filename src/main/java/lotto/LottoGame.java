@@ -13,7 +13,8 @@ public class LottoGame {
         LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
             int match = winningLotto.getWinLotto().match(lotto);
-            result.putRank(Rank.getRank(match));
+            boolean matchBouns = lotto.contains(winningLotto.getBounsNumber());
+            result.putRank(Rank.getRank(match, matchBouns));
         }
         return result;
     }
