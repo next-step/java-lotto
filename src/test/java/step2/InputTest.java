@@ -14,9 +14,9 @@ public class InputTest {
         assertThatIllegalArgumentException().isThrownBy(() -> InputValidationCheck.checkEmpty(""));
     }
 
-    @DisplayName("구매금액 액수 확인: 1000원 미만 불가")
+    @DisplayName("구매금액 입력 확인: 1000원 미만 불가")
     @Test
-    public void 구매금액_액수_확인() {
+    public void 구매액수_확인() {
 
         assertThatIllegalArgumentException().isThrownBy(() -> InputValidationCheck.checkCash("900"));
     }
