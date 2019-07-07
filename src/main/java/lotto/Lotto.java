@@ -25,7 +25,7 @@ public class Lotto {
 
     private static Set<LottoNumber> makeLottoNumberSet(Stream<Integer> stream) {
         return stream
-                .map(x -> LottoNumber.of(x))
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet());
     }
 

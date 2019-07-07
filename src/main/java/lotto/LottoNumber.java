@@ -6,14 +6,14 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class LottoNumber {
+    private int lottoNumber;
     private static final Map<Integer, LottoNumber> lottoNos = new HashMap<>();
+
     static {
         for (int i = 1; i < 46; i++) {
             lottoNos.put(i, new LottoNumber(i));
         }
     }
-
-    private int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
         if (lottoNumber <= 0 || lottoNumber > 45) {
