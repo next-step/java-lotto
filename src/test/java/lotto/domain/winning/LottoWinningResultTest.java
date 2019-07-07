@@ -113,6 +113,17 @@ public class LottoWinningResultTest {
     }
 
     @Test
+    @DisplayName("로또번호가 3개 일치하고 보너스번호가 같을때 당첨금을 확인한다")
+    void checkBounsNumber3() {
+        LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(
+                LottoTicket.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L))))
+        );
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 7L, 8L, 9L)), LottoNumber.of(1));
+        LottoWinningResult lottoWinningResult = LottoWinningResult.of(lottoTickets, winningLotto);
+        assertThat(lottoWinningResult.getTotalWinningAmount()).isEqualTo(LottoWinningAmount.THREE_MATCH.getWinningAmount());
+    }
+
+    @Test
     @DisplayName("로또번호가 복합적으로 일치할때 당첨금을 확인한다")
     void checkWinningAmount6() {
         LottoTickets lottoTickets = LottoTickets.of(Arrays.asList(

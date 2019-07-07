@@ -3,12 +3,12 @@ package lotto.domain.winning;
 import java.util.Arrays;
 
 public enum LottoWinningAmount {
-    NONE(0, 0, false),
-    THREE_MATCH(3, 5_000, false),
-    FOUR_MATCH(4, 50_000, false),
-    FIVE_MATCH(5, 1_500_000, false),
+    SIX_MATCH(6, 2_000_000_000, false),
     FIVE_AND_BONUS_MATCH(5, 30_000_000, true),
-    SIX_MATCH(6, 2_000_000_000, false);
+    FIVE_MATCH(5, 1_500_000, false),
+    FOUR_MATCH(4, 50_000, false),
+    THREE_MATCH(3, 5_000, false),
+    NONE(0, 0, false);
 
     private int matchCount;
     private long winningAmount;
@@ -24,13 +24,21 @@ public enum LottoWinningAmount {
         return winningAmount;
     }
 
-    public static LottoWinningAmount find(long matchCount, boolean bonusNumberMatch) {
-        return Arrays.stream(LottoWinningAmount.values())
-                .filter(amount -> isWinningCondition(amount, matchCount, bonusNumberMatch))
-                .findFirst().orElse(NONE);
+    public boolean isWinningCondition(long matchCount, boolean bonusNumberMatch) {
+        return isSameMatchCount(matchCount) && isBonusCondition(bonusNumberMatch);
     }
 
-    private static boolean isWinningCondition(LottoWinningAmount amount, long matchCount, boolean bonusNumberMatch) {
-        return amount.matchCount == matchCount && amount.bonusNumberMatch == bonusNumberMatch;
+    private boolean isSameMatchCount(long matchCount) {
+        return this.matchCount == matchCount;
+    }
+
+    private boolean isBonusCondition(boolean bonusNumberMatch) {
+        return this.bonusNumberMatch ? bonusNumberMatch : true;
+    }
+
+    public static LottoWinningAmount find(long matchCount, boolean bonusNumberMatch) {
+        return Arrays.stream(LottoWinningAmount.values())
+                .filter(amount -> amount.isWinningCondition(matchCount, bonusNumberMatch))
+                .findFirst().orElse(NONE);
     }
 }
