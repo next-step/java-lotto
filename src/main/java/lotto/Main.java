@@ -17,11 +17,14 @@ public class Main {
     public static void main(String[] args) {
         int money = InputPurchaseAmount();
         Lotteries lotteries = buy(money);
+
         viewLotto(lotteries);
+
         LottoResult lottoResult = new LottoResult(lotteries, inputWinnerNumber(), InputView.inputBonusBall());
 
-        List<Rank> s = lottoResult.getRank();
-        OutputView.viewResult(s);
-        OutputView.viewEarningRate(money, s);
+        List<Rank> resultRank = lottoResult.getRank();
+
+        OutputView.viewResult(resultRank);
+        OutputView.viewEarningRate(money, resultRank);
     }
 }

@@ -27,8 +27,8 @@ public class InputView {
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public static int inputBonusBall() {
+    public static Number inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요");
-        return scanner.nextInt();
+        return Number.of(scanner.nextInt());
     }
 }

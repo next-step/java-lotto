@@ -29,22 +29,38 @@ public enum Rank {
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
 
-        if (countOfMatch < 3) {
+        if (isMiss(countOfMatch)) {
             return MISS;
         }
 
-        Rank rank = Stream.of(values())
-                .filter(value -> value.getCountOfMatch() == countOfMatch)
-                .findFirst().orElseThrow(IllegalAccessError::new);
+        Rank rank = getRank(countOfMatch);
 
-        if (matchBonus && rank.getCountOfMatch() == 5) {
+        if (isSecond(matchBonus, rank)) {
             return SECOND;
         }
 
-        if (rank.getCountOfMatch() == 5) {
+        if (isThird(rank)) {
             return THIRD;
         }
 
         return rank;
+    }
+
+    private static Rank getRank(int countOfMatch) {
+        return Stream.of(values())
+                .filter(value -> value.getCountOfMatch() == countOfMatch)
+                .findFirst().orElseThrow(IllegalAccessError::new);
+    }
+
+    private static boolean isMiss(int countOfMatch) {
+        return countOfMatch < 3;
+    }
+
+    private static boolean isThird(Rank rank) {
+        return rank.getCountOfMatch() == 5;
+    }
+
+    private static boolean isSecond(boolean matchBonus, Rank rank) {
+        return matchBonus && isThird(rank);
     }
 }
