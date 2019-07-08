@@ -1,7 +1,11 @@
 package lotto.io;
 
 import lotto.model.Lotteries;
+import lotto.model.Rank;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -14,21 +18,27 @@ public class OutputView {
                         .collect(Collectors.joining(","))));
     }
 
-//    public static void viewResult(LottoResult result) {
-//        System.out.println("당첨 통계");
-//        System.out.println("--------");
-//        System.out.println("3개 일치 (5000원)- " + result.getWinningCount3());
-//        System.out.println("4개 일치 (50000원)- " + result.getWinningCount4());
-//        System.out.println("5개 일치 (1500000원)- " + result.getWinningCount5());
-//        System.out.println("6개 일치 (2000000000원)" + result.getWinningCount6());
-//    }
-//
-//    public static void viewEarningRate(Lotteries lotteries, LottoResult lottoResult) {
-//        int earning = 0;
-//        earning += lottoResult.getWinningCount6() * 2000000000;
-//        earning += lottoResult.getWinningCount5() * 1500000;
-//        earning += lottoResult.getWinningCount4() * 50000;
-//        earning += lottoResult.getWinningCount3() * 5000;
-//        System.out.println("총 수익률은" + (double) (lotteries.getLotteries().size()) * 1000 / earning + "입니다");
-//    }
+    public static void viewResult(List<Rank> ranks) {
+
+        Map<Rank, Long> map = ranks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        System.out.println("당첨 통계");
+        System.out.println("--------");
+        map.forEach((rank, count) -> System.out.println(rank.getCountOfMatch() + "개 일치 (" + rank.getWinningMoney() + ")-" + count + "개"));
+    }
+
+    public static void viewEarningRate(int money, List<Rank> ranks) {
+
+        int earning = 0;
+        Map<Rank, Long> map = ranks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        for (Map.Entry<Rank, Long> entry : map.entrySet()) {
+            Rank rank = entry.getKey();
+            Long count = entry.getValue();
+            earning += rank.getWinningMoney() * count;
+        }
+
+        System.out.println("Earing is .. :" + earning);
+        System.out.println("총 수익률은" + (double) (earning / money) + "입니다");
+    }
 }

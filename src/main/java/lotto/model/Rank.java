@@ -28,6 +28,11 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+
+        if (countOfMatch < 3) {
+            return MISS;
+        }
+
         Rank rank = Stream.of(values())
                 .filter(value -> value.getCountOfMatch() == countOfMatch)
                 .findFirst().orElseThrow(IllegalAccessError::new);

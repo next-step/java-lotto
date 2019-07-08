@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class Lottery {
 
@@ -22,7 +21,7 @@ public class Lottery {
         return numbers.size() == 6;
     }
 
-    public int getWinningCount(LinkedHashSet<Number> winningNumbers) {
+    int getWinningCount(LinkedHashSet<Number> winningNumbers) {
 
         int count = (int) winningNumbers.stream()
                 .filter(winningNumber -> numbers.stream().map(Number::getNumber).anyMatch(e -> e == winningNumber.getNumber()))
@@ -31,7 +30,7 @@ public class Lottery {
         return count;
     }
 
-    public Set<Number> getNumbers() {
+    public LinkedHashSet<Number> getNumbers() {
         return numbers;
     }
 }

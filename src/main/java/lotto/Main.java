@@ -14,11 +14,13 @@ import static lotto.util.LottoTicketBox.buy;
 
 public class Main {
     public static void main(String[] args) {
-        Lotteries lotteries = buy(InputPurchaseAmount());
+        int money = InputPurchaseAmount();
+        Lotteries lotteries = buy(money);
         viewLotto(lotteries);
         LottoResult lottoResult = new LottoResult(lotteries, inputWinnerNumber());
-        List<Rank> ranks = lottoResult.getRank();
-        ranks.forEach(e -> System.out.println(e.getCountOfMatch()));
+        List<Rank> s = lottoResult.getRank();
+        OutputView.viewResult(s);
+        OutputView.viewEarningRate(money, s);
 //        OutputView.viewResult(lottoResult);
 //        OutputView.viewEarningRate(lotteries, lottoResult);
     }
