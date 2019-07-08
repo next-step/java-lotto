@@ -1,43 +1,50 @@
 package lotto.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 
 class LottoNumbersTest {
 
-//    @Test
-//    void getNumbers() {
-//        List<Integer> numbers = Arrays.asList(1, 4, 5, 6, 7, 8);
-//        assertThat(new LottoNumbers(numbers).getNumbers().size()).isEqualTo(6);
-//    }
-//
-//    @Test
-//    void validate() {
-//        List<Integer> numbers = Arrays.asList(1, 4, 2);
-//        assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
-//    }
-//
-//    @Test
-//    void getWinningCount() {
-//        LottoNumbers lottery = new LottoNumbers(Arrays.asList(1, 4, 5, 6, 7, 20));
-//        assertThat(lottery.getWinningCount(Arrays.asList(1, 4, 5, 6, 7, 8))).isEqualTo(5);
-//    }
-
-
+    @DisplayName("로또 번호가 6개 이상이면 IllegalException")
     @Test
-    void countMatch() {
-        LinkedHashSet winningNumbers = (LinkedHashSet) Arrays.asList(
+    void throwExceptionWhenLottoNumberCountLowerThan6() {
+        assertThatThrownBy(() -> new LottoNumbers(new LinkedHashSet<>(Arrays.asList(
                 Number.of(4),
                 Number.of(5),
                 Number.of(6),
                 Number.of(7),
                 Number.of(8),
-                Number.of(9));
+                Number.of(9),
+                Number.of(10)))))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
+    @DisplayName("당첨 개수를 잘 가지고 오는 지 확인한다")
+    @Test
+    void getWinningCount(){
+        LottoNumbers lottoNumbers = new LottoNumbers(new LinkedHashSet<>(Arrays.asList(
+                Number.of(4),
+                Number.of(5),
+                Number.of(6),
+                Number.of(7),
+                Number.of(8),
+                Number.of(9))));
 
-//        new Lotteries(winningNumbers);
+        LottoNumbers winningNumbers = new LottoNumbers(new LinkedHashSet<>(Arrays.asList(
+                Number.of(4),
+                Number.of(5),
+                Number.of(6),
+                Number.of(7),
+                Number.of(8),
+                Number.of(10))));
+
+        assertThat(lottoNumbers.getWinningCount(winningNumbers)).isEqualTo(5);
     }
 }
