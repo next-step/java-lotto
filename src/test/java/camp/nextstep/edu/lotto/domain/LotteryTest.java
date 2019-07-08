@@ -17,27 +17,21 @@ class LotteryTest {
     @DisplayName("로또를 생성하면, 6개의 숫자로 이루어진 Integer Set 을 반환해야합니다")
     void createLottery_sizeIsEqualToSix() {
         final Lottery actual = Lottery.randomizedInstance();
-
-        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
-        assertThat(numberSet).hasSize(6);
+        assertThat(actual).hasSize(6);
     }
 
     @Test
     @DisplayName("생성된 로또의 숫자는 중복되지 않아야 합니다")
     void createLottery_numbersShouldNotBeDuplicated() {
         final Lottery actual = Lottery.randomizedInstance();
-
-        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
-        assertThat(numberSet).hasSize(6);
+        assertThat(actual).hasSize(6);
     }
 
     @Test
     @DisplayName("생성된 로또의 숫자는 1~45 범위 안에 있어야 합니다")
     void createLottery() {
         final Lottery actual = Lottery.randomizedInstance();
-
-        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
-        assertThat(numberSet)
+        assertThat(actual)
                 .filteredOn(lotteryNumber -> lotteryNumber.compareTo(LotteryNumber.min()) >= 0)
                 .filteredOn(lotteryNumber -> lotteryNumber.compareTo(LotteryNumber.max()) <= 0)
                 .hasSize(6);
@@ -75,8 +69,7 @@ class LotteryTest {
         // when
         final Lottery actual = Lottery.customizedInstance(givenLotteryNumberSet);
         // then
-        final Set<LotteryNumber> numberSet = this.getLotteryNumberSet(actual);
-        assertThat(numberSet).contains(
+        assertThat(actual).contains(
                 LotteryNumber.from(1),
                 LotteryNumber.from(2),
                 LotteryNumber.from(3),
@@ -91,13 +84,5 @@ class LotteryTest {
         return numberList.stream()
                 .map(LotteryNumber::from)
                 .collect(Collectors.toSet());
-    }
-
-    private Set<LotteryNumber> getLotteryNumberSet(Lottery lottery) {
-        try {
-            return (Set<LotteryNumber>) ReflectionUtils.tryToReadFieldValue(Lottery.class, "numberSet", lottery).get();
-        } catch (Exception ignored) {
-            throw new AssertionError();
-        }
     }
 }

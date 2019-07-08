@@ -20,10 +20,10 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     private LotteryNumber(int value) {
         if (value < MINIMUM_VALUE) {
-            throw new IllegalArgumentException("'value' must be greater than or equal to " + MINIMUM_VALUE);
+            throw new IllegalArgumentException("'intValue' must be greater than or equal to " + MINIMUM_VALUE);
         }
         if (value > MAXIMUM_VALUE) {
-            throw new IllegalArgumentException("'value' must be less than or equal to " + MAXIMUM_VALUE);
+            throw new IllegalArgumentException("'intValue' must be less than or equal to " + MAXIMUM_VALUE);
         }
         this.value = value;
     }
@@ -56,7 +56,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     @Override
     public String toString() {
         return "LotteryNumber{" +
-                "value=" + value +
+                "intValue=" + value +
                 '}';
     }
 

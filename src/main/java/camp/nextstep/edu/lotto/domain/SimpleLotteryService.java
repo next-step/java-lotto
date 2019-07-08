@@ -12,25 +12,19 @@ public class SimpleLotteryService implements LotteryService {
 
     @Override
     public void validate(int investment, int numberOfCustomizedLotteries) {
-        final NaturalNumber naturalInvestment = NaturalNumber.from(investment);
-        final NaturalNumber naturalNumberOfCustomizedLotteries = NaturalNumber.from(numberOfCustomizedLotteries);
-
-        final NaturalNumber availableNumberOfLotteries = Lottery.getAvailableNumberOfLotteries(naturalInvestment);
-        if (availableNumberOfLotteries.isLessThan(naturalNumberOfCustomizedLotteries)) {
-            throw new IllegalArgumentException("'numberOfCustomizedLotteries' must be less than or equal to (investment / " + Lottery.PRICE + ")");
+        final int availableNumberOfLotteries = LotteryPrice.calculateAvailableLottery(investment);
+        if (availableNumberOfLotteries < numberOfCustomizedLotteries) {
+            throw new IllegalArgumentException("'numberOfCustomizedLotteries' must be less than or equal to (investment / " + LotteryPrice.intValue() + ")");
         }
     }
 
     public Lotteries purchase(int investment, List<List<Integer>> numbers) {
-        final NaturalNumber naturalNumberInvestment = NaturalNumber.from(investment);
-        final NaturalNumber naturalNumberOfLotteries = Lottery.getAvailableNumberOfLotteries(naturalNumberInvestment);
-
-        final int numberOfCustomizedLotteries = numbers.size();
-        final NaturalNumber naturalNumberOfCustomizedLotteries = NaturalNumber.from(numberOfCustomizedLotteries);
-        final NaturalNumber naturalNumberOfRandomizedLotteries = naturalNumberOfLotteries.subtract(naturalNumberOfCustomizedLotteries);
+        final int numberOfCustomized = numbers.size();
+        final int availableNumberOfLotteries = LotteryPrice.calculateAvailableLottery(investment);
+        final int numberOfRandomized = availableNumberOfLotteries - numberOfCustomized;
 
         final List<Lottery> customizedLotteries = this.createCustomizedLotteries(numbers);
-        final List<Lottery> randomizedLotteries = this.createRandomizedLotteries(naturalNumberOfRandomizedLotteries);
+        final List<Lottery> randomizedLotteries = this.createRandomizedLotteries(numberOfRandomized);
 
         final List<Lottery> lotteryList = new ArrayList<>();
         lotteryList.addAll(customizedLotteries);
@@ -39,21 +33,15 @@ public class SimpleLotteryService implements LotteryService {
         return Lotteries.from(lotteryList);
     }
 
-    private List<Lottery> createRandomizedLotteries(NaturalNumber naturalNumberOfLotteries) {
-        final int numberOfLotteries = naturalNumberOfLotteries.value();
+    private List<Lottery> createRandomizedLotteries(int numberOfLotteries) {
         return IntStream.range(ZERO, numberOfLotteries)
-                .mapToObj(number -> Lottery.randomizedInstance())
+                .mapToObj(number -> LotteryFactory.create(CreateLotteryRequest.random()))
                 .collect(Collectors.toList());
     }
 
     private List<Lottery> createCustomizedLotteries(List<List<Integer>> listOfNumbers) {
         return listOfNumbers.stream()
-                .map(numberSet -> {
-                    Set<LotteryNumber> lotteryNumberSet = numberSet.stream()
-                            .map(LotteryNumber::from)
-                            .collect(Collectors.toSet());
-                    return Lottery.customizedInstance(lotteryNumberSet);
-                })
+                .map(numbers -> LotteryFactory.create(CreateLotteryRequest.custom(numbers)))
                 .collect(Collectors.toList());
     }
 

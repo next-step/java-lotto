@@ -1,10 +1,10 @@
 package camp.nextstep.edu.lotto.domain;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class Lottery {
-    public static final NaturalNumber PRICE = NaturalNumber.from(1000);
+public class Lottery implements Iterable<LotteryNumber> {
 
     private static final int SIZE = 6;
     private static final int ZERO = 0;
@@ -33,13 +33,6 @@ public class Lottery {
         return new Lottery(numberSet);
     }
 
-    public static NaturalNumber getAvailableNumberOfLotteries(NaturalNumber investment) {
-        if (investment == null) {
-            throw new IllegalArgumentException("'investment' must not be null");
-        }
-        return investment.divideBy(PRICE);
-    }
-
     public int score(Lottery lottery) {
         if (lottery == null) {
             throw new IllegalArgumentException("'lottery' must not be null");
@@ -65,6 +58,21 @@ public class Lottery {
         return "Lottery{" +
                 "numberSet=" + numberSet +
                 '}';
+    }
+
+    @Override
+    public Iterator<LotteryNumber> iterator() {
+        return numberSet.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super LotteryNumber> action) {
+        numberSet.forEach(action);
+    }
+
+    @Override
+    public Spliterator<LotteryNumber> spliterator() {
+        return numberSet.spliterator();
     }
 
     @Override
