@@ -2,10 +2,12 @@ package lotto;
 
 import lotto.domain.LottoResult;
 import lotto.domain.LottoStore;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumbers;
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 /**
  * Created by wyparks2@gmail.com on 2019-06-25
@@ -17,12 +19,12 @@ public class LottoApplication {
         int money = InputView.firstQuestionAndReturnAnswer();
 
         LottoStore lottoStore = new LottoStore();
-        LottoTickets purchasedLottoTickets = lottoStore.buyLotto(money);
+        List<LottoTicket> purchasedLottoTickets = lottoStore.buyLotto(money);
 
         ResultView.printPurchasedLottoTickets(purchasedLottoTickets);
 
-        WinningNumbers winningNumbers = InputView.secondQuestionAndReturnAnswer();
-        LottoResult lottoResult = purchasedLottoTickets.match(winningNumbers);
+        WinningLottoTicket winningLottoTicket = InputView.secondQuestionAndReturnAnswer();
+        LottoResult lottoResult = lottoStore.match(winningLottoTicket);
         ResultView.printWinStatistics(lottoResult);
     }
 }

@@ -12,12 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoRankTest {
     @Test
     void match() {
-        assertThat(LottoRank.match(0)).isEqualTo(LottoRank.MISS);
-        assertThat(LottoRank.match(1)).isEqualTo(LottoRank.MISS);
-        assertThat(LottoRank.match(2)).isEqualTo(LottoRank.MISS);
-        assertThat(LottoRank.match(3)).isEqualTo(LottoRank.FOURTH);
-        assertThat(LottoRank.match(4)).isEqualTo(LottoRank.THIRD);
-        assertThat(LottoRank.match(5)).isEqualTo(LottoRank.SECOND);
-        assertThat(LottoRank.match(6)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.of(0)).isEqualTo(LottoRank.MISS);
+        assertThat(LottoRank.of(1)).isEqualTo(LottoRank.MISS);
+        assertThat(LottoRank.of(2)).isEqualTo(LottoRank.MISS);
+        assertThat(LottoRank.of(3)).isEqualTo(LottoRank.FOURTH);
+        assertThat(LottoRank.of(4)).isEqualTo(LottoRank.THIRD);
+        assertThat(LottoRank.of(5)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.of(6)).isEqualTo(LottoRank.FIRST);
     }
 }

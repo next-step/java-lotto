@@ -2,7 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+
+import java.util.List;
 
 import static lotto.domain.LottoRank.*;
 
@@ -17,10 +18,10 @@ public class ResultView {
     private static final String WIN_STATS_MESSAGE_FORMAT = "당첨 통계";
     private static final String YIELDS_MESSAGE_FORMAT = "총 수익률은 %1.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printPurchasedLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + PURCHASED_LOTTO_TICKETS_TOTAL_SUFFIX_MESSAGE);
+    public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
+        System.out.println(lottoTickets.size() + PURCHASED_LOTTO_TICKETS_TOTAL_SUFFIX_MESSAGE);
 
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
     }

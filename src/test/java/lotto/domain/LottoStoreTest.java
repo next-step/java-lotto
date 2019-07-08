@@ -16,6 +16,6 @@ public class LottoStoreTest {
     void 로또_구매(int input, int expected) {
         LottoStore lottoStore = new LottoStore();
 
-        assertThat(lottoStore.buyLotto(input).getLottoTickets()).size().isEqualTo(expected);
+        assertThat(lottoStore.buyLotto(input)).size().isEqualTo(expected);
     }
 }

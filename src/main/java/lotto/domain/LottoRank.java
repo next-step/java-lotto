@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1500_000),
+    SECOND(5, 1_500_000),
     THIRD(4, 50_000),
     FOURTH(3, 5_000),
     MISS(0, 0);
@@ -30,7 +30,7 @@ public enum LottoRank {
         return prizes;
     }
 
-    public static LottoRank match(long matchCount) {
+    public static LottoRank of(int matchCount) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.getMatchCount() == matchCount)
                 .findFirst()

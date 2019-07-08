@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningLottoTicket;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +27,7 @@ public class InputView {
         return money;
     }
 
-    public static WinningNumbers secondQuestionAndReturnAnswer() {
+    public static WinningLottoTicket secondQuestionAndReturnAnswer() {
         newLine();
 
         System.out.println(SECOND_QUESTION_MESSAGE);
@@ -39,7 +39,7 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        return new WinningNumbers(winningNumbers);
+        return new WinningLottoTicket(winningNumbers);
     }
 
     private static void newLine() {
