@@ -7,7 +7,7 @@ import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LotteriesRewardTest implements LotteriesRewardHelper {
+class LotteriesRewardTest {
 
     @Test
     @DisplayName("객체가 잘 생성되어야합니다")

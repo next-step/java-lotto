@@ -6,12 +6,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.EnumMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class SimpleLotteryServiceTest implements LotteriesRewardHelper {
+class SimpleLotteryServiceTest {
 
     private SimpleLotteryService simpleLotteryService;
 
@@ -76,13 +77,12 @@ class SimpleLotteryServiceTest implements LotteriesRewardHelper {
     }
 
     private LotteriesReward create() {
-        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
-        return this.createLotteriesReward(rewardMap);
+        return LotteriesReward.from(Collections.emptyList());
     }
 
     private LotteriesReward create(RewardType rewardType, int numberOfWinningLotteries) {
-        final EnumMap<RewardType, Integer> rewardMap = new EnumMap<>(RewardType.class);
-        rewardMap.put(rewardType, numberOfWinningLotteries);
-        return createLotteriesReward(rewardMap);
+        return LotteriesReward.from(IntStream.range(0, numberOfWinningLotteries)
+                .mapToObj(number -> rewardType)
+                .collect(Collectors.toList()));
     }
 }
