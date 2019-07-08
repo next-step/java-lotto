@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoOrderTest {
 
@@ -29,6 +28,14 @@ class LottoOrderTest {
 		assertThatIllegalArgumentException().isThrownBy(() -> {
 			new LottoOrder(investment, manualCount);
 		});
+	}
 
+	@Test
+	void balance(){
+		int investment = 10000;
+		int manualCount = 3;
+		LottoOrder order = new LottoOrder(investment, manualCount);
+
+		assertThat(order.getBalance()).isEqualTo(7000);
 	}
 }

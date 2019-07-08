@@ -7,7 +7,7 @@ package lotto.model;
 public class LottoOrder {
 
 	private static final int PRICE_OF_TICKET = 1000;
-
+	
 	/**
 	 * 주문서 생성
 	 * @param investment 투자금(구입금액)
@@ -17,6 +17,8 @@ public class LottoOrder {
 		if(manualCount * PRICE_OF_TICKET > investment){
 			throw new IllegalArgumentException();
 		}
+		
+		
 	}
 
 	/**
@@ -26,5 +28,9 @@ public class LottoOrder {
 	 */
 	public boolean verify() {
 		return true;
+	}
+
+	public int getBalance() {
+		return 0;
 	}
 }
