@@ -9,9 +9,19 @@ import java.util.List;
  */
 public class WinningLottoTicket {
     private LottoTicket winningLottoTicket;
+    private LottoNumber bonusNumber;
 
-    public WinningLottoTicket(List<Integer> numbers) {
-        this.winningLottoTicket = new LottoTicket(numbers);
+    public WinningLottoTicket(List<Integer> numbers, int bonusNumber) {
+        this(new LottoTicket(numbers), bonusNumber);
+    }
+
+    public WinningLottoTicket(LottoTicket lottoTicket, int bonusNumber) {
+        this.winningLottoTicket = lottoTicket;
+        this.bonusNumber = new LottoNumber(bonusNumber);
+
+        if (lottoTicket.contains(this.bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public LottoRank match(LottoTicket lottoTicket) {

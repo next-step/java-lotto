@@ -20,7 +20,12 @@ public class LottoApplication {
 
         ResultView.printPurchasedLottoTickets(purchasedLottoTickets);
 
-        WinningLottoTicket winningLottoTicket = InputView.secondQuestionAndReturnAnswer();
+        LottoTicket lottoTicket = InputView.secondQuestionAndReturnAnswer();
+
+        int bonusNumber = InputView.thirdQuestionAndReturnAnswer();
+
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(lottoTicket, bonusNumber);
+
         LottoResult lottoResult = lottoStore.match(winningLottoTicket);
         ResultView.printWinStatistics(lottoResult);
     }

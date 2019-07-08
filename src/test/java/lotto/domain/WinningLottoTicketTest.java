@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * Created by wyparks2@gmail.com on 2019-07-08
@@ -17,12 +18,7 @@ public class WinningLottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-    }
-
-    @Test
-    void 생성() {
-        new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLottoTicket = new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
     }
 
     @Test
@@ -58,5 +54,11 @@ public class WinningLottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         assertThat(winningLottoTicket.match(lottoTicket)).isEqualTo(LottoRank.MISS);
+    }
+
+    @Test
+    void 보너스_중복숫자_불가() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinningLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 6));
     }
 }

@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningLottoTicket;
 
 import java.util.Arrays;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 public class InputView {
     private static final String FIRST_QUESTION_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String SECOND_QUESTION_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String THIRD_QUESTION_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private InputView() {
     }
@@ -27,7 +30,7 @@ public class InputView {
         return money;
     }
 
-    public static WinningLottoTicket secondQuestionAndReturnAnswer() {
+    public static LottoTicket secondQuestionAndReturnAnswer() {
         newLine();
 
         System.out.println(SECOND_QUESTION_MESSAGE);
@@ -39,7 +42,17 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
-        return new WinningLottoTicket(winningNumbers);
+        return new LottoTicket(winningNumbers);
+    }
+
+    public static int thirdQuestionAndReturnAnswer() {
+        newLine();
+
+        System.out.println(THIRD_QUESTION_MESSAGE);
+
+        Scanner scanner = new Scanner(System.in);
+
+        return scanner.nextInt();
     }
 
     private static void newLine() {
