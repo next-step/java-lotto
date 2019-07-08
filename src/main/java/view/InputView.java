@@ -33,7 +33,7 @@ public final class InputView {
 
         for (int i = 0; i < number; i++) {
             lottoSets.add(new LottoSet(Arrays.stream(sc.nextLine().split(", "))
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::of)
                     .collect(Collectors.toList())));
         }
 
@@ -44,13 +44,13 @@ public final class InputView {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return new LottoSet(Arrays.stream(new Scanner(System.in).nextLine().split(", "))
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList()));
 
     }
 
     public static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(new Scanner(System.in).nextInt());
+        return LottoNumber.of(new Scanner(System.in).nextInt());
     }
 }

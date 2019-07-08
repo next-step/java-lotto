@@ -1,30 +1,27 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class LottoSet {
-    private final List<LottoNumber> lottoNumbers;
+    public static final int LOTTO_SIZE = 6;
+    private final SortedSet<LottoNumber> lottoNumbers;
 
     public LottoSet(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LottoGenerator.LOTTO_SIZE) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 갯수를 바르게 입력해주세요");
         }
 
-        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
+
+        if (this.lottoNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
-
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoSet(int... lottoNumbers) {
         this(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
@@ -38,7 +35,7 @@ public final class LottoSet {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public SortedSet<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

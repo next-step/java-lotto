@@ -16,7 +16,7 @@ public class LottoMoneyTest {
     @Test
     public void 로또_구입_개수_구하기() {
         // given
-        int price = LottoGame.TICKET_PRICE * 14;
+        int price = LottoMoney.TICKET_PRICE * 14;
         LottoMoney lottoMoney = new LottoMoney(price);
 
         //  when

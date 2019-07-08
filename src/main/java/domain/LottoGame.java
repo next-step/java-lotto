@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public final class LottoGame {
-
-    public static final int TICKET_PRICE = 1000;
     private int tryNo;
 
     public LottoGame(LottoMoney lottoMoney, int manualBuyNumber) {

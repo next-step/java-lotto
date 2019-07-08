@@ -31,7 +31,7 @@ public class LottoResultTest {
                 new LottoSet(17, 21, 29, 37, 42, 45),
                 new LottoSet(3, 8, 27, 30, 35, 44)));
         // when
-        lottoResult = new LottoResult(lottoPaper, new WinningLotto(new LottoSet(1, 2, 3, 4, 5, 6), new LottoNumber(44)));
+        lottoResult = new LottoResult(lottoPaper, new WinningLotto(new LottoSet(1, 2, 3, 4, 5, 6), LottoNumber.of(44)));
     }
 
     @Test
