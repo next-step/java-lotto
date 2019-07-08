@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class LottoStoreTest {
     @ParameterizedTest
-    @CsvSource(value = {"1000,1", "1500,1", "0,0", "900,0", "2000,2"})
+    @CsvSource(value = {"1000,1", "1500,1", "900,0", "2000,2"})
     void 로또_구매(int input, int expected) {
         LottoStore lottoStore = new LottoStore();
 

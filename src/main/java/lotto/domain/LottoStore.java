@@ -17,11 +17,15 @@ public class LottoStore {
     private List<LottoTicket> lottoTickets;
 
     public List<LottoTicket> buyLotto(int money) {
+        return buyLotto(AUTO_LOTTO_NUMBERS_GENERATOR, new Money(money));
+    }
+
+    public List<LottoTicket> buyLotto(Money money) {
         return buyLotto(AUTO_LOTTO_NUMBERS_GENERATOR, money);
     }
 
-    public List<LottoTicket> buyLotto(LottoNumbersGenerator generator, int money) {
-        int canBuyLottoCount = money / 1000;
+    public List<LottoTicket> buyLotto(LottoNumbersGenerator generator, Money money) {
+        int canBuyLottoCount = money.canBuyLottoCount();
 
         lottoTickets = IntStream.rangeClosed(1, canBuyLottoCount)
                 .boxed()

@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoStore;
-import lotto.domain.LottoTicket;
-import lotto.domain.WinningLottoTicket;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -16,7 +13,7 @@ import java.util.List;
  */
 public class LottoApplication {
     public static void main(String[] args) {
-        int money = InputView.firstQuestionAndReturnAnswer();
+        Money money = new Money(InputView.firstQuestionAndReturnAnswer());
 
         LottoStore lottoStore = new LottoStore();
         List<LottoTicket> purchasedLottoTickets = lottoStore.buyLotto(money);
