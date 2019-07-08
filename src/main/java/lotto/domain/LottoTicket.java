@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     static private String DELIMITER_NUMBERS = ", ";
@@ -23,10 +21,9 @@ public class LottoTicket {
     public LottoTicket(String lottoNumbers) {
         String[] rawNumbers = lottoNumbers.split(DELIMITER_NUMBERS);
 
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for (String number : rawNumbers) {
-            numbers.add(Integer.parseInt(number));
-        }
+        List<Integer> numbers = Arrays.stream(rawNumbers)
+                .map(number -> Integer.parseInt(number))
+                .collect(Collectors.toList());
 
         Collections.sort(numbers);
 
@@ -44,6 +41,10 @@ public class LottoTicket {
 
     public int oneIfHas(int number) {
         return this.ticket.contains(number) ? 1 : 0;
+    }
+
+    public boolean hasBonus(int bonusBall) {
+        return this.oneIfHas(bonusBall) == 1;
     }
 
     public List<Integer> getNumbers() {

@@ -12,8 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private int INPUT_PURCHASED_PRICE = 3000;
-
+    private static final int INPUT_PRICE_PURCHASED = 3000;
     private Lotto lotto;
     private LottoTicket ticket;
     private LottoTickets tickets;
@@ -22,7 +21,7 @@ public class LottoTest {
     @BeforeEach
     void setUp() {
         orderedNumbers = new LottoOrderedStrategy().generate();
-        lotto = new Lotto();
+        lotto = new Lotto(INPUT_PRICE_PURCHASED);
         ticket = new LottoTicket(orderedNumbers);
         tickets = lotto.generate(3, new LottoOrderedStrategy());
     }

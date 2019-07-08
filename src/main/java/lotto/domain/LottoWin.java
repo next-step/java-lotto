@@ -1,29 +1,41 @@
 package lotto.domain;
 
-public class LottoWin {
-    private static int WIN_EARNING_BY_THREE = 5000;
-    private static int WIN_EARNING_BY_FOUR = 50000;
-    private static int WIN_EARNING_BY_FIVE = 1500000;
-    private static int WIN_EARNING_BY_SIX = 2000000000;
+public enum LottoWin {
+    MISS(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
-    private int matchCount;
+    private int countOfMatch;
+    private int earning;
 
-    public LottoWin(int matchCount) {
-        this.matchCount = matchCount;
+    LottoWin(int countOfMatch, int earning) {
+        this.countOfMatch = countOfMatch;
+        this.earning = earning;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
     public int getEarning() {
-        switch (matchCount) {
-            case 3:
-                return WIN_EARNING_BY_THREE;
-            case 4:
-                return WIN_EARNING_BY_FOUR;
-            case 5:
-                return WIN_EARNING_BY_FIVE;
-            case 6:
-                return WIN_EARNING_BY_SIX;
+        return earning;
+    }
+
+    public static LottoWin valueOf(int countOfMatch, boolean matchBonus) {
+        for (LottoWin lottoWin : values()) {
+            if (lottoWin.countOfMatch == 5 && matchBonus) {
+                return SECOND;
+            }
+
+            if (lottoWin.countOfMatch == countOfMatch) {
+                return lottoWin;
+            }
         }
 
-        return 0;
+        return MISS;
     }
+
 }

@@ -15,11 +15,12 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public LottoResult checkWin(LottoTicket winner) {
+    public LottoResult checkWin(LottoTicket winner, int bonusBall) {
         LottoResult lottoResult = new LottoResult();
 
         for (LottoTicket ticket : tickets) {
-            lottoResult.add(ticket.correctWith(winner));
+            int numOfCorrect = ticket.correctWith(winner);
+            lottoResult.add(LottoWin.valueOf(numOfCorrect, winner.hasBonus(bonusBall)));
         }
 
         return lottoResult;
