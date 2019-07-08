@@ -9,9 +9,10 @@ import java.util.Arrays;
  */
 public enum LottoRank {
     FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private int matchCount;
@@ -22,6 +23,10 @@ public enum LottoRank {
         this.prizes = prizes;
     }
 
+    public boolean isSameMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
@@ -30,10 +35,15 @@ public enum LottoRank {
         return prizes;
     }
 
-    public static LottoRank of(int matchCount) {
+    public static LottoRank of(int matchCount, boolean hasMatchBonusNumber) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getMatchCount() == matchCount)
+                .filter(lottoRank -> lottoRank.isSameMatchCount(matchCount))
+                .filter(lottoRank -> isMatchSecond(hasMatchBonusNumber, lottoRank))
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    private static boolean isMatchSecond(boolean hasMatchBonusNumber, LottoRank lottoRank) {
+        return !lottoRank.equals(SECOND) || hasMatchBonusNumber;
     }
 }

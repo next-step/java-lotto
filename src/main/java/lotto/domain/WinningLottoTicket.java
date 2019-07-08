@@ -25,6 +25,9 @@ public class WinningLottoTicket {
     }
 
     public LottoRank match(LottoTicket lottoTicket) {
-        return LottoRank.of(winningLottoTicket.match(lottoTicket));
+        int matchCount = winningLottoTicket.match(lottoTicket);
+        boolean matchBonus = lottoTicket.contains(bonusNumber);
+
+        return LottoRank.of(matchCount, matchBonus);
     }
 }
