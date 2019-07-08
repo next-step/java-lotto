@@ -1,6 +1,6 @@
 package lotto.util;
 
-import lotto.model.Lottery;
+import lotto.model.LottoNumbers;
 import lotto.model.Number;
 
 import java.util.LinkedHashSet;
@@ -18,7 +18,7 @@ class LottoGenerator {
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
-    static Lottery generate() {
+    static LottoNumbers generate() {
         List<Integer> lotteryNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
@@ -29,6 +29,6 @@ class LottoGenerator {
 
         sort(pickNumbers);
 
-        return new Lottery(pickNumbers.stream().map(Number::of).collect(Collectors.toCollection(LinkedHashSet::new)));
+        return new LottoNumbers(pickNumbers.stream().map(Number::of).collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 }

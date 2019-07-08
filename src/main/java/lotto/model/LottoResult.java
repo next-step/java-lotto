@@ -1,19 +1,16 @@
 package lotto.model;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoResult {
 
     private Lotteries lotteries;
-    private LinkedHashSet<Number> winningNumbers;
-    private Number bonusBall;
+    private WinningNumber winningNumbers;
 
-    public LottoResult(Lotteries lotteries, LinkedHashSet<Number> inputWinnerNumber, Number bonusBall) {
+    public LottoResult(Lotteries lotteries, WinningNumber winningNumbers) {
         this.lotteries = lotteries;
-        this.winningNumbers = inputWinnerNumber;
-        this.bonusBall = bonusBall;
+        this.winningNumbers = winningNumbers;
     }
 
     public List<Rank> getRank() {
@@ -23,19 +20,19 @@ public class LottoResult {
                 .collect(Collectors.toList());
     }
 
-    private Rank getRank(Lottery lottery) {
+    private Rank getRank(LottoNumbers lottoNumbers) {
 
-        int matchingCount = lottery.getWinningCount(winningNumbers);
+        int matchingCount = lottoNumbers.getWinningCount(winningNumbers.getWinningNumbers());
 
-        if (isSecondRank(lottery, matchingCount)) {
+        if (isSecondRank(lottoNumbers, matchingCount)) {
             return Rank.valueOf(matchingCount, true);
         }
 
         return Rank.valueOf(matchingCount, false);
     }
 
-    private boolean isSecondRank(Lottery lottery, int matchingCount) {
-        return matchingCount == 5 && lottery.isMatchBonusBall(bonusBall);
+    private boolean isSecondRank(LottoNumbers lottoNumbers, int matchingCount) {
+        return matchingCount == 5 && lottoNumbers.isMatchBonusBall(winningNumbers.getBonusBall());
 
     }
 

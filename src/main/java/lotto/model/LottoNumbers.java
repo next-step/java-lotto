@@ -3,11 +3,11 @@ package lotto.model;
 import java.util.LinkedHashSet;
 import java.util.function.Predicate;
 
-public class Lottery {
+public class LottoNumbers {
 
     private LinkedHashSet<Number> numbers;
 
-    public Lottery(LinkedHashSet<Number> numbers) {
+    public LottoNumbers(LinkedHashSet<Number> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
@@ -18,8 +18,9 @@ public class Lottery {
         }
     }
 
-    int getWinningCount(LinkedHashSet<Number> winningNumbers) {
+    int getWinningCount(LottoNumbers winningNumbers) {
         return (int) winningNumbers
+                .getNumbers()
                 .stream()
                 .filter(matchWinningNumbers())
                 .count();

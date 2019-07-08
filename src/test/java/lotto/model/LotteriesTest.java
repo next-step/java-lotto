@@ -9,8 +9,8 @@ public class LotteriesTest {
 
     @Test
     void throwExceptionWhenLotteriesSizeLowwer6() {
-        Set<Lottery> lotteries = new HashSet<>();
-        lotteries.add(new Lottery(Number.of(5)));
+        Set<LottoNumbers> lotteries = new HashSet<>();
+        lotteries.add(new LottoNumbers(Number.of(5)));
         new Lotteries()
     }
 }
