@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Lotteries {
 
-
     private List<Lottery> lotteries;
 
     public Lotteries(List<Lottery> lotteries) {

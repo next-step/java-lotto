@@ -1,44 +1,24 @@
 package lotto.model;
 
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoResult {
 
-    private int winningCount3;
-    private int winningCount4;
-    private int winningCount5;
-    private int winningCount6;
+    Lotteries lotteries;
+    LinkedHashSet<Number> winningNumbers;
 
-    public void addWinningCount(int winningCount) {
-
-        if (winningCount == 3) {
-            winningCount3++;
-        }
-
-        if (winningCount == 4) {
-            winningCount4++;
-        }
-
-        if (winningCount == 5) {
-            winningCount5++;
-        }
-
-        if (winningCount == 6) {
-            winningCount6++;
-        }
+    public LottoResult(Lotteries lotteries, LinkedHashSet<Number> winningNumbers) {
+        this.lotteries = lotteries;
+        this.winningNumbers = winningNumbers;
     }
 
-    public int getWinningCount6() {
-        return winningCount6;
+    public List<Rank> getRank() {
+        return lotteries.getLotteries()
+                .stream()
+                .map(e -> Rank.valueOf(e.getWinningCount(winningNumbers), false))
+                .collect(Collectors.toList());
     }
 
-    public int getWinningCount5() {
-        return winningCount5;
-    }
-
-    public int getWinningCount4() {
-        return winningCount4;
-    }
-
-    public int getWinningCount3() {
-        return winningCount3;
-    }
 }

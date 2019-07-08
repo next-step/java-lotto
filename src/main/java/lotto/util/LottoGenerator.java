@@ -1,7 +1,9 @@
 package lotto.util;
 
 import lotto.model.Lottery;
+import lotto.model.Number;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,6 +29,6 @@ class LottoGenerator {
 
         sort(pickNumbers);
 
-        return new Lottery(pickNumbers);
+        return new Lottery(pickNumbers.stream().map(Number::of).collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 }

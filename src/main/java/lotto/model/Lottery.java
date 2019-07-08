@@ -1,31 +1,37 @@
 package lotto.model;
 
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Lottery {
 
-    private List<Integer> numbers;
+    private LinkedHashSet<Number> numbers;
 
-    public Lottery(List<Integer> numbers) {
+    public Lottery(LinkedHashSet<Number> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(LinkedHashSet<Number> numbers) {
         if (!hasSixNumbers(numbers)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private boolean hasSixNumbers(List<Integer> numbers) {
+    private boolean hasSixNumbers(LinkedHashSet<Number> numbers) {
         return numbers.size() == 6;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public int getWinningCount(LinkedHashSet<Number> winningNumbers) {
+
+        int count = (int) winningNumbers.stream()
+                .filter(winningNumber -> numbers.stream().map(Number::getNumber).anyMatch(e -> e == winningNumber.getNumber()))
+                .count();
+
+        return count;
     }
 
-    public int getWinningCount(List<Integer> winningNumbers) {
-        return (int) winningNumbers.stream().filter(winnerNumber -> this.numbers.contains(winnerNumber)).count();
+    public Set<Number> getNumbers() {
+        return numbers;
     }
 }

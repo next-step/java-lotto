@@ -8,9 +8,9 @@ import java.util.List;
 
 public class LottoResultProvider {
 
-    public static LottoResult getResult(Lotteries lotteries, List<Integer> winningNumbers) {
-        LottoResult lottoResult = new LottoResult();
-        lotteries.getLotteries().forEach(lotto -> lottoResult.addWinningCount(lotto.getWinningCount(winningNumbers)));
-        return lottoResult;
-    }
+//    public static LottoResult getResult(Lotteries lotteries, List<Integer> winningNumbers) {
+//        LottoResult lottoResult = new LottoResult();
+//        lotteries.getLotteries().forEach(lotto -> lottoResult.addWinningCount(lotto.getWinningCount(winningNumbers)));
+//        return lottoResult;
+//    }
 }

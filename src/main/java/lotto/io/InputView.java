@@ -1,7 +1,9 @@
 package lotto.io;
 
+import lotto.model.Number;
+
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -14,8 +16,14 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> inputWinnerNumber() {
+    public static LinkedHashSet<Number> inputWinnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(scanner.next().replace(" ", "").split(",")).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        return Arrays.stream(
+                scanner.next()
+                        .replace(" ", "")
+                        .split(","))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(Number::of)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }
