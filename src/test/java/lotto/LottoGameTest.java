@@ -23,8 +23,8 @@ class LottoGameTest {
 
     @Test
     void result() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 10, 11, 13));
         LottoGame lottoGame = new LottoGame(new Money(10000), money -> lottos);
+        WinningLotto winningLotto = new WinningLotto(Lotto.of("1,2,3,10,11,13"), LottoNumber.of(8));
         LottoResult result = lottoGame.result(winningLotto);
 
         assertThat(result.getValue(Rank.FIRST)).isEqualTo(2);

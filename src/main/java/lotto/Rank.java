@@ -16,11 +16,19 @@ public enum Rank {
         this.winningAmount = winningAmount;
     }
 
-    public static Rank getRank(int countOfMatch) {
+    public static Rank getRank(int countOfMatch, boolean matchBouns) {
         if (countOfMatch < 3){
             return MISS;
         }
 
+        Rank rank = mathchRank(countOfMatch);
+        if (SECOND.matchCount(countOfMatch)) {
+            return matchBouns ? SECOND : THIRD;
+        }
+        return rank;
+    }
+
+    private static Rank mathchRank(int countOfMatch) {
         for (Rank rank : values()) {
             if (rank.matchCount(countOfMatch)) {
                 return rank;
