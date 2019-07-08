@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.io.InputView;
 import lotto.io.OutputView;
 import lotto.model.Lotteries;
 import lotto.model.LottoResult;
@@ -17,11 +18,10 @@ public class Main {
         int money = InputPurchaseAmount();
         Lotteries lotteries = buy(money);
         viewLotto(lotteries);
-        LottoResult lottoResult = new LottoResult(lotteries, inputWinnerNumber());
+        LottoResult lottoResult = new LottoResult(lotteries, inputWinnerNumber(), InputView.inputBonusBall());
+
         List<Rank> s = lottoResult.getRank();
         OutputView.viewResult(s);
         OutputView.viewEarningRate(money, s);
-//        OutputView.viewResult(lottoResult);
-//        OutputView.viewEarningRate(lotteries, lottoResult);
     }
 }

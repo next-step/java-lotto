@@ -30,7 +30,13 @@ public class Lottery {
         return count;
     }
 
+
     public LinkedHashSet<Number> getNumbers() {
         return numbers;
+    }
+
+    public boolean isMatchBonusBall(int bonusBall) {
+        return numbers.stream()
+                .anyMatch(e -> e.getNumber() == bonusBall);
     }
 }
