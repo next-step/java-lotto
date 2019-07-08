@@ -9,11 +9,12 @@ public class LottoGame {
         this.lottos = lottoNumberRandom.generate(money);
     }
 
-    public LottoResult result(Lotto winningLotto) {
+    public LottoResult result(WinningLotto winningLotto) {
         LottoResult result = new LottoResult();
         for (Lotto lotto : lottos) {
-            int match = winningLotto.match(lotto);
-            result.putRank(Rank.getRank(match));
+            int match = winningLotto.getWinLotto().match(lotto);
+            boolean matchBouns = lotto.contains(winningLotto.getBounsNumber());
+            result.putRank(Rank.getRank(match, matchBouns));
         }
         return result;
     }
