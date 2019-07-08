@@ -32,13 +32,13 @@ public class LottoNumbers {
 
     private Predicate<Number> matchWinningNumbers() {
         return winningNumber -> numbers.stream()
-                .map(Number::getNumber)
-                .anyMatch(e -> e == winningNumber.getNumber());
+                .map(Number::getValue)
+                .anyMatch(e -> e == winningNumber.getValue());
     }
 
     boolean isMatchBonusBall(Number bonusBall) {
         return numbers.stream()
-                .anyMatch(e -> e.getNumber() == bonusBall.getNumber());
+                .anyMatch(e -> e.getValue() == bonusBall.getValue());
     }
 
     public LinkedHashSet<Number> getNumbers() {

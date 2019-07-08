@@ -19,7 +19,7 @@ public class Number {
         }
     }
 
-    public int getNumber() {
+    public int getValue() {
         return number;
     }
 

@@ -16,7 +16,7 @@ public class OutputView {
         lotteries.getLotteries()
                 .forEach(lottery -> System.out.println(lottery.getNumbers()
                         .stream()
-                        .map(e -> String.valueOf(e.getNumber()))
+                        .map(e -> String.valueOf(e.getValue()))
                         .collect(Collectors.joining(","))));
     }
 

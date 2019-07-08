@@ -25,9 +25,9 @@ public class Main {
 
         LottoResult lottoResult = new LottoResult(lotteries, winningNumber);
 
-        List<Rank> resultRank = lottoResult.getRank();
+        List<Rank> rankResult = lottoResult.getRankResult();
 
-        OutputView.viewResult(resultRank);
-        OutputView.viewEarningRate(money, resultRank);
+        OutputView.viewResult(rankResult);
+        OutputView.viewEarningRate(money, rankResult);
     }
 }

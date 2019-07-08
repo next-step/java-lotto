@@ -13,14 +13,14 @@ public class LottoResult {
         this.winningNumbers = winningNumbers;
     }
 
-    public List<Rank> getRank() {
+    public List<Rank> getRankResult() {
         return lotteries.getLotteries()
                 .stream()
-                .map(this::getRank)
+                .map(this::getRankResult)
                 .collect(Collectors.toList());
     }
 
-    private Rank getRank(LottoNumbers lottoNumbers) {
+    private Rank getRankResult(LottoNumbers lottoNumbers) {
 
         int matchingCount = lottoNumbers.getWinningCount(winningNumbers.getWinningNumbers());
 
