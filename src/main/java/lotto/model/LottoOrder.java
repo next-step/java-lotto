@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.List;
+
 /**
  * 로또 구입에 필요한 정보를 관리하는 개체
  * 수동번호, 주문 가능 금액 초과등을 판단
@@ -7,30 +9,30 @@ package lotto.model;
 public class LottoOrder {
 
 	private static final int PRICE_OF_TICKET = 1000;
-	
+
+	private final int balance;
+
+	private final List<LottoNumberSet> manualOrders;
+
 	/**
 	 * 주문서 생성
 	 * @param investment 투자금(구입금액)
-	 * @param manualCount 수동입력 구매 수
+	 * @param manualOrders 수동구매 번호
 	 */
-	public LottoOrder(int investment, int manualCount) {
-		if(manualCount * PRICE_OF_TICKET > investment){
+	public LottoOrder(int investment, List<LottoNumberSet> manualOrders) {
+		this.balance = investment - manualOrders.size() * PRICE_OF_TICKET;
+		if(balance < 0){
 			throw new IllegalArgumentException();
 		}
-		
-		
+
+		this.manualOrders = manualOrders;
 	}
 
-	/**
-	 * 주문서가 유효한 상태인지 확인
-	 * 수동구매 요청 수에 맞게 입력되었는지 검사
-	 * @return 주문서 생성조건에 맞게 준비되었다면 true 반환
-	 */
-	public boolean verify() {
-		return true;
+	public List<LottoNumberSet> getManualOrders() {
+		return manualOrders;
 	}
 
 	public int getBalance() {
-		return 0;
+		return this.balance;
 	}
 }
