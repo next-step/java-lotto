@@ -1,9 +1,13 @@
 package lotto.view.input;
 
+import lotto.common.Csv;
+import lotto.common.PositiveNumber;
+
 import java.util.List;
 
 public interface InputView {
-    Long getPurchaseAmount();
-    List<Long> getWinningTicket();
-    Long getBonusNumber();
+    PositiveNumber getPurchaseAmount();
+    List<Csv> getManualTicketNumbers();
+    Csv getWinningTicket();
+    PositiveNumber getBonusNumber();
 }

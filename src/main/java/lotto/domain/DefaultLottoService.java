@@ -1,13 +1,16 @@
 package lotto.domain;
 
-import lotto.domain.ticket.LottoNumber;
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTicketGenerator;
-import lotto.domain.ticket.LottoTickets;
+import lotto.common.PositiveNumber;
+import lotto.domain.ticket.*;
 import lotto.domain.winning.LottoWinningResult;
+import lotto.dto.LottoPurchaseRequestDto;
 import lotto.dto.LottoResultDto;
+import lotto.dto.LottoWinningRequestDto;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DefaultLottoService implements LottoService {
 
@@ -17,11 +20,22 @@ public class DefaultLottoService implements LottoService {
         this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
-    public LottoTickets purchaseLottoTickets(long purchaseAmount) {
-        return lottoTicketGenerator.generate(PurchaseAmount.of(purchaseAmount));
+    public LottoTickets purchaseLottoTickets(LottoPurchaseRequestDto lottoPurchaseRequestDto) {
+        PurchaseAmount purchaseAmount = PurchaseAmount.ofManual(lottoPurchaseRequestDto.getPurchaseAmount(), lottoPurchaseRequestDto.getManualTicketCount());
+
+        LottoTickets manualTickets = LottoTickets.ofManual(lottoPurchaseRequestDto.getManualTicketNumbers());
+        LottoTickets autoTickets = lottoTicketGenerator.generate(purchaseAmount.getNumberOfAutoTickets());
+
+        return LottoTickets.of(Stream.of(manualTickets, autoTickets)
+                .flatMap(lottoTicket -> lottoTicket.findAll().stream())
+                .collect(Collectors.toList()));
     }
 
-    public LottoResultDto checkWinningAmount(LottoTickets lottoTickets, List<Long> winningTicket, long purchaseAmount, long bonusNumber) {
-        return LottoResultDto.of(LottoWinningResult.of(lottoTickets, LottoTicket.of(winningTicket, bonusNumber)), PurchaseAmount.of(purchaseAmount));
+    public LottoResultDto checkWinningAmount(LottoWinningRequestDto lottoWinningRequestDto) {
+        WinningLotto winningLotto = WinningLotto.of(LottoNumbers.of(lottoWinningRequestDto.getWinningTicket().getCsvLong()),
+                LottoNumber.of(lottoWinningRequestDto.getBonusNumber()));
+        LottoTickets purchaseTickets = lottoWinningRequestDto.getPurchaseTickets();
+
+        return LottoResultDto.of(LottoWinningResult.of(purchaseTickets, winningLotto), purchaseTickets.count());
     }
 }

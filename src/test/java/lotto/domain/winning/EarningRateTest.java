@@ -1,42 +1,23 @@
 package lotto.domain.winning;
 
+import lotto.common.PositiveNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-
 public class EarningRateTest {
-
-    @Test
-    @DisplayName("당첨금액이 -1인경우 예외처리를 확인한다")
-    void checkException() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    EarningRate.of(-1, 1000);
-                }).withMessageMatching("Amount must grather than 0");
-    }
-
-    @Test
-    @DisplayName("구입금액이 -1인경우 예외처리를 확인한다")
-    void checkException2() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    EarningRate.of(1000, -1);
-                }).withMessageMatching("Amount must grather than 0");
-    }
 
     @Test
     @DisplayName("수익률이 2배인경우를 확인한다")
     void checkEarningRate() {
-        EarningRate earningRate = EarningRate.of(1000, 500);
+        EarningRate earningRate = EarningRate.of(PositiveNumber.of(2000), PositiveNumber.of(1));
         assertThat(earningRate.get()).isEqualTo(2.0);
     }
 
     @Test
     @DisplayName("수익률이 0.5배인경우를 확인한다")
     void checkEarningRate2() {
-        EarningRate earningRate = EarningRate.of(500, 1000);
+        EarningRate earningRate = EarningRate.of(PositiveNumber.of(500), PositiveNumber.of(1));
         assertThat(earningRate.get()).isEqualTo(0.5);
     }
 }

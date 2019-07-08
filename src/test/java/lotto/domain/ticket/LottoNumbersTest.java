@@ -1,5 +1,6 @@
 package lotto.domain.ticket;
 
+import lotto.common.PositiveNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,17 +9,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LottoTicketTest {
+public class LottoNumbersTest {
 
     @Test
     @DisplayName("로또번호 개수가 6개인경우 정상적으로 생성하는지 확인한다")
     void checkNumberCount() {
-        // given
-        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45);
-        // when
+        LottoNumbers lottoTicket = LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
         List<LottoNumber> lottoNumbers = lottoTicket.findAll();
-        // then
+
         assertThat(lottoNumbers.size()).isEqualTo(6);
         assertThat(lottoNumbers.get(0).get()).isEqualTo(1L);
         assertThat(lottoNumbers.get(1).get()).isEqualTo(2L);
@@ -33,7 +33,7 @@ public class LottoTicketTest {
     void checkNumberCount2() throws Exception {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L), 45);
+                    LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L));
                 }).withMessageMatching("Count of Lotto numbers must be 6");
     }
 
@@ -42,7 +42,7 @@ public class LottoTicketTest {
     void checkNumberCount3() throws Exception {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L), 45);
+                    LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L));
                 }).withMessageMatching("Count of Lotto numbers must be 6");
     }
 
@@ -51,18 +51,14 @@ public class LottoTicketTest {
     void checkDuplicatedNumber() throws Exception {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    LottoTicket.of(Arrays.asList(2L, 2L, 3L, 4L, 5L, 6L), 45);
+                    LottoNumbers.of(Arrays.asList(2L, 2L, 3L, 4L, 5L, 6L));
                 }).withMessageMatching("Lotto numbers can not be duplicated");
     }
 
     @Test
-    @DisplayName("보너스번호를 정상적으로 생성하는지 확인한다")
+    @DisplayName("특정번호가 로또티켓에 존재하는지 확인한다")
     void checkBonusNumber() {
-        // given
-        LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L), 45);
-        // when
-        LottoNumber bonusNumber = lottoTicket.getBonusNumber();
-        // then
-        assertThat(bonusNumber.get()).isEqualTo(45L);
+        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L));
+        assertTrue(lottoNumbers.existNumber(LottoNumber.of(PositiveNumber.of(1))));
     }
 }

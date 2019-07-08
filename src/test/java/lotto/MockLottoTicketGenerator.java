@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.PurchaseAmount;
+import lotto.common.PositiveNumber;
 import lotto.domain.ticket.LottoTicketGenerator;
 import lotto.domain.ticket.LottoTickets;
 
@@ -13,7 +13,7 @@ public class MockLottoTicketGenerator implements LottoTicketGenerator {
     }
 
     @Override
-    public LottoTickets generate(PurchaseAmount purchaseAmount) {
+    public LottoTickets generate(PositiveNumber ticketCount) {
         return lottoTickets;
     }
 }

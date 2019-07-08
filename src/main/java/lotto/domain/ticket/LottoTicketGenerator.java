@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
-import lotto.domain.PurchaseAmount;
+import lotto.common.PositiveNumber;
 
 public interface LottoTicketGenerator {
-    LottoTickets generate(PurchaseAmount purchaseAmount);
+    LottoTickets generate(PositiveNumber ticketCount);
 }

@@ -2,22 +2,18 @@ package lotto;
 
 import lotto.domain.DefaultLottoService;
 import lotto.domain.LottoService;
-import lotto.domain.ticket.DefaultLottoTicketGenerator;
-import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.*;
+import lotto.dto.LottoPurchaseRequestDto;
 import lotto.dto.LottoResultDto;
+import lotto.dto.LottoWinningRequestDto;
 import lotto.view.input.InputView;
 import lotto.view.result.ResultView;
-
-import java.util.List;
 
 public class LottoController {
 
     private final InputView inputView;
     private final ResultView resultView;
     private final LottoService lottoService;
-
-    private long purchaseAmount;
-    private LottoTickets lottoTickets;
 
     LottoController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
@@ -26,21 +22,12 @@ public class LottoController {
     }
 
     public void run() {
-        purchaseLottoTickets();
-        checkWinningAmount();
-    }
+        LottoPurchaseRequestDto lottoPurchaseRequestDto = LottoPurchaseRequestDto.of(inputView.getPurchaseAmount(), inputView.getManualTicketNumbers());
+        LottoTickets purchaseTickets = lottoService.purchaseLottoTickets(lottoPurchaseRequestDto);
+        resultView.printLottoTickets(purchaseTickets);
 
-    private void purchaseLottoTickets() {
-        purchaseAmount = inputView.getPurchaseAmount();
-        lottoTickets = lottoService.purchaseLottoTickets(purchaseAmount);
-        resultView.printLottoTickets(lottoTickets);
-    }
-
-    private void checkWinningAmount() {
-        List<Long> winningTicket = inputView.getWinningTicket();
-        long bonusNumber =inputView.getBonusNumber();
-
-        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoTickets, winningTicket, purchaseAmount, bonusNumber);
+        LottoWinningRequestDto lottoWinningRequestDto = LottoWinningRequestDto.of(inputView.getWinningTicket(), inputView.getBonusNumber(), purchaseTickets);
+        LottoResultDto lottoResultDto = lottoService.checkWinningAmount(lottoWinningRequestDto);
         resultView.printResult(lottoResultDto);
     }
 }

@@ -1,23 +1,22 @@
 package lotto.view.result;
 
-import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.winning.LottoWinningAmount;
 import lotto.domain.winning.LottoWinningResult;
 import lotto.dto.LottoResultDto;
 
-import java.util.Map;
-
 public class DefaultResultView implements ResultView {
 
     @Override
     public void printLottoTickets(LottoTickets lottoTickets) {
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoTickets.getNumberOfManualTickets().get(), lottoTickets.getNumberOfAutoTickets().get()));
         lottoTickets.findAll().stream()
-                .forEach(lottoTicket -> printLottoTicket(lottoTicket));
+                .forEach(lottoTicket -> printLottoTicket(lottoTicket.getLottoTicketNumbers()));
+        System.out.println();
     }
 
-    private void printLottoTicket(LottoTicket lottoTicket) {
-        System.out.println("[" + lottoTicket.getLottoTicketNumbers() + "]");
+    private void printLottoTicket(String lottoNumbers) {
+        System.out.println("[" + lottoNumbers + "]");
     }
 
     @Override
