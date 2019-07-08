@@ -32,7 +32,7 @@ public class LottoResult {
     }
 
     private boolean isSecondRank(LottoNumbers lottoNumbers, int matchingCount) {
-        return matchingCount == 5 && lottoNumbers.isMatchBonusBall(winningNumbers.getBonusBall());
+        return matchingCount == 5 && lottoNumbers.hasNumber(winningNumbers.getBonusBall());
 
     }
 

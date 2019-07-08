@@ -36,9 +36,9 @@ public class LottoNumbers {
                 .anyMatch(e -> e == winningNumber.getValue());
     }
 
-    boolean isMatchBonusBall(Number bonusBall) {
+    public boolean hasNumber(Number number) {
         return numbers.stream()
-                .anyMatch(e -> e.getValue() == bonusBall.getValue());
+                .anyMatch(e -> e.getValue() == number.getValue());
     }
 
     public LinkedHashSet<Number> getNumbers() {
