@@ -50,4 +50,14 @@ class LottoOrderTest {
 
 		assertThat(order.getAutoOrderCount()).isEqualTo(7);
 	}
+
+	@DisplayName("주문 최소금액 미달")
+	@Test
+	void lessThanPrice(){
+		int investment = 100;
+		assertThatIllegalArgumentException().isThrownBy(() -> {
+			new LottoOrder(investment, new ArrayList<>());
+		});
+	}
+
 }
