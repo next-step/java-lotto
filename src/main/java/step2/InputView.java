@@ -16,13 +16,18 @@ public class InputView {
         return Integer.parseInt(cash) / Lotto.LOTTO_PRICE;
     }
 
-    public String[] inputWinningNumbers() {
+    public int[] inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
         String[] inputWinningNumbers = scan.nextLine().split(",");
+        String[] trimWinningNumbers = new String[Lotto.WINNING_NUMBERS_LENGTH];
+        for (int i = 0; i < Lotto.WINNING_NUMBERS_LENGTH; i++) {
+            trimWinningNumbers[i] = inputWinningNumbers[i].trim();
+        }
 
-        InputValidationCheck.checkWinningNumbers(inputWinningNumbers);
-        InputValidationCheck.checkWinningNumberRange(inputWinningNumbers);
+        InputValidationCheck.checkWinningNumbers(trimWinningNumbers);
+        InputValidationCheck.checkOverlapWinningNumber(trimWinningNumbers);
 
-        return inputWinningNumbers;
+        return InputValidationCheck.checkWinningNumberRange(trimWinningNumbers);
     }
 }
