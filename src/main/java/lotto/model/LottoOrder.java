@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 로또 구입에 필요한 정보를 관리하는 개체
@@ -36,6 +37,10 @@ public class LottoOrder {
 		this.manualOrders = manualOrders;
 	}
 
+	/**
+	 * 수동주문 번호 셋트 반환
+	 * @return 수동주문이 없으면 길이가 0인 리스트 반환
+	 */
 	public List<LottoNumberSet> getManualOrders() {
 		return this.manualOrders;
 	}

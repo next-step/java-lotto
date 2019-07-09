@@ -20,7 +20,8 @@ public class LotteryStore {
 	public LottoWallet buy(LottoOrder order) {
 
 
-		List<LottoTicket> tickets = order.getManualOrders().stream()
+		List<LottoTicket> tickets = order.getManualOrders()
+				.stream()
 				.map(numbers -> LottoTicket.of(numbers))
 				.collect(Collectors.toList());
 

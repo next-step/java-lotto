@@ -48,7 +48,7 @@ public class OrderInputDialog {
 	 * @return 수동으로 지정된 로또번호 목록 반환
 	 */
 	private List<LottoNumberSet> processManualInput(int manualTicketCount) {
-		if(manualTicketCount < 0){
+		if(manualTicketCount <= 0){
 			return null;
 		}
 
