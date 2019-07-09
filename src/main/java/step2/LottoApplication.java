@@ -16,7 +16,7 @@ public class LottoApplication {
         Set<List<Integer>> purchasedLottos = lotto.purchasedLottos(standardLotto, lottoCount);
         resultView.printPurchasedLottos(purchasedLottos);
 
-        String[] inputWinningNumbers = inputView.inputWinningNumbers();  // 공백 제거하지 않은 상테
+        int[] winningNumbers = inputView.inputWinningNumbers();  // 공백 제거하지 않은 상테
     }
 
 
