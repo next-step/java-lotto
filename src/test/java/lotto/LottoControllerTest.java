@@ -2,9 +2,14 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.TicketMachine;
-import lotto.view.in.InputDialog;
+import lotto.model.LottoOrder;
+import lotto.view.in.InputReader;
+import lotto.view.in.OrderInputDialog;
+import lotto.view.in.SingleInputDialog;
+import lotto.view.out.MessagePrinter;
 import lotto.view.out.ResultViewer;
 import lotto.view.out.WalletViewer;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,15 +21,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoControllerTest {
 
+	@DisplayName("수동구매없이 자동 10개 구입 테스트")
 	@Test
 	void investTest() {
 
 		// Arrange
 		LottoController controller = new LottoController(new TicketMachine());
+		LottoOrder order = new LottoOrder(10000, null);
+		OrderInputDialog orderDialog = new StaticOrderDialog(order);
 		List<String> output = new ArrayList<>();
 
 		// Action
-		controller.invest(message -> "10000", new WalletViewer(message -> output.add(message)));
+		controller.invest(orderDialog, new WalletViewer(message -> output.add(message)));
 
 		// Assertion
 		assertThat(output).contains("10개를 구매했습니다.");
@@ -39,16 +47,18 @@ public class LottoControllerTest {
 		assertThat(printedTicketPattern).isEqualTo(10);
 	}
 
+	@DisplayName("자동구매 당첨확인 테스트")
 	@Test
 	void winTest(){
 		// Arrange
 		int[] manualNumbers = {1, 2, 3, 4, 5, 6};
 		TicketMachine machine = new StaticTicketMachine(manualNumbers);
 		LottoController controller = new LottoController(machine);
+		LottoOrder order = new LottoOrder(1000, null);
+		controller.invest(new StaticOrderDialog(order), new WalletViewer(message -> {}));
 		List<String> output = new ArrayList<>();
-		controller.invest(message -> "1000", new WalletViewer(message -> {}));
 
-		InputDialog winNumberInput = message -> (message.contains("당첨 번호") ? "1, 2, 3, 10, 11, 12" : "45");
+		SingleInputDialog winNumberInput = message -> (message.contains("당첨 번호") ? "1, 2, 3, 10, 11, 12" : "45");
 
 		// Action
 		controller.lottery(winNumberInput, new ResultViewer(message -> output.add(message)));
@@ -59,6 +69,9 @@ public class LottoControllerTest {
 		assertThat(output).contains("총 수익률은 5.00입니다.");
 	}
 
+	/**
+	 * 지정된 숫자로 복권을 발행하는 테스트용 클래스
+	 */
 	class StaticTicketMachine extends TicketMachine{
 
 		private int[] numbers;
@@ -70,6 +83,24 @@ public class LottoControllerTest {
 		@Override
 		public LottoTicket issuingTicket(){
 			return LottoTicket.of(numbers);
+		}
+	}
+
+	/**
+	 * 정해진 주문서를 반환하는 테스트용 클래스
+	 */
+	class StaticOrderDialog extends OrderInputDialog {
+
+		private LottoOrder order;
+
+		public StaticOrderDialog(LottoOrder order) {
+			super(null, null);
+			this.order = order;
+		}
+
+		@Override
+		public LottoOrder makeOrder(){
+			return order;
 		}
 	}
 }

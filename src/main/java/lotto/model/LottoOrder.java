@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,13 @@ public class LottoOrder {
 	 * @param manualOrders 수동구매 번호
 	 */
 	public LottoOrder(int investment, List<LottoNumberSet> manualOrders) {
+
+		if(manualOrders == null){
+			this.balance = investment;
+			this.manualOrders = new ArrayList<>();
+			return;
+		}
+
 		this.balance = investment - manualOrders.size() * PRICE_OF_TICKET;
 		if(balance < 0){
 			throw new IllegalArgumentException();
@@ -29,10 +37,11 @@ public class LottoOrder {
 	}
 
 	public List<LottoNumberSet> getManualOrders() {
-		return manualOrders;
+		return this.manualOrders;
 	}
 
-	public int getBalance() {
-		return this.balance;
+	public int getAutoOrderCount() {
+		return this.balance / PRICE_OF_TICKET;
 	}
+
 }

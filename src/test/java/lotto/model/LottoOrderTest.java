@@ -18,9 +18,9 @@ class LottoOrderTest {
 	@BeforeEach
 	void setManualOrderList(){
 		manualOrderList = new ArrayList<>();
-		manualOrderList.add(lotto.model.LottoNumberSet.of(new int[]{1, 2, 3, 4, 5, 6}));
-		manualOrderList.add(lotto.model.LottoNumberSet.of(new int[]{1, 2, 3, 7, 8, 9}));
-		manualOrderList.add(lotto.model.LottoNumberSet.of(new int[]{1, 2, 3, 7, 8, 9}));
+		manualOrderList.add(LottoNumberSet.of(new int[]{1, 2, 3, 4, 5, 6}));
+		manualOrderList.add(LottoNumberSet.of(new int[]{1, 2, 3, 7, 8, 9}));
+		manualOrderList.add(LottoNumberSet.of(new int[]{1, 2, 3, 7, 8, 9}));
 	}
 
 	@DisplayName("정상주문")
@@ -42,12 +42,12 @@ class LottoOrderTest {
 		});
 	}
 
-	@DisplayName("수동구매 비용을 제외한 잔액")
+	@DisplayName("수동구매를 제외한 자동구매 수량 확인")
 	@Test
 	void balance(){
 		int investment = 10000;
 		LottoOrder order = new LottoOrder(investment, manualOrderList);
 
-		assertThat(order.getBalance()).isEqualTo(7000);
+		assertThat(order.getAutoOrderCount()).isEqualTo(7);
 	}
 }
