@@ -22,6 +22,9 @@ public class LottoOrder {
 	 * @param manualOrders 수동구매 번호
 	 */
 	public LottoOrder(int investment, List<LottoNumberSet> manualOrders) {
+		if(investment < PRICE_OF_TICKET){
+			throw new IllegalArgumentException();
+		}
 
 		if(manualOrders == null){
 			this.balance = investment;
