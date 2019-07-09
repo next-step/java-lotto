@@ -1,5 +1,10 @@
 package step2;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 public class InputValidationCheck {
 
     public static void checkEmpty(String cash) {
@@ -14,25 +19,33 @@ public class InputValidationCheck {
         }
     }
 
-    public static void checkWinningNumbers(String[] inputWinningNumbers) {
-        int winningNumberLength = inputWinningNumbers.length;
-
-        if (winningNumberLength != Lotto.WINNING_NUMBERS_LENGTH) {
+    public static void checkWinningNumbers(String[] trimWinningNumbers) {
+        if (trimWinningNumbers.length != Lotto.WINNING_NUMBERS_LENGTH) {
             throw new IllegalArgumentException("당첨번호는" + Lotto.WINNING_NUMBERS_LENGTH + "개를 입력하셔야 합니다.");
         }
     }
 
-    public static void checkWinningNumberRange(String[] winningNumbers) {
+    public static int[] checkWinningNumberRange(String[] trimWinningNumbers) {
+        int[] winningNumbers = new int[Lotto.WINNING_NUMBERS_LENGTH];
         for (int i = 0; i < Lotto.WINNING_NUMBERS_LENGTH; i++) {
-            checkEachWinningNumber(Integer.parseInt(winningNumbers[i].trim()));
+            winningNumbers[i] = Integer.parseInt((trimWinningNumbers[i]));
+            checkEachWinningNumber(winningNumbers[i]);
         }
+
+        return winningNumbers;
     }
 
     private static void checkEachWinningNumber(int winningNumber) {
-        if (winningNumber > Lotto.WINNING_NUMBERS_MAX ||
-                winningNumber < Lotto.WINNING_NUMBERS_MIN) {
-            throw new IllegalArgumentException(
-                    "당첨번호는" + Lotto.WINNING_NUMBERS_MIN + " ~ " + Lotto.WINNING_NUMBERS_MAX + "사이로 입력하셔야 합니다.");
+        if (winningNumber > Lotto.WINNING_NUMBERS_MAX || winningNumber < Lotto.WINNING_NUMBERS_MIN) {
+            throw new IllegalArgumentException("당첨번호는" + Lotto.WINNING_NUMBERS_MIN + " ~ " + Lotto.WINNING_NUMBERS_MAX + "사이로 입력하셔야 합니다.");
         }
     }
+
+    public static void checkOverlapWinningNumber(String[] winningNumbers) {
+        Set<String> uniqueWinningNumber = new HashSet<>(Arrays.asList(winningNumbers));
+        if(uniqueWinningNumber.size() != winningNumbers.length){
+            throw new IllegalArgumentException("당첨번호에 중복된 값이 있습니다.");
+        }
+    }
+
 }
