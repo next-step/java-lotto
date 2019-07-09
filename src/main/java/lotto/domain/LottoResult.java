@@ -1,48 +1,45 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
     private static int PRICE_LOTTO = 1000;
 
-    private Map<Integer, Integer> result;
+    private Map<LottoWin, Integer> result;
 
-    public LottoResult() {
-        this.result = new HashMap<>();
+
+    private LottoResult(Map<LottoWin, Integer> map) {
+        this.result = map;
     }
 
-    public void add(LottoWin win) {
-        result.putIfAbsent(win.getCountOfMatch(), 0);
-        result.put(win.getCountOfMatch(), result.get(win.getCountOfMatch()) + 1);
+    public static LottoResult of(List<LottoWin> wins) {
+        HashMap<LottoWin, Integer> map = new HashMap<>();
+
+        wins.stream()
+                .forEach(win -> {
+                    map.putIfAbsent(win, 0);
+                    map.put(win, map.get(win) + 1);
+                });
+
+        return new LottoResult(map);
     }
 
-    public String getResultOf(LottoWin win) {
-        int earning = win.getEarning();
-        int count = result.getOrDefault(win.getCountOfMatch(), 0);
 
-        StringBuilder builder = new StringBuilder();
-        builder.append(win.getCountOfMatch());
-        builder.append("개 일치");
-        if (win == LottoWin.SECOND) {
-            builder.append(", 보너스 볼 일치");
-        }
-        builder.append(" (");
-        builder.append(earning);
-
-        builder.append("원) - ");
-        builder.append(count);
-        builder.append("개");
-
-        return builder.toString();
+    public Integer getResultOf(LottoWin win) {
+        return result.getOrDefault(win, 0);
     }
 
-    public int getProfitRate() {
-        int paidPrice = result.size() * PRICE_LOTTO;
+    public float getProfitRate() {
+        int countTickets = result.values().stream()
+                .reduce((x, y) -> x + y)
+                .orElseThrow(IllegalStateException::new);
 
-        int totalProfit = 0;
-        for (Integer matchCount : result.keySet()) {
-            LottoWin win = LottoWin.valueOf(matchCount, false);
+        int paidPrice = countTickets * PRICE_LOTTO;
+
+        float totalProfit = 0.0F;
+        for (LottoWin win : result.keySet()) {
             totalProfit += win.getEarning();
         }
 

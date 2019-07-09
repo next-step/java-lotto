@@ -7,9 +7,11 @@ import lotto.strategy.LottoOrderedStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
     private static final int INPUT_PRICE_PURCHASED = 3000;
@@ -33,6 +35,8 @@ public class LottoTest {
 
     @Test
     void 발급한_로또는_숫자가_6개다() {
-        assertThat(ticket.getNumbers().size()).isEqualTo(6);
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            new LottoTicket(Arrays.asList(1, 2, 3, 4, 5));
+        });
     }
 }

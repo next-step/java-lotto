@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
-    static final public String DELIMITER_STRING = "\n";
-
     private List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -16,25 +15,14 @@ public class LottoTickets {
     }
 
     public LottoResult checkWin(LottoTicket winner, int bonusBall) {
-        LottoResult lottoResult = new LottoResult();
+        List<LottoWin> wins = tickets.stream()
+                .map(ticket -> ticket.checkWin(winner, bonusBall))
+                .collect(Collectors.toList());
 
-        for (LottoTicket ticket : tickets) {
-            int numOfCorrect = ticket.correctWith(winner);
-            lottoResult.add(LottoWin.valueOf(numOfCorrect, winner.hasBonus(bonusBall)));
-        }
-
-        return lottoResult;
+        return LottoResult.of(wins);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        for (LottoTicket ticket : tickets) {
-            builder.append(ticket.toString());
-            builder.append(DELIMITER_STRING);
-        }
-
-        return builder.substring(0, builder.length() - DELIMITER_STRING.length());
+    public List<LottoTicket> getTickets() {
+        return tickets;
     }
 }

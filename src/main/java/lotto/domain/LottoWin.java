@@ -26,8 +26,8 @@ public enum LottoWin {
 
     public static LottoWin valueOf(int countOfMatch, boolean matchBonus) {
         for (LottoWin lottoWin : values()) {
-            if (lottoWin.countOfMatch == 5 && matchBonus) {
-                return SECOND;
+            if (countOfMatch == LottoWin.SECOND.countOfMatch && matchBonus) {
+                return LottoWin.SECOND;
             }
 
             if (lottoWin.countOfMatch == countOfMatch) {
@@ -35,7 +35,6 @@ public enum LottoWin {
             }
         }
 
-        return MISS;
+        return LottoWin.MISS;
     }
-
 }
