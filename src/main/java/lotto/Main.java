@@ -1,23 +1,33 @@
 package lotto;
 
+import lotto.io.InputView;
 import lotto.io.OutputView;
-import lotto.model.Lotto;
+import lotto.model.Lotteries;
 import lotto.model.LottoResult;
+import lotto.model.Rank;
+import lotto.model.WinningNumber;
 
 import java.util.List;
 
 import static lotto.io.InputView.InputPurchaseAmount;
-import static lotto.io.InputView.inputWinnerNumber;
+import static lotto.io.InputView.inputWinningNumbers;
 import static lotto.io.OutputView.viewLotto;
-import static lotto.util.LottoResultProvider.getResult;
 import static lotto.util.LottoTicketBox.buy;
 
 public class Main {
     public static void main(String[] args) {
-        List<Lotto> lottos = buy(InputPurchaseAmount());
-        viewLotto(lottos);
-        LottoResult lottoResult = getResult(lottos, inputWinnerNumber());
-        OutputView.viewResult(lottoResult);
-        OutputView.viewEarningRate(lottos, lottoResult);
+        int money = InputPurchaseAmount();
+        Lotteries lotteries = buy(money);
+
+        viewLotto(lotteries);
+
+        WinningNumber winningNumber = new WinningNumber(inputWinningNumbers(), InputView.inputBonusBall());
+
+        LottoResult lottoResult = new LottoResult(lotteries, winningNumber);
+
+        List<Rank> rankResult = lottoResult.getRankResult();
+
+        OutputView.viewResult(rankResult);
+        OutputView.viewEarningRate(money, rankResult);
     }
 }

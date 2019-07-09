@@ -1,44 +1,40 @@
 package lotto.model;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class LottoResult {
 
-    private int winningCount3;
-    private int winningCount4;
-    private int winningCount5;
-    private int winningCount6;
+    private Lotteries lotteries;
+    private WinningNumber winningNumbers;
 
-    public void addWinningCount(int winningCount) {
+    public LottoResult(Lotteries lotteries, WinningNumber winningNumbers) {
+        this.lotteries = lotteries;
+        this.winningNumbers = winningNumbers;
+    }
 
-        if (winningCount == 3) {
-            winningCount3++;
+    public List<Rank> getRankResult() {
+        return lotteries.getLotteries()
+                .stream()
+                .map(this::getRankResult)
+                .collect(Collectors.toList());
+    }
+
+    private Rank getRankResult(LottoNumbers lottoNumbers) {
+
+        int matchingCount = lottoNumbers.getWinningCount(winningNumbers.getWinningNumbers());
+
+        if (isSecondRank(lottoNumbers, matchingCount)) {
+            return Rank.valueOf(matchingCount, true);
         }
 
-        if (winningCount == 4) {
-            winningCount4++;
-        }
-
-        if (winningCount == 5) {
-            winningCount5++;
-        }
-
-        if (winningCount == 6) {
-            winningCount6++;
-        }
+        return Rank.valueOf(matchingCount, false);
     }
 
-    public int getWinningCount6() {
-        return winningCount6;
+    private boolean isSecondRank(LottoNumbers lottoNumbers, int matchingCount) {
+        return matchingCount == 5 && lottoNumbers.hasNumber(winningNumbers.getBonusBall());
+
     }
 
-    public int getWinningCount5() {
-        return winningCount5;
-    }
 
-    public int getWinningCount4() {
-        return winningCount4;
-    }
-
-    public int getWinningCount3() {
-        return winningCount3;
-    }
 }
