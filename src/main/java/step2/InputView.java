@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputView {
@@ -24,10 +25,12 @@ public class InputView {
         for (int i = 0; i < Lotto.WINNING_NUMBERS_LENGTH; i++) {
             trimWinningNumbers[i] = inputWinningNumbers[i].trim();
         }
-
         InputValidationCheck.checkWinningNumbers(trimWinningNumbers);
         InputValidationCheck.checkOverlapWinningNumber(trimWinningNumbers);
 
-        return InputValidationCheck.checkWinningNumberRange(trimWinningNumbers);
+        int[] winningNumbers =InputValidationCheck.checkWinningNumberRange(trimWinningNumbers);
+        Arrays.sort(winningNumbers);
+
+        return winningNumbers;
     }
 }
