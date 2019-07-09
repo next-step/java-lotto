@@ -56,8 +56,10 @@ public class OrderInputDialog {
 		this.printer.print("수동으로 구매할 번호를 입력해 주세요.");
 
 		while(manualTicketCount > 0){
-			LottoNumberSet numbers = LottoNumberSet.of(new ExpressionSplitter(reader.read()).split());
+			String inputValue = reader.read();
+			LottoNumberSet numbers = LottoNumberSet.of(new ExpressionSplitter(inputValue).split());
 			manualNumberSets.add(numbers);
+			manualTicketCount--;
 		}
 
 		return manualNumberSets;
