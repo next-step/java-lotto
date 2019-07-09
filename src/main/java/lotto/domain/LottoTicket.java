@@ -15,7 +15,6 @@ public class LottoTicket {
 	private LottoNumberSet numbers;
 
 	private LottoTicket(LottoNumberSet numbers){
-		// 기본생성자는 클래스메서드에서만 접근
 		this.numbers = numbers;
 	}
 

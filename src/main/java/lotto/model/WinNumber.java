@@ -1,6 +1,7 @@
 package lotto.model;
 
 public class WinNumber {
+
 	private LottoNumberSet primaryNumbers;
 
 	private LottoNumber bonusNumber;

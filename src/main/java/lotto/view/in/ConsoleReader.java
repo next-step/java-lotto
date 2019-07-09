@@ -3,6 +3,7 @@ package lotto.view.in;
 import java.util.Scanner;
 
 public class ConsoleReader implements InputReader {
+
 	Scanner scanner;
 
 	public ConsoleReader(){

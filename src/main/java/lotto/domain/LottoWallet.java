@@ -11,8 +11,6 @@ public class LottoWallet {
 
 	private static final CharSequence NEW_LINE = "\n";
 
-	private static final int EMPTY_BALANCE = 0;
-
 	private List<LottoTicket> tickets;
 
 	public LottoWallet(List<LottoTicket> tickets){
