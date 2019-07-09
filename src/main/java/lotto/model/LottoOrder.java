@@ -2,15 +2,12 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 로또 구입에 필요한 정보를 관리하는 개체
  * 수동번호, 주문 가능 금액 초과등을 판단
  */
 public class LottoOrder {
-
-	private static final int PRICE_OF_TICKET = 1000;
 
 	private final int balance;
 
@@ -22,7 +19,7 @@ public class LottoOrder {
 	 * @param manualOrders 수동구매 번호
 	 */
 	public LottoOrder(int investment, List<LottoNumberSet> manualOrders) {
-		if(investment < PRICE_OF_TICKET){
+		if(investment < LottoRule.PRICE_OF_TICKET){
 			throw new IllegalArgumentException();
 		}
 
@@ -32,7 +29,7 @@ public class LottoOrder {
 			return;
 		}
 
-		this.balance = investment - manualOrders.size() * PRICE_OF_TICKET;
+		this.balance = investment - manualOrders.size() * LottoRule.PRICE_OF_TICKET;
 		if(balance < 0){
 			throw new IllegalArgumentException();
 		}
@@ -48,8 +45,12 @@ public class LottoOrder {
 		return this.manualOrders;
 	}
 
+	/**
+	 * 지동주문 수량 반환
+	 * @return
+	 */
 	public int getAutoOrderCount() {
-		return this.balance / PRICE_OF_TICKET;
+		return this.balance / LottoRule.PRICE_OF_TICKET;
 	}
 
 }

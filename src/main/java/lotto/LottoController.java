@@ -7,6 +7,7 @@ import lotto.domain.ResultReport;
 import lotto.domain.TicketMachine;
 import lotto.model.LottoNumber;
 import lotto.model.LottoNumberSet;
+import lotto.model.LottoRule;
 import lotto.model.WinNumber;
 import lotto.view.in.OrderInputDialog;
 import lotto.view.in.SingleInputDialog;
@@ -50,7 +51,7 @@ public class LottoController {
 		WinNumber winNumber = new WinNumber(numbers, bonusNumber);
 
 		ResultReport result = wallet.result(winNumber);
-		int investment = wallet.ticketCount() * LotteryStore.PRICE_OF_TICKET; // 투자금 (티켓구입액)
+		int investment = wallet.ticketCount() * LottoRule.PRICE_OF_TICKET; // 투자금 (티켓구입액)
 
 		viewer.render(result, investment);
 	}

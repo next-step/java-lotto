@@ -9,8 +9,6 @@ import java.util.stream.IntStream;
 
 public class LotteryStore {
 
-	public static final int PRICE_OF_TICKET = 1000;
-
 	private TicketMachine machine;
 
 	public LotteryStore(TicketMachine machine){
@@ -18,8 +16,6 @@ public class LotteryStore {
 	}
 
 	public LottoWallet buy(LottoOrder order) {
-
-
 		List<LottoTicket> tickets = order.getManualOrders()
 				.stream()
 				.map(numbers -> LottoTicket.of(numbers))
