@@ -28,8 +28,8 @@ public class InputView {
     }
 
     public static List<String> inputManualNumber(int manualNumberCount) {
-        List<String> manualLottoNumbers = new ArrayList<>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> manualLottoNumbers = new ArrayList<>();
         scanner.nextLine();
         for (int i = 0; i < manualNumberCount; i++) {
             manualLottoNumbers.add(scanner.nextLine());
