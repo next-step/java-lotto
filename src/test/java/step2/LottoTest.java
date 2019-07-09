@@ -2,6 +2,9 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +17,7 @@ public class LottoTest {
     @Test
     public void 로또번호_범위_확인() {
         List<Integer> standardLottoNumbers = lotto.generateStandardLotto();
-        Set<List<Integer>> autoLottos = lotto.purchasedLottos(standardLottoNumbers,3);
+        Set<ArrayList<Integer>> autoLottos = lotto.purchasedLottos(standardLottoNumbers,3);
         assertThat(autoLottos.size()).isEqualTo(3);
     }
 
@@ -22,7 +25,7 @@ public class LottoTest {
     @Test
     public void 생성_된_로또_수량확인() {
         List<Integer> standardLottoNumbers = lotto.generateStandardLotto();
-        Set<List<Integer>> autoLottos = lotto.purchasedLottos(standardLottoNumbers,3);
+        Set<ArrayList<Integer>> autoLottos = lotto.purchasedLottos(standardLottoNumbers,3);
         assertThat(autoLottos.size()).isEqualTo(3);
     }
 
@@ -30,8 +33,8 @@ public class LottoTest {
     @Test
     public void 생성_된_로또_자릿수_확인() {
         List<Integer> standardLottoNumbers = lotto.generateStandardLotto();
-        Set<List<Integer>> autoLottos = lotto.purchasedLottos(standardLottoNumbers, 3);
-        for (List<Integer> autoLotto : autoLottos) {
+        Set<ArrayList<Integer>> autoLottos = lotto.purchasedLottos(standardLottoNumbers, 3);
+        for (ArrayList<Integer> autoLotto : autoLottos) {
             assertThat(autoLotto.size()).isEqualTo(Lotto.WINNING_NUMBERS_LENGTH);
         }
     }
