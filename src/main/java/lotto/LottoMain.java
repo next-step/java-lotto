@@ -1,19 +1,19 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoMain {
     public static void main(String[] args) {
         int inputAmount = InputView.inputAmount();
-        Money money = new Money(inputAmount);
-        LottoGame lottoGame = new LottoGame(money, new LottoGeneratorRandom());
-
         int manualNumberCount = InputView.inputManualNumberCount();
-        List<String> inputManualNumbers;
-        if (manualNumberCount > 0){
+        Money money = new Money(inputAmount, manualNumberCount);
+        List<String> inputManualNumbers = Collections.emptyList();
+        if (manualNumberCount > 0) {
             inputManualNumbers = InputView.inputManualNumber(manualNumberCount);
         }
 
+        LottoGame lottoGame = new LottoGame(money, new LottoGeneratorRandom(), inputManualNumbers);
         OutputView.outputCnt(money.countOfBuyingLotto(), manualNumberCount);
         OutputView.outputLottos(lottoGame.getLottos());
 

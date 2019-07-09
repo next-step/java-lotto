@@ -3,15 +3,25 @@ package lotto;
 import java.util.Objects;
 
 public class Money {
+    public static final int LOTTO_PRICE = 1000;
     private int money;
-    static final int LOTTO_PRICE = 1000;
+    private int manualCount;
 
     public Money(int money) {
         this.money = money;
+        this.manualCount = 0;
+    }
+
+    public Money(int money, int manualCount) {
+        if (manualCount > (money / LOTTO_PRICE)){
+            throw new IllegalArgumentException();
+        }
+        this.money = money;
+        this.manualCount = manualCount;
     }
 
     public int countOfBuyingLotto(){
-        return this.money / LOTTO_PRICE;
+        return (this.money / LOTTO_PRICE) - manualCount;
     }
 
     public Money sum(Money prize) {

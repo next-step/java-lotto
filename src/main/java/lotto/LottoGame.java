@@ -1,12 +1,16 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
-    private final List<Lotto> lottos;
+    private List<Lotto> lottos;
 
-    public LottoGame(Money money, LottoGenerator lottoNumberRandom) {
-        this.lottos = lottoNumberRandom.generate(money);
+    public LottoGame(Money money, LottoGenerator lottoNumberRandom, List<String> manualLottos) {
+        this.lottos = manualLottos.stream()
+                .map(Lotto::of)
+                .collect(Collectors.toList());
+        this.lottos.addAll(lottoNumberRandom.generate(money));
     }
 
     public LottoResult result(WinningLotto winningLotto) {

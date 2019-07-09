@@ -4,7 +4,7 @@ import java.util.List;
 
 public class OutputView {
     public static void outputCnt(int auto, int manual) {
-        System.out.println("수동으로 " + manual + "장, 자동으로 " + (auto - manual) + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manual + "장, 자동으로 " + auto + "개를 구매했습니다.");
     }
 
     public static void outputLottos(List<Lotto> lottos) {
