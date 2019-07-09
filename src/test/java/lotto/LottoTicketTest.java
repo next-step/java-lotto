@@ -42,7 +42,6 @@ public class LottoTicketTest {
     void 문자열형태를_순서대로_숫자열로_바꾼다() {
         String sampleNumbers = "4, 3, 2, 1, 5, 6";
         LottoTicket compared = LottoTicket.of(sampleNumbers);
-
         assertThat(compared).isEqualTo(ticket);
     }
 
