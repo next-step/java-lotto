@@ -7,12 +7,13 @@ import java.util.List;
 public final class LottoGame {
     private int tryNo;
 
-    public LottoGame(LottoMoney lottoMoney, int manualBuyNumber) {
-        if(lottoMoney.getTryNo() < manualBuyNumber) {
+    public LottoGame(int lottoMoney, int manualBuyNumber) {
+        LottoMoney gameMoney = new LottoMoney(lottoMoney);
+        if(gameMoney.getTryNo() < manualBuyNumber) {
             throw new IllegalArgumentException("수동구매 갯수가 구입금액을 초과합니다.");
         }
 
-        tryNo = lottoMoney.getTryNo() - manualBuyNumber;
+        tryNo = gameMoney.getTryNo() - manualBuyNumber;
     }
 
     public List<LottoSet> start() {
