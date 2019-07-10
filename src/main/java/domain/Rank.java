@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Arrays;
 
 public enum Rank {
@@ -16,22 +18,23 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
+        if (matchBonus && countOfMatch == SECOND.countOfMatch) {
+            return Rank.SECOND;
+        }
+
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.SECOND)
+                .filter(rank -> rank.countOfMatch == countOfMatch)
+                .findFirst()
+                .orElse(Rank.MISS);
+    }
+
     public int getCountOfMatch() {
         return countOfMatch;
     }
 
     public int getWinningMoney() {
         return winningMoney;
-    }
-
-    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        if (matchBonus && countOfMatch == SECOND.countOfMatch) {
-            return Rank.SECOND;
-        }
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.SECOND)
-                .filter(rank -> rank.countOfMatch == countOfMatch)
-                .findFirst()
-                .orElse(Rank.MISS);
     }
 }
