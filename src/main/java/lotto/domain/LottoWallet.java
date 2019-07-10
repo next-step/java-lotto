@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.model.LottoNumberSet;
 import lotto.model.WinNumber;
 
 import java.util.ArrayList;
@@ -10,23 +11,18 @@ public class LottoWallet {
 
 	private static final CharSequence NEW_LINE = "\n";
 
-	private static final int EMPTY_BALANCE = 0;
-
 	private List<LottoTicket> tickets;
 
-	private int balance;
-
-	public LottoWallet(List<LottoTicket> tickets, int balance){
+	public LottoWallet(List<LottoTicket> tickets){
 		for(LottoTicket ticket : tickets) {
 			this.add(ticket);
 		}
-		this.balance = balance;
 	}
 
 	private void add(LottoTicket ticket) {
 
-		if(ticket == null || !ticket.verify()){
-			throw new IllegalArgumentException("유효하지 않은 복권은 지갑에 담을 수 없습니다.");
+		if(ticket == null){
+			throw new IllegalArgumentException();
 		}
 
 		if(tickets == null){
@@ -40,17 +36,6 @@ public class LottoWallet {
 		return tickets.size();
 	}
 
-	public boolean hasBalance() {
-		return balance > EMPTY_BALANCE;
-	}
-
-	@Override
-	public String toString() {
-		return tickets.stream()
-				.map(LottoTicket::toString)
-				.collect(Collectors.joining(NEW_LINE));
-	}
-
 	public ResultReport result(WinNumber winNumber) {
 		ResultReport report = new ResultReport();
 
@@ -60,5 +45,21 @@ public class LottoWallet {
 				});
 
 		return report;
+	}
+
+	/**
+	 * 지정한 숫자로 만들어진 복권이 있는지 확인해주는 메서드
+	 * @param numberSet 숫자셋트
+	 * @return 동일한 숫자로 구성된 복권이 있다면 true 반환
+	 */
+	public boolean containsTicketHasNumbers(LottoNumberSet numberSet) {
+		return tickets.contains(LottoTicket.of(numberSet));
+	}
+
+	@Override
+	public String toString() {
+		return tickets.stream()
+				.map(LottoTicket::toString)
+				.collect(Collectors.joining(NEW_LINE));
 	}
 }

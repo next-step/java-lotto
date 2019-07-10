@@ -1,6 +1,5 @@
 package lotto.view.in;
 
-@FunctionalInterface
-public interface InputDialog {
+public interface SingleInputDialog {
 	String execute(String message);
 }

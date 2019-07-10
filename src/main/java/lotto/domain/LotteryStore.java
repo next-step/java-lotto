@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import lotto.model.LottoOrder;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LotteryStore {
-
-	public static final int PRICE_OF_TICKET = 1000;
 
 	private TicketMachine machine;
 
@@ -14,15 +15,19 @@ public class LotteryStore {
 		this.machine = machine;
 	}
 
-	public LottoWallet buy(int money) {
-
-		int availableCount = money / PRICE_OF_TICKET;
-
-		List<LottoTicket> tickets = IntStream.range(0, availableCount)
-				.mapToObj(index -> this.issuingTicket())
+	public LottoWallet buy(LottoOrder order) {
+		List<LottoTicket> tickets = order.getManualOrders()
+				.stream()
+				.map(numbers -> LottoTicket.of(numbers))
 				.collect(Collectors.toList());
 
-		return new LottoWallet(tickets, money % PRICE_OF_TICKET);
+		int availableCount = order.getAutoOrderCount();
+
+		tickets.addAll(IntStream.range(0, availableCount)
+				.mapToObj(index -> this.issuingTicket())
+				.collect(Collectors.toList()));
+
+		return new LottoWallet(tickets);
 	}
 
 	private LottoTicket issuingTicket(){
