@@ -1,5 +1,3 @@
-import org.assertj.core.util.Strings;
-
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -11,7 +9,7 @@ public class StringCalculator {
     private final static String PATTERN = "//(.)\n(.*)";
 
     public static int add(String input) throws Exception {
-        if (Strings.isNullOrEmpty(input))
+        if ("".equals(input))
             return SUM_FAILED;
 
         Matcher m = Pattern.compile(PATTERN).matcher(input);

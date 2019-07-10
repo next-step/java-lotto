@@ -1,25 +1,25 @@
 package controller;
 
-import domain.LottoGame;
-import domain.LottoNumber;
-import domain.LottoResult;
+import domain.*;
 import view.InputVeiw;
 import view.ResultView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class LottoGameMain {
 
     public static void main(String[] args) {
         int price = InputVeiw.userInput();
-        LottoGame lottoGame = new LottoGame(price);
+        List<LottoNumber> lottoManual = InputVeiw.inputManualLottoNumber();
+        LottoGame lottoGame = new LottoGame(price,lottoManual.size());
+        LottoResult lottoResult = new LottoResult();
 
-        ArrayList<LottoNumber> lottoNumber = lottoGame.getAutoLottoNumber();
-        ResultView.printLottoNumber(lottoNumber);
+        List<LottoNumber> lottoAuto = lottoGame.getAutoLottoNumber();
+        List<LottoNumber> lottoTotal = ResultView.printLottoNumber(lottoManual,lottoAuto);
 
-        int[] winningNumber = InputVeiw.inputPrvLottoNumber();
+        String winningNumber = InputVeiw.inputPrvLottoNumber();
         int bonusBall = InputVeiw.inputBonusBall();
-        LottoResult gameResult =lottoGame.getWinningResult(winningNumber, bonusBall);
-        ResultView.printResult(gameResult);
+        lottoResult.getWinningResult(lottoTotal, winningNumber, bonusBall, price);
+        ResultView.printResult(lottoResult);
     }
 }

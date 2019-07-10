@@ -8,25 +8,21 @@ public class LottoNumber {
     private final static int ONE_UNIT_OF_LOTTO = 6;
     private final static int EXIST_BONUS_BALL = 1;
 
-    private ArrayList<Integer> lottoElement;
+    private ArrayList<Integer> lottoElement = new ArrayList<>();
 
     // 생성자를 호출하면 lottoElement에 로또번호를 생성하여 추가
     LottoNumber() {
         ArrayList<Integer> randomNumber = getRandomNumber();
 
-        lottoElement = new ArrayList<>();
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
             lottoElement.add(randomNumber.get(i));
         }
     }
 
-    private ArrayList<Integer> getRandomNumber() {
-        ArrayList<Integer> randomNumber = new ArrayList<>();
-        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
-            randomNumber.add(i);
+    public LottoNumber(int[] temp){
+        for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
+            lottoElement.add(temp[i]);
         }
-        Collections.shuffle(randomNumber);
-        return randomNumber;
     }
 
     public ArrayList<Integer> getElement() {
@@ -43,10 +39,19 @@ public class LottoNumber {
         return checkBonusBall(bonusball, wingingCount);
     }
 
+    private ArrayList<Integer> getRandomNumber() {
+        ArrayList<Integer> randomNumber = new ArrayList<>();
+        for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
+            randomNumber.add(i);
+        }
+        Collections.shuffle(randomNumber);
+        return randomNumber;
+    }
+
     private int checkBonusBall(int bonusball, int countsResult) {
-        if ((countsResult == LottoData.THIRD_WINNER.getMatch() && lottoElement.contains(bonusball))) {
-            countsResult = 0; // 보너스 볼을 포함하는 4등 카운트 초기화 
-            LottoData.setBonusBallCount(EXIST_BONUS_BALL);
+        if ((countsResult == LottoRankData.THIRD_WINNER.getMatch() && lottoElement.contains(bonusball))) {
+            countsResult = 0; // 보너스 볼을 포함하는 4등 카운트 초기화
+            LottoRankData.setBonusBallCount(EXIST_BONUS_BALL);
         }
         return countsResult;
     }
