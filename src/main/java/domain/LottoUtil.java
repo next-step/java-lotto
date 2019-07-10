@@ -17,8 +17,8 @@ public enum LottoUtil {
     public static int[] coverStrToArr(String inputWinningNumber) {
         String[] result = removeBlankAndSplit(inputWinningNumber);
 
-        if (checkPrvStr(result)) {
-            throw new IllegalArgumentException("입력이 잘못되었습니다. 지난 당첨 번호를 다시 한번 입력해주세요.");
+        if (checkInputElement(result)) {
+            throw new IllegalArgumentException("입력이 잘못되었습니다. 로또 번호를 다시 한번 입력해주세요.");
         }
 
         int[] inputNumber = new int[ONE_UNIT_OF_LOTTO];
@@ -28,7 +28,7 @@ public enum LottoUtil {
         return inputNumber;
     }
 
-    private static boolean checkPrvStr(String[] input) {
+    private static boolean checkInputElement(String[] input) {
         return input.length != ONE_UNIT_OF_LOTTO;
     }
 

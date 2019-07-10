@@ -31,6 +31,6 @@ public class ResultView {
                     System.out.println(winner.getMatchNum() + "개 일치 (" + winner.getPrize() + "원)- " + winner.getMatchCount() + "개");
                 });
 
-        System.out.print("총 수익률은  " + gameResult.getPercentOfRevenue() + "입니다. 기준이 1이기 때문에 결과적으로 " + gameResult.judgeResult() + "라는 의미임)");
+        System.out.print("총 수익률은  " + gameResult.getWinningRevenue().getPercentOfRevenue() + "입니다. 기준이 1이기 때문에 결과적으로 " + gameResult.getWinningRevenue().judgeResult() + "라는 의미임)");
     }
 }

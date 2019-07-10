@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class InputVeiw {
+public class InputView {
 
     public static int userInput() {
         Scanner scanner = new Scanner(System.in);
@@ -42,11 +42,11 @@ public class InputVeiw {
         Scanner inputLotto = new Scanner(System.in);
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<LottoNumber> lottoNumber = new ArrayList<>();
-        String temp;
+        String input;
         int[] lotto;
         for (int i = 0; i < number; i++) {
-            temp = inputLotto.nextLine();
-            lotto = LottoUtil.coverStrToArr(temp);
+            input = inputLotto.nextLine();
+            lotto = LottoUtil.coverStrToArr(input);
             lottoNumber.add(new LottoNumber(lotto));
         }
         return lottoNumber;

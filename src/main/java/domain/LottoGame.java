@@ -11,11 +11,11 @@ public class LottoGame {
     private List<LottoNumber> lotto;
     private int numberOfGame;
 
-    public LottoGame(int inputPrice, int numberofLottoManual) {
+    public LottoGame(int inputPrice, int numberOfLottoManual) {
         if (checkPrice(inputPrice)) {
             throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");
         }
-        this.numberOfGame = convertPriceToNumberOfGame(inputPrice) - numberofLottoManual;
+        this.numberOfGame = convertPriceToNumberOfGame(inputPrice) - numberOfLottoManual;
         lotto = new ArrayList<>();
     }
 

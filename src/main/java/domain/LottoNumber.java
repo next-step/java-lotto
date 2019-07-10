@@ -19,9 +19,9 @@ public class LottoNumber {
         }
     }
 
-    public LottoNumber(int[] temp){
+    public LottoNumber(int[] input){
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
-            lottoElement.add(temp[i]);
+            lottoElement.add(input[i]);
         }
     }
 
