@@ -23,7 +23,7 @@ public final class InputView {
         return new Scanner(System.in).nextInt();
     }
 
-    public static List<LottoSet> inputManualAutoSets(int number) {
+    public static List<LottoSet> inputManualLottoSets(int number) {
         List<LottoSet> lottoSets = new ArrayList<>();
         if (number == 0) {
             return lottoSets;

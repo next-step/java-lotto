@@ -9,11 +9,11 @@ public final class LottoGame {
 
     public LottoGame(int lottoMoney, int manualBuyNumber) {
         LottoMoney gameMoney = new LottoMoney(lottoMoney);
-        if(gameMoney.getTryNo() < manualBuyNumber) {
+        if(gameMoney.calculateTryNo() < manualBuyNumber) {
             throw new IllegalArgumentException("수동구매 갯수가 구입금액을 초과합니다.");
         }
 
-        tryNo = gameMoney.getTryNo() - manualBuyNumber;
+        tryNo = gameMoney.calculateTryNo() - manualBuyNumber;
     }
 
     public List<LottoSet> start() {

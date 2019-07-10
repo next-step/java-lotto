@@ -1,7 +1,6 @@
 package view;
 
 import domain.LottoPaper;
-import domain.LottoResult;
 import domain.Rank;
 import domain.RankCount;
 
@@ -9,17 +8,16 @@ import java.util.Comparator;
 
 public final class ResultView {
 
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(RankCount rankCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        RankCount rankCount = lottoResult.getLottoRankCount();
         rankCount.getRankCount().keySet().stream()
                 .filter(rank -> rank.getCountOfMatch() != 0)
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> System.out.println(getStaticText(rank, rankCount.getNumberOfRankCount(rank))));
 
-        System.out.println("총 수익률은 " + lottoResult.getProfit() + "입니다.");
+        System.out.println("총 수익률은 " + rankCount.calculateProfit() + "입니다.");
     }
 
     private static String getStaticText(Rank rank, int count) {

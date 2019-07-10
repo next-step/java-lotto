@@ -20,7 +20,7 @@ public class LottoMoneyTest {
         LottoMoney lottoMoney = new LottoMoney(price);
 
         //  when
-        int tryNo = lottoMoney.getTryNo();
+        int tryNo = lottoMoney.calculateTryNo();
 
         // then
         assertThat(tryNo, is(14));

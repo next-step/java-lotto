@@ -11,7 +11,7 @@ public final class LottoMoney {
         this.money = money;
     }
 
-    public int getTryNo() {
+    public int calculateTryNo() {
         return money / TICKET_PRICE;
     }
 }

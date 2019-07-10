@@ -7,9 +7,9 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoResultTest {
+public class RankCountTest {
 
-    private LottoResult lottoResult;
+    private RankCount rankCount;
     private LottoPaper lottoPaper;
 
     @Before
@@ -31,19 +31,19 @@ public class LottoResultTest {
                 new LottoSet(17, 21, 29, 37, 42, 45),
                 new LottoSet(3, 8, 27, 30, 35, 44)));
         // when
-        lottoResult = new LottoResult(lottoPaper, new WinningLotto(new LottoSet(1, 2, 3, 4, 5, 6), LottoNumber.of(44)));
+        rankCount = new RankCount(lottoPaper, new WinningLotto(new LottoSet(1, 2, 3, 4, 5, 6), LottoNumber.of(44)));
     }
 
     @Test
     public void 수익률_일치() {
         // then
-        assertThat(lottoResult.getProfit()).isEqualTo(0.35);
+        assertThat(rankCount.calculateProfit()).isEqualTo(0.35);
     }
 
     @Test
     public void 매칭개수_일치() {
         // then
-        assertThat(lottoResult.getLottoRankCount(Rank.FIFTH)).isEqualTo(1);
-        assertThat(lottoResult.getLottoRankCount(Rank.FIRST)).isEqualTo(0);
+        assertThat(rankCount.getNumberOfRankCount(Rank.FIFTH)).isEqualTo(1);
+        assertThat(rankCount.getNumberOfRankCount(Rank.FIRST)).isEqualTo(0);
     }
 }
