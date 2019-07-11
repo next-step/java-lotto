@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.net.InterfaceAddress;
 import java.util.*;
 
 public enum LottoUtil {
@@ -39,7 +40,7 @@ public enum LottoUtil {
 
         int[] WinningNumber = new int[ONE_UNIT_OF_LOTTO];
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; ++i) {
-            WinningNumber[i] = Integer.parseInt(result[i]) ;
+            WinningNumber[i] = Integer.parseInt(result[i]);
         }
         return WinningNumber;
     }
@@ -53,9 +54,31 @@ public enum LottoUtil {
 
         ArrayList<Integer> WinningNumber = new ArrayList<>();
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; ++i) {
-            WinningNumber.add(Integer.parseInt(result[i])) ;
+            WinningNumber.add(Integer.parseInt(result[i]));
         }
         return WinningNumber;
+    }
+
+    public static void checkLottoNumber(List<Integer> input) {
+        for (int value : input) {
+            checkIfLottoNumberOutOfBound(value);
+        }
+        checkDuplicate(input);
+    }
+
+    private static void checkIfLottoNumberOutOfBound(int value) {
+        if (value <= 0 || value > 45) {
+            throw new IllegalArgumentException("입력한 로또 숫자가 잘못되었습니다. 프로그램을 종료합니다.");
+        }
+    }
+
+    private static void checkDuplicate(List<Integer> input) {
+        System.out.println(input);
+        Set<Integer> result = new HashSet<>(input);
+        if (result.size() != 6) {
+            throw new IllegalArgumentException("입력한 로또 값에 중복이 있습니다. 프로그램을 종료합니다");
+        }
+
     }
 
     private static boolean checkInputElement(String[] input) {

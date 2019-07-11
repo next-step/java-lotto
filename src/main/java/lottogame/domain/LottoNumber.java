@@ -8,12 +8,14 @@ public class LottoNumber {
     private final static int ONE_UNIT_OF_LOTTO = 6;
     private final static int EXIST_BONUS_BALL = 1;
 
+
     private ArrayList<Integer> lottoElement = new ArrayList<>();
 
     // 생성자를 호출하면 lottoElement에 로또번호를 생성하여 추가
     public LottoNumber(List<Integer> input) {
         IntStream.range(0, ONE_UNIT_OF_LOTTO)
                 .forEach(i -> lottoElement.add(input.get(i)));
+        LottoUtil.checkLottoNumber(lottoElement);
     }
 
     public ArrayList<Integer> getElement() {
@@ -26,7 +28,6 @@ public class LottoNumber {
         for (int value : winningLottoNumber) {
             wingingCount = lottoElement.contains(value) ? wingingCount + 1 : wingingCount;
         }
-
         return matchBonusBall(bonusball, wingingCount);
     }
 
