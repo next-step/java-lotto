@@ -10,15 +10,23 @@ public class LottoGame {
     private List<LottoNumber> lotto;
     private int numberOfGame;
 
-    public LottoGame(int inputPrice, int numberOfLottoManual) {
+    public LottoGame(int inputPrice, List<LottoNumber> lottoManual) {
         if (checkPrice(inputPrice)) {
             throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");
         }
-        this.numberOfGame = convertPriceToNumberOfGame(inputPrice) - numberOfLottoManual;
+        this.numberOfGame = convertPriceToNumberOfGame(inputPrice) - lottoManual.size();
         lotto = new ArrayList<>();
+        lotto = getAutoLottoNumber();
+
+        lottoManual.addAll(lotto);
+        lotto = lottoManual;
     }
 
-    public List<LottoNumber> getAutoLottoNumber() {
+    public List<LottoNumber> getLotto() {
+        return lotto;
+    }
+
+    private List<LottoNumber> getAutoLottoNumber() {
         for (int i = 0; i < numberOfGame; i++) {
             lotto.add(new LottoNumber());
             Collections.sort(lotto.get(i).getElement());

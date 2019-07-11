@@ -13,14 +13,13 @@ public class LottoGameMain {
     public static void main(String[] args) {
         int price = InputView.userInput();
         List<LottoNumber> lottoManual = InputView.inputManualLottoNumber();
-        LottoGame lottoGame = new LottoGame(price,lottoManual.size());
-        List<LottoNumber> lottoAuto = lottoGame.getAutoLottoNumber();
-        List<LottoNumber> lottoTotal = ResultView.printLottoNumber(lottoManual,lottoAuto);
+        LottoGame lottoGame = new LottoGame(price,lottoManual);
+        ResultView.printLottoNumber(lottoGame.getLotto(),lottoManual.size());
 
         String winningNumber = InputView.inputPrvLottoNumber();
         int bonusBall = InputView.inputBonusBall();
         LottoResult lottoResult = new LottoResult();
-        lottoResult.getWinningResult(lottoTotal, winningNumber, bonusBall, price);
+        lottoResult.getWinningResult(lottoGame.getLotto(), winningNumber, bonusBall, price);
         ResultView.printResult(lottoResult);
     }
 }

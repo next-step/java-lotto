@@ -1,22 +1,16 @@
 package lottogame.view;
 
-import lottogame.domain.LottoRankData;
-import lottogame.domain.WinnerGroupDTO;
-import lottogame.domain.LottoNumber;
-import lottogame.domain.LottoResult;
+import lottogame.domain.*;
 
 import java.util.List;
 
 public class ResultView {
-    public static List<LottoNumber> printLottoNumber(List<LottoNumber> lottoTotal, List<LottoNumber> lottoAuto) {
-        System.out.println("수동으로 " + lottoTotal.size() + "개, 자동으로 " + lottoAuto.size() + "개를 구매했습니다.");
-        lottoTotal.addAll(lottoAuto);
+    public static void printLottoNumber(List<LottoNumber> lottoTotal, int sizeOfManualLotto) {
+        System.out.println("수동으로 " + sizeOfManualLotto + "개, 자동으로 " + (lottoTotal.size()-sizeOfManualLotto) + "개를 구매했습니다.");
         for (LottoNumber lottoNumber : lottoTotal) {
             System.out.println(lottoNumber.getElement());
         }
         System.out.println("\n");
-
-        return lottoTotal;
     }
 
     public static void printResult(LottoResult gameResult) {

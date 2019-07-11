@@ -14,11 +14,12 @@ public enum LottoRankData implements CountWinnerStrategy {
 
     BONUS_SECOND_WINNER(3_000_0000, 5, () -> getCountWinner(1));
 
+    private final static int BONUS_MATCH = 1;
+
     private int prize, match;
     private static int bonusBallCount;
     static List<Integer> countsOfWinningResultConvertList;
     private CountWinnerStrategy countWinnerStrategy;
-    private final static int BONUS_MATCH = 1;
 
     private LottoRankData(int prize, int match, final CountWinnerStrategy countWinnerStrategy) {
         this.prize = prize;
