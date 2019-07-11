@@ -11,6 +11,8 @@ public class LottoLottery {
     static final int THIRD = 50_000;
     static final int FOURTH = 5_000;
 
+    static final int MAKE_FLOAT = 100;
+
     private Map<Integer, Integer> statisticResult = new HashMap<>();
 
     public List<Integer> lotteryStatics(Set<ArrayList<Integer>> purchasedLottos, int[] winningNumbers) {
@@ -81,7 +83,7 @@ public class LottoLottery {
             removeUnavailableValue(result, i);
         }
         if (!result.isEmpty()) {
-            return (totalWard(result) / spandCash * 100) / 100;
+            return (totalWard(result) / spandCash * MAKE_FLOAT) / MAKE_FLOAT;
         }
         return 0;
     }
