@@ -20,7 +20,7 @@ public enum LottoUtil {
     }
 
     public static void checkNumberOfLotto(int input) {
-        if (input <= ZERO)
+        if (input < ZERO)
             throw new IllegalArgumentException("수량이 잘못입력되었습니다. 다시 실행 후 1이상 숫자를 입력해주세요.");
     }
 

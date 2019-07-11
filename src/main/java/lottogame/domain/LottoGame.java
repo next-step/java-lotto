@@ -17,8 +17,7 @@ public class LottoGame {
         lotto = new ArrayList<>();
         lotto = getAutoLottoNumber();
 
-        lottoManual.addAll(lotto);
-        lotto = lottoManual;
+        mergeList(lottoManual);
     }
 
     public List<LottoNumber> getLotto() {
@@ -44,5 +43,12 @@ public class LottoGame {
         }
         Collections.shuffle(randomNumber);
         return randomNumber;
+    }
+
+    private void mergeList(List<LottoNumber> lottoManual){
+        List<LottoNumber> lottoTotal = new ArrayList<>();
+        lottoTotal.addAll(lottoManual);
+        lottoTotal.addAll(lotto);
+        lotto = lottoTotal;
     }
 }
