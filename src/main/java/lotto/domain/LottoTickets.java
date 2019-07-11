@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
-    static final public String DELEIMITER_STRING = "\n";
-
     private List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -15,25 +14,15 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public LottoResult checkWin(LottoTicket winner) {
-        LottoResult lottoResult = new LottoResult();
+    public LottoResult checkWin(LottoTicket winner, int bonusBall) {
+        List<LottoWin> wins = tickets.stream()
+                .map(ticket -> ticket.checkWin(winner, bonusBall))
+                .collect(Collectors.toList());
 
-        for (LottoTicket ticket : tickets) {
-            lottoResult.add(ticket.correctWith(winner));
-        }
-
-        return lottoResult;
+        return LottoResult.of(wins);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-
-        for (LottoTicket ticket : tickets) {
-            builder.append(ticket.toString());
-            builder.append(DELEIMITER_STRING);
-        }
-
-        return builder.substring(0, builder.length()-DELEIMITER_STRING.length());
+    public List<LottoTicket> getTickets() {
+        return tickets;
     }
 }

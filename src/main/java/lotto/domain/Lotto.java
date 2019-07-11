@@ -2,27 +2,26 @@ package lotto.domain;
 
 import lotto.strategy.LottoNumberStrategy;
 import lotto.strategy.LottoRandomStrategy;
-import lotto.view.LottoIO;
-import lotto.view.ResultView;
 
 import java.util.ArrayList;
 
 public class Lotto {
+    LottoTickets tickets;
     static private int PRICE_LOTTO_TICKET = 1000;
 
-    private LottoIO io;
-
-    public Lotto(LottoIO io) {
-        this.io = io;
+    public Lotto(int price) {
+        int countTicket = price / PRICE_LOTTO_TICKET;
+        tickets = generate(countTicket, new LottoRandomStrategy());
     }
 
-    public void start() {
-        int willBuyTickets = io.getNumOfPurchased() / PRICE_LOTTO_TICKET;
-        LottoTickets tickets = generate(willBuyTickets, new LottoRandomStrategy());
-        ResultView.println(tickets.toString());
+    public LottoTickets generate() {
+        return tickets;
+    }
 
-        LottoTicket winner = new LottoTicket(io.getWinnerNumbers());
-        io.printResult(tickets.checkWin(winner));
+    public LottoResult start(String winnerNumbers, int bonusBall) {
+        LottoTicket winner = LottoTicket.of(winnerNumbers);
+
+        return tickets.checkWin(winner, bonusBall);
     }
 
     public LottoTickets generate(int numOfTickets, LottoNumberStrategy strategy) {

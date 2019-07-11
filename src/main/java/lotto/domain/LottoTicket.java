@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     static private String DELIMITER_NUMBERS = ", ";
@@ -20,17 +18,20 @@ public class LottoTicket {
         this.ticket = numbers;
     }
 
-    public LottoTicket(String lottoNumbers) {
+    public static LottoTicket of(String lottoNumbers) {
         String[] rawNumbers = lottoNumbers.split(DELIMITER_NUMBERS);
+        List<Integer> numbers = Arrays.stream(rawNumbers)
+                .map(number -> Integer.parseInt(number))
+                .collect(Collectors.toList());
 
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for (String number : rawNumbers) {
-            numbers.add(Integer.parseInt(number));
-        }
+        return new LottoTicket(numbers);
+    }
 
-        Collections.sort(numbers);
+    public LottoWin checkWin(LottoTicket winner, int bonusBall) {
+        int numOfCorrect = correctWith(winner);
+        boolean hasBonus = hasBonus(bonusBall);
 
-        this.ticket = numbers;
+        return LottoWin.valueOf(numOfCorrect, hasBonus);
     }
 
     public int correctWith(LottoTicket another) {
@@ -46,8 +47,12 @@ public class LottoTicket {
         return this.ticket.contains(number) ? 1 : 0;
     }
 
-    public List<Integer> getNumbers() {
-        return this.ticket;
+    public boolean hasBonus(int bonusBall) {
+        return this.oneIfHas(bonusBall) == 1;
+    }
+
+    public List<Integer> getTicket() {
+        return ticket;
     }
 
     @Override
@@ -62,21 +67,5 @@ public class LottoTicket {
     public int hashCode() {
 
         return Objects.hash(ticket);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-
-        for (Integer number : ticket) {
-            builder.append(number).append(", ");
-        }
-
-        int max = builder.length();
-        builder.delete(max - DELIMITER_NUMBERS.length(), max);
-        builder.append("]");
-
-        return builder.toString();
     }
 }

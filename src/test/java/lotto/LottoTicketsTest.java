@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,10 +24,5 @@ public class LottoTicketsTest {
     @Test
     void 티켓을_가진다() {
         assertThat(tickets.size()).isEqualTo(2);
-    }
-
-    @Test
-    void to_string() {
-        assertThat(tickets.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n[1, 2, 3, 4, 5, 6]");
     }
 }

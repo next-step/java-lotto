@@ -1,8 +1,10 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoWin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sun.security.krb5.internal.Ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +13,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketTest {
-    private List<Integer> INPUT_SAMPLE_NUMBERS = Arrays.asList(1,2,3,4,5,6);
-    private List<Integer> INPUT_SAMPLE_ANOTHER_NUMBERS = Arrays.asList(3,5,7,9,11,13);
+    private List<Integer> INPUT_SAMPLE_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private List<Integer> INPUT_SAMPLE_ANOTHER_NUMBERS = Arrays.asList(3, 5, 7, 9, 11, 13);
 
     private LottoTicket ticket;
 
@@ -39,13 +41,13 @@ public class LottoTicketTest {
     @Test
     void 문자열형태를_순서대로_숫자열로_바꾼다() {
         String sampleNumbers = "4, 3, 2, 1, 5, 6";
-        LottoTicket compared = new LottoTicket(sampleNumbers);
-
+        LottoTicket compared = LottoTicket.of(sampleNumbers);
         assertThat(compared).isEqualTo(ticket);
     }
 
     @Test
-    void to_string() {
-        assertThat(ticket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    void check_win() {
+        int bonus = 45;
+        assertThat(ticket.checkWin(ticket, bonus)).isEqualTo(LottoWin.FIRST);
     }
 }
