@@ -9,7 +9,7 @@ public class Lotto {
     static final int WINNING_NUMBERS_MIN = 1;
     static final int WINNING_NUMBERS_MAX = 45;
 
-    public List<Integer> generateStandardLotto() {
+    public static List<Integer> generateStandardLotto() {
         List<Integer> standardLotto = new ArrayList<>();
         for (int i = Lotto.WINNING_NUMBERS_MIN; i < Lotto.WINNING_NUMBERS_MAX + 1; i++) {
             standardLotto.add(i);
