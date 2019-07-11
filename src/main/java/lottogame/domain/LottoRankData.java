@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum LottoRankData implements CountWinnerStrategy {
-    FIRST_WINNER(2000000000, 6, () -> getCountWinner(6)),
+    FIRST_WINNER(2_000_000_000, 6, () -> getCountWinner(6)),
 
-    SECOND_WINNER(1500000, 5, () -> getCountWinner(5)),
+    SECOND_WINNER(1_500_000, 5, () -> getCountWinner(5)),
 
-    THIRD_WINNER(50000, 4, () -> getCountWinner(4)),
+    THIRD_WINNER(50_000, 4, () -> getCountWinner(4)),
 
-    FORTH_WINNER(5000, 3, () -> getCountWinner(3)),
+    FORTH_WINNER(5_000, 3, () -> getCountWinner(3)),
 
-    BONUS_SECOND_WINNER(30000000, 5, () -> getCountWinner(1));
+    BONUS_SECOND_WINNER(3_000_0000, 5, () -> getCountWinner(1));
 
     private int prize, match;
     private static int bonusBallCount;
