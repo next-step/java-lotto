@@ -3,8 +3,10 @@ package lottogame.domain;
 public enum LottoUtil {
     REST(","), BLANK(" "), NOTHING("");
 
-    private String value;
     private final static int ONE_UNIT_OF_LOTTO = 6;
+    private final static int ZERO = 0;
+
+    private String value;
 
     private LottoUtil(String input) {
         value = input;
@@ -14,11 +16,15 @@ public enum LottoUtil {
         return value;
     }
 
+    public static Boolean isNumberZEROOrMinus(int input){
+        return input <= ZERO ;
+    }
+
     public static int[] coverStrToArr(String inputWinningNumber) {
         String[] result = removeBlankAndSplit(inputWinningNumber);
 
         if (checkInputElement(result)) {
-            throw new IllegalArgumentException("입력이 잘못되었습니다. 로또 번호를 다시 한번 입력해주세요.");
+            throw new IllegalArgumentException("로또 번호의 입력이 잘못되었습니다. 다시 프로그램을 실행해주세요.");
         }
 
         int[] inputNumber = new int[ONE_UNIT_OF_LOTTO];

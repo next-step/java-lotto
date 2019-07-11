@@ -5,16 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
-    private final static int LOTTO_MINIMUM_PRICE = 1000;
-
     private List<LottoNumber> lotto;
     private int numberOfGame;
 
-    public LottoGame(int inputPrice, List<LottoNumber> lottoManual) {
-        if (checkPrice(inputPrice)) {
-            throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 가격을 다시 한번 입력해주세요.");
-        }
-        this.numberOfGame = convertPriceToNumberOfGame(inputPrice) - lottoManual.size();
+    public LottoGame(LottoPrice inputPrice, List<LottoNumber> lottoManual) {
+        this.numberOfGame = inputPrice.convertPriceToNumberOfGame() - lottoManual.size();
         lotto = new ArrayList<>();
         lotto = getAutoLottoNumber();
 
@@ -32,13 +27,5 @@ public class LottoGame {
             Collections.sort(lotto.get(i).getElement());
         }
         return lotto;
-    }
-
-    private int convertPriceToNumberOfGame(int price) {
-        return price / LOTTO_MINIMUM_PRICE;
-    }
-
-    private boolean checkPrice(int price) {
-        return price < LOTTO_MINIMUM_PRICE;
     }
 }

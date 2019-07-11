@@ -7,7 +7,7 @@ public class LottoResult {
     private LottoRevenue lottoRevenue;
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
-    public void getWinningResult(List<LottoNumber> lottoNumber, String inputWinningNumber, int bonusBall, int purchaseAmount) {
+    public void getWinningResult(List<LottoNumber> lottoNumber, String inputWinningNumber, int bonusBall, LottoPrice purchaseAmount) {
         int[] winningNumber = LottoUtil.coverStrToArr(inputWinningNumber);
         Integer[] countsOfWinningResult = new Integer[lottoNumber.size()];
 
@@ -16,7 +16,7 @@ public class LottoResult {
         }
 
         LottoRankData.setCountsOfWinningResultConvertList(Arrays.asList(countsOfWinningResult));
-        lottoRevenue = new LottoRevenue(calculatorRevenue(LottoRankData.calculatorTotalWinningRevenue(), purchaseAmount));
+        lottoRevenue = new LottoRevenue(calculatorRevenue(LottoRankData.calculatorTotalWinningRevenue(), purchaseAmount.getPrice()));
     }
 
     public LottoRevenue getWinningRevenue() {

@@ -39,6 +39,10 @@ public class InputView {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         int number = scanner.nextInt();
 
+        if(LottoUtil.isNumberZEROOrMinus(number)){
+            throw new IllegalArgumentException("수량이 잘못입력되었습니다. 다시 실행 후 1이상 숫자를 입력해주세요.");
+        }
+
         Scanner inputLotto = new Scanner(System.in);
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<LottoNumber> lottoNumber = new ArrayList<>();
