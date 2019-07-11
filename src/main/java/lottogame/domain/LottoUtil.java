@@ -24,9 +24,10 @@ public enum LottoUtil {
             throw new IllegalArgumentException("수량이 잘못입력되었습니다. 다시 실행 후 1이상 숫자를 입력해주세요.");
     }
 
-    public static void checkBonusball(int input) {
+    public static int checkBonusball(int input) {
         if (input <= ZERO || input > LOTTO_MAXIMUM_NUMBER)
             throw new IllegalArgumentException("보너스볼 번호가 잘못입력되었습니다. 다시 실행 후 올바른 숫자를 입력해주세요.");
+        return input;
     }
 
     public static int[] coverStrToArr(String inputWinningNumber) {

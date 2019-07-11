@@ -30,7 +30,6 @@ public class InputView {
         System.out.println("\n보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         int bonusBall = scanner.nextInt();
-        LottoUtil.checkBonusball(bonusBall);
         return bonusBall;
     }
 

@@ -8,10 +8,12 @@ public class LottoGame {
     private final static int MAX_LOTTO_NUMBER = 45;
 
     private List<LottoNumber> lotto;
+    private LottoPrice price;
     private int numberOfGame;
 
-    public LottoGame(LottoPrice inputPrice, List<LottoNumber> lottoManual) {
-        this.numberOfGame = inputPrice.convertPriceToNumberOfGame() - lottoManual.size();
+    public LottoGame(int inputPrice, List<LottoNumber> lottoManual) {
+        price = new LottoPrice(inputPrice);
+        this.numberOfGame = price.convertPriceToNumberOfGame() - lottoManual.size();
         lotto = new ArrayList<>();
         lotto = getAutoLottoNumber();
 
@@ -21,6 +23,10 @@ public class LottoGame {
 
     public List<LottoNumber> getLotto() {
         return lotto;
+    }
+
+    public LottoPrice getPrice() {
+        return price;
     }
 
     private List<LottoNumber> getAutoLottoNumber() {

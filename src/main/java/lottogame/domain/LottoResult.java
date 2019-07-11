@@ -2,22 +2,17 @@ package lottogame.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 
 public class LottoResult {
     private LottoRevenue lottoRevenue;
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
-    public void getWinningResult(List<LottoNumber> lottoNumber, String inputWinningNumber, int bonusBall, LottoPrice purchaseAmount) {
-        int[] winningNumber = LottoUtil.coverStrToArr(inputWinningNumber);
-        Integer[] countsOfWinningResult = new Integer[lottoNumber.size()];
-
-        for (int i = 0; i < lottoNumber.size(); i++) {
-            countsOfWinningResult[i] = lottoNumber.get(i).compareWinningNumber(winningNumber, bonusBall);
-        }
+    public void getWinningResult(LottoGame lottoGame, WinningLottoNumber winningLottoNumber) {
+        Integer[] countsOfWinningResult = lottoGame.getLotto().stream()
+                .map(lottoNumber -> lottoNumber.compareWinningNumber(winningLottoNumber.getWinningNumber(), winningLottoNumber.bonusBall)).toArray(Integer[]::new);
 
         LottoRankData.setCountsOfWinningResultConvertList(Arrays.asList(countsOfWinningResult));
-        lottoRevenue = new LottoRevenue(calculatorRevenue(LottoRankData.calculatorTotalWinningRevenue(), purchaseAmount.getPrice()));
+        lottoRevenue = new LottoRevenue(calculatorRevenue(LottoRankData.calculatorTotalWinningRevenue(), lottoGame.getPrice().getPrice()));
     }
 
     public LottoRevenue getWinningRevenue() {
