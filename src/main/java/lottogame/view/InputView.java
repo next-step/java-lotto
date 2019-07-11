@@ -42,7 +42,7 @@ public class InputView {
         LottoUtil.checkNumberOfLotto(number);
 
         if (number == 0) {
-            return new ArrayList<LottoNumber>();
+            return new ArrayList<>();
         }
 
         Scanner inputLotto = new Scanner(System.in);

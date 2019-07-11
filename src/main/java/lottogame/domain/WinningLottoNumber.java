@@ -13,9 +13,4 @@ public class WinningLottoNumber {
     int[] getWinningNumber() {
         return winningNumber;
     }
-
-    int getBonusBall(){
-        return bonusBall;
-    }
-
 }

@@ -1,10 +1,9 @@
 package lottogame.domain;
 
-import java.net.InterfaceAddress;
 import java.util.*;
 
 public enum LottoUtil {
-    REST(","), BLANK(" "), NOTHING("");
+    BLANK(" "), NOTHING(""), REST(",");
 
     private final static int ONE_UNIT_OF_LOTTO = 6;
     private final static int ZERO = 0;
@@ -12,7 +11,7 @@ public enum LottoUtil {
 
     private String value;
 
-    private LottoUtil(String input) {
+    LottoUtil(String input) {
         value = input;
     }
 
@@ -73,7 +72,6 @@ public enum LottoUtil {
     }
 
     private static void checkDuplicate(List<Integer> input) {
-        System.out.println(input);
         Set<Integer> result = new HashSet<>(input);
         if (result.size() != 6) {
             throw new IllegalArgumentException("입력한 로또 값에 중복이 있습니다. 프로그램을 종료합니다");

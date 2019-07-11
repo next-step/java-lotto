@@ -1,11 +1,11 @@
 package lottogame.domain;
 
-public class LottoPrice {
+class LottoPrice {
     private final static int ONE_LOTTO_PRICE = 1000;
 
-    final int price;
+    final private int price;
 
-    public LottoPrice(int price) {
+    LottoPrice(int price) {
         if (price < ONE_LOTTO_PRICE) {
             throw new IllegalArgumentException("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 다시 프로그램을 실행 후 올바른 가격을 입력해주세요.");
         }
@@ -13,7 +13,7 @@ public class LottoPrice {
         this.price = price;
     }
 
-   int getPrice() {
+    int getPrice() {
         return price;
     }
 
