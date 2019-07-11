@@ -3,6 +3,7 @@ package step2;
 import java.util.*;
 
 import static step2.InputView.*;
+import static step2.Lotto.generateStandardLotto;
 
 public class LottoApplication {
 
@@ -15,7 +16,7 @@ public class LottoApplication {
         int lottoCount = inputCash();
         resultView.countLottoResult(lottoCount);
 
-        List<Integer> standardLotto = lotto.generateStandardLotto();
+        List<Integer> standardLotto = generateStandardLotto();
         Set<ArrayList<Integer>> purchasedLottos = lotto.purchasedLottos(standardLotto, lottoCount);
         resultView.printPurchasedLottos(purchasedLottos);
 
