@@ -1,4 +1,4 @@
-package domain;
+package lottogame.domain;
 
 public enum LottoUtil {
     REST(","), BLANK(" "), NOTHING("");

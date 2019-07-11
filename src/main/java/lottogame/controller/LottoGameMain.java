@@ -1,8 +1,10 @@
-package controller;
+package lottogame.controller;
 
-import domain.*;
-import view.InputView;
-import view.ResultView;
+import lottogame.view.InputView;
+import lottogame.domain.LottoGame;
+import lottogame.domain.LottoNumber;
+import lottogame.domain.LottoResult;
+import lottogame.view.ResultView;
 
 import java.util.List;
 

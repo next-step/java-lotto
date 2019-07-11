@@ -1,7 +1,7 @@
-package view;
+package lottogame.view;
 
-import domain.LottoNumber;
-import domain.LottoUtil;
+import lottogame.domain.LottoNumber;
+import lottogame.domain.LottoUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package domain;
+package lottogame.domain;
 
 public class WinnerGroupDTO {
     private int matchNum;

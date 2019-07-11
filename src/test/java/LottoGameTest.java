@@ -1,5 +1,4 @@
-import domain.*;
-import org.junit.jupiter.api.BeforeEach;
+import lottogame.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

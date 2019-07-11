@@ -1,9 +1,9 @@
-package view;
+package lottogame.view;
 
-import domain.LottoNumber;
-import domain.LottoResult;
-import domain.LottoRankData;
-import domain.WinnerGroupDTO;
+import lottogame.domain.LottoRankData;
+import lottogame.domain.WinnerGroupDTO;
+import lottogame.domain.LottoNumber;
+import lottogame.domain.LottoResult;
 
 import java.util.List;
 

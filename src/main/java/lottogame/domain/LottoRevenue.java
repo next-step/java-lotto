@@ -1,4 +1,4 @@
-package domain;
+package lottogame.domain;
 
 public class LottoRevenue {
     private final static int SUB_POINT_ONE = 1;

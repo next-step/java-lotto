@@ -1,6 +1,4 @@
-package domain;
-
-import java.util.List;
+package lottogame.domain;
 
 @FunctionalInterface
 public interface CountWinnerStrategy {
