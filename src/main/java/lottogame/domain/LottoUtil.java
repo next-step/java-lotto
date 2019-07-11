@@ -1,5 +1,7 @@
 package lottogame.domain;
 
+import java.util.*;
+
 public enum LottoUtil {
     REST(","), BLANK(" "), NOTHING("");
 
@@ -34,11 +36,25 @@ public enum LottoUtil {
             throw new IllegalArgumentException("로또 번호의 입력이 잘못되었습니다. 다시 프로그램을 실행해주세요.");
         }
 
-        int[] inputNumber = new int[ONE_UNIT_OF_LOTTO];
+        int[] WinningNumber = new int[ONE_UNIT_OF_LOTTO];
         for (int i = 0; i < ONE_UNIT_OF_LOTTO; ++i) {
-            inputNumber[i] = Integer.parseInt(result[i]);
+            WinningNumber[i] = Integer.parseInt(result[i]) ;
         }
-        return inputNumber;
+        return WinningNumber;
+    }
+
+    public static ArrayList<Integer> coverStrToArrList(String inputWinningNumber) {
+        String[] result = removeBlankAndSplit(inputWinningNumber);
+
+        if (checkInputElement(result)) {
+            throw new IllegalArgumentException("로또 번호의 입력이 잘못되었습니다. 다시 프로그램을 실행해주세요.");
+        }
+
+        ArrayList<Integer> WinningNumber = new ArrayList<>();
+        for (int i = 0; i < ONE_UNIT_OF_LOTTO; ++i) {
+            WinningNumber.add(Integer.parseInt(result[i])) ;
+        }
+        return WinningNumber;
     }
 
     private static boolean checkInputElement(String[] input) {

@@ -2,6 +2,8 @@ package lottogame.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     private final static int MAX_LOTTO_NUMBER = 45;
@@ -11,18 +13,9 @@ public class LottoNumber {
     private ArrayList<Integer> lottoElement = new ArrayList<>();
 
     // 생성자를 호출하면 lottoElement에 로또번호를 생성하여 추가
-    LottoNumber() {
-        ArrayList<Integer> randomNumber = getRandomNumber();
-
-        for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
-            lottoElement.add(randomNumber.get(i));
-        }
-    }
-
-    public LottoNumber(int[] input){
-        for (int i = 0; i < ONE_UNIT_OF_LOTTO; i++) {
-            lottoElement.add(input[i]);
-        }
+    public LottoNumber(List<Integer> input) {
+        IntStream.range(0, ONE_UNIT_OF_LOTTO)
+                .forEach(i -> lottoElement.add(input.get(i)));
     }
 
     public ArrayList<Integer> getElement() {

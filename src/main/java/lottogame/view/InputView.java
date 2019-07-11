@@ -46,10 +46,10 @@ public class InputView {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<LottoNumber> lottoNumber = new ArrayList<>();
         String input;
-        int[] lotto;
+        List<Integer> lotto;
         for (int i = 0; i < number; i++) {
             input = inputLotto.nextLine();
-            lotto = LottoUtil.coverStrToArr(input);
+            lotto = LottoUtil.coverStrToArrList(input);
             lottoNumber.add(new LottoNumber(lotto));
         }
         return lottoNumber;
