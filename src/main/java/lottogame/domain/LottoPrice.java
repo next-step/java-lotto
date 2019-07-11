@@ -3,7 +3,7 @@ package lottogame.domain;
 public class LottoPrice {
     private final static int ONE_LOTTO_PRICE = 1000;
 
-    int price;
+    final int price;
 
     public LottoPrice(int price) {
         if (price < ONE_LOTTO_PRICE) {

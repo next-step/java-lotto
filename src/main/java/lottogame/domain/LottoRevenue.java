@@ -1,22 +1,26 @@
 package lottogame.domain;
 
-public class LottoRevenue {
-    private double revenue;
+import java.math.BigDecimal;
 
-    LottoRevenue(double revenue) {
+public class LottoRevenue {
+    private final static BigDecimal PROFIT_RANGE = new BigDecimal(1.00);
+
+    final private BigDecimal revenue;
+
+    LottoRevenue(BigDecimal revenue) {
         this.revenue = revenue;
 
     }
 
     public String judgeResult() {
-        if (this.revenue > 1)
+        if (this.revenue.compareTo(PROFIT_RANGE) > 0)
             return "이익";
-        if (this.revenue == 1)
+        if (this.revenue.equals(PROFIT_RANGE))
             return "본전";
         return "손해";
     }
 
-    public double getRevenue() {
+    public BigDecimal getRevenue() {
         return revenue;
     }
 }

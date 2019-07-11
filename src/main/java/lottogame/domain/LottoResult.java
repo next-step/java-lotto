@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class LottoResult {
         return lottoRevenue;
     }
 
-    private double calculatorRevenue(double total, int lottoPrice) {
-        return total / lottoPrice;
+    private BigDecimal calculatorRevenue(double total, int lottoPrice) {
+        return new BigDecimal(total / lottoPrice);
     }
 }
