@@ -126,3 +126,28 @@
  - 실패하는 테스트를 구현한다.
  - 테스트가 성공하도록 프로덕션 코드를 구현한다.
  - 프로덕션 코드와 테스트 코드를 리팩토링한다.
+----
+### 1차 피드백 ###
+ * src/main/java/step2/InputView.java
+   -  ~~InputView 등 상태가 없는 클래스의 경우 static으로 사용(인스턴스를 생성 지양)~~
+ * src/main/java/step2/LottoLottery.java
+   -  매직넘버로 구현된 곳을 상수로 분리 (예: line 84)
+   -  다른 곳에도 있으면, 분리가능하면 분리한다.
+   -  단위테스트 만들기
+   -  상금 타입을 Enum 으로 관리하기
+   -  예) static final int FIRST = 2_000_000_000;
+   -  ndent(인덴트, 들여쓰기) depth를 2를 넘지 않도록 구현한다.
+   -  힌트: depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
+   -  stream 응용하기
+````
+return Arrays.stream(winningNumbers)
+                         .filter(winningNumber -> purchasedLotto.contains(winningNumber))
+                         .count();
+````
+ * src/main/java/step2/Lotto.java
+   - Lotto의 클래스 내부에 존재하는 메서드는 모두 List (로또번호들) 와 관련된 일을 수행
+   - Lotto의 멤버변수로 List를 두어 구현
+   - 그렇게 된다면 로또 번호와 관련된 메서드들을 모을 수 있음
+   - 리턴타입으로 클래스가 아니라 인터페이스를 사용 Set<ArrayList<Integer>>
+ * src/main/java/step2/LottoValidationCheck.java
+   - Lotto 도메인이 생긴다면 유효성 검증로직은 해당 도메인으로 이동
