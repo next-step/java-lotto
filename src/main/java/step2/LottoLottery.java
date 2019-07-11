@@ -6,10 +6,10 @@ import java.util.*;
 
 public class LottoLottery {
 
-    static final int FIRST = 2000000000;
-    static final int SECOND = 1500000;
-    static final int THIRD = 50000;
-    static final int FOURTH = 5000;
+    static final int FIRST = 2_000_000_000;
+    static final int SECOND = 1_500_000;
+    static final int THIRD = 50_000;
+    static final int FOURTH = 5_000;
 
     private Map<Integer, Integer> statisticResult = new HashMap<>();
 
