@@ -60,8 +60,9 @@ public enum LottoRankData implements CountWinnerStrategy {
     }
 
     private static long getCountWinner(int match) {
-        if (match == BONUS_MATCH)
+        if (match == BONUS_MATCH) {
             return bonusBallCount;
+        }
         return countsOfWinningResultConvertList.stream().filter(x -> x.equals(match)).count();
     }
 
