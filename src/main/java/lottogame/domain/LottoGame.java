@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
-    private final static int SUBSTR_RANGE = 3;
-    private final static int MINIMUM_PRICE = 1000;
+    private final static int LOTTO_MINIMUM_PRICE = 1000;
 
     private List<LottoNumber> lotto;
     private int numberOfGame;
@@ -28,11 +27,10 @@ public class LottoGame {
     }
 
     private int convertPriceToNumberOfGame(int price) {
-        String priceString = String.valueOf(price);
-        return Integer.parseInt(priceString.substring(0, priceString.length() - SUBSTR_RANGE));
+        return price / LOTTO_MINIMUM_PRICE;
     }
 
     private boolean checkPrice(int price) {
-        return price < MINIMUM_PRICE;
+        return price < LOTTO_MINIMUM_PRICE;
     }
 }
