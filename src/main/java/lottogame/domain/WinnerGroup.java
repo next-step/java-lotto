@@ -12,7 +12,7 @@ public class WinnerGroup {
 
     public LottoRankData getRankData() { return rankData; }
 
-    private int getCount() {
+    public int getCount() {
         return count;
     }
 

@@ -15,16 +15,16 @@ public class LottoRevenue {
 
     }
 
-    public String judgeResult() {
+    public BigDecimal getRevenue() {
+        return revenue;
+    }
+
+    private String judgeResult() {
         if (this.revenue.compareTo(PROFIT_RANGE) > 0)
             return "이익";
         if (this.revenue.equals(PROFIT_RANGE))
             return "본전";
         return "손해";
-    }
-
-    private BigDecimal getRevenue() {
-        return revenue;
     }
 
     @Override

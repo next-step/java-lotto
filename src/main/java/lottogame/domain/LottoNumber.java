@@ -28,4 +28,21 @@ public class LottoNumber {
         }
         return new WinnerGroup(LottoRankData.match(wingingCount, lottoElement.contains(bonusball)), WINNER_EXIST);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        LottoNumber other = (LottoNumber) obj;
+        if (lottoElement == null) {
+            if (other.lottoElement != null)
+                return false;
+        } else if (!lottoElement.equals(other.lottoElement))
+            return false;
+        return true;
+    }
 }
