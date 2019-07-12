@@ -58,6 +58,4 @@ class LottoGameTest {
         assertThat(lottoGame.getLotto().get(FIRST_ELEMENT_INDEX).getElement().equals(lottoManual.get(FIRST_ELEMENT_INDEX).getElement())).isTrue();
         assertThat(lottoGame.getLotto().get(SECOND_ELEMENT_INDEX).getElement().equals(lottoManual.get(SECOND_ELEMENT_INDEX).getElement())).isTrue();
     }
-
-
 }

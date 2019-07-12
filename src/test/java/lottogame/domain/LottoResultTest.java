@@ -22,7 +22,7 @@ class LottoResultTest {
     private int price = 3000;
 
     @BeforeEach
-    void settup() {
+    void setup() {
         winningLottoNumber = new WinningLottoNumber("1, 2, 3, 4, 5, 6", 7);
         lottoManual = new ArrayList<>();
         lottoResult = new LottoResult();
@@ -117,5 +117,4 @@ class LottoResultTest {
 
         assertThat(form.format(lottoResult.getWinningRevenue().getRevenue())).isEqualTo(form.format(new BigDecimal(LottoRankData.THIRD_WINNER.getPrize() / lottoPrice)));
     }
-
 }

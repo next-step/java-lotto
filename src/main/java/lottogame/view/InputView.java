@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-
     public static int userInput() {
         Scanner scanner = new Scanner(System.in);
 
