@@ -41,6 +41,12 @@ class LottoNumberTest {
                 });
     }
 
-
+    @Test
+    void inputMinus_check() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> {
+                    lotto = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, -7));
+                });
+    }
 
 }

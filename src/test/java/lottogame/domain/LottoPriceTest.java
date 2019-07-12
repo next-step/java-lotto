@@ -17,7 +17,7 @@ class LottoPriceTest {
     }
 
     @Test
-    void countOflottoGame_check() {
+    void countOfLottoGame_check() {
         price = new LottoPrice(5000);
         assertThat(price.convertPriceToNumberOfGame()).isEqualTo(5);
     }

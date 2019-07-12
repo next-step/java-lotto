@@ -6,6 +6,8 @@ import java.util.List;
 
 public class LottoGame {
     private final static int MAX_LOTTO_NUMBER = 45;
+    private final static int SUBLIST_POINT_FIRST = 0;
+    private final static int SUBLIST_POINT_LAST = 6;
 
     private List<LottoNumber> lotto;
     final private LottoPrice price;
@@ -40,13 +42,13 @@ public class LottoGame {
         return lotto;
     }
 
-    private ArrayList<Integer> getRandomNumber() {
+    private List<Integer> getRandomNumber() {
         ArrayList<Integer> randomNumber = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
             randomNumber.add(i);
         }
         Collections.shuffle(randomNumber);
-        return randomNumber;
+        return randomNumber.subList(SUBLIST_POINT_FIRST,SUBLIST_POINT_LAST);
     }
 
     private void mergeList(List<LottoNumber> lottoManual){
