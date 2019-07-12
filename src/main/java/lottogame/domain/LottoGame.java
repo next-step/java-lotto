@@ -8,12 +8,16 @@ public class LottoGame {
     private final static int MAX_LOTTO_NUMBER = 45;
 
     private List<LottoNumber> lotto;
-    private LottoPrice price;
-    private int numberOfGame;
+    final private LottoPrice price;
+    final private int numberOfGame;
 
     public LottoGame(int inputPrice, List<LottoNumber> lottoManual) {
         price = new LottoPrice(inputPrice);
-        this.numberOfGame = price.convertPriceToNumberOfGame() - lottoManual.size();
+        numberOfGame = price.convertPriceToNumberOfGame() - lottoManual.size();
+        if(numberOfGame <0){
+            throw new IllegalArgumentException("수동로또 구매 수량이 구매가격을 초과하였습니다.");
+        }
+
         lotto = new ArrayList<>();
         lotto = getAutoLottoNumber();
 

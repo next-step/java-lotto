@@ -10,6 +10,8 @@ public class LottoNumber {
     private ArrayList<Integer> lottoElement = new ArrayList<>();
 
     public LottoNumber(List<Integer> input) {
+        LottoUtil.checkLottoNumber(input);
+
         IntStream.range(0, ONE_UNIT_OF_LOTTO)
                 .forEach(i -> lottoElement.add(input.get(i)));
         LottoUtil.checkLottoNumber(lottoElement);
