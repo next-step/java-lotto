@@ -18,6 +18,9 @@ public class LottoGeneratorRandom implements LottoGenerator {
 
     public LottoGeneratorRandom(Money money, int manualCount) {
         this();
+        if (money.countOfBuyingLotto() < manualCount) {
+            throw new IllegalArgumentException();
+        }
         this.money = money;
         this.manualCount = manualCount;
     }
