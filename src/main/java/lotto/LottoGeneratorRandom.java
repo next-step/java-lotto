@@ -14,7 +14,7 @@ public class LottoGeneratorRandom implements LottoGenerator {
         }
     }
 
-    private Lotto generateLotto() {
+    private LottoAuto generateLotto() {
         Collections.shuffle(baseNumbers);
         return Lotto.of(baseNumbers.subList(0, LOTTO_NUMBER_MAX_COUNT));
     }

@@ -23,7 +23,7 @@ public class LottoGame {
         return result;
     }
 
-    public List<Lotto> getLottos() {
+    List<Lotto> getLottos() {
         return lottos;
     }
 }

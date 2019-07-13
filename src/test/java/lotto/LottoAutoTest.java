@@ -8,17 +8,17 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoTest {
+public class LottoAutoTest {
     @Test
     void lottoCreateSet() {
-        Lotto lotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getLotto().size()).isEqualTo(6);
+        LottoAuto lottoAuto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        assertThat(lottoAuto.getLotto().size()).isEqualTo(6);
     }
 
     @Test
     void lottoCreateList() {
-        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.getLotto().size()).isEqualTo(6);
+        LottoAuto lottoAuto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoAuto.getLotto().size()).isEqualTo(6);
     }
 
     @Test
@@ -34,19 +34,19 @@ public class LottoTest {
 
     @Test
     void match6() {
-        Lotto lotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
-        int mathchCount = lotto.match(winningLotto);
+        LottoAuto lottoAuto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        LottoAuto winningLotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        int mathchCount = lottoAuto.match(winningLotto);
         assertThat(mathchCount).isEqualTo(6);
     }
 
     @Test
     void contains() {
-        Lotto lotto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
-        boolean result = lotto.contains(LottoNumber.of(1));
+        LottoAuto lottoAuto = Lotto.of(Set.of(1, 2, 3, 4, 5, 6));
+        boolean result = lottoAuto.contains(LottoNumber.of(1));
         assertThat(result).isTrue();
 
-        result = lotto.contains(LottoNumber.of(7));
+        result = lottoAuto.contains(LottoNumber.of(7));
         assertThat(result).isFalse();
     }
 }
