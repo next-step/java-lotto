@@ -2,6 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,4 +28,5 @@ class MoneyTest {
         double profitRate = investMoney.rateOfReturn(prize);
         assertThat(profitRate).isEqualTo(10);
     }
+
 }

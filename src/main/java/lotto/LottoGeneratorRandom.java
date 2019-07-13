@@ -6,23 +6,35 @@ import java.util.List;
 
 public class LottoGeneratorRandom implements LottoGenerator {
     private List<Integer> baseNumbers;
+    private Money money;
+    private int manualCount;
 
-    public LottoGeneratorRandom() {
+    private LottoGeneratorRandom() {
         baseNumbers = new ArrayList<>();
         for (int i = 1; i <= LOTTO_BOUND; i++) {
             baseNumbers.add(i);
         }
     }
 
-    private Lotto generateLotto() {
+    public LottoGeneratorRandom(Money money, int manualCount) {
+        this();
+        if (money.countOfBuyingLotto() < manualCount) {
+            throw new IllegalArgumentException();
+        }
+        this.money = money;
+        this.manualCount = manualCount;
+    }
+
+    private LottoAuto generateLotto() {
         Collections.shuffle(baseNumbers);
-        return Lotto.of(baseNumbers.subList(0, LOTTO_NUMBER_MAX_COUNT));
+        return LottoAuto.of(baseNumbers.subList(0, LOTTO_NUMBER_MAX_COUNT));
     }
 
     @Override
-    public List<Lotto> generate(Money money) {
+    public List<Lotto> generate() {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.countOfBuyingLotto(); i++) {
+        int autoLottoCount = this.money.countOfBuyingLotto() - manualCount;
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(generateLotto());
         }
         return lottos;

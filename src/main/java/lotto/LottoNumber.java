@@ -16,13 +16,13 @@ public class LottoNumber {
     }
 
     private LottoNumber(int lottoNumber) {
-        if (lottoNumber <= 0 || lottoNumber > 45) {
-            throw new IllegalArgumentException();
-        }
         this.lottoNumber = lottoNumber;
     }
 
     static LottoNumber of(int number){
+        if (number <= 0 || number > 45) {
+            throw new IllegalArgumentException();
+        }
         return Optional.of(lottoNos).orElseThrow(IllegalAccessError::new).get(number);
     }
 
