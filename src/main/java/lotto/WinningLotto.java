@@ -1,10 +1,10 @@
 package lotto;
 
 public class WinningLotto {
-    private LottoAuto winLotto;
+    private LottoManual winLotto;
     private LottoNumber bounsNumber;
 
-    public WinningLotto(LottoAuto winLotto, LottoNumber bounsNumber) {
+    public WinningLotto(LottoManual winLotto, LottoNumber bounsNumber) {
         if (winLotto.contains(bounsNumber)){
             throw new IllegalArgumentException();
         }
@@ -12,7 +12,7 @@ public class WinningLotto {
         this.bounsNumber = bounsNumber;
     }
 
-    public LottoAuto getWinLotto() {
+    public LottoManual getWinLotto() {
         return winLotto;
     }
 

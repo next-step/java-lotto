@@ -29,14 +29,4 @@ class MoneyTest {
         assertThat(profitRate).isEqualTo(10);
     }
 
-    @Test
-    public void overMoney() {
-        assertThatIllegalArgumentException().isThrownBy(()-> new Money(1000, 2));
-    }
-
-    @Test
-    public void autoBuyingCountWithManual() {
-        Money money = new Money(10000,3);
-        assertThat(money.countOfBuyingLotto()).isEqualTo(7);
-    }
 }
