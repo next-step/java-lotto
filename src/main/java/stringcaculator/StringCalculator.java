@@ -1,4 +1,4 @@
-import org.assertj.core.util.Strings;
+package stringcaculator;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class StringCalculator {
     private final static String PATTERN = "//(.)\n(.*)";
 
     public static int add(String input) throws Exception {
-        if (Strings.isNullOrEmpty(input))
+        if ("".equals(input))
             return SUM_FAILED;
 
         Matcher m = Pattern.compile(PATTERN).matcher(input);
