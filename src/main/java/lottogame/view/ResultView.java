@@ -1,6 +1,7 @@
 package lottogame.view;
 
 import lottogame.domain.*;
+
 import java.util.List;
 
 public class ResultView {
@@ -27,7 +28,7 @@ public class ResultView {
         System.out.println(printRevenueResult(gameResult) + "라는 의미임.");
     }
 
-        private static String printRevenueResult(LottoResult gameResult) {
-            return gameResult.getWinningRevenue().isRevenueOverProfitRange() ? "이익" : "손해";
-        }
+    private static String printRevenueResult(LottoResult gameResult) {
+        return gameResult.getWinningRevenue().isRevenueOverProfitRange() ? "이익" : "손해";
+    }
 }

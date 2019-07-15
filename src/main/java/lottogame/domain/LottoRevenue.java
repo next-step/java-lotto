@@ -34,7 +34,7 @@ public class LottoRevenue {
 
     public boolean isRevenueOverProfitRange() {
         if (this.revenue.compareTo(PROFIT_RANGE) > 0)
-             return true;
-         return false;
+            return true;
+        return false;
     }
 }
