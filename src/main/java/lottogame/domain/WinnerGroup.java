@@ -29,4 +29,10 @@ public class WinnerGroup {
     public String toString() {
         return getRankData().getMatch() + "개 일치" + "(" + getRankData().getPrize() + ")- " + getCount() + "개 ";
     }
+
+    public boolean isEqualRankData(LottoRankData rankData) {
+        if(this.getRankData().equals(rankData))
+            return true;
+        return false;
+    }
 }

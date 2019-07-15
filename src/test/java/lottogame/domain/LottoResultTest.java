@@ -89,7 +89,7 @@ class LottoResultTest {
     }
 
     @Test
-    void forthdWinner() {
+    void forthWinner() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 10, 8, 9));
         lottoManual.add(dummy);
 
@@ -117,4 +117,6 @@ class LottoResultTest {
 
         assertThat(form.format(lottoResult.getWinningRevenue().getRevenue())).isEqualTo(form.format(new BigDecimal(LottoRankData.THIRD_WINNER.getPrize() / lottoPrice)));
     }
+
+
 }

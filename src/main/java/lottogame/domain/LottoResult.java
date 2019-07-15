@@ -36,8 +36,7 @@ public class LottoResult {
         initializeWinnerGroups();
 
         winnerGroups.forEach(element -> {
-            resultList.stream()
-                    .filter(result -> element.getRankData().equals(result.getRankData()))
+            resultList.stream().filter(result -> element.isEqualRankData(result.getRankData()))
                     .forEach(result -> element.addCount());
         });
     }
