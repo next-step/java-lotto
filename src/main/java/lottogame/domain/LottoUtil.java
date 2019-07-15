@@ -73,7 +73,7 @@ public enum LottoUtil {
 
     private static void checkDuplicate(List<Integer> input) {
         Set<Integer> result = new HashSet<>(input);
-        if (result.size() != 6) {
+        if (result.size() != ONE_UNIT_OF_LOTTO) {
             throw new IllegalArgumentException("입력한 로또 값에 중복이 있습니다. 프로그램을 종료합니다");
         }
 
