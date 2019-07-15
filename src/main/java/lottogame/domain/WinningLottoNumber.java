@@ -17,8 +17,8 @@ public class WinningLottoNumber {
         return winningNumber;
     }
 
-    private void checkDuplicate(){
-        if(Arrays.stream(winningNumber).filter(i -> i == bonusBall).count() !=0){
+    private void checkDuplicate() {
+        if (Arrays.stream(winningNumber).filter(i -> i == bonusBall).count() != 0) {
             throw new IllegalArgumentException("로또번호와 보너스 번호가 중복이 됩니다. 프로그램을 종료합니다.");
         }
     }

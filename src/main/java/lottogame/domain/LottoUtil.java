@@ -78,7 +78,7 @@ public enum LottoUtil {
     }
 
     private static void checkInputElement(String[] input) {
-        if(input.length != ONE_UNIT_OF_LOTTO){
+        if (input.length != ONE_UNIT_OF_LOTTO) {
             throw new IllegalArgumentException("로또 번호의 입력이 잘못되었습니다. 다시 프로그램을 실행해주세요.");
         }
 

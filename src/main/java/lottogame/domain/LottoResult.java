@@ -28,7 +28,7 @@ public class LottoResult {
         lottoRevenue = new LottoRevenue(calculatorRevenue(calculatorTotalWinningRevenue(), lottoGame.getPrice().getPrice()));
     }
 
-    public LottoRankData findWinnerData(){
+    public LottoRankData findWinnerData() {
         return winnerGroups.stream()
                 .filter(winner -> winner.getCount() == EXIST_COUNT)
                 .findAny()
