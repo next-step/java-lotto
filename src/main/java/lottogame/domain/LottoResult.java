@@ -28,10 +28,10 @@ public class LottoResult {
     }
 
     public LottoRankData findWinnerData(){
-        return winnerGroups.stream()
+        return Objects.requireNonNull(winnerGroups.stream()
                 .filter(winner -> winner.getCount() == EXIST_COUNT)
                 .findAny()
-                .orElse(null)
+                .orElse(null))
                 .getRankData();
     }
 

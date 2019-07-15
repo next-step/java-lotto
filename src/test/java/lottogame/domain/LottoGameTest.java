@@ -27,7 +27,7 @@ class LottoGameTest {
     }
 
     @Test
-    void countOFLottoManual_check() {
+    void  수동로또_갯수_확인() {
         for (int i = 0; i < TIME_OF_GAME; ++i) {
             dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
             lottoManual.add(dummy);
@@ -40,7 +40,7 @@ class LottoGameTest {
     }
 
     @Test
-    void countOfLottoAuto_check() {
+    void 자동로또_갯수_확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.add(dummy);
         LottoGame lottoGame = new LottoGame(priceEx2, lottoManual);
@@ -48,7 +48,7 @@ class LottoGameTest {
     }
 
     @Test
-    void isLottoManualExistInstideList() {
+    void 수동로또_정상_생성여부_확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.add(dummy);
         dummy = new LottoNumber(Arrays.asList(23, 45, 30, 10, 9, 15));
