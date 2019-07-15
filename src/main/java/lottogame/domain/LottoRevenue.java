@@ -19,22 +19,14 @@ public class LottoRevenue {
         return revenue;
     }
 
-    private String judgeResult() {
-        if (this.revenue.compareTo(PROFIT_RANGE) > 0)
-            return "이익";
-        if (this.revenue.equals(PROFIT_RANGE))
-            return "본전";
-        return "손해";
-    }
-
-    @Override
-    public String toString() {
-        return "총 수익률은  " + form.format(getRevenue()) + "입니다. (기준이 1이기 때문에 결과적으로 " + judgeResult() + "라는 의미임)";
-    }
-
     public boolean isRevenueOverProfitRange() {
         if (this.revenue.compareTo(PROFIT_RANGE) > 0)
             return true;
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "총 수익률은  " + form.format(getRevenue()) + "입니다. (기준이 1이기 때문에 결과적으로 ";
     }
 }

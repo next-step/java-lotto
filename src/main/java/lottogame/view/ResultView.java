@@ -14,7 +14,7 @@ public class ResultView {
     }
 
     public static void printResult(LottoResult gameResult) {
-        List<WinnerGroup> winnerGroup = gameResult.getWinnerGroup();
+        List<WinnerGroup> winnerGroup = gameResult.getWinnerGroups();
 
         System.out.println("\n");
         System.out.println("당첨 통계");
@@ -25,7 +25,8 @@ public class ResultView {
                 .forEach(winner -> {
                     System.out.println(winner.toString());
                 });
-        System.out.println(printRevenueResult(gameResult) + "라는 의미임.");
+        System.out.print(gameResult.getWinningRevenue());
+        System.out.println(printRevenueResult(gameResult) + "라는 의미임.)");
     }
 
     private static String printRevenueResult(LottoResult gameResult) {

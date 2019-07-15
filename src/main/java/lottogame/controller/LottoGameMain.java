@@ -12,7 +12,7 @@ public class LottoGameMain {
         int price = InputView.userInput();
         List<LottoNumber> lottoManual = InputView.inputManualLottoNumber();
         LottoGame lottoGame = new LottoGame(price, lottoManual);
-        ResultView.printLottoNumber(lottoGame.getLotto(), lottoManual.size());
+        ResultView.printLottoNumber(lottoGame.getLottoPrice(), lottoManual.size());
 
         WinningLottoNumber winningLottoNumber = new WinningLottoNumber(InputView.inputPrvLottoNumber(), InputView.inputBonusBall());
         LottoResult lottoResult = new LottoResult();

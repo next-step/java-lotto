@@ -11,7 +11,7 @@ public class LottoResult {
     public LottoRevenue getWinningRevenue() {
         return lottoRevenue;
     }
-    public List<WinnerGroup> getWinnerGroup() {
+    public List<WinnerGroup> getWinnerGroups() {
         return winnerGroup;
     }
 
@@ -21,19 +21,19 @@ public class LottoResult {
                 .map(lottoNumber -> lottoNumber.compareWinningNumber(winningLottoNumber.getWinningNumber(), winningLottoNumber.bonusBall))
                 .collect(Collectors.toList());
 
-        makeWinnerGroupList(result);
+        makeWinnerGroups(result);
         lottoRevenue = new LottoRevenue(calculatorRevenue(calculatorTotalWinningRevenue(), lottoGame.getPrice().getPrice()));
     }
 
-    private void initializeWinnerGroupList() {
+    private void initializeWinnerGroups() {
         winnerGroup = new ArrayList<>();
         Arrays.stream(LottoRankData.values())
                 .map(value -> new WinnerGroup(value, 0))
                 .forEach(element -> winnerGroup.add(element));
     }
 
-    private void makeWinnerGroupList(List<WinnerGroup> resultList) {
-        initializeWinnerGroupList();
+    private void makeWinnerGroups(List<WinnerGroup> resultList) {
+        initializeWinnerGroups();
 
         winnerGroup.forEach(element -> {
             resultList.stream().filter(result -> element.isEqualRankData(result.getRankData()))
