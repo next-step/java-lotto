@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
     private LottoRevenue lottoRevenue;
-    private List<WinnerGroup> winnerGroup;
+    private List<WinnerGroup> winnerGroups;
 
     public LottoRevenue getWinningRevenue() {
         return lottoRevenue;
     }
 
     public List<WinnerGroup> getWinnerGroups() {
-        return winnerGroup;
+        return winnerGroups;
     }
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
@@ -27,16 +27,16 @@ public class LottoResult {
     }
 
     private void initializeWinnerGroups() {
-        winnerGroup = new ArrayList<>();
+        winnerGroups = new ArrayList<>();
         Arrays.stream(LottoRankData.values())
                 .map(value -> new WinnerGroup(value, 0))
-                .forEach(element -> winnerGroup.add(element));
+                .forEach(element -> winnerGroups.add(element));
     }
 
     private void makeWinnerGroups(List<WinnerGroup> resultList) {
         initializeWinnerGroups();
 
-        winnerGroup.forEach(element -> {
+        winnerGroups.forEach(element -> {
             resultList.stream().filter(result -> element.isEqualRankData(result.getRankData()))
                     .forEach(result -> element.addCount());
         });
@@ -47,6 +47,6 @@ public class LottoResult {
     }
 
     private int calculatorTotalWinningRevenue() {
-        return winnerGroup.stream().mapToInt(WinnerGroup::getRevenue).sum();
+        return winnerGroups.stream().mapToInt(WinnerGroup::getRevenue).sum();
     }
 }
