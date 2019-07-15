@@ -21,12 +21,12 @@ public enum LottoUtil {
 
     public static void checkNumberOfLotto(int input) {
         if (input < ZERO)
-            throw new IllegalArgumentException("수량이 잘못입력되었습니다. 다시 실행 후 1이상 숫자를 입력해주세요.");
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_LOTTO_MANUAL_COUNT.getValue());
     }
 
     public static int checkBonusball(int input) {
         if (input <= ZERO || input > LOTTO_MAXIMUM_NUMBER)
-            throw new IllegalArgumentException("보너스볼 번호가 잘못입력되었습니다. 다시 실행 후 올바른 숫자를 입력해주세요.");
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_BONUS_NUMBER.getValue());
         return input;
     }
 
@@ -54,7 +54,7 @@ public enum LottoUtil {
 
     public static void checkLottoNumber(List<Integer> input) {
         if (isInputCountLowerThanNormal(input)) {
-            throw new IllegalArgumentException("로또 번호의 입력이 잘못되었습니다. 다시 프로그램을 실행해주세요.");
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_LOTTO_NUMBER_COUNT.getValue());
         }
 
         for (int value : input) {
@@ -65,21 +65,21 @@ public enum LottoUtil {
 
     private static void checkIfLottoNumberOutOfBound(int value) {
         if (value <= ZERO || value > LOTTO_MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException("입력한 로또 숫자가 잘못되었습니다. 프로그램을 종료합니다.");
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_LOTTO_NUMBER_INPUT.getValue());
         }
     }
 
     private static void checkDuplicate(List<Integer> input) {
         Set<Integer> result = new HashSet<>(input);
         if (result.size() != ONE_UNIT_OF_LOTTO) {
-            throw new IllegalArgumentException("입력한 로또 값에 중복이 있습니다. 프로그램을 종료합니다");
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_LOTTO_NUMBER_DUPLICATE.getValue());
         }
 
     }
 
     private static void checkInputElement(String[] input) {
         if (input.length != ONE_UNIT_OF_LOTTO) {
-            throw new IllegalArgumentException("로또 번호의 입력이 잘못되었습니다. 다시 프로그램을 실행해주세요.");
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_LOTTO_NUMBER_COUNT.getValue());
         }
 
     }
