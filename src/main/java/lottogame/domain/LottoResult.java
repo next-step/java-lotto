@@ -17,7 +17,7 @@ public class LottoResult {
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
     public void getWinningResult(LottoGame lottoGame, WinningLottoNumber winningLottoNumber) {
-        List<WinnerGroup> result = lottoGame.getLotto().stream()
+        List<WinnerGroup> result = lottoGame.getLottoPrice().stream()
                 .map(lottoNumber -> lottoNumber.compareWinningNumber(winningLottoNumber.getWinningNumber(), winningLottoNumber.bonusBall))
                 .collect(Collectors.toList());
 

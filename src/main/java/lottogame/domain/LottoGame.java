@@ -26,7 +26,7 @@ public class LottoGame {
         mergeList(lottoManual);
     }
 
-    public List<LottoNumber> getLotto() {
+    public List<LottoNumber> getLottoPrice() {
         return lotto;
     }
 
