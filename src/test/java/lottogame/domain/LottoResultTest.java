@@ -12,8 +12,6 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoResultTest {
-    private final static int EXIST_COUNT = 1;
-
     private LottoResult lottoResult;
     private WinningLottoNumber winningLottoNumber;
     private LottoGame lottoGame;
@@ -29,83 +27,58 @@ class LottoResultTest {
     }
 
     @Test
-    void fistWinner() {
+    void firstWinner_당첨확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.add(dummy);
 
         lottoGame = new LottoGame(price, lottoManual);
         lottoResult.getWinningResult(lottoGame, winningLottoNumber);
-//        assertThat(lottoResult.getWinnerGroup().stream()
-//                .filter(winner -> winner.getCount() == EXIST_COUNT)
-//                .findAny()
-//                .orElse(null)
-//                .getRankData())
-//                .isEqualTo(LottoRankData.FIRST_WINNER);
+        assertThat(lottoResult.findWinnerData()).isEqualTo(LottoRankData.FIRST_WINNER);
 
     }
 
     @Test
-    void secondWinner() {
+    void secondWinner_당첨확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 8));
         lottoManual.add(dummy);
 
         lottoGame = new LottoGame(price, lottoManual);
         lottoResult.getWinningResult(lottoGame, winningLottoNumber);
-        assertThat(lottoResult.getWinnerGroup().stream()
-                .filter(winner -> winner.getCount() == EXIST_COUNT)
-                .findAny()
-                .orElse(null)
-                .getRankData())
-                .isEqualTo(LottoRankData.SECOND_WINNER);
+        assertThat(lottoResult.findWinnerData()).isEqualTo(LottoRankData.SECOND_WINNER);
     }
 
     @Test
-    void bonusSecondWinner() {
+    void bonusSecondWinner_당첨확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 7));
         lottoManual.add(dummy);
 
         lottoGame = new LottoGame(price, lottoManual);
         lottoResult.getWinningResult(lottoGame, winningLottoNumber);
-        assertThat(lottoResult.getWinnerGroup().stream()
-                .filter(winner -> winner.getCount() == EXIST_COUNT)
-                .findAny()
-                .orElse(null)
-                .getRankData())
-                .isEqualTo(LottoRankData.BONUS_SECOND_WINNER);
+        assertThat(lottoResult.findWinnerData()).isEqualTo(LottoRankData.BONUS_SECOND_WINNER);
     }
 
     @Test
-    void thirdWinner() {
+    void thirdWinner_당첨확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 8, 9));
         lottoManual.add(dummy);
 
         lottoGame = new LottoGame(price, lottoManual);
         lottoResult.getWinningResult(lottoGame, winningLottoNumber);
-        assertThat(lottoResult.getWinnerGroup().stream()
-                .filter(winner -> winner.getCount() == EXIST_COUNT)
-                .findAny()
-                .orElse(null)
-                .getRankData())
-                .isEqualTo(LottoRankData.THIRD_WINNER);
+        assertThat(lottoResult.findWinnerData()).isEqualTo(LottoRankData.THIRD_WINNER);
     }
 
     @Test
-    void forthWinner() {
+    void forthWinner_당첨확인() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 10, 8, 9));
         lottoManual.add(dummy);
 
         lottoGame = new LottoGame(price, lottoManual);
         lottoResult.getWinningResult(lottoGame, winningLottoNumber);
-        assertThat(lottoResult.getWinnerGroup().stream()
-                .filter(winner -> winner.getCount() == EXIST_COUNT)
-                .findAny()
-                .orElse(null)
-                .getRankData())
-                .isEqualTo(LottoRankData.FORTH_WINNER);
+        assertThat(lottoResult.findWinnerData()).isEqualTo(LottoRankData.FORTH_WINNER);
     }
 
     @Test
-    void winningRevenueForThirdWinner() {
+    void 수익률_계산() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 8, 9));
         lottoManual.add(dummy);
 
@@ -116,7 +89,8 @@ class LottoResultTest {
         DecimalFormat form = new DecimalFormat("#.##");
         System.out.println(lottoResult.getWinningRevenue().getRevenue());
 
-        assertThat(form.format(lottoResult.getWinningRevenue().getRevenue())).isEqualTo(form.format(new BigDecimal(LottoRankData.THIRD_WINNER.getPrize() / lottoPrice)));
+        assertThat(form.format(lottoResult.getWinningRevenue().getRevenue()))
+                .isEqualTo(form.format(new BigDecimal(LottoRankData.THIRD_WINNER.getPrize() / lottoPrice)));
     }
 
 
