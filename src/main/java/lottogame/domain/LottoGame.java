@@ -17,7 +17,7 @@ public class LottoGame {
         price = new LottoPrice(inputPrice);
         numberOfGame = price.convertPriceToNumberOfGame() - lottoManual.size();
         if (numberOfGame < 0) {
-            throw new IllegalArgumentException("수동로또 구매 수량이 구매가격을 초과하였습니다.");
+            throw new IllegalArgumentException("수동로또 구매 수량이 구매가격을 초과하였습니다. 다시 프로그램을 실행해주세요");
         }
 
         lotto = new ArrayList<>();
