@@ -88,6 +88,7 @@ class LottoResultTest {
         DecimalFormat form = new DecimalFormat("#.##");
         System.out.println(lottoResult.getWinningRevenue().getRevenue());
 
-        assertThat(form.format(lottoResult.getWinningRevenue().getRevenue())).isEqualTo(form.format(new BigDecimal(LottoRankData.THIRD_WINNER.getPrize() / lottoPrice)));
+        assertThat(form.format(lottoResult.getWinningRevenue().getRevenue()))
+                .isEqualTo(form.format(new BigDecimal(LottoRankData.THIRD_WINNER.getPrize() / lottoPrice)));
     }
 }
