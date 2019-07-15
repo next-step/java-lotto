@@ -8,7 +8,7 @@ public enum LottoUtilStrData {
     WARNING_STR_LOTTO_NUMBER_INPUT("입력한 로또 숫자가 잘못되었습니다. 프로그램을 종료합니다."),
     WARNING_STR_LOTTO_NUMBER_DUPLICATE("입력한 로또 값에 중복이 있습니다. 프로그램을 종료합니다"),
     WARNING_STR_LOTTO_PRICE_LOWER_THN_MINIMUM("최소 금액 1000원 보다 작은 금액이 입력되었습니다. 다시 프로그램을 실행 후 올바른 가격을 입력해주세요."),
-    WARNING_STR_WINNINGNUMBER_BONUS_DUPLICATE("로또번호와 보너스 번호가 중복이 됩니다. 프로그램을 종료합니다.");
+    WARNING_STR_WINNING_NUMBER_BONUS_DUPLICATE("로또번호와 보너스 번호가 중복이 됩니다. 프로그램을 종료합니다.");
 
     private String value;
 

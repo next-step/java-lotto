@@ -19,7 +19,7 @@ public class WinningLottoNumber {
 
     private void checkDuplicate() {
         if (Arrays.stream(winningNumber).filter(i -> i == bonusBall).count() != 0) {
-            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_WINNINGNUMBER_BONUS_DUPLICATE.getValue());
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_WINNING_NUMBER_BONUS_DUPLICATE.getValue());
         }
     }
 }
