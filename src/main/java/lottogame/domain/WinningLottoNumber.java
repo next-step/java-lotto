@@ -8,7 +8,7 @@ public class WinningLottoNumber {
     final int bonusBall;
 
     public WinningLottoNumber(String inputWinningNumber, int bonusBall) {
-        this.winningNumber = LottoUtil.coverStrToArr(inputWinningNumber);
+        this.winningNumber = LottoUtil.covertStrToArr(inputWinningNumber);
         this.bonusBall = LottoUtil.checkBonusball(bonusBall);
         checkDuplicate();
     }
