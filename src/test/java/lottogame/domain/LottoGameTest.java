@@ -36,7 +36,7 @@ class LottoGameTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
                     lottoGame = new LottoGame(priceEx1, lottoManual);
-                });
+                }).withMessage("수동로또 구매 수량이 구매가격을 초과하였습니다.");
     }
 
     @Test
