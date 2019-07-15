@@ -10,7 +10,9 @@ public class WinnerGroup {
         this.count = count;
     }
 
-    public LottoRankData getRankData() { return rankData; }
+    public LottoRankData getRankData() {
+        return rankData;
+    }
 
     public int getCount() {
         return count;
@@ -21,7 +23,7 @@ public class WinnerGroup {
     }
 
     public boolean isEqualRankData(LottoRankData rankData) {
-        if(this.getRankData().equals(rankData))
+        if (this.getRankData().equals(rankData))
             return true;
         return false;
     }

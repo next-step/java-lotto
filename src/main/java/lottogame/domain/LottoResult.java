@@ -11,6 +11,7 @@ public class LottoResult {
     public LottoRevenue getWinningRevenue() {
         return lottoRevenue;
     }
+
     public List<WinnerGroup> getWinnerGroups() {
         return winnerGroup;
     }
