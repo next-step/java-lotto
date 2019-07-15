@@ -16,13 +16,11 @@ class LottoGameTest {
     private LottoGame lottoGame;
     private int priceEx1 = 2000;
     private int priceEx2 = 5000;
-    private LottoPrice lottoPrice;
     private List<LottoNumber> lottoManual;
-    LottoNumber dummy;
+    private LottoNumber dummy;
 
     @BeforeEach
     void setup() {
-        lottoPrice = new LottoPrice(priceEx2);
         lottoManual = new ArrayList<>();
     }
 
@@ -34,9 +32,8 @@ class LottoGameTest {
         }
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> {
-                    lottoGame = new LottoGame(priceEx1, lottoManual);
-                }).withMessage("수동로또 구매 수량이 구매가격을 초과하였습니다. 다시 프로그램을 실행해주세요");
+                .isThrownBy(() -> lottoGame = new LottoGame(priceEx1, lottoManual))
+                .withMessage("수동로또 구매 수량이 구매가격을 초과하였습니다. 다시 프로그램을 실행해주세요");
     }
 
     @Test
