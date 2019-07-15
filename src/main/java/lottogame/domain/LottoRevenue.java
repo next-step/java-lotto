@@ -12,7 +12,6 @@ public class LottoRevenue {
 
     LottoRevenue(BigDecimal revenue) {
         this.revenue = revenue;
-
     }
 
     public BigDecimal getRevenue() {
