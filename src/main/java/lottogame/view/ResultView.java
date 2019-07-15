@@ -1,6 +1,8 @@
 package lottogame.view;
 
 import lottogame.domain.*;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ResultView {
@@ -24,6 +26,12 @@ public class ResultView {
                 .forEach(winner -> {
                     System.out.println(winner.toString());
                 });
-        System.out.println(gameResult.getWinningRevenue().toString());
+
+        System.out.print(gameResult.getWinningRevenue().toString());
+        System.out.println(printRevenueResult(gameResult)+"라는 의미임.");
+    }
+
+    private static String printRevenueResult(LottoResult gameResult) {
+        return gameResult.getWinningRevenue().isRevenueOverProfitRange() ? "이익" : "손해";
     }
 }
