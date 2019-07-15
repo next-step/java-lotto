@@ -44,7 +44,7 @@ class LottoGameTest {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.add(dummy);
         LottoGame lottoGame = new LottoGame(priceEx2, lottoManual);
-        assertThat(lottoGame.getLotto().size() - lottoManual.size()).isEqualTo(4);
+        assertThat(lottoGame.getLottoPrice().size() - lottoManual.size()).isEqualTo(4);
     }
 
     @Test
@@ -55,7 +55,7 @@ class LottoGameTest {
         lottoManual.add(dummy);
 
         LottoGame lottoGame = new LottoGame(priceEx2, lottoManual);
-        assertThat(lottoGame.getLotto().get(FIRST_ELEMENT_INDEX).getElement().equals(lottoManual.get(FIRST_ELEMENT_INDEX).getElement())).isTrue();
-        assertThat(lottoGame.getLotto().get(SECOND_ELEMENT_INDEX).getElement().equals(lottoManual.get(SECOND_ELEMENT_INDEX).getElement())).isTrue();
+        assertThat(lottoGame.getLottoPrice().get(FIRST_ELEMENT_INDEX).getElement().equals(lottoManual.get(FIRST_ELEMENT_INDEX).getElement())).isTrue();
+        assertThat(lottoGame.getLottoPrice().get(SECOND_ELEMENT_INDEX).getElement().equals(lottoManual.get(SECOND_ELEMENT_INDEX).getElement())).isTrue();
     }
 }

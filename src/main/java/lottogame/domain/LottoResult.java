@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
+    private final static int EXIST_COUNT = 1;
+
     private LottoRevenue lottoRevenue;
     private List<WinnerGroup> winnerGroups;
 
@@ -24,6 +26,14 @@ public class LottoResult {
 
         makeWinnerGroups(result);
         lottoRevenue = new LottoRevenue(calculatorRevenue(calculatorTotalWinningRevenue(), lottoGame.getPrice().getPrice()));
+    }
+
+    public LottoRankData findWinnerData(){
+        return winnerGroups.stream()
+                .filter(winner -> winner.getCount() == EXIST_COUNT)
+                .findAny()
+                .orElse(null)
+                .getRankData();
     }
 
     private void initializeWinnerGroups() {
