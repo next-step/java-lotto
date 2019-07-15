@@ -20,6 +20,12 @@ public class WinnerGroup {
         return revenue;
     }
 
+    public boolean isEqualRankData(LottoRankData rankData) {
+        if(this.getRankData().equals(rankData))
+            return true;
+        return false;
+    }
+
     void addCount() {
         count += 1;
         revenue = rankData.getPrize() * count;
