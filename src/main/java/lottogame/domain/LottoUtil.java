@@ -66,7 +66,7 @@ public enum LottoUtil {
     }
 
     private static void checkIfLottoNumberOutOfBound(int value) {
-        if (value <= 0 || value > 45) {
+        if (value <= ZERO || value > LOTTO_MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("입력한 로또 숫자가 잘못되었습니다. 프로그램을 종료합니다.");
         }
     }
