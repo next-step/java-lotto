@@ -2,6 +2,7 @@ package lottogame.view;
 
 import lottogame.domain.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ResultView {
@@ -26,10 +27,13 @@ public class ResultView {
                     System.out.println(winner.toString());
                 });
         System.out.print(gameResult.getWinningRevenue());
-        System.out.println(printRevenueResult(gameResult) + "라는 의미임.)");
+        System.out.println(printRevenueResult(gameResult) + "(이)라는 의미임.)");
     }
 
     private static String printRevenueResult(LottoResult gameResult) {
+        if (gameResult.getWinningRevenue().isEqualWithProfitRange()) {
+            return "본전";
+        }
         return gameResult.getWinningRevenue().isRevenueOverProfitRange() ? "이익" : "손해";
     }
 }
