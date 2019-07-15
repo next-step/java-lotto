@@ -38,17 +38,21 @@ public class LottoResult {
 
     private void initializeWinnerGroups() {
         winnerGroups = new ArrayList<>();
-        Arrays.stream(LottoRankData.values())
-                .map(value -> new WinnerGroup(value, 0))
-                .forEach(element -> winnerGroups.add(element));
+        for (LottoRankData value : LottoRankData.values()) {
+            WinnerGroup element = new WinnerGroup(value, 0);
+            winnerGroups.add(element);
+        }
     }
 
     private void makeWinnerGroups(List<WinnerGroup> resultList) {
         initializeWinnerGroups();
 
         winnerGroups.forEach(element -> {
-            resultList.stream().filter(result -> element.isEqualRankData(result.getRankData()))
-                    .forEach(result -> element.addCount());
+            for (WinnerGroup result : resultList) {
+                if (element.isEqualRankData(result.getRankData())) {
+                    element.addCount();
+                }
+            }
         });
     }
 
