@@ -10,7 +10,7 @@ class WinningLottoNumberTest {
     private String winningNum = "1,2,3,4,5,6";
 
     @Test
-    void WinningNumber_check() {
+    void 당첨번호_유효성_체크() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
                     winningLottoNumber = new WinningLottoNumber("1,2,3,4,5,6,7", bonusNum);
@@ -18,7 +18,7 @@ class WinningLottoNumberTest {
     }
 
     @Test
-    void BonussNumber_check() {
+    void 보너스번호_유효성_체크() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
                     winningLottoNumber = new WinningLottoNumber(winningNum, -7);
@@ -26,7 +26,7 @@ class WinningLottoNumberTest {
     }
 
     @Test
-    void WinningNumberAndbonusDuplicate_check() {
+    void 당첨번호_보너스번호_중복_체크() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> {
                     winningLottoNumber = new WinningLottoNumber(winningNum, bonusNum);
