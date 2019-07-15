@@ -30,7 +30,7 @@ public class LottoGame {
         return lotto;
     }
 
-    LottoPrice getPrice() {
+    LottoPrice getLottoPrice() {
         return price;
     }
 

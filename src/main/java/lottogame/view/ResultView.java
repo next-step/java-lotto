@@ -2,7 +2,6 @@ package lottogame.view;
 
 import lottogame.domain.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ResultView {
@@ -28,7 +27,7 @@ public class ResultView {
                 });
 
         System.out.print(gameResult.getWinningRevenue().toString());
-        System.out.println(printRevenueResult(gameResult)+"라는 의미임.");
+        System.out.println(printRevenueResult(gameResult) + "라는 의미임.");
     }
 
     private static String printRevenueResult(LottoResult gameResult) {

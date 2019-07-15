@@ -22,7 +22,7 @@ public class LottoResult {
                 .collect(Collectors.toList());
 
         makeWinnerGroups(result);
-        lottoRevenue = new LottoRevenue(calculatorRevenue(calculatorTotalWinningRevenue(), lottoGame.getPrice().getPrice()));
+        lottoRevenue = new LottoRevenue(calculatorRevenue(calculatorTotalWinningRevenue(), lottoGame.getLottoPrice().getPrice()));
     }
 
     private void initializeWinnerGroups() {
