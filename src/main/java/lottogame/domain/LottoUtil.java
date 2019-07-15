@@ -66,14 +66,14 @@ public enum LottoUtil {
     }
 
     private static void checkIfLottoNumberOutOfBound(int value) {
-        if (value <= 0 || value > 45) {
+        if (value <= ZERO || value > LOTTO_MAXIMUM_NUMBER) {
             throw new IllegalArgumentException("입력한 로또 숫자가 잘못되었습니다. 프로그램을 종료합니다.");
         }
     }
 
     private static void checkDuplicate(List<Integer> input) {
         Set<Integer> result = new HashSet<>(input);
-        if (result.size() != 6) {
+        if (result.size() != ONE_UNIT_OF_LOTTO) {
             throw new IllegalArgumentException("입력한 로또 값에 중복이 있습니다. 프로그램을 종료합니다");
         }
 
