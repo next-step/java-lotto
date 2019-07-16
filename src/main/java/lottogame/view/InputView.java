@@ -51,7 +51,7 @@ public class InputView {
         List<Integer> lotto;
         for (int i = 0; i < number; i++) {
             input = inputLotto.nextLine();
-            lotto = LottoUtil.coverStrToArrList(input);
+            lotto = LottoUtil.covertStrToArrList(input);
             lottoNumber.add(new LottoNumber(lotto));
         }
         return lottoNumber;

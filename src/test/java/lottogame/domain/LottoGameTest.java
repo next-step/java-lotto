@@ -16,46 +16,43 @@ class LottoGameTest {
     private LottoGame lottoGame;
     private int priceEx1 = 2000;
     private int priceEx2 = 5000;
-    private LottoPrice lottoPrice;
     private List<LottoNumber> lottoManual;
-    LottoNumber dummy;
+    private LottoNumber dummy;
 
     @BeforeEach
     void setup() {
-        lottoPrice = new LottoPrice(priceEx2);
         lottoManual = new ArrayList<>();
     }
 
     @Test
-    void countOFLottoManual_check() {
+    void 로또수동_갯수_유효성_체크() {
         for (int i = 0; i < TIME_OF_GAME; ++i) {
             dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
             lottoManual.add(dummy);
         }
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> {
-                    lottoGame = new LottoGame(priceEx1, lottoManual);
-                });
+                .isThrownBy(() -> lottoGame = new LottoGame(priceEx1, lottoManual))
+                .withMessage("수동로또 구매 수량이 구매가격을 초과하였습니다. 다시 프로그램을 실행해주세요");
     }
 
     @Test
-    void countOfLottoAuto_check() {
+    void 로또자동_갯수_유효성_체크() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.add(dummy);
         LottoGame lottoGame = new LottoGame(priceEx2, lottoManual);
-        assertThat(lottoGame.getLotto().size() - lottoManual.size()).isEqualTo(4);
+        assertThat(lottoGame.getLottoPrice().size() - lottoManual.size()).isEqualTo(4);
     }
 
     @Test
-    void isLottoManualExistInstideList() {
+    void 로또수동_생성여부_체크() {
         dummy = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoManual.add(dummy);
         dummy = new LottoNumber(Arrays.asList(23, 45, 30, 10, 9, 15));
         lottoManual.add(dummy);
 
         LottoGame lottoGame = new LottoGame(priceEx2, lottoManual);
-        assertThat(lottoGame.getLotto().get(FIRST_ELEMENT_INDEX).getElement().equals(lottoManual.get(FIRST_ELEMENT_INDEX).getElement())).isTrue();
-        assertThat(lottoGame.getLotto().get(SECOND_ELEMENT_INDEX).getElement().equals(lottoManual.get(SECOND_ELEMENT_INDEX).getElement())).isTrue();
+        assertThat(lottoGame.getLottoPrice().get(FIRST_ELEMENT_INDEX).getElement().equals(lottoManual.get(FIRST_ELEMENT_INDEX).getElement())).isTrue();
+        assertThat(lottoGame.getLottoPrice().get(SECOND_ELEMENT_INDEX).getElement().equals(lottoManual.get(SECOND_ELEMENT_INDEX).getElement())).isTrue();
     }
 }

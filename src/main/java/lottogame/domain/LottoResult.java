@@ -5,39 +5,51 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
+    private final static int EXIST_COUNT = 1;
+
     private LottoRevenue lottoRevenue;
-    private List<WinnerGroup> winnerGroup;
+    private List<WinnerGroup> winnerGroups;
 
     public LottoRevenue getWinningRevenue() {
         return lottoRevenue;
     }
-    public List<WinnerGroup> getWinnerGroup() {
-        return winnerGroup;
+
+    public List<WinnerGroup> getWinnerGroups() {
+        return winnerGroups;
     }
 
     // 로또 자동 생성 번호와 지난 당첨 번호를 비교하여 당첨 번호 갯수 확인
     public void getWinningResult(LottoGame lottoGame, WinningLottoNumber winningLottoNumber) {
-        List<WinnerGroup> result = lottoGame.getLotto().stream()
+        List<WinnerGroup> result = lottoGame.getLottoPrice().stream()
                 .map(lottoNumber -> lottoNumber.compareWinningNumber(winningLottoNumber.getWinningNumber(), winningLottoNumber.bonusBall))
                 .collect(Collectors.toList());
 
-        makeWinnerGroupList(result);
+        makeWinnerGroups(result);
         lottoRevenue = new LottoRevenue(calculatorRevenue(calculatorTotalWinningRevenue(), lottoGame.getPrice().getPrice()));
     }
 
-    private void initializeWinnerGroupList() {
-        winnerGroup = new ArrayList<>();
-        Arrays.stream(LottoRankData.values())
-                .map(value -> new WinnerGroup(value, 0))
-                .forEach(element -> winnerGroup.add(element));
+    public LottoRankData findWinnerData() {
+        return winnerGroups.stream()
+                .filter(winner -> winner.getCount() == EXIST_COUNT)
+                .findAny()
+                .orElse(null)
+                .getRankData();
     }
 
-    private void makeWinnerGroupList(List<WinnerGroup> resultList) {
-        initializeWinnerGroupList();
+    private void initializeWinnerGroups() {
+        winnerGroups = new ArrayList<>();
+        for (LottoRankData value : LottoRankData.values()) {
+            WinnerGroup element = new WinnerGroup(value, 0);
+            winnerGroups.add(element);
+        }
+    }
 
-        winnerGroup.forEach(element -> {
+    private void makeWinnerGroups(List<WinnerGroup> resultList) {
+        initializeWinnerGroups();
+
+        winnerGroups.forEach(element -> {
             resultList.stream()
-                    .filter(result -> element.getRankData().equals(result.getRankData()))
+                    .filter(result -> element.isEqualRankData(result.getRankData()))
                     .forEach(result -> element.addCount());
         });
     }
@@ -47,6 +59,6 @@ public class LottoResult {
     }
 
     private int calculatorTotalWinningRevenue() {
-        return winnerGroup.stream().mapToInt(WinnerGroup::getRevenue).sum();
+        return winnerGroups.stream().mapToInt(WinnerGroup::getRevenue).sum();
     }
 }

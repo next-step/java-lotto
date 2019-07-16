@@ -16,8 +16,8 @@ public class LottoGame {
     public LottoGame(int inputPrice, List<LottoNumber> lottoManual) {
         price = new LottoPrice(inputPrice);
         numberOfGame = price.convertPriceToNumberOfGame() - lottoManual.size();
-        if(numberOfGame <0){
-            throw new IllegalArgumentException("수동로또 구매 수량이 구매가격을 초과하였습니다.");
+        if (numberOfGame < 0) {
+            throw new IllegalArgumentException(LottoUtilStrData.WARNING_STR_LOTTO_MANUAL_COUNT_OVER_PRICE.getValue());
         }
 
         lotto = new ArrayList<>();
@@ -26,7 +26,7 @@ public class LottoGame {
         mergeList(lottoManual);
     }
 
-    public List<LottoNumber> getLotto() {
+    public List<LottoNumber> getLottoPrice() {
         return lotto;
     }
 
@@ -48,10 +48,10 @@ public class LottoGame {
             randomNumber.add(i);
         }
         Collections.shuffle(randomNumber);
-        return randomNumber.subList(SUBLIST_POINT_FIRST,SUBLIST_POINT_LAST);
+        return randomNumber.subList(SUBLIST_POINT_FIRST, SUBLIST_POINT_LAST);
     }
 
-    private void mergeList(List<LottoNumber> lottoManual){
+    private void mergeList(List<LottoNumber> lottoManual) {
         List<LottoNumber> lottoTotal = new ArrayList<>();
         lottoTotal.addAll(lottoManual);
         lottoTotal.addAll(lotto);
