@@ -46,11 +46,7 @@ public class LottoTicket {
         return this.ticket.contains(number) ? 1 : 0;
     }
 
-    public boolean hasBonus(int bonusBall) {
-        return this.oneIfHas(bonusBall) == 1;
-    }
-
-    public List<Integer> getTicket() {
+    public List<LottoNumber> getTicket() {
         return ticket;
     }
 
