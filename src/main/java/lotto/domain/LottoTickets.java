@@ -18,9 +18,9 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public LottoResult checkWin(LottoTicket winner, int bonusBall) {
+    public LottoResult checkWin(LottoWinner winner) {
         List<LottoWin> wins = tickets.stream()
-                .map(ticket -> ticket.checkWin(winner, new LottoNumber(bonusBall)))
+                .map(ticket -> ticket.checkWin(winner))
                 .collect(Collectors.toList());
 
         return LottoResult.of(wins);

@@ -22,7 +22,7 @@ public class Lotto {
     public LottoResult start(String winnerNumbers, int bonusBall) {
         LottoTicket winner = LottoTicket.of(winnerNumbers);
 
-        return tickets.checkWin(winner, bonusBall);
+        return tickets.checkWin(new LottoWinner(winner, bonusBall));
     }
 
     public LottoTickets generate(int numOfTickets, LottoNumberStrategy strategy) {

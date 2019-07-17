@@ -25,13 +25,6 @@ public class LottoTicketTest {
     }
 
     @Test
-    void 다른_번호들과_일치수() {
-        LottoTicket another = LottoTicket.of(INPUT_SAMPLE_ANOTHER_NUMBERS);
-
-        assertThat(ticket.correctWith(another)).isEqualTo(2);
-    }
-
-    @Test
     void 숫자들을_순서대로_바꾼다() {
         List<Integer> sampleNumbers = Arrays.asList(4, 3, 2, 1, 5, 6);
         LottoTicket compared = LottoTicket.of(sampleNumbers);

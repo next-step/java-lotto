@@ -35,29 +35,15 @@ public class LottoTicket {
         return of(numbers);
     }
 
-    public LottoWin checkWin(LottoTicket winner, LottoNumber bonusBall) {
-        int numOfCorrect = correctWith(winner);
-        boolean hasBonus = hasBonus(bonusBall);
+    public LottoWin checkWin(LottoWinner winner) {
+        int numOfCorrect = winner.correctWith(this);
+        boolean hasBonus = winner.hasBonus(this);
 
         return LottoWin.valueOf(numOfCorrect, hasBonus);
     }
 
-    public int correctWith(LottoTicket another) {
-        int result = 0;
-        for (LottoNumber number : ticket) {
-            result += another.oneIfHas(number);
-        }
-
-        return result;
-    }
-
     public int oneIfHas(LottoNumber number) {
         return this.ticket.contains(number) ? 1 : 0;
-    }
-
-
-    public boolean hasBonus(LottoNumber bonusBall) {
-        return this.oneIfHas(bonusBall) == 1;
     }
 
     public List<LottoNumber> getTicket() {
