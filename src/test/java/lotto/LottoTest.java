@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
-    private static final int INPUT_PRICE_PURCHASED = 3000;
+    private static final int INPUT_PRICE_PURCHASED = 3_000;
     private Lotto lotto;
     private LottoTicket ticket;
     private LottoTickets tickets;
@@ -24,7 +24,7 @@ public class LottoTest {
     void setUp() {
         orderedNumbers = new LottoOrderedStrategy().generate();
         lotto = new Lotto(INPUT_PRICE_PURCHASED);
-        ticket = new LottoTicket(orderedNumbers);
+        ticket = LottoTicket.of(orderedNumbers);
         tickets = lotto.generate(3, new LottoOrderedStrategy());
     }
 
@@ -36,7 +36,7 @@ public class LottoTest {
     @Test
     void 발급한_로또는_숫자가_6개다() {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            new LottoTicket(Arrays.asList(1, 2, 3, 4, 5));
+            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5));
         });
     }
 }

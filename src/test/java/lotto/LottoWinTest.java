@@ -7,11 +7,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 public class LottoWinTest {
-    private static int WIN_EARNING_BY_THREE = 5000;
-    private static int WIN_EARNING_BY_FOUR = 50000;
-    private static int WIN_EARNING_BY_FIVE = 1500000;
-    private static int  WIN_EARNING_BY_FIVE_WITH_BONUS = 30000000;
-    private static int WIN_EARNING_BY_SIX = 2000000000;
+    private static int WIN_EARNING_BY_THREE             = 5_000;
+    private static int WIN_EARNING_BY_FOUR              = 50_000;
+    private static int WIN_EARNING_BY_FIVE              = 150_0000;
+    private static int  WIN_EARNING_BY_FIVE_WITH_BONUS  = 3_000_0000;
+    private static int WIN_EARNING_BY_SIX               = 2_000_000_000;
 
     private LottoWin win;
 

@@ -4,10 +4,11 @@ import lotto.strategy.LottoNumberStrategy;
 import lotto.strategy.LottoRandomStrategy;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Lotto {
-    LottoTickets tickets;
-    static private int PRICE_LOTTO_TICKET = 1000;
+    private static int PRICE_LOTTO_TICKET = 1000;
+    private LottoTickets tickets;
 
     public Lotto(int price) {
         int countTicket = price / PRICE_LOTTO_TICKET;
@@ -25,10 +26,10 @@ public class Lotto {
     }
 
     public LottoTickets generate(int numOfTickets, LottoNumberStrategy strategy) {
-        ArrayList<LottoTicket> tickets = new ArrayList<>();
+        List<LottoTicket> tickets = new ArrayList<>();
 
         for (int i = 0; i < numOfTickets; i++) {
-            tickets.add(new LottoTicket(strategy.generate()));
+            tickets.add(LottoTicket.of(strategy.generate()));
         }
 
         return new LottoTickets(tickets);

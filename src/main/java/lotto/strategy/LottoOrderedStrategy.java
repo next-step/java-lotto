@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoOrderedStrategy implements LottoNumberStrategy {
-    static public final int LOTTO_COUNT_RANGE_MIN = 0;
-    static public final int LOTTO_COUNT_RANGE_MAX = 6;
-    static public final int LOTTO_NUMBER_MIN = 1;
-    static public final int LOTTO_NUMBER_MAX = 45;
+    public static final int LOTTO_COUNT_RANGE_MIN = 0;
+    public static final int LOTTO_COUNT_RANGE_MAX = 6;
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
 
     @Override
     public List<Integer> generate() {

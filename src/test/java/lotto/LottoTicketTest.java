@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWin;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,12 +21,12 @@ public class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        ticket = new LottoTicket(INPUT_SAMPLE_NUMBERS);
+        ticket = LottoTicket.of(INPUT_SAMPLE_NUMBERS);
     }
 
     @Test
     void 다른_번호들과_일치수() {
-        LottoTicket another = new LottoTicket(INPUT_SAMPLE_ANOTHER_NUMBERS);
+        LottoTicket another = LottoTicket.of(INPUT_SAMPLE_ANOTHER_NUMBERS);
 
         assertThat(ticket.correctWith(another)).isEqualTo(2);
     }
@@ -33,7 +34,7 @@ public class LottoTicketTest {
     @Test
     void 숫자들을_순서대로_바꾼다() {
         List<Integer> sampleNumbers = Arrays.asList(4, 3, 2, 1, 5, 6);
-        LottoTicket compared = new LottoTicket(sampleNumbers);
+        LottoTicket compared = LottoTicket.of(sampleNumbers);
 
         assertThat(compared).isEqualTo(ticket);
     }
@@ -49,6 +50,6 @@ public class LottoTicketTest {
     @Test
     void check_win() {
         int bonus = 45;
-        assertThat(ticket.checkWin(ticket, bonus)).isEqualTo(LottoWin.FIRST);
+        assertThat(ticket.checkWin(ticket, new LottoNumber(bonus))).isEqualTo(LottoWin.FIRST);
     }
 }

@@ -31,14 +31,14 @@ public class LottoResult {
         return result.getOrDefault(win, 0);
     }
 
-    public float getProfitRate() {
+    public double getProfitRate() {
         int countTickets = result.values().stream()
                 .reduce((x, y) -> x + y)
                 .orElseThrow(IllegalStateException::new);
 
         int paidPrice = countTickets * PRICE_LOTTO;
 
-        float totalProfit = 0.0F;
+        double totalProfit = 0.0;
         for (LottoWin win : result.keySet()) {
             totalProfit += win.getEarning();
         }

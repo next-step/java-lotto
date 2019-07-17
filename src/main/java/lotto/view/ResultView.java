@@ -1,13 +1,10 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWin;
+import lotto.domain.*;
 
 public class ResultView {
-    static final public String DELIMITER_STRING = "\n";
-    static final public String DELIMITER_NUMBERS = ", ";
+    public static final String DELIMITER_STRING = "\n";
+    public static final String DELIMITER_NUMBERS = ", ";
 
     public static void printResult(LottoResult result) {
         println("\n당첨 통계");
@@ -53,7 +50,7 @@ public class ResultView {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
 
-        for (Integer number : ticket.getTicket()) {
+        for (LottoNumber number : ticket.getTicket()) {
             builder.append(number).append(", ");
         }
 
