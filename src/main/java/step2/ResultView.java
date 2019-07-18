@@ -1,6 +1,6 @@
 package step2;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,8 +9,8 @@ public class ResultView {
         System.out.println(countLotto + "개를 구매했습니다.");
     }
 
-    public void printPurchasedLottos(Set<ArrayList<Integer>> purchasedLottos) {
-        for (ArrayList<Integer> purchasedLotto : purchasedLottos) {
+    public void printPurchasedLottos(Set<List<Integer>> purchasedLottos) {
+        for (List<Integer> purchasedLotto : purchasedLottos) {
             System.out.println(purchasedLotto);
         }
         printWinningStatistics();
@@ -23,10 +23,9 @@ public class ResultView {
     public void printFinalResult(Map<Integer, Integer> result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (" + LottoLottery.FOURTH + "원)- " + result.get(3) + "개");
-        System.out.println("4개 일치 (" + LottoLottery.THIRD + "원)- " + result.get(4) + "개");
-        System.out.println("5개 일치 (" + LottoLottery.SECOND + "원)- " + result.get(5) + "개");
-        System.out.println("6개 일치 (" + LottoLottery.FIRST + "원)- " + result.get(6) + "개");
+        for (int i = LottoLottery.MATCHING_LIMIT; i < Lotto.WINNING_NUMBERS_LENGTH + 1; i++) {
+            System.out.println(i + "개 일치 (" + Prize.findByCountOfMatch(i).getWinningMoney() + "원)- " + result.get(i) + "개");
+        }
     }
 
     public void printYield(double yield) {
@@ -36,7 +35,7 @@ public class ResultView {
         }
         if (result >= 1) {
             System.out.printf("총 수익률 1이상!! : 수익률 ");
-            System.out.format("%.2f%n" , result);
+            System.out.format("%.2f%n", result);
         }
     }
 }
