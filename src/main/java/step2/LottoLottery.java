@@ -69,7 +69,7 @@ public class LottoLottery {
         return 0;
     }
 
-    private void removeUnavailableValue(Map<Integer, Integer> result, int key) {
+    public static void removeUnavailableValue(Map<Integer, Integer> result, int key) {
         // 1. 수익률 계산에 유효한 값은 map의 key가 3인 것부터 유효하므로 삭제
         if (key < MATCHING_LIMIT) {
             result.remove(key);
@@ -80,7 +80,7 @@ public class LottoLottery {
         }
     }
 
-    private double totalPrize(Map<Integer, Integer> result) {
+    public static double totalPrize(Map<Integer, Integer> result) {
         double totalWard = 0;
         for (int i = MATCHING_LIMIT; i < Lotto.WINNING_NUMBERS_LENGTH + 1; i++) {
             totalWard += calculateTotalPrize(result, i);
@@ -88,7 +88,7 @@ public class LottoLottery {
         return totalWard;
     }
 
-    private double calculateTotalPrize( Map<Integer, Integer> result, int num ){
+    private static double calculateTotalPrize( Map<Integer, Integer> result, int num ){
         double calculateResult = 0;
         if (!Objects.isNull(result.get(num)) && result.get(num) != 0) {
             calculateResult += result.get(num).doubleValue() * Prize.findByCountOfMatch(num).getWinningMoney();
