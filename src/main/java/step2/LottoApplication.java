@@ -16,8 +16,8 @@ public class LottoApplication {
         int lottoCount = inputCash();
         resultView.countLottoResult(lottoCount);
 
-        List<Integer> standardLotto = generateStandardLotto();
-        Set<ArrayList<Integer>> purchasedLottos = lotto.purchasedLottos(standardLotto, lottoCount);
+        Lotto.standardLotto = generateStandardLotto();
+        Set<List<Integer>> purchasedLottos = lotto.purchasedLottos(lottoCount);
         resultView.printPurchasedLottos(purchasedLottos);
 
         int[] winningNumbers = inputWinningNumbers();
