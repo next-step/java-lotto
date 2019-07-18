@@ -11,7 +11,6 @@ public class Lotto {
     static List<Integer> standardLotto = new ArrayList<>();
 
     public static List<Integer> generateStandardLotto() {
-
         for (int i = Lotto.WINNING_NUMBERS_MIN; i < Lotto.WINNING_NUMBERS_MAX + 1; i++) {
             standardLotto.add(i);
         }
