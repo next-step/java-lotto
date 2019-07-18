@@ -17,7 +17,7 @@ public class Lotto {
         return standardLotto;
     }
 
-    public Set<List<Integer>> purchasedLottos(int lottoCount) {
+    public static Set<List<Integer>> purchasedLottos(int lottoCount) {
         Set<List<Integer>> collectAutoLotto = new HashSet<>();
 
         while (collectAutoLotto.size() < lottoCount) {
@@ -27,7 +27,7 @@ public class Lotto {
         return collectAutoLotto;
     }
 
-    private List<Integer> generateAutoLotto() {
+    private static List<Integer> generateAutoLotto() {
         Collections.shuffle(standardLotto);
         List<Integer> shuffleLottoNumbers = standardLotto.subList(0, 6);
         Collections.sort(shuffleLottoNumbers);
