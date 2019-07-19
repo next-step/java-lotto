@@ -18,6 +18,6 @@ public final class LottoGenerator {
     public static LottoSet getLottoSet() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> selectLottoNumbers = new ArrayList<>(lottoNumbers.subList(0, LottoSet.LOTTO_SIZE));
-        return new LottoSet(selectLottoNumbers);
+        return LottoSet.newInstance(selectLottoNumbers);
     }
 }
