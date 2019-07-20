@@ -19,7 +19,7 @@ public class LottoSetTest {
 
     @Before
     public void setUp() {
-        lottoSet = new LottoSet(IntStream.rangeClosed(1, 6)
+        lottoSet = LottoSet.newInstance(IntStream.rangeClosed(1, 6)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
@@ -35,7 +35,7 @@ public class LottoSetTest {
                 LottoNumber.of(11));
 
         // when
-        LottoSet lottoSet = new LottoSet(lottoNumbers);
+        LottoSet lottoSet = LottoSet.newInstance(lottoNumbers);
 
         //then
         assertThat(lottoSet.getLottoNumbers().first()).isEqualTo(LottoNumber.of(5));
@@ -44,9 +44,9 @@ public class LottoSetTest {
 
     @Test
     public void 당첨번호_매칭수_일치() {
-        assertThat(lottoSet.countOfMatchNumber(new LottoSet(7, 8, 9, 10, 11, 12))).isEqualTo(0);
-        assertThat(lottoSet.countOfMatchNumber(new LottoSet(2, 3, 4, 5, 6, 7))).isEqualTo(5);
-        assertThat(lottoSet.countOfMatchNumber(new LottoSet(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+        assertThat(lottoSet.countOfMatchNumber(LottoSet.newInstance(7, 8, 9, 10, 11, 12))).isEqualTo(0);
+        assertThat(lottoSet.countOfMatchNumber(LottoSet.newInstance(2, 3, 4, 5, 6, 7))).isEqualTo(5);
+        assertThat(lottoSet.countOfMatchNumber(LottoSet.newInstance(1, 2, 3, 4, 5, 6))).isEqualTo(6);
     }
 
     @Test
@@ -57,6 +57,6 @@ public class LottoSetTest {
 
     @Test
     public void 로또_사이즈() {
-        assertThat(new LottoSet(1, 2, 3, 4, 5, 6).getLottoNumbers()).hasSize(LottoSet.LOTTO_SIZE);
+        assertThat(LottoSet.newInstance(1, 2, 3, 4, 5, 6).getLottoNumbers()).hasSize(LottoSet.LOTTO_SIZE);
     }
 }

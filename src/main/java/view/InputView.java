@@ -32,7 +32,7 @@ public final class InputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         for (int i = 0; i < number; i++) {
-            lottoSets.add(new LottoSet(Arrays.stream(sc.nextLine().split(", "))
+            lottoSets.add(LottoSet.newInstance(Arrays.stream(sc.nextLine().split(", "))
                     .map(LottoNumber::of)
                     .collect(Collectors.toList())));
         }
@@ -43,7 +43,7 @@ public final class InputView {
     public static LottoSet inputWinningLotto() {
 
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LottoSet(Arrays.stream(new Scanner(System.in).nextLine().split(", "))
+        return LottoSet.newInstance(Arrays.stream(new Scanner(System.in).nextLine().split(", "))
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
 

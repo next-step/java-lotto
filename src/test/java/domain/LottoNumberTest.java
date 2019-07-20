@@ -2,19 +2,18 @@ package domain;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LottoNumberTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void 로또_번호는_최대값보다_클_수_없다() {
-        LottoNumber.of(LottoNumber.LOTTO_MAX_NUMBER + 1);
+        assertNull(LottoNumber.of(LottoNumber.LOTTO_MAX_NUMBER + 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void 로또_번호는_최소값보다_작을_수_없다() {
-        LottoNumber.of(LottoNumber.LOTTO_MIN_NUMBER - 1);
+        assertNull(LottoNumber.of(LottoNumber.LOTTO_MIN_NUMBER - 1));
     }
 
     @Test
