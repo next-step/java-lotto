@@ -11,6 +11,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         int totalLottoAmount = InputView.getLottoAmounts();
+
         LottoMoney lottoMoney = LottoMoney.of(totalLottoAmount);
 
         LottoFactory lottoFactory = new LottoFactory(lottoMoney);
