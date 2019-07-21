@@ -75,6 +75,12 @@
    - 최소 값 과 최대 값을 상수로 제공한다.
    - 객체 상태가 1-45 한정되어 있으므로, 인스턴스 풀을 제공한다.
    
+ - `LottoNumbers` 클래스 구현.
+   - Lotto의 숫자들은 여섯 숫자 여야 하며, 중복이 없는것을 검증한다.
+   - `LottoRankCounter` 의 역할을 해당 클래스로 옮긴다.
+   - `당첨 LottoNumbers`와 `보너스 LottoNumber`를 받아 `LottoRank`를 구한다.
+     - 만약 `보너스 LottoNumber` 가 `당첨 LottoNumbers` 에 속한다면, 에러를 발생한다.
+   
  - `LottoResults` 클래스 수정.
    - `로또 당첨 번호 문자열` 을 받아, List<Integer>로 만들어 사용하지 않고, List<LottoNumber>로 만들어서 사용하도록 변경.
    - `로또 보너스 당첨 번호` 도 추가적으로 받아, 계산한다.
