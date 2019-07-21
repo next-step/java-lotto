@@ -34,6 +34,8 @@ public class LottoResultTest {
 
     @Test
     void 수익률() {
+        wins = Arrays.asList(LottoWin.valueOf(3, false));
+        lottoResult = LottoResult.of(wins);
         assertThat(lottoResult.getProfitRate()).isEqualTo(5);
     }
 

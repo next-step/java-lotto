@@ -16,7 +16,6 @@ public class LottoResult {
 
     public static LottoResult of(List<LottoWin> wins) {
         HashMap<LottoWin, Integer> map = new HashMap<>();
-
         wins.stream()
                 .forEach(win -> {
                     map.putIfAbsent(win, 0);
