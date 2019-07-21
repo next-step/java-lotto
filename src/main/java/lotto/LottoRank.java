@@ -3,10 +3,11 @@ package lotto;
 import java.util.Arrays;
 
 public enum LottoRank {
-    MISS(0,0),
-    FOURTH(5_000, 3 ),
-    THIRD(50_000, 4),
-    SECOND(1_500_000, 5),
+    MISS(0, 0),
+    FIFTH(5_000, 3),
+    FOURTH(50_000, 4),
+    THIRD(1_500_000, 5),
+    SECOND(30_000_000, 5),
     FIRST(2_000_000_000, 6);
 
     private int winningMoney;
@@ -17,6 +18,14 @@ public enum LottoRank {
         this.countOfMatch = countOfMatch;
     }
 
+    public static LottoRank valueOf(int countOfMatch, boolean isMatchBonus) {
+        return Arrays.stream(values())
+                     .filter(rank -> rank.countOfMatch == countOfMatch)
+                     .findFirst()
+                     .map(lottoRank -> applyMatchBonus(lottoRank, isMatchBonus))
+                     .orElse(MISS);
+    }
+
     public int getCountOfMatch() {
         return countOfMatch;
     }
@@ -25,10 +34,11 @@ public enum LottoRank {
         return winningMoney;
     }
 
-    public static LottoRank valueOf(int countOfMatch) {
-        return Arrays.stream(values())
-                    .filter(rank -> rank.countOfMatch == countOfMatch)
-                    .findFirst()
-                    .orElse(MISS);
+    private static LottoRank applyMatchBonus(LottoRank lottoRank, boolean isMatchBonus) {
+        if (LottoRank.THIRD == lottoRank && isMatchBonus) {
+            return LottoRank.SECOND;
+        }
+
+        return lottoRank;
     }
 }
