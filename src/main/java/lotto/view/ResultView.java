@@ -35,6 +35,19 @@ public class ResultView {
         return builder.toString();
     }
 
+    public static void printWallet(LottoWallet wallet) {
+        printTicketsStatus(wallet);
+        printTickets(wallet.getGenerated());
+        printTickets(wallet.getPicked());
+    }
+
+    private static void printTicketsStatus(LottoWallet wallet) {
+        int sizeOfGenerated = wallet.getGenerated().size();
+        int sizeOfPicked = wallet.getPicked().size();
+
+        println("수동으로 " + sizeOfPicked + "장, 자동으로 " + sizeOfGenerated + "개를 구매했습니다.");
+    }
+
     public static void printTickets(LottoTickets tickets) {
         StringBuilder builder = new StringBuilder();
 
@@ -43,7 +56,9 @@ public class ResultView {
             builder.append(DELIMITER_STRING);
         }
 
-        println(builder.substring(0, builder.length() - DELIMITER_STRING.length()) + "\n");
+        if (builder.length() == 0) return;
+
+        println(builder.substring(0, builder.length() - DELIMITER_STRING.length()));
     }
 
     private static String printTicket(LottoTicket ticket) {

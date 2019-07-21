@@ -45,4 +45,14 @@ public class LottoResult {
 
         return totalProfit / paidPrice;
     }
+
+    public LottoResult sum(LottoResult lottoResult) {
+        lottoResult.result.keySet().stream()
+                .forEach(matchCount -> {
+                    result.putIfAbsent(matchCount, 0);
+                    result.put(matchCount, result.get(matchCount) + 1);
+                });
+
+        return new LottoResult(result);
+    }
 }
