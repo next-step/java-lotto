@@ -50,7 +50,7 @@ public class LottoNumber {
 
     private static boolean isNotNumberData(String number) {
         try {
-            Integer.parseInt(number);
+            Integer.parseInt(number.trim());
             return false;
         } catch (Exception e) {
             return true;

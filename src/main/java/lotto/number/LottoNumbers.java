@@ -22,6 +22,7 @@ public class LottoNumbers {
         }
         List<LottoNumber> lottoNumbers = Arrays.stream(lotteryNumberStrings)
                                                .map(LottoNumber::of)
+                                               .distinct()
                                                .collect(Collectors.toList());
 
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
