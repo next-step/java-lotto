@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -15,7 +16,7 @@ public class LottoFactoryTest {
     public void testLottosSize(int intLottoMoney) {
         LottoMoney lottoMoney = LottoMoney.of(intLottoMoney);
         LottoFactory lottoFactory = new LottoFactory(lottoMoney);
-        List<Lotto> lottos = lottoFactory.createLottos();
+        List<LottoNumbers> lottos = lottoFactory.createLottoNumbersBundle();
 
         int lottoCounts = lottoMoney.value() / LottoFactory.SINGLE_LOTTO_MONEY;
         assertThat(lottos).hasSize(lottoCounts);
