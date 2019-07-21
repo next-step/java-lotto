@@ -16,8 +16,21 @@ public class LottoRankCounter {
         return countFinder.getOrDefault(rank, 0);
     }
 
-    public int getTotalLottoMoney(LottoRank rank) {
+    public int getTotalLottoMoneyAt(LottoRank rank) {
         int count = getCount(rank);
         return rank.getWinningMoney() * count;
+    }
+
+    public int getTotalLottoMoney() {
+        return countFinder.keySet().stream()
+                          .mapToInt(this::getTotalLottoMoneyAt)
+                          .sum();
+    }
+
+    public int size() {
+        return countFinder.values()
+                          .stream()
+                          .mapToInt(Integer::intValue)
+                          .sum();
     }
 }

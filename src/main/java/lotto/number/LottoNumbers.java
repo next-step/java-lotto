@@ -11,7 +11,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -25,6 +25,10 @@ public class LottoNumbers {
                                                .distinct()
                                                .collect(Collectors.toList());
 
+        return from(lottoNumbers);
+    }
+
+    public static LottoNumbers from(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalStateException("the lotto number must be distinct");
         }
@@ -44,5 +48,13 @@ public class LottoNumbers {
         boolean isBonusMatched = this.lottoNumbers.contains(bonusLottoNumber);
 
         return LottoRank.valueOf(countOfMatch, isBonusMatched);
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                            .map(LottoNumber::get)
+                            .map(number -> Integer.toString(number))
+                            .collect(Collectors.joining(",", "[", "]"));
     }
 }

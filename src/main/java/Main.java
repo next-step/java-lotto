@@ -1,7 +1,8 @@
-import lotto.Lotto;
 import lotto.LottoFactory;
 import lotto.LottoMoney;
-import lotto.LottoResults;
+import lotto.LottoResult;
+import lotto.number.LottoNumber;
+import lotto.number.LottoNumbers;
 import view.InputView;
 import view.ResultView;
 
@@ -15,12 +16,13 @@ public class Main {
         LottoFactory lottoFactory = new LottoFactory(lottoMoney);
         ResultView.printLottoCounts(lottoFactory.getLottoCounts());
 
-        List<Lotto> lottos = lottoFactory.createLottos();
-        ResultView.printLottos(lottos);
+        List<LottoNumbers> lottoNumbersBundle = lottoFactory.createLottoNumbersBundle();
+        ResultView.printLottoNumbersBundle(lottoNumbersBundle);
 
-        String lotteryNumbersString = InputView.getLotteryNumbersString();
+        LottoNumbers winnerLottoNumbers = LottoNumbers.from(InputView.getLotteryNumbersString());
+        LottoNumber bonusLottoNumber = LottoNumber.of(InputView.getBonusLottoNumberString());
 
-        LottoResults lottoResults = new LottoResults(lotteryNumbersString, lottos);
-        ResultView.printLottoResults(lottoResults);
+        LottoResult lottoResult = new LottoResult(winnerLottoNumbers, bonusLottoNumber, lottoNumbersBundle);
+        ResultView.printLottoResults(lottoResult);
     }
 }
