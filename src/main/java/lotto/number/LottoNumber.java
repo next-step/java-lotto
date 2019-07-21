@@ -1,7 +1,8 @@
-package lotto;
+package lotto.number;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoNumber {
     public static final int MIN = 1;
@@ -26,6 +27,10 @@ public class LottoNumber {
 
         int number = Integer.parseInt(numberString.trim());
 
+        return of(number);
+    }
+
+    public static LottoNumber of(int number) {
         if (isNotBetweenMinAndMax(number)) {
             throw NUMBER_SIZE_EXCEPTION;
         }
@@ -50,5 +55,20 @@ public class LottoNumber {
         } catch (Exception e) {
             return true;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof LottoNumber))
+            return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
