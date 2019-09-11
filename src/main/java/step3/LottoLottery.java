@@ -41,7 +41,7 @@ public class LottoLottery {
     }
 
     public double calculationOfYield(int lottoCount, Map<Integer, Integer> result) {
-        int spandCash = lottoCount * LottoGenerator.LOTTO_PRICE;
+        int spandCash = lottoCount * Lotto.LOTTO_PRICE;
         // 수익률 = 상금/ 구매금액 * 100
         // 수익률 = 상금/ spandCash  * 100
 

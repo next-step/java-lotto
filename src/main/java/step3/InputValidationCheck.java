@@ -13,8 +13,8 @@ public class InputValidationCheck {
     }
 
     public static void checkCash(String cash) {
-        if (Integer.parseInt(cash) < LottoGenerator.LOTTO_PRICE) {
-            throw new IllegalArgumentException("로또는 1장에 " + LottoGenerator.LOTTO_PRICE + " 원 입니다.");
+        if (Integer.parseInt(cash) < Lotto.LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또는 1장에 " + Lotto.LOTTO_PRICE + " 원 입니다.");
         }
     }
 

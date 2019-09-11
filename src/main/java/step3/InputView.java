@@ -3,7 +3,6 @@ package step3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -17,7 +16,7 @@ public class InputView {
         InputValidationCheck.checkEmpty(cash);
         InputValidationCheck.checkCash(cash);
 
-        return Integer.parseInt(cash) / LottoGenerator.LOTTO_PRICE;
+        return Integer.parseInt(cash) / Lotto.LOTTO_PRICE;
     }
 
     public static ArrayList<Integer> inputWinningNumbers() {

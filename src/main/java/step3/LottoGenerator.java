@@ -4,7 +4,6 @@ import java.util.*;
 
 public class LottoGenerator {
 
-    static final int LOTTO_PRICE = 1000;
     static final int WINNING_NUMBERS_LENGTH = 6;
     static private List<Integer> standardLotto = new ArrayList<>();
 

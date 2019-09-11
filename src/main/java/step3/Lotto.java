@@ -9,6 +9,7 @@ public class Lotto {
 
     static final int LOTTO_NUMBER_MIN = 1;
     static final int LOTTO_NUMBER_MAX = 45;
+    static final int LOTTO_PRICE = 1000;
 
     List<Integer> lotto;
 
