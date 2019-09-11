@@ -20,7 +20,7 @@ public class LottoApplication {
         Set<Lotto> purchasedLottos = LottoGenerator.purchasedLottos(lottoCount);
         printPurchasedLottos(purchasedLottos);
 
-        List<Integer> winningNumbers = inputWinningNumbers1();
+        List<Integer> winningNumbers = inputWinningNumbers();
         List<Integer> resultMatcing = Lotto.lotteryStatics(purchasedLottos, winningNumbers);
         Map<Integer, Integer> result = Lotto.giveStatistic(resultMatcing);
         printFinalResult(result);
