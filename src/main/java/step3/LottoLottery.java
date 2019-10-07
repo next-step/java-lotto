@@ -6,10 +6,15 @@ import java.util.*;
 public class LottoLottery {
 
     static final int MATCHING_LIMIT = 3;
-    private static final int MAKE_FLOAT = 100;
+    static int BONUS_WINNING_COUNT = 0;
 
     public static Map<Integer, Integer> statisticResult = new HashMap<>();
+    public static List<Integer> bonusWinningIndex = new ArrayList<>();
 
+    /**
+     * matchWinningNumbers 에서는 당첨번호 중 몇 개가 일치하는지 카운팅한다.
+     * bonusLotto에 보너스 번호 당첨 대상 로또를 저장한다.
+     */
     public static int matchWinningNumbers(Lotto purchasedLotto, List<Integer> winningNumbers) {
         final int count = (int) winningNumbers.stream()
                 .filter(purchasedLotto.lotto::contains)
@@ -42,14 +47,13 @@ public class LottoLottery {
 
     public double calculationOfYield(int lottoCount, Map<Integer, Integer> result) {
         int spandCash = lottoCount * Lotto.LOTTO_PRICE;
-        // 수익률 = 상금/ 구매금액 * 100
-        // 수익률 = 상금/ spandCash  * 100
-
+        // 수익률 = (상금 - 구매금액) / 구매금액  = (totalWard - spandCash) / spandCash
         for (int i = 1; i < LottoGenerator.WINNING_NUMBERS_LENGTH + 1; i++) {
             removeUnavailableValue(result, i);
         }
         if (!result.isEmpty()) {
-            return (totalPrize(result) / spandCash * MAKE_FLOAT) / MAKE_FLOAT;
+            double totalWard = totalPrize(result);
+            return  1 - (Math.abs(totalWard - spandCash) / spandCash);
         }
         return 0;
     }
@@ -79,5 +83,33 @@ public class LottoLottery {
             calculateResult += result.get(num).doubleValue() * Prize.findByCountOfMatch(num).getWinningMoney();
         }
         return calculateResult;
+    }
+
+    public void checkBonusWinningChance(List<Integer> resultMatching) {
+        for (int i = 0; i < resultMatching.size(); i++) {
+            inputBonusWinningIndex(resultMatching, i);
+        }
+    }
+
+    private void inputBonusWinningIndex(List<Integer> resultMatching, int index) {
+        if (resultMatching.get(index) == 5) {
+            bonusWinningIndex.add(index);
+        }
+    }
+
+    public void pickOutBonusWinningLotto(Set<Lotto> purchasedLottos) {
+        int indexCount = 0;
+        for (Lotto purchasedLotto : purchasedLottos) {
+            purchasedLottoCompareBonusNumber(purchasedLotto.lotto, indexCount);
+            indexCount++;
+        }
+    }
+
+    private void purchasedLottoCompareBonusNumber(List<Integer> purchasedLotto, int indexCount) {
+        // TODO: 여기 로직 찝찝하니까 TEST할 때 꼭 넣자
+        if (bonusWinningIndex.contains(indexCount)) {
+            // 5개일치 로또가 보너스 번호도 일치하는지 확인
+            BONUS_WINNING_COUNT = purchasedLotto.contains(Lotto.LOTTO_BONUS_NUMBER) ? BONUS_WINNING_COUNT + 1 : BONUS_WINNING_COUNT;
+        }
     }
 }

@@ -22,21 +22,29 @@ public class InputView {
     public static ArrayList<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] inputWinningNumbers = scan.nextLine().split(",");
+
+        InputValidationCheck.checkWinningNumberLength(inputWinningNumbers);
+        InputValidationCheck.checkOverlapWinningNumber(inputWinningNumbers);
+
         String[] trimWinningNumbers = new String[LottoGenerator.WINNING_NUMBERS_LENGTH];
         for (int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++) {
             trimWinningNumbers[i] = inputWinningNumbers[i].trim();
         }
-        InputValidationCheck.checkWinningNumberLength(trimWinningNumbers);
-        InputValidationCheck.checkOverlapWinningNumber(trimWinningNumbers);
 
         int[] winningNumbers = InputValidationCheck.checkWinningNumberRange(trimWinningNumbers);
         Arrays.sort(winningNumbers);
 
         ArrayList<Integer> inputWinningNumberList = new ArrayList<>();
-        for(int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++)  {
-            inputWinningNumberList.add(winningNumbers[0]);
+        for (int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++) {
+            inputWinningNumberList.add(winningNumbers[i]);
         }
 
         return inputWinningNumberList;
+    }
+
+    public static void bonusNumberAdd() {
+        System.out.println("보너스 볼을 입력해주세요.");
+        Lotto.LOTTO_BONUS_NUMBER = scan.nextInt();
+        InputValidationCheck.checkEachWinningNumber(Lotto.LOTTO_BONUS_NUMBER);
     }
 }

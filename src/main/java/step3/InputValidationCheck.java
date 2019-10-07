@@ -1,8 +1,6 @@
 package step3;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class InputValidationCheck {
 
@@ -34,9 +32,9 @@ public class InputValidationCheck {
         return winningNumbers;
     }
 
-    private static void checkEachWinningNumber(int winningNumber) {
+    public static void checkEachWinningNumber(int winningNumber) {
         if (winningNumber > Lotto.LOTTO_NUMBER_MAX || winningNumber < Lotto.LOTTO_NUMBER_MIN) {
-            throw new IllegalArgumentException("당첨번호는" + Lotto.LOTTO_NUMBER_MIN + " ~ " + Lotto.LOTTO_NUMBER_MAX + "사이로 입력하셔야 합니다.");
+            throw new IllegalArgumentException("당첨번호와 보너스 볼은" + Lotto.LOTTO_NUMBER_MIN + " ~ " + Lotto.LOTTO_NUMBER_MAX + "사이로 입력하셔야 합니다.");
         }
     }
 
@@ -46,5 +44,4 @@ public class InputValidationCheck {
             throw new IllegalArgumentException("당첨번호에 중복된 값이 있습니다.");
         }
     }
-
 }
