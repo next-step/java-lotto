@@ -22,8 +22,8 @@ public class LottoLotteryTest {
         lottoStatistic.put(4, 0);
         lottoStatistic.put(5, 1);
         lottoStatistic.put(6, 0);
-
     }
+
     @DisplayName("당첨과 관계 없는 값 삭제")
     @Test
     void removeUnavailableValueTest() {
@@ -37,7 +37,7 @@ public class LottoLotteryTest {
     @Test
     void totalWinningPrize() {
         double totalWard = 0;
-        for(int i = LottoLottery.MATCHING_LIMIT; i < LottoGenerator.WINNING_NUMBERS_LENGTH +1; i++){
+        for (int i = LottoLottery.MATCHING_LIMIT; i < LottoGenerator.WINNING_NUMBERS_LENGTH + 1; i++) {
             totalWard += lottoStatistic.get(i) * Prize.findByCountOfMatch(i).getWinningMoney();
         }
         double testTotalWard = LottoLottery.totalPrize(lottoStatistic);
