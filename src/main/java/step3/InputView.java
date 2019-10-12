@@ -3,6 +3,7 @@ package step3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -42,9 +43,10 @@ public class InputView {
         return inputWinningNumberList;
     }
 
-    public static void bonusNumberAdd() {
+    public static void bonusNumberAdd(List<Integer> inputWinningNumberList) {
         System.out.println("보너스 볼을 입력해주세요.");
         Lotto.LOTTO_BONUS_NUMBER = scan.nextInt();
-        InputValidationCheck.checkEachWinningNumber(Lotto.LOTTO_BONUS_NUMBER);
+
+        InputValidationCheck.checkBonusNumber(inputWinningNumberList);
     }
 }
