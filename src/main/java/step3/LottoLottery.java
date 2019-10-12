@@ -53,7 +53,10 @@ public class LottoLottery {
         }
         if (!result.isEmpty()) {
             double totalWard = totalPrize(result);
-            return  1 - (Math.abs(totalWard - spandCash) / spandCash);
+            double earningRate = Math.abs(totalWard - spandCash);
+            return  earningRate / spandCash;
+//            return  1 - (earningRate / spandCash);
+//            return  1 - (Math.abs(totalWard - spandCash) / spandCash);
         }
         return 0;
     }
@@ -106,7 +109,6 @@ public class LottoLottery {
     }
 
     private void purchasedLottoCompareBonusNumber(List<Integer> purchasedLotto, int indexCount) {
-        // TODO: 여기 로직 찝찝하니까 TEST할 때 꼭 넣자
         if (bonusWinningIndex.contains(indexCount)) {
             // 5개일치 로또가 보너스 번호도 일치하는지 확인
             BONUS_WINNING_COUNT = purchasedLotto.contains(Lotto.LOTTO_BONUS_NUMBER) ? BONUS_WINNING_COUNT + 1 : BONUS_WINNING_COUNT;
