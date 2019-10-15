@@ -13,6 +13,8 @@ public class LottoApplication {
 
         LottoLottery lottery = new LottoLottery();
 
+        Money money = new Money(InputView.inputCash());
+
         int lottoCount = inputCash();
         countLottoResult(lottoCount);
         LottoGenerator.generateStandardLotto();
