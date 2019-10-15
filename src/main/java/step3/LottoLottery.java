@@ -3,6 +3,8 @@ package step3;
 
 import java.util.*;
 
+ // TODO: 이 객체의 로직구현은 너무 복잡하다.
+ //  좀 더 쉬운방법이 없을까?
 public class LottoLottery {
 
     static final int MATCHING_LIMIT = 3;
@@ -45,18 +47,16 @@ public class LottoLottery {
                 .count();
     }
 
-    public double calculationOfYield(int lottoCount, Map<Integer, Integer> result) {
-        int spandCash = lottoCount * Lotto.LOTTO_PRICE;
+    public double calculationOfYield(int inputCash, Map<Integer, Integer> result) {
         // 수익률 = (상금 - 구매금액) / 구매금액  = (totalWard - spandCash) / spandCash
         for (int i = 1; i < LottoGenerator.WINNING_NUMBERS_LENGTH + 1; i++) {
             removeUnavailableValue(result, i);
         }
         if (!result.isEmpty()) {
             double totalWard = totalPrize(result);
-            double earningRate = Math.abs(totalWard - spandCash);
-            return  earningRate / spandCash;
-//            return  1 - (earningRate / spandCash);
-//            return  1 - (Math.abs(totalWard - spandCash) / spandCash);
+            double earningRate = Math.abs(totalWard - inputCash);
+            return  earningRate / inputCash;
+
         }
         return 0;
     }
