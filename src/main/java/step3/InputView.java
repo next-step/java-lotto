@@ -12,12 +12,7 @@ public class InputView {
 
     public static int inputCash() {
         System.out.println("구입금액을 입력해 주세요.");
-        String cash = scan.nextLine();
-
-        InputValidationCheck.checkEmpty(cash);
-        InputValidationCheck.checkCash(cash);
-
-        return Integer.parseInt(cash) / Lotto.LOTTO_PRICE;
+        return  Integer.parseInt(scan.nextLine());
     }
 
     public static ArrayList<Integer> inputWinningNumbers() {
