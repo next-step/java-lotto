@@ -14,13 +14,11 @@ public class LottoApplication {
         LottoLottery lottery = new LottoLottery();
 
         Money money = new Money(InputView.inputCash());
-
-        int lottoCount = inputCash();
-        countLottoResult(lottoCount);
+        countLottoResult(money.getLottoCount());
         LottoGenerator.generateStandardLotto();
 
         // 1. 로또 구매 ( 구매한 로또 번호는 고유하다. )
-        Set<Lotto> purchasedLottos = LottoGenerator.purchasedLottos(lottoCount);
+        Set<Lotto> purchasedLottos = LottoGenerator.purchasedLottos(money.getLottoCount());
         printPurchasedLottos(purchasedLottos);
 
         // 2. 당첨번호와 보너스 번호를 입력 받음
@@ -42,7 +40,7 @@ public class LottoApplication {
 
         printFinalResult(result);
 
-        double yield = Math.abs(lottery.calculationOfYield(lottoCount, result));
+        double yield = Math.abs(lottery.calculationOfYield(money.getInputCash(), result));
         printYield(yield);
 
     }
