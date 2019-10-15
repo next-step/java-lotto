@@ -3,7 +3,7 @@ package step3;
 public class Money {
 
     private static final int LOTTO_PRICE = 1000;
-    private static int inputCash;
+    private int inputCash;
 
     public Money(int inputCash) {
         validateMoney(inputCash);
