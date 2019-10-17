@@ -2,20 +2,24 @@ package step3;
 
 import java.util.*;
 
-public class LottoNumbers {
+public class LottoWinningNumbers {
 
     static int LOTTO_BONUS_NUMBER;
     private List<Integer> winningNumbers;
 
-    public LottoNumbers(List<Integer> winningNumbers) {
+    public LottoWinningNumbers(List<Integer> winningNumbers) {
         this.winningNumbers = new ArrayList<>(winningNumbers);
     }
 
-    public static LottoNumbers createLottoNumber(String[] inputWinningNumbers) {
+    public static List<Integer> valueOf(LottoWinningNumbers test){
+        return test.winningNumbers;
+    }
+
+    public static LottoWinningNumbers creatLottoWinningNumbers(String[] inputWinningNumbers) {
         checkWinningNumberLength(inputWinningNumbers);
         checkOverlapWinningNumber(inputWinningNumbers);
 
-        LottoNumbers winningNumbers = new LottoNumbers(checkWinningNumberRange(inputWinningNumbers));
+        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(checkWinningNumberRange(inputWinningNumbers));
         return winningNumbers;
     }
 
@@ -45,7 +49,7 @@ public class LottoNumbers {
             throw new IllegalArgumentException("당첨번호와 보너스 볼은 " + 1 + " ~ " + 45 + "사이로 입력하셔야 합니다.");
     }
 
-    public static void checkBonusNumber(LottoNumbers inputWinningNumberList) {
+    public static void checkBonusNumber(LottoWinningNumbers inputWinningNumberList) {
         checkEachWinningNumber(LOTTO_BONUS_NUMBER);
         for (int winningNumber : inputWinningNumberList.winningNumbers) {
             checkOverlapBonusNumber(winningNumber);
