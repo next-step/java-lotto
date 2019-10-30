@@ -5,8 +5,8 @@ import java.util.Map;
 public class Money {
 
     private static final int LOTTO_PRICE = 1000;
-    private int inputCash;
     private static long totalPrize = 0;
+    private int inputCash;
 
     public Money(int inputCash) {
         validateMoney(inputCash);
@@ -17,11 +17,15 @@ public class Money {
         return this.inputCash;
     }
 
+    public long getTotalPrize() {
+        return totalPrize;
+    }
+
     public int getInputCash() {
         return this.inputCash * LOTTO_PRICE;
     }
 
-    private static void validateMoney(int inputCash) {
+    public static void validateMoney(int inputCash) {
         if (inputCash < LOTTO_PRICE)
             throw new IllegalArgumentException("로또는 1장에 " + LOTTO_PRICE + " 원 입니다.");
     }

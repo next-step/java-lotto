@@ -22,18 +22,18 @@ public class LottoWinningNumbers {
         return new LottoWinningNumbers(checkWinningNumberRange(inputWinningNumbers));
     }
 
-    private static void checkWinningNumberLength(String[] inputWinningNumbers) {
+    public static void checkWinningNumberLength(String[] inputWinningNumbers) {
         if (inputWinningNumbers.length != LottoGenerator.WINNING_NUMBERS_LENGTH)
             throw new IllegalArgumentException("당첨번호는" + LottoGenerator.WINNING_NUMBERS_LENGTH + "개를 입력하셔야 합니다.");
     }
 
-    private static void checkOverlapWinningNumber(String[] inputWinningNumbers) {
+    public static void checkOverlapWinningNumber(String[] inputWinningNumbers) {
         Set<String> uniqueWinningNumber = new HashSet<>(Arrays.asList(inputWinningNumbers));
         if (uniqueWinningNumber.size() != inputWinningNumbers.length)
             throw new IllegalArgumentException("당첨번호에 중복된 값이 있습니다.");
     }
 
-    private static ArrayList<Integer> checkWinningNumberRange(String[] inputWinningNumbers) {
+    public static ArrayList<Integer> checkWinningNumberRange(String[] inputWinningNumbers) {
         ArrayList<Integer> inputWinningNumberList = new ArrayList<>();
         for (int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++) {
             checkEachWinningNumber(Integer.parseInt((inputWinningNumbers[i])));
