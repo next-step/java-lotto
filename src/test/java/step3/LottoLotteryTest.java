@@ -10,6 +10,9 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 보너스 번호와 관련 된 로직이 있음
+ * */
 public class LottoLotteryTest {
 
     private Map<Integer, Integer> lottoStatistic = new HashMap<>();
@@ -40,7 +43,7 @@ public class LottoLotteryTest {
         for (int i = LottoLottery.MATCHING_LIMIT; i < LottoGenerator.WINNING_NUMBERS_LENGTH + 1; i++) {
             totalWard += lottoStatistic.get(i) * Prize.findByCountOfMatch(i).getWinningMoney();
         }
-        double testTotalWard = LottoLottery.totalPrize(lottoStatistic);
+        double testTotalWard = Money.totalPrize(lottoStatistic);
         assertThat(testTotalWard).isEqualTo(totalWard);
     }
 }
