@@ -1,14 +1,7 @@
 package step3;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.junit.jupiter.api.*;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +24,6 @@ public class LottoLotteryTest {
         resultMatching.put(2, 0);
 
         LottoWinningNumbers.LOTTO_BONUS_NUMBER = lottoWinningNumbers.get(5);
-
     }
 
     @DisplayName("보너스 당첨 여부 확인")
