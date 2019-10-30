@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
  */
 public class StatisticResult {
 
-    // statisticResult: N번 인덱스(key)에 일치하는 로또번호 수(value)
     private static final int MATCHING_LIMIT = 3;
     public Map<Integer, Integer> statisticResult = new HashMap<>();
 
@@ -24,10 +23,6 @@ public class StatisticResult {
             this.statisticResult.put(index, value);
             index++;
         }
-    }
-
-    public void addResult(int matchCount, int resultMatchCount) {
-        statisticResult.put(matchCount, resultMatchCount);
     }
 
     public boolean bonusValidCheck(StatisticResult statisticResult) {
@@ -54,7 +49,6 @@ public class StatisticResult {
         for (int key : winningLottos) {
             summaryResult.put(key, summaryResult.get(key) + 1);
         }
-
         return summaryResult;
     }
 }
