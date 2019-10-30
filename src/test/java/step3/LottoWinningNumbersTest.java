@@ -6,31 +6,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class InputTest {
+public class LottoWinningNumbersTest {
 
     @BeforeEach
     void setUp() {
-        System.out.println("로또 InputTest시작");
-    }
-
-    @DisplayName("구매금액 입력 확인: 1000원 미만 불가")
-    @Test
-    public void 구매액수_확인() {
-
-        assertThatIllegalArgumentException().isThrownBy(() -> Money.validateMoney(900));
+        System.out.println("로또 LottoWinningNumbers 테스트");
     }
 
     @DisplayName("당첨번호 입력받기 확인: 6자리 입력")
     @Test
     public void 입력받은_당첨번호_자릿수_확인() {
-        String[] winningNumbers = "30, 2, 12, 22, 45, 100".split(",");
+        String[] winningNumbers = "30, 2, 12, 22, 45, 5, 8".split(",");
         assertThatIllegalArgumentException().isThrownBy(() -> LottoWinningNumbers.checkWinningNumberLength(winningNumbers));
     }
 
     @DisplayName("당첨번호 범위 확인: 1 ~ 45")
     @Test
     public void 당첨번호_범위_확인() {
-        String[] winningNumbers = "30, 2, 12, 22, 45, 100".split(",");
+        String[] winningNumbers = "30, 2, 12, 22, 45, 1".split(",");
         assertThatIllegalArgumentException().isThrownBy(() -> LottoWinningNumbers.checkWinningNumberRange(winningNumbers));
     }
 
@@ -45,6 +38,6 @@ public class InputTest {
     @Test
     public void 보너스번호_유효성_확인() {
         LottoWinningNumbers.LOTTO_BONUS_NUMBER = 10;
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoWinningNumbers.checkOverlapBonusNumber(9));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoWinningNumbers.checkOverlapBonusNumber(10));
     }
 }
