@@ -1,50 +1,36 @@
 package step3;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class ResultView {
     public static void countLottoResult(int countLotto) {
         System.out.println(countLotto + "개를 구매했습니다.");
     }
 
-    public static void printPurchasedLottos(Set<Lotto> purchasedLottos) {
-        for (Lotto purchasedLotto : purchasedLottos) {
-            System.out.println(purchasedLotto.lotto);
-        }
-        printWinningStatistics();
+    public static void printPurchasedLottos(List<Integer> purchasedLotto) {
+        System.out.println(purchasedLotto);
     }
 
-    private static void printWinningStatistics() {
-        System.out.println();
-    }
-
-    public static void printFinalResult(Map<Integer, Integer> result) {
+    public static void printAboutRank(Map<Integer, Integer> summaryResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        // 1. 1 ~ 3등을 뺀 나머지 출력
-        for (int i = LottoLottery.MATCHING_LIMIT; i < LottoGenerator.BONUS_WINNING_VALID_NUMBER; i++) {
-
-            System.out.println(i + "개 일치 (" + Prize.findByCountOfMatch(i).getWinningMoney() + "원)- " + result.get(i) + "개");
-        }
-
-        // 2. 1, 2등을 출력
-        for (int i = LottoGenerator.BONUS_WINNING_VALID_NUMBER; i < LottoGenerator.WINNING_NUMBERS_LENGTH + 1; i++) {
-            printBonusWinningValidResult(result, i);
+        for (int key : summaryResult.keySet()) {
+            System.out.println(goPrint(summaryResult, key));
         }
     }
 
-    private static void printBonusWinningValidResult(Map<Integer, Integer> result, int i) {
-        if (i == LottoGenerator.BONUS_WINNING_VALID_NUMBER) {
-            System.out.println(i + "개 일치 (" + Prize.findByCountOfMatch(i).getWinningMoney() + "원)- " + (result.get(i) - LottoLottery.BONUS_WINNING_COUNT) + "개");
+    private static String goPrint(Map<Integer, Integer> summaryResult, int key) {
+        if (LottoGenerator.BONUS_WINNING_VALID_NUMBER == key) {
+            return hasBonusCheck(summaryResult, key);
         }
-        if (i == LottoGenerator.BONUS_WINNING_VALID_NUMBER) {
-            System.out.println(i + "개 일치, 보너스 볼 일치 (" + Prize.findByCountOfMatch(i + 1).getWinningMoney() + "원)- " + LottoLottery.BONUS_WINNING_COUNT + "개");
-        }
-        if (i == LottoGenerator.WINNING_NUMBERS_LENGTH) {
-            System.out.println(i + "개 일치 (" + Prize.findByCountOfMatch(i + 1).getWinningMoney() + "원)- " + result.get(i) + "개");
-        }
+        return key + "개 일치 (" + Prize.matchOfCount(key, false).getWinningMoney() + "원)- " + summaryResult.get(key) + "개";
+    }
+
+    private static String hasBonusCheck(Map<Integer, Integer> summaryResult, int key) {
+        return key + "개 일치 (" + Prize.matchOfCount(key, false).getWinningMoney() + "원)- " + (summaryResult.get(key) - LottoLottery.BONUS_WINNING_COUNT) + "개\n" +
+                +key + "개 일치, 보너스 볼 일치 (" + Prize.matchOfCount(key, true).getWinningMoney() + "원)- " + LottoLottery.BONUS_WINNING_COUNT + "개";
     }
 
     public static void printYield(double yield) {
