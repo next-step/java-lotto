@@ -28,7 +28,7 @@ public class LottoGeneratorTest {
     @Test
     public void 생성_된_로또_자릿수_확인() {
         LottoGenerator.generateStandardLotto();
-        Set<Lotto> autoLottos = LottoGenerator.purchasedLottos(3);
+        Set<Lotto> autoLottos = LottoGenerator.purchasedLottos(6);
         assertThat(autoLottos.size()).isEqualTo(LottoGenerator.WINNING_NUMBERS_LENGTH);
     }
 }
