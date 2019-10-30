@@ -11,16 +11,15 @@ public class LottoWinningNumbers {
         this.winningNumbers = new ArrayList<>(winningNumbers);
     }
 
-    public static List<Integer> valueOf(LottoWinningNumbers test){
-        return test.winningNumbers;
+    public static List<Integer> valueOf(LottoWinningNumbers lottoWinningNumbers) {
+        return lottoWinningNumbers.winningNumbers;
     }
 
     public static LottoWinningNumbers creatLottoWinningNumbers(String[] inputWinningNumbers) {
         checkWinningNumberLength(inputWinningNumbers);
         checkOverlapWinningNumber(inputWinningNumbers);
 
-        LottoWinningNumbers winningNumbers = new LottoWinningNumbers(checkWinningNumberRange(inputWinningNumbers));
-        return winningNumbers;
+        return new LottoWinningNumbers(checkWinningNumberRange(inputWinningNumbers));
     }
 
     private static void checkWinningNumberLength(String[] inputWinningNumbers) {
