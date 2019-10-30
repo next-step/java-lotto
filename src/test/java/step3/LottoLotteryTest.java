@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * 보너스 번호와 관련 된 로직이 있음
- */
 public class LottoLotteryTest {
 
     private List<Integer> lottoWinningNumbers = new ArrayList<>();
+    private Map<Integer, Integer> resultMatching = new HashMap<>();
 
     @BeforeEach
     void setUp() {
@@ -26,6 +26,10 @@ public class LottoLotteryTest {
         lottoWinningNumbers.add(4, 31);
         lottoWinningNumbers.add(5, 42);
 
+        resultMatching.put(0, 5);
+        resultMatching.put(1, 0);
+        resultMatching.put(2, 0);
+
         LottoWinningNumbers.LOTTO_BONUS_NUMBER = lottoWinningNumbers.get(5);
 
     }
@@ -33,6 +37,8 @@ public class LottoLotteryTest {
     @DisplayName("보너스 당첨 여부 확인")
     @Test
     void purchasedLottoCompareBonusNumber() {
+        LottoLottery.updateBonusNumberIndex( resultMatching,0);
+
         for (int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++) {
             LottoLottery.purchasedLottoCompareBonusNumber(lottoWinningNumbers, i);
         }
