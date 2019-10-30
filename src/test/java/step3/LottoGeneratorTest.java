@@ -7,7 +7,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+public class LottoGeneratorTest {
 
     @DisplayName("로또번호 범위 확인: 1 ~ 45")
     @Test
