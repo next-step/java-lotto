@@ -7,3 +7,7 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+# TDD 연습 과제
+* 실패하는 테스트 코드를 작성하고, 테스트 통과를 위해 코드를 수정한다.
+* 수정된 코드는 리펙토링을 진행한다.
