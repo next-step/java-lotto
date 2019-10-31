@@ -3,9 +3,10 @@ package tdd;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static tdd.Numbers.INIT_RESULT_VALUE;
+
 public class StringAddCalculator {
 
-    private static final int INIT_RESULT_VALUE = 0;
     private static final String DEFAULT_DELIMITER = ",|:";
 
     public int add(String inputText) {
@@ -23,17 +24,7 @@ public class StringAddCalculator {
             text = m.group(2);
         }
 
-        String[] numbers = text.split(delimiter);
-
-        int result = INIT_RESULT_VALUE;
-        for (String each : numbers) {
-            int number = Integer.valueOf(each);
-            if (number < 0) {
-                throw new IllegalArgumentException();
-            }
-            result += number;
-        }
-
-        return result;
+        Numbers numbers = new Numbers(text.split(delimiter));
+        return numbers.addAll();
     }
 }
