@@ -28,6 +28,9 @@ public class StringAddCalculator {
         int result = INIT_RESULT_VALUE;
         for (String each : numbers) {
             int number = Integer.valueOf(each);
+            if (number < 0) {
+                throw new IllegalArgumentException();
+            }
             result += number;
         }
 
