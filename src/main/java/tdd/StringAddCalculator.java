@@ -9,7 +9,7 @@ public class StringAddCalculator {
             return INIT_RESULT_VALUE;
         }
 
-        String[] numbers = inputText.split(",");
+        String[] numbers = inputText.split(",|:");
 
         int result = INIT_RESULT_VALUE;
         for (String each : numbers) {
