@@ -1,15 +1,16 @@
 package tdd;
 
 public class Numbers {
-    public static final int INIT_RESULT_VALUE = 0;
+
+    static final int INIT_RESULT_VALUE = 0;
 
     private String[] numbers;
 
-    public Numbers(String[] numberTexts) {
+    Numbers(String[] numberTexts) {
         this.numbers = numberTexts;
     }
 
-    public int addAll() {
+    int addAll() {
         int result = INIT_RESULT_VALUE;
 
         for (String each : numbers) {
