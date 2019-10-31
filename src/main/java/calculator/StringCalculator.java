@@ -27,7 +27,7 @@ public class StringCalculator {
     }
 
     private static String[] split(String text, String customDelimiter) {
-        if(customDelimiter.isEmpty()) {
+        if (customDelimiter.isEmpty()) {
             return text.split(DEFAULT_DELIMITER);
         }
 
