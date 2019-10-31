@@ -15,13 +15,16 @@ public class Numbers {
 
         for (String each : numbers) {
             int number = convertToInt(each);
-
-            if (number < INIT_RESULT_VALUE) {
-                throw new IllegalArgumentException();
-            }
+            checkPositiveValidation(number);
             result += number;
         }
         return result;
+    }
+
+    private void checkPositiveValidation(int number) {
+        if (number < INIT_RESULT_VALUE) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private int convertToInt(String numberText) {
