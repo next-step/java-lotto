@@ -17,8 +17,13 @@ public class StringCalculator {
     private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
 
     public static int add(String text) {
+        if (text == null || text.isEmpty()) {
+            return 0;
+        }
+
         String[] values = split(removeCustomDelimiter(text), extractCustomDelimiter(text));
         isValid(values);
+
         return sum(values);
     }
 
