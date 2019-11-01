@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.domain.LottoCreator.canAffordToBuyLotto;
+
 public class Person {
 
-	private long amount;
+	private Wallet wallet;
 	private List<Lotto> lotteries;
 
 	private Person(long amount, List<Lotto> lotteries) {
-		this.amount = amount;
+		this.wallet = Wallet.of(amount);
 		this.lotteries = lotteries;
 	}
 
@@ -22,9 +24,14 @@ public class Person {
 		return new Person(amount, lotteries);
 	}
 
-	public void buyLotto() {
-		amount -= 1000;
-		lotteries.add(LottoCreator.create());
+	public void buyLottoWithAllMoney() {
+		while (canAffordToBuyLotto(wallet)) {
+			buyLotto();
+		}
+	}
+
+	private void buyLotto() {
+		lotteries.add(LottoCreator.pickLotto(wallet));
 	}
 
 	@Override
@@ -32,13 +39,13 @@ public class Person {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Person person = (Person) o;
-		return amount == person.amount &&
+		return Objects.equals(wallet, person.wallet) &&
 				Objects.equals(lotteries, person.lotteries);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, lotteries);
+		return Objects.hash(wallet, lotteries);
 	}
 
 }
