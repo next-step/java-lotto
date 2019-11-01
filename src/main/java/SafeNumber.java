@@ -5,7 +5,7 @@ public class SafeNumber {
     private static final int MINIMUM_VALUE = 0;
     private Integer number;
 
-    public SafeNumber(int number) {
+    public SafeNumber(final int number) {
         if (number < MINIMUM_VALUE) {
             throw new RuntimeException(number + " : 음수는 허용되지 않습니다.");
         }
