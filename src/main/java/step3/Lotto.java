@@ -15,6 +15,10 @@ public class Lotto {
         this.lotto = new ArrayList<>(lotto);
     }
 
+    public static List<Integer> beforeInstance(Lotto lotto) {
+        return lotto.lotto;
+    }
+
     public static List<Integer> lotteryStatics(Set<Lotto> purchasedLottos, List<Integer> winningNumbers) {
         List<Integer> resultMatching = new ArrayList<>();
         for (Lotto purchasedLotto : purchasedLottos) {
@@ -36,12 +40,5 @@ public class Lotto {
             LottoLottery.purchasedLottoCompareBonusNumber(purchasedLotto.lotto, indexCount);
             indexCount++;
         }
-    }
-
-    public static void goPrint(Set<Lotto> purchasedLottos) {
-        for (Lotto purchasedLotto : purchasedLottos) {
-            ResultView.printPurchasedLottos(purchasedLotto.lotto);
-        }
-        System.out.println();
     }
 }

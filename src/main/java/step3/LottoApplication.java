@@ -18,7 +18,7 @@ public class LottoApplication {
 
         // 1. 로또 구매 ( 구매한 로또 번호는 고유하다. )
         Set<Lotto> purchasedLottos = LottoGenerator.purchasedLottos(money.getLottoCount());
-        Lotto.goPrint(purchasedLottos);
+        goPrint(purchasedLottos);
 
         // 2. 당첨번호와 보너스 번호를 입력 받음
         String[] inputWinningNumbers = inputWinningNumbers();

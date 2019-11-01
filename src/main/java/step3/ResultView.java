@@ -2,13 +2,21 @@ package step3;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ResultView {
     public static void countLottoResult(int countLotto) {
         System.out.println(countLotto + "개를 구매했습니다.");
     }
 
-    public static void printPurchasedLottos(List<Integer> purchasedLotto) {
+    public static void goPrint(Set<Lotto> purchasedLottos) {
+        for (Lotto purchasedLotto : purchasedLottos) {
+            printPurchasedLottos(Lotto.beforeInstance(purchasedLotto));
+        }
+        System.out.println();
+    }
+
+    private static void printPurchasedLottos(List<Integer> purchasedLotto) {
         System.out.println(purchasedLotto);
     }
 
