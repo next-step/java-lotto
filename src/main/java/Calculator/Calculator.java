@@ -1,16 +1,9 @@
 package Calculator;
 
-import com.sun.deploy.util.StringUtils;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
-
-    @Override
-    public boolean equals(Object obj) {
-        return (obj instanceof Calculator);
-    }
 
     public int calculateText(String text) {
         if (isNullOrEmpty(text)) {
@@ -61,6 +54,11 @@ public class Calculator {
     private boolean isMinusNumber(String token) {
         int number = Integer.parseInt(token);
         return (number < 0) ? true : false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Calculator);
     }
 
 }
