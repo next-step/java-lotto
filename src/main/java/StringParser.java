@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,10 +10,18 @@ public class StringParser {
     private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final String NUMBER_FORMAT = "\\d+";
+    private static final String EMPTY = "";
 
     public static List<Integer> parse(final String input) {
+        if (validateInput(input)) {
+            return Collections.singletonList(0);
+        }
         List<String> parsed = parseWithDelimiter(input);
         return convert(parsed);
+    }
+
+    private static boolean validateInput(String input) {
+        return (input == null) || (input.trim().equals(EMPTY));
     }
 
     private static List<String> parseWithDelimiter(final String input) {
