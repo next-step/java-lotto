@@ -25,7 +25,11 @@ public class CalculatorTest {
         assertThat(calculator.calculateText(null)).isEqualTo(0);
     }
 
-
+    @Test
+    void 단독_또는_콤마포함_계산(){
+        assertThat(calculator.calculateText("6")).isEqualTo(6);
+        assertThat(calculator.calculateText("6,7")).isEqualTo(13);
+    }
 
 
 

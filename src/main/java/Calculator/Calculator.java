@@ -13,8 +13,7 @@ public class Calculator {
             return 0;
         }
 
-
-        return 1;
+        return sumTokens(getTokens(text));
     }
 
     private boolean isNullOrEmpty(String text){
@@ -27,4 +26,17 @@ public class Calculator {
 
         return false;
     }
+
+    private String[] getTokens(String text){
+        return text.split(",");
+    }
+
+    private int sumTokens(String[] tokens){
+        int result = 0;
+        for(String token:tokens){
+            result += Integer.parseInt(token);
+        }
+        return result;
+    }
+
 }
