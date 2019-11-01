@@ -49,12 +49,12 @@ public class CalculatorTest {
         }).isInstanceOf(RuntimeException.class);
     }
 
- /*   @Test
-    void 음수_테스트(){
+    @Test
+    void 구분자_이외의_문자_계산(){
         assertThatThrownBy(() -> {
-            calculator.makeValidInteger("-1");
+            calculator.calculateText("//;\n-1&2;3");
         }).isInstanceOf(RuntimeException.class);
-    }*/
+    }
 
 
 }

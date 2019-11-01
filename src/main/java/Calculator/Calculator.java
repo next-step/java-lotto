@@ -1,5 +1,7 @@
 package Calculator;
 
+import com.sun.deploy.util.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,12 +47,20 @@ public class Calculator {
         return result;
     }
 
-    private int makeValidInteger(String token){
-        int result = Integer.parseInt(token);
-        if(result < 0){
+    private int makeValidInteger(String token) {
+        if (isNotNumberToken(token) || isMinusNumber(token)) {
             throw new RuntimeException();
         }
-        return result;
+        return Integer.parseInt(token);
+    }
+
+    private boolean isNotNumberToken(String token) {
+        return (token.matches("^[0-9]*$")) ? false : true;
+    }
+
+    private boolean isMinusNumber(String token) {
+        int number = Integer.parseInt(token);
+        return (number < 0) ? true : false;
     }
 
 }
