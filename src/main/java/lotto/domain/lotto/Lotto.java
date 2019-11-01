@@ -8,19 +8,24 @@ import java.util.Set;
 public class Lotto {
 
 	private static int LOTTO_BALL_NUMBERS_LIMIT = 6;
+	@SuppressWarnings("FieldCanBeLocal")
+	private static String LOTTO_NUMBERS_COUNT_ERROR_MSG = "로또는 %s개의 숫자만 가질 수 있습니다";
+	@SuppressWarnings("FieldCanBeLocal")
+	private static String ANSWER_NUMBERS_COUNT_ERROR_MSG = "로또는 %s개의 숫자로만 비교될 수 있습니다";
 
 	private Set<Integer> numbers;
+	private LottoPrize status;
 
 	private Lotto(List<Integer> inputNumbers) {
-		validateNumbersCount(inputNumbers);
+		validateNumbersCount(inputNumbers, LOTTO_NUMBERS_COUNT_ERROR_MSG);
 		this.numbers = new HashSet<>(inputNumbers);
 		validateDuplicateNumbers(numbers);
+		this.status = LottoPrize.UNKNOWN;
 	}
 
-	private void validateNumbersCount(List<Integer> inputNumbers) {
+	private void validateNumbersCount(List<Integer> inputNumbers, String errorMessage) {
 		if (inputNumbers.size() != LOTTO_BALL_NUMBERS_LIMIT) {
-			throw new IllegalArgumentException(String.format("로또는 %s개의 숫자만 가지고 있습니다",
-					LOTTO_BALL_NUMBERS_LIMIT));
+			throw new IllegalArgumentException(String.format(errorMessage, LOTTO_BALL_NUMBERS_LIMIT));
 		}
 	}
 
@@ -34,7 +39,21 @@ public class Lotto {
 		return new Lotto(inputNumbers);
 	}
 
-	// TODO: 2019-11-01 GETTER를 없앨 수 있는 방법이 있는지 생각해보기
+	public void examine(List<Integer> answerNumbers) {
+		validateNumbersCount(answerNumbers, ANSWER_NUMBERS_COUNT_ERROR_MSG);
+		this.status = LottoPrize.of(countMatchedNumbers(answerNumbers));
+	}
+
+	private long countMatchedNumbers(List<Integer> answerNumbers) {
+		return answerNumbers.stream()
+				.filter(e -> numbers.contains(e))
+				.count();
+	}
+
+	public boolean hasSameStatus(LottoPrize lottoPrize) {
+		return status.equals(lottoPrize);
+	}
+
 	public Set<Integer> getNumbers() {
 		return numbers;
 	}
