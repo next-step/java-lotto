@@ -32,7 +32,7 @@ class PositiveIntegerTest {
     static Stream<Arguments> add() {
         return Stream.of(
             Arguments.of(new PositiveInteger(0), new PositiveInteger(1), new PositiveInteger(1)),
-            Arguments.of(new PositiveInteger(2), new PositiveInteger(3), new PositiveInteger(5));
+            Arguments.of(new PositiveInteger(2), new PositiveInteger(3), new PositiveInteger(5))
         );
     }
 
