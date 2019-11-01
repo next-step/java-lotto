@@ -34,7 +34,11 @@ public class CalculatorTest {
     @Test
     void 콤마와_콜론포함_계산(){
         assertThat(calculator.calculateText("6,7:3")).isEqualTo(16);
+    }
 
+    @Test
+    void 커스텀_구분자_계산(){
+        assertThat(calculator.calculateText("//;\n1;2;3")).isEqualTo(6);
     }
 
 
