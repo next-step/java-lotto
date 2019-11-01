@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class Person {
 
-	private Wallet wallet;
-	private List<Lotto> lotteries;
+	private final Wallet wallet;
+	private final List<Lotto> lotteries;
 
 	private Person(long amount, List<Lotto> lotteries) {
 		this.wallet = Wallet.of(amount);

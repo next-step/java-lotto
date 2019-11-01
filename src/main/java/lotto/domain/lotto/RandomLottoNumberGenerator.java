@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class RandomLottoNumberGenerator implements LottoNumbersGeneratePolicy {
 
-	private static int LOTTO_MIN_NUMBER = 1;
-	private static int LOTTO_MAX_NUMBER = 45;
+	private static final int LOTTO_MIN_NUMBER = 1;
+	private static final int LOTTO_MAX_NUMBER = 45;
 
 	@SuppressWarnings("FieldCanBeLocal")
 	private static int START_INDEX = 0;
