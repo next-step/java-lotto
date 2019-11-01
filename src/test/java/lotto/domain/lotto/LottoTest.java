@@ -22,7 +22,7 @@ class LottoTest {
 		targetLotto.examine(Arrays.asList(num1, num2, num3, num4, num5, num6));
 
 		// then
-		assertThat(targetLotto.hasSameStatus(expectedLottoPrize)).isTrue();
+		assertThat(targetLotto.getStatus()).isEqualTo(expectedLottoPrize);
 	}
 
 }

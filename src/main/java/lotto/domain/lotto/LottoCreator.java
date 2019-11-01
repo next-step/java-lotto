@@ -7,7 +7,8 @@ public class LottoCreator {
 
 	private LottoNumbersGeneratePolicy createPolicy;
 
-	private static int LOTTO_PRICE = 1000;
+	// 로또 생산자는 로또 가격을 누구나 볼 수 있게 적어 두어야 한다
+	public static final int LOTTO_PRICE = 1000;
 
 	private LottoCreator(LottoNumbersGeneratePolicy createPolicy) {
 		this.createPolicy = createPolicy;

@@ -55,7 +55,7 @@
 
 로또를 사는 객체 \
 
-### Calculator
+### EarningsRateCalculator
 
 로또 결과를 계산해주는 객체 \
 사람이 계산하기엔 머리에 한계가 있으니 계산기를 쓰자
@@ -78,4 +78,4 @@ lotto.examine(List Integer)를 하면 해당 로또에 대한 LottoPrize가 기�
 
 > 총 수익률 계산하기
 
-calculator.calculateReturn(List Lotto)
+calculator.calculate(List Lotto)

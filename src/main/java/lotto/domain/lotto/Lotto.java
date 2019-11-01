@@ -16,6 +16,10 @@ public class Lotto {
 	private Set<Integer> numbers;
 	private LottoPrize status;
 
+	public Lotto(LottoPrize status) {
+		this.status = status;
+	}
+
 	private Lotto(List<Integer> inputNumbers) {
 		validateNumbersCount(inputNumbers, LOTTO_NUMBERS_COUNT_ERROR_MSG);
 		this.numbers = new HashSet<>(inputNumbers);
@@ -50,8 +54,8 @@ public class Lotto {
 				.count();
 	}
 
-	public boolean hasSameStatus(LottoPrize lottoPrize) {
-		return status.equals(lottoPrize);
+	public LottoPrize getStatus() {
+		return status;
 	}
 
 	public Set<Integer> getNumbers() {

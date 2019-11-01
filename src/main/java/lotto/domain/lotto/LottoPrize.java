@@ -35,4 +35,8 @@ public enum LottoPrize {
 		return cachingLottoPrize.getOrDefault(sameNumberCount, UNKNOWN);
 	}
 
+	public long getRewardAmount() {
+		return rewardAmount;
+	}
+
 }
