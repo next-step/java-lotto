@@ -35,7 +35,7 @@ public class LottoWinningNumbersTest {
     @DisplayName("보너스번호 중복/ 보너스번호 범위 확인")
     @Test
     public void 보너스번호_유효성_확인() {
-        LottoWinningNumbers.LOTTO_BONUS_NUMBER = 10;
+        LottoWinningNumbers.lottoBonusNumber = 10;
         assertThatIllegalArgumentException().isThrownBy(() -> LottoWinningNumbers.checkOverlapBonusNumber(10));
     }
 }

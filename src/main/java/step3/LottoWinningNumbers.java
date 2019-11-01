@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoWinningNumbers {
 
-    static int LOTTO_BONUS_NUMBER;
+    static int lottoBonusNumber;
     private List<Integer> winningNumbers;
 
     public LottoWinningNumbers(List<Integer> winningNumbers) {
@@ -49,14 +49,14 @@ public class LottoWinningNumbers {
     }
 
     public static void checkBonusNumber(LottoWinningNumbers inputWinningNumberList) {
-        checkEachWinningNumber(LOTTO_BONUS_NUMBER);
+        checkEachWinningNumber(lottoBonusNumber);
         for (int winningNumber : inputWinningNumberList.winningNumbers) {
             checkOverlapBonusNumber(winningNumber);
         }
     }
 
     public static void checkOverlapBonusNumber(int winningNumber) {
-        if (winningNumber == LOTTO_BONUS_NUMBER)
+        if (winningNumber == lottoBonusNumber)
             throw new IllegalArgumentException("입력 된 당첨번호 중에 보너스 번호와 중복되는 값이 있습니다.");
     }
 }

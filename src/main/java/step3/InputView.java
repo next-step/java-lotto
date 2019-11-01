@@ -23,7 +23,7 @@ public class InputView {
 
     public static void bonusNumberAdd(LottoWinningNumbers inputWinningNumberList) {
         System.out.println("보너스 볼을 입력해주세요.");
-        LottoWinningNumbers.LOTTO_BONUS_NUMBER = scan.nextInt();
+        LottoWinningNumbers.lottoBonusNumber = scan.nextInt();
         LottoWinningNumbers.checkBonusNumber(inputWinningNumberList);
     }
 }
