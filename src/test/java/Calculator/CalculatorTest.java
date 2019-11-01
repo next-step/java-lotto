@@ -19,6 +19,14 @@ public class CalculatorTest {
         assertThat(calculator).isEqualTo(new Calculator());
     }
 
+    @Test
+    void 빈문자열_또는_null_입력(){
+        assertThat(calculator.calculateText("")).isEqualTo(0);
+        assertThat(calculator.calculateText(null)).isEqualTo(0);
+    }
+
+
+
 
 
 }
