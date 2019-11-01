@@ -3,6 +3,9 @@ package step1;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step1.Domain.Calculator;
+import step1.Util.NumberUtil;
+import step1.Util.StringUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,9 +17,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class CalculatorTest {
     @Test
     void SumTest() {
-        Calculator calculator = new Calculator(Arrays.asList(1, 2, 3));
+        Calculator calculator = new Calculator("1,2,3");
         assertThat(calculator.getSum()).isEqualTo(6);
-
     }
 
     @ParameterizedTest

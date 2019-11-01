@@ -1,11 +1,15 @@
 package step1;
 
-import java.util.Scanner;
+import step1.Domain.Calculator;
+import step1.View.InputView;
+import step1.View.ResultView;
 
 public class Application {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = InputView.inputDate();
+        Calculator calculator = new Calculator(input);
+        Integer calculatorSum = calculator.getSum();
+        ResultView.printData(calculatorSum);
 
     }
 }
