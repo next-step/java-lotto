@@ -14,7 +14,7 @@ class DefaultParserTest {
 
         ParseStrategy strategy = new DefaultParser();
         strategy.support(normalInput);
-        List<String> parsedInputs = strategy.parse(normalInput);
+        List<String> parsedInputs = strategy.parse();
 
         assertThat(parsedInputs).contains("1", "2", "3");
     }

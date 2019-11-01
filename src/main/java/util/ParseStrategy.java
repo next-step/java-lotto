@@ -13,6 +13,6 @@ public abstract class ParseStrategy {
         return this.matcher.find();
     }
 
-    protected abstract List<String> parse(String input);
+    public abstract List<String> parse();
 
 }

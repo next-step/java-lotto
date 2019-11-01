@@ -14,7 +14,7 @@ class CustomParserTest {
 
         ParseStrategy strategy = new CustomParser();
         strategy.support(customInput);
-        List<String> parsedInputs = strategy.parse(customInput);
+        List<String> parsedInputs = strategy.parse();
 
         assertThat(parsedInputs).contains("1", "2", "3", "4");
     }

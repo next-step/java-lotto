@@ -12,7 +12,7 @@ public class CustomParser extends ParseStrategy {
     }
 
     @Override
-    protected List<String> parse(String input) {
+    public List<String> parse() {
         this.customDelimiter = super.matcher.group(1);
         String customInput = super.matcher.group(2);
         return Arrays.asList(customInput.split(this.customDelimiter));

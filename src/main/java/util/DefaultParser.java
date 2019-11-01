@@ -12,8 +12,8 @@ public class DefaultParser extends ParseStrategy {
     }
 
     @Override
-    protected List<String> parse(String input) {
-        return Arrays.asList(input.split(DELIMITER));
+    public List<String> parse() {
+        return Arrays.asList(super.matcher.group(1).split(DELIMITER));
     }
 
 }
