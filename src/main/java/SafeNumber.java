@@ -12,6 +12,10 @@ public class SafeNumber {
         this.number = number;
     }
 
+    public Integer getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
