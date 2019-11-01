@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoLottery {
 
-    static int BONUS_WINNING_COUNT = 0;
+    static int bonusWinningCount = 0;
     static boolean bonusCheck = false;
 
     private static List<Integer> bonusWinningIndex = new ArrayList<>();
@@ -17,10 +17,10 @@ public class LottoLottery {
 
     public static void purchasedLottoCompareBonusNumber(List<Integer> purchasedLotto, int indexCount) {
         if (bonusWinningIndex.contains(indexCount)) {
-            BONUS_WINNING_COUNT = purchasedLotto.contains(LottoWinningNumbers.lottoBonusNumber) ? BONUS_WINNING_COUNT + 1 : BONUS_WINNING_COUNT;
+            bonusWinningCount = purchasedLotto.contains(LottoWinningNumbers.lottoBonusNumber) ? bonusWinningCount + 1 : bonusWinningCount;
         }
 
-        if (BONUS_WINNING_COUNT > 0) {
+        if (bonusWinningCount > 0) {
             bonusCheck = true;
         }
     }

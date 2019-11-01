@@ -51,8 +51,8 @@ public class Money {
     }
 
     private long sumBonusPrize(Map<Integer, Integer> summaryResult, int key) {
-        long bonusPrize = Prize.matchOfCount(key, true).getWinningMoney() * LottoLottery.BONUS_WINNING_COUNT;
-        int thirdPrizeCount = summaryResult.get(key) - LottoLottery.BONUS_WINNING_COUNT;
+        long bonusPrize = Prize.matchOfCount(key, true).getWinningMoney() * LottoLottery.bonusWinningCount;
+        int thirdPrizeCount = summaryResult.get(key) - LottoLottery.bonusWinningCount;
 
         return bonusPrize + (Prize.matchOfCount(key, false).getWinningMoney() * thirdPrizeCount);
     }

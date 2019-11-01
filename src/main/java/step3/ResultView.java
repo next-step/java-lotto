@@ -37,8 +37,8 @@ public class ResultView {
     }
 
     private static String hasBonusCheck(Map<Integer, Integer> summaryResult, int key) {
-        return key + "개 일치 (" + Prize.matchOfCount(key, false).getWinningMoney() + "원)- " + (summaryResult.get(key) - LottoLottery.BONUS_WINNING_COUNT) + "개\n" +
-                +key + "개 일치, 보너스 볼 일치 (" + Prize.matchOfCount(key, true).getWinningMoney() + "원)- " + LottoLottery.BONUS_WINNING_COUNT + "개";
+        return key + "개 일치 (" + Prize.matchOfCount(key, false).getWinningMoney() + "원)- " + (summaryResult.get(key) - LottoLottery.bonusWinningCount) + "개\n" +
+                +key + "개 일치, 보너스 볼 일치 (" + Prize.matchOfCount(key, true).getWinningMoney() + "원)- " + LottoLottery.bonusWinningCount + "개";
     }
 
     public static void printYield(double yield) {

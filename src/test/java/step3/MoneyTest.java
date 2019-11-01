@@ -15,7 +15,7 @@ public class MoneyTest {
 
     @BeforeEach
     void setUp() {
-        LottoLottery.BONUS_WINNING_COUNT = 1;
+        LottoLottery.bonusWinningCount = 1;
         LottoLottery.bonusCheck = true;
 
         summaryResult.put(5, 2);
@@ -27,7 +27,7 @@ public class MoneyTest {
         }
 
         summaryResult.put(5, 3);
-        totalPrize += Prize.matchOfCount(5, true).getWinningMoney() * LottoLottery.BONUS_WINNING_COUNT;
+        totalPrize += Prize.matchOfCount(5, true).getWinningMoney() * LottoLottery.bonusWinningCount;
 
     }
 
