@@ -1,10 +1,11 @@
-package lotto.domain;
+package lotto.domain.person;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCreator;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static lotto.domain.LottoCreator.canAffordToBuyLotto;
 
 public class Person {
 
@@ -24,14 +25,14 @@ public class Person {
 		return new Person(amount, lotteries);
 	}
 
-	public void buyLottoWithAllMoney() {
-		while (canAffordToBuyLotto(wallet)) {
-			buyLotto();
+	public void buyLottoWithAllMoney(LottoCreator lottoCreator) {
+		while (lottoCreator.canAffordToBuyLotto(wallet)) {
+			buyLotto(lottoCreator);
 		}
 	}
 
-	private void buyLotto() {
-		lotteries.add(LottoCreator.pickLotto(wallet));
+	private void buyLotto(LottoCreator lottoCreator) {
+		lotteries.add(lottoCreator.pickLotto(wallet));
 	}
 
 	@Override

@@ -1,8 +1,8 @@
-package lotto.domain;
+package lotto.domain.person;
 
 import java.util.Objects;
 
-class Wallet {
+public class Wallet {
 
 	private long amount;
 
@@ -10,15 +10,15 @@ class Wallet {
 		this.amount = amount;
 	}
 
-	static Wallet of(long amount) {
+	public static Wallet of(long amount) {
 		return new Wallet(amount);
 	}
 
-	boolean hasMoreThan(long comparedAmount) {
+	public boolean hasMoreThan(long comparedAmount) {
 		return amount >= comparedAmount;
 	}
 
-	void minus(long minusAmount) {
+	public void minus(long minusAmount) {
 		this.amount -= minusAmount;
 	}
 
