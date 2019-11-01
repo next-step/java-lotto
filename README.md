@@ -7,3 +7,11 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+# 요구사항 분석
+## 1단계
+* 쉼표 또는 콜론을 구분자로 뷴라한다.
+* 커스텀 구분자로 분리한다
+* 분리된 문자열을 숫자로 변환한다.
+* 양수값 이외의 입력은 runtime exception을 보낸다.
+* 숫자로 분리된 값들의 합을 구한다.
