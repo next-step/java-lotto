@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class SafeNumber {
 
-    private static final String NUMBER_FORMAT = "\\d+";
     private static final int MINIMUM_VALUE = 0;
     private Integer number;
 
