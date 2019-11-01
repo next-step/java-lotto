@@ -28,7 +28,7 @@ public class Calculator {
     }
 
     private String[] getTokens(String text){
-        return text.split(",");
+        return text.split(",|:");
     }
 
     private int sumTokens(String[] tokens){

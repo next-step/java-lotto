@@ -31,6 +31,12 @@ public class CalculatorTest {
         assertThat(calculator.calculateText("6,7")).isEqualTo(13);
     }
 
+    @Test
+    void 콤마와_콜론포함_계산(){
+        assertThat(calculator.calculateText("6,7:3")).isEqualTo(16);
+
+    }
+
 
 
 }
