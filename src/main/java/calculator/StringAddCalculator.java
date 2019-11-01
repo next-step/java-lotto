@@ -22,14 +22,26 @@ public class StringAddCalculator {
         }
     }
 
-    public int validate(String input) {
+    public int sum(String[] inputs) {
+        int sum = 0;
+        for (String input : inputs) {
+            sum += Integer.parseInt(input);
+        }
+        return sum;
+    }
+
+    public String[] numberSplit(String input) {
+        return input.split(",");
+    }
+
+    private int validate(String input) {
         if (input.isEmpty()) {
             return ZERO;
         }
         return nullValidate(input);
     }
 
-    public int nullValidate(String input) {
+    private int nullValidate(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NullPointerException e) {

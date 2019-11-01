@@ -14,14 +14,30 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    void calculateCreate() {
+    void calculateCreateTest() {
         StringAddCalculator calculator = new StringAddCalculator("1,2");
         assertThat(calculator).isEqualTo(new StringAddCalculator("1,2"));
     }
 
     @Test
-    void emptyOrNullValidate() {
+    void emptyOrNullValidateTest() {
         assertThat(stringAddCalculator.add("")).isEqualTo(0);
         assertThat(stringAddCalculator.add(null)).isEqualTo(0);
+    }
+
+    @Test
+    void onceValueTest() {
+        assertThat(stringAddCalculator.add("5")).isEqualTo(5);
+    }
+
+    @Test
+    void sumCalculateTest() {
+        assertThat(stringAddCalculator.add("1,2")).isEqualTo(3);
+    }
+
+    @Test
+    void commaSplitTest() {
+        assertThat(stringAddCalculator.numberSplit("1,2")).hasSize(2);
+        assertThat(stringAddCalculator.numberSplit("1,2")).contains("1", "2");
     }
 }
