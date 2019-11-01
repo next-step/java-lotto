@@ -1,6 +1,5 @@
-package com.seok2.adder;
+package com.seok2.adder.domain;
 
-import java.math.BigInteger;
 import java.util.Objects;
 
 public class PositiveInteger {
