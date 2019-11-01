@@ -2,10 +2,12 @@ package lotto.domain.person;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCreator;
+import lotto.dto.LottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Person {
 
@@ -33,6 +35,25 @@ public class Person {
 
 	private void buyLotto(LottoCreator lottoCreator) {
 		lotteries.add(lottoCreator.pickLotto(wallet));
+	}
+
+	public List<LottoDto> getLottoDtos() {
+		return lotteries.stream()
+				.map(LottoDto::of)
+				.collect(Collectors.toList());
+	}
+
+	public void checkAllLotteries(List<Integer> answerNumbers) {
+		validateEmptyLotteries();
+		for (Lotto lotto : lotteries) {
+			lotto.examine(answerNumbers);
+		}
+	}
+
+	private void validateEmptyLotteries() {
+		if (lotteries.isEmpty()) {
+			throw new IllegalStateException("비교할 수 있는 로또가 없습니다");
+		}
 	}
 
 	@Override
