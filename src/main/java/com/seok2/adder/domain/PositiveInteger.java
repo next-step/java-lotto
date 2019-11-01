@@ -4,15 +4,17 @@ import java.util.Objects;
 
 public class PositiveInteger {
 
-    private static final int ZERO = 0;
+    public static final PositiveInteger ZERO = new PositiveInteger();
+    private static final int ZERO_VALUE = 0;
+
     private final int integer;
 
     public PositiveInteger() {
-        this(ZERO);
+        this(ZERO_VALUE);
     }
 
     public PositiveInteger(int integer) {
-        if(integer < ZERO)
+        if(integer < ZERO_VALUE)
             throw new IllegalArgumentException();
         this.integer = integer;
     }
@@ -23,6 +25,16 @@ public class PositiveInteger {
         } catch ( NumberFormatException e ) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public PositiveInteger add(PositiveInteger operand) {
+        if(operand.integer == ZERO_VALUE)
+            return this;
+        return new PositiveInteger(this.integer + operand.integer);
+    }
+
+    public int intValue() {
+        return this.integer;
     }
 
     @Override
@@ -42,9 +54,5 @@ public class PositiveInteger {
         return Objects.hash(integer);
     }
 
-    public PositiveInteger add(PositiveInteger operand) {
-        if(operand.integer == ZERO)
-            return this;
-        return new PositiveInteger(this.integer + operand.integer);
-    }
+
 }

@@ -1,9 +1,8 @@
-package com.seok2.adder;
+package com.seok2.adder.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import com.seok2.adder.domain.PositiveInteger;
 import java.util.Random;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
