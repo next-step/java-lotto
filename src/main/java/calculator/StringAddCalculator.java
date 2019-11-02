@@ -23,14 +23,13 @@ public class StringAddCalculator {
             return Integer.parseInt(ZERO);
         }
 
-        String[] numbers = numberSplit(input);
-        return sum(numbers);
+        return sum(numberSplit(input));
     }
 
-    public int sum(String[] inputs) {
+    private int sum(String[] inputs) {
         int sum = 0;
         for (String input : inputs) {
-            sum += Integer.parseInt(input);
+            sum += minusValueValidate(input);
         }
         return sum;
     }
@@ -45,6 +44,13 @@ public class StringAddCalculator {
         }
 
         return input.split("[,:]");
+    }
+
+    private int minusValueValidate(String input) {
+        if (Integer.parseInt(input) < 0) {
+            throw new IllegalArgumentException();
+        }
+        return Integer.parseInt(input);
     }
 
     private String validate(String input) {
