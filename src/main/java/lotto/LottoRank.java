@@ -24,10 +24,6 @@ public enum LottoRank {
                 .orElse(NOT_MATCH);
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
     public int getWinning() {
         return winning;
     }
