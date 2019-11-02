@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class StringAddCalculatorTest {
     StringAddCalculator stringAddCalculator = new StringAddCalculator("");
@@ -30,5 +31,20 @@ public class StringAddCalculatorTest {
     @Test
     void isOneLengthNumberTest() {
         assertThat(stringAddCalculator.isOneLengthNumber("1")).isTrue();
+    }
+
+    @DisplayName("음수이면 Exception 발생")
+    @Test
+    void isNegativeTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            stringAddCalculator.isNegative(-1);
+        });
+    }
+
+    @DisplayName("더하기")
+    @Test
+    void plusTest() {
+        String[] operands = {"1", "1", "8"};
+        assertThat(stringAddCalculator.plus(operands)).isEqualTo(10);
     }
 }

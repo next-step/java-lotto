@@ -33,4 +33,25 @@ public class StringAddCalculator {
             return false;
         }
     }
+
+    public boolean isNegative(int operand) {
+        if (operand < 0) {
+            throw new IllegalArgumentException("Negative number is not allowed");
+        }
+        return false;
+    }
+
+    public int plus(String[] operands) {
+        int result = 0;
+
+        for (String operand : operands) {
+            int parsedOperand = Integer.parseInt(operand);
+
+            if(!isNegative(parsedOperand)) {
+                result += parsedOperand;
+            }
+        }
+
+        return result;
+    }
 }
