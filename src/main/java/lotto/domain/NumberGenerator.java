@@ -22,9 +22,9 @@ public class NumberGenerator {
 
     public List<Integer> generate() {
         Collections.shuffle(totalNumbers);
-        List<Integer> lottoNumbers = totalNumbers.subList(0, count);
+        List<Integer> lottoNumbers = new ArrayList<>(totalNumbers.subList(0, count));
         Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     @Override
