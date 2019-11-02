@@ -3,7 +3,7 @@ package calculator;
 import java.util.Objects;
 
 public class StringAddCalculator {
-    private static final int ZERO = 0;
+    private static final String ZERO = "0";
     private String input;
 
     public StringAddCalculator() {
@@ -16,10 +16,13 @@ public class StringAddCalculator {
 
     public int add(String input) {
         try {
-            return validate(input);
+            input = validate(input);
         } catch (NullPointerException e) {
-            return ZERO;
+            return Integer.parseInt(ZERO);
         }
+
+        String[] numbers = numberSplit(input);
+        return sum(numbers);
     }
 
     public int sum(String[] inputs) {
@@ -34,16 +37,16 @@ public class StringAddCalculator {
         return input.split(",");
     }
 
-    private int validate(String input) {
+    private String validate(String input) {
         if (input.isEmpty()) {
             return ZERO;
         }
         return nullValidate(input);
     }
 
-    private int nullValidate(String input) {
+    private String nullValidate(String input) {
         try {
-            return Integer.parseInt(input);
+            return input;
         } catch (NullPointerException e) {
             return ZERO;
         }
