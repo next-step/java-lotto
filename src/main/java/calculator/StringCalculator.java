@@ -15,6 +15,8 @@ public class StringCalculator {
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
+    private static final int CUSTOM_DELIMITER_INDEX = 1;
+    private static final int CUSTOM_DELIMITER_REMOVE_INDEX = 2;
 
     public static int add(String text) {
         if (text == null || text.isEmpty()) {
@@ -42,7 +44,7 @@ public class StringCalculator {
     private static String removeCustomDelimiter(String text) {
         Matcher matcher = getMatcher(text, CUSTOM_DELIMITER_PATTERN);
         if (matcher.find()) {
-            return matcher.group(2);
+            return matcher.group(CUSTOM_DELIMITER_REMOVE_INDEX);
         }
 
         return text;
@@ -51,7 +53,7 @@ public class StringCalculator {
     private static String extractCustomDelimiter(String text) {
         Matcher matcher = getMatcher(text, CUSTOM_DELIMITER_PATTERN);
         if (matcher.find()) {
-            return matcher.group(1);
+            return matcher.group(CUSTOM_DELIMITER_INDEX);
         }
 
         return EMPTY_STRING;
