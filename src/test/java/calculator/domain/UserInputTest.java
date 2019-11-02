@@ -23,4 +23,18 @@ class UserInputTest {
         assertThat(integers).containsExactly(1, 2, 3);
 
     }
+
+    @Test
+    @DisplayName("사용자정의 구분자를 받아 파싱한다.")
+    void parsingStringWithCustomDelimit() {
+        //given
+        UserInput userInput = new UserInput("//;\\n1;2;3");
+
+        //when
+        List<Integer> integers = userInput.getIntegers();
+
+        //then
+        assertThat(integers).hasSize(3);
+        assertThat(integers).containsExactly(1, 2, 3);
+    }
 }
