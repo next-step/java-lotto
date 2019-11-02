@@ -8,16 +8,18 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class StringAddCalculatorTest {
     private StringAddCalculator stringAddCalculator;
+    private StringInput stringInput;
 
     @BeforeEach
     void setUp() {
         stringAddCalculator = new StringAddCalculator();
+        stringInput = new StringInput();
     }
 
     @Test
     void calculateCreateTest() {
-        StringAddCalculator calculator = new StringAddCalculator("1,2");
-        assertThat(calculator).isEqualTo(new StringAddCalculator("1,2"));
+        StringAddCalculator calculator = new StringAddCalculator();
+        assertThat(calculator).isEqualTo(new StringAddCalculator());
     }
 
     @Test
@@ -38,13 +40,13 @@ public class StringAddCalculatorTest {
 
     @Test
     void commaSplitTest() {
-        assertThat(stringAddCalculator.numberSplit("1,2")).hasSize(2);
-        assertThat(stringAddCalculator.numberSplit("1,2")).contains("1", "2");
+        assertThat(stringInput.basicSplit("1,2")).hasSize(2);
+        assertThat(stringInput.basicSplit("1,2")).contains("1", "2");
     }
 
     @Test
     void colonSplitWithCommaSplitTest() {
-        assertThat(stringAddCalculator.numberSplit("1:3,2")).hasSize(3);
+        assertThat(stringInput.inputSplitWithCustom("//;\n1;2;3")).hasSize(3);
     }
 
     @Test
