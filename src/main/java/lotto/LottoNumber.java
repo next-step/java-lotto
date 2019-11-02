@@ -25,7 +25,11 @@ public class LottoNumber {
         return numberCandidates.stream().limit(6).sorted().collect(Collectors.toList());
     }
 
-    public long matchNumberCount(LottoNumber winnerLottoNumber) {
+    public LottoRank getRank(LottoNumber winnerLottoNumber) {
+        return LottoRank.find(matchNumberCount(winnerLottoNumber));
+    }
+
+    private long matchNumberCount(LottoNumber winnerLottoNumber) {
         return winnerLottoNumber.getNumbers().stream().filter(numbers::contains).count();
     }
 

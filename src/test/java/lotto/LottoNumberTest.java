@@ -25,7 +25,7 @@ public class LottoNumberTest {
 
     @Test
     void matchLottoNumberTest() {
-        assertThat(lottoNumber.matchNumberCount(winnerLottoNumber)).isEqualTo(6);
+        assertThat(lottoNumber.getRank(winnerLottoNumber)).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
