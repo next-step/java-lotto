@@ -11,7 +11,7 @@ public class ResultView {
 
     public static void goPrint(Set<Lotto> purchasedLottos) {
         for (Lotto purchasedLotto : purchasedLottos) {
-            printPurchasedLottos(Lotto.beforeInstance(purchasedLotto));
+            printPurchasedLottos(Lotto.valueOf(purchasedLotto));
         }
         System.out.println();
     }

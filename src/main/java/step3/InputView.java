@@ -21,9 +21,9 @@ public class InputView {
         return inputWinningNumbers;
     }
 
-    public static void bonusNumberAdd(LottoWinningNumbers inputWinningNumberList) {
+    public static void bonusNumberAdd(Lotto inputWinningLottoNumberList) {
         System.out.println("보너스 볼을 입력해주세요.");
-        LottoWinningNumbers.lottoBonusNumber = scan.nextInt();
-        LottoWinningNumbers.checkBonusNumber(inputWinningNumberList);
+        Lotto.lottoBonusNumber = scan.nextInt();
+        LottoNo.checkBonusNumber(inputWinningLottoNumberList);
     }
 }

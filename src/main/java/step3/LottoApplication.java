@@ -22,12 +22,12 @@ public class LottoApplication {
 
         // 2. 당첨번호와 보너스 번호를 입력 받음
         String[] inputWinningNumbers = inputWinningNumbers();
-        LottoWinningNumbers winningNumbers = LottoWinningNumbers.creatLottoWinningNumbers(inputWinningNumbers);
-        bonusNumberAdd(winningNumbers);
+        Lotto lotto = Lotto.creatLottoWinningNumbers(inputWinningNumbers);
+        bonusNumberAdd(lotto);
 
         // 3. 로또 당첨여부 확인
         // 3-1. 구매한 로또 각각 낱장에 당첨번호가 몇 개나 있는지 카운팅
-        List<Integer> resultMatching = Lotto.lotteryStatics(purchasedLottos, LottoWinningNumbers.valueOf(winningNumbers));
+        List<Integer> resultMatching = Lotto.lotteryStatics(purchasedLottos, Lotto.valueOf(lotto));
         StatisticResult statisticResult = new StatisticResult(resultMatching);
 
         // 3-2. 보너스 볼이 일치하는지 확인

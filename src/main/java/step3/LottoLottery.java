@@ -17,7 +17,7 @@ public class LottoLottery {
 
     public static void purchasedLottoCompareBonusNumber(List<Integer> purchasedLotto, int indexCount) {
         if (bonusWinningIndex.contains(indexCount)) {
-            bonusWinningCount = purchasedLotto.contains(LottoWinningNumbers.lottoBonusNumber) ? bonusWinningCount + 1 : bonusWinningCount;
+            bonusWinningCount = purchasedLotto.contains(Lotto.lottoBonusNumber) ? bonusWinningCount + 1 : bonusWinningCount;
         }
 
         if (bonusWinningCount > 0) {
