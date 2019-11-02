@@ -5,11 +5,11 @@ import java.util.Objects;
 
 public class LottoMachine {
 
+    static final int lottoNumberCount = 6;
+    private static final int lottoNumberLimit = 45;
     private NumberGenerator numberGenerator;
 
     LottoMachine() {
-        final int lottoNumberCount = 6;
-        final int lottoNumberLimit = 45;
         numberGenerator = new NumberGenerator(lottoNumberCount, lottoNumberLimit);
     }
 
