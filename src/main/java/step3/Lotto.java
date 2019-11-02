@@ -2,7 +2,7 @@ package step3;
 
 import java.util.*;
 
-public class NewLotto {
+public class Lotto {
 
     static final int LOTTO_NUMBER_MIN = 1;
     static final int LOTTO_NUMBER_MAX = 45;
@@ -10,19 +10,19 @@ public class NewLotto {
 
     private List<Integer> newLotto;
 
-    public NewLotto(List<Integer> newLotto) {
+    public Lotto(List<Integer> newLotto) {
         this.newLotto = new ArrayList<>(newLotto);
     }
 
-    public static NewLotto creatLottoWinningNumbers2(String[] inputNewLottoNumbers) {
+    public static Lotto creatLottoWinningNumbers(String[] inputNewLottoNumbers) {
         checkWinningNumberLength(inputNewLottoNumbers);
         checkOverlapWinningNumber(inputNewLottoNumbers);
 
-        return new NewLotto(checkWinningNumberRange(inputNewLottoNumbers));
+        return new Lotto(checkWinningNumberRange(inputNewLottoNumbers));
     }
 
-    public static List<Integer> valueOf(NewLotto newLotto) {
-        return newLotto.newLotto;
+    public static List<Integer> valueOf(Lotto lotto) {
+        return lotto.newLotto;
     }
 
     public static void checkWinningNumberLength(String[] inputNewLottoNumbers) {
@@ -46,24 +46,24 @@ public class NewLotto {
         return inputWinningNumberList;
     }
 
-    public static List<Integer> lotteryStatics2(Set<NewLotto> purchasedLottos, List<Integer> winningNumbers) {
+    public static List<Integer> lotteryStatics(Set<Lotto> purchasedLottos, List<Integer> winningNumbers) {
         List<Integer> resultMatching = new ArrayList<>();
-        for (NewLotto purchasedLotto : purchasedLottos) {
+        for (Lotto purchasedLotto : purchasedLottos) {
             resultMatching.add(matchWinningNumbers(purchasedLotto, winningNumbers));
         }
         return resultMatching;
     }
 
-    private static int matchWinningNumbers(NewLotto purchasedLotto, List<Integer> winningNumbers) {
+    private static int matchWinningNumbers(Lotto purchasedLotto, List<Integer> winningNumbers) {
         final int count = (int) winningNumbers.stream()
                 .filter(purchasedLotto.newLotto::contains)
                 .count();
         return count;
     }
 
-    public static void pickOutBonusWinningLotto(Set<NewLotto> purchasedLottos) {
+    public static void pickOutBonusWinningLotto(Set<Lotto> purchasedLottos) {
         int indexCount = 0;
-        for (NewLotto purchasedLotto : purchasedLottos) {
+        for (Lotto purchasedLotto : purchasedLottos) {
             LottoLottery.purchasedLottoCompareBonusNumber(purchasedLotto.newLotto, indexCount);
             indexCount++;
         }
