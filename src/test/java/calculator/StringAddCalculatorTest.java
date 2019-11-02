@@ -32,12 +32,17 @@ public class StringAddCalculatorTest {
 
     @Test
     void sumCalculateTest() {
-        assertThat(stringAddCalculator.add("1,2")).isEqualTo(3);
+        assertThat(stringAddCalculator.add("1,2:3")).isEqualTo(6);
     }
 
     @Test
     void commaSplitTest() {
         assertThat(stringAddCalculator.numberSplit("1,2")).hasSize(2);
         assertThat(stringAddCalculator.numberSplit("1,2")).contains("1", "2");
+    }
+
+    @Test
+    void colonSplitWithCommaSplitTest() {
+        assertThat(stringAddCalculator.numberSplit("1:3,2")).hasSize(3);
     }
 }

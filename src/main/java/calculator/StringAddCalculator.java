@@ -34,7 +34,7 @@ public class StringAddCalculator {
     }
 
     public String[] numberSplit(String input) {
-        return input.split(",");
+        return input.split("[,:]");
     }
 
     private String validate(String input) {
