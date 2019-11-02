@@ -27,7 +27,7 @@ public class LottoNumberStrategy implements RandomGenerateStrategy{
 
     private static int getRandomNumberRange(int min, int max) {
         if (min >= max) {
-            throw new IllegalArgumentException("max must be greater than min");
+            throw new IllegalArgumentException("최소값이 최대값보다 크거나 같습니다.");
         }
 
         return random.nextInt((max - min) + 1) + min;
