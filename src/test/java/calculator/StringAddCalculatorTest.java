@@ -45,4 +45,9 @@ public class StringAddCalculatorTest {
     void colonSplitWithCommaSplitTest() {
         assertThat(stringAddCalculator.numberSplit("1:3,2")).hasSize(3);
     }
+
+    @Test
+    void customTokenTest() {
+        assertThat(stringAddCalculator.add("//;\n1;2;3")).isEqualTo(6);
+    }
 }

@@ -1,6 +1,8 @@
 package calculator;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final String ZERO = "0";
@@ -34,6 +36,14 @@ public class StringAddCalculator {
     }
 
     public String[] numberSplit(String input) {
+
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] tokens= m.group(2).split(customDelimiter);
+            return tokens;
+        }
+
         return input.split("[,:]");
     }
 
