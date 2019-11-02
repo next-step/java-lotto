@@ -3,10 +3,7 @@ package step1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -52,5 +49,17 @@ public class StringAddCalculatorTest {
     @Test
     void plusByCustomDelimiterTest() {
         assertThat(stringAddCalculator.plusByCustomDelimiter("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @DisplayName("커스텀 쉼표로 구분")
+    @Test
+    void plusByCommaDelimiterTest() {
+        assertThat(stringAddCalculator.plusByDefaultDelimiter("1,2")).isEqualTo(3);
+    }
+
+    @DisplayName("커스텀 쉼표로 구분")
+    @Test
+    void plusByDefaultDelimiterTest() {
+        assertThat(stringAddCalculator.plusByDefaultDelimiter("1,2:3")).isEqualTo(6);
     }
 }
