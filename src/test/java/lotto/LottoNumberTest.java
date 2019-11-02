@@ -22,7 +22,12 @@ public class LottoNumberTest {
     }
 
     @Test
-    void winLottoNumberTest() {
+    void matchLottoNumberTest() {
         assertThat(lottoNumber.matchNumberCount(winnerNumbers)).isEqualTo(6);
+    }
+
+    @Test
+    void createLottoNumberTest() {
+        assertThat(new LottoNumber().getNumbers().size()).isEqualTo(6);
     }
 }
