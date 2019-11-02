@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IssuedLottosTest {
 
     @Test
-    void name() {
+    void 발급된_로또_당첨_확인() {
         IssuedLottos issuedLottos = new IssuedLottos(
                 Arrays.asList(
                         new Lotto(Arrays.asList(1, 2, 3, 40, 41, 42)),

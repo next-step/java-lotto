@@ -7,8 +7,8 @@ public class Store {
 
     private final LottoMachine lottoMachine;
 
-    public Store() {
-        lottoMachine = new LottoMachine();
+    public Store(final LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
     public IssuedLottos issueLottos(final int amount) {

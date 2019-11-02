@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +14,14 @@ public class Lotto {
 
     public int findMatchedNumberCount(final List<Integer> winNumbers) {
         return (int) winNumbers.stream().filter(numbers::contains).count();
+    }
+
+    public List<Integer> findNumbers() {
+        return Collections.unmodifiableList(this.numbers);
+    }
+
+    public int countNumber() {
+        return this.numbers.size();
     }
 
     @Override

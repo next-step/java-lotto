@@ -10,13 +10,13 @@ public class NumberGeneratorTest {
 
     @Test
     void 생성() {
-        NumberGenerator numberGenerator = new NumberGenerator(6, 45);
-        assertThat(numberGenerator).isEqualTo(new NumberGenerator(6, 45));
+        BasicNumberGenerator numberGenerator = new BasicNumberGenerator();
+        assertThat(numberGenerator).isEqualTo(new BasicNumberGenerator());
     }
 
     @Test
     void 로또번호추출() {
-        NumberGenerator numberGenerator = new NumberGenerator(6, 45);
+        BasicNumberGenerator numberGenerator = new BasicNumberGenerator();
         List<Integer> numbers = numberGenerator.generate();
         assertThat(numbers).containsAnyOf(
                 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,

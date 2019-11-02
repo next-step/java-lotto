@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,7 +11,11 @@ public class IssuedLottos {
 
     public IssuedLottos(final List<Lotto> lottos) {
         this.lottos = lottos;
-        final int matchedNumberCountSize = LottoMachine.lottoNumberCount + 1;
+        int matchedNumberCountSize = 0;
+        if (lottos != null && !lottos.isEmpty()) {
+            Lotto lotto = lottos.get(0);
+            matchedNumberCountSize = lotto.countNumber() + 1;
+        }
         this.winCount = new int[matchedNumberCountSize];
     }
 
@@ -27,6 +32,10 @@ public class IssuedLottos {
 
     public int countWin(final int matchedNumberCount) {
         return this.winCount[matchedNumberCount];
+    }
+
+    public List<Lotto> findAllIssuedLottos() {
+        return Collections.unmodifiableList(this.lottos);
     }
 
     @Override
