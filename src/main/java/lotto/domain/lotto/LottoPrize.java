@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public enum LottoPrize {
 
 	FIRST(6, 2_000_000_000, true),
+	SECOND_BONUS(5, 30_000_000, true),
 	SECOND(5, 1_500_000, true),
 	THIRD(4, 50_000, true),
 	FIRTH(3, 5_000, true),

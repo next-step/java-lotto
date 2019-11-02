@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -23,6 +24,18 @@ class LottoTest {
 
 		// then
 		assertThat(targetLotto.getStatus()).isEqualTo(expectedLottoPrize);
+	}
+
+	@Test
+	void 보너스_번호를_확인할_수_있다() {
+		// given
+		Lotto targetLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoPrize.SECOND);
+
+		// when
+		targetLotto.examineBonus(6);
+
+		// then
+		assertThat(targetLotto.getStatus()).isEqualByComparingTo(LottoPrize.SECOND_BONUS);
 	}
 
 }

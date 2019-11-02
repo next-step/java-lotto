@@ -16,7 +16,6 @@ public class LottoDto {
 	private final List<Integer> numbers;
 	private final LottoPrize status;
 
-	// TEST FIXTURE
 	public LottoDto(LottoPrize status) {
 		this.numbers = Collections.emptyList();
 		this.status = status;

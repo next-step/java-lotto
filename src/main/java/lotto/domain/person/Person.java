@@ -50,6 +50,17 @@ public class Person {
 		}
 	}
 
+	public void checkBonusLotteries(int bonusNumber) {
+		// TODO: 2019-11-02 일급 컬렉션으로 로직 분리
+		List<Lotto> secondPrizeLotteries = lotteries.stream()
+				.filter(Lotto::isSecondPrizeLotto)
+				.collect(Collectors.toList());
+
+		for (Lotto lotto : secondPrizeLotteries) {
+			lotto.examineBonus(bonusNumber);
+		}
+	}
+
 	private void validateEmptyLotteries() {
 		if (lotteries.isEmpty()) {
 			throw new IllegalStateException("비교할 수 있는 로또가 없습니다");
