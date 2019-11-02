@@ -11,6 +11,10 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int findMatchedNumberCount(final List<Integer> winNumbers) {
+        return (int) winNumbers.stream().filter(numbers::contains).count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
