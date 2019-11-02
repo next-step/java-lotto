@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.lotto.LottoCreator;
+import lotto.domain.lotto.LottoPrize;
 import lotto.domain.lotto.RandomLottoNumberGenerator;
 import lotto.domain.util.EarningsRateCalculator;
 import lotto.domain.person.Person;
@@ -9,29 +10,27 @@ import lotto.dto.LottoPrizeStat;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoController {
 
-	private final InputView inputView;
-	private final ResultView resultView;
-	private Person person;
+	/**
+	 * TODO 인스턴스 변수를 사용하지 않고 메소드의 길이를 줄일 수 있는 방법이 있을지 생각해보기
+	 */
 
-	public LottoController() {
-		inputView = new InputView();
-		resultView = new ResultView();
-	}
+	public static void buyLottoAndLookUpPrizes() {
+		InputView inputView = new InputView();
+		ResultView resultView = new ResultView();
 
-	public void buyLotto() {
-		person = Person.of(inputView.receiveAmount());
-		LottoCreator lottoCreator = LottoCreator.of(new RandomLottoNumberGenerator());
-
-		person.buyLottoWithAllMoney(lottoCreator);
+		// buyLotto
+		Person person = Person.of(inputView.receiveAmount());
+		person.buyLottoWithAllMoney(LottoCreator.of(new RandomLottoNumberGenerator()));
 		resultView.printBuyingLotteries(person.getLottoDtos());
-	}
 
-	public void lookUpPrizes() {
-		person.checkAllLotteries(inputView.receiveAnswerNumbers());
-		LottoPrizeStat lottoPrizeStat = LottoPrizeCounter.countLottoPrizes(person.getLottoDtos());
-		double earningsRatio = EarningsRateCalculator.calculate(person.getLottoDtos(), LottoCreator.LOTTO_PRICE);
+		// LookUpPrizes
+		List<LottoPrize> lottoPrizes = person.checkAllLotteries(inputView.receiveAnswerNumbers());
+		LottoPrizeStat lottoPrizeStat = LottoPrizeCounter.countLottoPrizes(lottoPrizes);
+		double earningsRatio = EarningsRateCalculator.calculate(lottoPrizes, LottoCreator.LOTTO_PRICE);
 		resultView.printWinStats(lottoPrizeStat, earningsRatio);
 	}
 

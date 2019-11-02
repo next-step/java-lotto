@@ -2,6 +2,7 @@ package lotto.domain.person;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCreator;
+import lotto.domain.lotto.LottoPrize;
 import lotto.dto.LottoDto;
 
 import java.util.ArrayList;
@@ -43,23 +44,23 @@ public class Person {
 				.collect(Collectors.toList());
 	}
 
-	public void checkAllLotteries(List<Integer> answerNumbers) {
+	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers) {
 		validateEmptyLotteries();
-		for (Lotto lotto : lotteries) {
-			lotto.examine(answerNumbers);
-		}
-	}
-
-	public void checkBonusLotteries(int bonusNumber) {
-		// TODO: 2019-11-02 일급 컬렉션으로 로직 분리
-		List<Lotto> secondPrizeLotteries = lotteries.stream()
-				.filter(Lotto::isSecondPrizeLotto)
+		return lotteries.stream()
+				.map(lotto -> lotto.examine(answerNumbers))
 				.collect(Collectors.toList());
-
-		for (Lotto lotto : secondPrizeLotteries) {
-			lotto.examineBonus(bonusNumber);
-		}
 	}
+
+//	public void checkBonusLotteries(int bonusNumber) {
+//		// TODO: 2019-11-02 일급 컬렉션으로 로직 분리
+//		List<Lotto> secondPrizeLotteries = lotteries.stream()
+//				.filter(Lotto::isSecondPrizeLotto)
+//				.collect(Collectors.toList());
+//
+//		for (Lotto lotto : secondPrizeLotteries) {
+//			lotto.examineBonus(bonusNumber);
+//		}
+//	}
 
 	private void validateEmptyLotteries() {
 		if (lotteries.isEmpty()) {

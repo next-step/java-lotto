@@ -28,6 +28,7 @@ public class Wallet {
 	}
 
 	public void minus(long minusAmount) {
+		validateAmount(amount - minusAmount);
 		this.amount -= minusAmount;
 	}
 
