@@ -33,4 +33,8 @@ public class LottoNumbers {
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public int size() {
+        return lottoNumbers.size();
+    }
 }

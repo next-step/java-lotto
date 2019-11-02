@@ -2,17 +2,43 @@ package lotto;
 
 public class LottoMachine {
 
-    private final LottoView lottoView;
-    private final LottoNumbers lottoNumbers;
+    private static int LOTTO_PRICE = 1000;
 
-    public LottoMachine(LottoView lottoView, int lottoCount) {
+    private final LottoView lottoView;
+    private LottoNumbers lottoNumbers;
+
+    public LottoMachine(LottoView lottoView) {
         this.lottoView = lottoView;
-        this.lottoNumbers = new LottoNumbers(lottoCount);
+    }
+
+    void start() {
+        try {
+            createLottoNumbers();
+        } catch (NumberFormatException exception) {
+            return;
+        } catch (IllegalArgumentException exception) {
+            return;
+        }
+
+        
+    }
+
+    private void createLottoNumbers() {
+        int lottoCount = getLottoCount(lottoView.getMoney());
+        lottoNumbers = new LottoNumbers(lottoCount);
 
         lottoView.showLottoNumbers(lottoNumbers);
     }
 
-    public void checkWinningLottoNumber(LottoNumber winningNumber) {
+    private int getLottoCount(int money) {
+        if (money % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException();
+        }
+
+        return money / LOTTO_PRICE;
+    }
+
+    private void checkWinningLottoNumber(LottoNumber winningNumber) {
         lottoView.showLottoRanks(lottoNumbers.getRanks(winningNumber));
     }
 }
