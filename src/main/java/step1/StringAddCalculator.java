@@ -1,5 +1,8 @@
 package step1;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
     String input;
 
@@ -53,5 +56,18 @@ public class StringAddCalculator {
         }
 
         return result;
+    }
+
+    public int plusByCustomDelimiter(String expression) {
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+
+        if (m.find()) {
+            String customDelimiter = m.group(1);
+            String[] tokens= m.group(2).split(customDelimiter);
+
+            return plus(tokens);
+        }
+
+        return -1;
     }
 }

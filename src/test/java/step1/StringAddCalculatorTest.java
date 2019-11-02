@@ -47,4 +47,10 @@ public class StringAddCalculatorTest {
         String[] operands = {"1", "1", "8"};
         assertThat(stringAddCalculator.plus(operands)).isEqualTo(10);
     }
+
+    @DisplayName("커스텀 구분자로 구분")
+    @Test
+    void plusByCustomDelimiterTest() {
+        assertThat(stringAddCalculator.plusByCustomDelimiter("//;\n1;2;3")).isEqualTo(6);
+    }
 }
