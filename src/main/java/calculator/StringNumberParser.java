@@ -7,6 +7,8 @@ public class StringNumberParser {
     private static final String DEFAULT_SEPARATOR = ",|:";
     private static final String CUSTOM_SEPARATOR_START_STRING = "//";
     private static final String CUSTOM_SEPARATOR_END_STRING = "\n";
+    private static final String NON_NUMBER_ERROR_MESSAGE = "숫자는 이외의 값을 입력하였습니다.";
+    private static final String NON_POSITIVE_NUMBER_ERROR_MESSAGE = "숫자는 양수만 가능합니다.";
 
     public static List<Integer> parse(String string) {
         String separator = getSeparator(string);
@@ -44,9 +46,25 @@ public class StringNumberParser {
         List<Integer> numbers = new ArrayList<>();
 
         for (String number : strings) {
-            numbers.add(Integer.parseInt(number));
+            numbers.add(convertNumber(number));
         }
 
         return numbers;
+    }
+
+    private static int convertNumber(String numberString) {
+        try {
+            return checkPositive(Integer.parseInt(numberString));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(NON_NUMBER_ERROR_MESSAGE);
+        }
+    }
+
+    private static int checkPositive(int number) {
+        if (number < 0) {
+            throw new RuntimeException(NON_POSITIVE_NUMBER_ERROR_MESSAGE);
+        }
+
+        return number;
     }
 }
