@@ -25,4 +25,10 @@ public class StringAddCalculatorTest {
     void isBlankTest(String nullAndEmpty) {
         assertThat(stringAddCalculator.isBlank(nullAndEmpty)).isTrue();
     }
+
+    @DisplayName("한자리 숫자인지 검사")
+    @Test
+    void isOneLengthNumberTest() {
+        assertThat(stringAddCalculator.isOneLengthNumber("1")).isTrue();
+    }
 }

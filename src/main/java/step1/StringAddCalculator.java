@@ -11,10 +11,26 @@ public class StringAddCalculator {
         return 0;
     }
 
-    public boolean isBlank(String input) {
-        if(input == null || input.isEmpty()) {
+    public boolean isBlank(String expression) {
+        if (expression == null || expression.isEmpty()) {
             return true;
         }
         return false;
+    }
+
+    public boolean isOneLengthNumber(String expression) {
+        if (expression.length() == 1 && isNumeric(expression)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNumeric(String expression) {
+        try {
+            Double.parseDouble(expression);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
