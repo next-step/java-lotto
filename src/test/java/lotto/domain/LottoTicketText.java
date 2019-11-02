@@ -3,9 +3,7 @@ package lotto.domain;
 import lotto.util.NumberGenerator;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,9 +12,11 @@ public class LottoTicketText {
 
     @Test
     void 로또티켓_클래스생성_수동숫자(){
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-        LottoTicket lottoTicket = new LottoTicket(numbers);
-        assertThat(lottoTicket.toString()).isEqualTo(numbers.toString());
+        LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lottoTicket1.toString()).isEqualTo(Arrays.asList(1,2,3,4,5,6).toString());
+
+        LottoTicket lottoTicket2 = new LottoTicket("1,2,3,4,5,6");
+        assertThat(lottoTicket2.toString()).isEqualTo(Arrays.asList(1,2,3,4,5,6).toString());
     }
 
     @Test

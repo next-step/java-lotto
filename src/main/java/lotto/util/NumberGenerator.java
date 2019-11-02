@@ -21,4 +21,14 @@ public class NumberGenerator {
         return baseNumbers.subList(WIN_NUM_START,WIN_NUM_END);
     }
 
+    public List<Integer> generateSixNumbers(String text){
+        List<Integer> numbers = new ArrayList<>();
+        String[] tokens = text.trim().split(",");
+        for(String token:tokens){
+            numbers.add(Integer.parseInt(token));
+        }
+        return numbers;
+    }
+
+
 }

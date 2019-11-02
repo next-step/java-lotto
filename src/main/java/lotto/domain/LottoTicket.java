@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.util.NumberGenerator;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicket {
@@ -10,6 +11,10 @@ public class LottoTicket {
 
     LottoTicket(){
         this(new NumberGenerator().generateSixNumbers());
+    }
+
+    LottoTicket(String text){
+        this(new NumberGenerator().generateSixNumbers(text));
     }
 
     LottoTicket(List<Integer> numbers){
