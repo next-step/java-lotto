@@ -2,6 +2,9 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -20,14 +23,14 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public List<LottoRank> getRanks(LottoNumber winningNumber) {
+    public Map<LottoRank, Long> getRankGroup(LottoNumber winningNumber) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (LottoNumber each : lottoNumbers) {
             lottoRanks.add(each.getRank(winningNumber));
         }
 
-        return lottoRanks;
+        return lottoRanks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public List<LottoNumber> getLottoNumbers() {

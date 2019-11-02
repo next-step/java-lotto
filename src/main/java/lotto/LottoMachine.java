@@ -11,16 +11,16 @@ public class LottoMachine {
         this.lottoView = lottoView;
     }
 
+    // todo : 예외처리
     void start() {
         try {
             createLottoNumbers();
+            findWinningLotto();
         } catch (NumberFormatException exception) {
             return;
         } catch (IllegalArgumentException exception) {
             return;
         }
-
-        
     }
 
     private void createLottoNumbers() {
@@ -30,6 +30,7 @@ public class LottoMachine {
         lottoView.showLottoNumbers(lottoNumbers);
     }
 
+    // 테스트를 위해서 private 메소드의 접근제한자를 바꾸는 것이 옳을까?
     private int getLottoCount(int money) {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException();
@@ -38,7 +39,12 @@ public class LottoMachine {
         return money / LOTTO_PRICE;
     }
 
+    private void findWinningLotto() {
+        LottoNumber winningLottoNumber = new LottoNumber(lottoView.getWinningLottoNumbers());
+        checkWinningLottoNumber(winningLottoNumber);
+    }
+
     private void checkWinningLottoNumber(LottoNumber winningNumber) {
-        lottoView.showLottoRanks(lottoNumbers.getRanks(winningNumber));
+        lottoView.showResult(lottoNumbers.getRankGroup(winningNumber));
     }
 }
