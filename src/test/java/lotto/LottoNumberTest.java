@@ -13,17 +13,19 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoNumberTest {
 
     private LottoNumber lottoNumber;
-    private List<Integer> winnerNumbers;
+    private LottoNumber winnerLottoNumber;
 
     @BeforeEach
     void setUp() {
-        winnerNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        winnerLottoNumber = new LottoNumber(winnerNumbers);
         lottoNumber = new LottoNumber(winnerNumbers);
     }
 
     @Test
     void matchLottoNumberTest() {
-        assertThat(lottoNumber.matchNumberCount(winnerNumbers)).isEqualTo(6);
+        assertThat(lottoNumber.matchNumberCount(winnerLottoNumber)).isEqualTo(6);
     }
 
     @Test
