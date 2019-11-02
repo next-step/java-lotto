@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,12 +14,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  */
 public class StringAdderTest {
 
+    private StringAdder adder;
+
+    @BeforeEach
+    void init() {
+        // given
+        adder = new StringAdder();
+    }
+
     @DisplayName("빈 문자")
     @Test
     void emptyString() {
-        // given
-        StringAdder adder = new StringAdder();
-
         // when
         int result = adder.sum("");
 
@@ -30,9 +36,6 @@ public class StringAdderTest {
     @ParameterizedTest
     @CsvSource(value = {"0=0", "100=100"}, delimiter = '=')
     void SingleNumber(String input, int expected) {
-        // given
-        StringAdder adder = new StringAdder();
-
         // when
         int result = adder.sum(input);
 
@@ -44,9 +47,6 @@ public class StringAdderTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2=3", "10,20,30=60"}, delimiter = '=')
     void comma(String input, int expected) {
-        // given
-        StringAdder adder = new StringAdder();
-
         // when
         int result = adder.sum(input);
 
@@ -58,9 +58,6 @@ public class StringAdderTest {
     @ParameterizedTest
     @CsvSource(value = {"1:2=3", "10:20:30=60"}, delimiter = '=')
     void colon(String input, int expected) {
-        // given
-        StringAdder adder = new StringAdder();
-
         // when
         int result = adder.sum(input);
 
@@ -72,9 +69,6 @@ public class StringAdderTest {
     @ParameterizedTest
     @CsvSource(value = {"1:2,3=6", "10,20:30=60"}, delimiter = '=')
     void commaAndColon(String input, int expected) {
-        // given
-        StringAdder adder = new StringAdder();
-
         // when
         int result = adder.sum(input);
 
@@ -83,31 +77,36 @@ public class StringAdderTest {
     }
 
     @DisplayName("커스텀 구분자")
-    @ParameterizedTest
-    @CsvSource(value = {"//;\n1;2;3=6"}, delimiter = '=')
-    void customDelimiter(String input, int expected) {
-        // given
-        StringAdder adder = new StringAdder();
-
+    @Test
+    void customDelimiter() {
         // when
-        int result = adder.sum(input);
+        int result = adder.sum("//;\n1;2;3");
 
         // then
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).isEqualTo(6);
     }
 
     @DisplayName("음수 입력")
     @ParameterizedTest
-    @CsvSource(value = {"-1;2;3=6", "-1;z;3=6"}, delimiter = '=')
+    @CsvSource(value = {"-1:2:3=6", "-1:5,3=6"}, delimiter = '=')
     void negativeInteger(String input) {
-        // given
-        StringAdder adder = new StringAdder();
-
         // when
         // then
         assertThatThrownBy(() -> {
             adder.sum(input);
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(RuntimeException.class).hasMessage("Not support negative integer.");
+
+    }
+
+    @DisplayName("문자 입력")
+    @ParameterizedTest
+    @CsvSource(value = {"z:2:3=6", "t:5,3=6"}, delimiter = '=')
+    void notInteger(String input) {
+        // when
+        // then
+        assertThatThrownBy(() -> {
+            adder.sum(input);
+        }).isInstanceOf(NumberFormatException.class);
 
     }
 }
