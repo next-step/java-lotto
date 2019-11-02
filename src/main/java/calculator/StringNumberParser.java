@@ -6,7 +6,7 @@ import java.util.List;
 public class StringNumberParser {
     private static final String DEFAULT_SEPARATOR = ",|:";
     private static final String CUSTOM_SEPARATOR_START_STRING = "//";
-    private static final String CUSTOM_SEPARATOR_END_STRING = "\n";
+    private static final String CUSTOM_SEPARATOR_END_STRING = "\\n";
     private static final String NON_NUMBER_ERROR_MESSAGE = "숫자는 이외의 값을 입력하였습니다.";
     private static final String NON_POSITIVE_NUMBER_ERROR_MESSAGE = "숫자는 양수만 가능합니다.";
 
