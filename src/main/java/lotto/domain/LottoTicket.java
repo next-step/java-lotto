@@ -10,14 +10,14 @@ public class LottoTicket {
     private List<Integer> numbers;
 
     LottoTicket(){
-        this(new NumberGenerator().generateSixNumbers());
+        this(new NumberGenerator().generateNumbers());
     }
 
     LottoTicket(String text){
-        this(new NumberGenerator().generateSixNumbers(text));
+        this(new NumberGenerator().generateNumbers(text));
     }
 
-    LottoTicket(List<Integer> numbers){
+    private LottoTicket(List<Integer> numbers){
         this.numbers = numbers;
     }
 
