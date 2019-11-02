@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author : 김윤호
@@ -31,5 +32,9 @@ public class PurchasedLotto {
     @Override
     public int hashCode() {
         return Objects.hash(purchasedLotto);
+    }
+
+    public List<List<Integer>> getLottoNumbers() {
+        return purchasedLotto.stream().map(Lotto::getLottoNumbers).collect(Collectors.toList());
     }
 }

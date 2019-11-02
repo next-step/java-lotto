@@ -27,6 +27,10 @@ public class LottoMachine {
         return Collections.unmodifiableList(purchasedLotto.getPurchasedLotto());
     }
 
+    public List<List<Integer>> getLottoNumbers() {
+        return purchasedLotto.getLottoNumbers();
+    }
+
     private List<Lotto> purchaseLotto() {
         List<Lotto> lotto = new ArrayList<>();
         for (int i = 0; i < lottoAmount.getPurchasedLottoCount(); i++) {
@@ -34,5 +38,4 @@ public class LottoMachine {
         }
         return lotto;
     }
-
 }
