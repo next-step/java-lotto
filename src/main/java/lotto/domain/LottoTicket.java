@@ -1,9 +1,17 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoTicket {
 
+    private List<Integer> numbers;
+
+    LottoTicket(List<Integer> numbers){
+        this.numbers = numbers;
+    }
+
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof LottoTicket ;
+    public String toString() {
+        return numbers.toString();
     }
 }
