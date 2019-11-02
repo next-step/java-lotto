@@ -20,13 +20,17 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public List<LottoRank> getRanks(LottoNumber winnerNumber) {
+    public List<LottoRank> getRanks(LottoNumber winningNumber) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (LottoNumber each : lottoNumbers) {
-            lottoRanks.add(each.getRank(winnerNumber));
+            lottoRanks.add(each.getRank(winningNumber));
         }
 
         return lottoRanks;
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
