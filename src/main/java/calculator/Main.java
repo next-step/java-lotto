@@ -1,7 +1,9 @@
 package calculator;
 
+import calculator.domain.Calculator;
 import calculator.domain.UserInput;
 import calculator.view.InputView;
+import calculator.view.ResultView;
 
 public class Main {
 
@@ -9,6 +11,10 @@ public class Main {
         InputView inputView = new InputView();
         inputView.createInput();
         UserInput userInput = inputView.getInput();
-        System.out.println(userInput.getInput());
+
+        int result = Calculator.calculate(userInput.getIntegers());
+
+        ResultView resultView = new ResultView(result);
+        resultView.print();
     }
 }
