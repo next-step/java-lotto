@@ -2,21 +2,27 @@ package step1;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
+    StringAddCalculator stringAddCalculator = new StringAddCalculator("");
+
     @DisplayName("stringAddCalculator 생성 테스트")
     @Test
     void stringAddCalculatorTest() {
-        StringAddCalculator calculator = new StringAddCalculator("1:2:3");
 
-        assertThat(new StringAddCalculator("1:2:3")).isEqualTo(calculator);
     }
 
-    @Test
-    void seperateTest() {
-        StringAddCalculator calculator = new StringAddCalculator("1:2:3");
-        assertThat(calculator.seperateByDelimiter(":")).containsExactly("1", "2", "3");
+    @DisplayName("null, empty 확인")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void isBlankTest(String nullAndEmpty) {
+        assertThat(stringAddCalculator.isBlank(nullAndEmpty)).isTrue();
     }
 }
