@@ -10,15 +10,7 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public int getContainsNumberCount(List<Integer> winnerNumbers) {
-        int count = 0;
-
-        for (Integer winnerNumber : winnerNumbers) {
-            if (numbers.contains(winnerNumber)) {
-                count++;
-            }
-        }
-
-        return count;
+    public long matchNumberCount(List<Integer> winnerNumbers) {
+        return winnerNumbers.stream().filter(numbers::contains).count();
     }
 }

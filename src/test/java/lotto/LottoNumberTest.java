@@ -23,6 +23,6 @@ public class LottoNumberTest {
 
     @Test
     void winLottoNumberTest() {
-        assertThat(lottoNumber.getContainsNumberCount(winnerNumbers)).isEqualTo(6);
+        assertThat(lottoNumber.matchNumberCount(winnerNumbers)).isEqualTo(6);
     }
 }
