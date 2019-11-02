@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import lotto.util.NumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -42,6 +40,14 @@ public class LottoTicketText {
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket("1,2,3,*,5,6");
         }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void 일치갯수_확인(){
+        LottoTicket winNumbers = new LottoTicket("1,2,3,4,5,6");
+        assertThat(new LottoTicket("1,2,3,4,5,6").countCompareWinNumbers(winNumbers)).isEqualTo(6);
+        assertThat(new LottoTicket("1,2,3,14,15,16").countCompareWinNumbers(winNumbers)).isEqualTo(3);
+        assertThat(new LottoTicket("11,12,13,14,15,16").countCompareWinNumbers(winNumbers)).isEqualTo(0);
     }
 
 }
