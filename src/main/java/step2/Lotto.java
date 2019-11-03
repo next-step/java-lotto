@@ -23,6 +23,13 @@ public class Lotto {
         return Objects.equals(numbers, lotto.numbers);
     }
 
+    public boolean equalsIgnoreOrder(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Lotto)) return false;
+        final Lotto lotto = (Lotto) o;
+        return numbers.containsAll(lotto.numbers);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(numbers);

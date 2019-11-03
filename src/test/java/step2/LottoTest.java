@@ -8,14 +8,24 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Lotto should")
+@DisplayName("Lotto")
 class LottoTest {
     private final List<Integer> lottoNumbers = Arrays.asList(8, 21, 23, 41, 42, 43);
+    private final List<Integer> lottoNumbersDifferentOrder = Arrays.asList(23, 21, 42, 41, 8, 43);
 
     @Test
-    @DisplayName("be equal to other one when it's number are same")
-    void lottoIsEqualsToWhenLottoNumberIsSame() {
-        Lotto lotto = new Lotto(lottoNumbers);
+    @DisplayName("should be equal to other one when it's number are same")
+    void shouldBeEqualsToWhenLottoNumberIsSame() {
+        final Lotto lotto = new Lotto(lottoNumbers);
         assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
+    }
+
+    @Test
+    @DisplayName("can evaluate whether mine is winner")
+    void canEvaluateWhetherMineIsWinner() {
+        final Lotto lotto = new Lotto(lottoNumbers);
+
+        assertThat(lotto.equalsIgnoreOrder(new Lotto(lottoNumbers))).isTrue();
+        assertThat(lotto.equalsIgnoreOrder(new Lotto(lottoNumbersDifferentOrder))).isTrue();
     }
 }
