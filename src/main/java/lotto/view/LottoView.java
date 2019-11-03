@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class LottoView {
     private static final String ERROR_MESSAGE_FORMAT = "오류가 발생했습니다. 원인 : %s";
-    private static final String CONVERT_NUMBER_ERROR_MESSAGE = "로또 번호는 숫자만 입력이 가능합니다.";
+    private static final String CONVERT_NUMBER_ERROR = "숫자만 입력이 가능합니다.";
     private static final String PURCHASE_QUESTION_TEXT = "구입금액을 입력해 주세요.";
     private static final String PURCHASE_RESULT_TEXT = "%s개를 구매했습니다.";
     private static final String WIN_QUESTION_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
