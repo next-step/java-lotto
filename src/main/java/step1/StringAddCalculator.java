@@ -48,11 +48,10 @@ public class StringAddCalculator {
         }
     }
 
-    public boolean isNegative(int operand) {
+    public void checkNegative(int operand) {
         if (operand < 0) {
             throw new IllegalArgumentException(NEGATIVE_EXCEPTION_MESSAGE);
         }
-        return false;
     }
 
     public int plus(String[] operands) {
@@ -61,9 +60,8 @@ public class StringAddCalculator {
         for (String operand : operands) {
             int parsedOperand = Integer.parseInt(operand);
 
-            if (!isNegative(parsedOperand)) {
-                result += parsedOperand;
-            }
+            checkNegative(parsedOperand);
+            result += parsedOperand;
         }
 
         return result;

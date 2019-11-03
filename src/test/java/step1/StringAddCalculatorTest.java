@@ -35,7 +35,7 @@ public class StringAddCalculatorTest {
     @Test
     void isNegativeTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            stringAddCalculator.isNegative(-1);
+            stringAddCalculator.checkNegative(-1);
         });
     }
 
