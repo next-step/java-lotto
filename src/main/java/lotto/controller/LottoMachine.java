@@ -37,12 +37,12 @@ public class LottoMachine {
     }
 
     private void findWinningLotto() {
-        LottoNumber winningLottoNumber = new LottoNumber(lottoView.getWinningLottoNumbers());
-        checkWinningLottoNumber(winningLottoNumber);
+        checkWinningLottoNumber(new LottoNumber(lottoView.getWinningLottoNumbers()));
     }
 
     private void checkWinningLottoNumber(LottoNumber winningNumber) {
         Map<LottoRank, Long> rankGroup = lottoNumbers.getRankGroup(winningNumber);
+
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));
     }
