@@ -9,17 +9,15 @@ public class StringAddCalculator {
 	private String delimiters = ",|:";
 
 	public int add(String text) {
-		String[] tokens = null;
-
-		if (text == null || text.isEmpty()) {
-			return 0;
-		}
+		if (text == null || text.isEmpty()) return 0;
 
 		Matcher m = Pattern.compile("(//(.)\n)?(.+)").matcher(text);
 		if (!m.matches()) return 0;
 		if (m.group(2) != null && !m.group(2).isEmpty()) delimiters += "|" + m.group(2);
-		tokens = m.group(3).split(delimiters);
+		return getSum(m.group(3).split(delimiters));
+	}
 
+	private int getSum(String[] tokens) {
 		int sum = 0;
 		for (String s : tokens) {
 			sum += parseNumber(s);
