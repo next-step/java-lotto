@@ -49,7 +49,7 @@ public class LottoNumber {
 
     private void assertValidNumbers(List<Integer> numbers) {
         assertSize(numbers);
-        assertInvalidRange(numbers);
+        assertValidRange(numbers);
         assertUnique(numbers);
     }
 
@@ -63,7 +63,7 @@ public class LottoNumber {
         }
     }
 
-    private void assertInvalidRange(List<Integer> numbers) {
+    private void assertValidRange(List<Integer> numbers) {
         long invalidRangeNumberCount = numbers
                 .stream()
                 .filter(number -> number > MAX_NUMBER || number < MIN_NUMBER)

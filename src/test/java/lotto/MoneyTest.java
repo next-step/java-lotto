@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class MoneyTest {
 
@@ -20,5 +21,16 @@ public class MoneyTest {
 
         Money tenThousand = new Money(10000);
         assertThat((long) (tenThousand.getProfitRate(rankGroup) * 100)).isEqualTo(500);
+    }
+
+    @Test
+    void validMoneyTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Money(-1);
+        }).withMessage(Money.MONEY_RANGE_ERROR);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Money(10900);
+        }).withMessage(Money.MONEY_UNIT_ERROR);
     }
 }
