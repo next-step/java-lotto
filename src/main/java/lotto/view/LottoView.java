@@ -20,6 +20,7 @@ public class LottoView {
     private static final String WIN_RESULT_TEXT = "당첨통계\n----------";
     private static final String MATCH_RESULT_TEXT = "%d개 일치 (%d원)- %d개";
     private static final String PROFIT_RATE_RESULT_TEXT = "총 수익률은 %.2f 입니다.";
+    private static final String RESTART_TEXT = "재시작...\n";
     private static final String LOTTO_NUMBER_PREFIX = "[";
     private static final String LOTTO_NUMBER_POSTFIX = "]";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
@@ -79,11 +80,16 @@ public class LottoView {
     }
 
     public void showConvertNumberError() {
-        showErrorMessage(CONVERT_NUMBER_ERROR_MESSAGE);
+        showErrorMessage(CONVERT_NUMBER_ERROR);
     }
 
     public void showErrorMessage(String message) {
         drawText(String.format(ERROR_MESSAGE_FORMAT, message));
+    }
+
+    public void showRestartMessage() {
+        newLine();
+        drawText(RESTART_TEXT);
     }
 
     private void drawText(String text) {

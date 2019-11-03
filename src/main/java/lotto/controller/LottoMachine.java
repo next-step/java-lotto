@@ -24,9 +24,22 @@ public class LottoMachine {
             findWinningLotto();
         } catch (NumberFormatException exception) {
             lottoView.showConvertNumberError();
+            restart();
         } catch (IllegalArgumentException exception) {
             lottoView.showErrorMessage(exception.getMessage());
+            restart();
         }
+    }
+
+    private void restart() {
+        lottoView.showRestartMessage();
+        clear();
+        start();
+    }
+
+    private void clear() {
+        lottoNumbers = null;
+        money = null;
     }
 
     private void createLottoNumbers() {
