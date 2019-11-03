@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
-class Lotto {
+public class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_GET_NUMBER = 6;
@@ -19,12 +19,12 @@ class Lotto {
         }
     }
 
-    Lotto() {
+    public Lotto() {
         this.lottoNumber = new ArrayList<>();
         this.hitCount = ZERO;
     }
 
-    void selectLottoNumber() {
+    public void selectLottoNumber() {
         Collections.shuffle(allLottoNumber);
         for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
             this.lottoNumber.add(allLottoNumber.get(i));
@@ -44,11 +44,11 @@ class Lotto {
 
     }
 
-    Integer getHitCount() {
+    public Integer getHitCount() {
         return hitCount;
     }
 
-    List<Integer> getLottoNumber() {
+    public List<Integer> getLottoNumber() {
         Collections.sort(lottoNumber);
         return lottoNumber;
     }
