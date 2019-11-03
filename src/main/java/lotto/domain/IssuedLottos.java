@@ -7,31 +7,23 @@ import java.util.Objects;
 public class IssuedLottos {
 
     private final List<Lotto> lottos;
-    private int[] winCount;
 
     public IssuedLottos(final List<Lotto> lottos) {
         this.lottos = lottos;
-        int matchedNumberCountSize = 0;
-        if (lottos != null && !lottos.isEmpty()) {
-            Lotto lotto = lottos.get(0);
-            matchedNumberCountSize = lotto.countNumber() + 1;
-        }
-        this.winCount = new int[matchedNumberCountSize];
     }
 
     public int count() {
         return this.lottos.size();
     }
 
-    public void checkNumbers(final List<Integer> winNumbers) {
+    public MatchedNumbers checkNumbers(final List<Integer> winNumbers) {
+        final int matchCount = winNumbers.size() + 1;
+        MatchedNumbers matchedNumbers = new MatchedNumbers(matchCount);
         for (Lotto lotto : lottos) {
             final int matchedNumberCount = lotto.findMatchedNumberCount(winNumbers);
-            winCount[matchedNumberCount]++;
+            matchedNumbers.add(matchedNumberCount);
         }
-    }
-
-    public int countWin(final int matchedNumberCount) {
-        return this.winCount[matchedNumberCount];
+        return matchedNumbers;
     }
 
     public List<Lotto> findAllIssuedLottos() {

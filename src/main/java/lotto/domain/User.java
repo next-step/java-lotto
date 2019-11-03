@@ -9,6 +9,7 @@ public class User {
     private static String DELIMITER = ", ";
     private final int amount;
     private IssuedLottos issuedLottos;
+    private MatchedNumbers matchedNumbers;
 
     public User(final int amount) {
         this.amount = amount;
@@ -32,11 +33,11 @@ public class User {
         for (String winNumberUnit : winNumberUnits) {
             numbers.add(Integer.parseInt(winNumberUnit));
         }
-        issuedLottos.checkNumbers(numbers);
+        this.matchedNumbers = issuedLottos.checkNumbers(numbers);
     }
 
     public int countWinLotto(final int matchedNumberCount) {
-        return this.issuedLottos.countWin(matchedNumberCount);
+        return this.matchedNumbers.get(matchedNumberCount);
     }
 
     public double calculateRate() {
