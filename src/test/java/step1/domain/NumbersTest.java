@@ -1,5 +1,5 @@
-import domain.Numbers;
-import domain.SafeNumber;
+package step1.domain;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
