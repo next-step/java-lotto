@@ -33,8 +33,9 @@ public class LottoService {
 
     public double findYield(Map<WinnerType, Integer> winnerStat, int buyNumbers) {
         double totalPrize = calculateTotalPrize(winnerStat);
+        double yield = totalPrize / (buyNumbers * LOTTO_AMOUNT);
 
-        return totalPrize / (buyNumbers * LOTTO_AMOUNT);
+        return Math.floor(yield * 100) / 100;
     }
 
     private int calculateTotalPrize(Map<WinnerType, Integer> winnerStat) {

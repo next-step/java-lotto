@@ -68,4 +68,16 @@ class LottoServiceTest {
 
         assertThat(yield).isEqualTo(1.1);
     }
+
+    @Test
+    @DisplayName("수익률은 소수 2자리 아래는 버림한다.")
+    void findYieldFloor() {
+        LottoService lottoService = new LottoService();
+        Map<WinnerType, Integer> winnerStats = new HashMap<>();
+        winnerStats.put(WinnerType.FOURTH, 1);
+
+        double yield = lottoService.findYield(winnerStats, 14);
+
+        assertThat(yield).isEqualTo(0.35);
+    }
 }
