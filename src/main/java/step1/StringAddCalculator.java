@@ -43,7 +43,7 @@ public class StringAddCalculator {
         try {
             Double.parseDouble(expression);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
             return false;
         }
     }
