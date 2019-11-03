@@ -59,6 +59,12 @@ public class LottoTest {
         }
         assertThat(lottoPaper.getNumbers()).hasSize(6);
         System.out.println(lottoPaper.getNumbers());
+    }
 
+    @Test
+    void duplicateNumberTest() {
+        lottoPaper.applyNumber(5);
+        lottoPaper.applyNumber(5);
+        assertThat(lottoPaper.getNumbers()).hasSize(1);
     }
 }

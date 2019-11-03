@@ -15,10 +15,16 @@ public class LottoPaper {
     }
 
     public void applyNumber(Integer number) {
-        this.numbers.add(number);
+        if (isDuplicateNumber(number)) {
+            this.numbers.add(number);
+        }
     }
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public boolean isDuplicateNumber(Integer number) {
+        return !this.numbers.contains(number);
     }
 }
