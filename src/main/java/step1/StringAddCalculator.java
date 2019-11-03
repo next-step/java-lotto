@@ -71,11 +71,12 @@ public class StringAddCalculator {
         int DELIMITER_INDEX = 1;
         int OPERANDS_INDEX = 2;
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(expression);
+        Matcher customDelimiterMatcher = Pattern.compile("//(.)\n(.*)")
+                                            .matcher(expression);
 
-        if (m.find()) {
-            String customDelimiter = m.group(DELIMITER_INDEX);
-            String[] tokens = m.group(OPERANDS_INDEX).split(customDelimiter);
+        if (customDelimiterMatcher.find()) {
+            String customDelimiter = customDelimiterMatcher.group(DELIMITER_INDEX);
+            String[] tokens = customDelimiterMatcher.group(OPERANDS_INDEX).split(customDelimiter);
 
             return plus(tokens);
         }
