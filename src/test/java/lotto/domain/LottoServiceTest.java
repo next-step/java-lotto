@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,5 +30,26 @@ class LottoServiceTest {
         List<Lotto> lottos = lottoService.createLottoTickets(5);
 
         assertThat(lottos).hasSize(5);
+    }
+
+    @Test
+    @DisplayName("당첨을 확인한다.")
+    void findWinner() {
+        LottoService lottoService = new LottoService();
+        List<Lotto> lottos = Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)),
+                new Lotto(Arrays.asList(2,3,4,5,6,7)),
+                new Lotto(Arrays.asList(3,4,5,6,7,8)),
+                new Lotto(Arrays.asList(4,5,6,7,8,9)),
+                new Lotto(Arrays.asList(5,6,7,8,9,10)));
+
+        Lotto winnerLotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+
+        Map<Integer, Integer> winnerStat = lottoService.findWinnerStats(lottos, winnerLotto);
+
+        assertThat(winnerStat).hasSize(4);
+        assertThat(winnerStat.get(3)).isEqualTo(1);
+        assertThat(winnerStat.get(4)).isEqualTo(1);
+        assertThat(winnerStat.get(5)).isEqualTo(1);
+        assertThat(winnerStat.get(6)).isEqualTo(1);
     }
 }
