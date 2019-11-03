@@ -106,4 +106,4 @@ person.checkBonusLotteries( Integer )를 하면 가지고 있는 5개일치 로�
 ## 일급 컬렉션을 적용할 부분
 
 - Person 안의 lotteries에 적용 가능
-- Lotto 안의 numbers를 적용 가능
+- Lotto 안의 numbers를 적용 가능 (Lotto의 status가 사라지며 Lotto가 사실상 일급 컬렉션 역할을 하게 됨)

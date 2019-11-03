@@ -8,16 +8,15 @@ import lotto.dto.LottoDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Person {
 
 	private final Wallet wallet;
-	private final List<Lotto> lotteries;
+	private final BuyingLotteries lotteries;
 
 	private Person(long amount, List<Lotto> lotteries) {
 		this.wallet = Wallet.of(amount);
-		this.lotteries = lotteries;
+		this.lotteries = new BuyingLotteries(lotteries);
 	}
 
 	public static Person of(long amount) {
@@ -39,16 +38,12 @@ public class Person {
 	}
 
 	public List<LottoDto> getLottoDtos() {
-		return lotteries.stream()
-				.map(LottoDto::of)
-				.collect(Collectors.toList());
+		return lotteries.toLottoDtos();
 	}
 
 	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
 		validateEmptyLotteries();
-		return lotteries.stream()
-				.map(lotto -> lotto.examine(answerNumbers, bonusNumber))
-				.collect(Collectors.toList());
+		return lotteries.checkAllLotteries(answerNumbers, bonusNumber);
 	}
 
 	private void validateEmptyLotteries() {
