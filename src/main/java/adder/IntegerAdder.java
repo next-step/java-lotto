@@ -1,4 +1,4 @@
-package StringCalculator;
+package adder;
 
 import java.util.List;
 
