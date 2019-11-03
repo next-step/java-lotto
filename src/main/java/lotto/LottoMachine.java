@@ -1,11 +1,14 @@
 package lotto;
 
+import java.util.Map;
+
 public class LottoMachine {
 
     private static int LOTTO_PRICE = 1000;
 
     private final LottoView lottoView;
     private LottoNumbers lottoNumbers;
+    private Money money;
 
     public LottoMachine(LottoView lottoView) {
         this.lottoView = lottoView;
@@ -24,7 +27,8 @@ public class LottoMachine {
     }
 
     private void createLottoNumbers() {
-        int lottoCount = getLottoCount(lottoView.getMoney());
+        money = new Money(lottoView.getMoney());
+        int lottoCount = getLottoCount(money.get());
         lottoNumbers = new LottoNumbers(lottoCount);
 
         lottoView.showLottoNumbers(lottoNumbers);
@@ -45,6 +49,8 @@ public class LottoMachine {
     }
 
     private void checkWinningLottoNumber(LottoNumber winningNumber) {
-        lottoView.showResult(lottoNumbers.getRankGroup(winningNumber));
+        Map<LottoRank, Long> rankGroup = lottoNumbers.getRankGroup(winningNumber);
+        lottoView.showRankResult(rankGroup);
+        lottoView.showProfitRate(money.getProfitRate(rankGroup));
     }
 }
