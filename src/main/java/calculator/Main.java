@@ -1,7 +1,7 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.Parser;
+import util.Parser;
 import calculator.view.InputView;
 import calculator.view.ResultView;
 
