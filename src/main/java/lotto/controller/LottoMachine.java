@@ -20,15 +20,14 @@ public class LottoMachine {
         this.lottoView = lottoView;
     }
 
-    // todo : 예외처리
     public void start() {
         try {
             createLottoNumbers();
             findWinningLotto();
         } catch (NumberFormatException exception) {
-            return;
+            lottoView.showConvertNumberError();
         } catch (IllegalArgumentException exception) {
-            return;
+            lottoView.showErrorMessage(exception.getMessage());
         }
     }
 
