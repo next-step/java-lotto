@@ -16,7 +16,7 @@ public class Store {
 
         final List<Lotto> issuedLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto issuedLotto = lottoMachine.issue();
+            final Lotto issuedLotto = lottoMachine.issue();
             issuedLottos.add(issuedLotto);
         }
 

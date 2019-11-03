@@ -13,7 +13,7 @@ public class BasicLottoMachine implements LottoMachine {
 
     @Override
     public Lotto issue() {
-        List<Integer> numbers = numberGenerator.generate();
+        final List<Integer> numbers = numberGenerator.generate();
         return new Lotto(numbers);
     }
 

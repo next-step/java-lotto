@@ -20,10 +20,6 @@ public class Lotto {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public int countNumber() {
-        return this.numbers.size();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

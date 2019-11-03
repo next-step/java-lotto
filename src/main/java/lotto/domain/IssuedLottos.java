@@ -18,7 +18,7 @@ public class IssuedLottos {
 
     public MatchedNumbers checkNumbers(final List<Integer> winNumbers) {
         final int matchCount = winNumbers.size() + 1;
-        MatchedNumbers matchedNumbers = new MatchedNumbers(matchCount);
+        final MatchedNumbers matchedNumbers = new MatchedNumbers(matchCount);
         for (Lotto lotto : lottos) {
             final int matchedNumberCount = lotto.findMatchedNumberCount(winNumbers);
             matchedNumbers.add(matchedNumberCount);

@@ -10,11 +10,11 @@ public class MatchedNumbers {
         this.matchedNumbersCount = new int[size];
     }
 
-    void add(int matchedNumberCount) {
+    void add(final int matchedNumberCount) {
         this.matchedNumbersCount[matchedNumberCount]++;
     }
 
-    int get(int matchedNumberCount) {
+    int get(final int matchedNumberCount) {
         return this.matchedNumbersCount[matchedNumberCount];
     }
 

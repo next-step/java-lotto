@@ -28,8 +28,8 @@ public class User {
     }
 
     public void checkLottoWin(final String winNumbers) {
-        String[] winNumberUnits = winNumbers.split(DELIMITER);
-        List<Integer> numbers = new ArrayList<>();
+        final String[] winNumberUnits = winNumbers.split(DELIMITER);
+        final List<Integer> numbers = new ArrayList<>();
         for (String winNumberUnit : winNumberUnits) {
             numbers.add(Integer.parseInt(winNumberUnit));
         }
