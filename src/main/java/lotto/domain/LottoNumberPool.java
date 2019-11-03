@@ -3,9 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.MAX_NUMBER;
+
 public class LottoNumberPool {
 
-    private static final int MAX_NUMBER = 45;
     private static final List<Integer> numbers = new ArrayList<>();
 
     public static List<Integer> getNumbers() {

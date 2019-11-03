@@ -45,4 +45,27 @@ public class LottoNumberTest {
     void createLottoNumberTest() {
         assertThat(new LottoNumber().getNumbers().size()).isEqualTo(6);
     }
+
+    @Test
+    void invalidNumberTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+        }).withMessage(LottoNumber.GRATER_THAN_NUMBER_COUNT_ERROR);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5));
+        }).withMessage(LottoNumber.LESS_THAN_NUMBER_COUNT_ERROR);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 5));
+        }).withMessage(LottoNumber.DUPLICATED_NUMBER_ERROR);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(Arrays.asList(-1, 2, 3, 4, 5, 6));
+        }).withMessage(LottoNumber.INVALID_RANGE_NUMBER_ERROR);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 46));
+        }).withMessage(LottoNumber.INVALID_RANGE_NUMBER_ERROR);
+    }
 }
