@@ -31,5 +31,8 @@ public class LottoTest {
     @Test
     void lottoTest() {
         assertThat(lotto).isEqualTo(new Lotto(8));
+        assertThat(lotto.getNumber()).isEqualTo(8);
+        lotto.selectLottoNumber();
+        assertThat(lotto.getNumber()).isEqualTo(8);
     }
 }

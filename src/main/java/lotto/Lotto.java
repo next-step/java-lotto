@@ -1,12 +1,27 @@
 package lotto;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Lotto {
+    private static final int CORRECT_VALUE = 1;
     private int number;
 
     public Lotto(int number) {
         this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void selectLottoNumber() {
+        this.number = getRandomNumber();
+    }
+
+    private int getRandomNumber() {
+        int number = new Random().nextInt(44);
+        return number + CORRECT_VALUE;
     }
 
     @Override
