@@ -6,7 +6,8 @@ public class Game {
     private Set<Integer> game;
 
     public Game(int i) {
-        this.game = Lotto.getUniques(i);
+        UserLotto userLotto = new UserLotto(1, i);
+        this.game = userLotto.getUniques(i);
     }
 
     public int score(Set<Integer> lotto) {

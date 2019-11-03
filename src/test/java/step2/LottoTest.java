@@ -21,7 +21,7 @@ class LottoTest {
     void uniqueNumbersTest(int range, int limit, String inputs) {
         Set<Integer> list =
                 Arrays.stream(inputs.split(",")).map(Integer::parseInt).collect(toSet());
-        Lotto.init(1, range);
-        assertThat(Lotto.getUniques(limit)).isEqualTo(list);
+        OfficialLotto officialLotto = new OfficialLotto(1, range);
+        assertThat(officialLotto.getUniques(limit)).isEqualTo(list);
     }
 }
