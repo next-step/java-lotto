@@ -65,6 +65,11 @@ public class LottoTest {
             System.out.println(paper.getLottoNumber().toString());
             System.out.println("hit:" + paper.getHitCount());
         }
+    }
 
+    @Test
+    void insightsIncreaseCountTest() {
+        Insights.insights.get(3).increaseCount();
+        assertThat(Insights.insights.get(3).getCount()).isEqualTo(1);
     }
 }

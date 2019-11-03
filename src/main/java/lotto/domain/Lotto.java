@@ -8,7 +8,6 @@ public class Lotto {
     private static final int LOTTO_GET_NUMBER = 6;
     private static final int ZERO = 0;
     private static List<Integer> allLottoNumber;
-
     private List<Integer> lottoNumber;
     private Integer hitCount;
 
@@ -41,7 +40,6 @@ public class Lotto {
         if (lottoNumber.contains(winLotto)) {
             this.hitCount++;
         }
-
     }
 
     public Integer getHitCount() {

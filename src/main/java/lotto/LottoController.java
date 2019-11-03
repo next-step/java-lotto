@@ -5,8 +5,6 @@ import lotto.domain.LottoPaper;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.Arrays;
-
 public class LottoController {
 
     public void execute() {
@@ -17,14 +15,26 @@ public class LottoController {
             lotto.selectLottoNumber();
             lottoPaper.applyLotto(lotto);
         }
+        printLottoNumber(lottoPaper);
+        getWinLotto(lottoPaper);
+        getInsights(lottoPaper, count);
 
+    }
+
+    private void printLottoNumber(LottoPaper lottoPaper) {
         ResultView.printLottoNumber(lottoPaper);
+    }
 
+    private void getWinLotto(LottoPaper lottoPaper) {
         int[] winLotto = InputView.getWinLotto();
-
         lottoPaper.checkLottoGrade(winLotto);
+    }
 
-        ResultView.printInsights(lottoPaper);
+    private void getInsights(LottoPaper lottoPaper, int count) {
+        ResultView.printDescription();
+        lottoPaper.getInsights();
+        ResultView.printInsights();
+        ResultView.printYield(lottoPaper.getYield(count));
     }
 
 

@@ -1,12 +1,10 @@
 package lotto.view;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputView {
     private static final int LOTTO_VALUE = 1000;
     private static final String DELIMITER = ", ";
-
 
     public static int purchaseCount() {
         Scanner scanner = new Scanner(System.in);
