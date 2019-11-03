@@ -8,14 +8,13 @@ public class StringAddCalculator {
     public static final String NEGATIVE_EXCEPTION_MESSAGE = "Negative number is not allowed";
     public static final String DEFAULT_DELIMITER = ",|:";
 
-    private String input;
+    private String expression;
 
     public StringAddCalculator(String input) {
-        this.input = input;
+        this.expression = input;
     }
 
     int calculate() {
-        String expression = this.input;
         int result;
 
         if (isBlank(expression)) {
