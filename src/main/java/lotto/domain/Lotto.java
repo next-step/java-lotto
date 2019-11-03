@@ -25,7 +25,7 @@ public class Lotto {
 
     private List<Integer> createLottoNumbers() {
         List<Integer> lottos = new ArrayList<>();
-        for (int i = 0; i < 45; i++) {
+        for (int i = 1; i < 45; i++) {
             lottos.add(i);
         }
         Collections.shuffle(lottos);
@@ -45,7 +45,7 @@ public class Lotto {
 
     private void checkNumberValue(Integer number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("lotto number는 0과 45사이의 숫자입니다.");
+            throw new IllegalArgumentException("lotto number는 1과 45사이의 숫자입니다.");
         }
     }
 
