@@ -10,7 +10,7 @@ public class Calculator {
 
     public Calculator(String inputWord) {
         List<String> inputWords = StringUtil.splitStrings(inputWord);
-        this.inputValues = NumberUtil.parsePositiveInt(inputWords);
+        this.inputValues = NumberUtil.parseUnsignedInt(inputWords);
     }
 
     public int getSum() {
