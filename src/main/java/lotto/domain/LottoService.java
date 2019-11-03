@@ -5,7 +5,6 @@ import java.util.*;
 public class LottoService {
 
     private static final int LOTTO_AMOUNT = 1000;
-    private static final int WIN_MIN_NUMBER = 3;
 
     public int buyTicket(int amount) {
         return amount / LOTTO_AMOUNT;
@@ -26,9 +25,23 @@ public class LottoService {
 
         for (Lotto lotto : lottos) {
             Optional<WinnerType> winnerType = findWinnerType(lotto, winnerLotto);
-            addStat(winnerStat, winnerType);
+            winnerType.ifPresent(type -> addStat(winnerStat, type));
         }
         return winnerStat;
+    }
+
+    private Optional<WinnerType> findWinnerType(Lotto lotto, Lotto winnerLotto) {
+        int count = 0;
+        for (Integer number : winnerLotto.getNumbers()) {
+            count = lotto.contains(number) ? count + 1 : count;
+        }
+
+        return WinnerType.findByCount(count);
+    }
+
+    private void addStat(Map<WinnerType, Integer> winnerStat, WinnerType winnerType) {
+        winnerStat.computeIfPresent(winnerType, (type, count) -> count + 1);
+        winnerStat.putIfAbsent(winnerType, 1);
     }
 
     public double findYield(Map<WinnerType, Integer> winnerStat, int buyNumbers) {
@@ -44,26 +57,6 @@ public class LottoService {
             totalPrize += winnerType.calculatePrize(winnerStat.get(winnerType));
         }
         return totalPrize;
-    }
-
-    private void addStat(Map<WinnerType, Integer> winnerStat, Optional<WinnerType> winnerType) {
-        if (!winnerType.isPresent()) {
-            return;
-        }
-
-        winnerStat.computeIfPresent(winnerType.get(), (type, count) -> count + 1);
-        winnerStat.putIfAbsent(winnerType.get(), 1);
-    }
-
-    private Optional<WinnerType> findWinnerType(Lotto lotto, Lotto winnerLotto) {
-
-        int count = 0;
-        for (Integer number : winnerLotto.getNumbers()) {
-            count = lotto.contains(number) ? count + 1 : count;
-        }
-
-        return WinnerType.findByCount(count);
-
     }
 
 }
