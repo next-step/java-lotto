@@ -15,8 +15,6 @@ public class StringAddCalculator {
     }
 
     int calculate() {
-        int result;
-
         if (isBlank(expression)) {
             return 0;
         }
@@ -25,7 +23,7 @@ public class StringAddCalculator {
             return Integer.parseInt(expression);
         }
 
-        result = plusByCustomDelimiter(expression);
+        int result = plusByCustomDelimiter(expression);
         if (result != CONTINUE) {
             return result;
         }
