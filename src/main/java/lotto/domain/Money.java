@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class Money {
 
+    private static int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
@@ -20,7 +21,8 @@ public class Money {
         return totalProfit / money;
     }
 
-    public int get() {
-        return money;
+    public int getLottoCount() {
+        return money / LOTTO_PRICE;
+    }
     }
 }
