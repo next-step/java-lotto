@@ -24,10 +24,11 @@ public class StringAddCalculatorTest {
         assertThat(stringAddCalculator.isBlank(nullAndEmpty)).isTrue();
     }
 
-    @DisplayName("한자리 숫자인지 검사")
+    @DisplayName("숫자인지 검사")
     @Test
     void isOneLengthNumberTest() {
-        assertThat(stringAddCalculator.isOneLengthNumber("1")).isTrue();
+        assertThat(stringAddCalculator.isNumeric("1")).isTrue();
+        assertThat(stringAddCalculator.isNumeric("10")).isTrue();
     }
 
     @DisplayName("음수이면 Exception 발생")

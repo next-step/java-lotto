@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    public static final int BLANK_OUTPUT = 0;
     public static final int CONTINUE = -1;
     public static final String NEGATIVE_EXCEPTION_MESSAGE = "Negative number is not allowed";
     public static final String DEFAULT_DELIMITER = ",|:";
@@ -16,10 +17,10 @@ public class StringAddCalculator {
 
     int calculate() {
         if (isBlank(expression)) {
-            return 0;
+            return BLANK_OUTPUT;
         }
 
-        if (isOneLengthNumber(expression)) {
+        if (isNumeric(expression)) {
             return Integer.parseInt(expression);
         }
 
@@ -38,14 +39,7 @@ public class StringAddCalculator {
         return false;
     }
 
-    public boolean isOneLengthNumber(String expression) {
-        if (expression.length() == 1 && isNumeric(expression)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isNumeric(String expression) {
+    public boolean isNumeric(String expression) {
         try {
             Double.parseDouble(expression);
             return true;
