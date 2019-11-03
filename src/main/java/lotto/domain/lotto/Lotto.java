@@ -37,15 +37,26 @@ public class Lotto {
 		return new Lotto(inputNumbers);
 	}
 
-	public LottoPrize examine(List<Integer> answerNumbers) {
+	public LottoPrize examine(List<Integer> answerNumbers, int bonusNumber) {
 		validateNumbersCount(answerNumbers, ANSWER_NUMBERS_COUNT_ERROR_MSG);
-		return LottoPrize.of(countMatchedNumbers(answerNumbers));
+		validateBonusNumber(answerNumbers, bonusNumber);
+		return LottoPrize.of(countMatchedNumbers(answerNumbers), isBonusNumberMatched(bonusNumber));
+	}
+
+	private void validateBonusNumber(List<Integer> answerNumbers, int bonusNumber) {
+		if (answerNumbers.contains(bonusNumber)) {
+			throw new IllegalArgumentException(String.format("보너스 숫자(%s)가 로또 당첨 숫자와 중복됩니다!", bonusNumber));
+		}
 	}
 
 	private long countMatchedNumbers(List<Integer> answerNumbers) {
 		return answerNumbers.stream()
 				.filter(numbers::contains)
 				.count();
+	}
+
+	private boolean isBonusNumberMatched(int bonusNumber) {
+		return numbers.contains(bonusNumber);
 	}
 
 	public Set<Integer> getNumbers() {

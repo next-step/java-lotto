@@ -29,7 +29,7 @@ public class Person {
 	}
 
 	public void buyLottoWithAllMoney(LottoCreator lottoCreator) {
-		while (lottoCreator.canAffordToBuyLotto(wallet)) {
+		for (int i = 0, end = wallet.getPossibleNumberToBuy(LottoCreator.LOTTO_PRICE); i < end; i++) {
 			buyLotto(lottoCreator);
 		}
 	}
@@ -44,23 +44,12 @@ public class Person {
 				.collect(Collectors.toList());
 	}
 
-	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers) {
+	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
 		validateEmptyLotteries();
 		return lotteries.stream()
-				.map(lotto -> lotto.examine(answerNumbers))
+				.map(lotto -> lotto.examine(answerNumbers, bonusNumber))
 				.collect(Collectors.toList());
 	}
-
-//	public void checkBonusLotteries(int bonusNumber) {
-//		// TODO: 2019-11-02 일급 컬렉션으로 로직 분리
-//		List<Lotto> secondPrizeLotteries = lotteries.stream()
-//				.filter(Lotto::isSecondPrizeLotto)
-//				.collect(Collectors.toList());
-//
-//		for (Lotto lotto : secondPrizeLotteries) {
-//			lotto.examineBonus(bonusNumber);
-//		}
-//	}
 
 	private void validateEmptyLotteries() {
 		if (lotteries.isEmpty()) {

@@ -34,8 +34,12 @@ public enum LottoPrize {
 
 	}
 
-	public static LottoPrize of(long sameNumberCount) {
-		return cachingLottoPrize.getOrDefault(sameNumberCount, UNKNOWN);
+	public static LottoPrize of(long sameNumberCount, boolean bonusNumberMatched) {
+		LottoPrize prize = cachingLottoPrize.getOrDefault(sameNumberCount, UNKNOWN);
+		if (bonusNumberMatched && prize.equals(LottoPrize.SECOND)) {
+			return LottoPrize.SECOND_BONUS;
+		}
+		return prize;
 	}
 
 	public static List<LottoPrize> displayedLottoPrizes() {
@@ -55,6 +59,9 @@ public enum LottoPrize {
 
 	@Override
 	public String toString() {
+		if (this.equals(LottoPrize.SECOND_BONUS)) {
+			return String.format("%s개 일치, 보너스 볼 일치(%s원)", sameNumberCount, rewardAmount);
+		}
 		return String.format("%s개 일치 (%s원)", sameNumberCount, rewardAmount);
 	}
 

@@ -18,10 +18,6 @@ public class LottoCreator {
 		return new LottoCreator(createPolicy);
 	}
 
-	public boolean canAffordToBuyLotto(Wallet wallet) {
-		return wallet.hasMoreThan(LOTTO_PRICE);
-	}
-
 	public Lotto pickLotto(Wallet wallet) {
 		wallet.minus(LOTTO_PRICE);
 		return Lotto.of(createPolicy.generate());
