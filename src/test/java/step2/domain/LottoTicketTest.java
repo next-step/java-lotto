@@ -4,13 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static step2.helper.LottoHelper.makeLottoNumbersHelper;
 
 class LottoTicketTest {
 
@@ -22,16 +21,6 @@ class LottoTicketTest {
         overSizeNumbers.add(new LottoNumber(45));
 
         return Stream.of(lessSizeNumbers, overSizeNumbers);
-    }
-
-    private static List<LottoNumber> makeLottoNumbersHelper(int one, int two, int three, int four, int five, int six) {
-        LottoNumber lottoOne = new LottoNumber(one);
-        LottoNumber lottoTwo = new LottoNumber(two);
-        LottoNumber lottoThree = new LottoNumber(three);
-        LottoNumber lottoFour = new LottoNumber(four);
-        LottoNumber lottoFive = new LottoNumber(five);
-        LottoNumber lottoSix = new LottoNumber(six);
-        return new ArrayList<>(Arrays.asList(lottoOne, lottoTwo, lottoThree, lottoFour, lottoFive, lottoSix));
     }
 
     @Test
