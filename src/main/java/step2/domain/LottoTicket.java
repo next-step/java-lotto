@@ -1,5 +1,6 @@
 package step2.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,10 @@ public class LottoTicket {
         if (size != CORRECT_SIZE) {
             throw new IllegalArgumentException(size + "는 올바르지 않은 갯수입니다.");
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     @Override
