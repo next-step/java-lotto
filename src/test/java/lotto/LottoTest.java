@@ -11,21 +11,24 @@ import java.util.Random;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private List<Integer> lottoPaper;
+    private LottoPaper lottoPaper;
+    private List<Integer> numbers;
     private Lotto lotto;
+
     @BeforeEach
     void setUp() {
-        lottoPaper = new ArrayList<>();
-        lotto = new Lotto(8);
+        numbers = new ArrayList<>();
+        lotto = new Lotto();
+        lottoPaper = new LottoPaper(numbers);
 
     }
 
     @Test
-    void collectionTest() {
+    void collectTest() {
         int random = new Random().nextInt(44);
-        lottoPaper.add(random);
-        Collections.shuffle(lottoPaper);
-        System.out.println(lottoPaper.get(0));
+        numbers.add(random);
+        Collections.shuffle(numbers);
+        System.out.println(numbers.get(0));
     }
 
     @Test
@@ -34,5 +37,28 @@ public class LottoTest {
         assertThat(lotto.getNumber()).isEqualTo(8);
         lotto.selectLottoNumber();
         assertThat(lotto.getNumber()).isEqualTo(8);
+    }
+
+    @Test
+    void createLottoPaperCollectionTest() {
+        for (int i = 0; i < 6; i++) {
+            Lotto lotto = new Lotto();
+            lotto.selectLottoNumber();
+            numbers.add(lotto.getNumber());
+        }
+        assertThat(numbers).hasSize(6);
+        System.out.println(numbers.toString());
+    }
+
+    @Test
+    void createLottoPaperClassTest() {
+        for (int i = 0; i < 6; i++) {
+            Lotto lotto = new Lotto();
+            lotto.selectLottoNumber();
+            lottoPaper.applyNumber(lotto.getNumber());
+        }
+        assertThat(lottoPaper.getNumbers()).hasSize(6);
+        System.out.println(lottoPaper.getNumbers());
+
     }
 }

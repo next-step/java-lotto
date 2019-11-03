@@ -5,9 +5,13 @@ import java.util.Random;
 
 public class Lotto {
     private static final int CORRECT_VALUE = 1;
-    private int number;
+    private Integer number;
 
-    public Lotto(int number) {
+    public Lotto() {
+        this(null);
+    }
+
+    public Lotto(Integer number) {
         this.number = number;
     }
 
