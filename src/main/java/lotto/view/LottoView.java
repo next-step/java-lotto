@@ -1,4 +1,9 @@
-package lotto;
+package lotto.view;
+
+import lotto.InputTool;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -20,12 +25,12 @@ public class LottoView {
 
     private final InputTool inputTool = new InputTool();
 
-    int getMoney() {
+    public int getMoney() {
         drawText(PURCHASE_QUESTION_TEXT);
         return inputTool.readLineToInt();
     }
 
-    List<Integer> getWinningLottoNumbers() {
+    public List<Integer> getWinningLottoNumbers() {
         newLine();
         drawText(WIN_QUESTION_TEXT);
 
@@ -39,7 +44,7 @@ public class LottoView {
                 .collect(Collectors.toList());
     }
 
-    void showLottoNumbers(LottoNumbers lottoNumbers) {
+    public void showLottoNumbers(LottoNumbers lottoNumbers) {
         drawText(String.format(PURCHASE_RESULT_TEXT, lottoNumbers.size()));
 
         for (LottoNumber each : lottoNumbers.getLottoNumbers()) {
@@ -53,7 +58,7 @@ public class LottoView {
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
     }
 
-    void showRankResult(Map<LottoRank, Long> rankGroup) {
+    public void showRankResult(Map<LottoRank, Long> rankGroup) {
         newLine();
         drawText(WIN_RESULT_TEXT);
         showStatistics(rankGroup);
@@ -68,7 +73,7 @@ public class LottoView {
                 });
     }
 
-    void showProfitRate(double profitRate) {
+    public void showProfitRate(double profitRate) {
         drawText(String.format(PROFIT_RATE_RESULT_TEXT, profitRate));
     }
 

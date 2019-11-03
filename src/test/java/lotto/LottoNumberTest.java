@@ -1,9 +1,10 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

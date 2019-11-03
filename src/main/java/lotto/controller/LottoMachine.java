@@ -1,4 +1,10 @@
-package lotto;
+package lotto.controller;
+
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
+import lotto.domain.Money;
+import lotto.view.LottoView;
 
 import java.util.Map;
 
@@ -15,7 +21,7 @@ public class LottoMachine {
     }
 
     // todo : 예외처리
-    void start() {
+    public void start() {
         try {
             createLottoNumbers();
             findWinningLotto();

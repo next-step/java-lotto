@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +12,7 @@ public class LottoNumber {
         this.numbers = getShuffledNumbers();
     }
 
-    // test 용
-    LottoNumber(List<Integer> numbers) {
+    public LottoNumber(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
