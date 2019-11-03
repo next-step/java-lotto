@@ -20,7 +20,7 @@ class CalculatorTest {
     @DisplayName("숫자들의 합")
     void sumTest() {
         Calculator calculator = new Calculator("1,2,3");
-        assertThat(calculator.getSum()).isEqualTo(6);
+        assertThat(calculator.sum()).isEqualTo(6);
     }
 
     @ParameterizedTest
@@ -33,7 +33,7 @@ class CalculatorTest {
     })
     @DisplayName("custom 구분자 포함 split")
     void splitTest(String input) {
-        List<String> inputWords = StringUtil.splitStrings(input);
+        List<String> inputWords = StringUtil.split(input);
         assertThat(inputWords).containsExactly("3", "4", "5");
     }
 

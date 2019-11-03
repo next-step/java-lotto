@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class StringUtil {
     private static final String REGEX_FOR_CUSTOM_DELIMITER = "//(.)\\\\n(.*)";
@@ -15,7 +16,7 @@ public class StringUtil {
         return input == null || input.equals("");
     }
 
-    public static List<String> splitStrings(String input) {
+    public static List<String> split(String input) {
         Matcher delimiterMatcher = Pattern.compile(REGEX_FOR_CUSTOM_DELIMITER).matcher(input);
 
         String delimiter = DEFAULT_REGEX_DELIMITER;
@@ -26,6 +27,6 @@ public class StringUtil {
 
         return Arrays.stream(input.trim()
                 .split(delimiter))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }
