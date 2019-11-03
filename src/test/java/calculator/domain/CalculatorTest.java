@@ -14,10 +14,10 @@ class CalculatorTest {
     @DisplayName("입력받은 숫자 리스트를 더한 뒤 합을 반환한다.")
     void calculate() {
         //given
-        List<Integer> integers = Arrays.asList(1, 2, 3);
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
 
         //when
-        int result = Calculator.calculate(integers);
+        int result = Calculator.calculate(numbers);
 
         //then
         assertThat(result).isEqualTo(6);

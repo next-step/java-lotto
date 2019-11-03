@@ -1,18 +1,19 @@
 package calculator;
 
 import calculator.domain.Calculator;
-import calculator.domain.UserInput;
+import calculator.domain.Parser;
 import calculator.view.InputView;
 import calculator.view.ResultView;
+
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        inputView.createInput();
-        UserInput userInput = inputView.getInput();
 
-        int result = Calculator.calculate(userInput.getIntegers());
+        List<Integer> numbers = Parser.convertToInteger(inputView.getInputValue());
+        int result = Calculator.calculate(numbers);
 
         ResultView resultView = new ResultView(result);
         resultView.print();
