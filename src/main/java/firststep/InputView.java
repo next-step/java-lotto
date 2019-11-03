@@ -8,7 +8,7 @@ public class InputView {
 
     public String[] process(String input) {
         if (isBlank(input)) {
-            return new String[] {"0"};
+            return new String[]{"0"};
         }
 
         if (isCustomDelimiter(input)) {

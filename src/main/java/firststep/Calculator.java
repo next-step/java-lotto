@@ -12,10 +12,12 @@ public class Calculator {
     }
 
     private void validate(String[] input) {
-        if(isNegativeNumber(input)) throw new RuntimeException();
+        if (isNegativeNumber(input)) {
+            throw new RuntimeException();
+        }
     }
 
-    private boolean isNegativeNumber(String[] input){
+    private boolean isNegativeNumber(String[] input) {
         boolean present;
         try {
             present = Arrays.stream(input).map(Integer::parseInt).filter(i -> i < 0).findFirst().isPresent();

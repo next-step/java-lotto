@@ -10,10 +10,11 @@ public class CalculatorTest {
 
 
     private final Calculator calculator = new Calculator();
+
     @Test
     @DisplayName("숫자를 합한다")
     void calculate() {
-        String[] input = new String[]{"1","2","3"};
+        String[] input = new String[]{"1", "2", "3"};
         assertThat(calculator.calculate(input)).isEqualTo(6);
     }
 
@@ -28,14 +29,14 @@ public class CalculatorTest {
     @DisplayName("음수는 RuntimeException")
     void calculate3() {
         String[] input = new String[]{"-1"};
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(()->calculator.calculate(input));
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(input));
     }
 
     @Test
     @DisplayName("숫자가 아니면 RuntimeException")
     void calculate4() {
         String[] input = new String[]{"test"};
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(()->calculator.calculate(input));
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> calculator.calculate(input));
     }
 
 }
