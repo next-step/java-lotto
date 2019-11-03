@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoRank;
-
 import java.util.Map;
 
 public class Money {
