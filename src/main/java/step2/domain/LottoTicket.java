@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +11,10 @@ public class LottoTicket {
     }
 
     public int[] makeAutoNumbers() {
-        // List 안에 로또번호 추가
         for (int i = 1; i <= 45; i++) {
             lottoNum.add(i);
         }
 
-        // set안의 수를 무작위로 섞는다
         Collections.shuffle(lottoNum);
 
         int[] lottoNums = new int[6];
@@ -24,9 +22,8 @@ public class LottoTicket {
             lottoNums[i] = lottoNum.get(i);
         }
 
-        // 정렬
-        Arrays.sort(lottoNums);
+        Collections.sort(lottoNum);
 
-        return Arrays.toString(lottoNums);
+        return lottoNums;
     }
 }

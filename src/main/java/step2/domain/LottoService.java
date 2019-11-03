@@ -1,11 +1,11 @@
-package step2;
+package step2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoService {
     private int lottoCount;
+    private List<LottoTicket> lottoTickets;
 
     public int buyLotto(int price) {
         this.lottoCount = price/1000;
@@ -13,7 +13,11 @@ public class LottoService {
     }
 
     public List<LottoTicket> generateAutoLotto(int lottoCount) {
-        return Arrays.asList(new LottoTicket(), new LottoTicket());
-        //return new ArrayList<LottoTicket>(new LottoTicket(), new LottoTicket());
+        lottoTickets = new ArrayList<>();
+
+        for(int i = 0; i < lottoCount; i++) {
+            lottoTickets.add(new LottoTicket());
+        }
+        return lottoTickets;
     }
 }
