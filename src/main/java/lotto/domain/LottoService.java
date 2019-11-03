@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoService {
 
@@ -24,37 +21,48 @@ public class LottoService {
         return lottos;
     }
 
-    public Map<Integer, Integer> findWinnerStats(List<Lotto> lottos, Lotto winnerLotto) {
-        Map<Integer, Integer> winnerStat = new HashMap<>();
+    public Map<WinnerType, Integer> findWinnerStats(List<Lotto> lottos, Lotto winnerLotto) {
+        Map<WinnerType, Integer> winnerStat = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            int sameNumber = findSameNumber(lotto, winnerLotto);
-            addStat(winnerStat, sameNumber);
+            Optional<WinnerType> winnerType = findWinnerType(lotto, winnerLotto);
+            addStat(winnerStat, winnerType);
         }
         return winnerStat;
     }
 
-    private void addStat(Map<Integer, Integer> winnerStat, int sameNumber) {
-        if(sameNumber == 0) {
+    public double findYield(Map<WinnerType, Integer> winnerStat, int buyNumbers) {
+        double totalPrize = calculateTotalPrize(winnerStat);
+
+        return totalPrize / (buyNumbers * LOTTO_AMOUNT);
+    }
+
+    private int calculateTotalPrize(Map<WinnerType, Integer> winnerStat) {
+        int totalPrize = 0;
+        for (WinnerType winnerType : winnerStat.keySet()) {
+            totalPrize += winnerType.calculatePrize(winnerStat.get(winnerType));
+        }
+        return totalPrize;
+    }
+
+    private void addStat(Map<WinnerType, Integer> winnerStat, Optional<WinnerType> winnerType) {
+        if (!winnerType.isPresent()) {
             return;
         }
 
-        winnerStat.computeIfPresent(sameNumber, Integer::sum);
-        winnerStat.putIfAbsent(sameNumber, 1);
+        winnerStat.computeIfPresent(winnerType.get(), (type, count) -> count + 1);
+        winnerStat.putIfAbsent(winnerType.get(), 1);
     }
 
-    private int findSameNumber(Lotto lotto, Lotto winnerLotto) {
+    private Optional<WinnerType> findWinnerType(Lotto lotto, Lotto winnerLotto) {
 
         int count = 0;
         for (Integer number : winnerLotto.getNumbers()) {
-            count = lotto.contains(number) ? count+1 : count;
+            count = lotto.contains(number) ? count + 1 : count;
         }
 
-        if (count < WIN_MIN_NUMBER) {
-            return 0;
-        }
+        return WinnerType.findByCount(count);
 
-        return count;
     }
 
 }
