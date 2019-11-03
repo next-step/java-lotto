@@ -5,48 +5,52 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
     private static final int BLANK_OUTPUT = 0;
-    private static final int CONTINUE = -1;
     private static final String NEGATIVE_EXCEPTION_MESSAGE = "Negative number is not allowed";
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private String expression;
 
-    public StringAddCalculator(String input) {
-        this.expression = input;
+    public StringAddCalculator() {
+
     }
 
-    int calculate() {
-        if (isBlank(expression)) {
+    int calculate(String input) {
+        this.expression = input;
+
+        if (isBlank()) {
             return BLANK_OUTPUT;
         }
 
-        if (isNumeric(expression)) {
+        if (isNumeric()) {
             return Integer.parseInt(expression);
         }
 
-        int result = plusByCustomDelimiter(expression);
-        if (result != CONTINUE) {
-            return result;
+        if(isCustomDelimiter()) {
+            return plusByCustomDelimiter();
         }
 
-        return plusByDefaultDelimiter(expression);
+        return plusByDefaultDelimiter();
     }
 
-    public boolean isBlank(String expression) {
+    public boolean isBlank() {
         if (expression == null || expression.isEmpty()) {
             return true;
         }
         return false;
     }
 
-    public boolean isNumeric(String expression) {
+    public boolean isNumeric() {
         try {
             Double.parseDouble(expression);
             return true;
         } catch (NumberFormatException ignored) {
             return false;
         }
+    }
+
+    private boolean isCustomDelimiter() {
+        return getMatcher(CUSTOM_DELIMITER_PATTERN).find();
     }
 
     public void checkNegative(int operand) {
@@ -68,27 +72,24 @@ public class StringAddCalculator {
         return result;
     }
 
-    public int plusByCustomDelimiter(String expression) {
+    public int plusByCustomDelimiter() {
         int DELIMITER_INDEX = 1;
         int OPERANDS_INDEX = 2;
 
-        Matcher customDelimiterMatcher = getMatcher(expression, CUSTOM_DELIMITER_PATTERN);
+        Matcher customDelimiterMatcher = getMatcher(CUSTOM_DELIMITER_PATTERN);
 
-        if (customDelimiterMatcher.find()) {
-            String customDelimiter = customDelimiterMatcher.group(DELIMITER_INDEX);
-            String[] tokens = customDelimiterMatcher.group(OPERANDS_INDEX).split(customDelimiter);
+        customDelimiterMatcher.find();
+        String customDelimiter = customDelimiterMatcher.group(DELIMITER_INDEX);
+        String[] tokens = customDelimiterMatcher.group(OPERANDS_INDEX).split(customDelimiter);
 
-            return plus(tokens);
-        }
-
-        return CONTINUE;
+        return plus(tokens);
     }
 
-    private Matcher getMatcher(String expression, Pattern pattern) {
+    private Matcher getMatcher(Pattern pattern) {
         return pattern.matcher(expression);
     }
 
-    public int plusByDefaultDelimiter(String expression) {
+    public int plusByDefaultDelimiter() {
         String[] tokens = expression.split(DEFAULT_DELIMITER);
 
         return plus(tokens);
