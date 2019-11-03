@@ -2,13 +2,15 @@ package lotto;
 
 import java.util.*;
 
-public class Lotto {
+class Lotto {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_GET_NUMBER = 6;
-    private static final int LOTTO_INIT_NUMBER = 0;
+    private static final int ZERO = 0;
     private static List<Integer> allLottoNumber;
+
     private List<Integer> lottoNumber;
+    private Integer hitCount;
 
     static {
         allLottoNumber = new ArrayList<>();
@@ -17,18 +19,50 @@ public class Lotto {
         }
     }
 
-    public Lotto() {
+    Lotto() {
         this.lottoNumber = new ArrayList<>();
+        this.hitCount = ZERO;
     }
 
-    public void selectLottoNumber() {
+    void selectLottoNumber() {
         Collections.shuffle(allLottoNumber);
-        for (int i = LOTTO_INIT_NUMBER; i < LOTTO_GET_NUMBER; i++) {
+        for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
             this.lottoNumber.add(allLottoNumber.get(i));
         }
     }
 
-    public List<Integer> getLottoNumber() {
+    void checkNumber(int[] winLotto) {
+        for (int i = ZERO; i < winLotto.length; i++) {
+            hit(winLotto[i]);
+        }
+    }
+
+    private void hit(Integer winLotto) {
+        if (lottoNumber.contains(winLotto)) {
+            this.hitCount++;
+        }
+
+    }
+
+    Integer getHitCount() {
+        return hitCount;
+    }
+
+    List<Integer> getLottoNumber() {
+        Collections.sort(lottoNumber);
         return lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumber, lotto.lottoNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

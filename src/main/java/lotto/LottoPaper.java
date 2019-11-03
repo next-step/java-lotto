@@ -1,30 +1,26 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoPaper {
-
-    private List<Integer> numbers;
+    private List<Lotto> lottoPapers;
 
     public LottoPaper() {
-        this(null);
+        this.lottoPapers = new ArrayList<>();
     }
 
-    public LottoPaper(List<Integer> numbers) {
-        this.numbers = numbers;
+    public List<Lotto> getLottoPapers() {
+        return lottoPapers;
     }
 
-    public void applyNumber(Integer number) {
-        if (isDuplicateNumber(number)) {
-            this.numbers.add(number);
+    public void applyLotto(Lotto lotto) {
+        this.lottoPapers.add(lotto);
+    }
+    
+    public void checkLottoGrade(int[] winLotto) {
+        for (Lotto lotto : lottoPapers) {
+            lotto.checkNumber(winLotto);
         }
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public boolean isDuplicateNumber(Integer number) {
-        return !this.numbers.contains(number);
     }
 }
