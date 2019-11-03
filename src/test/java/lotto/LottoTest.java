@@ -33,38 +33,10 @@ public class LottoTest {
 
     @Test
     void lottoTest() {
-        assertThat(lotto).isEqualTo(new Lotto(8));
-        assertThat(lotto.getNumber()).isEqualTo(8);
         lotto.selectLottoNumber();
-        assertThat(lotto.getNumber()).isEqualTo(8);
+        assertThat(lotto.getLottoNumber()).hasSize(6);
+        System.out.println(lotto.getLottoNumber().toString());
     }
 
-    @Test
-    void createLottoPaperCollectionTest() {
-        for (int i = 0; i < 6; i++) {
-            Lotto lotto = new Lotto();
-            lotto.selectLottoNumber();
-            numbers.add(lotto.getNumber());
-        }
-        assertThat(numbers).hasSize(6);
-        System.out.println(numbers.toString());
-    }
 
-    @Test
-    void createLottoPaperClassTest() {
-        for (int i = 0; i < 6; i++) {
-            Lotto lotto = new Lotto();
-            lotto.selectLottoNumber();
-            lottoPaper.applyNumber(lotto.getNumber());
-        }
-        assertThat(lottoPaper.getNumbers()).hasSize(6);
-        System.out.println(lottoPaper.getNumbers());
-    }
-
-    @Test
-    void duplicateNumberTest() {
-        lottoPaper.applyNumber(5);
-        lottoPaper.applyNumber(5);
-        assertThat(lottoPaper.getNumbers()).hasSize(1);
-    }
 }

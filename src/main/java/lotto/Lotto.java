@@ -1,43 +1,34 @@
 package lotto;
 
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class Lotto {
-    private static final int CORRECT_VALUE = 1;
-    private Integer number;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_GET_NUMBER = 6;
+    private static final int LOTTO_INIT_NUMBER = 0;
+    private static List<Integer> allLottoNumber;
+    private List<Integer> lottoNumber;
+
+    static {
+        allLottoNumber = new ArrayList<>();
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            allLottoNumber.add(i);
+        }
+    }
 
     public Lotto() {
-        this(null);
-    }
-
-    public Lotto(Integer number) {
-        this.number = number;
-    }
-
-    public int getNumber() {
-        return number;
+        this.lottoNumber = new ArrayList<>();
     }
 
     public void selectLottoNumber() {
-        this.number = getRandomNumber();
+        Collections.shuffle(allLottoNumber);
+        for (int i = LOTTO_INIT_NUMBER; i < LOTTO_GET_NUMBER; i++) {
+            this.lottoNumber.add(allLottoNumber.get(i));
+        }
     }
 
-    private int getRandomNumber() {
-        int number = new Random().nextInt(44);
-        return number + CORRECT_VALUE;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Lotto lotto = (Lotto) o;
-        return number == lotto.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
+    public List<Integer> getLottoNumber() {
+        return lottoNumber;
     }
 }
