@@ -53,7 +53,8 @@ class LotteryTicketTest {
         List<Integer> numbers = ticket.getNumbers();
 
         // then
-        boolean allMatch = numbers.stream().allMatch(integer -> integer > 0 && integer <= 45);
+        boolean allMatch = numbers.stream()
+                .allMatch(integer -> integer > 0 && integer <= 45);
         assertThat(allMatch).isTrue();
     }
 }

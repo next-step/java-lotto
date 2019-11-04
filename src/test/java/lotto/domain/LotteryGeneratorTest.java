@@ -18,7 +18,7 @@ public class LotteryGeneratorTest {
     @BeforeEach
     void setUp() {
         // given
-        lotteryGenerator = new LotteryGenerator();
+        lotteryGenerator = new LotteryGenerator(new NumberGenerator());
     }
 
     @DisplayName("복권 생성기: 단일 생성")

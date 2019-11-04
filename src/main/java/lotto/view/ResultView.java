@@ -31,7 +31,9 @@ public class ResultView {
                 "5개 일치 (1500000원)- 0개\n" +
                 "6개 일치 (2000000000원)- 0개"
         );
+    }
 
+    public void showRevenueRate() {
         out.println("총 수익률은 0.35입니다.");
     }
 }

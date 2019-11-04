@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto;
 
+import lotto.domain.LotteryGenerator;
+import lotto.domain.LotteryTicket;
+import lotto.domain.NumberGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,7 +22,7 @@ public class LotteryMachine {
     private final ResultView resultView;
 
     public LotteryMachine(InputStream in, PrintStream out) {
-        lotteryGenerator = new LotteryGenerator();
+        lotteryGenerator = new LotteryGenerator(new NumberGenerator());
         inputView = new InputView(in);
         resultView = new ResultView(out);
     }
@@ -32,5 +35,6 @@ public class LotteryMachine {
 
         List<Integer> winningNumbers = inputView.receiveWinningNumbers();
         resultView.showStatistics();
+        resultView.showRevenueRate();
     }
 }

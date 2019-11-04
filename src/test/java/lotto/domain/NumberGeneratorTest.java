@@ -32,6 +32,7 @@ class NumberGeneratorTest {
         // when
         List<Integer> numbers = generator.generate(size);
         System.out.println(numbers);
+
         // then
         assertThat(numbers).hasSize(size);
 

@@ -1,7 +1,5 @@
 package lotto;
 
-import lotto.domain.LotteryMachine;
-
 /**
  * Created by yusik on 2019/11/05.
  */
