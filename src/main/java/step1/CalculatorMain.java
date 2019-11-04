@@ -8,6 +8,6 @@ public class CalculatorMain {
     String inputValue = scanner.nextLine();
     StringAddCalculator stringAddCalculator = new StringAddCalculator(inputValue);
     int result = stringAddCalculator.calculate();
-    System.out.println("result : " + result);
+    System.out.println(result);
   }
 }
