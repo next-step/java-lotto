@@ -21,7 +21,7 @@ public class BasicNumberGenerator implements NumberGenerator {
     @Override
     public List<Integer> generate() {
         Collections.shuffle(totalNumbers);
-        List<Integer> lottoNumbers = new ArrayList<>(totalNumbers.subList(0, LOTTO_NUMBER_COUNT));
+        final List<Integer> lottoNumbers = new ArrayList<>(totalNumbers.subList(0, LOTTO_NUMBER_COUNT));
         Collections.sort(lottoNumbers);
         return Collections.unmodifiableList(lottoNumbers);
     }

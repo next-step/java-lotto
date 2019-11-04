@@ -20,10 +20,7 @@ public class IssuedLottosTest {
                 )
         );
 
-        issuedLottos.checkNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(issuedLottos.countWin(3)).isEqualTo(1);
-        assertThat(issuedLottos.countWin(4)).isEqualTo(1);
-        assertThat(issuedLottos.countWin(5)).isEqualTo(1);
-        assertThat(issuedLottos.countWin(6)).isEqualTo(1);
+        WinningStatus winningStatus = issuedLottos.checkRank(Arrays.asList(1, 2, 3, 4, 30, 31), 40);
+        assertThat(winningStatus.getCountOfRankFor(Rank.SECOND)).isEqualTo(1);
     }
 }

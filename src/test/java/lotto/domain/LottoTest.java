@@ -1,44 +1,39 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
+    private Lotto lotto;
+
+    @BeforeEach
+    void setUp() {
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
     @Test
     void 생성() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
-    @Test
-    void 당첨여부확인_3개() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int result = lotto.findMatchedNumberCount(Arrays.asList(1, 2, 3, 8, 9, 10));
-        assertThat(result).isEqualTo(3);
-    }
-
-    @Test
-    void 당첨여부확인_4개() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int result = lotto.findMatchedNumberCount(Arrays.asList(1, 2, 3, 4, 9, 10));
-        assertThat(result).isEqualTo(4);
-    }
-
-    @Test
-    void 당첨여부확인_5개() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int result = lotto.findMatchedNumberCount(Arrays.asList(1, 2, 3, 4, 5, 10));
-        assertThat(result).isEqualTo(5);
-    }
-
-    @Test
-    void 당첨여부확인_6개() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int result = lotto.findMatchedNumberCount(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(result).isEqualTo(6);
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,8,9,10:3", "1,2,3,4,9,10:4", "1,2,3,4,5,10:5", "1,2,3,4,5,6:6"}, delimiter = ':')
+    void 당첨여부확인(final String input, final int expected) {
+        String[] numbers = input.split(",");
+        List<Integer> winNumbers = new ArrayList<>();
+        for (String number : numbers) {
+            winNumbers.add(Integer.parseInt(number));
+        }
+        int result = lotto.checkCountOfMatch(winNumbers);
+        assertThat(result).isEqualTo(expected);
     }
 }
