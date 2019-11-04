@@ -2,16 +2,20 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.CsvSource;
+import step2.domain.LottoTicket;
 import step2.domain.Winner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnerTest {
-    Winner winner = new Winner();
+    List<LottoTicket> lottoTickets = new ArrayList<>();
+    String lastWeekWinningInput = "1,2,3,4,5,6";
+
+    Winner winner = new Winner(lottoTickets, lastWeekWinningInput);
     List<Integer> winnerNums = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     @DisplayName("3개 일치")
