@@ -14,14 +14,9 @@ public class Lotto {
     }
 
     public int compare(Lotto other) {
-        int count = 0;
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (other.contains(lottoNumber)) {
-                count++;
-            }
-        }
-
-        return count;
+        return (int) lottoNumbers.stream()
+                .filter(other::contains)
+                .count();
     }
 
     private boolean contains(LottoNumber lottoNumber) {
