@@ -29,17 +29,21 @@ public class StringNumberParser {
     }
 
     private static String findCustomSeparator(String string) {
-        int startIndex = string.indexOf(CUSTOM_SEPARATOR_START_STRING) + CUSTOM_SEPARATOR_START_STRING.length();
+        int startIndex = findSubstringStartIndex(string, CUSTOM_SEPARATOR_START_STRING);
         int endIndex = string.indexOf(CUSTOM_SEPARATOR_END_STRING);
         return string.substring(startIndex, endIndex);
     }
 
     private static String[] split(String string, String separator) {
         if (hasCustomSeparator(string)) {
-            int beginIndex = string.indexOf(CUSTOM_SEPARATOR_END_STRING) + CUSTOM_SEPARATOR_END_STRING.length();
+            int beginIndex = findSubstringStartIndex(string, CUSTOM_SEPARATOR_END_STRING);
             return string.substring(beginIndex).split(separator);
         }
         return string.split(separator);
+    }
+
+    private static int findSubstringStartIndex(String string, String separatorString) {
+        return string.indexOf(separatorString) + separatorString.length();
     }
 
     private static List<Integer> convertNumbers(String[] strings) {
