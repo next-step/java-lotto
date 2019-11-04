@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class LottoBox {
     private static final int LOTTO_START_NUMBER = 1;
@@ -16,7 +17,7 @@ public class LottoBox {
     }
 
     public static List<LottoNumber> generateNumbers() {
-        Collections.shuffle(defaultNumbers);
-        return defaultNumbers.subList(0, 6);
+        Collections.shuffle(defaultNumbers, new Random(System.currentTimeMillis()));
+        return new ArrayList<>(defaultNumbers.subList(0, 6));
     }
 }

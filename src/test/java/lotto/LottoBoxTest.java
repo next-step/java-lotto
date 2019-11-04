@@ -14,4 +14,12 @@ public class LottoBoxTest {
         List<LottoNumber> lottoNumbers = LottoBox.generateNumbers();
         assertThat(lottoNumbers).hasSize(6);
     }
+
+    @Test
+    @DisplayName("매번 다른 번호가 생성되는지 확인한다.")
+    void isRandomNumbers() {
+        Lotto firstLotto = new Lotto(LottoBox.generateNumbers());
+        Lotto second = new Lotto(LottoBox.generateNumbers());
+        assertThat(firstLotto).isNotEqualTo(second);
+    }
 }
