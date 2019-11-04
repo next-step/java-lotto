@@ -23,18 +23,18 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<LottoRank, Long> getRankGroup(Lotto winningLotto) {
+    public Map<LottoRank, Long> getRankGroup(LottoNumber winningLottoNumber) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (Lotto each : lottos) {
-            lottoRanks.add(each.getRank(winningLotto));
+            lottoRanks.add(each.getRank(winningLottoNumber));
         }
 
         return lottoRanks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public List<Lotto> getValue() {
+        return new ArrayList<>(lottos);
     }
 
     public int size() {
