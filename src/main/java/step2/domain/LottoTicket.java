@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,5 +51,9 @@ public class LottoTicket {
 
     private boolean isProperNumRange(int lottoNum) {
         return (lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX);
+    }
+
+    public List<Integer> getLottoNums() {
+        return this.lottoNums;
     }
 }
