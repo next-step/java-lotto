@@ -8,7 +8,7 @@ public class LottoMachine {
     public static final Money LOTTO_PRICE = Money.of(1_000);
     private static final LottoStrategy strategy = new RandomLottoStrategy();
 
-    protected static Lotteries buy(Money investment) {
+    public static Lotteries buy(Money investment) {
         List<Lotto> lotteries = new ArrayList<>();
         while (investment.moreThanOrEquals(LOTTO_PRICE)) {
             lotteries.add(Lotto.generate(strategy));

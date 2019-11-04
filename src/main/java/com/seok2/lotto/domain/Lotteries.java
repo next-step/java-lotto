@@ -1,8 +1,10 @@
 package com.seok2.lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Lotteries {
+public class Lotteries implements Iterable<Lotto> {
 
     private List<Lotto> lotteries;
 
@@ -16,9 +18,17 @@ public class Lotteries {
             throw new IllegalArgumentException("최소 한 장 이상의 게임을 구매해야 합니다.");
     }
 
-    protected int size() {
+    public GameStats check(Lotto winning) {
+        return GameStats.of(lotteries.stream().map(lotto -> winning.check(lotto)).collect(Collectors.toList()));
+    }
+
+    public int size() {
         return lotteries.size();
     }
 
 
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lotteries.iterator();
+    }
 }
