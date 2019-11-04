@@ -2,6 +2,8 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -24,5 +26,17 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame(money);
 
         assertThat(lottoGame.lottoSize()).isEqualTo(expectedSize);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 6", "1,2,3,4,5,6"})
+    @DisplayName("당첨 번호를 셋팅한다.")
+    void winningLotto(String winningLottoString) {
+        int money = 1000;
+        LottoGame lottoGame = new LottoGame(money);
+
+        lottoGame.winningLotto(winningLottoString);
+
+        assertThat(lottoGame.isInitWinningLotto()).isTrue();
     }
 }

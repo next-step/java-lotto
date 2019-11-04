@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoGame {
     private static final int GAME_AMOUNT = 1000;
@@ -9,6 +10,7 @@ public class LottoGame {
     private static final String MONEY_LOW_MESSAGE = "금액이 부족합니다.";
 
     private List<Lotto> lottos = new ArrayList<>();
+    private Lotto winningLotto = null;
 
     public LottoGame(int money) {
         int gameCount = gameCount(money);
@@ -31,5 +33,14 @@ public class LottoGame {
 
     public int lottoSize() {
         return lottos.size();
+    }
+
+    public void winningLotto(String winningLottoString) {
+        List<LottoNumber> lottoNumbers = LottoBox.parseNumberString(winningLottoString);
+        this.winningLotto = new Lotto(lottoNumbers);
+    }
+
+    public boolean isInitWinningLotto() {
+        return Objects.nonNull(this.winningLotto);
     }
 }

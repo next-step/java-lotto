@@ -22,4 +22,12 @@ public class LottoBoxTest {
         Lotto second = new Lotto(LottoBox.generateNumbers());
         assertThat(firstLotto).isNotEqualTo(second);
     }
+
+    @Test
+    @DisplayName("입력받은 로또 번호를 넣었을때 6개의 로또 번호가 생성 되는지 확인 한다.")
+    void parseNumberString() {
+        String numberString = "1, 2, 3, 4, 5, 6";
+        List<LottoNumber> lottoNumbers = LottoBox.parseNumberString(numberString);
+        assertThat(lottoNumbers).hasSize(6);
+    }
 }
