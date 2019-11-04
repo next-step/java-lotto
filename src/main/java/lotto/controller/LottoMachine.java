@@ -1,11 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.LottoRank;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoMachine {
@@ -19,7 +17,6 @@ public class LottoMachine {
             Money money = getMoney(lottoView);
             Lottos lottos = createLottoNumbers(lottoView, money);
 
-            createLottoNumbers(lottoView, money);
             findWinningLotto(lottoView, money, lottos);
         } catch (NumberFormatException exception) {
             lottoView.showConvertNumberError();
@@ -47,8 +44,11 @@ public class LottoMachine {
     }
 
     private void findWinningLotto(LottoView lottoView, Money money, Lottos lottos) {
+        List<Integer> winningNumbers = lottoView.getWinningNumbers();
+        int winningBonusNumber = lottoView.getWinningBonusNumber();
+
         // todo : 일급 컬렉션으로 감싸기
-        Map<LottoRank, Long> rankGroup = lottos.getRankGroup(new Lotto(lottoView.getWinningLottoNumbers()));
+        Map<LottoRank, Long> rankGroup = lottos.getRankGroup(new LottoNumber(winningNumbers, winningBonusNumber));
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));
