@@ -20,23 +20,25 @@ public class LottoService {
         return lottos;
     }
 
-    public Map<WinnerType, Integer> findWinnerStats(List<Lotto> lottos, Lotto winnerLotto) {
+    public Map<WinnerType, Integer> findWinnerStats(List<Lotto> lottos, Lotto winnerLotto, int bonusNumber) {
         Map<WinnerType, Integer> winnerStat = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            Optional<WinnerType> winnerType = findWinnerType(lotto, winnerLotto);
+            Optional<WinnerType> winnerType = findWinnerType(lotto, winnerLotto, bonusNumber);
             winnerType.ifPresent(type -> addStat(winnerStat, type));
         }
         return winnerStat;
     }
 
-    private Optional<WinnerType> findWinnerType(Lotto lotto, Lotto winnerLotto) {
+    private Optional<WinnerType> findWinnerType(Lotto lotto, Lotto winnerLotto, int bonusNumber) {
         int count = 0;
-        for (Integer number : winnerLotto.getNumbers()) {
-            count = lotto.contains(number) ? count + 1 : count;
+        boolean isMatchBonus = false;
+        for (Integer number : lotto.getNumbers()) {
+            count = winnerLotto.contains(number) ? count + 1 : count;
+            isMatchBonus = (number == bonusNumber) || isMatchBonus;
         }
 
-        return WinnerType.findByCount(count);
+        return WinnerType.findByCount(count, isMatchBonus);
     }
 
     private void addStat(Map<WinnerType, Integer> winnerStat, WinnerType winnerType) {

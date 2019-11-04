@@ -40,20 +40,18 @@ class LottoServiceTest {
         List<Lotto> lottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
                 new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)),
                 new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
                 new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)));
 
         Lotto winnerLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Map<WinnerType, Integer> winnerStat = lottoService.findWinnerStats(lottos, winnerLotto);
+        Map<WinnerType, Integer> winnerStat = lottoService.findWinnerStats(lottos, winnerLotto, 0);
 
-        assertThat(winnerStat).hasSize(4);
+        assertThat(winnerStat).hasSize(3);
         assertThat(winnerStat.get(WinnerType.FIRST)).isEqualTo(2);
-        assertThat(winnerStat.get(WinnerType.SECOND)).isEqualTo(1);
-        assertThat(winnerStat.get(WinnerType.THIRD)).isEqualTo(1);
         assertThat(winnerStat.get(WinnerType.FOURTH)).isEqualTo(1);
+        assertThat(winnerStat.get(WinnerType.FIFTH)).isEqualTo(1);
     }
 
     @Test
@@ -61,8 +59,8 @@ class LottoServiceTest {
     void findYield() {
         LottoService lottoService = new LottoService();
         Map<WinnerType, Integer> winnerStats = new HashMap<>();
-        winnerStats.put(WinnerType.THIRD, 2);
         winnerStats.put(WinnerType.FOURTH, 2);
+        winnerStats.put(WinnerType.FIFTH, 2);
 
         double yield = lottoService.findYield(winnerStats, 100);
 
@@ -74,10 +72,26 @@ class LottoServiceTest {
     void findYieldFloor() {
         LottoService lottoService = new LottoService();
         Map<WinnerType, Integer> winnerStats = new HashMap<>();
-        winnerStats.put(WinnerType.FOURTH, 1);
+        winnerStats.put(WinnerType.FIFTH, 1);
 
         double yield = lottoService.findYield(winnerStats, 14);
 
         assertThat(yield).isEqualTo(0.35);
+    }
+
+    @Test
+    @DisplayName("보너스볼도 일치하는지 검사한다.")
+    void checkBonusNumber() {
+        LottoService lottoService = new LottoService();
+        List<Lotto> lottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+
+        Lotto winnerLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto, 7);
+
+        assertThat(winnerStats).hasSize(2);
+        assertThat(winnerStats.containsKey(WinnerType.SECOND)).isTrue();
+        assertThat(winnerStats.containsKey(WinnerType.THIRD)).isTrue();
     }
 }
