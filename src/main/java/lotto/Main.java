@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoService;
+import lotto.domain.WinnerLotto;
 import lotto.domain.WinnerType;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -21,9 +22,8 @@ public class Main {
         ResultView.printBuyTicketNumber(number);
         ResultView.printBuyLottos(lottos);
 
-        Lotto winnerLotto = new Lotto(InputView.createWinnerNumbers());
-        int bonusNumber = InputView.createBonusNumber();
-        Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto, bonusNumber);
+        WinnerLotto winnerLotto = InputView.createWinnerLotto();
+        Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto);
         double yield = lottoService.findYield(winnerStats, number);
 
         ResultView.printWinnerStats(winnerStats);

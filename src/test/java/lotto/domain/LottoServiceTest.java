@@ -44,9 +44,10 @@ class LottoServiceTest {
                 new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
                 new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)));
 
-        Lotto winnerLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinnerLotto winnerLotto = new WinnerLotto(lotto, 30);
 
-        Map<WinnerType, Integer> winnerStat = lottoService.findWinnerStats(lottos, winnerLotto, 0);
+        Map<WinnerType, Integer> winnerStat = lottoService.findWinnerStats(lottos, winnerLotto);
 
         assertThat(winnerStat).hasSize(3);
         assertThat(winnerStat.get(WinnerType.FIRST)).isEqualTo(2);
@@ -86,9 +87,10 @@ class LottoServiceTest {
         List<Lotto> lottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
 
-        Lotto winnerLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinnerLotto winnerLotto = new WinnerLotto(lotto, 7);
 
-        Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto, 7);
+        Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto);
 
         assertThat(winnerStats).hasSize(2);
         assertThat(winnerStats.containsKey(WinnerType.SECOND)).isTrue();
