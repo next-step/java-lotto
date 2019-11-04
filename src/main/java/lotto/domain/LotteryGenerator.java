@@ -17,6 +17,6 @@ public class LotteryGenerator {
     }
 
     public LotteryTicket generate() {
-        return new LotteryTicket();
+        return new LotteryTicket(null);
     }
 }
