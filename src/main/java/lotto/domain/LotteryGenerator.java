@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,10 +8,15 @@ import java.util.List;
  */
 public class LotteryGenerator {
     public List<LotteryTicket> generate(int count) {
-        return null;
+
+        List<LotteryTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            tickets.add(generate());
+        }
+        return tickets;
     }
 
     public LotteryTicket generate() {
-        return null;
+        return new LotteryTicket();
     }
 }

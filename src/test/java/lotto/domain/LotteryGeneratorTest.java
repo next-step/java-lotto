@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class LotteryGeneratorTest {
 
-    @DisplayName("복권 생성")
+    private LotteryGenerator lotteryGenerator;
+
+    @BeforeEach
+    void setUp() {
+        // given
+        lotteryGenerator = new LotteryGenerator();
+    }
+
+    @DisplayName("복권 생성기: 단일 생성")
     @Test
     void generateTicket() {
-
-        // given
-        LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
         // when
         LotteryTicket lotteryTickets = lotteryGenerator.generate();
@@ -26,13 +32,12 @@ public class LotteryGeneratorTest {
         assertThat(lotteryTickets).isNotNull();
     }
 
-    @DisplayName("복권 여러개 생성")
+    @DisplayName("복권 생성기: 여러개 생성")
     @Test
     void generateTickets() {
 
         // given
         int expected = 14;
-        LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
         // when
         List<LotteryTicket> lotteryTickets = lotteryGenerator.generate(expected);
