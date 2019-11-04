@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String TO_STRING_FORMAT = "[%s]";
+    private static final String NUMBERS_JOIN_DELIMITER = ", ";
+    private static final int HASH_CODE_PRIME = 59;
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -29,8 +32,8 @@ public class Lotto {
     public String toString() {
         String numberString = lottoNumbers.stream()
                 .map(LottoNumber::toString)
-                .collect(Collectors.joining(", "));
-        return String.format("[%s]", numberString);
+                .collect(Collectors.joining(NUMBERS_JOIN_DELIMITER));
+        return String.format(TO_STRING_FORMAT, numberString);
     }
 
     @Override
@@ -43,10 +46,9 @@ public class Lotto {
 
     @Override
     public int hashCode() {
-        final int prime = 59;
         int hashCode = 1;
         for (LottoNumber lottoNumber : lottoNumbers) {
-            hashCode = prime * hashCode + (lottoNumber == null ? 0 : lottoNumber.hashCode());
+            hashCode = HASH_CODE_PRIME * hashCode + (lottoNumber == null ? 0 : lottoNumber.hashCode());
         }
         return hashCode;
     }

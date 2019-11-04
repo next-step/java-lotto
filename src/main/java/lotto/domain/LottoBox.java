@@ -10,6 +10,8 @@ public class LottoBox {
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_LENGTH_MIN = 1;
     private static final int LOTTO_LENGTH_MAX = 6;
+    private static final int SUBSTRING_FROM_INDEX = 0;
+    private static final int SUBSTRING_TO_INDEX = 6;
     private static final String NUMBER_STRING_SEPARATOR = ", |,";
     private static final String OUT_OF_RANGE_ERROR_MESSAGE = "로또 숫자는 6개만 입력 가능합니다.";
     private static final String CONVERT_NUMBER_ERROR_MESSAGE = "숫자 이외의 값이 입력 되었습니다.";
@@ -24,7 +26,7 @@ public class LottoBox {
 
     public static List<LottoNumber> generateNumbers() {
         Collections.shuffle(defaultNumbers, new Random(System.currentTimeMillis()));
-        return new ArrayList<>(defaultNumbers.subList(0, 6));
+        return new ArrayList<>(defaultNumbers.subList(SUBSTRING_FROM_INDEX, SUBSTRING_TO_INDEX));
     }
 
     public static List<LottoNumber> parseNumberString(String numberString) {
