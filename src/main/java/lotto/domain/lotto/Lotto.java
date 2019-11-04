@@ -14,13 +14,11 @@ public class Lotto {
 	private static final String ANSWER_NUMBERS_COUNT_ERROR_MSG = "로또는 %s개의 숫자로만 비교될 수 있습니다";
 
 	private final Set<Integer> numbers;
-	private LottoPrize status;
 
 	private Lotto(List<Integer> inputNumbers) {
 		validateNumbersCount(inputNumbers, LOTTO_NUMBERS_COUNT_ERROR_MSG);
 		this.numbers = new HashSet<>(inputNumbers);
 		validateDuplicateNumbers(numbers);
-		this.status = LottoPrize.UNKNOWN;
 	}
 
 	private void validateNumbersCount(List<Integer> inputNumbers, String errorMessage) {
@@ -39,19 +37,26 @@ public class Lotto {
 		return new Lotto(inputNumbers);
 	}
 
-	public void examine(List<Integer> answerNumbers) {
+	public LottoPrize examine(List<Integer> answerNumbers, int bonusNumber) {
 		validateNumbersCount(answerNumbers, ANSWER_NUMBERS_COUNT_ERROR_MSG);
-		this.status = LottoPrize.of(countMatchedNumbers(answerNumbers));
+		validateBonusNumber(answerNumbers, bonusNumber);
+		return LottoPrize.of(countMatchedNumbers(answerNumbers), isBonusNumberMatched(bonusNumber));
+	}
+
+	private void validateBonusNumber(List<Integer> answerNumbers, int bonusNumber) {
+		if (answerNumbers.contains(bonusNumber)) {
+			throw new IllegalArgumentException(String.format("보너스 숫자(%s)가 로또 당첨 숫자와 중복됩니다!", bonusNumber));
+		}
 	}
 
 	private long countMatchedNumbers(List<Integer> answerNumbers) {
 		return answerNumbers.stream()
-				.filter(e -> numbers.contains(e))
+				.filter(numbers::contains)
 				.count();
 	}
 
-	public LottoPrize getStatus() {
-		return status;
+	private boolean isBonusNumberMatched(int bonusNumber) {
+		return numbers.contains(bonusNumber);
 	}
 
 	public Set<Integer> getNumbers() {

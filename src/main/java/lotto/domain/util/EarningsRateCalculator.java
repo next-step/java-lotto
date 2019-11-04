@@ -1,25 +1,23 @@
 package lotto.domain.util;
 
 import lotto.domain.lotto.LottoPrize;
-import lotto.dto.LottoDto;
 
 import java.util.List;
 
 public class EarningsRateCalculator {
 
-	public static double calculate(List<LottoDto> lotteries, int lottoPrice) {
-		return (double) getRewardAmount(lotteries) / getLottoPrices(lotteries, lottoPrice);
+	public static double calculate(List<LottoPrize> lottoPrizes, int lottoPrice) {
+		return (double) getRewardAmount(lottoPrizes) / getLottoPrices(lottoPrizes, lottoPrice);
 	}
 
-	private static long getRewardAmount(List<LottoDto> lotteries) {
-		return lotteries.stream()
-				.map(LottoDto::getStatus)
+	private static long getRewardAmount(List<LottoPrize> lottoPrizes) {
+		return lottoPrizes.stream()
 				.mapToLong(LottoPrize::getRewardAmount)
 				.sum();
 	}
 
-	private static int getLottoPrices(List<LottoDto> lotteries, int lottoPrice) {
-		return lotteries.size() * lottoPrice;
+	private static int getLottoPrices(List<LottoPrize> lottoPrizes, int lottoPrice) {
+		return lottoPrizes.size() * lottoPrice;
 	}
 
 }

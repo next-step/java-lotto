@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public enum LottoPrize {
 
 	FIRST(6, 2_000_000_000, true),
+	SECOND_BONUS(5, 30_000_000, true),
 	SECOND(5, 1_500_000, true),
 	THIRD(4, 50_000, true),
 	FIRTH(3, 5_000, true),
@@ -33,8 +34,12 @@ public enum LottoPrize {
 
 	}
 
-	public static LottoPrize of(long sameNumberCount) {
-		return cachingLottoPrize.getOrDefault(sameNumberCount, UNKNOWN);
+	public static LottoPrize of(long sameNumberCount, boolean bonusNumberMatched) {
+		LottoPrize prize = cachingLottoPrize.getOrDefault(sameNumberCount, UNKNOWN);
+		if (bonusNumberMatched && prize.equals(LottoPrize.SECOND)) {
+			return LottoPrize.SECOND_BONUS;
+		}
+		return prize;
 	}
 
 	public static List<LottoPrize> displayedLottoPrizes() {
@@ -54,6 +59,9 @@ public enum LottoPrize {
 
 	@Override
 	public String toString() {
+		if (this.equals(LottoPrize.SECOND_BONUS)) {
+			return String.format("%s개 일치, 보너스 볼 일치(%s원)", sameNumberCount, rewardAmount);
+		}
 		return String.format("%s개 일치 (%s원)", sameNumberCount, rewardAmount);
 	}
 

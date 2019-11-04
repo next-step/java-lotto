@@ -2,21 +2,21 @@ package lotto.domain.person;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCreator;
+import lotto.domain.lotto.LottoPrize;
 import lotto.dto.LottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Person {
 
 	private final Wallet wallet;
-	private final List<Lotto> lotteries;
+	private final BuyingLotteries lotteries;
 
 	private Person(long amount, List<Lotto> lotteries) {
 		this.wallet = Wallet.of(amount);
-		this.lotteries = lotteries;
+		this.lotteries = new BuyingLotteries(lotteries);
 	}
 
 	public static Person of(long amount) {
@@ -28,7 +28,7 @@ public class Person {
 	}
 
 	public void buyLottoWithAllMoney(LottoCreator lottoCreator) {
-		while (lottoCreator.canAffordToBuyLotto(wallet)) {
+		for (int i = 0, end = wallet.getPossibleNumberToBuy(LottoCreator.LOTTO_PRICE); i < end; i++) {
 			buyLotto(lottoCreator);
 		}
 	}
@@ -38,16 +38,12 @@ public class Person {
 	}
 
 	public List<LottoDto> getLottoDtos() {
-		return lotteries.stream()
-				.map(LottoDto::of)
-				.collect(Collectors.toList());
+		return lotteries.toLottoDtos();
 	}
 
-	public void checkAllLotteries(List<Integer> answerNumbers) {
+	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
 		validateEmptyLotteries();
-		for (Lotto lotto : lotteries) {
-			lotto.examine(answerNumbers);
-		}
+		return lotteries.checkAllLotteries(answerNumbers, bonusNumber);
 	}
 
 	private void validateEmptyLotteries() {

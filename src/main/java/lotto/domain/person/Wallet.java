@@ -23,11 +23,12 @@ public class Wallet {
 		return new Wallet(amount);
 	}
 
-	public boolean hasMoreThan(long comparedAmount) {
-		return amount >= comparedAmount;
+	public int getPossibleNumberToBuy(long price) {
+		return (int) (amount / price);
 	}
 
 	public void minus(long minusAmount) {
+		validateAmount(amount - minusAmount);
 		this.amount -= minusAmount;
 	}
 
