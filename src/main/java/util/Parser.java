@@ -53,10 +53,10 @@ public class Parser {
                 .collect(Collectors.toList());
     }
 
-    private static Integer changeToNumber(String string) {
+    private static Integer changeToNumber(String value) {
         Integer number;
         try {
-            number = Integer.parseUnsignedInt(string);
+            number = Integer.parseUnsignedInt(value);
         } catch (Exception e) {
             System.out.println("fail number parsing : " + e);
             throw new IllegalArgumentException("기본구분자, 커스텀 구분자 외에 다른 문자를 입력할 수 없습니다.");

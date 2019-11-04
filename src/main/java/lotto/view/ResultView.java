@@ -9,18 +9,18 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-    public void printBuyTicketNumber(int number) {
+    public static void printBuyTicketNumber(int number) {
         System.out.println(String.format("%s개를 구매했습니다.", number));
     }
 
-    public void printBuyLottos(List<Lotto> lottos) {
+    public static void printBuyLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             System.out.println(makeLottoNumberFormat(lotto.getNumbers()));
         }
         System.out.println();
     }
 
-    private String makeLottoNumberFormat(List<Integer> numbers) {
+    private static String makeLottoNumberFormat(List<Integer> numbers) {
         String number = numbers.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
@@ -28,7 +28,7 @@ public class ResultView {
         return String.format("[%s]", number);
     }
 
-    public void printWinnerStats(Map<WinnerType, Integer> winnerStats) {
+    public static void printWinnerStats(Map<WinnerType, Integer> winnerStats) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------------------------------");
@@ -37,11 +37,11 @@ public class ResultView {
         }
     }
 
-    private String makeStatsFormat(WinnerType type, int count) {
+    private static String makeStatsFormat(WinnerType type, int count) {
         return String.format("%s개 일치 (%s)원 - %s 개", type.getSameCount(), type.getPrize(), count);
     }
 
-    public void printYield(double yield) {
+    public static void printYield(double yield) {
         System.out.println(String.format("총 수익률은 %s 입니다.", yield));
     }
 }

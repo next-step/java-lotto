@@ -25,7 +25,7 @@ public class Lotto {
 
     private List<Integer> createLottoNumbers() {
         List<Integer> lottos = new ArrayList<>();
-        for (int i = 1; i < 45; i++) {
+        for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER; i++) {
             lottos.add(i);
         }
         Collections.shuffle(lottos);
@@ -34,7 +34,7 @@ public class Lotto {
     }
 
     private void validateNumbers(List<Integer> numbers) {
-        if(numbers.size() != LOTTO_VALID_SIZE) {
+        if (numbers.size() != LOTTO_VALID_SIZE) {
             throw new IllegalArgumentException("lotto number 개수는 6개입니다.");
         }
 
