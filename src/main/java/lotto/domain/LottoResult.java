@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class LottoResult {
     private static final int DEFAULT_RESULT_COUNT = 0;
