@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.domain.Lotto;
 import lotto.domain.WinnerType;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,13 +34,28 @@ public class ResultView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("--------------------------------");
-        for (WinnerType type : WinnerType.values()) {
+
+        for (WinnerType type : getWinnerTypes()) {
             System.out.println(makeStatsFormat(type, winnerStats.getOrDefault(type, 0)));
         }
     }
 
+    private static List<WinnerType> getWinnerTypes() {
+        return Arrays.stream(WinnerType.values())
+                .sorted(Comparator.comparing(WinnerType::getPrize))
+                .collect(Collectors.toList());
+    }
+
     private static String makeStatsFormat(WinnerType type, int count) {
-        return String.format("%s개 일치 (%s)원 - %s 개", type.getSameCount(), type.getPrize(), count);
+        return String.format("%s개 일치 %s (%s)원 - %s 개", type.getSameCount(), makeBonusMatchFormat(type.isMatchBonus()), type.getPrize(), count);
+    }
+
+    private static String makeBonusMatchFormat(boolean matchBonus) {
+        if (matchBonus) {
+            return ", 보너스 볼 일치";
+        }
+
+        return "";
     }
 
     public static void printYield(double yield) {

@@ -39,6 +39,10 @@ public enum WinnerType {
         return prize;
     }
 
+    public boolean isMatchBonus() {
+        return isMatchBonus;
+    }
+
     public int calculatePrize(Integer number) {
         return prize * number;
     }
