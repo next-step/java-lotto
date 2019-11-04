@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by yusik on 2019/11/05.
@@ -31,6 +32,17 @@ class LotteryTicketTest {
 
         // then
         assertThat(numbers).hasSize(6);
+    }
+
+    @DisplayName("복권 숫자 변조 방지")
+    @Test
+    void addNumbers() {
+
+        // when
+        List<Integer> numbers = ticket.getNumbers();
+
+        // then
+        assertThrows(UnsupportedOperationException.class, () -> numbers.add(1));
     }
 
     @DisplayName("복권 숫자 범위")

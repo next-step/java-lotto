@@ -1,17 +1,20 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by yusik on 2019/11/04.
  */
 public class LotteryTicket {
-    public LotteryTicket(List<Integer> numbers) {
 
+    private final List<Integer> numbers;
+
+    public LotteryTicket(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
     public List<Integer> getNumbers() {
-        return new ArrayList<>();
+        return Collections.unmodifiableList(numbers);
     }
 }
