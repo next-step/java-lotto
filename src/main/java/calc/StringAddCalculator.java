@@ -1,12 +1,21 @@
 package calc;
 
+import java.util.Arrays;
+
 public class StringAddCalculator {
 
-    public int add(String number) {
-        if (number == null || number.equals("")) {
+    public int add(String input) {
+        if (input == null || input.equals("")) {
             return 0;
         }
 
-        return Integer.parseInt(number);
+        if (input.contains(",")) {
+            String[] numbers = input.split(",");
+            return Arrays.stream(numbers)
+                        .mapToInt(Integer::parseInt)
+                        .reduce(0, Integer::sum);
+        }
+
+        return Integer.parseInt(input);
     }
 }
