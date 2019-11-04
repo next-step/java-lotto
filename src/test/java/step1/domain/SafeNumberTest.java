@@ -1,4 +1,5 @@
-import domain.SafeNumber;
+package step1.domain;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

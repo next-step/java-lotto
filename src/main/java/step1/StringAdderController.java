@@ -1,9 +1,11 @@
-import domain.Numbers;
-import domain.SafeNumber;
-import util.ParseStrategy;
-import util.ParserGroup;
-import view.InputView;
-import view.OutputView;
+package step1;
+
+import step1.domain.Numbers;
+import step1.domain.SafeNumber;
+import step1.util.ParseStrategy;
+import step1.util.ParserGroup;
+import step1.view.InputView;
+import step1.view.OutputView;
 
 import java.util.List;
 
