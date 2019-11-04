@@ -35,4 +35,16 @@ public class StringAddCalculatorTest {
     void 숫자_두개를_컴마_구분자로_입력하면_두_숫자의_합을_반환테스트(String input, int result) {
         assertThat(calculator.add(input)).isEqualTo(result);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:2;3", "3:4;7", "1:3;4", "100:10;110"}, delimiter = ';')
+    void 숫자_두개를_콜론_구분자로_입력하면_두_숫자의_합을_반환테스트(String input, int result) {
+        assertThat(calculator.add(input)).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:2;3", "3,4;7", "1:3;4", "100,10;110"}, delimiter = ';')
+    void 숫자_두개를_컴마콜론_구분자로_입력하면_두_숫자의_합을_반환테스트(String input, int result) {
+        assertThat(calculator.add(input)).isEqualTo(result);
+    }
 }
