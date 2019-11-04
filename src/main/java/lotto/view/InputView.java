@@ -26,4 +26,10 @@ public class InputView {
     private static boolean isGameMoneyUnit(int input) {
         return input % LottoGame.GAME_AMOUNT != 0;
     }
+
+    public static String inputWinningNumbers() {
+        System.out.println();
+        System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
+        return scanner.nextLine();
+    }
 }

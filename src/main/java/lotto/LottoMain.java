@@ -12,5 +12,8 @@ public class LottoMain {
         LottoGame lottoGame = new LottoGame(money);
         OutPutView.printGameCount(lottoGame.lottoSize());
         OutputView.printLottos(lottoGame.getLottos());
+
+        String winningNumbers = InputView.inputWinningNumbers();
+        lottoGame.winningLotto(winningNumbers);
     }
 }
