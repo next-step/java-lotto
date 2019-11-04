@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoRank;
+import lotto.domain.LottoRankGroup;
 import lotto.domain.Money;
 import org.junit.jupiter.api.Test;
 
@@ -16,11 +17,13 @@ public class MoneyTest {
     @Test
     void profitRateTest() {
         Map<LottoRank, Long> rankGroup = new HashMap<LottoRank, Long>() {{
-            put(LottoRank.THIRD, 1L);
+            put(LottoRank.FIFTH, 1L);
         }};
 
-        Money tenThousand = new Money(10000);
-        assertThat((long) (tenThousand.getProfitRate(rankGroup) * 100)).isEqualTo(500);
+        LottoRankGroup lottoRankGroup = new LottoRankGroup(rankGroup);
+
+        Money tenThousand = new Money(5000);
+        assertThat((long) (tenThousand.getProfitRate(lottoRankGroup) * 100)).isEqualTo(100);
     }
 
     @Test
