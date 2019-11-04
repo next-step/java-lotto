@@ -1,13 +1,12 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoGame {
     private static final int GAME_AMOUNT = 1000;
     private static final int MIN_GAME_COUNT = 1;
     private static final String MONEY_LOW_MESSAGE = "금액이 부족합니다.";
+    private static final String NO_INIT_WINNING_NUMBER = "당첨번호가 입력되지 않았습니다.";
 
     private List<Lotto> lottos = new ArrayList<>();
     private Lotto winningLotto = null;
@@ -19,6 +18,10 @@ public class LottoGame {
         }
 
         initLottos(gameCount);
+    }
+
+    public LottoGame(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     private int gameCount(int money) {
@@ -42,5 +45,18 @@ public class LottoGame {
 
     public boolean isInitWinningLotto() {
         return Objects.nonNull(this.winningLotto);
+    }
+
+    public LottoResult result() {
+        if (!isInitWinningLotto()) {
+            throw new RuntimeException(NO_INIT_WINNING_NUMBER);
+        }
+
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottos) {
+            lottoResult.update(lotto.compare(winningLotto));
+        }
+
+        return lottoResult;
     }
 }

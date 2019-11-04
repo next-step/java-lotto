@@ -26,4 +26,19 @@ public class Lotto {
         }
         return hashCode;
     }
+
+    public int compare(Lotto other) {
+        int count = 0;
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (other.contains(lottoNumber)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }
