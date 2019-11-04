@@ -43,8 +43,13 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1:2;3", "3,4;7", "1:3;4", "100,10;110"}, delimiter = ';')
+    @CsvSource(value = {"1:2;3", "3,4:1;8", "1:3,1;5", "1,100:10;111"}, delimiter = ';')
     void 숫자_두개를_컴마콜론_구분자로_입력하면_두_숫자의_합을_반환테스트(String input, int result) {
         assertThat(calculator.add(input)).isEqualTo(result);
+    }
+
+    @Test
+    void 커스텀_구분자로_입력해도_두_숫자의_합을_반환테스트() {
+        assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
     }
 }

@@ -1,18 +1,15 @@
 package calc;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class StringAddCalculator {
 
     public int add(String input) {
-        if (input == null || input.equals("")) {
-            return 0;
-        }
+        return add(new InputChecker(input).getNumbers());
+    }
 
-        String[] numbers = input.split(",|:");
-        return Arrays.stream(numbers)
-            .mapToInt(Integer::parseInt)
+    private int add(List<Integer> numbers) {
+        return numbers.stream()
             .reduce(0, Integer::sum);
-
     }
 }
