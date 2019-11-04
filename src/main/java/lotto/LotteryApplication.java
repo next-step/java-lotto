@@ -8,7 +8,7 @@ import lotto.domain.LotteryMachine;
 public class LotteryApplication {
 
     public static void main(String[] args) {
-        LotteryMachine lotteryMachine = new LotteryMachine(System.in);
+        LotteryMachine lotteryMachine = new LotteryMachine(System.in, System.out);
         lotteryMachine.run();
     }
 
