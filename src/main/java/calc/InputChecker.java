@@ -28,12 +28,15 @@ public class InputChecker {
         Matcher inputMatcher = INPUT_DELIMETER_PATTERN.matcher(input);
         if (inputMatcher.find()) {
             String customDelimeter = inputMatcher.group(1);
-            return Arrays.stream(inputMatcher.group(2).split(customDelimeter))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+            return convertInputWithDelimeter(inputMatcher.group(2), customDelimeter);
         }
 
-        return Arrays.stream(input.split(DEFAULT_INPUT_DELIMETER))
+        return convertInputWithDelimeter(input, DEFAULT_INPUT_DELIMETER);
+    }
+
+    private List<Integer> convertInputWithDelimeter(String input,
+        String delimeter) {
+        return Arrays.stream(input.split(delimeter))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
