@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.IssuedLottos;
 import lotto.domain.Lotto;
+import lotto.domain.Rank;
+import lotto.domain.WinningStatus;
 
 public class ResultView {
 
@@ -15,29 +17,14 @@ public class ResultView {
         }
     }
 
-    public static void printWinStatus(final int threeWinCount, final int fourWinCount, final int fiveWinCount, final int sixWinCount) {
+    public static void printWinningStatus(final WinningStatus winningStatus) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        printThreeWinCount(threeWinCount);
-        printFourWinCount(fourWinCount);
-        printFiveWinCount(fiveWinCount);
-        printSixWinCount(sixWinCount);
-    }
-
-    private static void printThreeWinCount(final int threeWinCount) {
-        System.out.println("3개 일치 (5000원) - " + threeWinCount);
-    }
-
-    private static void printFourWinCount(final int fourWinCount) {
-        System.out.println("4개 일치 (50000원) - " + fourWinCount);
-    }
-
-    private static void printFiveWinCount(final int fiveWinCount) {
-        System.out.println("5개 일치 (1500000원) - " + fiveWinCount);
-    }
-
-    private static void printSixWinCount(final int sixWinCount) {
-        System.out.println("6개 일치 (2000000000원) - " + sixWinCount);
+        System.out.println("3개 일치 (5000원) - " + winningStatus.getCountOfRankFor(Rank.FIFTH));
+        System.out.println("4개 일치 (50000원) - " + winningStatus.getCountOfRankFor(Rank.FOURTH));
+        System.out.println("5개 일치 (1500000원) - " + winningStatus.getCountOfRankFor(Rank.THIRD));
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + winningStatus.getCountOfRankFor(Rank.SECOND));
+        System.out.println("6개 일치 (2000000000원) - " + winningStatus.getCountOfRankFor(Rank.FIRST));
     }
 
     public static void printResult(final double rate) {

@@ -16,20 +16,16 @@ public class Main {
 
         user.buyLottoIn(store);
 
-        ResultView.printTotalLottoCount(user.countBoughtLotto());
+        ResultView.printTotalLottoCount(user.getCountOfLottos());
 
         ResultView.printIssuedLottos(user.findIssuedLottos());
 
         String winNumbers = InputView.inputWinNumbers();
+        String bonusNumber = InputView.inputBonusNumber();
 
-        user.checkLottoWin(winNumbers);
+        user.checkLottoRank(winNumbers, bonusNumber);
 
-        ResultView.printWinStatus(
-                user.countWinLotto(3),
-                user.countWinLotto(4),
-                user.countWinLotto(5),
-                user.countWinLotto(6)
-        );
+        ResultView.printWinningStatus(user.getWinningStatus());
 
         ResultView.printResult(user.calculateRate());
     }

@@ -9,7 +9,7 @@ public class User {
     private static String DELIMITER = ", ";
     private final int amount;
     private IssuedLottos issuedLottos;
-    private MatchedNumbers matchedNumbers;
+    private WinningStatus winningStatus;
 
     public User(final int amount) {
         this.amount = amount;
@@ -19,7 +19,7 @@ public class User {
         this.issuedLottos = store.issueLottos(amount);
     }
 
-    public int countBoughtLotto() {
+    public int getCountOfLottos() {
         return this.issuedLottos.count();
     }
 
@@ -27,25 +27,26 @@ public class User {
         return this.issuedLottos;
     }
 
-    public void checkLottoWin(final String winNumbers) {
+    public void checkLottoRank(final String winNumbers, final String bonusNumber) {
         final String[] winNumberUnits = winNumbers.split(DELIMITER);
         final List<Integer> numbers = new ArrayList<>();
         for (String winNumberUnit : winNumberUnits) {
             numbers.add(Integer.parseInt(winNumberUnit));
         }
-        this.matchedNumbers = issuedLottos.checkNumbers(numbers);
+        this.winningStatus = issuedLottos.checkRank(numbers, Integer.parseInt(bonusNumber));
     }
 
-    public int countWinLotto(final int matchedNumberCount) {
-        return this.matchedNumbers.get(matchedNumberCount);
+    public int getCountByRank(final Rank rank) {
+        return this.winningStatus.getCountOfRankFor(rank);
     }
 
     public double calculateRate() {
-        double three = countWinLotto(3) * 5000.0;
-        double four = countWinLotto(4) * 50000.0;
-        double five = countWinLotto(5) * 1500000.0;
-        double six = countWinLotto(6) * 2000000000.0;
-        return Math.floor((three + four + five + six) / amount * 100)/100.0;
+        final double totalWinningAmount = winningStatus.getTotalWinningAmount();
+        return Math.floor(totalWinningAmount / amount * 100) / 100.0;
+    }
+
+    public WinningStatus getWinningStatus() {
+        return this.winningStatus;
     }
 
     @Override
@@ -53,11 +54,13 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return amount == user.amount;
+        return amount == user.amount &&
+                Objects.equals(issuedLottos, user.issuedLottos) &&
+                Objects.equals(winningStatus, user.winningStatus);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(amount, issuedLottos, winningStatus);
     }
 }

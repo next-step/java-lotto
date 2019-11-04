@@ -16,14 +16,15 @@ public class IssuedLottos {
         return this.lottos.size();
     }
 
-    public MatchedNumbers checkNumbers(final List<Integer> winNumbers) {
-        final int matchCount = winNumbers.size() + 1;
-        final MatchedNumbers matchedNumbers = new MatchedNumbers(matchCount);
-        for (Lotto lotto : lottos) {
-            final int matchedNumberCount = lotto.findMatchedNumberCount(winNumbers);
-            matchedNumbers.add(matchedNumberCount);
-        }
-        return matchedNumbers;
+    public WinningStatus checkRank(final List<Integer> winNumbers, final int bonusNumber) {
+        final WinningStatus winningStatus = new WinningStatus();
+
+        lottos.forEach(lotto -> {
+            final Rank rank = lotto.checkRank(winNumbers, bonusNumber);
+            winningStatus.addCountOfRankFor(rank);
+        });
+
+        return winningStatus;
     }
 
     public List<Lotto> findAllIssuedLottos() {

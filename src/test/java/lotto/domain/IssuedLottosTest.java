@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
@@ -9,9 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IssuedLottosTest {
 
-    @ParameterizedTest
-    @ValueSource(ints = {3, 4, 5, 6})
-    void 발급된_로또_당첨_확인(final int matchedNumbersCount) {
+    @Test
+    void 발급된_로또_당첨_확인() {
         IssuedLottos issuedLottos = new IssuedLottos(
                 Arrays.asList(
                         new Lotto(Arrays.asList(1, 2, 3, 40, 41, 42)),
@@ -22,7 +20,7 @@ public class IssuedLottosTest {
                 )
         );
 
-        MatchedNumbers matchedNumbers = issuedLottos.checkNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(matchedNumbers.get(matchedNumbersCount)).isEqualTo(1);
+        WinningStatus winningStatus = issuedLottos.checkRank(Arrays.asList(1, 2, 3, 4, 30, 31), 40);
+        assertThat(winningStatus.getCountOfRankFor(Rank.SECOND)).isEqualTo(1);
     }
 }
