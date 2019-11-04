@@ -1,6 +1,7 @@
 package calc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,5 +62,12 @@ public class InputCheckerTest {
         assertThat(numbers).contains(Integer.parseInt(inputNumbers[0]));
         assertThat(numbers).contains(Integer.parseInt(inputNumbers[1]));
         assertThat(numbers).contains(Integer.parseInt(inputNumbers[2]));
+    }
+
+    @Test
+    void 음수를_입력하면_런타임_예외_발생테스트() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new InputChecker("-1,2,3").getNumbers();
+        });
     }
 }

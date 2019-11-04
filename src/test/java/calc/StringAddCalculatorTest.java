@@ -1,7 +1,7 @@
 package calc;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,5 +51,12 @@ public class StringAddCalculatorTest {
     @Test
     void 커스텀_구분자로_입력해도_두_숫자의_합을_반환테스트() {
         assertThat(calculator.add("//;\n1;2;3")).isEqualTo(6);
+    }
+
+    @Test
+    void 음수를_입력하면_런타임_예외_발생테스트() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            calculator.add("-1,2,3");
+        });
     }
 }

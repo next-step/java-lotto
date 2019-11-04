@@ -6,9 +6,11 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputChecker {
 
+    private static final String ILLEGAL_INPUT = "음수가 입력되었습니다.";
     private static final String DEFAULT_INPUT_DELIMETER = ",|:";
     private static final String CUSTOM_INPUT_DELIMETER_START = "//";
     private static final String CUSTOM_INPUT_DELIMETER_END = "\n";
@@ -36,9 +38,13 @@ public class InputChecker {
 
     private List<Integer> convertInputWithDelimeter(String input,
         String delimeter) {
-        return Arrays.stream(input.split(delimeter))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+        Stream<Integer> numbersStream = Arrays.stream(input.split(delimeter))
+                                              .map(Integer::parseInt);
+        if (numbersStream.anyMatch(integer -> integer < 0)) {
+            throw new IllegalArgumentException(ILLEGAL_INPUT);
+        }
+
+        return numbersStream.collect(Collectors.toList());
     }
 
     public List<Integer> getNumbers() {
