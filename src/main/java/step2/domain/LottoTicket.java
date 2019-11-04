@@ -8,11 +8,16 @@ public class LottoTicket {
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
 
-    List<Integer> lottoNums;
-    List<Integer> candidateNumbers = new ArrayList<>();
+    private List<Integer> lottoNums;
+    private List<Integer> candidateNumbers = new ArrayList<>();
 
     public LottoTicket() {
         this.lottoNums = makeAutoNumbers();
+        checkNumsRange();
+    }
+
+    public LottoTicket(List<Integer> winningNums) {
+        this.lottoNums = winningNums;
         checkNumsRange();
     }
 
@@ -38,13 +43,13 @@ public class LottoTicket {
     }
 
     private void checkNumsRange() {
-        for(int lottoNum : lottoNums) {
+        for (int lottoNum : lottoNums) {
             checkNumRange(lottoNum);
         }
     }
 
     private void checkNumRange(int lottoNum) {
-        if(!isProperNumRange(lottoNum)) {
+        if (!isProperNumRange(lottoNum)) {
             throw new IllegalArgumentException("Out of range");
         }
     }

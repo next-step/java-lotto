@@ -17,4 +17,9 @@ public class LottoServiceTest {
     void generateAutoLottoTest() {
         assertThat(lottoService.generateAutoLotto(3)).hasSize(3);
     }
+
+    @Test
+    void getWinnerTest() {
+
+    }
 }

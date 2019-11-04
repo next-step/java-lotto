@@ -1,7 +1,5 @@
 package step2.view;
 
-import step2.domain.LottoTicket;
-
 import java.util.Scanner;
 
 public class InputView {
@@ -17,7 +15,9 @@ public class InputView {
         return sc.nextInt();
     }
 
-    public LottoTicket getLastWeekWinningNumber() {
-        return new LottoTicket();
+    public String getLastWeekWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
+        return sc.nextLine();
     }
 }

@@ -9,7 +9,7 @@ public class ResultView {
     public void printLottoTickets(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() + "를 구매했습니다.");
 
-        for(LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }
     }
