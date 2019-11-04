@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
-    private int lottoCount;
     private List<LottoTicket> lottoTickets;
 
-    public int buyLotto(int price) {
-        this.lottoCount = price/1000;
-        return lottoCount;
+    public List<LottoTicket> buyTickets(int price) {
+        int lottoCount = price/1000;
+
+        return generateAutoLotto(lottoCount);
     }
 
     public List<LottoTicket> generateAutoLotto(int lottoCount) {
@@ -19,5 +19,9 @@ public class LottoService {
             lottoTickets.add(new LottoTicket());
         }
         return lottoTickets;
+    }
+
+    public Winner getWiner() {
+        return new Winner();
     }
 }

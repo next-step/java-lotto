@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    List<Integer> lottoNum = new ArrayList<Integer>();
+    List<Integer> lottoNum = new ArrayList<>();
 
     public LottoTicket() {
     }
