@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumber {
+public class Lotto {
 
     public static final String GRATER_THAN_NUMBER_COUNT_ERROR = "입력된 번호의 개수가 너무 많습니다. 6개의 번호를 입력해주세요.";
     public static final String LESS_THAN_NUMBER_COUNT_ERROR = "입력된 번호의 개수가 너무 적습니다. 6개의 번호를 입력해주세요.";
@@ -18,21 +18,21 @@ public class LottoNumber {
 
     private final List<Integer> numbers;
 
-    public LottoNumber() {
+    public Lotto() {
         this(getShuffledNumbers());
     }
 
-    public LottoNumber(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         assertValidNumbers(numbers);
         this.numbers = numbers;
     }
 
-    public LottoRank getRank(LottoNumber winningNumber) {
+    public LottoRank getRank(Lotto winningNumber) {
         return LottoRank.find(matchNumberCount(winningNumber));
     }
 
-    private long matchNumberCount(LottoNumber winnerLottoNumber) {
-        return winnerLottoNumber.getNumbers()
+    private long matchNumberCount(Lotto winnerLotto) {
+        return winnerLotto.getNumbers()
                 .stream()
                 .filter(numbers::contains)
                 .count();

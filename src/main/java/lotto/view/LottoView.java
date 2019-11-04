@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.InputTool;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.LottoRank;
 
 import java.util.Arrays;
@@ -46,10 +46,10 @@ public class LottoView {
                 .collect(Collectors.toList());
     }
 
-    public void showLottoNumbers(LottoNumbers lottoNumbers) {
-        drawText(String.format(PURCHASE_RESULT_TEXT, lottoNumbers.size()));
+    public void showLottoNumbers(Lottos lottos) {
+        drawText(String.format(PURCHASE_RESULT_TEXT, lottos.size()));
 
-        for (LottoNumber each : lottoNumbers.getLottoNumbers()) {
+        for (Lotto each : lottos.getLottos()) {
             drawText(getNumbersText(each.getNumbers()));
         }
     }

@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.LottoRank;
 import lotto.domain.Money;
 import lotto.view.LottoView;
@@ -14,10 +14,10 @@ public class LottoMachine {
     private void start(LottoView lottoView) {
         try {
             Money money = getMoney(lottoView);
-            LottoNumbers lottoNumbers = createLottoNumbers(lottoView, money);
+            Lottos lottos = createLottoNumbers(lottoView, money);
 
             createLottoNumbers(lottoView, money);
-            findWinningLotto(lottoView, money, lottoNumbers);
+            findWinningLotto(lottoView, money, lottos);
         } catch (NumberFormatException exception) {
             lottoView.showConvertNumberError();
             restart(lottoView);
@@ -36,15 +36,15 @@ public class LottoMachine {
        return new Money(lottoView.getMoney());
     }
 
-    private LottoNumbers createLottoNumbers(LottoView lottoView, Money money) {
-        LottoNumbers lottoNumbers = new LottoNumbers(money.getLottoCount());
-        lottoView.showLottoNumbers(lottoNumbers);
+    private Lottos createLottoNumbers(LottoView lottoView, Money money) {
+        Lottos lottos = new Lottos(money.getLottoCount());
+        lottoView.showLottoNumbers(lottos);
 
-        return lottoNumbers;
+        return lottos;
     }
 
-    private void findWinningLotto(LottoView lottoView, Money money, LottoNumbers lottoNumbers) {
-        Map<LottoRank, Long> rankGroup = lottoNumbers.getRankGroup(new LottoNumber(lottoView.getWinningLottoNumbers()));
+    private void findWinningLotto(LottoView lottoView, Money money, Lottos lottos) {
+        Map<LottoRank, Long> rankGroup = lottos.getRankGroup(new Lotto(lottoView.getWinningLottoNumbers()));
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));

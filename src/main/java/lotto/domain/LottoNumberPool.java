@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoNumber.MAX_NUMBER;
+import static lotto.domain.Lotto.MAX_NUMBER;
 
 public class LottoNumberPool {
 
