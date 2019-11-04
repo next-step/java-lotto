@@ -5,10 +5,10 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-public class OfficialLotto implements LottoStrategy {
+public class UserNumbers implements LottoNumberStrategy {
     private static List<Integer> balls = new ArrayList<>();
 
-    public OfficialLotto(int min, int max) {
+    public UserNumbers(int min, int max) {
         balls = IntStream.rangeClosed(min, max).boxed().collect(toList());
     }
 

@@ -2,6 +2,6 @@ package step2;
 
 import java.util.Set;
 
-public interface LottoStrategy {
+public interface LottoNumberStrategy {
     Set<Integer> getUniques(int limit);
 }
