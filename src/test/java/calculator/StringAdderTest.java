@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by yusik on 2019/11/02.
@@ -92,10 +92,7 @@ public class StringAdderTest {
     void negativeInteger(String input) {
         // when
         // then
-        assertThatThrownBy(() -> {
-            adder.sum(input);
-        }).isInstanceOf(RuntimeException.class).hasMessage("Not support negative integer.");
-
+        assertThrows(NumberFormatException.class, () -> adder.sum(input));
     }
 
     @DisplayName("문자 입력")
@@ -104,9 +101,7 @@ public class StringAdderTest {
     void notInteger(String input) {
         // when
         // then
-        assertThatThrownBy(() -> {
-            adder.sum(input);
-        }).isInstanceOf(NumberFormatException.class);
+        assertThrows(NumberFormatException.class, () -> adder.sum(input));
 
     }
 }
