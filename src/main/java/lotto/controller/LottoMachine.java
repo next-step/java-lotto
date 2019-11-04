@@ -10,8 +10,11 @@ import java.util.Map;
 
 public class LottoMachine {
 
-    // 상태를 제거하면 사이드 이펙트를 제거할 수 있다. 하지만, 기존의 상태를 활용했던 곳에 파라미터로 전달해줘야 하므로 파라미터 수가 늘어나게 된다. trade off?
-    private void start(LottoView lottoView) {
+    private static LottoMachine lottoMachine;
+
+    private LottoMachine() {}
+
+    public void start(LottoView lottoView) {
         try {
             Money money = getMoney(lottoView);
             Lottos lottos = createLottoNumbers(lottoView, money);
@@ -44,9 +47,22 @@ public class LottoMachine {
     }
 
     private void findWinningLotto(LottoView lottoView, Money money, Lottos lottos) {
+        // todo : 일급 컬렉션으로 감싸기
         Map<LottoRank, Long> rankGroup = lottos.getRankGroup(new Lotto(lottoView.getWinningLottoNumbers()));
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));
+    }
+
+    public static LottoMachine getInstance() {
+        if (lottoMachine == null) {
+            synchronized (LottoMachine.class) {
+                if (lottoMachine == null) {
+                    lottoMachine = new LottoMachine();
+                }
+            }
+        }
+
+        return lottoMachine;
     }
 }

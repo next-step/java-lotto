@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoView {
+
     private static final String ERROR_MESSAGE_FORMAT = "오류가 발생했습니다. 원인 : %s";
     private static final String CONVERT_NUMBER_ERROR = "숫자만 입력이 가능합니다.";
     private static final String PURCHASE_QUESTION_TEXT = "구입금액을 입력해 주세요.";
@@ -25,7 +26,13 @@ public class LottoView {
     private static final String LOTTO_NUMBER_POSTFIX = "]";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private final InputTool inputTool = new InputTool();
+    private static LottoView lottoView;
+
+    private final InputTool inputTool;
+
+    private LottoView() {
+        inputTool = new InputTool();
+    }
 
     public int getMoney() {
         drawText(PURCHASE_QUESTION_TEXT);
@@ -98,5 +105,17 @@ public class LottoView {
 
     private void newLine() {
         drawText(System.lineSeparator());
+    }
+
+    public static LottoView getInstance() {
+        if (lottoView == null) {
+            synchronized (LottoView.class) {
+                if (lottoView == null) {
+                    lottoView = new LottoView();
+                }
+            }
+        }
+
+        return lottoView;
     }
 }
