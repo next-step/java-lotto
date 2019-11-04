@@ -1,10 +1,7 @@
 package lotto.view;
 
 import lotto.InputTool;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.LottoRank;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -79,17 +76,17 @@ public class LottoView {
         return String.format(LOTTO_NUMBER_FORMAT, numbersText, lottoNumber.getBonusNumber());
     }
 
-    public void showRankResult(Map<LottoRank, Long> rankGroup) {
+    public void showRankResult(LottoRankGroup rankGroup) {
         newLine();
         drawText(WIN_RESULT_TEXT);
         showStatistics(rankGroup);
     }
 
-    private void showStatistics(Map<LottoRank, Long> rankGroup) {
+    private void showStatistics(LottoRankGroup rankGroup) {
         Arrays.stream(LottoRank.values())
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
-                    Long rankCount = rankGroup.get(rank);
+                    Long rankCount = rankGroup.getValue().get(rank);
                     drawText(String.format(MATCH_RESULT_TEXT, rank.getMatchCount(), rank.getWinning(), rankCount == null ? 0 : rankCount));
                 });
     }

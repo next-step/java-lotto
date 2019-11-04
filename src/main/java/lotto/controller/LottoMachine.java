@@ -47,8 +47,7 @@ public class LottoMachine {
         List<Integer> winningNumbers = lottoView.getWinningNumbers();
         int winningBonusNumber = lottoView.getWinningBonusNumber();
 
-        // todo : 일급 컬렉션으로 감싸기
-        Map<LottoRank, Long> rankGroup = lottos.getRankGroup(new LottoNumber(winningNumbers, winningBonusNumber));
+        LottoRankGroup rankGroup = lottos.getRankGroup(new LottoNumber(winningNumbers, winningBonusNumber));
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));
