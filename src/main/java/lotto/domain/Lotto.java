@@ -1,12 +1,36 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public int compare(Lotto other) {
+        int count = 0;
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (other.contains(lottoNumber)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        String numberString = lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(", "));
+        return String.format("[%s]", numberString);
     }
 
     @Override
@@ -25,20 +49,5 @@ public class Lotto {
             hashCode = prime * hashCode + (lottoNumber == null ? 0 : lottoNumber.hashCode());
         }
         return hashCode;
-    }
-
-    public int compare(Lotto other) {
-        int count = 0;
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            if (other.contains(lottoNumber)) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
-    private boolean contains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
     }
 }

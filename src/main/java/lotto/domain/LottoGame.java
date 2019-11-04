@@ -63,4 +63,8 @@ public class LottoGame {
     private int gameMoney() {
         return this.lottos.size() * GAME_AMOUNT;
     }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
+    }
 }

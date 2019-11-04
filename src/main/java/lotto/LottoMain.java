@@ -1,5 +1,6 @@
 package lotto;
 
+import calculator.OutputView;
 import lotto.domain.LottoGame;
 import lotto.view.InputView;
 import lotto.view.OutPutView;
@@ -10,5 +11,6 @@ public class LottoMain {
 
         LottoGame lottoGame = new LottoGame(money);
         OutPutView.printGameCount(lottoGame.lottoSize());
+        OutputView.printLottos(lottoGame.getLottos());
     }
 }
