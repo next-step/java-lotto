@@ -22,7 +22,7 @@ public class LottoController {
         resultView.printLottoTickets(lottoTickets);
 
         LottoTicket lastWeekWinningNumber = inputView.getLastWeekWinningNumber();
-        Winner winner = lottoService.getWiner();
+        Winner winner = lottoService.getWiner(lastWeekWinningNumber);
 
         resultView.printWinnerStatistics(winner);
 

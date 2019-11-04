@@ -10,7 +10,7 @@ public class LottoServiceTest {
 
     @Test
     void buyLottoTest() {
-        assertThat(lottoService.buyLotto(14000)).isEqualTo(14);
+        assertThat(lottoService.buyTickets(14000)).isEqualTo(14);
     }
 
     @Test

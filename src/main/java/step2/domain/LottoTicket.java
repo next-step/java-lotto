@@ -1,29 +1,56 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    List<Integer> lottoNum = new ArrayList<>();
+    private static final int LOTTO_NUM_MIN = 1;
+    private static final int LOTTO_NUM_MAX = 45;
+
+    List<Integer> lottoNums;
+    List<Integer> candidateNumbers = new ArrayList<>();
 
     public LottoTicket() {
+        this.lottoNums = makeAutoNumbers();
+        checkNumsRange();
     }
 
-    public int[] makeAutoNumbers() {
-        for (int i = 1; i <= 45; i++) {
-            lottoNum.add(i);
-        }
+    public List<Integer> makeAutoNumbers() {
+        makeCandidateNumbers();
 
-        Collections.shuffle(lottoNum);
-
-        int[] lottoNums = new int[6];
+        List<Integer> selectedNums = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            lottoNums[i] = lottoNum.get(i);
+            selectedNums.add(candidateNumbers.get(i));
         }
 
-        Collections.sort(lottoNum);
+        Collections.sort(selectedNums);
 
-        return lottoNums;
+        return selectedNums;
+    }
+
+    private void makeCandidateNumbers() {
+        for (int i = 1; i <= 45; i++) {
+            candidateNumbers.add(i);
+        }
+
+        Collections.shuffle(candidateNumbers);
+    }
+
+    private void checkNumsRange() {
+        for(int lottoNum : lottoNums) {
+            checkNumRange(lottoNum);
+        }
+    }
+
+    private void checkNumRange(int lottoNum) {
+        if(!isProperNumRange(lottoNum)) {
+            throw new IllegalArgumentException("Out of range");
+        }
+    }
+
+    private boolean isProperNumRange(int lottoNum) {
+        return (lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX);
     }
 }

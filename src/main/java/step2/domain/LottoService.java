@@ -21,7 +21,7 @@ public class LottoService {
         return lottoTickets;
     }
 
-    public Winner getWiner() {
+    public Winner getWiner(LottoTicket lastWeekWinningNumber) {
         return new Winner();
     }
 }
