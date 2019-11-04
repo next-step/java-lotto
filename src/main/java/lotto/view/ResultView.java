@@ -1,9 +1,11 @@
 package lotto.view;
 
 import lotto.domain.LotteryTicket;
+import lotto.domain.WinningRanking;
 
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yusik on 2019/11/05.
@@ -23,17 +25,22 @@ public class ResultView {
         }
     }
 
-    public void showStatistics() {
+    public void showStatistics(Map<WinningRanking, Integer> winningTickets) {
+        System.out.println(winningTickets);
         out.println("당첨 통계\n---------");
-        out.println(
-                "3개 일치 (5000원)- 1개\n" +
-                "4개 일치 (50000원)- 0개\n" +
-                "5개 일치 (1500000원)- 0개\n" +
-                "6개 일치 (2000000000원)- 0개"
-        );
+        for (WinningRanking ranking : WinningRanking.values()) {
+            out.printf(
+                    "%d개 일치 (%d원)- %d개\n",
+                    ranking.getMatchingCount(),
+                    ranking.getReward(),
+                    winningTickets.getOrDefault(ranking, 0));
+        }
     }
 
-    public void showRevenueRate() {
-        out.println("총 수익률은 0.35입니다.");
+    public void showRevenueRate(int amount, Map<WinningRanking, Integer> winningTickets) {
+        double totalReward = winningTickets.keySet().stream()
+                .mapToDouble(winningRanking -> winningRanking.getReward() * winningTickets.get(winningRanking))
+                .sum();
+        out.printf("총 수익률은 %.2f입니다.\n", totalReward / amount);
     }
 }

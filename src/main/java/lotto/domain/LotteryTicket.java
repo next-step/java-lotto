@@ -17,4 +17,11 @@ public class LotteryTicket {
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
+
+    public WinningRanking getRankByMatchNumbers(List<Integer> winningNumbers) {
+        int matchingCount = (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+        return WinningRanking.getByMatchingCount(matchingCount);
+    }
 }

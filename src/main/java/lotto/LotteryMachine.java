@@ -1,14 +1,13 @@
 package lotto;
 
-import lotto.domain.LotteryGenerator;
-import lotto.domain.LotteryTicket;
-import lotto.domain.NumberGenerator;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yusik on 2019/11/05.
@@ -29,12 +28,13 @@ public class LotteryMachine {
 
     public void run() {
 
-        int ticketCount = inputView.receiveAmount() / TICKET_PRICE;
-        List<LotteryTicket> tickets = lotteryGenerator.generate(ticketCount);
+        int amount = inputView.receiveAmount();
+        List<LotteryTicket> tickets = lotteryGenerator.generate(amount / TICKET_PRICE);
         resultView.showTickets(tickets);
 
-        List<Integer> winningNumbers = inputView.receiveWinningNumbers();
-        resultView.showStatistics();
-        resultView.showRevenueRate();
+        WinningNumbers winningNumbers = new WinningNumbers(inputView.receiveWinningNumbers());
+        Map<WinningRanking, Integer> winningTickets = winningNumbers.getWinningTickets(tickets);
+        resultView.showStatistics(winningTickets);
+        resultView.showRevenueRate(amount, winningTickets);
     }
 }
