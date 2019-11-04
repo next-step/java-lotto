@@ -19,7 +19,7 @@ public class LottoNumber {
     private final List<Integer> numbers;
 
     public LottoNumber() {
-        this.numbers = getShuffledNumbers();
+        this(getShuffledNumbers());
     }
 
     public LottoNumber(List<Integer> numbers) {
