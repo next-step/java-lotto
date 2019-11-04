@@ -27,20 +27,15 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    private List<Integer> getShuffledNumbers() {
-        List<Integer> numberCandidates = LottoNumberPool.getNumbers();
-
-        Collections.shuffle(numberCandidates);
-
-        return numberCandidates.stream().limit(LOTTO_NUMBER_SIZE).sorted().collect(Collectors.toList());
-    }
-
     public LottoRank getRank(LottoNumber winningNumber) {
         return LottoRank.find(matchNumberCount(winningNumber));
     }
 
     private long matchNumberCount(LottoNumber winnerLottoNumber) {
-        return winnerLottoNumber.getNumbers().stream().filter(numbers::contains).count();
+        return winnerLottoNumber.getNumbers()
+                .stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     public List<Integer> getNumbers() {
@@ -79,5 +74,16 @@ public class LottoNumber {
         if (uniqueNumberSet.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
+    }
+
+    private static List<Integer> getShuffledNumbers() {
+        List<Integer> numberCandidates = LottoNumberPool.getNumbers();
+
+        Collections.shuffle(numberCandidates);
+
+        return numberCandidates.stream()
+                .limit(LOTTO_NUMBER_SIZE)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
