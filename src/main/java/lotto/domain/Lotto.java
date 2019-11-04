@@ -3,31 +3,36 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
-    private static final int LOTTO_MAX_NUMBER = 45;
-    private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_GET_NUMBER = 6;
     private static final int ZERO = 0;
-    private static List<Integer> allLottoNumber;
     private List<Integer> lottoNumber;
+    private List<Integer> allLottoNumber;
     private Integer hitCount;
 
-    static {
-        allLottoNumber = new ArrayList<>();
-        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
-            allLottoNumber.add(i);
-        }
-    }
-
     public Lotto() {
-        this.lottoNumber = new ArrayList<>();
+        CreatableLotto creatableLotto = new LottoFactory().getLottoVersionSix();
+        this.allLottoNumber = creatableLotto.makeLotto();
         this.hitCount = ZERO;
+        this.lottoNumber = selectLottoNumber(new CreatableLotto() {
+            @Override
+            public List<Integer> makeLotto() {
+                List<Integer> lottoNumbers = new ArrayList<>();
+                Collections.shuffle(allLottoNumber);
+                for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
+                    lottoNumbers.add(allLottoNumber.get(i));
+                }
+                return lottoNumbers;
+            }
+        });
     }
 
-    public void selectLottoNumber() {
-        Collections.shuffle(allLottoNumber);
-        for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
-            this.lottoNumber.add(allLottoNumber.get(i));
-        }
+    public Lotto(List<Integer> lottoNumber) {
+        this.hitCount = ZERO;
+        this.lottoNumber = lottoNumber;
+    }
+
+    public List<Integer> selectLottoNumber(CreatableLotto creatableLotto) {
+        return creatableLotto.makeLotto();
     }
 
     void checkNumber(int[] winLotto) {

@@ -1,20 +1,16 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoPaper;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.Map;
+
 public class LottoController {
 
     public void execute() {
-        LottoPaper lottoPaper = new LottoPaper();
         int count = InputView.purchaseCount();
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto();
-            lotto.selectLottoNumber();
-            lottoPaper.applyLotto(lotto);
-        }
+        LottoPaper lottoPaper = new LottoPaper(count);
         printLottoNumber(lottoPaper);
         getWinLotto(lottoPaper);
         getInsights(lottoPaper, count);
@@ -32,8 +28,8 @@ public class LottoController {
 
     private void getInsights(LottoPaper lottoPaper, int count) {
         ResultView.printDescription();
-        lottoPaper.getInsights();
-        ResultView.printInsights();
+        Map<Integer, Insights> insights = lottoPaper.getInsights();
+        ResultView.printInsights(insights);
         ResultView.printYield(lottoPaper.getYield(count));
     }
 

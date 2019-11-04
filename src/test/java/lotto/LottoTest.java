@@ -2,11 +2,10 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoPaper;
+import lotto.domain.CreatableLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -16,60 +15,40 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        numbers = new ArrayList<>();
         lotto = new Lotto();
-        lottoPaper = new LottoPaper();
-
-    }
-
-    @Test
-    void collectTest() {
-        int random = new Random().nextInt(44);
-        numbers.add(random);
-        Collections.shuffle(numbers);
-        System.out.println(numbers.get(0));
+        lottoPaper = new LottoPaper(3);
+        numbers = lotto.selectLottoNumber(new CreatableLotto() {
+            @Override
+            public List<Integer> makeLotto() {
+                List<Integer> list = new ArrayList<>();
+                list.add(4);
+                list.add(5);
+                list.add(6);
+                list.add(1);
+                list.add(2);
+                list.add(3);
+                return list;
+            }
+        });
     }
 
     @Test
     void lottoTest() {
-        lotto.selectLottoNumber();
-        assertThat(lotto.getLottoNumber()).hasSize(6);
-        System.out.println(lotto.getLottoNumber().toString());
+        assertThat(numbers).hasSize(6);
     }
 
     @Test
-    void createLottoPaperTest() {
-        for (int i = 0; i < 5; i++) {
-            Lotto lotto = new Lotto();
-            lotto.selectLottoNumber();
-            lottoPaper.applyLotto(lotto);
-        }
-
-        for (Lotto paper : lottoPaper.getLottoPapers()) {
-            System.out.println(paper.getLottoNumber().toString());
-        }
+    void sortTest() {
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.getLottoNumber()).containsExactly(1,2,3,4,5,6);
     }
 
     @Test
     void checkLottoGrade() {
         int[] winNumber = new int[] {1,2,3,4,5,6};
-        for (int i = 0; i < 5; i++) {
-            Lotto lotto = new Lotto();
-            lotto.selectLottoNumber();
-            lottoPaper.applyLotto(lotto);
-        }
-
+        Lotto lotto = new Lotto(numbers);
+        lottoPaper.applyLotto(lotto);
         lottoPaper.checkLottoGrade(winNumber);
-
-        for (Lotto paper : lottoPaper.getLottoPapers()) {
-            System.out.println(paper.getLottoNumber().toString());
-            System.out.println("hit:" + paper.getHitCount());
-        }
-    }
-
-    @Test
-    void insightsIncreaseCountTest() {
-        Insights.insights.get(3).increaseCount();
-        assertThat(Insights.insights.get(3).getCount()).isEqualTo(1);
+        assertThat(lotto.getHitCount()).isEqualTo(6);
     }
 }

@@ -20,8 +20,14 @@ public class ResultView {
         System.out.println("---------");
     }
 
-    public static void printInsights() {
-        for (Map.Entry<Integer, Insights> entry : Insights.insights.entrySet()) {
+    public static void printInsights(Map<Integer, Insights> insights) {
+        for (Map.Entry<Integer, Insights> entry : insights.entrySet()) {
+            printWinningInsights(entry);
+        }
+    }
+
+    private static void printWinningInsights(Map.Entry<Integer, Insights> entry) {
+        if (entry.getKey() >= 3) {
             System.out.println(entry.getKey() + "개 일치"
                     + "(" + entry.getValue().getPrice() + "원) - " + entry.getValue().getCount() + "개");
         }
