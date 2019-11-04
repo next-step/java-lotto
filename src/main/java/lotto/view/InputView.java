@@ -19,4 +19,9 @@ public class InputView {
         String inputValue = scanner.next();
         return Parser.convertToInteger(inputValue);
     }
+
+    public static int createBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 }

@@ -22,6 +22,7 @@ public class Main {
         ResultView.printBuyLottos(lottos);
 
         Lotto winnerLotto = new Lotto(InputView.createWinnerNumbers());
+        int bonusNumber = InputView.createBonusNumber();
         Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto);
         double yield = lottoService.findYield(winnerStats, number);
 
