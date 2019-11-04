@@ -10,10 +10,10 @@ import static java.util.stream.Collectors.toList;
 
 public abstract class LottoMachine {
 
-    protected static final int START_INDEX = 1;
-    protected static final int ADD_SIZE = 5;
+    protected static final int START_INDEX = 0;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    protected static final int ADD_SIZE = 5;
     protected static final List<LottoNumber> lottoNumbers = getInstance();
 
     private static List<LottoNumber> getInstance() {

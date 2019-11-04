@@ -4,10 +4,10 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class WinLottoTicket {
+public class WinningNumbers {
     private List<LottoNumber> winNumbers;
 
-    public WinLottoTicket(List<Integer> winNumbers) {
+    public WinningNumbers(List<Integer> winNumbers) {
         this.winNumbers = makeWinNumbers(winNumbers);
     }
 

@@ -12,9 +12,9 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static step2.helper.LottoHelper.makeLottoNumbersHelper;
 
-class WinLottoTicketTest {
+class WinningNumbersTest {
 
-    private WinLottoTicket winLottoTicket;
+    private WinningNumbers winningNumbers;
 
     private static Stream<Arguments> getLottoTickets() {
         List<LottoNumber> nothingMatchNumbers = makeLottoNumbersHelper(11, 12, 13, 14, 15, 16);
@@ -29,13 +29,13 @@ class WinLottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        winLottoTicket = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @ParameterizedTest
     @MethodSource("getLottoTickets")
     void 로또티켓이_몇개맞았는지_확인하기(LottoTicket lottoTicket, int result) {
-        int matchAmount = winLottoTicket.getMatchAmount(lottoTicket);
+        int matchAmount = winningNumbers.getMatchAmount(lottoTicket);
 
         assertThat(matchAmount).isEqualTo(result);
     }
