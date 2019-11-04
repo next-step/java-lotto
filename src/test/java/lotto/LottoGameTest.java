@@ -45,6 +45,17 @@ public class LottoGameTest {
     }
 
     @Test
+    @DisplayName("winningLotto를 초기화 하지 않고 result를 호출하면 RuntimeException이 발생 하는지 확인한다.")
+    void noInitWinningNumbers() {
+        List<Lotto> testLottos = getTestLottos();
+        LottoGame lottoGame = new LottoGame(testLottos);
+
+        assertThatThrownBy(() -> {
+            lottoGame.result();
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     @DisplayName("LottoRank당 하나씩 결과가 나오는지 확인한다.")
     void result() {
         List<Lotto> testLottos = getTestLottos();
