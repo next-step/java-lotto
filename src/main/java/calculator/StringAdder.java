@@ -19,18 +19,10 @@ public class StringAdder {
         String[] tokens = split(input);
         int sum = 0;
         for (String token : tokens) {
-            sum += parseIntOnlyPositive(token);
+            sum += Integer.parseUnsignedInt(token);
         }
 
         return sum;
-    }
-
-    private int parseIntOnlyPositive(String token) {
-        int number = Integer.parseInt(token);
-        if (number < 0) {
-            throw new RuntimeException("Not support negative integer.");
-        }
-        return number;
     }
 
     private String[] split(String input) {
