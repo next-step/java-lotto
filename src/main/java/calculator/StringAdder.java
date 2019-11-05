@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,29 +9,16 @@ import java.util.regex.Pattern;
  */
 public class StringAdder {
 
-    public static String REGEX_DEFAULT_DELIMITER = "[,:]";
-    public static String REGEX_CUSTOM_DELIMITER = "//(.)\n(.*)";
+    private static final String REGEX_DEFAULT_DELIMITER = "[,:]";
+    private static final String REGEX_CUSTOM_DELIMITER = "//(.)\n(.*)";
 
     public int sum(String input) {
-        if (input.isEmpty()) {
-            return 0;
-        }
-
-        String[] tokens = split(input);
-        int sum = 0;
-        for (String token : tokens) {
-            sum += parseIntOnlyPositive(token);
-        }
-
-        return sum;
-    }
-
-    private int parseIntOnlyPositive(String token) {
-        int number = Integer.parseInt(token);
-        if (number < 0) {
-            throw new RuntimeException("Not support negative integer.");
-        }
-        return number;
+        return input.isEmpty()
+                ? 0
+                : Arrays.stream(split(input))
+                .map(Integer::parseUnsignedInt)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private String[] split(String input) {
