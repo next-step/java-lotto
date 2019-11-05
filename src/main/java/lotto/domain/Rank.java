@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum Rank {
 
@@ -37,8 +38,12 @@ public enum Rank {
 
     public static Rank findByCountOfMatch(final int countOfMatch, final boolean isMatchBonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.countOfMatch == countOfMatch && rank.isMatchBonus == isMatchBonus)
+                .filter(equals(countOfMatch, isMatchBonus))
                 .findAny()
                 .orElse(Rank.MISS);
+    }
+
+    private static Predicate<? super Rank> equals(final int countOfMatch, final boolean isMatchBonus) {
+        return rank -> rank.countOfMatch == countOfMatch && rank.isMatchBonus == isMatchBonus;
     }
 }
