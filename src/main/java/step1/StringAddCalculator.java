@@ -56,11 +56,11 @@ public class StringAddCalculator {
     try {
       returnValue = Integer.parseInt(arg);
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("숫자형 변환에 실패하였습니다.");
     }
 
     if (returnValue < 0) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
     }
     return returnValue;
   }
