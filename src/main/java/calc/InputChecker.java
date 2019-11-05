@@ -21,13 +21,13 @@ public class InputChecker {
         Matcher inputMatcher = INPUT_DELIMITER_PATTERN.matcher(input);
         if (inputMatcher.find()) {
             String customDelimiter = inputMatcher.group(1);
-            return convertInputWithDelimeter(inputMatcher.group(2), customDelimiter);
+            return convertInputWithDelimiter(inputMatcher.group(2), customDelimiter);
         }
 
-        return convertInputWithDelimeter(input, DEFAULT_INPUT_DELIMITER);
+        return convertInputWithDelimiter(input, DEFAULT_INPUT_DELIMITER);
     }
 
-    private static Numbers convertInputWithDelimeter(String input, String delimeter) {
-        return new Numbers(input.split(delimeter));
+    private static Numbers convertInputWithDelimiter(String input, String delimiter) {
+        return new Numbers(input.split(delimiter));
     }
 }
