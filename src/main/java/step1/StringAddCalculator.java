@@ -24,9 +24,9 @@ public class StringAddCalculator {
       return result;
     }
     if (isCustomSplitRegex(arg)) {
-      return sumSplitedValue(splitedValue);
+      return sumSplitedArr(splitedValue);
     }
-    return sumSplitedValue(arg.split(DEFAULT_SPLIT_REGEX));
+    return sumSplitedArr(arg.split(DEFAULT_SPLIT_REGEX));
   }
 
   private boolean isArgumentInvalid(String arg) {
@@ -43,9 +43,9 @@ public class StringAddCalculator {
     return false;
   }
 
-  private int sumSplitedValue(String[] splitedValue) {
+  private int sumSplitedArr(String[] splitedArr) {
     int returnValue = 0;
-    for (String val : splitedValue) {
+    for (String val : splitedArr) {
       returnValue += parsedSplitedValue(val);
     }
     return returnValue;
