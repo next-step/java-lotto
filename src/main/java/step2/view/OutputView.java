@@ -17,7 +17,7 @@ public class OutputView {
     }
 
     public static void showBuyTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.toString());
+        lottoTickets.forEach(System.out::println);
     }
 
     public static void showResult(LottoResult lottoResult) {

@@ -37,4 +37,16 @@ public class InputView {
         return input.replace(" ", "")
                 .split(",");
     }
+
+    public static Integer inputBonusNumber(List<Integer> winningNumbers) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = Integer.parseInt(scanner.nextLine());
+
+        while (winningNumbers.contains(bonusNumber)) {
+            System.out.println("이미 있는 번호입니다.\n다시 입력해주세요.");
+            bonusNumber = Integer.parseInt(scanner.nextLine());
+        }
+
+        return bonusNumber;
+    }
 }

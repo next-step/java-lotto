@@ -10,13 +10,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static step2.helper.LottoHelper.makeLottoNumbersHelper;
 
 class LottoResultTest {
+    private int bonus;
 
     @Test
     void getResult_결과만들기() {
         List<LottoNumber> lottoNumbers = makeLottoNumbersHelper(1, 2, 3, 4, 5, 6);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 11, 22, 33));
+        bonus = 45;
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 11, 22, 33, bonus));
 
         LottoResult lottoResult = new LottoResult(winningNumbers, Collections.singletonList(lottoTicket));
 
@@ -28,7 +30,8 @@ class LottoResultTest {
         List<LottoNumber> lottoNumbers = makeLottoNumbersHelper(1, 2, 3, 4, 5, 6);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 11, 22, 33));
+        bonus = 45;
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 11, 22, 33, bonus));
 
         LottoResult lottoResult = new LottoResult(winningNumbers, Arrays.asList(lottoTicket));
 

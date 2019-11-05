@@ -20,7 +20,8 @@ public class LottoResult {
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchAmount = winningNumbers.getMatchAmount(lottoTicket);
-            PriceGroup priceGroup = PriceGroup.findPriceByMatchAmount(matchAmount);
+            boolean hasBonus = winningNumbers.hasBonus(lottoTicket);
+            PriceGroup priceGroup = PriceGroup.findPriceByMatchAmount(matchAmount, hasBonus);
             result.put(priceGroup, result.get(priceGroup) + ADD);
         }
         this.result = result;

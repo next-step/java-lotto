@@ -12,16 +12,18 @@ class PriceGroupTest {
 
     private static Stream<Arguments> getPriceGroup() {
         return Stream.of(
-                Arguments.of(0, PriceGroup.ZERO),
-                Arguments.of(3, PriceGroup.THREE),
-                Arguments.of(6, PriceGroup.SIX)
+                Arguments.of(0, false, PriceGroup.ZERO),
+                Arguments.of(3, false, PriceGroup.THREE),
+                Arguments.of(5, false, PriceGroup.FIVE),
+                Arguments.of(5, true, PriceGroup.FIVE_WITH_BONUS),
+                Arguments.of(6, false, PriceGroup.SIX)
         );
     }
 
     @ParameterizedTest
     @MethodSource("getPriceGroup")
-    void 맞춘갯수로_당첨금액_가져오기(Integer matchAmount, PriceGroup answer) {
-        PriceGroup priceGroup = PriceGroup.findPriceByMatchAmount(matchAmount);
+    void 맞춘갯수로_당첨금액_가져오기(Integer matchAmount, boolean hasBonus, PriceGroup answer) {
+        PriceGroup priceGroup = PriceGroup.findPriceByMatchAmount(matchAmount, hasBonus);
 
         assertThat(priceGroup).isEqualTo(answer);
     }

@@ -18,18 +18,24 @@ class WinningNumbersTest {
 
     private static Stream<Arguments> getLottoTickets() {
         List<LottoNumber> nothingMatchNumbers = makeLottoNumbersHelper(11, 12, 13, 14, 15, 16);
+        List<LottoNumber> fiveMatchNumbers = makeLottoNumbersHelper(1, 2, 3, 4, 5, 16);
+        List<LottoNumber> fiveMatchWithBonus = makeLottoNumbersHelper(1, 2, 3, 4, 15, 45);
         List<LottoNumber> allMatchNumbers = makeLottoNumbersHelper(1, 2, 3, 4, 5, 6);
         LottoTicket nothingMatchTicket = new LottoTicket(nothingMatchNumbers);
+        LottoTicket fiveMatchTicket = new LottoTicket(fiveMatchNumbers);
+        LottoTicket fiveWithBonusMatchTicket = new LottoTicket(fiveMatchWithBonus);
         LottoTicket allMatchLottoTicket = new LottoTicket(allMatchNumbers);
 
         return Stream.of(
                 Arguments.of(nothingMatchTicket, 0),
+                Arguments.of(fiveMatchTicket, 5),
+                Arguments.of(fiveWithBonusMatchTicket, 5),
                 Arguments.of(allMatchLottoTicket, 6));
     }
 
     @BeforeEach
     void setUp() {
-        winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 45));
     }
 
     @ParameterizedTest
