@@ -1,11 +1,6 @@
 package com.seok2.lotto.domain;
 
-import com.seok2.common.utils.StringUtils;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 

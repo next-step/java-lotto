@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class StringUtils {
 
+    public static final String LINE_BREAK = "\n";
     private static final String DEFAULT_DELIMITER = ",|:";
     private static final Pattern DEFAULT_PATTERN = Pattern.compile("//(.)\n(.*)");
     private static final int DELIMITER_INDEX = 1;

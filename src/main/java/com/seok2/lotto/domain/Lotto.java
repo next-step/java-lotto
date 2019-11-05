@@ -1,6 +1,7 @@
 package com.seok2.lotto.domain;
 
-import com.seok2.common.utils.StringUtils;
+import static com.seok2.common.utils.StringUtils.split;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -31,10 +32,10 @@ public class Lotto {
     }
 
     public static Lotto generate(String numbers) {
-        return new Lotto(Arrays.stream(StringUtils.split(numbers))
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toList()));
+        return new Lotto(Arrays.stream(split(numbers))
+            .map(Integer::parseInt)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()));
     }
 
     protected Rank check(Lotto winning) {

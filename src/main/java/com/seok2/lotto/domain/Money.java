@@ -4,7 +4,7 @@ public class Money {
 
     private static final String CURRENCY_UNIT = " 원";
     private static final int ZERO_VALUE = 0;
-    private static final Money ZERO = new Money(ZERO_VALUE);
+    public static final Money ZERO = new Money(ZERO_VALUE);
 
     private final int money;
 
@@ -41,8 +41,11 @@ public class Money {
         return Money.of(this.money + money.money);
     }
 
-    public Profit calculateProfit(Money investment) {
-        return new Profit(this.money / (double) investment.money);
+    public double percnet(Money money) {
+        if (money.money == ZERO_VALUE) {
+            return ZERO_VALUE;
+        }
+        return this.money / (double) money.money;
     }
 
     @Override

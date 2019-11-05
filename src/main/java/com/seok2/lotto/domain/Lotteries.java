@@ -8,9 +8,13 @@ public class Lotteries implements Iterable<Lotto> {
 
     private final List<Lotto> lotteries;
 
-    protected Lotteries(List<Lotto> lotteries) {
+    private Lotteries(List<Lotto> lotteries) {
         validate(lotteries);
         this.lotteries = lotteries;
+    }
+
+    public static Lotteries of(List<Lotto> lotteries) {
+        return new Lotteries(lotteries);
     }
 
     private void validate(List<Lotto> lotteries) {
@@ -19,14 +23,15 @@ public class Lotteries implements Iterable<Lotto> {
         }
     }
 
-    public GameStats check(Lotto winning) {
-        return GameStats.of(lotteries.stream().map(winning::check).collect(Collectors.toList()));
+    public Ranks check(Lotto winning) {
+        return Ranks.of(lotteries.stream()
+            .map(winning::check)
+            .collect(Collectors.toList()));
     }
 
     public int size() {
         return lotteries.size();
     }
-
 
     @Override
     public Iterator<Lotto> iterator() {
