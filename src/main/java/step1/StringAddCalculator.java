@@ -4,11 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+  private static final String DEFAULT_SPLIT_REGEX = ",|:";
+  private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
   private int result = 0;
   private String inputValue;
   private String[] splitedValue;
-  private static final String DEFAULT_SPLIT_REGEX = ",|:";
-  private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
 
   public StringAddCalculator(String value) {
     this.inputValue = value;
