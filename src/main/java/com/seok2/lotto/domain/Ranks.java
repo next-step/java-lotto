@@ -10,8 +10,8 @@ public class Ranks {
         this.ranks = ranks;
     }
 
-    public static Ranks of(List<Rank> stats) {
-        return new Ranks(stats);
+    public static Ranks of(List<Rank> ranks) {
+        return new Ranks(ranks);
     }
 
     public long count(Rank rank) {

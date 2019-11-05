@@ -34,18 +34,18 @@ public class Lotto {
     public static Lotto generate(String numbers) {
         return new Lotto(Arrays.stream(split(numbers))
             .map(Integer::parseInt)
-            .map(LottoNumber::new)
+            .map(LottoNumber::of)
             .collect(Collectors.toList()));
     }
 
-    protected Rank check(Lotto winning) {
-        return Rank.ofMatches(match(winning));
-    }
-
-    private int match(Lotto winning) {
+    public int match(Lotto winning) {
         Set<LottoNumber> intersection = new HashSet<>(winning.numbers);
         intersection.retainAll(this.numbers);
         return intersection.size();
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
     @Override

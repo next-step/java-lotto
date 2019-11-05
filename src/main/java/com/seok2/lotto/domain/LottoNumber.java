@@ -1,5 +1,7 @@
 package com.seok2.lotto.domain;
 
+import static java.lang.Integer.*;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -9,14 +11,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    protected LottoNumber(int number) {
+    private LottoNumber(int number) {
         validate(number);
         this.number = number;
     }
 
+    public static LottoNumber of(int number) {
+        return new LottoNumber(number);
+    }
+
     protected void validate(int number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER)
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1보다 크고 45보다 작아야 합니다.");
+        }
     }
 
     @Override
@@ -26,8 +33,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }

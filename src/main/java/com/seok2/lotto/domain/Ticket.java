@@ -21,7 +21,7 @@ public class Ticket {
         return new Ticket(purchaseAmount, lotteries);
     }
 
-    public LottoResult check(Lotto winning) {
+    public LottoResult check(WinningLotto winning) {
         return LottoResult.of(purchaseAmount, lotteries.check(winning));
     }
 
@@ -31,7 +31,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder(MessageFormat.format(PURCHASE_QUANTITY_MSG, lotteries.size()));
+        StringBuilder builder = new StringBuilder(MessageFormat.format(PURCHASE_QUANTITY_MSG, size()));
         builder.append(LINE_BREAK);
         for (Lotto lotto : lotteries) {
             builder.append(lotto)

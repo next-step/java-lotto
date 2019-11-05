@@ -10,7 +10,7 @@ import static java.util.stream.Collectors.toList;
 public class RandomLottoStrategy implements LottoStrategy {
 
     private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(1,45)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::of)
             .collect(toList());
 
     @Override

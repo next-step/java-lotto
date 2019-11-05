@@ -23,7 +23,7 @@ public class Lotteries implements Iterable<Lotto> {
         }
     }
 
-    public Ranks check(Lotto winning) {
+    public Ranks check(WinningLotto winning) {
         return Ranks.of(lotteries.stream()
             .map(winning::check)
             .collect(Collectors.toList()));
