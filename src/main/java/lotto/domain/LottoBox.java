@@ -14,7 +14,6 @@ public class LottoBox {
     private static final int SUBSTRING_TO_INDEX = 6;
     private static final String NUMBER_STRING_SEPARATOR = ", |,";
     private static final String OUT_OF_RANGE_ERROR_MESSAGE = "로또 숫자는 6개만 입력 가능합니다.";
-    private static final String CONVERT_NUMBER_ERROR_MESSAGE = "숫자 이외의 값이 입력 되었습니다.";
 
     private static List<LottoNumber> defaultNumbers = new ArrayList<>();
 
@@ -48,17 +47,9 @@ public class LottoBox {
     private static List<LottoNumber> convertLottoNumbers(String[] numberStringArray) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String numberString : numberStringArray) {
-            lottoNumbers.add(new LottoNumber(convertNumber(numberString)));
+            lottoNumbers.add(new LottoNumber(numberString));
         }
 
         return lottoNumbers;
-    }
-
-    private static int convertNumber(String numberString) {
-        try {
-            return Integer.parseInt(numberString);
-        } catch (NumberFormatException e) {
-            throw new  NumberFormatException(CONVERT_NUMBER_ERROR_MESSAGE);
-        }
     }
 }

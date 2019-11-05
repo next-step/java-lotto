@@ -8,7 +8,7 @@ public class LottoGame {
     private static final String MONEY_LOW_MESSAGE = "금액이 부족합니다.";
     private static final String NO_INIT_WINNING_NUMBER = "당첨번호가 입력되지 않았습니다.";
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
     private Lotto winningLotto = null;
 
     public LottoGame(int money) {
@@ -29,6 +29,7 @@ public class LottoGame {
     }
 
     private void initLottos(int gameCount) {
+        lottos = new ArrayList<>();
         for (int i = 0; i < gameCount; i++) {
             lottos.add(new Lotto(LottoBox.generateNumbers()));
         }

@@ -3,10 +3,24 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final String CONVERT_NUMBER_ERROR_MESSAGE = "숫자 이외의 값이 입력 되었습니다.";
+
     private int number;
 
     public LottoNumber(int number) {
         this.number = number;
+    }
+
+    public LottoNumber(String number) {
+        this.number = convertNumber(number);
+    }
+
+    private static int convertNumber(String numberString) {
+        try {
+            return Integer.parseInt(numberString);
+        } catch (NumberFormatException e) {
+            throw new  NumberFormatException(CONVERT_NUMBER_ERROR_MESSAGE);
+        }
     }
 
     @Override
