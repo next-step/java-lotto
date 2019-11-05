@@ -2,10 +2,10 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoService;
+import lotto.domain.WinnerLotto;
 import lotto.domain.WinnerType;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-import util.Parser;
 
 import java.util.List;
 import java.util.Map;
@@ -14,25 +14,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-
-        int buyAmount = inputView.createBuyAmount();
-
         LottoService lottoService = new LottoService();
-        int number = lottoService.buyTicket(buyAmount);
+
+        int number = lottoService.buyTicket(InputView.createBuyAmount());
         List<Lotto> lottos = lottoService.createLottoTickets(number);
 
-        resultView.printBuyTicketNumber(number);
-        resultView.printBuyLottos(lottos);
+        ResultView.printBuyTicketNumber(number);
+        ResultView.printBuyLottos(lottos);
 
-        String winnerNumbers = inputView.createWinnerNumbers();
-        Lotto winnerLotto = new Lotto(Parser.convertToInteger(winnerNumbers));
+        WinnerLotto winnerLotto = InputView.createWinnerLotto();
         Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto);
         double yield = lottoService.findYield(winnerStats, number);
 
-        resultView.printWinnerStats(winnerStats);
-        resultView.printYield(yield);
+        ResultView.printWinnerStats(winnerStats);
+        ResultView.printYield(yield);
 
     }
 }

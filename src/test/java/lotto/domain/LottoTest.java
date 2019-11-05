@@ -26,7 +26,7 @@ class LottoTest {
     void createLottoValidSize() {
 
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(1,2,3,4,5));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("lotto number 개수는 6개입니다.");
     }
@@ -36,7 +36,7 @@ class LottoTest {
     void createLottoValidNumber() {
 
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(1,2,3,4,5,100));
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 100));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("lotto number는 1과 45사이의 숫자입니다.");
     }
