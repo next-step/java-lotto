@@ -7,6 +7,8 @@ public class StringAddCalculator {
 
   private static final String DEFAULT_SPLIT_REGEX = ",|:";
   private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
+  private static final int CUSTOM_DELIMITER_SPLIT_GROUP = 1;
+  private static final int CUSTOM_DELIMITER_SPLIT_VALUE = 2;
   private int result = 0;
   private String inputValue;
   private String[] splitedValue;
@@ -36,8 +38,8 @@ public class StringAddCalculator {
   private boolean isCustomSplitRegex(String arg) {
     Matcher m = Pattern.compile(CUSTOM_SPLIT_REGEX).matcher(arg);
     if (m.find()) {
-      String customDelimiter = m.group(1);
-      splitedValue = m.group(2).split(customDelimiter);
+      String customDelimiter = m.group(CUSTOM_DELIMITER_SPLIT_GROUP);
+      splitedValue = m.group(CUSTOM_DELIMITER_SPLIT_VALUE).split(customDelimiter);
       return true;
     }
     return false;
