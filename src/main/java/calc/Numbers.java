@@ -29,10 +29,6 @@ public class Numbers {
         return numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public int addAll() {
         return numbers.stream().reduce(0, Integer::sum);
     }
