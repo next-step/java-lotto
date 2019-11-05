@@ -17,6 +17,9 @@ public class InputView {
     public static int buyTickets() {
         System.out.println(AMOUNT);
         int amount = scanner.nextInt();
+        if ( amount % 1000 != 0 || amount / 1000 < 1 ) {
+            throw new IllegalArgumentException("로또는 1000뤈단위로 구매할 수 있습니다.");
+        }
         int ticketAmount = amount / 1000;
         System.out.println(ticketAmount + AMOUNT_CONFIRM_POSTFIX);
         return ticketAmount;
