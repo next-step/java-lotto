@@ -30,7 +30,7 @@ public class LottoTicketTest {
 
     @Test
     void 로또번호를_문자열로_리턴테스트() {
-        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).getNumbers()).isEqualTo("1, 2, 3, 4, 5, 6");
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).toString()).isEqualTo("1, 2, 3, 4, 5, 6");
     }
 
     @Test

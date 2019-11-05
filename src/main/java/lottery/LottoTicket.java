@@ -24,12 +24,6 @@ public class LottoTicket {
         this(Arrays.asList(lottoNumber));
     }
 
-    public String getNumbers() {
-        return lottoNumbers.stream()
-            .map(String::valueOf)
-            .collect(Collectors.joining(NUMBER_DELIMITER));
-    }
-
     private Set<Integer> checkTicketValidation(Set<Integer> lottoNumbers) {
         if (!isValidSize(lottoNumbers)) {
             throw new IllegalArgumentException(ILLEGAL_TICKET_SIZE);
@@ -68,5 +62,12 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+            .map(String::valueOf)
+            .collect(Collectors.joining(NUMBER_DELIMITER));
     }
 }
