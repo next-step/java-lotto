@@ -11,9 +11,11 @@ public class ResultView {
         for (String ticketToString : toStringTickets) {
             System.out.println(ticketToString);
         }
+        printNewLine();
     }
 
     public void printWinStatistics(List<String>  StatisticsStrings) {
+        printNewLine();
         System.out.println("당첨 통계");
         System.out.println("--------");
 

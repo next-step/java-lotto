@@ -10,17 +10,12 @@ public class LottoController {
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
 
-
         int money = inputView.inputGameMoney();
         LottoGame game = new LottoGame(money);
 
         resultView.printMyTicket(game.getTicketsString());
-        resultView.printNewLine();
-
 
         String winText = inputView.inputWinText();
-        resultView.printNewLine();
-
         resultView.printWinStatistics(game.getResultString(winText));
 
     }
