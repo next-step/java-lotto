@@ -16,11 +16,6 @@ public class LottoTicket {
         checkNumsRange();
     }
 
-    public LottoTicket(List<Integer> winningNums) {
-        this.lottoNums = winningNums;
-        checkNumsRange();
-    }
-
     public List<Integer> makeAutoNumbers() {
         makeCandidateNumbers();
 
