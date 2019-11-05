@@ -37,9 +37,10 @@ public class LottoGameTest {
     @DisplayName("당첨 번호를 셋팅한다.")
     void winningLotto(String winningLottoString) {
         int money = 1000;
+        int bonus = 7;
         LottoGame lottoGame = new LottoGame(money);
 
-        lottoGame.winningLotto(winningLottoString);
+        lottoGame.winningLotto(winningLottoString, bonus);
 
         assertThat(lottoGame.isInitWinningLotto()).isTrue();
     }
@@ -60,9 +61,10 @@ public class LottoGameTest {
     void result() {
         List<Lotto> testLottos = getTestLottos();
         String testWinningNumbers = "1, 2, 3, 4, 5, 6";
+        int bonus = 7;
 
         LottoGame lottoGame = new LottoGame(testLottos);
-        lottoGame.winningLotto(testWinningNumbers);
+        lottoGame.winningLotto(testWinningNumbers, bonus);
 
         LottoResult lottoResult = lottoGame.result();
         for (LottoRank lottoRank : LottoRank.values()) {
@@ -74,6 +76,7 @@ public class LottoGameTest {
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(getTestLotto(new int[]{1, 2, 3, 4, 5, 6}));
         lottos.add(getTestLotto(new int[]{2, 3, 4, 5, 6, 7}));
+        lottos.add(getTestLotto(new int[]{2, 3, 4, 5, 6, 8}));
         lottos.add(getTestLotto(new int[]{3, 4, 5, 6, 7, 8}));
         lottos.add(getTestLotto(new int[]{4, 5, 6, 7, 8, 9}));
 

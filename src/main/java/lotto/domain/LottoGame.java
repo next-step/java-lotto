@@ -10,6 +10,7 @@ public class LottoGame {
 
     private List<Lotto> lottos;
     private Lotto winningLotto = null;
+    private LottoNumber bonusNumber;
 
     public LottoGame(int money) {
         int gameCount = gameCount(money);
@@ -39,9 +40,10 @@ public class LottoGame {
         return lottos.size();
     }
 
-    public void winningLotto(String winningLottoString) {
+    public void winningLotto(String winningLottoString, int bonus) {
         List<LottoNumber> lottoNumbers = LottoBox.parseNumberString(winningLottoString);
         this.winningLotto = new Lotto(lottoNumbers);
+        bonusNumber = new LottoNumber(bonus);
     }
 
     public boolean isInitWinningLotto() {
@@ -55,7 +57,7 @@ public class LottoGame {
 
         LottoResult lottoResult = new LottoResult(gameMoney());
         for (Lotto lotto : lottos) {
-            lottoResult.update(lotto.compare(winningLotto));
+            lottoResult.update(lotto.compare(winningLotto), lotto.contains(bonusNumber));
         }
 
         return lottoResult;
