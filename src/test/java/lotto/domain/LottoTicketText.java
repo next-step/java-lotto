@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -20,34 +23,31 @@ public class LottoTicketText {
         LottoTicket lottoTicket = new LottoTicket();
 
         String text = lottoTicket.toString();
-        text = text.substring(1, text.length()-1);
+        text = text.substring(1, text.length() - 1);
         String[] tokens = text.split(",");
 
-        int notNumberCount = (int)Arrays.stream(tokens)
+        int notNumberCount = (int) Arrays.stream(tokens)
                 .map(token -> Integer.parseInt(token.trim()))
-                .filter(token -> token<1 || token >45).count();
+                .filter(token -> token < 1 || token > 45)
+                .count();
 
         assertThat(tokens.length).isEqualTo(6);
         assertThat(notNumberCount).isEqualTo(0);
     }
 
-    @Test
-    void 로또티켓_클래스생성_수동숫자_유효성체크(){
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3,*,5,6"})
+    void 로또티켓_클래스생성_수동숫자_유효성체크(String text) {
         assertThatThrownBy(() -> {
-            LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6,7");
-        }).isInstanceOf(RuntimeException.class);
-
-        assertThatThrownBy(() -> {
-            LottoTicket lottoTicket = new LottoTicket("1,2,3,*,5,6");
+            LottoTicket lottoTicket = new LottoTicket(text);
         }).isInstanceOf(RuntimeException.class);
     }
 
-    @Test
-    void 일치갯수_확인(){
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,14,15,16:3", "11,12,13,14,15,16:0"}, delimiter = ':')
+    void 일치갯수_확인(String text, int matchCount) {
         LottoTicket winNumbers = new LottoTicket("1,2,3,4,5,6");
-        assertThat(new LottoTicket("1,2,3,4,5,6").countCompareWinNumbers(winNumbers)).isEqualTo(6);
-        assertThat(new LottoTicket("1,2,3,14,15,16").countCompareWinNumbers(winNumbers)).isEqualTo(3);
-        assertThat(new LottoTicket("11,12,13,14,15,16").countCompareWinNumbers(winNumbers)).isEqualTo(0);
+        assertThat(new LottoTicket(text).countCompareWinNumbers(winNumbers)).isEqualTo(matchCount);
     }
 
 }

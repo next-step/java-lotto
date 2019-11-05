@@ -29,7 +29,7 @@ public class NumberGenerator {
         return numbers;
     }
 
-    private List<Integer> getBaseNumbers(){
+    private List<Integer> getBaseNumbers() {
         List<Integer> baseNumbers = new ArrayList<>();
         for (int i = LOTTO_START_NUM; i <= LOTTO_END_NUM; i++) {
             baseNumbers.add(i);
@@ -37,7 +37,7 @@ public class NumberGenerator {
         return baseNumbers;
     }
 
-    private String[] getTokens(String text){
+    private String[] getTokens(String text) {
         String[] tokens = text.trim().split(",");
         if (isNotRightCount(tokens) || isNotNumber(tokens)) {
             throw new RuntimeException();
@@ -55,7 +55,6 @@ public class NumberGenerator {
                 .count();
         return (notNumberCount > 0);
     }
-
 
 
 }

@@ -14,12 +14,12 @@ public class ResultView {
         printNewLine();
     }
 
-    public void printWinStatistics(List<String>  StatisticsStrings) {
+    public void printWinStatistics(List<String> StatisticsStrings) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (String statisticsString : StatisticsStrings){
+        for (String statisticsString : StatisticsStrings) {
             System.out.println(statisticsString);
         }
     }

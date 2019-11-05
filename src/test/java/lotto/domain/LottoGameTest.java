@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,14 +12,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoGameTest {
 
+    @ParameterizedTest
+    @CsvSource(value = {"14000,14", "1100,1"})
+    void 로또_구입_성공(int gameMoney, int ticketCount) {
+        assertThat(new LottoGame(gameMoney).getTicketsString().size()).isEqualTo(ticketCount);
+    }
+
     @Test
-    void 로또_구입() {
-        assertThat(new LottoGame(14000).getTicketsString().size()).isEqualTo(14);
-        assertThat(new LottoGame(1100).getTicketsString().size()).isEqualTo(1);
+    void 로또_구입_실패() {
         assertThatThrownBy(() -> {
             new LottoGame(0);
         }).isInstanceOf(RuntimeException.class);
     }
+
     @Test
     void 당첨번호_확인() {
         List<LottoTicket> tickets = Arrays.asList(
@@ -31,7 +38,7 @@ public class LottoGameTest {
         double takePercent = Math.round((double) 55000 / 3000 * 10000) / 100.0;
         String takePercentString = "총 수익률은 " + takePercent + "입니다.";
 
-        assertThat(results.get(results.size()-1)).isEqualTo(takePercentString);
+        assertThat(results.get(results.size() - 1)).isEqualTo(takePercentString);
     }
 
 
