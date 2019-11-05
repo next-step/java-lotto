@@ -11,7 +11,7 @@ public class Ticket {
         this.games = games;
     }
 
-    public int[] report(Set<Integer> lottoNumbers, int pickCount) {
+    public int[] report(Winning lottoNumbers, int pickCount) {
         gameResult = new int[pickCount + 1];
         games.forEach(game -> {
             gameResult[game.score(lottoNumbers)]++;

@@ -1,5 +1,7 @@
 package step2.View;
 
+import step2.Winning;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Set;
@@ -20,7 +22,7 @@ public class InputView {
         return ticketAmount;
     }
 
-    public static Set<Integer> winningNumber() {
+    public static Winning winningNumber() {
         scanner.nextLine();
         System.out.println(WINNING_NUMBER);
         String inputNumbers = scanner.nextLine();
@@ -35,6 +37,6 @@ public class InputView {
         if (winningNumbers.stream().anyMatch(num -> num < 1 || num > 45)) {
             throw new IllegalArgumentException("로또번호는 1 ~ 45 사이의 숫자입니다.");
         }
-        return winningNumbers;
+        return new Winning(winningNumbers);
     }
 }

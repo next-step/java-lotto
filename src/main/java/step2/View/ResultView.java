@@ -3,6 +3,7 @@ package step2.View;
 import step2.Game;
 import step2.Ticket;
 import step2.Prize;
+import step2.Winning;
 
 import java.util.List;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void analyze(Ticket ticket, Set<Integer> winningNumbers, int pickCount) {
+    public static void analyze(Ticket ticket, Winning winningNumbers, int pickCount) {
         System.out.println();
         System.out.println(RESULT);
         int[] report = ticket.report(winningNumbers, pickCount);

@@ -24,7 +24,7 @@ public class Game {
         return "[" + numbers.stream().sorted().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2).get() + "]";
     }
 
-    public int score(Set<Integer> lotto) {
+    public int score(Winning lotto) {
         return numbers.stream().filter(lotto::contains).toArray().length;
     }
 }

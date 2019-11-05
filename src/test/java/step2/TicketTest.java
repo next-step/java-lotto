@@ -13,16 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TicketTest {
     private List<Game> games;
-    private Set<Integer> lottoNumbers;
+    private Winning winning;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = new HashSet<>();
+        Set<Integer> lottoNumbers = new HashSet<>();
         lottoNumbers.add(1);
         lottoNumbers.add(2);
         lottoNumbers.add(3);
         lottoNumbers.add(4);
         lottoNumbers.add(5);
+        winning = new Winning(lottoNumbers);
         games = new ArrayList<>();
         games.add(new Game(5, 5));
     }
@@ -31,7 +32,7 @@ public class TicketTest {
     @DisplayName("게임들의 당첨결과 조회")
     void name() {
         Ticket ticket = new Ticket(games);
-        assertThat(ticket.report(lottoNumbers, 5)).isEqualTo(new int[]{0, 0, 0, 0, 0, 1});
+        assertThat(ticket.report(winning, 5)).isEqualTo(new int[]{0, 0, 0, 0, 0, 1});
 
     }
 }
