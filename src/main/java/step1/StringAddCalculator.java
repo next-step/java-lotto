@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+
   private static final String DEFAULT_SPLIT_REGEX = ",|:";
   private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
   private int result = 0;
@@ -19,8 +20,12 @@ public class StringAddCalculator {
   }
 
   public int add(String arg) {
-    if(isArgumentValid(arg)) return result;
-    if(isCustomSplitRegex(arg)) return sumSplitedValue(splitedValue);
+    if (isArgumentValid(arg)) {
+      return result;
+    }
+    if (isCustomSplitRegex(arg)) {
+      return sumSplitedValue(splitedValue);
+    }
     return sumSplitedValue(arg.split(DEFAULT_SPLIT_REGEX));
   }
 
@@ -32,7 +37,7 @@ public class StringAddCalculator {
     Matcher m = Pattern.compile(CUSTOM_SPLIT_REGEX).matcher(arg);
     if (m.find()) {
       String customDelimiter = m.group(1);
-      splitedValue =  m.group(2).split(customDelimiter);
+      splitedValue = m.group(2).split(customDelimiter);
       return true;
     }
     return false;
@@ -41,21 +46,21 @@ public class StringAddCalculator {
 
   private int sumSplitedValue(String[] splitedValue) {
     int rtn = 0;
-    for(String val : splitedValue) {
+    for (String val : splitedValue) {
       rtn += parsedSplitedValue(val);
     }
     return rtn;
   }
 
-  private int parsedSplitedValue(String arg){
+  private int parsedSplitedValue(String arg) {
     int rtn;
-    try{
+    try {
       rtn = Integer.parseInt(arg);
-    }catch(IllegalArgumentException e){
+    } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException();
     }
 
-    if(rtn < 0){
+    if (rtn < 0) {
       throw new IllegalArgumentException();
     }
     return rtn;

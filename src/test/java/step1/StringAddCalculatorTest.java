@@ -10,7 +10,7 @@ public class StringAddCalculatorTest {
   StringAddCalculator cal = new StringAddCalculator("");
 
   @Test
-  void add_null_또는_빈문자() throws Exception  {
+  void add_null_또는_빈문자() throws Exception {
     assertThat(cal.add(null)).isEqualTo(0);
     assertThat(cal.add("")).isEqualTo(0);
   }
