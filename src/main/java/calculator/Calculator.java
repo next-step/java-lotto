@@ -5,8 +5,8 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    static final Pattern ONLY_NUMBER_PATTER = Pattern.compile("^[0-9]*$");
+    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern ONLY_NUMBER_PATTER = Pattern.compile("^[0-9]*$");
 
     public int calculateText(String text) {
         if (isNullOrEmpty(text)) {
