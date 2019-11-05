@@ -1,9 +1,11 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * Created by yusik on 2019/11/05.
@@ -24,18 +26,9 @@ public class WinningNumbers {
         }
     }
 
-    public Map<WinningRanking, Integer> getWinningTickets(List<LotteryTicket> tickets) {
-        Map<WinningRanking, Integer> map = new HashMap<>();
-        for (LotteryTicket ticket : tickets) {
-            mergeIfNotNull(map, ticket);
-        }
-        return map;
-    }
-
-    private void mergeIfNotNull(Map<WinningRanking, Integer> map, LotteryTicket ticket) {
-        WinningRanking winningRanking = ticket.getRankByMatchNumbers(winningNumbers);
-        if (Objects.nonNull(winningRanking)) {
-            map.merge(winningRanking, 1, Integer::sum);
-        }
+    public Map<WinningRanking, Long> getWinningTickets(List<LotteryTicket> tickets) {
+        return tickets.stream()
+                .filter(ticket -> Objects.nonNull(ticket.getRanking(winningNumbers)))
+                .collect(groupingBy(ticket -> ticket.getRanking(winningNumbers), counting()));
     }
 }

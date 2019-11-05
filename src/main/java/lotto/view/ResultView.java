@@ -19,25 +19,24 @@ public class ResultView {
     }
 
     public void showTickets(List<LotteryTicket> tickets) {
-        out.println(tickets.size() + "개를 구매했습니다.");
+        out.printf("%d개를 구매했습니다.\n", tickets.size());
         for (LotteryTicket ticket : tickets) {
             out.println(ticket.getNumbers());
         }
     }
 
-    public void showStatistics(Map<WinningRanking, Integer> winningTickets) {
-        System.out.println(winningTickets);
+    public void showStatistics(Map<WinningRanking, Long> winningTickets) {
         out.println("당첨 통계\n---------");
         for (WinningRanking ranking : WinningRanking.values()) {
             out.printf(
                     "%d개 일치 (%d원)- %d개\n",
                     ranking.getMatchingCount(),
                     ranking.getReward(),
-                    winningTickets.getOrDefault(ranking, 0));
+                    winningTickets.getOrDefault(ranking, 0L));
         }
     }
 
-    public void showRevenueRate(int amount, Map<WinningRanking, Integer> winningTickets) {
+    public void showRevenueRate(int amount, Map<WinningRanking, Long> winningTickets) {
         double totalReward = winningTickets.keySet().stream()
                 .mapToDouble(winningRanking -> winningRanking.getReward() * winningTickets.get(winningRanking))
                 .sum();

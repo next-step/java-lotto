@@ -18,8 +18,8 @@ public class LotteryTicket {
         return Collections.unmodifiableList(numbers);
     }
 
-    public WinningRanking getRankByMatchNumbers(List<Integer> winningNumbers) {
-        int matchingCount = (int) numbers.stream()
+    public WinningRanking getRanking(List<Integer> winningNumbers) {
+        long matchingCount = numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
         return WinningRanking.getByMatchingCount(matchingCount);

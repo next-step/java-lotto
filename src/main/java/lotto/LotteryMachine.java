@@ -33,7 +33,7 @@ public class LotteryMachine {
         resultView.showTickets(tickets);
 
         WinningNumbers winningNumbers = new WinningNumbers(inputView.receiveWinningNumbers());
-        Map<WinningRanking, Integer> winningTickets = winningNumbers.getWinningTickets(tickets);
+        Map<WinningRanking, Long> winningTickets = winningNumbers.getWinningTickets(tickets);
         resultView.showStatistics(winningTickets);
         resultView.showRevenueRate(amount, winningTickets);
     }

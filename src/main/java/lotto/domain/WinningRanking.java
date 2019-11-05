@@ -29,7 +29,7 @@ public enum WinningRanking {
         return reward;
     }
 
-    public static WinningRanking getByMatchingCount(int matchingCount) {
+    public static WinningRanking getByMatchingCount(long matchingCount) {
         return Arrays.stream(WinningRanking.values())
                 .filter(winningRanking -> winningRanking.matchingCount == matchingCount)
                 .findFirst()
