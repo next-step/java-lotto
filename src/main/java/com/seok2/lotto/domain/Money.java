@@ -1,5 +1,6 @@
 package com.seok2.lotto.domain;
 
+
 import java.util.Objects;
 
 public class Money {
@@ -27,13 +28,6 @@ public class Money {
             return this;
         }
         return Money.of(this.money - money.money);
-    }
-
-    public Money multiply(int value) {
-        if (value == ZERO_VALUE) {
-            return Money.ZERO;
-        }
-        return Money.of(money * value);
     }
 
     public Money add(Money money) {

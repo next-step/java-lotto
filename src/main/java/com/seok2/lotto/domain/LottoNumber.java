@@ -1,7 +1,5 @@
 package com.seok2.lotto.domain;
 
-import static java.lang.Integer.*;
-
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
