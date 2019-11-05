@@ -1,8 +1,8 @@
 package com.seok2.lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
+
+    private static final String DUPLICATE_NUMBER_ERROR_MSG = "보너스 번호가 이미 선택 된 번호입니다.";
 
     private final Lotto lotto;
     private final LottoNumber bonus;
@@ -15,7 +15,7 @@ public class WinningLotto {
 
     private void validate(Lotto lotto, LottoNumber bonus) {
         if (lotto.contains(bonus)) {
-            throw new IllegalArgumentException("보너스 번호가 이미 선택 된 번호입니다.");
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MSG);
         }
     }
 

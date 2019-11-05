@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int LOTTO_SIZE = 6;
+    private static final String LOTTO_LENGTH_ERROR_MSG = "로또 번호는 6개보다 많거나 적을 수 없습니다.";
+    private static final int LOTTO_LENGTH = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -22,8 +23,11 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개보다 많거나 적을 수 없습니다.");
+        long count = numbers.stream()
+            .distinct()
+            .count();
+        if (count != LOTTO_LENGTH) {
+            throw new IllegalArgumentException(LOTTO_LENGTH_ERROR_MSG);
         }
     }
 
