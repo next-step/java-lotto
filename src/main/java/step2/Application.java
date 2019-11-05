@@ -1,14 +1,15 @@
 package step2;
 
+import step2.Data.AnalysisData;
 import step2.View.InputView;
 import step2.View.ResultView;
 
 import java.util.List;
-import java.util.Set;
 
 public class Application {
     private static final int MAX_LOTTO_NUM = 45;
     private static final int PICK_NUMBER_COUNT = 6;
+    private static final int MIN_PRIZE = 3;
 
     public static void main(String[] args) {
         int ticketAmount = InputView.buyTickets();
@@ -17,6 +18,7 @@ public class Application {
 
         Winning winningNumbers = InputView.winningNumber();
         Ticket ticket = new Ticket(games);
-        ResultView.analyze(ticket, winningNumbers, PICK_NUMBER_COUNT);
+        AnalysisData analysisData = ticket.analysis(winningNumbers, PICK_NUMBER_COUNT, MIN_PRIZE);
+        ResultView.print(analysisData);
     }
 }

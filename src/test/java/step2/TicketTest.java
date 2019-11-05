@@ -32,7 +32,7 @@ public class TicketTest {
     @DisplayName("게임들의 당첨결과 조회")
     void name() {
         Ticket ticket = new Ticket(games);
-        assertThat(ticket.report(winning, 5)).isEqualTo(new int[]{0, 0, 0, 0, 0, 1});
+        assertThat(ticket.scores(winning, 5)).isEqualTo(new int[]{0, 0, 0, 0, 0, 1});
 
     }
 }

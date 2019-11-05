@@ -10,7 +10,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameTest {
-    Winning winning;
+    private Winning winning;
 
     @BeforeEach
     void setUp() {

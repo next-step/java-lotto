@@ -1,15 +1,22 @@
 package step2;
 
+import step2.Data.AnalysisData;
+
 import java.util.List;
 
 public class Ticket {
-    List<Game> games;
+    private List<Game> games;
 
     public Ticket(List<Game> games) {
         this.games = games;
     }
 
-    public int[] report(Winning lottoNumbers, int pickCount) {
+    public AnalysisData analysis(Winning lottoNumbers, int pickCount, int minPrize) {
+        int[] gameResult = scores(lottoNumbers, pickCount);
+        return new AnalysisData(gameResult, earning(gameResult, minPrize), minPrize);
+    }
+
+    public int[] scores(Winning lottoNumbers, int pickCount) {
         int[] gameResult = new int[pickCount + 1];
         games.forEach(game -> {
             gameResult[game.score(lottoNumbers)]++;
@@ -17,10 +24,13 @@ public class Ticket {
         return gameResult;
     }
 
-    public float earning(int[] gameResult) {
+    private float earning(int[] gameResult, int minPrize) {
         float payMoney = games.size() * 1000;
-        float getMoney = (gameResult[3] * 5000) + (gameResult[4] * 50000)
-                + (gameResult[5] * 1500000) + (gameResult[6] * 2000000000);
+
+        float getMoney = 0;
+        for ( int index = minPrize; index < gameResult.length; index++ ) {
+            getMoney += gameResult[index] * Prize.getMoney(index);
+        }
         return getMoney / payMoney;
     }
 }

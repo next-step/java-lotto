@@ -12,19 +12,19 @@ public class Game {
         this.numbers = autoGame.getNumbers(limit);
     }
 
-    public static List<Game> buy(int amount, int max, int limit) {
+    static List<Game> buy(int amount, int max, int limit) {
         List<Game> games = new ArrayList<>();
-        for (int count = 0; count < amount; count++) {
+        for ( int count = 0; count < amount; count++ ) {
             games.add(new Game(max, limit));
         }
         return games;
     }
 
     public String gameNumbers() {
-        return "[" + numbers.stream().sorted().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2).get() + "]";
+        return "[" + numbers.stream().sorted().map(String :: valueOf).reduce((o1, o2) -> o1 + ", " + o2).get() + "]";
     }
 
     public int score(Winning lotto) {
-        return numbers.stream().filter(lotto::contains).toArray().length;
+        return numbers.stream().filter(lotto :: contains).toArray().length;
     }
 }
