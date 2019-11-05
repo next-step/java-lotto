@@ -1,8 +1,11 @@
-package lottery;
+package lottery.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import java.util.Arrays;
+import java.util.List;
+import lottery.domain.LottoTicket;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
@@ -30,7 +33,7 @@ public class LottoTicketTest {
 
     @Test
     void 로또번호를_문자열로_리턴테스트() {
-        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).toString()).isEqualTo("1, 2, 3, 4, 5, 6");
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @Test
@@ -41,5 +44,11 @@ public class LottoTicketTest {
     @Test
     void 다른번호_티켓이_다른지_확인테스트() {
         assertThat(new LottoTicket(1, 2, 3, 4, 5, 6)).isNotEqualTo(new LottoTicket(2, 3, 4, 5, 6, 7));
+    }
+
+    @Test
+    void 당첨번호_확인_테스트() {
+        List<Integer> winNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(new LottoTicket(1, 2, 3, 4, 5, 6).match(winNumbers).size()).isEqualTo(6);
     }
 }

@@ -1,9 +1,10 @@
-package lottery;
+package lottery.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.List;
+import lottery.domain.LottoTicketSeller;
+import lottery.domain.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +29,7 @@ class LottoTicketSellerTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "2000:2", "3000:3", "4000:4", "5000:5"}, delimiter = ':')
     void 정상금액_구입테스트(int money, int ticketNumber) {
-        List<LottoTicket> purchasedTickets = seller.purchaseRandomGames(money);
+        LottoTickets purchasedTickets = seller.purchaseRandomGames(money);
         assertThat(purchasedTickets.size()).isEqualTo(ticketNumber);
     }
 }

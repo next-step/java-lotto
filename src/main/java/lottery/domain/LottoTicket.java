@@ -1,4 +1,4 @@
-package lottery;
+package lottery.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class LottoTicket {
 
@@ -24,6 +25,10 @@ public class LottoTicket {
 
     public LottoTicket(Integer... lottoNumber) {
         this(Arrays.asList(lottoNumber));
+    }
+
+    public List<Integer> match(List<Integer> winNumbers) {
+        return new ArrayList<>(CollectionUtils.intersection(lottoNumbers, winNumbers));
     }
 
     private List<Integer> checkTicketValidation(Set<Integer> lottoNumbers) {
@@ -73,8 +78,8 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return lottoNumbers.stream()
+        return "[" + lottoNumbers.stream()
             .map(String::valueOf)
-            .collect(Collectors.joining(NUMBER_DELIMITER));
+            .collect(Collectors.joining(NUMBER_DELIMITER)) + "]";
     }
 }
