@@ -33,8 +33,10 @@ public class WinningStatus {
                 .orElse(0);
     }
 
-    double getTotalWinningAmount() {
-        return winnings.stream().mapToDouble(Winning::getWinningAmount).sum();
+    public double getTotalWinningAmount() {
+        return winnings.stream()
+                .mapToDouble(Winning::getWinningAmount)
+                .sum();
     }
 
     @Override

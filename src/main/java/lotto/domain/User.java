@@ -9,7 +9,6 @@ public class User {
     private static String DELIMITER = ", ";
     private final int amount;
     private IssuedLottos issuedLottos;
-    private WinningStatus winningStatus;
 
     public User(final int amount) {
         this.amount = amount;
@@ -27,26 +26,19 @@ public class User {
         return this.issuedLottos;
     }
 
-    public void checkLottoRank(final String winNumbers, final String bonusNumber) {
+    public WinningStatus checkLottoRank(final String winNumbers, final String bonusNumber) {
         final String[] winNumberUnits = winNumbers.split(DELIMITER);
         final List<Integer> numbers = new ArrayList<>();
+
         for (String winNumberUnit : winNumberUnits) {
             numbers.add(Integer.parseInt(winNumberUnit));
         }
-        this.winningStatus = issuedLottos.checkRank(numbers, Integer.parseInt(bonusNumber));
+
+        return issuedLottos.checkRank(numbers, Integer.parseInt(bonusNumber));
     }
 
-    public int getCountByRank(final Rank rank) {
-        return this.winningStatus.getCountOfRankFor(rank);
-    }
-
-    public double calculateRate() {
-        final double totalWinningAmount = winningStatus.getTotalWinningAmount();
+    public double calculateRate(final double totalWinningAmount) {
         return Math.floor(totalWinningAmount / amount * 100) / 100.0;
-    }
-
-    public WinningStatus getWinningStatus() {
-        return this.winningStatus;
     }
 
     @Override
@@ -55,12 +47,11 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return amount == user.amount &&
-                Objects.equals(issuedLottos, user.issuedLottos) &&
-                Objects.equals(winningStatus, user.winningStatus);
+                Objects.equals(issuedLottos, user.issuedLottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, issuedLottos, winningStatus);
+        return Objects.hash(amount, issuedLottos);
     }
 }

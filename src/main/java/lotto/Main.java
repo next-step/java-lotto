@@ -23,10 +23,10 @@ public class Main {
         String winNumbers = InputView.inputWinNumbers();
         String bonusNumber = InputView.inputBonusNumber();
 
-        user.checkLottoRank(winNumbers, bonusNumber);
+        WinningStatus winningStatus = user.checkLottoRank(winNumbers, bonusNumber);
 
-        ResultView.printWinningStatus(user.getWinningStatus());
+        ResultView.printWinningStatus(winningStatus);
 
-        ResultView.printResult(user.calculateRate());
+        ResultView.printResult(user.calculateRate(winningStatus.getTotalWinningAmount()));
     }
 }
