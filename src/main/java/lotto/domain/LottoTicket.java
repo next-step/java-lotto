@@ -23,7 +23,9 @@ public class LottoTicket {
 
 
     public int countCompareWinNumbers(LottoTicket winNumbers) {
-        return (int) numbers.stream().filter(number -> winNumbers.contains(number)).count();
+        return (int) numbers.stream()
+                .filter(number -> winNumbers.contains(number))
+                .count();
     }
 
     public boolean contains(int num) {

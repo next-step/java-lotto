@@ -50,8 +50,9 @@ public class NumberGenerator {
     }
 
     private boolean isNotNumber(String[] tokens) {
-        int notNumberCount =
-                (int) Arrays.stream(tokens).filter(token -> !token.matches(ONLY_NUMBER_PATTER)).count();
+        int notNumberCount = (int) Arrays.stream(tokens)
+                .filter(token -> !token.matches(ONLY_NUMBER_PATTER))
+                .count();
         return (notNumberCount > 0);
     }
 
