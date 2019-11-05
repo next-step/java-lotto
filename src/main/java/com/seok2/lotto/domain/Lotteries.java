@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lotteries implements Iterable<Lotto> {
 
-    private List<Lotto> lotteries;
+    private final List<Lotto> lotteries;
 
     protected Lotteries(List<Lotto> lotteries) {
         validate(lotteries);
@@ -14,12 +14,13 @@ public class Lotteries implements Iterable<Lotto> {
     }
 
     private void validate(List<Lotto> lotteries) {
-        if (lotteries.isEmpty())
+        if (lotteries.isEmpty()) {
             throw new IllegalArgumentException("최소 한 장 이상의 게임을 구매해야 합니다.");
+        }
     }
 
     public GameStats check(Lotto winning) {
-        return GameStats.of(lotteries.stream().map(lotto -> winning.check(lotto)).collect(Collectors.toList()));
+        return GameStats.of(lotteries.stream().map(winning::check).collect(Collectors.toList()));
     }
 
     public int size() {

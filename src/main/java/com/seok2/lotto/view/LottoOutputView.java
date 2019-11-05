@@ -33,9 +33,13 @@ public class LottoOutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("----------");
-        RANK_LIST.forEach(rank -> System.out.println(MessageFormat.format(GAME_STATS_MSG, rank, stats.getNumberOfWins(rank))));
+//        RANK_LIST.forEach(rank -> System.out.println(formatRank(stats, rank)));
         System.out.println();
     }
+//
+//    private static String formatRank(GameStats stats, Rank rank) {
+//        return MessageFormat.format(GAME_STATS_MSG, rank, stats.getNumberOfWins(rank));
+//    }
 
     public static void printProfit(Profit profit) {
         System.out.println(profit);

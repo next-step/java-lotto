@@ -1,37 +1,41 @@
 package com.seok2.lotto.domain;
 
+import static java.util.stream.Collectors.toList;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class GameStats {
-    private static final long ZERO = 0;
-    private final Map<Rank, Long> stats;
+
+    private final List<Rank> stats;
 
     private GameStats(List<Rank> stats) {
-        this.stats = stats.stream()
-        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        this.stats = stats;
     }
 
     public static GameStats of(List<Rank> stats) {
         return new GameStats(stats);
     }
 
-    public long getNumberOfWins(Rank rank) {
-        return stats.getOrDefault(rank, ZERO);
+    private long count(Rank rank) {
+        return stats.stream()
+            .filter(rank::equals)
+            .count();
     }
 
-    public Money getTotalWinnings() {
-        return stats.entrySet()
-                .stream()
-                .map(e -> e.getKey().getWinnings(e.getValue().intValue()))
-                .reduce(Money::add)
-                .get();
+    public Money getTotalReward() {
+        return stats
+            .stream()
+            .map(Rank::getReward)
+            .reduce(Money::add)
+            .get();
     }
 
     public Profit getProfit(Money investment) {
-        return getTotalWinnings().calculateProfit(investment);
+        return getTotalReward().calculateProfit(investment);
     }
 }

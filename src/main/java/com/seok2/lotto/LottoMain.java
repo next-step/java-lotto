@@ -7,8 +7,8 @@ import com.seok2.lotto.view.LottoOutputView;
 public class LottoMain {
 
     public static void main(String[] args) {
-        Money investment = LottoInputView.getMoney();
-        Lotteries lotteries = LottoMachine.buy(investment.clone());
+        Money investment = LottoInputView.getInvestment();
+        Lotteries lotteries = LottoMachine.buy(investment);
         LottoOutputView.printPurchaseHistory(lotteries);
         Lotto winning = LottoInputView.getWinning();
         GameStats stats = lotteries.check(winning);

@@ -19,13 +19,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    protected static List<LottoNumber> parse(String numbers) {
-        return Arrays.stream(StringUtils.split(numbers, ","))
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
     protected void validate(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER)
             throw new IllegalArgumentException("로또 번호는 1보다 크고 45보다 작아야 합니다.");

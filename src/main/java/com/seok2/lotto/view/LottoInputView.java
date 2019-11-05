@@ -11,7 +11,7 @@ public class LottoInputView {
     private static final String WINNING_LOTTO_MSG = "지난 주 당첨 번호를 입력해주세요.";
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Money getMoney() {
+    public static Money getInvestment() {
         System.out.println(PURCHASE_AMOUNT_MSG);
         return Money.of(scanner.nextInt());
     }

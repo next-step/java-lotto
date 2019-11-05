@@ -6,12 +6,18 @@ import java.util.regex.Pattern;
 public class StringUtils {
 
     private static final String DEFAULT_DELIMITER = ",|:";
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final int DELIMITER_INDEX = 1;
+    private static final int CONTENT_INDEX = 2;
+
+    private StringUtils() {
+    }
 
     public static String[] split(String str) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(str);
+        Matcher m = DEFAULT_PATTERN.matcher(str);
         if (m.find()) {
-            String delimiter = m.group(1);
-            return m.group(2).split(delimiter);
+            String delimiter = m.group(DELIMITER_INDEX);
+            return m.group(CONTENT_INDEX).split(delimiter);
         }
         return split(str, DEFAULT_DELIMITER);
     }
@@ -21,10 +27,7 @@ public class StringUtils {
     }
 
     public static boolean isBlank(String str) {
-        if (str == null || str.trim().length() == 0) {
-            return true;
-        }
-        return false;
+        return str == null || str.trim().length() == 0;
     }
 
 }
