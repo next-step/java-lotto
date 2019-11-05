@@ -1,28 +1,49 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class StringInput {
+class Inputs {
     private static final String BASIC_DELIMITER = "[,:]";
     private static final String CUSTOM_DELIMITER = "//(.)\n(.*)";
-    private String input;
+    private static final String STRING_ZERO = "0";
+    private static final int INTEGER_ZERO = 0;
+    private List<String> inputs;
 
-    StringInput() {
-        this(null);
+    Inputs() {
+
     }
 
-    StringInput(String input) {
-        this.input = input;
+    Inputs(String input) {
+        validate(input);
+        this.inputs = Arrays.asList(inputSplitWithCustom(input));
     }
 
-    String validate(String input) {
+    private void validate(String input) {
         if (input == null || input.isEmpty()) {
-            return "0";
+            this.inputs.clear();
         }
-        return input;
     }
+
+    int addInput() {
+        int sum = INTEGER_ZERO;
+        for (String input : this.inputs) {
+            sum += checkInput(input);
+        }
+        return sum;
+    }
+
+    private int checkInput(String input) {
+        if (Integer.parseInt(input) < 0) {
+            throw new IllegalArgumentException();
+        }
+        return Integer.parseInt(input);
+    }
+
 
     String[] basicSplit(String input) {
         return input.split(BASIC_DELIMITER);
@@ -41,12 +62,13 @@ class StringInput {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StringInput that = (StringInput) o;
-        return Objects.equals(input, that.input);
+        Inputs inputs1 = (Inputs) o;
+        return Objects.equals(inputs, inputs1.inputs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(input);
+        return Objects.hash(inputs);
     }
+
 }
