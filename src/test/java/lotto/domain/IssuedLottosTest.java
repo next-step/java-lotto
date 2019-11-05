@@ -21,6 +21,6 @@ public class IssuedLottosTest {
         );
 
         WinningStatus winningStatus = issuedLottos.checkRank(Arrays.asList(1, 2, 3, 4, 30, 31), 40);
-        assertThat(winningStatus.getCountOfRankFor(Rank.SECOND)).isEqualTo(1);
+        assertThat(winningStatus.getCountOfRankFor(Rank.SECOND)).isEqualTo(2);
     }
 }
