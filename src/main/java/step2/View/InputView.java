@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
+import static step2.LottoUtil.*;
 
 public class InputView {
     private static final String AMOUNT = "구입금액을 입력해 주세요.";
@@ -13,10 +14,6 @@ public class InputView {
     private static final String NUMBER_COUNT_EXCEPTION = "입력된 로또번호가 6개가 아닙니다.";
     private static final String DUPLICATED_NUMBER_EXCEPTION = "로또번호는 중복된 숫자를 허용하지 않습니다.";
     private static final String NUMBER_RANGE_EXCEPTION = "로또번호는 1 ~ 45 사이의 숫자입니다.";
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
 
 
     private static Scanner scanner = new Scanner(System.in);
