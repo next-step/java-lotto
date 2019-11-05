@@ -1,20 +1,25 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNo> numbers;
 
     public Lotto(final List<Integer> numbers) {
-        this.numbers = numbers;
+        final List<LottoNo> lottoNos = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNos.add(new LottoNo(number));
+        }
+        this.numbers = lottoNos;
     }
 
     Rank checkRank(final List<Integer> winNumbers, final int bonusNumber) {
-        int countOfMatch = (int) winNumbers.stream().filter(numbers::contains).count();
-        final boolean isMatchBonus = numbers.contains(bonusNumber);
+        int countOfMatch = (int) numbers.stream().filter(number -> number.contains(winNumbers)).count();
+        final boolean isMatchBonus = numbers.stream().anyMatch(number -> number.getNumber() == bonusNumber);
 
         if (countOfMatch == Rank.FOURTH.getCountOfMatch() && isMatchBonus) {
             countOfMatch = countOfMatch + 1;
@@ -24,7 +29,9 @@ public class Lotto {
     }
 
     public List<Integer> findNumbers() {
-        return Collections.unmodifiableList(this.numbers);
+        return this.numbers.stream()
+                .map(LottoNo::getNumber)
+                .collect(Collectors.toList());
     }
 
     @Override
