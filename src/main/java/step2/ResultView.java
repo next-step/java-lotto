@@ -24,9 +24,9 @@ public class ResultView {
 
   public void printEarnSummary() {
     //이 시점에서 전체 얻은 금액과 구매한 금액을 알고 있어야함
-    double earnPercent = (double)reviewLotto.getTotalEarnAmount() / lottoMachine.inputAmount;
+    double earnPercent = (double) reviewLotto.getTotalEarnAmount() / lottoMachine.inputAmount;
 
-    System.out.println("총 수익율은 " + Math.round(earnPercent*100) / 100.0 + "입니다.");
+    System.out.println("총 수익율은 " + Math.round(earnPercent * 100) / 100.0 + "입니다.");
 
   }
 }

@@ -39,7 +39,8 @@ public class LottoMachine {
     return shffledLottoNumberArr;
   }
 
-  public ArrayList<ArrayList<String>> issueLottoNumberArr(int buyTicketCount, ArrayList<String> defaultLottoNumberArr) {
+  public ArrayList<ArrayList<String>> issueLottoNumberArr(int buyTicketCount,
+      ArrayList<String> defaultLottoNumberArr) {
     ArrayList<ArrayList<String>> ticketList = new ArrayList<>();
     ArrayList<String> ticket = new ArrayList<>();
 
@@ -54,7 +55,8 @@ public class LottoMachine {
   public ArrayList<ArrayList<String>> start() {
     int ticketCount = calculateTicketCount(inputAmount);
     ArrayList<String> defaultLottoNumberArr = generateDefaultLottoNumberArr();
-    ArrayList<ArrayList<String>> lottoNumberTicketArr = issueLottoNumberArr(ticketCount,defaultLottoNumberArr);
+    ArrayList<ArrayList<String>> lottoNumberTicketArr = issueLottoNumberArr(ticketCount,
+        defaultLottoNumberArr);
     printBuyLottoTicketArr(lottoNumberTicketArr);
     return lottoNumberTicketArr;
   }

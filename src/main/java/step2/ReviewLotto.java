@@ -32,7 +32,8 @@ public class ReviewLotto {
     int matchCount = 0;
     String[] inputLottoWinnerNumberArr = inputLottoWinnerNumber.split(LOTTO_WINNER_NUMBER_SPLIT);
     for (int i = 0; i < inputLottoWinnerNumberArr.length; i++) {
-      matchCount += checkLottoWinnerNumberArrInLottoNumberTicket(lottoNumberTicket, inputLottoWinnerNumberArr[i]);
+      matchCount += checkLottoWinnerNumberArrInLottoNumberTicket(lottoNumberTicket,
+          inputLottoWinnerNumberArr[i]);
     }
     if (matchCount == num) {
       return 1;

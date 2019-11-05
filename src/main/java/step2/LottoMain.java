@@ -8,7 +8,8 @@ public class LottoMain {
     InputView inputView = new InputView();
     LottoMachine lottoMachine = new LottoMachine(inputView.inputAmount());
     ArrayList<ArrayList<String>> lottoNumberTicketArr = lottoMachine.start();
-    ReviewLotto reviewLotto = new ReviewLotto(inputView.inputLottoWinnerNumber(),lottoNumberTicketArr);
+    ReviewLotto reviewLotto = new ReviewLotto(inputView.inputLottoWinnerNumber(),
+        lottoNumberTicketArr);
     ResultView resultView = new ResultView(lottoMachine, reviewLotto);
     resultView.statistics();
     resultView.printEarnSummary();
