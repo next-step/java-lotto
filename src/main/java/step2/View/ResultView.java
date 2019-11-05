@@ -2,9 +2,10 @@ package step2.View;
 
 import step2.Game;
 import step2.Ticket;
-import step2.Winning;
+import step2.Prize;
 
 import java.util.List;
+import java.util.Set;
 
 public class ResultView {
     private static final String RESULT = "당첨 통계\n---------";
@@ -22,17 +23,17 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void analyze(Ticket ticket, int pickCount) {
+    public static void analyze(Ticket ticket, Set<Integer> winningNumbers, int pickCount) {
         System.out.println();
         System.out.println(RESULT);
-        int[] report = ticket.report(pickCount);
-        System.out.println(3 + WINNING_COUNT_POSTFIX + Winning.FORTH_PRIZE.getPrize() +
+        int[] report = ticket.report(winningNumbers, pickCount);
+        System.out.println(3 + WINNING_COUNT_POSTFIX + Prize.FORTH_PRIZE.getMoney() +
                 WINNING_PRIZE_POSTFIX + report[3] + WINNING_GAME_POSTFIX);
-        System.out.println(4 + WINNING_COUNT_POSTFIX + Winning.THIRD_PRIZE.getPrize() +
+        System.out.println(4 + WINNING_COUNT_POSTFIX + Prize.THIRD_PRIZE.getMoney() +
                 WINNING_PRIZE_POSTFIX + report[4] + WINNING_GAME_POSTFIX);
-        System.out.println(5 + WINNING_COUNT_POSTFIX + Winning.SECOND_PRIZE.getPrize() +
+        System.out.println(5 + WINNING_COUNT_POSTFIX + Prize.SECOND_PRIZE.getMoney() +
                 WINNING_PRIZE_POSTFIX + report[5] + WINNING_GAME_POSTFIX);
-        System.out.println(6 + WINNING_COUNT_POSTFIX + Winning.FIRST_PRIZE.getPrize() +
+        System.out.println(6 + WINNING_COUNT_POSTFIX + Prize.FIRST_PRIZE.getMoney() +
                 WINNING_PRIZE_POSTFIX + report[6] + WINNING_GAME_POSTFIX);
 
         float earning = ticket.earning();

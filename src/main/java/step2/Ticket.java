@@ -5,15 +5,13 @@ import java.util.Set;
 
 public class Ticket {
     List<Game> games;
-    Set<Integer> lottoNumbers;
     int[] gameResult;
 
-    public Ticket(List<Game> games, Set<Integer> lottoNumbers) {
+    public Ticket(List<Game> games) {
         this.games = games;
-        this.lottoNumbers = lottoNumbers;
     }
 
-    public int[] report(int pickCount) {
+    public int[] report(Set<Integer> lottoNumbers, int pickCount) {
         gameResult = new int[pickCount + 1];
         games.forEach(game -> {
             gameResult[game.score(lottoNumbers)]++;

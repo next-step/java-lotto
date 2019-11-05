@@ -30,8 +30,8 @@ public class TicketTest {
     @Test
     @DisplayName("게임들의 당첨결과 조회")
     void name() {
-        Ticket ticket = new Ticket(games, lottoNumbers);
-        assertThat(ticket.report(5)).isEqualTo(new int[]{0, 0, 0, 0, 0, 1});
+        Ticket ticket = new Ticket(games);
+        assertThat(ticket.report(lottoNumbers, 5)).isEqualTo(new int[]{0, 0, 0, 0, 0, 1});
 
     }
 }

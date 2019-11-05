@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 public class Game {
-    private Set<Integer> game;
+    private Set<Integer> numbers;
 
     public Game(int max, int limit) {
-        UserNumbers userNumbers = new UserNumbers(1, max);
-        this.game = userNumbers.getUniques(limit);
+        AutoGame autoGame = new AutoGame(1, max);
+        this.numbers = autoGame.getNumbers(limit);
     }
 
     public static List<Game> buy(int amount, int max, int limit) {
@@ -21,10 +21,10 @@ public class Game {
     }
 
     public String gameNumbers() {
-        return "[" + game.stream().sorted().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2).get() + "]";
+        return "[" + numbers.stream().sorted().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2).get() + "]";
     }
 
     public int score(Set<Integer> lotto) {
-        return game.stream().filter(lotto::contains).toArray().length;
+        return numbers.stream().filter(lotto::contains).toArray().length;
     }
 }

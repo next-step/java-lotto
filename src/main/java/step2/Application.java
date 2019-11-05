@@ -15,8 +15,8 @@ public class Application {
         List<Game> games = Game.buy(ticketAmount, MAX_LOTTO_NUM, PICK_NUMBER_COUNT);
         ResultView.checkout(games);
         Set<Integer> winningNumbers = InputView.winningNumber();
-        Ticket ticket = new Ticket(games, winningNumbers);
-        ResultView.analyze(ticket, PICK_NUMBER_COUNT);
+        Ticket ticket = new Ticket(games);
+        ResultView.analyze(ticket, winningNumbers, PICK_NUMBER_COUNT);
 
     }
 }
