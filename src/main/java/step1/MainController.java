@@ -8,9 +8,9 @@ public class MainController {
         Scanner sc = new Scanner(System.in);
 
         String input = sc.nextLine();
-        StringAddCalculator stringAddCalculator = new StringAddCalculator(input);
+        StringAddCalculator stringAddCalculator = new StringAddCalculator();
 
-        int result = stringAddCalculator.calculate();
+        int result = stringAddCalculator.calculate(input);
 
         System.out.println(result);
     }
