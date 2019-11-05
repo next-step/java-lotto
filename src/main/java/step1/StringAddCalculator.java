@@ -20,7 +20,7 @@ public class StringAddCalculator {
   }
 
   public int add(String arg) {
-    if (isArgumentValid(arg)) {
+    if (isArgumentInvalid(arg)) {
       return result;
     }
     if (isCustomSplitRegex(arg)) {
@@ -29,8 +29,8 @@ public class StringAddCalculator {
     return sumSplitedValue(arg.split(DEFAULT_SPLIT_REGEX));
   }
 
-  private boolean isArgumentValid(String arg) {
-    return arg == null || arg.length() == 0;
+  private boolean isArgumentInvalid(String arg) {
+    return (arg == null || arg.length() == 0);
   }
 
   private boolean isCustomSplitRegex(String arg) {
