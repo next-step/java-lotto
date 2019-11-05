@@ -2,8 +2,8 @@ package lotto.domain.person;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCreator;
-import lotto.domain.lotto.LottoPrize;
 import lotto.dto.LottoDto;
+import lotto.domain.lotto.LottoPrizes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class Person {
 		return lotteries.toLottoDtos();
 	}
 
-	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
+	public LottoPrizes checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
 		validateEmptyLotteries();
 		return lotteries.checkAllLotteries(answerNumbers, bonusNumber);
 	}

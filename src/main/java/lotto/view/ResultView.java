@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ResultView {
 
-	public void printBuyingLotteries(List<LottoDto> lottoDtos) {
+	public static void printBuyingLotteries(List<LottoDto> lottoDtos) {
 		System.out.println(String.format("%s개를 구매했습니다.", lottoDtos.size()));
 		for(LottoDto dto : lottoDtos) {
 			System.out.println(dto.printLottoNumbers());
@@ -15,7 +15,7 @@ public class ResultView {
 		System.out.println();
 	}
 
-	public void printWinStats(LottoPrizeStat stat, double earningsRatio) {
+	public static void printWinStats(LottoPrizeStat stat, double earningsRatio) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
