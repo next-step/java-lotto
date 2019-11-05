@@ -37,7 +37,7 @@ public class ResultView {
         System.out.println(6 + WINNING_COUNT_POSTFIX + Prize.FIRST_PRIZE.getMoney() +
                 WINNING_PRIZE_POSTFIX + report[6] + WINNING_GAME_POSTFIX);
 
-        float earning = ticket.earning();
+        float earning = ticket.earning(report);
         System.out.println(WINNING_RATE_PREFIX + earning + WINNING_REPORT_PREFIX
                 + (earning > 1 ? GAIN : LOSS) + WINNING_REPORT_POSTFIX);
     }
