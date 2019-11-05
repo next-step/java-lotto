@@ -27,6 +27,10 @@ public class Person {
 		return new Person(amount, lotteries);
 	}
 
+	public void buyLottoSelf(LottoCreator lottoCreator) {
+		buyLotto(lottoCreator);
+	}
+
 	public void buyLottoWithAllMoney(LottoCreator lottoCreator) {
 		for (int i = 0, end = wallet.getPossibleNumberToBuy(LottoCreator.LOTTO_PRICE); i < end; i++) {
 			buyLotto(lottoCreator);

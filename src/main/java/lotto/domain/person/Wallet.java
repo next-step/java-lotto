@@ -23,7 +23,8 @@ public class Wallet {
 		return new Wallet(amount);
 	}
 
-	public int getPossibleNumberToBuy(long price) {
+	@SuppressWarnings("SameParameterValue")
+	int getPossibleNumberToBuy(long price) {
 		return (int) (amount / price);
 	}
 
