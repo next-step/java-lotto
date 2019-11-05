@@ -12,10 +12,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public int checkCountOfMatch(final List<Integer> winNumbers) {
-        return (int) winNumbers.stream().filter(numbers::contains).count();
-    }
-
     Rank checkRank(final List<Integer> winNumbers, final int bonusNumber) {
         int countOfMatch = (int) winNumbers.stream().filter(numbers::contains).count();
         final boolean isMatchBonus = numbers.contains(bonusNumber);

@@ -7,8 +7,14 @@ import lotto.domain.WinningStatus;
 
 public class ResultView {
 
-    public static void printTotalLottoCount(final int totalCount) {
-        System.out.println(totalCount + "개를 구매했습니다.");
+    public static void printTotalLottoCount(final int totalDirectLottoCount, final int totalAutoLottoCount) {
+        String print = "";
+        if (totalDirectLottoCount != 0) {
+            print += "수동으로 " + totalDirectLottoCount + "장, 자동으로 ";
+        }
+        print += totalAutoLottoCount + "개를 구매했습니다.";
+
+        System.out.println(print);
     }
 
     public static void printIssuedLottos(final IssuedLottos issuedLottos) {

@@ -33,7 +33,7 @@ public class LottoTest {
         for (String number : numbers) {
             winNumbers.add(Integer.parseInt(number));
         }
-        int result = lotto.checkCountOfMatch(winNumbers);
-        assertThat(result).isEqualTo(expected);
+        Rank rank = lotto.checkRank(winNumbers, 45);
+        assertThat(rank.getCountOfMatch()).isEqualTo(expected);
     }
 }

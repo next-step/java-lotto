@@ -4,19 +4,24 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        int amount = InputView.inputAmount();
+        final int amount = InputView.inputAmount();
 
         NumberGenerator numberGenerator = new BasicNumberGenerator();
         LottoMachine lottoMachine = new BasicLottoMachine(numberGenerator);
         Store store = new Store(lottoMachine);
         User user = new User(amount);
 
-        user.buyLottoIn(store);
+        final int directCount = InputView.inputDirectCount();
+        final List<String> directLottoNumbers = InputView.inputDirectLottoNumbers(directCount);
 
-        ResultView.printTotalLottoCount(user.getCountOfLottos());
+        user.buyLotto(store, directLottoNumbers);
+
+        ResultView.printTotalLottoCount(user.getCountOfDirectLottos(), user.getCountOfAutoLottos());
 
         ResultView.printIssuedLottos(user.findIssuedLottos());
 

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,26 +11,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserTest {
 
+    private User user;
+
+    @BeforeEach
+    void setUp() {
+        this.user = new User(1000);
+    }
+
     @Test
     void 로또_구매_및_확인() {
-        User user = new User(1000);
-        user.buyLottoIn(new Store(new BasicLottoMachine(new TestNumberGenerator())));
+        user.buyLotto(new Store(new BasicLottoMachine(new TestNumberGenerator())), Collections.emptyList());
         WinningStatus winningStatus = user.checkLottoRank("1, 2, 3, 4, 5, 6", "7");
         assertThat(winningStatus.getCountOfRankFor(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
     void 로또_수익률() {
-        User user = new User(1000);
-        user.buyLottoIn(new Store(new BasicLottoMachine(new TestNumberGenerator())));
+        user.buyLotto(new Store(new BasicLottoMachine(new TestNumberGenerator())), Collections.emptyList());
         WinningStatus winningStatus = user.checkLottoRank("1, 2, 3, 7, 8, 9", "10");
         assertThat(user.calculateRate(winningStatus.getTotalWinningAmount())).isEqualTo(5.00);
     }
 
     @Test
     void 보너스_번호_포함_당첨번호확인() {
-        User user = new User(1000);
-        user.buyLottoIn(new Store(new BasicLottoMachine(new TestNumberGenerator())));
+        user.buyLotto(new Store(new BasicLottoMachine(new TestNumberGenerator())), Collections.emptyList());
         WinningStatus winningStatus = user.checkLottoRank("1, 2, 3, 4, 10, 11", "5");
         assertThat(winningStatus.getCountOfRankFor(Rank.SECOND)).isEqualTo(1);
     }

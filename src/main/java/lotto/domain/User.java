@@ -9,17 +9,23 @@ public class User {
     private static String DELIMITER = ", ";
     private final int amount;
     private IssuedLottos issuedLottos;
+    private int countOfDirectLottos;
 
     public User(final int amount) {
         this.amount = amount;
     }
 
-    public void buyLottoIn(final Store store) {
-        this.issuedLottos = store.issueLottos(amount);
+    public void buyLotto(final Store store, final List<String> directLottoNumbers) {
+        this.issuedLottos = store.issueLottos(amount, directLottoNumbers);
+        this.countOfDirectLottos = directLottoNumbers.size();
     }
 
-    public int getCountOfLottos() {
-        return this.issuedLottos.count();
+    public int getCountOfAutoLottos() {
+        return this.issuedLottos.count() - countOfDirectLottos;
+    }
+
+    public int getCountOfDirectLottos() {
+        return this.countOfDirectLottos;
     }
 
     public IssuedLottos findIssuedLottos() {
