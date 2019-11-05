@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -8,39 +7,33 @@ import java.util.Set;
 public class Lotto {
 
 	private static final int LOTTO_BALL_NUMBERS_LIMIT = 6;
-	@SuppressWarnings("FieldCanBeLocal")
-	private static final String LOTTO_NUMBERS_COUNT_ERROR_MSG = "로또는 %s개의 숫자만 가질 수 있습니다";
-	@SuppressWarnings("FieldCanBeLocal")
-	private static final String ANSWER_NUMBERS_COUNT_ERROR_MSG = "로또는 %s개의 숫자로만 비교될 수 있습니다";
 
-	private final Set<Integer> numbers;
+	private final LottoNumbers numbers;
+	private final LottoType type;
 
-	private Lotto(List<Integer> inputNumbers) {
-		validateNumbersCount(inputNumbers, LOTTO_NUMBERS_COUNT_ERROR_MSG);
-		this.numbers = new HashSet<>(inputNumbers);
-		validateDuplicateNumbers(numbers);
+	private Lotto(List<Integer> inputNumbers, LottoType type) {
+		this.numbers = new LottoNumbers(inputNumbers);
+		this.type = type;
 	}
 
-	private void validateNumbersCount(List<Integer> inputNumbers, String errorMessage) {
+	private void validateNumbersCount(List<Integer> inputNumbers) {
 		if (inputNumbers.size() != LOTTO_BALL_NUMBERS_LIMIT) {
-			throw new IllegalArgumentException(String.format(errorMessage, LOTTO_BALL_NUMBERS_LIMIT));
-		}
-	}
-
-	private void validateDuplicateNumbers(Set<Integer> numbers) {
-		if (numbers.size() != LOTTO_BALL_NUMBERS_LIMIT) {
-			throw new IllegalArgumentException("중복된 숫자가 있습니다");
+			throw new IllegalArgumentException(String.format("로또는 %s개의 숫자로만 비교될 수 있습니다", LOTTO_BALL_NUMBERS_LIMIT));
 		}
 	}
 
 	public static Lotto of(List<Integer> inputNumbers) {
-		return new Lotto(inputNumbers);
+		return of(inputNumbers, LottoType.AUTO);
+	}
+
+	public static Lotto of(List<Integer> inputNumbers, LottoType type) {
+		return new Lotto(inputNumbers, type);
 	}
 
 	public LottoPrize examine(List<Integer> answerNumbers, int bonusNumber) {
-		validateNumbersCount(answerNumbers, ANSWER_NUMBERS_COUNT_ERROR_MSG);
+		validateNumbersCount(answerNumbers);
 		validateBonusNumber(answerNumbers, bonusNumber);
-		return LottoPrize.of(countMatchedNumbers(answerNumbers), isBonusNumberMatched(bonusNumber));
+		return LottoPrize.of(numbers.countMatchedNumbers(answerNumbers), numbers.isBonusNumberMatched(bonusNumber));
 	}
 
 	private void validateBonusNumber(List<Integer> answerNumbers, int bonusNumber) {
@@ -49,18 +42,12 @@ public class Lotto {
 		}
 	}
 
-	private long countMatchedNumbers(List<Integer> answerNumbers) {
-		return answerNumbers.stream()
-				.filter(numbers::contains)
-				.count();
-	}
-
-	private boolean isBonusNumberMatched(int bonusNumber) {
-		return numbers.contains(bonusNumber);
-	}
-
 	public Set<Integer> getNumbers() {
-		return numbers;
+		return numbers.get();
+	}
+
+	public LottoType getType() {
+		return type;
 	}
 
 	@Override

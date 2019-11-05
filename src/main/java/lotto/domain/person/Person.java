@@ -4,6 +4,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCreator;
 import lotto.dto.LottoDto;
 import lotto.domain.lotto.LottoPrizes;
+import lotto.dto.LottoDtoCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,8 @@ public class Person {
 		lotteries.add(lottoCreator.pickLotto(wallet));
 	}
 
-	public List<LottoDto> getLottoDtos() {
-		return lotteries.toLottoDtos();
+	public LottoDtoCollection getLottoDtoCollection() {
+		return new LottoDtoCollection(lotteries.toLottoDtos());
 	}
 
 	public LottoPrizes checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
