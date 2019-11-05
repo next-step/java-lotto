@@ -12,13 +12,8 @@ public class InputChecker {
     private static final String CUSTOM_INPUT_DELIMITER_END = "\n";
     private static final Pattern INPUT_DELIMITER_PATTERN = Pattern
         .compile(CUSTOM_INPUT_DELIMITER_START + "(.)" + CUSTOM_INPUT_DELIMITER_END + "(.*)");
-    private final Numbers numbers;
 
-    public InputChecker(String input) {
-        this.numbers = checkInput(input);
-    }
-
-    private Numbers checkInput(String input) {
+    public static Numbers checkInput(String input) {
         if (Objects.isNull(input) || input.equals("")) {
             return new Numbers(Arrays.asList(0));
         }
@@ -32,12 +27,7 @@ public class InputChecker {
         return convertInputWithDelimeter(input, DEFAULT_INPUT_DELIMITER);
     }
 
-    private Numbers convertInputWithDelimeter(String input,
-        String delimeter) {
+    private static Numbers convertInputWithDelimeter(String input, String delimeter) {
         return new Numbers(input.split(delimeter));
-    }
-
-    public Numbers getNumbers() {
-        return numbers;
     }
 }
