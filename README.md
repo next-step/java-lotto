@@ -18,6 +18,7 @@
 * 구입한 로또를 출력한다.
 * 당첨번호를 입력한다.
 * 당첨 통계를 출력한다.
+* 보너스 볼을 입력 받는다.
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)

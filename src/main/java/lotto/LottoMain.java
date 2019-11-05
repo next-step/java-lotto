@@ -13,7 +13,8 @@ public class LottoMain {
         OutputView.printLottos(lottoGame.getLottos());
 
         String winningNumbers = InputView.inputWinningNumbers();
-        lottoGame.winningLotto(winningNumbers, 7);
+        int bonusNumber = InputView.inputBonusNumber();
+        lottoGame.winningLotto(winningNumbers, bonusNumber);
 
         OutputView.printResult(lottoGame.result());
     }
