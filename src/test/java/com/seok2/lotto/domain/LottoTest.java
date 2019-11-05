@@ -14,18 +14,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoTest {
 
     static Stream<Arguments> lotto() {
-        LottoStrategy fixedLottoStrategy = () -> IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::new).collect(Collectors.toList());
+        LottoStrategy fixedLottoStrategy = () -> IntStream.rangeClosed(1, 6).mapToObj(LottoNumber::of).collect(Collectors.toList());
         Lotto lotto = Lotto.generate("1,2,3,4,5,6");
         return Stream.of(
                 Arguments.of(fixedLottoStrategy, lotto)
         );
     }
 
-    static Stream<Arguments> check() {
+    static Stream<Arguments> match() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", Rank.FIRST),
-                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", Rank.FOURTH),
-                Arguments.of("1,2,3,4,5,6", "10,11,12,13,14,15", Rank.MISS)
+                Arguments.of("1,2,3,4,5,6", "1,2,3,4,5,6", 6),
+                Arguments.of("1,2,3,4,5,6", "1,2,3,7,8,9", 3),
+                Arguments.of("1,2,3,4,5,6", "10,11,12,13,14,15", 0)
         );
     }
 
@@ -36,8 +36,8 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("check")
+    @MethodSource("match")
     void check(String lotto, String winning, Rank expected) {
-        assertThat(Lotto.generate(lotto).check(Lotto.generate(winning))).isEqualTo(expected);
+        assertThat(Lotto.generate(lotto).match(Lotto.generate(winning))).isEqualTo(expected);
     }
 }

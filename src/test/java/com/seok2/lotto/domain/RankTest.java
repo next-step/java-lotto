@@ -10,21 +10,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
-    static Stream<Arguments> ofMatches() {
+    static Stream<Arguments> find() {
         return Stream.of(
-                Arguments.of(6, Rank.FIRST),
-                Arguments.of(5, Rank.SECOND),
-                Arguments.of(4, Rank.THIRD),
-                Arguments.of(3, Rank.FOURTH),
-                Arguments.of(2, Rank.MISS),
-                Arguments.of(1, Rank.MISS),
-                Arguments.of(0, Rank.MISS)
+            Arguments.of(6, false, Rank.FIRST),
+            Arguments.of(5, true, Rank.SECOND),
+            Arguments.of(5, false, Rank.THIRD),
+            Arguments.of(4, false, Rank.FOURTH),
+            Arguments.of(3, false, Rank.FIFTH),
+            Arguments.of(2, false, Rank.MISS),
+            Arguments.of(1, false, Rank.MISS),
+            Arguments.of(0, false, Rank.MISS)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("ofMatches")
-    void ofMatches(int matches, Rank expected) {
-        assertThat(Rank.ofMatches(matches)).isEqualTo(expected);
+    @MethodSource("find")
+    void ofMatches(int matches, boolean isMatchBonus, Rank expected) {
+        assertThat(Rank.find(matches, isMatchBonus)).isEqualTo(expected);
     }
 }

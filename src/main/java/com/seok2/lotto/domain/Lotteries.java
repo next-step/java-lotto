@@ -6,26 +6,34 @@ import java.util.stream.Collectors;
 
 public class Lotteries implements Iterable<Lotto> {
 
-    private List<Lotto> lotteries;
+    private static final String NO_LOTTO_PURCHASED_ERROR_MSG = "최소 한 장 이상의 게임을 구매해야 합니다.";
 
-    protected Lotteries(List<Lotto> lotteries) {
+    private final List<Lotto> lotteries;
+
+    private Lotteries(List<Lotto> lotteries) {
         validate(lotteries);
         this.lotteries = lotteries;
     }
 
-    private void validate(List<Lotto> lotteries) {
-        if (lotteries.isEmpty())
-            throw new IllegalArgumentException("최소 한 장 이상의 게임을 구매해야 합니다.");
+    public static Lotteries of(List<Lotto> lotteries) {
+        return new Lotteries(lotteries);
     }
 
-    public GameStats check(Lotto winning) {
-        return GameStats.of(lotteries.stream().map(lotto -> winning.check(lotto)).collect(Collectors.toList()));
+    private void validate(List<Lotto> lotteries) {
+        if (lotteries.isEmpty()) {
+            throw new IllegalArgumentException(NO_LOTTO_PURCHASED_ERROR_MSG);
+        }
+    }
+
+    public Ranks check(WinningLotto winning) {
+        return Ranks.of(lotteries.stream()
+            .map(winning::check)
+            .collect(Collectors.toList()));
     }
 
     public int size() {
         return lotteries.size();
     }
-
 
     @Override
     public Iterator<Lotto> iterator() {

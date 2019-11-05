@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class PositiveIntegerTest {
 
-
     static Stream<String> invalid() {
         return Stream.of("-1", "", " ", null);
     }

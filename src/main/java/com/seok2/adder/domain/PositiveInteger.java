@@ -14,22 +14,24 @@ public class PositiveInteger {
     }
 
     public PositiveInteger(int integer) {
-        if(integer < ZERO_VALUE)
+        if (integer < ZERO_VALUE) {
             throw new IllegalArgumentException();
+        }
         this.integer = integer;
     }
 
     public static PositiveInteger parse(String s) {
         try {
-            return  new PositiveInteger(Integer.parseInt(s));
-        } catch ( NumberFormatException e ) {
+            return new PositiveInteger(Integer.parseInt(s));
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
     }
 
     public PositiveInteger add(PositiveInteger operand) {
-        if(operand.integer == ZERO_VALUE)
+        if (operand.integer == ZERO_VALUE) {
             return this;
+        }
         return new PositiveInteger(this.integer + operand.integer);
     }
 

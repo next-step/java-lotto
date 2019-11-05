@@ -1,12 +1,14 @@
 package com.seok2.lotto.domain;
 
-import java.math.BigDecimal;
+
+import java.util.Objects;
 
 public class Money {
 
     private static final String CURRENCY_UNIT = " 원";
     private static final int ZERO_VALUE = 0;
-    private static final Money ZERO = new Money(0);
+    public static final Money ZERO = new Money(ZERO_VALUE);
+
     private final int money;
 
     private Money(int money) {
@@ -22,13 +24,24 @@ public class Money {
     }
 
     protected Money minus(Money money) {
-        if (money.money == ZERO_VALUE)
+        if (money.money == ZERO_VALUE) {
             return this;
-        return new Money((this.money - money.money));
+        }
+        return Money.of(this.money - money.money);
     }
 
-    public Money clone() {
-        return new Money(this.money);
+    public Money add(Money money) {
+        if (money.money == ZERO_VALUE) {
+            return this;
+        }
+        return Money.of(this.money + money.money);
+    }
+
+    public double percent(Money money) {
+        if (money.money == ZERO_VALUE) {
+            return ZERO_VALUE;
+        }
+        return this.money / (double) money.money;
     }
 
     @Override
@@ -36,19 +49,20 @@ public class Money {
         return money + CURRENCY_UNIT;
     }
 
-    public Money multiply(int value) {
-        if (value == ZERO_VALUE)
-            return Money.ZERO;
-        return new Money(money * value);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Money money1 = (Money) o;
+        return money == money1.money;
     }
 
-    public Money add(Money money) {
-        if (money.money == ZERO_VALUE)
-            return this;
-        return new Money(this.money + money.money);
-    }
-
-    public Profit calculateProfit(Money investment) {
-        return new Profit(this.money / (double) investment.money);
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 }
