@@ -43,27 +43,26 @@ public class StringAddCalculator {
     return false;
   }
 
-
   private int sumSplitedValue(String[] splitedValue) {
-    int rtn = 0;
+    int returnValue = 0;
     for (String val : splitedValue) {
-      rtn += parsedSplitedValue(val);
+      returnValue += parsedSplitedValue(val);
     }
-    return rtn;
+    return returnValue;
   }
 
   private int parsedSplitedValue(String arg) {
-    int rtn;
+    int returnValue;
     try {
-      rtn = Integer.parseInt(arg);
+      returnValue = Integer.parseInt(arg);
     } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException();
     }
 
-    if (rtn < 0) {
+    if (returnValue < 0) {
       throw new IllegalArgumentException();
     }
-    return rtn;
+    return returnValue;
   }
 }
 
