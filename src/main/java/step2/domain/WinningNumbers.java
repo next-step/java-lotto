@@ -11,7 +11,6 @@ public class WinningNumbers {
         this.winNumbers = makeWinNumbers(winNumbers);
     }
 
-
     private List<LottoNumber> makeWinNumbers(List<Integer> winNumbers) {
         return winNumbers.stream()
                 .map(LottoNumber::new)
