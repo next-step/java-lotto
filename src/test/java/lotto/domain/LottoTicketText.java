@@ -44,10 +44,13 @@ public class LottoTicketText {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,14,15,16:3", "11,12,13,14,15,16:0"}, delimiter = ':')
-    void 일치갯수_확인(String text, int matchCount) {
-        LottoTicket winNumbers = new LottoTicket("1,2,3,4,5,6");
-        assertThat(new LottoTicket(text).countCompareWinNumbers(winNumbers)).isEqualTo(matchCount);
+    @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,5,16:THIRD", "1,2,13,14,15,7:MISS"}, delimiter = ':')
+    void 로또_등수_계산(String text, Rank rank) {
+        LottoTicket winTicket = new LottoTicket("1,2,3,4,5,6");
+        int bonusNumber = 7;
+        LottoTicket ticket = new LottoTicket(text);
+        assertThat(ticket.calculateRank(winTicket, bonusNumber)).isEqualTo(rank);
     }
+
 
 }

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.NumberGenerator;
-
 import java.util.List;
 
 public class LottoTicket {
@@ -22,7 +20,14 @@ public class LottoTicket {
     }
 
 
-    public int countCompareWinNumbers(LottoTicket winNumbers) {
+    public Rank calculateRank(LottoTicket winNumbers, int bonus) {
+        int matchCount = calculateMatchCount(winNumbers);
+        boolean bonusMatch = contains(bonus);
+
+        return Rank.findByMatchCountAndBonusMatch(matchCount, bonusMatch);
+    }
+
+    private int calculateMatchCount(LottoTicket winNumbers){
         return (int) numbers.stream()
                 .filter(number -> winNumbers.contains(number))
                 .count();

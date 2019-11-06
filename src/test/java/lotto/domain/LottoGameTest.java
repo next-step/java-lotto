@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,20 +26,27 @@ public class LottoGameTest {
         }).isInstanceOf(RuntimeException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46, 1})
+    void 유효하지_않은_보너스숫자(int bonusNumber) {
+        LottoGame lottoGame = new LottoGame(1000);
+        assertThatThrownBy(() -> {
+            lottoGame.doGame("1,2,3,4,5,6", bonusNumber);
+        }).isInstanceOf(RuntimeException.class);
+    }
+
     @Test
-    void 당첨번호_확인() {
+    void 당첨_확인() {
         List<LottoTicket> tickets = Arrays.asList(
-                new LottoTicket("1,2,3,4,15,16"),
-                new LottoTicket("1,2,3,14,15,16"),
-                new LottoTicket("11,12,13,14,15,16")
+                new LottoTicket("1,2,3,4,5,7"),
+                new LottoTicket("11,12,31,14,15,17")
         );
         LottoGame game = new LottoGame(tickets);
-        List<String> results = game.getResultString("1,2,3,4,5,6");
+        game.doGame("1,2,3,4,5,6", 7);
 
-        double takePercent = Math.round((double) 55000 / 3000 * 10000) / 100.0;
-        String takePercentString = "총 수익률은 " + takePercent + "입니다.";
+        double winPercent = Math.round((double) 30000000 / 2000 * 10000) / 100.0;
 
-        assertThat(results.get(results.size() - 1)).isEqualTo(takePercentString);
+        assertThat(game.getWinPercent()).isEqualTo(winPercent);
     }
 
 

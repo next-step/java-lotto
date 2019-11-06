@@ -16,7 +16,8 @@ public class LottoController {
         resultView.printMyTicket(game.getTicketsString());
 
         String winText = inputView.inputWinText();
-        resultView.printWinStatistics(game.getResultString(winText));
+
+        //resultView.printWinStatistics(game.getResultString(winText));
 
     }
 }
