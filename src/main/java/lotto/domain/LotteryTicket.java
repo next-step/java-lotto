@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.NumbersValidator;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -32,28 +34,23 @@ public class LotteryTicket {
         return WinningRanking.getByMatchingCount(matchingCount);
     }
 
-    private void validateSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != LOTTERY_NUMBER_SIZE) {
-            String message = String.format("당첨 번호는 %d개 입니다.", LOTTERY_NUMBER_SIZE);
-            throw new RuntimeException(message);
+    private void validateSize(List<Integer> lotteryNumbers) {
+        if (!NumbersValidator.validateSize(lotteryNumbers, LOTTERY_NUMBER_SIZE)) {
+            String message = String.format("복권 번호는 %d개 입니다.", LOTTERY_NUMBER_SIZE);
+            throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateRange(List<Integer> winningNumbers) {
-        boolean outOfRange = winningNumbers.stream()
-                .anyMatch(number -> number < LOTTERY_NUMBER_MIN || number > LOTTERY_NUMBER_MAX);
-        if (outOfRange) {
-            String message = String.format("당첨 번호의 범위는 [%d, %d] 입니다.", LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX);
-            throw new RuntimeException(message);
+    private void validateRange(List<Integer> lotteryNumbers) {
+        if (!NumbersValidator.validateRange(lotteryNumbers, LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX)) {
+            String message = String.format("복권 번호의 범위는 [%d, %d] 입니다.", LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX);
+            throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateDuplicate(List<Integer> winningNumbers) {
-        boolean duplicate = winningNumbers.stream()
-                .distinct()
-                .count() != winningNumbers.size();
-        if (duplicate) {
-            throw new RuntimeException("당첨 번호는 중복될 수 없습니다.");
+    private void validateDuplicate(List<Integer> lotteryNumbers) {
+        if (!NumbersValidator.validateDuplicate(lotteryNumbers)) {
+            throw new IllegalArgumentException("복권 번호는 중복될 수 없습니다.");
         }
     }
 }

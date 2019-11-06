@@ -64,7 +64,7 @@ class LotteryTicketTest {
     void outOfRange() {
         assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 46)))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("당첨 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
+                .hasMessageMatching("복권 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
     }
 
     @DisplayName("유효성 검사 실패: 사이즈")
@@ -72,7 +72,7 @@ class LotteryTicketTest {
     void sizeOver() {
         assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("당첨 번호는 [0-9]+개 입니다.");
+                .hasMessageMatching("복권 번호는 [0-9]+개 입니다.");
     }
 
     @DisplayName("유효성 검사 실패: 숫자 중복")

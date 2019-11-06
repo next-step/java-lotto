@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.NumbersValidator;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -32,27 +34,22 @@ public class WinningNumbers {
     }
 
     private void validateSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != WINNING_NUMBER_SIZE) {
+        if (!NumbersValidator.validateSize(winningNumbers, WINNING_NUMBER_SIZE)) {
             String message = String.format("당첨 번호는 %d개 입니다.", WINNING_NUMBER_SIZE);
-            throw new RuntimeException(message);
+            throw new IllegalArgumentException(message);
         }
     }
 
     private void validateRange(List<Integer> winningNumbers) {
-        boolean outOfRange = winningNumbers.stream()
-                .anyMatch(number -> number < WINNING_NUMBER_MIN || number > WINNING_NUMBER_MAX);
-        if (outOfRange) {
+        if (!NumbersValidator.validateRange(winningNumbers, WINNING_NUMBER_MIN, WINNING_NUMBER_MAX)) {
             String message = String.format("당첨 번호의 범위는 [%d, %d] 입니다.", WINNING_NUMBER_MIN, WINNING_NUMBER_MAX);
-            throw new RuntimeException(message);
+            throw new IllegalArgumentException(message);
         }
     }
 
     private void validateDuplicate(List<Integer> winningNumbers) {
-        boolean duplicate = winningNumbers.stream()
-                .distinct()
-                .count() != winningNumbers.size();
-        if (duplicate) {
-            throw new RuntimeException("당첨 번호는 중복될 수 없습니다.");
+        if (!NumbersValidator.validateDuplicate(winningNumbers)) {
+            throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
     }
 }
