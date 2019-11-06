@@ -46,9 +46,10 @@ public class GameTest {
     @Test
     @DisplayName("포함하는 숫자 출력")
     void checkIncludeNumber() {
-        assertThat(game.getIncludingWinningNumber(IntStream.rangeClosed(0, 45).boxed().collect(toSet())))
+        int[] array = IntStream.rangeClosed(0, 45).boxed().mapToInt(i -> i).toArray();
+        assertThat(game.getIncludingWinningNumber(new WinningNumbers(IntStream.rangeClosed(0, 45).boxed().collect(toSet()))))
                 .isEqualTo(6);
-        assertThat(game.getIncludingWinningNumber(IntStream.rangeClosed(46, 47).boxed().collect(toSet())))
+        assertThat(game.getIncludingWinningNumber(new WinningNumbers(IntStream.rangeClosed(46, 46).boxed().collect(toSet()))))
                 .isEqualTo(0);
     }
 

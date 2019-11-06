@@ -3,7 +3,6 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -30,7 +29,7 @@ public class Game {
         return number;
     }
 
-    public int getIncludingWinningNumber(Set<Integer> winningNumber) {
-        return Math.toIntExact(numbers.stream().filter(winningNumber::contains).count());
+    public int getIncludingWinningNumber(WinningNumbers winningNumbersNumber) {
+        return Math.toIntExact(numbers.stream().filter(winningNumbersNumber::contains).count());
     }
 }

@@ -2,7 +2,6 @@ package step2;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static step2.LottoUtil.LOTTO_NUMBER_COUNT;
 import static step2.LottoUtil.LOTTO_PRICE;
@@ -17,7 +16,6 @@ public class Ticket {
         for (int count = 0; count < gameCount; count++) {
             games.add(new Game());
         }
-
     }
 
     public List<Game> getGames() {
@@ -35,12 +33,11 @@ public class Ticket {
         return amount / LOTTO_PRICE;
     }
 
-    public int[] checkWinningCount(Set<Integer> winningNumbers) {
-        int[] winningCount = new int[LOTTO_NUMBER_COUNT + 1];
+    public WinningCount checkWinningCount(WinningNumbers winningNumbers) {
+        int[] count = new int[LOTTO_NUMBER_COUNT + 1];
         games.forEach(game -> {
-            winningCount[game.getIncludingWinningNumber(winningNumbers)]++;
+            count[game.getIncludingWinningNumber(winningNumbers)]++;
         });
-        return winningCount;
-
+        return new WinningCount(count);
     }
 }

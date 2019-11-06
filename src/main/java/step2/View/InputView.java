@@ -18,11 +18,6 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int buyTickets() {
-        System.out.println(AMOUNT);
-        return scanner.nextInt();
-    }
-
     public static Set<Integer> getWinningNumbers() {
         scanner.nextLine();
         System.out.println(WINNING_NUMBER);
@@ -35,6 +30,11 @@ public class InputView {
 
         verifyLottoNumber(winningNumbers);
         return winningNumbers;
+    }
+
+    public static int buyTickets() {
+        System.out.println(AMOUNT);
+        return scanner.nextInt();
     }
 
 

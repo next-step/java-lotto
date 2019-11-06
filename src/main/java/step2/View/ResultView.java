@@ -1,11 +1,8 @@
 package step2.View;
 
-import step2.Game;
-import step2.Prize;
-import step2.Ticket;
+import step2.*;
 
 import java.util.List;
-import java.util.Set;
 
 import static step2.LottoUtil.LOTTO_PRIZE_MAX_CORRECT_NUMBER;
 import static step2.LottoUtil.LOTTO_PRIZE_MIN_CORRECT_NUMBER;
@@ -29,27 +26,30 @@ public class ResultView {
         games.forEach(game -> System.out.println("[" + game.getNumbers() + "]"));
     }
 
-    public static void printAnalysis(Ticket ticket, Set<Integer> winningNumber) {
+    public static void printAnalysis(Ticket ticket, WinningNumbers winningNumbersNumber) {
         printNewLine();
         System.out.println(RESULT);
-        printWinningCount(ticket.checkWinningCount(winningNumber));
-//        수익률 출력
-
+        WinningCount winningCount = ticket.checkWinningCount(winningNumbersNumber);
+        printWinningCount(winningCount);
+        printWinningRate(winningCount);
     }
 
-    private static void printWinningCount(int[] winningCount) {
+    private static void printWinningCount(WinningCount winningCount) {
         for (int correctNumber = LOTTO_PRIZE_MIN_CORRECT_NUMBER;
-             correctNumber < LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctNumber++) {
+             correctNumber <= LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctNumber++) {
             System.out.print(correctNumber + WINNING_COUNT_POSTFIX
                     + Prize.getPrice(correctNumber) + WINNING_PRIZE_POSTFIX
-                    + winningCount[correctNumber] + WINNING_GAME_POSTFIX);
+                    + winningCount.getCount(correctNumber) + WINNING_GAME_POSTFIX);
         }
     }
 
+    private static void printWinningRate(WinningCount winningCount) {
+        float rate = winningCount.getWinningRate();
+        System.out.println(WINNING_RATE_PREFIX + rate + WINNING_REPORT_PREFIX +
+                (rate > 1 ? GAIN : LOSS) + WINNING_REPORT_POSTFIX);
+    }
 
     private static void printNewLine() {
         System.out.println();
     }
-
-
 }
