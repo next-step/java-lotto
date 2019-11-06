@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,5 +43,13 @@ public class GameTest {
         );
     }
 
+    @Test
+    @DisplayName("포함하는 숫자 출력")
+    void checkIncludeNumber() {
+        assertThat(game.getIncludingWinningNumber(IntStream.rangeClosed(0, 45).boxed().collect(toSet())))
+                .isEqualTo(6);
+        assertThat(game.getIncludingWinningNumber(IntStream.rangeClosed(46, 47).boxed().collect(toSet())))
+                .isEqualTo(0);
+    }
 
 }

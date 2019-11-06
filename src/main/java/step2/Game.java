@@ -3,6 +3,7 @@ package step2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -27,5 +28,9 @@ public class Game {
         List<Integer> number = new ArrayList<>(balls.subList(0, LOTTO_NUMBER_COUNT));
         number.sort(Integer::compareTo);
         return number;
+    }
+
+    public int getIncludingWinningNumber(Set<Integer> winningNumber) {
+        return Math.toIntExact(numbers.stream().filter(winningNumber::contains).count());
     }
 }
