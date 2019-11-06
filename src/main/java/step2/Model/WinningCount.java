@@ -15,15 +15,15 @@ public class WinningCount {
 
     public float getWinningRate() {
         float earningMoney = 0;
-        for (int correctCount = LOTTO_PRIZE_MIN_CORRECT_NUMBER;
-             correctCount <= LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctCount++) {
-            earningMoney += (Prize.getPrice(correctCount) * count[correctCount]);
+        for (int matchCount = LOTTO_PRIZE_MIN_MATCH_NUMBER;
+             matchCount <= LOTTO_PRIZE_MAX_MATCH_NUMBER; matchCount++) {
+            earningMoney += (Prize.getPrice(matchCount) * count[matchCount]);
         }
         return earningMoney / (totalCount() * LOTTO_PRICE);
     }
 
-    public int getCount(int correctNumber) {
-        return count[correctNumber];
+    public int getCount(int matchCount) {
+        return count[matchCount];
     }
 
     private int totalCount() {

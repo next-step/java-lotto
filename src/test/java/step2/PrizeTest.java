@@ -16,7 +16,7 @@ class PrizeTest {
             "6:2000000000"
     }, delimiter = ':')
     @DisplayName("맞는 개수에 대한 상금 조회")
-    void getPrice(int correctNumber, int prize) {
-        assertThat(Prize.getPrice(correctNumber)).isEqualTo(prize);
+    void getPrice(int matchCount, int prize) {
+        assertThat(Prize.getPrice(matchCount)).isEqualTo(prize);
     }
 }

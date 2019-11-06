@@ -8,8 +8,8 @@ import step2.Model.WinningNumbers;
 
 import java.util.List;
 
-import static step2.Util.LottoUtil.LOTTO_PRIZE_MAX_CORRECT_NUMBER;
-import static step2.Util.LottoUtil.LOTTO_PRIZE_MIN_CORRECT_NUMBER;
+import static step2.Util.LottoUtil.LOTTO_PRIZE_MAX_MATCH_NUMBER;
+import static step2.Util.LottoUtil.LOTTO_PRIZE_MIN_MATCH_NUMBER;
 
 public class ResultView {
     private static final String AMOUNT_CONFIRM_POSTFIX = "개를 구매했습니다.";
@@ -38,11 +38,11 @@ public class ResultView {
     }
 
     private static void printWinningCount(WinningCount winningCount) {
-        for (int correctNumber = LOTTO_PRIZE_MIN_CORRECT_NUMBER;
-             correctNumber <= LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctNumber++) {
-            System.out.println(correctNumber + WINNING_COUNT_POSTFIX
-                    + Prize.getPrice(correctNumber) + WINNING_PRIZE_POSTFIX
-                    + winningCount.getCount(correctNumber) + WINNING_GAME_POSTFIX);
+        for (int matchCount = LOTTO_PRIZE_MIN_MATCH_NUMBER;
+             matchCount <= LOTTO_PRIZE_MAX_MATCH_NUMBER; matchCount++) {
+            System.out.println(matchCount + WINNING_COUNT_POSTFIX
+                    + Prize.getPrice(matchCount) + WINNING_PRIZE_POSTFIX
+                    + winningCount.getCount(matchCount) + WINNING_GAME_POSTFIX);
         }
     }
 
