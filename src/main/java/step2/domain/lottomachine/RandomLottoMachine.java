@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toList;
 
 public class RandomLottoMachine extends LottoMachine {
+    private static final int START_INDEX = 0;
 
     @Override
     public LottoTicket issueLottoTicket() {

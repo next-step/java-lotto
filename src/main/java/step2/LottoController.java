@@ -27,6 +27,9 @@ public class LottoController {
         OutputView.showBuyTickets(lottoTickets);
 
         List<Integer> winNumbers = InputView.inputWinningNumbers();
+        Integer bonusNumber = InputView.inputBonusNumber(winNumbers);
+
+        winNumbers.add(bonusNumber);
         WinningNumbers winningNumbers = new WinningNumbers(winNumbers);
 
         LottoResult lottoResult = new LottoResult(winningNumbers, lottoTickets);

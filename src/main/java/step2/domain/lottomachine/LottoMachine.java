@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
+import static step2.domain.LottoNumber.MAX_NUMBER;
+import static step2.domain.LottoNumber.MIN_NUMBER;
 
 public abstract class LottoMachine {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    protected static final int START_INDEX = 0;
     protected static final int ADD_SIZE = 5;
     protected static final List<LottoNumber> lottoNumbers = getInstance();
 
