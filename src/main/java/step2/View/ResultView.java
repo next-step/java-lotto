@@ -1,9 +1,14 @@
 package step2.View;
 
 import step2.Game;
+import step2.Prize;
 import step2.Ticket;
 
 import java.util.List;
+import java.util.Set;
+
+import static step2.LottoUtil.LOTTO_PRIZE_MAX_CORRECT_NUMBER;
+import static step2.LottoUtil.LOTTO_PRIZE_MIN_CORRECT_NUMBER;
 
 public class ResultView {
     private static final String AMOUNT_CONFIRM_POSTFIX = "개를 구매했습니다.";
@@ -22,15 +27,25 @@ public class ResultView {
         List<Game> games = ticket.getGames();
         System.out.println(games.size() + AMOUNT_CONFIRM_POSTFIX);
         games.forEach(game -> System.out.println("[" + game.getNumbers() + "]"));
-//        tickets 루프 돌며 출력
     }
 
-    public static void printAnalysis() {
+    public static void printAnalysis(Ticket ticket, Set<Integer> winningNumber) {
         printNewLine();
         System.out.println(RESULT);
-//        등수별 정보와 당첨정보 출력
+        printWinningCount(ticket.checkWinningCount(winningNumber));
 //        수익률 출력
+
     }
+
+    private static void printWinningCount(int[] winningCount) {
+        for (int correctNumber = LOTTO_PRIZE_MIN_CORRECT_NUMBER;
+             correctNumber < LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctNumber++) {
+            System.out.print(correctNumber + WINNING_COUNT_POSTFIX
+                    + Prize.getPrice(correctNumber) + WINNING_PRIZE_POSTFIX
+                    + winningCount[correctNumber] + WINNING_GAME_POSTFIX);
+        }
+    }
+
 
     private static void printNewLine() {
         System.out.println();
