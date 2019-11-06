@@ -13,23 +13,18 @@ public class NumberGenerator {
 
     private static final int DEFAULT_START_NUMBER = 1;
     private static final int DEFAULT_END_NUMBER = 45;
+    private static final List<Integer> BASE;
 
-    private final List<Integer> base;
-
-    public NumberGenerator() {
-        this(DEFAULT_START_NUMBER, DEFAULT_END_NUMBER);
-    }
-
-    public NumberGenerator(int start, int end) {
-        base = IntStream
-                .range(start, end + 1)
+    static {
+        BASE = IntStream
+                .range(DEFAULT_START_NUMBER, DEFAULT_END_NUMBER + 1)
                 .boxed()
                 .collect(toList());
     }
 
     public List<Integer> generate(int limit) {
-        Collections.shuffle(base);
-        return base.stream()
+        Collections.shuffle(BASE);
+        return BASE.stream()
                 .limit(limit)
                 .sorted()
                 .collect(toList());
