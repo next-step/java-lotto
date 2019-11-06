@@ -15,7 +15,6 @@ public class LottoGame {
     private int[] winCounts;
     private double winPercent;
 
-
     public LottoGame(int money) {
         if (money < TICKET_PRICE) {
             throw new RuntimeException();
@@ -74,15 +73,6 @@ public class LottoGame {
         return winCounts;
     }
 
-    /*private List<String> makeStatisticsStrings(int[] statistics) {
-        List<String> statisticsStrings = new ArrayList<>();
-        for (int i = 3; i <= 6; i++) {
-            String resultString = String.format("%d개 일치 (%d원)- %d개", i, PRIZE[i], statistics[i]);
-            statisticsStrings.add(resultString);
-        }
-        return statisticsStrings;
-    }*/
-
     private Double calculateWinPercent() {
         BigDecimal consume = new BigDecimal(tickets.size() * TICKET_PRICE);
         BigDecimal income = new BigDecimal(calculateIncome());
@@ -95,10 +85,6 @@ public class LottoGame {
                 .mapToInt(rank -> rank.getWinMoney() * winCounts[rank.ordinal()])
                 .sum();
     }
-
-    /*private String makeTakePercentString(double takePercent) {
-        return "총 수익률은 " + takePercent + "입니다.";
-    }*/
 
     public int[] getWinCounts() {
         return winCounts;
