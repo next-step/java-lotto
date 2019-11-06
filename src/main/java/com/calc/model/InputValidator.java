@@ -1,44 +1,57 @@
 package com.calc.model;
 
+import com.calc.constant.StringAddCalculatorConstant;
+
 public class InputValidator {
 
 
-    private static final String INVALID_MESSAGE = "숫자가 아니거나 음수입니다.";
-    private static final String STRING_ZERO_NUMBER = "0";
+    private static final String INVALID_NUMBER_MESSAGE = "숫자가 아닙니다.";
+    private static final String NEGATIVE_NUMBER_MESSAGE = "입력 된 값이 음수입니다.";
     private static final String EMPTY_STRING = "";
 
-    public String isNull(String inputValue) {
+    public String validateNullAndEmpty(String inputValue) {
+        if (isNull(inputValue)) {
+            return StringAddCalculatorConstant.STRING_ZERO_NUMBER;
+        }
+
+        if (isEmpty(inputValue)) {
+            return StringAddCalculatorConstant.STRING_ZERO_NUMBER;
+        }
+
+        return inputValue;
+    }
+
+    private boolean isNull(String inputValue) {
         if (inputValue == null) {
-            return STRING_ZERO_NUMBER;
+            return true;
         }
 
-        return inputValue;
+        return false;
     }
 
-    public String isEmpty(String inputValue) {
+    private boolean isEmpty(String inputValue) {
         if (EMPTY_STRING.equals(inputValue)) {
-            return STRING_ZERO_NUMBER;
+            return true;
         }
 
-        return inputValue;
-    }
-
-    public String validate(String invalidValue) {
-        int result = isStringNumber(invalidValue);
-
-        if (result < 0) {
-            throw new RuntimeException(INVALID_MESSAGE);
-        }
-
-        return String.valueOf(result);
+        return false;
     }
 
     private int isStringNumber(String inputValue) {
         try {
             return Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
-            throw new RuntimeException(INVALID_MESSAGE);
+            throw new RuntimeException(INVALID_NUMBER_MESSAGE);
         }
     }
 
+    public int validateStringNumber(String stringNumber) {
+        int result = isStringNumber(stringNumber);
+
+        if (StringAddCalculatorConstant.ZERO_NUMBER > result) {
+            throw new RuntimeException(NEGATIVE_NUMBER_MESSAGE);
+        }
+
+        return result;
+    }
 }

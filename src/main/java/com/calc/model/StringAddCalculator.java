@@ -1,15 +1,21 @@
 package com.calc.model;
 
+import com.calc.constant.StringAddCalculatorConstant;
+
 public class StringAddCalculator {
 
-    private static final int ZERO_NUMBER = 0;
-
     public int add(String inputValue) {
+        InputValidator inputValidator = new InputValidator();
+        inputValue = inputValidator.validateNullAndEmpty(inputValue);
+
+        if (StringAddCalculatorConstant.STRING_ZERO_NUMBER.equals(inputValue)) {
+            return StringAddCalculatorConstant.ZERO_NUMBER;
+        }
 
         String[] inputValues = inputValue.split(",|:");
-        int result = ZERO_NUMBER;
-        for (String number : inputValues) {
-            result += Integer.parseInt(number);
+        int result = StringAddCalculatorConstant.ZERO_NUMBER;
+        for (String stringNumber : inputValues) {
+            result += inputValidator.validateStringNumber(stringNumber);
         }
 
         return result;
