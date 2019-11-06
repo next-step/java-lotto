@@ -1,5 +1,9 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -28,20 +32,9 @@ public enum Rank {
         if (SECOND.getCountOfMatch() == countOfMatch || THIRD.getCountOfMatch() == countOfMatch) {
             return validateBonus(matchBonus);
         }
-        // ... indent 1..어떻게..해야할까요?
-        for (Rank rank : values()) {
-            if (getRankValue(rank, countOfMatch) != null) {
-                return getRankValue(rank, countOfMatch);
-            }
-        }
-        return null;
-    }
-
-    public static Rank getRankValue(Rank rank, int countOfMatch) {
-        if (rank.getCountOfMatch() == countOfMatch) {
-            return rank;
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(r -> r.getRankValue(r, countOfMatch) != null).findAny()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static Rank validateBonus(boolean matchBonus) {
@@ -49,5 +42,12 @@ public enum Rank {
             return SECOND;
         }
         return THIRD;
+    }
+
+    public Rank getRankValue(Rank rank, int countOfMatch) {
+        if (rank.getCountOfMatch() == countOfMatch) {
+            return rank;
+        }
+        return null;
     }
 }
