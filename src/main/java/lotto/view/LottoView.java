@@ -67,12 +67,10 @@ public class LottoView {
 
     private String getNumbersText(LottoNumbers lottoNumbers) {
 
-        String numbersText = lottoNumbers.getNumbers()
+        return lottoNumbers.getValue()
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
-
-        return String.format(LOTTO_NUMBER_FORMAT, numbersText, lottoNumbers.getBonusNumber());
     }
 
     public void showRankResult(LottoRankGroup rankGroup) {

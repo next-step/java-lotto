@@ -6,24 +6,20 @@ public class BonusNumber {
 
     private int number;
 
-    public BonusNumber(int number) {
+    BonusNumber(int number) {
         this.number = number;
     }
 
-    public int getValue() {
+    boolean hasMatchedNumber(LottoNumbers lottoNumbers) {
+        for (Integer lottoNumber : lottoNumbers.getValue()) {
+            if (lottoNumber == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    int getValue() {
         return number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BonusNumber that = (BonusNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 }

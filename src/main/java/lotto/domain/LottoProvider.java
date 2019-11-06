@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,27 +28,34 @@ public class LottoProvider {
         return shuffledNumbers;
     }
 
-    public static Lotto create(List<Integer> numbers, int bonusNumber) {
-        return new Lotto(new LottoNumbers(numbers), new BonusNumber(bonusNumber));
+    public static WinningLotto createWinningLotto(List<Integer> numbers, int bonusNumber) {
+        return new WinningLotto(createLotto(numbers), new BonusNumber(bonusNumber));
+    }
+
+    public static Lotto createLotto(Integer[] numbers) {
+        return createLotto(Arrays.asList(numbers));
+    }
+
+    public static Lotto createLotto(List<Integer> numbers) {
+        return new Lotto(new LottoNumbers(numbers));
     }
 
     public static List<Lotto> createLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoProvider.create());
+            lottos.add(LottoProvider.createLotto());
         }
         return lottos;
     }
 
-    private static Lotto create() {
+    private static Lotto createLotto() {
         List<Integer> shuffledNumbers = getShuffledNumbers();
         List<Integer> numbers = shuffledNumbers.stream()
                 .limit(NUMBERS_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
-        int bonusNumber = shuffledNumbers.get(shuffledNumbers.size() - 1);
 
-        return create(numbers, bonusNumber);
+        return createLotto(numbers);
     }
 }

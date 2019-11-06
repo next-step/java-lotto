@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoProvider;
-import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -16,22 +13,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    private static final int LOTTO_COUNT = 5;
     private Lottos lottos;
-    private Lotto winningLotto;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
-        winningLotto = LottoProvider.create(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        winningLotto = LottoProvider.createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         List<Lotto> rawLottos = new ArrayList<>();
-        rawLottos.add(winningLotto);
-        rawLottos.add(LottoProvider.create(Arrays.asList(1, 2, 3, 4, 5, 8), 7));
-        rawLottos.add(LottoProvider.create(Arrays.asList(1, 2, 3, 4, 5, 8), 10));
-        rawLottos.add(LottoProvider.create(Arrays.asList(1, 2, 3, 4, 9, 8), 7));
-        rawLottos.add(LottoProvider.create(Arrays.asList(1, 2, 3, 10, 9, 8), 7));
-        rawLottos.add(LottoProvider.create(Arrays.asList(1, 2, 11, 10, 9, 8), 7));
-        rawLottos.add(LottoProvider.create(Arrays.asList(1, 2, 11, 10, 9, 8), 7));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 9, 8)));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 10, 9, 8)));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 11, 10, 9, 8)));
+        rawLottos.add(LottoProvider.createLotto(Arrays.asList(1, 2, 11, 10, 9, 8)));
         lottos = new Lottos(rawLottos);
     }
 

@@ -18,11 +18,11 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public LottoRankGroup compareTo(Lotto winningLotto) {
+    public LottoRankGroup compareTo(WinningLotto winningLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (Lotto each : lottos) {
-            lottoRanks.add(each.getRank(winningLotto));
+            lottoRanks.add(winningLotto.compareNumbersTo(each));
         }
 
         Map<LottoRank, Long> rankGroup = lottoRanks

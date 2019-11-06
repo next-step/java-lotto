@@ -11,33 +11,26 @@ public class LottoNumbers {
     public static final String LESS_THAN_NUMBER_COUNT_ERROR = "입력된 번호의 개수가 너무 적습니다. 6개의 번호를 입력해주세요.";
     public static final String DUPLICATED_NUMBER_ERROR = "로또 번호는 중복될 수 없습니다.";
     public static final String INVALID_RANGE_NUMBER_ERROR = "로또 번호는 1 ~ 45 사이의 숫자만 입력가능합니다.";
-    public static final String DUPLICATED_BONUS_NUMBER_ERROR = "보너스 번호는 중복될 수 없습니다.";
 
     public static final int NUMBERS_SIZE = 6;
     public static final int MAX_NUMBER = 45;
     public static final int MIN_NUMBER = 1;
 
     private final List<Integer> numbers;
-    private final int bonusNumber;
 
-    public LottoNumbers(List<Integer> numbers, int bonusNumber) {
-        assertValidNumbers(numbers, bonusNumber);
+    public LottoNumbers(List<Integer> numbers) {
+        assertValidNumbers(numbers);
         this.numbers = numbers;
-        this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getValue() {
         return new ArrayList<>(numbers);
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
-    }
-
-    private void assertValidNumbers(List<Integer> numbers, int bonusNumber) {
+    private void assertValidNumbers(List<Integer> numbers) {
         assertSize(numbers);
         assertValidRange(numbers);
-        assertUnique(numbers, bonusNumber);
+        assertUnique(numbers);
     }
 
     private void assertSize(List<Integer> numbers) {
@@ -62,14 +55,14 @@ public class LottoNumbers {
         }
     }
 
-    private void assertUnique(List<Integer> numbers, int bonusNumber) {
+    private void assertUnique(List<Integer> numbers) {
         Set<Integer> uniqueNumberSet = new HashSet<>(numbers);
         if (uniqueNumberSet.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
 
-        if (uniqueNumberSet.contains(bonusNumber)) {
+        /*if (uniqueNumberSet.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_ERROR);
-        }
+        }*/
     }
 }

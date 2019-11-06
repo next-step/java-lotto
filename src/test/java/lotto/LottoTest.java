@@ -1,76 +1,79 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoRank;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
 
 public class LottoTest {
 
-    private Lotto firstPlaceNumber;
-    private Lotto secondPlaceNumber;
-    private Lotto thirdPlaceNumber;
-    private Lotto fourthPlaceNumber;
-    private Lotto notMatchNumber;
-    private Lotto winnerLotto;
+    private WinningLotto winnerLotto;
+    private List<Integer> winnerNumbers;
 
     @BeforeEach
     void setUp() {
-        List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-        winnerLotto = new Lotto(new LottoNumbers(winnerNumbers,7));
-        firstPlaceNumber = new Lotto(new LottoNumbers(winnerNumbers,7));
-        secondPlaceNumber = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 40), 7));
-        thirdPlaceNumber = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 20, 40), 8));
-        fourthPlaceNumber = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 3, 12, 20, 40), 8));
-        notMatchNumber = new Lotto(new LottoNumbers(Arrays.asList(1, 2, 9, 12, 20, 40), 8));
+        winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        winnerLotto = LottoProvider.createWinningLotto(winnerNumbers, 7);
     }
 
     @Test
     void matchLottoNumberTest() {
-        assertThat(firstPlaceNumber.getRank(winnerLotto.getLottoNumbers())).isEqualTo(LottoRank.FIRST);
-        assertThat(secondPlaceNumber.getRank(winnerLotto.getLottoNumbers())).isEqualTo(LottoRank.SECOND);
-        assertThat(thirdPlaceNumber.getRank(winnerLotto.getLottoNumbers())).isEqualTo(LottoRank.THIRD);
-        assertThat(fourthPlaceNumber.getRank(winnerLotto.getLottoNumbers())).isEqualTo(LottoRank.FOURTH);
-        assertThat(notMatchNumber.getRank(winnerLotto.getLottoNumbers())).isEqualTo(LottoRank.NOT_MATCH);
-    }
-
-    @Test
-    void createLottoNumberTest() {
-        assertThat(new Lotto().getLottoNumbers().getNumbers()).isEqualTo(6);
+        assertThat(winnerLotto.compareNumbersTo(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(LottoRank.FIRST);
+        assertThat(winnerLotto.compareNumbersTo(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(LottoRank.SECOND);
+        assertThat(winnerLotto.compareNumbersTo(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 40)))).isEqualTo(LottoRank.THIRD);
+        assertThat(winnerLotto.compareNumbersTo(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 20, 40)))).isEqualTo(LottoRank.FOURTH);
+        assertThat(winnerLotto.compareNumbersTo(LottoProvider.createLotto(Arrays.asList(1, 2, 9, 12, 20, 40)))).isEqualTo(LottoRank.NOT_MATCH);
     }
 
     @Test
     void invalidNumberTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 8);
+            LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         }).withMessage(LottoNumbers.GRATER_THAN_NUMBER_COUNT_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5), 8);
+            LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5));
         }).withMessage(LottoNumbers.LESS_THAN_NUMBER_COUNT_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 5), 8);
+            LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 5));
         }).withMessage(LottoNumbers.DUPLICATED_NUMBER_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(-1, 2, 3, 4, 5, 6), 8);
+            LottoProvider.createLotto(Arrays.asList(-1, 2, 3, 4, 5, 6));
         }).withMessage(LottoNumbers.INVALID_RANGE_NUMBER_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 46), 8);
+            LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 46));
         }).withMessage(LottoNumbers.INVALID_RANGE_NUMBER_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
-        }).withMessage(LottoNumbers.DUPLICATED_BONUS_NUMBER_ERROR);
+            LottoProvider.createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+        }).withMessage(WinningLotto.DUPLICATED_BONUS_NUMBER_ERROR);
+    }
+
+    private class LottoArgumentsProvider implements ArgumentsProvider {
+
+        @Override
+        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+            return Stream.of(
+                    Arguments.of(LottoProvider.createLotto(winnerNumbers)),
+                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 40))),
+                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 20, 40))),
+                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 12, 20, 40))),
+                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 9, 12, 20, 40)))
+            );
+        }
     }
 }

@@ -45,8 +45,9 @@ public class LottoMachine {
     private void findWinningLotto(LottoView lottoView, Money money, Lottos lottos) {
         List<Integer> winningNumbers = lottoView.getWinningNumbers();
         int winningBonusNumber = lottoView.getWinningBonusNumber();
+        WinningLotto winningLotto = LottoProvider.createWinningLotto(winningNumbers, winningBonusNumber);
 
-        LottoRankGroup rankGroup = lottos.getRankGroup(new LottoNumbers(winningNumbers, winningBonusNumber));
+        LottoRankGroup rankGroup = lottos.compareTo(winningLotto);
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));
