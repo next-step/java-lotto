@@ -1,4 +1,4 @@
-package com.calc;
+package com.calc.model;
 
 import com.calc.model.InputValidator;
 import org.junit.jupiter.api.BeforeEach;
