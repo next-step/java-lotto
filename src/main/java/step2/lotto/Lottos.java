@@ -1,15 +1,18 @@
 package step2.lotto;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import step2.statistics.DefaultLottoStatistics;
 
 public class Lottos {
+    public static final Lottos EMTPY = new Lottos(Collections.EMPTY_LIST);
+    public static final List<Integer> MATCH_NUMBER_COUNT_TO_WIN = Collections.unmodifiableList(
+            Arrays.asList(3, 4, 5, 6));
+
     private final List<Lotto> lottos;
 
     public Lottos(final Lotto... lottos) {
@@ -27,27 +30,23 @@ public class Lottos {
     }
 
     public DefaultLottoStatistics stats(final List<Integer> winNumbers) {
-        final Map<Integer, List<Lotto>> collect = Stream.of(3, 4, 5, 6)
-                                                        .collect(Collectors.toMap(i -> i,
-                                                                                  i -> get(winNumbers, i),
-                                                                                  (a, b) -> {
-                                                                                      final List<Lotto> objects = new ArrayList<>();
-                                                                                      objects.addAll(a);
-                                                                                      objects.addAll(b);
-                                                                                      return objects;
-                                                                                  }));
+        final Map<Integer, Lottos> collect = MATCH_NUMBER_COUNT_TO_WIN
+                .stream()
+                .collect(Collectors.toMap(i -> i,
+                                          i -> filterByMatchCount(winNumbers, i)));
 
         return new DefaultLottoStatistics(collect);
 
     }
 
-    private List<Lotto> get(final List<Integer> winNumbers, final int boundInclusive) {
-        final List<Lotto> collect = lottos.stream()
-                                          .filter(lotto -> lotto.matches(winNumbers, boundInclusive))
-                                          .collect(Collectors.toList());
+    public int size() {
+        return lottos.size();
+    }
 
-        return collect;
-
+    private Lottos filterByMatchCount(final List<Integer> winNumbers, final int boundInclusive) {
+        return new Lottos(lottos.stream()
+                                .filter(lotto -> lotto.matches(winNumbers, boundInclusive))
+                                .collect(Collectors.toList()));
     }
 
     @Override
@@ -55,5 +54,9 @@ public class Lottos {
         return lottos.stream()
                      .map(Object::toString)
                      .collect(Collectors.joining("\n"));
+    }
+
+    public long priceSum() {
+        return lottos.stream().map(Lotto::getPrice).mapToLong(Integer::longValue).sum();
     }
 }

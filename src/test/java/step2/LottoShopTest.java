@@ -16,7 +16,7 @@ class LottoShopTest {
     private final List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     @Test
-    @DisplayName("can sell auto number lotto")
+    @DisplayName("can create valid lotto number")
     void test1() {
         final LottoShop lottoShopSellsAlwaysSameLottoNumbers = LottoShopFactory.alwaysSame(lottoNumbers);
         final Lotto lotto = lottoShopSellsAlwaysSameLottoNumbers.buyAuto();

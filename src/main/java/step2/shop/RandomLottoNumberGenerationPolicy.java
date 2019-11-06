@@ -5,11 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class RandomLottoNumberGenerationPolicy implements LottoNumberGenerationPolicy {
-    private static final int NUMBER_SIZE = 6;
-    private static final int NUMBER_LOWER_BOUND = 1;
-    private static final int NUMBER_UPPER_BOUND = 45;
+import static step2.lotto.LottoConstant.LOTTO_NUMBER_LENGTH;
+import static step2.lotto.LottoConstant.LOTTO_NUMBER_LOWER_BOUND;
+import static step2.lotto.LottoConstant.LOTTO_NUMBER_UPPER_BOUND;
 
+class RandomLottoNumberGenerationPolicy implements LottoNumberGenerationPolicy {
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
     RandomLottoNumberGenerationPolicy() {
@@ -17,8 +17,8 @@ class RandomLottoNumberGenerationPolicy implements LottoNumberGenerationPolicy {
 
     @Override
     public List<Integer> nextSix() {
-        return Stream.generate(() -> random.nextInt(NUMBER_LOWER_BOUND, NUMBER_UPPER_BOUND + 1))
-                     .limit(NUMBER_SIZE)
+        return Stream.generate(() -> random.nextInt(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND + 1))
+                     .limit(LOTTO_NUMBER_LENGTH)
                      .collect(Collectors.toList());
     }
 }

@@ -1,36 +1,40 @@
 package step2.statistics;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import step2.lotto.Lotto;
+import step2.lotto.Lottos;
+
+import static step2.lotto.Lottos.MATCH_NUMBER_COUNT_TO_WIN;
 
 public class DefaultLottoStatistics implements LottoStatistics {
-    private final Map<Integer, Integer> priceMap;
-    private final Map<Integer, List<Lotto>> rawData;
+    private final Map<Integer, Long> priceMap;
+    private final Map<Integer, Lottos> lottosMap;
 
-    public DefaultLottoStatistics(final Map<Integer, List<Lotto>> rawData) {
+    public DefaultLottoStatistics(final Map<Integer, Lottos> lottosMap) {
         this.priceMap = new HashMap<>();
-        this.rawData = rawData;
+        this.lottosMap = lottosMap;
 
-        priceMap.put(3, 5000);
-        priceMap.put(4, 50000);
-        priceMap.put(5, 1500000);
-        priceMap.put(6, 2000000000);
+        priceMap.put(3, 5_000L);
+        priceMap.put(4, 50_000L);
+        priceMap.put(5, 1_500_000L);
+        priceMap.put(6, 2_000_000_000L);
     }
 
     public int match(final int bound) {
-        return rawData.getOrDefault(bound, new ArrayList<>()).size();
+        return lottosMap.getOrDefault(bound, Lottos.EMTPY).size();
     }
 
-    public int priceSum(final int bound) {
-        return rawData.getOrDefault(bound, new ArrayList<>())
-                      .stream()
-                      .map(Lotto::getPrice)
-                      .mapToInt(Integer::intValue)
-                      .map(val -> val * priceMap.get(bound))
-                      .sum();
+    public long priceSum(final int bound) {
+        final long basePrice = lottosMap.getOrDefault(bound, Lottos.EMTPY).priceSum();
+        final long winMultiplyFactor = priceMap.getOrDefault(bound, 0L);
+        return basePrice * winMultiplyFactor;
+    }
+
+    public long priceSum() {
+        return MATCH_NUMBER_COUNT_TO_WIN.stream()
+                                        .map(this::priceSum)
+                                        .mapToLong(Long::longValue)
+                                        .sum();
     }
 }

@@ -46,10 +46,6 @@ public class ManyAutoNumberLottoScenario {
               .map(i -> String.format("%s개 일치 (%s원)- %s개", i, lottoStatistics.priceSum(i), lottoStatistics.match(i)))
               .forEach(output::write);
 
-        final int winPriceSum = Stream.of(3, 4, 5, 6)
-                                      .map(lottoStatistics::priceSum)
-                                      .mapToInt(Integer::intValue)
-                                      .sum();
-        output.write(String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", winPriceSum / price));
+        output.write(String.format("총 수익률은 %s%%입니다.", lottoStatistics.priceSum() / price));
     }
 }
