@@ -43,14 +43,14 @@ public class CalculatorTest {
     }
 
     @Test
-    void 음수_계산(){
+    void 음수_계산() {
         assertThatThrownBy(() -> {
             calculator.calculateText("//;\n-1;2;3");
         }).isInstanceOf(RuntimeException.class);
     }
 
     @Test
-    void 구분자_이외의_문자_계산(){
+    void 구분자_이외의_문자_계산() {
         assertThatThrownBy(() -> {
             calculator.calculateText("//;\n-1&2;3");
         }).isInstanceOf(RuntimeException.class);

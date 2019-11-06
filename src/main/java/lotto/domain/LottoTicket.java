@@ -27,7 +27,7 @@ public class LottoTicket {
         return Rank.findByMatchCountAndBonusMatch(matchCount, bonusMatch);
     }
 
-    private int calculateMatchCount(LottoTicket winNumbers){
+    private int calculateMatchCount(LottoTicket winNumbers) {
         return (int) numbers.stream()
                 .filter(number -> winNumbers.contains(number))
                 .count();
