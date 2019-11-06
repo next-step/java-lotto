@@ -25,20 +25,29 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        Rank[] ranks = values();
-        for (Rank rank : ranks) {
-            if (rank.getCountOfMatch() == countOfMatch) {
-                if (rank.getCountOfMatch() == 5) {
-                    if (matchBonus) {
-                        return SECOND;
-                    } else {
-                        return THIRD;
-                    }
-                }
-                return rank;
+        if (SECOND.getCountOfMatch() == countOfMatch || THIRD.getCountOfMatch() == countOfMatch) {
+            return validateBonus(matchBonus);
+        }
+        // ... indent 1..어떻게..해야할까요?
+        for (Rank rank : values()) {
+            if (getRankValue(rank, countOfMatch) != null) {
+                return getRankValue(rank, countOfMatch);
             }
-
         }
         return null;
+    }
+
+    public static Rank getRankValue(Rank rank, int countOfMatch) {
+        if (rank.getCountOfMatch() == countOfMatch) {
+            return rank;
+        }
+        return null;
+    }
+
+    public static Rank validateBonus(boolean matchBonus) {
+        if (matchBonus) {
+            return SECOND;
+        }
+        return THIRD;
     }
 }

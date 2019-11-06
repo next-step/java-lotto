@@ -20,4 +20,12 @@ public class RankTest {
         assertThat(Rank.valueOf(5, true)).isEqualTo(Rank.SECOND);
         assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
     }
+
+    @Test
+    void matchBonusTest() {
+        assertThat(Rank.validateBonus(true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.validateBonus(false)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.valueOf(5, false)).isEqualTo(Rank.THIRD);
+        assertThat(Rank.valueOf(6, false)).isEqualTo(Rank.FIRST);
+    }
 }
