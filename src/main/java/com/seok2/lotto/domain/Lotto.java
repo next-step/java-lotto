@@ -32,7 +32,7 @@ public class Lotto {
         if(numbers.size() != count){
             throw new DuplicateLottoNumberException();
         }
-        if (count > LOTTO_LENGTH) {
+        if (count != LOTTO_LENGTH) {
             throw new OutOfLottoLengthException();
         }
     }
