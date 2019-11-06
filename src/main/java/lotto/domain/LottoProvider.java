@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumbers.*;
 
-public class LottoNumberProvider {
+public class LottoProvider {
 
     private static final List<Integer> numbers = new ArrayList<>();
 
@@ -22,18 +22,32 @@ public class LottoNumberProvider {
     }
 
     private static List<Integer> getShuffledNumbers() {
-        List<Integer> shuffledNumbers = LottoNumberProvider.getNumbers();
+        List<Integer> shuffledNumbers = LottoProvider.getNumbers();
         Collections.shuffle(shuffledNumbers);
         return shuffledNumbers;
     }
 
-    public static LottoNumbers createLottoNumber() {
+    public static Lotto create(List<Integer> numbers, int bonusNumber) {
+        return new Lotto(new LottoNumbers(numbers), new BonusNumber(bonusNumber));
+    }
+
+    public static List<Lotto> createLottos(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            lottos.add(LottoProvider.create());
+        }
+        return lottos;
+    }
+
+    private static Lotto create() {
         List<Integer> shuffledNumbers = getShuffledNumbers();
         List<Integer> numbers = shuffledNumbers.stream()
                 .limit(NUMBERS_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
+        int bonusNumber = shuffledNumbers.get(shuffledNumbers.size() - 1);
 
-        return new LottoNumbers(numbers, shuffledNumbers.get(shuffledNumbers.size() - 1));
+        return create(numbers, bonusNumber);
     }
 }

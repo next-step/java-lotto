@@ -11,23 +11,18 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(int count) {
-        this.lottos = createLottos(count);
+        this(LottoProvider.createLottos(count));
     }
 
-    private List<Lotto> createLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public LottoRankGroup getRankGroup(LottoNumbers winningLottoNumber) {
+    public LottoRankGroup compareTo(Lotto winningLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (Lotto each : lottos) {
-            lottoRanks.add(each.getRank(winningLottoNumber));
+            lottoRanks.add(each.getRank(winningLotto));
         }
 
         Map<LottoRank, Long> rankGroup = lottoRanks
