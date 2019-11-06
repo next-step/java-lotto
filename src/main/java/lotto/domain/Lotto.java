@@ -1,35 +1,33 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class Lotto {
 
-    private final LottoNumber lottoNumber;
+    private final LottoNumbers lottoNumbers;
 
     public Lotto() {
         this(LottoNumberProvider.createLottoNumber());
     }
 
-    public Lotto(LottoNumber lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoRank getRank(LottoNumber winningLottoNumber) {
+    public LottoRank getRank(LottoNumbers winningLottoNumber) {
         return LottoRank.find(matchNumberCount(winningLottoNumber), matchBonusNumber(winningLottoNumber));
     }
 
-    public LottoNumber getLottoNumber() {
-        return lottoNumber;
+    public LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
     }
 
-    private long matchNumberCount(LottoNumber winningLottoNumber) {
+    private long matchNumberCount(LottoNumbers winningLottoNumber) {
         return winningLottoNumber.getNumbers()
                 .stream()
-                .filter(lottoNumber.getNumbers()::contains)
+                .filter(lottoNumbers.getNumbers()::contains)
                 .count();
     }
 
-    private boolean matchBonusNumber(LottoNumber winningLottoNumber) {
-        return lottoNumber.getBonusNumber() == winningLottoNumber.getBonusNumber();
+    private boolean matchBonusNumber(LottoNumbers winningLottoNumber) {
+        return lottoNumbers.getBonusNumber() == winningLottoNumber.getBonusNumber();
     }
 }

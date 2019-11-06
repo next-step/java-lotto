@@ -23,7 +23,7 @@ public class Lottos {
         return lottos;
     }
 
-    public LottoRankGroup getRankGroup(LottoNumber winningLottoNumber) {
+    public LottoRankGroup getRankGroup(LottoNumbers winningLottoNumber) {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (Lotto each : lottos) {

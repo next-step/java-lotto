@@ -6,7 +6,6 @@ import lotto.domain.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoView {
@@ -62,18 +61,18 @@ public class LottoView {
         drawText(String.format(PURCHASE_RESULT_TEXT, lottos.size()));
 
         for (Lotto each : lottos.getValue()) {
-            drawText(getNumbersText(each.getLottoNumber()));
+            drawText(getNumbersText(each.getLottoNumbers()));
         }
     }
 
-    private String getNumbersText(LottoNumber lottoNumber) {
+    private String getNumbersText(LottoNumbers lottoNumbers) {
 
-        String numbersText = lottoNumber.getNumbers()
+        String numbersText = lottoNumbers.getNumbers()
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
 
-        return String.format(LOTTO_NUMBER_FORMAT, numbersText, lottoNumber.getBonusNumber());
+        return String.format(LOTTO_NUMBER_FORMAT, numbersText, lottoNumbers.getBonusNumber());
     }
 
     public void showRankResult(LottoRankGroup rankGroup) {

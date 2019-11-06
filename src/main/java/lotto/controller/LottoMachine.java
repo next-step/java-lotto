@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.LottoView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoMachine {
 
@@ -47,7 +46,7 @@ public class LottoMachine {
         List<Integer> winningNumbers = lottoView.getWinningNumbers();
         int winningBonusNumber = lottoView.getWinningBonusNumber();
 
-        LottoRankGroup rankGroup = lottos.getRankGroup(new LottoNumber(winningNumbers, winningBonusNumber));
+        LottoRankGroup rankGroup = lottos.getRankGroup(new LottoNumbers(winningNumbers, winningBonusNumber));
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumber.*;
+import static lotto.domain.LottoNumbers.*;
 
 public class LottoNumberProvider {
 
@@ -27,13 +27,13 @@ public class LottoNumberProvider {
         return shuffledNumbers;
     }
 
-    public static LottoNumber createLottoNumber() {
+    public static LottoNumbers createLottoNumber() {
         List<Integer> shuffledNumbers = getShuffledNumbers();
         List<Integer> numbers = shuffledNumbers.stream()
                 .limit(NUMBERS_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
 
-        return new LottoNumber(numbers, shuffledNumbers.get(shuffledNumbers.size() - 1));
+        return new LottoNumbers(numbers, shuffledNumbers.get(shuffledNumbers.size() - 1));
     }
 }
