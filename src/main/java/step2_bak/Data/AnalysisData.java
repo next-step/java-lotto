@@ -1,6 +1,6 @@
-package step2.Data;
+package step2_bak.Data;
 
-import step2.Prize;
+import step2_bak.Prize;
 
 import java.util.ArrayList;
 import java.util.List;

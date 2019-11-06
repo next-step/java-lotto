@@ -1,6 +1,6 @@
-package step2.View;
+package step2_bak.View;
 
-import step2.Winning;
+import step2_bak.Winning;
 
 import java.util.Arrays;
 import java.util.Scanner;
