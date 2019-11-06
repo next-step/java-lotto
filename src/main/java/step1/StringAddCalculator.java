@@ -4,11 +4,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+
+  private static final String DEFAULT_SPLIT_REGEX = ",|:";
+  private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
+  private static final int CUSTOM_DELIMITER_SPLIT_GROUP = 1;
+  private static final int CUSTOM_DELIMITER_SPLIT_VALUE = 2;
   private int result = 0;
   private String inputValue;
   private String[] splitedValue;
-  private static final String DEFAULT_SPLIT_REGEX = ",|:";
-  private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
 
   public StringAddCalculator(String value) {
     this.inputValue = value;
@@ -19,46 +22,49 @@ public class StringAddCalculator {
   }
 
   public int add(String arg) {
-    if(isArgumentValid(arg)) return result;
-    if(isCustomSplitRegex(arg)) return sumSplitedValue(splitedValue);
-    return sumSplitedValue(arg.split(DEFAULT_SPLIT_REGEX));
+    if (isArgumentInvalid(arg)) {
+      return result;
+    }
+    if (isCustomSplitRegex(arg)) {
+      return sumSplitedArr(splitedValue);
+    }
+    return sumSplitedArr(arg.split(DEFAULT_SPLIT_REGEX));
   }
 
-  private boolean isArgumentValid(String arg) {
-    return arg == null || arg.length() == 0;
+  private boolean isArgumentInvalid(String arg) {
+    return (arg == null || arg.length() == 0);
   }
 
   private boolean isCustomSplitRegex(String arg) {
     Matcher m = Pattern.compile(CUSTOM_SPLIT_REGEX).matcher(arg);
     if (m.find()) {
-      String customDelimiter = m.group(1);
-      splitedValue =  m.group(2).split(customDelimiter);
+      String customDelimiter = m.group(CUSTOM_DELIMITER_SPLIT_GROUP);
+      splitedValue = m.group(CUSTOM_DELIMITER_SPLIT_VALUE).split(customDelimiter);
       return true;
     }
     return false;
   }
 
-
-  private int sumSplitedValue(String[] splitedValue) {
-    int rtn = 0;
-    for(String val : splitedValue) {
-      rtn += parsedSplitedValue(val);
+  private int sumSplitedArr(String[] splitedArr) {
+    int returnValue = 0;
+    for (String val : splitedArr) {
+      returnValue += parsedSplitedValue(val);
     }
-    return rtn;
+    return returnValue;
   }
 
-  private int parsedSplitedValue(String arg){
-    int rtn;
-    try{
-      rtn = Integer.parseInt(arg);
-    }catch(IllegalArgumentException e){
-      throw new IllegalArgumentException();
+  private int parsedSplitedValue(String arg) {
+    int returnValue;
+    try {
+      returnValue = Integer.parseInt(arg);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("숫자형 변환에 실패하였습니다.");
     }
 
-    if(rtn < 0){
-      throw new IllegalArgumentException();
+    if (returnValue < 0) {
+      throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
     }
-    return rtn;
+    return returnValue;
   }
 }
 
