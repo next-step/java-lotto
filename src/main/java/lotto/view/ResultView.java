@@ -27,10 +27,12 @@ public class ResultView {
 
     public void showStatistics(Map<WinningRanking, Long> winningTickets) {
         out.println("당첨 통계\n---------");
-        for (WinningRanking ranking : WinningRanking.values()) {
+        for (WinningRanking ranking : WinningRanking.sortedValues()) {
+            String bonusMessage = ranking.hasBonus() ? ", 보너스 볼 일치" : " ";
             out.printf(
-                    "%d개 일치 (%d원)- %d개\n",
+                    "%d개 일치%s(%d원)- %d개\n",
                     ranking.getMatchingCount(),
+                    bonusMessage,
                     ranking.getReward(),
                     winningTickets.getOrDefault(ranking, 0L));
         }

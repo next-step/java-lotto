@@ -27,11 +27,11 @@ public class LotteryTicket {
         return Collections.unmodifiableList(numbers);
     }
 
-    public WinningRanking getRanking(List<Integer> winningNumbers) {
+    public WinningRanking getRanking(List<Integer> winningNumbers, int bonusNumber) {
         long matchingCount = numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
-        return WinningRanking.getByMatchingCount(matchingCount);
+        return WinningRanking.valueOf(matchingCount, numbers.contains(bonusNumber));
     }
 
     private void validateSize(List<Integer> lotteryNumbers) {

@@ -30,7 +30,9 @@ public class LotteryController {
         List<LotteryTicket> tickets = lotteryGenerator.generate(amount);
         resultView.showTickets(tickets);
 
-        WinningNumbers winningNumbers = new WinningNumbers(inputView.receiveWinningNumbers());
+        WinningNumbers winningNumbers = new WinningNumbers(
+                inputView.receiveWinningNumbers(),
+                inputView.receiveBonusNumber());
         Map<WinningRanking, Long> winningTickets = winningNumbers.getWinningTickets(tickets);
         resultView.showStatistics(winningTickets);
         resultView.showRevenueRate(amount, winningTickets);
