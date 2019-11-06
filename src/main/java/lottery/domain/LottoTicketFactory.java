@@ -13,8 +13,6 @@ public class LottoTicketFactory {
                                                                 .boxed()
                                                                 .collect(Collectors.toList());
 
-
-
     public static List<LottoTicket> generateRandomGames(int numberOfTicket) {
         List<LottoTicket> randomGames = new ArrayList<>();
         IntStream.range(0, numberOfTicket)
