@@ -51,18 +51,26 @@ public class InputView {
         return LottoConstants.LOTTO_NUMBERS.containsAll(numbers);
     }
 
-    public static int getBonusNumber() {
+    public static int getBonusNumber(List<Integer> winNumbers) {
         System.out.println("보너스 볼을 입력해주세요.");
         int bonusNumber = scanner.nextInt();
         scanner.nextLine();
-        return checkBonusNumberInput(bonusNumber);
+        return checkBonusNumberInput(bonusNumber, winNumbers);
     }
 
-    private static int checkBonusNumberInput(int bonusNumber) {
+    private static int checkBonusNumberInput(int bonusNumber, List<Integer> winNumbers) {
         if (!isValidNumbers(Collections.singletonList(bonusNumber))) {
             throw new IllegalArgumentException("올바른 로또 번호가 아닙니다.");
         }
 
+        if (isAlreadyPicked(bonusNumber, winNumbers)) {
+            throw new IllegalArgumentException("이미 뽑힌 당첨 번호는 보너스 번호로 입력할 수 없습니다.");
+        }
+
         return bonusNumber;
+    }
+
+    private static boolean isAlreadyPicked(int bonusNumber, List<Integer> winNumbers) {
+        return winNumbers.contains(bonusNumber);
     }
 }
