@@ -1,5 +1,7 @@
 package com.seok2.lotto.domain;
 
+import com.seok2.lotto.exception.MinimumLotteriesException;
+import com.seok2.lotto.exception.OutOfLottoLengthException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -9,6 +11,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 class LottoNumberTest {
@@ -23,7 +26,8 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void create(int input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(input));
+        assertThatThrownBy(() -> LottoNumber.of(input))
+            .isInstanceOf(OutOfLottoLengthException.class);
     }
 
     @ParameterizedTest

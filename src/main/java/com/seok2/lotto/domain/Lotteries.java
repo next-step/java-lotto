@@ -34,6 +34,18 @@ public class Lotteries implements Iterable<Lotto> {
         return lotteries.size();
     }
 
+    public long sizeOfAuto() {
+        return lotteries.stream()
+            .filter(Lotto::isAuto)
+            .count();
+    }
+
+    public long sizeOfManual() {
+        return lotteries.stream()
+            .filter(Lotto::isManual)
+            .count();
+    }
+
     @Override
     public Iterator<Lotto> iterator() {
         return lotteries.iterator();

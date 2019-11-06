@@ -37,7 +37,7 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("match")
-    void check(String lotto, String winning, Rank expected) {
+    void check(String lotto, String winning, int expected) {
         assertThat(Lotto.generate(lotto).match(Lotto.generate(winning))).isEqualTo(expected);
     }
 }

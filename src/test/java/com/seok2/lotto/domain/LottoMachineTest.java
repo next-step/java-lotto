@@ -1,5 +1,6 @@
 package com.seok2.lotto.domain;
 
+import com.seok2.lotto.exception.MinimumLotteriesException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoMachineTest {
@@ -24,11 +26,12 @@ class LottoMachineTest {
     @ParameterizedTest
     @MethodSource("buy")
     void buy(Money money, int expected) {
-        assertThat(LottoMachine.buy(money).size()).isEqualTo(expected);
+        assertThat(LottoMachine.buy(money, Papers.empty()).size()).isEqualTo(expected);
     }
 
     @Test
     void valid() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoMachine.buy(Money.of(500)));
+        assertThatThrownBy(() -> LottoMachine.buy(Money.of(500), Papers.empty()))
+            .isInstanceOf(MinimumLotteriesException.class);
     }
 }

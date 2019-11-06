@@ -25,7 +25,7 @@ public class Money {
         return new Money(money);
     }
 
-    protected boolean moreThanOrEquals(Money money) {
+    public boolean moreThanOrEquals(Money money) {
         return this.money.compareTo(money.money) >= ZERO_VALUE;
     }
 
@@ -43,7 +43,7 @@ public class Money {
         return Money.of(this.money.subtract(money.money));
     }
 
-    protected Money multiply(long multiplicand) {
+    public Money multiply(long multiplicand) {
         if (multiplicand == ONE_VALUE) {
             return this;
         }
@@ -71,7 +71,7 @@ public class Money {
             return false;
         }
         Money that = (Money) o;
-        return money == that.money;
+        return Objects.equals(money, that.money);
     }
 
     @Override

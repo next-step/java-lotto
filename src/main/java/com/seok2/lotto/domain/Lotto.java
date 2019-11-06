@@ -1,68 +1,41 @@
 package com.seok2.lotto.domain;
 
-import static com.seok2.common.utils.StringUtils.split;
-
-import com.seok2.lotto.exception.DuplicateLottoNumberException;
-import com.seok2.lotto.exception.OutOfLottoLengthException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final Money PRICE = Money.of(1_000);
-    private static final String NUMBERS_STRING_REGEX = "^[0-9,]+$";
-    private static final int LOTTO_LENGTH = 6;
 
-    private final List<LottoNumber> numbers;
+    private final LottoNumbers numbers;
+    private final boolean auto;
 
-    private Lotto(List<LottoNumber> numbers) {
-        validate(numbers);
+    private Lotto(LottoNumbers numbers, boolean auto) {
         this.numbers = numbers;
-    }
-
-    private void validate(List<LottoNumber> numbers) {
-        long count = numbers.stream()
-            .distinct()
-            .count();
-        if(numbers.size() != count){
-            throw new DuplicateLottoNumberException();
-        }
-        if (count != LOTTO_LENGTH) {
-            throw new OutOfLottoLengthException();
-        }
+        this.auto = auto;
     }
 
     public static Lotto generate(LottoStrategy strategy) {
-        return new Lotto(strategy.generate());
+        return new Lotto(LottoNumbers.of(strategy.generate()), true);
     }
 
     public static Lotto generate(String numbers) {
-        return new Lotto(Arrays.stream(split(numbers))
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .map(LottoNumber::of)
-            .collect(Collectors.toList()));
+        return new Lotto(LottoNumbers.of(numbers), false);
     }
 
     public int match(Lotto winning) {
-        Set<LottoNumber> intersection = new HashSet<>(winning.numbers);
-        intersection.retainAll(this.numbers);
-        return intersection.size();
+        return numbers.match(winning.numbers);
     }
 
-    public boolean contains(LottoNumber number) {
-        return numbers.contains(number);
+    public boolean contains(LottoNumber bonus) {
+        return numbers.contains(bonus);
     }
 
-    @Override
-    public String toString() {
-        Collections.sort(numbers);
-        return numbers.toString();
+    public boolean isAuto() {
+        return this.auto;
+    }
+
+    public boolean isManual() {
+        return !this.auto;
     }
 
     @Override
@@ -81,4 +54,11 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+
 }

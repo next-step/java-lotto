@@ -1,6 +1,5 @@
 package com.seok2.lotto.domain;
 
-import com.seok2.lotto.exception.LottoNumberRangeException;
 import com.seok2.lotto.exception.OutOfLottoLengthException;
 import java.util.Objects;
 import java.util.stream.IntStream;
