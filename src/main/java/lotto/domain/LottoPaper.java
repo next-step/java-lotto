@@ -1,12 +1,13 @@
 package lotto.domain;
 
-import lotto.Insights;
+import lotto.Rank;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoPaper {
-    private static final int LOTTO_VALUE = 1000;
+    private static final int BONUS_CHECK = 1;
+    private static final int SECOND_LOTTO_WIN_COUNT = 2;
 
     private List<Lotto> lottoPapers;
 
@@ -34,30 +35,19 @@ public class LottoPaper {
         this.lottoPapers.add(lotto);
     }
     
-    public void checkLottoGrade(int[] winLotto) {
+    public List<Rank> getWinningLottoRanks(int[] winLotto, int bonusNumber) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottoPapers) {
-            int checkWinNumber = lotto.checkWinNumber(winLotto);
-        }
-    }
+            int winNumberCount = lotto.checkWinNumber(winLotto);
 
-    public Map<Integer, Insights> getInsights() {
-        for (Lotto lotto : lottoPapers) {
-            int hitCount = lotto.getHitCount(1);
-            checkInsights(hitCount);
+            if (winNumberCount == SECOND_LOTTO_WIN_COUNT) {
+                int getBonusNumber = lotto.getHitCount(bonusNumber);
+                if (getBonusNumber == BONUS_CHECK) {
+                    ranks.add(Rank.valueOf(winNumberCount, true));
+                }
+            }
+            ranks.add(Rank.valueOf(winNumberCount, false));
         }
-        return Insights.insights;
-    }
-
-    public Map<Integer, Insights> checkInsights(int hitCount) {
-        if (Insights.insights.containsKey(hitCount)) {
-            Insights.insights.get(hitCount).increaseCount();
-        }
-        return Insights.insights;
-    }
-
-    public double getYield(int purchaseCount) {
-        int winnings = Insights.getTotalPrice();
-        int purchasePrice = purchaseCount * LOTTO_VALUE;
-        return (double)winnings/purchasePrice;
+        return ranks;
     }
 }

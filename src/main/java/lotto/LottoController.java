@@ -4,6 +4,7 @@ import lotto.domain.LottoPaper;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -12,8 +13,8 @@ public class LottoController {
         int count = InputView.purchaseCount();
         LottoPaper lottoPaper = new LottoPaper(count);
         printLottoNumber(lottoPaper);
-        getWinLotto(lottoPaper);
-        getInsights(lottoPaper, count);
+        List<Rank> ranks = getWinLotto(lottoPaper);
+
 
     }
 
@@ -21,20 +22,10 @@ public class LottoController {
         ResultView.printLottoNumber(lottoPaper);
     }
 
-    private void getWinLotto(LottoPaper lottoPaper) {
+    private List<Rank> getWinLotto(LottoPaper lottoPaper) {
         int[] winLotto = InputView.getWinLotto();
-        lottoPaper.checkLottoGrade(winLotto);
-    }
-
-    private void getBonusNumber() {
-        InputView.getBonusNumber();
-    }
-
-    private void getInsights(LottoPaper lottoPaper, int count) {
-        ResultView.printDescription();
-        Map<Integer, Insights> insights = lottoPaper.getInsights();
-        ResultView.printInsights(insights);
-        ResultView.printYield(lottoPaper.getYield(count));
+        int bonusNumber = InputView.getBonusNumber();
+        return lottoPaper.getWinningLottoRanks(winLotto, bonusNumber);
     }
 
 

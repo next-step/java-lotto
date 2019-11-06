@@ -9,24 +9,20 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private LottoPaper lottoPaper;
     private List<Integer> numbers;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
-        lottoPaper = new LottoPaper(3);
-        numbers = lotto.selectLottoNumber(() -> {
-            List<Integer> list = new ArrayList<>();
-            list.add(4);
-            list.add(5);
-            list.add(6);
-            list.add(1);
-            list.add(2);
-            list.add(3);
-            return list;
-        });
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+
+        lotto = new Lotto(numbers);
     }
 
     @Test
@@ -60,14 +56,5 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
         int[] testLottos = new int[] {1,2,3,7,8,9};
         assertThat(lotto.checkWinNumber(testLottos)).isEqualTo(3);
-    }
-
-    @Test
-    void checkLottoGrade() {
-        int[] winNumber = new int[] {1,2,3,4,5,6};
-        Lotto lotto = new Lotto(numbers);
-        lottoPaper.applyLotto(lotto);
-        lottoPaper.checkLottoGrade(winNumber);
-        assertThat(lotto.getHitCount(1)).isEqualTo(6);
     }
 }
