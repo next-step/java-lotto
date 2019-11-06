@@ -40,6 +40,10 @@ public enum WinningRanking {
         return matchingBonus;
     }
 
+    public boolean valuable() {
+        return reward > 0;
+    }
+
     public static WinningRanking valueOf(long matchingCount, boolean matchingBonus) {
         return Arrays.stream(WinningRanking.values())
                 .filter(winningRanking -> winningRanking.matchingCount == matchingCount)
@@ -50,7 +54,7 @@ public enum WinningRanking {
 
     public static List<WinningRanking> sortedValues() {
         return Arrays.stream(values())
-                .filter(winningRanking -> winningRanking.getReward() > 0)
+                .filter(WinningRanking::valuable)
                 .sorted(Comparator.comparingInt(WinningRanking::getReward))
                 .collect(Collectors.toList());
     }
