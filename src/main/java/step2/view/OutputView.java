@@ -4,9 +4,9 @@ import step2.domain.LottoResult;
 import step2.domain.LottoTicket;
 import step2.domain.PriceGroup;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class OutputView {
     private static final int LOTTO_PRICE = 1000;
@@ -33,7 +33,7 @@ public class OutputView {
     }
 
     private static void showBoard(LottoResult lottoResult) {
-        Map<PriceGroup, Integer> sortedResult = new TreeMap<>(lottoResult.getResult());
+        Map<PriceGroup, Integer> sortedResult = new EnumMap<>(lottoResult.getResult());
         sortedResult.forEach(OutputView::showEachBoard);
     }
 
