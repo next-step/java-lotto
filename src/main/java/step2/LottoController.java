@@ -11,6 +11,8 @@ import step2.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Collections.EMPTY_LIST;
+
 public class LottoController {
 
     public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class LottoController {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < amount; i++) {
-            LottoTicket lottoTicket = lottoMachine.issueLottoTicket();
+            LottoTicket lottoTicket = lottoMachine.issueLottoTicket(EMPTY_LIST);
             lottoTickets.add(lottoTicket);
         }
         OutputView.showBuyTickets(lottoTickets);
