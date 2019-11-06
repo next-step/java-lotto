@@ -39,12 +39,12 @@ public class LottoGameTest {
     void 당첨_확인() {
         List<LottoTicket> tickets = Arrays.asList(
                 new LottoTicket("1,2,3,4,5,7"),
-                new LottoTicket("11,12,31,14,15,17")
+                new LottoTicket("1,2,3,14,15,17")
         );
         LottoGame game = new LottoGame(tickets);
         game.doGame("1,2,3,4,5,6", 7);
 
-        double winPercent = Math.round((double) 30000000 / 2000 * 10000) / 100.0;
+        double winPercent = Math.round((double) 30005000 / 2000 * 10000) / 100.0;
 
         assertThat(game.getWinPercent()).isEqualTo(winPercent);
     }

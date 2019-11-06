@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,11 +80,11 @@ public class LottoGame {
         return statisticsStrings;
     }*/
 
-    private double calculateWinPercent() {
-        int consume = tickets.size() * TICKET_PRICE;
-        int income = calculateIncome();
+    private Double calculateWinPercent() {
+        BigDecimal consume = new BigDecimal(tickets.size() * TICKET_PRICE);
+        BigDecimal income = new BigDecimal(calculateIncome());
 
-        return Math.round((double) income / consume * 10000) / 100.0;
+        return income.divide(consume, 4, RoundingMode.FLOOR).multiply(new BigDecimal(100)).doubleValue();
     }
 
     private int calculateIncome() {
