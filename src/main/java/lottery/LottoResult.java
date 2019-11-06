@@ -7,8 +7,8 @@ public class LottoResult {
     private static final String ILLEGAL_MATCHED_COUNT = "당첨 번호와 최대 6개의 숫자까지만 일치할 수 있습니다.";
     private final Prize prize;
 
-    public LottoResult(int matchedCount) {
-        this.prize = Prize.getPrize(checkInput(matchedCount));
+    public LottoResult(int matchedCount, boolean isBonusMatched ) {
+        this.prize = Prize.getPrize(checkInput(matchedCount), isBonusMatched);
     }
 
     private int checkInput(int matchedCount) {

@@ -30,6 +30,10 @@ public class LottoTicket {
         return new ArrayList<>(CollectionUtils.intersection(lottoNumbers, winNumbers));
     }
 
+    public boolean isBonusMatched(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     private List<Integer> checkTicketValidation(Set<Integer> lottoNumbers) {
         if (!isValidSize(lottoNumbers)) {
             throw new IllegalArgumentException(ILLEGAL_TICKET_SIZE);

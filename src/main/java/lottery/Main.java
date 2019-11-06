@@ -15,7 +15,8 @@ public class Main {
         ResultView.printLottoTickets(lottoTickets);
 
         List<Integer> winNumbers = InputView.getWinNumbers();
-        LottoResults results = lottoTickets.match(winNumbers);
+        int bonusNumber = InputView.getBonusNumber();
+        LottoResults results = lottoTickets.match(winNumbers, bonusNumber);
         ResultView.printLottoResults(results);
     }
 }

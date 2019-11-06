@@ -9,7 +9,7 @@ import lottery.domain.Prize;
 
 public class LottoResults {
 
-    private static final String REPRESENT_PATTERN = "{0}개 일치 ({1}원)- {2}개\n";
+    private static final String REPRESENT_PATTERN = "{0}개 일치{1}({2}원)- {3}개\n";
     private final Map<Prize, Integer> totalResults = new EnumMap<>(Prize.class);
 
     public LottoResults(List<LottoResult> lottoResults) {
@@ -49,6 +49,13 @@ public class LottoResults {
         return totalResults.get(prize) * prize.getWinMoney();
     }
 
+    private String getBonusMessage(Prize prize) {
+        if (prize.equals(Prize.SECOND)) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
+    }
+
     @Override
     public String toString() {
         StringBuilder resultString = new StringBuilder();
@@ -58,7 +65,7 @@ public class LottoResults {
             .filter(prize -> !Prize.isFail(prize))
             .forEach(
                 prize -> resultString.append(MessageFormat.format(REPRESENT_PATTERN,
-                    prize.getMatchedNumber(), prize.getWinMoney(), totalResults.get(prize))
+                    prize.getMatchedNumber(), getBonusMessage(prize), prize.getWinMoney(), totalResults.get(prize))
                 )
             );
         return resultString.toString();
