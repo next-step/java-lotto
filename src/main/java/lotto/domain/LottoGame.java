@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -23,8 +24,10 @@ public class LottoGame {
         this.tickets = generateLottoTickets(ticketCount);
     }
 
-    public LottoGame(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+    public LottoGame(List<String> ticketTexts) {
+        this.tickets = ticketTexts.stream()
+                .map(text -> new LottoTicket(text))
+                .collect(Collectors.toList());
     }
 
     public List<String> getTicketsString() {
