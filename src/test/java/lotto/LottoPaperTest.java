@@ -38,6 +38,12 @@ public class LottoPaperTest {
     }
 
     @Test
+    void checkLottoWinNumber() {
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.getLottoNumber()).contains(1,2,3,4,5,6);
+    }
+
+    @Test
     void checkInsightsTest() {
         assertThat(lottoPaper.checkInsights(0).get(0).getCount()).isEqualTo(1);
         assertThat(lottoPaper.checkInsights(1).get(1).getCount()).isEqualTo(2);

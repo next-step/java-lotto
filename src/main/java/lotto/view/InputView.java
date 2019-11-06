@@ -24,4 +24,10 @@ public class InputView {
         }
         return winLotto;
     }
+
+    public static int getBonusNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
+    }
 }

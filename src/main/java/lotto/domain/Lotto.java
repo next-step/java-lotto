@@ -7,48 +7,26 @@ public class Lotto {
     private static final int ZERO = 0;
     private List<Integer> lottoNumber;
     private List<Integer> allLottoNumber;
-    private Integer hitCount;
 
     public Lotto() {
         CreatableLotto creatableLotto = new LottoFactory().getLottoVersionSix();
         this.allLottoNumber = creatableLotto.makeLotto();
-        this.hitCount = ZERO;
-        this.lottoNumber = selectLottoNumber(new CreatableLotto() {
-            @Override
-            public List<Integer> makeLotto() {
-                List<Integer> lottoNumbers = new ArrayList<>();
-                Collections.shuffle(allLottoNumber);
-                for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
-                    lottoNumbers.add(allLottoNumber.get(i));
-                }
-                return lottoNumbers;
+        this.lottoNumber = selectLottoNumber(() -> {
+            List<Integer> lottoNumbers = new ArrayList<>();
+            Collections.shuffle(allLottoNumber);
+            for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
+                lottoNumbers.add(allLottoNumber.get(i));
             }
+            return lottoNumbers;
         });
     }
 
     public Lotto(List<Integer> lottoNumber) {
-        this.hitCount = ZERO;
         this.lottoNumber = lottoNumber;
     }
 
     public List<Integer> selectLottoNumber(CreatableLotto creatableLotto) {
         return creatableLotto.makeLotto();
-    }
-
-    void checkNumber(int[] winLotto) {
-        for (int i = ZERO; i < winLotto.length; i++) {
-            hit(winLotto[i]);
-        }
-    }
-
-    private void hit(Integer winLotto) {
-        if (lottoNumber.contains(winLotto)) {
-            this.hitCount++;
-        }
-    }
-
-    public Integer getHitCount() {
-        return hitCount;
     }
 
     public List<Integer> getLottoNumber() {
@@ -67,5 +45,23 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    public int checkWinNumber(int[] winLotto) {
+        int hitCount = 0;
+        for (int lotto : winLotto) {
+            hitCount += getHitCount(lotto);
+        }
+        return hitCount;
+    }
+
+    public int getHitCount(int winLottoNumber) {
+        if (isContainsWinNumber(winLottoNumber)) {
+            return 1;
+        } else return 0;
+    }
+
+    public boolean isContainsWinNumber(int winLottoNumber) {
+        return lottoNumber.contains(winLottoNumber);
     }
 }

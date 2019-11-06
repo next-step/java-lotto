@@ -26,6 +26,10 @@ public class LottoController {
         lottoPaper.checkLottoGrade(winLotto);
     }
 
+    private void getBonusNumber() {
+        InputView.getBonusNumber();
+    }
+
     private void getInsights(LottoPaper lottoPaper, int count) {
         ResultView.printDescription();
         Map<Integer, Insights> insights = lottoPaper.getInsights();

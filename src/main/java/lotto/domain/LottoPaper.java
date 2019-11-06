@@ -36,13 +36,13 @@ public class LottoPaper {
     
     public void checkLottoGrade(int[] winLotto) {
         for (Lotto lotto : lottoPapers) {
-            lotto.checkNumber(winLotto);
+            int checkWinNumber = lotto.checkWinNumber(winLotto);
         }
     }
 
     public Map<Integer, Insights> getInsights() {
         for (Lotto lotto : lottoPapers) {
-            int hitCount = lotto.getHitCount();
+            int hitCount = lotto.getHitCount(1);
             checkInsights(hitCount);
         }
         return Insights.insights;

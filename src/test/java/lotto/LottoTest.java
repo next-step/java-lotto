@@ -49,6 +49,6 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
         lottoPaper.applyLotto(lotto);
         lottoPaper.checkLottoGrade(winNumber);
-        assertThat(lotto.getHitCount()).isEqualTo(6);
+        assertThat(lotto.getHitCount(1)).isEqualTo(6);
     }
 }
