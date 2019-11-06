@@ -18,5 +18,4 @@ public class Main {
         LottoResults results = lottoTickets.match(winNumbers);
         ResultView.printLottoResults(results);
     }
-
 }

@@ -34,9 +34,9 @@ public class LottoResults {
     }
 
     private int purchasedAmount() {
-        return 1000 * totalResults.values()
-            .stream()
-            .reduce(0, Integer::sum);
+        return LottoConstants.TICKET_PRICE * totalResults.values()
+                                                         .stream()
+                                                         .reduce(0, Integer::sum);
     }
 
     private double sumOfWinMoney() {
