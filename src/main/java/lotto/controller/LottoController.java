@@ -12,18 +12,27 @@ public class LottoController {
 
 	public static void buyLottoAndLookUpPrizes() {
 		Person person = Person.of(InputView.receiveAmount());
+		buySelfLotto(person);
+		buyAuthLotto(person);
+		lookUpPrizes(person);
+	}
+
+	private static void buySelfLotto(Person person) {
 		int selfBuyCount = InputView.receiveSelfBuyCount();
 		for (InputLottoNumbers inputLottoNumbers : InputView.receiveSelfLottoNumbers(selfBuyCount)) {
 			person.buyLottoSelf(LottoCreator.of(new SelfLottoNumberGenerator(inputLottoNumbers.getInputNumbers()), LottoType.SELF));
 		}
+	}
 
-		// buyLotto
+	private static void buyAuthLotto(Person person) {
 		person.buyLottoWithAllMoney(LottoCreator.of(new RandomLottoNumberGenerator(), LottoType.AUTO));
 		ResultView.printBuyingLotteries(person.getLottoDtoCollection());
+	}
 
-		// LookUpPrizes
+	private static void lookUpPrizes(Person person) {
 		LottoPrizes lottoPrizes = person.checkAllLotteries(InputView.receiveAnswerNumbers(), InputView.receiveBonusNumber());
 		ResultView.printWinStats(lottoPrizes.createStatistics(), lottoPrizes.calculateEarningsRatio(LottoCreator.LOTTO_PRICE));
 	}
+
 
 }

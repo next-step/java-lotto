@@ -5,16 +5,16 @@ import java.util.*;
 public class LottoNumbers {
 
 	private static final int LOTTO_BALL_NUMBERS_LIMIT = 6;
-	private static final int LOTTO_BALL_MAX_NUMBER = 45;
-	private static final int LOTTO_BALL_MIN_NUMBER = 1;
 	private static final String LOTTO_NUMBERS_COUNT_ERROR_MSG = "로또는 %s개의 숫자만 가질 수 있습니다";
 
-	private final Set<Integer> numbers;
+	private final Set<LottoNumber> numbers;
 
 	LottoNumbers(List<Integer> inputNumbers) {
 		validateNumbersCount(inputNumbers);
-		validateNumbersRange(inputNumbers);
-		this.numbers = new HashSet<>(inputNumbers);
+		this.numbers = new HashSet<>();
+		for (int inputNumber : inputNumbers) {
+			numbers.add(LottoNumber.of(inputNumber));
+		}
 		validateDuplicateNumbers(numbers);
 	}
 
@@ -24,36 +24,25 @@ public class LottoNumbers {
 		}
 	}
 
-	private void validateNumbersRange(List<Integer> inputNumbers) {
-		for (int number : inputNumbers) {
-			validateNumberRange(number);
-		}
-	}
-
-	private void validateNumberRange(int number) {
-		if (number > LOTTO_BALL_MAX_NUMBER || number < LOTTO_BALL_MIN_NUMBER) {
-			throw new IllegalArgumentException(String.format("로또 번호는 %s ~ %s 사이여야 합니다 (입력 : %s)",
-					LOTTO_BALL_MIN_NUMBER, LOTTO_BALL_MAX_NUMBER, number));
-		}
-	}
-
-	private void validateDuplicateNumbers(Set<Integer> numbers) {
+	private void validateDuplicateNumbers(Set<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_BALL_NUMBERS_LIMIT) {
 			throw new IllegalArgumentException("중복된 숫자가 있습니다");
 		}
 	}
 
 	long countMatchedNumbers(List<Integer> answerNumbers) {
+		validateNumbersCount(answerNumbers);
 		return answerNumbers.stream()
+				.map(LottoNumber::of)
 				.filter(numbers::contains)
 				.count();
 	}
 
 	boolean isBonusNumberMatched(int bonusNumber) {
-		return numbers.contains(bonusNumber);
+		return numbers.contains(LottoNumber.of(bonusNumber));
 	}
 
-	Set<Integer> get() {
+	Set<LottoNumber> get() {
 		return Collections.unmodifiableSet(numbers);
 	}
 

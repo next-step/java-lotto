@@ -1,6 +1,7 @@
 package lotto.dto;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoType;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class LottoDto {
 	private static final String PRINT_FORMAT = "[%s]";
 	private static final String PRINT_DELIMITER = ", ";
 
-	private final List<Integer> numbers;
+	private final List<LottoNumber> numbers;
 	private final LottoType type;
 
 	private LottoDto(Lotto lotto) {
@@ -33,7 +34,7 @@ public class LottoDto {
 		return String.format(PRINT_FORMAT, String.join(PRINT_DELIMITER, stringNumbers));
 	}
 
-	public boolean hasType(LottoType type) {
+	boolean hasType(LottoType type) {
 		return this.type == type;
 	}
 

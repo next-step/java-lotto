@@ -42,7 +42,7 @@ public class Lotto {
 		}
 	}
 
-	public Set<Integer> getNumbers() {
+	public Set<LottoNumber> getNumbers() {
 		return numbers.get();
 	}
 
