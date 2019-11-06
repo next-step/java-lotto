@@ -3,23 +3,12 @@ package lotto.domain;
 import java.util.*;
 
 public class Lotto {
-    private static final int LOTTO_GET_NUMBER = 6;
     private static final int ZERO = 0;
     private static final int HIT_COUNT = 1;
     private List<Integer> lottoNumber;
-    private List<Integer> allLottoNumber;
 
     public Lotto() {
-        CreatableLotto creatableLotto = new LottoFactory().getLottoVersionSix();
-        this.allLottoNumber = creatableLotto.makeLotto();
-        this.lottoNumber = selectLottoNumber(() -> {
-            List<Integer> lottoNumbers = new ArrayList<>();
-            Collections.shuffle(allLottoNumber);
-            for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
-                lottoNumbers.add(allLottoNumber.get(i));
-            }
-            return lottoNumbers;
-        });
+        this.lottoNumber = new LottoNumber().getLottoNumbers();
     }
 
     public Lotto(List<Integer> lottoNumber) {
