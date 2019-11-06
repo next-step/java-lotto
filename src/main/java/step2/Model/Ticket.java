@@ -1,6 +1,7 @@
 package step2.Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static step2.Util.LottoUtil.LOTTO_NUMBER_COUNT;
@@ -20,7 +21,7 @@ public class Ticket {
     }
 
     public List<Game> getGames() {
-        return games;
+        return Collections.unmodifiableList(games);
     }
 
     public int getGameCount() {
