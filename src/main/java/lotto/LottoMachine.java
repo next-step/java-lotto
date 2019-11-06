@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
 
 /**
@@ -9,7 +10,7 @@ import lotto.view.LottoResultView;
  */
 public class LottoMachine {
     public static void main(String[] args) {
-        LottoOrder lottoMachine = new LottoOrder(14000);
-        LottoResultView.printLotto(lottoMachine.getLottoNumbers());
+        LottoOrder lottoMachine = new LottoOrder(LottoInputView.inputPurchaseAmount());
+        LottoResultView.printLotto(lottoMachine.getLotto());
     }
 }
