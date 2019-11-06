@@ -38,12 +38,6 @@ public class LottoPaperTest {
     }
 
     @Test
-    void insightsIncreaseCountTest() {
-        Insights.insights.get(3).increaseCount();
-        assertThat(Insights.insights.get(3).getCount()).isEqualTo(1);
-    }
-
-    @Test
     void checkLottoRankTest() {
         int[] winNumber = new int[] {1,2,3,4,5,6};
         lottoPaper.applyLotto(lotto);
