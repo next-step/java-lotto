@@ -29,7 +29,7 @@ public class Ticket {
     }
 
     private int checkoutGames(int amount) {
-        if (amount % LOTTO_PRICE != 0 || amount / LOTTO_PRICE < 1) {
+        if (amount % LOTTO_PRICE != 0 || amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(AMOUNT_EXCEPTION);
         }
         return amount / LOTTO_PRICE;

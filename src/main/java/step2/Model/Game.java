@@ -12,6 +12,9 @@ public class Game {
     private static final List<Integer> balls = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
             .boxed().collect(toList());
 
+    private static final String DELIMITER = ", ";
+    private static final int START_INDEX = 0;
+
     private List<Integer> numbers;
 
     public Game() {
@@ -19,13 +22,13 @@ public class Game {
     }
 
     public String getNumbers() {
-        return numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2)
+        return numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + DELIMITER + o2)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
     private List<Integer> getSortedUniques() {
         Collections.shuffle(balls);
-        List<Integer> number = new ArrayList<>(balls.subList(0, LOTTO_NUMBER_COUNT));
+        List<Integer> number = new ArrayList<>(balls.subList(START_INDEX, LOTTO_NUMBER_COUNT));
         number.sort(Integer::compareTo);
         return number;
     }

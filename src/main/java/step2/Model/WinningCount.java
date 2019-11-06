@@ -15,7 +15,8 @@ public class WinningCount {
 
     public float getWinningRate() {
         float earningMoney = 0;
-        for (int correctCount = LOTTO_PRIZE_MIN_CORRECT_NUMBER; correctCount <= LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctCount++) {
+        for (int correctCount = LOTTO_PRIZE_MIN_CORRECT_NUMBER;
+             correctCount <= LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctCount++) {
             earningMoney += (Prize.getPrice(correctCount) * count[correctCount]);
         }
         return earningMoney / (totalCount() * LOTTO_PRICE);
