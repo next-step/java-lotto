@@ -1,47 +1,60 @@
 package com.seok2.lotto.domain;
 
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
 
     private static final String CURRENCY_UNIT = " 원";
     private static final int ZERO_VALUE = 0;
-    public static final Money ZERO = new Money(ZERO_VALUE);
+    private static final int ONE_VALUE = 1;
+    public static final Money ZERO = of(ZERO_VALUE);
 
-    private final int money;
+    private final BigDecimal money;
 
-    private Money(int money) {
+    private Money(BigDecimal money) {
         this.money = money;
     }
 
     public static Money of(int money) {
+        return of(new BigDecimal(money));
+    }
+
+    public static Money of(BigDecimal money) {
         return new Money(money);
     }
 
     protected boolean moreThanOrEquals(Money money) {
-        return this.money >= money.money;
+        return this.money.compareTo(money.money) >= ZERO_VALUE;
+    }
+
+    protected Money add(Money money) {
+        if (money.equals(ZERO)) {
+            return this;
+        }
+        return Money.of(this.money.add(money.money));
     }
 
     protected Money minus(Money money) {
-        if (money.money == ZERO_VALUE) {
+        if (money.equals(ZERO)) {
             return this;
         }
-        return Money.of(this.money - money.money);
+        return Money.of(this.money.subtract(money.money));
     }
 
-    public Money add(Money money) {
-        if (money.money == ZERO_VALUE) {
+    protected Money multiply(long multiplicand) {
+        if (multiplicand == ONE_VALUE) {
             return this;
         }
-        return Money.of(this.money + money.money);
+        return Money.of(this.money.multiply(new BigDecimal(multiplicand)));
     }
 
-    public double percent(Money money) {
-        if (money.money == ZERO_VALUE) {
-            return ZERO_VALUE;
+    protected BigDecimal percent(Money divisor) {
+        if (money.equals(ZERO)) {
+            return BigDecimal.ZERO;
         }
-        return this.money / (double) money.money;
+        return this.money.divide(divisor.money);
     }
 
     @Override
@@ -57,8 +70,8 @@ public class Money {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Money money1 = (Money) o;
-        return money == money1.money;
+        Money that = (Money) o;
+        return money == that.money;
     }
 
     @Override

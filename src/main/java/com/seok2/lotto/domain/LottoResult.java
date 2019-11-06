@@ -6,6 +6,7 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 
+@Deprecated
 public class LottoResult {
 
     private static final List<Rank> RANK_LIST = Arrays
@@ -26,20 +27,16 @@ public class LottoResult {
         return new LottoResult(purchaseAmount, ranks);
     }
 
-    private double calculateYield() {
-        return ranks.getTotalReward().percent(purchaseAmount);
-    }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(RESULT_TITLE)
             .append(LINE_BREAK);
         for (Rank rank : RANK_LIST) {
-            builder
-                .append(MessageFormat.format(RANK_MSG, rank, ranks.count(rank)))
+            builder.append(MessageFormat.format(RANK_MSG, rank, ranks.count(rank)))
                 .append(LINE_BREAK);
         }
-        builder.append(MessageFormat.format(YIELD_MSG, calculateYield()));
+        builder.append(MessageFormat.format(YIELD_MSG, ranks.calculateYield()));
         return builder.toString();
     }
 

@@ -1,11 +1,12 @@
 package com.seok2.lotto.domain;
 
+import static com.seok2.lotto.domain.Lotto.PRICE;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
 
-    public static final Money PRICE = Money.of(1_000);
     private static final LottoStrategy strategy = new RandomLottoStrategy();
 
     private LottoMachine() {
@@ -13,7 +14,6 @@ public class LottoMachine {
     }
 
     public static Ticket buy(Money investment) {
-
         Money purchaseAmount = Money.ZERO;
         List<Lotto> lotteries = new ArrayList<>();
         while (investment.moreThanOrEquals(PRICE)) {

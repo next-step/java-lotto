@@ -4,6 +4,7 @@ import static com.seok2.lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -24,9 +25,8 @@ class RanksTest {
 
     static Stream<Arguments> getTotalReward() {
         return Stream.of(
-            Arguments.of(Ranks.of(Arrays.asList(MISS, MISS)), Money.ZERO),
-            Arguments.of(Ranks.of(Arrays.asList(FIRST)), Money.of(2_000_000_000)),
-            Arguments.of(Ranks.of(Arrays.asList(FIFTH, FIFTH, MISS)), Money.of(10_000))
+            Arguments.of(Ranks.of(Arrays.asList(MISS, MISS)), BigDecimal.ZERO),
+            Arguments.of(Ranks.of(Arrays.asList(FIRST)), new BigDecimal(2_000_000))
         );
     }
 
@@ -39,7 +39,7 @@ class RanksTest {
 
     @ParameterizedTest
     @MethodSource("getTotalReward")
-    void getTotalReward(Ranks ranks, Money expected) {
-        assertThat(ranks.getTotalReward()).isEqualTo(expected);
+    void getTotalReward(Ranks ranks, BigDecimal expected) {
+        assertThat(ranks.calculateYield()).isEqualTo(expected);
     }
 }

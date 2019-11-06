@@ -1,11 +1,11 @@
 package com.seok2.lotto.domain;
 
+import com.seok2.lotto.exception.LottoNumberRangeException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final String LOTTO_NUMBER_RANGE_ERROR_MSG = "로또 번호는 1보다 크고 45보다 작아야 합니다.";
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final LottoNumber[] CACHE = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             return CACHE[--number];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MSG);
+            throw new LottoNumberRangeException();
         }
     }
 

@@ -2,6 +2,7 @@ package com.seok2.lotto.domain;
 
 import static com.seok2.common.utils.StringUtils.split;
 
+import com.seok2.lotto.exception.OutOfLottoLengthException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,12 +13,12 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final String LOTTO_LENGTH_ERROR_MSG = "로또 번호는 6개보다 많거나 적을 수 없습니다.";
+    public static final Money PRICE = Money.of(1_000);
     private static final int LOTTO_LENGTH = 6;
 
     private final List<LottoNumber> numbers;
 
-    protected Lotto(List<LottoNumber> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = numbers;
     }
@@ -27,7 +28,7 @@ public class Lotto {
             .distinct()
             .count();
         if (count != LOTTO_LENGTH) {
-            throw new IllegalArgumentException(LOTTO_LENGTH_ERROR_MSG);
+            throw new OutOfLottoLengthException();
         }
     }
 
@@ -66,8 +67,8 @@ public class Lotto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        Lotto that = (Lotto) o;
+        return Objects.equals(numbers, that.numbers);
     }
 
     @Override

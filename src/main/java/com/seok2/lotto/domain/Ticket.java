@@ -4,13 +4,13 @@ import static com.seok2.common.utils.StringUtils.LINE_BREAK;
 
 import java.text.MessageFormat;
 
+@Deprecated
 public class Ticket {
 
     private static final String PURCHASE_QUANTITY_MSG = "{0} 개를 구매했습니다.";
 
     private final Money purchaseAmount;
     private final Lotteries lotteries;
-
 
     private Ticket(Money purchaseAmount, Lotteries lotteries) {
         this.purchaseAmount = purchaseAmount;

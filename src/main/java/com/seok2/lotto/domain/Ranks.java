@@ -1,5 +1,8 @@
 package com.seok2.lotto.domain;
 
+import static com.seok2.lotto.domain.Lotto.PRICE;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Ranks {
@@ -20,7 +23,15 @@ public class Ranks {
             .count();
     }
 
-    public Money getTotalReward() {
+    public BigDecimal calculateYield() {
+        return getTotalReward().percent(calculatePurchaseAmount());
+    }
+
+    private Money calculatePurchaseAmount() {
+        return PRICE.multiply(ranks.size());
+    }
+
+    private Money getTotalReward() {
         return ranks
             .stream()
             .map(Rank::getReward)
