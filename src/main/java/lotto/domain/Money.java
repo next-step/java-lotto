@@ -15,8 +15,8 @@ public class Money {
         this.money = money;
     }
 
-    public double getProfitRate(Map<LottoRank, Long> rankGroup) {
-        long totalProfit = rankGroup
+    public double getProfitRate(LottoRankGroup rankGroup) {
+        long totalProfit = rankGroup.getValue()
                 .entrySet()
                 .stream()
                 .map(e -> e.getKey().getWinning() * e.getValue())

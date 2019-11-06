@@ -23,7 +23,7 @@ public class InputTool {
         return inputText;
     }
 
-    public Integer readLineToInt() throws NumberFormatException {
-        return Integer.valueOf(readLine());
+    public int readLineToInt() throws NumberFormatException {
+        return Integer.parseInt(readLine());
     }
 }

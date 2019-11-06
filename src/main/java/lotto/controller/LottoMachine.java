@@ -1,62 +1,67 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoRank;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.List;
 import java.util.Map;
 
 public class LottoMachine {
 
-    private final LottoView lottoView;
-    private LottoNumbers lottoNumbers;
-    private Money money;
+    private static LottoMachine lottoMachine;
 
-    public LottoMachine(LottoView lottoView) {
-        this.lottoView = lottoView;
-    }
+    private LottoMachine() {}
 
-    public void start() {
+    public void start(LottoView lottoView) {
         try {
-            createLottoNumbers();
-            findWinningLotto();
+            Money money = getMoney(lottoView);
+            Lottos lottos = createLottoNumbers(lottoView, money);
+
+            findWinningLotto(lottoView, money, lottos);
         } catch (NumberFormatException exception) {
             lottoView.showConvertNumberError();
-            restart();
+            restart(lottoView);
         } catch (IllegalArgumentException exception) {
             lottoView.showErrorMessage(exception.getMessage());
-            restart();
+            restart(lottoView);
         }
     }
 
-    private void restart() {
+    private void restart(LottoView lottoView) {
         lottoView.showRestartMessage();
-        clear();
-        start();
+        start(lottoView);
     }
 
-    private void clear() {
-        lottoNumbers = null;
-        money = null;
+    private Money getMoney(LottoView lottoView) {
+       return new Money(lottoView.getMoney());
     }
 
-    private void createLottoNumbers() {
-        money = new Money(lottoView.getMoney());
-        lottoNumbers = new LottoNumbers(money.getLottoCount());
+    private Lottos createLottoNumbers(LottoView lottoView, Money money) {
+        Lottos lottos = new Lottos(money.getLottoCount());
+        lottoView.showLottoNumbers(lottos);
 
-        lottoView.showLottoNumbers(lottoNumbers);
+        return lottos;
     }
 
-    private void findWinningLotto() {
-        checkWinningLottoNumber(new LottoNumber(lottoView.getWinningLottoNumbers()));
-    }
+    private void findWinningLotto(LottoView lottoView, Money money, Lottos lottos) {
+        List<Integer> winningNumbers = lottoView.getWinningNumbers();
+        int winningBonusNumber = lottoView.getWinningBonusNumber();
 
-    private void checkWinningLottoNumber(LottoNumber winningNumber) {
-        Map<LottoRank, Long> rankGroup = lottoNumbers.getRankGroup(winningNumber);
+        LottoRankGroup rankGroup = lottos.getRankGroup(new LottoNumber(winningNumbers, winningBonusNumber));
 
         lottoView.showRankResult(rankGroup);
         lottoView.showProfitRate(money.getProfitRate(rankGroup));
+    }
+
+    public static LottoMachine getInstance() {
+        if (lottoMachine == null) {
+            synchronized (LottoMachine.class) {
+                if (lottoMachine == null) {
+                    lottoMachine = new LottoMachine();
+                }
+            }
+        }
+
+        return lottoMachine;
     }
 }
