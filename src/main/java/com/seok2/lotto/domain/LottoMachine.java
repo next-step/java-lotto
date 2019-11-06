@@ -13,7 +13,7 @@ public class LottoMachine {
 
     }
 
-    public static Ticket buy(Money investment) {
+    public static Lotteries buy(Money investment) {
         Money purchaseAmount = Money.ZERO;
         List<Lotto> lotteries = new ArrayList<>();
         while (investment.moreThanOrEquals(PRICE)) {
@@ -21,6 +21,6 @@ public class LottoMachine {
             investment = investment.minus(PRICE);
             purchaseAmount = purchaseAmount.add(PRICE);
         }
-        return Ticket.of(purchaseAmount, Lotteries.of(lotteries));
+        return Lotteries.of(lotteries);
     }
 }

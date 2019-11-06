@@ -1,6 +1,9 @@
 package com.seok2.lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
 
@@ -11,10 +14,11 @@ public enum Rank {
     FIFTH(3, Money.of(5_000), "3개 일치 (5,000원)"),
     MISS(0, Money.of(0), "낙첨");
 
+    public final static List<Rank> WINNINGS = Arrays.asList(FIRST,SECOND,THIRD,FOURTH,FIFTH);
+
     private final int matches;
     private final Money reward;
     private final String description;
-
 
     Rank(int matches, Money reward, String description) {
         this.matches = matches;

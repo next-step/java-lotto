@@ -2,6 +2,7 @@ package com.seok2.lotto.domain;
 
 import static com.seok2.common.utils.StringUtils.split;
 
+import com.seok2.lotto.exception.DuplicateLottoNumberException;
 import com.seok2.lotto.exception.OutOfLottoLengthException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final Money PRICE = Money.of(1_000);
+    private static final String NUMBERS_STRING_REGEX = "^[0-9,]+$";
     private static final int LOTTO_LENGTH = 6;
 
     private final List<LottoNumber> numbers;
@@ -27,7 +29,10 @@ public class Lotto {
         long count = numbers.stream()
             .distinct()
             .count();
-        if (count != LOTTO_LENGTH) {
+        if(numbers.size() != count){
+            throw new DuplicateLottoNumberException();
+        }
+        if (count > LOTTO_LENGTH) {
             throw new OutOfLottoLengthException();
         }
     }
@@ -38,6 +43,7 @@ public class Lotto {
 
     public static Lotto generate(String numbers) {
         return new Lotto(Arrays.stream(split(numbers))
+            .map(String::trim)
             .map(Integer::parseInt)
             .map(LottoNumber::of)
             .collect(Collectors.toList()));

@@ -1,6 +1,7 @@
 package com.seok2.lotto.domain;
 
 import com.seok2.lotto.exception.LottoNumberRangeException;
+import com.seok2.lotto.exception.OutOfLottoLengthException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -22,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             return CACHE[--number];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new LottoNumberRangeException();
+            throw new OutOfLottoLengthException();
         }
     }
 
