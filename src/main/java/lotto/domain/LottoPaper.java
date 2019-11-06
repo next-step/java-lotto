@@ -34,7 +34,7 @@ public class LottoPaper {
     public void applyLotto(Lotto lotto) {
         this.lottoPapers.add(lotto);
     }
-    
+
     public List<Rank> getWinningLottoRanks(int[] winLotto, int bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottoPapers) {

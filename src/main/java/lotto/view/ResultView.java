@@ -4,7 +4,6 @@ import lotto.Rank;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPaper;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class ResultView {
 
     public static void getYield(int totalWinningPrice, int count) {
         int purchasePrice = count * LOTTO_VALUE;
-        double yield = (double)totalWinningPrice/purchasePrice;
+        double yield = (double) totalWinningPrice / purchasePrice;
         System.out.println(printYield(yield));
     }
 
