@@ -15,9 +15,11 @@ public class LottoController {
 
         resultView.printMyTicket(game.getTicketsString());
 
-        String winText = inputView.inputWinText();
+        String text = inputView.inputWinText();
+        int bonusNumber = inputView.inputBonusNumber();
+        game.doGame(text, bonusNumber);
 
-        //resultView.printWinStatistics(game.getResultString(winText));
-
+        resultView.printWinCounts(game.getWinCounts());
+        resultView.printWinPercent(game.getWinPercent());
     }
 }

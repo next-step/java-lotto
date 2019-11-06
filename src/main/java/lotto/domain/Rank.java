@@ -28,8 +28,19 @@ public enum Rank {
                 .orElse(MISS);
     }
 
+    public static Rank findByOrder(int order) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.ordinal() == order)
+                .findFirst()
+                .orElse(MISS);
+    }
+
     public int getWinMoney() {
         return winMoney;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
 }
