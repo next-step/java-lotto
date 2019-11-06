@@ -1,15 +1,18 @@
 package step2.View;
 
-import step2.*;
+import step2.Data.Prize;
+import step2.Model.Game;
+import step2.Model.Ticket;
+import step2.Model.WinningCount;
+import step2.Model.WinningNumbers;
 
 import java.util.List;
 
-import static step2.LottoUtil.LOTTO_PRIZE_MAX_CORRECT_NUMBER;
-import static step2.LottoUtil.LOTTO_PRIZE_MIN_CORRECT_NUMBER;
+import static step2.Util.LottoUtil.LOTTO_PRIZE_MAX_CORRECT_NUMBER;
+import static step2.Util.LottoUtil.LOTTO_PRIZE_MIN_CORRECT_NUMBER;
 
 public class ResultView {
     private static final String AMOUNT_CONFIRM_POSTFIX = "개를 구매했습니다.";
-
     private static final String RESULT = "당첨 통계\n---------";
     private static final String WINNING_COUNT_POSTFIX = "개 일치 (";
     private static final String WINNING_PRIZE_POSTFIX = ") - ";
@@ -37,7 +40,7 @@ public class ResultView {
     private static void printWinningCount(WinningCount winningCount) {
         for (int correctNumber = LOTTO_PRIZE_MIN_CORRECT_NUMBER;
              correctNumber <= LOTTO_PRIZE_MAX_CORRECT_NUMBER; correctNumber++) {
-            System.out.print(correctNumber + WINNING_COUNT_POSTFIX
+            System.out.println(correctNumber + WINNING_COUNT_POSTFIX
                     + Prize.getPrice(correctNumber) + WINNING_PRIZE_POSTFIX
                     + winningCount.getCount(correctNumber) + WINNING_GAME_POSTFIX);
         }

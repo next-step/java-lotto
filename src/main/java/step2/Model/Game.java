@@ -1,4 +1,4 @@
-package step2;
+package step2.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
-import static step2.LottoUtil.*;
+import static step2.Util.LottoUtil.*;
 
 public class Game {
     private static final List<Integer> balls = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
@@ -19,7 +19,8 @@ public class Game {
     }
 
     public String getNumbers() {
-        return numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2).get();
+        return numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2)
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     private List<Integer> getSortedUniques() {
@@ -29,7 +30,7 @@ public class Game {
         return number;
     }
 
-    public int getIncludingWinningNumber(WinningNumbers winningNumbersNumber) {
+    int getIncludingWinningNumber(WinningNumbers winningNumbersNumber) {
         return Math.toIntExact(numbers.stream().filter(winningNumbersNumber::contains).count());
     }
 }

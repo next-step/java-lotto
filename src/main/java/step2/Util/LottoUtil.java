@@ -1,4 +1,4 @@
-package step2;
+package step2.Util;
 
 public class LottoUtil {
     public static final int LOTTO_PRICE = 1000;

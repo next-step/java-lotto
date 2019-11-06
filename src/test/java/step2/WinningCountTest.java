@@ -1,10 +1,12 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
+import step2.Data.Prize;
+import step2.Model.WinningCount;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static step2.LottoUtil.LOTTO_PRICE;
+import static step2.Util.LottoUtil.LOTTO_PRICE;
 
 class WinningCountTest {
     private static WinningCount winningCount = new WinningCount(new int[]{0, 0, 0, 0, 0, 1, 0});

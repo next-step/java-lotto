@@ -2,11 +2,11 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step2.Model.Ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TicketTest {
-
+class TicketTest {
     @Test
     @DisplayName("입력된 금액만큼 로또가 구입되는지 확인")
     void buyTicketsTest() {

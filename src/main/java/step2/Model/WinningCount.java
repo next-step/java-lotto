@@ -1,8 +1,10 @@
-package step2;
+package step2.Model;
+
+import step2.Data.Prize;
 
 import java.util.Arrays;
 
-import static step2.LottoUtil.*;
+import static step2.Util.LottoUtil.*;
 
 public class WinningCount {
     private int[] count;
@@ -26,5 +28,4 @@ public class WinningCount {
     private int totalCount() {
         return Arrays.stream(count).reduce(Integer::sum).orElseThrow(IllegalArgumentException::new);
     }
-
 }

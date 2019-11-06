@@ -1,13 +1,14 @@
-package step2;
+package step2.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static step2.LottoUtil.LOTTO_NUMBER_COUNT;
-import static step2.LottoUtil.LOTTO_PRICE;
+import static step2.Util.LottoUtil.LOTTO_NUMBER_COUNT;
+import static step2.Util.LottoUtil.LOTTO_PRICE;
 
 public class Ticket {
     private static final String AMOUNT_EXCEPTION = "로또는 1000원단위로 구매할 수 있습니다.";
+
     private List<Game> games;
 
     public Ticket(int amount) {
@@ -35,9 +36,7 @@ public class Ticket {
 
     public WinningCount checkWinningCount(WinningNumbers winningNumbers) {
         int[] count = new int[LOTTO_NUMBER_COUNT + 1];
-        games.forEach(game -> {
-            count[game.getIncludingWinningNumber(winningNumbers)]++;
-        });
+        games.forEach(game -> count[game.getIncludingWinningNumber(winningNumbers)]++);
         return new WinningCount(count);
     }
 }

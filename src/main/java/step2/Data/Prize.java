@@ -1,4 +1,4 @@
-package step2;
+package step2.Data;
 
 import java.util.Arrays;
 
@@ -30,5 +30,4 @@ public enum Prize {
     public int getEarningMoney() {
         return this.earningMoney;
     }
-
 }
