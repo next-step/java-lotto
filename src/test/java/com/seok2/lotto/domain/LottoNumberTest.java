@@ -29,6 +29,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @MethodSource("valid")
     void create(int input, LottoNumber expected) {
+        assertThat(LottoNumber.of(input).hashCode()).isEqualTo(expected.hashCode());
         assertThat(LottoNumber.of(input)).isEqualTo(expected);
     }
 
