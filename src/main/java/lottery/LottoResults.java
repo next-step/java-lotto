@@ -1,25 +1,32 @@
 package lottery;
 
+import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import lottery.domain.Prize;
 
 public class LottoResults {
 
-    private static final int PRIZE_OF_3_MATCH = 5000;
-    private static final int PRIZE_OF_4_MATCH = 50000;
-    private static final int PRIZE_OF_5_MATCH = 1500000;
-    private static final int PRIZE_OF_6_MATCH = 2000000000;
-    private List<LottoResult> lottoResults;
-    private final int numberOf3MatchedTickets;
-    private final int numberOf4MatchedTickets;
-    private final int numberOf5MatchedTickets;
-    private final int numberOf6MatchedTickets;
+    private static final String REPRESENT_PATTERN = "{0}개 일치 ({1}원)- {2}개\n";
+    private final Map<Prize, Integer> totalResults = new EnumMap<>(Prize.class);
 
     public LottoResults(List<LottoResult> lottoResults) {
-        this.lottoResults = lottoResults;
-        this.numberOf3MatchedTickets = getNumberOfNMatchedTicket(3);
-        this.numberOf4MatchedTickets = getNumberOfNMatchedTicket(4);
-        this.numberOf5MatchedTickets = getNumberOfNMatchedTicket(5);
-        this.numberOf6MatchedTickets = getNumberOfNMatchedTicket(6);
+        calculateStatistics(lottoResults);
+    }
+
+    private void calculateStatistics(List<LottoResult> lottoResults) {
+        Arrays.stream(Prize.values())
+            .forEach(
+                prize -> totalResults.put(prize, countNumberOfPrize(lottoResults, prize))
+            );
+    }
+
+    private int countNumberOfPrize(List<LottoResult> lottoResults, Prize prize) {
+        return (int) lottoResults.stream()
+            .filter(lottoResult -> lottoResult.isPrize(prize))
+            .count();
     }
 
     public double getEarningRate() {
@@ -27,32 +34,33 @@ public class LottoResults {
     }
 
     private int purchasedAmount() {
-        return lottoResults.size() * 1000;
+        return 1000 * totalResults.values()
+            .stream()
+            .reduce(0, Integer::sum);
     }
 
     private double sumOfWinMoney() {
-        return PRIZE_OF_3_MATCH * numberOf3MatchedTickets +
-            PRIZE_OF_4_MATCH * numberOf4MatchedTickets +
-            PRIZE_OF_5_MATCH * numberOf5MatchedTickets +
-            PRIZE_OF_6_MATCH * numberOf6MatchedTickets;
+        return Arrays.stream(Prize.values())
+            .map(this::calculateWinMoney)
+            .reduce(0, Integer::sum);
     }
 
-    private int getNumberOfNMatchedTicket(int numberOfMatched) {
-        return (int) lottoResults.stream()
-            .filter(i -> i.isMatchedNNumbers(numberOfMatched))
-            .count();
+    private int calculateWinMoney(Prize prize) {
+        return totalResults.get(prize) * prize.getWinMoney();
     }
 
     @Override
     public String toString() {
         StringBuilder resultString = new StringBuilder();
-        resultString.append("당첨 통계\n");
+        resultString.append("\n당첨 통계\n");
         resultString.append("---------\n");
-        resultString.append("3개 일치 (5000원)- " + numberOf3MatchedTickets + "개\n");
-        resultString.append("4개 일치 (50000원)- " + numberOf4MatchedTickets + "개\n");
-        resultString.append("5개 일치 (1500000원)- " + numberOf5MatchedTickets + "개\n");
-        resultString.append("6개 일치 (2000000000원)- " + numberOf6MatchedTickets + "개\n");
-
+        Arrays.stream(Prize.values())
+            .filter(prize -> !Prize.isFail(prize))
+            .forEach(
+                prize -> resultString.append(MessageFormat.format(REPRESENT_PATTERN,
+                    prize.getMatchedNumber(), prize.getWinMoney(), totalResults.get(prize))
+                )
+            );
         return resultString.toString();
     }
 }
