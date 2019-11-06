@@ -15,8 +15,11 @@ public class RanksTest {
         List<Rank> ranksInit = new ArrayList<>();
         ranksInit.add(Rank.FIRST);
         ranksInit.add(Rank.THIRD);
+        ranksInit.add(Rank.FIRST);
+        ranksInit.add(Rank.FIRST);
         Ranks ranks = new Ranks(ranksInit);
-        assertThat(ranks.getRanks()).hasSize(2);
+        assertThat(ranks.getRanks()).hasSize(4);
         assertThat(ranks.getRanks()).contains(Rank.FIRST);
+        assertThat(ranks.getLottoRankCount().get(Rank.FIRST)).isEqualTo(3);
     }
 }

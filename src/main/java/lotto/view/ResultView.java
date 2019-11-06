@@ -1,11 +1,16 @@
 package lotto.view;
 
+import lotto.Rank;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPaper;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
+    private static final int LOTTO_VALUE = 1000;
+    private static final double YIELD_PIVOT_NUMBER = 1.0;
 
     public static void printLottoNumber(LottoPaper lottoPaper) {
         List<Lotto> lottos = lottoPaper.getLottoPapers();
@@ -14,25 +19,38 @@ public class ResultView {
         }
     }
 
-    public static void printDescription() {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+    public static void printLottoResult(Map<Rank, Integer> ranks) {
+        printDescription();
+        for (Map.Entry<Rank, Integer> entry : ranks.entrySet()) {
+            System.out.println(printLotto(entry));
+        }
     }
 
-//    public static void printInsights(Map<Integer, Insights> insights) {
-//        for (Map.Entry<Integer, Insights> entry : insights.entrySet()) {
-//            printWinningInsights(entry);
-//        }
-//    }
-//
-//    private static void printWinningInsights(Map.Entry<Integer, Insights> entry) {
-//        if (entry.getKey() >= 3) {
-//            System.out.println(entry.getKey() + "개 일치"
-//                    + "(" + entry.getValue().getPrice() + "원) - " + entry.getValue().getCount() + "개");
-//        }
-//    }
+    public static void getYield(int totalWinningPrice, int count) {
+        int purchasePrice = count * LOTTO_VALUE;
+        double yield = (double)totalWinningPrice/purchasePrice;
+        System.out.println(printYield(yield));
+    }
 
-    public static void printYield(double yield) {
-        System.out.println("총 수익률은 " + Double.parseDouble(String.format("%.2f", yield))+ "입니다");
+    private static String printYield(double yield) {
+        if (yield >= YIELD_PIVOT_NUMBER) {
+            return String.format("총 수익율은 %s입니다.", Double.parseDouble(String.format("%.2f", yield)));
+        }
+        return String.format("총 수익율은 %s입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임",
+                Double.parseDouble(String.format("%.2f", yield)));
+    }
+
+    private static String printLotto(Map.Entry<Rank, Integer> entry) {
+        if (entry.getKey() == Rank.SECOND) {
+            return String.format("%s 개 일치, 보너스 볼 일치(%d원)- %d개",
+                    entry.getKey().getCountOfMatch(), entry.getKey().getWinningMoney(), entry.getValue());
+        }
+        return String.format("%s 개 일치 (%d원)- %d개",
+                entry.getKey().getCountOfMatch(), entry.getKey().getWinningMoney(), entry.getValue());
+    }
+
+    private static void printDescription() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
     }
 }
