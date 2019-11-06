@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lottery.LottoConstants;
@@ -65,7 +66,7 @@ public class LottoTicket {
 
         LottoTicket that = (LottoTicket) o;
 
-        return lottoNumbers != null ? lottoNumbers.equals(that.lottoNumbers) : that.lottoNumbers == null;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override

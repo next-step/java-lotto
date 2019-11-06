@@ -32,7 +32,6 @@ public enum Prize {
         return prize.equals(FAIL);
     }
 
-
     public int getMatchedNumber() {
         return matchedNumber;
     }
