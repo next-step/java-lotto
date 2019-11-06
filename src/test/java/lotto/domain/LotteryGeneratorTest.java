@@ -37,10 +37,11 @@ public class LotteryGeneratorTest {
     void generateTickets() {
 
         // given
-        int expected = 14;
+        int amount = 14_000;
+        int expected = amount / 1_000;
 
         // when
-        List<LotteryTicket> lotteryTickets = lotteryGenerator.generate(expected);
+        List<LotteryTicket> lotteryTickets = lotteryGenerator.generate(amount);
 
         // then
         assertThat(lotteryTickets).hasSize(expected);

@@ -8,16 +8,19 @@ import java.util.List;
  */
 public class LotteryGenerator {
 
-    public static final int SIZE = 6;
+    private static final int SIZE = 6;
+    private static final int TICKET_PRICE = 1_000;
+
     private final NumberGenerator numberGenerator;
 
     public LotteryGenerator(NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 
-    public List<LotteryTicket> generate(int count) {
+    public List<LotteryTicket> generate(int amount) {
 
         List<LotteryTicket> tickets = new ArrayList<>();
+        int count = amount / TICKET_PRICE;
         for (int i = 0; i < count; i++) {
             tickets.add(generate());
         }
