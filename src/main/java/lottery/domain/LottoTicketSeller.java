@@ -7,15 +7,15 @@ public class LottoTicketSeller {
     private static final Integer TICKET_PRICE = 1000;
     private static final String NOT_ENOUGH_MONEY = "로또 구입 금액이 부족합니다.";
 
-    public LottoTickets purchaseRandomGames(int purchaseAmount) {
+    public static LottoTickets purchaseRandomGames(int purchaseAmount) {
         return new LottoTickets(generateRandomGames(getNumberOfTicket(purchaseAmount)));
     }
 
-    private List<LottoTicket> generateRandomGames(int numberOfTicket) {
+    private static List<LottoTicket> generateRandomGames(int numberOfTicket) {
         return LottoTicketFactory.generateRandomGames(numberOfTicket);
     }
 
-    private Integer getNumberOfTicket(int purchaseAmount) {
+    private static Integer getNumberOfTicket(int purchaseAmount) {
         Integer numberOfTickets = purchaseAmount / TICKET_PRICE;
         if (numberOfTickets <= 0) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
