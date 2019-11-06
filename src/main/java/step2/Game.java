@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -17,13 +18,13 @@ public class Game {
         numbers = getSortedUniques();
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public String getNumbers() {
+        return numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + ", " + o2).get();
     }
 
     private List<Integer> getSortedUniques() {
         Collections.shuffle(balls);
-        List<Integer> number = balls.subList(0, LOTTO_NUMBER_COUNT);
+        List<Integer> number = new ArrayList<>(balls.subList(0, LOTTO_NUMBER_COUNT));
         number.sort(Integer::compareTo);
         return number;
     }

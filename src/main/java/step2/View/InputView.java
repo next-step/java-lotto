@@ -10,7 +10,7 @@ import static step2.LottoUtil.*;
 public class InputView {
     private static final String AMOUNT = "구입금액을 입력해 주세요.";
     private static final String WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String AMOUNT_EXCEPTION = "로또는 1000원단위로 구매할 수 있습니다.";
+
     private static final String NUMBER_COUNT_EXCEPTION = "입력된 로또번호가 6개가 아닙니다.";
     private static final String DUPLICATED_NUMBER_EXCEPTION = "로또번호는 중복된 숫자를 허용하지 않습니다.";
     private static final String NUMBER_RANGE_EXCEPTION = "로또번호는 1 ~ 45 사이의 숫자입니다.";
@@ -20,9 +20,7 @@ public class InputView {
 
     public static int buyTickets() {
         System.out.println(AMOUNT);
-        int amount = scanner.nextInt();
-        verifyAmount(amount);
-        return amount;
+        return scanner.nextInt();
     }
 
     public static Set<Integer> getWinningNumbers() {
@@ -39,11 +37,6 @@ public class InputView {
         return winningNumbers;
     }
 
-    private static void verifyAmount(int amount) {
-        if (amount % LOTTO_PRICE != 0 || amount / LOTTO_PRICE < 1) {
-            throw new IllegalArgumentException(AMOUNT_EXCEPTION);
-        }
-    }
 
     private static void verifyLottoNumberCount(int length) {
         if (length != LOTTO_NUMBER_COUNT) {
