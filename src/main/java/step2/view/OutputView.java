@@ -14,6 +14,7 @@ public class OutputView {
     private static final int NEED_TO_SHOW = 3;
     private static final String RATE_RESULT = "총 수익률은 %.2f입니다.";
     private static final String BONUS_MATCH_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d)원 - %d 개";
+    private static final String AMOUNT_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     public static int getPurchaseAmount(int money) {
         int amount = money / LOTTO_PRICE;
@@ -21,7 +22,8 @@ public class OutputView {
         return amount;
     }
 
-    public static void showBuyTickets(List<LottoTicket> lottoTickets) {
+    public static void showBuyTickets(List<LottoTicket> lottoTickets, int manualAmount) {
+        System.out.println(String.format(AMOUNT_FORMAT, manualAmount, lottoTickets.size() - manualAmount));
         lottoTickets.forEach(System.out::println);
     }
 
