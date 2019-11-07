@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -12,6 +13,10 @@ import java.util.Objects;
 public class Lotto {
 
     private final List<Integer> lottoNumbers;
+
+    public Lotto(Integer... lottoNumbers) {
+        this(Arrays.asList(lottoNumbers));
+    }
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
