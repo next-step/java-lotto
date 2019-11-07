@@ -41,6 +41,9 @@ public class LottoProvider {
     }
 
     public static List<Lotto> createLottos(int count) {
+        if (count <= 0) {
+            return Collections.emptyList();
+        }
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {

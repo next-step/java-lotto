@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
@@ -36,8 +37,27 @@ public class LottoMachine {
     }
 
     private Lottos createLottoNumbers(LottoView lottoView, Money money) {
-        Lottos lottos = new Lottos(money.getLottoCount());
-        lottoView.showLottoNumbers(lottos);
+        int totalLottoCount = money.getLottoCount();
+        int manuallySelectedLottoCount = lottoView.getManuallySelectedLottoCount();
+        int autoSelectedLottoCount = totalLottoCount - manuallySelectedLottoCount;
+
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(createSelectedLotto(lottoView, manuallySelectedLottoCount));
+        totalLottos.addAll(LottoProvider.createLottos(autoSelectedLottoCount));
+
+        Lottos lottos = new Lottos(totalLottos);
+        lottoView.showLottoNumbers(lottos, manuallySelectedLottoCount, autoSelectedLottoCount);
+
+        return lottos;
+    }
+
+    private List<Lotto> createSelectedLotto(LottoView lottoView, int count) {
+        lottoView.showSelectedLottoNumberQuestion();
+
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(LottoProvider.createLotto(lottoView.getNumbers()));
+        }
 
         return lottos;
     }

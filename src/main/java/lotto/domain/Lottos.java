@@ -10,10 +10,6 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
-        this(LottoProvider.createLottos(count));
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }

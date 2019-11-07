@@ -19,16 +19,11 @@ public enum LottoRank {
     }
 
     public static LottoRank find(long matchCount, boolean matchBonusNumber) {
-        LottoRank rank = Arrays.stream(LottoRank.values())
+        return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                .filter(lottoRank -> lottoRank != SECOND || matchBonusNumber)
                 .findFirst()
                 .orElse(NOT_MATCH);
-
-        if (matchCount == 5) {
-            return matchBonusNumber ? SECOND : THIRD;
-        }
-
-        return rank;
     }
 
     public int getMatchCount() {
