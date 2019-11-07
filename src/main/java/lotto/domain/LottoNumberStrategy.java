@@ -16,6 +16,7 @@ public class LottoNumberStrategy implements RandomGenerateStrategy {
     private static final int LOTTO_MIN_NUM = 1;
     private static final int LOTTO_MAX_NUM = 45;
     private static final int LOTTO_NUMBER_SIZE = 6;
+
     private static final Random random = new Random();
     private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
     private static final String DELIMITER = ",";
@@ -43,7 +44,7 @@ public class LottoNumberStrategy implements RandomGenerateStrategy {
                 throw new InputMismatchException("로또는 1-45 숫자만 입력이 가능합니다.");
             }
         }
-        if (isLottoNumberSize(numbers.length)) {
+        if (!isLottoNumberSize(numbers.length)) {
             throw new InputMismatchException("로또는 6개의 숫자로 구성되어야 합니다.");
         }
     }
