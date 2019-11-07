@@ -44,7 +44,7 @@ class WinningNumbersTest {
     void outOfRange() {
         assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 46), 7))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("당첨 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
+                .hasMessageMatching("복권 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
     }
 
     @DisplayName("유효성 검사 실패: 사이즈")
@@ -52,7 +52,7 @@ class WinningNumbersTest {
     void sizeOver() {
         assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 8))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("당첨 번호는 [0-9]+개 입니다.");
+                .hasMessageMatching("복권 번호는 [0-9]+개 입니다.");
     }
 
     @DisplayName("유효성 검사 실패: 숫자 중복")

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.NumbersValidator;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -39,22 +37,31 @@ public class LotteryTicket {
     }
 
     private void validateSize(List<Integer> lotteryNumbers) {
-        if (!NumbersValidator.validateSize(lotteryNumbers, LOTTERY_NUMBER_SIZE)) {
+        if (lotteryNumbers.size() != LOTTERY_NUMBER_SIZE) {
             String message = String.format("복권 번호는 %d개 입니다.", LOTTERY_NUMBER_SIZE);
             throw new IllegalArgumentException(message);
         }
     }
 
     private void validateRange(List<Integer> lotteryNumbers) {
-        if (!NumbersValidator.validateRange(lotteryNumbers, LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX)) {
+        boolean outOfRange = lotteryNumbers.stream()
+                .anyMatch(number -> number < LOTTERY_NUMBER_MIN || number > LOTTERY_NUMBER_MAX);
+        if (outOfRange) {
             String message = String.format("복권 번호의 범위는 [%d, %d] 입니다.", LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX);
             throw new IllegalArgumentException(message);
         }
     }
 
     private void validateDuplicate(List<Integer> lotteryNumbers) {
-        if (!NumbersValidator.validateDuplicate(lotteryNumbers)) {
+        boolean duplicate = lotteryNumbers.stream()
+                .distinct()
+                .count() != lotteryNumbers.size();
+        if (duplicate) {
             throw new IllegalArgumentException("복권 번호는 중복될 수 없습니다.");
         }
+    }
+
+    public boolean contains(int bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }
