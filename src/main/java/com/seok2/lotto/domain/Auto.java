@@ -1,6 +1,6 @@
 package com.seok2.lotto.domain;
 
-public enum  Auto {
+public enum Auto {
 
     TRUE(true, "자동"),
     FALSE(false, "수동");

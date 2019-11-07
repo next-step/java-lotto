@@ -14,6 +14,7 @@ public class LottoSheet {
     private LottoSheet(Queue<LottoSheetRow> lottoSheetRows) {
         this.lottoSheetRows = lottoSheetRows;
     }
+
     public static LottoSheet of(List<String> lottoSheetRows) {
         List<LottoSheetRow> mapped = lottoSheetRows.stream()
             .map(StringUtils::split)

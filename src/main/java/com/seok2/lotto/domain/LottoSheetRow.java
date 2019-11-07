@@ -13,7 +13,7 @@ public class LottoSheetRow {
     }
 
     static LottoSheetRow of(String... numbers) {
-        int [] parsed = Arrays.stream(numbers)
+        int[] parsed = Arrays.stream(numbers)
             .map(Integer::parseInt)
             .mapToInt(i -> i)
             .toArray();

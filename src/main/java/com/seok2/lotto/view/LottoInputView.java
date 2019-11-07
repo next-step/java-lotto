@@ -33,7 +33,8 @@ public class LottoInputView {
 
     public static WinningLotto getWinning() {
         System.out.println(WINNING_LOTTO_MSG);
-        Lotto winning = Lotto.of(Arrays.stream(StringUtils.split(scanner.next())).map(Integer::parseInt).mapToInt(i->i).toArray());
+        Lotto winning = Lotto
+            .of(Arrays.stream(StringUtils.split(scanner.next())).map(Integer::parseInt).mapToInt(i -> i).toArray());
         System.out.println(WINNING_BONUS_NUMBER_MSG);
         return WinningLotto.of(winning, LottoNumber.of(scanner.nextInt()));
     }

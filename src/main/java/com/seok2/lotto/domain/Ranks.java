@@ -3,7 +3,6 @@ package com.seok2.lotto.domain;
 
 import static com.seok2.lotto.domain.Lotto.LOTTO_PRICE;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Ranks {

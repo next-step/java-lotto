@@ -1,7 +1,6 @@
 package com.seok2.lotto.domain;
 
 import com.seok2.lotto.exception.LottoDuplicateNumberException;
-import java.util.Arrays;
 
 public class WinningLotto {
 

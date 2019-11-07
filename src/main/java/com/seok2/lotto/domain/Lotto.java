@@ -18,7 +18,8 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
         this.auto = auto;
     }
-    public static Lotto of(Auto auto, int ... lottoNumbers) {
+
+    public static Lotto of(Auto auto, int... lottoNumbers) {
         return new Lotto(LottoNumbers.of(lottoNumbers), auto);
     }
 
@@ -26,7 +27,7 @@ public class Lotto {
         return new Lotto(lottoNumbers, auto);
     }
 
-    public static Lotto of(int ... lottoNumbers) {
+    public static Lotto of(int... lottoNumbers) {
         return of(Auto.TRUE, lottoNumbers);
     }
 

@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Lotteries implements Iterable<Lotto>{
+public class Lotteries implements Iterable<Lotto> {
 
     private final List<Lotto> lotteries;
 

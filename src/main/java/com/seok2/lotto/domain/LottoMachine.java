@@ -9,7 +9,7 @@ public class LottoMachine {
     public static Lotteries buy(Money investment, LottoSheet sheet) {
         Money lottoPrice = Lotto.LOTTO_PRICE;
         List<Lotto> lotteries = new ArrayList<>();
-        while(investment.moreThanOrEquals(lottoPrice)){
+        while (investment.moreThanOrEquals(lottoPrice)) {
             LottoStrategy strategy = LottoStrategyFactory.get(sheet.next());
             lotteries.add(strategy.generate());
             investment = investment.subtract(lottoPrice);
@@ -19,7 +19,7 @@ public class LottoMachine {
     }
 
     private static void checkLottoSheet(LottoSheet sheet) {
-        if(sheet.isNotEmpty()) {
+        if (sheet.isNotEmpty()) {
             throw new PurchaseAmountException();
         }
     }
