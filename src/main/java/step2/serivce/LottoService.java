@@ -7,9 +7,16 @@ public class LottoService {
     public static final int LOTTO_PRICE = 1000;
 
     public LottoTickets buyTickets(int price) {
-        int lottoCount = price / LOTTO_PRICE;
+        checkPrice(price);
 
+        int lottoCount = price / LOTTO_PRICE;
         return getLottoTickets(lottoCount);
+    }
+
+    private void checkPrice(int price) {
+        if(price <= 0) {
+            throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다");
+        }
     }
 
     public LottoTickets getLottoTickets(int lottoCount) {
