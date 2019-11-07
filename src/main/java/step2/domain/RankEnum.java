@@ -1,10 +1,10 @@
 package step2.domain;
 
 public enum RankEnum {
-    THREE_MATCH(3, 5000),
-    FOUR_MATCH(4, 50000),
-    FIVE_MATCH(5, 1500000),
-    SIX_MATCH(6, 2000000000);
+    THREE_MATCH(3, 5_000),
+    FOUR_MATCH(4, 50_000),
+    FIVE_MATCH(5, 1_500_000),
+    SIX_MATCH(6, 2_000_000_000);
 
     private int matchCount;
     private int reward;

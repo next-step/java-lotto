@@ -16,7 +16,7 @@ public class LottoService {
         return new LottoTickets(lottoCount);
     }
 
-    public Winner getWiner(LottoTickets lottoTickets, String lastWeekWinningInput) {
+    public Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         return new Winner(lottoTickets, lastWeekWinningInput);
     }
 }

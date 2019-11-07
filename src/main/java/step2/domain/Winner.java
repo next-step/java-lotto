@@ -8,21 +8,19 @@ import java.util.Map;
 public class Winner {
     private static final String WINNING_NUM_DELIMITER = ",";
 
-    private List<Integer> winnerNums;
     private Ranks countOfRanks;
     private Double profit;
 
-
     public Winner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         getWinner(lottoTickets, lastWeekWinningInput);
-
         countOfRanks = new Ranks();
+
         int lottoTicketsSize = lottoTickets.size();
         calculateProfit(lottoTicketsSize);
     }
 
     private Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
-        winnerNums = splitWinningNums(lastWeekWinningInput);
+        List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
 
         lottoTickets.getWinner(winnerNums, countOfRanks);
 
