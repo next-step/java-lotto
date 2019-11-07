@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    public void printLottoTickets(LottoTickets lottoTickets) {
+    public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.size() + "를 구매했습니다.");
 
         List<LottoTicket> lottos = lottoTickets.getLottoTickets();
@@ -18,20 +18,20 @@ public class ResultView {
         }
     }
 
-    private void printLottoTicket(LottoTicket lottoTicket) {
+    private static void printLottoTicket(LottoTicket lottoTicket) {
         List<Integer> lottoNums = lottoTicket.getLottoNums();
 
         System.out.println(String.join(",", String.valueOf(lottoNums)));
     }
 
-    public void printWinnerStatistics(Winner winner) {
+    public static void printWinnerStatistics(Winner winner) {
         System.out.println("\n당첨통계");
         System.out.println("---------");
 
         printStatistics(winner);
     }
 
-    public void printStatistics(Winner winner) {
+    private static void printStatistics(Winner winner) {
         Map<Integer, Integer> countOfRanks = winner.getCountOfRanks();
 
         System.out.println("3개 일치 (5000원)- " + countOfRanks.getOrDefault(3, 0) + "개");

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Winner {
     private static final String WINNING_NUM_DELIMITER = ",";
-    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private List<Integer> winnerNums;
     private Map<Integer, Integer> countOfRanks = new HashMap<>();
@@ -21,7 +21,7 @@ public class Winner {
         calculateProfit(lottoTicketsSize);
     }
 
-    public Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
+    private Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         winnerNums = splitWinningNums(lastWeekWinningInput);
 
         lottoTickets.getWinner(winnerNums, countOfRanks);

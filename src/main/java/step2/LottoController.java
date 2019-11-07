@@ -12,20 +12,17 @@ import java.util.List;
 public class LottoController {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-
-        int purchaseAmount = inputView.getPurchaseAmount();
+        int purchaseAmount = InputView.getPurchaseAmount();
 
         LottoService lottoService = new LottoService();
         LottoTickets lottoTickets = lottoService.buyTickets(purchaseAmount);
 
-        ResultView resultView = new ResultView();
-        resultView.printLottoTickets(lottoTickets);
+        ResultView.printLottoTickets(lottoTickets);
 
-        String lastWeekWinningInput = inputView.getLastWeekWinningNumbers();
+        String lastWeekWinningInput = InputView.getLastWeekWinningNumbers();
         Winner winner = lottoService.getWiner(lottoTickets, lastWeekWinningInput);
 
-        resultView.printWinnerStatistics(winner);
+        ResultView.printWinnerStatistics(winner);
 
     }
 }
