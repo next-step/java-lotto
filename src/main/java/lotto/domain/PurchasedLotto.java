@@ -19,7 +19,7 @@ public class PurchasedLotto {
     public PurchasedLotto(int lottoAmount) {
         List<Lotto> purchasedLotto = new ArrayList<>();
         for (int i = 0; i < lottoAmount; i++) {
-            purchasedLotto.add(new Lotto(LOTTO_NUMBER_STRATEGY.randomNumbers()));
+            purchasedLotto.add(new Lotto(LOTTO_NUMBER_STRATEGY.generateLottoNumber()));
         }
         this.purchasedLotto = purchasedLotto;
     }
