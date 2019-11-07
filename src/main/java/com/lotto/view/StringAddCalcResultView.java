@@ -1,10 +1,10 @@
 package com.lotto.view;
 
-public class StringAddCalculatorResultView {
+public class StringAddCalcResultView {
 
     private int result;
 
-    public StringAddCalculatorResultView(int result) {
+    public StringAddCalcResultView(int result) {
         this.result = result;
     }
 

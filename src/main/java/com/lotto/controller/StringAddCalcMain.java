@@ -1,19 +1,19 @@
 package com.lotto.controller;
 
 import com.lotto.model.StringAddCalculator;
-import com.lotto.view.StringAddCalculatorInputView;
-import com.lotto.view.StringAddCalculatorResultView;
+import com.lotto.view.StringAddCalcInputView;
+import com.lotto.view.StringAddCalcResultView;
 
 public class StringAddCalcMain {
 
     public static void main(String[] args) {
 
-        StringAddCalculatorInputView stringAddCalculatorInputView = new StringAddCalculatorInputView();
+        StringAddCalcInputView stringAddCalcInputView = new StringAddCalcInputView();
 
         StringAddCalculator stringAddCalculator = new StringAddCalculator();
-        int result = stringAddCalculator.execute(stringAddCalculatorInputView.getInputValue());
+        int result = stringAddCalculator.execute(stringAddCalcInputView.getInputValue());
 
-        StringAddCalculatorResultView stringAddCalculatorResultView = new StringAddCalculatorResultView(result);
-        stringAddCalculatorResultView.print();
+        StringAddCalcResultView stringAddCalcResultView = new StringAddCalcResultView(result);
+        stringAddCalcResultView.print();
     }
 }
