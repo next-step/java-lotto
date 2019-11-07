@@ -6,6 +6,7 @@ public enum RankEnum {
     FIVE_MATCH(5, 1_500_000),
     SIX_MATCH(6, 2_000_000_000);
 
+    private static final int NO_REWARD = 0;
     private final int matchCount;
     private final int reward;
 
@@ -14,34 +15,17 @@ public enum RankEnum {
         this.reward = reward;
     }
 
-    public static int getReward(int hit) {
-        int result = 0;
+    public static int getReward(int hitCount) {
+        int result = NO_REWARD;
 
-        try {
-            for (RankEnum rank : RankEnum.values()) {
-                result = compare(rank, hit);
-                checkResult(result);
-            }
-        } catch(ResultEndException e) {
-                return result;
+        for (RankEnum rank : RankEnum.values()) {
+            result += compare(rank, hitCount);
         }
-
         return result;
     }
 
-    private static void checkResult(int result) throws ResultEndException {
-        if (result > 0) {
-            throw new ResultEndException("get Reward is ended");
-        }
-    }
-
-    private static int compare(RankEnum rank, int hit) {
-        return rank.matchCount == hit ? rank.reward : 0;
+    private static int compare(RankEnum rank, int hitCount) {
+        return rank.matchCount == hitCount ? rank.reward : 0;
     }
 }
 
-class ResultEndException extends Exception {
-    public ResultEndException(String message) {
-        super(message);
-    }
-}
