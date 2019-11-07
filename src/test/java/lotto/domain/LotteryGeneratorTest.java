@@ -26,7 +26,7 @@ public class LotteryGeneratorTest {
     void generateTicket() {
 
         // when
-        LotteryTicket lotteryTickets = lotteryGenerator.generate();
+        LotteryTicket lotteryTickets = lotteryGenerator.generateAutoTicket();
 
         // then
         assertThat(lotteryTickets).isNotNull();

@@ -27,8 +27,10 @@ public class LotteryController {
     public void run() {
 
         int amount = inputView.receiveAmount();
-        List<LotteryTicket> tickets = lotteryGenerator.generate(amount);
-        resultView.showTickets(tickets);
+        List<List<Integer>> manualLotteries = inputView.receiveManualLottery();
+
+        List<LotteryTicket> tickets = lotteryGenerator.generate(amount, manualLotteries);
+        resultView.showTickets(tickets, manualLotteries.size());
 
         WinningNumbers winningNumbers = new WinningNumbers(
                 inputView.receiveWinningNumbers(),

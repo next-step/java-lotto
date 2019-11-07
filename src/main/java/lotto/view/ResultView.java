@@ -18,8 +18,8 @@ public class ResultView {
         this.out = out;
     }
 
-    public void showTickets(List<LotteryTicket> tickets) {
-        out.printf("%d개를 구매했습니다.\n", tickets.size());
+    public void showTickets(List<LotteryTicket> tickets, int manualCount) {
+        out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, tickets.size() - manualCount);
         for (LotteryTicket ticket : tickets) {
             out.println(ticket.getNumbers());
         }
