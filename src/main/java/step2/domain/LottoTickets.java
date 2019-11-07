@@ -25,18 +25,10 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public void getWinner(List<Integer> winnerNums, Ranks countOfRanks) {
+    public void setWinner(List<Integer> winnerNums, Ranks countOfRanks) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = matchNumber(lottoTicket.getLottoNums(), winnerNums);
+            int matchCount = lottoTicket.matchNumber(winnerNums);
             countOfRanks.countWinning(matchCount);
         }
-    }
-
-    public int matchNumber(List<Integer> candidateNums, List<Integer> winnerNums) {
-        Long matchNumer = candidateNums.stream()
-                .filter(winnerNums::contains)
-                .count();
-
-        return Math.toIntExact(matchNumer);
     }
 }

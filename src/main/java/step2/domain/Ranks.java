@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Ranks {
+    public static final int WINNING_COUNT = 1;
+
     private Map<Integer, Integer> ranks = new HashMap<>();
 
     public Double calculateProfit(int lottoTicketsSize) {
@@ -22,7 +24,7 @@ public class Ranks {
     }
 
     public void countWinning(int matchCount) {
-        ranks.put(matchCount, ranks.getOrDefault(matchCount, 0) + 1);
+        ranks.put(matchCount, ranks.getOrDefault(matchCount, 0) + WINNING_COUNT);
     }
 
     public int getOrDefault(int hit, int defaultNum) {

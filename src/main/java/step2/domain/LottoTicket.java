@@ -5,36 +5,37 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
+    public static final int LOTTO_SIZE = 6;
+
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
+    private static final LottoCandidate candidateNumbers = new LottoCandidate();
+    private static final String LOTTO_NUMS_DELIMITER = ",";
 
-    private final List<Integer> lottoNums;
+    private List<Integer> lottoNums;
 
     public LottoTicket() {
+        candidateNumbers.shuffle();
+
         this.lottoNums = makeAutoNumbers();
         checkNumsRange();
     }
 
-    public List<Integer> makeAutoNumbers() {
-        List<Integer> candidateNumbers = new ArrayList<>();
-        makeCandidateNumbers(candidateNumbers);
+    public LottoTicket(List<Integer> lottoNums) {
+        candidateNumbers.shuffle();
 
+        this.lottoNums = lottoNums;
+        checkNumsRange();
+    }
+
+    public List<Integer> makeAutoNumbers() {
         List<Integer> selectedNums = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            selectedNums.add(candidateNumbers.get(i));
-        }
+
+        candidateNumbers.addRandomNumber(selectedNums);
 
         Collections.sort(selectedNums);
 
         return selectedNums;
-    }
-
-    private void makeCandidateNumbers(List<Integer> candidateNumbers) {
-        for (int i = 1; i <= 45; i++) {
-            candidateNumbers.add(i);
-        }
-
-        Collections.shuffle(candidateNumbers);
     }
 
     private void checkNumsRange() {
@@ -50,10 +51,19 @@ public class LottoTicket {
     }
 
     private boolean isProperNumRange(int lottoNum) {
-        return (lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX);
+        return lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX;
     }
 
-    public List<Integer> getLottoNums() {
-        return this.lottoNums;
+    public int matchNumber(List<Integer> winnerNums) {
+        Long matchNumber = this.lottoNums.stream()
+                .filter(winnerNums::contains)
+                .count();
+
+        return Math.toIntExact(matchNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.join(LOTTO_NUMS_DELIMITER, String.valueOf(lottoNums));
     }
 }

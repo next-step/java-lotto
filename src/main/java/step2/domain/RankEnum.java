@@ -7,6 +7,7 @@ public enum RankEnum {
     SIX_MATCH(6, 2_000_000_000);
 
     private static final int NO_REWARD = 0;
+
     private final int matchCount;
     private final int reward;
 
@@ -26,6 +27,14 @@ public enum RankEnum {
 
     private static int compare(RankEnum rank, int hitCount) {
         return rank.matchCount == hitCount ? rank.reward : 0;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getReward() {
+        return reward;
     }
 }
 
