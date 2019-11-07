@@ -60,9 +60,5 @@ public class LottoNumbers {
         if (uniqueNumberSet.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
-
-        /*if (uniqueNumberSet.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_ERROR);
-        }*/
     }
 }
