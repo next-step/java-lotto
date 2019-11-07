@@ -42,25 +42,6 @@ public class LottoTest {
     }
 
     @Test
-    void create_amount_test() {
-        LottoAmount amount = new LottoAmount(14000);
-        assertThat(amount).isEqualTo(new LottoAmount(14000));
-    }
-
-    @Test
-    void get_purchased_lotto_count() {
-        LottoAmount amount = new LottoAmount(14000);
-        assertThat(amount.getPurchasedLottoCount()).isEqualTo(14);
-    }
-
-    @Test
-    void 로또_적은_금액으로_사보기() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoAmount amount = new LottoAmount(500);
-        }).withMessageMatching("건네주신 금액으로는 로또를 살 수 없습니다.");
-    }
-
-    @Test
     void 구매된_로또_갯수() {
         LottoOrder lottoOrder = new LottoOrder(14000);
         assertThat(lottoOrder.getLottoAmount()).isEqualTo(14);
@@ -93,14 +74,6 @@ public class LottoTest {
         assertThat(NUMERIC.matcher(number).matches()).isTrue();
     }
 
-    @Test
-    void 당첨조회_객체_생성() {
-        Integer[] number = {1,2,3,4,5,6};
-        List<Integer> winningNumbers = Arrays.asList(number);
-        WinningNumber checkWinningNumber = new WinningNumber(winningNumbers);
-        assertThat(checkWinningNumber).isEqualTo(new WinningNumber(winningNumbers));
-    }
-    
     @Test
     void 당첨조회() {
         Integer[] number = {1,2,3,4,5,6};
