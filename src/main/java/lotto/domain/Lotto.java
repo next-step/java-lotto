@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * @author : 김윤호
@@ -27,7 +25,11 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
-    
+
+    public int matchLottoNumberCount(List<Integer> winningNumbers) {
+        return (int) this.lottoNumbers.stream().filter(number -> winningNumbers.contains(number)).count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
