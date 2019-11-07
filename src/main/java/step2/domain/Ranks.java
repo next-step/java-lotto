@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.serivce.LottoService;
+
 import java.util.HashMap;
 import java.util.Map;
 

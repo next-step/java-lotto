@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnerTest {
-    LottoTickets lottoTickets = new LottoTickets();
+    LottoTickets lottoTickets = new LottoTickets(1);
 
     List<Integer> winnerNums = Arrays.asList(1, 2, 3, 4, 5, 6);
 

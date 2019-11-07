@@ -2,17 +2,19 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoTickets {
-    List<LottoTicket> lottoTickets;
+    private List<LottoTicket> lottoTickets;
 
-    public LottoTickets() {
+    public LottoTickets(int lottoCount) {
         this.lottoTickets = new ArrayList<>();
+        createLottoTickets(lottoCount);
     }
 
-    public void add(LottoTicket lottoTicket) {
-        this.lottoTickets.add(lottoTicket);
+    private void createLottoTickets(int lottoCount) {
+        for (int i = 0; i < lottoCount; i++) {
+            lottoTickets.add(new LottoTicket());
+        }
     }
 
     public int size() {

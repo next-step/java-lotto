@@ -1,13 +1,10 @@
-package step2;
+package step2.controller;
 
-import step2.domain.LottoService;
-import step2.domain.LottoTicket;
+import step2.serivce.LottoService;
 import step2.domain.LottoTickets;
 import step2.domain.Winner;
 import step2.view.InputView;
 import step2.view.ResultView;
-
-import java.util.List;
 
 public class LottoController {
 
