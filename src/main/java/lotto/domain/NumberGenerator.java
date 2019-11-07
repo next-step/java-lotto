@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class NumberGenerator {
         return numbers;
     }
 
-    private List<Integer> getBaseNumbers(){
+    private List<Integer> getBaseNumbers() {
         List<Integer> baseNumbers = new ArrayList<>();
         for (int i = LOTTO_START_NUM; i <= LOTTO_END_NUM; i++) {
             baseNumbers.add(i);
@@ -37,7 +37,7 @@ public class NumberGenerator {
         return baseNumbers;
     }
 
-    private String[] getTokens(String text){
+    private String[] getTokens(String text) {
         String[] tokens = text.trim().split(",");
         if (isNotRightCount(tokens) || isNotNumber(tokens)) {
             throw new RuntimeException();
@@ -50,11 +50,11 @@ public class NumberGenerator {
     }
 
     private boolean isNotNumber(String[] tokens) {
-        int notNumberCount =
-                (int) Arrays.stream(tokens).filter(token -> !token.matches(ONLY_NUMBER_PATTER)).count();
+        int notNumberCount = (int) Arrays.stream(tokens)
+                .filter(token -> !token.matches(ONLY_NUMBER_PATTER))
+                .count();
         return (notNumberCount > 0);
     }
-
 
 
 }
