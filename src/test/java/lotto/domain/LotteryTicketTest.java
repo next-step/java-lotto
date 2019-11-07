@@ -30,7 +30,7 @@ class LotteryTicketTest {
     void getNumbers() {
 
         // when
-        List<Integer> numbers = ticket.getNumbers();
+        List<LotteryNumber> numbers = ticket.getNumbers();
 
         // then
         assertThat(numbers).hasSize(6);
@@ -41,22 +41,20 @@ class LotteryTicketTest {
     void addNumbers() {
 
         // when
-        List<Integer> numbers = ticket.getNumbers();
+        List<LotteryNumber> numbers = ticket.getNumbers();
 
         // then
-        assertThrows(UnsupportedOperationException.class, () -> numbers.add(1));
+        assertThrows(UnsupportedOperationException.class, () -> numbers.add(LotteryNumber.of(1)));
     }
 
     @DisplayName("복권 숫자 범위 정상")
     @Test
     void validateNumber() {
         // when
-        List<Integer> numbers = ticket.getNumbers();
+        List<LotteryNumber> numbers = ticket.getNumbers();
 
         // then
-        boolean allMatch = numbers.stream()
-                .allMatch(integer -> integer > 0 && integer <= 45);
-        assertThat(allMatch).isTrue();
+        assertThat(numbers.contains(LotteryNumber.of(1))).isTrue();
     }
 
     @DisplayName("유효성 검사 실패: 범위")

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by yusik on 2019/11/04.
@@ -9,45 +10,35 @@ import java.util.List;
 public class LotteryTicket {
 
     private static final int LOTTERY_NUMBER_SIZE = 6;
-    private static final int LOTTERY_NUMBER_MIN = 1;
-    private static final int LOTTERY_NUMBER_MAX = 45;
 
-    private final List<Integer> numbers;
+    private final List<LotteryNumber> numbers;
 
     public LotteryTicket(List<Integer> numbers) {
         validateSize(numbers);
-        validateRange(numbers);
         validateDuplicate(numbers);
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .map(LotteryNumber::of)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> getNumbers() {
+    public List<LotteryNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
-    public WinningRanking getRanking(List<Integer> winningNumbers, int bonusNumber) {
+    public boolean isWin(LotteryTicket winningNumbers, LotteryNumber bonusNumber) {
+        return getRanking(winningNumbers, bonusNumber) != WinningRanking.MISS;
+    }
+
+    public WinningRanking getRanking(LotteryTicket winningNumbers, LotteryNumber bonusNumber) {
         long matchingCount = numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
         return WinningRanking.valueOf(matchingCount, numbers.contains(bonusNumber));
     }
 
-    public boolean isWin(List<Integer> winningNumbers, int bonusNumber) {
-        return getRanking(winningNumbers, bonusNumber) != WinningRanking.MISS;
-    }
-
     private void validateSize(List<Integer> lotteryNumbers) {
         if (lotteryNumbers.size() != LOTTERY_NUMBER_SIZE) {
             String message = String.format("복권 번호는 %d개 입니다.", LOTTERY_NUMBER_SIZE);
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    private void validateRange(List<Integer> lotteryNumbers) {
-        boolean outOfRange = lotteryNumbers.stream()
-                .anyMatch(number -> number < LOTTERY_NUMBER_MIN || number > LOTTERY_NUMBER_MAX);
-        if (outOfRange) {
-            String message = String.format("복권 번호의 범위는 [%d, %d] 입니다.", LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX);
             throw new IllegalArgumentException(message);
         }
     }
@@ -61,7 +52,7 @@ public class LotteryTicket {
         }
     }
 
-    public boolean contains(int bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean contains(LotteryNumber lotteryNumber) {
+        return numbers.contains(lotteryNumber);
     }
 }
