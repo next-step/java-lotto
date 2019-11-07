@@ -27,12 +27,7 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
-
-    public Long matchLottoNumberCount(int[] numbers) {
-        List<Integer> matchNumbers = IntStream.of(numbers).boxed().collect(Collectors.toList());
-        return this.lottoNumbers.stream().filter(number -> matchNumbers.contains(number)).count();
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
