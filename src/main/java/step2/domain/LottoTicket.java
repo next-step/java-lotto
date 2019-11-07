@@ -8,8 +8,7 @@ public class LottoTicket {
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
 
-    private List<Integer> lottoNums;
-    private List<Integer> candidateNumbers = new ArrayList<>();
+    private final List<Integer> lottoNums;
 
     public LottoTicket() {
         this.lottoNums = makeAutoNumbers();
@@ -17,7 +16,8 @@ public class LottoTicket {
     }
 
     public List<Integer> makeAutoNumbers() {
-        makeCandidateNumbers();
+        List<Integer> candidateNumbers = new ArrayList<>();
+        makeCandidateNumbers(candidateNumbers);
 
         List<Integer> selectedNums = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -29,7 +29,7 @@ public class LottoTicket {
         return selectedNums;
     }
 
-    private void makeCandidateNumbers() {
+    private void makeCandidateNumbers(List<Integer> candidateNumbers) {
         for (int i = 1; i <= 45; i++) {
             candidateNumbers.add(i);
         }
