@@ -1,8 +1,12 @@
 package lotto.view;
 
+import lotto.domain.LottoNumberStrategy;
+
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author : 김윤호
@@ -13,20 +17,25 @@ public class LottoInputView {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
-    private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
+    private static final String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해주세요.";
 
-    public static int inputPurchaseAmount() {
+    public static final int inputPurchaseAmount() {
         System.out.println(INPUT_PURCHASE_AMOUNT);
 
         final String amount = scanner.nextLine();
-        if (!isNumber(amount)) {
+        if (!LottoNumberStrategy.isNumber(amount)) {
             throw new InputMismatchException("숫자만 입력 가능합니다.");
         }
 
         return Integer.parseInt(amount);
     }
 
-    public static boolean isNumber(String str) {
-        return str != null && NUMERIC.matcher(str).matches();
+    public static final List<Integer> inputWinningNumber() {
+        System.out.println(INPUT_WINNING_NUMBER);
+
+        final String winningNumber = scanner.nextLine();
+        LottoNumberStrategy.checkLottoNumber(winningNumber);
+
+        return Arrays.stream(winningNumber.split(",")).map(Integer::parseInt).collect(Collectors.toList());
     }
 }
