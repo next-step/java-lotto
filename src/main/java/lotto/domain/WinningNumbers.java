@@ -30,7 +30,7 @@ public class WinningNumbers {
 
     public Map<WinningRanking, Long> getWinningTickets(List<LotteryTicket> tickets) {
         return tickets.stream()
-                .filter(ticket -> WinningRanking.MISS != ticket.getRanking(winningNumbers, bonusNumber))
+                .filter(ticket -> ticket.isWin(winningNumbers, bonusNumber))
                 .collect(groupingBy(ticket -> ticket.getRanking(winningNumbers, bonusNumber), counting()));
     }
 

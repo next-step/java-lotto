@@ -34,6 +34,10 @@ public class LotteryTicket {
         return WinningRanking.valueOf(matchingCount, numbers.contains(bonusNumber));
     }
 
+    public boolean isWin(List<Integer> winningNumbers, int bonusNumber) {
+        return getRanking(winningNumbers, bonusNumber) != WinningRanking.MISS;
+    }
+
     private void validateSize(List<Integer> lotteryNumbers) {
         if (!NumbersValidator.validateSize(lotteryNumbers, LOTTERY_NUMBER_SIZE)) {
             String message = String.format("복권 번호는 %d개 입니다.", LOTTERY_NUMBER_SIZE);
