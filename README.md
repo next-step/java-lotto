@@ -107,3 +107,21 @@ person.checkBonusLotteries( Integer )를 하면 가지고 있는 5개일치 로�
 
 - Person 안의 lotteries에 적용 가능
 - Lotto 안의 numbers를 적용 가능 (Lotto의 status가 사라지며 Lotto가 사실상 일급 컬렉션 역할을 하게 됨)
+
+## Step4
+
+## next-step에서 정해준 요구사항
+
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+## TDD 적용을 위한 구체적인 기능 추려보기
+
+> 수동으로 로또 번호가 구매되는 기능
+
+InputView에서 문자열을 받아 파싱이 되어 `List<Integer>`가 생겼다는 가정 하에 \
+그 `List<Integer>`를 받아 6글자 / 중첩된 번호 없음 / 1~45 사이임을 검증하고 로또를 만든다
+
+## 포장할 원시값
+
+모든 값들이 컬렉션이나 포장되어 있음 (ex. LottoPrizeStat, Wallet)

@@ -1,8 +1,8 @@
 package lotto.domain.person;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoPrize;
 import lotto.dto.LottoDto;
+import lotto.domain.lotto.LottoPrizes;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,10 +26,10 @@ class BuyingLotteries {
 				.collect(Collectors.toList());
 	}
 
-	List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
-		return lotteries.stream()
+	LottoPrizes checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
+		return new LottoPrizes(lotteries.stream()
 				.map(lotto -> lotto.examine(answerNumbers, bonusNumber))
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 
 	boolean isEmpty() {

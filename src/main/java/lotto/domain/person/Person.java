@@ -2,8 +2,9 @@ package lotto.domain.person;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCreator;
-import lotto.domain.lotto.LottoPrize;
 import lotto.dto.LottoDto;
+import lotto.domain.lotto.LottoPrizes;
+import lotto.dto.LottoDtoCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,10 @@ public class Person {
 		return new Person(amount, lotteries);
 	}
 
+	public void buyLottoSelf(LottoCreator lottoCreator) {
+		buyLotto(lottoCreator);
+	}
+
 	public void buyLottoWithAllMoney(LottoCreator lottoCreator) {
 		for (int i = 0, end = wallet.getPossibleNumberToBuy(LottoCreator.LOTTO_PRICE); i < end; i++) {
 			buyLotto(lottoCreator);
@@ -37,11 +42,11 @@ public class Person {
 		lotteries.add(lottoCreator.pickLotto(wallet));
 	}
 
-	public List<LottoDto> getLottoDtos() {
-		return lotteries.toLottoDtos();
+	public LottoDtoCollection getLottoDtoCollection() {
+		return new LottoDtoCollection(lotteries.toLottoDtos());
 	}
 
-	public List<LottoPrize> checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
+	public LottoPrizes checkAllLotteries(List<Integer> answerNumbers, int bonusNumber) {
 		validateEmptyLotteries();
 		return lotteries.checkAllLotteries(answerNumbers, bonusNumber);
 	}

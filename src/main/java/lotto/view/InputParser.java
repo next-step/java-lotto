@@ -5,10 +5,10 @@ import java.util.List;
 
 class InputParser {
 
-	private static final String DELIMITER = ", ";
+	private static final String DELIMITERS = ", |,";
 
 	static List<Integer> parse(String string) {
-		String[] parsedString = string.split(DELIMITER);
+		String[] parsedString = string.split(DELIMITERS);
 		return parseStringToNumbers(parsedString);
 	}
 

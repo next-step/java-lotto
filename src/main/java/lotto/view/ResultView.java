@@ -1,21 +1,23 @@
 package lotto.view;
 
 import lotto.dto.LottoDto;
+import lotto.dto.LottoDtoCollection;
 import lotto.dto.LottoPrizeStat;
-
-import java.util.List;
 
 public class ResultView {
 
-	public void printBuyingLotteries(List<LottoDto> lottoDtos) {
-		System.out.println(String.format("%s개를 구매했습니다.", lottoDtos.size()));
-		for(LottoDto dto : lottoDtos) {
+	public static void printBuyingLotteries(LottoDtoCollection collection) {
+		System.out.println();
+		System.out.println(String.format("수동으로 %s개 자동으로 %s개를 구매했습니다.", collection.selfLottoCount(),
+				collection.autoLottoCount()));
+
+		for(LottoDto dto : collection.getAutoLottoDtos()) {
 			System.out.println(dto.printLottoNumbers());
 		}
 		System.out.println();
 	}
 
-	public void printWinStats(LottoPrizeStat stat, double earningsRatio) {
+	public static void printWinStats(LottoPrizeStat stat, double earningsRatio) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
