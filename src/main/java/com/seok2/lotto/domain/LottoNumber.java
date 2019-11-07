@@ -1,14 +1,13 @@
 package com.seok2.lotto.domain;
 
-import com.seok2.lotto.exception.OutOfLottoLengthException;
+import com.seok2.lotto.exception.LottoOutOfBoundException;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private static final LottoNumber[] CACHE = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+
+    private static final LottoNumber[] CACHE = IntStream.rangeClosed(Lotto.LOTTO_MIN_NUMBER, Lotto.LOTTO_MAX_NUMBER)
         .mapToObj(LottoNumber::new)
         .toArray(LottoNumber[]::new);
 
@@ -22,13 +21,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         try {
             return CACHE[--number];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new OutOfLottoLengthException();
+            throw new LottoOutOfBoundException();
         }
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(number);
+    public int compareTo(LottoNumber that) {
+        return number - that.number;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
-    public int compareTo(LottoNumber number) {
-        return this.number - number.number;
+    public String toString() {
+        return String.valueOf(number);
     }
 }

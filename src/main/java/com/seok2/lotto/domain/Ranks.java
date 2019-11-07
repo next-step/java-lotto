@@ -1,6 +1,7 @@
 package com.seok2.lotto.domain;
 
-import static com.seok2.lotto.domain.Lotto.PRICE;
+
+import static com.seok2.lotto.domain.Lotto.LOTTO_PRICE;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,12 +24,12 @@ public class Ranks {
             .count();
     }
 
-    public BigDecimal calculateYield() {
-        return getTotalReward().percent(calculatePurchaseAmount());
+    public ReturnOnInvestmentRate calculateReturnOnInvestmentRate() {
+        return getTotalReward().calculateReturnOnInvestmentRate(calculatePurchaseAmount());
     }
 
     private Money calculatePurchaseAmount() {
-        return PRICE.multiply(ranks.size());
+        return LOTTO_PRICE.multiply(ranks.size());
     }
 
     private Money getTotalReward() {

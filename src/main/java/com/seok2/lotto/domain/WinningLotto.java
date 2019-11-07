@@ -1,6 +1,7 @@
 package com.seok2.lotto.domain;
 
-import com.seok2.lotto.exception.DuplicateLottoNumberException;
+import com.seok2.lotto.exception.LottoDuplicateNumberException;
+import java.util.Arrays;
 
 public class WinningLotto {
 
@@ -15,7 +16,7 @@ public class WinningLotto {
 
     private void validate(Lotto lotto, LottoNumber bonus) {
         if (lotto.contains(bonus)) {
-            throw new DuplicateLottoNumberException();
+            throw new LottoDuplicateNumberException();
         }
     }
 
@@ -23,7 +24,7 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonus);
     }
 
-    public Rank check(Lotto lotto) {
-        return Rank.find(lotto.match(this.lotto), lotto.contains(this.bonus));
+    Rank check(Lotto lotto) {
+        return lotto.check(this.lotto, this.bonus);
     }
 }

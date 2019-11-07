@@ -25,36 +25,36 @@ public class Money {
         return new Money(money);
     }
 
-    public boolean moreThanOrEquals(Money money) {
+    boolean moreThanOrEquals(Money money) {
         return this.money.compareTo(money.money) >= ZERO_VALUE;
     }
 
-    protected Money add(Money money) {
+    Money add(Money money) {
         if (money.equals(ZERO)) {
             return this;
         }
         return Money.of(this.money.add(money.money));
     }
 
-    protected Money minus(Money money) {
+    Money subtract(Money money) {
         if (money.equals(ZERO)) {
             return this;
         }
         return Money.of(this.money.subtract(money.money));
     }
 
-    public Money multiply(long multiplicand) {
+    Money multiply(long multiplicand) {
         if (multiplicand == ONE_VALUE) {
             return this;
         }
         return Money.of(this.money.multiply(new BigDecimal(multiplicand)));
     }
 
-    protected BigDecimal percent(Money divisor) {
+    ReturnOnInvestmentRate calculateReturnOnInvestmentRate(Money returnOnInvestment) {
         if (money.equals(ZERO)) {
-            return BigDecimal.ZERO;
+            return ReturnOnInvestmentRate.of(BigDecimal.ZERO);
         }
-        return this.money.divide(divisor.money);
+        return ReturnOnInvestmentRate.of(this.money.divide(returnOnInvestment.money));
     }
 
     @Override

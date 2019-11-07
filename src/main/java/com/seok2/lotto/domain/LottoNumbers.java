@@ -1,64 +1,63 @@
 package com.seok2.lotto.domain;
 
-import static com.seok2.common.utils.StringUtils.split;
-
-import com.seok2.lotto.exception.DuplicateLottoNumberException;
-import com.seok2.lotto.exception.OutOfLottoLengthException;
+import com.seok2.lotto.exception.LottoDuplicateNumberException;
+import com.seok2.lotto.exception.LottoLengthException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final int LOTTO_LENGTH = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    private LottoNumbers(List<LottoNumber> numbers) {
-        validate(numbers);
+    private LottoNumbers(Set<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public static LottoNumbers of(List<LottoNumber> numbers) {
-        return new LottoNumbers(numbers);
+    static LottoNumbers of(Collection<LottoNumber> numbers) {
+        validateSize(numbers);
+        validateDuplicate(numbers);
+        return new LottoNumbers(Collections.unmodifiableSet(new TreeSet<>(numbers)));
     }
 
-    public static LottoNumbers of(String numbers) {
-        return of(parse(numbers));
+    static LottoNumbers of(int... numbers) {
+        return of(Arrays.stream(numbers)
+            .mapToObj(LottoNumber::of)
+            .collect(Collectors.toList()));
     }
 
-    private static List<LottoNumber> parse(String numbers) {
-        return Arrays.stream(split(numbers))
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .map(LottoNumber::of)
-            .collect(Collectors.toList());
-    }
-
-    private void validate(List<LottoNumber> numbers) {
-        long count = numbers.stream()
-            .distinct()
-            .count();
-        if (numbers.size() != count) {
-            throw new DuplicateLottoNumberException();
-        }
-        if (count != LOTTO_LENGTH) {
-            throw new OutOfLottoLengthException();
+    private static void validateSize(Collection<LottoNumber> numbers) {
+        if (numbers.size() != Lotto.LOTTO_LENGTH) {
+            throw new LottoLengthException();
         }
     }
 
-    public int match(LottoNumbers winning) {
-        Set<LottoNumber> intersection = new HashSet<>(winning.numbers);
-        intersection.retainAll(this.numbers);
-        return intersection.size();
+    private static void validateDuplicate(Collection<LottoNumber> numbers) {
+        Set<LottoNumber> identified = new HashSet<>(numbers);
+        if (numbers.size() != identified.size()) {
+            throw new LottoDuplicateNumberException();
+        }
     }
 
-    public boolean contains(LottoNumber number) {
-        return numbers.contains(number);
+    int match(LottoNumbers lottoNumbers) {
+        Set<LottoNumber> copy = new HashSet<>(this.numbers);
+        copy.retainAll(lottoNumbers.numbers);
+        return copy.size();
+    }
+
+    boolean contains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 
     @Override
@@ -77,12 +76,4 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(numbers);
     }
-
-    @Override
-    public String toString() {
-        Collections.sort(numbers);
-        return numbers.toString();
-    }
-
-
 }

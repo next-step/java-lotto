@@ -1,21 +1,21 @@
 package com.seok2.lotto.view;
 
-import static com.seok2.lotto.domain.Lotto.PRICE;
-
+import com.seok2.common.utils.StringUtils;
 import com.seok2.lotto.domain.Lotto;
 import com.seok2.lotto.domain.LottoNumber;
 import com.seok2.lotto.domain.Money;
-import com.seok2.lotto.domain.Paper;
-import com.seok2.lotto.domain.Papers;
 import com.seok2.lotto.domain.WinningLotto;
-import com.seok2.lotto.exception.PurchaseAmountException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
+
 public class LottoInputView {
 
+    private static final int ZERO_VALUE = 0;
     private static final String PURCHASE_AMOUNT_MSG = "구매금액을 입력해 주세요.";
     private static final String NUMBER_OF_MANUAL_NUMBER_MSG = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_NUMBER_MSG = "수동으로 구매할 번호를 입력해 주세요.";
@@ -33,40 +33,21 @@ public class LottoInputView {
 
     public static WinningLotto getWinning() {
         System.out.println(WINNING_LOTTO_MSG);
-        Lotto winning = Lotto.generate(scanner.next());
+        Lotto winning = Lotto.of(Arrays.stream(StringUtils.split(scanner.next())).map(Integer::parseInt).mapToInt(i->i).toArray());
         System.out.println(WINNING_BONUS_NUMBER_MSG);
         return WinningLotto.of(winning, LottoNumber.of(scanner.nextInt()));
     }
 
-    public static Papers getPapers(Money investment) {
+    public static List<String> getLottoSheetRow() {
         System.out.println(NUMBER_OF_MANUAL_NUMBER_MSG);
         int trials = scanner.nextInt();
-        if (trials <= 0) {
-            return Papers.empty();
+        if (trials <= ZERO_VALUE) {
+            return Collections.emptyList();
         }
-        return getPapers(trials, investment);
-    }
-
-    private static Papers getPapers(int trials, Money investment) {
-        validate(trials, investment);
         System.out.println(MANUAL_NUMBER_MSG);
-        Queue<Paper> papers = new LinkedList<>();
+        List<String> lottoSheetRow = new LinkedList<>();
         IntStream.range(0, trials)
-            .forEach(i -> papers.offer(Paper.of(scanner.next())));
-        return Papers.of(papers);
-    }
-
-    private static void validate(int trials, Money investment) {
-        if (!isPurchasable(trials, investment)) {
-            throw new PurchaseAmountException();
-        }
-    }
-
-    private static boolean isPurchasable(int trials, Money investment) {
-        return investment.moreThanOrEquals(PRICE.multiply(trials));
-    }
-
-    public static void main(String[] args) {
-        IntStream.of(2).forEach(System.out::println);
+            .forEach(i -> lottoSheetRow.add(scanner.next()));
+        return lottoSheetRow;
     }
 }

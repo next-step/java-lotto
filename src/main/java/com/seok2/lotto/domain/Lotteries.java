@@ -1,37 +1,31 @@
 package com.seok2.lotto.domain;
 
-import com.seok2.lotto.exception.MinimumLotteriesException;
+import static java.util.stream.Collectors.toList;
+
+import com.seok2.lotto.exception.EmptyLotteriesException;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Lotteries implements Iterable<Lotto> {
+public class Lotteries implements Iterable<Lotto>{
 
     private final List<Lotto> lotteries;
 
     private Lotteries(List<Lotto> lotteries) {
         validate(lotteries);
-        this.lotteries = lotteries;
-    }
-
-    public static Lotteries of(List<Lotto> lotteries) {
-        return new Lotteries(lotteries);
+        this.lotteries = Collections.unmodifiableList(lotteries);
     }
 
     private void validate(List<Lotto> lotteries) {
-        if (lotteries.isEmpty()) {
-            throw new MinimumLotteriesException();
+        if (lotteries == null || lotteries.isEmpty()) {
+            throw new EmptyLotteriesException();
         }
     }
 
     public Ranks check(WinningLotto winning) {
         return Ranks.of(lotteries.stream()
             .map(winning::check)
-            .collect(Collectors.toList()));
-    }
-
-    public int size() {
-        return lotteries.size();
+            .collect(toList()));
     }
 
     public long sizeOfAuto() {
@@ -41,9 +35,11 @@ public class Lotteries implements Iterable<Lotto> {
     }
 
     public long sizeOfManual() {
-        return lotteries.stream()
-            .filter(Lotto::isManual)
-            .count();
+        return lotteries.size() - sizeOfAuto();
+    }
+
+    static Lotteries of(List<Lotto> lotteries) {
+        return new Lotteries(lotteries);
     }
 
     @Override

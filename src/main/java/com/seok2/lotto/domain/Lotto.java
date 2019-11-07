@@ -1,41 +1,50 @@
 package com.seok2.lotto.domain;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
 public class Lotto {
 
-    public static final Money PRICE = Money.of(1_000);
+    private static final String LOTTO_PRINT_FORMAT = "{0}: {1}";
+    static final Money LOTTO_PRICE = Money.of(1_000);
+    static final int LOTTO_MIN_NUMBER = 1;
+    static final int LOTTO_MAX_NUMBER = 45;
+    static final int LOTTO_LENGTH = 6;
 
-    private final LottoNumbers numbers;
-    private final boolean auto;
+    private final LottoNumbers lottoNumbers;
+    private final Auto auto;
 
-    private Lotto(LottoNumbers numbers, boolean auto) {
-        this.numbers = numbers;
+    private Lotto(LottoNumbers lottoNumbers, Auto auto) {
+        this.lottoNumbers = lottoNumbers;
         this.auto = auto;
     }
-
-    public static Lotto generate(LottoStrategy strategy) {
-        return new Lotto(LottoNumbers.of(strategy.generate()), true);
+    public static Lotto of(Auto auto, int ... lottoNumbers) {
+        return new Lotto(LottoNumbers.of(lottoNumbers), auto);
     }
 
-    public static Lotto generate(String numbers) {
-        return new Lotto(LottoNumbers.of(numbers), false);
+    public static Lotto of(Auto auto, LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers, auto);
     }
 
-    public int match(Lotto winning) {
-        return numbers.match(winning.numbers);
+    public static Lotto of(int ... lottoNumbers) {
+        return of(Auto.TRUE, lottoNumbers);
     }
 
-    public boolean contains(LottoNumber bonus) {
-        return numbers.contains(bonus);
+    boolean contains(LottoNumber bonus) {
+        return this.lottoNumbers.contains(bonus);
     }
 
-    public boolean isAuto() {
-        return this.auto;
+    Rank check(Lotto winning, LottoNumber bonus) {
+        return Rank.find(lottoNumbers.match(winning.lottoNumbers), contains(bonus));
     }
 
-    public boolean isManual() {
-        return !this.auto;
+    boolean isAuto() {
+        return auto.isAuto();
+    }
+
+    @Override
+    public String toString() {
+        return MessageFormat.format(LOTTO_PRINT_FORMAT, auto.getDescription(), lottoNumbers.toString());
     }
 
     @Override
@@ -47,17 +56,13 @@ public class Lotto {
             return false;
         }
         Lotto that = (Lotto) o;
-        return Objects.equals(numbers, that.numbers);
+        return Objects.equals(lottoNumbers, that.lottoNumbers) &&
+            Objects.equals(auto, that.auto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
+        return Objects.hash(lottoNumbers, auto);
     }
 
 

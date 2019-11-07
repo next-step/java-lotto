@@ -50,7 +50,7 @@ public class LottoOutputView {
             builder.append(MessageFormat.format(RESULT_RANK_MSG, rank, ranks.count(rank)))
                 .append(LINE_BREAK);
         }
-        builder.append(MessageFormat.format(RESULT_YIELD_MSG, ranks.calculateYield()));
+        builder.append(MessageFormat.format(RESULT_YIELD_MSG, ranks.calculateReturnOnInvestmentRate()));
         System.out.println(builder.toString());
     }
 }

@@ -24,7 +24,7 @@ public enum Rank {
         this.description = description;
     }
 
-    public static Rank find(int matches, boolean isMatchBonus) {
+    static Rank find(int matches, boolean isMatchBonus) {
         return Arrays.stream(values())
             .filter(rank -> rank.matches == matches)
             .filter(rank -> !rank.equals(SECOND) || isMatchBonus)
