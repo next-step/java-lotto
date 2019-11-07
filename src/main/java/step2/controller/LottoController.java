@@ -1,5 +1,6 @@
 package step2.controller;
 
+import step2.domain.Bonus;
 import step2.serivce.LottoService;
 import step2.domain.LottoTickets;
 import step2.domain.Winner;
@@ -17,7 +18,9 @@ public class LottoController {
         ResultView.printLottoTickets(lottoTickets);
 
         String lastWeekWinningInput = InputView.getLastWeekWinningNumbers();
-        Winner winner = lottoService.getWinner(lottoTickets, lastWeekWinningInput);
+
+        Bonus bonus = InputView.getBonus();
+        Winner winner = lottoService.getWinner(lottoTickets, lastWeekWinningInput, bonus);
 
         ResultView.printWinnerStatistics(winner);
 

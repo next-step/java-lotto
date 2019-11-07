@@ -11,20 +11,20 @@ public class Winner {
     private Ranks countOfRanks;
     private Double profit;
 
-    public Winner(LottoTickets lottoTickets, String lastWeekWinningInput) {
+    public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
         countOfRanks = new Ranks();
 
-        setWinner(lottoTickets, lastWeekWinningInput);
+        setWinner(lottoTickets, lastWeekWinningInput, bonus);
         getWinner();
 
         int lottoTicketsSize = lottoTickets.size();
         calculateProfit(lottoTicketsSize);
     }
 
-    private void setWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
+    private void setWinner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
         List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
 
-        lottoTickets.setWinner(winnerNums, countOfRanks);
+        lottoTickets.setWinner(winnerNums, bonus, countOfRanks);
     }
 
     private List<Integer> splitWinningNums(String lastWeekWinningInput) {

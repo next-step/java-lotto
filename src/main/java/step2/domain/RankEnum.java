@@ -4,6 +4,7 @@ public enum RankEnum {
     THREE_MATCH(3, 5_000),
     FOUR_MATCH(4, 50_000),
     FIVE_MATCH(5, 1_500_000),
+    FIVE_BONUS(5, 3_000_000),
     SIX_MATCH(6, 2_000_000_000);
 
     private static final int NO_REWARD = 0;

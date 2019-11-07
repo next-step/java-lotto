@@ -25,10 +25,11 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public void setWinner(List<Integer> winnerNums, Ranks countOfRanks) {
+    public void setWinner(List<Integer> winnerNums, Bonus bonus, Ranks countOfRanks) {
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.matchNumber(winnerNums);
             countOfRanks.countWinning(matchCount);
+            countOfRanks.countBouns(lottoTicket, matchCount, bonus);
         }
     }
 }

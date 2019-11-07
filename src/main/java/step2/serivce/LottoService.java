@@ -1,5 +1,6 @@
 package step2.serivce;
 
+import step2.domain.Bonus;
 import step2.domain.LottoTickets;
 import step2.domain.Winner;
 
@@ -23,7 +24,7 @@ public class LottoService {
         return new LottoTickets(lottoCount);
     }
 
-    public Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
-        return new Winner(lottoTickets, lastWeekWinningInput);
+    public Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
+        return new Winner(lottoTickets, lastWeekWinningInput, bonus);
     }
 }
