@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    public static final int LOTTO_SIZE = 6;
-
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
     private static final LottoCandidate candidateNumbers = new LottoCandidate();
@@ -44,13 +42,13 @@ public class LottoTicket {
         }
     }
 
-    private void checkNumRange(int lottoNum) {
+    public static void checkNumRange(int lottoNum) {
         if (!isProperNumRange(lottoNum)) {
             throw new IllegalArgumentException("Out of range");
         }
     }
 
-    private boolean isProperNumRange(int lottoNum) {
+    private static boolean isProperNumRange(int lottoNum) {
         return lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX;
     }
 
@@ -62,8 +60,21 @@ public class LottoTicket {
         return Math.toIntExact(matchNumber);
     }
 
+    public List<Integer> getLottoNums() {
+        return lottoNums;
+    }
+
+    public int size() {
+        return lottoNums.size();
+    }
+
+    public boolean contains(int number) {
+        return lottoNums.contains(number);
+    }
+
     @Override
     public String toString() {
         return String.join(LOTTO_NUMS_DELIMITER, String.valueOf(lottoNums));
     }
+
 }

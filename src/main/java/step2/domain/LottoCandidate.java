@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoCandidate {
+    public static final int LOTTO_SIZE = 6;
+
     private static List<Integer> candidate = new ArrayList<>();
 
     public LottoCandidate() {
@@ -22,7 +24,7 @@ public class LottoCandidate {
     }
 
     public void addRandomNumber(List<Integer> selectedNums) {
-        for (int i = 0; i < LottoTicket.LOTTO_SIZE; i++) {
+        for (int i = 0; i < LOTTO_SIZE; i++) {
             selectedNums.add(candidate.get(i));
         }
     }
