@@ -76,9 +76,9 @@ public class LottoView {
         }
     }
 
-    private String getNumbersText(LottoNumbers lottoNumbers) {
+    private String getNumbersText(List<Integer> numbers) {
 
-        return lottoNumbers.getValue()
+        return numbers
                 .stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));

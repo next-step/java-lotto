@@ -18,7 +18,7 @@ public class Lottos {
         List<LottoRank> lottoRanks = new ArrayList<>();
 
         for (Lotto each : lottos) {
-            lottoRanks.add(winningLotto.compareNumbersTo(each));
+            lottoRanks.add(each.matchTo(winningLotto));
         }
 
         Map<LottoRank, Long> rankGroup = lottoRanks

@@ -30,10 +30,10 @@ public class LottoProvider {
     }
 
     public static WinningLotto createWinningLotto(List<Integer> numbers, int bonusNumber) {
-        return new WinningLotto(createLotto(numbers), new BonusNumber(bonusNumber));
+        return new WinningLotto(createLotto(numbers), new LottoNumber(bonusNumber));
     }
 
-    public static Lotto createLotto(Integer[] numbers) {
+    public static Lotto createLotto(Integer... numbers) {
         return createLotto(Arrays.asList(numbers));
     }
 
