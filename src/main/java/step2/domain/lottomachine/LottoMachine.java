@@ -21,6 +21,6 @@ public abstract class LottoMachine {
                 .collect(toList());
     }
 
-    public abstract LottoTicket issueLottoTicket();
+    public abstract LottoTicket issueLottoTicket(List<Integer> numbers);
 
 }

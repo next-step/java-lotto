@@ -1,7 +1,7 @@
 package step2.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class LottoResult {
     }
 
     private Map<PriceGroup, Integer> initResult() {
-        Map<PriceGroup, Integer> result = new HashMap<>();
+        Map<PriceGroup, Integer> result = new EnumMap<>(PriceGroup.class);
         for (PriceGroup priceGroup : PriceGroup.values()) {
             result.put(priceGroup, 0);
         }

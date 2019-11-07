@@ -13,7 +13,7 @@ public class RandomLottoMachine extends LottoMachine {
     private static final int START_INDEX = 0;
 
     @Override
-    public LottoTicket issueLottoTicket() {
+    public LottoTicket issueLottoTicket(List<Integer> numbers) {
         Collections.shuffle(lottoNumbers);
         return getSixNumbers();
     }
