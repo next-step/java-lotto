@@ -34,6 +34,16 @@ class WinnersTest {
         assertThat(winners.totalEarning()).isEqualTo(Rank.FIRST.getPrize() + Rank.SECOND.getPrize());
     }
 
+    @Test
+    void match_bonus() {
+        Lottos lottos = lottoGenerate(10);
+        LottoNumbers winner = winnerGenerate(0);
+        int bonus = 7;
+        winners = new Winners(lottos, winner, bonus);
+
+        assertThat(winners.getResult().get(Rank.SECOND)).isEqualTo(1);
+    }
+
     private LottoNumbers winnerGenerate(int weight) {
         List<Integer> numbers = new ArrayList<>();
 
