@@ -8,5 +8,5 @@ import java.util.List;
  * @date : 2019-11-02 21:53
  */
 public interface RandomGenerateStrategy {
-    public List<Integer> randomNumbers();
+    public List<Integer> generateLottoNumber();
 }
