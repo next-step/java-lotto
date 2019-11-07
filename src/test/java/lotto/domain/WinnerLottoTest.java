@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinnerLottoTest {
 
@@ -23,5 +24,17 @@ class WinnerLottoTest {
 
         assertThat(winnerType.isPresent()).isTrue();
         assertThat(winnerType.get()).isEqualTo(WinnerType.SECOND);
+    }
+
+    @Test
+    @DisplayName("로또 당첨번호와 보너스볼의 번호는 같을 수 없다.")
+    void validateDuplicate() {
+
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        assertThatThrownBy(() -> {
+            new WinnerLotto(new Lotto(numbers), 6);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("lotto 당첨 번호와 보너스볼 번호는 같을 수 없습니다.");
     }
 }

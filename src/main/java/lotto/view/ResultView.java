@@ -51,11 +51,7 @@ public class ResultView {
     }
 
     private static String makeBonusMatchFormat(boolean matchBonus) {
-        if (matchBonus) {
-            return ", 보너스 볼 일치";
-        }
-
-        return "";
+        return matchBonus ? ", 보너스 볼 일치" : "";
     }
 
     public static void printYield(double yield) {

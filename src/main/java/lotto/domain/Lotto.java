@@ -23,7 +23,7 @@ public class Lotto {
         this.numbers.sort(Integer::compareTo);
     }
 
-    private List<Integer> createLottoNumbers() {
+    private static List<Integer> createLottoNumbers() {
         List<Integer> lottos = new ArrayList<>();
         for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER; i++) {
             lottos.add(i);
