@@ -7,12 +7,10 @@ import java.util.regex.Pattern;
 
 public class CustomDelimiter {
 
-    private Matcher matcher;
+    private final String BASE_DELIMITER = ",|;";
+    private final String CUSTOM_DELIMITER = "//(.)\n(.*)";
 
-    public boolean hasCustomDelimiter(String inputValue) {
-        matcher = Pattern.compile("//(.)\n(.*)").matcher(inputValue);
-        return matcher.find();
-    }
+    private Matcher matcher;
 
     public String[] getValuesToAdd(String inputValue) {
         if (hasCustomDelimiter(inputValue)) {
@@ -20,6 +18,13 @@ public class CustomDelimiter {
             return matcher.group(2).split(customDelimiter);
         }
 
-        return new String[StringAddCalculatorConstant.ZERO_NUMBER];
+        return inputValue.split(BASE_DELIMITER);
     }
+
+    public boolean hasCustomDelimiter(String inputValue) {
+        matcher = Pattern.compile(CUSTOM_DELIMITER).matcher(inputValue);
+        return matcher.find();
+    }
+
+
 }

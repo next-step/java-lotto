@@ -14,9 +14,6 @@ public class StringAddCalculator {
         }
 
         String[] inputValues = customDelimiter.getValuesToAdd(inputValue);
-        if (inputValue.length() == StringAddCalculatorConstant.ZERO_NUMBER) {
-            inputValues = inputValue.split(",|:");
-        }
 
         return add(inputValues);
      }
