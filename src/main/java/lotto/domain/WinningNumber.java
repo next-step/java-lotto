@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author : 김윤호
@@ -13,6 +10,10 @@ import java.util.Objects;
 public class WinningNumber {
 
     private final List<Integer> winningNumbers;
+
+    public WinningNumber(Integer... winningNumbers) {
+        this(Arrays.asList(winningNumbers));
+    }
 
     public WinningNumber(List<Integer> winningNumbers) {
         this.winningNumbers = winningNumbers;
