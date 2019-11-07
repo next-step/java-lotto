@@ -1,6 +1,6 @@
 package step2.domain;
 
-public enum Rank {
+public enum RankEnum {
     THREE_MATCH(3, 5000),
     FOUR_MATCH(4, 50000),
     FIVE_MATCH(5, 1500000),
@@ -9,7 +9,7 @@ public enum Rank {
     private int matchCount;
     private int reward;
 
-    Rank(int matchCount, int reward) {
+    RankEnum(int matchCount, int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
@@ -17,14 +17,14 @@ public enum Rank {
     public static int getReward(int hit) {
         int result = 0;
 
-        for(Rank rank : Rank.values()) {
+        for(RankEnum rank : RankEnum.values()) {
             result = compare(rank, hit);
             if(result > 0) break;
         }
         return result;
     }
 
-    private static int compare(Rank rank, int hit) {
+    private static int compare(RankEnum rank, int hit) {
         return rank.matchCount == hit ? rank.reward : 0;
     }
 }

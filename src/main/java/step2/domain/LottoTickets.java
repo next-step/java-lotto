@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoTickets {
-    List<LottoTicket> lottoTickets = new ArrayList<>();
+    List<LottoTicket> lottoTickets;
 
     public LottoTickets() {
+        this.lottoTickets = new ArrayList<>();
     }
 
     public void add(LottoTicket lottoTicket) {
@@ -22,10 +23,10 @@ public class LottoTickets {
         return lottoTickets;
     }
 
-    public void getWinner(List<Integer> winnerNums, Map<Integer, Integer> countOfRanks) {
+    public void getWinner(List<Integer> winnerNums, Ranks countOfRanks) {
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = matchNumber(lottoTicket.getLottoNums(), winnerNums);
-            countWinning(matchCount, countOfRanks);
+            countOfRanks.countWinning(matchCount);
         }
     }
 
@@ -35,9 +36,5 @@ public class LottoTickets {
                 .count();
 
         return Math.toIntExact(matchNumer);
-    }
-
-    private void countWinning(int matchCount, Map<Integer, Integer> countOfRanks) {
-        countOfRanks.put(matchCount, countOfRanks.getOrDefault(matchCount, 0) + 1);
     }
 }

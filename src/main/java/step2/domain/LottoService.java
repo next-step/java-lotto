@@ -1,9 +1,7 @@
 package step2.domain;
 
-import java.util.List;
-
 public class LottoService {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private LottoTickets lottoTickets;
 

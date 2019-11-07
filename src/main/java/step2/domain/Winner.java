@@ -7,16 +7,16 @@ import java.util.Map;
 
 public class Winner {
     private static final String WINNING_NUM_DELIMITER = ",";
-    private static final int LOTTO_PRICE = 1000;
 
     private List<Integer> winnerNums;
-    private Map<Integer, Integer> countOfRanks = new HashMap<>();
+    private Ranks countOfRanks;
     private Double profit;
 
 
     public Winner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         getWinner(lottoTickets, lastWeekWinningInput);
 
+        countOfRanks = new Ranks();
         int lottoTicketsSize = lottoTickets.size();
         calculateProfit(lottoTicketsSize);
     }
@@ -43,23 +43,14 @@ public class Winner {
     }
 
     private void calculateProfit(int lottoTicketsSize) {
-        int sum = 0;
-
-        for (int matchCount : countOfRanks.keySet()) {
-            int countOfMatchTicket = countOfRanks.get(matchCount);
-
-            sum += Rank.getReward(matchCount) * countOfMatchTicket;
-        }
-
-        int purchaseAmount = lottoTicketsSize * LOTTO_PRICE;
-        profit = Double.parseDouble(String.format("%.2f", sum / (double) purchaseAmount));
+        profit = countOfRanks.calculateProfit(lottoTicketsSize);
     }
 
     public Double getProfit() {
         return this.profit;
     }
 
-    public Map<Integer, Integer> getCountOfRanks() {
+    public Ranks getCountOfRanks() {
         return this.countOfRanks;
     }
 }

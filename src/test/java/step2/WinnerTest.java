@@ -4,12 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.LottoTicket;
 import step2.domain.LottoTickets;
-import step2.domain.Rank;
-import step2.domain.Winner;
+import step2.domain.RankEnum;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,6 +45,6 @@ public class WinnerTest {
     @ParameterizedTest
     @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
     void getRewardTest(int matchCount, int reward) {
-        assertThat(Rank.getReward(matchCount)).isEqualTo(reward);
+        assertThat(RankEnum.getReward(matchCount)).isEqualTo(reward);
     }
 }
