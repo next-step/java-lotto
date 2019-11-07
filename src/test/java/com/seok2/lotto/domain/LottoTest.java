@@ -46,6 +46,6 @@ class LottoTest {
     @Test
     void isAuto() {
         assertThat(Lotto.of(Auto.TRUE, 1,2,3,4,5,6).isAuto()).isTrue();
-        assertThat(Lotto.of(Auto.TRUE, 1,2,3,4,5,6).isAuto()).isFalse();
+        assertThat(Lotto.of(Auto.FALSE, 1,2,3,4,5,6).isAuto()).isFalse();
     }
 }
