@@ -1,16 +1,19 @@
 package step2.view;
 
 import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
 import step2.domain.Winner;
 
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+    public void printLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.size() + "를 구매했습니다.");
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        List<LottoTicket> lottos = lottoTickets.getLottoTickets();
+
+        for (LottoTicket lottoTicket : lottos) {
             printLottoTicket(lottoTicket);
         }
     }

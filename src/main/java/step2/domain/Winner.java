@@ -14,31 +14,19 @@ public class Winner {
     private Double profit;
 
 
-    public Winner(List<LottoTicket> lottoTickets, String lastWeekWinningInput) {
+    public Winner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         getWinner(lottoTickets, lastWeekWinningInput);
 
         int lottoTicketsSize = lottoTickets.size();
         calculateProfit(lottoTicketsSize);
     }
 
-    public Winner getWinner(List<LottoTicket> lottoTickets, String lastWeekWinningInput) {
+    public Winner getWinner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         winnerNums = splitWinningNums(lastWeekWinningInput);
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            List<Integer> candidateNums = lottoTicket.getLottoNums();
+        lottoTickets.getWinner(winnerNums, countOfRanks);
 
-            int matchCount = matchNumber(candidateNums, winnerNums);
-            countWinning(matchCount);
-        }
         return this;
-    }
-
-    public int matchNumber(List<Integer> candidateNums, List<Integer> winnerNums) {
-        Long matchNumer = candidateNums.stream()
-                .filter(winnerNums::contains)
-                .count();
-
-        return Math.toIntExact(matchNumer);
     }
 
     private List<Integer> splitWinningNums(String lastWeekWinningInput) {
@@ -52,10 +40,6 @@ public class Winner {
         }
 
         return winningNums;
-    }
-
-    private void countWinning(int matchCount) {
-        countOfRanks.put(matchCount, countOfRanks.getOrDefault(matchCount, 0) + 1);
     }
 
     private void calculateProfit(int lottoTicketsSize) {

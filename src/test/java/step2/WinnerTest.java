@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
 import step2.domain.Rank;
 import step2.domain.Winner;
 
@@ -15,34 +16,32 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WinnerTest {
-    List<LottoTicket> lottoTickets = new ArrayList<>();
-    String lastWeekWinningInput = "1,2,3,4,5,6";
+    LottoTickets lottoTickets = new LottoTickets();
 
-    Winner winner = new Winner(lottoTickets, lastWeekWinningInput);
     List<Integer> winnerNums = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     @DisplayName("3개 일치")
     @Test
     void matchNumbersThreeTest() {
-        assertThat(winner.matchNumber(Arrays.asList(1, 2, 3, 10, 11, 12), winnerNums)).isEqualTo(3);
+        assertThat(lottoTickets.matchNumber(Arrays.asList(1, 2, 3, 10, 11, 12), winnerNums)).isEqualTo(3);
     }
 
     @DisplayName("4개 일치")
     @Test
     void matchNumbersFourTest() {
-        assertThat(winner.matchNumber(Arrays.asList(1, 2, 3, 4, 11, 12), winnerNums)).isEqualTo(4);
+        assertThat(lottoTickets.matchNumber(Arrays.asList(1, 2, 3, 4, 11, 12), winnerNums)).isEqualTo(4);
     }
 
     @DisplayName("5개 일치")
     @Test
     void matchNumbersFiveTest() {
-        assertThat(winner.matchNumber(Arrays.asList(1, 2, 3, 4, 5, 12), winnerNums)).isEqualTo(5);
+        assertThat(lottoTickets.matchNumber(Arrays.asList(1, 2, 3, 4, 5, 12), winnerNums)).isEqualTo(5);
     }
 
     @DisplayName("6개 일치")
     @Test
     void matchNumbersSixTest() {
-        assertThat(winner.matchNumber(Arrays.asList(1, 2, 3, 4, 5, 6), winnerNums)).isEqualTo(6);
+        assertThat(lottoTickets.matchNumber(Arrays.asList(1, 2, 3, 4, 5, 6), winnerNums)).isEqualTo(6);
     }
 
     @DisplayName("상금 일치")

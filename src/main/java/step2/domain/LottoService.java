@@ -1,21 +1,20 @@
 package step2.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
     private static final int LOTTO_PRICE = 1000;
 
-    private List<LottoTicket> lottoTickets;
+    private LottoTickets lottoTickets;
 
-    public List<LottoTicket> buyTickets(int price) {
+    public LottoTickets buyTickets(int price) {
         int lottoCount = price / LOTTO_PRICE;
 
         return generateAutoLotto(lottoCount);
     }
 
-    public List<LottoTicket> generateAutoLotto(int lottoCount) {
-        lottoTickets = new ArrayList<>();
+    public LottoTickets generateAutoLotto(int lottoCount) {
+        lottoTickets = new LottoTickets();
 
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(new LottoTicket());
@@ -23,7 +22,7 @@ public class LottoService {
         return lottoTickets;
     }
 
-    public Winner getWiner(List<LottoTicket> lottoTickets, String lastWeekWinningInput) {
+    public Winner getWiner(LottoTickets lottoTickets, String lastWeekWinningInput) {
         return new Winner(lottoTickets, lastWeekWinningInput);
     }
 }

@@ -2,6 +2,7 @@ package step2;
 
 import step2.domain.LottoService;
 import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
 import step2.domain.Winner;
 import step2.view.InputView;
 import step2.view.ResultView;
@@ -16,7 +17,7 @@ public class LottoController {
         int purchaseAmount = inputView.getPurchaseAmount();
 
         LottoService lottoService = new LottoService();
-        List<LottoTicket> lottoTickets = lottoService.buyTickets(purchaseAmount);
+        LottoTickets lottoTickets = lottoService.buyTickets(purchaseAmount);
 
         ResultView resultView = new ResultView();
         resultView.printLottoTickets(lottoTickets);
