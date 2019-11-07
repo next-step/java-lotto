@@ -17,7 +17,7 @@ public class NumberGenerator {
 
     static {
         BASE = IntStream
-                .range(DEFAULT_START_NUMBER, DEFAULT_END_NUMBER + 1)
+                .rangeClosed(DEFAULT_START_NUMBER, DEFAULT_END_NUMBER)
                 .boxed()
                 .collect(toList());
     }
