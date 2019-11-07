@@ -40,7 +40,7 @@ public class BonusTest {
     @Test
     void countOfBounsRankTest() {
         Ranks ranks = new Ranks();
-        ranks.countBouns(lottoTicket, 5, bonus);
+        ranks.countWinning(lottoTicket, 5, bonus);
 
         assertThat(ranks.getOrDefault(BONUS_RANK_INDEX,0)).isEqualTo(1);
     }

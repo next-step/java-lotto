@@ -28,8 +28,7 @@ public class LottoTickets {
     public void setWinner(List<Integer> winnerNums, Bonus bonus, Ranks countOfRanks) {
         for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = lottoTicket.matchNumber(winnerNums);
-            countOfRanks.countWinning(matchCount);
-            countOfRanks.countBouns(lottoTicket, matchCount, bonus);
+            countOfRanks.countWinning(lottoTicket, matchCount, bonus);
         }
     }
 }
