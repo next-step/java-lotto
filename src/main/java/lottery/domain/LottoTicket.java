@@ -5,15 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import lottery.LottoConstants;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class LottoTicket {
 
-    private static final Integer LOTTO_TICKER_SIZE = 6;
-    private static final Predicate<Integer> LOTTO_VALID_NUMBER_RANGE = integer -> (0 < integer) && (integer < 46);
     private static final String ILLEGAL_TICKET_SIZE = "유효하지 않은 티켓입니다.(입력한 숫자가 6개가 아닙니다.)";
     private static final String ILLEGAL_TICKET_NUMBER = "유효하지 않은 티켓입니다.(유요하지 않은 숫자가 입력되었습니다.)";
     private static final String NUMBER_DELIMITER = ", ";
@@ -29,6 +28,10 @@ public class LottoTicket {
 
     public List<Integer> match(List<Integer> winNumbers) {
         return new ArrayList<>(CollectionUtils.intersection(lottoNumbers, winNumbers));
+    }
+
+    public boolean isBonusMatched(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     private List<Integer> checkTicketValidation(Set<Integer> lottoNumbers) {
@@ -49,12 +52,11 @@ public class LottoTicket {
     }
 
     private boolean isValidNumbers(Set<Integer> lottoNumbers) {
-        return lottoNumbers.stream()
-            .allMatch(LOTTO_VALID_NUMBER_RANGE);
+        return LottoConstants.LOTTO_NUMBERS.containsAll(lottoNumbers);
     }
 
     private boolean isValidSize(Set<Integer> lottoNumbers) {
-        return lottoNumbers.size() == LOTTO_TICKER_SIZE;
+        return lottoNumbers.size() == LottoConstants.LOTTO_TICKER_SIZE;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class LottoTicket {
 
         LottoTicket that = (LottoTicket) o;
 
-        return lottoNumbers != null ? lottoNumbers.equals(that.lottoNumbers) : that.lottoNumbers == null;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override

@@ -11,13 +11,12 @@ public class Main {
     public static void main(String[] args) {
         int purchaseAmount = InputView.payAmount();
 
-        LottoTicketSeller seller = new LottoTicketSeller();
-        LottoTickets lottoTickets = seller.purchaseRandomGames(purchaseAmount);
+        LottoTickets lottoTickets = LottoTicketSeller.purchaseRandomGames(purchaseAmount);
         ResultView.printLottoTickets(lottoTickets);
 
         List<Integer> winNumbers = InputView.getWinNumbers();
-        LottoResults results = lottoTickets.match(winNumbers);
+        int bonusNumber = InputView.getBonusNumber(winNumbers);
+        LottoResults results = lottoTickets.match(winNumbers, bonusNumber);
         ResultView.printLottoResults(results);
     }
-
 }
