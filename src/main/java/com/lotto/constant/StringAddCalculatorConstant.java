@@ -1,4 +1,4 @@
-package com.calc.constant;
+package com.lotto.constant;
 
 public class StringAddCalculatorConstant {
 

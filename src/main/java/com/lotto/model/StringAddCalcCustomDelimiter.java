@@ -1,11 +1,9 @@
-package com.calc.model;
-
-import com.calc.constant.StringAddCalculatorConstant;
+package com.lotto.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomDelimiter {
+public class StringAddCalcCustomDelimiter {
 
     private final String BASE_DELIMITER = ",|;";
     private final String CUSTOM_DELIMITER = "//(.)\n(.*)";

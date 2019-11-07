@@ -1,8 +1,8 @@
-package com.calc.model;
+package com.lotto.model;
 
-import com.calc.constant.StringAddCalculatorConstant;
+import com.lotto.constant.StringAddCalculatorConstant;
 
-public class InputValidator {
+public class StringAddCalcInputValidator {
 
 
     private static final String INVALID_NUMBER_MESSAGE = "숫자가 아닙니다.";
