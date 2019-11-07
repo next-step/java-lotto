@@ -2,25 +2,24 @@ package lottery;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lottery.domain.Prize;
 
 public class LottoResults {
 
     private static final String REPRESENT_PATTERN = "{0}개 일치{1}({2}원)- {3}개\n";
-    private final Map<Prize, Integer> totalResults = new EnumMap<>(Prize.class);
+    private Map<Prize, Integer> totalResults;
 
     public LottoResults(List<LottoResult> lottoResults) {
         calculateStatistics(lottoResults);
     }
 
     private void calculateStatistics(List<LottoResult> lottoResults) {
-        Arrays.stream(Prize.values())
-            .forEach(
-                prize -> totalResults.put(prize, countNumberOfPrize(lottoResults, prize))
-            );
+        this.totalResults = Arrays.stream(Prize.values())
+            .collect(Collectors.toMap(Function.identity(), prize -> countNumberOfPrize(lottoResults, prize)));
     }
 
     private int countNumberOfPrize(List<LottoResult> lottoResults, Prize prize) {
@@ -35,8 +34,8 @@ public class LottoResults {
 
     private int purchasedAmount() {
         return LottoConstants.TICKET_PRICE * totalResults.values()
-                                                         .stream()
-                                                         .reduce(0, Integer::sum);
+            .stream()
+            .reduce(0, Integer::sum);
     }
 
     private double sumOfWinMoney() {
@@ -56,18 +55,21 @@ public class LottoResults {
         return " ";
     }
 
+    private void constructResultStatistics(StringBuilder resultString, Prize prize) {
+        resultString.append(getFormattedResult(prize));
+    }
+
+    private String getFormattedResult(Prize prize) {
+        return MessageFormat.format(REPRESENT_PATTERN,
+            prize.getMatchedNumber(), getBonusMessage(prize), prize.getWinMoney(), totalResults.get(prize));
+    }
+
     @Override
     public String toString() {
-        StringBuilder resultString = new StringBuilder();
-        resultString.append("\n당첨 통계\n");
-        resultString.append("---------\n");
-        Arrays.stream(Prize.values())
-            .filter(prize -> !Prize.isFail(prize))
-            .forEach(
-                prize -> resultString.append(MessageFormat.format(REPRESENT_PATTERN,
-                    prize.getMatchedNumber(), getBonusMessage(prize), prize.getWinMoney(), totalResults.get(prize))
-                )
-            );
-        return resultString.toString();
+        return "\n당첨 통계\n"
+             + "---------\n"
+             + Arrays.stream(Prize.values())
+                     .filter(prize -> !Prize.isFail(prize))
+                     .collect(StringBuilder::new, this::constructResultStatistics, StringBuilder::append).toString();
     }
 }
