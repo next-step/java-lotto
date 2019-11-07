@@ -12,15 +12,13 @@ import java.util.Map;
 /**
  * Created by yusik on 2019/11/05.
  */
-public class LotteryMachine {
-
-    private static final int TICKET_PRICE = 1_000;
+public class LotteryController {
 
     private final LotteryGenerator lotteryGenerator;
     private final InputView inputView;
     private final ResultView resultView;
 
-    public LotteryMachine(InputStream in, PrintStream out) {
+    public LotteryController(InputStream in, PrintStream out) {
         lotteryGenerator = new LotteryGenerator(new NumberGenerator());
         inputView = new InputView(in);
         resultView = new ResultView(out);
@@ -29,10 +27,12 @@ public class LotteryMachine {
     public void run() {
 
         int amount = inputView.receiveAmount();
-        List<LotteryTicket> tickets = lotteryGenerator.generate(amount / TICKET_PRICE);
+        List<LotteryTicket> tickets = lotteryGenerator.generate(amount);
         resultView.showTickets(tickets);
 
-        WinningNumbers winningNumbers = new WinningNumbers(inputView.receiveWinningNumbers());
+        WinningNumbers winningNumbers = new WinningNumbers(
+                inputView.receiveWinningNumbers(),
+                inputView.receiveBonusNumber());
         Map<WinningRanking, Long> winningTickets = winningNumbers.getWinningTickets(tickets);
         resultView.showStatistics(winningTickets);
         resultView.showRevenueRate(amount, winningTickets);

@@ -1,7 +1,6 @@
 package lotto.view;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -35,7 +34,7 @@ public class InputViewTest {
     @DisplayName("당첨 번호 입력")
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:6", "15, 2:2"}, delimiter = ':')
-    void getInput(String input, int size) {
+    void receiveWinningNumbers(String input, int size) {
 
         // given
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
@@ -46,6 +45,23 @@ public class InputViewTest {
 
         //then
         assertThat(winningNumbers).hasSize(size);
+
+    }
+
+    @DisplayName("보너스 번호 입력")
+    @ParameterizedTest
+    @CsvSource(value = {"6:6", "7:7"}, delimiter = ':')
+    void receiveBonusNumber(String input, int bonus) {
+
+        // given
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        InputView inputView = new InputView(in);
+
+        // when
+        int bonusNumber = inputView.receiveBonusNumber();
+
+        //then
+        assertThat(bonusNumber).isEqualTo(bonus);
 
     }
 }

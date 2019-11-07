@@ -33,4 +33,10 @@ public class InputView {
                 .map(Integer::parseUnsignedInt)
                 .collect(toList());
     }
+
+    public int receiveBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumber = scanner.nextLine();
+        return Integer.parseUnsignedInt(bonusNumber.trim());
+    }
 }

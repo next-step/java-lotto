@@ -5,9 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
@@ -45,10 +47,9 @@ class LotteryTicketTest {
         assertThrows(UnsupportedOperationException.class, () -> numbers.add(1));
     }
 
-    @DisplayName("복권 숫자 범위")
+    @DisplayName("복권 숫자 범위 정상")
     @Test
     void validateNumber() {
-
         // when
         List<Integer> numbers = ticket.getNumbers();
 
@@ -56,5 +57,29 @@ class LotteryTicketTest {
         boolean allMatch = numbers.stream()
                 .allMatch(integer -> integer > 0 && integer <= 45);
         assertThat(allMatch).isTrue();
+    }
+
+    @DisplayName("유효성 검사 실패: 범위")
+    @Test
+    void outOfRange() {
+        assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 46)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageMatching("복권 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
+    }
+
+    @DisplayName("유효성 검사 실패: 사이즈")
+    @Test
+    void sizeOver() {
+        assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageMatching("복권 번호는 [0-9]+개 입니다.");
+    }
+
+    @DisplayName("유효성 검사 실패: 숫자 중복")
+    @Test
+    void duplicate() {
+        assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 5)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("중복");
     }
 }
