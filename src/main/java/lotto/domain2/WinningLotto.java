@@ -15,6 +15,10 @@ public class WinningLotto {
         return this.rank == rank;
     }
 
+    int getWinningMoney() {
+        return this.rank.getMoney();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

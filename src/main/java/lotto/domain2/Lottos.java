@@ -1,5 +1,6 @@
 package lotto.domain2;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +25,10 @@ public class Lottos {
         }
 
         return winningLottos;
+    }
+
+    List<Lotto> findAllLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     @Override

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningLottos {
+    private static final int OPERAND_FOR_FLOOR = 100;
+    private static final double OPERAND_FOR_TRANSLATE_DOUBLE = 100.0;
     private List<WinningLotto> winningLottos;
 
     public WinningLottos() {
@@ -21,6 +23,14 @@ public class WinningLottos {
         return (int) winningLottos.stream()
                 .filter(winningLotto -> winningLotto.is(rank))
                 .count();
+    }
+
+    public double getRate(final int money) {
+        final double winningMoney = winningLottos.stream()
+                .mapToDouble(WinningLotto::getWinningMoney)
+                .sum();
+
+        return Math.floor(winningMoney / money * OPERAND_FOR_FLOOR) / OPERAND_FOR_TRANSLATE_DOUBLE;
     }
 
     @Override

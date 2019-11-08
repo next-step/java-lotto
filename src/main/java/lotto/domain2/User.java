@@ -28,6 +28,10 @@ public class User {
         return lottos.checkWinning(winningLottoNumbers);
     }
 
+    Lottos findLottos() {
+        return this.lottos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
