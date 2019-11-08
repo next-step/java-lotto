@@ -2,7 +2,7 @@ package lotto.domain2;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1,2,3,4,5", "1,2,3,4,5,6,7"})
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     void 로또번호_개수_부족하거나_많을때(final String input) {
         String[] inputSplit = input.split(",");
         List<Integer> numbers = new ArrayList<>();
