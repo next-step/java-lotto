@@ -1,5 +1,6 @@
 package lottery;
 
+import lottery.domain.LottoMoney;
 import lottery.domain.LottoNumber;
 import lottery.domain.LottoTicket;
 import lottery.domain.LottoTicketSeller;
@@ -10,7 +11,7 @@ import lottery.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        int purchaseAmount = InputView.payAmount();
+        LottoMoney purchaseAmount = InputView.payAmount();
 
         LottoTickets lottoTickets = LottoTicketSeller.purchaseRandomGames(purchaseAmount);
         ResultView.printLottoTickets(lottoTickets);

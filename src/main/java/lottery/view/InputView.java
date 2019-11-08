@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lottery.domain.LottoMoney;
 import lottery.domain.LottoNumber;
 import lottery.domain.LottoTicket;
 
@@ -12,16 +13,12 @@ public class InputView {
     private static final String INPUT_DELIMITER = ", ";
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int payAmount() {
+    public static LottoMoney payAmount() {
         System.out.println("구입 금액을 입력해주세요.");
         int purchaseAmount = scanner.nextInt();
         scanner.nextLine();
 
-        if (purchaseAmount < 0) {
-            throw new IllegalArgumentException("구매 금액은 0보다 커야 합니다.");
-        }
-
-        return purchaseAmount;
+        return new LottoMoney(purchaseAmount);
     }
 
     public static LottoTicket getWinLottoTicket() {

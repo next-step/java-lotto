@@ -4,21 +4,11 @@ import java.util.List;
 
 public class LottoTicketSeller {
 
-    private static final String NOT_ENOUGH_MONEY = "로또 구입 금액이 부족합니다.";
-
-    public static LottoTickets purchaseRandomGames(int purchaseAmount) {
-        return new LottoTickets(generateRandomGames(getNumberOfTicket(purchaseAmount)));
+    public static LottoTickets purchaseRandomGames(LottoMoney purchaseAmount) {
+        return new LottoTickets(generateRandomGames(purchaseAmount.getNumberOfTickets()));
     }
 
     private static List<LottoTicket> generateRandomGames(int numberOfTicket) {
         return LottoTicketFactory.generateRandomGames(numberOfTicket);
-    }
-
-    private static Integer getNumberOfTicket(int purchaseAmount) {
-        Integer numberOfTickets = purchaseAmount / LottoTicket.TICKET_PRICE;
-        if (numberOfTickets <= 0) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
-        }
-        return numberOfTickets;
     }
 }
