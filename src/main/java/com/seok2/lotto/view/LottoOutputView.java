@@ -2,10 +2,10 @@ package com.seok2.lotto.view;
 
 import static com.seok2.common.utils.StringUtils.LINE_BREAK;
 
-import com.seok2.lotto.domain.Lotteries;
-import com.seok2.lotto.domain.Lotto;
-import com.seok2.lotto.domain.Rank;
-import com.seok2.lotto.domain.Ranks;
+import com.seok2.lotto.domain.lotto.Lotteries;
+import com.seok2.lotto.domain.lotto.Lotto;
+import com.seok2.lotto.domain.rank.Rank;
+import com.seok2.lotto.domain.rank.Ranks;
 import java.text.MessageFormat;
 
 public class LottoOutputView {

@@ -5,6 +5,9 @@ import java.util.Arrays;
 
 public class StringAdder {
 
+    private StringAdder() {
+    }
+
     public static int sum(String text) {
         if (StringUtils.isBlank(text)) {
             return 0;

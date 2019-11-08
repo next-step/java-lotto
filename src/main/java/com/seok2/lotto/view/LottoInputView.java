@@ -1,16 +1,14 @@
 package com.seok2.lotto.view;
 
-import com.seok2.common.utils.StringUtils;
-import com.seok2.lotto.domain.Lotto;
-import com.seok2.lotto.domain.LottoNumber;
-import com.seok2.lotto.domain.Money;
-import com.seok2.lotto.domain.WinningLotto;
-import java.util.Arrays;
+import com.seok2.lotto.domain.lotto.Lotto;
+import com.seok2.lotto.domain.lotto.LottoNumber;
+import com.seok2.lotto.domain.common.Money;
+import com.seok2.lotto.domain.lotto.WinningLotto;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class LottoInputView {
@@ -33,8 +31,7 @@ public class LottoInputView {
 
     public static WinningLotto getWinning() {
         System.out.println(WINNING_LOTTO_MSG);
-        Lotto winning = Lotto
-            .of(Arrays.stream(StringUtils.split(scanner.next())).map(Integer::parseInt).mapToInt(i -> i).toArray());
+        Lotto winning = Lotto.auto(scanner.next());
         System.out.println(WINNING_BONUS_NUMBER_MSG);
         return WinningLotto.of(winning, LottoNumber.of(scanner.nextInt()));
     }
@@ -46,9 +43,7 @@ public class LottoInputView {
             return Collections.emptyList();
         }
         System.out.println(MANUAL_NUMBER_MSG);
-        List<String> lottoSheetRow = new LinkedList<>();
-        IntStream.range(0, trials)
-            .forEach(i -> lottoSheetRow.add(scanner.next()));
-        return lottoSheetRow;
+        return Stream.generate(scanner::next).limit(trials)
+            .collect(Collectors.toList());
     }
 }

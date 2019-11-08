@@ -1,10 +1,10 @@
 package com.seok2.lotto;
 
-import com.seok2.lotto.domain.Lotteries;
-import com.seok2.lotto.domain.LottoMachine;
-import com.seok2.lotto.domain.LottoSheet;
-import com.seok2.lotto.domain.Money;
-import com.seok2.lotto.domain.Ranks;
+import com.seok2.lotto.domain.lotto.Lotteries;
+import com.seok2.lotto.domain.order.LottoMachine;
+import com.seok2.lotto.domain.order.LottoSheet;
+import com.seok2.lotto.domain.common.Money;
+import com.seok2.lotto.domain.rank.Ranks;
 import com.seok2.lotto.view.LottoInputView;
 import com.seok2.lotto.view.LottoOutputView;
 
