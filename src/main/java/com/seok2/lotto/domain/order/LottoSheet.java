@@ -18,7 +18,7 @@ public class LottoSheet {
     public static LottoSheet of(List<String> lottoSheetRows) {
         List<LottoSheetRow> mapped = lottoSheetRows.stream()
             .map(StringUtils::split)
-            .map(LottoSheetRow::of)
+            .map(LottoSheetRow::manual)
             .collect(Collectors.toList());
         return new LottoSheet(mapped);
     }

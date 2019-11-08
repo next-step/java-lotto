@@ -2,8 +2,6 @@ package com.seok2.lotto.domain.order;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.seok2.lotto.domain.order.LottoSheet;
-import com.seok2.lotto.domain.order.LottoSheetRow;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +11,7 @@ class LottoSheetTest {
 
     @Test
     void next() {
-        assertThat(lottoSheet.next()).isEqualTo(LottoSheetRow.of(1,2,3,4,5,6));
+        assertThat(lottoSheet.next()).isEqualTo(LottoSheetRow.manual(1,2,3,4,5,6));
     }
 
     @Test

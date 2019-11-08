@@ -15,15 +15,15 @@ public class LottoSheetRow {
         this.numbers = numbers;
     }
 
-    public static LottoSheetRow of(String... numbers) {
+    public static LottoSheetRow manual(String... numbers) {
         int[] parsed = Arrays.stream(numbers)
             .map(Integer::parseInt)
             .mapToInt(i -> i)
             .toArray();
-        return of(parsed);
+        return manual(parsed);
     }
 
-    public static LottoSheetRow of(int... numbers) {
+    public static LottoSheetRow manual(int... numbers) {
         validate(numbers);
         return new LottoSheetRow(numbers);
     }
