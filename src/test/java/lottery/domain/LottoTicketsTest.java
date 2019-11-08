@@ -13,8 +13,8 @@ class LottoTicketsTest {
 
     @BeforeEach
     void setUp() {
-        tickets.add(new LottoTicket(1, 2, 3, 4, 5, 6));
-        tickets.add(new LottoTicket(1, 2, 3, 4, 5, 7));
+        tickets.add(LottoTicket.of(1, 2, 3, 4, 5, 6));
+        tickets.add(LottoTicket.of(1, 2, 3, 4, 5, 7));
     }
 
     @Test

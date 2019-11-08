@@ -1,7 +1,6 @@
 package lottery.domain;
 
 import java.util.List;
-import lottery.LottoConstants;
 
 public class LottoTicketSeller {
 
@@ -16,7 +15,7 @@ public class LottoTicketSeller {
     }
 
     private static Integer getNumberOfTicket(int purchaseAmount) {
-        Integer numberOfTickets = purchaseAmount / LottoConstants.TICKET_PRICE;
+        Integer numberOfTickets = purchaseAmount / LottoTicket.TICKET_PRICE;
         if (numberOfTickets <= 0) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }

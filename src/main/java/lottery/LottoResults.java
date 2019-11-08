@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lottery.domain.LottoTicket;
 import lottery.domain.Prize;
 
 public class LottoResults {
@@ -33,7 +34,7 @@ public class LottoResults {
     }
 
     private int purchasedAmount() {
-        return LottoConstants.TICKET_PRICE * totalResults.values()
+        return LottoTicket.TICKET_PRICE * totalResults.values()
             .stream()
             .reduce(0, Integer::sum);
     }

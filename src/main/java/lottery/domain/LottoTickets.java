@@ -19,10 +19,10 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public LottoResults match(List<Integer> winNumbers, int bonusNumber) {
+    public LottoResults match(LottoTicket winLottoTicket, LottoNumber bonusLottoNumber) {
         List<LottoResult> results = new ArrayList<>();
         for (LottoTicket ticket : lottoTickets) {
-            results.add(new LottoResult(ticket.match(winNumbers).size(), ticket.isBonusMatched(bonusNumber)));
+            results.add(new LottoResult(ticket.match(winLottoTicket).size(), ticket.isBonusMatched(bonusLottoNumber)));
         }
         return new LottoResults(results);
     }

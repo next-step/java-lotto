@@ -8,55 +8,63 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lottery.LottoConstants;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class LottoTicket {
 
+    public static final Integer TICKET_PRICE = 1000;
+    private static final Integer LOTTO_TICKER_SIZE = 6;
     private static final String ILLEGAL_TICKET_SIZE = "유효하지 않은 티켓입니다.(입력한 숫자가 6개가 아닙니다.)";
-    private static final String ILLEGAL_TICKET_NUMBER = "유효하지 않은 티켓입니다.(유요하지 않은 숫자가 입력되었습니다.)";
     private static final String NUMBER_DELIMITER = ", ";
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<Integer> lottoNumbers) {
-        this.lottoNumbers = checkTicketValidation(new HashSet<>(lottoNumbers));
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoTicket(Integer... lottoNumber) {
-        this(Arrays.asList(lottoNumber));
+    public static LottoTicket of(Integer... lottoNumbers) {
+        return LottoTicket.ofIntegerList(Arrays.asList(lottoNumbers));
     }
 
-    public List<Integer> match(List<Integer> winNumbers) {
-        return new ArrayList<>(CollectionUtils.intersection(lottoNumbers, winNumbers));
+    public static LottoTicket ofIntegerList(List<Integer> lottoNumbers) {
+        return LottoTicket.ofLottoNumberList(LottoNumber.ofNumbers(checkTicketValidation(new HashSet<>(lottoNumbers))));
     }
 
-    public boolean isBonusMatched(int bonusNumber) {
+    public static LottoTicket ofLottoNumberList(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket ofRandom() {
+        return LottoTicket.ofLottoNumberList(LottoNumber.ofRandom(LOTTO_TICKER_SIZE));
+    }
+
+    public List<LottoNumber> match(LottoTicket winLottoTicket) {
+        return winLottoTicket.getMatchedNumbers(this, winLottoTicket);
+    }
+
+    public boolean isBonusMatched(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    private List<Integer> checkTicketValidation(Set<Integer> lottoNumbers) {
+    private List<LottoNumber> getMatchedNumbers(LottoTicket ticket1, LottoTicket ticket2) {
+        return new ArrayList<>(CollectionUtils.intersection(ticket1.lottoNumbers, ticket2.lottoNumbers));
+    }
+
+    private static List<Integer> checkTicketValidation(Set<Integer> lottoNumbers) {
         if (!isValidSize(lottoNumbers)) {
             throw new IllegalArgumentException(ILLEGAL_TICKET_SIZE);
-        }
-
-        if (!isValidNumbers(lottoNumbers)) {
-            throw new IllegalArgumentException(ILLEGAL_TICKET_NUMBER);
         }
 
         return convertSortedNumber(new ArrayList<>(lottoNumbers));
     }
 
-    private List<Integer> convertSortedNumber(List<Integer> lottoNumbers) {
+    private static List<Integer> convertSortedNumber(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
-    private boolean isValidNumbers(Set<Integer> lottoNumbers) {
-        return LottoConstants.LOTTO_NUMBERS.containsAll(lottoNumbers);
-    }
-
-    private boolean isValidSize(Set<Integer> lottoNumbers) {
-        return lottoNumbers.size() == LottoConstants.LOTTO_TICKER_SIZE;
+    private static boolean isValidSize(Set<Integer> lottoNumbers) {
+        return lottoNumbers.size() == LOTTO_TICKER_SIZE;
     }
 
     @Override
@@ -81,7 +89,7 @@ public class LottoTicket {
     @Override
     public String toString() {
         return "[" + lottoNumbers.stream()
-            .map(String::valueOf)
+            .map(LottoNumber::toString)
             .collect(Collectors.joining(NUMBER_DELIMITER)) + "]";
     }
 }

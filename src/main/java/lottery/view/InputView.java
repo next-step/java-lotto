@@ -1,11 +1,11 @@
 package lottery.view;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lottery.LottoConstants;
+import lottery.domain.LottoNumber;
+import lottery.domain.LottoTicket;
 
 public class InputView {
 
@@ -24,53 +24,36 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public static List<Integer> getWinNumbers() {
+    public static LottoTicket getWinLottoTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
-        return checkWinNumbersInput(input);
+        return LottoTicket.ofIntegerList(convertInputToIntegerList(input));
     }
 
-    private static List<Integer> checkWinNumbersInput(String input) {
-        List<Integer> numbers = Arrays.stream(input.split(INPUT_DELIMITER))
-                                      .map(Integer::parseInt)
-                                      .collect(Collectors.toList());
-        if (!isValidSize(numbers.size())) {
-            throw new IllegalArgumentException("올바른 로또 번호 개수가 아닙니다.");
-        }
-        if (!isValidNumbers(numbers)) {
-            throw new IllegalArgumentException("올바른 로또 번호가 아닙니다.");
-        }
-        return numbers;
+    private static List<Integer> convertInputToIntegerList(String input) {
+        return Arrays.stream(input.split(INPUT_DELIMITER))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
-    private static boolean isValidSize(int size) {
-        return size == LottoConstants.LOTTO_TICKER_SIZE;
-    }
-
-    private static boolean isValidNumbers(List<Integer> numbers) {
-        return LottoConstants.LOTTO_NUMBERS.containsAll(numbers);
-    }
-
-    public static int getBonusNumber(List<Integer> winNumbers) {
+    public static LottoNumber getBonusNumber(LottoTicket winLottoTicket) {
         System.out.println("보너스 볼을 입력해주세요.");
         int bonusNumber = scanner.nextInt();
         scanner.nextLine();
-        return checkBonusNumberInput(bonusNumber, winNumbers);
+        return checkBonusNumberInput(bonusNumber, winLottoTicket);
     }
 
-    private static int checkBonusNumberInput(int bonusNumber, List<Integer> winNumbers) {
-        if (!isValidNumbers(Collections.singletonList(bonusNumber))) {
-            throw new IllegalArgumentException("올바른 로또 번호가 아닙니다.");
-        }
+    private static LottoNumber checkBonusNumberInput(int bonusNumber, LottoTicket winLottoTicket) {
+        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
 
-        if (isAlreadyPicked(bonusNumber, winNumbers)) {
+        if (isAlreadyPicked(bonusLottoNumber, winLottoTicket)) {
             throw new IllegalArgumentException("이미 뽑힌 당첨 번호는 보너스 번호로 입력할 수 없습니다.");
         }
 
-        return bonusNumber;
+        return bonusLottoNumber;
     }
 
-    private static boolean isAlreadyPicked(int bonusNumber, List<Integer> winNumbers) {
-        return winNumbers.contains(bonusNumber);
+    private static boolean isAlreadyPicked(LottoNumber bonusLottoNumber, LottoTicket winLottoTicket) {
+        return winLottoTicket.isBonusMatched(bonusLottoNumber);
     }
 }

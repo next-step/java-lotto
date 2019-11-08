@@ -1,6 +1,7 @@
 package lottery;
 
-import java.util.List;
+import lottery.domain.LottoNumber;
+import lottery.domain.LottoTicket;
 import lottery.domain.LottoTicketSeller;
 import lottery.domain.LottoTickets;
 import lottery.view.InputView;
@@ -14,9 +15,9 @@ public class Main {
         LottoTickets lottoTickets = LottoTicketSeller.purchaseRandomGames(purchaseAmount);
         ResultView.printLottoTickets(lottoTickets);
 
-        List<Integer> winNumbers = InputView.getWinNumbers();
-        int bonusNumber = InputView.getBonusNumber(winNumbers);
-        LottoResults results = lottoTickets.match(winNumbers, bonusNumber);
+        LottoTicket winLottoTicket = InputView.getWinLottoTicket();
+        LottoNumber bonusLottoNumber = InputView.getBonusNumber(winLottoTicket);
+        LottoResults results = lottoTickets.match(winLottoTicket, bonusLottoNumber);
         ResultView.printLottoResults(results);
     }
 }
