@@ -25,8 +25,12 @@ public class WinningLotto {
         this.bonusNumber = Number.verifyOf(bonusNumber);
     }
 
-    boolean contains(int integer) {
-        return numbers.contains(Number.verifyOf(integer));
+    boolean contains(Number integer) {
+        return numbers.contains(integer);
+    }
+
+    boolean hasBonus(List<Number> userLotto) {
+        return userLotto.contains(bonusNumber);
     }
 
     private void verifyWinningNumberCount(List<Number> inputWinningNumbers) {
@@ -42,8 +46,6 @@ public class WinningLotto {
         if (winningNumbers.contains(Number.verifyOf(bonusNumber))) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION);
         }
-
-
     }
 
 

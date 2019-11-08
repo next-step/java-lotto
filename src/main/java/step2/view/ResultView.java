@@ -35,11 +35,19 @@ public class ResultView {
     }
 
     private static void printWinningCount(WinningCount winningCount) {
+        Prize prize;
         for (int matchCount = WinningCount.MIN_MATCH_COUNT;
              matchCount <= WinningCount.MAX_MATCH_COUNT; matchCount++) {
+            prize = Prize.of(matchCount, false);
             System.out.println(matchCount + WINNING_COUNT_POSTFIX
-                    + Prize.getPrice(matchCount) + WINNING_PRIZE_POSTFIX
-                    + winningCount.countOfMatchCount(matchCount) + WINNING_GAME_POSTFIX);
+                    + prize.getMoney() + WINNING_PRIZE_POSTFIX
+                    + winningCount.countOfPrize(prize) + WINNING_GAME_POSTFIX);
+            if (matchCount == WinningCount.MAX_MATCH_COUNT - 1) {
+                prize = Prize.of(matchCount, true);
+                System.out.println(matchCount + WINNING_COUNT_POSTFIX
+                        + prize.getMoney() + WINNING_PRIZE_POSTFIX
+                        + winningCount.countOfPrize(prize) + WINNING_GAME_POSTFIX);
+            }
         }
     }
 

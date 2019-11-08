@@ -16,6 +16,20 @@ class PrizeTest {
     }, delimiter = ':')
     @DisplayName("맞는 개수에 대한 상금 조회")
     void getPrice(int matchCount, int prize) {
-        assertThat(Prize.getPrice(matchCount)).isEqualTo(prize);
+        assertThat(Prize.of(matchCount, false).getMoney()).isEqualTo(prize);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "3:false:KRW_5_000",
+            "4:false:KRW_50_000",
+            "5:false:KRW_1_500_000",
+            "5:true:KRW_30_000_000",
+            "6:false:KRW_2_000_000_000",
+    }, delimiter = ':')
+    @DisplayName("조건에 일치하는 prize 확인 테스트")
+    void of(int matchCount, boolean hasBonus, String prize) {
+        assertThat(Prize.of(matchCount, hasBonus)).isEqualTo(Prize.valueOf(prize));
+    }
+
 }

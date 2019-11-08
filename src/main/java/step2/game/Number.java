@@ -26,4 +26,14 @@ public class Number {
 
         throw new IllegalArgumentException(NUMBER_RANGE_EXCEPTION);
     }
+
+    public static int compareTo(Number number1, Number number2) {
+        return Integer.compare(number1.num, number2.num);
+    }
+
+    @Override
+    public String toString() {
+        return num.toString();
+    }
+
 }

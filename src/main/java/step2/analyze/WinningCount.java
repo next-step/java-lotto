@@ -14,8 +14,8 @@ public class WinningCount {
         this.winningCount = winningCount;
     }
 
-    public int countOfMatchCount(int matchCount) {
-        return winningCount.getOrDefault(Prize.ofMatchCount(matchCount), 0);
+    public int countOfPrize(Prize prize) {
+        return winningCount.getOrDefault(prize, 0);
     }
 
     public float calculateWinningRate() {

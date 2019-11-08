@@ -23,19 +23,18 @@ class WinningCountTest {
     @Test
     void getWinningRate() {
         assertThat(winningCount.calculateWinningRate())
-                .isEqualTo((float) Prize.getPrice(5) / Ticket.LOTTO_PRICE);
+                .isEqualTo((float) Prize.of(5, false).getMoney() / Ticket.LOTTO_PRICE);
     }
 
     @Test
     void getCount() {
         assertAll(
-                () -> assertThat(winningCount.countOfMatchCount(0)).isEqualTo(0),
-                () -> assertThat(winningCount.countOfMatchCount(1)).isEqualTo(0),
-                () -> assertThat(winningCount.countOfMatchCount(2)).isEqualTo(0),
-                () -> assertThat(winningCount.countOfMatchCount(3)).isEqualTo(0),
-                () -> assertThat(winningCount.countOfMatchCount(4)).isEqualTo(0),
-                () -> assertThat(winningCount.countOfMatchCount(5)).isEqualTo(1),
-                () -> assertThat(winningCount.countOfMatchCount(6)).isEqualTo(0)
+                () -> assertThat(winningCount.countOfPrize(Prize.KRW_0_000)).isEqualTo(0),
+                () -> assertThat(winningCount.countOfPrize(Prize.KRW_5_000)).isEqualTo(0),
+                () -> assertThat(winningCount.countOfPrize(Prize.KRW_50_000)).isEqualTo(0),
+                () -> assertThat(winningCount.countOfPrize(Prize.KRW_1_500_000)).isEqualTo(1),
+                () -> assertThat(winningCount.countOfPrize(Prize.KRW_30_000_000)).isEqualTo(0),
+                () -> assertThat(winningCount.countOfPrize(Prize.KRW_2_000_000_000)).isEqualTo(0)
         );
     }
 }

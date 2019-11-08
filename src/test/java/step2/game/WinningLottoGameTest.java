@@ -32,6 +32,6 @@ class WinningLottoGameTest {
     @DisplayName("당첨번호를 포함하는지 테스트")
     void containsTest(String inputWinningNumbers, int bonusNumber, boolean contains) {
         WinningLotto winningLotto = new WinningLotto(inputWinningNumbers, bonusNumber);
-        assertThat(winningLotto.contains(1)).isEqualTo(contains);
+        assertThat(winningLotto.contains(Number.verifyOf(1))).isEqualTo(contains);
     }
 }

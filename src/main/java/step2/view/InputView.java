@@ -9,7 +9,7 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static String getWinningNumbers() {
+    public static String inputWinningNumbers() {
         scanner.nextLine();
         System.out.println(WINNING_NUMBER);
         return scanner.nextLine();
@@ -20,7 +20,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static int getBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println(BONUS_NUMBER);
         return scanner.nextInt();
     }
