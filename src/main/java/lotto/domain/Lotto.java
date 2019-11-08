@@ -1,7 +1,11 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author : 김윤호
@@ -11,9 +15,11 @@ import java.util.Objects;
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
+    private static final Predicate<String> IS_NUMERIC = str -> NUMERIC.matcher(str).matches();
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    private Lotto(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개로 이루어져야 합니다.");
         }
@@ -23,6 +29,19 @@ public class Lotto {
         }
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static final Lotto of(List<Integer> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public static final Lotto of(Integer... lottoNumbers) {
+        return new Lotto(Arrays.asList(lottoNumbers));
+    }
+
+    public static final Lotto of(String lottoNumbers) {
+        String[] lottoNos = lottoNumbers.split(",");
+        return new Lotto(Arrays.stream(lottoNos).map(String::trim).filter(IS_NUMERIC).map(Integer::parseInt).collect(Collectors.toList()));
     }
 
     @Override
