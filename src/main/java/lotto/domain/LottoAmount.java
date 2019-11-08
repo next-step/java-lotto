@@ -13,6 +13,9 @@ public class LottoAmount {
     private final int amount;
 
     public LottoAmount(int amount) {
+        if (amount < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또를 구입하려면 최소 1000원이 필요합니다.");
+        }
         this.amount = amount;
     }
 
