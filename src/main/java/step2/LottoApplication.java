@@ -11,7 +11,7 @@ public class LottoApplication {
         Ticket ticket = new Ticket(ticketAmount);
         ResultView.printTickets(ticket);
         WinningLotto winningLottoNumber
-                = new WinningLotto(InputView.getWinningNumbers());
+                = new WinningLotto(InputView.getWinningNumbers(), InputView.getBonusNumber());
         ResultView.printAnalysis(ticket, winningLottoNumber);
     }
 }

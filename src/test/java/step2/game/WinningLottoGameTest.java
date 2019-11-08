@@ -10,25 +10,28 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class WinningLottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {
-            "1, 1, 2, 3, 4, 5",
-            "1, 2, 3, 4, 5",
-            "0, 1, 2, 3, 4, 5",
+            "1, 1, 2, 3, 4, 5:6",
+            "1, 2, 3, 4, 5:6",
+            "0, 1, 2, 3, 4, 5:6",
+            "1, 2, 3, 4, 5, 46:6",
+            "1, 2, 3, 4, 5, 6:6",
     }, delimiter = ':')
     @DisplayName("에러 발생 테스트")
-    void InvalidNumbersTest(String inputWinningNumbers) {
-        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(inputWinningNumbers));
+    void InvalidNumbersTest(String inputWinningNumbers, int bonusNumber) {
+        assertThrows(IllegalArgumentException.class, () -> new WinningLotto(inputWinningNumbers, bonusNumber));
     }
 
     @ParameterizedTest
     @CsvSource(value = {
-            "1, 2, 3, 4, 5, 6:true",
-            "2, 3, 4, 5, 6, 7:false",
-            "1, 2, 3, 4, 5, 6:true",
-            "2, 3, 4, 5, 6, 7:false"
+            "1, 2, 3, 4, 5, 6:10:true",
+            "2, 3, 4, 5, 6, 7:10:false",
+            "2, 3, 4, 5, 6, 7:10:false",
+            "1, 2, 3, 4, 5, 6:10:true",
+            "2, 3, 4, 5, 6, 7:1:false"
     }, delimiter = ':')
     @DisplayName("당첨번호를 포함하는지 테스트")
-    void containsTest(String inputWinningNumbers, boolean contains) {
-        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
+    void containsTest(String inputWinningNumbers, int bonusNumber, boolean contains) {
+        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers, bonusNumber);
         assertThat(winningLotto.contains(1)).isEqualTo(contains);
     }
 }
