@@ -22,7 +22,7 @@ public class LottoResultTest {
     @DisplayName("lank 카운트를 하나씩 올리고 실제로 올라갔는지 확인한다.")
     void update() {
         for (LottoRank lottoRank : LottoRank.values()) {
-            lottoResult.update(lottoRank.getCount(), lottoRank.isConsiderBonus());
+            lottoResult.update(lottoRank);
         }
 
         for (LottoRank lottoRank : LottoRank.values()) {
@@ -35,7 +35,7 @@ public class LottoResultTest {
     void profit() {
         double expectedYield = getExpectedYield();
         for (LottoRank lottoRank : LottoRank.values()) {
-            lottoResult.update(lottoRank.getCount(), lottoRank.isConsiderBonus());
+            lottoResult.update(lottoRank);
         }
 
         assertThat(lottoResult.yield()).isEqualTo(expectedYield);

@@ -32,10 +32,10 @@ public class UserLotto {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoResult result(Lotto winningLotto, LottoNumber bonusNumber, int money) {
+    public LottoResult result(WinningLotto winningLotto, int money) {
         LottoResult lottoResult = new LottoResult(money);
         for (Lotto lotto : lottos) {
-            lottoResult.update(lotto.compare(winningLotto), lotto.contains(bonusNumber));
+            lottoResult.update(winningLotto.match(lotto));
         }
 
         return lottoResult;
