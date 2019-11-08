@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum LottoRank {
+    NONE(0, false, 0),
     FIFTH(3, false, 5000),
     FOURTH(4, false, 50000),
     THIRD(5, false, 1500000),
@@ -32,11 +33,12 @@ public enum LottoRank {
         return considerBonus;
     }
 
-    public static Optional<LottoRank> getRank(int count, boolean matchBonus) {
+    public static LottoRank getRank(int count, boolean matchBonus) {
         return Stream.of(LottoRank.values())
                 .filter(lottoRank -> lottoRank.count == count)
                 .filter(lottoRank -> filterMatchBonus(count, matchBonus, lottoRank))
-                .findFirst();
+                .findFirst()
+                .orElse(LottoRank.NONE);
     }
 
     private static boolean filterMatchBonus(int count, boolean matchBonus, LottoRank lottoRank) {

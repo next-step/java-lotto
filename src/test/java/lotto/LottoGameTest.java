@@ -79,6 +79,7 @@ public class LottoGameTest {
         lottos.add(getTestLotto(new int[]{2, 3, 4, 5, 6, 8}));
         lottos.add(getTestLotto(new int[]{3, 4, 5, 6, 7, 8}));
         lottos.add(getTestLotto(new int[]{4, 5, 6, 7, 8, 9}));
+        lottos.add(getTestLotto(new int[]{10, 11, 12, 13, 14, 15}));
 
         return lottos;
     }

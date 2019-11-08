@@ -14,7 +14,8 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        lottoResult = new LottoResult(5000);
+        int money = LottoRank.values().length * LottoGame.GAME_AMOUNT;
+        lottoResult = new LottoResult(money);
     }
 
     @Test
