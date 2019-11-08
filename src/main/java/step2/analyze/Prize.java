@@ -15,6 +15,10 @@ public enum Prize {
     KRW_30_000_000(5, true, 30_000_000),
     KRW_2_000_000_000(6, false, 2_000_000_000);
 
+    private static String WINNING_CONDITION_FORMAT = "%d개 일치 ";
+    private static String WINNING_CONDITION_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치 ";
+
+
     private final int matchCount;
     private final boolean bonus;
     private final int money;
@@ -38,12 +42,12 @@ public enum Prize {
         Arrays.stream(values())
                 .filter(prize -> prize.matchCount > 0)
                 .forEach(prize -> {
-                    String condition = prize.matchCount + "개 일치";
-                    if (prize.bonus) {
-                        condition += ", 보너스 볼 일치";
-                    }
+                    String condition = prize.bonus ?
+                            String.format(WINNING_CONDITION_WITH_BONUS_FORMAT, prize.matchCount) :
+                            String.format(WINNING_CONDITION_FORMAT, prize.matchCount);
                     prizes.put(prize, condition);
                 });
+
         return prizes;
     }
 
