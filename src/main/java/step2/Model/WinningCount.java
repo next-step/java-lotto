@@ -4,9 +4,10 @@ import step2.Data.Prize;
 
 import java.util.Arrays;
 
-import static step2.Util.LottoUtil.*;
-
 public class WinningCount {
+    public static final int MIN_MATCH_COUNT = 3;
+    public static final int MAX_MATCH_COUNT = 6;
+
     private int[] count;
 
     public WinningCount(int[] count) {
@@ -15,14 +16,14 @@ public class WinningCount {
 
     public float getWinningRate() {
         float earningMoney = 0;
-        for (int matchCount = LOTTO_PRIZE_MIN_MATCH_NUMBER;
-             matchCount <= LOTTO_PRIZE_MAX_MATCH_NUMBER; matchCount++) {
+        for (int matchCount = MIN_MATCH_COUNT;
+             matchCount <= MAX_MATCH_COUNT; matchCount++) {
             earningMoney += (Prize.getPrice(matchCount) * count[matchCount]);
         }
-        return earningMoney / (totalCount() * LOTTO_PRICE);
+        return earningMoney / (totalCount() * Ticket.LOTTO_PRICE);
     }
 
-    public int getCount(int matchCount) {
+    public int countOfMatchCount(int matchCount) {
         return count[matchCount];
     }
 

@@ -3,7 +3,7 @@ package step2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.Model.Game;
+import step2.Model.LottoGame;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,21 +13,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GameTest {
-    private Game game;
+class LottoGameTest {
+    private LottoGame lottoGame;
     private List<Integer> numbers;
 
     @BeforeEach
     void setUp() {
-        game = new Game();
-        numbers = Arrays.stream(game.getNumbers().split(",")).map(num -> Integer.parseInt(num.trim())).collect(toList());
+        lottoGame = new LottoGame();
+        numbers = Arrays.stream(lottoGame.toString().trim()
+                .replace("[", "")
+                .replace("]", "")
+                .split(","))
+                .map(num -> Integer.parseInt(num.trim()))
+                .collect(toList());
     }
 
     @Test
     @DisplayName("중복이 허용하지 않는 랜덤 숫자 6개가 생성되는지 확인")
     void createNumberTest() {
         assertThat(numbers.size()).isEqualTo(6);
-
     }
 
     @Test
@@ -41,16 +45,4 @@ class GameTest {
                 () -> assertTrue(numbers.get(4) < numbers.get(5))
         );
     }
-
-//    @Test
-//    @DisplayName("포함하는 숫자 출력")
-//    void checkIncludeNumber() {
-//        assertThat(game.getIncludingWinningNumber(
-//                new WinningNumbers(IntStream.rangeClosed(0, 45).boxed().map(Object::toString).toArray(String[]::new))))
-//                .isEqualTo(6);
-//        assertThat(game.getIncludingWinningNumber(
-//                new WinningNumbers(IntStream.rangeClosed(46, 46).boxed().map(Object::toString).toArray(String[]::new))))
-//                .isEqualTo(0);
-//    }
-
 }

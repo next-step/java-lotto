@@ -8,8 +8,8 @@ public enum Prize {
     KRW_1_500_000(5, 1_5000_000),
     KRW_2_000_000_000(6, 2_000_000_000);
 
-    private int matchCount;
-    private int earningMoney;
+    private final int matchCount;
+    private final int earningMoney;
 
     Prize(int matchCount, int earningMoney) {
         this.matchCount = matchCount;
@@ -18,17 +18,9 @@ public enum Prize {
 
     public static int getPrice(int matchCount) {
         return Arrays.stream(values())
-                .filter(prize -> prize.getMatchCount() == matchCount)
+                .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new)
-                .getEarningMoney();
-    }
-
-    public int getMatchCount() {
-        return this.matchCount;
-    }
-
-    public int getEarningMoney() {
-        return this.earningMoney;
+                .earningMoney;
     }
 }

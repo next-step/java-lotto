@@ -14,7 +14,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static int buyTickets() {
+    public static int buyTicket() {
         System.out.println(AMOUNT);
         return scanner.nextInt();
     }
