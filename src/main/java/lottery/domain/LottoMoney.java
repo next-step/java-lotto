@@ -1,5 +1,7 @@
 package lottery.domain;
 
+import lottery.dto.LottoTries;
+
 public class LottoMoney {
 
     private static final String ILLEGAL_MONEY = "구매 금액은 0보다 커야 합니다.";
@@ -18,7 +20,11 @@ public class LottoMoney {
         return purchaseAmount;
     }
 
-    public int getNumberOfTickets() {
+    public LottoTries getLottoTries(int manualLottoInput) {
+        return new LottoTries(getTotalTries(), manualLottoInput);
+    }
+
+    private int getTotalTries() {
         int numberOfTickets = this.lottoMoney / LottoTicket.TICKET_PRICE;
         if (numberOfTickets <= 0) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);

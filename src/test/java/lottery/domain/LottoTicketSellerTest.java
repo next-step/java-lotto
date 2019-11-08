@@ -12,14 +12,14 @@ class LottoTicketSellerTest {
     @Test
     void 부족한_구입금액_입력테스트() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            LottoTicketSeller.purchaseRandomGames(new LottoMoney(100));
+            LottoTicketSeller.purchaseRandomGames(new LottoMoney(100).getLottoTries(0).getRandomTries());
         }).withMessage("로또 구입 금액이 부족합니다.");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "2000:2", "3000:3", "4000:4", "5000:5"}, delimiter = ':')
     void 정상금액_구입테스트(int money, int ticketNumber) {
-        LottoTickets purchasedTickets = LottoTicketSeller.purchaseRandomGames(new LottoMoney(money));
+        LottoTickets purchasedTickets = LottoTicketSeller.purchaseRandomGames(new LottoMoney(money).getLottoTries(0).getRandomTries());
         assertThat(purchasedTickets.size()).isEqualTo(ticketNumber);
     }
 }

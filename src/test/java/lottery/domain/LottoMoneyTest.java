@@ -19,7 +19,7 @@ class LottoMoneyTest {
     @ValueSource(ints = {0, 10, 100, 999})
     void 모자란_돈으로_구매가능한_티켓_매수확인테스트(int purchaseAmount) {
         assertThatIllegalArgumentException().isThrownBy(()->{
-            new LottoMoney(purchaseAmount).getNumberOfTickets();
+            new LottoMoney(purchaseAmount).getLottoTries(0);
         }).withMessage("로또 구입 금액이 부족합니다.");
     }
 }

@@ -3,8 +3,8 @@ package lottery.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lottery.LottoResult;
-import lottery.LottoResults;
+import lottery.dto.LottoResult;
+import lottery.dto.LottoResults;
 
 public class LottoTickets {
 
@@ -25,6 +25,10 @@ public class LottoTickets {
             results.add(new LottoResult(ticket.match(winLottoTicket).size(), ticket.isBonusMatched(bonusLottoNumber)));
         }
         return new LottoResults(results);
+    }
+
+    public void append(LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.lottoTickets);
     }
 
     @Override

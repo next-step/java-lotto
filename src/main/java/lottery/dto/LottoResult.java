@@ -1,4 +1,4 @@
-package lottery;
+package lottery.dto;
 
 import lottery.domain.Prize;
 

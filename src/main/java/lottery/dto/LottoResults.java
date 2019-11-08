@@ -1,4 +1,4 @@
-package lottery;
+package lottery.dto;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
