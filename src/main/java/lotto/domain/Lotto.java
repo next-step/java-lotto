@@ -10,14 +10,15 @@ import java.util.Objects;
  */
 public class Lotto {
 
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개로 이루어져야 합니다.");
         }
 
-        if (lottoNumbers.stream().distinct().count() != 6) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 중복이 불가능 합니다.");
         }
 
