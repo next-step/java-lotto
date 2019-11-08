@@ -10,6 +10,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public int count() {
+        return this.lottos.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

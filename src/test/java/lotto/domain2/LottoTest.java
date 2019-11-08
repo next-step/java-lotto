@@ -15,21 +15,29 @@ public class LottoTest {
 
     @Test
     void 생성() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
     void 로또번호_개수_부족하거나_많을때(final String input) {
         String[] inputSplit = input.split(",");
-        List<Integer> numbers = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : inputSplit) {
-            numbers.add(Integer.parseInt(number));
+            lottoNumbers.add(LottoNumber.of(Integer.parseInt(number)));
         }
 
         assertThatThrownBy(() -> {
-            new Lotto(numbers);
+            new Lotto(lottoNumbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
