@@ -10,6 +10,7 @@ public class LottoMachine {
 
     public LottoMachine() {
         this.baseLottoNumbers = new ArrayList<>();
+
         for (int no = LottoNumber.MIN; no <= LottoNumber.MAX; no++) {
             baseLottoNumbers.add(LottoNumber.of(no));
         }
@@ -17,6 +18,7 @@ public class LottoMachine {
 
     public Lottos issue(final int countOfLotto) {
         final List<Lotto> lottos = new ArrayList<>();
+
         for (int i = 0; i < countOfLotto; i++) {
             Collections.shuffle(baseLottoNumbers);
             Lotto lotto = new Lotto(Collections.unmodifiableList(baseLottoNumbers.subList(0, Lotto.NUMBER_COUNT)));

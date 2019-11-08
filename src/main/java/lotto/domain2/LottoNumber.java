@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
-    public static final int MIN = 1;
-    public static final int MAX = 45;
+    static final int MIN = 1;
+    static final int MAX = 45;
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int no;
 
@@ -21,7 +21,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(final int no) {
-        if (MIN > no || no > MAX) {
+        if (no < MIN || MAX < no) {
             throw new IllegalArgumentException(String.format("로또번호는 %s 이상, %s 이하여야 합니다.", MIN, MAX));
         }
 
