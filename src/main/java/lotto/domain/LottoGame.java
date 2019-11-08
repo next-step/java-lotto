@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+
+import java.util.List;
 
 public class LottoGame {
     public static final int GAME_AMOUNT = 1000;
