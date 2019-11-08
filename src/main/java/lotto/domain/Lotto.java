@@ -17,7 +17,7 @@ public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
     private static final Predicate<String> IS_NUMERIC = str -> NUMERIC.matcher(str).matches();
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     private Lotto(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
@@ -28,7 +28,7 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 중복이 불가능 합니다.");
         }
 
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = lottoNumbers.stream().map(LottoNumber::of).collect(Collectors.toList());
     }
 
     public static final Lotto of(List<Integer> lottoNumbers) {
