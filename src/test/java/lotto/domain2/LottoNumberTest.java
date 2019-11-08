@@ -6,20 +6,20 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class NumberTest {
+public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = 1)
     void 생성(final int no) {
-        Number number = Number.of(no);
-        assertThat(number).isEqualTo(Number.of(no));
+        LottoNumber lottoNumber = LottoNumber.of(no);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(no));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 작은숫자_또는_큰숫자_IllegalArgumentsException(final int no) {
         assertThatThrownBy(() -> {
-            Number.of(no);
+            LottoNumber.of(no);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
