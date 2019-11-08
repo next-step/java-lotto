@@ -21,8 +21,6 @@ class LottoGameTest {
     void setUp() {
         lottoGame = new LottoGame();
         numbers = Arrays.stream(lottoGame.toString().trim()
-                .replace("[", "")
-                .replace("]", "")
                 .split(","))
                 .map(num -> Integer.parseInt(num.trim()))
                 .collect(toList());

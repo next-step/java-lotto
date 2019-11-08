@@ -13,7 +13,7 @@ class WinningCountTest {
 
     @Test
     void getWinningRate() {
-        assertThat(winningCount.getWinningRate())
+        assertThat(winningCount.calculateWinningRate())
                 .isEqualTo((float) Prize.getPrice(5) / Ticket.LOTTO_PRICE);
     }
 

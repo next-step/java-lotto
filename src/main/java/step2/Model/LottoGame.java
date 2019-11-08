@@ -7,9 +7,7 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-
 public class LottoGame {
-
     public static final int NUMBER_COUNT = 6;
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
@@ -27,9 +25,8 @@ public class LottoGame {
     }
 
     public String toString() {
-        String numberString = numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + DELIMITER + o2)
+        return numbers.stream().map(String::valueOf).reduce((o1, o2) -> o1 + DELIMITER + o2)
                 .orElseThrow(IllegalArgumentException::new);
-        return "[" + numberString + "]";
     }
 
     private List<Integer> pickRandomNumbers() {

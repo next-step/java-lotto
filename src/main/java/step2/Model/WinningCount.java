@@ -3,6 +3,7 @@ package step2.Model;
 import step2.Data.Prize;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class WinningCount {
     public static final int MIN_MATCH_COUNT = 3;
@@ -14,20 +15,24 @@ public class WinningCount {
         this.count = count;
     }
 
-    public float getWinningRate() {
-        float earningMoney = 0;
-        for (int matchCount = MIN_MATCH_COUNT;
-             matchCount <= MAX_MATCH_COUNT; matchCount++) {
-            earningMoney += (Prize.getPrice(matchCount) * count[matchCount]);
-        }
-        return earningMoney / (totalCount() * Ticket.LOTTO_PRICE);
-    }
-
     public int countOfMatchCount(int matchCount) {
         return count[matchCount];
     }
 
-    private int totalCount() {
-        return Arrays.stream(count).reduce(Integer::sum).orElseThrow(IllegalArgumentException::new);
+    public float calculateWinningRate() {
+        return calculateTotalEarningMoney() / calculateTicketPrice();
+    }
+
+    private float calculateTotalEarningMoney() {
+        return IntStream.rangeClosed(MIN_MATCH_COUNT, MAX_MATCH_COUNT)
+                .map(i -> Prize.calculateEarningMoney(i, count[i]))
+                .sum();
+    }
+
+    private int calculateTicketPrice() {
+        int totalCount = Arrays.stream(count)
+                .reduce(Integer::sum)
+                .orElseThrow(IllegalArgumentException::new);
+        return totalCount * Ticket.LOTTO_PRICE;
     }
 }

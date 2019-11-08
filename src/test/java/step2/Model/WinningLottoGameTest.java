@@ -26,7 +26,7 @@ class WinningLottoGameTest {
             "1, 2, 3, 4, 5, 6:true",
             "2, 3, 4, 5, 6, 7:false"
     }, delimiter = ':')
-    @DisplayName("")
+    @DisplayName("당첨번호를 포함하는지 테스트")
     void containsTest(String inputWinningNumbers, boolean contains) {
         WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
         assertThat(winningLotto.contains(1)).isEqualTo(contains);

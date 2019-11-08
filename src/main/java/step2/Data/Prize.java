@@ -1,8 +1,10 @@
 package step2.Data;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Prize {
+    KRW_0_000(0, 0),
     KRW_5_000(3, 5_000),
     KRW_50_000(4, 50_000),
     KRW_1_500_000(5, 1_5000_000),
@@ -16,11 +18,15 @@ public enum Prize {
         this.earningMoney = earningMoney;
     }
 
+    public static int calculateEarningMoney(int matchCount, int lottoGameCount) {
+        return getPrice(matchCount) * lottoGameCount;
+    }
+
     public static int getPrice(int matchCount) {
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new)
+                .orElse(Optional.of(KRW_0_000).get())
                 .earningMoney;
     }
 }

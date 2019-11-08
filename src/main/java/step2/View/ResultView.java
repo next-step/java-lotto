@@ -23,7 +23,7 @@ public class ResultView {
     public static void printTickets(Ticket ticket) {
         List<LottoGame> lottoGames = ticket.getLottoGames();
         System.out.println(lottoGames.size() + AMOUNT_CONFIRM_POSTFIX);
-        lottoGames.forEach(lottoGame -> System.out.println(lottoGame.toString()));
+        lottoGames.forEach(lottoGame -> System.out.println("[" + lottoGame.toString() + "]"));
     }
 
     public static void printAnalysis(Ticket ticket, WinningLotto winningLottoNumber) {
@@ -44,7 +44,7 @@ public class ResultView {
     }
 
     private static void printWinningRate(WinningCount winningCount) {
-        float rate = winningCount.getWinningRate();
+        float rate = winningCount.calculateWinningRate();
         System.out.println(WINNING_RATE_PREFIX + rate + WINNING_REPORT_PREFIX +
                 (rate > 1 ? GAIN : LOSS) + WINNING_REPORT_POSTFIX);
     }
