@@ -13,4 +13,13 @@ public class UserTest {
         User user = new User(money);
         assertThat(user).isEqualTo(new User(money));
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = 10_000)
+    void 로또구매(final int money) {
+        User user = new User(money);
+        user.buyLottosIn(new Store(new LottoMachine()));
+        WinningLottos winningLottos = user.checkLottos("1, 2, 3, 4, 5, 6");
+
+    }
 }

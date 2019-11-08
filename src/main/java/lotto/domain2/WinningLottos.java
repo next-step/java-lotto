@@ -1,12 +1,26 @@
 package lotto.domain2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class WinningLottos {
-    private final Lottos winningLottos;
+    private List<WinningLotto> winningLottos;
 
-    public WinningLottos(final Lottos winningLottos) {
-        this.winningLottos = winningLottos;
+    public WinningLottos() {
+        this.winningLottos = new ArrayList<>();
+    }
+
+    void addOnlyWinning(final Lotto lotto, final Rank rank) {
+        if (rank != Rank.LOSE) {
+            this.winningLottos.add(new WinningLotto(lotto, rank));
+        }
+    }
+
+    public int getCountOf(final Rank rank) {
+        return (int) winningLottos.stream()
+                .filter(winningLotto -> winningLotto.is(rank))
+                .count();
     }
 
     @Override

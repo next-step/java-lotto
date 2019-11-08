@@ -14,6 +14,18 @@ public class Lottos {
         return this.lottos.size();
     }
 
+    WinningLottos checkWinning(final List<LottoNumber> winningLotto) {
+        final WinningLottos winningLottos = new WinningLottos();
+
+        for (Lotto lotto : lottos) {
+            final int countOfMatch = lotto.getCountOfMatchWith(new Lotto(winningLotto));
+            final Rank rank = Rank.findByCountOfMatch(countOfMatch);
+            winningLottos.addOnlyWinning(lotto, rank);
+        }
+
+        return winningLottos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
