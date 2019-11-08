@@ -1,6 +1,8 @@
 package step2.analyze;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static step2.analyze.WinningCount.MAX_MATCH_COUNT;
@@ -31,11 +33,29 @@ public enum Prize {
                 .orElse(Optional.of(KRW_0_000).get());
     }
 
+    public static Map<Prize, String> ofPrizesAndWinningCondition() {
+        Map<Prize, String> prizes = new HashMap<>();
+        Arrays.stream(values())
+                .filter(prize -> prize.matchCount > 0)
+                .forEach(prize -> {
+                    String condition = prize.matchCount + "개 일치";
+                    if (prize.bonus) {
+                        condition += ", 보너스 볼 일치";
+                    }
+                    prizes.put(prize, condition);
+                });
+        return prizes;
+    }
+
     public int calculateEarningMoney(int lottoGameCount) {
         return this.money * lottoGameCount;
     }
 
     public int getMoney() {
         return money;
+    }
+
+    public static int compareTo(Prize prize1, Prize prize2) {
+        return Integer.compare(prize1.money, prize2.money);
     }
 }

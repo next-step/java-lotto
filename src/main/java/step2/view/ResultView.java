@@ -7,12 +7,13 @@ import step2.game.Ticket;
 import step2.game.WinningLotto;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
     private static final String AMOUNT_CONFIRM_POSTFIX = "개를 구매했습니다.";
     private static final String RESULT = "당첨 통계\n---------";
-    private static final String WINNING_COUNT_POSTFIX = "개 일치 (";
-    private static final String WINNING_PRIZE_POSTFIX = ") - ";
+    private static final String WINNING_MONEY_PREFIX = "(";
+    private static final String WINNING_MONEY_POSTFIX = "원) - ";
     private static final String WINNING_GAME_POSTFIX = "개";
     private static final String WINNING_RATE_PREFIX = "총 수익률은 ";
     private static final String WINNING_REPORT_PREFIX = "입니다.(기준이 1이기 때문에 결과적으로 ";
@@ -35,20 +36,14 @@ public class ResultView {
     }
 
     private static void printWinningCount(WinningCount winningCount) {
-        Prize prize;
-        for (int matchCount = WinningCount.MIN_MATCH_COUNT;
-             matchCount <= WinningCount.MAX_MATCH_COUNT; matchCount++) {
-            prize = Prize.of(matchCount, false);
-            System.out.println(matchCount + WINNING_COUNT_POSTFIX
-                    + prize.getMoney() + WINNING_PRIZE_POSTFIX
-                    + winningCount.countOfPrize(prize) + WINNING_GAME_POSTFIX);
-            if (matchCount == WinningCount.MAX_MATCH_COUNT - 1) {
-                prize = Prize.of(matchCount, true);
-                System.out.println(matchCount + WINNING_COUNT_POSTFIX
-                        + prize.getMoney() + WINNING_PRIZE_POSTFIX
-                        + winningCount.countOfPrize(prize) + WINNING_GAME_POSTFIX);
-            }
-        }
+        Map<Prize, String> prizesAndWinningCondition = Prize.ofPrizesAndWinningCondition();
+        prizesAndWinningCondition.keySet()
+                .stream().sorted()
+                .forEach(prize -> {
+                    System.out.println(prizesAndWinningCondition.get(prize)
+                            + WINNING_MONEY_PREFIX + prize.getMoney() + WINNING_MONEY_POSTFIX
+                            + winningCount.countOfPrize(prize) + WINNING_GAME_POSTFIX);
+                });
     }
 
     private static void printWinningRate(WinningCount winningCount) {
