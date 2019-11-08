@@ -9,7 +9,7 @@ public class LottoGenerator {
     static private List<Integer> standardLotto = new ArrayList<>();
 
     public static void generateStandardLotto() {
-        for (int i = Lotto.LOTTO_NUMBER_MIN; i < Lotto.LOTTO_NUMBER_MAX + 1; i++) {
+        for (int i = LottoNumber.LOTTO_NUMBER_MIN; i < LottoNumber.LOTTO_NUMBER_MAX + 1; i++) {
             standardLotto.add(i);
         }
     }
