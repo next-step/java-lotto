@@ -11,15 +11,15 @@ public class NumberTest {
     @ParameterizedTest
     @ValueSource(ints = 1)
     void 생성(final int no) {
-        Number number = new Number(no);
-        assertThat(number).isEqualTo(new Number(no));
+        Number number = Number.of(no);
+        assertThat(number).isEqualTo(Number.of(no));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 작은숫자_또는_큰숫자_IllegalArgumentsException(final int no) {
         assertThatThrownBy(() -> {
-            new Number(no);
+            Number.of(no);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
