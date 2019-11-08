@@ -1,4 +1,4 @@
-package step2.Data;
+package step2.analyze;
 
 import java.util.Arrays;
 import java.util.Optional;

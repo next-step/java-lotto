@@ -1,11 +1,11 @@
 package step2;
 
-import step2.Model.Ticket;
-import step2.Model.WinningLotto;
-import step2.View.InputView;
-import step2.View.ResultView;
+import step2.game.Ticket;
+import step2.game.WinningLotto;
+import step2.view.InputView;
+import step2.view.ResultView;
 
-public class Application {
+public class LottoApplication {
     public static void main(String[] args) {
         int ticketAmount = InputView.buyTicket();
         Ticket ticket = new Ticket(ticketAmount);

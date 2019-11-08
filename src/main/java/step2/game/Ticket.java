@@ -1,4 +1,6 @@
-package step2.Model;
+package step2.game;
+
+import step2.analyze.WinningCount;
 
 import java.util.ArrayList;
 import java.util.Collections;

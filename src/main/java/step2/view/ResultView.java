@@ -1,10 +1,10 @@
-package step2.View;
+package step2.view;
 
-import step2.Data.Prize;
-import step2.Model.LottoGame;
-import step2.Model.Ticket;
-import step2.Model.WinningCount;
-import step2.Model.WinningLotto;
+import step2.analyze.Prize;
+import step2.analyze.WinningCount;
+import step2.game.LottoGame;
+import step2.game.Ticket;
+import step2.game.WinningLotto;
 
 import java.util.List;
 

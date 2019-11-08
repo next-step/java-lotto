@@ -1,4 +1,4 @@
-package step2.Model;
+package step2.game;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

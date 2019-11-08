@@ -1,9 +1,7 @@
-package step2;
+package step2.analyze;
 
 import org.junit.jupiter.api.Test;
-import step2.Data.Prize;
-import step2.Model.Ticket;
-import step2.Model.WinningCount;
+import step2.game.Ticket;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;

@@ -1,6 +1,6 @@
-package step2.Model;
+package step2.analyze;
 
-import step2.Data.Prize;
+import step2.game.Ticket;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
