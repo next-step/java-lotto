@@ -11,22 +11,30 @@ public enum Prize {
     KRW_2_000_000_000(6, 2_000_000_000);
 
     private final int matchCount;
-    private final int earningMoney;
+    private final int prize;
 
-    Prize(int matchCount, int earningMoney) {
+    Prize(int matchCount, int prize) {
         this.matchCount = matchCount;
-        this.earningMoney = earningMoney;
+        this.prize = prize;
+    }
+
+    public static Prize ofMatchCount(int matchCount) {
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount == matchCount)
+                .findFirst()
+                .orElse(Optional.of(KRW_0_000).get());
+    }
+
+    public static int getPrice(int matchCount) {
+        return ofMatchCount(matchCount).prize;
     }
 
     public static int calculateEarningMoney(int matchCount, int lottoGameCount) {
         return getPrice(matchCount) * lottoGameCount;
     }
 
-    public static int getPrice(int matchCount) {
-        return Arrays.stream(values())
-                .filter(prize -> prize.matchCount == matchCount)
-                .findFirst()
-                .orElse(Optional.of(KRW_0_000).get())
-                .earningMoney;
+    public int calculateEarningMoney(int lottoGameCount) {
+        return this.prize * lottoGameCount;
     }
+
 }

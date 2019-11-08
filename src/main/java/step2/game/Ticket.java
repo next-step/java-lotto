@@ -1,10 +1,9 @@
 package step2.game;
 
+import step2.analyze.Prize;
 import step2.analyze.WinningCount;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Ticket {
     private static final String AMOUNT_EXCEPTION = "로또는 1000원단위로 구매할 수 있습니다.";
@@ -36,8 +35,12 @@ public class Ticket {
     }
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
-        int[] count = new int[LottoGame.NUMBER_COUNT + 1];
-        lottoGames.forEach(lottoGame -> count[lottoGame.matchWinningNumberCount(winningLotto)]++);
-        return new WinningCount(count);
+        Map<Prize, Integer> winningCount = new HashMap<>();
+        lottoGames.forEach(lottoGame -> {
+            Prize prize = Prize.ofMatchCount(lottoGame.matchWinningNumberCount(winningLotto));
+            winningCount.put(prize, winningCount.getOrDefault(prize, 0) + 1);
+        });
+        return new WinningCount(winningCount);
+
     }
 }
