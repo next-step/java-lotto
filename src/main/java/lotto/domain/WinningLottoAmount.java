@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public enum WinningLottoAmount {
 
@@ -45,7 +42,7 @@ public enum WinningLottoAmount {
     }
 
     public static Map<WinningLottoAmount, Long> lottoResult(List<WinningLottoAmount> winningLottoAmount) {
-        Map<WinningLottoAmount, Long> lottoResult = new HashMap<>();
+        Map<WinningLottoAmount, Long> lottoResult = new LinkedHashMap<>();
         Arrays.stream(WinningLottoAmount.values()).filter(winningAmount -> winningAmount.amount >= WINNING_MIN_COUNT).forEach(winningAmount -> {
             long cnt = winningLottoAmount.stream()
                     .filter(amount -> amount.isEqualMatchCount(winningAmount.matchCount))
