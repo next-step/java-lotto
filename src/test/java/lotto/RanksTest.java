@@ -20,6 +20,5 @@ public class RanksTest {
         Ranks ranks = new Ranks(ranksInit);
         assertThat(ranks.getRanks()).hasSize(4);
         assertThat(ranks.getRanks()).contains(Rank.FIRST);
-        assertThat(ranks.getLottoRankCount().get(Rank.FIRST)).isEqualTo(3);
     }
 }

@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Insights;
 import lotto.domain.LottoPaper;
 import lotto.domain.Ranks;
 import lotto.view.InputView;
@@ -17,9 +18,9 @@ public class LottoController {
         List<Rank> ranks = getWinLotto(lottoPaper);
 
         Ranks lottoRanks = new Ranks(ranks);
-        Map<Rank, Integer> lottoRanksCount = lottoRanks.getLottoRankCount();
+        Map<Rank, Integer> lottoInsights = lottoRanks.updateLottoRank();
 
-        ResultView.printLottoResult(lottoRanksCount);
+        ResultView.printLottoResult(lottoInsights);
         ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(), count);
     }
 
