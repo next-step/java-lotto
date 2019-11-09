@@ -1,28 +1,19 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lotto.data.Lottos;
 
 public class VendingMachine {
-    private LottoPrice lottoPrice;
+    private Wallet wallet;
 
     public VendingMachine(int budget) {
-        this.lottoPrice = new LottoPrice(budget);
+        this.wallet = new Wallet(budget);
     }
 
     public Lottos buy() {
-        List<Lotto> lottos = new ArrayList<>();
-
-        while (lottoPrice.isEnoughBudget()) {
-            lottos.add(new Lotto());
-        }
-
-        return new Lottos(lottos);
+        return new Lottos(wallet);
     }
 
     public int getExpend() {
-        return lottoPrice.getExpend();
+        return wallet.getExpend();
     }
 }
