@@ -11,12 +11,12 @@ import static lotto.domain.LottoNumbers.NUMBERS_SIZE;
 
 public class LottoProvider {
 
-    private static final List<Integer> numbers = new ArrayList<>();
+    private static final List<LottoNumber> numbers = new ArrayList<>();
 
-    private static List<Integer> getNumbers() {
+    private static List<LottoNumber> getNumbers() {
         if (numbers.isEmpty()) {
-            for (int i = 1; i <= MAX_NUMBER; i++) {
-                numbers.add(i);
+            for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+                numbers.add(new LottoNumber(i));
             }
         }
 
@@ -24,7 +24,12 @@ public class LottoProvider {
     }
 
     private static List<Integer> getShuffledNumbers() {
-        List<Integer> shuffledNumbers = LottoProvider.getNumbers();
+        List<Integer> shuffledNumbers = LottoProvider
+                .getNumbers()
+                .stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+
         Collections.shuffle(shuffledNumbers);
         return shuffledNumbers;
     }
