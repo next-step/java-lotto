@@ -33,13 +33,9 @@ public class LottoInputView {
         return NUMERIC.matcher(amount).matches();
     }
 
-//
-//    public static final List<Integer> inputWinningNumber() {
-//        System.out.println(INPUT_WINNING_NUMBER);
-//
-//        final String winningNumber = scanner.nextLine().replaceAll(BLANK, EMPTY);
-//        LottoNumberStrategy.validateLottoNumber(winningNumber);
-//
-//        return Arrays.stream(winningNumber.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-//    }
+
+    public static final String inputWinningNumber() {
+        System.out.println(INPUT_WINNING_NUMBER);
+        return scanner.nextLine().replaceAll(BLANK, EMPTY);
+    }
 }
