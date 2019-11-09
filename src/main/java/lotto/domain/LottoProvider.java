@@ -6,7 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumbers.MAX_NUMBER;
+import static lotto.domain.LottoNumber.MAX_NUMBER;
+import static lotto.domain.LottoNumber.MIN_NUMBER;
 import static lotto.domain.LottoNumbers.NUMBERS_SIZE;
 
 public class LottoProvider {

@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static lotto.domain.LottoNumber.MAX_NUMBER;
+import static lotto.domain.LottoNumber.MIN_NUMBER;
+
 public class LottoNumbers {
 
     public static final String GRATER_THAN_NUMBER_COUNT_ERROR = "입력된 번호의 개수가 너무 많습니다. 6개의 번호를 입력해주세요.";
@@ -13,8 +16,6 @@ public class LottoNumbers {
     public static final String INVALID_RANGE_NUMBER_ERROR = "로또 번호는 1 ~ 45 사이의 숫자만 입력가능합니다.";
 
     public static final int NUMBERS_SIZE = 6;
-    public static final int MAX_NUMBER = 45;
-    public static final int MIN_NUMBER = 1;
 
     private final List<Integer> numbers;
 
