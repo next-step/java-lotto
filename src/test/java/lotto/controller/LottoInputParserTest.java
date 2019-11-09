@@ -28,8 +28,8 @@ class LottoInputParserTest {
         InputReader inputReader1 = new TestInputReader("45", "1, 2, 3, 4, 5, 6, 7");
         InputReader inputReader2 = new TestInputReader("45", "1, 2, 3, 4, 5");
 
-        assertThatThrownBy(() -> LottoInputParser.getWinningInput(inputReader1)).isInstanceOf(RuntimeException.class);
-        assertThatThrownBy(() -> LottoInputParser.getWinningInput(inputReader2)).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> LottoInputParser.getMultipleNumberInput(inputReader1, "")).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> LottoInputParser.getMultipleNumberInput(inputReader2, "")).isInstanceOf(RuntimeException.class);
     }
 
     @DisplayName("bonus_number_duplicate")
