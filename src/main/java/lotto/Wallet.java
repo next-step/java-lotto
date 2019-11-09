@@ -1,26 +1,20 @@
 package lotto;
 
-public class LottoPrice {
+public class Wallet {
     private static final int PRICE = 1000;
 
     private int budget;
     private int change;
 
-    public LottoPrice(int budget) {
+    public Wallet(int budget) {
         this.budget = budget;
         this.change = budget;
         validate();
     }
 
-    private void validate() {
-        if (budget < PRICE) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     public boolean isEnoughBudget() {
         if (change - PRICE >= 0) {
-            change -= PRICE;
+            payMoney();
             return true;
         }
 
@@ -29,5 +23,15 @@ public class LottoPrice {
 
     public int getExpend() {
         return budget - change;
+    }
+
+    private void payMoney() {
+        change -= PRICE;
+    }
+
+    private void validate() {
+        if (budget < PRICE) {
+            throw new IllegalArgumentException();
+        }
     }
 }
