@@ -28,4 +28,12 @@ public class LottoMachine {
             lottos.add(Lotto.of(lottoGenerator.generate()));
         }
     }
+
+    public List<Lotto> getLottos() {
+        return this.lottos;
+    }
+
+    public int getLottoCount() {
+        return this.lottoAmount.amount();
+    }
 }
