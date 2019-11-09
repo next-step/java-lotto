@@ -8,10 +8,10 @@ public class Lotto {
     static final int LOTTO_NUMBER_MAX = 45;
     static int lottoBonusNumber;
 
-    private List<Integer> lotto;
+    private List<Integer> newLotto;
 
-    public Lotto(List<Integer> lotto) {
-        this.lotto = new ArrayList<>(lotto);
+    public Lotto(List<Integer> newLotto) {
+        this.newLotto = new ArrayList<>(newLotto);
     }
 
     public static Lotto creatLottoWinningNumbers(String[] inputNewLottoNumbers) {
@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     public static List<Integer> valueOf(Lotto lotto) {
-        return lotto.lotto;
+        return lotto.newLotto;
     }
 
     public static void checkWinningNumberLength(String[] inputNewLottoNumbers) {
@@ -39,7 +39,7 @@ public class Lotto {
     public static ArrayList<Integer> checkWinningNumberRange(String[] inputNewLottoNumbers) {
         ArrayList<Integer> inputWinningNumberList = new ArrayList<>();
         for (int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++) {
-            LottoNo.checkEachNumber(Integer.parseInt((inputNewLottoNumbers[i])));
+            LottoNumber.checkEachNumber(Integer.parseInt((inputNewLottoNumbers[i])));
             inputWinningNumberList.add(Integer.parseInt((inputNewLottoNumbers[i])));
         }
         Collections.sort(inputWinningNumberList);
@@ -56,7 +56,7 @@ public class Lotto {
 
     private static int matchWinningNumbers(Lotto purchasedLotto, List<Integer> winningNumbers) {
         final int count = (int) winningNumbers.stream()
-                .filter(purchasedLotto.lotto::contains)
+                .filter(purchasedLotto.newLotto::contains)
                 .count();
         return count;
     }
@@ -64,7 +64,7 @@ public class Lotto {
     public static void pickOutBonusWinningLotto(Set<Lotto> purchasedLottos) {
         int indexCount = 0;
         for (Lotto purchasedLotto : purchasedLottos) {
-            LottoLottery.purchasedLottoCompareBonusNumber(purchasedLotto.lotto, indexCount);
+            LottoLottery.purchasedLottoCompareBonusNumber(purchasedLotto.newLotto, indexCount);
             indexCount++;
         }
     }
