@@ -14,6 +14,5 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
         assertThat(lottoNumbers).isEqualTo(new LottoNumbers());
         assertThat(lottoNumbers.shuffle()).isNotEqualTo(new LottoNumbers().shuffle());
-        assertThat(lottoNumbers.shuffle().get(0)).isNotEqualTo(new LottoNumbers().shuffle().get(0));
     }
 }

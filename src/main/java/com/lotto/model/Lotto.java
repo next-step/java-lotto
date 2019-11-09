@@ -1,6 +1,7 @@
 package com.lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class Lotto {
         for (int i = ZERO_NUMBER; i < LOTTO_WINNING_NUMBER_COUNT; i++) {
             numbers.add(shuffleLottoNumbers.get(i));
         }
+        Collections.sort(numbers);
     }
 
     @Override
