@@ -11,14 +11,14 @@ public class StoreTest {
 
     @Test
     void 생성() {
-        Store store = new Store(new LottoMachine());
-        assertThat(store).isEqualTo(new Store(new LottoMachine()));
+        Store store = new Store(new BasicLottoMachine());
+        assertThat(store).isEqualTo(new Store(new BasicLottoMachine()));
     }
 
     @ParameterizedTest
     @ValueSource(ints = 1000)
     void 로또발급(final int money) {
-        Store store = new Store(new LottoMachine());
+        Store store = new Store(new BasicLottoMachine());
         Lottos lottos = store.issueLotto(money);
         assertThat(lottos.count()).isEqualTo(1);
     }
@@ -26,7 +26,7 @@ public class StoreTest {
     @ParameterizedTest
     @ValueSource(ints = 999)
     void 로또발급_구매가격미달(final int money) {
-        Store store = new Store(new LottoMachine());
+        Store store = new Store(new BasicLottoMachine());
         assertThatThrownBy(() -> {
             store.issueLotto(money);
         }).isInstanceOf(IllegalArgumentException.class);

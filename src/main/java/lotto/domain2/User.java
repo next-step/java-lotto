@@ -17,7 +17,7 @@ public class User {
         this.lottos = store.issueLotto(money);
     }
 
-    public WinningLottos checkLottos(final String winningNumbersInput) {
+    public WinningLottos checkLottos(final String winningNumbersInput, final int bonusNumber) {
         final String[] splitWinningNumber = winningNumbersInput.split(WINNING_NUMBERS_DELIMITER);
         final List<LottoNumber> winningLottoNumbers = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class User {
             winningLottoNumbers.add(LottoNumber.of(Integer.parseInt(winningNumber)));
         }
 
-        return lottos.checkWinning(winningLottoNumbers);
+        return lottos.checkWinning(winningLottoNumbers, bonusNumber);
     }
 
     Lottos findLottos() {

@@ -15,14 +15,15 @@ public class Lotto {
         this.lottoNumbers = numbers;
     }
 
-    int getCountOfMatchWith(final Lotto winningLotto) {
+    int getCountOfMatchWith(final List<LottoNumber> winningLotto) {
         return (int) lottoNumbers.stream()
                 .filter(winningLotto::contains)
                 .count();
     }
 
-    private boolean contains(final LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+    boolean isMatchBonus(final int bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(LottoNumber.of(bonusNumber)));
     }
 
     @Override

@@ -22,10 +22,20 @@ public enum Rank {
         return this.money;
     }
 
-    public static Rank findByCountOfMatch(final int countOfMatch) {
-        return Arrays.stream(values())
+    public static Rank findByCountOfMatch(final int countOfMatch, final boolean isMatchBonus) {
+        Rank winningRank = Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch)
                 .findAny()
                 .orElse(Rank.LOSE);
+
+        if (winningRank == Rank.SECOND && !isMatchBonus) {
+            return Rank.THIRD;
+        }
+
+        if (winningRank == Rank.FIRTH && isMatchBonus) {
+            return Rank.SECOND;
+        }
+
+        return winningRank;
     }
 }

@@ -15,12 +15,13 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    WinningLottos checkWinning(final List<LottoNumber> winningLotto) {
+    WinningLottos checkWinning(final List<LottoNumber> winningNumbers, final int bonusNumber) {
         final WinningLottos winningLottos = new WinningLottos();
 
         for (Lotto lotto : lottos) {
-            final int countOfMatch = lotto.getCountOfMatchWith(new Lotto(winningLotto));
-            final Rank rank = Rank.findByCountOfMatch(countOfMatch);
+            final int countOfMatch = lotto.getCountOfMatchWith(winningNumbers);
+            final boolean isMatchBonus = lotto.isMatchBonus(bonusNumber);
+            final Rank rank = Rank.findByCountOfMatch(countOfMatch, isMatchBonus);
             winningLottos.addOnlyWinning(lotto, rank);
         }
 

@@ -10,14 +10,14 @@ public class LottoMachineTest {
 
     @Test
     void 생성() {
-        final LottoMachine lottoMachine = new LottoMachine();
-        assertThat(lottoMachine).isEqualTo(new LottoMachine());
+        final LottoMachine lottoMachine = new BasicLottoMachine();
+        assertThat(lottoMachine).isEqualTo(new BasicLottoMachine());
     }
 
     @ParameterizedTest
     @ValueSource(ints = 10)
     void 로또발급(final int countOfLotto) {
-        final LottoMachine lottoMachine = new LottoMachine();
+        final LottoMachine lottoMachine = new BasicLottoMachine();
         final Lottos lottos = lottoMachine.issue(countOfLotto);
         assertThat(lottos.count()).isEqualTo(countOfLotto);
     }
