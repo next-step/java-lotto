@@ -13,8 +13,8 @@ public class User {
         this.money = money;
     }
 
-    public void buyLottosIn(final Store store) {
-        this.lottos = store.issueLotto(money);
+    public void buyLottosIn(final Store store, final List<String> directLottos) {
+        this.lottos = store.issueLotto(money, directLottos);
     }
 
     public WinningLottos checkLottos(final String winningNumbersInput, final int bonusNumber) {

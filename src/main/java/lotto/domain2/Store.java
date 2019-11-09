@@ -1,5 +1,6 @@
 package lotto.domain2;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Store {
@@ -10,14 +11,25 @@ public class Store {
         this.lottoMachine = lottoMachine;
     }
 
-    public Lottos issueLotto(final int money) {
-        final int countOfLotto = money / LOTTO_PRICE;
+    public Lottos issueLotto(final int money, final List<String> directLottos) {
+        final int countOfTotalLotto = money / LOTTO_PRICE;
 
-        if (countOfLotto == 0) {
+        if (countOfTotalLotto == 0) {
             throw new IllegalArgumentException(String.format("로또 하나의 구매 가격은 %s원 입니다.", LOTTO_PRICE));
         }
 
-        return lottoMachine.issue(countOfLotto);
+        if (countOfTotalLotto < directLottos.size()) {
+            int needfulMoney = directLottos.size() * LOTTO_PRICE;
+            throw new IllegalArgumentException(
+                    String.format(
+                            "원하는 만큼 수동 로또 구매를 위해서는 %s원이 필요합니다. 지불한 금액은 %s원입니다.",
+                            needfulMoney,
+                            money
+                    )
+            );
+        }
+
+        return lottoMachine.issue(countOfTotalLotto, directLottos);
     }
 
     @Override

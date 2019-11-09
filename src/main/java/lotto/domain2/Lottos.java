@@ -32,6 +32,16 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
+    int findCountOfDirectLottos() {
+        return (int) lottos.stream()
+                .filter(Lotto::isDirect)
+                .count();
+    }
+
+    int findCountOfAutoLottos() {
+        return lottos.size() - findCountOfDirectLottos();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
