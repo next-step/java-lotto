@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Lotto {
 
-    private final int ZERO_NUMBER = 0;
-    private final int LOTTO_WINNING_NUMBER_COUNT = 6;
+    private static final int ZERO_NUMBER = 0;
+    private static final int LOTTO_WINNING_NUMBER_COUNT = 6;
 
     List<Integer> numbers = new ArrayList<>();
 
