@@ -35,13 +35,10 @@ public class LottoMarket {
     private Winners getWinner(Lottos lottos) {
         LottoNumbers winningNumbers = new LottoNumbers(LottoInputParser.getWinningInput(inputReader));
 
-        return LottoInputParser.getBonus(inputReader, winningNumbers).map(num -> new Winners(lottos, winningNumbers, num))
-                               .orElseGet(() -> new Winners(lottos, winningNumbers));
+        return new Winners(lottos, winningNumbers, LottoInputParser.getBonus(inputReader, winningNumbers));
     }
 
     private VendingMachine initVendingMachine() {
-        return inputReader.readInt("지불할 금액 입력: ")
-                          .map(VendingMachine::new)
-                          .orElseThrow(IllegalArgumentException::new);
+        return new VendingMachine(inputReader.readInt("지불할 금액 입력: "));
     }
 }

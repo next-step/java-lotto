@@ -22,18 +22,16 @@ public class LottoInputParser {
                            .collect(Collectors.toList());
     }
 
-    public static Optional<Integer> getBonus(InputReader inputReader, LottoNumbers winningNumbers) {
-        Optional<Integer> bonus = inputReader.readInt("보너스 번호를 입력해주세요");
+    public static int getBonus(InputReader inputReader, LottoNumbers winningNumbers) {
+        int bonus = inputReader.readInt("보너스 번호를 입력해주세요");
 
-        bonus.ifPresent(num -> {
-            if (num < LottoNumberGenerator.MIN_RANGE_NUM || num > LottoNumberGenerator.MAX_RANGE_NUM) {
-                throw new IllegalArgumentException();
-            }
+        if (bonus < LottoNumberGenerator.MIN_RANGE_NUM || bonus > LottoNumberGenerator.MAX_RANGE_NUM) {
+            throw new IllegalArgumentException();
+        }
 
-            if (winningNumbers.isMatchBonus(num)) {
-                throw new IllegalArgumentException();
-            }
-        });
+        if (winningNumbers.isMatchBonus(bonus)) {
+            throw new IllegalArgumentException();
+        }
 
         return bonus;
     }
