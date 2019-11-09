@@ -27,6 +27,10 @@ public class LottoView {
     private static final String LOTTO_NUMBER_POSTFIX = "]";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
+    private static final String COMMA = ",";
+    private static final String BLANK = " ";
+    private static final String EMPTY = "";
+
     private static LottoView lottoView;
 
     private final InputTool inputTool;
@@ -62,10 +66,18 @@ public class LottoView {
     }
 
     public List<Integer> getNumbers() {
-        String[] texts = inputTool.readLine().replace(" ", "").split(",");
+        String[] texts = splitBy(COMMA, inputTool.readLine());
         return Arrays.stream(texts)
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    private String[] splitBy(String regex, String text) {
+        return removeBlank(text).split(regex);
+    }
+
+    private String removeBlank(String text) {
+        return text.replace(BLANK, EMPTY);
     }
 
     public void showLottoNumbers(Lottos lottos, int autoSelectedCount, int manuallySelectedCount) {
