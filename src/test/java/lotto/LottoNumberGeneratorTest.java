@@ -11,12 +11,12 @@ class LottoNumberGeneratorTest {
 
     @Test
     void check_number_count() {
-        assertThat(LottoNumberGenerator.sixNumberGenerator().size()).isEqualTo(6);
+        assertThat(LottoNumberGenerator.sixNumberGenerator().getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     void check_all_different() {
-        Set<Integer> set = new HashSet<>(LottoNumberGenerator.sixNumberGenerator());
+        Set<Integer> set = new HashSet<>(LottoNumberGenerator.sixNumberGenerator().getNumbers());
          assertThat(set.size()).isEqualTo(6);
     }
 }
