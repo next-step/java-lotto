@@ -22,7 +22,7 @@ class LotteryTicketTest {
     @BeforeEach
     void setUp() {
         // given
-        ticket = new LotteryTicket(Lists.newArrayList(1, 2, 3, 4, 5, 6));
+        ticket = LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("복권 숫자 갯수")
@@ -60,7 +60,7 @@ class LotteryTicketTest {
     @DisplayName("유효성 검사 실패: 범위")
     @Test
     void outOfRange() {
-        assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 46)))
+        assertThatThrownBy(() -> LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 46)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageMatching("복권 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
     }
@@ -68,7 +68,7 @@ class LotteryTicketTest {
     @DisplayName("유효성 검사 실패: 사이즈")
     @Test
     void sizeOver() {
-        assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
+        assertThatThrownBy(() -> LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageMatching("복권 번호는 [0-9]+개 입니다.");
     }
@@ -76,7 +76,7 @@ class LotteryTicketTest {
     @DisplayName("유효성 검사 실패: 숫자 중복")
     @Test
     void duplicate() {
-        assertThatThrownBy(() -> new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 5)))
+        assertThatThrownBy(() -> LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("중복");
     }

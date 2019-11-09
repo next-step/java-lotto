@@ -19,7 +19,7 @@ public class LotteryController {
     private final ResultView resultView;
 
     public LotteryController(InputStream in, PrintStream out) {
-        lotteryGenerator = new LotteryGenerator(new NumberGenerator());
+        lotteryGenerator = new LotteryGenerator();
         inputView = new InputView(in);
         resultView = new ResultView(out);
     }

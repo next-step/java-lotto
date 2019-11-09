@@ -9,8 +9,8 @@ import java.util.Optional;
  */
 public class LotteryNumber {
 
-    private static final int LOTTERY_NUMBER_MIN = 1;
-    private static final int LOTTERY_NUMBER_MAX = 45;
+    public static final int LOTTERY_NUMBER_MIN = 1;
+    public static final int LOTTERY_NUMBER_MAX = 45;
     private static final String RANGE_ERROR_MESSAGE =
             String.format("복권 번호의 범위는 [%d, %d] 입니다.", LOTTERY_NUMBER_MIN, LOTTERY_NUMBER_MAX);
     private static final Map<Integer, LotteryNumber> CACHE = new HashMap<>();

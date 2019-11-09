@@ -23,12 +23,12 @@ class WinningNumbersTest {
         // given
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         List<LotteryTicket> tickets = new ArrayList<>();
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6))); // first
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 7))); // second
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 45))); // third
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 44, 45))); // fourth
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 43, 44, 45))); // fifth
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 42, 43, 44, 45))); // miss
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6))); // first
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 7))); // second
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 45))); // third
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 44, 45))); // fourth
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 43, 44, 45))); // fifth
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 42, 43, 44, 45))); // miss
 
         // when
         Map<WinningRanking, Long> countingMap = winningNumbers.getWinningTickets(tickets);

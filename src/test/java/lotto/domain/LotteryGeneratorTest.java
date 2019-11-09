@@ -19,18 +19,18 @@ public class LotteryGeneratorTest {
     @BeforeEach
     void setUp() {
         // given
-        lotteryGenerator = new LotteryGenerator(new NumberGenerator());
+        lotteryGenerator = new LotteryGenerator();
     }
 
-    @DisplayName("복권 생성기: 단일 생성")
+    @DisplayName("복권 생성기: 자동 번호 생성")
     @Test
     void generateTicket() {
 
         // when
-        LotteryTicket lotteryTickets = lotteryGenerator.generateAutoTicket();
+        List<LotteryNumber> numbers = lotteryGenerator.generateAutoNumbers(6);
 
         // then
-        assertThat(lotteryTickets).isNotNull();
+        assertThat(numbers).isNotNull();
     }
 
     @DisplayName("복권 생성기: 여러개 생성")
