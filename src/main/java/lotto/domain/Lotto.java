@@ -15,10 +15,6 @@ public class Lotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public List<Integer> selectLottoNumber(CreatableLotto creatableLotto) {
-        return creatableLotto.makeLotto();
-    }
-
     public List<Integer> getLottoNumber() {
         Collections.sort(lottoNumber);
         return lottoNumber;

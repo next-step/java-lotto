@@ -13,32 +13,19 @@ public class LottoController {
     public void execute() {
         int count = InputView.purchaseCount();
         LottoPaper lottoPaper = new LottoPaper(count);
-        printLottoNumber(lottoPaper);
+        ResultView.printLottoNumber(lottoPaper);
         List<Rank> ranks = getWinLotto(lottoPaper);
 
         Ranks lottoRanks = new Ranks(ranks);
         Map<Rank, Integer> lottoRanksCount = lottoRanks.getLottoRankCount();
 
-        printLottoResult(lottoRanksCount);
-        printYield(lottoRanks.getTotalLottoWinningPrice(), count);
-
-    }
-
-    private void printYield(int totalPrice, int count) {
-        ResultView.getYield(totalPrice, count);
-    }
-
-    private void printLottoResult(Map<Rank, Integer> ranks) {
-        ResultView.printLottoResult(ranks);
+        ResultView.printLottoResult(lottoRanksCount);
+        ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(), count);
     }
 
     private List<Rank> getWinLotto(LottoPaper lottoPaper) {
         int[] winLotto = InputView.getWinLotto();
         int bonusNumber = InputView.getBonusNumber();
         return lottoPaper.getWinningLottoRanks(winLotto, bonusNumber);
-    }
-
-    private void printLottoNumber(LottoPaper lottoPaper) {
-        ResultView.printLottoNumber(lottoPaper);
     }
 }
