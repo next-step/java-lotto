@@ -1,10 +1,13 @@
 package lotto;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoGenerator;
+import lotto.domain.LottoResult;
+import lotto.domain.WinningLottoAmount;
 import lotto.view.LottoInputView;
 import lotto.view.LottoResultView;
+
+import java.util.List;
 
 /**
  * @author : 김윤호
@@ -17,5 +20,8 @@ public class LottoGame {
         lottoMachine.purchase(new LottoGenerator());
         LottoResultView.printLottoPurchaseCount(lottoMachine.getLottoCount());
         LottoResultView.printPurchasedLotto(lottoMachine.getLottos());
+        LottoResult lottoResult = new LottoResult(LottoInputView.inputWinningNumber());
+        LottoResultView.printWinningLotto(lottoResult.getWinningLottoAmount(lottoMachine.getLottos()));
+        LottoResultView.printRateOfReturn(lottoResult.rateOfReturn(lottoMachine.getLottos()));
     }
 }
