@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -18,9 +19,9 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        validateNumbers(numbers);
         this.numbers = numbers;
         this.numbers.sort(Integer::compareTo);
+        validateNumbers();
     }
 
     private static List<Integer> createLottoNumbers() {
@@ -33,14 +34,21 @@ public class Lotto {
         return lottos.subList(0, LOTTO_VALID_SIZE);
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers() {
+        List<Integer> numbers = getUniqueNumbers();
         if (numbers.size() != LOTTO_VALID_SIZE) {
-            throw new IllegalArgumentException("lotto number 개수는 6개입니다.");
+            throw new IllegalArgumentException("lotto number는 중복되지 않은 6개의 숫자입니다.");
         }
 
         for (Integer number : numbers) {
             checkNumberValue(number);
         }
+    }
+
+    private List<Integer> getUniqueNumbers() {
+        return this.numbers.stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private void checkNumberValue(Integer number) {

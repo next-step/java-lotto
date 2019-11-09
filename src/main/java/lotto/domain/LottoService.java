@@ -10,10 +10,14 @@ public class LottoService {
         return amount / LOTTO_AMOUNT;
     }
 
-    public List<Lotto> createLottoTickets(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+    public List<Lotto> createLottoTickets(int count, List<Lotto> manualLottos) {
+        int autoCount = count - manualLottos.size();
+        if (autoCount < 0) {
+            throw new IllegalArgumentException("구매금액보다 수동으로 구매한 로또 수가 더 클 수 없습니다.");
+        }
 
-        for (int i = 0; i < count; i++) {
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < autoCount; i++) {
             lottos.add(new Lotto());
         }
 

@@ -28,7 +28,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("lotto number 개수는 6개입니다.");
+                .hasMessageContaining("lotto number는 중복되지 않은 6개의 숫자입니다.");
     }
 
     @Test
@@ -39,5 +39,23 @@ class LottoTest {
             new Lotto(Arrays.asList(1, 2, 3, 4, 5, 100));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("lotto number는 1과 45사이의 숫자입니다.");
+    }
+
+    @Test
+    @DisplayName("수동으로 로또를 생성한다.")
+    void createManualLotto() {
+
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto.getNumbers()).containsExactly(1,2,3,4,5,6);
+    }
+
+    @Test
+    @DisplayName("수동생성 시 중복으로 입력할 수 없다.")
+    void checkDuplicate() {
+
+        assertThatThrownBy(() -> {
+            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5));
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("lotto number는 중복되지 않은 6개의 숫자입니다.");
     }
 }
