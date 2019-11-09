@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.LottoNumberGenerator;
@@ -10,8 +9,8 @@ import lotto.data.LottoNumbers;
 import lotto.input.InputReader;
 
 public class LottoInputParser {
-    public static List<Integer> getWinningInput(InputReader inputReader) {
-        List<String> inputNumbers = Arrays.asList(inputReader.readLine("당첨번호 입력: ").split(", "));
+    public static List<Integer> getMultipleNumberInput(InputReader inputReader, String comment) {
+        List<String> inputNumbers = Arrays.asList(inputReader.readLine(comment).split(", "));
 
         if (inputNumbers.size() != 6) {
             throw new RuntimeException();
@@ -20,6 +19,16 @@ public class LottoInputParser {
         return inputNumbers.stream()
                            .map(Integer::valueOf)
                            .collect(Collectors.toList());
+    }
+
+    public static int getSingleNumberInput(InputReader inputReader, String comment) {
+        int inputNumber = inputReader.readInt(comment);
+
+        if (inputNumber < 0) {
+            throw new RuntimeException();
+        }
+
+        return inputNumber;
     }
 
     public static int getBonus(InputReader inputReader, LottoNumbers winningNumbers) {
