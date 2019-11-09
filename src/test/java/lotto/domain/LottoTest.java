@@ -46,8 +46,8 @@ public class LottoTest {
     }
 
     @Test
-    void contains_test() {
+    void get_lotto_number() {
         Lotto lotto = Lotto.of("1,2,3,4,5,6");
-        assertThat(lotto.contains(LottoNumber.of(5))).isTrue();
+        assertThat(lotto.getLottoNumber()).isEqualTo(Arrays.asList(1,2,3,4,5,6));
     }
 }
