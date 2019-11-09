@@ -15,7 +15,8 @@ public class ResultView {
         System.out.println(String.format("%s개를 구매했습니다.", number));
     }
 
-    public static void printBuyLottos(List<Lotto> lottos) {
+    public static void printBuyLottos(int manualCount, List<Lotto> lottos) {
+        System.out.println(String.format("수동으로 %s장, 자동으로 %s장을 구매했습니다.", manualCount, lottos.size() - manualCount));
         for (Lotto lotto : lottos) {
             System.out.println(makeLottoNumberFormat(lotto.getNumbers()));
         }

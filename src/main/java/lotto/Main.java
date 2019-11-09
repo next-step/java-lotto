@@ -23,7 +23,7 @@ public class Main {
         List<Lotto> lottos = lottoService.createLottoTickets(count, manualLottos);
 
         ResultView.printBuyTicketNumber(count);
-        ResultView.printBuyLottos(lottos);
+        ResultView.printBuyLottos(manualCount, lottos);
 
         WinnerLotto winnerLotto = InputView.createWinnerLotto();
         Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto);
