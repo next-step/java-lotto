@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +40,6 @@ class WinningLottoTest {
     @Test
     void match() {
         WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6");
-        assertThat(winningLotto.matchLotto(Lotto.of("1,2,3,4,5,6"))).isEqualTo(6);
+        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.of("1,2,3,4,5,6")))).contains(WinningLottoAmount.FIRST);
     }
 }
