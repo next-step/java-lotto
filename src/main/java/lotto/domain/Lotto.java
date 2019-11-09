@@ -40,8 +40,21 @@ public class Lotto {
     }
 
     public static final Lotto of(String lottoNumbers) {
-        String[] lottoNos = lottoNumbers.split(",");
-        return new Lotto(Arrays.stream(lottoNos).map(String::trim).filter(IS_NUMERIC).map(Integer::parseInt).collect(Collectors.toList()));
+        return new Lotto(Arrays.stream(lottoNumbers.split(","))
+                            .map(String::trim)
+                            .filter(IS_NUMERIC)
+                            .map(Integer::parseInt)
+                            .collect(Collectors.toList()));
+    }
+
+    public boolean contains(LottoNumber number) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
+    }
+
+    public Long match(Lotto userLotto) {
+        return this.lottoNumbers.stream()
+                .filter(lottoNumber -> userLotto.contains(lottoNumber)).count();
     }
 
     @Override
