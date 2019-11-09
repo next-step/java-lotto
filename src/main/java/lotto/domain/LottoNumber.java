@@ -38,6 +38,10 @@ public class LottoNumber {
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 번호입니다."));
     }
 
+    int convertIntValue() {
+        return this.lottoNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
