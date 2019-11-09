@@ -11,8 +11,8 @@ public class Lotto {
 
     List<Integer> numbers = new ArrayList<>();
 
-    public Lotto(LottoNumbers lottoNumbers) {
-        List<Integer> shuffleLottoNumbers = lottoNumbers.shuffle();
+    public Lotto() {
+        List<Integer> shuffleLottoNumbers = new LottoNumbers().shuffle();
         for (int i = ZERO_NUMBER; i < LOTTO_WINNING_NUMBER_COUNT; i++) {
             numbers.add(shuffleLottoNumbers.get(i));
         }

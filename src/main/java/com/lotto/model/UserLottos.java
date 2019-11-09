@@ -5,9 +5,14 @@ import java.util.List;
 
 public class UserLottos {
 
+    private final Money money;
+
     private List<Lotto> Lottos;
 
-    public UserLottos(List<Lotto> lottos) {
-        this.Lottos = lottos;
+    public UserLottos(Money money) {
+        this.money = money;
     }
+
+
+
 }

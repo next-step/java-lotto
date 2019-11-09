@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyTest {
@@ -17,5 +18,13 @@ class MoneyTest {
     void numberOfLottoPurchasedTest(int inputMoney, int result) {
         Money money = new Money(inputMoney);
         assertThat(money.numberOfLottoPurchased()).isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {100, 900})
+    @DisplayName("입력한 금액이 부족한 경우 테스트")
+    void outOfMoneyTest(int inputMoney) {
+        Money money = new Money(inputMoney);
+        assertThatIllegalArgumentException().isThrownBy(() -> money.numberOfLottoPurchased());
     }
 }
