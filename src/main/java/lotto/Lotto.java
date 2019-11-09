@@ -9,7 +9,7 @@ public class Lotto {
     private final LottoNumbers numbers;
 
     public Lotto() {
-        this.numbers = new LottoNumbers(LottoNumberGenerator.sixNumberGenerator());
+        this.numbers = LottoNumberGenerator.sixNumberGenerator();
     }
 
     public Lotto(LottoNumbers numbers) {
