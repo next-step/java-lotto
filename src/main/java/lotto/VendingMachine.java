@@ -11,6 +11,8 @@ public class VendingMachine {
     public VendingMachine(Wallet wallet, List<Lotto> manualNumbers) {
         this.wallet = wallet;
         this.manualNumbers = manualNumbers;
+
+        validate();
     }
 
     public Lottos buy() {
@@ -19,5 +21,11 @@ public class VendingMachine {
 
     public int getExpend() {
         return wallet.getExpend();
+    }
+
+    private void validate() {
+        if (wallet.isBuyable(manualNumbers.size()) == false) {
+            throw new RuntimeException();
+        }
     }
 }

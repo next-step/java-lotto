@@ -1,7 +1,7 @@
 package lotto;
 
 public class Wallet {
-    private static final int PRICE = 1000;
+    static final int PRICE = 1000;
 
     private int budget;
     private int change;
@@ -10,6 +10,10 @@ public class Wallet {
         this.budget = budget;
         this.change = budget;
         validate();
+    }
+
+    public boolean isBuyable(int count) {
+        return change > count * PRICE;
     }
 
     public boolean isEnoughBudget() {
@@ -21,12 +25,12 @@ public class Wallet {
         return false;
     }
 
-    public int getExpend() {
-        return budget - change;
+    public void payMoney() {
+        change -= PRICE;
     }
 
-    private void payMoney() {
-        change -= PRICE;
+    public int getExpend() {
+        return budget - change;
     }
 
     private void validate() {

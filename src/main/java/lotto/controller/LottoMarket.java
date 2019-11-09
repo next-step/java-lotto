@@ -47,7 +47,7 @@ public class LottoMarket {
         int budget = LottoInputParser.getSingleNumberInput(inputReader, "지불할 금액 입력: ");
         int manualCount = LottoInputParser.getSingleNumberInput(inputReader, "수동구매 매수: ");
 
-        Wallet wallet = new Wallet(budget, manualCount);
+        Wallet wallet = new Wallet(budget);
         return new VendingMachine(wallet, createManualLotto(manualCount));
     }
 
