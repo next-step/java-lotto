@@ -11,18 +11,13 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public LottoRankGroup compareTo(WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-
-        for (Lotto each : lottos) {
-            lottoRanks.add(each.matchTo(winningLotto));
-        }
-
-        Map<LottoRank, Long> rankGroup = lottoRanks
+        Map<LottoRank, Long> rankGroup = lottos
                 .stream()
+                .map(lotto -> lotto.matchTo(winningLotto))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoRankGroup(rankGroup);
