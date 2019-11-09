@@ -41,11 +41,5 @@ public enum Rank {
               .filter(rank -> rank.isDependsBonus ? rank.matchCount == matchCount && isMatchBonus : rank.matchCount == matchCount)
               .findAny().orElse(Rank.MISS);
     }
-
-    public static Rank valueOf(int matchCount) {
-        return Arrays.stream(Rank.values())
-              .filter(rank -> rank.matchCount == matchCount)
-              .findAny().orElse(Rank.MISS);
-    }
 }
 
