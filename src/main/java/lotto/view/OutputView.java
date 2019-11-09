@@ -9,6 +9,7 @@ import java.util.List;
 public class OutputView {
     private static final String PRINT_GAME_COUNT_MESSAGE = "%d개를 구매했습니다.";
     private static final String PRINT_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static final String PRINT_RESULT_CONSIDER_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String PRINT_RESULT_TITLE = "당첨 통계\n---------";
     private static final String PRINT_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String PRINT_YIELD_UNDER_ZERO_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -27,13 +28,22 @@ public class OutputView {
         printResultTitle();
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            int count = result.rankCount(lottoRank);
-            int rankCount = lottoRank.getCount();
-            int rankMoney = lottoRank.getMoney();
-            System.out.println(String.format(PRINT_RESULT_MESSAGE, rankCount, rankMoney, count));
+            printRank(result, lottoRank);
         }
 
         printYield(result.yield());
+    }
+
+    private static void printRank(LottoResult result, LottoRank lottoRank) {
+        int count = result.rankCount(lottoRank);
+        int rankCount = lottoRank.getCount();
+        int rankMoney = lottoRank.getMoney();
+
+        if (lottoRank.isConsiderBonus()) {
+            System.out.println(String.format(PRINT_RESULT_CONSIDER_BONUS_MESSAGE, rankCount, rankMoney, count));
+            return;
+        }
+        System.out.println(String.format(PRINT_RESULT_MESSAGE, rankCount, rankMoney, count));
     }
 
     private static void printResultTitle() {

@@ -16,12 +16,8 @@ public class LottoResult {
         }
     }
 
-    public void update(int count) {
-        Optional<LottoRank> lottoRankOptional = LottoRank.getRank(count);
-        lottoRankOptional.ifPresent(lottoRank -> {
-            int rankCount = rankCount(lottoRank);
-            result.put(lottoRank, rankCount + 1);
-        });
+    public void update(LottoRank lottoRank) {
+        result.put(lottoRank, rankCount(lottoRank) + 1);
     }
 
     public int rankCount(LottoRank lottoRank) {

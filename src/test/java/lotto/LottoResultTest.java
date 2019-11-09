@@ -14,14 +14,15 @@ public class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        lottoResult = new LottoResult(4000);
+        int money = LottoRank.values().length * LottoGame.GAME_AMOUNT;
+        lottoResult = new LottoResult(money);
     }
 
     @Test
     @DisplayName("lank 카운트를 하나씩 올리고 실제로 올라갔는지 확인한다.")
     void update() {
         for (LottoRank lottoRank : LottoRank.values()) {
-            lottoResult.update(lottoRank.getCount());
+            lottoResult.update(lottoRank);
         }
 
         for (LottoRank lottoRank : LottoRank.values()) {
@@ -34,7 +35,7 @@ public class LottoResultTest {
     void profit() {
         double expectedYield = getExpectedYield();
         for (LottoRank lottoRank : LottoRank.values()) {
-            lottoResult.update(lottoRank.getCount());
+            lottoResult.update(lottoRank);
         }
 
         assertThat(lottoResult.yield()).isEqualTo(expectedYield);
