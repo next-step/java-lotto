@@ -21,7 +21,7 @@ class LottosTest {
     @ParameterizedTest
     @MethodSource("getManualLottos")
     void manual_lotto(List<Lotto> manualLottos) {
-        wallet = new Wallet((manualLottos.size() + 1) * 1000, manualLottos.size());
+        wallet = new Wallet((manualLottos.size() + 1) * 1000);
         assertThat(new Lottos(wallet, manualLottos).getCount()).isEqualTo(1 + manualLottos.size());
     }
 
