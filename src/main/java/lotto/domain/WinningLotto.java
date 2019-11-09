@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,8 +21,12 @@ public class WinningLotto {
         return new WinningLotto(winningNumbers);
     }
 
-    public Long matchLotto(Lotto userLotto) {
-        return winningLotto.match(userLotto);
+    public List<WinningLottoAmount> matchLottos(List<Lotto> userLotto) {
+        List<WinningLottoAmount> winningLottoAmounts = new ArrayList<>();
+        userLotto.forEach(lotto -> {
+            winningLottoAmounts.add(WinningLottoAmount.findWinningAmount(winningLotto.match(lotto)));
+        });
+        return winningLottoAmounts;
     }
 
     @Override
