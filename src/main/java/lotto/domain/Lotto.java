@@ -15,9 +15,11 @@ public class Lotto {
     }
 
     public LottoRank matchTo(WinningLotto winningLotto) {
+        boolean matchBonusNumber = winningLotto.matchBonusNumber(getLottoNumbers());
+
         return LottoRank.find(
                 getMatchNumberCount(winningLotto.getNumbers()),
-                winningLotto.matchBonusNumber(getLottoNumbers()));
+                rank -> matchBonusNumber ? LottoRank.SECOND : LottoRank.THIRD);
     }
 
     private long getMatchNumberCount(List<Integer> numbers) {
