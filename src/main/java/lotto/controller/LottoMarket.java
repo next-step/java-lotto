@@ -1,6 +1,11 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import lotto.Lotto;
 import lotto.VendingMachine;
+import lotto.Wallet;
 import lotto.Winners;
 import lotto.data.LottoNumbers;
 import lotto.data.Lottos;
@@ -33,12 +38,26 @@ public class LottoMarket {
     }
 
     private Winners getWinner(Lottos lottos) {
-        LottoNumbers winningNumbers = new LottoNumbers(LottoInputParser.getWinningInput(inputReader));
+        LottoNumbers winningNumbers = new LottoNumbers(LottoInputParser.getMultipleNumberInput(inputReader, "당첨번호 입력: "));
 
         return new Winners(lottos, winningNumbers, LottoInputParser.getBonus(inputReader, winningNumbers));
     }
 
     private VendingMachine initVendingMachine() {
-        return new VendingMachine(inputReader.readInt("지불할 금액 입력: "));
+        int budget = LottoInputParser.getSingleNumberInput(inputReader, "지불할 금액 입력: ");
+        int manualCount = LottoInputParser.getSingleNumberInput(inputReader, "수동구매 매수: ");
+
+        Wallet wallet = new Wallet(budget, manualCount);
+        return new VendingMachine(wallet, createManualLotto(manualCount));
+    }
+
+    private List<Lotto> createManualLotto(int count) {
+        List<Lotto> manualLottos = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            manualLottos.add(new Lotto(new LottoNumbers(LottoInputParser.getMultipleNumberInput(inputReader, "수동구매 번호 입력: "))));
+        }
+
+        return manualLottos;
     }
 }
