@@ -5,48 +5,39 @@ import java.util.List;
 import java.util.Objects;
 
 public class User {
+    private static final String WINNING_NUMBERS_DELIMITER = ", ";
+    private final int money;
+    private Lottos lottos;
 
-    private static String DELIMITER = ", ";
-    private final int amount;
-    private IssuedLottos issuedLottos;
-    private WinningStatus winningStatus;
-
-    public User(final int amount) {
-        this.amount = amount;
+    public User(final int money) {
+        this.money = money;
     }
 
-    public void buyLottoIn(final Store store) {
-        this.issuedLottos = store.issueLottos(amount);
+    public void buyLottosIn(final Store store, final List<String> directLottos) {
+        this.lottos = store.issueLotto(money, directLottos);
     }
 
-    public int getCountOfLottos() {
-        return this.issuedLottos.count();
-    }
+    public WinningLottos checkLottos(final String winningNumbersInput, final int bonusNumber) {
+        final String[] splitWinningNumber = winningNumbersInput.split(WINNING_NUMBERS_DELIMITER);
+        final List<LottoNumber> winningLottoNumbers = new ArrayList<>();
 
-    public IssuedLottos findIssuedLottos() {
-        return this.issuedLottos;
-    }
-
-    public void checkLottoRank(final String winNumbers, final String bonusNumber) {
-        final String[] winNumberUnits = winNumbers.split(DELIMITER);
-        final List<Integer> numbers = new ArrayList<>();
-        for (String winNumberUnit : winNumberUnits) {
-            numbers.add(Integer.parseInt(winNumberUnit));
+        for (String winningNumber : splitWinningNumber) {
+            winningLottoNumbers.add(LottoNumber.of(Integer.parseInt(winningNumber)));
         }
-        this.winningStatus = issuedLottos.checkRank(numbers, Integer.parseInt(bonusNumber));
+
+        return lottos.checkWinning(winningLottoNumbers, bonusNumber);
     }
 
-    public int getCountByRank(final Rank rank) {
-        return this.winningStatus.getCountOfRankFor(rank);
+    public Lottos findLottos() {
+        return lottos;
     }
 
-    public double calculateRate() {
-        final double totalWinningAmount = winningStatus.getTotalWinningAmount();
-        return Math.floor(totalWinningAmount / amount * 100) / 100.0;
+    public int findCountOfDirectLottos() {
+        return lottos.findCountOfDirectLottos();
     }
 
-    public WinningStatus getWinningStatus() {
-        return this.winningStatus;
+    public int findCountOfAutoLottos() {
+        return lottos.findCountOfAutoLottos();
     }
 
     @Override
@@ -54,13 +45,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return amount == user.amount &&
-                Objects.equals(issuedLottos, user.issuedLottos) &&
-                Objects.equals(winningStatus, user.winningStatus);
+        return money == user.money &&
+                Objects.equals(lottos, user.lottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount, issuedLottos, winningStatus);
+        return Objects.hash(money, lottos);
     }
 }

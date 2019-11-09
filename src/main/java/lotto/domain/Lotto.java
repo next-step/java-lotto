@@ -1,34 +1,39 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
+    static final int NUMBER_COUNT = 6;
+    private final List<LottoNumber> lottoNumbers;
+    private final boolean isDirect;
 
-    private final List<Integer> numbers;
-
-    public Lotto(final List<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        this(lottoNumbers, false);
     }
 
-    public int checkCountOfMatch(final List<Integer> winNumbers) {
-        return (int) winNumbers.stream().filter(numbers::contains).count();
-    }
-
-    Rank checkRank(final List<Integer> winNumbers, final int bonusNumber) {
-        int countOfMatch = (int) winNumbers.stream().filter(numbers::contains).count();
-        final boolean isMatchBonus = numbers.contains(bonusNumber);
-
-        if (countOfMatch == Rank.FOURTH.getCountOfMatch() && isMatchBonus) {
-            countOfMatch = countOfMatch + 1;
+    public Lotto(final List<LottoNumber> numbers, final boolean isDirect) {
+        if (NUMBER_COUNT != numbers.size()) {
+            throw new IllegalArgumentException(String.format("로또번호의 개수는 %s개만 가능합니다. 입력받은 로또번호 개수 = %s", NUMBER_COUNT, numbers.size()));
         }
 
-        return Rank.findByCountOfMatch(countOfMatch, isMatchBonus);
+        this.lottoNumbers = numbers;
+        this.isDirect = isDirect;
     }
 
-    public List<Integer> findNumbers() {
-        return Collections.unmodifiableList(this.numbers);
+    int getCountOfMatchWith(final List<LottoNumber> winningLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(winningLotto::contains)
+                .count();
+    }
+
+    boolean isMatchBonus(final int bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(LottoNumber.of(bonusNumber)));
+    }
+
+    boolean isDirect() {
+        return this.isDirect;
     }
 
     @Override
@@ -36,11 +41,16 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return String.join(", ", lottoNumbers.toString());
     }
 }
