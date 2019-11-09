@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain2.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -9,29 +9,24 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        final int amount = InputView.inputAmount();
-
-        NumberGenerator numberGenerator = new BasicNumberGenerator();
-        LottoMachine lottoMachine = new BasicLottoMachine(numberGenerator);
-        Store store = new Store(lottoMachine);
-        User user = new User(amount);
+        final int money = InputView.inputMoney();
+        final User user = new User(money);
 
         final int directCount = InputView.inputDirectCount();
-        final List<String> directLottoNumbers = InputView.inputDirectLottoNumbers(directCount);
+        final List<String> directLottos = InputView.inputDirectLottoNumbers(directCount);
 
-        user.buyLotto(store, directLottoNumbers);
+        final LottoMachine lottoMachine = new BasicLottoMachine();
+        final Store store = new Store(lottoMachine);
+        user.buyLottosIn(store, directLottos);
 
-        ResultView.printTotalLottoCount(user.getCountOfDirectLottos(), user.getCountOfAutoLottos());
+        ResultView.printLottoCount(user.findCountOfDirectLottos(), user.findCountOfAutoLottos());
+        ResultView.printLottos(user.findLottos());
 
-        ResultView.printIssuedLottos(user.findIssuedLottos());
+        final String winNumbers = InputView.inputWinNumbers();
+        final int bonusNumber = InputView.inputBonusNumber();
+        final WinningLottos winningLottos = user.checkLottos(winNumbers, bonusNumber);
 
-        String winNumbers = InputView.inputWinNumbers();
-        String bonusNumber = InputView.inputBonusNumber();
-
-        WinningStatus winningStatus = user.checkLottoRank(winNumbers, bonusNumber);
-
-        ResultView.printWinningStatus(winningStatus);
-
-        ResultView.printResult(user.calculateRate(winningStatus.getTotalWinningAmount()));
+        ResultView.printWinningStatus(winningLottos);
+        ResultView.printResult(winningLottos.getRate(money));
     }
 }

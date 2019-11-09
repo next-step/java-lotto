@@ -51,6 +51,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return String.join(", ", (CharSequence) lottoNumbers);
+        return String.join(", ", lottoNumbers.toString());
     }
 }

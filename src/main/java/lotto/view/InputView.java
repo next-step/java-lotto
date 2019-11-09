@@ -9,7 +9,7 @@ public class InputView {
 
     private static final int NOT_NUMBER = -1;
 
-    public static int inputAmount() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         int amount;
         do {
@@ -55,8 +55,8 @@ public class InputView {
         return new Scanner(System.in).nextLine();
     }
 
-    public static String inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new Scanner(System.in).nextLine();
+        return new Scanner(System.in).nextInt();
     }
 }

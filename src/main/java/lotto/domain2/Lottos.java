@@ -28,7 +28,7 @@ public class Lottos {
         return winningLottos;
     }
 
-    List<Lotto> findAllLottos() {
+    public List<Lotto> findAllLottos() {
         return Collections.unmodifiableList(lottos);
     }
 

@@ -28,8 +28,16 @@ public class User {
         return lottos.checkWinning(winningLottoNumbers, bonusNumber);
     }
 
-    Lottos findLottos() {
-        return this.lottos;
+    public Lottos findLottos() {
+        return lottos;
+    }
+
+    public int findCountOfDirectLottos() {
+        return lottos.findCountOfDirectLottos();
+    }
+
+    public int findCountOfAutoLottos() {
+        return lottos.findCountOfAutoLottos();
     }
 
     @Override

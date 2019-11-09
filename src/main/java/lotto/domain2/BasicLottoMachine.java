@@ -55,7 +55,9 @@ public class BasicLottoMachine implements LottoMachine {
 
         for (int i = 0; i < countOfLotto; i++) {
             Collections.shuffle(baseLottoNumbers);
-            Lotto lotto = new Lotto(Collections.unmodifiableList(baseLottoNumbers.subList(0, Lotto.NUMBER_COUNT)));
+            List<LottoNumber> lottoNumbers = new ArrayList<>(baseLottoNumbers.subList(0, Lotto.NUMBER_COUNT));
+            Collections.sort(lottoNumbers);
+            Lotto lotto = new Lotto(lottoNumbers);
             lottos.add(lotto);
         }
 
