@@ -3,7 +3,6 @@ package lotto.controller;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,12 +51,8 @@ class LottoInputParserTest {
         }
 
         @Override
-        public Optional<Integer> readInt(String comment) {
-            try {
-                return Optional.of(Integer.valueOf(readIntValue));
-            } catch (NumberFormatException e) {
-                return Optional.empty();
-            }
+        public int readInt(String comment) {
+            return Integer.parseInt(readIntValue);
         }
 
         @Override
