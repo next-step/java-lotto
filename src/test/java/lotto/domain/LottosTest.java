@@ -1,4 +1,4 @@
-package lotto.domain2;
+package lotto.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.domain2.Lotto;
-import lotto.domain2.Lottos;
-import lotto.domain2.Rank;
-import lotto.domain2.WinningLottos;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.WinningLottos;
 
 public class ResultView {
 

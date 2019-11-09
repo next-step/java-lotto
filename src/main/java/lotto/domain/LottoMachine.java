@@ -1,8 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public interface LottoMachine {
-
-    Lotto issue();
-
-    Lotto issue(final String directLottoNumber);
+    Lottos issue(final int countOfTotalLotto, final List<String> directLottos);
 }

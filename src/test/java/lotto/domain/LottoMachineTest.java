@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,16 +12,15 @@ public class LottoMachineTest {
 
     @Test
     void 생성() {
-        NumberGenerator numberGenerator = new BasicNumberGenerator();
-        LottoMachine lottoMachine = new BasicLottoMachine(numberGenerator);
-        assertThat(lottoMachine).isEqualTo(new BasicLottoMachine(numberGenerator));
+        final LottoMachine lottoMachine = new BasicLottoMachine();
+        assertThat(lottoMachine).isEqualTo(new BasicLottoMachine());
     }
 
-    @Test
-    void 로또_수동_발급() {
-        NumberGenerator numberGenerator = new BasicNumberGenerator();
-        LottoMachine lottoMachine = new BasicLottoMachine(numberGenerator);
-        Lotto directLotto = lottoMachine.issue("1, 2, 3, 4, 5, 6");
-        assertThat(directLotto).isEqualTo(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    @ParameterizedTest
+    @ValueSource(ints = 10)
+    void 로또발급(final int countOfLotto) {
+        final LottoMachine lottoMachine = new BasicLottoMachine();
+        final Lottos lottos = lottoMachine.issue(countOfLotto, Collections.emptyList());
+        assertThat(lottos.count()).isEqualTo(countOfLotto);
     }
 }

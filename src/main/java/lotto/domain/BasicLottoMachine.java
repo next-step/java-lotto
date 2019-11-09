@@ -1,34 +1,67 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class BasicLottoMachine implements LottoMachine {
+    private static final String DIRECT_NUMBERS_DELIMITER = ", ";
+    private final List<LottoNumber> baseLottoNumbers;
 
-    private static String DELIMITER = ", ";
-    private NumberGenerator numberGenerator;
+    public BasicLottoMachine() {
+        this.baseLottoNumbers = new ArrayList<>();
 
-    public BasicLottoMachine(final NumberGenerator numberGenerator) {
-        this.numberGenerator = numberGenerator;
+        for (int no = LottoNumber.MIN; no <= LottoNumber.MAX; no++) {
+            baseLottoNumbers.add(LottoNumber.of(no));
+        }
     }
 
     @Override
-    public Lotto issue() {
-        final List<Integer> numbers = numberGenerator.generate();
-        return new Lotto(numbers);
+    public Lottos issue(final int countOfTotalLotto, final List<String> directLottos) {
+        final List<Lotto> lottos = new ArrayList<>();
+        final int countOfAutoLotto = countOfTotalLotto - directLottos.size();
+
+        lottos.addAll(issueDirectLotto(directLottos));
+        lottos.addAll(issueAutoLotto(countOfAutoLotto));
+
+        return new Lottos(lottos);
     }
 
-    @Override
-    public Lotto issue(String directLottoNumber) {
-        final String[] directLottoNumberUnits = directLottoNumber.split(DELIMITER);
-        final List<Integer> directLottoNumbers = new ArrayList<>();
+    private List<Lotto> issueDirectLotto(final List<String> directLottos) {
+        final List<Lotto> lottos = new ArrayList<>();
 
-        for (String directLottoNumberUnit : directLottoNumberUnits) {
-            directLottoNumbers.add(Integer.parseInt(directLottoNumberUnit));
+        for (String directLotto : directLottos) {
+            String[] directLottoNumbers = directLotto.split(DIRECT_NUMBERS_DELIMITER);
+            lottos.add(issueDirectLotto(directLottoNumbers));
         }
 
-        return new Lotto(directLottoNumbers);
+        return lottos;
+    }
+
+    private Lotto issueDirectLotto(final String[] directLottoNumbers) {
+        final List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (String directLottoNumber : directLottoNumbers) {
+            LottoNumber lottoNumber = LottoNumber.of(Integer.parseInt(directLottoNumber));
+            lottoNumbers.add(lottoNumber);
+        }
+
+        return new Lotto(lottoNumbers, true);
+    }
+
+    private List<Lotto> issueAutoLotto(final int countOfLotto) {
+        final List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < countOfLotto; i++) {
+            Collections.shuffle(baseLottoNumbers);
+            List<LottoNumber> lottoNumbers = new ArrayList<>(baseLottoNumbers.subList(0, Lotto.NUMBER_COUNT));
+            Collections.sort(lottoNumbers);
+            Lotto lotto = new Lotto(lottoNumbers);
+            lottos.add(lotto);
+        }
+
+        return lottos;
     }
 
     @Override
@@ -36,11 +69,11 @@ public class BasicLottoMachine implements LottoMachine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BasicLottoMachine that = (BasicLottoMachine) o;
-        return Objects.equals(numberGenerator, that.numberGenerator);
+        return Objects.equals(baseLottoNumbers, that.baseLottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numberGenerator);
+        return Objects.hash(baseLottoNumbers);
     }
 }
