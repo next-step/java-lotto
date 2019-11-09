@@ -47,7 +47,7 @@ public class Lotto {
                             .collect(Collectors.toList()));
     }
 
-    public boolean contains(LottoNumber number) {
+    private boolean contains(LottoNumber number) {
         return this.lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
@@ -55,6 +55,12 @@ public class Lotto {
     public Long match(Lotto userLotto) {
         return this.lottoNumbers.stream()
                 .filter(lottoNumber -> userLotto.contains(lottoNumber)).count();
+    }
+
+    public List<Integer> getLottoNumber() {
+        return this.lottoNumbers.stream()
+                .map(LottoNumber::convertIntValue)
+                .collect(Collectors.toList());
     }
 
     @Override
