@@ -26,8 +26,4 @@ public class Lottos {
     public List<Lotto> getValue() {
         return new ArrayList<>(lottos);
     }
-
-    public int size() {
-        return lottos.size();
-    }
 }
