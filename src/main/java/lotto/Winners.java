@@ -1,7 +1,6 @@
 package lotto;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Map;
@@ -15,12 +14,18 @@ import lotto.data.Rank;
 public class Winners {
     private final Map<Rank, Long> result;
 
-    public Winners(Lottos lottos, LottoNumbers winningNumbers) {
-        this.result = initResult(lottos, winningNumbers);
+    public Winners(Lottos lottos, LottoNumbers winningNumbers, int bonus) {
+        this.result = initResult(lottos, winningNumbers, bonus);
     }
 
-    public Map<Rank, Long> getResult() {
-        return result;
+    public long getTotalEarning() {
+        int total = 0;
+
+        for (Rank rank : result.keySet()) {
+            total += rank.getTotalPrize(result.get(rank));
+        }
+
+        return total;
     }
 
     @Override
@@ -28,34 +33,30 @@ public class Winners {
         StringBuilder sb = new StringBuilder();
 
         for (Rank rank : Rank.values()) {
-            sb.append(rank.getMatchCount()).append("개 일치 : ")
-              .append(rank.getPrize()).append("원 - ")
-              .append(result.getOrDefault(rank, 0L)).append("개 당첨\n");
+            getResultMessages(sb, rank);
         }
 
         return sb.toString();
     }
 
-    public long totalEarning() {
-        int total = 0;
-
-        for (Rank rank : result.keySet()) {
-            total += result.get(rank) * rank.getPrize();
-        }
-
-        return total;
-    }
-
-    private Map<Rank, Long> initResult(Lottos lottos, LottoNumbers winningNumbers) {
-        return getRankList(lottos, winningNumbers)
+    private Map<Rank, Long> initResult(Lottos lottos, LottoNumbers winningNumbers, int bonus) {
+        return getRankList(lottos, winningNumbers, bonus)
                 .stream()
                 .collect(groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    private List<Rank> getRankList(Lottos lottos, LottoNumbers winningNumbers) {
-        return lottos.getLottos().stream()
-              .map(lotto -> lotto.matchCount(winningNumbers))
-              .map(Rank::valueOf)
-              .collect(toList());
+    private List<Rank> getRankList(Lottos lottos, LottoNumbers winningNumbers, int bonus) {
+        return lottos.rankLottos(winningNumbers, bonus);
+    }
+
+    private void getResultMessages(StringBuilder sb, Rank rank) {
+        sb.append(rank.getMatchCount()).append("개 일치, ");
+
+        if (rank.isDependsBonus()) {
+            sb.append("보너스볼 일치, ");
+        }
+
+        sb.append(rank.getPrize()).append("원 - ")
+          .append(result.getOrDefault(rank, 0L)).append("개 당첨\n");
     }
 }
