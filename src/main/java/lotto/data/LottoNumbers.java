@@ -1,5 +1,6 @@
 package lotto.data;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -16,6 +17,6 @@ public class LottoNumbers {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 }
