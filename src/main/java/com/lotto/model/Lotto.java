@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int ZERO_NUMBER = 0;
     private static final int LOTTO_WINNING_NUMBER_COUNT = 6;
+    private static final String START_CHARACTER = "[";
+    private static final String END_CHARACTER = "]";
+    private static final String COMMA_SPACE_CHARACTER = ", ";
 
-    List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
+
+    private int matchCount = 0;
 
     public Lotto() {
         List<Integer> shuffleLottoNumbers = new LottoNumbers().shuffle();
@@ -18,6 +24,31 @@ public class Lotto {
             numbers.add(shuffleLottoNumbers.get(i));
         }
         Collections.sort(numbers);
+    }
+
+    public String printNumbers() {
+        StringBuilder stringBuilder = new StringBuilder(START_CHARACTER);
+        stringBuilder.append(
+                numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(COMMA_SPACE_CHARACTER)));
+        stringBuilder.append(END_CHARACTER);
+        return stringBuilder.toString();
+    }
+
+    public int match(WinningLotto winningLotto) {
+        for (int number : numbers) {
+            matchCount += winningLotto.match(number);
+        }
+        return matchCount;
+    }
+
+    public boolean isMatchCount(int matchCount) {
+        return this.matchCount == matchCount;
+    }
+
+    public int isWinningMoney() {
+        return Rank.valueOf(matchCount).getWinningMoney();
     }
 
     @Override

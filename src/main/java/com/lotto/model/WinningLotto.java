@@ -15,4 +15,8 @@ public class WinningLotto {
         }
         winningNumbers.add(winningNumber);
     }
+
+    public int match(int userNumber) {
+        return (winningNumbers.contains(userNumber)) ? 1 : 0;
+    }
 }

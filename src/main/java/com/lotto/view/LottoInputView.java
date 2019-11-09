@@ -10,12 +10,13 @@ public class LottoInputView {
     private static final String INPUT_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String INPUT_MISMATCH_PURCHASE_AMOUNT = "구입금액을 잘못 입력하였습니다.";
     private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String COMMA_STRING = ",";
-    private static final String EMPTY_STRING = "";
+    private static final String DELIMITER_CHARACTER = ", ";
+//    private static final String EMPTY_STRING = "";
 
-    private Scanner scanner = new Scanner(System.in);
+//    private Scanner scanner = new Scanner(System.in);
 
     public int inputPurhaseAmount() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println(INPUT_PURCHASE_AMOUNT);
         try {
             return scanner.nextInt();
@@ -25,12 +26,14 @@ public class LottoInputView {
     }
 
     public WinningLotto inputWinningNumbers() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println(INPUT_WINNING_NUMBERS);
         WinningLotto winningLotto = new WinningLotto();
-        while (scanner.hasNext()) {
-            String inputStringNumber = scanner.next();
-            inputStringNumber = inputStringNumber.replaceAll(COMMA_STRING, EMPTY_STRING);
-            winningLotto.inputWinningNumber(checkWinningNumber(inputStringNumber));
+        String inputStringNumber = scanner.nextLine();
+        String[] inputNumbers = inputStringNumber.split(DELIMITER_CHARACTER);
+
+        for (String inputNumber : inputNumbers) {
+            winningLotto.inputWinningNumber(checkWinningNumber(inputNumber));
         }
         return winningLotto;
     }
