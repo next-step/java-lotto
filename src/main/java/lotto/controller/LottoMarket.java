@@ -1,12 +1,9 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
-import lotto.data.LottoNumbers;
-import lotto.data.Lottos;
 import lotto.VendingMachine;
 import lotto.Winners;
+import lotto.data.LottoNumbers;
+import lotto.data.Lottos;
 import lotto.input.InputReader;
 import lotto.view.Viewer;
 
@@ -32,17 +29,19 @@ public class LottoMarket {
 
     private void printResult(Winners winners) {
         viewer.print(winners.toString(), "결과 확인");
-        viewer.print(String.valueOf(winners.totalEarning() / (double) vendingMachine.getExpend()), "총 수익률");
+        viewer.print(String.valueOf(winners.getTotalEarning() / (double) vendingMachine.getExpend()), "총 수익률");
     }
 
     private Winners getWinner(Lottos lottos) {
-        LottoNumbers winningNumbers = new LottoNumbers(Arrays.stream(inputReader.readLine("당첨번호 입력: ").split(" "))
-                                                             .map(Integer::valueOf)
-                                                             .collect(Collectors.toList()));
-        return new Winners(lottos, winningNumbers);
+        LottoNumbers winningNumbers = new LottoNumbers(LottoInputParser.getWinningInput(inputReader));
+
+        return LottoInputParser.getBonus(inputReader, winningNumbers).map(num -> new Winners(lottos, winningNumbers, num))
+                               .orElseGet(() -> new Winners(lottos, winningNumbers));
     }
 
     private VendingMachine initVendingMachine() {
-        return new VendingMachine(inputReader.readInt("지불할 금액 입력: "));
+        return inputReader.readInt("지불할 금액 입력: ")
+                          .map(VendingMachine::new)
+                          .orElseThrow(IllegalArgumentException::new);
     }
 }
