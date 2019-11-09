@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Collections;
 import java.util.StringJoiner;
 
 import lotto.data.LottoNumbers;
@@ -20,10 +19,13 @@ public class Lotto {
         return numbers.matchCount(winningNumbers);
     }
 
+    public boolean isMatchBonus(int bonus) {
+        return numbers.isMatchBonus(bonus);
+    }
+
     @Override
     public String toString() {
         StringJoiner sj = new StringJoiner(",");
-        Collections.sort(numbers.getNumbers());
 
         for (int num : numbers.getNumbers()) {
             sj.add(String.valueOf(num));
