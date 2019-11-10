@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ public class LottoGameTest {
         int money = 5000;
         int expectedSize = money / 1000;
 
-        LottoGame lottoGame = new LottoGame(money, lottoStrings);
+        LottoGame lottoGame = new LottoGame(money, Arrays.asList(lottoStrings));
 
         assertThat(lottoGame.lottoSize()).isEqualTo(expectedSize);
     }
