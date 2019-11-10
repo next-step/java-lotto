@@ -5,16 +5,29 @@ import java.util.Objects;
 
 class LottoNumbers {
     private static final int COUNT = 6;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
 
     LottoNumbers(final List<Integer> numbers) {
-        check(numbers);
+        checkNumberCount(numbers);
+        checkNumberRange(numbers);
         this.numbers = numbers;
     }
 
-    private void check(final List<Integer> numbers) {
+    private void checkNumberCount(final List<Integer> numbers) {
         if (numbers.size() != COUNT) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void checkNumberRange(final List<Integer> numbers) {
+        numbers.forEach(this::checkNumberRange);
+    }
+
+    private void checkNumberRange(final Integer number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException();
         }
     }

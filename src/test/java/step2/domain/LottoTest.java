@@ -13,7 +13,19 @@ class LottoTest {
     }
 
     @Test
-    void createOver6() {
+    void createSizeOver6() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 6, 7));
+    }
+
+    @Test
+    void createWithNumberExceed45() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 46));
+    }
+
+
+    @Test
+    void createWithNumberUnder1() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 0));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, -1));
     }
 }
