@@ -39,12 +39,12 @@ public class WinningCount {
     private float calculateTotalEarningMoney() {
         return winningCount.keySet().stream()
                 .map(prize -> prize.calculateEarningMoney(winningCount.get(prize)))
-                .reduce((o1, o2) -> o1 + o2)
+                .reduce(Integer::sum)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
     private int calculateTicketPrice() {
         return winningCount.values().stream()
-                .reduce((o1, o2) -> o1 + o2).orElse(0) * Ticket.LOTTO_PRICE;
+                .reduce(Integer::sum).orElse(0) * Ticket.LOTTO_PRICE;
     }
 }

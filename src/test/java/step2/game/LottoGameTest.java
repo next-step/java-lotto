@@ -29,5 +29,4 @@ class LottoGameTest {
     void createNumberTest() {
         assertThat(numbers.size()).isEqualTo(6);
     }
-
 }

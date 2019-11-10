@@ -17,7 +17,7 @@ class WinningLottoGameTest {
             "1, 2, 3, 4, 5, 6:6",
     }, delimiter = ':')
     @DisplayName("에러 발생 테스트")
-    void InvalidNumbersTest(String inputWinningNumbers, int bonusNumber) {
+    void invalidNumbersTest(String inputWinningNumbers, int bonusNumber) {
         assertThrows(IllegalArgumentException.class, () -> new WinningLotto(inputWinningNumbers, bonusNumber));
     }
 

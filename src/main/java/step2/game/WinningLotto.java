@@ -17,7 +17,7 @@ public class WinningLotto {
     public WinningLotto(String inputNumbers, int bonusNumber) {
         List<Number> inputWinningNumbers = Arrays.stream(inputNumbers.split(DELIMITER))
                 .map(num -> Integer.parseInt(num.trim()))
-                .map(num -> Number.valueOf(num))
+                .map(Number::valueOf)
                 .collect(toList());
         verifyWinningNumberCount(inputWinningNumbers);
         verifyWinningNumberOrBonusNumber(inputWinningNumbers, bonusNumber);
@@ -47,6 +47,4 @@ public class WinningLotto {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION);
         }
     }
-
-
 }

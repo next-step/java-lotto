@@ -12,7 +12,7 @@ import static step2.game.LottoGame.MIN_NUMBER;
 public class Number {
     private static final Map<Integer, Number> verifiedNumbers
             = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER).boxed()
-            .collect(toMap(number -> number, number -> new Number(number)));
+            .collect(toMap(number -> number, Number::new));
     private static final String NUMBER_RANGE_EXCEPTION = "로또번호는 1 ~ 45 사이의 숫자입니다.";
     private Integer num;
 

@@ -48,5 +48,4 @@ public class Ticket {
     public String toStringLottoNumbers(int index) {
         return lottoGames.get(index).toString();
     }
-
 }
