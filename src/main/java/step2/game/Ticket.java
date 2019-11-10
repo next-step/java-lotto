@@ -25,10 +25,14 @@ public class Ticket {
     }
 
     private int buyLottoGames(int amount) {
+        verifyAmount(amount);
+        return amount / LOTTO_PRICE;
+    }
+
+    private void verifyAmount(int amount) {
         if (amount % LOTTO_PRICE != 0 || amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(AMOUNT_EXCEPTION);
         }
-        return amount / LOTTO_PRICE;
     }
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
@@ -41,7 +45,7 @@ public class Ticket {
         return winningCount;
     }
 
-    public String getLottoGames(int index) {
+    public String toStringLottoNumbers(int index) {
         return lottoGames.get(index).toString();
     }
 

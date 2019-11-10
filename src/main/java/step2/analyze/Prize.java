@@ -31,16 +31,16 @@ public enum Prize {
                 .orElse(Optional.of(KRW_0_000).get());
     }
 
+    public int calculateEarningMoney(int lottoGameCount) {
+        return this.money * lottoGameCount;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }
 
     public boolean isBonus() {
         return bonus;
-    }
-
-    public int calculateEarningMoney(int lottoGameCount) {
-        return this.money * lottoGameCount;
     }
 
     public int getMoney() {

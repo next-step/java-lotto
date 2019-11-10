@@ -17,8 +17,10 @@ public class WinningCount {
         }
     }
 
-    public Map<Prize, Integer> getWinningCount() {
-        return winningCount;
+    public Map<Prize, Integer> getWinningCountWithoutZero() {
+        Map<Prize, Integer> winningCountWithoutZero = new LinkedHashMap<>(winningCount);
+        winningCountWithoutZero.remove(Prize.KRW_0_000);
+        return winningCountWithoutZero;
     }
 
     public void addCount(Prize prize) {
