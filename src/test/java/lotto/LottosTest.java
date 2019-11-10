@@ -1,9 +1,7 @@
 package lotto;
 
-import lotto.domain.AutoLottosGenerator;
-import lotto.domain.CreatableLotto;
 import lotto.domain.Lotto;
-import lotto.domain.LottoPaper;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +10,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoPaperTest {
-    private LottoPaper lottoPaper;
+public class LottosTest {
+    private Lottos lottos;
     private Lotto lotto;
 
     @BeforeEach
@@ -29,8 +27,8 @@ public class LottoPaperTest {
         lotto = new Lotto(numbers);
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto);
-        lottoPaper = new LottoPaper(3, x -> lottos);
-        lottoPaper.getWinningLottoRanks(new int[] {1,2,3,4,5,6}, 7);
+        this.lottos = new Lottos(3, x -> lottos);
+        this.lottos.getWinningLottoRanks(new int[] {1,2,3,4,5,6}, 7);
     }
 
     @Test
@@ -41,7 +39,7 @@ public class LottoPaperTest {
     @Test
     void checkLottoRankTest() {
         int[] winNumber = new int[] {1,2,3,4,5,6};
-        assertThat(lottoPaper.getWinningLottoRanks(winNumber, 10)).contains(Rank.FIRST);
+        assertThat(lottos.getWinningLottoRanks(winNumber, 10)).contains(Rank.FIRST);
     }
 
 }

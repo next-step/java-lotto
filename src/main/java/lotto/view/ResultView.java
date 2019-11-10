@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.Rank;
 import lotto.domain.Lotto;
-import lotto.domain.LottoPaper;
+import lotto.domain.Lottos;
 
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,8 @@ public class ResultView {
     private static final int LOTTO_VALUE = 1000;
     private static final double YIELD_PIVOT_NUMBER = 1.0;
 
-    public static void printLottoNumber(LottoPaper lottoPaper) {
-        List<Lotto> lottos = lottoPaper.getLottoPapers();
+    public static void printLottoNumber(Lottos purchasedLotto) {
+        List<Lotto> lottos = purchasedLotto.getLottos();
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getLottoNumber());
         }

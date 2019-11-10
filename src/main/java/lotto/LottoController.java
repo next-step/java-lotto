@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.AutoLottosGenerator;
-import lotto.domain.LottoPaper;
+import lotto.domain.Lottos;
 import lotto.domain.Ranks;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -13,20 +13,16 @@ public class LottoController {
 
     public void execute() {
         int count = InputView.purchaseCount();
-        LottoPaper lottoPaper = new LottoPaper(count, new AutoLottosGenerator());
-        ResultView.printLottoNumber(lottoPaper);
-        List<Rank> ranks = getWinLotto(lottoPaper);
+        Lottos lottos = new Lottos(count, new AutoLottosGenerator());
+        ResultView.printLottoNumber(lottos);
 
-        Ranks lottoRanks = new Ranks(ranks);
+        int[] winLotto = InputView.getWinLotto();
+        int bonusNumber = InputView.getBonusNumber();
+        Ranks lottoRanks = new Ranks(winLotto, bonusNumber);
+        List<Rank> winningRanks = lottoRanks.getWinningLottoRanks(lottos);
         Map<Rank, Integer> lottoInsights = lottoRanks.updateLottoRank();
 
         ResultView.printLottoResult(lottoInsights);
-        ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(), count);
-    }
-
-    private List<Rank> getWinLotto(LottoPaper lottoPaper) {
-        int[] winLotto = InputView.getWinLotto();
-        int bonusNumber = InputView.getBonusNumber();
-        return lottoPaper.getWinningLottoRanks(winLotto, bonusNumber);
+        ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(winningRanks), count);
     }
 }

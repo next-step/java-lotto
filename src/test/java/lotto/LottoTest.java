@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoPaper;
-import lotto.domain.CreatableLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.*;

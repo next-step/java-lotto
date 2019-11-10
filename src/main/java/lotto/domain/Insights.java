@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.Rank;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Insights {
@@ -41,7 +42,11 @@ public class Insights {
         return new LinkedHashMap<>(insights);
     }
 
-    public int getWinningMoney(Rank rank) {
-        return insights.get(rank) * rank.getWinningMoney();
+    public int getWinningMoney(List<Rank> ranks) {
+        int sum = 0;
+        for (Rank rank : ranks) {
+            sum += insights.get(rank) * rank.getWinningMoney();
+        }
+        return sum;
     }
 }
