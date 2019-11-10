@@ -13,7 +13,7 @@ public class Wallet {
     }
 
     public boolean isBuyable(int count) {
-        return change > count * PRICE;
+        return change >= count * PRICE;
     }
 
     public boolean isEnoughBudget() {
@@ -29,7 +29,7 @@ public class Wallet {
         change -= PRICE;
     }
 
-    public int getExpend() {
+    public int calculateSpent() {
         return budget - change;
     }
 

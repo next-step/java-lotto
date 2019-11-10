@@ -9,7 +9,9 @@ import lotto.data.LottoNumbers;
 import lotto.input.InputReader;
 
 public class LottoInputParser {
-    public static List<Integer> getMultipleNumberInput(InputReader inputReader, String comment) {
+    private static final int NUMBER_MIN_THRESHOLD = 0;
+
+    public static List<Integer> parseMultipleNumberInput(InputReader inputReader, String comment) {
         List<String> inputNumbers = Arrays.asList(inputReader.readLine(comment).split(", "));
 
         if (inputNumbers.size() != 6) {
@@ -21,17 +23,17 @@ public class LottoInputParser {
                            .collect(Collectors.toList());
     }
 
-    public static int getSingleNumberInput(InputReader inputReader, String comment) {
+    public static int parseSingleNumberInput(InputReader inputReader, String comment) {
         int inputNumber = inputReader.readInt(comment);
 
-        if (inputNumber < 0) {
+        if (inputNumber < NUMBER_MIN_THRESHOLD) {
             throw new RuntimeException();
         }
 
         return inputNumber;
     }
 
-    public static int getBonus(InputReader inputReader, LottoNumbers winningNumbers) {
+    public static int parseBonus(InputReader inputReader, LottoNumbers winningNumbers) {
         int bonus = inputReader.readInt("보너스 번호를 입력해주세요");
 
         if (bonus < LottoNumberGenerator.MIN_RANGE_NUM || bonus > LottoNumberGenerator.MAX_RANGE_NUM) {

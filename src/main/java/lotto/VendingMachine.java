@@ -19,8 +19,8 @@ public class VendingMachine {
         return new Lottos(wallet, manualNumbers);
     }
 
-    public int getExpend() {
-        return wallet.getExpend();
+    public int calculateSpent() {
+        return wallet.calculateSpent();
     }
 
     private void validate() {

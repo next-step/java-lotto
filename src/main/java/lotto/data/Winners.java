@@ -1,4 +1,4 @@
-package lotto;
+package lotto.data;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -7,10 +7,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import lotto.data.LottoNumbers;
-import lotto.data.Lottos;
-import lotto.data.Rank;
-
 public class Winners {
     private final Map<Rank, Long> result;
 
@@ -18,7 +14,15 @@ public class Winners {
         this.result = initResult(lottos, winningNumbers, bonus);
     }
 
-    public long getTotalEarning() {
+    public double calculateYield(long totalSpent) {
+        return getTotalEarning() / (double) totalSpent;
+    }
+
+    public Map<Rank, Long> getResult() {
+        return getResult();
+    }
+
+    private long getTotalEarning() {
         int total = 0;
 
         for (Rank rank : result.keySet()) {
@@ -26,17 +30,6 @@ public class Winners {
         }
 
         return total;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Rank rank : Rank.values()) {
-            getResultMessages(sb, rank);
-        }
-
-        return sb.toString();
     }
 
     private Map<Rank, Long> initResult(Lottos lottos, LottoNumbers winningNumbers, int bonus) {
@@ -47,16 +40,5 @@ public class Winners {
 
     private List<Rank> getRankList(Lottos lottos, LottoNumbers winningNumbers, int bonus) {
         return lottos.rankLottos(winningNumbers, bonus);
-    }
-
-    private void getResultMessages(StringBuilder sb, Rank rank) {
-        sb.append(rank.getMatchCount()).append("개 일치, ");
-
-        if (rank.isDependsBonus()) {
-            sb.append("보너스볼 일치, ");
-        }
-
-        sb.append(rank.getPrize()).append("원 - ")
-          .append(result.getOrDefault(rank, 0L)).append("개 당첨\n");
     }
 }
