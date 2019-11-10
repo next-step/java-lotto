@@ -1,16 +1,20 @@
 package step2.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 class LottoNumbers {
-    private static final int COUNT = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    static final int COUNT = 6;
+    static final int MIN_NUMBER = 1;
+    static final int MAX_NUMBER = 45;
 
     private final List<Integer> numbers;
+
+    public LottoNumbers(final Integer... numbers) {
+        this(Arrays.asList(numbers));
+    }
 
     LottoNumbers(final List<Integer> numbers) {
         checkNumberCount(numbers);
