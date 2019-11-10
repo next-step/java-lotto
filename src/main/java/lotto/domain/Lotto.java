@@ -7,10 +7,6 @@ public class Lotto {
     private static final int HIT_COUNT = 1;
     private List<Integer> lottoNumber;
 
-    public Lotto() {
-        this.lottoNumber = new LottoNumber().getLottoNumbers();
-    }
-
     public Lotto(List<Integer> lottoNumber) {
         this.lottoNumber = lottoNumber;
     }

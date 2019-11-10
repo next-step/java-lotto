@@ -11,28 +11,12 @@ public class LottoPaper {
 
     private List<Lotto> lottoPapers;
 
-    public LottoPaper() {
-        this.lottoPapers = new ArrayList<>();
-    }
-
-    public LottoPaper(Integer count) {
-        this.lottoPapers = new ArrayList<>();
-        createLotto(count);
+    public LottoPaper(Integer count, LottosGenerator lottosGenerator) {
+        this.lottoPapers = lottosGenerator.generate(count);
     }
 
     public List<Lotto> getLottoPapers() {
         return lottoPapers;
-    }
-
-    private void createLotto(int count) {
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto();
-            applyLotto(lotto);
-        }
-    }
-
-    public void applyLotto(Lotto lotto) {
-        this.lottoPapers.add(lotto);
     }
 
     public List<Rank> getWinningLottoRanks(int[] winLotto, int bonusNumber) {

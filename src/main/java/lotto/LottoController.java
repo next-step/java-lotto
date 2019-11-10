@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.Insights;
+import lotto.domain.AutoLottosGenerator;
 import lotto.domain.LottoPaper;
 import lotto.domain.Ranks;
 import lotto.view.InputView;
@@ -13,7 +13,7 @@ public class LottoController {
 
     public void execute() {
         int count = InputView.purchaseCount();
-        LottoPaper lottoPaper = new LottoPaper(count);
+        LottoPaper lottoPaper = new LottoPaper(count, new AutoLottosGenerator());
         ResultView.printLottoNumber(lottoPaper);
         List<Rank> ranks = getWinLotto(lottoPaper);
 

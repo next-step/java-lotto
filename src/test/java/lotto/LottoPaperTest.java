@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.AutoLottosGenerator;
 import lotto.domain.CreatableLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoPaper;
@@ -26,9 +27,9 @@ public class LottoPaperTest {
         numbers.add(6);
 
         lotto = new Lotto(numbers);
-        lottoPaper = new LottoPaper();
-
-        lottoPaper.applyLotto(lotto);
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(lotto);
+        lottoPaper = new LottoPaper(3, x -> lottos);
         lottoPaper.getWinningLottoRanks(new int[] {1,2,3,4,5,6}, 7);
     }
 
@@ -40,7 +41,6 @@ public class LottoPaperTest {
     @Test
     void checkLottoRankTest() {
         int[] winNumber = new int[] {1,2,3,4,5,6};
-        lottoPaper.applyLotto(lotto);
         assertThat(lottoPaper.getWinningLottoRanks(winNumber, 10)).contains(Rank.FIRST);
     }
 

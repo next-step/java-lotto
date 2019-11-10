@@ -21,6 +21,7 @@ public class Insights {
         insights.put(Rank.THIRD, INITIAL_COUNT_VALUE);
         insights.put(Rank.SECOND, INITIAL_COUNT_VALUE);
         insights.put(Rank.FIRST, INITIAL_COUNT_VALUE);
+        insights.put(Rank.MISS, INITIAL_COUNT_VALUE);
         return insights;
     }
 
