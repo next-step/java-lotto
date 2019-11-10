@@ -18,7 +18,7 @@ public class UserLotto {
     public static UserLotto generatedAuto(int gameCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < gameCount; i++) {
-            lottos.add(new Lotto(LottoBox.generateNumbers()));
+            lottos.add(LottoBox.generateLotto());
         }
 
         return new UserLotto(lottos);

@@ -23,6 +23,10 @@ public class Lotto {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
+    public int numberSize() {
+        return lottoNumbers.size();
+    }
+
     @Override
     public String toString() {
         String numberString = lottoNumbers.stream()

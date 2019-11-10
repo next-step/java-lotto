@@ -23,15 +23,15 @@ public class LottoBox {
         }
     }
 
-    public static List<LottoNumber> generateNumbers() {
+    public static Lotto generateLotto() {
         Collections.shuffle(defaultNumbers, new Random(System.currentTimeMillis()));
-        return new ArrayList<>(defaultNumbers.subList(SUBSTRING_FROM_INDEX, SUBSTRING_TO_INDEX));
+        return new Lotto(new ArrayList<>(defaultNumbers.subList(SUBSTRING_FROM_INDEX, SUBSTRING_TO_INDEX)));
     }
 
-    public static List<LottoNumber> parseNumberString(String numberString) {
+    public static Lotto parseNumberString(String numberString) {
         String[] numberStringArray = numberString.split(NUMBER_STRING_SEPARATOR);
         checkLottoLength(numberStringArray);
-        return convertLottoNumbers(numberStringArray);
+        return new Lotto(convertLottoNumbers(numberStringArray));
     }
 
     private static void checkLottoLength(String[] numberStringArray) {
