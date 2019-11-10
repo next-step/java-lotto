@@ -6,18 +6,19 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningCount {
-    public static final int MIN_MATCH_COUNT = 3;
-    public static final int MAX_MATCH_COUNT = 6;
     private static final int SINGLE_COUNT = 1;
 
     private Map<Prize, Integer> winningCount;
 
     public WinningCount() {
-        Map<Prize, Integer> winningCount = new LinkedHashMap<>();
+        winningCount = new LinkedHashMap<>();
         for (Prize prize : Prize.values()) {
             winningCount.put(prize, 0);
         }
-        this.winningCount = winningCount;
+    }
+
+    public Map<Prize, Integer> getWinningCount() {
+        return winningCount;
     }
 
     public void addCount(Prize prize) {

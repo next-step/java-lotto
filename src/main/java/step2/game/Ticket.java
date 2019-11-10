@@ -4,7 +4,6 @@ import step2.analyze.Prize;
 import step2.analyze.WinningCount;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Ticket {
@@ -13,15 +12,12 @@ public class Ticket {
     private List<LottoGame> lottoGames;
 
     public Ticket(int amount) {
-        lottoGames = new ArrayList<>();
         int lottoCount = buyLottoGames(amount);
+
+        lottoGames = new ArrayList<>();
         for (int count = 0; count < lottoCount; count++) {
             lottoGames.add(new LottoGame());
         }
-    }
-
-    public List<LottoGame> getLottoGames() {
-        return Collections.unmodifiableList(lottoGames);
     }
 
     public int countGames() {
@@ -44,4 +40,9 @@ public class Ticket {
         }
         return winningCount;
     }
+
+    public String getLottoGames(int index) {
+        return lottoGames.get(index).toString();
+    }
+
 }

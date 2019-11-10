@@ -1,11 +1,7 @@
 package step2.analyze;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-
-import static step2.analyze.WinningCount.MAX_MATCH_COUNT;
 
 public enum Prize {
     KRW_0_000(0, false, 0),
@@ -15,9 +11,7 @@ public enum Prize {
     KRW_30_000_000(5, true, 30_000_000),
     KRW_2_000_000_000(6, false, 2_000_000_000);
 
-    private static String WINNING_CONDITION_FORMAT = "%d개 일치 ";
-    private static String WINNING_CONDITION_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치 ";
-
+    public static final int MAX_MATCH_COUNT = 6;
 
     private final int matchCount;
     private final boolean bonus;
@@ -37,18 +31,12 @@ public enum Prize {
                 .orElse(Optional.of(KRW_0_000).get());
     }
 
-    public static Map<Prize, String> ofPrizesAndWinningCondition() {
-        Map<Prize, String> prizes = new HashMap<>();
-        Arrays.stream(values())
-                .filter(prize -> prize.matchCount > 0)
-                .forEach(prize -> {
-                    String condition = prize.bonus ?
-                            String.format(WINNING_CONDITION_WITH_BONUS_FORMAT, prize.matchCount) :
-                            String.format(WINNING_CONDITION_FORMAT, prize.matchCount);
-                    prizes.put(prize, condition);
-                });
+    public int getMatchCount() {
+        return matchCount;
+    }
 
-        return prizes;
+    public boolean isBonus() {
+        return bonus;
     }
 
     public int calculateEarningMoney(int lottoGameCount) {
@@ -57,9 +45,5 @@ public enum Prize {
 
     public int getMoney() {
         return money;
-    }
-
-    public static int compareTo(Prize prize1, Prize prize2) {
-        return Integer.compare(prize1.money, prize2.money);
     }
 }
