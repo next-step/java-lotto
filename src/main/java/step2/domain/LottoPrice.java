@@ -2,7 +2,7 @@ package step2.domain;
 
 import java.util.Objects;
 
-public class LottoPrice {
+class LottoPrice {
     private static final int MIN_PRICE = 1000;
 
     private final int price;

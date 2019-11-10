@@ -2,6 +2,8 @@ package step2.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 class LottoNumbers {
     private static final int COUNT = 6;
@@ -43,5 +45,10 @@ class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream().map(String::valueOf).collect(Collectors.joining(", ", "[", "]"));
     }
 }
