@@ -6,7 +6,8 @@ import java.util.List;
 import lotto.Lotto;
 import lotto.VendingMachine;
 import lotto.Wallet;
-import lotto.Winners;
+import lotto.view.LottoResult;
+import lotto.data.Winners;
 import lotto.data.LottoNumbers;
 import lotto.data.Lottos;
 import lotto.input.InputReader;
@@ -24,28 +25,29 @@ public class LottoMarket {
     }
 
     public void guess() {
-        Lottos lottos = vendingMachine.buy();
-        lottos.getLottos().forEach(lotto -> viewer.print(lotto.toString(), ""));
-
-        Winners winners = getWinner(lottos);
-
-        printResult(winners);
+        Lottos lottos = buyLottos();
+        viewResult(getWinner(lottos));
     }
 
-    private void printResult(Winners winners) {
-        viewer.print(winners.toString(), "결과 확인");
-        viewer.print(String.valueOf(winners.getTotalEarning() / (double) vendingMachine.getExpend()), "총 수익률");
+    private Lottos buyLottos() {
+        Lottos lottos = vendingMachine.buy();
+        viewer.view(lottos);
+        return lottos;
+    }
+
+    private void viewResult(Winners winners) {
+        viewer.viewResult(new LottoResult(winners, vendingMachine.calculateSpent()));
     }
 
     private Winners getWinner(Lottos lottos) {
-        LottoNumbers winningNumbers = new LottoNumbers(LottoInputParser.getMultipleNumberInput(inputReader, "당첨번호 입력: "));
+        LottoNumbers winningNumbers = new LottoNumbers(LottoInputParser.parseMultipleNumberInput(inputReader, "당첨번호 입력: "));
 
-        return new Winners(lottos, winningNumbers, LottoInputParser.getBonus(inputReader, winningNumbers));
+        return new Winners(lottos, winningNumbers, LottoInputParser.parseBonus(inputReader, winningNumbers));
     }
 
     private VendingMachine initVendingMachine() {
-        int budget = LottoInputParser.getSingleNumberInput(inputReader, "지불할 금액 입력: ");
-        int manualCount = LottoInputParser.getSingleNumberInput(inputReader, "수동구매 매수: ");
+        int budget = LottoInputParser.parseSingleNumberInput(inputReader, "지불할 금액 입력: ");
+        int manualCount = LottoInputParser.parseSingleNumberInput(inputReader, "수동구매 매수: ");
 
         Wallet wallet = new Wallet(budget);
         return new VendingMachine(wallet, createManualLotto(manualCount));
@@ -55,7 +57,7 @@ public class LottoMarket {
         List<Lotto> manualLottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            manualLottos.add(new Lotto(new LottoNumbers(LottoInputParser.getMultipleNumberInput(inputReader, "수동구매 번호 입력: "))));
+            manualLottos.add(new Lotto(new LottoNumbers(LottoInputParser.parseMultipleNumberInput(inputReader, "수동구매 번호 입력: "))));
         }
 
         return manualLottos;

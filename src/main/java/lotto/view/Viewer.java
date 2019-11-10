@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.data.Lottos;
+
 public interface Viewer {
-    void print(String result, String comment);
+    void view(Lottos lottos);
+    void viewResult(LottoResult result);
 }
