@@ -5,24 +5,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import lotto.data.LottoNumbers;
 import lotto.data.Lottos;
 import lotto.data.Rank;
+import lotto.data.Winners;
 
 class WinnersTest {
     private Winners winners;
 
     @Test
-    void total_earning() {
+    void calculate_yield() {
         Lottos lottos = lottoGenerate(2);
         LottoNumbers winner = winnerGenerate(0);
         int bonus = 7;
         winners = new Winners(lottos, winner, bonus);
 
-        assertThat(winners.getTotalEarning()).isEqualTo(Rank.FIRST.getPrize() + Rank.SECOND.getPrize());
+        assertThat(winners.calculateYield(2 * 1000)).isEqualTo((Rank.FIRST.getPrize() + Rank.SECOND.getPrize()) / (2 * 1000));
     }
 
     private LottoNumbers winnerGenerate(int weight) {
