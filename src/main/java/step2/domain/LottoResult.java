@@ -9,10 +9,11 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
     private final Lotto winningLotto;
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public LottoResult(final Lotto winningLotto) {
+    private LottoResult(final Lotto winningLotto, final List<Lotto> lottos) {
         this.winningLotto = winningLotto;
+        this.lottos = lottos;
     }
 
     public void add(final Lotto lotto) {
@@ -28,7 +29,38 @@ public class LottoResult {
         return collect.getOrDefault(lottoMatch, 0L).intValue();
     }
 
-    public double rate() {
+    public double winningRate() {
+
         return 0;
+    }
+
+    public static LottoResultBuilder builder() {
+        return new LottoResultBuilder();
+    }
+
+    public static final class LottoResultBuilder {
+        private Lotto winningLotto;
+        private List<Lotto> lottos = new ArrayList<>();
+
+        private LottoResultBuilder() {
+        }
+
+        public static LottoResultBuilder aLottoResult() {
+            return new LottoResultBuilder();
+        }
+
+        public LottoResultBuilder winningLotto(Lotto winningLotto) {
+            this.winningLotto = winningLotto;
+            return this;
+        }
+
+        public LottoResultBuilder addLotto(Lotto lotto) {
+            this.lottos.add(lotto);
+            return this;
+        }
+
+        public LottoResult build() {
+            return new LottoResult(winningLotto, lottos);
+        }
     }
 }
