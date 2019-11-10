@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoServiceTest {
 
@@ -28,7 +26,7 @@ class LottoServiceTest {
     @DisplayName("구매 개수만큼 로또티켓들을 생성한다.")
     void createLottoTickets() {
         LottoService lottoService = new LottoService();
-        List<Lotto> lottos = lottoService.createLottoTickets(5);
+        List<Lotto> lottos = lottoService.createLottoTickets(5, Collections.emptyList());
 
         assertThat(lottos).hasSize(5);
     }
@@ -95,5 +93,19 @@ class LottoServiceTest {
         assertThat(winnerStats).hasSize(2);
         assertThat(winnerStats.containsKey(WinnerType.SECOND)).isTrue();
         assertThat(winnerStats.containsKey(WinnerType.THIRD)).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또구매수보다 수동구매수가 클 수 없다.")
+    void validateDuplicate() {
+
+        List<Lotto> mannualLottos = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        LottoService lottoService = new LottoService();
+
+        assertThatThrownBy(() -> {
+            lottoService.createLottoTickets(1, mannualLottos);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구매금액보다 수동으로 구매한 로또 수가 더 클 수 없습니다.");
     }
 }

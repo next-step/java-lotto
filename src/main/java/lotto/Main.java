@@ -16,15 +16,18 @@ public class Main {
 
         LottoService lottoService = new LottoService();
 
-        int number = lottoService.buyTicket(InputView.createBuyAmount());
-        List<Lotto> lottos = lottoService.createLottoTickets(number);
+        int count = lottoService.buyTicket(InputView.createBuyAmount());
+        int manualCount = InputView.createBuyManualCount();
 
-        ResultView.printBuyTicketNumber(number);
-        ResultView.printBuyLottos(lottos);
+        List<Lotto> manualLottos = InputView.createBuyManualLottos(manualCount);
+        List<Lotto> lottos = lottoService.createLottoTickets(count, manualLottos);
+
+        ResultView.printBuyTicketNumber(count);
+        ResultView.printBuyLottos(manualCount, lottos);
 
         WinnerLotto winnerLotto = InputView.createWinnerLotto();
         Map<WinnerType, Integer> winnerStats = lottoService.findWinnerStats(lottos, winnerLotto);
-        double yield = lottoService.findYield(winnerStats, number);
+        double yield = lottoService.findYield(winnerStats, count);
 
         ResultView.printWinnerStats(winnerStats);
         ResultView.printYield(yield);
