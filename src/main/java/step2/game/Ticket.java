@@ -3,7 +3,9 @@ package step2.game;
 import step2.analyze.Prize;
 import step2.analyze.WinningCount;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Ticket {
     public static final int LOTTO_PRICE = 1000;
@@ -34,12 +36,12 @@ public class Ticket {
     }
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
-        Map<Prize, Integer> winningCount = new HashMap<>();
-        lottoGames.forEach(lottoGame -> {
+        WinningCount winningCount = new WinningCount();
+        for (LottoGame lottoGame : lottoGames) {
             Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
                     lottoGame.containsBonus(winningLotto));
-            winningCount.put(prize, winningCount.getOrDefault(prize, 0) + 1);
-        });
-        return new WinningCount(winningCount);
+            winningCount.addCount(prize);
+        }
+        return winningCount;
     }
 }

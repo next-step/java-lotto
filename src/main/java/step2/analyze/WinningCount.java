@@ -2,16 +2,27 @@ package step2.analyze;
 
 import step2.game.Ticket;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WinningCount {
     public static final int MIN_MATCH_COUNT = 3;
     public static final int MAX_MATCH_COUNT = 6;
+    private static final int SINGLE_COUNT = 1;
 
     private Map<Prize, Integer> winningCount;
 
-    public WinningCount(Map<Prize, Integer> winningCount) {
+    public WinningCount() {
+        Map<Prize, Integer> winningCount = new LinkedHashMap<>();
+        for (Prize prize : Prize.values()) {
+            winningCount.put(prize, 0);
+        }
         this.winningCount = winningCount;
+    }
+
+    public void addCount(Prize prize) {
+        int count = winningCount.get(prize);
+        winningCount.put(prize, count + SINGLE_COUNT);
     }
 
     public int countOfPrize(Prize prize) {

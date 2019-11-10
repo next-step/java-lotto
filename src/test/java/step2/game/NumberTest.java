@@ -13,14 +13,14 @@ class NumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("범위의 맞는 숫자가 나오는 지 확인")
     void verifyOf(int num) {
-        assertThat(Number.verifyOf(num).toString()).isEqualTo(String.valueOf(num));
+        assertThat(Number.valueOf(num).toString()).isEqualTo(String.valueOf(num));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("범위의 맞지 않는 숫자는 에러 출력")
     void verifyOfWithException(int num) {
-        assertThrows(IllegalArgumentException.class, () -> Number.verifyOf(num));
+        assertThrows(IllegalArgumentException.class, () -> Number.valueOf(num));
     }
 
 

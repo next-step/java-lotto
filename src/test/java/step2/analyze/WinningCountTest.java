@@ -4,9 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import step2.game.Ticket;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -15,9 +12,8 @@ class WinningCountTest {
 
     @BeforeEach
     void setUp() {
-        Map<Prize, Integer> winning = new HashMap<>();
-        winning.put(Prize.KRW_1_500_000, 1);
-        winningCount = new WinningCount(winning);
+        winningCount = new WinningCount();
+        winningCount.addCount(Prize.KRW_1_500_000);
     }
 
     @Test

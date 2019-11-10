@@ -19,7 +19,7 @@ public class Number {
         this.num = num;
     }
 
-    public static Number verifyOf(int number) {
+    public static Number valueOf(int number) {
         if (verifiedNumbers.containsKey(number)) {
             return verifiedNumbers.get(number);
         }

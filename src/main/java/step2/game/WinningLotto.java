@@ -17,12 +17,12 @@ public class WinningLotto {
     public WinningLotto(String inputNumbers, int bonusNumber) {
         List<Number> inputWinningNumbers = Arrays.stream(inputNumbers.split(DELIMITER))
                 .map(num -> Integer.parseInt(num.trim()))
-                .map(num -> Number.verifyOf(num))
+                .map(num -> Number.valueOf(num))
                 .collect(toList());
         verifyWinningNumberCount(inputWinningNumbers);
         verifyWinningNumberOrBonusNumber(inputWinningNumbers, bonusNumber);
         this.numbers = inputWinningNumbers;
-        this.bonusNumber = Number.verifyOf(bonusNumber);
+        this.bonusNumber = Number.valueOf(bonusNumber);
     }
 
     boolean contains(Number integer) {
@@ -43,7 +43,7 @@ public class WinningLotto {
     }
 
     private void verifyWinningNumberOrBonusNumber(List<Number> winningNumbers, int bonusNumber) {
-        if (winningNumbers.contains(Number.verifyOf(bonusNumber))) {
+        if (winningNumbers.contains(Number.valueOf(bonusNumber))) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION);
         }
     }

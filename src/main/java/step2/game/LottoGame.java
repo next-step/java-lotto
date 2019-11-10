@@ -12,7 +12,7 @@ public class LottoGame {
     static final int NUMBER_COUNT = 6;
     static final int MIN_NUMBER = 1;
     private static final List<Number> balls = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
-            .boxed().map(num -> Number.verifyOf(num)).collect(toList());
+            .boxed().map(num -> Number.valueOf(num)).collect(toList());
 
     private static final String DELIMITER = ", ";
     private static final int START_INDEX = 0;
