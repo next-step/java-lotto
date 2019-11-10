@@ -23,6 +23,17 @@ public class LottoGame {
         userLotto = UserLotto.of(lottos);
     }
 
+    public LottoGame(int money, String[] lottoStrings) {
+        int gameCount = gameCount(money);
+        if (gameCount < MIN_GAME_COUNT) {
+            throw new IllegalArgumentException(MONEY_LOW_MESSAGE);
+        }
+
+        int autoGameCount = gameCount - lottoStrings.length;
+        userLotto = UserLotto.generatedAuto(autoGameCount);
+        userLotto.addAll(lottoStrings);
+    }
+
     private int gameCount(int money) {
         return money / GAME_AMOUNT;
     }

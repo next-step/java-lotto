@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LottoBox {
     private static final int LOTTO_START_NUMBER = 1;
@@ -14,6 +11,7 @@ public class LottoBox {
     private static final int SUBSTRING_TO_INDEX = 6;
     private static final String NUMBER_STRING_SEPARATOR = ", |,";
     private static final String OUT_OF_RANGE_ERROR_MESSAGE = "로또 숫자는 6개만 입력 가능합니다.";
+    private static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "중복 숫자는 허용하지 않습니다.";
 
     private static List<LottoNumber> defaultNumbers = new ArrayList<>();
 
@@ -31,7 +29,9 @@ public class LottoBox {
     public static Lotto parseNumberString(String numberString) {
         String[] numberStringArray = numberString.split(NUMBER_STRING_SEPARATOR);
         checkLottoLength(numberStringArray);
-        return new Lotto(convertLottoNumbers(numberStringArray));
+        List<LottoNumber> lottoNumbers = convertLottoNumbers(numberStringArray);
+        checkDuplicated(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     private static void checkLottoLength(String[] numberStringArray) {
@@ -51,5 +51,12 @@ public class LottoBox {
         }
 
         return lottoNumbers;
+    }
+
+    private static void checkDuplicated(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> checkSet = new HashSet<>(lottoNumbers);
+        if (checkSet.size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR_MESSAGE);
+        }
     }
 }

@@ -3,8 +3,6 @@ package lotto;
 import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,17 @@ public class LottoGameTest {
         assertThatThrownBy(() -> {
             LottoGame lottoGame = new LottoGame(money);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void addAll() {
+        String[] lottoStrings = {"1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6"};
+        int money = 5000;
+        int expectedSize = money / 1000;
+
+        LottoGame lottoGame = new LottoGame(money, lottoStrings);
+
+        assertThat(lottoGame.lottoSize()).isEqualTo(expectedSize);
     }
 
     @Test

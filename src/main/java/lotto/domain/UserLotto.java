@@ -40,4 +40,11 @@ public class UserLotto {
 
         return lottoResult;
     }
+
+    public void addAll(String[] lottoStrings) {
+        for (String lottoString : lottoStrings) {
+            Lotto lotto = LottoBox.parseNumberString(lottoString);
+            lottos.add(lotto);
+        }
+    }
 }
