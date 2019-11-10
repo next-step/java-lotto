@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,18 +19,18 @@ public class LotteryGeneratorTest {
     @BeforeEach
     void setUp() {
         // given
-        lotteryGenerator = new LotteryGenerator(new NumberGenerator());
+        lotteryGenerator = new LotteryGenerator();
     }
 
-    @DisplayName("복권 생성기: 단일 생성")
+    @DisplayName("복권 생성기: 자동 번호 생성")
     @Test
     void generateTicket() {
 
         // when
-        LotteryTicket lotteryTickets = lotteryGenerator.generate();
+        List<LotteryNumber> numbers = lotteryGenerator.generateAutoNumbers(6);
 
         // then
-        assertThat(lotteryTickets).isNotNull();
+        assertThat(numbers).isNotNull();
     }
 
     @DisplayName("복권 생성기: 여러개 생성")
@@ -39,9 +40,10 @@ public class LotteryGeneratorTest {
         // given
         int amount = 14_000;
         int expected = amount / 1_000;
+        List<List<Integer>> manualLotteries = new ArrayList<>();
 
         // when
-        List<LotteryTicket> lotteryTickets = lotteryGenerator.generate(amount);
+        List<LotteryTicket> lotteryTickets = lotteryGenerator.generate(amount, manualLotteries);
 
         // then
         assertThat(lotteryTickets).hasSize(expected);

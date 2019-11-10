@@ -23,12 +23,12 @@ class WinningNumbersTest {
         // given
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         List<LotteryTicket> tickets = new ArrayList<>();
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 6))); // first
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 7))); // second
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 5, 45))); // third
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 4, 44, 45))); // fourth
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 3, 43, 44, 45))); // fifth
-        tickets.add(new LotteryTicket(Arrays.asList(1, 2, 42, 43, 44, 45))); // miss
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6))); // first
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 7))); // second
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 5, 45))); // third
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 4, 44, 45))); // fourth
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 3, 43, 44, 45))); // fifth
+        tickets.add(LotteryTicket.from(Arrays.asList(1, 2, 42, 43, 44, 45))); // miss
 
         // when
         Map<WinningRanking, Long> countingMap = winningNumbers.getWinningTickets(tickets);
@@ -44,7 +44,7 @@ class WinningNumbersTest {
     void outOfRange() {
         assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 46), 7))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("당첨 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
+                .hasMessageMatching("복권 번호의 범위는 \\[\\d+, \\d+\\] 입니다.");
     }
 
     @DisplayName("유효성 검사 실패: 사이즈")
@@ -52,7 +52,7 @@ class WinningNumbersTest {
     void sizeOver() {
         assertThatThrownBy(() -> new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 8))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageMatching("당첨 번호는 [0-9]+개 입니다.");
+                .hasMessageMatching("복권 번호는 [0-9]+개 입니다.");
     }
 
     @DisplayName("유효성 검사 실패: 숫자 중복")
