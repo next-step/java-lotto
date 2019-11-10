@@ -30,8 +30,17 @@ public class LottoResult {
     }
 
     public double winningRate() {
+        final long awardSum = lottos.stream()
+                                    .map(lotto -> lotto.winningReward(winningLotto))
+                                    .mapToLong(Long::longValue)
+                                    .sum();
 
-        return 0;
+        final long priceSum = lottos.stream()
+                                    .map(Lotto::price)
+                                    .mapToLong(Long::longValue)
+                                    .sum();
+
+        return 1.0 * awardSum / priceSum;
     }
 
     public static LottoResultBuilder builder() {
@@ -56,6 +65,11 @@ public class LottoResult {
 
         public LottoResultBuilder addLotto(Lotto lotto) {
             this.lottos.add(lotto);
+            return this;
+        }
+
+        public LottoResultBuilder addLottos(Lottos lottos) {
+            this.lottos.addAll(lottos.getLottos());
             return this;
         }
 

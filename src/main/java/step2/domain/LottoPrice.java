@@ -3,6 +3,7 @@ package step2.domain;
 import java.util.Objects;
 
 class LottoPrice {
+    static final LottoPrice DEFAULT = new LottoPrice(1000);
     private static final long MIN_PRICE = 1_000L;
 
     private final long price;
@@ -16,6 +17,10 @@ class LottoPrice {
         if (price != MIN_PRICE) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public long price() {
+        return price;
     }
 
     @Override
