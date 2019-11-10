@@ -22,7 +22,6 @@ class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 46));
     }
 
-
     @Test
     void createWithNumberUnder1() {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 0));
