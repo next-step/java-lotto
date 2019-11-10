@@ -27,7 +27,7 @@ public class LottoInputParser {
         int inputNumber = inputReader.readInt(comment);
 
         if (inputNumber < NUMBER_MIN_THRESHOLD) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
 
         return inputNumber;
