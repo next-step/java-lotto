@@ -6,22 +6,22 @@ import java.util.List;
 import lotto.Lotto;
 import lotto.VendingMachine;
 import lotto.Wallet;
-import lotto.view.LottoResult;
-import lotto.data.Winners;
 import lotto.data.LottoNumbers;
 import lotto.data.Lottos;
+import lotto.data.Winners;
 import lotto.input.InputReader;
+import lotto.view.LottoViewResolver;
 import lotto.view.Viewer;
 
 public class LottoMarket {
     private final InputReader inputReader;
-    private final Viewer viewer;
     private final VendingMachine vendingMachine;
+    private final LottoViewResolver viewResolver;
 
     public LottoMarket(InputReader inputReader, Viewer viewer) {
         this.inputReader = inputReader;
-        this.viewer = viewer;
         this.vendingMachine = initVendingMachine();
+        this.viewResolver = new LottoViewResolver(viewer);
     }
 
     public void guess() {
@@ -31,12 +31,12 @@ public class LottoMarket {
 
     private Lottos buyLottos() {
         Lottos lottos = vendingMachine.buy();
-        viewer.view(lottos);
+        viewResolver.viewStart(lottos);
         return lottos;
     }
 
     private void viewResult(Winners winners) {
-        viewer.viewResult(new LottoResult(winners, vendingMachine.calculateSpent()));
+        viewResolver.viewResult(winners, vendingMachine.calculateSpent());
     }
 
     private Winners getWinner(Lottos lottos) {
