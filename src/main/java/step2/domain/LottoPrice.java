@@ -3,16 +3,16 @@ package step2.domain;
 import java.util.Objects;
 
 class LottoPrice {
-    private static final int MIN_PRICE = 1000;
+    private static final long MIN_PRICE = 1_000L;
 
-    private final int price;
+    private final long price;
 
-    public LottoPrice(final int price) {
+    public LottoPrice(final long price) {
         checkPrice(price);
         this.price = price;
     }
 
-    private void checkPrice(final int price) {
+    private void checkPrice(final long price) {
         if (price != MIN_PRICE) {
             throw new IllegalArgumentException();
         }

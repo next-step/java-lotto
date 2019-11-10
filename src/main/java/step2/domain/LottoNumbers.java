@@ -22,6 +22,13 @@ class LottoNumbers {
         this.numbers = numbers;
     }
 
+    LottoMatch match(final LottoNumbers winningNumbers) {
+        final long count = this.numbers.stream()
+                                       .filter(winningNumbers.numbers::contains)
+                                       .count();
+        return LottoMatch.of(count);
+    }
+
     private void checkNumberCount(final List<Integer> numbers) {
         if (numbers.size() != COUNT) {
             throw new IllegalArgumentException();

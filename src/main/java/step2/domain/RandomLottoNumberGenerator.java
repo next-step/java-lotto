@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class RandomLottoNumberGenerator implements LottoNumberGenerator {
+class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
     @Override

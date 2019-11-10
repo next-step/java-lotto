@@ -15,6 +15,10 @@ public class Lotto {
         this.numbers = new LottoNumbers(numbers);
     }
 
+    public LottoMatch match(final Lotto lotto) {
+        return numbers.match(lotto.numbers);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
