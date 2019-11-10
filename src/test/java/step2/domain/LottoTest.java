@@ -12,5 +12,8 @@ class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(1, 2, 3, 4, 5, 6));
     }
 
-
+    @Test
+    void createOver6() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(1, 2, 3, 4, 5, 6, 7));
+    }
 }
