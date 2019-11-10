@@ -43,6 +43,17 @@ public class LottoGameTest {
     }
 
     @Test
+    @DisplayName("당첨 번호와 보너스 번호가 중복되면 IllegalArgumentException이 발생한다.")
+    void checkBonus() {
+        String testWinningNumbers = "1, 2, 3, 4, 5, 6";
+        int bonus = 6;
+
+        assertThatThrownBy(() -> {
+            WinningLotto winningLotto = new WinningLotto(testWinningNumbers,  bonus);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("LottoRank당 하나씩 결과가 나오는지 확인한다.")
     void result() {
         List<Lotto> testLottos = getTestLottos();
