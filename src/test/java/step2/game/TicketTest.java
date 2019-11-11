@@ -2,10 +2,13 @@ package step2.game;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import step2.analyze.Prize;
 import step2.analyze.WinningCount;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TicketTest {
     Ticket ticket = new Ticket(14000);
@@ -26,5 +29,12 @@ class TicketTest {
             totalPrizeCount += winningCount.countOfPrize(prize);
         }
         assertThat(totalPrizeCount).isEqualTo(14);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 100, 1450})
+    @DisplayName("로또구입시 금액 유효성 검증")
+    void verifyAmountTest(int amount) {
+        assertThrows(IllegalArgumentException.class, () -> new Ticket(amount));
     }
 }
