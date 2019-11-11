@@ -93,6 +93,7 @@ public class LottoView {
         return lottoNumbers
                 .getValue()
                 .stream()
+                .sorted()
                 .map(LottoNumber::getValue)
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));

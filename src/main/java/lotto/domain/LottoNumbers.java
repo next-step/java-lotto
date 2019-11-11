@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,15 +16,15 @@ public class LottoNumbers {
 
     public static final int NUMBERS_SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public LottoNumbers(List<LottoNumber> numbers) {
         assertValidNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = new HashSet<>(numbers);
     }
 
-    public List<LottoNumber> getValue() {
-        return new ArrayList<>(numbers);
+    public Set<LottoNumber> getValue() {
+        return new HashSet<>(numbers);
     }
 
     private void assertValidNumbers(List<LottoNumber> numbers) {
