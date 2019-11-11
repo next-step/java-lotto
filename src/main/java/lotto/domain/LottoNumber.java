@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoNumber {
+    public static final int LOTTO_START_NUMBER = 1;
+    public static final int LOTTO_END_NUMBER = 45;
     private static final String CONVERT_NUMBER_ERROR_MESSAGE = "숫자 이외의 값이 입력 되었습니다.";
 
     private int number;

@@ -3,23 +3,21 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoNumbers {
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_LENGTH_MIN = 1;
     private static final int LOTTO_LENGTH_MAX = 6;
     private static final String NUMBER_STRING_SEPARATOR = ", |,";
-    private static final String OUT_OF_RANGE_ERROR_MESSAGE = "로또 숫자는 6개만 입력 가능합니다.";
-    private static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "중복 숫자는 허용하지 않습니다.";
+    public static final String OUT_OF_RANGE_ERROR_MESSAGE = "로또 숫자는 6개만 입력 가능합니다.";
+    public static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "중복 숫자는 허용하지 않습니다.";
 
     private List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoNumbers defaultNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
+        for (int i = LottoNumber.LOTTO_START_NUMBER; i <= LottoNumber.LOTTO_END_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
 
@@ -64,11 +62,15 @@ public class LottoNumbers {
         Collections.shuffle(lottoNumbers, new Random(System.currentTimeMillis()));
     }
 
-    public LottoNumbers subList(int fromIndex, int toIndex) {
+    public LottoNumbers subNumbers(int fromIndex, int toIndex) {
         return new LottoNumbers(new ArrayList<>(lottoNumbers.subList(fromIndex, toIndex)));
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int size() {
+        return lottoNumbers.size();
     }
 }

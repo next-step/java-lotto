@@ -7,7 +7,7 @@ public class LottoBox {
 
     public static Lotto generateLotto() {
         defaultNumbers.shuffle();
-        return new Lotto(defaultNumbers.subList(SUBSTRING_FROM_INDEX, SUBSTRING_TO_INDEX));
+        return new Lotto(defaultNumbers.subNumbers(SUBSTRING_FROM_INDEX, SUBSTRING_TO_INDEX));
     }
 
     public static Lotto parseNumberString(String numberString) {
