@@ -7,6 +7,7 @@ import java.util.List;
 public class LottoTicket {
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
+    public static final int LOTTO_PRICE = 1000;
     private static final LottoCandidate candidateNumbers = new LottoCandidate();
     private static final String LOTTO_NUMS_DELIMITER = ",";
 
@@ -52,12 +53,12 @@ public class LottoTicket {
         return lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX;
     }
 
-    public int matchNumber(List<Integer> winnerNums) {
-        Long matchNumber = this.lottoNums.stream()
+    public int countMatchNumber(List<Integer> winnerNums) {
+        Long countOfMatchNumber = this.lottoNums.stream()
                 .filter(winnerNums::contains)
                 .count();
 
-        return Math.toIntExact(matchNumber);
+        return Math.toIntExact(countOfMatchNumber);
     }
 
     public List<Integer> getLottoNums() {

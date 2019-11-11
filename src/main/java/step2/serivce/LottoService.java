@@ -4,9 +4,9 @@ import step2.domain.Bonus;
 import step2.domain.LottoTickets;
 import step2.domain.Winner;
 
-public class LottoService {
-    public static final int LOTTO_PRICE = 1000;
+import static step2.domain.LottoTicket.LOTTO_PRICE;
 
+public class LottoService {
     public LottoTickets buyTickets(int price) {
         checkPrice(price);
 
@@ -15,7 +15,7 @@ public class LottoService {
     }
 
     private void checkPrice(int price) {
-        if(price < LOTTO_PRICE) {
+        if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다");
         }
     }

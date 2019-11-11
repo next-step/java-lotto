@@ -1,7 +1,7 @@
 package step2.domain;
 
 public class Bonus {
-    int bonus;
+    private int bonus;
 
     public Bonus(int bonus) {
         LottoTicket.checkNumRange(bonus);
