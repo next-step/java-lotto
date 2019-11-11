@@ -28,9 +28,9 @@ public class LottoTicket {
     }
 
     public List<Integer> makeAutoNumbers() {
-        List<Integer> selectedNums = new ArrayList<>();
+        List<Integer> selectedNums;
 
-        candidateNumbers.addRandomNumber(selectedNums);
+        selectedNums = candidateNumbers.addRandomNumber();
 
         Collections.sort(selectedNums);
 

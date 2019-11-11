@@ -30,9 +30,12 @@ public class LottoCandidate {
         Collections.shuffle(candidate);
     }
 
-    public void addRandomNumber(List<Integer> selectedNums) {
+    public List<Integer> addRandomNumber() {
+        List<Integer> selectedNums = new ArrayList<>();
+
         for (int i = 0; i < LOTTO_SIZE; i++) {
             selectedNums.add(candidate.get(i));
         }
+        return selectedNums;
     }
 }
