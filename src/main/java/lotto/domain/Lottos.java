@@ -4,24 +4,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UserLotto {
+public class Lottos {
     private List<Lotto> lottos;
 
-    private UserLotto(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    public static UserLotto of(List<Lotto> lottos) {
-        return new UserLotto(lottos);
+    public static Lottos of(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public static UserLotto generatedAuto(int gameCount) {
+    public static Lottos generatedAuto(int gameCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < gameCount; i++) {
             lottos.add(LottoBox.generateLotto());
         }
 
-        return new UserLotto(lottos);
+        return new Lottos(lottos);
     }
 
     public int size() {

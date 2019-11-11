@@ -13,6 +13,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers.getLottoNumbers();
+    }
+
     public int compare(Lotto other) {
         return (int) lottoNumbers.stream()
                 .filter(other::contains)
