@@ -1,9 +1,7 @@
 package step2.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Winner {
     private static final String WINNING_NUM_DELIMITER = ",";
@@ -14,17 +12,17 @@ public class Winner {
     public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
         countOfRanks = new Ranks();
 
-        setWinner(lottoTickets, lastWeekWinningInput, bonus);
+        prepareWinner(lottoTickets, lastWeekWinningInput, bonus);
         getWinner();
 
         int lottoTicketsSize = lottoTickets.size();
         calculateProfit(lottoTicketsSize);
     }
 
-    private void setWinner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
+    private void prepareWinner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
         List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
 
-        lottoTickets.setWinner(winnerNums, bonus, countOfRanks);
+        lottoTickets.prepareWinner(winnerNums, bonus, countOfRanks);
     }
 
     private List<Integer> splitWinningNums(String lastWeekWinningInput) {

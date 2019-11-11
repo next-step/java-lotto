@@ -4,7 +4,7 @@ public class Bonus {
     private int bonus;
 
     public Bonus(int bonus) {
-        LottoTicket.checkNumRange(bonus);
+        LottoNum.checkNumRange(bonus);
 
         this.bonus = bonus;
     }
