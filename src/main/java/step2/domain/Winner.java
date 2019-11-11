@@ -16,7 +16,7 @@ public class Winner {
         getWinner();
 
         int lottoTicketsSize = lottoTickets.size();
-        calculateProfit(lottoTicketsSize);
+        profit = calculateProfit(lottoTicketsSize);
     }
 
     private void prepareWinner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
@@ -42,8 +42,8 @@ public class Winner {
         return this;
     }
 
-    private void calculateProfit(int lottoTicketsSize) {
-        profit = countOfRanks.calculateProfit(lottoTicketsSize);
+    private Double calculateProfit(int lottoTicketsSize) {
+        return countOfRanks.calculateProfit(lottoTicketsSize);
     }
 
     public Ranks getCountOfRanks() {

@@ -7,11 +7,12 @@ public class LottoTickets {
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(int lottoCount) {
-        this.lottoTickets = new ArrayList<>();
         createLottoTickets(lottoCount);
     }
 
     private void createLottoTickets(int lottoCount) {
+        this.lottoTickets = new ArrayList<>();
+
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(new LottoTicket());
         }

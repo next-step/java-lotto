@@ -5,7 +5,7 @@ import step2.domain.Bonus;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
 
     public static int getPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
