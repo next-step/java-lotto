@@ -82,11 +82,6 @@ public class LottoGameTest {
     }
 
     private Lotto getTestLotto(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-
-        return new Lotto(lottoNumbers);
+        return new Lotto(LottoNumbers.of(numbers));
     }
 }

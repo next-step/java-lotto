@@ -20,6 +20,6 @@ public class WinningLotto {
     }
 
     public LottoRank match(Lotto lotto) {
-        return LottoRank.getRank(lotto.compare(winningLotto), lotto.contains(bonusNumber));
+        return LottoRank.getRank(lotto.matchCount(winningLotto), lotto.contains(bonusNumber));
     }
 }

@@ -8,7 +8,6 @@ public class LottoNumber {
     public static final String CONVERT_NUMBER_ERROR_MESSAGE = "숫자 이외의 값이 입력 되었습니다.";
     public static final String OUT_OF_LOTTO_NUMBER_RANGE = "로또 번호는 1 ~ 45의 숫자만 가능합니다.";
 
-
     private int number;
 
     public LottoNumber(int number) {
