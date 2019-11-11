@@ -1,9 +1,11 @@
 package step2.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static step2.game.Number.createVerifiedNumbers;
 
 public class LottoGame {
@@ -19,6 +21,13 @@ public class LottoGame {
 
     public LottoGame() {
         numbers = pickRandomNumbers();
+    }
+
+    public LottoGame(String manualNumbers) {
+        this.numbers = Arrays.stream(manualNumbers.trim().split(","))
+                .map(num -> Integer.parseInt(num.trim()))
+                .map(num -> Number.valueOf(num))
+                .collect(toList());
     }
 
     public String toString() {

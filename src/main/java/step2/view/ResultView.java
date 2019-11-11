@@ -5,7 +5,7 @@ import step2.game.Ticket;
 import step2.game.WinningLotto;
 
 public class ResultView {
-    private static final String AMOUNT_CONFIRM_POSTFIX = "개를 구매했습니다.";
+    private static final String AMOUNT_CONFIRM_POSTFIX = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String RESULT = "당첨 통계\n---------";
     private static final String PRIZE_WITH_BONUS = ", 보너스 볼 일치";
     private static final String EMPTY = "";
@@ -15,10 +15,14 @@ public class ResultView {
     private static final String LOSS = "손해";
 
     public static void printTickets(Ticket ticket) {
-        int gameCount = ticket.countGames();
-        System.out.println(gameCount + AMOUNT_CONFIRM_POSTFIX);
-        for (int i = 0; i < gameCount; i++) {
-            System.out.println("[" + ticket.toStringLottoNumbers(i) + "]");
+        int autoCount = ticket.getAutoCount();
+        int manualCount = ticket.getManualCount();
+        System.out.println(String.format(AMOUNT_CONFIRM_POSTFIX, manualCount, autoCount));
+        for (int i = 0; i < manualCount; i++) {
+            System.out.println("[" + ticket.toStringManualNumbers(i) + "]");
+        }
+        for (int i = 0; i < autoCount; i++) {
+            System.out.println("[" + ticket.toStringAutoNumbers(i) + "]");
         }
     }
 

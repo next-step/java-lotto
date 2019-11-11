@@ -9,19 +9,44 @@ import java.util.List;
 public class Ticket {
     public static final int LOTTO_PRICE = 1000;
     private static final String AMOUNT_EXCEPTION = "로또는 1000원단위로 구매할 수 있습니다.";
-    private List<LottoGame> lottoGames;
+    private static final String MANUAL_AMOUNT_EXCEPTION = "구입하려는 금액을 초과합니다.";
+    private List<LottoGame> autoGames;
+    private List<LottoGame> manualGames;
+
 
     public Ticket(int amount) {
         int lottoCount = buyLottoGames(amount);
 
-        lottoGames = new ArrayList<>();
+        autoGames = new ArrayList<>();
         for (int count = 0; count < lottoCount; count++) {
-            lottoGames.add(new LottoGame());
+            autoGames.add(new LottoGame());
         }
     }
 
-    public int countGames() {
-        return lottoGames.size();
+    public Ticket(int amount, int manualCount) {
+        int lottoCount = buyLottoGames(amount);
+        if (manualCount > lottoCount) {
+            throw new IllegalArgumentException(MANUAL_AMOUNT_EXCEPTION);
+        }
+        autoGames = new ArrayList<>();
+        for (int count = 0; count < lottoCount - manualCount; count++) {
+            autoGames.add(new LottoGame());
+        }
+        manualGames = new ArrayList<>();
+    }
+
+    public void buyManuals(List<String> manualNumbers) {
+        for (String manualNumber : manualNumbers) {
+            manualGames.add(new LottoGame(manualNumber));
+        }
+    }
+
+    public int getAutoCount() {
+        return autoGames.size();
+    }
+
+    public int getManualCount() {
+        return manualGames.size();
     }
 
     private int buyLottoGames(int amount) {
@@ -37,7 +62,12 @@ public class Ticket {
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
         WinningCount winningCount = new WinningCount();
-        for (LottoGame lottoGame : lottoGames) {
+        for (LottoGame lottoGame : autoGames) {
+            Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
+                    lottoGame.containsBonus(winningLotto));
+            winningCount.addCount(prize);
+        }
+        for (LottoGame lottoGame : manualGames) {
             Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
                     lottoGame.containsBonus(winningLotto));
             winningCount.addCount(prize);
@@ -45,7 +75,11 @@ public class Ticket {
         return winningCount;
     }
 
-    public String toStringLottoNumbers(int index) {
-        return lottoGames.get(index).toString();
+    public String toStringAutoNumbers(int index) {
+        return autoGames.get(index).toString();
+    }
+
+    public String toStringManualNumbers(int index) {
+        return manualGames.get(index).toString();
     }
 }
