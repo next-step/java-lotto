@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private static final int LOTTO_NUM_MIN = 1;
-    private static final int LOTTO_NUM_MAX = 45;
+    public static final int LOTTO_NUM_MIN = 1;
+    public static final int LOTTO_NUM_MAX = 45;
     public static final int LOTTO_PRICE = 1000;
     private static final LottoCandidate candidateNumbers = new LottoCandidate();
     private static final String LOTTO_NUMS_DELIMITER = ",";
