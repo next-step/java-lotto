@@ -6,7 +6,7 @@ import step2.analyze.WinningCount;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualGames {
+public class ManualGames extends InputNumber {
     private List<LottoGame> games;
 
     private ManualGames() {
@@ -22,7 +22,9 @@ public class ManualGames {
     }
 
     private void addGame(String manualGame) {
-        games.add(LottoGame.ofManual(manualGame));
+        List<Number> inputNumbers = toNumberList(manualGame);
+        verifyLottoNumberCount(inputNumbers);
+        games.add(LottoGame.ofManual(inputNumbers));
     }
 
     public void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto) {

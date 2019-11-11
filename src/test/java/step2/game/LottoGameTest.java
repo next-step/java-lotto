@@ -7,7 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +29,8 @@ class LottoGameTest {
                 .map(num -> Integer.parseInt(num.trim()))
                 .collect(toList());
         winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
+
+
     }
 
     @Test
@@ -38,9 +42,11 @@ class LottoGameTest {
     @Test
     @DisplayName("수동 로또 생성")
     void createManualLottoTest() {
-        assertThat(LottoGame.ofManual("1, 2, 3, 4, 5, 6")
+        List<Number> numbers = IntStream.rangeClosed(1, 6).boxed().map(Number::valueOf).collect(toList());
+        assertThat(LottoGame.ofManual(numbers)
                 .matchWinningNumberCount(winningLotto))
                 .isEqualTo(6);
+
     }
 
     @ParameterizedTest
@@ -52,6 +58,6 @@ class LottoGameTest {
     })
     @DisplayName("수동 로또 선택 시 유효성 검증")
     void ofManual(String inputNumbers) {
-        assertThrows(IllegalArgumentException.class, () -> LottoGame.ofManual(inputNumbers));
+        assertThrows(IllegalArgumentException.class, () -> ManualGames.buy(Collections.singletonList(inputNumbers)));
     }
 }
