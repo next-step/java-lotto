@@ -1,5 +1,8 @@
 package com.seok2.lotto.domain.order;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 import com.seok2.common.utils.StringUtils;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,11 +19,10 @@ public class LottoSheet {
     }
 
     public static LottoSheet of(List<String> lottoSheetRows) {
-        List<LottoSheetRow> mapped = lottoSheetRows.stream()
+        return lottoSheetRows.stream()
             .map(StringUtils::split)
             .map(LottoSheetRow::manual)
-            .collect(Collectors.toList());
-        return new LottoSheet(mapped);
+            .collect(collectingAndThen(toList(), LottoSheet::new));
     }
 
     protected LottoSheetRow next() {

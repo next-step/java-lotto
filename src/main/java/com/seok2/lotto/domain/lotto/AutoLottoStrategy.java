@@ -15,7 +15,7 @@ public class AutoLottoStrategy implements LottoStrategy {
     private List<Integer> pool;
 
     AutoLottoStrategy() {
-        this.pool = LOTTO_NUMBER_POOL;
+        this(LOTTO_NUMBER_POOL);
     }
 
     AutoLottoStrategy(List<Integer> pool) {
