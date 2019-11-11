@@ -1,6 +1,8 @@
-package com.seok2.lotto.domain;
+package com.seok2.lotto.domain.rank;
 
+import com.seok2.lotto.domain.common.Money;
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
 
@@ -11,10 +13,11 @@ public enum Rank {
     FIFTH(3, Money.of(5_000), "3개 일치 (5,000원)"),
     MISS(0, Money.of(0), "낙첨");
 
+    public static final List<Rank> WINNINGS = Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST);
+
     private final int matches;
     private final Money reward;
     private final String description;
-
 
     Rank(int matches, Money reward, String description) {
         this.matches = matches;
@@ -38,5 +41,6 @@ public enum Rank {
     public String toString() {
         return this.description;
     }
+
 
 }

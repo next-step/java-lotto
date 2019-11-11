@@ -1,8 +1,9 @@
-package com.seok2.lotto.domain;
+package com.seok2.lotto.domain.lotto;
+
+import com.seok2.lotto.domain.rank.Rank;
+import com.seok2.lotto.exception.LottoDuplicateNumberException;
 
 public class WinningLotto {
-
-    private static final String DUPLICATE_NUMBER_ERROR_MSG = "보너스 번호가 이미 선택 된 번호입니다.";
 
     private final Lotto lotto;
     private final LottoNumber bonus;
@@ -15,7 +16,7 @@ public class WinningLotto {
 
     private void validate(Lotto lotto, LottoNumber bonus) {
         if (lotto.contains(bonus)) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MSG);
+            throw new LottoDuplicateNumberException();
         }
     }
 
@@ -23,7 +24,7 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonus);
     }
 
-    public Rank check(Lotto lotto) {
-        return Rank.find(lotto.match(this.lotto), lotto.contains(this.bonus));
+    Rank check(Lotto lotto) {
+        return lotto.check(this.lotto, this.bonus);
     }
 }
