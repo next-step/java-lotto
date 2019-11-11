@@ -31,7 +31,8 @@ public enum Rank {
             return validateBonus(matchBonus);
         }
         return Arrays.stream(values())
-                .filter(r -> r.getRankValue(r, countOfMatch) != null).findAny()
+                .filter(r -> r.countOfMatch == countOfMatch)
+                .findAny()
                 .orElse(MISS);
     }
 
@@ -40,12 +41,5 @@ public enum Rank {
             return SECOND;
         }
         return THIRD;
-    }
-
-    public Rank getRankValue(Rank rank, int countOfMatch) {
-        if (rank.getCountOfMatch() == countOfMatch) {
-            return rank;
-        }
-        return null;
     }
 }
