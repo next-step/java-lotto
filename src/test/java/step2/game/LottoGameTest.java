@@ -17,7 +17,7 @@ class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        lottoGame = new LottoGame();
+        lottoGame = new AutoGame();
         String lottoNumbers = lottoGame.toString();
         numbers = Arrays.stream(lottoNumbers.trim()
                 .split(","))
@@ -35,7 +35,7 @@ class LottoGameTest {
     @Test
     @DisplayName("수동 로또 생성")
     void createManualLottoTest() {
-        assertThat(new LottoGame("1, 2, 3, 4, 5, 6")
+        assertThat(new ManualGame("1, 2, 3, 4, 5, 6")
                 .matchWinningNumberCount(winningLotto))
                 .isEqualTo(6);
     }

@@ -19,7 +19,7 @@ public class Ticket {
 
         autoGames = new ArrayList<>();
         for (int count = 0; count < lottoCount; count++) {
-            autoGames.add(new LottoGame());
+            autoGames.add(new AutoGame());
         }
     }
 
@@ -30,14 +30,14 @@ public class Ticket {
         }
         autoGames = new ArrayList<>();
         for (int count = 0; count < lottoCount - manualCount; count++) {
-            autoGames.add(new LottoGame());
+            autoGames.add(new AutoGame());
         }
         manualGames = new ArrayList<>();
     }
 
     public void buyManuals(List<String> manualNumbers) {
         for (String manualNumber : manualNumbers) {
-            manualGames.add(new LottoGame(manualNumber));
+            manualGames.add(new ManualGame(manualNumber));
         }
     }
 

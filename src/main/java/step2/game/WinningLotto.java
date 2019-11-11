@@ -25,7 +25,7 @@ public class WinningLotto {
         this.bonusNumber = Number.valueOf(bonusNumber);
     }
 
-    boolean contains(Number integer) {
+    public boolean contains(Number integer) {
         return numbers.contains(integer);
     }
 
