@@ -15,7 +15,7 @@ public class LottoService {
     }
 
     private void checkPrice(int price) {
-        if(price <= 0) {
+        if(price % LOTTO_PRICE != 0 || price <= 0) {
             throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다");
         }
     }

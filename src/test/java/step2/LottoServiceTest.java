@@ -10,6 +10,23 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoServiceTest {
     LottoService lottoService = new LottoService();
 
+    @DisplayName("로또 500원 구매")
+    @Test
+    void buyLottoUnder1000Test() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottoService.buyTickets(500);
+        });
+    }
+
+    @DisplayName("로또 1500원 구매")
+    @Test
+    void buyLotto1500Test() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottoService.buyTickets(1500);
+        });
+    }
+
+
     @DisplayName("로또 구매")
     @Test
     void buyLottoTest() {
