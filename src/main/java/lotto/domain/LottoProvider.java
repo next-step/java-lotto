@@ -24,12 +24,8 @@ public class LottoProvider {
         return numbers;
     }
 
-    private static List<Integer> getShuffledNumbers() {
-        List<Integer> shuffledNumbers = LottoProvider
-                .getNumbers()
-                .stream()
-                .map(LottoNumber::getValue)
-                .collect(Collectors.toList());
+    private static List<LottoNumber> getShuffledNumbers() {
+        List<LottoNumber> shuffledNumbers = new ArrayList<>(LottoProvider.getNumbers());
 
         Collections.shuffle(shuffledNumbers);
         return shuffledNumbers;
@@ -44,7 +40,12 @@ public class LottoProvider {
     }
 
     public static Lotto createLotto(List<Integer> numbers) {
-        return new Lotto(new LottoNumbers(numbers));
+        List<LottoNumber> lottoNumbers = numbers
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new Lotto(new LottoNumbers(lottoNumbers));
     }
 
     public static List<Lotto> createLottos(int count) {
@@ -60,12 +61,12 @@ public class LottoProvider {
     }
 
     private static Lotto createLotto() {
-        List<Integer> shuffledNumbers = getShuffledNumbers();
-        List<Integer> numbers = shuffledNumbers.stream()
+        List<LottoNumber> numbers = getShuffledNumbers()
+                .stream()
                 .limit(NUMBERS_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
 
-        return createLotto(numbers);
+        return new Lotto(new LottoNumbers(numbers));
     }
 }

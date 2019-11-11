@@ -88,10 +88,12 @@ public class LottoView {
         }
     }
 
-    private String getNumbersText(List<Integer> numbers) {
+    private String getNumbersText(LottoNumbers lottoNumbers) {
 
-        return numbers
+        return lottoNumbers
+                .getValue()
                 .stream()
+                .map(LottoNumber::getValue)
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
     }

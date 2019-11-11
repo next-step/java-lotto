@@ -17,18 +17,18 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getNumbers() {
+    public LottoNumbers getNumbers() {
         return lotto.getLottoNumbers();
     }
 
-    public boolean matchBonusNumber(List<Integer> numbers) {
-        return bonusNumber.hasMatchedNumber(numbers);
+    public boolean matchBonusNumber(LottoNumbers lottoNumbers) {
+        return bonusNumber.hasMatchedNumber(lottoNumbers);
     }
 
-    private void assertUniqueBonusNumber(List<Integer> numbers, LottoNumber bonusNumber) {
-        Set<Integer> uniqueNumberSet = new HashSet<>(numbers);
+    private void assertUniqueBonusNumber(LottoNumbers numbers, LottoNumber bonusNumber) {
+        Set<LottoNumber> uniqueNumberSet = new HashSet<>(numbers.getValue());
 
-        if (uniqueNumberSet.contains(bonusNumber.getValue())) {
+        if (uniqueNumberSet.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATED_BONUS_NUMBER_ERROR);
         }
     }

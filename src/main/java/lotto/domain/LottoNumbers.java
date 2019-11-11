@@ -17,24 +17,24 @@ public class LottoNumbers {
 
     public static final int NUMBERS_SIZE = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<LottoNumber> numbers) {
         assertValidNumbers(numbers);
         this.numbers = numbers;
     }
 
-    public List<Integer> getValue() {
+    public List<LottoNumber> getValue() {
         return new ArrayList<>(numbers);
     }
 
-    private void assertValidNumbers(List<Integer> numbers) {
+    private void assertValidNumbers(List<LottoNumber> numbers) {
         assertSize(numbers);
         assertValidRange(numbers);
         assertUnique(numbers);
     }
 
-    private void assertSize(List<Integer> numbers) {
+    private void assertSize(List<LottoNumber> numbers) {
         int size = numbers.size();
         if (size < NUMBERS_SIZE) {
             throw new IllegalArgumentException(LESS_THAN_NUMBER_COUNT_ERROR);
@@ -45,9 +45,10 @@ public class LottoNumbers {
         }
     }
 
-    private void assertValidRange(List<Integer> numbers) {
+    private void assertValidRange(List<LottoNumber> numbers) {
         long invalidRangeNumberCount = numbers
                 .stream()
+                .map(LottoNumber::getValue)
                 .filter(number -> number > MAX_NUMBER || number < MIN_NUMBER)
                 .count();
 
@@ -56,8 +57,8 @@ public class LottoNumbers {
         }
     }
 
-    private void assertUnique(List<Integer> numbers) {
-        Set<Integer> uniqueNumberSet = new HashSet<>(numbers);
+    private void assertUnique(List<LottoNumber> numbers) {
+        Set<LottoNumber> uniqueNumberSet = new HashSet<>(numbers);
         if (uniqueNumberSet.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
