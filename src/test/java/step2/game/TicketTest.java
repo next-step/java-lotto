@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.analyze.Prize;
 import step2.analyze.WinningCount;
+import step2.numbers.WinningLotto;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ class TicketTest {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
         WinningCount winningCount = ticket.checkWinningCount(winningLotto);
         int totalPrizeCount = 0;
-        for (Prize prize : Prize.values()) {
+        for ( Prize prize : Prize.values() ) {
             totalPrizeCount += winningCount.countOfPrize(prize);
         }
         assertThat(totalPrizeCount).isEqualTo(14);

@@ -1,6 +1,7 @@
 package step2.game;
 
 import step2.analyze.WinningCount;
+import step2.numbers.WinningLotto;
 
 import java.util.List;
 
@@ -12,13 +13,13 @@ public class Ticket {
     private ManualGames manualGames;
 
     public Ticket(int autoCount, List<String> manualNumbers) {
-        autoGames = AutoGames.buy(autoCount);
-        manualGames = ManualGames.buy(manualNumbers);
+        autoGames = new AutoGames(autoCount);
+        manualGames = new ManualGames(manualNumbers);
     }
 
     public static int verifyAutoCount(int amount, int manualCount) {
         int lottoCount = buyLottoGames(amount);
-        if (manualCount > lottoCount) {
+        if ( manualCount > lottoCount ) {
             throw new IllegalArgumentException(MANUAL_AMOUNT_EXCEPTION);
         }
         return lottoCount - manualCount;
@@ -30,7 +31,7 @@ public class Ticket {
     }
 
     private static void verifyAmount(int amount) {
-        if (amount % LOTTO_PRICE != 0 || amount < LOTTO_PRICE) {
+        if ( amount % LOTTO_PRICE != 0 || amount < LOTTO_PRICE ) {
             throw new IllegalArgumentException(AMOUNT_EXCEPTION);
         }
     }

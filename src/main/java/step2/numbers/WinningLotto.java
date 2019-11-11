@@ -1,4 +1,4 @@
-package step2.game;
+package step2.numbers;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class WinningLotto {
         return numbers.contains(integer);
     }
 
-    boolean hasBonus(List<Number> userLotto) {
+    public boolean hasBonus(List<Number> userLotto) {
         return userLotto.contains(bonusNumber);
     }
 }

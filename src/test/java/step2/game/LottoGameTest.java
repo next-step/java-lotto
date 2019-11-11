@@ -5,6 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import step2.numbers.LottoGame;
+import step2.numbers.Number;
+import step2.numbers.WinningLotto;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,21 +19,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoGameTest {
-    private LottoGame lottoGame;
+    private AutoGames lottoGame;
     private List<Integer> numbers;
     private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
-        lottoGame = new LottoGame();
-        String lottoNumbers = lottoGame.toString();
-        numbers = Arrays.stream(lottoNumbers.trim()
-                .split(","))
-                .map(num -> Integer.parseInt(num.trim()))
-                .collect(toList());
+        lottoGame = new AutoGames(1);
+        String lottoNumbers = lottoGame.toString(0);
+        numbers = Arrays.stream(lottoNumbers.trim().split(",")).map(num -> Integer.parseInt(num.trim())).collect(toList());
         winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
-
-
     }
 
     @Test
@@ -42,22 +40,14 @@ class LottoGameTest {
     @Test
     @DisplayName("수동 로또 생성")
     void createManualLottoTest() {
-        List<Number> numbers = IntStream.rangeClosed(1, 6).boxed().map(Number::valueOf).collect(toList());
-        assertThat(LottoGame.ofManual(numbers)
-                .matchWinningNumberCount(winningLotto))
-                .isEqualTo(6);
-
+        List<Number> numbers = IntStream.rangeClosed(1, 6).boxed().map(Number :: valueOf).collect(toList());
+        assertThat(new LottoGame(numbers).matchWinningNumberCount(winningLotto)).isEqualTo(6);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "1, 2, 3, 4, 5, 6, 7",
-            "-10, 3, 4, 5, 6, 7",
-            "1, 2",
-            "1, 2, 3, 4, 5, 46"
-    })
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 6, 7", "-10, 3, 4, 5, 6, 7", "1, 2", "1, 2, 3, 4, 5, 46"})
     @DisplayName("수동 로또 선택 시 유효성 검증")
     void ofManual(String inputNumbers) {
-        assertThrows(IllegalArgumentException.class, () -> ManualGames.buy(Collections.singletonList(inputNumbers)));
+        assertThrows(IllegalArgumentException.class, () -> new ManualGames(Collections.singletonList(inputNumbers)));
     }
 }

@@ -2,33 +2,44 @@ package step2.game;
 
 import step2.analyze.Prize;
 import step2.analyze.WinningCount;
+import step2.numbers.LottoGame;
+import step2.numbers.Number;
+import step2.numbers.WinningLotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import static step2.numbers.Number.createVerifiedNumbers;
+
 public class AutoGames {
+    static final int NUMBER_COUNT = 6;
+    private static final List<Number> balls = createVerifiedNumbers();
+    private static final int START_INDEX = 0;
     private List<LottoGame> games;
 
-    private AutoGames() {
+    public AutoGames(int autoCount) {
         games = new ArrayList<>();
-    }
-
-    public static AutoGames buy(int autoCount) {
-        AutoGames autoGames = new AutoGames();
-        for (int count = 0; count < autoCount; count++) {
-            autoGames.addGame();
+        for ( int count = 0; count < autoCount; count++ ) {
+            addGame();
         }
-        return autoGames;
     }
 
     private void addGame() {
-        games.add(LottoGame.ofRandom());
+        games.add(new LottoGame(pickRandomNumbers()));
+    }
+
+    private List<Number> pickRandomNumbers() {
+        Collections.shuffle(balls);
+        List<Number> number = new ArrayList<>(balls.subList(START_INDEX, NUMBER_COUNT));
+        number.sort(Number :: compareTo);
+        return number;
     }
 
     public void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
-        for (LottoGame lottoGame : games) {
-            Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
-                    lottoGame.containsBonus(winningLotto));
+        for ( LottoGame lottoGame : games ) {
+            Prize prize
+                    = Prize.of(lottoGame.matchWinningNumberCount(winningLotto), lottoGame.containsBonus(winningLotto));
             winningCount.addCount(prize);
         }
     }

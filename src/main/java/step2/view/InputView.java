@@ -34,7 +34,7 @@ public class InputView {
         scanner.nextLine();
         System.out.println(MANUAL_LOTTO_NUMBER);
         List<String> manuals = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
+        for ( int i = 0; i < manualLottoCount; i++ ) {
             manuals.add(scanner.nextLine());
         }
         return manuals;
@@ -51,7 +51,7 @@ public class InputView {
     }
 
     private static void verifyInputNumber(int inputNumber, int minValue) {
-        if (inputNumber < minValue) {
+        if ( inputNumber < minValue ) {
             throw new IllegalArgumentException(AMOUNT_EXCEPTION);
         }
     }

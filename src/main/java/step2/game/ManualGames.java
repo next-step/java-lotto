@@ -2,35 +2,34 @@ package step2.game;
 
 import step2.analyze.Prize;
 import step2.analyze.WinningCount;
+import step2.numbers.InputNumbersUtil;
+import step2.numbers.LottoGame;
+import step2.numbers.Number;
+import step2.numbers.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualGames extends InputNumber {
+public class ManualGames {
     private List<LottoGame> games;
 
-    private ManualGames() {
-        this.games = new ArrayList<>();
-    }
-
-    public static ManualGames buy(List<String> manualNumbers) {
-        ManualGames manualGames = new ManualGames();
-        for (String manualNumber : manualNumbers) {
-            manualGames.addGame(manualNumber);
+    public ManualGames(List<String> manualNumbers) {
+        games = new ArrayList<>();
+        for ( String manualNumber : manualNumbers ) {
+            addGame(manualNumber);
         }
-        return manualGames;
     }
 
     private void addGame(String manualGame) {
-        List<Number> inputNumbers = toNumberList(manualGame);
-        verifyLottoNumberCount(inputNumbers);
-        games.add(LottoGame.ofManual(inputNumbers));
+        List<Number> inputNumbers = InputNumbersUtil.toNumberList(manualGame);
+        InputNumbersUtil.verifyLottoNumberCount(inputNumbers);
+        games.add(new LottoGame(inputNumbers));
     }
 
     public void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
-        for (LottoGame lottoGame : games) {
-            Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
-                    lottoGame.containsBonus(winningLotto));
+        for ( LottoGame lottoGame : games ) {
+            Prize prize
+                    = Prize.of(lottoGame.matchWinningNumberCount(winningLotto), lottoGame.containsBonus(winningLotto));
             winningCount.addCount(prize);
         }
     }

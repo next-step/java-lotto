@@ -1,7 +1,7 @@
 package step2;
 
 import step2.game.Ticket;
-import step2.game.WinningLotto;
+import step2.numbers.WinningLotto;
 import step2.view.InputView;
 import step2.view.ResultView;
 
