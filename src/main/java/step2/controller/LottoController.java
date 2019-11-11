@@ -20,7 +20,7 @@ public class LottoController {
         String lastWeekWinningInput = InputView.getLastWeekWinningNumbers();
 
         Bonus bonus = InputView.getBonus();
-        Winner winner = lottoService.getWinner(lottoTickets, lastWeekWinningInput, bonus);
+        Winner winner = new Winner(lottoTickets, lastWeekWinningInput, bonus);
 
         ResultView.printWinnerStatistics(winner);
 

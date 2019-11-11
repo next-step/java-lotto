@@ -38,10 +38,4 @@ public class LottoServiceTest {
             lottoService.buyTickets(0);
         });
     }
-
-    @DisplayName("로또 생성")
-    @Test
-    void generateAutoLottoTest() {
-        assertThat(lottoService.getLottoTickets(3).getLottoTickets()).hasSize(3);
-    }
 }
