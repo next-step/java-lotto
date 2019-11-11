@@ -1,8 +1,7 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
@@ -14,36 +13,11 @@ public class LottoTicket {
     public LottoTicket() {
         candidateNumbers.shuffle();
 
-        this.lottoNums = makeAutoNumbers();
+        this.lottoNums = LottoGenerator.makeAutoNumbers(candidateNumbers);
     }
 
     public LottoTicket(List<Integer> lottoNums) {
-        candidateNumbers.shuffle();
-
-        this.lottoNums = makeNumbers(lottoNums);
-    }
-
-    public List<LottoNum> makeNumbers(List<Integer> lottoNums) {
-        List<LottoNum> selectedNums = new ArrayList<>();
-
-        for (int inputLottoNum : lottoNums) {
-            LottoNum lottoNum = new LottoNum(inputLottoNum);
-            selectedNums.add(lottoNum);
-        }
-
-        Collections.sort(selectedNums);
-
-        return selectedNums;
-    }
-
-    public List<LottoNum> makeAutoNumbers() {
-        List<LottoNum> selectedNums;
-
-        selectedNums = candidateNumbers.addRandomNumber();
-
-        Collections.sort(selectedNums);
-
-        return selectedNums;
+        this.lottoNums = LottoGenerator.makeNumbers(lottoNums);
     }
 
     public int countMatchNumber(List<Integer> winnerNums) {
@@ -67,7 +41,7 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        return String.join(LOTTO_NUMS_DELIMITER, String.valueOf(lottoNums));
+        return String.join(LOTTO_NUMS_DELIMITER, String.valueOf(lottoNums.stream().map(LottoNum::getLottoNum).collect(Collectors.toList())));
     }
 
 }
