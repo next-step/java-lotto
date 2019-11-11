@@ -5,6 +5,8 @@ import lotto.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,9 +16,16 @@ public class LottoNumberTest {
     void matchTest() {
         LottoNumber lottoNumber = new LottoNumber(5);
 
-        /*LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5).s);
+        assertThat(lottoNumber.hasMatchedNumber(createLottoNumbers(1, 2, 3, 4, 5, 6))).isTrue();
+        assertThat(lottoNumber.hasMatchedNumber(createLottoNumbers(1, 2, 3, 4, 6, 7))).isFalse();
+    }
 
-        assertThat(lottoNumber.hasMatchedNumber(Arrays.asList(1, 2, 3, 4, 5))).isTrue();
-        assertThat(lottoNumber.hasMatchedNumber(Arrays.asList(1, 2, 3, 4, 6))).isFalse();*/
+    private static LottoNumbers createLottoNumbers(Integer ... numbers) {
+        List<LottoNumber> lottoNumbers = Arrays
+                .stream(numbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new LottoNumbers(lottoNumbers);
     }
 }
