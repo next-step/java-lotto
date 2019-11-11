@@ -1,9 +1,9 @@
 package step2.domain;
 
-import step2.serivce.LottoService;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import static step2.domain.LottoTicket.LOTTO_PRICE;
 
 public class Ranks {
     public static final int WINNING_COUNT = 1;
@@ -25,7 +25,7 @@ public class Ranks {
     }
 
     public Double calculateProfit(int lottoTicketsSize) {
-        int purchaseAmount = lottoTicketsSize * LottoService.LOTTO_PRICE;
+        int purchaseAmount = lottoTicketsSize * LOTTO_PRICE;
         return Double.parseDouble(String.format("%.2f", sumReward() / (double) purchaseAmount));
     }
 

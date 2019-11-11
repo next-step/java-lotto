@@ -2,22 +2,15 @@ package step2.serivce;
 
 import step2.domain.Bonus;
 import step2.domain.LottoTickets;
+import step2.domain.Price;
 import step2.domain.Winner;
 
-import static step2.domain.LottoTicket.LOTTO_PRICE;
-
 public class LottoService {
-    public LottoTickets buyTickets(int price) {
-        checkPrice(price);
+    public LottoTickets buyTickets(int inputPrice) {
+        Price price = new Price(inputPrice);
 
-        int lottoCount = price / LOTTO_PRICE;
+        int lottoCount = price.countLotto();;
         return getLottoTickets(lottoCount);
-    }
-
-    private void checkPrice(int price) {
-        if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다");
-        }
     }
 
     public LottoTickets getLottoTickets(int lottoCount) {
