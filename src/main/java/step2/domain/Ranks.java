@@ -12,7 +12,7 @@ public class Ranks {
 
     private Map<Integer, Integer> ranks = new HashMap<>();
 
-    public Double calculateProfit(int lottoTicketsSize) {
+    public int sumReward() {
         int sum = 0;
 
         for (int matchCount : ranks.keySet()) {
@@ -21,8 +21,12 @@ public class Ranks {
             sum += RankEnum.getReward(matchCount) * countOfMatchTicket;
         }
 
+        return sum;
+    }
+
+    public Double calculateProfit(int lottoTicketsSize) {
         int purchaseAmount = lottoTicketsSize * LottoService.LOTTO_PRICE;
-        return Double.parseDouble(String.format("%.2f", sum / (double) purchaseAmount));
+        return Double.parseDouble(String.format("%.2f", sumReward() / (double) purchaseAmount));
     }
 
     public void countWinning(LottoTicket lottoTicket, int matchCount, Bonus bonus) {
