@@ -7,11 +7,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.analyze.Prize;
 import step2.analyze.WinningCount;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TicketTest {
-    Ticket ticket = new Ticket(14000, 0);
+    Ticket ticket = new Ticket(14, new ArrayList<>());
 
     @Test
     @DisplayName("입력된 금액만큼 로또가 구입되는지 확인")
@@ -35,6 +37,6 @@ class TicketTest {
     @ValueSource(ints = {0, 100, 1450})
     @DisplayName("로또구입시 금액 유효성 검증")
     void verifyAmountTest(int amount) {
-        assertThrows(IllegalArgumentException.class, () -> new Ticket(amount));
+        assertThrows(IllegalArgumentException.class, () -> Ticket.verifyAutoCount(amount, 0));
     }
 }

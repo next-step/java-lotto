@@ -11,10 +11,10 @@ public class LottoApplication {
     public static void main(String[] args) {
         int ticketAmount = InputView.buyTicket();
         int manualLottoCount = InputView.buyManual();
-        Ticket ticket = new Ticket(ticketAmount, manualLottoCount);
+        int autoCount = Ticket.verifyAutoCount(ticketAmount, manualLottoCount);
 
         List<String> manualNumbers = InputView.buyManual(manualLottoCount);
-        ticket.buyManuals(manualNumbers);
+        Ticket ticket = new Ticket(autoCount, manualNumbers);
 
         ResultView.printTickets(ticket);
 
