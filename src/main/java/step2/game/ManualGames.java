@@ -7,29 +7,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualGames {
-    private List<LottoGame> manualGames;
+    private List<LottoGame> games;
 
-    public ManualGames() {
-        this.manualGames = new ArrayList<>();
+    private ManualGames() {
+        this.games = new ArrayList<>();
     }
 
-    public void addGame(ManualGame manualGame) {
-        manualGames.add(manualGame);
+    public static ManualGames buy(List<String> manualNumbers) {
+        ManualGames manualGames = new ManualGames();
+        for (String manualNumber : manualNumbers) {
+            manualGames.addGame(manualNumber);
+        }
+        return manualGames;
     }
 
-    public int size() {
-        return manualGames.size();
+    private void addGame(String manualGame) {
+        games.add(LottoGame.ofManual(manualGame));
     }
 
-    public void getWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
-        for (LottoGame lottoGame : manualGames) {
+    public void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
+        for (LottoGame lottoGame : games) {
             Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
                     lottoGame.containsBonus(winningLotto));
             winningCount.addCount(prize);
         }
     }
 
+    public int size() {
+        return games.size();
+    }
+
     public String toString(int index) {
-        return manualGames.get(index).toString();
+        return games.get(index).toString();
     }
 }

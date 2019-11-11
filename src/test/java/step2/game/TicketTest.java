@@ -39,4 +39,10 @@ class TicketTest {
     void verifyAmountTest(int amount) {
         assertThrows(IllegalArgumentException.class, () -> Ticket.verifyAutoCount(amount, 0));
     }
+
+    @Test
+    @DisplayName("로또구입시 auto구입 금액 확인")
+    void verifyAutoCount() {
+        assertThat(Ticket.verifyAutoCount(14000, 10)).isEqualTo(4);
+    }
 }

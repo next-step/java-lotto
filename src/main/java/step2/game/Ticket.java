@@ -12,14 +12,8 @@ public class Ticket {
     private ManualGames manualGames;
 
     public Ticket(int autoCount, List<String> manualNumbers) {
-        autoGames = new AutoGames();
-        for (int count = 0; count < autoCount; count++) {
-            autoGames.addGame(new AutoGame());
-        }
-        manualGames = new ManualGames();
-        for (String manualNumber : manualNumbers) {
-            manualGames.addGame(new ManualGame(manualNumber));
-        }
+        autoGames = AutoGames.buy(autoCount);
+        manualGames = ManualGames.buy(manualNumbers);
     }
 
     public static int verifyAutoCount(int amount, int manualCount) {
@@ -27,7 +21,7 @@ public class Ticket {
         if (manualCount > lottoCount) {
             throw new IllegalArgumentException(MANUAL_AMOUNT_EXCEPTION);
         }
-        return lottoCount;
+        return lottoCount - manualCount;
     }
 
     private static int buyLottoGames(int amount) {
@@ -51,8 +45,8 @@ public class Ticket {
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
         WinningCount winningCount = new WinningCount();
-        autoGames.getWinningCount(winningCount, winningLotto);
-        manualGames.getWinningCount(winningCount, winningLotto);
+        autoGames.checkWinningCount(winningCount, winningLotto);
+        manualGames.checkWinningCount(winningCount, winningLotto);
         return winningCount;
     }
 

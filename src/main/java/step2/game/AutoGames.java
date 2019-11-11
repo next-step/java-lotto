@@ -7,29 +7,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoGames {
-    private List<LottoGame> autoGames;
+    private List<LottoGame> games;
 
-    public AutoGames() {
-        autoGames = new ArrayList<>();
+    private AutoGames() {
+        games = new ArrayList<>();
     }
 
-    public void getWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
-        for (LottoGame lottoGame : autoGames) {
+    public static AutoGames buy(int autoCount) {
+        AutoGames autoGames = new AutoGames();
+        for (int count = 0; count < autoCount; count++) {
+            autoGames.addGame();
+        }
+        return autoGames;
+    }
+
+    private void addGame() {
+        games.add(LottoGame.ofRandom());
+    }
+
+    public void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
+        for (LottoGame lottoGame : games) {
             Prize prize = Prize.of(lottoGame.matchWinningNumberCount(winningLotto),
                     lottoGame.containsBonus(winningLotto));
             winningCount.addCount(prize);
         }
     }
 
-    public void addGame(AutoGame autoGame) {
-        autoGames.add(autoGame);
-    }
-
     public int size() {
-        return autoGames.size();
+        return games.size();
     }
 
     public String toString(int index) {
-        return autoGames.get(index).toString();
+        return games.get(index).toString();
     }
 }

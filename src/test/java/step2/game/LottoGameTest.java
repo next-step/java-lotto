@@ -3,12 +3,15 @@ package step2.game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoGameTest {
     private LottoGame lottoGame;
@@ -17,7 +20,7 @@ class LottoGameTest {
 
     @BeforeEach
     void setUp() {
-        lottoGame = new AutoGame();
+        lottoGame = new LottoGame();
         String lottoNumbers = lottoGame.toString();
         numbers = Arrays.stream(lottoNumbers.trim()
                 .split(","))
@@ -35,8 +38,20 @@ class LottoGameTest {
     @Test
     @DisplayName("수동 로또 생성")
     void createManualLottoTest() {
-        assertThat(new ManualGame("1, 2, 3, 4, 5, 6")
+        assertThat(LottoGame.ofManual("1, 2, 3, 4, 5, 6")
                 .matchWinningNumberCount(winningLotto))
                 .isEqualTo(6);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1, 2, 3, 4, 5, 6, 7",
+            "-10, 3, 4, 5, 6, 7",
+            "1, 2",
+            "1, 2, 3, 4, 5, 46"
+    })
+    @DisplayName("수동 로또 선택 시 유효성 검증")
+    void ofManual(String inputNumbers) {
+        assertThrows(IllegalArgumentException.class, () -> LottoGame.ofManual(inputNumbers));
     }
 }

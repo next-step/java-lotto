@@ -19,8 +19,8 @@ public class WinningLotto {
                 .map(num -> Integer.parseInt(num.trim()))
                 .map(Number::valueOf)
                 .collect(toList());
-        verifyWinningNumberCount(inputWinningNumbers);
-        verifyWinningNumberOrBonusNumber(inputWinningNumbers, bonusNumber);
+        verifyLottoNumberCount(inputWinningNumbers);
+        verifyLottoNumberOrBonusNumber(inputWinningNumbers, bonusNumber);
         this.numbers = inputWinningNumbers;
         this.bonusNumber = Number.valueOf(bonusNumber);
     }
@@ -33,7 +33,7 @@ public class WinningLotto {
         return userLotto.contains(bonusNumber);
     }
 
-    private void verifyWinningNumberCount(List<Number> inputWinningNumbers) {
+    private void verifyLottoNumberCount(List<Number> inputWinningNumbers) {
         if (inputWinningNumbers.size() != LottoGame.NUMBER_COUNT) {
             throw new IllegalArgumentException(NUMBER_COUNT_EXCEPTION);
         }
@@ -42,7 +42,7 @@ public class WinningLotto {
         }
     }
 
-    private void verifyWinningNumberOrBonusNumber(List<Number> winningNumbers, int bonusNumber) {
+    private void verifyLottoNumberOrBonusNumber(List<Number> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(Number.valueOf(bonusNumber))) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION);
         }
