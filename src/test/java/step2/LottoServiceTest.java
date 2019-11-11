@@ -21,9 +21,7 @@ public class LottoServiceTest {
     @DisplayName("로또 1500원 구매")
     @Test
     void buyLotto1500Test() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            lottoService.buyTickets(1500);
-        });
+        assertThat(lottoService.buyTickets(1500).getLottoTickets()).hasSize(1);
     }
 
 
