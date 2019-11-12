@@ -11,9 +11,6 @@ public class LottoInputView {
     private static final String INPUT_MISMATCH_PURCHASE_AMOUNT = "구입금액을 잘못 입력하였습니다.";
     private static final String INPUT_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String DELIMITER_CHARACTER = ", ";
-//    private static final String EMPTY_STRING = "";
-
-//    private Scanner scanner = new Scanner(System.in);
 
     public int inputPurhaseAmount() {
         Scanner scanner = new Scanner(System.in);
