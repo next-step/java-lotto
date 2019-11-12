@@ -43,7 +43,7 @@ public class LottoGameTest {
 
         double winPercent = Math.round((double) 30005000 / 2000 * 10000) / 100.0;
 
-        assertThat(game.getWinPercent()).isEqualTo(winPercent);
+        assertThat(game.getLottoStatistics().getWinPercents()).isEqualTo(winPercent);
     }
 
 

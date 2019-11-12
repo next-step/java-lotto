@@ -20,7 +20,6 @@ public class LottoController {
         int bonusNumber = inputView.inputBonusNumber();
         game.doGame(text, bonusNumber);
 
-        resultView.printWinCounts(game.getWinCounts());
-        resultView.printWinPercent(game.getWinPercent());
+        resultView.printLottoStatistics(game.getLottoStatistics());
     }
 }

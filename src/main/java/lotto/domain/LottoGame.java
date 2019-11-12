@@ -12,8 +12,7 @@ public class LottoGame {
     static final int TICKET_PRICE = 1000;
 
     private List<LottoTicket> tickets;
-    private int[] winCounts;
-    private double winPercent;
+    private LottoStatistics statistics;
 
     public LottoGame(int money) {
         if (money < TICKET_PRICE) {
@@ -21,12 +20,14 @@ public class LottoGame {
         }
         int ticketCount = money / TICKET_PRICE;
         this.tickets = generateLottoTickets(ticketCount);
+        this.statistics = new LottoStatistics();
     }
 
     public LottoGame(List<String> ticketTexts) {
         this.tickets = ticketTexts.stream()
                 .map(text -> new LottoTicket(text))
                 .collect(Collectors.toList());
+        this.statistics = new LottoStatistics();
     }
 
     public List<String> getTicketsString() {
@@ -46,41 +47,24 @@ public class LottoGame {
     }
 
     public void doGame(String winText, int bonus) {
-        this.winCounts = calculateWinCounts(new WinTicket(winText, bonus));
-        this.winPercent = calculateWinPercent();
+        calculateWinCounts(new WinTicket(winText, bonus));
+        calculateWinPercent();
     }
 
-    private int[] calculateWinCounts(WinTicket winTicket) {
-        int[] winCounts = new int[Rank.values().length];
-
+    private void calculateWinCounts(WinTicket winTicket) {
         for (LottoTicket ticket : tickets) {
             Rank rank = ticket.calculateRank(winTicket);
-            winCounts[rank.ordinal()]++;
+            statistics.updateWinCounts(rank);
         }
-
-        return winCounts;
     }
 
-    private Double calculateWinPercent() {
+    private void calculateWinPercent() {
         BigDecimal consume = new BigDecimal(tickets.size() * TICKET_PRICE);
-        BigDecimal income = new BigDecimal(calculateIncome());
-
-        return income.divide(consume, 4, RoundingMode.FLOOR).multiply(new BigDecimal(100)).doubleValue();
-    }
-
-    private int calculateIncome() {
-        return Arrays.stream(Rank.values())
-                .mapToInt(rank -> rank.getWinMoney() * winCounts[rank.ordinal()])
-                .sum();
-    }
-
-    public int[] getWinCounts() {
-        return winCounts;
-    }
-
-    public double getWinPercent() {
-        return winPercent;
+        statistics.updateWinPercent(consume);
     }
 
 
+    public LottoStatistics getLottoStatistics() {
+        return this.statistics;
+    }
 }

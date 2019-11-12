@@ -1,8 +1,8 @@
 package lotto.view;
 
+import lotto.domain.LottoStatistics;
 import lotto.domain.Rank;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -17,7 +17,12 @@ public class ResultView {
         printNewLine();
     }
 
-    public void printWinCounts(int[] winCounts) {
+    public void printLottoStatistics(LottoStatistics statistics){
+        printWinCounts(statistics.getWinCounts());
+        printWinPercent(statistics.getWinPercents());
+    }
+
+    private void printWinCounts(int[] winCounts) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("--------");
@@ -37,7 +42,7 @@ public class ResultView {
         }
     }
 
-    public void printWinPercent(double winPercent) {
+    private void printWinPercent(double winPercent) {
         System.out.println("총 수익률은" + winPercent + "입니다.");
     }
 
