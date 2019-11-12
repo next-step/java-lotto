@@ -35,16 +35,12 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static final Lotto of(Integer... lottoNumbers) {
-        return new Lotto(Arrays.asList(lottoNumbers));
-    }
-
     public static final Lotto of(String lottoNumbers) {
         return new Lotto(Arrays.stream(lottoNumbers.split(","))
-                            .map(String::trim)
-                            .filter(IS_NUMERIC)
-                            .map(Integer::parseInt)
-                            .collect(Collectors.toList()));
+                .map(String::trim)
+                .filter(IS_NUMERIC)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     private boolean contains(LottoNumber number) {

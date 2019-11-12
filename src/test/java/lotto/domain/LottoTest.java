@@ -34,12 +34,6 @@ public class LottoTest {
     }
 
     @Test
-    void 생성_가변인자() {
-        Lotto lotto = Lotto.of(1,2,3,4,5,6);
-        assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
-    }
-
-    @Test
     void 생성_문자열() {
         Lotto lotto = Lotto.of("1,2,3,4,5,6");
         assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
