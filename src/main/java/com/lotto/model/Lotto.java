@@ -36,11 +36,10 @@ public class Lotto {
         return stringBuilder.toString();
     }
 
-    public int match(WinningLotto winningLotto) {
+    public void match(WinningLotto winningLotto) {
         for (int number : numbers) {
             matchCount += winningLotto.match(number);
         }
-        return matchCount;
     }
 
     public boolean isMatchCount(int matchCount) {
