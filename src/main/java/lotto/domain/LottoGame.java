@@ -46,23 +46,11 @@ public class LottoGame {
     }
 
     public void doGame(String winText, int bonus) {
-        LottoTicket winTicket = new LottoTicket(winText);
-
-        if (!isValidBonus(winTicket, bonus)) {
-            throw new RuntimeException();
-        }
-
-        this.winCounts = calculateWinCounts(winTicket, bonus);
+        this.winCounts = calculateWinCounts(new LottoTicket(winText), LottoNumber.of(bonus));
         this.winPercent = calculateWinPercent();
     }
 
-    private boolean isValidBonus(LottoTicket winTicket, int bonus) {
-        return !(winTicket.contains(bonus)
-                || bonus < NumberGenerator.LOTTO_START_NUM
-                || bonus > NumberGenerator.LOTTO_END_NUM);
-    }
-
-    private int[] calculateWinCounts(LottoTicket winTicket, int bonus) {
+    private int[] calculateWinCounts(LottoTicket winTicket, LottoNumber bonus) {
         int[] winCounts = new int[Rank.values().length];
 
         for (LottoTicket ticket : tickets) {

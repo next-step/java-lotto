@@ -5,7 +5,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,8 +16,14 @@ public class LottoTicketText {
 
     @Test
     void 로또티켓_클래스생성_수동숫자() {
-        LottoTicket lottoTicket2 = new LottoTicket("1,2,3,4,5,6");
-        assertThat(lottoTicket2.toString()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6).toString());
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+
+        List<LottoNumber> numbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            numbers.add(LottoNumber.of(i));
+        }
+
+        assertThat(lottoTicket.toString()).isEqualTo(numbers.toString());
     }
 
     @Test
@@ -24,15 +32,15 @@ public class LottoTicketText {
 
         String text = lottoTicket.toString();
         text = text.substring(1, text.length() - 1);
-        String[] tokens = text.split(",");
+        String[] tokens = text.split(",|\\{|\\}");
 
-        int notNumberCount = (int) Arrays.stream(tokens)
+        int validNumberCount = (int) Arrays.stream(tokens)
+                .filter(token -> (token.length() != 0) && !token.equals(" "))
                 .map(token -> Integer.parseInt(token.trim()))
-                .filter(token -> token < 1 || token > 45)
+                .filter(token -> token >= 1 && token <= 45)
                 .count();
 
-        assertThat(tokens.length).isEqualTo(6);
-        assertThat(notNumberCount).isEqualTo(0);
+        assertThat(validNumberCount).isEqualTo(6);
     }
 
     @ParameterizedTest
@@ -49,7 +57,7 @@ public class LottoTicketText {
         LottoTicket winTicket = new LottoTicket("1,2,3,4,5,6");
         int bonusNumber = 7;
         LottoTicket ticket = new LottoTicket(text);
-        assertThat(ticket.calculateRank(winTicket, bonusNumber)).isEqualTo(rank);
+        assertThat(ticket.calculateRank(winTicket, LottoNumber.of(bonusNumber))).isEqualTo(rank);
     }
 
 

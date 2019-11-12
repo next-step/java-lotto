@@ -4,8 +4,7 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private List<Integer> numbers;
-
+    private List<LottoNumber> numbers;
 
     LottoTicket() {
         this(new NumberGenerator().generateNumbers());
@@ -15,12 +14,11 @@ public class LottoTicket {
         this(new NumberGenerator().generateNumbers(text));
     }
 
-    private LottoTicket(List<Integer> numbers) {
+    private LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-
-    public Rank calculateRank(LottoTicket winNumbers, int bonus) {
+    public Rank calculateRank(LottoTicket winNumbers, LottoNumber bonus) {
         int matchCount = calculateMatchCount(winNumbers);
         boolean bonusMatch = contains(bonus);
 
@@ -33,7 +31,7 @@ public class LottoTicket {
                 .count();
     }
 
-    public boolean contains(int num) {
+    public boolean contains(LottoNumber num) {
         return (numbers.contains(num));
     }
 
