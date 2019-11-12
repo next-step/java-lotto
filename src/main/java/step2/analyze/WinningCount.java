@@ -12,7 +12,7 @@ public class WinningCount {
 
     public WinningCount() {
         winningCount = new LinkedHashMap<>();
-        for (Prize prize : Prize.values()) {
+        for ( Prize prize : Prize.values() ) {
             winningCount.put(prize, 0);
         }
     }
@@ -39,12 +39,10 @@ public class WinningCount {
     private float calculateTotalEarningMoney() {
         return winningCount.keySet().stream()
                 .map(prize -> prize.calculateEarningMoney(winningCount.get(prize)))
-                .reduce(Integer::sum)
-                .orElseThrow(IllegalArgumentException::new);
+                .reduce(Integer :: sum).orElseThrow(IllegalArgumentException :: new);
     }
 
     private int calculateTicketPrice() {
-        return winningCount.values().stream()
-                .reduce(Integer::sum).orElse(0) * Ticket.LOTTO_PRICE;
+        return winningCount.values().stream().reduce(Integer :: sum).orElse(0) * Ticket.LOTTO_PRICE;
     }
 }
