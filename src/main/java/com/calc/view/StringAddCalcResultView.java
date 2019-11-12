@@ -1,4 +1,4 @@
-package com.lotto.view;
+package com.calc.view;
 
 public class StringAddCalcResultView {
 

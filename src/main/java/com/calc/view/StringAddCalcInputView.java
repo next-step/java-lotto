@@ -1,6 +1,6 @@
-package com.lotto.view;
+package com.calc.view;
 
-import com.lotto.model.StringAddCalcInputValidator;
+import com.calc.model.StringAddCalcInputValidator;
 
 import java.util.Scanner;
 

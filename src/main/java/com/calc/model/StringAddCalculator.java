@@ -1,4 +1,4 @@
-package com.lotto.model;
+package com.calc.model;
 
 import com.lotto.constant.StringAddCalculatorConstant;
 

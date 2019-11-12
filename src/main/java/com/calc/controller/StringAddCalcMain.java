@@ -1,8 +1,8 @@
-package com.lotto.controller;
+package com.calc.controller;
 
-import com.lotto.model.StringAddCalculator;
-import com.lotto.view.StringAddCalcInputView;
-import com.lotto.view.StringAddCalcResultView;
+import com.calc.model.StringAddCalculator;
+import com.calc.view.StringAddCalcInputView;
+import com.calc.view.StringAddCalcResultView;
 
 public class StringAddCalcMain {
 

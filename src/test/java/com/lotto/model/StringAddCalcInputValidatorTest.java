@@ -1,5 +1,6 @@
 package com.lotto.model;
 
+import com.calc.model.StringAddCalcInputValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
