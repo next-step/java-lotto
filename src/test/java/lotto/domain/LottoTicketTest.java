@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoTicketText {
+public class LottoTicketTest {
 
     @Test
     void 로또티켓_클래스생성_수동숫자() {
@@ -54,10 +54,9 @@ public class LottoTicketText {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,5,16:THIRD", "1,2,13,14,15,7:MISS"}, delimiter = ':')
     void 로또_등수_계산(String text, Rank rank) {
-        LottoTicket winTicket = new LottoTicket("1,2,3,4,5,6");
         int bonusNumber = 7;
         LottoTicket ticket = new LottoTicket(text);
-        assertThat(ticket.calculateRank(winTicket, LottoNumber.of(bonusNumber))).isEqualTo(rank);
+        assertThat(ticket.calculateRank(new WinTicket("1,2,3,4,5,6", bonusNumber))).isEqualTo(rank);
     }
 
 

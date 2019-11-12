@@ -46,15 +46,15 @@ public class LottoGame {
     }
 
     public void doGame(String winText, int bonus) {
-        this.winCounts = calculateWinCounts(new LottoTicket(winText), LottoNumber.of(bonus));
+        this.winCounts = calculateWinCounts(new WinTicket(winText, bonus));
         this.winPercent = calculateWinPercent();
     }
 
-    private int[] calculateWinCounts(LottoTicket winTicket, LottoNumber bonus) {
+    private int[] calculateWinCounts(WinTicket winTicket) {
         int[] winCounts = new int[Rank.values().length];
 
         for (LottoTicket ticket : tickets) {
-            Rank rank = ticket.calculateRank(winTicket, bonus);
+            Rank rank = ticket.calculateRank(winTicket);
             winCounts[rank.ordinal()]++;
         }
 

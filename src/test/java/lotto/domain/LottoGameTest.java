@@ -27,7 +27,7 @@ public class LottoGameTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 46, 1})
+    @ValueSource(ints = {0, 46})
     void 유효하지_않은_보너스숫자(int bonusNumber) {
         LottoGame lottoGame = new LottoGame(1000);
         assertThatThrownBy(() -> {
