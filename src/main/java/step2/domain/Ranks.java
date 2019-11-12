@@ -7,18 +7,14 @@ import static step2.domain.LottoTicket.LOTTO_PRICE;
 
 public class Ranks {
     public static final int WINNING_COUNT = 1;
-    public static final int BONUS_RANK_INDEX = 7;
-    public static final int BONUS_MATCH_START_COUNT = 5;
 
-    private Map<Integer, Integer> ranks = new HashMap<>();
+    private Map<RankEnum, Integer> ranks = new HashMap<>();
 
     public int sumReward() {
         int sum = 0;
 
-        for (int matchCount : ranks.keySet()) {
-            int countOfMatchTicket = ranks.get(matchCount);
-
-            sum += RankEnum.getReward(matchCount) * countOfMatchTicket;
+        for (RankEnum rank : ranks.keySet()) {
+            sum += rank.getReward() * rank.getMatchCount();
         }
 
         return sum;
@@ -30,19 +26,18 @@ public class Ranks {
     }
 
     public void countWinning(LottoTicket lottoTicket, int matchCount, Bonus bonus) {
-        if (isMatchBouns(lottoTicket, matchCount, bonus)) {
-            ranks.put(BONUS_RANK_INDEX, ranks.getOrDefault(BONUS_RANK_INDEX, 0) + WINNING_COUNT);
+        boolean isBonusMatch = bonus.matchBonusNumber(lottoTicket);
+        if (isBonusMatch) {
+            RankEnum rank = RankEnum.valueOf(matchCount, isBonusMatch);
+            ranks.put(rank, ranks.getOrDefault(rank, 0) + WINNING_COUNT);
             return;
         }
 
-        ranks.put(matchCount, ranks.getOrDefault(matchCount, 0) + WINNING_COUNT);
+        RankEnum rank = RankEnum.valueOf(matchCount, isBonusMatch);
+        ranks.put(rank, ranks.getOrDefault(rank, 0) + WINNING_COUNT);
     }
 
-    public boolean isMatchBouns(LottoTicket lottoTicket, int matchCount, Bonus bonus) {
-        return matchCount == BONUS_MATCH_START_COUNT && bonus.matchBonusNumber(lottoTicket);
-    }
-
-    public int getOrDefault(int hit, int defaultNum) {
+    public int getOrDefault(RankEnum hit, int defaultNum) {
         return ranks.getOrDefault(hit, defaultNum);
     }
 }

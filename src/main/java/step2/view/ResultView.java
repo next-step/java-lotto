@@ -4,9 +4,9 @@ import step2.domain.*;
 
 import java.util.List;
 
-import static step2.domain.Ranks.BONUS_RANK_INDEX;
-
 public class ResultView {
+    private static final int NO_MATCH_REWARD = 0;
+    private static final int FIVE_BONUS_REWARD = 3_000_000;
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.size() + "를 구매했습니다.");
@@ -41,12 +41,16 @@ public class ResultView {
     }
 
     private static void printRank(RankEnum rank, Ranks countOfRanks) {
-        if (rank.getMatchCount() == BONUS_RANK_INDEX) {
-            System.out.println("5개 일치, 보너스 볼 일치 (" + rank.getReward() + "원)- " + countOfRanks.getOrDefault(rank.getMatchCount(), 0) + "개");
+        if (rank.getReward() == NO_MATCH_REWARD) {
             return;
         }
 
-        System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getReward() + "원)- " + countOfRanks.getOrDefault(rank.getMatchCount(), 0) + "개");
+        if (rank.getReward() == FIVE_BONUS_REWARD) {
+            System.out.println("5개 일치, 보너스 볼 일치 (" + rank.getReward() + "원)- " + countOfRanks.getOrDefault(rank, 0) + "개");
+            return;
+        }
+
+        System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getReward() + "원)- " + countOfRanks.getOrDefault(rank, 0) + "개");
     }
 
     private static void newLine() {

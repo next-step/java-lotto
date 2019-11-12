@@ -1,13 +1,14 @@
 package step2.domain;
 
 public enum RankEnum {
+    MISS(0, 0),
     THREE_MATCH(3, 5_000),
     FOUR_MATCH(4, 50_000),
     FIVE_MATCH(5, 1_500_000),
-    FIVE_BONUS(7, 3_000_000),
+    FIVE_BONUS(5, 3_000_000),
     SIX_MATCH(6, 2_000_000_000);
 
-    private static final int NO_REWARD = 0;
+    private static final int WINNING_MIN_COUNT = 3;
 
     private final int matchCount;
     private final int reward;
@@ -17,17 +18,29 @@ public enum RankEnum {
         this.reward = reward;
     }
 
-    public static int getReward(int hitCount) {
-        int result = NO_REWARD;
-
-        for (RankEnum rank : RankEnum.values()) {
-            result += compare(rank, hitCount);
+    public static RankEnum valueOf(int matchCount, boolean isBounsMatch) {
+        if (matchCount < WINNING_MIN_COUNT) {
+            return MISS;
         }
-        return result;
+
+        RankEnum rank = valueOf(matchCount);
+        if (FIVE_BONUS.matchCount(matchCount)) {
+            return isBounsMatch ? FIVE_BONUS : FIVE_MATCH;
+        }
+        return rank;
     }
 
-    private static int compare(RankEnum rank, int hitCount) {
-        return rank.matchCount == hitCount ? rank.reward : 0;
+    private static RankEnum valueOf(int matchCount) {
+        for (RankEnum rank : values()) {
+            if (rank.matchCount(matchCount)) {
+                return rank;
+            }
+        }
+        throw new IllegalArgumentException(matchCount + "는 유효하지 않은 값입니다.");
+    }
+
+    private boolean matchCount(int countOfMatch) {
+        return this.matchCount == countOfMatch;
     }
 
     public int getMatchCount() {

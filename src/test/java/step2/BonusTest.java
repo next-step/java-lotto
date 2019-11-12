@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.domain.Bonus;
 import step2.domain.LottoTicket;
+import step2.domain.RankEnum;
 import step2.domain.Ranks;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static step2.domain.Ranks.BONUS_RANK_INDEX;
 
 public class BonusTest {
     Bonus bonus = new Bonus(45);
@@ -42,6 +42,6 @@ public class BonusTest {
         Ranks ranks = new Ranks();
         ranks.countWinning(lottoTicket, 5, bonus);
 
-        assertThat(ranks.getOrDefault(BONUS_RANK_INDEX,0)).isEqualTo(1);
+        assertThat(ranks.getOrDefault(RankEnum.FIVE_BONUS,0)).isEqualTo(1);
     }
 }

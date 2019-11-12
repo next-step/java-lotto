@@ -45,8 +45,8 @@ public class WinnerTest {
 
     @DisplayName("상금 일치")
     @ParameterizedTest
-    @CsvSource(value = {"3:5000", "4:50000", "5:1500000", "6:2000000000"}, delimiter = ':')
-    void getRewardTest(int hitCount, int reward) {
-        assertThat(RankEnum.getReward(hitCount)).isEqualTo(reward);
+    @CsvSource(value = {"THREE_MATCH:5000", "FOUR_MATCH:50000", "FIVE_MATCH:1500000", "SIX_MATCH:2000000000"}, delimiter = ':')
+    void getRewardTest(String nameOfMatch, int reward) {
+        assertThat(RankEnum.valueOf(nameOfMatch).getReward()).isEqualTo(reward);
     }
 }
