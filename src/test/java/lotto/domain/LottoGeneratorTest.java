@@ -14,10 +14,10 @@ class LottoGeneratorTest {
     }
 
     @Test
-    void generateBonusNo() {
+    void lotto_bonus_no_test() {
         Lotto lotto = Lotto.ofWinningLotto("1,2,3,4,5,6");
         LottoGenerator lottoGenerator = new LottoGenerator();
         int bonus = lottoGenerator.generateBonusNo(lotto);
-        assertThat(lotto.getLottoNumber()).contains(bonus);
+        assertThat(lotto.getLottoNumber()).doesNotContain(bonus);
     }
 }
