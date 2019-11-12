@@ -10,28 +10,19 @@ import org.junit.jupiter.api.Test;
 import lotto.data.LottoNumbers;
 import lotto.data.Lottos;
 import lotto.data.Rank;
+import lotto.data.Winners;
 
 class WinnersTest {
     private Winners winners;
 
     @Test
-    void sort_grade() {
-        Lottos lottos = lottoGenerate(10);
-        LottoNumbers winner = winnerGenerate(0);
-        winners = new Winners(lottos, winner);
-
-        assertThat(winners.getResult().get(Rank.FIRST)).isEqualTo(1);
-        assertThat(winners.getResult().get(Rank.FIFTH)).isEqualTo(1);
-        assertThat(winners.getResult().get(Rank.MISS)).isEqualTo(5);
-    }
-
-    @Test
-    void total_earning() {
+    void calculate_yield() {
         Lottos lottos = lottoGenerate(2);
         LottoNumbers winner = winnerGenerate(0);
-        winners = new Winners(lottos, winner);
+        int bonus = 7;
+        winners = new Winners(lottos, winner, bonus);
 
-        assertThat(winners.totalEarning()).isEqualTo(Rank.FIRST.getPrize() + Rank.SECOND.getPrize());
+        assertThat(winners.calculateYield(2 * 1000)).isEqualTo((Rank.FIRST.getPrize() + Rank.SECOND.getPrize()) / (2 * 1000));
     }
 
     private LottoNumbers winnerGenerate(int weight) {

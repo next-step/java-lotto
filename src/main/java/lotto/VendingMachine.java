@@ -1,28 +1,31 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lotto.data.Lottos;
 
 public class VendingMachine {
-    private LottoPrice lottoPrice;
+    private Wallet wallet;
+    private List<Lotto> manualNumbers;
 
-    public VendingMachine(int budget) {
-        this.lottoPrice = new LottoPrice(budget);
+    public VendingMachine(Wallet wallet, List<Lotto> manualNumbers) {
+        this.wallet = wallet;
+        this.manualNumbers = manualNumbers;
+
+        validate();
     }
 
     public Lottos buy() {
-        List<Lotto> lottos = new ArrayList<>();
-
-        while (lottoPrice.isEnoughBudget()) {
-            lottos.add(new Lotto());
-        }
-
-        return new Lottos(lottos);
+        return new Lottos(wallet, manualNumbers);
     }
 
-    public int getExpend() {
-        return lottoPrice.getExpend();
+    public int calculateSpent() {
+        return wallet.calculateSpent();
+    }
+
+    private void validate() {
+        if (wallet.isBuyable(manualNumbers.size()) == false) {
+            throw new RuntimeException();
+        }
     }
 }
