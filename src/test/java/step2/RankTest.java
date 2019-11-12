@@ -3,6 +3,7 @@ package step2;
 import org.junit.jupiter.api.Test;
 import step2.domain.Bonus;
 import step2.domain.LottoTicket;
+import step2.domain.LottoTickets;
 import step2.domain.Ranks;
 
 import java.util.Arrays;
@@ -14,8 +15,9 @@ public class RankTest {
 
     @Test
     void sumRewardTest() {
-        Ranks ranks = new Ranks();
-        ranks.countWinning(lottoTicket, 3, new Bonus(5));
+        LottoTickets lottoTickets = LottoTickets.of(lottoTicket);
+
+        Ranks ranks = new Ranks(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6), new Bonus(7));
 
         assertThat(ranks.sumReward()).isEqualTo(5000);
     }

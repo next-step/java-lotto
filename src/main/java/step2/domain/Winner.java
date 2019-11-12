@@ -6,23 +6,16 @@ import java.util.List;
 public class Winner {
     private static final String WINNING_NUM_DELIMITER = ",";
 
-    private Ranks countOfRanks;
+    private Ranks ranks;
     private Double profit;
 
     public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
-        countOfRanks = new Ranks();
+        List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
 
-        prepareWinner(lottoTickets, lastWeekWinningInput, bonus);
-        getWinner();
+        ranks = new Ranks(lottoTickets, winnerNums, bonus);
 
         int lottoTicketsSize = lottoTickets.size();
         profit = calculateProfit(lottoTicketsSize);
-    }
-
-    private void prepareWinner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
-        List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
-
-        lottoTickets.prepareWinner(winnerNums, bonus, countOfRanks);
     }
 
     private List<Integer> splitWinningNums(String lastWeekWinningInput) {
@@ -38,16 +31,12 @@ public class Winner {
         return winningNums;
     }
 
-    private Winner getWinner() {
-        return this;
-    }
-
     private Double calculateProfit(int lottoTicketsSize) {
-        return countOfRanks.calculateProfit(lottoTicketsSize);
+        return ranks.calculateProfit(lottoTicketsSize);
     }
 
-    public Ranks getCountOfRanks() {
-        return this.countOfRanks;
+    public Ranks getRanks() {
+        return this.ranks;
     }
 
     public String toStringProfit() {

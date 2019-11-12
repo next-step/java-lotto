@@ -6,6 +6,10 @@ import java.util.List;
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
 
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
+
     public LottoTickets(int lottoCount) {
         createLottoTickets(lottoCount);
     }
@@ -18,18 +22,18 @@ public class LottoTickets {
         }
     }
 
+    public static LottoTickets of(LottoTicket lottoTicket) {
+        List<LottoTicket> lotto = new ArrayList<>();
+        lotto.add(lottoTicket);
+
+        return new LottoTickets(lotto);
+    }
+
     public int size() {
         return lottoTickets.size();
     }
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
-    }
-
-    public void prepareWinner(List<Integer> winnerNums, Bonus bonus, Ranks countOfRanks) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.countMatchNumber(winnerNums);
-            countOfRanks.countWinning(lottoTicket, matchCount, bonus);
-        }
     }
 }

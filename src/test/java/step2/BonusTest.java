@@ -2,10 +2,7 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Bonus;
-import step2.domain.LottoTicket;
-import step2.domain.RankEnum;
-import step2.domain.Ranks;
+import step2.domain.*;
 
 import java.util.Arrays;
 
@@ -34,14 +31,5 @@ public class BonusTest {
     @Test
     void matchBonusNumberTest() {
         assertThat(bonus.matchBonusNumber(lottoTicket)).isTrue();
-    }
-
-    @DisplayName("랭킹에 보너스 당첨 등수 추가")
-    @Test
-    void countOfBounsRankTest() {
-        Ranks ranks = new Ranks();
-        ranks.countWinning(lottoTicket, 5, bonus);
-
-        assertThat(ranks.getOrDefault(RankEnum.FIVE_BONUS,0)).isEqualTo(1);
     }
 }

@@ -31,26 +31,41 @@ public class ResultView {
     }
 
     public static void printStatistics(Winner winner) {
-        Ranks countOfRanks = winner.getCountOfRanks();
+        Ranks ranks = winner.getRanks();
 
         for (RankEnum rank : RankEnum.values()) {
-           printRank(rank, countOfRanks);
+           printRank(rank, ranks);
         }
 
         System.out.println("총 수익률은 " + winner.toStringProfit() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
-    private static void printRank(RankEnum rank, Ranks countOfRanks) {
+    private static void printRank(RankEnum rank, Ranks ranks) {
+        StringBuilder bounusMatchBuilder = new StringBuilder();
+        StringBuilder rewardBuilder = new StringBuilder();
+
         if (rank.getReward() == NO_MATCH_REWARD) {
             return;
         }
 
         if (rank.getReward() == FIVE_BONUS_REWARD) {
-            System.out.println("5개 일치, 보너스 볼 일치 (" + rank.getReward() + "원)- " + countOfRanks.getOrDefault(rank, 0) + "개");
+            bounusMatchBuilder.append("5개 일치, 보너스 볼 일치 (");
+            bounusMatchBuilder.append(rank.getReward());
+            bounusMatchBuilder.append("원)- ");
+            bounusMatchBuilder.append(ranks.getOrDefault(rank, 0));
+            bounusMatchBuilder.append("개");
+
+            System.out.println(bounusMatchBuilder.toString());
             return;
         }
 
-        System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getReward() + "원)- " + countOfRanks.getOrDefault(rank, 0) + "개");
+        rewardBuilder.append(rank.getMatchCount());
+        rewardBuilder.append("개 일치 (");
+        rewardBuilder.append(rank.getReward());
+        rewardBuilder.append("원)- ");
+        rewardBuilder.append(ranks.getOrDefault(rank, 0));
+        rewardBuilder.append("개");
+        System.out.println(rewardBuilder);
     }
 
     private static void newLine() {
