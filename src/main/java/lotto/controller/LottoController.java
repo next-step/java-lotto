@@ -12,7 +12,7 @@ public class LottoController {
         ResultView resultView = new ResultView();
 
         int money = inputView.inputGameMoney();
-        LottoGame game = new LottoGame(money);
+        LottoGame game = LottoGame.of(money);
 
         resultView.printMyTicket(game.getTicketsString());
 

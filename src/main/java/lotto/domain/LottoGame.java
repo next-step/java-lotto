@@ -14,20 +14,27 @@ public class LottoGame {
     private List<LottoTicket> tickets;
     private LottoStatistics statistics;
 
-    public LottoGame(int money) {
+    private LottoGame(List<LottoTicket> tickets) {
+        this.tickets = tickets;
+        this.statistics = new LottoStatistics();
+    }
+
+    public static LottoGame of(int money) {
         if (money < TICKET_PRICE) {
             throw new RuntimeException();
         }
         int ticketCount = money / TICKET_PRICE;
-        this.tickets = generateLottoTickets(ticketCount);
-        this.statistics = new LottoStatistics();
+        List<LottoTicket> tickets = generateLottoTickets(ticketCount);
+
+        return new LottoGame(tickets);
     }
 
-    public LottoGame(List<String> ticketTexts) {
-        this.tickets = ticketTexts.stream()
+    public static LottoGame of(List<String> ticketTexts) {
+        List<LottoTicket> tickets = ticketTexts.stream()
                 .map(text -> new LottoTicket(text))
                 .collect(Collectors.toList());
-        this.statistics = new LottoStatistics();
+
+        return new LottoGame(tickets);
     }
 
     public List<String> getTicketsString() {
@@ -38,7 +45,7 @@ public class LottoGame {
         return strings;
     }
 
-    private List<LottoTicket> generateLottoTickets(int ticketCount) {
+    private static List<LottoTicket> generateLottoTickets(int ticketCount) {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             tickets.add(new LottoTicket());
