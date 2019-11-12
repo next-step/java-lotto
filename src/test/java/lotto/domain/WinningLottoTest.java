@@ -40,6 +40,6 @@ class WinningLottoTest {
     @Test
     void match() {
         WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6");
-        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.of("1,2,3,4,5,6")))).contains(WinningLottoAmount.FIRST);
+        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.ofWinningLotto("1,2,3,4,5,6")))).contains(WinningLottoAmount.FIRST);
     }
 }
