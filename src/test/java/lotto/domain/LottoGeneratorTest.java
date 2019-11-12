@@ -12,4 +12,12 @@ class LottoGeneratorTest {
         LottoGenerator lottoGenerator = new LottoGenerator();
         assertThat(lottoGenerator.generate()).hasSize(6);
     }
+
+    @Test
+    void generateBonusNo() {
+        Lotto lotto = Lotto.ofWinningLotto("1,2,3,4,5,6");
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        int bonus = lottoGenerator.generateBonusNo(lotto);
+        assertThat(lotto.getLottoNumber()).contains(bonus);
+    }
 }

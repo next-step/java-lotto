@@ -11,10 +11,13 @@ import java.util.Objects;
  */
 public class WinningLotto {
 
+    private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
     private final Lotto winningLotto;
+    private final int bonusNo;
 
     private WinningLotto(String winningLotto) {
         this.winningLotto = Lotto.ofWinningLotto(winningLotto);
+        this.bonusNo = LOTTO_GENERATOR.generateBonusNo(this.winningLotto);
     }
 
     public static final WinningLotto of(String winningNumbers) {
