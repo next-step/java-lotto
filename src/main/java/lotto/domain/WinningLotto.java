@@ -14,7 +14,7 @@ public class WinningLotto {
     private final Lotto winningLotto;
 
     private WinningLotto(String winningLotto) {
-        this.winningLotto = Lotto.of(winningLotto);
+        this.winningLotto = Lotto.ofWinningLotto(winningLotto);
     }
 
     public static final WinningLotto of(String winningNumbers) {
