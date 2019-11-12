@@ -1,35 +1,26 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoPaper;
-import lotto.domain.CreatableLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private LottoPaper lottoPaper;
     private List<Integer> numbers;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        lotto = new Lotto();
-        lottoPaper = new LottoPaper(3);
-        numbers = lotto.selectLottoNumber(new CreatableLotto() {
-            @Override
-            public List<Integer> makeLotto() {
-                List<Integer> list = new ArrayList<>();
-                list.add(4);
-                list.add(5);
-                list.add(6);
-                list.add(1);
-                list.add(2);
-                list.add(3);
-                return list;
-            }
-        });
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+
+        lotto = new Lotto(numbers);
     }
 
     @Test
@@ -44,11 +35,24 @@ public class LottoTest {
     }
 
     @Test
-    void checkLottoGrade() {
-        int[] winNumber = new int[] {1,2,3,4,5,6};
+    void containsLottoWinNumber() {
         Lotto lotto = new Lotto(numbers);
-        lottoPaper.applyLotto(lotto);
-        lottoPaper.checkLottoGrade(winNumber);
-        assertThat(lotto.getHitCount()).isEqualTo(6);
+        assertThat(lotto.isContainsWinNumber(1)).isTrue();
+        assertThat(lotto.isContainsWinNumber(7)).isFalse();
+    }
+
+    @Test
+    void checkValueWhenHitWinNumber() {
+        Lotto lotto = new Lotto(numbers);
+        assertThat(lotto.getHitCount(1)).isEqualTo(1);
+        assertThat(lotto.getHitCount(6)).isEqualTo(1);
+        assertThat(lotto.getHitCount(7)).isEqualTo(0);
+    }
+
+    @Test
+    void getCountWhenHitWinNumber() {
+        Lotto lotto = new Lotto(numbers);
+        int[] testLottos = new int[] {1,2,3,7,8,9};
+        assertThat(lotto.checkWinNumber(testLottos)).isEqualTo(3);
     }
 }
