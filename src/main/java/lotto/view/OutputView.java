@@ -7,15 +7,16 @@ import lotto.domain.LottoResult;
 import java.util.List;
 
 public class OutputView {
-    private static final String PRINT_GAME_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String PRINT_GAME_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String PRINT_RESULT_MESSAGE = "%d개 일치 (%d원)- %d개";
     private static final String PRINT_RESULT_CONSIDER_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static final String PRINT_RESULT_TITLE = "당첨 통계\n---------";
     private static final String PRINT_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String PRINT_YIELD_UNDER_ZERO_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printGameCount(int lottoSize) {
-        System.out.println(String.format(PRINT_GAME_COUNT_MESSAGE, lottoSize));
+    public static void printGameCount(int lottoSize, int selfNumberCount) {
+        int autoSize = lottoSize - selfNumberCount;
+        System.out.println(String.format(PRINT_GAME_COUNT_MESSAGE, selfNumberCount, autoSize));
     }
 
     public static void printLottos(List<Lotto> lottos) {

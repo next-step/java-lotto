@@ -1,13 +1,12 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.LottoGame;
+import lotto.domain.Lottos;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,8 +16,19 @@ public class LottoGameTest {
     void moneyValidate() {
         int money = 900;
         assertThatThrownBy(() -> {
-            LottoGame lottoGame = new LottoGame(money);
+            Lottos lottos = LottoGame.buyLotto(money);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void addAll() {
+        String[] lottoStrings = {"1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6"};
+        int money = 5000;
+        int expectedSize = money / 1000;
+
+        Lottos lottos = LottoGame.buyLottoWithSelfNumbers(money, Arrays.asList(lottoStrings));
+
+        assertThat(lottos.size()).isEqualTo(expectedSize);
     }
 
     @Test
@@ -27,45 +37,19 @@ public class LottoGameTest {
         int money = 3000;
         int expectedSize = money / 1000;
 
-        LottoGame lottoGame = new LottoGame(money);
+        Lottos lottos = LottoGame.buyLotto(money);
 
-        assertThat(lottoGame.lottoSize()).isEqualTo(expectedSize);
+        assertThat(lottos.size()).isEqualTo(expectedSize);
     }
 
     @Test
-    @DisplayName("LottoRank당 하나씩 결과가 나오는지 확인한다.")
-    void result() {
-        List<Lotto> testLottos = getTestLottos();
+    @DisplayName("당첨 번호와 보너스 번호가 중복되면 IllegalArgumentException이 발생한다.")
+    void checkBonus() {
         String testWinningNumbers = "1, 2, 3, 4, 5, 6";
-        int bonus = 7;
+        int bonus = 6;
 
-        LottoGame lottoGame = new LottoGame(testLottos);
-        WinningLotto winningLotto = new WinningLotto(testWinningNumbers,  bonus);
-
-        LottoResult lottoResult = lottoGame.result(winningLotto);
-        for (LottoRank lottoRank : LottoRank.values()) {
-            assertThat(lottoResult.rankCount(lottoRank)).isEqualTo(1);
-        }
-    }
-
-    private List<Lotto> getTestLottos() {
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(getTestLotto(new int[]{1, 2, 3, 4, 5, 6}));
-        lottos.add(getTestLotto(new int[]{2, 3, 4, 5, 6, 7}));
-        lottos.add(getTestLotto(new int[]{2, 3, 4, 5, 6, 8}));
-        lottos.add(getTestLotto(new int[]{3, 4, 5, 6, 7, 8}));
-        lottos.add(getTestLotto(new int[]{4, 5, 6, 7, 8, 9}));
-        lottos.add(getTestLotto(new int[]{10, 11, 12, 13, 14, 15}));
-
-        return lottos;
-    }
-
-    private Lotto getTestLotto(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-
-        return new Lotto(lottoNumbers);
+        assertThatThrownBy(() -> {
+            WinningLotto winningLotto = new WinningLotto(testWinningNumbers,  bonus);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
