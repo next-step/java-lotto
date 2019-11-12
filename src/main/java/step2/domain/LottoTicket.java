@@ -5,15 +5,12 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
-    private static final LottoCandidate candidateNumbers = new LottoCandidate();
     private static final String LOTTO_NUMS_DELIMITER = ",";
 
     private List<LottoNum> lottoNums;
 
     public LottoTicket() {
-        candidateNumbers.shuffle();
-
-        this.lottoNums = LottoGenerator.makeAutoNumbers(candidateNumbers);
+        this.lottoNums = LottoGenerator.makeAutoNumbers();
     }
 
     public LottoTicket(List<Integer> lottoNums) {
