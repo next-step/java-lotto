@@ -7,7 +7,7 @@ public class StringAddCalculator {
     private static final int BLANK_OUTPUT = 0;
     private static final String NEGATIVE_EXCEPTION_MESSAGE = "Negative number is not allowed";
     private static final String DEFAULT_DELIMITER = ",|:";
-    private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
+    private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
 
     private String expression;
 
@@ -26,7 +26,7 @@ public class StringAddCalculator {
             return Integer.parseInt(expression);
         }
 
-        if(isCustomDelimiter()) {
+        if (isCustomDelimiter()) {
             return plusByCustomDelimiter();
         }
 
@@ -34,10 +34,7 @@ public class StringAddCalculator {
     }
 
     public boolean isBlank() {
-        if (expression == null || expression.isEmpty()) {
-            return true;
-        }
-        return false;
+        return (expression == null || expression.isEmpty());
     }
 
     public boolean isNumeric() {
@@ -50,7 +47,7 @@ public class StringAddCalculator {
     }
 
     private boolean isCustomDelimiter() {
-        return getMatcher(CUSTOM_DELIMITER_PATTERN).find();
+        return getMatcher().find();
     }
 
     public void checkNegative(int operand) {
@@ -75,17 +72,19 @@ public class StringAddCalculator {
     public int plusByCustomDelimiter() {
         int DELIMITER_INDEX = 1;
         int OPERANDS_INDEX = 2;
+        String[] tokens = {};
 
-        Matcher customDelimiterMatcher = getMatcher(CUSTOM_DELIMITER_PATTERN);
+        Matcher customDelimiterMatcher = getMatcher();
 
-        customDelimiterMatcher.find();
-        String customDelimiter = customDelimiterMatcher.group(DELIMITER_INDEX);
-        String[] tokens = customDelimiterMatcher.group(OPERANDS_INDEX).split(customDelimiter);
-
+        if (customDelimiterMatcher.find()) {
+            String customDelimiter = customDelimiterMatcher.group(DELIMITER_INDEX);
+            String expression = customDelimiterMatcher.group(OPERANDS_INDEX);
+            tokens = expression.split(customDelimiter);
+        }
         return plus(tokens);
     }
 
-    private Matcher getMatcher(Pattern pattern) {
+    private Matcher getMatcher() {
         return pattern.matcher(expression);
     }
 

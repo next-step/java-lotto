@@ -1,41 +1,74 @@
 package step2.view;
 
-import step2.domain.LottoTicket;
-import step2.domain.Winner;
+import step2.domain.*;
 
 import java.util.List;
-import java.util.Map;
 
 public class ResultView {
-    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+    private static final int NO_MATCH_REWARD = 0;
+    private static final int FIVE_BONUS_REWARD = 3_000_000;
+
+    public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.size() + "를 구매했습니다.");
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        List<LottoTicket> lottos = lottoTickets.getLottoTickets();
+
+        for (LottoTicket lottoTicket : lottos) {
             printLottoTicket(lottoTicket);
         }
     }
 
-    private void printLottoTicket(LottoTicket lottoTicket) {
-        List<Integer> lottoNums = lottoTicket.getLottoNums();
-
-        System.out.println(String.join(",", String.valueOf(lottoNums)));
+    private static void printLottoTicket(LottoTicket lottoTicket) {
+        System.out.println(lottoTicket.toString());
     }
 
-    public void printWinnerStatistics(Winner winner) {
-        System.out.println("\n당첨통계");
+    public static void printWinnerStatistics(Winner winner) {
+        newLine();
+        System.out.println("당첨통계");
         System.out.println("---------");
 
         printStatistics(winner);
     }
 
-    public void printStatistics(Winner winner) {
-        Map<Integer, Integer> countOfRanks = winner.getCountOfRanks();
+    public static void printStatistics(Winner winner) {
+        Ranks ranks = winner.getRanks();
 
-        System.out.println("3개 일치 (5000원)- " + countOfRanks.getOrDefault(3, 0) + "개");
-        System.out.println("4개 일치 (50000원)- " + countOfRanks.getOrDefault(4, 0) + "개");
-        System.out.println("5개 일치 (1500000원)- " + countOfRanks.getOrDefault(5, 0) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + countOfRanks.getOrDefault(6, 0) + "개");
+        for (RankEnum rank : RankEnum.values()) {
+           printRank(rank, ranks);
+        }
 
-        System.out.println("총 수익률은 " + winner.getProfit() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 " + winner.toStringProfit() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+
+    private static void printRank(RankEnum rank, Ranks ranks) {
+        StringBuilder bounusMatchBuilder = new StringBuilder();
+        StringBuilder rewardBuilder = new StringBuilder();
+
+        if (rank.getReward() == NO_MATCH_REWARD) {
+            return;
+        }
+
+        if (rank.getReward() == FIVE_BONUS_REWARD) {
+            bounusMatchBuilder.append("5개 일치, 보너스 볼 일치 (");
+            bounusMatchBuilder.append(rank.getReward());
+            bounusMatchBuilder.append("원)- ");
+            bounusMatchBuilder.append(ranks.getOrDefault(rank, 0));
+            bounusMatchBuilder.append("개");
+
+            System.out.println(bounusMatchBuilder.toString());
+            return;
+        }
+
+        rewardBuilder.append(rank.getMatchCount());
+        rewardBuilder.append("개 일치 (");
+        rewardBuilder.append(rank.getReward());
+        rewardBuilder.append("원)- ");
+        rewardBuilder.append(ranks.getOrDefault(rank, 0));
+        rewardBuilder.append("개");
+        System.out.println(rewardBuilder);
+    }
+
+    private static void newLine() {
+        System.out.print(System.lineSeparator());
     }
 }

@@ -1,59 +1,44 @@
 package step2.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final int LOTTO_NUM_MIN = 1;
-    private static final int LOTTO_NUM_MAX = 45;
+    public static final int LOTTO_PRICE = 1000;
+    private static final String LOTTO_NUMS_DELIMITER = ",";
 
-    private List<Integer> lottoNums;
-    private List<Integer> candidateNumbers = new ArrayList<>();
+    private List<LottoNum> lottoNums;
 
     public LottoTicket() {
-        this.lottoNums = makeAutoNumbers();
-        checkNumsRange();
+        this.lottoNums = LottoGenerator.makeAutoNumbers();
     }
 
-    public List<Integer> makeAutoNumbers() {
-        makeCandidateNumbers();
-
-        List<Integer> selectedNums = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            selectedNums.add(candidateNumbers.get(i));
-        }
-
-        Collections.sort(selectedNums);
-
-        return selectedNums;
+    public LottoTicket(List<Integer> lottoNums) {
+        this.lottoNums = LottoGenerator.makeNumbers(lottoNums);
     }
 
-    private void makeCandidateNumbers() {
-        for (int i = 1; i <= 45; i++) {
-            candidateNumbers.add(i);
-        }
+    public int countMatchNumber(List<Integer> winnerNums) {
+        long countOfMatchNumber = this.lottoNums.stream()
+                .map(LottoNum::getLottoNum)
+                .filter(winnerNums::contains)
+                .count();
 
-        Collections.shuffle(candidateNumbers);
+        return Math.toIntExact(countOfMatchNumber);
     }
 
-    private void checkNumsRange() {
-        for (int lottoNum : lottoNums) {
-            checkNumRange(lottoNum);
-        }
+    public int size() {
+        return lottoNums.size();
     }
 
-    private void checkNumRange(int lottoNum) {
-        if (!isProperNumRange(lottoNum)) {
-            throw new IllegalArgumentException("Out of range");
-        }
+    public boolean contains(int inputNumber) {
+        return lottoNums.stream()
+            .map(LottoNum::getLottoNum)
+            .anyMatch(number -> number == inputNumber);
     }
 
-    private boolean isProperNumRange(int lottoNum) {
-        return (lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX);
+    @Override
+    public String toString() {
+        return String.join(LOTTO_NUMS_DELIMITER, String.valueOf(lottoNums.stream().map(LottoNum::getLottoNum).collect(Collectors.toList())));
     }
 
-    public List<Integer> getLottoNums() {
-        return this.lottoNums;
-    }
 }
