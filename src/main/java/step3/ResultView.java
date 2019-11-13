@@ -1,5 +1,6 @@
 package step3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,8 +17,14 @@ public class ResultView {
         System.out.println();
     }
 
-    private static void printPurchasedLottos(List<Integer> purchasedLotto) {
-        System.out.println(purchasedLotto);
+//    private static void printPurchasedLottos(List<Integer> purchasedLotto) {
+//        System.out.println(purchasedLotto);
+//    }
+
+    private static void printPurchasedLottos(List<LottoNumber> purchasedLotto) {
+        List<Integer> printLotto = new ArrayList<>();
+        purchasedLotto.forEach(x -> printLotto.add(LottoNumber.valueOf(x)));
+        System.out.println(printLotto);
     }
 
     public static void printAboutRank(Map<Integer, Integer> summaryResult) {
