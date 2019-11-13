@@ -16,11 +16,14 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumbers getNumbers() {
-        return lotto.getLottoNumbers();
+    public LottoRank matchTo(Lotto targetLotto) {
+        return LottoRank.find(
+                lotto.getMatchNumberCount(targetLotto),
+                matchBonusNumber(targetLotto.getLottoNumbers())
+        );
     }
 
-    public boolean matchBonusNumber(LottoNumbers lottoNumbers) {
+    private boolean matchBonusNumber(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
     }
 

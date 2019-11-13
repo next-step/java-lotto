@@ -17,7 +17,7 @@ public class Lottos {
     public LottoRankGroup compareTo(WinningLotto winningLotto) {
         Map<LottoRank, Long> rankGroup = lottos
                 .stream()
-                .map(lotto -> lotto.matchTo(winningLotto))
+                .map(winningLotto::matchTo)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoRankGroup(rankGroup);

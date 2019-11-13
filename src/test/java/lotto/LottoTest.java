@@ -31,11 +31,12 @@ public class LottoTest {
 
     @Test
     void matchLottoNumberTest() {
-        assertThat(LottoProvider.createLotto(1, 2, 3, 4, 5, 6).matchTo(winnerLotto)).isEqualTo(LottoRank.FIRST);
-        assertThat(LottoProvider.createLotto(1, 2, 3, 4, 5, 7).matchTo(winnerLotto)).isEqualTo(LottoRank.SECOND);
-        assertThat(LottoProvider.createLotto(1, 2, 3, 4, 5, 40).matchTo(winnerLotto)).isEqualTo(LottoRank.THIRD);
-        assertThat(LottoProvider.createLotto(1, 2, 3, 4, 20, 40).matchTo(winnerLotto)).isEqualTo(LottoRank.FOURTH);
-        assertThat(LottoProvider.createLotto(1, 2, 9, 12, 20, 40).matchTo(winnerLotto)).isEqualTo(LottoRank.NOT_MATCH);
+        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(LottoRank.FIRST);
+        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 5, 7))).isEqualTo(LottoRank.SECOND);
+        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 5, 40))).isEqualTo(LottoRank.THIRD);
+        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 20, 40))).isEqualTo(LottoRank.FOURTH);
+        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 12, 20, 40))).isEqualTo(LottoRank.FIFTH);
+        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 45, 12, 20, 40))).isEqualTo(LottoRank.NOT_MATCH);
     }
 
     @Test

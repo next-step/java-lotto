@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.Set;
+
 public class Lotto {
 
     private final LottoNumbers lottoNumbers;
@@ -12,18 +15,16 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public LottoRank matchTo(WinningLotto winningLotto) {
-        return LottoRank.find(
-                getMatchNumberCount(winningLotto.getNumbers()),
-                winningLotto.matchBonusNumber(getLottoNumbers())
-        );
-    }
-
-    private long getMatchNumberCount(LottoNumbers targetLottoNumbers) {
-        return targetLottoNumbers
-                .getValue()
+    public long getMatchNumberCount(Lotto targetLotto) {
+        return targetLotto
+                .getNumbers()
                 .stream()
                 .filter(lottoNumbers::contains)
                 .count();
     }
+
+    protected Set<LottoNumber> getNumbers() {
+        return lottoNumbers.getValue();
+    }
+
 }
