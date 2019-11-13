@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"14000,14", "1100,1"})
     void 로또_구입_성공(int gameMoney, int ticketCount) {
-        assertThat(LottoGame.of(gameMoney).getTicketsString().size()).isEqualTo(ticketCount);
+        assertThat(LottoGame.of(gameMoney, new ArrayList<String>()).getTicketsString().size()).isEqualTo(ticketCount);
     }
 
     @Test
@@ -24,12 +25,16 @@ public class LottoGameTest {
         assertThatThrownBy(() -> {
             LottoGame.of(0);
         }).isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> {
+            LottoGame.of(2000, Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,7", "1,2,3,4,5,8"));
+        }).isInstanceOf(RuntimeException.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 유효하지_않은_보너스숫자(int bonusNumber) {
-        LottoGame lottoGame = LottoGame.of(1000);
+        LottoGame lottoGame = LottoGame.of(1000,);
         assertThatThrownBy(() -> {
             lottoGame.doGame("1,2,3,4,5,6", bonusNumber);
         }).isInstanceOf(RuntimeException.class);
@@ -38,7 +43,7 @@ public class LottoGameTest {
     @Test
     void 당첨_확인() {
         List<String> ticketTexts = Arrays.asList("1,2,3,4,5,7", "1,2,3,14,15,17");
-        LottoGame game = LottoGame.of(ticketTexts);
+        LottoGame game = LottoGame.of(2000, ticketTexts);
         game.doGame("1,2,3,4,5,6", 7);
 
         double winPercent = Math.round((double) 30005000 / 2000 * 10000) / 100.0;

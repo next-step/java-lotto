@@ -29,12 +29,23 @@ public class LottoGame {
         return new LottoGame(tickets);
     }
 
-    public static LottoGame of(List<String> ticketTexts) {
+    public static LottoGame of(int money, List<String> ticketTexts) {
+        int manualTicketCount = ticketTexts.size();
+        int autoTicketCount = (money / TICKET_PRICE) - manualTicketCount;
+        if(isMoneyNotEnough(money, autoTicketCount)){
+            throw new RuntimeException();
+        }
+
         List<LottoTicket> tickets = ticketTexts.stream()
                 .map(text -> new LottoTicket(text))
                 .collect(Collectors.toList());
+        tickets.addAll(generateLottoTickets(autoTicketCount));
 
         return new LottoGame(tickets);
+    }
+
+    private static boolean isMoneyNotEnough(int money, int autoTicketCount) {
+        return (money < TICKET_PRICE || autoTicketCount < 0);
     }
 
     public List<String> getTicketsString() {
