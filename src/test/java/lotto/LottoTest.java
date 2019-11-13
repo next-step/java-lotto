@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.LottoProvider;
-import lotto.domain.LottoRank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -20,23 +17,16 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoTest {
 
-    private WinningLotto winnerLotto;
-    private List<Integer> winnerNumbers;
-
-    @BeforeEach
-    void setUp() {
-        winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        winnerLotto = LottoProvider.createWinningLotto(winnerNumbers, 7);
-    }
-
     @Test
-    void matchLottoNumberTest() {
-        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(LottoRank.FIRST);
-        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 5, 7))).isEqualTo(LottoRank.SECOND);
-        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 5, 40))).isEqualTo(LottoRank.THIRD);
-        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 4, 20, 40))).isEqualTo(LottoRank.FOURTH);
-        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 3, 12, 20, 40))).isEqualTo(LottoRank.FIFTH);
-        assertThat(winnerLotto.matchTo(LottoProvider.createLotto(1, 2, 45, 12, 20, 40))).isEqualTo(LottoRank.NOT_MATCH);
+    void matchNumberText() {
+        Lotto lotto = LottoProvider.createLotto(1, 2, 3, 4, 5, 6);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(1, 2, 3, 4, 5, 6))).isEqualTo(6);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(1, 2, 3, 4, 5, 7))).isEqualTo(5);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(1, 2, 3, 4, 7, 8))).isEqualTo(4);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(1, 2, 3, 7, 8, 9))).isEqualTo(3);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(1, 2, 7, 8, 9, 10))).isEqualTo(2);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(1, 7, 8, 9, 10, 11))).isEqualTo(1);
+        assertThat(lotto.getMatchNumberCount(LottoProvider.createLotto(7, 8, 9, 10, 11, 12))).isEqualTo(0);
     }
 
     @Test
@@ -64,19 +54,5 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoProvider.createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
         }).withMessage(WinningLotto.DUPLICATED_BONUS_NUMBER_ERROR);
-    }
-
-    private class LottoArgumentsProvider implements ArgumentsProvider {
-
-        @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-            return Stream.of(
-                    Arguments.of(LottoProvider.createLotto(winnerNumbers)),
-                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 40))),
-                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 20, 40))),
-                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 12, 20, 40))),
-                    Arguments.of(LottoProvider.createLotto(Arrays.asList(1, 2, 9, 12, 20, 40)))
-            );
-        }
     }
 }
