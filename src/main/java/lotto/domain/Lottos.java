@@ -6,8 +6,8 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(Integer count, LottosGenerator lottosGenerator) {
-        this.lottos = lottosGenerator.generate(count);
+    public Lottos(LottosGenerator lottosGenerator) {
+        this.lottos = lottosGenerator.generate();
     }
 
     public List<Lotto> getLottos() {
