@@ -9,7 +9,7 @@ public class Winner {
     private Ranks ranks;
     private Double profit;
 
-    public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, Bonus bonus) {
+    public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, LottoNum bonus) {
         List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
 
         ranks = new Ranks(lottoTickets, winnerNums, bonus);

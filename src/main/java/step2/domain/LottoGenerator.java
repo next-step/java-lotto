@@ -3,6 +3,8 @@ package step2.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static step2.domain.LottoNum.LOTTO_NUM_MAX;
 import static step2.domain.LottoNum.LOTTO_NUM_MIN;
@@ -25,23 +27,17 @@ public class LottoGenerator {
     public static List<LottoNum> makeAutoNumbers() {
         shuffle();
 
-        List<LottoNum> selectedNums;
-
-        selectedNums = addRandomNumber();
+        List<LottoNum> selectedNums = addRandomNumber();
 
         Collections.sort(selectedNums);
         return selectedNums;
     }
 
     public static List<LottoNum> makeNumbers(List<Integer> lottoNums) {
-        List<LottoNum> selectedNums = new ArrayList<>();
-
-        for (int inputLottoNum : lottoNums) {
-            selectedNums.add(new LottoNum(inputLottoNum));
-        }
-
-        Collections.sort(selectedNums);
-        return selectedNums;
+        return lottoNums.stream()
+                .map(inputLottoNum -> new LottoNum(inputLottoNum))
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private static void shuffle() {
@@ -49,11 +45,8 @@ public class LottoGenerator {
     }
 
     private static List<LottoNum> addRandomNumber() {
-        List<LottoNum> selectedNums = new ArrayList<>();
-
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            selectedNums.add(new LottoNum(candidate.get(i)));
-        }
-        return selectedNums;
+        return IntStream.range(0, LOTTO_SIZE)
+                .mapToObj(i -> new LottoNum(candidate.get(i)))
+                .collect(Collectors.toList());
     }
 }

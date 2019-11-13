@@ -19,9 +19,9 @@ public class InputView {
         return sc.next();
     }
 
-    public static Bonus getBonus() {
+    public static int getBonus() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
-        return new Bonus(sc.nextInt());
+        return sc.nextInt();
     }
 }

@@ -22,13 +22,6 @@ public class LottoTickets {
         }
     }
 
-    public static LottoTickets of(LottoTicket lottoTicket) {
-        List<LottoTicket> lotto = new ArrayList<>();
-        lotto.add(lottoTicket);
-
-        return new LottoTickets(lotto);
-    }
-
     public int size() {
         return lottoTickets.size();
     }

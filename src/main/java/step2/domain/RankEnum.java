@@ -50,5 +50,9 @@ public enum RankEnum {
     public int getReward() {
         return reward;
     }
+
+    public boolean checkZeroReward() {
+        return this == RankEnum.MISS;
+    }
 }
 

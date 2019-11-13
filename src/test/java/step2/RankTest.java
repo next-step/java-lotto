@@ -1,12 +1,11 @@
 package step2;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.Bonus;
-import step2.domain.LottoTicket;
-import step2.domain.LottoTickets;
-import step2.domain.Ranks;
+import step2.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,9 +14,12 @@ public class RankTest {
 
     @Test
     void sumRewardTest() {
-        LottoTickets lottoTickets = LottoTickets.of(lottoTicket);
+        List<LottoTicket> lottos = new ArrayList<>();
+        lottos.add(lottoTicket);
 
-        Ranks ranks = new Ranks(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6), new Bonus(7));
+        LottoTickets lottoTickets = new LottoTickets(lottos);
+
+        Ranks ranks = new Ranks(lottoTickets, Arrays.asList(1, 2, 3, 4, 5, 6), new LottoNum(7));
 
         assertThat(ranks.sumReward()).isEqualTo(5000);
     }

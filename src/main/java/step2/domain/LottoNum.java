@@ -1,6 +1,6 @@
 package step2.domain;
 
-public class LottoNum implements Comparable<LottoNum>{
+public class LottoNum implements Comparable<LottoNum> {
     public static final int LOTTO_NUM_MIN = 1;
     public static final int LOTTO_NUM_MAX = 45;
 
@@ -26,11 +26,15 @@ public class LottoNum implements Comparable<LottoNum>{
         return ascSort(inputNum.getLottoNum());
     }
 
-    public int ascSort(int inputNum) {
+    private int ascSort(int inputNum) {
         return lottoNum - inputNum;
     }
 
     public int getLottoNum() {
         return lottoNum;
+    }
+
+    public boolean matchNumber(LottoTicket lottoTicket) {
+        return lottoTicket.contains(lottoNum);
     }
 }
