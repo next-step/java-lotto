@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
 
@@ -40,6 +39,12 @@ class WinningLottoTest {
     @Test
     void match() {
         WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6");
-        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.of("1,2,3,4,5,6")))).contains(WinningLottoAmount.FIRST);
+        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.ofWinningLotto("1,2,3,4,5,6")))).contains(WinningLottoAmount.FIRST);
+    }
+
+    @Test
+    void 로또_2등_테스트() {
+        WinningLotto winningLotto = WinningLotto.createWithBonusNo("1,2,3,4,5,6", 7);
+        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.ofWinningLotto("1,2,3,4,5,7")))).contains(WinningLottoAmount.SECOND);
     }
 }

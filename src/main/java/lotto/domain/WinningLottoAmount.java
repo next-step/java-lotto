@@ -1,12 +1,16 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public enum WinningLottoAmount {
 
     FIFTH(3, 5000),
     FOURTH(4, 50000),
     THIRD(5, 1500000),
+    SECOND(5, 30000000),
     FIRST(6, 2000000000),
     LOSING_TICKET(0, 0);
 
@@ -20,11 +24,19 @@ public enum WinningLottoAmount {
         this.amount = amount;
     }
 
-    public static WinningLottoAmount findWinningAmount(long matchCount) {
+    public static WinningLottoAmount findWinningAmount(long matchCount, boolean matchBonus) {
         return Arrays.stream(values())
-                .filter(lottoWinningAmount -> lottoWinningAmount.matchCount >= WINNING_MIN_COUNT && lottoWinningAmount.matchCount == matchCount)
+                .filter(lottoWinningAmount -> lottoWinningAmount.matchCount == matchCount)
+                .map(lottoWinningAmount -> checkSecond(lottoWinningAmount, matchBonus))
                 .findFirst()
                 .orElse(LOSING_TICKET);
+    }
+
+    private static WinningLottoAmount checkSecond(WinningLottoAmount lottoWinningAmount, boolean matchBonus) {
+        if (lottoWinningAmount.matchCount == SECOND.matchCount && matchBonus) {
+            return WinningLottoAmount.SECOND;
+        }
+        return lottoWinningAmount;
     }
 
     public int getMatchCount() {
@@ -45,7 +57,7 @@ public enum WinningLottoAmount {
         Map<WinningLottoAmount, Long> lottoResult = new LinkedHashMap<>();
         Arrays.stream(WinningLottoAmount.values()).filter(winningAmount -> winningAmount.amount >= WINNING_MIN_COUNT).forEach(winningAmount -> {
             long cnt = winningLottoAmount.stream()
-                    .filter(amount -> amount.isEqualMatchCount(winningAmount.matchCount))
+                    .filter(amount -> amount == winningAmount)
                     .count();
 
             lottoResult.put(winningAmount, cnt);

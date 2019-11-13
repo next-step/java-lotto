@@ -24,6 +24,15 @@ public class LottoGenerator implements LottoNumberStrategy {
         return new ArrayList<>(numbers);
     }
 
+    public int generateBonusNo(Lotto winningLotto) {
+        int bonusNo = getRandomNumberRange(LOTTO_MIN_NUM, LOTTO_MAX_NUM);
+        if (!winningLotto.getLottoNumber().contains(bonusNo)) {
+            return bonusNo;
+        }
+
+        return generateBonusNo(winningLotto);
+    }
+
     private static int getRandomNumberRange(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("max must be greater than min");
