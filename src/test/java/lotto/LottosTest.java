@@ -2,10 +2,12 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.ManualLottosGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,19 +29,13 @@ public class LottosTest {
         lotto = new Lotto(numbers);
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto);
-        this.lottos = new Lottos(3, x -> lottos);
-        this.lottos.getWinningLottoRanks(new int[] {1,2,3,4,5,6}, 7);
+        this.lottos = new Lottos(()-> lottos);
     }
 
     @Test
-    void checkLottoWinNumber() {
-        assertThat(lotto.getLottoNumber()).contains(1,2,3,4,5,6);
+    void 로또_수동_테스트() {
+        List<String> manualLottos = Arrays.asList("1, 2, 3, 4, 5, 6", "10, 11, 12, 13, 14, 15", "5, 6, 7, 8, 9, 10");
+        Lottos lottos = new Lottos(new ManualLottosGenerator(manualLottos));
+        assertThat(lottos.getLottos()).hasSize(3);
     }
-
-    @Test
-    void checkLottoRankTest() {
-        int[] winNumber = new int[] {1,2,3,4,5,6};
-        assertThat(lottos.getWinningLottoRanks(winNumber, 10)).contains(Rank.FIRST);
-    }
-
 }
