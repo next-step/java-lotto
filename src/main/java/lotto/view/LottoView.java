@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.InputTool;
-import lotto.StringUtils;
 import lotto.domain.*;
 
 import java.util.ArrayList;

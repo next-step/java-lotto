@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.Map;
-
 public class Money {
 
     public static final String MONEY_RANGE_ERROR = "구매 금액은 음수가 될 수 없습니다.";

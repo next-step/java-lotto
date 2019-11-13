@@ -3,8 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    // match count 는 필요한 값이지만, winningStrategy 에서 활용하지 못하고 하드코딩하는 것이 아쉽다. (실수 유발 가능)
-    // 상수로 한번더 래핑해서 공용으로 사용할까? enum 이 이미 상수의 역할을 하는데 enum 내부에서 한번더 상수를 선언하는 것이 옳을까?
     FIRST(6, 2_000_000_000, (count, bonusNumber) -> count == 6),
     SECOND(5, 30_000_000, (count, bonusNumber) -> count == 5 && bonusNumber),
     THIRD(5, 1_500_000, (count, bonusNumber) -> count == 5 && !bonusNumber),
