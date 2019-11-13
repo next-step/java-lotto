@@ -13,11 +13,11 @@ public class WinningLotto {
 
     private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
     private final Lotto winningLotto;
-    private final int bonusNo;
+    private final LottoNumber bonusNo;
 
     private WinningLotto(String winningLotto) {
         this.winningLotto = Lotto.ofWinningLotto(winningLotto);
-        this.bonusNo = LOTTO_GENERATOR.generateBonusNo(this.winningLotto);
+        this.bonusNo = LottoNumber.of(LOTTO_GENERATOR.generateBonusNo(this.winningLotto));
     }
 
     public static final WinningLotto of(String winningNumbers) {
@@ -27,7 +27,7 @@ public class WinningLotto {
     public List<WinningLottoAmount> matchLottos(List<Lotto> userLotto) {
         List<WinningLottoAmount> winningLottoAmounts = new ArrayList<>();
         userLotto.forEach(lotto -> {
-            winningLottoAmounts.add(WinningLottoAmount.findWinningAmount(winningLotto.match(lotto)));
+            winningLottoAmounts.add(WinningLottoAmount.findWinningAmount(winningLotto.match(lotto), lotto.matchBonusNo(bonusNo)));
         });
         return winningLottoAmounts;
     }

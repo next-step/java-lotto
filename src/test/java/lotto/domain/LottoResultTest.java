@@ -17,7 +17,7 @@ class LottoResultTest {
     void 로또_상금_구하기_테스트() {
         LottoResult lottoResult = new LottoResult("1,2,3,4,5,6");
         assertThat(lottoResult.getWinningLottoAmount(
-                        Arrays.asList(Lotto.of(Arrays.asList(1, 2, 3, 4, 6)), Lotto.of(Arrays.asList(13, 11, 12, 15, 16, 18))))
+                        Arrays.asList(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), Lotto.of(Arrays.asList(13, 11, 12, 15, 16, 18))))
         ).contains(WinningLottoAmount.FIRST);
     }
 
