@@ -16,13 +16,7 @@ public class Money {
     }
 
     public double getProfitRate(LottoRankGroup rankGroup) {
-        long totalProfit = rankGroup.getValue()
-                .entrySet()
-                .stream()
-                .map(e -> e.getKey().getWinning() * e.getValue())
-                .reduce(0L, Long::sum);
-
-        return totalProfit / money;
+        return rankGroup.getTotalProfit() / money;
     }
 
     public int getLottoCount() {

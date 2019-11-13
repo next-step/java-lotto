@@ -13,14 +13,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public boolean hasMatchedNumber(LottoNumbers lottoNumbers) {
-        return lottoNumbers
-                .getValue()
-                .stream()
-                .map(LottoNumber::getValue)
-                .anyMatch(number -> this.number == number);
-    }
-
     public int getValue() {
         return number;
     }

@@ -62,4 +62,8 @@ public class LottoNumbers {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
 }

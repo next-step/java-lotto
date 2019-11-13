@@ -23,7 +23,7 @@ public class Lotto {
         return targetLottoNumbers
                 .getValue()
                 .stream()
-                .filter(lottoNumbers.getValue()::contains)
+                .filter(lottoNumbers::contains)
                 .count();
     }
 }

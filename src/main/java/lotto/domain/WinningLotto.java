@@ -21,7 +21,7 @@ public class WinningLotto {
     }
 
     public boolean matchBonusNumber(LottoNumbers lottoNumbers) {
-        return bonusNumber.hasMatchedNumber(lottoNumbers);
+        return lottoNumbers.contains(bonusNumber);
     }
 
     private void assertUniqueBonusNumber(LottoNumbers numbers, LottoNumber bonusNumber) {

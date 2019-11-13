@@ -100,7 +100,7 @@ public class LottoView {
         Arrays.stream(LottoRank.values())
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
-                    Long rankCount = rankGroup.getValue().get(rank);
+                    Long rankCount = rankGroup.getRankCount(rank);
                     drawText(String.format(MATCH_RESULT_TEXT, rank.getMatchCount(), rank.getWinning(), rankCount == null ? 0 : rankCount));
                 });
     }
