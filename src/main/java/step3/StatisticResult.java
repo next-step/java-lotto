@@ -17,10 +17,10 @@ public class StatisticResult {
         }
     }
 
-    public StatisticResult(List<Integer> resultMatching) {
+    public StatisticResult(List<LottoNumber> resultMatching) {
         int index = 0;
-        for (int value : resultMatching) {
-            this.statisticResult.put(index, value);
+        for (LottoNumber value : resultMatching) {
+            this.statisticResult.put(index, LottoNumber.valueOf(value));
             index++;
         }
     }
@@ -37,17 +37,18 @@ public class StatisticResult {
         return statisticResult.statisticResult;
     }
 
-    public static Map<Integer, Integer> lottosInRank(List<Integer> resultMatching) {
-        List<Integer> winningLottos = resultMatching.stream().filter(x -> x >= MATCHING_LIMIT).collect(Collectors.toList());
+    public static Map<Integer, Integer> lottosInRank(List<LottoNumber> resultMatching) {
+        List<LottoNumber> winningLottos = resultMatching.stream().filter(x -> LottoNumber.valueOf(x) >= MATCHING_LIMIT).collect(Collectors.toList());
         Collections.sort(winningLottos);
 
         return countByRank(winningLottos);
     }
 
-    private static Map<Integer, Integer> countByRank(List<Integer> winningLottos) {
+    private static Map<Integer, Integer> countByRank(List<LottoNumber> winningLottos) {
         Map<Integer, Integer> summaryResult = beforeInstance(new StatisticResult());
-        for (int key : winningLottos) {
-            summaryResult.put(key, summaryResult.get(key) + 1);
+        for (LottoNumber key : winningLottos) {
+            int lottoKey = LottoNumber.valueOf(key);
+            summaryResult.put(lottoKey, summaryResult.get(lottoKey) + 1);
         }
         return summaryResult;
     }
