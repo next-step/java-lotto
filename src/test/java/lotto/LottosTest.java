@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.AutoLottosGenerator;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.ManualLottosGenerator;
@@ -37,5 +38,15 @@ public class LottosTest {
         List<String> manualLottos = Arrays.asList("1, 2, 3, 4, 5, 6", "10, 11, 12, 13, 14, 15", "5, 6, 7, 8, 9, 10");
         Lottos lottos = new Lottos(new ManualLottosGenerator(manualLottos));
         assertThat(lottos.getLottos()).hasSize(3);
+    }
+
+    @Test
+    void 수동_자동_로또_리스트_합치기() {
+        List<String> manualLottosNumber = Arrays.asList("1, 2, 3, 4, 5, 6", "10, 11, 12, 13, 14, 15", "5, 6, 7, 8, 9, 10");
+        Lottos manualLottos = new Lottos(new ManualLottosGenerator(manualLottosNumber));
+        Lottos autoLottos = new Lottos(new AutoLottosGenerator(5));
+        List<Lotto> lottos = new ArrayList<>(manualLottos.getLottos());
+        lottos.addAll(autoLottos.getLottos());
+        assertThat(lottos).hasSize(8);
     }
 }
