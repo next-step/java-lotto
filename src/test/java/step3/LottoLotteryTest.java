@@ -7,23 +7,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoLotteryTest {
 
-    private List<Integer> lottoWinningNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoWinningNumbers = new ArrayList<>();
     private Map<Integer, Integer> resultMatching = new HashMap<>();
 
     @BeforeEach
     void setUp() {
-        lottoWinningNumbers.add(0, 2);
-        lottoWinningNumbers.add(1, 6);
-        lottoWinningNumbers.add(2, 10);
-        lottoWinningNumbers.add(3, 27);
-        lottoWinningNumbers.add(4, 31);
-        lottoWinningNumbers.add(5, 42);
+        lottoWinningNumbers.add(0, new LottoNumber(2));
+        lottoWinningNumbers.add(1, new LottoNumber(2));
+        lottoWinningNumbers.add(2, new LottoNumber(10));
+        lottoWinningNumbers.add(3, new LottoNumber(27));
+        lottoWinningNumbers.add(4, new LottoNumber(31));
+        lottoWinningNumbers.add(5, new LottoNumber(42));
 
         resultMatching.put(0, 5);
         resultMatching.put(1, 0);
         resultMatching.put(2, 0);
 
-        Lotto.lottoBonusNumber = lottoWinningNumbers.get(5);
+        LottoNumber.lottoBonusNumber = LottoNumber.valueOf(lottoWinningNumbers.get(5));
     }
 
     @DisplayName("보너스 당첨 여부 확인")

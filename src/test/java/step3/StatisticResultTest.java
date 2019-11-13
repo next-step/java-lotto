@@ -6,16 +6,16 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StatisticResultTest {
-    private List<Integer> resultMatching = new ArrayList<>();
+    private List<LottoNumber> resultMatching = new ArrayList<>();
     private Map<Integer, Integer> summaryResult = new HashMap<>();
 
     @BeforeEach
     void setUp(){
-        resultMatching.add(0, 1);
-        resultMatching.add(1, 4);
-        resultMatching.add(2, 0);
-        resultMatching.add(3, 4);
-        resultMatching.add(4, 1);
+        resultMatching.add(0, new LottoNumber(1, false));
+        resultMatching.add(1, new LottoNumber(4, false));
+        resultMatching.add(2, new LottoNumber(0, false));
+        resultMatching.add(3, new LottoNumber(4, false));
+        resultMatching.add(4, new LottoNumber(1, false));
 
         summaryResult.put(3, 0);
         summaryResult.put(4, 2);
