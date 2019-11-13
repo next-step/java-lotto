@@ -34,7 +34,7 @@ public class LottoGameTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void 유효하지_않은_보너스숫자(int bonusNumber) {
-        LottoGame lottoGame = LottoGame.of(1000,);
+        LottoGame lottoGame = LottoGame.of(1000);
         assertThatThrownBy(() -> {
             lottoGame.doGame("1,2,3,4,5,6", bonusNumber);
         }).isInstanceOf(RuntimeException.class);

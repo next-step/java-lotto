@@ -7,9 +7,10 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printMyTicket(List<String> toStringTickets) {
+    public void printMyTicket(List<String> toStringTickets, int manualTicketCount) {
         int ticketCount = toStringTickets.size();
-        System.out.println(ticketCount + "개를 구매했습니다.");
+        int autoTicketCount = ticketCount - manualTicketCount;
+        System.out.println("수동으로 " + autoTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
 
         for (String ticketToString : toStringTickets) {
             System.out.println(ticketToString);
@@ -17,7 +18,7 @@ public class ResultView {
         printNewLine();
     }
 
-    public void printLottoStatistics(LottoStatistics statistics){
+    public void printLottoStatistics(LottoStatistics statistics) {
         printWinCounts(statistics.getWinCounts());
         printWinPercent(statistics.getWinPercents());
     }
@@ -34,7 +35,7 @@ public class ResultView {
             if (rank == Rank.MISS) {
                 continue;
             }
-            if (rank == Rank.MISS.SECOND) {
+            if (rank == Rank.SECOND) {
                 result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts[i]);
             }
 

@@ -32,7 +32,7 @@ public class LottoGame {
     public static LottoGame of(int money, List<String> ticketTexts) {
         int manualTicketCount = ticketTexts.size();
         int autoTicketCount = (money / TICKET_PRICE) - manualTicketCount;
-        if(isMoneyNotEnough(money, autoTicketCount)){
+        if (isMoneyNotEnough(money, autoTicketCount)) {
             throw new RuntimeException();
         }
 

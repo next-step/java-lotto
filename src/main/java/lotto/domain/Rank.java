@@ -32,7 +32,7 @@ public enum Rank {
 
     public static Rank findByOrder(int order) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.ordinal() == order)
+                .filter(rank -> rank.getWinOrder() == order)
                 .findFirst()
                 .orElse(MISS);
     }
