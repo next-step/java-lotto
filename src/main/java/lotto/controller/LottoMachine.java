@@ -43,9 +43,7 @@ public class LottoMachine {
         lottoView.showSelectedLottoNumberQuestion();
 
         List<Lotto> totalLottos = new ArrayList<>();
-        for (int i = 0; i < manuallySelectedLottoCount; i++) {
-            totalLottos.add(LottoProvider.createLotto(lottoView.getNumbers()));
-        }
+        totalLottos.addAll(LottoProvider.createLottos(lottoView.getManuallySelectedLottos(manuallySelectedLottoCount)));
         totalLottos.addAll(LottoProvider.createLottos(autoSelectedLottoCount));
 
         Lottos lottos = new Lottos(totalLottos);
@@ -55,9 +53,9 @@ public class LottoMachine {
     }
 
     private LottoRankGroup findWinningLotto(LottoView lottoView, Lottos lottos) {
-        List<Integer> winningNumbers = lottoView.getWinningNumbers();
+        String winningNumberText = lottoView.getWinningNumbers();
         int winningBonusNumber = lottoView.getWinningBonusNumber();
-        WinningLotto winningLotto = LottoProvider.createWinningLotto(winningNumbers, winningBonusNumber);
+        WinningLotto winningLotto = LottoProvider.createWinningLotto(winningNumberText, winningBonusNumber);
 
         return lottos.compareTo(winningLotto);
     }

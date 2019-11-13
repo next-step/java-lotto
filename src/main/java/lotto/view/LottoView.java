@@ -1,8 +1,10 @@
 package lotto.view;
 
 import lotto.InputTool;
+import lotto.StringUtils;
 import lotto.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -27,10 +29,6 @@ public class LottoView {
     private static final String LOTTO_NUMBER_POSTFIX = "]";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private static final String COMMA = ",";
-    private static final String BLANK = " ";
-    private static final String EMPTY = "";
-
     private static LottoView lottoView;
 
     private final InputTool inputTool;
@@ -44,11 +42,11 @@ public class LottoView {
         return inputTool.readLineToInt();
     }
 
-    public List<Integer> getWinningNumbers() {
+    public String getWinningNumbers() {
         newLine();
         drawText(WIN_QUESTION_TEXT);
 
-        return getNumbers();
+        return inputTool.readLine();
     }
 
     public int getWinningBonusNumber() {
@@ -65,19 +63,12 @@ public class LottoView {
         return inputTool.readLineToInt();
     }
 
-    public List<Integer> getNumbers() {
-        String[] texts = splitBy(COMMA, inputTool.readLine());
-        return Arrays.stream(texts)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
-    }
-
-    private String[] splitBy(String regex, String text) {
-        return removeBlank(text).split(regex);
-    }
-
-    private String removeBlank(String text) {
-        return text.replace(BLANK, EMPTY);
+    public List<String> getManuallySelectedLottos(int count) {
+        List<String> lottoTexts = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoTexts.add(inputTool.readLine());
+        }
+        return lottoTexts;
     }
 
     public void showLottoNumbers(Lottos lottos, int autoSelectedCount, int manuallySelectedCount) {
