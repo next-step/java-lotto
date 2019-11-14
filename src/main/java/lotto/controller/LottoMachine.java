@@ -3,8 +3,8 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class LottoMachine {
 
@@ -14,10 +14,13 @@ public class LottoMachine {
 
     public void start(LottoView lottoView) {
         try {
-            Money money = getMoney(lottoView);
+            Money money = new Money(lottoView.getMoney());
             Lottos lottos = createLottoNumbers(lottoView, money);
 
-            findWinningLotto(lottoView, money, lottos);
+            LottoRankGroup rankGroup = findWinningLotto(lottoView, lottos);
+
+            lottoView.showRankResult(rankGroup);
+            lottoView.showProfitRate(money.getProfitRate(rankGroup));
         } catch (NumberFormatException exception) {
             lottoView.showConvertNumberError();
             restart(lottoView);
@@ -32,25 +35,29 @@ public class LottoMachine {
         start(lottoView);
     }
 
-    private Money getMoney(LottoView lottoView) {
-       return new Money(lottoView.getMoney());
-    }
-
     private Lottos createLottoNumbers(LottoView lottoView, Money money) {
-        Lottos lottos = new Lottos(money.getLottoCount());
-        lottoView.showLottoNumbers(lottos);
+        int totalLottoCount = money.getLottoCount();
+        int manuallySelectedLottoCount = lottoView.getManuallySelectedLottoCount();
+        int autoSelectedLottoCount = totalLottoCount - manuallySelectedLottoCount;
+
+        lottoView.showSelectedLottoNumberQuestion();
+
+        List<Lotto> totalLottos = new ArrayList<>();
+        totalLottos.addAll(LottoProvider.createLottos(lottoView.getManuallySelectedLottos(manuallySelectedLottoCount)));
+        totalLottos.addAll(LottoProvider.createLottos(autoSelectedLottoCount));
+
+        Lottos lottos = new Lottos(totalLottos);
+        lottoView.showLottoNumbers(lottos, manuallySelectedLottoCount, autoSelectedLottoCount);
 
         return lottos;
     }
 
-    private void findWinningLotto(LottoView lottoView, Money money, Lottos lottos) {
-        List<Integer> winningNumbers = lottoView.getWinningNumbers();
+    private LottoRankGroup findWinningLotto(LottoView lottoView, Lottos lottos) {
+        String winningNumberText = lottoView.getWinningNumbers();
         int winningBonusNumber = lottoView.getWinningBonusNumber();
+        WinningLotto winningLotto = LottoProvider.createWinningLotto(winningNumberText, winningBonusNumber);
 
-        LottoRankGroup rankGroup = lottos.getRankGroup(new LottoNumber(winningNumbers, winningBonusNumber));
-
-        lottoView.showRankResult(rankGroup);
-        lottoView.showProfitRate(money.getProfitRate(rankGroup));
+        return lottos.compareTo(winningLotto);
     }
 
     public static LottoMachine getInstance() {

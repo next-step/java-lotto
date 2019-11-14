@@ -3,10 +3,10 @@ package lotto.view;
 import lotto.InputTool;
 import lotto.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoView {
@@ -14,10 +14,12 @@ public class LottoView {
     private static final String ERROR_MESSAGE_FORMAT = "오류가 발생했습니다. 원인 : %s";
     private static final String CONVERT_NUMBER_ERROR = "숫자만 입력이 가능합니다.";
     private static final String PURCHASE_QUESTION_TEXT = "구입금액을 입력해 주세요.";
-    private static final String PURCHASE_RESULT_TEXT = "%s개를 구매했습니다.";
+    private static final String PURCHASE_RESULT_TEXT = "수동으로 %d 개, 자동으로 %d 개 구매했습니다.";
     private static final String WIN_QUESTION_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String WIN_RESULT_TEXT = "당첨통계\n----------";
     private static final String BONUS_NUMBER_QUESTION_TEXT = "보너스 번호를 입력해 주세요.";
+    private static final String MANUALLY_LOTTO_COUNT_QUESTION_TEXT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUALLY_LOTTO_NUMBER_QUESTION_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String MATCH_RESULT_TEXT = "%d개 일치 (%d원)- %d개";
     private static final String PROFIT_RATE_RESULT_TEXT = "총 수익률은 %.2f 입니다.";
     private static final String RESTART_TEXT = "재시작...\n";
@@ -39,12 +41,11 @@ public class LottoView {
         return inputTool.readLineToInt();
     }
 
-    public List<Integer> getWinningNumbers() {
+    public String getWinningNumbers() {
         newLine();
         drawText(WIN_QUESTION_TEXT);
 
-        String[] lottoNumberTexts = inputTool.readLine().replace(" ", "").split(",");
-        return textsToNumbers(lottoNumberTexts);
+        return inputTool.readLine();
     }
 
     public int getWinningBonusNumber() {
@@ -52,28 +53,40 @@ public class LottoView {
         return inputTool.readLineToInt();
     }
 
-    private List<Integer> textsToNumbers(String[] texts) {
-        return Arrays.stream(texts)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
+    public void showSelectedLottoNumberQuestion() {
+        drawText(MANUALLY_LOTTO_NUMBER_QUESTION_TEXT);
     }
 
-    public void showLottoNumbers(Lottos lottos) {
-        drawText(String.format(PURCHASE_RESULT_TEXT, lottos.size()));
+    public int getManuallySelectedLottoCount() {
+        drawText(MANUALLY_LOTTO_COUNT_QUESTION_TEXT);
+        return inputTool.readLineToInt();
+    }
+
+    public List<String> getManuallySelectedLottos(int count) {
+        List<String> lottoTexts = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoTexts.add(inputTool.readLine());
+        }
+        return lottoTexts;
+    }
+
+    public void showLottoNumbers(Lottos lottos, int autoSelectedCount, int manuallySelectedCount) {
+        drawText(String.format(PURCHASE_RESULT_TEXT, autoSelectedCount, manuallySelectedCount));
 
         for (Lotto each : lottos.getValue()) {
-            drawText(getNumbersText(each.getLottoNumber()));
+            drawText(getNumbersText(each.getLottoNumbers()));
         }
     }
 
-    private String getNumbersText(LottoNumber lottoNumber) {
+    private String getNumbersText(LottoNumbers lottoNumbers) {
 
-        String numbersText = lottoNumber.getNumbers()
+        return lottoNumbers
+                .getValue()
                 .stream()
+                .sorted()
+                .map(LottoNumber::getValue)
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
-
-        return String.format(LOTTO_NUMBER_FORMAT, numbersText, lottoNumber.getBonusNumber());
     }
 
     public void showRankResult(LottoRankGroup rankGroup) {
@@ -86,7 +99,7 @@ public class LottoView {
         Arrays.stream(LottoRank.values())
                 .sorted(Comparator.reverseOrder())
                 .forEach(rank -> {
-                    Long rankCount = rankGroup.getValue().get(rank);
+                    Long rankCount = rankGroup.getRankCount(rank);
                     drawText(String.format(MATCH_RESULT_TEXT, rank.getMatchCount(), rank.getWinning(), rankCount == null ? 0 : rankCount));
                 });
     }

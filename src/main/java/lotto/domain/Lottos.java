@@ -10,28 +10,14 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
-        this.lottos = createLottos(count);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
-    private List<Lotto> createLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
-    }
-
-    public LottoRankGroup getRankGroup(LottoNumber winningLottoNumber) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-
-        for (Lotto each : lottos) {
-            lottoRanks.add(each.getRank(winningLottoNumber));
-        }
-
-        Map<LottoRank, Long> rankGroup = lottoRanks
+    public LottoRankGroup compareTo(WinningLotto winningLotto) {
+        Map<LottoRank, Long> rankGroup = lottos
                 .stream()
+                .map(winningLotto::matchTo)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoRankGroup(rankGroup);
@@ -39,9 +25,5 @@ public class Lottos {
 
     public List<Lotto> getValue() {
         return new ArrayList<>(lottos);
-    }
-
-    public int size() {
-        return lottos.size();
     }
 }
