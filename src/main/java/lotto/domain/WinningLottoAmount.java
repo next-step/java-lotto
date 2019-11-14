@@ -65,8 +65,4 @@ public enum WinningLottoAmount {
 
         return lottoResult;
     }
-
-    public boolean isEqualMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
-    }
 }
