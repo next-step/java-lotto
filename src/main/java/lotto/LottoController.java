@@ -11,26 +11,24 @@ import java.util.Map;
 public class LottoController {
 
     public void execute() {
-        int countAll = InputView.purchaseCount();
         int purchaseAmount = InputView.purchaseAmount();
         Money money = new Money(purchaseAmount);
+
         int manualCount = InputView.purchaseManualCount();
-        int remainingCount = money.purchased(manualCount);
         List<String> manualLottosNumbers = InputView.inputManualLottoNumbers(manualCount);
 
         Lottos manualLottos = new Lottos(new ManualLottosGenerator(manualLottosNumbers));
-        Lottos autoLottos = new Lottos(new AutoLottosGenerator(countAll - manualCount));
-        Lottos autoLottos2 = new Lottos(new AutoLottosGenerator(money));
-
-        ResultView.printLottoNumber(autoLottos);
+        Lottos autoLottos = new Lottos(new AutoLottosGenerator(money));
+        manualLottos.addManualLottos(autoLottos.getLottos());
+        ResultView.printLottoNumber(manualLottos);
 
         int[] winLotto = InputView.getWinLotto();
         int bonusNumber = InputView.getBonusNumber();
         Ranks lottoRanks = new Ranks(winLotto, bonusNumber);
-        List<Rank> winningRanks = lottoRanks.getWinningLottoRanks(autoLottos);
+        List<Rank> winningRanks = lottoRanks.getWinningLottoRanks(manualLottos);
         Map<Rank, Integer> lottoInsights = lottoRanks.updateLottoRank();
 
         ResultView.printLottoResult(lottoInsights);
-        ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(winningRanks), countAll);
+        ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(winningRanks), money);
     }
 }

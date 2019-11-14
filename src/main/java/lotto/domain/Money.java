@@ -2,14 +2,18 @@ package lotto.domain;
 
 public class Money {
     private static final int LOTTO_AMOUNT = 1000;
-    private final int amount;
+    private final int purchaseAmount;
     private int count;
     private int balance;
 
-    public Money(int amount) {
-        this.amount = amount;
-        this.count = amount / LOTTO_AMOUNT;
-        this.balance = amount;
+    public Money(int purchaseAmount) {
+        this.purchaseAmount = purchaseAmount;
+        this.count = purchaseAmount / LOTTO_AMOUNT;
+        this.balance = purchaseAmount;
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 
     public int getBalance() {

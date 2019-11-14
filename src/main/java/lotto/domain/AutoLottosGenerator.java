@@ -8,11 +8,6 @@ public class AutoLottosGenerator implements LottosGenerator {
     private static final int LOTTO_GET_NUMBER = 6;
     private static final int ZERO = 0;
     private Money money;
-    private int count;
-
-    public AutoLottosGenerator(int count) {
-        this.count = count;
-    }
 
     public AutoLottosGenerator(Money money) {
         this.money = money;
@@ -21,6 +16,7 @@ public class AutoLottosGenerator implements LottosGenerator {
     @Override
     public List<Lotto> generate() {
         List<Lotto> lottoPapers = new ArrayList<>();
+        int count = this.money.purchaseCount();
         for (int i = 0; i < count; i++) {
             Lotto lotto = new Lotto(createRandomLottoNumber());
             lottoPapers.add(lotto);

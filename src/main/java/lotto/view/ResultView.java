@@ -3,12 +3,12 @@ package lotto.view;
 import lotto.Rank;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 
 import java.util.List;
 import java.util.Map;
 
 public class ResultView {
-    private static final int LOTTO_VALUE = 1000;
     private static final double YIELD_PIVOT_NUMBER = 1.0;
 
     public static void printLottoNumber(Lottos purchasedLotto) {
@@ -25,9 +25,8 @@ public class ResultView {
         }
     }
 
-    public static void getYield(int totalWinningPrice, int count) {
-        int purchasePrice = count * LOTTO_VALUE;
-        double yield = (double) totalWinningPrice / purchasePrice;
+    public static void getYield(int totalWinningPrice, Money money) {
+        double yield = (double) totalWinningPrice / money.getPurchaseAmount();
         System.out.println(printYield(yield));
     }
 
