@@ -7,10 +7,15 @@ import java.util.List;
 public class AutoLottosGenerator implements LottosGenerator {
     private static final int LOTTO_GET_NUMBER = 6;
     private static final int ZERO = 0;
+    private Money money;
     private int count;
 
     public AutoLottosGenerator(int count) {
         this.count = count;
+    }
+
+    public AutoLottosGenerator(Money money) {
+        this.money = money;
     }
 
     @Override

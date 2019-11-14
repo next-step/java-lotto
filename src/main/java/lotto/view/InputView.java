@@ -16,6 +16,14 @@ public class InputView {
         return scanner.nextInt();
     }
 
+    public static int purchaseAmount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("구입금액을 입력해 주세요.");
+//        int count = scanner.nextInt() / LOTTO_VALUE;
+//        System.out.println(count + "개를 구매했습니다.");
+        return scanner.nextInt();
+    }
+
     public static int purchaseManualCount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");

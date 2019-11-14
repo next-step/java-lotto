@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.AutoLottosGenerator;
-import lotto.domain.Lottos;
-import lotto.domain.ManualLottosGenerator;
-import lotto.domain.Ranks;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -15,12 +12,15 @@ public class LottoController {
 
     public void execute() {
         int countAll = InputView.purchaseCount();
+        int purchaseAmount = InputView.purchaseAmount();
+        Money money = new Money(purchaseAmount);
         int manualCount = InputView.purchaseManualCount();
+        int remainingCount = money.purchased(manualCount);
         List<String> manualLottosNumbers = InputView.inputManualLottoNumbers(manualCount);
 
         Lottos manualLottos = new Lottos(new ManualLottosGenerator(manualLottosNumbers));
         Lottos autoLottos = new Lottos(new AutoLottosGenerator(countAll - manualCount));
-
+        Lottos autoLottos2 = new Lottos(new AutoLottosGenerator(money));
 
         ResultView.printLottoNumber(autoLottos);
 
