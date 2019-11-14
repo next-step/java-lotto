@@ -28,10 +28,6 @@ public class WinningLotto {
         return new WinningLotto(winningNumbers);
     }
 
-    public static final WinningLotto createWithBonusNo(String winningNumbers, int bonusNo) {
-        return new WinningLotto(winningNumbers, bonusNo);
-    }
-
     public List<WinningLottoAmount> matchLottos(List<Lotto> userLotto) {
         List<WinningLottoAmount> winningLottoAmounts = new ArrayList<>();
         userLotto.forEach(lotto -> {
