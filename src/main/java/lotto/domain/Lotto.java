@@ -9,7 +9,9 @@ public class Lotto {
     private List<LottoNo> lottoNos;
 
     public Lotto(List<LottoNo> lottoNos) {
-        this.lottoNos = lottoNos;
+        this.lottoNos = Optional.ofNullable(lottoNos)
+                .orElse(new AutoLottosGenerator(new Money(1000))
+                        .createRandomLottoNumber());
     }
 
     public List<LottoNo> getLottoNumber() {

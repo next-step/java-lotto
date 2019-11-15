@@ -23,8 +23,8 @@ public class AutoLottosGenerator implements LottosGenerator {
         }
         return lottoPapers;
     }
-    
-    private List<LottoNo> createRandomLottoNumber() {
+
+    public List<LottoNo> createRandomLottoNumber() {
         CreatableLotto creatableLotto = new LottoFactory().getLottoVersionSix();
         List<LottoNo> allLottoNumber = creatableLotto.makeLotto();
         List<LottoNo> lottoNumbers = new ArrayList<>();

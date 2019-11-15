@@ -5,8 +5,11 @@ import lotto.domain.LottoNo;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.NullSource;
+
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 public class LottoTest {
     private List<LottoNo> numbers;
@@ -51,5 +54,11 @@ public class LottoTest {
         Lotto lotto = new Lotto(numbers);
         int[] testLottos = new int[] {1,2,3,7,8,9};
         assertThat(lotto.checkWinNumber(testLottos)).isEqualTo(3);
+    }
+
+    @Test
+    void validateWithNullTest() {
+        Lotto lotto = new Lotto(null);
+        assertThat(lotto.getLottoNumber()).hasSize(6);
     }
 }
