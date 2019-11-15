@@ -21,7 +21,7 @@ public class LottoGame {
 
     public static LottoGame of(int money) {
         if (money < TICKET_PRICE) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
         int ticketCount = money / TICKET_PRICE;
         List<LottoTicket> tickets = generateLottoTickets(ticketCount);
@@ -33,7 +33,7 @@ public class LottoGame {
         int manualTicketCount = ticketTexts.size();
         int autoTicketCount = (money / TICKET_PRICE) - manualTicketCount;
         if (isMoneyNotEnough(money, autoTicketCount)) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException();
         }
 
         List<LottoTicket> tickets = ticketTexts.stream()
