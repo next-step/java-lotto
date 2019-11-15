@@ -4,6 +4,7 @@ import lotto.Rank;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.Ranks;
 
 import java.util.List;
 import java.util.Map;
@@ -18,15 +19,15 @@ public class ResultView {
         }
     }
 
-    public static void printLottoResult(Map<Rank, Integer> ranks) {
+    public static void printLottoResult(Ranks ranks) {
         printDescription();
-        for (Map.Entry<Rank, Integer> entry : ranks.entrySet()) {
+        for (Map.Entry<Rank, Integer> entry : ranks.updateLottoRank().entrySet()) {
             System.out.println(printLotto(entry));
         }
     }
 
-    public static void getYield(int totalWinningPrice, Money money) {
-        double yield = (double) totalWinningPrice / money.getPurchaseAmount();
+    public static void getYield(Ranks ranks, Money money) {
+        double yield = (double) ranks.getTotalLottoWinningPrice() / money.getPurchaseAmount();
         System.out.println(printYield(yield));
     }
 

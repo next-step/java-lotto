@@ -15,10 +15,11 @@ public class Ranks {
     private int[] winLotto;
     private int bonusNumber;
 
-    public Ranks(int[] winLotto, int bonusNumber) {
+    public Ranks(int[] winLotto, int bonusNumber, Lottos lottos) {
         this.insights = new Insights();
         this.winLotto = winLotto;
         this.bonusNumber = bonusNumber;
+        this.ranks = getWinningLottoRanks(lottos);
     }
 
     public List<Rank> getWinningLottoRanks(Lottos lottos) {
@@ -53,8 +54,8 @@ public class Ranks {
         return lottoInsights;
     }
 
-    public int getTotalLottoWinningPrice(List<Rank> ranks) {
-        return insights.getWinningMoney(ranks);
+    public int getTotalLottoWinningPrice() {
+        return insights.getWinningMoney(this.getRanks());
     }
 
     public List<Rank> getRanks() {
