@@ -16,18 +16,13 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        List<Integer> numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(5);
-        numbers.add(6);
+        List<LottoNo> numbers = Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3),
+                new LottoNo(4), new LottoNo(5), new LottoNo(6));
 
         lotto = new Lotto(numbers);
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(lotto);
-        this.lottos = new Lottos(()-> lottos);
+        this.lottos = new Lottos(() -> lottos);
     }
 
     @Test

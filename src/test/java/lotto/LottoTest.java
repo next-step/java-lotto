@@ -1,25 +1,21 @@
 package lotto;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNo;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
-    private List<Integer> numbers;
+    private List<LottoNo> numbers;
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        List<Integer> numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(5);
-        numbers.add(6);
-
+        numbers = Arrays.asList(new LottoNo(1), new LottoNo(2), new LottoNo(3),
+                new LottoNo(4), new LottoNo(5), new LottoNo(6));
         lotto = new Lotto(numbers);
     }
 
@@ -31,7 +27,8 @@ public class LottoTest {
     @Test
     void sortTest() {
         Lotto lotto = new Lotto(numbers);
-        assertThat(lotto.getLottoNumber()).containsExactly(1,2,3,4,5,6);
+        assertThat(lotto.getLottoNumber()).containsExactly(new LottoNo(1), new LottoNo(2),
+                new LottoNo(3), new LottoNo(4), new LottoNo(5), new LottoNo(6));
     }
 
     @Test

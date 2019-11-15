@@ -23,8 +23,8 @@ public class ManualLottosGenerator implements LottosGenerator {
     }
 
     public Lotto generateLotto(String[] manualLotto) {
-        List<Integer> lotto = Arrays.stream(manualLotto)
-                .map(Integer::parseInt)
+        List<LottoNo> lotto = Arrays.stream(manualLotto)
+                .map(number -> new LottoNo(Integer.parseInt(number)))
                 .collect(Collectors.toList());
         return new Lotto(lotto);
     }

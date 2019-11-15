@@ -1,13 +1,12 @@
 package lotto.view;
 
 import lotto.Rank;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.Ranks;
+import lotto.domain.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final double YIELD_PIVOT_NUMBER = 1.0;
@@ -15,7 +14,11 @@ public class ResultView {
     public static void printLottoNumber(Lottos purchasedLotto) {
         List<Lotto> lottos = purchasedLotto.getLottos();
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLottoNumber());
+            List<Integer> lottoNumber = lotto.getLottoNumber()
+                    .stream()
+                    .map(LottoNo::getNumber)
+                    .collect(Collectors.toList());
+            System.out.println(lottoNumber.toString());
         }
     }
 
