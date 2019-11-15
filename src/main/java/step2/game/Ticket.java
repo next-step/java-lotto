@@ -9,8 +9,8 @@ public class Ticket {
     public static final int LOTTO_PRICE = 1000;
     private static final String AMOUNT_EXCEPTION = "로또는 1000원단위로 구매할 수 있습니다.";
     private static final String MANUAL_AMOUNT_EXCEPTION = "구입하려는 금액을 초과합니다.";
-    private AutoGames autoGames;
-    private ManualGames manualGames;
+    private GameStrategy autoGames;
+    private GameStrategy manualGames;
 
     public Ticket(int autoCount, List<String> manualNumbers) {
         autoGames = new AutoGames(autoCount);
@@ -37,11 +37,27 @@ public class Ticket {
     }
 
     public int getAutoCount() {
-        return autoGames.size();
+        return getCount(autoGames);
     }
 
     public int getManualCount() {
-        return manualGames.size();
+        return getCount(manualGames);
+    }
+
+    private int getCount(GameStrategy game) {
+        return game.size();
+    }
+
+    public String toStringAutoNumbers(int index) {
+        return toString(autoGames, index);
+    }
+
+    public String toStringManualNumbers(int index) {
+        return toString(manualGames, index);
+    }
+
+    private String toString(GameStrategy game, int index) {
+        return game.toString(index);
     }
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
@@ -49,14 +65,5 @@ public class Ticket {
         autoGames.checkWinningCount(winningCount, winningLotto);
         manualGames.checkWinningCount(winningCount, winningLotto);
         return winningCount;
-    }
-
-
-    public String toStringAutoNumbers(int index) {
-        return autoGames.toString(index);
-    }
-
-    public String toStringManualNumbers(int index) {
-        return manualGames.toString(index);
     }
 }

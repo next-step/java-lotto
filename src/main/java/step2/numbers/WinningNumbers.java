@@ -7,19 +7,19 @@ public class WinningNumbers {
 
     private List<Number> winningNumbers;
 
-    public WinningNumbers(String inputNumbers) {
+    WinningNumbers(String inputNumbers) {
         List<Number> inputWinningNumbers = InputNumbersUtil.toNumberList(inputNumbers);
         InputNumbersUtil.verifyLottoNumberCount(inputWinningNumbers);
         this.winningNumbers = inputWinningNumbers;
     }
 
-    public void verifyLottoNumberOrBonusNumber(int bonusNumber) {
-        if ( winningNumbers.contains(Number.valueOf(bonusNumber)) ) {
+    void verifyLottoNumberOrBonusNumber(int bonusNumber) {
+        if (winningNumbers.contains(Number.valueOf(bonusNumber))) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION);
         }
     }
 
-    public boolean contains(Number number) {
+    boolean contains(Number number) {
         return winningNumbers.contains(number);
     }
 }

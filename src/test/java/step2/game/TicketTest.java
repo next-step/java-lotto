@@ -8,13 +8,13 @@ import step2.analyze.Prize;
 import step2.analyze.WinningCount;
 import step2.numbers.WinningLotto;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TicketTest {
-    Ticket ticket = new Ticket(14, new ArrayList<>());
+    Ticket ticket = new Ticket(14, Collections.singletonList("4, 5, 6, 7, 8, 9"));
 
     @Test
     @DisplayName("입력된 금액만큼 로또가 구입되는지 확인")
@@ -28,17 +28,17 @@ class TicketTest {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
         WinningCount winningCount = ticket.checkWinningCount(winningLotto);
         int totalPrizeCount = 0;
-        for ( Prize prize : Prize.values() ) {
+        for (Prize prize : Prize.values()) {
             totalPrizeCount += winningCount.countOfPrize(prize);
         }
-        assertThat(totalPrizeCount).isEqualTo(14);
+        assertThat(totalPrizeCount).isEqualTo(15);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 100, 1450})
     @DisplayName("로또구입시 금액 유효성 검증")
     void verifyAmountTest(int amount) {
-        assertThrows(IllegalArgumentException.class, () -> Ticket.verifyAutoCount(amount, 0));
+        assertThrows(IllegalArgumentException.class, () -> Ticket.verifyAutoCount(amount, 1));
     }
 
     @Test

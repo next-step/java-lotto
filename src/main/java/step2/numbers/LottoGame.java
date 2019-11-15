@@ -3,13 +3,15 @@ package step2.numbers;
 import java.util.List;
 
 public class LottoGame {
-    public static final int MAX_NUMBER = 45;
-    public static final int MIN_NUMBER = 1;
-    public static final int NUMBER_COUNT = 6;
+    static final int MAX_NUMBER = 45;
+    static final int MIN_NUMBER = 1;
+    static final int NUMBER_COUNT = 6;
     private static final String JOINER = ", ";
     private List<Number> numbers;
 
-    public LottoGame(List<Number> lottoNumbers) {this.numbers = lottoNumbers;}
+    public LottoGame(List<Number> lottoNumbers) {
+        this.numbers = lottoNumbers;
+    }
 
     public String toString() {
         return numbers.stream()

@@ -10,7 +10,7 @@ import step2.numbers.WinningLotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualGames {
+public class ManualGames implements GameStrategy {
     private List<LottoGame> games;
 
     public ManualGames(List<String> manualNumbers) {
