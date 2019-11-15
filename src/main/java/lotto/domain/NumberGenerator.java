@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.LOTTO_END_NUM;
+import static lotto.domain.LottoNumber.LOTTO_START_NUM;
+
 public class NumberGenerator {
 
-    static final int LOTTO_START_NUM = 1;
-    static final int LOTTO_END_NUM = 45;
     static final int LOTTO_NUMBER_COUNT = 6;
     static final String ONLY_NUMBER_PATTER = "^[0-9]*$";
 

@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static lotto.domain.NumberGenerator.LOTTO_END_NUM;
-import static lotto.domain.NumberGenerator.LOTTO_START_NUM;
-
 public class LottoNumber {
+
+    static final int LOTTO_START_NUM = 1;
+    static final int LOTTO_END_NUM = 45;
 
     private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
