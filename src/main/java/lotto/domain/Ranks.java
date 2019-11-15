@@ -22,7 +22,7 @@ public class Ranks {
         this.ranks = getWinningLottoRanks(lottos);
     }
 
-    public List<Rank> getWinningLottoRanks(Lottos lottos) {
+    private List<Rank> getWinningLottoRanks(Lottos lottos) {
         this.ranks = new ArrayList<>();
         List<Lotto> purchasedLottos = lottos.getLottos();
         for (Lotto lotto : purchasedLottos) {
