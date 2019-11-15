@@ -5,22 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private static final int LOTTO_VALUE = 1000;
     private static final String DELIMITER = ", ";
-
-    public static int purchaseCount() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("구입금액을 입력해 주세요.");
-//        int count = scanner.nextInt() / LOTTO_VALUE;
-//        System.out.println(count + "개를 구매했습니다.");
-        return scanner.nextInt();
-    }
 
     public static int purchaseAmount() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
-//        int count = scanner.nextInt() / LOTTO_VALUE;
-//        System.out.println(count + "개를 구매했습니다.");
         return scanner.nextInt();
     }
 
