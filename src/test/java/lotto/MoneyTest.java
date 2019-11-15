@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class MoneyTest {
     private Money money;
@@ -20,5 +21,13 @@ public class MoneyTest {
         assertThat(money.purchaseCount()).isEqualTo(10);
         assertThat(money.purchased(3)).isEqualTo(7);
         assertThat(money.getBalance()).isEqualTo(7000);
+    }
+
+    @Test
+    void validateMoneyCheck() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Money money = new Money(999);
+            money.getBalance();
+        }).withMessageMatching("금액이 부족합니다.");
     }
 }

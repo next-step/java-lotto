@@ -8,8 +8,15 @@ public class Money {
 
     public Money(int purchaseAmount) {
         this.purchaseAmount = purchaseAmount;
+        validate();
         this.count = purchaseAmount / LOTTO_AMOUNT;
         this.balance = purchaseAmount;
+    }
+
+    private void validate() {
+        if (this.purchaseAmount < LOTTO_AMOUNT) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
     }
 
     public int getPurchaseAmount() {
