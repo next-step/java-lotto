@@ -56,7 +56,7 @@ public class LottoTicketTest {
     void 로또_등수_계산(String text, Rank rank) {
         int bonusNumber = 7;
         LottoTicket ticket = new LottoTicket(text);
-        assertThat(ticket.calculateRank(new WinTicket("1,2,3,4,5,6", bonusNumber))).isEqualTo(rank);
+        assertThat(new WinTicket("1,2,3,4,5,6", bonusNumber).calculateRank(ticket)).isEqualTo(rank);
     }
 
 

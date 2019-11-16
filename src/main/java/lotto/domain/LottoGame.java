@@ -71,7 +71,7 @@ public class LottoGame {
 
     private void calculateWinCounts(WinTicket winTicket) {
         for (LottoTicket ticket : tickets) {
-            Rank rank = ticket.calculateRank(winTicket);
+            Rank rank = winTicket.calculateRank(ticket);
             statistics.updateWinCounts(rank);
         }
     }

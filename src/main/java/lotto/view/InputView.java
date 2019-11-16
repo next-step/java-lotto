@@ -21,7 +21,7 @@ public class InputView {
     public List<String> inputManualTicketTexts(int count) {
         List<String> ticketTexts = new ArrayList<>();
 
-        if(count < 0) {
+        if (count < 0) {
             return ticketTexts;
         }
 

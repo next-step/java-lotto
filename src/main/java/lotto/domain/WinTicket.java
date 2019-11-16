@@ -10,12 +10,9 @@ public class WinTicket {
         this.bonusNumber = LottoNumber.of(bonusInt);
     }
 
-    public boolean winTicketContains(LottoNumber num) {
-        return (winTicket.contains(num));
+    public Rank calculateRank(LottoTicket lottoTicket) {
+        int matchCount = lottoTicket.getMatchCount(winTicket);
+        boolean bonusMatch = lottoTicket.contains(bonusNumber);
+        return Rank.findByMatchCountAndBonusMatch(matchCount, bonusMatch);
     }
-
-    public boolean bonusContains(LottoNumber num) {
-        return (bonusNumber.equals(num));
-    }
-
 }

@@ -18,24 +18,10 @@ public class LottoTicket {
         this.numbers = numbers;
     }
 
-    public Rank calculateRank(WinTicket winTicket) {
-        int matchCount = calculateMatchCount(winTicket);
-        boolean bonusMatch = calculateBonusMatch(winTicket);
-
-        return Rank.findByMatchCountAndBonusMatch(matchCount, bonusMatch);
-    }
-
-    private int calculateMatchCount(WinTicket winTicket) {
+    public int getMatchCount(LottoTicket inputTicket) {
         return (int) numbers.stream()
-                .filter(number -> winTicket.winTicketContains(number))
+                .filter(number -> inputTicket.contains(number))
                 .count();
-    }
-
-    private boolean calculateBonusMatch(WinTicket winTicket) {
-        return (numbers.stream()
-                .filter(number -> winTicket.bonusContains(number))
-                .count()
-                > 0);
     }
 
     public boolean contains(LottoNumber num) {
