@@ -44,11 +44,11 @@ public class LottoGameTest {
     void 당첨_확인() {
         List<String> ticketTexts = Arrays.asList("1,2,3,4,5,7", "1,2,3,14,15,17");
         LottoGame game = LottoGame.of(2000, ticketTexts);
-        game.doGame("1,2,3,4,5,6", 7);
+        LottoStatistics statistics = game.doGame("1,2,3,4,5,6", 7);
 
         double winPercent = Math.round((double) 30005000 / 2000 * 10000) / 100.0;
 
-        assertThat(game.getLottoStatistics().getWinPercents()).isEqualTo(winPercent);
+        assertThat(statistics.getWinPercents()).isEqualTo(winPercent);
     }
 
 

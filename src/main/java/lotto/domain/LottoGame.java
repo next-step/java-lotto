@@ -2,9 +2,7 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGame {
@@ -12,11 +10,9 @@ public class LottoGame {
     static final int TICKET_PRICE = 1000;
 
     private List<LottoTicket> tickets;
-    private LottoStatistics statistics;
 
     private LottoGame(List<LottoTicket> tickets) {
         this.tickets = tickets;
-        this.statistics = new LottoStatistics();
     }
 
     public static LottoGame of(int money) {
@@ -64,25 +60,36 @@ public class LottoGame {
         return tickets;
     }
 
-    public void doGame(String winText, int bonus) {
-        calculateWinCounts(new WinTicket(winText, bonus));
-        calculateWinPercent();
+    public LottoStatistics doGame(String winText, int bonus) {
+        Map<String, Integer> winCounts = calculateWinCounts(new WinTicket(winText, bonus));
+        Double winPercent = calculateWinPercent(winCounts);
+        return new LottoStatistics(winCounts, winPercent);
     }
 
-    private void calculateWinCounts(WinTicket winTicket) {
+    private Map<String, Integer> calculateWinCounts(WinTicket winTicket) {
+        Map<String, Integer> winCounts = Rank.generateRankMap();
+
         for (LottoTicket ticket : tickets) {
             Rank rank = winTicket.calculateRank(ticket);
-            statistics.updateWinCounts(rank);
+            winCounts.computeIfPresent(rank.name(), (key, value) -> ++value);
         }
+
+        return winCounts;
     }
 
-    private void calculateWinPercent() {
+    private Double calculateWinPercent(Map<String, Integer> winCounts) {
         BigDecimal consume = new BigDecimal(tickets.size() * TICKET_PRICE);
-        statistics.updateWinPercent(consume);
+        BigDecimal income = new BigDecimal(calculateIncome(winCounts));
+
+        return income.divide(consume, 4, RoundingMode.FLOOR)
+                .multiply(new BigDecimal(100))
+                .doubleValue();
     }
 
-
-    public LottoStatistics getLottoStatistics() {
-        return this.statistics;
+    private int calculateIncome(Map<String, Integer> winCounts) {
+        return Arrays.stream(Rank.values())
+                .mapToInt(rank -> rank.getWinMoney() * winCounts.get(rank.name()))
+                .sum();
     }
+
 }

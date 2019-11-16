@@ -24,9 +24,8 @@ public class LottoController {
 
         String text = inputView.inputWinText();
         int bonusNumber = inputView.inputBonusNumber();
-        game.doGame(text, bonusNumber);
 
+        resultView.printLottoStatistics(game.doGame(text, bonusNumber));
 
-        resultView.printLottoStatistics(game.getLottoStatistics());
     }
 }

@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Rank {
 
@@ -40,6 +42,15 @@ public enum Rank {
     public static int countRankType() {
         return (int) Arrays.stream(Rank.values())
                 .count();
+    }
+
+    public static Map<String, Integer> generateRankMap() {
+        Map<String, Integer> rankMap = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            rankMap.put(rank.name(), 0);
+        }
+
+        return rankMap;
     }
 
     public int getWinMoney() {
