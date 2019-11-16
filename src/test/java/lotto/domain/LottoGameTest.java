@@ -16,8 +16,9 @@ public class LottoGameTest {
 
     @ParameterizedTest
     @CsvSource(value = {"14000,14", "1100,1"})
-    void 로또_구입_성공(int gameMoney, int ticketCount) {
-        assertThat(LottoGame.of(gameMoney, new ArrayList<String>()).getTicketsString().size()).isEqualTo(ticketCount);
+    void 로또_구입_성공(int gameMoney, int expectedCount) {
+        int buyingCount = LottoGame.of(gameMoney).getTicketsString().size();
+        assertThat(buyingCount).isEqualTo(expectedCount);
     }
 
     @Test
