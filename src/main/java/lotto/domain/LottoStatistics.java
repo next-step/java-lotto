@@ -3,20 +3,25 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoStatistics {
 
-    private int[] winCounts;
+    private Map<String, Integer> winCounts;
     private double winPercent;
 
     public LottoStatistics() {
-        int winType = Rank.countRankType();
-        this.winCounts = new int[winType];
+        Map<String, Integer> winCounts = new HashMap<>();
+        for(Rank rank : Rank.values()){
+            winCounts.put(rank.name(), 0);
+        }
+        this.winCounts = winCounts;
         this.winPercent = 0;
     }
 
     public void updateWinCounts(Rank rank) {
-        this.winCounts[rank.getWinOrder()]++;
+        winCounts.computeIfPresent(rank.name(), (key, value) -> ++value);
     }
 
     public void updateWinPercent(BigDecimal consume) {
@@ -29,12 +34,12 @@ public class LottoStatistics {
 
     private int calculateIncome() {
         return Arrays.stream(Rank.values())
-                .mapToInt(rank -> rank.getWinMoney() * winCounts[rank.getWinOrder()])
+                .mapToInt(rank -> rank.getWinMoney() * winCounts.get(rank.name()))
                 .sum();
     }
 
-    public int[] getWinCounts() {
-        return winCounts.clone();
+    public Map<String, Integer> getWinCounts() {
+        return winCounts;
     }
 
     public double getWinPercents() {

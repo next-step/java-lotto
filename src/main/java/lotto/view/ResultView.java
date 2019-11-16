@@ -4,6 +4,7 @@ import lotto.domain.LottoStatistics;
 import lotto.domain.Rank;
 
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -23,20 +24,20 @@ public class ResultView {
         printWinPercent(statistics.getWinPercents());
     }
 
-    private void printWinCounts(int[] winCounts) {
+    private void printWinCounts(Map<String, Integer> winCounts) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (int i = winCounts.length - 1; i >= 0; i--) {
+        for (int i = Rank.countRankType() - 1; i >= 0; i--) {
             Rank rank = Rank.findByOrder(i);
-            String result = String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts[i]);
+            String result = String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank.name()));
 
             if (rank == Rank.MISS) {
                 continue;
             }
             if (rank == Rank.SECOND) {
-                result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts[i]);
+                result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank.name()));
             }
 
             System.out.println(result);
