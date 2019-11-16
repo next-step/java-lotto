@@ -8,17 +8,35 @@ public class LottoNum implements Comparable<LottoNum> {
 
     public LottoNum(int lottoNum) {
         this.lottoNum = lottoNum;
-        checkNumRange(lottoNum);
+
+        checkNumRange();
     }
 
-    public static void checkNumRange(int lottoNum) {
-        if (!isProperNumRange(lottoNum)) {
+    public LottoNum(String lottoNumInput) {
+        this(Integer.parseInt(lottoNumInput));
+    }
+
+    public LottoNum(int lottoNumInput, String winningLotto) {
+        this(lottoNumInput);
+
+        checkOverlaid(winningLotto);
+    }
+
+    private void checkNumRange() {
+        if (!isProperNumRange()) {
             throw new IllegalArgumentException("Out of range");
         }
     }
 
-    private static boolean isProperNumRange(int lottoNum) {
+    private boolean isProperNumRange() {
         return lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX;
+    }
+
+    private void checkOverlaid(String winningLotto) {
+        LottoTicket winnerTicket = new LottoTicket(Winner.splitWinningNums(winningLotto));
+        if (matchNumber(winnerTicket)) {
+            throw new IllegalArgumentException("winning lottonum is overlaid");
+        }
     }
 
     @Override

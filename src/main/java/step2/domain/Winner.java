@@ -9,16 +9,20 @@ public class Winner {
     private Ranks ranks;
     private Double profit;
 
+    public Winner(Ranks ranks, Double profit) {
+        this.ranks = ranks;
+        this.profit = profit;
+    }
+
     public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, LottoNum bonus) {
         List<Integer> winnerNums = splitWinningNums(lastWeekWinningInput);
 
         ranks = new Ranks(lottoTickets, winnerNums, bonus);
-
-        int lottoTicketsSize = lottoTickets.size();
-        profit = calculateProfit(lottoTicketsSize);
+        ofProfit(lottoTickets);
     }
 
-    private List<Integer> splitWinningNums(String lastWeekWinningInput) {
+
+    public static List<Integer> splitWinningNums(String lastWeekWinningInput) {
         String[] splitedWinningNums = lastWeekWinningInput.split(WINNING_NUM_DELIMITER);
 
         int numSize = splitedWinningNums.length;
@@ -31,8 +35,10 @@ public class Winner {
         return winningNums;
     }
 
-    private Double calculateProfit(int lottoTicketsSize) {
-        return ranks.calculateProfit(lottoTicketsSize);
+    private Winner ofProfit(LottoTickets lottoTickets) {
+        int lottoTicketsSize = lottoTickets.size();
+
+        return new Winner(ranks, ranks.calculateProfit(lottoTicketsSize));
     }
 
     public Ranks getRanks() {

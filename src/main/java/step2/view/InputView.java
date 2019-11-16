@@ -1,7 +1,5 @@
 package step2.view;
 
-import step2.domain.Bonus;
-
 import java.util.Scanner;
 
 public class InputView {
