@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class LottoMachine {
 
-    private final LottoAmount lottoAmount;
+    private LottoAmount lottoAmount;
     private final List<Lotto> lottos;
 
     public LottoMachine(LottoAmount lottoAmount) {
@@ -23,9 +23,16 @@ public class LottoMachine {
         this.lottos = new ArrayList<>();
     }
 
-    public void purchase(LottoGenerator lottoGenerator) {
+    private void purchaseAutoLotto(LottoGenerator lottoGenerator) {
         while (!lottoAmount.isEndAutoLotto()) {
+            this.lottoAmount = lottoAmount.decrease();
             lottos.add(Lotto.of(lottoGenerator.generate()));
+        }
+    }
+
+    private void purchaseManualLotto(List<String> manualLottoNumbers) {
+        for (String lottoNumber : manualLottoNumbers) {
+            lottos.add(Lotto.ofWinningLotto(lottoNumber));
         }
     }
 
@@ -33,7 +40,19 @@ public class LottoMachine {
         return this.lottos;
     }
 
-    public int getLottoCount() {
-        return this.lottoAmount.getLottoAutoCount();
+    public int getAutoLottoCount() {
+        return this.lottoAmount.getAutoLottoCount();
+    }
+
+    public int getManualLottoCount() {
+        return this.lottoAmount.getManualLottoCount();
+    }
+
+    public void purchaseLotto(LottoGenerator lottoGenerator, List<String> manualLottoNumbers) {
+        purchaseAutoLotto(lottoGenerator);
+
+        if (manualLottoNumbers.size() > 0) {
+            purchaseManualLotto(manualLottoNumbers);
+        }
     }
 }
