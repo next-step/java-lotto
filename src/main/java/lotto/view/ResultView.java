@@ -24,20 +24,20 @@ public class ResultView {
         printWinPercent(statistics.getWinPercents());
     }
 
-    private void printWinCounts(Map<String, Integer> winCounts) {
+    private void printWinCounts(Map<Rank, Integer> winCounts) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("--------");
 
         for (int i = Rank.countRankType() - 1; i >= 0; i--) {
             Rank rank = Rank.findByOrder(i);
-            String result = String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank.name()));
+            String result = String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank));
 
             if (rank == Rank.MISS) {
                 continue;
             }
             if (rank == Rank.SECOND) {
-                result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank.name()));
+                result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank));
             }
 
             System.out.println(result);

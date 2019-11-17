@@ -44,12 +44,11 @@ public enum Rank {
                 .count();
     }
 
-    public static Map<String, Integer> generateRankMap() {
-        Map<String, Integer> rankMap = new HashMap<>();
+    public static Map<Rank, Integer> generateRankMap() {
+        Map<Rank, Integer> rankMap = new HashMap<>();
         for (Rank rank : Rank.values()) {
-            rankMap.put(rank.name(), 0);
+            rankMap.put(rank, 0);
         }
-
         return rankMap;
     }
 

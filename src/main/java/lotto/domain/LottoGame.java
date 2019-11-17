@@ -61,23 +61,23 @@ public class LottoGame {
     }
 
     public LottoStatistics doGame(String winText, int bonus) {
-        Map<String, Integer> winCounts = calculateWinCounts(new WinTicket(winText, bonus));
+        Map<Rank, Integer> winCounts = calculateWinCounts(new WinTicket(winText, bonus));
         Double winPercent = calculateWinPercent(winCounts);
         return new LottoStatistics(winCounts, winPercent);
     }
 
-    private Map<String, Integer> calculateWinCounts(WinTicket winTicket) {
-        Map<String, Integer> winCounts = Rank.generateRankMap();
+    private Map<Rank, Integer> calculateWinCounts(WinTicket winTicket) {
+        Map<Rank, Integer> winCounts = Rank.generateRankMap();
 
         for (LottoTicket ticket : tickets) {
             Rank rank = winTicket.calculateRank(ticket);
-            winCounts.computeIfPresent(rank.name(), (key, value) -> ++value);
+            winCounts.computeIfPresent(rank, (key, value) -> ++value);
         }
 
         return winCounts;
     }
 
-    private Double calculateWinPercent(Map<String, Integer> winCounts) {
+    private Double calculateWinPercent(Map<Rank, Integer> winCounts) {
         BigDecimal consume = new BigDecimal(tickets.size() * TICKET_PRICE);
         BigDecimal income = new BigDecimal(calculateIncome(winCounts));
 
@@ -86,9 +86,9 @@ public class LottoGame {
                 .doubleValue();
     }
 
-    private int calculateIncome(Map<String, Integer> winCounts) {
-        return Arrays.stream(Rank.values())
-                .mapToInt(rank -> rank.getWinMoney() * winCounts.get(rank.name()))
+    private int calculateIncome(Map<Rank, Integer> winCounts) {
+        return winCounts.keySet().stream()
+                .mapToInt(rank -> rank.getWinMoney() * winCounts.get(rank))
                 .sum();
     }
 
