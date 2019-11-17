@@ -19,13 +19,17 @@ public class WinningLotto {
         this(winningLotto, 0);
     }
 
-    public WinningLotto(String winningNumbers, int bonusNo) {
+    private WinningLotto(String winningNumbers, int bonusNo) {
         this.winningLotto = Lotto.ofWinningLotto(winningNumbers);
         this.bonusNo = createBonusNo(bonusNo);
     }
 
     public static final WinningLotto of(String winningNumbers) {
         return new WinningLotto(winningNumbers);
+    }
+
+    public static WinningLotto ofBonusNo(String winningNumbers, int bonusNo) {
+        return new WinningLotto(winningNumbers, bonusNo);
     }
 
     public List<WinningLottoAmount> matchLottos(List<Lotto> userLotto) {
