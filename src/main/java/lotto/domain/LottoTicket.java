@@ -30,7 +30,7 @@ public class LottoTicket {
 
         int numSize = splitedNums.length;
 
-        if(numSize != LOTTO_SIZE) {
+        if (numSize != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개를 입력해야 합니다.");
         }
 
@@ -58,8 +58,8 @@ public class LottoTicket {
 
     public boolean contains(int inputNumber) {
         return lottoNums.stream()
-            .map(LottoNum::getLottoNum)
-            .anyMatch(number -> number == inputNumber);
+                .map(LottoNum::getLottoNum)
+                .anyMatch(number -> number == inputNumber);
     }
 
     @Override
