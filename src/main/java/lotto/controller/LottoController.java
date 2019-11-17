@@ -1,17 +1,24 @@
-package step2.controller;
+package lotto.controller;
 
-import step2.domain.LottoNum;
-import step2.domain.LottoTickets;
-import step2.domain.Winner;
-import step2.serivce.LottoService;
-import step2.view.InputView;
-import step2.view.ResultView;
+import lotto.domain.LottoNum;
+import lotto.domain.LottoTickets;
+import lotto.domain.Winner;
+import lotto.serivce.LottoService;
+import lotto.view.InputView;
+import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoController {
 
     public static void main(String[] args) {
         int purchaseAmount = InputView.getPurchaseAmount();
-        LottoTickets lottoTickets = LottoService.buyTickets(purchaseAmount);
+
+        int manualLottoCount = InputView.getManualLottoCount();
+
+        List<String> manualLotto = InputView.getManualLotto(manualLottoCount);
+
+        LottoTickets lottoTickets = LottoService.buyTickets(purchaseAmount, manualLotto);
         ResultView.printLottoTickets(lottoTickets);
 
         String lastWeekWinningInput = InputView.getLastWeekWinningNumbers();

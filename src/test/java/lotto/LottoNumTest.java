@@ -1,10 +1,10 @@
-package step2;
+package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.domain.*;
+import lotto.domain.*;
 
 import java.util.Arrays;
 

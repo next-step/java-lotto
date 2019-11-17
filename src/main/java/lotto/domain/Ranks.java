@@ -1,10 +1,10 @@
-package step2.domain;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static step2.domain.LottoTicket.LOTTO_PRICE;
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
 public class Ranks {
     public static final int WINNING_COUNT = 1;

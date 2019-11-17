@@ -1,11 +1,15 @@
-package step2.domain;
+package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static lotto.domain.LottoGenerator.LOTTO_SIZE;
 
 public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_NUMS_DELIMITER = ",";
+    private static final String WINNING_NUM_DELIMITER = ",";
 
     private List<LottoNum> lottoNums;
 
@@ -15,6 +19,29 @@ public class LottoTicket {
 
     public LottoTicket(List<Integer> lottoNums) {
         this.lottoNums = LottoGenerator.makeNumbers(lottoNums);
+    }
+
+    public static LottoTicket ofString(String manualLotto) {
+        List<Integer> lotto = splitNums(manualLotto);
+        return new LottoTicket(lotto);
+    }
+
+    public static List<Integer> splitNums(String lottoInput) {
+        String[] splitedNums = lottoInput.split(WINNING_NUM_DELIMITER);
+
+        int numSize = splitedNums.length;
+
+        if(numSize > LOTTO_SIZE || numSize < LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6개를 입력해야 합니다.");
+        }
+
+        List<Integer> lotto = new ArrayList<>();
+
+        for (int i = 0; i < numSize; i++) {
+            lotto.add(Integer.parseInt(splitedNums[i].trim()));
+        }
+
+        return lotto;
     }
 
     public int countMatchNumber(List<Integer> winnerNums) {

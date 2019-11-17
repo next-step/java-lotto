@@ -1,6 +1,6 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.*;
+import lotto.domain.*;
 
 import java.util.List;
 

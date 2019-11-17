@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 public class LottoNum implements Comparable<LottoNum> {
     public static final int LOTTO_NUM_MIN = 1;
@@ -33,7 +33,7 @@ public class LottoNum implements Comparable<LottoNum> {
     }
 
     private void checkOverlaid(String winningLotto) {
-        LottoTicket winnerTicket = new LottoTicket(Winner.splitWinningNums(winningLotto));
+        LottoTicket winnerTicket = new LottoTicket(LottoTicket.splitNums(winningLotto));
         if (matchNumber(winnerTicket)) {
             throw new IllegalArgumentException("winning lottonum is overlaid");
         }

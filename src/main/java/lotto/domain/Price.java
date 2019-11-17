@@ -1,6 +1,6 @@
-package step2.domain;
+package lotto.domain;
 
-import static step2.domain.LottoTicket.LOTTO_PRICE;
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
 public class Price {
     private int price;

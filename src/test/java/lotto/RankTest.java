@@ -1,7 +1,7 @@
-package step2;
+package lotto;
 
 import org.junit.jupiter.api.Test;
-import step2.domain.*;
+import lotto.domain.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;

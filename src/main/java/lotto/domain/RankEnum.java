@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 public enum RankEnum {
     MISS(0, 0),

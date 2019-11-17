@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static step2.domain.LottoNum.LOTTO_NUM_MAX;
-import static step2.domain.LottoNum.LOTTO_NUM_MIN;
+import static lotto.domain.LottoNum.LOTTO_NUM_MAX;
+import static lotto.domain.LottoNum.LOTTO_NUM_MIN;
 
 public class LottoGenerator {
     public static final int LOTTO_SIZE = 6;

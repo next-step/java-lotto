@@ -1,11 +1,11 @@
-package step2;
+package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import step2.domain.LottoTicket;
-import step2.domain.RankEnum;
+import lotto.domain.LottoTicket;
+import lotto.domain.RankEnum;
 
 import java.util.Arrays;
 import java.util.List;
