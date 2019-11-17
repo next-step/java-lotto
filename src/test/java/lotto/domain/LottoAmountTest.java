@@ -13,20 +13,30 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoAmountTest {
     @Test
     void 생성() {
-        LottoAmount amount = new LottoAmount(10000);
-        assertThat(amount).isEqualTo(new LottoAmount(10000));
+        LottoAmount amount = LottoAmount.of(10000);
+        assertThat(amount).isEqualTo(LottoAmount.of(10000));
     }
 
     @Test
     void 구매금액에_따른_로또_개수_구하기() {
-        LottoAmount lottoAmount = new LottoAmount(10000);
-        assertThat(lottoAmount.amount()).isEqualTo(10);
+        LottoAmount lottoAmount = LottoAmount.of(10000);
+        assertThat(lottoAmount.getLottoAutoCount()).isEqualTo(10);
     }
 
     @Test
     void 최소금액_검증() {
         assertThatThrownBy(() -> {
-            new LottoAmount(500);
+            LottoAmount.of(500);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void is_end_test() {
+        LottoAmount lottoAmount = LottoAmount.of(1000);
+        assertThat(lottoAmount.isEndAutoLotto()).isTrue();
+    }
+
+    @Test
+    void name() {
     }
 }

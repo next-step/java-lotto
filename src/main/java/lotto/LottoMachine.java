@@ -24,7 +24,7 @@ public class LottoMachine {
     }
 
     public void purchase(LottoGenerator lottoGenerator) {
-        for (int amount = 0; amount < lottoAmount.amount(); amount++) {
+        while (!lottoAmount.isEndAutoLotto()) {
             lottos.add(Lotto.of(lottoGenerator.generate()));
         }
     }
@@ -34,6 +34,6 @@ public class LottoMachine {
     }
 
     public int getLottoCount() {
-        return this.lottoAmount.amount();
+        return this.lottoAmount.getLottoAutoCount();
     }
 }

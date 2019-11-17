@@ -9,30 +9,54 @@ import java.util.Objects;
  */
 public class LottoAmount {
 
-    private final static int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
+    private static final int INIT_COUNT = 0;
     private final int amount;
+    private final int manualLottoCount;
 
-    public LottoAmount(int amount) {
+    private LottoAmount(int amount) {
+        this(amount, INIT_COUNT);
+    }
+
+    private LottoAmount(int amount, int manualLottoCount) {
         if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또를 구입하려면 최소 1000원이 필요합니다.");
         }
         this.amount = amount;
+        this.manualLottoCount = manualLottoCount;
     }
 
-    public int amount() {
+    public static final LottoAmount of(int amount) {
+        return new LottoAmount(amount);
+    }
+
+    public static final LottoAmount ofManual(int amount, int manualLottoCount) {
+        return new LottoAmount(amount, manualLottoCount);
+    }
+
+    private int decrease() {
+        return (amount - LOTTO_PRICE) / LOTTO_PRICE;
+    }
+
+    public int getLottoAutoCount() {
         return amount / LOTTO_PRICE;
+    }
+
+    public boolean isEndAutoLotto() {
+        return decrease() - manualLottoCount == 0;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoAmount amount1 = (LottoAmount) o;
-        return amount == amount1.amount;
+        LottoAmount that = (LottoAmount) o;
+        return amount == that.amount &&
+                manualLottoCount == that.manualLottoCount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(amount, manualLottoCount);
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class LottoGame {
     public static void main(String[] args) {
-        LottoMachine lottoMachine = new LottoMachine(new LottoAmount(LottoInputView.inputPurchaseAmount()));
+        LottoMachine lottoMachine = new LottoMachine(LottoAmount.of(LottoInputView.inputPurchaseAmount()));
         lottoMachine.purchase(new LottoGenerator());
         LottoResultView.printLottoPurchaseCount(lottoMachine.getLottoCount());
         LottoResultView.printPurchasedLotto(lottoMachine.getLottos());
