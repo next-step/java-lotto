@@ -38,8 +38,12 @@ public class LottoAmount {
         return (amount - LOTTO_PRICE) / LOTTO_PRICE;
     }
 
-    public int getLottoAutoCount() {
+    public int getAutoLottoCount() {
         return amount / LOTTO_PRICE;
+    }
+
+    public int getManualLottoCount() {
+        return manualLottoCount;
     }
 
     public boolean isEndAutoLotto() {
