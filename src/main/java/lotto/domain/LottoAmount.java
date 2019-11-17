@@ -34,8 +34,8 @@ public class LottoAmount {
         return new LottoAmount(amount, manualLottoCount);
     }
 
-    private int decrease() {
-        return (amount - LOTTO_PRICE) / LOTTO_PRICE;
+    public LottoAmount decrease() {
+        return new LottoAmount(amount - LOTTO_PRICE, manualLottoCount);
     }
 
     public int getAutoLottoCount() {
@@ -47,7 +47,7 @@ public class LottoAmount {
     }
 
     public boolean isEndAutoLotto() {
-        return decrease() - manualLottoCount == 0;
+        return (amount / LOTTO_PRICE) - manualLottoCount == 0;
     }
 
     @Override
