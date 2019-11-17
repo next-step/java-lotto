@@ -20,7 +20,7 @@ public class LottoAmountTest {
     @Test
     void 구매금액에_따른_로또_개수_구하기() {
         LottoAmount lottoAmount = LottoAmount.of(10000);
-        assertThat(lottoAmount.getLottoAutoCount()).isEqualTo(10);
+        assertThat(lottoAmount.getAutoLottoCount()).isEqualTo(10);
     }
 
     @Test
@@ -32,11 +32,8 @@ public class LottoAmountTest {
 
     @Test
     void is_end_test() {
-        LottoAmount lottoAmount = LottoAmount.of(1000);
-        assertThat(lottoAmount.isEndAutoLotto()).isTrue();
-    }
-
-    @Test
-    void name() {
+        LottoAmount lottoAmount = LottoAmount.of(2000);
+        lottoAmount = lottoAmount.decrease();
+        assertThat(!lottoAmount.isEndAutoLotto()).isTrue();
     }
 }

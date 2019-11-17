@@ -11,8 +11,8 @@ class WinningLottoTest {
 
     @Test
     void 생성() {
-        WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6");
-        assertThat(winningLotto).isEqualTo(WinningLotto.of("1,2,3,4,5,6"));
+        WinningLotto winningLotto = WinningLotto.ofBonusNo("1,2,3,4,5,6" , 7);
+        assertThat(winningLotto).isEqualTo(WinningLotto.ofBonusNo("1,2,3,4,5,6", 7));
     }
 
     @Test
