@@ -44,6 +44,9 @@ public class WinningLotto {
         if (bonusNo == 0) {
             return LottoNumber.of(LOTTO_GENERATOR.generateBonusNo(this.winningLotto));
         }
+        if (this.winningLotto.getLottoNumber().contains(bonusNo)) {
+            throw new IllegalArgumentException("당첨번호와 보너스번호는 중복이 불가능합니다.");
+        }
 
         return LottoNumber.of(bonusNo);
     }
