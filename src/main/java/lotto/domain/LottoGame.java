@@ -62,7 +62,7 @@ public class LottoGame {
 
     public LottoStatistics doGame(String winText, int bonus) {
         Map<Rank, Integer> winCounts = calculateWinCounts(new WinTicket(winText, bonus));
-        Double winPercent = calculateWinPercent(winCounts);
+        double winPercent = calculateWinPercent(winCounts);
         return new LottoStatistics(winCounts, winPercent);
     }
 
@@ -77,7 +77,7 @@ public class LottoGame {
         return winCounts;
     }
 
-    private Double calculateWinPercent(Map<Rank, Integer> winCounts) {
+    private double calculateWinPercent(Map<Rank, Integer> winCounts) {
         BigDecimal consume = new BigDecimal(tickets.size() * TICKET_PRICE);
         BigDecimal income = new BigDecimal(calculateIncome(winCounts));
 
