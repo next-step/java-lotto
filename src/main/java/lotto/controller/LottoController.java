@@ -19,7 +19,7 @@ public class LottoController {
         List<String> manualLotto = InputView.getManualLotto(manualLottoCount);
 
         LottoTickets lottoTickets = LottoService.buyTickets(purchaseAmount, manualLotto);
-        ResultView.printLottoTickets(lottoTickets);
+        ResultView.printLottoTickets(manualLottoCount, lottoTickets);
 
         String lastWeekWinningInput = InputView.getLastWeekWinningNumbers();
 

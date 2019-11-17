@@ -20,21 +20,25 @@ public class InputView {
     }
 
     public static List<String> getManualLotto(int manualLottoCount) {
+        Scanner scManual = new Scanner(System.in);
+
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         List<String> manualNumbers = new ArrayList<>();
 
         for (int i = 0; i < manualLottoCount; i++) {
-            manualNumbers.add(sc.nextLine());
+            manualNumbers.add(scManual.nextLine());
         }
 
         return manualNumbers;
     }
 
     public static String getLastWeekWinningNumbers() {
+        Scanner scWinner = new Scanner(System.in);
+
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
-        return sc.next();
+        return scWinner.nextLine();
     }
 
     public static int getBonus() {

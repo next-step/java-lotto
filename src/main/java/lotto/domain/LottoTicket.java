@@ -9,7 +9,6 @@ import static lotto.domain.LottoGenerator.LOTTO_SIZE;
 public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_NUMS_DELIMITER = ",";
-    private static final String WINNING_NUM_DELIMITER = ",";
 
     private List<LottoNum> lottoNums;
 
@@ -27,11 +26,11 @@ public class LottoTicket {
     }
 
     public static List<Integer> splitNums(String lottoInput) {
-        String[] splitedNums = lottoInput.split(WINNING_NUM_DELIMITER);
+        String[] splitedNums = lottoInput.split(LOTTO_NUMS_DELIMITER);
 
         int numSize = splitedNums.length;
 
-        if(numSize > LOTTO_SIZE || numSize < LOTTO_SIZE) {
+        if(numSize != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개를 입력해야 합니다.");
         }
 

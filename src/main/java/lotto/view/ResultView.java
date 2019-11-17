@@ -5,8 +5,14 @@ import lotto.domain.*;
 import java.util.List;
 
 public class ResultView {
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.size() + "를 구매했습니다.");
+    public static void printLottoTickets(int manualLottoCount, LottoTickets lottoTickets) {
+        StringBuilder buyCountBuilder = new StringBuilder();
+
+        buyCountBuilder.append("수동으로 ");
+        buyCountBuilder.append(manualLottoCount);
+        buyCountBuilder.append("장, 자동으로 ");
+        buyCountBuilder.append(lottoTickets.size());
+        buyCountBuilder.append("개를 구매했습니다.");
 
         List<LottoTicket> lottos = lottoTickets.getLottoTickets();
 
