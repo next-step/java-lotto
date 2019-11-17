@@ -11,10 +11,23 @@ import java.util.Objects;
 public class LottoResult {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int INIT_BONUS_NO = 0;
     private final WinningLotto winningLotto;
 
-    public LottoResult(String winningLotto) {
-        this.winningLotto = WinningLotto.of(winningLotto);
+    private LottoResult(String winningLotto) {
+        this(winningLotto, INIT_BONUS_NO);
+    }
+
+    private LottoResult(String winningLotto, int bonusNo) {
+        this.winningLotto = WinningLotto.ofBonusNo(winningLotto, bonusNo);
+    }
+
+    public static final LottoResult of(String winningLotto) {
+        return new LottoResult(winningLotto);
+    }
+
+    public static final LottoResult ofBonusNo(String winningLotto, int bonusNo) {
+        return new LottoResult(winningLotto, bonusNo);
     }
 
     public List<WinningLottoAmount> getWinningLottoAmount(List<Lotto> userLotto) {
