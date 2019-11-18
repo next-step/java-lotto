@@ -2,7 +2,9 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGame.TICKET_PRICE;
 
@@ -11,13 +13,14 @@ public class LottoStatistics {
     private Map<Rank, Integer> winCounts;
     private double winPercent;
 
-    public LottoStatistics(Map<Rank, Integer> winCounts, int ticketSize) {
+    public LottoStatistics(Map<Rank, Integer> winCounts) {
         this.winCounts = winCounts;
-        this.winPercent = calculateWinPercent(winCounts, ticketSize);
+        this.winPercent = calculateWinPercent(winCounts);
     }
 
-    private double calculateWinPercent(Map<Rank, Integer> winCounts, int ticketSize) {
-        BigDecimal consume = new BigDecimal(ticketSize* TICKET_PRICE);
+    private double calculateWinPercent(Map<Rank, Integer> winCounts) {
+        int ticketSize = winCounts.values().stream().mapToInt(Integer::intValue).sum();
+        BigDecimal consume = new BigDecimal(ticketSize * TICKET_PRICE);
         BigDecimal income = new BigDecimal(calculateIncome(winCounts));
 
         return income.divide(consume, 4, RoundingMode.FLOOR)
@@ -32,7 +35,7 @@ public class LottoStatistics {
     }
 
     public Map<Rank, Integer> getWinCounts() {
-        return winCounts;
+        return new HashMap<>(winCounts);
     }
 
     public double getWinPercents() {

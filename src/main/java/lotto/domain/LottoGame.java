@@ -62,7 +62,7 @@ public class LottoGame {
 
     public LottoStatistics doGame(String winText, int bonus) {
         Map<Rank, Integer> winCounts = calculateWinCounts(new WinTicket(winText, bonus));
-        return new LottoStatistics(winCounts, tickets.size());
+        return new LottoStatistics(winCounts);
     }
 
     private Map<Rank, Integer> calculateWinCounts(WinTicket winTicket) {
