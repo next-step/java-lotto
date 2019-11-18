@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualGames implements GameStrategy {
+    public static final String STRATEGY = "MANUAL";
     private List<LottoGame> games;
 
     public ManualGames(List<String> manualNumbers) {

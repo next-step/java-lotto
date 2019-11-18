@@ -19,7 +19,7 @@ class TicketTest {
     @Test
     @DisplayName("입력된 금액만큼 로또가 구입되는지 확인")
     void buyTicketsTest() {
-        assertThat(ticket.getAutoCount()).isEqualTo(14);
+        assertThat(ticket.getCount(AutoGames.STRATEGY)).isEqualTo(14);
     }
 
     @Test

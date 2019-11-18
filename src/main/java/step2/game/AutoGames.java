@@ -10,6 +10,7 @@ import java.util.List;
 import static step2.numbers.Number.createVerifiedNumbers;
 
 public class AutoGames implements GameStrategy {
+    public static final String STRATEGY = "AUTO";
     private static final int NUMBER_COUNT = 6;
     private static final List<Number> balls = createVerifiedNumbers();
     private static final int START_INDEX = 0;
