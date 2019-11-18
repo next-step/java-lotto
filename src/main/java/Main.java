@@ -1,6 +1,7 @@
 import lotto.LottoController;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.WinningRank;
 import lotto.view.InputView;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class Main {
 
         int[] winLotto = InputView.getWinLotto();
         int bonusNumber = InputView.getBonusNumber();
-
-        lottoController.viewResult(lottos, winLotto, bonusNumber, money);
+        WinningRank winningRank = lottoController.applyRank(winLotto, bonusNumber);
+        lottoController.viewResult(lottos, winningRank, money);
     }
 }

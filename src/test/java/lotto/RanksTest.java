@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.LottosMaker;
-import lotto.domain.Ranks;
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -23,7 +21,8 @@ public class RanksTest {
         int[] winLotto = new int[] {1, 2, 3, 4, 5, 6};
         List<String> manualLotto = Arrays.asList("1, 2, 3, 4, 5, 8");
         Lottos lottos = new LottosMaker().generate(manualLotto);
-        Ranks ranks = new Ranks(winLotto, 8, lottos);
+        WinningRank winningRank = new WinningRank(winLotto, 8);
+        Ranks ranks = new Ranks(winningRank, lottos);
         assertThat(ranks.getRanks()).contains(Rank.SECOND);
     }
 }

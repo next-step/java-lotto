@@ -44,16 +44,9 @@ public class LottoTest {
     @Test
     void checkValueWhenHitWinNumber() {
         Lotto lotto = new Lotto(numbers);
-        assertThat(lotto.getHitCount(1)).isEqualTo(1);
-        assertThat(lotto.getHitCount(6)).isEqualTo(1);
-        assertThat(lotto.getHitCount(7)).isEqualTo(0);
-    }
-
-    @Test
-    void getCountWhenHitWinNumber() {
-        Lotto lotto = new Lotto(numbers);
-        int[] testLottos = new int[] {1,2,3,7,8,9};
-        assertThat(lotto.checkWinNumber(testLottos)).isEqualTo(3);
+        assertThat(lotto.isContainsWinNumber(1)).isTrue();
+        assertThat(lotto.isContainsWinNumber(6)).isTrue();
+        assertThat(lotto.isContainsWinNumber(7)).isFalse();
     }
 
     @Test

@@ -17,8 +17,13 @@ public class LottoController {
         return lottos;
     }
 
-    public void viewResult(Lottos lottos, int[] winLotto, int bonusNumber, Money money) {
-        Ranks lottoRanks = new Ranks(winLotto, bonusNumber, lottos);
+    public WinningRank applyRank(int[] winLotto, int bonusNumber) {
+        return new WinningRank(winLotto, bonusNumber);
+    }
+
+    public void viewResult(Lottos lottos, WinningRank winningRank,Money money) {
+
+        Ranks lottoRanks = new Ranks(winningRank, lottos);
 
         ResultView.printLottoResult(lottoRanks);
         ResultView.getYield(lottoRanks, money);
