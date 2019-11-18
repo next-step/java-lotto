@@ -10,8 +10,8 @@ public class Lotto {
 
     public Lotto(List<LottoNo> lottoNos) {
         this.lottoNos = Optional.ofNullable(lottoNos)
-                .orElse(new AutoLottosGenerator(new Money(1000))
-                        .createRandomLottoNumber());
+                .orElse(new LottoFactory().createAutoLotto()
+                        .makeLotto());
     }
 
     public List<LottoNo> getLottoNumber() {

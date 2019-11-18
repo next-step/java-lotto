@@ -7,8 +7,12 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(LottosGenerator lottosGenerator) {
-        this.lottos = lottosGenerator.generate();
+//    public Lottos(LottosGenerator lottosGenerator) {
+//        this.lottos = lottosGenerator.generate();
+//    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> addManualLottos(List<Lotto> manualLottos) {

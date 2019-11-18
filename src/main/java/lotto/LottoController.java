@@ -4,13 +4,15 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
 
     public void execute(Money money, List<String> manualLottosNumbers) {
         Lottos manualLottos = new Lottos(new ManualLottosGenerator(manualLottosNumbers));
-        Lottos autoLottos = new Lottos(new AutoLottosGenerator(money));
+//        Lottos autoLottos = new Lottos(new AutoLottosGenerator(money));
+
         manualLottos.addManualLottos(autoLottos.getLottos());
         ResultView.printLottoNumber(manualLottos);
 

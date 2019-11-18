@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface LottosGenerator {
-    List<Lotto> generate();
-
+    Lottos generate(List<Lotto> lottos);
 }

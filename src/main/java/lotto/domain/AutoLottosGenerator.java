@@ -13,25 +13,4 @@ public class AutoLottosGenerator implements LottosGenerator {
         this.money = money;
     }
 
-    @Override
-    public List<Lotto> generate() {
-        List<Lotto> lottoPapers = new ArrayList<>();
-        int count = this.money.purchaseCount();
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto(createRandomLottoNumber());
-            lottoPapers.add(lotto);
-        }
-        return lottoPapers;
-    }
-
-    public List<LottoNo> createRandomLottoNumber() {
-        CreatableLotto creatableLotto = new LottoFactory().getLottoVersionSix();
-        List<LottoNo> allLottoNumber = creatableLotto.makeLotto();
-        List<LottoNo> lottoNumbers = new ArrayList<>();
-        Collections.shuffle(allLottoNumber);
-        for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
-            lottoNumbers.add(allLottoNumber.get(i));
-        }
-        return lottoNumbers;
-    }
 }
