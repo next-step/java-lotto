@@ -1,15 +1,17 @@
 package lotto.view;
 
+import lotto.domain.LottoStatistics;
 import lotto.domain.Rank;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
-    public void printMyTicket(List<String> toStringTickets) {
+    public void printMyTicket(List<String> toStringTickets, int manualTicketCount) {
         int ticketCount = toStringTickets.size();
-        System.out.println(ticketCount + "개를 구매했습니다.");
+        int autoTicketCount = ticketCount - manualTicketCount;
+        System.out.println("수동으로 " + autoTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
 
         for (String ticketToString : toStringTickets) {
             System.out.println(ticketToString);
@@ -17,27 +19,32 @@ public class ResultView {
         printNewLine();
     }
 
-    public void printWinCounts(int[] winCounts) {
+    public void printLottoStatistics(LottoStatistics statistics) {
+        printWinCounts(statistics.getWinCounts());
+        printWinPercent(statistics.getWinPercents());
+    }
+
+    private void printWinCounts(Map<Rank, Integer> winCounts) {
         printNewLine();
         System.out.println("당첨 통계");
         System.out.println("--------");
 
-        for (int i = winCounts.length - 1; i >= 0; i--) {
+        for (int i = Rank.countRankType() - 1; i >= 0; i--) {
             Rank rank = Rank.findByOrder(i);
-            String result = String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts[i]);
+            String result = String.format("%d개 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank));
 
             if (rank == Rank.MISS) {
                 continue;
             }
-            if (rank == Rank.MISS.SECOND) {
-                result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts[i]);
+            if (rank == Rank.SECOND) {
+                result = String.format("%d개 일치, 보너스 볼 일치 (%d원)- %d개", rank.getMatchCount(), rank.getWinMoney(), winCounts.get(rank));
             }
 
             System.out.println(result);
         }
     }
 
-    public void printWinPercent(double winPercent) {
+    private void printWinPercent(double winPercent) {
         System.out.println("총 수익률은" + winPercent + "입니다.");
     }
 

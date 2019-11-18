@@ -1,21 +1,25 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum Rank {
 
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000),
-    MISS(0, false, 0);
+    FIRST(1, 6, false, 2_000_000_000),
+    SECOND(2, 5, true, 30_000_000),
+    THIRD(3, 5, false, 1_500_000),
+    FOURTH(4, 4, false, 50_000),
+    FIFTH(5, 3, false, 5_000),
+    MISS(0, 0, false, 0);
 
+    private int winOrder;
     private int matchCount;
     private boolean bonusMatch;
     private int winMoney;
 
-    Rank(int matchCount, boolean bonusMatch, int winMoney) {
+    Rank(int winOrder, int matchCount, boolean bonusMatch, int winMoney) {
+        this.winOrder = winOrder;
         this.matchCount = matchCount;
         this.bonusMatch = bonusMatch;
         this.winMoney = winMoney;
@@ -30,9 +34,22 @@ public enum Rank {
 
     public static Rank findByOrder(int order) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.ordinal() == order)
+                .filter(rank -> rank.getWinOrder() == order)
                 .findFirst()
                 .orElse(MISS);
+    }
+
+    public static int countRankType() {
+        return (int) Arrays.stream(Rank.values())
+                .count();
+    }
+
+    public static Map<Rank, Integer> generateRankMap() {
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            rankMap.put(rank, 0);
+        }
+        return rankMap;
     }
 
     public int getWinMoney() {
@@ -41,6 +58,10 @@ public enum Rank {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public int getWinOrder() {
+        return winOrder;
     }
 
 }

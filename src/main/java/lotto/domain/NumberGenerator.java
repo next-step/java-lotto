@@ -5,34 +5,35 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.LOTTO_END_NUM;
+import static lotto.domain.LottoNumber.LOTTO_START_NUM;
+
 public class NumberGenerator {
 
-    static final int LOTTO_START_NUM = 1;
-    static final int LOTTO_END_NUM = 45;
     static final int LOTTO_NUMBER_COUNT = 6;
     static final String ONLY_NUMBER_PATTER = "^[0-9]*$";
 
 
-    public List<Integer> generateNumbers() {
-        List<Integer> baseNumbers = getBaseNumbers();
+    public List<LottoNumber> generateNumbers() {
+        List<LottoNumber> baseNumbers = getBaseNumbers();
         Collections.shuffle(baseNumbers);
         return baseNumbers.subList(0, LOTTO_NUMBER_COUNT);
     }
 
-    public List<Integer> generateNumbers(String text) {
-        List<Integer> numbers = new ArrayList<>();
+    public List<LottoNumber> generateNumbers(String text) {
+        List<LottoNumber> numbers = new ArrayList<>();
         String[] tokens = getTokens(text);
 
         for (String token : tokens) {
-            numbers.add(Integer.parseInt(token));
+            numbers.add(LottoNumber.of(token));
         }
         return numbers;
     }
 
-    private List<Integer> getBaseNumbers() {
-        List<Integer> baseNumbers = new ArrayList<>();
+    private List<LottoNumber> getBaseNumbers() {
+        List<LottoNumber> baseNumbers = new ArrayList<>();
         for (int i = LOTTO_START_NUM; i <= LOTTO_END_NUM; i++) {
-            baseNumbers.add(i);
+            baseNumbers.add(LottoNumber.of(i));
         }
         return baseNumbers;
     }
