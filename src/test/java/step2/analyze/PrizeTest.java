@@ -31,5 +31,4 @@ class PrizeTest {
     void of(int matchCount, boolean hasBonus, String prize) {
         assertThat(Prize.of(matchCount, hasBonus)).isEqualTo(Prize.valueOf(prize));
     }
-
 }

@@ -15,13 +15,13 @@ public class LottoGame {
 
     public String toString() {
         return numbers.stream()
-                .map(Number :: toString)
+                .map(Number::toString)
                 .reduce((o1, o2) -> o1 + JOINER + o2)
-                .orElseThrow(IllegalArgumentException :: new);
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public int matchWinningNumberCount(WinningLotto winningLotto) {
-        return Math.toIntExact(numbers.stream().filter(winningLotto :: contains).count());
+        return Math.toIntExact(numbers.stream().filter(winningLotto::contains).count());
     }
 
     public boolean containsBonus(WinningLotto winningLotto) {

@@ -20,10 +20,10 @@ public class ResultView {
         int autoCount = ticket.getCount(AutoGames.STRATEGY);
         int manualCount = ticket.getCount(ManualGames.STRATEGY);
         System.out.println(String.format(AMOUNT_CONFIRM_POSTFIX, manualCount, autoCount));
-        for ( int i = 0; i < manualCount; i++ ) {
+        for (int i = 0; i < manualCount; i++) {
             System.out.println("[" + ticket.toString(ManualGames.STRATEGY, i) + "]");
         }
-        for ( int i = 0; i < autoCount; i++ ) {
+        for (int i = 0; i < autoCount; i++) {
             System.out.println("[" + ticket.toString(AutoGames.STRATEGY, i) + "]");
         }
     }
