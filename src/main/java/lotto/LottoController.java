@@ -8,17 +8,16 @@ import java.util.List;
 
 public class LottoController {
 
-    public void execute(Money money, List<String> manualLottosNumbers) {
-
+    public Lottos execute(Money money, List<String> manualLottosNumbers) {
         Lottos manualLottos = new LottosMaker().generate(manualLottosNumbers);
         Lottos autoLottos = new LottosMaker().generate(money);
-
         Lottos lottos = new Lottos(manualLottos.addManualLottos(autoLottos.getLottos()));
 
         ResultView.printLottoNumber(lottos);
+        return lottos;
+    }
 
-        int[] winLotto = InputView.getWinLotto();
-        int bonusNumber = InputView.getBonusNumber();
+    public void viewResult(Lottos lottos, int[] winLotto, int bonusNumber, Money money) {
         Ranks lottoRanks = new Ranks(winLotto, bonusNumber, lottos);
 
         ResultView.printLottoResult(lottoRanks);

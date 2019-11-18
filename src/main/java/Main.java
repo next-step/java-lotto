@@ -1,4 +1,5 @@
 import lotto.LottoController;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.view.InputView;
 
@@ -16,6 +17,11 @@ public class Main {
         List<String> manualLottosNumbers = InputView.inputManualLottoNumbers(manualCount);
         money.purchased(manualCount);
 
-        lottoController.execute(money, manualLottosNumbers);
+        Lottos lottos = lottoController.execute(money, manualLottosNumbers);
+
+        int[] winLotto = InputView.getWinLotto();
+        int bonusNumber = InputView.getBonusNumber();
+
+        lottoController.viewResult(lottos, winLotto, bonusNumber, money);
     }
 }
