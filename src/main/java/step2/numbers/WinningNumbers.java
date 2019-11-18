@@ -4,8 +4,7 @@ import java.util.List;
 
 public class WinningNumbers {
     private static final String DUPLICATED_NUMBER_EXCEPTION = "로또번호는 중복된 숫자를 허용하지 않습니다.";
-
-    private List<Number> winningNumbers;
+    private final List<Number> winningNumbers;
 
     WinningNumbers(String inputNumbers) {
         List<Number> inputWinningNumbers = InputNumbersUtil.toNumberList(inputNumbers);

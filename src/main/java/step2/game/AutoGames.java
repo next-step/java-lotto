@@ -14,22 +14,19 @@ public class AutoGames implements GameStrategy {
     private static final int NUMBER_COUNT = 6;
     private static final List<Number> balls = createVerifiedNumbers();
     private static final int START_INDEX = 0;
-    private List<LottoGame> games;
+    private final List<LottoGame> games;
 
     public AutoGames(int autoCount) {
-        games = new ArrayList<>();
+        List<LottoGame> lottoGames = new ArrayList<>();
         for (int count = 0; count < autoCount; count++) {
-            addGame();
+            lottoGames.add(new LottoGame(pickRandomNumbers()));
         }
+        this.games = lottoGames;
     }
 
     @Override
     public List<LottoGame> getGames() {
         return games;
-    }
-
-    private void addGame() {
-        games.add(new LottoGame(pickRandomNumbers()));
     }
 
     private List<Number> pickRandomNumbers() {

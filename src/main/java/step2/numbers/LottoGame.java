@@ -7,7 +7,7 @@ public class LottoGame {
     static final int MIN_NUMBER = 1;
     static final int NUMBER_COUNT = 6;
     private static final String JOINER = ", ";
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
     public LottoGame(List<Number> lottoNumbers) {
         this.numbers = lottoNumbers;

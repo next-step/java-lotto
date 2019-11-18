@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
-    private WinningNumbers numbers;
-    private Number bonusNumber;
+    private final WinningNumbers numbers;
+    private final Number bonusNumber;
 
     public WinningLotto(String inputNumbers, int bonusNumber) {
         WinningNumbers winningNumbers = new WinningNumbers(inputNumbers);
