@@ -1,10 +1,7 @@
 package step2.game;
 
-import step2.analyze.Prize;
-import step2.analyze.WinningCount;
 import step2.numbers.LottoGame;
 import step2.numbers.Number;
-import step2.numbers.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,9 +17,14 @@ public class AutoGames implements GameStrategy {
 
     public AutoGames(int autoCount) {
         games = new ArrayList<>();
-        for ( int count = 0; count < autoCount; count++ ) {
+        for (int count = 0; count < autoCount; count++) {
             addGame();
         }
+    }
+
+    @Override
+    public List<LottoGame> getGames() {
+        return games;
     }
 
     private void addGame() {
@@ -32,16 +34,8 @@ public class AutoGames implements GameStrategy {
     private List<Number> pickRandomNumbers() {
         Collections.shuffle(balls);
         List<Number> number = new ArrayList<>(balls.subList(START_INDEX, NUMBER_COUNT));
-        number.sort(Number :: compareTo);
+        number.sort(Number::compareTo);
         return number;
-    }
-
-    public void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto) {
-        for ( LottoGame lottoGame : games ) {
-            Prize prize
-                    = Prize.of(lottoGame.matchWinningNumberCount(winningLotto), lottoGame.containsBonus(winningLotto));
-            winningCount.addCount(prize);
-        }
     }
 
     public int size() {

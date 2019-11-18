@@ -19,7 +19,7 @@ public class Ticket {
 
     public static int verifyAutoCount(int amount, int manualCount) {
         int lottoCount = buyLottoGames(amount);
-        if ( manualCount > lottoCount ) {
+        if (manualCount > lottoCount) {
             throw new IllegalArgumentException(MANUAL_AMOUNT_EXCEPTION);
         }
         return lottoCount - manualCount;
@@ -31,7 +31,7 @@ public class Ticket {
     }
 
     private static void verifyAmount(int amount) {
-        if ( amount % LOTTO_PRICE != 0 || amount < LOTTO_PRICE ) {
+        if (amount % LOTTO_PRICE != 0 || amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(AMOUNT_EXCEPTION);
         }
     }
@@ -62,8 +62,8 @@ public class Ticket {
 
     public WinningCount checkWinningCount(WinningLotto winningLotto) {
         WinningCount winningCount = new WinningCount();
-        autoGames.checkWinningCount(winningCount, winningLotto);
-        manualGames.checkWinningCount(winningCount, winningLotto);
+        winningCount.putAll(winningLotto.getWinningCount(autoGames));
+        winningCount.putAll(winningLotto.getWinningCount(manualGames));
         return winningCount;
     }
 }

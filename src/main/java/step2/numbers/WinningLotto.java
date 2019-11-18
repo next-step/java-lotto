@@ -1,5 +1,9 @@
 package step2.numbers;
 
+import step2.analyze.Prize;
+import step2.game.GameStrategy;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
@@ -19,5 +23,16 @@ public class WinningLotto {
 
     public boolean hasBonus(List<Number> userLotto) {
         return userLotto.contains(bonusNumber);
+    }
+
+    public List<Prize> getWinningCount(GameStrategy manualGames) {
+        List<Prize> winningCount = new ArrayList<>();
+        for (LottoGame lottoGame : manualGames.getGames()) {
+            Prize prize
+                    = Prize.of(lottoGame.matchWinningNumberCount(this),
+                    lottoGame.containsBonus(this));
+            winningCount.add(prize);
+        }
+        return winningCount;
     }
 }

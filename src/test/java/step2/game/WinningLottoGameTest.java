@@ -1,15 +1,27 @@
 package step2.game;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import step2.analyze.Prize;
 import step2.numbers.Number;
 import step2.numbers.WinningLotto;
+
+import java.util.Collections;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WinningLottoGameTest {
+    @Test
+    void checkWinningCount() {
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
+        ManualGames manualGames = new ManualGames(Collections.singletonList("4, 5, 6, 7, 8, 9"));
+        assertThat(winningLotto.getWinningCount(manualGames))
+                .isEqualTo(Collections.singletonList(Prize.KRW_5_000));
+    }
+
     @ParameterizedTest
     @CsvSource(value = {
             "1, 1, 2, 3, 4, 5:6",

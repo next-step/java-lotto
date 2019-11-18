@@ -1,11 +1,11 @@
 package step2.game;
 
-import step2.analyze.WinningCount;
-import step2.numbers.WinningLotto;
+import step2.numbers.LottoGame;
+
+import java.util.List;
 
 public interface GameStrategy {
-
-    void checkWinningCount(WinningCount winningCount, WinningLotto winningLotto);
+    List<LottoGame> getGames();
 
     int size();
 
