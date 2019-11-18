@@ -2,7 +2,13 @@ package lotto.domain;
 
 import java.util.List;
 
-@FunctionalInterface
 public interface LottosGenerator {
-    Lottos generate(List<Lotto> lottos);
+
+    default Lottos generate(Money money) {
+        return null;
+    }
+
+    default Lottos generate(List<String> manualLottos) {
+        return null;
+    }
 }

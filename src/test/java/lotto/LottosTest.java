@@ -28,7 +28,7 @@ public class LottosTest {
     @Test
     void 로또_수동_테스트() {
         List<String> manualLottos = Arrays.asList("1, 2, 3, 4, 5, 6", "10, 11, 12, 13, 14, 15", "5, 6, 7, 8, 9, 10");
-        Lottos lottos = new Lottos(new ManualLottos(manualLottos).getManualLottos());
+        Lottos lottos = new LottosMaker().generate(manualLottos);
         assertThat(lottos.getLottos()).hasSize(3);
     }
 
@@ -37,8 +37,8 @@ public class LottosTest {
         Money money = new Money(10000);
         money.purchased(3);
         List<String> manualLottosNumber = Arrays.asList("1, 2, 3, 4, 5, 6", "10, 11, 12, 13, 14, 15", "5, 6, 7, 8, 9, 10");
-        Lottos manualLottos = new Lottos(new ManualLottos(manualLottosNumber).getManualLottos());
-        Lottos autoLottos = new Lottos(new AutoLottos(money).getAutoLottos());
+        Lottos manualLottos = new LottosMaker().generate(manualLottosNumber);
+        Lottos autoLottos = new LottosMaker().generate(money);
         assertThat(autoLottos.getLottos()).hasSize(7);
         assertThat(autoLottos.addManualLottos(manualLottos.getLottos())).hasSize(10);
     }

@@ -9,18 +9,17 @@ import java.util.List;
 public class LottoController {
 
     public void execute(Money money, List<String> manualLottosNumbers) {
-        List<Lotto> lottosM = new ManualLottos(manualLottosNumbers).getManualLottos();
-        List<Lotto> lottosA = new AutoLottos(money).getAutoLottos();
 
-        Lottos manualLottos = new LottosMaker().generate(lottosM);
-        Lottos autoLottos = new LottosMaker().generate(lottosA);
+        Lottos manualLottos = new LottosMaker().generate(manualLottosNumbers);
+        Lottos autoLottos = new LottosMaker().generate(money);
 
-        manualLottos.addManualLottos(autoLottos.getLottos());
-        ResultView.printLottoNumber(manualLottos);
+        Lottos lottos = new Lottos(manualLottos.addManualLottos(autoLottos.getLottos()));
+
+        ResultView.printLottoNumber(lottos);
 
         int[] winLotto = InputView.getWinLotto();
         int bonusNumber = InputView.getBonusNumber();
-        Ranks lottoRanks = new Ranks(winLotto, bonusNumber, manualLottos);
+        Ranks lottoRanks = new Ranks(winLotto, bonusNumber, lottos);
 
         ResultView.printLottoResult(lottoRanks);
         ResultView.getYield(lottoRanks, money);
