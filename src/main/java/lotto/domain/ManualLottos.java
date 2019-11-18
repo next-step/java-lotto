@@ -16,10 +16,13 @@ public class ManualLottos {
     public List<Lotto> getManualLottos() {
         return this.manualLottos
                 .stream()
-                .map(lotto -> new Lotto(
-                                new LottoFactory()
-                                        .createManualLotto(lotto.split(DELIMITER))
-                                        .makeLotto()))
+                .map(lotto -> new Lotto(createManualLotto(lotto)))
                 .collect(Collectors.toList());
+    }
+
+    private List<LottoNo> createManualLotto(String lotto) {
+        return new LottoFactory()
+                .createManualLotto(lotto.split(DELIMITER))
+                .makeLotto();
     }
 }
