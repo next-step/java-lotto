@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNullPointerException;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     private List<LottoNo> numbers;
@@ -58,7 +58,9 @@ public class LottoTest {
 
     @Test
     void validateWithNullTest() {
-        Lotto lotto = new Lotto(null);
-        assertThat(lotto.getLottoNumber()).hasSize(6);
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto lotto = new Lotto(null);
+            assertThat(lotto.getLottoNumber()).hasSize(6);
+        });
     }
 }

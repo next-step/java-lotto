@@ -14,6 +14,7 @@ public class Main {
 
         int manualCount = InputView.purchaseManualCount();
         List<String> manualLottosNumbers = InputView.inputManualLottoNumbers(manualCount);
+        money.purchased(manualCount);
 
         lottoController.execute(money, manualLottosNumbers);
     }

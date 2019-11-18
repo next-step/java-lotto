@@ -12,12 +12,12 @@ public class LottoAutoType implements CreatableLotto {
     @Override
     public List<LottoNo> makeLotto() {
         CreatableLotto creatableLotto = new LottoFactory().getLottoVersionSix();
-        List<LottoNo> allLottoNumber = creatableLotto.makeLotto();
+        List<LottoNo> lottoPlatform = creatableLotto.makeLotto();
 
         List<LottoNo> lottoNumbers = new ArrayList<>();
-        Collections.shuffle(allLottoNumber);
+        Collections.shuffle(lottoPlatform);
         for (int i = ZERO; i < LOTTO_GET_NUMBER; i++) {
-            lottoNumbers.add(allLottoNumber.get(i));
+            lottoNumbers.add(lottoPlatform.get(i));
         }
         return lottoNumbers;
     }
