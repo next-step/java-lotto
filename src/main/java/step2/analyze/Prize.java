@@ -10,9 +10,7 @@ public enum Prize {
     KRW_1_500_000(5, false, 1_5000_000),
     KRW_30_000_000(5, true, 30_000_000),
     KRW_2_000_000_000(6, false, 2_000_000_000);
-
     public static final int MAX_MATCH_COUNT = 6;
-
     private final int matchCount;
     private final boolean bonus;
     private final int money;

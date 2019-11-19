@@ -1,6 +1,8 @@
 package step2.view;
 
 import step2.analyze.WinningCount;
+import step2.game.AutoGames;
+import step2.game.ManualGames;
 import step2.game.Ticket;
 import step2.numbers.WinningLotto;
 
@@ -15,14 +17,14 @@ public class ResultView {
     private static final String LOSS = "손해";
 
     public static void printTickets(Ticket ticket) {
-        int autoCount = ticket.getAutoCount();
-        int manualCount = ticket.getManualCount();
+        int autoCount = ticket.getCount(AutoGames.STRATEGY);
+        int manualCount = ticket.getCount(ManualGames.STRATEGY);
         System.out.println(String.format(AMOUNT_CONFIRM_POSTFIX, manualCount, autoCount));
-        for ( int i = 0; i < manualCount; i++ ) {
-            System.out.println("[" + ticket.toStringManualNumbers(i) + "]");
+        for (int i = 0; i < manualCount; i++) {
+            System.out.println("[" + ticket.toString(ManualGames.STRATEGY, i) + "]");
         }
-        for ( int i = 0; i < autoCount; i++ ) {
-            System.out.println("[" + ticket.toStringAutoNumbers(i) + "]");
+        for (int i = 0; i < autoCount; i++) {
+            System.out.println("[" + ticket.toString(AutoGames.STRATEGY, i) + "]");
         }
     }
 

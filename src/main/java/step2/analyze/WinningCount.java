@@ -3,16 +3,16 @@ package step2.analyze;
 import step2.game.Ticket;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningCount {
     private static final int SINGLE_COUNT = 1;
-
     private Map<Prize, Integer> winningCount;
 
     public WinningCount() {
         winningCount = new LinkedHashMap<>();
-        for ( Prize prize : Prize.values() ) {
+        for (Prize prize : Prize.values()) {
             winningCount.put(prize, 0);
         }
     }
@@ -39,10 +39,14 @@ public class WinningCount {
     private float calculateTotalEarningMoney() {
         return winningCount.keySet().stream()
                 .map(prize -> prize.calculateEarningMoney(winningCount.get(prize)))
-                .reduce(Integer :: sum).orElseThrow(IllegalArgumentException :: new);
+                .reduce(Integer::sum).orElseThrow(IllegalArgumentException::new);
     }
 
     private int calculateTicketPrice() {
-        return winningCount.values().stream().reduce(Integer :: sum).orElse(0) * Ticket.LOTTO_PRICE;
+        return winningCount.values().stream().reduce(Integer::sum).orElse(0) * Ticket.LOTTO_PRICE;
+    }
+
+    public void putAll(List<Prize> winningCount) {
+        winningCount.forEach((this::addCount));
     }
 }

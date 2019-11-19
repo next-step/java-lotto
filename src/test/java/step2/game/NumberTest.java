@@ -9,7 +9,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class NumberTest {
-
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     @DisplayName("범위의 맞는 숫자가 나오는 지 확인")
@@ -23,6 +22,4 @@ class NumberTest {
     void verifyOfWithException(int num) {
         assertThrows(IllegalArgumentException.class, () -> Number.valueOf(num));
     }
-
-
 }

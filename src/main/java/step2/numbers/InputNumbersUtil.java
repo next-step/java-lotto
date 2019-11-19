@@ -13,14 +13,14 @@ public class InputNumbersUtil {
     public static List<Number> toNumberList(String inputNumbers) {
         return Arrays.stream(inputNumbers.split(DELIMITER))
                 .map(num -> Integer.parseInt(num.trim()))
-                .map(Number :: valueOf).collect(toList());
+                .map(Number::valueOf).collect(toList());
     }
 
     public static void verifyLottoNumberCount(List<Number> inputWinningNumbers) {
-        if ( inputWinningNumbers.size() != LottoGame.NUMBER_COUNT ) {
+        if (inputWinningNumbers.size() != LottoGame.NUMBER_COUNT) {
             throw new IllegalArgumentException(NUMBER_COUNT_EXCEPTION);
         }
-        if ( inputWinningNumbers.stream().distinct().count() != LottoGame.NUMBER_COUNT ) {
+        if (inputWinningNumbers.stream().distinct().count() != LottoGame.NUMBER_COUNT) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_EXCEPTION);
         }
     }

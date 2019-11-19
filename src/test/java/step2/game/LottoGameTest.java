@@ -27,7 +27,8 @@ class LottoGameTest {
     void setUp() {
         lottoGame = new AutoGames(1);
         String lottoNumbers = lottoGame.toString(0);
-        numbers = Arrays.stream(lottoNumbers.trim().split(",")).map(num -> Integer.parseInt(num.trim())).collect(toList());
+        numbers = Arrays.stream(lottoNumbers.trim().split(","))
+                .map(num -> Integer.parseInt(num.trim())).collect(toList());
         winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
     }
 
@@ -40,12 +41,18 @@ class LottoGameTest {
     @Test
     @DisplayName("수동 로또 생성")
     void createManualLottoTest() {
-        List<Number> numbers = IntStream.rangeClosed(1, 6).boxed().map(Number :: valueOf).collect(toList());
+        List<Number> numbers = IntStream.rangeClosed(1, 6).boxed()
+                .map(Number::valueOf).collect(toList());
         assertThat(new LottoGame(numbers).matchWinningNumberCount(winningLotto)).isEqualTo(6);
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1, 2, 3, 4, 5, 6, 7", "-10, 3, 4, 5, 6, 7", "1, 2", "1, 2, 3, 4, 5, 46"})
+    @ValueSource(strings = {
+            "1, 2, 3, 4, 5, 6, 7",
+            "-10, 3, 4, 5, 6, 7",
+            "1, 2",
+            "1, 2, 3, 4, 5, 46"
+    })
     @DisplayName("수동 로또 선택 시 유효성 검증")
     void ofManual(String inputNumbers) {
         assertThrows(IllegalArgumentException.class, () -> new ManualGames(Collections.singletonList(inputNumbers)));
