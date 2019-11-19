@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         return new Lotto(splitLottoNumbers(inputWinningNumbers));
     }
 
-    private static List<LottoNumber> splitLottoNumbers(String[] inputWinningNumbers) {
+    public static List<LottoNumber> splitLottoNumbers(String[] inputWinningNumbers) {
         checkWinningNumberLength(inputWinningNumbers);
         checkOverlapWinningNumber(inputWinningNumbers);
         return Arrays.stream(inputWinningNumbers)
