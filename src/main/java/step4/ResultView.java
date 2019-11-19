@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class ResultView {
-    public static void countLottoResult(int countLotto) {
-        System.out.println(countLotto + "개를 구매했습니다.");
+    public static void countLottoResult(int manualLottoCount, int autoLottoCount) {
+        System.out.println();
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "개를 구매했습니다.");
     }
 
     public static void goPrint(Set<Lotto> purchasedLottos) {
@@ -17,10 +18,6 @@ public class ResultView {
         System.out.println();
     }
 
-//    private static void printPurchasedLottos(List<Integer> purchasedLotto) {
-//        System.out.println(purchasedLotto);
-//    }
-
     private static void printPurchasedLottos(List<LottoNumber> purchasedLotto) {
         List<Integer> printLotto = new ArrayList<>();
         purchasedLotto.forEach(x -> printLotto.add(LottoNumber.valueOf(x)));
@@ -28,6 +25,7 @@ public class ResultView {
     }
 
     public static void printAboutRank(Map<Integer, Integer> summaryResult) {
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
