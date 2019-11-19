@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static step4.InputView.bonusNumberAdd;
-import static step4.InputView.inputWinningNumbers;
+import static step4.InputView.*;
 import static step4.LottoNumber.createLottoNumber;
 import static step4.ResultView.*;
 
@@ -12,13 +12,19 @@ public class LottoApplication {
 
     public static void main(String[] args) {
 
-        Money money = new Money(InputView.inputCash());
+        Money money = new Money(inputCash());
+        int manualLottoCount = inputManual();
+        int autoLottoCount = money.getLottoCount() - manualLottoCount;
 
-        countLottoResult(money.getLottoCount());
+        // 0. 로또 수동구매(수동번호입력)
+        Set<Lotto> manualLottos = inputManualLottoNumbers(manualLottoCount);
+        countLottoResult(manualLottoCount, autoLottoCount);
+
         LottoGenerator.generateStandardLotto();
 
-        // 1. 로또 구매 ( 구매한 로또 번호는 고유하다. )
-        Set<Lotto> purchasedLottos = LottoGenerator.purchasedLottos(money.getLottoCount());
+        // 1. 로또 자동구매 ( 구매한 로또 번호는 고유하다. )
+        Set<Lotto> autoLottos = LottoGenerator.purchasedLottos(autoLottoCount);
+        Set<Lotto> purchasedLottos = Lotto.mergeLottoSets(manualLottos, autoLottos);
         goPrint(purchasedLottos);
 
         // 2. 당첨번호와 보너스 번호를 입력 받음
