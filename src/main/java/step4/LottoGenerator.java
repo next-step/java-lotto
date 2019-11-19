@@ -33,8 +33,7 @@ public class LottoGenerator {
         return shuffleLottoNumbers;
     }
 
-    public static Lotto makeManualLottos() {
-        String[] inputWinningNumbers = scan.nextLine().split(",");
+    public static Lotto makeManualLottos(String[] inputWinningNumbers) {
         for (int i = 0; i < LottoGenerator.WINNING_NUMBERS_LENGTH; i++) {
             inputWinningNumbers[i] = inputWinningNumbers[i].trim();
         }

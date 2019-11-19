@@ -23,7 +23,8 @@ public class InputView {
         System.out.println();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < manualCount; i++) {
-            collectManualLotto.add(LottoGenerator.makeManualLottos());
+            String[] inputWinningNumbers = scan.nextLine().split(",");
+            collectManualLotto.add(LottoGenerator.makeManualLottos(inputWinningNumbers));
             mergeLottos = Lotto.mergeLottoSets(collectManualLotto, mergeLottos);
         }
         return mergeLottos;
