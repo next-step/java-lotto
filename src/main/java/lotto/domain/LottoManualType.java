@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class LottoManualType implements CreatableLotto {
     private String[] manualLotto;
 
-    public LottoManualType(String[] manualLotto) {
+    LottoManualType(String[] manualLotto) {
         this.manualLotto = manualLotto;
     }
     @Override

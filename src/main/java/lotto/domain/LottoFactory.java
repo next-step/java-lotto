@@ -6,11 +6,11 @@ public class LottoFactory {
         return new LottoVersionSix();
     }
 
-    public CreatableLotto createAutoLotto() {
+    CreatableLotto createAutoLotto() {
         return new LottoAutoType();
     }
 
-    public CreatableLotto createManualLotto(String[] manualLotto) {
+    CreatableLotto createManualLotto(String[] manualLotto) {
         return new LottoManualType(manualLotto);
     }
 }

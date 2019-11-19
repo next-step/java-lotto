@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Insights {
+
     private final static int COUNT_ADD_NUMBER = 1;
     private final static int INITIAL_COUNT_VALUE = 0;
     private Map<Rank, Integer> insights;

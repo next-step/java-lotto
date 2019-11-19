@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class LottoController {
         return new WinningRank(winLotto, bonusNumber);
     }
 
-    public void viewResult(Lottos lottos, WinningRank winningRank,Money money) {
+    public void viewResult(Lottos lottos, WinningRank winningRank, Money money) {
 
         Ranks lottoRanks = new Ranks(winningRank, lottos);
 
