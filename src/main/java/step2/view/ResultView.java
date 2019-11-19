@@ -1,7 +1,5 @@
 package step2.view;
 
-import step2.AutoLotto;
-
 import java.util.List;
 
 public class ResultView {
@@ -9,7 +7,7 @@ public class ResultView {
 		System.out.println(lottos.size() + "개를 구매했습니다.");
 		lottos.forEach(lotto -> System.out.println(lotto));
 	}
-
+/*
 	public void showStatistic(int[] statistic) {
 		long sum = 0;
 		for (int i = 3; i < statistic.length; i++) {
@@ -18,4 +16,5 @@ public class ResultView {
 		}
 		System.out.println("총 수익은 " + sum + "입니다.");
 	}
+	*/
 }
