@@ -18,7 +18,19 @@ public class LottoGame {
 		}
 	}
 
-	public boolean checkLottosAmount(int num) {
-		return this.lottos.size() == num;
+	public LottoGame(List<AutoLotto> lottos) {
+		this.lottos = lottos;
+	}
+
+	public List<AutoLotto> getLottos() {
+		return this.lottos;
+	}
+
+	public long getPrizeSum(String winLotto) {
+		long prizeSum = 0;
+		for (AutoLotto lotto : lottos) {
+			prizeSum += lotto.getRank(winLotto).getPrize();
+		}
+		return prizeSum;
 	}
 }

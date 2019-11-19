@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,9 +23,23 @@ public class AutoLotto {
 		this.numbers = numbers;
 	}
 
-	public int getMatchNumberCount(List<Integer> compareNumbers) {
-		compareNumbers.retainAll(this.numbers);
-		return compareNumbers.size();
+	public Rank getRank(String winNumbers) {
+		return getRank(Arrays.stream(winNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList()));
+	}
+
+	public Rank getRank(List<Integer> winNumbers) {
+		int matchCount = 0;
+		for (Integer number : numbers) {
+			matchCount += contains(winNumbers, number);
+		}
+		return Rank.valueOf(matchCount);
+	}
+
+	private int contains(List<Integer> winNumbers, Integer number) {
+		if (winNumbers.contains(number)) {
+			return 1;
+		}
+		return 0;
 	}
 
 	public List<Integer> getNumbers() {

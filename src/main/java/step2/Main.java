@@ -6,13 +6,11 @@ import step2.view.ResultView;
 public class Main {
 	public static void main(String[] args) {
 		InputView inputView = new InputView();
-		ResultView resultView = new ResultView();
-/*
-		AutoLotto lotto = new AutoLotto(inputView.inputMoney());
-		resultView.showLottos(lotto.play());
+		ResultView resultView;
 
-		lotto.setResult(inputView.inputResult());
-		resultView.showStatistic(lotto.getStatistics());
-		*/
+		int money = inputView.inputMoney();
+		LottoGame lottoGame = new LottoGame(money);
+		resultView = new ResultView(lottoGame);
+		resultView.showStatistic(inputView.inputResult(), money);
 	}
 }
