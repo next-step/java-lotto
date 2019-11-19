@@ -3,9 +3,6 @@ package step4;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step4.LottoGenerator;
-import step4.LottoLottery;
-import step4.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.HashMap;
