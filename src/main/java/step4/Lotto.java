@@ -1,9 +1,7 @@
 package step4;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class Lotto {
 
@@ -48,5 +46,11 @@ public class Lotto {
             LottoLottery.purchasedLottoCompareBonusNumber(purchasedLotto.lotto, indexCount);
             indexCount++;
         }
+    }
+
+    public static <T> Set<T> mergeLottoSets(Set<T> manualLottos, Set<T> autoLottos) {
+        Set<T> set = new LinkedHashSet<>();
+        Stream.of(manualLottos, autoLottos).forEach(set::addAll);
+        return set;
     }
 }
