@@ -42,7 +42,7 @@ public class InputView {
 
     public static void bonusNumberAdd(Lotto inputWinningLottoNumberList) {
         System.out.println("보너스 볼을 입력해주세요.");
-        LottoNumber.lottoBonusNumber = scan.nextInt();
+        LottoLottery.lottoBonusNumber = scan.nextInt();
         LottoNumber.checkBonusNumber(inputWinningLottoNumberList);
     }
 }

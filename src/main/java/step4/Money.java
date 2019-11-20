@@ -44,7 +44,7 @@ public class Money {
     }
 
     private long calculateTotalPrize(Map<Integer, Integer> summaryResult, int key) {
-        if (LottoGenerator.BONUS_WINNING_VALID_NUMBER == key && LottoLottery.bonusCheck) {
+        if (LottoLottery.BONUS_WINNING_VALID_NUMBER == key && LottoLottery.bonusCheck) {
             return sumBonusPrize(summaryResult, key);
         }
         return Prize.matchOfCount(key, false).getWinningMoney() * summaryResult.get(key);

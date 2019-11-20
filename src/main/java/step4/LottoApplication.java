@@ -5,7 +5,6 @@ import java.util.Set;
 
 import static step4.InputView.bonusNumberAdd;
 import static step4.InputView.*;
-import static step4.LottoNumber.createLottoNumber;
 import static step4.ResultView.*;
 
 public class LottoApplication {
@@ -29,7 +28,7 @@ public class LottoApplication {
 
         // 2. 당첨번호와 보너스 번호를 입력 받음
         String[] inputWinningNumbers = inputWinningNumbers();
-        Lotto lotto = createLottoNumber(inputWinningNumbers);
+        Lotto lotto = LottoGenerator.createLottoNumber(inputWinningNumbers);
         bonusNumberAdd(lotto);
 
         // 3. 로또 당첨여부 확인

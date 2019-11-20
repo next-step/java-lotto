@@ -35,7 +35,7 @@ public class ResultView {
     }
 
     private static String goPrint(Map<Integer, Integer> summaryResult, int key) {
-        if (LottoGenerator.BONUS_WINNING_VALID_NUMBER == key) {
+        if (LottoLottery.BONUS_WINNING_VALID_NUMBER == key) {
             return hasBonusCheck(summaryResult, key);
         }
         return key + "개 일치 (" + Prize.matchOfCount(key, false).getWinningMoney() + "원)- " + summaryResult.get(key) + "개";
