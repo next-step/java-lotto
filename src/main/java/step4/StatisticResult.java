@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StatisticResult {
 
     private static final int MATCHING_LIMIT = 3;
-    public Map<Integer, Integer> statisticResult = new HashMap<>();
+    private Map<Integer, Integer> statisticResult = new HashMap<>();
 
     public StatisticResult() {
         for (int i = MATCHING_LIMIT; i < LottoGenerator.WINNING_NUMBERS_LENGTH + 1; i++) {
@@ -33,7 +33,7 @@ public class StatisticResult {
         for (int key : resultMatching.keySet()) {
             LottoLottery.updateBonusNumberIndex(resultMatching, key);
         }
-        return resultMatching.containsValue(LottoGenerator.BONUS_WINNING_VALID_NUMBER);
+        return resultMatching.containsValue(LottoLottery.BONUS_WINNING_VALID_NUMBER);
     }
 
     public static Map<Integer, Integer> beforeInstance(StatisticResult statisticResult) {
