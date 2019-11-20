@@ -29,7 +29,7 @@ public class LottoLotteryTest {
         resultMatching.put(1, 0);
         resultMatching.put(2, 0);
 
-        LottoNumber.lottoBonusNumber = LottoNumber.valueOf(lottoWinningNumbers.get(5));
+        LottoLottery.lottoBonusNumber = LottoNumber.valueOf(lottoWinningNumbers.get(5));
     }
 
     @DisplayName("보너스 당첨 여부 확인")

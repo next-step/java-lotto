@@ -24,7 +24,7 @@ public class LottoWinningNumbersTest {
     @Test
     public void 당첨번호_범위_확인() {
         String[] winningNumbers = "30, 2, 12, 22, 45, 1".split(",");
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.createLottoNumber(winningNumbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoGenerator.createLottoNumber(winningNumbers));
     }
 
     @DisplayName("당첨번호 중복 확인")
@@ -37,7 +37,7 @@ public class LottoWinningNumbersTest {
     @DisplayName("보너스번호 중복/ 보너스번호 범위 확인")
     @Test
     public void 보너스번호_유효성_확인() {
-        LottoNumber.lottoBonusNumber = 10;
+        LottoLottery.lottoBonusNumber = 10;
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.checkOverlapBonusNumber(10));
     }
 }
