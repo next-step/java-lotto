@@ -10,7 +10,7 @@ import java.util.Objects;
 public class LottoAmount {
 
     private static final int LOTTO_PRICE = 1000;
-    private final int amount;
+    private int amount;
 
     public LottoAmount(int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
@@ -19,8 +19,16 @@ public class LottoAmount {
         this.amount = purchaseAmount;
     }
 
-    public int getLottoAmount() {
+    public int getAvailableLottoCount() {
         return this.amount / LOTTO_PRICE;
+    }
+
+    public void decrease() {
+        this.amount = this.amount - LOTTO_PRICE;
+    }
+
+    public boolean isEnd() {
+        return this.amount < LOTTO_PRICE;
     }
 
     @Override
