@@ -1,10 +1,7 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -15,8 +12,6 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final Pattern NUMERIC = Pattern.compile("^[0-9]+$");
-    private static final Predicate<String> IS_NUMERIC = str -> NUMERIC.matcher(str).matches();
     private List<LottoNumber> lottoNumbers;
 
     private Lotto(List<Integer> lottoNumbers) {
@@ -33,14 +28,6 @@ public class Lotto {
 
     public static final Lotto of(List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers);
-    }
-
-    public static final Lotto ofWinningLotto(String lottoNumbers) {
-        return new Lotto(Arrays.stream(lottoNumbers.split(","))
-                .map(String::trim)
-                .filter(IS_NUMERIC)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
     }
 
     private boolean contains(LottoNumber number) {
