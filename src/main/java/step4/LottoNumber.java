@@ -11,7 +11,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
     public static final int LOTTO_NUMBER_MIN = 1;
     public static final int LOTTO_NUMBER_MAX = 45;
 
-    public static int lottoBonusNumber;
     private final int number;
 
     public LottoNumber(int number) {
@@ -23,10 +22,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public LottoNumber(int number, boolean pass) {
         this.number = number;
-    }
-
-    public static Lotto createLottoNumber(String[] inputWinningNumbers) {
-        return new Lotto(splitLottoNumbers(inputWinningNumbers));
     }
 
     public static List<LottoNumber> splitLottoNumbers(String[] inputWinningNumbers) {
@@ -50,12 +45,12 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     public static void checkOverlapBonusNumber(int winningNumber) {
-        if (winningNumber == lottoBonusNumber)
+        if (winningNumber == LottoLottery.lottoBonusNumber)
             throw new IllegalArgumentException("입력 된 당첨번호 중에 보너스 번호와 중복되는 값이 있습니다.");
     }
 
     public static void checkBonusNumber(Lotto inputWinningNumber) {
-        new LottoNumber(lottoBonusNumber);
+        new LottoNumber(LottoLottery.lottoBonusNumber);
         for (LottoNumber number : Lotto.valueOf(inputWinningNumber)) {
             checkOverlapBonusNumber(valueOf(number));
         }
