@@ -23,14 +23,6 @@ public class LottoAmount {
         return this.amount / LOTTO_PRICE;
     }
 
-    public void decrease() {
-        this.amount = this.amount - LOTTO_PRICE;
-    }
-
-    public boolean isEnd() {
-        return this.amount < LOTTO_PRICE;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
