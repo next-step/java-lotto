@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +22,7 @@ public class WinningLotto {
     }
 
     private WinningLotto(String winningNumbers, int bonusNo) {
-        this.winningLotto = Lotto.ofWinningLotto(winningNumbers);
+        this.winningLotto = Lotto.of(Util.stringToList(winningNumbers));
         this.bonusNo = createBonusNo(bonusNo);
     }
 
