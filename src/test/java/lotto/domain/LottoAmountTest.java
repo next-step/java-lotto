@@ -27,18 +27,4 @@ public class LottoAmountTest {
         LottoAmount lottoAmount = new LottoAmount(10000);
         assertThat(lottoAmount.getAvailableLottoCount()).isEqualTo(10);
     }
-
-    @Test
-    void 로또_구매금액_감소() {
-        LottoAmount lottoAmount = new LottoAmount(10000);
-        lottoAmount.decrease();
-        assertThat(lottoAmount.getAvailableLottoCount()).isEqualTo(9);
-    }
-
-    @Test
-    void 구매금액_0원_테스트() {
-        LottoAmount lottoAmount = new LottoAmount(1000);
-        lottoAmount.decrease();
-        assertThat(lottoAmount.isEnd()).isTrue();
-    }
 }

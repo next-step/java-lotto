@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Util;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ class WinningLottoTest {
 
     @Test
     void 생성() {
-        WinningLotto winningLotto = WinningLotto.ofBonusNo("1,2,3,4,5,6" , 7);
+        WinningLotto winningLotto = WinningLotto.ofBonusNo("1,2,3,4,5,6", 7);
         assertThat(winningLotto).isEqualTo(WinningLotto.ofBonusNo("1,2,3,4,5,6", 7));
     }
 
@@ -39,12 +40,12 @@ class WinningLottoTest {
     @Test
     void match() {
         WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6");
-        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.ofWinningLotto("1,2,3,4,5,6")))).contains(WinningLottoAmount.FIRST);
+        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.of(Util.stringToList("1,2,3,4,5,6"))))).contains(WinningLottoAmount.FIRST);
     }
 
     @Test
     void 로또_2등_테스트() {
         WinningLotto winningLotto = WinningLotto.ofBonusNo("1,2,3,4,5,6", 7);
-        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.ofWinningLotto("1,2,3,4,5,7")))).contains(WinningLottoAmount.SECOND);
+        assertThat(winningLotto.matchLottos(Arrays.asList(Lotto.of(Util.stringToList("1,2,3,4,5,7"))))).contains(WinningLottoAmount.SECOND);
     }
 }

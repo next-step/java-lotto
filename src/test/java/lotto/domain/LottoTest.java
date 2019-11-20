@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Util;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -35,13 +36,13 @@ public class LottoTest {
 
     @Test
     void 생성_문자열() {
-        Lotto lotto = Lotto.ofWinningLotto("1,2,3,4,5,6");
+        Lotto lotto = Lotto.of(Util.stringToList("1,2,3,4,5,6"));
         assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     void get_lotto_number() {
-        Lotto lotto = Lotto.ofWinningLotto("1,2,3,4,5,6");
+        Lotto lotto = Lotto.of(Util.stringToList("1,2,3,4,5,6"));
         assertThat(lotto.getLottoNumber()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }
