@@ -2,10 +2,9 @@ package lotto;
 
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoAmount;
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoPurchase;
+import lotto.domain.Lottos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,44 +14,23 @@ import java.util.List;
  */
 public class LottoMachine {
 
-    private LottoAmount lottoAmount;
-    private final List<Lotto> lottos;
+    private LottoPurchase lottoPurchase;
+    private final Lottos lottos;
 
-    public LottoMachine(LottoAmount lottoAmount) {
-        this.lottoAmount = lottoAmount;
-        this.lottos = new ArrayList<>();
-    }
-
-    private void purchaseAutoLotto(LottoGenerator lottoGenerator) {
-        while (!lottoAmount.isEndAutoLotto()) {
-            this.lottoAmount = lottoAmount.decrease();
-            lottos.add(Lotto.of(lottoGenerator.generate()));
-        }
-    }
-
-    private void purchaseManualLotto(List<String> manualLottoNumbers) {
-        for (String lottoNumber : manualLottoNumbers) {
-            lottos.add(Lotto.ofWinningLotto(lottoNumber));
-        }
+    public LottoMachine(LottoPurchase lottoPurchase, List<String> manualLottoNumbers) {
+        this.lottoPurchase = lottoPurchase;
+        this.lottos = new Lottos(lottoPurchase, manualLottoNumbers);
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return this.lottos.getLottoNumbers();
     }
 
     public int getAutoLottoCount() {
-        return this.lottoAmount.getAutoLottoCount();
+        return this.lottoPurchase.getAutoLottoCount();
     }
 
     public int getManualLottoCount() {
-        return this.lottoAmount.getManualLottoCount();
-    }
-
-    public void purchaseLotto(LottoGenerator lottoGenerator, List<String> manualLottoNumbers) {
-        purchaseAutoLotto(lottoGenerator);
-
-        if (manualLottoNumbers.size() > 0) {
-            purchaseManualLotto(manualLottoNumbers);
-        }
+        return this.lottoPurchase.getManualLottoCount();
     }
 }
