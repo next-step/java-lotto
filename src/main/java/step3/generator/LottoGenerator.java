@@ -5,5 +5,5 @@ import step3.model.Lotto;
 import java.util.List;
 
 public interface LottoGenerator {
-	List<Lotto> generate(int money);
+    List<Lotto> generate(int money);
 }
