@@ -42,7 +42,6 @@ public class StringAddCalculatorTest {
 		assertThat(calculator.hasDelimiter("?")).isFalse();
 	}
 
-
 	@ParameterizedTest
 	@CsvSource(value = {"1,2|3", "4:5|9", "1,2:3|6"}, delimiter = '|')
 	void delimiterTest(String text, int result) {
