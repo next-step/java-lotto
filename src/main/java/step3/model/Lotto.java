@@ -37,6 +37,10 @@ public class Lotto {
 		return count;
 	}
 
+	public Rank getRank(Lotto taret, LottoNumber bonusNumber) {
+		return Rank.valueOf(getMatchCount(taret), hasNumber(bonusNumber));
+	}
+
 	boolean hasNumber(LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
 	}

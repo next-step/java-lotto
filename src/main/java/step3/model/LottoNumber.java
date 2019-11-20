@@ -16,11 +16,11 @@ public class LottoNumber {
 		this.number = number;
 	}
 
-	static LottoNumber of(int number) {
+	public static LottoNumber of(int number) {
 		return new LottoNumber(number);
 	}
 
-	static LottoNumber of(String number) {
+	public static LottoNumber of(String number) {
 		if (Objects.isNull(number)) {
 			throw new IllegalArgumentException();
 		}
