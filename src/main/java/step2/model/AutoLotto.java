@@ -1,5 +1,6 @@
 package step2.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +25,12 @@ public class AutoLotto {
 	}
 
 	public Rank getRank(String winNumbers) {
-		return getRank(Arrays.stream(winNumbers.split(",")).map(Integer::parseInt).collect(Collectors.toList()));
+		List<Integer> list = new ArrayList<>();
+		for (String s : winNumbers.split(",")) {
+			Integer parseInt = Integer.parseInt(s);
+			list.add(parseInt);
+		}
+		return getRank(list);
 	}
 
 	public Rank getRank(List<Integer> winNumbers) {
