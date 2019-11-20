@@ -28,6 +28,9 @@ public class LottoGame {
 	}
 
 	public LottoResult getResult(Lotto winLotto, LottoNumber bonusNumber) {
+		if (winLotto.hasNumber(bonusNumber)) {
+			throw new IllegalArgumentException();
+		}
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : lottos) {
 			addRank(ranks, lotto.getRank(winLotto, bonusNumber));

@@ -1,7 +1,6 @@
 package step3.model;
 
 import org.junit.jupiter.api.Test;
-import step3.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +29,5 @@ public class LottoResultTest {
 
 		LottoResult lottoResult = new LottoResult(ranks, 14000);
 		assertThat(lottoResult.getProfit()).isEqualTo(0.35);
-
-		ResultView resultView = new ResultView();
-		resultView.printResult(lottoResult);
 	}
 }

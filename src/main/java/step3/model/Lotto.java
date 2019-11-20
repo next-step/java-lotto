@@ -41,7 +41,7 @@ public class Lotto {
 		return Rank.valueOf(getMatchCount(taret), hasNumber(bonusNumber));
 	}
 
-	boolean hasNumber(LottoNumber lottoNumber) {
+	public boolean hasNumber(LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
 	}
 

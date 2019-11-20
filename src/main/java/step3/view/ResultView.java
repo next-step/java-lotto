@@ -14,8 +14,7 @@ public class ResultView {
 	}
 
 	public void printResult(LottoResult lottoResult) {
-		System.out.println("당첨 통계");
-		System.out.println("---------");
+		System.out.println("\n당첨 통계\n---------");
 		System.out.printf("3개 일치 (%d원)- %d개\n", Rank.FIFTH.getPrize(), lottoResult.getRankCount(Rank.FIFTH));
 		System.out.printf("4개 일치 (%d원)- %d개\n", Rank.FOURTH.getPrize(), lottoResult.getRankCount(Rank.FOURTH));
 		System.out.printf("5개 일치 (%d원)- %d개\n", Rank.THIRD.getPrize(), lottoResult.getRankCount(Rank.THIRD));
