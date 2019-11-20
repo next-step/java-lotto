@@ -1,28 +1,30 @@
 package lotto;
 
-import lotto.domain.AutoLottosGenerator;
-import lotto.domain.Lottos;
-import lotto.domain.Ranks;
-import lotto.view.InputView;
+import lotto.domain.*;
 import lotto.view.ResultView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
 
-    public void execute() {
-        int count = InputView.purchaseCount();
-        Lottos lottos = new Lottos(count, new AutoLottosGenerator());
+    public Lottos execute(Money money, List<String> manualLottosNumbers) {
+        Lottos manualLottos = new LottosMaker().generate(manualLottosNumbers);
+        Lottos autoLottos = new LottosMaker().generate(money);
+        Lottos lottos = new Lottos(manualLottos.addManualLottos(autoLottos.getLottos()));
+
         ResultView.printLottoNumber(lottos);
+        return lottos;
+    }
 
-        int[] winLotto = InputView.getWinLotto();
-        int bonusNumber = InputView.getBonusNumber();
-        Ranks lottoRanks = new Ranks(winLotto, bonusNumber);
-        List<Rank> winningRanks = lottoRanks.getWinningLottoRanks(lottos);
-        Map<Rank, Integer> lottoInsights = lottoRanks.updateLottoRank();
+    public WinningRank applyRank(int[] winLotto, int bonusNumber) {
+        return new WinningRank(winLotto, bonusNumber);
+    }
 
-        ResultView.printLottoResult(lottoInsights);
-        ResultView.getYield(lottoRanks.getTotalLottoWinningPrice(winningRanks), count);
+    public void viewResult(Lottos lottos, WinningRank winningRank, Money money) {
+
+        Ranks lottoRanks = new Ranks(winningRank, lottos);
+
+        ResultView.printLottoResult(lottoRanks);
+        ResultView.getYield(lottoRanks, money);
     }
 }

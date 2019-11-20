@@ -1,33 +1,36 @@
 package lotto.view;
 
 import lotto.Rank;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final int LOTTO_VALUE = 1000;
     private static final double YIELD_PIVOT_NUMBER = 1.0;
 
     public static void printLottoNumber(Lottos purchasedLotto) {
         List<Lotto> lottos = purchasedLotto.getLottos();
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getLottoNumber());
+            List<Integer> lottoNumber = lotto.getLottoNumber()
+                    .stream()
+                    .map(LottoNo::getNumber)
+                    .collect(Collectors.toList());
+            System.out.println(lottoNumber.toString());
         }
     }
 
-    public static void printLottoResult(Map<Rank, Integer> ranks) {
+    public static void printLottoResult(Ranks ranks) {
         printDescription();
-        for (Map.Entry<Rank, Integer> entry : ranks.entrySet()) {
+        for (Map.Entry<Rank, Integer> entry : ranks.updateLottoRank().entrySet()) {
             System.out.println(printLotto(entry));
         }
     }
 
-    public static void getYield(int totalWinningPrice, int count) {
-        int purchasePrice = count * LOTTO_VALUE;
-        double yield = (double) totalWinningPrice / purchasePrice;
+    public static void getYield(Ranks ranks, Money money) {
+        double yield = (double) ranks.getTotalLottoWinningPrice() / money.getPurchaseAmount();
         System.out.println(printYield(yield));
     }
 

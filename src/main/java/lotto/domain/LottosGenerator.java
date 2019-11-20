@@ -3,6 +3,12 @@ package lotto.domain;
 import java.util.List;
 
 public interface LottosGenerator {
-    List<Lotto> generate(int count);
 
+    default Lottos generate(Money money) {
+        return null;
+    }
+
+    default Lottos generate(List<String> manualLottos) {
+        return null;
+    }
 }
