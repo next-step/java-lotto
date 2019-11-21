@@ -1,8 +1,8 @@
-package step3.view;
+package step4.view;
 
-import step3.model.Lotto;
-import step3.model.LottoResult;
-import step3.model.Rank;
+import step4.model.Lotto;
+import step4.model.LottoResult;
+import step4.model.Rank;
 
 import java.util.List;
 

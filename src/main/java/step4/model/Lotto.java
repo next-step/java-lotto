@@ -1,4 +1,4 @@
-package step3.model;
+package step4.model;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package step3.model;
+package step4.model;
 
 public enum Rank {
     FIRST(6, 2_000_000_000),

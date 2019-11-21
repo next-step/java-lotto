@@ -1,10 +1,10 @@
-package step3;
+package step4;
 
-import step3.generator.LottoGenerator;
-import step3.model.Lotto;
-import step3.model.LottoNumber;
-import step3.model.LottoResult;
-import step3.model.Rank;
+import step4.generator.LottoGenerator;
+import step4.model.Lotto;
+import step4.model.LottoNumber;
+import step4.model.LottoResult;
+import step4.model.Rank;
 
 import java.util.ArrayList;
 import java.util.List;

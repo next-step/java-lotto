@@ -1,6 +1,6 @@
-package step3.generator;
+package step4.generator;
 
-import step3.model.Lotto;
+import step4.model.Lotto;
 
 import java.util.List;
 

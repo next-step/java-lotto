@@ -1,10 +1,10 @@
-package step3;
+package step4;
 
-import step3.generator.AutoLottoGenerator;
-import step3.model.Lotto;
-import step3.model.LottoNumber;
-import step3.view.InputView;
-import step3.view.ResultView;
+import step4.generator.AutoLottoGenerator;
+import step4.model.Lotto;
+import step4.model.LottoNumber;
+import step4.view.InputView;
+import step4.view.ResultView;
 
 public class Main {
     public static void main(String[] args) {

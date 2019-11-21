@@ -1,6 +1,6 @@
-package step3.generator;
+package step4.generator;
 
-import step3.model.Lotto;
+import step4.model.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoGenerator implements LottoGenerator {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
