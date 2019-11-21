@@ -16,6 +16,10 @@ public class DefaultLottoGenerator implements LottoGenerator {
 				.collect(Collectors.toList());
 	}
 
+	public DefaultLottoGenerator(List<Lotto> lottos) {
+		this.lottos = lottos;
+	}
+
 	@Override
 	public List<Lotto> generate(int money) {
 		money -= lottos.size() * AutoLottoGenerator.LOTTO_PRICE;
