@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Util;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -15,33 +16,33 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
     @Test
     void 생성() {
-        Lotto lotto = Lotto.of(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     void 로또_번호_갯수_검증() {
         assertThatThrownBy(() -> {
-            Lotto.of(Arrays.asList(1,2,3,4,5));
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 로또_번호_중복_번호_검증() {
         assertThatThrownBy(() -> {
-            Lotto.of((Arrays.asList(1,2,3,4,5,5)));
+            Lotto.of((Arrays.asList(1, 2, 3, 4, 5, 5)));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 생성_문자열() {
-        Lotto lotto = Lotto.ofWinningLotto("1,2,3,4,5,6");
-        assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1,2,3,4,5,6)));
+        Lotto lotto = Lotto.of(Util.stringToList("1,2,3,4,5,6"));
+        assertThat(lotto).isEqualTo(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     void get_lotto_number() {
-        Lotto lotto = Lotto.ofWinningLotto("1,2,3,4,5,6");
-        assertThat(lotto.getLottoNumber()).isEqualTo(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto = Lotto.of(Util.stringToList("1,2,3,4,5,6"));
+        assertThat(lotto.getLottoNumber()).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }

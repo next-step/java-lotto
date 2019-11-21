@@ -2,10 +2,9 @@ package lotto;
 
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoAmount;
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoPurchase;
+import lotto.domain.Lottos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,25 +14,23 @@ import java.util.List;
  */
 public class LottoMachine {
 
-    private final LottoAmount lottoAmount;
-    private final List<Lotto> lottos;
+    private LottoPurchase lottoPurchase;
+    private final Lottos lottos;
 
-    public LottoMachine(LottoAmount lottoAmount) {
-        this.lottoAmount = lottoAmount;
-        this.lottos = new ArrayList<>();
-    }
-
-    public void purchase(LottoGenerator lottoGenerator) {
-        for (int amount = 0; amount < lottoAmount.amount(); amount++) {
-            lottos.add(Lotto.of(lottoGenerator.generate()));
-        }
+    public LottoMachine(LottoPurchase lottoPurchase, List<String> manualLottoNumbers) {
+        this.lottoPurchase = lottoPurchase;
+        this.lottos = new Lottos(lottoPurchase, manualLottoNumbers);
     }
 
     public List<Lotto> getLottos() {
-        return this.lottos;
+        return this.lottos.getLottoNumbers();
     }
 
-    public int getLottoCount() {
-        return this.lottoAmount.amount();
+    public int getAutoLottoCount() {
+        return this.lottoPurchase.getAutoLottoCount();
+    }
+
+    public int getManualLottoCount() {
+        return this.lottoPurchase.getManualLottoCount();
     }
 }

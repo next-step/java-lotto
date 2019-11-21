@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,8 +21,8 @@ public class WinningLotto {
         this(winningLotto, 0);
     }
 
-    public WinningLotto(String winningNumbers, int bonusNo) {
-        this.winningLotto = Lotto.ofWinningLotto(winningNumbers);
+    private WinningLotto(String winningNumbers, int bonusNo) {
+        this.winningLotto = Lotto.of(Util.stringToList(winningNumbers));
         this.bonusNo = createBonusNo(bonusNo);
     }
 
@@ -28,7 +30,7 @@ public class WinningLotto {
         return new WinningLotto(winningNumbers);
     }
 
-    public static final WinningLotto createWithBonusNo(String winningNumbers, int bonusNo) {
+    public static WinningLotto ofBonusNo(String winningNumbers, int bonusNo) {
         return new WinningLotto(winningNumbers, bonusNo);
     }
 
@@ -43,6 +45,9 @@ public class WinningLotto {
     private LottoNumber createBonusNo(int bonusNo) {
         if (bonusNo == 0) {
             return LottoNumber.of(LOTTO_GENERATOR.generateBonusNo(this.winningLotto));
+        }
+        if (this.winningLotto.getLottoNumber().contains(bonusNo)) {
+            throw new IllegalArgumentException("당첨번호와 보너스번호는 중복이 불가능합니다.");
         }
 
         return LottoNumber.of(bonusNo);
