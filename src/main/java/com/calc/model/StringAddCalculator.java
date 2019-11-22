@@ -1,22 +1,19 @@
 package com.calc.model;
 
-import com.calc.constant.StringAddCalculatorConstant;
+import com.lotto.constant.StringAddCalculatorConstant;
 
 public class StringAddCalculator {
 
-    private InputValidator inputValidator = new InputValidator();
-    private CustomDelimiter customDelimiter = new CustomDelimiter();
+    private StringAddCalcInputValidator stringAddCalcInputValidator = new StringAddCalcInputValidator();
+    private StringAddCalcCustomDelimiter stringAddCalcCustomDelimiter = new StringAddCalcCustomDelimiter();
 
     public int execute(String inputValue) {
-        inputValue = inputValidator.validateNullAndEmpty(inputValue);
+        inputValue = stringAddCalcInputValidator.validateNullAndEmpty(inputValue);
         if (StringAddCalculatorConstant.STRING_ZERO_NUMBER.equals(inputValue)) {
             return StringAddCalculatorConstant.ZERO_NUMBER;
         }
 
-        String[] inputValues = customDelimiter.getValuesToAdd(inputValue);
-        if (inputValue.length() == StringAddCalculatorConstant.ZERO_NUMBER) {
-            inputValues = inputValue.split(",|:");
-        }
+        String[] inputValues = stringAddCalcCustomDelimiter.getValuesToAdd(inputValue);
 
         return add(inputValues);
      }
@@ -24,7 +21,7 @@ public class StringAddCalculator {
      private int add(String[] inputValues) {
         int result = StringAddCalculatorConstant.ZERO_NUMBER;
         for (String stringNumber : inputValues) {
-            result += inputValidator.validateStringNumber(stringNumber);
+            result += stringAddCalcInputValidator.validateStringNumber(stringNumber);
         }
         return result;
      }

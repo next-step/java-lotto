@@ -1,10 +1,10 @@
 package com.calc.view;
 
-public class ResultView {
+public class StringAddCalcResultView {
 
     private int result;
 
-    public ResultView(int result) {
+    public StringAddCalcResultView(int result) {
         this.result = result;
     }
 

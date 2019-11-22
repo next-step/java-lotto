@@ -1,16 +1,16 @@
 package com.calc.view;
 
-import com.calc.model.InputValidator;
+import com.calc.model.StringAddCalcInputValidator;
 
 import java.util.Scanner;
 
-public class InputView {
+public class StringAddCalcInputView {
 
     private final String inputValue;
 
-    private InputValidator inputValidator = new InputValidator();
+    private StringAddCalcInputValidator stringAddCalcInputValidator = new StringAddCalcInputValidator();
 
-    public InputView() {
+    public StringAddCalcInputView() {
         Scanner scanner = new Scanner(System.in);
         this.inputValue = scanner.next();
     }
