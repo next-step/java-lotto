@@ -4,28 +4,28 @@ import java.util.List;
 
 public class LottoResult {
     private final List<Rank> ranks;
-    private final int money;
-    private int prizeSum;
+    private final Money money;
+    private Money prizeSum;
 
-    public LottoResult(List<Rank> ranks, int money) {
+    public LottoResult(List<Rank> ranks, Money money) {
         this.ranks = ranks;
         this.money = money;
 
-        for(Rank rank : ranks) {
-            prizeSum += rank.getPrize();
+        for (Rank rank : ranks) {
+            prizeSum = prizeSum == null ? rank.getPrize() : prizeSum.sum(rank.getPrize());
         }
     }
 
-    public int getPrizeSum() {
-        return prizeSum;
+    public boolean comparePrizeSum(Money money) {
+        return prizeSum.equals(money);
     }
 
     public double getProfit() {
-        return (Math.floor((double) prizeSum / money * 100) / 100.0);
+        return money.getProfit(prizeSum);
     }
 
     public int getRankCount(Rank findRank) {
-        return (int)ranks.stream()
+        return (int) ranks.stream()
                 .filter(rank -> rank == findRank)
                 .count();
     }

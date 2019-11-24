@@ -1,24 +1,21 @@
 package step4;
 
 import step4.generator.LottoGenerator;
-import step4.model.Lotto;
-import step4.model.LottoNumber;
-import step4.model.LottoResult;
-import step4.model.Rank;
+import step4.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
     private final List<Lotto> lottos;
-    private final int money;
+    private final Money money;
 
-    public LottoGame(LottoGenerator generator, int money) {
+    public LottoGame(LottoGenerator generator, Money money) {
         this.lottos = generator.generate(money);
         this.money = money;
     }
 
-    public LottoGame(List<Lotto> lottos, int money) {
+    public LottoGame(List<Lotto> lottos, Money money) {
         this.lottos = lottos;
         this.money = money;
     }

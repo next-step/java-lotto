@@ -22,8 +22,8 @@ public enum Rank {
         return this.matchCount;
     }
 
-    public int getPrize() {
-        return this.prize;
+    public Money getPrize() {
+        return new Money(this.prize);
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
