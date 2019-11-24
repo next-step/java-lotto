@@ -1,6 +1,7 @@
 package step4.generator;
 
 import step4.model.Lotto;
+import step4.model.Lottos;
 import step4.model.Money;
 
 import java.util.Arrays;
@@ -22,9 +23,9 @@ public class DefaultLottoGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<Lotto> generate(Money money) {
+    public Lottos generate(Money money) {
         Money autoMoney = money.leftMoney(lottos.size());
-        lottos.addAll(autoLottoGenerator.generate(autoMoney));
-        return lottos;
+        lottos.addAll(autoLottoGenerator.generate(autoMoney).getLottos());
+        return new Lottos(lottos);
     }
 }

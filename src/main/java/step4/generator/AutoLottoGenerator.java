@@ -1,6 +1,7 @@
 package step4.generator;
 
 import step4.model.Lotto;
+import step4.model.Lottos;
 import step4.model.Money;
 
 import java.util.ArrayList;
@@ -14,16 +15,18 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int MAX_NUMBER = 45;
 
     @Override
-    public List<Lotto> generate(Money money) {
+    public Lottos generate(Money money) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < money.lottoCount(); i++) {
             lottos.add(makeLotto());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public Lotto makeLotto() {
-        List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER).boxed().collect(Collectors.toList());
+        List<Integer> numbers = IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
         Collections.shuffle(numbers);
         numbers = numbers.subList(0, 6);
         Collections.sort(numbers);

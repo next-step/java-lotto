@@ -4,6 +4,7 @@ import step4.generator.DefaultLottoGenerator;
 import step4.model.Lotto;
 import step4.model.LottoNumber;
 import step4.model.Money;
+import step4.model.WinningLotto;
 import step4.view.InputView;
 import step4.view.ResultView;
 
@@ -23,8 +24,7 @@ public class Main {
         LottoGame lottoGame = new LottoGame(new DefaultLottoGenerator(manualLottos), money);
         resultView.printLottos(lottoGame.getLottos());
 
-        Lotto winLotto = Lotto.ofComma(inputView.inputResult());
-        LottoNumber lottoNumber = LottoNumber.of(inputView.inputBonus());
-        resultView.printResult(lottoGame.getResult(winLotto, lottoNumber));
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofComma(inputView.inputResult()), LottoNumber.of(inputView.inputBonus()));
+        resultView.printResult(lottoGame.getResult(winningLotto));
     }
 }

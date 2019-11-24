@@ -15,11 +15,22 @@ public class ResultView {
 
     public void printResult(LottoResult lottoResult) {
         System.out.println("\n당첨 통계\n---------");
-        System.out.printf("3개 일치 (%s원)- %d개\n", Rank.FIFTH.getPrize(), lottoResult.getRankCount(Rank.FIFTH));
-        System.out.printf("4개 일치 (%s원)- %d개\n", Rank.FOURTH.getPrize(), lottoResult.getRankCount(Rank.FOURTH));
-        System.out.printf("5개 일치 (%s원)- %d개\n", Rank.THIRD.getPrize(), lottoResult.getRankCount(Rank.THIRD));
-        System.out.printf("5개 일치, 보너스 볼 일치(%s원)- %d개\n", Rank.SECOND.getPrize(), lottoResult.getRankCount(Rank.SECOND));
-        System.out.printf("6개 일치 (%s원)- %d개\n", Rank.FIRST.getPrize(), lottoResult.getRankCount(Rank.FIRST));
-        System.out.printf("총 수익률은 %s입니다.\n", String.valueOf(lottoResult.getProfit()));
+        for (Rank rank : Rank.values()) {
+            printStatistics(rank, lottoResult);
+        }
+        System.out.printf("총 수익률은 %s입니다.\n", lottoResult.getProfit());
+    }
+
+    private void printStatistics(Rank rank, LottoResult lottoResult) {
+        if (rank == Rank.MISS) {
+            return;
+        }
+
+        if (rank.useBonusNo()) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%s원)- %d개\n", rank.getMatchCount(), rank.getPrize(), lottoResult.getRankCount(rank));
+            return;
+        }
+
+        System.out.printf("%d개 일치 (%s원)- %d개\n", rank.getMatchCount(), rank.getPrize(), lottoResult.getRankCount(rank));
     }
 }

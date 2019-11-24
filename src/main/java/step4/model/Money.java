@@ -1,5 +1,6 @@
 package step4.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Money {
@@ -24,7 +25,10 @@ public class Money {
     }
 
     public double getProfit(Money prizeSum) {
-        return (Math.floor((double) prizeSum.money / money * 100) / 100.0);
+        BigDecimal decimalSum = new BigDecimal(prizeSum == null ? 0 : prizeSum.money);
+        BigDecimal decimalMoney = new BigDecimal(money);
+
+        return decimalSum.divide(decimalMoney, 2, BigDecimal.ROUND_FLOOR).doubleValue();
     }
 
     @Override
