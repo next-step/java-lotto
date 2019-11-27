@@ -12,10 +12,8 @@ public class Winner {
         this.profit = profit;
     }
 
-    public Winner(LottoTickets lottoTickets, String lastWeekWinningInput, LottoNum bonus) {
-        List<Integer> winnerNums = LottoTicket.splitNums(lastWeekWinningInput);
-
-        ranks = new Ranks(lottoTickets, winnerNums, bonus);
+    public Winner(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        ranks = new Ranks(lottoTickets, winningLotto);
     }
 
     public Winner ofProfit(int lottoTicketsSize) {

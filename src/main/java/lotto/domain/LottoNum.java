@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoNum implements Comparable<LottoNum> {
-    public static final int LOTTO_NUM_MIN = 1;
-    public static final int LOTTO_NUM_MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private int lottoNum;
 
@@ -16,12 +18,6 @@ public class LottoNum implements Comparable<LottoNum> {
         this(Integer.parseInt(lottoNumInput));
     }
 
-    public LottoNum(int lottoNumInput, String winningLotto) {
-        this(lottoNumInput);
-
-        checkOverlaid(winningLotto);
-    }
-
     private void checkNumRange() {
         if (!isProperNumRange()) {
             throw new IllegalArgumentException("Out of range");
@@ -29,14 +25,7 @@ public class LottoNum implements Comparable<LottoNum> {
     }
 
     private boolean isProperNumRange() {
-        return lottoNum >= LOTTO_NUM_MIN && lottoNum <= LOTTO_NUM_MAX;
-    }
-
-    private void checkOverlaid(String winningLotto) {
-        LottoTicket winnerTicket = new LottoTicket(LottoTicket.splitNums(winningLotto));
-        if (matchNumber(winnerTicket)) {
-            throw new IllegalArgumentException("winning lottonum is overlaid");
-        }
+        return lottoNum >= MIN && lottoNum <= MAX;
     }
 
     @Override
@@ -52,7 +41,16 @@ public class LottoNum implements Comparable<LottoNum> {
         return lottoNum;
     }
 
-    public boolean matchNumber(LottoTicket lottoTicket) {
-        return lottoTicket.contains(lottoNum);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNum lottoNum1 = (LottoNum) o;
+        return lottoNum == lottoNum1.lottoNum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNum);
     }
 }

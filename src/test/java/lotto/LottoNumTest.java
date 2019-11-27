@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumTest {
-    LottoNum bonus = new LottoNum(45);
-    LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
+    private LottoNum bonus = new LottoNum(45);
+    private LottoTicket lottoTicket = LottoTicket.ofString("1, 2, 3, 4, 5, 45");
 
     @DisplayName("1~45 범위 내 검사")
     @ParameterizedTest
@@ -36,21 +36,6 @@ public class LottoNumTest {
         assertThat(bonus.getLottoNum()).isBetween(1, 45);
     }
 
-    @DisplayName("보너스볼 일치")
-    @Test
-    void matchBonusNumberTest() {
-        assertThat(bonus.matchNumber(lottoTicket)).isTrue();
-    }
-
-    @DisplayName("보너스번호가 이미 생성된 당첨 번호랑 겹치는지 검사")
-    @Test
-    void checkOverlapTest() {
-        String winnginglotto = "1,2,3,4,5,45";
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNum(45, winnginglotto);
-        });
-    }
 
     @DisplayName("숫자 변환 불가")
     @Test

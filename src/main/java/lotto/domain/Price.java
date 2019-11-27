@@ -3,7 +3,7 @@ package lotto.domain;
 import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
 public class Price {
-    private int price;
+    final private int price;
 
     public Price(int inputPrice) {
         this.price = inputPrice;

@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.domain.LottoGenerator.LOTTO_SIZE;
@@ -10,19 +12,19 @@ public class LottoTicket {
     public static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_NUMS_DELIMITER = ",";
 
-    private List<LottoNum> lottoNums;
+    private Set<LottoNum> lottoNums;
 
-    public LottoTicket() {
-        this.lottoNums = LottoGenerator.makeAutoNumbers();
-    }
-
-    public LottoTicket(List<Integer> lottoNums) {
+    private LottoTicket(List<Integer> lottoNums) {
         this.lottoNums = LottoGenerator.makeNumbers(lottoNums);
     }
 
+    public static LottoTicket of(List<Integer> lottoNums) {
+        return new LottoTicket(lottoNums);
+    }
+
     public static LottoTicket ofString(String manualLotto) {
-        List<Integer> lotto = splitNums(manualLotto);
-        return new LottoTicket(lotto);
+        List<Integer> lottoNums = splitNums(manualLotto);
+        return new LottoTicket(lottoNums);
     }
 
     public static List<Integer> splitNums(String lottoInput) {
@@ -30,41 +32,37 @@ public class LottoTicket {
 
         int numSize = splitedNums.length;
 
-        if (numSize != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6개를 입력해야 합니다.");
-        }
-
-        List<Integer> lotto = new ArrayList<>();
+        Set<Integer> lotto = new HashSet<>();
 
         for (int i = 0; i < numSize; i++) {
             lotto.add(Integer.parseInt(splitedNums[i].trim()));
         }
 
-        return lotto;
+        if (lotto.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 서로 다른 6개를 입력해야 합니다.");
+        }
+
+        return new ArrayList<>(lotto);
     }
 
-    public int countMatchNumber(List<Integer> winnerNums) {
+    public int countMatchNumber(Set<LottoNum> winnerNums) {
         long countOfMatchNumber = this.lottoNums.stream()
-                .map(LottoNum::getLottoNum)
                 .filter(winnerNums::contains)
                 .count();
 
         return Math.toIntExact(countOfMatchNumber);
     }
 
-    public int size() {
-        return lottoNums.size();
+    public boolean matchNumber(LottoNum lottoNum) {
+        return lottoNums.contains(lottoNum);
     }
 
-    public boolean contains(int inputNumber) {
-        return lottoNums.stream()
-                .map(LottoNum::getLottoNum)
-                .anyMatch(number -> number == inputNumber);
+    public Set<LottoNum> getLottoNums() {
+        return lottoNums;
     }
 
     @Override
     public String toString() {
         return String.join(LOTTO_NUMS_DELIMITER, String.valueOf(lottoNums.stream().map(LottoNum::getLottoNum).collect(Collectors.toList())));
     }
-
 }

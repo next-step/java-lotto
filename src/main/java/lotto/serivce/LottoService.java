@@ -8,36 +8,38 @@ import java.util.stream.Collectors;
 import static lotto.domain.LottoTicket.LOTTO_PRICE;
 
 public class LottoService {
-    private static final int MIN_LOTTO_COUNT = 1;
+    private static final int MIN_LOTTO_COUNT = 0;
 
     public static LottoTickets buyTickets(int purchaseAmount, List<String> manualLottos) {
-        int autoCount = purchaseAmount / LOTTO_PRICE - manualLottos.size();
+        Price price = new Price(purchaseAmount);
 
-        if (autoCount < MIN_LOTTO_COUNT) {
-            throw new IllegalArgumentException("자동 로또를 생성할 수 없습니다");
-        }
+        int autoCount = price.countLotto() - manualLottos.size();
+
+        System.out.println(autoCount);
 
         List<LottoTicket> tickets = manualLottos.stream()
-                .map(manualLotto -> LottoTicket.ofString(manualLotto))
+                .map(LottoTicket::ofString)
                 .collect(Collectors.toList());
 
-        tickets.addAll(buyTickets(autoCount * LOTTO_PRICE).getLottoTickets());
+        if (autoCount > MIN_LOTTO_COUNT) {
+            tickets.addAll(buyTickets(autoCount * LOTTO_PRICE));
+        }
 
         return new LottoTickets(tickets);
     }
 
-    public static LottoTickets buyTickets(int inputPrice) {
+    public static List<LottoTicket> buyTickets(int inputPrice) {
         Price price = new Price(inputPrice);
 
         int lottoCount = price.countLotto();
 
-        return new LottoTickets(lottoCount);
+        return new LottoTickets(lottoCount).getLottoTickets();
     }
 
-    public static Winner match(LottoTickets lottoTickets, String lastWeekWinningInput, LottoNum bonus) {
+    public static Winner match(LottoTickets lottoTickets, WinningLotto winningLotto) {
         int lottoTicketsSize = lottoTickets.size();
 
-        Winner winner = new Winner(lottoTickets, lastWeekWinningInput, bonus);
+        Winner winner = new Winner(lottoTickets, winningLotto);
         return winner.ofProfit(lottoTicketsSize);
     }
 }

@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import lotto.serivce.LottoService;
@@ -26,14 +27,14 @@ public class LottoServiceTest {
     @DisplayName("로또 1500원 구매")
     @Test
     void buyLotto1500Test() {
-        assertThat(LottoService.buyTickets(1500).getLottoTickets()).hasSize(1);
+        assertThat(LottoService.buyTickets(1500)).hasSize(1);
     }
 
 
     @DisplayName("자동 로또 구매")
     @Test
     void buyLottoTest() {
-        assertThat(LottoService.buyTickets(14000).getLottoTickets()).hasSize(14);
+        assertThat(LottoService.buyTickets(14000)).hasSize(14);
     }
 
     @DisplayName("로또 구매 실패")
@@ -59,6 +60,6 @@ public class LottoServiceTest {
         List<LottoTicket> tickets = new ArrayList<>();
         tickets.add(lottoTicket);
 
-        assertThat(LottoService.match(new LottoTickets(tickets), "1,2,3,4,5,6", new LottoNum(45)).getRanks().sumReward()).isEqualTo(5000);
+        assertThat(LottoService.match(new LottoTickets(tickets), new WinningLotto("1,2,3,4,5,6", new LottoNum(45))).getRanks().sumReward()).isEqualTo(5000);
     }
 }

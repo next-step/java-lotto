@@ -6,13 +6,16 @@ import java.util.List;
 
 public class ResultView {
     public static void printLottoTickets(int manualLottoCount, LottoTickets lottoTickets) {
+        int autoLottoCount = lottoTickets.size() - manualLottoCount;
+
         StringBuilder buyCountBuilder = new StringBuilder();
 
         buyCountBuilder.append("수동으로 ");
         buyCountBuilder.append(manualLottoCount);
         buyCountBuilder.append("장, 자동으로 ");
-        buyCountBuilder.append(lottoTickets.size());
+        buyCountBuilder.append(autoLottoCount);
         buyCountBuilder.append("개를 구매했습니다.");
+        System.out.println(buyCountBuilder);
 
         List<LottoTicket> lottos = lottoTickets.getLottoTickets();
 

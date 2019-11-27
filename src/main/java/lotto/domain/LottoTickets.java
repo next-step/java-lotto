@@ -19,7 +19,7 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new LottoTicket());
+            lottoTickets.add(LottoTicket.of(LottoGenerator.makeAutoNumbers()));
         }
     }
 

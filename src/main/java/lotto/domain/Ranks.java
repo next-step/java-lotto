@@ -12,12 +12,12 @@ public class Ranks {
 
     private Map<RankEnum, Integer> ranks = new HashMap<>();
 
-    public Ranks(LottoTickets lottoTickets, List<Integer> winnerNums, LottoNum bonus) {
+    public Ranks(LottoTickets lottoTickets, WinningLotto winningLotto) {
         List<LottoTicket> tickets = lottoTickets.getLottoTickets();
 
         for (LottoTicket lottoTicket : tickets) {
-            int matchCount = lottoTicket.countMatchNumber(winnerNums);
-            boolean isBonusMatch = bonus.matchNumber(lottoTicket);
+            int matchCount = lottoTicket.countMatchNumber(winningLotto.getWinningLottoNums());
+            boolean isBonusMatch = lottoTicket.matchNumber(winningLotto.getBonus());
 
             RankEnum rank = RankEnum.valueOf(matchCount, isBonusMatch);
             ranks.put(rank, ranks.getOrDefault(rank, 0) + WINNING_COUNT);

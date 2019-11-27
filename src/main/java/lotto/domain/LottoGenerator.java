@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.domain.LottoNum.LOTTO_NUM_MAX;
-import static lotto.domain.LottoNum.LOTTO_NUM_MIN;
+import static lotto.domain.LottoNum.MAX;
+import static lotto.domain.LottoNum.MIN;
 
 public class LottoGenerator {
     public static final int LOTTO_SIZE = 6;
+    private static final int START_INDEX = 0;
 
     private static List<Integer> candidate = new ArrayList<>();
 
@@ -19,34 +18,30 @@ public class LottoGenerator {
     }
 
     private static void makeCandidateNumbers() {
-        for (int i = LOTTO_NUM_MIN; i <= LOTTO_NUM_MAX; i++) {
+        for (int i = MIN; i <= MAX; i++) {
             candidate.add(i);
         }
     }
 
-    public static List<LottoNum> makeAutoNumbers() {
+    public static List<Integer> makeAutoNumbers() {
         shuffle();
 
-        List<LottoNum> selectedNums = addRandomNumber();
-
-        Collections.sort(selectedNums);
-        return selectedNums;
+        return getRandomNumbers();
     }
 
-    public static List<LottoNum> makeNumbers(List<Integer> lottoNums) {
+    public static Set<LottoNum> makeNumbers(List<Integer> lottoNums) {
         return lottoNums.stream()
-                .map(inputLottoNum -> new LottoNum(inputLottoNum))
-                .sorted()
-                .collect(Collectors.toList());
+                .map(LottoNum::new)
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private static void shuffle() {
         Collections.shuffle(candidate);
     }
 
-    private static List<LottoNum> addRandomNumber() {
-        return IntStream.range(0, LOTTO_SIZE)
-                .mapToObj(i -> new LottoNum(candidate.get(i)))
+    private static List<Integer> getRandomNumbers() {
+        return IntStream.range(START_INDEX, LOTTO_SIZE)
+                .mapToObj(i -> candidate.get(i))
                 .collect(Collectors.toList());
     }
 }
