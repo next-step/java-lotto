@@ -1,6 +1,7 @@
-package step2.domain;
+package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
@@ -18,15 +19,8 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new LottoTicket());
+            lottoTickets.add(LottoTicket.of(LottoGenerator.makeAutoNumbers()));
         }
-    }
-
-    public static LottoTickets of(LottoTicket lottoTicket) {
-        List<LottoTicket> lotto = new ArrayList<>();
-        lotto.add(lottoTicket);
-
-        return new LottoTickets(lotto);
     }
 
     public int size() {
@@ -34,6 +28,6 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 }

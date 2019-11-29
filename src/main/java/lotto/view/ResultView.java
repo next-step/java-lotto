@@ -1,15 +1,21 @@
-package step2.view;
+package lotto.view;
 
-import step2.domain.*;
+import lotto.domain.*;
 
 import java.util.List;
 
 public class ResultView {
-    private static final int NO_MATCH_REWARD = 0;
-    private static final int FIVE_BONUS_REWARD = 3_000_000;
+    public static void printLottoTickets(int manualLottoCount, LottoTickets lottoTickets) {
+        int autoLottoCount = lottoTickets.size() - manualLottoCount;
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.size() + "를 구매했습니다.");
+        StringBuilder buyCountBuilder = new StringBuilder();
+
+        buyCountBuilder.append("수동으로 ");
+        buyCountBuilder.append(manualLottoCount);
+        buyCountBuilder.append("장, 자동으로 ");
+        buyCountBuilder.append(autoLottoCount);
+        buyCountBuilder.append("개를 구매했습니다.");
+        System.out.println(buyCountBuilder);
 
         List<LottoTicket> lottos = lottoTickets.getLottoTickets();
 
@@ -41,21 +47,21 @@ public class ResultView {
     }
 
     private static void printRank(RankEnum rank, Ranks ranks) {
-        StringBuilder bounusMatchBuilder = new StringBuilder();
+        StringBuilder bonusMatchBuilder = new StringBuilder();
         StringBuilder rewardBuilder = new StringBuilder();
 
-        if (rank.getReward() == NO_MATCH_REWARD) {
+        if (rank.checkZeroReward()) {
             return;
         }
 
-        if (rank.getReward() == FIVE_BONUS_REWARD) {
-            bounusMatchBuilder.append("5개 일치, 보너스 볼 일치 (");
-            bounusMatchBuilder.append(rank.getReward());
-            bounusMatchBuilder.append("원)- ");
-            bounusMatchBuilder.append(ranks.getOrDefault(rank, 0));
-            bounusMatchBuilder.append("개");
+        if (rank == RankEnum.FIVE_BONUS) {
+            bonusMatchBuilder.append("5개 일치, 보너스 볼 일치 (");
+            bonusMatchBuilder.append(rank.getReward());
+            bonusMatchBuilder.append("원)- ");
+            bonusMatchBuilder.append(ranks.getOrDefault(rank));
+            bonusMatchBuilder.append("개");
 
-            System.out.println(bounusMatchBuilder.toString());
+            System.out.println(bonusMatchBuilder.toString());
             return;
         }
 
@@ -63,7 +69,7 @@ public class ResultView {
         rewardBuilder.append("개 일치 (");
         rewardBuilder.append(rank.getReward());
         rewardBuilder.append("원)- ");
-        rewardBuilder.append(ranks.getOrDefault(rank, 0));
+        rewardBuilder.append(ranks.getOrDefault(rank));
         rewardBuilder.append("개");
         System.out.println(rewardBuilder);
     }

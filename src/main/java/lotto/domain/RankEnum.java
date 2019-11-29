@@ -1,4 +1,4 @@
-package step2.domain;
+package lotto.domain;
 
 public enum RankEnum {
     MISS(0, 0),
@@ -49,6 +49,10 @@ public enum RankEnum {
 
     public int getReward() {
         return reward;
+    }
+
+    public boolean checkZeroReward() {
+        return this == RankEnum.MISS;
     }
 }
 
