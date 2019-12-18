@@ -11,17 +11,17 @@ public class LottoShop {
     private static final int SALE_PRICE = 1000;
     private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
 
-    private static List<LottoNumber> createLottoNumbersOf(int lottoCount) {
+    private static List<Lotto> createLottoNumbersOf(int lottoCount) {
 
-        List<LottoNumber> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(LottoNumber.of(LOTTO_MACHINE.generate()));
+            lottos.add(Lotto.of(LOTTO_MACHINE.generate()));
         }
         return lottos;
     }
 
-    public static List<LottoNumber> order(Order order) {
+    public static List<Lotto> order(Order order) {
 
         if (order.getPayment() < SALE_PRICE)
             throw new WrongOrderException(SALE_PRICE + "원 이상만 구매할 수 있습니다.");
@@ -29,20 +29,20 @@ public class LottoShop {
         if (order.getSelfNumbers().size() > order.getPayment() / SALE_PRICE)
             throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
 
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(createLottoNumbersOf(order.getSelfNumbers()));
-        lottoNumbers.addAll(createLottoNumbersOf(getAutoLottoNumberCount(order)));
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(createLottoNumbersOf(order.getSelfNumbers()));
+        lottos.addAll(createLottoNumbersOf(getAutoLottoNumberCount(order)));
 
-        return lottoNumbers;
+        return lottos;
     }
 
     private static int getAutoLottoNumberCount(Order order) {
         return order.getPayment() / SALE_PRICE - order.getSelfNumbers().size();
     }
 
-    private static List<LottoNumber> createLottoNumbersOf(List<String> selfNumbers) {
+    private static List<Lotto> createLottoNumbersOf(List<String> selfNumbers) {
         return selfNumbers.stream()
-                .map(LottoNumber::of)
+                .map(Lotto::of)
                 .collect(Collectors.toList());
     }
 }

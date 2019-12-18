@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumberTest {
+public class LottoTest {
 
     @Test
     void 사이즈가_6이_아니면_오류를_내보낸다() {
@@ -20,7 +20,7 @@ public class LottoNumberTest {
         number.add(5);
         number.add(6);
         number.add(7);
-        assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(WrongLottoNumberException.class);
+        assertThatThrownBy(() -> Lotto.of(number)).isInstanceOf(WrongLottoNumberException.class);
     }
 
     @Test
@@ -33,6 +33,6 @@ public class LottoNumberTest {
         number.add(5);
         number.add(6);
         number.add(7);
-        assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(WrongLottoNumberException.class);
+        assertThatThrownBy(() -> Lotto.of(number)).isInstanceOf(WrongLottoNumberException.class);
     }
 }

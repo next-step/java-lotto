@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.Lotto;
 import lotto.domain.LottoShop;
 
 import java.util.List;
@@ -11,10 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<LottoNumber> list = LottoShop.order(getOrder());
+        List<Lotto> list = LottoShop.order(getOrder());
 
-        for (LottoNumber lottoNumber : list) {
-            lottoNumber.showAllNumbers();
+        for (Lotto lotto : list) {
+            lotto.showAllNumbers();
         }
     }
 }
