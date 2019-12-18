@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoShop {
 
-    private static final int SALE_PRICE = 1000;
+    public static final int SALE_PRICE = 1000;
 
     public static LottoBundle sell(int payment) {
         return LottoBundle.of(createLottos(calculateLottoCount(payment)));
