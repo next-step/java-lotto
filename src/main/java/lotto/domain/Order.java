@@ -6,25 +6,25 @@ import java.util.List;
 public class Order {
 
     private int payment;
-    private List<String> lottoNumbers;
+    private List<String> selfNumbers;
 
     public int getPayment() {
         return payment;
     }
 
-    public List<String> getLottoNumbers() {
-        return lottoNumbers;
+    public List<String> getSelfNumbers() {
+        return selfNumbers;
     }
 
     private Order(Builder builder) {
         this.payment = builder.payment;
-        this.lottoNumbers = builder.lottoNumbers;
+        this.selfNumbers = builder.selfNumbers;
     }
 
     public static class Builder {
 
         private int payment = 0;
-        private List<String> lottoNumbers = new ArrayList<>();
+        private List<String> selfNumbers = new ArrayList<>();
 
         public Builder() {
         }
@@ -35,7 +35,7 @@ public class Order {
         }
 
         public Builder lottNumbers(List<String> lottoNumbers) {
-            this.lottoNumbers = lottoNumbers;
+            this.selfNumbers = lottoNumbers;
             return this;
         }
 

@@ -1,27 +1,46 @@
 package lotto.domain;
 
+import lotto.common.exception.WrongOrderException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoShop {
 
-    public static final int SALE_PRICE = 1000;
+    private static final int SALE_PRICE = 1000;
+    private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
 
-    public static LottoBundle sell(int payment) {
-        return LottoBundle.of(createLottos(calculateLottoCount(payment)));
-    }
+    private static List<LottoNumber> createLottoNumbersOf(int lottoCount) {
 
-    private static int calculateLottoCount(int payment) {
-        return payment / SALE_PRICE;
-    }
-
-    private static List<Lotto> createLottos(int lottoCount) {
-
-        List<Lotto> lottos = new ArrayList<>();
+        List<LottoNumber> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(LottoNumber.of(LOTTO_MACHINE.generate()));
         }
         return lottos;
+    }
+
+    public static void order(Order order) {
+
+        if (order.getPayment() < SALE_PRICE)
+            throw new WrongOrderException(SALE_PRICE + "원 이상만 구매할 수 있습니다.");
+
+        if (order.getSelfNumbers().size() > order.getPayment() / SALE_PRICE)
+            throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
+
+        createLottoNumbersOf(order.getSelfNumbers());
+        createLottoNumbersOf(getAutoLottoNumberCount(order));
+
+    }
+
+    private static int getAutoLottoNumberCount(Order order) {
+        return order.getPayment() / SALE_PRICE - order.getSelfNumbers().size();
+    }
+
+    private static List<LottoNumber> createLottoNumbersOf(List<String> selfNumbers) {
+        return selfNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 }

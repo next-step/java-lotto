@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class InputView {
 
-    public static Order order() {
+    public static Order getOrder() {
         return new Order.Builder()
                 .payment(inputPayment())
                 .lottNumbers(InputSelfLottoNumber())

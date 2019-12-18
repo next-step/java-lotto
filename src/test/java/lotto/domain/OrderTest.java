@@ -15,6 +15,6 @@ public class OrderTest {
                 .build();
 
         assertThat(order.getPayment()).isEqualTo(4000);
-        assertThat(order.getLottoNumbers().size()).isEqualTo(2);
+        assertThat(order.getSelfNumbers().size()).isEqualTo(2);
     }
 }

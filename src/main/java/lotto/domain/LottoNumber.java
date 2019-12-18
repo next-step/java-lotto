@@ -2,7 +2,11 @@ package lotto.domain;
 
 import lotto.common.exception.WrongLottoNumberException;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
 
@@ -14,8 +18,18 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public static LottoNumber of(Set<Integer> numbers){
+    public static LottoNumber of(Set<Integer> numbers) {
         return new LottoNumber(numbers);
+    }
+
+    public static LottoNumber of(List<Integer> numbers) {
+        return LottoNumber.of(new HashSet<>(numbers));
+    }
+
+    public static LottoNumber of(String number) {
+        return LottoNumber.of(Arrays.stream(number.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet()));
     }
 
     private static void validateSize(Set<Integer> numbers) {
