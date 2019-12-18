@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TicketBoxTest {
+public class LottoShopTest {
 
     @Test
     void sell() {
-        assertThat(new TicketBox().sell(14000)).isEqualTo(14);
+        assertThat(new LottoShop().sell(14000)).isEqualTo(14);
     }
 }
