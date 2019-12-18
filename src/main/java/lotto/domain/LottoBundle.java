@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 
-class LottoBundle {
+public class LottoBundle {
 
     private List<Lotto> lottos;
 
@@ -14,7 +14,7 @@ class LottoBundle {
         return new LottoBundle(lottos);
     }
 
-    int getLottosCount() {
+    public int getLottosCount() {
         return lottos.size();
     }
 }

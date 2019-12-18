@@ -7,11 +7,15 @@ public class LottoShop {
 
     private static final int SALE_PRICE = 1000;
 
-    public LottoBundle sell(int payment) { return LottoBundle.of(createLottos(calculateLottoCount(payment))); }
+    public static LottoBundle sell(int payment) {
+        return LottoBundle.of(createLottos(calculateLottoCount(payment)));
+    }
 
-    private int calculateLottoCount(int payment) { return payment / SALE_PRICE; }
+    private static int calculateLottoCount(int payment) {
+        return payment / SALE_PRICE;
+    }
 
-    private List<Lotto> createLottos(int lottoCount) {
+    private static List<Lotto> createLottos(int lottoCount) {
 
         List<Lotto> lottos = new ArrayList<>();
 
