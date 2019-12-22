@@ -27,4 +27,12 @@ public class OrderTest {
                 .payment(500)
                 .build()).isInstanceOf(WrongOrderException.class);
     }
+
+    @Test
+    void 수동번호가_입력_금액_개수_이상을_초과하면_WRONG_ORDER_EXCEPTION_발생() {
+        assertThatThrownBy(() -> new Order.Builder()
+                .payment(1000)
+                .selfNumber(Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6"))
+                .build()).isInstanceOf(WrongOrderException.class);
+    }
 }
