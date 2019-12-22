@@ -41,8 +41,4 @@ public class Lotto {
         if (numbers.stream().anyMatch(number -> number == 0 || number > 45))
             throw new WrongLottoNumberException("로또 넘버는 1-45 사이를 입력해주십시오.");
     }
-
-    public void showAllNumbers() {
-        System.out.println(numbers.stream().map(Object::toString).collect(Collectors.joining(",")));
-    }
 }

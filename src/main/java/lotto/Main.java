@@ -12,9 +12,5 @@ public class Main {
     public static void main(String[] args) {
 
         List<Lotto> list = LottoShop.order(getOrder());
-
-        for (Lotto lotto : list) {
-            lotto.showAllNumbers();
-        }
     }
 }

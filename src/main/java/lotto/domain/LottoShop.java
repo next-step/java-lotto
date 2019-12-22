@@ -11,7 +11,7 @@ public class LottoShop {
     private static final int SALE_PRICE = 1000;
     private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
 
-    private static List<Lotto> createLottoNumbersOf(int lottoCount) {
+    private static List<Lotto> pickAutoLottoNumberWith(int lottoCount) {
 
         List<Lotto> lottos = new ArrayList<>();
 
@@ -29,9 +29,9 @@ public class LottoShop {
         if (order.getSelfNumbers().size() > order.getPayment() / SALE_PRICE)
             throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
 
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.addAll(createLottoNumbersOf(order.getSelfNumbers()));
-        lottos.addAll(createLottoNumbersOf(getAutoLottoNumberCount(order)));
+        List<Lotto> lottos = pickSelfLottoNumberAs(order.getSelfNumbers());
+
+        lottos.addAll(pickAutoLottoNumberWith(getAutoLottoNumberCount(order)));
 
         return lottos;
     }
@@ -40,7 +40,7 @@ public class LottoShop {
         return order.getPayment() / SALE_PRICE - order.getSelfNumbers().size();
     }
 
-    private static List<Lotto> createLottoNumbersOf(List<String> selfNumbers) {
+    private static List<Lotto> pickSelfLottoNumberAs(List<String> selfNumbers) {
         return selfNumbers.stream()
                 .map(Lotto::of)
                 .collect(Collectors.toList());

@@ -34,8 +34,8 @@ public class Order {
             return this;
         }
 
-        public Builder lottNumbers(List<String> lottoNumbers) {
-            this.selfNumbers = lottoNumbers;
+        public Builder selfNumber(List<String> selfNumber) {
+            this.selfNumbers = selfNumber;
             return this;
         }
 

@@ -12,7 +12,7 @@ public class InputView {
     public static Order getOrder() {
         return new Order.Builder()
                 .payment(inputPayment())
-                .lottNumbers(InputSelfLottoNumber())
+                .selfNumber(InputSelfLottoNumber())
                 .build();
     }
 
