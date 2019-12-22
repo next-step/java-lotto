@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.common.exception.WrongOrderException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +21,6 @@ public class LottoShop {
 
     public static List<Lotto> order(Order order) {
 
-        if (order.getSelfNumbers().size() > order.getPayment() / SALE_PRICE)
-            throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
 
         List<Lotto> lottos = pickSelfLottoNumberAs(order.getSelfNumbers());
 

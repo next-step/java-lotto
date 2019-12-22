@@ -10,25 +10,32 @@ public class Order {
     private int payment;
     private List<String> selfNumbers;
 
-    public int getPayment() {
-        return payment;
-    }
-
-    public List<String> getSelfNumbers() {
-        return selfNumbers;
-    }
-
     private Order(Builder builder) {
 
         validatePayment(builder.payment);
+        validateSelfNumberCount(builder);
 
         this.payment = builder.payment;
         this.selfNumbers = builder.selfNumbers;
     }
 
+    private void validateSelfNumberCount(Builder builder) {
+        if (builder.selfNumbers.size() > builder.payment / LottoPolicy.LOTTO_PRICE)
+            throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
+
+    }
+
     private void validatePayment(int payment) {
         if (payment < LottoPolicy.LOTTO_PRICE)
             throw new WrongOrderException(LottoPolicy.LOTTO_PRICE + "원 이상만 구매할 수 있습니다.");
+    }
+
+    int getPayment() {
+        return payment;
+    }
+
+    List<String> getSelfNumbers() {
+        return selfNumbers;
     }
 
     public static class Builder {
