@@ -23,9 +23,6 @@ public class LottoShop {
 
     public static List<Lotto> order(Order order) {
 
-        if (order.getPayment() < SALE_PRICE)
-            throw new WrongOrderException(SALE_PRICE + "원 이상만 구매할 수 있습니다.");
-
         if (order.getSelfNumbers().size() > order.getPayment() / SALE_PRICE)
             throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
 
