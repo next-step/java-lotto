@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.common.exception.WrongOrderException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,16 @@ public class Order {
     }
 
     private Order(Builder builder) {
+
+        validatePayment(builder.payment);
+
         this.payment = builder.payment;
         this.selfNumbers = builder.selfNumbers;
+    }
+
+    private void validatePayment(int payment) {
+        if (payment < LottoPolicy.LOTTO_PRICE)
+            throw new WrongOrderException(LottoPolicy.LOTTO_PRICE + "원 이상만 구매할 수 있습니다.");
     }
 
     public static class Builder {

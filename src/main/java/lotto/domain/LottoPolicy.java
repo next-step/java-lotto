@@ -1,7 +1,7 @@
 package lotto.domain;
 
-public class LottoPolicy {
+class LottoPolicy {
 
-    private static final int LOTTO_PRICE = 1000;
+    static final int LOTTO_PRICE = 1000;
 
 }
