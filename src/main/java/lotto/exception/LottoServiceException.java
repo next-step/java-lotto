@@ -10,8 +10,4 @@ public class LottoServiceException extends RuntimeException {
         super(lottoError.getDescription());
         this.code = lottoError.getCode();
     }
-
-    public String getCode() {
-        return code;
-    }
 }

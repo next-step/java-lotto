@@ -18,7 +18,5 @@ public class Main {
 
         lottoBundle.collectNumbersAsString().forEach(OutputView::showLottoNumber);
 
-
-
     }
 }
