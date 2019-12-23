@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto {
+class Lotto {
 
     private Set<LottoNumber> numbers;
 
@@ -37,7 +37,7 @@ public class Lotto {
             throw new LottoServiceException(LottoError.WRONG_LOTTO_NUMBER_SIZE);
     }
 
-    public String getNumbersAsString() {
+    String getNumbersAsString() {
         return numbers.stream()
                 .map(LottoNumber::getValue)
                 .sorted()

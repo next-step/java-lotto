@@ -3,20 +3,22 @@ package lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoShop;
 import lotto.domain.Order;
-import lotto.io.InputView;
-import lotto.io.OutputView;
+
+import static lotto.io.InputView.getOrder;
+import static lotto.io.OutputView.showLottoCount;
+import static lotto.io.OutputView.showLottoNumber;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Order order = InputView.getOrder();
+        Order order = getOrder();
 
         LottoBundle lottoBundle = LottoShop.order(order);
 
-        OutputView.showLottoCount(order);
+        showLottoCount(order);
 
-        lottoBundle.collectNumbersAsString().forEach(OutputView::showLottoNumber);
+        showLottoNumber(lottoBundle.collectNumbersAsString());
 
     }
 }
