@@ -6,7 +6,7 @@ import lotto.domain.Order;
 import lotto.domain.WinningLotto;
 
 import static lotto.io.InputView.getOrder;
-import static lotto.io.InputView.getWinningNumber;
+import static lotto.io.InputView.getWinningLotto;
 import static lotto.io.OutputView.showLottoNumbers;
 import static lotto.io.OutputView.showOrderStatus;
 
@@ -22,7 +22,7 @@ public class Main {
 
         showLottoNumbers(lottoBundle.collectNumbersAsString());
 
-        WinningLotto winningLotto = getWinningNumber();
+        WinningLotto winningLotto = getWinningLotto();
 
     }
 }

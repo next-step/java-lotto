@@ -38,7 +38,7 @@ public class InputView {
         return inputInt();
     }
 
-    public static WinningLotto getWinningNumber() {
+    public static WinningLotto getWinningLotto() {
         return WinningLotto.of(inputWinningNumber(), inputBonusBall());
     }
 
