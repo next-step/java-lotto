@@ -56,4 +56,9 @@ class Lotto {
                 .count();
     }
 
+    public boolean hasBonusBall(LottoNumber lottoNumber) {
+        return numbers.stream()
+                .anyMatch(number -> number.equals(lottoNumber));
+    }
+
 }

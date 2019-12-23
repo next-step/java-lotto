@@ -61,4 +61,19 @@ class LottoTest {
 
         assertThat(lotto.matchCount(lotto2)).isEqualTo(5);
     }
+
+    @Test
+    void 보너스_볼_입력_맞는지_확인() {
+        Set<LottoNumber> number = new HashSet<>();
+        number.add(LottoNumber.of(1));
+        number.add(LottoNumber.of(2));
+        number.add(LottoNumber.of(3));
+        number.add(LottoNumber.of(4));
+        number.add(LottoNumber.of(5));
+        number.add(LottoNumber.of(6));
+        Lotto lotto = Lotto.of(number);
+
+        assertThat(lotto.hasBonusBall(LottoNumber.of(20))).isFalse();
+        assertThat(lotto.hasBonusBall(LottoNumber.of(1))).isTrue();
+    }
 }
