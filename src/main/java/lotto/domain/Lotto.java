@@ -46,8 +46,14 @@ class Lotto {
                 .collect(Collectors.joining(LottoPolicy.LOTTO_SEPARATOR));
     }
 
-    Stream<LottoNumber> stream(){
+    Stream<LottoNumber> stream() {
         return numbers.stream();
+    }
+
+    public long matchCount(Lotto lotto) {
+        return numbers.stream()
+                .filter(number -> lotto.stream().anyMatch(n -> n.equals(number)))
+                .count();
     }
 
 }

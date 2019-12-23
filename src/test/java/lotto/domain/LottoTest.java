@@ -38,4 +38,27 @@ class LottoTest {
         System.out.println(lotto.getNumbersAsString());
         assertThat(lotto.getNumbersAsString()).isEqualTo("1,2,3,4,5,6");
     }
+
+    @Test
+    void 매치카운트가_맞는지_확인한다() {
+        Set<LottoNumber> number = new HashSet<>();
+        number.add(LottoNumber.of(1));
+        number.add(LottoNumber.of(2));
+        number.add(LottoNumber.of(3));
+        number.add(LottoNumber.of(4));
+        number.add(LottoNumber.of(5));
+        number.add(LottoNumber.of(6));
+        Lotto lotto = Lotto.of(number);
+
+        Set<LottoNumber> number2 = new HashSet<>();
+        number2.add(LottoNumber.of(1));
+        number2.add(LottoNumber.of(2));
+        number2.add(LottoNumber.of(3));
+        number2.add(LottoNumber.of(4));
+        number2.add(LottoNumber.of(5));
+        number2.add(LottoNumber.of(7));
+        Lotto lotto2 = Lotto.of(number2);
+
+        assertThat(lotto.matchCount(lotto2)).isEqualTo(5);
+    }
 }
