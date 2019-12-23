@@ -5,8 +5,8 @@ import lotto.domain.LottoShop;
 import lotto.domain.Order;
 
 import static lotto.io.InputView.getOrder;
-import static lotto.io.OutputView.showLottoCount;
-import static lotto.io.OutputView.showLottoNumber;
+import static lotto.io.OutputView.showOrderStatus;
+import static lotto.io.OutputView.showLottoNumbers;
 
 public class Main {
 
@@ -16,9 +16,9 @@ public class Main {
 
         LottoBundle lottoBundle = LottoShop.order(order);
 
-        showLottoCount(order);
+        showOrderStatus(order);
 
-        showLottoNumber(lottoBundle.collectNumbersAsString());
+        showLottoNumbers(lottoBundle.collectNumbersAsString());
 
     }
 }
