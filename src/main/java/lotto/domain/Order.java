@@ -30,6 +30,10 @@ public class Order {
             throw new LottoServiceException(LottoError.MINIMUM_PAYMENT);
     }
 
+    int getAutoNumberCount() {
+        return payment / LottoPolicy.LOTTO_PRICE - selfNumbers.size();
+    }
+
     int getPayment() {
         return payment;
     }
