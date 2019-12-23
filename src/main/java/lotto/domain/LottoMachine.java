@@ -9,10 +9,13 @@ class LottoMachine {
 
     List<Integer> generate() {
 
-        List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+        List<Integer> numbers = IntStream
+                .rangeClosed(LottoPolicy.LOTTO_MINIMUM_NUMBER, LottoPolicy.LOTTO_MAXIMUM_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
 
-        return Collections.unmodifiableList(numbers.subList(0, 6));
+        return Collections.unmodifiableList(numbers.subList(0, LottoPolicy.LOTTO_SIZE));
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.common.exception.WrongOrderException;
+import lotto.common.exception.LottoServiceException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -25,7 +25,8 @@ public class OrderTest {
     void 로또_가격보다_낮은_금액이_입력되면_WRONG_ORDER_EXCEPTION_발생() {
         assertThatThrownBy(() -> new Order.Builder()
                 .payment(500)
-                .build()).isInstanceOf(WrongOrderException.class);
+                .build()).isInstanceOf(LottoServiceException.class)
+                .hasMessage(LottoError.MINIMUM_PAYMENT.getDescription());
     }
 
     @Test
@@ -33,6 +34,8 @@ public class OrderTest {
         assertThatThrownBy(() -> new Order.Builder()
                 .payment(1000)
                 .selfNumber(Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6"))
-                .build()).isInstanceOf(WrongOrderException.class);
+                .build())
+                .isInstanceOf(LottoServiceException.class)
+                .hasMessage(LottoError.SELF_NUMBER_CANNOT_EXCEED_THE_COUNT.getDescription());
     }
 }

@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import lotto.common.exception.WrongOrderException;
+import lotto.common.exception.LottoServiceException;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Order {
 
@@ -21,13 +22,12 @@ public class Order {
 
     private void validateSelfNumberCount(Builder builder) {
         if (builder.selfNumbers.size() > builder.payment / LottoPolicy.LOTTO_PRICE)
-            throw new WrongOrderException("수동 번호 개수는 금액을 초과할 수 없습니다.");
-
+            throw new LottoServiceException(LottoError.SELF_NUMBER_CANNOT_EXCEED_THE_COUNT);
     }
 
     private void validatePayment(int payment) {
         if (payment < LottoPolicy.LOTTO_PRICE)
-            throw new WrongOrderException(LottoPolicy.LOTTO_PRICE + "원 이상만 구매할 수 있습니다.");
+            throw new LottoServiceException(LottoError.MINIMUM_PAYMENT);
     }
 
     int getPayment() {

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.common.exception.WrongLottoNumberException;
+import lotto.common.exception.LottoServiceException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,27 +18,27 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(Set<Integer> numbers) {
+    static Lotto of(Set<Integer> numbers) {
         return new Lotto(numbers);
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    static Lotto of(List<Integer> numbers) {
         return Lotto.of(new HashSet<>(numbers));
     }
 
-    public static Lotto of(String number) {
+    static Lotto of(String number) {
         return Lotto.of(Arrays.stream(number.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet()));
     }
 
     private static void validateSize(Set<Integer> numbers) {
-        if (numbers.size() != 6)
-            throw new WrongLottoNumberException("로또 넘버 사이즈는 6이어야 합니다.");
+        if (numbers.size() != LottoPolicy.LOTTO_SIZE)
+            throw new LottoServiceException(LottoError.WRONG_LOTTO_NUMBER_SIZE);
     }
 
     private static void validateNumbers(Set<Integer> numbers) {
-        if (numbers.stream().anyMatch(number -> number == 0 || number > 45))
-            throw new WrongLottoNumberException("로또 넘버는 1-45 사이를 입력해주십시오.");
+        if (!numbers.stream().allMatch(number -> number >= LottoPolicy.LOTTO_MINIMUM_NUMBER && number <= LottoPolicy.LOTTO_MAXIMUM_NUMBER))
+            throw new LottoServiceException(LottoError.WRONG_LOTTO_RANGE);
     }
 }

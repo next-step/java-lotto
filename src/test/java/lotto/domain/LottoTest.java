@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.common.exception.WrongLottoNumberException;
+import lotto.common.exception.LottoServiceException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoTest {
+class LottoTest {
 
     @Test
     void 사이즈가_6이_아니면_오류를_내보낸다() {
@@ -20,7 +20,8 @@ public class LottoTest {
         number.add(5);
         number.add(6);
         number.add(7);
-        assertThatThrownBy(() -> Lotto.of(number)).isInstanceOf(WrongLottoNumberException.class);
+        assertThatThrownBy(() -> Lotto.of(number)).isInstanceOf(LottoServiceException.class)
+                .hasMessage(LottoError.WRONG_LOTTO_NUMBER_SIZE.getDescription());
     }
 
     @Test
@@ -32,7 +33,7 @@ public class LottoTest {
         number.add(4);
         number.add(5);
         number.add(6);
-        number.add(7);
-        assertThatThrownBy(() -> Lotto.of(number)).isInstanceOf(WrongLottoNumberException.class);
+        assertThatThrownBy(() -> Lotto.of(number)).isInstanceOf(LottoServiceException.class)
+                .hasMessage(LottoError.WRONG_LOTTO_RANGE.getDescription());
     }
 }
