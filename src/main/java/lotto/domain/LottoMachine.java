@@ -7,11 +7,12 @@ import java.util.stream.IntStream;
 
 class LottoMachine {
 
-    static List<Integer> generate() {
+    static List<LottoNumber> generate() {
 
-        List<Integer> numbers = IntStream
+        List<LottoNumber> numbers = IntStream
                 .rangeClosed(LottoPolicy.LOTTO_MINIMUM_NUMBER, LottoPolicy.LOTTO_MAXIMUM_NUMBER)
                 .boxed()
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);

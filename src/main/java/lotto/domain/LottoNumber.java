@@ -19,4 +19,8 @@ public class LottoNumber {
     static LottoNumber of(int value) {
         return new LottoNumber(value);
     }
+
+    int getValue() {
+        return this.value;
+    }
 }

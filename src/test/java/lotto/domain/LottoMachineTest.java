@@ -10,8 +10,8 @@ public class LottoMachineTest {
     @Test
     @RepeatedTest(20)
     void 로또_번호가_잘_나오는지_테스트한다() {
-        assertThat(new LottoMachine().generate())
+        assertThat(LottoMachine.generate())
                 .hasSize(6)
-                .allMatch(number -> number >= 1 && number <= 45);
+                .allMatch(number -> number.getValue() >= LottoPolicy.LOTTO_MINIMUM_NUMBER && number.getValue() <= LottoPolicy.LOTTO_MAXIMUM_NUMBER);
     }
 }

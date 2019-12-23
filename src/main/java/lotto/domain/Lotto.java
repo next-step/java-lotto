@@ -10,35 +10,30 @@ import java.util.stream.Collectors;
 
 class Lotto {
 
-    private Set<Integer> numbers;
+    private Set<LottoNumber> numbers;
 
-    private Lotto(Set<Integer> numbers) {
-        validateNumbers(numbers);
+    private Lotto(Set<LottoNumber> numbers) {
         validateSize(numbers);
         this.numbers = numbers;
     }
 
-    static Lotto of(Set<Integer> numbers) {
+    static Lotto of(Set<LottoNumber> numbers) {
         return new Lotto(numbers);
     }
 
-    static Lotto of(List<Integer> numbers) {
+    static Lotto of(List<LottoNumber> numbers) {
         return Lotto.of(new HashSet<>(numbers));
     }
 
     static Lotto of(String number) {
         return Lotto.of(Arrays.stream(number.split(","))
                 .map(Integer::parseInt)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 
-    private static void validateSize(Set<Integer> numbers) {
+    private static void validateSize(Set<LottoNumber> numbers) {
         if (numbers.size() != LottoPolicy.LOTTO_SIZE)
             throw new LottoServiceException(LottoError.WRONG_LOTTO_NUMBER_SIZE);
-    }
-
-    private static void validateNumbers(Set<Integer> numbers) {
-        if (!numbers.stream().allMatch(number -> number >= LottoPolicy.LOTTO_MINIMUM_NUMBER && number <= LottoPolicy.LOTTO_MAXIMUM_NUMBER))
-            throw new LottoServiceException(LottoError.WRONG_LOTTO_RANGE);
     }
 }
