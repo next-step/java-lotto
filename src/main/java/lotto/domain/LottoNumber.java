@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.exception.LottoServiceException;
 
-public class LottoNumber {
+class LottoNumber {
 
     private int value;
 
@@ -24,4 +24,11 @@ public class LottoNumber {
         return this.value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return value == that.value;
+    }
 }

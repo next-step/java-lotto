@@ -13,5 +13,4 @@ public class OutputView {
     public static void showLottoNumbers(List<String> lottoNumbers) {
         lottoNumbers.forEach(lottoNumber -> System.out.println("[" + lottoNumber + "]"));
     }
-
 }
