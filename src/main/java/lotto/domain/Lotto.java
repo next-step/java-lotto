@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Lotto {
 
@@ -43,6 +44,10 @@ class Lotto {
                 .sorted()
                 .map(Object::toString)
                 .collect(Collectors.joining(LottoPolicy.LOTTO_SEPARATOR));
+    }
+
+    Stream<LottoNumber> stream(){
+        return numbers.stream();
     }
 
 }

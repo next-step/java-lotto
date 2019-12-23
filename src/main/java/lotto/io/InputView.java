@@ -1,7 +1,7 @@
 package lotto.io;
 
 import lotto.domain.Order;
-import lotto.domain.WinningNumber;
+import lotto.domain.WinningLotto;
 
 import java.util.List;
 import java.util.Scanner;
@@ -38,8 +38,8 @@ public class InputView {
         return inputInt();
     }
 
-    public static WinningNumber getWinningNumber() {
-        return WinningNumber.of(inputWinningNumber(), inputBonusBall());
+    public static WinningLotto getWinningNumber() {
+        return WinningLotto.of(inputWinningNumber(), inputBonusBall());
     }
 
     private static String inputWinningNumber() {

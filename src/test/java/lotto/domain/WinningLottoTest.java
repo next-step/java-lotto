@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningNumberTest {
+public class WinningLottoTest {
 
     @Test
     @RepeatedTest(20)
@@ -21,8 +21,8 @@ public class WinningNumberTest {
         number.add(LottoNumber.of(5));
         number.add(LottoNumber.of(6));
 
-        assertThat(WinningNumber.of("1,2,3,4,5,6", 7).getBonusBall()).isEqualTo(LottoNumber.of(7));
-        assertThat(WinningNumber.of("1,2,3,4,5,6", 7).getNumbers()
+        assertThat(WinningLotto.of("1,2,3,4,5,6", 7).getBonusBall()).isEqualTo(LottoNumber.of(7));
+        assertThat(WinningLotto.of("1,2,3,4,5,6", 7).getNumbers()
                 .stream()
                 .anyMatch(e -> e.equals(number.stream().findAny().get())))
                 .isTrue();

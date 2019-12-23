@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoShop;
 import lotto.domain.Order;
-import lotto.domain.WinningNumber;
+import lotto.domain.WinningLotto;
 
 import static lotto.io.InputView.getOrder;
 import static lotto.io.InputView.getWinningNumber;
@@ -22,7 +22,7 @@ public class Main {
 
         showLottoNumbers(lottoBundle.collectNumbersAsString());
 
-        WinningNumber winningNumber = getWinningNumber();
+        WinningLotto winningLotto = getWinningNumber();
 
     }
 }
