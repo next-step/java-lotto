@@ -9,6 +9,15 @@ public class LottoShop {
     private static final int SALE_PRICE = 1000;
     private static final LottoMachine LOTTO_MACHINE = new LottoMachine();
 
+    public static LottoBundle order(Order order) {
+
+        List<Lotto> lottos = pickSelfLottoNumberAs(order.getSelfNumbers());
+
+        lottos.addAll(pickAutoLottoNumberWith(getAutoLottoNumberCount(order)));
+
+        return LottoBundle.of(lottos);
+    }
+
     private static List<Lotto> pickAutoLottoNumberWith(int lottoCount) {
 
         List<Lotto> lottos = new ArrayList<>();
@@ -16,16 +25,6 @@ public class LottoShop {
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(Lotto.of(LOTTO_MACHINE.generate()));
         }
-        return lottos;
-    }
-
-    public static List<Lotto> order(Order order) {
-
-
-        List<Lotto> lottos = pickSelfLottoNumberAs(order.getSelfNumbers());
-
-        lottos.addAll(pickAutoLottoNumberWith(getAutoLottoNumberCount(order)));
-
         return lottos;
     }
 
