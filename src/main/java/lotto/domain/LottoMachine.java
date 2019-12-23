@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 class LottoMachine {
 
-    List<Integer> generate() {
+    static List<Integer> generate() {
 
         List<Integer> numbers = IntStream
                 .rangeClosed(LottoPolicy.LOTTO_MINIMUM_NUMBER, LottoPolicy.LOTTO_MAXIMUM_NUMBER)
