@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class Lotto {
+public class Lotto {
 
     private Set<LottoNumber> numbers;
 

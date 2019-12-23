@@ -1,8 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class LottoBundle {
 
@@ -20,11 +19,9 @@ public class LottoBundle {
         return lottos.size();
     }
 
-    public void forEach(Consumer<? super Lotto> action) {
-        lottos.forEach(action);
-    }
-
-    public Stream<Lotto> stream(){
-        return lottos.stream();
+    public List<String> collectNumbersAsString() {
+        return lottos.stream()
+                .map(Lotto::getNumbersAsString)
+                .collect(Collectors.toList());
     }
 }
