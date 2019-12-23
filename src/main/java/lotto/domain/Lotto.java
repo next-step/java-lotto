@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     static Lotto of(String number) {
-        return Lotto.of(Arrays.stream(number.split(LottoPolicy.LOTTO_SEPERATOR))
+        return Lotto.of(Arrays.stream(number.split(LottoPolicy.LOTTO_SEPARATOR))
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
@@ -42,7 +42,7 @@ public class Lotto {
                 .map(LottoNumber::getValue)
                 .sorted()
                 .map(Object::toString)
-                .collect(Collectors.joining(LottoPolicy.LOTTO_SEPERATOR));
+                .collect(Collectors.joining(LottoPolicy.LOTTO_SEPARATOR));
     }
 
 }
