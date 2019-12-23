@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class LottoShop {
+public class LottoShop {
 
-    static LottoBundle order(Order order) {
+    public static LottoBundle order(Order order) {
 
         List<Lotto> lottos = pickSelfLottoNumberAs(order.getSelfNumbers());
 

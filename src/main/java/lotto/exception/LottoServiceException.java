@@ -1,4 +1,4 @@
-package lotto.common.exception;
+package lotto.exception;
 
 import lotto.domain.LottoError;
 

@@ -21,11 +21,6 @@ public class InputView {
         return inputInt();
     }
 
-    private static int inputSelfLottoCount() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return inputInt();
-    }
-
     private static List<String> InputSelfLottoNumber() {
 
         int selfLottoCount = inputSelfLottoCount();
@@ -36,6 +31,11 @@ public class InputView {
                 .mapToObj(i -> new Scanner(System.in).nextLine())
                 .collect(Collectors.toList());
 
+    }
+
+    private static int inputSelfLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return inputInt();
     }
 
     private static int inputInt() {

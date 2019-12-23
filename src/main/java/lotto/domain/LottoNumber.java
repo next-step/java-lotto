@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.common.exception.LottoServiceException;
+import lotto.exception.LottoServiceException;
 
 public class LottoNumber {
 
@@ -23,4 +23,5 @@ public class LottoNumber {
     int getValue() {
         return this.value;
     }
+
 }

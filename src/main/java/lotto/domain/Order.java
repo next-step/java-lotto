@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.common.exception.LottoServiceException;
+import lotto.exception.LottoServiceException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,12 @@ public class Order {
             throw new LottoServiceException(LottoError.MINIMUM_PAYMENT);
     }
 
-    int getAutoNumberCount() {
+    public int getAutoNumberCount() {
         return payment / LottoPolicy.LOTTO_PRICE - selfNumbers.size();
+    }
+
+    public int getSelfNumberCount() {
+        return selfNumbers.size();
     }
 
     int getPayment() {

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.common.exception.LottoServiceException;
+import lotto.exception.LottoServiceException;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,4 +36,13 @@ class Lotto {
         if (numbers.size() != LottoPolicy.LOTTO_SIZE)
             throw new LottoServiceException(LottoError.WRONG_LOTTO_NUMBER_SIZE);
     }
+
+    public String getNumbersAsString() {
+        return numbers.stream()
+                .map(LottoNumber::getValue)
+                .sorted()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+    }
+
 }
