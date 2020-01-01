@@ -4,8 +4,7 @@ import lotto.domain.*;
 
 import static lotto.io.InputView.getOrder;
 import static lotto.io.InputView.getWinningLotto;
-import static lotto.io.OutputView.showLottoNumbers;
-import static lotto.io.OutputView.showOrderStatus;
+import static lotto.io.OutputView.*;
 
 public class Main {
 
@@ -25,6 +24,8 @@ public class Main {
 
         lottoResult.match(lottoBundle, winningLotto);
 
-
+        for (Rank rank : Rank.values()) {
+            showLottoResult(rank.getMatchCount(), rank.getReward(), lottoResult.getCount(rank));
+        }
     }
 }

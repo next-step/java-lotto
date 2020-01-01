@@ -52,7 +52,6 @@ public class InputView {
         return inputInt();
     }
 
-
     private static String inputString() {
         return new Scanner(System.in).nextLine();
     }

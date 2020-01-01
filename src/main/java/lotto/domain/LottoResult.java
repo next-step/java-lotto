@@ -7,7 +7,6 @@ public class LottoResult {
 
     private Map<Rank, Integer> matchResult = new HashMap<>();
 
-
     public LottoResult() {
         for (Rank rank : Rank.values()) {
             matchResult.put(rank, 0);
@@ -21,10 +20,10 @@ public class LottoResult {
     }
 
     private void putRank(Rank rank) {
-        matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
+        matchResult.put(rank, matchResult.get(rank) + 1);
     }
 
-    int getCount(Rank rank) {
+    public int getCount(Rank rank) {
         return matchResult.get(rank);
     }
 }

@@ -13,4 +13,8 @@ public class OutputView {
     public static void showLottoNumbers(List<String> lottoNumbers) {
         lottoNumbers.forEach(lottoNumber -> System.out.println("[" + lottoNumber + "]"));
     }
+
+    public static void showLottoResult(int rankMatchCount, int rankReward, int matchCount) {
+        System.out.println(String.format("%d개 일치 (%d원) - %d개"));
+    }
 }

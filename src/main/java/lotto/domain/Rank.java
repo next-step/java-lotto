@@ -30,4 +30,12 @@ public enum Rank {
                 .findFirst()
                 .orElse(NO_MATCH);
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getReward() {
+        return reward;
+    }
 }
