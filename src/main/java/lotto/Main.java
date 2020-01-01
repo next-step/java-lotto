@@ -27,5 +27,7 @@ public class Main {
         for (Rank rank : Rank.values()) {
             showLottoResult(rank.getMatchCount(), rank.getReward(), lottoResult.getCount(rank));
         }
+
+        showEarningRate((float) lottoResult.getAmount() / (float) order.getPayment());
     }
 }

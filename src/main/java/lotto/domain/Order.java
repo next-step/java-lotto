@@ -38,7 +38,7 @@ public class Order {
         return selfNumbers.size();
     }
 
-    int getPayment() {
+    public int getPayment() {
         return payment;
     }
 

@@ -15,6 +15,10 @@ public class OutputView {
     }
 
     public static void showLottoResult(int rankMatchCount, int rankReward, int matchCount) {
-        System.out.println(String.format("%d개 일치 (%d원) - %d개"));
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", rankMatchCount, rankReward, matchCount));
+    }
+
+    public static void showEarningRate(float earningPoint) {
+        System.out.println(String.format("총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", earningPoint));
     }
 }

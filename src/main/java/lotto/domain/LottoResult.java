@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,5 +26,11 @@ public class LottoResult {
 
     public int getCount(Rank rank) {
         return matchResult.get(rank);
+    }
+
+    public int getAmount() {
+        return Arrays.stream(Rank.values())
+                .mapToInt(rank -> matchResult.get(rank) * rank.getReward())
+                .sum();
     }
 }
