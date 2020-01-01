@@ -18,7 +18,7 @@ public class WinningLotto {
         return numbers;
     }
 
-    public LottoNumber getBonusBall() {
+    LottoNumber getBonusBall() {
         return bonusBall;
     }
 }

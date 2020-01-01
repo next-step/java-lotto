@@ -61,4 +61,8 @@ class Lotto {
                 .anyMatch(number -> number.equals(lottoNumber));
     }
 
+    public long getMatchCount(Lotto lotto) {
+        return lotto.stream().filter(this.numbers::contains).count();
+    }
+
 }

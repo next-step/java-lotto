@@ -1,16 +1,15 @@
 package lotto.domain;
 
-import lotto.exception.LottoServiceException;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoNumberTest {
 
-    @Test
-    void 넘버_범위가_틀리면_오류를_발생한다() {
-        assertThatThrownBy(() -> LottoNumber.of(0))
-                .isInstanceOf(LottoServiceException.class)
-                .hasMessage(LottoError.WRONG_LOTTO_RANGE.getDescription());
+    @ParameterizedTest
+    @ValueSource(ints = {1, 5, 45})
+    void 로또_객체가_잘_생성되는지_확인한다(int arg) {
+        assertThat(LottoNumber.of(arg).getValue()).isEqualTo(arg);
     }
 }
