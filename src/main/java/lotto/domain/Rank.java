@@ -19,7 +19,7 @@ public enum Rank {
         this.reward = reward;
     }
 
-    private boolean hasEqual(int matchCount) {
+    public boolean hasEqual(int matchCount) {
         return this.matchCount == matchCount;
     }
 

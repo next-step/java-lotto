@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoShop;
-import lotto.domain.Order;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 
 import static lotto.io.InputView.getOrder;
 import static lotto.io.InputView.getWinningLotto;
@@ -23,6 +20,11 @@ public class Main {
         showLottoNumbers(lottoBundle.collectNumbersAsString());
 
         WinningLotto winningLotto = getWinningLotto();
+
+        LottoResult lottoResult = new LottoResult();
+
+        lottoResult.match(lottoBundle, winningLotto);
+
 
     }
 }

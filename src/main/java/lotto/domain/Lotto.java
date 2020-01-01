@@ -49,20 +49,4 @@ class Lotto {
     Stream<LottoNumber> stream() {
         return numbers.stream();
     }
-
-    public long matchCount(Lotto lotto) {
-        return numbers.stream()
-                .filter(number -> lotto.stream().anyMatch(n -> n.equals(number)))
-                .count();
-    }
-
-    public boolean hasBonusBall(LottoNumber lottoNumber) {
-        return numbers.stream()
-                .anyMatch(number -> number.equals(lottoNumber));
-    }
-
-    public long getMatchCount(Lotto lotto) {
-        return lotto.stream().filter(this.numbers::contains).count();
-    }
-
 }

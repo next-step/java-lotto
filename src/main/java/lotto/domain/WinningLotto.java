@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.stream.Collectors;
+
 public class WinningLotto {
 
     private final Lotto numbers;
@@ -14,11 +16,24 @@ public class WinningLotto {
         return new WinningLotto(Lotto.of(number), LottoNumber.of(bonusBall));
     }
 
-    public Lotto getNumbers() {
-        return numbers;
+    Rank matchRank(Lotto lotto) {
+        return Rank.of(matchCount(lotto), hasBonusBall(lotto));
     }
 
-    LottoNumber getBonusBall() {
-        return bonusBall;
+    private boolean hasBonusBall(Lotto lotto) {
+        return lotto.stream()
+                .anyMatch(number -> number.equals(bonusBall));
+    }
+
+    private boolean hasNumber(LottoNumber lottoNumber) {
+        return numbers.stream()
+                .anyMatch(number -> number.equals(lottoNumber));
+    }
+
+    private int matchCount(Lotto lotto) {
+        return lotto.stream()
+                .filter(this::hasNumber)
+                .collect(Collectors.toList())
+                .size();
     }
 }
