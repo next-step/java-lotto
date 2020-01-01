@@ -24,7 +24,7 @@ public class LottoResult {
         matchResult.put(rank, matchResult.getOrDefault(rank, 0) + 1);
     }
 
-    public int getCount(Rank rank) {
+    int getCount(Rank rank) {
         return matchResult.get(rank);
     }
 }
