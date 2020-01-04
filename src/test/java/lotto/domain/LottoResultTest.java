@@ -7,9 +7,9 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class LottoResultTest {
+class LottoResultTest {
 
-    LottoResult lottoResult;
+    private LottoResult lottoResult;
 
     @BeforeEach
     void setUp() {

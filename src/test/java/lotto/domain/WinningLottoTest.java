@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class WinningLottoTest {
+class WinningLottoTest {
 
     @Test
     void 인풋이_제대로_되는지_확인한다() {

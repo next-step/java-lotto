@@ -8,11 +8,11 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class OrderTest {
+class OrderTest {
 
     @Test
     void 오더가_잘_받아지는__확인한다() {
-        Order order = new Order.Builder()
+        Order order = Order.builder()
                 .payment(4000)
                 .selfNumber(Arrays.asList("2,3,4,5,1,6", "4,5,6,7,2,1"))
                 .build();
@@ -23,7 +23,7 @@ public class OrderTest {
 
     @Test
     void 로또_가격보다_낮은_금액이_입력되면_WRONG_ORDER_EXCEPTION_발생() {
-        assertThatThrownBy(() -> new Order.Builder()
+        assertThatThrownBy(() -> Order.builder()
                 .payment(500)
                 .build()).isInstanceOf(LottoServiceException.class)
                 .hasMessage(LottoError.MINIMUM_PAYMENT.getDescription());
@@ -31,7 +31,7 @@ public class OrderTest {
 
     @Test
     void 수동번호가_입력_금액_개수_이상을_초과하면_WRONG_ORDER_EXCEPTION_발생() {
-        assertThatThrownBy(() -> new Order.Builder()
+        assertThatThrownBy(() -> Order.builder()
                 .payment(1000)
                 .selfNumber(Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6"))
                 .build())

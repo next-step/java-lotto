@@ -28,6 +28,6 @@ public class Main {
             showLottoResult(rank.getMatchCount(), rank.getReward(), lottoResult.getCount(rank));
         }
 
-        showEarningRate(lottoResult.calcualteEarningRate(order.getPayment()));
+        showEarningRate(lottoResult.calculateEarningPoint(order.getPayment()));
     }
 }

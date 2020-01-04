@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 public class InputView {
 
     public static Order getOrder() {
-        return new Order.Builder()
+        return Order.builder()
                 .payment(inputPayment())
                 .selfNumber(InputSelfLottoNumber())
                 .build();

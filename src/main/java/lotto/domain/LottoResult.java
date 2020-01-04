@@ -28,13 +28,13 @@ public class LottoResult {
         return matchResult.get(rank);
     }
 
-    public int getAmount() {
+    int getAmount() {
         return Arrays.stream(Rank.values())
                 .mapToInt(rank -> matchResult.get(rank) * rank.getReward())
                 .sum();
     }
 
-    public float calcualteEarningRate(int payment) {
+    public float calculateEarningPoint(int payment) {
         return (float) this.getAmount() / (float) payment;
     }
 }
