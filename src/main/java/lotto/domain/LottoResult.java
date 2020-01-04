@@ -33,4 +33,8 @@ public class LottoResult {
                 .mapToInt(rank -> matchResult.get(rank) * rank.getReward())
                 .sum();
     }
+
+    public float calcualteEarningRate(int payment) {
+        return (float) this.getAmount() / (float) payment;
+    }
 }

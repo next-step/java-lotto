@@ -12,22 +12,8 @@ public class Order {
     private List<String> selfNumbers;
 
     private Order(Builder builder) {
-
-        validatePayment(builder.payment);
-        validateSelfNumberCount(builder);
-
         this.payment = builder.payment;
         this.selfNumbers = builder.selfNumbers;
-    }
-
-    private void validateSelfNumberCount(Builder builder) {
-        if (builder.selfNumbers.size() > builder.payment / LottoPolicy.LOTTO_PRICE)
-            throw new LottoServiceException(LottoError.SELF_NUMBER_CANNOT_EXCEED_THE_COUNT);
-    }
-
-    private void validatePayment(int payment) {
-        if (payment < LottoPolicy.LOTTO_PRICE)
-            throw new LottoServiceException(LottoError.MINIMUM_PAYMENT);
     }
 
     public int getAutoNumberCount() {
@@ -55,6 +41,7 @@ public class Order {
         }
 
         public Builder payment(int payment) {
+            validatePayment(payment);
             this.payment = payment;
             return this;
         }
@@ -62,6 +49,16 @@ public class Order {
         public Builder selfNumber(List<String> selfNumber) {
             this.selfNumbers = selfNumber;
             return this;
+        }
+
+        private void validatePayment(int payment) {
+            if (payment < LottoPolicy.LOTTO_PRICE)
+                throw new LottoServiceException(LottoError.MINIMUM_PAYMENT);
+        }
+
+        private void validateSelfNumberCount(Builder builder) {
+            if (builder.selfNumbers.size() > builder.payment / LottoPolicy.LOTTO_PRICE)
+                throw new LottoServiceException(LottoError.SELF_NUMBER_CANNOT_EXCEED_THE_COUNT);
         }
 
         public Order build() {
