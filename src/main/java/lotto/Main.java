@@ -1,33 +1,33 @@
 package lotto;
 
-import lotto.io.InputView;
-import lotto.io.OutputView;
-import lotto.model.Lotteries;
-import lotto.model.LottoResult;
-import lotto.model.Rank;
-import lotto.model.WinningNumber;
+import lotto.domain.*;
 
-import java.util.List;
-
-import static lotto.io.InputView.InputPurchaseAmount;
-import static lotto.io.InputView.inputWinningNumbers;
-import static lotto.io.OutputView.viewLotto;
-import static lotto.util.LottoTicketBox.buy;
+import static lotto.io.InputView.getOrder;
+import static lotto.io.InputView.getWinningLotto;
+import static lotto.io.OutputView.*;
 
 public class Main {
+
     public static void main(String[] args) {
-        int money = InputPurchaseAmount();
-        Lotteries lotteries = buy(money);
 
-        viewLotto(lotteries);
+        Order order = getOrder();
 
-        WinningNumber winningNumber = new WinningNumber(inputWinningNumbers(), InputView.inputBonusBall());
+        LottoBundle lottoBundle = LottoShop.order(order);
 
-        LottoResult lottoResult = new LottoResult(lotteries, winningNumber);
+        showOrderStatus(order);
 
-        List<Rank> rankResult = lottoResult.getRankResult();
+        showLottoNumbers(lottoBundle.collectNumbersAsString());
 
-        OutputView.viewResult(rankResult);
-        OutputView.viewEarningRate(money, rankResult);
+        WinningLotto winningLotto = getWinningLotto();
+
+        LottoResult lottoResult = new LottoResult();
+
+        lottoResult.match(lottoBundle, winningLotto);
+
+        for (Rank rank : Rank.values()) {
+            showLottoResult(rank.getMatchCount(), rank.getReward(), lottoResult.getCount(rank));
+        }
+
+        showEarningRate(lottoResult.calculateEarningPoint(order.getPayment()));
     }
 }

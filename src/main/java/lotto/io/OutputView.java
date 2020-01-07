@@ -1,52 +1,24 @@
 package lotto.io;
 
-import lotto.model.Lotteries;
-import lotto.model.Rank;
+import lotto.domain.Order;
 
-import java.text.MessageFormat;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void viewLotto(Lotteries lotteries) {
-        lotteries.getLotteries()
-                .forEach(lottery -> System.out.println(lottery.getNumbers()
-                        .stream()
-                        .map(e -> String.valueOf(e.getValue()))
-                        .collect(Collectors.joining(","))));
+    public static void showOrderStatus(Order order) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장를 구매했습니다.", order.getSelfNumberCount(), order.getAutoNumberCount()));
     }
 
-    public static void viewResult(List<Rank> ranks) {
-
-        Map<Rank, Long> map = ranks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        System.out.println("당첨 통계");
-        System.out.println("--------");
-        map.forEach(PRINT_WINNING_RANK);
+    public static void showLottoNumbers(List<String> lottoNumbers) {
+        lottoNumbers.forEach(lottoNumber -> System.out.println("[" + lottoNumber + "]"));
     }
 
-    private static final BiConsumer<Rank, Long> PRINT_WINNING_RANK =
-            (rank, count) -> System.out.println(MessageFormat.format("{0}개 일치 ({1})-{2}개", rank.getCountOfMatch(), rank.getWinningMoney(), count));
-
-    public static void viewEarningRate(int money, List<Rank> ranks) {
-
-        Map<Rank, Long> resultMap = ranks.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        System.out.println(MessageFormat.format("총 수익률은{0}입니다", getEarning(resultMap) / money));
+    public static void showLottoResult(int rankMatchCount, int rankReward, int matchCount) {
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", rankMatchCount, rankReward, matchCount));
     }
 
-    private static int getEarning(Map<Rank, Long> resultMap) {
-        int earning = 0;
-
-        for (Map.Entry<Rank, Long> entry : resultMap.entrySet()) {
-            Rank rank = entry.getKey();
-            Long count = entry.getValue();
-            earning += rank.getWinningMoney() * count;
-        }
-        return earning;
+    public static void showEarningRate(float earningPoint) {
+        System.out.println(String.format("총 수익률은 %f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", earningPoint));
     }
 }

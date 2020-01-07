@@ -1,35 +1,62 @@
 package lotto.io;
 
-import lotto.model.LottoNumbers;
-import lotto.model.Number;
+import lotto.domain.Order;
+import lotto.domain.WinningLotto;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
-    private static Scanner scanner = new Scanner(System.in);
-
-    public static int InputPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+    public static Order getOrder() {
+        return Order.builder()
+                .payment(inputPayment())
+                .selfNumber(InputSelfLottoNumber())
+                .build();
     }
 
-    public static LottoNumbers inputWinningNumbers() {
+    private static int inputPayment() {
+        System.out.println("구입금액을 입력해 주세요");
+        return inputInt();
+    }
+
+    private static List<String> InputSelfLottoNumber() {
+
+        int selfLottoCount = inputSelfLottoCount();
+
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        return IntStream.range(0, selfLottoCount)
+                .mapToObj(i -> inputString())
+                .collect(Collectors.toList());
+    }
+
+    private static int inputSelfLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return inputInt();
+    }
+
+    public static WinningLotto getWinningLotto() {
+        return WinningLotto.of(inputWinningNumber(), inputBonusBall());
+    }
+
+    private static String inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LottoNumbers(Arrays.stream(
-                scanner.next()
-                        .replace(" ", "")
-                        .split(","))
-                .mapToInt(Integer::parseInt)
-                .mapToObj(Number::of)
-                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return inputString();
     }
 
-    public static Number inputBonusBall() {
-        System.out.println("보너스 볼을 입력해 주세요");
-        return Number.of(scanner.nextInt());
+    private static int inputBonusBall() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return inputInt();
+    }
+
+    private static String inputString() {
+        return new Scanner(System.in).nextLine();
+    }
+
+    private static int inputInt() {
+        return new Scanner(System.in).nextInt();
     }
 }
