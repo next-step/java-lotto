@@ -21,4 +21,9 @@ public class AddCalculatorTest {
     void comma_split_test(){
         assertThat(new Calculator("1,2").getResult()).isEqualTo(3);
     }
+
+    @Test
+    void comma_colon_split_test() {
+        assertThat(new Calculator("1,2:3").getResult()).isEqualTo(6);
+    }
 }

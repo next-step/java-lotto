@@ -7,7 +7,7 @@ public class Calculator {
     public Calculator(String input) {
         String line = checkNumber(input);
 
-        String[] numbers = line.split(",");
+        String[] numbers = line.split(",|:");
         int sum = sum(numbers);
 
         this.result = sum;
