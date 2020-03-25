@@ -46,7 +46,7 @@ public class StringAddCalculator {
     private static PositiveNumbers covertToNumber(List<String> stringNumbers) {
         try {
             return stringNumbers.stream()
-                    .map(stringNumber -> Integer.parseInt(stringNumber))
+                    .map(Integer::parseInt)
                     .map(PositiveNumber::new)
                     .collect(collectingAndThen(toList(), PositiveNumbers::new));
         } catch (NumberFormatException e) {
