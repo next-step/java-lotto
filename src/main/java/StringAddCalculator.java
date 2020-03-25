@@ -34,7 +34,9 @@ public class StringAddCalculator {
                 .isPresent();
     }
 
-    public static int sum(List<Integer> integers) {
-        return false;
+    public static int sum(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
