@@ -26,4 +26,17 @@ public class AddCalculatorTest {
     void comma_colon_split_test() {
         assertThat(new Calculator("1,2:3").getResult()).isEqualTo(6);
     }
+
+    @DisplayName("문자열 속에 구분자의 위치를 찾는 단위 테스트")
+    @Test
+    void find_delimeter_test() {
+        String data = "//;\n1;2;3";
+        assertThat(data.substring(data.lastIndexOf("/")+1,data.indexOf("\n"))).isEqualTo(";");
+    }
+
+    @Test
+    void custom_split_test() {
+        String data = "//;\n1;2;3";
+        assertThat(new Calculator("//;\n1;2;3").getResult()).isEqualTo(6);
+    }
 }

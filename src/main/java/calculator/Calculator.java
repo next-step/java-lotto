@@ -6,11 +6,18 @@ public class Calculator {
 
     public Calculator(String input) {
         String line = checkNumber(input);
-
-        String[] numbers = line.split(",|:");
+        String customToken = hasTokens(line);
+        if(!customToken.isEmpty()) {
+            line = line.substring(line.lastIndexOf("\n")+1);
+        }
+        String[] numbers = line.split(",|:|;"+"|"+customToken);
         int sum = sum(numbers);
 
         this.result = sum;
+    }
+
+    private String hasTokens(String line) {
+        return line.substring(line.lastIndexOf("/")+1,line.indexOf("\n"));
     }
 
     private int sum(String[] numbers) {
