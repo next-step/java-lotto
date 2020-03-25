@@ -9,4 +9,7 @@ public class StringAddCalculator {
     public static List<String> splitByDefault(String input) {
         return Arrays.asList(input.split(",|:"));
     }
+
+    public static void validateNonNumberType(List<String> stringNumbers) {
+    }
 }

@@ -2,8 +2,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     @DisplayName("null 또는 공백이 입력되면 true를 리턴한다.")
@@ -18,5 +22,18 @@ public class StringAddCalculatorTest {
     @CsvSource(value = {"2,4,5=3", "23:4=2", "2,24,20:1,5=5"}, delimiter = '=')
     void extractStringNumberTest(String input, int expected) {
         assertThat(StringAddCalculator.splitByDefault(input).size()).isEqualTo(expected);
+    }
+
+    @DisplayName("숫자 이외의 값이 입력되면 예외를 리턴한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,@,3", "10,2,3:=", "%,),2:*"})
+    void validateNonNumberTypeTest(String input) {
+        //given
+        List<String> stringNumbers = StringAddCalculator.splitByDefault(input);
+
+        //when, then
+        assertThatThrownBy(() -> {
+            StringAddCalculator.validateNonNumberType(stringNumbers);
+        }).isInstanceOf(RuntimeException.class);
     }
 }
