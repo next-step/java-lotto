@@ -20,4 +20,8 @@ public class StringAddCalculator {
             throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
         }
     }
+
+    public static void validateNegative(List<Integer> numbers) {
+
+    }
 }
