@@ -18,4 +18,10 @@ public class PositiveNumberTest {
             new PositiveNumber(-1);
         }).isInstanceOf(RuntimeException.class);
     }
+
+    @DisplayName("PositiveNumber 객체와 int 값의 합을 int 타입으로 리턴한다.")
+    @Test
+    void addTest() {
+        assertThat(new PositiveNumber(1).addInt(5)).isEqualTo(6);
+    }
 }
