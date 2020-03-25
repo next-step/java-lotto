@@ -1,5 +1,5 @@
 public class StringAddCalculator {
-    public static int isNullOrEmpty(String input) {
-
+    public static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
     }
 }

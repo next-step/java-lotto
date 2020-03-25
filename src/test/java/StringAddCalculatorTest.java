@@ -7,6 +7,6 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void isNullOrEmptyTest(String input) {
-        assertThat(StringAddCalculator.isNullOrEmpty(input)).isZero();
+        assertThat(StringAddCalculator.isNullOrEmpty(input)).isTrue();
     }
 }
