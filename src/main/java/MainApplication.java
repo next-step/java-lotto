@@ -1,7 +1,7 @@
 public class MainApplication {
     public static void main(String[] args) {
 //        Scanner scanner = new Scanner(System.in);
-//        String s = scanner.nextLine();
+//        String input = scanner.nextLine();
 ////
         String input = "//#\n1#2#3";
 
