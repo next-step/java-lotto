@@ -49,4 +49,15 @@ public class StringAddCalculatorTest {
         //then
         assertThat(sum).isEqualTo(expected);
     }
+
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 입력하면, 합(sum)을 리턴한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"//;\\n1;2;3=6", "//@\\n1@2@3=6", "//#\\n1#2#3"}, delimiter = '=')
+    void splitByCustomTest(String input, int expected) {
+        //when
+        int sum = StringAddCalculator.addString(input);
+
+        //then
+        assertThat(sum).isEqualTo(expected);
+    }
 }
