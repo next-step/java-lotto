@@ -1,0 +1,14 @@
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class StringSplitterTest {
+    @DisplayName("StringSplitter는 쉼표 구분자로 문자열을 분리해서 반환한다.")
+    @Test
+    void splitTest() {
+        assertThat(StringSplitter.split("1,2,3")).isEqualTo(Arrays.asList("1", "2", "3"));
+    }
+}
