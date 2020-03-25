@@ -27,13 +27,13 @@ public class StringAddCalculatorTest {
     @DisplayName("숫자 이외의 값이 입력되면 예외를 리턴한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,@,3", "10,2,3:=", "%,),2:*"})
-    void validateNonNumberTypeTest(String input) {
+    void convertToNumberTest(String input) {
         //given
         List<String> stringNumbers = StringAddCalculator.splitByDefault(input);
 
         //when, then
         assertThatThrownBy(() -> {
-            StringAddCalculator.validateNonNumberType(stringNumbers);
+            StringAddCalculator.covertToNumber(stringNumbers);
         }).isInstanceOf(RuntimeException.class);
     }
 }
