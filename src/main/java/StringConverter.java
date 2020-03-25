@@ -9,7 +9,6 @@ public class StringConverter {
         return covertToNumber(strings);
     }
 
-
     private static PositiveNumbers covertToNumber(List<String> stringNumbers) {
         try {
             return stringNumbers.stream()
