@@ -4,29 +4,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
-    @DisplayName("기본 구분자로 구분된 문자열을 입력하면, 숫자로 간주되는 문자열의 갯수를 가진 콜렉션이 리턴된다.")
-    @ParameterizedTest
-    @CsvSource(value = {"2,4,5=3", "23:4=2", "2,24,20:1,5=5"}, delimiter = '=')
-    void extractStringNumberTest(String input, int expected) {
-        assertThat(StringAddCalculator.splitByDefault(input).size()).isEqualTo(expected);
-    }
-
     @DisplayName("숫자 이외의 값이 입력되면 예외를 리턴한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,@,3", "10,2,3:=", "%,),2:*"})
     void convertToNumberTest(String input) {
-        //given
-        List<String> stringNumbers = StringAddCalculator.splitByDefault(input);
-
         //when, then
         assertThatThrownBy(() -> {
-            StringAddCalculator.covertToNumber(stringNumbers);
+            StringAddCalculator.addString(input);
         }).isInstanceOf(RuntimeException.class);
     }
 
@@ -34,13 +22,9 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,-1,0", "10,-9", "20,-20,-1"})
     void validateNegativeTest(String input) {
-        //given
-        List<String> stringNumbers = StringAddCalculator.splitByDefault(input);
-        List<Integer> numbers = StringAddCalculator.covertToNumber(stringNumbers);
-
         //when, then
         assertThatThrownBy(() -> {
-            StringAddCalculator.validateNegative(numbers);
+            StringAddCalculator.addString(input);
         }).isInstanceOf(RuntimeException.class);
     }
 
@@ -49,11 +33,7 @@ public class StringAddCalculatorTest {
     @CsvSource(value = {"0,2,4=6", "7,3,1,23,5=39", "1,2:5,34:3=45"}, delimiter = '=')
     void sumTest(String input, int expected) {
         //given
-        List<String> strings = StringAddCalculator.addString(input);
-        List<Integer> integers = StringAddCalculator.covertToNumber(strings);
-
-        //when
-        int sum = StringAddCalculator.sum(integers);
+        int sum = StringAddCalculator.addString(input);
 
         //then
         assertThat(sum).isEqualTo(expected);
