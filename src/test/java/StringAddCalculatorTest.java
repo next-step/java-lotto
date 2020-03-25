@@ -12,8 +12,8 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"2,4,5:3", "23,4:2", "2,24,20,1,5:5"}, delimiter = ':')
-    void splitTest(String input, int expected) {
-        assertThat(StringAddCalculator.splitByDefault(input).length).isEqualTo(expected);
+    @CsvSource(value = {"2,4,5=3", "23:4=2", "2,24,20:1,5=5"}, delimiter = '=')
+    void splitByDefaultTest(String input, int expected) {
+        assertThat(StringAddCalculator.extractStringNumber(input).size()).isEqualTo(expected);
     }
 }
