@@ -6,11 +6,7 @@ public class StringAddCalculator {
         return input == null || input.isEmpty();
     }
 
-    public static List<String> extractStringNumber(String input) {
-        return Arrays.asList(splitByDefault(input));
-    }
-
-    private static String[] splitByDefault(String input) {
-        return input.split(",|:");
+    public static List<String> splitByDefault(String input) {
+        return Arrays.asList(input.split(",|:"));
     }
 }
