@@ -6,8 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringAddCalculatorTest {
     @DisplayName("null 또는 공백이 입력되면 true를 리턴한다.")
@@ -40,13 +39,29 @@ public class StringAddCalculatorTest {
     @DisplayName("음수를 입력하면 예외를 리턴한다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,-1,0", "10,-9", "20,-20,-1"})
-    void validateNegative(String input) {
+    void validateNegativeTest(String input) {
         //given
         List<String> stringNumbers = StringAddCalculator.splitByDefault(input);
         List<Integer> numbers = StringAddCalculator.covertToNumber(stringNumbers);
 
+        //when, then
         assertThatThrownBy(() -> {
             StringAddCalculator.validateNegative(numbers);
         }).isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("숫자로 변환된 콜렉션을 주면, 합(sum)을 리턴한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"0,2,4=6", "7,3,1,23,5=39", "1,2:5,34:3=45"}, delimiter = '=')
+    void sumTest(String input, int expected){
+        //given
+        List<String> strings = StringAddCalculator.splitByDefault(input);
+        List<Integer> integers = StringAddCalculator.covertToNumber(strings);
+
+        //when
+        int sum = StringAddCalculator.sum(integers);
+
+        //then
+        assertThat(sum).isEqualTo(expected);
     }
 }

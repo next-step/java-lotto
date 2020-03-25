@@ -33,4 +33,8 @@ public class StringAddCalculator {
                 .findAny()
                 .isPresent();
     }
+
+    public static int sum(List<Integer> integers) {
+        return false;
+    }
 }
