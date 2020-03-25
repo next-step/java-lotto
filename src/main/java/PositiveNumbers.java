@@ -8,15 +8,11 @@ public class PositiveNumbers {
         this.positiveNumbers = Collections.unmodifiableList(positiveNumbers);
     }
 
-    public int sum(){
+    public int sum() {
         int sum = 0;
-        for(PositiveNumber positiveNumber:positiveNumbers){
+        for (PositiveNumber positiveNumber : positiveNumbers) {
             sum = positiveNumber.addInt(sum);
         }
         return sum;
-    }
-
-    private List<PositiveNumber> getPositiveNumbers() {
-        return positiveNumbers;
     }
 }
