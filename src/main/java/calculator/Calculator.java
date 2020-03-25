@@ -5,30 +5,33 @@ public class Calculator {
     private final int result;
 
     public Calculator(String input) {
-        this.result = Integer.parseInt(checkNumber(input));
+        String line = checkNumber(input);
+
+        String[] numbers = line.split(",");
+        int sum = sum(numbers);
+
+        this.result = sum;
+    }
+
+    private int sum(String[] numbers) {
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sum += Integer.parseInt(numbers[i]);
+        }
+        return sum;
     }
 
     private String checkNumber(String input) {
-        return isNull(isEmpty(input));
-    }
-
-    private String isNull(String input) {
         if (input == null) {
             return "0";
         }
-        return input;
-    }
-
-    private String isEmpty(String input) {
         if (input.isEmpty()) {
             return "0";
         }
         return input;
     }
 
-
     public int getResult() {
         return result;
     }
-
 }
