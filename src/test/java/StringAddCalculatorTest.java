@@ -39,7 +39,7 @@ public class StringAddCalculatorTest {
 
     @DisplayName("음수를 입력하면 예외를 리턴한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1,-1,0", "10,-9", "20, -20, -1"})
+    @ValueSource(strings = {"1,-1,0", "10,-9", "20,-20,-1"})
     void validateNegative(String input) {
         //given
         List<String> stringNumbers = StringAddCalculator.splitByDefault(input);
