@@ -1,10 +1,11 @@
+import java.util.Collections;
 import java.util.List;
 
 public class PositiveNumbers {
     private List<PositiveNumber> positiveNumbers;
 
-    public PositiveNumbers(List<PositiveNumber> positiveNumberList) {
-        this.positiveNumbers = positiveNumberList;
+    public PositiveNumbers(List<PositiveNumber> positiveNumbers) {
+        this.positiveNumbers = Collections.unmodifiableList(positiveNumbers);
     }
 
     public int sum(){
@@ -15,7 +16,7 @@ public class PositiveNumbers {
         return sum;
     }
 
-    private List<PositiveNumber> getPositiveNumberList() {
+    private List<PositiveNumber> getPositiveNumbers() {
         return positiveNumbers;
     }
 }
