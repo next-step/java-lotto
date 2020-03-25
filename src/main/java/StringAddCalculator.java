@@ -22,12 +22,15 @@ public class StringAddCalculator {
     }
 
     public static void validateNegative(List<Integer> numbers) {
-        boolean hasNegative = numbers.stream()
+        if (hasNegative(numbers)) {
+            throw new RuntimeException("음수는 입력할 수 없습니다.");
+        }
+    }
+
+    private static boolean hasNegative(List<Integer> numbers) {
+        return numbers.stream()
                 .filter(number -> number < 0)
                 .findAny()
                 .isPresent();
-        if(hasNegative){
-            throw new RuntimeException("음수는 입력할 수 없습니다.");
-        }
     }
 }
