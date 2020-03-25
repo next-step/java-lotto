@@ -2,7 +2,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class StringAddCalculator {
     private static final String REGEX_FOR_DEFAULT = ",|:";
@@ -19,15 +21,11 @@ public class StringAddCalculator {
         return input == null || input.isEmpty();
     }
 
-    private static int sum(List<PositiveNumber> numbers) {
-        int sum = 0;
-        for (PositiveNumber positiveNumber : numbers) {
-            sum = positiveNumber.addInt(sum);
-        }
-        return sum;
+    private static int sum(PositiveNumbers positiveNumbers) {
+        return positiveNumbers.sum();
     }
 
-    private static List<PositiveNumber> convertFromStringToNumbers(String input) {
+    private static PositiveNumbers convertFromStringToNumbers(String input) {
         List<String> strings = splitByCustom(input);
         return covertToNumber(strings);
     }
@@ -45,12 +43,12 @@ public class StringAddCalculator {
         return splitByDefault(input);
     }
 
-    private static List<PositiveNumber> covertToNumber(List<String> stringNumbers) {
+    private static PositiveNumbers covertToNumber(List<String> stringNumbers) {
         try {
             return stringNumbers.stream()
                     .map(stringNumber -> Integer.parseInt(stringNumber))
                     .map(PositiveNumber::new)
-                    .collect(Collectors.toList());
+                    .collect(collectingAndThen(toList(), PositiveNumbers::new));
         } catch (NumberFormatException e) {
             throw new RuntimeException("숫자가 아닌 값은 입력할 수 없습니다.");
         }
