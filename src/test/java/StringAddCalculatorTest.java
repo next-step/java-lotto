@@ -10,13 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
-    @DisplayName("null 또는 공백이 입력되면 true를 리턴한다.")
-    @ParameterizedTest
-    @NullAndEmptySource
-    void isNullOrEmptyTest(String input) {
-        assertThat(StringAddCalculator.isNullOrEmpty(input)).isTrue();
-    }
-
     @DisplayName("기본 구분자로 구분된 문자열을 입력하면, 숫자로 간주되는 문자열의 갯수를 가진 콜렉션이 리턴된다.")
     @ParameterizedTest
     @CsvSource(value = {"2,4,5=3", "23:4=2", "2,24,20:1,5=5"}, delimiter = '=')
@@ -56,7 +49,7 @@ public class StringAddCalculatorTest {
     @CsvSource(value = {"0,2,4=6", "7,3,1,23,5=39", "1,2:5,34:3=45"}, delimiter = '=')
     void sumTest(String input, int expected) {
         //given
-        List<String> strings = StringAddCalculator.splitByDefault(input);
+        List<String> strings = StringAddCalculator.addString(input);
         List<Integer> integers = StringAddCalculator.covertToNumber(strings);
 
         //when
@@ -76,5 +69,4 @@ public class StringAddCalculatorTest {
         //then
         assertThat(sum).isZero();
     }
-
 }

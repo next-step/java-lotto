@@ -10,20 +10,26 @@ public class StringAddCalculator {
         return sum(convertFromStringToNumbers(input));
     }
 
+    private static boolean isNullOrEmpty(String input) {
+        return input == null || input.isEmpty();
+    }
+
+    private static int sum(List<Integer> numbers) {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     private static List<Integer> convertFromStringToNumbers(String input){
         List<String> strings = splitByDefault(input);
         return validateNegative(covertToNumber(strings));
     }
 
-    public static boolean isNullOrEmpty(String input) {
-        return input == null || input.isEmpty();
-    }
-
-    public static List<String> splitByDefault(String input) {
+    private static List<String> splitByDefault(String input) {
         return Arrays.asList(input.split(",|:"));
     }
 
-    public static List<Integer> covertToNumber(List<String> stringNumbers) {
+    private static List<Integer> covertToNumber(List<String> stringNumbers) {
         try {
             return stringNumbers.stream()
                     .map(stringNumber -> Integer.parseInt(stringNumber))
@@ -33,7 +39,7 @@ public class StringAddCalculator {
         }
     }
 
-    public static List<Integer> validateNegative(List<Integer> numbers) {
+    private static List<Integer> validateNegative(List<Integer> numbers) {
         if (hasNegative(numbers)) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
@@ -45,11 +51,5 @@ public class StringAddCalculator {
                 .filter(number -> number < 0)
                 .findAny()
                 .isPresent();
-    }
-
-    public static int sum(List<Integer> numbers) {
-        return numbers.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
     }
 }
