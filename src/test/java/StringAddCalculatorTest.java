@@ -6,7 +6,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     @DisplayName("null 또는 공백이 입력되면 true를 리턴한다.")
@@ -53,7 +54,7 @@ public class StringAddCalculatorTest {
     @DisplayName("숫자로 변환된 콜렉션을 주면, 합(sum)을 리턴한다.")
     @ParameterizedTest
     @CsvSource(value = {"0,2,4=6", "7,3,1,23,5=39", "1,2:5,34:3=45"}, delimiter = '=')
-    void sumTest(String input, int expected){
+    void sumTest(String input, int expected) {
         //given
         List<String> strings = StringAddCalculator.splitByDefault(input);
         List<Integer> integers = StringAddCalculator.covertToNumber(strings);
@@ -64,4 +65,16 @@ public class StringAddCalculatorTest {
         //then
         assertThat(sum).isEqualTo(expected);
     }
+
+    @DisplayName("null 또는 공백 문자열이 입력되면 0을 리턴한다.")
+    @ParameterizedTest
+    @NullAndEmptySource
+    void addStringTestWhenNullOrEmpty(String input) {
+        //when, then
+        int sum = StringAddCalculator.addString(input);
+
+        //then
+        assertThat(sum).isZero();
+    }
+
 }
