@@ -43,4 +43,10 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.calculate("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    public void splitAndSum_custom_구분자() throws Exception {
+        int result = StringAddCalculator.calculate("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
