@@ -10,21 +10,21 @@ public class StringAddCalculator {
 
     public static int splitAndSum(String inputData) {
         String[] splitInputData;
-
         if (checkNullInputData(inputData)) {
             return 0;
         }
+        inputData = makeMatcher(inputData);
+        splitInputData = inputData.split(CUSTOM_DELIMITER);
+        return sumFromSplitInputData(splitInputData);
+    }
 
+    private static String makeMatcher(String inputData) {
         Matcher matcher = Pattern.compile(PATTERN_START + "(.)" + PATTERN_END + "(.*)").matcher(inputData);
-
         if (matcher.find()) {
             CUSTOM_DELIMITER = matcher.group(1);
             inputData = matcher.group(2);
         }
-
-        splitInputData = inputData.split(CUSTOM_DELIMITER);
-
-        return sumFromSplitInputData(splitInputData);
+        return inputData;
     }
 
     private static int sumFromSplitInputData(String[] splitInputData) {

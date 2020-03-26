@@ -10,7 +10,6 @@ public class InputView {
     public static String askQuestion(){
         System.out.println("입력 : ");
         Scanner scanner = new Scanner(System.in);
-
         return scanner.nextLine();
     }
 }
