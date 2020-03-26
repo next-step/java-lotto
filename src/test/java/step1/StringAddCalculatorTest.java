@@ -10,7 +10,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("입력받은 문자열이 null일 경우 결과는 0이다.")
     void splitAndSumNull() {
-        int result = StringAddCalculator.caculate(null);
+        int result = StringAddCalculator.calculate(null);
 
         assertThat(result).isEqualTo(0);
     }
@@ -18,7 +18,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("입력받은 문자열이 Empty일 경우 결과는 0이다.")
     void splitAndSumEmpty() {
-        int result = StringAddCalculator.caculate(" ");
+        int result = StringAddCalculator.calculate(" ");
 
         assertThat(result).isEqualTo(0);
     }
@@ -26,14 +26,14 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("숫자 하나를 입력했을 경우 결과는 해당 숫자이다.")
     void splitAndSum_숫자하나() throws Exception {
-        int result = StringAddCalculator.caculate("2");
+        int result = StringAddCalculator.calculate("2");
 
         assertThat(result).isEqualTo(2);
     }
 
     @Test
     public void splitAndSum_쉼표구분자() throws Exception {
-        int result = StringAddCalculator.caculate("1,2");
+        int result = StringAddCalculator.calculate("1,2");
 
         assertThat(result).isEqualTo(3);
     }
