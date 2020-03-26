@@ -29,7 +29,7 @@ public class StringPlusCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1,2=3", "1,2,3=6"}, delimiter = '=')
-    @DisplayName("쉼표를 구분자로 가지는 문자열을 더한값이 나와야 한다.")
+    @DisplayName("쉼표를 기준으로 분리한 숫자를 더한값이 나와야 한다.")
     public void calculateCommaTokenizedTest(String input, int result) {
         assertThat(StringPlusCalculator.calculate(input))
                 .isEqualTo(result);
@@ -37,8 +37,16 @@ public class StringPlusCalculatorTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1:2:3=6", "1,2:3=6"}, delimiter = '=')
-    @DisplayName("쉼표 또는 콜론을 구분자로 가지는 문자열을 더한값이 나와야 한다.")
+    @DisplayName("쉼표 또는 콜론 기준으로 분리한 숫자를 더한값이 나와야 한다.")
     public void calculateCommaOrColonTokenizedTest(String input, int result) {
+        assertThat(StringPlusCalculator.calculate(input))
+                .isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"//;\\n1;2;3=6", "// \\n1 2 3=6"}, delimiter = '=')
+    @DisplayName("커스텀 구분자를 기준으로 분리한 숫자를 더한값이 나와야 한다.")
+    public void calculateCustomTokenizedTest(String input, int result) {
         assertThat(StringPlusCalculator.calculate(input))
                 .isEqualTo(result);
     }
