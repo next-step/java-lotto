@@ -1,11 +1,6 @@
 package calculator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class StringCalculator {
-    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
-    private static final String DEFAULT_TOKEN_DELIMITER = ",|:";
     private static final String EMPTY_STRING = "";
     private static final int ZERO = 0;
 
@@ -13,21 +8,12 @@ public class StringCalculator {
         if (isNullOrEmpty(input)) {
             return ZERO;
         }
-        String[] splitInput = splitInput(input);
+        String[] splitInput = Delimiter.split(input);
         return add(splitInput);
     }
 
     private boolean isNullOrEmpty(String input) {
         return input == null || EMPTY_STRING.equals(input.trim());
-    }
-
-    String[] splitInput(final String input) {
-        Matcher matcher = CUSTOM_PATTERN.matcher(input);
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(1);
-            return matcher.group(2).split(customDelimiter);
-        }
-        return input.split(DEFAULT_TOKEN_DELIMITER);
     }
 
     private int add(final String[] splitInput) {
