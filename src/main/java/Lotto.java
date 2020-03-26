@@ -1,12 +1,12 @@
-import sun.misc.PostVMInitHook;
-
-import java.util.Scanner;
+import domain.StringAddCalculator;
+import view.InputView;
+import view.ResultView;
 
 public class Lotto {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String inputData = scanner.nextLine();
-        System.out.println(StringAddCalculator.splitAndSum(inputData));
+        String inputData = InputView.askQuestion();
+        int sum = StringAddCalculator.splitAndSum(inputData);
+        ResultView.result(sum);
     }
 }
