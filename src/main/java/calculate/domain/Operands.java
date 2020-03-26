@@ -12,6 +12,10 @@ public class Operands {
         this.operands = Arrays.asList(operand);
     }
 
+    public Operands(List<Operand> operands) {
+        this.operands = operands;
+    }
+
     public List<Operand> getOperands() {
         return operands;
     }
