@@ -1,6 +1,7 @@
 package sum;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -14,6 +15,10 @@ class ValueList {
 	}
 
 	private List<PositiveValue> parseToPositiveList(String[] values) {
+		if (values == null) {
+			return Collections.emptyList();
+		}
+
 		return Arrays.stream(values)
 				.map(this::getPositiveValue)
 				.collect(Collectors.toList());
@@ -22,11 +27,8 @@ class ValueList {
 	private PositiveValue getPositiveValue(String valueString) {
 		if (valueString == null ||
 				valueString.isEmpty()) {
-			throw new IllegalArgumentException(
-					String.format("Parse valueString to PositiveValue failed. " +
-							"Each Number valueString must not be Null or Empty : valueString=%s", valueString));
+			return new PositiveValue(0);
 		}
-
 		return new PositiveValue(Integer.parseInt(valueString));
 	}
 
