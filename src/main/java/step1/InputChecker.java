@@ -21,11 +21,4 @@ public class InputChecker {
         }
         return false;
     }
-
-    public static boolean isOnlyNumber(String input) {
-        if(input.matches("^[0-9]*$")) {
-            return true;
-        }
-        return false;
-    }
 }
