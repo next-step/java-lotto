@@ -1,10 +1,12 @@
 package step1;
 
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
     private StringAddCalculator calculator;
@@ -13,6 +15,7 @@ public class StringAddCalculatorTest {
     void setUp() {
         calculator = new StringAddCalculator();
     }
+
     @Test
     @DisplayName("입력받은 문자열이 null일 경우 결과는 0이다.")
     void splitAndSumNull() {
@@ -59,5 +62,12 @@ public class StringAddCalculatorTest {
         int result = calculator.calculate("//;\n1;2;3");
 
         assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("파싱된 숫자가 음수일 경우 예외 처리를 수행한다.")
+    public void splitAndSum_negative() throws Exception {
+        assertThatThrownBy(() -> calculator.calculate("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
