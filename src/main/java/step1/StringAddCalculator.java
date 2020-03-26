@@ -7,6 +7,10 @@ public class StringAddCalculator {
         if(ValidationUtils.isNullOrEmpty(input)) {
             result = 0;
         }
+        else if(input.matches("^[0-9]*$")) {
+            result = Integer.parseInt(input);
+        }
+
         return result;
     }
 }
