@@ -96,4 +96,17 @@ public class StringAccumulatorTest {
 
         assertThat(sum).isEqualTo(expectedSum);
     }
+
+    @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @Test
+    public void useCustomDelimiterTest() {
+        String expression = "//;\n1;2;3";
+        StringAccumulator stringAccumulator = new StringAccumulator(expression);
+
+        List<String> separateExpression = stringAccumulator.getSeparateExpression();
+        int sum = stringAccumulator.sum(separateExpression);
+        int expectedSum = 6;
+
+        assertThat(sum).isEqualTo(expectedSum);
+    }
 }
