@@ -6,7 +6,7 @@ import calculator.exception.NegativeNumberException;
 import java.util.Objects;
 
 public class Number {
-    private static final int ZERO = 0;
+    public static final int ZERO = 0;
     private int value;
 
     private Number(final int number) {
@@ -18,9 +18,13 @@ public class Number {
         return new Number(parse(letter));
     }
 
-
     public Number add(final Number number) {
         return new Number(value + number.value);
+    }
+
+    // todo : getter
+    public int getValue() {
+        return this.value;
     }
 
     private static int parse(String letter) {
