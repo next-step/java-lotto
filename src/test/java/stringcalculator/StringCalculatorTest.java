@@ -22,6 +22,17 @@ public class StringCalculatorTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName(" “//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3"})
+    void customDelimiterCalculate(String expression) {
+        StringCalculator stringCalculator = new StringCalculator();
+
+        int actual = stringCalculator.calculate(expression);
+
+        assertThat(actual).isEqualTo(6);
+    }
+
     @DisplayName("빈 문자열 또는 null값 입력 시 0 반환")
     @ParameterizedTest
     @NullAndEmptySource
