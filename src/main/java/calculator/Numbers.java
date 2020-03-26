@@ -1,18 +1,23 @@
 package calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Numbers {
     private List<Number> numbers;
 
-    public Numbers(final String[] splitedString) {
+    private Numbers(List<Number> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static Numbers valueOf(final String[] splitedString) {
         final List<Number> numbers = new ArrayList<>();
         for (final String letter : splitedString) {
             numbers.add(Number.valueOf(letter));
         }
-        this.numbers = numbers;
+        return new Numbers(numbers);
     }
 
     @Override
