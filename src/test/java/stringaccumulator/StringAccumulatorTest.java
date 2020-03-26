@@ -1,6 +1,7 @@
 package stringaccumulator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -17,5 +18,14 @@ public class StringAccumulatorTest {
         String takeNewOne = stringAccumulator.getExpression();
 
         assertThat(takeNewOne).isEqualTo(expression);
+    }
+
+    @DisplayName("같은 값으로 생성한 StringAccumulator 인스턴스는 같다")
+    @Test
+    public void sameCreatedSameExpressionTest() {
+        String expression = "1,2";
+
+        assertThat(new StringAccumulator(expression))
+                .isEqualTo(new StringAccumulator(expression));
     }
 }
