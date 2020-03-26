@@ -2,10 +2,15 @@ package stringaccumulator;
 
 import java.util.Objects;
 
+import static stringaccumulator.Constant.ONLY_NUMBER;
+import static stringaccumulator.Constant.ONLY_POSITIVE;
+
 public class Operand {
+    private static final int ZERO = 0;
+
     private final String operand;
 
-    public Operand(String operand) {
+    Operand(String operand) {
         this.operand = operand;
     }
 
@@ -14,13 +19,13 @@ public class Operand {
             int intValue = Integer.parseInt(operand.getOperand());
             return isNegative(intValue);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자 이외의 값은 입력할 수 없습니다.");
+            throw new IllegalArgumentException(ONLY_NUMBER);
         }
     }
 
     private static int isNegative(Integer operand) {
-        if (operand < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        if (operand < ZERO) {
+            throw new IllegalArgumentException(ONLY_POSITIVE);
         }
         return operand;
     }

@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static stringaccumulator.Constant.ONLY_POSITIVE;
 
 public class StringAccumulatorTest {
 
@@ -17,29 +18,25 @@ public class StringAccumulatorTest {
     @ParameterizedTest
     @CsvSource(value = {" ~ 0", "1,2 ~ 3", "1,2,3 ~ 6", "1,2:3 ~ 6"}, delimiter = '~')
     public void newStringAccumInstanceTest(String expression, int expectedSum) {
-        Expressions expressions = Expressions.of(expression);
-
-        int sum = expressions.sum();
+        int sum = StringAccumulator.splitAndSum(expression);
 
         assertThat(sum).isEqualTo(expectedSum);
     }
 
-    @DisplayName("같은 값으로 생성한 StringAccumulator 인스턴스는 같다")
+    @DisplayName("같은 값으로 생성한 Expression 인스턴스는 같다")
     @Test
     public void sameCreatedSameExpressionTest() {
         String expression = "1,2";
 
-        assertThat(new Expressions(expression))
-                .isEqualTo(new Expressions(expression));
+        assertThat(Expressions.of(expression))
+                .isEqualTo(Expressions.of(expression));
     }
 
     @DisplayName("빈 문자열을 입력할 경우 0을 반환해야 한다.")
     @ParameterizedTest
     @EmptySource
     public void nullStringReturnsZero(String expression) {
-        Expressions expressions = new Expressions(expression);
-
-        int sum = expressions.sum();
+        int sum = StringAccumulator.splitAndSum(expression);
 
         assertThat(sum).isEqualTo(0);
     }
@@ -48,9 +45,7 @@ public class StringAccumulatorTest {
     @ParameterizedTest
     @NullSource
     public void nullReturnsZero(String expression) {
-        Expressions expressions = new Expressions(expression);
-
-        int sum = expressions.sum();
+        int sum = StringAccumulator.splitAndSum(expression);
 
         assertThat(expression).isNull();
         assertThat(sum).isEqualTo(0);
@@ -60,9 +55,7 @@ public class StringAccumulatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "2", "3"})
     public void returnsItSelfOnNumberSizeOne(String expression) {
-        Expressions expressions = new Expressions(expression);
-
-        int sum = expressions.sum();
+        int sum = StringAccumulator.splitAndSum(expression);
         int expected = Integer.parseInt(expression);
 
         assertThat(sum).isEqualTo(expected);
@@ -72,9 +65,7 @@ public class StringAccumulatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2 : 3", "2,3 : 5"}, delimiter = ':')
     public void returnsSumOfTwoNumbersWithComma(String expression, int expectedSum) {
-        Expressions expressions = new Expressions(expression);
-
-        int sum = expressions.sum();
+        int sum = StringAccumulator.splitAndSum(expression);
 
         assertThat(sum).isEqualTo(expectedSum);
     }
@@ -83,9 +74,7 @@ public class StringAccumulatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2:3 : 6"}, delimiter = ':')
     public void useColonByDelimiterTest(String expression, int expectedSum) {
-        Expressions expressions = new Expressions(expression);
-
-        int sum = expressions.sum();
+        int sum = StringAccumulator.splitAndSum(expression);
 
         assertThat(sum).isEqualTo(expectedSum);
     }
@@ -93,10 +82,8 @@ public class StringAccumulatorTest {
     @DisplayName("“//”와 “\\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
     @Test
     public void useCustomDelimiterTest() {
-        String expression = "//;\n1;2;3";
-        Expressions expressions = new Expressions(expression);
-
-        int sum = expressions.sum();
+        String expression = "//~\n1~2~3";
+        int sum = StringAccumulator.splitAndSum(expression);
         int expectedSum = 6;
 
         assertThat(sum).isEqualTo(expectedSum);
@@ -106,10 +93,12 @@ public class StringAccumulatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2:-3", "//;\n1;2;-3"})
     public void negativesThrowRuntimeException(String expression) {
-        Expressions expressions = new Expressions(expression);
 
-        assertThatThrownBy(() -> expressions.sum())
+        assertThatThrownBy(() ->
+                StringAccumulator.splitAndSum(expression))
+
                 .isExactlyInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("음수는 입력할 수 없습니다.");
+                .hasMessageContaining(ONLY_POSITIVE);
     }
+
 }

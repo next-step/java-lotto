@@ -6,17 +6,18 @@ import java.util.Objects;
 import static java.util.stream.Collectors.toList;
 
 public class Operands {
+    private static final int ZERO = 0;
     private final List<Operand> operands;
 
-    public Operands(List<String> operands) {
+    Operands(List<String> operands) {
         this.operands = operands.stream()
                 .map(Operand::new)
                 .collect(toList());
     }
 
-    public int sum() {
+    int sum() {
         if (operands.isEmpty()) {
-            return 0;
+            return ZERO;
         }
         return operands.stream()
                 .map(Operand::parseInt)

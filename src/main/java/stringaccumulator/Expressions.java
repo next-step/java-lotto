@@ -1,10 +1,10 @@
 package stringaccumulator;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
 public class Expressions {
@@ -16,17 +16,17 @@ public class Expressions {
     private static final int CUSTOM_DELIMITER = 1;
     private static final int CUSTOM_EXPRESSION = 2;
 
-    private Operands operands;
+    private final Operands operands;
 
-    public Expressions(String expression) {
+    private Expressions(String expression) {
         this.operands = separateExpression(expression);
     }
 
-    public static Expressions of(String expression) {
+    static Expressions of(String expression) {
         return new Expressions(expression);
     }
 
-    public int sum() {
+    int sum() {
         return operands.sum();
     }
 
@@ -37,20 +37,20 @@ public class Expressions {
         return getOperandsByDelimiter(expression);
     }
 
+    private boolean isNullOrEmpty(String expression) {
+        return Objects.isNull(expression) || Objects.equals(expression, NULL_STRING);
+    }
+
     private Operands getOperandsByDelimiter(String expression) {
         Matcher matcher = CUSTOM_DELIMITERS.matcher(expression);
         if (matcher.find()) {
             return new Operands(
-                    Arrays.asList(matcher.group(CUSTOM_EXPRESSION).split(matcher.group(CUSTOM_DELIMITER)))
+                    asList(matcher.group(CUSTOM_EXPRESSION).split(matcher.group(CUSTOM_DELIMITER)))
             );
         }
         return new Operands(
-                Arrays.asList(expression.split(DEFAULT_DELIMITERS.pattern()))
+                asList(expression.split(DEFAULT_DELIMITERS.pattern()))
         );
-    }
-
-    private boolean isNullOrEmpty(String expression) {
-        return Objects.isNull(expression) || Objects.equals(expression, NULL_STRING);
     }
 
     @Override
