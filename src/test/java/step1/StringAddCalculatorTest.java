@@ -21,4 +21,12 @@ public class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("숫자 하나를 입력했을 경우 결과는 해당 숫자이다.")
+    void splitAndSum_숫자하나() throws Exception {
+        int result = StringAddCalculator.splitAndSum("1");
+
+        assertThat(result).isEqualTo(1);
+    }
 }
