@@ -1,8 +1,5 @@
 package step1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static step1.Numbers.INIT_VALUE;
 
 public class StringAddCalculator {

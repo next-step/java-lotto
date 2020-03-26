@@ -1,8 +1,5 @@
 package step1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Numbers {
 
     static final int INIT_VALUE = 0;
