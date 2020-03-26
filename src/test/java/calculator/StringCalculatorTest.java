@@ -35,11 +35,11 @@ class StringCalculatorTest {
         assertThat(actual).isZero();
     }
 
-    @DisplayName("컴마(,) 기준으로 문자열을 분리할 수 있다.")
+    @DisplayName("컴마(,), 콜론(:) 기준으로 문자열을 분리할 수 있다.")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2", "1,2,3", "1,2,3,4"})
+    @ValueSource(strings = {"1,2", "1:2", "1,2:3"})
     void splitFromComma(String input) {
-        final String[] expect = input.split(",");
+        final String[] expect = input.split(",|:");
 
         String[] splitInput = stringCalculator.splitInput(input);
 
