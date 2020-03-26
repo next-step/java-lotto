@@ -26,8 +26,7 @@ public class Number {
         return new Number(value + number.value);
     }
 
-    // todo : getter
-    public int getValue() {
+    int getValue() {
         return this.value;
     }
 
