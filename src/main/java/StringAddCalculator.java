@@ -2,37 +2,47 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringAddCalculator {
+    private static final String PATTERN_END = "\n";
+    private static final String PATTERN_START = "//";
+    private static String CUSTOM_DELIMITER = "[,:]";
+
+
     public static int splitAndSum(String inputData) {
-        if (inputData == null || inputData.isEmpty()) {
-            return 0;
-        }
         int result = 0;
+        String[] splitInputData;
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputData);
+        if (checkNullInputData(inputData)) {
+            return result;
+        }
 
-        if (m.find()) {
-            String customDelimiter = m.group(1);
-            String[] splitInputData = m.group(2).split(customDelimiter);
+        Matcher matcher = Pattern.compile(PATTERN_START + "(.)" + PATTERN_END + "(.*)").matcher(inputData);
 
-            for (int i = 0; i < splitInputData.length; i++) {
-                if(Integer.parseInt(splitInputData[i]) <0){
-                    throw new RuntimeException();
-                }
+        if (matcher.find()) {
+            CUSTOM_DELIMITER = matcher.group(1);
+            inputData = matcher.group(2);
+        }
 
-                result = result + Integer.parseInt(splitInputData[i]);
-            }
-        }else{
+        splitInputData = inputData.split(CUSTOM_DELIMITER);
 
-            String[] splitInputData = inputData.split(",|:");
-
-            for (int i = 0; i < splitInputData.length; i++) {
-                if(Integer.parseInt(splitInputData[i]) <0){
-                    throw new RuntimeException();
-                }
-                result = result + Integer.parseInt(splitInputData[i]);
-            }
+        for (String splitData : splitInputData) {
+            checkMinus(splitData);
+            result = result + getParseInt(splitData);
         }
 
         return result;
+    }
+
+    private static void checkMinus(String splitInputData) {
+        if (getParseInt(splitInputData) < 0) {
+            throw new RuntimeException();
+        }
+    }
+
+    private static boolean checkNullInputData(String inputData) {
+        return inputData == null || inputData.isEmpty();
+    }
+
+    private static int getParseInt(String splitInputData) {
+        return Integer.parseInt(splitInputData);
     }
 }
