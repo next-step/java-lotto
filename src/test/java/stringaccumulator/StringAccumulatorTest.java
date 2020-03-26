@@ -3,6 +3,7 @@ package stringaccumulator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -70,5 +71,17 @@ public class StringAccumulatorTest {
         int expected = Integer.parseInt(expression);
 
         assertThat(sum).isEqualTo(expected);
+    }
+
+    @DisplayName("숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2 : 3", "2,3 : 5"}, delimiter = ':')
+    public void returnsSumOfTwoNumbersWithComma(String expression, int expectedSum) {
+        StringAccumulator stringAccumulator = new StringAccumulator(expression);
+
+        List<String> separateExpression = stringAccumulator.getSeparateExpression();
+        int sum = stringAccumulator.sum(separateExpression);
+
+        assertThat(sum).isEqualTo(expectedSum);
     }
 }
