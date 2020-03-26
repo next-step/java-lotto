@@ -19,16 +19,22 @@ public class StringCalculator {
 
     private int add(final String[] splitInput) {
         int sum = ZERO;
-        try {
-            for (String letter : splitInput) {
-                int parseNumber = Integer.parseInt(letter);
-                checkNegative(parseNumber);
-                sum += Integer.parseInt(letter);
-            }
-        } catch (Exception e) {
-            throw e;
+        for (String letter : splitInput) {
+            int parseNumber = parse(letter);
+            checkNegative(parseNumber);
+            sum += parseNumber;
         }
         return sum;
+    }
+
+    private int parse(String letter) {
+        int parseInt;
+        try {
+            parseInt = Integer.parseInt(letter);
+        } catch (NumberFormatException ne) {
+            throw new RuntimeException("숫자로 변환 할 수 없습니다.");
+        }
+        return parseInt;
     }
 
     private void checkNegative(int number) {
