@@ -6,14 +6,18 @@ public class StringCalculator {
     private static final String EMPTY_STRING = "";
 
     public int calculate(final String input) {
-        if (input == null || EMPTY_STRING.equals(input)) {
+        if (isNullOrEmpty(input)) {
             return ZERO;
         }
         String[] splitInput = splitInput(input);
         return add(splitInput);
     }
 
-    public String[] splitInput(final String input) {
+    private boolean isNullOrEmpty(String input) {
+        return input == null || EMPTY_STRING.equals(input.trim());
+    }
+
+    String[] splitInput(final String input) {
         return input.split(DEFAULT_TOKEN_DELIMITER);
     }
 
