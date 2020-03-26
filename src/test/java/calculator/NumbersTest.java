@@ -17,4 +17,15 @@ public class NumbersTest {
 
         assertThat(actual).isEqualTo(expect);
     }
+
+    @DisplayName("합계를 구할 수 있다.")
+    @Test
+    void sum() {
+        Numbers numbers = Numbers.valueOf(new String[]{"1", "2"});
+        int expect = 3;
+
+        int actual = numbers.sum();
+
+        assertThat(actual).isEqualTo(expect);
+    }
 }
