@@ -22,14 +22,18 @@ public class StringCalculator {
         try {
             for (String letter : splitInput) {
                 int parseNumber = Integer.parseInt(letter);
-                if (parseNumber < 0) {
-                    throw new RuntimeException("음수 입니다.");
-                }
+                checkNegative(parseNumber);
                 sum += Integer.parseInt(letter);
             }
         } catch (Exception e) {
             throw e;
         }
         return sum;
+    }
+
+    private void checkNegative(int number) {
+        if (number < ZERO) {
+            throw new RuntimeException("음수 입니다.");
+        }
     }
 }
