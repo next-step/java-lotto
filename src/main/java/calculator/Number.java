@@ -5,9 +5,11 @@ import calculator.exception.InvalidNumberException;
 import java.util.Objects;
 
 public class Number {
+    private static final int ZERO = 0;
     private int value;
 
     private Number(final int number) {
+        checkNegative(number);
         this.value = number;
     }
 
@@ -23,6 +25,12 @@ public class Number {
             throw new InvalidNumberException(letter);
         }
         return parseInt;
+    }
+
+    private void checkNegative(int number) {
+        if (number < ZERO) {
+            throw new RuntimeException("음수 입니다.");
+        }
     }
 
     @Override
