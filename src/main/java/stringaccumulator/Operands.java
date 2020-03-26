@@ -3,11 +3,15 @@ package stringaccumulator;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
+
 public class Operands {
-    private final List<String> operands;
+    private final List<Operand> operands;
 
     public Operands(List<String> operands) {
-        this.operands = operands;
+        this.operands = operands.stream()
+                .map(Operand::new)
+                .collect(toList());
     }
 
     public int sum() {
@@ -16,16 +20,9 @@ public class Operands {
         }
 
         return operands.stream()
-                .mapToInt(Integer::parseInt)
-                .map(this::isNegative)
+                .map(Operand::parseInt)
+                .mapToInt(Integer::intValue)
                 .sum();
-    }
-
-    private int isNegative(Integer operand) {
-        if (operand < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-        }
-        return operand;
     }
 
     @Override
