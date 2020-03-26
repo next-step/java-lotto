@@ -7,6 +7,7 @@ public class Expression {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
     private static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
     private static final String DEFAULT_STRING_DELIMITER = ",|:";
+    private static final String DEFAULT_STRING_VALUE = "0";
     private static final int DELIMITER_MATCH_INDEX = 1;
     private static final int EXPRESSION_MATCH_INDEX = 2;
 
@@ -18,7 +19,7 @@ public class Expression {
 
     public static Expression newInstance(String input) {
         if (input == null || "".equals(input.trim())) {
-            return new Expression("0");
+            return new Expression(DEFAULT_STRING_VALUE);
         }
 
         return new Expression(input);
