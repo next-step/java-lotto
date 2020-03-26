@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringAddCalculatorTest {
     @Test
-    @DisplayName("입력받은 숫자가 null일 경우 0으로 간주하고 계산해야 한다.")
+    @DisplayName("입력받은 문자열이 null일 경우 결과는 0이다.")
     void splitAndSumNull() {
         int result = StringAddCalculator.splitAndSum(null);
 
@@ -15,7 +15,7 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("입력받은 숫자가 empty일 경우 0으로 간주하고 계산해야 한다.")
+    @DisplayName("입력받은 문자열이 Empty일 경우 결과는 0이다.")
     void splitAndSumEmpty() {
         int result = StringAddCalculator.splitAndSum(" ");
 
