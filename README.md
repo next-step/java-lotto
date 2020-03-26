@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현 기능 목록
+* 문자열 입력 기능
+* 문자열 분리 기능
+* 덧셈기능
+* 커스텀 구분자 기능
+* 결과 출력 기능
