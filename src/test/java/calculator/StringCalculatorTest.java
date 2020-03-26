@@ -45,4 +45,15 @@ class StringCalculatorTest {
 
         assertThat(splitInput).isEqualTo(expect);
     }
+
+    @DisplayName("분리된 문자열을 합한다.")
+    @Test
+    void add() {
+        final String input = "1,2:3";
+        final int expect = 6;
+
+        int sum = stringCalculator.calculate(input);
+
+        assertThat(sum).isEqualTo(expect);
+    }
 }
