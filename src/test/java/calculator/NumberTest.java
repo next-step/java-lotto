@@ -36,4 +36,15 @@ public class NumberTest {
                 () -> Number.valueOf("-1")
         );
     }
+
+    @DisplayName("숫자를 더할 수 있다.")
+    @Test
+    void add() {
+        Number number = Number.valueOf("1");
+        Number expect = Number.valueOf("2");
+
+        Number actual = number.add(Number.valueOf("1"));
+
+        assertThat(actual).isEqualTo(expect);
+    }
 }
