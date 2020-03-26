@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class DelimiterStrategy {
-    private List<Operand> operands = new ArrayList<>();
+    private final List<Operand> operands = new ArrayList<>();
 
     public DelimiterStrategy(String s, Delimiter delimiter) {
         List<String> strings = Arrays.asList(s.split(delimiter.getDelimiter()));
 
         for (String str : strings) {
-            System.out.println(str);
-            System.out.println(Integer.parseInt(str));
             this.operands.add(new Operand(Integer.parseInt(str)));
         }
     }
