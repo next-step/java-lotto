@@ -25,4 +25,12 @@ public class NumberTest {
                 () -> Number.valueOf("a")
         );
     }
+
+    @DisplayName("음수 일 경우 예외를 발생시킨다.")
+    @Test
+    void checkNegative() {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+                () -> Number.valueOf("-1")
+        );
+    }
 }
