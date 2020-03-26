@@ -15,9 +15,9 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3=6", "1,2:3=6"}, delimiter = '=')
     void calculate(String expression, int expected) {
-        StringCalculator stringCalculator = new StringCalculator(expression);
+        StringCalculator stringCalculator = new StringCalculator();
 
-        int actual = stringCalculator.calculate();
+        int actual = stringCalculator.calculate(expression);
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -25,10 +25,10 @@ public class StringCalculatorTest {
     @DisplayName("빈 문자열 또는 null값 입력 시 0 반환")
     @ParameterizedTest
     @NullAndEmptySource
-    void calculateFailByInvalidString(String expression) {
-        StringCalculator stringCalculator = new StringCalculator(expression);
+    void calculateFailByNullAndEmptyString(String expression) {
+        StringCalculator stringCalculator = new StringCalculator();
 
-        int actual = stringCalculator.calculate();
+        int actual = stringCalculator.calculate(expression);
 
         assertThat(actual).isEqualTo(0);
     }
@@ -37,13 +37,13 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,adf,2", "adb,1"})
     void calculateFailByInvalidString(String expression) {
-        assertThatIllegalArgumentException(new StringCalculator(expression));
+        assertThatIllegalArgumentException().isThrownBy(() -> new StringCalculator().calculate(expression));
     }
 
     @DisplayName("음수를 전달하는 경우 에러 발생")
     @ParameterizedTest
     @ValueSource(strings = {"1,-1", "-1,2"})
     void calculateFailByNegative(String expression) {
-        assertThatIllegalArgumentException(new StringCalculator(expression));
+        assertThatIllegalArgumentException().isThrownBy(() -> new StringCalculator().calculate(expression));
     }
 }
