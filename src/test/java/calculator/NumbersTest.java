@@ -11,9 +11,9 @@ public class NumbersTest {
     @Test
     void create() {
         String[] splitedString = new String[]{"1", "2"};
-        Numbers expect = new Numbers(splitedString);
+        Numbers expect = Numbers.valueOf(splitedString);
 
-        Numbers actual = new Numbers(splitedString);
+        Numbers actual = Numbers.valueOf(splitedString);
 
         assertThat(actual).isEqualTo(expect);
     }
