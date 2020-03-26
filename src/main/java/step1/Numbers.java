@@ -15,6 +15,8 @@ public class Numbers {
 
         for(String numberString : numberStrings) {
             int number = stringToInteger(numberString);
+            checkPositiveNumber(number);
+
             result = result + number;
         }
 
@@ -23,5 +25,11 @@ public class Numbers {
 
     private static Integer stringToInteger(String string) {
         return Integer.parseInt(string);
+    }
+
+    private void checkPositiveNumber(int number) {
+        if(number < 0) {
+            throw new RuntimeException("숫자는 0 이상만 입력해주세요.");
+        }
     }
 }
