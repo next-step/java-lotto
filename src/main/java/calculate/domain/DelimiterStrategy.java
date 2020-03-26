@@ -7,15 +7,26 @@ import java.util.Objects;
 
 public class DelimiterStrategy {
     private final Operands operands;
+    private final Delimiter delimiter;
 
-    public DelimiterStrategy(String s, Delimiter delimiter) {
-        List<String> strings = Arrays.asList(s.split(delimiter.getDelimiter()));
+    public DelimiterStrategy(String operandString, String delimiterString) {
+        this.delimiter = new Delimiter(delimiterString);
+
+        List<String> strings = Arrays.asList(operandString.split(delimiter.getDelimiter()));
         List<Operand> operands = new ArrayList<>();
 
         for (String str : strings) {
             operands.add(new Operand(Integer.parseInt(str)));
         }
         this.operands = new Operands(operands);
+    }
+
+    public Operands getOperands() {
+        return operands;
+    }
+
+    public Delimiter getDelimiter() {
+        return delimiter;
     }
 
     @Override

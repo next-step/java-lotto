@@ -11,8 +11,8 @@ class DelimiterStrategyTest {
     @Test
     public void construct() throws Exception {
         //given
-        DelimiterStrategy strategy1 = new DelimiterStrategy("1:1", new Delimiter(":"));
-        DelimiterStrategy strategy2 = new DelimiterStrategy("1:1", new Delimiter(":"));
+        DelimiterStrategy strategy1 = new DelimiterStrategy("1:1", ":");
+        DelimiterStrategy strategy2 = new DelimiterStrategy("1:1", ":");
 
         //then
         assertThat(strategy1.equals(strategy2)).isTrue();
@@ -22,8 +22,8 @@ class DelimiterStrategyTest {
     @Test
     public void construct_fail() throws Exception {
         //given
-        DelimiterStrategy strategy1 = new DelimiterStrategy("1:1", new Delimiter(":"));
-        DelimiterStrategy strategy2 = new DelimiterStrategy("1:2", new Delimiter(":"));
+        DelimiterStrategy strategy1 = new DelimiterStrategy("1:1", ":");
+        DelimiterStrategy strategy2 = new DelimiterStrategy("1:2", ":");
 
         //then
         assertThat(!strategy1.equals(strategy2)).isTrue();
