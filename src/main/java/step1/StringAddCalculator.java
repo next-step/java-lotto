@@ -7,16 +7,13 @@ import static step1.Numbers.INIT_VALUE;
 
 public class StringAddCalculator {
     public static int caculate(String input) {
-
         if(InputChecker.isNullOrEmpty(input)) {
             return INIT_VALUE;
         }
-        if (InputChecker.isOnlyNumber(input)) {
-            return Integer.parseInt(input);
-        }
-        String[] strings = input.split(",");
 
+        String[] strings = input.split(",");
         Numbers numbers = new Numbers(convertToInteger(strings));
+
         return numbers.addAll();
     }
 
