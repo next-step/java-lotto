@@ -11,7 +11,7 @@ public class StringAddCalculator {
             return INIT_VALUE;
         }
 
-        String[] strings = input.split(",");
+        String[] strings = input.split(",|:");
         Numbers numbers = new Numbers(strings);
 
         return numbers.addAll();
