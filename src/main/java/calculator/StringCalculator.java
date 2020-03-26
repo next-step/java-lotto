@@ -8,6 +8,6 @@ public class StringCalculator {
     }
 
     public String[] splitInput(final String input) {
-        return input.split(",");
+        return input.split(",|:");
     }
 }
