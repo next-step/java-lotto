@@ -84,4 +84,16 @@ public class StringAccumulatorTest {
 
         assertThat(sum).isEqualTo(expectedSum);
     }
+
+    @DisplayName("구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:3 : 6"}, delimiter = ':')
+    public void useColonByDelimiterTest(String expression, int expectedSum) {
+        StringAccumulator stringAccumulator = new StringAccumulator(expression);
+
+        List<String> separateExpression = stringAccumulator.getSeparateExpression();
+        int sum = stringAccumulator.sum(separateExpression);
+
+        assertThat(sum).isEqualTo(expectedSum);
+    }
 }

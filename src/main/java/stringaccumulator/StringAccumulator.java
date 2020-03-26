@@ -7,7 +7,7 @@ import java.util.Objects;
 import static java.util.Collections.emptyList;
 
 public class StringAccumulator {
-    private static final String COMMA = ",";
+    private static final String DEFAULT_DELIMITERS = ",|:";
     private static final String NULL_STRING = "";
 
     private final String expression;
@@ -24,7 +24,7 @@ public class StringAccumulator {
         if (Objects.isNull(expression) || Objects.equals(expression, NULL_STRING)) {
             return emptyList();
         }
-        return Arrays.asList(expression.split(COMMA));
+        return Arrays.asList(expression.split(DEFAULT_DELIMITERS));
     }
 
     public int sum(List<String> operands) {
