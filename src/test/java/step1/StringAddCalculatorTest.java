@@ -21,4 +21,18 @@ public class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    void splitAndSumNull2() {
+        int result = StringAddCalculator.splitAndSum("1,");
+
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void splitAndSumEmpty2() {
+        int result = StringAddCalculator.splitAndSum("1, ");
+
+        assertThat(result).isEqualTo(1);
+    }
 }
