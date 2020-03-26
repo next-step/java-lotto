@@ -1,6 +1,6 @@
 package step1;
 
-public class ValidationUtils {
+public class InputChecker {
     public static boolean isNullOrEmpty(String input) {
         if(isNull(input) || isEmpty(input)) {
             return true;
