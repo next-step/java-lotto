@@ -18,7 +18,6 @@ public class Operands {
         if (operands.isEmpty()) {
             return 0;
         }
-
         return operands.stream()
                 .map(Operand::parseInt)
                 .mapToInt(Integer::intValue)
