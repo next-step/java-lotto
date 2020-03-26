@@ -10,7 +10,17 @@ public class Number {
     }
 
     public static Number valueOf(final String letter) {
-        return new Number(Integer.parseInt(letter));
+        return new Number(parse(letter));
+    }
+
+    private static int parse(String letter) {
+        int parseInt;
+        try {
+            parseInt = Integer.parseInt(letter);
+        } catch (NumberFormatException ne) {
+            throw new RuntimeException("숫자로 변환 할 수 없습니다.");
+        }
+        return parseInt;
     }
 
     @Override
