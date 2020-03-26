@@ -17,7 +17,7 @@ public class StringAddCalculatorTest {
     @Test
     @DisplayName("입력받은 숫자가 empty일 경우 0으로 간주하고 계산해야 한다.")
     void splitAndSumEmpty() {
-        int result = StringAddCalculator.splitAndSum("");
+        int result = StringAddCalculator.splitAndSum(" ");
 
         assertThat(result).isEqualTo(0);
     }
