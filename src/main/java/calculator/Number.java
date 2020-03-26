@@ -18,6 +18,11 @@ public class Number {
         return new Number(parse(letter));
     }
 
+
+    public Number add(final Number number) {
+        return new Number(value + number.value);
+    }
+
     private static int parse(String letter) {
         int parseInt;
         try {
