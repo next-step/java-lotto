@@ -24,18 +24,18 @@ public class Expression {
         return new Expression(input);
     }
 
-    public String[] split() {
+    public Numbers split() {
         Matcher matcher = CUSTOM_DELIMITER_PATTERN.matcher(expression);
         if (matcher.find()) {
             return splitWithCustomDelimiter(matcher);
         }
 
-        return expression.split(DEFAULT_STRING_DELIMITER);
+        return Numbers.create(expression.split(DEFAULT_STRING_DELIMITER));
     }
 
-    private String[] splitWithCustomDelimiter(Matcher matcher) {
+    private Numbers splitWithCustomDelimiter(Matcher matcher) {
         String delimitersWithCustom = DEFAULT_STRING_DELIMITER + "|" + matcher.group(DELIMITER_MATCH_INDEX);
         String pureExpression = matcher.group(EXPRESSION_MATCH_INDEX);
-        return pureExpression.split(delimitersWithCustom);
+        return Numbers.create(pureExpression.split(delimitersWithCustom));
     }
 }
