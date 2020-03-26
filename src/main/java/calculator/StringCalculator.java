@@ -6,4 +6,8 @@ public class StringCalculator {
     public int calculate(final String input) {
         return ZERO;
     }
+
+    public String[] splitInput(final String input) {
+        return input.split(",");
+    }
 }
