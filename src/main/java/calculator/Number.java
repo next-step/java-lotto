@@ -18,6 +18,10 @@ public class Number {
         return new Number(parse(letter));
     }
 
+    public static Number valueOf(final int value) {
+        return new Number(value);
+    }
+
     public Number add(final Number number) {
         return new Number(value + number.value);
     }
