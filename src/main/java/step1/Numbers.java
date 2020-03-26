@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Numbers {
 
-    private static final int INIT_VALUE = 0;
+    static final int INIT_VALUE = 0;
 
     private List<Integer> numbers;
 

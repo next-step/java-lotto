@@ -3,11 +3,13 @@ package step1;
 import java.util.ArrayList;
 import java.util.List;
 
+import static step1.Numbers.INIT_VALUE;
+
 public class StringAddCalculator {
     public static int caculate(String input) {
 
         if(InputChecker.isNullOrEmpty(input)) {
-            return 0;
+            return INIT_VALUE;
         }
         if (InputChecker.isOnlyNumber(input)) {
             return Integer.parseInt(input);
