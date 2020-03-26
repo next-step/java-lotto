@@ -1,7 +1,7 @@
 package calculator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ public class Numbers {
     private List<Number> numbers;
 
     private Numbers(List<Number> numbers) {
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableList(numbers);
     }
 
     public static Numbers valueOf(final String[] splitedString) {
@@ -18,6 +18,14 @@ public class Numbers {
             numbers.add(Number.valueOf(letter));
         }
         return new Numbers(numbers);
+    }
+
+    public int sum() {
+        Number sum = Number.valueOf(Number.ZERO);
+        for (Number number : numbers) {
+            sum = sum.add(number);
+        }
+        return sum.getValue();
     }
 
     @Override
