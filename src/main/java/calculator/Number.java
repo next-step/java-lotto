@@ -1,6 +1,7 @@
 package calculator;
 
 import calculator.exception.InvalidNumberException;
+import calculator.exception.NegativeNumberException;
 
 import java.util.Objects;
 
@@ -29,7 +30,7 @@ public class Number {
 
     private void checkNegative(int number) {
         if (number < ZERO) {
-            throw new RuntimeException("음수 입니다.");
+            throw new NegativeNumberException(number);
         }
     }
 
