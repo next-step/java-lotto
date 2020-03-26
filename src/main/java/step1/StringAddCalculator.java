@@ -15,7 +15,8 @@ public class StringAddCalculator {
         }
         else {
             String[] strings = input.split(",");
-            result = add(convertToInteger(strings));
+            Numbers numbers = new Numbers(convertToInteger(strings));
+            result = numbers.addAll();
         }
         return result;
     }
@@ -27,14 +28,5 @@ public class StringAddCalculator {
             numbers.add(Integer.parseInt(strings[i]));
         }
         return numbers;
-    }
-
-    private static int add(List<Integer> numbers) {
-        int result = 0;
-
-        for(int number : numbers) {
-            result = result + number;
-        }
-        return result;
     }
 }
