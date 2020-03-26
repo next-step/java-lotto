@@ -1,5 +1,6 @@
 package stringAddCalculator.model;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,5 +39,18 @@ public class Expression {
         String delimitersWithCustom = DEFAULT_STRING_DELIMITER + "|" + matcher.group(DELIMITER_MATCH_INDEX);
         String pureExpression = matcher.group(EXPRESSION_MATCH_INDEX);
         return Numbers.create(pureExpression.split(delimitersWithCustom));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Expression)) return false;
+        Expression that = (Expression) o;
+        return Objects.equals(expression, that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expression);
     }
 }
