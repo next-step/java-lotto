@@ -19,7 +19,6 @@ public class Numbers {
 
             result = result + number;
         }
-
         return result;
     }
 
