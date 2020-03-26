@@ -1,7 +1,6 @@
 package stringaccumulator;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,47 +12,33 @@ public class StringAccumulator {
     private static final Pattern CUSTOM_DELIMITERS = Pattern.compile("//(.)\n(.*)");
     private static final String NULL_STRING = "";
 
-    private final String expression;
+    private final Operands operands;
 
     public StringAccumulator(String expression) {
-        this.expression = expression;
+        this.operands = separateExpression(expression);
     }
 
     public String getExpression() {
-        return expression;
+        return operands.toString();
     }
 
-    public List<String> getSeparateExpression() {
+    public int sum() {
+        return operands.sum();
+    }
+
+    private Operands separateExpression(String expression) {
         if (Objects.isNull(expression) || Objects.equals(expression, NULL_STRING)) {
-            return emptyList();
+            return new Operands(emptyList());
         }
         if (DEFAULT_DELIMITERS.matcher(expression).find()) {
-            return Arrays.asList(expression.split(DEFAULT_DELIMITERS.pattern()));
+            return new Operands(Arrays.asList(expression.split(DEFAULT_DELIMITERS.pattern())));
         }
         Matcher matcher = CUSTOM_DELIMITERS.matcher(expression);
         if (matcher.find()) {
-            return Arrays.asList(matcher.group(2).split(matcher.group(1)));
+            return new Operands(Arrays.asList(matcher.group(2).split(matcher.group(1))));
         }
 
-        return Arrays.asList(expression);
-    }
-
-    public int sum(List<String> operands) {
-        if (operands.isEmpty()) {
-            return 0;
-        }
-
-        return operands.stream()
-                .mapToInt(Integer::parseInt)
-                .map(this::isNegative)
-                .sum();
-    }
-
-    private int isNegative(Integer operand) {
-        if (operand < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-        }
-        return operand;
+        return new Operands(Arrays.asList(expression));
     }
 
     @Override
@@ -61,11 +46,11 @@ public class StringAccumulator {
         if (this == o) return true;
         if (!(o instanceof StringAccumulator)) return false;
         StringAccumulator that = (StringAccumulator) o;
-        return Objects.equals(getExpression(), that.getExpression());
+        return Objects.equals(operands, that.operands);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getExpression());
+        return Objects.hash(operands);
     }
 }

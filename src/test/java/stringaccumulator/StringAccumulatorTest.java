@@ -8,8 +8,6 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -17,13 +15,13 @@ public class StringAccumulatorTest {
 
     @DisplayName("표현식을 입력 받아 새로운 StringAccumulator 를 생성할 수 있다")
     @ParameterizedTest
-    @ValueSource(strings = {"", "1,2", "1,2,3", "1,2:3"})
-    public void newStringAccumInstanceTest(String expression) {
+    @CsvSource(value = {" ~ 0", "1,2 ~ 3", "1,2,3 ~ 6", "1,2:3 ~ 6"}, delimiter = '~')
+    public void newStringAccumInstanceTest(String expression, int expectedSum) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        String takeNewOne = stringAccumulator.getExpression();
+        int sum = stringAccumulator.sum();
 
-        assertThat(takeNewOne).isEqualTo(expression);
+        assertThat(sum).isEqualTo(expectedSum);
     }
 
     @DisplayName("같은 값으로 생성한 StringAccumulator 인스턴스는 같다")
@@ -41,8 +39,7 @@ public class StringAccumulatorTest {
     public void nullStringReturnsZero(String expression) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-        int sum = stringAccumulator.sum(separateExpression);
+        int sum = stringAccumulator.sum();
 
         assertThat(sum).isEqualTo(0);
     }
@@ -53,8 +50,7 @@ public class StringAccumulatorTest {
     public void nullReturnsZero(String expression) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-        int sum = stringAccumulator.sum(separateExpression);
+        int sum = stringAccumulator.sum();
 
         assertThat(expression).isNull();
         assertThat(sum).isEqualTo(0);
@@ -66,9 +62,7 @@ public class StringAccumulatorTest {
     public void returnsItSelfOnNumberSizeOne(String expression) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-
-        int sum = stringAccumulator.sum(separateExpression);
+        int sum = stringAccumulator.sum();
         int expected = Integer.parseInt(expression);
 
         assertThat(sum).isEqualTo(expected);
@@ -80,8 +74,7 @@ public class StringAccumulatorTest {
     public void returnsSumOfTwoNumbersWithComma(String expression, int expectedSum) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-        int sum = stringAccumulator.sum(separateExpression);
+        int sum = stringAccumulator.sum();
 
         assertThat(sum).isEqualTo(expectedSum);
     }
@@ -92,8 +85,7 @@ public class StringAccumulatorTest {
     public void useColonByDelimiterTest(String expression, int expectedSum) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-        int sum = stringAccumulator.sum(separateExpression);
+        int sum = stringAccumulator.sum();
 
         assertThat(sum).isEqualTo(expectedSum);
     }
@@ -104,8 +96,7 @@ public class StringAccumulatorTest {
         String expression = "//;\n1;2;3";
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-        int sum = stringAccumulator.sum(separateExpression);
+        int sum = stringAccumulator.sum();
         int expectedSum = 6;
 
         assertThat(sum).isEqualTo(expectedSum);
@@ -117,9 +108,7 @@ public class StringAccumulatorTest {
     public void negativesThrowRuntimeException(String expression) {
         StringAccumulator stringAccumulator = new StringAccumulator(expression);
 
-        List<String> separateExpression = stringAccumulator.getSeparateExpression();
-
-        assertThatThrownBy(() -> stringAccumulator.sum(separateExpression))
+        assertThatThrownBy(() -> stringAccumulator.sum())
                 .isExactlyInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수는 입력할 수 없습니다.");
     }
