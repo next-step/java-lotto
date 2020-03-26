@@ -17,10 +17,18 @@ class StringCalculatorTest {
 
     @DisplayName("빈 문자열을 입력할 경우 0을 반환해야 한다.")
     @Test
-    void returnZero() {
+    void returnZeroWhenEmptyString() {
         final String emptyString = "";
 
         int actual = stringCalculator.calculate(emptyString);
+
+        assertThat(actual).isZero();
+    }
+
+    @DisplayName("null을 입력할 경우 0을 반환해야 한다.")
+    @Test
+    void returnZeroWhenNull() {
+        int actual = stringCalculator.calculate(null);
 
         assertThat(actual).isZero();
     }
