@@ -4,21 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringAddCalculator {
-    public static int splitAndSum(String input) {
-        int result = 0;
+    public static int caculate(String input) {
 
         if(InputChecker.isNullOrEmpty(input)) {
-            result = 0;
+            return 0;
         }
-        else if(InputChecker.isOnlyNumber(input)) {
-            result = Integer.parseInt(input);
+        if (InputChecker.isOnlyNumber(input)) {
+            return Integer.parseInt(input);
         }
-        else {
-            String[] strings = input.split(",");
-            Numbers numbers = new Numbers(convertToInteger(strings));
-            result = numbers.addAll();
-        }
-        return result;
+        String[] strings = input.split(",");
+
+        Numbers numbers = new Numbers(convertToInteger(strings));
+        return numbers.addAll();
     }
 
     private static List<Integer> convertToInteger(String[] strings) {

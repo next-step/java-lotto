@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Numbers {
 
+    private static final int INIT_VALUE = 0;
+
     private List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {
@@ -11,7 +13,7 @@ public class Numbers {
     }
 
     public int addAll() {
-        int result = 0;
+        int result = INIT_VALUE;
 
         for(int number : numbers) {
             result = result + number;
