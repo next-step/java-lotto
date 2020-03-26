@@ -24,7 +24,7 @@ public class StringCalculator {
 
         for (String token : tokens) {
             CalculatorNumber calculatorNumber = new CalculatorNumber(token);
-            result.add(calculatorNumber);
+            result = result.add(calculatorNumber);
         }
 
         return result.getNumber();

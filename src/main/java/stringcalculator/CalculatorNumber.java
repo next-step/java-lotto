@@ -2,10 +2,14 @@ package stringcalculator;
 
 public class CalculatorNumber {
     private static final int DEFAULT_NUMBER = 0;
-    private int number;
+    private final int number;
 
     public CalculatorNumber(String numberString) {
-        this.number = Integer.parseInt(numberString);
+        this(Integer.parseInt(numberString));
+    }
+
+    public CalculatorNumber(int number) {
+        this.number = number;
         validate();
     }
 
@@ -19,7 +23,7 @@ public class CalculatorNumber {
         return number;
     }
 
-    public void add(CalculatorNumber calculatorNumber) {
-        number += calculatorNumber.getNumber();
+    public CalculatorNumber add(CalculatorNumber calculatorNumber) {
+        return new CalculatorNumber(number + calculatorNumber.getNumber());
     }
 }
