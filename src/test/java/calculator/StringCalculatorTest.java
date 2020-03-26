@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class StringCalculatorTest {
 
@@ -55,5 +56,20 @@ class StringCalculatorTest {
         int sum = stringCalculator.calculate(input);
 
         assertThat(sum).isEqualTo(expect);
+    }
+
+    @DisplayName("숫자 이외의 값 or 음수일경우 RuntimeException 을 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {
+            " "
+            , "-1"
+            , "!"
+            , "-1,1"
+            , " ,1"
+            , "!,1"})
+    void throwExceptionWhenInvalidInput(String input) {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+                () -> stringCalculator.calculate(input)
+        );
     }
 }
