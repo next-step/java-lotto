@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PositiveValueTest {
 
@@ -26,7 +25,7 @@ class PositiveValueTest {
 	@Test
 	@DisplayName("예외 테스트")
 	void exceptionTest() {
-		assertThatThrownBy(()->new PositiveValue(-1))
+		assertThatThrownBy(() -> new PositiveValue(-1))
 				.isInstanceOf(RuntimeException.class);
 	}
 }

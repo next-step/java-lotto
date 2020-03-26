@@ -8,7 +8,8 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SumTest {
 
@@ -45,7 +46,7 @@ public class SumTest {
 
 	@Test
 	@DisplayName("구분자 기능 테스트")
-	void delimiterTest(){
+	void delimiterTest() {
 		int sum = Sum.sum("//;\n1;2;;3");
 		assertThat(sum)
 				.isEqualTo(6);
