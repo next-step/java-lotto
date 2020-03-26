@@ -5,8 +5,12 @@ import java.util.Objects;
 public class Number {
     private int value;
 
-    public Number(final String letter) {
-        this.value = Integer.parseInt(letter);
+    private Number(final int number) {
+        this.value = number;
+    }
+
+    public static Number valueOf(final String letter) {
+        return new Number(Integer.parseInt(letter));
     }
 
     @Override
