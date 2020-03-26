@@ -38,7 +38,7 @@ public class StringNumberTests {
     @NullAndEmptySource
     @ValueSource(strings = {"  ", "a"})
     public void createMinusNumbersTest(String input) {
-        assertThatExceptionOfType(NumberFormatException.class)
+        assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> Numbers.create(new String[]{input}));
     }
 

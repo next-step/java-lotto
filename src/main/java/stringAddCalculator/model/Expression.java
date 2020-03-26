@@ -18,7 +18,7 @@ public class Expression {
         this.expression = input;
     }
 
-    public static Expression newInstance(String input) {
+    public static Expression newInstance(final String input) {
         if (input == null || "".equals(input.trim())) {
             return new Expression(DEFAULT_STRING_VALUE);
         }
@@ -35,7 +35,7 @@ public class Expression {
         return Numbers.create(expression.split(DEFAULT_STRING_DELIMITER));
     }
 
-    private Numbers splitWithCustomDelimiter(Matcher matcher) {
+    private Numbers splitWithCustomDelimiter(final Matcher matcher) {
         String delimitersWithCustom = DEFAULT_STRING_DELIMITER + "|" + matcher.group(DELIMITER_MATCH_INDEX);
         String pureExpression = matcher.group(EXPRESSION_MATCH_INDEX);
         return Numbers.create(pureExpression.split(delimitersWithCustom));
