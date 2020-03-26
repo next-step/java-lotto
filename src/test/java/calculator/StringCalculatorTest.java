@@ -47,6 +47,18 @@ class StringCalculatorTest {
         assertThat(splitInput).isEqualTo(expect);
     }
 
+
+    @DisplayName("커스텀 구분자로 문자열을 분리한다.")
+    @Test
+    void splitFromCustomDelimiter() {
+        final String input = "//;\n1;2;3";
+        final String[] expect = new String[]{"1", "2", "3"};
+
+        String[] splitInput = stringCalculator.splitInput(input);
+
+        assertThat(splitInput).isEqualTo(expect);
+    }
+
     @DisplayName("분리된 문자열을 합한다.")
     @Test
     void add() {
