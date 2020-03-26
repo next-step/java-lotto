@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAccumulatorTest {
 
@@ -108,5 +109,18 @@ public class StringAccumulatorTest {
         int expectedSum = 6;
 
         assertThat(sum).isEqualTo(expectedSum);
+    }
+
+    @DisplayName("음수를 전달할 경우 RuntimeException 예외가 발생해야 한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2:-3", "//;\n1;2;-3"})
+    public void negativesThrowRuntimeException(String expression) {
+        StringAccumulator stringAccumulator = new StringAccumulator(expression);
+
+        List<String> separateExpression = stringAccumulator.getSeparateExpression();
+
+        assertThatThrownBy(() -> stringAccumulator.sum(separateExpression))
+                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("음수는 입력할 수 없습니다.");
     }
 }

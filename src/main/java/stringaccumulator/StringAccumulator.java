@@ -1,7 +1,6 @@
 package stringaccumulator;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -35,8 +34,8 @@ public class StringAccumulator {
         if (matcher.find()) {
             return Arrays.asList(matcher.group(2).split(matcher.group(1)));
         }
-        
-        return Collections.emptyList();
+
+        return Arrays.asList(expression);
     }
 
     public int sum(List<String> operands) {
@@ -46,7 +45,15 @@ public class StringAccumulator {
 
         return operands.stream()
                 .mapToInt(Integer::parseInt)
+                .map(this::isNegative)
                 .sum();
+    }
+
+    private int isNegative(Integer operand) {
+        if (operand < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+        return operand;
     }
 
     @Override
