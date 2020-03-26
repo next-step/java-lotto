@@ -2,13 +2,14 @@ package sum;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 class ValueList {
 
 	List<PositiveValue> values;
 
-	ValueList(String[] values) {
+	ValueList(String... values) {
 		this.values = parseToPositiveList(values);
 	}
 
@@ -33,5 +34,18 @@ class ValueList {
 		return values.stream()
 				.mapToInt(PositiveValue::getValue)
 				.sum();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ValueList valueList = (ValueList) o;
+		return values.equals(valueList.values);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(values);
 	}
 }
