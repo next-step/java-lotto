@@ -3,10 +3,14 @@ package calculate.domain;
 import java.util.Objects;
 
 public class Delimiter {
-    private String delimiter;
+    private final String delimiter;
 
     public Delimiter(String delimiter) {
         this.delimiter = delimiter;
+    }
+
+    public String getDelimiter() {
+        return delimiter;
     }
 
     @Override
