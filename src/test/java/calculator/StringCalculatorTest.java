@@ -36,29 +36,6 @@ class StringCalculatorTest {
         assertThat(actual).isZero();
     }
 
-    @DisplayName("컴마(,), 콜론(:) 기준으로 문자열을 분리할 수 있다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2", "1:2", "1,2:3"})
-    void splitFromComma(String input) {
-        final String[] expect = input.split(",|:");
-
-        String[] splitInput = stringCalculator.splitInput(input);
-
-        assertThat(splitInput).isEqualTo(expect);
-    }
-
-
-    @DisplayName("커스텀 구분자로 문자열을 분리한다.")
-    @Test
-    void splitFromCustomDelimiter() {
-        final String input = "//;\n1;2;3";
-        final String[] expect = new String[]{"1", "2", "3"};
-
-        String[] splitInput = stringCalculator.splitInput(input);
-
-        assertThat(splitInput).isEqualTo(expect);
-    }
-
     @DisplayName("분리된 문자열을 합한다.")
     @Test
     void add() {
