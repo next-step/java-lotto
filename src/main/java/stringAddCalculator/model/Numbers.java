@@ -27,7 +27,7 @@ public class Numbers {
                 .sum();
     }
 
-    private static int parserInt(String numberString) {
+    private static int parserInt(final String numberString) {
         int number = Integer.parseInt(numberString);
 
         if (number < 0) {
