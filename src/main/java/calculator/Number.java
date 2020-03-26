@@ -1,5 +1,7 @@
 package calculator;
 
+import calculator.exception.InvalidNumberException;
+
 import java.util.Objects;
 
 public class Number {
@@ -18,7 +20,7 @@ public class Number {
         try {
             parseInt = Integer.parseInt(letter);
         } catch (NumberFormatException ne) {
-            throw new RuntimeException("숫자로 변환 할 수 없습니다.");
+            throw new InvalidNumberException(letter);
         }
         return parseInt;
     }
