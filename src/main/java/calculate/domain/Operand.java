@@ -5,13 +5,13 @@ import calculate.exception.NotPositiveIntegerException;
 import java.util.Objects;
 
 public class Operand {
-    private int i;
+    private int operand;
 
-    public Operand(int i) {
-        if (i < 0) {
+    public Operand(int operand) {
+        if (operand < 0) {
             throw new NotPositiveIntegerException("피연산자는 양의 정수만 입력 가능 합니다.");
         }
-        this.i = i;
+        this.operand = operand;
     }
 
     @Override
@@ -19,11 +19,11 @@ public class Operand {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Operand operand = (Operand) o;
-        return i == operand.i;
+        return this.operand == operand.operand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(i);
+        return Objects.hash(operand);
     }
 }
