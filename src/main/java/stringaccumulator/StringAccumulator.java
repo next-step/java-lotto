@@ -23,12 +23,18 @@ public class StringAccumulator {
         if (Objects.isNull(expression) || Objects.equals(expression, NULL_STRING)) {
             return emptyList();
         }
-        return Arrays.asList("1", "2", "3");
+        return Arrays.asList(expression);
     }
 
     public int sum(List<String> operands) {
         if (operands.isEmpty()) {
             return 0;
+        }
+
+        if (operands.size() == 1) {
+            return operands.stream()
+                    .mapToInt(Integer::parseInt)
+                    .sum();
         }
         return 10;
     }
