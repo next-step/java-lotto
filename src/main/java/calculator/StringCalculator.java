@@ -7,19 +7,11 @@ public class StringCalculator {
         if (isNullOrEmpty(input)) {
             return Number.ZERO;
         }
-        String[] splitInput = Delimiter.split(input);
-        return add(splitInput).getValue();
+        Numbers numbers = Numbers.valueOf(Delimiter.split(input));
+        return numbers.sum();
     }
 
     private boolean isNullOrEmpty(String input) {
         return input == null || EMPTY_STRING.equals(input.trim());
-    }
-
-    private Number add(final String[] splitInput) {
-        Number sum = Number.valueOf("0");
-        for (String letter : splitInput) {
-            sum = sum.add(Number.valueOf(letter));
-        }
-        return sum;
     }
 }
