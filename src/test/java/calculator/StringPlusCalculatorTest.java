@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringPlusCalculatorTest {
 
@@ -49,5 +51,13 @@ public class StringPlusCalculatorTest {
     public void calculateCustomTokenizedTest(String input, int result) {
         assertThat(StringPlusCalculator.calculate(input))
                 .isEqualTo(result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1,2,3", "1,-2,3", "2,t,3"})
+    @DisplayName("음수 또는 숫자 의외의 값을 전달하면 RuntimeException 예외가 발생해야 한다.")
+    public void negativeSumExceptionTest(String input) {
+        assertThatThrownBy(() -> StringPlusCalculator.calculate(input))
+                .isInstanceOf(RuntimeException.class);
     }
 }
