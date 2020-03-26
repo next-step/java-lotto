@@ -1,8 +1,14 @@
 package stringaccumulator;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
+import static java.util.Collections.emptyList;
+
 public class StringAccumulator {
+    private static final String NULL_STRING = "";
+
     private final String expression;
 
     public StringAccumulator(String expression) {
@@ -11,6 +17,20 @@ public class StringAccumulator {
 
     public String getExpression() {
         return expression;
+    }
+
+    public List<String> getSeparateExpression() {
+        if (Objects.isNull(expression) || Objects.equals(expression, NULL_STRING)) {
+            return emptyList();
+        }
+        return Arrays.asList("1", "2", "3");
+    }
+
+    public int sum(List<String> operands) {
+        if (operands.isEmpty()) {
+            return 0;
+        }
+        return 10;
     }
 
     @Override

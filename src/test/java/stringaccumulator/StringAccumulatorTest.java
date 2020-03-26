@@ -3,9 +3,15 @@ package stringaccumulator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAccumulatorTest {
 
@@ -27,5 +33,30 @@ public class StringAccumulatorTest {
 
         assertThat(new StringAccumulator(expression))
                 .isEqualTo(new StringAccumulator(expression));
+    }
+
+    @DisplayName("빈 문자열을 입력할 경우 0을 반환해야 한다.")
+    @ParameterizedTest
+    @EmptySource
+    public void nullStringReturnsZero(String expression) {
+        StringAccumulator stringAccumulator = new StringAccumulator(expression);
+
+        List<String> separateExpression = stringAccumulator.getSeparateExpression();
+        int sum = stringAccumulator.sum(separateExpression);
+
+        assertThat(sum).isEqualTo(0);
+    }
+
+    @DisplayName("null 값을 입력할 경우 0을 반환해야 한다.")
+    @ParameterizedTest
+    @NullSource
+    public void nullReturnsZero(String expression) {
+        StringAccumulator stringAccumulator = new StringAccumulator(expression);
+
+        List<String> separateExpression = stringAccumulator.getSeparateExpression();
+        int sum = stringAccumulator.sum(separateExpression);
+
+        assertThat(expression).isNull();
+        assertThat(sum).isEqualTo(0);
     }
 }
