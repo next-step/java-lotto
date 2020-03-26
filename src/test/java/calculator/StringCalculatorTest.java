@@ -61,15 +61,24 @@ class StringCalculatorTest {
     @DisplayName("숫자 이외의 값 or 음수일경우 RuntimeException 을 발생한다.")
     @ParameterizedTest
     @ValueSource(strings = {
-            " "
-            , "-1"
+            "-1"
             , "!"
             , "-1,1"
-            , " ,1"
             , "!,1"})
     void throwExceptionWhenInvalidInput(String input) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(
                 () -> stringCalculator.calculate(input)
         );
+    }
+
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다")
+    @Test
+    void returnOneNumber() {
+        final String input = "1";
+        final int expect = 1;
+
+        int sum = stringCalculator.calculate(input);
+
+        assertThat(sum).isEqualTo(expect);
     }
 }
