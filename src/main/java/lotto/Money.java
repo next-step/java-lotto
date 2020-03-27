@@ -6,10 +6,19 @@ public class Money {
     private Long money;
 
     public Money(Long money) {
+        validateNegative(money);
         this.money = money;
     }
 
-    private void validateNonNumber()
+    private void validateNegative(Long money) {
+        if (isNegative(money)) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+    }
+
+    private boolean isNegative(Long money) {
+        return money < 0;
+    }
 
     @Override
     public boolean equals(Object o) {
