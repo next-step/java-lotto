@@ -1,10 +1,13 @@
 package lotto;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoGameTest {
 
@@ -15,6 +18,14 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(money);
 
         assertThat(lottoGame.getGameCount()).isEqualTo(expectedGameCount);
+    }
+
+    @DisplayName("구입 금액은 1000원 이상이어야 한다.")
+    @Test
+    public void depositGraterThanThousand() {
+        assertThatThrownBy(() -> new LottoGame(999))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 1000원 이상이어야 합니다");
     }
 
 }
