@@ -1,11 +1,10 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoCalculator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -17,9 +16,9 @@ public class Application {
         ResultView.printLottoCount(lottoBuyer.getCount());
         ResultView.printLottos(lottoBuyer.getLottos());
 
-        List<Integer> lottoNumbers = inputView.getLastWeekLottoNumbers();
+        String lastWeekLottoValue = inputView.getLastWeekLottoNumbers();
 
-        LottoCalculator lottoCalculator = new LottoCalculator(lottoNumbers, lottoBuyer.getLottos());
+        LottoCalculator lottoCalculator = new LottoCalculator(new Lotto(lastWeekLottoValue), lottoBuyer.getLottos());
 
         ResultView.printChanceOfWinning(lottoCalculator, money);
     }

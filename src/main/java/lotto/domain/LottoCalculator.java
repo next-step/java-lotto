@@ -18,7 +18,7 @@ public class LottoCalculator {
     @Getter
     private int rank4Count;
 
-    public LottoCalculator(List<Integer> lastWeekLotto, List<Lotto> lottos) {
+    public LottoCalculator(Lotto lastWeekLotto, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             RankType rankType = RankType.getRank(lotto.getSameCount(lastWeekLotto));
 
