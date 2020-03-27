@@ -38,6 +38,25 @@ public class Money {
         return this.money / MONEY_TO_BUY_ONE_LOTTO;
     }
 
+    public Money add(Money money){
+        if(this.money == null && money!=null){
+            return money;
+        }
+
+        if(this.money !=null && money == null){
+            return this;
+        }
+
+        if(this.money == null && money == null){
+            return null;
+        }
+        return new Money(this.money + money.getMoney());
+    }
+
+    public Long getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

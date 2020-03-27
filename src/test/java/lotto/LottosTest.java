@@ -87,6 +87,6 @@ public class LottosTest {
         Money earningMoney = lottos.calculatePrizeMoney(winningLotto);
 
         //then
-        assertThat(earningMoney).isEqualTo(new Money(201555000l));
+        assertThat(earningMoney).isEqualTo(new Money(2001555000l));
     }
 }

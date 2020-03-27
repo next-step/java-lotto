@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.MatchingResult.*;
+
 public class Lottos {
     private static final int THREE_NUM_MATCH_WITH_WINNING_LOTTO = 3;
     private static final int FOUR_NUM_MATCH_WITH_WINNING_LOTTO = 4;
@@ -45,6 +47,10 @@ public class Lottos {
     }
 
     public Money calculatePrizeMoney(List<Integer> winningLotto) {
-        return null;
+        Money money = THREE.calculatePrizeMoney(findCountOfThreeNumMatching(winningLotto));
+        Money money2 = FOUR.calculatePrizeMoney(findCountOfFourNumMatching(winningLotto));
+        Money money3 = FIVE.calculatePrizeMoney(findCountOfFiveNumMatching(winningLotto));
+        Money money4 = SIX.calculatePrizeMoney(findCountOfSixNumMatching(winningLotto));
+        return money.add(money2).add(money3).add(money4);
     }
 }
