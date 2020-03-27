@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 public class TextToNumber {
 
+    public static final String DELEMTER = ",|:";
     private List<Number> numbers;
 
     public TextToNumber(String inputText) {
@@ -19,7 +20,7 @@ public class TextToNumber {
     }
 
     private List<String> convertToStrings(String text) {
-        return Stream.of(text.split(","))
+        return Stream.of(text.split(DELEMTER))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
