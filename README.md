@@ -7,3 +7,15 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+
+##step1
+* 빈값, null  0 만들어주기
+* 문자한개 -> 숫자한개 , "01" 처럼 0으로시작하는 문자확인
+* split ',' ":"
+* 덧셈
+* // \n 커스텀문자처리
+* 음수처리, 문자처리 
+* 입력 부분
+* 출력 부분
