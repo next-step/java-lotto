@@ -2,7 +2,6 @@ package stringaccumulator;
 
 import java.util.Objects;
 
-import static stringaccumulator.Constant.ONLY_NUMBER;
 import static stringaccumulator.Constant.ONLY_POSITIVE;
 
 public class Operand {
@@ -17,15 +16,15 @@ public class Operand {
     static int parseInt(Operand operand) {
         try {
             int intValue = Integer.parseInt(operand.getOperand());
-            return isNegative(intValue);
+            return parsePositive(intValue);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ONLY_NUMBER);
+            throw new OnlyNumberViolationException();
         }
     }
 
-    private static int isNegative(Integer operand) {
+    private static int parsePositive(Integer operand) {
         if (operand < ZERO) {
-            throw new IllegalArgumentException(ONLY_POSITIVE);
+            throw new OnlyPositiveViolationException();
         }
         return operand;
     }

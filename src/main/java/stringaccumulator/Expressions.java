@@ -8,13 +8,13 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
 public class Expressions {
-    private static final Pattern DEFAULT_DELIMITERS = Pattern.compile(",|:");
+    private static final String DEFAULT_DELIMITERS = ",|:";
     private static final Pattern CUSTOM_DELIMITERS = Pattern.compile("//(.)\n(.*)");
     private static final String NULL_STRING = "";
     private static final Operands EMPTY_LIST = new Operands(emptyList());
 
-    private static final int CUSTOM_DELIMITER = 1;
-    private static final int CUSTOM_EXPRESSION = 2;
+    private static final int EXTRACTED_DELIMITER = 1;
+    private static final int EXTRACTED_EXPRESSION = 2;
 
     private final Operands operands;
 
@@ -45,11 +45,11 @@ public class Expressions {
         Matcher matcher = CUSTOM_DELIMITERS.matcher(expression);
         if (matcher.find()) {
             return new Operands(
-                    asList(matcher.group(CUSTOM_EXPRESSION).split(matcher.group(CUSTOM_DELIMITER)))
+                    asList(matcher.group(EXTRACTED_EXPRESSION).split(matcher.group(EXTRACTED_DELIMITER)))
             );
         }
         return new Operands(
-                asList(expression.split(DEFAULT_DELIMITERS.pattern()))
+                asList(expression.split(DEFAULT_DELIMITERS))
         );
     }
 
