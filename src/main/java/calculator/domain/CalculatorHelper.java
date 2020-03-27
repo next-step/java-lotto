@@ -8,13 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CalculatorHelper {
-    static final String REGEX = "//(.)\\\\n(.*)";
+    private static final Pattern PATTERN = Pattern.compile("//(.)\\\\n(.*)");
+    private static final String REGEX = ",|:";
 
     static List<String> findNumber(String expression) {
         if (Objects.isNull(expression) || expression.trim().isEmpty())
             return new ArrayList<>();
 
-        Matcher matcher = Pattern.compile(REGEX).matcher(expression);
+        Matcher matcher = PATTERN.matcher(expression);
 
         if (matcher.find()) {
             String delimiter = matcher.group(1);
@@ -23,6 +24,6 @@ public class CalculatorHelper {
             return Arrays.asList(numbers);
         }
 
-        return Arrays.asList(expression.split(",|:"));
+        return Arrays.asList(expression.split(REGEX));
     }
 }
