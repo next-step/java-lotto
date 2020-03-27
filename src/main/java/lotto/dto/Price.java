@@ -3,7 +3,6 @@ package lotto.dto;
 import java.util.Objects;
 
 public class Price {
-    private static final int ZERO = 0;
     private static final int LOTTO_PRICE = 1000;
 
     private int price;
@@ -18,8 +17,8 @@ public class Price {
     }
 
     private void checkAvailablePrice(final int price) {
-        if (price <= ZERO) {
-            throw new RuntimeException("금액을 잘못 입력 하셨습니다.");
+        if (price < LOTTO_PRICE) {
+            throw new RuntimeException("로또 구매 가능한 금액은 천원 이상 입니다.");
         }
     }
 
