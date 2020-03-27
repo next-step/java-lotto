@@ -1,15 +1,16 @@
 package calculator.domain;
 
+import calculator.tuils.CalculatorUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorHelperTest {
+public class CalculatorUtilsTest {
     @Test
     void findNumber1() {
-        List<String> numbers = CalculatorHelper.findNumber("//;\\n1;2;3");
+        List<String> numbers = CalculatorUtils.findNumber("//;\\n1;2;3");
 
         assertThat(numbers).hasSize(3);
         assertThat(numbers.get(0)).isEqualTo("1");
@@ -18,7 +19,7 @@ public class CalculatorHelperTest {
 
     @Test
     void findNumber2() {
-        List<String> numbers = CalculatorHelper.findNumber("1");
+        List<String> numbers = CalculatorUtils.findNumber("1");
 
         assertThat(numbers).hasSize(1);
         assertThat(numbers.get(0)).isEqualTo("1");
@@ -26,7 +27,7 @@ public class CalculatorHelperTest {
 
     @Test
     void findNumber3() {
-        List<String> numbers = CalculatorHelper.findNumber("1,2:3");
+        List<String> numbers = CalculatorUtils.findNumber("1,2:3");
 
         assertThat(numbers).hasSize(3);
         assertThat(numbers.get(0)).isEqualTo("1");
