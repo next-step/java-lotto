@@ -20,4 +20,8 @@ public class Lottos {
                 .collect(Collectors.toList())
                 .size();
     }
+
+    public int findCountOfFourNumMatching(List<Integer> winningLotto) {
+        return 0;
+    }
 }

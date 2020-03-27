@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -24,6 +25,7 @@ public class LottosTest {
         lotto4 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9));
     }
 
+    @DisplayName("구매한 로또 중에 당첨번호와 번호 3개가 일치하는 로또의 갯수를 리턴한다.")
     @Test
     void findCountOfThreeNumMatchingTest() {
         //given
@@ -34,5 +36,18 @@ public class LottosTest {
 
         //then
         assertThat(countOfThreeNumMatching).isEqualTo(1);
+    }
+
+    @DisplayName("구매한 로또 중에 당첨번호와 번호 4개가 일치하는 로또의 갯수를 리턴한다.")
+    @Test
+    void findCountOfFourNumMatchingTest() {
+        //given
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+
+        //when
+        int countOfFourNumMatching = lottos.findCountOfFourNumMatching(winningLotto);
+
+        //then
+        assertThat(countOfFourNumMatching).isEqualTo(1);
     }
 }
