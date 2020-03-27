@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import lotto.dto.Price;
+
 public class Lotto {
-    public int buy(final int price) {
-        return price / 1000;
+    public int buy(final Price price) {
+        return price.lotteryCount(1000);
     }
 }
