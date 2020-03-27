@@ -11,23 +11,23 @@ public class DelimiterStrategy {
     private final Operands operands;
     private final Delimiter delimiter;
 
-    public DelimiterStrategy(String operandString, String delimiterString) {
-        this.delimiter = new Delimiter(delimiterString);
+    public DelimiterStrategy(String primalOperand, String delimiter) {
+        this.delimiter = new Delimiter(delimiter);
 
-        List<String> delimitedString = splitOperandString(operandString);
+        List<String> delimitedString = splitOperandString(primalOperand);
         this.operands = new Operands(makeOperands(delimitedString));
     }
 
-    private List<String> splitOperandString(String inputString) {
-        if (Objects.isNull(inputString) || inputString.isEmpty()) {
+    private List<String> splitOperandString(String primalOperand) {
+        if (Objects.isNull(primalOperand) || primalOperand.isEmpty()) {
             return Arrays.asList("0");
         }
-        return StringUtil.splitStringUseDelimiter(inputString, delimiter.getDelimiter());
+        return StringUtil.splitStringUseDelimiter(primalOperand, delimiter.getDelimiter());
     }
 
-    private List<Operand> makeOperands(List<String> delimitedString) {
+    private List<Operand> makeOperands(List<String> operands) {
         List<Operand> result = new ArrayList<>();
-        for (String str : delimitedString) {
+        for (String str : operands) {
             result.add(createOperand(str));
         }
         return result;
