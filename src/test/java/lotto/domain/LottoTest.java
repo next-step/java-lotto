@@ -22,8 +22,8 @@ class LottoTest {
         final Price price = new Price(14000);
         final int expect = 14;
 
-        int actual = lotto.buy(price);
+        LotteryTickets actual = lotto.buy(price);
 
-        assertThat(actual).isEqualTo(expect);
+        assertThat(actual.count()).isEqualTo(14);
     }
 }
