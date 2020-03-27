@@ -1,11 +1,12 @@
 package lotto;
 
-import lotto.lottogenerator.LottoNumGeneratorStrategy;
+import java.util.Collections;
+import java.util.List;
 
 public class Lotto {
-    private LottoNumGeneratorStrategy lottoNumGeneratorStrategy;
+    private List<Integer> lottoNumbers;
 
-    public Lotto(LottoNumGeneratorStrategy lottoNumGeneratorStrategy) {
-        this.lottoNumGeneratorStrategy = lottoNumGeneratorStrategy;
+    public Lotto(List<Integer> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 }
