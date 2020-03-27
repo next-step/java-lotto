@@ -9,4 +9,8 @@ public class Calculator {
         this.operands = delimiterStrategy.getOperands();
         this.delimiter = delimiterStrategy.getDelimiter();
     }
+
+    public int calculate() {
+        return operands.plusAll();
+    }
 }
