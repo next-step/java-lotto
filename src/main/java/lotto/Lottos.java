@@ -51,6 +51,9 @@ public class Lottos {
         Money money2 = FOUR.calculatePrizeMoney(findCountOfFourNumMatching(winningLotto));
         Money money3 = FIVE.calculatePrizeMoney(findCountOfFiveNumMatching(winningLotto));
         Money money4 = SIX.calculatePrizeMoney(findCountOfSixNumMatching(winningLotto));
+        if(money == null && money2 == null && money3 == null && money4 == null){
+            return null;
+        }
         return money.add(money2).add(money3).add(money4);
     }
 }
