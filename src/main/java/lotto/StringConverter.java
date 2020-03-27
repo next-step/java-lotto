@@ -1,8 +1,6 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +22,15 @@ public class StringConverter {
     public static List<Integer> convertStringToNumbers(String input) {
         String[] split = input.split(DELIMITER_FOR_LAST_LOTTO_NUM);
         return Arrays.stream(split)
-                .map(Integer::parseInt)
+                .map(stringNumber -> validateNonNumberForNumbers(stringNumber))
                 .collect(Collectors.toList());
+    }
+
+    private static Integer validateNonNumberForNumbers(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
     }
 }
