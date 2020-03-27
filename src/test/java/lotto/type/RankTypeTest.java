@@ -1,6 +1,5 @@
-package type;
+package lotto.type;
 
-import lotto.type.RankType;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
