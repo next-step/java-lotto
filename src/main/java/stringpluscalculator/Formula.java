@@ -3,10 +3,12 @@ package stringpluscalculator;
 import java.util.Arrays;
 
 public class Formula {
-    private String[] formula;
+    private String[] formula = {"0"};
 
     public Formula(String input, String separators) {
-        this.formula = validateFormula(input.split(separators));
+        if(!input.isEmpty()){
+            this.formula = validateFormula(input.split(separators));
+        }
     }
 
     public int sum() {

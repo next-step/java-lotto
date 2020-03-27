@@ -20,7 +20,7 @@ public class StringPlusCalculator {
         if (isEmpty()) {
             return RETURN_VALUE_WHEN_EMPTY;
         }
-        return 1;
+        return formula.sum();
     }
 
     private boolean isEmpty() {
