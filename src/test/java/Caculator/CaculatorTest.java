@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+
 
 class CaculatorTest {
 
@@ -32,14 +32,21 @@ class CaculatorTest {
     @ParameterizedTest
     @CsvSource(value = { "1:1", "2:2", "5:5", "10:10" }, delimiter = ':')
     void oneNumberInputText(String input, int output) {
-        int result = caculator.splitNumberAndSumByComma(input);
+        int result = caculator.splitNumberAndCharater(input);
         assertThat(result).isEqualTo(output);
     }
 
     @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
     @Test
     void splitNumberAndSumByComma(){
-        int result = caculator.splitNumberAndSumByComma("1,2");
+        int result = caculator.splitNumberAndCharater("1,2");
         assertThat(result).isEqualTo(3);
+    }
+
+    @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
+    @Test
+    void splitNumberAndSumByCharater(){
+        int result = caculator.splitNumberAndCharater("1,2:3");
+        assertThat(result).isEqualTo(6);
     }
 }
