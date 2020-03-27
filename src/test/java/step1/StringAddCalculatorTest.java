@@ -1,4 +1,6 @@
-import domain.StringAddCalculator;
+package step1;
+
+import step1.domain.StringAddCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
