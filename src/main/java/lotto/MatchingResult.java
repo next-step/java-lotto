@@ -1,14 +1,21 @@
 package lotto;
 
 public enum MatchingResult {
-//    THREE(matchCount ->  * 5000L),
-//    FOUR(4),
-//    FIVE(5),
-//    SIX(6);
-//
-//    private int matchCount;
-//
-//    MatchingResult(int matchCount) {
-//        this.matchCount = matchCount;
-//    }
+    THREE(5000),
+    FOUR(50000),
+    FIVE(1500000),
+    SIX(2000000000);
+
+    private long cashPrize;
+
+    MatchingResult(long cashPrize) {
+        this.cashPrize = cashPrize;
+    }
+
+    public Money calculatePrizeMoney(long count) {
+        if (count < 1) {
+            return null;
+        }
+        return new Money(count * cashPrize);
+    }
 }
