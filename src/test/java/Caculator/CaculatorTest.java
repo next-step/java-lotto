@@ -55,4 +55,15 @@ class CaculatorTest {
         int result = caculator.splitNumberAndCustomSeparator("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
+
+    @DisplayName("음수를 전달 할경우 RuntimeException 예외가 발생해야된다")
+    @Test
+    void inputTextIsNegative() {
+        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
+            caculator.inputTextIsNegative("-1,2,3");
+        });
+
+        assertThat(runtimeException.getMessage()).isEqualTo("음수가 들어 올 수 없습니다.");
+
+    }
 }
