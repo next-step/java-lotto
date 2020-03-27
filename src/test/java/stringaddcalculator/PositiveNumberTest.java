@@ -1,3 +1,6 @@
+package stringaddcalculator;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +11,7 @@ public class PositiveNumberTest {
     @DisplayName("값은 양의 정수를 생성자의 인자로 받아 생성된 객체는 같다.")
     @Test
     void createTest() {
-        assertThat(new PositiveNumber(1)).isEqualTo(new PositiveNumber(1));
+        Assertions.assertThat(new PositiveNumber(1)).isEqualTo(new PositiveNumber(1));
     }
 
     @DisplayName("음수를 인자로 받아 생성하면 런타임 예외가 발생한다.")
@@ -19,9 +22,9 @@ public class PositiveNumberTest {
         }).isInstanceOf(RuntimeException.class);
     }
 
-    @DisplayName("PositiveNumber 객체와 int 값의 합을 int 타입으로 리턴한다.")
+    @DisplayName("stringaddcalculator.PositiveNumber 객체와 int 값의 합을 int 타입으로 리턴한다.")
     @Test
     void addTest() {
-        assertThat(new PositiveNumber(1).addInt(5)).isEqualTo(6);
+        Assertions.assertThat(new PositiveNumber(1).add(5)).isEqualTo(6);
     }
 }

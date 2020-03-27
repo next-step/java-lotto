@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import java.util.Objects;
 
 public class PositiveNumber {
@@ -8,18 +10,18 @@ public class PositiveNumber {
         this.number = number;
     }
 
-    public int addInt(int number){
+    public int add(int number){
         return this.number + number;
     }
 
     private int validateNegative(int number) {
-        if (hasNegative(number)) {
+        if (isNegative(number)) {
             throw new RuntimeException("음수는 입력할 수 없습니다.");
         }
         return number;
     }
 
-    private boolean hasNegative(int number) {
+    private boolean isNegative(int number) {
         return number < 0;
     }
 

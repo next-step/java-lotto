@@ -1,9 +1,11 @@
+package stringaddcalculator;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringSplitterTest {
     @DisplayName("StringSplitter는 쉼표 구분자로 문자열을 분리해서 리턴한다.")

@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -32,7 +34,7 @@ public class StringAddCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void addStringTestWhenNullOrEmpty(String input) {
-        //when, then
+        //when
         int sum = StringAddCalculator.addString(input);
 
         //then
@@ -52,7 +54,7 @@ public class StringAddCalculatorTest {
 
     @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 입력하면, 합(sum)을 리턴한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"//;\n1;2;3", "//@\n1@2@3", "//#\n1#2#3"})
+    @ValueSource(strings = {"//;@1;2;3", "//@@1@2@3", "//#@1#2#3"})
     void splitByCustomTest(String input) {
         //when
         int sum = StringAddCalculator.addString(input);

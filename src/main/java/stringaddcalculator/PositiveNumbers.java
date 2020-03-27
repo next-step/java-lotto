@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class PositiveNumbers {
     public int sum() {
         int sum = 0;
         for (PositiveNumber positiveNumber : positiveNumbers) {
-            sum = positiveNumber.addInt(sum);
+            sum = positiveNumber.add(sum);
         }
         return sum;
     }
