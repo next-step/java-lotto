@@ -43,4 +43,8 @@ public class Lottos {
                 .filter(count -> SIX_NUM_MATCH_WITH_WINNING_LOTTO == count)
                 .count();
     }
+
+    public Money calculatePrizeMoney(List<Integer> winningLotto) {
+        return null;
+    }
 }

@@ -76,4 +76,17 @@ public class LottosTest {
         //then
         assertThat(countOfSixNumMatching).isEqualTo(1L);
     }
+
+    @DisplayName("당첨번호를 주면, 상금을 알려준다.")
+    @Test
+    void calculatePrizeMoneyTest() {
+        //given
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+
+        //when
+        Money earningMoney = lottos.calculatePrizeMoney(winningLotto);
+
+        //then
+        assertThat(earningMoney).isEqualTo(new Money(201555000l));
+    }
 }
