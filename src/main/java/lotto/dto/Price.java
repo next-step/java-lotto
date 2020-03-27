@@ -5,8 +5,11 @@ import java.util.Objects;
 public class Price {
     private int price;
 
-    public Price(final int i) {
-        this.price = i;
+    public Price(final int price) {
+        if (price <= 0) {
+            throw new RuntimeException("금액을 잘못 입력 하셨습니다.");
+        }
+        this.price = price;
     }
 
     @Override
