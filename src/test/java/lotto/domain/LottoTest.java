@@ -19,11 +19,11 @@ class LottoTest {
     @DisplayName("구입 금액에 해당하는 복권을 구매한다.")
     @Test
     void buy() {
-        final Price price = new Price(14000);
-        final int expect = 14;
+        final Price price = new Price(2000);
+        final int expect = 2;
 
         LotteryTickets actual = lotto.buy(price);
 
-        assertThat(actual.count()).isEqualTo(14);
+        assertThat(actual.count()).isEqualTo(expect);
     }
 }
