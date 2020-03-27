@@ -53,4 +53,11 @@ public class StringAddCalculatorTest {
         assertThat(stringAddCalculator.calculate(text)).isSameAs(6);
     }
 
+    @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
+    @Test
+    void negative() {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> stringAddCalculator.calculate("-1"));
+    }
+
 }
