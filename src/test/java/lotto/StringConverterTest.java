@@ -30,7 +30,7 @@ public class StringConverterTest {
         });
     }
 
-    @DisplayName("지난 주 당첨번호를 문자열로 입력받으면, split된 값을 리스트로 만들어서 반환한다.")
+    @DisplayName("지난 주 당첨번호를 문자열로 입력받으면, split된 값을 숫자리스트로 만들어서 반환한다.")
     @Test
     void convertStringToNumbersTest() {
         //when

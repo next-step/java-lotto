@@ -1,8 +1,14 @@
 package lotto;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringConverter {
+    private static final String DELIMITER_FOR_LAST_LOTTO_NUM = ",";
+
     public static Money convertStringToMoney(String input) {
         return new Money(validateNonNumber(input));
     }
@@ -16,6 +22,9 @@ public class StringConverter {
     }
 
     public static List<Integer> convertStringToNumbers(String input) {
-        return null;
+        String[] split = input.split(DELIMITER_FOR_LAST_LOTTO_NUM);
+        return Arrays.stream(split)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }
