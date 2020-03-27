@@ -32,7 +32,14 @@ class CaculatorTest {
     @ParameterizedTest
     @CsvSource(value = { "1:1", "2:2", "5:5", "10:10" }, delimiter = ':')
     void oneNumberInputText(String input, int output) {
-        int result = caculator.oneNumberInputText(input);
+        int result = caculator.splitNumberAndSumByComma(input);
         assertThat(result).isEqualTo(output);
+    }
+
+    @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
+    @Test
+    void splitNumberAndSumByComma(){
+        int result = caculator.splitNumberAndSumByComma("1,2");
+        assertThat(result).isEqualTo(3);
     }
 }
