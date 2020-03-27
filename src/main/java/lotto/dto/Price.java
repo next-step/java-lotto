@@ -30,4 +30,8 @@ public class Price {
     public int hashCode() {
         return Objects.hash(price);
     }
+
+    public int lotteryCount(final int won) {
+        return price / won;
+    }
 }
