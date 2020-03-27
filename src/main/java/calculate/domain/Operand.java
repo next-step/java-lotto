@@ -14,6 +14,10 @@ public class Operand {
         this.operand = operand;
     }
 
+    public int getOperand() {
+        return operand;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

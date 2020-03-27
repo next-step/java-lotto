@@ -20,6 +20,14 @@ public class Operands {
         return operands;
     }
 
+    public int plusAll() {
+        int reuslt = 0;
+        for (Operand operand : operands) {
+            reuslt += operand.getOperand();
+        }
+        return reuslt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

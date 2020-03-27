@@ -2,6 +2,8 @@ package calculate.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -34,5 +36,19 @@ class OperandsTest {
                 () -> assertEquals(operands2.getOperands().size(), 2),
                 () -> assertEquals(operands3.getOperands().size(), 3)
         );
+    }
+
+    @DisplayName("덧셈 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2:3:6", "4:4:4:12", "0:1:2:3"}, delimiter = ':')
+    public void plusAll(int param1, int param2, int param3, int expect) throws Exception {
+        //given
+        Operands operands = new Operands(new Operand(param1), new Operand(param2), new Operand(param3));
+
+        //when
+        int result = operands.plusAll();
+
+        //then
+        assertThat(result).isEqualTo(expect);
     }
 }
