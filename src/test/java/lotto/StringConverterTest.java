@@ -1,9 +1,13 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -24,5 +28,15 @@ public class StringConverterTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             StringConverter.convertStringToMoney(input);
         });
+    }
+
+    @DisplayName("지난 주 당첨번호를 문자열로 입력받으면, split된 값을 리스트로 만들어서 반환한다.")
+    @Test
+    void convertStringToNumbersTest() {
+        //when
+        List<Integer> integers = StringConverter.convertStringToNumbers("1,2,3,4,5,6");
+
+        //then
+        assertThat(integers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }
