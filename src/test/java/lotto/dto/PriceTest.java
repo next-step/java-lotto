@@ -2,8 +2,11 @@ package lotto.dto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class PriceTest {
 
@@ -15,5 +18,14 @@ class PriceTest {
         Price actual = new Price(1000);
 
         assertThat(actual).isEqualTo(expect);
+    }
+
+    @DisplayName("구입 금액이 0원 이하일 경우 RuntimeException 을 발생한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    void negativeException(int price) {
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+                () -> new Price(price)
+        );
     }
 }
