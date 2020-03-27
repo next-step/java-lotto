@@ -14,7 +14,6 @@ public class Money {
 
     public Money(Long money) {
         validateNegative(money);
-       // validateEnoughToBuyLotto(money);
         this.money = money;
     }
 
@@ -26,16 +25,6 @@ public class Money {
 
     private boolean isNegative(Long money) {
         return money < ZERO_MONEY;
-    }
-
-    private void validateEnoughToBuyLotto(Long money) {
-        if (isLessThanOneThousand(money)) {
-            throw new IllegalArgumentException("1000원 미만의 금액은 입력할 수 없습니다.");
-        }
-    }
-
-    private boolean isLessThanOneThousand(Long money) {
-        return money < MONEY_TO_BUY_ONE_LOTTO;
     }
 
     public long findLottoCountToBuy() {

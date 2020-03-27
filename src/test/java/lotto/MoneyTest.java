@@ -25,15 +25,6 @@ public class MoneyTest {
         });
     }
 
-    @DisplayName("1000원 미만의 금액을 입력받으면 예외를 반환한다.")
-    @ParameterizedTest
-    @ValueSource(longs = {0, 500, 999})
-    void validateEnoughToBuyLottoTest(long input) {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Money(input);
-        });
-    }
-
     @DisplayName("몇 개의 로또를 살 수 있는지 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "1100:1", "15000:15", "14900:14"}, delimiter = ':')

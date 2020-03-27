@@ -30,6 +30,15 @@ public class StringConverterTest {
         });
     }
 
+    @DisplayName("1000원 미만의 금액을 입력받으면 예외를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "500", "999"})
+    void validateEnoughToBuyLottoTest(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringConverter.convertStringToMoney(input);
+        });
+    }
+
     @DisplayName("지난 주 당첨번호를 문자열로 입력받으면, split된 값을 숫자리스트로 만들어서 반환한다.")
     @Test
     void convertStringToNumbersTest() {
