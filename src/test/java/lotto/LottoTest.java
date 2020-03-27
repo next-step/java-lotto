@@ -40,7 +40,7 @@ public class LottoTest {
 
     @DisplayName("구매한 로또 번호와 당첨 로또 번호를 인자로 주면, 두 번호 간 일치한 숫자의 갯수를 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1:5", "7:6", "8:4", "9:4"}, delimiter = ':')
+    @CsvSource(value = {"1:5", "7:6", "8:5", "9:5"}, delimiter = ':')
     void findHowManyMatchTest(int input, int expected) {
         //given
         List<Integer> winningLotto = Arrays.asList(input, 2, 3, 4, 5, 6);
