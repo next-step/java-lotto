@@ -9,6 +9,8 @@ public class Money {
         this.money = money;
     }
 
+    private void validateNonNumber()
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
