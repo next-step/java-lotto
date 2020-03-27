@@ -89,4 +89,18 @@ public class LottosTest {
         //then
         assertThat(earningMoney).isEqualTo(new Money(2001555000l));
     }
+
+    @DisplayName("당첨번호를 알려주면, 수익률을 알려준다.")
+    @Test
+    public void calculateEarningRateTest() {
+        //given
+        Lotto lotto5 = new Lotto(Arrays.asList(15, 16, 17, 18, 19, 20));
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto5));
+
+        //when
+        double earningRate = lottos.calculateEarningRate(winningLotto);
+
+        //then
+        assertThat(earningRate).isEqualTo(1.25);
+    }
 }

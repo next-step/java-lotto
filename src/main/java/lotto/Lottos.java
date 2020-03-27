@@ -56,4 +56,8 @@ public class Lottos {
         }
         return money.add(money2).add(money3).add(money4);
     }
+
+    public double calculateEarningRate(List<Integer> winningLotto) {
+        return 0;
+    }
 }
