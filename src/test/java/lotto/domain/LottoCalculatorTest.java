@@ -9,12 +9,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoCalculatorTest {
-    private List<Integer> lastWeekLotto;
+    private Lotto lastWeekLotto;
     private List<Lotto> lottos;
 
     @BeforeEach
     void setUp() {
-        lastWeekLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+        lastWeekLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottos = Arrays.asList(new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
                 new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
                 new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44)),
