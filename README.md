@@ -2,8 +2,8 @@
 ## STEP 1 - 문자열 덧셈 계산기
 * 구조 설계
   1. StringAddCalculator
-  2. Number
-  3. Numbers
+  2. CustomNumber
+  3. CustomNumbers
   
 * 기능 구현 플로우
   1. 입력 값 검증
