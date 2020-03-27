@@ -39,4 +39,13 @@ public class StringConverterTest {
         //then
         assertThat(integers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
+
+    @DisplayName("숫자가 아닌 값이 입력되면, 예외를 반환한다 (2)")
+    @ParameterizedTest
+    @ValueSource(strings = {"@", "Money", "!!!!!"})
+    void validateNonNumberTestForNumbers(String input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            StringConverter.convertStringToMoney(input);
+        });
+    }
 }
