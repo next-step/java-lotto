@@ -32,5 +32,11 @@ public class StringAddCalculatorTest {
         assertThat(stringAddCalculator.calculate(inputText)).isZero();
     }
 
+    @DisplayName(value = "숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1"})
+    void onlyOneNumber(String inputText) {
+        assertThat(stringAddCalculator.calculate(inputText)).isSameAs(Integer.parseInt(inputText));
+    }
 
 }

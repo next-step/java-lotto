@@ -3,8 +3,7 @@ package calculator;
 public class StringAddCalculator {
 
     public int calculate(String inputText) {
-        checkNullOrEmpty(inputText);
-        return 0;
+        return checkNullOrEmpty(inputText);
     }
 
     private int checkNullOrEmpty(String inputText) {
@@ -21,7 +20,5 @@ public class StringAddCalculator {
             throw new IllegalArgumentException("숫자가 아닙니다. " + e.getMessage());
         }
     }
-
-
 
 }
