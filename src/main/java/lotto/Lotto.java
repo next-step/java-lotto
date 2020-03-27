@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.lottogenerator.LottoNumGeneratorStrategy;
+
 public class Lotto {
     private LottoNumGeneratorStrategy lottoNumGeneratorStrategy;
 
