@@ -2,8 +2,11 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
 
@@ -16,5 +19,15 @@ public class MoneyTest {
 
         //then
         assertThat(money1.equals(money2)).isTrue();
+    }
+
+    @DisplayName("양의 정수인지 체크")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -2, -10, -100})
+    public void validatePositive(int money) throws Exception {
+        //given
+        assertThatThrownBy(
+                () -> new Money(money)
+        ).isInstanceOf(IllegalArgumentException.class).hasMessage("금액은 양의 정수만 입력 가능 합니다.");
     }
 }
