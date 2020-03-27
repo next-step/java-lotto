@@ -21,6 +21,7 @@ public class StringConverterTest {
     }
 
     @DisplayName("입력받은 값이 숫자가 아니면 IllegalArgumentException 을 반환한다.")
+    @ParameterizedTest
     @ValueSource(strings = {"숫자가아닌데?", "Money", "!!!!"})
     void validateNonNumberTest(String input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
