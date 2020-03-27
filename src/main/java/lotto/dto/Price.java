@@ -3,13 +3,19 @@ package lotto.dto;
 import java.util.Objects;
 
 public class Price {
+    private static final int ZERO = 0;
+
     private int price;
 
     public Price(final int price) {
-        if (price <= 0) {
+        checkAvailablePrice(price);
+        this.price = price;
+    }
+
+    private void checkAvailablePrice(final int price) {
+        if (price <= ZERO) {
             throw new RuntimeException("금액을 잘못 입력 하셨습니다.");
         }
-        this.price = price;
     }
 
     @Override
