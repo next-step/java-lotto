@@ -28,18 +28,25 @@ public class DelimiterStrategy {
     private List<Operand> makeOperands(List<String> delimitedString) {
         List<Operand> result = new ArrayList<>();
         for (String str : delimitedString) {
-            if (Objects.isNull(str) || str.trim().isEmpty()) {
-                result.add(new Operand());
-            } else {
-                try {
-                    result.add(new Operand(Integer.parseInt(str)));
-
-                } catch (NumberFormatException e) {
-                    throw new RuntimeException("숫자를 입력해 주세요");
-                }
-            }
+            result.add(createOperand(str));
         }
         return result;
+    }
+
+    private Operand createOperand(String str) {
+        if (isNullOrEmpty(str)) {
+            return new Operand();
+        }
+
+        try {
+            return new Operand(Integer.parseInt(str));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("숫자를 입력해 주세요");
+        }
+    }
+
+    private boolean isNullOrEmpty(String str) {
+        return (Objects.isNull(str) || str.trim().isEmpty());
     }
 
     public Operands getOperands() {
