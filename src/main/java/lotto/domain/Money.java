@@ -16,6 +16,14 @@ public class Money {
         }
     }
 
+    public Money plus(Money money2) {
+        return new Money(this.money + money2.getMoney());
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,4 +36,5 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
 }
