@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-
 class CaculatorTest {
 
     private Caculator caculator;
@@ -38,15 +37,22 @@ class CaculatorTest {
 
     @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
     @Test
-    void splitNumberAndSumByComma(){
+    void splitNumberAndSumByComma() {
         int result = caculator.splitNumberAndCharater("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
     @Test
-    void splitNumberAndSumByCharater(){
+    void splitNumberAndSumByCharater() {
         int result = caculator.splitNumberAndCharater("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("“//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @Test
+    void splitNumberAndCustomSeparator() {
+        int result = caculator.splitNumberAndCustomSeparator("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
     }
 }

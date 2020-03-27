@@ -1,5 +1,8 @@
 package Caculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Caculator {
     private static final int NULL_EMPTY_VALUE = 0;
     private static final int NORMAL_VALUE = 1;
@@ -27,13 +30,28 @@ public class Caculator {
     }
 
     public int splitNumberAndCharater(String inputText) {
-        String[] numbers = inputText.split(SPLIT_TEXT);
-        int sum = 0;
+        String[] numbers = getNumbers(inputText, SPLIT_TEXT);
+        return sumNumbers(numbers);
+    }
 
+    private int sumNumbers(String[] numbers) {
+        int sum = 0;
         for (int i = 0; i < numbers.length; i++) {
             sum += oneNumberInputText(numbers[i]);
         }
-
         return sum;
+    }
+
+    private String[] getNumbers(String inputText, String splitText) {
+        return inputText.split(splitText);
+    }
+
+    public int splitNumberAndCustomSeparator(String inputText) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputText);
+        if (!matcher.find()) { return 0; }
+
+        String[] numbers = getNumbers(matcher.group(2), matcher.group(1));
+        return sumNumbers(numbers);
+
     }
 }
