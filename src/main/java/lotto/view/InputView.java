@@ -8,7 +8,11 @@ public class InputView {
 
     private final Scanner scanner;
 
-    public InputView(final InputStream inputStream) {
+    public InputView() {
+        this(System.in);
+    }
+
+    InputView(final InputStream inputStream) {
         scanner = new Scanner(inputStream);
     }
 
