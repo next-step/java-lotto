@@ -2,8 +2,12 @@ package study;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import study.calculator.domain.StringAddition;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,6 +17,21 @@ public class StringAdditionTest {
     @CsvSource(value = {"0,1=1", "1:1=2", "1,2:3=6"}, delimiter = '=')
     void defaultSeparator(String operands, int result) {
         assertThat(StringAddition.splitAndSum(operands)).isEqualTo(result);
+    }
+
+    @DisplayName("커스텀 구분자를 이용한 덧셈")
+    @ParameterizedTest
+    @MethodSource("provideStringOperands")
+    void customSeparator(String operands, int result) {
+        assertThat(StringAddition.splitAndSum(operands)).isEqualTo(result);
+    }
+
+    private static Stream<Arguments> provideStringOperands() {
+        return Stream.of(
+                Arguments.of("//?\n0?1", 1),
+                Arguments.of("//!!\n1!!1", 2),
+                Arguments.of("//?\n1,2?3", 6)
+        );
     }
 
 }
