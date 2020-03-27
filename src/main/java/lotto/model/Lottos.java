@@ -1,10 +1,10 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.MatchingResult.*;
+import static lotto.model.MatchingResult.*;
 
 public class Lottos {
     private static final int THREE_NUM_MATCH_WITH_WINNING_LOTTO = 3;

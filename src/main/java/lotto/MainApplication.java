@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.lottogenerator.LottoNumGeneratorByAuto;
+import lotto.model.LottoGame;
+import lotto.view.InputProcessor;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 

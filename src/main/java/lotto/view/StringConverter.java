@@ -1,10 +1,11 @@
-package lotto;
+package lotto.view;
+
+import lotto.model.Money;
+import lotto.view.InputView;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 public class StringConverter {
     private static final String DELIMITER_FOR_LAST_LOTTO_NUM = ",";

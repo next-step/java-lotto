@@ -1,6 +1,8 @@
-package lotto;
+package lotto.model;
 
+import lotto.view.StringConverter;
 import lotto.lottogenerator.LottoNumGeneratorStrategy;
+import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;

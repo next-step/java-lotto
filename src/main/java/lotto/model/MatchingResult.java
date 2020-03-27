@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public enum MatchingResult {
     THREE(3, 5000),

@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.model.MatchingResult;
+import lotto.model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
