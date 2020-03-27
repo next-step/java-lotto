@@ -1,17 +1,25 @@
 package stringpluscalculator;
 
+import java.util.Arrays;
+
 public class Formula {
     private String[] formula;
 
     public Formula(String input, String separators) {
-        this.formula = input.split(separators);
-        validateFormula();
+        this.formula = validateFormula(input.split(separators));
     }
 
-    private void validateFormula() {
-        for (String s : formula) {
+    public int sum() {
+        return Arrays.stream(formula)
+                .mapToInt(Integer::parseInt)
+                .reduce(0, Integer::sum);
+    }
+
+    private String[] validateFormula(String[] input) {
+        for (String s : input) {
             validateNumber(s);
         }
+        return input;
     }
 
     private void validateNumber(String input) {
