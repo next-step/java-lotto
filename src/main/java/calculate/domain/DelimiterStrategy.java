@@ -1,7 +1,8 @@
 package calculate.domain;
 
+import calculate.util.StringUtil;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,10 +18,7 @@ public class DelimiterStrategy {
     }
 
     private List<String> splitOperandString(String inputString) {
-        if (Objects.isNull(inputString)) {
-            return Arrays.asList("0");
-        }
-        return Arrays.asList(inputString.split(delimiter.getDelimiter()));
+        return StringUtil.splitStringUseDelimiter(inputString, delimiter.getDelimiter());
     }
 
     private List<Operand> makeOperands(List<String> delimitedString) {
