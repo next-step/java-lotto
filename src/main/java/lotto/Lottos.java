@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class Lottos {
     private static final int THREE_NUM_MATCH_WITH_WINNING_LOTTO = 3;
+    private static final int FOUR_NUM_MATCH_WITH_WINNING_LOTTO = 4;
 
     private List<Lotto> lottos;
 
@@ -22,6 +23,10 @@ public class Lottos {
     }
 
     public int findCountOfFourNumMatching(List<Integer> winningLotto) {
-        return 0;
+        return lottos.stream()
+                .map(lotto -> lotto.findHowManyMatch(winningLotto))
+                .filter(count -> FOUR_NUM_MATCH_WITH_WINNING_LOTTO == count)
+                .collect(Collectors.toList())
+                .size();
     }
 }
