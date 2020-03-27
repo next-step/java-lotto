@@ -7,6 +7,10 @@ import java.util.Objects;
 public class Operand {
     private int operand;
 
+    public Operand() {
+        this(0);
+    }
+
     public Operand(int operand) {
         if (operand < 0) {
             throw new NotPositiveIntegerException("피연산자는 양의 정수만 입력 가능 합니다.");

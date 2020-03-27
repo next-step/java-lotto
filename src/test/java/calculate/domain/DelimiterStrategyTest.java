@@ -19,6 +19,16 @@ class DelimiterStrategyTest {
         assertThat(strategy1.equals(strategy2)).isTrue();
     }
 
+    @DisplayName("피연산자에 null, ' '이 들어갈 경우")
+    @Test
+    public void construct_null() throws Exception {
+        //given
+        DelimiterStrategy strategy = new DelimiterStrategy(" ,2,,2", ",");
+
+        //then
+        assertThat(strategy.getOperands().getOperands().size()).isEqualTo(4);
+    }
+
     @DisplayName("생성자 테스트 : fail")
     @Test
     public void construct_fail() throws Exception {

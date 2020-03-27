@@ -3,6 +3,7 @@ package calculate.domain;
 import calculate.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,15 +19,27 @@ public class DelimiterStrategy {
     }
 
     private List<String> splitOperandString(String inputString) {
+        if (Objects.isNull(inputString) || inputString.isEmpty()) {
+            return Arrays.asList("0");
+        }
         return StringUtil.splitStringUseDelimiter(inputString, delimiter.getDelimiter());
     }
 
     private List<Operand> makeOperands(List<String> delimitedString) {
-        List<Operand> operands = new ArrayList<>();
+        List<Operand> result = new ArrayList<>();
         for (String str : delimitedString) {
-            operands.add(new Operand(Integer.parseInt(str)));
+            if (Objects.isNull(str) || str.trim().isEmpty()) {
+                result.add(new Operand());
+            } else {
+                try {
+                    result.add(new Operand(Integer.parseInt(str)));
+
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("숫자를 입력해 주세요");
+                }
+            }
         }
-        return operands;
+        return result;
     }
 
     public Operands getOperands() {

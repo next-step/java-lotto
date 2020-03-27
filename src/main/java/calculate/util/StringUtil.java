@@ -2,7 +2,6 @@ package calculate.util;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public final class StringUtil {
 
@@ -11,9 +10,6 @@ public final class StringUtil {
     }
 
     public static List<String> splitStringUseDelimiter(String input, String delimiter) {
-        if (Objects.isNull(input) || input.isEmpty()) {
-            return Arrays.asList("0");
-        }
         return Arrays.asList(input.split(delimiter));
     }
 }
