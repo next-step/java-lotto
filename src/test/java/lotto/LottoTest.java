@@ -2,6 +2,8 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -21,6 +23,15 @@ public class LottoTest {
     void validateDuplicationTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5));
+        });
+    }
+
+    @DisplayName("로또는 1 이상, 45 이하의 숫자로만 구성되어야 한다. 그렇지 않을 경우, 예외를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46})
+    void validateNumberRangeTest(int input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Lotto(Arrays.asList(input, 1, 2, 3, 4, 5));
         });
     }
 }
