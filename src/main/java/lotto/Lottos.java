@@ -10,6 +10,7 @@ public class Lottos {
     private static final int FOUR_NUM_MATCH_WITH_WINNING_LOTTO = 4;
     private static final int FIVE_NUM_MATCH_WITH_WINNING_LOTTO = 5;
     private static final int SIX_NUM_MATCH_WITH_WINNING_LOTTO = 6;
+    private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
 
     private List<Lotto> lottos;
 
@@ -58,6 +59,6 @@ public class Lottos {
         if (earningMoney == null) {
             return 0;
         }
-        return earningMoney.getMoney() / (this.lottos.size() * 1000l);
+        return earningMoney.getMoney() / (this.lottos.size() * PRICE_TO_BUY_ONE_LOTTO);
     }
 }
