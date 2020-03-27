@@ -1,23 +1,20 @@
 package calculate.conroller;
 
 import calculate.domain.Calculator;
+import calculate.domain.UserInput;
 import calculate.view.InputView;
-
-import java.util.Scanner;
+import calculate.view.ResultView;
 
 public class CalculateApplication {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("계산할 구분자와 문자열을 입력 하세요");
 
-        String input = sc.nextLine();
-        System.out.println(input);
-        InputView inputView = new InputView(input);
+        InputView inputView = new InputView();
+        inputView.getUserInput();
+        UserInput userInput = new UserInput(inputView.getInput());
 
-        Calculator calculator = new Calculator(inputView.getOperandString(), inputView.getDelimiter());
+        Calculator calculator = new Calculator(userInput.getPrimaloperand(), userInput.getDelimiter());
         int result = calculator.calculate();
-
-        System.out.println(result);
+        ResultView.printResult(result);
     }
 }
