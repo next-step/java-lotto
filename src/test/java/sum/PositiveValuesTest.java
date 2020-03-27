@@ -8,21 +8,21 @@ import org.junit.jupiter.params.provider.NullSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ValueListTest {
+class PositiveValuesTest {
 
 	@Test
 	@DisplayName("기본 테스트")
 	void sum() {
-		ValueList valueList = new ValueList("1", "2", "3");
-		assertThat(valueList.sum())
+		PositiveValues positiveValues = new PositiveValues("1", "2", "3");
+		assertThat(positiveValues.sum())
 				.isEqualTo(6);
 	}
 
 	@Test
 	@DisplayName("객체 테스트")
 	void objectTest() {
-		assertThat(new ValueList("1", "2", "3"))
-				.isEqualTo(new ValueList("1", "2", "3"));
+		assertThat(new PositiveValues("1", "2", "3"))
+				.isEqualTo(new PositiveValues("1", "2", "3"));
 	}
 
 	@ParameterizedTest
@@ -30,7 +30,7 @@ class ValueListTest {
 	@EmptySource
 	@DisplayName("빈 값 처리 테스트")
 	void exceptionTest(String emptyValue) {
-		assertThat(new ValueList(emptyValue).sum())
+		assertThat(new PositiveValues(emptyValue).sum())
 				.isEqualTo(0);
 	}
 

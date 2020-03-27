@@ -12,7 +12,7 @@ public class Sum {
 			return 0;
 		}
 
-		return new ValueList(parseValueList(sumParam)).sum();
+		return new PositiveValues(parseValueList(sumParam)).sum();
 	}
 
 	private static String[] parseValueList(String sumParam) {
