@@ -3,12 +3,13 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
+
 public class LottoGame {
-    private static final int GAME_PRICE = 1000;
     private final int gameCount;
 
     public LottoGame(int money) {
-        this.gameCount = Math.floorDiv(Money.validate(money), GAME_PRICE);
+        this.gameCount = Math.floorDiv(Money.validate(money), DEFAULT_GAME_PRICE);
     }
 
     public int getGameCount() {
