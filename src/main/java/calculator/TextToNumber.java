@@ -8,7 +8,10 @@ import java.util.stream.Stream;
 
 public class TextToNumber {
     private static final Pattern CUSTOM_DELIMTER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    public static final String DELEMTER = ",|:";
+    public static final String DELIMETER = ",|:";
+    public static final int MATCHING_PART = 1;
+    public static final int DELIMETER_FORMULA = 2;
+
     private List<Number> numbers;
 
     public TextToNumber(String inputText) {
@@ -24,13 +27,17 @@ public class TextToNumber {
     private List<String> convertToStrings(String text) {
         Matcher matcher = CUSTOM_DELIMTER_PATTERN.matcher(text);
         if (matcher.find()) {
-            String delimiter = matcher.group(1);
-            return Stream.of(matcher.group(2).split(delimiter))
-                    .map(String::trim)
-                    .collect(Collectors.toList());
+            return getCustomDelimeterStrings(matcher);
         }
 
-        return Stream.of(text.split(DELEMTER))
+        return Stream.of(text.split(DELIMETER))
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getCustomDelimeterStrings(Matcher matcher) {
+        String delimiter = matcher.group(MATCHING_PART);
+        return Stream.of(matcher.group(DELIMETER_FORMULA).split(delimiter))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
