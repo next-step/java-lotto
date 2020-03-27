@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class StringAddCalculatorTest {
@@ -24,12 +25,12 @@ public class StringAddCalculatorTest {
         new StringAddCalculator();
     }
 
-    @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 IllegalArgumentException 예외 처리를 한다.")
+    @DisplayName(value = "빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
     @ParameterizedTest
     @NullAndEmptySource
     void emptyOrNull(final String inputText) {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> stringAddCalculator.calculate(inputText));
+        assertThat(stringAddCalculator.calculate(inputText)).isZero();
     }
+
 
 }

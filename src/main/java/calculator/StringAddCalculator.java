@@ -2,20 +2,24 @@ package calculator;
 
 public class StringAddCalculator {
 
-    public StringAddCalculator() {
-    }
-
     public int calculate(String inputText) {
         checkNullOrEmpty(inputText);
         return 0;
     }
 
-
-    private String checkNullOrEmpty(String inputText) {
+    private int checkNullOrEmpty(String inputText) {
         if (inputText == null || inputText.trim().isEmpty()) {
-            throw new IllegalArgumentException("공백이나 null이 입력되면 안됩니다.");
+            return 0;
         }
-        return inputText;
+        return parseToInt(inputText);
+    }
+
+    private int parseToInt(String inputText) {
+        try {
+            return (Integer.parseInt(inputText));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자가 아닙니다. " + e.getMessage());
+        }
     }
 
 
