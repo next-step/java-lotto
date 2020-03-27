@@ -23,4 +23,8 @@ public class LottoGame {
         }
         return new LottoNumbers(lottoNumbers);
     }
+
+    public LottoGameResults checkResult(LottoNumbers boughtNumbers, List<Integer> winningNumber) {
+        return new LottoGameResults(boughtNumbers, new LottoNumber(winningNumber));
+    }
 }

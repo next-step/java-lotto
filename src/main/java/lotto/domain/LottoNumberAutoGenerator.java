@@ -25,4 +25,6 @@ public class LottoNumberAutoGenerator {
         return selectedNumbers;
     }
 
+    private LottoNumberAutoGenerator() {
+    }
 }

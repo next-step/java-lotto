@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumberAutoGeneratorTest {
 
-    @DisplayName("자동 로또 번호를 생성할 수 있다")
+    @DisplayName("로또 번호를 자동으로 생성할 수 있다")
     @Test
     public void generateLottoNumbersTest() {
         List<Integer> integers = LottoNumberAutoGenerator.get();
