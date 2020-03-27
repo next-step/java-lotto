@@ -14,7 +14,10 @@ public class LottoTicket {
         validateSize(numbers);
         validateNumberRange(numbers);
         validateDuplicate(numbers);
-        this.numbers = Collections.unmodifiableList(numbers);
+        
+        List<Integer> result = new ArrayList<>();
+        result.addAll(numbers);
+        this.numbers = Collections.unmodifiableList(result);
     }
 
     private void validateSize(List<Integer> numbers) {
@@ -53,5 +56,10 @@ public class LottoTicket {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

@@ -4,11 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
 
@@ -88,5 +90,23 @@ public class LottoTicketTest {
         assertThatThrownBy(
                 () -> new LottoTicket(Arrays.asList(1, 1, 3, 4, 5, 45))
         ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 중복될 수 없습니다.");
+    }
+
+
+    @DisplayName("로또는 불변 객체여야 한다")
+    @Test
+    public void test() throws Exception {
+        //given
+        List<Integer> tmp = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket = new LottoTicket(tmp);
+
+        //when
+        tmp.set(0, 111);
+
+        //then
+        assertAll(
+                () -> assertThat(ticket.getNumbers().get(0)).isEqualTo(1),
+                () -> assertThat(tmp.get(0)).isEqualTo(111)
+        );
     }
 }
