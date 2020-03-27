@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class MoneyTest {
     @DisplayName("Money 객체는 인자로 받는 금액(long type)에 따라 구별된다.")
     @ParameterizedTest
-    @ValueSource(longs = {15000, 12000})
+    @ValueSource(longs = {1000, 12000})
     void createMoneyTest(long input) {
         assertThat(new Money(input)).isEqualTo(new Money(input));
     }
