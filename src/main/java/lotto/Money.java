@@ -27,8 +27,8 @@ public class Money {
         return money < ZERO_MONEY;
     }
 
-    public long findLottoCountToBuy() {
-        return this.money / MONEY_TO_BUY_ONE_LOTTO;
+    public int findLottoCountToBuy() {
+        return (int) Math.floor(this.money / MONEY_TO_BUY_ONE_LOTTO) ;
     }
 
     public Money add(Money money){

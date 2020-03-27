@@ -13,4 +13,12 @@ public class InputView {
             throw new IllegalArgumentException("null 또는 공백은 입력할 수 없습니다.");
         }
     }
+
+    public static InputView of(String input){
+        return new InputView(input);
+    }
+
+    public String getInput() {
+        return input;
+    }
 }

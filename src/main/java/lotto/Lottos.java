@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Lottos {
     private static final int SIX_NUM_MATCH_WITH_WINNING_LOTTO = 6;
     private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
 
-    private List<Lotto> lottos;
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
@@ -60,5 +61,9 @@ public class Lottos {
             return 0;
         }
         return earningMoney.getMoney() / (this.lottos.size() * PRICE_TO_BUY_ONE_LOTTO);
+    }
+
+    public List<Lotto> getLottos() {
+        return this.lottos;
     }
 }

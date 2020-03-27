@@ -49,4 +49,9 @@ public class Lotto {
                     .collect(Collectors.toList())
                     .size();
     }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
 }

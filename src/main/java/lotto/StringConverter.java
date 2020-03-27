@@ -4,12 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class StringConverter {
     private static final String DELIMITER_FOR_LAST_LOTTO_NUM = ",";
     private static final Long MONEY_TO_BUY_ONE_LOTTO = 1000L;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
 
-    public static Money convertStringToMoney(String input) {
-        Long money = validateNonNumber(input);
+    public static Money convertStringToMoney(InputView inputView) {
+        Long money = validateNonNumber(inputView.getInput());
         validateEnoughToBuyLotto(money);
         return new Money(money);
     }
@@ -34,9 +38,11 @@ public class StringConverter {
 
     public static List<Integer> convertStringToNumbers(String input) {
         String[] split = input.split(DELIMITER_FOR_LAST_LOTTO_NUM);
-        return Arrays.stream(split)
+        List<Integer> collect = Arrays.stream(split)
                 .map(stringNumber -> validateNonNumberForNumbers(stringNumber))
                 .collect(Collectors.toList());
+        validateNumberRange(collect);
+        return collect;
     }
 
     private static Integer validateNonNumberForNumbers(String input) {
@@ -44,6 +50,16 @@ public class StringConverter {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+        }
+    }
+
+    private static void validateNumberRange(List<Integer> lottoNumbers) {
+        boolean hasNumberOutOfRange = lottoNumbers.stream()
+                .filter(number -> number > LOTTO_NUMBER_MAX || number < LOTTO_NUMBER_MIN)
+                .findAny()
+                .isPresent();
+        if (hasNumberOutOfRange) {
+            throw new IllegalArgumentException("로또는 1부터 45까지의 숫자로만 구성되어야 합니다.");
         }
     }
 }
