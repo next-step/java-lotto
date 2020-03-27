@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.dto.Price;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,9 +21,9 @@ class InputViewTest {
     @DisplayName("구입 금액을 입력받을 수 있다.")
     @Test
     void insertPrice() {
-        final int expect = 1000;
+        final Price expect = new Price(1000);
 
-        final int actual = inputView.inputPrice();
+        final Price actual = inputView.inputPrice();
 
         assertThat(actual).isEqualTo(expect);
     }
