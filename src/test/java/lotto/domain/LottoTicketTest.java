@@ -62,4 +62,22 @@ public class LottoTicketTest {
                 () -> numbers.set(0, 11)
         ).isInstanceOf(UnsupportedOperationException.class);
     }
+
+    @DisplayName("0 ~ 45 사이의 숫자인지 체크")
+    @Test
+    public void validateLottoNumberRange() throws Exception {
+        //given
+        assertThatThrownBy(
+                () -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 46))
+        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 1~ 45 사이의 정수만 가능 합니다.");
+    }
+
+    @DisplayName("0 ~ 45 사이의 숫자인지 체크")
+    @Test
+    public void validateLottoNumberRange2() throws Exception {
+        //given
+        assertThatThrownBy(
+                () -> new LottoTicket(Arrays.asList(0, 2, 3, 4, 5, 45))
+        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 1~ 45 사이의 정수만 가능 합니다.");
+    }
 }

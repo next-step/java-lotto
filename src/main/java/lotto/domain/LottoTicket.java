@@ -7,17 +7,28 @@ import java.util.Objects;
 public class LottoTicket {
 
     private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_Min_NUMBER_SIZE = 1;
+    private static final int LOTTO_MAX_NUMBER_SIZE = 45;
 
     private final List<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
         validateLottoSize(numbers);
+        validateLottoNumberRange(numbers);
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
     private void validateLottoSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("번호는 6개만 지정 가능 합니다.");
+        }
+    }
+
+    private void validateLottoNumberRange(List<Integer> numbers) {
+        for (Integer i : numbers) {
+            if (i < 1 || i > 45) {
+                throw new IllegalArgumentException("번호는 1~ 45 사이의 정수만 가능 합니다.");
+            }
         }
     }
 
