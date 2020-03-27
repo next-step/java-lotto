@@ -1,5 +1,8 @@
 package calculator.domain;
 
+import calculator.exception.CalculatorException;
+import calculator.type.ExceptionType;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,7 +18,7 @@ public class Number {
             this.number = Integer.parseInt(value);
 
         if (this.number < 0) {
-            throw new RuntimeException("Cannot be less than 0");
+            throw new CalculatorException(ExceptionType.INVALID_NUMBER);
         }
     }
 
