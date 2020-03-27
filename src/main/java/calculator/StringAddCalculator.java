@@ -1,11 +1,15 @@
 package calculator;
 
 public class StringAddCalculator {
-    private final String inputText;
 
-    public StringAddCalculator(String inputText) {
-        this.inputText = checkNullOrEmpty(inputText);
+    public StringAddCalculator() {
     }
+
+    public int calculate(String inputText) {
+        checkNullOrEmpty(inputText);
+        return 0;
+    }
+
 
     private String checkNullOrEmpty(String inputText) {
         if (inputText == null || inputText.trim().isEmpty()) {
@@ -13,5 +17,7 @@ public class StringAddCalculator {
         }
         return inputText;
     }
+
+
 
 }
