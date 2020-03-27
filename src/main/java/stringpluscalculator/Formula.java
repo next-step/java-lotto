@@ -6,7 +6,7 @@ public class Formula {
     private String[] formula = {"0"};
 
     public Formula(String input, String separators) {
-        if(!input.isEmpty()){
+        if (!input.isEmpty()) {
             this.formula = validateFormula(input.split(separators));
         }
     }

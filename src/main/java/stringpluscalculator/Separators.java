@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Separators {
     private static final String CUSTOM_SEPARATORS_PREFIX = "//";
-    private static final String CUSTOM_SEPARATORS_SUFFIX = "\n";
+    private static final String CUSTOM_SEPARATORS_SUFFIX = "\\n";
     private static final String SPLIT_DELIMITER = "|";
 
     private String[] separators = {":", ","};
@@ -21,7 +21,7 @@ public class Separators {
 
     public static String getInputWithoutCustomSeparator(String input) {
         if (hasCustomSeparator(input)) {
-            return input.split(CUSTOM_SEPARATORS_SUFFIX)[1];
+            return input.substring(input.indexOf(CUSTOM_SEPARATORS_SUFFIX) + CUSTOM_SEPARATORS_SUFFIX.length());
         }
         return input;
     }
