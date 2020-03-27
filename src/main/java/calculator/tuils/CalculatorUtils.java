@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.tuils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,11 +7,11 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CalculatorHelper {
+public class CalculatorUtils {
     private static final Pattern PATTERN = Pattern.compile("//(.)\\\\n(.*)");
     private static final String REGEX = ",|:";
 
-    static List<String> findNumber(String expression) {
+    public static List<String> findNumber(String expression) {
         if (Objects.isNull(expression) || expression.trim().isEmpty())
             return new ArrayList<>();
 
