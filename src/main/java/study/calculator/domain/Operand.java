@@ -1,4 +1,4 @@
-package study.domain;
+package study.calculator.domain;
 
 import java.util.Objects;
 
