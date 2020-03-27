@@ -13,7 +13,7 @@ public class AdditionTest {
     @ParameterizedTest
     @CsvSource({"1,2,3", "0,3,3"})
     void sum(int leftSide, int rightSide, int result) {
-        assertThat(Addition.sum(new Operand(leftSide),
-                new Operand(rightSide))).isEqualTo(result);
+        assertThat(Addition.sum(Operand.getInstance(leftSide),
+                Operand.getInstance(rightSide))).isEqualTo(result);
     }
 }

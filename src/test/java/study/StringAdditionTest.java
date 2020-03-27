@@ -1,6 +1,7 @@
 package study;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -24,6 +25,18 @@ public class StringAdditionTest {
     @MethodSource("provideStringOperands")
     void customSeparator(String operands, int result) {
         assertThat(StringAddition.splitAndSum(operands)).isEqualTo(result);
+    }
+
+    @DisplayName("공백 입력")
+    @Test
+    void empty() {
+        assertThat(StringAddition.splitAndSum("")).isEqualTo(0);
+    }
+
+    @DisplayName("null 입력")
+    @Test
+    void nullValue() {
+        assertThat(StringAddition.splitAndSum(null)).isEqualTo(0);
     }
 
     private static Stream<Arguments> provideStringOperands() {

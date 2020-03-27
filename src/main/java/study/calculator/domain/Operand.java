@@ -5,15 +5,26 @@ import java.util.Objects;
 public class Operand {
     private int operand;
 
-    public Operand(Integer operand) {
-        if (Objects.isNull(operand)) {
-            operand = 0;
-        }
+    private Operand(int operand) {
         if (operand < 0) {
             throw new IllegalArgumentException("0 이상의 수를 입력하여야 합니다.");
         }
 
         this.operand = operand;
+    }
+
+    public static Operand getInstance(String operand) {
+        if (Objects.isNull(operand)) {
+            return new Operand(0);
+        }
+        if(operand.isEmpty()) {
+            return new Operand(0);
+        }
+        return new Operand(Integer.parseInt(operand));
+    }
+
+    public static Operand getInstance(int operand) {
+        return new Operand(operand);
     }
 
     public int getOperand() {
