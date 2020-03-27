@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.dto.Price;
+
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -16,8 +18,8 @@ public class InputView {
         scanner = new Scanner(inputStream);
     }
 
-    public int inputPrice() {
+    public Price inputPrice() {
         System.out.println(INPUT_PRICE_MESSAGE);
-        return scanner.nextInt();
+        return new Price(scanner.nextInt());
     }
 }
