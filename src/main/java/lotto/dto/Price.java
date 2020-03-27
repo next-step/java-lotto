@@ -4,12 +4,17 @@ import java.util.Objects;
 
 public class Price {
     private static final int ZERO = 0;
+    private static final int LOTTO_PRICE = 1000;
 
     private int price;
 
     public Price(final int price) {
         checkAvailablePrice(price);
         this.price = price;
+    }
+
+    public int lotteryCount() {
+        return price / LOTTO_PRICE;
     }
 
     private void checkAvailablePrice(final int price) {
@@ -29,9 +34,5 @@ public class Price {
     @Override
     public int hashCode() {
         return Objects.hash(price);
-    }
-
-    public int lotteryCount(final int won) {
-        return price / won;
     }
 }
