@@ -28,7 +28,7 @@ public class Number {
 
     public static List<Number> listOf(List<String> numberValues) {
         return numberValues.stream()
-                .map(numberValue -> new Number(numberValue))
+                .map(Number::new)
                 .collect(Collectors.toList());
     }
 }
