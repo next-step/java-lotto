@@ -1,11 +1,16 @@
 package lotto.view;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class InputView {
-    private static final Scanner SCANNER = new Scanner(System.in);
+    private final Scanner scanner;
 
-    public static int inputPrice() {
-        return SCANNER.nextInt();
+    public InputView(final InputStream inputStream) {
+        scanner = new Scanner(inputStream);
+    }
+
+    public int inputPrice() {
+        return scanner.nextInt();
     }
 }
