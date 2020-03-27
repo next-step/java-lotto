@@ -2,7 +2,6 @@ package lotto;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static lotto.MatchingResult.*;
 
@@ -10,7 +9,7 @@ public class Lottos {
     private static final int THREE_NUM_MATCH_WITH_WINNING_LOTTO = 3;
     private static final int FOUR_NUM_MATCH_WITH_WINNING_LOTTO = 4;
     private static final int FIVE_NUM_MATCH_WITH_WINNING_LOTTO = 5;
-    private static final int SIX_NUM_MATCH_WITH_WINNING_LOTTO = 5;
+    private static final int SIX_NUM_MATCH_WITH_WINNING_LOTTO = 6;
 
     private List<Lotto> lottos;
 
@@ -47,17 +46,18 @@ public class Lottos {
     }
 
     public Money calculatePrizeMoney(List<Integer> winningLotto) {
-        Money money = THREE.calculatePrizeMoney(findCountOfThreeNumMatching(winningLotto));
-        Money money2 = FOUR.calculatePrizeMoney(findCountOfFourNumMatching(winningLotto));
-        Money money3 = FIVE.calculatePrizeMoney(findCountOfFiveNumMatching(winningLotto));
-        Money money4 = SIX.calculatePrizeMoney(findCountOfSixNumMatching(winningLotto));
-        if(money == null && money2 == null && money3 == null && money4 == null){
-            return null;
-        }
+        Money money = THREE.calculatePrizeMoney(this.findCountOfThreeNumMatching(winningLotto));
+        Money money2 = FOUR.calculatePrizeMoney(this.findCountOfFourNumMatching(winningLotto));
+        Money money3 = FIVE.calculatePrizeMoney(this.findCountOfFiveNumMatching(winningLotto));
+        Money money4 = SIX.calculatePrizeMoney(this.findCountOfSixNumMatching(winningLotto));
         return money.add(money2).add(money3).add(money4);
     }
 
     public double calculateEarningRate(List<Integer> winningLotto) {
-        return 0;
+        Money earningMoney = calculatePrizeMoney(winningLotto);
+        if (earningMoney == null) {
+            return 0;
+        }
+        return earningMoney.getMoney() / (this.lottos.size() * 1000l);
     }
 }

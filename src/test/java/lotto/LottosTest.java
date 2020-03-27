@@ -94,13 +94,13 @@ public class LottosTest {
     @Test
     public void calculateEarningRateTest() {
         //given
-        Lotto lotto5 = new Lotto(Arrays.asList(15, 16, 17, 18, 19, 20));
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto5));
+        Lotto lotto5 = new Lotto(Arrays.asList(15, 1, 2, 3, 19, 20));
+        Lottos lottos = new Lottos(Arrays.asList(lotto5));
 
-        //when
+        //whenR
         double earningRate = lottos.calculateEarningRate(winningLotto);
 
         //then
-        assertThat(earningRate).isEqualTo(1.25);
+        assertThat(earningRate).isEqualTo(5);
     }
 }

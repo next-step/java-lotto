@@ -8,9 +8,13 @@ public class Money {
 
     private Long money;
 
+    public Money (){
+        this.money = 0l;
+    }
+
     public Money(Long money) {
         validateNegative(money);
-        validateEnoughToBuyLotto(money);
+       // validateEnoughToBuyLotto(money);
         this.money = money;
     }
 
@@ -39,17 +43,6 @@ public class Money {
     }
 
     public Money add(Money money){
-        if(this.money == null && money!=null){
-            return money;
-        }
-
-        if(this.money !=null && money == null){
-            return this;
-        }
-
-        if(this.money == null && money == null){
-            return null;
-        }
         return new Money(this.money + money.getMoney());
     }
 

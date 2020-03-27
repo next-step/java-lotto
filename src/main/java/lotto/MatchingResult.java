@@ -13,8 +13,8 @@ public enum MatchingResult {
     }
 
     public Money calculatePrizeMoney(long count) {
-        if (count < 1) {
-            return null;
+        if (count == 0) {
+            return new Money();
         }
         return new Money(count * cashPrize);
     }
