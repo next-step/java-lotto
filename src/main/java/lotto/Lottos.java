@@ -38,4 +38,8 @@ public class Lottos {
                 .collect(Collectors.toList())
                 .size();
     }
+
+    public int findCountOfSixNumMatching(List<Integer> winningLotto) {
+        return 0;
+    }
 }
