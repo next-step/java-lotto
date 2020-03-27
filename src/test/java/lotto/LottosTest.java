@@ -50,4 +50,17 @@ public class LottosTest {
         //then
         assertThat(countOfFourNumMatching).isEqualTo(1);
     }
+
+    @DisplayName("구매한 로또 중에 당첨번호와 번호 5개가 일치하는 로또의 갯수를 리턴한다.")
+    @Test
+    void findCountOfFiveNumMatchingTest() {
+        //given
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+
+        //when
+        int countOfFiveNumMatching = lottos.findCountOfFiveNumMatching(winningLotto);
+
+        //then
+        assertThat(countOfFiveNumMatching).isEqualTo(1);
+    }
 }

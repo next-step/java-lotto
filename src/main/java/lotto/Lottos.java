@@ -29,4 +29,8 @@ public class Lottos {
                 .collect(Collectors.toList())
                 .size();
     }
+
+    public int findCountOfFiveNumMatching(List<Integer> winningLotto) {
+        return 0;
+    }
 }
