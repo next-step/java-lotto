@@ -3,10 +3,13 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
@@ -33,5 +36,20 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(Arrays.asList(input, 1, 2, 3, 4, 5));
         });
+    }
+
+    @DisplayName("구매한 로또 번호와 당첨 로또 번호를 인자로 주면, 두 번호 간 일치한 숫자의 갯수를 반환한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"1:5", "7:6", "8:4", "9:4"}, delimiter = ':')
+    void findHowManyMatchTest(int input, int expected) {
+        //given
+        List<Integer> winningLotto = Arrays.asList(input, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+
+        //when
+        int howManyMatch = lotto.findHowManyMatch(winningLotto);
+
+        //then
+        assertThat(howManyMatch).isEqualTo(expected);
     }
 }

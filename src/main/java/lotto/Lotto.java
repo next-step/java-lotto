@@ -42,4 +42,8 @@ public class Lotto {
             throw new IllegalArgumentException("로또는 1부터 45까지의 숫자로만 구성되어야 합니다.");
         }
     }
+
+    public int findHowManyMatch(List<Integer> winningLotto) {
+        return 0;
+    }
 }
