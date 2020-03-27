@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class DelimiterStrategyTest {
 
@@ -27,5 +28,18 @@ class DelimiterStrategyTest {
 
         //then
         assertThat(!strategy1.equals(strategy2)).isTrue();
+    }
+
+    @DisplayName("피연산자 테스트 : null이 입력 됐을때")
+    @Test
+    public void operand() throws Exception {
+        //given
+        DelimiterStrategy strategy = new DelimiterStrategy(null, ":");
+
+        //then
+        assertAll(
+                () -> assertThat(strategy.getOperands().getOperands().size()).isEqualTo(1),
+                () -> assertThat(strategy.getOperands().getOperands().get(0).getOperand()).isEqualTo(0)
+        );
     }
 }

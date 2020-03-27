@@ -12,13 +12,23 @@ public class DelimiterStrategy {
     public DelimiterStrategy(String operandString, String delimiterString) {
         this.delimiter = new Delimiter(delimiterString);
 
-        List<String> strings = Arrays.asList(operandString.split(delimiter.getDelimiter()));
-        List<Operand> operands = new ArrayList<>();
+        List<String> delimitedString = splitOperandString(operandString);
+        this.operands = new Operands(makeOperands(delimitedString));
+    }
 
-        for (String str : strings) {
+    private List<String> splitOperandString(String inputString) {
+        if (Objects.isNull(inputString)) {
+            return Arrays.asList("0");
+        }
+        return Arrays.asList(inputString.split(delimiter.getDelimiter()));
+    }
+
+    private List<Operand> makeOperands(List<String> delimitedString) {
+        List<Operand> operands = new ArrayList<>();
+        for (String str : delimitedString) {
             operands.add(new Operand(Integer.parseInt(str)));
         }
-        this.operands = new Operands(operands);
+        return operands;
     }
 
     public Operands getOperands() {
