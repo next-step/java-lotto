@@ -1,11 +1,13 @@
 package calculator;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TextToNumber {
-
+    private static final Pattern CUSTOM_DELIMTER_PATTERN = Pattern.compile("//(.)\n(.*)");
     public static final String DELEMTER = ",|:";
     private List<Number> numbers;
 
@@ -20,6 +22,14 @@ public class TextToNumber {
     }
 
     private List<String> convertToStrings(String text) {
+        Matcher matcher = CUSTOM_DELIMTER_PATTERN.matcher(text);
+        if (matcher.find()) {
+            String delimiter = matcher.group(1);
+            return Stream.of(matcher.group(2).split(delimiter))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+        }
+
         return Stream.of(text.split(DELEMTER))
                 .map(String::trim)
                 .collect(Collectors.toList());

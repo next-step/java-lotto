@@ -49,8 +49,8 @@ public class StringAddCalculatorTest {
     @DisplayName(value = "구분자를 쉼표(,) 이외에 콜론(:)을 사용할 수 있다.")
     @ParameterizedTest
     @ValueSource(strings = {"1,2:3"})
-    void colons(final String text) {
-        assertThat(stringAddCalculator.calculate(text)).isSameAs(6);
+    void colons(final String inputText) {
+        assertThat(stringAddCalculator.calculate(inputText)).isSameAs(6);
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 예외 처리를 한다.")
@@ -58,6 +58,13 @@ public class StringAddCalculatorTest {
     void negative() {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> stringAddCalculator.calculate("-1"));
+    }
+
+    @DisplayName(value = "//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"//;\n1;2;3"})
+    void customDelimiter(final String inputText) {
+        assertThat(stringAddCalculator.calculate(inputText)).isSameAs(6);
     }
 
 }
