@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money {
     private static final Long MONEY_TO_BUY_ONE_LOTTO = 1000L;
+    private static final Long ZERO_MONEY = 0L;
 
     private Long money;
 
@@ -20,7 +21,7 @@ public class Money {
     }
 
     private boolean isNegative(Long money) {
-        return money < 0;
+        return money < ZERO_MONEY;
     }
 
     private void validateEnoughToBuyLotto(Long money) {
