@@ -16,35 +16,31 @@ public class Lottos {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public int findCountOfThreeNumMatching(List<Integer> winningLotto) {
+    public long findCountOfThreeNumMatching(List<Integer> winningLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.findHowManyMatch(winningLotto))
                 .filter(count -> THREE_NUM_MATCH_WITH_WINNING_LOTTO == count)
-                .collect(Collectors.toList())
-                .size();
+                .count();
     }
 
-    public int findCountOfFourNumMatching(List<Integer> winningLotto) {
+    public long findCountOfFourNumMatching(List<Integer> winningLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.findHowManyMatch(winningLotto))
                 .filter(count -> FOUR_NUM_MATCH_WITH_WINNING_LOTTO == count)
-                .collect(Collectors.toList())
-                .size();
+                .count();
     }
 
-    public int findCountOfFiveNumMatching(List<Integer> winningLotto) {
+    public long findCountOfFiveNumMatching(List<Integer> winningLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.findHowManyMatch(winningLotto))
                 .filter(count -> FIVE_NUM_MATCH_WITH_WINNING_LOTTO == count)
-                .collect(Collectors.toList())
-                .size();
+                .count();
     }
 
-    public int findCountOfSixNumMatching(List<Integer> winningLotto) {
+    public long findCountOfSixNumMatching(List<Integer> winningLotto) {
         return lottos.stream()
                 .map(lotto -> lotto.findHowManyMatch(winningLotto))
                 .filter(count -> SIX_NUM_MATCH_WITH_WINNING_LOTTO == count)
-                .collect(Collectors.toList())
-                .size();
+                .count();
     }
 }

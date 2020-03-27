@@ -32,10 +32,10 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
         //when
-        int countOfThreeNumMatching = lottos.findCountOfThreeNumMatching(winningLotto);
+        Long countOfThreeNumMatching = lottos.findCountOfThreeNumMatching(winningLotto);
 
         //then
-        assertThat(countOfThreeNumMatching).isEqualTo(1);
+        assertThat(countOfThreeNumMatching).isEqualTo(1L);
     }
 
     @DisplayName("구매한 로또 중에 당첨번호와 번호 4개가 일치하는 로또의 갯수를 리턴한다.")
@@ -45,10 +45,10 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
         //when
-        int countOfFourNumMatching = lottos.findCountOfFourNumMatching(winningLotto);
+        Long countOfFourNumMatching = lottos.findCountOfFourNumMatching(winningLotto);
 
         //then
-        assertThat(countOfFourNumMatching).isEqualTo(1);
+        assertThat(countOfFourNumMatching).isEqualTo(1L);
     }
 
     @DisplayName("구매한 로또 중에 당첨번호와 번호 5개가 일치하는 로또의 갯수를 리턴한다.")
@@ -58,10 +58,10 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
         //when
-        int countOfFiveNumMatching = lottos.findCountOfFiveNumMatching(winningLotto);
+        Long countOfFiveNumMatching = lottos.findCountOfFiveNumMatching(winningLotto);
 
         //then
-        assertThat(countOfFiveNumMatching).isEqualTo(1);
+        assertThat(countOfFiveNumMatching).isEqualTo(1L);
     }
 
     @DisplayName("구매한 로또 중에 당첨번호와 번호 6개가 일치하는 로또의 갯수를 리턴한다.")
@@ -71,9 +71,9 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
 
         //when
-        int countOfSixNumMatching = lottos.findCountOfSixNumMatching(winningLotto);
+        Long countOfSixNumMatching = lottos.findCountOfSixNumMatching(winningLotto);
 
         //then
-        assertThat(countOfSixNumMatching).isEqualTo(1);
+        assertThat(countOfSixNumMatching).isEqualTo(1L);
     }
 }
