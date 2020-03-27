@@ -60,7 +60,7 @@ public class Lottos {
         if (earningMoney == null) {
             return 0;
         }
-        return earningMoney.getMoney() / (this.lottos.size() * PRICE_TO_BUY_ONE_LOTTO);
+        return ((double) earningMoney.getMoney() / (this.lottos.size() * PRICE_TO_BUY_ONE_LOTTO)) * 100;
     }
 
     public List<Lotto> getLottos() {

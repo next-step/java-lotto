@@ -65,6 +65,6 @@ public class ResultView {
     }
 
     private static void printMyEarningRate(Lottos lottos, List<Integer> winningLotto) {
-        System.out.println("총 수익률은 " + lottos.calculateEarningRate(winningLotto) + " 입니다.");
+        System.out.println("총 수익률은 " + lottos.calculateEarningRate(winningLotto) + "% 입니다.");
     }
 }

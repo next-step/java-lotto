@@ -14,7 +14,7 @@ public class MainApplication {
         String inputPrice = InputProcessor.getPurchasePrice();
 
         LottoGame lottoGame = new LottoGame(InputView.of(inputPrice));
-        while (!lottoGame.isEnd()){
+        while (!lottoGame.isEnd()) {
             lottoGame.start(lottoNumGeneratorByAuto);
         }
         ResultView.printMyLottos(lottoGame);
