@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -13,22 +11,30 @@ public class LottoTicket {
     private final List<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
-        validateLottoSize(numbers);
-        validateLottoNumberRange(numbers);
+        validateSize(numbers);
+        validateNumberRange(numbers);
+        validateDuplicate(numbers);
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
-    private void validateLottoSize(List<Integer> numbers) {
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("번호는 6개만 지정 가능 합니다.");
         }
     }
 
-    private void validateLottoNumberRange(List<Integer> numbers) {
+    private void validateNumberRange(List<Integer> numbers) {
         for (Integer i : numbers) {
             if (i < 1 || i > 45) {
                 throw new IllegalArgumentException("번호는 1~ 45 사이의 정수만 가능 합니다.");
             }
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> duplicate = new HashSet<>(numbers);
+        if (numbers.size() != duplicate.size()) {
+            throw new IllegalArgumentException("번호는 중복될 수 없습니다.");
         }
     }
 

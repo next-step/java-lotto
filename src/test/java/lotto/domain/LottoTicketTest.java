@@ -80,4 +80,13 @@ public class LottoTicketTest {
                 () -> new LottoTicket(Arrays.asList(0, 2, 3, 4, 5, 45))
         ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 1~ 45 사이의 정수만 가능 합니다.");
     }
+
+    @DisplayName("번호 중복 체크")
+    @Test
+    public void validateDuplicate() throws Exception {
+        //given
+        assertThatThrownBy(
+                () -> new LottoTicket(Arrays.asList(1, 1, 3, 4, 5, 45))
+        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 중복될 수 없습니다.");
+    }
 }
