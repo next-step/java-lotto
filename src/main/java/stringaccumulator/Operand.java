@@ -2,8 +2,6 @@ package stringaccumulator;
 
 import java.util.Objects;
 
-import static stringaccumulator.Constant.ONLY_POSITIVE;
-
 public class Operand {
     private static final int ZERO = 0;
 
