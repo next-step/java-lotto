@@ -37,12 +37,12 @@ public class MoneyTest {
     @DisplayName("몇 개의 로또를 살 수 있는지 반환한다.")
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "1100:1", "15000:15", "14900:14"}, delimiter = ':')
-    void findLottoCountToBuyTest(Long input, int expected) {
+    void findLottoCountToBuyTest(Long input, long expected) {
         //given
         Money money = new Money(input);
 
         //when
-        int lottoCountToBuy = money.findLottoCountToBuy();
+        long lottoCountToBuy = money.findLottoCountToBuy();
 
         //then
         assertThat(lottoCountToBuy).isEqualTo(expected);
