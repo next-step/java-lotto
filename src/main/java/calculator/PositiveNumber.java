@@ -1,9 +1,9 @@
 package calculator;
 
-public class Number {
+public class PositiveNumber {
     private final int number;
 
-    public Number(int number) {
+    public PositiveNumber(int number) {
         this.number = validate(number);
     }
 
@@ -18,8 +18,8 @@ public class Number {
         return number;
     }
 
-    public Number sum(Number number) {
-        return new Number(this.number + number.number);
+    public PositiveNumber sum(PositiveNumber number) {
+        return new PositiveNumber(this.number + number.number);
     }
 
 }

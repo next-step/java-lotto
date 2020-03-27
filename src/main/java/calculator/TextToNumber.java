@@ -12,15 +12,15 @@ public class TextToNumber {
     public static final int MATCHING_PART = 1;
     public static final int DELIMETER_FORMULA = 2;
 
-    private List<Number> numbers;
+    private List<PositiveNumber> positiveNumbers;
 
     public TextToNumber(String inputText) {
-        this.numbers = convertToNumbers(convertToStrings(inputText));
+        this.positiveNumbers = convertToNumbers(convertToStrings(inputText));
     }
 
     public Integer sum() {
-        return numbers.stream()
-                .reduce(new Number(0), Number::sum)
+        return positiveNumbers.stream()
+                .reduce(new PositiveNumber(0), PositiveNumber::sum)
                 .getNumber();
     }
 
@@ -42,10 +42,10 @@ public class TextToNumber {
                 .collect(Collectors.toList());
     }
 
-    private List<Number> convertToNumbers(List<String> strings) {
+    private List<PositiveNumber> convertToNumbers(List<String> strings) {
         return strings.stream()
                 .map(this::parseToInt)
-                .map(Number::new)
+                .map(PositiveNumber::new)
                 .collect(Collectors.toList());
     }
 
