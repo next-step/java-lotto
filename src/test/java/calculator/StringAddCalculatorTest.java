@@ -22,7 +22,7 @@ public class StringAddCalculatorTest {
     @ValueSource(strings = {"0", "5", "22"})
     void calculate_inputOneNumber_returnOrigin(String input) {
         int result = StringAddCalculator.calculate(input);
-        assertThat(result).isEqualTo(input);
+        assertThat(result).isEqualTo(Integer.valueOf(input));
     }
 
     @ParameterizedTest
@@ -33,7 +33,7 @@ public class StringAddCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"//;\\n1;2;3/6, //-\\n4-9-3/16"}, delimiter = '/')
+    @CsvSource(value = {"//;#1;2;3|6", "//-#4-9-3|16"}, delimiter = '|')
     void calculate_inputCustomDelimiter_returnSum(String input, int expected) {
         int result = StringAddCalculator.calculate(input);
         assertThat(result).isEqualTo(expected);
