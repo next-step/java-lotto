@@ -23,4 +23,13 @@ public class MoneyTest {
             new Money(input);
         });
     }
+
+    @DisplayName("1000원 미만의 금액을 입력받으면 예외를 반환한다.")
+    @ParameterizedTest
+    @ValueSource(longs = {0, 500, 999})
+    void validateEnoughToBuyLottoTest(long input) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Money(input);
+        });
+    }
 }
