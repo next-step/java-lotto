@@ -1,14 +1,15 @@
 package lotto.domain;
 
-import lotto.dto.Price;
+import java.util.List;
 
 public class LotteryTickets {
-    private Price price;
-    public LotteryTickets(final Price price) {
-        this.price = price;
+    private final List<Lottery> lotteryTickets;
+
+    public LotteryTickets(final List<Lottery> lotteries) {
+        this.lotteryTickets = lotteries;
     }
 
     public int count() {
-        return price.lotteryCount();
+        return lotteryTickets.size();
     }
 }
