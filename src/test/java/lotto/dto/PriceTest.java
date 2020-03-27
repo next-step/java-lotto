@@ -20,9 +20,9 @@ class PriceTest {
         assertThat(actual).isEqualTo(expect);
     }
 
-    @DisplayName("구입 금액이 0원 이하일 경우 RuntimeException 을 발생한다.")
+    @DisplayName("구입 금액이 1000원 이하일 경우 RuntimeException 을 발생한다.")
     @ParameterizedTest
-    @ValueSource(ints = {0, -1})
+    @ValueSource(ints = {0, -1, 990})
     void negativeException(int price) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(
                 () -> new Price(price)
