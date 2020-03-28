@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-import static lotto.utils.LottoConstant.*;
+import static lotto.utils.LottoConstant.LOTTO_NUMBER_SIZE;
 
 public abstract class LottoTicket {
-    protected List<Integer> numbers;
+    protected List<LottoNumber> numbers;
 
-    protected LottoTicket(final List<Integer> numbers) {
+    protected LottoTicket(final List<LottoNumber> numbers) {
         validate(numbers);
 
         Collections.sort(numbers);
@@ -19,43 +18,26 @@ public abstract class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public Integer[] toArray() {
-        return numbers.toArray(new Integer[0]);
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 
-    private void validate(final List<Integer> numbers) {
+    private void validate(final List<LottoNumber> numbers) {
         validateNullOrEmpty(numbers);
-
-        List<Integer> distinctNumbers = numbers.stream()
-                .distinct()
-                .collect(Collectors.toList());
-        validateDistinct(distinctNumbers);
+        validateSize(numbers);
     }
 
-    private void validateNullOrEmpty(List<Integer> numbers) {
-        if(Objects.isNull(numbers) || numbers.isEmpty()) {
+    private void validateNullOrEmpty(final List<LottoNumber> numbers) {
+        if (Objects.isNull(numbers) || numbers.isEmpty()) {
             throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
         }
     }
 
-    private void validateDistinct(List<Integer> numbers) {
-        validateNumberRange(numbers);
-        validateSize(numbers);
-    }
-
-    private void validateSize(List<Integer> numbers) {
+    private void validateSize(final List<LottoNumber> numbers) {
         int size = (int) numbers.stream()
                 .distinct()
                 .count();
         if (size != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
-        }
-    }
-
-    private void validateNumberRange(List<Integer> numbers) {
-        boolean isAnyOutOfRange = numbers.stream()
-                .anyMatch(number -> number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER);
-        if(isAnyOutOfRange) {
             throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
         }
     }

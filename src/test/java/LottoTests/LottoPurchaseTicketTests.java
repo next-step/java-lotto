@@ -1,5 +1,6 @@
 package LottoTests;
 
+import LottoTests.model.LottoNumberAdaptor;
 import lotto.model.LottoPurchaseTicket;
 import lotto.model.LottoResult;
 import lotto.model.WinningLottoTicket;
@@ -29,9 +30,9 @@ public class LottoPurchaseTicketTests {
     @Test
     public void generateLottoNumberTest() {
         LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance();
-        assertThat(lottoPurchaseTicket.toArray())
+        assertThat(lottoPurchaseTicket.getNumbers())
                 .hasSize(6)
-                .allMatch(number -> number >= 1 && number <= 45);
+                .allMatch(number -> number.toInt() >= 1 && number.toInt() <= 45);
     }
 
     @DisplayName("로또 생성 오류 테스트")
@@ -40,7 +41,7 @@ public class LottoPurchaseTicketTests {
     @MethodSource("generateLottoExceptionTestCases")
     public void generateLottoExceptionTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoPurchaseTicket.newInstance(numbers))
+                .isThrownBy(() -> LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(numbers)))
                 .withMessageContaining("Lotto Ticket must have six distinct number.");
     }
 
@@ -60,15 +61,15 @@ public class LottoPurchaseTicketTests {
     }
 
     private static Stream<Arguments> checkLottoTicketTestCases() {
-        LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6)));
         return Stream.of(
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoResult.SIX),
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoResult.FIVE),
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 8, 7)), LottoResult.FOUR),
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 9, 8, 7)), LottoResult.THREE),
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 10, 9, 8, 7)), LottoResult.TWO),
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 11, 10, 12, 13, 14)), LottoResult.ONE),
-                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(7, 8, 9, 10, 11, 12)), LottoResult.NONE)
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6))), LottoResult.SIX),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 7))), LottoResult.FIVE),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 8, 7))), LottoResult.FOUR),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 9, 8, 7))), LottoResult.THREE),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 10, 9, 8, 7))), LottoResult.TWO),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 11, 10, 12, 13, 14))), LottoResult.ONE),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(7, 8, 9, 10, 11, 12))), LottoResult.NONE)
         );
     }
 

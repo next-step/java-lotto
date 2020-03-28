@@ -1,8 +1,8 @@
 package LottoTests;
 
+import LottoTests.model.LottoNumberAdaptor;
 import lotto.model.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,7 +22,7 @@ public class WinningLottoTicketTests {
     @ParameterizedTest
     @MethodSource("generateWinningLottoTestCases")
     public void generateWinningLottoTest(List<Integer> numbers) {
-        assertThatCode(() -> WinningLottoTicket.newInstance(numbers)).doesNotThrowAnyException();
+        assertThatCode(() -> WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(numbers))).doesNotThrowAnyException();
     }
 
     @DisplayName("당첨 로또 생성 오류 테스트")
@@ -31,22 +31,22 @@ public class WinningLottoTicketTests {
     @MethodSource("generateWinningLottoExceptionTestCases")
     public void generateLottoExceptionTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> WinningLottoTicket.newInstance(numbers))
+                .isThrownBy(() -> WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(numbers)))
                 .withMessageContaining("Lotto Ticket must have six distinct number.");
     }
 
     private static Stream<Arguments> generateWinningLottoTestCases() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1,2,3,4,5,6)),
-                Arguments.of(Arrays.asList(10,20,30,40,41,42))
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Arguments.of(Arrays.asList(10, 20, 30, 40, 41, 42))
         );
     }
 
     private static Stream<Arguments> generateWinningLottoExceptionTestCases() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1,2,3,4,5,6,7)),
-                Arguments.of(Arrays.asList(1,2,3,4,5,60)),
-                Arguments.of(Arrays.asList(-1,2,3,0,5,6))
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 60)),
+                Arguments.of(Arrays.asList(-1, 2, 3, 0, 5, 6))
         );
     }
 }

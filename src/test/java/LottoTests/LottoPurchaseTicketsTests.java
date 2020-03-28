@@ -1,5 +1,6 @@
 package LottoTests;
 
+import LottoTests.model.LottoNumberAdaptor;
 import lotto.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,9 +21,9 @@ public class LottoPurchaseTicketsTests {
     @BeforeEach
     void init() {
         lottoTickets = Arrays.asList(
-                LottoPurchaseTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoPurchaseTicket.newInstance(Arrays.asList(1, 2, 3, 36, 41, 45)),
-                LottoPurchaseTicket.newInstance(Arrays.asList(1, 2, 3, 4, 19, 20))
+                LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6))),
+                LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 36, 41, 45))),
+                LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 19, 20)))
         );
     }
 
@@ -36,7 +37,7 @@ public class LottoPurchaseTicketsTests {
     @Test
     public void checkAllTest() {
         LottoPurchaseTickets lottoPurchaseTickets = LottoPurchaseTickets.create(lottoTickets);
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR));
 
         assertThat(lottoPurchaseTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);

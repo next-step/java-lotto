@@ -14,7 +14,7 @@ public class LottoGeneratorTests {
     public void generateAutomaticTest() {
         assertThat(AutomaticLottoGenerator.generate())
                 .hasSize(6)
-                .allMatch(number -> number >= 1 && number <= 45);
+                .allMatch(number -> number.toInt() >= 1 && number.toInt() <= 45);
     }
 
 }
