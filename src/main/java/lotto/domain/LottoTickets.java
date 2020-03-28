@@ -23,7 +23,7 @@ public class LottoTickets {
                 .collect(toList());
     }
 
-    public List<LottoRank> checkRank(LottoNumber winningNumber) {
+    public List<LottoRank> checkRank(WinningNumber winningNumber) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.checkPrize(winningNumber))
                 .collect(toList());

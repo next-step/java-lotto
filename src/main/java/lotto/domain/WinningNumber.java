@@ -7,7 +7,7 @@ public class WinningNumber extends LottoNumber {
 
     public WinningNumber(List<Integer> lottoNumber, int bonusNumber) {
         super(lottoNumber);
-        this.bonusNumber = new BonusNumber(bonusNumber);
+        this.bonusNumber = new BonusNumber(lottoNumber, bonusNumber);
     }
 
     public boolean isMatchBonusNumber(LottoNumber winningNumber) {

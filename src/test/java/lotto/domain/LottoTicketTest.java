@@ -28,7 +28,7 @@ class LottoTicketTest {
         LottoNumber game2 = new LottoNumber(Arrays.asList(7, 8, 9, 10, 11, 12));
         LottoTickets boughtTickets = new LottoTickets(game1, game2);
 
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(5, 6, 7, 8, 9, 10));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(5, 6, 7, 8, 9, 10), 11);
         List<LottoRank> lottoGameResult = boughtTickets.checkRank(winningNumber);
 
         assertThat(lottoGameResult).hasSize(2);

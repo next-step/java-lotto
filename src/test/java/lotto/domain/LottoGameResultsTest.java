@@ -14,7 +14,7 @@ class LottoGameResultsTest {
     public void lottoGameResultTest() {
         LottoNumber lottoNumber1 = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber2 = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber1, lottoNumber2);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
@@ -25,7 +25,7 @@ class LottoGameResultsTest {
     @Test
     public void lottoProfitRateTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 10, 11, 12));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 10, 11, 12), 13);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
@@ -36,7 +36,7 @@ class LottoGameResultsTest {
     @Test
     public void matchedTwoPrizeTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 7, 10, 11, 12));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 7, 10, 11, 12), 13);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
@@ -50,7 +50,7 @@ class LottoGameResultsTest {
     @Test
     public void matchedThreePrizeTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 10, 11, 12));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 10, 11, 12), 13);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
@@ -64,7 +64,7 @@ class LottoGameResultsTest {
     @Test
     public void matchedFourPrizeTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 11, 12));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 11, 12), 13);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
@@ -78,7 +78,7 @@ class LottoGameResultsTest {
     @Test
     public void matchedFivePrizeTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 12));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 12), 13);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
@@ -92,7 +92,7 @@ class LottoGameResultsTest {
     @Test
     public void matchedSixPrizeTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 13);
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 

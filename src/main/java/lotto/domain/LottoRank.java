@@ -10,6 +10,7 @@ public enum LottoRank {
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
+    FIVE_BONUS(51, 300_000_000),
     SIX(6, 2_000_000_000);
 
     private static Map<Integer, LottoRank> levels = new HashMap<>();
@@ -21,6 +22,7 @@ public enum LottoRank {
         levels.put(3, THREE);
         levels.put(4, FOUR);
         levels.put(5, FIVE);
+        levels.put(51, FIVE_BONUS);
         levels.put(6, SIX);
     }
 

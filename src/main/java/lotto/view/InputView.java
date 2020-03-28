@@ -11,6 +11,7 @@ import static lotto.domain.Constant.*;
 public class InputView {
     private static final String REQUEST_MONEY_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String COMMA = ",";
 
     public InputView() {
@@ -38,6 +39,19 @@ public class InputView {
         return winningNumber;
     }
 
+    public static int requestBonusNumber(List<Integer> winningNumber) {
+        System.out.println(REQUEST_BONUS_NUMBER);
+        Scanner scanner = new Scanner(System.in);
+        String inputBonusString = scanner.nextLine();
+        int bonusNumber = parseIntForLottoNum(inputBonusString);
+        winningNumber.stream()
+                .filter(e -> e.equals(bonusNumber))
+                .findFirst()
+                .ifPresent(integer -> new IllegalArgumentException("아이야이야"));
+
+        return bonusNumber;
+    }
+
     private static List<Integer> getWinningNumber(String[] inputValue) {
         return asList(inputValue).stream()
                 .map(InputView::parseIntForLottoNum)
@@ -62,7 +76,6 @@ public class InputView {
         if (LOTTO_NUM_MIN <= lottoNumber && lottoNumber <= LOTTO_NUM_MAX) {
             return lottoNumber;
         }
-        System.out.println(lottoNumber);
         throw new OutOfRangeException();
     }
 }

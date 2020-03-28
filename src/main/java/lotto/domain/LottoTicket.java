@@ -11,9 +11,16 @@ public class LottoTicket {
         this.lottoTicket = lottoNumber;
     }
 
-    public LottoRank checkPrize(LottoNumber winningNumber) {
+    public LottoRank checkPrize(WinningNumber winningNumber) {
         int matchCount = (int) lottoTicket.getMatchCountInLottoNumber(winningNumber);
+        if (isMatchFiveAndBonus(winningNumber, matchCount)) {
+            return LottoRank.FIVE_BONUS;
+        }
         return LottoRank.of(matchCount);
+    }
+
+    private boolean isMatchFiveAndBonus(WinningNumber winningNumber, int matchCount) {
+        return matchCount == 5 && winningNumber.isMatchBonusNumber(lottoTicket);
     }
 
     @Override

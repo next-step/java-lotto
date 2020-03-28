@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
 
 public class LottoGame {
@@ -15,8 +13,8 @@ public class LottoGame {
         return new LottoTickets(gameCount);
     }
 
-    public LottoGameResults getResults(LottoTickets boughtTickets, List<Integer> winningNumber) {
-        return LottoGameMatcher.matchWinningNumber(boughtTickets, new LottoNumber(winningNumber));
+    public LottoGameResults getResults(LottoTickets boughtTickets, WinningNumber winningNumber) {
+        return LottoGameMatcher.matchWinningNumber(boughtTickets, winningNumber);
     }
 
     private int calculateAutoGameCount(LottoMoney lottoMoney) {

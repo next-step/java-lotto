@@ -23,9 +23,9 @@ public class LottoGameResults {
         return getWinningPrizeSum() / (double) (winningGames.size() * DEFAULT_GAME_PRICE);
     }
 
-    public long getMatchCount(int index) {
+    public long getMatchCount(int matchCount) {
         return winningGames.stream()
-                .filter(ticketRank -> isMatch(ticketRank.getMatchCount(), index))
+                .filter(lottoRank -> isMatch(lottoRank.getMatchCount(), matchCount))
                 .count();
     }
 
@@ -41,4 +41,5 @@ public class LottoGameResults {
     private boolean isMatch(int matchCount, int checkPoint) {
         return matchCount == checkPoint;
     }
+
 }

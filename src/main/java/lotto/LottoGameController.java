@@ -3,8 +3,11 @@ package lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGameResults;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+
+import java.util.List;
 
 public class LottoGameController {
 
@@ -13,7 +16,10 @@ public class LottoGameController {
         LottoTickets boughtTickets = lottoGame.buy(InputView.requestMoney());
         boughtTickets.print();
 
-        LottoGameResults results = lottoGame.getResults(boughtTickets, InputView.requestWinningNumber());
+        List<Integer> lottoNumber = InputView.requestWinningNumber();
+        int bonusNumber = InputView.requestBonusNumber(lottoNumber);
+        WinningNumber winningNumber = new WinningNumber(lottoNumber, bonusNumber);
+        LottoGameResults results = lottoGame.getResults(boughtTickets, winningNumber);
         ResultView.print(results);
     }
 }
