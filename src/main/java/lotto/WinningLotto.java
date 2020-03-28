@@ -16,6 +16,22 @@ public class WinningLotto {
         return this.winningLotto;
     }
 
+    public int getMatchedCount(Lotto lotto) {
+        int matchedCount = 0;
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            matchedCount += CountingMatched(lottoNumber);
+        }
+        return matchedCount;
+    }
+
+    private int CountingMatched(LottoNumber lottoNumber) {
+        if (this.winningLotto.getLottoNumbers().stream()
+                .anyMatch(l -> l.getLottoNumber() == lottoNumber.getLottoNumber())) {
+            return 1;
+        }
+        return 0;
+    }
+
     private Lotto convertToLotto(String winningNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String s : winningNumbers.split(LOTTO_WINNING_NUMBER_SPLIT_KEYWORD)) {
