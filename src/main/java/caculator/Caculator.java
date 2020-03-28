@@ -8,6 +8,7 @@ public class Caculator {
     private static final int NORMAL_VALUE = 1;
     private static final String SPLIT_TEXT = ",|:";
     private static final String MINUS_OPERATOR = "-";
+    private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
 
     private String inputText;
 
@@ -30,7 +31,7 @@ public class Caculator {
         return Integer.parseInt(inputText);
     }
 
-    public int splitNumberAndCharater(String inputText) {
+    public int splitNumberAndCharacter(String inputText) {
         String[] numbers = getNumbers(inputText, SPLIT_TEXT);
         return sumNumbers(numbers);
     }
@@ -48,7 +49,7 @@ public class Caculator {
     }
 
     public int splitNumberAndCustomSeparator(String inputText) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputText);
+        Matcher matcher = Pattern.compile(CUSTOM_SPLIT_REGEX).matcher(inputText);
         if (!matcher.find()) { return 0; }
 
         String[] numbers = getNumbers(matcher.group(2), matcher.group(1));
