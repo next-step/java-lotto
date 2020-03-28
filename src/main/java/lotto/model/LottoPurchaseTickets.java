@@ -27,4 +27,8 @@ public class LottoPurchaseTickets {
 
         return LottoResults.create(lottoResults);
     }
+
+    public int size() {
+        return lottoTickets.size();
+    }
 }

@@ -10,13 +10,13 @@ public class LottoStore {
     private static final Integer LOTTO_PRICE = 1000;
 
     private LottoStore() {
-
     }
-    public static LottoTickets sell(final Integer payment) {
-        Integer lottoCount = payment / LOTTO_PRICE;
+
+    public static LottoPurchaseTickets sell(final Integer payment) {
+        int lottoCount = payment / LOTTO_PRICE;
         List<LottoPurchaseTicket> lottoPurchaseTickets = IntStream.range(0, lottoCount)
                 .mapToObj(i -> LottoPurchaseTicket.newInstance(AutomaticLottoGenerator.generate()))
                 .collect(Collectors.toList());
-        return LottoTickets.create(lottoPurchaseTickets);
+        return LottoPurchaseTickets.create(lottoPurchaseTickets);
     }
 }
