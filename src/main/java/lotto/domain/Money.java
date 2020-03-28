@@ -24,12 +24,12 @@ public class Money {
         return new Money(this.money + money.money);
     }
 
-    public Money divide(Money money) {
-        return new Money(this.money / money.money);
+    public Money divide(double count) {
+        return new Money(this.money / count);
     }
 
-    public Money multiply(Money money) {
-        return new Money(this.money * money.money);
+    public Money multiply(double count) {
+        return new Money(this.money * count);
     }
 
     public double getMoney() {

@@ -53,10 +53,9 @@ public class MoneyTest {
     public void divide(double int1, double int2, double expect) throws Exception {
         //given
         Money money1 = new Money(int1);
-        Money money2 = new Money(int2);
 
         //when
-        money1 = money1.divide(money2);
+        money1 = money1.divide(int2);
 
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);
@@ -68,10 +67,9 @@ public class MoneyTest {
     public void multiply(double int1, double int2, double expect) throws Exception {
         //given
         Money money1 = new Money(int1);
-        Money money2 = new Money(int2);
 
         //when
-        money1 = money1.multiply(money2);
+        money1 = money1.multiply(int2);
 
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);
