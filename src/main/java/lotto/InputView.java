@@ -4,7 +4,6 @@ public class InputView {
     private static final int MIN_PURCHASE_AMOUNT = 1000;
 
     private int purchaseAmount;
-    private int purchaseCount;
 
     public InputView(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
