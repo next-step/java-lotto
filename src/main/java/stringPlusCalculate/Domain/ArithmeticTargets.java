@@ -13,10 +13,6 @@ public class ArithmeticTargets {
         this.arithmeticTargets = arithmeticTargets;
     }
 
-    public static ArithmeticTargets createByDoubleList(List<Double> arithmeticTargets) {
-        return new ArithmeticTargets(arithmeticTargets);
-    }
-
     public static ArithmeticTargets createByStringList(List<String> arithmeticTargets) {
         List<Double> castCollect = arithmeticTargets.stream().mapToDouble(Double::parseDouble).boxed().collect(Collectors.toList());
         return new ArithmeticTargets(castCollect);
