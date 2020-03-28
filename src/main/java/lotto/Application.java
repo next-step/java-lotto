@@ -11,6 +11,8 @@ public class Application {
         InputView inputView = new InputView();
 
         Lotteries lotteries = lotto.buy(inputView.inputPrice());
+
         OutputView.printLotteryCount(lotteries.count());
+        OutputView.printLotteries(lotteries.getLottoNumbers());
     }
 }
