@@ -7,9 +7,6 @@ public class Lottery {
 
     private List<LottoNumber> lottoNumbers;
 
-    // 테스트를 위해 임시로 기본 생성자 추가
-    public Lottery() { }
-
     public Lottery(final List<LottoNumber> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
