@@ -1,10 +1,14 @@
 package lotto.domain.item;
 
+import lotto.exception.CloneFailException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class LottoTickets {
+
+public class LottoTickets implements Cloneable {
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT3 = 3;
     private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT4 = 4;
@@ -53,4 +57,34 @@ public class LottoTickets {
 //
 //        return (earning.getMoney() / (this.money.getHowManyBuyItem(lottoPrice) * lottoPrice.getMoney()) * 100);
 //    }
+
+
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(tickets, that.tickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tickets);
+    }
+
+    @Override
+    protected LottoTickets clone() {
+        LottoTickets clone = null;
+        try {
+            clone = (LottoTickets) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new CloneFailException("객체 클론 실패");
+        }
+
+        return clone;
+    }
 }

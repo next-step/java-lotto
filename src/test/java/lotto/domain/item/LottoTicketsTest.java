@@ -59,4 +59,17 @@ class LottoTicketsTest {
                         .isEqualTo(2)
         );
     }
+
+    @DisplayName("객체 복사 테스트")
+    @Test
+    public void clone_test() throws Exception {
+        //given
+        LottoTickets lottoTickets = new LottoTickets(ticketList);
+
+        //when
+        LottoTickets clone = (LottoTickets) lottoTickets.clone();
+
+        //then
+        assertThat(lottoTickets == clone).isFalse();
+    }
 }
