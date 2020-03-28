@@ -1,18 +1,24 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+
 import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
 
 public class Money {
-    private final int money;
+    private final BigDecimal money;
 
-    private Money(int money) {
+    Money(int money) {
         this.money = validate(money);
     }
 
-    public static int validate(int money) {
+    public BigDecimal validate(int money) {
         if (money < DEFAULT_GAME_PRICE) {
             throw new NotEnoughtMoneyException();
         }
-        return money;
+        return new BigDecimal(money);
+    }
+
+    public Double getPaidTotal() {
+        return money.doubleValue();
     }
 }

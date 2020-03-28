@@ -7,10 +7,12 @@ import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
 import static lotto.domain.Constant.ZERO_INDEX;
 
 public class LottoGame {
+    private final Money money;
     private final int gameCount;
 
     public LottoGame(int money) {
-        this.gameCount = Math.floorDiv(Money.validate(money), DEFAULT_GAME_PRICE);
+        this.money = new Money(money);
+        this.gameCount = Math.floorDiv(money, DEFAULT_GAME_PRICE);
     }
 
     public int getGameCount() {
