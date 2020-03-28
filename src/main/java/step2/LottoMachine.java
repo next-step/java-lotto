@@ -13,7 +13,6 @@ public class LottoMachine {
         for(int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
-
         return new Lottos(lottos);
     }
 }
