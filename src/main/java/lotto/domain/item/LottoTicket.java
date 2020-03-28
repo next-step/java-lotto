@@ -2,7 +2,7 @@ package lotto.domain.item;
 
 import java.util.*;
 
-public class LottoTicket implements Item {
+public class LottoTicket {
 
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int LOTTO_MIN_NUMBER_SIZE = 1;
