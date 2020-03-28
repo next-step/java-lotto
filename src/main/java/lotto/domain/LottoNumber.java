@@ -20,7 +20,7 @@ public class LottoNumber {
                 .count();
     }
 
-    private List<Integer> getLottoNumber() {
+    protected List<Integer> getLottoNumber() {
         return lottoNumber;
     }
 
