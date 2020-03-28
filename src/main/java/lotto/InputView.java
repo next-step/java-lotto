@@ -19,4 +19,5 @@ public class InputView {
     public int getPurchaseCount() {
         return purchaseAmount / MIN_PURCHASE_AMOUNT;
     }
+
 }

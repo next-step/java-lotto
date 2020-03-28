@@ -12,10 +12,12 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class CaculatorTest {
 
+    private InputView inputView;
     private Caculator caculator;
 
     @BeforeEach
     void setUp() {
+        inputView = new InputView();
         caculator = new Caculator();
     }
 
@@ -23,7 +25,7 @@ class CaculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullOrEmptyInputText(String input) {
-        int result = caculator.validateInputText(input);
+        int result = inputView.validateInputText(input);
         assertThat(result).isEqualTo(0);
     }
 
@@ -60,7 +62,7 @@ class CaculatorTest {
     @Test
     void inputTextIsNegative() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-            caculator.inputTextIsNegative("-1,2,3");
+            inputView.inputTextIsNegative("-1,2,3");
         });
 
         assertThat(runtimeException.getMessage()).isEqualTo("음수가 들어 올 수 없습니다.");
