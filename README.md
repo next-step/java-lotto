@@ -58,7 +58,8 @@
 4. 이 숫자는 1~45의 정수이다. 중복될 수 없다.  
 > LottoNumber(일급 컬렉션) 
 5. 당첨 번호를 6개 입력한다.  
-> WinningLotto  
+> ~~WinningLotto~~
+> 기존의 Lotto을 이용한다. Lotto에 직접 Number 목록을 받아 Lotto를 create 하는 메소드를 생성한다.  
 6. 각 로또 티켓별 당첨 숫자 개수를 도출하여 1,2,3,4등을 도출한다.  
 > LottoRank (Enum??)  
 7. 구매 금액 대비 당첨금으로 수익률을 계산한다.  
