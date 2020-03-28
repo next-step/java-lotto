@@ -1,6 +1,7 @@
 package lotto.domain.statisitc;
 
 import lotto.domain.item.Item;
+import lotto.domain.item.MatchLotto;
 
 import java.util.ArrayList;
 import java.util.List;

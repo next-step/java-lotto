@@ -1,6 +1,4 @@
-package lotto.domain.statisitc;
-
-import lotto.domain.item.Item;
+package lotto.domain.item;
 
 import java.util.ArrayList;
 import java.util.List;

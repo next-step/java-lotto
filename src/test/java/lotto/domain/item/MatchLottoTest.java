@@ -1,8 +1,5 @@
-package lotto.domain.statisitc;
+package lotto.domain.item;
 
-import lotto.domain.item.Item;
-import lotto.domain.item.LottoTicket;
-import lotto.domain.statisitc.MatchLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
