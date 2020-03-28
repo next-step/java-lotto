@@ -1,16 +1,19 @@
 package calculator.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Numbers {
     private static final int ZERO = 0;
 
-    private final String[] numbers;
+    private final List<String> numbers;
 
     public Numbers(String[] numbers) {
         for (String number : numbers) {
             isNumber(number);
             checkNegativeNum(number);
         }
-        this.numbers = numbers;
+        this.numbers = Arrays.asList(numbers);
     }
 
     public int sum() {
