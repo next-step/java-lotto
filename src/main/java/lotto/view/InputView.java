@@ -11,7 +11,6 @@ import static lotto.domain.Constant.*;
 public class InputView {
     private static final String REQUEST_MONEY_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-
     private static final String COMMA = ",";
 
     public InputView() {
