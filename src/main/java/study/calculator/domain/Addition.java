@@ -10,9 +10,11 @@ public class Addition {
 
     public static int sum(List<Operand> operands) {
         int result = 0;
+
         for (Operand operand : operands) {
             result += operand.getOperand();
         }
+
         return result;
     }
 }

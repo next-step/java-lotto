@@ -10,15 +10,16 @@ public class Splitter {
             Arrays.asList("?", "*", "+", "(", ")", "[", "]", "{", "}");
 
     private Splitter() {
-
     }
 
     public static List<String> split(String text) {
         if (Objects.isNull(text)) {
             return Collections.emptyList();
         }
+
         List<String> piecesByCustomDelimiter =
                 splitWithCustomDelimiter(text);
+
         return splitWithDefaultDelimiter(piecesByCustomDelimiter);
     }
 
@@ -26,9 +27,11 @@ public class Splitter {
             List<String> texts) {
         String delimitersRegEx = String.join("|", DEFAULT_DELIMITERS);
         List<String> pieces = new ArrayList<>();
+
         for (String text : texts) {
             pieces.addAll(Arrays.asList(text.split(delimitersRegEx)));
         }
+
         return pieces;
     }
 
@@ -36,11 +39,13 @@ public class Splitter {
             String text) {
         String customDelimiter =
                 escapeRegExKeyword(findCustomDelimiter(text));
+
         if (Objects.isNull(customDelimiter)) {
             return Collections.singletonList(text);
         }
         String operandsWithoutCustomDelimiter =
                 removeCustomDelimiter(text);
+
         return Arrays
                 .asList(operandsWithoutCustomDelimiter.split(customDelimiter));
     }
@@ -48,6 +53,7 @@ public class Splitter {
     private static String findCustomDelimiter(String text) {
         Matcher m =
                 Pattern.compile("//(?<delimiter>.*)\\\\n").matcher(text);
+
         if (m.find()) {
             return m.group("delimiter");
         }
@@ -59,6 +65,7 @@ public class Splitter {
         if (REGEX_KEYWORDS.contains(keyword)) {
             return "\\" + keyword;
         }
+        
         return keyword;
     }
 

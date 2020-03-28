@@ -46,5 +46,4 @@ public class StringAdditionTest {
                 Arguments.of("//?\\n1,2?3", 6)
         );
     }
-
 }

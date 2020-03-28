@@ -8,11 +8,12 @@ public class StringAddition {
             return 0;
         }
         List<String> stringOperands = Splitter.split(operandWithDelimiter);
-
         List<Operand> operands = new ArrayList<>();
+        
         for (String stringOperand : stringOperands) {
             operands.add(Operand.getInstance(stringOperand));
         }
+
         return Addition.sum(operands);
     }
 }
