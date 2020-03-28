@@ -1,6 +1,6 @@
 package LottoTests;
 
-import lotto.model.LottoTicket;
+import lotto.model.LottoPurchaseTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,19 +15,19 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 한장 테스트")
-public class LottoTicketTests {
+public class LottoPurchaseTicketTests {
 
     @DisplayName("로또 생성 테스트")
     @Test
     public void generateLottoTest() {
-        assertThatCode(() -> LottoTicket.newInstance()).doesNotThrowAnyException();
+        assertThatCode(() -> LottoPurchaseTicket.newInstance()).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 생성 번호 테스트")
     @Test
     public void generateLottoNumberTest() {
-        LottoTicket lottoTicket = LottoTicket.newInstance();
-        assertThat(lottoTicket.toArray)
+        LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance();
+        assertThat(lottoPurchaseTicket.toArray)
                 .hasSize(6)
                 .allmatch(number -> number >= 1 && number <= 45);
     }
@@ -38,15 +38,15 @@ public class LottoTicketTests {
     @MethodSource("generateLottoExceptionTestCases")
     public void generateLottoExceptionTest(List<Integer> numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.newInstance(numbers))
+                .isThrownBy(() -> LottoPurchaseTicket.newInstance(numbers))
                 .withMessageContaining("Lotto Ticket must have six distinct number.");
     }
 
     @DisplayName("로또 결과 확인 테스트")
     @ParameterizedTest
     @MethodSource("checkLottoTicketTestCases")
-    public void checkLottoTicketTest(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket, LottoResult lottoResult) {
-        assertThat(lottoTicket.check(winningLottoTicket)).isEqualTo(lottoResult);
+    public void checkLottoTicketTest(LottoPurchaseTicket lottoPurchaseTicket, WinningLottoTicket winningLottoTicket, LottoResult lottoResult) {
+        assertThat(lottoPurchaseTicket.check(winningLottoTicket)).isEqualTo(lottoResult);
     }
 
     private static Stream<Arguments> generateLottoExceptionTestCases() {
@@ -58,15 +58,15 @@ public class LottoTicketTests {
     }
 
     private static Stream<Arguments> checkLottoTicketTestCases() {
-        LottoTicket lottoTicket = LottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
         return Stream.of(
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoResult.SIX),
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoResult.FIVE),
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 8, 7)), LottoResult.FOUR),
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 9, 8, 7)), LottoResult.THREE),
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 10, 9, 8, 7)), LottoResult.TWO),
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 11, 10, 12, 13, 14)), LottoResult.ONE),
-                Arguments.of(lottoTicket, WinningLottoTicket.newInstance(Arrays.asList(7, 8, 9, 10, 11, 12)), LottoResult.NONE)
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoResult.SIX),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoResult.FIVE),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 8, 7)), LottoResult.FOUR),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 9, 8, 7)), LottoResult.THREE),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 2, 10, 9, 8, 7)), LottoResult.TWO),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(1, 11, 10, 12, 13, 14)), LottoResult.ONE),
+                Arguments.of(lottoPurchaseTicket, WinningLottoTicket.newInstance(Arrays.asList(7, 8, 9, 10, 11, 12)), LottoResult.NONE)
         );
     }
 

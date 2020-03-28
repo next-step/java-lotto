@@ -10,7 +10,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 @DisplayName("로또 여러 장 테스트")
-public class LottoTicketsTests {
+public class LottoPurchaseTicketsTests {
 
     private List<LottoTicket> lottoTickets = new ArrayList<>();
 

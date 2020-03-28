@@ -7,14 +7,14 @@ import java.util.Objects;
 
 import static lotto.utils.LottoConstant.*;
 
-public class LottoTicket {
+public class WinningLottoTicket {
     private List<Integer> numbers;
 
-    private LottoTicket(final List<Integer> numbers) {
+    private WinningLottoTicket(final List<Integer> numbers) {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public static LottoTicket newInstance(List<Integer> numbers) {
+    public static WinningLottoTicket newInstance(List<Integer> numbers) {
         if(Objects.isNull(numbers) || numbers.isEmpty()) {
             throw new IllegalArgumentException("lotto numbers is null or empty");
         }
@@ -34,14 +34,6 @@ public class LottoTicket {
         }
 
         Collections.sort(numbers);
-        return new LottoTicket(numbers);
-    }
-
-    public LottoResult check(WinningLottoTicket winningLottoTicket) {
-        int count = winningLottoTicket.toArray()
-                .stream()
-                .filter(number -> numbers.contains(number))
-                .count();
-        return LottoResult.of(count);
+        return new WinningLottoTicket(numbers);
     }
 }
