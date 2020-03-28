@@ -13,7 +13,7 @@ public class LottoGenerator {
         List<Integer> pool = new ArrayList<>();
 
         pool = makeLottoPool();
-        pool.subList(0, LOTTO_HAVE_NUMBER_SIZE);
+        pool = pool.subList(0, LOTTO_HAVE_NUMBER_SIZE);
         Collections.sort(pool);
 
         return pool;
