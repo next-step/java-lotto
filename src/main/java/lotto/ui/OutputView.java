@@ -1,9 +1,11 @@
 package lotto.ui;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 	private static final String BUY_COUNT_FORMAT = "%d개를 구매했습니다.";
@@ -25,11 +27,18 @@ public class OutputView {
 		System.out.println(STATISTIC_START_MSG);
 
 		lottoResult.getWinningMap()
-				.forEach((lottoRank, count) -> {
-					System.out.println(String.format(STATISTIC_RANK_FORMAT, lottoRank.getCorrectNumbers(), lottoRank.getEarningPrize(), count));
-				});
+				.entrySet()
+				.forEach(this::printLottoRankEntry);
 
 		System.out.println(String.format(STATISTIC_YIELD_FORMAT, lottoResult.getYield()));
+	}
+
+	private void printLottoRankEntry(Map.Entry<LottoRank, Long> winningEntry) {
+		System.out.println(
+				String.format(STATISTIC_RANK_FORMAT,
+						winningEntry.getKey().getCorrectNumbers(),
+						winningEntry.getKey().getEarningPrize(),
+						winningEntry.getValue()));
 	}
 
 }

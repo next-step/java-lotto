@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoResult {
 
@@ -10,12 +10,27 @@ public class LottoResult {
 	private final long spentMoney;
 
 	LottoResult(Map<LottoRank, Long> winningMap, long spentMoney) {
-		this.winningMap = Collections.unmodifiableMap(winningMap);
+		this.winningMap = Collections.unmodifiableMap(makeZeroPaddingEnumMap(winningMap));
 		this.spentMoney = spentMoney;
+	}
+
+	private Map<LottoRank, Long> makeZeroPaddingEnumMap(Map<LottoRank, Long> winningMap) {
+		Map<LottoRank, Long> rankMap = Arrays.stream(LottoRank.values())
+				.collect(Collectors.toMap(Function.identity(), rank -> 0L, Long::sum, LinkedHashMap::new));
+		winningMap.forEach(rankMap::replace);
+		return rankMap;
 	}
 
 	public Map<LottoRank, Long> getWinningMap() {
 		return winningMap;
+	}
+
+	public double getYield() {
+		return winningMap
+				.entrySet()
+				.stream()
+				.mapToLong(entry -> entry.getKey().getEarningPrize() * entry.getValue())
+				.sum() / (double) spentMoney;
 	}
 
 	@Override
@@ -29,13 +44,5 @@ public class LottoResult {
 	@Override
 	public int hashCode() {
 		return Objects.hash(winningMap);
-	}
-
-	public double getYield() {
-		return winningMap
-				.entrySet()
-				.stream()
-				.mapToLong(entry -> entry.getKey().getEarningPrize() * entry.getValue())
-				.sum() / (double) spentMoney;
 	}
 }
