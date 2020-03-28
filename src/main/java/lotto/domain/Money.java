@@ -24,6 +24,11 @@ public class Money {
         return money;
     }
 
+    public int getHowManyBuyItem(Money itemPrice) {
+        return this.money / itemPrice.money;
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

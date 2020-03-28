@@ -46,4 +46,20 @@ public class MoneyTest {
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);
     }
+
+    @DisplayName("입력 급액으로 몇개가 구매 가능한지 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"10000:1000:10", "5000:1000:5", "5000:500:10"}, delimiter = ':')
+    public void getHowManyBuyItem(int myMoney, int itemPrice, int count) throws Exception {
+        //given
+        Money money = new Money(myMoney);
+        Money price = new Money(itemPrice);
+
+        //when
+        int howManyBuyItem = money.getHowManyBuyItem(price);
+
+        //then
+        assertThat(howManyBuyItem).isEqualTo(count);
+    }
+
 }
