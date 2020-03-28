@@ -5,7 +5,7 @@ import java.util.*;
 public class LottoTicket implements Item {
 
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int LOTTO_Min_NUMBER_SIZE = 1;
+    private static final int LOTTO_MIN_NUMBER_SIZE = 1;
     private static final int LOTTO_MAX_NUMBER_SIZE = 45;
 
     private final List<Integer> numbers;
@@ -33,7 +33,7 @@ public class LottoTicket implements Item {
 
     private void validateNumberRange(List<Integer> numbers) {
         for (Integer i : numbers) {
-            if (i < LOTTO_Min_NUMBER_SIZE || i > LOTTO_MAX_NUMBER_SIZE) {
+            if (i < LOTTO_MIN_NUMBER_SIZE || i > LOTTO_MAX_NUMBER_SIZE) {
                 throw new IllegalArgumentException("번호는 1~ 45 사이의 정수만 가능 합니다.");
             }
         }

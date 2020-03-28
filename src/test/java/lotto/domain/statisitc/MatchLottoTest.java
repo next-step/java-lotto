@@ -1,4 +1,4 @@
-package lotto.domain.statistic;
+package lotto.domain.statisitc;
 
 import lotto.domain.item.Item;
 import lotto.domain.item.LottoTicket;
