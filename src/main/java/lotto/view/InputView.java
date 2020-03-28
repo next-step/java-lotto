@@ -34,7 +34,7 @@ public class InputView {
 
         List<Integer> winningNumber = getWinningNumber(inputValue);
         if (winningNumber.size() != LOTTO_NUM_COUNT_LIMIT) {
-            throw new InvalidWinningNumberException();
+            throw new InvalidWinningNumberException("당첨 번호는 6개의 숫자만 입력할 수 있습니다.");
         }
         return winningNumber;
     }
@@ -55,7 +55,7 @@ public class InputView {
         try {
             return Integer.parseInt(lottoNumString);
         } catch (NumberFormatException e) {
-            throw new OnlyNumberViolateException();
+            throw new InvalidWinningNumberException("당첨 번호는 숫자만 입력할 수 있습니다.");
         }
     }
 
