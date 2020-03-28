@@ -22,7 +22,7 @@ public class Numbers {
         return result;
     }
 
-    private static Integer stringToInteger(String string) {
+    public static Integer stringToInteger(String string) {
         int integer;
 
         try {
