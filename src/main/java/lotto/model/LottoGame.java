@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
+    private static final int COUNT_TO_STOP = 0;
+
     private int lottoCount;
     private List<Lotto> lottos = new ArrayList<>();
 
@@ -22,7 +24,7 @@ public class LottoGame {
     }
 
     public boolean isEnd() {
-        return lottoCount == 0;
+        return lottoCount == COUNT_TO_STOP;
     }
 
     public Lottos getLottos() {
