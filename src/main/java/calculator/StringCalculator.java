@@ -1,13 +1,11 @@
 package calculator;
 
 import calculator.domain.Numbers;
-import calculator.domain.StringCalculatorFilter;
+import calculator.domain.StringCalculatorParser;
 
 public class StringCalculator {
     public int splitAndSum(String input) {
-        StringCalculatorFilter filter = new StringCalculatorFilter(input);
-        String regex = filter.regexFromString();
-        String body = filter.messageFromString();
-        return new Numbers(body.split(regex)).sum();
+        StringCalculatorParser parser = new StringCalculatorParser(input);
+        return new Numbers(parser.parse()).sum();
     }
 }
