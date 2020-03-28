@@ -1,5 +1,7 @@
 package lotto.domain.item;
 
+import enums.LottoPrize;
+import lotto.domain.Money;
 import lotto.exception.CloneFailException;
 
 import java.util.ArrayList;
@@ -9,7 +11,6 @@ import java.util.Objects;
 
 
 public class LottoTickets implements Cloneable {
-    private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT3 = 3;
     private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT4 = 4;
     private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT5 = 5;
@@ -45,18 +46,15 @@ public class LottoTickets implements Cloneable {
         return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT6, luckyNumbers);
     }
 
-//    public boolean getAllEarningPrize(List<Integer> luckyNumbers) {
-//        Money lottoPrice = new Money(LOTTO_PRICE);
-//        Money earning = new Money();
-//
-//        earning = earning
-//                .plus(LottoPrize.MATCH3.calculate(getLuckyNumberMatch3Count(luckyNumbers)))
-//                .plus(LottoPrize.MATCH4.calculate(getLuckyNumberMatch4Count(luckyNumbers)))
-//                .plus(LottoPrize.MATCH5.calculate(getLuckyNumberMatch5Count(luckyNumbers)))
-//                .plus(LottoPrize.MATCH6.calculate(getLuckyNumberMatch6Count(luckyNumbers)));
-//
-//        return (earning.getMoney() / (this.money.getHowManyBuyItem(lottoPrice) * lottoPrice.getMoney()) * 100);
-//    }
+    public Money getAllEarningPrize(List<Integer> luckyNumbers) {
+        Money earning = new Money();
+
+        return earning
+                .plus(LottoPrize.MATCH3.calculate(getLuckyNumberMatch3Count(luckyNumbers)))
+                .plus(LottoPrize.MATCH4.calculate(getLuckyNumberMatch4Count(luckyNumbers)))
+                .plus(LottoPrize.MATCH5.calculate(getLuckyNumberMatch5Count(luckyNumbers)))
+                .plus(LottoPrize.MATCH6.calculate(getLuckyNumberMatch6Count(luckyNumbers)));
+    }
 
 
     public List<LottoTicket> getTickets() {

@@ -10,6 +10,7 @@ public class LottoDto {
     private int match4GameCount = 0;
     private int match5GameCount = 0;
     private int match6GameCount = 0;
+    private double earningRate = 0;
 
     public List<LottoTicket> getTickets() {
         return tickets;
@@ -31,6 +32,10 @@ public class LottoDto {
         return match6GameCount;
     }
 
+    public double getEarningRate() {
+        return earningRate;
+    }
+
     public void setTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
     }
@@ -49,5 +54,9 @@ public class LottoDto {
 
     public void setMatch6GameCount(int match6GameCount) {
         this.match6GameCount = match6GameCount;
+    }
+
+    public void setEarningRate(double earningRate) {
+        this.earningRate = earningRate;
     }
 }

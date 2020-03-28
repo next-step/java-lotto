@@ -5,7 +5,6 @@ import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.LottoDto;
 import lotto.view.ResultView;
-import lotto.view.StatisticDataDto;
 import util.StringUtil;
 
 import java.util.Collections;
@@ -28,5 +27,8 @@ public class LottoApplication {
 
         LottoDto winGame = lottoGame.findWinGame(luckyNumber);
         ResultView.printResult(winGame);
+
+        LottoDto earningRate = lottoGame.getEarningRate(luckyNumber);
+        ResultView.printEarningResult(earningRate);
     }
 }

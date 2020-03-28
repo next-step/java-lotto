@@ -24,4 +24,8 @@ public class ResultView {
         System.out.println("6개 일치 (2000000000)- " + dto.getMatch6GameCount() + "개");
 //        System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
     }
+
+    public static void printEarningResult(LottoDto dto) {
+        System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    private static final int LOTTO_PRICE = 1000;
+    private static final double LOTTO_PRICE = 1000;
 
     private Money money;
     private int playGameCount;
@@ -54,17 +54,19 @@ public class LottoGame {
         dto.setMatch6GameCount(this.lottoTickets.getLuckyNumberMatch6Count(luckyNumber));
         return dto;
     }
-//    public double getAllEarningPrize() {
-//        this.lottoTickets.getAllEarningPrize();
-//    }
 
-//    public StatisticDataDto getStatisticGame() {
-//        StatisticDataDto dataDto = new StatisticDataDto();
-//        dataDto.setMatchCount3(getMatchCount3LottoCount());
-//        dataDto.setMatchCount4(getMatchCount4LottoCount());
-//        dataDto.setMatchCount5(getMatchCount5LottoCount());
-//        dataDto.setMatchCount6(getMatchCount6LottoCount());
-//        dataDto.setEarningRate(getEarningRate() / this.money.getMoney());
-//        return dataDto;
-//    }
+    private Money getAllEarningPrize(List<Integer> luckyNumber) {
+        return this.lottoTickets.getAllEarningPrize(luckyNumber);
+    }
+
+    public LottoDto getEarningRate(List<Integer> luckyNumber) {
+        LottoDto dto = new LottoDto();
+        Money prize = getAllEarningPrize(luckyNumber);
+        int howManyBuyItem = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
+        Money buyAmount = new Money(LOTTO_PRICE).multiply(howManyBuyItem);
+
+        double rate = (prize.divide(buyAmount).getMoney()) * 100;
+        dto.setEarningRate(rate);
+        return dto;
+    }
 }
