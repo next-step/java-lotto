@@ -70,4 +70,8 @@ public class LottoMachine {
         }
         return numbers;
     }
+
+    public static int checkLottoNumber(Lotto winningLotto, Lotto lotto) {
+        return lotto.getMatchedNumberCount(winningLotto);
+    }
 }

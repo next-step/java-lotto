@@ -36,7 +36,39 @@ public class Lotto {
         }
     }
 
+    public int getMatchedNumberCount(Lotto winningLotto) {
+        int matchCount = 0;
+        List<Integer> winningIntegerNumbers = winningLotto.getIntegerValue();
+
+        for(int winningNumber : winningIntegerNumbers) {
+            matchCount = addMatchCount(winningNumber, matchCount);
+        }
+        return matchCount;
+    }
+
+    private int addMatchCount(int winningNumber, int matchCount) {
+        if(isMatch(winningNumber)) {
+            matchCount++;
+        }
+        return matchCount;
+    }
+
+    private boolean isMatch(int winningNumber) {
+        List<Integer> lottoIntegerNumbers = getIntegerValue();
+        return lottoIntegerNumbers.contains(winningNumber);
+    }
+
     public List<LottoNumber> getValue() {
         return new ArrayList<>(lotto);
     }
+
+    public List<Integer> getIntegerValue() {
+        List<Integer> lottoIntegerNumbers = new ArrayList<>();
+
+        for(LottoNumber lottoNumber : getValue()) {
+            lottoIntegerNumbers.add(lottoNumber.getValue());
+        }
+        return lottoIntegerNumbers;
+    }
 }
+
