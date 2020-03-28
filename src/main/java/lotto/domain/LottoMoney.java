@@ -23,7 +23,7 @@ public class LottoMoney {
     }
 
     public Double getPaidTotal() {
-        return money.doubleValue();
+        return (double) getAvailableBuyingCount() * DEFAULT_GAME_PRICE;
     }
 
     public int convertToInt() {
