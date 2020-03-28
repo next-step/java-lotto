@@ -46,17 +46,24 @@ public class Formula {
         int splitterStart = formula.indexOf(Constants.SPLITTER_DIVIDER_START) + Constants.SPLITTER_DIVIDER_START.length();
         int splitterEnd = formula.indexOf(Constants.SPLITTER_DIVIDER_END);
 
-        System.out.println(splitterStart + " ~ " + splitterEnd);
         return formula.substring(splitterStart, splitterEnd);
     }
 
     String trimArithmetic(List<String> splitters) {
-        String pureArithmetic = (isSplitter()) ? formula.substring(formula.indexOf(Constants.SPLITTER_DIVIDER_END), formula.length()) : formula;
+
+        String pureArithmetic = targetArithmetic(formula);
 
         for (String splitter : splitters) {
-            pureArithmetic = formula.replace(splitter, "");
+            pureArithmetic = pureArithmetic.replace(splitter, "");
         }
         return pureArithmetic;
+    }
+
+    String targetArithmetic(String formula) {
+        if(isSplitter()) {
+            return formula.substring(formula.indexOf(Constants.SPLITTER_DIVIDER_END) + Constants.SPLITTER_DIVIDER_END.length());
+        }
+        return formula;
     }
 
     @Override
