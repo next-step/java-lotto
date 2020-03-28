@@ -3,14 +3,18 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    private final int money;
+    private final double money;
 
-    public Money(int money) {
+    public Money() {
+        money = 0;
+    }
+
+    public Money(double money) {
         validatePositive(money);
         this.money = money;
     }
 
-    private void validatePositive(int money) {
+    private void validatePositive(double money) {
         if (money < 0) {
             throw new IllegalArgumentException("금액은 양의 정수만 입력 가능 합니다.");
         }
@@ -20,12 +24,12 @@ public class Money {
         return new Money(this.money + money2.getMoney());
     }
 
-    public int getMoney() {
+    public double getMoney() {
         return money;
     }
 
     public int getHowManyBuyItem(Money itemPrice) {
-        return this.money / itemPrice.money;
+        return (int) Math.floor(this.money / itemPrice.money);
 
     }
 

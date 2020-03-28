@@ -74,10 +74,10 @@ class MatchLottoStatisticTest {
 
         //then
         assertAll(
-                () -> assertThat(statistic.findMatchCount3Lottos().getItemsCount()).isEqualTo(1),
-                () -> assertThat(statistic.findMatchCount4Lottos().getItemsCount()).isEqualTo(3),
-                () -> assertThat(statistic.findMatchCount5Lottos().getItemsCount()).isEqualTo(2),
-                () -> assertThat(statistic.findMatchCount6Lottos().getItemsCount()).isEqualTo(1)
+                () -> assertThat(statistic.findMatchCount3Lottos()).isEqualTo(1),
+                () -> assertThat(statistic.findMatchCount4Lottos()).isEqualTo(3),
+                () -> assertThat(statistic.findMatchCount5Lottos()).isEqualTo(2),
+                () -> assertThat(statistic.findMatchCount6Lottos()).isEqualTo(1)
         );
     }
 
