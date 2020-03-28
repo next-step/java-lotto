@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
@@ -25,7 +26,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void invalidLottoNumber(int number) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+        assertThatExceptionOfType(InvalidLottoNumberException.class).isThrownBy(
                 () -> LottoNumber.valueOf(number)
         );
     }
