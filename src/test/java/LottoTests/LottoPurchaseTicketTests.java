@@ -22,7 +22,7 @@ public class LottoPurchaseTicketTests {
     @DisplayName("로또 생성 테스트")
     @Test
     public void generateLottoTest() {
-        assertThatCode(() -> LottoPurchaseTicket.newInstance()).doesNotThrowAnyException();
+        assertThatCode(LottoPurchaseTicket::newInstance).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 생성 번호 테스트")

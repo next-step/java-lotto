@@ -1,7 +1,6 @@
 package LottoTests;
 
-import lotto.model.LottoPurchaseTicket;
-import lotto.model.LottoPurchaseTickets;
+import lotto.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 @DisplayName("로또 여러 장 테스트")
@@ -28,8 +28,17 @@ public class LottoPurchaseTicketsTests {
 
     @DisplayName("로또 여러 장 생성 테스트")
     @Test
-    public void generateLottoTest() {
+    public void generateLottoTicketsTest() {
         assertThatCode(() -> LottoPurchaseTickets.create(lottoTickets)).doesNotThrowAnyException();
     }
 
+    @DisplayName("로또 결과 테스트")
+    @Test
+    public void checkAllTest() {
+        LottoPurchaseTickets lottoPurchaseTickets = LottoPurchaseTickets.create(lottoTickets);
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR));
+
+        assertThat(lottoPurchaseTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);
+    }
 }
