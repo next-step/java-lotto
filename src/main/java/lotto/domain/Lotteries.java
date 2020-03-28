@@ -20,6 +20,10 @@ public class Lotteries {
         return lottoNumbers;
     }
 
+    public LottoRank analyzeWin(final LottoNumbers winningLotteNumbers) {
+        return LottoRank.BLANK;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
