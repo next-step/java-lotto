@@ -5,13 +5,17 @@ import java.util.Objects;
 public class LottoNumber {
     private int number;
 
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         checkAvailableNumber(number);
         this.number = number;
     }
 
+    public static LottoNumber valueOf(final int number) {
+        return new LottoNumber(number);
+    }
+
     private void checkAvailableNumber(final int number) {
-        if (!(0 < number && number < 46)) {
+        if (number < 1 || number > 45) {
             throw new RuntimeException("1 ~ 45 사이의 숫자가 아닙니다.");
         }
     }
