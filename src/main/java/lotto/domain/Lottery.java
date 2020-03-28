@@ -10,6 +10,10 @@ public class Lottery {
         this.lottoNumbers = lottoNumbers;
     }
 
+    LottoNumbers getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
