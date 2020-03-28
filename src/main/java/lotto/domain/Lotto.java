@@ -1,9 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final String DELIMITER = ",";
     private static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
@@ -31,8 +32,8 @@ public class Lotto {
     }
 
     private static Set<LottoNumber> generateManulalLottoSets(String lottoString) {
+        String[] lottoStrings = lottoString.split(DELIMITER);
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        String[] lottoStrings = lottoString.split(",");
 
         for (String lottoNumber : lottoStrings) {
             lottoNumberSet.add(LottoNumber.valueOf(Integer.parseInt(lottoNumber.trim())));
@@ -55,6 +56,13 @@ public class Lotto {
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public WinningType checkWinning(Lotto winningLotto) {
+        long matchCount = winningLotto.lottoNumbers.stream()
+                .filter(lottoNumber -> this.lottoNumbers.contains(lottoNumber))
+                .count();
+        return WinningType.findLottoWinningtype(matchCount);
     }
 
     @Override
