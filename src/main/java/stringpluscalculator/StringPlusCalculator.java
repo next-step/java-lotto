@@ -1,5 +1,7 @@
 package stringpluscalculator;
 
+import java.util.Objects;
+
 public class StringPlusCalculator {
 
     private static final int RETURN_VALUE_WHEN_EMPTY = 0;
@@ -10,16 +12,20 @@ public class StringPlusCalculator {
 
     public StringPlusCalculator(String input) {
         this.input = input;
-        if (!input.isEmpty()) {
+        if (!isInputEmptyOrNull(input)) {
             this.separators = new Separators(input);
             this.formula = new Formula(input, separators.getSplitSeparator());
         }
     }
 
     public int calculate() {
-        if (input.isEmpty()) {
+        if (isInputEmptyOrNull(input)) {
             return RETURN_VALUE_WHEN_EMPTY;
         }
         return formula.sum();
+    }
+
+    public boolean isInputEmptyOrNull(String input) {
+        return Objects.isNull(input) || input.isEmpty();
     }
 }
