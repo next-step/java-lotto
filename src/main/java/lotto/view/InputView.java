@@ -39,17 +39,10 @@ public class InputView {
         return winningNumber;
     }
 
-    public static int requestBonusNumber(List<Integer> winningNumber) {
+    public static int requestBonusNumber() {
         System.out.println(REQUEST_BONUS_NUMBER);
         Scanner scanner = new Scanner(System.in);
-        String inputBonusString = scanner.nextLine();
-        int bonusNumber = parseIntForLottoNum(inputBonusString);
-        winningNumber.stream()
-                .filter(e -> e.equals(bonusNumber))
-                .findFirst()
-                .ifPresent(integer -> new IllegalArgumentException("아이야이야"));
-
-        return bonusNumber;
+        return parseIntForLottoNum(scanner.nextLine());
     }
 
     private static List<Integer> getWinningNumber(String[] inputValue) {
