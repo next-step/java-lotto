@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -48,4 +49,36 @@ class MatchLottoStatisticTest {
                 () -> assertThat(matchLottoStatistic.getMatchLottos().get(2).getItemsCount()).isEqualTo(1)
         );
     }
+
+    @DisplayName("당첨번호에 매칭된 또 정렬해서 저장 확인")
+    @Test
+    public void lottoCompare() throws Exception {
+        //given
+        List<Integer> luckyNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoTicket> lottos = new ArrayList<>(Arrays.asList(
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 11)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 10, 11)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 10, 12)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 10, 13)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 12, 13, 14)),
+                new LottoTicket(Arrays.asList(1, 2, 12, 13, 14, 15)),
+                new LottoTicket(Arrays.asList(1, 11, 12, 13, 14, 15))
+        ));
+
+        MatchLottoStatistic statistic = new MatchLottoStatistic();
+
+        //when
+        statistic.collectMatchLotto(lottos, luckyNumber);
+
+        //then
+        assertAll(
+                () -> assertThat(statistic.findMatchCount3Lottos().getItemsCount()).isEqualTo(1),
+                () -> assertThat(statistic.findMatchCount4Lottos().getItemsCount()).isEqualTo(3),
+                () -> assertThat(statistic.findMatchCount5Lottos().getItemsCount()).isEqualTo(2),
+                () -> assertThat(statistic.findMatchCount6Lottos().getItemsCount()).isEqualTo(1)
+        );
+    }
+
 }

@@ -1,6 +1,7 @@
 package lotto.domain.statisitc;
 
 import lotto.domain.item.Item;
+import lotto.domain.item.LottoTicket;
 import lotto.domain.item.MatchLotto;
 
 import java.util.ArrayList;
@@ -14,16 +15,48 @@ public class MatchLottoStatistic {
 
     private List<MatchLotto> matchLottos;
 
-    public MatchLottoStatistic(List<Item> lottos, List<Integer> luckNumber) {
-        List<MatchLotto> items = new ArrayList<>();
-
-        this.matchLottos = items;
+    public MatchLottoStatistic() {
+        this.matchLottos = new ArrayList<>();
     }
 
     public MatchLottoStatistic(MatchLotto other) {
         List<MatchLotto> items = new ArrayList<>();
         items.add(other);
         this.matchLottos = items;
+    }
+
+    public void collectMatchLotto(List<LottoTicket> lottos, List<Integer> luckyNumber) {
+        List<MatchLotto> result = new ArrayList<>();
+        for (LottoTicket lotto : lottos) {
+            int count = lotto.getCompareLuckNumberMatchCount(luckyNumber);
+            addMatchItem(count, lotto);
+        }
+    }
+
+    public MatchLotto findMatchCount3Lottos() {
+        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT3);
+    }
+
+    public MatchLotto findMatchCount4Lottos() {
+        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT4);
+    }
+
+    public MatchLotto findMatchCount5Lottos() {
+        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT5);
+    }
+
+    public MatchLotto findMatchCount6Lottos() {
+        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT6);
+    }
+
+    private MatchLotto findMatchLottos(int matchCount) {
+        List<MatchLotto> result = new ArrayList<>();
+        for (MatchLotto match : matchLottos) {
+            if (match.isMatchCountSame(matchCount)) {
+                return match;
+            }
+        }
+        return null;
     }
 
 //    public MatchItemsStatistic(List<MatchLotto> other) {
@@ -59,4 +92,5 @@ public class MatchLottoStatistic {
     public List<MatchLotto> getMatchLottos() {
         return matchLottos;
     }
+
 }
