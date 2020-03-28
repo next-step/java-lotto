@@ -2,6 +2,7 @@ package step2;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,6 +31,13 @@ public class LottoMachine {
     }
 
     private static List<LottoNumber> getShuffledNumber() {
+        List<LottoNumber> shuffledNumber = getWholeNumber();
+        Collections.shuffle(shuffledNumber);
+
+        return shuffledNumber;
+    }
+
+    private static List<LottoNumber> getWholeNumber() {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for(int i = 1; i <= 45; i++) {
