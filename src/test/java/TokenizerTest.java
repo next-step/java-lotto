@@ -4,7 +4,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class TokenizerTest {
 
@@ -17,6 +17,14 @@ public class TokenizerTest {
         assertThat(tokens).contains(1, 2, 3);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1@2,3", "1!2:3", "1!2!3", "1@2@3"})
+    public void withWrongMessageSplitThrowException(String message) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Tokenizer.split(message);
+        });
+    }
+
     @Test
     public void customDelimiterSplitTest() {
         String message = "1;2;3";
@@ -25,4 +33,15 @@ public class TokenizerTest {
         assertThat(tokens).hasSize(3);
         assertThat(tokens).contains(1, 2, 3);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"@", "!", "#", ";"})
+    public void withWrongDelimiterSplitThrowException(String delimiter) {
+        String message = "1,2:3";
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Tokenizer.split(message, delimiter);
+        });
+    }
+
+
 }
