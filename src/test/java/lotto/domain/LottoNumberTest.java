@@ -14,9 +14,9 @@ class LottoNumberTest {
     @RepeatedTest(value = 45, name = "1 ~ 45 중 {currentRepetition} of {totalRepetitions}")
     void create(RepetitionInfo repetitionInfo) {
         int number = repetitionInfo.getCurrentRepetition();
-        final LottoNumber expect = new LottoNumber(number);
+        final LottoNumber expect = LottoNumber.valueOf(number);
 
-        final LottoNumber actual = new LottoNumber(number);
+        final LottoNumber actual = LottoNumber.valueOf(number);
 
         assertThat(actual).isEqualTo(expect);
     }
@@ -26,7 +26,7 @@ class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46})
     void invalidLottoNumber(int number) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(
-                () -> new LottoNumber(number)
+                () -> LottoNumber.valueOf(number)
         );
     }
 }
