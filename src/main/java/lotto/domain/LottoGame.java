@@ -1,33 +1,28 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
-import static lotto.domain.Constant.ZERO_INDEX;
 
 public class LottoGame {
-    private final Money money;
+    private final LottoMoney lottoMoney;
     private final int gameCount;
 
     public LottoGame(int money) {
-        this.money = new Money(money);
-        this.gameCount = Math.floorDiv(money, DEFAULT_GAME_PRICE);
+        this.lottoMoney = new LottoMoney(money);
+        this.gameCount = calculateAutoGameCount();
     }
 
-    public int getGameCount() {
-        return gameCount;
+    public LottoTickets buy() {
+        return new LottoTickets(gameCount);
     }
 
-    public LottoNumbers buy() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = ZERO_INDEX; i < gameCount; i++) {
-            lottoNumbers.add(new LottoNumber(new LottoNumberAutoGenerator().get()));
-        }
-        return new LottoNumbers(lottoNumbers);
+    public LottoGameResults getResults(LottoTickets boughtTickets, List<Integer> winningNumber) {
+        return LottoGameMatcher.matchWinningNumber(boughtTickets, new LottoNumber(winningNumber));
     }
 
-    public LottoGameResults getResults(LottoNumbers boughtNumbers, List<Integer> winningNumber) {
-        return LottoGameMatcher.matchWinningNumber(boughtNumbers, new LottoNumber(winningNumber));
+    int calculateAutoGameCount() {
+        return Math.floorDiv(lottoMoney.convertToInt(), DEFAULT_GAME_PRICE);
     }
+
 }

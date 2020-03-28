@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,10 +13,10 @@ class LottoGameTest {
     @DisplayName("로또 구입 금액을 입력하면 구입 금액에 해당하는 구매할수 있는 게임 회수를 알 수 있다. (1000원=1게임)")
     @ParameterizedTest
     @CsvSource(value = {"3000, 3", "10000, 10"})
-    public void buyLottoTest(int money, int expectedGameCount) {
-        LottoGame lottoGame = new LottoGame(money);
+    public void buyLottoTest(int moneyAmount, int expectedGameCount) {
+        LottoGame lottoGame = new LottoGame(moneyAmount);
 
-        assertThat(lottoGame.getGameCount()).isEqualTo(expectedGameCount);
+        assertThat(lottoGame.buy().size()).isEqualTo(expectedGameCount);
     }
 
     @DisplayName("구입 금액은 1000원 이상이어야 한다.")
@@ -36,9 +33,7 @@ class LottoGameTest {
     public void buyLottoGameTest(int money, int expectedGameCount) {
         LottoGame lottoGame = new LottoGame(money);
 
-        LottoNumbers boughtGame = lottoGame.buy();
-
-        assertThat(boughtGame.size()).isEqualTo(expectedGameCount);
+        assertThat(lottoGame.calculateAutoGameCount()).isEqualTo(expectedGameCount);
     }
 
 }

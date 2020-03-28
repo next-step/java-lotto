@@ -10,14 +10,14 @@ public class LottoGameResults {
     private static final int LOTTO_WIN_MAX = 6;
 
     private final int totalGameCount;
-    private final List<Long> winningGames;
+    private final List<LottoRank> winningGames;
 
-    LottoGameResults(int totalGameCount, List<Long> winningGames) {
+    LottoGameResults(int totalGameCount, List<LottoRank> winningGames) {
         this.totalGameCount = totalGameCount;
         this.winningGames = winningGames;
     }
 
-    public List<Long> getWinningGames() {
+    public List<LottoRank> getWinningGames() {
         return new ArrayList<>(winningGames);
     }
 
@@ -27,7 +27,7 @@ public class LottoGameResults {
 
     public long getMatchCount(int index) {
         return winningGames.stream()
-                .filter(matchCount -> isMatch(matchCount, index))
+                .filter(ticketRank -> isMatch(ticketRank.getMatchCount(), index))
                 .count();
     }
 
@@ -35,12 +35,12 @@ public class LottoGameResults {
         double winningPrizeSum = 0;
         for (int i = LOTTO_WIN_MIN; i <= LOTTO_WIN_MAX; i++) {
             long count = getMatchCount(i);
-            winningPrizeSum += (count * LottoWinningLevel.of(i).getWinningPrize());
+            winningPrizeSum += (count * LottoRank.of(i).getWinningPrize());
         }
         return winningPrizeSum;
     }
 
-    private boolean isMatch(Long matchCount, int checkPoint) {
+    private boolean isMatch(int matchCount, int checkPoint) {
         return matchCount == checkPoint;
     }
 }

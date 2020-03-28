@@ -9,22 +9,22 @@ public class LottoGameMatcher {
     private LottoGameMatcher() {
     }
 
-    public static LottoGameResults matchWinningNumber(LottoNumbers boughtNumbers, LottoNumber winningNumber) {
-        List<Long> winnings = boughtNumbers.getCheckedNumbers(winningNumber);
+    public static LottoGameResults matchWinningNumber(LottoTickets boughtTickets, LottoNumber winningNumber) {
+        List<LottoRank> lottoRanks = boughtTickets.checkRank(winningNumber);
         return new LottoGameResults(
-                winnings.size(),
-                filterWinningGame(winnings)
+                lottoRanks.size(),
+                filterWinningGame(lottoRanks)
         );
     }
 
-    private static List<Long> filterWinningGame(List<Long> winnings) {
+    private static List<LottoRank> filterWinningGame(List<LottoRank> winnings) {
         return winnings.stream()
                 .filter(LottoGameMatcher::isGraterThanThree)
                 .collect(Collectors.toList());
     }
 
-    private static boolean isGraterThanThree(long matchCount) {
-        return matchCount >= WINNING_MIN_LIMIT;
+    private static boolean isGraterThanThree(LottoRank lottoRank) {
+        return lottoRank.getWinningPrize() >= WINNING_MIN_LIMIT;
     }
 
 }

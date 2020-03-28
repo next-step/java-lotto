@@ -22,7 +22,7 @@ public class InputView {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            throw new OnlyNumberViolateException();
+            throw new InvalidMoneyException();
         }
     }
 

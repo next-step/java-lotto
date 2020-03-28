@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoGameResults;
-import lotto.domain.LottoWinningLevel;
+import lotto.domain.LottoRank;
 
 public class ResultView {
     private static final String RESULT_SUMMARY_MESSAGE = "당첨 통계";
@@ -41,7 +41,7 @@ public class ResultView {
 
     private static String getString(int i, long count) {
         return String.format(
-                MATCH_MESSAGE, i, LottoWinningLevel.of(i).getWinningPrize(), count
+                MATCH_MESSAGE, i, LottoRank.of(i).getWinningPrize(), count
         );
     }
 
