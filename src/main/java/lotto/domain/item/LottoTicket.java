@@ -56,10 +56,8 @@ public class LottoTicket implements Item {
     }
 
     private int getMatch(List<Integer> compare, int match, Integer num) {
-        for (Integer comp : compare) {
-            if (num == comp) {
-                match++;
-            }
+        if (compare.contains(num)) {
+            match++;
         }
         return match;
     }
