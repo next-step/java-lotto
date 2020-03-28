@@ -18,6 +18,10 @@ public enum LottoTier {
         this.prize = prize;
     }
 
+    public int calculatePrize(int count) {
+        return count * prize;
+    }
+
     public static LottoTier getResult(int matchedNumberCount) {
         if(matchedNumberCount == 6) {
             return FIRST;
