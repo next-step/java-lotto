@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.OutOfLottoNumberSizeException;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +17,7 @@ public class LottoNumbers {
 
     private void checkLottoNumberSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers != null && lottoNumbers.size() != LOTTO_NUMBER_MAX_SIZE) {
-            throw new RuntimeException("로또 번호는 6개 숫자만 가집니다.");
+            throw new OutOfLottoNumberSizeException();
         }
     }
 
