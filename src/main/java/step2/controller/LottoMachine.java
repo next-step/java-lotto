@@ -19,6 +19,8 @@ public class LottoMachine {
     public static void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
         Lottos lottos = LottoMachine.createLottos(money);
+
+        Lotto winningLotto = LottoMachine.createLotto(inputView.getWinningNumbers());
     }
 
     public static Lottos createLottos(Money money) {
@@ -44,11 +46,10 @@ public class LottoMachine {
         return new Lotto(lotto);
     }
 
-    public static Lotto createLotto(Integer ... inputNumbers) {
-        List<Integer> numbers = Arrays.asList(inputNumbers);
+    public static Lotto createLotto(List<Integer> inputNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-        for(int number : numbers) {
+        for(int number : inputNumbers) {
             lottoNumbers.add(new LottoNumber(number)); // TODO: 같은 값으로 만들어진 LottoNumber 객체가 있으면 새로 안만들게 하고 싶다.
         }
         return new Lotto(lottoNumbers);
