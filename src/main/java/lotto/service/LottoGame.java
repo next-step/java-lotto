@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.service;
 
+import lotto.domain.Money;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.stragegy.LottoGenerator;
 

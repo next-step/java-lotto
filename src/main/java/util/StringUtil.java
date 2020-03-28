@@ -29,7 +29,7 @@ public class StringUtil {
         String[] split = input.split(LOTTO_SPLIT_DELIMITER);
 
         for (String s : split) {
-            result.add(Integer.parseInt(s));
+            result.add(Integer.parseInt(s.trim()));
         }
         return result;
     }
