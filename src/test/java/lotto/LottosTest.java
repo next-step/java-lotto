@@ -104,6 +104,6 @@ public class LottosTest {
         double earningRate = lottos.calculateEarningRate(winningLotto);
 
         //then
-        assertThat(earningRate).isEqualTo(5);
+        assertThat(earningRate).isEqualTo(500);
     }
 }

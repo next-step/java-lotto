@@ -13,7 +13,7 @@ public class Lottos {
     private static final int SIX_NUM_MATCH_WITH_WINNING_LOTTO = 6;
     private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);

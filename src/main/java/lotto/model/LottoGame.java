@@ -1,8 +1,8 @@
 package lotto.model;
 
-import lotto.view.StringConverter;
 import lotto.lottogenerator.LottoNumGeneratorStrategy;
 import lotto.view.InputView;
+import lotto.view.StringConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class LottoGame {
         return lottoCount == 0;
     }
 
-    public Lottos getLottos(){
+    public Lottos getLottos() {
         return new Lottos(lottos);
     }
 }

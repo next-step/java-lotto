@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Scanner;
 
-public class InputProcessor {
+public class InputScanner {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String getPurchasePrice() {
