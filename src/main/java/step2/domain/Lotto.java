@@ -36,7 +36,11 @@ public class Lotto {
         }
     }
 
-    public int getMatchedNumberCount(Lotto winningLotto) {
+    public LottoTier getLottoTier(Lotto winningLotto) {
+        return LottoTier.getTier(getMatchedNumberCount(winningLotto));
+    }
+
+    private int getMatchedNumberCount(Lotto winningLotto) {
         int matchCount = 0;
         List<Integer> winningIntegerNumbers = winningLotto.getIntegerValue();
 

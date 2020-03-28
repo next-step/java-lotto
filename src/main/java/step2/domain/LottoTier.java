@@ -22,7 +22,7 @@ public enum LottoTier {
         return count * prize;
     }
 
-    public static LottoTier getResult(int matchedNumberCount) {
+    public static LottoTier getTier(int matchedNumberCount) {
         if(matchedNumberCount == 6) {
             return FIRST;
         }

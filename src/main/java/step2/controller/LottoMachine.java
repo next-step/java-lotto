@@ -1,16 +1,11 @@
 package step2.controller;
 
-import step2.domain.Lotto;
-import step2.domain.LottoNumber;
-import step2.domain.Lottos;
-import step2.domain.Money;
+import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
@@ -19,9 +14,10 @@ public class LottoMachine {
     public static void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
         Lottos lottos = LottoMachine.createLottos(money);
-
-        resultView.showResult()
         Lotto winningLotto = LottoMachine.createLotto(inputView.getWinningNumbers());
+
+        LottoResult result = checkLottoNumber(winningLotto, lottos);
+
     }
 
     public static Lottos createLottos(Money money) {
@@ -72,7 +68,41 @@ public class LottoMachine {
         return numbers;
     }
 
-    public static int checkLottoNumber(Lotto winningLotto, Lotto lotto) {
-        return lotto.getMatchedNumberCount(winningLotto);
+    public static LottoResult checkLottoNumber(Lotto winningLotto, Lottos lottos) {
+        Map<LottoTier, Integer> resultMap = new HashMap<>();
+
+        int firstCount = 0;
+        int secondCount = 0;
+        int thirdCount = 0;
+        int fourthCount = 0;
+        int noneCount = 0;
+
+        for(Lotto lotto : lottos.getValue()) {
+            LottoTier tier = lotto.getLottoTier(winningLotto);
+
+            if(LottoTier.FIRST.equals(tier)) {
+                firstCount++;
+            }
+            else if(LottoTier.SECOND.equals(tier)) {
+                secondCount++;
+            }
+            else if(LottoTier.THIRD.equals(tier)) {
+                thirdCount++;
+            }
+            else if(LottoTier.FOURTH.equals(tier)) {
+                fourthCount++;
+            }
+            else {
+                noneCount++;
+            }
+        }
+
+        resultMap.put(LottoTier.FIRST, firstCount);
+        resultMap.put(LottoTier.SECOND, secondCount);
+        resultMap.put(LottoTier.THIRD, thirdCount);
+        resultMap.put(LottoTier.FOURTH, fourthCount);
+        resultMap.put(LottoTier.NONE, noneCount);
+
+        return new LottoResult(resultMap);
     }
 }
