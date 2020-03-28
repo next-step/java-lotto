@@ -23,7 +23,14 @@ public class Numbers {
     }
 
     private static Integer stringToInteger(String string) {
-        return Integer.parseInt(string);
+        int integer;
+
+        try {
+            integer = Integer.parseInt(string);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("숫자를 입력해주세요");
+        }
+        return integer;
     }
 
     private void checkPositiveNumber(int number) {
