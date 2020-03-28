@@ -22,7 +22,6 @@
 
 ### LottoResult.class
 
-1. Map<Rank,Integer> getWinningMap();
+1. Map<LottoRank,Integer> getWinningMap();
 
 2. double getYield();
-
