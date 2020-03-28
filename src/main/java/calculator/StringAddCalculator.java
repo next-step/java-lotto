@@ -6,9 +6,10 @@ public class StringAddCalculator {
         if (inputText == null || inputText.trim().isEmpty()) {
             return 0;
         }
+        TextToNumber convertNumber = new TextToNumber(inputText);
+        PostiveNumbers postiveNumbers = new PostiveNumbers(convertNumber);
 
-        TextToNumber textToNumber = new TextToNumber(inputText);
-        return textToNumber.sum();
+        return postiveNumbers.sum();
     }
 
 }

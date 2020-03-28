@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,26 +9,23 @@ import java.util.stream.Stream;
 
 public class TextToNumber {
     private static final Pattern CUSTOM_DELIMTER_PATTERN = Pattern.compile("//(.)\n(.*)");
-    public static final String DELIMETER = ",|:";
-    public static final int MATCHING_PART = 1;
-    public static final int DELIMETER_FORMULA = 2;
-
+    private static final String DELIMETER = ",|:";
+    private static final int MATCHING_PART = 1;
+    private static final int DELIMETER_FORMULA = 2;
     private List<PositiveNumber> positiveNumbers;
 
     public TextToNumber(String inputText) {
-        this.positiveNumbers = convertToNumbers(convertToStrings(inputText));
+        this.positiveNumbers = convertToNumbers(splitText(inputText));
     }
 
-    public Integer sum() {
-        return positiveNumbers.stream()
-                .reduce(new PositiveNumber(0), PositiveNumber::sum)
-                .getNumber();
+    public List<PositiveNumber> getPositiveNumbers() {
+        return new ArrayList<>(positiveNumbers);
     }
 
-    private List<String> convertToStrings(String text) {
+    private List<String> splitText(String text) {
         Matcher matcher = CUSTOM_DELIMTER_PATTERN.matcher(text);
         if (matcher.find()) {
-            return getCustomDelimeterStrings(matcher);
+            return getCustomDelimeterText(matcher);
         }
 
         return Stream.of(text.split(DELIMETER))
@@ -35,15 +33,15 @@ public class TextToNumber {
                 .collect(Collectors.toList());
     }
 
-    private List<String> getCustomDelimeterStrings(Matcher matcher) {
+    private List<String> getCustomDelimeterText(Matcher matcher) {
         String delimiter = matcher.group(MATCHING_PART);
         return Stream.of(matcher.group(DELIMETER_FORMULA).split(delimiter))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
 
-    private List<PositiveNumber> convertToNumbers(List<String> strings) {
-        return strings.stream()
+    private List<PositiveNumber> convertToNumbers(List<String> text) {
+        return text.stream()
                 .map(this::parseToInt)
                 .map(PositiveNumber::new)
                 .collect(Collectors.toList());
