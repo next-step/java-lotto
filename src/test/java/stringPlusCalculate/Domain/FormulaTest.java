@@ -63,4 +63,14 @@ public class FormulaTest {
 
         assertThat(arithmeticTargetList.toList()).isEqualTo(resultList);
     }
+
+    @Test
+    void splitArithmeticTarget_null_들어오는경우_Test() {
+        Formula formula = Formula.init("".trim());
+        List<Double> resultList = new ArrayList<>();
+
+        ArithmeticTargets arithmeticTargetList = formula.arithmeticBySplit();
+
+        assertThat(arithmeticTargetList.toList()).isEqualTo(resultList);
+    }
 }
