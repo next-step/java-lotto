@@ -23,8 +23,8 @@ public class LottoMachine {
         List<LottoNumber> lotto = getShuffledNumber()
                 .stream()
                 .limit(6)
+                .sorted()
                 .collect(Collectors.toList());
-        Collections.sort(lotto);
 
         return lotto;
     }
