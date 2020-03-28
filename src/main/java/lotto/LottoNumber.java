@@ -14,7 +14,7 @@ class LottoNumber {
     }
 
     private void validateWinningNumbers(Set<Integer> numbers) {
-        if (numbers.size() < WINNING_NUMBER_SIZE) {
+        if (numbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalArgumentException("다른 숫자를 여섯개 입력해주세요.");
         }
     }
