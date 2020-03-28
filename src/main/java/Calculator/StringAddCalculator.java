@@ -1,7 +1,7 @@
 package Calculator;
 
 public class StringAddCalculator {
-    static private final String DELIMITER = ",";
+    static private final String DELIMITER = ",|:";
 
     public static int splitAndSum(final String inputString) {
         if (!validateInputString(inputString)) {
