@@ -21,7 +21,7 @@ class LottoGameResultsTest {
         assertThat(lottoGameResults.getWinningGames()).hasSize(2);
     }
 
-    @DisplayName("로또 수익률 계산 테스트")
+    @DisplayName("1게임 샀을 때 5등 당첨 1개 로또 수익률 계산 테스트")
     @Test
     public void lottoProfitRateTest() {
         LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -30,6 +30,20 @@ class LottoGameResultsTest {
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
         assertThat(lottoGameResults.getProfitRate()).isEqualTo(5);
+    }
+
+    @DisplayName("1게임 샀을 때 2등 당첨 1개 로또 수익률 계산 테스트")
+    @Test
+    public void lottoProfitRateAtFiveBonusTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 12), 6);
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        System.out.println(lottoGameResults.getWinningPrizeSum());
+        System.out.println(lottoGameResults.getWinningPrizeSum() == LottoRank.FIVE_BONUS.getWinningPrize());
+
+        assertThat(lottoGameResults.getProfitRate()).isEqualTo(300000);
     }
 
     @DisplayName("2개가 일치하면 상금은 0원 이다.")

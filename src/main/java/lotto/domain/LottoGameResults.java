@@ -6,8 +6,10 @@ import java.util.List;
 import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
 
 public class LottoGameResults {
+    private static final double ZERO = 0;
     private static final int LOTTO_WIN_MIN = 3;
     private static final int LOTTO_WIN_MAX = 6;
+    private static final int LOTTO_WIN_BONUS = 51;
 
     private final List<LottoRank> winningGames;
 
@@ -30,11 +32,17 @@ public class LottoGameResults {
     }
 
     double getWinningPrizeSum() {
-        double winningPrizeSum = 0;
+        double winningPrizeSum = ZERO;
         for (int i = LOTTO_WIN_MIN; i <= LOTTO_WIN_MAX; i++) {
             long count = getMatchCount(i);
             winningPrizeSum += (count * LottoRank.of(i).getWinningPrize());
         }
+        return getFiveBonusPrize(winningPrizeSum);
+    }
+
+    private double getFiveBonusPrize(double winningPrizeSum) {
+        long fiveBonusCount = getMatchCount(LOTTO_WIN_BONUS);
+        winningPrizeSum += (fiveBonusCount * LottoRank.of(LOTTO_WIN_BONUS).getWinningPrize());
         return winningPrizeSum;
     }
 
