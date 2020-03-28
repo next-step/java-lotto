@@ -1,8 +1,5 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
-import lotto.domain.Money;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +21,7 @@ public class LottoTickets {
 
     private int getLuckyNumberMatchCount(int luckyNumber, List<Integer> luckyNumbers) {
         return (int) tickets.stream()
-                .filter(ticket -> luckyNumber == ticket.getCompareLuckNumberMatchCount(luckyNumbers))
+                .filter(ticket -> luckyNumber == ticket.getLuckyNumberMatchCount(luckyNumbers))
                 .count();
     }
 

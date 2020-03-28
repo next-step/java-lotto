@@ -46,7 +46,7 @@ public class LottoTicket implements Item {
         }
     }
 
-    public int getCompareLuckNumberMatchCount(List<Integer> luckyNumber) {
+    public int getLuckyNumberMatchCount(List<Integer> luckyNumber) {
         int match = 0;
         for (Integer num : numbers) {
             match = addCountIfMatch(luckyNumber, match, num);

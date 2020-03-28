@@ -64,7 +64,7 @@ public class LottoTicketTest {
         ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 6개만 지정 가능 합니다.");
     }
 
-    @DisplayName("한번 생성된 로또 번호는 변경 불가능해야 한다.")
+    @DisplayName("로또는 불변 VO 객체여야 한다")
     @Test
     public void modify() throws Exception {
         //given
@@ -77,6 +77,23 @@ public class LottoTicketTest {
         assertThatThrownBy(
                 () -> numbers.set(0, 11)
         ).isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @DisplayName("로또번호는 외부의 변화에 영향이 없어야 한다.")
+    @Test
+    public void modify2() throws Exception {
+        //given
+        List<Integer> tmp = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket = new LottoTicket(tmp);
+
+        //when
+        tmp.set(0, 111);
+
+        //then
+        assertAll(
+                () -> assertThat(ticket.getNumbers().get(0)).isEqualTo(1),
+                () -> assertThat(tmp.get(0)).isEqualTo(111)
+        );
     }
 
     @DisplayName("0 ~ 45 사이의 숫자인지 체크")
@@ -107,32 +124,15 @@ public class LottoTicketTest {
     }
 
 
-    @DisplayName("로또는 불변 VO 객체여야 한다")
-    @Test
-    public void test() throws Exception {
-        //given
-        List<Integer> tmp = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket ticket = new LottoTicket(tmp);
-
-        //when
-        tmp.set(0, 111);
-
-        //then
-        assertAll(
-                () -> assertThat(ticket.getNumbers().get(0)).isEqualTo(1),
-                () -> assertThat(tmp.get(0)).isEqualTo(111)
-        );
-    }
-
     @DisplayName("로또 번호가 몇개가 맞는지 확인한다.")
     @ParameterizedTest
     @MethodSource("provideMatchNumbers")
-    public void compareMatchNumberCount(List<Integer> comp, int expect) throws Exception {
+    public void getLuckyNumberMatchCount(List<Integer> comp, int expect) throws Exception {
         //given
         LottoTicket lotto = new LottoTicket(numbers);
 
         //when
-        int match = lotto.getCompareLuckNumberMatchCount(comp);
+        int match = lotto.getLuckyNumberMatchCount(comp);
 
         //then
         assertThat(match).isEqualTo(expect);
