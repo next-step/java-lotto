@@ -22,25 +22,25 @@ public enum LottoWinningInfo {
         return winningAmount;
     }
 
-    public static int valueOf(int matchCount) {
-        int amount = 0;
+    public static LottoWinningInfo valueOf(int matchCount) {
+        LottoWinningInfo lottoWinningInfo = null;
         switch (matchCount) {
             case 3:
-                amount = THIRD.getWinningAmount();
+                lottoWinningInfo = THIRD;
                 break;
             case 4:
-                amount = FOURTH.getWinningAmount();
+                lottoWinningInfo = FOURTH;
                 break;
             case 5:
-                amount = FIFTH.getWinningAmount();
+                lottoWinningInfo = FIFTH;
                 break;
             case 6:
-                amount = SIXTH.getWinningAmount();
+                lottoWinningInfo = SIXTH;
                 break;
             default:
                 break;
         }
 
-        return amount;
+        return lottoWinningInfo;
     }
 }

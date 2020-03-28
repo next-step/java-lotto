@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -44,10 +45,20 @@ class ResultViewTest {
 
     @DisplayName("당첨된 로또의 개수를 확인한다")
     @Test
-    void winningResult() {
-        List<WinningLotto> winningLottos = resultView.getWinningLottos();
+    void winningResultSize() {
+        Map<Integer, WinningLotto> winningLottos = resultView.getWinningLottos();
 
         assertThat(winningLottos).hasSize(4);
+    }
+
+    @DisplayName("당첨 내역을 출력한다")
+    @Test
+    void printWinningResult() {
+        String result = resultView.printWinningResult();
+        assertThat(result).isEqualTo("3개 일치(5000원)- 1개\n"
+                                     + "4개 일치(50000원)- 1개\n"
+                                     + "5개 일치(1500000원)- 1개\n"
+                                     + "6개 일치(2000000000원)- 1개\n");
     }
 
 }
