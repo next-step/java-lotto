@@ -39,6 +39,7 @@ public abstract class LottoTicket {
         int size = (int) numbers.stream()
                 .distinct()
                 .count();
+
         if (size != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
         }

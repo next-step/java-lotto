@@ -36,10 +36,6 @@ public enum LottoResult {
                 .orElseThrow(() -> new IllegalArgumentException("Match Count must between 0 and 6."));
     }
 
-    private LottoMatchCount getLottoMatchCount() {
-        return matchCount;
-    }
-
     public Integer getMatchCount() {
         return matchCount.toInt();
     }
@@ -50,5 +46,9 @@ public enum LottoResult {
 
     public boolean isBlank() {
         return price.equals(0L);
+    }
+
+    private LottoMatchCount getLottoMatchCount() {
+        return matchCount;
     }
 }
