@@ -13,6 +13,5 @@ class LottoNumberGeneratorTest {
         LottoNumbers lottoNumbers = LottoNumberGenerator.generate();
 
         assertThat(lottoNumbers).isNotNull();
-        assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 }
