@@ -1,15 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.item.LottoTicket;
 import lotto.service.LottoGame;
+import lotto.view.LottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,20 +17,19 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(new Money(10000));
     }
 
+    @DisplayName("입력금액에서 구매 가능한 로또만큼 구매 되는지 체크")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "5000:5"}, delimiter = ':')
+    public void buyLotto(int myMoney, int expect) throws Exception {
+        //given
+        LottoGame lottoGame = new LottoGame(new Money(myMoney));
 
-//    @DisplayName("입력금액에서 구매 가능한 로또만큼 구매 되는지 체크")
-//    @ParameterizedTest
-//    @CsvSource(value = {"1000:1", "5000:5"}, delimiter = ':')
-//    public void buyLotto(int myMoney, int expect) throws Exception {
-//        //given
-//        LottoGame lottoGame = new LottoGame(new Money(myMoney));
-//
-//        //when
-//        lottoGame.buyAllLottoTicket();
-//
-//        //then
-////        assertThat(lottoGame.getLottos().size()).isEqualTo(expect);
-//    }
+        //when
+        LottoDto dto = lottoGame.play();
+
+        //then
+        assertThat(dto.getTickets().size()).isEqualTo(expect);
+    }
 
 //    @DisplayName("수익률 개산")
 //    @Test
