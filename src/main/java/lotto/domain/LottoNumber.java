@@ -34,6 +34,13 @@ public class LottoNumber {
 				.collect(Collectors.joining(",", "[", "]"));
 	}
 
+	LottoRank matchLottoNumber(LottoNumber winningNumber) {
+		int correctNumbers = (int) this.numbers.stream()
+				.filter(winningNumber.numbers::contains)
+				.count();
+		return LottoRank.getFromCorrectNumbers(correctNumbers);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

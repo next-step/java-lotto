@@ -9,7 +9,7 @@ public class LottoResult {
 	private final Map<LottoRank, Long> winningMap;
 	private final int buyPrize;
 
-	public LottoResult(Map<LottoRank, Long> winningMap, int buyPrize) {
+	LottoResult(Map<LottoRank, Long> winningMap, int buyPrize) {
 		this.winningMap = Collections.unmodifiableMap(winningMap);
 		this.buyPrize = buyPrize;
 	}
