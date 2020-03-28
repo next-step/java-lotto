@@ -33,8 +33,9 @@ class LottoNumbersTest {
 
         System.out.println(lottoGameResult.toString());
 
-        assertThat(lottoGameResult).hasSize(1);
-        assertThat(lottoGameResult.get(0)).isEqualTo(4);
+        assertThat(lottoGameResult).hasSize(2);
+        assertThat(lottoGameResult.get(0)).isEqualTo(2);
+        assertThat(lottoGameResult.get(1)).isEqualTo(4);
     }
 
     @DisplayName("당첨 내역에 따라 당첨 금액이 결정된다")
