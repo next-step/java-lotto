@@ -1,5 +1,6 @@
 package LottoTests;
 
+import lotto.AutomaticLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +12,9 @@ public class LottoGeneratorTests {
     @DisplayName("자동 로또 번호 생성 테스트")
     @Test
     public void generateAutomaticTest() {
-        assertThat(RandomLottoGenerator.generate())
+        assertThat(AutomaticLottoGenerator.generate())
                 .hasSize(6)
-                .allmatch(number -> number >= 1 && number <= 45);
+                .allMatch(number -> number >= 1 && number <= 45);
     }
 
 }

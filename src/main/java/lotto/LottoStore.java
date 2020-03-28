@@ -9,7 +9,7 @@ public class LottoStore {
     public static LottoTickets sell(final Integer payment) {
         Integer lottoCount = payment / LOTTO_PRICE;
         List<LottoTicket> lottoTickets = IntStream.range(0, lottoCount)
-                .mapToObj(i -> LottoTicket.newInstance(RandomLottoGenerator.generate()))
+                .mapToObj(i -> LottoTicket.newInstance(AutomaticLottoGenerator.generate()))
                 .collect(Collectors.toList());
         return LottoTickets.create(lottoTickets);
     }
