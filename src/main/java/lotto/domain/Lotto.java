@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.Price;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.dto.Price;
+import lotto.domain.Price;
 
 import java.io.InputStream;
 import java.util.Scanner;

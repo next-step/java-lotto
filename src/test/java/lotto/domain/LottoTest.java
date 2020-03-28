@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.Price;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ class LottoTest {
         final Price price = new Price(2000);
         final int expect = 2;
 
-        LotteryTickets actual = lotto.buy(price);
+        Lotteries actual = lotto.buy(price);
 
         assertThat(actual.count()).isEqualTo(expect);
     }
