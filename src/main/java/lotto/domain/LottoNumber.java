@@ -13,7 +13,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public long getMatchCount(LottoNumber winningNumber) {
+    public long getMatchCountInLottoNumber(LottoNumber winningNumber) {
         return winningNumber.getLottoNumber()
                 .stream()
                 .filter(lottoNumber::contains)

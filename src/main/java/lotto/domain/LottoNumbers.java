@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    private static final int THREE = 3;
+
     private final List<LottoNumber> lottoNumbers;
 
     LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -19,9 +21,9 @@ public class LottoNumbers {
         return lottoNumbers.size();
     }
 
-    public List<Long> checkWinningNumber(LottoNumber winningNumber) {
+    public List<Long> getCheckedNumbers(LottoNumber winningNumber) {
         return lottoNumbers.stream()
-                .map(e -> e.getMatchCount(winningNumber))
+                .map(winningNumber::getMatchCountInLottoNumber)
                 .collect(Collectors.toList());
     }
 

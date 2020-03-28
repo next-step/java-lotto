@@ -1,23 +1,22 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.summingInt;
 
 public class LottoGameResults {
-    private final Map<Integer, Integer> lottoGameResults;
+    private final int totalGameCount;
+    private final List<Long> winningGames;
 
-    LottoGameResults(LottoNumbers boughtNumbers, LottoNumber winningNumber) {
-        this.lottoGameResults = checkWinning(boughtNumbers, winningNumber);
+    public LottoGameResults(int totalGameCount, List<Long> winningGames) {
+        this.totalGameCount = totalGameCount;
+        this.winningGames = winningGames;
     }
 
-    private Map<Integer, Integer> checkWinning(LottoNumbers boughtNumbers, LottoNumber winningNumber) {
-        List<Long> gameResults = boughtNumbers.checkWinningNumber(winningNumber);
-        return gameResults.stream()
-                .collect(groupingBy(e -> e.intValue(), HashMap::new, summingInt(e -> e.intValue())));
+    public int getTotalGameCount() {
+        return totalGameCount;
     }
 
+    public List<Long> getWinningGames() {
+        return new ArrayList<>(winningGames);
+    }
 }

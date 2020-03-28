@@ -1,18 +1,18 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import static lotto.domain.Constant.*;
 
 public class InputView {
     private static final String REQUEST_MONEY_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
 
-    private static final String ONLY_NUMBER_MESSAGE = "금액은 숫자만 입력할 수 있습니다.";
+    private static final String COMMA = ",";
 
     public InputView() {
     }
@@ -23,37 +23,47 @@ public class InputView {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            throw new IllegalArgumentException(ONLY_NUMBER_MESSAGE);
+            throw new OnlyNumberViolateException();
         }
     }
 
     public static List<Integer> requestWinningNumber() {
         System.out.println(REQUEST_WINNING_NUMBER);
         Scanner scanner = new Scanner(System.in);
-        String[] inputValue = scanner.nextLine().split(",");
+        String[] inputValue = scanner.nextLine().split(COMMA);
 
-        List<Integer> winningNumber = asList(inputValue).stream()
+        List<Integer> winningNumber = getWinningNumber(inputValue);
+        if (winningNumber.size() != LOTTO_NUM_COUNT_LIMIT) {
+            throw new InvalidWinningNumberException();
+        }
+        return winningNumber;
+    }
+
+    private static List<Integer> getWinningNumber(String[] inputValue) {
+        return asList(inputValue).stream()
                 .map(InputView::parseIntForLottoNum)
                 .distinct()
                 .collect(toList());
-
-        if (winningNumber.size() != 6) {
-            throw new IllegalArgumentException("당첨번호가 올바르지 않습니다.");
-        }
-        return new ArrayList<>(winningNumber);
     }
 
     private static int parseIntForLottoNum(String lottoNumString) {
-        int lottoNumber;
-        try {
-            lottoNumber = Integer.parseInt(lottoNumString);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
-        }
+        int lottoNumber = parseLottoNumber(lottoNumString);
+        return validateRange(lottoNumber);
+    }
 
-        if (1 <= lottoNumber && lottoNumber <= 45) {
+    private static int parseLottoNumber(String lottoNumString) {
+        try {
+            return Integer.parseInt(lottoNumString);
+        } catch (NumberFormatException e) {
+            throw new OnlyNumberViolateException();
+        }
+    }
+
+    private static int validateRange(int lottoNumber) {
+        if (LOTTO_NUM_MIN <= lottoNumber && lottoNumber <= LOTTO_NUM_MAX) {
             return lottoNumber;
         }
-        throw new IllegalArgumentException("당첨 번호는 1~45 까지 입력할 수 있습니다.");
+        System.out.println(lottoNumber);
+        throw new OutOfRangeException();
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
+import static lotto.domain.Constant.ZERO_INDEX;
 
 public class LottoGame {
     private final int gameCount;
@@ -18,13 +19,13 @@ public class LottoGame {
 
     public LottoNumbers buy() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < gameCount; i++) {
-            lottoNumbers.add(new LottoNumber(LottoNumberAutoGenerator.get()));
+        for (int i = ZERO_INDEX; i < gameCount; i++) {
+            lottoNumbers.add(new LottoNumber(new LottoNumberAutoGenerator().get()));
         }
         return new LottoNumbers(lottoNumbers);
     }
 
-    public LottoGameResults checkResult(LottoNumbers boughtNumbers, List<Integer> winningNumber) {
-        return new LottoGameResults(boughtNumbers, new LottoNumber(winningNumber));
+    public LottoGameResults getResults(LottoNumbers boughtNumbers, List<Integer> winningNumber) {
+        return LottoGameMatcher.matchToMap(boughtNumbers, new LottoNumber(winningNumber));
     }
 }
