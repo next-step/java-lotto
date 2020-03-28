@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.AutomaticLottoGenerator;
+import lotto.model.wrapper.LottoNumber;
 
 import java.util.List;
 

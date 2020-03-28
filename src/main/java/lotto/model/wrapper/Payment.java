@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.wrapper;
 
 import static lotto.utils.LottoConstant.LOTTO_PRICE;
 

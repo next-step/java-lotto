@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.wrapper.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

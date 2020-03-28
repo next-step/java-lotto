@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.wrapper.LottoMatchCount;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;

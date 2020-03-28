@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.wrapper.Payment;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

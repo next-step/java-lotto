@@ -1,6 +1,6 @@
 package LottoTests.model;
 
-import lotto.model.LottoNumber;
+import lotto.model.wrapper.LottoNumber;
 
 import java.util.List;
 import java.util.Objects;

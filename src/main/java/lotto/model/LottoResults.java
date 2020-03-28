@@ -20,7 +20,7 @@ public class LottoResults {
     }
 
     public Double profit() {
-        return getTotalPrice() / getPurchaseAmount();
+        return getTotalPrice() / getPurchasePayment();
     }
 
     public LottoResults getResult() {
@@ -43,7 +43,7 @@ public class LottoResults {
                 .sum();
     }
 
-    private double getPurchaseAmount() {
+    private double getPurchasePayment() {
         return (double) lottoResults.keySet()
                 .stream()
                 .mapToLong(result -> lottoResults.getOrDefault(result, 0L))

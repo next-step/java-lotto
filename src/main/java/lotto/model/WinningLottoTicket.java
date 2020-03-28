@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.wrapper.LottoNumber;
+
 import java.util.List;
 
 public class WinningLottoTicket extends LottoTicket {
