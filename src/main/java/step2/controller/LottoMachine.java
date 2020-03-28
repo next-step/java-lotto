@@ -16,8 +16,7 @@ public class LottoMachine {
         Lottos lottos = LottoMachine.createLottos(money);
         Lotto winningLotto = LottoMachine.createLotto(inputView.getWinningNumbers());
 
-        resultView.printResult(checkLottoNumber(winningLotto, lottos));
-
+        resultView.printResult(checkLottoNumber(winningLotto, lottos), money);
     }
 
     public static Lottos createLottos(Money money) {

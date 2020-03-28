@@ -6,7 +6,7 @@ public class Money {
     public static final String MONEY_AMOUNT_ERROR = "로또 금액보다 큰 금액을 입력해주세요.";
     private static final Integer LOTTO_PRICE = 1000;
 
-    private final int money;
+    private int money;
 
     public Money(int money) {
         validateMoney(money);
@@ -31,6 +31,13 @@ public class Money {
     }
 
     public int getLottoCount() {
-        return money / LOTTO_PRICE;
+        int lottoCount = money / LOTTO_PRICE;
+        this.money = LOTTO_PRICE * lottoCount;
+
+        return lottoCount;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }
