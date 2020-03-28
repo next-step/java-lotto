@@ -24,6 +24,11 @@ public abstract class LottoTicket {
         return Collections.unmodifiableList(numbers);
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
     private void validate(final List<LottoNumber> numbers) {
         validateNullOrEmpty(numbers);
         validateSize(numbers);

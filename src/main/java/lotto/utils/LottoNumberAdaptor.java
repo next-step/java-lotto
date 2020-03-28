@@ -1,4 +1,4 @@
-package LottoTests.model;
+package lotto.utils;
 
 import lotto.model.wrapper.LottoNumber;
 
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumberAdaptor {
     public static List<LottoNumber> convert(List<Integer> origin) {
-        if(Objects.isNull(origin)) {
+        if (Objects.isNull(origin)) {
             return null;
         }
 

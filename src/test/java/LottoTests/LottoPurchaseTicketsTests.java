@@ -1,6 +1,6 @@
 package LottoTests;
 
-import LottoTests.model.LottoNumberAdaptor;
+import lotto.utils.LottoNumberAdaptor;
 import lotto.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

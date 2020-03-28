@@ -1,6 +1,6 @@
 package LottoTests;
 
-import LottoTests.model.LottoNumberAdaptor;
+import lotto.utils.LottoNumberAdaptor;
 import lotto.model.LottoPurchaseTicket;
 import lotto.model.LottoResult;
 import lotto.model.WinningLottoTicket;

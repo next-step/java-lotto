@@ -13,6 +13,10 @@ public class LottoMatchCount {
         return new LottoMatchCount(matchCount);
     }
 
+    public Integer toInt() {
+        return matchCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

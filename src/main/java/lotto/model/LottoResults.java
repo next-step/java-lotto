@@ -23,10 +23,14 @@ public class LottoResults {
         return getTotalPrice() / getPurchasePayment();
     }
 
-    public LottoResults getResult() {
+    public Long count(LottoResult lottoResult) {
+        return lottoResults.getOrDefault(lottoResult, 0L);
+    }
+
+    public Map<LottoResult, Long> getResult() {
         Map<LottoResult, Long> result = getDefaultResult();
         result.putAll(this.lottoResults);
-        return new LottoResults(result);
+        return result;
     }
 
     private static Map<LottoResult, Long> getDefaultResult() {

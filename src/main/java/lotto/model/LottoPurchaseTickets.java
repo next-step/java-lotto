@@ -31,4 +31,10 @@ public class LottoPurchaseTickets {
     public int size() {
         return lottoTickets.size();
     }
+
+    public String toString() {
+        return lottoTickets.stream()
+                .map(LottoPurchaseTicket::toString)
+                .collect(Collectors.joining("\n"));
+    }
 }
