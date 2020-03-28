@@ -1,9 +1,7 @@
 package step2.view;
 
 import step2.ViewUtils;
-import step2.domain.Lotto;
-import step2.domain.LottoNumber;
-import step2.domain.Lottos;
+import step2.domain.*;
 
 import java.util.List;
 
@@ -50,5 +48,13 @@ public class ResultView {
         if(i != 0) {
             builder.append(LOTTO_NUMBER_DELIMITER);
         }
+    }
+
+    public void printResult(LottoResult result) {
+        ViewUtils.printLine(WINNING_STATISTICS_INFORMATION);
+        ViewUtils.printLine(String.format(MATCH_FOURTH_INFORMATION, result.getTierCount(LottoTier.FOURTH)));
+        ViewUtils.printLine(String.format(MATCH_THIRD_INFORMATION, result.getTierCount(LottoTier.THIRD)));
+        ViewUtils.printLine(String.format(MATCH_SECOND_INFORMATION, result.getTierCount(LottoTier.SECOND)));
+        ViewUtils.printLine(String.format(MATCH_FIRST_INFORMATION, result.getTierCount(LottoTier.FIRST)));
     }
 }

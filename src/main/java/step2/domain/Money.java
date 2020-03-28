@@ -1,7 +1,5 @@
 package step2.domain;
 
-import step2.controller.LottoMachine;
-
 public class Money {
     private static final Integer AMOUNT_ZERO = 0;
     public static final String MONEY_NEGATIVE_ERROR = "0보다 큰 금액을 입력해주세요.";

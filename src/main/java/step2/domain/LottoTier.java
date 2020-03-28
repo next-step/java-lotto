@@ -1,7 +1,5 @@
 package step2.domain;
 
-import java.util.Arrays;
-
 public enum LottoTier {
 
     FIRST(6, 2000000000),

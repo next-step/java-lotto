@@ -1,9 +1,7 @@
 package step2;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step1.StringAddCalculator;
 import step2.controller.LottoMachine;
 import step2.domain.Lotto;
 import step2.domain.LottoNumber;
