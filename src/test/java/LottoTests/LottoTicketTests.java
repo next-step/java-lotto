@@ -1,5 +1,6 @@
 package LottoTests;
 
+import lotto.model.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,8 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 한장 테스트")
 public class LottoTicketTests {
@@ -26,7 +26,7 @@ public class LottoTicketTests {
     @DisplayName("로또 생성 번호 테스트")
     @Test
     public void generateLottoNumberTest() {
-        LottoTIcket lottoTicket = LottoTicket.newInstance();
+        LottoTicket lottoTicket = LottoTicket.newInstance();
         assertThat(lottoTicket.toArray)
                 .hasSize(6)
                 .allmatch(number -> number >= 1 && number <= 45);
@@ -46,7 +46,7 @@ public class LottoTicketTests {
     @ParameterizedTest
     @MethodSource("checkLottoTicketTestCases")
     public void checkLottoTicketTest(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket, LottoResult lottoResult) {
-        assertThat(lottoTicket.checkResult(winningLottoTicket)).isEqualTo(lottoResult);
+        assertThat(lottoTicket.check(winningLottoTicket)).isEqualTo(lottoResult);
     }
 
     private static Stream<Arguments> generateLottoExceptionTestCases() {

@@ -1,6 +1,6 @@
 package LottoTests;
 
-import lotto.LottoStore;
+import lotto.model.LottoStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
