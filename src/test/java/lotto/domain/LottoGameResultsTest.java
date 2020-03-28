@@ -40,10 +40,21 @@ class LottoGameResultsTest {
         LottoTickets lottoTickets = new LottoTickets(lottoNumber);
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
 
-        System.out.println(lottoGameResults.getWinningPrizeSum());
-        System.out.println(lottoGameResults.getWinningPrizeSum() == LottoRank.FIVE_BONUS.getWinningPrize());
-
         assertThat(lottoGameResults.getProfitRate()).isEqualTo(300000);
+    }
+
+    @DisplayName("1개가 일치하면 상금은 0원 이다.")
+    @Test
+    public void matchedOnePrizeTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 7, 8, 10, 11, 12), 13);
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+
+        assertThat(lottoRank.getMatchCount()).isEqualTo(1);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.ONE.getWinningPrize());
     }
 
     @DisplayName("2개가 일치하면 상금은 0원 이다.")
