@@ -13,8 +13,8 @@ public class LottoPurchaseTickets {
     }
 
     public static LottoPurchaseTickets create(List<LottoPurchaseTicket> lottoTickets) {
-        if(Objects.isNull(lottoTickets) || lottoTickets.isEmpty()) {
-            throw new IllegalArgumentException("lotto tickets is null or empty");
+        if(Objects.isNull(lottoTickets)) {
+            throw new IllegalArgumentException("lotto tickets is null");
         }
 
         return new LottoPurchaseTickets(lottoTickets);

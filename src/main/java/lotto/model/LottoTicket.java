@@ -34,7 +34,7 @@ public abstract class LottoTicket {
 
     private void validateNullOrEmpty(List<Integer> numbers) {
         if(Objects.isNull(numbers) || numbers.isEmpty()) {
-            throw new IllegalArgumentException("lotto numbers is null or empty");
+            throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
         }
     }
 

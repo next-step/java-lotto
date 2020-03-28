@@ -13,7 +13,7 @@ public class LottoStoreTests {
 
     @DisplayName("로또 판매 테스트")
     @ParameterizedTest
-    @CsvSource(value = {"10000,10", "54321,5", "912,0", "0,0"})
+    @CsvSource(value = {"10000,10", "54321,54", "912,0", "0,0"})
     public void sellTest(Integer payment, Integer expectedLottoTicketsSize) {
         LottoPurchaseTickets lottoPurchaseTickets = LottoStore.sell(payment);
         assertThat(lottoPurchaseTickets.size()).isEqualTo(expectedLottoTicketsSize);
