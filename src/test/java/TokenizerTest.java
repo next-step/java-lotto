@@ -16,4 +16,13 @@ public class TokenizerTest {
         assertThat(tokens).hasSize(3);
         assertThat(tokens).contains(1, 2, 3);
     }
+
+    @Test
+    public void customDelimiterSplitTest() {
+        String message = "1;2;3";
+        String delimiter = ";";
+        List<Integer> tokens = Tokenizer.split(message, delimiter);
+        assertThat(tokens).hasSize(3);
+        assertThat(tokens).contains(1, 2, 3);
+    }
 }
