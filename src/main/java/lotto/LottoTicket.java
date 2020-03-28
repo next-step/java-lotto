@@ -4,8 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.LottoRule.getLottoNumbersSize;
+
 public class LottoTicket {
-    private static final int LOTTO_NUMBER_SIZE = 6;
     private List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
@@ -15,7 +16,7 @@ public class LottoTicket {
     }
 
     private void verifySize(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
+        if (lottoNumbers.size() != getLottoNumbersSize()) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }
     }
