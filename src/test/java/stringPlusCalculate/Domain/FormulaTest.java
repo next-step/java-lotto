@@ -1,10 +1,8 @@
 package stringPlusCalculate.Domain;
 
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +32,16 @@ public class FormulaTest {
         Formula formula = Formula.init("//;\\n1;2;3");
 
         assertThat(formula.findSplitter()).isEqualTo(";");
+    }
+
+    @Test
+    void determineSplitterWhenDefaultTest() {
+        Formula formula = Formula.init("1;2;3");
+        List<String> resultList = new ArrayList<>();
+        resultList.add(":");
+        resultList.add(",");
+
+        assertThat(formula.determineSplitter()).isEqualTo(resultList);
     }
 
     @Test
