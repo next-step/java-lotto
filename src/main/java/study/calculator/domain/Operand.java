@@ -3,6 +3,7 @@ package study.calculator.domain;
 import java.util.Objects;
 
 public class Operand {
+    private static final int ZERO = 0;
     private int operand;
 
     private Operand(int operand) {
@@ -14,13 +15,10 @@ public class Operand {
     }
 
     public static Operand getInstance(String operand) {
-        if (Objects.isNull(operand)) {
-            return new Operand(0);
+        if (Objects.isNull(operand) || operand.isEmpty()) {
+            return new Operand(ZERO);
         }
-        if (operand.isEmpty()) {
-            return new Operand(0);
-        }
-
+        
         return new Operand(Integer.parseInt(operand));
     }
 
