@@ -14,15 +14,18 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"3000, 3", "10000, 10"})
     public void buyLottoTest(int moneyAmount, int expectedGameCount) {
-        LottoGame lottoGame = new LottoGame(moneyAmount);
+        LottoGame lottoGame = new LottoGame();
 
-        assertThat(lottoGame.buy().size()).isEqualTo(expectedGameCount);
+        assertThat(lottoGame.buy(moneyAmount).size()).isEqualTo(expectedGameCount);
     }
 
     @DisplayName("구입 금액은 1000원 이상이어야 한다.")
     @Test
     public void depositGraterThanThousand() {
-        assertThatThrownBy(() -> new LottoGame(999))
+        assertThatThrownBy(() -> {
+            LottoGame lottoGame = new LottoGame();
+            lottoGame.buy(999);
+        })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("구입 금액은 1000원 이상이어야 합니다");
     }
@@ -31,9 +34,9 @@ class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"3000, 3", "10000, 10"})
     public void buyLottoGameTest(int money, int expectedGameCount) {
-        LottoGame lottoGame = new LottoGame(money);
+        LottoGame lottoGame = new LottoGame();
 
-        assertThat(lottoGame.calculateAutoGameCount()).isEqualTo(expectedGameCount);
+        assertThat(lottoGame.buy(money).size()).isEqualTo(expectedGameCount);
     }
 
 }

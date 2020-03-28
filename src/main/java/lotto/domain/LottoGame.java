@@ -5,15 +5,13 @@ import java.util.List;
 import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
 
 public class LottoGame {
-    private final LottoMoney lottoMoney;
-    private final int gameCount;
 
-    public LottoGame(int money) {
-        this.lottoMoney = new LottoMoney(money);
-        this.gameCount = calculateAutoGameCount();
+    public LottoGame() {
     }
 
-    public LottoTickets buy() {
+    public LottoTickets buy(int money) {
+        final LottoMoney lottoMoney = new LottoMoney(money);
+        final int gameCount = calculateAutoGameCount(lottoMoney);
         return new LottoTickets(gameCount);
     }
 
@@ -21,7 +19,7 @@ public class LottoGame {
         return LottoGameMatcher.matchWinningNumber(boughtTickets, new LottoNumber(winningNumber));
     }
 
-    int calculateAutoGameCount() {
+    private int calculateAutoGameCount(LottoMoney lottoMoney) {
         return Math.floorDiv(lottoMoney.convertToInt(), DEFAULT_GAME_PRICE);
     }
 
