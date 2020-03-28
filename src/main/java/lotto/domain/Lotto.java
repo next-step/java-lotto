@@ -7,15 +7,14 @@ import java.util.List;
 
 public class Lotto {
     public LotteryTickets buy(final Price price) {
-        List<Lottery> lotteries = makeLottery(price);
+        List<Lottery> lotteries = publishLottery(price);
         return new LotteryTickets(lotteries);
     }
 
-    private List<Lottery> makeLottery(final Price price) {
+    private List<Lottery> publishLottery(final Price price) {
         List<Lottery> lotteries = new ArrayList<>();
-        final int lotteryCount = price.lotteryCount();
-        for (int i = 0; i < lotteryCount; i++) {
-            lotteries.add(new Lottery());
+        for (int i = 0; i < price.lotteryCount(); i++) {
+            lotteries.add(new Lottery(LottoNumberGenerator.generate()));
         }
         return lotteries;
     }
