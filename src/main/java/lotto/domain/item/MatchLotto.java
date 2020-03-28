@@ -33,8 +33,8 @@ public class MatchLotto {
         return new MatchLotto(this.matchCount, items);
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public boolean isMatchCountSame(int count) {
+        return this.matchCount == count;
     }
 
     public int getItemsCount() {

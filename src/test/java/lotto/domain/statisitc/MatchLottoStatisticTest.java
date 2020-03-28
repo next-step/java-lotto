@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class MatchItemsTest {
+class MatchLottoStatisticTest {
 
     private List<Integer> numbers;
 
@@ -32,21 +32,20 @@ class MatchItemsTest {
     public void construtor() throws Exception {
         //given
         MatchLotto lotto = new MatchLotto(0, new LottoTicket());
-        MatchItems matchItems = new MatchItems(lotto);
+        MatchLottoStatistic matchLottoStatistic = new MatchLottoStatistic(lotto);
 
         //when
-        matchItems.addMatchItem(1, new LottoTicket());
-        matchItems.addMatchItem(1, new LottoTicket());
-        matchItems.addMatchItem(1, new LottoTicket());
-        matchItems.addMatchItem(3, new LottoTicket());
+        matchLottoStatistic.addMatchItem(1, new LottoTicket());
+        matchLottoStatistic.addMatchItem(1, new LottoTicket());
+        matchLottoStatistic.addMatchItem(1, new LottoTicket());
+        matchLottoStatistic.addMatchItem(3, new LottoTicket());
 
         //then
         assertAll(
-                () -> assertThat(matchItems.size()).isEqualTo(3),
-                () -> assertThat(matchItems.getItems().get(0).getItemsCount()).isEqualTo(1),
-                () -> assertThat(matchItems.getItems().get(1).getItemsCount()).isEqualTo(3),
-                () -> assertThat(matchItems.getItems().get(2).getItemsCount()).isEqualTo(1)
+                () -> assertThat(matchLottoStatistic.size()).isEqualTo(3),
+                () -> assertThat(matchLottoStatistic.getMatchLottos().get(0).getItemsCount()).isEqualTo(1),
+                () -> assertThat(matchLottoStatistic.getMatchLottos().get(1).getItemsCount()).isEqualTo(3),
+                () -> assertThat(matchLottoStatistic.getMatchLottos().get(2).getItemsCount()).isEqualTo(1)
         );
-
     }
 }

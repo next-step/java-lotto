@@ -16,6 +16,4 @@ class LottoGeneratorTest {
         //then
         assertThat(integers.size()).isEqualTo(6);
     }
-
-
 }

@@ -2,7 +2,9 @@ package lotto.domain.item;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,4 +51,16 @@ class MatchLottoTest {
         //then
         assertThat(matchLotto.getItemsCount()).isEqualTo(2);
     }
+
+    @DisplayName("매칭된 번호의 개수가 동일한지 체크")
+    @ParameterizedTest
+    @CsvSource(value = {"1:1", "3:3", "4:4"}, delimiter = ':')
+    public void isMatchCountSame(int matchCount, int compare) throws Exception {
+        //given
+        MatchLotto matchLotto = new MatchLotto(matchCount);
+
+        //then
+        assertThat(matchLotto.isMatchCountSame(compare)).isTrue();
+    }
+
 }
