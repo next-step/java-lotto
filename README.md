@@ -33,3 +33,10 @@
         * 6개 일치 : 2000000000원
 * LottoResults
     * LottoResults는 LottoTickets이 포함한 LottoTicket의 개별 LottoResult 목록을 포함한다. 
+    * 산 금액 대비 수익률을 계산한다.
+* InputView
+    * 구입금액을 입력할 수 있다.
+    * 지난 주 당첨 번호를 입력할 수 있다.
+* ResultView
+    * 구매한 자동 로또 번호를 출력할 수 있다.
+    * 당첨 통계 및 수익률을 출력할 수 있다.
