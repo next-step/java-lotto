@@ -20,8 +20,16 @@ public class Money {
         }
     }
 
-    public Money plus(Money money2) {
-        return new Money(this.money + money2.getMoney());
+    public Money plus(Money money) {
+        return new Money(this.money + money.money);
+    }
+
+    public Money divide(Money money) {
+        return new Money(this.money / money.money);
+    }
+
+    public Money multiply(Money money) {
+        return new Money(this.money * money.money);
     }
 
     public double getMoney() {
@@ -30,7 +38,6 @@ public class Money {
 
     public int getHowManyBuyItem(Money itemPrice) {
         return (int) Math.floor(this.money / itemPrice.money);
-
     }
 
     @Override

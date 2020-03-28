@@ -17,19 +17,19 @@ public class LottoApplication {
         String inputMoney = InputView.inputBuyAmount();
         Money money = new Money(StringUtil.parseStringToInt(inputMoney));
 
-        LottoGame lottoGame = new LottoGame(money);
-        lottoGame.buyAllLottoTicket();
-        List<LottoTicket> lottos = lottoGame.getLottos();
-        ResultView.printLoots(lottos);
-
-        String luckyNumberInput = InputView.inputLuckyNumber();
-        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
-        Collections.sort(luckyNumber);
-        ResultView.printLuckyNumber(luckyNumber);
-
-        lottoGame.statisticAllGame(luckyNumber);
-        StatisticDataDto dto = lottoGame.getStatisticGame();
-
-        ResultView.printResult(dto);
+//        LottoGame lottoGame = new LottoGame(money);
+//        lottoGame.buyAllLottoTicket();
+//        List<LottoTicket> lottos = lottoGame.getLottos();
+//        ResultView.printLoots(lottos);
+//
+//        String luckyNumberInput = InputView.inputLuckyNumber();
+//        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
+//        Collections.sort(luckyNumber);
+//        ResultView.printLuckyNumber(luckyNumber);
+//
+//        lottoGame.statisticAllGame(luckyNumber);
+//        StatisticDataDto dto = lottoGame.getStatisticGame();
+//
+//        ResultView.printResult(dto);
     }
 }
