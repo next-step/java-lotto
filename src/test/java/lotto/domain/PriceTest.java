@@ -1,6 +1,5 @@
-package lotto.dto;
+package lotto.domain;
 
-import lotto.domain.Price;
 import lotto.exception.NoPurchasePriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
