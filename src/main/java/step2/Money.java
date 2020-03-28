@@ -1,7 +1,6 @@
 package step2;
 
 public class Money {
-    private static final Integer LOTTO_PRICE = 1000;
     private static final Integer AMOUNT_ZERO = 0;
     public static final String MONEY_NEGATIVE_ERROR = "0보다 큰 금액을 입력해주세요.";
     public static final String MONEY_AMOUNT_ERROR = "로또 금액보다 큰 금액을 입력해주세요.";
@@ -25,7 +24,7 @@ public class Money {
     }
 
     private void checkMoneyAmount(int money) {
-        if(money < LOTTO_PRICE) {
+        if(money < LottoMachine.LOTTO_PRICE) {
             throw new IllegalArgumentException(MONEY_AMOUNT_ERROR);
         }
     }
