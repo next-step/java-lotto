@@ -21,7 +21,15 @@ public enum RewardEnum {
     }
 
     public int getReward() {
-        return this.matched;
+        return this.reward;
+    }
+
+    public static int getMinMatched(){
+        return THREE.matched;
+    }
+
+    public static int getMaxMatched(){
+        return SIX.matched;
     }
 
     public static boolean isWinning(int matched) {
