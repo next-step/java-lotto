@@ -14,12 +14,16 @@ public class LottoShop {
     public LottoBundle buyAuto(int price) {
         validatePrice(price);
         int lottoCount = Math.floorDiv(price, PRICE_PER_PIECE);
+        return new LottoBundle(toList(lottoCount));
+    }
+
+    private List<Lotto> toList(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(new Lotto());
         }
-        return new LottoBundle(lottos);
+        return lottos;
     }
 
     private void validatePrice(int price) {
