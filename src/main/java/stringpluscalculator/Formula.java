@@ -1,40 +1,29 @@
 package stringpluscalculator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Formula {
-    private String[] formula = {"0"};
+    private List<PositiveNumber> positiveNumbers = Arrays.asList(new PositiveNumber(0));
 
     public Formula(String input, String separators) {
         if (!input.isEmpty()) {
-            this.formula = validateFormula(input.split(separators));
+            this.positiveNumbers = convertPositiveNumber(input.split(separators));
         }
     }
 
     public int sum() {
-        return Arrays.stream(formula)
-                .mapToInt(Integer::parseInt)
+        return positiveNumbers.stream()
+                .mapToInt(PositiveNumber::getPositiveNumber)
                 .reduce(0, Integer::sum);
     }
 
-    private String[] validateFormula(String[] input) {
-        for (String s : input) {
-            validateNumber(s);
+    private List<PositiveNumber> convertPositiveNumber(String[] splitInput) {
+        List<PositiveNumber> converted = new ArrayList<>();
+        for (String s : splitInput) {
+            converted.add(new PositiveNumber(s));
         }
-        return input;
-    }
-
-    private void validateNumber(String input) {
-        try {
-            validatePositiveNumber(Integer.parseInt(input));
-        } catch (NumberFormatException nfe) {
-            throw new RuntimeException("수식 중 숫자가 아닌것이 있습니다.");
-        }
-    }
-
-    private void validatePositiveNumber(int input) {
-        if (input < 0) {
-            throw new RuntimeException("수식 중 양수가 아닌것이 있습니다.");
-        }
+        return converted;
     }
 }
