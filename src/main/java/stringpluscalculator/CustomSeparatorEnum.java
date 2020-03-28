@@ -18,9 +18,13 @@ public enum CustomSeparatorEnum {
 
     public static String withoutCustomSeparator(String input) {
         if (CustomSeparatorEnum.hasCustomSeparator(input)) {
-            return input.substring(input.indexOf(SUFFIX.value) + SUFFIX.value.length());
+            return input.substring(getCustomSeparatorEndIndex(input));
         }
         return input;
+    }
+
+    private static int getCustomSeparatorEndIndex(String input){
+        return input.indexOf(SUFFIX.value) + SUFFIX.value.length();
     }
 
     public static boolean hasCustomSeparator(String input) {
