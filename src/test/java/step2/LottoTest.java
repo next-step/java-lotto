@@ -1,7 +1,9 @@
 package step2;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import step1.StringAddCalculator;
 import step2.controller.LottoMachine;
 import step2.domain.Lotto;
 import step2.domain.LottoNumber;
@@ -32,8 +34,13 @@ public class LottoTest {
     @DisplayName("당첨 숫자 개수 체크가 제대로 되는지 테스트")
     void WinningNumber() {
         Lotto lotto = LottoMachine.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto = LottoMachine.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(LottoMachine.checkLottoNumber(winningLotto, lotto)).isEqualTo(6);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(1, 2, 3, 4, 7, 8)))).isEqualTo(4);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(1, 2, 3, 7, 8, 9)))).isEqualTo(3);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(1, 2, 7, 8, 9, 10)))).isEqualTo(2);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(1, 7, 8, 9, 10, 11)))).isEqualTo(1);
+        assertThat(lotto.getMatchedNumberCount(LottoMachine.createLotto(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(0);
     }
 }
