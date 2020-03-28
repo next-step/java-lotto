@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lottery;
 import lotto.domain.Price;
 
 import java.io.InputStream;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 
 public class InputView {
     private static final String INPUT_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String INPUT_WINNIG_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
 
     private final Scanner scanner;
 
@@ -20,6 +22,12 @@ public class InputView {
 
     public Price inputPrice() {
         System.out.println(INPUT_PRICE_MESSAGE);
-        return new Price(scanner.nextInt());
+        return new Price(Integer.parseInt(scanner.nextLine()));
+    }
+
+    public Lottery insertLastWeekendWinningLottery() {
+        System.out.println();
+        System.out.println(INPUT_WINNIG_NUMBERS_MESSAGE);
+        return new Lottery(scanner.nextLine());
     }
 }
