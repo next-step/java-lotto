@@ -6,15 +6,15 @@ public class LottoNumberGenerator {
 
     private static final Random RANDOM = new Random();
 
-    public static List<LottoNumber> generate() {
-        List<LottoNumber> lottoNumbers = removeDuplicateNumbers();
+    public static LottoNumbers generate() {
+        List<LottoNumber> lottoNumbers = generateUnRedundantNumbers();
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers;
+        return new LottoNumbers(lottoNumbers);
     }
 
-    private static List<LottoNumber> removeDuplicateNumbers() {
+    private static List<LottoNumber> generateUnRedundantNumbers() {
         Set<LottoNumber> set = new HashSet<>();
-        while (set.size() < 6) {
+        while (set.size() < LottoNumbers.LOTTO_NUMBER_MAX_SIZE) {
             set.add(LottoNumber.valueOf(random()));
         }
         return new ArrayList<>(set);
