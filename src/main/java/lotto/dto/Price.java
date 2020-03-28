@@ -1,5 +1,7 @@
 package lotto.dto;
 
+import lotto.exception.NoPurchasePriceException;
+
 import java.util.Objects;
 
 public class Price {
@@ -18,7 +20,7 @@ public class Price {
 
     private void checkAvailablePrice(final int price) {
         if (price < LOTTO_PRICE) {
-            throw new RuntimeException("로또 구매 가능한 금액은 천원 이상 입니다.");
+            throw new NoPurchasePriceException(price);
         }
     }
 
