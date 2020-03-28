@@ -7,3 +7,27 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현 목록 (로또 1단계)
+* LottoStore
+    * LottoStore는 로또(LottoTicket)를 판매한다.
+    * LottoStore는 구입금액 내에서 가능한 최대 갯수의 LottoTicket를 판매한다.
+    * LottoStore가 판매하는 LottoTicket의 기본 가격은 1000원이다.
+* LottoTicket
+    * LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 포함한다.
+    * WinningLottoTicket과 비교해서 당첨 결과(LottoResult)를 반환한다.
+* LottoTickets
+    * LottoTickets은 구입한 LottoTicket 목록을 소유한다.
+* WinningLottoTicket
+    * Winning LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 포함한다.
+* LottoResult
+    * LottoResult는 WinningLottoTicket과 LottoTicket간의 일치하는 숫자 결과를 포함한다.
+    * LottoResult는 일치하는 숫자 갯수인 0 ~ 6 중의 하나와, 그에 따른 당첨금 내용을 포함한다.
+    * 당첨 결과는 다음과 같다.
+        * 0 ~ 2 일치 : 0
+        * 3개 일치 : 5000원
+        * 4개 일치 : 50000원
+        * 5개 일치 : 1500000원
+        * 6개 일치 : 2000000000원
+* LottoResults
+    * LottoResults는 LottoTickets이 포함한 LottoTicket의 개별 LottoResult 목록을 포함한다. 
