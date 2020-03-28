@@ -9,17 +9,17 @@ import java.util.List;
 
 public class Formula {
 
-    final String formula;
+    String formula;
 
-    private Formula(String formula) {
+    private Formula() {
+    }
+
+    public static Formula init() {
+        return new Formula();
+    }
+
+    public ArithmeticTargets arithmeticBySplit(String formula) {
         this.formula = formula;
-    }
-
-    public static Formula init(String formula) {
-        return new Formula(formula);
-    }
-
-    public ArithmeticTargets arithmeticBySplit() {
         List<String> splitters = determineSplitter();
 
         String trimArithmetic = trimArithmetic(splitters);
