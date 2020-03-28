@@ -28,14 +28,14 @@ public class Numbers {
         try {
             Integer.parseInt(input);
         } catch (RuntimeException e) {
-            System.out.println("숫자만 입력할 수 있습니다.");
+            System.out.println("숫자만 입력할 수 있습니다." + e.getMessage());
         }
     }
 
     private void checkNegativeNum(String number) {
         if (Integer.parseInt(number) < ZERO) {
-            System.out.println("음수는 입력할 수 없습니다.");
-            throw new RuntimeException();
+            throw new RuntimeException(String.format("음수(%s)는 입력할 수 없습니다.", number));
+
         }
     }
 
