@@ -10,10 +10,6 @@ public class LottoTicket implements Item {
 
     private final List<Integer> numbers;
 
-    public LottoTicket() {
-        this.numbers = new ArrayList<>();
-    }
-
     public LottoTicket(List<Integer> numbers) {
         Collections.sort(numbers);
         validateSize(numbers);
