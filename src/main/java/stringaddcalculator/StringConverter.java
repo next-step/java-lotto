@@ -1,3 +1,7 @@
+package stringaddcalculator;
+
+import stringaddcalculator.PositiveNumbers;
+
 import java.util.List;
 
 import static java.util.stream.Collectors.collectingAndThen;

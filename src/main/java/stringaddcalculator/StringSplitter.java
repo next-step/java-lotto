@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -5,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class StringSplitter {
     private static final String REGEX_FOR_DEFAULT = ",|:";
-    private static final String REGEX_FOR_CUSTOM = "//(.)\n(.*)";
+    private static final String REGEX_FOR_CUSTOM = "//(.)@(.*)";
 
     public static List<String> split(String input) {
         return splitByCustom(input);

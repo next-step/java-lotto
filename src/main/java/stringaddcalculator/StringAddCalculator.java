@@ -1,3 +1,7 @@
+package stringaddcalculator;
+
+import stringaddcalculator.PositiveNumbers;
+
 public class StringAddCalculator {
     public static int addString(String input) {
         if (isNullOrEmpty(input)) {
