@@ -11,9 +11,9 @@ public class CalculatorTest {
     @ParameterizedTest
     @CsvSource(value = {"//;\\n1;2;3:6", "1,2:3", "1,2,3:6", "1,2:3:6"}, delimiter = ':')
     void calculatorTest(String input, String expected) {
-        Calculator calculator = Calculator.init(input, Operator.PLUS);
+        Calculator calculator = Calculator.init();
 
-        Double result = calculator.calculate();
+        Double result = calculator.calculate(input, Operator.PLUS);
 
         assertThat(result).isEqualTo(Double.parseDouble(expected));
     }

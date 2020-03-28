@@ -3,19 +3,14 @@ package stringPlusCalculate.Domain;
 
 public class Calculator {
 
-    String input;
-    Operator operator;
-
-    private Calculator(String input, Operator operator) {
-        this.input = input;
-        this.operator = operator;
+    private Calculator() {
     }
 
-    public static Calculator init(String input, Operator operator) {
-        return new Calculator(input, operator);
+    public static Calculator init() {
+        return new Calculator();
     }
 
-    public Double calculate() {
+    public Double calculate(String input, Operator operator) {
         Formula formula = Formula.init(input);
         ArithmeticTargets arithmeticTargets = formula.arithmeticBySplit();
         return operator.calc(arithmeticTargets.toList());
