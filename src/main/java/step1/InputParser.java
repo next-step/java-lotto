@@ -5,12 +5,11 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
-    private static final String CUSTOM_PATTERN = "//(.)\n(.*)";
     private static final String DEFAULT_DELIMITER = ",|:";
+    private static final Pattern CUSTOM_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     public static String[] parseInput(String input) {
-        Pattern customPattern =  Pattern.compile(CUSTOM_PATTERN);
-        Matcher m = customPattern.matcher(input);
+        Matcher m = CUSTOM_PATTERN.matcher(input);
 
         if(m.find()) {
             String customDelimiter = m.group(1);
