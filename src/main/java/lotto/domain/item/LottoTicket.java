@@ -46,16 +46,16 @@ public class LottoTicket implements Item {
         }
     }
 
-    public int compareMatchNumberCount(List<Integer> compare) {
+    public int getCompareLuckNumberMatchCount(List<Integer> compare) {
         int match = 0;
         for (Integer num : numbers) {
-            match = getMatch(compare, match, num);
+            match = addCountIfMatch(compare, match, num);
         }
 
         return match;
     }
 
-    private int getMatch(List<Integer> compare, int match, Integer num) {
+    private int addCountIfMatch(List<Integer> compare, int match, Integer num) {
         if (compare.contains(num)) {
             match++;
         }

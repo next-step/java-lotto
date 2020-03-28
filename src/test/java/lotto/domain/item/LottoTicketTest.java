@@ -132,7 +132,7 @@ public class LottoTicketTest {
         LottoTicket lotto = new LottoTicket(numbers);
 
         //when
-        int match = lotto.compareMatchNumberCount(comp);
+        int match = lotto.getCompareLuckNumberMatchCount(comp);
 
         //then
         assertThat(match).isEqualTo(expect);
