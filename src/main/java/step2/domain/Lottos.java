@@ -1,6 +1,7 @@
-package step2;
+package step2.domain;
 
-import java.util.ArrayList;
+import step2.domain.Lotto;
+
 import java.util.List;
 
 public class Lottos {

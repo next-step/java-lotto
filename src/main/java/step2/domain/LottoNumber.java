@@ -1,4 +1,4 @@
-package step2;
+package step2.domain;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final Integer MIN_NUMBER = 1;

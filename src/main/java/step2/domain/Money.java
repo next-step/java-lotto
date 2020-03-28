@@ -1,4 +1,6 @@
-package step2;
+package step2.domain;
+
+import step2.controller.LottoMachine;
 
 public class Money {
     private static final Integer AMOUNT_ZERO = 0;
