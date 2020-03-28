@@ -1,9 +1,9 @@
 package LottoTests;
 
-import lotto.utils.LottoNumberAdaptor;
 import lotto.model.LottoPurchaseTicket;
 import lotto.model.LottoResult;
 import lotto.model.WinningLottoTicket;
+import lotto.utils.LottoNumberAdaptor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

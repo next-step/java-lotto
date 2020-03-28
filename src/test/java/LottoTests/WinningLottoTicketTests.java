@@ -1,7 +1,7 @@
 package LottoTests;
 
-import lotto.utils.LottoNumberAdaptor;
 import lotto.model.WinningLottoTicket;
+import lotto.utils.LottoNumberAdaptor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

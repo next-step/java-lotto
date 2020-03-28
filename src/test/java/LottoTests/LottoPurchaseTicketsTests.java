@@ -1,7 +1,7 @@
 package LottoTests;
 
-import lotto.utils.LottoNumberAdaptor;
 import lotto.model.*;
+import lotto.utils.LottoNumberAdaptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,5 +41,12 @@ public class LottoPurchaseTicketsTests {
         LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR));
 
         assertThat(lottoPurchaseTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);
+    }
+
+    @DisplayName("로또 갯수 테스트")
+    @Test
+    public void sizeTest() {
+        LottoPurchaseTickets lottoPurchaseTickets = LottoPurchaseTickets.create(lottoTickets);
+        assertThat(lottoPurchaseTickets.size()).isEqualTo(3);
     }
 }
