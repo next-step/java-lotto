@@ -8,7 +8,7 @@ public class Money {
 
     private Long money;
 
-    public Money (){
+    public Money() {
         this.money = 0l;
     }
 
@@ -28,10 +28,10 @@ public class Money {
     }
 
     public int findLottoCountToBuy() {
-        return (int) Math.floor(this.money / MONEY_TO_BUY_ONE_LOTTO) ;
+        return (int) Math.floor(this.money / MONEY_TO_BUY_ONE_LOTTO);
     }
 
-    public Money add(Money money){
+    public Money add(Money money) {
         return new Money(this.money + money.getMoney());
     }
 

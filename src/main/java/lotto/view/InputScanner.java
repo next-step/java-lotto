@@ -13,6 +13,6 @@ public class InputScanner {
 
     public static List<Integer> getWinningLotto() {
         System.out.println("지난 주 당첨번호를 입력해 주세요.");
-       return StringConverter.convertStringToNumbers(scanner.nextLine());
+        return StringConverter.convertStringToNumbers(scanner.nextLine());
     }
 }

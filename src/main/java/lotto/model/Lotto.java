@@ -44,10 +44,10 @@ public class Lotto {
     }
 
     public int findHowManyMatch(List<Integer> winningLotto) {
-            return this.lottoNumbers.stream()
-                    .filter(it -> winningLotto.contains(it))
-                    .collect(Collectors.toList())
-                    .size();
+        return this.lottoNumbers.stream()
+                .filter(it -> winningLotto.contains(it))
+                .collect(Collectors.toList())
+                .size();
     }
 
     @Override

@@ -21,7 +21,7 @@ public enum MatchingResult {
         return new Money(count * cashPrize);
     }
 
-    public void printHowManyMatch(long count){
+    public void printHowManyMatch(long count) {
         System.out.println(matchCount + "개 일치 " + (cashPrize + "원 - ") + count + "개");
     }
 }
