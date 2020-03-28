@@ -8,8 +8,12 @@ public class ResultView {
 
     public static void printLoots(List<LottoTicket> lottos) {
         System.out.println(lottos.size() + "개를 구매 했습니다.");
-        for (LottoTicket lotto: lottos){
+        for (LottoTicket lotto : lottos) {
             System.out.println(lotto);
         }
+    }
+
+    public static void printLuckyNumber(List<Integer> luckyNumber) {
+        System.out.println(luckyNumber);
     }
 }

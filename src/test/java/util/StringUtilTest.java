@@ -38,4 +38,13 @@ class StringUtilTest {
                 () -> StringUtil.parseStringToInt(input)
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName(",로 구분된 문다열을 입력 받아 List<Integer> 로 반환")
+    @ParameterizedTest
+    @CsvSource(value = {"1,2:2", "1,2,3:3", "1,2,3,4:4"}, delimiter = ':')
+    public void splitStringToIntegers(String input, int expect) throws Exception {
+        //given
+        assertThat(StringUtil.splitStringToIntegers(input).size()).isEqualTo(expect);
+    }
+
 }
