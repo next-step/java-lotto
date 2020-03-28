@@ -13,9 +13,9 @@ public class LottoBuyer {
 			.boxed()
 			.collect(Collectors.toList());
 
-	public List<LottoNumber> buyLottoNumbers(int money) {
-		int count = money / PRIZE;
-		return getLottoNumbers(count);
+	public List<LottoNumber> buyLottoNumbers(long money) {
+		long count = money / PRIZE;
+		return getLottoNumbers((int) count);
 	}
 
 	private List<LottoNumber> getLottoNumbers(int count) {

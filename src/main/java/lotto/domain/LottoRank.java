@@ -26,6 +26,10 @@ public enum LottoRank {
 		return correctMap.get(correctNumbers);
 	}
 
+	public int getCorrectNumbers() {
+		return correctNumbers;
+	}
+
 	public int getEarningPrize() {
 		return earningPrize;
 	}

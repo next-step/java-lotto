@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
@@ -8,15 +9,19 @@ import java.util.stream.Collectors;
 
 public class LottoChecker {
 	private final LottoNumber winningNumbers;
-	private final int spentMoney;
+	private final long spentMoney;
 
-	public LottoChecker(LottoNumber winningNumbers, int spentMoney) {
+	public LottoChecker(LottoNumber winningNumbers, long spentMoney) {
 		this.winningNumbers = winningNumbers;
 		this.spentMoney = spentMoney;
 	}
 
 	public LottoResult getWinningResult(LottoNumber... applyNumbers) {
-		Map<LottoRank, Long> map = Arrays.stream(applyNumbers)
+		return getWinningResult(Arrays.asList(applyNumbers));
+	}
+
+	public LottoResult getWinningResult(List<LottoNumber> applyNumbers) {
+		Map<LottoRank, Long> map = applyNumbers.stream()
 				.map(lottoNumber -> lottoNumber.matchLottoNumber(winningNumbers))
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));

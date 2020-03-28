@@ -13,12 +13,12 @@ public class LottoNumber {
 	}
 
 	public LottoNumber(List<Integer> numbers) {
+		this.numbers = numbers;
+
 		if (isInvalidLottoNumbers(numbers)) {
 			throw new IllegalArgumentException(String.format("Instantiate LottoNumber failed. " +
-					"numbers must be distinct 6 numbers range 1~45 : numbers=%s", listString(numbers)));
+					"numbers must be distinct 6 numbers range 1~45 : numbers=%s", toString()));
 		}
-
-		this.numbers = numbers;
 	}
 
 	private boolean isInvalidLottoNumbers(List<Integer> numbers) {
@@ -28,17 +28,18 @@ public class LottoNumber {
 				.count() != 6;
 	}
 
-	private String listString(List<Integer> numbers) {
-		return numbers.stream()
-				.map(Object::toString)
-				.collect(Collectors.joining(",", "[", "]"));
-	}
-
 	LottoRank matchLottoNumber(LottoNumber winningNumber) {
 		int correctNumbers = (int) this.numbers.stream()
 				.filter(winningNumber.numbers::contains)
 				.count();
 		return LottoRank.getFromCorrectNumbers(correctNumbers);
+	}
+
+	@Override
+	public String toString() {
+		return numbers.stream()
+				.map(Object::toString)
+				.collect(Collectors.joining(",", "[", "]"));
 	}
 
 	@Override

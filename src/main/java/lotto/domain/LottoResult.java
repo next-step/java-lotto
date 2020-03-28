@@ -7,11 +7,11 @@ import java.util.Objects;
 public class LottoResult {
 
 	private final Map<LottoRank, Long> winningMap;
-	private final int buyPrize;
+	private final long spentMoney;
 
-	LottoResult(Map<LottoRank, Long> winningMap, int buyPrize) {
+	LottoResult(Map<LottoRank, Long> winningMap, long spentMoney) {
 		this.winningMap = Collections.unmodifiableMap(winningMap);
-		this.buyPrize = buyPrize;
+		this.spentMoney = spentMoney;
 	}
 
 	public Map<LottoRank, Long> getWinningMap() {
@@ -36,6 +36,6 @@ public class LottoResult {
 				.entrySet()
 				.stream()
 				.mapToLong(entry -> entry.getKey().getEarningPrize() * entry.getValue())
-				.sum() / (double) buyPrize;
+				.sum() / (double) spentMoney;
 	}
 }
