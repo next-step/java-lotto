@@ -8,6 +8,7 @@ import step2.view.InputView;
 import step2.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class LottoMachine {
         int lottoCount = money.getLottoCount();
 
         for(int i = 0; i < lottoCount; i++) {
-            createdLottos.add(new Lotto(createLotto()));
+            createdLottos.add(createLotto());
         }
         Lottos lottos = new Lottos(createdLottos);
         resultView.showLottos(lottos, lottoCount);
@@ -33,14 +34,24 @@ public class LottoMachine {
         return lottos;
     }
 
-    private static List<LottoNumber> createLotto() {
+    private static Lotto createLotto() {
         List<LottoNumber> lotto = getShuffledNumber()
                 .stream()
                 .limit(Lotto.COUNT_NUMBER)
                 .sorted()
                 .collect(Collectors.toList());
 
-        return lotto;
+        return new Lotto(lotto);
+    }
+
+    public static Lotto createLotto(Integer ... inputNumbers) {
+        List<Integer> numbers = Arrays.asList(inputNumbers);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for(int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return new Lotto(lottoNumbers);
     }
 
     private static List<LottoNumber> getShuffledNumber() {
