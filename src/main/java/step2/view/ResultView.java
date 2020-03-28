@@ -21,24 +21,37 @@ public class ResultView {
     private void printLine(String line) {
         System.out.println(line);
     }
+
     public void showLottos(Lottos lottos, int count) {
         printLine(String.format(LOTTO_COUNT_INFORMATION, count));
+        printLottoNumbers(lottos);
+    }
 
+    private void printLottoNumbers(Lottos lottos) {
         StringBuilder builder = new StringBuilder();
+
         for(Lotto lotto : lottos.getValue()) {
             builder.setLength(0);
             builder.append(LOTTO_NUMBER_PREFIX);
 
             List<LottoNumber> lottoNumbers = lotto.getValue();
-            for(int i = 0; i < lottoNumbers.size(); i++) {
-                if(i != 0) {
-                    builder.append(LOTTO_NUMBER_DELIMITER);
-                }
-                builder.append(Integer.toString(lottoNumbers.get(i).getValue()));
-            }
+            appendLottoNumbers(builder, lottoNumbers);
 
             builder.append(LOTTO_NUMBER_POSTFIX);
             printLine(builder.toString());
+        }
+    }
+
+    private void appendLottoNumbers(StringBuilder builder, List<LottoNumber> lottoNumbers) {
+        for(int i = 0; i < lottoNumbers.size(); i++) {
+            appendDelimiter(builder, i);
+            builder.append(Integer.toString(lottoNumbers.get(i).getValue()));
+        }
+    }
+
+    private void appendDelimiter(StringBuilder builder, int i) {
+        if(i != 0) {
+            builder.append(LOTTO_NUMBER_DELIMITER);
         }
     }
 }
