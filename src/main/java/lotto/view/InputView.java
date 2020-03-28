@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lottery;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Price;
 
 import java.io.InputStream;
@@ -25,9 +25,9 @@ public class InputView {
         return new Price(Integer.parseInt(scanner.nextLine()));
     }
 
-    public Lottery insertLastWeekendWinningLottery() {
+    public LottoNumbers insertLastWeekendWinningLottery() {
         System.out.println();
         System.out.println(INPUT_WINNIG_NUMBERS_MESSAGE);
-        return new Lottery(scanner.nextLine());
+        return new LottoNumbers(scanner.nextLine());
     }
 }

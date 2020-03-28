@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotteries;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,5 +15,7 @@ public class Application {
 
         OutputView.printLotteryCount(lotteries.count());
         OutputView.printLotteries(lotteries.getLottoNumbers());
+
+        LottoNumbers winningLotteNumbers = inputView.insertLastWeekendWinningLottery();
     }
 }

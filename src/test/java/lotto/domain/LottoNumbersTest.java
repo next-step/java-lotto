@@ -47,4 +47,15 @@ class LottoNumbersTest {
                 () -> new LottoNumbers(lottoNumbers)
         );
     }
+
+    @DisplayName("입력받은 당첨 번호 문자열을 Lottery 객체로 생성할 수 있다.")
+    @Test
+    void createFromInput() {
+        final String input = "1, 2, 3, 4, 5, 6";
+        LottoNumbers expect = new LottoNumbers(input);
+
+        LottoNumbers actual = new LottoNumbers(input);
+
+        assertThat(actual).isEqualTo(expect);
+    }
 }
