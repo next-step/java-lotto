@@ -36,4 +36,9 @@ public class LottoGame {
     public List<LottoTicket> getLottos() {
         return lottos;
     }
+
+//    @Override
+//    public String toString() {
+//        return lottos.toString() + "\n";
+//    }
 }
