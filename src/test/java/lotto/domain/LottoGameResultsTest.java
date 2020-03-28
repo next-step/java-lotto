@@ -88,6 +88,20 @@ class LottoGameResultsTest {
         assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FIVE.getWinningPrize());
     }
 
+    @DisplayName("5개가 일치하고 보너스번호도 일치하면 상금은 300_000_000원 이다.")
+    @Test
+    public void matchedFiveBonusPrizeTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 12), 6);
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+
+        assertThat(lottoRank.getMatchCount()).isEqualTo(51);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FIVE_BONUS.getWinningPrize());
+    }
+
     @DisplayName("6개가 일치하면 상금은 2_000_000_000원 이다.")
     @Test
     public void matchedSixPrizeTest() {
