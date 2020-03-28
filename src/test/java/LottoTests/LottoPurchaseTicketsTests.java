@@ -1,6 +1,7 @@
 package LottoTests;
 
 import lotto.model.LottoPurchaseTicket;
+import lotto.model.LottoPurchaseTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class LottoPurchaseTicketsTests {
     @DisplayName("로또 여러 장 생성 테스트")
     @Test
     public void generateLottoTest() {
-        assertThatCode(() -> LottoTickets.create(lottoTickets)).doesNotThrowAnyException();
+        assertThatCode(() -> LottoPurchaseTickets.create(lottoTickets)).doesNotThrowAnyException();
     }
 
 }
