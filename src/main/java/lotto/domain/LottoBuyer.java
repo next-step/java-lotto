@@ -23,7 +23,7 @@ public class LottoBuyer {
 
 		for (int i = 0; i < count; i++) {
 			Collections.shuffle(candidateNumbers);
-			lottoNumbers.add(new LottoNumber(candidateNumbers.subList(0, 6)));
+			lottoNumbers.add(new LottoNumber(new ArrayList<>(candidateNumbers.subList(0, 6))));
 		}
 
 		return lottoNumbers;
