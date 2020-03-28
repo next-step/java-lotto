@@ -1,6 +1,6 @@
 package calculate.domain;
 
-import calculate.util.StringUtil;
+import util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
