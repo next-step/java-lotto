@@ -17,7 +17,7 @@ public class Operand {
         if (Objects.isNull(operand)) {
             return new Operand(0);
         }
-        if(operand.isEmpty()) {
+        if (operand.isEmpty()) {
             return new Operand(0);
         }
         return new Operand(Integer.parseInt(operand));

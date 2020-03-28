@@ -41,9 +41,9 @@ public class StringAdditionTest {
 
     private static Stream<Arguments> provideStringOperands() {
         return Stream.of(
-                Arguments.of("//?\n0?1", 1),
-                Arguments.of("//!!\n1!!1", 2),
-                Arguments.of("//?\n1,2?3", 6)
+                Arguments.of("//?\\n0?1", 1),
+                Arguments.of("//!!\\n1!!1", 2),
+                Arguments.of("//?\\n1,2?3", 6)
         );
     }
 
