@@ -9,7 +9,7 @@ public class LottoGameMatcher {
     private LottoGameMatcher() {
     }
 
-    public static LottoGameResults matchToMap(LottoNumbers boughtNumbers, LottoNumber winningNumber) {
+    public static LottoGameResults matchWinningNumber(LottoNumbers boughtNumbers, LottoNumber winningNumber) {
         List<Long> winnings = boughtNumbers.getCheckedNumbers(winningNumber);
         return new LottoGameResults(
                 winnings.size(),

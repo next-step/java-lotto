@@ -26,6 +26,6 @@ public class LottoGame {
     }
 
     public LottoGameResults getResults(LottoNumbers boughtNumbers, List<Integer> winningNumber) {
-        return LottoGameMatcher.matchToMap(boughtNumbers, new LottoNumber(winningNumber));
+        return LottoGameMatcher.matchWinningNumber(boughtNumbers, new LottoNumber(winningNumber));
     }
 }

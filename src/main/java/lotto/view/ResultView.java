@@ -1,10 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Constant;
 import lotto.domain.LottoGameResults;
 import lotto.domain.LottoWinningLevel;
-
-import java.util.List;
 
 public class ResultView {
     private static final String RESULT_SUMMARY_MESSAGE = "당첨 통계";
@@ -20,12 +17,12 @@ public class ResultView {
     private static final StringBuilder stringBuilder = new StringBuilder();
 
     public static void print(LottoGameResults results) {
-        List<Long> winningGames = results.getWinningGames();
-        int totalGameCount = results.getTotalGameCount();
-
         initMessage();
-        long winningPrizeSum = getWinningPrizeSum(winningGames);
-        profitRate(totalGameCount, winningPrizeSum);
+        for (int i = LOTTO_WIN_MIN; i <= LOTTO_WIN_MAX; i++) {
+            printWinningResult(i, results.getMatchCount(i));
+        }
+        String profitMessage = String.format(NET_PROFIT_MESSAGE, results.getProfitRate());
+        stringBuilder.append(profitMessage);
 
         System.out.println(stringBuilder.toString());
     }
@@ -37,38 +34,15 @@ public class ResultView {
                 .append(CARRIAGE_RETURN);
     }
 
-    private static long getWinningPrizeSum(List<Long> winningGames) {
-        long winningPrizeSum = 0;
-        for (int i = LOTTO_WIN_MIN; i <= LOTTO_WIN_MAX; i++) {
-            long count = getMatchCount(winningGames, i);
-            String message = getString(i, count);
-            stringBuilder.append(message + CARRIAGE_RETURN);
-            winningPrizeSum += (count * LottoWinningLevel.of(i).getWinningPrize());
-        }
-        return winningPrizeSum;
-    }
-
-    private static long getMatchCount(List<Long> winningGames, int index) {
-        return winningGames.stream()
-                .filter(matchCount -> isMatch(matchCount, index))
-                .count();
-    }
-
-    private static boolean isMatch(Long matchCount, int checkPoint) {
-        return matchCount == checkPoint;
+    private static void printWinningResult(int index, long matchCount) {
+        String message = getString(index, matchCount);
+        stringBuilder.append(message + CARRIAGE_RETURN);
     }
 
     private static String getString(int i, long count) {
         return String.format(
-                MATCH_MESSAGE, i, LottoWinningLevel.of(i).getWinningPrize(),
-                count
+                MATCH_MESSAGE, i, LottoWinningLevel.of(i).getWinningPrize(), count
         );
-    }
-
-    private static void profitRate(int totalGameCount, long winningPrizeSum) {
-        double totalPaidMoney = totalGameCount * Constant.DEFAULT_GAME_PRICE;
-        double profitRate = winningPrizeSum / totalPaidMoney;
-        stringBuilder.append(String.format(NET_PROFIT_MESSAGE, profitRate));
     }
 
 }

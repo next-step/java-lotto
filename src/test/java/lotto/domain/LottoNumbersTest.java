@@ -45,13 +45,14 @@ class LottoNumbersTest {
         LottoNumbers boughtNumbers = new LottoNumbers(game1, game2, game3);
         LottoNumber winningNumber = new LottoNumber(Arrays.asList(5, 6, 7, 8, 9, 10));
 
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchToMap(boughtNumbers, winningNumber);
-
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(boughtNumbers, winningNumber);
         List<Long> results = lottoGameResults.getWinningGames();
+        long winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
         assertThat(results).hasSize(2);
         assertThat(results.get(0)).isEqualTo(4);
         assertThat(results.get(1)).isEqualTo(4);
+        assertThat(winningPrizeSum).isEqualTo(100000);
 
     }
 
