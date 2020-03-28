@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoNumberException;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -18,15 +20,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void checkAvailableNumber(final int number) {
         if (number < MIN || number > MAX) {
-            throw new RuntimeException("1 ~ 45 사이의 숫자가 아닙니다.");
+            throw new InvalidLottoNumberException(number);
         }
     }
 
     private static class LottoNumberCache {
+        private static final int START_INDEX = 0;
         static final LottoNumber[] cache = new LottoNumber[MAX];
 
         static {
-            for (int i = 0; i < MAX; i++) {
+            for (int i = START_INDEX; i < MAX; i++) {
                 cache[i] = new LottoNumber(i + MIN);
             }
         }
