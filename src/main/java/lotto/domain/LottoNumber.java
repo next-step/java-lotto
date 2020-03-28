@@ -7,6 +7,7 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN = 1;
     public static final int MAX = 45;
+
     private int number;
 
     private LottoNumber(final int number) {
@@ -35,6 +36,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
 
         private LottoNumberCache() {}
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 
     @Override

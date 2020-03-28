@@ -17,6 +17,11 @@ public class LottoNumbers {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
+    }
+
     private void checkLottoNumberSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers != null && lottoNumbers.size() != LOTTO_NUMBER_MAX_SIZE) {
             throw new OutOfLottoNumberSizeException();
