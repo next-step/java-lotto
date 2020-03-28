@@ -6,18 +6,31 @@ public class LottoNumber {
     private int number;
 
     private LottoNumber(final int number) {
-        checkAvailableNumber(number);
         this.number = number;
     }
 
     public static LottoNumber valueOf(final int number) {
-        return new LottoNumber(number);
+        checkAvailableNumber(number);
+        return LottoNumberCache.cache[number - 1];
     }
 
-    private void checkAvailableNumber(final int number) {
+    private static void checkAvailableNumber(final int number) {
         if (number < 1 || number > 45) {
             throw new RuntimeException("1 ~ 45 사이의 숫자가 아닙니다.");
         }
+    }
+
+    private static class LottoNumberCache {
+        static final int MAX = 45;
+        static final LottoNumber[] cache = new LottoNumber[MAX];
+
+        static {
+            for (int i = 0; i < MAX; i++) {
+                cache[i] = new LottoNumber(i + 1);
+            }
+        }
+
+        private LottoNumberCache() {}
     }
 
     @Override
