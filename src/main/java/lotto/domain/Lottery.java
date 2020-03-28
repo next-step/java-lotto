@@ -9,15 +9,8 @@ public class Lottery {
     private List<LottoNumber> lottoNumbers;
 
     public Lottery(final List<LottoNumber> lottoNumbers) {
-        checkLottoNumberSize(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    private void checkLottoNumberSize(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers != null && lottoNumbers.size() != 6) {
-            throw new RuntimeException("로또 번호는 6개 숫자만 가집니다.");
-        }
     }
 
     @Override
