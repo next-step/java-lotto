@@ -32,6 +32,20 @@ class LottoGameResultsTest {
         assertThat(lottoGameResults.getProfitRate()).isEqualTo(5);
     }
 
+    @DisplayName("2개가 일치하면 상금은 0원 이다.")
+    @Test
+    public void matchedTwoPrizeTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 7, 10, 11, 12));
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+
+        assertThat(lottoRank.getMatchCount()).isEqualTo(2);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.TWO.getWinningPrize());
+    }
+
     @DisplayName("3개가 일치하면 상금은 5000원 이다.")
     @Test
     public void matchedThreePrizeTest() {
@@ -43,7 +57,49 @@ class LottoGameResultsTest {
         LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
 
         assertThat(lottoRank.getMatchCount()).isEqualTo(3);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(5000);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.THREE.getWinningPrize());
+    }
+
+    @DisplayName("4개가 일치하면 상금은 50000원 이다.")
+    @Test
+    public void matchedFourPrizeTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 11, 12));
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+
+        assertThat(lottoRank.getMatchCount()).isEqualTo(4);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FOUR.getWinningPrize());
+    }
+
+    @DisplayName("5개가 일치하면 상금은 1_500_000원 이다.")
+    @Test
+    public void matchedFivePrizeTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 12));
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+
+        assertThat(lottoRank.getMatchCount()).isEqualTo(5);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FIVE.getWinningPrize());
+    }
+
+    @DisplayName("6개가 일치하면 상금은 2_000_000_000원 이다.")
+    @Test
+    public void matchedSixPrizeTest() {
+        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
+        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+
+        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+
+        assertThat(lottoRank.getMatchCount()).isEqualTo(6);
+        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.SIX.getWinningPrize());
     }
 
 }

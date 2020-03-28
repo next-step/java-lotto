@@ -36,24 +36,4 @@ class LottoTicketTest {
         assertThat(lottoGameResult.get(1).getMatchCount()).isEqualTo(4);
     }
 
-    @DisplayName("당첨 내역에 따라 당첨 금액이 결정된다")
-    @Test
-    public void winningPrizeTest() {
-        LottoNumber game1 = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber game2 = new LottoNumber(Arrays.asList(7, 8, 9, 10, 11, 12));
-        LottoNumber game3 = new LottoNumber(Arrays.asList(7, 8, 9, 10, 11, 12));
-        LottoTickets boughtTickets = new LottoTickets(game1, game2, game3);
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(5, 6, 7, 8, 9, 10));
-
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(boughtTickets, winningNumber);
-        List<LottoRank> lottoRanks = lottoGameResults.getWinningGames();
-        double winningPrizeSum = (long) lottoGameResults.getWinningPrizeSum();
-
-        assertThat(lottoRanks).hasSize(2);
-        assertThat(lottoRanks.get(0).getMatchCount()).isEqualTo(4);
-        assertThat(lottoRanks.get(1).getMatchCount()).isEqualTo(4);
-        assertThat(winningPrizeSum).isEqualTo(100000);
-
-    }
-
 }
