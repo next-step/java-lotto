@@ -7,7 +7,7 @@ public class LottoGameResults {
     private final int totalGameCount;
     private final List<Long> winningGames;
 
-    public LottoGameResults(int totalGameCount, List<Long> winningGames) {
+    LottoGameResults(int totalGameCount, List<Long> winningGames) {
         this.totalGameCount = totalGameCount;
         this.winningGames = winningGames;
     }

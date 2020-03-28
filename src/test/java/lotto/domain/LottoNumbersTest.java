@@ -31,8 +31,6 @@ class LottoNumbersTest {
         LottoNumber winningNumber = new LottoNumber(Arrays.asList(5, 6, 7, 8, 9, 10));
         List<Long> lottoGameResult = boughtNumbers.getCheckedNumbers(winningNumber);
 
-        System.out.println(lottoGameResult.toString());
-
         assertThat(lottoGameResult).hasSize(2);
         assertThat(lottoGameResult.get(0)).isEqualTo(2);
         assertThat(lottoGameResult.get(1)).isEqualTo(4);

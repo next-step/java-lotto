@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGameMatcher {
+    private static final int WINNING_MIN_LIMIT = 3;
+
     private LottoGameMatcher() {
     }
 
@@ -22,7 +24,7 @@ public class LottoGameMatcher {
     }
 
     private static boolean isGraterThanThree(long matchCount) {
-        return matchCount >= 3;
+        return matchCount >= WINNING_MIN_LIMIT;
     }
 
 }

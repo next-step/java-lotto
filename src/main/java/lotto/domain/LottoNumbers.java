@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final int THREE = 3;
-
     private final List<LottoNumber> lottoNumbers;
 
     LottoNumbers(List<LottoNumber> lottoNumbers) {
