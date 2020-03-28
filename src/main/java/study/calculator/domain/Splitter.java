@@ -14,6 +14,8 @@ public class Splitter {
     private static final String REGEX_FOR_REMOVING_CUSTOM_DELIMITER =
             "//.*\\\\n";
     private static final String DELIMITER_GROUP_NAME = "delimiter";
+    private static final Pattern CUSTOM_DELIMITER_PATTERN =
+            Pattern.compile(REGEX_FOR_EXTRACTING_CUSTOM_DELIMITER);
 
     private Splitter() {
     }
@@ -58,8 +60,7 @@ public class Splitter {
     }
 
     private static String findCustomDelimiter(String text) {
-        Matcher m = Pattern.compile(REGEX_FOR_EXTRACTING_CUSTOM_DELIMITER)
-                .matcher(text);
+        Matcher m = CUSTOM_DELIMITER_PATTERN.matcher(text);
 
         if (m.find()) {
             return m.group(DELIMITER_GROUP_NAME);
