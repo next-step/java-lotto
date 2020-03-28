@@ -9,7 +9,7 @@ public class LottoNumberGenerator {
     public static List<LottoNumber> generate() {
         Set<LottoNumber> set = new HashSet<>();
         while (set.size() < 6) {
-            set.add(new LottoNumber(RANDOM.nextInt(45) + 1));
+            set.add(LottoNumber.valueOf(RANDOM.nextInt(45) + 1));
         }
 
         List<LottoNumber> lottoNumbers = new ArrayList<>(set);
