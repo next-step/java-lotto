@@ -68,7 +68,8 @@ public class LottoTicketTest {
     @Test
     public void modify() throws Exception {
         //given
-        LottoTicket ticket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket = new LottoTicket(list);
 
         //when
         List<Integer> numbers = ticket.getNumbers();
@@ -83,16 +84,18 @@ public class LottoTicketTest {
     @Test
     public void modify2() throws Exception {
         //given
-        List<Integer> tmp = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket ticket = new LottoTicket(tmp);
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket = new LottoTicket(list);
 
         //when
-        tmp.set(0, 111);
+        list.set(0, 111);
+        System.out.println(ticket.getNumbers());
+        System.out.println(list);
 
         //then
         assertAll(
                 () -> assertThat(ticket.getNumbers().get(0)).isEqualTo(1),
-                () -> assertThat(tmp.get(0)).isEqualTo(111)
+                () -> assertThat(list.get(0)).isEqualTo(111)
         );
     }
 
