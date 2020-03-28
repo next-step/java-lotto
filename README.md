@@ -18,6 +18,8 @@
     * WinningLottoTicket과 비교해서 당첨 결과(LottoResult)를 반환한다.
 * LottoTickets
     * LottoTickets은 구입한 LottoTicket 목록을 소유한다.
+* RandomLottoTicketGenerator
+    * 1 ~ 45 사이의 중복되지 않는 숫자 6개를 생성한다.
 * WinningLottoTicket
     * Winning LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 포함한다.
 * LottoResult
