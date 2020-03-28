@@ -1,31 +1,24 @@
 package step2.view;
 
-import java.util.Scanner;
+import step2.ViewUtils;
 
 public class InputView {
-    private static final String INPUT_NULL_EMPTY_EXCEPTION = "내용을 입력해주세요.";
-    private static final String NUMBER_FORMAT_EXCEPTION = "입력된 내용이 숫자가 아닙니다.";
-    private Scanner scanner;
+    private static final String MONEY_INPUT_INFORMATION = "구매금액을 입력해 주세요.";
+    private static final String WINNING_NUMBER_INPUT_INFORMATION = "지난 주 당첨 번호를 입력해주세요";
+
+    private final ViewUtils viewUtils;
 
     public InputView() {
-        this.scanner = new Scanner(System.in);
+        viewUtils = new ViewUtils();
     }
 
-    public String readLine() {
-        String input = scanner.nextLine();
-
-        if(input == null || input.isEmpty()) {
-            throw new IllegalArgumentException(INPUT_NULL_EMPTY_EXCEPTION);
-        }
-
-        return input;
+    public int getMoney() {
+        viewUtils.printLine(MONEY_INPUT_INFORMATION);
+        return viewUtils.readLineToInt();
     }
 
-    public int inputToInt() {
-        try {
-            return Integer.parseInt(readLine());
-        } catch(NumberFormatException e) {
-            throw new NumberFormatException(NUMBER_FORMAT_EXCEPTION);
-        }
+    public String getWinningNumber() {
+        viewUtils.printLine(WINNING_NUMBER_INPUT_INFORMATION);
+        return viewUtils.readLine();
     }
 }

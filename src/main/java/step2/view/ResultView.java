@@ -1,5 +1,6 @@
 package step2.view;
 
+import step2.ViewUtils;
 import step2.domain.Lotto;
 import step2.domain.LottoNumber;
 import step2.domain.Lottos;
@@ -18,12 +19,8 @@ public class ResultView {
     private static final String LOTTO_NUMBER_POSTFIX = "]";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private void printLine(String line) {
-        System.out.println(line);
-    }
-
     public void showLottos(Lottos lottos, int count) {
-        printLine(String.format(LOTTO_COUNT_INFORMATION, count));
+        ViewUtils.printLine(String.format(LOTTO_COUNT_INFORMATION, count));
         printLottoNumbers(lottos);
     }
 
@@ -38,7 +35,7 @@ public class ResultView {
             appendLottoNumbers(builder, lottoNumbers);
 
             builder.append(LOTTO_NUMBER_POSTFIX);
-            printLine(builder.toString());
+            ViewUtils.printLine(builder.toString());
         }
     }
 
