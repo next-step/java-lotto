@@ -1,11 +1,10 @@
 package lotto.service;
 
-import enums.LottoPrize;
 import lotto.domain.Money;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
 import lotto.domain.stragegy.LottoGenerator;
-import lotto.view.StatisticDataDto;
+import lotto.view.LottoDto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,13 +28,21 @@ public class LottoGame {
         return new LottoTicket(numbers);
     }
 
-    public void buyAllLottoTicket() {
+    private void buyAllLottoTicket() {
         List<LottoTicket> lottos = new ArrayList<>();
         while (playGameCount > 0) {
             List<Integer> numbers = LottoGenerator.lottoNumberGenerator();
             lottos.add(buyOneLottoTicket(numbers));
         }
         this.lottoTickets = new LottoTickets(Collections.unmodifiableList(lottos));
+    }
+
+    public LottoDto play() {
+        buyAllLottoTicket();
+        LottoDto dto = new LottoDto();
+        dto.setTickets(this.lottoTickets.getTickets());
+
+        return dto;
     }
 
 //    public double getAllEarningPrize() {
