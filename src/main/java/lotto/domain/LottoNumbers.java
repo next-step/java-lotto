@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.OutOfLottoNumberSizeException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +13,8 @@ public class LottoNumbers {
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     private void checkLottoNumberSize(final List<LottoNumber> lottoNumbers) {
