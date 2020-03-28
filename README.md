@@ -39,7 +39,6 @@
   * LottoMachine(static)
      * 로또 티켓을 만들어라
   * LottoTicket
-     * 로또번호를 만들어라
   * LottoNumber
   * LottoPrice(static)
      * 로또 가격을 보여라.
