@@ -8,6 +8,12 @@ public class Splitter {
     private static final String[] DEFAULT_DELIMITERS = {",", ":"};
     private static final List<String> REGEX_KEYWORDS =
             Arrays.asList("?", "*", "+", "(", ")", "[", "]", "{", "}");
+    private static final String JOIN_DELIMITER = "|";
+    private static final String REGEX_FOR_EXTRACTING_CUSTOM_DELIMITER =
+            "//(?<delimiter>.*)\\\\n";
+    private static final String REGEX_FOR_REMOVING_CUSTOM_DELIMITER =
+            "//.*\\\\n";
+    private static final String DELIMITER_GROUP_NAME = "delimiter";
 
     private Splitter() {
     }
@@ -25,7 +31,8 @@ public class Splitter {
 
     private static List<String> splitWithDefaultDelimiter(
             List<String> texts) {
-        String delimitersRegEx = String.join("|", DEFAULT_DELIMITERS);
+        String delimitersRegEx =
+                String.join(JOIN_DELIMITER, DEFAULT_DELIMITERS);
         List<String> pieces = new ArrayList<>();
 
         for (String text : texts) {
@@ -51,11 +58,11 @@ public class Splitter {
     }
 
     private static String findCustomDelimiter(String text) {
-        Matcher m =
-                Pattern.compile("//(?<delimiter>.*)\\\\n").matcher(text);
+        Matcher m = Pattern.compile(REGEX_FOR_EXTRACTING_CUSTOM_DELIMITER)
+                .matcher(text);
 
         if (m.find()) {
-            return m.group("delimiter");
+            return m.group(DELIMITER_GROUP_NAME);
         }
 
         return null;
@@ -65,11 +72,11 @@ public class Splitter {
         if (REGEX_KEYWORDS.contains(keyword)) {
             return "\\" + keyword;
         }
-        
+
         return keyword;
     }
 
     private static String removeCustomDelimiter(String text) {
-        return text.replaceAll("//.*\\\\n", "");
+        return text.replaceAll(REGEX_FOR_REMOVING_CUSTOM_DELIMITER, "");
     }
 }
