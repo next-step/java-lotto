@@ -17,11 +17,11 @@ public class ResultView {
         System.out.println(luckyNumber);
     }
 
-    public static void printResult(StatisticDataDto dto) {
-        System.out.println("3개 일치 (5000원)- " + dto.getMatchCount3() + "개");
-        System.out.println("4개 일치 (50000원)- " + dto.getMatchCount4() + "개");
-        System.out.println("5개 일치 (150000원)- " + dto.getMatchCount5() + "개");
-        System.out.println("6개 일치 (2000000000)- " + dto.getMatchCount6() + "개");
-        System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
+    public static void printResult(LottoDto dto) {
+        System.out.println("3개 일치 (5000원)- " + dto.getMatch3GameCount() + "개");
+        System.out.println("4개 일치 (50000원)- " + dto.getMatch4GameCount() + "개");
+        System.out.println("5개 일치 (150000원)- " + dto.getMatch5GameCount() + "개");
+        System.out.println("6개 일치 (2000000000)- " + dto.getMatch6GameCount() + "개");
+//        System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
     }
 }

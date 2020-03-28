@@ -26,9 +26,7 @@ public class LottoApplication {
         Collections.sort(luckyNumber);
         ResultView.printLuckyNumber(luckyNumber);
 
-//        lottoGame.statisticAllGame(luckyNumber);
-//        StatisticDataDto dto = lottoGame.getStatisticGame();
-//
-//        ResultView.printResult(dto);
+        LottoDto winGame = lottoGame.findWinGame(luckyNumber);
+        ResultView.printResult(winGame);
     }
 }

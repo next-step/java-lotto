@@ -46,6 +46,14 @@ public class LottoGame {
         return dto;
     }
 
+    public LottoDto findWinGame(List<Integer> luckyNumber) {
+        LottoDto dto = new LottoDto();
+        dto.setMatch3GameCount(this.lottoTickets.getLuckyNumberMatch3Count(luckyNumber));
+        dto.setMatch4GameCount(this.lottoTickets.getLuckyNumberMatch4Count(luckyNumber));
+        dto.setMatch5GameCount(this.lottoTickets.getLuckyNumberMatch5Count(luckyNumber));
+        dto.setMatch6GameCount(this.lottoTickets.getLuckyNumberMatch6Count(luckyNumber));
+        return dto;
+    }
 //    public double getAllEarningPrize() {
 //        this.lottoTickets.getAllEarningPrize();
 //    }
