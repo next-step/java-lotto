@@ -24,12 +24,36 @@ public class Formula {
             return ArithmeticTargets.empty();
         }
 
-        List<String> splitters = determineSplitter();
 
-        String trimArithmetic = trimArithmetic(splitters);
-        List<String> arithmetic = new ArrayList<>(Arrays.asList(trimArithmetic.split(Constants.EMPTY_STRING)));
+        List<String> arithmetic = filtArithmetic();
+        stringAndNegativeNumberException(arithmetic);
 
         return ArithmeticTargets.createByStringList(arithmetic);
+    }
+
+    private void stringAndNegativeNumberException(List<String> arithmetic) {
+        for(String arithmeticTarget : arithmetic) {
+            IsStringAndNegativeNumber(arithmeticTarget);
+        }
+    }
+
+    private void IsStringAndNegativeNumber(String arithmeticTarget) {
+        if(Integer.parseInt(arithmeticTarget) < 0) {
+            throw new RuntimeException();
+        }
+
+        try {
+            Integer.parseInt(arithmeticTarget);
+        } catch (Exception e) {
+            throw  new RuntimeException();
+        }
+    }
+
+    List<String> filtArithmetic() {
+
+        List<String> splitters = determineSplitter();
+        String trimArithmetic = trimArithmetic(splitters);
+        return new ArrayList<>(Arrays.asList(trimArithmetic.split(Constants.EMPTY_STRING)));
     }
 
     List<String> determineSplitter() {
@@ -69,6 +93,8 @@ public class Formula {
         }
         return formula;
     }
+
+
 
     @Override
     public String toString() {

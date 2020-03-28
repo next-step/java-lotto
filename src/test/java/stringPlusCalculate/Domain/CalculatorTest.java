@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CalculatorTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"//;\\n1;2;3:6", " :0", "1,2:3", "1,2,3:6", "1,2:3:6"}, delimiter = ':')
+    @CsvSource(value = {"//;\\n1;2;3:6", "1,2:3", "1,2,3:6", "1,2:3:6"}, delimiter = ':')
     void calculatorTest(String input, String expected) {
         Calculator calculator = Calculator.init();
 
