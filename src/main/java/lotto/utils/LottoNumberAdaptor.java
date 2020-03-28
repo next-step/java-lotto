@@ -7,13 +7,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumberAdaptor {
-    public static List<LottoNumber> convert(List<Integer> origin) {
+
+    private LottoNumberAdaptor() {
+    }
+
+    public static List<LottoNumber> convert(final List<Integer> origin) {
         if (Objects.isNull(origin)) {
             return null;
         }
 
         return origin.stream()
-                .map(LottoNumber::newInstance)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

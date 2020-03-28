@@ -47,6 +47,6 @@ public class LottoPurchaseTicketsTests {
     @Test
     public void sizeTest() {
         LottoPurchaseTickets lottoPurchaseTickets = LottoPurchaseTickets.create(lottoTickets);
-        assertThat(lottoPurchaseTickets.size()).isEqualTo(3);
+        assertThat(lottoPurchaseTickets.size()).isEqualTo(lottoTickets.size());
     }
 }

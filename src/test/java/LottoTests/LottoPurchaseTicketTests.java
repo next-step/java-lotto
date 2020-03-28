@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static lotto.utils.LottoConstant.*;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 한장 테스트")
@@ -31,8 +32,8 @@ public class LottoPurchaseTicketTests {
     public void generateLottoNumberTest() {
         LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance();
         assertThat(lottoPurchaseTicket.getNumbers())
-                .hasSize(6)
-                .allMatch(number -> number.toInt() >= 1 && number.toInt() <= 45);
+                .hasSize(LOTTO_NUMBER_SIZE)
+                .allMatch(number -> number.toInt() >= LOTTO_MIN_NUMBER && number.toInt() <= LOTTO_MAX_NUMBER);
     }
 
     @DisplayName("로또 생성 오류 테스트")

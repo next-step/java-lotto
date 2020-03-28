@@ -25,10 +25,10 @@ public class LottoStoreTests {
 
     private static Stream<Arguments> sellTestCases() {
         return Stream.of(
-                Arguments.of(Payment.newInstance(10000), 10),
-                Arguments.of(Payment.newInstance(54321), 54),
-                Arguments.of(Payment.newInstance(912), 0),
-                Arguments.of(Payment.newInstance(0), 0));
+                Arguments.of(Payment.of(10000), 10),
+                Arguments.of(Payment.of(54321), 54),
+                Arguments.of(Payment.of(912), 0),
+                Arguments.of(Payment.of(0), 0));
     }
 
 }

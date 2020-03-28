@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 public class LottoPurchaseTickets {
     private List<LottoPurchaseTicket> lottoTickets;
 
-    private LottoPurchaseTickets(List<LottoPurchaseTicket> lottoTickets) {
+    private LottoPurchaseTickets(final List<LottoPurchaseTicket> lottoTickets) {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public static LottoPurchaseTickets create(List<LottoPurchaseTicket> lottoTickets) {
+    public static LottoPurchaseTickets create(final List<LottoPurchaseTicket> lottoTickets) {
         if(Objects.isNull(lottoTickets)) {
             throw new IllegalArgumentException("lotto tickets is null");
         }
@@ -20,7 +20,7 @@ public class LottoPurchaseTickets {
         return new LottoPurchaseTickets(lottoTickets);
     }
 
-    public LottoResults checkAll(WinningLottoTicket winningLottoTicket) {
+    public LottoResults checkAll(final WinningLottoTicket winningLottoTicket) {
         List<LottoResult> lottoResults = lottoTickets.stream()
                 .map(ticket -> ticket.check(winningLottoTicket))
                 .collect(Collectors.toList());
@@ -32,6 +32,7 @@ public class LottoPurchaseTickets {
         return lottoTickets.size();
     }
 
+    @Override
     public String toString() {
         return lottoTickets.stream()
                 .map(LottoPurchaseTicket::toString)

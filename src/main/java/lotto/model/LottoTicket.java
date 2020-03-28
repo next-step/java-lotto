@@ -24,11 +24,6 @@ public abstract class LottoTicket {
         return Collections.unmodifiableList(numbers);
     }
 
-    @Override
-    public String toString() {
-        return numbers.toString();
-    }
-
     private void validate(final List<LottoNumber> numbers) {
         validateNullOrEmpty(numbers);
         validateSize(numbers);
@@ -47,5 +42,10 @@ public abstract class LottoTicket {
         if (size != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

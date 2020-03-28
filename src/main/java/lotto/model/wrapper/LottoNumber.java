@@ -8,16 +8,16 @@ import static lotto.utils.LottoConstant.LOTTO_MIN_NUMBER;
 public class LottoNumber implements Comparable<LottoNumber> {
     private Integer number;
 
-    private LottoNumber(Integer number) {
+    private LottoNumber(final Integer number) {
         this.number = number;
     }
 
-    public static LottoNumber newInstance(Integer number) {
+    public static LottoNumber of(final Integer number) {
         validateRange(number);
         return new LottoNumber(number);
     }
 
-    private static void validateRange(Integer number) {
+    private static void validateRange(final Integer number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
         }

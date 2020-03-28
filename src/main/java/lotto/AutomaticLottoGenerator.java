@@ -16,7 +16,7 @@ public class AutomaticLottoGenerator {
     static {
         lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                 .boxed()
-                .map(LottoNumber::newInstance)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

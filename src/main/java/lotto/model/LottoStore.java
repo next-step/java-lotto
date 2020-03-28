@@ -12,7 +12,7 @@ public class LottoStore {
     }
 
     public static LottoPurchaseTickets sell(final Payment payment) {
-        List<LottoPurchaseTicket> lottoPurchaseTickets = IntStream.range(0, payment.countLotto())
+        List<LottoPurchaseTicket> lottoPurchaseTickets = IntStream.range(0, payment.countLottoTicket())
                 .mapToObj(i -> LottoPurchaseTicket.newInstance())
                 .collect(Collectors.toList());
         return LottoPurchaseTickets.create(lottoPurchaseTickets);

@@ -10,7 +10,7 @@ public class WinningLottoTicket extends LottoTicket {
         super(numbers);
     }
 
-    public static WinningLottoTicket newInstance(List<LottoNumber> numbers) {
+    public static WinningLottoTicket newInstance(final List<LottoNumber> numbers) {
         return new WinningLottoTicket(numbers);
     }
 }

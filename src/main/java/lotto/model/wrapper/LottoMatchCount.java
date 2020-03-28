@@ -5,11 +5,11 @@ import java.util.Objects;
 public class LottoMatchCount {
     private final Integer matchCount;
 
-    private LottoMatchCount(Integer matchCount) {
+    private LottoMatchCount(final Integer matchCount) {
         this.matchCount = matchCount;
     }
 
-    public static LottoMatchCount of(Integer matchCount) {
+    public static LottoMatchCount of(final Integer matchCount) {
         return new LottoMatchCount(matchCount);
     }
 

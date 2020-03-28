@@ -15,7 +15,7 @@ import static lotto.view.OutputView.printLottoTickets;
 public class Main {
 
     public static void main(String[] args) {
-        Payment payment = Payment.newInstance(inputPayment());
+        Payment payment = Payment.of(inputPayment());
         LottoPurchaseTickets lottoPurchaseTickets = LottoStore.sell(payment);
 
         printLottoTickets(lottoPurchaseTickets);
