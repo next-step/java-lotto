@@ -1,6 +1,6 @@
-package lotto.domain.controller;
+package lotto.controller;
 
-import lotto.domain.view.InputView;
+import lotto.view.InputView;
 import util.StringUtil;
 
 public class LottoApplication {
