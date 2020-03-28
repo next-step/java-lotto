@@ -13,17 +13,17 @@ public class MatchLotto {
         this(matchCount, new ArrayList<>());
     }
 
-    public MatchLotto(int matchCount, Item matchItem) {
+    public MatchLotto(int matchCount, Item item) {
         this.matchCount = matchCount;
         ArrayList<Item> items = new ArrayList<>();
-        items.add(matchItem);
+        items.add(item);
         this.matchItem = items;
     }
 
-    public MatchLotto(int matchCount, List<Item> matchItem) {
+    public MatchLotto(int matchCount, List<Item> item) {
         this.matchCount = matchCount;
         ArrayList<Item> items = new ArrayList<>();
-        items.addAll(matchItem);
+        items.addAll(item);
         this.matchItem = items;
     }
 
@@ -33,6 +33,10 @@ public class MatchLotto {
         items.add(other);
 
         return new MatchLotto(this.matchCount, items);
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getItemsCount() {
