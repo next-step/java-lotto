@@ -59,12 +59,6 @@ public class MatchLottoStatistic {
         return null;
     }
 
-//    public MatchItemsStatistic(List<MatchLotto> other) {
-//        List<MatchLotto> items = new ArrayList<>();
-//        items.addAll(other);
-//        this.items = items;
-//    }
-
     private int findCountMatchItemIndex(int count) {
         for (int i = 0; i < matchLottos.size(); i++) {
             if (matchLottos.get(i).isMatchCountSame(count)) {
@@ -92,5 +86,4 @@ public class MatchLottoStatistic {
     public List<MatchLotto> getMatchLottos() {
         return matchLottos;
     }
-
 }
