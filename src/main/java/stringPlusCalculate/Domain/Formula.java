@@ -29,13 +29,13 @@ public class Formula {
     }
 
     List<String> determineSplitter() {
-        String[] splitters = new String[]{":", ","};
-
         if(isSplitter()) {
-            splitters = new String[]{findSplitter()};
+            List<String> splitters = new ArrayList<>();
+            splitters.add(findSplitter());
+            return splitters;
         }
 
-        return Arrays.asList(splitters);
+        return Arrays.asList(":", ",");
     }
 
     boolean isSplitter() {
@@ -45,11 +45,14 @@ public class Formula {
     String findSplitter() {
         int splitterStart = formula.indexOf(Constants.SPLITTER_DIVIDER_START) + Constants.SPLITTER_DIVIDER_START.length();
         int splitterEnd = formula.indexOf(Constants.SPLITTER_DIVIDER_END);
+
+        System.out.println(splitterStart + " ~ " + splitterEnd);
         return formula.substring(splitterStart, splitterEnd);
     }
 
     String trimArithmetic(List<String> splitters) {
-        String pureArithmetic = formula;
+        String pureArithmetic = (isSplitter()) ? formula.substring(formula.indexOf(Constants.SPLITTER_DIVIDER_END), formula.length()) : formula;
+
         for (String splitter : splitters) {
             pureArithmetic = formula.replace(splitter, "");
         }
