@@ -31,7 +31,7 @@ public class LottoGameResults {
                 .count();
     }
 
-    private double getWinningPrizeSum() {
+    double getWinningPrizeSum() {
         double winningPrizeSum = 0;
         for (int i = LOTTO_WIN_MIN; i <= LOTTO_WIN_MAX; i++) {
             long count = getMatchCount(i);

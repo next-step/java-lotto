@@ -47,7 +47,7 @@ class LottoNumbersTest {
 
         LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(boughtNumbers, winningNumber);
         List<Long> results = lottoGameResults.getWinningGames();
-        long winningPrizeSum = lottoGameResults.getWinningPrizeSum();
+        double winningPrizeSum = (long) lottoGameResults.getWinningPrizeSum();
 
         assertThat(results).hasSize(2);
         assertThat(results.get(0)).isEqualTo(4);
