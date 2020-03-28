@@ -8,13 +8,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-class CalculatorNumberTest {
+class NumberTest {
 
     @DisplayName("계산기 번호 정상 생성")
     @ParameterizedTest
     @ValueSource(ints = {1,2,3})
     void create(int expected) {
-        int actual = new CalculatorNumber(expected).getNumber();
+        int actual = new Number(expected).getNumber();
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -23,8 +23,8 @@ class CalculatorNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2,3", "10,20,30"})
     void addCalculatorNumber(int number1, int number2, int expected) {
-        CalculatorNumber calculatorNumber1 = new CalculatorNumber(number1);
-        CalculatorNumber calculatorNumber2 = new CalculatorNumber(number2);
+        Number calculatorNumber1 = new Number(number1);
+        Number calculatorNumber2 = new Number(number2);
         int actual = calculatorNumber1.add(calculatorNumber2).getNumber();
 
         assertThat(actual).isEqualTo(expected);
@@ -34,6 +34,6 @@ class CalculatorNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1})
     void createFailByNagativeNumber(int number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new CalculatorNumber(number));
+        assertThatIllegalArgumentException().isThrownBy(() -> new Number(number));
     }
 }
