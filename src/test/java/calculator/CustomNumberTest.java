@@ -1,5 +1,6 @@
 package calculator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -9,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class CustomNumberTest {
 
     @ParameterizedTest
+    @DisplayName("음수로 생성 시 throw RuntimeException")
     @ValueSource(ints = {-2, -9, -13})
     void of_inputNegative_throwRuntimeException(int input) {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
@@ -17,6 +19,7 @@ public class CustomNumberTest {
     }
 
     @ParameterizedTest
+    @DisplayName("같은 숫자로 생성된 NaturalNumber equals True ")
     @ValueSource(ints = {2, 5, 0})
     void of_inputNaturalNumberInclude0_returnObject(int input) {
         CustomNumber number = CustomNumber.of(input);
