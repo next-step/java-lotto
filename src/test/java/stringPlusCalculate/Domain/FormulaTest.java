@@ -3,6 +3,7 @@ package stringPlusCalculate.Domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FormulaTest {
 
@@ -72,5 +74,16 @@ public class FormulaTest {
         ArithmeticTargets arithmeticTargetList = formula.arithmeticBySplit();
 
         assertThat(arithmeticTargetList.toList()).isEqualTo(resultList);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,-2", "a,2", "a,-2"})
+    void splitArithmeticTarget_음수_문자_들어오는경우_Test(final String input) {
+
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            Formula formula = Formula.init(input);
+            formula.arithmeticBySplit();
+        });
+
     }
 }

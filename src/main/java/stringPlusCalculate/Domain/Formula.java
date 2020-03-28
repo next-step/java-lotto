@@ -20,6 +20,10 @@ public class Formula {
     }
 
     public ArithmeticTargets arithmeticBySplit() {
+        if(formula.trim().isEmpty()) {
+            return ArithmeticTargets.empty();
+        }
+
         List<String> splitters = determineSplitter();
 
         String trimArithmetic = trimArithmetic(splitters);
