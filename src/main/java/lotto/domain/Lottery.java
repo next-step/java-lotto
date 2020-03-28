@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ public class Lottery {
 
     public Lottery(final List<LottoNumber> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
