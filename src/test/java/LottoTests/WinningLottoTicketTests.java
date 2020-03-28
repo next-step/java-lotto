@@ -20,7 +20,6 @@ public class WinningLottoTicketTests {
 
     @DisplayName("당첨 로또 생성 테스트")
     @ParameterizedTest
-    @NullAndEmptySource
     @MethodSource("generateWinningLottoTestCases")
     public void generateWinningLottoTest(List<Integer> numbers) {
         assertThatCode(() -> WinningLottoTicket.newInstance(numbers)).doesNotThrowAnyException();

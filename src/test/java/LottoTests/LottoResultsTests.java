@@ -16,13 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("로또 결과 테스트")
 public class LottoResultsTests {
 
-    /*
-     * 3개 일치 : 5000원
-     * 4개 일치 : 50000원
-     * 5개 일치 : 1500000원
-     * 6개 일치 : 2000000000원
-     */
-
     @DisplayName("로또 수익률 테스트")
     @ParameterizedTest
     @MethodSource("profitTestCases")
@@ -32,12 +25,12 @@ public class LottoResultsTests {
 
     private static Stream<Arguments> profitTestCases() {
         return Stream.of(
-                Arguments.of(LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.ONE, LottoResult.TWO)), 400310),
-                Arguments.of(LottoResults.create(Arrays.asList(LottoResult.ONE, LottoResult.NONE, LottoResult.FOUR, LottoResult.ONE, LottoResult.TWO)), 10),
-                Arguments.of(LottoResults.create(Arrays.asList(LottoResult.FIVE, LottoResult.NONE, LottoResult.ONE)), 500),
+                Arguments.of(LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE, LottoResult.TWO)), 400311.0),
+                Arguments.of(LottoResults.create(Arrays.asList(LottoResult.ONE, LottoResult.NONE, LottoResult.FOUR, LottoResult.ONE, LottoResult.TWO)), 10.0),
+                Arguments.of(LottoResults.create(Arrays.asList(LottoResult.FIVE, LottoResult.NONE, LottoResult.ONE)), 500.0),
                 Arguments.of(LottoResults.create(
                         Arrays.asList(LottoResult.ONE, LottoResult.NONE, LottoResult.THREE, LottoResult.ONE, LottoResult.TWO,
                                 LottoResult.ONE, LottoResult.NONE, LottoResult.NONE, LottoResult.ONE, LottoResult.TWO)), 0.5),
-                Arguments.of(LottoResults.create(Collections.singletonList(LottoResult.ONE)), 0));
+                Arguments.of(LottoResults.create(Collections.singletonList(LottoResult.ONE)), 0.0));
     }
 }

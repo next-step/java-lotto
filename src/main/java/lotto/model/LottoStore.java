@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.utils.LottoConstant.LOTTO_PRICE;
+
 public class LottoStore {
-    private static final Integer LOTTO_PRICE = 1000;
 
     private LottoStore() {
     }
