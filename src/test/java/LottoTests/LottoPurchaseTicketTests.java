@@ -1,6 +1,7 @@
 package LottoTests;
 
 import lotto.model.LottoPurchaseTicket;
+import lotto.model.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,9 +28,9 @@ public class LottoPurchaseTicketTests {
     @Test
     public void generateLottoNumberTest() {
         LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance();
-        assertThat(lottoPurchaseTicket.toArray)
+        assertThat(lottoPurchaseTicket.toArray())
                 .hasSize(6)
-                .allmatch(number -> number >= 1 && number <= 45);
+                .allMatch(number -> number >= 1 && number <= 45);
     }
 
     @DisplayName("로또 생성 오류 테스트")
@@ -51,9 +52,9 @@ public class LottoPurchaseTicketTests {
 
     private static Stream<Arguments> generateLottoExceptionTestCases() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1,2,3,4,5,6,7)),
-                Arguments.of(Arrays.asList(1,2,3,4,5,60)),
-                Arguments.of(Arrays.asList(-1,2,3,0,5,6))
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 60)),
+                Arguments.of(Arrays.asList(-1, 2, 3, 0, 5, 6))
         );
     }
 
