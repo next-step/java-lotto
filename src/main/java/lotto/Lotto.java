@@ -8,6 +8,10 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public Lotto() {
+        this(toList(generateAutoLottoSets()));
+    }
+
     public Lotto(String lottoString) {
         this(toList(generateManulalLottoSets(lottoString)));
     }
@@ -15,6 +19,15 @@ public class Lotto {
     private Lotto(List<LottoNumber> lottos) {
         validateSize(lottos);
         this.lottoNumbers = Collections.unmodifiableList(lottos);
+    }
+
+    private static Set<LottoNumber> generateAutoLottoSets() {
+        Set<LottoNumber> lottoNumberSet = new HashSet<>();
+
+        while (lottoNumberSet.size() != LOTTO_SIZE) {
+            lottoNumberSet.add(LottoNumber.peek());
+        }
+        return lottoNumberSet;
     }
 
     private static Set<LottoNumber> generateManulalLottoSets(String lottoString) {
