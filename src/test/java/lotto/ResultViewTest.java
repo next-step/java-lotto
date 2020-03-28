@@ -3,7 +3,6 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -61,4 +60,24 @@ class ResultViewTest {
                                      + "6개 일치(2000000000원)- 1개\n");
     }
 
+    @DisplayName("총 구매금액을 계산한다")
+    @Test
+    void totalPurchaseAmount() {
+        int result = resultView.totalPurchaseAmount();
+        assertThat(result).isEqualTo(6000);
+    }
+
+    @DisplayName("총 구매금액을 계산한다")
+    @Test
+    void totalWinningAmount() {
+        int result = resultView.totalWinningAmount();
+        assertThat(result).isEqualTo(2001555000);
+    }
+
+    @DisplayName("총 수익률을 계산한다.")
+    @Test
+    void calculateRevenuePercent() {
+        double result = resultView.calculateRevenuePercent(5000, 14000);
+        assertThat(result).isEqualTo(0.35);
+    }
 }

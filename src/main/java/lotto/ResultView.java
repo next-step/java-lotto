@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String SPLIT_TEXT = ",";
     private static final int MIN_WIN_MATCH_COUNT = 3;
+    private static final int MIN_PURCHASE_AMOUNT = 1000;
 
     private LottoNumber winningNumbers;
     private List<LottoNumber> purchaseLottoNumbers;
@@ -64,6 +65,25 @@ public class ResultView {
         }
 
         return result;
+    }
+
+    public double calculateRevenuePercent(int totalWinningAmount, int totalPurchaseAmount) {
+        double revenuePercent = totalWinningAmount / (double) totalPurchaseAmount;
+        double decimalPoint = Math.pow(10.0, 2);
+
+        return Math.floor(revenuePercent * decimalPoint) / decimalPoint;
+    }
+
+    public int totalWinningAmount() {
+        int totalWinningAmount = 0;
+        for (Integer matchCount : winningLottos.keySet()) {
+            totalWinningAmount += winningLottos.get(matchCount).getTotalAmount();
+        }
+        return totalWinningAmount;
+    }
+
+    public int totalPurchaseAmount() {
+        return purchaseLottoNumbers.size() * MIN_PURCHASE_AMOUNT;
     }
 
     private int getResultCount(int matchCount) {
