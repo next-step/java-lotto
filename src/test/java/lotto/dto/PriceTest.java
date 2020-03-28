@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import lotto.exception.NoPurchasePriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +25,7 @@ class PriceTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1, 990})
     void negativeException(int price) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(
+        assertThatExceptionOfType(NoPurchasePriceException.class).isThrownBy(
                 () -> new Price(price)
         );
     }
