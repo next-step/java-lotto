@@ -1,10 +1,11 @@
 package lotto.controller;
 
-import lotto.service.LottoGame;
 import lotto.domain.Money;
 import lotto.domain.item.LottoTicket;
+import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.ResultView;
+import lotto.view.StatisticDataDto;
 import util.StringUtil;
 
 import java.util.Collections;
@@ -26,6 +27,9 @@ public class LottoApplication {
         Collections.sort(luckyNumber);
         ResultView.printLuckyNumber(luckyNumber);
 
+        lottoGame.statisticAllGame(luckyNumber);
+        StatisticDataDto dto = lottoGame.getStatisticGame();
 
+        ResultView.printResult(dto);
     }
 }

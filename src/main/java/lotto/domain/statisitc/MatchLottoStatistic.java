@@ -33,30 +33,30 @@ public class MatchLottoStatistic {
         }
     }
 
-    public MatchLotto findMatchCount3Lottos() {
-        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT3);
+    public int findMatchCount3Lottos() {
+        return getMatchLottoCount(LOTTO_MATCH_NUMBER_COUNT3);
     }
 
-    public MatchLotto findMatchCount4Lottos() {
-        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT4);
+    public int findMatchCount4Lottos() {
+        return getMatchLottoCount(LOTTO_MATCH_NUMBER_COUNT4);
     }
 
-    public MatchLotto findMatchCount5Lottos() {
-        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT5);
+    public int findMatchCount5Lottos() {
+        return getMatchLottoCount(LOTTO_MATCH_NUMBER_COUNT5);
     }
 
-    public MatchLotto findMatchCount6Lottos() {
-        return findMatchLottos(LOTTO_MATCH_NUMBER_COUNT6);
+    public int findMatchCount6Lottos() {
+        return getMatchLottoCount(LOTTO_MATCH_NUMBER_COUNT6);
     }
 
-    private MatchLotto findMatchLottos(int matchCount) {
+    private int getMatchLottoCount(int matchCount) {
         List<MatchLotto> result = new ArrayList<>();
         for (MatchLotto match : matchLottos) {
             if (match.isMatchCountSame(matchCount)) {
-                return match;
+                return match.getItemsCount();
             }
         }
-        return null;
+        return 0;
     }
 
     private int findCountMatchItemIndex(int count) {
