@@ -1,13 +1,17 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
 
 	private final Map<LottoRank, Integer> winningMap;
+	private final int buyPrize;
 
-	public LottoResult(Map<LottoRank, Integer> winningMap) {
+	public LottoResult(Map<LottoRank, Integer> winningMap, int buyPrize) {
 		this.winningMap = Collections.unmodifiableMap(winningMap);
+		this.buyPrize = buyPrize;
 	}
 
 	public Map<LottoRank, Integer> getWinningMap() {
@@ -25,5 +29,13 @@ public class LottoResult {
 	@Override
 	public int hashCode() {
 		return Objects.hash(winningMap);
+	}
+
+	public double getYield() {
+		return winningMap
+				.entrySet()
+				.stream()
+				.mapToInt(entry -> entry.getKey().getEarningPrize() * entry.getValue())
+				.sum()/(double)buyPrize;
 	}
 }
