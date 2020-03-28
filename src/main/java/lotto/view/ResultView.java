@@ -6,9 +6,9 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printLoots(List<LottoTicket> lottos) {
-        System.out.println(lottos.size() + "개를 구매 했습니다.");
-        for (LottoTicket lotto : lottos) {
+    public static void printLoots(LottoDto dto) {
+        System.out.println(dto.getTickets().size() + "개를 구매 했습니다.");
+        for (LottoTicket lotto : dto.getTickets()) {
             System.out.println(lotto);
         }
     }

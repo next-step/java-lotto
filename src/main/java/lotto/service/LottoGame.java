@@ -40,6 +40,7 @@ public class LottoGame {
     public LottoDto play() {
         buyAllLottoTicket();
         LottoDto dto = new LottoDto();
+
         dto.setTickets(this.lottoTickets.getTickets());
 
         return dto;

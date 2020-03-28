@@ -1,9 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.Money;
-import lotto.domain.item.LottoTicket;
 import lotto.service.LottoGame;
 import lotto.view.InputView;
+import lotto.view.LottoDto;
 import lotto.view.ResultView;
 import lotto.view.StatisticDataDto;
 import util.StringUtil;
@@ -18,16 +18,14 @@ public class LottoApplication {
         Money money = new Money(StringUtil.parseStringToInt(inputMoney));
 
         LottoGame lottoGame = new LottoGame(money);
-        lottoGame.play();
-//        lottoGame.buyAllLottoTicket();
-//        List<LottoTicket> lottos = lottoGame.getLottos();
-//        ResultView.printLoots(lottos);
-//
-//        String luckyNumberInput = InputView.inputLuckyNumber();
-//        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
-//        Collections.sort(luckyNumber);
-//        ResultView.printLuckyNumber(luckyNumber);
-//
+        LottoDto dto = lottoGame.play();
+        ResultView.printLoots(dto);
+
+        String luckyNumberInput = InputView.inputLuckyNumber();
+        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
+        Collections.sort(luckyNumber);
+        ResultView.printLuckyNumber(luckyNumber);
+
 //        lottoGame.statisticAllGame(luckyNumber);
 //        StatisticDataDto dto = lottoGame.getStatisticGame();
 //
