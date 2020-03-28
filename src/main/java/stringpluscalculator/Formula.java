@@ -8,8 +8,9 @@ public class Formula {
     private List<PositiveNumber> positiveNumbers = Arrays.asList(new PositiveNumber(0));
 
     public Formula(String input, String separators) {
-        if (!input.isEmpty()) {
-            this.positiveNumbers = convertPositiveNumber(input.split(separators));
+        String inputWithoutCustomSeparator = CustomSeparatorEnum.withoutCustomSeparator(input);
+        if (!inputWithoutCustomSeparator.isEmpty()) {
+            this.positiveNumbers = convertPositiveNumber(inputWithoutCustomSeparator.split(separators));
         }
     }
 
