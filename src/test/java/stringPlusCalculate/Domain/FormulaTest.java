@@ -56,9 +56,7 @@ public class FormulaTest {
     @ParameterizedTest
     @CsvSource(value = {"1,2:1 2", "//;\\n1;2;3:1 2 3"}, delimiter = ':')
     void splitArithmeticTargetTest(String input, String expected) {
-        Formula formula = Formula.init(input);
-        List<Double> resultList = Arrays.stream(expected.split(" ")).mapToDouble(Double::parseDouble).boxed().collect(Collectors.toList());
-
+        Formula formula = Formula.init(input);c
         ArithmeticTargets arithmeticTargetList = formula.arithmeticBySplit();
 
         assertThat(arithmeticTargetList.toList()).isEqualTo(resultList);
