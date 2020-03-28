@@ -15,6 +15,10 @@ public class Money {
         return this.money;
     }
 
+    public int getPurchasableCount(int price) {
+        return money / price;
+    }
+
     private void validate(int input) {
         if (input < 0) {
             throw new IllegalArgumentException("돈은 마이너스일 수 없습니다.");
