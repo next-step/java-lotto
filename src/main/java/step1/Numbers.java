@@ -27,7 +27,7 @@ public class Numbers {
     }
 
     private void checkPositiveNumber(int number) {
-        if(number < 0) {
+        if(number < INIT_VALUE) {
             throw new RuntimeException("숫자는 0 이상만 입력해주세요.");
         }
     }
