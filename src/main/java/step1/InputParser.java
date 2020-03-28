@@ -9,7 +9,8 @@ public class InputParser {
     private static final String DEFAULT_DELIMITER = ",|:";
 
     public static String[] parseInput(String input) {
-        Matcher m = Pattern.compile(CUSTOM_PATTERN).matcher(input);
+        Pattern customPattern =  Pattern.compile(CUSTOM_PATTERN);
+        Matcher m = customPattern.matcher(input);
 
         if(m.find()) {
             String customDelimiter = m.group(1);
