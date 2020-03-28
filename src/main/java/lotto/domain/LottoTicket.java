@@ -11,6 +11,7 @@ public class LottoTicket implements Item {
     private final List<Integer> numbers;
 
     public LottoTicket(List<Integer> numbers) {
+        Collections.sort(numbers);
         validateSize(numbers);
         validateNumberRange(numbers);
         validateDuplicate(numbers);
@@ -28,7 +29,7 @@ public class LottoTicket implements Item {
 
     private void validateNumberRange(List<Integer> numbers) {
         for (Integer i : numbers) {
-            if (i < 1 || i > 45) {
+            if (i < LOTTO_Min_NUMBER_SIZE || i > LOTTO_MAX_NUMBER_SIZE) {
                 throw new IllegalArgumentException("번호는 1~ 45 사이의 정수만 가능 합니다.");
             }
         }
@@ -40,6 +41,25 @@ public class LottoTicket implements Item {
             throw new IllegalArgumentException("번호는 중복될 수 없습니다.");
         }
     }
+
+    public int compareMatchNumberCount(List<Integer> compare) {
+        int match = 0;
+        for (Integer num : numbers) {
+            match = getMatch(compare, match, num);
+        }
+
+        return match;
+    }
+
+    private int getMatch(List<Integer> compare, int match, Integer num) {
+        for (Integer comp : compare) {
+            if (num == comp) {
+                match++;
+            }
+        }
+        return match;
+    }
+
 
     public List<Integer> getNumbers() {
         return numbers;
