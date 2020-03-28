@@ -1,7 +1,6 @@
 package step2.domain;
 
-import step2.domain.Lotto;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
@@ -9,5 +8,9 @@ public class Lottos {
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public List<Lotto> getValue() {
+        return new ArrayList<>(lottos);
     }
 }
