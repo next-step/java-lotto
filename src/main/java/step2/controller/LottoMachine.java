@@ -20,6 +20,7 @@ public class LottoMachine {
         Money money = new Money(inputView.getMoney());
         Lottos lottos = LottoMachine.createLottos(money);
 
+        resultView.showResult()
         Lotto winningLotto = LottoMachine.createLotto(inputView.getWinningNumbers());
     }
 
