@@ -1,15 +1,12 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 public class Lottery {
 
-    private List<LottoNumber> lottoNumbers;
+    private LottoNumbers lottoNumbers;
 
-    public Lottery(final List<LottoNumber> lottoNumbers) {
-        Collections.sort(lottoNumbers);
+    public Lottery(final LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
