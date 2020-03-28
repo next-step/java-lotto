@@ -49,7 +49,7 @@ public class LottoMachine {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for(int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(new LottoNumber(number)); // TODO: 같은 값으로 만들어진 LottoNumber 객체가 있으면 새로 안만들게 하고 싶다.
         }
         return new Lotto(lottoNumbers);
     }

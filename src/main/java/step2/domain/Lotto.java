@@ -1,15 +1,39 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     public static final Integer COUNT_NUMBER = 6;
+    public static final String LOTTO_NUMBER_DUPLICATION_ERROR = "중복되는 숫자를 가져선 안됩니다.";
+    public static final String LOTTO_NUMBER_COUNT_ERROR = "정해진 개수의 숫자를 입력해주세요.";
+
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
-        //TODO: 중복된 값이 들어오는 지 검증
+        validateNumberCount(lotto);
+        validateNumberDuplication(lotto);
         this.lotto = new ArrayList<>(lotto);
+    }
+
+    private void validateNumberDuplication(List<LottoNumber> lotto) {
+        Set<Integer> uniqueNumbers = new HashSet<>();
+
+        for(LottoNumber lottoNumber : lotto) {
+            uniqueNumbers.add(lottoNumber.getValue());
+        }
+
+        if(lotto.size() != uniqueNumbers.size()) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATION_ERROR);
+        }
+    }
+
+    private void validateNumberCount(List<LottoNumber> lotto) {
+        if(lotto.size() != COUNT_NUMBER) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_COUNT_ERROR);
+        }
     }
 
     public List<LottoNumber> getValue() {

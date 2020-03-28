@@ -3,6 +3,8 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.controller.LottoMachine;
+import step2.domain.Lotto;
+import step2.domain.LottoNumber;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -12,14 +14,14 @@ public class LottoTest {
     void validateLotto() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoMachine.createLotto(1, 2, 46, 3, 4, 5);
-        }).withMessage("숫자들이 1과 45사이의 정수들로 이루어져야 합니다.");
+        }).withMessage(LottoNumber.LOTTO_NUMBER_RANGE_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoMachine.createLotto(1, 2, 3, 3, 4, 5);
-        }).withMessage("중복되는 숫자를 가져서는 안됩니다.");
+        }).withMessage(Lotto.LOTTO_NUMBER_DUPLICATION_ERROR);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoMachine.createLotto(1, 2, 3, 6, 4, 5, 7);
-        }).withMessage("정해진 개수의 숫자를 입력해주세요.");
+        }).withMessage(Lotto.LOTTO_NUMBER_COUNT_ERROR);
     }
 }
