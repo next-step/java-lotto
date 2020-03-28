@@ -20,8 +20,7 @@ public class Operands {
             return ZERO;
         }
         return operands.stream()
-                .map(Operand::parseInt)
-                .mapToInt(Integer::intValue)
+                .mapToInt(Operand::parseInt)
                 .sum();
     }
 

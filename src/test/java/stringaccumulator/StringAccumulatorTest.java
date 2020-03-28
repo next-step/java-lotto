@@ -97,7 +97,8 @@ public class StringAccumulatorTest {
         assertThatThrownBy(() ->
                 StringAccumulator.splitAndSum(expression))
 
-                .isExactlyInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalArgumentException.class)
+                .isExactlyInstanceOf(OnlyPositiveViolationException.class)
                 .hasMessageContaining(ONLY_POSITIVE);
     }
 
