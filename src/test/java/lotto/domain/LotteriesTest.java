@@ -14,22 +14,9 @@ class LotteriesTest {
     @DisplayName("로또 복권은 6개의 로또 번호를 가지도록 객체 생성을 할 수 있다.")
     @Test
     void create() {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-            lottoNumbers.add(new LottoNumbers(
-                    Arrays.asList(
-                            LottoNumber.valueOf(1)
-                            , LottoNumber.valueOf(2)
-                            , LottoNumber.valueOf(3)
-                            , LottoNumber.valueOf(4)
-                            , LottoNumber.valueOf(5)
-                            , LottoNumber.valueOf(6)
-                    )
-            )
-        );
+        Lotteries expect = new Lotteries(createLottoNumbers());
 
-        Lotteries expect = new Lotteries(lottoNumbers);
-
-        Lotteries actual = new Lotteries(lottoNumbers);
+        Lotteries actual = new Lotteries(createLottoNumbers());
 
         assertThat(actual).isEqualTo(expect);
     }
@@ -43,5 +30,33 @@ class LotteriesTest {
         final List<LottoNumbers> lottoNumbers = lotteries.getLottoNumbers();
 
         assertThat(lottoNumbers).hasSize(2);
+    }
+
+    @DisplayName("구매한 복권들과 당첨 복권이 일치하지 않는다.")
+    @Test
+    void analyzeWin() {
+        Lotteries lotteries = new Lotteries(createLottoNumbers());
+        LottoNumbers winningLottoNumber = new LottoNumbers("7, 8, 9, 10, 11, 12");
+        LottoRank expect = LottoRank.BLANK;
+
+        LottoRank actual = lotteries.analyzeWin(winningLottoNumber);
+
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    private List<LottoNumbers> createLottoNumbers() {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+            lottoNumbers.add(new LottoNumbers(
+                    Arrays.asList(
+                            LottoNumber.valueOf(1)
+                            , LottoNumber.valueOf(2)
+                            , LottoNumber.valueOf(3)
+                            , LottoNumber.valueOf(4)
+                            , LottoNumber.valueOf(5)
+                            , LottoNumber.valueOf(6)
+                    )
+            )
+        );
+        return lottoNumbers;
     }
 }
