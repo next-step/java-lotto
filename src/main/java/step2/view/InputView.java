@@ -21,4 +21,8 @@ public class InputView {
         viewUtils.printLine(WINNING_NUMBER_INPUT_INFORMATION);
         return viewUtils.readLine();
     }
+
+    public static InputView getInstance() {
+        return new InputView();
+    }
 }

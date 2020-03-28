@@ -8,11 +8,6 @@ import step2.view.ResultView;
 public class Main {
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        ResultView resultView = new ResultView();
-
-        Lottos lottos = LottoMachine.createLottos(inputView.getMoney());
-
-//        resultView.showLottos(lottos, count);
+        LottoMachine.operate(InputView.getInstance());
     }
 }

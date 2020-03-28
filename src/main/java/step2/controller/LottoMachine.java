@@ -3,6 +3,9 @@ package step2.controller;
 import step2.domain.Lotto;
 import step2.domain.LottoNumber;
 import step2.domain.Lottos;
+import step2.domain.Money;
+import step2.view.InputView;
+import step2.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,16 +13,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    public static final Integer LOTTO_PRICE = 1000;
+    private static ResultView resultView = new ResultView();
 
-    public static Lottos createLottos(int money) {
-        List<Lotto> lottos = new ArrayList<Lotto>();
-        int count = money / LOTTO_PRICE;
+    public static void operate(InputView inputView) {
+        Money money = new Money(inputView.getMoney());
+        Lottos lottos = LottoMachine.createLottos(money);
+    }
 
-        for(int i = 0; i < count; i++) {
-            lottos.add(new Lotto(createLotto()));
+    public static Lottos createLottos(Money money) {
+        List<Lotto> createdLottos = new ArrayList<Lotto>();
+        int lottoCount = money.getLottoCount();
+
+        for(int i = 0; i < lottoCount; i++) {
+            createdLottos.add(new Lotto(createLotto()));
         }
-        return new Lottos(lottos);
+        Lottos lottos = new Lottos(createdLottos);
+        resultView.showLottos(lottos, lottoCount);
+
+        return lottos;
     }
 
     private static List<LottoNumber> createLotto() {
