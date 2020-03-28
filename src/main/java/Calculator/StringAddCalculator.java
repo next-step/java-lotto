@@ -31,10 +31,10 @@ public class StringAddCalculator {
         }
 
         final String customDelimiter = m.group(1);
-        return AddNumber.newInstance(m.group(2).split(customDelimiter)).add();
+        return AddNumber.newInstance(m.group(2).split(customDelimiter)).sum();
     }
 
     private static int calculateWithDelimiter(final String inputString) {
-        return AddNumber.newInstance(inputString.split(DELIMITER)).add();
+        return AddNumber.newInstance(inputString.split(DELIMITER)).sum();
     }
 }

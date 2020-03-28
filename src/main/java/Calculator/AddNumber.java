@@ -5,20 +5,24 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class AddNumber {
-    private final List<Integer> numberList;
+    private final List<NonNegativeNumber> numberList;
 
     private AddNumber(String[] numberArray) {
-        this.numberList = Stream.of(numberArray).map(Integer::parseInt).collect(Collectors.toList());
+        this.numberList = Stream.of(numberArray)
+                .map(Integer::parseInt)
+                .map(NonNegativeNumber::new)
+                .collect(Collectors.toList());
     }
 
     public static AddNumber newInstance (String[] numberArray) {
         return new AddNumber(numberArray);
     }
 
-    public int add() {
+    public int sum() {
         return this.numberList
                 .stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+                .reduce(NonNegativeNumber::add)
+                .orElse(NonNegativeNumber.ZERO)
+                .getNumber();
     }
 }
