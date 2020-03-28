@@ -1,21 +1,21 @@
 package stringAddCalculator.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Numbers {
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
-    public Numbers(final List<Integer> numbers) {
-        this.numbers = numbers;
+    private Numbers(final List<Number> numbers) {
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public static Numbers create(final String[] numbersString) {
-        List<Integer> numbers = Arrays.stream(numbersString)
-                .mapToInt(Numbers::parserInt)
-                .boxed()
+        List<Number> numbers = Arrays.stream(numbersString)
+                .map(Number::newInstance)
                 .collect(Collectors.toList());
 
         return new Numbers(numbers);
@@ -23,18 +23,8 @@ public class Numbers {
 
     public int sum() {
         return numbers.stream()
-                .mapToInt(Integer::intValue)
+                .mapToInt(Number::toInt)
                 .sum();
-    }
-
-    private static int parserInt(final String numberString) {
-        int number = Integer.parseInt(numberString);
-
-        if (number < 0) {
-            throw new RuntimeException("number must be greater than zero.");
-        }
-
-        return number;
     }
 
     @Override

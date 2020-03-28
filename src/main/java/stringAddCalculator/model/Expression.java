@@ -19,7 +19,7 @@ public class Expression {
     }
 
     public static Expression newInstance(final String input) {
-        if (input == null || "".equals(input.trim())) {
+        if (Objects.isNull(input) || "".equals(input.trim())) {
             return new Expression(DEFAULT_STRING_VALUE);
         }
 
