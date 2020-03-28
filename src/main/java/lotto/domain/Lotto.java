@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    public LotteryTickets buy(final Price price) {
+    public Lotteries buy(final Price price) {
         List<Lottery> lotteries = publishLottery(price);
-        return new LotteryTickets(lotteries);
+        return new Lotteries(lotteries);
     }
 
     private List<Lottery> publishLottery(final Price price) {
