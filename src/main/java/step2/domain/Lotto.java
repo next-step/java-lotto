@@ -8,6 +8,7 @@ public class Lotto {
     private final List<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
+        //TODO: 중복된 값이 들어오는 지 검증
         this.lotto = new ArrayList<>(lotto);
     }
 
