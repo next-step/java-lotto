@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoResultTest {
 
-	private Map<LottoRank, Integer> rankMap = Arrays.stream(LottoRank.values())
-			.collect(Collectors.toMap(Function.identity(), rank -> 1));
+	private Map<LottoRank, Long> rankMap = Arrays.stream(LottoRank.values())
+			.collect(Collectors.toMap(Function.identity(), rank -> 1L));
 	private int buyPrize = 14000;
 
 	private LottoResult lottoResult = new LottoResult(rankMap, buyPrize);
@@ -31,10 +31,10 @@ class LottoResultTest {
 
 	@Test
 	void getYieldTest() {
-		int earnedPrize = rankMap
-				.entrySet()
+		long earnedPrize = rankMap
+				.keySet()
 				.stream()
-				.mapToInt(entry -> entry.getKey().getEarningPrize() * entry.getValue())
+				.mapToLong(LottoRank::getEarningPrize)
 				.sum();
 		assertThat(lottoResult.getYield())
 				.isEqualTo((double) earnedPrize / buyPrize);

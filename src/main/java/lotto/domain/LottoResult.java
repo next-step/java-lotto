@@ -6,15 +6,15 @@ import java.util.Objects;
 
 public class LottoResult {
 
-	private final Map<LottoRank, Integer> winningMap;
+	private final Map<LottoRank, Long> winningMap;
 	private final int buyPrize;
 
-	public LottoResult(Map<LottoRank, Integer> winningMap, int buyPrize) {
+	public LottoResult(Map<LottoRank, Long> winningMap, int buyPrize) {
 		this.winningMap = Collections.unmodifiableMap(winningMap);
 		this.buyPrize = buyPrize;
 	}
 
-	public Map<LottoRank, Integer> getWinningMap() {
+	public Map<LottoRank, Long> getWinningMap() {
 		return winningMap;
 	}
 
@@ -35,7 +35,7 @@ public class LottoResult {
 		return winningMap
 				.entrySet()
 				.stream()
-				.mapToInt(entry -> entry.getKey().getEarningPrize() * entry.getValue())
-				.sum()/(double)buyPrize;
+				.mapToLong(entry -> entry.getKey().getEarningPrize() * entry.getValue())
+				.sum() / (double) buyPrize;
 	}
 }
