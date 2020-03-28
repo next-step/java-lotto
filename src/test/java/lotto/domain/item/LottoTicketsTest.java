@@ -1,5 +1,6 @@
 package lotto.domain.item;
 
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,11 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketsTest {
-    private static final int LOTTO_PRICE = 1000;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT3 = 3;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT4 = 4;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT5 = 5;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT6 = 6;
 
     List<Integer> luckyNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
@@ -58,6 +54,41 @@ class LottoTicketsTest {
                 () -> assertThat(lottoTickets.getLuckyNumberMatch6Count(luckyNumber))
                         .isEqualTo(2)
         );
+    }
+
+    @DisplayName("총 상금 금액 계산")
+    @Test
+    public void getAllEarningPrize() throws Exception {
+        //given
+        List<LottoTicket> ticket = new ArrayList<>(
+                Arrays.asList(
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))))
+        );
+        LottoTickets lottoTickets = new LottoTickets(ticket);
+
+        //when
+        Money prize = lottoTickets.getAllEarningPrize(luckyNumber);
+
+        //then
+        assertThat(prize.getMoney()).isEqualTo(15000);
+    }
+
+    @DisplayName("로또 티켓 수량 비교")
+    @Test
+    public void getTickets() throws Exception {
+        //given
+        List<LottoTicket> ticket = new ArrayList<>(
+                Arrays.asList(
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))))
+        );
+        LottoTickets lottoTickets = new LottoTickets(ticket);
+
+        //then
+        assertThat(lottoTickets.getTickets().size()).isEqualTo(3);
     }
 
     @DisplayName("객체 복사 테스트")

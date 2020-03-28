@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.item.LottoTicket;
+import lotto.domain.item.LottoTickets;
 import lotto.service.LottoGame;
 import lotto.view.LottoDto;
 import org.junit.jupiter.api.DisplayName;
@@ -7,9 +9,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
+
+    List<Integer> luckyNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+    List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
+            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
+//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
+//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))),
+
+            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
+            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
+            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24)))
+    ));
 
     @DisplayName("생성자 테스트")
     @Test
@@ -31,18 +49,17 @@ class LottoGameTest {
         assertThat(dto.getTickets().size()).isEqualTo(expect);
     }
 
-//    @DisplayName("수익률 개산")
-//    @Test
-//    public void erning() throws Exception {
-//        //given
-//        List<Integer> lottoNumber1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-//        List<Integer> lottoNumber2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
-//        LottoGame lottoGame = new LottoGame(Arrays.asList(new LottoTicket(lottoNumber1), new LottoTicket(lottoNumber2)));
-//
-//        //when
-//        lottoGame.statisticAllGame(Arrays.asList(1, 2, 3, 10, 11, 12));
-//        lottoGame.
-//
-//        //then
-//    }
+    @DisplayName("수익률 개산")
+    @Test
+    public void erning() throws Exception {
+        //given
+        LottoTickets lottoTickets = new LottoTickets(ticketList);
+        LottoGame lottoGame = new LottoGame(new Money(14000), lottoTickets);
+
+        //when
+        LottoDto earningRate = lottoGame.getEarningRate(luckyNumber);
+
+        //then
+        assertThat(earningRate.getEarningRate()).isEqualTo(0.35);
+    }
 }

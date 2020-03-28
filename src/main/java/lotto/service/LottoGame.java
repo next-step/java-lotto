@@ -23,6 +23,11 @@ public class LottoGame {
         this.playGameCount = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
     }
 
+    public LottoGame(Money money, LottoTickets lottoTickets) {
+        this.money = money;
+        this.lottoTickets = lottoTickets;
+    }
+
     private LottoTicket buyOneLottoTicket(List<Integer> numbers) {
         playGameCount--;
         return new LottoTicket(numbers);
@@ -65,7 +70,8 @@ public class LottoGame {
         int howManyBuyItem = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
         Money buyAmount = new Money(LOTTO_PRICE).multiply(howManyBuyItem);
 
-        double rate = (prize.divide(buyAmount).getMoney()) * 100;
+        double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
+
         dto.setEarningRate(rate);
         return dto;
     }
