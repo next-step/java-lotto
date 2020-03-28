@@ -37,4 +37,19 @@ class MatchLottoTest {
         //then
         assertThat(matchLotto.getItemsCount()).isEqualTo(1);
     }
+
+    @DisplayName("매칭 리스트에 아이템 더해주고 list의 크기 비교")
+    @Test
+    public void addItem() throws Exception {
+        //given
+        MatchLotto matchLotto = new MatchLotto(1, ticket1);
+
+        System.out.println(matchLotto);
+        //when
+        matchLotto = matchLotto.addItem(ticket2);
+        System.out.println(matchLotto);
+
+        //then
+        assertThat(matchLotto.getItemsCount()).isEqualTo(2);
+    }
 }

@@ -30,6 +30,7 @@ public class MatchLotto {
     public MatchLotto addItem(Item other) {
         List<Item> items = new ArrayList<>();
         items.addAll(this.matchItem);
+        items.add(other);
 
         return new MatchLotto(this.matchCount, items);
     }
