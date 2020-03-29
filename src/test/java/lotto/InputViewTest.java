@@ -33,4 +33,5 @@ public class InputViewTest {
         InputView inputView = new InputView(price);
         assertThat(inputView.getLottoCount()).isSameAs(14);
     }
+
 }
