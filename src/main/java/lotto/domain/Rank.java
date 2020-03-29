@@ -3,10 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000);
+    FIFTH(3, 5000),
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
+    FIRST(6, 2000000000);
 
     private int matchCount;
     private long amount;
@@ -16,10 +17,16 @@ public enum Rank {
         this.amount = amount;
     }
 
-    public static Rank findByMatchCount(int matchCount) {
+    public static Rank findByLottoTicketResult(LottoTicketResult lottoTicketResult) {
+        int matchCount = lottoTicketResult.getMatchCount();
+        boolean bonusMatch = lottoTicketResult.isBonusMatch();
+
+        if (matchCount == SECOND.getMatchCount() && bonusMatch) {
+            return SECOND;
+        }
         return Arrays.stream(values())
                 .filter(s -> s.matchCount == matchCount)
-                .findAny()
+                .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("당첨 되지 않았습니다."));
     }
 
