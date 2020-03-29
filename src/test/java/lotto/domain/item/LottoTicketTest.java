@@ -22,8 +22,8 @@ public class LottoTicketTest {
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 10), 5),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 10, 11), 4),
-                Arguments.of(Arrays.asList(1, 10, 11, 12, 13, 14, 15), 1),
-                Arguments.of(Arrays.asList(10, 11, 12, 13, 14, 15, 16), 0)
+                Arguments.of(Arrays.asList(1, 10, 11, 12, 13, 14), 1),
+                Arguments.of(Arrays.asList(10, 11, 12, 13, 14, 15), 0)
         );
     }
 
