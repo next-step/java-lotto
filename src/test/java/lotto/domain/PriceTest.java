@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import lotto.exception.NoPurchasePriceException;
+import lotto.exception.NegativePriceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -21,11 +19,12 @@ class PriceTest {
         assertThat(actual).isEqualTo(expect);
     }
 
-    @DisplayName("구입 금액이 1000원 이하일 경우 RuntimeException 을 발생한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1, 990})
-    void negativeException(int price) {
-        assertThatExceptionOfType(NoPurchasePriceException.class).isThrownBy(
+    @DisplayName("구입 금액이 음수일 경우 NegativePriceException 을 발생한다.")
+    @Test
+    void negativeException() {
+        final int price = -1;
+
+        assertThatExceptionOfType(NegativePriceException.class).isThrownBy(
                 () -> new Price(price)
         );
     }
