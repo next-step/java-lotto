@@ -21,11 +21,12 @@ public class LottoApplication {
         LottoDto dto = lottoGame.play();
         ResultView.printLoots(dto);
 
-//        String luckyNumberInput = InputView.inputLuckyNumber();
-//        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
-//        Collections.sort(luckyNumber);
-//        ResultView.printLuckyNumber(luckyNumber);
-//
+        String luckyNumberInput = InputView.inputLuckyNumber();
+        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
+        Collections.sort(luckyNumber);
+
+        String bonus = InputView.inputBonusLuckyNumber();
+
 //        new WinLottoTicket(luckyNumber);
 //
 //        LottoDto winGame = lottoGame.findWinGame(luckyNumber);
