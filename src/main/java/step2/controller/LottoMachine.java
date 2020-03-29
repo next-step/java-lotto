@@ -8,17 +8,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static ResultView resultView = new ResultView();
+    private static ResultView resultView;
+    private static LottoMachine lottoMachine;
 
-    public static void operate(InputView inputView) {
+    private LottoMachine() {}
+
+    public void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
-        Lottos lottos = LottoMachine.createLottos(money);
-        Lotto winningLotto = LottoMachine.createLotto(inputView.getWinningNumbers());
+        Lottos lottos = lottoMachine.createLottos(money);
+        Lotto winningLotto = lottoMachine.createLotto(inputView.getWinningNumbers());
 
         resultView.printResult(makeLottoResult(winningLotto, lottos), money);
     }
 
-    public static Lottos createLottos(Money money) {
+    public Lottos createLottos(Money money) {
         List<Lotto> createdLottos = new ArrayList<>();
         int lottoCount = money.getLottoCount();
 
@@ -31,7 +34,7 @@ public class LottoMachine {
         return lottos;
     }
 
-    private static Lotto createLotto() {
+    private Lotto createLotto() {
         List<LottoNumber> lotto = getShuffledNumber()
                 .stream()
                 .limit(Lotto.COUNT_NUMBER)
@@ -41,7 +44,7 @@ public class LottoMachine {
         return new Lotto(lotto);
     }
 
-    public static Lotto createLotto(List<Integer> inputNumbers) {
+    public Lotto createLotto(List<Integer> inputNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for(int number : inputNumbers) {
@@ -50,14 +53,14 @@ public class LottoMachine {
         return new Lotto(lottoNumbers);
     }
 
-    private static List<LottoNumber> getShuffledNumber() {
+    private List<LottoNumber> getShuffledNumber() {
         List<LottoNumber> shuffledNumber = getWholeNumber();
         Collections.shuffle(shuffledNumber);
 
         return shuffledNumber;
     }
 
-    private static List<LottoNumber> getWholeNumber() {
+    private List<LottoNumber> getWholeNumber() {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for(int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
@@ -66,7 +69,7 @@ public class LottoMachine {
         return numbers;
     }
 
-    public static LottoResult makeLottoResult(Lotto winningLotto, Lottos lottos) {
+    public LottoResult makeLottoResult(Lotto winningLotto, Lottos lottos) {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         for(LottoTier lottoTier : LottoTier.values()) {
@@ -75,7 +78,7 @@ public class LottoMachine {
         return new LottoResult(resultMap);
     }
 
-    private static int getLottoCountByTier(LottoTier lottoTier, Lottos lottos, Lotto winningLotto) {
+    private int getLottoCountByTier(LottoTier lottoTier, Lottos lottos, Lotto winningLotto) {
         int count = 0;
 
         for(Lotto lotto : lottos.getValue()) {
@@ -84,7 +87,7 @@ public class LottoMachine {
         return count;
     }
 
-    private static int addIfSameTier(LottoTier resultTier, LottoTier lottoTier, int count) {
+    private int addIfSameTier(LottoTier resultTier, LottoTier lottoTier, int count) {
         if(lottoTier.equals(resultTier)) {
             count++;
         }
