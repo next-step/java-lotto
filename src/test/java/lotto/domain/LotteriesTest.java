@@ -34,10 +34,22 @@ class LotteriesTest {
 
     @DisplayName("구매한 복권들과 당첨 복권이 일치하지 않는다.")
     @Test
-    void analyzeWin() {
+    void analyzeWin_NotMatch() {
         Lotteries lotteries = new Lotteries(createLottoNumbers());
         LottoNumbers winningLottoNumber = new LottoNumbers("7, 8, 9, 10, 11, 12");
         LottoRank expect = LottoRank.BLANK;
+
+        LottoRank actual = lotteries.analyzeWin(winningLottoNumber);
+
+        assertThat(actual).isEqualTo(expect);
+    }
+
+    @DisplayName("구매한 복권들과 당첨 복권이 3개 일치한다. (4등)")
+    @Test
+    void analyzeWin_Fourth() {
+        Lotteries lotteries = new Lotteries(createLottoNumbers());
+        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 10, 11, 12");
+        LottoRank expect = LottoRank.FOURTH;
 
         LottoRank actual = lotteries.analyzeWin(winningLottoNumber);
 
