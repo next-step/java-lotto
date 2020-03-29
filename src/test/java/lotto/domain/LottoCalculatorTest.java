@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.type.RankType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoCalculatorTest {
     private Lotto lastWeekLotto;
     private List<Lotto> lottos;
+
+    private LottoCalculator lottoCalculator;
 
     @BeforeEach
     void setUp() {
@@ -30,6 +33,7 @@ public class LottoCalculatorTest {
                 new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)),
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
 
+        lottoCalculator = new LottoCalculator(lastWeekLotto, lottos);
     }
 
     @Test
@@ -37,10 +41,19 @@ public class LottoCalculatorTest {
         int investment = 14_000;
         String winningPercentageValue = "0.35";
 
-        LottoCalculator lottoCalculator = new LottoCalculator(lastWeekLotto, lottos);
-
         String winningPercentage = lottoCalculator.getWinningPercentage(investment).toString();
 
         assertThat(winningPercentage).isEqualTo(winningPercentageValue);
+    }
+
+    @Test
+    void getCount() {
+        int noRankCount = lottoCalculator.getCount(RankType.NO_RANK);
+        int rank4Count = lottoCalculator.getCount(RankType.RANK4);
+        int rank1Count = lottoCalculator.getCount(RankType.RANK1);
+
+        assertThat(noRankCount).isEqualTo(13);
+        assertThat(rank4Count).isEqualTo(1);
+        assertThat(rank1Count).isEqualTo(0);
     }
 }
