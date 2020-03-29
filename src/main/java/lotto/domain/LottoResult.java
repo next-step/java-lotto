@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,5 +47,9 @@ public class LottoResult {
         }
 
         return Math.floor(total.divide(price) * ONE_HUNDRED_PERCENT) / (double) ONE_HUNDRED_PERCENT;
+    }
+
+    public Map<LottoRank, Integer> getChart() {
+        return Collections.unmodifiableMap(chart);
     }
 }
