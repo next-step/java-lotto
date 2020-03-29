@@ -17,6 +17,7 @@ public class ResultView {
     private LottoNumber winningNumbers;
     private List<LottoNumber> purchaseLottoNumbers;
     private Map<Integer, WinningLotto> winningLottos;
+    private int bonusBall;
 
     public ResultView() {
     }
@@ -26,12 +27,25 @@ public class ResultView {
     }
 
     public ResultView(List<LottoNumber> purchaseLottoNumbers) {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        String inputText = scanner.next();
+        String inputText = enterWinningValue();
+        int bonusBall = enterBonusValue();
+        validateBonusBall(bonusBall);
+
+        this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumber(numbers);
         this.purchaseLottoNumbers = purchaseLottoNumbers;
         this.winningLottos = getWinningLottos();
+    }
+
+    private int enterBonusValue() {
+        System.out.println("\n보너스 볼을 입력해 주세요");
+        return scanner.nextInt();
+    }
+
+    private String enterWinningValue() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.next();
     }
 
     public ResultView(String inputText, List<LottoNumber> purchaseLottoNumbers) {
@@ -119,6 +133,12 @@ public class ResultView {
 
     public int totalPurchaseAmount() {
         return purchaseLottoNumbers.size() * MIN_PURCHASE_AMOUNT;
+    }
+
+    public void validateBonusBall(int bonusBall) {
+        if (bonusBall < 1 || bonusBall > 45) {
+            throw new IllegalArgumentException("입력할 수 있는 범위는 1~45 사이입니다.");
+        }
     }
 
     private int getResultCount(int matchCount) {

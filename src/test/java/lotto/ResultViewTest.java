@@ -82,4 +82,12 @@ class ResultViewTest {
         double result = resultView.calculateRevenuePercent(5000, 14000);
         assertThat(result).isEqualTo(0.35);
     }
+
+    @DisplayName("보너스 볼에 유효성을 검사한다. 1~45 사이가 아닐때는 예외처리")
+    @Test
+    void validateBonusBall(){
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            resultView.validateBonusBall(46);
+        });
+    }
 }
