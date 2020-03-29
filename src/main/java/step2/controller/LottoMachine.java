@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
 public class LottoMachine {
     private static ResultView resultView;
     private static LottoMachine lottoMachine;
+    private static List<LottoNumber> wholeNumber;
 
     private LottoMachine() {
         this.resultView = new ResultView();
+        this.wholeNumber = getWholeNumber();
     }
 
     public void operate(InputView inputView) {
@@ -56,7 +58,7 @@ public class LottoMachine {
     }
 
     private List<LottoNumber> getShuffledNumber() {
-        List<LottoNumber> shuffledNumber = getWholeNumber();
+        List<LottoNumber> shuffledNumber = this.wholeNumber;
         Collections.shuffle(shuffledNumber);
 
         return shuffledNumber;
