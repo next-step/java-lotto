@@ -5,7 +5,8 @@ import lotto.model.winninglotto.WinningLotto;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.model.Rank.*;
+import static lotto.model.Rank.SECOND;
+import static lotto.model.Rank.THIRD;
 
 public class MyLottos {
     private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
@@ -27,16 +28,17 @@ public class MyLottos {
     }
 
     private long findCountOfSecond(WinningLotto winningLotto) {
-        return lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.hasBonusBall(winningLotto))
+        long count1 = lottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.hasBonusBall(winningLotto.getBonusNum()))
                 .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
                 .filter(matchCount -> matchCount == SECOND.getMatchCount())
                 .count();
+        return count1;
     }
 
     private long findCountOfThird(WinningLotto winningLotto) {
         return lottoNumbers.stream()
-                .filter(lottoNumber -> !lottoNumber.hasBonusBall(winningLotto))
+                .filter(lottoNumber -> !lottoNumber.hasBonusBall(winningLotto.getBonusNum()))
                 .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
                 .filter(matchCount -> matchCount == THIRD.getMatchCount())
                 .count();

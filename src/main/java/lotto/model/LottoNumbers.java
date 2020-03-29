@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Collections;
@@ -52,9 +53,9 @@ public class LottoNumbers {
                 .size();
     }
 
-    public boolean hasBonusBall(WinningLotto winningLotto){
+    public boolean hasBonusBall(BonusBall bonusBall){
         return lottoNumbers.stream()
-                .filter(number -> number.equals(winningLotto.getBonusNum()))
+                .filter(number -> bonusBall.isEqualWith(number))
                 .findAny()
                 .isPresent();
     }

@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.winninglotto.WinningLotto;
 import lotto.model.winninglotto.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,11 +44,11 @@ public class LottoNumbersTest {
     @CsvSource(value = {"1:5", "7:6", "8:5", "9:5"}, delimiter = ':')
     void findHowManyMatchTest(int input, int expected) {
         //given
-        WinningLottoNumbers winningLotto = new WinningLottoNumbers(Arrays.asList(input, 2, 3, 4, 5, 6));
+        WinningLottoNumbers winningLottoNumbers= new WinningLottoNumbers(Arrays.asList(input, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(2, 3, 4, 5, 6, 7));
 
         //when
-        int howManyMatch = lottoNumbers.findHowManyMatch(winningLotto);
+        int howManyMatch = lottoNumbers.findHowManyMatch(WinningLotto.of(winningLottoNumbers));
 
         //then
         assertThat(howManyMatch).isEqualTo(expected);

@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.winninglotto.BonusBall;
+import lotto.model.winninglotto.WinningLotto;
 import lotto.model.winninglotto.WinningLottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,8 +13,10 @@ import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyLottosTest {
-    private final WinningLottoNumbers WINNING_LOTTO = new WinningLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final int BONUS_BALL = 9;
+    private final WinningLottoNumbers WINNING_LOTTO_NUMBERS = new WinningLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private final int BONUS_BALL_NUMBER = 9;
+    private final WinningLotto WINNING_LOTTO
+            = new WinningLotto(WINNING_LOTTO_NUMBERS, new BonusBall(BONUS_BALL_NUMBER));
 
     private LottoNumbers lottoNumbers1;
     private LottoNumbers lottoNumbers2;
@@ -25,8 +29,8 @@ public class MyLottosTest {
     void setUp() {
         lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoNumbers2 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
-        lottoNumbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, BONUS_BALL));
-        lottoNumbers4 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, BONUS_BALL));
+        lottoNumbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, BONUS_BALL_NUMBER));
+        lottoNumbers4 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, BONUS_BALL_NUMBER));
         lottoNumbers5 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 22));
     }
 
@@ -37,7 +41,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfThreeNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FIFTH, BONUS_BALL);
+        Long countOfThreeNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FIFTH);
 
         //then
         assertThat(countOfThreeNumMatching).isEqualTo(1L);
@@ -50,7 +54,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfFourNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FOURTH, BONUS_BALL);
+        Long countOfFourNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FOURTH);
 
         //then
         assertThat(countOfFourNumMatching).isEqualTo(1L);
@@ -64,7 +68,7 @@ public class MyLottosTest {
                 = new MyLottos(Arrays.asList(lottoNumbers4, lottoNumbers5));
 
         //when
-        Long countOfFiveNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, SECOND, BONUS_BALL);
+        Long countOfFiveNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, SECOND);
 
         //then
         assertThat(countOfFiveNumMatching).isEqualTo(1L);
@@ -77,7 +81,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfSixNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FIRST, BONUS_BALL);
+        Long countOfSixNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FIRST);
 
         //then
         assertThat(countOfSixNumMatching).isEqualTo(1L);
@@ -91,7 +95,7 @@ public class MyLottosTest {
                 = new MyLottos(Arrays.asList(lottoNumbers3, lottoNumbers4, lottoNumbers5));
 
         //when
-        Money earningMoney = myLottos.calculateAllPrizeMoney(WINNING_LOTTO, BONUS_BALL);
+        Money earningMoney = myLottos.calculateAllPrizeMoney(WINNING_LOTTO);
 
         //then
         assertThat(earningMoney).isEqualTo(new Money(31_505_000l));
@@ -105,7 +109,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers5));
 
         //whenR
-        double earningRate = myLottos.calculateEarningRate(WINNING_LOTTO, BONUS_BALL);
+        double earningRate = myLottos.calculateEarningRate(WINNING_LOTTO);
 
         //then
         assertThat(earningRate).isEqualTo(500);
