@@ -68,7 +68,7 @@ public class LottoGame {
         LottoDto dto = new LottoDto();
         Money prize = getAllEarningPrize(winTicket);
         int howManyBuyItem = this.lottoTickets.size();
-        Money buyAmount = new Money(LOTTO_PRICE).multiply(howManyBuyItem);
+        Money buyAmount = Money.buyItemAmount(LOTTO_PRICE, howManyBuyItem);
 
         double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
 

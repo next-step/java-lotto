@@ -14,6 +14,10 @@ public class Money {
         this.money = money;
     }
 
+    public static Money buyItemAmount(double itemPrice, int buyCount) {
+        return new Money(itemPrice).multiply(buyCount);
+    }
+
     private void validatePositive(double money) {
         if (money < 0) {
             throw new IllegalArgumentException("금액은 양의 정수만 입력 가능 합니다.");
