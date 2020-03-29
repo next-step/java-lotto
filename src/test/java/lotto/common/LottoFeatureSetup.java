@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 
 public class LottoFeatureSetup {
 
+    private LottoFeatureSetup() {
+    }
+
     public static List<LottoNumber> getLottoNubersOneToSix() {
         return Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
