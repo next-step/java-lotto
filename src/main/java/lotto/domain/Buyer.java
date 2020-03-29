@@ -15,7 +15,7 @@ public class Buyer {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> buyLottoTickets(int money) {
+    public List<LottoTicket> buyLottoTickets(long money) {
         lottoTickets = LottoMachine.pay(money);
         return lottoTickets;
     }

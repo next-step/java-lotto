@@ -7,7 +7,7 @@ import java.util.List;
 import static lotto.domain.LottoRule.*;
 
 public class LottoMachine {
-    public static List<LottoTicket> pay(int money) {
+    public static List<LottoTicket> pay(long money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < getTicketCount(money); i++) {
