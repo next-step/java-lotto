@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTicketTest {
-    @DisplayName("로또 한장에는 중복되지 않는 6개의 로또번호가 들어간다.")
+    @DisplayName("로또티켓 한장에는 중복되지 않는 6개의 로또번호가 들어간다.")
     @Test
     void oneLotto() {
         int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
@@ -41,7 +41,7 @@ public class LottoTicketTest {
                 });
     }
 
-    @DisplayName("로또 한장은 천원이다.")
+    @DisplayName("로또티켓 한장은 천원이다.")
     @Test
     void price() {
         assertThat(LottoTicket.PRICE).isEqualTo(1000);
