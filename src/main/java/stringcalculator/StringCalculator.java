@@ -16,18 +16,23 @@ public class StringCalculator {
 
     public int calculate(String expression) {
         if (isNullAndEmpty(expression)) {
-            return DEFAULT_NUMBER;
+            return toInt(new Number(DEFAULT_NUMBER));
         }
+        return toInt(toNumber(tokenize(expression)));
+    }
 
-        String[] tokens = tokenize(expression);
-        CalculatorNumber result = new CalculatorNumber(DEFAULT_VALUE);
+    private int toInt(Number result) {
+        return result.getNumber();
+    }
+
+    private Number toNumber(String[] tokens) {
+        Number result = new Number(DEFAULT_VALUE);
 
         for (String token : tokens) {
-            CalculatorNumber calculatorNumber = new CalculatorNumber(token);
-            result = result.add(calculatorNumber);
+            Number number = new Number(token);
+            result = result.add(number);
         }
-
-        return result.getNumber();
+        return result;
     }
 
     private String[] tokenize(String expression) {
