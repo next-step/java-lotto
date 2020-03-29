@@ -15,9 +15,9 @@ public class LottoController {
         int purchaseCount = inputView.getPurchaseCount();
         System.out.println(purchaseCount + "를 구매 했습니다.");
 
-        Lotto lotto = new Lotto(purchaseCount);
-        lotto.createLottoNumbersByPurchaseCount();
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
+        lottoGenerator.createLottoNumbersByPurchaseCount();
+        List<LottoNumber> lottoNumbers = lottoGenerator.getLottoNumbers();
 
         for (LottoNumber lottoNumber : lottoNumbers) {
             System.out.println(lottoNumber.getNumbers());
