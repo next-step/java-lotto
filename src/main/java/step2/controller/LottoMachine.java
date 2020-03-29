@@ -77,25 +77,9 @@ public class LottoMachine {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         for(LottoTier lottoTier : LottoTier.values()) {
-            resultMap.put(lottoTier, getLottoCountByTier(lottoTier, lottos, winningLotto));
+            resultMap.put(lottoTier, lottos.getLottoCountByTier(lottoTier, winningLotto));
         }
         return new LottoResult(resultMap);
-    }
-
-    private int getLottoCountByTier(LottoTier lottoTier, Lottos lottos, Lotto winningLotto) {
-        int count = 0;
-
-        for(Lotto lotto : lottos.getValue()) {
-            count = addIfSameTier(lotto.getLottoTier(winningLotto), lottoTier, count);
-        }
-        return count;
-    }
-
-    private int addIfSameTier(LottoTier resultTier, LottoTier lottoTier, int count) {
-        if(lottoTier.equals(resultTier)) {
-            count++;
-        }
-        return count;
     }
 
     public static LottoMachine getInstance() {
