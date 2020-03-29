@@ -29,7 +29,7 @@ public class LottoWinningNumber {
     }
 
     public List<LottoNumber> getMatches(LottoTicket lottoTicket) {
-        return lottoTicket.stream()
+        return lottoTicket.getLottoNumber().stream()
                 .filter(lottoNumber -> winningNumber.contains(lottoNumber))
                 .collect(Collectors.toList());
     }
