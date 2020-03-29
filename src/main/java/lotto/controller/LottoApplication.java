@@ -25,10 +25,9 @@ public class LottoApplication {
         List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
         Collections.sort(luckyNumber);
 
-        String bonus = InputView.inputBonusLuckyNumber();
+        int bonus = StringUtil.parseStringToInt(InputView.inputBonusLuckyNumber());
+        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, bonus);
 
-//        new WinLottoTicket(luckyNumber);
-//
 //        LottoDto winGame = lottoGame.findWinGame(luckyNumber);
 //        ResultView.printResult(winGame);
 //
