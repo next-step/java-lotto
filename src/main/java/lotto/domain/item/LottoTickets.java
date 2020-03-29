@@ -17,34 +17,30 @@ public class LottoTickets implements Cloneable {
         this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
     }
 
-    private int finWinLotto(LottoPrize lottoPrize, Item winTicket) {
+    private int findWinLotto(LottoPrize lottoPrize, Item winTicket) {
         return (int) tickets.stream()
                 .filter(ticket -> lottoPrize == ticket.getRank(winTicket))
                 .count();
     }
 
     public int getFirstLottoCount(Item winTicket) {
-        return finWinLotto(LottoPrize.FIRST, winTicket);
+        return findWinLotto(LottoPrize.FIRST, winTicket);
     }
 
     public int getSecondLottoCount(Item winTicket) {
-        return finWinLotto(LottoPrize.SECOND, winTicket);
+        return findWinLotto(LottoPrize.SECOND, winTicket);
     }
 
     public int getThirdLottoCount(Item winTicket) {
-        return finWinLotto(LottoPrize.THIRD, winTicket);
+        return findWinLotto(LottoPrize.THIRD, winTicket);
     }
 
     public int getFourthLottoCount(Item winTicket) {
-        return finWinLotto(LottoPrize.FOURTH, winTicket);
+        return findWinLotto(LottoPrize.FOURTH, winTicket);
     }
 
     public int getFifthLottoCount(Item winTicket) {
-        return finWinLotto(LottoPrize.FIFTH, winTicket);
-    }
-
-    public int getMisshLottoCount(Item winTicket) {
-        return finWinLotto(LottoPrize.MISS, winTicket);
+        return findWinLotto(LottoPrize.FIFTH, winTicket);
     }
 
     public Money getAllEarningPrize(Item winTicket) {

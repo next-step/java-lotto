@@ -36,7 +36,7 @@ public class LottoTicketTest {
 
     @DisplayName("로또 티켓 정상 생성")
     @Test
-    public void constructor() throws Exception {
+    public void constructor_success() throws Exception {
         //given
         LottoTicket ticket1 = new LottoTicket(numbers);
         LottoTicket ticket2 = new LottoTicket(numbers);
@@ -47,7 +47,7 @@ public class LottoTicketTest {
     @DisplayName("당첨 번호와 비교해 로또 번호가 몇개가 맞는지 확인한다.")
     @ParameterizedTest
     @MethodSource("provideMatchNumbers")
-    public void getLuckyNumberMatchCount(List<Integer> comp, int expect) throws Exception {
+    public void getLuckyNumberMatchCount_success(List<Integer> comp, int expect) throws Exception {
         //given
         final LottoTicket lotto = new LottoTicket(comp);
         final WinLottoTicket winLottoTicket = new WinLottoTicket(numbers, 45);
@@ -61,7 +61,7 @@ public class LottoTicketTest {
 
     @DisplayName("해당 로또가 몇등인지 판단한다")
     @Test
-    public void getRank() throws Exception {
+    public void getRank_success() throws Exception {
         //given
         final LottoTicket lotto = new LottoTicket(numbers);
         final WinLottoTicket first = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);

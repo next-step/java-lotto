@@ -32,14 +32,14 @@ class LottoTicketsTest {
 
     @DisplayName("생성자 테스트")
     @Test
-    public void constructor() throws Exception {
+    public void constructor_success() throws Exception {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
     }
 
     @DisplayName("당첨 번호 일치 하는 로또 개수 비교")
     @Test
-    public void LuckyNumberMatchCount() throws Exception {
+    public void getXXXLottoCount_success() throws Exception {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
 
@@ -58,7 +58,7 @@ class LottoTicketsTest {
 
     @DisplayName("총 상금 금액 계산")
     @Test
-    public void getAllEarningPrize() throws Exception {
+    public void getAllEarningPrize_success() throws Exception {
         //given
         List<LottoTicket> ticket = new ArrayList<>(
                 Arrays.asList(
@@ -79,7 +79,7 @@ class LottoTicketsTest {
 
     @DisplayName("로또 티켓 수량 비교")
     @Test
-    public void getTickets() throws Exception {
+    public void getTickets_success() throws Exception {
         //given
         List<LottoTicket> ticket = new ArrayList<>(
                 Arrays.asList(
@@ -95,7 +95,7 @@ class LottoTicketsTest {
 
     @DisplayName("객체 복사 테스트")
     @Test
-    public void clone_test() throws Exception {
+    public void clone_success() throws Exception {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
 

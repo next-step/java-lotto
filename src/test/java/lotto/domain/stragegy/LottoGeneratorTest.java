@@ -9,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGeneratorTest {
 
     @Test
-    public void makeLottoNumber() throws Exception {
+    public void generateLottoNumber_success() throws Exception {
         //when
-        List<Integer> integers = LottoGenerator.lottoNumberGenerator();
+        List<Integer> integers = LottoGenerator.generateLottoNumber();
 
         //then
         assertThat(integers.size()).isEqualTo(6);

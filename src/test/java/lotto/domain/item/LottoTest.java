@@ -36,7 +36,7 @@ class LottoTest {
 
     @DisplayName("로또 티켓 정상 생성")
     @Test
-    public void constructor() throws Exception {
+    public void constructor_success() throws Exception {
         //given
         Lotto ticket1 = new Lotto(numbers);
         Lotto ticket2 = new Lotto(numbers);
@@ -49,7 +49,7 @@ class LottoTest {
      */
     @DisplayName("로또 티켓은 번호 6개만 지정 가능")
     @Test
-    public void lottosize() throws Exception {
+    public void validateSize_fail_lessThan6() throws Exception {
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 2, 3, 4))
         ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 6개만 지정 가능 합니다.");
@@ -57,7 +57,7 @@ class LottoTest {
 
     @DisplayName("로또 티켓은 번호 6개만 지정 가능")
     @Test
-    public void lottosize2() throws Exception {
+    public void validateSize_fail_moreThan6() throws Exception {
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 3, 4, 2))
         ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 6개만 지정 가능 합니다.");
@@ -65,7 +65,7 @@ class LottoTest {
 
     @DisplayName("로또는 불변 VO 객체여야 한다")
     @Test
-    public void modify() throws Exception {
+    public void constructor_fail_modify() throws Exception {
         //given
         List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto ticket = new Lotto(list);
@@ -81,7 +81,7 @@ class LottoTest {
 
     @DisplayName("로또번호는 외부의 변화에 영향이 없어야 한다.")
     @Test
-    public void modify2() throws Exception {
+    public void constructor_fail_modifyFromOutside() throws Exception {
         //given
         List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto ticket = new Lotto(list);
@@ -100,7 +100,7 @@ class LottoTest {
 
     @DisplayName("0 ~ 45 사이의 숫자인지 체크")
     @Test
-    public void validateLottoNumberRange() throws Exception {
+    public void validateNumberRange_fail_1() throws Exception {
         //given
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 46))
@@ -109,7 +109,7 @@ class LottoTest {
 
     @DisplayName("0 ~ 45 사이의 숫자인지 체크")
     @Test
-    public void validateLottoNumberRange2() throws Exception {
+    public void validateNumberRange_fail_2() throws Exception {
         //given
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(0, 2, 3, 4, 5, 45))
@@ -118,7 +118,7 @@ class LottoTest {
 
     @DisplayName("번호 중복 체크")
     @Test
-    public void validateDuplicate() throws Exception {
+    public void validateDuplicate_fail() throws Exception {
         //given
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 1, 3, 4, 5, 45))

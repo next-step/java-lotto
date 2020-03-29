@@ -38,7 +38,7 @@ public class LottoGame {
     private void buyAllLottoTicket() {
         List<LottoTicket> lottos = new ArrayList<>();
         while (playGameCount > 0) {
-            List<Integer> numbers = LottoGenerator.lottoNumberGenerator();
+            List<Integer> numbers = LottoGenerator.generateLottoNumber();
             lottos.add(buyOneLottoTicket(numbers));
         }
         this.lottoTickets = new LottoTickets(Collections.unmodifiableList(lottos));

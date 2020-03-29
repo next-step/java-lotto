@@ -22,9 +22,6 @@ class LottoGameTest {
 
     List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))),
-
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24)))
@@ -32,14 +29,14 @@ class LottoGameTest {
 
     @DisplayName("생성자 테스트")
     @Test
-    public void constructor() throws Exception {
+    public void constructor_success() throws Exception {
         LottoGame lottoGame = new LottoGame(new Money(10000));
     }
 
     @DisplayName("입력금액에서 구매 가능한 로또만큼 구매 되는지 체크")
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "5000:5"}, delimiter = ':')
-    public void buyLotto(int myMoney, int expect) throws Exception {
+    public void play_success_countBuyLotto(int myMoney, int expect) throws Exception {
         //given
         LottoGame lottoGame = new LottoGame(new Money(myMoney));
 
@@ -52,7 +49,7 @@ class LottoGameTest {
 
     @DisplayName("수익률 개산")
     @Test
-    public void erning() throws Exception {
+    public void getEarningRate_success() throws Exception {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
         LottoGame lottoGame = new LottoGame(new Money(14000), lottoTickets);

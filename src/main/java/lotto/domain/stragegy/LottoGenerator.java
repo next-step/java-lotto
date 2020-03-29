@@ -9,7 +9,7 @@ public class LottoGenerator {
     private static final int LOTTO_MIN_NUMBER_SIZE = 1;
     private static final int LOTTO_MAX_NUMBER_SIZE = 45;
 
-    public static List<Integer> lottoNumberGenerator() {
+    public static List<Integer> generateLottoNumber() {
         List<Integer> pool = new ArrayList<>();
 
         pool = makeLottoPool();

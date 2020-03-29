@@ -13,13 +13,13 @@ public class LottoTicket extends Lotto {
     public int getLuckyNumberMatchCount(Item winTicket) {
         int match = 0;
         for (Integer num : numbers) {
-            match = addCountIfMatch(winTicket, match, num);
+            match = increaseCountIfMatch(winTicket, match, num);
         }
 
         return match;
     }
 
-    private int addCountIfMatch(Item winTicket, int match, Integer num) {
+    private int increaseCountIfMatch(Item winTicket, int match, Integer num) {
         if (winTicket.getNumbers().contains(num)) {
             match++;
         }

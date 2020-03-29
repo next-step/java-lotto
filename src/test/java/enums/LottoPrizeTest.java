@@ -12,7 +12,7 @@ class LottoPrizeTest {
     @DisplayName("매칭된 번호 개수에 맞는 상금 확인")
     @Test
     @CsvSource(value = {""})
-    public void prize() throws Exception {
+    public void test_success_prize() throws Exception {
         //given
         final int winCount = 2;
 
@@ -35,7 +35,7 @@ class LottoPrizeTest {
 
     @DisplayName("등수별로 몇개의 당첨 번호가 확인 되야 하는지 테스트")
     @Test
-    public void matchCount() throws Exception {
+    public void test_success_matchCount() throws Exception {
         assertAll(
                 () -> assertThat(LottoPrize.FIRST.getMatchCount()).isEqualTo(6),
                 () -> assertThat(LottoPrize.SECOND.getMatchCount()).isEqualTo(5),
@@ -48,7 +48,7 @@ class LottoPrizeTest {
 
     @DisplayName("enum 이름이 동일한지 비교")
     @Test
-    public void compareName() throws Exception {
+    public void test_success_compareName() throws Exception {
         //given
         LottoPrize first = LottoPrize.FIRST;
         LottoPrize compare1 = LottoPrize.FIRST;
@@ -63,7 +63,7 @@ class LottoPrizeTest {
 
     @DisplayName("로또 등수 판단")
     @Test
-    public void findRank() throws Exception {
+    public void findRank_success() throws Exception {
         //given
         LottoPrize first1 = LottoPrize.findRank(6, false);
         LottoPrize first2 = LottoPrize.findRank(6, false);
