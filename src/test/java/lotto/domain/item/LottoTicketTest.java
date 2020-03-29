@@ -7,14 +7,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
 
@@ -45,15 +42,16 @@ public class LottoTicketTest {
         assertThat(ticket1.equals(ticket2)).isTrue();
     }
 
-    @DisplayName("로또 번호가 몇개가 맞는지 확인한다.")
+    @DisplayName("당첨 번호와 비교해 로또 번호가 몇개가 맞는지 확인한다.")
     @ParameterizedTest
     @MethodSource("provideMatchNumbers")
     public void getLuckyNumberMatchCount(List<Integer> comp, int expect) throws Exception {
         //given
-        LottoTicket lotto = new LottoTicket(numbers);
+        final LottoTicket lotto = new LottoTicket(numbers);
+        final WinLottoTicket winLottoTicket = new WinLottoTicket(comp, 45);
 
         //when
-        int match = lotto.getLuckyNumberMatchCount(comp);
+        int match = lotto.getLuckyNumberMatchCount(winLottoTicket);
 
         //then
         assertThat(match).isEqualTo(expect);

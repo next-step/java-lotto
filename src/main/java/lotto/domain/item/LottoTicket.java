@@ -8,17 +8,17 @@ public class LottoTicket extends Lotto {
         super(numbers);
     }
 
-    public int getLuckyNumberMatchCount(List<Integer> luckyNumber) {
+    public int getLuckyNumberMatchCount(Item winTicket) {
         int match = 0;
         for (Integer num : numbers) {
-            match = addCountIfMatch(luckyNumber, match, num);
+            match = addCountIfMatch(winTicket, match, num);
         }
 
         return match;
     }
 
-    private int addCountIfMatch(List<Integer> luckyNumber, int match, Integer num) {
-        if (luckyNumber.contains(num)) {
+    private int addCountIfMatch(Item winTicket, int match, Integer num) {
+        if (winTicket.getNumbers().contains(num)) {
             match++;
         }
         return match;

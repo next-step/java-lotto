@@ -42,16 +42,17 @@ class LottoTicketsTest {
     public void LuckyNumberMatchCount() throws Exception {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
 
         //then
         assertAll(
-                () -> assertThat(lottoTickets.getLuckyNumberMatch3Count(luckyNumber))
+                () -> assertThat(lottoTickets.getLuckyNumberMatch3Count(winLottoTicket))
                         .isEqualTo(3),
-                () -> assertThat(lottoTickets.getLuckyNumberMatch4Count(luckyNumber))
+                () -> assertThat(lottoTickets.getLuckyNumberMatch4Count(winLottoTicket))
                         .isEqualTo(0),
-                () -> assertThat(lottoTickets.getLuckyNumberMatch5Count(luckyNumber))
+                () -> assertThat(lottoTickets.getLuckyNumberMatch5Count(winLottoTicket))
                         .isEqualTo(2),
-                () -> assertThat(lottoTickets.getLuckyNumberMatch6Count(luckyNumber))
+                () -> assertThat(lottoTickets.getLuckyNumberMatch6Count(winLottoTicket))
                         .isEqualTo(2)
         );
     }
@@ -67,9 +68,10 @@ class LottoTicketsTest {
                         new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))))
         );
         LottoTickets lottoTickets = new LottoTickets(ticket);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
 
         //when
-        Money prize = lottoTickets.getAllEarningPrize(luckyNumber);
+        Money prize = lottoTickets.getAllEarningPrize(winLottoTicket);
 
         //then
         assertThat(prize.getMoney()).isEqualTo(15000);

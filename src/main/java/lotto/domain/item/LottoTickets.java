@@ -24,36 +24,36 @@ public class LottoTickets implements Cloneable {
         this.tickets = Collections.unmodifiableList(tmp);
     }
 
-    private int getLuckyNumberMatchCount(int luckyNumber, List<Integer> luckyNumbers) {
+    private int getLuckyNumberMatchCount(int luckyNumber, Item winTicket) {
         return (int) tickets.stream()
-                .filter(ticket -> luckyNumber == ticket.getLuckyNumberMatchCount(luckyNumbers))
+                .filter(ticket -> luckyNumber == ticket.getLuckyNumberMatchCount(winTicket))
                 .count();
     }
 
-    public int getLuckyNumberMatch3Count(List<Integer> luckyNumbers) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT3, luckyNumbers);
+    public int getLuckyNumberMatch3Count(Item winTicket) {
+        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT3, winTicket);
     }
 
-    public int getLuckyNumberMatch4Count(List<Integer> luckyNumbers) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT4, luckyNumbers);
+    public int getLuckyNumberMatch4Count(Item winTicket) {
+        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT4, winTicket);
     }
 
-    public int getLuckyNumberMatch5Count(List<Integer> luckyNumbers) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT5, luckyNumbers);
+    public int getLuckyNumberMatch5Count(Item winTicket) {
+        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT5, winTicket);
     }
 
-    public int getLuckyNumberMatch6Count(List<Integer> luckyNumbers) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT6, luckyNumbers);
+    public int getLuckyNumberMatch6Count(Item winTicket) {
+        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT6, winTicket);
     }
 
-    public Money getAllEarningPrize(List<Integer> luckyNumbers) {
+    public Money getAllEarningPrize(Item winTicket) {
         Money earning = new Money();
 
         return earning
-                .plus(LottoPrize.FIFTH.getWinningPrize(getLuckyNumberMatch3Count(luckyNumbers)))
-                .plus(LottoPrize.FOURTH.getWinningPrize(getLuckyNumberMatch4Count(luckyNumbers)))
-                .plus(LottoPrize.SECOND.getWinningPrize(getLuckyNumberMatch5Count(luckyNumbers)))
-                .plus(LottoPrize.FIRST.getWinningPrize(getLuckyNumberMatch6Count(luckyNumbers)));
+                .plus(LottoPrize.FIFTH.getWinningPrize(getLuckyNumberMatch3Count(winTicket)))
+                .plus(LottoPrize.FOURTH.getWinningPrize(getLuckyNumberMatch4Count(winTicket)))
+                .plus(LottoPrize.SECOND.getWinningPrize(getLuckyNumberMatch5Count(winTicket)))
+                .plus(LottoPrize.FIRST.getWinningPrize(getLuckyNumberMatch6Count(winTicket)));
     }
 
 

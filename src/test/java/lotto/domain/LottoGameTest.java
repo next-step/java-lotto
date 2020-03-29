@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
+import lotto.domain.item.WinLottoTicket;
 import lotto.service.LottoGame;
 import lotto.view.LottoDto;
 import org.junit.jupiter.api.DisplayName;
@@ -55,9 +56,10 @@ class LottoGameTest {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
         LottoGame lottoGame = new LottoGame(new Money(14000), lottoTickets);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
 
         //when
-        LottoDto earningRate = lottoGame.getEarningRate(luckyNumber);
+        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
 
         //then
         assertThat(earningRate.getEarningRate()).isEqualTo(0.35);

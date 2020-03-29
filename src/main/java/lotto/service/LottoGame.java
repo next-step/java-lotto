@@ -1,8 +1,10 @@
 package lotto.service;
 
 import lotto.domain.Money;
+import lotto.domain.item.Item;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
+import lotto.domain.item.WinLottoTicket;
 import lotto.domain.stragegy.LottoGenerator;
 import lotto.view.LottoDto;
 
@@ -51,22 +53,22 @@ public class LottoGame {
         return dto;
     }
 
-    public LottoDto findWinGame(List<Integer> luckyNumber) {
+    public LottoDto findWinGame(Item winTicket) {
         LottoDto dto = new LottoDto();
-        dto.setMatch3GameCount(this.lottoTickets.getLuckyNumberMatch3Count(luckyNumber));
-        dto.setMatch4GameCount(this.lottoTickets.getLuckyNumberMatch4Count(luckyNumber));
-        dto.setMatch5GameCount(this.lottoTickets.getLuckyNumberMatch5Count(luckyNumber));
-        dto.setMatch6GameCount(this.lottoTickets.getLuckyNumberMatch6Count(luckyNumber));
+        dto.setMatch3GameCount(this.lottoTickets.getLuckyNumberMatch3Count(winTicket));
+        dto.setMatch4GameCount(this.lottoTickets.getLuckyNumberMatch4Count(winTicket));
+        dto.setMatch5GameCount(this.lottoTickets.getLuckyNumberMatch5Count(winTicket));
+        dto.setMatch6GameCount(this.lottoTickets.getLuckyNumberMatch6Count(winTicket));
         return dto;
     }
 
-    private Money getAllEarningPrize(List<Integer> luckyNumber) {
-        return this.lottoTickets.getAllEarningPrize(luckyNumber);
+    private Money getAllEarningPrize(WinLottoTicket winTicket) {
+        return this.lottoTickets.getAllEarningPrize(winTicket);
     }
 
-    public LottoDto getEarningRate(List<Integer> luckyNumber) {
+    public LottoDto getEarningRate(WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
-        Money prize = getAllEarningPrize(luckyNumber);
+        Money prize = getAllEarningPrize(winTicket);
         int howManyBuyItem = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
         Money buyAmount = new Money(LOTTO_PRICE).multiply(howManyBuyItem);
 
