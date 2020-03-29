@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-class ValueList {
+class PositiveValues {
 
 	List<PositiveValue> values;
 
-	ValueList(String... values) {
+	PositiveValues(String... values) {
 		this.values = parseToPositiveList(values);
 	}
 
@@ -42,8 +42,8 @@ class ValueList {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		ValueList valueList = (ValueList) o;
-		return values.equals(valueList.values);
+		PositiveValues positiveValues = (PositiveValues) o;
+		return values.equals(positiveValues.values);
 	}
 
 	@Override
