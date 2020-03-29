@@ -3,13 +3,13 @@ package step2.domain;
 import java.util.List;
 
 public class WinLotto {
-    public static List<Integer> winLottoNumber;
+    public List<Integer> winLottoNumber;
 
     public WinLotto(List<Integer> winLottoNumber) {
         this.winLottoNumber = winLottoNumber;
     }
 
-    public static int match(List<Integer> buyLottoList) {
-        return (int) winLottoNumber.stream().filter(number -> buyLottoList.contains(number)).count();
+    public int match(List<Integer> buyLottos) {
+        return (int) winLottoNumber.stream().filter(number -> buyLottos.contains(number)).count();
     }
 }

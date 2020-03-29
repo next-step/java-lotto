@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import step2.domain.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 ;
@@ -21,23 +20,23 @@ public class LottoAutoGameTest {
     @DisplayName("입력값 확인테스트")
     @ValueSource(ints = {0})
     public void validateInputTest(int input){
-        assertThatThrownBy(() -> new BuyInfo(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new BuyInfo(input,1999)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("총금액 / 게임당금액 = 총경기")
     public void getTotalGameTest() {
-        SetLottoGame setLottoGame = new SetLottoGame();
+        ControlLottoGame controlLottoGame = new ControlLottoGame();
         int totalPrice = 14000;
 
-        assertThat(setLottoGame.getTotalGame(totalPrice)).isEqualTo(14);
+        assertThat(controlLottoGame.startLotto(totalPrice).getBuyLottoCount()).isEqualTo(14);
     }
 
     @Test
     @DisplayName("로또기본정보테스트")
     public void setLottoNumberTest() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getLottoNumberList().size()).isEqualTo(45);
+        assertThat(lotto.getLottoList().size()).isEqualTo(45);
     }
 
     @Test
