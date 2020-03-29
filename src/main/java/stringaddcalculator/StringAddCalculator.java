@@ -16,9 +16,16 @@ public class StringAddCalculator {
     private int sum(String inputString) {
         int result = 0;
         for (String splitNumber : this.splitString(inputString)) {
-            result += Integer.parseInt(splitNumber);
+            result += checkNegative(Integer.parseInt(splitNumber));
         }
         return result;
+    }
+
+    private int checkNegative(int checkNumber) {
+        if(checkNumber < 0) {
+            throw new RuntimeException();
+        }
+        return checkNumber;
     }
 
     private String[] splitString(String inputString) {
@@ -27,7 +34,7 @@ public class StringAddCalculator {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
         }
-        return inputString.split(",|;");
+        return inputString.split(",|:");
     }
 
     private boolean isNullOrEmpty(String inputString) {
