@@ -7,6 +7,8 @@ public class StringAddCalculator {
     private static final String PATTERN_END = "\n";
     private static final String PATTERN_START = "//";
     private static String CUSTOM_DELIMITER = "[,:]";
+    static Pattern pattern;
+    private static final int ZERO = 0;
 
     public static int splitAndSum(String inputData) {
         String[] splitInputData;
@@ -19,7 +21,7 @@ public class StringAddCalculator {
     }
 
     private static String makeMatcher(String inputData) {
-        Matcher matcher = Pattern.compile(PATTERN_START + "(.)" + PATTERN_END + "(.*)").matcher(inputData);
+        Matcher matcher = pattern.compile(PATTERN_START + "(.)" + PATTERN_END + "(.*)").matcher(inputData);
         if (matcher.find()) {
             CUSTOM_DELIMITER = matcher.group(1);
             inputData = matcher.group(2);
@@ -28,18 +30,24 @@ public class StringAddCalculator {
     }
 
     private static int sumFromSplitInputData(String[] splitInputData) {
-        int result = 0;
+        int result = ZERO;
         for (String splitData : splitInputData) {
-            checkMinus(splitData);
-            result = result + Integer.parseInt(splitData);
+            result = result + checkMinus(splitData);
         }
         return result;
     }
 
-    private static void checkMinus(String splitInputData) {
-        if (Integer.parseInt(splitInputData) < 0) {
-            throw new RuntimeException();
+    private static int checkMinus(String splitInputData) {
+        int splitData = ZERO;
+        try{
+            splitData = Integer.parseInt(splitInputData);
+            if (splitData < 0) {
+                throw new RuntimeException();
+            }
+        }catch(NumberFormatException e){
+            e.toString();
         }
+        return splitData;
     }
 
     private static boolean checkNullInputData(String inputData) {

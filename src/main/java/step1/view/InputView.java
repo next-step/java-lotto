@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    public InputView() {
+    private InputView() {
     }
 
     public static String askQuestion(){
