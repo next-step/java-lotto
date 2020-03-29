@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoFeatureSetup {
+public class LottoStub {
 
-    private LottoFeatureSetup() {
+    private LottoStub() {
     }
 
     public static List<LottoNumber> getLottoNubersOneToSix() {
