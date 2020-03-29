@@ -2,31 +2,24 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 
-import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
+import static lotto.domain.Constant.PRICE_PER_GAME;
 
 public class LottoMoney {
     private final BigDecimal money;
 
-    LottoMoney(int money) {
+    public LottoMoney(int money) {
         this.money = validate(money);
     }
 
     public BigDecimal validate(int money) {
-        if (money < DEFAULT_GAME_PRICE) {
+        if (money < PRICE_PER_GAME) {
             throw new NotEnoughMoneyException();
         }
         return new BigDecimal(money);
     }
 
     public int getAvailableBuyingCount() {
-        return Math.floorDiv(money.intValue(), DEFAULT_GAME_PRICE);
+        return Math.floorDiv(money.intValue(), PRICE_PER_GAME);
     }
 
-    public Double getPaidTotal() {
-        return (double) getAvailableBuyingCount() * DEFAULT_GAME_PRICE;
-    }
-
-    public int convertToInt() {
-        return money.intValue();
-    }
 }
