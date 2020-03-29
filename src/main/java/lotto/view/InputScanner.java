@@ -17,6 +17,12 @@ public class InputScanner {
         return StringConverter.convertStringToMoney(validateNullOrEmpty(money));
     }
 
+    public static int getBonusBall(){
+        System.out.println(REQUEST_FOR_BONUS_BALL);
+        String bonusBall = scanner.nextLine();
+        return StringConverter.convertStringToNumber(bonusBall);
+    }
+
     public static List<Integer> getWinningLotto() {
         System.out.println(REQUEST_FOR_WINNING_LOTTO);
         return StringConverter.convertStringToNumbers(scanner.nextLine());

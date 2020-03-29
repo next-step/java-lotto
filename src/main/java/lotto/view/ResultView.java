@@ -16,31 +16,48 @@ public class ResultView {
         printBlankLine();
     }
 
-    public static void printResult(LottoGame lottoGame, List<Integer> winningLotto) {
+    public static void printResult(LottoGame lottoGame, List<Integer> winningLotto, int bonusBall) {
         printBlankLine();
         printBlankLine();
 
-        printStatistics(lottoGame.getMyLottos(), winningLotto);
-        printEarningRate(lottoGame.getMyLottos(), winningLotto);
+        printStatistics(lottoGame.getMyLottos(), winningLotto, bonusBall);
+        printEarningRate(lottoGame.getMyLottos(), winningLotto, bonusBall);
     }
 
-    private static void printStatistics(MyLottos myLottos, List<Integer> winningLotto) {
+    private static void printStatistics(MyLottos myLottos, List<Integer> winningLotto, int bonusBall) {
         System.out.println("당첨 통계");
         System.out.println("=========================================");
 
         for (MatchingResult matchingResult : MatchingResult.values()) {
-            printStatistic(myLottos, winningLotto, matchingResult);
+            printStatistic(myLottos, winningLotto, matchingResult, bonusBall);
         }
     }
 
-    private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto, MatchingResult matchingResult) {
-        System.out.print(matchingResult.getMatchCount() + "개 일치 (" + matchingResult.getCashPrize() + "원) : ");
-        System.out.println(myLottos.findCountOfNumMatching(winningLotto, matchingResult) + "개");
+    private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto,
+                                       MatchingResult matchingResult, int bonusBall) {
+        printStatisticsExceptSecond(myLottos, winningLotto, matchingResult, bonusBall);
+        printStatisticForSecond(myLottos, winningLotto, matchingResult, bonusBall);
 
     }
 
-    private static void printEarningRate(MyLottos myLottos, List<Integer> winningLotto) {
-        double earningRate = myLottos.calculateEarningRate(winningLotto);
+    private static void printStatisticsExceptSecond(MyLottos myLottos, List<Integer> winningLotto,
+                                                    MatchingResult matchingResult, int bonusBall) {
+        if (!matchingResult.equals(MatchingResult.SECOND)){
+            System.out.print(matchingResult.getMatchCount() + "개 일치 (" + matchingResult.getCashPrize() + "원) : ");
+            System.out.println(myLottos.findCountOfNumMatching(winningLotto, matchingResult, bonusBall) + "개");
+        }
+    }
+
+    private static void printStatisticForSecond(MyLottos myLottos, List<Integer> winningLotto,
+                                                MatchingResult matchingResult, int bonusBall){
+        if (matchingResult.equals(MatchingResult.SECOND)){
+            System.out.print(matchingResult.getMatchCount() + "개 일치, 보너스볼 일치(" + matchingResult.getCashPrize() + "원) : ");
+            System.out.println(myLottos.findCountOfNumMatching(winningLotto, matchingResult, bonusBall) + "개");
+        }
+    }
+
+    private static void printEarningRate(MyLottos myLottos, List<Integer> winningLotto, int bonusBall) {
+        double earningRate = myLottos.calculateEarningRate(winningLotto, bonusBall);
         System.out.println("총 수익률은 " + String.format("%.2f", earningRate) + "%입니다.");
     }
 

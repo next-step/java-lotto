@@ -12,4 +12,8 @@ public class InputView {
     public static InputView of(Money money) {
         return new InputView(money);
     }
+
+    public Money getMoney() {
+        return money;
+    }
 }

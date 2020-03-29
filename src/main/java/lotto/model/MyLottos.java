@@ -14,27 +14,56 @@ public class MyLottos {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public long findCountOfNumMatching(List<Integer> winningLotto, MatchingResult matchingResult) {
+    public long findCountOfNumMatching(List<Integer> winningLotto, MatchingResult matchingResult, int bonusBall) {
+        if (matchingResult.equals(SECOND)) {
+            return findCountOfSecond(winningLotto, bonusBall);
+        }
+        if (matchingResult.equals(THIRD)) {
+            return findCountOfThird(winningLotto, bonusBall);
+        }
+        return findCountOfNumMatchingExceptThirdAndSecond(winningLotto, matchingResult);
+    }
+
+    private long findCountOfSecond(List<Integer> winningLotto, int bonusBall) {
         return lottoNumbers.stream()
-                .map(lottoNumbers -> lottoNumbers.findHowManyMatch(winningLotto))
+                .filter(lottoNumber -> lottoNumber.hasBonusBall(bonusBall))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
+                .filter(matchCount -> matchCount == SECOND.getMatchCount())
+                .count();
+    }
+
+    private long findCountOfThird(List<Integer> winningLotto, int bonusBall) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> !lottoNumber.hasBonusBall(bonusBall))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
+                .filter(matchCount -> matchCount == THIRD.getMatchCount())
+                .count();
+    }
+
+    private long findCountOfNumMatchingExceptThirdAndSecond(List<Integer> winningLotto, MatchingResult matchingResult) {
+        return lottoNumbers.stream()
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
                 .filter(count -> matchingResult.getMatchCount() == count)
                 .count();
     }
 
-    public Money calculateAllPrizeMoney(List<Integer> winningLotto) {
-        Money threeMatchMoney = calculatePrizeMoney(winningLotto, THREE);
-        Money fourMatchMoney = calculatePrizeMoney(winningLotto, FOUR);
-        Money fiveMatchMoney = calculatePrizeMoney(winningLotto, FIVE);
-        Money sixMatchMoney = calculatePrizeMoney(winningLotto, SIX);
-        return threeMatchMoney.add(fourMatchMoney).add(fiveMatchMoney).add(sixMatchMoney);
+    public Money calculateAllPrizeMoney(List<Integer> winningLotto, int bonusBall) {
+        long money = 0;
+
+        for (MatchingResult matchingResult : MatchingResult.values()) {
+            Money prizeMoney = calculatePrizeMoney(winningLotto, matchingResult, bonusBall);
+            money += prizeMoney.getMoney();
+        }
+
+        return new Money(money);
     }
 
-    private Money calculatePrizeMoney(List<Integer> winningLotto, MatchingResult matchingResult) {
-        return matchingResult.calculatePrizeMoney(findCountOfNumMatching(winningLotto, matchingResult));
+    private Money calculatePrizeMoney(List<Integer> winningLotto, MatchingResult matchingResult, int bonusBall) {
+        return matchingResult.calculatePrizeMoney(findCountOfNumMatching(winningLotto, matchingResult, bonusBall));
     }
 
-    public double calculateEarningRate(List<Integer> winningLotto) {
-        Money earningMoney = calculateAllPrizeMoney(winningLotto);
+    public double calculateEarningRate(List<Integer> winningLotto, int bonusBall) {
+        Money earningMoney = calculateAllPrizeMoney(winningLotto, bonusBall);
         return findEarningRate(earningMoney);
     }
 

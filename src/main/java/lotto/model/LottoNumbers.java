@@ -50,6 +50,13 @@ public class LottoNumbers {
                 .size();
     }
 
+    public boolean hasBonusBall(int bonusBallNumber){
+        return lottoNumbers.stream()
+                .filter(number -> number.equals(bonusBallNumber))
+                .findAny()
+                .isPresent();
+    }
+
     @Override
     public String toString() {
         return lottoNumbers.toString();

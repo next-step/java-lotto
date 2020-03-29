@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.view.InputView;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -10,7 +9,7 @@ public class InputViewTest {
     @NullAndEmptySource
     void validateNullOrEmptyTest(String input) {
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> {
-            new InputView(input);
+            new InputView(StringConverter.convertStringToMoney(input));
         });
     }
 }

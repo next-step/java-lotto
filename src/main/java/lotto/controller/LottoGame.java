@@ -4,14 +4,13 @@ import lotto.model.LottoNumberPool;
 import lotto.model.Money;
 import lotto.model.MyLottos;
 import lotto.view.InputView;
-import lotto.view.StringConverter;
 
 public class LottoGame {
     private int autoLottoCount;
     private MyLottos myLottos;
 
     public LottoGame(InputView inputView) {
-        Money money = StringConverter.convertStringToMoney(inputView.getInput());
+        Money money = inputView.getMoney();
         autoLottoCount = money.findLottoCountToBuy();
     }
 

@@ -1,8 +1,5 @@
 package lotto.model;
 
-import lotto.model.LottoNumbers;
-import lotto.model.Money;
-import lotto.model.MyLottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,68 +11,73 @@ import static lotto.model.MatchingResult.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyLottosTest {
-    private List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private final List<Integer> WINNING_LOTTO = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private final int BONUS_BALL = 9;
+
     private LottoNumbers lottoNumbers1;
     private LottoNumbers lottoNumbers2;
     private LottoNumbers lottoNumbers3;
     private LottoNumbers lottoNumbers4;
+    private LottoNumbers lottoNumbers5;
 
 
     @BeforeEach
     void setUp() {
         lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoNumbers2 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
-        lottoNumbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
-        lottoNumbers4 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 9));
+        lottoNumbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, BONUS_BALL));
+        lottoNumbers4 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, BONUS_BALL));
+        lottoNumbers5 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 22));
     }
 
-    @DisplayName("구매한 로또 중에 당첨번호와 번호 3개가 일치하는 로또의 갯수를 리턴한다.")
+    @DisplayName("구매한 로또 중에 5등 갯수를 리턴한다.")
     @Test
     void findCountOfThreeNumMatchingTest() {
         //given
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfThreeNumMatching = myLottos.findCountOfNumMatching(winningLotto, THREE);
+        Long countOfThreeNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FIFTH, BONUS_BALL);
 
         //then
         assertThat(countOfThreeNumMatching).isEqualTo(1L);
     }
 
-    @DisplayName("구매한 로또 중에 당첨번호와 번호 4개가 일치하는 로또의 갯수를 리턴한다.")
+    @DisplayName("구매한 로또 중에 4등의 갯수를 리턴한다.")
     @Test
     void findCountOfFourNumMatchingTest() {
         //given
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfFourNumMatching = myLottos.findCountOfNumMatching(winningLotto, FOUR);
+        Long countOfFourNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FOURTH, BONUS_BALL);
 
         //then
         assertThat(countOfFourNumMatching).isEqualTo(1L);
     }
 
-    @DisplayName("구매한 로또 중에 당첨번호와 번호 5개가 일치하는 로또의 갯수를 리턴한다.")
+    @DisplayName("구매한 로또 중에 당첨번호와 2등(5개 + 보너스번호) 갯수를 리턴한다.")
     @Test
-    void findCountOfFiveNumMatchingTest() {
+    void findCountOfSecondTest() {
         //given
-        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
+        MyLottos myLottos
+                = new MyLottos(Arrays.asList(lottoNumbers4, lottoNumbers5));
 
         //when
-        Long countOfFiveNumMatching = myLottos.findCountOfNumMatching(winningLotto, FIVE);
+        Long countOfFiveNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, SECOND, BONUS_BALL);
 
         //then
         assertThat(countOfFiveNumMatching).isEqualTo(1L);
     }
 
-    @DisplayName("구매한 로또 중에 당첨번호와 번호 6개가 일치하는 로또의 갯수를 리턴한다.")
+    @DisplayName("구매한 로또 중에 1등의 갯수를 리턴한다.")
     @Test
     void findCountOfSixNumMatchingTest() {
         //given
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfSixNumMatching = myLottos.findCountOfNumMatching(winningLotto, SIX);
+        Long countOfSixNumMatching = myLottos.findCountOfNumMatching(WINNING_LOTTO, FIRST, BONUS_BALL);
 
         //then
         assertThat(countOfSixNumMatching).isEqualTo(1L);
@@ -85,13 +87,14 @@ public class MyLottosTest {
     @Test
     void calculatePrizeMoneyTest() {
         //given
-        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
+        MyLottos myLottos
+                = new MyLottos(Arrays.asList(lottoNumbers3, lottoNumbers4, lottoNumbers5));
 
         //when
-        Money earningMoney = myLottos.calculateAllPrizeMoney(winningLotto);
+        Money earningMoney = myLottos.calculateAllPrizeMoney(WINNING_LOTTO, BONUS_BALL);
 
         //then
-        assertThat(earningMoney).isEqualTo(new Money(2001555000l));
+        assertThat(earningMoney).isEqualTo(new Money(31_505_000l));
     }
 
     @DisplayName("당첨번호를 알려주면, 수익률을 알려준다.")
@@ -102,7 +105,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers5));
 
         //whenR
-        double earningRate = myLottos.calculateEarningRate(winningLotto);
+        double earningRate = myLottos.calculateEarningRate(WINNING_LOTTO, BONUS_BALL);
 
         //then
         assertThat(earningRate).isEqualTo(500);

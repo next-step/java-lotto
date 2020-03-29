@@ -36,6 +36,11 @@ public class StringConverter {
         return money < MONEY_TO_BUY_ONE_LOTTO;
     }
 
+    public static int convertStringToNumber(String input){
+        validateNonNumber(input);
+        return Integer.parseInt(input);
+    }
+
     public static List<Integer> convertStringToNumbers(String input) {
         String[] split = input.split(DELIMITER_FOR_LAST_LOTTO_NUM);
         List<Integer> collect = Arrays.stream(split)
