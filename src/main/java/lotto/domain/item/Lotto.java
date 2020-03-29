@@ -1,5 +1,7 @@
 package lotto.domain.item;
 
+import lotto.exception.ValidLottoException;
+
 import java.util.*;
 
 public class Lotto implements Item {
@@ -21,14 +23,14 @@ public class Lotto implements Item {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("번호는 6개만 지정 가능 합니다.");
+            throw new ValidLottoException("번호는 6개만 지정 가능 합니다.");
         }
     }
 
     private void validateNumberRange(List<Integer> numbers) {
         for (Integer i : numbers) {
             if (i < LOTTO_MIN_NUMBER_SIZE || i > LOTTO_MAX_NUMBER_SIZE) {
-                throw new IllegalArgumentException("번호는 1~ 45 사이의 정수만 가능 합니다.");
+                throw new ValidLottoException("번호는 1~ 45 사이의 정수만 가능 합니다.");
             }
         }
     }
@@ -36,7 +38,7 @@ public class Lotto implements Item {
     private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
-            throw new IllegalArgumentException("번호는 중복될 수 없습니다.");
+            throw new ValidLottoException("번호는 중복될 수 없습니다.");
         }
     }
 

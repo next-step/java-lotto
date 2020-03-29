@@ -1,5 +1,6 @@
 package lotto.domain.item;
 
+import lotto.exception.ValidLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +52,7 @@ class LottoTest {
     public void lottosize() throws Exception {
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 2, 3, 4))
-        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 6개만 지정 가능 합니다.");
+        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 6개만 지정 가능 합니다.");
     }
 
     @DisplayName("로또 티켓은 번호 6개만 지정 가능")
@@ -59,7 +60,7 @@ class LottoTest {
     public void lottosize2() throws Exception {
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 3, 4, 2))
-        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 6개만 지정 가능 합니다.");
+        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 6개만 지정 가능 합니다.");
     }
 
     @DisplayName("로또는 불변 VO 객체여야 한다")
@@ -103,7 +104,7 @@ class LottoTest {
         //given
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 46))
-        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 1~ 45 사이의 정수만 가능 합니다.");
+        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 1~ 45 사이의 정수만 가능 합니다.");
     }
 
     @DisplayName("0 ~ 45 사이의 숫자인지 체크")
@@ -112,7 +113,7 @@ class LottoTest {
         //given
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(0, 2, 3, 4, 5, 45))
-        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 1~ 45 사이의 정수만 가능 합니다.");
+        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 1~ 45 사이의 정수만 가능 합니다.");
     }
 
     @DisplayName("번호 중복 체크")
@@ -121,6 +122,6 @@ class LottoTest {
         //given
         assertThatThrownBy(
                 () -> new Lotto(Arrays.asList(1, 1, 3, 4, 5, 45))
-        ).isInstanceOf(IllegalArgumentException.class).hasMessage("번호는 중복될 수 없습니다.");
+        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 중복될 수 없습니다.");
     }
 }

@@ -12,6 +12,12 @@ public class WinLottoTicket extends Lotto {
         this.bonus = bonus;
     }
 
+    private void validateBonusNumber(List<Integer> numbers, int bonus) {
+        if (numbers.contains(bonus)){
+
+        }
+    }
+
     public int getBonus() {
         return bonus;
     }
