@@ -1,27 +1,17 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LottoNumbers {
+    private GenerateLottoNumber generateNumber;
+    private Set<Integer> lottoNumbers;
 
-    private final List<Number> getneratedNumber;
-
-    public LottoNumbers(List<Number> getneratedNumber) {
-        this.getneratedNumber = shuffleNumbers(getneratedNumber);
+    public LottoNumbers() {
+        lottoNumbers = new GenerateLottoNumber().getLottoNumbers();
     }
 
-    private List<Number> shuffleNumbers(List<Number> generatedNumber) {
-        Collections.shuffle(generatedNumber);
-        return new ArrayList<>(generatedNumber);
-    }
-
-    public List<Number> getLottoNumbers() {
-        return getneratedNumber.stream()
-                .limit(6)
-                .sorted()
-                .collect(Collectors.toList());
+    public Set<Integer> getLottoNumbers() {
+        return new HashSet<>(lottoNumbers);
     }
 }
