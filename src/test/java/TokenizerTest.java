@@ -2,7 +2,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,9 +11,8 @@ public class TokenizerTest {
     @ParameterizedTest
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "1:2,3"})
     public void splitTest(String message) {
-        List<Integer> tokens = Tokenizer.split(message);
-        assertThat(tokens).hasSize(3);
-        assertThat(tokens).contains(1, 2, 3);
+        Numbers numbers = Tokenizer.split(message);
+        assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(1, 2, 3)));
     }
 
     @ParameterizedTest
@@ -45,9 +44,8 @@ public class TokenizerTest {
     @ParameterizedTest
     @CsvSource(value = {"1@2@3, @", "1!2!3, !", "1#2#3, #"})
     public void customDelimiterSplitTest(String message, String delimiter) {
-        List<Integer> tokens = Tokenizer.split(message, delimiter);
-        assertThat(tokens).hasSize(3);
-        assertThat(tokens).contains(1, 2, 3);
+        Numbers numbers = Tokenizer.split(message, delimiter);
+        assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(1, 2, 3)));
     }
 
     @ParameterizedTest
