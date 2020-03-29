@@ -1,27 +1,32 @@
 package lotto.domain;
 
-import lotto.exception.NoPurchasePriceException;
+import lotto.exception.NegativePriceException;
 
 import java.util.Objects;
 
 public class Price {
     private static final int LOTTO_PRICE = 1000;
+    private static final int MIN_PRICE = 0;
 
     private int price;
 
     public Price(final int price) {
-        checkAvailablePrice(price);
+        checkNegative(price);
         this.price = price;
+    }
+
+    private void checkNegative(final int price) {
+        if (price < MIN_PRICE) {
+            throw new NegativePriceException();
+        }
+    }
+
+    public boolean isAvailablePrice() {
+        return price < LOTTO_PRICE;
     }
 
     public int lotteryCount() {
         return price / LOTTO_PRICE;
-    }
-
-    private void checkAvailablePrice(final int price) {
-        if (price < LOTTO_PRICE) {
-            throw new NoPurchasePriceException(price);
-        }
     }
 
     @Override
