@@ -1,9 +1,10 @@
 package lotto.type;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 public enum RankType {
-    NO_RANK(0, condition -> condition < 3),
+    NO_RANK(0, condition -> condition < 3 || condition > 6),
     RANK1(2_000_000_000, condition -> condition == 6),
     RANK2(1_500_000, condition -> condition == 5),
     RANK3(50_000, condition -> condition == 4),
@@ -22,12 +23,8 @@ public enum RankType {
     }
 
     public static RankType getRank(int condition) {
-        for (RankType value : RankType.values()) {
-            if (value.expression.apply(condition)){
-                return value;
-            }
-        }
-
-        return RankType.NO_RANK;
+        return Arrays.stream(RankType.values())
+                .filter(type -> type.expression.apply(condition))
+                .findAny().get();
     }
 }
