@@ -10,12 +10,12 @@ public class Lotto {
     public static final String LOTTO_NUMBER_DUPLICATION_ERROR = "중복되는 숫자를 가져선 안됩니다.";
     public static final String LOTTO_NUMBER_COUNT_ERROR = "정해진 개수의 숫자를 입력해주세요.";
 
-    private final List<LottoNumber> lotto;
+    private final Set<LottoNumber> lotto;
 
     public Lotto(List<LottoNumber> lotto) {
         validateNumberCount(lotto);
         validateNumberDuplication(lotto);
-        this.lotto = new ArrayList<>(lotto);
+        this.lotto = new HashSet<>(lotto);
     }
 
     private void validateNumberDuplication(List<LottoNumber> lotto) {
@@ -42,7 +42,7 @@ public class Lotto {
 
     public int getMatchedNumberCount(Lotto winningLotto) {
         int matchCount = 0;
-        List<Integer> winningIntegerNumbers = winningLotto.getIntegerValue();
+        Set<Integer> winningIntegerNumbers = winningLotto.getIntegerValue();
 
         for(int winningNumber : winningIntegerNumbers) {
             matchCount = addMatchCount(winningNumber, matchCount);
@@ -58,16 +58,16 @@ public class Lotto {
     }
 
     private boolean isMatch(int winningNumber) {
-        List<Integer> lottoIntegerNumbers = getIntegerValue();
+        Set<Integer> lottoIntegerNumbers = getIntegerValue();
         return lottoIntegerNumbers.contains(winningNumber);
     }
 
-    public List<LottoNumber> getValue() {
-        return new ArrayList<>(lotto);
+    public Set<LottoNumber> getValue() {
+        return new HashSet<>(lotto);
     }
 
-    public List<Integer> getIntegerValue() {
-        List<Integer> lottoIntegerNumbers = new ArrayList<>();
+    public Set<Integer> getIntegerValue() {
+        Set<Integer> lottoIntegerNumbers = new HashSet<>();
 
         for(LottoNumber lottoNumber : getValue()) {
             lottoIntegerNumbers.add(lottoNumber.getValue());

@@ -3,7 +3,10 @@ package step2.view;
 import step2.ViewUtils;
 import step2.domain.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String LOTTO_COUNT_INFORMATION = "%s개를 구매했습니다.";
@@ -29,25 +32,20 @@ public class ResultView {
             builder.setLength(0);
             builder.append(LOTTO_NUMBER_PREFIX);
 
-            List<LottoNumber> lottoNumbers = lotto.getValue();
-            appendLottoNumbers(builder, lottoNumbers);
-
+            Set<LottoNumber> lottoNumbers = lotto.getValue();
+            builder.append(getLottoNumbersString(lottoNumbers));
             builder.append(LOTTO_NUMBER_POSTFIX);
             ViewUtils.printLine(builder.toString());
         }
     }
 
-    private void appendLottoNumbers(StringBuilder builder, List<LottoNumber> lottoNumbers) {
-        for(int i = 0; i < lottoNumbers.size(); i++) {
-            appendDelimiter(builder, i);
-            builder.append(Integer.toString(lottoNumbers.get(i).getValue()));
-        }
-    }
-
-    private void appendDelimiter(StringBuilder builder, int i) {
-        if(i != 0) {
-            builder.append(LOTTO_NUMBER_DELIMITER);
-        }
+    private String getLottoNumbersString(Set<LottoNumber> lottoNumbers) {
+        return lottoNumbers
+                .stream()
+                .sorted()
+                .map(LottoNumber::getValue)
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
     }
 
     public void printResult(LottoResult result, Money money) {
