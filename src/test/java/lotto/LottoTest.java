@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     private Lotto lotto;
-    private LottoNumber lottoNumber;
 
     @BeforeEach
     void setUp() {
@@ -32,12 +31,6 @@ class LottoTest {
         assertThat(numbers).hasSize(6);
     }
 
-    @DisplayName("넣은 로또넘버가 같은객체 인지 확인해본다.")
-    @Test
-    void createLottoNumber() {
-        lottoNumber = new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
-    }
 
     @DisplayName("구매 수량 만큼 로또숫자를 생성한다.")
     @Test
