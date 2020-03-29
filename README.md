@@ -83,6 +83,10 @@
 * 돈을 받는다.  
 * 돈을 받아 Lotto를 생성해서 생성한 로또를 관리한다.  
 * 보여질 내용을 정리하여 InputView, OutputView 에게 메시지를 보낸다.  
+* LottoProvider 로또를 생성해달라는 메시지를 보낸다.  
+
+#### LottoProvider  
+* 로또를 생성하는 역할을 수행한다.  
 
 #### Lottos  
 * 생성된 로또 목록 정보를 관리한다.  
