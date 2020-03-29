@@ -10,20 +10,26 @@ import java.util.stream.Collectors;
 
 public class ResultView {
     private static final String SPLIT_TEXT = ",";
+    private static final String SECOND_NAME = "2등";
     private static final int MIN_WIN_MATCH_COUNT = 3;
     private static final int MIN_PURCHASE_AMOUNT = 1000;
 
     private Scanner scanner = new Scanner(System.in);
     private LottoNumber winningNumbers;
     private List<LottoNumber> purchaseLottoNumbers;
-    private Map<Integer, WinningLotto> winningLottos;
+    private Map<String, WinningLotto> winningLottos;
     private int bonusBall;
 
     public ResultView() {
     }
 
+    public ResultView(int bonusBall) {
+        validateBonusBall(bonusBall);
+        this.bonusBall = bonusBall;
+    }
+
     public ResultView(String inputText) {
-        this(inputText, null);
+        this(inputText, null, 0);
     }
 
     public ResultView(List<LottoNumber> purchaseLottoNumbers) {
@@ -36,45 +42,40 @@ public class ResultView {
         winningNumbers = new LottoNumber(numbers);
         this.purchaseLottoNumbers = purchaseLottoNumbers;
         this.winningLottos = getWinningLottos();
+
     }
 
-    private int enterBonusValue() {
-        System.out.println("\n보너스 볼을 입력해 주세요");
-        return scanner.nextInt();
-    }
-
-    private String enterWinningValue() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.next();
-    }
-
-    public ResultView(String inputText, List<LottoNumber> purchaseLottoNumbers) {
+    public ResultView(String inputText, List<LottoNumber> purchaseLottoNumbers, int bonusBall) {
+        validateBonusBall(bonusBall);
+        this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumber(numbers);
         this.purchaseLottoNumbers = purchaseLottoNumbers;
         this.winningLottos = getWinningLottos();
+        this.bonusBall = bonusBall;
     }
 
-    public Map<Integer, WinningLotto> getWinningLottos() {
-        Map<Integer, WinningLotto> winningLottos = new HashMap<>();
+    public Map<String, WinningLotto> getWinningLottos() {
+        Map<String, WinningLotto> winningLottos = new HashMap<>();
         Set<Integer> winningNums = winningNumbers.getNumbers();
         for (int i = 0; i < purchaseLottoNumbers.size(); i++) {
             int matchCount = 0;
             Set<Integer> purchaseNumbers = purchaseLottoNumbers.get(i).getNumbers();
             matchCount = repeatByWinNumberSize(winningNums, matchCount, purchaseNumbers);
+            boolean matchBonus = checkMatchBonusBall(purchaseNumbers);
 
-            addWinningLotto(winningLottos, matchCount);
+            addWinningLotto(winningLottos, matchCount, matchBonus);
         }
         return winningLottos;
     }
 
-    private void addWinningLotto(Map<Integer, WinningLotto> winningLottos, int matchCount) {
+    private void addWinningLotto(Map<String, WinningLotto> winningLottos, int matchCount, boolean matchBonus) {
         if (matchCount < MIN_WIN_MATCH_COUNT) {
             return;
         }
         if (!winningLottos.containsKey(matchCount)) {
-            LottoWinningInfo lottoWinningInfo = LottoWinningInfo.valueOf(matchCount);
-            winningLottos.put(matchCount, new WinningLotto(lottoWinningInfo.getWinningAmount(), 1));
+            Rank rank = Rank.valueOf(matchCount, matchBonus);
+            winningLottos.put(rank.getName(), new WinningLotto(rank.getWinningAmount(), 1));
             return;
         }
 
@@ -94,11 +95,13 @@ public class ResultView {
 
     public String printWinningResult() {
         String result = "당첨통계\n---------\n";
-        LottoWinningInfo[] values = LottoWinningInfo.values();
-        for (LottoWinningInfo value : values) {
+        Rank[] values = Rank.values();
+        for (Rank value : values) {
+            String key = value.getName();
             int matchCount = value.getMatchCount();
-            int resultCount = getResultCount(matchCount);
-            result += matchCount + "개 일치(" + value.getWinningAmount() + "원)- " + resultCount + "개\n";
+            int resultCount = getResultCount(key);
+            result = getResultByRank(result, value, key, matchCount, resultCount);
+
         }
 
         return result;
@@ -125,8 +128,8 @@ public class ResultView {
 
     public int totalWinningAmount() {
         int totalWinningAmount = 0;
-        for (Integer matchCount : winningLottos.keySet()) {
-            totalWinningAmount += winningLottos.get(matchCount).getTotalAmount();
+        for (String name : winningLottos.keySet()) {
+            totalWinningAmount += winningLottos.get(name).getTotalAmount();
         }
         return totalWinningAmount;
     }
@@ -141,10 +144,19 @@ public class ResultView {
         }
     }
 
-    private int getResultCount(int matchCount) {
+    public boolean checkMatchBonusBall(Set<Integer> lottoNumber) {
+        boolean matchFlag = false;
+
+        if (lottoNumber.contains(this.bonusBall)) {
+            matchFlag = true;
+        }
+        return matchFlag;
+    }
+
+    private int getResultCount(String name) {
         int resultCount = 0;
-        if (winningLottos.containsKey(matchCount)) {
-            resultCount = winningLottos.get(matchCount).getCount();
+        if (winningLottos.containsKey(name)) {
+            resultCount = winningLottos.get(name).getCount();
         }
         return resultCount;
     }
@@ -168,6 +180,27 @@ public class ResultView {
             ++matchCount;
         }
         return matchCount;
+    }
+
+    private int enterBonusValue() {
+        System.out.println("\n보너스 볼을 입력해 주세요");
+        return scanner.nextInt();
+    }
+
+    private String enterWinningValue() {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.next();
+    }
+
+    private String getResultByRank(String result, Rank value, String key, int matchCount, int resultCount) {
+        if (SECOND_NAME.equals(key)) {
+            result += matchCount + "개 일치, 보너스 볼 일치(" + value.getWinningAmount() + "원)- " + resultCount
+                      + "개\n";
+            return result;
+        }
+        result += matchCount + "개 일치(" + value.getWinningAmount() + "원)- " + resultCount + "개\n";
+
+        return result;
     }
 
 }
