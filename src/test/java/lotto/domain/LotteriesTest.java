@@ -57,6 +57,43 @@ class LotteriesTest {
         assertThat(actual.get(LottoRank.FOURTH)).isEqualTo(expect);
     }
 
+    @DisplayName("구매한 복권들과 당첨 복권이 4개 일치한다. (3등)")
+    @Test
+    void analyzeWin_Third() {
+        Lotteries lotteries = new Lotteries(createLottoNumbers());
+        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 11, 12");
+        int expect = 1;
+
+        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+
+        assertThat(actual.get(LottoRank.THIRD)).isEqualTo(expect);
+    }
+
+    @DisplayName("구매한 복권들과 당첨 복권이 5개 일치한다. (2등)")
+    @Test
+    void analyzeWin_Second() {
+        Lotteries lotteries = new Lotteries(createLottoNumbers());
+        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 5, 12");
+        int expect = 1;
+
+        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+
+        assertThat(actual.get(LottoRank.SECOND)).isEqualTo(expect);
+    }
+
+    @DisplayName("구매한 복권들과 당첨 복권이 6개 일치한다. (1등)")
+    @Test
+    void analyzeWin_First() {
+        Lotteries lotteries = new Lotteries(createLottoNumbers());
+        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        int expect = 1;
+
+        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+
+        assertThat(actual.get(LottoRank.FIRST)).isEqualTo(expect);
+    }
+
+
     private List<LottoNumbers> createLottoNumbers() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
             lottoNumbers.add(new LottoNumbers(
