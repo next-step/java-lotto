@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class LottoController {
 
@@ -20,7 +19,7 @@ public class LottoController {
 
         resultView = new ResultView(lottoNumbers);
         System.out.println(resultView.printWinningResult());
-        System.out.println(resultView.printeRevenuePercent());
+        System.out.println(resultView.printRevenuePercent());
 
     }
 }

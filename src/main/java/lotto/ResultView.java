@@ -107,7 +107,7 @@ public class ResultView {
         return result;
     }
 
-    public String printeRevenuePercent() {
+    public String printRevenuePercent() {
         String result = "총 수익률은 ";
         double revenuePercent = calculateRevenuePercent(totalWinningAmount(),
                                                         totalPurchaseAmount());
