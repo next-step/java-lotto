@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class ResultView {
         this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumber(numbers);
-        this.purchaseLottoNumbers = purchaseLottoNumbers;
+        this.purchaseLottoNumbers = Collections.unmodifiableList(purchaseLottoNumbers);
         this.winningLottos = getWinningLottos();
 
     }
@@ -50,7 +51,7 @@ public class ResultView {
         this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumber(numbers);
-        this.purchaseLottoNumbers = purchaseLottoNumbers;
+        this.purchaseLottoNumbers = Collections.unmodifiableList(purchaseLottoNumbers);
         this.winningLottos = getWinningLottos();
         this.bonusBall = bonusBall;
     }
@@ -66,7 +67,7 @@ public class ResultView {
 
             addWinningLotto(winningLottos, matchCount, matchBonus);
         }
-        return winningLottos;
+        return Collections.unmodifiableMap(winningLottos);
     }
 
     private void addWinningLotto(Map<String, WinningLotto> winningLottos, int matchCount, boolean matchBonus) {
