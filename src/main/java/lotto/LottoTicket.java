@@ -34,4 +34,12 @@ public class LottoTicket {
                 .sorted()
                 .collect(Collectors.toList());
     }
+
+    public int compareTo(LottoTicket winningTicket) {
+        List<Integer> winningNumbers = winningTicket.getLottoNumbers();
+
+        return (int) winningNumbers.stream()
+                .filter(winningNumber -> getLottoNumbers().contains(winningNumber))
+                .count();
+    }
 }
