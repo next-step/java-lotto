@@ -1,9 +1,11 @@
 package lotto.domain;
 
+import lotto.utils.StringFormatter;
+
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class LottoNumber {
 	static final int LOWEST_NUMBER = 1;
@@ -17,11 +19,15 @@ public class LottoNumber {
 	}
 
 	public LottoNumber(List<Integer> numbers) {
-		this.numbers = numbers;
+		this.numbers = Collections.unmodifiableList(numbers);
 
 		if (isInvalidLottoNumbers(numbers)) {
 			throw new IllegalArgumentException(String.format("Instantiate LottoNumber failed. " +
-					"numbers must be distinct %d numbers range %d~%d : numbers=%s", NUMBER_SIZE, LOWEST_NUMBER, HIGHEST_NUMBER, toString()));
+					"numbers must be distinct %d numbers range %d~%d : numbers=%s",
+					NUMBER_SIZE,
+					LOWEST_NUMBER,
+					HIGHEST_NUMBER,
+					StringFormatter.listToString(numbers)));
 		}
 	}
 
@@ -39,11 +45,8 @@ public class LottoNumber {
 		return LottoRank.getFromCorrectNumbers(correctNumbers);
 	}
 
-	@Override
-	public String toString() {
-		return numbers.stream()
-				.map(Object::toString)
-				.collect(Collectors.joining(",", "[", "]"));
+	public List<Integer> getNumbers() {
+		return numbers;
 	}
 
 	@Override
