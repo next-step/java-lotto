@@ -12,7 +12,7 @@ public class StringAddCalculator {
         if (isNullOrEmpty(inputString)) {
             return ZERO;
         }
-        return 1;
+        return Integer.parseInt(inputString);
     }
 
     private boolean isNullOrEmpty(String inputString) {
