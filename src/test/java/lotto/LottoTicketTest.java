@@ -71,4 +71,15 @@ public class LottoTicketTest {
                 num1.getNumber(), num2.getNumber(), num3.getNumber(),
                 num4.getNumber(), num5.getNumber(), num6.getNumber());
     }
+
+    @Test
+    @DisplayName("당첨 티켓과 비교하여 당첨 번호 size 확인")
+    void getMatchCountByInputWinningTicket() {
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num1, num6));
+        LottoTicket winningTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num7, num6));
+
+        int matchCount = lottoTicket.compareTo(winningTicket);
+
+        assertThat(matchCount).isEqualTo(5);
+    }
 }
