@@ -44,7 +44,7 @@ public class LottoNumbersTest {
     @CsvSource(value = {"1:5", "7:6", "8:5", "9:5"}, delimiter = ':')
     void findHowManyMatchTest(int input, int expected) {
         //given
-        List<Integer> winningLotto = Arrays.asList(input, 2, 3, 4, 5, 6);
+        WinningLottoNumbers winningLotto = new WinningLottoNumbers(Arrays.asList(input, 2, 3, 4, 5, 6));
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(2, 3, 4, 5, 6, 7));
 
         //when

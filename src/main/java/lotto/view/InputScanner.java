@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Money;
+import lotto.model.WinningLottoNumbers;
 
 import java.util.List;
 import java.util.Scanner;
@@ -21,10 +22,10 @@ public class InputScanner {
         return StringConverter.convertStringToMoney(validateNullOrEmpty(money));
     }
 
-    public static List<Integer> getWinningLotto() {
+    public static WinningLottoNumbers getWinningLotto() {
         System.out.println(REQUEST_FOR_WINNING_LOTTO);
         winningLotto = StringConverter.convertStringToNumbers(scanner.nextLine());
-        return winningLotto;
+        return new WinningLottoNumbers(winningLotto);
     }
 
     public static int getBonusBall() {

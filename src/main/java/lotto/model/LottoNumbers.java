@@ -43,9 +43,9 @@ public class LottoNumbers {
         }
     }
 
-    public int findHowManyMatch(List<Integer> winningLotto) {
+    public int findHowManyMatch(WinningLottoNumbers winningLottoNumbers) {
         return this.lottoNumbers.stream()
-                .filter(it -> winningLotto.contains(it))
+                .filter(it -> winningLottoNumbers.contains(it))
                 .collect(Collectors.toList())
                 .size();
     }

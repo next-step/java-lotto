@@ -5,9 +5,10 @@ import lotto.model.Money;
 import lotto.model.MyLottos;
 import lotto.view.InputView;
 
+import java.util.List;
+
 public class LottoGame {
     private int autoLottoCount;
-    private int bonusBall;
     private MyLottos myLottos;
 
     public LottoGame(InputView inputView) {

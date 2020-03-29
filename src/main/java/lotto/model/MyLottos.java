@@ -14,56 +14,56 @@ public class MyLottos {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public long findCountOfNumMatching(List<Integer> winningLotto, Rank rank, int bonusBall) {
+    public long findCountOfNumMatching(WinningLottoNumbers winningLottoNumbers, Rank rank, int bonusBall) {
         if (rank.equals(SECOND)) {
-            return findCountOfSecond(winningLotto, bonusBall);
+            return findCountOfSecond(winningLottoNumbers, bonusBall);
         }
         if (rank.equals(THIRD)) {
-            return findCountOfThird(winningLotto, bonusBall);
+            return findCountOfThird(winningLottoNumbers, bonusBall);
         }
-        return findCountOfNumMatchingExceptThirdAndSecond(winningLotto, rank);
+        return findCountOfNumMatchingExceptThirdAndSecond(winningLottoNumbers, rank);
     }
 
-    private long findCountOfSecond(List<Integer> winningLotto, int bonusBall) {
+    private long findCountOfSecond(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
         return lottoNumbers.stream()
                 .filter(lottoNumber -> lottoNumber.hasBonusBall(bonusBall))
-                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLottoNumbers))
                 .filter(matchCount -> matchCount == SECOND.getMatchCount())
                 .count();
     }
 
-    private long findCountOfThird(List<Integer> winningLotto, int bonusBall) {
+    private long findCountOfThird(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
         return lottoNumbers.stream()
                 .filter(lottoNumber -> !lottoNumber.hasBonusBall(bonusBall))
-                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLottoNumbers))
                 .filter(matchCount -> matchCount == THIRD.getMatchCount())
                 .count();
     }
 
-    private long findCountOfNumMatchingExceptThirdAndSecond(List<Integer> winningLotto, Rank rank) {
+    private long findCountOfNumMatchingExceptThirdAndSecond(WinningLottoNumbers winningLottoNumbers, Rank rank) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLottoNumbers))
                 .filter(count -> rank.getMatchCount() == count)
                 .count();
     }
 
-    public Money calculateAllPrizeMoney(List<Integer> winningLotto, int bonusBall) {
+    public Money calculateAllPrizeMoney(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
         long money = 0;
 
         for (Rank rank : Rank.values()) {
-            Money prizeMoney = calculatePrizeMoney(winningLotto, rank, bonusBall);
+            Money prizeMoney = calculatePrizeMoney(winningLottoNumbers, rank, bonusBall);
             money += prizeMoney.getMoney();
         }
 
         return new Money(money);
     }
 
-    private Money calculatePrizeMoney(List<Integer> winningLotto, Rank rank, int bonusBall) {
-        return rank.calculatePrizeMoney(findCountOfNumMatching(winningLotto, rank, bonusBall));
+    private Money calculatePrizeMoney(WinningLottoNumbers winningLottoNumbers, Rank rank, int bonusBall) {
+        return rank.calculatePrizeMoney(findCountOfNumMatching(winningLottoNumbers, rank, bonusBall));
     }
 
-    public double calculateEarningRate(List<Integer> winningLotto, int bonusBall) {
-        Money earningMoney = calculateAllPrizeMoney(winningLotto, bonusBall);
+    public double calculateEarningRate(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
+        Money earningMoney = calculateAllPrizeMoney(winningLottoNumbers, bonusBall);
         return findEarningRate(earningMoney);
     }
 
