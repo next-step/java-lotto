@@ -1,24 +1,41 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Objects;
+
+import static lotto.domain.Constant.LOTTO_NUM_MAX;
+import static lotto.domain.Constant.LOTTO_NUM_MIN;
 
 public class BonusNumber {
     private final int bonusNumber;
 
-    public BonusNumber(List<Integer> lottoNumber, int bonusNumber) {
-        if (checkDuplication(lottoNumber, bonusNumber)) {
+    public BonusNumber(LottoTicket lottoTicket, int bonusNumber) {
+        this.bonusNumber = bonusNumber;
+        validateBonusNumber(bonusNumber);
+        if (checkDuplication(lottoTicket)) {
             throw new BonusNumberDuplicateException();
         }
-        this.bonusNumber = bonusNumber;
     }
 
-    private boolean checkDuplication(List<Integer> lottoNumber, int bonusNumber) {
-        return lottoNumber.stream()
-                .filter(e -> e.intValue() == bonusNumber)
-                .count() == 1;
+    private void validateBonusNumber(int bonusNumber) {
+        if (bonusNumber < LOTTO_NUM_MIN || LOTTO_NUM_MAX < bonusNumber) {
+            throw new BonusNumberRangeException();
+        }
     }
 
-    public boolean equals(int number) {
-        return bonusNumber == number;
+    private boolean checkDuplication(LottoTicket lottoTicket) {
+        return lottoTicket.has(bonusNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BonusNumber)) return false;
+        BonusNumber that = (BonusNumber) o;
+        return bonusNumber == that.bonusNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bonusNumber);
     }
 }
