@@ -34,7 +34,7 @@ class LottoRuleTest {
     @DisplayName("통합 테스트")
     @CsvSource(value = {"0:0", "1:0", "2:0", "3:5000", "4:50000", "6:2000000000"}, delimiter = ':')
     void totalTest(int matchCount, int expectedAmount) {
-        if (matchCount > LottoRule.getWinningMinCount()) {
+        if (matchCount >= LottoRule.getWinningMinCount()) {
             WINNING_VALUE result = WINNING_VALUE.findByMatchCount(matchCount);
             assertThat(result.getAmount()).isEqualTo(expectedAmount);
         }
