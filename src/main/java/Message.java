@@ -9,6 +9,15 @@ public class Message {
         this.messageBody = messageBody;
     }
 
+    public int sumBody() {
+        if (delimiter == null) {
+            Numbers numbers = Tokenizer.split(messageBody);
+            return numbers.sum();
+        }
+        Numbers numbers = Tokenizer.split(messageBody, delimiter);
+        return numbers.sum();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,4 +31,6 @@ public class Message {
     public int hashCode() {
         return Objects.hash(delimiter, messageBody);
     }
+
+
 }
