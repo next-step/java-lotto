@@ -24,7 +24,7 @@ public class LottoTest {
     @ParameterizedTest
     @CsvSource({"14000,14", "3900,3", "200,0"})
     void buy(int amount, int expect) {
-        assertThat(new Lotto(amount, lottoTicketIssuer).getQuantity())
+        assertThat(new Lotto(amount, lottoTicketIssuer).getLottoTickets().size())
                 .isEqualTo(expect);
     }
 
@@ -35,7 +35,7 @@ public class LottoTest {
                  int winnerCount) {
         Lotto lotto = new Lotto(1000, lottoTicketIssuer);
         LottoResult lottoResult = lotto.setWinningNumber(winningNumber);
-        assertThat(lottoResult.getWinner(lottoRanks).size())
+        assertThat(lottoResult.getWinningTickets(lottoRanks).size())
                 .isEqualTo(winnerCount);
     }
 

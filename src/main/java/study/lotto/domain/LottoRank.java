@@ -11,4 +11,8 @@ public enum LottoRank {
     LottoRank(int prize) {
         this.prize = prize;
     }
+
+    public int getPrize() {
+        return prize;
+    }
 }
