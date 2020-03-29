@@ -45,4 +45,8 @@ public enum WinningType {
     public BigDecimal getWinningAmount() {
         return amount;
     }
+
+    public boolean isMatched() {
+        return this != MISS_MATCH;
+    }
 }

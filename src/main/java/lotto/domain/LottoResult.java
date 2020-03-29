@@ -9,11 +9,11 @@ public class LottoResult {
     private static final int PRICE_PER_PIECE = 1000;
 
     private final List<WinningType> winningTypes;
-    private final LottoBundle lottoBundle;
+    private final long numberOfLotto;
 
-    public LottoResult(List<WinningType> winningTypes, LottoBundle lottoBundle) {
+    public LottoResult(List<WinningType> winningTypes, long numberOfLotto) {
         this.winningTypes = Collections.unmodifiableList(winningTypes);
-        this.lottoBundle = lottoBundle;
+        this.numberOfLotto = numberOfLotto;
     }
 
     public List<WinningType> getWinningTypes() {
@@ -31,6 +31,6 @@ public class LottoResult {
         for (WinningType winningType : winningTypes) {
             amount = amount.add(winningType.getWinningAmount());
         }
-        return amount.divide(BigDecimal.valueOf(lottoBundle.size() * PRICE_PER_PIECE), SING_OF_DECIMAL_TWO, BigDecimal.ROUND_CEILING);
+        return amount.divide(BigDecimal.valueOf(numberOfLotto * PRICE_PER_PIECE), SING_OF_DECIMAL_TWO, BigDecimal.ROUND_CEILING);
     }
 }

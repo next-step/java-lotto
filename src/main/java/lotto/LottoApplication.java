@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.LottoBundle;
 import lotto.domain.LottoResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -10,12 +9,13 @@ public class LottoApplication {
         int price = InputView.inputPrice();
         LottoShop lottoShop = new LottoShop();
 
-        LottoBundle lottoBundle = lottoShop.buyAuto(price);
-        ResultView.printLottoNumbers(lottoBundle);
+        lottoShop.buyAuto(price);
+        ResultView.printLottoNumbers(lottoShop.getLottoBundle());
 
         String winningNumber = InputView.inputWinningNumber();
+        int bonusNumber = InputView.inputBonusNumber();
 
-        LottoResult lottoResult = lottoShop.checkWinning(lottoBundle, winningNumber);
+        LottoResult lottoResult = lottoShop.checkWinning(winningNumber, bonusNumber);
         ResultView.printResult(lottoResult);
     }
 }

@@ -20,9 +20,18 @@ public class ResultView {
     private static void printLottoResult(LottoResult lottoResult) {
         Arrays.stream(WinningType.values())
                 .forEach(winningType -> {
-                    System.out.println(String.format("%d개 일치 (%.0f원) - %d개",
-                            winningType.getMatchCount(), winningType.getWinningAmount(), lottoResult.countByWinningtype(winningType)));
+                    printLottoResultDetail(lottoResult, winningType);
                 });
+    }
+
+    private static void printLottoResultDetail(LottoResult lottoResult, WinningType winningType) {
+        if (winningType.equals(WinningType.SECOND)) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%.0f원) - %d개",
+                    winningType.getMatchCount(), winningType.getWinningAmount(), lottoResult.countByWinningtype(winningType)));
+            return;
+        }
+        System.out.println(String.format("%d개 일치 (%.0f원) - %d개",
+                winningType.getMatchCount(), winningType.getWinningAmount(), lottoResult.countByWinningtype(winningType)));
     }
 
     private static void printEarningRate(LottoResult lottoResult) {
