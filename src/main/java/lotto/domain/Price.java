@@ -33,13 +33,17 @@ public class Price {
         return new Price(price * matchCount);
     }
 
-
     public Price sum(final Price winPrice) {
         return new Price(price + winPrice.price);
     }
 
     public double divide(final Price purchasePrice) {
         return (double)this.price / purchasePrice.price;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(price);
     }
 
     @Override
