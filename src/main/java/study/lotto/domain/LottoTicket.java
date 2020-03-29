@@ -2,12 +2,12 @@ package study.lotto.domain;
 
 import java.util.*;
 
-public class Lotto {
+public class LottoTicket {
     public static final int PRICE = 1000;
     private static final int LOTTO_NUMBER_TOTAL = 6;
     private Set<LottoNumber> lotto;
 
-    public Lotto(int[] lottoNumbers) {
+    public LottoTicket(int[] lottoNumbers) {
         if (Objects.isNull(lottoNumbers) ||
                 lottoNumbers.length != LOTTO_NUMBER_TOTAL) {
             throw new IllegalArgumentException("6개의 로또 숫자를 입력하세요.");
