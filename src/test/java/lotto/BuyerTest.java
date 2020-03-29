@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.LottoRule.WINNING_VALUE;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
