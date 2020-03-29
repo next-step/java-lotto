@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LOTTO_COUNT = 6;
     private static final String REGEX = ",";
+    private static final int ADD_COUNT = 1;
+    private static final int ZERO = 0;
 
     @Getter
     private List<Integer> numbers;
@@ -34,12 +36,18 @@ public class Lotto {
         int sameCount = 0;
 
         for (Integer number : numbers) {
-            if (lotto.contains(number)) {
-                sameCount++;
-            }
+            sameCount += getAddCount(lotto, number);
         }
 
         return sameCount;
+    }
+
+    private int getAddCount (Lotto lotto, int number) {
+        if (lotto.contains(number)) {
+            return ADD_COUNT;
+        }
+
+        return ZERO;
     }
 
     public boolean contains(int number) {
