@@ -13,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketsTest {
 
-    List<Integer> luckyNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+    WinLottoTicket winTicket = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
 
     List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))),
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))),
 
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 10))),
-            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 10))),
+            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 11))),
 
-            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
+            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 11, 12))),
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
             new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))),
 
@@ -42,18 +42,17 @@ class LottoTicketsTest {
     public void LuckyNumberMatchCount() throws Exception {
         //given
         LottoTickets lottoTickets = new LottoTickets(ticketList);
-        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
 
         //then
         assertAll(
-                () -> assertThat(lottoTickets.getLuckyNumberMatch3Count(winLottoTicket))
-                        .isEqualTo(3),
-                () -> assertThat(lottoTickets.getLuckyNumberMatch4Count(winLottoTicket))
-                        .isEqualTo(0),
-                () -> assertThat(lottoTickets.getLuckyNumberMatch5Count(winLottoTicket))
+                () -> assertThat(lottoTickets.getFirstLottoCount(winTicket))
                         .isEqualTo(2),
-                () -> assertThat(lottoTickets.getLuckyNumberMatch6Count(winLottoTicket))
-                        .isEqualTo(2)
+                () -> assertThat(lottoTickets.getSecondLottoCount(winTicket))
+                        .isEqualTo(1),
+                () -> assertThat(lottoTickets.getThirdLottoCount(winTicket))
+                        .isEqualTo(1),
+                () -> assertThat(lottoTickets.getFourthLottoCount(winTicket))
+                        .isEqualTo(1)
         );
     }
 
@@ -63,18 +62,19 @@ class LottoTicketsTest {
         //given
         List<LottoTicket> ticket = new ArrayList<>(
                 Arrays.asList(
-                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
+                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 12))),
                         new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
                         new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))))
         );
         LottoTickets lottoTickets = new LottoTickets(ticket);
-        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
 
         //when
-        Money prize = lottoTickets.getAllEarningPrize(winLottoTicket);
+        Money prize = lottoTickets.getAllEarningPrize(winTicket);
 
         //then
-        assertThat(prize.getMoney()).isEqualTo(15000);
+        assertAll(
+                () -> assertThat(prize.getMoney()).isEqualTo(1_510_000)
+        );
     }
 
     @DisplayName("로또 티켓 수량 비교")

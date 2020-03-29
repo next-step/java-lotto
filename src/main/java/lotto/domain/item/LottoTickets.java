@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
 public class LottoTickets implements Cloneable {
 
     private final List<LottoTicket> tickets;
@@ -20,38 +19,46 @@ public class LottoTickets implements Cloneable {
         this.tickets = Collections.unmodifiableList(tmp);
     }
 
-    private int getLuckyNumberMatchCount(int luckyNumber, Item winTicket) {
+    private int finWinLotto(LottoPrize lottoPrize, Item winTicket) {
         return (int) tickets.stream()
-                .filter(ticket -> luckyNumber == ticket.getLuckyNumberMatchCount(winTicket))
+                .filter(ticket -> lottoPrize == ticket.getRank(winTicket))
                 .count();
     }
 
-    public int getLuckyNumberMatch3Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LottoPrize.FIFTH.getMatchCount(), winTicket);
+    public int getFirstLottoCount(Item winTicket) {
+        return finWinLotto(LottoPrize.FIRST, winTicket);
     }
 
-    public int getLuckyNumberMatch4Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LottoPrize.FOURTH.getMatchCount(), winTicket);
+    public int getSecondLottoCount(Item winTicket) {
+        return finWinLotto(LottoPrize.SECOND, winTicket);
     }
 
-    public int getLuckyNumberMatch5Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LottoPrize.SECOND.getMatchCount(), winTicket);
+    public int getThirdLottoCount(Item winTicket) {
+        return finWinLotto(LottoPrize.THIRD, winTicket);
     }
 
-    public int getLuckyNumberMatch6Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LottoPrize.FIRST.getMatchCount(), winTicket);
+    public int getFourthLottoCount(Item winTicket) {
+        return finWinLotto(LottoPrize.FOURTH, winTicket);
+    }
+
+    public int getFifthLottoCount(Item winTicket) {
+        return finWinLotto(LottoPrize.FIFTH, winTicket);
+    }
+
+    public int getMisshLottoCount(Item winTicket) {
+        return finWinLotto(LottoPrize.MISS, winTicket);
     }
 
     public Money getAllEarningPrize(Item winTicket) {
         Money earning = new Money();
 
         return earning
-                .plus(LottoPrize.FIFTH.getWinningPrize(getLuckyNumberMatch3Count(winTicket)))
-                .plus(LottoPrize.FOURTH.getWinningPrize(getLuckyNumberMatch4Count(winTicket)))
-                .plus(LottoPrize.SECOND.getWinningPrize(getLuckyNumberMatch5Count(winTicket)))
-                .plus(LottoPrize.FIRST.getWinningPrize(getLuckyNumberMatch6Count(winTicket)));
+                .plus(LottoPrize.FIRST.getWinningPrize(getFirstLottoCount(winTicket)))
+                .plus(LottoPrize.SECOND.getWinningPrize(getSecondLottoCount(winTicket)))
+                .plus(LottoPrize.THIRD.getWinningPrize(getThirdLottoCount(winTicket)))
+                .plus(LottoPrize.FOURTH.getWinningPrize(getFourthLottoCount(winTicket)))
+                .plus(LottoPrize.FIFTH.getWinningPrize(getFifthLottoCount(winTicket)));
     }
-
 
     public List<LottoTicket> getTickets() {
         return tickets;
