@@ -1,5 +1,6 @@
 package lotto.domain.item;
 
+import enums.LottoPrize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,11 @@ public class LottoTicketTest {
 
     private static Stream<Arguments> provideMatchNumbers() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 10), 5),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 10, 11), 4),
-                Arguments.of(Arrays.asList(1, 10, 11, 12, 13, 14), 1),
-                Arguments.of(Arrays.asList(10, 11, 12, 13, 14, 15), 0)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6, 1),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 10), 5, 2),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 10, 11), 4, 3),
+                Arguments.of(Arrays.asList(1, 10, 11, 12, 13, 14), 1, 0),
+                Arguments.of(Arrays.asList(10, 11, 12, 13, 14, 15), 0, 0)
         );
     }
 
@@ -47,13 +48,30 @@ public class LottoTicketTest {
     @MethodSource("provideMatchNumbers")
     public void getLuckyNumberMatchCount(List<Integer> comp, int expect) throws Exception {
         //given
-        final LottoTicket lotto = new LottoTicket(numbers);
-        final WinLottoTicket winLottoTicket = new WinLottoTicket(comp, 45);
+        final LottoTicket lotto = new LottoTicket(comp);
+        final WinLottoTicket winLottoTicket = new WinLottoTicket(numbers, 45);
 
         //when
         int match = lotto.getLuckyNumberMatchCount(winLottoTicket);
 
         //then
         assertThat(match).isEqualTo(expect);
+    }
+
+    @DisplayName("해당 로또가 몇등인지 판단한다")
+//    @ParameterizedTest
+//    @MethodSource("provideMatchNumbers")
+    @Test
+    public void getRank() throws Exception {
+        //given
+        final LottoTicket lotto = new LottoTicket(numbers);
+        final WinLottoTicket winLottoTicket = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 45);
+
+        //when
+
+        int rank = lotto.getRank(winLottoTicket);
+
+        //then
+        assertThat(rank).isEqualTo(2);
     }
 }

@@ -11,10 +11,6 @@ import java.util.Objects;
 
 
 public class LottoTickets implements Cloneable {
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT3 = 3;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT4 = 4;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT5 = 5;
-    private static final int LOTTO_MATCH_LUCKY_NUMBER_COUNT6 = 6;
 
     private final List<LottoTicket> tickets;
 
@@ -31,19 +27,19 @@ public class LottoTickets implements Cloneable {
     }
 
     public int getLuckyNumberMatch3Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT3, winTicket);
+        return getLuckyNumberMatchCount(LottoPrize.FIFTH.getMatchCount(), winTicket);
     }
 
     public int getLuckyNumberMatch4Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT4, winTicket);
+        return getLuckyNumberMatchCount(LottoPrize.FOURTH.getMatchCount(), winTicket);
     }
 
     public int getLuckyNumberMatch5Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT5, winTicket);
+        return getLuckyNumberMatchCount(LottoPrize.SECOND.getMatchCount(), winTicket);
     }
 
     public int getLuckyNumberMatch6Count(Item winTicket) {
-        return getLuckyNumberMatchCount(LOTTO_MATCH_LUCKY_NUMBER_COUNT6, winTicket);
+        return getLuckyNumberMatchCount(LottoPrize.FIRST.getMatchCount(), winTicket);
     }
 
     public Money getAllEarningPrize(Item winTicket) {
