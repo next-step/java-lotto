@@ -36,20 +36,24 @@ public class LottoResult {
         return chart.get(lottoRank);
     }
 
+    public Map<LottoRank, Integer> getChart() {
+        return Collections.unmodifiableMap(chart);
+    }
+
     public double ratio(Price price) {
-        Price total = new Price(Price.MIN_PRICE);
-        for( Map.Entry<LottoRank, Integer> lottoResult : chart.entrySet()) {
-            int matchCount = lottoResult.getValue();
+        return Math.floor(sumWinPrice().divide(price) * ONE_HUNDRED_PERCENT) / (double) ONE_HUNDRED_PERCENT;
+    }
+
+    private Price sumWinPrice() {
+        Price sumWinPrice = new Price(Price.MIN_PRICE);
+
+        for (Map.Entry<LottoRank, Integer> lottoResult : chart.entrySet()) {
+            int matchCount  = lottoResult.getValue();
             Price rankPrice = lottoResult.getKey()
                                          .getRankPrice();
             Price winPrice = rankPrice.calculateWinPrice(matchCount);
-            total = total.sum(winPrice);
+            sumWinPrice = sumWinPrice.sum(winPrice);
         }
-
-        return Math.floor(total.divide(price) * ONE_HUNDRED_PERCENT) / (double) ONE_HUNDRED_PERCENT;
-    }
-
-    public Map<LottoRank, Integer> getChart() {
-        return Collections.unmodifiableMap(chart);
+        return sumWinPrice;
     }
 }
