@@ -9,16 +9,18 @@ import study.lotto.domain.LottoRank;
 import study.lotto.domain.LottoResult;
 import study.lotto.domain.LottoTicket;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    private int[] lottoTicketParam;
+    private List<Integer> lottoTicketParam;
 
     @BeforeEach
     void setUp() {
-        lottoTicketParam = new int[]{1, 2, 3, 4, 5, 6};
+        lottoTicketParam = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @DisplayName("추가한 로또 결과를 저장할 수 있다.")

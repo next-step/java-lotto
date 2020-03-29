@@ -4,6 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.domain.LottoTicket;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -11,7 +14,7 @@ public class LottoTicketTest {
     @DisplayName("로또티켓 한장에는 중복되지 않는 6개의 로또번호가 들어간다.")
     @Test
     void oneLotto() {
-        int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         assertThat(new LottoTicket(lottoNumbers).size()).isEqualTo(6);
     }
 
@@ -20,7 +23,8 @@ public class LottoTicketTest {
     void duplicatedNumber() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    int[] lottoNumbers = {1, 2, 2, 4, 5, 6};
+                    List<Integer> lottoNumbers =
+                            Arrays.asList(1, 2, 2, 4, 5, 6);
                     new LottoTicket(lottoNumbers);
                 });
     }
@@ -30,13 +34,14 @@ public class LottoTicketTest {
     void sixNumbers() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    int[] lottoNumbers = {1, 2, 3, 4, 5};
+                    List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5);
                     new LottoTicket(lottoNumbers);
                 });
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
-                    int[] lottoNumbers = {1, 2, 3, 4, 5, 6, 7};
+                    List<Integer> lottoNumbers =
+                            Arrays.asList(1, 2, 3, 4, 5, 6, 7);
                     new LottoTicket(lottoNumbers);
                 });
     }

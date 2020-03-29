@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import study.lotto.domain.LottoTicket;
 import study.lotto.domain.LottoWinningNumber;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +22,7 @@ public class LottoWinningNumberTest {
     @BeforeEach
     void setUp() {
         lottoWinningNumber =
-                new LottoWinningNumber(new int[]{1, 2, 3, 4, 5, 6});
+                new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("당첨번호를 입력한다.")
@@ -32,7 +34,7 @@ public class LottoWinningNumberTest {
     @DisplayName("로또 룰에서 벗어나면 에러 발생")
     @ParameterizedTest
     @MethodSource("provideWinningErrorNumber")
-    void outOfRule(int[] winningNumbers) {
+    void outOfRule(List<Integer> winningNumbers) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     new LottoWinningNumber(winningNumbers);
@@ -41,9 +43,9 @@ public class LottoWinningNumberTest {
 
     private static Stream<Arguments> provideWinningErrorNumber() {
         return Stream.of(
-                Arguments.of(new int[]{1, 2, 3, 4, 5}),
-                Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 7}),
-                Arguments.of(new int[]{1, 2, 2, 4, 5, 6})
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(Arrays.asList(1, 2, 2, 4, 5, 6))
         );
     }
 
@@ -57,13 +59,20 @@ public class LottoWinningNumberTest {
 
     private static Stream<Arguments> provideLottoTicket() {
         return Stream.of(
-                Arguments.of(new LottoTicket(new int[]{1, 2, 3, 4, 5, 6}), 6),
-                Arguments.of(new LottoTicket(new int[]{2, 3, 4, 5, 6, 7}), 5),
-                Arguments.of(new LottoTicket(new int[]{3, 4, 5, 6, 7, 8}), 4),
-                Arguments.of(new LottoTicket(new int[]{4, 5, 6, 7, 8, 9}), 3),
-                Arguments.of(new LottoTicket(new int[]{5, 6, 7, 8, 9, 10}), 2),
-                Arguments.of(new LottoTicket(new int[]{6, 7, 8, 9, 10, 11}), 1),
-                Arguments.of(new LottoTicket(new int[]{7, 8, 9, 10, 11, 12}), 0)
+                Arguments.of(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        6),
+                Arguments.of(new LottoTicket(Arrays.asList(2, 3, 4, 5, 6, 7)),
+                        5),
+                Arguments.of(new LottoTicket(Arrays.asList(3, 4, 5, 6, 7, 8)),
+                        4),
+                Arguments.of(new LottoTicket(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                        3),
+                Arguments.of(new LottoTicket(Arrays.asList(5, 6, 7, 8, 9, 10)),
+                        2),
+                Arguments.of(new LottoTicket(Arrays.asList(6, 7, 8, 9, 10, 11)),
+                        1),
+                Arguments.of(new LottoTicket(Arrays.asList(7, 8, 9, 10, 11, 12))
+                        , 0)
         );
     }
 }

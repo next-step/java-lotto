@@ -12,7 +12,7 @@ public class LottoTicket implements Iterable<LottoNumber> {
     private LottoTicket() {
     }
 
-    public LottoTicket(int[] lottoNumbers) {
+    public LottoTicket(List<Integer> lottoNumbers) {
         if (!LottoRule.isComplianceNumberRule(lottoNumbers)) {
             throw new IllegalArgumentException("중복없는 6개의 로또 숫자를 입력하세요.");
         }
@@ -24,7 +24,7 @@ public class LottoTicket implements Iterable<LottoNumber> {
         return lotto.size();
     }
 
-    private void setLotto(int[] lottoNumbers) {
+    private void setLotto(List<Integer> lottoNumbers) {
         lotto = new HashSet<>();
         for (int number : lottoNumbers) {
             lotto.add(new LottoNumber(number));
