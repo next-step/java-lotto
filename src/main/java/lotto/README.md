@@ -1,27 +1,42 @@
 # 로또
 
-## VO
+## DTO
 
 ### LottoNumber.class
 
- - 6개의 로또 번호로 이루어진 일급 컬렉션
+#### 1. List<Intger> getNumbers 
+
+- 로또넘버 getter
+ 
+#### 2. LottoRank matchNumbers(LottoNumber winningNumber) 
+
+- winningNumber 와 매칭시켜 LottoRank 를 리턴
+
+### LottoResult.class
+
+#### 1. Map<LottoRank,Integer> getWinningMap();
+
+- 로또Rank 라는 당첨 확인인 맵으로 된 통계를 보내줌.
+
+#### 2. double getYield(); 
+
+- 수익률 리턴.
+ 
 
 ## Business
 
 ### LottoNumberBuyer.class
 
-1. List<LottoNumber> buyLottoNumbers(int money);
+#### 1. List<LottoNumber> buyLottoNumbers(int money);
+
+- 돈을 입력받아 로또 넘버를 받음.
 
 ### LottoCheckerClass
 
-1. Constructor(LottoNumber winningNumber);
+#### 1. Constructor(LottoNumber winningNumber);
 
-2. LottoResult checkWinningStatistics(LottoNumber... lottoNumbers);
+- 생성자 (당첨번호 입력 받음)
 
-## DTO
+#### 2. LottoResult checkWinningStatistics(LottoNumber... lottoNumbers);
 
-### LottoResult.class
-
-1. Map<LottoRank,Integer> getWinningMap();
-
-2. double getYield();
+- 저장된 당첨 번호와 비교해서 LottoResult 라는 DTO 를 뽑아줌
