@@ -25,6 +25,9 @@ public enum LottoRank {
                      .orElse(LottoRank.BLANK);
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
     public Price getRankPrice() {
         return winPrice;
     }
