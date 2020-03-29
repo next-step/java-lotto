@@ -44,6 +44,7 @@ public class StringAddCalculatorTest {
     @DisplayName("커스텀구분자테스트")
     public void splitAndSum_커스텀구분자() {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        System.out.println(result);
         assertThat(result).isEqualTo(6);
     }
 

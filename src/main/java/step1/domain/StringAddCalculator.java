@@ -2,13 +2,14 @@ package step1.domain;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static java.util.regex.Pattern.compile;
 
 public class StringAddCalculator {
     private static final String PATTERN_END = "\n";
     private static final String PATTERN_START = "//";
-    private static String CUSTOM_DELIMITER = "[,:]";
-    static Pattern pattern;
     private static final int ZERO = 0;
+    private static final Pattern pattern = Pattern.compile(PATTERN_START + "(.)" + PATTERN_END + "(.*)");
+    private static String CUSTOM_DELIMITER = "[,:]";
 
     public static int splitAndSum(String inputData) {
         String[] splitInputData;
@@ -21,7 +22,7 @@ public class StringAddCalculator {
     }
 
     private static String makeMatcher(String inputData) {
-        Matcher matcher = pattern.compile(PATTERN_START + "(.)" + PATTERN_END + "(.*)").matcher(inputData);
+        Matcher matcher = pattern.matcher(inputData);
         if (matcher.find()) {
             CUSTOM_DELIMITER = matcher.group(1);
             inputData = matcher.group(2);
@@ -45,7 +46,7 @@ public class StringAddCalculator {
                 throw new RuntimeException();
             }
         }catch(NumberFormatException e){
-            e.toString();
+            throw new NumberFormatException();
         }
         return splitData;
     }
