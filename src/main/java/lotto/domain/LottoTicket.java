@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.LottoRule.getLottoNumbersSize;
+import static lotto.domain.LottoRule.getLottoNumbersSize;
 
 public class LottoTicket {
     private List<LottoNumber> lottoNumbers;

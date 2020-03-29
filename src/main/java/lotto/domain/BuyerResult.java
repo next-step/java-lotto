@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import lotto.LottoRule.WINNING_VALUE;
+import lotto.domain.LottoRule.WINNING_VALUE;
 
 import java.util.List;
 

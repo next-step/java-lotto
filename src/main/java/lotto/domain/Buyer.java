@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.LottoRule.*;
+import static lotto.domain.LottoRule.*;
 
 public class Buyer {
     private List<LottoTicket> lottoTickets;

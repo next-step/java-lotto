@@ -1,6 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import lotto.LottoRule.WINNING_VALUE;
+import lotto.domain.LottoRule;
+import lotto.domain.LottoRule.WINNING_VALUE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

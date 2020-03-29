@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.LottoRule.*;
+import static lotto.domain.LottoRule.*;
 
 public class LottoMachine {
     public static List<LottoTicket> pay(int money) {
