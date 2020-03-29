@@ -6,43 +6,31 @@ import lotto.model.MyLottos;
 
 import java.util.List;
 
-import static lotto.model.MatchingResult.*;
-
 public class ResultView {
     public static void printMyLottos(LottoGame lottoGame) {
         printBlankLine();
-        printMyLottosTiTle(lottoGame);
-        printMyLottosBody(lottoGame);
-        printBlankLine();
-    }
-
-    private static void printMyLottosTiTle(LottoGame lottoGame) {
         System.out.println(lottoGame.findHowManyMyLottos() + "개를 구매했습니다.");
-    }
 
-    private static void printMyLottosBody(LottoGame lottoGame) {
         lottoGame.getMyLottos().getLottoNumbers().stream()
                 .forEach(it -> System.out.println(it.toString()));
+        printBlankLine();
     }
 
     public static void printResult(LottoGame lottoGame, List<Integer> winningLotto) {
         printBlankLine();
-        printResultTitle();
+        printBlankLine();
+
         printStatistics(lottoGame.getMyLottos(), winningLotto);
         printEarningRate(lottoGame.getMyLottos(), winningLotto);
     }
 
-    private static void printResultTitle() {
-        printBlankLine();
+    private static void printStatistics(MyLottos myLottos, List<Integer> winningLotto) {
         System.out.println("당첨 통계");
         System.out.println("=========================================");
-    }
 
-    private static void printStatistics(MyLottos myLottos, List<Integer> winningLotto) {
-        printStatistic(myLottos, winningLotto, THREE);
-        printStatistic(myLottos, winningLotto, FOUR);
-        printStatistic(myLottos, winningLotto, FIVE);
-        printStatistic(myLottos, winningLotto, SIX);
+        for (MatchingResult matchingResult : MatchingResult.values()) {
+            printStatistic(myLottos, winningLotto, matchingResult);
+        }
     }
 
     private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto, MatchingResult matchingResult) {
