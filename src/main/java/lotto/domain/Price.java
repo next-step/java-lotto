@@ -5,8 +5,8 @@ import lotto.exception.NegativePriceException;
 import java.util.Objects;
 
 public class Price {
+    public static final int MIN_PRICE = 0;
     private static final int LOTTO_PRICE = 1000;
-    private static final int MIN_PRICE = 0;
 
     private int price;
 
@@ -27,6 +27,19 @@ public class Price {
 
     public int lotteryCount() {
         return price / LOTTO_PRICE;
+    }
+
+    public Price calculateWinPrice(final int matchCount) {
+        return new Price(price * matchCount);
+    }
+
+
+    public Price sum(final Price winPrice) {
+        return new Price(price + winPrice.price);
+    }
+
+    public double divide(final Price purchasePrice) {
+        return (double)this.price / purchasePrice.price;
     }
 
     @Override
