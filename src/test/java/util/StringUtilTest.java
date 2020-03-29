@@ -32,7 +32,7 @@ class StringUtilTest {
 
     @DisplayName("String을 int 로 변환 : fail")
     @ParameterizedTest
-    @ValueSource(strings = {":123", "abc", "!!"})
+    @ValueSource(strings = {":123", "abc", "!!", "1,2,3,,,4,", "1,2,3,"})
     public void parseStringToInt_fail(String input) throws Exception {
         assertThatThrownBy(
                 () -> StringUtil.parseStringToInt(input)
