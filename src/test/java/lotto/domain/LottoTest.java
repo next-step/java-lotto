@@ -69,4 +69,16 @@ public class LottoTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("2등 당첨 확인")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 7:6"}, delimiter = ':')
+    void checkSecond(String lottoNumber, String winningNumber, int secondNumber) {
+        Lotto buyingLotto = new Lotto(lottoNumber);
+        Lotto winningLotto = new Lotto(winningNumber);
+
+        int actual = winningLotto.checkWinning(buyingLotto, secondNumber).name();
+
+        assertThat(actual).isEqualTo(WinningType.SECOUND.name());
+    }
 }
