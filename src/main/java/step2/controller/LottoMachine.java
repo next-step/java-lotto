@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
     private static ResultView resultView;
-    private static final LottoMachine lottoMachine = new LottoMachine();
+    private static LottoMachine lottoMachine;
 
     private LottoMachine() {
         this.resultView = new ResultView();
@@ -97,6 +97,9 @@ public class LottoMachine {
     }
 
     public static LottoMachine getInstance() {
+        if(lottoMachine == null) {
+            lottoMachine = new LottoMachine();
+        }
         return lottoMachine;
     }
 }
