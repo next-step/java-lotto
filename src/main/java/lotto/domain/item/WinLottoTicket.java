@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public class WinLottoTicket extends Lotto {
 
-    private final int second;
+    private final int bonus;
 
-    public WinLottoTicket(List<Integer> numbers, int second) {
+    public WinLottoTicket(List<Integer> numbers, int bonus) {
         super(numbers);
-        this.second = second;
+        this.bonus = bonus;
     }
 
-    public int getSecond() {
-        return second;
+    public int getBonus() {
+        return bonus;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class WinLottoTicket extends Lotto {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         WinLottoTicket that = (WinLottoTicket) o;
-        return second == that.second;
+        return bonus == that.bonus;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), second);
+        return Objects.hash(super.hashCode(), bonus);
     }
 }

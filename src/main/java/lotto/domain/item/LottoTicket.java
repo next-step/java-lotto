@@ -27,7 +27,7 @@ public class LottoTicket extends Lotto {
     }
 
     private boolean isMatchBonus(Item winTicket) {
-        int bonus = ((WinLottoTicket) winTicket).getSecond();
+        int bonus = ((WinLottoTicket) winTicket).getBonus();
         return numbers.contains(bonus);
     }
 
