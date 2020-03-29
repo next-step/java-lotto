@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StringUtil {
+public final class StringUtil {
 
     private static final String LOTTO_SPLIT_DELIMITER = ",";
 
@@ -29,7 +29,7 @@ public class StringUtil {
         String[] split = input.split(LOTTO_SPLIT_DELIMITER);
 
         for (String s : split) {
-            result.add(Integer.parseInt(s.trim()));
+            result.add(parseStringToInt(s.trim()));
         }
         return result;
     }
