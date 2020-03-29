@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningType;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +29,8 @@ class LottoShopTest {
     @ParameterizedTest
     @ValueSource(ints = {10000})
     void createLotto(int price) {
-        LottoBundle lottos = lottoShop.buyAuto(price);
+        lottoShop.buyAuto(price);
+        LottoBundle lottos = lottoShop.getLottoBundle();
 
         assertThat(lottos.size()).isEqualTo(Math.floorDiv(price, PRICE_PER_PIECE));
     }
@@ -36,7 +39,10 @@ class LottoShopTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
     void lottery(String winningNumber) {
-        LottoResult lottoResult = lottoShop.checkWinning(Fixture.lottoBundle(), winningNumber);
+        Lotto lotto = new Lotto(winningNumber);
+        lottoShop = new LottoShop(new LottoBundle(Arrays.asList(lotto)));
+
+        LottoResult lottoResult = lottoShop.checkWinning(winningNumber, 10);
         List<WinningType> actual = lottoResult.getWinningTypes();
 
         assertAll(
