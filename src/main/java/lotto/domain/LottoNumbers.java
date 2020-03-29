@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.exception.OutOfLottoNumberSizeException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBER_MAX_SIZE = 6;
@@ -20,6 +17,23 @@ public class LottoNumbers {
         checkLottoNumberSize(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public int match(final LottoNumbers winningLotteNumbers) {
+        List<LottoNumber> source = this.deepCopy();
+        List<LottoNumber> win = winningLotteNumbers.deepCopy();
+
+        source.removeAll(win);
+
+        return LOTTO_NUMBER_MAX_SIZE - source.size();
+    }
+    
+    private List<LottoNumber> deepCopy() {
+        List<LottoNumber> clone = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            clone.add(LottoNumber.clone(lottoNumber));
+        }
+        return clone;
     }
 
     private void checkLottoNumberSize(final List<LottoNumber> lottoNumbers) {
