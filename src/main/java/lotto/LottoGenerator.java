@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class LottoGenerator {
         Collections.shuffle(pickNumber);
         List<Integer> numbers = pickNumber.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
-        return new HashSet<>(numbers);
+        return new LinkedHashSet<>(numbers);
     }
 
     public List<LottoNumber> createLottoNumbersByPurchaseCount() {
