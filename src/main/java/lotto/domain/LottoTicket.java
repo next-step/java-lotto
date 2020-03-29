@@ -39,6 +39,7 @@ public class LottoTicket {
     }
 
     LottoTicketResult checkWinning(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        verifyBonusNumber(bonusNumber, winningTicket);
         List<Integer> winningNumbers = winningTicket.getLottoNumbers();
 
         int matchCount = (int) winningNumbers.stream()
@@ -47,5 +48,12 @@ public class LottoTicket {
                 .count();
         boolean bonusMatch = getLottoNumbers().contains(bonusNumber.getNumber());
         return new LottoTicketResult(matchCount, bonusMatch);
+    }
+
+    private void verifyBonusNumber(LottoNumber bonusNumber, LottoTicket winningTicket) {
+        if (winningTicket.getLottoNumbers()
+                .contains(bonusNumber.getNumber())) {
+            throw new IllegalArgumentException(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber.getNumber()));
+        }
     }
 }
