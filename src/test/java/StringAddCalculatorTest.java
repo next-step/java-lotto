@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
@@ -38,5 +39,12 @@ public class StringAddCalculatorTest {
     void splitCommaAndColon(String formula, int expected) {
         int result = StringAddCalculator.splitAndSum(formula);
         assertThat(result).isEqualTo(expected);
+    }
+
+    @DisplayName("커스텀 구분자 사용 가능")
+    @Test
+    void splitCustomDelimiter() {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
     }
 }
