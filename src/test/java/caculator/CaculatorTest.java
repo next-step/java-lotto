@@ -1,4 +1,4 @@
-package Caculator;
+package caculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,10 +12,12 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class CaculatorTest {
 
+    private InputView inputView;
     private Caculator caculator;
 
     @BeforeEach
     void setUp() {
+        inputView = new InputView();
         caculator = new Caculator();
     }
 
@@ -23,7 +25,7 @@ class CaculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void nullOrEmptyInputText(String input) {
-        int result = caculator.validateInputText(input);
+        int result = inputView.validateInputText(input);
         assertThat(result).isEqualTo(0);
     }
 
@@ -31,21 +33,21 @@ class CaculatorTest {
     @ParameterizedTest
     @CsvSource(value = { "1:1", "2:2", "5:5", "10:10" }, delimiter = ':')
     void oneNumberInputText(String input, int output) {
-        int result = caculator.splitNumberAndCharater(input);
+        int result = caculator.splitNumberAndCharacter(input);
         assertThat(result).isEqualTo(output);
     }
 
     @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
     @Test
     void splitNumberAndSumByComma() {
-        int result = caculator.splitNumberAndCharater("1,2");
+        int result = caculator.splitNumberAndCharacter("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @DisplayName("숫자 두개를 컴마 구분자로 입력 할 경우 두 숫자의 합을 반환한다")
     @Test
     void splitNumberAndSumByCharater() {
-        int result = caculator.splitNumberAndCharater("1,2:3");
+        int result = caculator.splitNumberAndCharacter("1,2:3");
         assertThat(result).isEqualTo(6);
     }
 
@@ -60,7 +62,7 @@ class CaculatorTest {
     @Test
     void inputTextIsNegative() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> {
-            caculator.inputTextIsNegative("-1,2,3");
+            inputView.inputTextIsNegative("-1,2,3");
         });
 
         assertThat(runtimeException.getMessage()).isEqualTo("음수가 들어 올 수 없습니다.");

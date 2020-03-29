@@ -1,13 +1,12 @@
-package Caculator;
+package caculator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Caculator {
-    private static final int NULL_EMPTY_VALUE = 0;
-    private static final int NORMAL_VALUE = 1;
+
     private static final String SPLIT_TEXT = ",|:";
-    private static final String MINUS_OPERATOR = "-";
+    private static final String CUSTOM_SPLIT_REGEX = "//(.)\n(.*)";
 
     private String inputText;
 
@@ -18,19 +17,11 @@ public class Caculator {
         this.inputText = inputText;
     }
 
-    public int validateInputText(String inputText) {
-        if (inputText == null || inputText.isEmpty()) {
-            return NULL_EMPTY_VALUE;
-        }
-
-        return NORMAL_VALUE;
-    }
-
     private int oneNumberInputText(String inputText) {
         return Integer.parseInt(inputText);
     }
 
-    public int splitNumberAndCharater(String inputText) {
+    public int splitNumberAndCharacter(String inputText) {
         String[] numbers = getNumbers(inputText, SPLIT_TEXT);
         return sumNumbers(numbers);
     }
@@ -48,7 +39,7 @@ public class Caculator {
     }
 
     public int splitNumberAndCustomSeparator(String inputText) {
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(inputText);
+        Matcher matcher = Pattern.compile(CUSTOM_SPLIT_REGEX).matcher(inputText);
         if (!matcher.find()) { return 0; }
 
         String[] numbers = getNumbers(matcher.group(2), matcher.group(1));
@@ -56,10 +47,4 @@ public class Caculator {
 
     }
 
-    public void inputTextIsNegative(String inputText) {
-        if (inputText.contains(MINUS_OPERATOR)) {
-            throw new RuntimeException("음수가 들어 올 수 없습니다.");
-        }
-
-    }
 }
