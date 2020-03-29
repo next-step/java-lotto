@@ -37,7 +37,7 @@ public class OutputView {
 		System.out.println(
 				String.format(STATISTIC_RANK_FORMAT,
 						winningEntry.getKey().getCorrectNumbers(),
-						winningEntry.getKey().getEarningPrize(),
+						winningEntry.getKey().getWinningMoney(),
 						winningEntry.getValue()));
 	}
 

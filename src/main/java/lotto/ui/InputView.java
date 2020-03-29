@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-	private static final String PRIZE_INPUT_MSG = "구입 금액을 입력해 주세요.";
+	private static final String SPEND_MONEY_INPUT_MSG = "구입 금액을 입력해 주세요.";
 	private static final String GET_WINNING_NUMBER_MSG = "지난 주 당첨 번호를 입력해 주세요.";
 
 	private final Scanner scanner;
@@ -23,7 +23,7 @@ public class InputView {
 	}
 
 	public long getSpentMoney() {
-		System.out.println(PRIZE_INPUT_MSG);
+		System.out.println(SPEND_MONEY_INPUT_MSG);
 		return Integer.parseInt(scanner.nextLine());
 	}
 

@@ -15,19 +15,19 @@ class LottoResultTest {
 
 	private Map<LottoRank, Long> rankMap = Arrays.stream(LottoRank.values())
 			.collect(Collectors.toMap(Function.identity(), rank -> 1L));
-	private int buyPrize = 14000;
+	private int spendMoney = 14000;
 
-	private LottoResult lottoResult = new LottoResult(rankMap, buyPrize);
+	private LottoResult lottoResult = new LottoResult(rankMap, spendMoney);
 
 	@Test
 	void isEqualTest() {
 		assertThat(lottoResult)
-				.isEqualTo(new LottoResult(rankMap, buyPrize));
+				.isEqualTo(new LottoResult(rankMap, spendMoney));
 	}
 
 	@Test
 	void getWinningMapTest() {
-		assertThat(new LottoResult(rankMap, buyPrize).getWinningMap())
+		assertThat(new LottoResult(rankMap, spendMoney).getWinningMap())
 				.isEqualTo(rankMap);
 	}
 
@@ -40,19 +40,19 @@ class LottoResultTest {
 		Map<LottoRank,Long> expectedMap = Arrays.stream(LottoRank.values())
 				.collect(Collectors.toMap(Function.identity(), rank -> 0L));
 
-		assertThat(new LottoResult(rankMap, buyPrize).getWinningMap())
+		assertThat(new LottoResult(rankMap, spendMoney).getWinningMap())
 				.isEqualTo(expectedMap);
 	}
 
 	@Test
 	void getYieldTest() {
-		long earnedPrize = rankMap
+		long winningMoney = rankMap
 				.keySet()
 				.stream()
-				.mapToLong(LottoRank::getEarningPrize)
+				.mapToLong(LottoRank::getWinningMoney)
 				.sum();
 		assertThat(lottoResult.getYield())
-				.isEqualTo((double) earnedPrize / buyPrize);
+				.isEqualTo((double) winningMoney / spendMoney);
 	}
 
 }

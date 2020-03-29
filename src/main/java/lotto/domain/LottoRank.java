@@ -15,11 +15,11 @@ public enum LottoRank {
 			.collect(Collectors.toMap(rank -> rank.correctNumbers, Function.identity()));
 
 	private final int correctNumbers;
-	private final int earningPrize;
+	private final int earningMoney;
 
-	LottoRank(int correctNumbers, int earningPrize) {
+	LottoRank(int correctNumbers, int earningMoney) {
 		this.correctNumbers = correctNumbers;
-		this.earningPrize = earningPrize;
+		this.earningMoney = earningMoney;
 	}
 
 	public static LottoRank getFromCorrectNumbers(int correctNumbers) {
@@ -30,7 +30,7 @@ public enum LottoRank {
 		return correctNumbers;
 	}
 
-	public int getEarningPrize() {
-		return earningPrize;
+	public int getWinningMoney() {
+		return earningMoney;
 	}
 }
