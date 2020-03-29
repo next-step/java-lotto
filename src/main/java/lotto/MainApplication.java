@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.lottogenerator.LottoNumGeneratorByAuto;
 import lotto.controller.LottoGame;
+import lotto.lottogenerator.LottoNumGeneratorByAuto;
 import lotto.view.InputScanner;
 import lotto.view.InputView;
 import lotto.view.ResultView;

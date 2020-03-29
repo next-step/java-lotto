@@ -1,7 +1,6 @@
 package lotto.model;
 
 public enum MatchingResult {
-    ZERO(0, 0),
     THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),

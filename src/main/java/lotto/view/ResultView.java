@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.controller.LottoGame;
+import lotto.model.MatchingResult;
 import lotto.model.MyLottos;
 
 import java.util.List;
@@ -8,11 +9,6 @@ import java.util.List;
 import static lotto.model.MatchingResult.*;
 
 public class ResultView {
-    private static int threeMatchLottos = 0;
-    private static int fourMatchLottos = 0;
-    private static int fiveMatchLottos = 0;
-    private static int sixMatchLottos = 0;
-
     public static void printMyLottos(LottoGame lottoGame) {
         printBlankLine();
         printMyLottosTiTle(lottoGame);
@@ -32,7 +28,7 @@ public class ResultView {
     public static void printResult(LottoGame lottoGame, List<Integer> winningLotto) {
         printBlankLine();
         printResultTitle();
-        printMatchResults(lottoGame.getMyLottos(), winningLotto);
+        printStatistics(lottoGame.getMyLottos(), winningLotto);
         printEarningRate(lottoGame.getMyLottos(), winningLotto);
     }
 
@@ -42,41 +38,18 @@ public class ResultView {
         System.out.println("=========================================");
     }
 
-    private static void printMatchResults(MyLottos myLottos, List<Integer> winningLotto) {
-        findHowManyMatch(myLottos.findHowManyMatchWith(winningLotto));
-        printStatistics();
+    private static void printStatistics(MyLottos myLottos, List<Integer> winningLotto) {
+        printStatistic(myLottos, winningLotto, THREE);
+        printStatistic(myLottos, winningLotto, FOUR);
+        printStatistic(myLottos, winningLotto, FIVE);
+        printStatistic(myLottos, winningLotto, SIX);
     }
 
-    private static void findHowManyMatch(List<Integer> matchCounts) {
-        for (Integer integer : matchCounts) {
-            addCount(integer);
-        }
-    }
+    private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto,
+                                       MatchingResult matchingResult){
+        System.out.print(matchingResult.getMatchCount() + "개 일치 (" + matchingResult.getCashPrize() + "원) : ");
+        System.out.println(myLottos.findCountOfNumMatching(winningLotto, matchingResult) + "개");
 
-    private static void addCount(int matchCount) {
-        if (matchCount == 3) {
-            threeMatchLottos++;
-        }
-        if (matchCount == 4) {
-            fourMatchLottos++;
-        }
-        if (matchCount == 5) {
-            fiveMatchLottos++;
-        }
-        if (matchCount == 6) {
-            sixMatchLottos++;
-        }
-    }
-
-    private static void printStatistics() {
-        System.out.println(THREE.getMatchCount() + "개 일치 (" + THREE.getCashPrize() + "원) : " +
-                threeMatchLottos + "개");
-        System.out.println(FOUR.getMatchCount() + "개 일치 (" + FOUR.getCashPrize() + "원) : " +
-                fourMatchLottos + "개");
-        System.out.println(FIVE.getMatchCount() + "개 일치 (" + FIVE.getCashPrize() + "원) : " +
-                fiveMatchLottos + "개");
-        System.out.println(SIX.getMatchCount() + "개 일치 (" + SIX.getCashPrize() + "원) : " +
-                sixMatchLottos + "개");
     }
 
     private static void printEarningRate(MyLottos myLottos, List<Integer> winningLotto) {
