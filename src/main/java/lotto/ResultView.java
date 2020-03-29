@@ -56,7 +56,7 @@ public class ResultView {
     }
 
     public String printWinningResult() {
-        String result = "";
+        String result = "당첨통계\n---------\n";
         LottoWinningInfo[] values = LottoWinningInfo.values();
         for (LottoWinningInfo value : values) {
             int matchCount = value.getMatchCount();
