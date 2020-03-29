@@ -2,7 +2,7 @@ package study.lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 

@@ -12,11 +12,7 @@ public class LottoRule {
         }
 
         Set<Integer> uniqLottoNumbers = new HashSet<>(lottoNumbers);
-        if (uniqLottoNumbers.size() != LOTTO_NUMBER_TOTAL) {
-            return false;
-        }
-
-        return true;
+        return uniqLottoNumbers.size() == LOTTO_NUMBER_TOTAL;
     }
 
     public static LottoRank getWinningRank(LottoTicket lottoTicket,

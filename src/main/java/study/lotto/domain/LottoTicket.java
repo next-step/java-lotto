@@ -2,7 +2,6 @@ package study.lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoTicket implements Iterable<LottoNumber> {
     private static final String CONSTRUCTOR_ERROR_MESSAGE = "중복없는 6개의 로또 숫자를 " +
