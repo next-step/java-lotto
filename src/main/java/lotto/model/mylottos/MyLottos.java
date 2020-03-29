@@ -1,5 +1,7 @@
-package lotto.model;
+package lotto.model.mylottos;
 
+import lotto.model.Money;
+import lotto.model.Rank;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Collections;
@@ -79,7 +81,11 @@ public class MyLottos {
         return lottoNumbers.size() * PRICE_TO_BUY_ONE_LOTTO;
     }
 
+    public int findLottoCount() {
+        return lottoNumbers.size();
+    }
+
     public List<LottoNumbers> getLottoNumbers() {
-        return this.lottoNumbers;
+        return lottoNumbers;
     }
 }

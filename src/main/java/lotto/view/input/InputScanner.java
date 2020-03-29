@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.input;
 
 import lotto.model.Money;
 import lotto.model.winninglotto.BonusBall;
@@ -23,7 +23,7 @@ public class InputScanner {
         return StringConverter.convertStringToMoney(validateNullOrEmpty(money));
     }
 
-    public static WinningLottoNumbers getWinningLotto() {
+    public static WinningLottoNumbers getWinningNumbers() {
         System.out.println(REQUEST_FOR_WINNING_LOTTO);
         winningLotto = StringConverter.convertStringToNumbers(scanner.nextLine());
         return new WinningLottoNumbers(winningLotto);

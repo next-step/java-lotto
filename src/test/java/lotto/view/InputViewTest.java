@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.view.input.StringConverter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;

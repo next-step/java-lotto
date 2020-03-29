@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.input;
 
 import lotto.model.Money;
 
@@ -36,7 +36,7 @@ public class StringConverter {
         return money < MONEY_TO_BUY_ONE_LOTTO;
     }
 
-    public static int convertStringToNumber(String input){
+    public static int convertStringToNumber(String input) {
         validateNonNumber(input);
         return Integer.parseInt(input);
     }

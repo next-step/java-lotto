@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.mylottos;
 
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
@@ -53,7 +53,7 @@ public class LottoNumbers {
                 .size();
     }
 
-    public boolean hasBonusBall(BonusBall bonusBall){
+    public boolean hasBonusBall(BonusBall bonusBall) {
         return lottoNumbers.stream()
                 .filter(number -> bonusBall.isEqualWith(number))
                 .findAny()

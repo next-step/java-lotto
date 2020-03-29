@@ -7,11 +7,11 @@ public class BonusBall {
         this.bonusNumber = bonusNumber;
     }
 
-    public static BonusBall of(int bonusNumber){
+    public static BonusBall of(int bonusNumber) {
         return new BonusBall(bonusNumber);
     }
 
-    public boolean isEqualWith(int bonusNumber){
+    public boolean isEqualWith(int bonusNumber) {
         return this.bonusNumber == bonusNumber;
     }
 }

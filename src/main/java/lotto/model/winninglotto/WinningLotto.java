@@ -13,7 +13,7 @@ public class WinningLotto {
         this.bonusBall = bonusBall;
     }
 
-    public boolean contains(int number){
+    public boolean contains(int number) {
         return winningLottoNumbers.getWinningLottoNumbers()
                 .contains(number);
     }
@@ -22,11 +22,11 @@ public class WinningLotto {
         return bonusBall;
     }
 
-    public static WinningLotto of(WinningLottoNumbers winningLottoNumbers){
+    public static WinningLotto of(WinningLottoNumbers winningLottoNumbers) {
         return new WinningLotto(winningLottoNumbers);
     }
 
-    public static WinningLotto of(WinningLottoNumbers winningLottoNumbers, BonusBall bonusBall){
+    public static WinningLotto of(WinningLottoNumbers winningLottoNumbers, BonusBall bonusBall) {
         return new WinningLotto(winningLottoNumbers, bonusBall);
     }
 }

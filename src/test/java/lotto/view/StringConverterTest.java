@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.Money;
-import lotto.view.StringConverter;
+import lotto.view.input.StringConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
