@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,12 +13,25 @@ public class ResultView {
     private static final int MIN_WIN_MATCH_COUNT = 3;
     private static final int MIN_PURCHASE_AMOUNT = 1000;
 
+    private Scanner scanner = new Scanner(System.in);
     private LottoNumber winningNumbers;
     private List<LottoNumber> purchaseLottoNumbers;
     private Map<Integer, WinningLotto> winningLottos;
 
+    public ResultView() {
+    }
+
     public ResultView(String inputText) {
         this(inputText, null);
+    }
+
+    public ResultView(List<LottoNumber> purchaseLottoNumbers) {
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        String inputText = scanner.next();
+        Set<Integer> numbers = splitWinningNumber(inputText);
+        winningNumbers = new LottoNumber(numbers);
+        this.purchaseLottoNumbers = purchaseLottoNumbers;
+        this.winningLottos = getWinningLottos();
     }
 
     public ResultView(String inputText, List<LottoNumber> purchaseLottoNumbers) {
@@ -55,6 +69,15 @@ public class ResultView {
 
     }
 
+    public String printPurchaseLottoNumbers(List<LottoNumber> lottoNumbers) {
+        String result = "";
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            result += lottoNumber.getNumbers() + "\n";
+        }
+
+        return result;
+    }
+
     public String printWinningResult() {
         String result = "당첨통계\n---------\n";
         LottoWinningInfo[] values = LottoWinningInfo.values();
@@ -62,6 +85,18 @@ public class ResultView {
             int matchCount = value.getMatchCount();
             int resultCount = getResultCount(matchCount);
             result += matchCount + "개 일치(" + value.getWinningAmount() + "원)- " + resultCount + "개\n";
+        }
+
+        return result;
+    }
+
+    public String printeRevenuePercent() {
+        String result = "총 수익률은 ";
+        double revenuePercent = calculateRevenuePercent(totalWinningAmount(),
+                                                        totalPurchaseAmount());
+        result += revenuePercent + "입니다.";
+        if (revenuePercent < 1) {
+            result += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
 
         return result;
