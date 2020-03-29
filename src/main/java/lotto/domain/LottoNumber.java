@@ -14,9 +14,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    // 복사 생성자
+    private LottoNumber(final LottoNumber clone) {
+        this.number = clone.number;
+    }
+
     public static LottoNumber valueOf(final int number) {
         checkAvailableNumber(number);
         return LottoNumberCache.cache[number - MIN];
+    }
+
+    public static LottoNumber clone(final LottoNumber clone) {
+        return new LottoNumber(clone);
     }
 
     private static void checkAvailableNumber(final int number) {
