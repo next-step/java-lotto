@@ -3,11 +3,11 @@ package lotto.domain;
 public class WinningLotto {
     private static final int FIVE_MATCH_COUNT = 5;
     private Lotto winningLotto;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     public WinningLotto(String lottoNumber, int bonusNumber) {
         this.winningLotto = new Lotto(lottoNumber);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     public WinningType checkWinning(Lotto lotto) {
@@ -17,7 +17,7 @@ public class WinningLotto {
         boolean bonusMatch = false;
 
         if (isWinningFive(matchCount)) {
-            bonusMatch = lotto.isContainsLottoNumber(LottoNumber.valueOf(bonusNumber));
+            bonusMatch = lotto.isContainsLottoNumber(bonusNumber);
         }
         return WinningType.findLottoWinningtype(matchCount, bonusMatch);
     }
