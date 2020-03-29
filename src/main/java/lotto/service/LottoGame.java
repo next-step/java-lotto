@@ -55,10 +55,10 @@ public class LottoGame {
 
     public LottoDto findWinGame(Item winTicket) {
         LottoDto dto = new LottoDto();
-        dto.setMatch3GameCount(this.lottoTickets.getFirstLottoCount(winTicket));
-        dto.setMatch4GameCount(this.lottoTickets.getSecondLottoCount(winTicket));
-        dto.setMatch5GameCount(this.lottoTickets.getThirdLottoCount(winTicket));
-        dto.setMatch6GameCount(this.lottoTickets.getFourthLottoCount(winTicket));
+        dto.setFirstGameCount(this.lottoTickets.getFirstLottoCount(winTicket));
+        dto.setSecondGameCount(this.lottoTickets.getSecondLottoCount(winTicket));
+        dto.setThirdGameCount(this.lottoTickets.getThirdLottoCount(winTicket));
+        dto.setFourthGameCount(this.lottoTickets.getFourthLottoCount(winTicket));
         return dto;
     }
 
