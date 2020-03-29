@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
     BLANK(0, 0)
     , FOURTH(3, 5_000)
@@ -17,11 +19,9 @@ public enum LottoRank {
     }
 
     public static LottoRank findRank(int matchCount) {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoRank.matchCount == matchCount) {
-                return lottoRank;
-            }
-        }
-        return LottoRank.BLANK;
+        return Arrays.stream(LottoRank.values())
+                     .filter(lottoRank -> lottoRank.matchCount == matchCount)
+                     .findFirst()
+                     .orElse(LottoRank.BLANK);
     }
 }
