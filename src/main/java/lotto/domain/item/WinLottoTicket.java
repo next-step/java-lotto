@@ -12,6 +12,10 @@ public class WinLottoTicket extends Lotto {
         this.second = second;
     }
 
+    public int getSecond() {
+        return second;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

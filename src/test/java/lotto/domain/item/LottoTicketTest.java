@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
 
@@ -59,19 +60,22 @@ public class LottoTicketTest {
     }
 
     @DisplayName("해당 로또가 몇등인지 판단한다")
-//    @ParameterizedTest
-//    @MethodSource("provideMatchNumbers")
     @Test
     public void getRank() throws Exception {
         //given
         final LottoTicket lotto = new LottoTicket(numbers);
-        final WinLottoTicket winLottoTicket = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 45);
-
-        //when
-
-        int rank = lotto.getRank(winLottoTicket);
+        final WinLottoTicket first = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
+        final WinLottoTicket second = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 6);
+        final WinLottoTicket third = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 10);
+        final WinLottoTicket miss = new WinLottoTicket(Arrays.asList(1, 10, 11, 12, 13, 14), 20);
 
         //then
-        assertThat(rank).isEqualTo(2);
+        assertAll(
+                () -> assertThat(lotto.getRank(first)).isEqualTo(LottoPrize.FIRST)
+                , () -> assertThat(lotto.getRank(second)).isEqualTo(LottoPrize.SECOND)
+                , () -> assertThat(lotto.getRank(third)).isEqualTo(LottoPrize.THIRD)
+                , () -> assertThat(lotto.getRank(miss)).isEqualTo(LottoPrize.MISS)
+        );
+
     }
 }
