@@ -23,4 +23,8 @@ public class LottoTicket extends Lotto {
         }
         return match;
     }
+
+    public int getRank(WinLottoTicket winLottoTicket) {
+        return getLuckyNumberMatchCount(winLottoTicket);
+    }
 }
