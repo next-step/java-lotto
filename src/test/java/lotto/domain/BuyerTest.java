@@ -30,16 +30,29 @@ public class BuyerTest {
     }
 
     @Test
-    @DisplayName("2등 1장, 4등 1장일때 result 확인")
+    @DisplayName("3등 1장, 4등 1장일때 result 확인")
     void checkByGetResult() {
         LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
         LottoTicket fourthTicket = createTicket(1, 2, 3, 14, 15, 16);
 
         Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
-        BuyerResult result = newBuyer.getResult(winningTicket);
+        BuyerResult result = newBuyer.getResult(winningTicket, LottoNumber.of(17));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(752.5);
+    }
+
+    @Test
+    @DisplayName("2등 1장, 3등 1장일때 result 확인")
+    void checkByGetResult2() {
+        LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
+        LottoTicket fourthTicket = createTicket(1, 2, 3, 4, 5, 16);
+
+        Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
+        BuyerResult result = newBuyer.getResult(winningTicket, LottoNumber.of(16));
+
+        assertThat(result.getWinningResult().size()).isEqualTo(2);
+        assertThat(result.getProfitRate()).isEqualTo(30000.0);
     }
 
     private LottoTicket createTicket(int... numbers) {
