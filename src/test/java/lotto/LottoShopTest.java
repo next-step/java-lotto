@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoShopTest {
+    private static final int BONUS_NUMBER = 10;
     private static final int PRICE_PER_PIECE = 1000;
 
     private LottoShop lottoShop;
@@ -42,7 +43,7 @@ class LottoShopTest {
         Lotto lotto = new Lotto(winningNumber);
         lottoShop = new LottoShop(new LottoBundle(Arrays.asList(lotto)));
 
-        LottoResult lottoResult = lottoShop.checkWinning(winningNumber, 10);
+        LottoResult lottoResult = lottoShop.checkWinning(winningNumber, BONUS_NUMBER);
         List<WinningType> actual = lottoResult.getWinningTypes();
 
         assertAll(

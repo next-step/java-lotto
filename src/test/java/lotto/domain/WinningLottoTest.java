@@ -5,15 +5,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
+    private static final int BONUS_NUMBER = 10;
+
     @DisplayName("당첨 확인")
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 6:6"}, delimiter = ':')
     void checkWinning(String lottoNumber, String winningNumber, int expected) {
         Lotto buyingLotto = new Lotto(lottoNumber);
-        WinningLotto winningLotto = new WinningLotto(winningNumber, 11);
+        WinningLotto winningLotto = new WinningLotto(winningNumber, BONUS_NUMBER);
 
         int actual = winningLotto.checkWinning(buyingLotto).getMatchCount();
 
