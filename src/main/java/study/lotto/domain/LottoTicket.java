@@ -2,21 +2,17 @@ package study.lotto.domain;
 
 import java.util.*;
 
-public class LottoTicket {
+public class LottoTicket implements Iterable<LottoNumber> {
     public static final int PRICE = 1000;
-    private static final int LOTTO_NUMBER_TOTAL = 6;
+
     private Set<LottoNumber> lotto;
 
     public LottoTicket(int[] lottoNumbers) {
-        if (Objects.isNull(lottoNumbers) ||
-                lottoNumbers.length != LOTTO_NUMBER_TOTAL) {
-            throw new IllegalArgumentException("6개의 로또 숫자를 입력하세요.");
+        if (!LottoRule.isComplianceNumberRule(lottoNumbers)) {
+            throw new IllegalArgumentException("중복없는 6개의 로또 숫자를 입력하세요.");
         }
 
         setLotto(lottoNumbers);
-        if (lotto.size() != LOTTO_NUMBER_TOTAL) {
-            throw new IllegalArgumentException("중복된 숫자가 없어야 합니다.");
-        }
     }
 
     public int size() {
@@ -28,5 +24,9 @@ public class LottoTicket {
         for (int number : lottoNumbers) {
             lotto.add(new LottoNumber(number));
         }
+    }
+
+    @Override public Iterator<LottoNumber> iterator() {
+        return lotto.iterator();
     }
 }
