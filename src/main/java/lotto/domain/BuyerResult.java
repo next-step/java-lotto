@@ -1,34 +1,26 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BuyerResult {
     private final List<Rank> winningResult;
     private final double profitRate;
 
-    public BuyerResult(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        winningResult = createWinningResult(lottoTickets, winningTicket);
-        profitRate = createProfitRate(lottoTickets);
+    public BuyerResult(List<Rank> ranks, int lottoCount) {
+        this.winningResult = ranks;
+        this.profitRate = calculateProfitRate(lottoCount);
     }
 
-    private List<Rank> createWinningResult(List<LottoTicket> lottoTickets, LottoTicket winningTicket) {
-        List<Integer> winningMatchCounts = lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.compareTo(winningTicket))
-                .filter(matchCount -> matchCount >= LottoTicket.WINNING_MIN_COUNT)
-                .collect(Collectors.toList());
-
-        return winningMatchCounts.stream()
-                .map(Rank::findByMatchCount)
-                .collect(Collectors.toList());
+    private double calculateProfitRate(int lottoCount) {
+        long winningAmountSum = getWinningAmountSum();
+        double profitRate = ((double) winningAmountSum) / (lottoCount * LottoTicket.PRICE);
+        return Math.round(profitRate * 100) / 100.0;
     }
 
-    private double createProfitRate(List<LottoTicket> lottoTickets) {
-        long winningAmountSum = winningResult.stream()
+    private long getWinningAmountSum() {
+        return winningResult.stream()
                 .mapToLong(Rank::getAmount)
                 .sum();
-        double profitRate = ((double) winningAmountSum) / (lottoTickets.size() * LottoTicket.PRICE);
-        return Math.round(profitRate * 100) / 100.0;
     }
 
     public List<Rank> getWinningResult() {
