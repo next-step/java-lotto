@@ -40,38 +40,14 @@ public class Lotto {
     }
 
     public int getMatchedNumberCount(Lotto winningLotto) {
-        int matchCount = 0;
-        Set<Integer> winningIntegerNumbers = winningLotto.getIntegerValue();
+        Set<LottoNumber> intersection = new HashSet<>(lotto);
+        intersection.retainAll(winningLotto.getValue());
 
-        for(int winningNumber : winningIntegerNumbers) {
-            matchCount = addMatchCount(winningNumber, matchCount);
-        }
-        return matchCount;
-    }
-
-    private int addMatchCount(int winningNumber, int matchCount) {
-        if(isMatch(winningNumber)) {
-            matchCount++;
-        }
-        return matchCount;
-    }
-
-    private boolean isMatch(int winningNumber) {
-        Set<Integer> lottoIntegerNumbers = getIntegerValue();
-        return lottoIntegerNumbers.contains(winningNumber);
+        return intersection.size();
     }
 
     public Set<LottoNumber> getValue() {
         return new HashSet<>(lotto);
-    }
-
-    public Set<Integer> getIntegerValue() {
-        Set<Integer> lottoIntegerNumbers = new HashSet<>();
-
-        for(LottoNumber lottoNumber : getValue()) {
-            lottoIntegerNumbers.add(lottoNumber.getValue());
-        }
-        return lottoIntegerNumbers;
     }
 }
 

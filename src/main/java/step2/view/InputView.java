@@ -41,6 +41,7 @@ public class InputView {
         }
     }
 
+
     private String[] splitNumber(String inputText) {
         return inputText.split(COMMA);
     }

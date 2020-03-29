@@ -15,6 +15,6 @@ public class LottoMachineTest {
     void createLotto() {
         Money money = new Money(3000);
 
-        assertThat(lottoMachine.createLottos(money)).isNotNull();
+        assertThat(lottoMachine.createLottos(money.getLottoCount())).isNotNull();
     }
 }

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class LottoProvider {
 
-    private static final List<LottoNumber> wholeNumber = getWholeNumber();
+    private static final List<LottoNumber> wholeNumber = new ArrayList<>();
 
     private LottoProvider() {}
 
@@ -33,27 +33,27 @@ public class LottoProvider {
     }
 
     public static Lotto createLotto(List<Integer> inputNumbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        List<LottoNumber> lotto = getWholeNumber()
+                .stream()
+                .filter(number -> inputNumbers.contains(number.getValue()))
+                .collect(Collectors.toList());
 
-        for(int number : inputNumbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new Lotto(lottoNumbers);
+        return new Lotto(lotto);
     }
 
     private static List<LottoNumber> getShuffledNumber() {
-        List<LottoNumber> shuffledNumber = wholeNumber;
-        Collections.shuffle(shuffledNumber);
+        List<LottoNumber> shuffledNumber = new ArrayList<>(getWholeNumber());
 
+        Collections.shuffle(shuffledNumber);
         return shuffledNumber;
     }
 
     private static List<LottoNumber> getWholeNumber() {
-        List<LottoNumber> numbers = new ArrayList<>();
-
-        for(int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-            numbers.add(new LottoNumber(i));
+        if(wholeNumber.isEmpty()) {
+            for(int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
+                wholeNumber.add(new LottoNumber(i));
+            }
         }
-        return numbers;
+        return wholeNumber;
     }
 }

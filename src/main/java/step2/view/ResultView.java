@@ -30,11 +30,9 @@ public class ResultView {
 
         for(Lotto lotto : lottos.getValue()) {
             builder.setLength(0);
-            builder.append(LOTTO_NUMBER_PREFIX);
 
             Set<LottoNumber> lottoNumbers = lotto.getValue();
             builder.append(getLottoNumbersString(lottoNumbers));
-            builder.append(LOTTO_NUMBER_POSTFIX);
             ViewUtils.printLine(builder.toString());
         }
     }
