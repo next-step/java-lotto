@@ -1,8 +1,8 @@
 package lotto;
 
 import lotto.model.LottoNumbers;
-import lotto.model.MyLottos;
 import lotto.model.Money;
+import lotto.model.MyLottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.model.MatchingResult.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyLottosTest {
@@ -35,7 +36,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfThreeNumMatching = myLottos.findCountOfThreeNumMatching(winningLotto);
+        Long countOfThreeNumMatching = myLottos.findCountOfNumMatching(winningLotto, THREE);
 
         //then
         assertThat(countOfThreeNumMatching).isEqualTo(1L);
@@ -48,7 +49,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfFourNumMatching = myLottos.findCountOfFourNumMatching(winningLotto);
+        Long countOfFourNumMatching = myLottos.findCountOfNumMatching(winningLotto, FOUR);
 
         //then
         assertThat(countOfFourNumMatching).isEqualTo(1L);
@@ -61,7 +62,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfFiveNumMatching = myLottos.findCountOfFiveNumMatching(winningLotto);
+        Long countOfFiveNumMatching = myLottos.findCountOfNumMatching(winningLotto, FIVE);
 
         //then
         assertThat(countOfFiveNumMatching).isEqualTo(1L);
@@ -74,7 +75,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfSixNumMatching = myLottos.findCountOfSixNumMatching(winningLotto);
+        Long countOfSixNumMatching = myLottos.findCountOfNumMatching(winningLotto, SIX);
 
         //then
         assertThat(countOfSixNumMatching).isEqualTo(1L);
@@ -87,7 +88,7 @@ public class MyLottosTest {
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Money earningMoney = myLottos.calculatePrizeMoney(winningLotto);
+        Money earningMoney = myLottos.calculateAllPrizeMoney(winningLotto);
 
         //then
         assertThat(earningMoney).isEqualTo(new Money(2001555000l));

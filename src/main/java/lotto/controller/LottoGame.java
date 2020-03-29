@@ -36,4 +36,8 @@ public class LottoGame {
     public MyLottos getMyLottos() {
         return new MyLottos(lottoNumbers);
     }
+
+    public int findHowManyMyLottos(){
+        return lottoNumbers.size();
+    }
 }

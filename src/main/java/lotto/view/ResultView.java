@@ -17,7 +17,7 @@ public class ResultView {
     }
 
     private static void printMyLottosTiTle(LottoGame lottoGame) {
-        System.out.println(lottoGame.getMyLottos().getLottoNumbers().size() + "개를 구매했습니다.");
+        System.out.println(lottoGame.findHowManyMyLottos() + "개를 구매했습니다.");
     }
 
     private static void printMyLottosBody(LottoGame lottoGame) {
@@ -45,8 +45,7 @@ public class ResultView {
         printStatistic(myLottos, winningLotto, SIX);
     }
 
-    private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto,
-                                       MatchingResult matchingResult){
+    private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto, MatchingResult matchingResult) {
         System.out.print(matchingResult.getMatchCount() + "개 일치 (" + matchingResult.getCashPrize() + "원) : ");
         System.out.println(myLottos.findCountOfNumMatching(winningLotto, matchingResult) + "개");
 
