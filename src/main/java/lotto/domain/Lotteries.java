@@ -21,7 +21,11 @@ public class Lotteries {
     }
 
     public LottoRank analyzeWin(final LottoNumbers winningLotteNumbers) {
-        return LottoRank.BLANK;
+        LottoRank lottoRank = null;
+        for (LottoNumbers purchases : lottoNumbers) {
+            lottoRank = LottoRank.findRank(purchases.match(winningLotteNumbers));
+        }
+        return lottoRank;
     }
 
     @Override
