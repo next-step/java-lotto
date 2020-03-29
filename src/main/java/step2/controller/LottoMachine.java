@@ -18,18 +18,18 @@ public class LottoMachine {
 
     public void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
-        Lottos lottos = lottoMachine.createLottos(money);
-        Lotto winningLotto = lottoMachine.createWinningLotto(inputView.getWinningNumbers());
 
-        resultView.printResult(makeLottoResult(winningLotto, lottos), money);
+        Lottos lottos = createLottos(money);
+        resultView.showLottos(lottos, money.getLottoCount());
+
+        Lotto winningLotto = createWinningLotto(inputView.getWinningNumbers());
+        resultView.showResult(makeLottoResult(winningLotto, lottos), money);
     }
 
     public Lottos createLottos(Money money) {
         int lottoCount = money.getLottoCount();
 
         Lottos lottos = LottoProvider.createLottos(lottoCount);
-        resultView.showLottos(lottos, lottoCount);
-
         return lottos;
     }
 

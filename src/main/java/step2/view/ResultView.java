@@ -48,7 +48,7 @@ public class ResultView {
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LOTTO_NUMBER_PREFIX, LOTTO_NUMBER_POSTFIX));
     }
 
-    public void printResult(LottoResult result, Money money) {
+    public void showResult(LottoResult result, Money money) {
         ViewUtils.printLine(WINNING_STATISTICS_INFORMATION);
         ViewUtils.printLine(String.format(MATCH_FOURTH_INFORMATION, result.getTierCount(LottoTier.FOURTH)));
         ViewUtils.printLine(String.format(MATCH_THIRD_INFORMATION, result.getTierCount(LottoTier.THIRD)));
