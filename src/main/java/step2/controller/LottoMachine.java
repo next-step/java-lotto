@@ -22,8 +22,8 @@ public class LottoMachine {
         Lottos lottos = createLottos(money);
         resultView.showLottos(lottos, money.getLottoCount());
 
-        Lotto winningLotto = createWinningLotto(inputView.getWinningNumbers());
-        resultView.showResult(makeLottoResult(winningLotto, lottos), money);
+        LottoResult result = makeLottoResult(inputView, lottos);
+        resultView.showResult(result, money);
     }
 
     public Lottos createLottos(Money money) {
@@ -37,7 +37,9 @@ public class LottoMachine {
         return LottoProvider.createLotto(inputNumbers);
     }
 
-    public LottoResult makeLottoResult(Lotto winningLotto, Lottos lottos) {
+    public LottoResult makeLottoResult(InputView inputView, Lottos lottos) {
+        Lotto winningLotto = createWinningLotto(inputView.getWinningNumbers());
+
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         for(LottoTier lottoTier : LottoTier.values()) {
