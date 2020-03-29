@@ -8,14 +8,14 @@ public class Price {
     public static final int MIN_PRICE = 0;
     private static final int LOTTO_PRICE = 1000;
 
-    private int price;
+    private long price;
 
-    public Price(final int price) {
+    public Price(final long price) {
         checkNegative(price);
         this.price = price;
     }
 
-    private void checkNegative(final int price) {
+    private void checkNegative(final long price) {
         if (price < MIN_PRICE) {
             throw new NegativePriceException();
         }
@@ -25,7 +25,7 @@ public class Price {
         return price >= LOTTO_PRICE;
     }
 
-    public int lotteryCount() {
+    public long lotteryCount() {
         return price / LOTTO_PRICE;
     }
 
@@ -38,7 +38,7 @@ public class Price {
     }
 
     public double divide(final Price purchasePrice) {
-        return (double)this.price / purchasePrice.price;
+        return (double) this.price / purchasePrice.price;
     }
 
     @Override
