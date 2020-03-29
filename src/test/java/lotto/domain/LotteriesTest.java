@@ -41,7 +41,7 @@ class LotteriesTest {
 
         LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.getMatchCount(LottoRank.BLANK)).isEqualTo(expect);
+        assertThat(actual.wihCount(LottoRank.BLANK)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 3개 일치한다. (4등)")
@@ -53,7 +53,7 @@ class LotteriesTest {
 
         LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.getMatchCount(LottoRank.FOURTH)).isEqualTo(expect);
+        assertThat(actual.wihCount(LottoRank.FOURTH)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 4개 일치한다. (3등)")
@@ -65,7 +65,7 @@ class LotteriesTest {
 
         LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.getMatchCount(LottoRank.THIRD)).isEqualTo(expect);
+        assertThat(actual.wihCount(LottoRank.THIRD)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 5개 일치한다. (2등)")
@@ -77,7 +77,7 @@ class LotteriesTest {
 
         LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.getMatchCount(LottoRank.SECOND)).isEqualTo(expect);
+        assertThat(actual.wihCount(LottoRank.SECOND)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 6개 일치한다. (1등)")
@@ -89,7 +89,7 @@ class LotteriesTest {
 
         LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.getMatchCount(LottoRank.FIRST)).isEqualTo(expect);
+        assertThat(actual.wihCount(LottoRank.FIRST)).isEqualTo(expect);
     }
 
 
