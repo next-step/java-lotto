@@ -1,16 +1,17 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
 class LottoNumber {
     private static final int NUMBER_SIZE = 6;
 
-    private Set<Integer> numbers;
+    private final Set<Integer> numbers;
 
     public LottoNumber(Set<Integer> numbers) {
         validateWinningNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = Collections.unmodifiableSet(numbers);
     }
 
     private void validateWinningNumbers(Set<Integer> numbers) {

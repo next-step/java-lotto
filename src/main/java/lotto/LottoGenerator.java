@@ -15,7 +15,7 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private int purchaseCount;
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoGenerator(int purchaseCount) {
         this.purchaseCount = purchaseCount;
@@ -35,7 +35,7 @@ public class LottoGenerator {
         for (int i = 0; i < purchaseCount; i++) {
             numbers.add(new LottoNumber(generateRandomNumbers()));
         }
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
