@@ -13,12 +13,36 @@ class LottoPrizeTest {
     @Test
     @CsvSource(value = {""})
     public void prize() throws Exception {
+        //given
+        final int winCount = 2;
+
+        //then
         assertAll(
-                () -> assertThat(LottoPrize.MATCH3.calculate(3)).isEqualTo(15000),
-                () -> assertThat(LottoPrize.MATCH3.calculate(4)).isEqualTo(20000),
-                () -> assertThat(LottoPrize.MATCH4.calculate(4)).isEqualTo(200000),
-                () -> assertThat(LottoPrize.MATCH5.calculate(4)).isEqualTo(6000000),
-                () -> assertThat(LottoPrize.MATCH6.calculate(2)).isEqualTo(4000000000.0)
+                () -> assertThat(LottoPrize.FIRST.getWinningPrize(winCount).getMoney())
+                        .isEqualTo(4_000_000_000d),
+                () -> assertThat(LottoPrize.SECOND.getWinningPrize(winCount).getMoney())
+                        .isEqualTo(60_000_000),
+                () -> assertThat(LottoPrize.THIRD.getWinningPrize(winCount).getMoney())
+                        .isEqualTo(3_000_000d),
+                () -> assertThat(LottoPrize.FOURTH.getWinningPrize(winCount).getMoney())
+                        .isEqualTo(100_000d),
+                () -> assertThat(LottoPrize.FIFTH.getWinningPrize(winCount).getMoney())
+                        .isEqualTo(10_000d),
+                () -> assertThat(LottoPrize.MISS.getWinningPrize(winCount).getMoney())
+                        .isEqualTo(0)
+        );
+    }
+
+    @DisplayName("등수별로 몇개의 당첨 번호가 확인 되야 하는지 테스트")
+    @Test
+    public void matchCount() throws Exception {
+        assertAll(
+                () -> assertThat(LottoPrize.FIRST.getMatchCount()).isEqualTo(6),
+                () -> assertThat(LottoPrize.SECOND.getMatchCount()).isEqualTo(5),
+                () -> assertThat(LottoPrize.THIRD.getMatchCount()).isEqualTo(5),
+                () -> assertThat(LottoPrize.FOURTH.getMatchCount()).isEqualTo(4),
+                () -> assertThat(LottoPrize.FIFTH.getMatchCount()).isEqualTo(3),
+                () -> assertThat(LottoPrize.MISS.getMatchCount()).isEqualTo(0)
         );
     }
 }

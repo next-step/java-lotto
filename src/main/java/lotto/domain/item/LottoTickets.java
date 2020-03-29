@@ -50,10 +50,10 @@ public class LottoTickets implements Cloneable {
         Money earning = new Money();
 
         return earning
-                .plus(LottoPrize.MATCH3.calculate(getLuckyNumberMatch3Count(luckyNumbers)))
-                .plus(LottoPrize.MATCH4.calculate(getLuckyNumberMatch4Count(luckyNumbers)))
-                .plus(LottoPrize.MATCH5.calculate(getLuckyNumberMatch5Count(luckyNumbers)))
-                .plus(LottoPrize.MATCH6.calculate(getLuckyNumberMatch6Count(luckyNumbers)));
+                .plus(LottoPrize.FIFTH.getWinningPrize(getLuckyNumberMatch3Count(luckyNumbers)))
+                .plus(LottoPrize.FOURTH.getWinningPrize(getLuckyNumberMatch4Count(luckyNumbers)))
+                .plus(LottoPrize.SECOND.getWinningPrize(getLuckyNumberMatch5Count(luckyNumbers)))
+                .plus(LottoPrize.FIRST.getWinningPrize(getLuckyNumberMatch6Count(luckyNumbers)));
     }
 
 
