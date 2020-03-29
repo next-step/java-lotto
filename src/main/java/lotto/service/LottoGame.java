@@ -59,6 +59,7 @@ public class LottoGame {
         dto.setSecondGameCount(this.lottoTickets.getSecondLottoCount(winTicket));
         dto.setThirdGameCount(this.lottoTickets.getThirdLottoCount(winTicket));
         dto.setFourthGameCount(this.lottoTickets.getFourthLottoCount(winTicket));
+        dto.setFifthGameCount(this.lottoTickets.getFifthLottoCount(winTicket));
         return dto;
     }
 
