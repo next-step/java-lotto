@@ -45,7 +45,7 @@ public class LottoTicket {
                 .filter(winningNumber -> getLottoNumbers()
                         .contains(winningNumber))
                 .count();
-        boolean bonusMatch = winningNumbers.contains(bonusNumber.getNumber());
+        boolean bonusMatch = getLottoNumbers().contains(bonusNumber.getNumber());
         return new LottoTicketResult(matchCount, bonusMatch);
     }
 }
