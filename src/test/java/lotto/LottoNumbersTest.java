@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto;
+import lotto.model.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,12 +13,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoTest {
+public class LottoNumbersTest {
     @DisplayName("6개의 숫자로 구성되지 않은 숫자 리스트를 입력받으면 예외를 반환한다.")
     @Test
     void validateSizeTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5));
         });
     }
 
@@ -26,7 +26,7 @@ public class LottoTest {
     @Test
     void validateDuplicationTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(Arrays.asList(1, 1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(1, 1, 2, 3, 4, 5));
         });
     }
 
@@ -35,7 +35,7 @@ public class LottoTest {
     @ValueSource(ints = {-1, 0, 46})
     void validateNumberRangeTest(int input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new Lotto(Arrays.asList(input, 1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(input, 1, 2, 3, 4, 5));
         });
     }
 
@@ -45,10 +45,10 @@ public class LottoTest {
     void findHowManyMatchTest(int input, int expected) {
         //given
         List<Integer> winningLotto = Arrays.asList(input, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(2, 3, 4, 5, 6, 7));
 
         //when
-        int howManyMatch = lotto.findHowManyMatch(winningLotto);
+        int howManyMatch = lottoNumbers.findHowManyMatch(winningLotto);
 
         //then
         assertThat(howManyMatch).isEqualTo(expected);

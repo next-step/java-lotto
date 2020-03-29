@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.lottogenerator.LottoNumGeneratorByAuto;
-import lotto.model.LottoGame;
+import lotto.controller.LottoGame;
 import lotto.view.InputScanner;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -14,9 +14,7 @@ public class MainApplication {
         String inputPrice = InputScanner.getPurchasePrice();
 
         LottoGame lottoGame = new LottoGame(InputView.of(inputPrice));
-        while (!lottoGame.isEnd()) {
-            lottoGame.start(lottoNumGeneratorByAuto);
-        }
+        lottoGame.start(lottoNumGeneratorByAuto);
         ResultView.printMyLottos(lottoGame);
 
         List<Integer> winningLotto = InputScanner.getWinningLotto();

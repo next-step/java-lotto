@@ -1,6 +1,9 @@
-package lotto.model;
+package lotto.controller;
 
 import lotto.lottogenerator.LottoNumGeneratorStrategy;
+import lotto.model.LottoNumbers;
+import lotto.model.MyLottos;
+import lotto.model.Money;
 import lotto.view.InputView;
 import lotto.view.StringConverter;
 
@@ -11,23 +14,26 @@ public class LottoGame {
     private static final int COUNT_TO_STOP = 0;
 
     private int lottoCount;
-    private List<Lotto> lottos = new ArrayList<>();
+    private List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
     public LottoGame(InputView inputView) {
-        Money money = StringConverter.convertStringToMoney(inputView);
+        Money money = StringConverter.convertStringToMoney(inputView.getInput());
         lottoCount = money.findLottoCountToBuy();
     }
 
     public void start(LottoNumGeneratorStrategy lottoNumGeneratorStrategy) {
-        lottos.add(new Lotto(lottoNumGeneratorStrategy.generate()));
+        lottoNumbers.add(new LottoNumbers(lottoNumGeneratorStrategy.generate()));
         lottoCount--;
+        while (!isEnd()) {
+            start(lottoNumGeneratorStrategy);
+        }
     }
 
     public boolean isEnd() {
         return lottoCount == COUNT_TO_STOP;
     }
 
-    public Lottos getLottos() {
-        return new Lottos(lottos);
+    public MyLottos getMyLottos() {
+        return new MyLottos(lottoNumbers);
     }
 }

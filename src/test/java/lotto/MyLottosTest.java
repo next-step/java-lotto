@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.Lottos;
+import lotto.model.LottoNumbers;
+import lotto.model.MyLottos;
 import lotto.model.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,30 +12,30 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottosTest {
+public class MyLottosTest {
     private List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
-    private Lotto lotto1;
-    private Lotto lotto2;
-    private Lotto lotto3;
-    private Lotto lotto4;
+    private LottoNumbers lottoNumbers1;
+    private LottoNumbers lottoNumbers2;
+    private LottoNumbers lottoNumbers3;
+    private LottoNumbers lottoNumbers4;
 
 
     @BeforeEach
     void setUp() {
-        lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
-        lotto3 = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
-        lotto4 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 9));
+        lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoNumbers2 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 7, 8));
+        lottoNumbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 7, 8, 9));
+        lottoNumbers4 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 9));
     }
 
     @DisplayName("구매한 로또 중에 당첨번호와 번호 3개가 일치하는 로또의 갯수를 리턴한다.")
     @Test
     void findCountOfThreeNumMatchingTest() {
         //given
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfThreeNumMatching = lottos.findCountOfThreeNumMatching(winningLotto);
+        Long countOfThreeNumMatching = myLottos.findCountOfThreeNumMatching(winningLotto);
 
         //then
         assertThat(countOfThreeNumMatching).isEqualTo(1L);
@@ -45,10 +45,10 @@ public class LottosTest {
     @Test
     void findCountOfFourNumMatchingTest() {
         //given
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfFourNumMatching = lottos.findCountOfFourNumMatching(winningLotto);
+        Long countOfFourNumMatching = myLottos.findCountOfFourNumMatching(winningLotto);
 
         //then
         assertThat(countOfFourNumMatching).isEqualTo(1L);
@@ -58,10 +58,10 @@ public class LottosTest {
     @Test
     void findCountOfFiveNumMatchingTest() {
         //given
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfFiveNumMatching = lottos.findCountOfFiveNumMatching(winningLotto);
+        Long countOfFiveNumMatching = myLottos.findCountOfFiveNumMatching(winningLotto);
 
         //then
         assertThat(countOfFiveNumMatching).isEqualTo(1L);
@@ -71,10 +71,10 @@ public class LottosTest {
     @Test
     void findCountOfSixNumMatchingTest() {
         //given
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Long countOfSixNumMatching = lottos.findCountOfSixNumMatching(winningLotto);
+        Long countOfSixNumMatching = myLottos.findCountOfSixNumMatching(winningLotto);
 
         //then
         assertThat(countOfSixNumMatching).isEqualTo(1L);
@@ -84,10 +84,10 @@ public class LottosTest {
     @Test
     void calculatePrizeMoneyTest() {
         //given
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3, lotto4));
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2, lottoNumbers3, lottoNumbers4));
 
         //when
-        Money earningMoney = lottos.calculatePrizeMoney(winningLotto);
+        Money earningMoney = myLottos.calculatePrizeMoney(winningLotto);
 
         //then
         assertThat(earningMoney).isEqualTo(new Money(2001555000l));
@@ -97,11 +97,11 @@ public class LottosTest {
     @Test
     public void calculateEarningRateTest() {
         //given
-        Lotto lotto5 = new Lotto(Arrays.asList(15, 1, 2, 3, 19, 20));
-        Lottos lottos = new Lottos(Arrays.asList(lotto5));
+        LottoNumbers lottoNumbers5 = new LottoNumbers(Arrays.asList(15, 1, 2, 3, 19, 20));
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers5));
 
         //whenR
-        double earningRate = lottos.calculateEarningRate(winningLotto);
+        double earningRate = myLottos.calculateEarningRate(winningLotto);
 
         //then
         assertThat(earningRate).isEqualTo(500);

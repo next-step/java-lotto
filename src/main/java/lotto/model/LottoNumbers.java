@@ -1,17 +1,19 @@
 package lotto.model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Lotto {
+public class LottoNumbers {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
     private static final int LOTTO_SIZE = 6;
 
     private List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<Integer> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
         validateNumberRange(lottoNumbers);
@@ -25,10 +27,8 @@ public class Lotto {
     }
 
     private void validateDuplication(List<Integer> lottoNumbers) {
-        int sizeOfSet = lottoNumbers.stream()
-                .collect(Collectors.toSet())
-                .size();
-        if (lottoNumbers.size() > sizeOfSet) {
+        Set<Integer> uniqueNumbers = new HashSet<>(lottoNumbers);
+        if (lottoNumbers.size() > uniqueNumbers.size()) {
             throw new IllegalArgumentException("로또는 중복되지 않은 숫자로 구성되어야 합니다.");
         }
     }

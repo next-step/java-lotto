@@ -2,46 +2,53 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.model.MatchingResult.*;
 
-public class Lottos {
+public class MyLottos {
     private static final int THREE_NUM_MATCH_WITH_WINNING_LOTTO = 3;
     private static final int FOUR_NUM_MATCH_WITH_WINNING_LOTTO = 4;
     private static final int FIVE_NUM_MATCH_WITH_WINNING_LOTTO = 5;
     private static final int SIX_NUM_MATCH_WITH_WINNING_LOTTO = 6;
     private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
 
-    private List<Lotto> lottos;
+    private List<LottoNumbers> lottoNumbers;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableList(lottos);
+    public MyLottos(List<LottoNumbers> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public List<Integer> findHowManyMatchWith(List<Integer> winningLotto){
+        return lottoNumbers.stream()
+                .map(lottoNumbers -> lottoNumbers.findHowManyMatch(winningLotto))
+                .collect(Collectors.toList());
     }
 
     public long findCountOfThreeNumMatching(List<Integer> winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.findHowManyMatch(winningLotto))
+        return lottoNumbers.stream()
+                .map(lottoNumbers -> lottoNumbers.findHowManyMatch(winningLotto))
                 .filter(count -> THREE_NUM_MATCH_WITH_WINNING_LOTTO == count)
                 .count();
     }
 
     public long findCountOfFourNumMatching(List<Integer> winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.findHowManyMatch(winningLotto))
+        return lottoNumbers.stream()
+                .map(lottoNumbers -> lottoNumbers.findHowManyMatch(winningLotto))
                 .filter(count -> FOUR_NUM_MATCH_WITH_WINNING_LOTTO == count)
                 .count();
     }
 
     public long findCountOfFiveNumMatching(List<Integer> winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.findHowManyMatch(winningLotto))
+        return lottoNumbers.stream()
+                .map(lottoNumbers -> lottoNumbers.findHowManyMatch(winningLotto))
                 .filter(count -> FIVE_NUM_MATCH_WITH_WINNING_LOTTO == count)
                 .count();
     }
 
     public long findCountOfSixNumMatching(List<Integer> winningLotto) {
-        return lottos.stream()
-                .map(lotto -> lotto.findHowManyMatch(winningLotto))
+        return lottoNumbers.stream()
+                .map(lottoNumbers -> lottoNumbers.findHowManyMatch(winningLotto))
                 .filter(count -> SIX_NUM_MATCH_WITH_WINNING_LOTTO == count)
                 .count();
     }
@@ -59,10 +66,10 @@ public class Lottos {
         if (earningMoney == null) {
             return 0;
         }
-        return ((double) earningMoney.getMoney() / (this.lottos.size() * PRICE_TO_BUY_ONE_LOTTO)) * 100;
+        return ((double) earningMoney.getMoney() / (this.lottoNumbers.size() * PRICE_TO_BUY_ONE_LOTTO)) * 100;
     }
 
-    public List<Lotto> getLottos() {
-        return this.lottos;
+    public List<LottoNumbers> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 }
