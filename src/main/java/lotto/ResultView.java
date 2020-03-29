@@ -103,12 +103,12 @@ public class ResultView {
 
     private int repeatByWinNumberSize(Set<Integer> winningNums, int matchCount, Set<Integer> purchaseNumbers) {
         for (Integer winningNum : winningNums) {
-            matchCount = checkCotainsWinNumber(matchCount, purchaseNumbers, winningNum);
+            matchCount = checkContainsWinNumber(matchCount, purchaseNumbers, winningNum);
         }
         return matchCount;
     }
 
-    private int checkCotainsWinNumber(int matchCount, Set<Integer> purchaseNumbers, Integer winningNum) {
+    private int checkContainsWinNumber(int matchCount, Set<Integer> purchaseNumbers, Integer winningNum) {
         if (purchaseNumbers.contains(winningNum)) {
             ++matchCount;
         }

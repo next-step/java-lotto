@@ -54,7 +54,9 @@ class ResultViewTest {
     @Test
     void printWinningResult() {
         String result = resultView.printWinningResult();
-        assertThat(result).isEqualTo("3개 일치(5000원)- 1개\n"
+        assertThat(result).isEqualTo("당첨통계\n"
+                                     + "---------\n"
+                                     + "3개 일치(5000원)- 1개\n"
                                      + "4개 일치(50000원)- 1개\n"
                                      + "5개 일치(1500000원)- 1개\n"
                                      + "6개 일치(2000000000원)- 1개\n");
