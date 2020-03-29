@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LottoBuyer {
 	private static final int PRIZE = 1000;
 
-	private final List<Integer> candidateNumbers = IntStream.range(1, 46)
+	private final List<Integer> candidateNumbers = IntStream.rangeClosed(LottoNumber.LOWEST_NUMBER, LottoNumber.HIGHEST_NUMBER)
 			.boxed()
 			.collect(Collectors.toList());
 
@@ -23,7 +23,7 @@ public class LottoBuyer {
 
 		for (int i = 0; i < count; i++) {
 			Collections.shuffle(candidateNumbers);
-			lottoNumbers.add(new LottoNumber(new ArrayList<>(candidateNumbers.subList(0, 6))));
+			lottoNumbers.add(new LottoNumber(new ArrayList<>(candidateNumbers.subList(0, LottoNumber.NUMBER_SIZE))));
 		}
 
 		return lottoNumbers;
