@@ -6,7 +6,7 @@ public class LottoRule {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int PRICE = 1000;
+    private static final long PRICE = 1000;
     private static final int WINNING_MIN_COUNT = 3;
 
     static int getLottoStartNumber() {
@@ -21,7 +21,7 @@ public class LottoRule {
         return LOTTO_NUMBERS_SIZE;
     }
 
-    public static int getPrice() {
+    public static long getPrice() {
         return PRICE;
     }
 
@@ -36,9 +36,9 @@ public class LottoRule {
         FOURTH(3, 5000);
 
         private int matchCount;
-        private int amount;
+        private long amount;
 
-        WINNING_VALUE(int matchCount, int amount) {
+        WINNING_VALUE(int matchCount, long amount) {
             this.matchCount = matchCount;
             this.amount = amount;
         }
@@ -50,7 +50,7 @@ public class LottoRule {
                     .orElseThrow(() -> new IllegalArgumentException("당첨 되지 않았습니다."));
         }
 
-        public int getAmount() {
+        public long getAmount() {
             return amount;
         }
     }

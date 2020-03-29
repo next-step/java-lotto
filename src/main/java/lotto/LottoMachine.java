@@ -25,7 +25,7 @@ public class LottoMachine {
         return new LottoTicket(lottoNumbers.subList(0, getLottoNumbersSize()));
     }
 
-    private static int getTicketCount(int money) {
+    private static long getTicketCount(long money) {
         return money / getPrice();
     }
 }
