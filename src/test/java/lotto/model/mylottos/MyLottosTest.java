@@ -1,7 +1,6 @@
-package lotto.model;
+package lotto.model.mylottos;
 
-import lotto.model.mylottos.LottoNumbers;
-import lotto.model.mylottos.MyLottos;
+import lotto.model.Money;
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.model.winninglotto.WinningLottoNumbers;

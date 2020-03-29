@@ -21,6 +21,12 @@ public class LottoGame {
         autoLottoCount = money.findLottoCountToBuy();
     }
 
+    public LottoGame(int autoLottoCount, MyLottos myLottos, WinningLotto winningLotto) {
+        this.autoLottoCount = autoLottoCount;
+        this.myLottos = myLottos;
+        this.winningLotto = winningLotto;
+    }
+
     public MyLottos start() {
         myLottos = LottoNumberPool.getMyLottos(autoLottoCount);
         return myLottos;
