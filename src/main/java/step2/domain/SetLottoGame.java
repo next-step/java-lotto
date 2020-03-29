@@ -1,41 +1,33 @@
 package step2.domain;
 
-import step2.view.BuyLotto;
-import step2.view.Lotto;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class SetLottoGame {
-    private List<Integer> lottoRangeList;
-    private Lotto lotto;
-    private BuyLotto buyLotto;
+    public static Lotto lotto = new Lotto();
+    public static BuyInfo buyInfo = new BuyInfo();
 
-    public void startLotto(int totalPrice) {
-        lotto = new Lotto();
-        lottoRangeList = lotto.getLottoNumberList();
+    public static BuyInfo startLotto(int totalPrice) {
         int lottoCount = getTotalGame(totalPrice);
-        buyLotto(lottoCount);
+        Set<List<Integer>> buyLottoList =  buyLottoList(lottoCount);
+        buyInfo.setBuyLottoList(buyLottoList);
+        return buyInfo;
     }
 
-    private void buyLotto(int lottoCount) {
-        Set<List<Integer>> buyList = new HashSet<>();
-
+    public static Set<List<Integer>> buyLottoList(int lottoCount) {
+        Set<List<Integer>> buyLottoList = new HashSet();
         for (int i = 0; i < lottoCount; i++) {
-            buyList.add(extractLottoNumber(lottoRangeList));
+            List<Integer> lottoList = lotto.extractLottoNumber();
+            buyLottoList.add(lottoList);
         }
-        BuyLotto.setBuyLottoList(buyList);
+
+        return buyLottoList;
     }
 
-    public static List<Integer> extractLottoNumber(List<Integer> lottoNumberList) {
-        Collections.shuffle(lottoNumberList);
-        List<Integer> randomNumber = lottoNumberList.subList(0, Lotto.getSelectNumber());
-        Collections.sort(randomNumber);
-
-        return randomNumber;
-    }
-
-    public int getTotalGame(int totalPrice) {
-        buyLotto = new BuyLotto(totalPrice, lotto.getPrice());
-        return buyLotto.getBuyLottoCount();
+    public static int getTotalGame(int totalPrice) {
+        buyInfo = new BuyInfo(totalPrice, Lotto.getPrice());
+        return buyInfo.getBuyLottoCount();
     }
 }

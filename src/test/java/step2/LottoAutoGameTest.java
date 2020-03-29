@@ -5,10 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import step2.domain.SetLottoGame;
-import step2.view.BuyLotto;
-import step2.view.Lotto;
+import step2.domain.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ public class LottoAutoGameTest {
     @DisplayName("입력값 확인테스트")
     @ValueSource(ints = {0})
     public void validateInputTest(int input){
-        assertThatThrownBy(() -> new BuyLotto(input)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new BuyInfo(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -35,7 +34,7 @@ public class LottoAutoGameTest {
     }
 
     @Test
-    @DisplayName("로또기본테스트")
+    @DisplayName("로또기본정보테스트")
     public void setLottoNumberTest() {
         Lotto lotto = new Lotto();
         assertThat(lotto.getLottoNumberList().size()).isEqualTo(45);
@@ -45,38 +44,28 @@ public class LottoAutoGameTest {
     @DisplayName("로또랜덤추출테스트")
     public void extractLottoNumberTest() {
         Lotto lotto = new Lotto();
-        List<Integer> lottoRandom = SetLottoGame.extractLottoNumber(lotto.getLottoNumberList());
-        System.out.println(lottoRandom);
+        List<Integer> lottoRandom = lotto.extractLottoNumber();
         assertThat(lottoRandom.size()).isEqualTo(6);
     }
 
     @Test
-    @DisplayName("당첨정보셋팅테스트")
-    public void name() {
-        List<Integer> lotto = Arrays.asList(1,2,3,4,5,6);
-
-        List<Integer> winLotto = new ArrayList<>();
-
-      //  int cnt = SetLottoGame.resulit(winLotto, lotto);
-
-
-
+    @DisplayName("당첨정보결과테스트")
+    public void matchTest() {
+        WinLotto winLotto = new WinLotto(Arrays.asList(1,2,3,4,5,6));
+        List<Integer> buyLottoList = Arrays.asList(1,2,3,4,5,7);
+        assertThat(winLotto.match(buyLottoList)).isEqualTo(5);
     }
 
     @Test
-    public void equalNumberTest() {
-        List<Integer> lotto = Arrays.asList(1,2,3,4,5,6);
+    @DisplayName("당첨정보테스트")
+    public void resultTest() {
+        assertThat(WinInformation.matchWinInformation(3).getPrice()).isEqualTo(BigDecimal.valueOf(5000));
+    }
 
-        List<Integer> winLotto = new ArrayList<>();
-        winLotto.add(1);
-        winLotto.add(2);
-        winLotto.add(3);
-        winLotto.add(7);
-        winLotto.add(8);
-        winLotto.add(9);
+    @Test
+    @DisplayName("수익률테스트")
+    public void profitRateTest(){
 
-        //int count = SetLottoGame(lotto, winLotto);
-
-        //assertThat(count).isEqualTo(3);
+        assertThat(ResultLottoGame.getProfitRate(50000,5000)).isEqualTo(0.1);
     }
 }

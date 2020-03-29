@@ -1,23 +1,35 @@
-package step2.view;
+package step2.domain;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class BuyLotto {
+public class BuyInfo {
     private static int buyLottoTotalPrice;
     private static int buyLottoCount;
     private static Set<List<Integer>> buyLottoList;
+    private static List<Integer> matchCountList;
+
+    public static List<Integer> getMatchCountList() {
+        return matchCountList;
+    }
+
+    public static void setMatchCountList(List<Integer> matchCountList) {
+        BuyInfo.matchCountList = matchCountList;
+    }
+
 
     public static Set<List<Integer>> getBuyLottoList() {
         return buyLottoList;
     }
 
     public static void setBuyLottoList(Set<List<Integer>> buyLottoList) {
-        BuyLotto.buyLottoList = buyLottoList;
+        BuyInfo.buyLottoList = buyLottoList;
     }
 
 
+    public BuyInfo() {
+
+    }
 
     public static int getBuyLottoCount() {
         return buyLottoCount;
@@ -27,24 +39,22 @@ public class BuyLotto {
         this.buyLottoCount = buyLottoCount;
     }
 
-    public BuyLotto(int buyLottoTotalPrice) {
+    public BuyInfo(int buyLottoTotalPrice) {
         if (buyLottoTotalPrice <= 0) {
             throw new IllegalArgumentException("0원보다 큰 금액입력");
         }
         this.buyLottoTotalPrice = buyLottoTotalPrice;
     }
 
-    public BuyLotto() {
-
-    }
-
-    public BuyLotto(int totalPrice, int pricePerGame) {
+    public BuyInfo(int totalPrice, int pricePerGame) {
         if (totalPrice <= 0) {
             throw new IllegalArgumentException("0원보다 큰 금액입력");
         }
-
+        this.buyLottoTotalPrice = totalPrice;
         this.buyLottoCount = totalPrice / pricePerGame;
     }
 
-
+    public static int match(int number) {
+        return (int) matchCountList.stream().filter(d-> number == d).count();
+    }
 }
