@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.winninglotto.WinningLotto;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -43,16 +45,16 @@ public class LottoNumbers {
         }
     }
 
-    public int findHowManyMatch(WinningLottoNumbers winningLottoNumbers) {
+    public int findHowManyMatch(WinningLotto winningLotto) {
         return this.lottoNumbers.stream()
-                .filter(it -> winningLottoNumbers.contains(it))
+                .filter(it -> winningLotto.contains(it))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    public boolean hasBonusBall(int bonusBallNumber){
+    public boolean hasBonusBall(WinningLotto winningLotto){
         return lottoNumbers.stream()
-                .filter(number -> number.equals(bonusBallNumber))
+                .filter(number -> number.equals(winningLotto.getBonusNum()))
                 .findAny()
                 .isPresent();
     }

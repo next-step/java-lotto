@@ -1,7 +1,8 @@
 package lotto.view;
 
 import lotto.model.Money;
-import lotto.model.WinningLottoNumbers;
+import lotto.model.winninglotto.BonusBall;
+import lotto.model.winninglotto.WinningLottoNumbers;
 
 import java.util.List;
 import java.util.Scanner;
@@ -28,10 +29,11 @@ public class InputScanner {
         return new WinningLottoNumbers(winningLotto);
     }
 
-    public static int getBonusBall() {
+    public static BonusBall getBonusBall() {
         System.out.println(REQUEST_FOR_BONUS_BALL);
         String input = scanner.nextLine();
-        return validateBonusBall(StringConverter.convertStringToNumber(input));
+        int bonusBall = validateBonusBall(StringConverter.convertStringToNumber(input));
+        return BonusBall.of(bonusBall);
     }
 
     private static String validateNullOrEmpty(String input) {

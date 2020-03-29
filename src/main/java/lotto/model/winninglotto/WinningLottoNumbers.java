@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.winninglotto;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,9 +12,5 @@ public class WinningLottoNumbers {
 
     public List<Integer> getWinningLottoNumbers() {
         return winningLottoNumbers;
-    }
-
-    public boolean contains(int number){
-        return winningLottoNumbers.contains(number);
     }
 }

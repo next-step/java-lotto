@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.winninglotto.WinningLotto;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -14,56 +16,56 @@ public class MyLottos {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public long findCountOfNumMatching(WinningLottoNumbers winningLottoNumbers, Rank rank, int bonusBall) {
+    public long findCountOfNumMatching(WinningLotto winningLotto, Rank rank) {
         if (rank.equals(SECOND)) {
-            return findCountOfSecond(winningLottoNumbers, bonusBall);
+            return findCountOfSecond(winningLotto);
         }
         if (rank.equals(THIRD)) {
-            return findCountOfThird(winningLottoNumbers, bonusBall);
+            return findCountOfThird(winningLotto);
         }
-        return findCountOfNumMatchingExceptThirdAndSecond(winningLottoNumbers, rank);
+        return findCountOfNumMatchingExceptThirdAndSecond(winningLotto, rank);
     }
 
-    private long findCountOfSecond(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
+    private long findCountOfSecond(WinningLotto winningLotto) {
         return lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.hasBonusBall(bonusBall))
-                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLottoNumbers))
+                .filter(lottoNumber -> lottoNumber.hasBonusBall(winningLotto))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
                 .filter(matchCount -> matchCount == SECOND.getMatchCount())
                 .count();
     }
 
-    private long findCountOfThird(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
+    private long findCountOfThird(WinningLotto winningLotto) {
         return lottoNumbers.stream()
-                .filter(lottoNumber -> !lottoNumber.hasBonusBall(bonusBall))
-                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLottoNumbers))
+                .filter(lottoNumber -> !lottoNumber.hasBonusBall(winningLotto))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
                 .filter(matchCount -> matchCount == THIRD.getMatchCount())
                 .count();
     }
 
-    private long findCountOfNumMatchingExceptThirdAndSecond(WinningLottoNumbers winningLottoNumbers, Rank rank) {
+    private long findCountOfNumMatchingExceptThirdAndSecond(WinningLotto winningLotto, Rank rank) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLottoNumbers))
+                .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
                 .filter(count -> rank.getMatchCount() == count)
                 .count();
     }
 
-    public Money calculateAllPrizeMoney(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
+    public Money calculateAllPrizeMoney(WinningLotto winningLotto) {
         long money = 0;
 
         for (Rank rank : Rank.values()) {
-            Money prizeMoney = calculatePrizeMoney(winningLottoNumbers, rank, bonusBall);
+            Money prizeMoney = calculatePrizeMoney(winningLotto, rank);
             money += prizeMoney.getMoney();
         }
 
         return new Money(money);
     }
 
-    private Money calculatePrizeMoney(WinningLottoNumbers winningLottoNumbers, Rank rank, int bonusBall) {
-        return rank.calculatePrizeMoney(findCountOfNumMatching(winningLottoNumbers, rank, bonusBall));
+    private Money calculatePrizeMoney(WinningLotto winningLotto, Rank rank) {
+        return rank.calculatePrizeMoney(findCountOfNumMatching(winningLotto, rank));
     }
 
-    public double calculateEarningRate(WinningLottoNumbers winningLottoNumbers, int bonusBall) {
-        Money earningMoney = calculateAllPrizeMoney(winningLottoNumbers, bonusBall);
+    public double calculateEarningRate(WinningLotto winningLotto) {
+        Money earningMoney = calculateAllPrizeMoney(winningLotto);
         return findEarningRate(earningMoney);
     }
 
