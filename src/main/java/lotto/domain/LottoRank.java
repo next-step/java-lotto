@@ -1,18 +1,11 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 public enum LottoRank {
-	FOURTH(3, 5000),
-	THIRD(4, 50000),
-	SECOND(5, 1500000),
-	FIRST(6, 2000000000);
-
-	private static Map<Integer, LottoRank> correctMap = Arrays.stream(values())
-			.collect(Collectors.toMap(rank -> rank.correctNumbers, Function.identity()));
+	FIFTH(3, 5_000),
+	FOURTH(4, 50_000),
+	THIRD(5, 1_500_000),
+	SECOND(5, 30_000_000),
+	FIRST(6, 2_000_000_000);
 
 	private final int correctNumbers;
 	private final int earningMoney;
@@ -22,15 +15,24 @@ public enum LottoRank {
 		this.earningMoney = earningMoney;
 	}
 
-	public static LottoRank getFromCorrectNumbers(int correctNumbers) {
-		return correctMap.get(correctNumbers);
-	}
-
 	public int getCorrectNumbers() {
 		return correctNumbers;
 	}
 
 	public int getWinningMoney() {
 		return earningMoney;
+	}
+
+	static LottoRank getFromCorrectNumbers(int correctNumbers, boolean matchBonus) {
+		if (correctNumbers == FIRST.getCorrectNumbers()) {
+			return FIRST;
+		}
+		if (correctNumbers == SECOND.getCorrectNumbers() && matchBonus) {
+			return SECOND;
+		}
+		if (correctNumbers < FIFTH.getCorrectNumbers()) {
+			return null;
+		}
+		return values()[correctNumbers - 3];
 	}
 }

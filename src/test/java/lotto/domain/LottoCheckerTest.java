@@ -33,9 +33,9 @@ class LottoCheckerTest {
 	private static Stream<Arguments> provideWinningResultTestArgs(){
 		return Stream.of(
 				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,5,6),LottoRank.FIRST),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,5,7),LottoRank.SECOND),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,7,8),LottoRank.THIRD),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,7,8,9),LottoRank.FOURTH),
+				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,5,7),LottoRank.THIRD),
+				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,7,8),LottoRank.FOURTH),
+				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,7,8,9),LottoRank.FIFTH),
 				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,7,8,9,10),null)
 		);
 	}

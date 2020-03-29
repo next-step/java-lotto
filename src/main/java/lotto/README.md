@@ -4,14 +4,12 @@
 
 ### LottoNumber.class
 
+- 6개의 숫자를 가진 일급 컬렉션
+
 #### 1. List<Intger> getNumbers 
 
 - 로또넘버 getter
  
-#### 2. LottoRank matchNumbers(LottoNumber winningNumber) 
-
-- winningNumber 와 매칭시켜 LottoRank 를 리턴
-
 ### LottoResult.class
 
 #### 1. Map<LottoRank,Integer> getWinningMap();

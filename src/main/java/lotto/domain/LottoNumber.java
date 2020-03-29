@@ -42,7 +42,7 @@ public class LottoNumber {
 		int correctNumbers = (int) this.numbers.stream()
 				.filter(winningNumber.numbers::contains)
 				.count();
-		return LottoRank.getFromCorrectNumbers(correctNumbers);
+		return LottoRank.getFromCorrectNumbers(correctNumbers,false);
 	}
 
 	public List<Integer> getNumbers() {
