@@ -2,10 +2,10 @@ package lotto.type;
 
 public enum RankType {
     NO_RANK(0, 0),
-    RANK1(2000000000, 6),
-    RANK2(1500000, 5),
-    RANK3(50000, 4),
-    RANK4(5000, 3);
+    RANK1(2_000_000_000, 6),
+    RANK2(1_500_000, 5),
+    RANK3(50_000, 4),
+    RANK4(5_000, 3);
 
     private int reward;
     private int condition;
