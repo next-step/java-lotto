@@ -33,11 +33,9 @@ public class LottoProvider {
     }
 
     public static Lotto createLotto(List<Integer> inputNumbers) {
-        List<LottoNumber> lotto = getWholeNumber()
-                .stream()
-                .filter(number -> inputNumbers.contains(number.getValue()))
+        List<LottoNumber> lotto =  inputNumbers.stream()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
-
         return new Lotto(lotto);
     }
 

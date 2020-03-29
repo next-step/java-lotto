@@ -2,6 +2,7 @@ package step2.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -39,11 +40,12 @@ public class Lotto {
         return LottoTier.getTier(getMatchedNumberCount(winningLotto));
     }
 
-    public int getMatchedNumberCount(Lotto winningLotto) {
-        Set<LottoNumber> intersection = new HashSet<>(lotto);
-        intersection.retainAll(winningLotto.getValue());
-
-        return intersection.size();
+    public long getMatchedNumberCount(Lotto winningLotto) {
+        return winningLotto
+                .getValue()
+                .stream()
+                .filter(winningLottoNumber -> lotto.contains(winningLottoNumber))
+                .count();
     }
 
     public Set<LottoNumber> getValue() {

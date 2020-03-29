@@ -10,10 +10,10 @@ public enum LottoTier {
     FOURTH(3, 5_000),
     NONE(0, 0);
 
-    private int matchedNumberCount;
+    private long matchedNumberCount;
     private int prize;
 
-    LottoTier(int matchedNumberCount, int prize) {
+    LottoTier(long matchedNumberCount, int prize) {
         this.matchedNumberCount = matchedNumberCount;
         this.prize = prize;
     }
@@ -22,7 +22,7 @@ public enum LottoTier {
         return count * prize;
     }
 
-    public static LottoTier getTier(int matchedNumberCount) {
+    public static LottoTier getTier(long matchedNumberCount) {
         return Arrays.stream(values())
                 .filter(tier -> tier.matchedNumberCount == matchedNumberCount)
                 .findFirst()
