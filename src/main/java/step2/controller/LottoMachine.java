@@ -79,13 +79,13 @@ public class LottoMachine {
         int count = 0;
 
         for(Lotto lotto : lottos.getValue()) {
-            count = addIfSameTier(lotto, count, winningLotto, lottoTier);
+            count = addIfSameTier(lotto.getLottoTier(winningLotto), lottoTier, count);
         }
         return count;
     }
 
-    private static int addIfSameTier(Lotto lotto, int count, Lotto winningLotto, LottoTier lottoTier) {
-        if(lottoTier.equals(lotto.getLottoTier(winningLotto))) {
+    private static int addIfSameTier(LottoTier resultTier, LottoTier lottoTier, int count) {
+        if(lottoTier.equals(resultTier)) {
             count++;
         }
         return count;
