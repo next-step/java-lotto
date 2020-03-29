@@ -2,6 +2,7 @@ package study.lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket implements Iterable<LottoNumber> {
     public static final int PRICE = 1000;
@@ -37,6 +38,10 @@ public class LottoTicket implements Iterable<LottoNumber> {
                 .collect(Collectors.toSet());
 
         return clonedLottoTicket;
+    }
+
+    public Stream<LottoNumber> stream() {
+        return lotto.stream();
     }
 
     @Override public Iterator<LottoNumber> iterator() {

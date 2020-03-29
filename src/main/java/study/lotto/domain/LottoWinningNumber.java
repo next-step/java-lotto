@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
     private Set<LottoNumber> winningNumber;
@@ -28,15 +29,8 @@ public class LottoWinningNumber {
     }
 
     public List<LottoNumber> getMatches(LottoTicket lottoTicket) {
-        List<LottoNumber> matches = new ArrayList<>();
-
-        for(LottoNumber lottoNumber: lottoTicket) {
-            if(winningNumber.contains(lottoNumber)) {
-                matches.add(lottoNumber);
-            }
-        }
-
-        return matches;
+        return lottoTicket.stream()
+                .filter(lottoNumber -> winningNumber.contains(lottoNumber))
+                .collect(Collectors.toList());
     }
-
 }

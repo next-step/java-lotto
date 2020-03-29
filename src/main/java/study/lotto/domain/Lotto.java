@@ -40,10 +40,7 @@ public class Lotto {
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = LottoRule.getWinningRank(lottoTicket,
                     winningNumber);
-            // todo refactor
-            if (lottoRank != null) {
-                lottoResult.addWinningTicket(lottoRank, lottoTicket);
-            }
+            lottoResult.addWinningTicket(lottoRank, lottoTicket);
         }
 
         return lottoResult;

@@ -21,7 +21,9 @@ public class LottoResult {
     }
 
     public void addWinningTicket(LottoRank lottoRank, LottoTicket lottoTicket) {
-        this.winningTickets.get(lottoRank).add(lottoTicket);
+        if (lottoRank != null) {
+            this.winningTickets.get(lottoRank).add(lottoTicket);
+        }
     }
 
     public List<LottoTicket> getWinningTickets(LottoRank lottoRank) {
