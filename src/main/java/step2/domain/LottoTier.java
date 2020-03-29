@@ -22,23 +22,10 @@ public enum LottoTier {
 
     public static LottoTier getTier(int matchedNumberCount) {
         for (LottoTier lottoTier : LottoTier.values()) {
-            return getIfSameMatchedNumberCount(lottoTier, matchedNumberCount);
+            if(lottoTier.matchedNumberCount == matchedNumberCount) {
+                return lottoTier;
+            }
         }
         return LottoTier.NONE;
-    }
-
-    private static LottoTier getIfSameMatchedNumberCount(LottoTier lottoTier, int matchedNumberCount) {
-        if(lottoTier.getMatchedNumberCount() == matchedNumberCount) {
-            return lottoTier;
-        }
-        return LottoTier.NONE;
-    }
-
-    public int getMatchedNumberCount() {
-        return matchedNumberCount;
-    }
-
-    public int getPrize() {
-        return prize;
     }
 }
