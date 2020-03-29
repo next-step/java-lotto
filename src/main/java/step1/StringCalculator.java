@@ -1,6 +1,5 @@
 package step1;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +31,7 @@ public class StringCalculator {
 
     private int sum(String[] inputSplit) {
         for (String input : inputSplit) {
-            result += stringToInteger(input);
+            result += checkNegativeNumber(stringToInteger(input));
         }
         return result;
     }
@@ -51,6 +50,13 @@ public class StringCalculator {
             return m.group(2).split(customDelimiter);
         }
         return inputString.split(SEPERATOR_CHARACTER);
+    }
+
+    private Integer checkNegativeNumber(Integer inputNumber) {
+        if (inputNumber < 0) {
+            throw new RuntimeException();
+        }
+        return inputNumber;
     }
 
 
