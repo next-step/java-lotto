@@ -12,7 +12,16 @@ public class StringAddCalculator {
         if (isNullOrEmpty(inputString)) {
             return ZERO;
         }
-        return Integer.parseInt(inputString);
+        return sum(inputString);
+    }
+
+    private int sum(String inputString) {
+        String[] splitNumbers = inputString.split(",");
+        int result = 0;
+        for(String splitNumber : splitNumbers) {
+            result += Integer.parseInt(splitNumber);
+        }
+        return result;
     }
 
     private boolean isNullOrEmpty(String inputString) {
