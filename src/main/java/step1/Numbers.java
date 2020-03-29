@@ -22,12 +22,19 @@ public class Numbers {
         return result;
     }
 
-    private static Integer stringToInteger(String string) {
-        return Integer.parseInt(string);
+    public static Integer stringToInteger(String string) {
+        int integer;
+
+        try {
+            integer = Integer.parseInt(string);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("숫자를 입력해주세요");
+        }
+        return integer;
     }
 
     private void checkPositiveNumber(int number) {
-        if(number < 0) {
+        if(number < INIT_VALUE) {
             throw new RuntimeException("숫자는 0 이상만 입력해주세요.");
         }
     }
