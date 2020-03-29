@@ -2,6 +2,7 @@ package enums;
 
 import lotto.domain.Money;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 public enum LottoPrize {
@@ -34,12 +35,11 @@ public enum LottoPrize {
     }
 
     public static LottoPrize findRank(int matchCount, boolean bonusNumber) {
-        for (LottoPrize val : values()) {
-            if ((matchCount == val.matchCount) && (bonusNumber == val.bonus)) {
-                return val;
-            }
-        }
-        return MISS;
+        return Arrays.stream(values())
+                .filter(x -> x.matchCount == matchCount)
+                .filter(x -> x.bonus == bonusNumber)
+                .findFirst()
+                .orElse(MISS);
     }
 
     public boolean isEquals(LottoPrize that) {
