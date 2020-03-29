@@ -23,7 +23,7 @@ public enum LottoTier {
     public static LottoTier getTier(int matchedNumberCount) {
         for (LottoTier lottoTier : LottoTier.values()) {
             if(lottoTier.matchedNumberCount == matchedNumberCount) {
-                return lottoTier;
+                return lottoTier;          //TODO: indent 2 이하 어떻게 풀면 좋을 지
             }
         }
         return LottoTier.NONE;

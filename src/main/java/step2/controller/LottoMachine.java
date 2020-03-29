@@ -69,38 +69,25 @@ public class LottoMachine {
     public static LottoResult makeLottoResult(Lotto winningLotto, Lottos lottos) {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
-        int firstCount = 0;
-        int secondCount = 0;
-        int thirdCount = 0;
-        int fourthCount = 0;
-        int noneCount = 0;
+        for(LottoTier lottoTier : LottoTier.values()) {
+            resultMap.put(lottoTier, getLottoCountByTier(lottoTier, lottos, winningLotto));
+        }
+        return new LottoResult(resultMap);
+    }
+
+    private static int getLottoCountByTier(LottoTier lottoTier, Lottos lottos, Lotto winningLotto) {
+        int count = 0;
 
         for(Lotto lotto : lottos.getValue()) {
-            LottoTier tier = lotto.getLottoTier(winningLotto);
-
-            if(LottoTier.FIRST.equals(tier)) {
-                firstCount++;
-            }
-            else if(LottoTier.SECOND.equals(tier)) {
-                secondCount++;
-            }
-            else if(LottoTier.THIRD.equals(tier)) {
-                thirdCount++;
-            }
-            else if(LottoTier.FOURTH.equals(tier)) {
-                fourthCount++;
-            }
-            else {
-                noneCount++;
-            }
+            count = addIfSameTier(lotto, count, winningLotto, lottoTier);
         }
+        return count;
+    }
 
-        resultMap.put(LottoTier.FIRST, firstCount);
-        resultMap.put(LottoTier.SECOND, secondCount);
-        resultMap.put(LottoTier.THIRD, thirdCount);
-        resultMap.put(LottoTier.FOURTH, fourthCount);
-        resultMap.put(LottoTier.NONE, noneCount);
-
-        return new LottoResult(resultMap);
+    private static int addIfSameTier(Lotto lotto, int count, Lotto winningLotto, LottoTier lottoTier) {
+        if(lottoTier.equals(lotto.getLottoTier(winningLotto))) {
+            count++;
+        }
+        return count;
     }
 }
