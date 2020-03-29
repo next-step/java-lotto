@@ -22,7 +22,7 @@ public class Price {
     }
 
     public boolean isAvailablePrice() {
-        return price < LOTTO_PRICE;
+        return price >= LOTTO_PRICE;
     }
 
     public int lotteryCount() {
