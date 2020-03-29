@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.dto;
 
 import lotto.utils.StringFormatter;
 
@@ -8,10 +8,6 @@ import java.util.Objects;
 
 public class LottoWinningNumber extends LottoNumber {
 	private int bonusNumber;
-
-	LottoWinningNumber(int bonusNumber, Integer... electedNumbers) {
-		this(Arrays.asList(electedNumbers), bonusNumber);
-	}
 
 	public LottoWinningNumber(List<Integer> electedNumbers, int bonusNumber) {
 		super(electedNumbers);

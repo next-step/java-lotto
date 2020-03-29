@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.dto;
 
 import lotto.utils.StringFormatter;
 
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
-	static final int LOWEST_NUMBER = 1;
-	static final int HIGHEST_NUMBER = 45;
-	static final int NUMBER_SIZE = 6;
+	public static final int LOWEST_NUMBER = 1;
+	public static final int HIGHEST_NUMBER = 45;
+	public static final int NUMBER_SIZE = 6;
 
 	private List<Integer> numbers;
 
@@ -42,7 +42,7 @@ public class LottoNumber {
 				.count() != NUMBER_SIZE;
 	}
 
-	LottoRank matchLottoNumber(LottoWinningNumber winningNumber) {
+	public LottoRank matchLottoNumber(LottoWinningNumber winningNumber) {
 		int correctNumbers = getMatchElectedNumberCount(winningNumber);
 		boolean matchBonus = this.numbers.contains(winningNumber.getBonusNumber());
 		return LottoRank.getFromCorrectNumbers(correctNumbers, matchBonus);

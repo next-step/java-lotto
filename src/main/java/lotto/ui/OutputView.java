@@ -1,8 +1,8 @@
 package lotto.ui;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoRank;
+import lotto.domain.dto.LottoResult;
 import lotto.utils.StringFormatter;
 
 import java.util.List;

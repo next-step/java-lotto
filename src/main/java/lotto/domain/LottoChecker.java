@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoRank;
+import lotto.domain.dto.LottoResult;
+import lotto.domain.dto.LottoWinningNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
