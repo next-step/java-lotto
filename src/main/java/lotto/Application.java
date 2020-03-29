@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,11 +9,16 @@ public class Application {
         Lotto lotto = new Lotto();
         InputView inputView = new InputView();
 
-        Lotteries lotteries = lotto.buy(inputView.inputPrice());
+        Price inputPrice = inputView.inputPrice();
+        Lotteries lotteries = lotto.buy(inputPrice);
 
         OutputView.printLotteryCount(lotteries.count());
         OutputView.printLotteries(lotteries.getLottoNumbers());
 
         LottoNumbers winningLotteNumbers = inputView.insertLastWeekendWinningLottery();
+        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers);
+
+        OutputView.printLottoResult(lottoResult.getChart());
+        OutputView.printRatio(lottoResult.ratio(inputPrice));
     }
 }
