@@ -28,5 +28,4 @@ public enum WinInformation {
     public static WinInformation matchWinInformation(int count) {
         return Arrays.asList(values()).stream().filter(d -> d.count == count).findFirst().orElse(null);
     }
-
 }

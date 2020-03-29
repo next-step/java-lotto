@@ -12,15 +12,12 @@ public class LottoAutoGame {
 
     public static void main(String[] args) {
         int buyLottoTotalPrice = InputView.askTotalPrice();
-
         BuyInfo buyInfo = SetLottoGame.startLotto(buyLottoTotalPrice);
         ResultView.printBuyList(buyInfo);
-
         List<Integer> winnerLottoNumber = InputView.askWinnerLottoNumber();
-
-        ResultLottoGame.resultLotto(buyInfo,winnerLottoNumber);
-
-        ResultView.printResult(buyInfo);
-
+        ResultInfo resultInfo = ResultLottoGame.resultLotto(buyInfo, winnerLottoNumber);
+        resultInfo = ResultLottoGame.setResultString(resultInfo);
+        resultInfo = ResultLottoGame.getProfitRate(resultInfo);
+        ResultView.printResult(resultInfo);
     }
 }

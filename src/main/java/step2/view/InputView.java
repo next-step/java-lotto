@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class InputView {
     private static Scanner scanner;
+    private static final String SPLIT_SIGN = ",";
 
     public static int askTotalPrice() {
         System.out.println("구입금액을 입력해 주세요");
         scanner = new Scanner(System.in);
-
         return scanner.nextInt();
     }
 
@@ -18,19 +18,31 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         scanner = new Scanner(System.in);
         List<Integer> winnerLottoNumber = new ArrayList<>();
-
-        String[] splitString = split(scanner.nextLine());
-
-        for (int i = 0; i < splitString.length; i++) {
-            winnerLottoNumber.add(Integer.parseInt(splitString[i]));
-        }
-
-
-
+        setWinnerLottoNumber(winnerLottoNumber);
         return winnerLottoNumber;
     }
 
+    private static void setWinnerLottoNumber(List<Integer> winnerLottoNumber) {
+        String[] splitString = split(scanner.nextLine());
+        for (int i = 0; i < splitString.length; i++) {
+            int winnerNumber = validateWinnerNumber(splitString[i]);
+            winnerLottoNumber.add(winnerNumber);
+        }
+    }
+
+    private static int validateWinnerNumber(String splitString) {
+        int winnerNumber = Integer.parseInt(splitString);
+        if (winnerNumber > 45 || winnerNumber < 1) {
+            throw new IllegalArgumentException("당첨번호형식이 틀렸습니다.");
+        }
+        return winnerNumber;
+    }
+
     private static String[] split(String nextLine) {
-        return nextLine.split(",");
+        String[] splitString = nextLine.split(SPLIT_SIGN);
+        if (splitString.length != 6) {
+            throw new IllegalArgumentException("당첨번호형식이 틀렸습니다.");
+        }
+        return splitString;
     }
 }

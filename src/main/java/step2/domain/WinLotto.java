@@ -10,6 +10,6 @@ public class WinLotto {
     }
 
     public static int match(List<Integer> buyLottoList) {
-        return (int) winLottoNumber.stream().filter(number->buyLottoList.contains(number)).count();
+        return (int) winLottoNumber.stream().filter(number -> buyLottoList.contains(number)).count();
     }
 }

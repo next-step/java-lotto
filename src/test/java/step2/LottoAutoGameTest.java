@@ -61,11 +61,4 @@ public class LottoAutoGameTest {
     public void resultTest() {
         assertThat(WinInformation.matchWinInformation(3).getPrice()).isEqualTo(BigDecimal.valueOf(5000));
     }
-
-    @Test
-    @DisplayName("수익률테스트")
-    public void profitRateTest(){
-
-        assertThat(ResultLottoGame.getProfitRate(50000,5000)).isEqualTo(0.1);
-    }
 }
