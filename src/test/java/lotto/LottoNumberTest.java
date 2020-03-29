@@ -11,7 +11,6 @@ public class LottoNumberTest {
     @Test
     void canCreateLottoNumbers() {
         LottoNumber lottoNumber = new LottoNumber();
-
         assertThat(lottoNumber.getLottoNumbers().size()).isSameAs(6);
     }
 

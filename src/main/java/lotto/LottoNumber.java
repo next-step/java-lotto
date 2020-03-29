@@ -1,7 +1,6 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,7 +11,14 @@ public class LottoNumber {
     private List<Integer> lottoNumbers;
 
     public LottoNumber() {
-        lottoNumbers = generateNumbers();
+        lottoNumbers = shuffleNumbers(generateNumbers());
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers.stream()
+                .limit(6)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private List<Integer> generateNumbers() {
@@ -22,15 +28,8 @@ public class LottoNumber {
                 .collect(Collectors.toList());
     }
 
-    private void shuffleNumber() {
-        Collections.shuffle(lottoNumbers);
-    }
-
-    public List<Integer> getLottoNumbers() {
-        shuffleNumber();
-
-        return lottoNumbers.stream()
-                .filter(lottoNumberCount -> lottoNumberCount <= 6)
-                .collect(Collectors.toList());
+    private List<Integer> shuffleNumbers(List<Integer> generatedNumber) {
+        Collections.shuffle(generatedNumber);
+        return new ArrayList<>(generatedNumber);
     }
 }
