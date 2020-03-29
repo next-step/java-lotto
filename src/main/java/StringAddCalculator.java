@@ -1,7 +1,7 @@
 public class StringAddCalculator {
 
     public static final String EMPTY_STRING = "";
-    public static final String DELIMITER = ",";
+    public static final String DELIMITER = ",|:";
 
     public static int splitAndSum(String formula) {
         if (isNullOrEmpty(formula)) {
