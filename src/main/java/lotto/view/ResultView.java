@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.controller.LottoGame;
-import lotto.model.Result;
+import lotto.model.Rank;
 import lotto.model.MyLottos;
 
 import java.util.List;
@@ -28,31 +28,31 @@ public class ResultView {
         System.out.println("당첨 통계");
         System.out.println("=========================================");
 
-        for (Result result : Result.values()) {
-            printStatistic(myLottos, winningLotto, result, bonusBall);
+        for (Rank rank : Rank.values()) {
+            printStatistic(myLottos, winningLotto, rank, bonusBall);
         }
     }
 
     private static void printStatistic(MyLottos myLottos, List<Integer> winningLotto,
-                                       Result result, int bonusBall) {
-        printStatisticsExceptSecond(myLottos, winningLotto, result, bonusBall);
-        printStatisticForSecond(myLottos, winningLotto, result, bonusBall);
+                                       Rank rank, int bonusBall) {
+        printStatisticsExceptSecond(myLottos, winningLotto, rank, bonusBall);
+        printStatisticForSecond(myLottos, winningLotto, rank, bonusBall);
 
     }
 
     private static void printStatisticsExceptSecond(MyLottos myLottos, List<Integer> winningLotto,
-                                                    Result result, int bonusBall) {
-        if (!result.equals(Result.SECOND)){
-            System.out.print(result.getMatchCount() + "개 일치 (" + result.getCashPrize() + "원) : ");
-            System.out.println(myLottos.findCountOfNumMatching(winningLotto, result, bonusBall) + "개");
+                                                    Rank rank, int bonusBall) {
+        if (!rank.equals(Rank.SECOND)){
+            System.out.print(rank.getMatchCount() + "개 일치 (" + rank.getCashPrize() + "원) : ");
+            System.out.println(myLottos.findCountOfNumMatching(winningLotto, rank, bonusBall) + "개");
         }
     }
 
     private static void printStatisticForSecond(MyLottos myLottos, List<Integer> winningLotto,
-                                                Result result, int bonusBall){
-        if (result.equals(Result.SECOND)){
-            System.out.print(result.getMatchCount() + "개 일치, 보너스볼 일치(" + result.getCashPrize() + "원) : ");
-            System.out.println(myLottos.findCountOfNumMatching(winningLotto, result, bonusBall) + "개");
+                                                Rank rank, int bonusBall){
+        if (rank.equals(Rank.SECOND)){
+            System.out.print(rank.getMatchCount() + "개 일치, 보너스볼 일치(" + rank.getCashPrize() + "원) : ");
+            System.out.println(myLottos.findCountOfNumMatching(winningLotto, rank, bonusBall) + "개");
         }
     }
 
