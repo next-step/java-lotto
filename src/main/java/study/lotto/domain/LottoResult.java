@@ -14,10 +14,9 @@ public class LottoResult {
 
     private void setWinners() {
         this.winningTickets = new HashMap<>();
-        this.winningTickets.put(LottoRank.FIRST, new ArrayList<>());
-        this.winningTickets.put(LottoRank.SECOND, new ArrayList<>());
-        this.winningTickets.put(LottoRank.THIRD, new ArrayList<>());
-        this.winningTickets.put(LottoRank.FOURTH, new ArrayList<>());
+        for(LottoRank lottoRank: LottoRank.values()) {
+            this.winningTickets.put(lottoRank, new ArrayList<>());
+        }
     }
 
     public void addWinningTicket(LottoRank lottoRank, LottoTicket lottoTicket) {
