@@ -11,13 +11,14 @@ import java.util.List;
 public class MainApplication {
     public static void main(String[] args) {
         Money money = InputScanner.getPurchasePrice();
-        int bonusBall = InputScanner.getBonusBall();
 
         LottoGame lottoGame = new LottoGame(InputView.of(money));
         lottoGame.start();
         ResultView.printMyLottos(lottoGame);
 
         List<Integer> winningLotto = InputScanner.getWinningLotto();
+        int bonusBall = InputScanner.getBonusBall();
+
         ResultView.printResult(lottoGame, winningLotto, bonusBall);
     }
 }

@@ -7,6 +7,7 @@ import lotto.view.InputView;
 
 public class LottoGame {
     private int autoLottoCount;
+    private int bonusBall;
     private MyLottos myLottos;
 
     public LottoGame(InputView inputView) {
