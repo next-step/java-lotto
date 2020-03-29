@@ -4,9 +4,9 @@ import lotto.lottogenerator.LottoNumberPool;
 import lotto.model.Money;
 import lotto.model.Rank;
 import lotto.model.mylottos.MyLottos;
-import lotto.model.result.EarningRate;
-import lotto.model.result.GameResult;
-import lotto.model.result.MatchingResult;
+import lotto.model.gameresult.EarningRate;
+import lotto.model.gameresult.GameResult;
+import lotto.model.gameresult.MatchingResult;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.HashMap;

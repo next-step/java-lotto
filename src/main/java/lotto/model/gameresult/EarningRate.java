@@ -1,4 +1,4 @@
-package lotto.model.result;
+package lotto.model.gameresult;
 
 public class EarningRate {
     private Double earningRate;
