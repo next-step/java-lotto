@@ -20,6 +20,10 @@ public class LottoResult {
         chart.put(lottoRank, chart.get(lottoRank) + 1);
     }
 
+    public int getMatchCount(LottoRank lottoRank) {
+        return chart.get(lottoRank);
+    }
+
     public Map<LottoRank, Integer> getChart() {
         return Collections.unmodifiableMap(chart);
     }
