@@ -6,6 +6,6 @@ import step2.view.InputView;
 public class Main {
 
     public static void main(String[] args) {
-        LottoMachine.operate(InputView.getInstance());
+        LottoMachine.getInstance().operate(InputView.getInstance());
     }
 }

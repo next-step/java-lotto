@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 public class LottoMachine {
     private static ResultView resultView;
-    private static LottoMachine lottoMachine;
+    private static final LottoMachine lottoMachine = new LottoMachine();
 
-    private LottoMachine() {}
+    private LottoMachine() {
+        this.resultView = new ResultView();
+    }
 
     public void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
@@ -92,5 +94,9 @@ public class LottoMachine {
             count++;
         }
         return count;
+    }
+
+    public static LottoMachine getInstance() {
+        return lottoMachine;
     }
 }
