@@ -22,9 +22,13 @@ public class LottoNumber {
     }
 
     private void validateRange(int lottoNumber) {
-        if (lottoNumber < LOTTO_NUM_MIN || LOTTO_NUM_MAX < lottoNumber) {
+        if (isValidRange(lottoNumber)) {
             throw new LottoNumberRangeException();
         }
+    }
+
+    private boolean isValidRange(int lottoNumber) {
+        return lottoNumber < LOTTO_NUM_MIN || LOTTO_NUM_MAX < lottoNumber;
     }
 
     @Override
