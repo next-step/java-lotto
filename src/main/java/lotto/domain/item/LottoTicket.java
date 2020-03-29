@@ -25,6 +25,7 @@ public class LottoTicket extends Lotto {
     }
 
     public int getRank(WinLottoTicket winLottoTicket) {
-        return getLuckyNumberMatchCount(winLottoTicket);
+        int matchCount = getLuckyNumberMatchCount(winLottoTicket);
+        return matchCount;
     }
 }

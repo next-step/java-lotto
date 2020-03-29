@@ -45,4 +45,43 @@ class LottoPrizeTest {
                 () -> assertThat(LottoPrize.MISS.getMatchCount()).isEqualTo(0)
         );
     }
+
+    @DisplayName("enum 이름이 동일한지 비교")
+    @Test
+    public void compareName() throws Exception {
+        //given
+        LottoPrize first = LottoPrize.FIRST;
+        LottoPrize compare1 = LottoPrize.FIRST;
+        LottoPrize compare2 = LottoPrize.SECOND;
+
+        //then
+        assertAll(
+                () -> assertThat(compare1.isEquals(compare1)).isTrue(),
+                () -> assertThat(compare1.isEquals(compare2)).isFalse()
+        );
+    }
+
+    @DisplayName("로또 등수 판단")
+    @Test
+    public void findRank() throws Exception {
+        //given
+        LottoPrize first1 = LottoPrize.findRank(6, false);
+        LottoPrize first2 = LottoPrize.findRank(6, false);
+        LottoPrize second = LottoPrize.findRank(5, true);
+        LottoPrize third = LottoPrize.findRank(5, false);
+        LottoPrize fourth = LottoPrize.findRank(4, false);
+        LottoPrize fifth = LottoPrize.findRank(3, false);
+        LottoPrize miss = LottoPrize.findRank(2, false);
+
+        //then
+        assertAll(
+                () -> assertThat(first1.isEquals(LottoPrize.FIRST)).isTrue()
+                , () -> assertThat(first2.isEquals(LottoPrize.FIRST)).isTrue()
+                , () -> assertThat(second.isEquals(LottoPrize.SECOND)).isTrue()
+                , () -> assertThat(third.isEquals(LottoPrize.THIRD)).isTrue()
+                , () -> assertThat(fourth.isEquals(LottoPrize.FOURTH)).isTrue()
+                , () -> assertThat(fifth.isEquals(LottoPrize.FIFTH)).isTrue()
+                , () -> assertThat(miss.isEquals(LottoPrize.MISS)).isTrue()
+        );
+    }
 }
