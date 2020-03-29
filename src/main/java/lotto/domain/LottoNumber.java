@@ -11,7 +11,7 @@ public class LottoNumber {
     }
 
     private void verify(int number) {
-        if (number < LottoRule.getLottoStartNumber() || number > LottoRule.getLottoEndNumber()) {
+        if (number < LottoMachine.LOTTO_START_NUMBER || number > LottoMachine.LOTTO_END_NUMBER) {
             throw new IllegalArgumentException(String
                     .format("%d는 1~45 숫자 사이의 번호가 아닙니다", number));
         }

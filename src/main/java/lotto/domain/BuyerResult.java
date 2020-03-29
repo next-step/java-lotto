@@ -1,19 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.LottoRule.WINNING_VALUE;
-
 import java.util.List;
 
 public class BuyerResult {
-    private List<WINNING_VALUE> winningResult;
+    private List<Rank> winningResult;
     private double profitRate;
 
-    public BuyerResult(List<WINNING_VALUE> winningResult, double profitRate) {
+    public BuyerResult(List<Rank> winningResult, double profitRate) {
         this.winningResult = winningResult;
         this.profitRate = profitRate;
     }
 
-    public List<WINNING_VALUE> getWinningResult() {
+    public List<Rank> getWinningResult() {
         return winningResult;
     }
 
