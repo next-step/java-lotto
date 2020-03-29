@@ -9,6 +9,10 @@
 #### 1. List<Intger> getNumbers 
 
 - 로또넘버 getter
+
+### LottoWinningNumber.class
+
+- LottoNumber 를 상속하고 보너스 넘버를 추가로 갖고 있는 dto
  
 ### LottoResult.class
 
@@ -31,7 +35,7 @@
 
 ### LottoCheckerClass
 
-#### 1. Constructor(LottoNumber winningNumber);
+#### 1. Constructor(LottoWinningNumber winningNumber);
 
 - 생성자 (당첨번호 입력 받음)
 

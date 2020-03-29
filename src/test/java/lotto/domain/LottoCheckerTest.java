@@ -17,31 +17,18 @@ class LottoCheckerTest {
 
 	@Test
 	void isEqualTest() {
-		assertThat(new LottoChecker(new LottoNumber(1, 2, 3, 4, 5, 6), 14000))
-				.isEqualTo(new LottoChecker(new LottoNumber(1, 2, 3, 4, 5, 6), 14000));
+		assertThat(new LottoChecker(new LottoWinningNumber(7, 1, 2, 3, 4, 5, 6), 14000))
+				.isEqualTo(new LottoChecker(new LottoWinningNumber(7, 1, 2, 3, 4, 5, 6), 14000));
 	}
 
-	@ParameterizedTest
-	@MethodSource("provideWinningResultTestArgs")
-	void getWinningResultTest(List<Integer> winningNumbers, List<Integer> drawNumbers, LottoRank exactRank) {
-		LottoChecker lottoChecker = new LottoChecker(new LottoNumber(winningNumbers), 1000);
+	@Test
+	void getWinningResultTest() {
+		LottoChecker lottoChecker = new LottoChecker(new LottoWinningNumber(7,1,2,3,4,5,6), 1000);
 
-		assertThat(lottoChecker.getWinningResult(new LottoNumber(drawNumbers)))
-				.isEqualTo(new LottoResult(Collections.singletonMap(exactRank, 1L), 1000));
-	}
-
-	private static Stream<Arguments> provideWinningResultTestArgs(){
-		return Stream.of(
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,5,6),LottoRank.FIRST),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,5,7),LottoRank.THIRD),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,4,7,8),LottoRank.FOURTH),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,3,7,8,9),LottoRank.FIFTH),
-				Arguments.of(makeListFromIntegers(1,2,3,4,5,6),makeListFromIntegers(1,2,7,8,9,10),null)
-		);
-	}
-
-	private static List<Integer> makeListFromIntegers(Integer... ints){
-		return Arrays.stream(ints)
-				.collect(Collectors.toList());
+		assertThat(
+				lottoChecker.getWinningResult(
+						new LottoNumber(1,2,3,4,5,6),
+						new LottoNumber(1,2,3,4,5,6)))
+				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FIRST, 2L), 1000));
 	}
 }

@@ -22,13 +22,17 @@ public class LottoNumber {
 		this.numbers = Collections.unmodifiableList(numbers);
 
 		if (isInvalidLottoNumbers(numbers)) {
-			throw new IllegalArgumentException(String.format("Instantiate LottoNumber failed. " +
-					"numbers must be distinct %d numbers range %d~%d : numbers=%s",
-					NUMBER_SIZE,
-					LOWEST_NUMBER,
-					HIGHEST_NUMBER,
-					StringFormatter.listToString(numbers)));
+			throwIllegalException(numbers);
 		}
+	}
+
+	private void throwIllegalException(List<Integer> numbers) {
+		throw new IllegalArgumentException(String.format("Instantiate LottoNumber failed. " +
+						"numbers must be distinct %d numbers range %d~%d : numbers=%s",
+				NUMBER_SIZE,
+				LOWEST_NUMBER,
+				HIGHEST_NUMBER,
+				StringFormatter.listToString(numbers)));
 	}
 
 	private boolean isInvalidLottoNumbers(List<Integer> numbers) {
@@ -38,11 +42,16 @@ public class LottoNumber {
 				.count() != NUMBER_SIZE;
 	}
 
-	LottoRank matchLottoNumber(LottoNumber winningNumber) {
-		int correctNumbers = (int) this.numbers.stream()
-				.filter(winningNumber.numbers::contains)
+	LottoRank matchLottoNumber(LottoWinningNumber winningNumber) {
+		int correctNumbers = getMatchElectedNumberCount(winningNumber);
+		boolean matchBonus = this.numbers.contains(winningNumber.getBonusNumber());
+		return LottoRank.getFromCorrectNumbers(correctNumbers, matchBonus);
+	}
+
+	private int getMatchElectedNumberCount(LottoWinningNumber winningNumber) {
+		return (int) this.numbers.stream()
+				.filter(winningNumber.getNumbers()::contains)
 				.count();
-		return LottoRank.getFromCorrectNumbers(correctNumbers,false);
 	}
 
 	public List<Integer> getNumbers() {
