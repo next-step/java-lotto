@@ -21,21 +21,17 @@ public enum LottoTier {
     }
 
     public static LottoTier getTier(int matchedNumberCount) {
-        if(matchedNumberCount == 6) {
-            return FIRST;
+        for (LottoTier lottoTier : LottoTier.values()) {
+            return getIfSameMatchedNumberCount(lottoTier, matchedNumberCount);
         }
-        else if(matchedNumberCount == 5) {
-            return SECOND;
+        return LottoTier.NONE;
+    }
+
+    private static LottoTier getIfSameMatchedNumberCount(LottoTier lottoTier, int matchedNumberCount) {
+        if(lottoTier.getMatchedNumberCount() == matchedNumberCount) {
+            return lottoTier;
         }
-        else if(matchedNumberCount == 4) {
-            return THIRD;
-        }
-        else if(matchedNumberCount == 3) {
-            return FOURTH;
-        }
-        else {
-            return NONE;
-        }
+        return LottoTier.NONE;
     }
 
     public int getMatchedNumberCount() {
