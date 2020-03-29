@@ -13,6 +13,7 @@ public class LottoNumbers {
     public LottoNumbers(final String input) {
         this(newInstanceFromInput(input));
     }
+
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         checkLottoNumberSize(lottoNumbers);
         Collections.sort(lottoNumbers);
@@ -22,9 +23,7 @@ public class LottoNumbers {
     public int match(final LottoNumbers winningLotteNumbers) {
         List<LottoNumber> source = this.deepCopy();
         List<LottoNumber> win = winningLotteNumbers.deepCopy();
-
         source.removeAll(win);
-
         return LOTTO_NUMBER_MAX_SIZE - source.size();
     }
     
