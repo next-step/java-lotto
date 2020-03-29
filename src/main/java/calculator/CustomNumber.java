@@ -14,7 +14,7 @@ public class CustomNumber {
 
     private void verifyNotNegative(int number) {
         if (number < MIN_NUMBER) {
-            throw new RuntimeException("숫자에 음수 값이 들어올 수 없습니다.");
+            throw new IllegalArgumentException(String.format("숫자에 음수 값(%d)이 들어올 수 없습니다.", number));
         }
     }
 
