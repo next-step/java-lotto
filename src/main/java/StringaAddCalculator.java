@@ -1,14 +1,14 @@
 public class StringaAddCalculator {
 
     public static int splitAndSum(String formula) {
-        if (isNotEmpty(formula)) {
+        if (isNullOrEmpty(formula)) {
             return 0;
         }
 
         return 1;
     }
 
-    private static boolean isNotEmpty(String formula) {
-        return formula != null || !"".equals(formula);
+    private static boolean isNullOrEmpty(String formula) {
+        return formula == null || "".equals(formula);
     }
 }
