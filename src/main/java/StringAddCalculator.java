@@ -3,9 +3,9 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
-    public static final String EMPTY_STRING = "";
-    public static final String DELIMITER = ",|:";
-    public static final String REGEX = "//(.)\n(.*)";
+    private static final String EMPTY_STRING = "";
+    private static final String DELIMITER = ",|:";
+    private static final String REGEX = "//(.)\n(.*)";
 
     public static int splitAndSum(String formula) {
         if (isNullOrEmpty(formula)) {
