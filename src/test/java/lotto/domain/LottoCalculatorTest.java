@@ -29,14 +29,18 @@ public class LottoCalculatorTest {
                 new Lotto(Arrays.asList(13, 14, 18, 21, 23, 35)),
                 new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)),
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
+
     }
 
     @Test
     void getWinningPercentage() {
+        int investment = 14_000;
+        String winningPercentageValue = "0.35";
+
         LottoCalculator lottoCalculator = new LottoCalculator(lastWeekLotto, lottos);
 
-        String winningPercentage = lottoCalculator.getWinningPercentage(14000).toString();
+        String winningPercentage = lottoCalculator.getWinningPercentage(investment).toString();
 
-        assertThat(winningPercentage).isEqualTo("0.35");
+        assertThat(winningPercentage).isEqualTo(winningPercentageValue);
     }
 }
