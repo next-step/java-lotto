@@ -57,28 +57,4 @@ public class LottoTest {
     void createFailByInvalidLottoNumber(String lottoNumber) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumber));
     }
-
-    @DisplayName("당첨 확인")
-    @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 6:6"}, delimiter = ':')
-    void checkWinning(String lottoNumber, String winningNumber, int expected) {
-        Lotto buyingLotto = new Lotto(lottoNumber);
-        Lotto winningLotto = new Lotto(winningNumber);
-
-        int actual = winningLotto.checkWinning(buyingLotto).getMatchCount();
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @DisplayName("2등 당첨 확인")
-    @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 7:6"}, delimiter = ':')
-    void checkSecond(String lottoNumber, String winningNumber, int secondNumber) {
-        Lotto buyingLotto = new Lotto(lottoNumber);
-        Lotto winningLotto = new Lotto(winningNumber);
-
-        int actual = winningLotto.checkWinning(buyingLotto, secondNumber).name();
-
-        assertThat(actual).isEqualTo(WinningType.SECOUND.name());
-    }
 }

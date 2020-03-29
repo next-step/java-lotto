@@ -2,12 +2,13 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public enum WinningType {
+    MISS_MATCH(0, BigDecimal.ZERO),
     THREE_MATCH(3, BigDecimal.valueOf(5_000)),
     FOUR_MATCH(4, BigDecimal.valueOf(50_000)),
     FIVE_MATCH(5, BigDecimal.valueOf(1_500_000)),
+    SECOND(5, BigDecimal.valueOf(30_000_000)),
     SIX_MATCH(6, BigDecimal.valueOf(2_000_000_000));
 
     private int matchCount;
@@ -22,11 +23,15 @@ public enum WinningType {
         this.amount = amount;
     }
 
-    public static WinningType findLottoWinningtype(long matchCount) {
+    public static WinningType findLottoWinningtype(long matchCount, boolean bonusMatch) {
+        if (isEqualMatchCount(matchCount, FIVE_MATCH) || bonusMatch) {
+            return WinningType.SECOND;
+        }
+
         return Arrays.asList(values()).stream()
                 .filter(lottoMatchType -> isEqualMatchCount(matchCount, lottoMatchType))
                 .findFirst()
-                .orElse(null);
+                .orElse(MISS_MATCH);
     }
 
     private static boolean isEqualMatchCount(long matchCount, WinningType lottoMatchType) {
