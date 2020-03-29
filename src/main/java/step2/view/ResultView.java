@@ -60,9 +60,7 @@ public class ResultView {
         printYield(result, money);
     }
 
-    public void printYield(LottoResult result, Money money) {
-        double yield = result.getTotalPrize() / Long.valueOf(money.getMoney());
-
-        ViewUtils.printLine(String.format(YIELD_INFORMATION, yield));
+    private void printYield(LottoResult result, Money money) {
+        ViewUtils.printLine(String.format(YIELD_INFORMATION, result.getYield(money)));
     }
 }

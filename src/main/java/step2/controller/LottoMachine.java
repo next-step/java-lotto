@@ -4,7 +4,6 @@ import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,7 @@ public class LottoMachine {
         Lottos lottos = LottoMachine.createLottos(money);
         Lotto winningLotto = LottoMachine.createLotto(inputView.getWinningNumbers());
 
-        resultView.printResult(checkLottoNumber(winningLotto, lottos), money);
+        resultView.printResult(makeLottoResult(winningLotto, lottos), money);
     }
 
     public static Lottos createLottos(Money money) {
@@ -67,7 +66,7 @@ public class LottoMachine {
         return numbers;
     }
 
-    public static LottoResult checkLottoNumber(Lotto winningLotto, Lottos lottos) {
+    public static LottoResult makeLottoResult(Lotto winningLotto, Lottos lottos) {
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 
         int firstCount = 0;

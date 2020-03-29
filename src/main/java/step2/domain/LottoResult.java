@@ -22,4 +22,8 @@ public class LottoResult {
         }
         return totalPrize;
     }
+
+    public double getYield(Money money) {
+        return getTotalPrize() / Long.valueOf(money.getMoney());
+    }
 }
