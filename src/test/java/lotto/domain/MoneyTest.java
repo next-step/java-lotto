@@ -90,4 +90,10 @@ public class MoneyTest {
         assertThat(howManyBuyItem).isEqualTo(count);
     }
 
+    @DisplayName("아이템의 가격과 구매 개수를 이용하여 총 구매 금액을 구한다")
+    @ParameterizedTest
+    @CsvSource(value = {"100:3:300", "500:2:1000", "1500:3:4500"}, delimiter = ':')
+    public void buyItemAmount_success(double itemPrice, int buyCount, double expect) throws Exception {
+        assertThat(Money.buyItemAmount(itemPrice, buyCount).getMoney()).isEqualTo(expect);
+    }
 }
