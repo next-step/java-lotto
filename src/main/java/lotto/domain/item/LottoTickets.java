@@ -14,9 +14,7 @@ public class LottoTickets implements Cloneable {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        List<LottoTicket> tmp = new ArrayList<>();
-        tmp.addAll(tickets);
-        this.tickets = Collections.unmodifiableList(tmp);
+        this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
     }
 
     private int finWinLotto(LottoPrize lottoPrize, Item winTicket) {
