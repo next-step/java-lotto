@@ -8,7 +8,9 @@ import java.util.stream.Stream;
 
 public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final List<Integer> LOTTO_NUMBERS = Stream.iterate(1, n -> n + 1).limit(45).collect(Collectors.toList());
+    private static final List<Integer> LOTTO_NUMBERS = Stream.iterate(1, n -> n + 1)
+            .limit(45)
+            .collect(Collectors.toList());
 
     private LottoGenerator() {
     }
