@@ -51,14 +51,14 @@ class LottoGameTest {
     @Test
     public void getEarningRate_success() throws Exception {
         //given
-        LottoTickets lottoTickets = new LottoTickets(ticketList);
-        LottoGame lottoGame = new LottoGame(new Money(14000), lottoTickets);
+        final Money money = new Money(4000);
+        LottoGame lottoGame = new LottoGame(money, new LottoTickets(ticketList));
         WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
 
         //when
         LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
 
         //then
-        assertThat(earningRate.getEarningRate()).isEqualTo(0.35);
+        assertThat(earningRate.getEarningRate()).isEqualTo(1.25);
     }
 }

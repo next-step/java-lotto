@@ -16,17 +16,14 @@ public class LottoGame {
 
     private static final double LOTTO_PRICE = 1000;
 
-    private Money money;
     private int playGameCount;
     private LottoTickets lottoTickets;
 
     public LottoGame(Money money) {
-        this.money = money;
         this.playGameCount = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
     }
 
     public LottoGame(Money money, LottoTickets lottoTickets) {
-        this.money = money;
         this.lottoTickets = lottoTickets;
     }
 
@@ -70,7 +67,7 @@ public class LottoGame {
     public LottoDto getEarningRate(WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
         Money prize = getAllEarningPrize(winTicket);
-        int howManyBuyItem = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
+        int howManyBuyItem = this.lottoTickets.size();
         Money buyAmount = new Money(LOTTO_PRICE).multiply(howManyBuyItem);
 
         double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
