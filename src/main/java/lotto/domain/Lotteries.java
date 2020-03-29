@@ -21,14 +21,14 @@ public class Lotteries {
         return lottoNumbers;
     }
 
-    public Map<LottoRank, Integer> analyzeWin(final LottoNumbers winningLotteNumbers) {
+    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers) {
         LottoResult lottoResult = new LottoResult();
         LottoRank lottoRank;
         for (LottoNumbers purchases : lottoNumbers) {
             lottoRank = LottoRank.findRank(purchases.match(winningLotteNumbers));
             lottoResult.increase(lottoRank);
         }
-        return lottoResult.getChart();
+        return lottoResult;
     }
 
     @Override
