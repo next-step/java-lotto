@@ -5,6 +5,9 @@ import java.util.*;
 public class LottoRule {
     private static final int LOTTO_NUMBER_TOTAL = 6;
 
+    private LottoRule() {
+    }
+
     public static boolean isComplianceNumberRule(List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) ||
                 lottoNumbers.size() != LOTTO_NUMBER_TOTAL) {
