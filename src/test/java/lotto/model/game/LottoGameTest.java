@@ -47,4 +47,18 @@ public class LottoGameTest {
         assertThat(result.getMatchingResult().findMatchCount(FIRST)).isEqualTo(1l);
         assertThat(result.getMatchingResult().findMatchCount(SECOND)).isEqualTo(1l);
     }
+
+    @DisplayName("로또 게임의 getResult 메소드를 호출하면, earningRate를 알 수 있다.")
+    @Test
+    void getEarningRateTest() {
+        //given
+        MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2));
+        LottoGame lottoGame = new LottoGame(money.findLottoCountToBuy(), myLottos, WINNING_LOTTO);
+
+        //when
+        GameResult result = lottoGame.getResult(WINNING_LOTTO);
+
+        //then
+        assertThat(result.getEarningRate().getEarningRate()).isEqualTo(101500000);
+    }
 }
