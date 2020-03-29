@@ -12,24 +12,24 @@ import java.util.List;
 
 public class LottoController {
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        inputView.inputPrice();
+        long price = InputView.inputPrice();
 
         Buyer buyer = new Buyer();
-        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(inputView.getPrice());
+        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(price);
 
-        ResultView resultView = new ResultView();
-        resultView.printLottoTickets(lottoTickets);
+        ResultView.printLottoTickets(lottoTickets);
+        int[] winningNumbers = InputView.inputWinningNumbers();
 
-        inputView.inputWinningNumbers();
+        BuyerResult buyerResult = buyer.getResult(createLottoTicket(winningNumbers));
 
-        int[] winningNumbers = inputView.getWinningNumbers();
+        ResultView.printWinningStatistics(buyerResult);
+    }
+
+    private static LottoTicket createLottoTicket(int[] winningNumbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int winningNumber : winningNumbers) {
             lottoNumbers.add(LottoNumber.of(winningNumber));
         }
-        BuyerResult buyerResult = buyer.getResult(new LottoTicket(lottoNumbers));
-
-        resultView.printWinningStatistics(buyerResult);
+        return new LottoTicket(lottoNumbers);
     }
 }

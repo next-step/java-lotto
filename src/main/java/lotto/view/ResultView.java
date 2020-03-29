@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ResultView {
-    private static final String ENTER = "\n";
     private static final String BUY_COUNT_FORMAT = "%d개를 구매했습니다.";
     private static final String LOTTO_TICKET_FORMAT = "[%d, %d, %d, %d, %d, %d]";
     private static final String WINNING_STATISTICS_TITLE = "당첨 통계\n---------";
@@ -19,16 +18,13 @@ public class ResultView {
     private static final String RESULT_SOSO = "(기준이 1이기 때문에 결과적으로 쌤쌤이라는 의미임)";
     private static final String RESULT_BAD = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-
-    private Scanner scanner = new Scanner(System.in);
-
-    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
         System.out.println(String.format(BUY_COUNT_FORMAT, lottoTickets.size()));
         lottoTickets.forEach(lottoTicket ->
                 System.out.println(String.format(LOTTO_TICKET_FORMAT, lottoTicket.getLottoNumbers().toArray())));
     }
 
-    public void printWinningStatistics(BuyerResult buyerResult) {
+    public static void printWinningStatistics(BuyerResult buyerResult) {
         System.out.println(WINNING_STATISTICS_TITLE);
         List<WINNING_VALUE> winningResult = buyerResult.getWinningResult();
         Arrays.stream(WINNING_VALUE.values())
@@ -39,7 +35,7 @@ public class ResultView {
         printProfitRateDescription(profitRate);
     }
 
-    private void printWinningStatistics(List<WINNING_VALUE> winningResult, WINNING_VALUE winningValue) {
+    private static void printWinningStatistics(List<WINNING_VALUE> winningResult, WINNING_VALUE winningValue) {
         long count = winningResult.stream()
                 .filter(value -> value == winningValue)
                 .count();
@@ -49,7 +45,7 @@ public class ResultView {
                 count));
     }
 
-    private void printProfitRateDescription(double profitRate) {
+    private static void printProfitRateDescription(double profitRate) {
         if (profitRate > 1) {
             System.out.print(RESULT_GOOD);
         }
