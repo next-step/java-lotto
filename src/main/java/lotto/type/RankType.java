@@ -1,18 +1,20 @@
 package lotto.type;
 
+import java.util.function.Function;
+
 public enum RankType {
-    NO_RANK(0, 0),
-    RANK1(2_000_000_000, 6),
-    RANK2(1_500_000, 5),
-    RANK3(50_000, 4),
-    RANK4(5_000, 3);
+    NO_RANK(0, condition -> condition < 3),
+    RANK1(2_000_000_000, condition -> condition == 6),
+    RANK2(1_500_000, condition -> condition == 5),
+    RANK3(50_000, condition -> condition == 4),
+    RANK4(5_000, condition -> condition == 3);
 
     private int reward;
-    private int condition;
+    private Function<Integer, Boolean> expression;
 
-    RankType(int reward, int condition) {
+    RankType(int reward, Function<Integer, Boolean> expression) {
         this.reward = reward;
-        this.condition = condition;
+        this.expression = expression;
     }
 
     public int getTotalReward(int count) {
@@ -20,22 +22,12 @@ public enum RankType {
     }
 
     public static RankType getRank(int condition) {
-        if (condition < RANK4.condition) {
-            return NO_RANK;
+        for (RankType value : RankType.values()) {
+            if (value.expression.apply(condition)){
+                return value;
+            }
         }
 
-        if (condition == RANK4.condition) {
-            return RANK4;
-        }
-
-        if (condition == RANK3.condition) {
-            return RANK3;
-        }
-
-        if (condition == RANK2.condition) {
-            return RANK2;
-        }
-
-        return RANK1;
+        return RankType.NO_RANK;
     }
 }
