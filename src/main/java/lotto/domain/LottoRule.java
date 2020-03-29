@@ -53,5 +53,9 @@ public class LottoRule {
         public long getAmount() {
             return amount;
         }
+
+        public int getMatchCount() {
+            return matchCount;
+        }
     }
 }
