@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Lotteries {
@@ -20,12 +21,14 @@ public class Lotteries {
         return lottoNumbers;
     }
 
-    public LottoRank analyzeWin(final LottoNumbers winningLotteNumbers) {
-        LottoRank lottoRank = null;
+    public Map<LottoRank, Integer> analyzeWin(final LottoNumbers winningLotteNumbers) {
+        LottoResult lottoResult = new LottoResult();
+        LottoRank lottoRank;
         for (LottoNumbers purchases : lottoNumbers) {
             lottoRank = LottoRank.findRank(purchases.match(winningLotteNumbers));
+            lottoResult.increase(lottoRank);
         }
-        return lottoRank;
+        return lottoResult.getChart();
     }
 
     @Override
