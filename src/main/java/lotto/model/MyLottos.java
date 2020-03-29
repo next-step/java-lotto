@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.model.MatchingResult.*;
+import static lotto.model.Result.*;
 
 public class MyLottos {
     private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
@@ -14,14 +14,14 @@ public class MyLottos {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public long findCountOfNumMatching(List<Integer> winningLotto, MatchingResult matchingResult, int bonusBall) {
-        if (matchingResult.equals(SECOND)) {
+    public long findCountOfNumMatching(List<Integer> winningLotto, Result result, int bonusBall) {
+        if (result.equals(SECOND)) {
             return findCountOfSecond(winningLotto, bonusBall);
         }
-        if (matchingResult.equals(THIRD)) {
+        if (result.equals(THIRD)) {
             return findCountOfThird(winningLotto, bonusBall);
         }
-        return findCountOfNumMatchingExceptThirdAndSecond(winningLotto, matchingResult);
+        return findCountOfNumMatchingExceptThirdAndSecond(winningLotto, result);
     }
 
     private long findCountOfSecond(List<Integer> winningLotto, int bonusBall) {
@@ -40,26 +40,26 @@ public class MyLottos {
                 .count();
     }
 
-    private long findCountOfNumMatchingExceptThirdAndSecond(List<Integer> winningLotto, MatchingResult matchingResult) {
+    private long findCountOfNumMatchingExceptThirdAndSecond(List<Integer> winningLotto, Result result) {
         return lottoNumbers.stream()
                 .map(lottoNumber -> lottoNumber.findHowManyMatch(winningLotto))
-                .filter(count -> matchingResult.getMatchCount() == count)
+                .filter(count -> result.getMatchCount() == count)
                 .count();
     }
 
     public Money calculateAllPrizeMoney(List<Integer> winningLotto, int bonusBall) {
         long money = 0;
 
-        for (MatchingResult matchingResult : MatchingResult.values()) {
-            Money prizeMoney = calculatePrizeMoney(winningLotto, matchingResult, bonusBall);
+        for (Result result : Result.values()) {
+            Money prizeMoney = calculatePrizeMoney(winningLotto, result, bonusBall);
             money += prizeMoney.getMoney();
         }
 
         return new Money(money);
     }
 
-    private Money calculatePrizeMoney(List<Integer> winningLotto, MatchingResult matchingResult, int bonusBall) {
-        return matchingResult.calculatePrizeMoney(findCountOfNumMatching(winningLotto, matchingResult, bonusBall));
+    private Money calculatePrizeMoney(List<Integer> winningLotto, Result result, int bonusBall) {
+        return result.calculatePrizeMoney(findCountOfNumMatching(winningLotto, result, bonusBall));
     }
 
     public double calculateEarningRate(List<Integer> winningLotto, int bonusBall) {

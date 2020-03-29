@@ -3,10 +3,10 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.model.MatchingResult.*;
+import static lotto.model.Result.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MatchingResultTest {
+public class ResultTest {
     @DisplayName("5등 로또의 갯수를 주면, 5등 상금  * 갯수를 Money 객체로 반환한다.")
     @Test
     void calculatePrizeMoneyTestWhenFifth() {

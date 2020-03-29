@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.model.MatchingResult.*;
+import static lotto.model.Result.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyLottosTest {

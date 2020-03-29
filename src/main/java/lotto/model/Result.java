@@ -1,6 +1,6 @@
 package lotto.model;
 
-public enum MatchingResult {
+public enum Result {
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
     THIRD(5, 1_500_000),
@@ -10,7 +10,7 @@ public enum MatchingResult {
     private int matchCount;
     private long cashPrize;
 
-    MatchingResult(int matchCount, long cashPrize) {
+    Result(int matchCount, long cashPrize) {
         this.matchCount = matchCount;
         this.cashPrize = cashPrize;
     }
