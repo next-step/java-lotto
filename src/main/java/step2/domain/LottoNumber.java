@@ -1,5 +1,7 @@
 package step2.domain;
 
+import java.util.Objects;
+
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final Integer MIN_NUMBER = 1;
     public static final Integer MAX_NUMBER = 45;
@@ -23,7 +25,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        return Integer.compare(lottoNumber, o.getValue());
+        if(o.equals(lottoNumber)) {
+            return 0;
+        }
+        return lottoNumber > o.getValue() ? 1 : -1;
     }
-
 }
