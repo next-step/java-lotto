@@ -12,6 +12,6 @@ public class RankTypeTest {
         assertThat(RankType.getRank(4)).isEqualTo(RankType.RANK3);
         assertThat(RankType.getRank(5)).isEqualTo(RankType.RANK2);
         assertThat(RankType.getRank(6)).isEqualTo(RankType.RANK1);
-        assertThat(RankType.getRank(7)).isEqualTo(RankType.RANK1);
+        assertThat(RankType.getRank(7)).isEqualTo(RankType.NO_RANK);
     }
 }
