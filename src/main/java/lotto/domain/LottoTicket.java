@@ -38,11 +38,14 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public int compareTo(LottoTicket winningTicket) {
+    LottoTicketResult checkWinning(LottoTicket winningTicket, LottoNumber bonusNumber) {
         List<Integer> winningNumbers = winningTicket.getLottoNumbers();
 
-        return (int) winningNumbers.stream()
-                .filter(winningNumber -> getLottoNumbers().contains(winningNumber))
+        int matchCount = (int) winningNumbers.stream()
+                .filter(winningNumber -> getLottoNumbers()
+                        .contains(winningNumber))
                 .count();
+        boolean bonusMatch = winningNumbers.contains(bonusNumber.getNumber());
+        return new LottoTicketResult(matchCount, bonusMatch);
     }
 }
