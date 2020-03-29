@@ -4,7 +4,6 @@ import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

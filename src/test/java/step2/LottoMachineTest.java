@@ -3,7 +3,6 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.controller.LottoMachine;
-import step2.domain.Lotto;
 import step2.domain.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
