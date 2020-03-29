@@ -1,19 +1,22 @@
 package lotto.lottogenerator;
 
+import lotto.model.LottoNumbers;
+import lotto.model.MyLottos;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumberPool {
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
+    private static List<LottoNumbers> myLottoNumbers = new ArrayList<>();
 
-    public static List<Integer> makePool() {
-        List<Integer> pool = new ArrayList<>();
+    public static MyLottos generateLottoAsMuchAs(int autoLottoCount){
+        generateAutomatically(autoLottoCount);
+        return new MyLottos(myLottoNumbers);
+    }
 
-        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
-            pool.add(i);
+    private static void generateAutomatically(int autoLottoCount) {
+        for(int i = 0; i < autoLottoCount ; i++){
+            myLottoNumbers.add(new LottoNumbers(LottoNumGeneratorByAuto.generate()));
         }
-
-        return pool;
     }
 }

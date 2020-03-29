@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import lotto.model.Money;
 import lotto.view.StringConverter;

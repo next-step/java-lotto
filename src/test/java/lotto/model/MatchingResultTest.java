@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import lotto.model.MatchingResult;
 import lotto.model.Money;
