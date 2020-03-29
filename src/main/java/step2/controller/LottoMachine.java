@@ -19,7 +19,7 @@ public class LottoMachine {
     }
 
     public static Lottos createLottos(Money money) {
-        List<Lotto> createdLottos = new ArrayList<Lotto>();
+        List<Lotto> createdLottos = new ArrayList<>();
         int lottoCount = money.getLottoCount();
 
         for(int i = 0; i < lottoCount; i++) {
