@@ -1,5 +1,7 @@
 package util;
 
+import lotto.exception.NoInstantiationException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +11,7 @@ public final class StringUtil {
     private static final String LOTTO_SPLIT_DELIMITER = ",";
 
     private StringUtil() {
-        throw new IllegalArgumentException("생성자 사용 불가");
+        throw new NoInstantiationException(this.getClass().getSimpleName());
     }
 
     public static List<String> splitStringUseDelimiter(String input, String delimiter) {
