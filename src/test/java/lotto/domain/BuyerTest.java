@@ -18,14 +18,7 @@ public class BuyerTest {
     @BeforeEach
     void setUp() {
         buyer = new Buyer();
-        winningTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-        ));
+        winningTicket = createTicket(1, 2, 3, 4, 5, 6);
     }
 
     @ParameterizedTest
@@ -39,28 +32,24 @@ public class BuyerTest {
     @Test
     @DisplayName("2등 1장, 4등 1장일때 result 확인")
     void checkByGetResult() {
-        LottoTicket secondTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(16)
-        ));
-
-        LottoTicket fourthTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(24),
-                LottoNumber.of(15),
-                LottoNumber.of(16)
-        ));
+        LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
+        LottoTicket fourthTicket = createTicket(1, 2, 3, 14, 15, 16);
 
         Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
         BuyerResult result = newBuyer.getResult(winningTicket);
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(752.5);
+    }
+
+    private LottoTicket createTicket(int... numbers) {
+        return new LottoTicket(Arrays.asList(
+                LottoNumber.of(numbers[0]),
+                LottoNumber.of(numbers[1]),
+                LottoNumber.of(numbers[2]),
+                LottoNumber.of(numbers[3]),
+                LottoNumber.of(numbers[4]),
+                LottoNumber.of(numbers[5])
+        ));
     }
 }
