@@ -1,43 +1,51 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
 
-    @DisplayName("로또 번호를 입력받아 생성할 수 있다")
-    @Test
-    public void newLottoNumberTest() {
-        List<Integer> numbers = asList(1, 2, 3, 4, 5, 6);
-        LottoNumber lottoNumber = new LottoNumber(numbers);
+    @DisplayName("로또 번호를 입력받아 생성할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    public void newLottoNumberTest(int number) {
+        LottoNumber one = new LottoNumber(number);
+        LottoNumber another = new LottoNumber(number);
 
-        assertThat(lottoNumber.getNumberToString()).isEqualTo(numbers.toString());
+        assertThat(one).isEqualTo(another);
     }
 
-    @DisplayName("로또 번호가 같아도 다른 게임으로 인식한다")
-    @Test
-    public void sameLottoNumberTest() {
-        List<Integer> numbers = asList(1, 2, 3, 4, 5, 6);
-        LottoNumber one = new LottoNumber(numbers);
-        LottoNumber another = new LottoNumber(numbers);
+    @DisplayName("번호가 같으면 같은 객체로 인식한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    public void sameLottoNumberTest(int number) {
+        LottoNumber one = new LottoNumber(number);
+        LottoNumber another = new LottoNumber(number);
 
-        assertThat(one).isNotEqualTo(another);
+        assertThat(one.equals(another)).isTrue();
     }
 
-    @DisplayName("로또 번호끼리 맞은 번호 수 계산 테스트")
-    @Test
-    public void lottoMatchCountTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber winningNumber = new LottoNumber(Arrays.asList(1, 2, 3, 10, 11, 12));
+    @DisplayName("로또 번호는 1 ~ 45 사이의 숫자만 가질 수 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46})
+    public void lottoNumberRangeTest(int number) {
 
-        long matchCountInLottoNumber = lottoNumber.getMatchCountInLottoNumber(winningNumber);
-        assertThat(matchCountInLottoNumber).isEqualTo(3);
+        assertThatThrownBy(() -> new LottoNumber(number))
+                .isInstanceOf(LottoNumberRangeException.class)
+                .hasMessageContaining("로또 번호는 1~45 사이의 수만 가능합니다.");
+    }
+
+    @DisplayName("로또 번호의 인트 값을 호출할 수 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    public void lottoNumberIntValueTest(int number) {
+        LottoNumber lottoNumber = new LottoNumber(number);
+
+        assertThat(lottoNumber.intValue()).isEqualTo(number);
     }
 
 }
