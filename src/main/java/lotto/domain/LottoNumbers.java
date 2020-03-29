@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumbers {
 
@@ -25,13 +26,17 @@ public class LottoNumbers {
                 .collect(Collectors.toList()));
     }
 
-    public static LottoNumbers with(List<Integer> numbers){
+    public static LottoNumbers valueOf(List<Integer> numbers){
         return new LottoNumbers(numbers);
     }
 
-    public static LottoNumbers with(Integer... numbers) {
-        return new LottoNumbers(Arrays.asList(numbers));
+    public static LottoNumbers valueOf(String[] numbers){
+        return new LottoNumbers(Stream.of(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
+
+    public static LottoNumbers valueOf(Integer... numbers) { return new LottoNumbers(Arrays.asList(numbers)); }
 
     public int match(LottoNumbers other) {
         Set<LottoNumber> numbers = new HashSet<>();

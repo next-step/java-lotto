@@ -6,30 +6,23 @@ import java.util.Random;
 
 public class LottoMachine {
 
-    private static final int DEFAULT_LOTTO_PRICE = 1000;
-    private final int lottoPrice;
-    private final Random random = new Random();
+    private static final Money DEFAULT_LOTTO_PRICE = Money.won(1000);
+    private static final Random random = new Random();
 
-    public LottoMachine() {
-        this(DEFAULT_LOTTO_PRICE);
-    }
+    private LottoMachine() {}
 
-    public LottoMachine(int lottoPrice) {
-        this.lottoPrice = lottoPrice;
-    }
+    public static LottoTicket generateLottoTicket(Money inputMoney) {
+        int lottoCount = inputMoney.divide(DEFAULT_LOTTO_PRICE.getAmount()).intValue();
 
-    public LottoGroup generateLottoGroup(int inputMoney) {
-        int lottoCount = inputMoney / lottoPrice;
-
-        LottoGroup lottoGroup = new LottoGroup();
+        LottoTicket lottoTicket = new LottoTicket();
         for (int i = 0 ; i < lottoCount ; i++) {
-            lottoGroup.add(LottoNumbers.with(generateRandomNumbers()));
+            lottoTicket.add(LottoNumbers.valueOf(generateRandomNumbers()));
         }
 
-        return lottoGroup;
+        return lottoTicket;
     }
 
-    private List<Integer> generateRandomNumbers() {
+    private static List<Integer> generateRandomNumbers() {
         List<Integer> numbersBetween1And45 = generateNumbersBetween1And45();
         List<Integer> randomNumbersBetween1And45 = new ArrayList<>();
 
@@ -42,7 +35,7 @@ public class LottoMachine {
         return randomNumbersBetween1And45;
     }
 
-    private List<Integer> generateNumbersBetween1And45() {
+    private static List<Integer> generateNumbersBetween1And45() {
         List<Integer> from1To45 = new ArrayList<>();
         for (int i = LottoNumber.LOWER ; i <= LottoNumber.UPPER ; i++) {
             from1To45.add(i);

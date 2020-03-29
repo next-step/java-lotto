@@ -15,6 +15,7 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자는 1 ~ 45 이어야 한다.")
     public void createLottoNumberTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(0));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(46));
     }
 
     @ParameterizedTest

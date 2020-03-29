@@ -1,20 +1,21 @@
 package lotto;
 
-import lotto.domain.LottoGroup;
-import lotto.domain.LottoMachine;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class Main {
 
-    private static final LottoMachine lottoMachine = new LottoMachine();
-
     public static void main(String[] args) {
-        int inputMoney = InputView.inputMoney();
+        Money inputMoney = Money.won(InputView.inputMoney());
+        LottoTicket lottoTicket = LottoMachine.generateLottoTicket(inputMoney);
+        ResultView.print(lottoTicket);
 
-        LottoGroup lottoGroup = lottoMachine.generateLottoGroup(inputMoney);
+        String inputWinningNumbers = InputView.inputWinningNumbers();
+        LottoNumbers winningNumbers = LottoNumbers.valueOf(inputWinningNumbers.split(ResultView.LOTTO_NUM_DELIMITER));
 
-        ResultView.printBuyResult(lottoGroup);
+        LottoResults results = lottoTicket.collectResults(winningNumbers);
+        ResultView.printLottoResult(results, inputMoney);
     }
 
 }
