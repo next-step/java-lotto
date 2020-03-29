@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum LottoTier {
 
-    FIRST(6, 2000000000),
-    SECOND(5, 150000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 150_000),
+    THIRD(4, 50_000),
+    FOURTH(3, 5_000),
     NONE(0, 0);
 
     private int matchedNumberCount;
