@@ -21,6 +21,10 @@ public class LottoNumber {
         return number;
     }
 
+    public LottoNumber clone() {
+        return new LottoNumber(this.number);
+    }
+
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
