@@ -16,7 +16,7 @@ public class LottoGame {
     }
 
     public void start() {
-        myLottos = LottoNumberPool.generateLottoAsMuchAs(autoLottoCount);
+        myLottos = LottoNumberPool.getMyLottos(autoLottoCount);
     }
 
     public MyLottos getMyLottos() {

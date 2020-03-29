@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoNumberPool {
     private static List<LottoNumbers> myLottoNumbers = new ArrayList<>();
 
-    public static MyLottos generateLottoAsMuchAs(int autoLottoCount){
+    public static MyLottos getMyLottos(int autoLottoCount){
         generateAutomatically(autoLottoCount);
         return new MyLottos(myLottoNumbers);
     }
