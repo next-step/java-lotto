@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoBundleTest {
+    private static final int BONUS_NUMBER = 10;
 
     @DisplayName("로또 번들 정상 생성")
     @Test
@@ -36,7 +37,7 @@ class LottoBundleTest {
     @ValueSource(strings = {"1,2,3,4,5,6"})
     void lottery(String winningNumber) {
         LottoBundle lottoBundle = new LottoBundle(Arrays.asList(Fixture.lottoOne(), Fixture.lottoTwo()));
-        List<WinningType> actual = lottoBundle.lottery(winningNumber);
+        List<WinningType> actual = lottoBundle.drawForWinning(winningNumber, BONUS_NUMBER);
 
         assertThat(actual).isNotNull();
     }

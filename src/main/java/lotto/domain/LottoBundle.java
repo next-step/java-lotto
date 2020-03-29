@@ -23,11 +23,11 @@ public class LottoBundle {
         return lottos;
     }
 
-    public List<WinningType> lottery(String winningNumber) {
-        Lotto winningLotto = new Lotto(winningNumber);
+    public List<WinningType> drawForWinning(String winningNumber, int bonusNumber) {
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
         return lottos.stream()
                 .map(lotto -> winningLotto.checkWinning(lotto))
-                .filter(Objects::nonNull)
+                .filter(winningType -> winningType.isMatched())
                 .collect(Collectors.toList());
     }
 
