@@ -28,10 +28,10 @@ public class LottoApplication {
         int bonus = StringUtil.parseStringToInt(InputView.inputBonusLuckyNumber());
         WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, bonus);
 
-//        LottoDto winGame = lottoGame.findWinGame(luckyNumber);
-//        ResultView.printResult(winGame);
-//
-//        LottoDto earningRate = lottoGame.getEarningRate(luckyNumber);
-//        ResultView.printEarningResult(earningRate);
+        LottoDto winGame = lottoGame.findWinGame(winLottoTicket);
+        ResultView.printResult(winGame);
+
+        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
+        ResultView.printEarningResult(earningRate);
     }
 }
