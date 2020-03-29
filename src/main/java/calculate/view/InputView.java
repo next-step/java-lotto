@@ -1,28 +1,21 @@
 package calculate.view;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Scanner;
 
 public class InputView {
-    private static final Pattern p = Pattern.compile("\\/\\/(.)\\\\n(.*)");
+    private String input;
 
-    private String operandString;
-    private String delimiter;
-
-    public InputView(String input) {
-        Matcher m = p.matcher(input);
-
-        if (m.find()) {
-            this.delimiter = m.group(1);
-            this.operandString = m.group(2);
-        }
+    public InputView() {
     }
 
-    public String getOperandString() {
-        return operandString;
+    public void getUserInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("계산할 구분자와 문자열을 입력 하세요");
+
+        this.input = sc.nextLine();
     }
 
-    public String getDelimiter() {
-        return delimiter;
+    public String getInput() {
+        return input;
     }
 }
