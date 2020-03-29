@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
+import lotto.type.RankType;
 
 import java.util.List;
 
@@ -26,10 +27,10 @@ public class ResultView {
     public static void printChanceOfWinning(LottoCalculator lottoCalculator, int investment) {
         System.out.println(WINNING_CHANCE);
         System.out.println(LINE);
-        System.out.println(String.format(RANK4, lottoCalculator.getRank4Count()));
-        System.out.println(String.format(RANK3, lottoCalculator.getRank3Count()));
-        System.out.println(String.format(RANK2, lottoCalculator.getRank2Count()));
-        System.out.println(String.format(RANK1, lottoCalculator.getRank1Count()));
+        System.out.println(String.format(RANK4, lottoCalculator.getCount(RankType.RANK4)));
+        System.out.println(String.format(RANK3, lottoCalculator.getCount(RankType.RANK3)));
+        System.out.println(String.format(RANK2, lottoCalculator.getCount(RankType.RANK2)));
+        System.out.println(String.format(RANK1, lottoCalculator.getCount(RankType.RANK1)));
         System.out.println(String.format(PERCENTAGE, lottoCalculator.getWinningPercentage(investment)));
     }
 }

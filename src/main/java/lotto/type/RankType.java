@@ -15,7 +15,7 @@ public enum RankType {
         this.condition = condition;
     }
 
-    public int totalReward(int count) {
+    public int getTotalReward(int count) {
         return this.reward * count;
     }
 

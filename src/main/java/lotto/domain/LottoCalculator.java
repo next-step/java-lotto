@@ -10,46 +10,25 @@ import java.util.List;
 
 public class LottoCalculator {
     @Getter
-    private int rank1Count;
-    @Getter
-    private int rank2Count;
-    @Getter
-    private int rank3Count;
-    @Getter
-    private int rank4Count;
+    private MatchResult matchResult;
 
     public LottoCalculator(Lotto lastWeekLotto, List<Lotto> lottos) {
+        this.matchResult = new MatchResult();
+
         for (Lotto lotto : lottos) {
             RankType rankType = RankType.getRank(lotto.getSameCount(lastWeekLotto));
 
-            addRankCount(rankType);
+            matchResult.addResult(rankType);
         }
     }
 
     public BigDecimal getWinningPercentage(int investment) {
-        int totalReward = RankType.RANK1.totalReward(rank1Count) +
-                RankType.RANK2.totalReward(rank2Count) +
-                RankType.RANK3.totalReward(rank3Count) +
-                RankType.RANK4.totalReward(rank4Count);
+        int totalReward = matchResult.getTotalReward();
 
         return new BigDecimal(totalReward).divide(new BigDecimal(investment), new MathContext(2, RoundingMode.DOWN));
     }
 
-    private void addRankCount(RankType rankType) {
-        if (rankType == RankType.RANK1) {
-            rank1Count++;
-        }
-
-        if (rankType == RankType.RANK2) {
-            rank2Count++;
-        }
-
-        if (rankType == RankType.RANK3) {
-            rank3Count++;
-        }
-
-        if (rankType == RankType.RANK4) {
-            rank4Count++;
-        }
+    public int getCount(RankType rankType) {
+        return matchResult.getCount(rankType);
     }
 }
