@@ -28,11 +28,10 @@ public class Lotto implements Item {
     }
 
     private void validateNumberRange(List<Integer> numbers) {
-        for (Integer i : numbers) {
-            if (i < LOTTO_MIN_NUMBER_SIZE || i > LOTTO_MAX_NUMBER_SIZE) {
-                throw new ValidLottoException("번호는 1~ 45 사이의 정수만 가능 합니다.");
-            }
-        }
+        numbers.stream().filter(i -> (i < LOTTO_MIN_NUMBER_SIZE) || (i > LOTTO_MAX_NUMBER_SIZE))
+                .forEach(i -> {
+                    throw new ValidLottoException("번호는 1~ 45 사이의 정수만 가능 합니다.");
+                });
     }
 
     private void validateDuplicate(List<Integer> numbers) {
