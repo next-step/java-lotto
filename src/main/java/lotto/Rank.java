@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIFTH("5등", 3, 5_000),
     FOURTH("4등", 4, 50_000),
@@ -30,6 +32,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
+
         Rank rank = null;
         switch (matchCount) {
             case 3:
@@ -39,17 +42,22 @@ public enum Rank {
                 rank = FOURTH;
                 break;
             case 5:
-                if (matchBonus) {
-                    rank = SECOND;
-                    break;
-                }
-                rank = THIRD;
+                rank = checkBonusBall(matchBonus);
                 break;
             case 6:
                 rank = FIRST;
                 break;
         }
 
+        return rank;
+    }
+
+    private static Rank checkBonusBall(boolean matchBonus) {
+        Rank rank = THIRD;
+        if (matchBonus) {
+            rank = SECOND;
+
+        }
         return rank;
     }
 }
