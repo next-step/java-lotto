@@ -22,31 +22,11 @@ public enum MatchingResult {
         return new Money(count * cashPrize);
     }
 
-    public static MatchingResult findMatchingResult(int matchCount){
-        if(matchCount == 3){
-            return THREE;
-        }
-        if(matchCount == 4){
-            return FOUR;
-        }
-        if(matchCount == 5){
-            return FIVE;
-        }
-        if(matchCount == 6){
-            return SIX;
-        }
-        return ZERO;
-    }
-
     public int getMatchCount() {
         return matchCount;
     }
 
     public long getCashPrize() {
         return cashPrize;
-    }
-
-    public void printHowManyMatch(long count) {
-        System.out.println(matchCount + "개 일치 " + (cashPrize + "원 - ") + count + "개");
     }
 }
