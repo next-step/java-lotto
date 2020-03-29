@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,9 +39,9 @@ class LotteriesTest {
         LottoNumbers winningLottoNumber = new LottoNumbers("7, 8, 9, 10, 11, 12");
         int expect = 1;
 
-        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+        LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.get(LottoRank.BLANK)).isEqualTo(expect);
+        assertThat(actual.getMatchCount(LottoRank.BLANK)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 3개 일치한다. (4등)")
@@ -52,9 +51,9 @@ class LotteriesTest {
         LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 10, 11, 12");
         int expect = 1;
 
-        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+        LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.get(LottoRank.FOURTH)).isEqualTo(expect);
+        assertThat(actual.getMatchCount(LottoRank.FOURTH)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 4개 일치한다. (3등)")
@@ -64,9 +63,9 @@ class LotteriesTest {
         LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 11, 12");
         int expect = 1;
 
-        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+        LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.get(LottoRank.THIRD)).isEqualTo(expect);
+        assertThat(actual.getMatchCount(LottoRank.THIRD)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 5개 일치한다. (2등)")
@@ -76,9 +75,9 @@ class LotteriesTest {
         LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 5, 12");
         int expect = 1;
 
-        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+        LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.get(LottoRank.SECOND)).isEqualTo(expect);
+        assertThat(actual.getMatchCount(LottoRank.SECOND)).isEqualTo(expect);
     }
 
     @DisplayName("구매한 복권들과 당첨 복권이 6개 일치한다. (1등)")
@@ -88,9 +87,9 @@ class LotteriesTest {
         LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 5, 6");
         int expect = 1;
 
-        Map<LottoRank, Integer> actual = lotteries.analyzeWin(winningLottoNumber);
+        LottoResult actual = lotteries.analyzeWin(winningLottoNumber);
 
-        assertThat(actual.get(LottoRank.FIRST)).isEqualTo(expect);
+        assertThat(actual.getMatchCount(LottoRank.FIRST)).isEqualTo(expect);
     }
 
 
