@@ -19,18 +19,16 @@ public class LottoMachine {
     public void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
 
-        Lottos lottos = createLottos(money);
-        resultView.showLottos(lottos, money.getLottoCount());
+        int lottoCount = money.getLottoCount();
+        Lottos lottos = createLottos(lottoCount);
+        resultView.showLottos(lottos, lottoCount);
 
         LottoResult result = makeLottoResult(inputView, lottos);
         resultView.showResult(result, money);
     }
 
-    public Lottos createLottos(Money money) {
-        int lottoCount = money.getLottoCount();
-
-        Lottos lottos = LottoProvider.createLottos(lottoCount);
-        return lottos;
+    public Lottos createLottos(int lottoCount) {
+        return LottoProvider.createLottos(lottoCount);
     }
 
     public Lotto createWinningLotto(List<Integer> inputNumbers) {
