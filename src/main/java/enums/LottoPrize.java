@@ -17,13 +17,13 @@ public enum LottoPrize {
     private int matchCount;
     private double prize;
     private boolean bonus;
-    private Function<Integer, Double> calculate;
+    private Function<Integer, Double> getPrize;
 
-    LottoPrize(int matchCount, boolean bonus, double prize, Function<Integer, Double> calculate) {
+    LottoPrize(int matchCount, boolean bonus, double prize, Function<Integer, Double> getPrize) {
         this.matchCount = matchCount;
         this.prize = prize;
         this.bonus = bonus;
-        this.calculate = calculate;
+        this.getPrize = getPrize;
     }
 
     public int getMatchCount() {
@@ -31,7 +31,7 @@ public enum LottoPrize {
     }
 
     public Money getWinningPrize(int count) {
-        return new Money(calculate.apply(count));
+        return new Money(getPrize.apply(count));
     }
 
     public static LottoPrize findRank(int matchCount, boolean bonusNumber) {
