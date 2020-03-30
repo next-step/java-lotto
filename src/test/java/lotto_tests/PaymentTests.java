@@ -1,7 +1,5 @@
 package lotto_tests;
 
-import lotto.model.LottoPurchaseTicket;
-import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.Payment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
