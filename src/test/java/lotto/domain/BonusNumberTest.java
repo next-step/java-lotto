@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.common.LottoStub;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,13 +12,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BonusNumberTest {
 
+    LottoNumbers defaultLottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        defaultLottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+    }
+
     @DisplayName("보너스 번호를 생성할 수 있다")
     @Test
     public void createBonusNumberTest() {
-        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
-
-        BonusNumber one = new BonusNumber(lottoNumbers, 7);
-        BonusNumber another = new BonusNumber(lottoNumbers, 7);
+        BonusNumber one = new BonusNumber(defaultLottoNumbers, 7);
+        BonusNumber another = new BonusNumber(defaultLottoNumbers, 7);
 
         assertThat(one).isEqualTo(another);
     }
@@ -38,9 +44,7 @@ class BonusNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     public void bonusNumberRangeTest(int bonusNumber) {
-        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
-
-        assertThatThrownBy(() -> new BonusNumber(lottoNumbers, bonusNumber))
+        assertThatThrownBy(() -> new BonusNumber(defaultLottoNumbers, bonusNumber))
                 .isInstanceOf(BonusNumberRangeException.class)
                 .hasMessageContaining("보너스 번호 1~45 사이의 수만 가능합니다.");
     }
@@ -48,10 +52,19 @@ class BonusNumberTest {
     @DisplayName("보너스 번호는 기존 당첨번호와 중복될 수 없다")
     @Test
     public void doesntDuplicateBonusNumber() {
-        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
-
-        assertThatThrownBy(() -> new BonusNumber(lottoNumbers, 6))
+        assertThatThrownBy(() -> new BonusNumber(defaultLottoNumbers, 6))
                 .isInstanceOf(BonusNumberDuplicateException.class)
                 .hasMessageContaining("보너스 번호는 당첨번호와 중복될 수 없습니다.");
+    }
+
+    @DisplayName("입력받은 숫자와 보너스 넘버가 일치하는지 확인할 수 있다")
+    @ParameterizedTest
+    @ValueSource(ints = {7, 45})
+    void isMatchBonusNumber(int number) {
+        BonusNumber bonusNumber = new BonusNumber(defaultLottoNumbers, number);
+
+        boolean match = bonusNumber.isMatch(number);
+
+        assertThat(match).isTrue();
     }
 }

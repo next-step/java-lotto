@@ -16,6 +16,10 @@ public class BonusNumber {
         }
     }
 
+    public boolean isMatch(int lottoNumber) {
+        return bonusNumber == lottoNumber;
+    }
+
     private void validateBonusNumber(int bonusNumber) {
         if (bonusNumber < LOTTO_NUM_MIN || LOTTO_NUM_MAX < bonusNumber) {
             throw new BonusNumberRangeException();
@@ -38,4 +42,5 @@ public class BonusNumber {
     public int hashCode() {
         return Objects.hash(bonusNumber);
     }
+
 }
