@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumbers;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,17 +15,17 @@ public class LottoBuyer {
 			.boxed()
 			.collect(Collectors.toList());
 
-	public List<LottoNumber> buyLottoNumbers(long money) {
+	public List<LottoNumbers> buyLottoNumbers(long money) {
 		long count = money / PRIZE;
 		return getLottoNumbers((int) count);
 	}
 
-	private List<LottoNumber> getLottoNumbers(int count) {
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
+	private List<LottoNumbers> getLottoNumbers(int count) {
+		List<LottoNumbers> lottoNumbers = new ArrayList<>();
 
 		for (int i = 0; i < count; i++) {
 			Collections.shuffle(candidateNumbers);
-			lottoNumbers.add(new LottoNumber(new ArrayList<>(candidateNumbers.subList(0, LottoNumber.NUMBER_SIZE))));
+			lottoNumbers.add(new LottoNumber(new ArrayList<>(candidateNumbers.subList(0, LottoNumber.NUMBER_SIZE))).getLottoNumbers());
 		}
 
 		return lottoNumbers;

@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.dto.LottoNumbers;
 import lotto.domain.dto.LottoRank;
 import lotto.domain.dto.LottoResult;
 import lotto.utils.StringFormatter;
@@ -18,10 +18,10 @@ public class OutputView {
 		return new OutputView();
 	}
 
-	public void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+	public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
 		System.out.println(String.format(BUY_COUNT_FORMAT, lottoNumbers.size()));
 		lottoNumbers.stream()
-				.map(LottoNumber::getNumbers)
+				.map(LottoNumbers::getNumbers)
 				.map(StringFormatter::listToString)
 				.forEach(System.out::println);
 		System.out.println();

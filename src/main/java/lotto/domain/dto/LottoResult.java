@@ -1,6 +1,9 @@
 package lotto.domain.dto;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -33,16 +36,4 @@ public class LottoResult {
 				.sum() / (double) spentMoney;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		LottoResult that = (LottoResult) o;
-		return Objects.equals(winningMap, that.winningMap);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(winningMap);
-	}
 }

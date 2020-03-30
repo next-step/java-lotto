@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumbers;
 import lotto.domain.dto.LottoRank;
 import lotto.domain.dto.LottoResult;
 
@@ -19,12 +20,14 @@ public class LottoChecker {
 		this.spentMoney = spentMoney;
 	}
 
-	public LottoResult getWinningResult(LottoNumber... applyNumbers) {
+	public LottoResult getWinningResult(LottoNumbers... applyNumbers) {
 		return getWinningResult(Arrays.asList(applyNumbers));
 	}
 
-	public LottoResult getWinningResult(List<LottoNumber> applyNumbers) {
+	public LottoResult getWinningResult(List<LottoNumbers> applyNumbers) {
 		Map<LottoRank, Long> map = applyNumbers.stream()
+				.map(LottoNumbers::getNumbers)
+				.map(LottoNumber::new)
 				.map(lottoNumber -> lottoNumber.matchLottoNumber(winningNumber))
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));

@@ -22,12 +22,6 @@ class LottoResultTest {
 	private LottoResult lottoResult = new LottoResult(rankMap, spendMoney);
 
 	@Test
-	void isEqualTest() {
-		assertThat(lottoResult)
-				.isEqualTo(new LottoResult(rankMap, spendMoney));
-	}
-
-	@Test
 	void getWinningMapTest() {
 		assertThat(new LottoResult(rankMap, spendMoney).getWinningMap())
 				.isEqualTo(rankMap);

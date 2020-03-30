@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumbers;
 import lotto.domain.dto.LottoRank;
 import lotto.utils.StringFormatter;
 
@@ -8,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class LottoNumber {
+class LottoNumber {
 	public static final int LOWEST_NUMBER = 1;
 	public static final int HIGHEST_NUMBER = 45;
 	public static final int NUMBER_SIZE = 6;
@@ -19,7 +20,7 @@ public class LottoNumber {
 		this(Arrays.asList(numbers));
 	}
 
-	public LottoNumber(List<Integer> numbers) {
+	LottoNumber(List<Integer> numbers) {
 		this.numbers = Collections.unmodifiableList(numbers);
 
 		if (isInvalidLottoNumbers(numbers)) {
@@ -51,12 +52,12 @@ public class LottoNumber {
 
 	private int getMatchElectedNumberCount(LottoWinningNumber winningNumber) {
 		return (int) this.numbers.stream()
-				.filter(winningNumber.getNumbers()::contains)
+				.filter(winningNumber.getLottoNumbers().getNumbers()::contains)
 				.count();
 	}
 
-	public List<Integer> getNumbers() {
-		return numbers;
+	LottoNumbers getLottoNumbers() {
+		return new LottoNumbers(numbers);
 	}
 
 	@Override

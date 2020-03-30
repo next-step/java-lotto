@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumbers;
 import lotto.domain.dto.LottoRank;
 import lotto.domain.dto.LottoResult;
 import org.junit.jupiter.api.Test;
@@ -20,8 +21,8 @@ class LottoCheckerTest {
 
 		assertThat(
 				lottoChecker.getWinningResult(
-						new LottoNumber(lottoNumbers),
-						new LottoNumber(lottoNumbers)))
-				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FIRST, 2L), 1000));
+						new LottoNumbers(lottoNumbers),
+						new LottoNumbers(lottoNumbers)).getWinningMap())
+				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FIRST, 2L), 1000).getWinningMap());
 	}
 }

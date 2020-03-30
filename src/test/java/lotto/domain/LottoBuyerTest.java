@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class LottoBuyerTest {
 	@DisplayName("로또 번호 전부 다 같은 번호 나오지는 않는지 확인 테스트")
 	void LottoDistinctionTest(){
 		LottoBuyer buyer = new LottoBuyer();
-		List<LottoNumber> lottoNumbers = buyer.buyLottoNumbers(2000);
+		List<LottoNumbers> lottoNumbers = buyer.buyLottoNumbers(2000);
 
 		assertThat(lottoNumbers.get(0))
 				.isNotEqualTo(lottoNumbers.get(1));
