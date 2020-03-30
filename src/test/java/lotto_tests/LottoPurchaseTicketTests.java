@@ -74,35 +74,35 @@ public class LottoPurchaseTicketTests {
         return Stream.of(
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7)),
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7)),
                         LottoResult.SIX),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(8)),
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(8)),
                         LottoResult.FIVE),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(6)),
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(6)),
                         LottoResult.FIVE_WITH_BONUS),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,8,7)), LottoNumber.of(24)),
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,3,4,8,7)), LottoNumber.of(24)),
                         LottoResult.FOUR),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,9,8,7)), LottoNumber.of(24)),
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,3,9,8,7)), LottoNumber.of(24)),
                         LottoResult.THREE),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,10,9,8,7)), LottoNumber.of(24))
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,10,9,8,7)), LottoNumber.of(24)),
                         LottoResult.TWO),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,11,10,12,13,14)), LottoNumber.of(24))
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,11,10,12,13,14)), LottoNumber.of(24)),
                         LottoResult.ONE),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(7,8,9,10,11,12)), LottoNumber.of(24))
+                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(7,8,9,10,11,12)), LottoNumber.of(24)),
                         LottoResult.NONE)
         );
     }

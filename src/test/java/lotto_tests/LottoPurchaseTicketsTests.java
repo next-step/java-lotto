@@ -49,8 +49,8 @@ public class LottoPurchaseTicketsTests {
     @Test
     public void checkAllTest() {
         LottoPurchaseTickets lottoPurchaseTickets = new LottoPurchaseTickets(lottoTickets);
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(33)))
-        ;
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(33));
+
         LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE_WITH_BONUS));
 
         assertThat(lottoPurchaseTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);
