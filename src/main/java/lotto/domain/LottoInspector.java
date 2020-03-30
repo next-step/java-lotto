@@ -13,7 +13,8 @@ public class LottoInspector {
     public Map<Integer, Integer> getResult(Lotto winningLotto, List<Lotto> lottos) {
         Map<Integer, Integer> matchedResult = new LinkedHashMap<>();
         for (Lotto lotto : lottos) {
-            putMatchedResult(matchedResult, winningLotto.getMatchedCount(lotto));
+            int matchedKey = winningLotto.getMatchedCount(lotto);
+            matchedResult.put(matchedKey, matchedResult.getOrDefault(matchedKey, 0) + 1);
         }
         return matchedResult;
     }
@@ -28,12 +29,5 @@ public class LottoInspector {
 
     public BigDecimal getYield(Money money, int totalRevenue) {
         return new BigDecimal(totalRevenue).divide(new BigDecimal(money.getMoney()), 2, BigDecimal.ROUND_HALF_UP);
-    }
-
-    private void putMatchedResult(Map<Integer, Integer> matchedResult, Integer matchedName) {
-        if (matchedResult.containsKey(matchedName)) {
-            matchedResult.put(matchedName, matchedResult.get(matchedName) + 1);
-        }
-        matchedResult.put(matchedName, 1);
     }
 }
