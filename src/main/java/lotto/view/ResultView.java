@@ -13,6 +13,7 @@ public class ResultView {
 
     private static final String PURCHASE_COUNT_MSG_FORMAT = "%d개를 구매했습니다.";
     private static final String MATCH_NUMBER_COUNT_FORMAT = "%d개 일치 (%d%s)- %d개";
+    private static final String MATCH_NUMBER_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d%s) - %d개";
     private static final String NUMBERS_PRINT_FORMAT = "[%s]";
     private static final String EARNING_RATE_RESULT_FORMAT = "총 수익률을 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
@@ -58,17 +59,21 @@ public class ResultView {
         System.out.println(LOTTO_RESULT_MSG);
         System.out.println(SEPERATE_LINE);
 
-        for (LottoRank lottoRank : Arrays.asList(FOURTH, THIRD, SECOND, FIRST)) {
+        for (LottoRank lottoRank : Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST)) {
+            if (lottoRank == SECOND) {
+                System.out.printf(MATCH_NUMBER_WITH_BONUS_FORMAT,
+                        lottoRank.getCountOfMatch(), lottoRank.getPrizeMoney().getAmount().intValue(), Money.CURRENCY, results.countBy(lottoRank) );
+                printLineBreak();
+                continue;
+            }
+
             System.out.printf(MATCH_NUMBER_COUNT_FORMAT,
                     lottoRank.getCountOfMatch(), lottoRank.getPrizeMoney().getAmount().intValue(), Money.CURRENCY, results.countBy(lottoRank));
             printLineBreak();
         }
 
         BigDecimal earningRate = results.calculateEarningRate(inputMoney, 2, RoundingMode.FLOOR);
-
-        System.out.printf(EARNING_RATE_RESULT_FORMAT,
-                earningRate,
-                getLottoResultMsg(earningRate));
+        System.out.printf(EARNING_RATE_RESULT_FORMAT, earningRate, getLottoResultMsg(earningRate));
     }
 
     private static String getLottoResultMsg(BigDecimal earningRate) {
