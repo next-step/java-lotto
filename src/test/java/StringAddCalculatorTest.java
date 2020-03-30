@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -30,5 +31,15 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1");
 
         assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("숫자 이외의 값이나 음수가 들어간 경우 RuntimeException이 발생한다")
+    public void splitAndSumWithNoneNumberOrNegativeThrowRuntimeException() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("a,2,3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
