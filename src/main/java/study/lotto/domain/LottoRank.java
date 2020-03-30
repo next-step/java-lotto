@@ -5,12 +5,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public enum LottoRank {
-    FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FOURTH(5000, 3);
+    FIRST(2_000_000_000, 6),
+    SECOND(1_500_000, 5),
+    THIRD(50_000, 4),
+    FOURTH(5_000, 3);
 
-    private static Map<Integer, LottoRank> map = new HashMap<>();
+    private static Map<Integer, LottoRank> matchCountToLottoRank =
+            new HashMap<>();
 
     private int prize;
     private int matchCount;
@@ -22,17 +23,12 @@ public enum LottoRank {
 
     static {
         for (LottoRank lottoRank : LottoRank.values()) {
-            map.put(lottoRank.matchCount, lottoRank);
+            matchCountToLottoRank.put(lottoRank.matchCount, lottoRank);
         }
     }
 
     public static LottoRank matchCountOf(Integer matchCount) {
-        LottoRank lottoRank = map.get(matchCount);
-        if (Objects.isNull(lottoRank)) {
-            return null;
-        }
-
-        return lottoRank;
+        return matchCountToLottoRank.get(matchCount);
     }
 
     public int getPrize() {
