@@ -12,4 +12,12 @@ public class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("null 또는 빈 문자열이 입력될 경우 0을 리턴한다")
+    public void sumAndSplitWithNullOrEmptyReturnsZero() {
+        int result = StringAddCalculator.sumAndSplit("");
+
+        assertThat(result).isEqualTo(0);
+    }
 }
