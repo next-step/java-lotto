@@ -19,10 +19,10 @@ public class Lotto {
     }
 
     private void validateNumberDuplication(List<LottoNumber> lotto) {
-        Set<Integer> uniqueNumbers = new HashSet<>();
+        Set<LottoNumber> uniqueNumbers = new HashSet<>();
 
         for(LottoNumber lottoNumber : lotto) {
-            uniqueNumbers.add(lottoNumber.getValue());
+            uniqueNumbers.add(lottoNumber);
         }
 
         if(lotto.size() != uniqueNumbers.size()) {
