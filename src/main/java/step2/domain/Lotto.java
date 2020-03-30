@@ -9,16 +9,16 @@ public class Lotto {
     private int price = 1000;
     private Set<Integer> lottoList = new HashSet<>();
 
+    public Set<Integer> getLottoList() {
+        return lottoList;
+    }
+
     public Lotto() {
         getLottoNumberList();
     }
 
     public int getPrice() {
         return price;
-    }
-
-    public Set getLottoList() {
-        return lottoList;
     }
 
     public void getLottoNumberList() {
