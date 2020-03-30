@@ -32,31 +32,21 @@ public enum Rank {
     }
 
     public static Rank valueOf(int matchCount, boolean matchBonus) {
+        Rank rank = Arrays.stream(values())
+                          .filter(it -> it.matchCount == matchCount)
+                          .findFirst()
+                          .orElseThrow(IllegalAccessError::new);
 
-        Rank rank = null;
-        switch (matchCount) {
-            case 3:
-                rank = THIRD;
-                break;
-            case 4:
-                rank = FOURTH;
-                break;
-            case 5:
-                rank = checkBonusBall(matchBonus);
-                break;
-            case 6:
-                rank = FIRST;
-                break;
+        if (matchCount == 5) {
+            rank = checkBonusBall(rank, matchBonus);
         }
 
         return rank;
     }
 
-    private static Rank checkBonusBall(boolean matchBonus) {
-        Rank rank = THIRD;
+    private static Rank checkBonusBall(Rank rank, boolean matchBonus) {
         if (matchBonus) {
             rank = SECOND;
-
         }
         return rank;
     }

@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 class LottoNumber {
-    private static final int NUMBER_SIZE = 6;
+    private static final int NUMBER_SIZE = LottoRule.COUNT.getValue();
 
     private final Set<Integer> numbers;
 

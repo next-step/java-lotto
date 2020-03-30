@@ -4,6 +4,8 @@ import java.util.List;
 
 public class LottoController {
 
+    private static ResultView resultView = new ResultView();
+
     public static void main(String[] args) {
         InputView inputView = new InputView();
         int purchaseCount = inputView.getPurchaseCount();
@@ -13,7 +15,6 @@ public class LottoController {
         lottoGenerator.createLottoNumbersByPurchaseCount();
         List<LottoNumber> lottoNumbers = lottoGenerator.getLottoNumbers();
 
-        ResultView resultView = new ResultView();
         String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoNumbers);
         System.out.println(printPurchaseLottoNumbers);
 

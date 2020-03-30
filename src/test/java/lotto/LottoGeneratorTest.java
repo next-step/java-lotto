@@ -20,16 +20,15 @@ class LottoGeneratorTest {
         lottoGenerator = new LottoGenerator(14);
     }
 
-    @DisplayName("1~45 사이의 숫자 로또번호를 생성한다.")
-    @RepeatedTest(value = 14)
+    @DisplayName("1~45 사이의 숫자 로또번호를 구매 수량 만큼 생성한다.")
     @Test
     void generateRandomNumbers() {
-        Set<Integer> numbers = lottoGenerator.generateRandomNumbers();
-        assertThat(numbers).hasSize(6);
+        List<LottoNumber> lottoNumbersByPurchaseCount = lottoGenerator.createLottoNumbersByPurchaseCount();
+        assertThat(lottoNumbersByPurchaseCount).hasSize(14);
     }
 
 
-    @DisplayName("구매 수량 만큼 로또숫자를 생성한다.")
+    @DisplayName("구매수량만큼 생성한 로또 번호들을 가져온다.")
     @Test
     void createLottoNumbersByPurchaseCount() {
         List<LottoNumber> lottoNumbers = lottoGenerator.getLottoNumbers();
