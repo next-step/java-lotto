@@ -7,3 +7,10 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 구현 기능 목록
+* [X] 구분자, 메시지 본문 분리
+* [x] 문자열 분리
+* [x] 커스텀 구분자 사용 문자열 분리
+* [x] 음수 입력시 오류 처리
+* [X] 덧셈기능
