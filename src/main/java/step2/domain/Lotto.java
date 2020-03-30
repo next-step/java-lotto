@@ -49,7 +49,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getValue() {
-        return new HashSet<>(lotto);
+        return lotto;
     }
 }
 
