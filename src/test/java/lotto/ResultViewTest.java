@@ -22,5 +22,12 @@ public class ResultViewTest {
                 .isThrownBy(() -> new ResultView(inputText));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 46, 0, 2"})
+    void testLottoInRange(final String inputText) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new ResultView(inputText));
+    }
+
 
 }
