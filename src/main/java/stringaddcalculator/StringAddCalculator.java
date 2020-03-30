@@ -21,7 +21,8 @@ public class StringAddCalculator {
     private static int operate(String input) {
         int result = 0;
 
-        for (String operand : splitInput(input)) {
+        String[] operands = splitInput(input);
+        for (String operand : operands) {
             result += getValidValue(operand);
         }
 
