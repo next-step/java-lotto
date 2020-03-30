@@ -11,7 +11,7 @@ public class LottoRun {
     private static final LottoResultView lottoResultView = new LottoResultView();
 
     public static void main(String[] args) {
-        Integer money = lottoResultView.inputMoney();
+        int money = lottoResultView.inputMoney();
         Money myMoney = new Money(money);
 
         List<Lotto> myLottos = purchaseLottos(myMoney);
