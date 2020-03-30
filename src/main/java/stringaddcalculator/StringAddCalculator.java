@@ -6,9 +6,13 @@ public class StringAddCalculator {
     public static int splitAndSum(String input) {
         int result = 0;
 
-        if (Objects.isNull(input) || input.isEmpty()) {
+        if (isEmptyString(input)) {
             return result;
         }
         return result;
+    }
+
+    private static boolean isEmptyString(String string) {
+        return Objects.isNull(string) || string.isEmpty();
     }
 }
