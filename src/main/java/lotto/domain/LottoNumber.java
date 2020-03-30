@@ -17,10 +17,6 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public boolean isMatch(int bonusNumber) {
-        return lottoNumber == bonusNumber;
-    }
-
     private void validateRange(int lottoNumber) {
         if (isValidRange(lottoNumber)) {
             throw new LottoNumberRangeException();

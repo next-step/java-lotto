@@ -47,5 +47,4 @@ class LottoNumberTest {
 
         assertThat(lottoNumber.intValue()).isEqualTo(number);
     }
-
 }
