@@ -12,4 +12,12 @@ public class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(new String[]{"1", "2"});
     }
+
+    @Test
+    @DisplayName("입력된 문자열을 콜론을 기준으로 구분하여 나누어진 문자열 배열로 리턴한다")
+    public void splitByColonReturnsArrayOfStrings() {
+        String[] result = StringAddCalculator.split("1:2");
+
+        assertThat(result).isEqualTo(new String[]{"1", "2"});
+    }
 }
