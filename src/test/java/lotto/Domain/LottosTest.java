@@ -43,9 +43,9 @@ public class LottosTest {
         Lottos lottos = Lottos.init(lottoList);
         List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
 
-        Map<Integer, Integer> matchCountMap = lottos.match(winningNumber);
-        Double statistics = lottos.statistics(matchCountMap);
+        Map<Integer, Integer> statistics = lottos.match(winningNumber);
+        Double revenueRate = lottos.revenueRate(statistics);
 
-        assertThat(statistics).isEqualTo(Double.parseDouble(expected));
+        assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
     }
 }
