@@ -1,6 +1,5 @@
 package study.lotto;
 
-import org.assertj.core.internal.bytebuddy.build.ToStringPlugin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import study.lotto.domain.Amount;
@@ -22,8 +21,9 @@ public class AmountTest {
     @DisplayName("음수를 입력할 수 없다.")
     @Test
     void disallowNegative() {
-        assertThatExceptionOfType(IllegalAmountArgumentException.class).isThrownBy(() -> {
-           new Amount(-1);
-        });
+        assertThatExceptionOfType(IllegalAmountArgumentException.class)
+                .isThrownBy(() -> {
+                    new Amount(-1);
+                });
     }
 }

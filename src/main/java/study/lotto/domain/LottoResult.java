@@ -50,10 +50,12 @@ public class LottoResult {
 
     private int getPrizeTotal() {
         int prizeTotal = 0;
+
         for (LottoRank lottoRank : LottoRank.values()) {
             prizeTotal += this.winningTickets.get(lottoRank).size() *
                     lottoRank.getPrize();
         }
+
         return prizeTotal;
     }
 }

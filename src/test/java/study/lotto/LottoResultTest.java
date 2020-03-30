@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoResultTest {
     private List<LottoTicket> lottoTickets;
     private LottoWinningNumber lottoWinningNumber;
-    private LottoTicketIssuer lottoTicketIssuer;
 
     @BeforeEach
     void setUp() {
@@ -47,7 +46,7 @@ public class LottoResultTest {
         );
         LottoWinningNumber lottoWinningNumber =
                 new LottoWinningNumber(Arrays.asList(4,
-                5, 6, 7, 8, 9), 45);
+                        5, 6, 7, 8, 9), 45);
         LottoResult lottoResult = new LottoResult(lottoTickets,
                 lottoWinningNumber, 50000);
         assertThat(lottoResult.getRateOfReturn()).isEqualTo(0.1);

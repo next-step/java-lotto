@@ -10,7 +10,7 @@ public class Amount {
     private int amount;
 
     public Amount(int amount) {
-        if(amount < AMOUNT_MIN) {
+        if (amount < AMOUNT_MIN) {
             throw new IllegalAmountArgumentException(MIN_AMOUNT_ERROR_MESSAGE);
         }
         this.amount = amount;

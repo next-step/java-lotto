@@ -36,7 +36,7 @@ public enum LottoRank {
     public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
         LottoRank lottoRank = valueToLottoRank.get(new ValueKey(matchCount,
                 matchBonus));
-        if(Objects.isNull(lottoRank)) {
+        if (Objects.isNull(lottoRank)) {
             return MISS;
         }
         return lottoRank;
