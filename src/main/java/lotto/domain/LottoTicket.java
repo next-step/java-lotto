@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoTicket {
@@ -15,6 +16,10 @@ public class LottoTicket {
             return LottoRank.of(LottoRank.FIVE_BONUS.getMatchCount());
         }
         return LottoRank.of(matchCount);
+    }
+
+    public List<Integer> toIntNumbers() {
+        return lottoNumbers.toIntNumbers();
     }
 
     @Override

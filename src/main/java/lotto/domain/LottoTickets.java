@@ -23,6 +23,11 @@ public class LottoTickets {
                 .collect(toList());
     }
 
+    public void print() {
+        lottoTickets.stream()
+                .forEach(lottoTicket -> System.out.println(lottoTicket.toIntNumbers()));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -89,5 +91,15 @@ class LottoNumbersTest {
         int matchCount = lottoNumbers.countMatchNumbers(otherLottoNumbers);
 
         assertThat(matchCount).isEqualTo(6);
+    }
+
+    @DisplayName("로또 번호들을 숫자열로 변환할 수 있다")
+    @Test
+    public void createPrintMessageTest() {
+        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+
+        List<Integer> integers = lottoNumbers.toIntArrays();
+
+        assertThat(integers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 }
