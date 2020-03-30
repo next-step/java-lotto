@@ -35,6 +35,13 @@ public class LottoProvider {
         return new Lotto(lotto);
     }
 
+    private static List<LottoNumber> getShuffledNumber() {
+        List<LottoNumber> shuffledNumber = LOTTO_NUMBER_POOL;
+
+        Collections.shuffle(shuffledNumber);
+        return shuffledNumber;
+    }
+
     public static Lotto createLotto(List<Integer> inputNumbers) {
         List<LottoNumber> lotto =  inputNumbers.stream()
                 .map(LottoNumber::new)
@@ -42,10 +49,5 @@ public class LottoProvider {
         return new Lotto(lotto);
     }
 
-    private static List<LottoNumber> getShuffledNumber() {
-        List<LottoNumber> shuffledNumber = LOTTO_NUMBER_POOL;
 
-        Collections.shuffle(shuffledNumber);
-        return shuffledNumber;
-    }
 }
