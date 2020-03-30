@@ -1,6 +1,6 @@
 public class StringAddCalculator {
 
-    public static int sumAndSplit(String input) {
+    public static int splitAndSum(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
         }
