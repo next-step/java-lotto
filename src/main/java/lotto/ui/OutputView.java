@@ -3,24 +3,26 @@ package lotto.ui;
 import lotto.dto.LottoNumbers;
 import lotto.dto.LottoRank;
 import lotto.dto.LottoResult;
+import lotto.dto.PurchasedLottoNumbers;
 import lotto.utils.StringFormatter;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-	private static final String BUY_COUNT_FORMAT = "%d개를 구매했습니다.";
+	private static final String BUY_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
 	private static final String STATISTIC_START_MSG = "당첨 통계\n--------";
-	private static final String STATISTIC_RANK_FORMAT = "%d개 일치 (%,d원)- %d개";
+	private static final String STATISTIC_RANK_FORMAT = "%d개 일치%s(%,d원)- %d개";
+	private static final String STATISTIC_RANK_BONUS_STRING = ", 보너스 볼 일치";
+	private static final String STATISTIC_RANK_NOT_BONUS_STRING = " ";
 	private static final String STATISTIC_YIELD_FORMAT = "총 수익률은 %.2f입니다.";
 
 	public static OutputView getInstance() {
 		return new OutputView();
 	}
 
-	public void printLottoNumbers(List<LottoNumbers> lottoNumbers) {
-		System.out.println(String.format(BUY_COUNT_FORMAT, lottoNumbers.size()));
-		lottoNumbers.stream()
+	public void printLottoNumbers(PurchasedLottoNumbers lottoNumbers) {
+		System.out.println(String.format(BUY_COUNT_FORMAT, lottoNumbers.getPassiveCount(), lottoNumbers.getAutoCount()));
+		lottoNumbers.getLottoNumbers().stream()
 				.map(LottoNumbers::getNumbers)
 				.map(StringFormatter::listToString)
 				.forEach(System.out::println);
@@ -41,6 +43,7 @@ public class OutputView {
 		System.out.println(
 				String.format(STATISTIC_RANK_FORMAT,
 						winningEntry.getKey().getCorrectNumbers(),
+						winningEntry.getKey().hasBonus() ? STATISTIC_RANK_BONUS_STRING : STATISTIC_RANK_NOT_BONUS_STRING,
 						winningEntry.getKey().getWinningMoney(),
 						winningEntry.getValue()));
 	}
