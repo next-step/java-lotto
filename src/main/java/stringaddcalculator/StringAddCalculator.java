@@ -1,5 +1,6 @@
 package stringaddcalculator;
 
+import java.util.List;
 import java.util.Objects;
 
 public class StringAddCalculator {
@@ -9,6 +10,9 @@ public class StringAddCalculator {
         if (isEmptyString(input)) {
             return result;
         }
+
+        result += Integer.parseInt(input);
+
         return result;
     }
 
