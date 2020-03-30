@@ -18,9 +18,7 @@ public class LottoRun {
 
         Lotto winningLotto = getWinningLotto();
 
-        LottoInspector lottoInspector = innsightLottos(winningLotto, myLottos);
-
-        innsightResult(lottoInspector, myMoney);
+        insightResult(myMoney, winningLotto, myLottos);
     }
 
     private static Money getMonney() {
@@ -44,19 +42,15 @@ public class LottoRun {
         return winningLotto;
     }
 
-    private static LottoInspector innsightLottos(Lotto winningLotto, List<Lotto> lottos) {
-        LottoInspector lottoInspector = new LottoInspector(winningLotto, lottos);
-        Map<Integer, Integer> result = lottoInspector.getMatchedResult();
-        lottoResultView.viewInspect(result);
-
-        return lottoInspector;
-    }
-
-    private static BigDecimal innsightResult(LottoInspector lottoInspector, Money money) {
-        int totalRevenue = lottoInspector.getTotalRevenue();
+    private static LottoInspector insightResult(Money money, Lotto winningLotto, List<Lotto> lottos) {
+        LottoInspector lottoInspector = new LottoInspector();
+        Map<Integer, Integer> result = lottoInspector.getResult(winningLotto, lottos);
+        int totalRevenue = lottoInspector.getTotalRevenue(result);
         BigDecimal yield = lottoInspector.getYield(money, totalRevenue);
+
+        lottoResultView.viewInspect(result);
         lottoResultView.viewInsight(yield);
 
-        return yield;
+        return lottoInspector;
     }
 }

@@ -6,24 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoInspector {
-    private Lotto winningLotto;
-    private List<Lotto> lottos;
-    private Map<Integer, Integer> matchedResult;
 
-    public LottoInspector(Lotto winningLotto, List<Lotto> lottos) {
-        this.winningLotto = winningLotto;
-        this.lottos = lottos;
-        checkLottos();
+    public LottoInspector() {
     }
 
-    public Map<Integer, Integer> getMatchedResult() {
-        return this.matchedResult;
+    public Map<Integer, Integer> getResult(Lotto winningLotto, List<Lotto> lottos) {
+        Map<Integer, Integer> matchedResult = new LinkedHashMap<>();
+        for (Lotto lotto : lottos) {
+            putMatchedResult(matchedResult, winningLotto.getMatchedCount(lotto));
+        }
+        return matchedResult;
     }
 
-    public int getTotalRevenue() {
+    public int getTotalRevenue(Map<Integer, Integer> result) {
         int totalRevenue = 0;
-        for (Integer key : matchedResult.keySet()) {
-            totalRevenue += calculateReward(key, matchedResult.get(key));
+        for (Integer key : result.keySet()) {
+            totalRevenue += calculateReward(key, result.get(key));
         }
         return totalRevenue;
     }
@@ -39,17 +37,10 @@ public class LottoInspector {
         return 0;
     }
 
-    private void checkLottos() {
-        this.matchedResult = new LinkedHashMap<>();
-        for (Lotto lotto : lottos) {
-            putMatchedResult(winningLotto.getMatchedCount(lotto));
+    private void putMatchedResult(Map<Integer, Integer> matchedResult, Integer matchedName) {
+        if (matchedResult.containsKey(matchedName)) {
+            matchedResult.put(matchedName, matchedResult.get(matchedName) + 1);
         }
-    }
-
-    private void putMatchedResult(Integer matchedName) {
-        if (this.matchedResult.containsKey(matchedName)) {
-            this.matchedResult.put(matchedName, this.matchedResult.get(matchedName) + 1);
-        }
-        this.matchedResult.put(matchedName, 1);
+        matchedResult.put(matchedName, 1);
     }
 }
