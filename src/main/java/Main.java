@@ -8,8 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static lotto.utils.LottoUtil.convertTo;
-import static lotto.view.InputView.inputPayment;
-import static lotto.view.InputView.inputWinningNumber;
+import static lotto.view.InputView.*;
 import static lotto.view.OutputView.printLottoResults;
 import static lotto.view.OutputView.printLottoTickets;
 
@@ -32,7 +31,9 @@ public class Main {
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
-        return WinningLottoTicket.newInstance(winningNumbers, bonusNumber);
+        Integer bonusNumber = inputBonusNumber();
+
+        return WinningLottoTicket.newInstance(winningNumbers, LottoNumber.of(bonusNumber));
     }
 
 }
