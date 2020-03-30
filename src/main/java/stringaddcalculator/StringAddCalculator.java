@@ -1,6 +1,5 @@
 package stringaddcalculator;
 
-import java.util.List;
 import java.util.Objects;
 
 public class StringAddCalculator {
@@ -11,7 +10,11 @@ public class StringAddCalculator {
             return result;
         }
 
-        result += Integer.parseInt(input);
+        String[] splitInput = input.split(",");
+
+        for (String operand : splitInput) {
+            result += Integer.parseInt(operand);
+        }
 
         return result;
     }
