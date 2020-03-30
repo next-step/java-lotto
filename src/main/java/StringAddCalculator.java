@@ -5,6 +5,11 @@ public class StringAddCalculator {
     }
 
     public static int sum(String[] strings) {
-        return 3;
+        int sum = 0;
+        for (String num : strings) {
+            sum += Integer.parseInt(num);
+        }
+
+        return sum;
     }
 }

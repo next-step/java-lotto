@@ -22,7 +22,7 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("입력된 문자열 배열에 있는 숫자들의 합을 구한다")
     public void sumReturnsSumOfNumbers() {
         int result = StringAddCalculator.sum(new String[]{"1", "2"});
 
