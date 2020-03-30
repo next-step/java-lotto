@@ -25,7 +25,7 @@ public class Buyer {
     private List<Rank> getWinningResult(LottoTicket winningTicket, LottoNumber bonusNumber) {
         List<LottoTicketResult> winningLottoTicketResults = lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.checkWinning(winningTicket, bonusNumber))
-                .filter(result -> result.getMatchCount() >= LottoTicket.WINNING_MIN_COUNT)
+                .filter(LottoTicketResult::isWinning)
                 .collect(Collectors.toList());
 
         return winningLottoTicketResults.stream()

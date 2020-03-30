@@ -1,6 +1,8 @@
 package lotto.domain;
 
 public class LottoTicketResult {
+    private static final int WINNING_MIN_COUNT = 3;
+
     private int matchCount;
     private boolean bonusMatch;
 
@@ -15,5 +17,9 @@ public class LottoTicketResult {
 
     public boolean isBonusMatch() {
         return bonusMatch;
+    }
+
+    public boolean isWinning() {
+        return matchCount >= WINNING_MIN_COUNT;
     }
 }
