@@ -16,12 +16,12 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("로또 결과 테스트")
+@DisplayName("로또 결과 다수 테스트")
 public class LottoResultsTests {
 
     private static List<LottoResults> lottoResultsList;
 
-    static  {
+    static {
         lottoResultsList = new ArrayList<>();
         lottoResultsList.add(LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE, LottoResult.TWO)));
         lottoResultsList.add(LottoResults.create(Arrays.asList(LottoResult.ONE, LottoResult.NONE, LottoResult.FOUR, LottoResult.ONE, LottoResult.TWO)));

@@ -22,28 +22,40 @@ public class WinningLottoTicketTests {
     @DisplayName("당첨 로또 생성 테스트")
     @ParameterizedTest
     @MethodSource("generateWinningLottoTestCases")
-    public void generateWinningLottoTest(Set<LottoNumber> numbers) {
-        assertThatCode(() -> WinningLottoTicket.newInstance(numbers)).doesNotThrowAnyException();
+    public void generateWinningLottoTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
+        assertThatCode(() -> WinningLottoTicket.newInstance(numbers, bonusNumber)).doesNotThrowAnyException();
     }
 
     @DisplayName("당첨 로또 생성 오류 테스트")
     @ParameterizedTest
     @NullAndEmptySource
     @MethodSource("generateWinningLottoExceptionTestCases")
-    public void generateLottoExceptionTest(Set<LottoNumber> numbers) {
+    public void generateLottoExceptionTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> WinningLottoTicket.newInstance(numbers))
+                .isThrownBy(() -> WinningLottoTicket.newInstance(numbers, bonusNumber))
                 .withMessageContaining("Lotto Ticket must have six distinct number.");
+    }
+
+    @DisplayName("당첨 로또 생성 오류 - 보너스 번호 테스트")
+    @ParameterizedTest
+    @NullAndEmptySource
+    @MethodSource("winningLottoBonusNumberExceptionTestCases")
+    public void generateLottoExceptionTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> WinningLottoTicket.newInstance(numbers, bonusNumber))
+                .withMessageContaining("bonus number must be distinct.");
     }
 
     private static Stream<Arguments> generateWinningLottoTestCases() {
         return Stream.of(
                 Arguments.of(new HashSet<>(Arrays.asList(
                         LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)))),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
+                        LottoNumber.of(7)),
                 Arguments.of(new HashSet<>(Arrays.asList(
                         LottoNumber.of(10), LottoNumber.of(20), LottoNumber.of(30),
-                        LottoNumber.of(40), LottoNumber.of(41), LottoNumber.of(42))))
+                        LottoNumber.of(40), LottoNumber.of(41), LottoNumber.of(42))),
+                        LottoNumber.of(45))
         );
     }
 
@@ -51,10 +63,25 @@ public class WinningLottoTicketTests {
         return Stream.of(
                 Arguments.of(new HashSet<>(Arrays.asList(
                         LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7)))),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6), LottoNumber.of(7))),
+                        LottoNumber.of(9)),
                 Arguments.of(new HashSet<>(Arrays.asList(
                         LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                        LottoNumber.of(4), LottoNumber.of(5))))
+                        LottoNumber.of(4), LottoNumber.of(5))),
+                        LottoNumber.of(11))
+        );
+    }
+
+    private static Stream<Arguments> winningLottoBonusNumberExceptionTestCases() {
+        return Stream.of(
+                Arguments.of(new HashSet<>(Arrays.asList(
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6))),
+                        LottoNumber.of(6)),
+                Arguments.of(new HashSet<>(Arrays.asList(
+                        LottoNumber.of(10), LottoNumber.of(20), LottoNumber.of(30),
+                        LottoNumber.of(40), LottoNumber.of(41), LottoNumber.of(42))),
+                        LottoNumber.of(42))
         );
     }
 }
