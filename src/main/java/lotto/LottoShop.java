@@ -10,11 +10,19 @@ import java.util.List;
 
 public class LottoShop {
     private static final int PRICE_PER_PIECE = 1000;
+    private LottoBundle lottoBundle;
 
-    public LottoBundle buyAuto(int price) {
+    public LottoShop() {
+    }
+
+    public LottoShop(LottoBundle lottoBundle) {
+        this.lottoBundle = lottoBundle;
+    }
+
+    public void buyAuto(int price) {
         validatePrice(price);
         int lottoCount = Math.floorDiv(price, PRICE_PER_PIECE);
-        return new LottoBundle(toList(lottoCount));
+        lottoBundle = new LottoBundle(toList(lottoCount));
     }
 
     private List<Lotto> toList(int lottoCount) {
@@ -32,8 +40,12 @@ public class LottoShop {
         }
     }
 
-    public LottoResult checkWinning(LottoBundle lottoBundle, String winningNumber) {
-        List<WinningType> winningTypes = lottoBundle.lottery(winningNumber);
-        return new LottoResult(winningTypes, lottoBundle);
+    public LottoBundle getLottoBundle() {
+        return lottoBundle;
+    }
+
+    public LottoResult checkWinning(String winningNumber, int bonusNumber) {
+        List<WinningType> winningTypes = lottoBundle.drawForWinning(winningNumber, bonusNumber);
+        return new LottoResult(winningTypes, lottoBundle.size());
     }
 }

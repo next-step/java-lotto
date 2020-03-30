@@ -17,7 +17,7 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        lottoResult = new LottoResult(Arrays.asList(WinningType.THREE_MATCH), Fixture.lottoBundleHasFiveLotto());
+        lottoResult = new LottoResult(Arrays.asList(WinningType.THREE_MATCH), Fixture.lottoBundleHasFiveLotto().size());
     }
 
     @DisplayName("로또 수익률 계산")

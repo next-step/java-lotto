@@ -58,11 +58,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public WinningType checkWinning(Lotto winningLotto) {
-        long matchCount = winningLotto.lottoNumbers.stream()
-                .filter(lottoNumber -> this.lottoNumbers.contains(lottoNumber))
-                .count();
-        return WinningType.findLottoWinningtype(matchCount);
+    public boolean isContainsLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

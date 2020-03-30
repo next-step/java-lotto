@@ -3,7 +3,6 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -56,17 +55,5 @@ public class LottoTest {
     @ValueSource(strings = {"1, 2, 3, 4, 5, 46", "-1, 2, 3, 4, 5, 6"})
     void createFailByInvalidLottoNumber(String lottoNumber) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumber));
-    }
-
-    @DisplayName("당첨 확인")
-    @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 6:6"}, delimiter = ':')
-    void checkWinning(String lottoNumber, String winningNumber, int expected) {
-        Lotto buyingLotto = new Lotto(lottoNumber);
-        Lotto winningLotto = new Lotto(winningNumber);
-
-        int actual = winningLotto.checkWinning(buyingLotto).getMatchCount();
-
-        assertThat(actual).isEqualTo(expected);
     }
 }

@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum WinningType {
-    THREE_MATCH(3, BigDecimal.valueOf(5000)),
-    FOUR_MATCH(4, BigDecimal.valueOf(50000)),
-    FIVE_MATCH(5, BigDecimal.valueOf(1500000)),
-    SIX_MATCH(6, BigDecimal.valueOf(2000000000));
+    MISS_MATCH(0, BigDecimal.ZERO),
+    THREE_MATCH(3, BigDecimal.valueOf(5_000)),
+    FOUR_MATCH(4, BigDecimal.valueOf(50_000)),
+    FIVE_MATCH(5, BigDecimal.valueOf(1_500_000)),
+    SECOND(5, BigDecimal.valueOf(30_000_000)),
+    SIX_MATCH(6, BigDecimal.valueOf(2_000_000_000));
 
     private int matchCount;
     private BigDecimal amount;
@@ -21,11 +23,15 @@ public enum WinningType {
         this.amount = amount;
     }
 
-    public static WinningType findLottoWinningtype(long matchCount) {
+    public static WinningType findLottoWinningtype(long matchCount, boolean bonusMatch) {
+        if (isEqualMatchCount(matchCount, FIVE_MATCH) || bonusMatch) {
+            return WinningType.SECOND;
+        }
+
         return Arrays.asList(values()).stream()
                 .filter(lottoMatchType -> isEqualMatchCount(matchCount, lottoMatchType))
                 .findFirst()
-                .orElse(null);
+                .orElse(MISS_MATCH);
     }
 
     private static boolean isEqualMatchCount(long matchCount, WinningType lottoMatchType) {
@@ -38,5 +44,9 @@ public enum WinningType {
 
     public BigDecimal getWinningAmount() {
         return amount;
+    }
+
+    public boolean isMatched() {
+        return this != MISS_MATCH;
     }
 }
