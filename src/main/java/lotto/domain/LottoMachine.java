@@ -13,7 +13,8 @@ public class LottoMachine {
     }
 
     public List<Lotto> purchaseLottos(Money money) {
-        for (int i = 0; i < getPurchasedCount(money); i++) {
+        int purchasedCount = getPurchasedCount(money);
+        for (int i = 0; i < purchasedCount; i++) {
             this.lottos.add(Lotto.newAutomatic());
         }
         return this.lottos;
