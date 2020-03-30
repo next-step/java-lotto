@@ -28,7 +28,7 @@ public class PositiveNumber {
     }
 
     private void validatePositive(int number) {
-        if (number < 0) {
+        if (number <= 0) {
             throw new RuntimeException("양수가 아닙니다.");
         }
     }
