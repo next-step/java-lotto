@@ -20,7 +20,7 @@ public class LottoChecker {
 		this.spentMoney = spentMoney;
 	}
 
-	public LottoResult getWinningResult(LottoNumbers... applyNumbers) {
+	LottoResult getWinningResult(LottoNumbers... applyNumbers) {
 		return getWinningResult(Arrays.asList(applyNumbers));
 	}
 

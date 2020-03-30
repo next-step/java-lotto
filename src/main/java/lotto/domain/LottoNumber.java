@@ -54,7 +54,7 @@ class LottoNumber {
 
 	LottoNumbers getLottoNumbers() {
 		return new LottoNumbers(numbers.stream()
-				.map(LottoNo::getLottoNo)
+				.map(LottoNo::getNumber)
 				.collect(Collectors.toList()));
 	}
 

@@ -22,7 +22,7 @@ class LottoWinningNumber {
 		throw new IllegalArgumentException(String.format("Instantiate LottoWinningNumber failed. " +
 						"bonus Number cannot be elected numbers : numbers=%s, bonusNumber=%d",
 				StringFormatter.listToString(electedNumber.getLottoNumbers().getNumbers()),
-				bonusNumber.getLottoNo()));
+				bonusNumber.getNumber()));
 	}
 
 	private boolean isInvalidLottoNumbers() {

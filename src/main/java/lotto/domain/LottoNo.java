@@ -6,14 +6,14 @@ class LottoNo {
 	public static final int LOWEST_NUMBER = 1;
 	public static final int HIGHEST_NUMBER = 45;
 
-	private final int lottoNo;
+	private final int number;
 
 	static LottoNo getInstance(int lottoNo) {
 		return new LottoNo(lottoNo);
 	}
 
 	private LottoNo(int lottoNo) {
-		this.lottoNo = lottoNo;
+		this.number = lottoNo;
 
 		if (isInvalidLottoNumbers()) {
 			throwIllegalException();
@@ -25,21 +25,21 @@ class LottoNo {
 						"lottoNo must be in range %d~%d : lottoNo=%d",
 				LottoNo.LOWEST_NUMBER,
 				LottoNo.HIGHEST_NUMBER,
-				lottoNo));
+				number));
 	}
 
 	private boolean isInvalidLottoNumbers() {
-		return (lottoNo < LOWEST_NUMBER) || (HIGHEST_NUMBER < lottoNo);
+		return (number < LOWEST_NUMBER) || (HIGHEST_NUMBER < number);
 	}
 
-	public int getLottoNo() {
-		return lottoNo;
+	public int getNumber() {
+		return number;
 	}
 
 	@Override
 	public String toString() {
 		return "LottoNo{" +
-				"lottoNo=" + lottoNo +
+				"lottoNo=" + number +
 				'}';
 	}
 
@@ -48,11 +48,11 @@ class LottoNo {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoNo lottoNo1 = (LottoNo) o;
-		return lottoNo == lottoNo1.lottoNo;
+		return number == lottoNo1.number;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(lottoNo);
+		return Objects.hash(number);
 	}
 }

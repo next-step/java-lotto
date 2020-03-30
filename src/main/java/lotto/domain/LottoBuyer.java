@@ -18,7 +18,7 @@ public class LottoBuyer {
 		machinePassive = new LottoMachinePassive();
 	}
 
-	public PurchasedLottoNumbers buyLottoNumbers(long money) {
+	PurchasedLottoNumbers buyLottoNumbers(long money) {
 		return buyLottoNumbers(money, Collections.emptyList());
 	}
 
