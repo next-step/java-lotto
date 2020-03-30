@@ -1,22 +1,16 @@
 package lotto.domain.item;
 
-import lotto.exception.ValidLottoException;
-
 import java.util.List;
-import java.util.Objects;
 
 public class WinLottoTicket extends Lotto {
-    public WinLottoTicket(List<LottoNumber> numbers) {
+
+    private final LottoNumber bonus;
+
+    public WinLottoTicket(List<LottoNumber> numbers, LottoNumber bonus) {
         super(numbers);
-    }
-
-//    private final int bonus;
-
-//    public WinLottoTicket(List<Integer> numbers, int bonus) {
-//        super(numbers);
 //        validateBonusNumber(numbers, bonus);
-//        this.bonus = bonus;
-//    }
+        this.bonus = bonus;
+    }
 //
 //    private void validateBonusNumber(List<Integer> numbers, int bonus) {
 //        if (numbers.contains(bonus)) {
@@ -24,9 +18,9 @@ public class WinLottoTicket extends Lotto {
 //        }
 //    }
 //
-//    public int getBonus() {
-//        return bonus;
-//    }
+    public LottoNumber getBonus() {
+        return bonus;
+    }
 //
 //    @Override
 //    public boolean equals(Object o) {
