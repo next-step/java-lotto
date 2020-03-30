@@ -4,23 +4,33 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
-        return sum(split(input));
+        return sum(toInt(split(input)));
+    }
+
+    private static int[] toInt(String[] values) {
+        int[] numbers = new int[values.length];
+
+        for (int i = 0; i < values.length; i++) {
+            int number = Integer.parseInt(values[i]);
+            if (number < 0 ) {
+                throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
+            }
+
+            numbers[i] = number;
+        }
+        return numbers;
     }
 
     private static String[] split(String input) {
         return input.split(",|:");
     }
 
-    private static int sum(String[] values) {
+    private static int sum(int[] numbers) {
         int sum = 0;
-        for (String value : values) {
-            int number = Integer.parseInt(value);
-            if (number < 0 ) {
-                throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
-            }
-
+        for (int number : numbers) {
             sum += number;
         }
+
         return sum;
     }
 }
