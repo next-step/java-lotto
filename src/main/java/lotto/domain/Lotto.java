@@ -26,8 +26,8 @@ public class Lotto {
     }
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = cloneLottoNumbers(lottoNumbers);
-        validate();
         sortLottorNumbers();
     }
 
@@ -63,8 +63,9 @@ public class Lotto {
         return lottoNumber;
     }
 
-    private void validate() {
-        if (this.lottoNumbers.size() != LOTTO_MAX_SOCKET) {
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        Objects.requireNonNull(lottoNumbers, "로또 생성에 실패했습니다.");
+        if (lottoNumbers.size() != LOTTO_MAX_SOCKET) {
             throw new IllegalArgumentException("로또는 고유한 숫자 6개로 이뤄져야 합니다.");
         }
     }

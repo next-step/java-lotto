@@ -50,6 +50,7 @@ public class LottoNumber implements Cloneable {
     }
 
     private void validateNumberRange(Integer number) {
+        Objects.requireNonNull(number, "로또 번호를 생성하는데 실패했습니다.");
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new RuntimeException("로또 숫자 범위를 넘어섰습니다.");
         }
