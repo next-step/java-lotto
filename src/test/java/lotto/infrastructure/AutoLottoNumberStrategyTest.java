@@ -1,7 +1,6 @@
 package lotto.infrastructure;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +16,8 @@ class AutoLottoNumberStrategyTest {
         LottoNumbers one = new AutoLottoNumberStrategy().get();
         LottoNumbers another = new AutoLottoNumberStrategy().get();
 
-        assertThat(one.size()).isEqualTo(SIX);
-        assertThat(another.size()).isEqualTo(SIX);
+        assertThat(one.getLottoNumbers()).hasSize(SIX);
+        assertThat(another.getLottoNumbers()).hasSize(SIX);
 
         assertThat(one.equals(another)).isFalse();
     }
