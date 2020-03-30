@@ -19,4 +19,8 @@ public class LottoGame {
         }
         return new LottoTickets(lottoTickets);
     }
+
+    public LottoGameResults match(LottoTickets lottoTickets, WinningTicket winningTicket) {
+        return new LottoGameResults(lottoTickets.checkRank(winningTicket));
+    }
 }
