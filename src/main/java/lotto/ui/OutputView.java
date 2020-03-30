@@ -1,8 +1,9 @@
 package lotto.ui;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoRank;
+import lotto.domain.dto.LottoResult;
+import lotto.utils.StringFormatter;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,10 @@ public class OutputView {
 
 	public void printLottoNumbers(List<LottoNumber> lottoNumbers) {
 		System.out.println(String.format(BUY_COUNT_FORMAT, lottoNumbers.size()));
-		lottoNumbers.forEach(System.out::println);
+		lottoNumbers.stream()
+				.map(LottoNumber::getNumbers)
+				.map(StringFormatter::listToString)
+				.forEach(System.out::println);
 		System.out.println();
 	}
 
@@ -37,7 +41,7 @@ public class OutputView {
 		System.out.println(
 				String.format(STATISTIC_RANK_FORMAT,
 						winningEntry.getKey().getCorrectNumbers(),
-						winningEntry.getKey().getEarningPrize(),
+						winningEntry.getKey().getWinningMoney(),
 						winningEntry.getValue()));
 	}
 

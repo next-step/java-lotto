@@ -1,37 +1,29 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoRank;
+import lotto.domain.dto.LottoResult;
+import lotto.domain.dto.LottoWinningNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoCheckerTest {
 
 	@Test
-	void isEqualTest() {
-		assertThat(new LottoChecker(new LottoNumber(1, 2, 3, 4, 5, 6), 14000))
-				.isEqualTo(new LottoChecker(new LottoNumber(1, 2, 3, 4, 5, 6), 14000));
-	}
-
-	@Test
 	void getWinningResultTest() {
-		LottoChecker lottoChecker = new LottoChecker(new LottoNumber(1, 2, 3, 4, 5, 6), 1000);
+		List<Integer> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6).collect(Collectors.toList());
+		LottoChecker lottoChecker = new LottoChecker(new LottoWinningNumber(lottoNumbers, 7), 1000);
 
-		assertThat(lottoChecker.getWinningResult(new LottoNumber(1, 2, 3, 4, 5, 6)))
-				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FIRST, 1L), 1000));
-
-		assertThat(lottoChecker.getWinningResult(new LottoNumber(1, 2, 3, 4, 5, 7)))
-				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.SECOND, 1L), 1000));
-
-		assertThat(lottoChecker.getWinningResult(new LottoNumber(1, 2, 3, 4, 7, 8)))
-				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.THIRD, 1L), 1000));
-
-		assertThat(lottoChecker.getWinningResult(new LottoNumber(1, 2, 3, 7, 8, 9)))
-				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FOURTH, 1L), 1000));
-
-		assertThat(lottoChecker.getWinningResult(new LottoNumber(1, 2, 7, 8, 9, 10)))
-				.isEqualTo(new LottoResult(Collections.EMPTY_MAP, 1000));
+		assertThat(
+				lottoChecker.getWinningResult(
+						new LottoNumber(lottoNumbers),
+						new LottoNumber(lottoNumbers)))
+				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FIRST, 2L), 1000));
 	}
-
 }

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.dto;
 
 import java.util.*;
 import java.util.function.Function;
@@ -9,7 +9,7 @@ public class LottoResult {
 	private final Map<LottoRank, Long> winningMap;
 	private final long spentMoney;
 
-	LottoResult(Map<LottoRank, Long> winningMap, long spentMoney) {
+	public LottoResult(Map<LottoRank, Long> winningMap, long spentMoney) {
 		this.winningMap = Collections.unmodifiableMap(makeZeroPaddingEnumMap(winningMap));
 		this.spentMoney = spentMoney;
 	}
@@ -29,7 +29,7 @@ public class LottoResult {
 		return winningMap
 				.entrySet()
 				.stream()
-				.mapToLong(entry -> entry.getKey().getEarningPrize() * entry.getValue())
+				.mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
 				.sum() / (double) spentMoney;
 	}
 

@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoRank;
+import lotto.domain.dto.LottoResult;
+import lotto.domain.dto.LottoWinningNumber;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -8,11 +13,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoChecker {
-	private final LottoNumber winningNumbers;
+	private final LottoWinningNumber winningNumber;
 	private final long spentMoney;
 
-	public LottoChecker(LottoNumber winningNumbers, long spentMoney) {
-		this.winningNumbers = winningNumbers;
+	public LottoChecker(LottoWinningNumber winningNumber, long spentMoney) {
+		this.winningNumber = winningNumber;
 		this.spentMoney = spentMoney;
 	}
 
@@ -22,7 +27,7 @@ public class LottoChecker {
 
 	public LottoResult getWinningResult(List<LottoNumber> applyNumbers) {
 		Map<LottoRank, Long> map = applyNumbers.stream()
-				.map(lottoNumber -> lottoNumber.matchLottoNumber(winningNumbers))
+				.map(lottoNumber -> lottoNumber.matchLottoNumber(winningNumber))
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
@@ -34,11 +39,11 @@ public class LottoChecker {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoChecker that = (LottoChecker) o;
-		return Objects.equals(winningNumbers, that.winningNumbers);
+		return Objects.equals(winningNumber, that.winningNumber);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(winningNumbers);
+		return Objects.hash(winningNumber);
 	}
 }

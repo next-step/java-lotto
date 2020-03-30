@@ -2,7 +2,8 @@ package lotto;
 
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoChecker;
-import lotto.domain.LottoNumber;
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoWinningNumber;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -19,7 +20,7 @@ public class Lotto {
 		List<LottoNumber> numbers = lottoBuyer.buyLottoNumbers(spentMoney);
 		outputView.printLottoNumbers(numbers);
 
-		LottoNumber winNumber = inputView.getWinningLastWeekNumber();
+		LottoWinningNumber winNumber = inputView.getWinningLastWeekNumber();
 		LottoChecker lottoChecker = new LottoChecker(winNumber, spentMoney);
 
 		outputView.printStatistics(lottoChecker.getWinningResult(numbers));
