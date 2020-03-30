@@ -1,5 +1,6 @@
 package lotto.dto;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PurchasedLottoNumbers {
@@ -10,7 +11,7 @@ public class PurchasedLottoNumbers {
 	public PurchasedLottoNumbers(int passiveCount, int autoCount, List<LottoNumbers> lottoNumbers) {
 		this.passiveCount = passiveCount;
 		this.autoCount = autoCount;
-		this.lottoNumbers = lottoNumbers;
+		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
 	}
 
 	public int getPassiveCount() {
