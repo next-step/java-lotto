@@ -6,6 +6,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.WinningType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -29,7 +30,7 @@ class LottoShopTest {
     @DisplayName("구입 금액에 맞게 로또 생성")
     @ParameterizedTest
     @ValueSource(ints = {10000})
-    void createLotto(int price) {
+    void buyAuto(int price) {
         lottoShop.buyAuto(price);
         LottoBundle lottos = lottoShop.getLottoBundle();
 
@@ -50,6 +51,19 @@ class LottoShopTest {
                 () -> assertThat(actual).isNotNull(),
                 () -> assertThat(actual).isNotEmpty(),
                 () -> assertThat(actual.get(0)).isEqualTo(WinningType.SIX_MATCH)
+        );
+    }
+
+    @DisplayName("로또 수동 구입 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,6", "7,28,30,1,11,12", "14,13,1,8,6,49"})
+    void buyManual(String lottoString) {
+        List<String> lottoStrings = Arrays.asList(lottoString);
+        LottoBundle lottos = lottoShop.buyManual(lottoStrings);
+
+        assertAll(
+                () -> assertThat(lottos.size()).isEqualTo(lottoStrings.size()),
+                () -> assertThat(lottos.getLottos()).containsExactly(new Lotto(lottoString))
         );
     }
 }
