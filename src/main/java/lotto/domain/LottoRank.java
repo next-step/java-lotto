@@ -7,6 +7,7 @@ public enum LottoRank {
     , FOURTH(3, new Price(5_000))
     , THIRD(4,  new Price(50_000))
     , SECOND(5, new Price(1_500_000))
+    , SECOND_BONUS(5, new Price(30_000_000))
     , FIRST(6,  new Price(2_000_000_000))
     ;
 
