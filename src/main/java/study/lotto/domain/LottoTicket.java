@@ -1,11 +1,16 @@
 package study.lotto.domain;
 
+import study.lotto.domain.exception.LottoTicketConstructorException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket implements Iterable<LottoNumber> {
-    private static final String CONSTRUCTOR_ERROR_MESSAGE = "중복없는 6개의 로또 숫자를 " +
-            "입력하세요.";
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final String LOTTO_NUMBERS_SIZE_ERROR_MESSAGE =
+            "%d개의 로또 숫자를 입력하세요.";
+    private static final String DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE =
+            "로또 숫자의 중복은 허용되지 않습니다.";
     public static final int PRICE = 1000;
 
     private Set<LottoNumber> lottoNumber;
@@ -14,11 +19,18 @@ public class LottoTicket implements Iterable<LottoNumber> {
     }
 
     public LottoTicket(List<Integer> lottoNumbers) {
-        if (!LottoRule.isComplianceNumberRule(lottoNumbers)) {
-            throw new IllegalArgumentException(CONSTRUCTOR_ERROR_MESSAGE);
+        if (Objects.isNull(lottoNumbers) ||
+                lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new LottoTicketConstructorException(
+                    LOTTO_NUMBERS_SIZE_ERROR_MESSAGE);
         }
 
         setLottoNumber(lottoNumbers);
+
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new LottoTicketConstructorException(
+                    DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE);
+        }
     }
 
     public int size() {
