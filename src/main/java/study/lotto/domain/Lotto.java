@@ -34,15 +34,9 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoResult setWinningNumber(LottoWinningNumber winningNumber) {
-        LottoResult lottoResult = new LottoResult(investmentAmount);
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoRank lottoRank = LottoRule.getWinningRank(lottoTicket,
-                    winningNumber);
-            lottoResult.addWinningTicket(lottoRank, lottoTicket);
-        }
-
-        return lottoResult;
+    public LottoResult result(LottoWinningNumber lottoWinningNumber) {
+        return new LottoResult(lottoTickets,
+                lottoWinningNumber,
+                investmentAmount);
     }
 }

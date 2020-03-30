@@ -7,25 +7,32 @@ public class LottoResult {
     private Map<LottoRank, List<LottoTicket>> winningTickets;
     private Amount investmentAmount;
 
-    public LottoResult(Amount investmentAmount) {
+    public LottoResult(List<LottoTicket> lottoTickets,
+                       LottoWinningNumber lottoWinningNumber,
+                       Amount investmentAmount) {
         this.investmentAmount = investmentAmount;
-        setWinners();
+        setWinningTickets(lottoTickets, lottoWinningNumber);
     }
 
-    public LottoResult(int investmentAmount) {
-        this(new Amount(investmentAmount));
+    public LottoResult(List<LottoTicket> lottoTickets,
+                       LottoWinningNumber lottoWinningNumber,
+                       int investmentAmount) {
+        this(lottoTickets, lottoWinningNumber, new Amount(investmentAmount));
     }
 
-    private void setWinners() {
-        this.winningTickets = new HashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            this.winningTickets.put(lottoRank, new ArrayList<>());
+    private void setWinningTickets(List<LottoTicket> lottoTickets,
+                                   LottoWinningNumber lottoWinningNumber) {
+        initWinningTickets();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoRank lottoRank = lottoWinningNumber.rank(lottoTicket);
+            this.winningTickets.get(lottoRank).add(lottoTicket);
         }
     }
 
-    public void addWinningTicket(LottoRank lottoRank, LottoTicket lottoTicket) {
-        if (lottoRank != null) {
-            this.winningTickets.get(lottoRank).add(lottoTicket);
+    private void initWinningTickets() {
+        this.winningTickets = new HashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            this.winningTickets.put(lottoRank, new ArrayList<>());
         }
     }
 

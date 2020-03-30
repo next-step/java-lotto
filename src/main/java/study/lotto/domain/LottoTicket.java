@@ -60,6 +60,10 @@ public class LottoTicket implements Iterable<LottoNumber> {
         return clonedLottoTicket;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     @Override public Iterator<LottoNumber> iterator() {
         return lottoNumbers.iterator();
     }
