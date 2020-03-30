@@ -4,12 +4,21 @@ import lotto.type.RankType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoCalculatorTest {
+    private Lotto noRankLotto;
+    private Lotto rank1Lotto;
+    private Lotto rank2Lotto;
+    private Lotto rank3Lotto;
+    private Lotto rank4Lotto;
+    private Lotto rank5Lotto;
+    private String bonusBall;
+
     private Lotto lastWeekLotto;
     private List<Lotto> lottos;
 
@@ -17,29 +26,25 @@ public class LottoCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        lastWeekLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        lottos = Arrays.asList(new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
-                new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
-                new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44)),
-                new Lotto(Arrays.asList(1, 8, 11, 31, 41, 42)),
-                new Lotto(Arrays.asList(13, 14, 16, 38, 42, 45)),
-                new Lotto(Arrays.asList(7, 11, 30, 40, 42, 43)),
-                new Lotto(Arrays.asList(2, 13, 22, 32, 38, 45)),
-                new Lotto(Arrays.asList(23, 25, 33, 36, 39, 41)),
-                new Lotto(Arrays.asList(1, 3, 5, 14, 22, 45)),
-                new Lotto(Arrays.asList(5, 9, 38, 41, 43, 44)),
-                new Lotto(Arrays.asList(2, 8, 9, 18, 19, 21)),
-                new Lotto(Arrays.asList(13, 14, 18, 21, 23, 35)),
-                new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)),
-                new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
+        noRankLotto = new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        rank1Lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        rank2Lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        rank3Lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
+        rank4Lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
+        rank5Lotto = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10));
 
-        lottoCalculator = new LottoCalculator(lastWeekLotto, lottos);
+        bonusBall = "7";
+
+        lastWeekLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottos = new ArrayList<>();
     }
 
     @Test
     void getWinningPercentage() {
         int investment = 14_000;
         String winningPercentageValue = "0.35";
+        addRank(RankType.RANK5, 1);
+        lottoCalculator = new LottoCalculator(new WinningLotto(lastWeekLotto, bonusBall), lottos);
 
         String winningPercentage = lottoCalculator.getWinningPercentage(investment).toString();
 
@@ -48,12 +53,39 @@ public class LottoCalculatorTest {
 
     @Test
     void getCount() {
-        int noRankCount = lottoCalculator.getCount(RankType.NO_RANK);
-        int rank4Count = lottoCalculator.getCount(RankType.RANK4);
-        int rank1Count = lottoCalculator.getCount(RankType.RANK1);
+        int expected = 10;
+        addRank(RankType.RANK1, expected);
+        lottoCalculator = new LottoCalculator(new WinningLotto(lastWeekLotto, bonusBall), lottos);
 
-        assertThat(noRankCount).isEqualTo(13);
-        assertThat(rank4Count).isEqualTo(1);
-        assertThat(rank1Count).isEqualTo(0);
+        assertThat(lottoCalculator.getCount(RankType.RANK1)).isEqualTo(expected);
+        assertThat(lottoCalculator.getCount(RankType.NO_RANK)).isEqualTo(0);
+    }
+
+    private void addRank(RankType type, int addCount) {
+        Lotto lotto = noRankLotto;
+
+        if (type == RankType.RANK1) {
+            lotto = rank1Lotto;
+        }
+
+        if (type == RankType.RANK2) {
+            lotto = rank2Lotto;
+        }
+
+        if (type == RankType.RANK3) {
+            lotto = rank3Lotto;
+        }
+
+        if (type == RankType.RANK4) {
+            lotto = rank4Lotto;
+        }
+
+        if (type == RankType.RANK5) {
+            lotto = rank5Lotto;
+        }
+
+        for (int i = 0; i < addCount; i++) {
+            lottos.add(lotto);
+        }
     }
 }
