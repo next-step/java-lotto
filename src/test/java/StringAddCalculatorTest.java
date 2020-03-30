@@ -46,4 +46,12 @@ public class StringAddCalculatorTest {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("#,b,c"))
                 .isInstanceOf(NumberFormatException.class);
     }
+
+    @Test
+    @DisplayName("//와 \\n 문자 사이에 커스텀 구분자를 지정할 수 있다")
+    public void splitAndSumWithCustomDelimiter() {
+        int result = StringAddCalculator.splitAndSum("//&\n1&2&3");
+
+        assertThat(result).isEqualTo(result);
+    }
 }
