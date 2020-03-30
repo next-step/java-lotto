@@ -22,10 +22,28 @@ public class StringAddCalculator {
         int result = 0;
 
         for (String operand : splitInput(input)) {
-            result += Integer.parseInt(operand);
+            result += getValidValue(operand);
         }
 
         return result;
+    }
+
+    private static int getValidValue(String input) {
+        int value = parseValidInt(input);
+
+        if (value < 0) {
+            throw new RuntimeException();
+        }
+
+        return value;
+    }
+
+    private static int parseValidInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException();
+        }
     }
 
     private static String[] splitInput(String input) {

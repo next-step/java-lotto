@@ -9,12 +9,12 @@
     - [x] default 구분자
     - [x] custom 구분자  
 * Separator
-  - [ ] 문자열 분리
+  - [x] 문자열 분리
   - [x] 커스텀 구분자로 분리
 * StringAddCalculator
   - [x] null 혹은 빈 문자열 확인
   - [x] 피연산자의 int 값으로 연산
-  - [ ] 피연산자의 조건 : 양수 (음수, 문자 등의 경우 RuntimeException throw)
+  - [x] 피연산자의 조건 : 양수 (음수, 문자 등의 경우 RuntimeException throw)
 
 ### 프로그래밍 요구사항
 
