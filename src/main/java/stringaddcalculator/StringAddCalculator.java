@@ -3,6 +3,9 @@ package stringaddcalculator;
 import java.util.Objects;
 
 public class StringAddCalculator {
+    private static final String REGEX_FORMAT = "[%s]";
+    private static final String DELIMITERS = ",:";
+
     public static int splitAndSum(String input) {
         int result = 0;
 
@@ -10,7 +13,7 @@ public class StringAddCalculator {
             return result;
         }
 
-        String[] splitInput = input.split("[,:]");
+        String[] splitInput = input.split(String.format(REGEX_FORMAT, DELIMITERS));
 
         for (String operand : splitInput) {
             result += Integer.parseInt(operand);

@@ -6,7 +6,7 @@
 
 * Delimiter
   - [ ] 입력받은 문자열의 피연산자를 분리하기 위한 구분자 정의
-    - [ ] default 구분자
+    - [x] default 구분자
     - [ ] custom 구분자  
 * Separator
   - [ ] 문자열 분리
