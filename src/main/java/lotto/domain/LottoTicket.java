@@ -1,30 +1,33 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoTicket {
-    private final LottoNumber lottoTicket;
+    private final LottoNumbers lottoNumbers;
 
-    LottoTicket(LottoNumberStrategy lottoNumberStrategy) {
-        this.lottoTicket = lottoNumberStrategy.get();
+    public LottoTicket(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
-    LottoTicket(LottoNumber lottoNumber) {
-        this.lottoTicket = lottoNumber;
-    }
-
-    public LottoRank checkPrize(WinningNumber winningNumber) {
-        int matchCount = (int) lottoTicket.getMatchCountInLottoNumber(winningNumber);
-        if (isMatchFiveAndBonus(winningNumber, matchCount)) {
-            return LottoRank.FIVE_BONUS;
+    public LottoRank checkPrize(WinningTicket winningTicket) {
+        int matchCount = lottoNumbers.countMatchNumbers(winningTicket.getLottoNumbers());
+        if (matchCount == LottoRank.FIVE.getMatchCount() && winningTicket.isMatchBonusNumber(lottoNumbers)) {
+            return LottoRank.of(LottoRank.FIVE_BONUS.getMatchCount());
         }
         return LottoRank.of(matchCount);
     }
 
-    private boolean isMatchFiveAndBonus(WinningNumber winningNumber, int matchCount) {
-        return matchCount == 5 && winningNumber.isMatchBonusNumber(lottoTicket);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoTicket)) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override
-    public String toString() {
-        return lottoTicket.getNumberToString();
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
+
 }
