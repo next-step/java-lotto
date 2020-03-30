@@ -7,19 +7,19 @@ public class Lotto {
     private static final String DELIMITER = ",";
     private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
-        this(toList(generateAutoLottoSets()));
+        this(generateAutoLottoSets());
     }
 
     public Lotto(String lottoString) {
-        this(toList(generateManulalLottoSets(lottoString)));
+        this(generateManulalLottoSets(lottoString));
     }
 
-    private Lotto(List<LottoNumber> lottos) {
+    private Lotto(Set<LottoNumber> lottos) {
         validateSize(lottos);
-        this.lottoNumbers = Collections.unmodifiableList(lottos);
+        this.lottoNumbers = Collections.unmodifiableSet(lottos);
     }
 
     private static Set<LottoNumber> generateAutoLottoSets() {
@@ -41,20 +41,14 @@ public class Lotto {
         return lottoNumberSet;
     }
 
-    private static List<LottoNumber> toList(Set<LottoNumber> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers).stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .collect(Collectors.toList());
-    }
-
-    private void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(Set<LottoNumber> lottoNumbers) {
         HashSet<LottoNumber> deduplicationLottoNumbers = new HashSet<>(lottoNumbers);
         if (deduplicationLottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개를 선택 해야합니다.", LOTTO_SIZE));
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
