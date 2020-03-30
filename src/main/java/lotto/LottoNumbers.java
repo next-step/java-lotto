@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LottoNumbers {
-    private GenerateLottoNumber generateNumber;
     private Set<Integer> lottoNumbers;
 
     public LottoNumbers() {

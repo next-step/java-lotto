@@ -17,7 +17,7 @@ public class InputView {
     }
 
     private int valdatePrice(int price) {
-        if (price > MIN_PRICE) {
+        if (price >= MIN_PRICE) {
             return price;
         }
 

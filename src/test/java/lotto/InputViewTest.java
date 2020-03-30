@@ -10,8 +10,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 
 public class InputViewTest {
 
-    private
-
     @DisplayName("사용자의 입력을 받을 수 있다.")
     @Test
     void testCanCreate() {
