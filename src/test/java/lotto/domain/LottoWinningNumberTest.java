@@ -16,7 +16,7 @@ class LottoWinningNumberTest {
 
 	@ParameterizedTest
 	@MethodSource("provideWinningResultTestArgs")
-	void matchWinningTest(LottoNumber winningNumber, int bonusWinNumber, LottoNumber drawNumbers, LottoRank exactRank) {
+	void matchWinningTest(LottoNumber winningNumber, LottoNo bonusWinNumber, LottoNumber drawNumbers, LottoRank exactRank) {
 		LottoWinningNumber lottoNumber = new LottoWinningNumber(winningNumber, bonusWinNumber);
 		assertThat(lottoNumber.matchLottoNumber(drawNumbers))
 				.isEqualTo(exactRank);
@@ -24,12 +24,12 @@ class LottoWinningNumberTest {
 
 	private static Stream<Arguments> provideWinningResultTestArgs() {
 		return Stream.of(
-				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), 7, makeLottoNumber(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
-				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), 7, makeLottoNumber(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
-				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), 45, makeLottoNumber(1, 2, 3, 4, 5, 7), LottoRank.THIRD),
-				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), 7, makeLottoNumber(1, 2, 3, 4, 7, 8), LottoRank.FOURTH),
-				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), 7, makeLottoNumber(1, 2, 3, 7, 8, 9), LottoRank.FIFTH),
-				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), 7, makeLottoNumber(1, 2, 7, 8, 9, 10), null)
+				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), LottoNo.getInstance(7), makeLottoNumber(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
+				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), LottoNo.getInstance(7), makeLottoNumber(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
+				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), LottoNo.getInstance(45), makeLottoNumber(1, 2, 3, 4, 5, 7), LottoRank.THIRD),
+				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), LottoNo.getInstance(7), makeLottoNumber(1, 2, 3, 4, 7, 8), LottoRank.FOURTH),
+				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), LottoNo.getInstance(7), makeLottoNumber(1, 2, 3, 7, 8, 9), LottoRank.FIFTH),
+				Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6), LottoNo.getInstance(7), makeLottoNumber(1, 2, 7, 8, 9, 10), null)
 		);
 	}
 

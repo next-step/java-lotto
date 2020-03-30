@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 class LottoMachineAuto {
 
-	private final List<Integer> candidateNumbers = IntStream.rangeClosed(LottoNumber.LOWEST_NUMBER, LottoNumber.HIGHEST_NUMBER)
+	private final List<Integer> candidateNumbers = IntStream.rangeClosed(LottoNo.LOWEST_NUMBER, LottoNo.HIGHEST_NUMBER)
 			.boxed()
 			.collect(Collectors.toList());
 

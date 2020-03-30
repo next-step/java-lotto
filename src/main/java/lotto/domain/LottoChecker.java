@@ -16,7 +16,7 @@ public class LottoChecker {
 	private final long spentMoney;
 
 	public LottoChecker(LottoNumbers wonNumbers, int wonBonusNumber, long spentMoney) {
-		this.wonNumbers = new LottoWinningNumber(new LottoNumber(wonNumbers.getNumbers()), wonBonusNumber);
+		this.wonNumbers = new LottoWinningNumber(new LottoNumber(wonNumbers.getNumbers()), LottoNo.getInstance(wonBonusNumber));
 		this.spentMoney = spentMoney;
 	}
 

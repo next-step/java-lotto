@@ -7,9 +7,9 @@ import java.util.Objects;
 
 class LottoWinningNumber {
 	private LottoNumber electedNumber;
-	private int bonusNumber;
+	private LottoNo bonusNumber;
 
-	LottoWinningNumber(LottoNumber electedNumbers, int bonusNumber) {
+	LottoWinningNumber(LottoNumber electedNumbers, LottoNo bonusNumber) {
 		this.electedNumber = electedNumbers;
 		this.bonusNumber = bonusNumber;
 
@@ -22,7 +22,7 @@ class LottoWinningNumber {
 		throw new IllegalArgumentException(String.format("Instantiate LottoWinningNumber failed. " +
 						"bonus Number cannot be elected numbers : numbers=%s, bonusNumber=%d",
 				StringFormatter.listToString(electedNumber.getLottoNumbers().getNumbers()),
-				bonusNumber));
+				bonusNumber.getLottoNo()));
 	}
 
 	private boolean isInvalidLottoNumbers() {
@@ -37,6 +37,14 @@ class LottoWinningNumber {
 
 	private int getMatchElectedNumberCount(LottoNumber drawNumber) {
 		return this.electedNumber.countContainsNumbers(drawNumber);
+	}
+
+	@Override
+	public String toString() {
+		return "LottoWinningNumber{" +
+				"electedNumber=" + electedNumber +
+				", bonusNumber=" + bonusNumber +
+				'}';
 	}
 
 	@Override

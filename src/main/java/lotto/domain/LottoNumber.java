@@ -1,26 +1,28 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumbers;
-import lotto.utils.StringFormatter;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 class LottoNumber {
-	public static final int LOWEST_NUMBER = 1;
-	public static final int HIGHEST_NUMBER = 45;
 	public static final int NUMBER_SIZE = 6;
 
-	private List<Integer> numbers;
+	private List<LottoNo> numbers;
 
 	LottoNumber(Integer... numbers) {
 		this(Arrays.asList(numbers));
 	}
 
 	LottoNumber(List<Integer> numbers) {
-		this.numbers = Collections.unmodifiableList(numbers);
+		this.numbers =
+				Collections.unmodifiableList(numbers
+						.stream()
+						.map(LottoNo::getInstance)
+						.collect(Collectors.toList()));
 
 		if (isInvalidLottoNumbers()) {
 			throwIllegalException();
@@ -29,21 +31,18 @@ class LottoNumber {
 
 	private void throwIllegalException() {
 		throw new IllegalArgumentException(String.format("Instantiate LottoNumber failed. " +
-						"numbers must be distinct %d numbers range %d~%d : numbers=%s",
+						"numbers must be distinct count %d : numbers=%s",
 				NUMBER_SIZE,
-				LOWEST_NUMBER,
-				HIGHEST_NUMBER,
-				this.toString()));
+				toString()));
 	}
 
 	private boolean isInvalidLottoNumbers() {
 		return numbers.stream()
 				.distinct()
-				.filter(number -> LOWEST_NUMBER <= number && number <= HIGHEST_NUMBER)
 				.count() != NUMBER_SIZE;
 	}
 
-	boolean containsNumber(int bonusNumber) {
+	boolean containsNumber(LottoNo bonusNumber) {
 		return this.numbers.contains(bonusNumber);
 	}
 
@@ -54,12 +53,16 @@ class LottoNumber {
 	}
 
 	LottoNumbers getLottoNumbers() {
-		return new LottoNumbers(numbers);
+		return new LottoNumbers(numbers.stream()
+				.map(LottoNo::getLottoNo)
+				.collect(Collectors.toList()));
 	}
 
 	@Override
 	public String toString() {
-		return StringFormatter.listToString(numbers);
+		return "LottoNumber{" +
+				"numbers=" + numbers +
+				'}';
 	}
 
 	@Override
