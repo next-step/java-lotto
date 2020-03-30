@@ -21,15 +21,18 @@
 * RandomLottoTicketGenerator
     * 1 ~ 45 사이의 중복되지 않는 숫자 6개를 생성한다.
 * WinningLottoTicket
-    * Winning LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 포함한다.
+    * WinningLottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 포함한다.
+    * WinningLottoTicket은 1부터 45 사이의 보너스 숫자 1개를 포함한다.
+        * 보너스 숫자는 로또 숫자 6개와 겹치지 않는다.
 * LottoResult
-    * LottoResult는 WinningLottoTicket과 LottoTicket간의 일치하는 숫자 결과를 포함한다.
-    * LottoResult는 일치하는 숫자 갯수인 0 ~ 6 중의 하나와, 그에 따른 당첨금 내용을 포함한다.
+    * LottoResult는 WinningLottoTicket과 LottoTicket간의 일치하는 로또 결과를 포함한다.
+    * LottoResult는 일치하는 숫자 갯수인 0 ~ 6 중의 하나와 보너스 볼 일치 여부, 그에 따른 당첨금 내용을 포함한다.
     * 당첨 결과는 다음과 같다.
         * 0 ~ 2 일치 : 0
         * 3개 일치 : 5000원
         * 4개 일치 : 50000원
         * 5개 일치 : 1500000원
+        * 5개 일치, 보너스 볼 일치 : 30000000원
         * 6개 일치 : 2000000000원
 * LottoResults
     * LottoResults는 LottoTickets이 포함한 LottoTicket의 개별 LottoResult 목록을 포함한다. 
