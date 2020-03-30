@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -29,5 +31,4 @@ public class Numbers {
     public int hashCode() {
         return Objects.hash(numbers);
     }
-
 }

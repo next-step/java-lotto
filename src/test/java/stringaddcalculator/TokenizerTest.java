@@ -1,3 +1,6 @@
+package stringaddcalculator;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,7 +15,7 @@ public class TokenizerTest {
     @ValueSource(strings = {"1,2,3", "1:2:3", "1,2:3", "1:2,3"})
     public void splitTest(String message) {
         Numbers numbers = Tokenizer.split(message);
-        assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(1, 2, 3)));
+        Assertions.assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(1, 2, 3)));
     }
 
     @ParameterizedTest
@@ -45,7 +48,7 @@ public class TokenizerTest {
     @CsvSource(value = {"1@2@3, @", "1!2!3, !", "1#2#3, #"})
     public void customDelimiterSplitTest(String message, String delimiter) {
         Numbers numbers = Tokenizer.split(message, delimiter);
-        assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(1, 2, 3)));
+        Assertions.assertThat(numbers).isEqualTo(new Numbers(Arrays.asList(1, 2, 3)));
     }
 
     @ParameterizedTest
@@ -74,5 +77,4 @@ public class TokenizerTest {
                     Tokenizer.split(message, delimiter);
                 }).withMessage("문자열은 계산할 수 없습니다.");
     }
-
 }

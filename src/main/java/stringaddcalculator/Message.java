@@ -1,3 +1,5 @@
+package stringaddcalculator;
+
 import java.util.Objects;
 
 public class Message {
@@ -31,6 +33,4 @@ public class Message {
     public int hashCode() {
         return Objects.hash(delimiter, messageBody);
     }
-
-
 }
