@@ -10,7 +10,7 @@ public class StringAddCalculator {
             return result;
         }
 
-        String[] splitInput = input.split(",");
+        String[] splitInput = input.split("[,:]");
 
         for (String operand : splitInput) {
             result += Integer.parseInt(operand);
