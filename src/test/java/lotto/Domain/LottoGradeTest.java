@@ -14,6 +14,6 @@ public class LottoGradeTest {
     void lottoGradeTest(String input, String expected) {
         LottoGrade lottoGrade = LottoGrade.findGrade(Integer.parseInt(input));
 
-        assertThat(lottoGrade.getPrice()).isEqualTo(Integer.parseInt(expected));
+        assertThat(lottoGrade.getPrize()).isEqualTo(Integer.parseInt(expected));
     }
 }

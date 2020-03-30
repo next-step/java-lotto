@@ -28,13 +28,26 @@ public class Lottos {
 
     Map<Integer, Integer> initLottoStatistics() {
         Map<Integer, Integer> statistics = new HashMap<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i <= 6; i++) {
             statistics.put(i, 0);
         }
         return statistics;
     }
 
     public Double revenueRate(Map<Integer, Integer> matchCountMap) {
-        return null;
+        double sumOfWinningLotto = 0.0;
+
+        for (Map.Entry<Integer, Integer> entry : matchCountMap.entrySet()) {
+            sumOfWinningLotto += calculatePrize(entry);
+        }
+
+        return sumOfWinningLotto / (lottoList.size() * 1000);
+    }
+
+    double calculatePrize(Map.Entry<Integer, Integer> entry) {
+        if(entry.getKey() <= 2) {
+            return 0;
+        }
+        return LottoGrade.findGrade(entry.getKey()).getPrize() * entry.getValue();
     }
 }

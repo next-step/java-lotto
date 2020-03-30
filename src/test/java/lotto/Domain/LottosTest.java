@@ -27,7 +27,7 @@ public class LottosTest {
         Map<Integer, Integer> matchCountMap = lottos.match(winningNumber);
 
         assertThat(matchCountMap)
-                .hasSize(4)
+                .hasSize(7)
                 .contains(entry(3, 2), entry(4, 0), entry(5, 0), entry(6, 0));
     }
 
