@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
     private static final int WINNING_NUMBER_SIZE = 6;
@@ -14,17 +13,23 @@ public class LottoWinningNumber {
             "6개의 당첨 번호를 입력하세요.";
     private static final String DUPLICATED_WINNING_NUMBERS_ERROR_MESSAGE =
             "당첨 번호의 중복은 허용되지 않습니다.";
+    private static final String DUPLICATED_BONUS_NUMBER_ERROR_MESSAGE =
+            "보너스 번호의 중복은 허용되지 않습니다.";
 
     private Set<LottoNumber> winningNumbers;
+    private LottoNumber bonusNumber;
 
-
-    public LottoWinningNumber(List<Integer> winningNumbers) {
+    public LottoWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
         if (Objects.isNull(winningNumbers) ||
                 winningNumbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalLottoWinningNumberArgumentException(
                     WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
         }
-
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalLottoWinningNumberArgumentException(
+                    DUPLICATED_BONUS_NUMBER_ERROR_MESSAGE);
+        }
+        this.bonusNumber = new LottoNumber(bonusNumber);
         setWinningNumbers(winningNumbers);
 
         if (this.winningNumbers.size() != WINNING_NUMBER_SIZE) {
@@ -44,9 +49,12 @@ public class LottoWinningNumber {
         return winningNumbers.size();
     }
 
-    public List<LottoNumber> getMatches(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumbers().stream()
+    public LottoRank rank(LottoTicket lottoTicket) {
+        int matchCount = (int) lottoTicket.getLottoNumbers().stream()
                 .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
-                .collect(Collectors.toList());
+                .count();
+        boolean matchBonus = lottoTicket.contains(bonusNumber);
+
+        return LottoRank.valueOf(matchCount, matchBonus);
     }
 }
