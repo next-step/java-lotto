@@ -23,7 +23,7 @@ public class LottoMachine {
     private int getPurchasedCount(Money money) {
         int purchasableCount = money.getMoney() / LOTTO_PRICE;
         if (purchasableCount < 1) {
-            throw new RuntimeException("돈이 부족합니다.");
+            throw new IllegalArgumentException("돈이 부족합니다.");
         }
         return purchasableCount;
     }

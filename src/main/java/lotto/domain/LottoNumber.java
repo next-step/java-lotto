@@ -52,7 +52,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
     private void validateNumberRange(Integer number) {
         Objects.requireNonNull(number, "로또 번호를 생성하는데 실패했습니다.");
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new RuntimeException("로또 숫자 범위를 넘어섰습니다.");
+            throw new IllegalArgumentException("로또 숫자 범위를 넘어섰습니다.");
         }
     }
 
@@ -61,7 +61,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
-            throw new RuntimeException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("숫자가 아닙니다.");
         }
         return number;
     }
@@ -92,7 +92,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
         try {
             return (LottoNumber) super.clone();
         } catch (CloneNotSupportedException ce) {
-            throw new RuntimeException("로또 번호를 만드는데 문제가 있습니다.");
+            throw new UnsupportedOperationException("로또 번호를 만드는데 문제가 있습니다.");
         }
     }
 }

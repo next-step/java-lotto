@@ -16,7 +16,7 @@ public class FormulaTest {
     void validateTest(String input, String splitSeparators) {
         assertThatThrownBy(
                 () -> new Formula(input, splitSeparators)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest

@@ -22,14 +22,14 @@ public class PositiveNumber {
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
-            throw new RuntimeException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("숫자가 아닙니다.");
         }
         return number;
     }
 
     private void validatePositiveOrZero(int number) {
         if (number < 0) {
-            throw new RuntimeException("음수는 사용할 수 없습니다.");
+            throw new IllegalArgumentException("음수는 사용할 수 없습니다.");
         }
     }
 }
