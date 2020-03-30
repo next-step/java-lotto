@@ -70,8 +70,7 @@ public class LottoPurchaseTicketTests {
     }
 
     private static Stream<Arguments> checkLottoTicketTestCases() {
-        LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.create(
-                convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
+        LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.newInstance(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         return Stream.of(
                 Arguments.of(
                         lottoPurchaseTicket,

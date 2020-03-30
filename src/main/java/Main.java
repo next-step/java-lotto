@@ -4,7 +4,6 @@ import lotto.model.WinningLottoTicket;
 import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.Payment;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,7 +32,7 @@ public class Main {
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
-        return WinningLottoTicket.newInstance(winningNumbers);
+        return WinningLottoTicket.newInstance(winningNumbers, bonusNumber);
     }
 
 }

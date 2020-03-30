@@ -40,7 +40,7 @@ public class WinningLottoTicketTests {
     @ParameterizedTest
     @NullAndEmptySource
     @MethodSource("winningLottoBonusNumberExceptionTestCases")
-    public void generateLottoExceptionTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
+    public void generateLottoExceptionWinningNumberTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLottoTicket.newInstance(numbers, bonusNumber))
                 .withMessageContaining("bonus number must be distinct.");
