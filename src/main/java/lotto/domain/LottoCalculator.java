@@ -12,11 +12,11 @@ public class LottoCalculator {
     @Getter
     private MatchResult matchResult;
 
-    public LottoCalculator(Lotto lastWeekLotto, List<Lotto> lottos) {
+    public LottoCalculator(WinningLotto winningLotto, List<Lotto> lottos) {
         this.matchResult = new MatchResult();
 
         for (Lotto lotto : lottos) {
-            RankType rankType = RankType.getRank(lotto.getSameCount(lastWeekLotto));
+            RankType rankType = RankType.getRank(winningLotto.getMatchCount(lotto), winningLotto.matchBonus(lotto));
 
             matchResult.addResult(rankType);
         }

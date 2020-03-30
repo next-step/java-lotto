@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class InputView {
     private static final String MONEY_INSERT = "구입금액을 입력해 주세요.";
     private static final String LAST_WEEK_LOTTO_INPUT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_BALL_INPUT = "보너스 볼을 입력해 주세요.";
 
     private Scanner scanner;
 
@@ -23,4 +24,11 @@ public class InputView {
 
         return scanner.nextLine();
     }
+
+    public String getBonusBallNumber() {
+        System.out.println(BONUS_BALL_INPUT);
+
+        return scanner.nextLine();
+    }
+
 }
