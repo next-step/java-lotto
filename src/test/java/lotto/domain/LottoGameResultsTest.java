@@ -4,141 +4,150 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
+import static lotto.domain.Constant.PRICE_PER_GAME;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameResultsTest {
 
-    @DisplayName("구매한 로또 티켓들 중 당첨된 티켓의 수를 계산하는 테스트")
-    @Test
-    public void lottoGameResultTest() {
-        LottoNumber lottoNumber1 = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber2 = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber1, lottoNumber2);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
-
-        assertThat(lottoGameResults.getWinningGames()).hasSize(2);
-    }
-
-    @DisplayName("1게임 샀을 때 5등 당첨 1개 로또 수익률 계산 테스트")
-    @Test
-    public void lottoProfitRateTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 10, 11, 12), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
-
-        assertThat(lottoGameResults.getProfitRate()).isEqualTo(5);
-    }
-
-    @DisplayName("1게임 샀을 때 2등 당첨 1개 로또 수익률 계산 테스트")
-    @Test
-    public void lottoProfitRateAtFiveBonusTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 12), 6);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
-
-        assertThat(lottoGameResults.getProfitRate()).isEqualTo(300000);
-    }
-
     @DisplayName("1개가 일치하면 상금은 0원 이다.")
     @Test
     public void matchedOnePrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 7, 8, 10, 11, 12), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.ONE);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(1);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.ONE.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.ONE.getWinningPrize());
     }
 
     @DisplayName("2개가 일치하면 상금은 0원 이다.")
     @Test
     public void matchedTwoPrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 7, 10, 11, 12), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.TWO);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(2);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.TWO.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.TWO.getWinningPrize());
     }
 
     @DisplayName("3개가 일치하면 상금은 5000원 이다.")
     @Test
     public void matchedThreePrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 10, 11, 12), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.THREE);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(3);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.THREE.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.THREE.getWinningPrize());
+    }
+
+    @DisplayName("3개 일치 티켓이 2장이면 상금은 5000원 이다.")
+    @Test
+    public void twoMatchedThreePrizeTest() {
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.THREE, LottoRank.THREE);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
+
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
+
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.THREE.getWinningPrize() * 2);
     }
 
     @DisplayName("4개가 일치하면 상금은 50000원 이다.")
     @Test
     public void matchedFourPrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 11, 12), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.FOUR);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(4);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FOUR.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.FOUR.getWinningPrize());
     }
 
     @DisplayName("5개가 일치하면 상금은 1_500_000원 이다.")
     @Test
     public void matchedFivePrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 12), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.FIVE);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(5);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FIVE.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.FIVE.getWinningPrize());
     }
 
     @DisplayName("5개가 일치하고 보너스번호도 일치하면 상금은 300_000_000원 이다.")
     @Test
     public void matchedFiveBonusPrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 12), 6);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.FIVE_BONUS);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(51);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.FIVE_BONUS.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.FIVE_BONUS.getWinningPrize());
     }
 
     @DisplayName("6개가 일치하면 상금은 2_000_000_000원 이다.")
     @Test
     public void matchedSixPrizeTest() {
-        LottoNumber lottoNumber = new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 13);
-        LottoTickets lottoTickets = new LottoTickets(lottoNumber);
-        LottoGameResults lottoGameResults = LottoGameMatcher.matchWinningNumber(lottoTickets, winningNumber);
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.SIX);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        LottoRank lottoRank = lottoGameResults.getWinningGames().get(0);
+        double winningPrizeSum = lottoGameResults.getWinningPrizeSum();
 
-        assertThat(lottoRank.getMatchCount()).isEqualTo(6);
-        assertThat(lottoRank.getWinningPrize()).isEqualTo(LottoRank.SIX.getWinningPrize());
+        assertThat(winningPrizeSum).isEqualTo(LottoRank.SIX.getWinningPrize());
+    }
+
+    @DisplayName("결과중 각 당첨 랭크별 개수를 구할 수 있다")
+    @Test
+    public void getEachRankCountTotalTest() {
+        List<LottoRank> lottoRanks = Arrays.asList(
+                LottoRank.SIX, LottoRank.FIVE, LottoRank.FIVE_BONUS, LottoRank.FOUR, LottoRank.FOUR,
+                LottoRank.THREE, LottoRank.THREE, LottoRank.THREE, LottoRank.TWO, LottoRank.TWO, LottoRank.ONE
+        );
+
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
+
+        long oneTotal = lottoGameResults.getEachRankCountTotal(LottoRank.ONE.getMatchCount());
+        long twoTotal = lottoGameResults.getEachRankCountTotal(LottoRank.TWO.getMatchCount());
+        long threeTotal = lottoGameResults.getEachRankCountTotal(LottoRank.THREE.getMatchCount());
+        long fourTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FOUR.getMatchCount());
+        long fiveTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FIVE.getMatchCount());
+        long fiveBonusTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FIVE_BONUS.getMatchCount());
+        long sixTotal = lottoGameResults.getEachRankCountTotal(LottoRank.SIX.getMatchCount());
+
+        assertThat(oneTotal).isEqualTo(1);
+        assertThat(twoTotal).isEqualTo(2);
+        assertThat(threeTotal).isEqualTo(3);
+        assertThat(fourTotal).isEqualTo(2);
+        assertThat(fiveTotal).isEqualTo(1);
+        assertThat(fiveBonusTotal).isEqualTo(1);
+        assertThat(sixTotal).isEqualTo(1);
+    }
+
+    @DisplayName("1게임(1000원) 샀을 때 5등(3개 일치) 당첨 1개 로또 수익률 계산 테스트")
+    @Test
+    public void lottoProfitRateTest() {
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.THREE);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
+
+        double profitRate = lottoGameResults.getProfitRate();
+        int expected = LottoRank.THREE.getWinningPrize() / PRICE_PER_GAME;
+
+        assertThat(profitRate).isEqualTo(expected);
+    }
+
+    @DisplayName("10게임(10000원) 샀을 때 2등 당첨(5개 일치 + 보너스 번호 일치) 1개 로또 수익률 계산 테스트")
+    @Test
+    public void lottoProfitRateAtFiveBonusTest() {
+        List<LottoRank> lottoRanks = Arrays.asList(LottoRank.FIVE_BONUS);
+        LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
+
+        double profitRate = lottoGameResults.getProfitRate();
+        int expected = LottoRank.FIVE_BONUS.getWinningPrize() / (lottoRanks.size() * PRICE_PER_GAME);
+
+        assertThat(profitRate).isEqualTo(expected);
     }
 
 }

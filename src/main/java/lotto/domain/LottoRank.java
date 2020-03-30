@@ -45,4 +45,8 @@ public enum LottoRank {
     public int getWinningPrize() {
         return winningPrize;
     }
+
+    public boolean isEqualTo(int matchCount) {
+        return this.matchCount == matchCount;
+    }
 }
