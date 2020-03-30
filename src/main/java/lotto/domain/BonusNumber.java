@@ -8,10 +8,10 @@ import static lotto.domain.Constant.LOTTO_NUM_MIN;
 public class BonusNumber {
     private final int bonusNumber;
 
-    public BonusNumber(LottoTicket lottoTicket, int bonusNumber) {
+    public BonusNumber(LottoNumbers lottoNumbers, int bonusNumber) {
         this.bonusNumber = bonusNumber;
         validateBonusNumber(bonusNumber);
-        if (checkDuplication(lottoTicket)) {
+        if (checkDuplication(lottoNumbers)) {
             throw new BonusNumberDuplicateException();
         }
     }
@@ -22,8 +22,8 @@ public class BonusNumber {
         }
     }
 
-    private boolean checkDuplication(LottoTicket lottoTicket) {
-        return lottoTicket.has(bonusNumber);
+    private boolean checkDuplication(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override
