@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputResult {
-    private static int LOTTO_PRICE;
     private final int lottoCount;
     private List<LottoNumbers> generatedLottos;
 
-    public InputResult(int lottoCount, List<LottoNumbers> generatedLottos) {
-        this.lottoCount = lottoCount;
-        this.generatedLottos = new ArrayList<>(generatedLottos);
+    public InputResult(Lotto lotto) {
+        this.lottoCount = lotto.getLottoCount();
+        this.generatedLottos = new ArrayList<>(lotto.generateLottos());
     }
 
-    public String showResult(int lottoCount, List<LottoNumbers> generatedLottos) {
+    public String showResult() {
         StringBuilder sb = new StringBuilder();
-        sb.append(lottoCount * LOTTO_PRICE);
         sb.append(System.getProperty("line.separator"));
-        sb.append(lottoCount + "개를 구매했습니다.");
+        sb.append(this.lottoCount + "개를 구매했습니다.");
+        sb.append(System.getProperty("line.separator"));
 
-        for (int i = 0; i < generatedLottos.size(); i++) {
-
+        for (LottoNumbers lottoNumbers: this.generatedLottos) {
+            sb.append(lottoNumbers.getLottoNumbers().toString());
+            sb.append(System.getProperty("line.separator"));
         }
 
         return sb.toString();

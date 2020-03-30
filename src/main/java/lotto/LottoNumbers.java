@@ -13,4 +13,11 @@ public class LottoNumbers {
     public Set<Integer> getLottoNumbers() {
         return new HashSet<>(lottoNumbers);
     }
+
+    @Override
+    public String toString() {
+        return "LottoNumbers{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }

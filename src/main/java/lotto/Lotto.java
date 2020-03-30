@@ -20,6 +20,10 @@ public class Lotto {
         return generatedLottos;
     }
 
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
