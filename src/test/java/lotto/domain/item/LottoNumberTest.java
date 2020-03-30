@@ -27,6 +27,7 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(10);
         LottoNumber lottoNumber2 = new LottoNumber(10);
 
+        //then
         assertThat(lottoNumber).isEqualTo(lottoNumber2);
     }
 
@@ -37,17 +38,18 @@ class LottoNumberTest {
         LottoNumber lottoNumber = new LottoNumber(10);
         LottoNumber lottoNumber2 = new LottoNumber(20);
 
+        //then
         assertThat(lottoNumber).isNotEqualTo(lottoNumber2);
     }
 
+    @DisplayName("멤버변수의 숫자가 크면 더 큰것으로 판단한다")
+    @Test
+    public void compareTo_fail() throws Exception {
+        //given
+        LottoNumber lottoNumber = new LottoNumber(30);
+        LottoNumber lottoNumber2 = new LottoNumber(10);
 
-//    @DisplayName("멤버변수의 숫자가 크면 더 큰것으로 판단한다")
-//    @Test
-//    public void compareTo_fail() throws Exception {
-//        //given
-//        LottoNumber lottoNumber = new LottoNumber(30);
-//        LottoNumber lottoNumber2 = new LottoNumber(10);
-//
-//        assertThat(lottoNumber).isGreaterThan(lottoNumber2);
-//    }
+        //then
+        assertThat(lottoNumber).isGreaterThan(lottoNumber2);
+    }
 }
