@@ -14,8 +14,10 @@ public class Application {
         OutputView.printLotteryCount(lotteries.count());
         OutputView.printLotteries(lotteries.getLottoNumbers());
 
-        LottoNumbers winningLotteNumbers = inputView.insertLastWeekendWinningLottery();
-        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers);
+        LottoNumbers winningLotteNumbers = inputView.inputLastWeekendWinningLottery();
+        BonusBall bonusBall = inputView.inputBonusBall();
+
+        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers, bonusBall);
 
         OutputView.printLottoResult(lottoResult.getChart());
         OutputView.printRatio(lottoResult.ratio(inputPrice));
