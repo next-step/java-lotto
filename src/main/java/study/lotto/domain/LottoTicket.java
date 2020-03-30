@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.exception.LottoTicketConstructorException;
+import study.lotto.domain.exception.IllegalLottoTicketArgumentException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,14 +21,14 @@ public class LottoTicket implements Iterable<LottoNumber> {
     public LottoTicket(List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) ||
                 lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new LottoTicketConstructorException(
+            throw new IllegalLottoTicketArgumentException(
                     LOTTO_NUMBERS_SIZE_ERROR_MESSAGE);
         }
 
         setLottoNumbers(lottoNumbers);
 
         if (this.lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new LottoTicketConstructorException(
+            throw new IllegalLottoTicketArgumentException(
                     DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE);
         }
     }

@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.exception.LottoWinningNumberConstructorException;
+import study.lotto.domain.exception.IllegalLottoWinningNumberArgumentException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,14 +21,14 @@ public class LottoWinningNumber {
     public LottoWinningNumber(List<Integer> winningNumbers) {
         if (Objects.isNull(winningNumbers) ||
                 winningNumbers.size() != WINNING_NUMBER_SIZE) {
-            throw new LottoWinningNumberConstructorException(
+            throw new IllegalLottoWinningNumberArgumentException(
                     WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
         }
 
         setWinningNumbers(winningNumbers);
 
         if (this.winningNumbers.size() != WINNING_NUMBER_SIZE) {
-            throw new LottoWinningNumberConstructorException(
+            throw new IllegalLottoWinningNumberArgumentException(
                     DUPLICATED_WINNING_NUMBERS_ERROR_MESSAGE);
         }
     }
