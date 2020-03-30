@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoInspectorTest {
 
-    private WinningLotto testWinningLotto;
+    private Lotto testWinningLotto;
     private List<Lotto> testLottos;
 
     @BeforeEach
     void setting() {
-        this.testWinningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
+        this.testWinningLotto = Lotto.newManual("1, 2, 3, 4, 5, 6");
         this.testLottos = new ArrayList<>();
 
         Lotto lotto1 = Lotto.newManual(Arrays.asList(

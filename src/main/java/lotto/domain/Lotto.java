@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_MAX_SOCKET = 6;
+    private static final String LOTTO_WINNING_NUMBER_SPLIT_KEYWORD = ",";
 
     private Set<LottoNumber> lottoNumbers;
 
@@ -18,6 +19,10 @@ public class Lotto {
 
     public static Lotto newManual(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers.stream().collect(Collectors.toSet()));
+    }
+
+    public static Lotto newManual(String lottoNumbers) {
+        return new Lotto(convertToLotto(lottoNumbers));
     }
 
     private Lotto() {
@@ -37,6 +42,22 @@ public class Lotto {
 
     public boolean isExistNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public int getMatchedCount(Lotto lotto) {
+        int matchedCount = 0;
+        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
+            matchedCount += CountingMatched(lottoNumber);
+        }
+        return matchedCount;
+    }
+
+    private int CountingMatched(LottoNumber lottoNumber) {
+        if (lottoNumbers.stream()
+                .anyMatch(l -> l.getLottoNumber() == lottoNumber.getLottoNumber())) {
+            return 1;
+        }
+        return 0;
     }
 
     private void sortLottorNumbers() {
@@ -68,6 +89,14 @@ public class Lotto {
         if (lottoNumbers.size() != LOTTO_MAX_SOCKET) {
             throw new IllegalArgumentException("로또는 고유한 숫자 6개로 이뤄져야 합니다.");
         }
+    }
+
+    private static Set<LottoNumber> convertToLotto(String winningNumbers) {
+        Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
+        for (String s : winningNumbers.split(LOTTO_WINNING_NUMBER_SPLIT_KEYWORD)) {
+            lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
+        }
+        return lottoNumbers;
     }
 
     private Set<LottoNumber> cloneLottoNumbers(Set<LottoNumber> originNumbers) {

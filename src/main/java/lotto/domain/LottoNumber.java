@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.generator.LottoGenerator;
 import lotto.generator.RandomNumberGenerator;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 public class LottoNumber implements Cloneable, Comparable<LottoNumber> {

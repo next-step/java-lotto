@@ -48,4 +48,16 @@ public class LottoTest {
                 () -> Lotto.newManual(lottoNumbers)
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또번호 맞춘 갯수 가져오기 테스트")
+    void getMatchedCountTest() {
+        Lotto winningLotto = Lotto.newManual("1, 2, 3, 4, 5, 6");
+        Lotto lotto = Lotto.newManual(Arrays.asList(
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3),
+                LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(45)
+        ));
+
+        assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);
+    }
 }

@@ -16,7 +16,7 @@ public class LottoRun {
 
         List<Lotto> myLottos = purchaseLottos(myMoney);
 
-        WinningLotto winningLotto = getWinningLotto();
+        Lotto winningLotto = getWinningLotto();
 
         LottoInspector lottoInspector = innsightLottos(winningLotto, myLottos);
 
@@ -36,15 +36,15 @@ public class LottoRun {
         return lottos;
     }
 
-    private static WinningLotto getWinningLotto() {
+    private static Lotto getWinningLotto() {
         String winningNumbers = lottoResultView.inputWinningNumber();
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
-        lottoResultView.viewLottoNumbers(winningLotto.getWinningLotto());
+        Lotto winningLotto = Lotto.newManual(winningNumbers);
+        lottoResultView.viewLottoNumbers(winningLotto);
 
         return winningLotto;
     }
 
-    private static LottoInspector innsightLottos(WinningLotto winningLotto, List<Lotto> lottos) {
+    private static LottoInspector innsightLottos(Lotto winningLotto, List<Lotto> lottos) {
         LottoInspector lottoInspector = new LottoInspector(winningLotto, lottos);
         Map<Integer, Integer> result = lottoInspector.getMatchedResult();
         lottoResultView.viewInspect(result);

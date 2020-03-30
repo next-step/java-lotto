@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoInspector {
-    private WinningLotto winningLotto;
+    private Lotto winningLotto;
     private List<Lotto> lottos;
     private Map<Integer, Integer> matchedResult;
 
-    public LottoInspector(WinningLotto winningLotto, List<Lotto> lottos) {
+    public LottoInspector(Lotto winningLotto, List<Lotto> lottos) {
         this.winningLotto = winningLotto;
         this.lottos = lottos;
         checkLottos();
