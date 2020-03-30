@@ -39,25 +39,25 @@ public class ResultView {
     }
 
     private static String getThreeMatchResults(LottoGameResults lottoGameResults) {
-        long three = lottoGameResults.getMatchCount(THREE.getMatchCount());
+        long three = lottoGameResults.getEachRankCountTotal(THREE.getMatchCount());
         return String.format(MATCH_COMMON_MESSAGE, THREE.getMatchCount(), THREE.getWinningPrize(), three);
     }
 
     private static String getFourMatchResults(LottoGameResults lottoGameResults) {
-        long four = lottoGameResults.getMatchCount(FOUR.getMatchCount());
+        long four = lottoGameResults.getEachRankCountTotal(FOUR.getMatchCount());
         return String.format(MATCH_COMMON_MESSAGE, FOUR.getMatchCount(), FOUR.getWinningPrize(), four);
     }
 
     private static String getFiveMatchResults(LottoGameResults lottoGameResults) {
-        long five = lottoGameResults.getMatchCount(FIVE.getMatchCount());
-        long fiveBonus = lottoGameResults.getMatchCount(FIVE_BONUS.getMatchCount());
+        long five = lottoGameResults.getEachRankCountTotal(FIVE.getMatchCount());
+        long fiveBonus = lottoGameResults.getEachRankCountTotal(FIVE_BONUS.getMatchCount());
         String fiveMatch = String.format(MATCH_COMMON_MESSAGE, FIVE.getMatchCount(), FIVE.getWinningPrize(), five);
         String fiveBonusMatch = String.format(MATCH_BONUS_MESSAGE, FIVE.getMatchCount(), FIVE_BONUS.getWinningPrize(), fiveBonus);
         return fiveMatch + CARRIAGE_RETURN + fiveBonusMatch;
     }
 
     private static String getSixMatchResults(LottoGameResults lottoGameResults) {
-        long six = lottoGameResults.getMatchCount(SIX.getMatchCount());
+        long six = lottoGameResults.getEachRankCountTotal(SIX.getMatchCount());
         return String.format(MATCH_COMMON_MESSAGE, SIX.getMatchCount(), SIX.getWinningPrize(), six);
     }
 
