@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -32,6 +34,10 @@ public class LottoPurchaseTicketsTests {
                 LottoPurchaseTicket.create(
                         LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
                         LottoNumber.of(4), LottoNumber.of(19), LottoNumber.of(20)
+                ),
+                LottoPurchaseTicket.create(
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(33)
                 )
         );
     }
@@ -46,10 +52,8 @@ public class LottoPurchaseTicketsTests {
     @Test
     public void checkAllTest() {
         LottoPurchaseTickets lottoPurchaseTickets = new LottoPurchaseTickets(lottoTickets);
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.create(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
-        LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(33)));
+        LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE_WITH_BONUS));
 
         assertThat(lottoPurchaseTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);
     }
@@ -59,5 +63,11 @@ public class LottoPurchaseTicketsTests {
     public void sizeTest() {
         LottoPurchaseTickets lottoPurchaseTickets = new LottoPurchaseTickets(lottoTickets);
         assertThat(lottoPurchaseTickets.size()).isEqualTo(lottoTickets.size());
+    }
+
+    private static Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 }

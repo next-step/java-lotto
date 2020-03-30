@@ -13,7 +13,9 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static lotto.model.LottoTicket.LOTTO_NUMBER_SIZE;
@@ -69,52 +71,46 @@ public class LottoPurchaseTicketTests {
 
     private static Stream<Arguments> checkLottoTicketTestCases() {
         LottoPurchaseTicket lottoPurchaseTicket = LottoPurchaseTicket.create(
-                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
-        );
+                convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)));
         return Stream.of(
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,6)), LottoNumber.of(7)),
                         LottoResult.SIX),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(7)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(8)),
                         LottoResult.FIVE),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(4), LottoNumber.of(8), LottoNumber.of(7)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,5,7)), LottoNumber.of(6)),
+                        LottoResult.FIVE_WITH_BONUS),
+                Arguments.of(
+                        lottoPurchaseTicket,
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,4,8,7)), LottoNumber.of(24)),
                         LottoResult.FOUR),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
-                                LottoNumber.of(9), LottoNumber.of(8), LottoNumber.of(7)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,3,9,8,7)), LottoNumber.of(24)),
                         LottoResult.THREE),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(10),
-                                LottoNumber.of(9), LottoNumber.of(8), LottoNumber.of(7)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,2,10,9,8,7)), LottoNumber.of(24))
                         LottoResult.TWO),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(1), LottoNumber.of(11), LottoNumber.of(10),
-                                LottoNumber.of(12), LottoNumber.of(13), LottoNumber.of(14)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(1,11,10,12,13,14)), LottoNumber.of(24))
                         LottoResult.ONE),
                 Arguments.of(
                         lottoPurchaseTicket,
-                        WinningLottoTicket.create(
-                                LottoNumber.of(7), LottoNumber.of(8), LottoNumber.of(9),
-                                LottoNumber.of(10), LottoNumber.of(11), LottoNumber.of(12)),
+                        WinningLottoTicket.create(convertToLottoNumbers(Arrays.asList(7,8,9,10,11,12)), LottoNumber.of(24))
                         LottoResult.NONE)
         );
+    }
+
+    private static Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
     }
 }
