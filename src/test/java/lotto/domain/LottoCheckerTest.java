@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoNumber;
 import lotto.domain.dto.LottoRank;
 import lotto.domain.dto.LottoResult;
-import lotto.domain.dto.LottoWinningNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

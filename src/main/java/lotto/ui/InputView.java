@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.dto.LottoWinningNumber;
+import lotto.domain.LottoWinningNumber;
 
 import java.util.Arrays;
 import java.util.List;

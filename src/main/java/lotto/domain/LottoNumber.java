@@ -1,5 +1,6 @@
-package lotto.domain.dto;
+package lotto.domain;
 
+import lotto.domain.dto.LottoRank;
 import lotto.utils.StringFormatter;
 
 import java.util.Arrays;

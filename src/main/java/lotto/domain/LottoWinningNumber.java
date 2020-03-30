@@ -1,8 +1,7 @@
-package lotto.domain.dto;
+package lotto.domain;
 
 import lotto.utils.StringFormatter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

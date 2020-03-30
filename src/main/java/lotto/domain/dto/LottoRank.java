@@ -23,7 +23,7 @@ public enum LottoRank {
 		return earningMoney;
 	}
 
-	static LottoRank getFromCorrectNumbers(int correctNumbers, boolean matchBonus) {
+	public static LottoRank getFromCorrectNumbers(int correctNumbers, boolean matchBonus) {
 		if (correctNumbers == FIRST.getCorrectNumbers()) {
 			return FIRST;
 		}
