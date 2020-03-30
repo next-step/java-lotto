@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.AutomaticLottoGenerator;
+import lotto.model.wrapper.LottoMatchCount;
 import lotto.model.wrapper.LottoNumber;
 
 import java.util.Set;
@@ -24,6 +25,9 @@ public class LottoPurchaseTicket extends LottoTicket {
                 .stream()
                 .filter(number -> numbers.contains(number))
                 .count();
-        return LottoResult.of(Math.toIntExact(count));
+
+        boolean matchBonusNumber = numbers.contains(winningLottoTicket.getBonusNumber());
+
+        return LottoResult.of(LottoMatchCount.create(Math.toIntExact(count), matchBonusNumber));
     }
 }

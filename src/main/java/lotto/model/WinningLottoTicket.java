@@ -13,11 +13,15 @@ public class WinningLottoTicket extends LottoTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottoTicket newInstance(final Set<LottoNumber> numbers, LottoNumber bonusNumber) {
+    public static WinningLottoTicket newInstance(final Set<LottoNumber> numbers, final LottoNumber bonusNumber) {
+        if(numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("bonus number must be distinct.");
+        }
+
         return new WinningLottoTicket(numbers, bonusNumber);
     }
 
-    public static Object create(Set<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
-        return new WinningLottoTicket(lottoNumbers, bonusNumber);
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }
