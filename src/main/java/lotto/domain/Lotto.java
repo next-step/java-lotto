@@ -47,12 +47,12 @@ public class Lotto {
     public int getMatchedCount(Lotto lotto) {
         int matchedCount = 0;
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            matchedCount += CountingMatched(lottoNumber);
+            matchedCount += countingMatched(lottoNumber);
         }
         return matchedCount;
     }
 
-    private int CountingMatched(LottoNumber lottoNumber) {
+    private int countingMatched(LottoNumber lottoNumber) {
         if (lottoNumbers.stream()
                 .anyMatch(l -> l.getLottoNumber() == lottoNumber.getLottoNumber())) {
             return 1;
