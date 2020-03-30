@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoChecker;
 import lotto.domain.LottoWinningNumber;
-import lotto.domain.dto.LottoNumbers;
+import lotto.dto.LottoNumbers;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 

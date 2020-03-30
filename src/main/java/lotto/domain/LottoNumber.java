@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoNumbers;
-import lotto.domain.dto.LottoRank;
+import lotto.dto.LottoNumbers;
+import lotto.dto.LottoRank;
 import lotto.utils.StringFormatter;
 
 import java.util.Arrays;

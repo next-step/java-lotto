@@ -1,7 +1,5 @@
-package lotto.domain.dto;
+package lotto.dto;
 
-import lotto.domain.dto.LottoRank;
-import lotto.domain.dto.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

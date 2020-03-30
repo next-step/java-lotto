@@ -1,4 +1,4 @@
-package lotto.domain.dto;
+package lotto.dto;
 
 public enum LottoRank {
 	FIFTH(3, 5_000),
