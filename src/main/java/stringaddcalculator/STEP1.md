@@ -10,9 +10,9 @@
     - [ ] custom 구분자  
 * Separator
   - [ ] 문자열 분리
-  - [ ] 커스텀 구분자 분리
-  - [ ] 문자열 계산기의 피연산자 분리
+  - [ ] 커스텀 구분자로 분리
 * StringAddCalculator
+  - [ ] null 혹은 빈 문자열 확인
   - [ ] 피연산자의 int 값으로 연산
   - [ ] 피연산자의 조건 : 양수 (음수, 문자 등의 경우 RuntimeException throw)
 
