@@ -66,7 +66,7 @@ public class LottoTicketTest {
         final LottoTicket lotto = new LottoTicket(numbers);
         final WinLottoTicket first = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
         final WinLottoTicket second = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 6);
-        final WinLottoTicket third = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 10);
+        final WinLottoTicket third = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 10), 11);
         final WinLottoTicket miss = new WinLottoTicket(Arrays.asList(1, 10, 11, 12, 13, 14), 20);
 
         //then
