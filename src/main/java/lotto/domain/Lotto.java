@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = cloneLottoNumbers(lottoNumbers);
         validate();
         sortLottorNumbers();
     }
@@ -67,5 +67,13 @@ public class Lotto {
         if (this.lottoNumbers.size() != LOTTO_MAX_SOCKET) {
             throw new IllegalArgumentException("로또는 고유한 숫자 6개로 이뤄져야 합니다.");
         }
+    }
+
+    private Set<LottoNumber> cloneLottoNumbers(Set<LottoNumber> originNumbers) {
+        Set<LottoNumber> cloned = new LinkedHashSet<>();
+        for (LottoNumber originNumber : originNumbers) {
+            cloned.add(originNumber.clone());
+        }
+        return cloned;
     }
 }

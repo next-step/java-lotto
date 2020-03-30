@@ -5,7 +5,7 @@ import lotto.generator.RandomNumberGenerator;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Cloneable {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
 
@@ -76,5 +76,14 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public LottoNumber clone() {
+        try {
+            return (LottoNumber) super.clone();
+        } catch (CloneNotSupportedException ce) {
+            throw new RuntimeException("로또 번호를 만드는데 문제가 있습니다.");
+        }
     }
 }
