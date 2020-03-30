@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.LottoWinningNumber;
+import lotto.dto.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,15 +28,18 @@ public class InputView {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public LottoWinningNumber getWinningLastWeekNumber() {
+	public LottoNumbers getWonLastWeekLottoNumbers() {
 		System.out.println(GET_WINNING_NUMBER_MSG);
 		String numberString = scanner.nextLine();
 		List<Integer> numbers = Arrays.stream(numberString.split(","))
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 
+		return new LottoNumbers(numbers);
+	}
+
+	public int getWonLastWeekBonusNumber() {
 		System.out.println(GET_WINNING_BONUS_MSG);
-		int bonusNumber = Integer.parseInt(scanner.nextLine());
-		return new LottoWinningNumber(numbers, bonusNumber);
+		return Integer.parseInt(scanner.nextLine());
 	}
 }

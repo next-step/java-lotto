@@ -12,11 +12,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoChecker {
-	private final LottoWinningNumber winningNumber;
+	private final LottoWinningNumber wonNumbers;
 	private final long spentMoney;
 
-	public LottoChecker(LottoWinningNumber winningNumber, long spentMoney) {
-		this.winningNumber = winningNumber;
+	public LottoChecker(LottoNumbers wonNumbers, int wonBonusNumber, long spentMoney) {
+		this.wonNumbers = new LottoWinningNumber(new LottoNumber(wonNumbers.getNumbers()), wonBonusNumber);
 		this.spentMoney = spentMoney;
 	}
 
@@ -28,7 +28,7 @@ public class LottoChecker {
 		Map<LottoRank, Long> map = applyNumbers.stream()
 				.map(LottoNumbers::getNumbers)
 				.map(LottoNumber::new)
-				.map(lottoNumber -> lottoNumber.matchLottoNumber(winningNumber))
+				.map(wonNumbers::matchLottoNumber)
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
@@ -40,11 +40,11 @@ public class LottoChecker {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoChecker that = (LottoChecker) o;
-		return Objects.equals(winningNumber, that.winningNumber);
+		return Objects.equals(wonNumbers, that.wonNumbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(winningNumber);
+		return Objects.hash(wonNumbers);
 	}
 }

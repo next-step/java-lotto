@@ -1,35 +1,42 @@
 package lotto.domain;
 
+import lotto.dto.LottoRank;
 import lotto.utils.StringFormatter;
 
-import java.util.List;
 import java.util.Objects;
 
-public class LottoWinningNumber extends LottoNumber {
+class LottoWinningNumber {
+	private LottoNumber electedNumber;
 	private int bonusNumber;
 
-	public LottoWinningNumber(List<Integer> electedNumbers, int bonusNumber) {
-		super(electedNumbers);
+	LottoWinningNumber(LottoNumber electedNumbers, int bonusNumber) {
+		this.electedNumber = electedNumbers;
 		this.bonusNumber = bonusNumber;
 
-		if (isInvalidLottoNumbers(electedNumbers, bonusNumber)) {
-			throwIllegalException(electedNumbers, bonusNumber);
+		if (isInvalidLottoNumbers()) {
+			throwIllegalException();
 		}
 	}
 
-	private void throwIllegalException(List<Integer> numbers, int bonusNumber) {
+	private void throwIllegalException() {
 		throw new IllegalArgumentException(String.format("Instantiate LottoWinningNumber failed. " +
 						"bonus Number cannot be elected numbers : numbers=%s, bonusNumber=%d",
-				StringFormatter.listToString(numbers),
+				StringFormatter.listToString(electedNumber.getLottoNumbers().getNumbers()),
 				bonusNumber));
 	}
 
-	private boolean isInvalidLottoNumbers(List<Integer> numbers, int bonusNumber) {
-		return numbers.contains(bonusNumber);
+	private boolean isInvalidLottoNumbers() {
+		return electedNumber.containsNumber(bonusNumber);
 	}
 
-	public int getBonusNumber() {
-		return bonusNumber;
+	LottoRank matchLottoNumber(LottoNumber drawNumber) {
+		int correctNumbers = getMatchElectedNumberCount(drawNumber);
+		boolean matchBonus = drawNumber.containsNumber(this.bonusNumber);
+		return LottoRank.getFromCorrectNumbers(correctNumbers, matchBonus);
+	}
+
+	private int getMatchElectedNumberCount(LottoNumber drawNumber) {
+		return this.electedNumber.countContainsNumbers(drawNumber);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumbers;
-import lotto.dto.LottoRank;
 import lotto.utils.StringFormatter;
 
 import java.util.Arrays;
@@ -23,41 +22,44 @@ class LottoNumber {
 	LottoNumber(List<Integer> numbers) {
 		this.numbers = Collections.unmodifiableList(numbers);
 
-		if (isInvalidLottoNumbers(numbers)) {
-			throwIllegalException(numbers);
+		if (isInvalidLottoNumbers()) {
+			throwIllegalException();
 		}
 	}
 
-	private void throwIllegalException(List<Integer> numbers) {
+	private void throwIllegalException() {
 		throw new IllegalArgumentException(String.format("Instantiate LottoNumber failed. " +
 						"numbers must be distinct %d numbers range %d~%d : numbers=%s",
 				NUMBER_SIZE,
 				LOWEST_NUMBER,
 				HIGHEST_NUMBER,
-				StringFormatter.listToString(numbers)));
+				this.toString()));
 	}
 
-	private boolean isInvalidLottoNumbers(List<Integer> numbers) {
+	private boolean isInvalidLottoNumbers() {
 		return numbers.stream()
 				.distinct()
 				.filter(number -> LOWEST_NUMBER <= number && number <= HIGHEST_NUMBER)
 				.count() != NUMBER_SIZE;
 	}
 
-	public LottoRank matchLottoNumber(LottoWinningNumber winningNumber) {
-		int correctNumbers = getMatchElectedNumberCount(winningNumber);
-		boolean matchBonus = this.numbers.contains(winningNumber.getBonusNumber());
-		return LottoRank.getFromCorrectNumbers(correctNumbers, matchBonus);
+	boolean containsNumber(int bonusNumber) {
+		return this.numbers.contains(bonusNumber);
 	}
 
-	private int getMatchElectedNumberCount(LottoWinningNumber winningNumber) {
+	int countContainsNumbers(LottoNumber lottoNumber) {
 		return (int) this.numbers.stream()
-				.filter(winningNumber.getLottoNumbers().getNumbers()::contains)
+				.filter(lottoNumber::containsNumber)
 				.count();
 	}
 
 	LottoNumbers getLottoNumbers() {
 		return new LottoNumbers(numbers);
+	}
+
+	@Override
+	public String toString() {
+		return StringFormatter.listToString(numbers);
 	}
 
 	@Override

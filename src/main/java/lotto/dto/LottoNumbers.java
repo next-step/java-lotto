@@ -6,7 +6,6 @@ import java.util.List;
 public class LottoNumbers {
 	private final List<Integer> numbers;
 
-
 	public LottoNumbers(List<Integer> numbers) {
 		this.numbers = Collections.unmodifiableList(numbers);
 	}
