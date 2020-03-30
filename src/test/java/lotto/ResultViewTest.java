@@ -4,7 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class ResultViewTest {
 
@@ -14,5 +14,13 @@ public class ResultViewTest {
         ResultView resultViewTest = new ResultView(inputText);
         assertThat(resultViewTest.winnerNumber()).hasSize(6);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 1, 2, 2, 3, 6"})
+    void testValidateDuplicate(final String inputText) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new ResultView(inputText));
+    }
+
 
 }
