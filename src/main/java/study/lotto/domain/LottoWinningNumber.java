@@ -1,6 +1,5 @@
 package study.lotto.domain;
 
-import study.lotto.domain.exception.LottoTicketConstructorException;
 import study.lotto.domain.exception.LottoWinningNumberConstructorException;
 
 import java.util.HashSet;
@@ -28,7 +27,7 @@ public class LottoWinningNumber {
 
         setWinningNumbers(winningNumbers);
 
-        if (winningNumbers.size() != WINNING_NUMBER_SIZE) {
+        if (this.winningNumbers.size() != WINNING_NUMBER_SIZE) {
             throw new LottoWinningNumberConstructorException(
                     DUPLICATED_WINNING_NUMBERS_ERROR_MESSAGE);
         }
@@ -46,7 +45,7 @@ public class LottoWinningNumber {
     }
 
     public List<LottoNumber> getMatches(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumber().stream()
+        return lottoTicket.getLottoNumbers().stream()
                 .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
                 .collect(Collectors.toList());
     }

@@ -33,7 +33,7 @@ public class ResultView {
 
     private static void displayLottoTicket(LottoTicket lottoTicket) {
         System.out.print("[");
-        String numbers = lottoTicket.getLottoNumber().stream()
+        String numbers = lottoTicket.getLottoNumbers().stream()
                 .map(number -> Integer.toString(number.getNumber()))
                 .collect(Collectors.joining(", "));
         System.out.print(numbers);

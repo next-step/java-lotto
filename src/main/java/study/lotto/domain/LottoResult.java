@@ -5,16 +5,20 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<LottoRank, List<LottoTicket>> winningTickets;
-    private int investmentAmount;
+    private Amount investmentAmount;
 
-    public LottoResult(int investmentAmount) {
+    public LottoResult(Amount investmentAmount) {
         this.investmentAmount = investmentAmount;
         setWinners();
     }
 
+    public LottoResult(int investmentAmount) {
+        this(new Amount(investmentAmount));
+    }
+
     private void setWinners() {
         this.winningTickets = new HashMap<>();
-        for(LottoRank lottoRank: LottoRank.values()) {
+        for (LottoRank lottoRank : LottoRank.values()) {
             this.winningTickets.put(lottoRank, new ArrayList<>());
         }
     }
@@ -34,7 +38,7 @@ public class LottoResult {
     public double getRateOfReturn() {
         int prizeTotal = getPrizeTotal();
 
-        return (double) prizeTotal / investmentAmount;
+        return (double) prizeTotal / investmentAmount.getAmount();
     }
 
     private int getPrizeTotal() {

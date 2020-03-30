@@ -13,7 +13,7 @@ public class LottoTicket implements Iterable<LottoNumber> {
             "로또 숫자의 중복은 허용되지 않습니다.";
     public static final int PRICE = 1000;
 
-    private Set<LottoNumber> lottoNumber;
+    private Set<LottoNumber> lottoNumbers;
 
     private LottoTicket() {
     }
@@ -25,35 +25,35 @@ public class LottoTicket implements Iterable<LottoNumber> {
                     LOTTO_NUMBERS_SIZE_ERROR_MESSAGE);
         }
 
-        setLottoNumber(lottoNumbers);
+        setLottoNumbers(lottoNumbers);
 
-        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+        if (this.lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new LottoTicketConstructorException(
                     DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE);
         }
     }
 
     public int size() {
-        return lottoNumber.size();
+        return lottoNumbers.size();
     }
 
-    public List<LottoNumber> getLottoNumber() {
-        return lottoNumber.stream()
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers.stream()
                 .map(LottoNumber::clone)
                 .sorted()
                 .collect(Collectors.toList());
     }
 
-    private void setLottoNumber(List<Integer> lottoNumbers) {
-        lottoNumber = new HashSet<>();
+    private void setLottoNumbers(List<Integer> lottoNumbers) {
+        this.lottoNumbers = new HashSet<>();
         for (int number : lottoNumbers) {
-            lottoNumber.add(new LottoNumber(number));
+            this.lottoNumbers.add(new LottoNumber(number));
         }
     }
 
     public LottoTicket clone() {
         LottoTicket clonedLottoTicket = new LottoTicket();
-        clonedLottoTicket.lottoNumber = lottoNumber.stream()
+        clonedLottoTicket.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::clone)
                 .collect(Collectors.toSet());
 
@@ -61,6 +61,6 @@ public class LottoTicket implements Iterable<LottoNumber> {
     }
 
     @Override public Iterator<LottoNumber> iterator() {
-        return lottoNumber.iterator();
+        return lottoNumbers.iterator();
     }
 }
