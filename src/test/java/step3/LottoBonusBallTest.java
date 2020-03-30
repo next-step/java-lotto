@@ -3,9 +3,11 @@ package step3;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step3.domain.BuyInfo;
-import step3.domain.Lotto;
-import step3.domain.LottoInfo;
+import step3.domain.*;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -16,6 +18,12 @@ public class LottoBonusBallTest {
     @DisplayName("입력값 테스트")
     public void priceTest() {
         assertThatThrownBy(() -> new BuyInfo(0,2000)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력값 테스트0보다 작은구매금액테스트")
+    public void priceFailTest() {
+        assertThatThrownBy(() -> new BuyInfo(-1,2000)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -36,5 +44,25 @@ public class LottoBonusBallTest {
     public void getLottoRandomTest(){
         Lotto lotto = new Lotto();
         assertThat(lotto.getRandomLottoList().size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("당첨정보결과테스트")
+    public void matchTest() {
+        WinLotto winLotto = new WinLotto("1,2,3,4,5,6");
+        List<Integer> buyLottoList = Arrays.asList(1,2,3,4,5,7);
+        assertThat(winLotto.match(buyLottoList)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("5등당첨정보테스트")
+    public void resultTest() {
+        assertThat(WinInformation.matchWinInformation(3,0).getPrice()).isEqualTo(BigDecimal.valueOf(5000));
+    }
+
+    @Test
+    @DisplayName("2등당첨정보테스트")
+    public void resultBonusBallTest() {
+        assertThat(WinInformation.matchWinInformation(5,1).getPrice()).isEqualTo(BigDecimal.valueOf(30000000));
     }
 }
