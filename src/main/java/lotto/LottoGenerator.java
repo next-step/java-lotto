@@ -38,7 +38,7 @@ public class LottoGenerator {
         return new LottoTicket(numbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoTicket.getLottoNumbers();
+    public LottoTicket getLottoTicket() {
+        return lottoTicket;
     }
 }

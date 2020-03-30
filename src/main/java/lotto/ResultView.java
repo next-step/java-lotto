@@ -3,7 +3,6 @@ package lotto;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -17,7 +16,7 @@ public class ResultView {
 
     private Scanner scanner = new Scanner(System.in);
     private LottoNumber winningNumbers;
-    private List<LottoNumber> purchaseLottoNumbers;
+    private LottoTicket lottoTicket;
     private Map<String, WinningLotto> winningLottos;
     private int bonusBall;
 
@@ -33,7 +32,7 @@ public class ResultView {
         this(inputText, null, 0);
     }
 
-    public ResultView(List<LottoNumber> purchaseLottoNumbers) {
+    public ResultView(LottoTicket lottoTicket) {
         String inputText = enterWinningValue();
         int bonusBall = enterBonusValue();
         validateBonusBall(bonusBall);
@@ -41,17 +40,17 @@ public class ResultView {
         this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumber(numbers);
-        this.purchaseLottoNumbers = Collections.unmodifiableList(purchaseLottoNumbers);
+        this.lottoTicket = lottoTicket;
         this.winningLottos = getWinningLottos();
 
     }
 
-    public ResultView(String inputText, List<LottoNumber> purchaseLottoNumbers, int bonusBall) {
+    public ResultView(String inputText, LottoTicket lottoTicket, int bonusBall) {
         validateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumber(numbers);
-        this.purchaseLottoNumbers = Collections.unmodifiableList(purchaseLottoNumbers);
+        this.lottoTicket = lottoTicket;
         this.winningLottos = getWinningLottos();
         this.bonusBall = bonusBall;
     }
@@ -59,9 +58,9 @@ public class ResultView {
     public Map<String, WinningLotto> getWinningLottos() {
         Map<String, WinningLotto> winningLottos = new HashMap<>();
         Set<Integer> winningNums = winningNumbers.getNumbers();
-        for (int i = 0; i < purchaseLottoNumbers.size(); i++) {
+        for (int i = 0; i < lottoTicket.getLottoNumbers().size(); i++) {
             int matchCount = 0;
-            Set<Integer> purchaseNumbers = purchaseLottoNumbers.get(i).getNumbers();
+            Set<Integer> purchaseNumbers = lottoTicket.getLottoNumbers().get(i).getNumbers();
             matchCount = repeatByWinNumberSize(winningNums, matchCount, purchaseNumbers);
             boolean matchBonus = checkMatchBonusBall(purchaseNumbers);
 
@@ -85,9 +84,9 @@ public class ResultView {
 
     }
 
-    public String printPurchaseLottoNumbers(List<LottoNumber> lottoNumbers) {
+    public String printPurchaseLottoNumbers(LottoTicket lottoTicket) {
         String result = "";
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
             result += lottoNumber.getNumbers() + "\n";
         }
 
@@ -136,7 +135,7 @@ public class ResultView {
     }
 
     public int totalPurchaseAmount() {
-        return purchaseLottoNumbers.size() * MIN_PURCHASE_AMOUNT;
+        return lottoTicket.getLottoNumbers().size() * MIN_PURCHASE_AMOUNT;
     }
 
     public void validateBonusBall(int bonusBall) {

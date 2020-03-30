@@ -31,8 +31,8 @@ class LottoGeneratorTest {
     @DisplayName("구매수량만큼 생성한 로또 번호들을 가져온다.")
     @Test
     void createLottoNumbersByPurchaseCount() {
-        List<LottoNumber> lottoNumbers = lottoGenerator.getLottoNumbers();
-        assertThat(lottoNumbers).hasSize(14);
+        LottoTicket lottoTicket = lottoGenerator.getLottoTicket();
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(14);
 
     }
 }

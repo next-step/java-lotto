@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoController {
 
     private static ResultView resultView = new ResultView();
@@ -13,12 +11,12 @@ public class LottoController {
 
         LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
         lottoGenerator.createLottoNumbersByPurchaseCount();
-        List<LottoNumber> lottoNumbers = lottoGenerator.getLottoNumbers();
+        LottoTicket lottoTicket = lottoGenerator.getLottoTicket();
 
-        String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoNumbers);
+        String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoTicket);
         System.out.println(printPurchaseLottoNumbers);
 
-        resultView = new ResultView(lottoNumbers);
+        resultView = new ResultView(lottoTicket);
         System.out.println(resultView.printWinningResult());
         System.out.println(resultView.printRevenuePercent());
 

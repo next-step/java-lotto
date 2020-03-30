@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,15 +19,15 @@ class ResultViewTest {
     void setUp() {
         String input = "1,2,3,4,5,6";
         int bonusBall = 42;
-        List<LottoNumber> purchaseLottoNumbers = Arrays.asList(
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
                 new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), //1등
                 new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 34, 35, 45))), //5등
                 new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 35, 42))), //4등
                 new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 42))), //2등
                 new LottoNumber(new HashSet<>(Arrays.asList(22, 23, 24, 25, 35, 42))), //꽝
                 new LottoNumber(new HashSet<>(Arrays.asList(2, 23, 24, 25, 35, 42))) //꽝
-        );
-        resultView = new ResultView(input, purchaseLottoNumbers, bonusBall);
+        ));
+        resultView = new ResultView(input, lottoTicket, bonusBall);
 
     }
 
