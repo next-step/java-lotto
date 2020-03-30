@@ -1,19 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.Buyer;
-import lotto.domain.BuyerResult;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class BuyerTest {
     private Buyer buyer;
@@ -22,14 +20,7 @@ public class BuyerTest {
     @BeforeEach
     void setUp() {
         buyer = new Buyer();
-        winningTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(6)
-        ));
+        winningTicket = createTicket(1, 2, 3, 4, 5, 6);
     }
 
     @ParameterizedTest
@@ -41,30 +32,51 @@ public class BuyerTest {
     }
 
     @Test
-    @DisplayName("2등 1장, 4등 1장일때 result 확인")
+    @DisplayName("3등 1장, 4등 1장일때 result 확인")
     void checkByGetResult() {
-        LottoTicket secondTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(4),
-                LottoNumber.of(5),
-                LottoNumber.of(16)
-        ));
+        LottoTicket thirdTicket = createTicket(1, 2, 3, 4, 5, 16);
+        LottoTicket fourthTicket = createTicket(1, 2, 3, 14, 15, 16);
 
-        LottoTicket fourthTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.of(1),
-                LottoNumber.of(2),
-                LottoNumber.of(3),
-                LottoNumber.of(24),
-                LottoNumber.of(15),
-                LottoNumber.of(16)
-        ));
-
-        Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
-        BuyerResult result = newBuyer.getResult(winningTicket);
+        Buyer newBuyer = new Buyer(Arrays.asList(thirdTicket, fourthTicket));
+        BuyerResult result = newBuyer.getResult(winningTicket, LottoNumber.of(17));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(752.5);
+    }
+
+    @Test
+    @DisplayName("2등 1장, 3등 1장일때 result 확인")
+    void checkByGetResult2() {
+        LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
+        LottoTicket fourthTicket = createTicket(1, 2, 3, 4, 5, 16);
+
+        Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
+        BuyerResult result = newBuyer.getResult(winningTicket, LottoNumber.of(16));
+
+        assertThat(result.getWinningResult().size()).isEqualTo(2);
+        assertThat(result.getProfitRate()).isEqualTo(30000.0);
+    }
+
+    @ParameterizedTest
+    @DisplayName("보너스번호 당첨번호와 중복 시 예외 발생")
+    @ValueSource(ints = {1, 3, 5})
+    void nonDuplicatedByInputBonus(int bonusNumber) {
+        LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
+
+        Buyer newBuyer = new Buyer(Arrays.asList(secondTicket));
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            newBuyer.getResult(winningTicket, LottoNumber.of(bonusNumber));
+        }).withMessage(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber));
+    }
+
+    private LottoTicket createTicket(int... numbers) {
+        return new LottoTicket(Arrays.asList(
+                LottoNumber.of(numbers[0]),
+                LottoNumber.of(numbers[1]),
+                LottoNumber.of(numbers[2]),
+                LottoNumber.of(numbers[3]),
+                LottoNumber.of(numbers[4]),
+                LottoNumber.of(numbers[5])
+        ));
     }
 }

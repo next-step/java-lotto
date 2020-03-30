@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,8 +78,8 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num1, num6));
         LottoTicket winningTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num7, num6));
 
-        int matchCount = lottoTicket.compareTo(winningTicket);
+        LottoTicketResult lottoTicketResult = lottoTicket.checkWinning(winningTicket, LottoNumber.of(5));
 
-        assertThat(matchCount).isEqualTo(5);
+        assertThat(lottoTicketResult.getMatchCount()).isEqualTo(5);
     }
 }

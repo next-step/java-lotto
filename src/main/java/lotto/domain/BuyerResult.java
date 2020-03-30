@@ -1,19 +1,29 @@
 package lotto.domain;
 
-import lotto.domain.LottoRule.WINNING_VALUE;
-
 import java.util.List;
 
 public class BuyerResult {
-    private List<WINNING_VALUE> winningResult;
-    private double profitRate;
+    private final List<Rank> winningResult;
+    private final double profitRate;
 
-    public BuyerResult(List<WINNING_VALUE> winningResult, double profitRate) {
-        this.winningResult = winningResult;
-        this.profitRate = profitRate;
+    public BuyerResult(List<Rank> ranks, int lottoCount) {
+        this.winningResult = ranks;
+        this.profitRate = calculateProfitRate(lottoCount);
     }
 
-    public List<WINNING_VALUE> getWinningResult() {
+    private double calculateProfitRate(int lottoCount) {
+        long winningAmountSum = getWinningAmountSum();
+        double profitRate = ((double) winningAmountSum) / (lottoCount * LottoTicket.PRICE);
+        return Math.round(profitRate * 100) / 100.0;
+    }
+
+    private long getWinningAmountSum() {
+        return winningResult.stream()
+                .mapToLong(Rank::getAmount)
+                .sum();
+    }
+
+    public List<Rank> getWinningResult() {
         return winningResult;
     }
 
