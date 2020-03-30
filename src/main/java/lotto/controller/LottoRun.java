@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoResultView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -51,9 +52,9 @@ public class LottoRun {
         return lottoInspector;
     }
 
-    private static double innsightResult(LottoInspector lottoInspector, Money money) {
+    private static BigDecimal innsightResult(LottoInspector lottoInspector, Money money) {
         int totalRevenue = lottoInspector.getTotalRevenue();
-        double yield = (double) totalRevenue / (double) money.getMoney();
+        BigDecimal yield = new BigDecimal(totalRevenue).divide(new BigDecimal(money.getMoney()), 2, BigDecimal.ROUND_HALF_UP);
         lottoResultView.viewInsight(yield);
 
         return yield;

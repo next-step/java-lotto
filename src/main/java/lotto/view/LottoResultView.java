@@ -2,9 +2,9 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Money;
 import lotto.domain.RewardEnum;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -64,8 +64,8 @@ public class LottoResultView {
         }
     }
 
-    public void viewInsight(double yield) {
-        if (yield < 1) {
+    public void viewInsight(BigDecimal yield) {
+        if (yield.compareTo(new BigDecimal(1)) <= 0) {
             System.out.println("총 수익률은" + String.format("%.2f", yield) + " 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
             return;
         }
