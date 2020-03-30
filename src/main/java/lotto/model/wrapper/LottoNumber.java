@@ -23,10 +23,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public int toInt() {
-        return number;
-    }
-
     @Override
     public String toString() {
         return number.toString();

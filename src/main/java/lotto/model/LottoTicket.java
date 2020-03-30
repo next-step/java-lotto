@@ -16,10 +16,6 @@ public abstract class LottoTicket {
         this.numbers = new HashSet(numbers);
     }
 
-    public Set<LottoNumber> getNumbers() {
-        return Collections.unmodifiableSet(numbers);
-    }
-
     private void validate(final Set<LottoNumber> numbers) {
         if (Objects.isNull(numbers) || numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");

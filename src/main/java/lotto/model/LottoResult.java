@@ -34,7 +34,7 @@ public enum LottoResult {
 
     public static LottoResult of(final LottoMatchCount lottoMatchCount) {
         return Optional.ofNullable(LOTTO_RESULTS.get(lottoMatchCount))
-                .orElseThrow(() -> new IllegalArgumentException("Match Count must between 0 and 6."));
+                .orElseThrow(() -> new IllegalArgumentException("match count must between 0 and 6."));
     }
 
     public Integer getMatchCount() {

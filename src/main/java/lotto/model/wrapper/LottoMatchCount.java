@@ -22,7 +22,7 @@ public class LottoMatchCount {
         return new LottoMatchCount(matchCount, LottoBonusMatchResult.of(matchCount, matchBonusNumber));
     }
 
-    public Integer toInt() {
+    public int toInt() {
         return matchCount;
     }
 
