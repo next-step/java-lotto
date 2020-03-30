@@ -9,6 +9,10 @@ public class BonusBall {
         this.bonusNumber = LottoNumber.valueOf(Integer.valueOf(input));
     }
 
+    LottoNumber getLottoNumber() {
+        return bonusNumber;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
