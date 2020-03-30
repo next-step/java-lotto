@@ -20,11 +20,12 @@ public class Lotteries {
         return lottoNumbers;
     }
 
-    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers) {
+    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers, final BonusBall bonusBall) {
         LottoResult lottoResult = new LottoResult();
-        LottoRank lottoRank;
         for (LottoNumbers purchase : lottoNumbers) {
-            lottoRank = LottoRank.findRank(purchase.analyzeMatchCount(winningLotteNumbers));
+            int matchCount = purchase.analyzeMatchCount(winningLotteNumbers);
+            boolean hasBonusBall = purchase.hasBonusBall(bonusBall);
+            LottoRank lottoRank = LottoRank.findRank(matchCount, hasBonusBall);
             lottoResult.increase(lottoRank);
         }
         return lottoResult;
