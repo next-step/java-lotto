@@ -12,9 +12,6 @@ public class MatchResultTest {
     @BeforeEach
     void setUP() {
         matchResult = new MatchResult();
-        matchResult.addResult(RankType.RANK4);
-        matchResult.addResult(RankType.RANK3);
-        matchResult.addResult(RankType.NO_RANK);
     }
 
     @Test
@@ -25,19 +22,20 @@ public class MatchResultTest {
 
     @Test
     void getCount() {
-        int rank1Count = matchResult.getCount(RankType.RANK1);
-        int rank2Count = matchResult.getCount(RankType.RANK2);
-        int rank3Count = matchResult.getCount(RankType.RANK3);
-        int rank4Count = matchResult.getCount(RankType.RANK4);
+        matchResult.addResult(RankType.RANK1);
 
-        assertThat(rank1Count).isEqualTo(0);
-        assertThat(rank2Count).isEqualTo(0);
-        assertThat(rank3Count).isEqualTo(1);
-        assertThat(rank4Count).isEqualTo(1);
+        int rank1Count = matchResult.getCount(RankType.RANK1);
+        int noRankCount = matchResult.getCount(RankType.NO_RANK);
+
+        assertThat(rank1Count).isEqualTo(1);
+        assertThat(noRankCount).isEqualTo(0);
     }
 
     @Test
     void getTotalReward() {
+        matchResult.addResult(RankType.RANK5);
+        matchResult.addResult(RankType.RANK4);
+
         int totalReward = matchResult.getTotalReward();
 
         assertThat(totalReward).isEqualTo(55000);
