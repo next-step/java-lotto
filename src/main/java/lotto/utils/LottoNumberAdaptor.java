@@ -4,6 +4,7 @@ import lotto.model.wrapper.LottoNumber;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumberAdaptor {
@@ -11,13 +12,13 @@ public class LottoNumberAdaptor {
     private LottoNumberAdaptor() {
     }
 
-    public static List<LottoNumber> convert(final List<Integer> origin) {
+    public static Set<LottoNumber> convert(final List<Integer> origin) {
         if (Objects.isNull(origin)) {
             return null;
         }
 
         return origin.stream()
                 .map(LottoNumber::of)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

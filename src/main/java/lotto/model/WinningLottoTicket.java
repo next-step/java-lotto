@@ -2,15 +2,15 @@ package lotto.model;
 
 import lotto.model.wrapper.LottoNumber;
 
-import java.util.List;
+import java.util.Set;
 
 public class WinningLottoTicket extends LottoTicket {
 
-    private WinningLottoTicket(final List<LottoNumber> numbers) {
+    private WinningLottoTicket(final Set<LottoNumber> numbers) {
         super(numbers);
     }
 
-    public static WinningLottoTicket newInstance(final List<LottoNumber> numbers) {
+    public static WinningLottoTicket newInstance(final Set<LottoNumber> numbers) {
         return new WinningLottoTicket(numbers);
     }
 }

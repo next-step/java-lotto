@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -29,8 +31,10 @@ public class LottoResults {
         return result;
     }
 
-    public Double profit() {
-        return getTotalPrice() / getPurchasePayment();
+    public BigDecimal profit() {
+        BigDecimal totalPrice = BigDecimal.valueOf(getTotalPrice());
+        BigDecimal purchasePayment = BigDecimal.valueOf(getPurchasePayment());
+        return totalPrice.divide(purchasePayment, 1, RoundingMode.HALF_UP);
     }
 
     private static Map<LottoResult, Long> getDefaultResult() {
@@ -40,15 +44,15 @@ public class LottoResults {
         return defaultResult;
     }
 
-    private Long getTotalPrice() {
+    private long getTotalPrice() {
         return lottoResults.keySet()
                 .stream()
                 .mapToLong(result -> result.getPrice() * lottoResults.get(result))
                 .sum();
     }
 
-    private double getPurchasePayment() {
-        return (double) lottoResults.keySet()
+    private long getPurchasePayment() {
+        return lottoResults.keySet()
                 .stream()
                 .mapToLong(result -> lottoResults.getOrDefault(result, 0L))
                 .sum() * LOTTO_PRICE;

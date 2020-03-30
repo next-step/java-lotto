@@ -30,13 +30,13 @@ public class LottoPurchaseTicketsTests {
     @DisplayName("로또 여러 장 생성 테스트")
     @Test
     public void generateLottoTicketsTest() {
-        assertThatCode(() -> LottoPurchaseTickets.create(lottoTickets)).doesNotThrowAnyException();
+        assertThatCode(() -> new LottoPurchaseTickets(lottoTickets)).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 결과 테스트")
     @Test
     public void checkAllTest() {
-        LottoPurchaseTickets lottoPurchaseTickets = LottoPurchaseTickets.create(lottoTickets);
+        LottoPurchaseTickets lottoPurchaseTickets = new LottoPurchaseTickets(lottoTickets);
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR));
 
@@ -46,7 +46,7 @@ public class LottoPurchaseTicketsTests {
     @DisplayName("로또 갯수 테스트")
     @Test
     public void sizeTest() {
-        LottoPurchaseTickets lottoPurchaseTickets = LottoPurchaseTickets.create(lottoTickets);
+        LottoPurchaseTickets lottoPurchaseTickets = new LottoPurchaseTickets(lottoTickets);
         assertThat(lottoPurchaseTickets.size()).isEqualTo(lottoTickets.size());
     }
 }

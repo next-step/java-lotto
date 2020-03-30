@@ -4,6 +4,7 @@ import lotto.model.wrapper.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -23,10 +24,10 @@ public class AutomaticLottoGenerator {
     private AutomaticLottoGenerator() {
     }
 
-    public static List<LottoNumber> generate() {
+    public static Set<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
         return IntStream.range(0, LOTTO_NUMBER_SIZE)
                 .mapToObj(i -> lottoNumbers.get(i))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

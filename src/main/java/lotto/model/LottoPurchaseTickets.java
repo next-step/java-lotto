@@ -8,16 +8,12 @@ import java.util.stream.Collectors;
 public class LottoPurchaseTickets {
     private List<LottoPurchaseTicket> lottoTickets;
 
-    private LottoPurchaseTickets(final List<LottoPurchaseTicket> lottoTickets) {
-        this.lottoTickets = new ArrayList<>(lottoTickets);
-    }
-
-    public static LottoPurchaseTickets create(final List<LottoPurchaseTicket> lottoTickets) {
-        if(Objects.isNull(lottoTickets)) {
+    public LottoPurchaseTickets(final List<LottoPurchaseTicket> lottoTickets) {
+        if (Objects.isNull(lottoTickets)) {
             throw new IllegalArgumentException("lotto tickets is null");
         }
 
-        return new LottoPurchaseTickets(lottoTickets);
+        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
     public LottoResults checkAll(final WinningLottoTicket winningLottoTicket) {

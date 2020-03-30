@@ -15,6 +15,6 @@ public class LottoStore {
         List<LottoPurchaseTicket> lottoPurchaseTickets = IntStream.range(0, payment.countLottoTicket())
                 .mapToObj(i -> LottoPurchaseTicket.newInstance())
                 .collect(Collectors.toList());
-        return LottoPurchaseTickets.create(lottoPurchaseTickets);
+        return new LottoPurchaseTickets(lottoPurchaseTickets);
     }
 }

@@ -4,6 +4,7 @@ import lotto.model.LottoPurchaseTickets;
 import lotto.model.LottoResult;
 import lotto.model.LottoResults;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class OutputView {
@@ -40,8 +41,8 @@ public class OutputView {
                 resultCount));
     }
 
-    private static void printProfitResult(final Double profit) {
-        if (profit < 1) {
+    private static void printProfitResult(final BigDecimal profit) {
+        if (profit.compareTo(BigDecimal.valueOf(1)) < 0) {
             System.out.println(String.format(PROFIT_WITH_LOSS_SHOW_FORMAT, profit));
             return;
         }
