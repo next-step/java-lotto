@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoProvider {
 
-    private static final List<LottoNumber> wholeNumber = new ArrayList<>();
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
     private LottoProvider() {}
 
@@ -40,18 +43,9 @@ public class LottoProvider {
     }
 
     private static List<LottoNumber> getShuffledNumber() {
-        List<LottoNumber> shuffledNumber = new ArrayList<>(getWholeNumber());
+        List<LottoNumber> shuffledNumber = LOTTO_NUMBER_POOL;
 
         Collections.shuffle(shuffledNumber);
         return shuffledNumber;
-    }
-
-    private static List<LottoNumber> getWholeNumber() {
-        if(wholeNumber.isEmpty()) {
-            for(int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-                wholeNumber.add(new LottoNumber(i));
-            }
-        }
-        return wholeNumber;
     }
 }
