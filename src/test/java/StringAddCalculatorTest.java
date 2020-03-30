@@ -20,4 +20,12 @@ public class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(new String[]{"1", "2"});
     }
+
+    @Test
+    @DisplayName("")
+    public void sumReturnsSumOfNumbers() {
+        int result = StringAddCalculator.sum(new String[]{"1", "2"});
+
+        assertThat(result).isEqualTo(3);
+    }
 }
