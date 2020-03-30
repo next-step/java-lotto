@@ -18,7 +18,7 @@ public class BuyInfo {
             throw new IllegalArgumentException("로또 구매가격은 0보다 커야합니다.");
         }
         if (totalPrice < oneGamePrice){
-            throw new IllegalArgumentException(oneGamePrice + "보다 큰 금액 입력");
+            throw new IllegalArgumentException("구매가격은 로또 장당가격인 " + oneGamePrice + "보다 큰 금액 입력");
         }
         this.totalPrice = totalPrice;
         this.totalCount = totalPrice/oneGamePrice;

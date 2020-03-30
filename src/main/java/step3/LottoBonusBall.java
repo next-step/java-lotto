@@ -17,7 +17,10 @@ public class LottoBonusBall {
         OutputView outputView = new OutputView();
         outputView.printBuyList(buyLotto);
 
-        WinLotto winLotto = inputView.askWinnerLottoNumber();
-        BonusBall bonusBall = inputView.askBonusNumber();
+        String winLottoInputValue = inputView.askWinnerLottoNumber();
+        WinLotto winLotto = new WinLotto(winLottoInputValue);
+
+        int bonusBallInputValue = inputView.askBonusNumber();
+        BonusBall bonusBall = new BonusBall(bonusBallInputValue);
     }
 }

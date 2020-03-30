@@ -1,6 +1,5 @@
 package step3.view;
 
-import step3.domain.BuyInfo;
 import step3.domain.BuyLotto;
 import step3.domain.ResultInfo;
 
