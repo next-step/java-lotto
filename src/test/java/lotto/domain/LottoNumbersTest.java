@@ -20,16 +20,16 @@ class LottoNumbersTest {
         );
 
         assertThat(lottoNumbers).isNotNull();
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers.getLottoNumbers()).hasSize(6);
     }
 
     @DisplayName("로또 번호들은 번호가 6개 이어야만 한다")
     @Test
     public void lottoNumbersSizeTest() {
-        assertThatThrownBy(() -> {
-            LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5);
-            lottoNumbers.size();
-        }).isInstanceOf(LottoNumbersSizeException.class)
+        assertThatThrownBy(() -> new LottoNumbers(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5)
+        )).isInstanceOf(LottoNumbersSizeException.class)
                 .hasMessageContaining("로또 번호는 6개 이어야만 합니다.");
     }
 
@@ -45,5 +45,16 @@ class LottoNumbersTest {
         boolean contains = lottoNumbers.contains(number);
 
         assertThat(contains).isEqualTo(expected);
+    }
+
+    @DisplayName("로또 번호들과 로또 번호들을 비교하면 몇개의 로또 번호가 일치하는지 알 수 있다")
+    @Test
+    public void compareTwoLottoNumbers() {
+        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers otherLottoNumbers = LottoStub.getLottoNumbers(4, 5, 6, 7, 8, 9);
+
+        int matchCount = lottoNumbers.countMatchNumbers(otherLottoNumbers);
+
+        assertThat(matchCount).isEqualTo(3);
     }
 }

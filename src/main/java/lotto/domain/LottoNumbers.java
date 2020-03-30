@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,8 +11,8 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
         validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoNumbers(LottoNumber... lottoNumbers) {
@@ -19,18 +20,30 @@ public class LottoNumbers {
     }
 
     public boolean contains(int lottoNumber) {
-        return lottoNumbers.stream()
-                .filter(number -> number.equals(new LottoNumber(lottoNumber)))
-                .count() == HAS_CONDITION;
+        return getMatchCount(new LottoNumber(lottoNumber)) == HAS_CONDITION;
     }
 
-    public int size() {
-        return lottoNumbers.size();
+    public long getMatchCount(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .filter(number -> number.equals(lottoNumber))
+                .count();
+    }
+
+    public int countMatchNumbers(LottoNumbers lottoNumbers) {
+        List<LottoNumber> otherNumbers = lottoNumbers.getLottoNumbers();
+        return (int) this.lottoNumbers.stream()
+                .filter(otherNumbers::contains)
+                .count();
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers);
     }
 
     private void validate(List<LottoNumber> lottoNumbers) {
-        if (size() != LOTTO_NUMBERS_SIZE) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new LottoNumbersSizeException();
         }
     }
+
 }
