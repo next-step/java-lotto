@@ -4,13 +4,13 @@ public class PositiveNumber {
     private Integer positiveNumber;
 
     public PositiveNumber(Integer number) {
-        validatePositive(number);
+        validatePositiveOrZero(number);
         this.positiveNumber = number;
     }
 
     public PositiveNumber(String number) {
         this.positiveNumber = convertNumber(number);
-        validatePositive(this.positiveNumber);
+        validatePositiveOrZero(this.positiveNumber);
     }
 
     public Integer getPositiveNumber() {
@@ -27,9 +27,9 @@ public class PositiveNumber {
         return number;
     }
 
-    private void validatePositive(int number) {
-        if (number <= 0) {
-            throw new RuntimeException("양수가 아닙니다.");
+    private void validatePositiveOrZero(int number) {
+        if (number < 0) {
+            throw new RuntimeException("음수는 사용할 수 없습니다.");
         }
     }
 }
