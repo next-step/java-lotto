@@ -1,5 +1,6 @@
 package lotto.infrastructure;
 
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,8 @@ class AutoLottoNumberStrategyTest {
     @DisplayName("로또 번호를 자동으로 생성할 수 있다")
     @Test
     public void generateLottoNumbersTest() {
-        LottoTicket one = new AutoLottoNumberStrategy().get();
-        LottoTicket another = new AutoLottoNumberStrategy().get();
+        LottoNumbers one = new AutoLottoNumberStrategy().get();
+        LottoNumbers another = new AutoLottoNumberStrategy().get();
 
         assertThat(one.size()).isEqualTo(SIX);
         assertThat(another.size()).isEqualTo(SIX);

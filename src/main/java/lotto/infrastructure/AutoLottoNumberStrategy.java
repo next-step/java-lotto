@@ -2,7 +2,7 @@ package lotto.infrastructure;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumberStrategy;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,10 +23,10 @@ public class AutoLottoNumberStrategy implements LottoNumberStrategy {
     }
 
     @Override
-    public LottoTicket get() {
+    public LottoNumbers get() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> selectedLottoNum = new ArrayList<>(lottoNumbers).subList(ZERO_INDEX, LOTTO_NUM_COUNT_LIMIT);
         selectedLottoNum.sort(comparingInt(LottoNumber::intValue));
-        return new LottoTicket(selectedLottoNum);
+        return new LottoNumbers(selectedLottoNum);
     }
 }
