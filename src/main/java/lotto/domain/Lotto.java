@@ -6,21 +6,24 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LOTTO_MAX_SOCKET = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto() {
         generatorLottoNumbers();
         sortLottorNumbers();
     }
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        validateLimitCount();
-        validateDuplicationNumbers();
+        validate();
         sortLottorNumbers();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this(lottoNumbers.stream().collect(Collectors.toSet()));
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
@@ -33,11 +36,11 @@ public class Lotto {
     private void sortLottorNumbers() {
         this.lottoNumbers = this.lottoNumbers.stream()
                 .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private void generatorLottoNumbers() {
-        this.lottoNumbers = new ArrayList<>();
+        this.lottoNumbers = new LinkedHashSet<>();
         for (int i = 0; i < LOTTO_MAX_SOCKET; i++) {
             LottoNumber lottoNumber = makeLottoNumber();
             this.lottoNumbers.add(lottoNumber);
@@ -52,19 +55,9 @@ public class Lotto {
         return lottoNumber;
     }
 
-    private void validateDuplicationNumbers() {
-        Set<LottoNumber> duplicated = this.lottoNumbers.stream()
-                .filter(i -> Collections.frequency(this.lottoNumbers, i) > 1)
-                .collect(Collectors.toSet());
-
-        if (duplicated.size() > 0) {
-            throw new IllegalArgumentException("6개 숫자는 중복되면 안됩니다.");
-        }
-    }
-
-    private void validateLimitCount() {
+    private void validate() {
         if (this.lottoNumbers.size() != LOTTO_MAX_SOCKET) {
-            throw new IllegalArgumentException("로또는 6개 숫자로 이뤄져야 합니다.");
+            throw new IllegalArgumentException("로또는 고유한 숫자 6개로 이뤄져야 합니다.");
         }
     }
 }

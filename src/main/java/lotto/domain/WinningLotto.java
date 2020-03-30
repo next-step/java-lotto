@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class WinningLotto {
     private static final String LOTTO_WINNING_NUMBER_SPLIT_KEYWORD = ",";
@@ -33,7 +33,7 @@ public class WinningLotto {
     }
 
     private Lotto convertToLotto(String winningNumbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
         for (String s : winningNumbers.split(LOTTO_WINNING_NUMBER_SPLIT_KEYWORD)) {
             lottoNumbers.add(new LottoNumber(s.trim()));
         }
