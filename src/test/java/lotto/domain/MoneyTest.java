@@ -13,7 +13,7 @@ public class MoneyTest {
 
     @DisplayName("생성자 테스트")
     @Test
-    public void construct() throws Exception {
+    public void construct_success() throws Exception {
         //given
         Money money1 = new Money(1000);
         Money money2 = new Money(1000);
@@ -25,7 +25,7 @@ public class MoneyTest {
     @DisplayName("양의 정수인지 체크")
     @ParameterizedTest
     @ValueSource(doubles = {-1, -2, -10, -100})
-    public void validatePositive(double money) throws Exception {
+    public void validatePositive_fail(double money) throws Exception {
         //given
         assertThatThrownBy(
                 () -> new Money(money)
@@ -35,7 +35,7 @@ public class MoneyTest {
     @DisplayName("금액 덧셈 기능")
     @ParameterizedTest
     @CsvSource(value = {"100:100:200", "1000:3000:4000"}, delimiter = ':')
-    public void plus(double int1, double int2, double expect) throws Exception {
+    public void plus_success(double int1, double int2, double expect) throws Exception {
         //given
         Money money1 = new Money(int1);
         Money money2 = new Money(int2);
@@ -50,7 +50,7 @@ public class MoneyTest {
     @DisplayName("금액 나눗셈 기능")
     @ParameterizedTest
     @CsvSource(value = {"1000:10:100", "2000:1000:2", "500:1000:0.5"}, delimiter = ':')
-    public void divide(double int1, double int2, double expect) throws Exception {
+    public void divide_success(double int1, double int2, double expect) throws Exception {
         //given
         Money money1 = new Money(int1);
 
@@ -64,7 +64,7 @@ public class MoneyTest {
     @DisplayName("금액 콥셈 기능")
     @ParameterizedTest
     @CsvSource(value = {"10:10:100", "2000:1000:2000000", "2:3:6"}, delimiter = ':')
-    public void multiply(double int1, double int2, double expect) throws Exception {
+    public void multiply_success(double int1, double int2, double expect) throws Exception {
         //given
         Money money1 = new Money(int1);
 
@@ -78,7 +78,7 @@ public class MoneyTest {
     @DisplayName("입력 급액으로 몇개가 구매 가능한지 테스트")
     @ParameterizedTest
     @CsvSource(value = {"10000:1000:10", "5000:1000:5", "5000:500:10"}, delimiter = ':')
-    public void getHowManyBuyItem(int myMoney, int itemPrice, int count) throws Exception {
+    public void getHowManyBuyItem_success(int myMoney, int itemPrice, int count) throws Exception {
         //given
         Money money = new Money(myMoney);
         Money price = new Money(itemPrice);
@@ -90,4 +90,10 @@ public class MoneyTest {
         assertThat(howManyBuyItem).isEqualTo(count);
     }
 
+    @DisplayName("아이템의 가격과 구매 개수를 이용하여 총 구매 금액을 구한다")
+    @ParameterizedTest
+    @CsvSource(value = {"100:3:300", "500:2:1000", "1500:3:4500"}, delimiter = ':')
+    public void buyItemAmount_success(double itemPrice, int buyCount, double expect) throws Exception {
+        assertThat(Money.buyItemAmount(itemPrice, buyCount).getMoney()).isEqualTo(expect);
+    }
 }

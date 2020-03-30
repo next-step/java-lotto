@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Money;
+import lotto.domain.item.WinLottoTicket;
 import lotto.service.LottoGame;
 import lotto.view.InputView;
 import lotto.view.LottoDto;
@@ -23,12 +24,14 @@ public class LottoApplication {
         String luckyNumberInput = InputView.inputLuckyNumber();
         List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
         Collections.sort(luckyNumber);
-        ResultView.printLuckyNumber(luckyNumber);
 
-        LottoDto winGame = lottoGame.findWinGame(luckyNumber);
+        int bonus = StringUtil.parseStringToInt(InputView.inputBonusLuckyNumber());
+        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, bonus);
+
+        LottoDto winGame = lottoGame.findWinGame(winLottoTicket);
         ResultView.printResult(winGame);
 
-        LottoDto earningRate = lottoGame.getEarningRate(luckyNumber);
+        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
         ResultView.printEarningResult(earningRate);
     }
 }

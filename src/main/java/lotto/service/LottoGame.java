@@ -1,9 +1,12 @@
 package lotto.service;
 
+import enums.LottoPrize;
 import lotto.domain.Money;
+import lotto.domain.item.Item;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
-import lotto.domain.stragegy.LottoGenerator;
+import lotto.domain.item.WinLottoTicket;
+import lotto.domain.stragegy.LottoNumberGenerator;
 import lotto.view.LottoDto;
 
 import java.util.ArrayList;
@@ -14,17 +17,14 @@ public class LottoGame {
 
     private static final double LOTTO_PRICE = 1000;
 
-    private Money money;
     private int playGameCount;
     private LottoTickets lottoTickets;
 
     public LottoGame(Money money) {
-        this.money = money;
         this.playGameCount = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
     }
 
     public LottoGame(Money money, LottoTickets lottoTickets) {
-        this.money = money;
         this.lottoTickets = lottoTickets;
     }
 
@@ -36,7 +36,7 @@ public class LottoGame {
     private void buyAllLottoTicket() {
         List<LottoTicket> lottos = new ArrayList<>();
         while (playGameCount > 0) {
-            List<Integer> numbers = LottoGenerator.lottoNumberGenerator();
+            List<Integer> numbers = LottoNumberGenerator.generateLottoNumber();
             lottos.add(buyOneLottoTicket(numbers));
         }
         this.lottoTickets = new LottoTickets(Collections.unmodifiableList(lottos));
@@ -51,24 +51,25 @@ public class LottoGame {
         return dto;
     }
 
-    public LottoDto findWinGame(List<Integer> luckyNumber) {
+    public LottoDto findWinGame(Item winTicket) {
         LottoDto dto = new LottoDto();
-        dto.setMatch3GameCount(this.lottoTickets.getLuckyNumberMatch3Count(luckyNumber));
-        dto.setMatch4GameCount(this.lottoTickets.getLuckyNumberMatch4Count(luckyNumber));
-        dto.setMatch5GameCount(this.lottoTickets.getLuckyNumberMatch5Count(luckyNumber));
-        dto.setMatch6GameCount(this.lottoTickets.getLuckyNumberMatch6Count(luckyNumber));
+        dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        dto.setSecondGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
+        dto.setThirdGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
+        dto.setFourthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
+        dto.setFifthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
         return dto;
     }
 
-    private Money getAllEarningPrize(List<Integer> luckyNumber) {
-        return this.lottoTickets.getAllEarningPrize(luckyNumber);
+    private Money getAllEarningPrize(WinLottoTicket winTicket) {
+        return this.lottoTickets.getAllEarningPrize(winTicket);
     }
 
-    public LottoDto getEarningRate(List<Integer> luckyNumber) {
+    public LottoDto getEarningRate(WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
-        Money prize = getAllEarningPrize(luckyNumber);
-        int howManyBuyItem = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
-        Money buyAmount = new Money(LOTTO_PRICE).multiply(howManyBuyItem);
+        Money prize = getAllEarningPrize(winTicket);
+        int howManyBuyItem = this.lottoTickets.size();
+        Money buyAmount = Money.buyItemAmount(LOTTO_PRICE, howManyBuyItem);
 
         double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
 

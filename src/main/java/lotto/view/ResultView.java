@@ -2,8 +2,6 @@ package lotto.view;
 
 import lotto.domain.item.LottoTicket;
 
-import java.util.List;
-
 public class ResultView {
 
     public static void printLoots(LottoDto dto) {
@@ -13,16 +11,12 @@ public class ResultView {
         }
     }
 
-    public static void printLuckyNumber(List<Integer> luckyNumber) {
-        System.out.println(luckyNumber);
-    }
-
     public static void printResult(LottoDto dto) {
-        System.out.println("3개 일치 (5000원)- " + dto.getMatch3GameCount() + "개");
-        System.out.println("4개 일치 (50000원)- " + dto.getMatch4GameCount() + "개");
-        System.out.println("5개 일치 (150000원)- " + dto.getMatch5GameCount() + "개");
-        System.out.println("6개 일치 (2000000000)- " + dto.getMatch6GameCount() + "개");
-//        System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
+        System.out.println("3개 일치 (5000원)- " + dto.getFifthGameCount() + "개");
+        System.out.println("4개 일치 (50000원)- " + dto.getFourthGameCount() + "개");
+        System.out.println("5개 일치 (1500000원)- " + dto.getThirdGameCount() + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (30000000원)- " + dto.getSecondGameCount() + "개");
+        System.out.println("6개 일치 (2000000000원)- " + dto.getFirstGameCount() + "개");
     }
 
     public static void printEarningResult(LottoDto dto) {
