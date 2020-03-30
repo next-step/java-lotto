@@ -39,20 +39,21 @@ public class LottoTicket {
 
     LottoTicketResult checkWinning(LottoTicket winningTicket, LottoNumber bonusNumber) {
         verifyBonusNumber(bonusNumber, winningTicket);
-        List<Integer> winningNumbers = winningTicket.getLottoNumbers();
-
-        int matchCount = (int) winningNumbers.stream()
-                .filter(winningNumber -> getLottoNumbers()
-                        .contains(winningNumber))
+        int matchCount = (int) winningTicket.lottoNumbers
+                .stream()
+                .filter(winningNumber -> this.lottoNumbers.contains(winningNumber))
                 .count();
-        boolean bonusMatch = getLottoNumbers().contains(bonusNumber.getNumber());
+        boolean bonusMatch = this.lottoNumbers.contains(bonusNumber);
         return new LottoTicketResult(matchCount, bonusMatch);
     }
 
     private void verifyBonusNumber(LottoNumber bonusNumber, LottoTicket winningTicket) {
-        if (winningTicket.getLottoNumbers()
-                .contains(bonusNumber.getNumber())) {
+        if (winningTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber.getNumber()));
         }
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }
