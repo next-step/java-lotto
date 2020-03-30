@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
@@ -45,8 +43,6 @@ class LottoGameTest {
         WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbersOneToSix(), 7);
         LottoGameResults lottoGameResults = lottoGame.match(lottoTickets, winningTicket);
 
-        List<LottoRank> lottoRanks = lottoGameResults.getLottoRanks();
-
-        assertThat(lottoRanks.get(0).getMatchCount()).isEqualTo(6);
+        assertThat(lottoGameResults.getWinningPrizeSum()).isEqualTo(LottoRank.SIX.getWinningPrize());
     }
 }
