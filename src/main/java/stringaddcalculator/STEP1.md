@@ -7,10 +7,10 @@
 * Delimiter
   - [ ] 입력받은 문자열의 피연산자를 분리하기 위한 구분자 정의
     - [x] default 구분자
-    - [ ] custom 구분자  
+    - [x] custom 구분자  
 * Separator
   - [ ] 문자열 분리
-  - [ ] 커스텀 구분자로 분리
+  - [x] 커스텀 구분자로 분리
 * StringAddCalculator
   - [x] null 혹은 빈 문자열 확인
   - [x] 피연산자의 int 값으로 연산
