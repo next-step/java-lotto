@@ -5,43 +5,40 @@ import lotto.exception.ValidLottoException;
 import java.util.*;
 
 public class Lotto implements Item {
+
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private static final int LOTTO_MIN_NUMBER_SIZE = 1;
-    private static final int LOTTO_MAX_NUMBER_SIZE = 45;
 
-    protected final List<Integer> numbers;
+    protected final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
+
+        if (numbers == null) {
+            numbers = new ArrayList<>();
+        }
+
         Collections.sort(numbers);
         validateSize(numbers);
-        validateNumberRange(numbers);
         validateDuplicate(numbers);
 
-        List<Integer> result = new ArrayList<>(numbers);
+        List<LottoNumber> result = new ArrayList<>(numbers);
         this.numbers = Collections.unmodifiableList(result);
     }
 
-    private void validateSize(List<Integer> numbers) {
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException("번호는 6개만 지정 가능 합니다.");
         }
     }
 
-    private void validateNumberRange(List<Integer> numbers) {
-        numbers.stream().filter(i -> (i < LOTTO_MIN_NUMBER_SIZE) || (i > LOTTO_MAX_NUMBER_SIZE))
-                .forEach(i -> {
-                    throw new ValidLottoException("번호는 1~ 45 사이의 정수만 가능 합니다.");
-                });
-    }
-
-    private void validateDuplicate(List<Integer> numbers) {
-        Set<Integer> duplicate = new HashSet<>(numbers);
+    private void validateDuplicate(List<LottoNumber> numbers) {
+        Set<LottoNumber> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
             throw new ValidLottoException("번호는 중복될 수 없습니다.");
         }
     }
 
-    public List<Integer> getNumbers() {
+    @Override
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 
