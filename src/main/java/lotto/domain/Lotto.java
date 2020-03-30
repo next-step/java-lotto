@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -17,7 +15,8 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        validate();
+        validateLimitCount();
+        validateDuplicationNumbers();
         sortLottorNumbers();
     }
 
@@ -53,7 +52,17 @@ public class Lotto {
         return lottoNumber;
     }
 
-    private void validate() {
+    private void validateDuplicationNumbers() {
+        Set<LottoNumber> duplicated = this.lottoNumbers.stream()
+                .filter(i -> Collections.frequency(this.lottoNumbers, i) > 1)
+                .collect(Collectors.toSet());
+
+        if (duplicated.size() > 0) {
+            throw new IllegalArgumentException("6개 숫자는 중복되면 안됩니다.");
+        }
+    }
+
+    private void validateLimitCount() {
         if (this.lottoNumbers.size() != LOTTO_MAX_SOCKET) {
             throw new IllegalArgumentException("로또는 6개 숫자로 이뤄져야 합니다.");
         }

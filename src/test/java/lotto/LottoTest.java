@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
@@ -35,5 +36,17 @@ public class LottoTest {
                 () -> assertThat(lotto.isExistNumber(new LottoNumber(8))).isFalse(),
                 () -> assertThat(lotto.isExistNumber(new LottoNumber(10))).isFalse()
         );
+    }
+
+    @Test
+    @DisplayName("중복된 로또번호 테스트")
+    void validateDuplicationNumbersTest() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(5)
+        );
+        assertThatThrownBy(
+                () -> new Lotto(lottoNumbers)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
