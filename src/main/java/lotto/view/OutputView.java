@@ -35,9 +35,9 @@ public class OutputView {
     }
 
     private static void printEachResult(final LottoResult lottoResult, final Long resultCount) {
-        if(lottoResult.equals(LottoResult.FIVE_WITH_BONUS)) {
+        if (lottoResult.equals(LottoResult.FIVE_WITH_BONUS)) {
             printWinResult(lottoResult, resultCount, RESULT_WITH_BONUS_FORMAT);
-            return ;
+            return;
         }
 
         printWinResult(lottoResult, resultCount, RESULT_FORMAT);

@@ -24,7 +24,7 @@ public class Numbers {
     public Number sum() {
         Number result = Number.of(0);
 
-        for(Number number : numbers) {
+        for (Number number : numbers) {
             result = number.add(result);
         }
 
