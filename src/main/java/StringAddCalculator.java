@@ -4,6 +4,7 @@ public class StringAddCalculator {
         if (input == null || input.isEmpty()) {
             return 0;
         }
+
         return sum(toInt(split(input)));
     }
 
@@ -11,14 +12,19 @@ public class StringAddCalculator {
         int[] numbers = new int[values.length];
 
         for (int i = 0; i < values.length; i++) {
-            int number = Integer.parseInt(values[i]);
-            if (number < 0 ) {
-                throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
-            }
-
-            numbers[i] = number;
+            numbers[i] = toPositive(values[i]);
         }
+
         return numbers;
+    }
+
+    private static int toPositive(String value) {
+        int number = Integer.parseInt(value);
+        if (number < 0 ) {
+            throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
+        }
+
+        return number;
     }
 
     private static String[] split(String input) {
