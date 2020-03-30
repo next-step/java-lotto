@@ -1,34 +1,41 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumbers;
+import lotto.dto.PurchasedLottoNumbers;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoBuyer {
 	private static final int PRIZE = 1000;
 
-	private final List<Integer> candidateNumbers = IntStream.rangeClosed(LottoNumber.LOWEST_NUMBER, LottoNumber.HIGHEST_NUMBER)
-			.boxed()
-			.collect(Collectors.toList());
+	private LottoMachineAuto machineAuto;
+	private LottoMachinePassive machinePassive;
 
-	public List<LottoNumbers> buyLottoNumbers(long money) {
-		long count = money / PRIZE;
-		return getLottoNumbers((int) count);
+	public LottoBuyer() {
+		machineAuto = new LottoMachineAuto();
+		machinePassive = new LottoMachinePassive();
 	}
 
-	private List<LottoNumbers> getLottoNumbers(int count) {
-		List<LottoNumbers> lottoNumbers = new ArrayList<>();
+	public PurchasedLottoNumbers buyLottoNumbers(long money) {
+		return buyLottoNumbers(money, Collections.emptyList());
+	}
 
-		for (int i = 0; i < count; i++) {
-			Collections.shuffle(candidateNumbers);
-			lottoNumbers.add(new LottoNumbers(new ArrayList<>(candidateNumbers.subList(0, LottoNumber.NUMBER_SIZE))));
-		}
+	public PurchasedLottoNumbers buyLottoNumbers(long money, List<LottoNumbers> passiveNumbers) {
+		long count = money / PRIZE;
+		int passiveCount = passiveNumbers.size();
+		int autoCount = (int) count - passiveCount;
+		return new PurchasedLottoNumbers(passiveCount, autoCount, getLottoNumbers(autoCount, passiveNumbers));
+	}
 
-		return lottoNumbers;
+	private List<LottoNumbers> getLottoNumbers(int autoCount, List<LottoNumbers> passiveNumbers) {
+		List<LottoNumber> printedLottoNumbers = machinePassive.ticketingLottoNumber(passiveNumbers);
+		printedLottoNumbers.addAll(machineAuto.ticketingLottoNumber(autoCount));
+
+		return printedLottoNumbers.stream()
+				.map(LottoNumber::getLottoNumbers)
+				.collect(Collectors.toList());
 	}
 
 }
