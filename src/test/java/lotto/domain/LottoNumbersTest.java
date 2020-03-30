@@ -47,14 +47,47 @@ class LottoNumbersTest {
         assertThat(contains).isEqualTo(expected);
     }
 
-    @DisplayName("로또 번호들과 로또 번호들을 비교하면 몇개의 로또 번호가 일치하는지 알 수 있다")
+    @DisplayName("로또 번호들과 로또 번호들을 비교하면 몇개의 로또 번호가 일치하는지 알 수 있다 - <3>")
     @Test
-    public void compareTwoLottoNumbers() {
+    public void compareTwoLottoNumbers3() {
         LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
         LottoNumbers otherLottoNumbers = LottoStub.getLottoNumbers(4, 5, 6, 7, 8, 9);
 
         int matchCount = lottoNumbers.countMatchNumbers(otherLottoNumbers);
 
         assertThat(matchCount).isEqualTo(3);
+    }
+
+    @DisplayName("로또 번호들과 로또 번호들을 비교하면 몇개의 로또 번호가 일치하는지 알 수 있다 - <4>")
+    @Test
+    public void compareTwoLottoNumbers4() {
+        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers otherLottoNumbers = LottoStub.getLottoNumbers(3, 4, 5, 6, 7, 8);
+
+        int matchCount = lottoNumbers.countMatchNumbers(otherLottoNumbers);
+
+        assertThat(matchCount).isEqualTo(4);
+    }
+
+    @DisplayName("로또 번호들과 로또 번호들을 비교하면 몇개의 로또 번호가 일치하는지 알 수 있다 - <5>")
+    @Test
+    public void compareTwoLottoNumbers5() {
+        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers otherLottoNumbers = LottoStub.getLottoNumbers(2, 3, 4, 5, 6, 7);
+
+        int matchCount = lottoNumbers.countMatchNumbers(otherLottoNumbers);
+
+        assertThat(matchCount).isEqualTo(5);
+    }
+
+    @DisplayName("로또 번호들과 로또 번호들을 비교하면 몇개의 로또 번호가 일치하는지 알 수 있다 - <6>")
+    @Test
+    public void compareTwoLottoNumbers6() {
+        LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers otherLottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
+
+        int matchCount = lottoNumbers.countMatchNumbers(otherLottoNumbers);
+
+        assertThat(matchCount).isEqualTo(6);
     }
 }
