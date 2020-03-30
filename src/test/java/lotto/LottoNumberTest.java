@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자 생성 테스트")
     void generateLottoNumberTest(int value) {
         assertThat(
-                new LottoNumber(() -> value).getLottoNumber()
+                LottoNumber.newRandomNumber(() -> value).getLottoNumber()
         ).isEqualTo(value);
     }
 }

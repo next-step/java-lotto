@@ -56,9 +56,9 @@ public class Lotto {
     }
 
     private LottoNumber makeLottoNumber() {
-        LottoNumber lottoNumber = new LottoNumber();
+        LottoNumber lottoNumber = LottoNumber.newRandomNumber();
         while (isExistNumber(lottoNumber)) {
-            lottoNumber = new LottoNumber();
+            lottoNumber = LottoNumber.newRandomNumber();
         }
         return lottoNumber;
     }

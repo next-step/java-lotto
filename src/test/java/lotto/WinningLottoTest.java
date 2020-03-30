@@ -44,8 +44,8 @@ public class WinningLottoTest {
     void getMatchedCountTest() {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
         Lotto lotto = Lotto.newManual(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3),
+                LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(45)
         ));
 
         assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);

@@ -11,21 +11,37 @@ public class LottoNumber {
 
     private Integer lottoNumber;
 
-    public LottoNumber() {
+    public static LottoNumber newRandomNumber() {
+        return new LottoNumber();
+    }
+
+    public static LottoNumber newRandomNumber(RandomNumberGenerator lottoNumberGenerator) {
+        return new LottoNumber(lottoNumberGenerator);
+    }
+
+    public static LottoNumber newChooseNumber(int number) {
+        return new LottoNumber(number);
+    }
+
+    public static LottoNumber newChooseNumber(String input) {
+        return new LottoNumber(input);
+    }
+
+    private LottoNumber() {
         this.lottoNumber = new LottoGenerator().getRandomNumber();
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.lottoNumber = number;
         validateNumberRange(this.lottoNumber);
     }
 
-    public LottoNumber(String input) {
+    private LottoNumber(String input) {
         this.lottoNumber = convertNumber(input);
         validateNumberRange(this.lottoNumber);
     }
 
-    public LottoNumber(RandomNumberGenerator lottoNumberGenerator) {
+    private LottoNumber(RandomNumberGenerator lottoNumberGenerator) {
         this.lottoNumber = lottoNumberGenerator.getRandomNumber();
     }
 

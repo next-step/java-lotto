@@ -35,7 +35,7 @@ public class WinningLotto {
     private Lotto convertToLotto(String winningNumbers) {
         Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
         for (String s : winningNumbers.split(LOTTO_WINNING_NUMBER_SPLIT_KEYWORD)) {
-            lottoNumbers.add(new LottoNumber(s.trim()));
+            lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
         }
         return Lotto.newManual(lottoNumbers);
     }

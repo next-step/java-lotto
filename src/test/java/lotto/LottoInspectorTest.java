@@ -23,10 +23,10 @@ public class LottoInspectorTest {
         this.testLottos = new ArrayList<>();
 
         Lotto lotto1 = Lotto.newManual(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3), LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(6)
         ));
         Lotto lotto2 = Lotto.newManual(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(41), new LottoNumber(42), new LottoNumber(43)
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3), LottoNumber.newChooseNumber(41), LottoNumber.newChooseNumber(42), LottoNumber.newChooseNumber(43)
         ));
         this.testLottos.add(lotto1);
         this.testLottos.add(lotto2);
