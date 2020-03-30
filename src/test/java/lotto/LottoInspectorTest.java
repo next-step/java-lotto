@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,5 +44,13 @@ public class LottoInspectorTest {
         assertThat(
                 new LottoInspector(testWinningLotto, testLottos).getTotalRevenue()
         ).isEqualTo(RewardEnum.SIX.getReward() + RewardEnum.THREE.getReward());
+    }
+
+    @Test
+    @DisplayName("수익률 가져오기 테스트")
+    void getYieldTest() {
+        assertThat(
+                new LottoInspector(testWinningLotto, testLottos).getYield(new Money(1000), 5000)
+        ).isEqualByComparingTo(new BigDecimal(5));
     }
 }

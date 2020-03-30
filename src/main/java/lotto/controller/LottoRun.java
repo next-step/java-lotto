@@ -54,7 +54,7 @@ public class LottoRun {
 
     private static BigDecimal innsightResult(LottoInspector lottoInspector, Money money) {
         int totalRevenue = lottoInspector.getTotalRevenue();
-        BigDecimal yield = new BigDecimal(totalRevenue).divide(new BigDecimal(money.getMoney()), 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal yield = lottoInspector.getYield(money, totalRevenue);
         lottoResultView.viewInsight(yield);
 
         return yield;
