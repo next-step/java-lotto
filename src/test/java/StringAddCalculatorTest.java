@@ -23,4 +23,12 @@ public class StringAddCalculatorTest {
 
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("숫자 하나만 있는 문자열을 입력한 경우 그대로 그 숫자를 리턴한다")
+    public void splitAndSumWithSingleNumberReturnsThatNumber() {
+        int result = StringAddCalculator.splitAndSum("1");
+
+        assertThat(result).isEqualTo(1);
+    }
 }
