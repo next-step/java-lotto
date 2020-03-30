@@ -1,15 +1,15 @@
 public class StringAddCalculator {
 
-    public static int splitAndSum(String input) {
-        if (isBlank(input)) {
+    public static int splitAndSum(String text) {
+        if (isBlank(text)) {
             return 0;
         }
 
-        return sum(toInt(split(input)));
+        return sum(toInt(split(text)));
     }
 
-    private static boolean isBlank(String input) {
-        return input == null || input.isEmpty();
+    private static boolean isBlank(String text) {
+        return text == null || text.isEmpty();
     }
 
     private static int[] toInt(String[] values) {
@@ -31,8 +31,8 @@ public class StringAddCalculator {
         return number;
     }
 
-    private static String[] split(String input) {
-        return input.split(",|:");
+    private static String[] split(String text) {
+        return text.split(",|:");
     }
 
     private static int sum(int[] numbers) {
