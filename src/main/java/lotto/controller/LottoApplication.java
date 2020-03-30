@@ -17,21 +17,21 @@ public class LottoApplication {
         String inputMoney = InputView.inputBuyAmount();
         Money money = new Money(StringUtil.parseStringToInt(inputMoney));
 
-        LottoGame lottoGame = new LottoGame(money);
-        LottoDto dto = lottoGame.play();
-        ResultView.printLoots(dto);
-
-        String luckyNumberInput = InputView.inputLuckyNumber();
-        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
-        Collections.sort(luckyNumber);
-
-        int bonus = StringUtil.parseStringToInt(InputView.inputBonusLuckyNumber());
-        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, bonus);
-
-        LottoDto winGame = lottoGame.findWinGame(winLottoTicket);
-        ResultView.printResult(winGame);
-
-        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
-        ResultView.printEarningResult(earningRate);
+//        LottoGame lottoGame = new LottoGame(money);
+//        LottoDto dto = lottoGame.play();
+//        ResultView.printLoots(dto);
+//
+//        String luckyNumberInput = InputView.inputLuckyNumber();
+//        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
+//        Collections.sort(luckyNumber);
+//
+//        int bonus = StringUtil.parseStringToInt(InputView.inputBonusLuckyNumber());
+//        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, bonus);
+//
+//        LottoDto winGame = lottoGame.findWinGame(winLottoTicket);
+//        ResultView.printResult(winGame);
+//
+//        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
+//        ResultView.printEarningResult(earningRate);
     }
 }
