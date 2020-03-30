@@ -31,8 +31,7 @@ class LottoShopTest {
     @ParameterizedTest
     @ValueSource(ints = {10000})
     void buyAuto(int price) {
-        lottoShop.buyAuto(price);
-        LottoBundle lottos = lottoShop.getLottoBundle();
+        List<Lotto> lottos = lottoShop.buyAuto(price);
 
         assertThat(lottos.size()).isEqualTo(Math.floorDiv(price, PRICE_PER_PIECE));
     }
@@ -56,14 +55,14 @@ class LottoShopTest {
 
     @DisplayName("로또 수동 구입 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,6", "7,28,30,1,11,12", "14,13,1,8,6,49"})
+    @ValueSource(strings = {"1,2,3,4,5,6", "7,28,30,1,11,12", "14,13,1,8,6,44"})
     void buyManual(String lottoString) {
         List<String> lottoStrings = Arrays.asList(lottoString);
-        LottoBundle lottos = lottoShop.buyManual(lottoStrings);
+        List<Lotto> lottos = lottoShop.buyManual(lottoStrings);
 
         assertAll(
                 () -> assertThat(lottos.size()).isEqualTo(lottoStrings.size()),
-                () -> assertThat(lottos.getLottos()).containsExactly(new Lotto(lottoString))
+                () -> assertThat(lottos).containsExactly(new Lotto(lottoString))
         );
     }
 }
