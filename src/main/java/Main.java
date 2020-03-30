@@ -1,10 +1,12 @@
 import lotto.model.LottoPurchaseTickets;
 import lotto.model.LottoStore;
 import lotto.model.WinningLottoTicket;
+import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.Payment;
-import lotto.utils.LottoNumberAdaptor;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static lotto.utils.LottoUtil.convertTo;
 import static lotto.view.InputView.inputPayment;
@@ -27,8 +29,11 @@ public class Main {
 
     private static WinningLottoTicket inputWinningLottoTicket() {
         String winningNumberString = inputWinningNumber();
-        List<Integer> winningNumbers = convertTo(winningNumberString);
-        return WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(winningNumbers));
+        Set<LottoNumber> winningNumbers = convertTo(winningNumberString).stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+
+        return WinningLottoTicket.newInstance(winningNumbers);
     }
 
 }

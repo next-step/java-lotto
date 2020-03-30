@@ -3,11 +3,11 @@ package lotto.model;
 import lotto.model.wrapper.LottoNumber;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static lotto.utils.LottoConstant.LOTTO_NUMBER_SIZE;
 
 public abstract class LottoTicket {
+
+    public static final int LOTTO_NUMBER_SIZE = 6;
+
     protected Set<LottoNumber> numbers;
 
     protected LottoTicket(final Set<LottoNumber> numbers) {

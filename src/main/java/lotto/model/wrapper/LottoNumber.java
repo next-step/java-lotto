@@ -2,10 +2,10 @@ package lotto.model.wrapper;
 
 import java.util.Objects;
 
-import static lotto.utils.LottoConstant.LOTTO_MAX_NUMBER;
-import static lotto.utils.LottoConstant.LOTTO_MIN_NUMBER;
-
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+
     private Integer number;
 
     private LottoNumber(final Integer number) {
@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateRange(final Integer number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
+            throw new IllegalArgumentException("Lotto Ticket must be between 1 and 45.");
         }
     }
 

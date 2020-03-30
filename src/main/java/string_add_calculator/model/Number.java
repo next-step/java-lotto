@@ -1,4 +1,4 @@
-package stringAddCalculator.model;
+package string_add_calculator.model;
 
 import java.util.Objects;
 
@@ -10,11 +10,11 @@ public class Number {
         this.number = number;
     }
 
-    public static Number newInstance(final Integer number) {
+    public static Number of(final Integer number) {
         return new Number(number);
     }
 
-    public static Number newInstance(final String numberString) {
+    public static Number of(final String numberString) {
         int number = Integer.parseInt(numberString);
 
         if (number < 0) {
@@ -24,8 +24,8 @@ public class Number {
         return new Number(number);
     }
 
-    int toInt() {
-        return number;
+    public Number add(Number another) {
+        return Number.of(number + another.number);
     }
 
     @Override
@@ -40,4 +40,5 @@ public class Number {
     public int hashCode() {
         return Objects.hash(number);
     }
+
 }

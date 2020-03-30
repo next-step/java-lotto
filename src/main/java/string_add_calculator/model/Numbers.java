@@ -1,4 +1,4 @@
-package stringAddCalculator.model;
+package string_add_calculator.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,16 +15,20 @@ public class Numbers {
 
     public static Numbers create(final String[] numbersString) {
         List<Number> numbers = Arrays.stream(numbersString)
-                .map(Number::newInstance)
+                .map(Number::of)
                 .collect(Collectors.toList());
 
         return new Numbers(numbers);
     }
 
-    public int sum() {
-        return numbers.stream()
-                .mapToInt(Number::toInt)
-                .sum();
+    public Number sum() {
+        Number result = Number.of(0);
+
+        for(Number number : numbers) {
+            result = number.add(result);
+        }
+
+        return result;
     }
 
     @Override

@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.utils.LottoConstant.*;
+import static lotto.model.LottoTicket.LOTTO_NUMBER_SIZE;
+import static lotto.model.wrapper.LottoNumber.LOTTO_MAX_NUMBER;
+import static lotto.model.wrapper.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class AutomaticLottoGenerator {
 

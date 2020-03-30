@@ -1,7 +1,7 @@
-package LottoTests;
+package lotto_tests;
 
 import lotto.model.*;
-import lotto.utils.LottoNumberAdaptor;
+import lotto.model.wrapper.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,18 @@ public class LottoPurchaseTicketsTests {
     @BeforeEach
     void init() {
         lottoTickets = Arrays.asList(
-                LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 36, 41, 45))),
-                LottoPurchaseTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 19, 20)))
+                LottoPurchaseTicket.create(
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6)
+                ),
+                LottoPurchaseTicket.create(
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(36), LottoNumber.of(41), LottoNumber.of(45)
+                ),
+                LottoPurchaseTicket.create(
+                        LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                        LottoNumber.of(4), LottoNumber.of(19), LottoNumber.of(20)
+                )
         );
     }
 
@@ -37,7 +46,9 @@ public class LottoPurchaseTicketsTests {
     @Test
     public void checkAllTest() {
         LottoPurchaseTickets lottoPurchaseTickets = new LottoPurchaseTickets(lottoTickets);
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(LottoNumberAdaptor.convert(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.create(
+                LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3),
+                LottoNumber.of(4), LottoNumber.of(5), LottoNumber.of(6));
         LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR));
 
         assertThat(lottoPurchaseTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);

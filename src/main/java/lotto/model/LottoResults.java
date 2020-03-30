@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static lotto.utils.LottoConstant.LOTTO_PRICE;
+import static lotto.model.wrapper.Payment.LOTTO_PRICE;
 
 public class LottoResults {
     private Map<LottoResult, Long> lottoResults;
