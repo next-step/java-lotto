@@ -13,8 +13,7 @@ public class StringAddCalculator {
         return sum;
     }
 
-
     public static int sumAndSplit(String input) {
-        return 6;
+        return sum(split(input));
     }
 }
