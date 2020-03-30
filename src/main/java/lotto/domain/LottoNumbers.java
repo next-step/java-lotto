@@ -27,6 +27,10 @@ public class LottoNumbers {
         return LOTTO_NUMBER_MAX_SIZE - source.size();
     }
 
+    boolean hasBonusBall(final BonusBall bonusBall) {
+        return lottoNumbers.contains(bonusBall.getLottoNumber());
+    }
+
     private static List<LottoNumber> newInstanceFromInput(final String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String letter : input.split(LOTTO_NUMBER_DELIMITER)) {
