@@ -36,15 +36,15 @@ public class Lotto {
     }
 
     public boolean isExistNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-                .filter(l -> l.equals(lottoNumber))
-                .collect(Collectors.toList()).size() > 0;
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void sortLottorNumbers() {
-        this.lottoNumbers = this.lottoNumbers.stream()
-                .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+        List<LottoNumber> sortedNumbers = this.lottoNumbers
+                .stream().collect(Collectors.toList());
+
+        Collections.sort(sortedNumbers);
+        this.lottoNumbers = new LinkedHashSet<>(sortedNumbers);
     }
 
     private void generatorLottoNumbers() {

@@ -3,9 +3,10 @@ package lotto.domain;
 import lotto.generator.LottoGenerator;
 import lotto.generator.RandomNumberGenerator;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class LottoNumber implements Cloneable {
+public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
 
@@ -64,6 +65,14 @@ public class LottoNumber implements Cloneable {
             throw new RuntimeException("숫자가 아닙니다.");
         }
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        if (this.lottoNumber < o.getLottoNumber()) {
+            return -1;
+        }
+        return 1;
     }
 
     @Override
