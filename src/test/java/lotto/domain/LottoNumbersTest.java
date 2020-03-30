@@ -98,7 +98,7 @@ class LottoNumbersTest {
     public void createPrintMessageTest() {
         LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
 
-        List<Integer> integers = lottoNumbers.toIntArrays();
+        List<Integer> integers = lottoNumbers.toIntNumbers();
 
         assertThat(integers).containsExactly(1, 2, 3, 4, 5, 6);
     }
