@@ -1,10 +1,12 @@
 package calculator.domain;
 
+import calculator.tuils.CalculatorUtils;
+
 import java.util.List;
 
 public class Calculator {
     public static int calculate(String expression) {
-        List<String> numberValues = CalculatorHelper.findNumber(expression);
+        List<String> numberValues = CalculatorUtils.findNumber(expression);
 
         return add(Number.listOf(numberValues));
     }

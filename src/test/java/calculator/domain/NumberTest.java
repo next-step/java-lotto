@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.exception.CalculatorException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,7 +18,7 @@ public class NumberTest {
         assertThat(number3.sum(10)).isEqualTo(11);
 
         assertThatThrownBy(() -> new Number("-1"))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(CalculatorException.class)
                 .hasMessageContaining("Cannot be less than 0");
     }
 }
