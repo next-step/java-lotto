@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class WinningTicket {
+    private static final int COUNT_ONE = 1;
+
     private final LottoNumbers lottoNumbers;
     private final BonusNumber bonusNumber;
 
@@ -15,16 +17,11 @@ public class WinningTicket {
         return lottoNumbers;
     }
 
-    public boolean isMatchBonusNumber(LottoNumber winningNumber) {
-//        return winningNumber.getLottoNumber()
-//                .stream()
-//                .filter(this::isMatchBonusNumber)
-//                .count() == 1;
-        return true;
-    }
-
-    private boolean isMatchBonusNumber(int number) {
-        return bonusNumber.equals(number);
+    public boolean isMatchBonusNumber(LottoNumbers lottoNumbers) {
+        return lottoNumbers.getLottoNumbers()
+                .stream()
+                .filter(lottoNumber -> lottoNumber.isEqualBonusNumber(bonusNumber))
+                .count() == COUNT_ONE;
     }
 
     @Override
