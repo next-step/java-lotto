@@ -7,7 +7,6 @@ import lotto.dto.PurchasedLottoNumbers;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
