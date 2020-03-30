@@ -11,10 +11,15 @@ public class StringAddCalculator {
         return input.split(",|:");
     }
 
-    private static int sum(String[] strings) {
+    private static int sum(String[] values) {
         int sum = 0;
-        for (String num : strings) {
-            sum += Integer.parseInt(num);
+        for (String value : values) {
+            int number = Integer.parseInt(value);
+            if (number < 0 ) {
+                throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
+            }
+
+            sum += number;
         }
 
         return sum;
