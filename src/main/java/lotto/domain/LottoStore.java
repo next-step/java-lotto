@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
+
+    private LottoStore() {}
+
     public static Lotteries buy(final Price price) {
         checkAvailablePriceBuyLotto(price);
         return new Lotteries(publishLottery(price));

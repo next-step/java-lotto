@@ -6,6 +6,8 @@ public class LottoNumberGenerator {
 
     private static final Random RANDOM = new Random();
 
+    private LottoNumberGenerator() {}
+
     public static LottoNumbers generate() {
         List<LottoNumber> lottoNumbers = generateUnRedundantNumbers();
         Collections.shuffle(lottoNumbers);
