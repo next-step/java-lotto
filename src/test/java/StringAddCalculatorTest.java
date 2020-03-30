@@ -34,9 +34,16 @@ public class StringAddCalculatorTest {
     }
 
     @Test
-    @DisplayName("음수가 들어간 경우 RuntimeException이 발생한다")
+    @DisplayName("음수가 입력된 경우 RuntimeException이 발생한다")
     public void splitAndSumWithNegativeNumberThrowRuntimeException() {
         assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("숫자 이외의 값이 입력된 경우 NumberFormatException이 발생한다")
+    public void splitAndSumWithNoneNumberThrowNumberFormatException() {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("#,b,c"))
+                .isInstanceOf(NumberFormatException.class);
     }
 }

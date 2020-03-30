@@ -21,7 +21,6 @@ public class StringAddCalculator {
 
             sum += number;
         }
-
         return sum;
     }
 }
