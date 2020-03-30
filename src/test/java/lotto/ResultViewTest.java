@@ -21,12 +21,12 @@ class ResultViewTest {
         String input = "1,2,3,4,5,6";
         int bonusBall = 42;
         List<LottoNumber> purchaseLottoNumbers = Arrays.asList(
-                new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-                new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 34, 35, 45))),
-                new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 35, 42))),
-                new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 42))),
-                new LottoNumber(new HashSet<>(Arrays.asList(22, 23, 24, 25, 35, 42))),
-                new LottoNumber(new HashSet<>(Arrays.asList(2, 23, 24, 25, 35, 42)))
+                new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), //1등
+                new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 34, 35, 45))), //5등
+                new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 35, 42))), //4등
+                new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 42))), //2등
+                new LottoNumber(new HashSet<>(Arrays.asList(22, 23, 24, 25, 35, 42))), //꽝
+                new LottoNumber(new HashSet<>(Arrays.asList(2, 23, 24, 25, 35, 42))) //꽝
         );
         resultView = new ResultView(input, purchaseLottoNumbers, bonusBall);
 
@@ -58,9 +58,9 @@ class ResultViewTest {
         System.out.println(result);
         assertThat(result).isEqualTo("당첨통계\n"
                                      + "---------\n"
-                                     + "3개 일치(5000원)- 0개\n"
+                                     + "3개 일치(5000원)- 1개\n"
                                      + "4개 일치(50000원)- 1개\n"
-                                     + "5개 일치(1500000원)- 1개\n"
+                                     + "5개 일치(1500000원)- 0개\n"
                                      + "5개 일치, 보너스 볼 일치(30000000원)- 1개\n"
                                      + "6개 일치(2000000000원)- 1개\n");
     }
@@ -76,7 +76,7 @@ class ResultViewTest {
     @Test
     void totalWinningAmount() {
         int result = resultView.totalWinningAmount();
-        assertThat(result).isEqualTo(2031550000);
+        assertThat(result).isEqualTo(2030055000);
     }
 
     @DisplayName("총 수익률을 계산한다.")
