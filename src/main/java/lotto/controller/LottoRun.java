@@ -11,8 +11,7 @@ public class LottoRun {
     private static final LottoResultView lottoResultView = new LottoResultView();
 
     public static void main(String[] args) {
-        int money = lottoResultView.inputMoney();
-        Money myMoney = new Money(money);
+        Money myMoney = getMonney();
 
         List<Lotto> myLottos = purchaseLottos(myMoney);
 
@@ -21,9 +20,14 @@ public class LottoRun {
         innsightLottos(myMoney, winningLotto, myLottos);
     }
 
+    private static Money getMonney() {
+        int money = lottoResultView.inputMoney();
+        return new Money(money);
+    }
+
     private static List<Lotto> purchaseLottos(Money money) {
-        LottoMachine lottoMachine = new LottoMachine(money);
-        List<Lotto> lottos = lottoMachine.getLottos();
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.purchaseLottos(money);
 
         lottoResultView.viewLottoCount(lottos);
         lottoResultView.viewLottos(lottos);
