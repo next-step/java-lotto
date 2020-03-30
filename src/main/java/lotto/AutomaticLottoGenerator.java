@@ -4,10 +4,13 @@ import lotto.model.wrapper.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static lotto.utils.LottoConstant.*;
+import static lotto.model.LottoTicket.LOTTO_NUMBER_SIZE;
+import static lotto.model.wrapper.LottoNumber.LOTTO_MAX_NUMBER;
+import static lotto.model.wrapper.LottoNumber.LOTTO_MIN_NUMBER;
 
 public class AutomaticLottoGenerator {
 
@@ -23,10 +26,10 @@ public class AutomaticLottoGenerator {
     private AutomaticLottoGenerator() {
     }
 
-    public static List<LottoNumber> generate() {
+    public static Set<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
         return IntStream.range(0, LOTTO_NUMBER_SIZE)
                 .mapToObj(i -> lottoNumbers.get(i))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }
