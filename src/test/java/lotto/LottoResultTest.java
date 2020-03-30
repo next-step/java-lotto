@@ -19,7 +19,7 @@ public class LottoResultTest {
     public void earningsRateTest() {
         Money input = Money.won(14000);
         Map<LottoRank, LottoTicket> lottoResult = new EnumMap<>(LottoRank.class);
-        lottoResult.put(FIRST, LottoTicket.with(LottoNumbers.valueOf(1,2,3,4,5,6)));
+        lottoResult.put(FIRST, LottoTicket.with(LottoNumbers.valueOf(1, 2, 3, 4, 5, 6)));
         LottoResults results = new LottoResults(lottoResult);
 
         BigDecimal earningRate = results.calculateEarningRate(input, 2, RoundingMode.FLOOR);

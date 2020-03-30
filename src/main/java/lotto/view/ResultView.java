@@ -26,7 +26,8 @@ public class ResultView {
 
     private static final BigDecimal PROFIT_POINT = BigDecimal.ONE;
 
-    private ResultView() {}
+    private ResultView() {
+    }
 
     public static void print(LottoTicket lottoTicket) {
         System.out.printf(PURCHASE_COUNT_MSG_FORMAT, lottoTicket.size());
@@ -59,7 +60,7 @@ public class ResultView {
 
         for (LottoRank lottoRank : Arrays.asList(FOURTH, THIRD, SECOND, FIRST)) {
             System.out.printf(MATCH_NUMBER_COUNT_FORMAT,
-                    lottoRank.getMatchCount(), lottoRank.getPrizeMoney().getAmount().intValue(), Money.CURRENCY, results.countBy(lottoRank));
+                    lottoRank.getCountOfMatch(), lottoRank.getPrizeMoney().getAmount().intValue(), Money.CURRENCY, results.countBy(lottoRank));
             printLineBreak();
         }
 
