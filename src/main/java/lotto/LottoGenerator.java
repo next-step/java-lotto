@@ -15,11 +15,11 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = LottoRule.COUNT.getValue();
 
     private int purchaseCount;
-    private final List<LottoNumber> lottoNumbers;
+    private LottoTicket lottoTicket;
 
     public LottoGenerator(int purchaseCount) {
         this.purchaseCount = purchaseCount;
-        this.lottoNumbers = createLottoNumbersByPurchaseCount();
+        this.lottoTicket = createLottoNumbersByPurchaseCount();
 
     }
 
@@ -30,15 +30,15 @@ public class LottoGenerator {
         return new LinkedHashSet<>(numbers);
     }
 
-    public List<LottoNumber> createLottoNumbersByPurchaseCount() {
+    public LottoTicket createLottoNumbersByPurchaseCount() {
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
             numbers.add(new LottoNumber(generateRandomNumbers()));
         }
-        return Collections.unmodifiableList(numbers);
+        return new LottoTicket(numbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return lottoTicket.getLottoNumbers();
     }
 }

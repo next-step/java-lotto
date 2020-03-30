@@ -23,8 +23,8 @@ class LottoGeneratorTest {
     @DisplayName("1~45 사이의 숫자 로또번호를 구매 수량 만큼 생성한다.")
     @Test
     void generateRandomNumbers() {
-        List<LottoNumber> lottoNumbersByPurchaseCount = lottoGenerator.createLottoNumbersByPurchaseCount();
-        assertThat(lottoNumbersByPurchaseCount).hasSize(14);
+        LottoTicket lottoTicket = lottoGenerator.createLottoNumbersByPurchaseCount();
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(14);
     }
 
 
