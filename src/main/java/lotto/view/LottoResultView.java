@@ -26,11 +26,8 @@ public class LottoResultView {
         return inputMoney;
     }
 
-    public void viewLottoCount(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-    }
-
     public void viewLottos(List<Lotto> lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             viewLottoNumbers(lotto);
         }
@@ -67,8 +64,7 @@ public class LottoResultView {
         }
     }
 
-    public void viewInsight(Money money, int totalRevenue) {
-        double yield = (double) totalRevenue / (double) money.getMoney();
+    public void viewInsight(double yield) {
         if (yield < 1) {
             System.out.println("총 수익률은" + String.format("%.2f", yield) + " 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
             return;
