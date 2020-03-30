@@ -18,9 +18,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 로또번호 생성 테스트")
     void createWinningLottoTest() {
-        assertThat(
-                new WinningLotto("1, 2, 3, 4, 5, 6")
-        );
+        new WinningLotto("1, 2, 3, 4, 5, 6");
     }
 
     @ParameterizedTest

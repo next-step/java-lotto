@@ -34,7 +34,7 @@ public class LottoInspectorTest {
     @Test
     @DisplayName("로또 분석기 생성 테스트")
     void createLottoInspectorTest() {
-        assertThat(new LottoInspector(testWinningLotto, testLottos));
+        new LottoInspector(testWinningLotto, testLottos);
     }
 
     @Test

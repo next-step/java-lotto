@@ -16,9 +16,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void generateLottoTest() {
-        assertThat(
-                new Lotto().getLottoNumbers()
-        );
+        new Lotto().getLottoNumbers();
     }
 
     @Test

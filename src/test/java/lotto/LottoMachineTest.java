@@ -14,9 +14,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또기계 생성 테스트")
     void createLottoMachineTest() {
-        assertThat(
-                new LottoMachine().purchaseLottos(new Money(1000))
-        );
+        new LottoMachine().purchaseLottos(new Money(1000));
     }
 
     @ParameterizedTest
