@@ -5,34 +5,48 @@ import lotto.view.LottoResultView;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class LottoRun {
 
+    private static final LottoResultView lottoResultView = new LottoResultView();
+
     public static void main(String[] args) {
-        LottoResultView lottoResultView = new LottoResultView();
-        Scanner scanner = new Scanner(System.in);
+        Integer money = lottoResultView.inputMoney();
+        Money myMoney = new Money(money);
 
-        lottoResultView.viewMoneyGuidance();
-        Integer inputMoney = scanner.nextInt();
+        List<Lotto> myLottos = purchaseLottos(myMoney);
 
-        Money myMoney = new Money(inputMoney);
-        LottoMachine lottoMachine = new LottoMachine(myMoney);
+        WinningLotto winningLotto = getWinningLotto();
 
-        List<Lotto> myLottos = lottoMachine.getLottos();
-        lottoResultView.viewLottoCount(myLottos);
-        lottoResultView.viewLottos(myLottos);
+        innsightLottos(myMoney, winningLotto, myLottos);
+    }
 
-        lottoResultView.viewWinningNumberGuidance();
-        String inputWinningNumbers = scanner.next();
-        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
+    private static List<Lotto> purchaseLottos(Money money) {
+        LottoMachine lottoMachine = new LottoMachine(money);
+        List<Lotto> lottos = lottoMachine.getLottos();
+
+        lottoResultView.viewLottoCount(lottos);
+        lottoResultView.viewLottos(lottos);
+
+        return lottos;
+    }
+
+    private static WinningLotto getWinningLotto() {
+        String winningNumbers = lottoResultView.inputWinningNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
         lottoResultView.viewLottoNumbers(winningLotto.getWinningLotto());
 
-        LottoInspector lottoInspector = new LottoInspector(winningLotto, myLottos);
+        return winningLotto;
+    }
+
+    private static LottoInspector innsightLottos(Money money, WinningLotto winningLotto, List<Lotto> lottos) {
+        LottoInspector lottoInspector = new LottoInspector(winningLotto, lottos);
         Map<Integer, Integer> result = lottoInspector.getMatchedResult();
         lottoResultView.viewInspect(result);
 
         int totalRevenue = lottoInspector.getTotalRevenue();
-        lottoResultView.viewInsight(myMoney, totalRevenue);
+        lottoResultView.viewInsight(money, totalRevenue);
+
+        return lottoInspector;
     }
 }

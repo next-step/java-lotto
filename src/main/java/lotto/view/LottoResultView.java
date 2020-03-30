@@ -7,6 +7,7 @@ import lotto.domain.RewardEnum;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static java.util.stream.Collectors.joining;
 
@@ -17,8 +18,11 @@ public class LottoResultView {
 
     }
 
-    public void viewMoneyGuidance() {
+    public int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int inputMoney = scanner.nextInt();
+        return inputMoney;
     }
 
     public void viewLottoCount(List<Lotto> lottos) {
@@ -41,8 +45,11 @@ public class LottoResultView {
         System.out.println("[" + numbers + "]");
     }
 
-    public void viewWinningNumberGuidance() {
+    public String inputWinningNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        String inputWinningNumbers = scanner.next();
+        return inputWinningNumbers;
     }
 
     public void viewInspect(Map<Integer, Integer> result) {
@@ -62,7 +69,7 @@ public class LottoResultView {
     public void viewInsight(Money money, int totalRevenue) {
         double yield = (double) totalRevenue / (double) money.getMoney();
         if (yield < 1) {
-            System.out.println("총 수익률은" + String.format("%.2f", yield) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            System.out.println("총 수익률은" + String.format("%.2f", yield) + " 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
             return;
         }
         System.out.println("총 수익률은 " + String.format("%.2f", yield) + " 입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
