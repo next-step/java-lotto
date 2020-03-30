@@ -37,6 +37,6 @@ public class WinningLotto {
         for (String s : winningNumbers.split(LOTTO_WINNING_NUMBER_SPLIT_KEYWORD)) {
             lottoNumbers.add(new LottoNumber(s.trim()));
         }
-        return new Lotto(lottoNumbers);
+        return Lotto.newManual(lottoNumbers);
     }
 }

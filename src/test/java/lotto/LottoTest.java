@@ -17,7 +17,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void generateLottoTest() {
-        new Lotto().getLottoNumbers();
+        Lotto.newAutomatic().getLottoNumbers();
     }
 
     @Test
@@ -28,7 +28,7 @@ public class LottoTest {
                 new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6)
         );
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.newManual(lottoNumbers);
 
         assertAll(
                 () -> assertThat(lotto.isExistNumber(new LottoNumber(1))).isTrue(),
@@ -46,7 +46,7 @@ public class LottoTest {
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(5)
         );
         assertThatThrownBy(
-                () -> new Lotto(lottoNumbers)
+                () -> Lotto.newManual(lottoNumbers)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

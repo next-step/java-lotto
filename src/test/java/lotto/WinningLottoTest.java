@@ -43,13 +43,9 @@ public class WinningLottoTest {
     @DisplayName("로또번호 맞춘 갯수 가져오기 테스트")
     void getMatchedCountTest() {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto = new Lotto(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
+        Lotto lotto = Lotto.newManual(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(45)
         ));
 
         assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);

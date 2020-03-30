@@ -8,19 +8,27 @@ public class Lotto {
 
     private Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
+    public static Lotto newAutomatic() {
+        return new Lotto();
+    }
+
+    public static Lotto newManual(Set<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto newManual(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers.stream().collect(Collectors.toSet()));
+    }
+
+    private Lotto() {
         generatorLottoNumbers();
         sortLottorNumbers();
     }
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         validate();
         sortLottorNumbers();
-    }
-
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        this(lottoNumbers.stream().collect(Collectors.toSet()));
     }
 
     public Set<LottoNumber> getLottoNumbers() {
