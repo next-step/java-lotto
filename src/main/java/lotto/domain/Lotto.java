@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
     private static final String DELIMITER = ",";
@@ -14,7 +16,7 @@ public class Lotto {
     }
 
     public Lotto(String lottoString) {
-        this(generateManulalLottoSets(lottoString));
+        this(generateManualLottoSets(lottoString));
     }
 
     private Lotto(Set<LottoNumber> lottos) {
@@ -31,7 +33,7 @@ public class Lotto {
         return lottoNumberSet;
     }
 
-    private static Set<LottoNumber> generateManulalLottoSets(String lottoString) {
+    private static Set<LottoNumber> generateManualLottoSets(String lottoString) {
         String[] lottoStrings = lottoString.split(DELIMITER);
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
 
