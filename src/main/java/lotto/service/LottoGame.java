@@ -1,5 +1,6 @@
 package lotto.service;
 
+import enums.LottoPrize;
 import lotto.domain.Money;
 import lotto.domain.item.Item;
 import lotto.domain.item.LottoTicket;
@@ -52,11 +53,11 @@ public class LottoGame {
 
     public LottoDto findWinGame(Item winTicket) {
         LottoDto dto = new LottoDto();
-        dto.setFirstGameCount(this.lottoTickets.getFirstLottoCount(winTicket));
-        dto.setSecondGameCount(this.lottoTickets.getSecondLottoCount(winTicket));
-        dto.setThirdGameCount(this.lottoTickets.getThirdLottoCount(winTicket));
-        dto.setFourthGameCount(this.lottoTickets.getFourthLottoCount(winTicket));
-        dto.setFifthGameCount(this.lottoTickets.getFifthLottoCount(winTicket));
+        dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        dto.setSecondGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
+        dto.setThirdGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
+        dto.setFourthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
+        dto.setFifthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
         return dto;
     }
 

@@ -1,5 +1,6 @@
 package lotto.domain.item;
 
+import enums.LottoPrize;
 import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,13 +46,13 @@ class LottoTicketsTest {
 
         //then
         assertAll(
-                () -> assertThat(lottoTickets.getFirstLottoCount(winTicket))
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.FIRST, winTicket))
                         .isEqualTo(2),
-                () -> assertThat(lottoTickets.getSecondLottoCount(winTicket))
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket))
                         .isEqualTo(1),
-                () -> assertThat(lottoTickets.getThirdLottoCount(winTicket))
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket))
                         .isEqualTo(1),
-                () -> assertThat(lottoTickets.getFourthLottoCount(winTicket))
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket))
                         .isEqualTo(1)
         );
     }

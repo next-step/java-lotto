@@ -17,48 +17,28 @@ public class LottoTickets implements Cloneable {
         this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
     }
 
-    private int findWinLotto(LottoPrize lottoPrize, Item winTicket) {
+    public int findWinLottoCountFromRank(LottoPrize lottoPrize, Item winTicket) {
         return (int) tickets.stream()
                 .filter(ticket -> lottoPrize == ticket.getRank(winTicket))
                 .count();
-    }
-
-    public int getFirstLottoCount(Item winTicket) {
-        return findWinLotto(LottoPrize.FIRST, winTicket);
-    }
-
-    public int getSecondLottoCount(Item winTicket) {
-        return findWinLotto(LottoPrize.SECOND, winTicket);
-    }
-
-    public int getThirdLottoCount(Item winTicket) {
-        return findWinLotto(LottoPrize.THIRD, winTicket);
-    }
-
-    public int getFourthLottoCount(Item winTicket) {
-        return findWinLotto(LottoPrize.FOURTH, winTicket);
-    }
-
-    public int getFifthLottoCount(Item winTicket) {
-        return findWinLotto(LottoPrize.FIFTH, winTicket);
     }
 
     public Money getAllEarningPrize(Item winTicket) {
         Money earning = new Money();
 
         return earning
-                .plus(LottoPrize.FIRST.getWinningPrize(getFirstLottoCount(winTicket)))
-                .plus(LottoPrize.SECOND.getWinningPrize(getSecondLottoCount(winTicket)))
-                .plus(LottoPrize.THIRD.getWinningPrize(getThirdLottoCount(winTicket)))
-                .plus(LottoPrize.FOURTH.getWinningPrize(getFourthLottoCount(winTicket)))
-                .plus(LottoPrize.FIFTH.getWinningPrize(getFifthLottoCount(winTicket)));
+                .plus(LottoPrize.FIRST.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIRST, winTicket)))
+                .plus(LottoPrize.SECOND.getWinningPrize(findWinLottoCountFromRank(LottoPrize.SECOND, winTicket)))
+                .plus(LottoPrize.THIRD.getWinningPrize(findWinLottoCountFromRank(LottoPrize.THIRD, winTicket)))
+                .plus(LottoPrize.FOURTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket)))
+                .plus(LottoPrize.FIFTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket)));
     }
 
     public List<LottoTicket> getTickets() {
         return tickets;
     }
 
-    public int size(){
+    public int size() {
         return this.tickets.size();
     }
 
