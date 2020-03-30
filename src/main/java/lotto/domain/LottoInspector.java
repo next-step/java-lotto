@@ -21,20 +21,13 @@ public class LottoInspector {
     public int getTotalRevenue(Map<Integer, Integer> result) {
         int totalRevenue = 0;
         for (Integer key : result.keySet()) {
-            totalRevenue += calculateReward(key, result.get(key));
+            totalRevenue += RewardEnum.calculateReward(key, result.get(key));
         }
         return totalRevenue;
     }
 
     public BigDecimal getYield(Money money, int totalRevenue) {
         return new BigDecimal(totalRevenue).divide(new BigDecimal(money.getMoney()), 2, BigDecimal.ROUND_HALF_UP);
-    }
-
-    private int calculateReward(int matched, int count) {
-        if (RewardEnum.isWinning(matched)) {
-            return RewardEnum.getRewardFromMatched(matched) * count;
-        }
-        return 0;
     }
 
     private void putMatchedResult(Map<Integer, Integer> matchedResult, Integer matchedName) {

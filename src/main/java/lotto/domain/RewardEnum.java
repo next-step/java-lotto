@@ -24,17 +24,24 @@ public enum RewardEnum {
         return this.reward;
     }
 
-    public static int getMinMatched(){
+    public static int getMinMatched() {
         return THREE.matched;
     }
 
-    public static int getMaxMatched(){
+    public static int getMaxMatched() {
         return SIX.matched;
     }
 
-    public static boolean isWinning(int matched) {
+    private static boolean isWinning(int matched) {
         return Arrays.stream(RewardEnum.values())
                 .anyMatch(r -> r.getMatched() == matched);
+    }
+
+    public static int calculateReward(int matched, int count) {
+        if (RewardEnum.isWinning(matched)) {
+            return RewardEnum.getRewardFromMatched(matched) * count;
+        }
+        return 0;
     }
 
     public static int getRewardFromMatched(int matched) {
