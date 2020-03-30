@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class LottoNumberTest {
+class LottoStoreNumberTest {
     @DisplayName("1 ~ 45 범위의 숫자를 가진 로또 숫자 객체를 생성할 수 있다.")
     @RepeatedTest(value = 45, name = "1 ~ 45 중 {currentRepetition} of {totalRepetitions}")
     void create(RepetitionInfo repetitionInfo) {

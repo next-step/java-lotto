@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-class LottoNumbersTest {
+class LottoStoreNumbersTest {
     @DisplayName("LottoNumbers 객체 생성을 할 수 있다.")
     @Test
     void create() {
