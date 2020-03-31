@@ -20,6 +20,10 @@ public class Calculator {
     }
 
     public double sum(String text) {
+        if (text == null || "".equals(text.trim())) {
+            return 0;
+        }
+
         return Arrays.stream(split(text))
                 .mapToDouble(this::parseDouble)
                 .sum();
