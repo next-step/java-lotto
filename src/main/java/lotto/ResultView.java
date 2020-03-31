@@ -1,5 +1,7 @@
 package lotto;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -83,7 +85,8 @@ public class ResultView {
     public String printPurchaseLottoNumbers(LottoTicket lottoTicket) {
         String result = "";
         for (LottoNumbers lottoNumbers : lottoTicket.getLottoNumbers()) {
-            result += lottoNumbers.getNumbers() + "\n";
+            result += lottoNumbers.getNumbers().stream().map(LottoNo::getNo).collect(Collectors.toList())
+                      + "\n";
         }
 
         return result;
@@ -155,7 +158,7 @@ public class ResultView {
         return Arrays
                 .stream(inputText.split(SPLIT_TEXT))
                 .map(num -> new LottoNo(Integer.parseInt(num)))
-                .collect(Collectors.toSet());
+                .collect(toSet());
     }
 
     private int repeatByWinNumberSize(Set<LottoNo> winningNums, int matchCount, Set<LottoNo> purchaseNumbers) {
