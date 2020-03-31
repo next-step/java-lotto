@@ -36,8 +36,8 @@ public class Lotto {
         }
     }
 
-    public LottoTier getLottoTier(Lotto winningLotto) {
-        return LottoTier.getTier(getMatchedNumberCount(winningLotto));
+    public LottoTier getLottoTier(WinningLotto winningLotto) {
+        return LottoTier.getTier(getMatchedNumberCount(winningLotto.getLotto()), isMatchedBonusNumber(winningLotto.getBonusNumber()));
     }
 
     public long getMatchedNumberCount(Lotto winningLotto) {
@@ -46,6 +46,10 @@ public class Lotto {
                 .stream()
                 .filter(winningLottoNumber -> lotto.contains(winningLottoNumber))
                 .count();
+    }
+
+    public boolean isMatchedBonusNumber(LottoNumber bonusNumber) {
+        return lotto.contains(bonusNumber);
     }
 
     public Set<LottoNumber> getValue() {

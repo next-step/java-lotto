@@ -10,7 +10,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public int getLottoCountByTier(LottoTier lottoTier, Lotto winningLotto) {
+    public int getLottoCountByTier(LottoTier lottoTier, WinningLotto winningLotto) {
         int count = 0;
 
         for(Lotto lotto : lottos) {

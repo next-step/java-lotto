@@ -31,12 +31,12 @@ public class LottoMachine {
         return LottoProvider.createLottos(lottoCount);
     }
 
-    public Lotto createWinningLotto(List<Integer> inputNumbers) {
-        return LottoProvider.createLotto(inputNumbers);
+    public WinningLotto createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
+        return LottoProvider.createWinningLotto(inputNumbers, bonusNumber);
     }
 
     public LottoResult makeLottoResult(InputView inputView, Lottos lottos) {
-        Lotto winningLotto = createWinningLotto(inputView.getWinningNumbers());
+        WinningLotto winningLotto = createWinningLotto(inputView.getWinningNumbers(), inputView.getBonusNumber());
 
         Map<LottoTier, Integer> resultMap = new HashMap<>();
 

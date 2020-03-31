@@ -8,6 +8,7 @@ import java.util.List;
 public class InputView {
     private static final String MONEY_INPUT_INFORMATION = "구매금액을 입력해 주세요.";
     private static final String WINNING_NUMBER_INPUT_INFORMATION = "지난 주 당첨 번호를 입력해주세요";
+    private static final String BONUS_NUMBER_INPUT_INFORMATION = "보너스 볼을 입력해 주세요";
     private static final String LOTTO_NUMBER_NOT_INTEGER_ERROR = "숫자만 입력해주세요";
     private static final String COMMA = ",";
 
@@ -41,13 +42,25 @@ public class InputView {
         }
     }
 
-
     private String[] splitNumber(String inputText) {
         return inputText.split(COMMA);
     }
 
     private String getWinningNumbersText() {
         viewUtils.printLine(WINNING_NUMBER_INPUT_INFORMATION);
+        return viewUtils.readLine();
+    }
+
+    public int getBonusNumber() {
+        try {
+            return Integer.parseInt(getBonusNumberText());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_NOT_INTEGER_ERROR);
+        }
+    }
+
+    private String getBonusNumberText() {
+        viewUtils.printLine(BONUS_NUMBER_INPUT_INFORMATION);
         return viewUtils.readLine();
     }
 
