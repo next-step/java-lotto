@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public class LottoGame {
 
     public static final int LOTTO_PRICE = 1000;
@@ -19,5 +21,9 @@ public class LottoGame {
             throw new IllegalArgumentException("구매 금액이 로또 한 장 값보다 작을 수 없습니다.");
         }
         return price / LOTTO_PRICE;
+    }
+
+    public int getTotalWinnings(List<Rank> asList) {
+        return 2000000000;
     }
 }

@@ -8,8 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
-import static lotto.Rank.FOURTH;
-import static lotto.Rank.THIRD;
+import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -74,5 +73,13 @@ public class LottoGameTest {
     public void inputPriceLowerThanOneLottoPriceThrowException() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> lottoGame.purchaseLotto(500));
+    }
+
+    @Test
+    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다")
+    public void returnsTotalWinningsWhenInputRankOfAllLotto() {
+        int result = lottoGame.getTotalWinnings(Arrays.asList(FIRST));
+
+        assertThat(result).isEqualTo(2000000000);
     }
 }
