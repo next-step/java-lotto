@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +28,13 @@ public class Lotteries {
             lottoResult.increase(lottoRank);
         }
         return lottoResult;
+    }
+
+    public Lotteries merge(final Lotteries autos) {
+        List<LottoNumbers> merge = new ArrayList<>();
+        merge.addAll(lottoNumbers);
+        merge.addAll(autos.lottoNumbers);
+        return new Lotteries(merge);
     }
 
     @Override
