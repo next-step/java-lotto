@@ -1,6 +1,9 @@
 package lotto;
 
 public class LottoGame {
+
+    public static final int LOTTO_PRICE = 1000;
+
     public int match(Lotto lotto, Lotto winningLotto) {
         return (int) lotto.getNumbers().stream()
                 .filter(num -> winningLotto.getNumbers().contains(num))
@@ -12,6 +15,9 @@ public class LottoGame {
     }
 
     public int purchaseLotto(int price) {
-        return price / 1000;
+        if (price < LOTTO_PRICE) {
+            throw new IllegalArgumentException("구매 금액이 로또 한 장 값보다 작을 수 없습니다.");
+        }
+        return price / LOTTO_PRICE;
     }
 }

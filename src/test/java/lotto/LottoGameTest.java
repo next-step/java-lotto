@@ -9,6 +9,7 @@ import java.util.Arrays;
 import static lotto.Rank.FOURTH;
 import static lotto.Rank.THIRD;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoGameTest {
 
@@ -69,5 +70,10 @@ public class LottoGameTest {
         assertThat(result).isEqualTo(2);
     }
 
-
+    @Test
+    @DisplayName("구매 금액이 한 장 값보다 작으면 IllegalArgumentException")
+    public void inputPriceLowerThanOneLottoPriceThrowException() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoGame.purchaseLotto(500));
+    }
 }
