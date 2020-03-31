@@ -4,32 +4,30 @@ import java.util.Arrays;
 
 public enum LottoTier {
 
-    FIRST(6, false, 2_000_000_000) {
+    FIRST(6, 2_000_000_000) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 6; }
     },
-    SECOND(5, true, 30_000_000) {
+    SECOND(5, 30_000_000) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 5 && isMatchBonusNumber == true; }
     },
-    THIRD(5, false,150_000) {
+    THIRD(5, 150_000) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 5 && isMatchBonusNumber == false; }
     },
-    FOURTH(4, false, 50_000) {
+    FOURTH(4, 50_000) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 4; }
     },
-    FIFTH(3, false,5_000) {
+    FIFTH(3,5_000) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 3; }
     },
-    NONE(0, false,0) {
+    NONE(0,0) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount < 3; }
     };
 
     private long matchedNumberCount;
-    private boolean isMatchBonusNumber;
     private int prize;
 
-    LottoTier(long matchedNumberCount, boolean isMatchBonusNumber, int prize) {
+    LottoTier(long matchedNumberCount, int prize) {
         this.matchedNumberCount = matchedNumberCount;
-        this.isMatchBonusNumber = isMatchBonusNumber;
         this.prize = prize;
     }
 
