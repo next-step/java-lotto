@@ -9,7 +9,15 @@ public class Calculator {
 
     public double sum(String text) {
         return Arrays.stream(split(text))
-                .mapToDouble(Double::parseDouble)
+                .mapToDouble(this::parseDouble)
                 .sum();
+    }
+
+    private double parseDouble(String token) {
+        double number = Double.parseDouble(token);
+        if(number < 0) {
+            throw new RuntimeException("음수를 입력할 수 없습니다.");
+        }
+        return number;
     }
 }
