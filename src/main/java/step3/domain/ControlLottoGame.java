@@ -11,9 +11,9 @@ public class ControlLottoGame {
         LottoInfo lottoInfo = new LottoInfo(LOTTO_PRICE);
         BuyInfo buyInfo = new BuyInfo(totalPrice, lottoInfo.getLottoPrice());
         Lotto lotto = new Lotto();
-        Set<List<Integer>> buyLottoList = new HashSet<>();
+        Set<List<LottoNumber>> buyLottoList = new HashSet<>();
         for (int i = 0; i < buyInfo.getTotalCount(); i++) {
-            List<Integer> lottoList = lotto.getRandomLottoList();
+            List<LottoNumber> lottoList = lotto.getRandomLottoList();
             buyLottoList.add(lottoList);
         }
         BuyLotto buyLotto = new BuyLotto(buyLottoList);
@@ -21,7 +21,7 @@ public class ControlLottoGame {
     }
 
     public RankList setRanktList(WinLotto winLotto, BuyLotto buyLotto) {
-        Iterator<List<Integer>> iterator = buyLotto.getBuyLottoList().iterator();
+        Iterator<List<LottoNumber>> iterator = buyLotto.getBuyLottoList().iterator();
         List<WinInformation> list = new ArrayList<>();
         while (iterator.hasNext()) {
             WinInformation winInformation = setRank(winLotto, iterator.next());
@@ -31,11 +31,11 @@ public class ControlLottoGame {
         return rankList;
     }
 
-    private WinInformation setRank(WinLotto winLotto, List<Integer> next) {
-        int matchCount = winLotto.match((List<Integer>) next);
+    private WinInformation setRank(WinLotto winLotto, List<LottoNumber> next) {
+        int matchCount = winLotto.match((List<LottoNumber>) next);
         boolean bonusBallMatch = false;
         if (matchCount == BONUS_BALL) {
-            bonusBallMatch = winLotto.matchBonusball((List<Integer>) next);
+            bonusBallMatch = winLotto.matchBonusball((List<LottoNumber>) next);
         }
         return WinInformation.matchWinInformation(matchCount, bonusBallMatch);
     }

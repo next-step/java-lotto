@@ -21,7 +21,7 @@ public class LottoBonusBall {
 
     private static WinLotto askWinLotto(InputView inputView) {
         String winLottoInputValue = inputView.askWinnerLottoNumber();
-        int bonusBallInputValue = inputView.askBonusNumber();
+        LottoNumber bonusBallInputValue = inputView.askBonusNumber();
         return new WinLotto(winLottoInputValue, bonusBallInputValue);
     }
 }

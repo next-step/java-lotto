@@ -11,10 +11,10 @@ public class WinLotto {
     private static final int LOTTO_END_NUMBER = 45;
     private static final int SELECT_NUMBER = 6;
     private static final String SPLIT_SIGN = ",";
-    private Set<Integer> winLottoNumber;
-    private int bonuseBall;
+    private Set<LottoNumber> winLottoNumber;
+    private LottoNumber bonuseBall;
 
-    public WinLotto(String winNumber, int bonusBallInputValue) {
+    public WinLotto(String winNumber, LottoNumber bonusBallInputValue) {
         this.winLottoNumber = checkWinLottoNumber(winNumber);
         this.bonuseBall = addBonusBall(bonusBallInputValue);
     }
@@ -23,29 +23,28 @@ public class WinLotto {
         return SELECT_NUMBER;
     }
 
-    private Set<Integer> checkWinLottoNumber(String winNumber) {
+    private Set<LottoNumber> checkWinLottoNumber(String winNumber) {
         return setWinnerLottoNumber(winNumber);
     }
 
-    public int match(List<Integer> buyLottos) {
+    public int match(List<LottoNumber> buyLottos) {
         return (int) winLottoNumber.stream()
                 .filter(number -> buyLottos.contains(number))
                 .count();
     }
 
-    private Set<Integer> setWinnerLottoNumber(String inputValue) {
-        Set<Integer> winnerLottoNumber = new HashSet<>();
+    private Set<LottoNumber> setWinnerLottoNumber(String inputValue) {
+        Set<LottoNumber> winnerLottoNumber = new HashSet<>();
         String[] splitString = split(inputValue);
         for (int i = 0; i < splitString.length; i++) {
-            int winnerNumber = validateWinnerNumber(Integer.parseInt(splitString[i]));
+            LottoNumber winnerNumber = new LottoNumber(Integer.parseInt(splitString[i]));
             winnerLottoNumber.add(winnerNumber);
         }
         checkDuplicate(winnerLottoNumber);
-
         return winnerLottoNumber;
     }
 
-    private void checkDuplicate(Set<Integer> winnerLottoNumber) {
+    private void checkDuplicate(Set<LottoNumber> winnerLottoNumber) {
         if (winnerLottoNumber.size() < SELECT_NUMBER) {
             throw new IllegalArgumentException("중복된 값이 들어있습니다.");
         }
@@ -64,23 +63,15 @@ public class WinLotto {
         return splitString;
     }
 
-    private int validateWinnerNumber(int winnerNumber) {
-        if (winnerNumber > LOTTO_END_NUMBER || winnerNumber < LOTTO_START_NUMBER) {
-            throw new IllegalArgumentException("당첨번호형식이 틀렸습니다.");
-        }
-        return winnerNumber;
-    }
-
-    public int addBonusBall(int bonusBallInputValue) {
+    public LottoNumber addBonusBall(LottoNumber bonusBallInputValue) {
         int sameCount = match(Arrays.asList(bonusBallInputValue));
         if (sameCount > ZERO) {
             throw new IllegalArgumentException("보너스볼은 당첨번호의 값과 중복이 되면 안됩니다.");
         }
-        validateWinnerNumber(bonusBallInputValue);
         return bonusBallInputValue;
     }
 
-    public boolean matchBonusball(List<Integer> buyLottos) {
+    public boolean matchBonusball(List<LottoNumber> buyLottos) {
         int matchCount = (int) Arrays.asList(this.bonuseBall)
                 .stream()
                 .filter(number -> buyLottos.contains(number))

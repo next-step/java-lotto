@@ -1,5 +1,7 @@
 package step3.view;
 
+import step3.domain.LottoNumber;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -17,9 +19,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public int askBonusNumber() {
+    public LottoNumber askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return new LottoNumber(scanner.nextInt());
     }
 }
