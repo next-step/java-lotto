@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.WinningRequestDto;
+
 import java.util.Objects;
 
 public class WinningTicket {
@@ -7,6 +9,10 @@ public class WinningTicket {
 
     private final LottoNumbers lottoNumbers;
     private final BonusNumber bonusNumber;
+
+    public WinningTicket(WinningRequestDto winningDto) {
+        this(winningDto.getLottoNumbers(), winningDto.getBonusNumber());
+    }
 
     public WinningTicket(LottoNumbers lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;

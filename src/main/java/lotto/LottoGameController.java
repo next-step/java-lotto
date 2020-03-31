@@ -8,18 +8,15 @@ import lotto.view.ResultView;
 public class LottoGameController {
 
     public static void main(String[] args) {
-        LottoMoney lottoMoney = new LottoMoney(InputView.requestMoney());
-        LottoMachine lottoMachine = new LottoMachine(lottoMoney);
-        LottoTickets lottoTickets = lottoMachine.buy(new AutoLottoNumberStrategy());
+        InputView inputView = new InputView();
+
+        LottoMachine lottoMachine = new LottoMachine(inputView.lottoGameDto());
+        LottoTickets lottoTickets = lottoMachine.buyAuto(new AutoLottoNumberStrategy());
 
         LottoGame lottoGame = new LottoGame(lottoTickets);
         ResultView.print(lottoGame);
 
-        WinningTicket winningTicket = new WinningTicket(
-                InputView.requestWinningNumbers(),
-                InputView.requestBonusNumber()
-        );
-
+        WinningTicket winningTicket = new WinningTicket(inputView.getWinningDto());
         LottoGameResults lottoGameResults = lottoGame.match(winningTicket);
         ResultView.print(lottoGameResults);
     }

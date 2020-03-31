@@ -39,7 +39,7 @@ public class LottoNumber {
 
     private int parseLottoNumber(String lottoNumber) {
         try {
-            return Integer.parseInt(lottoNumber);
+            return Integer.parseInt(lottoNumber.trim());
         } catch (NumberFormatException e) {
             throw new LottoNumberInvalidException();
         }

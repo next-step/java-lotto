@@ -15,9 +15,10 @@ class LottoMachineTest {
     @ValueSource(ints = {10000, 50000})
     public void buyLottoGameTest(int money) {
         LottoMoney lottoMoney = new LottoMoney(money);
+
         LottoMachine lottoMachine = new LottoMachine(lottoMoney);
 
-        LottoTickets lottoTickets = lottoMachine.buy(new AutoLottoNumberStrategy());
+        LottoTickets lottoTickets = lottoMachine.buyAuto(new AutoLottoNumberStrategy());
 
         assertThat(lottoTickets).isNotNull();
     }
