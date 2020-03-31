@@ -1,5 +1,7 @@
 package lotto.domain.item;
 
+import lotto.exception.ValidLottoException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +15,14 @@ public class LottoNumbers {
     private final List<LottoNumber> numbers;
 
     public LottoNumbers(List<LottoNumber> numbers) {
+        validateSize(numbers);
         this.numbers = Collections.unmodifiableList(new ArrayList<>(numbers));
+    }
+
+    private void validateSize(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new ValidLottoException(LOTTO_VALID_ONLY_6);
+        }
     }
 
     @Override
