@@ -16,12 +16,12 @@ public class LottoNumber {
     public int intValue() {
         return lottoNumber;
     }
-
+    
     public boolean isEqualBonusNumber(BonusNumber bonusNumber) {
         return bonusNumber.isMatch(lottoNumber);
     }
 
-    private void validateRange(int lottoNumber) {
+    void validateRange(int lottoNumber) {
         if (isValidRange(lottoNumber)) {
             throw new LottoNumberRangeException();
         }

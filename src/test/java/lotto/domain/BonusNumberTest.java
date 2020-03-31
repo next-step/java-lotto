@@ -45,8 +45,8 @@ class BonusNumberTest {
     @ValueSource(ints = {0, 46})
     public void bonusNumberRangeTest(int bonusNumber) {
         assertThatThrownBy(() -> new BonusNumber(defaultLottoNumbers, bonusNumber))
-                .isInstanceOf(BonusNumberRangeException.class)
-                .hasMessageContaining("보너스 번호 1~45 사이의 수만 가능합니다.");
+                .isInstanceOf(LottoNumberRangeException.class)
+                .hasMessageContaining("로또 번호는 1~45 사이의 수만 가능합니다.");
     }
 
     @DisplayName("보너스 번호는 기존 당첨번호와 중복될 수 없다")

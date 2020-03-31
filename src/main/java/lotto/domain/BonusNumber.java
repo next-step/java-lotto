@@ -2,32 +2,22 @@ package lotto.domain;
 
 import java.util.Objects;
 
-import static lotto.domain.Constant.LOTTO_NUM_MAX;
-import static lotto.domain.Constant.LOTTO_NUM_MIN;
-
 public class BonusNumber {
-    private final int bonusNumber;
+    private final LottoNumber lottoNumber;
 
-    public BonusNumber(LottoNumbers lottoNumbers, int bonusNumber) {
-        this.bonusNumber = bonusNumber;
-        validateBonusNumber(bonusNumber);
+    public BonusNumber(LottoNumbers lottoNumbers, int lottoNumber) {
+        this.lottoNumber = new LottoNumber(lottoNumber);
         if (checkDuplication(lottoNumbers)) {
             throw new BonusNumberDuplicateException();
         }
     }
 
     public boolean isMatch(int lottoNumber) {
-        return bonusNumber == lottoNumber;
-    }
-
-    private void validateBonusNumber(int bonusNumber) {
-        if (bonusNumber < LOTTO_NUM_MIN || LOTTO_NUM_MAX < bonusNumber) {
-            throw new BonusNumberRangeException();
-        }
+        return this.lottoNumber.equals(new LottoNumber(lottoNumber));
     }
 
     private boolean checkDuplication(LottoNumbers lottoNumbers) {
-        return lottoNumbers.contains(bonusNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -35,12 +25,11 @@ public class BonusNumber {
         if (this == o) return true;
         if (!(o instanceof BonusNumber)) return false;
         BonusNumber that = (BonusNumber) o;
-        return bonusNumber == that.bonusNumber;
+        return Objects.equals(lottoNumber, that.lottoNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bonusNumber);
+        return Objects.hash(lottoNumber);
     }
-
 }

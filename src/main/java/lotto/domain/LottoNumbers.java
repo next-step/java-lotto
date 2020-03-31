@@ -21,8 +21,8 @@ public class LottoNumbers {
         this(Arrays.asList(lottoNumbers));
     }
 
-    public boolean contains(int lottoNumber) {
-        return getMatchCount(new LottoNumber(lottoNumber)) == HAS_CONDITION;
+    public boolean contains(LottoNumber lottoNumber) {
+        return getMatchCount(lottoNumber) == HAS_CONDITION;
     }
 
     public long getMatchCount(LottoNumber lottoNumber) {

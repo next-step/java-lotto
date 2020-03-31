@@ -44,7 +44,7 @@ class LottoNumbersTest {
         boolean expected = Boolean.parseBoolean(split[1]);
 
         LottoNumbers lottoNumbers = LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6);
-        boolean contains = lottoNumbers.contains(number);
+        boolean contains = lottoNumbers.contains(new LottoNumber(number));
 
         assertThat(contains).isEqualTo(expected);
     }
