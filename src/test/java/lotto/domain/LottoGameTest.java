@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.item.LottoTicket;
-import lotto.domain.item.LottoTickets;
-import lotto.domain.item.WinLottoTicket;
+import lotto.domain.item.*;
 import lotto.service.LottoGame;
 import lotto.view.LottoDto;
 import org.junit.jupiter.api.DisplayName;
@@ -18,14 +16,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
 
-    List<Integer> luckyNumber = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+    LottoNumbers luckyNumber = LottoNumbers.createLottoNumbersUseInteger(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
-//    List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24)))
-//    ));
+    List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
+            new LottoTicket(LottoNumbers.createLottoNumbersUseInteger(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12)))),
+            new LottoTicket(LottoNumbers.createLottoNumbersUseInteger(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24)))),
+            new LottoTicket(LottoNumbers.createLottoNumbersUseInteger(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24)))),
+            new LottoTicket(LottoNumbers.createLottoNumbersUseInteger(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))))
+    ));
 
     @DisplayName("생성자 테스트")
     @Test
@@ -47,18 +45,18 @@ class LottoGameTest {
         assertThat(dto.getTickets().size()).isEqualTo(expect);
     }
 
-//    @DisplayName("수익률 개산")
-//    @Test
-//    public void getEarningRate_success() throws Exception {
-//        //given
-//        final Money money = new Money(4000);
-//        LottoGame lottoGame = new LottoGame(money, new LottoTickets(ticketList));
-//        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, 45);
-//
-//        //when
-//        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
-//
-//        //then
-//        assertThat(earningRate.getEarningRate()).isEqualTo(1.25);
-//    }
+    @DisplayName("수익률 개산")
+    @Test
+    public void getEarningRate_success() throws Exception {
+        //given
+        final Money money = new Money(4000);
+        LottoGame lottoGame = new LottoGame(money, new LottoTickets(ticketList));
+        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, new LottoNumber(45));
+
+        //when
+        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
+
+        //then
+        assertThat(earningRate.getEarningRate()).isEqualTo(1.25);
+    }
 }
