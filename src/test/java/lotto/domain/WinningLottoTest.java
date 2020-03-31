@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,6 +10,7 @@ public class WinningLottoTest {
     private String winningLottoValue = "1,2,3,4,5,6";
 
     @Test
+    @DisplayName("당첨 번호와 매칭 되는 로또 번호 수 테스트")
     void getMatchCount() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningLottoValue), bonusBall);
 
@@ -18,6 +20,7 @@ public class WinningLottoTest {
     }
 
     @Test
+    @DisplayName("보너스 번호와 일치하는지에 대한 테스트")
     void matchBonus() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(winningLottoValue), bonusBall);
 
