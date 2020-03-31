@@ -23,9 +23,7 @@ public class Lotteries {
     public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers, final LottoNumber bonusBall) {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumbers purchase : lottoNumbers) {
-            int matchCount = purchase.analyzeMatchCount(winningLotteNumbers);
-            boolean hasBonusBall = purchase.hasBonusBall(bonusBall);
-            LottoRank lottoRank = LottoRank.findRank(matchCount, hasBonusBall);
+            LottoRank lottoRank = purchase.analyzeRank(winningLotteNumbers, bonusBall);
             lottoResult.increase(lottoRank);
         }
         return lottoResult;
