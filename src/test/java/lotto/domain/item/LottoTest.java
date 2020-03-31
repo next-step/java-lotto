@@ -32,33 +32,6 @@ class LottoTest {
         assertThat(ticket1.equals(ticket2)).isTrue();
     }
 
-    /**
-     * lottosize(), lottosize2() 테스트 코드를 합칠순 없을지...
-     */
-    @DisplayName("로또 티켓은 번호 6개만 지정 가능")
-    @Test
-    public void validateSize_fail_lessThan6() throws Exception {
-        //given
-        numbers.remove(0);
-
-        //then
-        assertThatThrownBy(
-                () -> new Lotto(numbers)
-        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 6개만 지정 가능 합니다.");
-    }
-
-    @DisplayName("로또 티켓은 번호 6개만 지정 가능")
-    @Test
-    public void validateSize_fail_moreThan6() throws Exception {
-        //given
-        numbers.add(new LottoNumber(20));
-
-        //then
-        assertThatThrownBy(
-                () -> new Lotto(numbers)
-        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 6개만 지정 가능 합니다.");
-    }
-
     @DisplayName("null 매개변수가 넘어올 경우")
     @Test
     public void test_fail_inputNullParam() throws Exception {
