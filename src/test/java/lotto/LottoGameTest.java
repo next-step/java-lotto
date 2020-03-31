@@ -19,5 +19,12 @@ public class LottoGameTest {
         int result = LottoGame.match(lotto, winningLotto);
 
         assertThat(result).isEqualTo(3);
+
+        lotto = Arrays.asList(1, 2, 3, 10, 11, 12);
+        winningLotto = Arrays.asList(1, 2, 3, 5, 6, 10);
+
+        result = LottoGame.match(lotto, winningLotto);
+
+        assertThat(result).isEqualTo(4);
     }
 }
