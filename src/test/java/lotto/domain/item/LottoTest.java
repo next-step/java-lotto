@@ -11,9 +11,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTest {
+
+    private static final String NULL_ERROR_MESSAGE = "로또생성 실패 : 매개변수:null";
     private List<LottoNumber> numbers;
 
     @BeforeEach
@@ -32,16 +33,16 @@ class LottoTest {
         assertThat(ticket1.equals(ticket2)).isTrue();
     }
 
-//    @DisplayName("null 매개변수가 넘어올 경우")
-//    @Test
-//    public void test_fail_inputNullParam() throws Exception {
-//        //given
-//        ArrayList<LottoNumber> emptyNumber = new ArrayList<>();
-//        assertThatThrownBy(
-//                () -> new Lotto(null)
-//        ).isInstanceOf(ValidLottoException.class);
-//    }
-//
+    @DisplayName("null 매개변수가 넘어올 경우")
+    @Test
+    public void constructor_fail_inputNullParam() throws Exception {
+        //given
+        List<LottoNumber> nullValue = null;
+        assertThatThrownBy(
+                () -> new Lotto(nullValue)
+        ).isInstanceOf(ValidLottoException.class).hasMessage(NULL_ERROR_MESSAGE);
+    }
+
 //    @DisplayName("로또는 불변 VO 객체여야 한다")
 //    @Test
 //    public void constructor_fail_modify() throws Exception {
