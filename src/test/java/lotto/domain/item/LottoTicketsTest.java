@@ -1,7 +1,6 @@
 package lotto.domain.item;
 
 import enums.LottoPrize;
-import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,49 +13,82 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketsTest {
 
-//    WinLottoTicket winTicket = new WinLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6), 10);
-//
-//    List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))),
-//
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 10))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 11))),
-//
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 11, 12))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))),
-//
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24))),
-//            new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 20, 21, 22, 23, 24)))
-//    ));
-//
-//    @DisplayName("생성자 테스트")
-//    @Test
-//    public void constructor_success() throws Exception {
-//        //given
-//        LottoTickets lottoTickets = new LottoTickets(ticketList);
-//    }
-//
-//    @DisplayName("당첨 번호 일치 하는 로또 개수 비교")
-//    @Test
-//    public void getXXXLottoCount_success() throws Exception {
-//        //given
-//        LottoTickets lottoTickets = new LottoTickets(ticketList);
-//
-//        //then
-//        assertAll(
-//                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.FIRST, winTicket))
-//                        .isEqualTo(2),
-//                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket))
-//                        .isEqualTo(1),
-//                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket))
-//                        .isEqualTo(1),
-//                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket))
-//                        .isEqualTo(1)
-//        );
-//    }
-//
+    private final List<LottoNumber> numbers =
+            new ArrayList<>(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)));
+    WinLottoTicket winTicket = new WinLottoTicket(numbers, new LottoNumber(10));
+
+    List<LottoTicket> ticketList = new ArrayList<>(Arrays.asList(
+            new LottoTicket(numbers),
+            new LottoTicket(numbers),
+            new LottoTicket(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(10))),
+            new LottoTicket(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(11))),
+            new LottoTicket(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(12))),
+            new LottoTicket(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(13))),
+            new LottoTicket(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(20),
+                    new LottoNumber(30),
+                    new LottoNumber(45)))
+    ));
+
+    @DisplayName("생성자 테스트")
+    @Test
+    public void constructor_success() throws Exception {
+        //given
+        LottoTickets lottoTickets = new LottoTickets(ticketList);
+    }
+
+    @DisplayName("당첨 번호 일치 하는 로또 개수 비교")
+    @Test
+    public void getXXXLottoCount_success() throws Exception {
+        //given
+        LottoTickets lottoTickets = new LottoTickets(ticketList);
+
+        //then
+        assertAll(
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.FIRST, winTicket))
+                        .isEqualTo(2),
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket))
+                        .isEqualTo(1),
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket))
+                        .isEqualTo(3),
+                () -> assertThat(lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket))
+                        .isEqualTo(0)
+        );
+    }
+
 //    @DisplayName("총 상금 금액 계산")
 //    @Test
 //    public void getAllEarningPrize_success() throws Exception {

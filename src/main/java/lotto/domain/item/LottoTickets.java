@@ -1,28 +1,25 @@
 package lotto.domain.item;
 
 import enums.LottoPrize;
-import lotto.domain.Money;
-import lotto.exception.CloneFailException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LottoTickets implements Cloneable {
 
-//    private final List<LottoTicket> tickets;
-//
-//    public LottoTickets(List<LottoTicket> tickets) {
-//        this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
-//    }
-//
-//    public int findWinLottoCountFromRank(LottoPrize lottoPrize, Item winTicket) {
-//        return (int) tickets.stream()
-//                .filter(ticket -> lottoPrize == ticket.getRank(winTicket))
-//                .count();
-//    }
-//
+    private final List<LottoTicket> tickets;
+
+    public LottoTickets(List<LottoTicket> tickets) {
+        this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
+    }
+
+    public int findWinLottoCountFromRank(LottoPrize lottoPrize, WinLottoTicket winTicket) {
+        return (int) tickets.stream()
+                .filter(ticket -> lottoPrize == ticket.getRank(winTicket))
+                .count();
+    }
+
 //    public Money getAllEarningPrize(Item winTicket) {
 //        Money earning = new Money();
 //
@@ -33,7 +30,7 @@ public class LottoTickets implements Cloneable {
 //                .plus(LottoPrize.FOURTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket)))
 //                .plus(LottoPrize.FIFTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket)));
 //    }
-//
+
 //    public List<LottoTicket> getTickets() {
 //        return tickets;
 //    }
