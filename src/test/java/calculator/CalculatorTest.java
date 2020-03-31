@@ -10,6 +10,18 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
+    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다")
+    @Test
+    void emptyString() {
+        Calculator calculator = new Calculator();
+
+        double sum1 = calculator.sum("");
+        assertThat(sum1).isEqualTo(0);
+
+        double sum2 = calculator.sum(null);
+        assertThat(sum2).isEqualTo(0);
+    }
+
     @DisplayName("문자열 덧셈 계산기는 ','를 구분자로 하여 각 문자열을 분리할 수 있다")
     @Test
     void split() {
