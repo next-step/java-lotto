@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import lotto.exception.ExceptionType;
 import lotto.exception.LottoException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -20,10 +22,19 @@ public class LottoTest {
     }
 
     @Test
-    void lotto() {
+    @DisplayName("로또 번호 갯수 체크 테스트")
+    void lotto_갯수_검사() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining("Lotto number must be 6");
+                .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER.getMessage());
+    }
+
+    @Test
+    @DisplayName("로또 번호 중복 검사 테스트 ")
+    void lotto_중복_검사() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(ExceptionType.DUPLICATED_LOTTO_NUMBER.getMessage());
     }
 
     @ParameterizedTest
