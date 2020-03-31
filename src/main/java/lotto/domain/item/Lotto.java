@@ -22,12 +22,6 @@ public class Lotto implements Item {
         this.numbers = Collections.unmodifiableList(result);
     }
 
-//    private void validateSize(List<LottoNumber> numbers) {
-//        if (numbers.size() != LOTTO_NUMBER_SIZE) {
-//            throw new ValidLottoException("번호는 6개만 지정 가능 합니다.");
-//        }
-//    }
-
     private void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
