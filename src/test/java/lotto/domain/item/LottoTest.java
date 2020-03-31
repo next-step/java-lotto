@@ -72,22 +72,4 @@ class LottoTest {
                         .isNotEqualTo(numbers.get(0))
         );
     }
-
-    @DisplayName("번호 중복 체크")
-    @Test
-    public void validateDuplicate_fail() throws Exception {
-        //given
-        ArrayList<LottoNumber> duplicateNumber =
-                new ArrayList<>(Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)));
-
-        assertThatThrownBy(
-                () -> new Lotto(duplicateNumber)
-        ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 중복될 수 없습니다.");
-    }
 }
