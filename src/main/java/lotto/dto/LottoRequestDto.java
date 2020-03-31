@@ -3,14 +3,14 @@ package lotto.dto;
 import java.util.List;
 
 public class LottoRequestDto {
-    private int price;
+    private int amount;
     private int manualCount;
     private List<String> manualLottoStrings;
     private String winningNumber;
     private int bonusNumber;
 
-    public LottoRequestDto(int price, int manualCount, List<String> manualLottoStrings) {
-        this.price = price;
+    public LottoRequestDto(int amount, int manualCount, List<String> manualLottoStrings) {
+        this.amount = amount;
         this.manualCount = manualCount;
         this.manualLottoStrings = manualLottoStrings;
     }
@@ -20,8 +20,8 @@ public class LottoRequestDto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getPrice() {
-        return price;
+    public int getAmount() {
+        return amount;
     }
 
     public int getManualCount() {

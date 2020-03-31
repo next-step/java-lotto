@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningType;
+import lotto.domain.*;
 import lotto.dto.LottoRequestDto;
 
 import java.util.ArrayList;
@@ -22,27 +19,22 @@ public class LottoShop {
     }
 
     public void buyLotto(LottoRequestDto lottoRequestDto) {
-        int price = lottoRequestDto.getPrice();
-        int manualCount = lottoRequestDto.getManualCount();
+        Purchase purchase = new Purchase(lottoRequestDto.getAmount(), lottoRequestDto.getManualCount());
         List<String> manualLottoStrings = lottoRequestDto.getManualLottoStrings();
 
-        validatePrice(price, manualCount);
-        int lottoCount = Math.floorDiv(price, PRICE_PER_PIECE);
-
-        List<Lotto> lottos = buyAuto(lottoCount - manualCount);
-        List<Lotto> manualLottos = buyManual(manualLottoStrings);
-        lottos.addAll(manualLottos);
-        this.lottoBundle = new LottoBundle(lottos);
+        LottoBundle autoLottoBundle = buyAuto(purchase.countOfAuto());
+        lottoBundle = autoLottoBundle.join(buyManual(manualLottoStrings));
     }
 
-    public List<Lotto> buyAuto(int lottoCount) {
-        return toLottos(lottoCount);
+    public LottoBundle buyAuto(int lottoCount) {
+        return new LottoBundle(toLottos(lottoCount));
     }
 
-    public List<Lotto> buyManual(List<String> lottoStrings) {
-        return lottoStrings.stream()
+    public LottoBundle buyManual(List<String> lottoStrings) {
+        List<Lotto> manualLottos = lottoStrings.stream()
                 .map(Lotto::manual)
                 .collect(Collectors.toList());
+        return new LottoBundle(manualLottos);
     }
 
     private List<Lotto> toLottos(int lottoCount) {
@@ -51,20 +43,6 @@ public class LottoShop {
             lottos.add(Lotto.auto());
         }
         return lottos;
-    }
-
-    private void validatePrice(int price, int manualCount) {
-        if (price < PRICE_PER_PIECE) {
-            throw new IllegalArgumentException("로또 가격은 1000원 이상이어야 합니다.");
-        }
-
-        if (price < manualLottoPrice(manualCount)) {
-            throw new IllegalArgumentException("수동 구입 로또가 구입금액 보다 많습니다.");
-        }
-    }
-
-    private int manualLottoPrice(int manualCount) {
-        return PRICE_PER_PIECE * manualCount;
     }
 
     public LottoResult checkWinning(LottoRequestDto lottoRequestDto) {

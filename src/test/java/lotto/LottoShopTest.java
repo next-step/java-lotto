@@ -8,6 +8,7 @@ import lotto.dto.LottoRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -31,7 +32,7 @@ class LottoShopTest {
     @ParameterizedTest
     @ValueSource(ints = {10000})
     void buyAuto(int price) {
-        List<Lotto> lottos = lottoShop.buyAuto(price);
+        LottoBundle lottos = lottoShop.buyAuto(Math.floorDiv(price, PRICE_PER_PIECE));
 
         assertThat(lottos.size()).isEqualTo(Math.floorDiv(price, PRICE_PER_PIECE));
     }
@@ -58,11 +59,24 @@ class LottoShopTest {
     @ValueSource(strings = {"1,2,3,4,5,6", "7,28,30,1,11,12", "14,13,1,8,6,44"})
     void buyManual(String lottoString) {
         List<String> lottoStrings = Arrays.asList(lottoString);
-        List<Lotto> lottos = lottoShop.buyManual(lottoStrings);
+        LottoBundle lottos = lottoShop.buyManual(lottoStrings);
 
         assertAll(
                 () -> assertThat(lottos.size()).isEqualTo(lottoStrings.size()),
-                () -> assertThat(lottos).containsExactly(Lotto.manual(lottoString))
+                () -> assertThat(lottos.getLottos()).containsExactly(Lotto.manual(lottoString))
+        );
+    }
+
+    @DisplayName("로또 구입 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"10000:1:1,2,3,4,5,6"}, delimiter = ':')
+    void buyLotto(int amount, int manualCount, String lottoString) {
+        List<String> lottoStrings = Arrays.asList(lottoString);
+        lottoShop.buyLotto(new LottoRequestDto(amount, manualCount, lottoStrings));
+        LottoBundle lottoBundle = lottoShop.getLottoBundle();
+        assertAll(
+                () -> assertThat(lottoBundle.size()).isEqualTo(amount / PRICE_PER_PIECE),
+                () -> assertThat(lottoBundle.getLottos()).contains(Lotto.manual(lottoString))
         );
     }
 }
