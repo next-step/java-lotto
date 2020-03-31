@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
     public String[] split(String text) {
-        String delimiter = ",";
+        String delimiter = ",|:";
         Pattern pattern = Pattern.compile("//(.)\n(.*)");
         Matcher matcher = pattern.matcher(text);
 
