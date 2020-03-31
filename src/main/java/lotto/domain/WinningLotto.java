@@ -1,9 +1,6 @@
 package lotto.domain;
 
 public class WinningLotto {
-    private final int ADD_COUNT = 1;
-    private final int ZERO = 0;
-
     private Lotto lotto;
     private int bonusNumber;
 
@@ -13,24 +10,10 @@ public class WinningLotto {
     }
 
     public int getMatchCount(Lotto lotto) {
-        int matchCount = 0;
-
-        for (Integer number : this.lotto.getNumbers()) {
-            matchCount += addMatchCount(lotto, number);
-        }
-
-        return matchCount;
+        return this.lotto.getMatchCount(lotto);
     }
 
     public boolean matchBonus(Lotto lotto) {
         return lotto.contains(this.bonusNumber);
-    }
-
-    private int addMatchCount(Lotto lotto, int number) {
-        if (lotto.contains(number)) {
-            return ADD_COUNT;
-        }
-
-        return ZERO;
     }
 }

@@ -32,6 +32,12 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int getMatchCount(Lotto lotto) {
+        return (int) this.numbers.stream()
+                .filter(number -> lotto.contains(number))
+                .count();
+    }
+
     public boolean contains(int number) {
         return numbers.contains(number);
     }
