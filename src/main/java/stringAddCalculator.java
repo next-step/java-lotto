@@ -3,6 +3,7 @@ import java.util.regex.Pattern;
 
 public class stringAddCalculator {
 
+    public static final String DEFAULT_DELIMITER = ",|:";
     public static final String REGEX_PATTERN = "//(.)\n(.*)";
 
     public static final Pattern pattern = Pattern.compile(REGEX_PATTERN);
@@ -45,7 +46,7 @@ public class stringAddCalculator {
             return m.group(2).split(customDelimiter);
         }
 
-        return text.split(",|:");
+        return text.split(DEFAULT_DELIMITER);
     }
 
     private int sum(int[] numbers) {
