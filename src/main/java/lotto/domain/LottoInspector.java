@@ -10,19 +10,29 @@ public class LottoInspector {
     public LottoInspector() {
     }
 
-    public Map<Integer, Integer> getResult(Lotto winningLotto, List<Lotto> lottos) {
-        Map<Integer, Integer> matchedResult = new LinkedHashMap<>();
+    public Map<RankEnum, Integer> getResult(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> lottos) {
+        Map<RankEnum, Integer> matchedResult = initMatchedResult();
         for (Lotto lotto : lottos) {
-            int matchedKey = winningLotto.getMatchedCount(lotto);
-            matchedResult.put(matchedKey, matchedResult.getOrDefault(matchedKey, 0) + 1);
+            int matchedCount = winningLotto.getMatchedCount(lotto);
+            boolean hasBonus = lotto.isExistNumber(bonusNumber);
+            RankEnum rank = RankEnum.getRank(matchedCount, hasBonus);
+            matchedResult.put(rank, matchedResult.getOrDefault(rank, 0) + 1);
         }
         return matchedResult;
     }
 
-    public int getTotalRevenue(Map<Integer, Integer> result) {
+    private Map<RankEnum, Integer> initMatchedResult() {
+        Map<RankEnum, Integer> matchedResult = new LinkedHashMap<>();
+        for (RankEnum rank : RankEnum.values()) {
+            matchedResult.put(rank, 0);
+        }
+        return matchedResult;
+    }
+
+    public int getTotalRevenue(Map<RankEnum, Integer> result) {
         int totalRevenue = 0;
-        for (Integer key : result.keySet()) {
-            totalRevenue += RankEnum.calculateReward(key, result.get(key));
+        for (RankEnum rank : result.keySet()) {
+            totalRevenue += rank.getReward() * result.get(rank);
         }
         return totalRevenue;
     }

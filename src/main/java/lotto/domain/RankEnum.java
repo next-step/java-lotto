@@ -3,17 +3,20 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum RankEnum {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000),
+    NO_RANK(0, false, 0);
 
     private int matched;
+    private boolean requiredBonus;
     private int reward;
 
-    RankEnum(int matched, int reward) {
+    RankEnum(int matched, boolean requiredBonus, int reward) {
         this.matched = matched;
+        this.requiredBonus = requiredBonus;
         this.reward = reward;
     }
 
@@ -21,36 +24,22 @@ public enum RankEnum {
         return this.matched;
     }
 
+    public boolean getRequiredBonus() {
+        return this.requiredBonus;
+    }
+
     public int getReward() {
         return this.reward;
     }
 
-    public static int getMinMatched() {
-        return FIRST.matched;
+    public static boolean isWinning(RankEnum rank) {
+        return rank.matched >= 3;
     }
 
-    public static int getMaxMatched() {
-        return FIFTH.matched;
-    }
-
-    private static boolean isWinning(int matched) {
+    public static RankEnum getRank(int matched, boolean hasBonus) {
         return Arrays.stream(RankEnum.values())
-                .anyMatch(r -> r.getMatched() == matched);
-    }
-
-    public static int calculateReward(int matched, int count) {
-        if (RankEnum.isWinning(matched)) {
-            return RankEnum.getRewardFromMatched(matched) * count;
-        }
-        return 0;
-    }
-
-    public static int getRewardFromMatched(int matched) {
-        return Arrays.stream(RankEnum.values())
-                .filter(r -> r.getMatched() == matched)
-                .mapToInt(r -> r.getReward())
+                .filter(r -> r.matched == matched && r.requiredBonus == hasBonus)
                 .findFirst()
-                .orElse(0);
+                .orElse(NO_RANK);
     }
-
 }

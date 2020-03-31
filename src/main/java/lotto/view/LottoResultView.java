@@ -39,7 +39,6 @@ public class LottoResultView {
                 .map(LottoNumber::getLottoNumber)
                 .map(n -> n.toString())
                 .collect(joining(JOIN_DELIMETER));
-
         System.out.println("[" + numbers + "]");
     }
 
@@ -50,25 +49,41 @@ public class LottoResultView {
         return inputWinningNumbers;
     }
 
-    public void viewInspect(Map<Integer, Integer> result) {
+    public int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
+        int inputWinningNumbers = scanner.nextInt();
+        return inputWinningNumbers;
+    }
+
+    public void viewInspect(Map<RankEnum, Integer> result) {
         System.out.println("\n당첨 통계\n--------------------");
-        for (int i = RankEnum.getMinMatched(); i <= RankEnum.getMaxMatched(); i++) {
-            viewInspectRaw(result, i);
+        for (RankEnum rank : result.keySet()) {
+            viewInspectRaw(rank, result.get(rank));
         }
         System.out.println("\n--------------------");
     }
 
-    private void viewInspectRaw(Map<Integer, Integer> result, int matched) {
-        if (result.containsKey(matched)) {
-            System.out.println(matched + "개 일치 (" + RankEnum.getRewardFromMatched(matched) + "원) - " + result.get(matched) + "개");
+    private void viewInspectRaw(RankEnum rank, int matchedCount) {
+        if (RankEnum.isWinning(rank)) {
+            System.out.println(getRankDescription(rank) + " - " + matchedCount + "개");
         }
     }
 
-    public void viewInsight(BigDecimal yield) {
-        if (yield.compareTo(new BigDecimal(1)) <= 0) {
-            System.out.println("총 수익률은" + String.format("%.2f", yield) + " 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
-            return;
+    private String getRankDescription(RankEnum rank) {
+        String description = rank.getMatched() + "개 일치";
+        if (rank.getRequiredBonus()) {
+            description += ", (보너스 볼 일치)";
         }
-        System.out.println("총 수익률은 " + String.format("%.2f", yield) + " 입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+        description += "(" + rank.getReward() + "원)";
+        return description;
+    }
+
+    public void viewInsight(BigDecimal yield) {
+        System.out.print("총 수익률은" + String.format("%.2f", yield) + " 입니다.");
+        if (yield.compareTo(new BigDecimal(1)) <= 0) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+        System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
     }
 }

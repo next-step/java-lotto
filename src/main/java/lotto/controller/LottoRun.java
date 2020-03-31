@@ -17,8 +17,10 @@ public class LottoRun {
         List<Lotto> myLottos = purchaseLottos(myMoney);
 
         Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber(winningLotto);
 
-        insightResult(myMoney, winningLotto, myLottos);
+        Map<RankEnum, Integer> result = insightResult(winningLotto, bonusNumber, myLottos);
+        insightYield(myMoney, result);
     }
 
     private static Money getMonney() {
@@ -42,13 +44,30 @@ public class LottoRun {
         return winningLotto;
     }
 
-    private static LottoInspector insightResult(Money money, Lotto winningLotto, List<Lotto> lottos) {
+    private static LottoNumber getBonusNumber(Lotto winningLotto) {
+        int bonusNumber = lottoResultView.inputBonusNumber();
+        LottoNumber bonusLottoNumber = LottoNumber.newChooseNumber(bonusNumber);
+
+        if (winningLotto.isExistNumber(bonusLottoNumber)) {
+            throw new IllegalArgumentException("입력하신 보너스번호는 이미 있는 번호입니다.");
+        }
+        return bonusLottoNumber;
+    }
+
+    private static Map<RankEnum, Integer> insightResult(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> lottos) {
         LottoInspector lottoInspector = new LottoInspector();
-        Map<Integer, Integer> result = lottoInspector.getResult(winningLotto, lottos);
+        Map<RankEnum, Integer> result = lottoInspector.getResult(winningLotto, bonusNumber, lottos);
+
+        lottoResultView.viewInspect(result);
+
+        return result;
+    }
+
+    private static LottoInspector insightYield(Money money, Map<RankEnum, Integer> result) {
+        LottoInspector lottoInspector = new LottoInspector();
         int totalRevenue = lottoInspector.getTotalRevenue(result);
         BigDecimal yield = lottoInspector.getYield(money, totalRevenue);
 
-        lottoResultView.viewInspect(result);
         lottoResultView.viewInsight(yield);
 
         return lottoInspector;
