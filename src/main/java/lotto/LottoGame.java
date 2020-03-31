@@ -1,12 +1,9 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoGame {
-
-    public static int match(List<Integer> lotto, List<Integer> winningLotto) {
-        return (int) lotto.stream()
-                .filter(num -> winningLotto.contains(num))
+    public static int match(Lotto lotto, Lotto winningLotto) {
+        return (int) lotto.getNumbers().stream()
+                .filter(num -> winningLotto.getNumbers().contains(num))
                 .count();
     }
 
