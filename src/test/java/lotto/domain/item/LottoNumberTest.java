@@ -4,6 +4,10 @@ import lotto.exception.ValidLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -18,6 +22,19 @@ class LottoNumberTest {
                 () -> assertThatThrownBy(() -> new LottoNumber(0)).isInstanceOf(ValidLottoException.class),
                 () -> assertThatThrownBy(() -> new LottoNumber(-10)).isInstanceOf(ValidLottoException.class)
         );
+    }
+
+    @DisplayName("정적 팩터리 메서드 사이즈 확인")
+    @Test
+    public void createLottoNumberBulk_success() throws Exception {
+        //given
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        //when
+        List<LottoNumber> lottoNumberBulk = LottoNumber.createLottoNumberBulk(numbers);
+
+        //then
+        assertThat(lottoNumberBulk.size()).isEqualTo(6);
     }
 
     @DisplayName("같은 번호의 멤버변수를 가지면 동일 객체로 본다")
