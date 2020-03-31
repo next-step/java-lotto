@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -83,20 +84,13 @@ public class LottoGameTest {
         assertThat(result).isEqualTo(FIRST.getWinningMoney() + SECOND.getWinningMoney());
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {14000, 5000})
     @DisplayName("당첨금 총액과 구매 금액을 이용하여 수익률을 계산한다")
-    public void calculateRateOfRevenueByTotalWinningsAndPrice() {
-        int price = 14000;
+    public void calculateRateOfRevenueByTotalWinningsAndPrice(int price) {
         int totalWinnings = lottoGame.getTotalWinnings(Arrays.asList(FOURTH));
 
         double result = lottoGame.getRateOfRevenue(price, totalWinnings);
-
-        assertThat(result).isEqualTo((double) totalWinnings / price);
-
-        price = 5000;
-        totalWinnings = lottoGame.getTotalWinnings(Arrays.asList(FOURTH));
-
-        result = lottoGame.getRateOfRevenue(price, totalWinnings);
 
         assertThat(result).isEqualTo((double) totalWinnings / price);
     }
