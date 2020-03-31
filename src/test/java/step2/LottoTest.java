@@ -34,7 +34,7 @@ public class LottoTest {
     @Test
     @DisplayName("당첨 숫자 개수 체크가 제대로 되는지 테스트")
     void WinningNumber() {
-        Lotto lotto = LottoMachine.getInstance().createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
         assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
