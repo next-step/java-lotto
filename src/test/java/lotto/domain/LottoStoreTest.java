@@ -30,7 +30,7 @@ class LottoStoreTest {
         final Price price = new Price(2000);
         final int expect = 2;
 
-        Lotteries actual = LottoStore.sell(price, autoPublisher);
+        Lotteries actual = LottoStore.sell(price, new ArrayList<>());
 
         assertThat(actual.count()).isEqualTo(expect);
     }
@@ -42,7 +42,7 @@ class LottoStoreTest {
         final List<LottoNumbers> manualLottoNumbers = createLottoNumbers();
 
         assertThatExceptionOfType(ManualSizeOverflowException.class).isThrownBy(
-                () -> LottoStore.sellManual(price, manualLottoNumbers)
+                () -> LottoStore.sell(price, manualLottoNumbers)
         );
     }
 
@@ -51,7 +51,7 @@ class LottoStoreTest {
     @ValueSource(ints = {0, 999})
     void noPurchaseException(int price) {
         assertThatExceptionOfType(NoPurchasePriceException.class).isThrownBy(
-                () -> LottoStore.sell(new Price(price), autoPublisher)
+                () -> LottoStore.sell(new Price(price), new ArrayList<>())
         );
     }
 
