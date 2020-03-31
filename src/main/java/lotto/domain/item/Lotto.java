@@ -6,8 +6,6 @@ import java.util.*;
 
 public class Lotto implements Item {
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
-
     protected final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
@@ -17,18 +15,18 @@ public class Lotto implements Item {
         }
 
         Collections.sort(numbers);
-        validateSize(numbers);
+
         validateDuplicate(numbers);
 
         List<LottoNumber> result = new ArrayList<>(numbers);
         this.numbers = Collections.unmodifiableList(result);
     }
 
-    private void validateSize(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new ValidLottoException("번호는 6개만 지정 가능 합니다.");
-        }
-    }
+//    private void validateSize(List<LottoNumber> numbers) {
+//        if (numbers.size() != LOTTO_NUMBER_SIZE) {
+//            throw new ValidLottoException("번호는 6개만 지정 가능 합니다.");
+//        }
+//    }
 
     private void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
