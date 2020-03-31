@@ -3,6 +3,8 @@ package lotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -58,16 +60,13 @@ public class LottoGameTest {
         assertThat(result).isEqualTo(THIRD);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1000,1", "2000,2"})
     @DisplayName("로또의 구매 금액을 입력하면 구매한 로또 장수를 리턴한다")
-    public void purchaseLottoReturnsCountOfLottoTickets() {
-        int result = lottoGame.purchaseLotto(1000);
+    public void purchaseLottoReturnsCountOfLottoTickets(int price, int count) {
+        int result = lottoGame.purchaseLotto(price);
 
-        assertThat(result).isEqualTo(1);
-
-        result = lottoGame.purchaseLotto(2000);
-
-        assertThat(result).isEqualTo(2);
+        assertThat(result).isEqualTo(count);
     }
 
     @Test
