@@ -68,12 +68,12 @@ public class LottoShop {
         return PRICE_PER_PIECE * manualCount;
     }
 
-    public LottoBundle getLottoBundle() {
-        return lottoBundle;
+    public LottoResult checkWinning(LottoRequestDto lottoRequestDto) {
+        List<WinningType> winningTypes = lottoBundle.drawForWinning(lottoRequestDto.getWinningNumber(), lottoRequestDto.getBonusNumber());
+        return new LottoResult(winningTypes, lottoBundle.size());
     }
 
-    public LottoResult checkWinning(String winningNumber, int bonusNumber) {
-        List<WinningType> winningTypes = lottoBundle.drawForWinning(winningNumber, bonusNumber);
-        return new LottoResult(winningTypes, lottoBundle.size());
+    public LottoBundle getLottoBundle() {
+        return lottoBundle;
     }
 }
