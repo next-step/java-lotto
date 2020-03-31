@@ -10,31 +10,29 @@ public class LottoTicket extends Lotto {
         super(numbers);
     }
 
-//    public LottoTicket(List<LottoNumber> numbers) {
-//        super(numbers);
-//    }
-//
 //    public int getLuckyNumberMatchCount(Item winTicket) {
-//        int match = 0;
-//        for (Integer num : numbers) {
-//            match = increaseCountIfMatch(winTicket, match, num);
+//        int matchCount = 0;
+//        for (LottoNumber num : numbers) {
+//            matchCount = increaseCountIfMatch(winTicket, matchCount, num);
 //        }
 //
-//        return match;
+//        return matchCount;
 //    }
 //
-//    private int increaseCountIfMatch(Item winTicket, int match, Integer num) {
-//        if (winTicket.getNumbers().contains(num)) {
-//            match++;
+//    private int increaseCountIfMatch(Item winTicket, int matchCount, LottoNumber winNumber) {
+//        for (LottoNumber number : winTicket.getNumbers()) {
+//            if (number.equals(winNumber)) {
+//                matchCount++;
+//            }
 //        }
-//        return match;
+//        return matchCount;
 //    }
 //
 //    private boolean isMatchBonus(Item winTicket) {
-//        int bonus = ((WinLottoTicket) winTicket).getBonus();
+//        LottoNumber bonus = ((WinLottoTicket) winTicket).getBonus();
 //        return numbers.contains(bonus);
 //    }
-//
+
 //    public LottoPrize getRank(Item winLottoTicket) {
 //        int matchCount = getLuckyNumberMatchCount(winLottoTicket);
 //        boolean matchBonus = isMatchBonus(winLottoTicket);
