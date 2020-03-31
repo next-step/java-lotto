@@ -1,13 +1,13 @@
-package LottoTests;
+package lotto_tests;
 
 import lotto.model.LottoResult;
 import lotto.model.LottoResults;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,12 +16,12 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("로또 결과 테스트")
+@DisplayName("로또 결과 다수 테스트")
 public class LottoResultsTests {
 
     private static List<LottoResults> lottoResultsList;
 
-    static  {
+    static {
         lottoResultsList = new ArrayList<>();
         lottoResultsList.add(LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE, LottoResult.TWO)));
         lottoResultsList.add(LottoResults.create(Arrays.asList(LottoResult.ONE, LottoResult.NONE, LottoResult.FOUR, LottoResult.ONE, LottoResult.TWO)));
@@ -36,7 +36,7 @@ public class LottoResultsTests {
     @DisplayName("로또 수익률 테스트")
     @ParameterizedTest
     @MethodSource("profitTestCases")
-    public void profitTest(LottoResults lottoResults, Double expectedProfit) {
+    public void profitTest(LottoResults lottoResults, BigDecimal expectedProfit) {
         assertThat(lottoResults.profit()).isEqualTo(expectedProfit);
     }
 
@@ -49,11 +49,11 @@ public class LottoResultsTests {
 
     private static Stream<Arguments> profitTestCases() {
         return Stream.of(
-                Arguments.of(lottoResultsList.get(0), 400311.0),
-                Arguments.of(lottoResultsList.get(1), 10.0),
-                Arguments.of(lottoResultsList.get(2), 500.0),
-                Arguments.of(lottoResultsList.get(3), 0.5),
-                Arguments.of(lottoResultsList.get(4), 0.0));
+                Arguments.of(lottoResultsList.get(0), BigDecimal.valueOf(400311.0)),
+                Arguments.of(lottoResultsList.get(1), BigDecimal.valueOf(10.0)),
+                Arguments.of(lottoResultsList.get(2), BigDecimal.valueOf(500.0)),
+                Arguments.of(lottoResultsList.get(3), BigDecimal.valueOf(0.5)),
+                Arguments.of(lottoResultsList.get(4), BigDecimal.valueOf(0.0)));
     }
 
     private static Stream<Arguments> countTestCases() {

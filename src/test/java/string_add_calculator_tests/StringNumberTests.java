@@ -1,4 +1,4 @@
-package StringAddCalculatorTests;
+package string_add_calculator_tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import stringAddCalculator.model.Numbers;
+import string_add_calculator.model.Number;
+import string_add_calculator.model.Numbers;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,7 +48,7 @@ public class StringNumberTests {
     @DisplayName("Numbers 합계 테스트")
     @ParameterizedTest
     @MethodSource("sumNumbersNormalCases")
-    public void sumNumbersTest(Numbers numbers, int expectedResult) {
+    public void sumNumbersTest(Numbers numbers, Number expectedResult) {
         assertThat(numbers.sum()).isEqualTo(expectedResult);
     }
 
@@ -61,8 +62,8 @@ public class StringNumberTests {
 
     private static Stream<Arguments> sumNumbersNormalCases() {
         return Stream.of(
-                Arguments.of(Numbers.create(new String[]{"1", "2", "3"}), 6),
-                Arguments.of(Numbers.create(new String[]{"10", "21", "9"}), 40)
+                Arguments.of(Numbers.create(new String[]{"1", "2", "3"}), Number.of(6)),
+                Arguments.of(Numbers.create(new String[]{"10", "21", "9"}), Number.of(40))
         );
     }
 }

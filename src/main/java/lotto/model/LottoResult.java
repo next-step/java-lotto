@@ -10,13 +10,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoResult {
-    NONE(LottoMatchCount.of(0), 0L),
-    ONE(LottoMatchCount.of(1), 0L),
-    TWO(LottoMatchCount.of(2), 0L),
-    THREE(LottoMatchCount.of(3), 5000L),
-    FOUR(LottoMatchCount.of(4), 50000L),
-    FIVE(LottoMatchCount.of(5), 1500000L),
-    SIX(LottoMatchCount.of(6), 2000000000L),
+    NONE(LottoMatchCount.newInstance(0, LottoBonusMatchResult.ANYWAY), 0L),
+    ONE(LottoMatchCount.newInstance(1, LottoBonusMatchResult.ANYWAY), 0L),
+    TWO(LottoMatchCount.newInstance(2, LottoBonusMatchResult.ANYWAY), 0L),
+    THREE(LottoMatchCount.newInstance(3, LottoBonusMatchResult.ANYWAY), 5_000L),
+    FOUR(LottoMatchCount.newInstance(4, LottoBonusMatchResult.ANYWAY), 50_000L),
+    FIVE(LottoMatchCount.newInstance(5, LottoBonusMatchResult.UN_MATCH), 1_500_000L),
+    FIVE_WITH_BONUS(LottoMatchCount.newInstance(5, LottoBonusMatchResult.MATCH), 30_000_000L),
+    SIX(LottoMatchCount.newInstance(6, LottoBonusMatchResult.ANYWAY), 2_000_000_000L),
     ;
 
     private static final Map<LottoMatchCount, LottoResult> LOTTO_RESULTS = Collections.unmodifiableMap(
@@ -24,28 +25,28 @@ public enum LottoResult {
                     .collect(Collectors.toMap(LottoResult::getLottoMatchCount, Function.identity())));
 
     private final LottoMatchCount matchCount;
-    private final Long price;
+    private final long price;
 
-    LottoResult(final LottoMatchCount matchCount, final Long price) {
+    LottoResult(final LottoMatchCount matchCount, final long price) {
         this.matchCount = matchCount;
         this.price = price;
     }
 
-    public static LottoResult of(final int count) {
-        return Optional.ofNullable(LOTTO_RESULTS.get(LottoMatchCount.of(count)))
-                .orElseThrow(() -> new IllegalArgumentException("Match Count must between 0 and 6."));
+    public static LottoResult of(final LottoMatchCount lottoMatchCount) {
+        return Optional.ofNullable(LOTTO_RESULTS.get(lottoMatchCount))
+                .orElseThrow(() -> new IllegalArgumentException("match count must between 0 and 6."));
     }
 
     public Integer getMatchCount() {
         return matchCount.toInt();
     }
 
-    public Long getPrice() {
+    public long getPrice() {
         return price;
     }
 
     public boolean isBlank() {
-        return price.equals(0L);
+        return price == 0L;
     }
 
     private LottoMatchCount getLottoMatchCount() {
