@@ -25,6 +25,10 @@ public class Price {
         return price >= LOTTO_PRICE;
     }
 
+    public boolean isOverSize(final int numberOfManual) {
+        return numberOfManual > lotteryCount();
+    }
+
     public int lotteryCount() {
         return (int) price / LOTTO_PRICE;
     }
@@ -58,4 +62,5 @@ public class Price {
     public int hashCode() {
         return Objects.hash(price);
     }
+
 }
