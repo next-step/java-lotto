@@ -27,4 +27,16 @@ public class LottoGameTest {
 
         assertThat(result).isEqualTo(4);
     }
+
+    @Test
+    @DisplayName("일치한 번호 갯수를 입력하면 등수를 리턴한다")
+    public void getRankReturnsRankOfLotto() {
+        List<Integer> lotto = Arrays.asList(1, 2, 3, 10, 11, 12);
+        List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int matchCount = LottoGame.match(lotto, winningLotto);
+
+        int result = LottoGame.getRank(matchCount);
+
+        assertThat(result).isEqualTo(5);
+    }
 }

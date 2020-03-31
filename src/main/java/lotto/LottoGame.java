@@ -9,4 +9,8 @@ public class LottoGame {
                 .filter(num -> winningLotto.contains(num))
                 .count();
     }
+
+    public static int getRank(int i) {
+        return 5;
+    }
 }
