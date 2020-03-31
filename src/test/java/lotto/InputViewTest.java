@@ -16,7 +16,7 @@ class InputViewTest {
     @Test
     void validatePurchaseAmount() {
         int purchaseAmount = 500;
-        
+
         assertThatIllegalArgumentException().isThrownBy(() -> {
             inputView = new InputView(purchaseAmount);
         });
@@ -30,5 +30,24 @@ class InputViewTest {
         int purchaseCount = inputView.getPurchaseCount();
 
         assertThat(purchaseCount).isEqualTo(14);
+    }
+
+    @DisplayName("수동으로 구매 할 로또수 구매금액보다 클 시 예외처리를 해준다")
+    @Test
+    void validateManualCount() {
+        inputView = new InputView(15000);
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            inputView.validateManualCount(16);
+        });
+    }
+
+    @DisplayName("수동 개수와 자동개수가 몇개인지 카운트를 센다")
+    @Test
+    void getCount() {
+        inputView = new InputView(15000, 13);
+
+        assertAll(() -> assertThat(inputView.getManualCount()).isEqualTo(13),
+                  () -> assertThat(inputView.getAutomaticCount()).isEqualTo(2));
     }
 }
