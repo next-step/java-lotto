@@ -6,7 +6,7 @@ import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
 import lotto.domain.item.WinLottoTicket;
-import lotto.domain.stragegy.LottoNumberGenerator;
+import lotto.domain.stragegy.LottoNumberAutoGenerator;
 import lotto.view.LottoDto;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class LottoGame {
     private void buyAllLottoTicket() {
         List<LottoTicket> lottos = new ArrayList<>();
         while (playGameCount > 0) {
-            LottoNumbers numbers = LottoNumbers.createLottoNumbersUseInteger(LottoNumberGenerator.generateLottoNumber());
+            LottoNumbers numbers = LottoNumbers.createLottoNumbersUseInteger(LottoNumberAutoGenerator.generateLottoNumber());
             lottos.add(buyOneLottoTicket(numbers));
         }
         this.lottoTickets = new LottoTickets(Collections.unmodifiableList(lottos));
