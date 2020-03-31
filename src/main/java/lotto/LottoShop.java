@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoShop {
-    private static final int PRICE_PER_PIECE = 1000;
     private LottoBundle lottoBundle;
 
     public LottoShop() {
