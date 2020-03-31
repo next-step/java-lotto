@@ -66,4 +66,9 @@ public class LottoTickets implements Cloneable {
 
         return clone;
     }
+
+    @Override
+    public String toString() {
+        return tickets.toString();
+    }
 }
