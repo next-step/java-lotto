@@ -1,12 +1,14 @@
 package lotto.domain;
 
-import static lotto.domain.LottoGame.CANDIDATE_NUMBERS;
 import static lotto.domain.LottoGame.LOTTO_NO_COUNT;
+import static lotto.domain.LottoNo.LOWER_BOUND;
+import static lotto.domain.LottoNo.UPPER_BOUND;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,13 +17,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoGameTest {
 
+  private static final String DELIMITER = ",";
+
   @DisplayName("Test for illegal argument")
   @ParameterizedTest
-  @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7", "1,2,3,4,5,a", "0,1,2,3,4,5", "1,2,3,4,5,46"})
+  @ValueSource(strings = {"1,1,2,3,4,5", "1,2,3,4,5", "1,2,3,4,5,6,7", "0,1,2,3,4,5", "1,2,3,4,5,46"})
   public void IllegalArgumentTest(String numbers) {
-    List<Integer> integers = Arrays.stream(numbers.split(", "))
+    Set<Integer> integers = Arrays.stream(numbers.split(DELIMITER))
         .map(Integer::parseInt)
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
 
     assertThatThrownBy(() -> new LottoGame(integers))
         .isInstanceOf(IllegalArgumentException.class);
@@ -30,9 +34,9 @@ public class LottoGameTest {
   @DisplayName("Test for random generation method")
   @Test
   public void randomGenerationTest() {
-    List<Integer> integers = LottoGame.genarateRandomNumbers();
+    Set<Integer> integers = LottoGame.genarateRandomNumbers();
     assertThat(integers).hasSize(LOTTO_NO_COUNT);
-    integers.forEach(integer -> assertThat(CANDIDATE_NUMBERS.contains(integer)).isTrue());
+    integers.forEach(integer -> assertThat(integer).isBetween(LOWER_BOUND, UPPER_BOUND));
   }
 }
 

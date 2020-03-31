@@ -10,7 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,16 +22,16 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class WinningNumbersTest {
 
   private static final String DELIMITER = ",";
-  private static final List<Integer> LOTTO_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
+  private static final Set<Integer> LOTTO_NUMBERS = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
   private static final WinningNumbers WINNING_NUMBERS = new WinningNumbers(
       LOTTO_NUMBERS,
       7
   );
 
   private LottoGame buildLottoNumbers(String numbers) {
-    java.util.List<Integer> integers = Arrays.stream(numbers.split(DELIMITER))
+    Set<Integer> integers = Arrays.stream(numbers.split(DELIMITER))
         .map(Integer::parseInt)
-        .collect(Collectors.toList());
+        .collect(Collectors.toSet());
 
     return new LottoGame(integers);
   }
