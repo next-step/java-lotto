@@ -1,22 +1,25 @@
 package lotto.domain.item;
 
+import lotto.exception.ValidLottoException;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Lotto implements Item {
 
+    private static final String NULL_PARAM_ERROR_MESSAGE = "매개변수:null";
     protected final LottoNumbers numbers;
 
-    public Lotto(final LottoNumbers numbers) {
+    public Lotto(LottoNumbers numbers) {
         if (numbers == null) {
-            throw new IllegalArgumentException("올바르지 않은 값입니다 : null");
+            throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
         }
         this.numbers = new LottoNumbers(numbers);
     }
 
-    public Lotto(final List<LottoNumber> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         if (numbers == null) {
-            throw new IllegalArgumentException("올바르지 않은 값입니다 : null");
+            throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
         }
         this.numbers = new LottoNumbers(numbers);
     }
