@@ -7,12 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoPublisherTest {
 
-    @DisplayName("복권들을 발행할 수 있다.")
+    @DisplayName("복권을 자동 발행할 수 있다.")
     @Test
     void publish() {
-        LottoPublisher lottoPublisher = new LottoPublisher();
+        LottoPublisher lottoPublisher = new LottoAutoPublisher(2);
 
-        Lotteries actual = lottoPublisher.publish(2);
+        Lotteries actual = lottoPublisher.publish();
 
         assertThat(actual).isNotNull();
         assertThat(actual.count()).isEqualTo(2);
