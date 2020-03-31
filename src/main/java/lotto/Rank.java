@@ -3,20 +3,21 @@ package lotto;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6),
-    SECOND(5),
-    THIRD(4),
-    FOURTH(3);
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000);
 
     private int matchCount;
+    private int winningMoney;
 
-    Rank(int matchCount) {
+    Rank(int matchCount, int winningMoney) {
         this.matchCount = matchCount;
+        this.winningMoney = winningMoney;
     }
 
-
     public int getWinningMoney() {
-        return 2000000000;
+        return winningMoney;
     }
 
     public static Rank of(int matchCount) {
