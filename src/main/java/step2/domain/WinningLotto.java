@@ -20,7 +20,7 @@ public class WinningLotto {
     }
 
     public LottoTier getLottoTier(Lotto targetLotto) {
-        return LottoTier.getTier(getMatchedNumberCount(lotto), isMatchedBonusNumber(targetLotto));
+        return LottoTier.getTier(getMatchedNumberCount(targetLotto), isMatchedBonusNumber(targetLotto));
     }
 
     public long getMatchedNumberCount(Lotto targetLotto) {
