@@ -1,17 +1,7 @@
 package lotto.service;
 
-import enums.LottoPrize;
 import lotto.domain.Money;
-import lotto.domain.item.Item;
-import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
-import lotto.domain.item.WinLottoTicket;
-import lotto.domain.stragegy.LottoNumberGenerator;
-import lotto.view.LottoDto;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class LottoGame {
 
@@ -24,9 +14,9 @@ public class LottoGame {
         this.playGameCount = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
     }
 
-//    public LottoGame(Money money, LottoTickets lottoTickets) {
-//        this.lottoTickets = lottoTickets;
-//    }
+    public LottoGame(Money money, LottoTickets lottoTickets) {
+        this.lottoTickets = lottoTickets;
+    }
 //
 //    private LottoTicket buyOneLottoTicket(List<Integer> numbers) {
 //        playGameCount--;
