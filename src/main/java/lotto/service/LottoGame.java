@@ -6,7 +6,7 @@ import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
 import lotto.domain.item.WinLottoTicket;
-import lotto.domain.stragegy.LottoNumberAutoGenerator;
+import lotto.domain.strategy.LottoNumberAutoGenerator;
 import lotto.view.LottoDto;
 
 import java.util.ArrayList;
