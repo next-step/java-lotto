@@ -14,6 +14,11 @@ public enum Rank {
         this.matchCount = matchCount;
     }
 
+
+    public int getWinningMoney() {
+        return 2000000000;
+    }
+
     public static Rank of(int matchCount) {
         return Stream.of(values())
                 .filter(rank -> rank.matchCount == matchCount)

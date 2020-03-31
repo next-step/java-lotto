@@ -20,4 +20,12 @@ public class RankTest {
 
         assertThat(rank).isEqualTo(SECOND);
     }
+
+    @Test
+    @DisplayName("등수에 따라 당첨 금액을 얻을 수 있다")
+    public void getMoneyWithRankReturnsWinningMoney() {
+        int money = FIRST.getWinningMoney();
+
+        assertThat(money).isEqualTo(2000000000);
+    }
 }
