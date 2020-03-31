@@ -7,3 +7,9 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+# 작업내역
+## 1st
+* 로또 구매부 구현. 입력부이므로 별도의 테스트케이스는 만들지 않는다.
+* 구매금액(Amount) 클래스로 랩핑.
+* 테스트용 클래스 생성.
