@@ -1,7 +1,6 @@
 package lotto.Domain;
 
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -41,7 +40,6 @@ public class LottoMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"1 2 13 4 5 6:5", "13 24 1 5 42 7:50", "1 2 13 35 24 42:2000000"}, delimiter = ':')
     void buyLottoTest(String input, String expected) {
-        int price = 1000;
         LottoMachine lottoMachine = LottoMachine.init();
         ArrayList<Integer> targetNumbers = Arrays.stream(input.split(" "))
                 .map(Integer::parseInt)
@@ -53,5 +51,14 @@ public class LottoMachineTest {
         Double revenueRate = lottos.revenueRate(statistics);
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"14000:14", "1000:1", "3000:3"}, delimiter = ':')
+    void buyAutoLottosTest(String input, String expected) {
+        LottoMachine lottoMachine = LottoMachine.init();
+        Lottos lottos = lottoMachine.buyAutoLottos(Integer.parseInt(input));
+
+        assertThat(lottos.toList()).hasSize(Integer.parseInt(expected));
     }
 }

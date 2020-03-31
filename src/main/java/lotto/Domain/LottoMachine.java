@@ -20,6 +20,15 @@ public class LottoMachine {
         return new LottoMachine();
     }
 
+    public Lottos buyAutoLottos(int price) {
+        int lottoCount = boughtLottoCount(price);
+        for (int i = 0; i < lottoCount; i++) {
+            Lotto lotto = makeLotto(makeAutoTargetNumber());
+            lottos = buyLotto(lotto);
+        }
+        return lottos;
+    }
+
     int boughtLottoCount(int price) {
         lessThenOneLottoPriceException(price);
         return price / LOTTO_PRICE;
