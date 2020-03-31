@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CalculatorTest {
 
@@ -23,5 +24,18 @@ public class CalculatorTest {
         double sum = calculator.sum("1,2,3,4,5");
 
         assertThat(sum).isEqualTo(15);
+    }
+
+    @DisplayName("문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw 한다")
+    @Test
+    void throwRuntimeExceptionsIfNonNumberOrNegativeNumber() {
+        Calculator calculator = new Calculator();
+        assertThatThrownBy(() -> {
+            calculator.sum("1,2,a,b,3");
+        }).isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(() -> {
+            calculator.sum("1,2,5,-10,3");
+        }).isInstanceOf(RuntimeException.class);
     }
 }
