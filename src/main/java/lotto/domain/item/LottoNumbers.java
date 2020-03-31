@@ -18,17 +18,22 @@ public class LottoNumbers {
         this.value = Collections.unmodifiableList(new ArrayList<>(value));
     }
 
+    public static LottoNumbers createLottoNumbersUseInteger(List<Integer> value) {
+        List<LottoNumber> lottoNumberBulk = LottoNumber.createLottoNumberBulk(value);
+        return new LottoNumbers(lottoNumberBulk);
+    }
+
     public LottoNumbers(LottoNumbers copy) {
         this.value = Collections.unmodifiableList(new ArrayList<>(copy.value));
     }
 
-    private void validateSize(List<LottoNumber> numbers) {
+    private static void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_VALID_ONLY_6);
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> numbers) {
+    private static void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
             throw new ValidLottoException("번호는 중복될 수 없습니다.");

@@ -33,6 +33,19 @@ class LottoNumbersTest {
         assertThat(lottoNumbers.equals(compare)).isTrue();
     }
 
+    @DisplayName("정적 팩토리 메서드 테스트")
+    @Test
+    public void createLottoNumbersUseInteger_success() throws Exception {
+        //given
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        //when
+        LottoNumbers lottoNumbers = LottoNumbers.createLottoNumbersUseInteger(numbers);
+
+        //then
+        assertThat(lottoNumbers.getValue().size()).isEqualTo(6);
+    }
+
     @DisplayName("로또 티켓은 번호 6개 보다 적게 지정 하면 exception")
     @Test
     public void validateSize_fail_lessThan6() throws Exception {
