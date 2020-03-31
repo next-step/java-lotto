@@ -1,6 +1,7 @@
 package lotto.Domain;
 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,5 +54,9 @@ public class Lottos {
             return 0;
         }
         return LottoGrade.findGrade(entry.getKey()).getPrize() * entry.getValue();
+    }
+
+    public List<Lotto> toList() {
+        return Collections.unmodifiableList(lottoList);
     }
 }
