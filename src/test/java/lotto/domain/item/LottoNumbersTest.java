@@ -70,8 +70,9 @@ class LottoNumbersTest {
                         new LottoNumber(5),
                         new LottoNumber(6)));
 
+        //then
         assertThatThrownBy(
-                () -> new Lotto(duplicateNumber)
+                () -> new LottoNumbers(duplicateNumber)
         ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 중복될 수 없습니다.");
     }
 }
