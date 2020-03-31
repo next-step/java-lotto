@@ -7,7 +7,6 @@ import lotto.domain.WinningType;
 import lotto.dto.LottoRequestDto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,14 +41,14 @@ public class LottoShop {
 
     public List<Lotto> buyManual(List<String> lottoStrings) {
         return lottoStrings.stream()
-                .map(Lotto::new)
+                .map(Lotto::manualLotto)
                 .collect(Collectors.toList());
     }
 
     private List<Lotto> toLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.autoLotto());
         }
         return lottos;
     }

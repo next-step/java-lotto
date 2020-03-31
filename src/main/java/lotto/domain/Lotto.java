@@ -11,12 +11,12 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this(generateAutoLottoSets());
+    private Lotto() {
+        this(generateAutoLottoSet());
     }
 
-    public Lotto(String lottoString) {
-        this(generateManualLottoSets(lottoString));
+    private Lotto(String lottoString) {
+        this(generateManualLottoSet(lottoString));
     }
 
     private Lotto(Set<LottoNumber> lottos) {
@@ -24,7 +24,15 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableSet(lottos);
     }
 
-    private static Set<LottoNumber> generateAutoLottoSets() {
+    public static Lotto autoLotto() {
+        return new Lotto();
+    }
+
+    public static Lotto manualLotto(String lottoString) {
+        return new Lotto(lottoString);
+    }
+
+    private static Set<LottoNumber> generateAutoLottoSet() {
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
 
         while (lottoNumberSet.size() != LOTTO_SIZE) {
@@ -33,7 +41,7 @@ public class Lotto {
         return lottoNumberSet;
     }
 
-    private static Set<LottoNumber> generateManualLottoSets(String lottoString) {
+    private static Set<LottoNumber> generateManualLottoSet(String lottoString) {
         String[] lottoStrings = lottoString.split(DELIMITER);
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
 

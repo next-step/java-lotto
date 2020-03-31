@@ -6,7 +6,7 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(String lottoNumber, int bonusNumber) {
-        this.winningLotto = new Lotto(lottoNumber);
+        this.winningLotto = Lotto.manualLotto(lottoNumber);
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
