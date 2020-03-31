@@ -20,7 +20,7 @@ public class Lotteries {
         return lottoNumbers;
     }
 
-    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers, final BonusBall bonusBall) {
+    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers, final LottoNumber bonusBall) {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumbers purchase : lottoNumbers) {
             int matchCount = purchase.analyzeMatchCount(winningLotteNumbers);

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.BonusBall;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Price;
 
@@ -33,9 +33,9 @@ public class InputView {
         return new LottoNumbers(scanner.nextLine());
     }
 
-    public BonusBall inputBonusBall() {
+    public LottoNumber inputBonusBall() {
         System.out.println();
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
-        return new BonusBall(scanner.nextLine());
+        return LottoNumber.valueOf(Integer.valueOf(scanner.nextLine()));
     }
 }

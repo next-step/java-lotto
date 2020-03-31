@@ -15,7 +15,7 @@ public class Application {
         OutputView.printLotteries(lotteries.getLottoNumbers());
 
         LottoNumbers winningLotteNumbers = inputView.inputLastWeekendWinningLottery();
-        BonusBall bonusBall = inputView.inputBonusBall();
+        LottoNumber bonusBall = inputView.inputBonusBall();
 
         LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers, bonusBall);
 
