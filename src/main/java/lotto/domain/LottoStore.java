@@ -9,9 +9,9 @@ public class LottoStore {
 
     private LottoStore() {}
 
-    public static Lotteries sell(final Price price) {
+    public static Lotteries sell(final Price price, final LottoPublisher lottoPublisher) {
         checkAvailablePriceBuyLotto(price);
-        return new Lotteries(publishLottery(price));
+        return publishLottery(price, checkAvailablePublisher(lottoPublisher));
     }
 
     private static void checkAvailablePriceBuyLotto(final Price price) {
@@ -20,11 +20,14 @@ public class LottoStore {
         }
     }
 
-    private static List<LottoNumbers> publishLottery(final Price price) {
-        List<LottoNumbers> lotteries = new ArrayList<>();
-        for (int i = 0; i < price.lotteryCount(); i++) {
-            lotteries.add(LottoNumberGenerator.generate());
+    private static LottoPublisher checkAvailablePublisher(final LottoPublisher lottoPublisher) {
+        if (lottoPublisher == null) {
+            return new LottoPublisher();
         }
-        return lotteries;
+        return lottoPublisher;
+    }
+
+    private static Lotteries publishLottery(final Price price, final LottoPublisher lottoPublisher) {
+        return lottoPublisher.publish(price.lotteryCount());
     }
 }
