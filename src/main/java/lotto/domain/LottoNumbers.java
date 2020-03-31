@@ -20,17 +20,6 @@ public class LottoNumbers {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int analyzeMatchCount(final LottoNumbers winningLotteNumbers) {
-        List<LottoNumber> source = this.deepCopy();
-        List<LottoNumber> win = winningLotteNumbers.deepCopy();
-        source.removeAll(win);
-        return LOTTO_NUMBER_MAX_SIZE - source.size();
-    }
-
-    boolean hasBonusBall(final LottoNumber bonusBall) {
-        return lottoNumbers.contains(bonusBall);
-    }
-
     private static List<LottoNumber> newInstanceFromInput(final String input) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String letter : input.split(LOTTO_NUMBER_DELIMITER)) {
@@ -52,6 +41,23 @@ public class LottoNumbers {
             clone.add(LottoNumber.clone(lottoNumber));
         }
         return clone;
+    }
+
+    LottoRank analyzeRank(final LottoNumbers winningLotteNumbers, final LottoNumber bonusBall) {
+        int matchCount = analyzeMatchCount(winningLotteNumbers);
+        boolean hasBonusBall = this.hasBonusBall(bonusBall);
+        return LottoRank.findRank(matchCount, hasBonusBall);
+    }
+
+    private int analyzeMatchCount(final LottoNumbers winningLotteNumbers) {
+        List<LottoNumber> source = this.deepCopy();
+        List<LottoNumber> win = winningLotteNumbers.deepCopy();
+        source.removeAll(win);
+        return LOTTO_NUMBER_MAX_SIZE - source.size();
+    }
+
+    boolean hasBonusBall(final LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
     }
 
     @Override
