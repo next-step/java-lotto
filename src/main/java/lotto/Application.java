@@ -12,17 +12,17 @@ public class Application {
 
         Price inputPrice = inputView.inputPrice();
         int manualCount = inputView.inputManualCount();
+        List<LottoNumbers> inputManualLottoNumbers = inputView.inputManualLottoNumbers(manualCount);
 
-        List<LottoNumbers> manualLotteries = inputView.inputManualLottoNumbers(manualCount);
-        Lotteries autoLotteries = LottoStore.sell(inputPrice, new LottoAutoPublisher(inputPrice.lotteryCount()));
+        Lotteries lotteries = LottoStore.sell(inputPrice, inputManualLottoNumbers);
 
-        OutputView.printLotteryCount(autoLotteries.count());
-        OutputView.printLotteries(autoLotteries.getLottoNumbers());
+        OutputView.printLotteryCount(manualCount, lotteries.count());
+        OutputView.printLotteries(lotteries.getLottoNumbers());
 
         LottoNumbers winningLotteNumbers = inputView.inputLastWeekendWinningLottery();
         LottoNumber bonusBall = inputView.inputBonusBall();
 
-        LottoResult lottoResult = autoLotteries.analyzeWin(winningLotteNumbers, bonusBall);
+        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers, bonusBall);
 
         OutputView.printLottoResult(lottoResult.getChart());
         OutputView.printRatio(lottoResult.ratio(inputPrice));
