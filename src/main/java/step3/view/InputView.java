@@ -1,10 +1,5 @@
 package step3.view;
 
-import step3.domain.BonusBall;
-import step3.domain.WinLotto;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {

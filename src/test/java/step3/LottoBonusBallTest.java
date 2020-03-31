@@ -49,7 +49,7 @@ public class LottoBonusBallTest {
     @Test
     @DisplayName("당첨정보결과테스트")
     public void matchTest() {
-        WinLotto winLotto = new WinLotto("1,2,3,4,5,6");
+        WinLotto winLotto = new WinLotto("1,2,3,4,5,6",7);
         List<Integer> buyLottoList = Arrays.asList(1,2,3,4,5,7);
         assertThat(winLotto.match(buyLottoList)).isEqualTo(5);
     }
@@ -57,12 +57,18 @@ public class LottoBonusBallTest {
     @Test
     @DisplayName("5등당첨정보테스트")
     public void resultTest() {
-        assertThat(WinInformation.matchWinInformation(3,0).getPrice()).isEqualTo(BigDecimal.valueOf(5000));
+        assertThat(WinInformation.matchWinInformation(3,false).getPrice()).isEqualTo(BigDecimal.valueOf(5000));
     }
 
     @Test
     @DisplayName("2등당첨정보테스트")
     public void resultBonusBallTest() {
-        assertThat(WinInformation.matchWinInformation(5,1).getPrice()).isEqualTo(BigDecimal.valueOf(30000000));
+        assertThat(WinInformation.matchWinInformation(5,true).getPrice()).isEqualTo(BigDecimal.valueOf(30000000));
+    }
+
+    @Test
+    @DisplayName("전체건수 테스트")
+    public void resultAllCountTest() {
+        assertThat(WinInformation.matchWinInformationAllCount()).isEqualTo(5);
     }
 }

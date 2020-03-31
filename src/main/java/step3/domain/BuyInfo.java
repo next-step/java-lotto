@@ -1,6 +1,7 @@
 package step3.domain;
 
 public class BuyInfo {
+    private static final int ZERO = 0;
     private int totalPrice;
 
     public int getTotalPrice() {
@@ -14,7 +15,7 @@ public class BuyInfo {
     private int totalCount;
 
     public BuyInfo(int totalPrice, int oneGamePrice) {
-        if (totalPrice <= 0 ){
+        if (totalPrice <= ZERO ){
             throw new IllegalArgumentException("로또 구매가격은 0보다 커야합니다.");
         }
         if (totalPrice < oneGamePrice){

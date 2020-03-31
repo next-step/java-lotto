@@ -7,11 +7,10 @@ public class ResultInfo {
     private BigDecimal investPrice;
     private BigDecimal profitPrice = BigDecimal.ZERO;
     private BigDecimal rate = BigDecimal.ZERO;
-    private List<Integer> matchCountList;
+    private List<WinInformation> matchCountList;
     private StringBuffer resultSentence;
 
-    public ResultInfo(BigDecimal investPrice, List<Integer> matchCountList) {
-        this.investPrice = investPrice;
+    public ResultInfo(List<WinInformation> matchCountList) {
         this.matchCountList = matchCountList;
     }
 
@@ -44,14 +43,8 @@ public class ResultInfo {
         return profitPrice;
     }
 
-    public List<Integer> getMatchCountList() {
+    public List<WinInformation> getMatchCountList() {
         return matchCountList;
-    }
-
-    public int match(int number) {
-        return (int) matchCountList.stream()
-        .filter(d -> number == d)
-        .count();
     }
 
     public void addProfit(BigDecimal multiply) {

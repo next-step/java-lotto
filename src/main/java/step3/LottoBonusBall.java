@@ -4,8 +4,6 @@ import step3.domain.*;
 import step3.view.InputView;
 import step3.view.OutputView;
 
-import java.util.List;
-
 public class LottoBonusBall {
     public static void main(String[] args) {
         InputView inputView = new InputView();
@@ -18,9 +16,15 @@ public class LottoBonusBall {
         outputView.printBuyList(buyLotto);
 
         String winLottoInputValue = inputView.askWinnerLottoNumber();
-        WinLotto winLotto = new WinLotto(winLottoInputValue);
 
         int bonusBallInputValue = inputView.askBonusNumber();
-        BonusBall bonusBall = new BonusBall(bonusBallInputValue);
+        WinLotto winLotto = new WinLotto(winLottoInputValue, bonusBallInputValue);
+
+        RankList rankList = controlLottoGame.setRanktList(winLotto, buyLotto);
+
+        ResultInfo resultInfo = controlLottoGame.setResult(rankList);
+
+
+        System.out.println(rankList);
     }
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 
 public class BuyLotto {
+    private Set<List<Integer>> buyLottoList;
+
     public BuyLotto(Set<List<Integer>> buyLottoList) {
         this.buyLottoList = buyLottoList;
     }
@@ -12,5 +14,4 @@ public class BuyLotto {
         return buyLottoList;
     }
 
-    private Set<List<Integer>> buyLottoList;
 }

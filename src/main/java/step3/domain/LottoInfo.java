@@ -1,6 +1,7 @@
 package step3.domain;
 
 public class LottoInfo {
+    private static final int ZERO = 0;
     private int lottoPrice = 0;
 
     public LottoInfo(int lottoPrice) {
@@ -9,7 +10,7 @@ public class LottoInfo {
     }
 
     private void validateLottoInfo(int lottoPrice) {
-        if (lottoPrice <= 0 ){
+        if (lottoPrice <= ZERO ){
             throw new IllegalArgumentException("로또 판매가격은 0보다 커야합니다.");
         }
     }
