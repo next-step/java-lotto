@@ -87,10 +87,17 @@ public class LottoGameTest {
     @DisplayName("당첨금 총액과 구매 금액을 이용하여 수익률을 계산한다")
     public void calculateRateOfRevenueByTotalWinningsAndPrice() {
         int price = 14000;
-        int totalWinnings = lottoGame.getTotalWinnings(Arrays.asList(FIRST, SECOND));
+        int totalWinnings = lottoGame.getTotalWinnings(Arrays.asList(FOURTH));
 
         double result = lottoGame.getRateOfRevenue(price, totalWinnings);
 
-        assertThat(result).isEqualTo(0.35);
+        assertThat(result).isEqualTo((double) totalWinnings / price);
+
+        price = 5000;
+        totalWinnings = lottoGame.getTotalWinnings(Arrays.asList(FOURTH));
+
+        result = lottoGame.getRateOfRevenue(price, totalWinnings);
+
+        assertThat(result).isEqualTo((double) totalWinnings / price);
     }
 }

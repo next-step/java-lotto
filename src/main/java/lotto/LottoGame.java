@@ -30,6 +30,6 @@ public class LottoGame {
     }
 
     public double getRateOfRevenue(int price, int totalWinnings) {
-        return 0.35;
+        return (double) totalWinnings / price;
     }
 }
