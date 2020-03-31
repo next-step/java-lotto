@@ -102,4 +102,25 @@ class LottoNumbersTest {
 
         assertThat(integers).containsExactly(1, 2, 3, 4, 5, 6);
     }
+
+    @DisplayName("문자 배열로 로또 번호들을 생성할 수 있다")
+    @Test
+    public void stringLottoNumbersTest() {
+        String[] stringNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
+
+        LottoNumbers lottoNumbers = new LottoNumbers(stringNumbers);
+        LottoNumbers anotherNumber = new LottoNumbers(stringNumbers);
+
+        assertThat(lottoNumbers).isEqualTo(anotherNumber);
+    }
+
+    @DisplayName("문자 배열로 로또 번호들을 생성할 수 있다")
+    @Test
+    public void stringExceptionTest() {
+        String[] stringNumbers = new String[]{"1", "2", "3", "4", "5"};
+
+        assertThatThrownBy(() -> new LottoNumbers(stringNumbers))
+                .isInstanceOf(LottoNumbersSizeException.class)
+                .hasMessageContaining("로또 번호는 6개 이어야만 합니다.");
+    }
 }
