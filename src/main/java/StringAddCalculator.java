@@ -27,7 +27,7 @@ public class StringAddCalculator {
 
     private static int toPositive(String value) {
         int number = Integer.parseInt(value);
-        if (number < 0 ) {
+        if (number < 0) {
             throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
         }
 
