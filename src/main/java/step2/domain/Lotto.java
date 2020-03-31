@@ -36,22 +36,6 @@ public class Lotto {
         }
     }
 
-    public LottoTier getLottoTier(WinningLotto winningLotto) {
-        return LottoTier.getTier(getMatchedNumberCount(winningLotto.getLotto()), isMatchedBonusNumber(winningLotto.getBonusNumber()));
-    }
-
-    public long getMatchedNumberCount(Lotto winningLotto) {
-        return winningLotto
-                .getValue()
-                .stream()
-                .filter(winningLottoNumber -> lotto.contains(winningLottoNumber))
-                .count();
-    }
-
-    public boolean isMatchedBonusNumber(LottoNumber bonusNumber) {
-        return lotto.contains(bonusNumber);
-    }
-
     public Set<LottoNumber> getValue() {
         return lotto;
     }

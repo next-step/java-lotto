@@ -19,11 +19,19 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getLotto() {
-        return lotto;
+    public LottoTier getLottoTier(Lotto targetLotto) {
+        return LottoTier.getTier(getMatchedNumberCount(lotto), isMatchedBonusNumber(targetLotto));
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public long getMatchedNumberCount(Lotto targetLotto) {
+        return lotto
+                .getValue()
+                .stream()
+                .filter(winningLottoNumber -> targetLotto.getValue().contains(winningLottoNumber))
+                .count();
+    }
+
+    public boolean isMatchedBonusNumber(Lotto targetLotto) {
+        return targetLotto.getValue().contains(bonusNumber);
     }
 }
