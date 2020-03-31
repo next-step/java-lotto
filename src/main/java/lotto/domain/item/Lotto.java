@@ -1,25 +1,27 @@
 package lotto.domain.item;
 
-import lotto.exception.ValidLottoException;
-
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 public class Lotto implements Item {
 
-    protected final List<LottoNumber> numbers;
+    protected final LottoNumbers numbers;
 
-    public Lotto(List<LottoNumber> numbers) {
+    public Lotto(final LottoNumbers numbers) {
         if (numbers == null) {
-            numbers = new ArrayList<>();
+            throw new IllegalArgumentException("올바르지 않은 값입니다 : null");
         }
-        Collections.sort(numbers);
-
-        List<LottoNumber> result = new ArrayList<>(numbers);
-        this.numbers = Collections.unmodifiableList(result);
+        this.numbers = new LottoNumbers(numbers);
     }
 
-    @Override
-    public List<LottoNumber> getNumbers() {
+    public Lotto(final List<LottoNumber> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException("올바르지 않은 값입니다 : null");
+        }
+        this.numbers = new LottoNumbers(numbers);
+    }
+
+    public LottoNumbers getNumbers() {
         return numbers;
     }
 
