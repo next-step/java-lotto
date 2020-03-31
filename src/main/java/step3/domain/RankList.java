@@ -18,11 +18,4 @@ public class RankList {
                 .filter(d -> number == d)
                 .count();
     }
-
-    @Override
-    public String toString() {
-        return "RankList{" +
-                "matchtCountList=" + matchtCountList +
-                '}';
-    }
 }

@@ -15,9 +15,7 @@ public class OutputView {
         }
     }
 
-    public void printResult(ResultInfo resultInfo) {
-        System.out.println("당첨통계");
-        System.out.println("--------");
-        System.out.println(resultInfo.getResultSentence());
+    public void printResult(StringBuffer stringBuffer) {
+        System.out.println(stringBuffer);
     }
 }

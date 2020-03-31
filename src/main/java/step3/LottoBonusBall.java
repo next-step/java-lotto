@@ -22,9 +22,9 @@ public class LottoBonusBall {
 
         RankList rankList = controlLottoGame.setRanktList(winLotto, buyLotto);
 
-        ResultInfo resultInfo = controlLottoGame.setResult(rankList);
+        ResultInfo resultInfo = new ResultInfo(buyLottoTotalPrice);
+        StringBuffer stringBuffer = controlLottoGame.setResult(resultInfo, rankList);
 
-
-        System.out.println(rankList);
+        outputView.printResult(stringBuffer);
     }
 }

@@ -41,16 +41,19 @@ public class ControlLottoGame {
         return WinInformation.matchWinInformation(matchCount,bonusBallMatch);
     }
 
-    public ResultInfo setResult(RankList rankList) {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (int i = 1; i <= 6; i++) {
-
+    public StringBuffer setResult(ResultInfo resultInfo, RankList rankList) {
+        WinInformation winInformation;
+        StringBuffer stringBuffer = new StringBuffer("당첨통계 \n ================\n");
+        for (int i = 1; i <= WinInformation.matchWinInformationAllCount(); i++) {
+            winInformation = WinInformation.matchWinInformationByIndex(i);
+            BigDecimal price = winInformation.getPrice();
+            String title = winInformation.getTitle();
+            int count = winInformation.getCount();
+            int matchCount = rankList.match(winInformation);
+            stringBuffer.append(count + title + "(" + price + "원) - " + matchCount + "개" + '\n');
+            resultInfo.addProfit(price.multiply(BigDecimal.valueOf(matchCount)));
         }
-
-        stringBuffer.append(WinInformation.EQUALS_COUNT_3.getCount()
-                + WinInformation.EQUALS_COUNT_3.getTitle()
-                + "(" + WinInformation.EQUALS_COUNT_3.getPrice() + "원) - "
-                + rankList.match(WinInformation.EQUALS_COUNT_3) + "개");
-        return null;
+        stringBuffer.append("총 수익률은 " + resultInfo.getRate() + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        return stringBuffer;
     }
 }

@@ -1,17 +1,15 @@
 package step3.domain;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class ResultInfo {
     private BigDecimal investPrice;
     private BigDecimal profitPrice = BigDecimal.ZERO;
     private BigDecimal rate = BigDecimal.ZERO;
-    private List<WinInformation> matchCountList;
     private StringBuffer resultSentence;
 
-    public ResultInfo(List<WinInformation> matchCountList) {
-        this.matchCountList = matchCountList;
+    public ResultInfo(int buyLottoTotalPrice) {
+        this.investPrice = BigDecimal.valueOf(buyLottoTotalPrice);
     }
 
     public BigDecimal getRate() {
@@ -41,10 +39,6 @@ public class ResultInfo {
 
     public BigDecimal getProfitPrice() {
         return profitPrice;
-    }
-
-    public List<WinInformation> getMatchCountList() {
-        return matchCountList;
     }
 
     public void addProfit(BigDecimal multiply) {
