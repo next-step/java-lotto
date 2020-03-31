@@ -2,10 +2,7 @@ package lotto.domain.item;
 
 import lotto.exception.ValidLottoException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
 
@@ -16,12 +13,20 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> numbers) {
         validateSize(numbers);
+        validateDuplicate(numbers);
         this.numbers = Collections.unmodifiableList(new ArrayList<>(numbers));
     }
 
     private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_VALID_ONLY_6);
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> numbers) {
+        Set<LottoNumber> duplicate = new HashSet<>(numbers);
+        if (numbers.size() != duplicate.size()) {
+            throw new ValidLottoException("번호는 중복될 수 없습니다.");
         }
     }
 
