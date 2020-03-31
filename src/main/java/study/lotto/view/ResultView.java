@@ -12,6 +12,8 @@ public class ResultView {
     private static String RESULT_MESSAGE = "당첨 통계";
     private static String SEPARATOR = "---------";
     private static String MATCH_MESSAGE = "%d개 일치 (%d원)- %d개";
+    private static String MATCH_MESSAGE_WITH_BONUS =
+            "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
     private static String RATE_OF_RETURN_MESSAGE = "총 수익률은 %f입니다.";
     private static String RATE_OF_RETURN_ADDITIONAL_MESSAGE =
             "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -33,7 +35,7 @@ public class ResultView {
 
     private static void displayLottoTicket(LottoTicket lottoTicket) {
         System.out.print("[");
-        String numbers = lottoTicket.getLottoNumber().stream()
+        String numbers = lottoTicket.getLottoNumbers().stream()
                 .map(number -> Integer.toString(number.getNumber()))
                 .collect(Collectors.joining(", "));
         System.out.print(numbers);
@@ -46,10 +48,21 @@ public class ResultView {
             LottoRank lottoRank = lottoRanks[i];
             List<LottoTicket> winningTickets =
                     lottoResult.getWinningTickets(lottoRank);
-            System.out.println(String.format(MATCH_MESSAGE,
-                    lottoRank.getMatchCount(), lottoRank.getPrize(),
-                    winningTickets.size()));
+            displayWinning(lottoRank, winningTickets.size());
         }
+    }
+
+    private static void displayWinning(LottoRank lottoRank, int count) {
+        if (lottoRank.equals(LottoRank.MISS)) {
+            return;
+        }
+        if (lottoRank.isMatchBonus()) {
+            System.out.println(String.format(MATCH_MESSAGE_WITH_BONUS,
+                    lottoRank.getMatchCount(), lottoRank.getPrize(), count));
+            return;
+        }
+        System.out.println(String.format(MATCH_MESSAGE,
+                lottoRank.getMatchCount(), lottoRank.getPrize(), count));
     }
 
     private static void displayRateOfReturn(double rateOfReturn) {

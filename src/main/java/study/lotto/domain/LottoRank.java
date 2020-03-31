@@ -5,33 +5,40 @@ import java.util.Map;
 import java.util.Objects;
 
 public enum LottoRank {
-    FIRST(2000000000, 6),
-    SECOND(1500000, 5),
-    THIRD(50000, 4),
-    FOURTH(5000, 3);
+    FIRST(2_000_000_000, 6, false),
+    SECOND(30_000_000, 5, true),
+    THIRD(1_500_000, 5, false),
+    FOURTH(50_000, 4, false),
+    FIFTH(5_000, 3, false),
+    MISS(0, 0, false);
 
-    private static Map<Integer, LottoRank> map = new HashMap<>();
+    private static Map<ValueKey, LottoRank> valueToLottoRank =
+            new HashMap<>();
 
     private int prize;
     private int matchCount;
+    private boolean matchBonus;
 
-    LottoRank(int prize, int matchCount) {
+    LottoRank(int prize, int matchCount, boolean matchBonus) {
         this.prize = prize;
         this.matchCount = matchCount;
+        this.matchBonus = matchBonus;
     }
 
     static {
         for (LottoRank lottoRank : LottoRank.values()) {
-            map.put(lottoRank.matchCount, lottoRank);
+            ValueKey valueKey = new ValueKey(lottoRank.matchCount,
+                    lottoRank.matchBonus);
+            valueToLottoRank.put(valueKey, lottoRank);
         }
     }
 
-    public static LottoRank matchCountOf(Integer matchCount) {
-        LottoRank lottoRank = map.get(matchCount);
+    public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
+        LottoRank lottoRank = valueToLottoRank.get(new ValueKey(matchCount,
+                matchBonus));
         if (Objects.isNull(lottoRank)) {
-            return null;
+            return MISS;
         }
-
         return lottoRank;
     }
 
@@ -41,5 +48,31 @@ public enum LottoRank {
 
     public int getMatchCount() {
         return matchCount;
+    }
+
+    public boolean isMatchBonus() {
+        return matchBonus;
+    }
+
+    private static class ValueKey {
+        private Integer matchCount;
+        private boolean matchBonus;
+
+        private ValueKey(Integer matchCount, boolean matchBonus) {
+            this.matchCount = matchCount;
+            this.matchBonus = matchBonus;
+        }
+
+        @Override public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            ValueKey valueKey = (ValueKey) o;
+            return matchBonus == valueKey.matchBonus &&
+                    Objects.equals(matchCount, valueKey.matchCount);
+        }
+
+        @Override public int hashCode() {
+            return Objects.hash(matchCount, matchBonus);
+        }
     }
 }

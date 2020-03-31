@@ -7,21 +7,21 @@ import java.util.stream.Collectors;
 public class Lotto {
     private List<LottoTicket> lottoTickets;
     private LottoTicketIssuer lottoTicketIssuer;
-    private int investmentAmount;
+    private Amount investmentAmount;
 
-    public Lotto(int amount, LottoTicketIssuer lottoTicketIssuer) {
+    public Lotto(Amount amount, LottoTicketIssuer lottoTicketIssuer) {
         this.lottoTicketIssuer = lottoTicketIssuer;
         generateLottoTicket(amount);
     }
 
-    private void generateLottoTicket(int amount) {
-        int quantity = amount / LottoTicket.PRICE;
+    public Lotto(int amount, LottoTicketIssuer lottoTicketIssuer) {
+        this(new Amount(amount), lottoTicketIssuer);
+    }
 
-        if (quantity < 0) {
-            quantity = 0;
-        }
+    private void generateLottoTicket(Amount amount) {
+        int quantity = amount.getAmount() / LottoTicket.PRICE;
 
-        investmentAmount = quantity * LottoTicket.PRICE;
+        investmentAmount = new Amount(quantity * LottoTicket.PRICE);
         lottoTickets = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottoTickets.add(lottoTicketIssuer.issue());
@@ -34,15 +34,9 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoResult setWinningNumber(LottoWinningNumber winningNumber) {
-        LottoResult lottoResult = new LottoResult(investmentAmount);
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            LottoRank lottoRank = LottoRule.getWinningRank(lottoTicket,
-                    winningNumber);
-            lottoResult.addWinningTicket(lottoRank, lottoTicket);
-        }
-
-        return lottoResult;
+    public LottoResult result(LottoWinningNumber lottoWinningNumber) {
+        return new LottoResult(lottoTickets,
+                lottoWinningNumber,
+                investmentAmount);
     }
 }

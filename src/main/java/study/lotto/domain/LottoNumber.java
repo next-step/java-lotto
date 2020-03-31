@@ -1,8 +1,12 @@
 package study.lotto.domain;
 
+import study.lotto.domain.exception.IllegalNumberRangeArgumentException;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final String NUMBER_RANGE_ERROR_MESSAGE =
+            "숫자는 %d이상 %d이하여야 합니다.";
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
@@ -10,8 +14,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int number) {
         if ((number < MIN_NUMBER) || (number > MAX_NUMBER)) {
-            throw new IllegalArgumentException(
-                    "숫자는 " + MIN_NUMBER + "이상 " + MAX_NUMBER + "이하여야 합니다.");
+            throw new IllegalNumberRangeArgumentException(
+                    String.format(NUMBER_RANGE_ERROR_MESSAGE, MIN_NUMBER,
+                            MAX_NUMBER));
         }
 
         this.number = number;

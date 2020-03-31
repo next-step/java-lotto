@@ -5,23 +5,34 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<LottoRank, List<LottoTicket>> winningTickets;
-    private int investmentAmount;
+    private Amount investmentAmount;
 
-    public LottoResult(int investmentAmount) {
+    public LottoResult(List<LottoTicket> lottoTickets,
+                       LottoWinningNumber lottoWinningNumber,
+                       Amount investmentAmount) {
         this.investmentAmount = investmentAmount;
-        setWinners();
+        setWinningTickets(lottoTickets, lottoWinningNumber);
     }
 
-    private void setWinners() {
-        this.winningTickets = new HashMap<>();
-        for(LottoRank lottoRank: LottoRank.values()) {
-            this.winningTickets.put(lottoRank, new ArrayList<>());
+    public LottoResult(List<LottoTicket> lottoTickets,
+                       LottoWinningNumber lottoWinningNumber,
+                       int investmentAmount) {
+        this(lottoTickets, lottoWinningNumber, new Amount(investmentAmount));
+    }
+
+    private void setWinningTickets(List<LottoTicket> lottoTickets,
+                                   LottoWinningNumber lottoWinningNumber) {
+        initWinningTickets();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoRank lottoRank = lottoWinningNumber.rank(lottoTicket);
+            this.winningTickets.get(lottoRank).add(lottoTicket);
         }
     }
 
-    public void addWinningTicket(LottoRank lottoRank, LottoTicket lottoTicket) {
-        if (lottoRank != null) {
-            this.winningTickets.get(lottoRank).add(lottoTicket);
+    private void initWinningTickets() {
+        this.winningTickets = new HashMap<>();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            this.winningTickets.put(lottoRank, new ArrayList<>());
         }
     }
 
@@ -34,15 +45,17 @@ public class LottoResult {
     public double getRateOfReturn() {
         int prizeTotal = getPrizeTotal();
 
-        return (double) prizeTotal / investmentAmount;
+        return (double) prizeTotal / investmentAmount.getAmount();
     }
 
     private int getPrizeTotal() {
         int prizeTotal = 0;
+
         for (LottoRank lottoRank : LottoRank.values()) {
             prizeTotal += this.winningTickets.get(lottoRank).size() *
                     lottoRank.getPrize();
         }
+
         return prizeTotal;
     }
 }
