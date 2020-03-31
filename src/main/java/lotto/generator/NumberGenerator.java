@@ -1,6 +1,6 @@
 package lotto.generator;
 
-public interface RandomNumberGenerator {
+public interface NumberGenerator {
 
     int getRandomNumber();
 }

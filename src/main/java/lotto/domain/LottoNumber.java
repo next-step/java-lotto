@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.generator.LottoGenerator;
-import lotto.generator.RandomNumberGenerator;
+import lotto.generator.LottoNumberGenerator;
+import lotto.generator.NumberGenerator;
 
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
         return new LottoNumber();
     }
 
-    public static LottoNumber newRandomNumber(RandomNumberGenerator lottoNumberGenerator) {
+    public static LottoNumber newRandomNumber(NumberGenerator lottoNumberGenerator) {
         return new LottoNumber(lottoNumberGenerator);
     }
 
@@ -28,7 +28,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
     }
 
     private LottoNumber() {
-        this.lottoNumber = new LottoGenerator().getRandomNumber();
+        this.lottoNumber = new LottoNumberGenerator().getRandomNumber();
     }
 
     private LottoNumber(int number) {
@@ -41,7 +41,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
         validateNumberRange(this.lottoNumber);
     }
 
-    private LottoNumber(RandomNumberGenerator lottoNumberGenerator) {
+    private LottoNumber(NumberGenerator lottoNumberGenerator) {
         this.lottoNumber = lottoNumberGenerator.getRandomNumber();
     }
 

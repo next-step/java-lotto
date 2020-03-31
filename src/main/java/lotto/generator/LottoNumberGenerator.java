@@ -2,7 +2,7 @@ package lotto.generator;
 
 import java.util.Random;
 
-public class LottoGenerator implements RandomNumberGenerator {
+public class LottoNumberGenerator implements NumberGenerator {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
 
