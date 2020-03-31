@@ -32,44 +32,44 @@ class LottoTest {
         assertThat(ticket1.equals(ticket2)).isTrue();
     }
 
-    @DisplayName("null 매개변수가 넘어올 경우")
-    @Test
-    public void test_fail_inputNullParam() throws Exception {
-        //given
-        ArrayList<LottoNumber> emptyNumber = new ArrayList<>();
-        assertThatThrownBy(
-                () -> new Lotto(null)
-        ).isInstanceOf(ValidLottoException.class);
-    }
+//    @DisplayName("null 매개변수가 넘어올 경우")
+//    @Test
+//    public void test_fail_inputNullParam() throws Exception {
+//        //given
+//        ArrayList<LottoNumber> emptyNumber = new ArrayList<>();
+//        assertThatThrownBy(
+//                () -> new Lotto(null)
+//        ).isInstanceOf(ValidLottoException.class);
+//    }
+//
+//    @DisplayName("로또는 불변 VO 객체여야 한다")
+//    @Test
+//    public void constructor_fail_modify() throws Exception {
+//        //given
+//        Lotto ticket = new Lotto(numbers);
+//
+//        //when
+//        List<LottoNumber> numbers = ticket.getNumbers();
+//
+//        //then
+//        assertThatThrownBy(
+//                () -> numbers.set(0, new LottoNumber(11))
+//        ).isInstanceOf(UnsupportedOperationException.class);
+//    }
 
-    @DisplayName("로또는 불변 VO 객체여야 한다")
-    @Test
-    public void constructor_fail_modify() throws Exception {
-        //given
-        Lotto ticket = new Lotto(numbers);
-
-        //when
-        List<LottoNumber> numbers = ticket.getNumbers();
-
-        //then
-        assertThatThrownBy(
-                () -> numbers.set(0, new LottoNumber(11))
-        ).isInstanceOf(UnsupportedOperationException.class);
-    }
-
-    @DisplayName("로또번호는 외부의 변화에 영향이 없어야 한다.")
-    @Test
-    public void constructor_fail_modifyFromOutside() throws Exception {
-        //given
-        Lotto ticket = new Lotto(numbers);
-
-        //when
-        numbers.set(0, new LottoNumber(10));
-
-        //then
-        assertAll(
-                () -> assertThat(ticket.getNumbers().get(0))
-                        .isNotEqualTo(numbers.get(0))
-        );
-    }
+//    @DisplayName("로또번호는 외부의 변화에 영향이 없어야 한다.")
+//    @Test
+//    public void constructor_fail_modifyFromOutside() throws Exception {
+//        //given
+//        Lotto ticket = new Lotto(numbers);
+//
+//        //when
+//        numbers.set(0, new LottoNumber(10));
+//
+//        //then
+//        assertAll(
+//                () -> assertThat(ticket.getNumbers().get(0))
+//                        .isNotEqualTo(numbers.get(0))
+//        );
+//    }
 }
