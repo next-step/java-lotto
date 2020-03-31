@@ -25,8 +25,8 @@ public class Price {
         return price >= LOTTO_PRICE;
     }
 
-    public long lotteryCount() {
-        return price / LOTTO_PRICE;
+    public int lotteryCount() {
+        return (int) price / LOTTO_PRICE;
     }
 
     public Price calculateWinPrice(final int matchCount) {
