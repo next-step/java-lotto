@@ -1,6 +1,7 @@
 package lotto.domain.item;
 
 import enums.LottoPrize;
+import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,16 +21,16 @@ public class LottoTickets implements Cloneable {
                 .count();
     }
 
-//    public Money getAllEarningPrize(Item winTicket) {
-//        Money earning = new Money();
-//
-//        return earning
-//                .plus(LottoPrize.FIRST.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIRST, winTicket)))
-//                .plus(LottoPrize.SECOND.getWinningPrize(findWinLottoCountFromRank(LottoPrize.SECOND, winTicket)))
-//                .plus(LottoPrize.THIRD.getWinningPrize(findWinLottoCountFromRank(LottoPrize.THIRD, winTicket)))
-//                .plus(LottoPrize.FOURTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket)))
-//                .plus(LottoPrize.FIFTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket)));
-//    }
+    public Money getAllEarningPrize(WinLottoTicket winTicket) {
+        Money earning = new Money();
+
+        return earning
+                .plus(LottoPrize.FIRST.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIRST, winTicket)))
+                .plus(LottoPrize.SECOND.getWinningPrize(findWinLottoCountFromRank(LottoPrize.SECOND, winTicket)))
+                .plus(LottoPrize.THIRD.getWinningPrize(findWinLottoCountFromRank(LottoPrize.THIRD, winTicket)))
+                .plus(LottoPrize.FOURTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket)))
+                .plus(LottoPrize.FIFTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket)));
+    }
 
 //    public List<LottoTicket> getTickets() {
 //        return tickets;
