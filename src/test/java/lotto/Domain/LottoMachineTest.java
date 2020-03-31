@@ -26,19 +26,6 @@ public class LottoMachineTest {
         assertThat(lottoCount).isEqualTo(Integer.parseInt(expected));
     }
 
-    @Test
-    void lottoIssuanceTest(String input) {
-        ArrayList<Integer> targetNumbers = new ArrayList<>();
-        for (int i = 0; i <= 45; i++) {
-            targetNumbers.add(i);
-        }
-
-        LottoIssuance issuance = LottoIssuance.AUTO;
-        issuance.chooseNumber();
-
-        assertThat(issuance.targetNumber()).isEqualTo(targetNumbers);
-    }
-
     @ParameterizedTest
     @ValueSource(strings = {"1 2 13 4 5 6", "13 24 1 5 42 7", "1 2 13 35 24 42"})
     void makeLottoLottoTest(String input) {
