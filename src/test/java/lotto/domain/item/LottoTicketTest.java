@@ -1,5 +1,6 @@
 package lotto.domain.item;
 
+import enums.LottoPrize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
 
@@ -73,22 +75,22 @@ public class LottoTicketTest {
         assertThat(match).isEqualTo(expect);
     }
 
-//    @DisplayName("해당 로또가 몇등인지 판단한다")
-//    @Test
-//    public void getRank_success() throws Exception {
-//        //given
-//        final LottoTicket lotto = new LottoTicket(numbers);
-//        final WinLottoTicket first = new WinLottoTicket(numbers, new LottoNumber(10));
-//        final WinLottoTicket second = new WinLottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10)), new LottoNumber(6));
-//        final WinLottoTicket third = new WinLottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10)), new LottoNumber(11));
-//        final WinLottoTicket miss = new WinLottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12), new LottoNumber(13), new LottoNumber(14)), new LottoNumber(20));
-//
-//        //then
-//        assertAll(
-//                () -> assertThat(lotto.getRank(first)).isEqualTo(LottoPrize.FIRST)
-//                , () -> assertThat(lotto.getRank(second)).isEqualTo(LottoPrize.SECOND)
-//                , () -> assertThat(lotto.getRank(third)).isEqualTo(LottoPrize.THIRD)
-//                , () -> assertThat(lotto.getRank(miss)).isEqualTo(LottoPrize.MISS)
-//        );
-//    }
+    @DisplayName("해당 로또가 몇등인지 판단한다")
+    @Test
+    public void getRank_success() throws Exception {
+        //given
+        final LottoTicket lotto = new LottoTicket(numbers);
+        final WinLottoTicket first = new WinLottoTicket(numbers, new LottoNumber(10));
+        final WinLottoTicket second = new WinLottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10)), new LottoNumber(6));
+        final WinLottoTicket third = new WinLottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10)), new LottoNumber(11));
+        final WinLottoTicket miss = new WinLottoTicket(Arrays.asList(new LottoNumber(1), new LottoNumber(10), new LottoNumber(11), new LottoNumber(12), new LottoNumber(13), new LottoNumber(14)), new LottoNumber(20));
+
+        //then
+        assertAll(
+                () -> assertThat(lotto.getRank(first)).isEqualTo(LottoPrize.FIRST)
+                , () -> assertThat(lotto.getRank(second)).isEqualTo(LottoPrize.SECOND)
+                , () -> assertThat(lotto.getRank(third)).isEqualTo(LottoPrize.THIRD)
+                , () -> assertThat(lotto.getRank(miss)).isEqualTo(LottoPrize.MISS)
+        );
+    }
 }
