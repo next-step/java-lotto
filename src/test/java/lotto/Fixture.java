@@ -16,14 +16,14 @@ public class Fixture {
     }
 
     public static Lotto lottoOne() {
-        return Lotto.manualLotto("1, 2, 3, 4, 5, 6");
+        return Lotto.manual("1, 2, 3, 4, 5, 6");
     }
 
     public static Lotto lottoTwo() {
-        return Lotto.manualLotto("13, 18, 23, 24, 30, 41");
+        return Lotto.manual("13, 18, 23, 24, 30, 41");
     }
 
     public static Lotto lottoThree() {
-        return Lotto.manualLotto("23, 15, 4, 8, 43, 45");
+        return Lotto.manual("23, 15, 4, 8, 43, 45");
     }
 }

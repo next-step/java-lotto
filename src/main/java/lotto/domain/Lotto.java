@@ -24,14 +24,6 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableSet(lottos);
     }
 
-    public static Lotto autoLotto() {
-        return new Lotto();
-    }
-
-    public static Lotto manualLotto(String lottoString) {
-        return new Lotto(lottoString);
-    }
-
     private static Set<LottoNumber> generateAutoLottoSet() {
         Set<LottoNumber> lottoNumberSet = new HashSet<>();
 
@@ -56,6 +48,14 @@ public class Lotto {
         if (deduplicationLottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개를 선택 해야합니다.", LOTTO_SIZE));
         }
+    }
+
+    public static Lotto auto() {
+        return new Lotto();
+    }
+
+    public static Lotto manual(String lottoString) {
+        return new Lotto(lottoString);
     }
 
     public Set<LottoNumber> getLottoNumbers() {

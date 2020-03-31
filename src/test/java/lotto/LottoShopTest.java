@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoBundle;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningType;
+import lotto.dto.LottoRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,10 +40,10 @@ class LottoShopTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
     void lottery(String winningNumber) {
-        Lotto lotto = new Lotto(winningNumber);
+        Lotto lotto = Lotto.manual(winningNumber);
         lottoShop = new LottoShop(new LottoBundle(Arrays.asList(lotto)));
 
-        LottoResult lottoResult = lottoShop.checkWinning(winningNumber, BONUS_NUMBER);
+        LottoResult lottoResult = lottoShop.checkWinning(new LottoRequestDto(winningNumber, BONUS_NUMBER));
         List<WinningType> actual = lottoResult.getWinningTypes();
 
         assertAll(
@@ -61,7 +62,7 @@ class LottoShopTest {
 
         assertAll(
                 () -> assertThat(lottos.size()).isEqualTo(lottoStrings.size()),
-                () -> assertThat(lottos).containsExactly(new Lotto(lottoString))
+                () -> assertThat(lottos).containsExactly(Lotto.manual(lottoString))
         );
     }
 }

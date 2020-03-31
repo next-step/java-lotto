@@ -41,14 +41,14 @@ public class LottoShop {
 
     public List<Lotto> buyManual(List<String> lottoStrings) {
         return lottoStrings.stream()
-                .map(Lotto::manualLotto)
+                .map(Lotto::manual)
                 .collect(Collectors.toList());
     }
 
     private List<Lotto> toLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(Lotto.autoLotto());
+            lottos.add(Lotto.auto());
         }
         return lottos;
     }
