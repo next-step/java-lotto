@@ -39,6 +39,6 @@ public class LottoResultTest {
     @DisplayName("결과와 구매 금액에 맞는 수익률을 도출하는 지 테스트")
     void getYield() {
         Money money = new Money(4000);
-        assertThat(lottoResult.getYield(money)).isEqualTo(500051.25);
+        assertThat(lottoResult.getYield(money)).isEqualTo(507551.25);
     }
 }
