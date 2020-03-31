@@ -50,4 +50,6 @@ public class LottoProvider {
     }
 
 
+    public static void createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
+    }
 }
