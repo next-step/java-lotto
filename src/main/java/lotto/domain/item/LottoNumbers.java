@@ -18,6 +18,10 @@ public class LottoNumbers {
         this.numbers = Collections.unmodifiableList(new ArrayList<>(numbers));
     }
 
+    public LottoNumbers(LottoNumbers copy) {
+        this.numbers = Collections.unmodifiableList(new ArrayList<>(copy.numbers));
+    }
+
     private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_VALID_ONLY_6);
