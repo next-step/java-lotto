@@ -22,6 +22,15 @@ public class CalculatorTest {
         assertThat(sum2).isEqualTo(0);
     }
 
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다")
+    @Test
+    void singleNumber() {
+        Calculator calculator = new Calculator();
+
+        double sum = calculator.sum("23");
+        assertThat(sum).isEqualTo(23);
+    }
+
     @DisplayName("문자열 덧셈 계산기는 ','를 구분자로 하여 각 문자열을 분리할 수 있다")
     @Test
     void split() {
