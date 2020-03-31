@@ -9,15 +9,16 @@ public class LottoStore {
 
     private LottoStore() {}
 
-    public static Lotteries sell(final Price price, final LottoPublisher lottoPublisher) {
-        checkAvailablePriceBuyLotto(price);
-        return publishLottery(price, lottoPublisher);
-    }
-
-    public static Lotteries sellManual(final Price price, final List<LottoNumbers> manualLottoNumbers, final LottoPublisher lottoPublisher) {
+    // 수동 + 자동
+    public static Lotteries sell(final Price price, final List<LottoNumbers> manualLottoNumbers) {
         checkAvailablePriceBuyLotto(price);
         checkLotteriesSize(price, manualLottoNumbers.size());
-        return publishLottery(price, lottoPublisher);
+
+        int autoCount = price.lotteryCount() - manualLottoNumbers.size();
+        Lotteries manuals = publishLottery(new LottoManualPublisher(manualLottoNumbers));
+        Lotteries autos = publishLottery(new LottoAutoPublisher(autoCount));
+
+        return manuals.merge(autos);
     }
 
     private static void checkAvailablePriceBuyLotto(final Price price) {
@@ -32,7 +33,7 @@ public class LottoStore {
         }
     }
 
-    private static Lotteries publishLottery(final Price price, final LottoPublisher lottoPublisher) {
+    private static Lotteries publishLottery(final LottoPublisher lottoPublisher) {
         return lottoPublisher.publish();
     }
 }
