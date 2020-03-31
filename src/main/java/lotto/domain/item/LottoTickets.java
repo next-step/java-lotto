@@ -32,10 +32,10 @@ public class LottoTickets implements Cloneable {
                 .plus(LottoPrize.FIFTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket)));
     }
 
-//    public List<LottoTicket> getTickets() {
-//        return tickets;
-//    }
-//
+    public List<LottoTicket> getTickets() {
+        return tickets;
+    }
+
 //    public int size() {
 //        return this.tickets.size();
 //    }
