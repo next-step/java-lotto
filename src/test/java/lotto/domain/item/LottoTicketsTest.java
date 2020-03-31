@@ -141,16 +141,16 @@ class LottoTicketsTest {
         assertThat(lottoTickets.getTickets().size()).isEqualTo(3);
     }
 
-//    @DisplayName("객체 복사 테스트")
-//    @Test
-//    public void clone_success() throws Exception {
-//        //given
-//        LottoTickets lottoTickets = new LottoTickets(ticketList);
-//
-//        //when
-//        LottoTickets clone = (LottoTickets) lottoTickets.clone();
-//
-//        //then
-//        assertThat(lottoTickets == clone).isFalse();
-//    }
+    @DisplayName("객체 복사 테스트")
+    @Test
+    public void clone_success() throws Exception {
+        //given
+        LottoTickets lottoTickets = new LottoTickets(ticketList);
+
+        //when
+        LottoTickets clone = (LottoTickets) lottoTickets.clone();
+
+        //then
+        assertThat(lottoTickets == clone).isFalse();
+    }
 }
