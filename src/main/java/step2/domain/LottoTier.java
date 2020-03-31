@@ -31,6 +31,8 @@ public enum LottoTier {
         this.prize = prize;
     }
 
+    abstract boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber);
+
     public int calculatePrize(int count) {
         return count * prize;
     }
@@ -41,6 +43,4 @@ public enum LottoTier {
                 .findFirst()
                 .orElse(NONE);
     }
-
-    abstract boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber);
 }
