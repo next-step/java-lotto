@@ -14,15 +14,15 @@ public class Application {
         int manualCount = inputView.inputManualCount();
 
         List<LottoNumbers> manualLotteries = inputView.inputManualLottoNumbers(manualCount);
-        Lotteries lotteries = LottoStore.sell(inputPrice, new LottoPublisher());
+        Lotteries autoLotteries = LottoStore.sell(inputPrice, new LottoAutoPublisher(inputPrice.lotteryCount()));
 
-        OutputView.printLotteryCount(lotteries.count());
-        OutputView.printLotteries(lotteries.getLottoNumbers());
+        OutputView.printLotteryCount(autoLotteries.count());
+        OutputView.printLotteries(autoLotteries.getLottoNumbers());
 
         LottoNumbers winningLotteNumbers = inputView.inputLastWeekendWinningLottery();
         LottoNumber bonusBall = inputView.inputBonusBall();
 
-        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers, bonusBall);
+        LottoResult lottoResult = autoLotteries.analyzeWin(winningLotteNumbers, bonusBall);
 
         OutputView.printLottoResult(lottoResult.getChart());
         OutputView.printRatio(lottoResult.ratio(inputPrice));
