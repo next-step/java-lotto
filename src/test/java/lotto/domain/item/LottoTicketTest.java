@@ -1,6 +1,5 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
 
@@ -59,21 +57,22 @@ public class LottoTicketTest {
         assertThat(ticket1.equals(ticket2)).isTrue();
     }
 
-//    @DisplayName("당첨 번호와 비교해 로또 번호가 몇개가 맞는지 확인한다.")
-//    @ParameterizedTest
-//    @MethodSource("provideMatchNumbers")
-//    public void getLuckyNumberMatchCount_success(List<LottoNumber> comp, int expect) throws Exception {
-//        //given
-//        final LottoTicket lotto = new LottoTicket(comp);
-//        final WinLottoTicket winLottoTicket = new WinLottoTicket(numbers, new LottoNumber(45));
-//
-//        //when
-//        int match = lotto.getLuckyNumberMatchCount(winLottoTicket);
-//
-//        //then
-//        assertThat(match).isEqualTo(expect);
-//    }
-//
+    @DisplayName("당첨 번호와 비교해 로또 번호가 몇개가 맞는지 확인한다.")
+    @ParameterizedTest
+    @MethodSource("provideMatchNumbers")
+    public void getLuckyNumberMatchCount_success(List<LottoNumber> comp, int expect) throws Exception {
+        //given
+        final LottoTicket lotto = new LottoTicket(comp);
+        final WinLottoTicket winLottoTicket =
+                new WinLottoTicket(new LottoNumbers(numbers), new LottoNumber(45));
+
+        //when
+        int match = lotto.getLuckyNumberMatchCount(winLottoTicket);
+
+        //then
+        assertThat(match).isEqualTo(expect);
+    }
+
 //    @DisplayName("해당 로또가 몇등인지 판단한다")
 //    @Test
 //    public void getRank_success() throws Exception {
