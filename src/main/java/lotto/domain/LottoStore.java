@@ -11,7 +11,7 @@ public class LottoStore {
 
     public static Lotteries sell(final Price price, final LottoPublisher lottoPublisher) {
         checkAvailablePriceBuyLotto(price);
-        return publishLottery(price, checkAvailablePublisher(lottoPublisher));
+        return publishLottery(price, lottoPublisher);
     }
 
     public static Lotteries sellManual(final Price price, final List<LottoNumbers> manualLottoNumbers) {
@@ -32,14 +32,7 @@ public class LottoStore {
         }
     }
 
-    private static LottoPublisher checkAvailablePublisher(final LottoPublisher lottoPublisher) {
-        if (lottoPublisher == null) {
-            return new LottoPublisher();
-        }
-        return lottoPublisher;
-    }
-
     private static Lotteries publishLottery(final Price price, final LottoPublisher lottoPublisher) {
-        return lottoPublisher.publish(price.lotteryCount());
+        return lottoPublisher.publish();
     }
 }
