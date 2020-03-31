@@ -23,7 +23,8 @@ public class LottoTicket implements Iterable<LottoNumber> {
         if (Objects.isNull(lottoNumbers) ||
                 lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalLottoNumberSizeException(
-                    LOTTO_NUMBERS_SIZE_ERROR_MESSAGE);
+                    String.format(LOTTO_NUMBERS_SIZE_ERROR_MESSAGE,
+                            LOTTO_NUMBERS_SIZE));
         }
 
         setLottoNumbers(lottoNumbers);

@@ -11,7 +11,7 @@ import java.util.Set;
 public class LottoWinningNumber {
     private static final int WINNING_NUMBER_SIZE = 6;
     private static final String WINNING_NUMBERS_SIZE_ERROR_MESSAGE =
-            "6개의 당첨 번호를 입력하세요.";
+            "%d개의 당첨 번호를 입력하세요.";
     private static final String DUPLICATED_WINNING_NUMBERS_ERROR_MESSAGE =
             "당첨 번호의 중복은 허용되지 않습니다.";
     private static final String DUPLICATED_BONUS_NUMBER_ERROR_MESSAGE =
@@ -24,7 +24,8 @@ public class LottoWinningNumber {
         if (Objects.isNull(winningNumbers) ||
                 winningNumbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalLottoNumberSizeException(
-                    WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
+                    String.format(WINNING_NUMBERS_SIZE_ERROR_MESSAGE,
+                            WINNING_NUMBER_SIZE));
         }
         if (winningNumbers.contains(bonusNumber)) {
             throw new NoDuplicatedNumberAllowedException(

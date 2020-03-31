@@ -11,7 +11,8 @@ public class Amount {
 
     public Amount(int amount) {
         if (amount < AMOUNT_MIN) {
-            throw new IllegalNumberRangeArgumentException(MIN_AMOUNT_ERROR_MESSAGE);
+            throw new IllegalNumberRangeArgumentException(
+                    String.format(MIN_AMOUNT_ERROR_MESSAGE, AMOUNT_MIN));
         }
         this.amount = amount;
     }
