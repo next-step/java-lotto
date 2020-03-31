@@ -49,7 +49,11 @@ public class LottoProvider {
         return new Lotto(lotto);
     }
 
+    public static WinningLotto createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
+        List<LottoNumber> lottoNumbers = inputNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
 
-    public static void createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
+        return new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(bonusNumber));
     }
 }
