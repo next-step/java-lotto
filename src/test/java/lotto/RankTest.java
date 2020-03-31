@@ -3,8 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.Rank.FIRST;
-import static lotto.Rank.SECOND;
+import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {

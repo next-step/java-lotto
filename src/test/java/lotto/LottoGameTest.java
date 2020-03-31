@@ -76,10 +76,10 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다")
+    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 리턴한다")
     public void returnsTotalWinningsWhenInputRankOfAllLotto() {
-        int result = lottoGame.getTotalWinnings(Arrays.asList(FIRST));
+        int result = lottoGame.getTotalWinnings(Arrays.asList(FIRST, SECOND));
 
-        assertThat(result).isEqualTo(2000000000);
+        assertThat(result).isEqualTo(FIRST.getWinningMoney() + SECOND.getWinningMoney());
     }
 }

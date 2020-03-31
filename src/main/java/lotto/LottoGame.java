@@ -23,7 +23,9 @@ public class LottoGame {
         return price / LOTTO_PRICE;
     }
 
-    public int getTotalWinnings(List<Rank> asList) {
-        return 2000000000;
+    public int getTotalWinnings(List<Rank> winningResults) {
+        return winningResults.stream()
+                .mapToInt(Rank::getWinningMoney)
+                .sum();
     }
 }
