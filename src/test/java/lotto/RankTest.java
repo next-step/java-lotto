@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static lotto.Rank.FIRST;
+import static lotto.Rank.SECOND;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
@@ -14,5 +15,9 @@ public class RankTest {
         Rank rank = Rank.of(6);
 
         assertThat(rank).isEqualTo(FIRST);
+
+        rank = Rank.of(5);
+
+        assertThat(rank).isEqualTo(SECOND);
     }
 }
