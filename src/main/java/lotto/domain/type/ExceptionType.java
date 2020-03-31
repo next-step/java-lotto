@@ -1,4 +1,4 @@
-package lotto.type;
+package lotto.domain.type;
 
 import lombok.Getter;
 

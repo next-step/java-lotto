@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoCalculator;
-import lotto.type.RankType;
+import lotto.domain.type.RankType;
 
 import java.util.List;
 

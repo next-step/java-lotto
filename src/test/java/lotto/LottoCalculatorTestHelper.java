@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.Lotto;
-import lotto.type.RankType;
+import lotto.domain.type.RankType;
 
 import java.util.ArrayList;
 import java.util.List;

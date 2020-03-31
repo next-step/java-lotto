@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.type.RankType;
+import lotto.domain.type.RankType;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lombok.Getter;
-import lotto.type.RankType;
+import lotto.domain.type.RankType;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
