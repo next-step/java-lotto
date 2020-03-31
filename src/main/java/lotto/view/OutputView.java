@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class OutputView {
     private static final String WIN_MATCH_MESSAGE = "%d개 일치 (%s원) - %d개";
+    private static final String WIN_SECOND_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원) - %d개";
 
     private OutputView() { }
 
@@ -26,16 +27,15 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        printRank(LottoRank.FOURTH, chart.get(LottoRank.FOURTH));
-        printRank(LottoRank.THIRD, chart.get(LottoRank.THIRD));
-        printRank(LottoRank.SECOND, chart.get(LottoRank.SECOND));
-        printRank(LottoRank.FIRST, chart.get(LottoRank.FIRST));
+        printRank(WIN_MATCH_MESSAGE,        LottoRank.FOURTH,       chart.get(LottoRank.FOURTH));
+        printRank(WIN_MATCH_MESSAGE,        LottoRank.THIRD,        chart.get(LottoRank.THIRD));
+        printRank(WIN_MATCH_MESSAGE,        LottoRank.SECOND,       chart.get(LottoRank.SECOND));
+        printRank(WIN_SECOND_BONUS_MESSAGE, LottoRank.SECOND_BONUS, chart.get(LottoRank.SECOND_BONUS));
+        printRank(WIN_MATCH_MESSAGE,        LottoRank.FIRST,        chart.get(LottoRank.FIRST));
     }
 
-    private static void printRank(final LottoRank rank, final Integer matchCount) {
-        System.out.println(String.format(WIN_MATCH_MESSAGE, rank.getMatchCount()
-                                                          , rank.getRankPrice().toString()
-                                                          , matchCount));
+    private static void printRank(final String message, final LottoRank rank, final Integer matchCount) {
+        System.out.println(String.format(message, rank.getMatchCount(), rank.getRankPrice().toString(), matchCount));
     }
 
     public static void printRatio(final double ratio) {

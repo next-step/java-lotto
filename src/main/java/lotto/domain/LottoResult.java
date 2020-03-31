@@ -24,6 +24,7 @@ public class LottoResult {
         chart.put(LottoRank.FOURTH, DEFAULT_MATCH_COUNT);
         chart.put(LottoRank.THIRD, DEFAULT_MATCH_COUNT);
         chart.put(LottoRank.SECOND, DEFAULT_MATCH_COUNT);
+        chart.put(LottoRank.SECOND_BONUS, DEFAULT_MATCH_COUNT);
         chart.put(LottoRank.FIRST, DEFAULT_MATCH_COUNT);
         return chart;
     }
