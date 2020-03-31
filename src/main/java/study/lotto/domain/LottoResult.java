@@ -38,7 +38,7 @@ public class LottoResult {
 
     public List<LottoTicket> getWinningTickets(LottoRank lottoRank) {
         return winningTickets.get(lottoRank).stream()
-                .map(LottoTicket::clone)
+                .map(LottoTicket::new)
                 .collect(Collectors.toList());
     }
 

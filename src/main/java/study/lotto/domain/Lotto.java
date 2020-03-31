@@ -30,7 +30,7 @@ public class Lotto {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets.stream()
-                .map(LottoTicket::clone)
+                .map(LottoTicket::new)
                 .collect(Collectors.toList());
     }
 

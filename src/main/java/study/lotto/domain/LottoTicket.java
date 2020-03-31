@@ -35,13 +35,19 @@ public class LottoTicket implements Iterable<LottoNumber> {
         }
     }
 
+    public LottoTicket(LottoTicket lottoTicket) {
+        this.lottoNumbers = lottoTicket.lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet());
+    }
+
     public int size() {
         return lottoNumbers.size();
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::clone)
+                .map(LottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
     }
@@ -51,15 +57,6 @@ public class LottoTicket implements Iterable<LottoNumber> {
         for (int number : lottoNumbers) {
             this.lottoNumbers.add(new LottoNumber(number));
         }
-    }
-
-    public LottoTicket clone() {
-        LottoTicket clonedLottoTicket = new LottoTicket();
-        clonedLottoTicket.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::clone)
-                .collect(Collectors.toSet());
-
-        return clonedLottoTicket;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
