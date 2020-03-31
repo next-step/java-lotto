@@ -12,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteriesTest {
 
-    private BonusBall bonusBall;
+    private LottoNumber bonusBall;
 
     @BeforeEach
     void setUp() {
-        bonusBall = new BonusBall("1");
+        bonusBall = LottoNumber.valueOf(12);
     }
 
     @DisplayName("로또 복권은 6개의 로또 번호를 가지도록 객체 생성을 할 수 있다.")
@@ -102,7 +102,7 @@ class LotteriesTest {
     @DisplayName("보너스볼을 갖고 있다.")
     @Test
     void hasBonusBall_True() {
-        LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 12");
 
         boolean hasBonusBall = lottoNumbers.hasBonusBall(bonusBall);
 
