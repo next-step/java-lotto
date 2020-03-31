@@ -15,13 +15,13 @@ public class MoneyTest {
     @Test
     @DisplayName("음수는 돈이 될 수 없다.")
     public void minusMoneyTest() {
-        assertThatIllegalArgumentException() .isThrownBy(() -> Money.won(-1));
+        assertThatIllegalArgumentException().isThrownBy(() -> Money.won(-1));
     }
 
     @Test
     @DisplayName("돈 더하기 테스트")
     public void plusMoneyTest() {
-        assertThat( Money.won(1000).plus(Money.won(1000))).isEqualTo(Money.won(2000));
+        assertThat(Money.won(1000).plus(Money.won(1000))).isEqualTo(Money.won(2000));
     }
 
     @Test

@@ -1,11 +1,13 @@
 package lotto;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.LottoRank;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -34,21 +36,79 @@ public class LottoNumbersTest {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbers.valueOf(1, 2, 3, 4, 5, 6, 7));
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {
-            "7 8 9 12 24 26 : 0",
-            "8 42 6 12 24 26 : 1",
-            "7 4 2 12 24 26 : 2",
-            "8 2 6 4 24 26 : 3",
-            "7 4 6 12 5 1 : 4",
-            "6 4 3 1 5 26 : 5",
-            "1 2 3 4 5 6 : 6"
-    }, delimiter = ':')
-    @DisplayName("당청 번호와 일치하는 숫자의 개수를 올바르게 리턴해야한다")
-    void matchTest(String input, int matchCount) {
+    @Test
+    @DisplayName("당첨 번호에 보너스 숫자가 포함되면 IllegalArgumentException 이 발생되어야 한다.")
+    void rankExceptionTest() {
         LottoNumbers winningNums = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
-        LottoNumbers lottoNumbers = LottoNumbers.valueOf(input.split(" "));
+        LottoNumber bonusNumber = LottoNumber.valueOf(5);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
 
-        assertThat(lottoNumbers.match(winningNums)).isEqualTo(matchCount);
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoNumbers.rank(winningNums, bonusNumber));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "7, 4, 26, 25, 8, 1",
+            "26, 24, 33, 1, 45, 27",
+    })
+    @DisplayName("일치하는 숫자가 3 미만이면 꽝이다")
+    void missRankTest(String input) {
+        LottoNumbers winningNums = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(input.split(", "));
+
+        assertThat(lottoNumbers.rank(winningNums, bonusNumber)).isEqualTo(LottoRank.MISS);
+    }
+
+    @Test
+    @DisplayName("숫자 3개 일치하면 5 등이다")
+    void fifthRankTest() {
+        LottoNumbers winningNums = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(1, 2, 3, 7, 8, 9);
+
+        assertThat(lottoNumbers.rank(winningNums, bonusNumber)).isEqualTo(LottoRank.FIFTH);
+    }
+
+    @Test
+    @DisplayName("숫자 4개 일치하면 4 등이다")
+    void forthRankTest() {
+        LottoNumbers winningNums = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 7, 8);
+
+        assertThat(lottoNumbers.rank(winningNums, bonusNumber)).isEqualTo(LottoRank.FOURTH);
+    }
+
+
+    @Test
+    @DisplayName("보너스 숫자 제외하고 숫자 5개 일치하면 3등이다.")
+    void thirdRankTest() {
+        LottoNumbers winningNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(9);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 7);
+
+        assertThat(lottoNumbers.rank(winningNumbers, bonusNumber)).isEqualTo(LottoRank.THIRD);
+    }
+
+    @Test
+    @DisplayName("숫자 5개 일치하고 보너스 숫자 까지 일치하면 2등이다.")
+    void secondRankTest() {
+        LottoNumbers winningNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 7);
+
+        assertThat(lottoNumbers.rank(winningNumbers, bonusNumber)).isEqualTo(LottoRank.SECOND);
+    }
+
+    @Test
+    @DisplayName("숫자 6개 일치하면 1등이다.")
+    void firstRankTest() {
+        LottoNumbers winningNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(1, 2, 3, 4, 5, 6);
+
+        assertThat(lottoNumbers.rank(winningNumbers, bonusNumber)).isEqualTo(LottoRank.FIRST);
+    }
+
 }

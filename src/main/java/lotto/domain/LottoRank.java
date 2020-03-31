@@ -1,42 +1,43 @@
 package lotto.domain;
 
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FIRST(6, Money.won(2000000000)),
-    SECOND(5, Money.won(1500000)),
-    THIRD(4, Money.won(50000)),
-    FOURTH(3, Money.won(5000)),
-    FIFTH(2, Money.ZERO),
-    SIXTH(1,  Money.ZERO),
-    SEVENTH(0,  Money.ZERO);
+    FIRST(6, Money.won(2_000_000_000), (count, matchBonus) -> count == 6),
+    SECOND(5, Money.won(30_000_000), (count, matchBonus) -> count == 5 && matchBonus),
+    THIRD(5, Money.won(1_500_000), (count, matchBonus) -> count == 5 && !matchBonus),
+    FOURTH(4, Money.won(50_000), (count, matchBonus) -> count == 4),
+    FIFTH(3, Money.won(5_000), (count, matchBonus) -> count == 3),
+    MISS(0, Money.ZERO, (count, matchBonus) -> count < 3);
 
-    private static Map<Integer, LottoRank> rankByMatchCount = Stream.of(LottoRank.values())
-            .collect(Collectors.toMap(lottoPrize -> lottoPrize.matchCount, lottoPrize -> lottoPrize));
-
-    private final int matchCount;
+    private final int countOfMatch;
     private final Money prizeMoney;
+    private final BiPredicate<Integer, Boolean> biPredicate;
 
-    LottoRank(int matchCount, Money prizeMoney) {
-        this.matchCount = matchCount;
+    LottoRank(int countOfMatch, Money prizeMoney, BiPredicate<Integer, Boolean> biPredicate) {
+        this.countOfMatch = countOfMatch;
         this.prizeMoney = prizeMoney;
+        this.biPredicate = biPredicate;
     }
 
-    public static LottoRank of(int matchCount) {
-        if (matchCount > FIRST.matchCount || matchCount < SEVENTH.matchCount) {
+    public static LottoRank of(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch > FIRST.countOfMatch || countOfMatch < MISS.countOfMatch) {
             throw new IllegalArgumentException("일치 숫자는 0이상 6이하 이어야 한다.");
         }
-        return rankByMatchCount.get(matchCount);
+
+        return Stream.of(values())
+                .filter(lottoRank -> lottoRank.biPredicate.test(countOfMatch, matchBonus))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("등수를 매길 수 없습니다."));
     }
 
     public Money getPrizeMoney() {
         return prizeMoney;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public int getCountOfMatch() {
+        return countOfMatch;
     }
 
     public Money calculatePrizeMoney(int prizeCount) {

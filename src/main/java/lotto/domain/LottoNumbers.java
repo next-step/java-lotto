@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 public class LottoNumbers {
 
-     static final int LOTTO_SIZE = 6;
+    static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> orderedNumbers;
 
@@ -21,24 +21,26 @@ public class LottoNumbers {
 
         this.orderedNumbers = Collections.unmodifiableList(
                 lottoNumbers.stream()
-                .sorted()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                        .sorted()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList()));
     }
 
-    public static LottoNumbers valueOf(List<Integer> numbers){
+    public static LottoNumbers valueOf(List<Integer> numbers) {
         return new LottoNumbers(numbers);
     }
 
-    public static LottoNumbers valueOf(String[] numbers){
+    public static LottoNumbers valueOf(String[] numbers) {
         return new LottoNumbers(Stream.of(numbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList()));
     }
 
-    public static LottoNumbers valueOf(Integer... numbers) { return new LottoNumbers(Arrays.asList(numbers)); }
+    public static LottoNumbers valueOf(Integer... numbers) {
+        return new LottoNumbers(Arrays.asList(numbers));
+    }
 
-    public int match(LottoNumbers other) {
+    private int countOfMatch(LottoNumbers other) {
         Set<LottoNumber> numbers = new HashSet<>();
         numbers.addAll(orderedNumbers);
         numbers.addAll(other.getOrderedNumbers());
@@ -62,4 +64,14 @@ public class LottoNumbers {
         return Objects.hash(orderedNumbers);
     }
 
+    public LottoRank rank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호에 보너스 숫자가 포함되면 안된다.");
+        }
+        return LottoRank.of(countOfMatch(winningNumbers), contains(bonusNumber));
+    }
+
+    private boolean contains(LottoNumber number) {
+        return orderedNumbers.contains(number);
+    }
 }

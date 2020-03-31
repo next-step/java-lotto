@@ -34,9 +34,9 @@ public class LottoTicket {
         return lotteryNumbers.size();
     }
 
-    public LottoResults collectResults(LottoNumbers winningNumbers) {
+    public LottoResults collectResults(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         Map<LottoRank, List<LottoNumbers>> numbersGroupByPrize = lotteryNumbers.stream()
-                .collect(Collectors.groupingBy(lottoNumbers -> LottoRank.of(lottoNumbers.match(winningNumbers))));
+                .collect(Collectors.groupingBy(lottoNumbers -> lottoNumbers.rank(winningNumbers, bonusNumber)));
         return LottoResults.of(numbersGroupByPrize);
     }
 }

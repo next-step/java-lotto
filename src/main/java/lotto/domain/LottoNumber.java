@@ -10,10 +10,14 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if (LOWER > number ||  UPPER < number) {
-            throw new IllegalArgumentException("로또 숫자 범위는 1 ~ 45 입니다.z");
+        if (LOWER > number || UPPER < number) {
+            throw new IllegalArgumentException("로또 숫자 범위는 1 ~ 45 입니다.");
         }
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        return new LottoNumber(number);
     }
 
     public int getNumber() {
