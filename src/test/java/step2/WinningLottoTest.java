@@ -17,7 +17,7 @@ public class WinningLottoTest {
     void validateWinningLotto() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             LottoProvider.createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
-        });
+        }).withMessage(WinningLotto.BONUS_NUMBER_DUPLICATION_ERROR);
     }
 
     @Test

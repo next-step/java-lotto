@@ -2,7 +2,7 @@ package step2.domain;
 
 public class WinningLotto {
 
-    private static final String BONUS_NUMBER_DUPLICATION_ERROR = "보너스 번호는 다른 번호와 중복될 수 없습니다.";
+    public static final String BONUS_NUMBER_DUPLICATION_ERROR = "보너스 번호는 다른 번호와 중복될 수 없습니다.";
     private Lotto lotto;
     private LottoNumber bonusNumber;
 
@@ -31,7 +31,7 @@ public class WinningLotto {
                 .count();
     }
 
-    public boolean isMatchedBonusNumber(Lotto targetLotto) {
+    private boolean isMatchedBonusNumber(Lotto targetLotto) {
         return targetLotto.getValue().contains(bonusNumber);
     }
 }
