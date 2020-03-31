@@ -6,10 +6,9 @@ public class LottoController {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        int purchaseCount = inputView.getPurchaseCount();
         System.out.println(inputView.purchaseLottoTicketInfo());
 
-        LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
+        LottoGenerator lottoGenerator = new LottoGenerator(inputView.getAutomaticCount(),inputView.getManualCount());
         lottoGenerator.createLottoNumbersByPurchaseCount();
         LottoTicket lottoTicket = lottoGenerator.getLottoTicket();
 
