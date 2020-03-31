@@ -10,4 +10,8 @@ public class Amount {
         }
         this.amount = amount;
     }
+
+    public int getAmount() {
+        return this.amount;
+    }
 }
