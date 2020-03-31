@@ -1,13 +1,13 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringAddCalculator {
+public class stringAddCalculator {
 
     public static final String REGEX_PATTERN = "//(.)\n(.*)";
 
     public static final Pattern pattern = Pattern.compile(REGEX_PATTERN);
 
-    public static int splitAndSum(String text) {
+    public int splitAndSum(String text) {
         if (isBlank(text)) {
             return 0;
         }
@@ -15,11 +15,11 @@ public class StringAddCalculator {
         return sum(toInt(split(text)));
     }
 
-    private static boolean isBlank(String text) {
+    private boolean isBlank(String text) {
         return text == null || text.isEmpty();
     }
 
-    private static int[] toInt(String[] values) {
+    private int[] toInt(String[] values) {
         int[] numbers = new int[values.length];
 
         for (int i = 0; i < values.length; i++) {
@@ -29,7 +29,7 @@ public class StringAddCalculator {
         return numbers;
     }
 
-    private static int toPositive(String value) {
+    private int toPositive(String value) {
         int number = Integer.parseInt(value);
         if (number < 0) {
             throw new RuntimeException("입력에 음수가 포함될 수 없습니다.");
@@ -38,7 +38,7 @@ public class StringAddCalculator {
         return number;
     }
 
-    private static String[] split(String text) {
+    private String[] split(String text) {
         Matcher m = pattern.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
@@ -48,7 +48,7 @@ public class StringAddCalculator {
         return text.split(",|:");
     }
 
-    private static int sum(int[] numbers) {
+    private int sum(int[] numbers) {
         int sum = 0;
         for (int number : numbers) {
             sum += number;
