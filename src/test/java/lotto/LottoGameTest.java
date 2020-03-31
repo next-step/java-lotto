@@ -63,5 +63,11 @@ public class LottoGameTest {
         int result = lottoGame.purchaseLotto(1000);
 
         assertThat(result).isEqualTo(1);
+
+        result = lottoGame.purchaseLotto(2000);
+
+        assertThat(result).isEqualTo(2);
     }
+
+
 }

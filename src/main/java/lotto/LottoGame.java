@@ -11,7 +11,7 @@ public class LottoGame {
         return Rank.of(matchCount);
     }
 
-    public int purchaseLotto(int i) {
-        return 1;
+    public int purchaseLotto(int price) {
+        return price / 1000;
     }
 }
