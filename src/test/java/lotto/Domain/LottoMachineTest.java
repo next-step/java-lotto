@@ -1,6 +1,7 @@
 package lotto.Domain;
 
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoMachineTest {
 
@@ -51,6 +53,15 @@ public class LottoMachineTest {
         Double revenueRate = lottos.revenueRate(statistics);
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
+    }
+
+    @Test
+    void buyAutoLottosTest() {
+        LottoMachine lottoMachine = LottoMachine.init();
+
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+            lottoMachine.buyAutoLottos(0);
+        });
     }
 
     @ParameterizedTest
