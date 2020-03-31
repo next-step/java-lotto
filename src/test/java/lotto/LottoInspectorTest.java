@@ -42,7 +42,7 @@ public class LottoInspectorTest {
 
         assertThat(
                 new LottoInspector().getTotalRevenue(result)
-        ).isEqualTo(RewardEnum.SIX.getReward() + RewardEnum.THREE.getReward());
+        ).isEqualTo(RankEnum.FIRST.getReward() + RankEnum.FIFTH.getReward());
     }
 
     @Test

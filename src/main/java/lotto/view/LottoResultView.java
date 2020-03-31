@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.RewardEnum;
+import lotto.domain.RankEnum;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -52,7 +52,7 @@ public class LottoResultView {
 
     public void viewInspect(Map<Integer, Integer> result) {
         System.out.println("\n당첨 통계\n--------------------");
-        for (int i = RewardEnum.getMinMatched(); i <= RewardEnum.getMaxMatched(); i++) {
+        for (int i = RankEnum.getMinMatched(); i <= RankEnum.getMaxMatched(); i++) {
             viewInspectRaw(result, i);
         }
         System.out.println("\n--------------------");
@@ -60,7 +60,7 @@ public class LottoResultView {
 
     private void viewInspectRaw(Map<Integer, Integer> result, int matched) {
         if (result.containsKey(matched)) {
-            System.out.println(matched + "개 일치 (" + RewardEnum.getRewardFromMatched(matched) + "원) - " + result.get(matched) + "개");
+            System.out.println(matched + "개 일치 (" + RankEnum.getRewardFromMatched(matched) + "원) - " + result.get(matched) + "개");
         }
     }
 

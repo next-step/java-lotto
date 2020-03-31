@@ -2,16 +2,17 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum RewardEnum {
-    THREE(3, 5000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    SIX(6, 2_000_000_000);
+public enum RankEnum {
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000);
 
     private int matched;
     private int reward;
 
-    RewardEnum(int matched, int reward) {
+    RankEnum(int matched, int reward) {
         this.matched = matched;
         this.reward = reward;
     }
@@ -25,27 +26,27 @@ public enum RewardEnum {
     }
 
     public static int getMinMatched() {
-        return THREE.matched;
+        return FIRST.matched;
     }
 
     public static int getMaxMatched() {
-        return SIX.matched;
+        return FIFTH.matched;
     }
 
     private static boolean isWinning(int matched) {
-        return Arrays.stream(RewardEnum.values())
+        return Arrays.stream(RankEnum.values())
                 .anyMatch(r -> r.getMatched() == matched);
     }
 
     public static int calculateReward(int matched, int count) {
-        if (RewardEnum.isWinning(matched)) {
-            return RewardEnum.getRewardFromMatched(matched) * count;
+        if (RankEnum.isWinning(matched)) {
+            return RankEnum.getRewardFromMatched(matched) * count;
         }
         return 0;
     }
 
     public static int getRewardFromMatched(int matched) {
-        return Arrays.stream(RewardEnum.values())
+        return Arrays.stream(RankEnum.values())
                 .filter(r -> r.getMatched() == matched)
                 .mapToInt(r -> r.getReward())
                 .findFirst()

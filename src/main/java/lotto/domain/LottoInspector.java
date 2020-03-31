@@ -22,7 +22,7 @@ public class LottoInspector {
     public int getTotalRevenue(Map<Integer, Integer> result) {
         int totalRevenue = 0;
         for (Integer key : result.keySet()) {
-            totalRevenue += RewardEnum.calculateReward(key, result.get(key));
+            totalRevenue += RankEnum.calculateReward(key, result.get(key));
         }
         return totalRevenue;
     }
