@@ -13,10 +13,16 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
+    public LottoNumber(String lottoNumber) {
+        int parseLottoNumber = parseLottoNumber(lottoNumber);
+        validateRange(parseLottoNumber);
+        this.lottoNumber = parseLottoNumber;
+    }
+
     public int intValue() {
         return lottoNumber;
     }
-    
+
     public boolean isEqualBonusNumber(BonusNumber bonusNumber) {
         return bonusNumber.isMatch(lottoNumber);
     }
@@ -29,6 +35,14 @@ public class LottoNumber {
 
     private boolean isValidRange(int lottoNumber) {
         return lottoNumber < LOTTO_NUM_MIN || LOTTO_NUM_MAX < lottoNumber;
+    }
+
+    private int parseLottoNumber(String lottoNumber) {
+        try {
+            return Integer.parseInt(lottoNumber);
+        } catch (NumberFormatException e) {
+            throw new LottoNumberInvalidException();
+        }
     }
 
     @Override
