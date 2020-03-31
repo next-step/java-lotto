@@ -22,7 +22,6 @@ class LottoTest {
         numbers = new ArrayList<>(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
     }
 
-
     @DisplayName("로또 티켓 정상 생성")
     @Test
     public void constructor_success() throws Exception {
@@ -42,35 +41,4 @@ class LottoTest {
                 () -> new Lotto(nullValue)
         ).isInstanceOf(ValidLottoException.class).hasMessage(NULL_ERROR_MESSAGE);
     }
-
-//    @DisplayName("로또는 불변 VO 객체여야 한다")
-//    @Test
-//    public void constructor_fail_modify() throws Exception {
-//        //given
-//        Lotto ticket = new Lotto(numbers);
-//
-//        //when
-//        List<LottoNumber> numbers = ticket.getNumbers();
-//
-//        //then
-//        assertThatThrownBy(
-//                () -> numbers.set(0, new LottoNumber(11))
-//        ).isInstanceOf(UnsupportedOperationException.class);
-//    }
-
-//    @DisplayName("로또번호는 외부의 변화에 영향이 없어야 한다.")
-//    @Test
-//    public void constructor_fail_modifyFromOutside() throws Exception {
-//        //given
-//        Lotto ticket = new Lotto(numbers);
-//
-//        //when
-//        numbers.set(0, new LottoNumber(10));
-//
-//        //then
-//        assertAll(
-//                () -> assertThat(ticket.getNumbers().get(0))
-//                        .isNotEqualTo(numbers.get(0))
-//        );
-//    }
 }
