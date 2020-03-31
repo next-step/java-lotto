@@ -1,5 +1,6 @@
 package lotto.service;
 
+import enums.LottoPrize;
 import lotto.domain.Money;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.LottoTicket;
@@ -50,15 +51,15 @@ public class LottoGame {
         return dto;
     }
 
-//    public LottoDto findWinGame(Item winTicket) {
-//        LottoDto dto = new LottoDto();
-//        dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
-//        dto.setSecondGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
-//        dto.setThirdGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
-//        dto.setFourthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
-//        dto.setFifthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
-//        return dto;
-//    }
+    public LottoDto findWinGame(WinLottoTicket winTicket) {
+        LottoDto dto = new LottoDto();
+        dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        dto.setSecondGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
+        dto.setThirdGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
+        dto.setFourthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
+        dto.setFifthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        return dto;
+    }
 
     private Money getAllEarningPrize(WinLottoTicket winTicket) {
         return this.lottoTickets.getAllEarningPrize(winTicket);
