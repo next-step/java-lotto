@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lombok.Getter;
 import lotto.exception.LottoException;
-import lotto.domain.type.ExceptionType;
+import lotto.exception.ExceptionType;
 
 import java.util.Arrays;
 import java.util.Collections;

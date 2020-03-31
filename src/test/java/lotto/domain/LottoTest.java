@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,7 @@ public class LottoTest {
     @Test
     void lotto() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
-                .isInstanceOf(RuntimeException.class)
+                .isInstanceOf(LottoException.class)
                 .hasMessageContaining("Lotto number must be 6");
     }
 
