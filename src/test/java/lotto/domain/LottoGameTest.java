@@ -4,6 +4,8 @@ import lotto.common.LottoStub;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
@@ -19,8 +21,9 @@ class LottoGameTest {
 
         LottoGame lottoGame = new LottoGame(lottoTickets);
         LottoGameResults lottoGameResults = lottoGame.match(winningTicket);
-
-        assertThat(lottoGameResults.getWinningPrizeSum()).isEqualTo(LottoRank.SIX.getWinningPrize());
+        BigDecimal winningPrizeSum = lottoGameResults.getWinningPrizeSum();
+        
+        assertThat(winningPrizeSum.intValue()).isEqualTo(LottoRank.SIX.getWinningPrize());
     }
 
 }
