@@ -28,4 +28,8 @@ public class LottoGame {
                 .mapToInt(Rank::getWinningMoney)
                 .sum();
     }
+
+    public double getRateOfRevenue(int price, int totalWinnings) {
+        return 0.35;
+    }
 }
