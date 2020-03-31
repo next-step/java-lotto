@@ -30,4 +30,13 @@ public class LottoTest {
     void contains(int value, boolean expected) {
         assertThat(lotto.contains(value)).isEqualTo(expected);
     }
+
+    @Test
+    void getMatchCount() {
+        Lotto matchLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        int matchCount = lotto.getMatchCount(matchLotto);
+
+        assertThat(matchCount).isEqualTo(5);
+    }
 }
