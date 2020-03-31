@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,5 +17,13 @@ public class LottoService {
         }
         Collections.shuffle(lottoNumbers);
         return new ArrayList<>(lottoNumbers.subList(0, 6));
+    }
+
+    public List<LottoTicket> buyTickets(int ticketCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTickets.add(new LottoTicket(createNonDuplicateNumbers()));
+        }
+        return lottoTickets;
     }
 }
