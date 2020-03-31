@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class ResultView {
     private static final String SPLIT_TEXT = ",";
     private static final String SECOND_NAME = "2등";
-    private static final int MIN_WIN_MATCH_COUNT = 3;
-    private static final int MIN_PURCHASE_AMOUNT = 1000;
+    private static final int MIN_WIN_MATCH_COUNT = LottoRule.MIN_WIN_MATCH_COUNT.getValue();
+    private static final int MIN_PURCHASE_AMOUNT = LottoRule.MIN_PURCHASE_AMOUNT.getValue();
 
     private Scanner scanner = new Scanner(System.in);
     private LottoNumbers winningNumbers;

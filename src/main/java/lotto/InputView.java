@@ -3,7 +3,7 @@ package lotto;
 import java.util.Scanner;
 
 public class InputView {
-    private static final int MIN_PURCHASE_AMOUNT = 1000;
+    private static final int MIN_PURCHASE_AMOUNT = LottoRule.MIN_PURCHASE_AMOUNT.getValue();
     private Scanner scanner = new Scanner(System.in);
     private int purchaseAmount;
     private int manualCount;
