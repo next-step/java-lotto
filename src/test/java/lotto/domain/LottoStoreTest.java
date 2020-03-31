@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.NoPurchasePriceException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,13 +12,19 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoStoreTest {
 
+    private LottoPublisher lottoPublisher;
+    @BeforeEach
+    void setUp() {
+        lottoPublisher = new LottoPublisher();
+    }
+
     @DisplayName("구입 금액에 해당하는 복권을 구매한다.")
     @Test
     void buy() {
         final Price price = new Price(2000);
         final int expect = 2;
 
-        Lotteries actual = LottoStore.sell(price);
+        Lotteries actual = LottoStore.sell(price, lottoPublisher);
 
         assertThat(actual.count()).isEqualTo(expect);
     }
@@ -27,7 +34,7 @@ class LottoStoreTest {
     @ValueSource(ints = {0, 999})
     void noPurchaseException(int price) {
         assertThatExceptionOfType(NoPurchasePriceException.class).isThrownBy(
-                () -> LottoStore.sell(new Price(price))
+                () -> LottoStore.sell(new Price(price), lottoPublisher)
         );
     }
 }
