@@ -16,7 +16,9 @@ public class ResultView {
     private static final int MIN_WIN_MATCH_COUNT = LottoRule.MIN_WIN_MATCH_COUNT.getValue();
     private static final int MIN_PURCHASE_AMOUNT = LottoRule.MIN_PURCHASE_AMOUNT.getValue();
 
-    private Scanner scanner = new Scanner(System.in);
+    private static ResultView resultView = new ResultView();
+    private static Scanner scanner = new Scanner(System.in);
+
     private LottoNumbers winningNumbers;
     private LottoTicket lottoTicket;
     private Map<String, WinningLotto> winningLottos;
@@ -31,18 +33,6 @@ public class ResultView {
 
     public ResultView(String inputText) {
         this(inputText, null, 0);
-    }
-
-    public ResultView(LottoTicket lottoTicket) {
-        String inputText = enterWinningValue();
-        LottoNo bonusBall = enterBonusValue();
-
-        this.bonusBall = bonusBall;
-        Set<LottoNo> numbers = splitWinningNumber(inputText);
-        winningNumbers = new LottoNumbers(numbers);
-        this.lottoTicket = lottoTicket;
-        this.winningLottos = getWinningLottos();
-
     }
 
     public ResultView(String inputText, LottoTicket lottoTicket, int bonusBall) {
@@ -175,17 +165,19 @@ public class ResultView {
         return matchCount;
     }
 
-    private LottoNo enterBonusValue() {
-        System.out.println("\n보너스 볼을 입력해 주세요");
-        return new LottoNo(scanner.nextInt());
-    }
-
-    private String enterWinningValue() {
+    public void enterValue() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.next();
+        String inputText = scanner.next();
+        System.out.println("\n보너스 볼을 입력해 주세요");
+        LottoNo bonusBall = new LottoNo(scanner.nextInt());
+
+        this.bonusBall = bonusBall;
+        Set<LottoNo> numbers = splitWinningNumber(inputText);
+        winningNumbers = new LottoNumbers(numbers);
+        this.winningLottos = getWinningLottos();
     }
 
-    private String getResultByRank(String result, Rank value, String key, int matchCount, int resultCount) {
+    public String getResultByRank(String result, Rank value, String key, int matchCount, int resultCount) {
         if (SECOND_NAME.equals(key)) {
             result += matchCount + "개 일치, 보너스 볼 일치(" + value.getWinningAmount() + "원)- " + resultCount
                       + "개\n";
@@ -196,4 +188,11 @@ public class ResultView {
         return result;
     }
 
+    public void setLottoTicket(LottoTicket lottoTicket) {
+        this.lottoTicket = lottoTicket;
+    }
+
+    public static ResultView getResultView() {
+        return resultView;
+    }
 }

@@ -4,21 +4,14 @@ import java.util.Scanner;
 
 public class InputView {
     private static final int MIN_PURCHASE_AMOUNT = LottoRule.MIN_PURCHASE_AMOUNT.getValue();
-    private Scanner scanner = new Scanner(System.in);
+
+    private static InputView inputView = new InputView();
+    private static Scanner scanner = new Scanner(System.in);
+
     private int purchaseAmount;
     private int manualCount;
 
     public InputView() {
-        System.out.println("구매액을 입력해 주세요.");
-        int purchaseAmount = scanner.nextInt();
-        validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
-
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int manualCount = scanner.nextInt();
-        validateManualCount(manualCount);
-        this.manualCount = manualCount;
-
     }
 
     public InputView(int purchaseAmount) {
@@ -29,6 +22,18 @@ public class InputView {
     public InputView(int purchaseAmount, int manualCount) {
         validatePurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
+        validateManualCount(manualCount);
+        this.manualCount = manualCount;
+    }
+
+    public void enterValue() {
+        System.out.println("구매액을 입력해 주세요.");
+        int purchaseAmount = scanner.nextInt();
+        validatePurchaseAmount(purchaseAmount);
+        this.purchaseAmount = purchaseAmount;
+
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualCount = scanner.nextInt();
         validateManualCount(manualCount);
         this.manualCount = manualCount;
     }
@@ -59,5 +64,9 @@ public class InputView {
 
     public String purchaseLottoTicketInfo() {
         return "수동으로 " + getManualCount() + "장, 자동으로 " + getAutomaticCount() + "개를 구매했습니다.";
+    }
+
+    public static InputView getInputView() {
+        return inputView;
     }
 }
