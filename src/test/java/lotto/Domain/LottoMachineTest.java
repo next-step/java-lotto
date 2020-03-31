@@ -35,7 +35,7 @@ public class LottoMachineTest {
                 .collect(Collectors.toCollection(ArrayList::new));
         Lotto lotto = lottoMachine.makeLotto(targetNumbers);
 
-        assertThat(lotto.toList).isEqualTo(targetNumbers);
+        assertThat(lotto.toList()).isEqualTo(targetNumbers);
     }
 
     @ParameterizedTest
@@ -46,7 +46,7 @@ public class LottoMachineTest {
         ArrayList<Integer> targetNumbers = Arrays.stream(input.split(" "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(ArrayList::new));
-        Lottos lottos = lottoMachine.buyLotto(price, targetNumbers);
+        Lottos lottos = lottoMachine.buyLotto(Lotto.init(targetNumbers));
 
         List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
         Map<Integer, Integer> statistics = lottos.match(winningNumber);

@@ -28,11 +28,11 @@ public class LottoTest {
 
         Lotto lotto = Lotto.init(lottoNumbers);
 
-        assertThat(lotto).isEqualTo(Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        assertThat(lotto).isEqualTo(Lotto.init(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1 2 3 4 5", "1 2 3 4 5 6 7"})
+    @ValueSource(strings = {"1 2 3 4 5"})
     void lottoNumberCountExceptionTest(String input) {
         List<Integer> lottoNumbers = Arrays.stream(input.split(" "))
                 .mapToInt(Integer::parseInt)

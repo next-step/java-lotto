@@ -6,12 +6,13 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> lottoNumber;
+    private List<Integer> lottoNumber;
 
     private Lotto(List<Integer> lottoNumber) {
         lottoNumberCountException(lottoNumber.size());
+        Collections.shuffle(lottoNumber);
         Collections.sort(lottoNumber);
-        this.lottoNumber = lottoNumber;
+        this.lottoNumber = lottoNumber.subList(0, 6);
     }
 
     public static Lotto init(List<Integer> lottoNumber) {
@@ -19,7 +20,7 @@ public class Lotto {
     }
 
     private void lottoNumberCountException(int lottoNumberCount) {
-        if(lottoNumberCount != 6) {
+        if(lottoNumberCount < 6) {
             throw new IllegalArgumentException(lottoNumberCount + "개의 로또 번호가 입력되었습니다.");
         }
     }
@@ -32,6 +33,10 @@ public class Lotto {
         return matchCount;
     }
 
+    public List<Integer> toList() {
+        return Collections.unmodifiableList(lottoNumber);
+    }
+
     @Override
     public String toString() {
         return lottoNumber.toString();
@@ -39,6 +44,6 @@ public class Lotto {
 
     @Override
     public boolean equals(Object obj) {
-        return lottoNumber.toString().equals(obj.toString());
+        return this.toString().equals(obj.toString());
     }
 }

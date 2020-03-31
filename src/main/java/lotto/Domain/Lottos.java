@@ -17,6 +17,10 @@ public class Lottos {
         return new Lottos(lottoList);
     }
 
+    public void add(Lotto lotto) {
+        lottoList.add(lotto);
+    }
+
     public Map<Integer, Integer> match(List<Integer> winningNumber) {
         Map<Integer, Integer> statistics = initLottoStatistics();
         for (Lotto lotto : lottoList) {
