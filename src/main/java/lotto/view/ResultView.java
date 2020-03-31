@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoGame;
 import lotto.domain.LottoGameResults;
 
 import static lotto.domain.LottoRank.*;
@@ -14,6 +15,11 @@ public class ResultView {
             "총 수익률은 %.2f입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     private static final StringBuilder stringBuilder = new StringBuilder();
+
+    public static void print(LottoGame lottoGame) {
+        lottoGame.getTicketSources()
+        .forEach(System.out::println);
+    }
 
     public static void print(LottoGameResults results) {
         initMessage();
@@ -60,5 +66,4 @@ public class ResultView {
         long six = lottoGameResults.getEachRankCountTotal(SIX.getMatchCount());
         return String.format(MATCH_COMMON_MESSAGE, SIX.getMatchCount(), SIX.getWinningPrize(), six);
     }
-
 }

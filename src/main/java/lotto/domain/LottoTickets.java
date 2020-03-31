@@ -23,10 +23,8 @@ public class LottoTickets {
                 .collect(toList());
     }
 
-    public List<String> convertToString() {
-        return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.toIntNumbers().toString())
-                .collect(toList());
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 
     @Override

@@ -13,10 +13,13 @@ public class LottoGameController {
         LottoTickets lottoTickets = lottoMachine.buy(new AutoLottoNumberStrategy());
 
         LottoGame lottoGame = new LottoGame(lottoTickets);
+        ResultView.print(lottoGame);
+
         WinningTicket winningTicket = new WinningTicket(
                 InputView.requestWinningNumbers(),
                 InputView.requestBonusNumber()
         );
+
         LottoGameResults lottoGameResults = lottoGame.match(winningTicket);
         ResultView.print(lottoGameResults);
     }
