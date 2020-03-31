@@ -128,23 +128,19 @@ class LottoTicketsTest {
                 () -> assertThat(prize.getMoney()).isEqualTo(1_510_000)
         );
     }
-//
-//    @DisplayName("로또 티켓 수량 비교")
-//    @Test
-//    public void getTickets_success() throws Exception {
-//        //given
-//        List<LottoTicket> ticket = new ArrayList<>(
-//                Arrays.asList(
-//                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 10, 11, 12))),
-//                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
-//                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))))
-//        );
-//        LottoTickets lottoTickets = new LottoTickets(ticket);
-//
-//        //then
-//        assertThat(lottoTickets.getTickets().size()).isEqualTo(3);
-//    }
-//
+
+    @DisplayName("로또 티켓 수량 비교")
+    @Test
+    public void getTickets_success() throws Exception {
+        //given
+        List<LottoTicket> ticket = new ArrayList<>(
+                Arrays.asList(new LottoTicket(numbers), new LottoTicket(numbers), new LottoTicket(numbers)));
+        LottoTickets lottoTickets = new LottoTickets(ticket);
+
+        //then
+        assertThat(lottoTickets.getTickets().size()).isEqualTo(3);
+    }
+
 //    @DisplayName("객체 복사 테스트")
 //    @Test
 //    public void clone_success() throws Exception {
