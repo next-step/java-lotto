@@ -49,8 +49,7 @@ class LottoGameTest {
     @Test
     public void getEarningRate_success() throws Exception {
         //given
-        final Money money = new Money(4000);
-        LottoGame lottoGame = new LottoGame(money, new LottoTickets(ticketList));
+        LottoGame lottoGame = new LottoGame(new LottoTickets(ticketList));
         WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, new LottoNumber(45));
 
         //when
