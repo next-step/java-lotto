@@ -1,6 +1,7 @@
 package lotto.domain.item;
 
 import enums.LottoPrize;
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -89,26 +90,44 @@ class LottoTicketsTest {
         );
     }
 
-//    @DisplayName("총 상금 금액 계산")
-//    @Test
-//    public void getAllEarningPrize_success() throws Exception {
-//        //given
-//        List<LottoTicket> ticket = new ArrayList<>(
-//                Arrays.asList(
-//                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 12))),
-//                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 11, 12, 13))),
-//                        new LottoTicket(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 20, 30, 45))))
-//        );
-//        LottoTickets lottoTickets = new LottoTickets(ticket);
-//
-//        //when
-//        Money prize = lottoTickets.getAllEarningPrize(winTicket);
-//
-//        //then
-//        assertAll(
-//                () -> assertThat(prize.getMoney()).isEqualTo(1_510_000)
-//        );
-//    }
+    @DisplayName("총 상금 금액 계산")
+    @Test
+    public void getAllEarningPrize_success() throws Exception {
+        //given
+        List<LottoTicket> ticket = new ArrayList<>(
+                Arrays.asList(
+                        new LottoTicket(Arrays.asList(
+                                new LottoNumber(1),
+                                new LottoNumber(2),
+                                new LottoNumber(3),
+                                new LottoNumber(4),
+                                new LottoNumber(5),
+                                new LottoNumber(12))),
+                        new LottoTicket(Arrays.asList(
+                                new LottoNumber(1),
+                                new LottoNumber(2),
+                                new LottoNumber(3),
+                                new LottoNumber(11),
+                                new LottoNumber(12),
+                                new LottoNumber(13))),
+                        new LottoTicket(Arrays.asList(
+                                new LottoNumber(1),
+                                new LottoNumber(2),
+                                new LottoNumber(3),
+                                new LottoNumber(20),
+                                new LottoNumber(30),
+                                new LottoNumber(45))))
+        );
+        LottoTickets lottoTickets = new LottoTickets(ticket);
+
+        //when
+        Money prize = lottoTickets.getAllEarningPrize(winTicket);
+
+        //then
+        assertAll(
+                () -> assertThat(prize.getMoney()).isEqualTo(1_510_000)
+        );
+    }
 //
 //    @DisplayName("로또 티켓 수량 비교")
 //    @Test
