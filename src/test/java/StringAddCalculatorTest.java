@@ -9,11 +9,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
-    private stringAddCalculator stringAddCalculator;
+    private StringAddCalculator stringAddCalculator;
 
     @BeforeEach
     public void setUp() {
-        stringAddCalculator = new stringAddCalculator();
+        stringAddCalculator = new StringAddCalculator();
     }
 
     @Test

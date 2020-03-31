@@ -1,7 +1,8 @@
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class stringAddCalculator {
+public class StringAddCalculator {
 
     public static final String DEFAULT_DELIMITER = ",|:";
     public static final String REGEX_PATTERN = "//(.)\n(.*)";
@@ -21,13 +22,9 @@ public class stringAddCalculator {
     }
 
     private int[] toInt(String[] values) {
-        int[] numbers = new int[values.length];
-
-        for (int i = 0; i < values.length; i++) {
-            numbers[i] = toPositive(values[i]);
-        }
-
-        return numbers;
+        return Arrays.stream(values)
+                .mapToInt(this::toPositive)
+                .toArray();
     }
 
     private int toPositive(String value) {
@@ -50,11 +47,7 @@ public class stringAddCalculator {
     }
 
     private int sum(int[] numbers) {
-        int sum = 0;
-        for (int number : numbers) {
-            sum += number;
-        }
-
-        return sum;
+        return Arrays.stream(numbers)
+                .sum();
     }
 }
