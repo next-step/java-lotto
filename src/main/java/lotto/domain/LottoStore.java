@@ -1,8 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.ManualSizeOverflowException;
 import lotto.exception.NoPurchasePriceException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoStore {
@@ -14,9 +14,21 @@ public class LottoStore {
         return publishLottery(price, checkAvailablePublisher(lottoPublisher));
     }
 
+    public static Lotteries sellManual(final Price price, final List<LottoNumbers> manualLottoNumbers) {
+        checkAvailablePriceBuyLotto(price);
+        checkLotteriesSize(price, manualLottoNumbers.size());
+        return null;
+    }
+
     private static void checkAvailablePriceBuyLotto(final Price price) {
         if (!price.isAvailablePrice()) {
             throw new NoPurchasePriceException();
+        }
+    }
+
+    private static void checkLotteriesSize(final Price price, final int numberOfManual) {
+        if (price.isOverSize(numberOfManual)) {
+            throw new ManualSizeOverflowException(numberOfManual);
         }
     }
 
