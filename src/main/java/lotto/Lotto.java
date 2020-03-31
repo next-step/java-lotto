@@ -11,13 +11,17 @@ public class Lotto {
     public Lotto(int lottoCount) {
         this.lottoCount = lottoCount;
         this.generatedLottos = new ArrayList<>();
+        generateLottos();
     }
 
-    public List<LottoNumbers> generateLottos() {
+    private void generateLottos() {
         for (int i = 0; i < lottoCount; i++) {
             generatedLottos.add(new LottoNumbers());
         }
-        return generatedLottos;
+    }
+
+    public List<LottoNumbers> getGeneratedLottos() {
+        return new ArrayList<>(generatedLottos);
     }
 
     public int getLottoCount() {

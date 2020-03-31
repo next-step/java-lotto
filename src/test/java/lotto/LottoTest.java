@@ -11,6 +11,6 @@ public class LottoTest {
     @ValueSource(ints = {14})
     void testLottoGames(final int lottoCount) {
         Lotto lotto = new Lotto(lottoCount);
-        assertThat(lotto.generateLottos()).hasSize(14);
+        assertThat(lotto.getGeneratedLottos()).hasSize(14);
     }
 }

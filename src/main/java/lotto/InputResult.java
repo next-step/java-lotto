@@ -9,10 +9,10 @@ public class InputResult {
 
     public InputResult(Lotto lotto) {
         this.lottoCount = lotto.getLottoCount();
-        this.generatedLottos = new ArrayList<>(lotto.generateLottos());
+        this.generatedLottos = new ArrayList<>(lotto.getGeneratedLottos());
     }
 
-    public String showResult() {
+    public void showResult() {
         StringBuilder sb = new StringBuilder();
         sb.append(System.getProperty("line.separator"));
         sb.append(this.lottoCount + "개를 구매했습니다.");
@@ -23,7 +23,7 @@ public class InputResult {
             sb.append(System.getProperty("line.separator"));
         }
 
-        return sb.toString();
+        System.out.println(sb.toString());
     }
 
 

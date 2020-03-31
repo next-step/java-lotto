@@ -1,16 +1,28 @@
 package lotto;
 
-import java.util.Set;
+import java.util.Map;
 
 public class ResultView {
     private final Numbers numbers;
+    private Lotto lotto;
 
     public ResultView(String inputText) {
-        numbers = getParsedNumbers(inputText);
+        this(inputText, null);
     }
 
-    public Set<Integer> winnerNumber() {
-        return numbers.getNumbers();
+    public ResultView(String inputText, Lotto lotto) {
+        this.numbers = getParsedNumbers(inputText);
+        this.lotto = lotto;
+    }
+
+    public Map<Integer, LottoNumbers> getWinLottos() {
+        LottoResult lottoResult = new LottoResult(winnerNumber(), lotto);
+
+        return lottoResult.checkWinnerLotto();
+    }
+
+    public LottoNumbers winnerNumber() {
+        return new LottoNumbers(numbers.getNumbers());
     }
 
     private Numbers getParsedNumbers(String inputText) {

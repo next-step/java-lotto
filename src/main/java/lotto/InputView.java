@@ -1,7 +1,6 @@
 package lotto;
 
 public class InputView {
-    private static final int MIN_PRICE = 1000;
     private static final int LOTTO_PRICE = 1000;
 
     private final int lottoCount;
@@ -17,7 +16,7 @@ public class InputView {
     }
 
     private int valdatePrice(int price) {
-        if (price >= MIN_PRICE) {
+        if (price >= LOTTO_PRICE) {
             return price;
         }
 

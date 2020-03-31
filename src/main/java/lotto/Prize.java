@@ -3,25 +3,22 @@ package lotto;
 import java.util.Arrays;
 
 public enum Prize {
-    FIFTH(3, 5000, "5등"),
-    FOURTH(4, 50000, "4등"),
-    THIRD(5, 1500000, "3등"),
-    SECOND(5, 30000000, "2등(보너스 볼 일치)"),
-    FIRST(6, 2000000000, "1등");
+    FOURTH(3, 5000),
+    THIRD(4, 1500_000),
+    SECOND(5, 150_0000),
+    FIRST(6, 200_000_0000);
 
-    private int rank;
+    private int match;
     private int amount;
-    private String description;
 
-    Prize(int rank, int amount, String description) {
-        this.rank = rank;
+    Prize(int match, int amount) {
+        this.match = match;
         this.amount = amount;
-        this.description = description;
     }
 
     static Prize of(String rank) {
         return Arrays.stream(values())
-                .filter(v -> rank.equals(v.rank))
+                .filter(v -> rank.equals(v.match))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("당첨되지 않았습니다."));
     }
