@@ -3,6 +3,10 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    public static final String REGEX_PATTERN = "//(.)\n(.*)";
+
+    public static final Pattern pattern = Pattern.compile(REGEX_PATTERN);
+
     public static int splitAndSum(String text) {
         if (isBlank(text)) {
             return 0;
@@ -35,7 +39,7 @@ public class StringAddCalculator {
     }
 
     private static String[] split(String text) {
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+        Matcher m = pattern.matcher(text);
         if (m.find()) {
             String customDelimiter = m.group(1);
             return m.group(2).split(customDelimiter);
