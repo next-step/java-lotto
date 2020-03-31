@@ -40,6 +40,18 @@ public class CalculatorTest {
         assertThat(tokens).containsExactly("1", "2", "3");
     }
 
+    @DisplayName("문자열 덧셈 계산기는 ':'를 구분자로 하여 각 문자열을 분리할 수 있다")
+    @Test
+    void colonDelimiter() {
+        Calculator calculator = new Calculator();
+
+        double sum1 = calculator.sum("10:25:33");
+        assertThat(sum1).isEqualTo(68);
+
+        double sum2 = calculator.sum("10:25,33");
+        assertThat(sum2).isEqualTo(68);
+    }
+
     @DisplayName("문자열 덧셈 계산기는 ','를 구분자로 하여 각 문자열을 분리한 후 합을 구할 수 있다")
     @Test
     void sumEachTokens() {
