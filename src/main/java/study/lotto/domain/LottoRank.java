@@ -27,14 +27,14 @@ public enum LottoRank {
 
     static {
         for (LottoRank lottoRank : LottoRank.values()) {
-            ValueKey valueKey = new ValueKey(lottoRank.matchCount,
+            ValueKey valueKey = ValueKey.instanceOf(lottoRank.matchCount,
                     lottoRank.matchBonus);
             valueToLottoRank.put(valueKey, lottoRank);
         }
     }
 
     public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
-        LottoRank lottoRank = valueToLottoRank.get(new ValueKey(matchCount,
+        LottoRank lottoRank = valueToLottoRank.get(ValueKey.get(matchCount,
                 matchBonus));
         if (Objects.isNull(lottoRank)) {
             return MISS;
@@ -55,12 +55,41 @@ public enum LottoRank {
     }
 
     private static class ValueKey {
+        private static final int MIN = 0;
+        private static final int MAX = 6;
+        private static final ValueKey[][] cache = new ValueKey[7][2];
         private Integer matchCount;
         private boolean matchBonus;
 
-        private ValueKey(Integer matchCount, boolean matchBonus) {
+        private static ValueKey instanceOf(Integer matchCount,
+                                           boolean matchBonus) {
+            if ((matchCount >= MIN) && (matchCount <= MAX)) {
+                int numericMatchBonus = parseMatchBonus(matchBonus);
+                cache[matchCount][numericMatchBonus] =
+                        new ValueKey(matchCount
+                                , matchBonus);
+                return cache[matchCount][numericMatchBonus];
+            }
+            return new ValueKey(matchCount, matchBonus);
+        }
+
+        private static ValueKey get(Integer matchCount,
+                                    boolean matchBonus) {
+            int numericMatchBonus = parseMatchBonus(matchBonus);
+            return cache[matchCount][numericMatchBonus];
+        }
+
+        private ValueKey(Integer matchCount,
+                         boolean matchBonus) {
             this.matchCount = matchCount;
             this.matchBonus = matchBonus;
+        }
+
+        private static int parseMatchBonus(boolean matchBonus) {
+            if (matchBonus) {
+                return 1;
+            }
+            return 0;
         }
 
         @Override public boolean equals(Object o) {
