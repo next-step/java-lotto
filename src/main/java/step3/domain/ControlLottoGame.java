@@ -28,29 +28,26 @@ public class ControlLottoGame {
             list.add(winInformation);
         }
         RankList rankList = new RankList(list);
-
         return rankList;
     }
 
     private WinInformation setRank(WinLotto winLotto, List<Integer> next) {
         int matchCount = winLotto.match((List<Integer>) next);
         boolean bonusBallMatch = false;
-        if(matchCount == BONUS_BALL){
+        if (matchCount == BONUS_BALL) {
             bonusBallMatch = winLotto.matchBonusball((List<Integer>) next);
         }
-        return WinInformation.matchWinInformation(matchCount,bonusBallMatch);
+        return WinInformation.matchWinInformation(matchCount, bonusBallMatch);
     }
 
     public StringBuffer setResult(ResultInfo resultInfo, RankList rankList) {
-        WinInformation winInformation;
-        StringBuffer stringBuffer = new StringBuffer("당첨통계 \n ================\n");
+        StringBuffer stringBuffer = new StringBuffer("당첨 통계 \n================\n");
         for (int i = 1; i <= WinInformation.matchWinInformationAllCount(); i++) {
-            winInformation = WinInformation.matchWinInformationByIndex(i);
+            WinInformation winInformation = WinInformation.matchWinInformationByIndex(i);
             BigDecimal price = winInformation.getPrice();
-            String title = winInformation.getTitle();
             int count = winInformation.getCount();
             int matchCount = rankList.match(winInformation);
-            stringBuffer.append(count + title + "(" + price + "원) - " + matchCount + "개" + '\n');
+            stringBuffer.append(count + winInformation.getTitle() + "(" + price + "원) - " + matchCount + "개" + '\n');
             resultInfo.addProfit(price.multiply(BigDecimal.valueOf(matchCount)));
         }
         stringBuffer.append("총 수익률은 " + resultInfo.getRate() + "입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)");

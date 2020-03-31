@@ -9,10 +9,6 @@ public class RankList {
         this.matchtCountList = matchtCountList;
     }
 
-    public List<WinInformation> getMatchtCountList() {
-        return matchtCountList;
-    }
-
     public int match(WinInformation number) {
         return (int) matchtCountList.stream()
                 .filter(d -> number == d)

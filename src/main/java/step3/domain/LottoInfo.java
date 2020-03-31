@@ -10,7 +10,7 @@ public class LottoInfo {
     }
 
     private void validateLottoInfo(int lottoPrice) {
-        if (lottoPrice <= ZERO ){
+        if (lottoPrice <= ZERO) {
             throw new IllegalArgumentException("로또 판매가격은 0보다 커야합니다.");
         }
     }

@@ -8,23 +8,20 @@ public class LottoBonusBall {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         int buyLottoTotalPrice = inputView.askTotalPrice();
-
         ControlLottoGame controlLottoGame = new ControlLottoGame();
         BuyLotto buyLotto = controlLottoGame.startLotto(buyLottoTotalPrice);
-
         OutputView outputView = new OutputView();
         outputView.printBuyList(buyLotto);
-
-        String winLottoInputValue = inputView.askWinnerLottoNumber();
-
-        int bonusBallInputValue = inputView.askBonusNumber();
-        WinLotto winLotto = new WinLotto(winLottoInputValue, bonusBallInputValue);
-
+        WinLotto winLotto = askWinLotto(inputView);
         RankList rankList = controlLottoGame.setRanktList(winLotto, buyLotto);
-
         ResultInfo resultInfo = new ResultInfo(buyLottoTotalPrice);
         StringBuffer stringBuffer = controlLottoGame.setResult(resultInfo, rankList);
-
         outputView.printResult(stringBuffer);
+    }
+
+    private static WinLotto askWinLotto(InputView inputView) {
+        String winLottoInputValue = inputView.askWinnerLottoNumber();
+        int bonusBallInputValue = inputView.askBonusNumber();
+        return new WinLotto(winLottoInputValue, bonusBallInputValue);
     }
 }

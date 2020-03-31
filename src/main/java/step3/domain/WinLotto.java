@@ -15,7 +15,7 @@ public class WinLotto {
     private int bonuseBall;
 
     public WinLotto(String winNumber, int bonusBallInputValue) {
-        this.winLottoNumber =  checkWinLottoNumber(winNumber);
+        this.winLottoNumber = checkWinLottoNumber(winNumber);
         this.bonuseBall = addBonusBall(bonusBallInputValue);
     }
 
@@ -29,9 +29,8 @@ public class WinLotto {
 
     public int match(List<Integer> buyLottos) {
         return (int) winLottoNumber.stream()
-        .filter(number -> buyLottos
-        .contains(number))
-        .count();
+                .filter(number -> buyLottos.contains(number))
+                .count();
     }
 
     private Set<Integer> setWinnerLottoNumber(String inputValue) {
@@ -82,11 +81,11 @@ public class WinLotto {
     }
 
     public boolean matchBonusball(List<Integer> buyLottos) {
-        int matchCount = (int) Arrays.asList(this.bonuseBall).stream()
-                .filter(number -> buyLottos
-                .contains(number))
+        int matchCount = (int) Arrays.asList(this.bonuseBall)
+                .stream()
+                .filter(number -> buyLottos.contains(number))
                 .count();
-        if(matchCount == 1){
+        if (matchCount == 1) {
             return true;
         }
         return false;
