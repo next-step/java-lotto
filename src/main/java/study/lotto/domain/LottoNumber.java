@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.exception.IllegalLottoNumberArgumentException;
+import study.lotto.domain.exception.IllegalNumberRangeArgumentException;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int number) {
         if ((number < MIN_NUMBER) || (number > MAX_NUMBER)) {
-            throw new IllegalLottoNumberArgumentException(
+            throw new IllegalNumberRangeArgumentException(
                     String.format(NUMBER_RANGE_ERROR_MESSAGE, MIN_NUMBER,
                             MAX_NUMBER));
         }

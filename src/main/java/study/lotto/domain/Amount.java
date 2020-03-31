@@ -1,6 +1,6 @@
 package study.lotto.domain;
 
-import study.lotto.domain.exception.IllegalAmountArgumentException;
+import study.lotto.domain.exception.IllegalNumberRangeArgumentException;
 
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ public class Amount {
 
     public Amount(int amount) {
         if (amount < AMOUNT_MIN) {
-            throw new IllegalAmountArgumentException(MIN_AMOUNT_ERROR_MESSAGE);
+            throw new IllegalNumberRangeArgumentException(MIN_AMOUNT_ERROR_MESSAGE);
         }
         this.amount = amount;
     }

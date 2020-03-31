@@ -1,8 +1,8 @@
 package study.lotto.domain.exception;
 
-public class IllegalLottoTicketArgumentException
+public class IllegalLottoNumberSizeException
         extends IllegalArgumentException {
-    public IllegalLottoTicketArgumentException(String s) {
+    public IllegalLottoNumberSizeException(String s) {
         super(s);
     }
 }

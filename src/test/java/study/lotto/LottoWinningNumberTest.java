@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import study.lotto.domain.LottoRank;
 import study.lotto.domain.LottoTicket;
 import study.lotto.domain.LottoWinningNumber;
-import study.lotto.domain.exception.IllegalLottoWinningNumberArgumentException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +37,7 @@ public class LottoWinningNumberTest {
     @MethodSource("provideWinningErrorNumber")
     void outOfRule(List<Integer> winningNumbers, int bonusNumber) {
         assertThatExceptionOfType(
-                IllegalLottoWinningNumberArgumentException.class)
+                IllegalArgumentException.class)
                 .isThrownBy(() -> {
                     new LottoWinningNumber(winningNumbers, bonusNumber);
                 });
