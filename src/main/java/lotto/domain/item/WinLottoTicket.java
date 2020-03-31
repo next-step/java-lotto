@@ -3,6 +3,7 @@ package lotto.domain.item;
 import lotto.exception.ValidLottoException;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WinLottoTicket extends Lotto {
 
@@ -45,17 +46,17 @@ public class WinLottoTicket extends Lotto {
         return bonus;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        if (!super.equals(o)) return false;
-//        WinLottoTicket that = (WinLottoTicket) o;
-//        return bonus == that.bonus;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(super.hashCode(), bonus);
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        WinLottoTicket that = (WinLottoTicket) o;
+        return Objects.equals(bonus, that.bonus);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), bonus);
+    }
 }
