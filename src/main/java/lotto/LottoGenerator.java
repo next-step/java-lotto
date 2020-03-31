@@ -3,7 +3,6 @@ package lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,9 +30,9 @@ public class LottoGenerator {
     }
 
     public LottoTicket createLottoNumbersByPurchaseCount() {
-        List<LottoNumber> numbers = new ArrayList<>();
+        List<LottoNumbers> numbers = new ArrayList<>();
         for (int i = 0; i < purchaseCount; i++) {
-            numbers.add(new LottoNumber(generateRandomNumbers()));
+            numbers.add(new LottoNumbers(generateRandomNumbers()));
         }
         return new LottoTicket(numbers);
     }

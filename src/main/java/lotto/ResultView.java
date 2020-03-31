@@ -15,7 +15,7 @@ public class ResultView {
     private static final int MIN_PURCHASE_AMOUNT = 1000;
 
     private Scanner scanner = new Scanner(System.in);
-    private LottoNumber winningNumbers;
+    private LottoNumbers winningNumbers;
     private LottoTicket lottoTicket;
     private Map<String, WinningLotto> winningLottos;
     private int bonusBall;
@@ -39,7 +39,7 @@ public class ResultView {
 
         this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
-        winningNumbers = new LottoNumber(numbers);
+        winningNumbers = new LottoNumbers(numbers);
         this.lottoTicket = lottoTicket;
         this.winningLottos = getWinningLottos();
 
@@ -49,7 +49,7 @@ public class ResultView {
         validateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
         Set<Integer> numbers = splitWinningNumber(inputText);
-        winningNumbers = new LottoNumber(numbers);
+        winningNumbers = new LottoNumbers(numbers);
         this.lottoTicket = lottoTicket;
         this.winningLottos = getWinningLottos();
         this.bonusBall = bonusBall;
@@ -86,8 +86,8 @@ public class ResultView {
 
     public String printPurchaseLottoNumbers(LottoTicket lottoTicket) {
         String result = "";
-        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
-            result += lottoNumber.getNumbers() + "\n";
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoNumbers()) {
+            result += lottoNumbers.getNumbers() + "\n";
         }
 
         return result;

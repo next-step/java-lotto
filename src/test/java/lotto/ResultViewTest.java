@@ -20,12 +20,12 @@ class ResultViewTest {
         String input = "1,2,3,4,5,6";
         int bonusBall = 42;
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), //1등
-                new LottoNumber(new HashSet<>(Arrays.asList(1, 2, 3, 34, 35, 45))), //5등
-                new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 35, 42))), //4등
-                new LottoNumber(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 42))), //2등
-                new LottoNumber(new HashSet<>(Arrays.asList(22, 23, 24, 25, 35, 42))), //꽝
-                new LottoNumber(new HashSet<>(Arrays.asList(2, 23, 24, 25, 35, 42))) //꽝
+                new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), //1등
+                new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 34, 35, 45))), //5등
+                new LottoNumbers(new HashSet<>(Arrays.asList(2, 3, 4, 5, 35, 42))), //4등
+                new LottoNumbers(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 42))), //2등
+                new LottoNumbers(new HashSet<>(Arrays.asList(22, 23, 24, 25, 35, 42))), //꽝
+                new LottoNumbers(new HashSet<>(Arrays.asList(2, 23, 24, 25, 35, 42))) //꽝
         ));
         resultView = new ResultView(input, lottoTicket, bonusBall);
 

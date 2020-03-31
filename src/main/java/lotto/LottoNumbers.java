@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-class LottoNumber {
+class LottoNumbers {
     private static final int NUMBER_SIZE = LottoRule.COUNT.getValue();
 
     private final Set<Integer> numbers;
 
-    public LottoNumber(Set<Integer> numbers) {
+    public LottoNumbers(Set<Integer> numbers) {
         validateWinningNumbers(numbers);
         this.numbers = Collections.unmodifiableSet(numbers);
     }
@@ -27,8 +27,8 @@ class LottoNumber {
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
-        if (!(o instanceof LottoNumber)) { return false; }
-        LottoNumber that = (LottoNumber) o;
+        if (!(o instanceof LottoNumbers)) { return false; }
+        LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(getNumbers(), that.getNumbers());
     }
 

@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumbers> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumbers> getLottoNumbers() {
         return lottoNumbers;
     }
 }
