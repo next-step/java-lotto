@@ -14,6 +14,7 @@ public class LottoNumbers {
     public LottoNumbers(List<LottoNumber> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
+        Collections.sort(numbers);
         this.numbers = Collections.unmodifiableList(new ArrayList<>(numbers));
     }
 
