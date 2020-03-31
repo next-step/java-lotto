@@ -24,7 +24,7 @@ public enum WinningType {
     }
 
     public static WinningType findLottoWinningtype(long matchCount, boolean bonusMatch) {
-        if (isEqualMatchCount(matchCount, FIVE_MATCH) || bonusMatch) {
+        if (isEqualMatchCount(matchCount, FIVE_MATCH) && bonusMatch) {
             return WinningType.SECOND;
         }
 
