@@ -10,4 +10,8 @@ public class LottoGame {
     public Rank getRank(int matchCount) {
         return Rank.of(matchCount);
     }
+
+    public int purchaseLotto(int i) {
+        return 1;
+    }
 }

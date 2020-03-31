@@ -56,4 +56,12 @@ public class LottoGameTest {
 
         assertThat(result).isEqualTo(THIRD);
     }
+
+    @Test
+    @DisplayName("로또의 구매 금액을 입력하면 구매한 로또 장수를 리턴한다")
+    public void purchaseLottoReturnsCountOfLottoTickets() {
+        int result = lottoGame.purchaseLotto(1000);
+
+        assertThat(result).isEqualTo(1);
+    }
 }
