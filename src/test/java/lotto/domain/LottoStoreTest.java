@@ -17,7 +17,7 @@ class LottoStoreTest {
         final Price price = new Price(2000);
         final int expect = 2;
 
-        Lotteries actual = LottoStore.buy(price);
+        Lotteries actual = LottoStore.sell(price);
 
         assertThat(actual.count()).isEqualTo(expect);
     }
@@ -27,7 +27,7 @@ class LottoStoreTest {
     @ValueSource(ints = {0, 999})
     void noPurchaseException(int price) {
         assertThatExceptionOfType(NoPurchasePriceException.class).isThrownBy(
-                () -> LottoStore.buy(new Price(price))
+                () -> LottoStore.sell(new Price(price))
         );
     }
 }

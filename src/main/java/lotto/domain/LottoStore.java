@@ -9,7 +9,7 @@ public class LottoStore {
 
     private LottoStore() {}
 
-    public static Lotteries buy(final Price price) {
+    public static Lotteries sell(final Price price) {
         checkAvailablePriceBuyLotto(price);
         return new Lotteries(publishLottery(price));
     }

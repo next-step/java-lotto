@@ -32,7 +32,7 @@ class LotteriesTest {
     @DisplayName("로또 목록을 갖고올 수 있다.")
     @Test
     void getLottoNumbers() {
-        Lotteries lotteries = LottoStore.buy(new Price(2000));
+        Lotteries lotteries = LottoStore.sell(new Price(2000));
 
         final List<LottoNumbers> lottoNumbers = lotteries.getLottoNumbers();
 

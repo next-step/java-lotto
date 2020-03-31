@@ -9,7 +9,7 @@ public class Application {
         InputView inputView = new InputView();
 
         Price inputPrice = inputView.inputPrice();
-        Lotteries lotteries = LottoStore.buy(inputPrice);
+        Lotteries lotteries = LottoStore.sell(inputPrice);
 
         OutputView.printLotteryCount(lotteries.count());
         OutputView.printLotteries(lotteries.getLottoNumbers());
