@@ -1,7 +1,10 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,5 +31,12 @@ public class LottoServiceTest {
     private boolean checkDuplicate(List<Integer> lottoNumbers) {
         Set set = new HashSet(lottoNumbers);
         return set.size() == 6 ? true : false;
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3, 5, 7, 9})
+    public void buyTicketsTest(int ticketCount) {
+        List<LottoTicket> lottoTickets = lottoService.buyTickets(ticketCount);
+        assertThat(lottoTickets).hasSize(ticketCount);
     }
 }
