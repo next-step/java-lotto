@@ -1,53 +1,63 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
+import com.sun.tools.javac.util.Pair;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum LottoRank {
-    ZERO(0, 0),
-    ONE(1, 0),
-    TWO(2, 0),
-    THREE(3, 5_000),
-    FOUR(4, 50_000),
-    FIVE(5, 1_500_000),
-    FIVE_BONUS(51, 300_000_000),
-    SIX(6, 2_000_000_000);
+    ZERO(Pair.of(0, false), 0),
+    ONE(Pair.of(1, false), 0),
+    TWO(Pair.of(2, false), 0),
+    THREE(Pair.of(3, false), 5_000),
+    FOUR(Pair.of(4, false), 50_000),
+    FIVE(Pair.of(5, false), 1_500_000),
+    FIVE_BONUS(Pair.of(5, true), 300_000_000),
+    SIX(Pair.of(6, false), 2_000_000_000);
 
-    private static Map<Integer, LottoRank> levels = new HashMap<>();
+    private static Map<Pair, LottoRank> levels = new HashMap<>();
 
     static {
-        levels.put(0, ZERO);
-        levels.put(1, ONE);
-        levels.put(2, TWO);
-        levels.put(3, THREE);
-        levels.put(4, FOUR);
-        levels.put(5, FIVE);
-        levels.put(51, FIVE_BONUS);
-        levels.put(6, SIX);
+        levels.put(Pair.of(0, false), ZERO);
+        levels.put(Pair.of(1, false), ONE);
+        levels.put(Pair.of(2, false), TWO);
+        levels.put(Pair.of(3, false), THREE);
+        levels.put(Pair.of(4, false), FOUR);
+        levels.put(Pair.of(5, false), FIVE);
+        levels.put(Pair.of(5, true), FIVE_BONUS);
+        levels.put(Pair.of(6, false), SIX);
     }
 
-    private final int matchCount;
+    private final Pair<Integer, Boolean> tier;
     private final int winningPrize;
 
-    LottoRank(int matchCount, int winningPrize) {
-        this.matchCount = matchCount;
+    LottoRank(Pair<Integer, Boolean> tier, int winningPrize) {
+        this.tier = tier;
         this.winningPrize = winningPrize;
     }
 
+    public static LottoRank of(Pair<Integer, Boolean> tier) {
+        return levels.getOrDefault(tier, of(tier.fst));
+    }
+
     public static LottoRank of(int matchCount) {
-        return levels.get(matchCount);
+        return Arrays.asList(LottoRank.values()).stream()
+                .filter(lottoRank -> lottoRank.isMatch(matchCount))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("찾으시는 랭크가 존재하지 않습니다."));
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return new Integer(tier.fst);
     }
 
     public int getWinningPrize() {
         return winningPrize;
     }
 
-    public boolean isEqualTo(int matchCount) {
-        return this.matchCount == matchCount;
+    private boolean isMatch(int matchCount) {
+        return getMatchCount() == matchCount;
     }
+
 }

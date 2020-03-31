@@ -110,13 +110,13 @@ class LottoGameResultsTest {
 
         LottoGameResults lottoGameResults = new LottoGameResults(lottoRanks);
 
-        long oneTotal = lottoGameResults.getEachRankCountTotal(LottoRank.ONE.getMatchCount());
-        long twoTotal = lottoGameResults.getEachRankCountTotal(LottoRank.TWO.getMatchCount());
-        long threeTotal = lottoGameResults.getEachRankCountTotal(LottoRank.THREE.getMatchCount());
-        long fourTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FOUR.getMatchCount());
-        long fiveTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FIVE.getMatchCount());
-        long fiveBonusTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FIVE_BONUS.getMatchCount());
-        long sixTotal = lottoGameResults.getEachRankCountTotal(LottoRank.SIX.getMatchCount());
+        long oneTotal = lottoGameResults.getEachRankCountTotal(LottoRank.ONE);
+        long twoTotal = lottoGameResults.getEachRankCountTotal(LottoRank.TWO);
+        long threeTotal = lottoGameResults.getEachRankCountTotal(LottoRank.THREE);
+        long fourTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FOUR);
+        long fiveTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FIVE);
+        long fiveBonusTotal = lottoGameResults.getEachRankCountTotal(LottoRank.FIVE_BONUS);
+        long sixTotal = lottoGameResults.getEachRankCountTotal(LottoRank.SIX);
 
         assertThat(oneTotal).isEqualTo(1);
         assertThat(twoTotal).isEqualTo(2);

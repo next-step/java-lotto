@@ -6,6 +6,7 @@ import java.util.List;
 import static lotto.domain.Constant.PRICE_PER_GAME;
 
 public class LottoGameResults {
+    private static final int SCALE_TWO = 2;
     private final List<LottoRank> lottoRanks;
 
     LottoGameResults(List<LottoRank> lottoRanks) {
@@ -13,12 +14,12 @@ public class LottoGameResults {
     }
 
     public BigDecimal getProfitRate() {
-        return getWinningPrizeSum().divide(getPaidMoney());
+        return getWinningPrizeSum().divide(getPaidMoney(), SCALE_TWO, BigDecimal.ROUND_CEILING);
     }
 
-    public long getEachRankCountTotal(int matchCount) {
+    public long getEachRankCountTotal(LottoRank lottoRank) {
         return lottoRanks.stream()
-                .filter(lottoRank -> lottoRank.isEqualTo(matchCount))
+                .filter(lotto -> lotto.equals(lottoRank))
                 .count();
     }
 
