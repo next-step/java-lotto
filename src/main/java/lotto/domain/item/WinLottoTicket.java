@@ -1,21 +1,28 @@
 package lotto.domain.item;
 
+import lotto.exception.ValidLottoException;
+
 public class WinLottoTicket extends Lotto {
+
+    private static final String NULL_PARAM_ERROR_MESSAGE = "매개변수:null";
 
     private final LottoNumber bonus;
 
     public WinLottoTicket(LottoNumbers numbers, LottoNumber bonus) {
         super(numbers);
-//        validateBonusNumber(numbers, bonus);
+        if (bonus == null) {
+            throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
+        }
+        validateBonusNumber(numbers, bonus);
         this.bonus = bonus;
     }
 
-    //    private void validateBonusNumber(List<Integer> numbers, int bonus) {
-//        if (numbers.contains(bonus)) {
-//            throw new ValidLottoException("당첨 번호와 보너스 번호가 중복됩니다.");
-//        }
-//    }
-//
+    private void validateBonusNumber(LottoNumbers numbers, LottoNumber bonus) {
+        if (numbers.getValue().contains(bonus)) {
+            throw new ValidLottoException("당첨 번호와 보너스 번호가 중복됩니다.");
+        }
+    }
+
 //    public LottoNumber getBonus() {
 //        return bonus;
 //    }
