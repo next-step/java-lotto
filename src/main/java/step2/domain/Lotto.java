@@ -36,6 +36,10 @@ public class Lotto {
         }
     }
 
+    public boolean contains(LottoNumber number) {
+        return lotto.contains(number);
+    }
+
     public Set<LottoNumber> getValue() {
         return lotto;
     }

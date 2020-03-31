@@ -14,7 +14,7 @@ public class WinningLotto {
     }
 
     private void validateBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
-        if(lotto.getValue().contains(bonusNumber)) {
+        if(lotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATION_ERROR);
         }
     }
@@ -27,7 +27,7 @@ public class WinningLotto {
         return lotto
                 .getValue()
                 .stream()
-                .filter(winningLottoNumber -> targetLotto.getValue().contains(winningLottoNumber))
+                .filter(winningLottoNumber -> targetLotto.contains(winningLottoNumber))
                 .count();
     }
 
