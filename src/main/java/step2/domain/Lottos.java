@@ -14,7 +14,7 @@ public class Lottos {
         int count = 0;
 
         for(Lotto lotto : lottos) {
-            count = addIfSameTier(lotto.getLottoTier(winningLotto), lottoTier, count);
+            count = addIfSameTier(winningLotto.getLottoTier(lotto), lottoTier, count);
         }
         return count;
     }
