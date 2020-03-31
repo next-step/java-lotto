@@ -2,6 +2,8 @@ package lotto.domain.item;
 
 import lotto.exception.ValidLottoException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
@@ -14,6 +16,14 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
     public LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
+    }
+
+    public static List<LottoNumber> createLottoNumberBulk(List<Integer> numbers) {
+        List<LottoNumber> result = new ArrayList<>();
+        for (Integer integer : numbers) {
+            result.add(new LottoNumber(integer));
+        }
+        return result;
     }
 
     private void validateNumberRange(int numbers) {
