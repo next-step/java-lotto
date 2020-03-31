@@ -26,6 +26,6 @@ class LottoNoTest {
 
         assertAll(() -> assertThat(lottoNo).isEqualTo(new LottoNo(no)),
                   () -> assertThat(lottoNo.getNo()).isEqualTo(no));
-   
+
     }
 }

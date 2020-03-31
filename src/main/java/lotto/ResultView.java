@@ -18,14 +18,13 @@ public class ResultView {
     private LottoNumbers winningNumbers;
     private LottoTicket lottoTicket;
     private Map<String, WinningLotto> winningLottos;
-    private int bonusBall;
+    private LottoNo bonusBall;
 
     public ResultView() {
     }
 
     public ResultView(int bonusBall) {
-        validateBonusBall(bonusBall);
-        this.bonusBall = bonusBall;
+        this.bonusBall = new LottoNo(bonusBall);
     }
 
     public ResultView(String inputText) {
@@ -34,11 +33,10 @@ public class ResultView {
 
     public ResultView(LottoTicket lottoTicket) {
         String inputText = enterWinningValue();
-        int bonusBall = enterBonusValue();
-        validateBonusBall(bonusBall);
+        LottoNo bonusBall = enterBonusValue();
 
         this.bonusBall = bonusBall;
-        Set<Integer> numbers = splitWinningNumber(inputText);
+        Set<LottoNo> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumbers(numbers);
         this.lottoTicket = lottoTicket;
         this.winningLottos = getWinningLottos();
@@ -46,21 +44,19 @@ public class ResultView {
     }
 
     public ResultView(String inputText, LottoTicket lottoTicket, int bonusBall) {
-        validateBonusBall(bonusBall);
-        this.bonusBall = bonusBall;
-        Set<Integer> numbers = splitWinningNumber(inputText);
+        this.bonusBall = new LottoNo(bonusBall);
+        Set<LottoNo> numbers = splitWinningNumber(inputText);
         winningNumbers = new LottoNumbers(numbers);
         this.lottoTicket = lottoTicket;
         this.winningLottos = getWinningLottos();
-        this.bonusBall = bonusBall;
     }
 
     public Map<String, WinningLotto> getWinningLottos() {
         Map<String, WinningLotto> winningLottos = new HashMap<>();
-        Set<Integer> winningNums = winningNumbers.getNumbers();
+        Set<LottoNo> winningNums = winningNumbers.getNumbers();
         for (int i = 0; i < lottoTicket.getLottoNumbers().size(); i++) {
             int matchCount = 0;
-            Set<Integer> purchaseNumbers = lottoTicket.getLottoNumbers().get(i).getNumbers();
+            Set<LottoNo> purchaseNumbers = lottoTicket.getLottoNumbers().get(i).getNumbers();
             matchCount = repeatByWinNumberSize(winningNums, matchCount, purchaseNumbers);
             boolean matchBonus = checkMatchBonusBall(purchaseNumbers);
 
@@ -138,13 +134,7 @@ public class ResultView {
         return lottoTicket.getLottoNumbers().size() * MIN_PURCHASE_AMOUNT;
     }
 
-    public void validateBonusBall(int bonusBall) {
-        if (bonusBall < 1 || bonusBall > 45) {
-            throw new IllegalArgumentException("입력할 수 있는 범위는 1~45 사이입니다.");
-        }
-    }
-
-    public boolean checkMatchBonusBall(Set<Integer> lottoNumber) {
+    public boolean checkMatchBonusBall(Set<LottoNo> lottoNumber) {
         boolean matchFlag = false;
 
         if (lottoNumber.contains(this.bonusBall)) {
@@ -161,30 +151,30 @@ public class ResultView {
         return resultCount;
     }
 
-    private Set<Integer> splitWinningNumber(String inputText) {
+    private Set<LottoNo> splitWinningNumber(String inputText) {
         return Arrays
                 .stream(inputText.split(SPLIT_TEXT))
-                .map(num -> Integer.parseInt(num))
+                .map(num -> new LottoNo(Integer.parseInt(num)))
                 .collect(Collectors.toSet());
     }
 
-    private int repeatByWinNumberSize(Set<Integer> winningNums, int matchCount, Set<Integer> purchaseNumbers) {
-        for (Integer winningNum : winningNums) {
+    private int repeatByWinNumberSize(Set<LottoNo> winningNums, int matchCount, Set<LottoNo> purchaseNumbers) {
+        for (LottoNo winningNum : winningNums) {
             matchCount = checkContainsWinNumber(matchCount, purchaseNumbers, winningNum);
         }
         return matchCount;
     }
 
-    private int checkContainsWinNumber(int matchCount, Set<Integer> purchaseNumbers, Integer winningNum) {
+    private int checkContainsWinNumber(int matchCount, Set<LottoNo> purchaseNumbers, LottoNo winningNum) {
         if (purchaseNumbers.contains(winningNum)) {
             ++matchCount;
         }
         return matchCount;
     }
 
-    private int enterBonusValue() {
+    private LottoNo enterBonusValue() {
         System.out.println("\n보너스 볼을 입력해 주세요");
-        return scanner.nextInt();
+        return new LottoNo(scanner.nextInt());
     }
 
     private String enterWinningValue() {

@@ -7,20 +7,20 @@ import java.util.Set;
 class LottoNumbers {
     private static final int NUMBER_SIZE = LottoRule.COUNT.getValue();
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNo> numbers;
 
-    public LottoNumbers(Set<Integer> numbers) {
+    public LottoNumbers(Set<LottoNo> numbers) {
         validateWinningNumbers(numbers);
         this.numbers = Collections.unmodifiableSet(numbers);
     }
 
-    private void validateWinningNumbers(Set<Integer> numbers) {
+    private void validateWinningNumbers(Set<LottoNo> numbers) {
         if (numbers.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException("다른 숫자를 여섯개 입력해주세요.");
         }
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNo> getNumbers() {
         return numbers;
     }
 

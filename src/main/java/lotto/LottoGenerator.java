@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
     private static final List<Integer> pickNumber = new ArrayList<>(
@@ -22,11 +23,13 @@ public class LottoGenerator {
 
     }
 
-    private Set<Integer> generateRandomNumbers() {
+    private Set<LottoNo> generateRandomNumbers() {
         Collections.shuffle(pickNumber);
         List<Integer> numbers = pickNumber.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
-        return new LinkedHashSet<>(numbers);
+
+        return numbers.stream().map(item -> new LottoNo(item)).collect(
+                Collectors.toCollection(LinkedHashSet::new));
     }
 
     public LottoTicket createLottoNumbersByPurchaseCount() {

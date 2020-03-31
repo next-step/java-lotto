@@ -3,9 +3,12 @@ package lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,14 +22,57 @@ class ResultViewTest {
     void setUp() {
         String input = "1,2,3,4,5,6";
         int bonusBall = 42;
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-                new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))), //1등
-                new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 34, 35, 45))), //5등
-                new LottoNumbers(new HashSet<>(Arrays.asList(2, 3, 4, 5, 35, 42))), //4등
-                new LottoNumbers(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 42))), //2등
-                new LottoNumbers(new HashSet<>(Arrays.asList(22, 23, 24, 25, 35, 42))), //꽝
-                new LottoNumbers(new HashSet<>(Arrays.asList(2, 23, 24, 25, 35, 42))) //꽝
-        ));
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(1),
+                                                                  new LottoNo(2),
+                                                                  new LottoNo(3),
+                                                                  new LottoNo(4),
+                                                                  new LottoNo(5),
+                                                                  new LottoNo(6))
+                                                              .collect(Collectors.toSet())))); //1등
+
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(1),
+                                                                  new LottoNo(2),
+                                                                  new LottoNo(3),
+                                                                  new LottoNo(34),
+                                                                  new LottoNo(35),
+                                                                  new LottoNo(45))
+                                                              .collect(Collectors.toSet()))));//5등
+
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(2),
+                                                                  new LottoNo(3),
+                                                                  new LottoNo(4),
+                                                                  new LottoNo(5),
+                                                                  new LottoNo(35),
+                                                                  new LottoNo(42))
+                                                              .collect(Collectors.toSet())))); //4등
+
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(2),
+                                                                  new LottoNo(3),
+                                                                  new LottoNo(4),
+                                                                  new LottoNo(5),
+                                                                  new LottoNo(6),
+                                                                  new LottoNo(42))
+                                                              .collect(Collectors.toSet()))));// 2등
+
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(21),
+                                                                  new LottoNo(22),
+                                                                  new LottoNo(23),
+                                                                  new LottoNo(24),
+                                                                  new LottoNo(25),
+                                                                  new LottoNo(26))
+                                                              .collect(Collectors.toSet()))));//꽝
+
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(2),
+                                                                  new LottoNo(22),
+                                                                  new LottoNo(23),
+                                                                  new LottoNo(24),
+                                                                  new LottoNo(25),
+                                                                  new LottoNo(26))
+                                                              .collect(Collectors.toSet()))));//꽝
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
         resultView = new ResultView(input, lottoTicket, bonusBall);
 
     }
@@ -89,7 +135,7 @@ class ResultViewTest {
     @Test
     void validateBonusBall() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            resultView.validateBonusBall(46);
+            resultView = new ResultView(46);
         });
     }
 
@@ -97,7 +143,13 @@ class ResultViewTest {
     @Test
     void checkMatchBonusBall() {
         resultView = new ResultView(5);
-        boolean match = resultView.checkMatchBonusBall(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        boolean match = resultView.checkMatchBonusBall(new HashSet<>(Stream.of(new LottoNo(1),
+                                                                               new LottoNo(2),
+                                                                               new LottoNo(3),
+                                                                               new LottoNo(4),
+                                                                               new LottoNo(5),
+                                                                               new LottoNo(6))
+                                                                           .collect(Collectors.toSet())));
 
         assertThat(match).isTrue();
     }
