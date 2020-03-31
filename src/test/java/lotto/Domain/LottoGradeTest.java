@@ -19,7 +19,7 @@ public class LottoGradeTest {
     }
 
     @Test
-    void findGradeExcptionTest() {
+    void findGradeExceptionTest() {
         assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> {
             LottoGrade.findGrade(0);
         });

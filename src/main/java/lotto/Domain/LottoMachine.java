@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 public class LottoMachine {
 
     private final int LOTTO_PRICE = 1000;
-    int price;
     Lottos lottos;
 
     public LottoMachine() {
@@ -20,8 +19,7 @@ public class LottoMachine {
         return new LottoMachine();
     }
 
-    public Lottos buyAutoLottos(int price) {
-        int lottoCount = boughtLottoCount(price);
+    public Lottos buyAutoLottos(int lottoCount) {
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = makeLotto(makeAutoTargetNumber());
             lottos = buyLotto(lotto);
@@ -29,7 +27,7 @@ public class LottoMachine {
         return lottos;
     }
 
-    int boughtLottoCount(int price) {
+    public int boughtLottoCount(int price) {
         lessThenOneLottoPriceException(price);
         return price / LOTTO_PRICE;
     }

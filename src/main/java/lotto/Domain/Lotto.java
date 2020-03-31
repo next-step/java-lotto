@@ -11,8 +11,8 @@ public class Lotto {
     private Lotto(List<Integer> lottoNumber) {
         lottoNumberCountException(lottoNumber.size());
         Collections.shuffle(lottoNumber);
-        Collections.sort(lottoNumber);
         this.lottoNumber = lottoNumber.subList(0, 6);
+        Collections.sort(this.lottoNumber);
     }
 
     public static Lotto init(List<Integer> lottoNumber) {

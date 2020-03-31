@@ -56,11 +56,11 @@ public class LottoMachineTest {
     }
 
     @Test
-    void buyAutoLottosTest() {
+    void boughtLottoCountTest() {
         LottoMachine lottoMachine = LottoMachine.init();
 
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
-            lottoMachine.buyAutoLottos(0);
+            lottoMachine.boughtLottoCount(0);
         });
     }
 
@@ -68,7 +68,8 @@ public class LottoMachineTest {
     @CsvSource(value = {"14000:14", "1000:1", "3000:3"}, delimiter = ':')
     void buyAutoLottosTest(String input, String expected) {
         LottoMachine lottoMachine = LottoMachine.init();
-        Lottos lottos = lottoMachine.buyAutoLottos(Integer.parseInt(input));
+        int count = lottoMachine.boughtLottoCount(Integer.parseInt(input));
+        Lottos lottos = lottoMachine.buyAutoLottos(count);
 
         assertThat(lottos.toList()).hasSize(Integer.parseInt(expected));
     }
