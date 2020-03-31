@@ -3,7 +3,6 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,10 +39,18 @@ public class CalculatorTest {
     }
 
     @DisplayName("기본 구분자와 함께 문자열 앞부분의 \"//\"와 \"\\n\" 사이에 위치하는 문자를 커스텀 구분자로 사용할 수 있다")
-    @ParameterizedTest
-    @CsvSource(value = {"//:\n1,2:3=6", "//;\n1,2;3;4;5=15", "//^\n3^4^5,6,7=25"}, delimiter = '=')
-    void splitUsingCustomDelimiter(String expression, String result) {
+    @Test
+    void splitUsingCustomDelimiter() {
         Calculator calculator = new Calculator();
-        assertThat(calculator.sum(expression)).isEqualTo(Double.parseDouble(result));
+
+        String expression1 = "//;\n1;2;3";
+        assertThat(calculator.sum(expression1)).isEqualTo(6);
+
+        String expression2 = "//;\n1,2;3;4;5";
+        assertThat(calculator.sum(expression2)).isEqualTo(15);
+
+        String expression3 = "//:\n3:4:5,6,7";
+        assertThat(calculator.sum(expression3)).isEqualTo(25);
     }
+
 }
