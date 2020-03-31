@@ -24,7 +24,7 @@ public class LottoGame {
         this.playGameCount = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
     }
 
-    public LottoGame(Money money, LottoTickets lottoTickets) {
+    public LottoGame(LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
