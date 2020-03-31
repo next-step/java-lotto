@@ -14,10 +14,10 @@ public class LottoStore {
         return publishLottery(price, lottoPublisher);
     }
 
-    public static Lotteries sellManual(final Price price, final List<LottoNumbers> manualLottoNumbers) {
+    public static Lotteries sellManual(final Price price, final List<LottoNumbers> manualLottoNumbers, final LottoPublisher lottoPublisher) {
         checkAvailablePriceBuyLotto(price);
         checkLotteriesSize(price, manualLottoNumbers.size());
-        return null;
+        return publishLottery(price, lottoPublisher);
     }
 
     private static void checkAvailablePriceBuyLotto(final Price price) {
