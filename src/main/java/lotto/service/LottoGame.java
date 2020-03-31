@@ -4,6 +4,7 @@ import lotto.domain.Money;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
+import lotto.domain.item.WinLottoTicket;
 import lotto.domain.stragegy.LottoNumberGenerator;
 import lotto.view.LottoDto;
 
@@ -58,20 +59,20 @@ public class LottoGame {
 //        dto.setFifthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
 //        return dto;
 //    }
-//
-//    private Money getAllEarningPrize(WinLottoTicket winTicket) {
-//        return this.lottoTickets.getAllEarningPrize(winTicket);
-//    }
-//
-//    public LottoDto getEarningRate(WinLottoTicket winTicket) {
-//        LottoDto dto = new LottoDto();
-//        Money prize = getAllEarningPrize(winTicket);
-//        int howManyBuyItem = this.lottoTickets.size();
-//        Money buyAmount = Money.buyItemAmount(LOTTO_PRICE, howManyBuyItem);
-//
-//        double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
-//
-//        dto.setEarningRate(rate);
-//        return dto;
-//    }
+
+    private Money getAllEarningPrize(WinLottoTicket winTicket) {
+        return this.lottoTickets.getAllEarningPrize(winTicket);
+    }
+
+    public LottoDto getEarningRate(WinLottoTicket winTicket) {
+        LottoDto dto = new LottoDto();
+        Money prize = getAllEarningPrize(winTicket);
+        int howManyBuyItem = this.lottoTickets.size();
+        Money buyAmount = Money.buyItemAmount(LOTTO_PRICE, howManyBuyItem);
+
+        double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
+
+        dto.setEarningRate(rate);
+        return dto;
+    }
 }
