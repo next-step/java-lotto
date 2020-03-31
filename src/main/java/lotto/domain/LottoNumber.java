@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         checkAvailableNumber(number);
-        return new LottoNumber(number);
+        return LottoNumberCache.cache[number - MIN];
     }
 
     public static LottoNumber clone(final LottoNumber clone) {
@@ -32,6 +32,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < MIN || number > MAX) {
             throw new InvalidLottoNumberException(number);
         }
+    }
+
+    private static class LottoNumberCache {
+        private static final int START_INDEX = 0;
+        static final LottoNumber[] cache = new LottoNumber[MAX];
+
+        static {
+            for (int i = START_INDEX; i < MAX; i++) {
+                cache[i] = new LottoNumber(i + MIN);
+            }
+        }
+
+        private LottoNumberCache() {}
     }
 
     @Override

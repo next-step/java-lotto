@@ -6,7 +6,7 @@ public class BonusBall {
     private LottoNumber bonusNumber;
 
     public BonusBall(final String input) {
-        this.bonusNumber = LottoNumberGenerator.cache[Integer.valueOf(input) - LottoNumber.MIN];
+        this.bonusNumber = LottoNumber.valueOf(Integer.valueOf(input));
     }
 
     LottoNumber getLottoNumber() {
