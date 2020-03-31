@@ -12,8 +12,8 @@ import java.util.stream.IntStream;
 
 public class LottoGame {
 
-  private static final int START_INDEX = 0;
   public static final int LOTTO_NO_COUNT = 6;
+  private static final int START_INDEX = 0;
 
   private Set<LottoNo> lottoNos;
 
@@ -29,6 +29,10 @@ public class LottoGame {
         .collect(Collectors.toSet());
   }
 
+  public Set<LottoNo> getLottoNos() {
+    return lottoNos;
+  }
+
   public static Set<Integer> genarateRandomNumbers() {
     List<Integer> candidates = IntStream.rangeClosed(LOWER_BOUND, UPPER_BOUND)
         .boxed()
@@ -37,6 +41,12 @@ public class LottoGame {
     Collections.shuffle(candidates);
 
     return new HashSet<>(candidates.subList(START_INDEX, LOTTO_NO_COUNT));
+  }
+
+  public int getMatchCount(LottoGame lottoGame) {
+    return (int) lottoNos.stream()
+        .filter(lottoNo -> lottoGame.lottoNos.contains(lottoNo))
+        .count();
   }
 
   private void throwIfInvalid(Set<Integer> lottoNumbers) {
