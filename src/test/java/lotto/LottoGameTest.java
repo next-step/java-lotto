@@ -37,6 +37,14 @@ public class LottoGameTest {
 
         int result = LottoGame.getRank(matchCount);
 
-        assertThat(result).isEqualTo(5);
+        assertThat(result).isEqualTo(4);
+
+        lotto = Arrays.asList(1, 2, 3, 10, 11, 12);
+        winningLotto = Arrays.asList(1, 2, 3, 4, 5, 10);
+        matchCount = LottoGame.match(lotto, winningLotto);
+
+        result = LottoGame.getRank(matchCount);
+
+        assertThat(result).isEqualTo(3);
     }
 }
