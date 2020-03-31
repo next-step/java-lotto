@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameTest {
@@ -35,9 +36,9 @@ public class LottoGameTest {
         List<Integer> winningLotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         int matchCount = LottoGame.match(lotto, winningLotto);
 
-        int result = LottoGame.getRank(matchCount);
+        Rank result = LottoGame.getRank(matchCount);
 
-        assertThat(result).isEqualTo(4);
+        assertThat(result).isEqualTo(FOURTH);
 
         lotto = Arrays.asList(1, 2, 3, 10, 11, 12);
         winningLotto = Arrays.asList(1, 2, 3, 4, 5, 10);
@@ -45,6 +46,6 @@ public class LottoGameTest {
 
         result = LottoGame.getRank(matchCount);
 
-        assertThat(result).isEqualTo(3);
+        assertThat(result).isEqualTo(THIRD);
     }
 }
