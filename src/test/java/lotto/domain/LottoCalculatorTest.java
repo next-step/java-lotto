@@ -25,6 +25,7 @@ public class LottoCalculatorTest {
         Lotto rank3Lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
         Lotto rank4Lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
         Lotto rank5Lotto = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10));
+        bonusBall = "7";
 
         lastWeekLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoCalculatorTestHelper = new LottoCalculatorTestHelper(noRankLotto,
@@ -41,7 +42,6 @@ public class LottoCalculatorTest {
         String winningPercentageValue = "0.35";
         List<Lotto> lottos = lottoCalculatorTestHelper.getRankLotto(RankType.RANK5, 1);
         LottoCalculator lottoCalculator = new LottoCalculator(new WinningLotto(lastWeekLotto, bonusBall), lottos);
-        bonusBall = "7";
 
         String winningPercentage = lottoCalculator.getWinningPercentage(investment).toString();
 

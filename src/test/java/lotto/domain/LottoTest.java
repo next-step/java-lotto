@@ -26,7 +26,7 @@ public class LottoTest {
     void lotto_갯수_검사() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
                 .isInstanceOf(LottoException.class)
-                .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER.getMessage());
+                .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER_SIZE.getMessage());
     }
 
     @Test
@@ -35,6 +35,14 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(LottoException.class)
                 .hasMessageContaining(ExceptionType.DUPLICATED_LOTTO_NUMBER.getMessage());
+    }
+
+    @Test
+    @DisplayName("로또 번호 검사 테스트 (1 이상 45 이하) ")
+    void lotto_번호_검사() {
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(0, 2, 3, 4, 5, 6)))
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(ExceptionType.INVALID_LOTTO_NUMBER.getMessage());
     }
 
     @ParameterizedTest
