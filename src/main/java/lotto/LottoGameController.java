@@ -1,19 +1,22 @@
 package lotto;
 
-import lotto.domain.LottoGame;
-import lotto.domain.LottoGameResults;
-import lotto.domain.LottoNumbers;
+import lotto.domain.*;
+import lotto.infrastructure.AutoLottoNumberStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoGameController {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(InputView.requestMoney());
-
-        LottoNumbers boughtNumbers = lottoGame.buy();
-        LottoGameResults results = lottoGame.getResults(boughtNumbers, InputView.requestWinningNumber());
-
-        ResultView.print(results);
+        LottoMoney lottoMoney = new LottoMoney(InputView.requestMoney());
+        LottoGame lottoGame = new LottoGame(lottoMoney);
+        LottoTickets lottoTickets = lottoGame.buy(new AutoLottoNumberStrategy());
+        lottoTickets.print();
+        WinningTicket winningTicket = new WinningTicket(
+                InputView.requestWinningNumbers(),
+                InputView.requestBonusNumber()
+        );
+        LottoGameResults lottoGameResults = lottoGame.match(lottoTickets, winningTicket);
+        ResultView.print(lottoGameResults);
     }
 }

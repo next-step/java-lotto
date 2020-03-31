@@ -1,46 +1,30 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
+import static lotto.domain.Constant.PRICE_PER_GAME;
 
 public class LottoGameResults {
-    private static final int LOTTO_WIN_MIN = 3;
-    private static final int LOTTO_WIN_MAX = 6;
+    private final List<LottoRank> lottoRanks;
 
-    private final int totalGameCount;
-    private final List<Long> winningGames;
-
-    LottoGameResults(int totalGameCount, List<Long> winningGames) {
-        this.totalGameCount = totalGameCount;
-        this.winningGames = winningGames;
-    }
-
-    public List<Long> getWinningGames() {
-        return new ArrayList<>(winningGames);
+    LottoGameResults(List<LottoRank> lottoRanks) {
+        this.lottoRanks = lottoRanks;
     }
 
     public double getProfitRate() {
-        return getWinningPrizeSum() / (double) (totalGameCount * DEFAULT_GAME_PRICE);
+        return getWinningPrizeSum() / (double) (lottoRanks.size() * PRICE_PER_GAME);
     }
 
-    public long getMatchCount(int index) {
-        return winningGames.stream()
-                .filter(matchCount -> isMatch(matchCount, index))
+    public long getEachRankCountTotal(int matchCount) {
+        return lottoRanks.stream()
+                .filter(lottoRank -> lottoRank.isEqualTo(matchCount))
                 .count();
     }
 
-    private double getWinningPrizeSum() {
-        double winningPrizeSum = 0;
-        for (int i = LOTTO_WIN_MIN; i <= LOTTO_WIN_MAX; i++) {
-            long count = getMatchCount(i);
-            winningPrizeSum += (count * LottoWinningLevel.of(i).getWinningPrize());
-        }
-        return winningPrizeSum;
+    double getWinningPrizeSum() {
+        return lottoRanks.stream()
+                .mapToDouble(LottoRank::getWinningPrize)
+                .sum();
     }
 
-    private boolean isMatch(Long matchCount, int checkPoint) {
-        return matchCount == checkPoint;
-    }
 }

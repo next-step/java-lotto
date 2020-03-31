@@ -3,29 +3,24 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.Constant.DEFAULT_GAME_PRICE;
-import static lotto.domain.Constant.ZERO_INDEX;
-
 public class LottoGame {
-    private final int gameCount;
+    private final LottoMoney lottoMoney;
 
-    public LottoGame(int money) {
-        this.gameCount = Math.floorDiv(Money.validate(money), DEFAULT_GAME_PRICE);
+    public LottoGame(LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
     }
 
-    public int getGameCount() {
-        return gameCount;
-    }
-
-    public LottoNumbers buy() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = ZERO_INDEX; i < gameCount; i++) {
-            lottoNumbers.add(new LottoNumber(new LottoNumberAutoGenerator().get()));
+    public LottoTickets buy(LottoNumberStrategy lottoNumberStrategy) {
+        int availableCount = lottoMoney.getAvailableBuyingCount();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < availableCount; i++) {
+            LottoTicket lottoTicket = new LottoTicket(lottoNumberStrategy.get());
+            lottoTickets.add(lottoTicket);
         }
-        return new LottoNumbers(lottoNumbers);
+        return new LottoTickets(lottoTickets);
     }
 
-    public LottoGameResults getResults(LottoNumbers boughtNumbers, List<Integer> winningNumber) {
-        return LottoGameMatcher.matchWinningNumber(boughtNumbers, new LottoNumber(winningNumber));
+    public LottoGameResults match(LottoTickets lottoTickets, WinningTicket winningTicket) {
+        return new LottoGameResults(lottoTickets.checkRank(winningTicket));
     }
 }
