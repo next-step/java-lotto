@@ -15,6 +15,11 @@ public class LottoNo {
     number = integer;
   }
 
+  @Override
+  public String toString() {
+    return Integer.toString(number);
+  }
+
   private void throwIfInvalid(int integer) {
     if (integer < LOWER_BOUND || integer > UPPER_BOUND) {
       throw new IllegalArgumentException("LottoNo should be between 1 and 45.");

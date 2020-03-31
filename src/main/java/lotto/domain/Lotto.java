@@ -17,6 +17,10 @@ public class Lotto {
     this(0, lottoGames);
   }
 
+  public List<LottoGame> getLottoGames() {
+    return lottoGames;
+  }
+
   public Lotto(int autoCount, List<LottoGame> lottoGames) {
     this.lottoGames = Stream.concat(
         Stream.generate(LottoGame::new).limit(autoCount),
