@@ -1,3 +1,5 @@
+package calculator;
+
 import static org.assertj.core.api.Assertions.*;
 
 import calculator.StringCalculator;
