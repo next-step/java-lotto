@@ -1,7 +1,5 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
-
 import java.util.List;
 
 public class LottoTicket extends Lotto {
@@ -10,24 +8,24 @@ public class LottoTicket extends Lotto {
         super(numbers);
     }
 
-//    public int getLuckyNumberMatchCount(Item winTicket) {
-//        int matchCount = 0;
-//        for (LottoNumber num : numbers) {
-//            matchCount = increaseCountIfMatch(winTicket, matchCount, num);
-//        }
-//
-//        return matchCount;
-//    }
-//
-//    private int increaseCountIfMatch(Item winTicket, int matchCount, LottoNumber winNumber) {
-//        for (LottoNumber number : winTicket.getNumbers()) {
-//            if (number.equals(winNumber)) {
-//                matchCount++;
-//            }
-//        }
-//        return matchCount;
-//    }
-//
+    public int getLuckyNumberMatchCount(WinLottoTicket winTicket) {
+        int matchCount = 0;
+        for (LottoNumber num : this.numbers.getValue()) {
+            matchCount = increaseCountIfMatch(winTicket, matchCount, num);
+        }
+
+        return matchCount;
+    }
+
+    private int increaseCountIfMatch(WinLottoTicket winTicket, int matchCount, LottoNumber winNumber) {
+        for (LottoNumber number : winTicket.getNumbers().getValue()) {
+            if (number.equals(winNumber)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
 //    private boolean isMatchBonus(Item winTicket) {
 //        LottoNumber bonus = ((WinLottoTicket) winTicket).getBonus();
 //        return numbers.contains(bonus);
