@@ -9,14 +9,15 @@ public class LottoGameController {
 
     public static void main(String[] args) {
         LottoMoney lottoMoney = new LottoMoney(InputView.requestMoney());
-        LottoGame lottoGame = new LottoGame(lottoMoney);
-        LottoTickets lottoTickets = lottoGame.buy(new AutoLottoNumberStrategy());
-        lottoTickets.print();
+        LottoMachine lottoMachine = new LottoMachine(lottoMoney);
+        LottoTickets lottoTickets = lottoMachine.buy(new AutoLottoNumberStrategy());
+
+        LottoGame lottoGame = new LottoGame(lottoTickets);
         WinningTicket winningTicket = new WinningTicket(
                 InputView.requestWinningNumbers(),
                 InputView.requestBonusNumber()
         );
-        LottoGameResults lottoGameResults = lottoGame.match(lottoTickets, winningTicket);
+        LottoGameResults lottoGameResults = lottoGame.match(winningTicket);
         ResultView.print(lottoGameResults);
     }
 }

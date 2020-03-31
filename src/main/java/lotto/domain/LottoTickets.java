@@ -23,9 +23,10 @@ public class LottoTickets {
                 .collect(toList());
     }
 
-    public void print() {
-        lottoTickets.stream()
-                .forEach(lottoTicket -> System.out.println(lottoTicket.toIntNumbers()));
+    public List<String> convertToString() {
+        return lottoTickets.stream()
+                .map(lottoTicket -> lottoTicket.toIntNumbers().toString())
+                .collect(toList());
     }
 
     @Override
