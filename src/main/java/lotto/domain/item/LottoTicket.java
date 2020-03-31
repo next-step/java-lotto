@@ -10,6 +10,10 @@ public class LottoTicket extends Lotto {
         super(numbers);
     }
 
+    public LottoTicket(LottoNumbers numbers) {
+        super(numbers);
+    }
+
     public int getLuckyNumberMatchCount(WinLottoTicket winTicket) {
         int matchCount = 0;
         for (LottoNumber num : this.numbers.getValue()) {

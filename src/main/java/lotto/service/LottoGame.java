@@ -1,7 +1,15 @@
 package lotto.service;
 
 import lotto.domain.Money;
+import lotto.domain.item.LottoNumbers;
+import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
+import lotto.domain.stragegy.LottoNumberGenerator;
+import lotto.view.LottoDto;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoGame {
 
@@ -17,30 +25,30 @@ public class LottoGame {
     public LottoGame(Money money, LottoTickets lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
-//
-//    private LottoTicket buyOneLottoTicket(List<Integer> numbers) {
-//        playGameCount--;
-//        return new LottoTicket(numbers);
-//    }
-//
-//    private void buyAllLottoTicket() {
-//        List<LottoTicket> lottos = new ArrayList<>();
-//        while (playGameCount > 0) {
-//            List<Integer> numbers = LottoNumberGenerator.generateLottoNumber();
-//            lottos.add(buyOneLottoTicket(numbers));
-//        }
-//        this.lottoTickets = new LottoTickets(Collections.unmodifiableList(lottos));
-//    }
-//
-//    public LottoDto play() {
-//        buyAllLottoTicket();
-//        LottoDto dto = new LottoDto();
-//
-//        dto.setTickets(this.lottoTickets.getTickets());
-//
-//        return dto;
-//    }
-//
+
+    private LottoTicket buyOneLottoTicket(LottoNumbers numbers) {
+        playGameCount--;
+        return new LottoTicket(numbers);
+    }
+
+    private void buyAllLottoTicket() {
+        List<LottoTicket> lottos = new ArrayList<>();
+        while (playGameCount > 0) {
+            LottoNumbers numbers = LottoNumbers.createLottoNumbersUseInteger(LottoNumberGenerator.generateLottoNumber());
+            lottos.add(buyOneLottoTicket(numbers));
+        }
+        this.lottoTickets = new LottoTickets(Collections.unmodifiableList(lottos));
+    }
+
+    public LottoDto play() {
+        buyAllLottoTicket();
+        LottoDto dto = new LottoDto();
+
+        dto.setTickets(this.lottoTickets.getTickets());
+
+        return dto;
+    }
+
 //    public LottoDto findWinGame(Item winTicket) {
 //        LottoDto dto = new LottoDto();
 //        dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));

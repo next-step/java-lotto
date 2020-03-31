@@ -32,21 +32,21 @@ class LottoGameTest {
     public void constructor_success() throws Exception {
         LottoGame lottoGame = new LottoGame(new Money(10000));
     }
-//
-//    @DisplayName("입력금액에서 구매 가능한 로또만큼 구매 되는지 체크")
-//    @ParameterizedTest
-//    @CsvSource(value = {"1000:1", "5000:5"}, delimiter = ':')
-//    public void play_success_countBuyLotto(int myMoney, int expect) throws Exception {
-//        //given
-//        LottoGame lottoGame = new LottoGame(new Money(myMoney));
-//
-//        //when
-//        LottoDto dto = lottoGame.play();
-//
-//        //then
-//        assertThat(dto.getTickets().size()).isEqualTo(expect);
-//    }
-//
+
+    @DisplayName("입력금액에서 구매 가능한 로또만큼 구매 되는지 체크")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "5000:5"}, delimiter = ':')
+    public void play_success_countBuyLotto(int myMoney, int expect) throws Exception {
+        //given
+        LottoGame lottoGame = new LottoGame(new Money(myMoney));
+
+        //when
+        LottoDto dto = lottoGame.play();
+
+        //then
+        assertThat(dto.getTickets().size()).isEqualTo(expect);
+    }
+
 //    @DisplayName("수익률 개산")
 //    @Test
 //    public void getEarningRate_success() throws Exception {
