@@ -4,9 +4,7 @@ import lombok.Getter;
 import lotto.exception.LottoException;
 import lotto.exception.ExceptionType;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -23,13 +21,10 @@ public class Lotto {
     }
 
     Lotto(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_COUNT) {
-            throw new LottoException(ExceptionType.INVALID_LOTTO_NUMBER);
-        }
-
         Collections.sort(numbers);
-
         this.numbers = numbers;
+
+        validNumbers();
     }
 
     public int getMatchCount(Lotto lotto) {
@@ -40,5 +35,15 @@ public class Lotto {
 
     public boolean contains(int number) {
         return numbers.contains(number);
+    }
+
+    private void validNumbers() {
+        if (numbers.size() != LOTTO_COUNT) {
+            throw new LottoException(ExceptionType.INVALID_LOTTO_NUMBER);
+        }
+
+        if(new HashSet<>(numbers).size() < LOTTO_COUNT) {
+            throw new LottoException(ExceptionType.DUPLICATED_LOTTO_NUMBER);
+        }
     }
 }
