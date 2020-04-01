@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoChecker;
 import lotto.dto.LottoNumberDto;
-import lotto.dto.PurchasedLottoNumbers;
+import lotto.dto.PurchasedLottoNumbersDto;
 import lotto.ui.InputView;
 import lotto.ui.OutputView;
 
@@ -18,7 +18,7 @@ public class Lotto {
 		LottoBuyer lottoBuyer = new LottoBuyer();
 		long spentMoney = inputView.getSpentMoney();
 		List<LottoNumberDto> passiveNumbers = inputView.getPassiveLottoNumbers();
-		PurchasedLottoNumbers numbers = lottoBuyer.buyLottoNumbers(spentMoney, passiveNumbers);
+		PurchasedLottoNumbersDto numbers = lottoBuyer.buyLottoNumbers(spentMoney, passiveNumbers);
 		outputView.printLottoNumbers(numbers);
 
 		LottoNumberDto wonNumber = inputView.getWonLastWeekLottoNumbers();

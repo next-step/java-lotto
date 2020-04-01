@@ -3,7 +3,7 @@ package lotto.ui;
 import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoRank;
 import lotto.dto.LottoStatisticsDto;
-import lotto.dto.PurchasedLottoNumbers;
+import lotto.dto.PurchasedLottoNumbersDto;
 import lotto.utils.StringFormatter;
 
 import java.util.Map;
@@ -20,7 +20,7 @@ public class OutputView {
 		return new OutputView();
 	}
 
-	public void printLottoNumbers(PurchasedLottoNumbers lottoNumbers) {
+	public void printLottoNumbers(PurchasedLottoNumbersDto lottoNumbers) {
 		System.out.println(String.format(BUY_COUNT_FORMAT, lottoNumbers.getPassiveCount(), lottoNumbers.getAutoCount()));
 		lottoNumbers.getLottoNumbers().stream()
 				.map(LottoNumberDto::getNumbers)

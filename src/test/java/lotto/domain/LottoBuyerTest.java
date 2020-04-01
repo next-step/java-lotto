@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumberDto;
-import lotto.dto.PurchasedLottoNumbers;
+import lotto.dto.PurchasedLottoNumbersDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ class LottoBuyerTest {
 	void LottoPassiveTest() {
 		List<Integer> numberList = Arrays.asList(1, 2, 3, 4, 5, 6);
 		LottoBuyer buyer = new LottoBuyer();
-		PurchasedLottoNumbers lottoNumbers = buyer.buyLottoNumbers(4000,
+		PurchasedLottoNumbersDto lottoNumbers = buyer.buyLottoNumbers(4000,
 				Arrays.asList(new LottoNumberDto(numberList),
 						new LottoNumberDto(numberList),
 						new LottoNumberDto(numberList)));
