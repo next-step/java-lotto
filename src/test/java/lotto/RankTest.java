@@ -26,4 +26,12 @@ public class RankTest {
 
         assertThat(money).isEqualTo(2000000000);
     }
+
+    @Test
+    @DisplayName("3개 미만으로 번호가 일치하면 당첨 실패로 처리한다")
+    public void loseWhenMatchCountLessThanThree() {
+        Rank rank = Rank.of(2);
+
+        assertThat(rank).isEqualTo(LOSER);
+    }
 }
