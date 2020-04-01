@@ -10,7 +10,7 @@ public class InputView {
 
     private static final int DEFAULT_PRICE = Integer.MIN_VALUE;
 
-    public static int getPurchasePrice() {
+    public static int getMoney() {
         System.out.println(PURCHASE_NOTICE);
 
         try {

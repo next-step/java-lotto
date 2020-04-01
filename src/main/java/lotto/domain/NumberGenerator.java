@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,9 +17,12 @@ public class NumberGenerator {
             .collect(Collectors.toList());
 
     static List<Integer> generateOneSet() {
-        Collections.shuffle(numberRange);
+        Collections.shuffle(numberRange, new Random(System.currentTimeMillis()));
 
-        List<Integer> oneSet = numberRange.subList(0, LOTTO_ONE_SET_SIZE);
+        List<Integer> oneSet = new ArrayList<>();
+        for (int i = 0; i < LOTTO_ONE_SET_SIZE; i++) {
+            oneSet.add(numberRange.get(i).intValue());
+        }
         Collections.sort(oneSet);
 
         return oneSet;
