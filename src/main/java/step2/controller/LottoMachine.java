@@ -28,10 +28,9 @@ public class LottoMachine {
     public Lottos createLottos(InputView inputView, Money money) {
         int lottoCount = money.getLottoCount();
         int manualLottoCount = inputView.getManualLottoCount();
-        int autoLottoCount = manualLottoCount - lottoCount;
+        int autoLottoCount = lottoCount - manualLottoCount;
 
         List<Lotto> wholeLottos = new ArrayList<>();
-
         wholeLottos.addAll(LottoProvider.createLottos(inputView.getManualLottos(manualLottoCount)));
         wholeLottos.addAll(LottoProvider.createLottos(autoLottoCount));
 
