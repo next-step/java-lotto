@@ -35,7 +35,7 @@ public class LottoResult {
         return totalPrice() / totalTicketCost();
     }
 
-    private int totalPrice() {
+    private double totalPrice() {
         int sum = 0;
         for (LottoPrize prize : LottoPrize.values()) {
             sum += prize.getPrice() * lottoResult.get(prize);
@@ -43,7 +43,7 @@ public class LottoResult {
         return sum;
     }
 
-    private int totalTicketCost() {
+    private double totalTicketCost() {
         int totalTicketCount = 0;
         for (int ticketCount : lottoResult.values()) {
             totalTicketCount += ticketCount;
