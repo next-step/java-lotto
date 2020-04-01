@@ -8,19 +8,6 @@ public class InputView {
     private static InputView inputView = new InputView();
     private static Scanner scanner = new Scanner(System.in);
 
-    public InputView() {
-    }
-
-    public InputView(int purchaseAmount) {
-        validatePurchaseAmount(purchaseAmount);
-    }
-
-    public InputView(int purchaseAmount, int manualCount) {
-        validatePurchaseAmount(purchaseAmount);
-        int purchaseCount = getPurchaseCount(purchaseAmount);
-        validateManualCount(purchaseCount, manualCount);
-    }
-
     public int enterPurchaseAmount() {
         System.out.println("구매액을 입력해 주세요.");
         int purchaseAmount = scanner.nextInt();

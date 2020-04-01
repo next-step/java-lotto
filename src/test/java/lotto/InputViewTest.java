@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class InputViewTest {
 
-    private InputView inputView;
+    private static InputView inputView = InputView.getInputView();
 
     @DisplayName("로또 구입 금액이 최소 금액보다 이하일 경우 예외처리를 해준다")
     @Test
@@ -18,7 +18,7 @@ class InputViewTest {
         int purchaseAmount = 500;
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            inputView = new InputView(purchaseAmount);
+            inputView.validatePurchaseAmount(purchaseAmount);
         });
     }
 
@@ -26,7 +26,6 @@ class InputViewTest {
     @Test
     void getPurchaseCount() {
         int purchaseAmount = 14000;
-        inputView = new InputView(purchaseAmount);
         int purchaseCount = inputView.getPurchaseCount(purchaseAmount);
 
         assertThat(purchaseCount).isEqualTo(14);
@@ -35,7 +34,6 @@ class InputViewTest {
     @DisplayName("수동으로 구매 할 로또수 구매금액보다 클 시 예외처리를 해준다")
     @Test
     void validateManualCount() {
-        inputView = new InputView(15000);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             inputView.validateManualCount(inputView.getPurchaseCount(15000), 16);
@@ -45,8 +43,6 @@ class InputViewTest {
     @DisplayName("자동개수가 몇개인지 카운트를 센다")
     @Test
     void getCount() {
-        inputView = new InputView(15000, 13);
-
         assertThat(inputView.getAutomaticCount(15, 13)).isEqualTo(2);
     }
 }
