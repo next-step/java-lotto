@@ -16,7 +16,6 @@ public class LottoController {
         inputResult.showResult();
 
         ResultView resultView = new ResultView(askLastPrizeNumber(), lotto);
-        resultView.getWinLottos();
     }
 
     private int askNumberOfPurchase() {

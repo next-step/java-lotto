@@ -12,14 +12,14 @@ public class TextToNumber {
     private static final String DELIMETER = ",|:";
     private static final int MATCHING_PART = 1;
     private static final int DELIMETER_FORMULA = 2;
-    private List<PositiveNumber> positiveNumbers;
+    private PostiveNumbers positiveNumbers;
 
     public TextToNumber(String inputText) {
-        this.positiveNumbers = convertToNumbers(splitText(inputText));
+        this.positiveNumbers = new PostiveNumbers(convertToNumbers(splitText(inputText)));
     }
 
     public List<PositiveNumber> getPositiveNumbers() {
-        return new ArrayList<>(positiveNumbers);
+        return positiveNumbers.getPositiveNumbers();
     }
 
     private List<String> splitText(String text) {

@@ -15,15 +15,23 @@ public class ResultView {
         this.lotto = lotto;
     }
 
-    public Map<Integer, LottoNumbers> getWinLottos() {
-        LottoResult lottoResult = new LottoResult(winnerNumber(), lotto);
-
-        return lottoResult.checkWinnerLotto();
-    }
-
     public LottoNumbers winnerNumber() {
         return new LottoNumbers(numbers.getNumbers());
     }
+
+//    public void showResult() {
+//        Map<Integer, LottoNumbers> winningInfo = getWinLottos();
+//        winningInfo.values();
+//    }
+
+    public String printWinningResult() {
+        return null;
+    }
+
+//    private Map<Integer, LottoNumbers> getWinLottos() {
+//        LottoResult lottoResult = new LottoResult(winnerNumber(), lotto);
+//        return lottoResult.checkWinnerLotto();
+//    }
 
     private Numbers getParsedNumbers(String inputText) {
         return new Parser(inputText).getNumbers();

@@ -7,7 +7,7 @@ public class StringAddCalculator {
             return 0;
         }
         TextToNumber convertNumber = new TextToNumber(inputText);
-        PostiveNumbers postiveNumbers = new PostiveNumbers(convertNumber);
+        PostiveNumbers postiveNumbers = new PostiveNumbers(convertNumber.getPositiveNumbers());
 
         return postiveNumbers.sum();
     }

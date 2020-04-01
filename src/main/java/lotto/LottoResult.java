@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -12,14 +14,14 @@ public class LottoResult {
         this.lotto = lotto;
     }
 
-    public Map<Integer, LottoNumbers> checkWinnerLotto() {
-        Map<Integer, LottoNumbers> result = new HashMap<>();
+    public Map<Integer, List<LottoNumbers>> checkWinnerLotto() {
+        List<LottoNumbers> result = new ArrayList<>();
 
-        for (LottoNumbers lottoNumbers : lotto.getGeneratedLottos()) {
-            int matchCount = extractLottoNumbers(lottoNumbers);
-            result.put(matchCount, lottoNumbers);
+        for (LottoNumbers userLotto : lotto.getGeneratedLottos()) {
+            int matchCount = extractLottoNumbers(userLotto);
+
         }
-        return result;
+        return null;
     }
 
     private int extractLottoNumbers(LottoNumbers lottoNumbers) {
