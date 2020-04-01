@@ -13,26 +13,13 @@ import org.junit.jupiter.api.Test;
 
 class LottoGeneratorTest {
 
-    private LottoGenerator lottoGenerator;
+    private static LottoGenerator lottoGenerator = LottoGenerator.getLottoGenerator();
 
-    @BeforeEach
-    void setUp() {
-        lottoGenerator = new LottoGenerator(14);
-    }
-
-    @DisplayName("1~45 사이의 숫자 로또번호를 구매 수량 만큼 생성한다.")
+    @DisplayName("1~45 사이의 숫자 로또번호를 자동 구매 수량 만큼 생성한다.")
     @Test
     void generateRandomNumbers() {
-        LottoTicket lottoTicket = lottoGenerator.createLottoNumbersByPurchaseCount();
+        LottoTicket lottoTicket = lottoGenerator.createAutomaticLottoTicket(14);
         assertThat(lottoTicket.getLottoNumbers()).hasSize(14);
     }
 
-
-    @DisplayName("구매수량만큼 생성한 로또 번호들을 가져온다.")
-    @Test
-    void createLottoNumbersByPurchaseCount() {
-        LottoTicket lottoTicket = lottoGenerator.getLottoTicket();
-        assertThat(lottoTicket.getLottoNumbers()).hasSize(14);
-
-    }
 }

@@ -3,6 +3,7 @@ package lotto;
 public class LottoController {
 
     private static InputView inputView = InputView.getInputView();
+    private static LottoGenerator lottoGenerator = LottoGenerator.getLottoGenerator();
     private static ResultView resultView = ResultView.getResultView();
 
     public static void main(String[] args) {
@@ -13,9 +14,9 @@ public class LottoController {
 
         System.out.println(inputView.purchaseLottoTicketInfo(manualCount, automaticCount));
 
-        LottoGenerator lottoGenerator = new LottoGenerator(automaticCount, manualCount);
-        lottoGenerator.createLottoNumbersByPurchaseCount();
-        LottoTicket lottoTicket = lottoGenerator.getLottoTicket();
+        LottoTicket manualLottoTicket = lottoGenerator.createManualLottoTicket(manualCount);
+        LottoTicket automaticLottoTicket = lottoGenerator.createAutomaticLottoTicket(automaticCount);
+        LottoTicket lottoTicket = lottoGenerator.totalLottoTicket(manualLottoTicket,automaticLottoTicket);
 
         String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoTicket);
         System.out.println(printPurchaseLottoNumbers);

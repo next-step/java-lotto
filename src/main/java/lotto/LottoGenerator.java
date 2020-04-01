@@ -18,29 +18,8 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_COUNT = LottoRule.COUNT.getValue();
     private static final String SPLIT_TEXT = ",";
 
-    private Scanner scanner = new Scanner(System.in);
-
-    private int automaticCount;
-    private LottoTicket lottoTicket;
-
-    public LottoGenerator(int automaticCount) {
-        this.automaticCount = automaticCount;
-        this.lottoTicket = createLottoNumbersByPurchaseCount();
-
-    }
-
-    public LottoGenerator(int automaticCount, int manualCount) {
-        this.automaticCount = automaticCount;
-
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualCount; i++) {
-            lottoNumbers.add(new LottoNumbers(splitLottoNumber(scanner.nextLine())));
-        }
-
-        lottoNumbers.addAll(createLottoNumbersByPurchaseCount().getLottoNumbers());
-        this.lottoTicket = new LottoTicket(lottoNumbers);
-    }
+    private static LottoGenerator lottoGenerator = new LottoGenerator();
+    private static Scanner scanner = new Scanner(System.in);
 
     private Set<LottoNo> generateRandomNumbers() {
         Collections.shuffle(pickNumber);
@@ -51,7 +30,7 @@ public class LottoGenerator {
                 Collectors.toCollection(LinkedHashSet::new));
     }
 
-    public LottoTicket createLottoNumbersByPurchaseCount() {
+    public LottoTicket createAutomaticLottoTicket(int automaticCount) {
         List<LottoNumbers> numbers = new ArrayList<>();
         for (int i = 0; i < automaticCount; i++) {
             numbers.add(new LottoNumbers(generateRandomNumbers()));
@@ -59,8 +38,13 @@ public class LottoGenerator {
         return new LottoTicket(numbers);
     }
 
-    public LottoTicket getLottoTicket() {
-        return lottoTicket;
+    public LottoTicket createManualLottoTicket(int manualCount) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < manualCount; i++) {
+            lottoNumbers.add(new LottoNumbers(splitLottoNumber(scanner.nextLine())));
+        }
+        return new LottoTicket(lottoNumbers);
     }
 
     private Set<LottoNo> splitLottoNumber(String inputText) {
@@ -68,5 +52,16 @@ public class LottoGenerator {
                 .stream(inputText.split(SPLIT_TEXT))
                 .map(num -> new LottoNo(Integer.parseInt(num)))
                 .collect(toSet());
+    }
+
+    public static LottoGenerator getLottoGenerator() {
+        return lottoGenerator;
+    }
+
+    public LottoTicket totalLottoTicket(LottoTicket manualLottoTicket, LottoTicket automaticLottoTicket) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(manualLottoTicket.getLottoNumbers());
+        lottoNumbers.addAll(automaticLottoTicket.getLottoNumbers());
+        return new LottoTicket(lottoNumbers);
     }
 }
