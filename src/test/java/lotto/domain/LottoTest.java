@@ -60,6 +60,14 @@ public class LottoTest {
         assertThat(winning.get(Winning.LOSE)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("수익률 계산 테스트")
+    public void calculateYieldTest(){
+        String result = Lotto.calculateYield(14000, 5000);
+
+        assertThat(result).isEqualTo("0.35");
+    }
+
     private Set<List<Integer>> generateLottoValue() {
         Set<List<Integer>> lottoNumbers = new HashSet<>();
 

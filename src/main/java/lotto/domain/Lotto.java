@@ -45,4 +45,8 @@ public class Lotto {
 
         return result;
     }
+
+    public static String calculateYield(int paidMoney, int profit) {
+        return "";
+    }
 }
