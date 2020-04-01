@@ -8,34 +8,31 @@ public class InputView {
     private static InputView inputView = new InputView();
     private static Scanner scanner = new Scanner(System.in);
 
-    private int purchaseAmount;
-    private int manualCount;
-
     public InputView() {
     }
 
     public InputView(int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
     }
 
     public InputView(int purchaseAmount, int manualCount) {
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
-        validateManualCount(manualCount);
-        this.manualCount = manualCount;
+        int purchaseCount = getPurchaseCount(purchaseAmount);
+        validateManualCount(purchaseCount, manualCount);
     }
 
-    public void enterValue() {
+    public int enterPurchaseAmount() {
         System.out.println("구매액을 입력해 주세요.");
         int purchaseAmount = scanner.nextInt();
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+        return getPurchaseCount(purchaseAmount);
+    }
 
+    public int enterManualCount(int purchaseCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualCount = scanner.nextInt();
-        validateManualCount(manualCount);
-        this.manualCount = manualCount;
+        validateManualCount(purchaseCount, manualCount);
+        return manualCount;
     }
 
     public void validatePurchaseAmount(int purchaseAmount) {
@@ -44,26 +41,22 @@ public class InputView {
         }
     }
 
-    public void validateManualCount(int manualCount) {
-        if (manualCount > getPurchaseCount()) {
+    public void validateManualCount(int purchaseCount, int manualCount) {
+        if (manualCount > purchaseCount) {
             throw new IllegalArgumentException("구매 금액보다 수동으로 구매할 로또금액이 큽니다");
         }
     }
 
-    public int getPurchaseCount() {
+    public int getPurchaseCount(int purchaseAmount) {
         return purchaseAmount / MIN_PURCHASE_AMOUNT;
     }
 
-    public int getManualCount() {
-        return manualCount;
+    public int getAutomaticCount(int purchaseCount, int manualCount) {
+        return purchaseCount - manualCount;
     }
 
-    public int getAutomaticCount() {
-        return getPurchaseCount() - manualCount;
-    }
-
-    public String purchaseLottoTicketInfo() {
-        return "수동으로 " + getManualCount() + "장, 자동으로 " + getAutomaticCount() + "개를 구매했습니다.";
+    public String purchaseLottoTicketInfo(int manualCount, int automaticCount) {
+        return "수동으로 " + manualCount + "장, 자동으로 " + automaticCount + "개를 구매했습니다.";
     }
 
     public static InputView getInputView() {

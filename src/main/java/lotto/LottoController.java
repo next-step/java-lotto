@@ -7,11 +7,13 @@ public class LottoController {
 
     public static void main(String[] args) {
 
-        inputView.enterValue();
-        System.out.println(inputView.purchaseLottoTicketInfo());
+        int purchaseCount = inputView.enterPurchaseAmount();
+        int manualCount = inputView.enterManualCount(purchaseCount);
+        int automaticCount = inputView.getAutomaticCount(purchaseCount, manualCount);
 
-        LottoGenerator lottoGenerator = new LottoGenerator(inputView.getAutomaticCount(),
-                                                           inputView.getManualCount());
+        System.out.println(inputView.purchaseLottoTicketInfo(manualCount, automaticCount));
+
+        LottoGenerator lottoGenerator = new LottoGenerator(automaticCount, manualCount);
         lottoGenerator.createLottoNumbersByPurchaseCount();
         LottoTicket lottoTicket = lottoGenerator.getLottoTicket();
 

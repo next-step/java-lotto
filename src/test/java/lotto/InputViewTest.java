@@ -27,7 +27,7 @@ class InputViewTest {
     void getPurchaseCount() {
         int purchaseAmount = 14000;
         inputView = new InputView(purchaseAmount);
-        int purchaseCount = inputView.getPurchaseCount();
+        int purchaseCount = inputView.getPurchaseCount(purchaseAmount);
 
         assertThat(purchaseCount).isEqualTo(14);
     }
@@ -38,16 +38,15 @@ class InputViewTest {
         inputView = new InputView(15000);
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            inputView.validateManualCount(16);
+            inputView.validateManualCount(inputView.getPurchaseCount(15000), 16);
         });
     }
 
-    @DisplayName("수동 개수와 자동개수가 몇개인지 카운트를 센다")
+    @DisplayName("자동개수가 몇개인지 카운트를 센다")
     @Test
     void getCount() {
         inputView = new InputView(15000, 13);
 
-        assertAll(() -> assertThat(inputView.getManualCount()).isEqualTo(13),
-                  () -> assertThat(inputView.getAutomaticCount()).isEqualTo(2));
+        assertThat(inputView.getAutomaticCount(15, 13)).isEqualTo(2);
     }
 }
