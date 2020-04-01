@@ -40,30 +40,34 @@ public class InputView {
         for(int i = 0; i < manualLottoCount; i++) {
             inputTexts.add(viewUtils.readLine());
         }
-        return convertInputTextToLottos(inputTexts);
+        return convertInputTextsToLottos(inputTexts);
     }
 
-    private List<List<Integer>> convertInputTextToLottos(List<String> inputTexts) {
+    private List<List<Integer>> convertInputTextsToLottos(List<String> inputTexts) {
         List<List<Integer>> manualLottos = new ArrayList<>();
 
         for(String inputText : inputTexts) {
-            manualLottos.add(convertStringToNumbers(inputText));
+            manualLottos.add(convertInputTextToNumbers(inputText));
         }
         return manualLottos;
     }
 
-    private List<Integer> convertStringToNumbers(String inputText) {
+    private List<Integer> convertInputTextToNumbers(String inputText) {
         String[] stringNumbers = splitNumber(inputText);
 
-        return Arrays.stream(stringNumbers)
-                .map(Integer::valueOf)
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(stringNumbers)
+                    .map(Integer::valueOf)
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_NOT_INTEGER_ERROR);
+        }
     }
 
     public List<Integer> getWinningNumbers() {
         String inputText = getWinningNumbersText();
 
-        return convertStringToNumbers(inputText);
+        return convertInputTextToNumbers(inputText);
     }
 
     private String[] splitNumber(String inputText) {
