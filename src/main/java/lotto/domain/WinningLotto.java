@@ -13,11 +13,15 @@ public class WinningLotto {
     }
 
     public int match(Lotto userLotto) {
-        int matchCount = winningLotto.match(userLotto);
+        int matchCount = userLotto.match(winningLotto);
+        boolean matchBonus = userLotto.contains(bonusNumber);
+        return rank(matchCount, matchBonus);
+    }
+
+    private static int rank(int matchCount, boolean matchBonus) {
         if (matchCount == 6) {
             return 1;
         }
-        boolean matchBonus = userLotto.contains(bonusNumber);
         if (matchCount == 5 && matchBonus) {
             return 2;
         }
