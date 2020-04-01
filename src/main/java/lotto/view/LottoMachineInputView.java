@@ -5,12 +5,13 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class LottoMachineView {
+public class LottoMachineInputView {
     private static final String PURCHASE_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String WINNING_LOTTO_INFO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String LOTTO_SPLIT_DELIMITER = ",";
@@ -21,22 +22,20 @@ public class LottoMachineView {
         System.out.println(showTicketNumber.toString());
     }
 
-    public static LottoTickets lottoPurchaseView() {
+    public static String lottoPurchaseView() {
         System.out.println(PURCHASE_MESSAGE);
-        String purchaseAmount = sc.nextLine();
-        return new LottoMachine().purchaseTicket(purchaseAmount);
+        return sc.nextLine();
     }
 
 
-    public static LottoTicket latestWinningLotto() {
+    public static List<Integer> latestWinningLotto() {
         System.out.println(WINNING_LOTTO_INFO_MESSAGE);
-        return new LottoTicket(
-                Arrays.stream(split(LOTTO_SPLIT_DELIMITER))
-                        .map(number -> number.trim())
-                        .mapToInt(Integer::parseInt)
-                        .boxed()
-                        .collect(Collectors.toList())
-        );
+        String[] inputs = sc.nextLine().split(LOTTO_SPLIT_DELIMITER);
+        return new ArrayList(Arrays.stream(inputs).
+                map(input -> input.trim())
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList()));
     }
 
     public static LottoResult checkWinningResult(LottoTicket lottoWinningTicket, LottoTickets lottoTickets) {

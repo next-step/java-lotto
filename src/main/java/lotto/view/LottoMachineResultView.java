@@ -9,7 +9,7 @@ public class LottoMachineResultView {
 
     public static void showTicketNumber(LottoTickets lottoTickets) {
         for (LottoTicket ticket : lottoTickets.ticketList()) {
-            LottoMachineView.show(ticket.showTicketNumber());
+            LottoMachineInputView.show(ticket.showTicketNumber());
         }
     }
 

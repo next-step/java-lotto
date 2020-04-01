@@ -1,21 +1,26 @@
 package lotto;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.view.LottoMachineResultView;
-import lotto.view.LottoMachineView;
+import lotto.view.LottoMachineInputView;
+
+import java.util.List;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoTickets lottoTickets = LottoMachineView.lottoPurchaseView();
+        String money = LottoMachineInputView.lottoPurchaseView();
+        LottoTickets lottoTickets = new LottoMachine().purchaseTicket(money);
         LottoMachineResultView.showTicketNumber(lottoTickets);
 
-        LottoTicket winningTicket = LottoMachineView.latestWinningLotto();
-        LottoResult lottoResult = LottoMachineView.checkWinningResult(winningTicket, lottoTickets);
+        List<Integer> winningNumbers = LottoMachineInputView.latestWinningLotto();
+        LottoTicket winningLottoTicket = new LottoTicket(winningNumbers);
+
+        LottoResult lottoResult = LottoMachineInputView.checkWinningResult(winningLottoTicket, lottoTickets);
 
         LottoMachineResultView.printLottoResult(lottoResult);
-
 
     }
 }
