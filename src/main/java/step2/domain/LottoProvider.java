@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class LottoProvider {
 
     private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
             .mapToObj(LottoNumber::new)
-            .collect(Collectors.toList());
+            .collect(toList());
 
     private LottoProvider() {}
 
@@ -26,13 +29,11 @@ public class LottoProvider {
     }
 
     private static Lotto createLotto() {
-        List<LottoNumber> lotto = getShuffledNumber()
+        return getShuffledNumber()
                 .stream()
                 .limit(Lotto.COUNT_NUMBER)
                 .sorted()
-                .collect(Collectors.toList());
-
-        return new Lotto(lotto);
+                .collect(collectingAndThen(toList(), Lotto::new));
     }
 
     private static List<LottoNumber> getShuffledNumber() {
@@ -43,16 +44,15 @@ public class LottoProvider {
     }
 
     public static Lotto createLotto(List<Integer> inputNumbers) {
-        List<LottoNumber> lotto =  inputNumbers.stream()
+        return inputNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        return new Lotto(lotto);
+                .collect(collectingAndThen(toList(), Lotto::new));
     }
 
     public static WinningLotto createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
         List<LottoNumber> lottoNumbers = inputNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(toList());
 
         return new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(bonusNumber));
     }
