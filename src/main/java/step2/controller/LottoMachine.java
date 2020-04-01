@@ -32,7 +32,7 @@ public class LottoMachine {
 
         List<Lotto> wholeLottos = new ArrayList<>();
 
-        wholeLottos.addAll(LottoProvider.createLottos(inputView.getManualLottoNumbers()));
+        wholeLottos.addAll(LottoProvider.createLottos(inputView.getManualLottos(manualLottoCount)));
         wholeLottos.addAll(LottoProvider.createLottos(autoLottoCount));
 
         Lottos lottos = new Lottos(wholeLottos);
