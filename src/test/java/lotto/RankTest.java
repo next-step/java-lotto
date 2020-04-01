@@ -1,11 +1,12 @@
 package lotto;
 
+import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lotto.Rank.*;
+import static lotto.domain.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
