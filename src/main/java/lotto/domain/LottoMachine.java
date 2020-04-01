@@ -6,12 +6,12 @@ import lotto.util.LottoTicketUtils;
 public class LottoMachine {
     private static final String PURCHASE_MESSAGE = "%d개를 구매하셨습니다.";
 
-    public static LottoResult winningResult(LottoWinningTicket lottoWinningTicket, LottoTickets lottoTickets) {
+    public static LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
         LottoResult result = new LottoResult();
         LottoPrize lottoPrize;
 
         for (LottoTicket ticket : lottoTickets.ticketList()) {
-            lottoPrize = LottoPrize.find(ticket.findMatchCount(lottoWinningTicket));
+            lottoPrize = LottoPrize.find(ticket.findMatchCount(winningTicket));
             result.increase(lottoPrize);
         }
         return result;
