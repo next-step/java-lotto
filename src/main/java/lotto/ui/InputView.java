@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.dto.LottoNumbers;
+import lotto.dto.LottoNumberDto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public class InputView {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public List<LottoNumbers> getPassiveLottoNumbers() {
+	public List<LottoNumberDto> getPassiveLottoNumbers() {
 		System.out.println(GET_PASSIVE_NUMBER_COUNT_MSG);
 		int count = Integer.parseInt(scanner.nextLine());
 
@@ -39,25 +39,25 @@ public class InputView {
 		return getPassiveLottoNumbers(count);
 	}
 
-	private List<LottoNumbers> getPassiveLottoNumbers(int count) {
-		List<LottoNumbers> lottoNumbers = new ArrayList<>(count);
+	private List<LottoNumberDto> getPassiveLottoNumbers(int count) {
+		List<LottoNumberDto> lottoNumbers = new ArrayList<>(count);
 		for (int i = 0; i < count; i++) {
 			List<Integer> numbers = Arrays.stream(scanner.nextLine().split(","))
 					.map(Integer::parseInt)
 					.collect(Collectors.toList());
-			lottoNumbers.add(new LottoNumbers(numbers));
+			lottoNumbers.add(new LottoNumberDto(numbers));
 		}
 		return lottoNumbers;
 	}
 
-	public LottoNumbers getWonLastWeekLottoNumbers() {
+	public LottoNumberDto getWonLastWeekLottoNumbers() {
 		System.out.println(GET_WINNING_NUMBER_MSG);
 		String numberString = scanner.nextLine();
 		List<Integer> numbers = Arrays.stream(numberString.split(","))
 				.map(Integer::parseInt)
 				.collect(Collectors.toList());
 
-		return new LottoNumbers(numbers);
+		return new LottoNumberDto(numbers);
 	}
 
 	public int getWonLastWeekBonusNumber() {

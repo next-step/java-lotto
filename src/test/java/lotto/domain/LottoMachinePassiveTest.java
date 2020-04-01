@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoNumbers;
+import lotto.dto.LottoNumberDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class LottoMachinePassiveTest {
 		LottoMachinePassive lottoMachinePassive = new LottoMachinePassive();
 		assertThat(
 				lottoMachinePassive.ticketingLottoNumber(
-						Collections.singletonList(new LottoNumbers(
+						Collections.singletonList(new LottoNumberDto(
 								Arrays.asList(1, 2, 3, 4, 5, 6)))))
 				.anyMatch(lottoNumber -> lottoNumber.getLottoNumbers().getNumbers().equals(Arrays.asList(1, 2, 3, 4, 5, 6)))
 				.hasSize(1);
@@ -29,7 +29,7 @@ class LottoMachinePassiveTest {
 		LottoMachinePassive lottoMachinePassive = new LottoMachinePassive();
 		assertThatThrownBy(() -> {
 			lottoMachinePassive.ticketingLottoNumber(
-					Collections.singletonList(new LottoNumbers(
+					Collections.singletonList(new LottoNumberDto(
 							Arrays.asList(1, 2, 3, 4, 5, 5))));
 		})
 				.isInstanceOf(RuntimeException.class);

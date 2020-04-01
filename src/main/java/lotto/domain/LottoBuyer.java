@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoNumbers;
+import lotto.dto.LottoNumberDto;
 import lotto.dto.PurchasedLottoNumbers;
 
 import java.util.Collections;
@@ -22,14 +22,14 @@ public class LottoBuyer {
 		return buyLottoNumbers(money, Collections.emptyList());
 	}
 
-	public PurchasedLottoNumbers buyLottoNumbers(long money, List<LottoNumbers> passiveNumbers) {
+	public PurchasedLottoNumbers buyLottoNumbers(long money, List<LottoNumberDto> passiveNumbers) {
 		long count = money / PRIZE;
 		int passiveCount = passiveNumbers.size();
 		int autoCount = (int) count - passiveCount;
 		return new PurchasedLottoNumbers(passiveCount, autoCount, getLottoNumbers(autoCount, passiveNumbers));
 	}
 
-	private List<LottoNumbers> getLottoNumbers(int autoCount, List<LottoNumbers> passiveNumbers) {
+	private List<LottoNumberDto> getLottoNumbers(int autoCount, List<LottoNumberDto> passiveNumbers) {
 		List<LottoNumber> printedLottoNumbers = machinePassive.ticketingLottoNumber(passiveNumbers);
 		printedLottoNumbers.addAll(machineAuto.ticketingLottoNumber(autoCount));
 

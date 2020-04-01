@@ -6,9 +6,9 @@ import java.util.List;
 public class PurchasedLottoNumbers {
 	private int passiveCount;
 	private int autoCount;
-	private List<LottoNumbers> lottoNumbers;
+	private List<LottoNumberDto> lottoNumbers;
 
-	public PurchasedLottoNumbers(int passiveCount, int autoCount, List<LottoNumbers> lottoNumbers) {
+	public PurchasedLottoNumbers(int passiveCount, int autoCount, List<LottoNumberDto> lottoNumbers) {
 		this.passiveCount = passiveCount;
 		this.autoCount = autoCount;
 		this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
@@ -22,7 +22,7 @@ public class PurchasedLottoNumbers {
 		return autoCount;
 	}
 
-	public List<LottoNumbers> getLottoNumbers() {
+	public List<LottoNumberDto> getLottoNumbers() {
 		return lottoNumbers;
 	}
 }

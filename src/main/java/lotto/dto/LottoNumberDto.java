@@ -3,10 +3,10 @@ package lotto.dto;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbers {
+public class LottoNumberDto {
 	private final List<Integer> numbers;
 
-	public LottoNumbers(List<Integer> numbers) {
+	public LottoNumberDto(List<Integer> numbers) {
 		this.numbers = Collections.unmodifiableList(numbers);
 	}
 

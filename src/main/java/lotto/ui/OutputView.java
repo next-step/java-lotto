@@ -1,6 +1,6 @@
 package lotto.ui;
 
-import lotto.dto.LottoNumbers;
+import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoRank;
 import lotto.dto.LottoResult;
 import lotto.dto.PurchasedLottoNumbers;
@@ -23,7 +23,7 @@ public class OutputView {
 	public void printLottoNumbers(PurchasedLottoNumbers lottoNumbers) {
 		System.out.println(String.format(BUY_COUNT_FORMAT, lottoNumbers.getPassiveCount(), lottoNumbers.getAutoCount()));
 		lottoNumbers.getLottoNumbers().stream()
-				.map(LottoNumbers::getNumbers)
+				.map(LottoNumberDto::getNumbers)
 				.map(StringFormatter::listToString)
 				.forEach(System.out::println);
 		System.out.println();
