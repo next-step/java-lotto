@@ -20,7 +20,7 @@ public class InputView {
         }
     }
 
-    public static String getWinnerNum() {
+    public static String getWinnerNumber() {
         System.out.println(WINNING_NUMBER_NOTICE);
 
         return scanner.nextLine();

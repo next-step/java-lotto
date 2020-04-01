@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum Winning {
     FIRST_PLACE(6, 2000000000),
@@ -10,8 +13,8 @@ public enum Winning {
     FOURTH_PLACE(3, 5000),
     LOSE(0, 0);
 
-    int matchCount;
-    int winningPrice;
+    private int matchCount;
+    private int winningPrice;
 
     private static Map<Integer, Winning> winningTypes;
 
@@ -23,8 +26,8 @@ public enum Winning {
         }
     }
 
-    private int getMatchCount() {
-        return matchCount;
+    public static List<Winning> winValues() {
+        return Arrays.stream(values()).filter(winning -> winning != LOSE).collect(Collectors.toList());
     }
 
     public static Winning getWinningType(int matchCount) {
@@ -35,8 +38,16 @@ public enum Winning {
         return winningTypes.get(matchCount);
     }
 
-    Winning(int matcheCount, int winningPrice) {
-        this.matchCount = matcheCount;
+    Winning(int matchCount, int winningPrice) {
+        this.matchCount = matchCount;
         this.winningPrice = winningPrice;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getWinningPrice() {
+        return winningPrice;
     }
 }
