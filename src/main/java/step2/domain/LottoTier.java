@@ -8,10 +8,10 @@ public enum LottoTier {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 6; }
     },
     SECOND(5, 30_000_000) {
-        public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 5 && isMatchBonusNumber == true; }
+        public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 5 && isMatchBonusNumber; }
     },
     THIRD(5, 150_000) {
-        public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 5 && isMatchBonusNumber == false; }
+        public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 5 && !isMatchBonusNumber; }
     },
     FOURTH(4, 50_000) {
         public boolean isWinning(long matchedNumberCount, boolean isMatchBonusNumber) {return matchedNumberCount == 4; }
@@ -39,7 +39,7 @@ public enum LottoTier {
 
     public static LottoTier getTier(long matchedNumberCount, boolean isMatchBonusNumber) {
         return Arrays.stream(values())
-                .filter(tier -> tier.isWinning(matchedNumberCount, isMatchBonusNumber) == true)
+                .filter(tier -> tier.isWinning(matchedNumberCount, isMatchBonusNumber))
                 .findFirst()
                 .orElse(NONE);
     }
