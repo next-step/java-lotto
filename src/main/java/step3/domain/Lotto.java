@@ -14,7 +14,7 @@ public class Lotto {
 
     public void getLottoNumberList() {
         for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
-            lottoList.add(new LottoNumber(i));
+            lottoList.add(LottoNumber.of(i));
         }
         this.lottoList = lottoList;
     }

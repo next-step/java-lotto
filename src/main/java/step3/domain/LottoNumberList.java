@@ -2,26 +2,44 @@ package step3.domain;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoNumberList {
-    private Set<LottoNumber> lottoNumberList;
 
-    public LottoNumberList(Set<LottoNumber> lottoNumberList) {
+    private List<LottoNumber> lottoNumberList;
+
+    public LottoNumberList(List<LottoNumber> lottoNumberList) {
         this.lottoNumberList = lottoNumberList;
     }
 
-    public LottoNumberList(List<LottoNumber> lottoNumberList) {
-        this.lottoNumberList = new HashSet<LottoNumber>(lottoNumberList);
+    public boolean contains(LottoNumber number) {
+        return this.lottoNumberList.contains(number);
     }
 
-    public boolean contains(LottoNumber number) {
-        return lottoNumberList.contains(number);
+    public List<LottoNumber> getLottoNumberList() {
+        return lottoNumberList;
     }
 
     @Override
     public String toString() {
-        return lottoNumberList.stream().map(n->String.valueOf(n)).collect(Collectors.joining(",","[","]"));
+        return String.valueOf(lottoNumberList);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumberList that = (LottoNumberList) o;
+        return Objects.equals(lottoNumberList, that.lottoNumberList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumberList);
+    }
+
+    public int size() {
+        return this.lottoNumberList.size();
     }
 }

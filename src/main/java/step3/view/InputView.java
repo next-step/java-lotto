@@ -22,6 +22,6 @@ public class InputView {
     public LottoNumber askBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         scanner = new Scanner(System.in);
-        return new LottoNumber(scanner.nextInt());
+        return LottoNumber.of(scanner.nextInt());
     }
 }

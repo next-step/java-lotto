@@ -1,17 +1,12 @@
 package step3.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class WinLotto {
     private static final int ZERO = 0;
-    private static final int LOTTO_START_NUMBER = 1;
-    private static final int LOTTO_END_NUMBER = 45;
     private static final int SELECT_NUMBER = 6;
     private static final String SPLIT_SIGN = ",";
-    private Set<LottoNumber> winLottoNumber;
+    private LottoNumberList winLottoNumber;
     private LottoNumber bonuseBall;
 
     public WinLotto(String winNumber, LottoNumber bonusBallInputValue) {
@@ -19,32 +14,28 @@ public class WinLotto {
         this.bonuseBall = addBonusBall(bonusBallInputValue);
     }
 
-    public static int getSelectNumber() {
-        return SELECT_NUMBER;
-    }
-
-    private Set<LottoNumber> checkWinLottoNumber(String winNumber) {
+    private LottoNumberList checkWinLottoNumber(String winNumber) {
         return setWinnerLottoNumber(winNumber);
     }
 
     public int match(LottoNumberList buyLottos) {
-        return (int) winLottoNumber.stream()
-                .filter(number -> buyLottos.contains(number))
+        return (int) winLottoNumber.getLottoNumberList().stream()
+                .filter(number -> buyLottos.getLottoNumberList().contains(number))
                 .count();
     }
 
-    private Set<LottoNumber> setWinnerLottoNumber(String inputValue) {
-        Set<LottoNumber> winnerLottoNumber = new HashSet<>();
+    private LottoNumberList setWinnerLottoNumber(String inputValue) {
+        List<LottoNumber> winnerLottoNumber = new ArrayList<>();
         String[] splitString = split(inputValue);
         for (int i = 0; i < splitString.length; i++) {
-            LottoNumber winnerNumber = new LottoNumber(Integer.parseInt(splitString[i]));
+            LottoNumber winnerNumber = LottoNumber.of(Integer.parseInt(splitString[i]));
             winnerLottoNumber.add(winnerNumber);
         }
         checkDuplicate(winnerLottoNumber);
-        return winnerLottoNumber;
+        return new LottoNumberList(winnerLottoNumber);
     }
 
-    private void checkDuplicate(Set<LottoNumber> winnerLottoNumber) {
+    private void checkDuplicate(List<LottoNumber> winnerLottoNumber) {
         if (winnerLottoNumber.size() < SELECT_NUMBER) {
             throw new IllegalArgumentException("중복된 값이 들어있습니다.");
         }
@@ -72,19 +63,21 @@ public class WinLotto {
     }
 
     private int match(LottoNumber bonusBallInputValue) {
-        return (int) winLottoNumber.stream()
+        return (int) winLottoNumber.getLottoNumberList().stream()
                 .filter(number -> Arrays.asList(bonusBallInputValue).contains(number))
                 .count();
     }
 
     public boolean matchBonusball(LottoNumberList buyLottos) {
-        int matchCount = (int) Arrays.asList(this.bonuseBall)
+        return Arrays.asList(this.bonuseBall)
                 .stream()
-                .filter(number -> buyLottos.contains(number))
-                .count();
-        if (matchCount == 1) {
-            return true;
-        }
-        return false;
+                .filter(number -> buyLottos.getLottoNumberList().contains(number))
+                .findFirst()
+                .isPresent();
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(winLottoNumber);
     }
 }
