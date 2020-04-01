@@ -28,7 +28,7 @@ public class Numbers {
         try {
             Integer.parseInt(input);
         } catch (RuntimeException e) {
-            System.out.println("숫자만 입력할 수 있습니다." + e.getMessage());
+            throw new RuntimeException("숫자만 입력할 수 있습니다." + e.getMessage());
         }
     }
 
