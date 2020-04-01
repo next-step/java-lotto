@@ -2,10 +2,13 @@ package step2;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import step2.domain.LottoProvider;
 import step2.domain.WinningLotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -22,7 +25,9 @@ public class WinningLottoTest {
 
     @Test
     @DisplayName("당첨 숫자 개수 체크가 제대로 되는지 테스트")
-    void WinningNumber() {
+    @ParameterizedTest
+    @CsvSource(value = "")
+    void WinningNumber(List<Integer> input, int expected) {
         WinningLotto lotto = LottoProvider.createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
