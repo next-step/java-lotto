@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoNumber;
-import lotto.domain.dto.LottoRank;
-import lotto.domain.dto.LottoResult;
-import lotto.domain.dto.LottoWinningNumber;
+import lotto.dto.LottoNumberDto;
+import lotto.dto.LottoStatisticsDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,25 +11,27 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class LottoChecker {
-	private final LottoWinningNumber winningNumber;
-	private final long spentMoney;
+	private final LottoWinningNumber wonNumbers;
+	private final LottoMoney lottoMoney;
 
-	public LottoChecker(LottoWinningNumber winningNumber, long spentMoney) {
-		this.winningNumber = winningNumber;
-		this.spentMoney = spentMoney;
+	public LottoChecker(LottoNumberDto wonNumbers, int wonBonusNumber, LottoMoney lottoMoney) {
+		this.wonNumbers = new LottoWinningNumber(new LottoNumber(wonNumbers.getNumbers()), LottoNo.getInstance(wonBonusNumber));
+		this.lottoMoney = lottoMoney;
 	}
 
-	public LottoResult getWinningResult(LottoNumber... applyNumbers) {
+	LottoStatisticsDto getWinningResult(LottoNumberDto... applyNumbers) {
 		return getWinningResult(Arrays.asList(applyNumbers));
 	}
 
-	public LottoResult getWinningResult(List<LottoNumber> applyNumbers) {
+	public LottoStatisticsDto getWinningResult(List<LottoNumberDto> applyNumbers) {
 		Map<LottoRank, Long> map = applyNumbers.stream()
-				.map(lottoNumber -> lottoNumber.matchLottoNumber(winningNumber))
+				.map(LottoNumberDto::getNumbers)
+				.map(LottoNumber::new)
+				.map(wonNumbers::matchLottoNumber)
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-		return new LottoResult(map, spentMoney);
+		return new LottoStatisticsDto(map, lottoMoney.getSpentMoney());
 	}
 
 	@Override
@@ -39,11 +39,11 @@ public class LottoChecker {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		LottoChecker that = (LottoChecker) o;
-		return Objects.equals(winningNumber, that.winningNumber);
+		return Objects.equals(wonNumbers, that.wonNumbers);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(winningNumber);
+		return Objects.hash(wonNumbers);
 	}
 }

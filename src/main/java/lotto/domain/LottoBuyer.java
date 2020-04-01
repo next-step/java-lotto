@@ -1,34 +1,43 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoNumber;
+import lotto.dto.PurchasedLottoNumbersDto;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoBuyer {
-	private static final int PRIZE = 1000;
 
-	private final List<Integer> candidateNumbers = IntStream.rangeClosed(LottoNumber.LOWEST_NUMBER, LottoNumber.HIGHEST_NUMBER)
-			.boxed()
-			.collect(Collectors.toList());
+	private final List<LottoNumber> passiveNumbers;
+	private final LottoMachine lottoMachine;
 
-	public List<LottoNumber> buyLottoNumbers(long money) {
-		long count = money / PRIZE;
-		return getLottoNumbers((int) count);
+	public LottoBuyer(List<LottoNumber> passiveNumbers) {
+		this.passiveNumbers = passiveNumbers;
+		lottoMachine = new LottoMachine();
 	}
 
-	private List<LottoNumber> getLottoNumbers(int count) {
-		List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-		for (int i = 0; i < count; i++) {
-			Collections.shuffle(candidateNumbers);
-			lottoNumbers.add(new LottoNumber(new ArrayList<>(candidateNumbers.subList(0, LottoNumber.NUMBER_SIZE))));
+	public PurchasedLottoNumbersDto buyLottoNumbers(LottoMoney money) {
+		int autoCount = getAutoCount(money);
+		if (autoCount < 0) {
+			throw new IllegalArgumentException(String.format("buyLottoNumbers failed. please add money more then passiveNumbers" +
+					"money=%s, count of passiveNumbers=%d", money, passiveNumbers.size()));
 		}
+		return getLottoNumbers(autoCount);
+	}
 
-		return lottoNumbers;
+	private int getAutoCount(LottoMoney money) {
+		return money.getLottoNumbersCount() - passiveNumbers.size();
+	}
+
+	private PurchasedLottoNumbersDto getLottoNumbers(int autoCount) {
+		List<LottoNumber> printedLottoNumbers = lottoMachine.autoTicketingLottoNumber(autoCount);
+		printedLottoNumbers.addAll(passiveNumbers);
+
+		return new PurchasedLottoNumbersDto(
+				passiveNumbers.size(),
+				autoCount,
+				printedLottoNumbers.stream()
+						.map(LottoNumber::getLottoNumbers)
+						.collect(Collectors.toList()));
 	}
 
 }

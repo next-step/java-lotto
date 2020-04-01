@@ -1,7 +1,6 @@
-package lotto.domain.dto;
+package lotto.dto;
 
-import lotto.domain.dto.LottoRank;
-import lotto.domain.dto.LottoResult;
+import lotto.domain.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,23 +12,17 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultTest {
+class LottoStatisticsDtoTest {
 
 	private Map<LottoRank, Long> rankMap = Arrays.stream(LottoRank.values())
 			.collect(Collectors.toMap(Function.identity(), rank -> 1L));
 	private int spendMoney = 14000;
 
-	private LottoResult lottoResult = new LottoResult(rankMap, spendMoney);
-
-	@Test
-	void isEqualTest() {
-		assertThat(lottoResult)
-				.isEqualTo(new LottoResult(rankMap, spendMoney));
-	}
+	private LottoStatisticsDto lottoStatisticsDto = new LottoStatisticsDto(rankMap, spendMoney);
 
 	@Test
 	void getWinningMapTest() {
-		assertThat(new LottoResult(rankMap, spendMoney).getWinningMap())
+		assertThat(new LottoStatisticsDto(rankMap, spendMoney).getWinningMap())
 				.isEqualTo(rankMap);
 	}
 
@@ -42,7 +35,7 @@ class LottoResultTest {
 		Map<LottoRank,Long> expectedMap = Arrays.stream(LottoRank.values())
 				.collect(Collectors.toMap(Function.identity(), rank -> 0L));
 
-		assertThat(new LottoResult(rankMap, spendMoney).getWinningMap())
+		assertThat(new LottoStatisticsDto(rankMap, spendMoney).getWinningMap())
 				.isEqualTo(expectedMap);
 	}
 
@@ -53,7 +46,7 @@ class LottoResultTest {
 				.stream()
 				.mapToLong(LottoRank::getWinningMoney)
 				.sum();
-		assertThat(lottoResult.getYield())
+		assertThat(lottoStatisticsDto.getYield())
 				.isEqualTo((double) winningMoney / spendMoney);
 	}
 
