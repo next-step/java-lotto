@@ -1,6 +1,7 @@
 package step2.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,16 @@ public class LottoProvider {
 
         for(int i = 0; i < lottoCount; i++) {
             lottos.add(createLotto());
+        }
+
+        return lottos;
+    }
+
+    public static List<Lotto> createLottos(List<List<Integer>> manualLottos) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for(List<Integer> manualLotto : manualLottos) {
+            lottos.add(createLotto(manualLotto));
         }
 
         return lottos;
