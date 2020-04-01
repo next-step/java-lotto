@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> lottoNumber;
+    private final List<Integer> lottoNumber;
 
     private Lotto(List<Integer> lottoNumber) {
         lottoNumberCountException(lottoNumber.size());

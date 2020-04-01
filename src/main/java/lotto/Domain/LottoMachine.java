@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     Lottos lottos;
 
     public LottoMachine() {
