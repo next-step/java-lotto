@@ -65,7 +65,7 @@ public class LottoTest {
     public void calculateYieldTest(){
         String result = Lotto.calculateYield(14000, 5000);
 
-        assertThat(result).isEqualTo("0.35");
+        assertThat(result).isEqualTo("0.36");
     }
 
     private Set<List<Integer>> generateLottoValue() {
