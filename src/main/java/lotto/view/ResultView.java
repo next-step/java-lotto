@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.IssuedLotto;
 import lotto.domain.Lotto;
 import lotto.domain.Winning;
 
@@ -15,10 +16,10 @@ public class ResultView {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    public static void printIssuedLotto(Lotto lotto) {
-        StringBuffer stringBuffer = new StringBuffer(String.format(PURCHASED_NUM_NOTICE, lotto.size()));
+    public static void printIssuedLotto(IssuedLotto Issuedlotto) {
+        StringBuffer stringBuffer = new StringBuffer(String.format(PURCHASED_NUM_NOTICE, Issuedlotto.size()));
 
-        stringBuffer.append(lotto.toString(LOTTO_NUMBER_FORMAT, LOTTO_NUMBER_DELIMITER));
+        stringBuffer.append(Issuedlotto.toString(LOTTO_NUMBER_FORMAT, LOTTO_NUMBER_DELIMITER));
 
         System.out.println(stringBuffer.toString());
     }

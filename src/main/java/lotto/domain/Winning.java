@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public enum Winning {
@@ -19,7 +16,7 @@ public enum Winning {
     private static Map<Integer, Winning> winningTypes;
 
     static {
-        winningTypes = new HashMap<>();
+        winningTypes = new LinkedHashMap<>();
 
         for (Winning winning : Winning.values()) {
             winningTypes.put(winning.getMatchCount(), winning);
