@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 
 public class LottoChecker {
 	private final LottoWinningNumber wonNumbers;
-	private final long spentMoney;
+	private final LottoMoney lottoMoney;
 
-	public LottoChecker(LottoNumberDto wonNumbers, int wonBonusNumber, long spentMoney) {
+	public LottoChecker(LottoNumberDto wonNumbers, int wonBonusNumber, LottoMoney lottoMoney) {
 		this.wonNumbers = new LottoWinningNumber(new LottoNumber(wonNumbers.getNumbers()), LottoNo.getInstance(wonBonusNumber));
-		this.spentMoney = spentMoney;
+		this.lottoMoney = lottoMoney;
 	}
 
 	LottoStatisticsDto getWinningResult(LottoNumberDto... applyNumbers) {
@@ -31,7 +31,7 @@ public class LottoChecker {
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-		return new LottoStatisticsDto(map, spentMoney);
+		return new LottoStatisticsDto(map, lottoMoney.getSpentMoney());
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoBuyer;
 import lotto.domain.LottoChecker;
+import lotto.domain.LottoMoney;
 import lotto.dto.LottoNumberDto;
 import lotto.dto.PurchasedLottoNumbersDto;
 import lotto.ui.InputView;
@@ -16,14 +17,14 @@ public class Lotto {
 		OutputView outputView = OutputView.getInstance();
 
 		LottoBuyer lottoBuyer = new LottoBuyer();
-		long spentMoney = inputView.getSpentMoney();
+		LottoMoney money = new LottoMoney(inputView.getSpentMoney());
 		List<LottoNumberDto> passiveNumbers = inputView.getPassiveLottoNumbers();
-		PurchasedLottoNumbersDto numbers = lottoBuyer.buyLottoNumbers(spentMoney, passiveNumbers);
+		PurchasedLottoNumbersDto numbers = lottoBuyer.buyLottoNumbers(money, passiveNumbers);
 		outputView.printLottoNumbers(numbers);
 
 		LottoNumberDto wonNumber = inputView.getWonLastWeekLottoNumbers();
 		int wonBonusNumber = inputView.getWonLastWeekBonusNumber();
-		LottoChecker lottoChecker = new LottoChecker(wonNumber, wonBonusNumber, spentMoney);
+		LottoChecker lottoChecker = new LottoChecker(wonNumber, wonBonusNumber, money);
 
 		outputView.printStatistics(lottoChecker.getWinningResult(numbers.getLottoNumbers()));
 	}
