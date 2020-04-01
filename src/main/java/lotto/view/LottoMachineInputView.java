@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 public class LottoMachineInputView {
     private static final String PURCHASE_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String WINNING_LOTTO_INFO_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_MESSAGE ="보너스 번호를 입력해 주세요.";
+
     private static final String LOTTO_SPLIT_DELIMITER = ",";
 
     private static final Scanner sc = new Scanner(System.in);
@@ -27,7 +29,6 @@ public class LottoMachineInputView {
         return sc.nextLine();
     }
 
-
     public static List<Integer> latestWinningLotto() {
         System.out.println(WINNING_LOTTO_INFO_MESSAGE);
         String[] inputs = sc.nextLine().split(LOTTO_SPLIT_DELIMITER);
@@ -37,9 +38,12 @@ public class LottoMachineInputView {
                 .boxed()
                 .collect(Collectors.toList()));
     }
-
-    public static LottoResult checkWinningResult(LottoTicket lottoWinningTicket, LottoTickets lottoTickets) {
-        return LottoMachine.winningResult(lottoWinningTicket, lottoTickets);
+    public static int bonusLottoNumber(){
+        System.out.println(BONUS_NUMBER_MESSAGE);
+        return sc.nextInt();
+    }
+    public static LottoResult checkWinningResult(LottoTicket lottoWinningTicket, LottoTickets lottoTickets, int bonusNumber) {
+        return LottoMachine.winningResult(lottoWinningTicket, lottoTickets, bonusNumber);
     }
 
     private static String[] split(String delimiter) {
