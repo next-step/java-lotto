@@ -62,21 +62,8 @@ public class InputView {
 
     public List<Integer> getWinningNumbers() {
         String inputText = getWinningNumbersText();
-        List<Integer> winningNumbers = new ArrayList<>();
-        String[] stringNumbers = splitNumber(inputText);
 
-        try {
-            addIntegerNumbers(stringNumbers, winningNumbers);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_NOT_INTEGER_ERROR);
-        }
-        return winningNumbers;
-    }
-
-    private void addIntegerNumbers(String[] stringNumbers, List<Integer> winningNumbers) {
-        for(int i = 0; i < stringNumbers.length; i++) {
-            winningNumbers.add(Integer.parseInt(stringNumbers[i]));
-        }
+        return convertStringToNumbers(inputText);
     }
 
     private String[] splitNumber(String inputText) {
