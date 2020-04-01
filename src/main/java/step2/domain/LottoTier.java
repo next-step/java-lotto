@@ -35,4 +35,12 @@ public enum LottoTier {
                 .findFirst()
                 .orElse(NONE);
     }
+
+    public long getMatchedNumberCount() {
+        return matchedNumberCount;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 }

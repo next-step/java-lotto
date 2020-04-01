@@ -25,8 +25,6 @@ public class WinningLottoTest {
 
     @Test
     @DisplayName("당첨 숫자 개수 체크가 제대로 되는지 테스트")
-    @ParameterizedTest
-    @CsvSource(value = "")
     void WinningNumber(List<Integer> input, int expected) {
         WinningLotto lotto = LottoProvider.createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
