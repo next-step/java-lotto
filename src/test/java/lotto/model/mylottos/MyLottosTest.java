@@ -2,6 +2,7 @@ package lotto.model.mylottos;
 
 import lotto.model.Money;
 import lotto.model.gameresult.EarningRate;
+import lotto.model.lottonumber.LottoNumbers;
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.model.winninglotto.WinningLottoNumbers;

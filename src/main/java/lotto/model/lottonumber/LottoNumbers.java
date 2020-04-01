@@ -1,4 +1,4 @@
-package lotto.model.mylottos;
+package lotto.model.lottonumber;
 
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;

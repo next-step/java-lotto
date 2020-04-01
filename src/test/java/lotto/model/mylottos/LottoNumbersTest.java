@@ -1,6 +1,6 @@
 package lotto.model.mylottos;
 
-import lotto.model.mylottos.LottoNumbers;
+import lotto.model.lottonumber.LottoNumbers;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.model.winninglotto.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;

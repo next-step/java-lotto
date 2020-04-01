@@ -5,6 +5,7 @@ import lotto.model.Rank;
 import lotto.model.gameresult.EarningRate;
 import lotto.model.gameresult.GameResult;
 import lotto.model.gameresult.MatchingResult;
+import lotto.model.lottonumber.LottoNumbers;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Collections;

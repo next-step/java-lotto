@@ -1,6 +1,6 @@
 package lotto.lottogenerator;
 
-import lotto.model.mylottos.LottoNumbers;
+import lotto.model.lottonumber.LottoNumbers;
 import lotto.model.mylottos.MyLottos;
 
 import java.util.ArrayList;
