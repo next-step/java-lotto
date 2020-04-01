@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoRank;
-import lotto.dto.LottoResult;
+import lotto.dto.LottoStatisticsDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +20,11 @@ public class LottoChecker {
 		this.spentMoney = spentMoney;
 	}
 
-	LottoResult getWinningResult(LottoNumberDto... applyNumbers) {
+	LottoStatisticsDto getWinningResult(LottoNumberDto... applyNumbers) {
 		return getWinningResult(Arrays.asList(applyNumbers));
 	}
 
-	public LottoResult getWinningResult(List<LottoNumberDto> applyNumbers) {
+	public LottoStatisticsDto getWinningResult(List<LottoNumberDto> applyNumbers) {
 		Map<LottoRank, Long> map = applyNumbers.stream()
 				.map(LottoNumberDto::getNumbers)
 				.map(LottoNumber::new)
@@ -32,7 +32,7 @@ public class LottoChecker {
 				.filter(Objects::nonNull)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-		return new LottoResult(map, spentMoney);
+		return new LottoStatisticsDto(map, spentMoney);
 	}
 
 	@Override

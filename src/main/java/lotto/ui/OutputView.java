@@ -2,7 +2,7 @@ package lotto.ui;
 
 import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoRank;
-import lotto.dto.LottoResult;
+import lotto.dto.LottoStatisticsDto;
 import lotto.dto.PurchasedLottoNumbers;
 import lotto.utils.StringFormatter;
 
@@ -29,14 +29,14 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public void printStatistics(LottoResult lottoResult) {
+	public void printStatistics(LottoStatisticsDto lottoStatisticsDto) {
 		System.out.println(STATISTIC_START_MSG);
 
-		lottoResult.getWinningMap()
+		lottoStatisticsDto.getWinningMap()
 				.entrySet()
 				.forEach(this::printLottoRankEntry);
 
-		System.out.println(String.format(STATISTIC_YIELD_FORMAT, lottoResult.getYield()));
+		System.out.println(String.format(STATISTIC_YIELD_FORMAT, lottoStatisticsDto.getYield()));
 	}
 
 	private void printLottoRankEntry(Map.Entry<LottoRank, Long> winningEntry) {

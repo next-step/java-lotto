@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LottoResult {
+public class LottoStatisticsDto {
 
 	private final Map<LottoRank, Long> winningMap;
 	private final long spentMoney;
 
-	public LottoResult(Map<LottoRank, Long> winningMap, long spentMoney) {
+	public LottoStatisticsDto(Map<LottoRank, Long> winningMap, long spentMoney) {
 		this.winningMap = Collections.unmodifiableMap(makeZeroPaddingEnumMap(winningMap));
 		this.spentMoney = spentMoney;
 	}

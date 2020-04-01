@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoRank;
-import lotto.dto.LottoResult;
+import lotto.dto.LottoStatisticsDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -22,7 +22,7 @@ class LottoCheckerTest {
 				lottoChecker.getWinningResult(
 						lottoNumberDto,
 						lottoNumberDto).getWinningMap())
-				.isEqualTo(new LottoResult(Collections.singletonMap(LottoRank.FIRST, 2L), 1000).getWinningMap());
+				.isEqualTo(new LottoStatisticsDto(Collections.singletonMap(LottoRank.FIRST, 2L), 1000).getWinningMap());
 	}
 
 
