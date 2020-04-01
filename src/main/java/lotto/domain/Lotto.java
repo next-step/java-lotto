@@ -44,8 +44,7 @@ public class Lotto {
     }
 
     private void validateSize(Set<LottoNumber> lottoNumbers) {
-        HashSet<LottoNumber> deduplicationLottoNumbers = new HashSet<>(lottoNumbers);
-        if (deduplicationLottoNumbers.size() != LOTTO_SIZE) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개를 선택 해야합니다.", LOTTO_SIZE));
         }
     }

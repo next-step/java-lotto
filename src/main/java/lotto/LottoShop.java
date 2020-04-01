@@ -30,10 +30,9 @@ public class LottoShop {
     }
 
     public LottoBundle buyManual(List<String> lottoStrings) {
-        List<Lotto> manualLottos = lottoStrings.stream()
+        return lottoStrings.stream()
                 .map(Lotto::manual)
-                .collect(Collectors.toList());
-        return new LottoBundle(manualLottos);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoBundle::new));
     }
 
     private List<Lotto> toLottos(int lottoCount) {
