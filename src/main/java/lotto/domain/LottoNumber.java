@@ -3,46 +3,47 @@ package lotto.domain;
 import lotto.generator.LottoNumberGenerator;
 import lotto.generator.NumberGenerator;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
-public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_MIN_NUMBER = 1;
 
-    private Integer lottoNumber;
+    private final int lottoNumber;
+
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
 
     public static LottoNumber newRandomNumber() {
-        return new LottoNumber();
+        return Optional.ofNullable(lottoNumbers.get(new LottoNumberGenerator().getRandomNumber()))
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static LottoNumber newRandomNumber(NumberGenerator lottoNumberGenerator) {
-        return new LottoNumber(lottoNumberGenerator);
+        return Optional.ofNullable(lottoNumbers.get(lottoNumberGenerator.getRandomNumber()))
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static LottoNumber newChooseNumber(int number) {
-        return new LottoNumber(number);
+        return Optional.ofNullable(lottoNumbers.get(number))
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public static LottoNumber newChooseNumber(String input) {
-        return new LottoNumber(input);
-    }
-
-    private LottoNumber() {
-        this.lottoNumber = new LottoNumberGenerator().getRandomNumber();
+        return LottoNumber.newChooseNumber(convertNumber(input));
     }
 
     private LottoNumber(int number) {
         this.lottoNumber = number;
         validateNumberRange(this.lottoNumber);
-    }
-
-    private LottoNumber(String input) {
-        this.lottoNumber = convertNumber(input);
-        validateNumberRange(this.lottoNumber);
-    }
-
-    private LottoNumber(NumberGenerator lottoNumberGenerator) {
-        this.lottoNumber = lottoNumberGenerator.getRandomNumber();
     }
 
     public int getLottoNumber() {
@@ -56,8 +57,8 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
         }
     }
 
-    private Integer convertNumber(String input) {
-        Integer number;
+    private static int convertNumber(String input) {
+        int number;
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
@@ -72,27 +73,5 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
             return -1;
         }
         return 1;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return Objects.equals(lottoNumber, that.lottoNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumber);
-    }
-
-    @Override
-    public LottoNumber clone() {
-        try {
-            return (LottoNumber) super.clone();
-        } catch (CloneNotSupportedException ce) {
-            throw new UnsupportedOperationException("로또 번호를 만드는데 문제가 있습니다.");
-        }
     }
 }

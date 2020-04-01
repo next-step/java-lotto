@@ -32,7 +32,7 @@ public class Lotto {
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = cloneLottoNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
         sortLottorNumbers();
     }
 
@@ -97,13 +97,5 @@ public class Lotto {
             lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
         }
         return lottoNumbers;
-    }
-
-    private Set<LottoNumber> cloneLottoNumbers(Set<LottoNumber> originNumbers) {
-        Set<LottoNumber> cloned = new LinkedHashSet<>();
-        for (LottoNumber originNumber : originNumbers) {
-            cloned.add(originNumber.clone());
-        }
-        return cloned;
     }
 }

@@ -17,4 +17,17 @@ public class LottoNumberTest {
                 LottoNumber.newRandomNumber(() -> value).getLottoNumber()
         ).isEqualTo(value);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5, 6, 9})
+    @DisplayName("로또숫자 static 객체 테스트")
+    void staticLottoNumberTest(int value) {
+        assertThat(
+                LottoNumber.newChooseNumber(value)
+        ).isEqualTo(LottoNumber.newChooseNumber(value));
+
+        assertThat(
+                LottoNumber.newChooseNumber(value) == LottoNumber.newChooseNumber(value)
+        ).isTrue();
+    }
 }
