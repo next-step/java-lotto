@@ -9,6 +9,8 @@ public enum Rank {
     FOURTH(3, 5000),
     LOSER(0, 0);
 
+    public static final int WINNING_COUNT_BOUNDARY = 3;
+
     private int matchCount;
     private int winningMoney;
 
@@ -21,9 +23,17 @@ public enum Rank {
         return winningMoney;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public static Rank of(int matchCount) {
+        if (matchCount < WINNING_COUNT_BOUNDARY) {
+            return LOSER;
+        }
+
         return Stream.of(values())
-                .filter(rank -> rank.matchCount == matchCount)
+                .filter(rank -> rank.getMatchCount() == matchCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 랭킹입니다."));
     }
