@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-class LottoNumber {
+public class LottoNumber {
 	public static final int NUMBER_SIZE = 6;
 
 	private List<LottoNo> numbers;
@@ -17,7 +17,7 @@ class LottoNumber {
 		this(Arrays.asList(numbers));
 	}
 
-	LottoNumber(List<Integer> numbers) {
+	public LottoNumber(List<Integer> numbers) {
 		this.numbers =
 				Collections.unmodifiableList(numbers
 						.stream()

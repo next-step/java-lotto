@@ -1,7 +1,7 @@
 package lotto.ui;
 
-import lotto.dto.LottoNumberDto;
 import lotto.domain.LottoRank;
+import lotto.dto.LottoNumberDto;
 import lotto.dto.LottoStatisticsDto;
 import lotto.dto.PurchasedLottoNumbersDto;
 import lotto.utils.StringFormatter;

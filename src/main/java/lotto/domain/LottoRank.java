@@ -30,6 +30,13 @@ public enum LottoRank {
 		this.hasBonus = hasBonus;
 	}
 
+	public static LottoRank getFromCorrectNumbers(int correctNumbers, boolean matchBonus) {
+		if (matchBonus) {
+			return bonusMap.getOrDefault(correctNumbers, notBonusMap.get(correctNumbers));
+		}
+		return notBonusMap.get(correctNumbers);
+	}
+
 	public int getCorrectNumbers() {
 		return correctNumbers;
 	}
@@ -40,12 +47,5 @@ public enum LottoRank {
 
 	public boolean hasBonus() {
 		return hasBonus;
-	}
-
-	public static LottoRank getFromCorrectNumbers(int correctNumbers, boolean matchBonus) {
-		if (matchBonus) {
-			return bonusMap.getOrDefault(correctNumbers, notBonusMap.get(correctNumbers));
-		}
-		return notBonusMap.get(correctNumbers);
 	}
 }

@@ -8,16 +8,16 @@ class LottoNo {
 
 	private final int number;
 
-	static LottoNo getInstance(int lottoNo) {
-		return new LottoNo(lottoNo);
-	}
-
 	private LottoNo(int lottoNo) {
 		this.number = lottoNo;
 
 		if (isInvalidLottoNumbers()) {
 			throwIllegalException();
 		}
+	}
+
+	static LottoNo getInstance(int lottoNo) {
+		return new LottoNo(lottoNo);
 	}
 
 	private void throwIllegalException() {

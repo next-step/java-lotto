@@ -17,13 +17,13 @@ public class InputView {
 
 	private final Scanner scanner;
 
+	public InputView(Scanner scanner) {
+		this.scanner = scanner;
+	}
+
 	public static InputView getInstance() {
 		Scanner scanner = new Scanner(System.in);
 		return new InputView(scanner);
-	}
-
-	public InputView(Scanner scanner) {
-		this.scanner = scanner;
 	}
 
 	public long getSpentMoney() {
@@ -31,7 +31,7 @@ public class InputView {
 		return Integer.parseInt(scanner.nextLine());
 	}
 
-	public List<LottoNumberDto> getPassiveLottoNumbers() {
+	public LottoTickets getPassiveLottoNumbers() {
 		System.out.println(GET_PASSIVE_NUMBER_COUNT_MSG);
 		int count = Integer.parseInt(scanner.nextLine());
 
@@ -39,25 +39,28 @@ public class InputView {
 		return getPassiveLottoNumbers(count);
 	}
 
-	private List<LottoNumberDto> getPassiveLottoNumbers(int count) {
-		List<LottoNumberDto> lottoNumbers = new ArrayList<>(count);
+	private LottoTickets getPassiveLottoNumbers(int count) {
+		List<LottoTicket> lottoNumbers = new ArrayList<>(count);
 		for (int i = 0; i < count; i++) {
-			List<Integer> numbers = Arrays.stream(scanner.nextLine().split(","))
-					.map(Integer::parseInt)
-					.collect(Collectors.toList());
-			lottoNumbers.add(new LottoNumberDto(numbers));
+			LottoTicket numbers = getLottoTicket(scanner.nextLine());
+			lottoNumbers.add(numbers);
 		}
-		return lottoNumbers;
+		return new LottoTickets(lottoNumbers);
+	}
+
+	private LottoTicket getLottoTicket(String s) {
+		return new LottoTicket(
+				Arrays.stream(s.split(","))
+						.map(Integer::parseInt)
+						.collect(Collectors.toList()));
 	}
 
 	public LottoNumberDto getWonLastWeekLottoNumbers() {
 		System.out.println(GET_WINNING_NUMBER_MSG);
 		String numberString = scanner.nextLine();
-		List<Integer> numbers = Arrays.stream(numberString.split(","))
-				.map(Integer::parseInt)
-				.collect(Collectors.toList());
+		LottoTicket numbers = getLottoTicket(numberString);
 
-		return new LottoNumberDto(numbers);
+		return new LottoNumberDto(numbers.getLottoNumbers());
 	}
 
 	public int getWonLastWeekBonusNumber() {
