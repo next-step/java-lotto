@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
@@ -45,17 +46,17 @@ public class LottoTest {
     @Test
     @DisplayName("당첨 결과 생성 테스트")
     public void winningResultTset(){
-        Set<List<Integer>> expect = generateLottoValue();
+        Set<List<Integer>> expect = generateLottoValueWithNotMatching();
         Lotto lotto = new Lotto(expect);
 
-        List<String> winningNumber = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         Map<Winning, Integer> winning = lotto.getResult(winningNumber);
 
         assertThat(winning.get(Winning.FIRST_PLACE)).isEqualTo(1);
         assertThat(winning.get(Winning.SECOND_PLACE)).isEqualTo(1);
         assertThat(winning.get(Winning.THIRD_PLACE)).isEqualTo(1);
-        assertThat(winning.get(Winning.FOURTH_PLACE)).isEqualTo(0);
+        assertNull(winning.get(Winning.FOURTH_PLACE));
         assertThat(winning.get(Winning.LOSE)).isEqualTo(1);
     }
 

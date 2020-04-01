@@ -34,8 +34,15 @@ public class Lotto {
         return stringBuilder.toString();
     }
 
-    public Map<Winning, Integer> getResult(List<String> winningNumber) {
+    public Map<Winning, Integer> getResult(List<Integer> winningNumber) {
+        Map<Winning, Integer> result = new HashMap<>();
 
-        return new HashMap();
+        for (List<Integer> oneSet : lottoNumbers) {
+            long matchCount = winningNumber.stream().filter(oneSet::contains).count();
+            Winning winning = Winning.getWinningType((int) matchCount);
+            result.put(winning, result.containsKey(winning) ? result.get(winning) + 1 : 1);
+        }
+
+        return result;
     }
 }
