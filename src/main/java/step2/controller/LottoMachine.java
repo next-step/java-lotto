@@ -4,6 +4,7 @@ import step2.domain.*;
 import step2.view.InputView;
 import step2.view.ResultView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,17 +19,26 @@ public class LottoMachine {
 
     public void operate(InputView inputView) {
         Money money = new Money(inputView.getMoney());
-
-        int lottoCount = money.getLottoCount();
-        Lottos lottos = createLottos(lottoCount);
-        resultView.showLottos(lottos, lottoCount);
+        Lottos lottos = createLottos(inputView, money);
 
         LottoResult result = makeLottoResult(inputView, lottos);
         resultView.showResult(result, money);
     }
 
-    public Lottos createLottos(int lottoCount) {
-        return LottoProvider.createLottos(lottoCount);
+    public Lottos createLottos(InputView inputView, Money money) {
+        int lottoCount = money.getLottoCount();
+        int manualLottoCount = inputView.getManualLottoCount();
+        int autoLottoCount = manualLottoCount - lottoCount;
+
+        List<Lotto> wholeLottos = new ArrayList<>();
+
+        wholeLottos.addAll(LottoProvider.createLottos(inputView.getManualLottoNumbers()));
+        wholeLottos.addAll(LottoProvider.createLottos(autoLottoCount));
+
+        Lottos lottos = new Lottos(wholeLottos);
+        resultView.showLottos(lottos, lottoCount);
+
+        return lottos;
     }
 
     public WinningLotto createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
