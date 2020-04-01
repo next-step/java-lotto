@@ -1,29 +1,28 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final String DELIMITER = ",";
     private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto() {
-        this(toList(generateAutoLottoSets()));
+    private Lotto() {
+        this(generateAutoLottoSet());
     }
 
-    public Lotto(String lottoString) {
-        this(toList(generateManulalLottoSets(lottoString)));
+    private Lotto(String lottoString) {
+        this(generateManualLottoSet(lottoString));
     }
 
-    private Lotto(List<LottoNumber> lottos) {
+    private Lotto(Set<LottoNumber> lottos) {
         validateSize(lottos);
-        this.lottoNumbers = Collections.unmodifiableList(lottos);
+        this.lottoNumbers = Collections.unmodifiableSet(lottos);
     }
 
-    private static Set<LottoNumber> generateAutoLottoSets() {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
+    private static Set<LottoNumber> generateAutoLottoSet() {
+        Set<LottoNumber> lottoNumberSet = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
 
         while (lottoNumberSet.size() != LOTTO_SIZE) {
             lottoNumberSet.add(LottoNumber.peek());
@@ -31,9 +30,9 @@ public class Lotto {
         return lottoNumberSet;
     }
 
-    private static Set<LottoNumber> generateManulalLottoSets(String lottoString) {
+    private static Set<LottoNumber> generateManualLottoSet(String lottoString) {
         String[] lottoStrings = lottoString.split(DELIMITER);
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
+        Set<LottoNumber> lottoNumberSet = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
 
         for (String lottoNumber : lottoStrings) {
             lottoNumberSet.add(LottoNumber.valueOf(Integer.parseInt(lottoNumber.trim())));
@@ -41,20 +40,21 @@ public class Lotto {
         return lottoNumberSet;
     }
 
-    private static List<LottoNumber> toList(Set<LottoNumber> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers).stream()
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .collect(Collectors.toList());
-    }
-
-    private void validateSize(List<LottoNumber> lottoNumbers) {
-        HashSet<LottoNumber> deduplicationLottoNumbers = new HashSet<>(lottoNumbers);
-        if (deduplicationLottoNumbers.size() != LOTTO_SIZE) {
+    private void validateSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개를 선택 해야합니다.", LOTTO_SIZE));
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public static Lotto auto() {
+        return new Lotto();
+    }
+
+    public static Lotto manual(String lottoString) {
+        return new Lotto(lottoString);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 

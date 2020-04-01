@@ -20,7 +20,7 @@ public class LottoTest {
     @DisplayName("랜덤 로또 생성")
     @Test
     void create() {
-        Lotto lotto = new Lotto();
+        Lotto lotto = Lotto.auto();
 
         assertThat(lotto).isNotNull();
         assertThat(lotto.getLottoNumbers()).hasSize(LOTTO_SIZE);
@@ -35,7 +35,7 @@ public class LottoTest {
                 .map(lottoString -> LottoNumber.valueOf(Integer.parseInt(lottoString.trim())))
                 .collect(Collectors.toList());
 
-        Lotto lotto = new Lotto(text);
+        Lotto lotto = Lotto.manual(text);
 
         assertAll(
                 () -> assertThat(lotto.getLottoNumbers()).hasSize(lottoNumbers.size()),
@@ -47,13 +47,13 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 5"})
     void createFailByLottoNumber(String lottoNumber) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.manual(lottoNumber));
     }
 
     @DisplayName("로또 번호가 1~45사이가 아닐 시 생성 실패")
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 46", "-1, 2, 3, 4, 5, 6"})
     void createFailByInvalidLottoNumber(String lottoNumber) {
-        assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(lottoNumber));
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.manual(lottoNumber));
     }
 }

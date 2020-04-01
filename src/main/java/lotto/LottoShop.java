@@ -1,15 +1,16 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoBundle;
-import lotto.domain.LottoResult;
-import lotto.domain.WinningType;
+import lotto.domain.*;
+import lotto.dto.LottoRequestDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoShop {
-    private static final int PRICE_PER_PIECE = 1000;
+    private static final int ZERO = 0;
+
     private LottoBundle lottoBundle;
 
     public LottoShop() {
@@ -19,33 +20,44 @@ public class LottoShop {
         this.lottoBundle = lottoBundle;
     }
 
-    public void buyAuto(int price) {
-        validatePrice(price);
-        int lottoCount = Math.floorDiv(price, PRICE_PER_PIECE);
-        lottoBundle = new LottoBundle(toList(lottoCount));
+    public void buyLotto(LottoRequestDto lottoRequestDto) {
+        Purchase purchase = new Purchase(lottoRequestDto.getAmount(), lottoRequestDto.getManualCount());
+
+        lottoBundle = buyAuto(purchase.countOfAuto());
+        if (existManulLotto(lottoRequestDto)) {
+            List<String> manualLottoStrings = lottoRequestDto.getManualLottoStrings();
+            lottoBundle = lottoBundle.join(buyManual(manualLottoStrings));
+        }
     }
 
-    private List<Lotto> toList(int lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
+    private boolean existManulLotto(LottoRequestDto lottoRequestDto) {
+        return lottoRequestDto.getManualCount() > ZERO;
+    }
 
+    public LottoBundle buyAuto(int lottoCount) {
+        return new LottoBundle(toLottos(lottoCount));
+    }
+
+    public LottoBundle buyManual(List<String> lottoStrings) {
+        return lottoStrings.stream()
+                .map(Lotto::manual)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoBundle::new));
+    }
+
+    private List<Lotto> toLottos(int lottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.auto());
         }
         return lottos;
     }
 
-    private void validatePrice(int price) {
-        if (price < PRICE_PER_PIECE) {
-            throw new IllegalArgumentException("로또 가격은 1000원 이상이어야 합니다.");
-        }
+    public LottoResult checkWinning(LottoRequestDto lottoRequestDto) {
+        List<WinningType> winningTypes = lottoBundle.drawForWinning(lottoRequestDto.getWinningNumber(), lottoRequestDto.getBonusNumber());
+        return new LottoResult(winningTypes, lottoBundle.size());
     }
 
     public LottoBundle getLottoBundle() {
         return lottoBundle;
-    }
-
-    public LottoResult checkWinning(String winningNumber, int bonusNumber) {
-        List<WinningType> winningTypes = lottoBundle.drawForWinning(winningNumber, bonusNumber);
-        return new LottoResult(winningTypes, lottoBundle.size());
     }
 }

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -10,7 +10,7 @@ public class LottoBundle {
 
     public LottoBundle(List<Lotto> lottos) {
         validateSize(lottos);
-        this.lottos = Collections.unmodifiableList(lottos);
+        this.lottos = new ArrayList<>(lottos);
     }
 
     private void validateSize(List<Lotto> lottos) {
@@ -20,7 +20,7 @@ public class LottoBundle {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     public List<WinningType> drawForWinning(String winningNumber, int bonusNumber) {
@@ -33,5 +33,10 @@ public class LottoBundle {
 
     public long size() {
         return lottos.size();
+    }
+
+    public LottoBundle join(LottoBundle lottoBundle) {
+        lottos.addAll(lottoBundle.lottos);
+        return new LottoBundle(lottos);
     }
 }

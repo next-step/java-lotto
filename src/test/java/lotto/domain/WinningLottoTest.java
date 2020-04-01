@@ -13,7 +13,7 @@ class WinningLottoTest {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 6:6"}, delimiter = ':')
     void checkWinning(String lottoNumber, String winningNumber, int expected) {
-        Lotto buyingLotto = new Lotto(lottoNumber);
+        Lotto buyingLotto = Lotto.manual(lottoNumber);
         WinningLotto winningLotto = new WinningLotto(winningNumber, BONUS_NUMBER);
 
         int actual = winningLotto.checkWinning(buyingLotto).getMatchCount();
@@ -25,7 +25,7 @@ class WinningLottoTest {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:1, 2, 3, 4, 5, 7:6"}, delimiter = ':')
     void checkSecond(String lottoNumber, String winningNumber, int bonusNumber) {
-        Lotto buyingLotto = new Lotto(lottoNumber);
+        Lotto buyingLotto = Lotto.manual(lottoNumber);
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
 
         String actual = winningLotto.checkWinning(buyingLotto).name();

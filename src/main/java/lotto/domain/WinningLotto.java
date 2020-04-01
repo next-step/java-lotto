@@ -6,7 +6,7 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(String lottoNumber, int bonusNumber) {
-        this.winningLotto = new Lotto(lottoNumber);
+        this.winningLotto = Lotto.manual(lottoNumber);
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
@@ -14,12 +14,15 @@ public class WinningLotto {
         long matchCount = winningLotto.getLottoNumbers().stream()
                 .filter(lottoNumber -> lotto.isContainsLottoNumber(lottoNumber))
                 .count();
-        boolean bonusMatch = false;
 
+        return WinningType.findLottoWinningtype(matchCount, isBonusMatch(lotto, matchCount));
+    }
+
+    private boolean isBonusMatch(Lotto lotto, long matchCount) {
         if (isWinningFive(matchCount)) {
-            bonusMatch = lotto.isContainsLottoNumber(bonusNumber);
+            return lotto.isContainsLottoNumber(bonusNumber);
         }
-        return WinningType.findLottoWinningtype(matchCount, bonusMatch);
+        return false;
     }
 
     private boolean isWinningFive(long matchCount) {
