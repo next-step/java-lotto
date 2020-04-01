@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -13,5 +14,12 @@ public class LottoTest {
     public void invalidLottoWhenInputNumbersCountLessThenSix() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(Collections.emptyList()));
+    }
+
+    @Test
+    @DisplayName("로또 번호는 중복될 수 없다")
+    public void invalidLottoWhenInputDuplicatedNumbers() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 3, 4, 5)));
     }
 }
