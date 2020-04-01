@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
     private static final String DELIMITER = ",";
@@ -25,7 +22,7 @@ public class Lotto {
     }
 
     private static Set<LottoNumber> generateAutoLottoSet() {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
+        Set<LottoNumber> lottoNumberSet = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
 
         while (lottoNumberSet.size() != LOTTO_SIZE) {
             lottoNumberSet.add(LottoNumber.peek());
@@ -35,7 +32,7 @@ public class Lotto {
 
     private static Set<LottoNumber> generateManualLottoSet(String lottoString) {
         String[] lottoStrings = lottoString.split(DELIMITER);
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
+        Set<LottoNumber> lottoNumberSet = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
 
         for (String lottoNumber : lottoStrings) {
             lottoNumberSet.add(LottoNumber.valueOf(Integer.parseInt(lottoNumber.trim())));
