@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Number {
 
-    private final Integer number;
+    private final int number;
 
-    private Number(Integer number) {
+    private Number(int number) {
         this.number = number;
     }
 
-    public static Number of(final Integer number) {
+    public static Number of(final int number) {
         return new Number(number);
     }
 

@@ -8,9 +8,9 @@ public class InputView {
     private InputView() {
     }
 
-    public static Integer inputPayment() {
+    public static int inputPayment() {
         System.out.println("구입금액을 입력해 주세요.");
-        final Integer money = scanner.nextInt();
+        final int money = scanner.nextInt();
         scanner.nextLine();
         return money;
     }
@@ -20,9 +20,9 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static Integer inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        final Integer bonusNumber = scanner.nextInt();
+        final int bonusNumber = scanner.nextInt();
         scanner.nextLine();
         return bonusNumber;
     }

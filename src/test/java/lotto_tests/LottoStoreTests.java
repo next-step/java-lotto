@@ -18,7 +18,7 @@ public class LottoStoreTests {
     @DisplayName("로또 판매 테스트")
     @ParameterizedTest
     @MethodSource("sellTestCases")
-    public void sellTest(Payment payment, Integer expectedLottoTicketsSize) {
+    public void sellTest(Payment payment, int expectedLottoTicketsSize) {
         LottoPurchaseTickets lottoPurchaseTickets = LottoStore.sell(payment);
         assertThat(lottoPurchaseTickets.size()).isEqualTo(expectedLottoTicketsSize);
     }

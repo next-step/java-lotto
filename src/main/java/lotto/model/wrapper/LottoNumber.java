@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> NUMBERS;
 
-    private Integer number;
+    private int number;
 
     static {
         NUMBERS = Collections.unmodifiableMap(IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
@@ -22,23 +22,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .collect(Collectors.toMap(Function.identity(), LottoNumber::new)));
     }
 
-    private LottoNumber(final Integer number) {
+    private LottoNumber(final int number) {
         this.number = number;
     }
 
-    public static LottoNumber of(final Integer number) {
+    public static LottoNumber of(final int number) {
         return Optional.ofNullable(NUMBERS.get(number))
                 .orElseThrow(() -> new IllegalArgumentException("Lotto Ticket must be between 1 and 45."));
     }
 
     @Override
     public String toString() {
-        return number.toString();
+        return String.valueOf(number);
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return number.compareTo(o.number);
+        return Integer.compare(number, o.number);
     }
 
     @Override

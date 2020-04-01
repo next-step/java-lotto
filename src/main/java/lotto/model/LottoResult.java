@@ -37,7 +37,7 @@ public enum LottoResult {
                 .orElseThrow(() -> new IllegalArgumentException("match count must between 0 and 6."));
     }
 
-    public Integer getMatchCount() {
+    public int getMatchCount() {
         return matchCount.toInt();
     }
 

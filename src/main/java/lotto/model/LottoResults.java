@@ -21,7 +21,7 @@ public class LottoResults {
         return new LottoResults(result);
     }
 
-    public Long count(final LottoResult lottoResult) {
+    public long count(final LottoResult lottoResult) {
         return lottoResults.getOrDefault(lottoResult, 0L);
     }
 

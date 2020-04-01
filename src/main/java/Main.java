@@ -31,7 +31,7 @@ public class Main {
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet());
 
-        Integer bonusNumber = inputBonusNumber();
+        int bonusNumber = inputBonusNumber();
 
         return WinningLottoTicket.newInstance(winningNumbers, LottoNumber.of(bonusNumber));
     }

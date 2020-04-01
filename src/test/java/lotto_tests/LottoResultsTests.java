@@ -43,7 +43,7 @@ public class LottoResultsTests {
     @DisplayName("로또 결과 카운트 테스트")
     @ParameterizedTest
     @MethodSource("countTestCases")
-    public void countTest(LottoResults lottoResults, LottoResult lottoResult, Long expectedCount) {
+    public void countTest(LottoResults lottoResults, LottoResult lottoResult, long expectedCount) {
         assertThat(lottoResults.count(lottoResult)).isEqualTo(expectedCount);
     }
 
