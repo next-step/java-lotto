@@ -13,7 +13,7 @@ public class LottoTicket {
     private final List<Integer> ticket;
 
     public LottoTicket() {
-        this.ticket = autoNumberGenerate();
+        this(autoNumberGenerate());
     }
 
     public LottoTicket(List<Integer> numbers) {
@@ -31,7 +31,7 @@ public class LottoTicket {
         return LottoTicketUtils.RANGE - copyList.size();
     }
 
-    private List<Integer> autoNumberGenerate() {
+    private static List<Integer> autoNumberGenerate() {
         List<Integer> lotto = new ArrayList<>();
 
         Collections.shuffle(LottoTicketUtils.lottoNumberRange);
@@ -66,10 +66,13 @@ public class LottoTicket {
         }
         winningNumber.add(number);
     }
-
     private void checkNumberRange(int number) {
         if (number < LottoTicketUtils.TICKET_MIN_NUMBER || number > LottoTicketUtils.TICKET_MAX_NUMBER) {
             throw new NotANumberException(number);
         }
+    }
+
+    public boolean hasBonusNumber(int bonusNumber) {
+        return ticket.contains(bonusNumber);
     }
 }
