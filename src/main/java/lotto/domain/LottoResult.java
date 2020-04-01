@@ -2,12 +2,13 @@ package lotto.domain;
 
 import lotto.util.LottoTicketUtils;
 
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class LottoResult {
     private final Map<LottoPrize, Integer> lottoResult;
+    private final int ZERO = 0;
 
     public LottoResult() {
         lottoResult = init();
@@ -15,11 +16,10 @@ public class LottoResult {
 
     private Map init() {
         Map<LottoPrize, Integer> lottoResult = new HashMap<>();
-        lottoResult.put(LottoPrize.FIRST, 0);
-        lottoResult.put(LottoPrize.SECOND, 0);
-        lottoResult.put(LottoPrize.THIRD, 0);
-        lottoResult.put(LottoPrize.FOURTH, 0);
-        lottoResult.put(LottoPrize.NONE, 0);
+        Arrays.stream(LottoPrize.values())
+                .forEach(lottoPrize ->
+                        lottoResult.put(lottoPrize, ZERO)
+                );
         return lottoResult;
     }
 
@@ -35,21 +35,19 @@ public class LottoResult {
         return totalPrice() / totalTicketCost();
     }
 
-    private int totalPrice() {
+    private double totalPrice() {
         int sum = 0;
-        for (int i = 0; i < LottoPrize.values().length; i++) {
-            LottoPrize prize = LottoPrize.values()[i];
-            sum += lottoResult.get(prize) * prize.getPrice();
+        for (LottoPrize prize : LottoPrize.values()) {
+            sum += prize.getPrice() * lottoResult.get(prize);
         }
         return sum;
     }
 
-    private int totalTicketCost() {
-        int count = 0;
-        Iterator<Map.Entry<LottoPrize, Integer>> iterator = lottoResult.entrySet().iterator();
-        while (iterator.hasNext()) {
-            count += iterator.next().getValue();
+    private double totalTicketCost() {
+        int totalTicketCount = 0;
+        for (int ticketCount : lottoResult.values()) {
+            totalTicketCount += ticketCount;
         }
-        return count * LottoTicketUtils.TICKET_PRICE;
+        return totalTicketCount * LottoTicketUtils.TICKET_PRICE;
     }
 }
