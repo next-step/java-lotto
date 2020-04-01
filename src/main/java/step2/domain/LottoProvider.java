@@ -17,13 +17,12 @@ public class LottoProvider {
 
     private LottoProvider() {}
 
-    public static Lottos createLottos(int lottoCount) {
-        List<Lotto> createdLottos = new ArrayList<>();
+    public static List<Lotto> createLottos(int lottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for(int i = 0; i < lottoCount; i++) {
-            createdLottos.add(createLotto());
+            lottos.add(createLotto());
         }
-        Lottos lottos = new Lottos(createdLottos);
 
         return lottos;
     }
