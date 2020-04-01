@@ -12,9 +12,9 @@ public class LottoGameTest {
     @ParameterizedTest
     @CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
     @DisplayName("")
-    public void issueLottoTest(int input, int expet) {
+    public void issueLottoTest(int input, int expect) {
         Lotto lotto = LottoGame.issueLotto(input);
 
-        assertThat(lotto.size()).isEqualTo(input);
+        assertThat(lotto.size()).isEqualTo(expect);
     }
 }
