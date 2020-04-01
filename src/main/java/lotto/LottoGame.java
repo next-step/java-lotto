@@ -7,6 +7,9 @@ import static java.util.stream.Collectors.toList;
 
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_NUMBER_BOUNDARY = 45;
+    public static final int MINIMUM_LOTTO_NUMBER = 1;
+    public static final int LOTTO_NUMBER_SIZE = 6;
 
     public int match(Lotto lotto, Lotto winningLotto) {
         return (int) lotto.getNumbers().stream()
@@ -47,8 +50,8 @@ public class LottoGame {
         Set<Integer> numberSet = new HashSet<>();
         int number;
 
-        while (numberSet.size() != 6) {
-            number = random.nextInt(45) + 1;
+        while (numberSet.size() != LOTTO_NUMBER_SIZE) {
+            number = random.nextInt(LOTTO_NUMBER_BOUNDARY) + MINIMUM_LOTTO_NUMBER;
             numberSet.add(number);
         }
 
