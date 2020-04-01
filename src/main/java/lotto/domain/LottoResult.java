@@ -4,7 +4,6 @@ import lotto.util.LottoTicketUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class LottoResult {
@@ -19,7 +18,7 @@ public class LottoResult {
         Map<LottoPrize, Integer> lottoResult = new HashMap<>();
         Arrays.stream(LottoPrize.values())
                 .forEach(lottoPrize ->
-                    lottoResult.put(lottoPrize, ZERO)
+                        lottoResult.put(lottoPrize, ZERO)
                 );
         return lottoResult;
     }
@@ -38,19 +37,17 @@ public class LottoResult {
 
     private int totalPrice() {
         int sum = 0;
-        for (int i = 0; i < LottoPrize.values().length; i++) {
-            LottoPrize prize = LottoPrize.values()[i];
-            sum += lottoResult.get(prize) * prize.getPrice();
+        for (LottoPrize prize : LottoPrize.values()) {
+            sum += prize.getPrice() * lottoResult.get(prize);
         }
         return sum;
     }
 
     private int totalTicketCost() {
-        int count = 0;
-//        Iterator<Map.Entry<LottoPrize, Integer>> iterator = lottoResult.entrySet().iterator();
-//        while (iterator.hasNext()) {
-//            count += iterator.next().getValue();
-//        }
-        return count * LottoTicketUtils.TICKET_PRICE;
+        int totalTicketCount = 0;
+        for (int ticketCount : lottoResult.values()) {
+            totalTicketCount += ticketCount;
+        }
+        return totalTicketCount * LottoTicketUtils.TICKET_PRICE;
     }
 }

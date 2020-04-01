@@ -14,4 +14,13 @@ public class LottoResultTest {
         }
         assertThat(result.prizeCount(LottoPrize.FIRST)).isEqualTo(10);
     }
+
+    @Test
+    void lottoAverageTest() {
+        LottoResult result = new LottoResult();
+        for(int i =0; i < LottoPrize.values().length; i++) {
+            result.increase(LottoPrize.FIRST);
+        }
+        System.out.println(result.average());
+    }
 }
