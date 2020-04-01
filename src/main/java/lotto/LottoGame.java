@@ -3,7 +3,6 @@ package lotto;
 import java.util.List;
 
 public class LottoGame {
-
     public static final int LOTTO_PRICE = 1000;
 
     public int match(Lotto lotto, Lotto winningLotto) {

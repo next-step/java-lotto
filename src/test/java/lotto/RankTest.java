@@ -7,7 +7,6 @@ import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
-
     @Test
     @DisplayName("일치하는 번호 갯수를 랭킹으로 변경한다")
     public void getRankReturnsRank() {
