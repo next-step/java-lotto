@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumberDto;
-import lotto.dto.LottoRank;
 import lotto.dto.LottoStatisticsDto;
 
 import java.util.Arrays;
