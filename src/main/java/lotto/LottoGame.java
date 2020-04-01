@@ -1,6 +1,10 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
@@ -30,5 +34,13 @@ public class LottoGame {
 
     public double getRateOfRevenue(int price, int totalWinnings) {
         return (double) totalWinnings / price;
+    }
+
+    public List<Lotto> createLottos(int i) {
+        return Stream
+                .generate(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                .limit(10)
+                .collect(toList());
+
     }
 }

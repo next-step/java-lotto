@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -92,5 +94,13 @@ public class LottoGameTest {
         double result = lottoGame.getRateOfRevenue(price, totalWinnings);
 
         assertThat(result).isEqualTo((double) totalWinnings / price);
+    }
+
+    @Test
+    @DisplayName("입력된 구매 장수만큼 로또를 자동으로 생성한다")
+    public void autoCreateLottoAsMuchAsPurchaseCount() {
+        List<Lotto> lottos = lottoGame.createLottos(10);
+
+        assertThat(lottos).hasSize(10);
     }
 }
