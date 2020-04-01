@@ -27,7 +27,7 @@ public class WinLotto {
         return setWinnerLottoNumber(winNumber);
     }
 
-    public int match(List<LottoNumber> buyLottos) {
+    public int match(LottoNumberList buyLottos) {
         return (int) winLottoNumber.stream()
                 .filter(number -> buyLottos.contains(number))
                 .count();
@@ -64,14 +64,20 @@ public class WinLotto {
     }
 
     public LottoNumber addBonusBall(LottoNumber bonusBallInputValue) {
-        int sameCount = match(Arrays.asList(bonusBallInputValue));
+        int sameCount = match(bonusBallInputValue);
         if (sameCount > ZERO) {
             throw new IllegalArgumentException("보너스볼은 당첨번호의 값과 중복이 되면 안됩니다.");
         }
         return bonusBallInputValue;
     }
 
-    public boolean matchBonusball(List<LottoNumber> buyLottos) {
+    private int match(LottoNumber bonusBallInputValue) {
+        return (int) winLottoNumber.stream()
+                .filter(number -> Arrays.asList(bonusBallInputValue).contains(number))
+                .count();
+    }
+
+    public boolean matchBonusball(LottoNumberList buyLottos) {
         int matchCount = (int) Arrays.asList(this.bonuseBall)
                 .stream()
                 .filter(number -> buyLottos.contains(number))

@@ -19,11 +19,11 @@ public class Lotto {
         this.lottoList = lottoList;
     }
 
-    public List<LottoNumber> getRandomLottoList() {
+    public LottoNumberList getRandomLottoList() {
         List<LottoNumber> lottoList = new ArrayList(this.lottoList);
         Collections.shuffle(lottoList);
         List<LottoNumber> randomLottolList = new ArrayList<>(lottoList.subList(0, SELECT_NUMBER));
         Collections.sort(randomLottolList);
-        return randomLottolList;
+        return new LottoNumberList(randomLottolList);
     }
 }

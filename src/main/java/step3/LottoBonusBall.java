@@ -13,7 +13,7 @@ public class LottoBonusBall {
         OutputView outputView = new OutputView();
         outputView.printBuyList(buyLotto);
         WinLotto winLotto = askWinLotto(inputView);
-        RankList rankList = controlLottoGame.setRanktList(winLotto, buyLotto);
+        RankList rankList = controlLottoGame.setRankList(winLotto, buyLotto);
         ResultInfo resultInfo = new ResultInfo(buyLottoTotalPrice);
         StringBuffer stringBuffer = controlLottoGame.setResult(resultInfo, rankList);
         outputView.printResult(stringBuffer);

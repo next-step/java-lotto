@@ -4,24 +4,18 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class ControlLottoGame {
-    private static final int LOTTO_PRICE = 1000;
     private static final int BONUS_BALL = 5;
 
     public BuyLotto startLotto(int totalPrice) {
-        LottoInfo lottoInfo = new LottoInfo(LOTTO_PRICE);
-        BuyInfo buyInfo = new BuyInfo(totalPrice, lottoInfo.getLottoPrice());
+        BuyInfo buyInfo = new BuyInfo(totalPrice);
         Lotto lotto = new Lotto();
-        Set<List<LottoNumber>> buyLottoList = new HashSet<>();
-        for (int i = 0; i < buyInfo.getTotalCount(); i++) {
-            List<LottoNumber> lottoList = lotto.getRandomLottoList();
-            buyLottoList.add(lottoList);
-        }
-        BuyLotto buyLotto = new BuyLotto(buyLottoList);
+        BuyLotto buyLotto = new BuyLotto(lotto,buyInfo.getTotalCount());
+
         return buyLotto;
     }
 
-    public RankList setRanktList(WinLotto winLotto, BuyLotto buyLotto) {
-        Iterator<List<LottoNumber>> iterator = buyLotto.getBuyLottoList().iterator();
+    public RankList setRankList(WinLotto winLotto, BuyLotto buyLotto) {
+        Iterator<LottoNumberList> iterator = buyLotto.getBuyLottoList().iterator();
         List<WinInformation> list = new ArrayList<>();
         while (iterator.hasNext()) {
             WinInformation winInformation = setRank(winLotto, iterator.next());
@@ -31,11 +25,11 @@ public class ControlLottoGame {
         return rankList;
     }
 
-    private WinInformation setRank(WinLotto winLotto, List<LottoNumber> next) {
-        int matchCount = winLotto.match((List<LottoNumber>) next);
+    private WinInformation setRank(WinLotto winLotto, LottoNumberList next) {
+        int matchCount = winLotto.match(next);
         boolean bonusBallMatch = false;
         if (matchCount == BONUS_BALL) {
-            bonusBallMatch = winLotto.matchBonusball((List<LottoNumber>) next);
+            bonusBallMatch = winLotto.matchBonusball(next);
         }
         return WinInformation.matchWinInformation(matchCount, bonusBallMatch);
     }
