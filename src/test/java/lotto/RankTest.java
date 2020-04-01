@@ -2,6 +2,8 @@ package lotto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,10 +29,11 @@ public class RankTest {
         assertThat(money).isEqualTo(2000000000);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2})
     @DisplayName("3개 미만으로 번호가 일치하면 당첨 실패로 처리한다")
-    public void loseWhenMatchCountLessThanThree() {
-        Rank rank = Rank.of(2);
+    public void loseWhenMatchCountLessThanThree(int matchCount) {
+        Rank rank = Rank.of(matchCount);
 
         assertThat(rank).isEqualTo(LOSER);
     }
