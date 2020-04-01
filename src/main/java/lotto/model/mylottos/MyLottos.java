@@ -2,10 +2,15 @@ package lotto.model.mylottos;
 
 import lotto.model.Money;
 import lotto.model.Rank;
+import lotto.model.gameresult.EarningRate;
+import lotto.model.gameresult.GameResult;
+import lotto.model.gameresult.MatchingResult;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static lotto.model.Rank.SECOND;
 import static lotto.model.Rank.THIRD;
@@ -17,6 +22,20 @@ public class MyLottos {
 
     public MyLottos(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public GameResult findGameResult(WinningLotto winningLotto){
+        return new GameResult(findMatchingResult(winningLotto), calculateEarningRate(winningLotto));
+    }
+
+    public MatchingResult findMatchingResult(WinningLotto winningLotto){
+        Map<Rank, Long> result = new HashMap<>();
+
+        for (Rank rank : Rank.values()) {
+            result.put(rank, findCountOfNumMatching(winningLotto, rank));
+        }
+
+        return new MatchingResult(result);
     }
 
     public long findCountOfNumMatching(WinningLotto winningLotto, Rank rank) {
@@ -68,13 +87,14 @@ public class MyLottos {
         return rank.calculatePrizeMoney(findCountOfNumMatching(winningLotto, rank));
     }
 
-    public double calculateEarningRate(WinningLotto winningLotto) {
+    public EarningRate calculateEarningRate(WinningLotto winningLotto) {
         Money earningMoney = calculateAllPrizeMoney(winningLotto);
         return findEarningRate(earningMoney);
     }
 
-    private double findEarningRate(Money earningMoney) {
-        return earningMoney.getMoney() / findInputMoney() * 100;
+    private EarningRate findEarningRate(Money earningMoney) {
+        double earningRate = (earningMoney.getMoney() / findInputMoney()) * 100;
+        return new EarningRate(earningRate);
     }
 
     private double findInputMoney() {

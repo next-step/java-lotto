@@ -38,7 +38,7 @@ public class LottoGameTest {
     void getResultTest() {
         //given
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2));
-        LottoGame lottoGame = new LottoGame(money.findLottoCountToBuy(), myLottos, WINNING_LOTTO);
+        LottoGame lottoGame = new LottoGame(money.findLottoCountToBuy(), myLottos);
 
         //when
         GameResult result = lottoGame.getResult(WINNING_LOTTO);
@@ -53,7 +53,7 @@ public class LottoGameTest {
     void getEarningRateTest() {
         //given
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers1, lottoNumbers2));
-        LottoGame lottoGame = new LottoGame(money.findLottoCountToBuy(), myLottos, WINNING_LOTTO);
+        LottoGame lottoGame = new LottoGame(money.findLottoCountToBuy(), myLottos);
 
         //when
         GameResult result = lottoGame.getResult(WINNING_LOTTO);

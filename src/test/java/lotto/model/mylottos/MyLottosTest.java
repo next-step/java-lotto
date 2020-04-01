@@ -1,6 +1,7 @@
 package lotto.model.mylottos;
 
 import lotto.model.Money;
+import lotto.model.gameresult.EarningRate;
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.model.winninglotto.WinningLottoNumbers;
@@ -109,10 +110,10 @@ public class MyLottosTest {
         LottoNumbers lottoNumbers5 = new LottoNumbers(Arrays.asList(15, 1, 2, 3, 19, 20));
         MyLottos myLottos = new MyLottos(Arrays.asList(lottoNumbers5));
 
-        //whenR
-        double earningRate = myLottos.calculateEarningRate(WINNING_LOTTO);
+        //when
+        EarningRate earningRate = myLottos.calculateEarningRate(WINNING_LOTTO);
 
         //then
-        assertThat(earningRate).isEqualTo(500);
+        assertThat(earningRate.getEarningRate()).isEqualTo(500);
     }
 }
