@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,12 +42,37 @@ public class LottoTest {
         }
     }
 
+    @Test
+    @DisplayName("당첨 결과 생성 테스트")
+    public void winningResultTset(){
+        Set<List<Integer>> expect = generateLottoValue();
+        Lotto lotto = new Lotto(expect);
+
+        List<String> winningNumber = Arrays.asList("1", "2", "3", "4", "5", "6");
+
+        Map<Winning, Integer> winning = lotto.getResult(winningNumber);
+
+        assertThat(winning.get(Winning.FIRST_PLACE)).isEqualTo(1);
+        assertThat(winning.get(Winning.SECOND_PLACE)).isEqualTo(1);
+        assertThat(winning.get(Winning.THIRD_PLACE)).isEqualTo(1);
+        assertThat(winning.get(Winning.FOURTH_PLACE)).isEqualTo(0);
+        assertThat(winning.get(Winning.LOSE)).isEqualTo(1);
+    }
+
     private Set<List<Integer>> generateLottoValue() {
         Set<List<Integer>> lottoNumbers = new HashSet<>();
 
         lottoNumbers.add(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoNumbers.add(Arrays.asList(2, 3, 4, 5, 6, 7));
         lottoNumbers.add(Arrays.asList(3, 4, 5, 6, 7, 8));
+
+        return lottoNumbers;
+    }
+
+    private Set<List<Integer>> generateLottoValueWithNotMatching() {
+        Set<List<Integer>> lottoNumbers = generateLottoValue();
+
+        lottoNumbers.add(Arrays.asList(9, 10, 11, 12, 13, 14));
 
         return lottoNumbers;
     }

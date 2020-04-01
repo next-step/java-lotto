@@ -17,4 +17,5 @@ public class LottoGameTest {
 
         assertThat(lotto.size()).isEqualTo(expect);
     }
+
 }

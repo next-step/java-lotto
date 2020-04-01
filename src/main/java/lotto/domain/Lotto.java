@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -35,5 +32,10 @@ public class Lotto {
         }
 
         return stringBuilder.toString();
+    }
+
+    public Map<Winning, Integer> getResult(List<String> winningNumber) {
+
+        return new HashMap();
     }
 }
