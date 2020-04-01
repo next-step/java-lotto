@@ -20,10 +20,6 @@ public class LottoNumber {
     private final int no;
 
     private LottoNumber(int no) {
-        if (no < LOTTO_NUMBER_MIN || no > LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException("로또 번호의 범위를 벗어났습니다.");
-        }
-
         this.no = no;
     }
 
@@ -37,7 +33,7 @@ public class LottoNumber {
 
     static LottoNumber of(int number) {
         return Optional.ofNullable(lottoNos.get(number))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalArgumentException("로또 번호의 범위를 벗어났습니다."));
     }
 
     @Override
