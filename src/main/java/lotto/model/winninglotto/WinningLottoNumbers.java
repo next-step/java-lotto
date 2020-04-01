@@ -1,22 +1,28 @@
-package lotto.model;
+package lotto.model.winninglotto;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
-public class Lotto {
+public class WinningLottoNumbers {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private List<Integer> lottoNumbers;
+    private List<Integer> winningLottoNumbers;
 
-    public Lotto(List<Integer> lottoNumbers) {
-        validateSize(lottoNumbers);
-        validateDuplication(lottoNumbers);
-        validateNumberRange(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    public WinningLottoNumbers(List<Integer> winningLottoNumbers) {
+        validateSize(winningLottoNumbers);
+        validateNumberRange(winningLottoNumbers);
+        validateDuplication(winningLottoNumbers);
+        this.winningLottoNumbers = Collections.unmodifiableList(winningLottoNumbers);
     }
+
+    public List<Integer> getWinningLottoNumbers() {
+        return winningLottoNumbers;
+    }
+
 
     private void validateSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
@@ -25,10 +31,8 @@ public class Lotto {
     }
 
     private void validateDuplication(List<Integer> lottoNumbers) {
-        int sizeOfSet = lottoNumbers.stream()
-                .collect(Collectors.toSet())
-                .size();
-        if (lottoNumbers.size() > sizeOfSet) {
+        Set<Integer> uniqueNumbers = new HashSet<>(lottoNumbers);
+        if (lottoNumbers.size() > uniqueNumbers.size()) {
             throw new IllegalArgumentException("로또는 중복되지 않은 숫자로 구성되어야 합니다.");
         }
     }
@@ -41,17 +45,5 @@ public class Lotto {
         if (hasNumberOutOfRange) {
             throw new IllegalArgumentException("로또는 1부터 45까지의 숫자로만 구성되어야 합니다.");
         }
-    }
-
-    public int findHowManyMatch(List<Integer> winningLotto) {
-        return this.lottoNumbers.stream()
-                .filter(it -> winningLotto.contains(it))
-                .collect(Collectors.toList())
-                .size();
-    }
-
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
     }
 }

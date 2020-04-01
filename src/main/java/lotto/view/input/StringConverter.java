@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.input;
 
 import lotto.model.Money;
 
@@ -12,8 +12,8 @@ public class StringConverter {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
 
-    public static Money convertStringToMoney(InputView inputView) {
-        Long money = validateNonNumber(inputView.getInput());
+    public static Money convertStringToMoney(String stringMoney) {
+        Long money = validateNonNumber(stringMoney);
         validateEnoughToBuyLotto(money);
         return new Money(money);
     }
@@ -34,6 +34,11 @@ public class StringConverter {
 
     private static boolean isLessThanOneThousand(Long money) {
         return money < MONEY_TO_BUY_ONE_LOTTO;
+    }
+
+    public static int convertStringToNumber(String input) {
+        validateNonNumber(input);
+        return Integer.parseInt(input);
     }
 
     public static List<Integer> convertStringToNumbers(String input) {

@@ -1,25 +1,17 @@
 package lotto;
 
-import lotto.lottogenerator.LottoNumGeneratorByAuto;
-import lotto.model.LottoGame;
-import lotto.view.InputScanner;
-import lotto.view.InputView;
-import lotto.view.ResultView;
-
-import java.util.List;
+import lotto.model.game.LottoGame;
+import lotto.model.winninglotto.WinningLotto;
+import lotto.view.input.InputScanner;
+import lotto.view.output.ResultView;
 
 public class MainApplication {
     public static void main(String[] args) {
-        LottoNumGeneratorByAuto lottoNumGeneratorByAuto = new LottoNumGeneratorByAuto();
-        String inputPrice = InputScanner.getPurchasePrice();
+        LottoGame lottoGame = new LottoGame(InputScanner.getPurchasePrice());
+        ResultView.printMyLottos(lottoGame.start());
 
-        LottoGame lottoGame = new LottoGame(InputView.of(inputPrice));
-        while (!lottoGame.isEnd()) {
-            lottoGame.start(lottoNumGeneratorByAuto);
-        }
-        ResultView.printMyLottos(lottoGame);
-
-        List<Integer> winningLotto = InputScanner.getWinningLotto();
-        ResultView.printResult(lottoGame, winningLotto);
+        WinningLotto winningLotto
+                = WinningLotto.of(InputScanner.getWinningNumbers(), InputScanner.getBonusBall());
+        ResultView.printResult(lottoGame.getResult(winningLotto));
     }
 }

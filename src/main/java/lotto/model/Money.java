@@ -31,10 +31,6 @@ public class Money {
         return (int) Math.floor(this.money / MONEY_TO_BUY_ONE_LOTTO);
     }
 
-    public Money add(Money money) {
-        return new Money(this.money + money.getMoney());
-    }
-
     public Long getMoney() {
         return money;
     }
