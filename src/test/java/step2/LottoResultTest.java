@@ -23,6 +23,7 @@ public class LottoResultTest {
         resultMap.put(LottoTier.SECOND, 1);
         resultMap.put(LottoTier.THIRD, 1);
         resultMap.put(LottoTier.FOURTH, 1);
+        resultMap.put(LottoTier.FIFTH, 1);
         resultMap.put(LottoTier.NONE, 1);
 
         lottoResult = new LottoResult(resultMap);
@@ -31,13 +32,13 @@ public class LottoResultTest {
     @Test
     @DisplayName("결과에 맞는 수입금액을 도출하는 지 테스트")
     void getTotalPrize() {
-        assertThat(lottoResult.getTotalPrize()).isEqualTo(2000205000);
+        assertThat(lottoResult.getTotalPrize()).isEqualTo(2030205000);
     }
 
     @Test
     @DisplayName("결과와 구매 금액에 맞는 수익률을 도출하는 지 테스트")
     void getYield() {
         Money money = new Money(4000);
-        assertThat(lottoResult.getYield(money)).isEqualTo(500051.25);
+        assertThat(lottoResult.getYield(money)).isEqualTo(507551.25);
     }
 }

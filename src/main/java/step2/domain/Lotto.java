@@ -19,10 +19,10 @@ public class Lotto {
     }
 
     private void validateNumberDuplication(List<LottoNumber> lotto) {
-        Set<Integer> uniqueNumbers = new HashSet<>();
+        Set<LottoNumber> uniqueNumbers = new HashSet<>();
 
         for(LottoNumber lottoNumber : lotto) {
-            uniqueNumbers.add(lottoNumber.getValue());
+            uniqueNumbers.add(lottoNumber);
         }
 
         if(lotto.size() != uniqueNumbers.size()) {
@@ -36,20 +36,12 @@ public class Lotto {
         }
     }
 
-    public LottoTier getLottoTier(Lotto winningLotto) {
-        return LottoTier.getTier(getMatchedNumberCount(winningLotto));
-    }
-
-    public long getMatchedNumberCount(Lotto winningLotto) {
-        return winningLotto
-                .getValue()
-                .stream()
-                .filter(winningLottoNumber -> lotto.contains(winningLottoNumber))
-                .count();
+    public boolean contains(LottoNumber number) {
+        return lotto.contains(number);
     }
 
     public Set<LottoNumber> getValue() {
-        return new HashSet<>(lotto);
+        return lotto;
     }
 }
 

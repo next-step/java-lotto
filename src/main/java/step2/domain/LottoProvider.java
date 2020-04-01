@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoProvider {
 
-    private static final List<LottoNumber> wholeNumber = new ArrayList<>();
+    private static final List<LottoNumber> LOTTO_NUMBER_POOL = IntStream.rangeClosed(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
     private LottoProvider() {}
 
@@ -32,6 +35,13 @@ public class LottoProvider {
         return new Lotto(lotto);
     }
 
+    private static List<LottoNumber> getShuffledNumber() {
+        List<LottoNumber> shuffledNumber = LOTTO_NUMBER_POOL;
+
+        Collections.shuffle(shuffledNumber);
+        return shuffledNumber;
+    }
+
     public static Lotto createLotto(List<Integer> inputNumbers) {
         List<LottoNumber> lotto =  inputNumbers.stream()
                 .map(LottoNumber::new)
@@ -39,19 +49,11 @@ public class LottoProvider {
         return new Lotto(lotto);
     }
 
-    private static List<LottoNumber> getShuffledNumber() {
-        List<LottoNumber> shuffledNumber = new ArrayList<>(getWholeNumber());
+    public static WinningLotto createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
+        List<LottoNumber> lottoNumbers = inputNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
 
-        Collections.shuffle(shuffledNumber);
-        return shuffledNumber;
-    }
-
-    private static List<LottoNumber> getWholeNumber() {
-        if(wholeNumber.isEmpty()) {
-            for(int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
-                wholeNumber.add(new LottoNumber(i));
-            }
-        }
-        return wholeNumber;
+        return new WinningLotto(new Lotto(lottoNumbers), new LottoNumber(bonusNumber));
     }
 }

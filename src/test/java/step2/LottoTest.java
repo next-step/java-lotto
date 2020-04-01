@@ -6,6 +6,7 @@ import step2.controller.LottoMachine;
 import step2.domain.Lotto;
 import step2.domain.LottoNumber;
 import step2.domain.LottoProvider;
+import step2.domain.WinningLotto;
 
 import java.util.Arrays;
 
@@ -31,17 +32,4 @@ public class LottoTest {
         }).withMessage(Lotto.LOTTO_NUMBER_COUNT_ERROR);
     }
 
-    @Test
-    @DisplayName("당첨 숫자 개수 체크가 제대로 되는지 테스트")
-    void WinningNumber() {
-        Lotto lotto = LottoMachine.getInstance().createWinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6)))).isEqualTo(6);
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 5, 7)))).isEqualTo(5);
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 4, 7, 8)))).isEqualTo(4);
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 3, 7, 8, 9)))).isEqualTo(3);
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 2, 7, 8, 9, 10)))).isEqualTo(2);
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(1, 7, 8, 9, 10, 11)))).isEqualTo(1);
-        assertThat(lotto.getMatchedNumberCount(LottoProvider.createLotto(Arrays.asList(7, 8, 9, 10, 11, 12)))).isEqualTo(0);
-    }
 }

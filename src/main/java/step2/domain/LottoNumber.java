@@ -27,16 +27,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public int compareTo(LottoNumber o) {
-        if(o.equals(lottoNumber)) {
-            return 0;
-        }
-        return lottoNumber > o.getValue() ? 1 : -1;
+        return Integer.compare(lottoNumber, o.getValue());
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return lottoNumber == that.lottoNumber;
     }
