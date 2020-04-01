@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoMachine {
+    private static final String TOO_MANY_MANUAL_COUNT_ERROR = "%s개 이하로 입력해주세요.";
     private static ResultView resultView;
     private static LottoMachine lottoMachine;
 
@@ -28,6 +29,8 @@ public class LottoMachine {
     public Lottos createLottos(InputView inputView, Money money) {
         int lottoCount = money.getLottoCount();
         int manualLottoCount = inputView.getManualLottoCount();
+        validateManualLottoCount(lottoCount, manualLottoCount);
+
         int autoLottoCount = lottoCount - manualLottoCount;
 
         List<Lotto> wholeLottos = new ArrayList<>();
@@ -38,6 +41,12 @@ public class LottoMachine {
         resultView.showLottos(lottos, lottoCount);
 
         return lottos;
+    }
+
+    private void validateManualLottoCount(int lottoCount, int manualLottoCount) {
+        if(lottoCount < manualLottoCount) {
+            throw new IllegalArgumentException(String.format(TOO_MANY_MANUAL_COUNT_ERROR, lottoCount));
+        }
     }
 
     public WinningLotto createWinningLotto(List<Integer> inputNumbers, int bonusNumber) {
