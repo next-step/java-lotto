@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.type.RankType;
+import lotto.domain.type.RankType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

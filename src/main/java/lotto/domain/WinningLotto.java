@@ -1,36 +1,31 @@
 package lotto.domain;
 
-public class WinningLotto {
-    private final int ADD_COUNT = 1;
-    private final int ZERO = 0;
+import lotto.exception.ExceptionType;
+import lotto.exception.LottoException;
 
+public class WinningLotto {
     private Lotto lotto;
     private int bonusNumber;
 
     public WinningLotto(Lotto lotto, String bonusNumber) {
         this.lotto = lotto;
         this.bonusNumber = Integer.parseInt(bonusNumber);
+
+        checkBonusNumber();
     }
 
     public int getMatchCount(Lotto lotto) {
-        int matchCount = 0;
-
-        for (Integer number : this.lotto.getNumbers()) {
-            matchCount += addMatchCount(lotto, number);
-        }
-
-        return matchCount;
+        return this.lotto.getMatchCount(lotto);
     }
 
     public boolean matchBonus(Lotto lotto) {
         return lotto.contains(this.bonusNumber);
     }
 
-    private int addMatchCount(Lotto lotto, int number) {
-        if (lotto.contains(number)) {
-            return ADD_COUNT;
-        }
+    private void checkBonusNumber() {
+        if(lotto.contains(this.bonusNumber)) {
+            throw new LottoException(ExceptionType.DUPLICATED_LOTTO_BONUS_NUMBER);
 
-        return ZERO;
+        };
     }
 }

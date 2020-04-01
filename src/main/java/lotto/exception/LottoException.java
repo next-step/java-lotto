@@ -1,7 +1,5 @@
 package lotto.exception;
 
-import lotto.type.ExceptionType;
-
 public class LottoException extends RuntimeException {
     private ExceptionType type;
 
