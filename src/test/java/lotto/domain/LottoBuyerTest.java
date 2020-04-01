@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,17 +18,21 @@ class LottoBuyerTest {
 	void buyLottoNumbersCountTest() {
 		LottoBuyer buyer = new LottoBuyer();
 
-		assertThat(buyer.buyLottoNumbers(14000).getAutoCount())
+		assertThat(getPurchasedLottoNumbersDto(buyer, 14000).getAutoCount())
 				.isEqualTo(14);
-		assertThat(buyer.buyLottoNumbers(14999).getAutoCount())
+		assertThat(getPurchasedLottoNumbersDto(buyer, 14999).getAutoCount())
 				.isEqualTo(14);
+	}
+
+	private PurchasedLottoNumbersDto getPurchasedLottoNumbersDto(LottoBuyer buyer, int i) {
+		return buyer.buyLottoNumbers(i, Collections.emptyList());
 	}
 
 	@Test
 	@DisplayName("로또 번호 전부 다 같은 번호 나오지는 않는지 확인 테스트")
 	void LottoDistinctionTest() {
 		LottoBuyer buyer = new LottoBuyer();
-		List<LottoNumberDto> lottoNumbers = buyer.buyLottoNumbers(2000).getLottoNumbers();
+		List<LottoNumberDto> lottoNumbers = getPurchasedLottoNumbersDto(buyer, 2000).getLottoNumbers();
 
 		assertThat(lottoNumbers.get(0))
 				.isNotEqualTo(lottoNumbers.get(1));

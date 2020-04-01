@@ -18,10 +18,6 @@ public class LottoBuyer {
 		machinePassive = new LottoMachinePassive();
 	}
 
-	PurchasedLottoNumbersDto buyLottoNumbers(long money) {
-		return buyLottoNumbers(money, Collections.emptyList());
-	}
-
 	public PurchasedLottoNumbersDto buyLottoNumbers(long money, List<LottoNumberDto> passiveNumbers) {
 		long count = money / PRIZE;
 		int passiveCount = passiveNumbers.size();
