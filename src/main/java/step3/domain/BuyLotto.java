@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BuyLotto {
+public class BuyLotto extends Lotto{
     private static final int BONUS_BALL = 5;
-
     private List<LottoNumberList> buyLottoList;
 
     public BuyLotto(int totalCount) {
@@ -18,6 +17,41 @@ public class BuyLotto {
         }
         this.buyLottoList = buyLottoList;
     }
+
+    public BuyLotto(int totalCount, String[] manulaLottoNumbers) {
+        this(totalCount);
+        addManual(manulaLottoNumbers);
+    }
+
+    private void addManual(String[] manulaLottoNumbers) {
+        for (int i = 0; i < manulaLottoNumbers.length; i++) {
+            buyManualLotto(manulaLottoNumbers[i]);
+        }
+    }
+
+    private void buyManualLotto(String manulaLottoNumber1) {
+        List<LottoNumber> manulaLottoNumber = new ArrayList<>();
+        String[] splitString = split(manulaLottoNumber1);
+        for (int i = 0; i < splitString.length; i++) {
+            LottoNumber number = LottoNumber.of(Integer.parseInt(splitString[i]));
+            manulaLottoNumber.add(number);
+        }
+        this.buyLottoList.add(new LottoNumberList(manulaLottoNumber));
+    }
+
+    private String[] split(String inputValue) {
+        String[] splitString;
+        try {
+            splitString = inputValue.split(SPLIT_SIGN);
+            if (splitString.length != SELECT_NUMBER) {
+                throw new IllegalArgumentException("당첨번호형식이 틀렸습니다.");
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+        return splitString;
+    }
+
 
     public List<LottoNumberList> getBuyLottoList() {
         return buyLottoList;

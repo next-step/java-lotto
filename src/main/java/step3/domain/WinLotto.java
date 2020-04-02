@@ -2,10 +2,8 @@ package step3.domain;
 
 import java.util.*;
 
-public class WinLotto {
+public class WinLotto extends Lotto{
     private static final int ZERO = 0;
-    private static final int SELECT_NUMBER = 6;
-    private static final String SPLIT_SIGN = ",";
     private LottoNumberList winLottoNumber;
     private LottoNumber bonuseBall;
 

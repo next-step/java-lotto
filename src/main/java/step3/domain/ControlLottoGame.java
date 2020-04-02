@@ -4,9 +4,8 @@ import java.math.BigDecimal;
 
 public class ControlLottoGame {
 
-    public BuyLotto startLotto(int totalPrice) {
-        BuyInfo buyInfo = new BuyInfo(totalPrice);
-        return new BuyLotto(buyInfo.getTotalCount());
+    public BuyLotto startLotto(int autoCount, String[] manulaLottoNumber) {
+        return new BuyLotto(autoCount, manulaLottoNumber);
     }
 
     public Ranks makeRankListByBuyLotto(WinLotto winLotto, BuyLotto buyLotto) {
