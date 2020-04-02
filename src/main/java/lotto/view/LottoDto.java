@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.domain.item.LottoTicket;
-
-import java.util.List;
+import lotto.domain.item.LottoTickets;
 
 public class LottoDto {
-    private List<LottoTicket> tickets;
+    private LottoTickets tickets;
     private int firstGameCount = 0;
     private int secondGameCount = 0;
     private int thirdGameCount = 0;
@@ -13,7 +11,7 @@ public class LottoDto {
     private int fifthGameCount = 0;
     private double earningRate = 0;
 
-    public List<LottoTicket> getTickets() {
+    public LottoTickets getTickets() {
         return tickets;
     }
 
@@ -41,7 +39,7 @@ public class LottoDto {
         return earningRate;
     }
 
-    public void setTickets(List<LottoTicket> tickets) {
+    public void setTickets(LottoTickets tickets) {
         this.tickets = tickets;
     }
 
