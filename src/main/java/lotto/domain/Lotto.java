@@ -16,28 +16,24 @@ public class Lotto {
 
     public String toString(String format, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
-//
-//        for (List<Integer> oneSet : lottoNumbers) {
-//            String lottoNums = oneSet.stream().map(num -> Integer.toString(num)).collect(Collectors.joining(delimiter));
-//            stringBuilder.append(String.format(format, lottoNums));
-//        }
+
+        String joinedNumbers = lottoNumbers.stream().map(num -> Integer.toString(num)).collect(Collectors.joining(delimiter));
+        stringBuilder.append(String.format(format, joinedNumbers));
 
         return stringBuilder.toString();
     }
 
-    public Map<Winning, Integer> getResult(List<Integer> winningNumber) {
-        Map<Winning, Integer> result = new HashMap<>();
-//
-//        for (List<Integer> oneSet : lottoNumbers) {
-//            long matchCount = winningNumber.stream().filter(oneSet::contains).count();
-//            Winning winning = Winning.getWinningType((int) matchCount);
-//            result.put(winning, result.containsKey(winning) ? result.get(winning) + 1 : 1);
-//        }
+    public Winning getResult(List<Integer> winningNumbers) {
+        int matchCount = 0;
 
-        return result;
+        for (Integer number : winningNumbers) {
+            matchCount += lottoNumbers.contains(number) ? 1 : 0;
+        }
+
+        return Winning.getWinningType(matchCount);
     }
 
     public static String calculateYield(int paidMoney, int profit) {
-        return String.format("%.2f", (float) profit/(float) paidMoney);
+        return String.format("%.2f", (float) profit / (float) paidMoney);
     }
 }
