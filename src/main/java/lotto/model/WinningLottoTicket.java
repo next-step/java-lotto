@@ -17,7 +17,7 @@ public class WinningLottoTicket {
 
     public static WinningLottoTicket newInstance(final Set<LottoNumber> numbers, final LottoNumber bonusNumber) {
         if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("bonus number must be distinct.");
+            throw new IllegalArgumentException("보너스 숫자는 당첨 번호와 일치하면 안됩니다.");
         }
 
         return new WinningLottoTicket(LottoTicket.newInstance(numbers), bonusNumber);

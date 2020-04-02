@@ -8,7 +8,7 @@ public class LottoTickets {
 
     private LottoTickets(final List<LottoTicket> lottoTickets) {
         if (Objects.isNull(lottoTickets)) {
-            throw new IllegalArgumentException("lotto tickets is null");
+            throw new IllegalArgumentException("로또 객체가 올바르지 않습니다.");
         }
 
         this.lottoTickets = new ArrayList<>(lottoTickets);

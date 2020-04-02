@@ -23,7 +23,7 @@ public class LottoStore {
 
     private static int countAutomaticLottoTickets(final Payment payment, final int manualLottoTickets) {
         if(payment.countLottoTicket() - manualLottoTickets < 0) {
-            throw new IllegalArgumentException("payment is insufficient to buy lotto tickets.");
+            throw new IllegalArgumentException("입력 받은 수동 로또들을 전부 구입하기엔 돈이 모자릅니다.");
         }
         return payment.countLottoTicket() - manualLottoTickets;
     }

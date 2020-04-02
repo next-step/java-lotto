@@ -44,7 +44,7 @@ public class LottoTicket {
 
     private void validate(final Set<LottoNumber> numbers) {
         if (Objects.isNull(numbers) || numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
+            throw new IllegalArgumentException("로또는 서로 다른 6개의 숫자여야 합니다.");
         }
     }
 

@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(final int number) {
         return Optional.ofNullable(NUMBERS.get(number))
-                .orElseThrow(() -> new IllegalArgumentException("Lotto Ticket must be between 1 and 45."));
+                .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1 이상, 45 이하여야 한다."));
     }
 
     public static LottoNumber of(final String number) {

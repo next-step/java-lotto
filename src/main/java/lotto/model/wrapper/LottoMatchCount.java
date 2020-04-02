@@ -32,7 +32,7 @@ public class LottoMatchCount {
 
     public static LottoMatchCount of(final int count) {
         return Optional.ofNullable(COUNTS.get(count))
-                .orElseThrow(() -> new IllegalArgumentException("Match Count must be between 0 and 6."));
+                .orElseThrow(() -> new IllegalArgumentException("당첨 번호와 매칭되는 숫자는 0 이상, 6 이하여야 합니다."));
     }
 
     public int toInt() {

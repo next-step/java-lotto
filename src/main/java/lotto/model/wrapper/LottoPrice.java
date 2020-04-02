@@ -8,7 +8,7 @@ public class LottoPrice {
 
     private LottoPrice(final long price) {
         if (price < 0) {
-            throw new RuntimeException("price must be greater than zero.");
+            throw new RuntimeException("상금은 0보다 커야 합니다.");
         }
         this.price = price;
     }

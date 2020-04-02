@@ -36,7 +36,7 @@ public enum LottoResult {
 
     public static LottoResult of(final LottoResultMatchId lottoResultMatchId) {
         return Optional.ofNullable(LOTTO_RESULTS.get(lottoResultMatchId))
-                .orElseThrow(() -> new IllegalArgumentException("Unacceptable Match Id."));
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 당첨 케이스가 없습니다."));
     }
 
     public int getMatchCount() {
