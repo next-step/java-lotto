@@ -30,7 +30,7 @@ public class LottoResultTests {
     public void generateLottoAbnormalResultTests(final LottoResultMatchId matchCount) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoResult.of(matchCount))
-                .withMessageContaining("Unacceptable Match Id.");
+                .withMessageContaining("일치하는 당첨 케이스가 없습니다.");
     }
 
     @DisplayName("로또 결과 파라미터 테스트")

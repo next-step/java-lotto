@@ -30,6 +30,6 @@ public class LottoNumberTests {
     public void generateLottoNumberExceptionTest(int input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumber.of(input))
-                .withMessageContaining("Lotto Ticket must be between 1 and 45.");
+                .withMessageContaining("로또 번호는 1 이상, 45 이하여야 한다.");
     }
 }

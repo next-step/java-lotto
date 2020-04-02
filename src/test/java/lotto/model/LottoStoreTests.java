@@ -29,7 +29,7 @@ public class LottoStoreTests {
     public void sellShortMoneyTest(Payment payment, LottoTickets manualLottoTickets) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoStore.sell(payment, manualLottoTickets))
-                .withMessageContaining("payment is insufficient to buy lotto tickets.");
+                .withMessageContaining("입력 받은 수동 로또들을 전부 구입하기엔 돈이 모자릅니다.");
     }
 
     private static Stream<Arguments> sellTestCases() {

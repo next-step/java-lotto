@@ -24,7 +24,7 @@ public class PaymentTests {
     public void generateMinusPaymentTest(int money) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Payment.of(money))
-                .withMessageContaining("payment must be greater than zero.");
+                .withMessageContaining("구입 금액은 0 보다 커야 한다.");
     }
 
     @DisplayName("로또 구입 가능 숫자 테스트")

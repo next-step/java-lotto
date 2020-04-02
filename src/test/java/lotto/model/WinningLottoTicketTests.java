@@ -31,7 +31,7 @@ public class WinningLottoTicketTests {
     public void generateLottoExceptionTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLottoTicket.newInstance(numbers, bonusNumber))
-                .withMessageContaining("Lotto Ticket must have six distinct number.");
+                .withMessageContaining("로또는 서로 다른 6개의 숫자여야 합니다.");
     }
 
     @DisplayName("당첨 로또 생성 오류 - 보너스 번호 테스트")
@@ -40,7 +40,7 @@ public class WinningLottoTicketTests {
     public void generateLottoExceptionWinningNumberTest(Set<LottoNumber> numbers, LottoNumber bonusNumber) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> WinningLottoTicket.newInstance(numbers, bonusNumber))
-                .withMessageContaining("bonus number must be distinct.");
+                .withMessageContaining("보너스 숫자는 당첨 번호와 일치하면 안됩니다.");
     }
 
     private static Stream<Arguments> generateWinningLottoTestCases() {

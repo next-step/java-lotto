@@ -33,7 +33,7 @@ public class LottoTicketTests {
     public void generateLottoExceptionTest(Set<LottoNumber> numbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.newInstance(numbers))
-                .withMessageContaining("Lotto Ticket must have six distinct number.");
+                .withMessageContaining("로또는 서로 다른 6개의 숫자여야 합니다.");
     }
 
     @DisplayName("로또 결과 확인 테스트")
