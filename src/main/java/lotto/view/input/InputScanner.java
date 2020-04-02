@@ -1,8 +1,9 @@
 package lotto.view.input;
 
 import lotto.model.Money;
+import lotto.model.lottonumber.LottoNumber;
+import lotto.model.lottonumber.LottoNumbers;
 import lotto.model.winninglotto.BonusBall;
-import lotto.model.winninglotto.WinningLottoNumbers;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class InputScanner {
     private static final String MSG_BONUS_NUMBER = "당첨 번호에 포함된 번호는 보너스 번호가 될 수 없습니다.";
     private static final Scanner scanner = new Scanner(System.in);
 
-    private static List<Integer> winningLotto;
+    private static List<LottoNumber> winningLotto;
 
     public static Money getPurchasePrice() {
         System.out.println(REQUEST_FOR_MONEY);
@@ -23,17 +24,17 @@ public class InputScanner {
         return StringConverter.convertStringToMoney(validateNullOrEmpty(money));
     }
 
-    public static WinningLottoNumbers getWinningNumbers() {
+    public static LottoNumbers getWinningNumbers() {
         System.out.println(REQUEST_FOR_WINNING_LOTTO);
         winningLotto = StringConverter.convertStringToNumbers(scanner.nextLine());
-        return new WinningLottoNumbers(winningLotto);
+        return new LottoNumbers(winningLotto);
     }
 
     public static BonusBall getBonusBall() {
         System.out.println(REQUEST_FOR_BONUS_BALL);
         String input = scanner.nextLine();
         int bonusBall = validateBonusBall(StringConverter.convertStringToNumber(input));
-        return BonusBall.of(bonusBall);
+        return BonusBall.of(LottoNumber.of(bonusBall));
     }
 
     private static String validateNullOrEmpty(String input) {

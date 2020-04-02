@@ -1,8 +1,8 @@
 package lotto.model.mylottos;
 
+import lotto.model.lottonumber.LottoNumber;
 import lotto.model.lottonumber.LottoNumbers;
 import lotto.model.winninglotto.WinningLotto;
-import lotto.model.winninglotto.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +19,8 @@ public class LottoNumbersTest {
     @Test
     void validateSizeTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(
+                    LottoNumber.of(1)));
         });
     }
 
@@ -27,7 +28,14 @@ public class LottoNumbersTest {
     @Test
     void validateDuplicationTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(1, 1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(
+                    LottoNumber.of(1),
+                    LottoNumber.of(1),
+                    LottoNumber.of(2),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5)
+            ));
         });
     }
 
@@ -36,17 +44,37 @@ public class LottoNumbersTest {
     @ValueSource(ints = {-1, 0, 46})
     void validateNumberRangeTest(int input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(input, 1, 2, 3, 4, 5));
+            new LottoNumbers(Arrays.asList(
+                    LottoNumber.of(input),
+                    LottoNumber.of(1),
+                    LottoNumber.of(2),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5)));
         });
     }
 
     @DisplayName("구매한 로또 번호와 당첨 로또 번호를 인자로 주면, 두 번호 간 일치한 숫자의 갯수를 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1:5", "7:6", "8:5", "9:5"}, delimiter = ':')
+    @CsvSource(value = {"1:6", "7:5"}, delimiter = ':')
     void findHowManyMatchTest(int input, int expected) {
         //given
-        WinningLottoNumbers winningLottoNumbers= new WinningLottoNumbers(Arrays.asList(input, 2, 3, 4, 5, 6));
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(2, 3, 4, 5, 6, 7));
+        LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(
+                LottoNumber.of(input),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        ));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        ));
 
         //when
         int howManyMatch = lottoNumbers.findHowManyMatch(WinningLotto.of(winningLottoNumbers));

@@ -1,17 +1,19 @@
 package lotto.model.winninglotto;
 
-public class BonusBall {
-    private int bonusNumber;
+import lotto.model.lottonumber.LottoNumber;
 
-    public BonusBall(int bonusNumber) {
+public class BonusBall {
+    private LottoNumber bonusNumber;
+
+    public BonusBall(LottoNumber bonusNumber) {
         this.bonusNumber = bonusNumber;
     }
 
-    public static BonusBall of(int bonusNumber) {
+    public static BonusBall of(LottoNumber bonusNumber) {
         return new BonusBall(bonusNumber);
     }
 
-    public boolean isEqualWith(int bonusNumber) {
+    public boolean isEqualWith(LottoNumber bonusNumber) {
         return this.bonusNumber == bonusNumber;
     }
 }

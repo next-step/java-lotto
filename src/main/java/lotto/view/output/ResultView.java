@@ -6,6 +6,8 @@ import lotto.model.gameresult.GameResult;
 import lotto.model.gameresult.MatchingResult;
 import lotto.model.mylottos.MyLottos;
 
+import java.util.Arrays;
+
 import static lotto.model.Rank.SECOND;
 
 public class ResultView {
@@ -33,24 +35,20 @@ public class ResultView {
     }
 
     private static void printStatistics(MatchingResult matchingResult) {
-        for (Rank rank : Rank.values()) {
-            printStatisticExceptSecond(matchingResult, rank);
-        }
-        printStatisticForSecond(matchingResult, SECOND);
+        Arrays.stream(Rank.values())
+                .forEach(rank -> printStatistic(rank));
 
     }
 
-    private static void printStatisticExceptSecond(MatchingResult matchingResult, Rank rank) {
-        if (!SECOND.equals(rank)) {
-            System.out.print(rank.getMatchCount() + "개 일치 (" + rank.getCashPrize() + "원) : ");
-            System.out.println(matchingResult.findMatchCount(rank) + "개");
-        }
-    }
-
-    private static void printStatisticForSecond(MatchingResult matchingResult, Rank rank) {
+    private static void printStatistic(Rank rank) {
         if (SECOND.equals(rank)) {
             System.out.print(rank.getMatchCount() + "개 일치, 보너스볼 일치(" + rank.getCashPrize() + "원) : ");
-            System.out.println(matchingResult.findMatchCount(rank) + "개");
+            System.out.println(MatchingResult.findRankCount(rank) + "개");
+        }
+
+        if (!SECOND.equals(rank)) {
+            System.out.print(rank.getMatchCount() + "개 일치 (" + rank.getCashPrize() + "원) : ");
+            System.out.println(MatchingResult.findRankCount(rank) + "개");
         }
     }
 

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Money;
+import lotto.model.lottonumber.LottoNumber;
 import lotto.view.input.StringConverter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -49,16 +50,6 @@ public class StringConverterTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             StringConverter.convertStringToMoney(input);
         });
-    }
-
-    @DisplayName("지난 주 당첨번호를 문자열로 입력받으면, split된 값을 숫자리스트로 만들어서 반환한다.")
-    @Test
-    void convertStringToNumbersTest() {
-        //when
-        List<Integer> integers = StringConverter.convertStringToNumbers("1,2,3,4,5,6");
-
-        //then
-        assertThat(integers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("숫자가 아닌 값이 입력되면, 예외를 반환한다 (2)")

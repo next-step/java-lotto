@@ -1,5 +1,6 @@
 package lotto.model.lottonumber;
 
+import lotto.model.Rank;
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
 
@@ -10,40 +11,33 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
-        validateNumberRange(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    private void validateSize(List<Integer> lottoNumbers) {
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또는 6개의 숫자로 구성되어야 합니다.");
         }
     }
 
-    private void validateDuplication(List<Integer> lottoNumbers) {
-        Set<Integer> uniqueNumbers = new HashSet<>(lottoNumbers);
+    private void validateDuplication(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> uniqueNumbers = new HashSet<>(lottoNumbers);
         if (lottoNumbers.size() > uniqueNumbers.size()) {
             throw new IllegalArgumentException("로또는 중복되지 않은 숫자로 구성되어야 합니다.");
         }
     }
 
-    private void validateNumberRange(List<Integer> lottoNumbers) {
-        boolean hasNumberOutOfRange = lottoNumbers.stream()
-                .filter(number -> number > LOTTO_NUMBER_MAX || number < LOTTO_NUMBER_MIN)
-                .findAny()
-                .isPresent();
-        if (hasNumberOutOfRange) {
-            throw new IllegalArgumentException("로또는 1부터 45까지의 숫자로만 구성되어야 합니다.");
-        }
+    public Rank resolveRank(WinningLotto winningLotto){
+        int matchCount = findHowManyMatch(winningLotto);
+        boolean hasBonusBall = hasBonusBall(winningLotto.getBonusNumber());
+        return Rank.findMatchResult(matchCount, hasBonusBall);
     }
 
     public int findHowManyMatch(WinningLotto winningLotto) {
@@ -58,6 +52,14 @@ public class LottoNumbers {
                 .filter(number -> bonusBall.isEqualWith(number))
                 .findAny()
                 .isPresent();
+    }
+
+    public boolean contains(LottoNumber lottoNumber){
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package lotto.model.lottonumber;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -15,9 +14,17 @@ public class LottoNumber {
     }
 
     private void validateNumberRange(int lottoNumber) {
-        if(lottoNumber > LOTTO_NUMBER_MAX || lottoNumber < LOTTO_NUMBER_MIN){
+        if (lottoNumber > LOTTO_NUMBER_MAX || lottoNumber < LOTTO_NUMBER_MIN) {
             throw new IllegalArgumentException("로또는 1부터 45까지의 숫자로만 구성되어야 합니다.");
         }
+    }
+
+    public static LottoNumber of(int lottoNumber){
+        return new LottoNumber(lottoNumber);
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override
@@ -31,5 +38,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.lottoNumber);
     }
 }
