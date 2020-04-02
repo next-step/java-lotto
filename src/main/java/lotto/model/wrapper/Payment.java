@@ -12,7 +12,7 @@ public class Payment {
 
     public static Payment of(final int money) {
         if (money < 0) {
-            throw new IllegalArgumentException("구입 금액은 0 보다 커야 한다.");
+            throw new IllegalArgumentException("구입 금액은 0 보다 커야 합니다.");
         }
 
         return new Payment(money);

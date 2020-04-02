@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.model.LottoTickets;
 import lotto.model.LottoResult;
 import lotto.model.LottoResults;
+import lotto.model.LottoTickets;
 import lotto.model.dto.LottoWinStatResult;
 import lotto.model.dto.LottoWinStatResults;
 
@@ -34,7 +34,7 @@ public class OutputView {
     }
 
     private static void printEachWinResult(final LottoWinStatResult lottoWinStatResult) {
-        if (LottoResult.FIVE_WITH_BONUS.equals(lottoWinStatResult)) {
+        if (LottoResult.FIVE_WITH_BONUS == lottoWinStatResult.getLottoResult()) {
             printWinResult(lottoWinStatResult, RESULT_WITH_BONUS_FORMAT);
             return;
         }

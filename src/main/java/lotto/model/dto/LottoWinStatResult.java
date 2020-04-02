@@ -22,4 +22,8 @@ public class LottoWinStatResult {
     public long getCount() {
         return count;
     }
+
+    public LottoResult getLottoResult() {
+        return lottoResult;
+    }
 }

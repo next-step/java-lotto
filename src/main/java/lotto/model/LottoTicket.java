@@ -15,7 +15,7 @@ public class LottoTicket {
     private LottoTicket(final Set<LottoNumber> numbers) {
         validate(numbers);
 
-        this.numbers = new HashSet(numbers);
+        this.numbers = new HashSet<>(numbers);
     }
 
     public static LottoTicket newInstance() {
@@ -26,7 +26,7 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    public static LottoTicket newInstance(int ...numbers) {
+    public static LottoTicket newInstance(int... numbers) {
         Set<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toSet());

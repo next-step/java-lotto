@@ -1,8 +1,8 @@
 package lotto.model;
 
-import lotto.model.wrapper.LottoMatchCount;
 import lotto.model.wrapper.LottoPrice;
 import lotto.model.wrapper.LottoResultMatchId;
+import lotto.model.wrapper.WinningLottoMatchingCount;
 
 import java.util.Collections;
 import java.util.Map;
@@ -30,7 +30,7 @@ public enum LottoResult {
     private final LottoPrice price;
 
     LottoResult(final int matchCount, final LottoBonusNumberMatch lottoBonusNumberMatch, final long price) {
-        this.matchCount = LottoResultMatchId.newInstance(LottoMatchCount.of(matchCount), lottoBonusNumberMatch);
+        this.matchCount = LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(matchCount), lottoBonusNumberMatch);
         this.price = LottoPrice.of(price);
     }
 

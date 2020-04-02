@@ -37,6 +37,9 @@ public class InputView {
         try {
             List<String> lottoNumberLines = InputConsoleView.inputManualLotto(manualLottoCount.getCount());
             return LottoTickets.newInstance(convertTo(lottoNumberLines));
+        } catch (NumberFormatException ex) {
+            System.out.println("제대로 된 숫자를 입력하세요");
+            return inputManualLotto(manualLottoCount);
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             return inputManualLotto(manualLottoCount);

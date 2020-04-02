@@ -18,6 +18,7 @@ public class Main {
         ManualLottoCount manualLottoCount = InputView.inputManualLottoCount();
 
         LottoTickets manualLottoTickets = InputView.inputManualLotto(manualLottoCount);
+
         LottoTickets lottoTickets = LottoStore.sell(payment, manualLottoTickets);
 
         printLottoTickets(lottoTickets, manualLottoTickets.size());
