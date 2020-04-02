@@ -4,7 +4,7 @@ import lotto.domain.Money;
 import lotto.domain.item.LottoNumber;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.WinLottoTicket;
-import lotto.service.LottoGame;
+import lotto.domain.item.LottoGame;
 import lotto.view.InputView;
 import lotto.view.LottoDto;
 import lotto.view.ResultView;
