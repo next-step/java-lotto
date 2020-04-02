@@ -17,10 +17,10 @@ public class LottoWinStatResults {
     public static LottoWinStatResults newInstance(Map<LottoResult, Long> result) {
         List<LottoWinStatResult> winResult = Collections.unmodifiableList(
                 result.keySet()
-                .stream()
-                .filter(lottoResult -> !lottoResult.isBlank())
-                .map(lottoResult -> new LottoWinStatResult(lottoResult, result.get(lottoResult)))
-                .collect(Collectors.toList()));
+                        .stream()
+                        .filter(lottoResult -> !lottoResult.isBlank())
+                        .map(lottoResult -> new LottoWinStatResult(lottoResult, result.get(lottoResult)))
+                        .collect(Collectors.toList()));
 
         return new LottoWinStatResults(winResult);
     }

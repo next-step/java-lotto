@@ -4,9 +4,9 @@ import lotto.model.LottoResult;
 
 public class LottoWinStatResult {
     private final LottoResult lottoResult;
-    private final Long count;
+    private final long count;
 
-    public LottoWinStatResult(final LottoResult lottoResult, final Long count) {
+    public LottoWinStatResult(final LottoResult lottoResult, final long count) {
         this.lottoResult = lottoResult;
         this.count = count;
     }
@@ -19,7 +19,7 @@ public class LottoWinStatResult {
         return lottoResult.getPrice();
     }
 
-    public Long getCount() {
+    public long getCount() {
         return count;
     }
 }

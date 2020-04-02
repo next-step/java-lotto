@@ -35,11 +35,6 @@ public class LottoResultMatchId {
     }
 
     @Override
-    public String toString() {
-        return "lotto match count : ";
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LottoResultMatchId)) return false;

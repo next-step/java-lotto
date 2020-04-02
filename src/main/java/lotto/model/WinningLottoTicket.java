@@ -1,7 +1,7 @@
 package lotto.model;
 
-import lotto.model.wrapper.LottoResultMatchId;
 import lotto.model.wrapper.LottoNumber;
+import lotto.model.wrapper.LottoResultMatchId;
 
 import java.util.Set;
 
