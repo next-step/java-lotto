@@ -65,7 +65,7 @@ public class Lotto implements Iterable<LottoNumber> {
 
     public int matchingCount(Lotto lotto) {
         return (int) lottoNumbers.stream()
-                .filter(lottoNumber -> lotto.contains(lottoNumber))
+                .filter(lotto::contains)
                 .count();
     }
 
