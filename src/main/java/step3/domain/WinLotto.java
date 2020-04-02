@@ -20,7 +20,7 @@ public class WinLotto {
 
     public int match(LottoNumberList buyLottos) {
         return (int) winLottoNumber.getLottoNumberList().stream()
-                .filter(number -> buyLottos.getLottoNumberList().contains(number))
+                .filter(number -> buyLottos.isContains(number))
                 .count();
     }
 

@@ -16,11 +16,10 @@ public class LottoBonusBall {
 
         WinLotto winLotto = askWinLotto(inputView);
 
-        RankList rankList = controlLottoGame.makeRankListByBuyLotto(winLotto, buyLotto);
+        Ranks ranks = controlLottoGame.makeRankListByBuyLotto(winLotto, buyLotto);
 
-        ResultInfo resultInfo = new ResultInfo(buyLottoTotalPrice);
-        controlLottoGame.setResult(resultInfo, rankList);
-        outputView.printResult(resultInfo, rankList);
+        ResultInfo resultInfo = new ResultInfo(ranks, buyLottoTotalPrice);
+        outputView.printResult(resultInfo);
     }
 
     private static WinLotto askWinLotto(InputView inputView) {

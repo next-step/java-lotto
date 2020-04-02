@@ -2,7 +2,7 @@ package step3.view;
 
 import step3.domain.BuyLotto;
 import step3.domain.RankInformation;
-import step3.domain.RankList;
+import step3.domain.Ranks;
 import step3.domain.ResultInfo;
 
 import java.util.Iterator;
@@ -24,18 +24,19 @@ public class OutputView {
         }
     }
 
-    public void printResult(ResultInfo resultInfo, RankList rankList) {
+    public void printResult(ResultInfo resultInfo) {
         System.out.println("당첨 통계 \n================\n");
         System.out.println(String.format(Rank_BASIC, RankInformation.EQUALS_COUNT_3.getCount(),
-                RankInformation.EQUALS_COUNT_3.getPrice().toString(), rankList.match(RankInformation.EQUALS_COUNT_3)));
+                RankInformation.EQUALS_COUNT_3.getPrice().toString(), resultInfo.match(RankInformation.EQUALS_COUNT_3)));
         System.out.println(String.format(Rank_BASIC, RankInformation.EQUALS_COUNT_4.getCount(),
-                RankInformation.EQUALS_COUNT_4.getPrice().toString(), rankList.match(RankInformation.EQUALS_COUNT_4)));
+                RankInformation.EQUALS_COUNT_4.getPrice().toString(), resultInfo.match(RankInformation.EQUALS_COUNT_4)));
         System.out.println(String.format(Rank_BASIC, RankInformation.EQUALS_COUNT_5.getCount(),
-                RankInformation.EQUALS_COUNT_5.getPrice().toString(), rankList.match(RankInformation.EQUALS_COUNT_5)));
+                RankInformation.EQUALS_COUNT_5.getPrice().toString(), resultInfo.match(RankInformation.EQUALS_COUNT_5)));
         System.out.println(String.format(Rank_SPECIAL, RankInformation.EQUALS_COUNT_BONUS_5.getCount(),
-                RankInformation.EQUALS_COUNT_BONUS_5.getPrice().toString(), rankList.match(RankInformation.EQUALS_COUNT_BONUS_5)));
+                RankInformation.EQUALS_COUNT_BONUS_5.getPrice().toString(), resultInfo.match(RankInformation.EQUALS_COUNT_BONUS_5)));
         System.out.println(String.format(Rank_BASIC, RankInformation.EQUALS_COUNT_6.getCount(),
-                RankInformation.EQUALS_COUNT_6.getPrice().toString(), rankList.match(RankInformation.EQUALS_COUNT_6)));
+                RankInformation.EQUALS_COUNT_6.getPrice().toString(), resultInfo.match(RankInformation.EQUALS_COUNT_6)));
         System.out.println(String.format(RESULT, resultInfo.getRate().toString()));
     }
+
 }
