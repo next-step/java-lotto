@@ -14,7 +14,20 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자 생성 테스트")
     void generateLottoNumberTest(int value) {
         assertThat(
-                new LottoNumber(() -> value).getLottoNumber()
+                LottoNumber.newRandomNumber(() -> value).getLottoNumber()
         ).isEqualTo(value);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {4, 5, 6, 9})
+    @DisplayName("로또숫자 static 객체 테스트")
+    void staticLottoNumberTest(int value) {
+        assertThat(
+                LottoNumber.newChooseNumber(value)
+        ).isEqualTo(LottoNumber.newChooseNumber(value));
+
+        assertThat(
+                LottoNumber.newChooseNumber(value) == LottoNumber.newChooseNumber(value)
+        ).isTrue();
     }
 }

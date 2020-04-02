@@ -6,30 +6,25 @@ import java.util.List;
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
 
-    private Money money;
     private List<Lotto> lottos;
 
-    public LottoMachine(Money money) {
-        this.money = money;
-        validatePurchasable();
-        this.lottos = generateLottos();
+    public LottoMachine() {
+        this.lottos = new ArrayList<>();
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> purchaseLottos(Money money) {
+        int purchasedCount = getPurchasedCount(money);
+        for (int i = 0; i < purchasedCount; i++) {
+            this.lottos.add(Lotto.newAutomatic());
+        }
         return this.lottos;
     }
 
-    private List<Lotto> generateLottos() {
-        List<Lotto> generatedlottos = new ArrayList<>();
-        for (int i = 0; i < money.getPurchasableCount(LOTTO_PRICE); i++) {
-            generatedlottos.add(new Lotto());
+    private int getPurchasedCount(Money money) {
+        int purchasableCount = money.getMoney() / LOTTO_PRICE;
+        if (purchasableCount < 1) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
         }
-        return generatedlottos;
-    }
-
-    private void validatePurchasable() {
-        if (money.getPurchasableCount(LOTTO_PRICE) < 1) {
-            throw new RuntimeException("돈이 부족합니다.");
-        }
+        return purchasableCount;
     }
 }

@@ -14,7 +14,7 @@ public class PositiveNumberTest {
     void convertNumberTest(String input) {
         assertThatThrownBy(
                 () -> new PositiveNumber(input)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -23,6 +23,6 @@ public class PositiveNumberTest {
     void convertNumberTest(int input) {
         assertThatThrownBy(
                 () -> new PositiveNumber(input)
-        ).isInstanceOf(RuntimeException.class);
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

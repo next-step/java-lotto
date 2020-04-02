@@ -3,36 +3,73 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoResultView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class LottoRun {
 
+    private static final LottoResultView lottoResultView = new LottoResultView();
+
     public static void main(String[] args) {
-        LottoResultView lottoResultView = new LottoResultView();
-        Scanner scanner = new Scanner(System.in);
+        Money myMoney = getMonney();
 
-        lottoResultView.viewMoneyGuidance();
-        Integer inputMoney = scanner.nextInt();
+        List<Lotto> myLottos = purchaseLottos(myMoney);
 
-        Money myMoney = new Money(inputMoney);
-        LottoMachine lottoMachine = new LottoMachine(myMoney);
+        Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber(winningLotto);
 
-        List<Lotto> myLottos = lottoMachine.getLottos();
-        lottoResultView.viewLottoCount(myLottos);
-        lottoResultView.viewLottos(myLottos);
+        Map<RankEnum, Integer> result = insightResult(winningLotto, bonusNumber, myLottos);
+        insightYield(myMoney, result);
+    }
 
-        lottoResultView.viewWinningNumberGuidance();
-        String inputWinningNumbers = scanner.next();
-        WinningLotto winningLotto = new WinningLotto(inputWinningNumbers);
-        lottoResultView.viewLottoNumbers(winningLotto.getWinningLotto());
+    private static Money getMonney() {
+        int money = lottoResultView.inputMoney();
+        return new Money(money);
+    }
 
-        LottoInspector lottoInspector = new LottoInspector(winningLotto, myLottos);
-        Map<Integer, Integer> result = lottoInspector.getMatchedResult();
+    private static List<Lotto> purchaseLottos(Money money) {
+        LottoMachine lottoMachine = new LottoMachine();
+        List<Lotto> lottos = lottoMachine.purchaseLottos(money);
+        lottoResultView.viewLottos(lottos);
+
+        return lottos;
+    }
+
+    private static Lotto getWinningLotto() {
+        String winningNumbers = lottoResultView.inputWinningNumber();
+        Lotto winningLotto = Lotto.newManual(winningNumbers);
+        lottoResultView.viewLottoNumbers(winningLotto);
+
+        return winningLotto;
+    }
+
+    private static LottoNumber getBonusNumber(Lotto winningLotto) {
+        int bonusNumber = lottoResultView.inputBonusNumber();
+        LottoNumber bonusLottoNumber = LottoNumber.newChooseNumber(bonusNumber);
+
+        if (winningLotto.isExistNumber(bonusLottoNumber)) {
+            throw new IllegalArgumentException("입력하신 보너스번호는 이미 있는 번호입니다.");
+        }
+        return bonusLottoNumber;
+    }
+
+    private static Map<RankEnum, Integer> insightResult(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> lottos) {
+        LottoInspector lottoInspector = new LottoInspector();
+        Map<RankEnum, Integer> result = lottoInspector.getResult(winningLotto, bonusNumber, lottos);
+
         lottoResultView.viewInspect(result);
 
-        int totalRevenue = lottoInspector.getTotalRevenue();
-        lottoResultView.viewInsight(myMoney, totalRevenue);
+        return result;
+    }
+
+    private static LottoInspector insightYield(Money money, Map<RankEnum, Integer> result) {
+        LottoInspector lottoInspector = new LottoInspector();
+        int totalRevenue = lottoInspector.getTotalRevenue(result);
+        BigDecimal yield = lottoInspector.getYield(money, totalRevenue);
+
+        lottoResultView.viewInsight(yield);
+
+        return lottoInspector;
     }
 }

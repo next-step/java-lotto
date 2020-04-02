@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
@@ -16,26 +17,47 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void generateLottoTest() {
-        assertThat(
-                new Lotto().getLottoNumbers()
-        );
+        Lotto.newAutomatic().getLottoNumbers();
     }
 
     @Test
     @DisplayName("로또번호 생성시 이미 있는 번호 테스트")
     void isNumberExistTest() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3), 
+                LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(6)
         );
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.newManual(lottoNumbers);
 
         assertAll(
-                () -> assertThat(lotto.isExistNumber(new LottoNumber(1))).isTrue(),
-                () -> assertThat(lotto.isExistNumber(new LottoNumber(5))).isTrue(),
-                () -> assertThat(lotto.isExistNumber(new LottoNumber(8))).isFalse(),
-                () -> assertThat(lotto.isExistNumber(new LottoNumber(10))).isFalse()
+                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(1))).isTrue(),
+                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(5))).isTrue(),
+                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(8))).isFalse(),
+                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(10))).isFalse()
         );
+    }
+
+    @Test
+    @DisplayName("중복된 로또번호 테스트")
+    void validateDuplicationNumbersTest() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3),
+                LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(5)
+        );
+        assertThatThrownBy(
+                () -> Lotto.newManual(lottoNumbers)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또번호 맞춘 갯수 가져오기 테스트")
+    void getMatchedCountTest() {
+        Lotto winningLotto = Lotto.newManual("1, 2, 3, 4, 5, 6");
+        Lotto lotto = Lotto.newManual(Arrays.asList(
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3),
+                LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(45)
+        ));
+
+        assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);
     }
 }

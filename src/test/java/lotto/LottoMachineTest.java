@@ -14,9 +14,7 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또기계 생성 테스트")
     void createLottoMachineTest() {
-        assertThat(
-                new LottoMachine(new Money(1000))
-        );
+        new LottoMachine().purchaseLottos(new Money(1000));
     }
 
     @ParameterizedTest
@@ -24,7 +22,7 @@ public class LottoMachineTest {
     @DisplayName("로또기계로 돈만큼 로또 생성 테스트")
     void generateLottosTest(int input) {
         assertThat(
-                new LottoMachine(new Money(input * 1000)).getLottos().size()
+                new LottoMachine().purchaseLottos(new Money(input * 1000)).size()
         ).isEqualTo(input);
     }
 }
