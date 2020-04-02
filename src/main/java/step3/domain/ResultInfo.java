@@ -9,10 +9,6 @@ public class ResultInfo {
     private BigDecimal rate = BigDecimal.ZERO;
     private Ranks ranks;
 
-    public ResultInfo(int buyLottoTotalPrice) {
-        this.investPrice = BigDecimal.valueOf(buyLottoTotalPrice);
-    }
-
     public ResultInfo(Ranks ranks, int buyLottoTotalPrice) {
         this.investPrice = BigDecimal.valueOf(buyLottoTotalPrice);
         this.ranks = ranks;

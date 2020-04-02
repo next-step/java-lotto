@@ -10,13 +10,13 @@ public class OutputView {
     private static final String RESULT = "총 수익률은 %s 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String MANUAL = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public OutputView(BuyInfo buyInfo, BuyLotto buyLotto) {
-        printBuyList(buyInfo, buyLotto);
+    public OutputView(BuyInfo buyInfo) {
+        printBuyList(buyInfo);
     }
 
-    public void printBuyList(BuyInfo buyInfo, BuyLotto buyLotto) {
+    public void printBuyList(BuyInfo buyInfo) {
         System.out.println(String.format(MANUAL,buyInfo.getManualCount(), buyInfo.getAutoCount()));
-        Iterator iterator = buyLotto.getBuyLottoList().iterator();
+        Iterator iterator = buyInfo.printList().iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }

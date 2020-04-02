@@ -9,9 +9,9 @@ public class Ranks {
         this.ranks = rankList;
     }
 
-    public Ranks(WinLotto winLotto, BuyLotto buyLotto) {
+    public Ranks(WinLotto winLotto, BuyInfo buyInfo) {
 
-        this.ranks = buyLotto.check(winLotto);
+        this.ranks = buyInfo.getBuyLotto().check(winLotto);
     }
 
     public int match(RankInformation number) {

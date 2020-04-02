@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BuyLotto extends Lotto{
+public class BuyLotto extends Lotto {
     private static final int BONUS_BALL = 5;
     private List<LottoNumberList> buyLottoList;
 
@@ -51,7 +51,6 @@ public class BuyLotto extends Lotto{
         }
         return splitString;
     }
-
 
     public List<LottoNumberList> getBuyLottoList() {
         return buyLottoList;
