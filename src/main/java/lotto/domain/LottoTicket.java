@@ -15,6 +15,10 @@ public class LottoTicket {
         this.lottoNumbers = LottoNumbers.of(lottoNumbers);
     }
 
+    private LottoTicket(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.getLottoNumbers();
     }
@@ -28,10 +32,14 @@ public class LottoTicket {
         return new LottoTicketResult(matchCount, bonusMatch);
     }
 
-    public static LottoTicket of(int... lottoNumbers) {
+    static LottoTicket of(int... lottoNumbers) {
         return new LottoTicket(Arrays.stream(lottoNumbers)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
+    }
+
+    static LottoTicket ofForm(LottoTicketForm lottoTicketForm) {
+        return new LottoTicket(lottoTicketForm.getLottoNumbers());
     }
 
     @Override
