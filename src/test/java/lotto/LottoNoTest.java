@@ -13,8 +13,7 @@ class LottoNoTest {
     @Test
     void validationLottoNo() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNo(0);
-            new LottoNo(46);
+            LottoNo.of(46);
         });
     }
 
@@ -22,9 +21,9 @@ class LottoNoTest {
     @Test
     void getLottoNo() {
         int no = 5;
-        LottoNo lottoNo = new LottoNo(no);
+        LottoNo lottoNo = LottoNo.of(no);
 
-        assertAll(() -> assertThat(lottoNo).isEqualTo(new LottoNo(no)),
+        assertAll(() -> assertThat(lottoNo).isEqualTo(LottoNo.of(no)),
                   () -> assertThat(lottoNo.getNo()).isEqualTo(no));
 
     }

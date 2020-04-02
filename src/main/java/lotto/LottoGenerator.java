@@ -26,7 +26,7 @@ public class LottoGenerator {
         List<Integer> numbers = pickNumber.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
 
-        return numbers.stream().map(item -> new LottoNo(item)).collect(
+        return numbers.stream().map(item -> LottoNo.of(item)).collect(
                 Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -57,7 +57,7 @@ public class LottoGenerator {
     private Set<LottoNo> splitLottoNumber(String inputText) {
         return Arrays
                 .stream(inputText.split(SPLIT_TEXT))
-                .map(num -> new LottoNo(Integer.parseInt(num)))
+                .map(num -> LottoNo.of(Integer.parseInt(num)))
                 .collect(toSet());
     }
 

@@ -24,52 +24,52 @@ class ResultViewTest {
         String input = "1,2,3,4,5,6";
         int bonusBall = 42;
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(1),
-                                                                  new LottoNo(2),
-                                                                  new LottoNo(3),
-                                                                  new LottoNo(4),
-                                                                  new LottoNo(5),
-                                                                  new LottoNo(6))
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(LottoNo.of(1),
+                                                                  LottoNo.of(2),
+                                                                  LottoNo.of(3),
+                                                                  LottoNo.of(4),
+                                                                  LottoNo.of(5),
+                                                                  LottoNo.of(6))
                                                               .collect(Collectors.toSet())))); //1등
 
-        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(1),
-                                                                  new LottoNo(2),
-                                                                  new LottoNo(3),
-                                                                  new LottoNo(34),
-                                                                  new LottoNo(35),
-                                                                  new LottoNo(45))
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(LottoNo.of(1),
+                                                                  LottoNo.of(2),
+                                                                  LottoNo.of(3),
+                                                                  LottoNo.of(34),
+                                                                  LottoNo.of(35),
+                                                                  LottoNo.of(45))
                                                               .collect(Collectors.toSet()))));//5등
 
-        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(2),
-                                                                  new LottoNo(3),
-                                                                  new LottoNo(4),
-                                                                  new LottoNo(5),
-                                                                  new LottoNo(35),
-                                                                  new LottoNo(42))
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(LottoNo.of(2),
+                                                                  LottoNo.of(3),
+                                                                  LottoNo.of(4),
+                                                                  LottoNo.of(5),
+                                                                  LottoNo.of(35),
+                                                                  LottoNo.of(42))
                                                               .collect(Collectors.toSet())))); //4등
 
-        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(2),
-                                                                  new LottoNo(3),
-                                                                  new LottoNo(4),
-                                                                  new LottoNo(5),
-                                                                  new LottoNo(6),
-                                                                  new LottoNo(42))
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(LottoNo.of(2),
+                                                                  LottoNo.of(3),
+                                                                  LottoNo.of(4),
+                                                                  LottoNo.of(5),
+                                                                  LottoNo.of(6),
+                                                                  LottoNo.of(42))
                                                               .collect(Collectors.toSet()))));// 2등
 
-        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(21),
-                                                                  new LottoNo(22),
-                                                                  new LottoNo(23),
-                                                                  new LottoNo(24),
-                                                                  new LottoNo(25),
-                                                                  new LottoNo(26))
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(LottoNo.of(21),
+                                                                  LottoNo.of(22),
+                                                                  LottoNo.of(23),
+                                                                  LottoNo.of(24),
+                                                                  LottoNo.of(25),
+                                                                  LottoNo.of(26))
                                                               .collect(Collectors.toSet()))));//꽝
 
-        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(new LottoNo(2),
-                                                                  new LottoNo(22),
-                                                                  new LottoNo(23),
-                                                                  new LottoNo(24),
-                                                                  new LottoNo(25),
-                                                                  new LottoNo(26))
+        lottoNumbers.add(new LottoNumbers(new HashSet<>(Stream.of(LottoNo.of(2),
+                                                                  LottoNo.of(22),
+                                                                  LottoNo.of(23),
+                                                                  LottoNo.of(24),
+                                                                  LottoNo.of(25),
+                                                                  LottoNo.of(26))
                                                               .collect(Collectors.toSet()))));//꽝
 
         lottoTicket = new LottoTicket(lottoNumbers);
@@ -125,12 +125,12 @@ class ResultViewTest {
     @DisplayName("구매한 로또티켓에 보너스 볼이 있는지 확인한다.")
     @Test
     void checkMatchBonusBall() {
-        boolean match = resultView.checkMatchBonusBall(winningLottoInfo, new HashSet<>(Stream.of(new LottoNo(1),
-                                                                                                 new LottoNo(2),
-                                                                                                 new LottoNo(3),
-                                                                                                 new LottoNo(4),
-                                                                                                 new LottoNo(5),
-                                                                                                 new LottoNo(42))
+        boolean match = resultView.checkMatchBonusBall(winningLottoInfo, new HashSet<>(Stream.of(LottoNo.of(1),
+                                                                                                 LottoNo.of(2),
+                                                                                                 LottoNo.of(3),
+                                                                                                 LottoNo.of(4),
+                                                                                                 LottoNo.of(5),
+                                                                                                 LottoNo.of(42))
                                                                                              .collect(Collectors
                                                                                                               .toSet())));
 
