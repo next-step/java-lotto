@@ -18,6 +18,6 @@ class LottoMixer {
 
     static List<LottoNumber> mixLottoNumbers() {
         Collections.shuffle(LottoMixer.lottoNumbers);
-        return new ArrayList<>(lottoNumbers.subList(0, LottoTicket.LOTTO_NUMBERS_SIZE));
+        return new ArrayList<>(lottoNumbers.subList(0, LottoNumbers.LOTTO_NUMBERS_SIZE));
     }
 }
