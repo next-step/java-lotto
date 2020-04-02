@@ -36,7 +36,7 @@ public class Expression {
     }
 
     private static boolean isNullOrEmpty(String expression) {
-        return expression == null || "".equals(expression);
+        return expression == null || expression.isEmpty();
     }
 
 }

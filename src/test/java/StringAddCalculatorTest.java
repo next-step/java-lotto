@@ -29,6 +29,7 @@ public class StringAddCalculatorTest {
     public void splitAndSumSplitComma() {
         int result = StringAddCalculator.splitAndSum("1,2");
         assertThat(result).isEqualTo(3);
+        String a = "";
     }
 
     @DisplayName("구분자로 콤마 또는 콜론 사용 가능")
