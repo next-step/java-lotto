@@ -3,6 +3,7 @@ package lotto.domain.item;
 import lotto.exception.ValidLottoException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -16,6 +17,13 @@ public class LottoNumbers {
         validateDuplicate(value);
         Collections.sort(value);
         this.value = Collections.unmodifiableList(new ArrayList<>(value));
+    }
+
+    public static LottoNumbers of(List<Integer> number) {
+        List<LottoNumber> numbers = number.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        return new LottoNumbers(numbers);
     }
 
     public static LottoNumbers createLottoNumbersUseInteger(List<Integer> value) {
