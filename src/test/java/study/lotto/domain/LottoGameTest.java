@@ -1,4 +1,4 @@
-package study.lotto;
+package study.lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
