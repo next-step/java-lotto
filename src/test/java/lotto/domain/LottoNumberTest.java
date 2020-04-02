@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -20,5 +21,10 @@ public class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46})
     public void doNotCreate(int number) {
         assertThatIllegalArgumentException().isThrownBy(() -> lottoNumber = new LottoNumber(number));
+    }
+
+    @Test
+    public void stringCreate() {
+        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber("1"));
     }
 }
