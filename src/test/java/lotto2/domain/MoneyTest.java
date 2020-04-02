@@ -19,7 +19,7 @@ public class MoneyTest {
     @DisplayName("구입한 로또의 갯수를 구할 수 있다.")
     @ParameterizedTest
     @ValueSource(ints = {1000})
-    void testMoneyPerLotto(final int amount) {
+    void testMoneyPerLottoCount(final int amount) {
         Money money = new Money(amount);
         assertThat(money.getLottoCount()).isEqualTo(1);
     }
