@@ -26,14 +26,15 @@ public class LottoApplication {
         LottoService lottoService = new LottoService();
         int availableBuyCount = lottoService.getAvailableBuyCount(money.minus(10));
 
+        ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
 
         LottoDto dto1 = lottoService.passivityPlay(buyPassivityCount);
         ResultView.printLoots(dto1);
+        LottoDto dto = lottoService.autoPlay(availableBuyCount - buyCount);
+        ResultView.printLoots(dto);
 
 
         LottoGame lottoGame = new LottoGame(money);
-        LottoDto dto = lottoService.autoPlay(availableBuyCount - buyCount);
-        ResultView.printLoots(dto);
 
         String luckyNumberInput = InputView.inputLuckyNumber();
         List<Integer> luckyNumber = StringUtil.splitStringToIntegers(luckyNumberInput);
