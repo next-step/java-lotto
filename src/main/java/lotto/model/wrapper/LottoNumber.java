@@ -31,6 +31,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .orElseThrow(() -> new IllegalArgumentException("Lotto Ticket must be between 1 and 45."));
     }
 
+    public static LottoNumber of(final String number) {
+        return of(Integer.parseInt(number));
+    }
+
     @Override
     public String toString() {
         return String.valueOf(number);

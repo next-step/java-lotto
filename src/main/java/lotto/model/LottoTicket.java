@@ -4,6 +4,7 @@ import lotto.AutomaticLottoGenerator;
 import lotto.model.wrapper.LottoNumber;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -17,12 +18,6 @@ public class LottoTicket {
         this.numbers = new HashSet(numbers);
     }
 
-    private void validate(final Set<LottoNumber> numbers) {
-        if (Objects.isNull(numbers) || numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
-        }
-    }
-
     public static LottoTicket newInstance() {
         return new LottoTicket(AutomaticLottoGenerator.generate());
     }
@@ -31,12 +26,26 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
+    public static LottoTicket newInstance(int ...numbers) {
+        Set<LottoNumber> lottoNumbers = Arrays.stream(numbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toSet());
+
+        return new LottoTicket(lottoNumbers);
+    }
+
     public Set<LottoNumber> getNumbers() {
         return new HashSet<>(numbers);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    private void validate(final Set<LottoNumber> numbers) {
+        if (Objects.isNull(numbers) || numbers.size() != LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("Lotto Ticket must have six distinct number.");
+        }
     }
 
     @Override

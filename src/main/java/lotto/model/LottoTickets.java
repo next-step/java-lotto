@@ -1,19 +1,25 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(final List<LottoTicket> lottoTickets) {
+    private LottoTickets(final List<LottoTicket> lottoTickets) {
         if (Objects.isNull(lottoTickets)) {
             throw new IllegalArgumentException("lotto tickets is null");
         }
 
         this.lottoTickets = new ArrayList<>(lottoTickets);
+    }
+
+    public static LottoTickets newInstance(final List<LottoTicket> lottoTickets) {
+        return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets newInstance(LottoTicket... lottoTickets) {
+        return new LottoTickets(Arrays.asList(lottoTickets));
     }
 
     public LottoResults checkAll(final WinningLottoTicket winningLottoTicket) {
@@ -26,6 +32,13 @@ public class LottoTickets {
 
     public int size() {
         return lottoTickets.size();
+    }
+
+    public LottoTickets merge(List<LottoTicket> another) {
+        List<LottoTicket> newLottoTickets = new ArrayList<>();
+        newLottoTickets.addAll(lottoTickets);
+        newLottoTickets.addAll(another);
+        return new LottoTickets(newLottoTickets);
     }
 
     @Override

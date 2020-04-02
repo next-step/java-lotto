@@ -12,9 +12,19 @@ public class LottoStore {
     }
 
     public static LottoTickets sell(final Payment payment, final LottoTickets manualLottoTickets) {
-        List<LottoTicket> lottoTickets = IntStream.range(0, payment.countLottoTicket())
+        int automaticLottoCount = countAutomaticLottoTickets(payment, manualLottoTickets.size());
+
+        List<LottoTicket> lottoTickets = IntStream.range(0, automaticLottoCount)
                 .mapToObj(i -> LottoTicket.newInstance())
                 .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
+
+        return manualLottoTickets.merge(lottoTickets);
+    }
+
+    private static int countAutomaticLottoTickets(final Payment payment, final int manualLottoTickets) {
+        if(payment.countLottoTicket() - manualLottoTickets < 0) {
+            throw new IllegalArgumentException("payment is insufficient to buy lotto tickets.");
+        }
+        return payment.countLottoTicket() - manualLottoTickets;
     }
 }

@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.model.*;
 import lotto.model.wrapper.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,13 +41,13 @@ public class LottoTicketsTests {
     @DisplayName("로또 여러 장 생성 테스트")
     @Test
     public void generateLottoTicketsTest() {
-        assertThatCode(() -> new LottoTickets(lottoTickets)).doesNotThrowAnyException();
+        assertThatCode(() -> LottoTickets.newInstance(lottoTickets)).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 결과 테스트")
     @Test
     public void checkAllTest() {
-        LottoTickets lottoTickets = new LottoTickets(this.lottoTickets);
+        LottoTickets lottoTickets = LottoTickets.newInstance(this.lottoTickets);
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(33));
 
         LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE_WITH_BONUS));
@@ -59,7 +58,7 @@ public class LottoTicketsTests {
     @DisplayName("로또 갯수 테스트")
     @Test
     public void sizeTest() {
-        LottoTickets lottoTickets = new LottoTickets(this.lottoTickets);
+        LottoTickets lottoTickets = LottoTickets.newInstance(this.lottoTickets);
         assertThat(lottoTickets.size()).isEqualTo(this.lottoTickets.size());
     }
 
