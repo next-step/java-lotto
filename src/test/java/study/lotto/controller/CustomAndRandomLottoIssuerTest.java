@@ -22,7 +22,7 @@ public class CustomAndRandomLottoIssuerTest {
         )));
 
         CustomAndRandomLottoIssuer customAndRandomLottoIssuer =
-                new CustomAndRandomLottoIssuer(lottos);
+                new CustomAndRandomLottoIssuer(lottos, new RandomLottoIssuer());
 
         Lotto expectFirst = customAndRandomLottoIssuer.issue();
         assertThat(first).isEqualTo(expectFirst);
@@ -36,7 +36,7 @@ public class CustomAndRandomLottoIssuerTest {
     @Test
     void empty() {
         CustomAndRandomLottoIssuer customAndRandomLottoIssuer =
-                new CustomAndRandomLottoIssuer(null);
+                new CustomAndRandomLottoIssuer(null, new RandomLottoIssuer());
         Lotto something = customAndRandomLottoIssuer.issue();
         assertThat(something).isNotNull();
     }
