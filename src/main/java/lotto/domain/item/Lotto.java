@@ -5,7 +5,7 @@ import lotto.exception.ValidLottoException;
 import java.util.List;
 import java.util.Objects;
 
-public class Lotto implements Item {
+public class Lotto {
 
     private static final String NULL_PARAM_ERROR_MESSAGE = "매개변수:null";
     protected final LottoNumbers numbers;
