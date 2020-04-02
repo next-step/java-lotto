@@ -1,4 +1,4 @@
-package lottotests;
+package lotto.model;
 
 import lotto.model.LottoTicket;
 import lotto.model.LottoResult;

@@ -1,6 +1,7 @@
-package lottotests;
+package lotto.model;
 
 import lotto.AutomaticLottoGenerator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ public class LottoGeneratorTests {
     @DisplayName("자동 로또 번호 생성 테스트")
     @Test
     public void generateAutomaticTest() {
-        assertThat(AutomaticLottoGenerator.generate())
+        Assertions.assertThat(AutomaticLottoGenerator.generate())
                 .hasSize(LOTTO_NUMBER_SIZE);
     }
 

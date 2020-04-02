@@ -1,4 +1,4 @@
-package lottotests;
+package lotto.model.wrapper;
 
 import lotto.model.LottoBonusMatchResult;
 import lotto.model.wrapper.LottoResultMatchId;
