@@ -3,6 +3,7 @@ package step2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import step2.controller.LottoMachine;
+import step2.domain.LottoProvider;
 import step2.domain.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +16,6 @@ public class LottoMachineTest {
     void createLotto() {
         Money money = new Money(3000);
 
-        assertThat(lottoMachine.createLottos(money.getLottoCount())).isNotNull();
+        assertThat(LottoProvider.createLottos(money.getLottoCount())).isNotNull();
     }
 }
