@@ -14,7 +14,7 @@ public class LottoMachine {
     }
 
     private static LottoTicket generateLottoTicket() {
-        return new LottoTicket(LottoNumberPool.generateLottoNumbers());
+        return new LottoTicket(LottoMixer.mixLottoNumbers());
     }
 
     private static long getTicketCount(long money) {
