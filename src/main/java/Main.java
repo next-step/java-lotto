@@ -1,11 +1,9 @@
 import lotto.model.LottoStore;
-import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
 import lotto.model.WinningLottoTicket;
 import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.Payment;
 
-import java.util.List;
 import java.util.Set;
 
 import static lotto.utils.LottoUtil.convertTo;
@@ -20,7 +18,7 @@ public class Main {
         LottoTickets manualLottoTickets = LottoTickets.newInstance(convertTo(inputManualLotto()));
         LottoTickets lottoTickets = LottoStore.sell(payment, manualLottoTickets);
 
-        printLottoTickets(lottoTickets);
+        printLottoTickets(lottoTickets, manualLottoTickets.size());
 
         WinningLottoTicket winningLottoTicket = inputWinningLottoTicket();
 
