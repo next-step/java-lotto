@@ -1,6 +1,6 @@
 public class StringAddCalculator {
 
-    private static final String DEFAULT_DELIMITER = ",";
+    private static final String DEFAULT_DELIMITER = ",|:";
 
     public static int splitAndSum(String expression) {
         if (isNullOrEmpty(expression)) {
