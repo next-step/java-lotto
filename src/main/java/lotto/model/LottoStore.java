@@ -11,10 +11,10 @@ public class LottoStore {
     private LottoStore() {
     }
 
-    public static LottoPurchaseTickets sell(final Payment payment) {
-        List<LottoPurchaseTicket> lottoPurchaseTickets = IntStream.range(0, payment.countLottoTicket())
-                .mapToObj(i -> LottoPurchaseTicket.newInstance())
+    public static LottoTickets sell(final Payment payment) {
+        List<LottoTicket> lottoTickets = IntStream.range(0, payment.countLottoTicket())
+                .mapToObj(i -> LottoTicket.newInstance())
                 .collect(Collectors.toList());
-        return new LottoPurchaseTickets(lottoPurchaseTickets);
+        return new LottoTickets(lottoTickets);
     }
 }

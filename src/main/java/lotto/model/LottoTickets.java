@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoPurchaseTickets {
-    private List<LottoPurchaseTicket> lottoTickets;
+public class LottoTickets {
+    private List<LottoTicket> lottoTickets;
 
-    public LottoPurchaseTickets(final List<LottoPurchaseTicket> lottoTickets) {
+    public LottoTickets(final List<LottoTicket> lottoTickets) {
         if (Objects.isNull(lottoTickets)) {
             throw new IllegalArgumentException("lotto tickets is null");
         }
@@ -18,7 +18,7 @@ public class LottoPurchaseTickets {
 
     public LottoResults checkAll(final WinningLottoTicket winningLottoTicket) {
         List<LottoResult> lottoResults = lottoTickets.stream()
-                .map(ticket -> ticket.check(winningLottoTicket))
+                .map(winningLottoTicket::check)
                 .collect(Collectors.toList());
 
         return LottoResults.create(lottoResults);
@@ -31,7 +31,7 @@ public class LottoPurchaseTickets {
     @Override
     public String toString() {
         return lottoTickets.stream()
-                .map(LottoPurchaseTicket::toString)
+                .map(LottoTicket::toString)
                 .collect(Collectors.joining("\n"));
     }
 }

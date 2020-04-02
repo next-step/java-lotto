@@ -1,7 +1,6 @@
 package lotto_tests;
 
 import lotto.model.LottoBonusMatchResult;
-import lotto.model.LottoPurchaseTicket;
 import lotto.model.LottoResult;
 import lotto.model.wrapper.LottoMatchCount;
 import org.junit.jupiter.api.DisplayName;

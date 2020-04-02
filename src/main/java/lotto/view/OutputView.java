@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.LottoPurchaseTickets;
+import lotto.model.LottoTickets;
 import lotto.model.LottoResult;
 import lotto.model.LottoResults;
 
@@ -17,9 +17,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoTickets(final LottoPurchaseTickets lottoPurchaseTickets) {
-        System.out.println(String.format(PURCHASE_SHOW_FORMAT, lottoPurchaseTickets.size()));
-        System.out.println(lottoPurchaseTickets.toString());
+    public static void printLottoTickets(final LottoTickets lottoTickets) {
+        System.out.println(String.format(PURCHASE_SHOW_FORMAT, lottoTickets.size()));
+        System.out.println(lottoTickets.toString());
         System.out.println();
     }
 

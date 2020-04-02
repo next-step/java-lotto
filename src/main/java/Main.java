@@ -1,4 +1,4 @@
-import lotto.model.LottoPurchaseTickets;
+import lotto.model.LottoTickets;
 import lotto.model.LottoStore;
 import lotto.model.WinningLottoTicket;
 import lotto.model.wrapper.LottoNumber;
@@ -16,13 +16,13 @@ public class Main {
 
     public static void main(String[] args) {
         Payment payment = Payment.of(inputPayment());
-        LottoPurchaseTickets lottoPurchaseTickets = LottoStore.sell(payment);
+        LottoTickets lottoTickets = LottoStore.sell(payment);
 
-        printLottoTickets(lottoPurchaseTickets);
+        printLottoTickets(lottoTickets);
 
         WinningLottoTicket winningLottoTicket = inputWinningLottoTicket();
 
-        printLottoResults(lottoPurchaseTickets.checkAll(winningLottoTicket));
+        printLottoResults(lottoTickets.checkAll(winningLottoTicket));
     }
 
     private static WinningLottoTicket inputWinningLottoTicket() {

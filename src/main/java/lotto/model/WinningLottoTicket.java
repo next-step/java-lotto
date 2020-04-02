@@ -5,12 +5,13 @@ import lotto.model.wrapper.LottoNumber;
 
 import java.util.Set;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
 
+    private final LottoTicket winningLottoTicket;
     private final LottoNumber bonusNumber;
 
-    private WinningLottoTicket(final Set<LottoNumber> numbers, final LottoNumber bonusNumber) {
-        super(numbers);
+    private WinningLottoTicket(final LottoTicket winningLottoTicket, final LottoNumber bonusNumber) {
+        this.winningLottoTicket = winningLottoTicket;
         this.bonusNumber = bonusNumber;
     }
 
@@ -19,14 +20,15 @@ public class WinningLottoTicket extends LottoTicket {
             throw new IllegalArgumentException("bonus number must be distinct.");
         }
 
-        return new WinningLottoTicket(numbers, bonusNumber);
+        return new WinningLottoTicket(LottoTicket.newInstance(numbers), bonusNumber);
     }
 
-    public LottoResult checkLottoTicket(Set<LottoNumber> lottoNumbers) {
-        long count = numbers.stream()
-                .filter(lottoNumbers::contains)
+    public LottoResult check(LottoTicket lottoTicket) {
+        long count = winningLottoTicket.getNumbers()
+                .stream()
+                .filter(lottoTicket::contains)
                 .count();
-        boolean matchBonusNumber = lottoNumbers.contains(bonusNumber);
+        boolean matchBonusNumber = lottoTicket.contains(bonusNumber);
 
         return LottoResult.of(LottoMatchCount.create(Math.toIntExact(count), matchBonusNumber));
     }

@@ -1,6 +1,6 @@
 package lotto_tests;
 
-import lotto.model.LottoPurchaseTickets;
+import lotto.model.LottoTickets;
 import lotto.model.LottoStore;
 import lotto.model.wrapper.Payment;
 import org.junit.jupiter.api.DisplayName;
@@ -19,8 +19,8 @@ public class LottoStoreTests {
     @ParameterizedTest
     @MethodSource("sellTestCases")
     public void sellTest(Payment payment, int expectedLottoTicketsSize) {
-        LottoPurchaseTickets lottoPurchaseTickets = LottoStore.sell(payment);
-        assertThat(lottoPurchaseTickets.size()).isEqualTo(expectedLottoTicketsSize);
+        LottoTickets lottoTickets = LottoStore.sell(payment);
+        assertThat(lottoTickets.size()).isEqualTo(expectedLottoTicketsSize);
     }
 
     private static Stream<Arguments> sellTestCases() {
