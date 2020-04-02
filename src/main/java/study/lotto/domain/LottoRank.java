@@ -1,8 +1,6 @@
 package study.lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public enum LottoRank {
     FIRST(2_000_000_000, 6, false),
@@ -12,7 +10,7 @@ public enum LottoRank {
     FIFTH(5_000, 3, false),
     MISS(0, 0, false);
 
-    private static Map<ValueKey, LottoRank> valueToLottoRank =
+    private static Map<Integer, List<LottoRank>> valueToLottoRank =
             new HashMap<>();
 
     private int prize;
@@ -26,16 +24,29 @@ public enum LottoRank {
     }
 
     static {
+        initValueToLottoRank();
         for (LottoRank lottoRank : LottoRank.values()) {
-            ValueKey valueKey = ValueKey.instanceOf(lottoRank.matchCount,
-                    lottoRank.matchBonus);
-            valueToLottoRank.put(valueKey, lottoRank);
+            valueToLottoRank.get(lottoRank.matchCount).add(lottoRank);
+        }
+    }
+
+    private static void initValueToLottoRank() {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            valueToLottoRank.put(lottoRank.getMatchCount(), new ArrayList<>());
         }
     }
 
     public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
-        return valueToLottoRank.getOrDefault(ValueKey.get(matchCount,
-                        matchBonus), MISS);
+        List<LottoRank> lottoRanks = valueToLottoRank.getOrDefault(matchCount,
+                Collections.singletonList(MISS));
+        if (lottoRanks.size() == 1) {
+            return lottoRanks.get(0);
+        }
+
+        return lottoRanks.stream()
+                .filter(v -> v.matchBonus == matchBonus)
+                .findFirst()
+                .orElse(MISS);
     }
 
     public int getPrize() {
@@ -48,56 +59,5 @@ public enum LottoRank {
 
     public boolean isMatchBonus() {
         return matchBonus;
-    }
-
-    private static class ValueKey {
-        private static final int MIN = 0;
-        private static final int MAX = 6;
-        private static final ValueKey[][] cache = new ValueKey[7][2];
-        private Integer matchCount;
-        private boolean matchBonus;
-
-        private static ValueKey instanceOf(Integer matchCount,
-                                           boolean matchBonus) {
-            if ((matchCount >= MIN) && (matchCount <= MAX)) {
-                int numericMatchBonus = parseMatchBonus(matchBonus);
-                cache[matchCount][numericMatchBonus] =
-                        new ValueKey(matchCount
-                                , matchBonus);
-                return cache[matchCount][numericMatchBonus];
-            }
-            return new ValueKey(matchCount, matchBonus);
-        }
-
-        private static ValueKey get(Integer matchCount,
-                                    boolean matchBonus) {
-            int numericMatchBonus = parseMatchBonus(matchBonus);
-            return cache[matchCount][numericMatchBonus];
-        }
-
-        private ValueKey(Integer matchCount,
-                         boolean matchBonus) {
-            this.matchCount = matchCount;
-            this.matchBonus = matchBonus;
-        }
-
-        private static int parseMatchBonus(boolean matchBonus) {
-            if (matchBonus) {
-                return 1;
-            }
-            return 0;
-        }
-
-        @Override public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ValueKey valueKey = (ValueKey) o;
-            return matchBonus == valueKey.matchBonus &&
-                    Objects.equals(matchCount, valueKey.matchCount);
-        }
-
-        @Override public int hashCode() {
-            return Objects.hash(matchCount, matchBonus);
-        }
     }
 }

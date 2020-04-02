@@ -32,7 +32,6 @@ public class Lottos implements Iterable<Lotto> {
         lottos.add(lotto);
     }
 
-    // todo get 과 set은 최소화 해야 한다.
     public Lotto get(int index) {
         return lottos.get(index);
     }
