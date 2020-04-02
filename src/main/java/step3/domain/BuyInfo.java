@@ -1,7 +1,6 @@
 package step3.domain;
 
 import java.util.List;
-import java.util.Optional;
 
 public class BuyInfo {
     private static final int ZERO = 0;
@@ -50,7 +49,7 @@ public class BuyInfo {
 
     public BuyInfo(int totalPrice, String[] manualLottoNumbers) {
         validateBuyInfo(totalPrice);
-        validateManualLottoNumbers(manualLottoNumbers);
+        validateManualLottoNumbers(totalPrice, manualLottoNumbers);
         this.totalPrice = totalPrice;
         this.manualCount = manualLottoNumbers.length;
         this.totalCount = totalPrice / ONE_GAME_PRICE;
@@ -58,7 +57,7 @@ public class BuyInfo {
         this.buyLotto = new BuyLotto(autoCount, manualLottoNumbers);
     }
 
-    private void validateManualLottoNumbers(String[] manualLottoNumbers) {
+    private void validateManualLottoNumbers(int totalPrice, String[] manualLottoNumbers) {
         if (totalPrice / ONE_GAME_PRICE < manualLottoNumbers.length) {
             throw new IllegalArgumentException("구입금액내에서 수동로또를 구매할 수 있습니다.");
         }
