@@ -1,12 +1,11 @@
 package lotto.domain;
 
 import lotto.domain.item.*;
-import lotto.domain.item.LottoGame;
 import lotto.view.LottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,16 +32,16 @@ class LottoGameTest {
 
     @DisplayName("입력금액에서 구매 가능한 로또만큼 구매 되는지 체크")
     @ParameterizedTest
-    @CsvSource(value = {"1000:1", "5000:5"}, delimiter = ':')
-    public void play_success_countBuyLotto(int myMoney, int expect) throws Exception {
+    @ValueSource(ints = {1, 2, 3, 4, 5, 10, 11, 100})
+    public void play_success_countBuyLotto(int count) throws Exception {
         //given
-        LottoGame lottoGame = new LottoGame(new Money(myMoney));
+        LottoGame lottoGame = new LottoGame();
 
         //when
-        LottoDto dto = lottoGame.play();
+        LottoTickets autoLottoTicket = lottoGame.createAutoLottoTicket(count);
 
         //then
-        assertThat(dto.getTickets().size()).isEqualTo(expect);
+        assertThat(autoLottoTicket.size()).isEqualTo(count);
     }
 
     @DisplayName("수익률 개산")

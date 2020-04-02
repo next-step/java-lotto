@@ -5,6 +5,7 @@ import lotto.domain.item.LottoNumber;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.WinLottoTicket;
 import lotto.domain.item.LottoGame;
+import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.LottoDto;
 import lotto.view.ResultView;
@@ -23,8 +24,9 @@ public class LottoApplication {
 
         List<String> buyPassivityNumber = InputView.inputBuyPassivityLottoNumber(buyCount);
 
+        LottoService lottoService = new LottoService();
         LottoGame lottoGame = new LottoGame(money);
-        LottoDto dto = lottoGame.play();
+        LottoDto dto = lottoService.autoPlay(10);
         ResultView.printLoots(dto);
 
         String luckyNumberInput = InputView.inputLuckyNumber();
