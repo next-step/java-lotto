@@ -1,7 +1,7 @@
 public class StringAddCalculator {
 
     public static int splitAndSum(String expression) {
-        Numbers numbers = new Numbers(Expression.toArray(expression));
+        Numbers numbers = Numbers.create(Expression.toArray(expression));
         return numbers.sum();
     }
 

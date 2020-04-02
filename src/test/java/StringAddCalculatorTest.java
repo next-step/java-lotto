@@ -36,4 +36,11 @@ public class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum("1,2:3");
         assertThat(result).isEqualTo(6);
     }
+
+    @DisplayName("커스텀 구분자 사용 가능")
+    @Test
+    public void splitAndSumCustomDelimiter() throws Exception {
+        int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
 }
