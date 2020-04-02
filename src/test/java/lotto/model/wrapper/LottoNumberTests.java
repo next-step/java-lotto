@@ -1,12 +1,10 @@
 package lotto.model.wrapper;
 
-import lotto.model.wrapper.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("로또 번호 테스트")
 public class LottoNumberTests {
@@ -16,6 +14,14 @@ public class LottoNumberTests {
     @ValueSource(ints = {1, 17, 45})
     public void generateLottoNumberTest(int input) {
         assertThatCode(() -> LottoNumber.of(input)).doesNotThrowAnyException();
+    }
+
+    @DisplayName("로또 번호 비교 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 17, 45})
+    public void compareLottoNumberTest(int input) {
+        assertThat(LottoNumber.of(input)).isSameAs(LottoNumber.of(input));
+        assertThat(LottoNumber.of(input)).isEqualTo(LottoNumber.of(input));
     }
 
     @DisplayName("로또 번호 생성 테스트 - 에러")
