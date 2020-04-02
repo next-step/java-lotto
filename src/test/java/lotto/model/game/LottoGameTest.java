@@ -3,9 +3,9 @@ package lotto.model.game;
 import lotto.model.Money;
 import lotto.model.gameresult.GameResult;
 import lotto.model.gameresult.MatchingResult;
-import lotto.model.lottonumber.LottoNumber;
-import lotto.model.lottonumber.LottoNumbers;
-import lotto.model.mylottos.MyLottos;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.MyLottos;
 import lotto.model.winninglotto.BonusBall;
 import lotto.model.winninglotto.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.regex.MatchResult;
 
-import static lotto.model.Rank.FIRST;
 import static lotto.model.Rank.SECOND;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -24,14 +22,14 @@ public class LottoGameTest {
     private final int BONUS_BALL_NUMBER = 9;
     private final BonusBall BONUS_BALL = BonusBall.of(LottoNumber.of(BONUS_BALL_NUMBER));
 
-    private LottoNumbers WINNING_LOTTO_NUMBERS;
+    private Lotto WINNING_LOTTO_NUMBERS;
     private WinningLotto WINNING_LOTTO;
-    private LottoNumbers LOTTO_NUMBERS_1;
-    private LottoNumbers LOTTO_NUMBERS_2;
+    private Lotto LOTTO_NUMBERS_1;
+    private Lotto LOTTO_NUMBERS_2;
 
     @BeforeEach
     void setUp() {
-        LOTTO_NUMBERS_1 = new LottoNumbers(Arrays.asList(
+        LOTTO_NUMBERS_1 = new Lotto(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -39,7 +37,7 @@ public class LottoGameTest {
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        LOTTO_NUMBERS_2 = new LottoNumbers(Arrays.asList(
+        LOTTO_NUMBERS_2 = new Lotto(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -47,7 +45,7 @@ public class LottoGameTest {
                 new LottoNumber(5),
                 new LottoNumber(BONUS_BALL_NUMBER)));
 
-        WINNING_LOTTO_NUMBERS = new LottoNumbers(Arrays.asList(
+        WINNING_LOTTO_NUMBERS = new Lotto(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),

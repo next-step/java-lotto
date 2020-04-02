@@ -1,6 +1,6 @@
 package lotto.model.winninglotto;
 
-import lotto.model.lottonumber.LottoNumber;
+import lotto.model.lotto.LottoNumber;
 
 public class BonusBall {
     private LottoNumber bonusNumber;

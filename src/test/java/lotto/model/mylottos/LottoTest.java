@@ -1,7 +1,7 @@
 package lotto.model.mylottos;
 
-import lotto.model.lottonumber.LottoNumber;
-import lotto.model.lottonumber.LottoNumbers;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Lotto;
 import lotto.model.winninglotto.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,12 +14,12 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoNumbersTest {
+public class LottoTest {
     @DisplayName("6개의 숫자로 구성되지 않은 숫자 리스트를 입력받으면 예외를 반환한다.")
     @Test
     void validateSizeTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(
+            new Lotto(Arrays.asList(
                     LottoNumber.of(1)));
         });
     }
@@ -28,7 +28,7 @@ public class LottoNumbersTest {
     @Test
     void validateDuplicationTest() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(
+            new Lotto(Arrays.asList(
                     LottoNumber.of(1),
                     LottoNumber.of(1),
                     LottoNumber.of(2),
@@ -44,7 +44,7 @@ public class LottoNumbersTest {
     @ValueSource(ints = {-1, 0, 46})
     void validateNumberRangeTest(int input) {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            new LottoNumbers(Arrays.asList(
+            new Lotto(Arrays.asList(
                     LottoNumber.of(input),
                     LottoNumber.of(1),
                     LottoNumber.of(2),
@@ -59,7 +59,7 @@ public class LottoNumbersTest {
     @CsvSource(value = {"1:6", "7:5"}, delimiter = ':')
     void findHowManyMatchTest(int input, int expected) {
         //given
-        LottoNumbers winningLottoNumbers = new LottoNumbers(Arrays.asList(
+        Lotto winningLotto = new Lotto(Arrays.asList(
                 LottoNumber.of(input),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
@@ -67,7 +67,7 @@ public class LottoNumbersTest {
                 LottoNumber.of(5),
                 LottoNumber.of(6)
         ));
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(
+        Lotto lotto = new Lotto(Arrays.asList(
                 LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
@@ -77,7 +77,7 @@ public class LottoNumbersTest {
         ));
 
         //when
-        int howManyMatch = lottoNumbers.findHowManyMatch(WinningLotto.of(winningLottoNumbers));
+        int howManyMatch = lotto.findHowManyMatch(WinningLotto.of(winningLotto));
 
         //then
         assertThat(howManyMatch).isEqualTo(expected);

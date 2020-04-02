@@ -7,11 +7,11 @@ import lotto.view.output.ResultView;
 
 public class MainApplication {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(InputScanner.getPurchasePrice());
-        ResultView.printMyLottos(lottoGame.start());
+        ResultView.printMyLottos(LottoGame.start(InputScanner.getPurchasePrice()));
 
         WinningLotto winningLotto
                 = WinningLotto.of(InputScanner.getWinningNumbers(), InputScanner.getBonusBall());
-        ResultView.printResult(lottoGame.getResult(winningLotto));
+
+        ResultView.printResult(LottoGame.getResult(winningLotto));
     }
 }

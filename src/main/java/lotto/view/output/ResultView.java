@@ -4,7 +4,7 @@ import lotto.model.Rank;
 import lotto.model.gameresult.EarningRate;
 import lotto.model.gameresult.GameResult;
 import lotto.model.gameresult.MatchingResult;
-import lotto.model.mylottos.MyLottos;
+import lotto.model.lotto.MyLottos;
 
 import java.util.Arrays;
 
@@ -23,21 +23,20 @@ public class ResultView {
     public static void printResult(GameResult gameResult) {
         System.lineSeparator();
 
-        printStatisticsWithTitle(gameResult.getMatchingResult());
+        printStatisticsWithTitle();
         printEarningRate(gameResult.getEarningRate());
     }
 
-    private static void printStatisticsWithTitle(MatchingResult matchingResult) {
+    private static void printStatisticsWithTitle() {
         System.out.println("당첨 통계");
         System.out.println("=========================================");
 
-        printStatistics(matchingResult);
+        printStatistics();
     }
 
-    private static void printStatistics(MatchingResult matchingResult) {
+    private static void printStatistics() {
         Arrays.stream(Rank.values())
                 .forEach(rank -> printStatistic(rank));
-
     }
 
     private static void printStatistic(Rank rank) {

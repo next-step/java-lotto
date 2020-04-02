@@ -1,25 +1,22 @@
-package lotto.model.mylottos;
+package lotto.model.lotto;
 
-import lotto.model.Money;
 import lotto.model.Rank;
 import lotto.model.gameresult.EarningRate;
 import lotto.model.gameresult.GameResult;
 import lotto.model.gameresult.MatchingResult;
-import lotto.model.lottonumber.LottoNumbers;
+import lotto.model.lotto.Lotto;
 import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MyLottos {
     private static final long PRICE_TO_BUY_ONE_LOTTO = 1000l;
 
-    private List<LottoNumbers> lottoNumbers;
+    private List<Lotto> lottoNumbers;
 
-    public MyLottos(List<LottoNumbers> lottoNumbers) {
+    public MyLottos(List<Lotto> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -29,15 +26,15 @@ public class MyLottos {
         return new GameResult(matchingResult, earningRate);
     }
 
-    private EarningRate calculateEarningRate(WinningLotto winningLotto){
-        if(findInputMoney()==0){
+    private EarningRate calculateEarningRate(WinningLotto winningLotto) {
+        if (findInputMoney() == 0) {
             return new EarningRate(Double.POSITIVE_INFINITY);
         }
 
         Long money = findMatchingRanks(winningLotto).stream()
                 .mapToLong(Rank::getCashPrize)
                 .sum();
-       return new EarningRate(money / findInputMoney() * 100);
+        return new EarningRate(money / findInputMoney() * 100);
     }
 
     private MatchingResult findMatchingResult(WinningLotto winningLotto) {
@@ -61,7 +58,7 @@ public class MyLottos {
         return lottoNumbers.size();
     }
 
-    public List<LottoNumbers> getLottoNumbers() {
+    public List<Lotto> getLottoNumbers() {
         return lottoNumbers;
     }
 }

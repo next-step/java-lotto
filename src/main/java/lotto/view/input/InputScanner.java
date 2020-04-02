@@ -1,8 +1,8 @@
 package lotto.view.input;
 
 import lotto.model.Money;
-import lotto.model.lottonumber.LottoNumber;
-import lotto.model.lottonumber.LottoNumbers;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Lotto;
 import lotto.model.winninglotto.BonusBall;
 
 import java.util.List;
@@ -24,10 +24,10 @@ public class InputScanner {
         return StringConverter.convertStringToMoney(validateNullOrEmpty(money));
     }
 
-    public static LottoNumbers getWinningNumbers() {
+    public static Lotto getWinningNumbers() {
         System.out.println(REQUEST_FOR_WINNING_LOTTO);
         winningLotto = StringConverter.convertStringToNumbers(scanner.nextLine());
-        return new LottoNumbers(winningLotto);
+        return new Lotto(winningLotto);
     }
 
     public static BonusBall getBonusBall() {

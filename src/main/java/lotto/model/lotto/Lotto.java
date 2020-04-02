@@ -1,4 +1,4 @@
-package lotto.model.lottonumber;
+package lotto.model.lotto;
 
 import lotto.model.Rank;
 import lotto.model.winninglotto.BonusBall;
@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
     private List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplication(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);

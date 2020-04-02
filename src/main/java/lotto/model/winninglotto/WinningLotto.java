@@ -1,23 +1,23 @@
 package lotto.model.winninglotto;
 
-import lotto.model.lottonumber.LottoNumber;
-import lotto.model.lottonumber.LottoNumbers;
+import lotto.model.lotto.LottoNumber;
+import lotto.model.lotto.Lotto;
 
 public class WinningLotto {
-    private LottoNumbers winningLottoNumbers;
+    private Lotto winningLotto;
     private BonusBall bonusBall;
 
-    public WinningLotto(LottoNumbers winningLottoNumbers) {
-        this.winningLottoNumbers = winningLottoNumbers;
+    public WinningLotto(Lotto winningLotto) {
+        this.winningLotto = winningLotto;
     }
 
-    public WinningLotto(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
-        this.winningLottoNumbers = winningLottoNumbers;
+    public WinningLotto(Lotto winningLotto, BonusBall bonusBall) {
+        this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return winningLottoNumbers
+        return winningLotto
                 .contains(lottoNumber);
     }
 
@@ -25,11 +25,11 @@ public class WinningLotto {
         return bonusBall;
     }
 
-    public static WinningLotto of(LottoNumbers winningLottoNumbers) {
-        return new WinningLotto(winningLottoNumbers);
+    public static WinningLotto of(Lotto winningLotto) {
+        return new WinningLotto(winningLotto);
     }
 
-    public static WinningLotto of(LottoNumbers winningLottoNumbers, BonusBall bonusBall) {
-        return new WinningLotto(winningLottoNumbers, bonusBall);
+    public static WinningLotto of(Lotto winningLotto, BonusBall bonusBall) {
+        return new WinningLotto(winningLotto, bonusBall);
     }
 }

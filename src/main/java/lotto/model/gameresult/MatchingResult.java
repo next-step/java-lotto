@@ -5,6 +5,8 @@ import lotto.model.Rank;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class MatchingResult {
     private static Map<Rank, Integer> result = new HashMap<>();
