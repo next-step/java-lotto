@@ -47,6 +47,13 @@ public class LottoGenerator {
         return new LottoTicket(lottoNumbers);
     }
 
+    public LottoTicket totalLottoTicket(LottoTicket manualLottoTicket, LottoTicket automaticLottoTicket) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        lottoNumbers.addAll(manualLottoTicket.getLottoNumbers());
+        lottoNumbers.addAll(automaticLottoTicket.getLottoNumbers());
+        return new LottoTicket(lottoNumbers);
+    }
+
     private Set<LottoNo> splitLottoNumber(String inputText) {
         return Arrays
                 .stream(inputText.split(SPLIT_TEXT))
@@ -58,10 +65,4 @@ public class LottoGenerator {
         return lottoGenerator;
     }
 
-    public LottoTicket totalLottoTicket(LottoTicket manualLottoTicket, LottoTicket automaticLottoTicket) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        lottoNumbers.addAll(manualLottoTicket.getLottoNumbers());
-        lottoNumbers.addAll(automaticLottoTicket.getLottoNumbers());
-        return new LottoTicket(lottoNumbers);
-    }
 }

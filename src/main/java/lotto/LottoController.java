@@ -1,9 +1,12 @@
 package lotto;
 
+import java.util.Map;
+
 public class LottoController {
 
     private static InputView inputView = InputView.getInputView();
     private static LottoGenerator lottoGenerator = LottoGenerator.getLottoGenerator();
+    private static WinningLottoInfo winningLottoInfo = WinningLottoInfo.getWinningLottoInfo();
     private static ResultView resultView = ResultView.getResultView();
 
     public static void main(String[] args) {
@@ -16,16 +19,18 @@ public class LottoController {
 
         LottoTicket manualLottoTicket = lottoGenerator.createManualLottoTicket(manualCount);
         LottoTicket automaticLottoTicket = lottoGenerator.createAutomaticLottoTicket(automaticCount);
-        LottoTicket lottoTicket = lottoGenerator.totalLottoTicket(manualLottoTicket,automaticLottoTicket);
+        LottoTicket lottoTicket = lottoGenerator.totalLottoTicket(manualLottoTicket, automaticLottoTicket);
 
         String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoTicket);
         System.out.println(printPurchaseLottoNumbers);
 
-        resultView.setLottoTicket(lottoTicket);
-        resultView.enterValue();
+        winningLottoInfo.enterWinningNumbers();
+        winningLottoInfo.enterBonusBall();
 
-        System.out.println(resultView.printWinningResult());
-        System.out.println(resultView.printRevenuePercent());
+        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
+
+        System.out.println(resultView.printWinningResult(winningLottos));
+        System.out.println(resultView.printRevenuePercent(winningLottos, lottoTicket));
 
     }
 }

@@ -1,56 +1,31 @@
 package lotto;
 
-import static java.util.stream.Collectors.*;
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String SPLIT_TEXT = ",";
+
     private static final String SECOND_NAME = "2등";
     private static final int MIN_WIN_MATCH_COUNT = LottoRule.MIN_WIN_MATCH_COUNT.getValue();
     private static final int MIN_PURCHASE_AMOUNT = LottoRule.MIN_PURCHASE_AMOUNT.getValue();
 
     private static ResultView resultView = new ResultView();
-    private static Scanner scanner = new Scanner(System.in);
-
-    private LottoNumbers winningNumbers;
-    private LottoTicket lottoTicket;
-    private Map<String, WinningLotto> winningLottos;
-    private LottoNo bonusBall;
 
     public ResultView() {
     }
 
-    public ResultView(int bonusBall) {
-        this.bonusBall = new LottoNo(bonusBall);
-    }
-
-    public ResultView(String inputText) {
-        this(inputText, null, 0);
-    }
-
-    public ResultView(String inputText, LottoTicket lottoTicket, int bonusBall) {
-        this.bonusBall = new LottoNo(bonusBall);
-        Set<LottoNo> numbers = splitWinningNumber(inputText);
-        winningNumbers = new LottoNumbers(numbers);
-        this.lottoTicket = lottoTicket;
-        this.winningLottos = getWinningLottos();
-    }
-
-    public Map<String, WinningLotto> getWinningLottos() {
+    public Map<String, WinningLotto> getWinningLottos(WinningLottoInfo winningLottoInfo,
+                                                      LottoTicket lottoTicket) {
         Map<String, WinningLotto> winningLottos = new HashMap<>();
-        Set<LottoNo> winningNums = winningNumbers.getNumbers();
+        Set<LottoNo> winningNums = winningLottoInfo.getWinningNumbers().getNumbers();
         for (int i = 0; i < lottoTicket.getLottoNumbers().size(); i++) {
             int matchCount = 0;
             Set<LottoNo> purchaseNumbers = lottoTicket.getLottoNumbers().get(i).getNumbers();
             matchCount = repeatByWinNumberSize(winningNums, matchCount, purchaseNumbers);
-            boolean matchBonus = checkMatchBonusBall(purchaseNumbers);
+            boolean matchBonus = checkMatchBonusBall(winningLottoInfo, purchaseNumbers);
 
             addWinningLotto(winningLottos, matchCount, matchBonus);
         }
@@ -82,13 +57,13 @@ public class ResultView {
         return result;
     }
 
-    public String printWinningResult() {
+    public String printWinningResult(Map<String, WinningLotto> winningLottos) {
         String result = "당첨통계\n---------\n";
         Rank[] values = Rank.values();
         for (Rank value : values) {
             String key = value.getName();
             int matchCount = value.getMatchCount();
-            int resultCount = getResultCount(key);
+            int resultCount = getResultCount(key, winningLottos);
             result = getResultByRank(result, value, key, matchCount, resultCount);
 
         }
@@ -96,10 +71,10 @@ public class ResultView {
         return result;
     }
 
-    public String printRevenuePercent() {
+    public String printRevenuePercent(Map<String, WinningLotto> winningLottos, LottoTicket lottoTicket) {
         String result = "총 수익률은 ";
-        double revenuePercent = calculateRevenuePercent(totalWinningAmount(),
-                                                        totalPurchaseAmount());
+        double revenuePercent = calculateRevenuePercent(totalWinningAmount(winningLottos),
+                                                        totalPurchaseAmount(lottoTicket));
         result += revenuePercent + "입니다.";
         if (revenuePercent < 1) {
             result += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -115,7 +90,7 @@ public class ResultView {
         return Math.floor(revenuePercent * decimalPoint) / decimalPoint;
     }
 
-    public int totalWinningAmount() {
+    public int totalWinningAmount(Map<String, WinningLotto> winningLottos) {
         int totalWinningAmount = 0;
         for (String name : winningLottos.keySet()) {
             totalWinningAmount += winningLottos.get(name).getTotalAmount();
@@ -123,32 +98,25 @@ public class ResultView {
         return totalWinningAmount;
     }
 
-    public int totalPurchaseAmount() {
+    public int totalPurchaseAmount(LottoTicket lottoTicket) {
         return lottoTicket.getLottoNumbers().size() * MIN_PURCHASE_AMOUNT;
     }
 
-    public boolean checkMatchBonusBall(Set<LottoNo> lottoNumber) {
+    public boolean checkMatchBonusBall(WinningLottoInfo winningLottoInfo, Set<LottoNo> lottoNumber) {
         boolean matchFlag = false;
 
-        if (lottoNumber.contains(this.bonusBall)) {
+        if (lottoNumber.contains(winningLottoInfo.getBonusBall())) {
             matchFlag = true;
         }
         return matchFlag;
     }
 
-    private int getResultCount(String name) {
+    private int getResultCount(String name, Map<String, WinningLotto> winningLottos) {
         int resultCount = 0;
         if (winningLottos.containsKey(name)) {
             resultCount = winningLottos.get(name).getCount();
         }
         return resultCount;
-    }
-
-    private Set<LottoNo> splitWinningNumber(String inputText) {
-        return Arrays
-                .stream(inputText.split(SPLIT_TEXT))
-                .map(num -> new LottoNo(Integer.parseInt(num)))
-                .collect(toSet());
     }
 
     private int repeatByWinNumberSize(Set<LottoNo> winningNums, int matchCount, Set<LottoNo> purchaseNumbers) {
@@ -165,18 +133,6 @@ public class ResultView {
         return matchCount;
     }
 
-    public void enterValue() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        String inputText = scanner.next();
-        System.out.println("\n보너스 볼을 입력해 주세요");
-        LottoNo bonusBall = new LottoNo(scanner.nextInt());
-
-        this.bonusBall = bonusBall;
-        Set<LottoNo> numbers = splitWinningNumber(inputText);
-        winningNumbers = new LottoNumbers(numbers);
-        this.winningLottos = getWinningLottos();
-    }
-
     public String getResultByRank(String result, Rank value, String key, int matchCount, int resultCount) {
         if (SECOND_NAME.equals(key)) {
             result += matchCount + "개 일치, 보너스 볼 일치(" + value.getWinningAmount() + "원)- " + resultCount
@@ -186,10 +142,6 @@ public class ResultView {
         result += matchCount + "개 일치(" + value.getWinningAmount() + "원)- " + resultCount + "개\n";
 
         return result;
-    }
-
-    public void setLottoTicket(LottoTicket lottoTicket) {
-        this.lottoTicket = lottoTicket;
     }
 
     public static ResultView getResultView() {

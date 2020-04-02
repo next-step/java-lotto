@@ -1,7 +1,6 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,7 +15,9 @@ import org.junit.jupiter.api.Test;
 
 class ResultViewTest {
 
-    private ResultView resultView;
+    private static ResultView resultView = ResultView.getResultView();
+    private WinningLottoInfo winningLottoInfo;
+    private LottoTicket lottoTicket;
 
     @BeforeEach
     void setUp() {
@@ -71,27 +72,15 @@ class ResultViewTest {
                                                                   new LottoNo(26))
                                                               .collect(Collectors.toSet()))));//꽝
 
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-
-        resultView = new ResultView(input, lottoTicket, bonusBall);
-
-    }
-
-    @DisplayName("당첨번호를 입력 받고 유효성을 체크한다. 동일 숫자가 입력되는 경우")
-    @Test
-    void inputWinningNumbers() {
-        String errorInput = "1,2,2,3,4,5";
-
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            resultView = new ResultView(errorInput);
-        });
+        lottoTicket = new LottoTicket(lottoNumbers);
+        winningLottoInfo = new WinningLottoInfo(bonusBall, input);
 
     }
 
     @DisplayName("당첨된 로또의 개수를 확인한다")
     @Test
     void winningResultSize() {
-        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos();
+        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
 
         assertThat(winningLottos).hasSize(4);
     }
@@ -99,7 +88,8 @@ class ResultViewTest {
     @DisplayName("당첨 내역을 출력한다")
     @Test
     void printWinningResult() {
-        String result = resultView.printWinningResult();
+        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
+        String result = resultView.printWinningResult(winningLottos);
         System.out.println(result);
         assertThat(result).isEqualTo("당첨통계\n"
                                      + "---------\n"
@@ -113,14 +103,15 @@ class ResultViewTest {
     @DisplayName("총 구매금액을 계산한다")
     @Test
     void totalPurchaseAmount() {
-        int result = resultView.totalPurchaseAmount();
+        int result = resultView.totalPurchaseAmount(lottoTicket);
         assertThat(result).isEqualTo(6000);
     }
 
     @DisplayName("총 당첨금액을 계산한다")
     @Test
     void totalWinningAmount() {
-        int result = resultView.totalWinningAmount();
+        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
+        int result = resultView.totalWinningAmount(winningLottos);
         assertThat(result).isEqualTo(2030055000);
     }
 
@@ -131,25 +122,17 @@ class ResultViewTest {
         assertThat(result).isEqualTo(0.35);
     }
 
-    @DisplayName("보너스 볼에 유효성을 검사한다. 1~45 사이가 아닐때는 예외처리")
-    @Test
-    void validateBonusBall() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            resultView = new ResultView(46);
-        });
-    }
-
     @DisplayName("구매한 로또티켓에 보너스 볼이 있는지 확인한다.")
     @Test
     void checkMatchBonusBall() {
-        resultView = new ResultView(5);
-        boolean match = resultView.checkMatchBonusBall(new HashSet<>(Stream.of(new LottoNo(1),
-                                                                               new LottoNo(2),
-                                                                               new LottoNo(3),
-                                                                               new LottoNo(4),
-                                                                               new LottoNo(5),
-                                                                               new LottoNo(6))
-                                                                           .collect(Collectors.toSet())));
+        boolean match = resultView.checkMatchBonusBall(winningLottoInfo, new HashSet<>(Stream.of(new LottoNo(1),
+                                                                                                 new LottoNo(2),
+                                                                                                 new LottoNo(3),
+                                                                                                 new LottoNo(4),
+                                                                                                 new LottoNo(5),
+                                                                                                 new LottoNo(42))
+                                                                                             .collect(Collectors
+                                                                                                              .toSet())));
 
         assertThat(match).isTrue();
     }
