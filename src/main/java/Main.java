@@ -1,21 +1,23 @@
 import lotto.model.LottoStore;
+import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
 import lotto.model.WinningLottoTicket;
 import lotto.model.wrapper.LottoNumber;
+import lotto.model.wrapper.ManualLottoCount;
 import lotto.model.wrapper.Payment;
+import lotto.view.InputView;
 
-import java.util.Set;
-
-import static lotto.utils.LottoUtil.convertTo;
-import static lotto.view.InputView.*;
 import static lotto.view.OutputView.printLottoResults;
 import static lotto.view.OutputView.printLottoTickets;
 
 public class Main {
 
     public static void main(String[] args) {
-        Payment payment = Payment.of(inputPayment());
-        LottoTickets manualLottoTickets = LottoTickets.newInstance(convertTo(inputManualLotto()));
+        Payment payment = InputView.inputPayment();
+
+        ManualLottoCount manualLottoCount = InputView.inputManualLottoCount();
+
+        LottoTickets manualLottoTickets = InputView.inputManualLotto(manualLottoCount);
         LottoTickets lottoTickets = LottoStore.sell(payment, manualLottoTickets);
 
         printLottoTickets(lottoTickets, manualLottoTickets.size());
@@ -26,12 +28,11 @@ public class Main {
     }
 
     private static WinningLottoTicket inputWinningLottoTicket() {
-        String winningNumberString = inputWinningNumber();
-        Set<LottoNumber> winningNumbers = convertTo(winningNumberString);
+        LottoTicket winningLottoTicket = InputView.inputWinningNumber();
 
-        int bonusNumber = inputBonusNumber();
+        LottoNumber bonusNumber = InputView.inputBonusNumber();
 
-        return WinningLottoTicket.newInstance(winningNumbers, LottoNumber.of(bonusNumber));
+        return WinningLottoTicket.newInstance(winningLottoTicket, bonusNumber);
     }
 
 }
