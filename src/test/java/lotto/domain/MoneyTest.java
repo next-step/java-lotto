@@ -47,6 +47,36 @@ public class MoneyTest {
         assertThat(money1.getMoney()).isEqualTo(expect);
     }
 
+    @DisplayName("금액 뺄셈 기능")
+    @ParameterizedTest
+    @CsvSource(value = {"100:100:0.0", "3000:1000:2000"}, delimiter = ':')
+    public void minus_success(double int1, double int2, double expect) throws Exception {
+        //given
+        Money money1 = new Money(int1);
+        Money money2 = new Money(int2);
+
+        //when
+        money1 = money1.minus(money2);
+
+        //then
+        assertThat(money1.getMoney()).isEqualTo(expect);
+    }
+
+    @DisplayName("금액 뺄셈 기능")
+    @ParameterizedTest
+    @CsvSource(value = {"100:200", "1000:2000"}, delimiter = ':')
+    public void minus_fail(double int1, double int2) throws Exception {
+        //given
+        Money money1 = new Money(int1);
+        Money money2 = new Money(int2);
+
+        //then
+        assertThatThrownBy(
+                () -> money1.minus(money2)
+        ).isInstanceOf(IllegalArgumentException.class);
+
+    }
+
     @DisplayName("금액 나눗셈 기능")
     @ParameterizedTest
     @CsvSource(value = {"1000:10:100", "2000:1000:2", "500:1000:0.5"}, delimiter = ':')
