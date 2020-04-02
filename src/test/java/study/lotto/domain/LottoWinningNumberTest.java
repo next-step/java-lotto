@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import study.lotto.domain.LottoRank;
-import study.lotto.domain.Lotto;
-import study.lotto.domain.LottoWinningNumber;
 
 import java.util.Arrays;
 import java.util.List;

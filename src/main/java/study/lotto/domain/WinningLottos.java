@@ -14,7 +14,7 @@ public class WinningLottos {
         winningLottos.get(lottoRank).add(lotto);
     }
 
-    public Lottos get(LottoRank lottoRank){
+    public Lottos get(LottoRank lottoRank) {
         return new Lottos(winningLottos.get(lottoRank));
     }
 

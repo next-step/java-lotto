@@ -2,7 +2,6 @@ package study.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.domain.Lotto;
 
 import java.util.Arrays;
 import java.util.List;

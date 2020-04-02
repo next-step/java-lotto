@@ -14,8 +14,9 @@ public class CustomAndRandomLottoIssuer implements LottoIssuer {
     private RandomLottoIssuer randomLottoIssuer;
     private Lottos lottos;
 
-    public static CustomAndRandomLottoIssuer valueOf(List<List<Integer>> customNumbers) {
-        if(Objects.isNull(customNumbers)) {
+    public static CustomAndRandomLottoIssuer valueOf(
+            List<List<Integer>> customNumbers) {
+        if (Objects.isNull(customNumbers)) {
             return new CustomAndRandomLottoIssuer(null);
         }
 
