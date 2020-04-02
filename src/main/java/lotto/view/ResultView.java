@@ -4,8 +4,14 @@ import lotto.domain.item.LottoTicket;
 
 public class ResultView {
 
+    private static final String BUY_COUNT_MESSAGE = "개를 구매 했습니다.";
+
+
+    private static void print(int count) {
+        System.out.println(count + BUY_COUNT_MESSAGE);
+    }
+
     public static void printLoots(LottoDto dto) {
-        System.out.println(dto.getTickets().size() + "개를 구매 했습니다.");
         for (LottoTicket lotto : dto.getTickets().getTickets()) {
             System.out.println(lotto);
         }

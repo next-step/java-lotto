@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.Money;
 import lotto.domain.item.LottoGame;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.LottoTickets;
@@ -41,5 +42,10 @@ public class LottoService {
         LottoDto dto = new LottoDto();
         dto.setTickets(tickets);
         return dto;
+    }
+
+    public int getAvailableBuyCount(Money money) {
+        LottoGame lottoGame = new LottoGame();
+        return lottoGame.getAvailableBuyCount(money);
     }
 }
