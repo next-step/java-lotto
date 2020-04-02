@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> NUMBERS;
 
-    private int number;
+    private final int number;
 
     static {
         NUMBERS = Collections.unmodifiableMap(IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)

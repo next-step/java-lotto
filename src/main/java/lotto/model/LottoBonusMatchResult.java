@@ -1,14 +1,14 @@
 package lotto.model;
 
+import lotto.model.wrapper.LottoMatchCount;
+
 public enum LottoBonusMatchResult {
     ANYWAY,
     UN_MATCH,
     MATCH;
 
-    private final static int BONUS_MUST_CHECK_COUNT = 5;
-
-    public static LottoBonusMatchResult of(final int matchCount, final boolean matchBonusNumber) {
-        if (matchCount == BONUS_MUST_CHECK_COUNT) {
+    public static LottoBonusMatchResult of(final LottoMatchCount matchCount, final boolean matchBonusNumber) {
+        if (matchCount == LottoMatchCount.BONUS_CHECK_COUNT) {
             return createByMatchBonusNumber(matchBonusNumber);
         }
         return ANYWAY;
