@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.dto.LottoWinResults;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -25,23 +27,19 @@ public class LottoResults {
         return lottoResults.getOrDefault(lottoResult, 0L);
     }
 
-    public Map<LottoResult, Long> getResult() {
-        Map<LottoResult, Long> result = getDefaultResult();
+    public LottoWinResults getWinResult() {
+        Map<LottoResult, Long> result = new LinkedHashMap<>();
+        Arrays.stream(LottoResult.values())
+                .forEach(lottoResult -> result.put(lottoResult, 0L));
+
         result.putAll(this.lottoResults);
-        return result;
+        return LottoWinResults.newInstance(result);
     }
 
     public BigDecimal profit() {
         BigDecimal totalPrice = BigDecimal.valueOf(getTotalPrice());
         BigDecimal purchasePayment = BigDecimal.valueOf(getPurchasePayment());
         return totalPrice.divide(purchasePayment, 1, RoundingMode.HALF_UP);
-    }
-
-    private static Map<LottoResult, Long> getDefaultResult() {
-        Map<LottoResult, Long> defaultResult = new LinkedHashMap<>();
-        Arrays.stream(LottoResult.values())
-                .forEach(lottoResult -> defaultResult.put(lottoResult, 0L));
-        return defaultResult;
     }
 
     private long getTotalPrice() {
