@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+    private static final String MONEY_POSITIVE_INTEGER_ERR_MESSAGE = "금액은 양의 정수만 입력 가능 합니다.";
+    private static final String MONEY_NEGATIVE_INTEGER_ERR_MESSAGE = "금액은 음수가 될 수 없습니다.";
     private final double money;
 
     public Money() {
@@ -20,12 +22,24 @@ public class Money {
 
     private void validatePositive(double money) {
         if (money < 0) {
-            throw new IllegalArgumentException("금액은 양의 정수만 입력 가능 합니다.");
+            throw new IllegalArgumentException(MONEY_POSITIVE_INTEGER_ERR_MESSAGE);
         }
     }
 
     public Money plus(Money money) {
         return new Money(this.money + money.money);
+    }
+
+    public Money minus(Money money) {
+        return new Money(this.money - money.money);
+    }
+
+    public Money minus(double money) {
+        double calc = this.money - money;
+        if (calc < 0) {
+            throw new IllegalArgumentException(MONEY_NEGATIVE_INTEGER_ERR_MESSAGE);
+        }
+        return new Money(calc);
     }
 
     public Money divide(Money money) {
