@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
@@ -42,5 +43,19 @@ public class StringAddCalculatorTest {
     public void splitAndSumCustomDelimiter() throws Exception {
         int result = StringAddCalculator.splitAndSum("//;\n1;2;3");
         assertThat(result).isEqualTo(6);
+    }
+
+    @DisplayName("음수 입력시 RuntimeException")
+    @Test
+    public void splitAndSumNegative() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("-1,2,3"))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName("커스텀 구분자 에서 음수 RuntimeException")
+    @Test
+    public void splitAndSumNegativeWithCustomDelimiter() throws Exception {
+        assertThatThrownBy(() -> StringAddCalculator.splitAndSum("//;\n1;-2;3"))
+                .isInstanceOf(RuntimeException.class);
     }
 }
