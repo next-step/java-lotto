@@ -2,6 +2,7 @@ package study.lotto.controller;
 
 
 import study.lotto.domain.LottoGame;
+import study.lotto.domain.LottoIssuer;
 import study.lotto.domain.LottoResult;
 import study.lotto.domain.LottoWinningNumber;
 import study.lotto.view.InputView;
@@ -12,7 +13,10 @@ import java.util.List;
 public class LottoController {
     public static void run() {
         int amount = InputView.getAmount();
-        LottoGame lottoGame = new LottoGame(amount, new RandomLottoIssuer());
+        List<List<Integer>> customNumberList = InputView.getCustomNumbers();
+        LottoIssuer lottoIssuer =
+                CustomAndRandomLottoIssuer.valueOf(customNumberList);
+        LottoGame lottoGame = new LottoGame(amount, lottoIssuer);
         ResultView.displayBuyingLotto(lottoGame.getLottos());
 
         List<Integer> winningNumbers = InputView.getWinningNumber();
