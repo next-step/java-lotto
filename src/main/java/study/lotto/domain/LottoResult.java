@@ -1,7 +1,6 @@
 package study.lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LottoResult {
     private Map<LottoRank, Lottos> winningTickets;

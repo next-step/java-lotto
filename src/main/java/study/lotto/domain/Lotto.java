@@ -63,6 +63,12 @@ public class Lotto implements Iterable<LottoNumber> {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
+    public int matchingCount(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> lotto.contains(lottoNumber))
+                .count();
+    }
+
     @Override public Iterator<LottoNumber> iterator() {
         return lottoNumbers.iterator();
     }
