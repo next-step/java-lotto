@@ -5,6 +5,7 @@ import lotto.view.LottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
@@ -56,5 +57,20 @@ class LottoGameTest {
 
         //then
         assertThat(earningRate.getEarningRate()).isEqualTo(1.25);
+    }
+
+    @DisplayName("몇개의 로또 구매가 가능한지 체크")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:1", "4444:4", "5999:5"}, delimiter = ':')
+    public void getAvailableBuyCount_success(int moneyParam, int expect) throws Exception {
+        //given
+        Money money = new Money(moneyParam);
+        LottoGame lottoGame = new LottoGame();
+
+        //when
+        int availableBuyCount = lottoGame.getAvailableBuyCount(money);
+
+        //then
+        assertThat(availableBuyCount).isEqualTo(expect);
     }
 }

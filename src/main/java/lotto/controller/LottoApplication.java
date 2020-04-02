@@ -1,10 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.Money;
+import lotto.domain.item.LottoGame;
 import lotto.domain.item.LottoNumber;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.WinLottoTicket;
-import lotto.domain.item.LottoGame;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.LottoDto;
@@ -24,12 +24,15 @@ public class LottoApplication {
         List<String> buyPassivityCount = InputView.inputBuyPassivityLottoNumber(buyCount);
 
         LottoService lottoService = new LottoService();
+        int availableBuyCount = lottoService.getAvailableBuyCount(money.minus(10));
+
+
         LottoDto dto1 = lottoService.passivityPlay(buyPassivityCount);
         ResultView.printLoots(dto1);
 
 
         LottoGame lottoGame = new LottoGame(money);
-        LottoDto dto = lottoService.autoPlay(10);
+        LottoDto dto = lottoService.autoPlay(availableBuyCount - buyCount);
         ResultView.printLoots(dto);
 
         String luckyNumberInput = InputView.inputLuckyNumber();

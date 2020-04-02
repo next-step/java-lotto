@@ -39,6 +39,10 @@ public class LottoGame {
         return LottoTickets.createLottoToPassivity(numbers);
     }
 
+    public int getAvailableBuyCount(Money money) {
+        return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
+    }
+
     public LottoDto findWinGame(WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
         dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
