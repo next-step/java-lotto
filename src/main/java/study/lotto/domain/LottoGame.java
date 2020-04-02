@@ -2,10 +2,9 @@ package study.lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGame {
-    private List<Lotto> lottos;
+    private Lottos lottos;
     private LottoIssuer lottoIssuer;
     private Amount investmentAmount;
 
@@ -22,21 +21,19 @@ public class LottoGame {
         int quantity = amount.getAmount() / Lotto.PRICE;
 
         investmentAmount = new Amount(quantity * Lotto.PRICE);
-        lottos = new ArrayList<>();
+        List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(lottoIssuer.issue());
+            lottoList.add(lottoIssuer.issue());
         }
+
+        this.lottos = new Lottos(lottoList);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos.stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
+    public Lottos getLottos() {
+        return new Lottos(lottos);
     }
 
     public LottoResult result(LottoWinningNumber lottoWinningNumber) {
-        return new LottoResult(lottos,
-                lottoWinningNumber,
-                investmentAmount);
+        return new LottoResult(lottos, lottoWinningNumber, investmentAmount);
     }
 }

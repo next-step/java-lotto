@@ -3,8 +3,8 @@ package study.lotto.view;
 import study.lotto.domain.LottoRank;
 import study.lotto.domain.LottoResult;
 import study.lotto.domain.Lotto;
+import study.lotto.domain.Lottos;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -19,7 +19,7 @@ public class ResultView {
             "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 
-    public static void displayBuyingLotto(List<Lotto> lottos) {
+    public static void displayBuyingLotto(Lottos lottos) {
         System.out.println(lottos.size() + BUY_MESSAGE);
         for (Lotto lotto : lottos) {
             displayLottoTicket(lotto);
@@ -46,7 +46,7 @@ public class ResultView {
         LottoRank[] lottoRanks = LottoRank.values();
         for (int i = lottoRanks.length - 1; i >= 0; i--) {
             LottoRank lottoRank = lottoRanks[i];
-            List<Lotto> winningTickets =
+            Lottos winningTickets =
                     lottoResult.getWinningTickets(lottoRank);
             displayWinning(lottoRank, winningTickets.size());
         }

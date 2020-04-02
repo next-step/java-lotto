@@ -4,23 +4,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-    private Map<LottoRank, List<Lotto>> winningTickets;
+    private Map<LottoRank, Lottos> winningTickets;
     private Amount investmentAmount;
 
-    public LottoResult(List<Lotto> lottos,
+    public LottoResult(Lottos lottos,
                        LottoWinningNumber lottoWinningNumber,
                        Amount investmentAmount) {
         this.investmentAmount = investmentAmount;
         setWinningTickets(lottos, lottoWinningNumber);
     }
 
-    public LottoResult(List<Lotto> lottos,
+    public LottoResult(Lottos lottos,
                        LottoWinningNumber lottoWinningNumber,
                        int investmentAmount) {
         this(lottos, lottoWinningNumber, new Amount(investmentAmount));
     }
 
-    private void setWinningTickets(List<Lotto> lottos,
+    private void setWinningTickets(Lottos lottos,
                                    LottoWinningNumber lottoWinningNumber) {
         initWinningTickets();
         for (Lotto lotto : lottos) {
@@ -32,14 +32,12 @@ public class LottoResult {
     private void initWinningTickets() {
         this.winningTickets = new HashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
-            this.winningTickets.put(lottoRank, new ArrayList<>());
+            this.winningTickets.put(lottoRank, new Lottos());
         }
     }
 
-    public List<Lotto> getWinningTickets(LottoRank lottoRank) {
-        return winningTickets.get(lottoRank).stream()
-                .map(Lotto::new)
-                .collect(Collectors.toList());
+    public Lottos getWinningTickets(LottoRank lottoRank) {
+        return new Lottos(winningTickets.get(lottoRank));
     }
 
     public double getRateOfReturn() {

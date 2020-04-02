@@ -11,15 +11,15 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    private List<Lotto> lottos;
+    private Lottos lottos;
     private LottoWinningNumber lottoWinningNumber;
 
     @BeforeEach
     void setUp() {
-        lottos = Arrays.asList(
+        lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45))
-        );
+        ));
         lottoWinningNumber = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4,
                 5, 6), 45);
     }
@@ -41,9 +41,9 @@ public class LottoResultTest {
     @DisplayName("수익률을 구할 수 있다.")
     @Test
     void getRateOfReturn() {
-        List<Lotto> lottos = Arrays.asList(
+        Lottos lottos = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
-        );
+        ));
         LottoWinningNumber lottoWinningNumber =
                 new LottoWinningNumber(Arrays.asList(4,
                         5, 6, 7, 8, 9), 45);
