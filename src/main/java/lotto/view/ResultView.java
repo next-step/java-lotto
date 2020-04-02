@@ -11,15 +11,15 @@ import static lotto.domain.LottoRank.*;
 
 public class ResultView {
 
-    private static final String PURCHASE_COUNT_MSG_FORMAT = "%d개를 구매했습니다.";
+    private static final String PURCHASE_COUNT_MSG_FORMAT = "수동으로 %d장, 자동으로 %d징을 구매했습니다.";
     private static final String MATCH_NUMBER_COUNT_FORMAT = "%d개 일치 (%d%s)- %d개";
     private static final String MATCH_NUMBER_WITH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d%s) - %d개";
     private static final String NUMBERS_PRINT_FORMAT = "[%s]";
     private static final String EARNING_RATE_RESULT_FORMAT = "총 수익률을 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     private static final String LOTTO_RESULT_MSG = "당첨 통계";
-    private static final String SEPERATE_LINE = "---------";
-    public static final String LOTTO_NUM_DELIMITER = ", ";
+    private static final String SEPARATE_LINE = "---------";
+    private static final String LOTTO_NUM_DELIMITER = ", ";
 
     private static final String PROFIT = "이익";
     private static final String LOSS = "손해";
@@ -30,15 +30,20 @@ public class ResultView {
     private ResultView() {
     }
 
-    public static void print(LottoTicket lottoTicket) {
-        System.out.printf(PURCHASE_COUNT_MSG_FORMAT, lottoTicket.size());
+    public static void print(LottoTicket manualLottoTicket, LottoTicket autoLottoTicket) {
+        System.out.printf(PURCHASE_COUNT_MSG_FORMAT, manualLottoTicket.size(), autoLottoTicket.size());
         printLineBreak();
 
+        print(manualLottoTicket);
+        print(autoLottoTicket);
+
+        printLineBreak();
+    }
+
+    private static void print(LottoTicket lottoTicket) {
         for (LottoNumbers lottoNumbers : lottoTicket.getLotteryNumbers()) {
             print(lottoNumbers);
         }
-
-        printLineBreak();
     }
 
     private static void print(LottoNumbers lottoNumbers) {
@@ -57,7 +62,7 @@ public class ResultView {
 
     public static void printLottoResult(LottoResults results, Money inputMoney) {
         System.out.println(LOTTO_RESULT_MSG);
-        System.out.println(SEPERATE_LINE);
+        System.out.println(SEPARATE_LINE);
 
         for (LottoRank lottoRank : Arrays.asList(FIFTH, FOURTH, THIRD, SECOND, FIRST)) {
             if (lottoRank == SECOND) {
@@ -88,5 +93,9 @@ public class ResultView {
         }
 
         return PROFIT;
+    }
+
+    public static void printErrorMessage(Exception e) {
+        System.out.println(e.getMessage());
     }
 }

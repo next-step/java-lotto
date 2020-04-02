@@ -13,12 +13,12 @@ public enum LottoRank {
 
     private final int countOfMatch;
     private final Money prizeMoney;
-    private final BiPredicate<Integer, Boolean> biPredicate;
+    private final BiPredicate<Integer, Boolean> winningCondition;
 
-    LottoRank(int countOfMatch, Money prizeMoney, BiPredicate<Integer, Boolean> biPredicate) {
+    LottoRank(int countOfMatch, Money prizeMoney, BiPredicate<Integer, Boolean> winningCondition) {
         this.countOfMatch = countOfMatch;
         this.prizeMoney = prizeMoney;
-        this.biPredicate = biPredicate;
+        this.winningCondition = winningCondition;
     }
 
     public static LottoRank of(int countOfMatch, boolean matchBonus) {
@@ -27,7 +27,7 @@ public enum LottoRank {
         }
 
         return Stream.of(values())
-                .filter(lottoRank -> lottoRank.biPredicate.test(countOfMatch, matchBonus))
+                .filter(lottoRank -> lottoRank.winningCondition.test(countOfMatch, matchBonus))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("등수를 매길 수 없습니다."));
     }

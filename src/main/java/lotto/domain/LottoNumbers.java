@@ -64,14 +64,13 @@ public class LottoNumbers {
         return Objects.hash(orderedNumbers);
     }
 
-    public LottoRank rank(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("당첨 번호에 보너스 숫자가 포함되면 안된다.");
-        }
+    public LottoRank rank(WinningLottoNumbers winningLottoNumbers) {
+        LottoNumbers winningNumbers = winningLottoNumbers.getLottoNumbers();
+        LottoNumber bonusNumber = winningLottoNumbers.getLottoNumber();
         return LottoRank.of(countOfMatch(winningNumbers), contains(bonusNumber));
     }
 
-    private boolean contains(LottoNumber number) {
+    boolean contains(LottoNumber number) {
         return orderedNumbers.contains(number);
     }
 }

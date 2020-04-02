@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class LottoGenerator {
+public class LottoAutoGenerator {
 
-    private static final Money DEFAULT_LOTTO_PRICE = Money.won(1000);
     private static final Random random = new Random();
 
-    private LottoGenerator() {
+    private LottoAutoGenerator() {
     }
 
-    public static LottoTicket generateLottoTicket(Money inputMoney) {
-        int lottoCount = inputMoney.divide(DEFAULT_LOTTO_PRICE.getAmount()).intValue();
-
+    public static LottoTicket generateAutoLottoTicket(int lottoCount) {
         LottoTicket lottoTicket = new LottoTicket();
         for (int i = 0; i < lottoCount; i++) {
             lottoTicket.add(LottoNumbers.valueOf(generateRandomNumbers()));
@@ -37,11 +34,11 @@ public class LottoGenerator {
     }
 
     private static List<Integer> generateCandidates() {
-        List<Integer> from1To45 = new ArrayList<>();
+        List<Integer> candidates = new ArrayList<>();
         for (int i = LottoNumber.LOWER; i <= LottoNumber.UPPER; i++) {
-            from1To45.add(i);
+            candidates.add(i);
         }
-        return from1To45;
+        return candidates;
     }
 
 

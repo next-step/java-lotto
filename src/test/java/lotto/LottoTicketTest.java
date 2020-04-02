@@ -23,8 +23,8 @@ public class LottoTicketTest {
                 LottoNumbers.valueOf(1, 2, 3, 14, 23, 24), // 5
                 LottoNumbers.valueOf(24, 5, 7, 14, 23, 27) // MISS
         );
-
-        LottoResults results = lottoTicket.collectResults(winningNumbers, bonusNumber);
+        WinningLottoNumbers winningLottoNumbers = WinningLottoNumbers.valueOf(winningNumbers, bonusNumber);
+        LottoResults results = lottoTicket.collectResults(winningLottoNumbers);
 
         assertThat(results.countBy(LottoRank.FIRST)).isEqualTo(2);
         assertThat(results.countBy(LottoRank.SECOND)).isEqualTo(1);
@@ -34,4 +34,23 @@ public class LottoTicketTest {
         assertThat(results.countBy(LottoRank.MISS)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("LottoTicket 끼리 합칠 수 있어야 한다.")
+    public void mergeLottoTicketTest() {
+        LottoTicket oneLottoTicket = LottoTicket.with(
+                LottoNumbers.valueOf(1,2,3,4,5,6),
+                LottoNumbers.valueOf(1,2,3,4,5,7)
+        );
+        LottoTicket otherLottoTicket = LottoTicket.with(
+                LottoNumbers.valueOf(1,2,3,4,5,6),
+                LottoNumbers.valueOf(1,2,3,4,5,8)
+        );
+
+        LottoTicket mergeLottoTicket = oneLottoTicket.merge(otherLottoTicket);
+
+        assertThat(mergeLottoTicket.getLotteryNumbers()).containsExactly(
+                LottoNumbers.valueOf(1,2,3,4,5,6),
+                LottoNumbers.valueOf(1,2,3,4,5,7),
+                LottoNumbers.valueOf(1,2,3,4,5,8));
+    }
 }

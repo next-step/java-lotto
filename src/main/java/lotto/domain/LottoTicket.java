@@ -34,9 +34,20 @@ public class LottoTicket {
         return lotteryNumbers.size();
     }
 
-    public LottoResults collectResults(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    public LottoResults collectResults(WinningLottoNumbers winningLottoNumbers) {
         Map<LottoRank, List<LottoNumbers>> numbersGroupByPrize = lotteryNumbers.stream()
-                .collect(Collectors.groupingBy(lottoNumbers -> lottoNumbers.rank(winningNumbers, bonusNumber)));
+                .collect(Collectors.groupingBy(lottoNumbers -> lottoNumbers.rank(winningLottoNumbers)));
         return LottoResults.of(numbersGroupByPrize);
+    }
+
+    public LottoTicket merge(LottoTicket otherLottoTicket) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+
+        lottoNumbers.addAll(this.getLotteryNumbers());
+        lottoNumbers.addAll(otherLottoTicket.getLotteryNumbers());
+
+        return new LottoTicket(lottoNumbers.stream()
+                        .distinct()
+                        .collect(Collectors.toList()));
     }
 }

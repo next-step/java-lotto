@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class Money {
     public static final String CURRENCY = "원";
-    static final Money ZERO = Money.won(0);
+    public static final Money ZERO = Money.won(0);
+    public static final Money LOTTO_PRICE = Money.won(1000);
 
     private final BigDecimal amount;
 
@@ -29,12 +30,16 @@ public class Money {
         return new Money(this.amount.add((other.amount)));
     }
 
+    public Money minus(Money won) {
+        return new Money(this.amount.subtract(won.amount));
+    }
+
     public BigDecimal divide(Money other, int scale, RoundingMode roundingMode) {
         return divide(other.amount, scale, roundingMode);
     }
 
-    public BigDecimal divide(BigDecimal amount) {
-        return divide(amount, 0, RoundingMode.DOWN);
+    public int divideToInt(Money other) {
+        return divide(other, 0, RoundingMode.DOWN).intValue();
     }
 
     public BigDecimal divide(BigDecimal amount, int scale, RoundingMode roundingMode) {
@@ -56,5 +61,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    public boolean biggerThan(Money other) {
+        return this.amount.compareTo(other.amount) >= 1;
     }
 }
