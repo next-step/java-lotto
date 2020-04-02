@@ -10,11 +10,9 @@ public class Numbers {
     }
 
     public int sum() {
-        int sum = 0;
-        for (Number number : numbers) {
-            sum += number.get();
-        }
-        return sum;
+        return numbers.stream()
+                .map(Number::get)
+                .reduce(0, Integer::sum);
     }
 
 }

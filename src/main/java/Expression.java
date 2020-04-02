@@ -7,7 +7,7 @@ public class Expression {
 
     private static final String DEFAULT_DELIMITER = ",|:";
 
-    public static List<Number> split(String expression) {
+    public static List<Number> toArray(String expression) {
         if (isNullOrEmpty(expression)) {
             return new ArrayList<>();
         }
