@@ -9,7 +9,7 @@ public class LottoNumber {
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     static {
-        for (int i = LOTTO_START_NUMBER; i < LOTTO_END_NUMBER; i++) {
+        for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
