@@ -27,4 +27,12 @@ public class LottoNumberTest {
     public void stringCreate() {
         assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber("1"));
     }
+
+    @Test
+    public void compareTo() {
+        lottoNumber = new LottoNumber(2);
+        assertThat(lottoNumber.compareTo(new LottoNumber(2))).isEqualTo(0);
+        assertThat(lottoNumber.compareTo(new LottoNumber(1))).isEqualTo(1);
+        assertThat(lottoNumber.compareTo(new LottoNumber(3))).isEqualTo(-1);
+    }
 }
