@@ -1,12 +1,24 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoNumbersException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    private static final int LOTTO_SIZE = 6;
+
     private final List<Integer> lottoNumbers;
 
+    public Lotto() {
+        lottoNumbers = NumberGenerator.generateLotto(LOTTO_SIZE);
+    }
+
     public Lotto(List<Integer> lottoNumbers) {
+        if (Objects.isNull(lottoNumbers) || lottoNumbers.size() != LOTTO_SIZE) {
+            throw new InvalidLottoNumbersException();
+        }
+
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 

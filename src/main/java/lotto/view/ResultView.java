@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.IssuedLotto;
-import lotto.domain.Lotto;
 import lotto.domain.Winning;
 
 import java.util.Map;
@@ -35,8 +34,17 @@ public class ResultView {
 
             winningPrice += matchCount * winning.getWinningPrice();
         }
-        stringBuilder.append(String.format(RESULT_YIELD_LOSE_FORMAT, ((float) winningPrice / (float) paidMoney)));
+        stringBuilder.append(getYieldResult((float) winningPrice / (float) paidMoney));
+
 
         System.out.println(stringBuilder.toString());
+    }
+
+    private static String getYieldResult(float yield) {
+        if (yield > 1) {
+            return String.format(RESULT_YIELD_WIN_FORMAT, yield);
+        }
+
+        return String.format(RESULT_YIELD_LOSE_FORMAT, yield);
     }
 }

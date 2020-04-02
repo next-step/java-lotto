@@ -40,6 +40,6 @@ public class LottoTest {
         List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(expect);
 
-        assertThat(lotto.toString("[%s]\n", ", ")).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        assertThat(lotto.toString("[%s]", ", ")).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

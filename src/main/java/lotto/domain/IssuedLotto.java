@@ -9,7 +9,7 @@ public class IssuedLotto {
         issuedLotto = new HashSet<>();
 
         for (int i = 0; i < count; i++) {
-            issuedLotto.add(new Lotto(NumberGenerator.generateOneSet()));
+            issuedLotto.add(new Lotto());
         }
     }
 
