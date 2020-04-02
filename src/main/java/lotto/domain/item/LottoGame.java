@@ -10,8 +10,6 @@ import java.util.List;
 
 public class LottoGame {
 
-    private static final double LOTTO_PRICE = 1000;
-
     private int playGameCount;
     private LottoTickets lottoTickets;
 
@@ -19,7 +17,7 @@ public class LottoGame {
     }
 
     public LottoGame(Money money) {
-        this.playGameCount = money.getHowManyBuyItem(new Money(LOTTO_PRICE));
+        this.playGameCount = money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
     }
 
     public LottoGame(LottoTickets lottoTickets) {
@@ -59,7 +57,7 @@ public class LottoGame {
         LottoDto dto = new LottoDto();
         Money prize = getAllEarningPrize(winTicket);
         int howManyBuyItem = this.lottoTickets.size();
-        Money buyAmount = Money.buyItemAmount(LOTTO_PRICE, howManyBuyItem);
+        Money buyAmount = Money.buyItemAmount(LottoTicket.PRICE, howManyBuyItem);
 
         double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
 
