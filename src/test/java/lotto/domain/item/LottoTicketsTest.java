@@ -153,4 +153,31 @@ class LottoTicketsTest {
         //then
         assertThat(lottoTickets == clone).isFalse();
     }
+
+    @DisplayName("주어진 수 만큼 랜덤 로또를 만들어 낸다")
+    @Test
+    public void lottoTicketGenerate_success() throws Exception {
+        //given
+        LottoTickets tickets = LottoTickets.createLottoToAuto(3);
+
+        //then
+        assertThat(tickets.size()).isEqualTo(3);
+    }
+
+    @DisplayName("수동으로 입력한 번로를 이용하여 로또 티켓 생성")
+    @Test
+    public void generatePassivityLotto_sucess() throws Exception {
+        //given
+        LottoNumbers lottoNumbers1 = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers2 = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoNumbers> numbers =
+                new ArrayList<>(Arrays.asList(lottoNumbers1, lottoNumbers2));
+
+        //when
+        LottoTickets tickets = LottoTickets.createLottoToPassivity(numbers);
+
+
+        //then
+        assertThat(tickets.size()).isEqualTo(2);
+    }
 }

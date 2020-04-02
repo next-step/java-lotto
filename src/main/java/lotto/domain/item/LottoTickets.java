@@ -2,12 +2,14 @@ package lotto.domain.item;
 
 import enums.LottoPrize;
 import lotto.domain.Money;
+import lotto.domain.strategy.LottoNumberAutoGenerator;
 import lotto.exception.CloneFailException;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoTickets implements Cloneable {
 
@@ -15,6 +17,22 @@ public class LottoTickets implements Cloneable {
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
+    }
+
+    public static LottoTickets createLottoToAuto(int count) {
+        List<LottoTicket> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            LottoNumbers numbers = LottoNumbers.createLottoNumbersUseInteger(LottoNumberAutoGenerator.generateLottoNumber());
+            result.add(new LottoTicket(numbers));
+        }
+        return new LottoTickets(result);
+    }
+
+    public static LottoTickets createLottoToPassivity(List<LottoNumbers> numbers) {
+        List<LottoTicket> tickets = numbers.stream()
+                .map(LottoTicket::new)
+                .collect(Collectors.toList());
+        return new LottoTickets(tickets);
     }
 
     public int findWinLottoCountFromRank(LottoPrize lottoPrize, WinLottoTicket winTicket) {
