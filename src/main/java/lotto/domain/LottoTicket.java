@@ -23,7 +23,7 @@ public class LottoTicket {
             throw new IllegalArgumentException(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber.getNumber()));
         }
         int matchCount = lottoNumbers.match(winningNumbers);
-        boolean bonusMatch = lottoNumbers.getLottoNumbers().contains(bonusNumber);
+        boolean bonusMatch = lottoNumbers.contains(bonusNumber);
         return new LottoTicketResult(matchCount, bonusMatch);
     }
 

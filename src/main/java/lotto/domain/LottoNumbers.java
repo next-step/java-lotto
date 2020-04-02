@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -48,5 +49,11 @@ public class LottoNumbers {
 
     public static LottoNumbers of(List<LottoNumber> lottoNumbers) {
         return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers of(int... lottoNumbers) {
+        return new LottoNumbers(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 }

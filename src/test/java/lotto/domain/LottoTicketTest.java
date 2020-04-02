@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -73,12 +74,12 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("당첨 티켓과 비교하여 당첨 번호 size 확인")
+    @DisplayName("당첨 번호와 비교하여 당첨 번호 size 확인")
     void getMatchCountByInputWinningTicket() {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num1, num6));
-        LottoTicket winningTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num7, num6));
+        LottoNumbers winningNumbers = LottoNumbers.of(Arrays.asList(num2, num3, num5, num4, num7, num6));
 
-        LottoTicketResult lottoTicketResult = lottoTicket.checkWinning(winningTicket, LottoNumber.of(5));
+        LottoTicketResult lottoTicketResult = lottoTicket.checkWinning(winningNumbers, num1);
 
         assertThat(lottoTicketResult.getMatchCount()).isEqualTo(5);
     }

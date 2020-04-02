@@ -15,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class BuyerTest {
     private Buyer buyer;
-    private LottoTicket winningTicket;
+    private LottoNumbers winningNumbers;
 
     @BeforeEach
     void setUp() {
         buyer = new Buyer();
-        winningTicket = createTicket(1, 2, 3, 4, 5, 6);
+        winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
     }
 
     @ParameterizedTest
@@ -38,7 +38,7 @@ public class BuyerTest {
         LottoTicket fourthTicket = createTicket(1, 2, 3, 14, 15, 16);
 
         Buyer newBuyer = new Buyer(Arrays.asList(thirdTicket, fourthTicket));
-        BuyerResult result = newBuyer.getResult(winningTicket, LottoNumber.of(17));
+        BuyerResult result = newBuyer.getResult(winningNumbers, LottoNumber.of(17));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(752.5);
@@ -51,7 +51,7 @@ public class BuyerTest {
         LottoTicket fourthTicket = createTicket(1, 2, 3, 4, 5, 16);
 
         Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
-        BuyerResult result = newBuyer.getResult(winningTicket, LottoNumber.of(16));
+        BuyerResult result = newBuyer.getResult(winningNumbers, LottoNumber.of(16));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(30000.0);
@@ -65,7 +65,7 @@ public class BuyerTest {
 
         Buyer newBuyer = new Buyer(Arrays.asList(secondTicket));
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
-            newBuyer.getResult(winningTicket, LottoNumber.of(bonusNumber));
+            newBuyer.getResult(winningNumbers, LottoNumber.of(bonusNumber));
         }).withMessage(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber));
     }
 
