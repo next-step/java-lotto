@@ -6,7 +6,7 @@ public class ResultView {
 
     public static void printLoots(LottoDto dto) {
         System.out.println(dto.getTickets().size() + "개를 구매 했습니다.");
-        for (LottoTicket lotto : dto.getTickets()) {
+        for (LottoTicket lotto : dto.getTickets().getTickets()) {
             System.out.println(lotto);
         }
     }
