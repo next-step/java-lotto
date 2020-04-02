@@ -1,6 +1,6 @@
-package lotto.controller;
+package lotto.domain;
 
-import lotto.domain.LottoNumber;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ public class LottoGameTest {
                 new LottoNumber(5),
                 new LottoNumber(6));
 
-        assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(6);
+        Assertions.assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(6);
     }
 
     @Test
