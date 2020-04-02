@@ -11,14 +11,14 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    private List<LottoTicket> lottoTickets;
+    private List<Lotto> lottos;
     private LottoWinningNumber lottoWinningNumber;
 
     @BeforeEach
     void setUp() {
-        lottoTickets = Arrays.asList(
-                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45))
+        lottos = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 45))
         );
         lottoWinningNumber = new LottoWinningNumber(Arrays.asList(1, 2, 3, 4,
                 5, 6), 45);
@@ -27,7 +27,7 @@ public class LottoResultTest {
     @DisplayName("로또 결과를 계산하여 저장할 수 있다.")
     @Test
     void addWinner() {
-        LottoResult lottoResult = new LottoResult(lottoTickets,
+        LottoResult lottoResult = new LottoResult(lottos,
                 lottoWinningNumber, 1000);
 
         assertThat(lottoResult.getWinningTickets(LottoRank.FIRST).size())
@@ -41,13 +41,13 @@ public class LottoResultTest {
     @DisplayName("수익률을 구할 수 있다.")
     @Test
     void getRateOfReturn() {
-        List<LottoTicket> lottoTickets = Arrays.asList(
-                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
         LottoWinningNumber lottoWinningNumber =
                 new LottoWinningNumber(Arrays.asList(4,
                         5, 6, 7, 8, 9), 45);
-        LottoResult lottoResult = new LottoResult(lottoTickets,
+        LottoResult lottoResult = new LottoResult(lottos,
                 lottoWinningNumber, 50000);
         assertThat(lottoResult.getRateOfReturn()).isEqualTo(0.1);
     }

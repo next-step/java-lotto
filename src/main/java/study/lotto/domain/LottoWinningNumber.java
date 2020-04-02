@@ -51,11 +51,11 @@ public class LottoWinningNumber {
         return winningNumbers.size();
     }
 
-    public LottoRank rank(LottoTicket lottoTicket) {
-        int matchCount = (int) lottoTicket.getLottoNumbers().stream()
+    public LottoRank rank(Lotto lotto) {
+        int matchCount = (int) lotto.getLottoNumbers().stream()
                 .filter(lottoNumber -> winningNumbers.contains(lottoNumber))
                 .count();
-        boolean matchBonus = lottoTicket.contains(bonusNumber);
+        boolean matchBonus = lotto.contains(bonusNumber);
 
         return LottoRank.valueOf(matchCount, matchBonus);
     }

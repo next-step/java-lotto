@@ -1,42 +1,54 @@
 package study.lotto;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import study.lotto.domain.*;
+import study.lotto.domain.Lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
-    private LottoTicketIssuer lottoTicketIssuer;
-
-    @BeforeEach
-    void setUp() {
-        lottoTicketIssuer =
-                () -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-    }
-
-    @DisplayName("입력한 금액만큼의 로또티켓을 생성한다.")
-    @ParameterizedTest
-    @CsvSource({"14000,14", "3900,3", "200,0"})
-    void buy(int amount, int expect) {
-        assertThat(
-                new Lotto(amount, lottoTicketIssuer).getLottoTickets().size())
-                .isEqualTo(expect);
-    }
-
-    @DisplayName("당첨번호와 3개 이상 일치하면 당첨된것이다.")
+    @DisplayName("로또티켓 한장에는 중복되지 않는 6개의 로또번호가 들어간다.")
     @Test
-    void winning() {
-        LottoWinningNumber lottoWinningNumber =
-                new LottoWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 45);
-        Lotto lotto = new Lotto(1000, lottoTicketIssuer);
-        LottoResult lottoResult = lotto.result(lottoWinningNumber);
-        assertThat(lottoResult.getWinningTickets(LottoRank.FIRST).size())
-                .isEqualTo(1);
+    void oneLotto() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        assertThat(new Lotto(lottoNumbers).size()).isEqualTo(6);
+    }
+
+    @DisplayName("중복된 숫자가 포함되어 있을 경우 에러발생")
+    @Test
+    void duplicatedNumber() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    List<Integer> lottoNumbers =
+                            Arrays.asList(1, 2, 2, 4, 5, 6);
+                    new Lotto(lottoNumbers);
+                });
+    }
+
+    @DisplayName("숫자가 총 6개가 아니면 에러발생")
+    @Test
+    void sixNumbers() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5);
+                    new Lotto(lottoNumbers);
+                });
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> {
+                    List<Integer> lottoNumbers =
+                            Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+                    new Lotto(lottoNumbers);
+                });
+    }
+
+    @DisplayName("로또티켓 한장은 천원이다.")
+    @Test
+    void price() {
+        assertThat(Lotto.PRICE).isEqualTo(1000);
     }
 }
