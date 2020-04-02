@@ -4,11 +4,10 @@ import lotto.domain.item.LottoTicket;
 
 public class ResultView {
 
-    private static final String BUY_COUNT_MESSAGE = "개를 구매 했습니다.";
+    private static final String BUY_COUNT_MESSAGE = "수동으로 %s장, 자동으로 %s장을 구매 했습니다.";
 
-
-    private static void print(int count) {
-        System.out.println(count + BUY_COUNT_MESSAGE);
+    public static void printLottoBuyCount(int pass, int auto) {
+        System.out.println(String.format(BUY_COUNT_MESSAGE, pass, auto));
     }
 
     public static void printLoots(LottoDto dto) {
