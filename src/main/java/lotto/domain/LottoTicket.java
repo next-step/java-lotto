@@ -39,11 +39,10 @@ public class LottoTicket {
 
     LottoTicketResult checkWinning(LottoTicket winningTicket, LottoNumber bonusNumber) {
         verifyBonusNumber(bonusNumber, winningTicket);
-        int matchCount = (int) winningTicket.lottoNumbers
-                .stream()
-                .filter(winningNumber -> this.lottoNumbers.contains(winningNumber))
+        int matchCount = (int) lottoNumbers.stream()
+                .filter(winningTicket::contains)
                 .count();
-        boolean bonusMatch = this.lottoNumbers.contains(bonusNumber);
+        boolean bonusMatch = lottoNumbers.contains(bonusNumber);
         return new LottoTicketResult(matchCount, bonusMatch);
     }
 
