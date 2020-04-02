@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,5 +22,11 @@ public class LottoNumberTest {
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             LottoNumber.of(input);
         }).withMessage(String.format("%d는 1~45 숫자 사이의 번호가 아닙니다", input));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 22, 33})
+    void cachingByCreation(int input) {
+        assertThat(LottoNumber.of(input) == LottoNumber.of(input));
     }
 }
