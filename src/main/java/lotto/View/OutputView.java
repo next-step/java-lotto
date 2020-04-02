@@ -30,7 +30,7 @@ public class OutputView {
         });
     }
 
-    public void LottoResult(Lottos lottos, List<Integer> lastweekWinLotto) {
+    public void lottoResult(Lottos lottos, List<Integer> lastweekWinLotto) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         Map<Integer, Integer> winList = lottos.match(lastweekWinLotto);

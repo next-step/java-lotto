@@ -47,6 +47,6 @@ public class LottoController {
     }
 
     public void LottoResult(Lottos lottos, List<Integer> lastweekWinLotto) {
-        outputView.LottoResult(lottos, lastweekWinLotto);
+        outputView.lottoResult(lottos, lastweekWinLotto);
     }
 }
