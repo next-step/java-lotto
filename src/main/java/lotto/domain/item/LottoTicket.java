@@ -6,6 +6,8 @@ import java.util.List;
 
 public class LottoTicket extends Lotto {
 
+    public static final double PRICE = 1000;
+
     public LottoTicket(List<LottoNumber> numbers) {
         super(numbers);
     }
