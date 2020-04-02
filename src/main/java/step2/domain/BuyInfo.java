@@ -31,5 +31,4 @@ public class BuyInfo {
         this.buyLottoTotalPrice = totalPrice;
         this.buyLottoCount = totalPrice / pricePerGame;
     }
-
 }

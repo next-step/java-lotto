@@ -7,7 +7,11 @@ public class Lotto {
     private static final int LOTTO_END_NUM = 45;
     private static final int SELECT_NUMBER = 6;
     private int price = 1000;
-    private Set lottoList;
+    private Set<Integer> lottoList = new HashSet<>();
+
+    public Set<Integer> getLottoList() {
+        return lottoList;
+    }
 
     public Lotto() {
         getLottoNumberList();
@@ -17,12 +21,7 @@ public class Lotto {
         return price;
     }
 
-    public Set getLottoList() {
-        return lottoList;
-    }
-
     public void getLottoNumberList() {
-        Set lottoList = new HashSet<>();
         for (int i = LOTTO_START_NUM; i <= LOTTO_END_NUM; i++) {
             lottoList.add(i);
         }
@@ -33,7 +32,7 @@ public class Lotto {
         List lottoList = new ArrayList(this.lottoList);
         List<Integer> lottoNumberList = lottoList;
         Collections.shuffle(lottoNumberList);
-        List<Integer> randomNumberList = lottoNumberList.subList(0, SELECT_NUMBER);
+        List<Integer> randomNumberList = new ArrayList<>(lottoNumberList.subList(0, SELECT_NUMBER));
         Collections.sort(randomNumberList);
         return randomNumberList;
     }

@@ -10,7 +10,6 @@ public class ControlLottoGame {
         BuyInfo buyInfo = new BuyInfo(totalPrice, lotto.getPrice());
         Set<List<Integer>> buyLottoList = new HashSet<>();
         for (int i = 0; i < buyInfo.getBuyLottoCount(); i++) {
-            lotto.getLottoNumberList();
             List<Integer> lottoList = lotto.extractLottoNumber();
             buyLottoList.add(lottoList);
         }

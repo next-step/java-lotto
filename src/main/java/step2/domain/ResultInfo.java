@@ -50,8 +50,8 @@ public class ResultInfo {
 
     public int match(int number) {
         return (int) matchCountList.stream()
-                .filter(d -> number == d)
-                .count();
+        .filter(d -> number == d)
+        .count();
     }
 
     public void addProfit(BigDecimal multiply) {
