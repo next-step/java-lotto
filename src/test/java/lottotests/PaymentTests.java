@@ -1,4 +1,4 @@
-package lotto_tests;
+package lottotests;
 
 import lotto.model.wrapper.Payment;
 import org.junit.jupiter.api.DisplayName;

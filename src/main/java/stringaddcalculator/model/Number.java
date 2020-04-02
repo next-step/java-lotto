@@ -1,12 +1,17 @@
-package string_add_calculator.model;
+package stringaddcalculator.model;
 
 import java.util.Objects;
 
 public class Number {
+    public static final Number ZERO = new Number(0);
 
     private final int number;
 
     private Number(int number) {
+        if (number < 0) {
+            throw new RuntimeException("number must be greater than zero.");
+        }
+
         this.number = number;
     }
 
@@ -15,13 +20,7 @@ public class Number {
     }
 
     public static Number of(final String numberString) {
-        int number = Integer.parseInt(numberString);
-
-        if (number < 0) {
-            throw new RuntimeException("number must be greater than zero.");
-        }
-
-        return new Number(number);
+        return new Number(Integer.parseInt(numberString));
     }
 
     public Number add(Number another) {

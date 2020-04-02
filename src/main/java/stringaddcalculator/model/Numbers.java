@@ -1,4 +1,4 @@
-package string_add_calculator.model;
+package stringaddcalculator.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +22,7 @@ public class Numbers {
     }
 
     public Number sum() {
-        Number result = Number.of(0);
+        Number result = Number.ZERO;
 
         for (Number number : numbers) {
             result = number.add(result);

@@ -3,11 +3,10 @@ package lotto.view;
 import lotto.model.LottoTickets;
 import lotto.model.LottoResult;
 import lotto.model.LottoResults;
-import lotto.model.dto.LottoWinResult;
-import lotto.model.dto.LottoWinResults;
+import lotto.model.dto.LottoWinStatResult;
+import lotto.model.dto.LottoWinStatResults;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 public class OutputView {
     private static final String RESULT_FORMAT = "%d개 일치 (%d원) - %d개";
@@ -28,27 +27,27 @@ public class OutputView {
     public static void printLottoResults(final LottoResults lottoResults) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        LottoWinResults lottoWinResults = lottoResults.getWinResult();
-        lottoWinResults.getWinResult()
+        LottoWinStatResults lottoWinStatResults = lottoResults.getWinStatResults();
+        lottoWinStatResults.getWinResult()
                 .forEach(OutputView::printEachWinResult);
         printProfitResult(lottoResults.profit());
     }
 
-    private static void printEachWinResult(final LottoWinResult lottoWinResult) {
-        if (lottoWinResult.equals(LottoResult.FIVE_WITH_BONUS)) {
-            printWinResult(lottoWinResult, RESULT_WITH_BONUS_FORMAT);
+    private static void printEachWinResult(final LottoWinStatResult lottoWinStatResult) {
+        if (LottoResult.FIVE_WITH_BONUS.equals(lottoWinStatResult)) {
+            printWinResult(lottoWinStatResult, RESULT_WITH_BONUS_FORMAT);
             return;
         }
 
-        printWinResult(lottoWinResult, RESULT_FORMAT);
+        printWinResult(lottoWinStatResult, RESULT_FORMAT);
     }
 
-    private static void printWinResult(final LottoWinResult lottoWinResult, final String resultFormat) {
+    private static void printWinResult(final LottoWinStatResult lottoWinStatResult, final String resultFormat) {
         System.out.println(String.format(
                 resultFormat,
-                lottoWinResult.getMatchCount(),
-                lottoWinResult.getPrice(),
-                lottoWinResult.getCount()));
+                lottoWinStatResult.getMatchCount(),
+                lottoWinStatResult.getPrice(),
+                lottoWinStatResult.getCount()));
     }
 
     private static void printProfitResult(final BigDecimal profit) {

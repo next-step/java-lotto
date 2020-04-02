@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.model.dto.LottoWinResults;
+import lotto.model.dto.LottoWinStatResults;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -27,13 +27,13 @@ public class LottoResults {
         return lottoResults.getOrDefault(lottoResult, 0L);
     }
 
-    public LottoWinResults getWinResult() {
+    public LottoWinStatResults getWinStatResults() {
         Map<LottoResult, Long> result = new LinkedHashMap<>();
         Arrays.stream(LottoResult.values())
                 .forEach(lottoResult -> result.put(lottoResult, 0L));
 
         result.putAll(this.lottoResults);
-        return LottoWinResults.newInstance(result);
+        return LottoWinStatResults.newInstance(result);
     }
 
     public BigDecimal profit() {

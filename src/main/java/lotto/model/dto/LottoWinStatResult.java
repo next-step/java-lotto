@@ -2,11 +2,11 @@ package lotto.model.dto;
 
 import lotto.model.LottoResult;
 
-public class LottoWinResult {
+public class LottoWinStatResult {
     private final LottoResult lottoResult;
     private final Long count;
 
-    public LottoWinResult(final LottoResult lottoResult, final Long count) {
+    public LottoWinStatResult(final LottoResult lottoResult, final Long count) {
         this.lottoResult = lottoResult;
         this.count = count;
     }

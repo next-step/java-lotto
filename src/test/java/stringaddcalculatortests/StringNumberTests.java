@@ -1,4 +1,4 @@
-package string_add_calculator_tests;
+package stringaddcalculatortests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import string_add_calculator.model.Number;
-import string_add_calculator.model.Numbers;
+import stringaddcalculator.model.Number;
+import stringaddcalculator.model.Numbers;
 
 import java.util.Arrays;
 import java.util.Collections;

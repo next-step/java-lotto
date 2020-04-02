@@ -1,12 +1,12 @@
-package string_add_calculator_tests;
+package stringaddcalculatortests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import string_add_calculator.StringAddCalculator;
-import string_add_calculator.model.Expression;
-import string_add_calculator.model.Number;
+import stringaddcalculator.StringAddCalculator;
+import stringaddcalculator.model.Expression;
+import stringaddcalculator.model.Number;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

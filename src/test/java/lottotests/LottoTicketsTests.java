@@ -1,4 +1,4 @@
-package lotto_tests;
+package lottotests;
 
 import lotto.model.*;
 import lotto.model.wrapper.LottoNumber;

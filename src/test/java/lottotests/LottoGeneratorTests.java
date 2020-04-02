@@ -1,4 +1,4 @@
-package lotto_tests;
+package lottotests;
 
 import lotto.AutomaticLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
