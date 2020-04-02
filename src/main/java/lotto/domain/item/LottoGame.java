@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain.item;
 
 import enums.LottoPrize;
 import lotto.domain.Money;
