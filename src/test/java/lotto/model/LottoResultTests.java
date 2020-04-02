@@ -2,8 +2,10 @@ package lotto.model;
 
 import lotto.model.LottoBonusMatchResult;
 import lotto.model.LottoResult;
+import lotto.model.wrapper.LottoMatchCount;
 import lotto.model.wrapper.LottoResultMatchId;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,12 +32,11 @@ public class LottoResultTests {
     public void generateLottoAbnormalResultTests(final LottoResultMatchId matchCount) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoResult.of(matchCount))
-                .withMessageContaining("match count must between 0 and 6.");
+                .withMessageContaining("Unacceptable Match Id.");
     }
 
     @DisplayName("로또 결과 파라미터 테스트")
-    @ParameterizedTest
-    @MethodSource("generateLottoAbnormalResultCases")
+    @Test
     public void lottoResultTests() {
         assertThat(LottoResult.FOUR.getPrice()).isEqualTo(50_000L);
         assertTrue(LottoResult.TWO.isBlank());
@@ -47,19 +48,19 @@ public class LottoResultTests {
         return Stream.of(
                 Arguments.of(LottoResultMatchId.newInstance(0, false)),
                 Arguments.of(LottoResultMatchId.newInstance(1, false)),
-                Arguments.of(LottoResultMatchId.newInstance(2, LottoBonusMatchResult.ANYWAY)),
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(2), LottoBonusMatchResult.ANYWAY)),
                 Arguments.of(LottoResultMatchId.newInstance(3, false)),
-                Arguments.of(LottoResultMatchId.newInstance(4, LottoBonusMatchResult.ANYWAY)),
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusMatchResult.ANYWAY)),
                 Arguments.of(LottoResultMatchId.newInstance(5, false)),
                 Arguments.of(LottoResultMatchId.newInstance(5, true)),
-                Arguments.of(LottoResultMatchId.newInstance(6, LottoBonusMatchResult.ANYWAY)));
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(6), LottoBonusMatchResult.ANYWAY)));
     }
 
     private static Stream<Arguments> generateLottoAbnormalResultCases() {
         return Stream.of(
-                Arguments.of(LottoResultMatchId.newInstance(7, true)),
-                Arguments.of(LottoResultMatchId.newInstance(-5, LottoBonusMatchResult.UN_MATCH)),
-                Arguments.of(LottoResultMatchId.newInstance(5, LottoBonusMatchResult.ANYWAY)));
+                Arguments.of(LottoResultMatchId.newInstance(6, LottoBonusMatchResult.UN_MATCH)),
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusMatchResult.UN_MATCH))
+        );
     }
 
 }
