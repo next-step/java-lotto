@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.model.wrapper.LottoMatchCount;
+import lotto.model.wrapper.LottoPrice;
 import lotto.model.wrapper.LottoResultMatchId;
 
 import java.util.Collections;
@@ -11,14 +12,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LottoResult {
-    NONE(LottoResultMatchId.newInstance(LottoMatchCount.of(0), LottoBonusMatchResult.ANYWAY), 0L),
-    ONE(LottoResultMatchId.newInstance(LottoMatchCount.of(1), LottoBonusMatchResult.ANYWAY), 0L),
-    TWO(LottoResultMatchId.newInstance(LottoMatchCount.of(2), LottoBonusMatchResult.ANYWAY), 0L),
-    THREE(LottoResultMatchId.newInstance(LottoMatchCount.of(3), LottoBonusMatchResult.ANYWAY), 5_000L),
-    FOUR(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusMatchResult.ANYWAY), 50_000L),
-    FIVE(LottoResultMatchId.newInstance(LottoMatchCount.of(5), LottoBonusMatchResult.UN_MATCH), 1_500_000L),
-    FIVE_WITH_BONUS(LottoResultMatchId.newInstance(LottoMatchCount.of(5), LottoBonusMatchResult.MATCH), 30_000_000L),
-    SIX(LottoResultMatchId.newInstance(LottoMatchCount.of(6), LottoBonusMatchResult.ANYWAY), 2_000_000_000L),
+    NONE(0, LottoBonusNumberMatch.ANYWAY, 0L),
+    ONE(1, LottoBonusNumberMatch.ANYWAY, 0L),
+    TWO(2, LottoBonusNumberMatch.ANYWAY, 0L),
+    THREE(3, LottoBonusNumberMatch.ANYWAY, 5_000L),
+    FOUR(4, LottoBonusNumberMatch.ANYWAY, 50_000L),
+    FIVE(5, LottoBonusNumberMatch.UN_MATCH, 1_500_000L),
+    FIVE_WITH_BONUS(5, LottoBonusNumberMatch.MATCH, 30_000_000L),
+    SIX(6, LottoBonusNumberMatch.ANYWAY, 2_000_000_000L),
     ;
 
     private static final Map<LottoResultMatchId, LottoResult> LOTTO_RESULTS = Collections.unmodifiableMap(
@@ -26,11 +27,11 @@ public enum LottoResult {
                     .collect(Collectors.toMap(LottoResult::getLottoMatchCount, Function.identity())));
 
     private final LottoResultMatchId matchCount;
-    private final long price;
+    private final LottoPrice price;
 
-    LottoResult(final LottoResultMatchId matchCount, final long price) {
-        this.matchCount = matchCount;
-        this.price = price;
+    LottoResult(final int matchCount, final LottoBonusNumberMatch lottoBonusNumberMatch, final long price) {
+        this.matchCount = LottoResultMatchId.newInstance(LottoMatchCount.of(matchCount), lottoBonusNumberMatch);
+        this.price = LottoPrice.of(price);
     }
 
     public static LottoResult of(final LottoResultMatchId lottoResultMatchId) {
@@ -43,11 +44,11 @@ public enum LottoResult {
     }
 
     public long getPrice() {
-        return price;
+        return price.getPrice();
     }
 
     public boolean isBlank() {
-        return price == 0L;
+        return price.equals(LottoPrice.of(0L));
     }
 
     private LottoResultMatchId getLottoMatchCount() {

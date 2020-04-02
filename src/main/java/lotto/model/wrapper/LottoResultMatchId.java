@@ -1,33 +1,33 @@
 package lotto.model.wrapper;
 
-import lotto.model.LottoBonusMatchResult;
+import lotto.model.LottoBonusNumberMatch;
 
 import java.util.Objects;
 
 public class LottoResultMatchId {
 
     private final LottoMatchCount matchCount;
-    private final LottoBonusMatchResult lottoBonusMatchResult;
+    private final LottoBonusNumberMatch lottoBonusNumberMatch;
 
-    private LottoResultMatchId(final LottoMatchCount matchCount, final LottoBonusMatchResult lottoBonusMatchResult) {
+    private LottoResultMatchId(final LottoMatchCount matchCount, final LottoBonusNumberMatch lottoBonusNumberMatch) {
         this.matchCount = matchCount;
-        this.lottoBonusMatchResult = lottoBonusMatchResult;
+        this.lottoBonusNumberMatch = lottoBonusNumberMatch;
     }
 
-    public static LottoResultMatchId newInstance(final LottoMatchCount matchCount, final LottoBonusMatchResult lottoBonusMatchResult) {
-        return new LottoResultMatchId(matchCount, lottoBonusMatchResult);
+    public static LottoResultMatchId newInstance(final LottoMatchCount matchCount, final LottoBonusNumberMatch lottoBonusNumberMatch) {
+        return new LottoResultMatchId(matchCount, lottoBonusNumberMatch);
     }
 
     public static LottoResultMatchId newInstance(final LottoMatchCount matchCount, final boolean matchBonusNumber) {
-        return new LottoResultMatchId(matchCount, LottoBonusMatchResult.of(matchCount, matchBonusNumber));
+        return new LottoResultMatchId(matchCount, LottoBonusNumberMatch.of(matchCount, matchBonusNumber));
     }
 
     public static LottoResultMatchId newInstance(final int matchCount, final boolean matchBonusNumber) {
         return newInstance(LottoMatchCount.of(matchCount), matchBonusNumber);
     }
 
-    public static LottoResultMatchId newInstance(final int matchCount, LottoBonusMatchResult lottoBonusMatchResult) {
-        return newInstance(LottoMatchCount.of(matchCount), lottoBonusMatchResult);
+    public static LottoResultMatchId newInstance(final int matchCount, LottoBonusNumberMatch lottoBonusNumberMatch) {
+        return newInstance(LottoMatchCount.of(matchCount), lottoBonusNumberMatch);
     }
 
     public int toInt() {
@@ -45,11 +45,11 @@ public class LottoResultMatchId {
         if (!(o instanceof LottoResultMatchId)) return false;
         LottoResultMatchId that = (LottoResultMatchId) o;
         return Objects.equals(matchCount, that.matchCount) &&
-                lottoBonusMatchResult == that.lottoBonusMatchResult;
+                lottoBonusNumberMatch == that.lottoBonusNumberMatch;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchCount, lottoBonusMatchResult);
+        return Objects.hash(matchCount, lottoBonusNumberMatch);
     }
 }

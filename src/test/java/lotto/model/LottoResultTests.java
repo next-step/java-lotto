@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.LottoBonusMatchResult;
-import lotto.model.LottoResult;
 import lotto.model.wrapper.LottoMatchCount;
 import lotto.model.wrapper.LottoResultMatchId;
 import org.junit.jupiter.api.DisplayName;
@@ -48,18 +46,18 @@ public class LottoResultTests {
         return Stream.of(
                 Arguments.of(LottoResultMatchId.newInstance(0, false)),
                 Arguments.of(LottoResultMatchId.newInstance(1, false)),
-                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(2), LottoBonusMatchResult.ANYWAY)),
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(2), LottoBonusNumberMatch.ANYWAY)),
                 Arguments.of(LottoResultMatchId.newInstance(3, false)),
-                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusMatchResult.ANYWAY)),
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusNumberMatch.ANYWAY)),
                 Arguments.of(LottoResultMatchId.newInstance(5, false)),
                 Arguments.of(LottoResultMatchId.newInstance(5, true)),
-                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(6), LottoBonusMatchResult.ANYWAY)));
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(6), LottoBonusNumberMatch.ANYWAY)));
     }
 
     private static Stream<Arguments> generateLottoAbnormalResultCases() {
         return Stream.of(
-                Arguments.of(LottoResultMatchId.newInstance(6, LottoBonusMatchResult.UN_MATCH)),
-                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusMatchResult.UN_MATCH))
+                Arguments.of(LottoResultMatchId.newInstance(6, LottoBonusNumberMatch.UN_MATCH)),
+                Arguments.of(LottoResultMatchId.newInstance(LottoMatchCount.of(4), LottoBonusNumberMatch.UN_MATCH))
         );
     }
 
