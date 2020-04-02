@@ -34,12 +34,8 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
-        LottoRank lottoRank = valueToLottoRank.get(ValueKey.get(matchCount,
-                matchBonus));
-        if (Objects.isNull(lottoRank)) {
-            return MISS;
-        }
-        return lottoRank;
+        return valueToLottoRank.getOrDefault(ValueKey.get(matchCount,
+                        matchBonus), MISS);
     }
 
     public int getPrize() {
