@@ -21,10 +21,13 @@ public class LottoApplication {
         Money money = new Money(StringUtil.parseStringToInt(inputMoney));
 
         int buyCount = StringUtil.parseStringToInt(InputView.inputBuyPassivityCount());
-
         List<String> buyPassivityNumber = InputView.inputBuyPassivityLottoNumber(buyCount);
 
         LottoService lottoService = new LottoService();
+        LottoDto dto1 = lottoService.passivityPlay(buyPassivityNumber);
+        ResultView.printLoots(dto1);
+
+
         LottoGame lottoGame = new LottoGame(money);
         LottoDto dto = lottoService.autoPlay(10);
         ResultView.printLoots(dto);
