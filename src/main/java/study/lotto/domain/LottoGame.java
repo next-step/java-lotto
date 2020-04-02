@@ -34,6 +34,13 @@ public class LottoGame {
     }
 
     public LottoResult result(LottoWinningNumber lottoWinningNumber) {
-        return new LottoResult(lottos, lottoWinningNumber, investmentAmount);
+        WinningLottos winningLottos = new WinningLottos();
+
+        for (Lotto lotto : lottos) {
+            LottoRank lottoRank = lottoWinningNumber.rank(lotto);
+            winningLottos.addToRank(lottoRank, lotto);
+        }
+
+        return new LottoResult(winningLottos, investmentAmount);
     }
 }

@@ -1,42 +1,22 @@
 package study.lotto.domain;
 
-import java.util.*;
-
 public class LottoResult {
-    private Map<LottoRank, Lottos> winningTickets;
+    private WinningLottos winningLottos;
     private Amount investmentAmount;
 
-    public LottoResult(Lottos lottos,
-                       LottoWinningNumber lottoWinningNumber,
+    public LottoResult(WinningLottos winningLottos,
                        Amount investmentAmount) {
+        this.winningLottos = winningLottos;
         this.investmentAmount = investmentAmount;
-        setWinningTickets(lottos, lottoWinningNumber);
     }
 
-    public LottoResult(Lottos lottos,
-                       LottoWinningNumber lottoWinningNumber,
+    public LottoResult(WinningLottos winningLottos,
                        int investmentAmount) {
-        this(lottos, lottoWinningNumber, new Amount(investmentAmount));
+        this(winningLottos, new Amount(investmentAmount));
     }
 
-    private void setWinningTickets(Lottos lottos,
-                                   LottoWinningNumber lottoWinningNumber) {
-        initWinningTickets();
-        for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lottoWinningNumber.rank(lotto);
-            this.winningTickets.get(lottoRank).add(lotto);
-        }
-    }
-
-    private void initWinningTickets() {
-        this.winningTickets = new HashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            this.winningTickets.put(lottoRank, new Lottos());
-        }
-    }
-
-    public Lottos getWinningTickets(LottoRank lottoRank) {
-        return new Lottos(winningTickets.get(lottoRank));
+    public Lottos getWinningLottos(LottoRank lottoRank) {
+        return winningLottos.get(lottoRank);
     }
 
     public double getRateOfReturn() {
@@ -49,7 +29,7 @@ public class LottoResult {
         int prizeTotal = 0;
 
         for (LottoRank lottoRank : LottoRank.values()) {
-            prizeTotal += this.winningTickets.get(lottoRank).size() *
+            prizeTotal += this.winningLottos.size(lottoRank) *
                     lottoRank.getPrize();
         }
 

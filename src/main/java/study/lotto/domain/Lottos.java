@@ -12,12 +12,10 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.map(Lottos::new).orElseGet(Lottos::new);
     }
 
-    // todo 이 생성자는 없애는 방향으로 리펙토링 하자
     public Lottos() {
         this.lottos = new ArrayList<>();
     }
 
-    // todo deep copy 가 아닌데 문제가 없을까?
     public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }

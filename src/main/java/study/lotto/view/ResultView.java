@@ -47,7 +47,7 @@ public class ResultView {
         for (int i = lottoRanks.length - 1; i >= 0; i--) {
             LottoRank lottoRank = lottoRanks[i];
             Lottos winningTickets =
-                    lottoResult.getWinningTickets(lottoRank);
+                    lottoResult.getWinningLottos(lottoRank);
             displayWinning(lottoRank, winningTickets.size());
         }
     }
