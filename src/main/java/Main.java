@@ -3,7 +3,9 @@ import lotto.model.LottoStore;
 import lotto.model.WinningLottoTicket;
 import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.Payment;
+import lotto.view.InputView;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
         Payment payment = Payment.of(inputPayment());
+        List<String> manualLottoTickets = InputView.inputManualLotto();
         LottoTickets lottoTickets = LottoStore.sell(payment);
 
         printLottoTickets(lottoTickets);
