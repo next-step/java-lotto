@@ -19,6 +19,8 @@ public class LottoApplication {
         String inputMoney = InputView.inputBuyAmount();
         Money money = new Money(StringUtil.parseStringToInt(inputMoney));
 
+        int buyCount = StringUtil.parseStringToInt(InputView.inputBuyPassivityCount());
+
         LottoGame lottoGame = new LottoGame(money);
         LottoDto dto = lottoGame.play();
         ResultView.printLoots(dto);
