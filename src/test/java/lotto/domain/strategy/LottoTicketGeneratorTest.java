@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoTicketAutoGeneratorTest {
+class LottoTicketGeneratorTest {
 
     @DisplayName("주어진 수 만큼 랜덤 로또를 만들어 낸다")
     @Test
     public void lottoTicketGenerate_success() throws Exception {
         //given
-        LottoTicketAutoGenerator generator = new LottoTicketAutoGenerator();
+        LottoTicketGenerator generator = new LottoTicketGenerator();
 
         //when
         LottoTickets tickets = generator.generate(3);
