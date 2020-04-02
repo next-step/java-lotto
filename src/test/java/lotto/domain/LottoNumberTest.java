@@ -13,7 +13,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 23, 45})
     public void create(int number) {
         lottoNumber = new LottoNumber(number);
-        assertThat(lottoNumber).isEqualTo(number);
+        assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
     }
 
     @ParameterizedTest
