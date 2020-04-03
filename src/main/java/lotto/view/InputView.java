@@ -5,11 +5,9 @@ import lotto.model.lottos.Lotto;
 import lotto.model.lottos.LottoNumber;
 import lotto.util.ScannerUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 import static lotto.Messages.*;
@@ -74,6 +72,7 @@ public class InputView {
                 .map(it -> it.trim())
                 .map(it -> ScannerUtil.convertStringToInteger(it))
                 .map(it -> new LottoNumber(it))
+                .sorted(comparing(LottoNumber::getLottoNumber))
                 .collect(collectingAndThen(toList(), Lotto::new));
     }
 
