@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final String LOTTO_VALID_ONLY_6 = "번호는 6개만 지정 가능 합니다.";
+    private static final String LOTTO_VALID_ONLY_6_MESSAGE = "번호는 6개만 지정 가능 합니다.";
+    private static final String LOTTO_DUPLICATE_MESSAGE = "번호는 중복될 수 없습니다.";
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> value;
@@ -37,14 +38,14 @@ public class LottoNumbers {
 
     private static void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new ValidLottoException(LOTTO_VALID_ONLY_6);
+            throw new ValidLottoException(LOTTO_VALID_ONLY_6_MESSAGE);
         }
     }
 
     private static void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
-            throw new ValidLottoException("번호는 중복될 수 없습니다.");
+            throw new ValidLottoException(LOTTO_DUPLICATE_MESSAGE);
         }
     }
 
