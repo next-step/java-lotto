@@ -43,24 +43,24 @@ public class LottoGame {
         return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
     }
 
-    public LottoDto findWinGame(WinLottoTicket winTicket) {
+    public LottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
-        dto.setFirstGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
-        dto.setSecondGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
-        dto.setThirdGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
-        dto.setFourthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
-        dto.setFifthGameCount(this.lottoTickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        dto.setSecondGameCount(tickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
+        dto.setThirdGameCount(tickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
+        dto.setFourthGameCount(tickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
+        dto.setFifthGameCount(tickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
         return dto;
     }
 
-    private Money getAllEarningPrize(WinLottoTicket winTicket) {
-        return this.lottoTickets.getAllEarningPrize(winTicket);
+    private Money getAllEarningPrize(LottoTickets tickets, WinLottoTicket winTicket) {
+        return tickets.getAllEarningPrize(winTicket);
     }
 
-    public LottoDto getEarningRate(WinLottoTicket winTicket) {
+    public LottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
-        Money prize = getAllEarningPrize(winTicket);
-        int howManyBuyItem = this.lottoTickets.size();
+        Money prize = getAllEarningPrize(tickets, winTicket);
+        int howManyBuyItem = tickets.size();
         Money buyAmount = Money.buyItemAmount(LottoTicket.PRICE, howManyBuyItem);
 
         double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;

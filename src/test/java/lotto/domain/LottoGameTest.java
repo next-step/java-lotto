@@ -49,14 +49,16 @@ class LottoGameTest {
     @Test
     public void getEarningRate_success() throws Exception {
         //given
-        LottoGame lottoGame = new LottoGame(new LottoTickets(ticketList));
-        WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, new LottoNumber(45));
+        LottoGame lottoGame = new LottoGame();
+        final WinLottoTicket winLottoTicket = new WinLottoTicket(luckyNumber, new LottoNumber(45));
+        final LottoTickets lottoToPassivity =
+                LottoTickets.createLottoToPassivity(Arrays.asList(LottoNumbers.of(Arrays.asList(1, 2, 3, 10, 11, 12))));
 
         //when
-        LottoDto earningRate = lottoGame.getEarningRate(winLottoTicket);
+        LottoDto earningRate = lottoGame.getEarningRate(lottoToPassivity, winLottoTicket);
 
         //then
-        assertThat(earningRate.getEarningRate()).isEqualTo(1.25);
+        assertThat(earningRate.getEarningRate()).isEqualTo(5);
     }
 
     @DisplayName("몇개의 로또 구매가 가능한지 체크")
