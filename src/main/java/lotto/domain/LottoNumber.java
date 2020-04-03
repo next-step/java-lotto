@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(final int number) {
         checkAvailableNumber(number);
-        return LottoNumberGenerator.cache[number - MIN];
+        return new LottoNumber(number);
     }
 
     public static LottoNumber clone(final LottoNumber clone) {
