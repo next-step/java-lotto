@@ -22,7 +22,7 @@ class LottoStoreTest {
         final Price price = new Price(2000);
         final int expect = 2;
 
-        Lotteries actual = LottoStore.sell(price, new ArrayList<>());
+        Lotteries actual = LottoStore.sell(price, new Lotteries(new ArrayList<>()));
 
         assertThat(actual.count()).isEqualTo(expect);
     }
@@ -42,10 +42,10 @@ class LottoStoreTest {
     @Test
     void throwOverSizeException() {
         final Price price = new Price(1000);
-        final List<LottoNumbers> manualLottoNumbers = createLottoNumbers();
+        final Lotteries manuals = createLottoNumbers();
 
         assertThatExceptionOfType(ManualSizeOverflowException.class).isThrownBy(
-                () -> LottoStore.sell(price, manualLottoNumbers)
+                () -> LottoStore.sell(price, manuals)
         );
     }
 
@@ -54,11 +54,11 @@ class LottoStoreTest {
     @ValueSource(ints = {0, 999})
     void noPurchaseException(int price) {
         assertThatExceptionOfType(NoPurchasePriceException.class).isThrownBy(
-                () -> LottoStore.sell(new Price(price), new ArrayList<>())
+                () -> LottoStore.sell(new Price(price), new Lotteries(new ArrayList<>()))
         );
     }
 
-    private List<LottoNumbers> createLottoNumbers() {
+    private Lotteries createLottoNumbers() {
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(new LottoNumbers(
                         Arrays.asList(
@@ -83,6 +83,6 @@ class LottoStoreTest {
                         )
                 )
         );
-        return lottoNumbers;
+        return new Lotteries(lottoNumbers);
     }
 }
