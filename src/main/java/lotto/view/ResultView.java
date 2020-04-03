@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ResultView {
     private static final String BUY_COUNT_FORMAT = "%d개를 구매했습니다.";
+    private static final String LOTTO_TICKET_TYPE_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_TICKET_FORMAT = "[%d, %d, %d, %d, %d, %d]";
     private static final String WINNING_STATISTICS_TITLE = "당첨 통계\n---------";
     private static final String WINNING_STATISTICS_BONUS_BALL_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개";
@@ -19,7 +20,12 @@ public class ResultView {
     private static final String RESULT_BAD = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
     public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(String.format(BUY_COUNT_FORMAT, lottoTickets.size()));
+        int ticketCount = lottoTickets.size();
+        System.out.println(String.format(BUY_COUNT_FORMAT, ticketCount));
+        long autoCount = lottoTickets.stream()
+                .filter(LottoTicket::isAuto)
+                .count();
+        System.out.println(String.format(LOTTO_TICKET_TYPE_FORMAT, ticketCount - autoCount, autoCount));
         lottoTickets.forEach(lottoTicket ->
                 System.out.println(String.format(LOTTO_TICKET_FORMAT, lottoTicket.getLottoNumbers().toArray())));
     }

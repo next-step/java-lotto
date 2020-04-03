@@ -4,14 +4,12 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoController {
     public static void main(String[] args) {
         long price = InputView.inputPrice();
+        LottoTicketForms lottoTicketForms = InputView.inputManualLotto();
 
-        Buyer buyer = Buyer.of(Money.of(price));
+        Buyer buyer = Buyer.of(Money.of(price), lottoTicketForms);
 
         ResultView.printLottoTickets(buyer.getLottoTickets());
 
@@ -20,13 +18,5 @@ public class LottoController {
         BuyerResult buyerResult = buyer.getResult(WinningLotto.of(bonusNumber, winningNumbers));
 
         ResultView.printWinningStatistics(buyerResult);
-    }
-
-    private static LottoTicket createLottoTicket(int[] winningNumbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int winningNumber : winningNumbers) {
-            lottoNumbers.add(LottoNumber.of(winningNumber));
-        }
-        return new LottoTicket(lottoNumbers);
     }
 }
