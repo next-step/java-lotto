@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_MAX_SOCKET = 6;
-    private static final String LOTTO_WINNING_NUMBER_SPLIT_KEYWORD = ",";
+    private static final String LOTTO_NUMBER_SPLIT_KEYWORD = ",";
 
     private Set<LottoNumber> lottoNumbers;
 
@@ -93,7 +93,7 @@ public class Lotto {
 
     private static Set<LottoNumber> convertToLotto(String winningNumbers) {
         Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
-        for (String s : winningNumbers.split(LOTTO_WINNING_NUMBER_SPLIT_KEYWORD)) {
+        for (String s : winningNumbers.split(LOTTO_NUMBER_SPLIT_KEYWORD)) {
             lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
         }
         return lottoNumbers;

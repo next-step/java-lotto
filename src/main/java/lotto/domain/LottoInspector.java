@@ -10,11 +10,11 @@ public class LottoInspector {
     public LottoInspector() {
     }
 
-    public Map<RankEnum, Integer> getResult(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> lottos) {
+    public Map<RankEnum, Integer> getResult(WinningLotto winningLotto, List<Lotto> lottos) {
         Map<RankEnum, Integer> matchedResult = initMatchedResult();
         for (Lotto lotto : lottos) {
-            int matchedCount = winningLotto.getMatchedCount(lotto);
-            boolean hasBonus = lotto.isExistNumber(bonusNumber);
+            int matchedCount = winningLotto.getWinningLotto().getMatchedCount(lotto);
+            boolean hasBonus = lotto.isExistNumber(winningLotto.getBonusNumber());
             RankEnum rank = RankEnum.getRank(matchedCount, hasBonus);
             matchedResult.put(rank, matchedResult.getOrDefault(rank, 0) + 1);
         }

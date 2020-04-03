@@ -15,16 +15,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoInspectorTest {
 
-    private Lotto testWinningLotto;
-    private LottoNumber testBonusNumber;
+    private WinningLotto testWinningLotto;
     private List<Lotto> testLottos;
     private LottoInspector lottoInspector;
 
     @BeforeEach
     void setting() {
         this.lottoInspector = new LottoInspector();
-        this.testWinningLotto = Lotto.newManual("1, 2, 3, 4, 5, 6");
-        this.testBonusNumber = LottoNumber.newChooseNumber(7);
+        this.testWinningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", 7);
         this.testLottos = new ArrayList<>();
 
         Lotto lotto1 = Lotto.newManual(Arrays.asList(
@@ -40,7 +38,7 @@ public class LottoInspectorTest {
     @Test
     @DisplayName("로또 분석후 수익금 가져오기 테스트")
     void getTotalRevenueTest() {
-        Map<RankEnum, Integer> result = this.lottoInspector.getResult(testWinningLotto, testBonusNumber, testLottos);
+        Map<RankEnum, Integer> result = this.lottoInspector.getResult(testWinningLotto, testLottos);
 
         assertThat(
                 new LottoInspector().getTotalRevenue(result)
