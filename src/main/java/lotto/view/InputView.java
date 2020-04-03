@@ -42,7 +42,7 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public static String inputBonusLuckyNumber() {
+    public static String inputBonusWinNumber() {
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
