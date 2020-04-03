@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum Prize {
     MISS(0, 0),
     FOURTH(3, 5000),
-    THIRD(4, 1500_000),
+    THIRD(4, 50_000),
     SECOND(5, 150_0000),
     FIRST(6, 200_000_0000);
 

@@ -5,9 +5,11 @@ import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.domain.Prize;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OutputView {
+    private static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     public void showInputResult(final List<Lotto> lottos, Money money) {
         StringBuilder sb = new StringBuilder();
@@ -49,7 +51,7 @@ public class OutputView {
     }
 
     public void showProfit(final Money purchasedAmount, final GameResult gameResult) {
-        System.out.println("총 수익률은 " + gameResult.getProfit(purchasedAmount) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("총 수익률은 " + decimalFormat.format(gameResult.getProfit(purchasedAmount)) + "입니다.");
     }
 
 

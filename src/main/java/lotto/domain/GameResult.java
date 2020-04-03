@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +27,8 @@ public class GameResult {
         return result.get(prize);
     }
 
-    public long getProfit(Money purchaseAmount) {
-        return getTotalPrizeAmount() / purchaseAmount.getAmount();
+    public double getProfit(Money purchaseAmount) {
+        return (double)getTotalPrizeAmount() / (double)purchaseAmount.getAmount();
     }
 
     private long getTotalPrizeAmount() {
