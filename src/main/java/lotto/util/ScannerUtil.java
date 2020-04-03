@@ -2,9 +2,10 @@ package lotto.util;
 
 import java.util.Scanner;
 
+import static lotto.util.MessageUtil.WARNING_INTEGER_FORMAT;
+import static lotto.util.MessageUtil.WARNING_NULL_AND_EMPTY;
+
 public class ScannerUtil {
-    private static final String WARNING_INTEGER_FORMAT = "숫자만 입력 가능합니다.";
-    private static final String WARNING_NULL_AND_EMPTY = "공백 또는 빈문자열은 입력할 수 없습니다.";
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String readLine() {
