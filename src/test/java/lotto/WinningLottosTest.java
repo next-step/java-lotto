@@ -1,11 +1,11 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ResultViewTest {
+class WinningLottosTest {
 
-    private static ResultView resultView = ResultView.getResultView();
+    private WinningLottos winningLottos;
     private WinningLottoInfo winningLottoInfo;
     private LottoTicket lottoTicket;
 
@@ -74,22 +74,20 @@ class ResultViewTest {
 
         lottoTicket = new LottoTicket(lottoNumbers);
         winningLottoInfo = new WinningLottoInfo(bonusBall, input);
+        winningLottos = new WinningLottos(winningLottoInfo, lottoTicket);
 
     }
 
     @DisplayName("당첨된 로또의 개수를 확인한다")
     @Test
     void winningResultSize() {
-        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
-
-        assertThat(winningLottos).hasSize(4);
+        assertThat(winningLottos.getWinningLottoGroup()).hasSize(4);
     }
 
     @DisplayName("당첨 내역을 출력한다")
     @Test
     void printWinningResult() {
-        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
-        String result = resultView.winningResult(winningLottos);
+        String result = winningLottos.winningResult();
         System.out.println(result);
         assertThat(result).isEqualTo("당첨통계\n"
                                      + "---------\n"
@@ -110,22 +108,21 @@ class ResultViewTest {
     @DisplayName("총 당첨금액을 계산한다")
     @Test
     void totalWinningAmount() {
-        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
-        int result = resultView.totalWinningAmount(winningLottos);
+        int result = winningLottos.totalWinningAmount();
         assertThat(result).isEqualTo(2030055000);
     }
 
     @DisplayName("총 수익률을 계산한다.")
     @Test
     void calculateRevenuePercent() {
-        double result = resultView.calculateRevenuePercent(5000, 14000);
+        double result = winningLottos.calculateRevenuePercent(5000, 14000);
         assertThat(result).isEqualTo(0.35);
     }
 
     @DisplayName("구매한 로또티켓에 보너스 볼이 있는지 확인한다.")
     @Test
     void checkMatchBonusBall() {
-        boolean match = resultView.checkMatchBonusBall(winningLottoInfo, new HashSet<>(Stream.of(LottoNo.of(1),
+        boolean match = winningLottos.checkMatchBonusBall(winningLottoInfo, new HashSet<>(Stream.of(LottoNo.of(1),
                                                                                                  LottoNo.of(2),
                                                                                                  LottoNo.of(3),
                                                                                                  LottoNo.of(4),

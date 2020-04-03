@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Map;
-
 public class LottoController {
 
     private static InputView inputView = InputView.getInputView();
@@ -26,10 +24,10 @@ public class LottoController {
         winningLottoInfo.enterWinningNumbers();
         winningLottoInfo.enterBonusBall();
 
-        Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
+        WinningLottos winningLottos = new WinningLottos(winningLottoInfo, lottoTicket);
 
-        resultView.printResult(resultView.winningResult(winningLottos));
-        resultView.printResult(resultView.revenuePercent(winningLottos, lottoTicket));
+        resultView.printResult(winningLottos.winningResult());
+        resultView.printResult(winningLottos.revenuePercent(lottoTicket));
 
     }
 }
