@@ -23,9 +23,10 @@ public class LottosTest {
         }
 
         //when
-        Lottos lottos = new Lottos(1, Arrays.asList(new Lotto(manualLottoNumbers)));
+        Lottos lottos
+                = Lottos.getAllLottos(1, Arrays.asList(new Lotto(manualLottoNumbers)));
 
         //then
-        assertThat(lottos.getTotalLottoCount()).isEqualTo(2);
+        assertThat(lottos.getToTalLottoCount()).isEqualTo(2);
     }
 }

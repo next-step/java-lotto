@@ -2,22 +2,36 @@ package lotto.model;
 
 import lotto.autoLottoGenerator.AutoLottoGenerator;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> manulLottos;
-    private List<Lotto> autoLottos;
+    private List<Lotto> allLottos;
 
-    public Lottos(int autoLottoCount, List<Lotto> manulLottos) {
-        this.autoLottos = generateAutoLottos(autoLottoCount);
-        this.manulLottos = manulLottos;
+    private Lottos(List<Lotto> allLottos) {
+        this.allLottos = Collections.unmodifiableList(allLottos);
     }
 
-    private List<Lotto> generateAutoLottos(int autoLottoCount){
+    public static Lottos getAllLottos(int autoLottoCount, List<Lotto> manulLottos) {
+        List<Lotto> lottos = generateAutoLottos(autoLottoCount);
+        for(Lotto manualLotto:manulLottos){
+            lottos.add(manualLotto);
+        }
+        return new Lottos(lottos);
+    }
+
+    private static  List<Lotto> generateAutoLottos(int autoLottoCount) {
         return AutoLottoGenerator.generate(autoLottoCount);
     }
 
-    public int getTotalLottoCount(){
-        return manulLottos.size() + autoLottos.size();
+    private List<Lotto> addLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            allLottos.add(lotto);
+        }
+        return allLottos;
+    }
+
+    public int getToTalLottoCount(){
+        return allLottos.size();
     }
 }
