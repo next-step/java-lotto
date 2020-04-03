@@ -17,4 +17,5 @@ public class Messages {
     public static final String WARNING_LOTTO_NON_DUPLICATION = "로또는 중복되지 않은 숫자로 구성되어야 합니다.";
 
     public static final String WARNING_BONUS_BALL_NOT_IN_LOTTO = "보너스 번호는 당첨 로또 번호에 포함되지 않아야 합니다.";
+    public static final String WARNING_NOT_ENOUGH_TO_BUY = "로또는 1000원 이상부터 구매 가능합니다.";
 }
