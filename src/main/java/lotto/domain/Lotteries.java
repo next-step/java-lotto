@@ -21,10 +21,10 @@ public class Lotteries {
         return lottoNumbers;
     }
 
-    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers, final LottoNumber bonusBall) {
+    public LottoResult analyzeWin(final WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumbers purchase : lottoNumbers) {
-            LottoRank lottoRank = purchase.analyzeRank(winningLotteNumbers, bonusBall);
+            LottoRank lottoRank = winningLotto.match(purchase);
             lottoResult.increase(lottoRank);
         }
         return lottoResult;
