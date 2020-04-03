@@ -14,10 +14,12 @@ public class LottoController {
             ResultView.printLotto(lotto.getLottoNumbers());
         }
         Lotto winningLotto = new Lotto(InputView.getWinningNumbers());
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Rank rank = LottoGame.match(lotto, winningLotto);
-            System.out.println(rank.getWinningMoney());
+            ranks.add(LottoGame.match(lotto, winningLotto));
         }
+        double yield = price.getYield(ranks);
+        ResultView.printYield(yield);
     }
 
     public static List<Lotto> buyLotto(int ticketCount) {
