@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Price {
@@ -22,6 +23,12 @@ public class Price {
 
     public int getAvailableBuyTicketCount() {
         return price / LOTTO_TICKET_PRICE;
+    }
+
+    public double getYield(List<Rank> ranks) {
+        LottoResult result = new LottoResult(ranks);
+        double totalWinningMoney = result.getTotalWinningMoney();
+        return Math.floor(totalWinningMoney / price * 100) / 100.0;
     }
 
     @Override
