@@ -152,6 +152,24 @@ public class LottoTest {
         assertThat(rank).isEqualTo(FIFTH);
     }
 
+    @DisplayName("꽝 확인")
+    @Test
+    void matchTestForBlank() {
+        //given
+        WinningLotto winningLotto = new WinningLotto(createLottoFromOneToSix(), new LottoNumber(20));
+
+        for (int i = 5; i <= 10; i++) {
+            myLottoNumbers.add(new LottoNumber(i));
+        }
+        Lotto myLotto = new Lotto(myLottoNumbers);
+
+        //when
+        Rank rank = myLotto.match(winningLotto);
+
+        //then
+        assertThat(rank).isEqualTo(BLANK);
+    }
+
     Lotto createLottoFromOneToSix(){
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
