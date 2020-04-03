@@ -30,7 +30,10 @@ public enum Rank {
     }
 
     public static int getAllPrizeMoney(List<Rank> ranks) {
-        return 0;
+        return ranks.stream()
+                .map(it -> it.getWinningMoney())
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     public int getMatchCount() {

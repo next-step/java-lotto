@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static lotto.model.Rank.*;
-import static lotto.model.Rank.BLANK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
@@ -32,6 +31,6 @@ public class RankTest {
         int allPrizeMoney = Rank.getAllPrizeMoney(ranks);
 
         //then
-        assertThat(allPrizeMoney).isEqualTo(3_005_000);
+        assertThat(allPrizeMoney).isEqualTo(30_005_000);
     }
 }
