@@ -5,6 +5,7 @@ import lotto.domain.Money;
 import lotto.domain.item.*;
 import lotto.exception.ValidLottoException;
 import lotto.view.MatchedLottoDto;
+import lotto.view.StatisticsLottoDto;
 import util.StringUtil;
 
 import java.util.ArrayList;
@@ -65,8 +66,8 @@ public class LottoService {
         return lottoGame.getAvailableBuyCount(money);
     }
 
-    public MatchedLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
-        MatchedLottoDto dto = new MatchedLottoDto();
+    public StatisticsLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
+        StatisticsLottoDto dto = new StatisticsLottoDto();
         dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIRST, winTicket));
         dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
         dto.setThirdGameCount(tickets.findWinLottoCountFromRank(Rank.THIRD, winTicket));
@@ -75,8 +76,8 @@ public class LottoService {
         return dto;
     }
 
-    public MatchedLottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
-        MatchedLottoDto dto = new MatchedLottoDto();
+    public StatisticsLottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
+        StatisticsLottoDto dto = new StatisticsLottoDto();
         Money prize = getAllEarningPrize(tickets, winTicket);
         int howManyBuyItem = tickets.size();
         Money buyAmount = Money.buyItemAmount(LottoTicket.PRICE, howManyBuyItem);
