@@ -9,18 +9,7 @@ import java.util.List;
 
 public class LottoGame {
 
-    private int playGameCount;
-    private LottoTickets lottoTickets;
-
     public LottoGame() {
-    }
-
-    public LottoGame(Money money) {
-        this.playGameCount = money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
-    }
-
-    public LottoGame(LottoTickets lottoTickets) {
-        this.lottoTickets = lottoTickets;
     }
 
     public LottoTickets createAutoLottoTicket(int count) {
