@@ -1,6 +1,6 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
+import enums.Rank;
 import lotto.domain.Money;
 import lotto.domain.strategy.LottoNumberAutoGenerator;
 import lotto.view.LottoDto;
@@ -45,11 +45,11 @@ public class LottoGame {
 
     public LottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
         LottoDto dto = new LottoDto();
-        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
-        dto.setSecondGameCount(tickets.findWinLottoCountFromRank(LottoPrize.SECOND, winTicket));
-        dto.setThirdGameCount(tickets.findWinLottoCountFromRank(LottoPrize.THIRD, winTicket));
-        dto.setFourthGameCount(tickets.findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket));
-        dto.setFifthGameCount(tickets.findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket));
+        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
+        dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
+        dto.setThirdGameCount(tickets.findWinLottoCountFromRank(Rank.THIRD, winTicket));
+        dto.setFourthGameCount(tickets.findWinLottoCountFromRank(Rank.FOURTH, winTicket));
+        dto.setFifthGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
         return dto;
     }
 

@@ -1,6 +1,6 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
+import enums.Rank;
 import lotto.domain.Money;
 import lotto.domain.strategy.LottoNumberAutoGenerator;
 import lotto.exception.CloneFailException;
@@ -35,9 +35,9 @@ public class LottoTickets implements Cloneable {
         return new LottoTickets(tickets);
     }
 
-    public int findWinLottoCountFromRank(LottoPrize lottoPrize, WinLottoTicket winTicket) {
+    public int findWinLottoCountFromRank(Rank rank, WinLottoTicket winTicket) {
         return (int) tickets.stream()
-                .filter(ticket -> lottoPrize == ticket.getRank(winTicket))
+                .filter(ticket -> rank == ticket.getRank(winTicket))
                 .count();
     }
 
@@ -45,11 +45,11 @@ public class LottoTickets implements Cloneable {
         Money earning = new Money();
 
         return earning
-                .plus(LottoPrize.FIRST.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIRST, winTicket)))
-                .plus(LottoPrize.SECOND.getWinningPrize(findWinLottoCountFromRank(LottoPrize.SECOND, winTicket)))
-                .plus(LottoPrize.THIRD.getWinningPrize(findWinLottoCountFromRank(LottoPrize.THIRD, winTicket)))
-                .plus(LottoPrize.FOURTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FOURTH, winTicket)))
-                .plus(LottoPrize.FIFTH.getWinningPrize(findWinLottoCountFromRank(LottoPrize.FIFTH, winTicket)));
+                .plus(Rank.FIRST.getWinningPrize(findWinLottoCountFromRank(Rank.FIRST, winTicket)))
+                .plus(Rank.SECOND.getWinningPrize(findWinLottoCountFromRank(Rank.SECOND, winTicket)))
+                .plus(Rank.THIRD.getWinningPrize(findWinLottoCountFromRank(Rank.THIRD, winTicket)))
+                .plus(Rank.FOURTH.getWinningPrize(findWinLottoCountFromRank(Rank.FOURTH, winTicket)))
+                .plus(Rank.FIFTH.getWinningPrize(findWinLottoCountFromRank(Rank.FIFTH, winTicket)));
     }
 
     public List<LottoTicket> getTickets() {

@@ -1,6 +1,6 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
+import enums.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,7 +69,7 @@ public class LottoTicketTest {
                 new WinLottoTicket(new LottoNumbers(numbers), new LottoNumber(45));
 
         //when
-        int match = lotto.getLuckyNumberMatchCount(winLottoTicket);
+        int match = lotto.getMatchCount(winLottoTicket);
 
         //then
         assertThat(match).isEqualTo(expect);
@@ -87,10 +87,10 @@ public class LottoTicketTest {
 
         //then
         assertAll(
-                () -> assertThat(lotto.getRank(first)).isEqualTo(LottoPrize.FIRST)
-                , () -> assertThat(lotto.getRank(second)).isEqualTo(LottoPrize.SECOND)
-                , () -> assertThat(lotto.getRank(third)).isEqualTo(LottoPrize.THIRD)
-                , () -> assertThat(lotto.getRank(miss)).isEqualTo(LottoPrize.MISS)
+                () -> assertThat(lotto.getRank(first)).isEqualTo(Rank.FIRST)
+                , () -> assertThat(lotto.getRank(second)).isEqualTo(Rank.SECOND)
+                , () -> assertThat(lotto.getRank(third)).isEqualTo(Rank.THIRD)
+                , () -> assertThat(lotto.getRank(miss)).isEqualTo(Rank.MISS)
         );
     }
 }
