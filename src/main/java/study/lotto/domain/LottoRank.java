@@ -12,8 +12,8 @@ public enum LottoRank {
 
     private static Map<Integer, List<LottoRank>> valueToLottoRank =
             new HashMap<>();
-    private static int SINGLE_LIST_SIZE = 1;
-    private static int FIRST_INDEX = 0;
+    private static final int SINGLE_LIST_SIZE = 1;
+    private static final int FIRST_INDEX = 0;
 
     private int prize;
     private int matchCount;

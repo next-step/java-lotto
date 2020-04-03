@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WinningLottos {
-    Map<LottoRank, Lottos> winningLottos;
+    private Map<LottoRank, Lottos> winningLottos;
 
     public WinningLottos() {
         initWinningLottos();

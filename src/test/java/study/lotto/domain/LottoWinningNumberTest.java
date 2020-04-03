@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoWinningNumberTest {
-    LottoWinningNumber lottoWinningNumber;
+    private LottoWinningNumber lottoWinningNumber;
 
     @BeforeEach
     void setUp() {

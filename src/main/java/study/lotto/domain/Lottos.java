@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Lottos implements Iterable<Lotto> {
-    List<Lotto> lottos;
+    private List<Lotto> lottos;
 
     public static Lottos valueOf(Optional<Lottos> lottos) {
         return lottos.map(Lottos::new).orElseGet(Lottos::new);
