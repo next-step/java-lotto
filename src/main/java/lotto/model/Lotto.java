@@ -17,6 +17,10 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableList(lotto);
     }
 
+    public boolean hasBonusBallNumber(LottoNumber bonusBall){
+        return lottoNumbers.contains(bonusBall);
+    }
+
     private void validateSizeSix(List<LottoNumber> lotto) {
         if (lotto.size() != 6) {
             throw new IllegalArgumentException(WARNING_LOTTO_SIZE);
