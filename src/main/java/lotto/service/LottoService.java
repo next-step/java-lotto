@@ -1,10 +1,8 @@
 package lotto.service;
 
+import enums.Rank;
 import lotto.domain.Money;
-import lotto.domain.item.LottoGame;
-import lotto.domain.item.LottoNumbers;
-import lotto.domain.item.LottoTicket;
-import lotto.domain.item.LottoTickets;
+import lotto.domain.item.*;
 import lotto.exception.ValidLottoException;
 import lotto.view.MatchedLottoDto;
 import util.StringUtil;
@@ -65,5 +63,15 @@ public class LottoService {
     public int getAvailableBuyCount(Money money) {
         LottoGame lottoGame = new LottoGame();
         return lottoGame.getAvailableBuyCount(money);
+    }
+
+    public MatchedLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
+        MatchedLottoDto dto = new MatchedLottoDto();
+        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
+        dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
+        dto.setThirdGameCount(tickets.findWinLottoCountFromRank(Rank.THIRD, winTicket));
+        dto.setFourthGameCount(tickets.findWinLottoCountFromRank(Rank.FOURTH, winTicket));
+        dto.setFifthGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
+        return dto;
     }
 }

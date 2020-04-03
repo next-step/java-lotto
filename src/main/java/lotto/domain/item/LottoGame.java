@@ -1,6 +1,5 @@
 package lotto.domain.item;
 
-import enums.Rank;
 import lotto.domain.Money;
 import lotto.domain.strategy.LottoNumberAutoGenerator;
 import lotto.view.MatchedLottoDto;
@@ -41,16 +40,6 @@ public class LottoGame {
 
     public int getAvailableBuyCount(Money money) {
         return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
-    }
-
-    public MatchedLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
-        MatchedLottoDto dto = new MatchedLottoDto();
-        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
-        dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
-        dto.setThirdGameCount(tickets.findWinLottoCountFromRank(Rank.THIRD, winTicket));
-        dto.setFourthGameCount(tickets.findWinLottoCountFromRank(Rank.FOURTH, winTicket));
-        dto.setFifthGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
-        return dto;
     }
 
     private Money getAllEarningPrize(LottoTickets tickets, WinLottoTicket winTicket) {
