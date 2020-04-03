@@ -18,13 +18,13 @@ public class Buyer {
         return lottoTickets;
     }
 
-    public BuyerResult getResult(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        return new BuyerResult(getWinningResult(winningNumbers, bonusNumber), lottoTickets.size());
+    public BuyerResult getResult(WinningLotto winningLotto) {
+        return new BuyerResult(getWinningResult(winningLotto), lottoTickets.size());
     }
 
-    private List<Rank> getWinningResult(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    private List<Rank> getWinningResult(WinningLotto winningLotto) {
         return lottoTickets.stream()
-                .map(lottoTicket -> lottoTicket.checkWinning(winningNumbers, bonusNumber))
+                .map(lottoTicket -> lottoTicket.checkWinning(winningLotto))
                 .collect(Collectors.toList());
     }
 }

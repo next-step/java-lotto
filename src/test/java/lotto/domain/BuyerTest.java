@@ -39,7 +39,7 @@ public class BuyerTest {
         LottoTicket fourthTicket = createTicket(1, 2, 3, 14, 15, 16);
 
         Buyer newBuyer = new Buyer(Arrays.asList(thirdTicket, fourthTicket));
-        BuyerResult result = newBuyer.getResult(winningNumbers, LottoNumber.of(17));
+        BuyerResult result = newBuyer.getResult(WinningLotto.of(LottoNumber.of(17), winningNumbers));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(new BigDecimal("752.50"));
@@ -52,7 +52,7 @@ public class BuyerTest {
         LottoTicket fourthTicket = createTicket(1, 2, 3, 4, 5, 16);
 
         Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
-        BuyerResult result = newBuyer.getResult(winningNumbers, LottoNumber.of(16));
+        BuyerResult result = newBuyer.getResult(WinningLotto.of(LottoNumber.of(16), winningNumbers));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
         assertThat(result.getProfitRate()).isEqualTo(new BigDecimal("30000.00"));
@@ -66,7 +66,7 @@ public class BuyerTest {
 
         Buyer newBuyer = new Buyer(Arrays.asList(secondTicket));
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
-            newBuyer.getResult(winningNumbers, LottoNumber.of(bonusNumber));
+            newBuyer.getResult(WinningLotto.of(LottoNumber.of(bonusNumber), winningNumbers));
         }).withMessage(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber));
     }
 

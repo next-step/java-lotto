@@ -11,6 +11,16 @@ public class LottoTicket {
 
     private final LottoNumbers lottoNumbers;
 
+    static LottoTicket of(int... lottoNumbers) {
+        return new LottoTicket(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
+    static LottoTicket ofForm(LottoTicketForm lottoTicketForm) {
+        return new LottoTicket(lottoTicketForm.getLottoNumbers());
+    }
+
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = LottoNumbers.of(lottoNumbers);
     }
@@ -23,21 +33,8 @@ public class LottoTicket {
         return lottoNumbers.getLottoNumbers();
     }
 
-    Rank checkWinning(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber.getNumber()));
-        }
-        return Rank.of(lottoNumbers.match(winningNumbers), lottoNumbers.contains(bonusNumber));
-    }
-
-    static LottoTicket of(int... lottoNumbers) {
-        return new LottoTicket(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList()));
-    }
-
-    static LottoTicket ofForm(LottoTicketForm lottoTicketForm) {
-        return new LottoTicket(lottoTicketForm.getLottoNumbers());
+    Rank checkWinning(WinningLotto winningLotto) {
+        return Rank.of(winningLotto.match(lottoNumbers));
     }
 
     @Override

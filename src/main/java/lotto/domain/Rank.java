@@ -18,7 +18,10 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Rank of(int matchCount, boolean bonusMatch) {
+    public static Rank of(WiningResult winingResult) {
+        int matchCount = winingResult.getMatchCount();
+        boolean bonusMatch = winingResult.isBonusMatch();
+
         if (matchCount == SECOND.getMatchCount() && bonusMatch) {
             return SECOND;
         }

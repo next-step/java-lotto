@@ -15,10 +15,10 @@ public class LottoController {
         List<LottoTicket> lottoTickets = buyer.buyLottoTickets(Money.of(price));
 
         ResultView.printLottoTickets(lottoTickets);
-        int[] winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
 
-        BuyerResult buyerResult = buyer.getResult(LottoNumbers.of(winningNumbers), LottoNumber.of(bonusNumber));
+        LottoNumbers winningNumbers = LottoNumbers.of(InputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
+        BuyerResult buyerResult = buyer.getResult(WinningLotto.of(bonusNumber, winningNumbers));
 
         ResultView.printWinningStatistics(buyerResult);
     }
