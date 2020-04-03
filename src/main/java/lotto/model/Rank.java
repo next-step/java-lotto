@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Rank {
     FIRST(6, 2_000_000_000, false),
@@ -26,6 +27,10 @@ public enum Rank {
                 .filter(it -> it.matchCount == matchCount)
                 .findFirst()
                 .orElse(BLANK);
+    }
+
+    public static int getAllPrizeMoney(List<Rank> ranks) {
+        return 0;
     }
 
     public int getMatchCount() {
