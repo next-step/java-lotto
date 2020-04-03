@@ -4,7 +4,7 @@ import lotto.domain.Money;
 import lotto.domain.item.LottoGame;
 import lotto.domain.item.LottoNumbers;
 import lotto.domain.item.LottoTickets;
-import lotto.view.LottoDto;
+import lotto.view.MatchedLottoDto;
 import util.StringUtil;
 
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ public class LottoService {
 
     private static final String LOTTO_SPLIT_DELIMITER = ",";
 
-    public LottoDto autoPlay(int gameCount) {
+    public MatchedLottoDto autoPlay(int gameCount) {
         LottoGame lottoGame = new LottoGame();
         LottoTickets tickets = lottoGame.createAutoLottoTicket(gameCount);
 
-        LottoDto dto = new LottoDto();
+        MatchedLottoDto dto = new MatchedLottoDto();
         dto.setTickets(tickets);
         return dto;
     }
 
-    public LottoDto passivityPlay(List<String> buyPassivityNumber) {
+    public MatchedLottoDto passivityPlay(List<String> buyPassivityNumber) {
         LottoGame lottoGame = new LottoGame();
         List<LottoNumbers> numbers = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class LottoService {
 
         LottoTickets tickets = lottoGame.createPassivityLottoTicket(numbers);
 
-        LottoDto dto = new LottoDto();
+        MatchedLottoDto dto = new MatchedLottoDto();
         dto.setTickets(tickets);
         return dto;
     }

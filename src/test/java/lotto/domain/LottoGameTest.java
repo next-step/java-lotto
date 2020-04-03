@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.item.*;
-import lotto.view.LottoDto;
+import lotto.view.MatchedLottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -55,7 +55,7 @@ class LottoGameTest {
                 LottoTickets.createLottoToPassivity(Arrays.asList(LottoNumbers.of(Arrays.asList(1, 2, 3, 10, 11, 12))));
 
         //when
-        LottoDto earningRate = lottoGame.getEarningRate(lottoToPassivity, winLottoTicket);
+        MatchedLottoDto earningRate = lottoGame.getEarningRate(lottoToPassivity, winLottoTicket);
 
         //then
         assertThat(earningRate.getEarningRate()).isEqualTo(5);

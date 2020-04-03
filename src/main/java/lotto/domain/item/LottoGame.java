@@ -3,7 +3,7 @@ package lotto.domain.item;
 import enums.Rank;
 import lotto.domain.Money;
 import lotto.domain.strategy.LottoNumberAutoGenerator;
-import lotto.view.LottoDto;
+import lotto.view.MatchedLottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +43,8 @@ public class LottoGame {
         return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
     }
 
-    public LottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
-        LottoDto dto = new LottoDto();
+    public MatchedLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
+        MatchedLottoDto dto = new MatchedLottoDto();
         dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
         dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
         dto.setThirdGameCount(tickets.findWinLottoCountFromRank(Rank.THIRD, winTicket));
@@ -57,8 +57,8 @@ public class LottoGame {
         return tickets.getAllEarningPrize(winTicket);
     }
 
-    public LottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
-        LottoDto dto = new LottoDto();
+    public MatchedLottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
+        MatchedLottoDto dto = new MatchedLottoDto();
         Money prize = getAllEarningPrize(tickets, winTicket);
         int howManyBuyItem = tickets.size();
         Money buyAmount = Money.buyItemAmount(LottoTicket.PRICE, howManyBuyItem);

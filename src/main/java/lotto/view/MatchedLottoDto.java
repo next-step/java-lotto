@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.item.LottoTickets;
 
-public class LottoDto {
+public class MatchedLottoDto {
     private LottoTickets tickets;
     private int firstGameCount = 0;
     private int secondGameCount = 0;

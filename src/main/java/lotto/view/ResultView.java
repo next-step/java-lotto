@@ -10,13 +10,13 @@ public class ResultView {
         System.out.println(String.format(BUY_COUNT_MESSAGE, pass, auto));
     }
 
-    public static void printLoots(LottoDto dto) {
+    public static void printLoots(MatchedLottoDto dto) {
         for (LottoTicket lotto : dto.getTickets().getTickets()) {
             System.out.println(lotto);
         }
     }
 
-    public static void printResult(LottoDto dto) {
+    public static void printResult(MatchedLottoDto dto) {
         System.out.println("3개 일치 (5000원)- " + dto.getFifthGameCount() + "개");
         System.out.println("4개 일치 (50000원)- " + dto.getFourthGameCount() + "개");
         System.out.println("5개 일치 (1500000원)- " + dto.getThirdGameCount() + "개");
@@ -24,7 +24,7 @@ public class ResultView {
         System.out.println("6개 일치 (2000000000원)- " + dto.getFirstGameCount() + "개");
     }
 
-    public static void printEarningResult(LottoDto dto) {
+    public static void printEarningResult(MatchedLottoDto dto) {
         System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
     }
 }
