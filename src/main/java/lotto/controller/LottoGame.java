@@ -1,9 +1,9 @@
 package lotto.controller;
 
-import lotto.model.GameResult;
-import lotto.model.Lottos;
+import lotto.model.gameresult.GameResult;
+import lotto.model.lottos.Lottos;
 import lotto.model.Rank;
-import lotto.model.WinningLotto;
+import lotto.model.winninglotto.WinningLotto;
 import lotto.view.InputView;
 
 import java.util.List;

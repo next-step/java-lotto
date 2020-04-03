@@ -1,4 +1,7 @@
-package lotto.model;
+package lotto.model.winninglotto;
+
+import lotto.model.lottos.Lotto;
+import lotto.model.lottos.LottoNumber;
 
 import java.util.List;
 

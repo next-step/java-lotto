@@ -1,6 +1,8 @@
-package lotto.model;
+package lotto.model.lottos;
 
 import lotto.autoLottoGenerator.AutoLottoGenerator;
+import lotto.model.Rank;
+import lotto.model.winninglotto.WinningLotto;
 
 import java.util.Collections;
 import java.util.List;

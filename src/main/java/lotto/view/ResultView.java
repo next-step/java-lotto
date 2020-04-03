@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.model.GameResult;
-import lotto.model.Lottos;
+import lotto.model.gameresult.GameResult;
+import lotto.model.lottos.Lottos;
 import lotto.model.Rank;
-import lotto.model.Results;
+import lotto.model.gameresult.Results;
 
 import static lotto.model.Rank.SECOND;
 

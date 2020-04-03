@@ -1,8 +1,7 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.WinningLotto;
+import lotto.model.lottos.Lotto;
+import lotto.model.lottos.LottoNumber;
 import lotto.util.ScannerUtil;
 
 import java.util.ArrayList;

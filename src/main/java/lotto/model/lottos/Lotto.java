@@ -1,4 +1,7 @@
-package lotto.model;
+package lotto.model.lottos;
+
+import lotto.model.Rank;
+import lotto.model.winninglotto.WinningLotto;
 
 import java.util.*;
 

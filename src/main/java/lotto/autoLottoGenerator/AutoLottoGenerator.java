@@ -1,11 +1,10 @@
 package lotto.autoLottoGenerator;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
+import lotto.model.lottos.Lotto;
+import lotto.model.lottos.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Comparator.comparing;
