@@ -2,7 +2,6 @@ package lotto.domain;
 
 import lotto.exception.ManualSizeOverflowException;
 import lotto.exception.NoPurchasePriceException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,20 +16,24 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LottoStoreTest {
 
-    private LottoPublisher autoPublisher;
-
-    @BeforeEach
-    void setUp() {
-        autoPublisher = new LottoAutoPublisher(2);
-    }
-
-    @DisplayName("구입 금액에 해당하는 복권을 판매한다.")
+    @DisplayName("구입 금액만큼 자동으로 복권을 판매한다.")
     @Test
-    void sell() {
+    void sellAuto() {
         final Price price = new Price(2000);
         final int expect = 2;
 
         Lotteries actual = LottoStore.sell(price, new ArrayList<>());
+
+        assertThat(actual.count()).isEqualTo(expect);
+    }
+
+    @DisplayName("수동으로 복권을 판매한다.")
+    @Test
+    void sellManually() {
+        final Price price = new Price(3000);
+        final int expect = 3;
+
+        Lotteries actual = LottoStore.sell(price, createLottoNumbers());
 
         assertThat(actual.count()).isEqualTo(expect);
     }
