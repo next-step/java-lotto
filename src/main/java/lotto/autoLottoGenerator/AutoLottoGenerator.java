@@ -5,8 +5,10 @@ import lotto.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
@@ -27,6 +29,7 @@ public class AutoLottoGenerator {
         return lottoPool.stream()
                 .map(it -> new LottoNumber(it))
                 .limit(6)
+                .sorted(comparing(LottoNumber::getLottoNumber))
                 .collect(collectingAndThen(toList(), Lotto::new));
     }
 }

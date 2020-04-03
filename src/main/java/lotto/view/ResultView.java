@@ -1,0 +1,40 @@
+package lotto.view;
+
+import lotto.model.GameResult;
+import lotto.model.Lottos;
+import lotto.model.Rank;
+import lotto.model.Results;
+
+import static lotto.model.Rank.SECOND;
+
+public class ResultView {
+    public static void printMyLottos(Lottos lottos) {
+        lottos.getAllLottos().stream()
+                .forEach(it -> System.out.println(it.toString()));
+    }
+
+    public static void printGameResult(GameResult gameResult) {
+        printResults(gameResult);
+        printEarningRate(gameResult);
+    }
+
+    private static void printResults(GameResult gameResult) {
+        Results results = gameResult.getResults();
+        for (Rank rank : Rank.values()) {
+            printRankResult(rank);
+            System.out.println(results.getCount(rank) + "개");
+        }
+    }
+
+    private static void printRankResult(Rank rank) {
+        System.out.print(rank.getMatchCount() + "개 일치");
+        if (rank.equals(SECOND)) {
+            System.out.print(", 보너스 볼 일치");
+        }
+        System.out.print(" (" + rank.getWinningMoney() + ") -> ");
+    }
+
+    private static void printEarningRate(GameResult gameResult) {
+        System.out.println("총 수익률은 " + gameResult.getEarningRate() + "% 입니다.");
+    }
+}

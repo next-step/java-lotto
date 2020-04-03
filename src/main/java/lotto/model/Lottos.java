@@ -34,4 +34,8 @@ public class Lottos {
     public int getToTalLottoCount() {
         return allLottos.size();
     }
+
+    public List<Lotto> getAllLottos() {
+        return allLottos;
+    }
 }
