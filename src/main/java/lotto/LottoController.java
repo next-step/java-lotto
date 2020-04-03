@@ -21,7 +21,7 @@ public class LottoController {
         LottoTicket automaticLottoTicket = lottoGenerator.createAutomaticLottoTicket(automaticCount);
         LottoTicket lottoTicket = lottoGenerator.totalLottoTicket(manualLottoTicket, automaticLottoTicket);
 
-        resultView.printResult(resultView.purchaseLottoNumbers(lottoTicket));
+        resultView.printResult(lottoTicket.purchaseLottoNumbers());
 
         winningLottoInfo.enterWinningNumbers();
         winningLottoInfo.enterBonusBall();

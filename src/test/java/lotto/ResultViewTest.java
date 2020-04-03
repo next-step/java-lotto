@@ -103,7 +103,7 @@ class ResultViewTest {
     @DisplayName("총 구매금액을 계산한다")
     @Test
     void totalPurchaseAmount() {
-        int result = resultView.totalPurchaseAmount(lottoTicket);
+        int result = lottoTicket.totalPurchaseAmount();
         assertThat(result).isEqualTo(6000);
     }
 

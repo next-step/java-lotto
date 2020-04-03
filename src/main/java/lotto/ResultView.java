@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -47,15 +46,6 @@ public class ResultView {
 
     }
 
-    public String purchaseLottoNumbers(LottoTicket lottoTicket) {
-        String result = "";
-        for (LottoNumbers lottoNumbers : lottoTicket.getLottoNumbers()) {
-            result += lottoNumbers.getNumbers().stream().map(LottoNo::getNo).collect(Collectors.toList())
-                      + "\n";
-        }
-
-        return result;
-    }
 
     public String winningResult(Map<String, WinningLotto> winningLottos) {
         String result = "당첨통계\n---------\n";
@@ -74,7 +64,7 @@ public class ResultView {
     public String revenuePercent(Map<String, WinningLotto> winningLottos, LottoTicket lottoTicket) {
         String result = "총 수익률은 ";
         double revenuePercent = calculateRevenuePercent(totalWinningAmount(winningLottos),
-                                                        totalPurchaseAmount(lottoTicket));
+                                                        lottoTicket.totalPurchaseAmount());
         result += revenuePercent + "입니다.";
         if (revenuePercent < 1) {
             result += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
@@ -96,10 +86,6 @@ public class ResultView {
             totalWinningAmount += winningLottos.get(name).getTotalAmount();
         }
         return totalWinningAmount;
-    }
-
-    public int totalPurchaseAmount(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumbers().size() * MIN_PURCHASE_AMOUNT;
     }
 
     public boolean checkMatchBonusBall(WinningLottoInfo winningLottoInfo, Set<LottoNo> lottoNumber) {
