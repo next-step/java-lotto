@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.model.Rank.FIRST;
+import static lotto.model.Rank.SECOND;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> myLottoNumbers = new ArrayList<>();
 
     @DisplayName("LottoNumber 객체 6개를 주면 정상적으로 Lotto 객체 생성")
     @Test
@@ -62,7 +64,7 @@ public class LottoTest {
         });
     }
 
-    @DisplayName("당첨 번호(보너스번호 포함)를 인자로 주면, 몇 등인지 당첨결과를 알려준다.")
+    @DisplayName("1등 확인")
     @Test
     void matchTestForFirst() {
         //given
@@ -77,5 +79,30 @@ public class LottoTest {
 
         //then
         assertThat(rank).isEqualTo(FIRST);
+    }
+
+    @DisplayName("2등 확인")
+    @Test
+    void matchTestForSecond() {
+        //given
+        WinningLotto winningLotto = new WinningLotto(createLottoFromOneToSix(), new LottoNumber(7));
+
+        for (int i = 2; i <= 7; i++) {
+            myLottoNumbers.add(new LottoNumber(i));
+        }
+        Lotto myLotto = new Lotto(myLottoNumbers);
+
+        //when
+        Rank rank = myLotto.match(winningLotto);
+
+        //then
+        assertThat(rank).isEqualTo(SECOND);
+    }
+
+    Lotto createLottoFromOneToSix(){
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+        return new Lotto(lottoNumbers);
     }
 }
