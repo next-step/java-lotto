@@ -9,7 +9,6 @@ public class Messages {
 
     public static final String WARNING_INTEGER_FORMAT = "숫자만 입력 가능합니다.";
     public static final String WARNING_NULL_AND_EMPTY = "공백 또는 빈문자열은 입력할 수 없습니다.";
-    public static final String WARNING_MONEY_INPUT = "구입금액은 1000원 이상만 입력 가능합니다.";
     public static final String WARNING_LOTTO_COUNT = "로또 금액이 부족합니다. 갯수를 다시 입력해 주세요.";
 
     public static final String WARNING_LOTTO_NUMBER_RANGE = "로또의 번호는 1이상 45이하의 숫자만 가능합니다.";

@@ -1,25 +1,27 @@
 package lotto.controller;
 
+import lotto.model.Money;
+import lotto.model.Rank;
 import lotto.model.gameresult.GameResult;
 import lotto.model.lottos.Lottos;
-import lotto.model.Rank;
 import lotto.model.winninglotto.WinningLotto;
 import lotto.view.InputView;
 
 import java.util.List;
 
 public class LottoGame {
-    private static Lottos myLottos;
-
     public static Lottos ready() {
-        InputView.getMoney();
-        InputView.getManualLottoCount();
-        myLottos = Lottos.createAllLottos(InputView.getLottoCountAuto(), InputView.getManualLottos());
-        return myLottos;
+        Money money = InputView.getMoney();
+        int manualLottoCount = InputView.getManualLottoCount(money);
+
+        return Lottos.createAllLottos(
+                money.getLottoCount(),
+                InputView.getManualLottos(manualLottoCount)
+        );
     }
 
-    public static GameResult start() {
-        List<Rank> ranks = myLottos.match(getWinningLotto());
+    public static GameResult start(Lottos lottos) {
+        List<Rank> ranks = lottos.match(getWinningLotto());
         return new GameResult(ranks);
     }
 

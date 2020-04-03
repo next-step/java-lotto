@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.Money;
 import lotto.model.lottos.Lotto;
 import lotto.model.lottos.LottoNumber;
 import lotto.util.ScannerUtil;
@@ -14,40 +15,40 @@ import static java.util.stream.Collectors.toList;
 import static lotto.Messages.*;
 
 public class InputView {
-    private static final int MINIMUM_MONEY_TO_BUY = 1000;
     private static final int ZERO = 0;
-    private static final String COMMA = ",";
+    private static final String DELIMITER = ",";
 
-    private static int lottoCount;
-    private static int lottoCountManual;
-    private static int lottoCountAuto;
+    private static int autoLottoCount;
 
-    public static int getMoney() {
+    public static Money getMoney() {
         printMessage(MESSAGE_MONEY_INPUT);
-        int money = ScannerUtil.readInt();
-        validateGreaterThan1000(isGreaterThan1000(money));
-        lottoCount = money / MINIMUM_MONEY_TO_BUY;
-        return lottoCount;
+
+        return new Money(ScannerUtil.readInt());
     }
 
-    public static int getManualLottoCount() {
+    public static int getManualLottoCount(Money money) {
         printMessage(MESSAGE_MANUAL_LOTTO_COUNT);
-        lottoCountManual = ScannerUtil.readInt();
-        validatePurchasable(isPurchasable(lottoCount));
-        lottoCountAuto = lottoCount - lottoCountManual;
-        return lottoCountManual;
+
+        int allLottoCount = money.getLottoCount();
+        int manualLottoCount = ScannerUtil.readInt();
+        validatePurchasable(isPurchasable(allLottoCount, manualLottoCount));
+
+        autoLottoCount = (allLottoCount - manualLottoCount);
+        return manualLottoCount;
     }
 
-    public static List<Lotto> getManualLottos() {
-        if (lottoCountManual == ZERO) {
+    public static List<Lotto> getManualLottos(int manualLottoCount) {
+        printMessage(MESSAGE_LOTTO_MANUAL);
+
+        if (manualLottoCount == ZERO) {
             return Collections.EMPTY_LIST;
         }
 
-        printMessage(MESSAGE_LOTTO_MANUAL);
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCountManual; i++) {
+        for (int i = 0; i < manualLottoCount; i++) {
             lottos.add(splitByComma(ScannerUtil.readLine()));
         }
+
         return lottos;
     }
 
@@ -61,30 +62,18 @@ public class InputView {
         return new LottoNumber(ScannerUtil.readInt());
     }
 
-    private static boolean isPurchasable(int lottoCountManul) {
-        return lottoCountManul <= lottoCount;
+    private static boolean isPurchasable(int allLottoCount, int manualLottoCount) {
+        return manualLottoCount <= allLottoCount;
     }
 
     private static void validatePurchasable(boolean isPurchasable) {
         if (!isPurchasable) {
             System.out.println(WARNING_LOTTO_COUNT);
-            getManualLottos();
-        }
-    }
-
-    private static boolean isGreaterThan1000(int money) {
-        return money >= MINIMUM_MONEY_TO_BUY;
-    }
-
-    private static void validateGreaterThan1000(boolean isGreaterThan1000) {
-        if (!isGreaterThan1000) {
-            System.out.println(WARNING_MONEY_INPUT);
-            getMoney();
         }
     }
 
     private static Lotto splitByComma(String input) {
-        return Arrays.stream(input.split(COMMA))
+        return Arrays.stream(input.split(DELIMITER))
                 .map(it -> it.trim())
                 .map(it -> ScannerUtil.convertStringToInteger(it))
                 .map(it -> new LottoNumber(it))
@@ -93,10 +82,6 @@ public class InputView {
 
     private static void printMessage(String message) {
         System.out.println(message);
-    }
-
-    public static int getLottoCountAuto() {
-        return lottoCountAuto;
     }
 
 }
