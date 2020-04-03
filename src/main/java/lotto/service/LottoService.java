@@ -74,4 +74,20 @@ public class LottoService {
         dto.setFifthGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
         return dto;
     }
+
+    public MatchedLottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
+        MatchedLottoDto dto = new MatchedLottoDto();
+        Money prize = getAllEarningPrize(tickets, winTicket);
+        int howManyBuyItem = tickets.size();
+        Money buyAmount = Money.buyItemAmount(LottoTicket.PRICE, howManyBuyItem);
+
+        double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
+
+        dto.setEarningRate(rate);
+        return dto;
+    }
+
+    private Money getAllEarningPrize(LottoTickets tickets, WinLottoTicket winTicket) {
+        return tickets.getAllEarningPrize(winTicket);
+    }
 }

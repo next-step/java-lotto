@@ -48,7 +48,7 @@ public class LottoApplication {
         MatchedLottoDto winGame = lottoService.findWinGame(tickets, winLottoTicket);
         ResultView.printResult(winGame);
 
-//        MatchedLottoDto earningRate = lottoGame.getEarningRate(tickets, winLottoTicket);
-//        ResultView.printEarningResult(earningRate);
+        MatchedLottoDto earningRate = lottoService.getEarningRate(tickets, winLottoTicket);
+        ResultView.printEarningResult(earningRate);
     }
 }
