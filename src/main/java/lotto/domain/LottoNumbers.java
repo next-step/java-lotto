@@ -8,6 +8,16 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public static LottoNumbers of(List<LottoNumber> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers);
+    }
+
+    public static LottoNumbers of(int... lottoNumbers) {
+        return new LottoNumbers(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
         verifyDuplicate(lottoNumbers);
         verifySize(lottoNumbers);
@@ -42,16 +52,6 @@ public class LottoNumbers {
                 .map(LottoNumber::getNumber)
                 .sorted()
                 .collect(Collectors.toList());
-    }
-
-    public static LottoNumbers of(List<LottoNumber> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers);
-    }
-
-    public static LottoNumbers of(int... lottoNumbers) {
-        return new LottoNumbers(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList()));
     }
 
     @Override
