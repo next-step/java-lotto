@@ -32,7 +32,7 @@ public class LottoGameTest {
                 new LottoNumber(5),
                 new LottoNumber(6)));
 
-        Assertions.assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(6);
+        Assertions.assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(Rank.valueOf(6));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LottoGameTest {
                 new LottoNumber(8),
                 new LottoNumber(9)));
 
-        assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(3);
+        assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(Rank.valueOf(3));
     }
 
     @Test

@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -10,19 +8,28 @@ import java.util.*;
 
 public class LottoController {
     public static void main(String[] args) {
-        Lotto lotto = LottoController.buyLotto();
-        ResultView.printLotto(lotto.getLottoNumbers());
-        List<LottoNumber> winningNumbers = InputView.getWinningNumbers();
-        int match = LottoGame.match(lotto, new Lotto(winningNumbers));
-        System.out.println(match);
+        Price price = InputView.getPrice();
+        List<Lotto> lottos = LottoController.buyLotto(price.getAvailableBuyTicketCount());
+        for (Lotto lotto : lottos) {
+            ResultView.printLotto(lotto.getLottoNumbers());
+        }
+        Lotto winningLotto = new Lotto(InputView.getWinningNumbers());
+        for (Lotto lotto : lottos) {
+            Rank rank = LottoGame.match(lotto, winningLotto);
+            System.out.println(rank.getWinningMoney());
+        }
     }
 
-    public static Lotto buyLotto() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        Random random = new Random();
-        while (lottoNumbers.size() < 6) {
-            lottoNumbers.add(new LottoNumber(random.nextInt(45) + 1));
+    public static List<Lotto> buyLotto(int ticketCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            Set<LottoNumber> lottoNumbers = new HashSet<>();
+            Random random = new Random();
+            while (lottoNumbers.size() < 6) {
+                lottoNumbers.add(new LottoNumber(random.nextInt(45) + 1));
+            }
+            lottos.add(new Lotto(new ArrayList<>(lottoNumbers)));
         }
-        return new Lotto(new ArrayList<>(lottoNumbers));
+        return lottos;
     }
 }
