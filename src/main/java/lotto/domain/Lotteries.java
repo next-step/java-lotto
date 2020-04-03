@@ -24,8 +24,7 @@ public class Lotteries {
     public LottoResult analyzeWin(final WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumbers purchase : lottoNumbers) {
-            LottoRank lottoRank = winningLotto.match(purchase);
-            lottoResult.increase(lottoRank);
+            lottoResult.rank(purchase, winningLotto);
         }
         return lottoResult;
     }

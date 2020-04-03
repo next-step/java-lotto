@@ -29,12 +29,9 @@ public class LottoResult {
         return chart;
     }
 
-    public void increase(LottoRank lottoRank) {
+    public void rank(final LottoNumbers purchase, final WinningLotto winningLotto) {
+        LottoRank lottoRank = winningLotto.match(purchase);
         chart.put(lottoRank, chart.get(lottoRank) + 1);
-    }
-
-    public int wihCount(LottoRank lottoRank) {
-        return chart.get(lottoRank);
     }
 
     public Map<LottoRank, Integer> getChart() {
