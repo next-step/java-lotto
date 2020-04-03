@@ -7,6 +7,7 @@ public class LottoNumber {
     static final int LOTTO_END_NUMBER = 45;
 
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private final int number;
 
     static {
         for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
@@ -14,7 +15,11 @@ public class LottoNumber {
         }
     }
 
-    private final int number;
+    public static LottoNumber of(int number) {
+        return Optional.ofNullable(lottoNumbers.get(number))
+                .orElseThrow(() -> new IllegalArgumentException(String
+                        .format("%d는 1~45 숫자 사이의 번호가 아닙니다", number)));
+    }
 
     private LottoNumber(int number) {
         this.number = number;
@@ -22,12 +27,6 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
-    }
-
-    public static LottoNumber of(int number) {
-        return Optional.ofNullable(lottoNumbers.get(number))
-                .orElseThrow(() -> new IllegalArgumentException(String
-                        .format("%d는 1~45 숫자 사이의 번호가 아닙니다", number)));
     }
 
     @Override
