@@ -3,22 +3,18 @@ package lotto.domain;
 import lotto.exception.ManualSizeOverflowException;
 import lotto.exception.NoPurchasePriceException;
 
-import java.util.List;
-
 public class LottoStore {
 
     private LottoStore() {}
 
-    // 수동 + 자동
-    public static Lotteries sell(final Price price, final List<LottoNumbers> manualLottoNumbers) {
+    public static Lotteries sell(final Price price, final Lotteries manuals) {
+        int manualCount = manuals.count();
+        int autoCount = price.lotteryCount() - manualCount;
+
         checkAvailablePriceBuyLotto(price);
-        checkLotteriesSize(price, manualLottoNumbers.size());
+        checkLotteriesSize(price, manualCount);
 
-        int autoCount = price.lotteryCount() - manualLottoNumbers.size();
-        Lotteries manuals = LottoNumberGenerator.generateManually(manualLottoNumbers);
-        Lotteries autos = LottoNumberGenerator.generateAutomatically(autoCount);
-
-        return manuals.merge(autos);
+        return manuals.merge(LottoNumberGenerator.generateAutomatically(autoCount));
     }
 
     private static void checkAvailablePriceBuyLotto(final Price price) {
