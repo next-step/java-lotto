@@ -7,23 +7,14 @@ import lotto.domain.RankEnum;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import static java.util.stream.Collectors.joining;
 
-public class LottoResultView {
+public class ResultView {
     private static final String JOIN_DELIMETER = ", ";
 
-    public LottoResultView() {
+    public ResultView() {
 
-    }
-
-    public int inputMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        int inputMoney = scanner.nextInt();
-
-        return inputMoney;
     }
 
     public void viewLottos(List<Lotto> lottos) {
@@ -40,20 +31,6 @@ public class LottoResultView {
                 .map(n -> n.toString())
                 .collect(joining(JOIN_DELIMETER));
         System.out.println("[" + numbers + "]");
-    }
-
-    public String inputWinningNumber() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        String inputWinningNumbers = scanner.next();
-        return inputWinningNumbers;
-    }
-
-    public int inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        Scanner scanner = new Scanner(System.in);
-        int inputWinningNumbers = scanner.nextInt();
-        return inputWinningNumbers;
     }
 
     public void viewInspect(Map<RankEnum, Integer> result) {

@@ -1,15 +1,16 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.view.LottoResultView;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 public class LottoRun {
-
-    private static final LottoResultView lottoResultView = new LottoResultView();
+    private static final ResultView resultView = new ResultView();
+    private static final InputView inputView = new InputView();
 
     public static void main(String[] args) {
         Money myMoney = getMonney();
@@ -24,28 +25,28 @@ public class LottoRun {
     }
 
     private static Money getMonney() {
-        int money = lottoResultView.inputMoney();
+        int money = inputView.inputMoney();
         return new Money(money);
     }
 
     private static List<Lotto> purchaseLottos(Money money) {
         LottoMachine lottoMachine = new LottoMachine();
         List<Lotto> lottos = lottoMachine.purchaseLottos(money);
-        lottoResultView.viewLottos(lottos);
+        resultView.viewLottos(lottos);
 
         return lottos;
     }
 
     private static Lotto getWinningLotto() {
-        String winningNumbers = lottoResultView.inputWinningNumber();
+        String winningNumbers = inputView.inputWinningNumber();
         Lotto winningLotto = Lotto.newManual(winningNumbers);
-        lottoResultView.viewLottoNumbers(winningLotto);
+        resultView.viewLottoNumbers(winningLotto);
 
         return winningLotto;
     }
 
     private static LottoNumber getBonusNumber(Lotto winningLotto) {
-        int bonusNumber = lottoResultView.inputBonusNumber();
+        int bonusNumber = inputView.inputBonusNumber();
         LottoNumber bonusLottoNumber = LottoNumber.newChooseNumber(bonusNumber);
 
         if (winningLotto.isExistNumber(bonusLottoNumber)) {
@@ -58,7 +59,7 @@ public class LottoRun {
         LottoInspector lottoInspector = new LottoInspector();
         Map<RankEnum, Integer> result = lottoInspector.getResult(winningLotto, bonusNumber, lottos);
 
-        lottoResultView.viewInspect(result);
+        resultView.viewInspect(result);
 
         return result;
     }
@@ -68,7 +69,7 @@ public class LottoRun {
         int totalRevenue = lottoInspector.getTotalRevenue(result);
         BigDecimal yield = lottoInspector.getYield(money, totalRevenue);
 
-        lottoResultView.viewInsight(yield);
+        resultView.viewInsight(yield);
 
         return lottoInspector;
     }
