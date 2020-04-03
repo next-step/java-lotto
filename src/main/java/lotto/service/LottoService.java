@@ -3,7 +3,9 @@ package lotto.service;
 import lotto.domain.Money;
 import lotto.domain.item.LottoGame;
 import lotto.domain.item.LottoNumbers;
+import lotto.domain.item.LottoTicket;
 import lotto.domain.item.LottoTickets;
+import lotto.exception.ValidLottoException;
 import lotto.view.MatchedLottoDto;
 import util.StringUtil;
 
@@ -14,6 +16,22 @@ import java.util.stream.Collectors;
 public class LottoService {
 
     private static final String LOTTO_SPLIT_DELIMITER = ",";
+    private static final String IMPOSSIBLE_QUANTITY = "구매 불가능한 수량";
+
+    public Money createMoney(String inputMoney) {
+        return new Money(StringUtil.parseStringToInt(inputMoney));
+    }
+
+    public int validateAvailableQuantity(String inputBuyCount, Money money) {
+        int count = StringUtil.parseStringToInt(inputBuyCount);
+        int availableQuantity = money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
+
+        if (count > availableQuantity) {
+            throw new ValidLottoException(IMPOSSIBLE_QUANTITY);
+        }
+
+        return count;
+    }
 
     public MatchedLottoDto autoPlay(int gameCount) {
         LottoGame lottoGame = new LottoGame();
