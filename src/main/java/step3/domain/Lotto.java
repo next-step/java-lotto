@@ -5,7 +5,8 @@ import java.util.*;
 public class Lotto {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
-    private static final int SELECT_NUMBER = 6;
+    public static final int SELECT_NUMBER = 6;
+    public static final String SPLIT_SIGN = ",";
     private Set<LottoNumber> lottoList = new HashSet<>();
 
     public Lotto() {

@@ -1,11 +1,11 @@
 package step3.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class WinLotto {
+public class WinLotto extends Lotto{
     private static final int ZERO = 0;
-    private static final int SELECT_NUMBER = 6;
-    private static final String SPLIT_SIGN = ",";
     private LottoNumberList winLottoNumber;
     private LottoNumber bonuseBall;
 
@@ -20,7 +20,7 @@ public class WinLotto {
 
     public int match(LottoNumberList buyLottos) {
         return (int) winLottoNumber.getLottoNumberList().stream()
-                .filter(number -> buyLottos.getLottoNumberList().contains(number))
+                .filter(number -> buyLottos.isContains(number))
                 .count();
     }
 

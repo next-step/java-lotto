@@ -1,9 +1,7 @@
 package step3.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class LottoNumberList {
 
@@ -41,5 +39,9 @@ public class LottoNumberList {
 
     public int size() {
         return this.lottoNumberList.size();
+    }
+
+    public boolean isContains(LottoNumber number) {
+        return lottoNumberList.contains(number);
     }
 }

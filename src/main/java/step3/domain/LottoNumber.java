@@ -7,12 +7,12 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_END_NUMBER = 45;
-    private static final Map<Integer, LottoNumber> lottoNumberPackage = new HashMap<>();
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_PACKAGE = new HashMap<>();
     private int lottoNumber;
 
     static {
         for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
-            lottoNumberPackage.put(i, new LottoNumber(i));
+            LOTTO_NUMBER_PACKAGE.put(i, new LottoNumber(i));
         }
     }
 
@@ -24,7 +24,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (lottoNumber > LOTTO_END_NUMBER || lottoNumber < LOTTO_START_NUMBER) {
             throw new IllegalArgumentException("번호형식이 틀렸습니다.");
         }
-        return lottoNumberPackage.get(lottoNumber);
+        return LOTTO_NUMBER_PACKAGE.get(lottoNumber);
     }
 
     @Override
