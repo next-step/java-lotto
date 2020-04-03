@@ -6,7 +6,6 @@ import lotto.view.ResultView;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class LottoRun {
     private static final ResultView resultView = new ResultView();
@@ -19,8 +18,8 @@ public class LottoRun {
 
         WinningLotto winningLotto = getWinningLotto();
 
-        Map<RankEnum, Integer> result = insightResult(winningLotto, myLottos);
-        insightYield(myMoney, result);
+        InsightResult insightResult = getInsightResult(winningLotto, myLottos);
+        insightYield(myMoney, insightResult);
     }
 
     private static Money getMonney() {
@@ -43,18 +42,18 @@ public class LottoRun {
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    private static Map<RankEnum, Integer> insightResult(WinningLotto winningLotto, List<Lotto> lottos) {
+    private static InsightResult getInsightResult(WinningLotto winningLotto, List<Lotto> lottos) {
         LottoInspector lottoInspector = new LottoInspector();
-        Map<RankEnum, Integer> result = lottoInspector.getResult(winningLotto, lottos);
+        InsightResult result = lottoInspector.getResult(winningLotto, lottos);
 
         resultView.viewInspect(result);
 
         return result;
     }
 
-    private static LottoInspector insightYield(Money money, Map<RankEnum, Integer> result) {
+    private static LottoInspector insightYield(Money money, InsightResult insightResult) {
         LottoInspector lottoInspector = new LottoInspector();
-        int totalRevenue = lottoInspector.getTotalRevenue(result);
+        int totalRevenue = insightResult.getTotalRevenue();
         BigDecimal yield = lottoInspector.getYield(money, totalRevenue);
 
         resultView.viewInsight(yield);

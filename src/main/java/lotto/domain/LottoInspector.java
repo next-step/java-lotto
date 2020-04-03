@@ -10,7 +10,7 @@ public class LottoInspector {
     public LottoInspector() {
     }
 
-    public Map<RankEnum, Integer> getResult(WinningLotto winningLotto, List<Lotto> lottos) {
+    public InsightResult getResult(WinningLotto winningLotto, List<Lotto> lottos) {
         Map<RankEnum, Integer> matchedResult = initMatchedResult();
         for (Lotto lotto : lottos) {
             int matchedCount = winningLotto.getWinningLotto().getMatchedCount(lotto);
@@ -18,7 +18,8 @@ public class LottoInspector {
             RankEnum rank = RankEnum.getRank(matchedCount, hasBonus);
             matchedResult.put(rank, matchedResult.getOrDefault(rank, 0) + 1);
         }
-        return matchedResult;
+
+        return new InsightResult(matchedResult);
     }
 
     private Map<RankEnum, Integer> initMatchedResult() {
@@ -27,14 +28,6 @@ public class LottoInspector {
             matchedResult.put(rank, 0);
         }
         return matchedResult;
-    }
-
-    public int getTotalRevenue(Map<RankEnum, Integer> result) {
-        int totalRevenue = 0;
-        for (RankEnum rank : result.keySet()) {
-            totalRevenue += rank.getReward() * result.get(rank);
-        }
-        return totalRevenue;
     }
 
     public BigDecimal getYield(Money money, int totalRevenue) {

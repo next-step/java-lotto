@@ -1,12 +1,12 @@
 package lotto.view;
 
+import lotto.domain.InsightResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.RankEnum;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 
@@ -33,10 +33,10 @@ public class ResultView {
         System.out.println("[" + numbers + "]");
     }
 
-    public void viewInspect(Map<RankEnum, Integer> result) {
+    public void viewInspect(InsightResult insightResult) {
         System.out.println("\n당첨 통계\n--------------------");
-        for (RankEnum rank : result.keySet()) {
-            viewInspectRaw(rank, result.get(rank));
+        for (RankEnum rank : insightResult.getInsightResult().keySet()) {
+            viewInspectRaw(rank, insightResult.getInsightResult().get(rank));
         }
         System.out.println("\n--------------------");
     }
