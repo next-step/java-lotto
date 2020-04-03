@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class BuyerTest {
     @DisplayName("가격에 맞는 개수만큼 로또 티켓 구매 확인")
     @CsvSource(value = {"3500:3", "9800:9", "15920:15"}, delimiter = ':')
     void checkTicketCountByPayMoney(int money, int expectedLottoTicketCount) {
-        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(money);
+        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(Money.of(money));
         assertThat(lottoTickets).hasSize(expectedLottoTicketCount);
     }
 
@@ -41,7 +42,7 @@ public class BuyerTest {
         BuyerResult result = newBuyer.getResult(winningNumbers, LottoNumber.of(17));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
-        assertThat(result.getProfitRate()).isEqualTo(752.5);
+        assertThat(result.getProfitRate()).isEqualTo(new BigDecimal("752.50"));
     }
 
     @Test
@@ -54,7 +55,7 @@ public class BuyerTest {
         BuyerResult result = newBuyer.getResult(winningNumbers, LottoNumber.of(16));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
-        assertThat(result.getProfitRate()).isEqualTo(30000.0);
+        assertThat(result.getProfitRate()).isEqualTo(new BigDecimal("30000.00"));
     }
 
     @ParameterizedTest

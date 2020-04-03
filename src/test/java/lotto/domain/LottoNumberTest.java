@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class LottoNumberTest {
     @ParameterizedTest
@@ -30,6 +31,6 @@ public class LottoNumberTest {
     @DisplayName("로또 번호 생성 캐싱")
     @ValueSource(ints = {1, 22, 33})
     void cachingByCreation(int input) {
-        assertThat(LottoNumber.of(input) == LottoNumber.of(input));
+        assertSame(LottoNumber.of(input), LottoNumber.of(input));
     }
 }

@@ -1,33 +1,34 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class BuyerResult {
     private final List<Rank> winningResult;
-    private final double profitRate;
+    private final BigDecimal profitRate;
 
     public BuyerResult(List<Rank> ranks, int lottoCount) {
         this.winningResult = ranks;
         this.profitRate = calculateProfitRate(lottoCount);
     }
 
-    private double calculateProfitRate(int lottoCount) {
-        long winningAmountSum = getWinningAmountSum();
-        double profitRate = ((double) winningAmountSum) / (lottoCount * LottoTicket.PRICE);
-        return Math.round(profitRate * 100) / 100.0;
+    private BigDecimal calculateProfitRate(int lottoCount) {
+        Money totalReward = getTotalReward();
+        return totalReward.calculateProfit(LottoTicket.TICKET_PRICE.multiply(lottoCount));
     }
 
-    private long getWinningAmountSum() {
+    private Money getTotalReward() {
         return winningResult.stream()
-                .mapToLong(Rank::getAmount)
-                .sum();
+                .map(Rank::getReward)
+                .reduce(Money.ZERO(), Money::sum);
+
     }
 
     public List<Rank> getWinningResult() {
         return winningResult;
     }
 
-    public double getProfitRate() {
+    public BigDecimal getProfitRate() {
         return profitRate;
     }
 }

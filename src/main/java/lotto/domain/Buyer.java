@@ -13,7 +13,7 @@ public class Buyer {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> buyLottoTickets(long money) {
+    public List<LottoTicket> buyLottoTickets(Money money) {
         lottoTickets = LottoMachine.pay(money);
         return lottoTickets;
     }
@@ -29,7 +29,7 @@ public class Buyer {
                 .collect(Collectors.toList());
 
         return winningLottoTicketResults.stream()
-                .map(Rank::findByLottoTicketResult)
+                .map(Rank::of)
                 .collect(Collectors.toList());
     }
 }

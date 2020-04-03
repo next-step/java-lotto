@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoTicket.*;
+
 public class LottoMachine {
-    public static List<LottoTicket> pay(long money) {
+    public static List<LottoTicket> pay(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < getTicketCount(money); i++) {
@@ -18,14 +20,14 @@ public class LottoMachine {
         return new LottoTicket(LottoMixer.mixLottoNumbers());
     }
 
-    private static long getTicketCount(long money) {
-        return money / LottoTicket.PRICE;
+    private static long getTicketCount(Money money) {
+        return money.divide(TICKET_PRICE);
     }
 
-    public static List<LottoTicket> pay(int money, List<LottoTicketForm> lottoTicketForms) {
+    public static List<LottoTicket> pay(Money money, List<LottoTicketForm> lottoTicketForms) {
         List<LottoTicket> result = new ArrayList<>();
-        money = (int) (money - lottoTicketForms.size() * LottoTicket.PRICE);
-        List<LottoTicket> autoLottoTickets = pay(money);
+        Money leftMoney = money.minus(TICKET_PRICE.multiply(lottoTicketForms.size()));
+        List<LottoTicket> autoLottoTickets = pay(leftMoney);
         List<LottoTicket> manualLottoTickets = lottoTicketForms.stream()
                 .map(LottoTicket::ofForm)
                 .collect(Collectors.toList());

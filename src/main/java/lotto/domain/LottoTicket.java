@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 
 public class LottoTicket {
-    static final long PRICE = 1000;
+    static final Money TICKET_PRICE = Money.of(1000);
 
     private final LottoNumbers lottoNumbers;
 

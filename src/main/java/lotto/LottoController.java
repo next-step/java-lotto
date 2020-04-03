@@ -12,7 +12,7 @@ public class LottoController {
         long price = InputView.inputPrice();
 
         Buyer buyer = new Buyer();
-        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(price);
+        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(Money.of(price));
 
         ResultView.printLottoTickets(lottoTickets);
         int[] winningNumbers = InputView.inputWinningNumbers();
