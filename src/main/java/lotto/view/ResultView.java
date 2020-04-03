@@ -23,7 +23,7 @@ public class ResultView {
         }
     }
 
-    public static void printResult(MatchedLottoDto dto) {
+    public static void printResult(StatisticsLottoDto dto) {
         System.out.println(String.format(FIFTH_MESSAGE, dto.getFifthGameCount()));
         System.out.println(String.format(FOURTH_MESSAGE, dto.getFourthGameCount()));
         System.out.println(String.format(THIRD_MESSAGE, dto.getThirdGameCount()));
@@ -31,7 +31,7 @@ public class ResultView {
         System.out.println(String.format(FIRST_MESSAGE, dto.getFirstGameCount()));
     }
 
-    public static void printEarningResult(MatchedLottoDto dto) {
+    public static void printEarningResult(StatisticsLottoDto dto) {
         System.out.println(String.format(EARNING_RATE_MESSAGE, dto.getEarningRate()));
     }
 }

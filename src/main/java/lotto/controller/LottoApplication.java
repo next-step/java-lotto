@@ -6,6 +6,7 @@ import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.MatchedLottoDto;
 import lotto.view.ResultView;
+import lotto.view.StatisticsLottoDto;
 import util.StringUtil;
 
 import java.util.ArrayList;
@@ -45,10 +46,10 @@ public class LottoApplication {
         ticketTmp.addAll(autoDto.getTickets().getTickets());
         LottoTickets tickets = new LottoTickets(ticketTmp);
 
-        MatchedLottoDto winGame = lottoService.findWinGame(tickets, winLottoTicket);
+        StatisticsLottoDto winGame = lottoService.findWinGame(tickets, winLottoTicket);
         ResultView.printResult(winGame);
 
-        MatchedLottoDto earningRate = lottoService.getEarningRate(tickets, winLottoTicket);
+        StatisticsLottoDto earningRate = lottoService.getEarningRate(tickets, winLottoTicket);
         ResultView.printEarningResult(earningRate);
     }
 }
