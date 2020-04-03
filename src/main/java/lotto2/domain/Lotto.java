@@ -1,9 +1,6 @@
 package lotto2.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
 
@@ -15,7 +12,11 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return new HashSet<>(lottoNumbers);
+        return new TreeSet<>(lottoNumbers);
+    }
+
+    private boolean isLottoNumberMatch(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public int getMatchCount(Lotto lotto) {
@@ -23,18 +24,15 @@ public class Lotto {
         for (LottoNumber lottoNumber : lottoNumbers) {
             matchCount += lotto.isLottoNumberMatch(lottoNumber) ? 1 : 0;
         }
-        return matchCount;
-    }
 
-    private boolean isLottoNumberMatch(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return matchCount;
     }
 
     private Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MAX_LOTTO_COUNT) {
             throw new IllegalArgumentException("중복 없이 숫자를 6개 입력해주세요.");
         }
-        return new HashSet<>(lottoNumbers);
+        return new TreeSet<>(lottoNumbers);
     }
 
     @Override

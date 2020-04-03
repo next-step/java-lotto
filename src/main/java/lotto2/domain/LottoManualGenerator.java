@@ -1,6 +1,8 @@
 package lotto2.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,7 +18,7 @@ public class LottoManualGenerator implements GenerateStrategy {
     }
 
     @Override
-    public Set<LottoNumber> generateNumbers() {
+    public List<LottoNumber> generateNumbers() {
         return convertToNumbers(splitText(inputText));
     }
 
@@ -26,11 +28,11 @@ public class LottoManualGenerator implements GenerateStrategy {
                 .collect(Collectors.toList());
     }
 
-    private Set<LottoNumber> convertToNumbers(List<String> text) {
+    private List<LottoNumber> convertToNumbers(List<String> text) {
         return text.stream()
                 .map(this::parseToInt)
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     private int parseToInt(String inputText) {
