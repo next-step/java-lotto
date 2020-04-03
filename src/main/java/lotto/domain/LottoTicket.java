@@ -10,6 +10,7 @@ public class LottoTicket {
     static final Money TICKET_PRICE = Money.of(1000);
 
     private final LottoNumbers lottoNumbers;
+    private final boolean auto;
 
     static LottoTicket of(int... lottoNumbers) {
         return new LottoTicket(Arrays.stream(lottoNumbers)
@@ -18,23 +19,28 @@ public class LottoTicket {
     }
 
     static LottoTicket ofForm(LottoTicketForm lottoTicketForm) {
-        return new LottoTicket(lottoTicketForm.getLottoNumbers());
+        return new LottoTicket(lottoTicketForm.getLottoNumbers(), false);
     }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = LottoNumbers.of(lottoNumbers);
+        this(LottoNumbers.of(lottoNumbers), true);
     }
 
-    private LottoTicket(LottoNumbers lottoNumbers) {
+    private LottoTicket(LottoNumbers lottoNumbers, boolean auto) {
         this.lottoNumbers = lottoNumbers;
+        this.auto = auto;
+    }
+
+    Rank checkWinning(WinningLotto winningLotto) {
+        return Rank.of(winningLotto.match(lottoNumbers));
     }
 
     public List<Integer> getLottoNumbers() {
         return lottoNumbers.getLottoNumbers();
     }
 
-    Rank checkWinning(WinningLotto winningLotto) {
-        return Rank.of(winningLotto.match(lottoNumbers));
+    public boolean isAuto() {
+        return auto;
     }
 
     @Override
