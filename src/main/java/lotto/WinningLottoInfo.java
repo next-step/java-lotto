@@ -18,9 +18,10 @@ public class WinningLottoInfo {
     }
 
     public WinningLottoInfo(int bonusBall, String inputText) {
-        this.bonusBall = new LottoNo(bonusBall);
+        this.bonusBall = LottoNo.of(bonusBall);
         Set<LottoNo> numbers = splitWinningNumber(inputText);
         this.winningNumbers = new LottoNumbers(numbers);
+        validateBonusBall();
     }
 
     public LottoNumbers enterWinningNumbers() {
@@ -34,9 +35,16 @@ public class WinningLottoInfo {
 
     public LottoNo enterBonusBall() {
         System.out.println("\n보너스 볼을 입력해 주세요");
-        LottoNo bonusBall = new LottoNo(scanner.nextInt());
+        LottoNo bonusBall = LottoNo.of(scanner.nextInt());
         this.bonusBall = bonusBall;
+        validateBonusBall();
         return bonusBall;
+    }
+
+    public void validateBonusBall() {
+        if (this.winningNumbers.getNumbers().contains(this.bonusBall)) {
+            throw new IllegalArgumentException("당첨번호와 보너스볼이 중복됩니다.");
+        }
     }
 
     private Set<LottoNo> splitWinningNumber(String inputText) {
@@ -57,4 +65,5 @@ public class WinningLottoInfo {
     public static WinningLottoInfo getWinningLottoInfo() {
         return winningLottoInfo;
     }
+
 }
