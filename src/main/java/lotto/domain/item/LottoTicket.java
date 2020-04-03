@@ -1,6 +1,6 @@
 package lotto.domain.item;
 
-import enums.LottoPrize;
+import enums.Rank;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class LottoTicket extends Lotto {
         super(numbers);
     }
 
-    public int getLuckyNumberMatchCount(WinLottoTicket winTicket) {
+    public int getMatchCount(WinLottoTicket winTicket) {
         int matchCount = 0;
         for (LottoNumber num : this.numbers.getValue()) {
             matchCount = increaseCountIfMatch(winTicket, matchCount, num);
@@ -39,9 +39,9 @@ public class LottoTicket extends Lotto {
         return numbers.getValue().contains(bonus);
     }
 
-    public LottoPrize getRank(WinLottoTicket winLottoTicket) {
-        int matchCount = getLuckyNumberMatchCount(winLottoTicket);
+    public Rank getRank(WinLottoTicket winLottoTicket) {
+        int matchCount = getMatchCount(winLottoTicket);
         boolean matchBonus = isMatchBonus(winLottoTicket);
-        return LottoPrize.findRank(matchCount, matchBonus);
+        return Rank.findRank(matchCount, matchBonus);
     }
 }
