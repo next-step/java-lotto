@@ -11,10 +11,9 @@ public class LottoController {
     public static void main(String[] args) {
         long price = InputView.inputPrice();
 
-        Buyer buyer = new Buyer();
-        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(Money.of(price));
+        Buyer buyer = Buyer.of(Money.of(price));
 
-        ResultView.printLottoTickets(lottoTickets);
+        ResultView.printLottoTickets(buyer.getLottoTickets());
 
         LottoNumbers winningNumbers = LottoNumbers.of(InputView.inputWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());

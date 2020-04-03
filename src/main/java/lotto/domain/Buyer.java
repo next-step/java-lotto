@@ -4,17 +4,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Buyer {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    public Buyer() {
+    public static Buyer of(Money money) {
+        return new Buyer(LottoMachine.createLottoTickets(money));
     }
 
-    public Buyer(List<LottoTicket> lottoTickets) {
+    public static Buyer of(Money money, LottoTicketForms lottoTicketForms) {
+        return new Buyer(LottoMachine.createLottoTickets(money, lottoTicketForms));
+    }
+
+    public static Buyer of(List<LottoTicket> lottoTickets) {
+        return new Buyer(lottoTickets);
+    }
+
+    private Buyer(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> buyLottoTickets(Money money) {
-        lottoTickets = LottoMachine.pay(money);
+    public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
 

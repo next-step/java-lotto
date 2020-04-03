@@ -15,12 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class BuyerTest {
-    private Buyer buyer;
     private LottoNumbers winningNumbers;
 
     @BeforeEach
     void setUp() {
-        buyer = new Buyer();
         winningNumbers = LottoNumbers.of(1, 2, 3, 4, 5, 6);
     }
 
@@ -28,7 +26,8 @@ public class BuyerTest {
     @DisplayName("가격에 맞는 개수만큼 로또 티켓 구매 확인")
     @CsvSource(value = {"3500:3", "9800:9", "15920:15"}, delimiter = ':')
     void checkTicketCountByPayMoney(int money, int expectedLottoTicketCount) {
-        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(Money.of(money));
+        Buyer buyer = Buyer.of(Money.of(money));
+        List<LottoTicket> lottoTickets = buyer.getLottoTickets();
         assertThat(lottoTickets).hasSize(expectedLottoTicketCount);
     }
 
@@ -38,7 +37,7 @@ public class BuyerTest {
         LottoTicket thirdTicket = createTicket(1, 2, 3, 4, 5, 16);
         LottoTicket fourthTicket = createTicket(1, 2, 3, 14, 15, 16);
 
-        Buyer newBuyer = new Buyer(Arrays.asList(thirdTicket, fourthTicket));
+        Buyer newBuyer = Buyer.of(Arrays.asList(thirdTicket, fourthTicket));
         BuyerResult result = newBuyer.getResult(WinningLotto.of(LottoNumber.of(17), winningNumbers));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
@@ -51,7 +50,7 @@ public class BuyerTest {
         LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
         LottoTicket fourthTicket = createTicket(1, 2, 3, 4, 5, 16);
 
-        Buyer newBuyer = new Buyer(Arrays.asList(secondTicket, fourthTicket));
+        Buyer newBuyer = Buyer.of(Arrays.asList(secondTicket, fourthTicket));
         BuyerResult result = newBuyer.getResult(WinningLotto.of(LottoNumber.of(16), winningNumbers));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
@@ -64,7 +63,7 @@ public class BuyerTest {
     void nonDuplicatedByInputBonus(int bonusNumber) {
         LottoTicket secondTicket = createTicket(1, 2, 3, 4, 5, 16);
 
-        Buyer newBuyer = new Buyer(Arrays.asList(secondTicket));
+        Buyer newBuyer = Buyer.of(Arrays.asList(secondTicket));
         assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
             newBuyer.getResult(WinningLotto.of(LottoNumber.of(bonusNumber), winningNumbers));
         }).withMessage(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber));
