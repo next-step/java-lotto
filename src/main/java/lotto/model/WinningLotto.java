@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.List;
+
 import static lotto.util.MessageUtil.WARNING_BONUS_BALL_NOT_IN_LOTTO;
 
 public class WinningLotto {
@@ -16,5 +18,13 @@ public class WinningLotto {
         if (lotto.hasBonusBallNumber(bonusBall)) {
             throw new IllegalArgumentException(WARNING_BONUS_BALL_NOT_IN_LOTTO);
         }
+    }
+
+    public List<LottoNumber> getLotto() {
+        return lotto.getLottoNumbers();
+    }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
     }
 }

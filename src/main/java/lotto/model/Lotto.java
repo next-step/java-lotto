@@ -1,10 +1,9 @@
 package lotto.model;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 import static lotto.util.MessageUtil.WARNING_LOTTO_NON_DUPLICATION;
 import static lotto.util.MessageUtil.WARNING_LOTTO_SIZE;
 
@@ -21,6 +20,22 @@ public class Lotto {
         return lottoNumbers.contains(bonusBall);
     }
 
+    public Rank match(WinningLotto winningLotto) {
+        int matchCount = findMatchCount(winningLotto.getLotto());
+        boolean hasBonusBall = hasBonusBall(winningLotto.getBonusBall());
+        return Rank.getMatchResult(matchCount, hasBonusBall);
+    }
+
+    private int findMatchCount(List<LottoNumber> winningLotto){
+        return winningLotto.stream()
+                .filter(it -> lottoNumbers.equals(it))
+                .collect(collectingAndThen(toList(), Collection::size));
+    }
+
+    private boolean hasBonusBall(LottoNumber bonusNumber){
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     private void validateSizeSix(List<LottoNumber> lotto) {
         if (lotto.size() != 6) {
             throw new IllegalArgumentException(WARNING_LOTTO_SIZE);
@@ -35,12 +50,12 @@ public class Lotto {
         }
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumbers);
-    }
-
-    public Rank match(WinningLotto winningLotto) {
-        return null;
     }
 }

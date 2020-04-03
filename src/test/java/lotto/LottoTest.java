@@ -67,7 +67,7 @@ public class LottoTest {
     void matchTestForFirst() {
         //given
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(1));
+            lottoNumbers.add(new LottoNumber(i));
         }
         Lotto myLotto = new Lotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(myLotto, new LottoNumber(7));
