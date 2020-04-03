@@ -1,11 +1,14 @@
 package lotto.view;
 
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.util.ScannerUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 import static lotto.util.MessageUtil.*;
 
@@ -33,10 +36,10 @@ public class InputView {
         return lottoCountManual;
     }
 
-    public static List<List<Integer>> getInputForLottoManual() {
+    public static List<Lotto> getInputForLottoManual() {
         printMessage(MESSAGE_LOTTO_MANUAL);
 
-        List<List<Integer>> lottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCountManual; i++) {
             lottos.add(splitByComma(ScannerUtil.readLine()));
         }
@@ -44,14 +47,14 @@ public class InputView {
         return lottos;
     }
 
-    public static List<Integer> getInputForWinningLotto() {
+    public static Lotto getInputForWinningLottoNumbers() {
         printMessage(MESSAGE_WINNING_LOTTO);
         return splitByComma(ScannerUtil.readLine());
     }
 
-    public static Integer getInputForBonusBall() {
+    public static LottoNumber getInputForBonusBall() {
         printMessage(MESSAGE_BONUS_BALL);
-        return ScannerUtil.readInt();
+        return new LottoNumber(ScannerUtil.readInt());
     }
 
     private static boolean isPurchasable(int lottoCountManul) {
@@ -76,10 +79,11 @@ public class InputView {
         }
     }
 
-    private static List<Integer> splitByComma(String input) {
+    private static Lotto splitByComma(String input) {
         return Arrays.stream(input.split(COMMA))
                 .map(it -> ScannerUtil.convertStringToInteger(it))
-                .collect(toList());
+                .map(it -> new LottoNumber(it))
+                .collect(collectingAndThen(toList(), Lotto::new));
     }
 
     private static void printMessage(String message) {
