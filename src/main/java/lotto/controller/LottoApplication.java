@@ -26,24 +26,23 @@ public class LottoApplication {
 
         ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
 
-        LottoDto dto1 = lottoService.passivityPlay(buyPassivityCount);
-        ResultView.printLoots(dto1);
-        LottoDto dto = lottoService.autoPlay(availableBuyCount - buyCount);
-        ResultView.printLoots(dto);
+        LottoDto passivityDto = lottoService.passivityPlay(buyPassivityCount);
+        LottoDto autoDto = lottoService.autoPlay(availableBuyCount - buyCount);
+        ResultView.printLoots(passivityDto);
+        ResultView.printLoots(autoDto);
 
         String winNumberInput = InputView.inputWinNumber();
-
-        List<Integer> luckyNumber = StringUtil.splitStringToIntegers(winNumberInput);
-        Collections.sort(luckyNumber);
+        List<Integer> winNumber = StringUtil.splitStringToIntegers(winNumberInput);
+        Collections.sort(winNumber);
 
         int bonus = StringUtil.parseStringToInt(InputView.inputBonusLuckyNumber());
         WinLottoTicket winLottoTicket = new WinLottoTicket(
-                LottoNumbers.createLottoNumbersUseInteger(luckyNumber), new LottoNumber(bonus));
+                LottoNumbers.createLottoNumbersUseInteger(winNumber), new LottoNumber(bonus));
 
         LottoGame lottoGame = new LottoGame(money);
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.addAll(dto1.getTickets().getTickets());
-        tickets.addAll(dto.getTickets().getTickets());
+        tickets.addAll(passivityDto.getTickets().getTickets());
+        tickets.addAll(autoDto.getTickets().getTickets());
 
         LottoTickets tickets1 = new LottoTickets(tickets);
 
