@@ -15,14 +15,6 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
     public static Rank valueOf(int countOfMatch) {
         Rank rank = null;
         switch (countOfMatch) {
@@ -43,5 +35,13 @@ public enum Rank {
                 break;
         }
         return rank;
+    }
+
+    public int getCountOfMatch() {
+        return countOfMatch;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
