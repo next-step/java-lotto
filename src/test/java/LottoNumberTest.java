@@ -1,3 +1,4 @@
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,5 +11,14 @@ public class LottoNumberTest {
     @ValueSource(ints = {1,2,45})
     void createTest(int input) {
         assertThatCode(() -> new LottoNumber(input)).doesNotThrowAnyException();
+    }
+
+    @DisplayName("1~45 범위 밖의 숫자가 입력되면 예외")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46})
+    void throwExceptionWhenOutOfRangeFrom1To45(int input) {
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> {
+            new LottoNumber(input);
+        });
     }
 }
