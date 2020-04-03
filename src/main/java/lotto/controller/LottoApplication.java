@@ -25,7 +25,6 @@ public class LottoApplication {
         List<String> buyPassivityCount = InputView.inputBuyPassivityLottoNumber(buyCount);
 
         int availableBuyCount = lottoService.getAvailableBuyCount(money.minus(10));
-
         ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
 
         MatchedLottoDto passivityDto = lottoService.passivityPlay(buyPassivityCount);
@@ -41,17 +40,15 @@ public class LottoApplication {
         WinLottoTicket winLottoTicket = new WinLottoTicket(
                 LottoNumbers.createLottoNumbersUseInteger(winNumber), new LottoNumber(bonus));
 
-        LottoGame lottoGame = new LottoGame(money);
-        List<LottoTicket> tickets = new ArrayList<>();
-        tickets.addAll(passivityDto.getTickets().getTickets());
-        tickets.addAll(autoDto.getTickets().getTickets());
+        List<LottoTicket> ticketTmp = new ArrayList<>();
+        ticketTmp.addAll(passivityDto.getTickets().getTickets());
+        ticketTmp.addAll(autoDto.getTickets().getTickets());
+        LottoTickets tickets = new LottoTickets(ticketTmp);
 
-        LottoTickets tickets1 = new LottoTickets(tickets);
-
-        MatchedLottoDto winGame = lottoGame.findWinGame(tickets1, winLottoTicket);
+        MatchedLottoDto winGame = lottoService.findWinGame(tickets, winLottoTicket);
         ResultView.printResult(winGame);
 
-        MatchedLottoDto earningRate = lottoGame.getEarningRate(tickets1, winLottoTicket);
-        ResultView.printEarningResult(earningRate);
+//        MatchedLottoDto earningRate = lottoGame.getEarningRate(tickets, winLottoTicket);
+//        ResultView.printEarningResult(earningRate);
     }
 }
