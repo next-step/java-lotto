@@ -15,6 +15,12 @@ public class WinningLotto {
         return new WinningLotto(winningLotteNumbers, bonusBall);
     }
 
+    LottoRank match(final LottoNumbers lottoNumbers) {
+        final int matchCount = lottoNumbers.analyzeMatchCount(winningLotteNumbers);
+        final boolean hasBonusBall = lottoNumbers.hasBonusBall(bonusBall);
+        return LottoRank.findRank(matchCount, hasBonusBall);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
