@@ -18,16 +18,16 @@ public class MoneyTest {
 
     @DisplayName("구입한 로또의 갯수를 구할 수 있다.")
     @ParameterizedTest
-    @ValueSource(ints = {1000})
-    void testMoneyPerLottoCount(final int amount) {
+    @ValueSource(longs = {1000})
+    void testMoneyPerLottoCount(final long amount) {
         Money money = new Money(amount);
         assertThat(money.getLottoCount()).isEqualTo(1);
     }
 
     @DisplayName("금액은 1000원 이상 입력되어한다.")
     @ParameterizedTest
-    @ValueSource(ints = {0, 500})
-    void testMoneyOverThousand(final int amount) {
+    @ValueSource(longs = {0, 500})
+    void testMoneyOverThousand(final long amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Money(amount));
     }

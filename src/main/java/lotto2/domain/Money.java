@@ -5,13 +5,13 @@ import java.util.Objects;
 public class Money {
     private static final int LOTTO_PRICE = 1000;
 
-    private final int amount;
+    private final long amount;
 
-    public Money(final int amount) {
+    public Money(final long amount) {
         this.amount = validatePrice(amount);
     }
 
-    private int validatePrice(int amount) {
+    private long validatePrice(long amount) {
         if (amount >= LOTTO_PRICE) {
             return amount;
         }
@@ -19,8 +19,12 @@ public class Money {
         throw new IllegalArgumentException("1000원보다 큰 값을 입력해야합니다.");
     }
 
-    public int getLottoCount() {
+    public long getLottoCount() {
         return amount / LOTTO_PRICE;
+    }
+
+    public long getAmount() {
+        return amount;
     }
 
     @Override
