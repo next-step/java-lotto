@@ -20,7 +20,8 @@ public class Application {
         LottoNumbers winningLotteNumbers = inputView.inputLastWeekendWinningLottery();
         LottoNumber bonusBall = inputView.inputBonusBall();
 
-        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers, bonusBall);
+        WinningLotto winningLotto = WinningLotto.of(winningLotteNumbers, bonusBall);
+        LottoResult lottoResult = lotteries.analyzeWin(winningLotto);
 
         OutputView.printLottoResult(lottoResult.getChart());
         OutputView.printRatio(lottoResult.ratio(inputPrice));
