@@ -13,4 +13,5 @@ public class MessageUtil {
     public static final String WARNING_LOTTO_COUNT = "로또 금액이 부족합니다. 갯수를 다시 입력해 주세요.";
 
     public static final String WARNING_LOTTO_NUMBER_RANGE = "로또의 번호는 1이상 45이하의 숫자만 가능합니다.";
+    public static final String WARNING_LOTTO_SIZE = "로또는 6개의 LottoNumber로 구성되어야 합니다.";
 }

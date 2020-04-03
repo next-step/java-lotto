@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ public class LottoTest {
     @DisplayName("LottoNumber 객체 6개를 주면 정상적으로 Lotto 객체 생성")
     @Test
     void createTest() {
-        for(int i=1; i<=6; i++){
+        for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
 
@@ -27,8 +26,8 @@ public class LottoTest {
 
     @DisplayName("LottoNumber 객체가 6개보다 적으면 예외 발생")
     @Test
-    void throwExceptionWhenNotSixLottoNumbers(){
-        for(int i=1; i<=5; i++){
+    void throwExceptionWhenNotSixLottoNumbers() {
+        for (int i = 1; i <= 5; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
 
@@ -39,8 +38,8 @@ public class LottoTest {
 
     @DisplayName("LottoNumber 객체가 6개보다 많으면 예외 발생")
     @Test
-    void throwExceptionWhenNotSixLottoNumbers_2(){
-        for(int i=1; i<=7; i++){
+    void throwExceptionWhenNotSixLottoNumbers_2() {
+        for (int i = 1; i <= 7; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
 
