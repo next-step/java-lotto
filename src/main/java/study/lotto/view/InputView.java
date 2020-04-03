@@ -62,4 +62,7 @@ public class InputView {
                 .map(number -> Integer.parseInt(number.trim()))
                 .collect(Collectors.toList());
     }
+
+    private InputView() {
+    }
 }

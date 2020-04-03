@@ -26,4 +26,7 @@ public class LottoController {
                         bonusNumber));
         ResultView.displayResult(lottoResult);
     }
+
+    private LottoController() {
+    }
 }

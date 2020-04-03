@@ -18,7 +18,6 @@ public class ResultView {
     private static String RATE_OF_RETURN_ADDITIONAL_MESSAGE =
             "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-
     public static void displayBuyingLotto(Lottos lottos) {
         System.out.println(lottos.size() + BUY_MESSAGE);
         for (Lotto lotto : lottos) {
@@ -70,5 +69,8 @@ public class ResultView {
         if (rateOfReturn < 1) {
             System.out.println(RATE_OF_RETURN_ADDITIONAL_MESSAGE);
         }
+    }
+
+    private ResultView() {
     }
 }
