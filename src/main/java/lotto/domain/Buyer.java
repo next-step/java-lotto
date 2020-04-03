@@ -19,7 +19,7 @@ public class Buyer {
     }
 
     public BuyerResult getResult(WinningLotto winningLotto) {
-        return new BuyerResult(getWinningResult(winningLotto), lottoTickets.size());
+        return BuyerResult.of(getWinningResult(winningLotto));
     }
 
     private List<Rank> getWinningResult(WinningLotto winningLotto) {

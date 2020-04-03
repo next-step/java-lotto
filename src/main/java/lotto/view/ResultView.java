@@ -30,7 +30,7 @@ public class ResultView {
         Arrays.stream(Rank.values())
                 .forEach(winningValue -> printWinningStatistics(winningResult, winningValue));
 
-        double profitRate = buyerResult.getProfitRate().doubleValue();
+        double profitRate = buyerResult.calculateProfitRate().doubleValue();
         System.out.print(String.format(WINNING_STATISTICS_PROFIT_RATE_FORMAT, profitRate));
         printProfitRateDescription(profitRate);
     }

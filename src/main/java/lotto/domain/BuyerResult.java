@@ -5,16 +5,23 @@ import java.util.List;
 
 public class BuyerResult {
     private final List<Rank> winningResult;
-    private final BigDecimal profitRate;
 
-    public BuyerResult(List<Rank> ranks, int lottoCount) {
-        this.winningResult = ranks;
-        this.profitRate = calculateProfitRate(lottoCount);
+    public static BuyerResult of(List<Rank> winningResult) {
+        return new BuyerResult(winningResult);
     }
 
-    private BigDecimal calculateProfitRate(int lottoCount) {
+    private BuyerResult(List<Rank> ranks) {
+        this.winningResult = ranks;
+    }
+
+    public List<Rank> getWinningResult() {
+        return winningResult;
+    }
+
+    public BigDecimal calculateProfitRate() {
         Money totalReward = getTotalReward();
-        return totalReward.calculateProfit(LottoTicket.TICKET_PRICE.multiply(lottoCount));
+        return totalReward.calculateProfit(LottoTicket.TICKET_PRICE
+                .multiply(winningResult.size()));
     }
 
     private Money getTotalReward() {
@@ -24,11 +31,4 @@ public class BuyerResult {
 
     }
 
-    public List<Rank> getWinningResult() {
-        return winningResult;
-    }
-
-    public BigDecimal getProfitRate() {
-        return profitRate;
-    }
 }

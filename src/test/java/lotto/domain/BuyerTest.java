@@ -42,7 +42,7 @@ public class BuyerTest {
         BuyerResult result = newBuyer.getResult(WinningLotto.of(LottoNumber.of(17), winningNumbers));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
-        assertThat(result.getProfitRate()).isEqualTo(new BigDecimal("752.50"));
+        assertThat(result.calculateProfitRate()).isEqualTo(new BigDecimal("752.50"));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class BuyerTest {
         BuyerResult result = newBuyer.getResult(WinningLotto.of(LottoNumber.of(16), winningNumbers));
 
         assertThat(result.getWinningResult().size()).isEqualTo(2);
-        assertThat(result.getProfitRate()).isEqualTo(new BigDecimal("30000.00"));
+        assertThat(result.calculateProfitRate()).isEqualTo(new BigDecimal("30000.00"));
     }
 
     @ParameterizedTest
