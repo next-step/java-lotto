@@ -17,13 +17,25 @@ public class LottoNumberGenerator {
 
     private LottoNumberGenerator() {}
 
-    public static LottoNumbers generate() {
+    public static Lotteries generateManually(final List<LottoNumbers> manualLottoNumbers) {
+        return new Lotteries(manualLottoNumbers);
+    }
+
+    public static Lotteries generateAutomatically(final int autoCount) {
+        List<LottoNumbers> lotteries = new ArrayList<>();
+        for (int i = START_INDEX; i < autoCount; i++) {
+            lotteries.add(LottoNumberGenerator.generate());
+        }
+        return new Lotteries(lotteries);
+    }
+
+    private static LottoNumbers generate() {
         List<LottoNumber> lottoNumbers = generateUnRedundantNumbers();
         Collections.shuffle(lottoNumbers);
         return new LottoNumbers(lottoNumbers);
     }
 
-    static List<LottoNumber> generateUnRedundantNumbers() {
+    private static List<LottoNumber> generateUnRedundantNumbers() {
         Set<LottoNumber> set = new HashSet<>();
         while (set.size() < LottoNumbers.LOTTO_NUMBER_MAX_SIZE) {
             set.add(cache[random() - LottoNumber.MIN]);
