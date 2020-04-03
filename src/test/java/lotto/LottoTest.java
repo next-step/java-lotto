@@ -47,4 +47,16 @@ public class LottoTest {
             new Lotto(lottoNumbers);
         });
     }
+
+    @DisplayName("중복된 숫자가 있으면 예외 발생")
+    @Test
+    void throwExceptionWhenDuplication(){
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(new LottoNumber(1));
+        }
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            new Lotto(lottoNumbers);
+        }).withMessageContaining("6개");
+    }
 }
