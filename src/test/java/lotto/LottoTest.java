@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.model.Rank.FIRST;
-import static lotto.model.Rank.SECOND;
+import static lotto.model.Rank.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
@@ -98,6 +97,25 @@ public class LottoTest {
         //then
         assertThat(rank).isEqualTo(SECOND);
     }
+
+    @DisplayName("2등 확인")
+    @Test
+    void matchTestForThird() {
+        //given
+        WinningLotto winningLotto = new WinningLotto(createLottoFromOneToSix(), new LottoNumber(8));
+
+        for (int i = 2; i <= 7; i++) {
+            myLottoNumbers.add(new LottoNumber(i));
+        }
+        Lotto myLotto = new Lotto(myLottoNumbers);
+
+        //when
+        Rank rank = myLotto.match(winningLotto);
+
+        //then
+        assertThat(rank).isEqualTo(THIRD);
+    }
+
 
     Lotto createLottoFromOneToSix(){
         for (int i = 1; i <= 6; i++) {
