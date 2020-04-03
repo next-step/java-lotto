@@ -15,13 +15,15 @@ import java.util.List;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        String inputMoney = InputView.inputBuyAmount();
-        Money money = new Money(StringUtil.parseStringToInt(inputMoney));
+        LottoService lottoService = new LottoService();
 
-        int buyCount = StringUtil.parseStringToInt(InputView.inputBuyPassivityCount());
+        String inputMoney = InputView.inputBuyAmount();
+        Money money = lottoService.createMoney(inputMoney);
+
+        String inputBuyCount = InputView.inputBuyPassivityCount();
+        int buyCount = lottoService.validateAvailableQuantity(inputBuyCount, money);
         List<String> buyPassivityCount = InputView.inputBuyPassivityLottoNumber(buyCount);
 
-        LottoService lottoService = new LottoService();
         int availableBuyCount = lottoService.getAvailableBuyCount(money.minus(10));
 
         ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
