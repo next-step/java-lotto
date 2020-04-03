@@ -1,9 +1,15 @@
 package lotto;
 
 import lotto.model.Rank;
+import lotto.model.Results;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static lotto.model.Rank.*;
+import static lotto.model.Rank.BLANK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
@@ -13,5 +19,19 @@ public class RankTest {
         Rank matchResult = Rank.getMatchResult(6, false);
 
         assertThat(matchResult).isEqualTo(Rank.FIRST);
+    }
+
+    @DisplayName("Results 를 주면, 총 상금을 반환한다.")
+    @Test
+    void getAllPrizeMoneyTest() {
+        //given
+        List<Rank> ranks = Arrays.asList(BLANK, SECOND, BLANK, FIFTH, BLANK);
+        Results results = Results.reflectAll(ranks);
+
+        //when
+        int allPrizeMoney = Rank.getAllPrizeMoney(ranks);
+
+        //then
+        assertThat(allPrizeMoney).isEqualTo(3_005_000);
     }
 }
