@@ -1,9 +1,6 @@
 package study.lotto.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -41,7 +38,7 @@ public class InputView {
         if (customNumberCount > 0) {
             return getCustomNumberDetail(customNumberCount);
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public static List<List<Integer>> getCustomNumberDetail(
