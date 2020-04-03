@@ -34,22 +34,8 @@ public class LottoNumbers {
             throw new OutOfLottoNumberSizeException();
         }
     }
-    
-    private List<LottoNumber> deepCopy() {
-        List<LottoNumber> clone = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            clone.add(LottoNumber.clone(lottoNumber));
-        }
-        return clone;
-    }
 
-    LottoRank analyzeRank(final LottoNumbers winningLotteNumbers, final LottoNumber bonusBall) {
-        int matchCount = analyzeMatchCount(winningLotteNumbers);
-        boolean hasBonusBall = this.hasBonusBall(bonusBall);
-        return LottoRank.findRank(matchCount, hasBonusBall);
-    }
-
-    private int analyzeMatchCount(final LottoNumbers winningLotteNumbers) {
+    int analyzeMatchCount(final LottoNumbers winningLotteNumbers) {
         List<LottoNumber> source = this.deepCopy();
         List<LottoNumber> win = winningLotteNumbers.deepCopy();
         source.removeAll(win);
@@ -58,6 +44,14 @@ public class LottoNumbers {
 
     boolean hasBonusBall(final LottoNumber bonusBall) {
         return lottoNumbers.contains(bonusBall);
+    }
+    
+    private List<LottoNumber> deepCopy() {
+        List<LottoNumber> clone = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            clone.add(LottoNumber.clone(lottoNumber));
+        }
+        return clone;
     }
 
     @Override
