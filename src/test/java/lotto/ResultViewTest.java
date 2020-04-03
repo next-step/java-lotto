@@ -89,7 +89,7 @@ class ResultViewTest {
     @Test
     void printWinningResult() {
         Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
-        String result = resultView.printWinningResult(winningLottos);
+        String result = resultView.winningResult(winningLottos);
         System.out.println(result);
         assertThat(result).isEqualTo("당첨통계\n"
                                      + "---------\n"
@@ -133,7 +133,6 @@ class ResultViewTest {
                                                                                                  LottoNo.of(42))
                                                                                              .collect(Collectors
                                                                                                               .toSet())));
-
         assertThat(match).isTrue();
     }
 }

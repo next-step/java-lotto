@@ -15,22 +15,21 @@ public class LottoController {
         int manualCount = inputView.enterManualCount(purchaseCount);
         int automaticCount = inputView.getAutomaticCount(purchaseCount, manualCount);
 
-        System.out.println(inputView.purchaseLottoTicketInfo(manualCount, automaticCount));
+        resultView.printResult(resultView.purchaseLottoTicketInfo(manualCount, automaticCount));
 
         LottoTicket manualLottoTicket = lottoGenerator.createManualLottoTicket(manualCount);
         LottoTicket automaticLottoTicket = lottoGenerator.createAutomaticLottoTicket(automaticCount);
         LottoTicket lottoTicket = lottoGenerator.totalLottoTicket(manualLottoTicket, automaticLottoTicket);
 
-        String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoTicket);
-        System.out.println(printPurchaseLottoNumbers);
+        resultView.printResult(resultView.purchaseLottoNumbers(lottoTicket));
 
         winningLottoInfo.enterWinningNumbers();
         winningLottoInfo.enterBonusBall();
 
         Map<String, WinningLotto> winningLottos = resultView.getWinningLottos(winningLottoInfo, lottoTicket);
 
-        System.out.println(resultView.printWinningResult(winningLottos));
-        System.out.println(resultView.printRevenuePercent(winningLottos, lottoTicket));
+        resultView.printResult(resultView.winningResult(winningLottos));
+        resultView.printResult(resultView.revenuePercent(winningLottos, lottoTicket));
 
     }
 }

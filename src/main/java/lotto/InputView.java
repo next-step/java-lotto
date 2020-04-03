@@ -42,9 +42,6 @@ public class InputView {
         return purchaseCount - manualCount;
     }
 
-    public String purchaseLottoTicketInfo(int manualCount, int automaticCount) {
-        return "수동으로 " + manualCount + "장, 자동으로 " + automaticCount + "개를 구매했습니다.";
-    }
 
     public static InputView getInputView() {
         return inputView;

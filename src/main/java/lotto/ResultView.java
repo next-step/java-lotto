@@ -47,7 +47,7 @@ public class ResultView {
 
     }
 
-    public String printPurchaseLottoNumbers(LottoTicket lottoTicket) {
+    public String purchaseLottoNumbers(LottoTicket lottoTicket) {
         String result = "";
         for (LottoNumbers lottoNumbers : lottoTicket.getLottoNumbers()) {
             result += lottoNumbers.getNumbers().stream().map(LottoNo::getNo).collect(Collectors.toList())
@@ -57,7 +57,7 @@ public class ResultView {
         return result;
     }
 
-    public String printWinningResult(Map<String, WinningLotto> winningLottos) {
+    public String winningResult(Map<String, WinningLotto> winningLottos) {
         String result = "당첨통계\n---------\n";
         Rank[] values = Rank.values();
         for (Rank value : values) {
@@ -71,7 +71,7 @@ public class ResultView {
         return result;
     }
 
-    public String printRevenuePercent(Map<String, WinningLotto> winningLottos, LottoTicket lottoTicket) {
+    public String revenuePercent(Map<String, WinningLotto> winningLottos, LottoTicket lottoTicket) {
         String result = "총 수익률은 ";
         double revenuePercent = calculateRevenuePercent(totalWinningAmount(winningLottos),
                                                         totalPurchaseAmount(lottoTicket));
@@ -111,6 +111,25 @@ public class ResultView {
         return matchFlag;
     }
 
+    public String getResultByRank(String result, Rank value, String key, int matchCount, int resultCount) {
+        if (SECOND_NAME.equals(key)) {
+            result += matchCount + "개 일치, 보너스 볼 일치(" + value.getWinningAmount() + "원)- " + resultCount
+                      + "개\n";
+            return result;
+        }
+        result += matchCount + "개 일치(" + value.getWinningAmount() + "원)- " + resultCount + "개\n";
+
+        return result;
+    }
+
+    public String purchaseLottoTicketInfo(int manualCount, int automaticCount) {
+        return "수동으로 " + manualCount + "장, 자동으로 " + automaticCount + "개를 구매했습니다.";
+    }
+
+    public void printResult(String result) {
+        System.out.println(result);
+    }
+
     private int getResultCount(String name, Map<String, WinningLotto> winningLottos) {
         int resultCount = 0;
         if (winningLottos.containsKey(name)) {
@@ -131,17 +150,6 @@ public class ResultView {
             ++matchCount;
         }
         return matchCount;
-    }
-
-    public String getResultByRank(String result, Rank value, String key, int matchCount, int resultCount) {
-        if (SECOND_NAME.equals(key)) {
-            result += matchCount + "개 일치, 보너스 볼 일치(" + value.getWinningAmount() + "원)- " + resultCount
-                      + "개\n";
-            return result;
-        }
-        result += matchCount + "개 일치(" + value.getWinningAmount() + "원)- " + resultCount + "개\n";
-
-        return result;
     }
 
     public static ResultView getResultView() {
