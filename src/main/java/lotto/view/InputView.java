@@ -18,8 +18,6 @@ public class InputView {
     private static final int ZERO = 0;
     private static final String DELIMITER = ",";
 
-    private static int autoLottoCount;
-
     public static Money getMoney() {
         printMessage(MESSAGE_MONEY_INPUT);
 
@@ -33,7 +31,6 @@ public class InputView {
         int manualLottoCount = ScannerUtil.readInt();
         validatePurchasable(isPurchasable(allLottoCount, manualLottoCount));
 
-        autoLottoCount = (allLottoCount - manualLottoCount);
         return manualLottoCount;
     }
 
@@ -83,5 +80,4 @@ public class InputView {
     private static void printMessage(String message) {
         System.out.println(message);
     }
-
 }

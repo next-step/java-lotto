@@ -13,9 +13,10 @@ public class LottoGame {
     public static Lottos ready() {
         Money money = InputView.getMoney();
         int manualLottoCount = InputView.getManualLottoCount(money);
+        int autoLottoCount = money.getLottoCount() - manualLottoCount;
 
         return Lottos.createAllLottos(
-                money.getLottoCount(),
+                autoLottoCount,
                 InputView.getManualLottos(manualLottoCount)
         );
     }
