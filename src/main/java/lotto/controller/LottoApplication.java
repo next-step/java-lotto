@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Money;
-import lotto.domain.item.*;
+import lotto.domain.lotto.*;
 import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.MatchedLottoDto;

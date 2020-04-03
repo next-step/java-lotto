@@ -1,10 +1,10 @@
 package lotto.service;
 
 import lotto.domain.Money;
-import lotto.domain.item.LottoNumber;
-import lotto.domain.item.LottoNumbers;
-import lotto.domain.item.LottoTickets;
-import lotto.domain.item.WinLottoTicket;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.WinLottoTicket;
 import lotto.view.StatisticsLottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

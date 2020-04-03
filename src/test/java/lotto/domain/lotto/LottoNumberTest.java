@@ -1,4 +1,4 @@
-package lotto.domain.item;
+package lotto.domain.lotto;
 
 import lotto.exception.ValidLottoException;
 import org.junit.jupiter.api.DisplayName;

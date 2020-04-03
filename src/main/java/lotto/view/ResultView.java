@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.item.LottoTicket;
+import lotto.domain.lotto.LottoTicket;
 
 public class ResultView {
 

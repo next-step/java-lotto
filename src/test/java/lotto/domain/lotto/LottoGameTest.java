@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import lotto.domain.item.LottoGame;
-import lotto.domain.item.LottoTickets;
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

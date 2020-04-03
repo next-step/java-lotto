@@ -2,7 +2,7 @@ package lotto.service;
 
 import enums.Rank;
 import lotto.domain.Money;
-import lotto.domain.item.*;
+import lotto.domain.lotto.*;
 import lotto.exception.ValidLottoException;
 import lotto.view.MatchedLottoDto;
 import lotto.view.StatisticsLottoDto;
