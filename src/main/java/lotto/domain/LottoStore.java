@@ -15,8 +15,8 @@ public class LottoStore {
         checkLotteriesSize(price, manualLottoNumbers.size());
 
         int autoCount = price.lotteryCount() - manualLottoNumbers.size();
-        Lotteries manuals = publishLottery(new LottoManualPublisher(manualLottoNumbers));
-        Lotteries autos = publishLottery(new LottoAutoPublisher(autoCount));
+        Lotteries manuals = LottoNumberGenerator.generateManually(manualLottoNumbers);
+        Lotteries autos = LottoNumberGenerator.generateAutomatically(autoCount);
 
         return manuals.merge(autos);
     }
@@ -31,9 +31,5 @@ public class LottoStore {
         if (price.isOverSize(numberOfManual)) {
             throw new ManualSizeOverflowException(numberOfManual);
         }
-    }
-
-    private static Lotteries publishLottery(final LottoPublisher lottoPublisher) {
-        return lottoPublisher.publish();
     }
 }
