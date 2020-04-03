@@ -9,7 +9,7 @@ public class LottoResult {
         this.ranks = ranks;
     }
 
-    public int getTotalWinningMoney() {
+    public double getTotalWinningMoney() {
         int totalWinningMoney = 0;
         for (Rank rank : ranks) {
             totalWinningMoney += rank.getWinningMoney();
