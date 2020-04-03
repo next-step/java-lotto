@@ -30,20 +30,4 @@ public class LottoGame {
     public int getAvailableBuyCount(Money money) {
         return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
     }
-
-    private Money getAllEarningPrize(LottoTickets tickets, WinLottoTicket winTicket) {
-        return tickets.getAllEarningPrize(winTicket);
-    }
-
-    public MatchedLottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
-        MatchedLottoDto dto = new MatchedLottoDto();
-        Money prize = getAllEarningPrize(tickets, winTicket);
-        int howManyBuyItem = tickets.size();
-        Money buyAmount = Money.buyItemAmount(LottoTicket.PRICE, howManyBuyItem);
-
-        double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
-
-        dto.setEarningRate(rate);
-        return dto;
-    }
 }
