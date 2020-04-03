@@ -15,11 +15,11 @@ public enum LottoRank {
     private static final int SINGLE_LIST_SIZE = 1;
     private static final int FIRST_INDEX = 0;
 
-    private int prize;
+    private long prize;
     private int matchCount;
     private boolean matchBonus;
 
-    LottoRank(int prize, int matchCount, boolean matchBonus) {
+    LottoRank(long prize, int matchCount, boolean matchBonus) {
         this.prize = prize;
         this.matchCount = matchCount;
         this.matchBonus = matchBonus;
@@ -51,7 +51,7 @@ public enum LottoRank {
                 .orElse(MISS);
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 

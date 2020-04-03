@@ -20,13 +20,13 @@ public class LottoResult {
     }
 
     public double getRateOfReturn() {
-        int prizeTotal = getPrizeTotal();
+        double prizeTotal = getPrizeTotal();
 
-        return (double) prizeTotal / investmentAmount.getAmount();
+        return prizeTotal / investmentAmount.getAmount();
     }
 
-    private int getPrizeTotal() {
-        int prizeTotal = 0;
+    private double getPrizeTotal() {
+        double prizeTotal = 0;
 
         for (LottoRank lottoRank : LottoRank.values()) {
             prizeTotal += this.winningLottos.size(lottoRank) *
