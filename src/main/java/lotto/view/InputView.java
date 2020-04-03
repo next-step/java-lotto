@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotteries;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Price;
@@ -49,7 +50,7 @@ public class InputView {
         return Integer.valueOf(scanner.nextLine());
     }
 
-    public List<LottoNumbers> inputManualLottoNumbers(final int manualCount) {
+    public Lotteries inputManualLottoNumbers(final int manualCount) {
         System.out.println();
         System.out.println(INPUT_MANUAL_LOTTO_NUMBERS_MESSAGE);
 
@@ -57,6 +58,6 @@ public class InputView {
         for (int i = 0; i < manualCount; i++) {
             lottoNumbers.add(new LottoNumbers(scanner.nextLine()));
         }
-        return lottoNumbers;
+        return new Lotteries(lottoNumbers);
     }
 }
