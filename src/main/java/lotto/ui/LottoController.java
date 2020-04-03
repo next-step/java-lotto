@@ -26,6 +26,7 @@ public class LottoController {
 
         GameResult gameResult = getGameResult(purchasedLottos, winningLotto);
         outputView.showResult(gameResult);
+        outputView.showProfit(gameMoney, gameResult);
     }
 
     private void generateAutoLottos(List<Lotto> purchasedLottos, Money money) {

@@ -38,6 +38,9 @@ public class OutputView {
      * @param gameResult
      */
     private void showGameResult(Prize prize, GameResult gameResult) {
+        if (Prize.MISS == prize) {
+            return;
+        }
 
         System.out.println(String.format("%d개 일치 (%d원)- %d개",
                 prize.getMatch(),
@@ -46,7 +49,7 @@ public class OutputView {
     }
 
     public void showProfit(final Money purchasedAmount, final GameResult gameResult) {
-        System.out.println("총 수익률은 " + gameResult.getProfit(purchasedAmount) + "%입니다.");
+        System.out.println("총 수익률은 " + gameResult.getProfit(purchasedAmount) + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
 

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
+    MISS(0, 0),
     FOURTH(3, 5000),
     THIRD(4, 1500_000),
     SECOND(5, 150_0000),
@@ -28,6 +29,6 @@ public enum Prize {
         return Arrays.stream(values())
                 .filter(v -> match == v.match)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("당첨되지 않았습니다."));
+                .orElse(Prize.MISS);
     }
 }
