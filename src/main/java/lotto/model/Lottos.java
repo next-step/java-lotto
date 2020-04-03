@@ -4,6 +4,7 @@ import lotto.autoLottoGenerator.AutoLottoGenerator;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private List<Lotto> allLottos;
@@ -14,24 +15,23 @@ public class Lottos {
 
     public static Lottos getAllLottos(int autoLottoCount, List<Lotto> manulLottos) {
         List<Lotto> lottos = generateAutoLottos(autoLottoCount);
-        for(Lotto manualLotto:manulLottos){
+        for (Lotto manualLotto : manulLottos) {
             lottos.add(manualLotto);
         }
         return new Lottos(lottos);
     }
 
-    private static  List<Lotto> generateAutoLottos(int autoLottoCount) {
+    public List<Rank> match(WinningLotto winningLotto) {
+        return allLottos.stream()
+                .map(it -> it.match(winningLotto))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Lotto> generateAutoLottos(int autoLottoCount) {
         return AutoLottoGenerator.generate(autoLottoCount);
     }
 
-    private List<Lotto> addLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            allLottos.add(lotto);
-        }
-        return allLottos;
-    }
-
-    public int getToTalLottoCount(){
+    public int getToTalLottoCount() {
         return allLottos.size();
     }
 }

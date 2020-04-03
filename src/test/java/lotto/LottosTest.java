@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.Lottos;
+import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,5 +26,23 @@ public class LottosTest {
 
         //then
         assertThat(lottos.getToTalLottoCount()).isEqualTo(2);
+    }
+
+    @DisplayName("구매한 로또의 당첨 Rank를 반환한다.")
+    @Test
+    void matchTest() {
+        List<LottoNumber> manualLottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            manualLottoNumbers.add(new LottoNumber(i));
+        }
+        Lottos lottos
+                = Lottos.getAllLottos(3, Arrays.asList(new Lotto(manualLottoNumbers)));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(manualLottoNumbers), new LottoNumber(7));
+
+        //when
+        List<Rank> matches = lottos.match(winningLotto);
+
+        //then
+        assertThat(matches).hasSize(4);
     }
 }
