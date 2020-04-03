@@ -36,8 +36,7 @@ public class InputView {
         return input;
     }
 
-
-    public static String inputLuckyNumber() {
+    public static String inputWinNumber() {
         System.out.println(LASTWEEK_WIN_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
