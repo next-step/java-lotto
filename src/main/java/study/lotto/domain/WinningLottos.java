@@ -1,10 +1,10 @@
 package study.lotto.domain;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class WinningLottos {
-    private Map<LottoRank, Lottos> winningLottos;
+    private EnumMap<LottoRank, Lottos> winningLottos;
 
     public WinningLottos() {
         initWinningLottos();
@@ -23,7 +23,7 @@ public class WinningLottos {
     }
 
     private Map<LottoRank, Lottos> initWinningLottos() {
-        winningLottos = new HashMap<>();
+        winningLottos = new EnumMap(LottoRank.class);
         for (LottoRank lottoRank : LottoRank.values()) {
             winningLottos.put(lottoRank, new Lottos());
         }
