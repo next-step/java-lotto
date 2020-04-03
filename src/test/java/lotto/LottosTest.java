@@ -26,7 +26,7 @@ public class LottosTest {
 
         //when
         Lottos lottos
-                = Lottos.getAllLottos(1, Arrays.asList(new Lotto(manualLottoNumbers)));
+                = Lottos.createAllLottos(1, Arrays.asList(new Lotto(manualLottoNumbers)));
 
         //then
         assertThat(lottos.getToTalLottoCount()).isEqualTo(2);
@@ -40,7 +40,7 @@ public class LottosTest {
             manualLottoNumbers.add(new LottoNumber(i));
         }
         Lottos lottos
-                = Lottos.getAllLottos(3, Arrays.asList(new Lotto(manualLottoNumbers)));
+                = Lottos.createAllLottos(3, Arrays.asList(new Lotto(manualLottoNumbers)));
         WinningLotto winningLotto = new WinningLotto(new Lotto(manualLottoNumbers), new LottoNumber(7));
 
         //when

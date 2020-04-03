@@ -11,7 +11,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.util.MessageUtil.*;
+import static lotto.Messages.*;
 
 public class InputView {
     private static final int MINIMUM_MONEY_TO_BUY = 1000;
@@ -22,7 +22,7 @@ public class InputView {
     private static int lottoCountManual;
     private static int lottoCountAuto;
 
-    public static int getMoneyFromUser() {
+    public static int getMoney() {
         printMessage(MESSAGE_MONEY_INPUT);
         int money = ScannerUtil.readInt();
         validateGreaterThan1000(isGreaterThan1000(money));
@@ -30,7 +30,7 @@ public class InputView {
         return lottoCount;
     }
 
-    public static int getManualLottoCountFromUser() {
+    public static int getManualLottoCount() {
         printMessage(MESSAGE_MANUAL_LOTTO_COUNT);
         lottoCountManual = ScannerUtil.readInt();
         validatePurchasable(isPurchasable(lottoCount));
@@ -38,7 +38,7 @@ public class InputView {
         return lottoCountManual;
     }
 
-    public static List<Lotto> getManualLottosFromUser() {
+    public static List<Lotto> getManualLottos() {
         if (lottoCountManual == ZERO) {
             return Collections.EMPTY_LIST;
         }
@@ -51,12 +51,12 @@ public class InputView {
         return lottos;
     }
 
-    public static Lotto getWinningLottoNumbersFromUser() {
+    public static Lotto getWinningLottoNumbers() {
         printMessage(MESSAGE_WINNING_LOTTO);
         return splitByComma(ScannerUtil.readLine());
     }
 
-    public static LottoNumber getBonusBallNumberFromUser() {
+    public static LottoNumber getBonusBallNumber() {
         printMessage(MESSAGE_BONUS_BALL);
         return new LottoNumber(ScannerUtil.readInt());
     }
@@ -68,7 +68,7 @@ public class InputView {
     private static void validatePurchasable(boolean isPurchasable) {
         if (!isPurchasable) {
             System.out.println(WARNING_LOTTO_COUNT);
-            getManualLottosFromUser();
+            getManualLottos();
         }
     }
 
@@ -79,7 +79,7 @@ public class InputView {
     private static void validateGreaterThan1000(boolean isGreaterThan1000) {
         if (!isGreaterThan1000) {
             System.out.println(WARNING_MONEY_INPUT);
-            getMoneyFromUser();
+            getMoney();
         }
     }
 

@@ -2,8 +2,8 @@ package lotto.util;
 
 import java.util.Scanner;
 
-import static lotto.util.MessageUtil.WARNING_INTEGER_FORMAT;
-import static lotto.util.MessageUtil.WARNING_NULL_AND_EMPTY;
+import static lotto.Messages.WARNING_INTEGER_FORMAT;
+import static lotto.Messages.WARNING_NULL_AND_EMPTY;
 
 public class ScannerUtil {
     private static final Scanner scanner = new Scanner(System.in);

@@ -21,6 +21,6 @@ public class GameResultTest {
 
         //then
         assertThat(gameResult.getEarningRate()).isEqualTo(600100.0);
-        assertThat(gameResult.getResults().getCount(BLANK)).isEqualTo(3);
+        assertThat(gameResult.getMatchResults().getCount(BLANK)).isEqualTo(3);
     }
 }

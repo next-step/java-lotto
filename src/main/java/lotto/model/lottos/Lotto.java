@@ -7,8 +7,8 @@ import java.util.*;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.util.MessageUtil.WARNING_LOTTO_NON_DUPLICATION;
-import static lotto.util.MessageUtil.WARNING_LOTTO_SIZE;
+import static lotto.Messages.WARNING_LOTTO_NON_DUPLICATION;
+import static lotto.Messages.WARNING_LOTTO_SIZE;
 
 public class Lotto {
     private List<LottoNumber> lottoNumbers;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.util.MessageUtil.WARNING_LOTTO_NUMBER_RANGE;
+import static lotto.Messages.WARNING_LOTTO_NUMBER_RANGE;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;

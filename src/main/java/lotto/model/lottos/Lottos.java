@@ -15,7 +15,7 @@ public class Lottos {
         this.allLottos = Collections.unmodifiableList(allLottos);
     }
 
-    public static Lottos getAllLottos(int autoLottoCount, List<Lotto> manulLottos) {
+    public static Lottos createAllLottos(int autoLottoCount, List<Lotto> manulLottos) {
         List<Lotto> lottos = generateAutoLottos(autoLottoCount);
         for (Lotto manualLotto : manulLottos) {
             lottos.add(manualLotto);
@@ -37,7 +37,7 @@ public class Lottos {
         return allLottos.size();
     }
 
-    public List<Lotto> getAllLottos() {
+    public List<Lotto> createAllLottos() {
         return allLottos;
     }
 }

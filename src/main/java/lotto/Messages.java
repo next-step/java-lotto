@@ -1,6 +1,6 @@
-package lotto.util;
+package lotto;
 
-public class MessageUtil {
+public class Messages {
     public static final String MESSAGE_MONEY_INPUT = "구입금액을 숫자로 입력해 주세요.";
     public static final String MESSAGE_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 갯수를 숫자로 입력해 주세요.";
     public static final String MESSAGE_LOTTO_MANUAL = "수동으로 구매할 로또 번호를 입력하세요. (쉼표로 번호 구분)";

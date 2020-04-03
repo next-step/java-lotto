@@ -6,18 +6,18 @@ import java.util.List;
 
 public class GameResult {
     private EarningRate earningRate;
-    private Results results;
+    private MatchResults matchResults;
 
     public GameResult(List<Rank> ranks) {
         this.earningRate = new EarningRate(Rank.findEarningRate(ranks));
-        this.results = Results.reflectAll(ranks);
+        this.matchResults = MatchResults.reflectAll(ranks);
     }
 
     public double getEarningRate() {
         return earningRate.getEarningRate();
     }
 
-    public Results getResults() {
-        return results;
+    public MatchResults getMatchResults() {
+        return matchResults;
     }
 }

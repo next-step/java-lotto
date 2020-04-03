@@ -3,13 +3,13 @@ package lotto.view;
 import lotto.model.gameresult.GameResult;
 import lotto.model.lottos.Lottos;
 import lotto.model.Rank;
-import lotto.model.gameresult.Results;
+import lotto.model.gameresult.MatchResults;
 
 import static lotto.model.Rank.SECOND;
 
 public class ResultView {
     public static void printMyLottos(Lottos lottos) {
-        lottos.getAllLottos().stream()
+        lottos.createAllLottos().stream()
                 .forEach(it -> System.out.println(it.toString()));
     }
 
@@ -19,10 +19,10 @@ public class ResultView {
     }
 
     private static void printResults(GameResult gameResult) {
-        Results results = gameResult.getResults();
+        MatchResults matchResults = gameResult.getMatchResults();
         for (Rank rank : Rank.values()) {
             printRankResult(rank);
-            System.out.println(results.getCount(rank) + "개");
+            System.out.println(matchResults.getCount(rank) + "개");
         }
     }
 

@@ -7,20 +7,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Results {
+public class MatchResults {
     private static final int ONE_MORE_COUNT= 1;
 
     private Map<Rank, Integer> results;
 
-    private Results(Map<Rank, Integer> results) {
+    private MatchResults(Map<Rank, Integer> results) {
         this.results = Collections.unmodifiableMap(results);
     }
 
-    public static Results reflectAll(List<Rank> ranks) {
+    public static MatchResults reflectAll(List<Rank> ranks) {
         Map<Rank, Integer> results = setUp();
         ranks.stream()
-                .forEach(it -> reflect(results, it));
-        return new Results(results);
+                .forEach(it -> reflectWhenRankIsFound(results, it));
+        return new MatchResults(results);
     }
 
     public int getCount(Rank rank) {
@@ -37,7 +37,7 @@ public class Results {
         return result;
     }
 
-    private static void reflect(Map<Rank, Integer> results, Rank rank) {
+    private static void reflectWhenRankIsFound(Map<Rank, Integer> results, Rank rank) {
         Integer currentCount = results.get(rank);
         results.replace(rank, currentCount + ONE_MORE_COUNT);
     }

@@ -12,9 +12,9 @@ public class LottoGame {
     private static Lottos myLottos;
 
     public static Lottos ready() {
-        InputView.getMoneyFromUser();
-        InputView.getManualLottoCountFromUser();
-        myLottos = Lottos.getAllLottos(InputView.getLottoCountAuto(), InputView.getManualLottosFromUser());
+        InputView.getMoney();
+        InputView.getManualLottoCount();
+        myLottos = Lottos.createAllLottos(InputView.getLottoCountAuto(), InputView.getManualLottos());
         return myLottos;
     }
 
@@ -25,8 +25,8 @@ public class LottoGame {
 
     private static WinningLotto getWinningLotto() {
         return new WinningLotto(
-                InputView.getWinningLottoNumbersFromUser(),
-                InputView.getBonusBallNumberFromUser()
+                InputView.getWinningLottoNumbers(),
+                InputView.getBonusBallNumber()
         );
     }
 }

@@ -5,7 +5,7 @@ import lotto.model.lottos.LottoNumber;
 
 import java.util.List;
 
-import static lotto.util.MessageUtil.WARNING_BONUS_BALL_NOT_IN_LOTTO;
+import static lotto.Messages.WARNING_BONUS_BALL_NOT_IN_LOTTO;
 
 public class WinningLotto {
     private Lotto lotto;

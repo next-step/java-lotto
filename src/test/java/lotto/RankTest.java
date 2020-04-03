@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.model.Rank;
-import lotto.model.gameresult.Results;
+import lotto.model.gameresult.MatchResults;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class RankTest {
     void getAllPrizeMoneyTest() {
         //given
         List<Rank> ranks = Arrays.asList(BLANK, SECOND, BLANK, FIFTH, BLANK);
-        Results results = Results.reflectAll(ranks);
+        MatchResults matchResults = MatchResults.reflectAll(ranks);
 
         //when
         int allPrizeMoney = Rank.getAllPrizeMoney(ranks);
