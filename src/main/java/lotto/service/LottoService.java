@@ -67,7 +67,7 @@ public class LottoService {
 
     public MatchedLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
         MatchedLottoDto dto = new MatchedLottoDto();
-        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIFTH, winTicket));
+        dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIRST, winTicket));
         dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
         dto.setThirdGameCount(tickets.findWinLottoCountFromRank(Rank.THIRD, winTicket));
         dto.setFourthGameCount(tickets.findWinLottoCountFromRank(Rank.FOURTH, winTicket));
