@@ -69,6 +69,10 @@ public class Lotto implements Iterable<LottoNumber> {
                 .count();
     }
 
+    public LottoRank rank(LottoWinningNumber lottoWinningNumber) {
+        return lottoWinningNumber.rank(this);
+    }
+
     @Override public Iterator<LottoNumber> iterator() {
         return lottoNumbers.iterator();
     }

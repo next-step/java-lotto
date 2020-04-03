@@ -1,9 +1,10 @@
 package study.lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class Lottos implements Iterable<Lotto> {
     private List<Lotto> lottos;
@@ -34,6 +35,18 @@ public class Lottos implements Iterable<Lotto> {
 
     public Lotto get(int index) {
         return lottos.get(index);
+    }
+
+    public WinningLottos ranks(LottoWinningNumber lottoWinningNumber) {
+        // todo stream 으로 해결할 방법을 찾아보자.
+        WinningLottos winningLottos = new WinningLottos();
+
+        for (Lotto lotto : lottos) {
+            LottoRank lottoRank = lotto.rank(lottoWinningNumber);
+            winningLottos.addToRank(lottoRank, lotto);
+        }
+
+        return winningLottos;
     }
 
     @Override public Iterator<Lotto> iterator() {

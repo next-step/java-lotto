@@ -34,13 +34,7 @@ public class LottoGame {
     }
 
     public LottoResult result(LottoWinningNumber lottoWinningNumber) {
-        WinningLottos winningLottos = new WinningLottos();
-
-        for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lottoWinningNumber.rank(lotto);
-            winningLottos.addToRank(lottoRank, lotto);
-        }
-
+        WinningLottos winningLottos = lottos.ranks(lottoWinningNumber);
         return new LottoResult(winningLottos, investmentAmount);
     }
 }
