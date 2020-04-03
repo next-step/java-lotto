@@ -3,16 +3,16 @@ package lotto.model;
 import java.util.List;
 
 public class GameResult {
-    private double earningRate;
+    private EarningRate earningRate;
     private Results results;
 
     public GameResult(List<Rank> ranks) {
-        this.earningRate = Rank.findEarningRate(ranks);
+        this.earningRate = new EarningRate(Rank.findEarningRate(ranks));
         this.results = Results.reflectAll(ranks);
     }
 
     public double getEarningRate() {
-        return earningRate;
+        return earningRate.getEarningRate();
     }
 
     public Results getResults() {
