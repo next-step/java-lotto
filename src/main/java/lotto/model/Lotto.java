@@ -39,4 +39,8 @@ public class Lotto {
     public String toString() {
         return String.valueOf(lottoNumbers);
     }
+
+    public Rank match(WinningLotto winningLotto) {
+        return null;
+    }
 }
