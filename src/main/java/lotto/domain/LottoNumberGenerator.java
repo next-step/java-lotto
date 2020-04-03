@@ -17,10 +17,6 @@ public class LottoNumberGenerator {
 
     private LottoNumberGenerator() {}
 
-    public static Lotteries generateManually(final List<LottoNumbers> manualLottoNumbers) {
-        return new Lotteries(manualLottoNumbers);
-    }
-
     public static Lotteries generateAutomatically(final int autoCount) {
         List<LottoNumbers> lotteries = new ArrayList<>();
         for (int i = START_INDEX; i < autoCount; i++) {
