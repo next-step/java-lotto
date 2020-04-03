@@ -1,4 +1,4 @@
-package lotto.domain.item;
+package lotto.domain.lotto;
 
 import enums.Rank;
 

@@ -1,8 +1,7 @@
-package lotto.domain.item;
+package lotto.domain.lotto;
 
 import lotto.domain.Money;
 import lotto.domain.strategy.LottoNumberAutoGenerator;
-import lotto.view.MatchedLottoDto;
 
 import java.util.ArrayList;
 import java.util.List;
