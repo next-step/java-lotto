@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto2.domain.Fixture.oneLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -38,8 +39,8 @@ public class LottoTest {
     @DisplayName("추출 번호는 오름차순으로 정렬되어 표시 된다.")
     @Test
     void testLottoSort() {
-        List<Integer> expected = Arrays.asList(3, 2, 1, 5, 4, 6);
-        List<LottoNumber> lottoNumbers = expected.stream()
+        List<Integer> unorderedNumber = Arrays.asList(3, 2, 1, 5, 4, 6);
+        List<LottoNumber> lottoNumbers = unorderedNumber.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 

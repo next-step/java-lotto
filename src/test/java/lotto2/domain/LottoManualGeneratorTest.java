@@ -9,25 +9,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static lotto2.domain.Fixture.oneLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 class LottoManualGeneratorTest {
-    private List<Integer> sixNumbers;
-
-    @BeforeEach
-    void setUp() {
-        sixNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-    }
 
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
     void testInputCreateLotto(final String inputText) {
-        List<LottoNumber> mock = sixNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        Set<LottoNumber> expected = new Lotto(mock).getLottoNumbers();
+        Set<LottoNumber> expected = oneLotto().getLottoNumbers();
 
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(inputText);
         Set<LottoNumber> actual = lottoManualGenerator.generateNumbers();

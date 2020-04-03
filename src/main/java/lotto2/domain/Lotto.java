@@ -18,6 +18,18 @@ public class Lotto {
         return new HashSet<>(lottoNumbers);
     }
 
+    public int getMatchCount(Lotto lotto) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            matchCount += lotto.isLottoNumberMatch(lottoNumber) ? 1 : 0;
+        }
+        return matchCount;
+    }
+
+    private boolean isLottoNumberMatch(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     private Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != MAX_LOTTO_COUNT) {
             throw new IllegalArgumentException("중복 없이 숫자를 6개 입력해주세요.");
