@@ -28,7 +28,7 @@ public class Lotto {
 
     private int findMatchCount(List<LottoNumber> winningLotto){
         return winningLotto.stream()
-                .filter(it -> lottoNumbers.equals(it))
+                .filter(it -> lottoNumbers.contains(it))
                 .collect(collectingAndThen(toList(), Collection::size));
     }
 
