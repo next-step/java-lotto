@@ -23,13 +23,8 @@ public class Buyer {
     }
 
     private List<Rank> getWinningResult(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
-        List<LottoTicketResult> winningLottoTicketResults = lottoTickets.stream()
+        return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.checkWinning(winningNumbers, bonusNumber))
-                .filter(LottoTicketResult::isWinning)
-                .collect(Collectors.toList());
-
-        return winningLottoTicketResults.stream()
-                .map(Rank::of)
                 .collect(Collectors.toList());
     }
 }

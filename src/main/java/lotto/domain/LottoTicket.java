@@ -23,13 +23,11 @@ public class LottoTicket {
         return lottoNumbers.getLottoNumbers();
     }
 
-    LottoTicketResult checkWinning(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    Rank checkWinning(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(String.format("보너스 숫자(%d)는 중복될 수 없습니다.", bonusNumber.getNumber()));
         }
-        int matchCount = lottoNumbers.match(winningNumbers);
-        boolean bonusMatch = lottoNumbers.contains(bonusNumber);
-        return new LottoTicketResult(matchCount, bonusMatch);
+        return Rank.of(lottoNumbers.match(winningNumbers), lottoNumbers.contains(bonusNumber));
     }
 
     static LottoTicket of(int... lottoNumbers) {

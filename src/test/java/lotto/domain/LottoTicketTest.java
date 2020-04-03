@@ -79,8 +79,8 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(num2, num3, num5, num4, num1, num6));
         LottoNumbers winningNumbers = LottoNumbers.of(Arrays.asList(num2, num3, num5, num4, num7, num6));
 
-        LottoTicketResult lottoTicketResult = lottoTicket.checkWinning(winningNumbers, num1);
+        Rank rank = lottoTicket.checkWinning(winningNumbers, num1);
 
-        assertThat(lottoTicketResult.getMatchCount()).isEqualTo(5);
+        assertThat(rank.getMatchCount()).isEqualTo(5);
     }
 }
