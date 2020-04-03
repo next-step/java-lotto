@@ -57,6 +57,6 @@ public class LottoTest {
 
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new Lotto(lottoNumbers);
-        }).withMessageContaining("6개");
+        });
     }
 }

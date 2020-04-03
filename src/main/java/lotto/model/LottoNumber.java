@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static lotto.util.MessageUtil.WARNING_LOTTO_NUMBER_RANGE;
 
@@ -28,5 +29,18 @@ public class LottoNumber {
         if (!lottoPool.contains(lottoNumber)) {
             throw new IllegalArgumentException(WARNING_LOTTO_NUMBER_RANGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }
