@@ -98,7 +98,7 @@ public class LottoTest {
         assertThat(rank).isEqualTo(SECOND);
     }
 
-    @DisplayName("2등 확인")
+    @DisplayName("3등 확인")
     @Test
     void matchTestForThird() {
         //given
@@ -116,6 +116,23 @@ public class LottoTest {
         assertThat(rank).isEqualTo(THIRD);
     }
 
+    @DisplayName("4등 확인")
+    @Test
+    void matchTestForFourth() {
+        //given
+        WinningLotto winningLotto = new WinningLotto(createLottoFromOneToSix(), new LottoNumber(9));
+
+        for (int i = 3; i <= 8; i++) {
+            myLottoNumbers.add(new LottoNumber(i));
+        }
+        Lotto myLotto = new Lotto(myLottoNumbers);
+
+        //when
+        Rank rank = myLotto.match(winningLotto);
+
+        //then
+        assertThat(rank).isEqualTo(FOURTH);
+    }
 
     Lotto createLottoFromOneToSix(){
         for (int i = 1; i <= 6; i++) {
