@@ -36,6 +36,10 @@ public enum Rank {
                 .sum();
     }
 
+    public static double findEarningRate(List<Rank> ranks) {
+        return 0;
+    }
+
     public int getMatchCount() {
         return matchCount;
     }

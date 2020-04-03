@@ -33,4 +33,15 @@ public class RankTest {
         //then
         assertThat(allPrizeMoney).isEqualTo(30_005_000);
     }
+
+
+    @DisplayName("구입한 로또의 수익률을 구한다.")
+    @Test
+    void findEarningRateTest(){
+        List<Rank> ranks = Arrays.asList(BLANK, SECOND, FIFTH, BLANK, BLANK);
+
+        double earningRate = Rank.findEarningRate(ranks);
+
+        assertThat(earningRate).isEqualTo((30_005_000 / 5_000) * 100);
+    }
 }
