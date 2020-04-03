@@ -3,20 +3,23 @@ package lotto;
 import java.util.Scanner;
 
 public class InputView {
-    private static final int MIN_PURCHASE_AMOUNT = 1000;
-    private Scanner scanner = new Scanner(System.in);
-    private int purchaseAmount;
+    private static final int MIN_PURCHASE_AMOUNT = LottoRule.MIN_PURCHASE_AMOUNT.getValue();
 
-    public InputView() {
+    private static InputView inputView = new InputView();
+    private static Scanner scanner = new Scanner(System.in);
+
+    public int enterPurchaseAmount() {
         System.out.println("구매액을 입력해 주세요.");
         int purchaseAmount = scanner.nextInt();
         validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+        return getPurchaseCount(purchaseAmount);
     }
 
-    public InputView(int purchaseAmount) {
-        validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = purchaseAmount;
+    public int enterManualCount(int purchaseCount) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualCount = scanner.nextInt();
+        validateManualCount(purchaseCount, manualCount);
+        return manualCount;
     }
 
     public void validatePurchaseAmount(int purchaseAmount) {
@@ -25,8 +28,22 @@ public class InputView {
         }
     }
 
-    public int getPurchaseCount() {
+    public void validateManualCount(int purchaseCount, int manualCount) {
+        if (manualCount > purchaseCount) {
+            throw new IllegalArgumentException("구매 금액보다 수동으로 구매할 로또금액이 큽니다");
+        }
+    }
+
+    public int getPurchaseCount(int purchaseAmount) {
         return purchaseAmount / MIN_PURCHASE_AMOUNT;
     }
 
+    public int getAutomaticCount(int purchaseCount, int manualCount) {
+        return purchaseCount - manualCount;
+    }
+
+
+    public static InputView getInputView() {
+        return inputView;
+    }
 }

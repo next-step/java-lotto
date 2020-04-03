@@ -4,31 +4,31 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-class LottoNumber {
+class LottoNumbers {
     private static final int NUMBER_SIZE = LottoRule.COUNT.getValue();
 
-    private final Set<Integer> numbers;
+    private final Set<LottoNo> numbers;
 
-    public LottoNumber(Set<Integer> numbers) {
+    public LottoNumbers(Set<LottoNo> numbers) {
         validateWinningNumbers(numbers);
         this.numbers = Collections.unmodifiableSet(numbers);
     }
 
-    private void validateWinningNumbers(Set<Integer> numbers) {
+    private void validateWinningNumbers(Set<LottoNo> numbers) {
         if (numbers.size() != NUMBER_SIZE) {
             throw new IllegalArgumentException("다른 숫자를 여섯개 입력해주세요.");
         }
     }
 
-    public Set<Integer> getNumbers() {
+    public Set<LottoNo> getNumbers() {
         return numbers;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
-        if (!(o instanceof LottoNumber)) { return false; }
-        LottoNumber that = (LottoNumber) o;
+        if (!(o instanceof LottoNumbers)) { return false; }
+        LottoNumbers that = (LottoNumbers) o;
         return Objects.equals(getNumbers(), that.getNumbers());
     }
 

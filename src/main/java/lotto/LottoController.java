@@ -1,26 +1,33 @@
 package lotto;
 
-import java.util.List;
-
 public class LottoController {
 
-    private static ResultView resultView = new ResultView();
+    private static InputView inputView = InputView.getInputView();
+    private static LottoGenerator lottoGenerator = LottoGenerator.getLottoGenerator();
+    private static WinningLottoInfo winningLottoInfo = WinningLottoInfo.getWinningLottoInfo();
+    private static ResultView resultView = ResultView.getResultView();
 
     public static void main(String[] args) {
-        InputView inputView = new InputView();
-        int purchaseCount = inputView.getPurchaseCount();
-        System.out.println(purchaseCount + "를 구매 했습니다.");
 
-        LottoGenerator lottoGenerator = new LottoGenerator(purchaseCount);
-        lottoGenerator.createLottoNumbersByPurchaseCount();
-        List<LottoNumber> lottoNumbers = lottoGenerator.getLottoNumbers();
+        int purchaseCount = inputView.enterPurchaseAmount();
+        int manualCount = inputView.enterManualCount(purchaseCount);
+        int automaticCount = inputView.getAutomaticCount(purchaseCount, manualCount);
 
-        String printPurchaseLottoNumbers = resultView.printPurchaseLottoNumbers(lottoNumbers);
-        System.out.println(printPurchaseLottoNumbers);
+        resultView.printResult(resultView.purchaseLottoTicketInfo(manualCount, automaticCount));
 
-        resultView = new ResultView(lottoNumbers);
-        System.out.println(resultView.printWinningResult());
-        System.out.println(resultView.printRevenuePercent());
+        LottoTicket manualLottoTicket = lottoGenerator.createManualLottoTicket(manualCount);
+        LottoTicket automaticLottoTicket = lottoGenerator.createAutomaticLottoTicket(automaticCount);
+        LottoTicket lottoTicket = lottoGenerator.totalLottoTicket(manualLottoTicket, automaticLottoTicket);
+
+        resultView.printResult(lottoTicket.purchaseLottoNumbers());
+
+        winningLottoInfo.enterWinningNumbers();
+        winningLottoInfo.enterBonusBall();
+
+        WinningLottos winningLottos = new WinningLottos(winningLottoInfo, lottoTicket);
+
+        resultView.printResult(winningLottos.winningResult());
+        resultView.printResult(winningLottos.revenuePercent(lottoTicket));
 
     }
 }
