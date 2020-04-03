@@ -134,6 +134,24 @@ public class LottoTest {
         assertThat(rank).isEqualTo(FOURTH);
     }
 
+    @DisplayName("5등 확인")
+    @Test
+    void matchTestForFifth() {
+        //given
+        WinningLotto winningLotto = new WinningLotto(createLottoFromOneToSix(), new LottoNumber(10));
+
+        for (int i = 4; i <= 9; i++) {
+            myLottoNumbers.add(new LottoNumber(i));
+        }
+        Lotto myLotto = new Lotto(myLottoNumbers);
+
+        //when
+        Rank rank = myLotto.match(winningLotto);
+
+        //then
+        assertThat(rank).isEqualTo(FIFTH);
+    }
+
     Lotto createLottoFromOneToSix(){
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
