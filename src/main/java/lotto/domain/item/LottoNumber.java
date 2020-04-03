@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
 
+    private static final String LOTTO_NUMBER_RANGE_MESSAGE = "번호는 1~ 45 사이의 정수만 가능 합니다.";
     private static final int LOTTO_MIN_NUMBER_SIZE = 1;
     private static final int LOTTO_MAX_NUMBER_SIZE = 45;
 
@@ -28,7 +29,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
 
     private void validateNumberRange(int numbers) {
         if (numbers < LOTTO_MIN_NUMBER_SIZE || numbers > LOTTO_MAX_NUMBER_SIZE) {
-            throw new ValidLottoException("번호는 1~ 45 사이의 정수만 가능 합니다.");
+            throw new ValidLottoException(LOTTO_NUMBER_RANGE_MESSAGE);
         }
     }
 

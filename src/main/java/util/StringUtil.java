@@ -9,6 +9,7 @@ import java.util.List;
 public final class StringUtil {
 
     private static final String LOTTO_SPLIT_DELIMITER = ",";
+    private static final String NUMERIC_VALID_MESSAGE = "숫자 형태를 입력해 주세요.";
 
     private StringUtil() {
         throw new NoInstantiationException(this.getClass().getSimpleName());
@@ -22,7 +23,7 @@ public final class StringUtil {
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {
-            throw new IllegalArgumentException("숫자 형태를 입력해 주세요.");
+            throw new IllegalArgumentException(NUMERIC_VALID_MESSAGE);
         }
     }
 
