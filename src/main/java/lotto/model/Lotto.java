@@ -34,4 +34,11 @@ public class Lotto {
             throw new IllegalArgumentException(WARNING_LOTTO_NON_DUPLICATION);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
+    }
 }

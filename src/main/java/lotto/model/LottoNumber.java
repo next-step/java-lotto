@@ -10,7 +10,7 @@ public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private static List<Integer> lottoPool = new ArrayList<>();
+    private static final List<Integer> lottoPool = new ArrayList<>();
 
     static {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
@@ -23,6 +23,10 @@ public class LottoNumber {
     public LottoNumber(int lottoNumber) {
         validateLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
+    }
+
+    public static List<Integer> getLottoPool(){
+        return lottoPool;
     }
 
     private void validateLottoNumber(int lottoNumber) {
