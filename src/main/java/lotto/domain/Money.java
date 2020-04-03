@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
+    private static final BigDecimal ZERO = BigDecimal.ZERO;
+
     private final BigDecimal amount;
 
     public static Money of(String value) {
@@ -15,17 +17,32 @@ public class Money {
         return new Money(BigDecimal.valueOf(value));
     }
 
+    public static Money ZERO() {
+        return new Money(ZERO);
+    }
+
     private Money(BigDecimal amount) {
+        if (amount.compareTo(ZERO) < 0) {
+            throw new IllegalArgumentException(String.format("Money는 음수(%s)일 수 없습니다.", amount.toString()));
+        }
         this.amount = amount;
+    }
+
+    public Money sum(Money anotherMoney) {
+        return new Money((amount.add(anotherMoney.getAmount())));
+    }
+
+    public Money minus(Money anotherMoney) {
+        return new Money(amount.subtract(anotherMoney.getAmount()));
+    }
+
+    public Money multiply(long number) {
+        return new Money(amount.multiply(BigDecimal.valueOf(number)));
     }
 
     public long divide(Money anotherMoney) {
         return amount.divide(anotherMoney.getAmount(), RoundingMode.DOWN)
                 .longValue();
-    }
-
-    public Money multiply(long number) {
-        return new Money(amount.multiply(BigDecimal.valueOf(number)));
     }
 
     public BigDecimal calculateProfit(Money anotherMoney) {
