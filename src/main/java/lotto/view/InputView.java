@@ -85,6 +85,7 @@ public class InputView {
 
     private static Lotto splitByComma(String input) {
         return Arrays.stream(input.split(COMMA))
+                .map(it -> it.trim())
                 .map(it -> ScannerUtil.convertStringToInteger(it))
                 .map(it -> new LottoNumber(it))
                 .collect(collectingAndThen(toList(), Lotto::new));
@@ -98,11 +99,4 @@ public class InputView {
         return lottoCountAuto;
     }
 
-    public static int getLottoCount() {
-        return lottoCount;
-    }
-
-    public static int getLottoCountManual() {
-        return lottoCountManual;
-    }
 }
