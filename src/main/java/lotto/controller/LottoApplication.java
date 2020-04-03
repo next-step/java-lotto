@@ -4,7 +4,7 @@ import lotto.domain.Money;
 import lotto.domain.item.*;
 import lotto.service.LottoService;
 import lotto.view.InputView;
-import lotto.view.LottoDto;
+import lotto.view.MatchedLottoDto;
 import lotto.view.ResultView;
 import util.StringUtil;
 
@@ -26,8 +26,8 @@ public class LottoApplication {
 
         ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
 
-        LottoDto passivityDto = lottoService.passivityPlay(buyPassivityCount);
-        LottoDto autoDto = lottoService.autoPlay(availableBuyCount - buyCount);
+        MatchedLottoDto passivityDto = lottoService.passivityPlay(buyPassivityCount);
+        MatchedLottoDto autoDto = lottoService.autoPlay(availableBuyCount - buyCount);
         ResultView.printLoots(passivityDto);
         ResultView.printLoots(autoDto);
 
@@ -46,10 +46,10 @@ public class LottoApplication {
 
         LottoTickets tickets1 = new LottoTickets(tickets);
 
-        LottoDto winGame = lottoGame.findWinGame(tickets1, winLottoTicket);
+        MatchedLottoDto winGame = lottoGame.findWinGame(tickets1, winLottoTicket);
         ResultView.printResult(winGame);
 
-        LottoDto earningRate = lottoGame.getEarningRate(tickets1, winLottoTicket);
+        MatchedLottoDto earningRate = lottoGame.getEarningRate(tickets1, winLottoTicket);
         ResultView.printEarningResult(earningRate);
     }
 }
