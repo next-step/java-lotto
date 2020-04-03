@@ -17,13 +17,13 @@ public class LottosTest {
     @Test
     void createTest() {
         //given
-        List<LottoNumber> autoLottoNumbers = new ArrayList<>();
+        List<LottoNumber> manualLottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            autoLottoNumbers.add(new LottoNumber(i));
+            manualLottoNumbers.add(new LottoNumber(i));
         }
 
         //when
-        Lottos lottos = new Lottos(1, Arrays.asList(new Lotto(autoLottoNumbers)));
+        Lottos lottos = new Lottos(1, Arrays.asList(new Lotto(manualLottoNumbers)));
 
         //then
         assertThat(lottos.getTotalLottoCount()).isEqualTo(2);
