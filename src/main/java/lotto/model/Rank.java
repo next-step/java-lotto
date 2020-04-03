@@ -11,6 +11,9 @@ public enum Rank {
     FIFTH(3, 5_000, false),
     BLANK(0, 0, false);
 
+    private static final int MONEY_TO_BUY_ONE_LOTTO = 1000;
+    private static final int NO_INPUT = 0;
+
     private int matchCount;
     private int winningMoney;
     private boolean hasBonusBall;
@@ -37,11 +40,14 @@ public enum Rank {
     }
 
     public static double findEarningRate(List<Rank> ranks) {
-        return 0;
-    }
+        double allPrizeMoney = getAllPrizeMoney(ranks);
+        int inputMoney = ranks.size() * MONEY_TO_BUY_ONE_LOTTO;
 
-    public int getMatchCount() {
-        return matchCount;
+        if (ranks.size() == NO_INPUT) {
+            return 0;
+        }
+
+        return (allPrizeMoney / inputMoney) * 100;
     }
 
     public int getWinningMoney() {
