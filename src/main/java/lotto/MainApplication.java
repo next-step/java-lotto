@@ -7,5 +7,7 @@ public class MainApplication {
         InputView.getInputForMoney();
         InputView.getInputForLottoCountManual();
         InputView.getInputForLottoManual();
+        InputView.getInputForWinningLotto();
+        InputView.getInputForBonusBall();
     }
 }

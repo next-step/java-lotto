@@ -13,7 +13,7 @@ public class ScannerUtil {
         return stringInput;
     }
 
-    public static int readInt(){
+    public static int readInt() {
         String stringInput = scanner.nextLine();
         validateNullAndEmpty(isNullOrEmpty(stringInput));
         return convertStringToInteger(stringInput);
@@ -37,7 +37,7 @@ public class ScannerUtil {
         }
     }
 
-    private static int convertStringToInteger(String input){
+    public static int convertStringToInteger(String input) {
         validateIntegerType(input);
         return Integer.parseInt(input);
     }
