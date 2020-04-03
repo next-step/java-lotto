@@ -7,7 +7,8 @@ public class GameResult {
     private Results results;
 
     public GameResult(List<Rank> ranks) {
-
+        this.earningRate = Rank.findEarningRate(ranks);
+        this.results = Results.reflectAll(ranks);
     }
 
     public double getEarningRate() {
