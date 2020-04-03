@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumberTest {
     @DisplayName("1~45 범위 안의 숫자가 입력되면 정상적으로 객체 생성")
@@ -17,7 +18,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void throwExceptionWhenOutOfRangeFrom1To45(int input) {
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
             new LottoNumber(input);
         });
     }
