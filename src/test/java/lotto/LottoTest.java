@@ -20,7 +20,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또번호 생성시 이미 있는 번호 테스트")
     void isNumberExistTest() {
-        Lotto lotto = Lotto.manual("1, 2, 3, 4, 5, 6");
+        Lotto lotto = Lotto.manual(1, 2, 3, 4, 5, 6);
 
         assertAll(
                 () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(1))).isTrue(),
@@ -34,15 +34,15 @@ public class LottoTest {
     @DisplayName("중복된 로또번호 테스트")
     void validateDuplicationNumbersTest() {
         assertThatThrownBy(
-                () -> Lotto.manual("1, 2, 3, 4, 5, 5")
+                () -> Lotto.manual(1, 2, 3, 4, 5, 5)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("로또번호 맞춘 갯수 가져오기 테스트")
     void getMatchedCountTest() {
-        Lotto winningLotto = Lotto.manual("1, 2, 3, 4, 5, 6");
-        Lotto lotto = Lotto.manual("1, 2, 3, 4, 5, 45");
+        Lotto winningLotto = Lotto.manual(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.manual(1, 2, 3, 4, 5, 45);
 
         assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);
     }

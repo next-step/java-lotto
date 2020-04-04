@@ -14,11 +14,11 @@ public class WinningLotto {
         this(inputWinningLotto, LottoNumber.newChooseNumber(inputBonusNumber));
     }
 
-    public WinningLotto(String inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
+    public WinningLotto(int[] inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
         this(Lotto.manual(inputWinningLottoNumbers), inputBonusNumber);
     }
 
-    public WinningLotto(String inputWinningLottoNumbers, int inputBonusNumber) {
+    public WinningLotto(int[] inputWinningLottoNumbers, int inputBonusNumber) {
         this(Lotto.manual(inputWinningLottoNumbers), LottoNumber.newChooseNumber(inputBonusNumber));
     }
 

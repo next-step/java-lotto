@@ -59,7 +59,7 @@ public class LottoRun {
     }
 
     private static WinningLotto getWinningLotto() {
-        String winningNumbers = inputView.inputWinningNumber();
+        int[] winningNumbers = inputView.inputWinningNumber();
         int bonusNumber = inputView.inputBonusNumber();
 
         return new WinningLotto(winningNumbers, bonusNumber);

@@ -22,8 +22,8 @@ public class LottoInspectorTest {
         this.lottoInspector = new LottoInspector();
         List<Lotto> testLottos = new ArrayList<>();
 
-        Lotto lotto1 = Lotto.manual("1, 2, 3, 4, 5, 6");
-        Lotto lotto2 = Lotto.manual("1, 2, 3, 41, 42, 43");
+        Lotto lotto1 = Lotto.manual(1, 2, 3, 4, 5, 6);
+        Lotto lotto2 = Lotto.manual(1, 2, 3, 41, 42, 43);
         testLottos.add(lotto1);
         testLottos.add(lotto2);
     }

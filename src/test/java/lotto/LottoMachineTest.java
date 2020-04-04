@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,8 +36,13 @@ public class LottoMachineTest {
     @Test
     @DisplayName("로또기계로 돈만큼 수동 로또 구매 테스트")
     void purchaseAutomaticLottosTest() {
+        List<int[]> inputs = new ArrayList<>();
+        inputs.add(new int[]{1, 2, 3, 4, 5, 6});
+        inputs.add(new int[]{1, 2, 3, 4, 5, 6});
+        inputs.add(new int[]{1, 2, 3, 4, 5, 6});
+
         PurchaseResult purchaseResult = new LottoMachine().purchaseManualLottos(
-                new Money(3000), new ManualLottoOrderSheet(Arrays.asList("1,2,3,4,5,6", "1,2,3,4,5,6", "1,2,3,4,5,6"))
+                new Money(3000), new ManualLottoOrderSheet(inputs)
         );
 
         assertThat(

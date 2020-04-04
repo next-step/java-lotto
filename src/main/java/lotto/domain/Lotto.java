@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_MAX_SOCKET = 6;
-    private static final String LOTTO_NUMBER_SPLIT_KEYWORD = ",";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -23,7 +22,7 @@ public class Lotto {
         return new Lotto(lottoNumbers.stream().collect(Collectors.toSet()));
     }
 
-    public static Lotto manual(String lottoNumbers) {
+    public static Lotto manual(int... lottoNumbers) {
         return new Lotto(changeToLottoNumbers(lottoNumbers));
     }
 
@@ -66,10 +65,10 @@ public class Lotto {
         }
     }
 
-    private static Set<LottoNumber> changeToLottoNumbers(String input) {
+    private static Set<LottoNumber> changeToLottoNumbers(int[] inputs) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (String s : input.split(LOTTO_NUMBER_SPLIT_KEYWORD)) {
-            lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
+        for (int i = 0; i < inputs.length; i++) {
+            lottoNumbers.add(LottoNumber.newChooseNumber(inputs[i]));
         }
         return lottoNumbers;
     }
