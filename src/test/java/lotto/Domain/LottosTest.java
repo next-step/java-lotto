@@ -27,9 +27,9 @@ public class LottosTest {
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
-        Map<LottoGrade, Integer> matchCountMap = lottos.match(winningNumber);
+        LottoResult matchCountMap = lottos.match(winningNumber);
 
-        assertThat(matchCountMap)
+        assertThat(matchCountMap.winLottoGradeAndPrize())
                 .hasSize(6)
                 .contains(entry(LottoGrade.MISS, 0)
                         , entry(LottoGrade.WIN5TH, 2)
@@ -55,8 +55,8 @@ public class LottosTest {
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
-        Map<LottoGrade, Integer> statistics = lottos.match(winningNumber);
-        Double revenueRate = lottos.revenueRate(statistics);
+        LottoResult statistics = lottos.match(winningNumber);
+        Double revenueRate = lottos.revenueRate(1);
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
     }

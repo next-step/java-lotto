@@ -29,7 +29,7 @@ public class LottoMachine {
         }
     }
 
-    List<Integer> makeAutoTargetNumber() {
+    public List<Integer> makeAutoTargetNumber() {
         Collections.shuffle(LOTTO_NUMBER_RANGE);
         return LOTTO_NUMBER_RANGE.subList(0, 6);
     }
