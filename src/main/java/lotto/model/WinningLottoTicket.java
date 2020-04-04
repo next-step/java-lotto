@@ -34,6 +34,6 @@ public class WinningLottoTicket {
                 .count();
         boolean matchBonusNumber = lottoTicket.contains(bonusNumber);
 
-        return LottoResult.of(LottoResultMatchId.newInstance(Math.toIntExact(count), matchBonusNumber));
+        return LottoResult.of(Math.toIntExact(count), matchBonusNumber);
     }
 }

@@ -1,6 +1,6 @@
 package lotto.model.wrapper;
 
-import lotto.model.LottoBonusNumberMatch;
+import lotto.model.LottoBonusNumberMatchStatus;
 
 import java.util.Collections;
 import java.util.Map;
@@ -33,11 +33,11 @@ public class WinningLottoMatchingCount {
                 .orElseThrow(() -> new IllegalArgumentException("당첨 번호와 매칭되는 숫자는 0 이상, 6 이하여야 합니다."));
     }
 
-    public LottoBonusNumberMatch getLottoBonusNumberMatch(final boolean isMatchedBonusNumber) {
+    public LottoBonusNumberMatchStatus getLottoBonusNumberMatchStatus(final boolean isMatchedBonusNumber) {
         if(count == BONUS_NUMBER_CHECK_MATCH_COUNT) {
-            return LottoBonusNumberMatch.createByMatchBonusNumber(isMatchedBonusNumber);
+            return LottoBonusNumberMatchStatus.createByMatchBonusNumber(isMatchedBonusNumber);
         }
-        return LottoBonusNumberMatch.ANYWAY;
+        return LottoBonusNumberMatchStatus.ANYWAY;
     }
 
     public int toInt() {

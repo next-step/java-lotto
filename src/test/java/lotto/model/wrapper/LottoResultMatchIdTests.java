@@ -1,6 +1,6 @@
 package lotto.model.wrapper;
 
-import lotto.model.LottoBonusNumberMatch;
+import lotto.model.LottoBonusNumberMatchStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static lotto.model.LottoBonusNumberMatch.*;
+import static lotto.model.LottoBonusNumberMatchStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
@@ -18,8 +18,8 @@ public class LottoResultMatchIdTests {
     @DisplayName("로또 매칭 식별자 생성 테스트")
     @ParameterizedTest
     @MethodSource("generateLottoMatchCountTestCases")
-    public void generateLottoMatchCountTest(int matchCount, LottoBonusNumberMatch lottoBonusNumberMatch) {
-        assertThatCode(() -> LottoResultMatchId.newInstance(matchCount, lottoBonusNumberMatch)).doesNotThrowAnyException();
+    public void generateLottoMatchCountTest(int matchCount, LottoBonusNumberMatchStatus lottoBonusNumberMatchStatus) {
+        assertThatCode(() -> LottoResultMatchId.newInstance(matchCount, lottoBonusNumberMatchStatus)).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 매칭 식별자 생성 테스트")

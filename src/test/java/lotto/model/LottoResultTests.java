@@ -46,18 +46,18 @@ public class LottoResultTests {
         return Stream.of(
                 Arguments.of(LottoResultMatchId.newInstance(0, false)),
                 Arguments.of(LottoResultMatchId.newInstance(1, false)),
-                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(2), LottoBonusNumberMatch.ANYWAY)),
+                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(2), LottoBonusNumberMatchStatus.ANYWAY)),
                 Arguments.of(LottoResultMatchId.newInstance(3, false)),
-                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(4), LottoBonusNumberMatch.ANYWAY)),
+                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(4), LottoBonusNumberMatchStatus.ANYWAY)),
                 Arguments.of(LottoResultMatchId.newInstance(5, false)),
                 Arguments.of(LottoResultMatchId.newInstance(5, true)),
-                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(6), LottoBonusNumberMatch.ANYWAY)));
+                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(6), LottoBonusNumberMatchStatus.ANYWAY)));
     }
 
     private static Stream<Arguments> generateLottoAbnormalResultCases() {
         return Stream.of(
-                Arguments.of(LottoResultMatchId.newInstance(6, LottoBonusNumberMatch.UN_MATCH)),
-                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(4), LottoBonusNumberMatch.UN_MATCH))
+                Arguments.of(LottoResultMatchId.newInstance(6, LottoBonusNumberMatchStatus.UN_MATCH)),
+                Arguments.of(LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(4), LottoBonusNumberMatchStatus.UN_MATCH))
         );
     }
 
