@@ -51,9 +51,6 @@ public class LottosTest {
         lottos.add(lotto);
 
 
-        for (Lotto lotto1 : lottos.toList()) {
-            System.out.println(lotto1.toString());
-        }
         int bonus = 7;
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);

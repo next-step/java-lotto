@@ -77,4 +77,22 @@ public class LottoTest {
 
         assertThat(lotto.match(winningLotto)).isEqualTo(LottoGrade.WIN1ST);
     }
+
+
+    @Test
+    void winningLottoBonus_오류_Test() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(1);
+        lottoNumbers.add(6);
+        lottoNumbers.add(3);
+        lottoNumbers.add(2);
+        lottoNumbers.add(5);
+        lottoNumbers.add(4);
+
+        Lotto lotto = Lotto.init(lottoNumbers);
+        int bonus = 49;
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+                WinningLotto.init(lotto, bonus);
+        });
+    }
 }
