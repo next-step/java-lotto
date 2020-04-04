@@ -1,19 +1,23 @@
 package lotto.model.gameresult;
 
+import lotto.model.Rank;
+
+import java.util.List;
+
 public class GameResult {
-    private MatchingResult matchingResult;
     private EarningRate earningRate;
+    private MatchResults matchResults;
 
-    public GameResult(MatchingResult matchingResult, EarningRate earningRate) {
-        this.matchingResult = matchingResult;
-        this.earningRate = earningRate;
+    public GameResult(List<Rank> ranks) {
+        this.earningRate = new EarningRate(Rank.findEarningRate(ranks));
+        this.matchResults = MatchResults.reflectAll(ranks);
     }
 
-    public MatchingResult getMatchingResult() {
-        return matchingResult;
+    public double getEarningRate() {
+        return earningRate.getEarningRate();
     }
 
-    public EarningRate getEarningRate() {
-        return earningRate;
+    public MatchResults getMatchResults() {
+        return matchResults;
     }
 }

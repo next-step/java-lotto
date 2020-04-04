@@ -1,50 +1,28 @@
 package lotto.model;
 
-import java.util.Objects;
+import static lotto.Messages.WARNING_NOT_ENOUGH_TO_BUY;
 
 public class Money {
-    private static final Long MONEY_TO_BUY_ONE_LOTTO = 1000L;
-    private static final Long ZERO_MONEY = 0L;
+    private static final int MONEY_TO_BUY_ONE_LOTTO = 1000;
 
-    private Long money;
+    private int money;
 
-    public Money() {
-        this.money = 0l;
-    }
-
-    public Money(Long money) {
-        validateNegative(money);
+    public Money(int money) {
+        validateEnoughMoneyToBuy(isEnoughMoneyToBuy(money));
         this.money = money;
     }
 
-    private void validateNegative(Long money) {
-        if (isNegative(money)) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+    private static boolean isEnoughMoneyToBuy(int money) {
+        return money >= MONEY_TO_BUY_ONE_LOTTO;
+    }
+
+    private static void validateEnoughMoneyToBuy(boolean isGreaterThan1000) {
+        if (!isGreaterThan1000) {
+            throw new IllegalArgumentException(WARNING_NOT_ENOUGH_TO_BUY);
         }
     }
 
-    private boolean isNegative(Long money) {
-        return money < ZERO_MONEY;
-    }
-
-    public int findLottoCountToBuy() {
-        return (int) Math.floor(this.money / MONEY_TO_BUY_ONE_LOTTO);
-    }
-
-    public Long getMoney() {
-        return money;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Money money1 = (Money) o;
-        return Objects.equals(money, money1.money);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(money);
+    public int getLottoCount() {
+        return (money / MONEY_TO_BUY_ONE_LOTTO);
     }
 }

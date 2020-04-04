@@ -1,28 +1,13 @@
 package lotto.model.gameresult;
 
-import java.util.Objects;
-
 public class EarningRate {
-    private Double earningRate;
+    private double earningRate;
 
-    public EarningRate(Double earningRate) {
+    public EarningRate(double earningRate) {
         this.earningRate = earningRate;
     }
 
-    public Double getEarningRate() {
+    public double getEarningRate() {
         return earningRate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EarningRate that = (EarningRate) o;
-        return Objects.equals(earningRate, that.earningRate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(earningRate);
     }
 }

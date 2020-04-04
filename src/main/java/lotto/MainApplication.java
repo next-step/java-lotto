@@ -1,17 +1,14 @@
 package lotto;
 
-import lotto.model.game.LottoGame;
-import lotto.model.winninglotto.WinningLotto;
-import lotto.view.input.InputScanner;
-import lotto.view.output.ResultView;
+import lotto.controller.LottoGame;
+import lotto.model.lottos.Lottos;
+import lotto.view.ResultView;
 
 public class MainApplication {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(InputScanner.getPurchasePrice());
-        ResultView.printMyLottos(lottoGame.start());
+        Lottos lottos = LottoGame.ready();
 
-        WinningLotto winningLotto
-                = WinningLotto.of(InputScanner.getWinningNumbers(), InputScanner.getBonusBall());
-        ResultView.printResult(lottoGame.getResult(winningLotto));
+        ResultView.printMyLottos(lottos);
+        ResultView.printGameResult(LottoGame.start(lottos));
     }
 }
