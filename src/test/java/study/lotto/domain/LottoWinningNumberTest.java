@@ -35,9 +35,7 @@ public class LottoWinningNumberTest {
     void outOfRule(List<Integer> winningNumbers, int bonusNumber) {
         assertThatExceptionOfType(
                 IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    new LottoWinningNumber(winningNumbers, bonusNumber);
-                });
+                .isThrownBy(() ->  new LottoWinningNumber(winningNumbers, bonusNumber));
     }
 
     private static Stream<Arguments> provideWinningErrorNumber() {

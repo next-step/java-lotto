@@ -21,8 +21,6 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, -1, 46})
     void invalidValue(int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    new LottoNumber(number);
-                });
+                .isThrownBy(() -> new LottoNumber(number));
     }
 }

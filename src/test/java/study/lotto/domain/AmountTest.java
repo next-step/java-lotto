@@ -21,8 +21,6 @@ public class AmountTest {
     @Test
     void disallowNegative() {
         assertThatExceptionOfType(IllegalNumberRangeArgumentException.class)
-                .isThrownBy(() -> {
-                    new Amount(-1);
-                });
+                .isThrownBy(() -> new Amount(-1));
     }
 }
