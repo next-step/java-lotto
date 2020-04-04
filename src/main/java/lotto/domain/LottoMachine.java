@@ -1,14 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static lotto.domain.LottoTicket.TICKET_PRICE;
 
 public class LottoMachine {
-    static final int LOTTO_START_NUMBER = 1;
-    static final int LOTTO_END_NUMBER = 45;
-
-    public static List<LottoTicket> pay(long money) {
+    public static List<LottoTicket> createLottoTickets(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < getTicketCount(money); i++) {
@@ -18,15 +17,32 @@ public class LottoMachine {
     }
 
     private static LottoTicket generateLottoTicket() {
-        ArrayList<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number = LOTTO_START_NUMBER; number < LOTTO_END_NUMBER; number++) {
-            lottoNumbers.add(LottoNumber.of(number));
-        }
-        Collections.shuffle(lottoNumbers);
-        return new LottoTicket(lottoNumbers.subList(0, LottoTicket.LOTTO_NUMBERS_SIZE));
+        return new LottoTicket(LottoMixer.mixLottoNumbers());
     }
 
-    private static long getTicketCount(long money) {
-        return money / LottoTicket.PRICE;
+    private static long getTicketCount(Money money) {
+        return money.divide(TICKET_PRICE);
+    }
+
+    public static List<LottoTicket> createLottoTickets(Money money, LottoTicketForms lottoTicketForms) {
+        Money leftMoney = deductManualPrice(money, lottoTicketForms);
+        List<LottoTicket> manualLottoTickets = createManualLottoTickets(lottoTicketForms);
+        List<LottoTicket> autoLottoTickets = createLottoTickets(leftMoney);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.addAll(manualLottoTickets);
+        lottoTickets.addAll(autoLottoTickets);
+        return lottoTickets;
+    }
+
+    private static List<LottoTicket> createManualLottoTickets(LottoTicketForms lottoTicketForms) {
+        return lottoTicketForms.getLottoTicketForms()
+                .stream()
+                .map(LottoTicket::ofForm)
+                .collect(Collectors.toList());
+    }
+
+    private static Money deductManualPrice(Money money, LottoTicketForms lottoTicketForms) {
+        return money.minus(TICKET_PRICE.multiply(lottoTicketForms.getSize()));
     }
 }

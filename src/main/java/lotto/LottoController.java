@@ -1,36 +1,22 @@
 package lotto;
 
-import lotto.domain.Buyer;
-import lotto.domain.BuyerResult;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoController {
     public static void main(String[] args) {
         long price = InputView.inputPrice();
+        LottoTicketForms lottoTicketForms = InputView.inputManualLotto();
 
-        Buyer buyer = new Buyer();
-        List<LottoTicket> lottoTickets = buyer.buyLottoTickets(price);
+        Buyer buyer = Buyer.of(Money.of(price), lottoTicketForms);
 
-        ResultView.printLottoTickets(lottoTickets);
-        int[] winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        ResultView.printLottoTickets(buyer.getLottoTickets());
 
-        BuyerResult buyerResult = buyer.getResult(createLottoTicket(winningNumbers), LottoNumber.of(bonusNumber));
+        LottoNumbers winningNumbers = LottoNumbers.of(InputView.inputWinningNumbers());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
+        BuyerResult buyerResult = buyer.getResult(WinningLotto.of(bonusNumber, winningNumbers));
 
         ResultView.printWinningStatistics(buyerResult);
-    }
-
-    private static LottoTicket createLottoTicket(int[] winningNumbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int winningNumber : winningNumbers) {
-            lottoNumbers.add(LottoNumber.of(winningNumber));
-        }
-        return new LottoTicket(lottoNumbers);
     }
 }

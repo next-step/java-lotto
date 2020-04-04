@@ -3,23 +3,24 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000);
+    MISS(0, Money.ZERO()),
+    FIFTH(3, Money.of(5000)),
+    FOURTH(4, Money.of(50000)),
+    THIRD(5, Money.of(1500000)),
+    SECOND(5, Money.of(30000000)),
+    FIRST(6, Money.of(2000000000));
 
     private int matchCount;
-    private long amount;
+    private Money reward;
 
-    Rank(int matchCount, long amount) {
+    Rank(int matchCount, Money reward) {
         this.matchCount = matchCount;
-        this.amount = amount;
+        this.reward = reward;
     }
 
-    public static Rank findByLottoTicketResult(LottoTicketResult lottoTicketResult) {
-        int matchCount = lottoTicketResult.getMatchCount();
-        boolean bonusMatch = lottoTicketResult.isBonusMatch();
+    public static Rank of(WiningResult winingResult) {
+        int matchCount = winingResult.getMatchCount();
+        boolean bonusMatch = winingResult.isBonusMatch();
 
         if (matchCount == SECOND.getMatchCount() && bonusMatch) {
             return SECOND;
@@ -27,14 +28,14 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(s -> s.matchCount == matchCount)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("당첨 되지 않았습니다."));
+                .orElse(MISS);
     }
 
-    public long getAmount() {
-        return amount;
+    public Money getReward() {
+        return reward;
     }
 
     public int getMatchCount() {
         return matchCount;
     }
-}
+    }

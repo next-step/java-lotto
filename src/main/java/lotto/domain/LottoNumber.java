@@ -1,28 +1,32 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
+    static final int LOTTO_START_NUMBER = 1;
+    static final int LOTTO_END_NUMBER = 45;
+
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
     private final int number;
 
-    private LottoNumber(int number) {
-        verify(number);
-        this.number = number;
+    static {
+        for (int i = LOTTO_START_NUMBER; i <= LOTTO_END_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
     }
 
-    private void verify(int number) {
-        if (number < LottoMachine.LOTTO_START_NUMBER || number > LottoMachine.LOTTO_END_NUMBER) {
-            throw new IllegalArgumentException(String
-                    .format("%d는 1~45 숫자 사이의 번호가 아닙니다", number));
-        }
+    public static LottoNumber of(int number) {
+        return Optional.ofNullable(lottoNumbers.get(number))
+                .orElseThrow(() -> new IllegalArgumentException(String
+                        .format("%d는 1~45 숫자 사이의 번호가 아닙니다", number)));
+    }
+
+    private LottoNumber(int number) {
+        this.number = number;
     }
 
     public int getNumber() {
         return number;
-    }
-
-    public static LottoNumber of(int input) {
-        return new LottoNumber(input);
     }
 
     @Override
