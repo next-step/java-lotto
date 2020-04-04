@@ -12,8 +12,6 @@ public enum LottoRank {
 
     private static Map<Integer, List<LottoRank>> valueToLottoRank =
             new HashMap<>();
-    private static final int SINGLE_LIST_SIZE = 1;
-    private static final int FIRST_INDEX = 0;
 
     private long prize;
     private int matchCount;
@@ -39,14 +37,13 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
-        List<LottoRank> lottoRanks = valueToLottoRank.getOrDefault(matchCount,
-                Collections.singletonList(MISS));
-        if (lottoRanks.size() == SINGLE_LIST_SIZE) {
-            return lottoRanks.get(FIRST_INDEX);
+        List<LottoRank> lottoRanks = valueToLottoRank.get(matchCount);
+        if (Objects.isNull(lottoRanks)) {
+            return MISS;
         }
 
         return lottoRanks.stream()
-                .filter(v -> v.matchBonus == matchBonus)
+                .filter(v -> v != LottoRank.SECOND || v.matchBonus == matchBonus)
                 .findFirst()
                 .orElse(MISS);
     }
