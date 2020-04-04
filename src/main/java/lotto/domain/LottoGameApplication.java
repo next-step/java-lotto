@@ -21,17 +21,11 @@ public class LottoGameApplication {
         List<Integer> winningNumbers = InputView.getWinningNumbers();
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        List<Rank> results = new ArrayList<>();
-
-        for (Lotto lotto : lottos) {
-            int matchCount = lottoGame.match(lotto, winningLotto);
-            results.add(lottoGame.valueOf(matchCount));
-        }
+        List<Rank> results = lottoGame.match(lottos, winningLotto);
 
         ResultView.printWinningStatus(results);
 
-        int totalWinnings = lottoGame.getTotalWinnings(results);
-        double rateOfRevenue = lottoGame.getRateOfRevenue(price, totalWinnings);
+        double rateOfRevenue = lottoGame.getRateOfRevenue(price, lottoGame.getTotalWinnings(results));
 
         ResultView.printRateOfRevenue(rateOfRevenue);
     }
