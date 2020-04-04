@@ -17,9 +17,9 @@ public class RankTest {
 
         assertThat(rank).isEqualTo(FIRST);
 
-        rank = Rank.of(5, true);
+        rank = Rank.of(4, true);
 
-        assertThat(rank).isEqualTo(SECOND);
+        assertThat(rank).isEqualTo(FOURTH);
     }
 
     @Test
@@ -45,5 +45,13 @@ public class RankTest {
         Rank rank = Rank.of(5, true);
 
         assertThat(rank).isEqualTo(SECOND);
+    }
+
+    @Test
+    @DisplayName("5개의 번호가 일치하고 보너스 볼 번호를 포함하지 않으면 3등이다")
+    public void getSecondRankWhenFiveNumbersMatchedAndNotContainsBonusNumber() {
+        Rank rank = Rank.of(5, false);
+
+        assertThat(rank).isEqualTo(THIRD);
     }
 }
