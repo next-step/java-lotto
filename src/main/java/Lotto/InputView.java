@@ -9,7 +9,7 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         String amount = scanner.nextLine();
         scanner.close();
-        return new Amount(Integer.parseInt(amount));
+        return new Amount(amount);
     }
 
 }

@@ -10,7 +10,11 @@ public class LottoMain {
         Amount amount = inputView.InputPurchasingAmount();
 
         int quantity = lottoProgress.amountToQuantity(amount);
-        resultView.checkQuantity(quantity);
+        resultView.showQuantity(quantity);
+        LottoBundle lottoBundle = new LottoBundle(quantity);
+        resultView.showLottoNumbers(lottoBundle);
 
     }
+
+
 }

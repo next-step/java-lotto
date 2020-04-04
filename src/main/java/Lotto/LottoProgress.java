@@ -7,4 +7,9 @@ public class LottoProgress {
     public int amountToQuantity(Amount amount) {
         return amount.getAmount()/LOTTO_PRICE;
     }
+
+    public void makeLottoGames(int quantity) {
+
+    }
+
 }
