@@ -10,7 +10,7 @@ public class Formula {
     public Formula(String input, String separators) {
         String inputWithoutCustomSeparator = CustomSeparatorEnum.withoutCustomSeparator(input);
         if (!inputWithoutCustomSeparator.isEmpty()) {
-            this.operands = convertPositiveNumber(inputWithoutCustomSeparator.split(separators));
+            this.operands = changeToOperand(inputWithoutCustomSeparator.split(separators));
         }
     }
 
@@ -20,7 +20,7 @@ public class Formula {
                 .reduce(0, Integer::sum);
     }
 
-    private List<Operand> convertPositiveNumber(String[] splitInput) {
+    private List<Operand> changeToOperand(String[] splitInput) {
         List<Operand> converted = new ArrayList<>();
         for (String s : splitInput) {
             converted.add(new Operand(s));
