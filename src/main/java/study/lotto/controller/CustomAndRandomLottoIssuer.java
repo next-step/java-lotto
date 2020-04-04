@@ -4,9 +4,9 @@ import study.lotto.domain.Lotto;
 import study.lotto.domain.LottoIssuer;
 import study.lotto.domain.Lottos;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CustomAndRandomLottoIssuer implements LottoIssuer {
@@ -16,8 +16,10 @@ public class CustomAndRandomLottoIssuer implements LottoIssuer {
 
     public static CustomAndRandomLottoIssuer valueOf(
             List<List<Integer>> customNumbers, LottoIssuer lottoIssuer) {
+
         if (Objects.isNull(customNumbers)) {
-            return new CustomAndRandomLottoIssuer(null, lottoIssuer);
+            return new CustomAndRandomLottoIssuer(
+                    new Lottos(Collections.emptyList()), lottoIssuer);
         }
 
         List<Lotto> lottos = customNumbers.stream()
@@ -27,7 +29,7 @@ public class CustomAndRandomLottoIssuer implements LottoIssuer {
     }
 
     CustomAndRandomLottoIssuer(Lottos lottos, LottoIssuer lottoIssuer) {
-        this.lottos = Lottos.valueOf(Optional.ofNullable(lottos));
+        this.lottos = new Lottos(lottos);
         this.lottoIssuer = lottoIssuer;
     }
 

@@ -7,10 +7,6 @@ import java.util.stream.Collectors;
 public class Lottos implements Iterable<Lotto> {
     private List<Lotto> list;
 
-    public static Lottos valueOf(Optional<Lottos> lottos) {
-        return lottos.map(Lottos::new).orElseGet(Lottos::new);
-    }
-
     public Lottos() {
         this.list = new ArrayList<>();
     }
