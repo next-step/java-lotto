@@ -24,7 +24,7 @@ public class LottoTest {
     @DisplayName("로또번호 생성시 이미 있는 번호 테스트")
     void isNumberExistTest() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
-                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3), 
+                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3),
                 LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(6)
         );
         Lotto lotto = Lotto.newManual(lottoNumbers);
@@ -59,5 +59,14 @@ public class LottoTest {
         ));
 
         assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("getLottoNumbers 불변검사")
+    void getLottoNumbersTest() {
+        Lotto lo = Lotto.newAutomatic();
+        lo.getLottoNumbers().add(LottoNumber.newChooseNumber(44));
+
+        assertThat(lo.getLottoNumbers().size()).isEqualTo(6);
     }
 }

@@ -7,7 +7,7 @@ public class Lotto {
     private static final int LOTTO_MAX_SOCKET = 6;
     private static final String LOTTO_NUMBER_SPLIT_KEYWORD = ",";
 
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public static Lotto newAutomatic() {
         return new Lotto();
@@ -26,62 +26,35 @@ public class Lotto {
     }
 
     private Lotto() {
-        generatorLottoNumbers();
-        sortLottorNumbers();
+        this.lottoNumbers = new TreeSet<>(generatorLottoNumbers());
     }
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-        sortLottorNumbers();
+        this.lottoNumbers = new TreeSet<>(lottoNumbers);
     }
 
     public Set<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+        return new TreeSet<>(this.lottoNumbers);
     }
 
     public boolean isExistNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public int getMatchedCount(Lotto lotto) {
-        int matchedCount = 0;
-        for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
-            matchedCount += countingMatched(lottoNumber);
-        }
-        return matchedCount;
+        return (int) lotto.getLottoNumbers().stream()
+                .filter(l -> isExistNumber(l))
+                .count();
     }
 
-    private int countingMatched(LottoNumber lottoNumber) {
-        if (lottoNumbers.stream()
-                .anyMatch(l -> l.getLottoNumber() == lottoNumber.getLottoNumber())) {
-            return 1;
+    private Set<LottoNumber> generatorLottoNumbers() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        while (lottoNumbers.size() < LOTTO_MAX_SOCKET) {
+            LottoNumber lottoNumber = LottoNumber.newRandomNumber();
+            lottoNumbers.add(lottoNumber);
         }
-        return 0;
-    }
-
-    private void sortLottorNumbers() {
-        List<LottoNumber> sortedNumbers = this.lottoNumbers
-                .stream().collect(Collectors.toList());
-
-        Collections.sort(sortedNumbers);
-        this.lottoNumbers = new LinkedHashSet<>(sortedNumbers);
-    }
-
-    private void generatorLottoNumbers() {
-        this.lottoNumbers = new LinkedHashSet<>();
-        for (int i = 0; i < LOTTO_MAX_SOCKET; i++) {
-            LottoNumber lottoNumber = makeLottoNumber();
-            this.lottoNumbers.add(lottoNumber);
-        }
-    }
-
-    private LottoNumber makeLottoNumber() {
-        LottoNumber lottoNumber = LottoNumber.newRandomNumber();
-        while (isExistNumber(lottoNumber)) {
-            lottoNumber = LottoNumber.newRandomNumber();
-        }
-        return lottoNumber;
+        return lottoNumbers;
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
@@ -92,7 +65,7 @@ public class Lotto {
     }
 
     private static Set<LottoNumber> convertToLotto(String winningNumbers) {
-        Set<LottoNumber> lottoNumbers = new LinkedHashSet<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (String s : winningNumbers.split(LOTTO_NUMBER_SPLIT_KEYWORD)) {
             lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
         }
