@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,7 +13,7 @@ public class LottoResultTest {
     @DisplayName("수익률을 구할 수 있다.")
     @Test
     void getRateOfReturn() {
-        List<Lotto> lottoList = Arrays.asList(
+        List<Lotto> lottoList = Collections.singletonList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
         WinningLottos winningLottos = new WinningLottos();

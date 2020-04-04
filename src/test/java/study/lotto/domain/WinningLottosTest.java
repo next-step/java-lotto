@@ -1,10 +1,10 @@
 package study.lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,7 +13,7 @@ public class WinningLottosTest {
     @DisplayName("등수에 맞는 로또를 추가한다.")
     @Test
     void addRank() {
-        List<Lotto> lottoList = Arrays.asList(
+        List<Lotto> lottoList = Collections.singletonList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
 
