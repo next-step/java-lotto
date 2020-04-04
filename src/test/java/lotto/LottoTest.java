@@ -2,10 +2,12 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.model.Lotto;
+import lotto.model.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,15 +30,27 @@ public class LottoTest {
     }
 
 
+    @DisplayName("로또 구매 테스트")
     @Test
     void initLottos() {
+        int money = 14000;
+        List<Lotto> lottos = lottoGame.initLottos(money);
+        assertThat(lottos.size()).isEqualTo(14);
     }
 
+    @DisplayName("Match test")
     @Test
     void match() {
-        int rank = lottoGame.match(winningLotto, myLotto);
+        int money = 14000;
+        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Lotto> lottos = lottoGame.initLottos(money);
 
-        assertThat(rank).isEqualTo(1);
+        List<Rank> results = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            Rank rank = lottoGame.match(winningLotto, lotto);
+            results.add(rank);
+        }
+        assertThat(results.size()).isEqualTo(14);
     }
 
     @Test
