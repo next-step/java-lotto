@@ -1,13 +1,14 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoInspector;
+import lotto.domain.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,12 +23,8 @@ public class LottoInspectorTest {
         this.lottoInspector = new LottoInspector();
         this.testLottos = new ArrayList<>();
 
-        Lotto lotto1 = Lotto.newManual(Arrays.asList(
-                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3), LottoNumber.newChooseNumber(4), LottoNumber.newChooseNumber(5), LottoNumber.newChooseNumber(6)
-        ));
-        Lotto lotto2 = Lotto.newManual(Arrays.asList(
-                LottoNumber.newChooseNumber(1), LottoNumber.newChooseNumber(2), LottoNumber.newChooseNumber(3), LottoNumber.newChooseNumber(41), LottoNumber.newChooseNumber(42), LottoNumber.newChooseNumber(43)
-        ));
+        Lotto lotto1 = Lotto.newManual("1, 2, 3, 4, 5, 6");
+        Lotto lotto2 = Lotto.newManual("1, 2, 3, 41, 42, 43");
         this.testLottos.add(lotto1);
         this.testLottos.add(lotto2);
     }
