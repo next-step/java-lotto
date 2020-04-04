@@ -12,12 +12,10 @@ public class LottoGame {
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     public int match(Lotto lotto, Lotto winningLotto) {
-        return (int) lotto.getNumbers().stream()
-                .filter(num -> winningLotto.getNumbers().contains(num))
-                .count();
+        return lotto.match(winningLotto);
     }
 
-    public Rank getRank(int matchCount) {
+    public Rank valueOf(int matchCount) {
         return Rank.of(matchCount);
     }
 

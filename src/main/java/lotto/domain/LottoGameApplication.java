@@ -25,7 +25,7 @@ public class LottoGameApplication {
 
         for (Lotto lotto : lottos) {
             int matchCount = lottoGame.match(lotto, winningLotto);
-            results.add(lottoGame.getRank(matchCount));
+            results.add(lottoGame.valueOf(matchCount));
         }
 
         ResultView.printWinningStatus(results);

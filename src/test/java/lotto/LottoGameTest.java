@@ -50,7 +50,7 @@ public class LottoGameTest {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         int matchCount = lottoGame.match(lotto, winningLotto);
 
-        Rank result = lottoGame.getRank(matchCount);
+        Rank result = lottoGame.valueOf(matchCount);
 
         assertThat(result).isEqualTo(FOURTH);
 
@@ -58,7 +58,7 @@ public class LottoGameTest {
         winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
         matchCount = lottoGame.match(lotto, winningLotto);
 
-        result = lottoGame.getRank(matchCount);
+        result = lottoGame.valueOf(matchCount);
 
         assertThat(result).isEqualTo(THIRD);
     }
