@@ -29,8 +29,8 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.size();
     }
 
-    public void add(Lotto lotto) {
-        lottos.add(lotto);
+    protected void addAll(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public Lotto get(int index) {
@@ -38,15 +38,12 @@ public class Lottos implements Iterable<Lotto> {
     }
 
     public WinningLottos ranks(LottoWinningNumber lottoWinningNumber) {
-        // todo stream 으로 해결할 방법을 찾아보자.
-        WinningLottos winningLottos = new WinningLottos();
+        Function<Lotto, LottoRank> key =
+                lotto -> lotto.rank(lottoWinningNumber);
+        Map<LottoRank, List<Lotto>> lottoRanks =
+                lottos.stream().collect(Collectors.groupingBy(key));
 
-        for (Lotto lotto : lottos) {
-            LottoRank lottoRank = lotto.rank(lottoWinningNumber);
-            winningLottos.addToRank(lottoRank, lotto);
-        }
-
-        return winningLottos;
+        return new WinningLottos(lottoRanks);
     }
 
     @Override public Iterator<Lotto> iterator() {

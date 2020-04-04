@@ -13,10 +13,12 @@ public class WinningLottosTest {
     @DisplayName("등수에 맞는 로또를 추가한다.")
     @Test
     void addRank() {
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        ;
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
+
         WinningLottos winningLottos = new WinningLottos();
-        winningLottos.addToRank(LottoRank.FIRST, new Lotto(lottoNumbers));
+        winningLottos.addToRank(LottoRank.FIRST, lottoList);
         assertThat(winningLottos.size(LottoRank.FIRST)).isEqualTo(1);
     }
 

@@ -12,10 +12,12 @@ public class LottoResultTest {
     @DisplayName("수익률을 구할 수 있다.")
     @Test
     void getRateOfReturn() {
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
         WinningLottos winningLottos = new WinningLottos();
         winningLottos
-                .addToRank(LottoRank.FIFTH, new Lotto(Arrays.asList(1, 2, 3, 4
-                        , 5, 6)));
+                .addToRank(LottoRank.FIFTH, lottoList);
 
         LottoResult lottoResult = new LottoResult(winningLottos, 50000);
         assertThat(lottoResult.getRateOfReturn()).isEqualTo(0.1);
@@ -24,10 +26,12 @@ public class LottoResultTest {
     @DisplayName("수익률이 몹시 클 수도 있다.")
     @Test
     void big() {
-        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Lotto> lottoList = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
         WinningLottos winningLottos = new WinningLottos();
-        winningLottos.addToRank(LottoRank.FIRST, new Lotto(lottoNumbers));
-        winningLottos.addToRank(LottoRank.FIRST, new Lotto(lottoNumbers));
+        winningLottos.addToRank(LottoRank.FIRST, lottoList);
 
         LottoResult lottoResult = new LottoResult(winningLottos, 5000);
         assertThat(lottoResult.getRateOfReturn()).isEqualTo(800_000);

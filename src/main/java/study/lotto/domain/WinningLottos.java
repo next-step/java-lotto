@@ -1,6 +1,7 @@
 package study.lotto.domain;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningLottos {
@@ -10,8 +11,17 @@ public class WinningLottos {
         initWinningLottos();
     }
 
-    public void addToRank(LottoRank lottoRank, Lotto lotto) {
-        winningLottos.get(lottoRank).add(lotto);
+    public WinningLottos(Map<LottoRank, List<Lotto>> winningLottos) {
+        initWinningLottos();
+
+        for (Map.Entry<LottoRank, List<Lotto>> entry : winningLottos
+                .entrySet()) {
+            addToRank(entry.getKey(), entry.getValue());
+        }
+    }
+
+    protected void addToRank(LottoRank lottoRank, List<Lotto> lottos) {
+        winningLottos.get(lottoRank).addAll(lottos);
     }
 
     public Lottos get(LottoRank lottoRank) {
@@ -22,12 +32,10 @@ public class WinningLottos {
         return winningLottos.get(lottoRank).size();
     }
 
-    private Map<LottoRank, Lottos> initWinningLottos() {
-        winningLottos = new EnumMap(LottoRank.class);
+    private void initWinningLottos() {
+        winningLottos = new EnumMap<>(LottoRank.class);
         for (LottoRank lottoRank : LottoRank.values()) {
             winningLottos.put(lottoRank, new Lottos());
         }
-
-        return winningLottos;
     }
 }
