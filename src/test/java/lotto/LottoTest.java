@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.model.Lotto;
-import lotto.model.Rank;
+import lotto.model.Result;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,9 +45,9 @@ public class LottoTest {
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<Lotto> lottos = lottoGame.initLottos(money);
 
-        List<Rank> results = new ArrayList<>();
+        List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Rank rank = lottoGame.match(winningLotto, lotto);
+            Result rank = lottoGame.match(winningLotto, lotto);
             results.add(rank);
         }
         assertThat(results.size()).isEqualTo(14);
