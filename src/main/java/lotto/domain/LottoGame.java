@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 public class LottoGame {
 
     private static final int DEFAULT_LOTTO_PRICE = 1000;
+    private static final int LOTTO_LIMIT_NUMBER = 45;
+    private static final int LOTTO_LIMIT_SIZE = 6;
 
 
     public List<Lotto> initLottos(int money) {
@@ -26,12 +28,12 @@ public class LottoGame {
     }
 
     public int getRandom() {
-        return new Random().nextInt(45) + 1;
+        return new Random().nextInt(LOTTO_LIMIT_NUMBER) + 1;
     }
 
     private List<Integer> createRandomList() {
         Set<Integer> set = new HashSet<>();
-        while (set.size() != 6) {
+        while (set.size() != LOTTO_LIMIT_SIZE) {
             set.add(getRandom());
         }
         List<Integer> createdLottos = new ArrayList<>(set);
