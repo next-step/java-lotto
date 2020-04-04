@@ -1,35 +1,32 @@
 package stringpluscalculator;
 
 public class PositiveNumber {
-    private Integer positiveNumber;
+    private int positiveNumber;
 
-    public PositiveNumber(Integer number) {
-        validatePositiveOrZero(number);
-        this.positiveNumber = number;
+    public PositiveNumber(int input) {
+        validatePositiveOrZero(input);
+        this.positiveNumber = input;
     }
 
-    public PositiveNumber(String number) {
-        this.positiveNumber = convertNumber(number);
-        validatePositiveOrZero(this.positiveNumber);
+    public PositiveNumber(String input) {
+        this(changeToNumber(input));
     }
 
-    public Integer getPositiveNumber() {
+    public int getPositiveNumber() {
         return this.positiveNumber;
     }
 
-    private Integer convertNumber(String input) {
-        Integer number;
+    private static int changeToNumber(String input) {
         try {
-            number = Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("숫자가 아닙니다.");
         }
-        return number;
     }
 
-    private void validatePositiveOrZero(int number) {
-        if (number < 0) {
-            throw new IllegalArgumentException("음수는 사용할 수 없습니다.");
+    private void validatePositiveOrZero(int input) {
+        if (input < 0) {
+            throw new IllegalArgumentException("양수만 사용할 수 있습니다.");
         }
     }
 }
