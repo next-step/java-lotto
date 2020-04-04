@@ -15,6 +15,14 @@ public class Money {
         return new Integer(this.money);
     }
 
+    public Money payed(Money payedMoney) {
+        int leftMoney = this.money - payedMoney.getMoney();
+        if (leftMoney < 0) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
+        }
+        return new Money(leftMoney);
+    }
+
     public int getPurchasableCount(int price) {
         return money / price;
     }

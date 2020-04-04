@@ -15,15 +15,15 @@ public class WinningLotto {
     }
 
     public WinningLotto(String inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
-        this(Lotto.newManual(inputWinningLottoNumbers), inputBonusNumber);
+        this(Lotto.manual(inputWinningLottoNumbers), inputBonusNumber);
     }
 
     public WinningLotto(String inputWinningLottoNumbers, int inputBonusNumber) {
-        this(Lotto.newManual(inputWinningLottoNumbers), LottoNumber.newChooseNumber(inputBonusNumber));
+        this(Lotto.manual(inputWinningLottoNumbers), LottoNumber.newChooseNumber(inputBonusNumber));
     }
 
     public Lotto getWinningLotto() {
-        return Lotto.newManual(this.winningLotto.getLottoNumbers());
+        return Lotto.manual(this.winningLotto.getLottoNumbers());
     }
 
     public LottoNumber getBonusNumber() {

@@ -9,21 +9,34 @@ public class LottoMachine {
     public LottoMachine() {
     }
 
-    public List<Lotto> purchaseLottos(Money money) {
-        int purchasedCount = getPurchasedCount(money);
-
+    public PurchaseResult purchaseManualLottos(Money money, ManualLottoOrderSheet manualLottoOrderSheet) {
+        validatePurchasableCount(money, manualLottoOrderSheet);
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < purchasedCount; i++) {
-            lottos.add(Lotto.newAutomatic());
+
+        for (int i = 0; i < manualLottoOrderSheet.getOrderCount(); i++) {
+            lottos.add(Lotto.manual(manualLottoOrderSheet.getManualLottoOrders().get(i)));
         }
-        return lottos;
+        return new PurchaseResult(lottos, new Money(manualLottoOrderSheet.getOrderCount() * LOTTO_PRICE));
     }
 
-    private int getPurchasedCount(Money money) {
-        int purchasableCount = money.getMoney() / LOTTO_PRICE;
-        if (purchasableCount < 1) {
+    public PurchaseResult purchaseAutomaticLottos(Money money) {
+        int purchasableCount = getAutomaticPurchasableCount(money);
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < purchasableCount; i++) {
+            lottos.add(Lotto.automatic());
+        }
+        return new PurchaseResult(lottos, new Money(purchasableCount * LOTTO_PRICE));
+    }
+
+    private void validatePurchasableCount(Money money, ManualLottoOrderSheet manualLottoOrderSheet) {
+        int laftMoney = money.getMoney() - (LOTTO_PRICE * manualLottoOrderSheet.getOrderCount());
+        if (laftMoney < 0) {
             throw new IllegalArgumentException("돈이 부족합니다.");
         }
-        return purchasableCount;
+    }
+
+    private int getAutomaticPurchasableCount(Money money) {
+        return money.getMoney() / LOTTO_PRICE;
     }
 }

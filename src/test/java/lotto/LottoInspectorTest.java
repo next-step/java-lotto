@@ -15,18 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoInspectorTest {
 
-    private List<Lotto> testLottos;
     private LottoInspector lottoInspector;
 
     @BeforeEach
     void setting() {
         this.lottoInspector = new LottoInspector();
-        this.testLottos = new ArrayList<>();
+        List<Lotto> testLottos = new ArrayList<>();
 
-        Lotto lotto1 = Lotto.newManual("1, 2, 3, 4, 5, 6");
-        Lotto lotto2 = Lotto.newManual("1, 2, 3, 41, 42, 43");
-        this.testLottos.add(lotto1);
-        this.testLottos.add(lotto2);
+        Lotto lotto1 = Lotto.manual("1, 2, 3, 4, 5, 6");
+        Lotto lotto2 = Lotto.manual("1, 2, 3, 41, 42, 43");
+        testLottos.add(lotto1);
+        testLottos.add(lotto2);
     }
 
     @Test

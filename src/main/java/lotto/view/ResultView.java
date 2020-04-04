@@ -18,8 +18,11 @@ public class ResultView {
 
     }
 
+    public void viewPurchaseCount(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + automaticLottos.size() + "장을 구매했습니다.");
+    }
+
     public void viewLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
         for (Lotto lotto : lottos) {
             viewLottoNumbers(lotto);
         }
@@ -58,7 +61,7 @@ public class ResultView {
     }
 
     public void viewInsight(BigDecimal yield) {
-        System.out.print("총 수익률은" + String.format("%.2f", yield) + " 입니다.");
+        System.out.print("총 수익률은 " + String.format("%.2f", yield) + " 입니다.");
         viewYieldAnalysis(yield.intValue() > BREAK_EVEN_POINT);
     }
 

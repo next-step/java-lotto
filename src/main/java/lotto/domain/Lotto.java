@@ -11,19 +11,19 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public static Lotto newAutomatic() {
+    public static Lotto automatic() {
         return new Lotto();
     }
 
-    public static Lotto newManual(Set<LottoNumber> lottoNumbers) {
+    public static Lotto manual(Set<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto newManual(List<LottoNumber> lottoNumbers) {
+    public static Lotto manual(List<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers.stream().collect(Collectors.toSet()));
     }
 
-    public static Lotto newManual(String lottoNumbers) {
+    public static Lotto manual(String lottoNumbers) {
         return new Lotto(changeToLottoNumbers(lottoNumbers));
     }
 

@@ -5,11 +5,13 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoRun {
     private static final ResultView resultView = new ResultView();
     private static final InputView inputView = new InputView();
+    private static LottoMachine lottoMachine = new LottoMachine();
 
     public static void main(String[] args) {
         Money myMoney = getMonney();
@@ -28,11 +30,32 @@ public class LottoRun {
     }
 
     private static List<Lotto> purchaseLottos(Money money) {
-        LottoMachine lottoMachine = new LottoMachine();
-        List<Lotto> lottos = lottoMachine.purchaseLottos(money);
+        int purchaseManualCount = inputView.inputPurchaseManualCount();
+        PurchaseResult manualPurchaseResult = purchaseManualLotto(money, purchaseManualCount);
+        PurchaseResult automaticPurchaseResult = purchaseAutomaticLotto(money.payed(manualPurchaseResult.getPayedMoney()));
+
+        resultView.viewPurchaseCount(manualPurchaseResult.getPurchasedLottos(), automaticPurchaseResult.getPurchasedLottos());
+
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualPurchaseResult.getPurchasedLottos());
+        lottos.addAll(automaticPurchaseResult.getPurchasedLottos());
+
         resultView.viewLottos(lottos);
 
         return lottos;
+    }
+
+    private static PurchaseResult purchaseAutomaticLotto(Money money) {
+        PurchaseResult automaticPurchaseResult = lottoMachine.purchaseAutomaticLottos(money);
+        return automaticPurchaseResult;
+    }
+
+    private static PurchaseResult purchaseManualLotto(Money money, int purchaseManualCount) {
+        if (purchaseManualCount > 0) {
+            ManualLottoOrderSheet manualLottoOrderSheet = inputView.inputManualLottoNumbers(purchaseManualCount);
+            return lottoMachine.purchaseManualLottos(money, manualLottoOrderSheet);
+        }
+        return new PurchaseResult();
     }
 
     private static WinningLotto getWinningLotto() {
