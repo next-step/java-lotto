@@ -23,8 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber newRandomNumber() {
-        return Optional.ofNullable(lottoNumbers.get(new LottoNumberGenerator().getRandomNumber()))
-                .orElseThrow(IllegalArgumentException::new);
+        return lottoNumbers.get(new LottoNumberGenerator().getRandomNumber());
     }
 
     public static LottoNumber newRandomNumber(NumberGenerator lottoNumberGenerator) {
