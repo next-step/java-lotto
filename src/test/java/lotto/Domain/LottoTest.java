@@ -53,9 +53,27 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         Lotto lotto = Lotto.init(lottoNumbers);
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
+        int bonus = 7;
+        WinningLotto winningNumber = WinningLotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)), bonus);
         int result = lotto.match(winningNumber);
 
         assertThat(result).isEqualTo(Integer.parseInt(expected));
+    }
+
+    @Test
+    void winninglottoTest() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(1);
+        lottoNumbers.add(6);
+        lottoNumbers.add(3);
+        lottoNumbers.add(2);
+        lottoNumbers.add(5);
+        lottoNumbers.add(4);
+
+        Lotto lotto = Lotto.init(lottoNumbers);
+        int bonus = 7;
+        WinningLotto winningLotto = WinningLotto.init(lottoNumbers, bonus);
+
+        assertThat(lotto.match(winningLotto)).isEqualTo(6);
     }
 }

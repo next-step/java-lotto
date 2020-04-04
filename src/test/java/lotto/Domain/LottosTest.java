@@ -22,7 +22,9 @@ public class LottosTest {
         Lotto lotto = Lotto.init(lottoNumbers);
         List<Lotto> lottoList = Arrays.asList(lotto, lotto);
         Lottos lottos = Lottos.init(lottoList);
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
+
+        int bonus = 7;
+        WinningLotto winningNumber = WinningLotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)), bonus);
 
         Map<Integer, Integer> matchCountMap = lottos.match(winningNumber);
 
@@ -41,7 +43,8 @@ public class LottosTest {
         Lotto lotto = Lotto.init(lottoNumbers);
         List<Lotto> lottoList = Arrays.asList(lotto, lotto);
         Lottos lottos = Lottos.init(lottoList);
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
+        int bonus = 7;
+        WinningLotto winningNumber = WinningLotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)), bonus);
 
         Map<Integer, Integer> statistics = lottos.match(winningNumber);
         Double revenueRate = lottos.revenueRate(statistics);
