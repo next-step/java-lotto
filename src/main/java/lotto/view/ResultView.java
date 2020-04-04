@@ -60,6 +60,7 @@ public class ResultView {
         System.out.print("총 수익률은" + String.format("%.2f", yield) + " 입니다.");
         if (yield.compareTo(new BigDecimal(1)) <= 0) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            return;
         }
         System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
     }
