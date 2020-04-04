@@ -8,10 +8,9 @@ import static java.util.stream.Collectors.toList;
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
 
-    public List<Rank> match(List<Lotto> lottos, Lotto winningLotto) {
+    public List<Rank> match(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
         return lottos.stream()
-                .mapToInt(lotto -> lotto.match(winningLotto))
-                .mapToObj(matchCount -> Rank.of(matchCount, true))
+                .map(lotto -> lotto.match(winningLotto, bonusNumber))
                 .collect(toList());
     }
 

@@ -20,7 +20,7 @@ public class LottoGameApplication {
         List<Integer> winningNumbers = InputView.getWinningNumbers();
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        List<Rank> results = lottoGame.match(lottos, winningLotto);
+        List<Rank> results = lottoGame.match(lottos, winningLotto, 10);
 
         ResultView.printWinningStatus(results);
 

@@ -18,11 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoGameTest {
-    private LottoGame lottoGame;
+    private LottoGame lottoGame = new LottoGame();
+    private Lotto winningLotto;
 
     @BeforeEach
     public void setUp() {
-        lottoGame = new LottoGame();
+        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
@@ -32,12 +33,20 @@ public class LottoGameTest {
                 new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
                 new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12))
         );
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<Rank> results = lottoGame.match(lottos, winningLotto);
+        List<Rank> results = lottoGame.match(lottos, winningLotto, 10);
 
-        assertThat(results).contains(FOURTH);
+        assertThat(results).contains(FIFTH);
         assertThat(results).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("5개의 번호가 일치하고 보너스 번호가 일치하면 2등이다")
+    public void matchFiveNumbersAndContainBonusIsSecond() {
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+
+        lottoGame.match(lottos, winningLotto, 7);
     }
 
     @ParameterizedTest

@@ -19,6 +19,10 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    public Rank match(Lotto winningLotto, int bonusNumber) {
+        return Rank.of(match(winningLotto), this.getNumbers().contains(bonusNumber));
+    }
+
     public int match(Lotto winningLotto) {
         return (int) this.getNumbers().stream()
                 .filter(num -> winningLotto.getNumbers().contains(num))
