@@ -1,10 +1,7 @@
 package lotto.Domain;
 
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Lottos {
 
@@ -22,38 +19,38 @@ public class Lottos {
         lottoList.add(lotto);
     }
 
-    public Map<Integer, Integer> match(List<Integer> winningNumber) {
-        Map<Integer, Integer> statistics = initLottoStatistics();
+    public Map<LottoGrade, Integer> match(WinningLotto winningNumber) {
+        Map<LottoGrade, Integer> statistics = initLottoStatistics();
         for (Lotto lotto : lottoList) {
-            Integer matchCount = lotto.match(winningNumber);
-            statistics.put(matchCount, statistics.get(matchCount)+1);
+            LottoGrade matchGrade = lotto.match(winningNumber);
+            statistics.put(matchGrade, statistics.get(matchGrade) + 1);
         }
         return statistics;
     }
 
-    Map<Integer, Integer> initLottoStatistics() {
-        Map<Integer, Integer> statistics = new HashMap<>();
-        for (int i = 0; i <= 6; i++) {
-            statistics.put(i, 0);
-        }
+    Map<LottoGrade, Integer> initLottoStatistics() {
+        Map<LottoGrade, Integer> statistics = new HashMap<>();
+        Arrays.stream(LottoGrade.values()).forEach(value -> {
+            statistics.put(value, 0);
+        });
         return statistics;
     }
 
-    public Double revenueRate(Map<Integer, Integer> matchCountMap) {
+    public Double revenueRate(Map<LottoGrade, Integer> matchCountMap) {
         double sumOfWinningLotto = 0.0;
 
-        for (Map.Entry<Integer, Integer> entry : matchCountMap.entrySet()) {
+        for (Map.Entry<LottoGrade, Integer> entry : matchCountMap.entrySet()) {
             sumOfWinningLotto += calculatePrize(entry);
         }
 
         return sumOfWinningLotto / (lottoList.size() * 1000);
     }
 
-    double calculatePrize(Map.Entry<Integer, Integer> entry) {
-        if(entry.getKey() <= 2) {
+    double calculatePrize(Map.Entry<LottoGrade, Integer> entry) {
+        if(entry.getKey().getPrize() <= 2) {
             return 0;
         }
-        return LottoGrade.findGrade(entry.getKey()).getPrize() * entry.getValue();
+        return entry.getKey().getPrize() * entry.getValue();
     }
 
     public List<Lotto> toList() {

@@ -24,12 +24,14 @@ public class Lotto {
         }
     }
 
-    public int match(List<Integer> winningNumber) {
-        int matchCount = 0;
-        for (Integer number : winningNumber) {
-            matchCount += (lottoNumber.contains(number)) ? 1 : 0;
-        }
-        return matchCount;
+    public LottoGrade match(WinningLotto winningNumber) {
+        int matchCount = winningNumber.matchLotto(Lotto.init(lottoNumber));
+        boolean matchBonus = winningNumber.matchBonus(Lotto.init(lottoNumber));
+        return LottoGrade.findGrade(matchCount, matchBonus);
+    }
+
+    public boolean isNumberMatch(int number) {
+        return lottoNumber.contains(number);
     }
 
     public List<Integer> toList() {

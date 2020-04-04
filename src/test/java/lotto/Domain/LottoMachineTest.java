@@ -68,8 +68,11 @@ public class LottoMachineTest {
         Lottos lottos = Lottos.init(new ArrayList<>());
         lottos.add(lotto);
 
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
-        Map<Integer, Integer> statistics = lottos.match(winningNumber);
+        int bonus = 7;
+        Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
+        WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
+
+        Map<LottoGrade, Integer> statistics = lottos.match(winningNumber);
         Double revenueRate = lottos.revenueRate(statistics);
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));

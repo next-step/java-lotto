@@ -27,11 +27,16 @@ public class LottosTest {
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
-        Map<Integer, Integer> matchCountMap = lottos.match(winningNumber);
+        Map<LottoGrade, Integer> matchCountMap = lottos.match(winningNumber);
 
         assertThat(matchCountMap)
-                .hasSize(7)
-                .contains(entry(3, 2), entry(4, 0), entry(5, 0), entry(6, 0));
+                .hasSize(6)
+                .contains(entry(LottoGrade.MISS, 0)
+                        , entry(LottoGrade.WIN5TH, 2)
+                        , entry(LottoGrade.WIN4TH, 0)
+                        , entry(LottoGrade.WIN3RD, 0)
+                        , entry(LottoGrade.WIN2ND, 0)
+                        , entry(LottoGrade.WIN1ST, 0));
     }
 
     @ParameterizedTest
@@ -42,13 +47,18 @@ public class LottosTest {
                 .boxed()
                 .collect(Collectors.toList());
         Lotto lotto = Lotto.init(lottoNumbers);
-        List<Lotto> lottoList = Arrays.asList(lotto, lotto);
-        Lottos lottos = Lottos.init(lottoList);
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        lottos.add(lotto);
+
+
+        for (Lotto lotto1 : lottos.toList()) {
+            System.out.println(lotto1.toString());
+        }
         int bonus = 7;
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
-        Map<Integer, Integer> statistics = lottos.match(winningNumber);
+        Map<LottoGrade, Integer> statistics = lottos.match(winningNumber);
         Double revenueRate = lottos.revenueRate(statistics);
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));

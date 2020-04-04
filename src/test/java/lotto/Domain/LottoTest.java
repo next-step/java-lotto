@@ -56,9 +56,9 @@ public class LottoTest {
         int bonus = 7;
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
-        int result = lotto.match(winningNumber);
+        LottoGrade result = lotto.match(winningNumber);
 
-        assertThat(result).isEqualTo(Integer.parseInt(expected));
+        assertThat(result).isEqualTo(LottoGrade.findGrade(Integer.parseInt(expected), false));
     }
 
     @Test
@@ -73,8 +73,8 @@ public class LottoTest {
 
         Lotto lotto = Lotto.init(lottoNumbers);
         int bonus = 7;
-        WinningLotto winningLotto = WinningLotto.init(lottoNumbers, bonus);
+        WinningLotto winningLotto = WinningLotto.init(lotto, bonus);
 
-        assertThat(lotto.match(winningLotto)).isEqualTo(6);
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoGrade.WIN1ST);
     }
 }
