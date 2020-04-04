@@ -36,13 +36,6 @@ public class LottoTicketTests {
                 .withMessageContaining("로또는 서로 다른 6개의 숫자여야 합니다.");
     }
 
-    @DisplayName("로또 결과 확인 테스트")
-    @ParameterizedTest
-    @MethodSource("checkLottoTicketTestCases")
-    public void checkLottoTicketTest(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket, LottoResult lottoResult) {
-        assertThat(winningLottoTicket.check(lottoTicket)).isEqualTo(lottoResult);
-    }
-
     private static Stream<Arguments> generateLottoExceptionTestCases() {
         return Stream.of(
                 Arguments.of(new HashSet<>(Arrays.asList(
@@ -57,47 +50,4 @@ public class LottoTicketTests {
         );
     }
 
-    private static Stream<Arguments> checkLottoTicketTestCases() {
-        LottoTicket lottoTicket = LottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        return Stream.of(
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7)),
-                        LottoResult.SIX),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(8)),
-                        LottoResult.FIVE),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(6)),
-                        LottoResult.FIVE_WITH_BONUS),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 8, 7)), LottoNumber.of(24)),
-                        LottoResult.FOUR),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 9, 8, 7)), LottoNumber.of(24)),
-                        LottoResult.THREE),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 10, 9, 8, 7)), LottoNumber.of(24)),
-                        LottoResult.TWO),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 11, 10, 12, 13, 14)), LottoNumber.of(24)),
-                        LottoResult.ONE),
-                Arguments.of(
-                        lottoTicket,
-                        WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)), LottoNumber.of(24)),
-                        LottoResult.NONE)
-        );
-    }
-
-    private static Set<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
-    }
 }

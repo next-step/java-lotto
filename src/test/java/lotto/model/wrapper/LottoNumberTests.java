@@ -20,7 +20,6 @@ public class LottoNumberTests {
     @ParameterizedTest
     @ValueSource(ints = {1, 17, 45})
     public void compareLottoNumberTest(int input) {
-        assertThat(LottoNumber.of(input)).isSameAs(LottoNumber.of(input));
         assertThat(LottoNumber.of(input)).isEqualTo(LottoNumber.of(input));
     }
 
@@ -30,6 +29,6 @@ public class LottoNumberTests {
     public void generateLottoNumberExceptionTest(int input) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumber.of(input))
-                .withMessageContaining("로또 번호는 1 이상, 45 이하여야 한다.");
+                .withMessageContaining("로또 번호는 1 이상, 45 이하여야 합니다.");
     }
 }
