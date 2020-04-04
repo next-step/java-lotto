@@ -31,7 +31,7 @@ public class LottoMachine {
 
     public List<Integer> makeAutoTargetNumber() {
         Collections.shuffle(LOTTO_NUMBER_RANGE);
-        return LOTTO_NUMBER_RANGE.subList(0, 6);
+        return new ArrayList<>(LOTTO_NUMBER_RANGE.subList(0, 6));
     }
 
     public Lotto buyLotto(List<Integer> targetNumbers) {

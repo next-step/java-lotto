@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Lottos {
 
-    private final List<Lotto> lottoList;
+    private List<Lotto> lottoList;
 
     private Lottos(List<Lotto> lottoList) {
         this.lottoList = lottoList;
@@ -26,10 +26,6 @@ public class Lottos {
             statistics.addWinGrade(matchGrade);
         }
         return statistics;
-    }
-
-    public double revenueRate(LottoResult statistics) {
-        return statistics.revenueRate();
     }
 
     public List<Lotto> toList() {

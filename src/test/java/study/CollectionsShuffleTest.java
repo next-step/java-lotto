@@ -17,6 +17,11 @@ public class CollectionsShuffleTest {
         List<Integer> lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         Collections.shuffle(lotto);
+        System.out.println(lotto.toString());
+        Collections.shuffle(lotto);
+        System.out.println(lotto.toString());
+        Collections.shuffle(lotto);
+        System.out.println(lotto.toString());
 
         assertThat(lotto).contains(1, 2, 3, 4, 5, 6);
     }

@@ -4,17 +4,14 @@ package lotto.Domain;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResult {
 
-    private Map<LottoGrade, Integer> statistics;
+    private SortedMap<LottoGrade, Integer> statistics;
 
     private LottoResult() {
-        statistics = new HashMap<>();
+        statistics = new TreeMap<>();
         Arrays.stream(LottoGrade.values()).forEach(value -> {
             statistics.put(value, 0);
         });
@@ -55,6 +52,6 @@ public class LottoResult {
     }
 
     public Map<LottoGrade, Integer> winLottoGradeAndPrize() {
-        return Collections.unmodifiableMap(statistics);
+        return Collections.unmodifiableSortedMap(statistics);
     }
 }

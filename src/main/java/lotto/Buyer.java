@@ -2,9 +2,7 @@ package lotto;
 
 
 import lotto.Controller.LottoController;
-import lotto.Domain.Lotto;
-import lotto.Domain.LottoMachine;
-import lotto.Domain.Lottos;
+import lotto.Domain.*;
 import lotto.View.InputView;
 
 import java.util.ArrayList;
@@ -12,23 +10,20 @@ import java.util.List;
 
 public class Buyer {
 
-    int amount;
-    LottoMachine lottoMachine;
-
-    private Buyer(int amount) {
-        this.amount = amount;
-        lottoMachine = LottoMachine.init();
+    private Buyer() {
     }
 
-    public static Buyer of(int amount) {
-        return new Buyer(amount);
+    public static Buyer of() {
+        return new Buyer();
     }
 
-//    public void perchase() {
-//        LottoController lottoController = new LottoController(InputView.init(), LottoMachine.init());
-//        int count = lottoController.payToLotto();
-//        Lottos lottos = lottoController.buyAutoLotto(count);
-//        List<Integer> laskweekWinLotto = lottoController.inputLastWeekWinLotto();
-////        lottoController.LottoResult(lottos, laskweekWinLotto);
-//    }
+    public void perchase() {
+        LottoController lottoController = new LottoController(InputView.init(), LottoMachine.init());
+        int count = lottoController.payToLotto();
+        Lottos lottos = lottoController.buyAutoLotto(count);
+        lottoController.boughtLottoList(lottos);
+        WinningLotto laskweekWinLotto = lottoController.inputLastWeekWinLotto();
+        LottoResult lottoResult = lottoController.lottoResult(lottos, laskweekWinLotto);
+        lottoController.printLottoResult(lottoResult);
+    }
 }
