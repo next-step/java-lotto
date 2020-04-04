@@ -15,7 +15,8 @@ public class LottoController {
         int amount = InputView.getAmount();
         List<List<Integer>> customNumberList = InputView.getCustomNumbers();
         LottoIssuer lottoIssuer =
-                CustomAndRandomLottoIssuer.valueOf(customNumberList, new RandomLottoIssuer());
+                CustomAndRandomLottoIssuer
+                        .valueOf(customNumberList, new RandomLottoIssuer());
         LottoGame lottoGame = new LottoGame(amount, lottoIssuer);
         ResultView.displayBuyingLotto(lottoGame.getLottos());
 

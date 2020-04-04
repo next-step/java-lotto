@@ -10,8 +10,8 @@ public class LottoResult {
         this.investmentAmount = investmentAmount;
     }
 
-    public LottoResult(WinningLottos winningLottos,
-                       int investmentAmount) {
+    protected LottoResult(WinningLottos winningLottos,
+                          int investmentAmount) {
         this(winningLottos, new Amount(investmentAmount));
     }
 
