@@ -20,14 +20,10 @@ public enum Rank {
     }
 
     public static Rank of(int matchCount) {
-        if (matchCount < WINNING_COUNT_BOUNDARY) {
-            return LOSER;
-        }
-
         return Stream.of(values())
                 .filter(rank -> rank.isMatched(matchCount))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 랭킹입니다."));
+                .orElse(LOSER);
     }
 
     private boolean isMatched(int matchCount) {
