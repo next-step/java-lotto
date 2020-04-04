@@ -19,14 +19,6 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public int getWinningMoney() {
-        return winningMoney;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
     public static Rank of(int matchCount) {
         if (matchCount < WINNING_COUNT_BOUNDARY) {
             return LOSER;
@@ -36,5 +28,13 @@ public enum Rank {
                 .filter(rank -> rank.getMatchCount() == matchCount)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 랭킹입니다."));
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getWinningMoney() {
+        return winningMoney;
     }
 }
