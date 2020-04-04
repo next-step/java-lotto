@@ -32,8 +32,8 @@ public enum RankEnum {
         return this.reward;
     }
 
-    public static boolean isWinning(RankEnum rank) {
-        return rank.matched >= 3;
+    public boolean isWinning() {
+        return this.matched >= 3;
     }
 
     public static RankEnum getRank(int matched, boolean hasBonus) {

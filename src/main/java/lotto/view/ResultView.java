@@ -42,7 +42,7 @@ public class ResultView {
     }
 
     private void viewInspectRaw(RankEnum rank, int matchedCount) {
-        if (RankEnum.isWinning(rank)) {
+        if (rank.isWinning()) {
             System.out.println(getRankDescription(rank) + " - " + matchedCount + "개");
         }
     }
