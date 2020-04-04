@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.generator.LottoNumberGenerator;
+import lotto.generator.RandomNumber;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,7 +53,7 @@ public class Lotto {
     private Set<LottoNumber> generatorLottoNumbers() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_MAX_SOCKET) {
-            LottoNumber lottoNumber = LottoNumber.newRandomNumber(new LottoNumberGenerator());
+            LottoNumber lottoNumber = LottoNumber.newRandomNumber(new RandomNumber());
             lottoNumbers.add(lottoNumber);
         }
         return lottoNumbers;
