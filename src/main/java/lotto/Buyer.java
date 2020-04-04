@@ -24,11 +24,11 @@ public class Buyer {
         return new Buyer(amount);
     }
 
-    public void perchase() {
-        LottoController lottoController = new LottoController(InputView.init(), LottoMachine.init());
-        int count = lottoController.payToLotto();
-        Lottos lottos = lottoController.buyAutoLotto(count);
-        List<Integer> laskweekWinLotto = lottoController.inputLastWeekWinLotto();
-//        lottoController.LottoResult(lottos, laskweekWinLotto);
-    }
+//    public void perchase() {
+//        LottoController lottoController = new LottoController(InputView.init(), LottoMachine.init());
+//        int count = lottoController.payToLotto();
+//        Lottos lottos = lottoController.buyAutoLotto(count);
+//        List<Integer> laskweekWinLotto = lottoController.inputLastWeekWinLotto();
+////        lottoController.LottoResult(lottos, laskweekWinLotto);
+//    }
 }

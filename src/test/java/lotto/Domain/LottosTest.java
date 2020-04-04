@@ -30,7 +30,6 @@ public class LottosTest {
         LottoResult matchCountMap = lottos.match(winningNumber);
 
         assertThat(matchCountMap.winLottoGradeAndPrize())
-                .hasSize(6)
                 .contains(entry(LottoGrade.MISS, 0)
                         , entry(LottoGrade.WIN5TH, 2)
                         , entry(LottoGrade.WIN4TH, 0)
@@ -56,7 +55,7 @@ public class LottosTest {
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
         LottoResult statistics = lottos.match(winningNumber);
-        Double revenueRate = lottos.revenueRate(1);
+        Double revenueRate = statistics.revenueRate();
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
     }

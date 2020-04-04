@@ -14,10 +14,9 @@ public class LottoResultTest {
 
     @Test
     void initLottoStatisticsTest() {
-        LottoResult lottoResult = LottoResult.init(new HashMap<>());
+        LottoResult lottoResult = LottoResult.init();
 
         assertThat(lottoResult.winLottoGradeAndPrize())
-                .hasSize(6)
                 .contains(entry(LottoGrade.MISS, 0)
                         , entry(LottoGrade.WIN5TH, 0)
                         , entry(LottoGrade.WIN4TH, 0)
@@ -28,16 +27,14 @@ public class LottoResultTest {
 
     @Test
     void revenueRateTest() {
-        LottoResult lottoResult = LottoResult.init(new HashMap<>());
-        lottoResult.put(LottoGrade.WIN1ST, 1);
-        lottoResult.put(LottoGrade.WIN4TH, 1);
-        lottoResult.put(LottoGrade.WIN4TH, 1);
+        LottoResult lottoResult = LottoResult.init();
+        lottoResult.addWinGrade(LottoGrade.WIN1ST);
+        lottoResult.addWinGrade(LottoGrade.WIN4TH);
+        lottoResult.addWinGrade(LottoGrade.WIN4TH);
 
-        int lottoCount = 10;
+        double result = lottoResult.revenueRate();
 
-        double result = lottoResult.revenueRate(lottoCount);
-
-        assertThat(result).isEqualTo(2000100000.0);
+        assertThat(result).isEqualTo(666700.0);
 
     }
 }

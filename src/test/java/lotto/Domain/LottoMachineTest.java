@@ -71,8 +71,8 @@ public class LottoMachineTest {
         Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
         WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
-        Map<LottoGrade, Integer> statistics = lottos.match(winningNumber);
-        Double revenueRate = lottos.revenueRate(statistics);
+        LottoResult statistics = lottos.match(winningNumber);
+        Double revenueRate = statistics.revenueRate();
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
     }
