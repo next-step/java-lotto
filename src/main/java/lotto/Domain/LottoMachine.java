@@ -35,7 +35,7 @@ public class LottoMachine {
         }
     }
 
-    public Lottos buyAutoLottos(int lottoCount) {
+    public Lottos c(int lottoCount) {
         Lottos lottos = Lottos.init(new ArrayList<>());
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = makeLotto(makeAutoTargetNumber());

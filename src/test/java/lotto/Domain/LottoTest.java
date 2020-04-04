@@ -32,7 +32,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1 2 3 4 5"})
+    @ValueSource(strings = {"1 2 3 4 5", "1 2 3 4 5 6 7"})
     void lottoNumberCountExceptionTest(String input) {
         List<Integer> lottoNumbers = Arrays.stream(input.split(" "))
                 .mapToInt(Integer::parseInt)
