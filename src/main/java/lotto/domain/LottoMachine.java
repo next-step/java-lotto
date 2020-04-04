@@ -6,18 +6,17 @@ import java.util.List;
 public class LottoMachine {
     private static final int LOTTO_PRICE = 1000;
 
-    private List<Lotto> lottos;
-
     public LottoMachine() {
-        this.lottos = new ArrayList<>();
     }
 
     public List<Lotto> purchaseLottos(Money money) {
         int purchasedCount = getPurchasedCount(money);
+
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchasedCount; i++) {
-            this.lottos.add(Lotto.newAutomatic());
+            lottos.add(Lotto.newAutomatic());
         }
-        return this.lottos;
+        return lottos;
     }
 
     private int getPurchasedCount(Money money) {
