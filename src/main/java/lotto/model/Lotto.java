@@ -1,16 +1,16 @@
-package lotto;
+package lotto.model;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Lotto {
-
-    private static final int DEFAULT_PRICE = 1000;
-    
-
-    int match(List<Integer> winningLotto, List<Integer> myLotto) {
+    private List<Integer> numbers;
 
 
+    public Lotto(final List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }
