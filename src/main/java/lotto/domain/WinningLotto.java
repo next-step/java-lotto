@@ -1,13 +1,13 @@
 package lotto.domain;
 
 public class WinningLotto {
-    private Lotto winningLottoNumbers;
+    private Lotto winningLotto;
     private LottoNumber bonusNumber;
 
     public WinningLotto(Lotto inputWinningLotto, LottoNumber inputBonusNumber) {
-        this.winningLottoNumbers = inputWinningLotto;
+        this.winningLotto = inputWinningLotto;
         this.bonusNumber = inputBonusNumber;
-        validateBonusNumber(winningLottoNumbers, bonusNumber);
+        validateBonusNumber(winningLotto, bonusNumber);
     }
 
     public WinningLotto(Lotto inputWinningLotto, int inputBonusNumber) {
@@ -23,7 +23,7 @@ public class WinningLotto {
     }
 
     public Lotto getWinningLotto() {
-        return this.winningLottoNumbers;
+        return Lotto.newManual(this.winningLotto.getLottoNumbers());
     }
 
     public LottoNumber getBonusNumber() {

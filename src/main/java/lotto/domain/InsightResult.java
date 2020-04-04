@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class InsightResult {
@@ -10,8 +11,8 @@ public class InsightResult {
         this.insightResult = Collections.unmodifiableMap(results);
     }
 
-    public Map<RankEnum, Integer> getInsightResult(){
-        return this.insightResult;
+    public Map<RankEnum, Integer> getInsightResult() {
+        return new HashMap<>(this.insightResult);
     }
 
     public int getTotalRevenue() {

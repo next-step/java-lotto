@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class Money {
 
-    private Integer money;
+    private final int money;
 
     public Money(int input) {
         validate(input);
         this.money = input;
     }
 
-    public Integer getMoney() {
-        return this.money;
+    public int getMoney() {
+        return new Integer(this.money);
     }
 
     public int getPurchasableCount(int price) {
@@ -30,7 +30,7 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return Objects.equals(money, money1.money);
+        return money == money1.money;
     }
 
     @Override
