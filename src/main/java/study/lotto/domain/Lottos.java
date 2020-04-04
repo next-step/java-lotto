@@ -5,46 +5,46 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Lottos implements Iterable<Lotto> {
-    private List<Lotto> lottos;
+    private List<Lotto> list;
 
     public static Lottos valueOf(Optional<Lottos> lottos) {
         return lottos.map(Lottos::new).orElseGet(Lottos::new);
     }
 
     public Lottos() {
-        this.lottos = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+    public Lottos(List<Lotto> list) {
+        this.list = new ArrayList<>(list);
     }
 
-    public Lottos(Lottos lottos) {
-        this(lottos.lottos);
+    public Lottos(Lottos list) {
+        this(list.list);
     }
 
     public int size() {
-        return lottos.size();
+        return list.size();
     }
 
     protected void addAll(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
+        this.list.addAll(lottos);
     }
 
     public Lotto get(int index) {
-        return lottos.get(index);
+        return list.get(index);
     }
 
     public WinningLottos ranks(LottoWinningNumber lottoWinningNumber) {
         Function<Lotto, LottoRank> key =
                 lotto -> lotto.rank(lottoWinningNumber);
         Map<LottoRank, List<Lotto>> lottoRanks =
-                lottos.stream().collect(Collectors.groupingBy(key));
+                list.stream().collect(Collectors.groupingBy(key));
 
         return new WinningLottos(lottoRanks);
     }
 
     @Override public Iterator<Lotto> iterator() {
-        return lottos.iterator();
+        return list.iterator();
     }
 }

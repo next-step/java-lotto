@@ -22,7 +22,7 @@ public class LottoResult {
     public double getRateOfReturn() {
         double prizeTotal = getPrizeTotal();
 
-        return prizeTotal / investmentAmount.getAmount();
+        return prizeTotal / investmentAmount.getValue();
     }
 
     private double getPrizeTotal() {

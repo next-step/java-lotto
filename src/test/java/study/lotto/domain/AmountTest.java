@@ -13,7 +13,7 @@ public class AmountTest {
     void allowNumber() {
         int testVal = 1;
         Amount amount = new Amount(testVal);
-        assertThat(amount.getAmount()).isEqualTo(testVal);
+        assertThat(amount.getValue()).isEqualTo(testVal);
         assertThat(amount).isEqualTo(new Amount(testVal));
     }
 

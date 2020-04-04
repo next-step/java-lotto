@@ -5,37 +5,37 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningLottos {
-    private EnumMap<LottoRank, Lottos> winningLottos;
+    private EnumMap<LottoRank, Lottos> lottoRanks;
 
     public WinningLottos() {
         initWinningLottos();
     }
 
-    public WinningLottos(Map<LottoRank, List<Lotto>> winningLottos) {
+    public WinningLottos(Map<LottoRank, List<Lotto>> lottoRanks) {
         initWinningLottos();
 
-        for (Map.Entry<LottoRank, List<Lotto>> entry : winningLottos
+        for (Map.Entry<LottoRank, List<Lotto>> entry : lottoRanks
                 .entrySet()) {
             addToRank(entry.getKey(), entry.getValue());
         }
     }
 
     protected void addToRank(LottoRank lottoRank, List<Lotto> lottos) {
-        winningLottos.get(lottoRank).addAll(lottos);
+        lottoRanks.get(lottoRank).addAll(lottos);
     }
 
     public Lottos get(LottoRank lottoRank) {
-        return new Lottos(winningLottos.get(lottoRank));
+        return new Lottos(lottoRanks.get(lottoRank));
     }
 
     public int size(LottoRank lottoRank) {
-        return winningLottos.get(lottoRank).size();
+        return lottoRanks.get(lottoRank).size();
     }
 
     private void initWinningLottos() {
-        winningLottos = new EnumMap<>(LottoRank.class);
+        lottoRanks = new EnumMap<>(LottoRank.class);
         for (LottoRank lottoRank : LottoRank.values()) {
-            winningLottos.put(lottoRank, new Lottos());
+            lottoRanks.put(lottoRank, new Lottos());
         }
     }
 }

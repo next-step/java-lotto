@@ -16,9 +16,6 @@ public class Lotto implements Iterable<LottoNumber> {
 
     private Set<LottoNumber> lottoNumbers;
 
-    private Lotto() {
-    }
-
     public Lotto(List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) ||
                 lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {

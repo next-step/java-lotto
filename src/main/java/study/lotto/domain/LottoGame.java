@@ -18,7 +18,7 @@ public class LottoGame {
     }
 
     private void generateLottoTicket(Amount amount) {
-        int quantity = amount.getAmount() / Lotto.PRICE;
+        int quantity = amount.getValue() / Lotto.PRICE;
 
         investmentAmount = new Amount(quantity * Lotto.PRICE);
         List<Lotto> lottoList = new ArrayList<>();
