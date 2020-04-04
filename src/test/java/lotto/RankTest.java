@@ -13,11 +13,11 @@ public class RankTest {
     @Test
     @DisplayName("일치하는 번호 갯수를 랭킹으로 변경한다")
     public void getRankReturnsRank() {
-        Rank rank = Rank.of(6);
+        Rank rank = Rank.of(6, false);
 
         assertThat(rank).isEqualTo(FIRST);
 
-        rank = Rank.of(5);
+        rank = Rank.of(5, true);
 
         assertThat(rank).isEqualTo(SECOND);
     }
@@ -34,8 +34,16 @@ public class RankTest {
     @ValueSource(ints = {0, 1, 2})
     @DisplayName("3개 미만으로 번호가 일치하면 당첨 실패로 처리한다")
     public void loseWhenMatchCountLessThanThree(int matchCount) {
-        Rank rank = Rank.of(matchCount);
+        Rank rank = Rank.of(matchCount, false);
 
         assertThat(rank).isEqualTo(LOSER);
+    }
+
+    @Test
+    @DisplayName("5개의 번호가 일치하고 보너스 볼 번호를 포함한다면 2등이다")
+    public void getSecondRankWhenFiveNumbersMatchedAndContainsBonusNumber() {
+        Rank rank = Rank.of(5, true);
+
+        assertThat(rank).isEqualTo(SECOND);
     }
 }

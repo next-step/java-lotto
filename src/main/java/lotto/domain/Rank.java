@@ -19,7 +19,7 @@ public enum Rank {
         this.winningMoney = winningMoney;
     }
 
-    public static Rank of(int matchCount) {
+    public static Rank of(int matchCount, boolean matchBonus) {
         return Stream.of(values())
                 .filter(rank -> rank.isMatched(matchCount))
                 .findFirst()
