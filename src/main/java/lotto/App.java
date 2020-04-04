@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.model.Lotto;
-import lotto.model.Rank;
+import lotto.model.Result;
 import lotto.view.InputView;
 import lotto.view.PurchaseLottoView;
 import lotto.view.ResultView;
@@ -16,12 +16,14 @@ public class App {
         PurchaseLottoView purchaseLottoView = new PurchaseLottoView();
 
         LottoGame lottoGame = new LottoGame();
-        List<Lotto> lottos = lottoGame.initLottos(inputView.getMoney());
+        int money = inputView.getMoney();
+        List<Lotto> lottos = lottoGame.initLottos(money);
         purchaseLottoView.print(lottos);
 
-        List<Rank> gameResults = lottoGame.matches(inputView.getWinningLotto(), lottos);
+        List<Result> gameResults = lottoGame.matches(inputView.getWinningLotto(), lottos);
 
         ResultView resultView = new ResultView();
         resultView.print(gameResults);
+        resultView.printRevenue(gameResults, money);
     }
 }

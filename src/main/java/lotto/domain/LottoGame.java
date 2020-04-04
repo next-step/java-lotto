@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.model.Lotto;
 import lotto.model.Rank;
+import lotto.model.Result;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -46,22 +47,22 @@ public class LottoGame {
     }
 
 
-    public List<Rank> matches(Lotto winningLotto, List<Lotto> myLottos) {
+    public List<Result> matches(Lotto winningLotto, List<Lotto> myLottos) {
         return myLottos.stream()
                 .map(myLotto -> match(winningLotto, myLotto))
                 .collect(Collectors.toList());
     }
 
-    public Rank match(Lotto winningLotto, Lotto myLotto) {
+    public Result match(Lotto winningLotto, Lotto myLotto) {
         int count = safeLongToInt(winningLotto.getNumbers().stream()
                 .filter(number -> myLotto.getNumbers().contains(number))
                 .count());
 
-        return new Rank(Rank.calc(count));
+        return new Result(new Rank(count));
     }
 
 
-    private int safeLongToInt(long l) {
+    public static int safeLongToInt(long l) {
         int i = (int) l;
         if ((long) i != l) {
             throw new IllegalArgumentException(l + " cannot be cast to int without changing its value.");
