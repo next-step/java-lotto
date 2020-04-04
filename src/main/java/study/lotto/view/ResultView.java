@@ -2,9 +2,9 @@ package study.lotto.view;
 
 import study.lotto.domain.LottoRank;
 import study.lotto.domain.LottoResult;
-import study.lotto.domain.LottoTicket;
+import study.lotto.domain.Lotto;
+import study.lotto.domain.Lottos;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -18,11 +18,10 @@ public class ResultView {
     private static String RATE_OF_RETURN_ADDITIONAL_MESSAGE =
             "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-
-    public static void displayBuyingLotto(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + BUY_MESSAGE);
-        for (LottoTicket lottoTicket : lottoTickets) {
-            displayLottoTicket(lottoTicket);
+    public static void displayBuyingLotto(Lottos lottos) {
+        System.out.println(lottos.size() + BUY_MESSAGE);
+        for (Lotto lotto : lottos) {
+            displayLottoTicket(lotto);
         }
     }
 
@@ -33,9 +32,9 @@ public class ResultView {
         displayRateOfReturn(lottoResult.getRateOfReturn());
     }
 
-    private static void displayLottoTicket(LottoTicket lottoTicket) {
+    private static void displayLottoTicket(Lotto lotto) {
         System.out.print("[");
-        String numbers = lottoTicket.getLottoNumbers().stream()
+        String numbers = lotto.getLottoNumbers().stream()
                 .map(number -> Integer.toString(number.getNumber()))
                 .collect(Collectors.joining(", "));
         System.out.print(numbers);
@@ -46,8 +45,8 @@ public class ResultView {
         LottoRank[] lottoRanks = LottoRank.values();
         for (int i = lottoRanks.length - 1; i >= 0; i--) {
             LottoRank lottoRank = lottoRanks[i];
-            List<LottoTicket> winningTickets =
-                    lottoResult.getWinningTickets(lottoRank);
+            Lottos winningTickets =
+                    lottoResult.getWinningLottos(lottoRank);
             displayWinning(lottoRank, winningTickets.size());
         }
     }
@@ -70,5 +69,8 @@ public class ResultView {
         if (rateOfReturn < 1) {
             System.out.println(RATE_OF_RETURN_ADDITIONAL_MESSAGE);
         }
+    }
+
+    private ResultView() {
     }
 }

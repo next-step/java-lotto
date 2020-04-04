@@ -22,12 +22,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
+    public LottoNumber(LottoNumber lottoNumber) {
+        this.number = lottoNumber.number;
     }
 
-    public LottoNumber clone() {
-        return new LottoNumber(this.number);
+    public int getNumber() {
+        return number;
     }
 
     @Override public boolean equals(Object o) {

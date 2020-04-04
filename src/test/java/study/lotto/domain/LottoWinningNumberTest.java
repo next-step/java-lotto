@@ -1,4 +1,4 @@
-package study.lotto;
+package study.lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import study.lotto.domain.LottoRank;
-import study.lotto.domain.LottoTicket;
-import study.lotto.domain.LottoWinningNumber;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoWinningNumberTest {
-    LottoWinningNumber lottoWinningNumber;
+    private LottoWinningNumber lottoWinningNumber;
 
     @BeforeEach
     void setUp() {
@@ -38,9 +35,7 @@ public class LottoWinningNumberTest {
     void outOfRule(List<Integer> winningNumbers, int bonusNumber) {
         assertThatExceptionOfType(
                 IllegalArgumentException.class)
-                .isThrownBy(() -> {
-                    new LottoWinningNumber(winningNumbers, bonusNumber);
-                });
+                .isThrownBy(() ->  new LottoWinningNumber(winningNumbers, bonusNumber));
     }
 
     private static Stream<Arguments> provideWinningErrorNumber() {
@@ -55,26 +50,26 @@ public class LottoWinningNumberTest {
     @DisplayName("당첨번호와 일치하는 숫자의 갯수 반환")
     @ParameterizedTest
     @MethodSource("provideLottoTicket")
-    void rand(LottoTicket lottoTicket, LottoRank expect) {
-        assertThat(lottoWinningNumber.rank(lottoTicket))
+    void rand(Lotto lotto, LottoRank expect) {
+        assertThat(lottoWinningNumber.rank(lotto))
                 .isEqualTo(expect);
     }
 
     private static Stream<Arguments> provideLottoTicket() {
         return Stream.of(
-                Arguments.of(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                         LottoRank.FIRST),
-                Arguments.of(new LottoTicket(Arrays.asList(2, 3, 4, 5, 6, 45)),
+                Arguments.of(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 45)),
                         LottoRank.SECOND),
-                Arguments.of(new LottoTicket(Arrays.asList(2, 3, 4, 5, 6, 7)),
+                Arguments.of(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
                         LottoRank.THIRD),
-                Arguments.of(new LottoTicket(Arrays.asList(3, 4, 5, 6, 7, 8)),
+                Arguments.of(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)),
                         LottoRank.FOURTH),
-                Arguments.of(new LottoTicket(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                Arguments.of(new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
                         LottoRank.FIFTH),
-                Arguments.of(new LottoTicket(Arrays.asList(5, 6, 7, 8, 9, 10)),
+                Arguments.of(new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10)),
                         LottoRank.MISS),
-                Arguments.of(new LottoTicket(Arrays.asList(6, 7, 8, 9, 10, 11)),
+                Arguments.of(new Lotto(Arrays.asList(6, 7, 8, 9, 10, 11)),
                         LottoRank.MISS)
         );
     }

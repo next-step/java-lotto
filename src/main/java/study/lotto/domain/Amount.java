@@ -7,27 +7,28 @@ import java.util.Objects;
 public class Amount {
     private static final String MIN_AMOUNT_ERROR_MESSAGE = "최소 금액은 %d원 입니다.";
     private static final int AMOUNT_MIN = 0;
-    private int amount;
+    private int value;
 
-    public Amount(int amount) {
-        if (amount < AMOUNT_MIN) {
-            throw new IllegalNumberRangeArgumentException(MIN_AMOUNT_ERROR_MESSAGE);
+    public Amount(int value) {
+        if (value < AMOUNT_MIN) {
+            throw new IllegalNumberRangeArgumentException(
+                    String.format(MIN_AMOUNT_ERROR_MESSAGE, AMOUNT_MIN));
         }
-        this.amount = amount;
+        this.value = value;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getValue() {
+        return value;
     }
 
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Amount amount1 = (Amount) o;
-        return amount == amount1.amount;
+        return value == amount1.value;
     }
 
     @Override public int hashCode() {
-        return Objects.hash(amount);
+        return Objects.hash(value);
     }
 }

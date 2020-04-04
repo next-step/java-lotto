@@ -1,8 +1,6 @@
 package study.lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public enum LottoRank {
     FIRST(2_000_000_000, 6, false),
@@ -12,37 +10,45 @@ public enum LottoRank {
     FIFTH(5_000, 3, false),
     MISS(0, 0, false);
 
-    private static Map<ValueKey, LottoRank> valueToLottoRank =
+    private static Map<Integer, List<LottoRank>> valueToLottoRank =
             new HashMap<>();
 
-    private int prize;
+    private long prize;
     private int matchCount;
     private boolean matchBonus;
 
-    LottoRank(int prize, int matchCount, boolean matchBonus) {
+    LottoRank(long prize, int matchCount, boolean matchBonus) {
         this.prize = prize;
         this.matchCount = matchCount;
         this.matchBonus = matchBonus;
     }
 
     static {
+        initValueToLottoRank();
         for (LottoRank lottoRank : LottoRank.values()) {
-            ValueKey valueKey = new ValueKey(lottoRank.matchCount,
-                    lottoRank.matchBonus);
-            valueToLottoRank.put(valueKey, lottoRank);
+            valueToLottoRank.get(lottoRank.matchCount).add(lottoRank);
+        }
+    }
+
+    private static void initValueToLottoRank() {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            valueToLottoRank.put(lottoRank.getMatchCount(), new ArrayList<>());
         }
     }
 
     public static LottoRank valueOf(Integer matchCount, boolean matchBonus) {
-        LottoRank lottoRank = valueToLottoRank.get(new ValueKey(matchCount,
-                matchBonus));
-        if (Objects.isNull(lottoRank)) {
+        List<LottoRank> lottoRanks = valueToLottoRank.get(matchCount);
+        if (Objects.isNull(lottoRanks)) {
             return MISS;
         }
-        return lottoRank;
+
+        return lottoRanks.stream()
+                .filter(v -> v != LottoRank.SECOND || v.matchBonus == matchBonus)
+                .findFirst()
+                .orElse(MISS);
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 
@@ -52,27 +58,5 @@ public enum LottoRank {
 
     public boolean isMatchBonus() {
         return matchBonus;
-    }
-
-    private static class ValueKey {
-        private Integer matchCount;
-        private boolean matchBonus;
-
-        private ValueKey(Integer matchCount, boolean matchBonus) {
-            this.matchCount = matchCount;
-            this.matchBonus = matchBonus;
-        }
-
-        @Override public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            ValueKey valueKey = (ValueKey) o;
-            return matchBonus == valueKey.matchBonus &&
-                    Objects.equals(matchCount, valueKey.matchCount);
-        }
-
-        @Override public int hashCode() {
-            return Objects.hash(matchCount, matchBonus);
-        }
     }
 }

@@ -1,8 +1,7 @@
-package study.lotto;
+package study.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import study.lotto.domain.Amount;
 import study.lotto.domain.exception.IllegalNumberRangeArgumentException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +13,7 @@ public class AmountTest {
     void allowNumber() {
         int testVal = 1;
         Amount amount = new Amount(testVal);
-        assertThat(amount.getAmount()).isEqualTo(testVal);
+        assertThat(amount.getValue()).isEqualTo(testVal);
         assertThat(amount).isEqualTo(new Amount(testVal));
     }
 
@@ -22,8 +21,6 @@ public class AmountTest {
     @Test
     void disallowNegative() {
         assertThatExceptionOfType(IllegalNumberRangeArgumentException.class)
-                .isThrownBy(() -> {
-                    new Amount(-1);
-                });
+                .isThrownBy(() -> new Amount(-1));
     }
 }
