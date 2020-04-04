@@ -1,28 +1,43 @@
 package step2.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoGameInfo {
+    private int price;
+    private int countOfTicket;
+    private List<Lotto> lottoTickets;
 
-    private static final String MESSAGE_OF_MONEY_EXCEPTION = "로또 한장의 가격은 1000원 입니다.";
-    private int money;
-    private int countOfLotto;
-
-    public LottoGameInfo(int money) {
-        this.money = money;
-        this.countOfLotto = buyLotto(money);
+    public LottoGameInfo(int price) {
+        this(price, null);
     }
 
-    public int buyLotto(int money) {
-        checkValidMoney(money);
-        return money / 1000;
+    public LottoGameInfo(int price, List<Lotto> lottos) {
+        validatePrice(price);
+        this.price = price;
+        this.countOfTicket = ticketCount(price);
+        this.lottoTickets = generateLottoTickets(this.countOfTicket);
     }
 
-    public void checkValidMoney(int money) {
-        if(money < 1000 ) {
-            throw new IllegalArgumentException(MESSAGE_OF_MONEY_EXCEPTION);
+    public int ticketCount(int price) {
+        return price / 1000;
+    }
+
+    public void validatePrice(int price) {
+        if (price < LottoConstant.LOTTO_PRICE) {
+            throw new IllegalArgumentException(LottoConstant.VALID_LOTTO_PRICE_MESSAGE);
         }
     }
 
-    public int getCountOfLotto() {
-        return countOfLotto;
+    public List<Lotto> generateLottoTickets(int countOfTicket) {
+        lottoTickets = new ArrayList<>();
+        for (int i = 0; i < countOfTicket; i++) {
+            lottoTickets.add(new Lotto());
+        }
+        return lottoTickets;
+    }
+
+    public List<Lotto> getLottoTickets() {
+        return lottoTickets;
     }
 }

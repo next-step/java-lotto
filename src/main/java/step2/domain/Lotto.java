@@ -3,32 +3,44 @@ package step2.domain;
 import java.util.*;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int RANGE_OF_LOTTO_NUMBER = 45;
-    private List<Integer> numbers = new ArrayList<>();
-    private List<Integer> lottoNumbers = new ArrayList<>();
+    private LottoNumber lottoNumber;
+    private List<Integer> numbers;
+    private List<Integer> lottoNumbers;
 
     public Lotto() {
-        this.numbers = generateLottoNumber();
+        lottoNumber = new LottoNumber();
+        numbers = new ArrayList<>();
+        lottoNumbers = new ArrayList<>();
+        List<Integer> generatedNumbers = generateLottoNumber();
+        validateNumberLengthCheck(generatedNumbers);
+        validateDuplicationCheck(generatedNumbers);
+        this.numbers = generatedNumbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
+    public List<Integer> generateLottoNumber() {
+        lottoNumbers = lottoNumber.initializeLottoNumber();
 
-    private List<Integer> generateLottoNumber() {
-        initialLottoNumber();
-        for (int i = 1; i <= LOTTO_NUMBER_COUNT; i++) {
+        for (int i = 1; i <= LottoConstant.LOTTO_NUMBER_LENGTH; i++) {
             numbers.add(lottoNumbers.get(i));
         }
         Collections.sort(numbers);
         return numbers;
     }
 
-    private void initialLottoNumber() {
-        for (int i = 1; i <= RANGE_OF_LOTTO_NUMBER; i++) {
-            lottoNumbers.add(i);
+    public void validateNumberLengthCheck(List<Integer> numbers) {
+        if (numbers.size() != LottoConstant.LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException(LottoConstant.VALID_LOTTO_NUMBER_LENGTH_MESSAGE);
         }
-        Collections.shuffle(lottoNumbers);
+    }
+
+    public void validateDuplicationCheck(List<Integer> numbers) {
+        Set<Integer> checkList = new HashSet<>(numbers);
+        if (numbers.size() != checkList.size()) {
+            throw new IllegalArgumentException(LottoConstant.VALID_LOTTO_NUMBER_DUPLICATE_MESSAGE);
+        }
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
