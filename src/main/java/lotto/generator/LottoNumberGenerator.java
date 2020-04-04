@@ -8,7 +8,6 @@ public class LottoNumberGenerator implements NumberGenerator {
 
     @Override
     public int getRandomNumber() {
-        Random random = new Random();
-        return random.nextInt(LOTTO_MAX_NUMBER) + LOTTO_MIN_NUMBER;
+        return new Random().nextInt(LOTTO_MAX_NUMBER) + LOTTO_MIN_NUMBER;
     }
 }

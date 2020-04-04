@@ -52,13 +52,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static int convertNumber(String input) {
-        int number;
         try {
-            number = Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("숫자가 아닙니다.");
         }
-        return number;
     }
 
     @Override
