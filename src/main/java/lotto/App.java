@@ -2,8 +2,10 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.model.Lotto;
+import lotto.model.Rank;
 import lotto.view.InputView;
 import lotto.view.PurchaseLottoView;
+import lotto.view.ResultView;
 
 import java.util.List;
 
@@ -17,7 +19,9 @@ public class App {
         List<Lotto> lottos = lottoGame.initLottos(inputView.getMoney());
         purchaseLottoView.print(lottos);
 
+        List<Rank> gameResults = lottoGame.matches(inputView.getWinningLotto(), lottos);
 
-//        inputView.getWinningLotto();
+        ResultView resultView = new ResultView();
+        resultView.print(gameResults);
     }
 }

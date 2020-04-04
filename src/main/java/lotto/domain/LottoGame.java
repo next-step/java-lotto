@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import lotto.model.Lotto;
+import lotto.model.Rank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -42,27 +44,20 @@ public class LottoGame {
     }
 
 
-    public int match(Lotto winningLotto, Lotto myLotto) {
+    public List<Rank> matches(Lotto winningLotto, List<Lotto> myLottos) {
+        return myLottos.stream()
+                .map(myLotto -> match(winningLotto, myLotto))
+                .collect(Collectors.toList());
+    }
+
+    public Rank match(Lotto winningLotto, Lotto myLotto) {
         int count = safeLongToInt(winningLotto.getNumbers().stream()
                 .filter(number -> myLotto.getNumbers().contains(number))
                 .count());
-        return rank(count);
+
+        return new Rank(Rank.calc(count));
     }
 
-    public int rank(int num) {
-        if (num == 6) {
-            return 1;
-        } else if (num == 5) {
-            return 2;
-        } else if (num == 4) {
-            return 3;
-        } else if (num == 3) {
-            return 4;
-        } else if (num == 2) {
-            return 5;
-        }
-        return 6;
-    }
 
     private int safeLongToInt(long l) {
         int i = (int) l;
