@@ -18,9 +18,10 @@ public class LottoGameApplication {
         ResultView.printLottoNumbers(lottos);
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();
+        int bonusNumber = InputView.getBonusNumber();
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        List<Rank> results = lottoGame.match(lottos, winningLotto, 10);
+        List<Rank> results = lottoGame.match(lottos, winningLotto, bonusNumber);
 
         ResultView.printWinningStatus(results);
 

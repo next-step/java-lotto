@@ -20,9 +20,10 @@ public class ResultView {
         printMessage("당첨 통계");
         printMessage("---------");
 
-        printMessage("3개 일치 (5000원) - " + results.stream().filter(r -> r == Rank.FOURTH).count());
-        printMessage("4개 일치 (50000원) - " + results.stream().filter(r -> r == Rank.THIRD).count());
-        printMessage("5개 일치 (1500000원) - " + results.stream().filter(r -> r == Rank.SECOND).count());
+        printMessage("3개 일치 (5000원) - " + results.stream().filter(r -> r == Rank.FIFTH).count());
+        printMessage("4개 일치 (50000원) - " + results.stream().filter(r -> r == Rank.FOURTH).count());
+        printMessage("5개 일치 (1500000원) - " + results.stream().filter(r -> r == Rank.THIRD).count());
+        printMessage("5개 일치, 보너스 볼 일치(30000000원) - " + results.stream().filter(r -> r == Rank.SECOND).count());
         printMessage("6개 일치 (2000000000원) - " + results.stream().filter(r -> r == Rank.FIRST).count());
     }
 
