@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     public static Lotto newManual(String lottoNumbers) {
-        return new Lotto(convertToLotto(lottoNumbers));
+        return new Lotto(changeToLottoNumbers(lottoNumbers));
     }
 
     private Lotto() {
@@ -64,9 +64,9 @@ public class Lotto {
         }
     }
 
-    private static Set<LottoNumber> convertToLotto(String winningNumbers) {
+    private static Set<LottoNumber> changeToLottoNumbers(String input) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (String s : winningNumbers.split(LOTTO_NUMBER_SPLIT_KEYWORD)) {
+        for (String s : input.split(LOTTO_NUMBER_SPLIT_KEYWORD)) {
             lottoNumbers.add(LottoNumber.newChooseNumber(s.trim()));
         }
         return lottoNumbers;
