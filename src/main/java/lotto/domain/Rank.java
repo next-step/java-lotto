@@ -25,9 +25,13 @@ public enum Rank {
         }
 
         return Stream.of(values())
-                .filter(rank -> rank.getMatchCount() == matchCount)
+                .filter(rank -> rank.isMatched(matchCount))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 랭킹입니다."));
+    }
+
+    private boolean isMatched(int matchCount) {
+        return getMatchCount() == matchCount;
     }
 
     public int getMatchCount() {
