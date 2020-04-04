@@ -1,22 +1,22 @@
 package stringpluscalculator;
 
-public class PositiveNumber {
+public class Operand {
     private int positiveNumber;
 
-    public PositiveNumber(int input) {
+    public Operand(int input) {
         validatePositiveOrZero(input);
         this.positiveNumber = input;
     }
 
-    public PositiveNumber(String input) {
-        this(changeToNumber(input));
+    public Operand(String input) {
+        this(changeToOperand(input));
     }
 
     public int getPositiveNumber() {
         return this.positiveNumber;
     }
 
-    private static int changeToNumber(String input) {
+    private static int changeToOperand(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException nfe) {
