@@ -10,12 +10,11 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("로또 한장 테스트")
 public class LottoTicketTests {

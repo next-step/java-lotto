@@ -13,11 +13,11 @@ import static lotto.view.OutputView.printLottoTickets;
 public class Main {
 
     public static void main(String[] args) {
-        Payment payment = InputView.inputPayment();
+        Payment payment = InputView.inputData(InputView::inputPayment);
 
-        ManualLottoCount manualLottoCount = InputView.inputManualLottoCount();
+        ManualLottoCount manualLottoCount = InputView.inputData(InputView::inputManualLottoCount);
 
-        LottoTickets manualLottoTickets = InputView.inputManualLotto(manualLottoCount);
+        LottoTickets manualLottoTickets = InputView.inputData(manualLottoCount, InputView::inputManualLotto);
 
         LottoTickets lottoTickets = LottoStore.sell(payment, manualLottoTickets);
 
@@ -29,9 +29,9 @@ public class Main {
     }
 
     private static WinningLottoTicket inputWinningLottoTicket() {
-        LottoTicket winningLottoTicket = InputView.inputWinningNumber();
+        LottoTicket winningLottoTicket = InputView.inputData(InputView::inputWinningNumber);
 
-        LottoNumber bonusNumber = InputView.inputBonusNumber();
+        LottoNumber bonusNumber = InputView.inputData(InputView::inputBonusNumber);
 
         return WinningLottoTicket.newInstance(winningLottoTicket, bonusNumber);
     }

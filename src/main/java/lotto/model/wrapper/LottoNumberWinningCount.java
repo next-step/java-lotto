@@ -34,7 +34,7 @@ public class LottoNumberWinningCount {
     }
 
     public BonusNumberMatchingStatus getLottoBonusNumberMatchStatus(final boolean isMatchedBonusNumber) {
-        if(count == BONUS_NUMBER_CHECK_MATCH_COUNT) {
+        if (count == BONUS_NUMBER_CHECK_MATCH_COUNT) {
             return BonusNumberMatchingStatus.createByMatchBonusNumber(isMatchedBonusNumber);
         }
         return BonusNumberMatchingStatus.ANYWAY;

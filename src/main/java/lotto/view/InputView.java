@@ -7,6 +7,8 @@ import lotto.model.wrapper.ManualLottoCount;
 import lotto.model.wrapper.Payment;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static lotto.utils.LottoUtil.convertTo;
 
@@ -15,12 +17,28 @@ public class InputView {
     private InputView() {
     }
 
+    public static <R> R inputData(Supplier<R> inputSupplier) {
+        R result = null;
+        while (result == null) {
+            result = inputSupplier.get();
+        }
+        return result;
+    }
+
+    public static <T, R> R inputData(T semiInputComponent, Function<T, R> inputFunction) {
+        R result = null;
+        while (result == null) {
+            result = inputFunction.apply(semiInputComponent);
+        }
+        return result;
+    }
+
     public static Payment inputPayment() {
         try {
             return Payment.of(InputConsoleView.inputPayment());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            return inputPayment();
+            return null;
         }
     }
 
@@ -29,7 +47,7 @@ public class InputView {
             return ManualLottoCount.of(InputConsoleView.inputManualLottoCount());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            return inputManualLottoCount();
+            return null;
         }
     }
 
@@ -39,10 +57,10 @@ public class InputView {
             return LottoTickets.newInstance(convertTo(lottoNumberLines));
         } catch (NumberFormatException ex) {
             System.out.println("제대로 된 숫자를 입력하세요");
-            return inputManualLotto(manualLottoCount);
+            return null;
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            return inputManualLotto(manualLottoCount);
+            return null;
         }
     }
 
@@ -52,7 +70,7 @@ public class InputView {
             return LottoTicket.newInstance(convertTo(line));
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            return inputWinningNumber();
+            return null;
         }
     }
 
@@ -61,7 +79,7 @@ public class InputView {
             return LottoNumber.of(InputConsoleView.inputBonusNumber());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            return inputBonusNumber();
+            return null;
         }
     }
 

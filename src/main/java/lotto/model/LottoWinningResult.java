@@ -27,8 +27,8 @@ public enum LottoWinningResult {
     private final LottoWinningResultMatchId lottoWinningResultMatchId;
     private final LottoPrice price;
 
-    LottoWinningResult(final int matchCount, final BonusNumberMatchingStatus bonusNumberMatchingStatus, final long price) {
-        this.lottoWinningResultMatchId = LottoWinningResultMatchId.newInstance(matchCount, bonusNumberMatchingStatus);
+    LottoWinningResult(final int winningNumbersMatchCount, final BonusNumberMatchingStatus bonusNumberMatchingStatus, final long price) {
+        this.lottoWinningResultMatchId = LottoWinningResultMatchId.newInstance(winningNumbersMatchCount, bonusNumberMatchingStatus);
         this.price = LottoPrice.of(price);
     }
 

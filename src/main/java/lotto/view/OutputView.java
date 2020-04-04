@@ -1,10 +1,10 @@
 package lotto.view;
 
+import lotto.model.LottoTickets;
 import lotto.model.LottoWinningResult;
 import lotto.model.LottoWinningResults;
-import lotto.model.LottoTickets;
-import lotto.model.dto.LottoWinningResultWithCount;
 import lotto.model.dto.LottoTotalResult;
+import lotto.model.dto.LottoWinningResultWithCount;
 
 import java.math.BigDecimal;
 

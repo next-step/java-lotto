@@ -1,7 +1,7 @@
 package lotto.model;
 
-import lotto.model.wrapper.LottoWinningResultMatchId;
 import lotto.model.wrapper.LottoNumberWinningCount;
+import lotto.model.wrapper.LottoWinningResultMatchId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
