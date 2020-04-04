@@ -13,12 +13,6 @@ public class LottoMachine {
     private static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.range(1, 46)
             .boxed()
             .collect(Collectors.toCollection(ArrayList::new));
-    
-    Lottos lottos;
-
-    public LottoMachine() {
-        lottos = Lottos.init(new ArrayList<>());
-    }
 
     public static LottoMachine init() {
         return new LottoMachine();
@@ -35,26 +29,12 @@ public class LottoMachine {
         }
     }
 
-    public Lottos c(int lottoCount) {
-        Lottos lottos = Lottos.init(new ArrayList<>());
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = makeLotto(makeAutoTargetNumber());
-            lottos = buyLotto(lotto);
-        }
-        return lottos;
-    }
-
-    public Lottos buyLotto(Lotto lotto) {
-        lottos.add(lotto);
-        return lottos;
-    }
-
     List<Integer> makeAutoTargetNumber() {
         Collections.shuffle(LOTTO_NUMBER_RANGE);
         return LOTTO_NUMBER_RANGE.subList(0, 6);
     }
 
-    public Lotto makeLotto(List<Integer> targetNumbers) {
+    public Lotto buyLotto(List<Integer> targetNumbers) {
         return Lotto.init(targetNumbers);
     }
 }

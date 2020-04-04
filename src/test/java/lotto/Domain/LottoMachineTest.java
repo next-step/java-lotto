@@ -42,13 +42,18 @@ public class LottoMachineTest {
         });
     }
 
+    @Test
+    void makeAutoTargetNumberTest() {
+        assertThat(lottoMachine.makeAutoTargetNumber()).hasSize(6);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"1 2 13 4 5 6", "13 24 1 5 42 7", "1 2 13 35 24 42"})
     void makeLottoLottoTest(String input) {
         ArrayList<Integer> targetNumbers = Arrays.stream(input.split(" "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(ArrayList::new));
-        Lotto lotto = lottoMachine.makeLotto(targetNumbers);
+        Lotto lotto = lottoMachine.buyLotto(targetNumbers);
 
         assertThat(lotto.toList()).isEqualTo(targetNumbers);
     }
@@ -59,7 +64,9 @@ public class LottoMachineTest {
         ArrayList<Integer> targetNumbers = Arrays.stream(input.split(" "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toCollection(ArrayList::new));
-        Lottos lottos = lottoMachine.buyLotto(Lotto.init(targetNumbers));
+        Lotto lotto = lottoMachine.buyLotto(targetNumbers);
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        lottos.add(lotto);
 
         List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
         Map<Integer, Integer> statistics = lottos.match(winningNumber);
