@@ -26,41 +26,18 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("입력된 로또와 당첨 로또의 일치하는 번호 갯수를 리턴한다")
-    public void matchLottoNumberReturnsCountOfMatches() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        int result = lottoGame.match(lotto, winningLotto);
-
-        assertThat(result).isEqualTo(3);
-
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 5, 6, 10));
-
-        result = lottoGame.match(lotto, winningLotto);
-
-        assertThat(result).isEqualTo(4);
-    }
-
-    @Test
     @DisplayName("일치한 번호 갯수를 입력하면 등수를 리턴한다")
-    public void getRankReturnsRankOfLotto() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
+    public void matchLottoAndWinningLottoReturnsResultsOfLottos() {
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
+                new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12))
+        );
         Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int matchCount = lottoGame.match(lotto, winningLotto);
 
-        Rank result = lottoGame.valueOf(matchCount);
+        List<Rank> results = lottoGame.match(lottos, winningLotto);
 
-        assertThat(result).isEqualTo(FOURTH);
-
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
-        matchCount = lottoGame.match(lotto, winningLotto);
-
-        result = lottoGame.valueOf(matchCount);
-
-        assertThat(result).isEqualTo(THIRD);
+        assertThat(results).contains(FOURTH);
+        assertThat(results).hasSize(2);
     }
 
     @ParameterizedTest

@@ -11,12 +11,8 @@ public class LottoGame {
     public List<Rank> match(List<Lotto> lottos, Lotto winningLotto) {
         return lottos.stream()
                 .mapToInt(lotto -> lotto.match(winningLotto))
-                .mapToObj(this::valueOf)
+                .mapToObj(Rank::of)
                 .collect(toList());
-    }
-
-    public Rank valueOf(int matchCount) {
-        return Rank.of(matchCount);
     }
 
     public int purchaseLotto(int price) {
