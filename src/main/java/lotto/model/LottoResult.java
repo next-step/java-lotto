@@ -26,11 +26,11 @@ public enum LottoResult {
             Stream.of(values())
                     .collect(Collectors.toMap(LottoResult::getLottoMatchCount, Function.identity())));
 
-    private final LottoResultMatchId matchCount;
+    private final LottoResultMatchId lottoResultMatchId;
     private final LottoPrice price;
 
-    LottoResult(final int matchCount, final LottoBonusNumberMatch lottoBonusNumberMatch, final long price) {
-        this.matchCount = LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(matchCount), lottoBonusNumberMatch);
+    LottoResult(final int lottoResultMatchId, final LottoBonusNumberMatch lottoBonusNumberMatch, final long price) {
+        this.lottoResultMatchId = LottoResultMatchId.newInstance(WinningLottoMatchingCount.of(lottoResultMatchId), lottoBonusNumberMatch);
         this.price = LottoPrice.of(price);
     }
 
@@ -39,8 +39,8 @@ public enum LottoResult {
                 .orElseThrow(() -> new IllegalArgumentException("일치하는 당첨 케이스가 없습니다."));
     }
 
-    public int getMatchCount() {
-        return matchCount.toInt();
+    public int getLottoResultMatchId() {
+        return lottoResultMatchId.toInt();
     }
 
     public long getPrice() {
@@ -52,6 +52,6 @@ public enum LottoResult {
     }
 
     private LottoResultMatchId getLottoMatchCount() {
-        return matchCount;
+        return lottoResultMatchId;
     }
 }

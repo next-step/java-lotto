@@ -1,5 +1,7 @@
 package lotto.model.wrapper;
 
+import lotto.model.LottoBonusNumberMatch;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
@@ -14,15 +16,12 @@ public class WinningLottoMatchingCount {
     private static final int BONUS_NUMBER_CHECK_MATCH_COUNT = 5;
     private static final Map<Integer, WinningLottoMatchingCount> COUNTS;
 
-    public static WinningLottoMatchingCount BONUS_CHECK_COUNT;
-
     private final int count;
 
     static {
         COUNTS = Collections.unmodifiableMap(IntStream.rangeClosed(WINNING_LOTTO_MIN_MATCH_COUNT, WINNING_LOTTO_MAX_MATCH_COUNT)
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), WinningLottoMatchingCount::new)));
-        BONUS_CHECK_COUNT = WinningLottoMatchingCount.of(BONUS_NUMBER_CHECK_MATCH_COUNT);
     }
 
     private WinningLottoMatchingCount(final int count) {
@@ -32,6 +31,13 @@ public class WinningLottoMatchingCount {
     public static WinningLottoMatchingCount of(final int count) {
         return Optional.ofNullable(COUNTS.get(count))
                 .orElseThrow(() -> new IllegalArgumentException("당첨 번호와 매칭되는 숫자는 0 이상, 6 이하여야 합니다."));
+    }
+
+    public LottoBonusNumberMatch getLottoBonusNumberMatch(final boolean isMatchedBonusNumber) {
+        if(count == BONUS_NUMBER_CHECK_MATCH_COUNT) {
+            return LottoBonusNumberMatch.createByMatchBonusNumber(isMatchedBonusNumber);
+        }
+        return LottoBonusNumberMatch.ANYWAY;
     }
 
     public int toInt() {
