@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.generator.LottoNumberGenerator;
 import lotto.generator.NumberGenerator;
 
 import java.util.HashMap;
@@ -20,10 +19,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         for (int i = LOTTO_MIN_NUMBER; i <= LOTTO_MAX_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
-    }
-
-    public static LottoNumber newRandomNumber() {
-        return lottoNumbers.get(new LottoNumberGenerator().getRandomNumber());
     }
 
     public static LottoNumber newRandomNumber(NumberGenerator lottoNumberGenerator) {
