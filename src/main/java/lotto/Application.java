@@ -9,15 +9,19 @@ public class Application {
         InputView inputView = new InputView();
 
         Price inputPrice = inputView.inputPrice();
-        Lotteries lotteries = LottoStore.buy(inputPrice);
+        int manualCount = inputView.inputManualCount();
 
-        OutputView.printLotteryCount(lotteries.count());
+        Lotteries manuals = inputView.inputManualLottoNumbers(manualCount);
+        Lotteries lotteries = LottoStore.sell(inputPrice, manuals);
+
+        OutputView.printLotteryCount(manualCount, lotteries.count());
         OutputView.printLotteries(lotteries.getLottoNumbers());
 
         LottoNumbers winningLotteNumbers = inputView.inputLastWeekendWinningLottery();
-        BonusBall bonusBall = inputView.inputBonusBall();
+        LottoNumber bonusBall = inputView.inputBonusBall();
 
-        LottoResult lottoResult = lotteries.analyzeWin(winningLotteNumbers, bonusBall);
+        WinningLotto winningLotto = WinningLotto.of(winningLotteNumbers, bonusBall);
+        LottoResult lottoResult = lotteries.analyzeWin(winningLotto);
 
         OutputView.printLottoResult(lottoResult.getChart());
         OutputView.printRatio(lottoResult.ratio(inputPrice));

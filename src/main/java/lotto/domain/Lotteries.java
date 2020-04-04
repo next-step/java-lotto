@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -20,15 +21,19 @@ public class Lotteries {
         return lottoNumbers;
     }
 
-    public LottoResult analyzeWin(final LottoNumbers winningLotteNumbers, final BonusBall bonusBall) {
+    public LottoResult analyzeWin(final WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
         for (LottoNumbers purchase : lottoNumbers) {
-            int matchCount = purchase.analyzeMatchCount(winningLotteNumbers);
-            boolean hasBonusBall = purchase.hasBonusBall(bonusBall);
-            LottoRank lottoRank = LottoRank.findRank(matchCount, hasBonusBall);
-            lottoResult.increase(lottoRank);
+            lottoResult.rank(purchase, winningLotto);
         }
         return lottoResult;
+    }
+
+    public Lotteries merge(final Lotteries autos) {
+        List<LottoNumbers> merge = new ArrayList<>();
+        merge.addAll(lottoNumbers);
+        merge.addAll(autos.lottoNumbers);
+        return new Lotteries(merge);
     }
 
     @Override

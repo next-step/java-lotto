@@ -12,11 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LotteriesTest {
 
-    private BonusBall bonusBall;
+    private LottoNumber bonusBall;
 
     @BeforeEach
     void setUp() {
-        bonusBall = new BonusBall("1");
+        bonusBall = LottoNumber.valueOf(12);
     }
 
     @DisplayName("로또 복권은 6개의 로또 번호를 가지도록 객체 생성을 할 수 있다.")
@@ -32,77 +32,17 @@ class LotteriesTest {
     @DisplayName("로또 목록을 갖고올 수 있다.")
     @Test
     void getLottoNumbers() {
-        Lotteries lotteries = LottoStore.buy(new Price(2000));
+        Lotteries lotteries = LottoStore.sell(new Price(2000), new Lotteries(new ArrayList<>()));
 
         final List<LottoNumbers> lottoNumbers = lotteries.getLottoNumbers();
 
         assertThat(lottoNumbers).hasSize(2);
     }
 
-    @DisplayName("구매한 복권들과 당첨 복권이 일치하지 않는다.")
-    @Test
-    void analyzeWin_NotMatch() {
-        Lotteries lotteries = new Lotteries(createLottoNumbers());
-        LottoNumbers winningLottoNumber = new LottoNumbers("7, 8, 9, 10, 11, 12");
-        int expect = 1;
-
-        LottoResult actual = lotteries.analyzeWin(winningLottoNumber, bonusBall);
-
-        assertThat(actual.wihCount(LottoRank.BLANK)).isEqualTo(expect);
-    }
-
-    @DisplayName("구매한 복권들과 당첨 복권이 3개 일치한다. (4등)")
-    @Test
-    void analyzeWin_Fourth() {
-        Lotteries lotteries = new Lotteries(createLottoNumbers());
-        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 10, 11, 12");
-        int expect = 1;
-
-        LottoResult actual = lotteries.analyzeWin(winningLottoNumber, bonusBall);
-
-        assertThat(actual.wihCount(LottoRank.FOURTH)).isEqualTo(expect);
-    }
-
-    @DisplayName("구매한 복권들과 당첨 복권이 4개 일치한다. (3등)")
-    @Test
-    void analyzeWin_Third() {
-        Lotteries lotteries = new Lotteries(createLottoNumbers());
-        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 11, 12");
-        int expect = 1;
-
-        LottoResult actual = lotteries.analyzeWin(winningLottoNumber, bonusBall);
-
-        assertThat(actual.wihCount(LottoRank.THIRD)).isEqualTo(expect);
-    }
-
-    @DisplayName("구매한 복권들과 당첨 복권이 5개 일치한다. (2등)")
-    @Test
-    void analyzeWin_Second() {
-        Lotteries lotteries = new Lotteries(createLottoNumbers());
-        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 5, 12");
-        int expect = 1;
-
-        LottoResult actual = lotteries.analyzeWin(winningLottoNumber, bonusBall);
-
-        assertThat(actual.wihCount(LottoRank.SECOND)).isEqualTo(expect);
-    }
-
-    @DisplayName("구매한 복권들과 당첨 복권이 6개 일치한다. (1등)")
-    @Test
-    void analyzeWin_First() {
-        Lotteries lotteries = new Lotteries(createLottoNumbers());
-        LottoNumbers winningLottoNumber = new LottoNumbers("1, 2, 3, 4, 5, 6");
-        int expect = 1;
-
-        LottoResult actual = lotteries.analyzeWin(winningLottoNumber, bonusBall);
-
-        assertThat(actual.wihCount(LottoRank.FIRST)).isEqualTo(expect);
-    }
-
     @DisplayName("보너스볼을 갖고 있다.")
     @Test
     void hasBonusBall_True() {
-        LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumbers lottoNumbers = new LottoNumbers("1, 2, 3, 4, 5, 12");
 
         boolean hasBonusBall = lottoNumbers.hasBonusBall(bonusBall);
 

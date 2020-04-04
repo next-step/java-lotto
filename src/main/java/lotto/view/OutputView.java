@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+    private static final String PURCHASE_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String WIN_MATCH_MESSAGE = "%d개 일치 (%s원) - %d개";
     private static final String WIN_SECOND_BONUS_MESSAGE = "%d개 일치, 보너스 볼 일치 (%s원) - %d개";
 
     private OutputView() { }
 
-    public static void printLotteryCount(int count) {
-        System.out.println(count + "개를 구매했습니다.");
+    public static void printLotteryCount(int manualCount, int allCount) {
+        System.out.println();
+        System.out.println(String.format(PURCHASE_COUNT_MESSAGE, manualCount, allCount - manualCount));
     }
 
     public static void printLotteries(final List<LottoNumbers> lottoNumbers) {

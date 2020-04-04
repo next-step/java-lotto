@@ -25,7 +25,7 @@ public enum LottoRank {
                                .findFirst()
                                .orElse(LottoRank.BLANK);
 
-        if (isSecondBonus(rank, matchBonus)) {
+        if (rank.isSecondBonus(matchBonus)) {
             return LottoRank.SECOND_BONUS;
         }
         return rank;
@@ -39,7 +39,7 @@ public enum LottoRank {
         return winPrice;
     }
 
-    private static boolean isSecondBonus(final LottoRank rank, final boolean matchBonus) {
-        return rank.equals(LottoRank.SECOND) && matchBonus;
+    private boolean isSecondBonus(final boolean matchBonus) {
+        return this.equals(LottoRank.SECOND) && matchBonus;
     }
 }

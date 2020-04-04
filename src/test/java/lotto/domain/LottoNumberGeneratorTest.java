@@ -9,9 +9,10 @@ class LottoNumberGeneratorTest {
 
     @DisplayName("무작위 6개의 로또 번호를 생성한다.")
     @Test
-    void generate() {
-        LottoNumbers lottoNumbers = LottoNumberGenerator.generate();
+    void generateAuto() {
+        Lotteries lotteries = LottoNumberGenerator.generateAutomatically(1);
 
-        assertThat(lottoNumbers).isNotNull();
+        assertThat(lotteries).isNotNull();
+        assertThat(lotteries.count()).isOne();
     }
 }
