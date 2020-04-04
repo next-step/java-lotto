@@ -1,11 +1,11 @@
 package lotto.model;
 
-public enum LottoBonusNumberMatchStatus {
+public enum BonusNumberMatchingStatus {
     ANYWAY,
     UN_MATCH,
     MATCH;
 
-    public static LottoBonusNumberMatchStatus createByMatchBonusNumber(final boolean isMatchedBonusNumber) {
+    public static BonusNumberMatchingStatus createByMatchBonusNumber(final boolean isMatchedBonusNumber) {
         if (isMatchedBonusNumber) {
             return MATCH;
         }

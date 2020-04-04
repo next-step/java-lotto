@@ -46,8 +46,8 @@ public class WinningLottoTicketTests {
     @DisplayName("로또 결과 확인 테스트")
     @ParameterizedTest
     @MethodSource("checkLottoTicketTestCases")
-    public void checkLottoTicketTest(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket, LottoResult lottoResult) {
-        assertThat(winningLottoTicket.check(lottoTicket)).isEqualTo(lottoResult);
+    public void checkLottoTicketTest(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket, LottoWinningResult lottoWinningResult) {
+        assertThat(winningLottoTicket.check(lottoTicket)).isEqualTo(lottoWinningResult);
     }
 
     private static Stream<Arguments> generateWinningLottoTestCases() {
@@ -96,35 +96,35 @@ public class WinningLottoTicketTests {
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7)),
-                        LottoResult.SIX),
+                        LottoWinningResult.SIX),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(8)),
-                        LottoResult.FIVE),
+                        LottoWinningResult.FIVE),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)), LottoNumber.of(6)),
-                        LottoResult.FIVE_WITH_BONUS),
+                        LottoWinningResult.FIVE_WITH_BONUS),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 8, 7)), LottoNumber.of(24)),
-                        LottoResult.FOUR),
+                        LottoWinningResult.FOUR),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 9, 8, 7)), LottoNumber.of(24)),
-                        LottoResult.THREE),
+                        LottoWinningResult.THREE),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 10, 9, 8, 7)), LottoNumber.of(24)),
-                        LottoResult.TWO),
+                        LottoWinningResult.TWO),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 11, 10, 12, 13, 14)), LottoNumber.of(24)),
-                        LottoResult.ONE),
+                        LottoWinningResult.ONE),
                 Arguments.of(
                         lottoTicket,
                         WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)), LottoNumber.of(24)),
-                        LottoResult.NONE)
+                        LottoWinningResult.NONE)
         );
     }
 

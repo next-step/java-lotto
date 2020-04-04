@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.model.LottoResult;
-import lotto.model.LottoResults;
+import lotto.model.LottoWinningResult;
+import lotto.model.LottoWinningResults;
 import lotto.model.LottoTickets;
-import lotto.model.dto.LottoWinStatResult;
-import lotto.model.dto.LottoWinStatResults;
+import lotto.model.dto.LottoWinningResultWithCount;
+import lotto.model.dto.LottoTotalResult;
 
 import java.math.BigDecimal;
 
@@ -24,30 +24,30 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLottoResults(final LottoResults lottoResults) {
+    public static void printLottoResults(final LottoWinningResults lottoWinningResults) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        LottoWinStatResults lottoWinStatResults = lottoResults.getWinStatResults();
-        lottoWinStatResults.getWinResult()
+        LottoTotalResult lottoTotalResult = LottoTotalResult.newInstance(lottoWinningResults);
+        lottoTotalResult.getWinResult()
                 .forEach(OutputView::printEachWinResult);
-        printProfitResult(lottoResults.profit());
+        printProfitResult(lottoTotalResult.getProfit());
     }
 
-    private static void printEachWinResult(final LottoWinStatResult lottoWinStatResult) {
-        if (LottoResult.FIVE_WITH_BONUS == lottoWinStatResult.getLottoResult()) {
-            printWinResult(lottoWinStatResult, RESULT_WITH_BONUS_FORMAT);
+    private static void printEachWinResult(final LottoWinningResultWithCount lottoWinningResultWithCount) {
+        if (LottoWinningResult.FIVE_WITH_BONUS == lottoWinningResultWithCount.getLottoWinningResult()) {
+            printWinResult(lottoWinningResultWithCount, RESULT_WITH_BONUS_FORMAT);
             return;
         }
 
-        printWinResult(lottoWinStatResult, RESULT_FORMAT);
+        printWinResult(lottoWinningResultWithCount, RESULT_FORMAT);
     }
 
-    private static void printWinResult(final LottoWinStatResult lottoWinStatResult, final String resultFormat) {
+    private static void printWinResult(final LottoWinningResultWithCount lottoWinningResultWithCount, final String resultFormat) {
         System.out.println(String.format(
                 resultFormat,
-                lottoWinStatResult.getMatchCount(),
-                lottoWinStatResult.getPrice(),
-                lottoWinStatResult.getCount()));
+                lottoWinningResultWithCount.getMatchCount(),
+                lottoWinningResultWithCount.getPrice(),
+                lottoWinningResultWithCount.getCount()));
     }
 
     private static void printProfitResult(final BigDecimal profit) {

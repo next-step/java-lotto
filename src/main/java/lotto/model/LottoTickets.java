@@ -25,12 +25,12 @@ public class LottoTickets {
         return new LottoTickets(Arrays.asList(lottoTickets));
     }
 
-    public LottoResults checkAll(final WinningLottoTicket winningLottoTicket) {
-        List<LottoResult> lottoResults = lottoTickets.stream()
+    public LottoWinningResults checkAll(final WinningLottoTicket winningLottoTicket) {
+        List<LottoWinningResult> lottoWinningResults = lottoTickets.stream()
                 .map(winningLottoTicket::check)
                 .collect(Collectors.toList());
 
-        return LottoResults.create(lottoResults);
+        return LottoWinningResults.create(lottoWinningResults);
     }
 
     public int size() {

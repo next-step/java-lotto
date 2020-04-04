@@ -1,39 +1,31 @@
 package lotto.model;
 
-import lotto.model.dto.LottoWinStatResults;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static lotto.model.wrapper.Payment.LOTTO_PRICE;
 
-public class LottoResults {
-    private Map<LottoResult, Long> lottoResults;
+public class LottoWinningResults {
+    private Map<LottoWinningResult, Long> lottoResults;
 
-    private LottoResults(final Map<LottoResult, Long> result) {
+    private LottoWinningResults(final Map<LottoWinningResult, Long> result) {
         this.lottoResults = Collections.unmodifiableMap(result);
     }
 
-    public static LottoResults create(final List<LottoResult> lottoResults) {
-        Map<LottoResult, Long> result = lottoResults.stream()
+    public static LottoWinningResults create(final List<LottoWinningResult> lottoWinningResults) {
+        Map<LottoWinningResult, Long> result = lottoWinningResults.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        return new LottoResults(result);
+        return new LottoWinningResults(result);
     }
 
-    public long count(final LottoResult lottoResult) {
-        return lottoResults.getOrDefault(lottoResult, 0L);
-    }
-
-    public LottoWinStatResults getWinStatResults() {
-        Map<LottoResult, Long> result = new LinkedHashMap<>();
-        Arrays.stream(LottoResult.values())
-                .forEach(lottoResult -> result.put(lottoResult, 0L));
-
-        result.putAll(this.lottoResults);
-        return LottoWinStatResults.newInstance(result);
+    public long count(final LottoWinningResult lottoWinningResult) {
+        return lottoResults.getOrDefault(lottoWinningResult, 0L);
     }
 
     public BigDecimal profit() {
@@ -56,11 +48,15 @@ public class LottoResults {
                 .sum() * LOTTO_PRICE;
     }
 
+    public Map<LottoWinningResult, Long> getLottoResults() {
+        return lottoResults;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof LottoResults)) return false;
-        LottoResults that = (LottoResults) o;
+        if (!(o instanceof LottoWinningResults)) return false;
+        LottoWinningResults that = (LottoWinningResults) o;
         return Objects.equals(lottoResults, that.lottoResults);
     }
 

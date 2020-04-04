@@ -50,7 +50,7 @@ public class LottoTicketsTests {
         LottoTickets lottoTickets = LottoTickets.newInstance(this.lottoTickets);
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.newInstance(convertToLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(33));
 
-        LottoResults expectedResults = LottoResults.create(Arrays.asList(LottoResult.SIX, LottoResult.THREE, LottoResult.FOUR, LottoResult.FIVE_WITH_BONUS));
+        LottoWinningResults expectedResults = LottoWinningResults.create(Arrays.asList(LottoWinningResult.SIX, LottoWinningResult.THREE, LottoWinningResult.FOUR, LottoWinningResult.FIVE_WITH_BONUS));
 
         assertThat(lottoTickets.checkAll(winningLottoTicket)).isEqualTo(expectedResults);
     }

@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.model.wrapper.LottoNumber;
-import lotto.model.wrapper.LottoResultMatchId;
 
 import java.util.Set;
 
@@ -27,13 +26,13 @@ public class WinningLottoTicket {
         return new WinningLottoTicket(LottoTicket.newInstance(numbers), bonusNumber);
     }
 
-    public LottoResult check(LottoTicket lottoTicket) {
+    public LottoWinningResult check(LottoTicket lottoTicket) {
         long count = winningLottoTicket.getNumbers()
                 .stream()
                 .filter(lottoTicket::contains)
                 .count();
         boolean matchBonusNumber = lottoTicket.contains(bonusNumber);
 
-        return LottoResult.of(Math.toIntExact(count), matchBonusNumber);
+        return LottoWinningResult.of(Math.toIntExact(count), matchBonusNumber);
     }
 }
