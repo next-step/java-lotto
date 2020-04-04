@@ -11,6 +11,7 @@ import java.util.List;
 import static java.util.stream.Collectors.joining;
 
 public class ResultView {
+    private static final int BREAK_EVEN_POINT = 1;
     private static final String JOIN_DELIMETER = ", ";
 
     public ResultView() {
@@ -58,10 +59,14 @@ public class ResultView {
 
     public void viewInsight(BigDecimal yield) {
         System.out.print("총 수익률은" + String.format("%.2f", yield) + " 입니다.");
-        if (yield.compareTo(new BigDecimal(1)) <= 0) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        viewYieldAnalysis(yield.intValue() > BREAK_EVEN_POINT);
+    }
+
+    private void viewYieldAnalysis(boolean isProfit) {
+        if (isProfit) {
+            System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
             return;
         }
-        System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+        System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

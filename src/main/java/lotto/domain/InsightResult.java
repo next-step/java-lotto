@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class InsightResult {
@@ -12,7 +12,7 @@ public class InsightResult {
     }
 
     public Map<RankEnum, Integer> getInsightResult() {
-        return new HashMap<>(this.insightResult);
+        return new LinkedHashMap<>(this.insightResult);
     }
 
     public int getTotalRevenue() {
