@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoGameTest {
     private Lotto winningNumbers;
@@ -45,15 +44,5 @@ public class LottoGameTest {
                 new LottoNumber(9)));
 
         assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(Rank.valueOf(3));
-    }
-
-    @Test
-    public void invalidWinningNumbersThrowException() {
-        assertThatIllegalArgumentException().isThrownBy(() -> {
-            winningNumbers = new Lotto(Arrays.asList(new LottoNumber(1),
-                    new LottoNumber(2),
-                    new LottoNumber(3)));
-            LottoGame.match(lottoNumbers, winningNumbers);
-        });
     }
 }
