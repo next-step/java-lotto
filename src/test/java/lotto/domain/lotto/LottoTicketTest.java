@@ -67,7 +67,7 @@ public class LottoTicketTest {
         //given
         List<LottoNumber> nullValue = null;
         assertThatThrownBy(
-                () -> new Lotto(nullValue)
+                () -> new LottoTicket(nullValue)
         ).isInstanceOf(ValidLottoException.class);
     }
 

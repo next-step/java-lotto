@@ -39,7 +39,7 @@ public class LottoTicket {
     }
 
     private int increaseCountIfMatch(WinLottoTicket winTicket, int matchCount, LottoNumber winNumber) {
-        for (LottoNumber number : winTicket.getNumbers().getValue()) {
+        for (LottoNumber number : winTicket.getLottoTicket().numbers.getValue()) {
             if (number.equals(winNumber)) {
                 matchCount++;
             }
