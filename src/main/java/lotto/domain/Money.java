@@ -3,12 +3,15 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+
+    private static final int ZERO = 0;
     private static final String MONEY_POSITIVE_INTEGER_ERR_MESSAGE = "금액은 양의 정수만 입력 가능 합니다.";
     private static final String MONEY_NEGATIVE_INTEGER_ERR_MESSAGE = "금액은 음수가 될 수 없습니다.";
+
     private final double money;
 
     public Money() {
-        money = 0;
+        money = ZERO;
     }
 
     public Money(double money) {
@@ -16,14 +19,14 @@ public class Money {
         this.money = money;
     }
 
-    public static Money buyItemAmount(double itemPrice, int buyCount) {
-        return new Money(itemPrice * buyCount);
-    }
-
     private void validatePositive(double money) {
-        if (money < 0) {
+        if (money < ZERO) {
             throw new IllegalArgumentException(MONEY_POSITIVE_INTEGER_ERR_MESSAGE);
         }
+    }
+
+    public static Money buyItemAmount(Money itemPrice, int buyCount) {
+        return new Money(itemPrice.money * buyCount);
     }
 
     public Money plus(Money money) {
@@ -32,7 +35,7 @@ public class Money {
 
     public Money minus(Money money) {
         double calc = this.money - money.money;
-        if (calc < 0) {
+        if (calc < ZERO) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_INTEGER_ERR_MESSAGE);
         }
 
