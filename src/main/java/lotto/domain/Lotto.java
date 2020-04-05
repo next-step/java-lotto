@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,6 +8,15 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
+        validateOfWinningNumbers(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto(Integer... numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int number : numbers) {
+               lottoNumbers.add(new LottoNumber(number));
+        }
         validateOfWinningNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }

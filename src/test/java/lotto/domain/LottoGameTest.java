@@ -1,48 +1,28 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameTest {
-    private Lotto winningNumbers;
-    private Lotto lottoNumbers;
+    private Lotto winningNumber;
+    private Lotto lotto;
 
     @BeforeEach
     public void setup() {
-        lottoNumbers = new Lotto(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
+        lotto = new Lotto(1, 2, 3, 4, 5, 6);
     }
 
     @Test
     public void match_6개_테스트() {
-        winningNumbers = new Lotto(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)));
-
-        Assertions.assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(Rank.valueOf(6));
+        winningNumber = new Lotto(1, 2, 3, 4, 5, 6);
+        assertThat(LottoGame.match(lotto, winningNumber)).isEqualTo(Rank.valueOf(6));
     }
 
     @Test
     public void match_3개_테스트() {
-        winningNumbers = new Lotto(Arrays.asList(new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(7),
-                new LottoNumber(8),
-                new LottoNumber(9)));
-
-        assertThat(LottoGame.match(lottoNumbers, winningNumbers)).isEqualTo(Rank.valueOf(3));
+        winningNumber = new Lotto(1, 2, 3, 7, 8, 9);
+        assertThat(LottoGame.match(lotto, winningNumber)).isEqualTo(Rank.valueOf(3));
     }
 }
