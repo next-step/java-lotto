@@ -14,11 +14,14 @@ public class PriceTest {
     private Price price;
 
     @Test
-    public void invalidInputThrowIllegalArgumentExceptionTest() {
+    public void lessThanMinimumAmountThrowException() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             price = new Price(0);
         }).withMessage("금액은 1000원 이상 입력해주세요.");
+    }
 
+    @Test
+    public void invalidAmountThrowException() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             price = new Price(1500);
         }).withMessage("금액은 1000원 단위로 입력해주세요.");
