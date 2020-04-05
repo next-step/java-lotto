@@ -124,6 +124,6 @@ public class MoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"100:3:300", "500:2:1000", "1500:3:4500"}, delimiter = ':')
     public void buyItemAmount_success(double itemPrice, int buyCount, double expect) throws Exception {
-        assertThat(Money.buyItemAmount(itemPrice, buyCount).getMoney()).isEqualTo(expect);
+        assertThat(Money.getTotalPurchaseAmount(itemPrice, buyCount).getMoney()).isEqualTo(expect);
     }
 }

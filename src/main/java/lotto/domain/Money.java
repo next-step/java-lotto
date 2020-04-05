@@ -25,7 +25,7 @@ public class Money {
         }
     }
 
-    public static Money buyItemAmount(Money itemPrice, int buyCount) {
+    public static Money getTotalPurchaseAmount(Money itemPrice, int buyCount) {
         return new Money(itemPrice.money * buyCount);
     }
 
