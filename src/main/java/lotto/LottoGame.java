@@ -10,15 +10,19 @@ import java.util.*;
 public class LottoController {
     public static void main(String[] args) {
         Price price = InputView.getPrice();
+
         List<Lotto> lottos = LottoController.buyLotto(price.getAvailableBuyTicketCount());
         for (Lotto lotto : lottos) {
-            ResultView.printLotto(lotto.getLottoNumbers());
+            ResultView.printLotto(lotto);
         }
+
         Lotto winningLotto = new Lotto(InputView.getWinningNumbers());
+
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             ranks.add(LottoGame.match(lotto, winningLotto));
         }
+
         LottoResult result = new LottoResult(ranks);
         BigDecimal yield = price.getYield(result.getTotalWinningMoney());
         ResultView.printYield(yield);
