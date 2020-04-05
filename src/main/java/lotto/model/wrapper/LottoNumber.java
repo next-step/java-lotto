@@ -3,7 +3,6 @@ package lotto.model.wrapper;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -27,8 +26,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(final int number) {
-        return Optional.ofNullable(NUMBERS.get(number))
-                .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1 이상, 45 이하여야 합니다."));
+        LottoNumber lottoNumber = NUMBERS.get(number);
+
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException("로또 번호는 1 이상, 45 이하여야 합니다.");
+        }
+
+        return lottoNumber;
     }
 
     public static LottoNumber of(final String number) {

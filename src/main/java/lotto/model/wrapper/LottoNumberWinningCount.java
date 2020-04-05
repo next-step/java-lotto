@@ -5,7 +5,6 @@ import lotto.model.BonusNumberMatchingStatus;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -29,8 +28,13 @@ public class LottoNumberWinningCount {
     }
 
     public static LottoNumberWinningCount of(final int count) {
-        return Optional.ofNullable(COUNTS.get(count))
-                .orElseThrow(() -> new IllegalArgumentException("당첨 번호와 매칭되는 숫자는 0 이상, 6 이하여야 합니다."));
+        LottoNumberWinningCount lottoNumberWinningCount = COUNTS.get(count);
+
+        if (lottoNumberWinningCount == null) {
+            throw new IllegalArgumentException("당첨 번호와 매칭되는 숫자는 0 이상, 6 이하여야 합니다.");
+        }
+
+        return lottoNumberWinningCount;
     }
 
     public BonusNumberMatchingStatus getLottoBonusNumberMatchStatus(final boolean isMatchedBonusNumber) {
