@@ -6,13 +6,17 @@ import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.ManualLottoCount;
 import lotto.model.wrapper.Payment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static lotto.utils.LottoUtil.convertTo;
 
 public class InputView {
+
+    private static Scanner scanner = new Scanner(System.in);
 
     private InputView() {
     }
@@ -35,7 +39,8 @@ public class InputView {
 
     public static Payment inputPayment() {
         try {
-            return Payment.of(InputConsoleView.inputPayment());
+            System.out.println("구입금액을 입력해 주세요.");
+            return Payment.of(inputInteger());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             return null;
@@ -44,7 +49,8 @@ public class InputView {
 
     public static ManualLottoCount inputManualLottoCount() {
         try {
-            return ManualLottoCount.of(InputConsoleView.inputManualLottoCount());
+            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            return ManualLottoCount.of(inputInteger());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             return null;
@@ -53,7 +59,7 @@ public class InputView {
 
     public static LottoTickets inputManualLotto(ManualLottoCount manualLottoCount) {
         try {
-            List<String> lottoNumberLines = InputConsoleView.inputManualLotto(manualLottoCount.getCount());
+            List<String> lottoNumberLines = inputManualLottoTickets(manualLottoCount.getCount());
             return LottoTickets.newInstance(convertTo(lottoNumberLines));
         } catch (NumberFormatException ex) {
             System.out.println("제대로 된 숫자를 입력하세요");
@@ -66,8 +72,8 @@ public class InputView {
 
     public static LottoTicket inputWinningNumber() {
         try {
-            String line = InputConsoleView.inputWinningNumber();
-            return LottoTicket.newInstance(convertTo(line));
+            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            return LottoTicket.newInstance(convertTo(scanner.nextLine()));
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             return null;
@@ -76,11 +82,26 @@ public class InputView {
 
     public static LottoNumber inputBonusNumber() {
         try {
-            return LottoNumber.of(InputConsoleView.inputBonusNumber());
+            System.out.println("보너스 볼을 입력해 주세요.");
+            return LottoNumber.of(inputInteger());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
             return null;
         }
     }
 
+    private static List<String> inputManualLottoTickets(int manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> manualLottoTickets = new ArrayList<>();
+        for(int i = 0; i < manualLottoCount; i++) {
+            manualLottoTickets.add(scanner.nextLine());
+        }
+        return manualLottoTickets;
+    }
+
+    private static int inputInteger() {
+        final int manualLottoCount = scanner.nextInt();
+        scanner.nextLine();
+        return manualLottoCount;
+    }
 }
