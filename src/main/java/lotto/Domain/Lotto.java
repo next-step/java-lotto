@@ -6,13 +6,12 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> lottoNumber;
+    private final List<Integer> lottoNumber;
 
     private Lotto(List<Integer> lottoNumber) {
         lottoNumberCountException(lottoNumber.size());
-        Collections.shuffle(lottoNumber);
-        this.lottoNumber = lottoNumber.subList(0, 6);
-        Collections.sort(this.lottoNumber);
+        Collections.sort(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
     public static Lotto init(List<Integer> lottoNumber) {
@@ -20,17 +19,19 @@ public class Lotto {
     }
 
     private void lottoNumberCountException(int lottoNumberCount) {
-        if(lottoNumberCount < 6) {
+        if(lottoNumberCount != 6) {
             throw new IllegalArgumentException(lottoNumberCount + "개의 로또 번호가 입력되었습니다.");
         }
     }
 
-    public int match(List<Integer> winningNumber) {
-        int matchCount = 0;
-        for (Integer number : winningNumber) {
-            matchCount += (lottoNumber.contains(number)) ? 1 : 0;
-        }
-        return matchCount;
+    public LottoGrade match(WinningLotto winningNumber) {
+        int matchCount = winningNumber.matchLotto(Lotto.init(lottoNumber));
+        boolean matchBonus = winningNumber.matchBonus(Lotto.init(lottoNumber));
+        return LottoGrade.findGrade(matchCount, matchBonus);
+    }
+
+    public boolean isNumberMatch(int number) {
+        return lottoNumber.contains(number);
     }
 
     public List<Integer> toList() {

@@ -7,6 +7,7 @@ public class InputView {
 
     private final String INFORMATION_BUY_AMOUNT = "구입금액을 입력해 주세요.";
     private final String INFORMATION_LAST_WEEK_WINNER = "지난 주 당첨 번호를 입력해 주세요.";
+    private final String INFORMATION_LAST_WEEK_BONUS = "보너스 볼을 입력해 주세요.";
 
     private Scanner scanner;
 
@@ -19,7 +20,15 @@ public class InputView {
     }
 
     public int userInstructionAmount() {
-        System.out.println(INFORMATION_BUY_AMOUNT);
+        return userInstructionToNumber(INFORMATION_BUY_AMOUNT);
+    }
+
+    public int userInstructionBonus() {
+        return userInstructionToNumber(INFORMATION_LAST_WEEK_BONUS);
+    }
+
+    private int userInstructionToNumber(String message) {
+        System.out.println(message);
         return Integer.parseInt(scanner.nextLine());
     }
 
@@ -27,4 +36,5 @@ public class InputView {
         System.out.println(INFORMATION_LAST_WEEK_WINNER);
         return scanner.nextLine();
     }
+
 }

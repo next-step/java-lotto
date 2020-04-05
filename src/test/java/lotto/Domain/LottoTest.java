@@ -32,7 +32,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1 2 3 4 5"})
+    @ValueSource(strings = {"1 2 3 4 5", "1 2 3 4 5 6 7"})
     void lottoNumberCountExceptionTest(String input) {
         List<Integer> lottoNumbers = Arrays.stream(input.split(" "))
                 .mapToInt(Integer::parseInt)
@@ -53,9 +53,46 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         Lotto lotto = Lotto.init(lottoNumbers);
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
-        int result = lotto.match(winningNumber);
+        int bonus = 7;
+        Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
+        WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
+        LottoGrade result = lotto.match(winningNumber);
 
-        assertThat(result).isEqualTo(Integer.parseInt(expected));
+        assertThat(result).isEqualTo(LottoGrade.findGrade(Integer.parseInt(expected), false));
+    }
+
+    @Test
+    void winninglottoTest() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(1);
+        lottoNumbers.add(6);
+        lottoNumbers.add(3);
+        lottoNumbers.add(2);
+        lottoNumbers.add(5);
+        lottoNumbers.add(4);
+
+        Lotto lotto = Lotto.init(lottoNumbers);
+        int bonus = 7;
+        WinningLotto winningLotto = WinningLotto.init(lotto, bonus);
+
+        assertThat(lotto.match(winningLotto)).isEqualTo(LottoGrade.WIN1ST);
+    }
+
+
+    @Test
+    void winningLottoBonus_오류_Test() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(1);
+        lottoNumbers.add(6);
+        lottoNumbers.add(3);
+        lottoNumbers.add(2);
+        lottoNumbers.add(5);
+        lottoNumbers.add(4);
+
+        Lotto lotto = Lotto.init(lottoNumbers);
+        int bonus = 49;
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+                WinningLotto.init(lotto, bonus);
+        });
     }
 }

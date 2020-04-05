@@ -22,13 +22,20 @@ public class LottosTest {
         Lotto lotto = Lotto.init(lottoNumbers);
         List<Lotto> lottoList = Arrays.asList(lotto, lotto);
         Lottos lottos = Lottos.init(lottoList);
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
 
-        Map<Integer, Integer> matchCountMap = lottos.match(winningNumber);
+        int bonus = 7;
+        Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
+        WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
 
-        assertThat(matchCountMap)
-                .hasSize(7)
-                .contains(entry(3, 2), entry(4, 0), entry(5, 0), entry(6, 0));
+        LottoResult matchCountMap = lottos.match(winningNumber);
+
+        assertThat(matchCountMap.winLottoGradeAndPrize())
+                .contains(entry(LottoGrade.MISS, 0)
+                        , entry(LottoGrade.WIN5TH, 2)
+                        , entry(LottoGrade.WIN4TH, 0)
+                        , entry(LottoGrade.WIN3RD, 0)
+                        , entry(LottoGrade.WIN2ND, 0)
+                        , entry(LottoGrade.WIN1ST, 0));
     }
 
     @ParameterizedTest
@@ -39,12 +46,16 @@ public class LottosTest {
                 .boxed()
                 .collect(Collectors.toList());
         Lotto lotto = Lotto.init(lottoNumbers);
-        List<Lotto> lottoList = Arrays.asList(lotto, lotto);
-        Lottos lottos = Lottos.init(lottoList);
-        List<Integer> winningNumber = new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42));
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        lottos.add(lotto);
 
-        Map<Integer, Integer> statistics = lottos.match(winningNumber);
-        Double revenueRate = lottos.revenueRate(statistics);
+
+        int bonus = 7;
+        Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
+        WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
+
+        LottoResult statistics = lottos.match(winningNumber);
+        Double revenueRate = statistics.revenueRate();
 
         assertThat(revenueRate).isEqualTo(Double.parseDouble(expected));
     }

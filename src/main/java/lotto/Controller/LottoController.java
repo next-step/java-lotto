@@ -1,12 +1,11 @@
 package lotto.Controller;
 
 
-import lotto.Domain.LottoMachine;
-import lotto.Domain.Lottos;
+import lotto.Domain.*;
 import lotto.View.InputView;
 import lotto.View.OutputView;
-import stringPlusCalculate.View.ResultView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,23 +29,36 @@ public class LottoController {
         return count;
     }
 
-    public Lottos buyAutoLotto(int count) {
-        Lottos lottos = lottoMachine.buyAutoLottos(count);
-        outputView.boughtLottoList(lottos);
+    public Lottos buyAutoLotto(int LottoCount) {
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        for (int i = 0; i < LottoCount; i++) {
+            Lotto lotto = lottoMachine.buyLotto(lottoMachine.makeAutoTargetNumber());
+            lottos.add(lotto);
+        }
         return lottos;
     }
 
-    public List<Integer> inputLastWeekWinLotto() {
+    public void boughtLottoList(Lottos lottos) {
+        outputView.boughtLottoList(lottos);
+    }
+
+    public WinningLotto inputLastWeekWinLotto() {
         System.out.println("---------------------");
         String input = inputView.userInstructionWinner();
         System.out.println("---------------------");
-        return Arrays.stream(input.split(", "))
+        int bonus = inputView.userInstructionBonus();
+        Lotto lastweekWinlotto = Lotto.init(Arrays.stream(input.split(", "))
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        return WinningLotto.init(lastweekWinlotto, bonus);
     }
 
-    public void LottoResult(Lottos lottos, List<Integer> lastweekWinLotto) {
-        outputView.LottoResult(lottos, lastweekWinLotto);
+    public LottoResult lottoResult(Lottos lottos, WinningLotto winningLotto) {
+        return lottos.match(winningLotto);
+    }
+
+    public void printLottoResult(LottoResult lottoResult) {
+        outputView.LottoResult(lottoResult);
     }
 }

@@ -2,29 +2,20 @@ package lotto.Domain;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private final int LOTTO_PRICE = 1000;
-    Lottos lottos;
-
-    public LottoMachine() {
-        lottos = Lottos.init(new ArrayList<>());
-    }
+    private static final int LOTTO_PRICE = 1000;
+    private static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.range(1, 46)
+            .boxed()
+            .collect(Collectors.toCollection(ArrayList::new));
 
     public static LottoMachine init() {
         return new LottoMachine();
-    }
-
-    public Lottos buyAutoLottos(int lottoCount) {
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = makeLotto(makeAutoTargetNumber());
-            lottos = buyLotto(lotto);
-        }
-        return lottos;
     }
 
     public int boughtLottoCount(int price) {
@@ -38,18 +29,12 @@ public class LottoMachine {
         }
     }
 
-    public Lottos buyLotto(Lotto lotto) {
-        lottos.add(lotto);
-        return lottos;
+    public List<Integer> makeAutoTargetNumber() {
+        Collections.shuffle(LOTTO_NUMBER_RANGE);
+        return new ArrayList<>(LOTTO_NUMBER_RANGE.subList(0, 6));
     }
 
-    List<Integer> makeAutoTargetNumber() {
-        return IntStream.range(1, 46)
-                .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public Lotto makeLotto(List<Integer> targetNumbers) {
+    public Lotto buyLotto(List<Integer> targetNumbers) {
         return Lotto.init(targetNumbers);
     }
 }

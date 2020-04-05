@@ -2,15 +2,12 @@ package lotto.View;
 
 
 import lotto.Domain.LottoGrade;
+import lotto.Domain.LottoResult;
 import lotto.Domain.Lottos;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class OutputView {
-
     private final String INFORMATION_BUY_COUNT = "개를 구매했습니다.";
 
     private OutputView() {
@@ -30,27 +27,29 @@ public class OutputView {
         });
     }
 
-    public void LottoResult(Lottos lottos, List<Integer> lastweekWinLotto) {
+    public void LottoResult(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        Map<Integer, Integer> winList = lottos.match(lastweekWinLotto);
+        Map<LottoGrade, Integer> winList = lottoResult.winLottoGradeAndPrize();
 
-        winList = winList.entrySet().stream()
-                .filter(key -> key.getKey() >= 3)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        winList.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey() != LottoGrade.MISS)
+                .forEach(entry -> {
+                    winLottoGradeAndPrizePrint(entry.getKey(), entry.getValue());
+                });
 
-        winList.forEach((key, value) -> {
-            winLottoGradeAndPrizePrint(key, value);
-        });
-
-        Double revenueRate = lottos.revenueRate(winList);
+        double revenueRate = lottoResult.revenueRate();
 
         System.out.println("총 수익률은 " +trimDecimalZeroResult(revenueRate) + "입니다.");
     }
 
-    private void winLottoGradeAndPrizePrint(Integer key, Integer value) {
-        String prize = trimDecimalZeroResult(LottoGrade.findGrade(key).getPrize());
-        System.out.println(key + "개 일치 (" + prize + "원) - " + value + "개");
+    private void winLottoGradeAndPrizePrint(LottoGrade key, Integer value) {
+        if(key.getMatchCount() == 5 && key.getMatchBonus()) {
+            System.out.println(key.getMatchCount() + "개 일치, 보너스 볼 일치(" + key.getPrize() + "원) - " + value + "개");
+            return;
+        }
+        System.out.println(key.getMatchCount() + "개 일치 (" + key.getPrize() + "원) - " + value + "개");
     }
 
     private String trimDecimalZeroResult(double result) {
