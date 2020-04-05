@@ -24,7 +24,6 @@ public class Calculator {
                 .map(item -> checkBiggerThanZero(item))
                 .collect(Collectors.toList());
 
-
         return sum(inputs);
     }
 
