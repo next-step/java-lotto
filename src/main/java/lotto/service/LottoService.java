@@ -33,11 +33,10 @@ public class LottoService {
     }
 
     public MatchedLottoDto autoPlay(int gameCount) {
-        LottoGame lottoGame = new LottoGame();
-        LottoTickets tickets = lottoGame.createAutoLottoTicket(gameCount);
+        LottoTickets lottoTickets = LottoTickets.createLottoToAuto(gameCount);
 
         MatchedLottoDto dto = new MatchedLottoDto();
-        dto.setTickets(tickets);
+        dto.setTickets(lottoTickets);
         return dto;
     }
 
