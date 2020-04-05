@@ -158,7 +158,7 @@ class LottoTicketsTest {
     @Test
     public void lottoTicketGenerate_success() throws Exception {
         //given
-        LottoTickets tickets = LottoTickets.createLottoToAuto(3);
+        LottoTickets tickets = LottoTickets.from(3);
 
         //then
         assertThat(tickets.size()).isEqualTo(3);
@@ -174,7 +174,7 @@ class LottoTicketsTest {
                 new ArrayList<>(Arrays.asList(lottoNumbers1, lottoNumbers2));
 
         //when
-        LottoTickets tickets = LottoTickets.createLottoToPassivity(numbers);
+        LottoTickets tickets = LottoTickets.from(numbers);
 
 
         //then

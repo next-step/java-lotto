@@ -42,7 +42,7 @@ class LottoServiceTest {
         LottoService service = new LottoService();
         final WinLottoTicket winLottoTicket = new WinLottoTicket(winNumber, new LottoNumber(45));
         final LottoTickets lottoToPassivity =
-                LottoTickets.createLottoToPassivity(Arrays.asList(LottoNumbers.of(Arrays.asList(1, 2, 3, 10, 11, 12))));
+                LottoTickets.from(Arrays.asList(LottoNumbers.of(Arrays.asList(1, 2, 3, 10, 11, 12))));
 
         //when
         StatisticsLottoDto earningRate = service.getEarningRate(lottoToPassivity, winLottoTicket);

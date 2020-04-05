@@ -19,7 +19,7 @@ public class LottoTickets implements Cloneable {
         this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
     }
 
-    public static LottoTickets createLottoToAuto(int count) {
+    public static LottoTickets from(int count) {
         List<LottoTicket> result = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             LottoNumbers numbers = LottoNumbers.createLottoNumbersUseInteger(LottoNumberAutoGenerator.generateLottoNumber());
@@ -28,7 +28,7 @@ public class LottoTickets implements Cloneable {
         return new LottoTickets(result);
     }
 
-    public static LottoTickets createLottoToPassivity(List<LottoNumbers> numbers) {
+    public static LottoTickets from(List<LottoNumbers> numbers) {
         List<LottoTicket> tickets = numbers.stream()
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());

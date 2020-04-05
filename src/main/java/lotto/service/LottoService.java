@@ -36,7 +36,7 @@ public class LottoService {
     }
 
     public MatchedLottoDto autoPlay(int gameCount) {
-        LottoTickets lottoTickets = LottoTickets.createLottoToAuto(gameCount);
+        LottoTickets lottoTickets = LottoTickets.from(gameCount);
 
         MatchedLottoDto dto = new MatchedLottoDto();
         dto.setTickets(lottoTickets);
@@ -55,7 +55,7 @@ public class LottoService {
             numbers.add(LottoNumbers.of(num));
         }
 
-        LottoTickets tickets = LottoTickets.createLottoToPassivity(numbers);
+        LottoTickets tickets = LottoTickets.from(numbers);
 
         MatchedLottoDto dto = new MatchedLottoDto();
         dto.setTickets(tickets);
