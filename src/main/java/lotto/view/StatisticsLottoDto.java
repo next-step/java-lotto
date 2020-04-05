@@ -2,30 +2,30 @@ package lotto.view;
 
 public class StatisticsLottoDto {
 
-    private int firstGameCount = 0;
-    private int secondGameCount = 0;
-    private int thirdGameCount = 0;
-    private int fourthGameCount = 0;
-    private int fifthGameCount = 0;
+    private long firstGameCount = 0;
+    private long secondGameCount = 0;
+    private long thirdGameCount = 0;
+    private long fourthGameCount = 0;
+    private long fifthGameCount = 0;
     private double earningRate = 0;
 
-    public int getFirstGameCount() {
+    public long getFirstGameCount() {
         return firstGameCount;
     }
 
-    public int getSecondGameCount() {
+    public long getSecondGameCount() {
         return secondGameCount;
     }
 
-    public int getThirdGameCount() {
+    public long getThirdGameCount() {
         return thirdGameCount;
     }
 
-    public int getFourthGameCount() {
+    public long getFourthGameCount() {
         return fourthGameCount;
     }
 
-    public int getFifthGameCount() {
+    public long getFifthGameCount() {
         return fifthGameCount;
     }
 
@@ -33,23 +33,23 @@ public class StatisticsLottoDto {
         return earningRate;
     }
 
-    public void setFirstGameCount(int firstGameCount) {
+    public void setFirstGameCount(long firstGameCount) {
         this.firstGameCount = firstGameCount;
     }
 
-    public void setSecondGameCount(int secondGameCount) {
+    public void setSecondGameCount(long secondGameCount) {
         this.secondGameCount = secondGameCount;
     }
 
-    public void setThirdGameCount(int thirdGameCount) {
+    public void setThirdGameCount(long thirdGameCount) {
         this.thirdGameCount = thirdGameCount;
     }
 
-    public void setFourthGameCount(int fourthGameCount) {
+    public void setFourthGameCount(long fourthGameCount) {
         this.fourthGameCount = fourthGameCount;
     }
 
-    public void setFifthGameCount(int fifthGameCount) {
+    public void setFifthGameCount(long fifthGameCount) {
         this.fifthGameCount = fifthGameCount;
     }
 

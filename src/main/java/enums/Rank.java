@@ -27,7 +27,7 @@ public enum Rank {
         return matchCount;
     }
 
-    public Money getWinningPrize(int ticketCount) {
+    public Money getWinningPrize(long ticketCount) {
         return new Money(prize * ticketCount);
     }
 

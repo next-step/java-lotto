@@ -35,8 +35,8 @@ public class LottoTickets implements Cloneable {
         return new LottoTickets(tickets);
     }
 
-    public int findWinLottoCountFromRank(Rank rank, WinLottoTicket winTicket) {
-        return (int) tickets.stream()
+    public long findWinLottoCountFromRank(Rank rank, WinLottoTicket winTicket) {
+        return tickets.stream()
                 .filter(ticket -> rank == ticket.getRank(winTicket))
                 .count();
     }
