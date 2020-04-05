@@ -18,49 +18,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoGameTest {
-    private LottoGame lottoGame;
+    private LottoGame lottoGame = new LottoGame();
+    private Lotto winningLotto;
 
     @BeforeEach
     public void setUp() {
-        lottoGame = new LottoGame();
-    }
-
-    @Test
-    @DisplayName("입력된 로또와 당첨 로또의 일치하는 번호 갯수를 리턴한다")
-    public void matchLottoNumberReturnsCountOfMatches() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        int result = lottoGame.match(lotto, winningLotto);
-
-        assertThat(result).isEqualTo(3);
-
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 5, 6, 10));
-
-        result = lottoGame.match(lotto, winningLotto);
-
-        assertThat(result).isEqualTo(4);
+        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     @DisplayName("일치한 번호 갯수를 입력하면 등수를 리턴한다")
-    public void getRankReturnsRankOfLotto() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        Lotto winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int matchCount = lottoGame.match(lotto, winningLotto);
+    public void matchLottoAndWinningLottoReturnsResultsOfLottos() {
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12)),
+                new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12))
+        );
 
-        Rank result = lottoGame.getRank(matchCount);
+        List<Rank> results = lottoGame.match(lottos, winningLotto, 10);
 
-        assertThat(result).isEqualTo(FOURTH);
+        assertThat(results).contains(FIFTH);
+        assertThat(results).hasSize(2);
+    }
 
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10));
-        matchCount = lottoGame.match(lotto, winningLotto);
+    @Test
+    @DisplayName("5개의 번호가 일치하고 보너스 번호가 일치하면 2등이다")
+    public void matchFiveNumbersAndContainBonusIsSecond() {
+        List<Lotto> lottos = Arrays.asList(
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-        result = lottoGame.getRank(matchCount);
-
-        assertThat(result).isEqualTo(THIRD);
+        lottoGame.match(lottos, winningLotto, 7);
     }
 
     @ParameterizedTest

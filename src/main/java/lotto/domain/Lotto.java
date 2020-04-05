@@ -10,13 +10,23 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public Rank match(Lotto winningLotto, int bonusNumber) {
+        return Rank.of(match(winningLotto), this.getNumbers().contains(bonusNumber));
+    }
+
+    public int match(Lotto winningLotto) {
+        return (int) this.getNumbers().stream()
+                .filter(num -> winningLotto.getNumbers().contains(num))
+                .count();
     }
 
     private void validateSize(List<Integer> lottoNumbers) {

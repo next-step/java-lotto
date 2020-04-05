@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameApplication {
@@ -19,19 +18,14 @@ public class LottoGameApplication {
         ResultView.printLottoNumbers(lottos);
 
         List<Integer> winningNumbers = InputView.getWinningNumbers();
+        int bonusNumber = InputView.getBonusNumber();
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        List<Rank> results = new ArrayList<>();
-
-        for (Lotto lotto : lottos) {
-            int matchCount = lottoGame.match(lotto, winningLotto);
-            results.add(lottoGame.getRank(matchCount));
-        }
+        List<Rank> results = lottoGame.match(lottos, winningLotto, bonusNumber);
 
         ResultView.printWinningStatus(results);
 
-        int totalWinnings = lottoGame.getTotalWinnings(results);
-        double rateOfRevenue = lottoGame.getRateOfRevenue(price, totalWinnings);
+        double rateOfRevenue = lottoGame.getRateOfRevenue(price, lottoGame.getTotalWinnings(results));
 
         ResultView.printRateOfRevenue(rateOfRevenue);
     }
