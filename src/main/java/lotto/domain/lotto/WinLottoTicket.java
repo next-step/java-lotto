@@ -14,18 +14,14 @@ public class WinLottoTicket {
     private final LottoNumber bonus;
 
     public WinLottoTicket(LottoNumbers numbers, LottoNumber bonus) {
-        if (bonus == null) {
-            throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
-        }
+        validateNull(bonus);
         validateBonusNumber(numbers, bonus);
         this.lottoTicket = new LottoTicket(numbers);
         this.bonus = bonus;
     }
 
     public WinLottoTicket(List<LottoNumber> numbers, LottoNumber bonus) {
-        if (bonus == null) {
-            throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
-        }
+        validateNull(bonus);
         validateBonusNumber(numbers, bonus);
         this.lottoTicket = new LottoTicket(numbers);
         this.bonus = bonus;
@@ -40,6 +36,12 @@ public class WinLottoTicket {
     private void validateBonusNumber(List<LottoNumber> numbers, LottoNumber bonus) {
         if (numbers.contains(bonus)) {
             throw new ValidLottoException(DUPLICATE_LOTTO_NUMBER);
+        }
+    }
+
+    private void validateNull(LottoNumber bonus) {
+        if (bonus == null) {
+            throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
         }
     }
 
