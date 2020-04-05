@@ -62,8 +62,7 @@ public class LottoService {
     }
 
     public int getAvailableBuyCount(Money money) {
-        LottoGame lottoGame = new LottoGame();
-        return lottoGame.getAvailableBuyCount(money);
+        return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
     }
 
     public StatisticsLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
