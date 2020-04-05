@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class LottoController {
@@ -18,7 +19,8 @@ public class LottoController {
         for (Lotto lotto : lottos) {
             ranks.add(LottoGame.match(lotto, winningLotto));
         }
-        double yield = price.getYield(ranks);
+        LottoResult result = new LottoResult(ranks);
+        BigDecimal yield = price.getYield(result.getTotalWinningMoney());
         ResultView.printYield(yield);
     }
 

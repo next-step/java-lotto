@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -37,9 +36,8 @@ public class PriceTest {
 
     @Test
     public void getYield() {
-        Price price = new Price(14000);
-        List<Rank> ranks = Arrays.asList(Rank.FOURTH);
-
-        assertThat(price.getYield(ranks)).isEqualTo(0.35);
+        price = new Price(14000);
+        double totalWinningMoney = 5_000;
+        assertThat(price.getYield(totalWinningMoney)).isEqualTo(BigDecimal.valueOf(0.36));
     }
 }

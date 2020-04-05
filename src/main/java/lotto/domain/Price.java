@@ -1,21 +1,26 @@
 package lotto.domain;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Price {
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private int price;
+    private final int price;
 
     public Price(int price) {
-        validatePrice(price);
+        validateMinimumPrice(price);
+        validateUnitPrice(price);
         this.price = price;
     }
 
-    private void validatePrice(int price) {
-        if (price < 1000) {
+    private void validateMinimumPrice(int price) {
+        if (price < LOTTO_TICKET_PRICE) {
             throw new IllegalArgumentException("금액은 1000원 이상 입력해주세요.");
         }
+    }
+
+    private void validateUnitPrice(int price) {
         if (price % LOTTO_TICKET_PRICE != 0) {
             throw new IllegalArgumentException("금액은 1000원 단위로 입력해주세요.");
         }
@@ -25,10 +30,10 @@ public class Price {
         return price / LOTTO_TICKET_PRICE;
     }
 
-    public double getYield(List<Rank> ranks) {
-        LottoResult result = new LottoResult(ranks);
-        double totalWinningMoney = result.getTotalWinningMoney();
-        return Math.floor(totalWinningMoney / price * 100) / 100.0;
+    public BigDecimal getYield(double totalWinningMoney) {
+        BigDecimal winningMoney = BigDecimal.valueOf(totalWinningMoney);
+        BigDecimal bigDecimalPrice = new BigDecimal(String.valueOf(price));
+        return winningMoney.divide(bigDecimalPrice, 2, RoundingMode.HALF_EVEN);
     }
 
     @Override
