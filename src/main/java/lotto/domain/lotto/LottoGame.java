@@ -25,8 +25,4 @@ public class LottoGame {
     public LottoTickets createPassivityLottoTicket(List<LottoNumbers> numbers) {
         return LottoTickets.createLottoToPassivity(numbers);
     }
-
-    public int getAvailableBuyCount(Money money) {
-        return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
-    }
 }

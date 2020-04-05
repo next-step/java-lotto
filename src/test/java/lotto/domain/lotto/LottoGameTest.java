@@ -23,19 +23,4 @@ class LottoGameTest {
         //then
         assertThat(autoLottoTicket.size()).isEqualTo(count);
     }
-
-    @DisplayName("몇개의 로또 구매가 가능한지 체크")
-    @ParameterizedTest
-    @CsvSource(value = {"1000:1", "4444:4", "5999:5"}, delimiter = ':')
-    public void getAvailableBuyCount_success(int moneyParam, int expect) throws Exception {
-        //given
-        Money money = new Money(moneyParam);
-        LottoGame lottoGame = new LottoGame();
-
-        //when
-        int availableBuyCount = lottoGame.getAvailableBuyCount(money);
-
-        //then
-        assertThat(availableBuyCount).isEqualTo(expect);
-    }
 }
