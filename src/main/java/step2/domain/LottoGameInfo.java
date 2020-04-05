@@ -2,21 +2,23 @@ package step2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoGameInfo {
     private int price;
     private int countOfTicket;
+    private int matchCount;
+    private List<Integer> winningInfomations;
     private List<Lotto> lottoTickets;
 
-    public LottoGameInfo(int price) {
-        this(price, null);
-    }
 
-    public LottoGameInfo(int price, List<Lotto> lottos) {
+    public LottoGameInfo(int price) {
         validatePrice(price);
         this.price = price;
         this.countOfTicket = ticketCount(price);
         this.lottoTickets = generateLottoTickets(this.countOfTicket);
+        this.winningInfomations = new ArrayList<>();
+        this.matchCount = 0;
     }
 
     public int ticketCount(int price) {
@@ -37,7 +39,16 @@ public class LottoGameInfo {
         return lottoTickets;
     }
 
+
     public List<Lotto> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public List<Integer> getWinningInfomations() {
+        return winningInfomations;
+    }
+
+    public int getCountOfTicket() {
+        return countOfTicket;
     }
 }

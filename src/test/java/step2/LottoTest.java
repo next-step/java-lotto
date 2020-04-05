@@ -3,11 +3,9 @@ package step2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import step2.domain.Lotto;
-import step2.domain.LottoGameInfo;
+import step2.domain.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -16,10 +14,13 @@ public class LottoTest {
 
     Lotto lotto;
     LottoGameInfo lottoGameInfo;
+    LottoWinningInfomation lottoWinningInfomation;
+    LottoWinningNumber lottoWinningNumber;
 
     @BeforeEach
     void setUp() {
         lotto = new Lotto();
+        lottoWinningNumber = new LottoWinningNumber("1,2,3,4,5,6");
     }
 
     @DisplayName("로또번호 갯수체크")
@@ -37,9 +38,12 @@ public class LottoTest {
     @DisplayName("로또 가격 정합성 체크")
     @Test
     public void 로또가격체크() {
+        System.out.println(lottoWinningInfomation.matchCountInformation(3).getPrice());
         assertThatIllegalArgumentException().isThrownBy(() -> {
             new LottoGameInfo(999);
         });
     }
+
+
 
 }

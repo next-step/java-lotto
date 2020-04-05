@@ -11,9 +11,14 @@ public class LottoConstant {
     public static final String INPUT_WINNING_NUMBER_MESSAGE = "당첨번호를 입력해주세요 (구분자는 , 입니다.)";
     public static final String VALID_WINNING_NUMBER_MESSAGE = "당첨번호는 숫자를 입력해 주세요.";
     public static final String VALID_WINNINT_NUMBER_NULL_MESSAGE = "당첨번호는 빈값일수 없습니다.";
+    public static final String RESULT_WINNING_MESSAGE = "당첨 통계\n---------";
     public static final String BUY_MESSAGE = " 장을 구매하셨습니다.";
     public static final String START_SEPERATOR = "[";
     public static final String END_SEPERATOR = "]";
     public static final String SPLIT_SEPERATOR = ",";
     public static final String ENTER = "\n";
+    public static final String FIRST_DESCRPTION = "6개 일치";
+    public static final String SECOND_DESCRPTION = "5개 일치";
+    public static final String THIRD_DESCRPTION = "4개 일치";
+    public static final String FOURTH_DESCRPTION = "3개 일치";
 }

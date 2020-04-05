@@ -5,12 +5,10 @@ import java.util.*;
 public class Lotto {
     private LottoNumber lottoNumber;
     private List<Integer> numbers;
-    private List<Integer> lottoNumbers;
 
     public Lotto() {
         lottoNumber = new LottoNumber();
         numbers = new ArrayList<>();
-        lottoNumbers = new ArrayList<>();
         List<Integer> generatedNumbers = generateLottoNumber();
         validateNumberLengthCheck(generatedNumbers);
         validateDuplicationCheck(generatedNumbers);
@@ -18,7 +16,7 @@ public class Lotto {
     }
 
     public List<Integer> generateLottoNumber() {
-        lottoNumbers = lottoNumber.initializeLottoNumber();
+        List<Integer> lottoNumbers = lottoNumber.initializeLottoNumber();
 
         for (int i = 1; i <= LottoConstant.LOTTO_NUMBER_LENGTH; i++) {
             numbers.add(lottoNumbers.get(i));

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class LottoWinningNumber {
-    List<Integer> winningNumber;
+    private List<Integer> winningNumber;
 
     public LottoWinningNumber(String winningNumber) {
         this.winningNumber = splitNumber(winningNumber);
