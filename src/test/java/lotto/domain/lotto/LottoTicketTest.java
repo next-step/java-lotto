@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import enums.Rank;
+import lotto.exception.ValidLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTicketTest {
@@ -57,6 +59,16 @@ public class LottoTicketTest {
         LottoTicket ticket2 = new LottoTicket(numbers);
 
         assertThat(ticket1.equals(ticket2)).isTrue();
+    }
+
+    @DisplayName("null 매개변수가 넘어올 경우")
+    @Test
+    public void constructor_fail_inputNullParam() throws Exception {
+        //given
+        List<LottoNumber> nullValue = null;
+        assertThatThrownBy(
+                () -> new Lotto(nullValue)
+        ).isInstanceOf(ValidLottoException.class);
     }
 
     @DisplayName("당첨 번호와 비교해 로또 번호가 몇개가 맞는지 확인한다.")
