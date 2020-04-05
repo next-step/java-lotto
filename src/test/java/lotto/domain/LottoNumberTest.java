@@ -20,7 +20,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     public void doNotCreate(int number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoNumber = new LottoNumber(number));
+        assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumber(number));
     }
 
     @Test
