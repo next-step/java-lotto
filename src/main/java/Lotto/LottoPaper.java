@@ -1,54 +1,46 @@
 package Lotto;
 
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoPaper {
 
     private final int LOTTO_NUMBER_BOUND = 45;
+    private final int LOTTO_MAX_LENGTH = 6;
 
-    private int[] lottoPaper;
+    private List<Integer> lottoPaper;
 
     public LottoPaper() {
-        lottoPaper = new int[6];
+        lottoPaper = new ArrayList<>();
         makeDeal();
     }
 
-    private int[] makeDeal() {
-        Random random = new Random();
+    private List<Integer> makeDeal() {
 
-        for (int i = 0; i < lottoPaper.length; i++) {
-            int ran = random.nextInt(LOTTO_NUMBER_BOUND);
-            if (!isContains(lottoPaper, ran)) {
-                lottoPaper[i] = ran;
-            } else if (isContains(lottoPaper, ran)) {
-                i--;
-            }
+        for (int i = 1; i <= LOTTO_NUMBER_BOUND; i++) {
+            lottoPaper.add(i);
         }
 
+        Collections.shuffle(lottoPaper);
+        lottoPaper = lottoPaper.subList(0, LOTTO_MAX_LENGTH);
+        
+        Collections.sort(lottoPaper);
 
         return lottoPaper;
     }
 
-    public boolean isContains(int[] lottoPaper, int ran) {
-        boolean bool = false;
-
-        for (int i = 0; i < lottoPaper.length; i++) {
-            if (lottoPaper[i] == ran) {
-                bool = true;
-                break;
-            }
-        }
-
-        return bool;
-    }
-
-    public int getLength() {
-        return lottoPaper.length;
+    public int getSize() {
+        return lottoPaper.size();
     }
 
     public int getNumber(int index) {
-        return lottoPaper[index];
+        return lottoPaper.get(index);
+    }
+
+    public boolean contains(int value) {
+        return lottoPaper.contains(value);
     }
 
 }
