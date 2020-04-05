@@ -126,4 +126,16 @@ public class MoneyTest {
     public void buyItemAmount_success(double itemPrice, int buyCount, double expect) throws Exception {
         assertThat(new Money(itemPrice).getTotalPurchaseAmount(buyCount).getMoney()).isEqualTo(expect);
     }
+
+    @DisplayName("투자 금액에 대한 수익률 계산")
+    @Test
+    public void getEarningRate_success() throws Exception {
+        //given
+        Money investment = new Money(14000);
+        Money earn = new Money(5000);
+        //when
+        double earningRate = investment.getEarningRate(earn);
+        System.out.println(earningRate);
+        //then
+    }
 }

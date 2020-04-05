@@ -50,6 +50,10 @@ public class Money {
         return new Money(this.money * money.money);
     }
 
+    public double getEarningRate(Money investmentAmount) {
+        return Math.floor(this.divide(investmentAmount).getMoney() * 100) / 100;
+    }
+
     public double getMoney() {
         return money;
     }

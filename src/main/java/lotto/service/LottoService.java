@@ -82,7 +82,7 @@ public class LottoService {
         int howManyBuyItem = tickets.size();
         Money buyAmount = new Money(LottoTicket.PRICE).getTotalPurchaseAmount(howManyBuyItem);
 
-        double rate = Math.floor(prize.divide(buyAmount).getMoney() * 100) / 100;
+        double rate = prize.getEarningRate(buyAmount);
 
         dto.setEarningRate(rate);
         return dto;
