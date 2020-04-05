@@ -12,7 +12,7 @@ public class LottoTicket {
     public static final double PRICE = 1000;
     private static final String NULL_PARAM_ERROR_MESSAGE = "매개변수:null";
 
-    protected final LottoNumbers numbers;
+    private final LottoNumbers numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
         validateNumbers(numbers);
