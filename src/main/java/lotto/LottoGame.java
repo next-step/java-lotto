@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.domain.IssuedLotto;
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,7 +18,7 @@ public class LottoGame {
     public static void playLotto() {
         int paidMoney = InputView.getMoney();
 
-        IssuedLotto lotto = issueLotto(paidMoney);
+        Lottos lotto = issueLotto(paidMoney);
         ResultView.printIssuedLotto(lotto);
 
         ResultView.printLottoResult(lotto.getResult(getWinningNumbers()), paidMoney);
@@ -36,7 +35,7 @@ public class LottoGame {
         return winningNumbers;
     }
 
-    public static IssuedLotto issueLotto(int price) {
-        return new IssuedLotto(price / LOTTO_PRICE);
+    public static Lottos issueLotto(int price) {
+        return new Lottos(price / LOTTO_PRICE);
     }
 }

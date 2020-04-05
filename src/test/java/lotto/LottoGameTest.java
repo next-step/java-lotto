@@ -1,7 +1,6 @@
 package lotto;
 
-import lotto.domain.IssuedLotto;
-import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,9 +13,9 @@ public class LottoGameTest {
     @CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
     @DisplayName("주어진 금액 만큼의 로또를 발행 여부 테스트")
     public void issueLottoTest(int input, int expect) {
-        IssuedLotto issuedLotto = LottoGame.issueLotto(input);
+        Lottos lottos = LottoGame.issueLotto(input);
 
-        assertThat(issuedLotto.size()).isEqualTo(expect);
+        assertThat(lottos.size()).isEqualTo(expect);
     }
 
 }

@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.*;
 
-public class IssuedLotto {
+public class Lottos {
     private final Set<Lotto> issuedLotto;
 
-    public IssuedLotto(int count) {
+    public Lottos(int count) {
         issuedLotto = new HashSet<>();
 
         for (int i = 0; i < count; i++) {
@@ -13,7 +13,7 @@ public class IssuedLotto {
         }
     }
 
-    public IssuedLotto(Set<Lotto> issuedLotto) {
+    public Lottos(Set<Lotto> issuedLotto) {
         this.issuedLotto = Collections.unmodifiableSet(issuedLotto);
     }
 

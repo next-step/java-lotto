@@ -11,24 +11,24 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class IssuedLottoTest {
+public class LottosTest {
 
     @Test
     @DisplayName("Set 생성자 테스트")
     public void LottoSetParameterConstructorTest() {
         Set<Lotto> expect = generateIssuedLotto();
-        IssuedLotto issuedLotto = new IssuedLotto(expect);
+        Lottos lottos = new Lottos(expect);
 
-        assertThat(issuedLotto.size()).isEqualTo(expect.size());
+        assertThat(lottos.size()).isEqualTo(expect.size());
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 1, 5})
     @DisplayName("주어진 갯수만큼 로또 생성 테스트")
     public void lottoGenerateTest(int input) {
-        IssuedLotto issuedLotto = new IssuedLotto(input);
+        Lottos lottos = new Lottos(input);
 
-        assertThat(issuedLotto.size()).isEqualTo(input);
+        assertThat(lottos.size()).isEqualTo(input);
     }
 
     @Test
@@ -36,10 +36,10 @@ public class IssuedLottoTest {
     public void LottoToStringTest() {
         List<String> toStringExpect = Arrays.asList("[1, 2, 3, 4, 5, 6]","[2, 3, 4, 5, 6, 7]","[3, 4, 5, 6, 7, 8]");
 
-        IssuedLotto issuedLotto = new IssuedLotto(generateIssuedLotto());
+        Lottos lottos = new Lottos(generateIssuedLotto());
 
         for (String expect : toStringExpect) {
-            assertTrue(issuedLotto.toString("[%s]\n", ", ").contains(expect));
+            assertTrue(lottos.toString("[%s]\n", ", ").contains(expect));
         }
     }
 
@@ -47,11 +47,11 @@ public class IssuedLottoTest {
     @DisplayName("당첨 결과 생성 테스트")
     public void winningResultTset(){
         Set<Lotto> expect = generateLottoValueWithNotMatching();
-        IssuedLotto issuedLotto = new IssuedLotto(expect);
+        Lottos lottos = new Lottos(expect);
 
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        Map<Winning, Integer> winning = issuedLotto.getResult(winningNumber);
+        Map<Winning, Integer> winning = lottos.getResult(winningNumber);
 
         assertThat(winning.get(Winning.FIRST_PLACE)).isEqualTo(1);
         assertThat(winning.get(Winning.SECOND_PLACE)).isEqualTo(1);
