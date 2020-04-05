@@ -2,7 +2,10 @@ package lotto.service;
 
 import enums.Rank;
 import lotto.domain.Money;
-import lotto.domain.lotto.*;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.WinLottoTicket;
 import lotto.exception.ValidLottoException;
 import lotto.view.MatchedLottoDto;
 import lotto.view.StatisticsLottoDto;
@@ -41,7 +44,6 @@ public class LottoService {
     }
 
     public MatchedLottoDto passivityPlay(List<String> buyPassivityNumber) {
-        LottoGame lottoGame = new LottoGame();
         List<LottoNumbers> numbers = new ArrayList<>();
 
         for (String str : buyPassivityNumber) {
@@ -53,7 +55,7 @@ public class LottoService {
             numbers.add(LottoNumbers.of(num));
         }
 
-        LottoTickets tickets = lottoGame.createPassivityLottoTicket(numbers);
+        LottoTickets tickets = LottoTickets.createLottoToPassivity(numbers);
 
         MatchedLottoDto dto = new MatchedLottoDto();
         dto.setTickets(tickets);
