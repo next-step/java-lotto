@@ -17,7 +17,7 @@ public class Money {
     }
 
     public static Money buyItemAmount(double itemPrice, int buyCount) {
-        return new Money(itemPrice).multiply(buyCount);
+        return new Money(itemPrice * buyCount);
     }
 
     private void validatePositive(double money) {
@@ -31,31 +31,20 @@ public class Money {
     }
 
     public Money minus(Money money) {
-        return new Money(this.money - money.money);
-    }
-
-    public Money minus(double money) {
-        double calc = this.money - money;
+        double calc = this.money - money.money;
         if (calc < 0) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_INTEGER_ERR_MESSAGE);
         }
-        return new Money(calc);
+
+        return new Money(this.money - money.money);
     }
 
     public Money divide(Money money) {
         return new Money(this.money / money.money);
     }
 
-    public Money divide(double count) {
-        return new Money(this.money / count);
-    }
-
     public Money multiply(Money money) {
         return new Money(this.money * money.money);
-    }
-
-    public Money multiply(double count) {
-        return new Money(this.money * count);
     }
 
     public double getMoney() {

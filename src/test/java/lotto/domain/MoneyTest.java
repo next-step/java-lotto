@@ -85,7 +85,7 @@ public class MoneyTest {
         Money money1 = new Money(int1);
 
         //when
-        money1 = money1.divide(int2);
+        money1 = money1.divide(new Money(int2));
 
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);
@@ -99,7 +99,7 @@ public class MoneyTest {
         Money money1 = new Money(int1);
 
         //when
-        money1 = money1.multiply(int2);
+        money1 = money1.multiply(new Money(int2));
 
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);

@@ -25,7 +25,7 @@ public class LottoApplication {
         int buyCount = lottoService.validateAvailableQuantity(inputBuyCount, money);
         List<String> buyPassivityCount = InputView.inputBuyPassivityLottoNumber(buyCount);
 
-        int availableBuyCount = lottoService.getAvailableBuyCount(money.minus(10));
+        int availableBuyCount = lottoService.getAvailableBuyCount(money);
         ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
 
         MatchedLottoDto passivityDto = lottoService.passivityPlay(buyPassivityCount);
