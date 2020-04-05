@@ -1,29 +1,39 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
+    static final String SIZE_ERROR_MESSAGE = "로또 번호는 6개만 가능합니다.";
+    static final String DUPLICATE_ERROR_MESSAGE = "로또 번호들은 중복될 수 없습니다.";
+    private static final int LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-        validateOfWinningNumbers(lottoNumbers);
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(Integer... numbers) {
+    public Lotto(int... numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
                lottoNumbers.add(new LottoNumber(number));
         }
-        validateOfWinningNumbers(lottoNumbers);
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateOfWinningNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("6개의 로또 번호를 입력해 주세요.");
+    private void validateSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> nonDuplicateNumbers = new HashSet<>(lottoNumbers);
+        if (nonDuplicateNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
 
@@ -32,7 +42,7 @@ public class Lotto {
     }
 
     public int match(Lotto winningLotto) {
-        List<LottoNumber> winning = winningLotto.getLottoNumbers();
+        List<LottoNumber> winning = winningLotto.lottoNumbers;
         int match = 0;
         for (int i = 0; i < winning.size(); i++) {
             match += contains(winning.get(i));
