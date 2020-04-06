@@ -14,8 +14,7 @@ public class LottoTest {
     @Test
     public void createOneLotto() {
         lotto = new Lotto();
-        Set<Integer> numbers = lotto.getLottoNumbers();
-        assertThat(numbers).hasSize(6);
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 
     @Test
@@ -23,6 +22,7 @@ public class LottoTest {
         winningLotto = new Lotto(1, 3, 2, 4, 5, 6);
         Set<Integer> winningNumbers = winningLotto.getLottoNumbers();
         assertThat(winningNumbers).hasSize(6).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(winningLotto).isEqualTo(new Lotto(1, 3, 2, 4, 5, 6));
     }
 
     @Test
