@@ -63,4 +63,19 @@ public class Lotto {
     public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
+
+    public int match(Lotto winningLotto) {
+        int match = 0;
+        for(Integer winningNumber : winningLotto.lottoNumbers) {
+            match += contains(winningNumber);
+        }
+        return match;
+    }
+
+    private int contains(Integer winningNumber) {
+        if (lottoNumbers.contains(winningNumber)) {
+            return 1;
+        }
+        return 0;
+    }
 }
