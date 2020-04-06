@@ -28,7 +28,7 @@ public class LottoMachine {
         }
     }
 
-    public List<Integer> makeAutoTargetNumber() {
+    private List<Integer> makeAutoTargetNumber() {
         Collections.shuffle(LOTTO_NUMBER_RANGE);
         return new ArrayList<>(LOTTO_NUMBER_RANGE.subList(0, 6));
     }
@@ -38,5 +38,14 @@ public class LottoMachine {
     }
 
     public Lottos purchaseAutoLotto(int lottoCount) {
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        for (int i = 0; i < lottoCount; i++) {
+            Lotto lotto = buyLotto(makeAutoTargetNumber());
+            lottos.add(lotto);
+        }
+        return lottos;
+    }
+
+    public Lottos purchaseManualLotto(List<String> manualLotto) {
     }
 }

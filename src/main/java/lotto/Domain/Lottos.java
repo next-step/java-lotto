@@ -31,4 +31,9 @@ public class Lottos {
     public List<Lotto> toList() {
         return Collections.unmodifiableList(lottoList);
     }
+
+    public Lottos combine(Lottos lottos) {
+        lottos.toList().forEach(this::add);
+        return this;
+    }
 }

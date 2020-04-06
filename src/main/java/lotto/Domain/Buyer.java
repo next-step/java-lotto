@@ -21,12 +21,7 @@ public class Buyer {
     }
 
     public Lottos purchaseAutoLotto(int lottoCount) {
-        Lottos lottos = Lottos.init(new ArrayList<>());
-        for (int i = 0; i < lottoCount; i++) {
-            Lotto lotto = lottoMachine.buyLotto(lottoMachine.makeAutoTargetNumber());
-            lottos.add(lotto);
-        }
-        return lottos;
+        return lottoMachine.purchaseAutoLotto(lottoCount);
     }
 
     public WinningLotto winningLottoNumbers(List<Integer> lottoNumbers, int bonus) {

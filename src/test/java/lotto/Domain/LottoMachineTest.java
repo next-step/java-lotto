@@ -63,7 +63,11 @@ public class LottoMachineTest {
 
     @Test
     void makeAutoTargetNumberTest() {
-        assertThat(lottoMachine.makeAutoTargetNumber()).hasSize(6);
+        Lottos lottos = lottoMachine.purchaseAutoLotto(1);
+
+        lottos.toList().stream().forEach(lotto -> {
+            assertThat(lotto.toList()).hasSize(6);
+        });
     }
 
     @ParameterizedTest
