@@ -12,19 +12,19 @@ public class InputView {
     private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String PASSIVITY_BUY_LOTTO_NUMBER_INPUT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 
-    public static String inputBuyAmount() {
+    public static String receiveBuyAmount() {
         System.out.println(BUY_LOTTO_COUNT_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    public static String inputBuyPassivityCount() {
+    public static String receiveBuyPassivityCount() {
         System.out.println(PASSIVITY_BUY_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    public static List<String> inputBuyPassivityLottoNumber(int count) {
+    public static List<String> receiveBuyPassivityLottoNumber(int count) {
         System.out.println(PASSIVITY_BUY_LOTTO_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         List<String> input = new ArrayList<>();
@@ -36,13 +36,13 @@ public class InputView {
         return input;
     }
 
-    public static String inputWinNumber() {
+    public static String receiveWinNumber() {
         System.out.println(LASTWEEK_WIN_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    public static String inputBonusWinNumber() {
+    public static String receiveBonusWinNumber() {
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

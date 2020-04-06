@@ -35,7 +35,7 @@ public class LottoService {
         return count;
     }
 
-    public MatchedLottoDto autoPlay(int gameCount) {
+    public MatchedLottoDto playMatchedLotto(int gameCount) {
         LottoTickets lottoTickets = LottoTickets.from(gameCount);
 
         MatchedLottoDto dto = new MatchedLottoDto();
@@ -43,7 +43,7 @@ public class LottoService {
         return dto;
     }
 
-    public MatchedLottoDto passivityPlay(List<String> buyPassivityNumber) {
+    public MatchedLottoDto playManuallyLotto(List<String> buyPassivityNumber) {
         List<LottoNumbers> numbers = new ArrayList<>();
 
         for (String str : buyPassivityNumber) {

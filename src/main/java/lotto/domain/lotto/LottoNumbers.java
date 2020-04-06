@@ -28,7 +28,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers createLottoNumbersUseInteger(List<Integer> value) {
-        List<LottoNumber> lottoNumberBulk = LottoNumber.createLottoNumberBulk(value);
+        List<LottoNumber> lottoNumberBulk = LottoNumber.of(value);
         return new LottoNumbers(lottoNumberBulk);
     }
 

@@ -47,10 +47,6 @@ public class LottoTicket {
         return matchCount;
     }
 
-    public LottoNumbers getNumbers() {
-        return numbers;
-    }
-
     private boolean isMatchBonus(WinLottoTicket winTicket) {
         LottoNumber bonus = winTicket.getBonus();
         return numbers.getValue().contains(bonus);

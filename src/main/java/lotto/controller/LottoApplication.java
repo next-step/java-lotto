@@ -18,26 +18,26 @@ public class LottoApplication {
     public static void main(String[] args) {
         LottoService lottoService = new LottoService();
 
-        String inputMoney = InputView.inputBuyAmount();
+        String inputMoney = InputView.receiveBuyAmount();
         Money money = lottoService.createMoney(inputMoney);
 
-        String inputBuyCount = InputView.inputBuyPassivityCount();
+        String inputBuyCount = InputView.receiveBuyPassivityCount();
         int buyCount = lottoService.validateAvailableQuantity(inputBuyCount, money);
-        List<String> buyPassivityCount = InputView.inputBuyPassivityLottoNumber(buyCount);
+        List<String> buyPassivityCount = InputView.receiveBuyPassivityLottoNumber(buyCount);
 
         int availableBuyCount = lottoService.getAvailableBuyCount(money);
         ResultView.printLottoBuyCount(buyCount, (availableBuyCount - buyCount));
 
-        MatchedLottoDto passivityDto = lottoService.passivityPlay(buyPassivityCount);
-        MatchedLottoDto autoDto = lottoService.autoPlay(availableBuyCount - buyCount);
+        MatchedLottoDto passivityDto = lottoService.playManuallyLotto(buyPassivityCount);
+        MatchedLottoDto autoDto = lottoService.playMatchedLotto(availableBuyCount - buyCount);
         ResultView.printLoots(passivityDto);
         ResultView.printLoots(autoDto);
 
-        String winNumberInput = InputView.inputWinNumber();
+        String winNumberInput = InputView.receiveWinNumber();
         List<Integer> winNumber = StringUtil.splitStringToIntegers(winNumberInput);
         Collections.sort(winNumber);
 
-        int bonus = StringUtil.parseStringToInt(InputView.inputBonusWinNumber());
+        int bonus = StringUtil.parseStringToInt(InputView.receiveBonusWinNumber());
         WinLottoTicket winLottoTicket = new WinLottoTicket(
                 LottoNumbers.createLottoNumbersUseInteger(winNumber), new LottoNumber(bonus));
 
