@@ -5,20 +5,25 @@ import lotto.exception.NumberDuplicateException;
 import lotto.exception.OutOfRangeException;
 import lotto.util.LottoTicketUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Numbers {
-    private final List<Integer> number;
+    private final Set<Integer> number;
     private int bonusNumber;
 
-    public Numbers(List<Integer> number) {
-        checkLengthValidation(number);
-        this.number = checkNumberValidation(number);
+    public Numbers(List<Integer> inputNumber) {
+        checkLengthValidation(inputNumber);
+        this.number = new HashSet<>(inputNumber);
+        checkNumberValidation(number);
+        checkDuplicate(number);
     }
 
-    public List<Integer> getNumber() {
-        return number;
+
+    public Set<Integer> showNumbers() {
+        return number.stream()
+                .sorted()
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private void checkLengthValidation(List<Integer> numberInformation) {
@@ -27,21 +32,17 @@ public class Numbers {
         }
     }
 
-    private List<Integer> checkNumberValidation(List<Integer> numbers) {
-        List<Integer> tmpList = new ArrayList<>();
+    private Set<Integer> checkNumberValidation(Set<Integer> numbers) {
         for (int number : numbers) {
             checkNumberRange(number);
-            checkDuplicate(tmpList, number);
         }
         return numbers;
     }
 
-    private void checkDuplicate(List<Integer> tmpList, int number) {
-        if (tmpList.contains(number)) {
+    private void checkDuplicate(Set<Integer> inputNumber) {
+        if (inputNumber.size() < 6) {
             throw new NumberDuplicateException();
         }
-        tmpList.add(number);
-
     }
 
     private void checkNumberRange(int number) {
