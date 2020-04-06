@@ -32,18 +32,9 @@ public class LottoTicket {
     public int getMatchCount(WinLottoTicket winTicket) {
         int matchCount = 0;
         for (LottoNumber num : this.numbers.getValue()) {
-            matchCount = increaseCountIfMatch(winTicket, matchCount, num);
+            matchCount += winTicket.getLottoTicket().numbers.getMatchNumberCount(num);
         }
 
-        return matchCount;
-    }
-
-    private int increaseCountIfMatch(WinLottoTicket winTicket, int matchCount, LottoNumber winNumber) {
-        for (LottoNumber number : winTicket.getLottoTicket().numbers.getValue()) {
-            if (number.equals(winNumber)) {
-                matchCount++;
-            }
-        }
         return matchCount;
     }
 
