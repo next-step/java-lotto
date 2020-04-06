@@ -23,10 +23,6 @@ public class Numbers {
         checkDuplicate(numbers);
     }
 
-    public boolean hasBonusNumber(){
-        return numbers.contains(this.bonusNumber);
-    }
-
     public Set<Integer> showNumbers() {
         return numbers.stream()
                 .sorted()

@@ -5,7 +5,7 @@ import java.util.List;
 public class LottoMachine {
     private TicketMoney ticketMoney;
 
-    public LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
+    public static LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
         return new LottoResult(winningTicket, lottoTickets);
     }
 
