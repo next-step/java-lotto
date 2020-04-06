@@ -1,78 +1,45 @@
 package lotto.domain;
 
-import lotto.exception.NotANumberException;
-import lotto.exception.NumberDuplicateException;
-import lotto.exception.OutOfRangeException;
-import lotto.util.LottoTicketUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
-    private final List<Integer> ticket;
+    private static final int NUMBER_LIMIT_COUNT = 6;
+    private static final List<Integer> lottoNumberRange = new ArrayList<>();
+    static {
+        for (int i = 1, end = 45; i <= end; i++) {
+            lottoNumberRange.add(i);
+        }
+    }
+
+    private final Numbers numbers;
 
     public LottoTicket() {
-        this(autoNumberGenerate());
+        Collections.shuffle(lottoNumberRange);
+        this.numbers = new Numbers(new ArrayList<>(lottoNumberRange.subList(0, NUMBER_LIMIT_COUNT)));
     }
 
     public LottoTicket(List<Integer> numbers) {
-        checkLengthValidation(numbers);
-        this.ticket = checkNumberValidation(numbers);
+        this.numbers = new Numbers(numbers);
     }
 
-    public List<Integer> showTicketNumber() {
-        return ticket;
+    public Set<Integer> showTicketNumber() {
+        return numbers.showNumbers();
+    }
+
+    public void bonusNumber(int bonusNumber) {
+        numbers.addBonusNumber(bonusNumber);
     }
 
     public int findMatchCount(LottoTicket lottoWinningTicket) {
         List<Integer> copyList = new ArrayList<>(lottoWinningTicket.showTicketNumber());
-        copyList.removeAll(ticket);
-        return LottoTicketUtils.RANGE - copyList.size();
+        copyList.removeAll(numbers.showNumbers());
+        return NUMBER_LIMIT_COUNT - copyList.size();
     }
 
-    private static List<Integer> autoNumberGenerate() {
-        List<Integer> lotto = new ArrayList<>();
-
-        Collections.shuffle(LottoTicketUtils.lottoNumberRange);
-        List<Integer> randomNumber = LottoTicketUtils.lottoNumberRange.subList(0, LottoTicketUtils.RANGE);
-
-        for (Integer number : randomNumber) {
-            lotto.add(number);
-        }
-
-        Collections.sort(lotto);
-        return lotto;
-    }
-
-    private void checkLengthValidation(List<Integer> numberInformation) {
-        if (numberInformation.size() != LottoTicketUtils.RANGE) {
-            throw new OutOfRangeException();
-        }
-    }
-
-    private List<Integer> checkNumberValidation(List<Integer> numbers) {
-        List<Integer> winningNumber = new ArrayList<>();
-        for (int number : numbers) {
-            checkNumberRange(number);
-            checkDuplicateThenAdd(winningNumber, number);
-        }
-        return winningNumber;
-    }
-
-    private void checkDuplicateThenAdd(List<Integer> winningNumber, int number) {
-        if (winningNumber.contains(number)) {
-            throw new NumberDuplicateException();
-        }
-        winningNumber.add(number);
-    }
-    private void checkNumberRange(int number) {
-        if (number < LottoTicketUtils.TICKET_MIN_NUMBER || number > LottoTicketUtils.TICKET_MAX_NUMBER) {
-            throw new NotANumberException(number);
-        }
-    }
-
-    public boolean hasBonusNumber(int bonusNumber) {
-        return ticket.contains(bonusNumber);
+    public boolean hasBonusNumber(LottoTicket ticket) {
+        return numbers.hasBonusNumber(ticket.numbers.getBonusNumber());
     }
 }

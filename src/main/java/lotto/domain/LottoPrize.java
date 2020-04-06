@@ -27,9 +27,6 @@ public enum LottoPrize {
         return message;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
 
     public int getPrice() {
         return price;

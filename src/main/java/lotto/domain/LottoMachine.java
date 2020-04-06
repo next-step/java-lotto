@@ -1,44 +1,29 @@
 package lotto.domain;
 
-import lotto.exception.MinimumPurchaseAmountException;
-import lotto.util.LottoTicketUtils;
+import java.util.List;
 
 public class LottoMachine {
-    private static final String PURCHASE_MESSAGE = "%d개를 구매하셨습니다.";
+    private TicketMoney ticketMoney;
 
-    public static LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets, int bonusNumber) {
-        LottoResult result = new LottoResult();
-        LottoPrize lottoPrize;
-
-        for (LottoTicket ticket : lottoTickets.ticketList()) {
-            int matched = ticket.findMatchCount(winningTicket);
-            boolean hasBonusNumber = ticket.hasBonusNumber(bonusNumber);
-            lottoPrize = LottoPrize.find(matched, hasBonusNumber);
-            result.increase(lottoPrize);
-        }
-        return result;
+    public static LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
+        return new LottoResult(winningTicket, lottoTickets);
     }
 
-    public LottoTickets purchaseTicket(String purchaseAmount) {
-        int ticketCount = parseToInt(purchaseAmount) / LottoTicketUtils.TICKET_PRICE;
-        System.out.println(String.format(PURCHASE_MESSAGE, ticketCount));
-        return new LottoTickets(ticketCount);
+    public void purchaseTotalTicket(int purchaseAmount) {
+        this.ticketMoney = new  TicketMoney(purchaseAmount);
     }
 
-    private static void negativeNumberValidator(int purchaseAmount) {
-        if (purchaseAmount < LottoTicketUtils.TICKET_PRICE) {
-            throw new MinimumPurchaseAmountException();
-        }
+    public int purchaseManualTicket(int manualTicketCount) {
+        this.ticketMoney.manualPurchase(manualTicketCount);
+        return this.ticketMoney.getManualCount();
     }
-    private static int parseToInt(String input) {
-        int purchaseAmount = 0;
-        try {
-            purchaseAmount = Integer.parseInt(input);
-            negativeNumberValidator(purchaseAmount);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("" + e.getMessage());
-        }
-        return purchaseAmount;
+
+    public LottoTickets myTickets(){
+        return new LottoTickets(ticketMoney.getAutoCount());
+    }
+
+    public LottoTickets myTickets(List<LottoTicket> manualTickets){
+        return new LottoTickets(ticketMoney.getAutoCount(), manualTickets);
     }
 
 }
