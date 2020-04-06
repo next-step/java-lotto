@@ -21,7 +21,7 @@ public class LottoController {
         this.buyer = buyer;
     }
 
-    public int purchaseLotto() {
+    public void purchaseLotto() {
         int price = inputView.userInstructionAmount();
         int count = buyer.payToLotto(price);
         outputView.userInstructionCount(count);
@@ -37,7 +37,6 @@ public class LottoController {
 
         outputView.LottoResult(lottoResult);
 
-        return count;
     }
 
     private List<Integer> winnerList(String winnerLottoNumbers) {

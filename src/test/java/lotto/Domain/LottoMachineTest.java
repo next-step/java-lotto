@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,9 +44,13 @@ public class LottoMachineTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 5, 1})
     void boughtManualLottoTest(int input) {
-        Lottos lottos = lottoMachine.purchaseManualLotto(input);
+        List<String> manualLotto = new ArrayList<>();
+        manualLotto.add("1 2 3 4 5 6");
+        manualLotto.add("2 3 4 5 6 7");
+        manualLotto.add("3 4 5 6 7 8");
+        Lottos lottos = lottoMachine.purchaseManualLotto(manualLotto);
 
-        assertThat(lottos.toList()).hasSize(Integer.parseInt(expected));
+        assertThat(lottos.toList()).hasSize(input);
     }
 
     @ParameterizedTest

@@ -36,4 +36,7 @@ public class LottoMachine {
     public Lotto buyLotto(List<Integer> targetNumbers) {
         return Lotto.init(targetNumbers);
     }
+
+    public Lottos purchaseAutoLotto(int lottoCount) {
+    }
 }
