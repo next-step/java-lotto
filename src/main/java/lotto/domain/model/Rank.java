@@ -1,22 +1,22 @@
-package lotto.domain;
+package lotto.domain.model;
 
 import static lotto.domain.LottoGame.LOTTO_NO_COUNT;
 
 import java.util.Arrays;
 
 public enum Rank {
-  FAILURE(0, false, 0),
-  FIFTH(3, false, 5_000),
-  FOURTH(4, false, 50_000),
+  FAILURE(0, null, 0),
+  FIFTH(3, null, 5_000),
+  FOURTH(4, null, 50_000),
   THIRD(5, false, 1_500_000),
   SECOND(5, true, 30_000_000),
-  FIRST(6, false, 2_000_000_000);
+  FIRST(6, null, 2_000_000_000);
 
   private int matchCount;
-  private boolean shouldMatchBonus;
+  private Boolean shouldMatchBonus;
   private int winningMoney;
 
-  Rank(int matchCount, boolean shouldMatchBonus, int winningMoney) {
+  Rank(int matchCount, Boolean shouldMatchBonus, int winningMoney) {
     this.matchCount = matchCount;
     this.shouldMatchBonus = shouldMatchBonus;
     this.winningMoney = winningMoney;
@@ -50,6 +50,7 @@ public enum Rank {
   }
 
   private boolean matchRank(int matchCount, boolean bonusMatched) {
-    return this.matchCount == matchCount && (!this.shouldMatchBonus || bonusMatched);
+    return this.matchCount == matchCount &&
+        (this.shouldMatchBonus == null || this.shouldMatchBonus.equals(bonusMatched));
   }
 }
