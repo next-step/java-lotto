@@ -10,10 +10,12 @@ public enum Winning {
     FOURTH_PLACE(3, 5000),
     LOSE(0, 0);
 
-    private int matchCount;
-    private int winningPrice;
+    private static final int MIN_WINNING_CONDITION = 3;
 
     private static Map<Integer, Winning> winningTypes;
+
+    private int matchCount;
+    private int winningPrice;
 
     static {
         winningTypes = new LinkedHashMap<>();
@@ -28,7 +30,7 @@ public enum Winning {
     }
 
     public static Winning getWinningType(int matchCount) {
-        if (matchCount < 3) {
+        if (matchCount < MIN_WINNING_CONDITION) {
             return LOSE;
         }
 
