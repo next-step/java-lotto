@@ -64,11 +64,11 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public long match(Lotto winningLotto) {
+    public Rank match(Lotto winningLotto) {
         long match = winningLotto.lottoNumbers.stream()
                 .filter(winningNumber -> lottoNumbers.contains(winningNumber))
                 .count();
-        return match;
+        return Rank.valueOf(match);
     }
 
     @Override

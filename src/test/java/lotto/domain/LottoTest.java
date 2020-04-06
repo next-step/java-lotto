@@ -57,13 +57,13 @@ public class LottoTest {
     public void match_6개_테스트() {
         lotto = new Lotto(1, 2, 3, 4, 5, 6);
         winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.match(winningLotto)).isEqualTo(6);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIRST);
     }
 
     @Test
     public void match_3개_테스트() {
         lotto = new Lotto(1, 2, 3, 4, 5, 6);
         winningLotto = new Lotto(1, 2, 3, 14, 15, 16);
-        assertThat(lotto.match(winningLotto)).isEqualTo(3);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIFTH);
     }
 }
