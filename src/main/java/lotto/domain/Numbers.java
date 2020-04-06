@@ -9,19 +9,22 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Numbers {
-    private final Set<Integer> number;
+    private final Set<Integer> numbers;
     private int bonusNumber;
 
     public Numbers(List<Integer> inputNumber) {
         checkLengthValidation(inputNumber);
-        this.number = new HashSet<>(inputNumber);
-        checkNumberValidation(number);
-        checkDuplicate(number);
+        this.numbers = new HashSet<>(inputNumber);
+        checkNumberValidation(numbers);
+        checkDuplicate(numbers);
     }
 
+    public boolean hasBonusNumber(){
+        return numbers.contains(this.bonusNumber);
+    }
 
     public Set<Integer> showNumbers() {
-        return number.stream()
+        return numbers.stream()
                 .sorted()
                 .collect(Collectors.toCollection(LinkedHashSet::new));
     }
@@ -40,7 +43,7 @@ public class Numbers {
     }
 
     private void checkDuplicate(Set<Integer> inputNumber) {
-        if (inputNumber.size() < 6) {
+        if (inputNumber.size() < LottoTicketUtils.RANGE) {
             throw new NumberDuplicateException();
         }
     }
@@ -51,4 +54,15 @@ public class Numbers {
         }
     }
 
+    public void addBonusNumber(int bonusNumber) {
+        checkNumberRange(bonusNumber);
+        bonusNumberValidator(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    private void bonusNumberValidator(int bonusNumber) {
+        if(numbers.contains(bonusNumber)){
+            throw new RuntimeException("중복된 로또 번호");
+        }
+    }
 }
