@@ -24,9 +24,13 @@ public class LottoController {
     public void purchaseLotto() {
         int price = inputView.userInstructionAmount();
         int count = buyer.payToLotto(price);
-        outputView.userInstructionCount(count);
 
-        Lottos lottos = buyer.purchaseAutoLotto(count);
+        List<String> manualLottoNumbers = inputView.userInstructionManually();
+        Lottos lottos = buyer.purchaseManualLotto(manualLottoNumbers);
+
+        lottos = buyer.purchaseAutoLotto(lottos, (count - lottos.toList().size()));
+
+        outputView.userInstructionCount(manualLottoNumbers.size(), (lottos.toList().size() - manualLottoNumbers.size()));
         outputView.boughtLottoList(lottos);
 
         String winnerLottoNumbers = inputView.userInstructionWinner();

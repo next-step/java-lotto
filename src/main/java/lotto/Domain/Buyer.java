@@ -24,8 +24,8 @@ public class Buyer {
         return lottoMachine.purchaseManualLotto(manualLotto);
     }
 
-    public Lottos purchaseAutoLotto(int lottoCount) {
-        return lottoMachine.purchaseAutoLotto(lottoCount);
+    public Lottos purchaseAutoLotto(Lottos lottos, int lottoCount) {
+        return lottoMachine.purchaseAutoLotto(lottos, lottoCount);
     }
 
     public WinningLotto winningLottoNumbers(List<Integer> lottoNumbers, int bonus) {

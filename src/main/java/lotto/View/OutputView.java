@@ -8,6 +8,8 @@ import lotto.Domain.Lottos;
 import java.util.Map;
 
 public class OutputView {
+    private static final String INFORMATION_BUY_MANUAL = "수동으로 ";
+    private static final String INFORMATION_BUY_AUTO = "장, 자동으로 ";
     private static final String INFORMATION_BUY_COUNT = "개를 구매했습니다.";
     private static final String INFORMATION_RESULT = "당첨 통계";
 
@@ -18,8 +20,8 @@ public class OutputView {
         return new OutputView();
     }
 
-    public void userInstructionCount(int count) {
-        System.out.println(count + INFORMATION_BUY_COUNT);
+    public void userInstructionCount(int manualCount, int autoCount) {
+        System.out.println(INFORMATION_BUY_MANUAL + manualCount + INFORMATION_BUY_AUTO + autoCount + INFORMATION_BUY_COUNT);
     }
 
     public void boughtLottoList(Lottos lottos) {

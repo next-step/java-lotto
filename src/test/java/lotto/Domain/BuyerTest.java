@@ -35,7 +35,7 @@ public class BuyerTest {
     @ParameterizedTest
     @ValueSource(ints = {14, 3, 1})
     void buyAutoLottoTest(int input) {
-        Lottos lottos = buyer.purchaseAutoLotto(input);
+        Lottos lottos = buyer.purchaseAutoLotto(Lottos.init(new ArrayList<>()), input);
 
         assertThat(lottos.toList()).hasSize(input);
     }

@@ -40,13 +40,12 @@ public class LottoMachine {
         return Lotto.init(targetNumbers);
     }
 
-    public Lottos purchaseAutoLotto(int lottoCount) {
-        Lottos lottos = Lottos.init(new ArrayList<>());
+    public Lottos purchaseAutoLotto(Lottos manualLottos, int lottoCount) {
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = buyLotto(makeAutoTargetNumber());
-            lottos.add(lotto);
+            manualLottos.add(lotto);
         }
-        return lottos;
+        return manualLottos;
     }
 
     public Lottos purchaseManualLotto(List<String> manualLotto) {
