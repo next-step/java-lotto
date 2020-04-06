@@ -88,4 +88,17 @@ class LottoNumbersTest {
                 () -> new LottoNumbers(duplicateNumber)
         ).isInstanceOf(ValidLottoException.class).hasMessage("로또생성 실패 : 번호는 중복될 수 없습니다.");
     }
+
+    @DisplayName("일치하는 번호의 개수를 반환")
+    @Test
+    public void getMatchNumberCount_success() throws Exception {
+        //given
+        LottoNumbers lottoNumbers = LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        //when
+        long count = lottoNumbers.getMatchNumberCount(new LottoNumber(1));
+
+        //then
+        assertThat(count).isEqualTo(1);
+    }
 }

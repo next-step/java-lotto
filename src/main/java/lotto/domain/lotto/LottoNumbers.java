@@ -31,6 +31,12 @@ public class LottoNumbers {
         this.value = Collections.unmodifiableList(new ArrayList<>(copy.value));
     }
 
+    public long getMatchNumberCount(LottoNumber lottoNumber) {
+        return this.value.stream()
+                .filter(x -> x.equals(lottoNumber))
+                .count();
+    }
+
     private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_VALID_ONLY_6_MESSAGE);
