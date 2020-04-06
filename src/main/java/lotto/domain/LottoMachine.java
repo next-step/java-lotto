@@ -5,17 +5,8 @@ import java.util.List;
 public class LottoMachine {
     private static final String PURCHASE_MESSAGE = "%d개를 구매하셨습니다.";
 
-    public static LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets, int bonusNumber) {
-        LottoResult result = new LottoResult();
-        LottoPrize lottoPrize;
-
-        for (LottoTicket ticket : lottoTickets.ticketList()) {
-            int matched = ticket.findMatchCount(winningTicket);
-            boolean hasBonusNumber = ticket.hasBonusNumber(bonusNumber);
-            lottoPrize = LottoPrize.find(matched, hasBonusNumber);
-            result.increase(lottoPrize);
-        }
-        return result;
+    public static LottoResult winningResult(LottoTicket winningTicket, LottoTickets lottoTickets) {
+        return new LottoResult(winningTicket, lottoTickets);
     }
 
     public LottoTickets purchaseTicket(String purchaseAmount) {

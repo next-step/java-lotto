@@ -14,19 +14,28 @@ public class LottoResult {
                 .forEach(lottoPrize ->
                         lottoResult.put(lottoPrize, ZERO)
                 );
-        return lottoResult;
+    }
+
+    public LottoResult() {
+    }
+
+    public LottoResult(LottoTicket winningTicket, LottoTickets myTickets) {
+        for (LottoTicket ticket : myTickets.ticketList()) {
+            int matched = ticket.findMatchCount(winningTicket);
+            increase(LottoPrize.find(matched, ticket.hasBonusNumber(winningTicket)));
+        }
     }
 
     public int prizeCount(LottoPrize prize) {
         return lottoResult.get(prize);
     }
 
-    public void increase(LottoPrize prize) {
-        lottoResult.put(prize, lottoResult.get(prize) + 1);
-    }
-
     public double average() {
         return totalPrice() / totalTicketCost();
+    }
+
+    public void increase(LottoPrize prize) {
+        lottoResult.put(prize, lottoResult.get(prize) + 1);
     }
 
     private double totalPrice() {
