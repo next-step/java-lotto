@@ -64,19 +64,11 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public int match(Lotto winningLotto) {
-        int match = 0;
-        for(Integer winningNumber : winningLotto.lottoNumbers) {
-            match += contains(winningNumber);
-        }
+    public long match(Lotto winningLotto) {
+        long match = winningLotto.lottoNumbers.stream()
+                .filter(winningNumber -> lottoNumbers.contains(winningNumber))
+                .count();
         return match;
-    }
-
-    private int contains(Integer winningNumber) {
-        if (lottoNumbers.contains(winningNumber)) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override
