@@ -5,7 +5,10 @@ import java.util.*;
 public class Lotto {
     private static final int LOTTO_NUMBER_MIN = 1;
     private static final int LOTTO_NUMBER_MAX = 45;
+    // TODO: 더 좋은 변수명 찾기
+    private static final int LOTTO_NUMBER_LIMIT = 6;
     private static List<Integer> numbers;
+    // TODO: 객체로 포장
     private final Set<Integer> lottoNumbers;
 
     static {
@@ -19,10 +22,18 @@ public class Lotto {
         this.lottoNumbers = createNumbers();
     }
 
+    public Lotto(Integer... numbers) {
+        Set<Integer> lottoNumbers = new TreeSet<>();
+        for(Integer number : numbers) {
+            lottoNumbers.add(number);
+        }
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private Set<Integer> createNumbers() {
         Collections.shuffle(numbers);
         Set<Integer> lottoNumbers = new TreeSet<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < LOTTO_NUMBER_LIMIT; i++) {
             lottoNumbers.add(numbers.get(i));
         }
         return lottoNumbers;
