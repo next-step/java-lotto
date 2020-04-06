@@ -15,8 +15,8 @@ public class LottoNumberTest {
     @DisplayName("Number 생성 테스트")
     void createNewNumber() {
         final int number = 24;
-        final LottoNumber lottoNumber = LottoNumber.newInstance(number);
-        assertThat(lottoNumber).isEqualTo(LottoNumber.newInstance(number));
+        final LottoNumber lottoNumber = LottoNumber.of(number);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(number));
     }
 
     @ParameterizedTest
@@ -24,7 +24,7 @@ public class LottoNumberTest {
     @DisplayName("Number 생성시 특정 값을 만들 때 에러 발생")
     void ErrorWhenCreateNumberWithOuterNumber(final int number) {
         assertThatThrownBy(()->{
-            LottoNumber.newInstance(number);
+            LottoNumber.of(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

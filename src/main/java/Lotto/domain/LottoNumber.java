@@ -13,7 +13,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static LottoNumber newInstance(int number) {
+    public static LottoNumber of(int number) {
         return new LottoNumber(number);
     }
 

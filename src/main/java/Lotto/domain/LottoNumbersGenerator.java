@@ -15,7 +15,7 @@ public class LottoNumbersGenerator {
         Collections.shuffle(LOTTO_NUMBER_LIST);
         return new LottoNumbers(LOTTO_NUMBER_LIST.subList(0, LottoNumbers.LOTTO_SIZE)
                 .stream()
-                .map(LottoNumber::newInstance)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
     }
 }
