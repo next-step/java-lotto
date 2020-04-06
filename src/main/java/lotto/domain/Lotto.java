@@ -23,11 +23,18 @@ public class Lotto {
     }
 
     public Lotto(Integer... numbers) {
+        validateSize(numbers);
         Set<Integer> lottoNumbers = new TreeSet<>();
         for(Integer number : numbers) {
             lottoNumbers.add(number);
         }
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateSize(Integer[] numbers) {
+        if (numbers.length != LOTTO_NUMBER_LIMIT) {
+            throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
+        }
     }
 
     private Set<Integer> createNumbers() {
