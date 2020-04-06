@@ -8,7 +8,7 @@ public class Lottos {
     private List<Lotto> lottoList;
 
     private Lottos(List<Lotto> lottoList) {
-        this.lottoList = lottoList;
+        this.lottoList = new ArrayList<>(lottoList);
     }
 
     public static Lottos init(List<Lotto> lottoList) {
@@ -33,7 +33,9 @@ public class Lottos {
     }
 
     public Lottos combine(Lottos lottos) {
-        lottos.toList().forEach(this::add);
-        return this;
+        Lottos conbineLottos = Lottos.init(this.lottoList);
+        conbineLottos.lottoList.addAll(lottos.toList());
+
+        return conbineLottos;
     }
 }

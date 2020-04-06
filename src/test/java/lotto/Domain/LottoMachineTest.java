@@ -41,16 +41,14 @@ public class LottoMachineTest {
         });
     }
 
-    @ParameterizedTest
-    @ValueSource(ints = {3, 5, 1})
-    void boughtManualLottoTest(int input) {
-        List<String> manualLotto = new ArrayList<>();
-        manualLotto.add("1 2 3 4 5 6");
-        manualLotto.add("2 3 4 5 6 7");
-        manualLotto.add("3 4 5 6 7 8");
+    @Test
+    void boughtManualLottoTest() {
+        List<String> manualLotto = new ArrayList<>(Arrays.asList("1, 2, 3, 4, 5, 6"
+                , "2, 3, 4, 5, 6, 7"
+                , "3, 4, 5, 6, 7, 8"));
         Lottos lottos = lottoMachine.purchaseManualLotto(manualLotto);
 
-        assertThat(lottos.toList()).hasSize(input);
+        assertThat(lottos.toList()).hasSize(3);
     }
 
     @ParameterizedTest

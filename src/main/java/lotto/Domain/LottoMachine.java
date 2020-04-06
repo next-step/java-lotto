@@ -2,6 +2,7 @@ package lotto.Domain;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,5 +48,16 @@ public class LottoMachine {
     }
 
     public Lottos purchaseManualLotto(List<String> manualLotto) {
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        for (int i = 0; i < manualLotto.size(); i++) {
+            List<Integer> manualPick = Arrays.stream(manualLotto.get(i).split(", "))
+                    .mapToInt(Integer::parseInt)
+                    .boxed()
+                    .collect(Collectors.toList());;
+            Lotto lotto = buyLotto(manualPick);
+            lottos.add(lotto);
+        }
+
+        return lottos;
     }
 }
