@@ -45,13 +45,13 @@ public class LottoMachineTest {
     @CsvSource(value = {"14000:14", "1000:1", "3000:3"}, delimiter = ':')
     void boughtAutoLottoTest(String input, String expected) {
         int lottoCount = lottoMachine.boughtLottoCount(Integer.parseInt(input));
-        Lottos lottos = lottoMachine.purchaseAutoLotto(lottoCount);
+        Lottos lottos = lottoMachine.purchaseAutoLotto(Lottos.init(new ArrayList<>()), lottoCount);
         assertThat(lottos.toList()).hasSize(Integer.parseInt(expected));
     }
 
     @Test
     void makeAutoTargetNumberTest() {
-        Lottos lottos = lottoMachine.purchaseAutoLotto(1);
+        Lottos lottos = lottoMachine.purchaseAutoLotto(Lottos.init(new ArrayList<>()), 1);
 
         lottos.toList().stream().forEach(lotto -> {
             assertThat(lotto.toList()).hasSize(6);

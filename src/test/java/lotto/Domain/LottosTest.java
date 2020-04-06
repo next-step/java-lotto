@@ -51,7 +51,7 @@ public class LottosTest {
     }
 
     @Test
-    void combineNullTest() {
+    void combineEmptyTest() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 13, 4, 5, 6);
         Lotto lotto = Lotto.init(lottoNumbers);
         List<Lotto> lottoList = Arrays.asList(lotto, lotto);
