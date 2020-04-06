@@ -31,13 +31,13 @@ public class LottoNumbers {
         this.value = Collections.unmodifiableList(new ArrayList<>(copy.value));
     }
 
-    private static void validateSize(List<LottoNumber> numbers) {
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_VALID_ONLY_6_MESSAGE);
         }
     }
 
-    private static void validateDuplicate(List<LottoNumber> numbers) {
+    private void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
             throw new ValidLottoException(LOTTO_DUPLICATE_MESSAGE);
