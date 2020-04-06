@@ -27,11 +27,6 @@ public class LottoNumbers {
         return new LottoNumbers(numbers);
     }
 
-    public static LottoNumbers createLottoNumbersUseInteger(List<Integer> value) {
-        List<LottoNumber> lottoNumberBulk = LottoNumber.of(value);
-        return new LottoNumbers(lottoNumberBulk);
-    }
-
     public LottoNumbers(LottoNumbers copy) {
         this.value = Collections.unmodifiableList(new ArrayList<>(copy.value));
     }

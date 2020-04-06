@@ -40,7 +40,7 @@ class LottoNumbersTest {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        LottoNumbers lottoNumbers = LottoNumbers.createLottoNumbersUseInteger(numbers);
+        LottoNumbers lottoNumbers = LottoNumbers.of(numbers);
 
         //then
         assertThat(lottoNumbers.getValue().size()).isEqualTo(6);

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoServiceTest {
 
-    LottoNumbers winNumber = LottoNumbers.createLottoNumbersUseInteger(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    LottoNumbers winNumber = LottoNumbers.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
     @DisplayName("구매할 금액과 수동으로 사려는 로또의 수량 비교")
     @ParameterizedTest

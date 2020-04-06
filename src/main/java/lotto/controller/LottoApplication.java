@@ -39,7 +39,7 @@ public class LottoApplication {
 
         int bonus = StringUtil.parseStringToInt(InputView.receiveBonusWinNumber());
         WinLottoTicket winLottoTicket = new WinLottoTicket(
-                LottoNumbers.createLottoNumbersUseInteger(winNumber), new LottoNumber(bonus));
+                LottoNumbers.of(winNumber), new LottoNumber(bonus));
 
         List<LottoTicket> ticketTmp = new ArrayList<>();
         ticketTmp.addAll(passivityDto.getTickets().getTickets());

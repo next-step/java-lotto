@@ -22,7 +22,7 @@ public class LottoTickets implements Cloneable {
     public static LottoTickets from(int count) {
         List<LottoTicket> result = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            LottoNumbers numbers = LottoNumbers.createLottoNumbersUseInteger(LottoNumberAutoGenerator.generateLottoNumber());
+            LottoNumbers numbers = LottoNumbers.of(LottoNumberAutoGenerator.generateLottoNumber());
             result.add(new LottoTicket(numbers));
         }
         return new LottoTickets(result);
