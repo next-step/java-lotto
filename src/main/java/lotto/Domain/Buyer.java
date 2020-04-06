@@ -20,6 +20,10 @@ public class Buyer {
         return lottoMachine.boughtLottoCount(amount);
     }
 
+    public Lottos purchaseManualLotto(List<String> manualLotto) {
+        return lottoMachine.purchaseManualLotto(manualLotto);
+    }
+
     public Lottos purchaseAutoLotto(int lottoCount) {
         return lottoMachine.purchaseAutoLotto(lottoCount);
     }

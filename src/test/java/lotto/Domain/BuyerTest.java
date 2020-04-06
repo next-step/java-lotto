@@ -41,7 +41,7 @@ public class BuyerTest {
     }
 
     @Test
-    void buyManualLottoTest(int input) {
+    void buyManualLottoTest() {
         List<String> manualLotto = new ArrayList<>(Arrays.asList("1, 2, 3, 4, 5, 6"
                 , "2, 3, 4, 5, 6, 7"
                 , "3, 4, 5, 6, 7, 8"));

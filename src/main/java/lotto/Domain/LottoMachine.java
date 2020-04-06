@@ -1,6 +1,8 @@
 package lotto.Domain;
 
 
+import lotto.Constants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
