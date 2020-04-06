@@ -1,3 +1,5 @@
+package calculator;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +20,11 @@ public class Numbers {
     }
 
     public int sum() {
-        return numbers.stream()
-                .map(Number::get)
-                .reduce(0, Integer::sum);
+        Number result = new Number(0);
+        for (Number number : numbers) {
+            result = number.add(result);
+        }
+        return result.getNumber();
     }
 
 }
