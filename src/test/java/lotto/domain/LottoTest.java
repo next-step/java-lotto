@@ -37,4 +37,18 @@ public class LottoTest {
             lotto = new Lotto(1, 2, 3, 4, 5, 6, 7, 8, 9);
         }).withMessage("로또 번호는 6개만 가능합니다.");
     }
+
+    @Test
+    public void createLottoWithDuplicateInputThrowException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lotto = new Lotto(1, 1, 2, 3, 4, 7);
+        }).withMessage("로또 번호들은 중복될 수 없습니다.");
+    }
+
+    @Test
+    public void createLottoWithInvalidNumberThrowException() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lotto = new Lotto(0, 1, 2, 3, 4, 46);
+        }).withMessage("로또 번호는 1부터 45까지만 가능합니다.");
+    }
 }

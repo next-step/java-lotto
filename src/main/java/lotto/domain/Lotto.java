@@ -26,14 +26,28 @@ public class Lotto {
         validateSize(numbers);
         Set<Integer> lottoNumbers = new TreeSet<>();
         for(Integer number : numbers) {
+            validateNumber(number);
             lottoNumbers.add(number);
         }
+        validateDuplicate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validateNumber(Integer number) {
+        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다.");
+        }
     }
 
     private void validateSize(Integer[] numbers) {
         if (numbers.length != LOTTO_NUMBER_LIMIT) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
+        }
+    }
+
+    private void validateDuplicate(Set<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_LIMIT) {
+            throw new IllegalArgumentException("로또 번호들은 중복될 수 없습니다.");
         }
     }
 
