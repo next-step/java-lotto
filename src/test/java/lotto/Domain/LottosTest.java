@@ -50,6 +50,20 @@ public class LottosTest {
                 .hasSize(4);
     }
 
+    @Test
+    void combineNullTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 13, 4, 5, 6);
+        Lotto lotto = Lotto.init(lottoNumbers);
+        List<Lotto> lottoList = Arrays.asList(lotto, lotto);
+        Lottos lottos = Lottos.init(lottoList);
+        Lottos lottosEmpty= Lottos.init(new ArrayList<>());
+
+        lottos = lottos.combine(lottosEmpty);
+
+        assertThat(lottos.toList())
+                .hasSize(2);
+    }
+
     @ParameterizedTest
     @CsvSource(value = {"1 2 13 4 5 6:5", "13 24 1 5 42 7:50", "1 2 13 35 24 42:2000000"}, delimiter = ':')
     void statisticsTest(String input, String expected) {
