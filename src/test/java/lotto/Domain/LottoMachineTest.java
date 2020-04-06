@@ -41,16 +41,6 @@ public class LottoMachineTest {
         });
     }
 
-    @Test
-    void boughtManualLottoTest() {
-        List<String> manualLotto = new ArrayList<>(Arrays.asList("1, 2, 3, 4, 5, 6"
-                , "2, 3, 4, 5, 6, 7"
-                , "3, 4, 5, 6, 7, 8"));
-        Lottos lottos = lottoMachine.purchaseManualLotto(manualLotto);
-
-        assertThat(lottos.toList()).hasSize(3);
-    }
-
     @ParameterizedTest
     @CsvSource(value = {"14000:14", "1000:1", "3000:3"}, delimiter = ':')
     void boughtAutoLottoTest(String input, String expected) {

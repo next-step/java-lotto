@@ -41,6 +41,16 @@ public class BuyerTest {
     }
 
     @Test
+    void buyManualLottoTest(int input) {
+        List<String> manualLotto = new ArrayList<>(Arrays.asList("1, 2, 3, 4, 5, 6"
+                , "2, 3, 4, 5, 6, 7"
+                , "3, 4, 5, 6, 7, 8"));
+        Lottos lottos = buyer.purchaseManualLotto(manualLotto);
+
+        assertThat(lottos.toList()).hasSize(3);
+    }
+
+    @Test
     void winningLottoTest() {
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         int bonus = 7;
