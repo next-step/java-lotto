@@ -20,11 +20,12 @@ public class LottoMachineInputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static void show(List<Integer> showTicketNumber) {
+
+    public static void show(Set<Integer> showTicketNumber) {
         System.out.println(showTicketNumber.toString());
     }
 
-    public static String lottoPurchaseView() {
+    public static int lottoPurchaseView() {
         System.out.println(PURCHASE_MESSAGE);
         return sc.nextLine();
     }
