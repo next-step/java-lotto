@@ -67,11 +67,4 @@ public class LottoMachineInputView {
         System.out.println(BONUS_NUMBER_MESSAGE);
         return sc.nextInt();
     }
-    public static LottoResult checkWinningResult(LottoTicket lottoWinningTicket, LottoTickets lottoTickets, int bonusNumber) {
-        return LottoMachine.winningResult(lottoWinningTicket, lottoTickets, bonusNumber);
-    }
-
-    private static String[] split(String delimiter) {
-        return sc.nextLine().split(delimiter);
-    }
 }
