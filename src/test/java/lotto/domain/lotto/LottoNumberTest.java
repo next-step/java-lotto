@@ -31,7 +31,7 @@ class LottoNumberTest {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         //when
-        List<LottoNumber> lottoNumberBulk = LottoNumber.of(numbers);
+        List<LottoNumber> lottoNumberBulk = LottoNumber.newList(numbers);
 
         //then
         assertThat(lottoNumberBulk.size()).isEqualTo(6);

@@ -19,7 +19,7 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static List<LottoNumber> of(List<Integer> numbers) {
+    public static List<LottoNumber> newList(List<Integer> numbers) {
         List<LottoNumber> result = new ArrayList<>();
         for (Integer integer : numbers) {
             result.add(new LottoNumber(integer));
