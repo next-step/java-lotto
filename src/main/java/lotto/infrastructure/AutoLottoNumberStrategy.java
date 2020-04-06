@@ -1,8 +1,8 @@
 package lotto.infrastructure;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberStrategy;
-import lotto.domain.LottoNumbers;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumberStrategy;
+import lotto.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.machine.LottoMachine;
+import lotto.domain.machine.LottoMoney;
+import lotto.domain.machine.LottoTickets;
 import lotto.infrastructure.AutoLottoNumberStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +21,7 @@ class LottoMachineTest {
 
         LottoMachine lottoMachine = new LottoMachine(lottoMoney);
 
-        LottoTickets lottoTickets = lottoMachine.buyAuto(new AutoLottoNumberStrategy());
+        LottoTickets lottoTickets = lottoMachine.buy(new AutoLottoNumberStrategy());
 
         assertThat(lottoTickets).isNotNull();
     }

@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import lotto.common.LottoStub;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.LottoNumbersSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

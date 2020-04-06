@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.common.LottoStub;
+import lotto.domain.lotto.BonusNumberDuplicateException;
+import lotto.domain.matcher.WinningTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

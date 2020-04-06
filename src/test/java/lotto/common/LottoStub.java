@@ -1,7 +1,7 @@
 package lotto.common;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

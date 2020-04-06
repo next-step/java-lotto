@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import com.sun.tools.javac.util.Pair;
+import lotto.domain.matcher.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

@@ -1,6 +1,9 @@
 package lotto.domain;
 
 import lotto.common.LottoStub;
+import lotto.domain.machine.LottoTicket;
+import lotto.domain.matcher.LottoRank;
+import lotto.domain.matcher.WinningTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
