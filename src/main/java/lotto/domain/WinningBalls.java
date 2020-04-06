@@ -1,17 +1,19 @@
 package lotto.domain;
 
 import java.util.Set;
+import lotto.domain.model.LottoBall;
+import lotto.domain.model.Rank;
 
-public class WinningNumbers {
+public class WinningBalls {
 
   private LottoGame criterion;
-  private LottoNo bonus;
+  private LottoBall bonus;
 
-  public WinningNumbers(Set<Integer> lottoNumbers, int bonus) {
+  public WinningBalls(Set<Integer> lottoNumbers, int bonus) {
     throwIfInvalid(lottoNumbers, bonus);
 
     this.criterion = new LottoGame(lottoNumbers);
-    this.bonus = new LottoNo(bonus);
+    this.bonus = new LottoBall(bonus);
   }
 
   private static void throwIfInvalid(Set<Integer> lottoNumbers, int bonus) {
@@ -20,9 +22,9 @@ public class WinningNumbers {
     }
   }
 
-  public Rank getRank(LottoGame lottoGame) {
+  public Rank calculateRank(LottoGame lottoGame) {
     int matchCount = lottoGame.getMatchCount(criterion);
-    boolean bonusMatched = lottoGame.getLottoNos().contains(bonus);
+    boolean bonusMatched = lottoGame.getLottoBalls().contains(bonus);
 
     return Rank.valueOf(matchCount, bonusMatched);
   }

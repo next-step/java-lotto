@@ -1,19 +1,20 @@
-package lotto.domain;
+package lotto.domain.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.domain.model.LottoBall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoNoTest {
+public class LottoBallTest {
 
   @DisplayName("Test for illegal argument")
   @ParameterizedTest
   @ValueSource(ints = {-1, 0, 46})
   public void illegalArgumentTest(int integer) {
-    assertThatThrownBy(() -> new LottoNo(integer))
+    assertThatThrownBy(() -> new LottoBall(integer))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -21,6 +22,6 @@ public class LottoNoTest {
   @ParameterizedTest
   @ValueSource(ints = {1, 10, 45})
   public void legalArgumentTest(int integer) {
-    assertThat(new LottoNo(integer).equals(new LottoNo(integer))).isTrue();
+    assertThat(new LottoBall(integer).equals(new LottoBall(integer))).isTrue();
   }
 }

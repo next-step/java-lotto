@@ -1,15 +1,13 @@
 package lotto.domain;
 
 import static lotto.domain.LottoGame.LOTTO_NO_COUNT;
-import static lotto.domain.LottoNo.LOWER_BOUND;
-import static lotto.domain.LottoNo.UPPER_BOUND;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.model.LottoBall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,9 +32,8 @@ public class LottoGameTest {
   @DisplayName("Test for random generation method")
   @Test
   public void randomGenerationTest() {
-    Set<Integer> integers = LottoGame.genarateRandomNumbers();
+    Set<LottoBall> integers = new LottoGame().getLottoBalls();
     assertThat(integers).hasSize(LOTTO_NO_COUNT);
-    integers.forEach(integer -> assertThat(integer).isBetween(LOWER_BOUND, UPPER_BOUND));
   }
 }
 

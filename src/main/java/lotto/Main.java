@@ -1,12 +1,11 @@
 package lotto;
 
-import java.util.List;
 import java.util.Set;
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
-import lotto.domain.WinningNumbers;
-import lotto.domain.view.InputView;
-import lotto.domain.view.ResultView;
+import lotto.domain.LottoGames;
+import lotto.domain.WinningResult;
+import lotto.domain.WinningBalls;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 public class Main {
   public static void main(String[] args) {
@@ -14,12 +13,12 @@ public class Main {
 
     int purchaseAmount = inputView.getPurchaseAmount();
 
-    Lotto lotto = new Lotto(purchaseAmount / 1000);
-    ResultView.printBuying(lotto.getLottoGames());
-    Set<Integer> lastWinningNumbers = inputView.getLastWinningNumbers();
+    LottoGames lottoGames = new LottoGames(purchaseAmount);
+    ResultView.printBuying(lottoGames.getLottoGames());
+    Set<Integer> lastWinningBalls = inputView.getLastWinningBalls();
     int bonusBall = inputView.getBonusBall();
 
-    List<Rank> ranks = lotto.getRanks(new WinningNumbers(lastWinningNumbers, bonusBall));
+    WinningResult ranks = lottoGames.confirmResult(new WinningBalls(lastWinningBalls, bonusBall));
     ResultView.printResult(ranks);
   }
 }

@@ -1,4 +1,6 @@
-package lotto.domain.view;
+package lotto.view;
+
+import static lotto.domain.LottoGames.LOTTO_PRICE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,10 +28,16 @@ public class InputView {
 
   public int getPurchaseAmount() {
     System.out.println(PURCHASE_AMOUNT_QUESTION);
-    return Integer.parseInt(scanner.nextLine());
+    int purchaseAmount = Integer.parseInt(scanner.nextLine());
+
+    if (purchaseAmount < LOTTO_PRICE) {
+      throw new IllegalArgumentException("You have to purchase at least 1,000 won.");
+    }
+
+    return purchaseAmount;
   }
 
-  public Set<Integer> getLastWinningNumbers() {
+  public Set<Integer> getLastWinningBalls() {
     System.out.println(LAST_WEEK_RESULT_QUESTION);
     String lastWinningNumbers = scanner.nextLine();
     return Arrays.stream(lastWinningNumbers.split(DELIMITER))

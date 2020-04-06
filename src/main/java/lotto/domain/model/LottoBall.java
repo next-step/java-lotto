@@ -1,15 +1,15 @@
-package lotto.domain;
+package lotto.domain.model;
 
 import java.util.Objects;
 
-public class LottoNo {
+public class LottoBall {
 
   public static final int UPPER_BOUND = 45;
   public static final int LOWER_BOUND = 1;
 
   private int number;
 
-  public LottoNo(int integer) {
+  public LottoBall(int integer) {
     throwIfInvalid(integer);
 
     number = integer;
@@ -36,10 +36,10 @@ public class LottoNo {
     if (o == this)
       return true;
 
-    if (!(o instanceof LottoNo))
+    if (!(o instanceof LottoBall))
       return false;
 
-    LottoNo other = (LottoNo) o;
+    LottoBall other = (LottoBall) o;
 
     return this.number == other.number;
   }
