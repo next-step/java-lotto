@@ -1,14 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoMachine;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoMachineInputView {
