@@ -9,6 +9,14 @@ import java.util.Arrays;
 
 public class LottoTicketTest {
     @Test
+    void hasBonusNumberTest() {
+        LottoTicket winningNumber = new LottoTicket(Arrays.asList(1, 5, 7, 10, 13, 15));
+        winningNumber.bonusNumber(45);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 5, 7, 10, 13, 45));
+        assertThat(lottoTicket.hasBonusNumber(winningNumber)).isTrue();
+    }
+
+    @Test
     void createLottoTicketTest() {
         LottoTicket lottoTicket = new LottoTicket();
         lottoTicket.showTicketNumber().stream()
@@ -21,7 +29,7 @@ public class LottoTicketTest {
     @Test
     void createLottoTicketWithNumber() {
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 5, 10, 40, 45, 6));
-        assertThat(lottoTicket.showTicketNumber()).containsExactly(1, 5, 10, 40, 45, 6);
+        assertThat(lottoTicket.showTicketNumber()).containsExactly(1, 5, 6, 10, 40, 45);
     }
 
     @Test
