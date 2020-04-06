@@ -3,12 +3,15 @@ package lotto.domain;
 import lotto.exception.NotANumberException;
 import lotto.exception.NumberDuplicateException;
 import lotto.exception.OutOfRangeException;
-import lotto.util.LottoTicketUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Numbers {
+    public static final int TICKET_MIN_NUMBER = 1;
+    public static final int TICKET_MAX_NUMBER = 45;
+    public static final int NUMBER_LIMIT_COUNT = 6;
+
     private final Set<Integer> numbers;
     private int bonusNumber;
 
@@ -30,7 +33,7 @@ public class Numbers {
     }
 
     private void checkLengthValidation(List<Integer> numberInformation) {
-        if (numberInformation.size() != LottoTicketUtils.RANGE) {
+        if (numberInformation.size() != NUMBER_LIMIT_COUNT) {
             throw new OutOfRangeException();
         }
     }
@@ -43,13 +46,13 @@ public class Numbers {
     }
 
     private void checkDuplicate(Set<Integer> inputNumber) {
-        if (inputNumber.size() < LottoTicketUtils.RANGE) {
+        if (inputNumber.size() < NUMBER_LIMIT_COUNT) {
             throw new NumberDuplicateException();
         }
     }
 
     private void checkNumberRange(int number) {
-        if (number < LottoTicketUtils.TICKET_MIN_NUMBER || number > LottoTicketUtils.TICKET_MAX_NUMBER) {
+        if (number < TICKET_MIN_NUMBER || number > TICKET_MAX_NUMBER) {
             throw new NotANumberException(number);
         }
     }

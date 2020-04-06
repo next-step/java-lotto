@@ -4,11 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private final List<LottoTicket> ticketList;
+    private static final int DEFAULT_TICKET_COUNT = 0;
+    private final List<LottoTicket> ticketList = new ArrayList<>();
 
-    public LottoTickets(int counts) {
-        this.ticketList = new ArrayList<>();
-        for (int i = 0; i < counts; i++) {
+    public LottoTickets(int totalCount) {
+        this(totalCount, new ArrayList<LottoTicket>(DEFAULT_TICKET_COUNT));
+    }
+
+    public LottoTickets(int autoTicketCount, List<LottoTicket> manualTickets) {
+        for (LottoTicket manualTicket : manualTickets) {
+            ticketList.add(manualTicket);
+        }
+
+        for (int i = DEFAULT_TICKET_COUNT; i < autoTicketCount; i++) {
             ticketList.add(new LottoTicket());
         }
     }

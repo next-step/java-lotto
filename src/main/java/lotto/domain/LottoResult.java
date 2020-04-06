@@ -1,21 +1,15 @@
 package lotto.domain;
 
-import lotto.util.LottoTicketUtils;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<LottoPrize, Integer> lottoResult;
-    private final int ZERO = 0;
+    private static final int ZERO = 0;
+    private static final int TICKET_PRICE = 1000;
+    private static final Map<LottoPrize, Integer> lottoResult = new HashMap<>();
 
-    public LottoResult() {
-        lottoResult = init();
-    }
-
-    private Map init() {
-        Map<LottoPrize, Integer> lottoResult = new HashMap<>();
+    static {
         Arrays.stream(LottoPrize.values())
                 .forEach(lottoPrize ->
                         lottoResult.put(lottoPrize, ZERO)
@@ -36,7 +30,7 @@ public class LottoResult {
     }
 
     private double totalPrice() {
-        int sum = 0;
+        int sum = ZERO;
         for (LottoPrize prize : LottoPrize.values()) {
             sum += prize.getPrice() * lottoResult.get(prize);
         }
@@ -44,10 +38,10 @@ public class LottoResult {
     }
 
     private double totalTicketCost() {
-        int totalTicketCount = 0;
+        int totalTicketCount = ZERO;
         for (int ticketCount : lottoResult.values()) {
             totalTicketCount += ticketCount;
         }
-        return totalTicketCount * LottoTicketUtils.TICKET_PRICE;
+        return totalTicketCount * TICKET_PRICE;
     }
 }

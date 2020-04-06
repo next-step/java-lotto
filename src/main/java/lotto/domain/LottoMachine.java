@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.MinimumPurchaseAmountException;
-import lotto.util.LottoTicketUtils;
+import java.util.List;
 
 public class LottoMachine {
     private static final String PURCHASE_MESSAGE = "%d개를 구매하셨습니다.";
