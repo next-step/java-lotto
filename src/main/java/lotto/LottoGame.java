@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1000;
     private static final String WINNING_DELIMITER = ", ";
 
     public static void main(String[] args) {
@@ -18,7 +17,7 @@ public class LottoGame {
     public static void playLotto() {
         int paidMoney = InputView.getMoney();
 
-        Lottos lotto = issueLotto(paidMoney);
+        Lottos lotto = new Lottos(paidMoney);
         ResultView.printIssuedLotto(lotto);
 
         ResultView.printLottoResult(lotto.getResult(getWinningNumbers()), paidMoney);
@@ -33,9 +32,5 @@ public class LottoGame {
         }
 
         return winningNumbers;
-    }
-
-    public static Lottos issueLotto(int price) {
-        return new Lottos(price / LOTTO_PRICE);
     }
 }

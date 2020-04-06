@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
@@ -23,12 +24,12 @@ public class LottosTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 5})
+    @CsvSource(value = {"0:0", "14000:14", "5300:5"}, delimiter = ':')
     @DisplayName("주어진 갯수만큼 로또 생성 테스트")
-    public void lottoGenerateTest(int input) {
+    public void lottoGenerateTest(int input, int expected) {
         Lottos lottos = new Lottos(input);
 
-        assertThat(lottos.size()).isEqualTo(input);
+        assertThat(lottos.size()).isEqualTo(expected);
     }
 
     @Test

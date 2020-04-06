@@ -3,11 +3,14 @@ package lotto.domain;
 import java.util.*;
 
 public class Lottos {
+    private static final int LOTTO_PRICE = 1000;
+
     private final Set<Lotto> issuedLotto;
 
-    public Lottos(int count) {
+    public Lottos(int paidMoney) {
         issuedLotto = new HashSet<>();
 
+        int count = paidMoney / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
             issuedLotto.add(new Lotto());
         }
