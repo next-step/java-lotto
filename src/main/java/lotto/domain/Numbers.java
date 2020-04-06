@@ -15,6 +15,7 @@ public class Numbers {
     private final Set<Integer> numbers;
     private int bonusNumber;
 
+
     public Numbers(List<Integer> inputNumber) {
         checkLengthValidation(inputNumber);
         this.numbers = new HashSet<>(inputNumber);
@@ -30,6 +31,19 @@ public class Numbers {
         return numbers.stream()
                 .sorted()
                 .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+    public void addBonusNumber(int bonusNumber) {
+        checkNumberRange(bonusNumber);
+        bonusNumberValidator(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
+
+    public int getBonusNumber(){
+        return bonusNumber;
+    }
+
+    public boolean hasBonusNumber(int bonusNumber){
+        return numbers.contains(bonusNumber);
     }
 
     private void checkLengthValidation(List<Integer> numberInformation) {
@@ -56,16 +70,9 @@ public class Numbers {
             throw new NotANumberException(number);
         }
     }
-
-    public void addBonusNumber(int bonusNumber) {
-        checkNumberRange(bonusNumber);
-        bonusNumberValidator(bonusNumber);
-        this.bonusNumber = bonusNumber;
-    }
-
     private void bonusNumberValidator(int bonusNumber) {
         if(numbers.contains(bonusNumber)){
-            throw new RuntimeException("중복된 로또 번호");
+            throw new NumberDuplicateException();
         }
     }
 }
