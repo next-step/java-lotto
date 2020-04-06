@@ -1,34 +1,36 @@
 package lotto;
 
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.Price;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
-import java.math.BigDecimal;
 import java.util.*;
 
-public class LottoController {
+public class LottoGame {
     public static void main(String[] args) {
         Price price = InputView.getPrice();
 
-        List<Lotto> lottos = LottoController.buyLotto(price.getAvailableBuyTicketCount());
+        LottoTicket lottoTicket = LottoGame.buyLotto(price.getAvailableBuyTicketCount());
         for (Lotto lotto : lottos) {
             ResultView.printLotto(lotto);
         }
 
         Lotto winningLotto = new Lotto(InputView.getWinningNumbers());
 
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            ranks.add(LottoGame.match(lotto, winningLotto));
-        }
+//        List<Rank> ranks = new ArrayList<>();
+//        for (Lotto lotto : lottos) {
+//            ranks.add(LottoGame.match(lotto, winningLotto));
+//        }
 
-        LottoResult result = new LottoResult(ranks);
-        BigDecimal yield = price.getYield(result.getTotalWinningMoney());
-        ResultView.printYield(yield);
+//        LottoResult result = new LottoResult(ranks);
+//        BigDecimal yield = price.getYield(result.getTotalWinningMoney());
+//        ResultView.printYield(yield);
     }
 
-    public static List<Lotto> buyLotto(int ticketCount) {
+    public static LottoTicket buyLotto(int ticketCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             Set<LottoNumber> lottoNumbers = new HashSet<>();
@@ -38,6 +40,6 @@ public class LottoController {
             }
             lottos.add(new Lotto(new ArrayList<>(lottoNumbers)));
         }
-        return lottos;
+        return new LottoTicket(lottos);
     }
 }
