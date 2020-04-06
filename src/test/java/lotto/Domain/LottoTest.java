@@ -62,7 +62,7 @@ public class LottoTest {
     }
 
     @Test
-    void winninglottoTest() {
+    void winningLottoTest() {
         List<Integer> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(1);
         lottoNumbers.add(6);

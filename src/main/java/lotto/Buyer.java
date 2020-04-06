@@ -5,16 +5,19 @@ import lotto.Controller.LottoController;
 import lotto.Domain.*;
 import lotto.View.InputView;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Buyer {
 
-    private Buyer() {
+    int amount;
+    LottoMachine lottoMachine;
+
+    private Buyer(int amount) {
+        this.amount = amount;
+        this.lottoMachine = LottoMachine.init();
     }
 
-    public static Buyer of() {
-        return new Buyer();
+    public static Buyer of(int amount) {
+        return new Buyer(amount);
     }
 
     public void perchase() {

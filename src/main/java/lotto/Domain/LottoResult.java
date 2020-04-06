@@ -1,9 +1,6 @@
 package lotto.Domain;
 
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class LottoResult {
