@@ -33,4 +33,10 @@ public class WinningLotto {
     public boolean matchBonus(Lotto targetLotto) {
         return targetLotto.isNumberMatch(bonus);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.lotto.equals(((WinningLotto) obj).lotto)
+                && this.bonus == ((WinningLotto) obj).bonus;
+    }
 }

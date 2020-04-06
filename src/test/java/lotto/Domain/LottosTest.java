@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,8 +23,8 @@ public class LottosTest {
         Lottos lottos = Lottos.init(lottoList);
 
         int bonus = 7;
-        Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
-        WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
+        Lotto winLotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
+        WinningLotto winningNumber = WinningLotto.init(winLotto, bonus);
 
         LottoResult matchCountMap = lottos.match(winningNumber);
 

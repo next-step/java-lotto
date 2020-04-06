@@ -54,8 +54,8 @@ public class LottoTest {
 
         Lotto lotto = Lotto.init(lottoNumbers);
         int bonus = 7;
-        Lotto winlotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
-        WinningLotto winningNumber = WinningLotto.init(winlotto, bonus);
+        Lotto winLotto = Lotto.init(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)));
+        WinningLotto winningNumber = WinningLotto.init(winLotto, bonus);
         LottoGrade result = lotto.match(winningNumber);
 
         assertThat(result).isEqualTo(LottoGrade.findGrade(Integer.parseInt(expected), false));

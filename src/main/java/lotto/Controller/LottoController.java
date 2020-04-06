@@ -5,7 +5,6 @@ import lotto.Domain.*;
 import lotto.View.InputView;
 import lotto.View.OutputView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,51 +13,37 @@ public class LottoController {
 
     InputView inputView;
     OutputView outputView;
-    LottoMachine lottoMachine;
+    Buyer buyer;
 
-    public LottoController(InputView inputView, LottoMachine lottoMachine) {
+    public LottoController(InputView inputView, Buyer buyer) {
         this.inputView = inputView;
         this.outputView = OutputView.init();
-        this.lottoMachine = lottoMachine;
+        this.buyer = buyer;
     }
 
-    public int payToLotto() {
+    public int purchaseLotto() {
         int price = inputView.userInstructionAmount();
-        int count = lottoMachine.boughtLottoCount(price);
+        int count = buyer.payToLotto(price);
         outputView.userInstructionCount(count);
+
+        Lottos lottos = buyer.purchaseAutoLotto(count);
+        outputView.boughtLottoList(lottos);
+
+        String winnerLottoNumbers = inputView.userInstructionWinner();
+        int bonus = inputView.userInstructionBonus();
+        WinningLotto winningLotto = buyer.winningLottoNumbers(winnerList(winnerLottoNumbers), bonus);
+
+        LottoResult lottoResult = lottos.match(winningLotto);
+
+        outputView.LottoResult(lottoResult);
+
         return count;
     }
 
-    public Lottos buyAutoLotto(int LottoCount) {
-        Lottos lottos = Lottos.init(new ArrayList<>());
-        for (int i = 0; i < LottoCount; i++) {
-            Lotto lotto = lottoMachine.buyLotto(lottoMachine.makeAutoTargetNumber());
-            lottos.add(lotto);
-        }
-        return lottos;
-    }
-
-    public void boughtLottoList(Lottos lottos) {
-        outputView.boughtLottoList(lottos);
-    }
-
-    public WinningLotto inputLastWeekWinLotto() {
-        System.out.println("---------------------");
-        String input = inputView.userInstructionWinner();
-        System.out.println("---------------------");
-        int bonus = inputView.userInstructionBonus();
-        Lotto lastweekWinlotto = Lotto.init(Arrays.stream(input.split(", "))
+    private List<Integer> winnerList(String winnerLottoNumbers) {
+        return Arrays.stream(winnerLottoNumbers.split(", "))
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList()));
-        return WinningLotto.init(lastweekWinlotto, bonus);
-    }
-
-    public LottoResult lottoResult(Lottos lottos, WinningLotto winningLotto) {
-        return lottos.match(winningLotto);
-    }
-
-    public void printLottoResult(LottoResult lottoResult) {
-        outputView.LottoResult(lottoResult);
+                .collect(Collectors.toList());
     }
 }

@@ -8,7 +8,8 @@ import lotto.Domain.Lottos;
 import java.util.Map;
 
 public class OutputView {
-    private final String INFORMATION_BUY_COUNT = "개를 구매했습니다.";
+    private static final String INFORMATION_BUY_COUNT = "개를 구매했습니다.";
+    private static final String INFORMATION_RESULT = "당첨 통계";
 
     private OutputView() {
     }
@@ -28,7 +29,7 @@ public class OutputView {
     }
 
     public void LottoResult(LottoResult lottoResult) {
-        System.out.println("당첨 통계");
+        System.out.println(INFORMATION_RESULT);
         System.out.println("---------");
         Map<LottoGrade, Integer> winList = lottoResult.winLottoGradeAndPrize();
 

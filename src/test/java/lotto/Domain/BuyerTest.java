@@ -1,7 +1,6 @@
 package lotto.Domain;
 
 
-import lotto.Buyer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -60,8 +60,11 @@ public class BuyerTest {
                 .collect(Collectors.toList());
         int bonus = 7;
 
-        Lottos lottos = Lottos.init(lottoNumbers);
-        WinningLotto winningLotto = buyer.winningLottoNumbers(lottoNumbers, bonus);
+        Lottos lottos = Lottos.init(new ArrayList<>());
+        lottos.add(Lotto.init(lottoNumbers));
+
+
+        WinningLotto winningLotto =  buyer.winningLottoNumbers(new ArrayList<>(Arrays.asList(1, 2, 13, 24, 35, 42)), bonus);
         LottoResult lottoResult = buyer.lottoResult(lottos, winningLotto);
 
         assertThat(lottoResult.revenueRate()).isEqualTo(Double.parseDouble(expected));
