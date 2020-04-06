@@ -2,9 +2,9 @@ package lotto.domain.lotto;
 
 import lotto.exception.ValidLottoException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
 
@@ -20,11 +20,9 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> newList(List<Integer> numbers) {
-        List<LottoNumber> result = new ArrayList<>();
-        for (Integer integer : numbers) {
-            result.add(new LottoNumber(integer));
-        }
-        return result;
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void validateNumberRange(int numbers) {
