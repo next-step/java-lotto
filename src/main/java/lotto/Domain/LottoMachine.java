@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
-    private static final int LOTTO_PRICE = 1000;
     private static final List<Integer> LOTTO_NUMBER_RANGE = IntStream.range(1, 46)
             .boxed()
             .collect(Collectors.toCollection(ArrayList::new));
@@ -20,12 +19,12 @@ public class LottoMachine {
 
     public int boughtLottoCount(int price) {
         lessThenOneLottoPriceException(price);
-        return price / LOTTO_PRICE;
+        return price / Constants.LOTTO_PRICE;
     }
 
     private void lessThenOneLottoPriceException(int price) {
-        if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException("[" + price + " < " + LOTTO_PRICE + "] 금액이 부족합니다.");
+        if (price < Constants.LOTTO_PRICE) {
+            throw new IllegalArgumentException("[" + price + " < " + Constants.LOTTO_PRICE + "] 금액이 부족합니다.");
         }
     }
 

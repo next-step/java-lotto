@@ -29,7 +29,7 @@ public class LottoResult {
             sumOfWinningLotto += calculatePrize(entry);
         }
 
-        return sumOfWinningLotto / (this.size() * 1000.0);
+        return sumOfWinningLotto / (this.size() * Constants.LOTTO_PRICE);
     }
 
     int calculatePrize(Map.Entry<LottoGrade, Integer> entry) {

@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +38,22 @@ public class LottoMachineTest {
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             lottoMachine.boughtLottoCount(input);
         });
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {3, 5, 1})
+    void boughtManualLottoTest(int input) {
+        Lottos lottos = lottoMachine.purchaseManualLotto(input);
+
+        assertThat(lottos.toList()).hasSize(Integer.parseInt(expected));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"14000:14", "1000:1", "3000:3"}, delimiter = ':')
+    void boughtAutoLottoTest(String input, String expected) {
+        int lottoCount = lottoMachine.boughtLottoCount(Integer.parseInt(input));
+        Lottos lottos = lottoMachine.purchaseAutoLotto(lottoCount);
+        assertThat(lottos.toList()).hasSize(Integer.parseInt(expected));
     }
 
     @Test

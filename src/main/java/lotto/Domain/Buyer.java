@@ -16,7 +16,6 @@ public class Buyer {
         return new Buyer();
     }
 
-
     public int payToLotto(int amount) {
         return lottoMachine.boughtLottoCount(amount);
     }
