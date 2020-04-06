@@ -16,7 +16,7 @@ public class LottoTickets implements Cloneable {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = Collections.unmodifiableList(new ArrayList<>(tickets));
+        this.tickets = new ArrayList<>(tickets);
     }
 
     public static LottoTickets from(int count) {
@@ -53,7 +53,7 @@ public class LottoTickets implements Cloneable {
     }
 
     public List<LottoTicket> getTickets() {
-        return tickets;
+        return Collections.unmodifiableList(tickets);
     }
 
     public int size() {

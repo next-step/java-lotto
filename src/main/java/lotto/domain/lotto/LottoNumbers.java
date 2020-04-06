@@ -13,11 +13,11 @@ public class LottoNumbers {
 
     private final List<LottoNumber> value;
 
-    public LottoNumbers(List<LottoNumber> value) {
+    public LottoNumbers(final List<LottoNumber> value) {
         validateSize(value);
         validateDuplicate(value);
         Collections.sort(value);
-        this.value = Collections.unmodifiableList(new ArrayList<>(value));
+        this.value = new ArrayList<>(value);
     }
 
     public static LottoNumbers of(List<Integer> number) {
@@ -28,7 +28,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(LottoNumbers copy) {
-        this.value = Collections.unmodifiableList(new ArrayList<>(copy.value));
+        this.value = new ArrayList<>(copy.value);
     }
 
     public long getMatchNumberCount(LottoNumber lottoNumber) {
@@ -51,7 +51,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getValue() {
-        return new ArrayList<>(value);
+        return Collections.unmodifiableList(value);
     }
 
     @Override
