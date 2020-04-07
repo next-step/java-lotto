@@ -8,11 +8,11 @@ public class Money {
 
     public Money(int input) {
         validate(input);
-        this.money = new Integer(input);
+        this.money = input;
     }
 
     public int getMoney() {
-        return new Integer(this.money);
+        return this.money;
     }
 
     public int leftMoney(int payedMoney) {
