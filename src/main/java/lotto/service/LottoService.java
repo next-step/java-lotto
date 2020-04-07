@@ -6,7 +6,6 @@ import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.lotto.WinLottoTicket;
-import lotto.exception.ValidLottoException;
 import lotto.view.MatchedLottoDto;
 import lotto.view.StatisticsLottoDto;
 import util.StringUtil;
@@ -18,7 +17,6 @@ import java.util.stream.Collectors;
 public class LottoService {
 
     private static final String LOTTO_SPLIT_DELIMITER = ",";
-    private static final String IMPOSSIBLE_QUANTITY = "구매 불가능한 수량";
 
     public Money createMoney(final String inputMoney) {
         return new Money(StringUtil.parseStringToInt(inputMoney));
@@ -26,13 +24,7 @@ public class LottoService {
 
     public int validateAvailableQuantity(final String inputBuyCount, final Money money) {
         int count = StringUtil.parseStringToInt(inputBuyCount);
-        int availableQuantity = money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
-
-        if (count > availableQuantity) {
-            throw new ValidLottoException(IMPOSSIBLE_QUANTITY);
-        }
-
-        return count;
+        return money.getPurchaseAvailableCount(new Money(LottoTicket.PRICE), count);
     }
 
     public MatchedLottoDto playMatchedLotto(final int gameCount) {

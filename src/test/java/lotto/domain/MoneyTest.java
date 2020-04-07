@@ -133,9 +133,23 @@ public class MoneyTest {
         //given
         Money investment = new Money(14000);
         Money earn = new Money(5000);
+
         //when
-        double earningRate = investment.getEarningRate(earn);
-        System.out.println(earningRate);
+        double earningRate = earn.getEarningRate(investment);
+
         //then
+        assertThat(earningRate).isEqualTo(0.35);
+    }
+
+    @DisplayName("구매 가능한 금액 범위 인지 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:10", "5000:2", "100:10"}, delimiter = ':')
+    public void getPurchaseAvailableCount_success(double price, int count) throws Exception {
+        //given
+        final Money money = new Money(10000);
+        final Money itemPrice = new Money(price);
+
+        //then
+        assertThat(money.getPurchaseAvailableCount(itemPrice, count)).isEqualTo(count);
     }
 }

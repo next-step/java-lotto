@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.ValidLottoException;
+
 import java.util.Objects;
 
 public class Money {
@@ -7,6 +9,7 @@ public class Money {
     private static final int ZERO = 0;
     private static final String MONEY_POSITIVE_INTEGER_ERR_MESSAGE = "금액은 양의 정수만 입력 가능 합니다.";
     private static final String MONEY_NEGATIVE_INTEGER_ERR_MESSAGE = "금액은 음수가 될 수 없습니다.";
+    private static final String IMPOSSIBLE_QUANTITY = "구매 불가능한 수량";
 
     private final double money;
 
@@ -60,6 +63,15 @@ public class Money {
 
     public int getHowManyBuyItem(final Money itemPrice) {
         return (int) Math.floor(this.money / itemPrice.money);
+    }
+
+    public int getPurchaseAvailableCount(final Money itemPrice, final int itemCount) {
+        Money amount = new Money(itemPrice.money * itemCount);
+
+        if (this.money < amount.money) {
+            throw new ValidLottoException(IMPOSSIBLE_QUANTITY);
+        }
+        return itemCount;
     }
 
     @Override
