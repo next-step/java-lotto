@@ -47,7 +47,7 @@ public class Lotto {
     private Set<LottoNumber> generatorLottoNumbers() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_MAX_SOCKET) {
-            LottoNumber lottoNumber = LottoNumber.newRandomNumber(new RandomNumber());
+            LottoNumber lottoNumber = LottoNumber.randomNumber(new RandomNumber());
             lottoNumbers.add(lottoNumber);
         }
         return lottoNumbers;
@@ -64,7 +64,7 @@ public class Lotto {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
         for (int i = 0; i < inputs.size(); i++) {
-            lottoNumbers.add(LottoNumber.newChooseNumber(inputs.get(i)));
+            lottoNumbers.add(LottoNumber.chooseNumber(inputs.get(i)));
         }
         return lottoNumbers;
     }

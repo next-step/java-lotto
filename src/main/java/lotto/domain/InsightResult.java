@@ -8,7 +8,7 @@ public class InsightResult {
     private final Map<RankEnum, Integer> insightResult;
 
     public InsightResult(Map<RankEnum, Integer> results) {
-        this.insightResult = Collections.unmodifiableMap(results);
+        this.insightResult = Collections.unmodifiableMap(new LinkedHashMap<>(results));
     }
 
     public Map<RankEnum, Integer> getInsightResult() {

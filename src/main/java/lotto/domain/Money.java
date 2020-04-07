@@ -8,7 +8,7 @@ public class Money {
 
     public Money(int input) {
         validate(input);
-        this.money = input;
+        this.money = new Integer(input);
     }
 
     public int getMoney() {

@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자 생성 테스트")
     void generateLottoNumberTest(int value) {
         assertThat(
-                LottoNumber.newRandomNumber(() -> value).getLottoNumber()
+                LottoNumber.randomNumber(() -> value).getLottoNumber()
         ).isEqualTo(value);
     }
 
@@ -22,6 +22,6 @@ public class LottoNumberTest {
     @ValueSource(ints = {4, 5, 6, 9})
     @DisplayName("로또숫자 static 객체 테스트")
     void staticLottoNumberTest(int value) {
-        assertThat(LottoNumber.newChooseNumber(value)).isSameAs(LottoNumber.newChooseNumber(value));
+        assertThat(LottoNumber.chooseNumber(value)).isSameAs(LottoNumber.chooseNumber(value));
     }
 }

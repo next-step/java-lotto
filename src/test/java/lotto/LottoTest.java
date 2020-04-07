@@ -25,10 +25,10 @@ public class LottoTest {
         Lotto lotto = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertAll(
-                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(1))).isTrue(),
-                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(5))).isTrue(),
-                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(8))).isFalse(),
-                () -> assertThat(lotto.isExistNumber(LottoNumber.newChooseNumber(10))).isFalse()
+                () -> assertThat(lotto.isExistNumber(LottoNumber.chooseNumber(1))).isTrue(),
+                () -> assertThat(lotto.isExistNumber(LottoNumber.chooseNumber(5))).isTrue(),
+                () -> assertThat(lotto.isExistNumber(LottoNumber.chooseNumber(8))).isFalse(),
+                () -> assertThat(lotto.isExistNumber(LottoNumber.chooseNumber(10))).isFalse()
         );
     }
 
@@ -53,7 +53,7 @@ public class LottoTest {
     @DisplayName("getLottoNumbers 불변검사")
     void getLottoNumbersTest() {
         Lotto lo = Lotto.automatic();
-        lo.getLottoNumbers().add(LottoNumber.newChooseNumber(44));
+        lo.getLottoNumbers().add(LottoNumber.chooseNumber(44));
 
         assertThat(lo.getLottoNumbers().size()).isEqualTo(6);
     }

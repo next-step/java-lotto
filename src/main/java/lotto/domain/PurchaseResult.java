@@ -9,8 +9,8 @@ public class PurchaseResult {
     private final Lottos automaticLottos;
 
     public PurchaseResult(Lottos manualLottos, Lottos automaticLottos) {
-        this.manualLottos = manualLottos;
-        this.automaticLottos = automaticLottos;
+        this.manualLottos = new Lottos(manualLottos.getLottos());
+        this.automaticLottos = new Lottos(automaticLottos.getLottos());
     }
 
     public Lottos getManualLottos() {

@@ -8,7 +8,7 @@ public class ManualLottoOrderSheet {
     private final List<List<Integer>> manualLottoOrders;
 
     public ManualLottoOrderSheet(List<List<Integer>> manualLottoOrders) {
-        this.manualLottoOrders = manualLottoOrders;
+        this.manualLottoOrders = new ArrayList<>(manualLottoOrders);
     }
 
     public List<List<Integer>> getManualLottoOrders() {

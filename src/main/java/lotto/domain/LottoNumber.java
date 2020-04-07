@@ -21,18 +21,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber newRandomNumber(NumberGenerator lottoNumberGenerator) {
+    public static LottoNumber randomNumber(NumberGenerator lottoNumberGenerator) {
         return Optional.ofNullable(lottoNumbers.get(lottoNumberGenerator.getRandomNumber()))
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static LottoNumber newChooseNumber(int number) {
+    public static LottoNumber chooseNumber(int number) {
         return Optional.ofNullable(lottoNumbers.get(number))
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public static LottoNumber newChooseNumber(String input) {
-        return LottoNumber.newChooseNumber(convertNumber(input));
+    public static LottoNumber chooseNumber(String input) {
+        return LottoNumber.chooseNumber(convertNumber(input));
     }
 
     private LottoNumber(int number) {
