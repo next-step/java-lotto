@@ -1,15 +1,11 @@
 package lotto.view;
 
-import static lotto.domain.LottoGames.LOTTO_PRICE;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.LottoGame;
+import lotto.domain.RankStatistic;
 import lotto.domain.WinningResult;
 import lotto.domain.model.LottoBall;
 import lotto.domain.model.Rank;
@@ -36,14 +32,13 @@ public class ResultView {
   }
 
   public static void printResult(WinningResult winningResult) {
-    Map<Rank, Long> rankStatistic = winningResult.getRanks().stream()
-        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    RankStatistic rankStatistic = winningResult.deriveStatistics();
 
     printRankStatistic(rankStatistic);
     printRateOfReturn(rankStatistic);
   }
 
-  private static void printRankStatistic(Map<Rank, Long> rankStatistic) {
+  private static void printRankStatistic(RankStatistic rankStatistic) {
     System.out.println(WINNING_STATISTICS);
     Arrays.stream(Rank.values())
         .filter(rank -> rank.getMatchCount() > 0)
@@ -52,17 +47,12 @@ public class ResultView {
             rank.getMatchCount(),
             rank.getShouldMatchBonus() == Trilean.TRUE ? MATCH_BONUS_BALL : SPACE,
             rank.getWinningMoney(),
-            Optional.ofNullable(rankStatistic.get(rank)).orElse(0L)
+            rankStatistic.countWinsOf(rank)
         ));
   }
 
-  private static void printRateOfReturn(Map<Rank, Long> rankStatistic) {
-    long prizeMoney = rankStatistic.entrySet().stream()
-        .mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
-        .sum();
-    double purchaseAmount = rankStatistic.values().stream()
-        .mapToDouble(v -> v).sum() * LOTTO_PRICE;
-    double rateOfReturn = prizeMoney / purchaseAmount;
+  private static void printRateOfReturn(RankStatistic rankStatistic) {
+    double rateOfReturn = rankStatistic.calculateYield();
 
     System.out.printf(RATE_OF_RETURN, rateOfReturn);
   }

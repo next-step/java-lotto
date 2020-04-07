@@ -11,7 +11,7 @@ public class WinningResult {
     this.ranks = ranks;
   }
 
-  public List<Rank> getRanks() {
-    return ranks;
+  public RankStatistic deriveStatistics() {
+    return new RankStatistic(ranks);
   }
 }
