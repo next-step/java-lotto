@@ -11,7 +11,7 @@ public class Lotto {
     private final List<Integer> lottoNumbers;
 
     public Lotto() {
-        lottoNumbers = NumberGenerator.generateLotto(LOTTO_SIZE);
+        lottoNumbers = LottoNumber.generate(LOTTO_SIZE);
     }
 
     public Lotto(List<Integer> lottoNumbers) {

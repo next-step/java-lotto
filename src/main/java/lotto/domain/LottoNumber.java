@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-public class NumberGenerator {
+public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
@@ -17,15 +17,15 @@ public class NumberGenerator {
             .mapToObj(Integer::new)
             .collect(toList());
 
-    static List<Integer> generateLotto(int numberCount) {
+    static List<Integer> generate(int numberCount) {
         Collections.shuffle(numberRange, new Random(System.currentTimeMillis()));
 
-        List<Integer> oneSet = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < numberCount; i++) {
-            oneSet.add(numberRange.get(i));
+            numbers.add(numberRange.get(i));
         }
-        Collections.sort(oneSet);
+        Collections.sort(numbers);
 
-        return oneSet;
+        return numbers;
     }
 }
