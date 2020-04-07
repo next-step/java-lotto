@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoInspector {
@@ -10,9 +9,9 @@ public class LottoInspector {
     public LottoInspector() {
     }
 
-    public InsightResult getResult(WinningLotto winningLotto, List<Lotto> lottos) {
+    public InsightResult getResult(WinningLotto winningLotto, Lottos lottos) {
         Map<RankEnum, Integer> matchedResult = initMatchedResult();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
             int matchedCount = winningLotto.getWinningLotto().getMatchedCount(lotto);
             boolean hasBonus = lotto.isExistNumber(winningLotto.getBonusNumber());
             RankEnum rank = RankEnum.getRank(matchedCount, hasBonus);

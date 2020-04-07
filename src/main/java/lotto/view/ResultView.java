@@ -17,14 +17,14 @@ public class ResultView {
 
     public void viewLottos(PurchaseResult purchaseResult) {
         viewPurchaseCount(purchaseResult.getManualLottos(), purchaseResult.getAutomaticLottos());
-        for (Lotto lotto : purchaseResult.getAllLottos()) {
+        for (Lotto lotto : purchaseResult.getAllLottos().getLottos()) {
             viewLottoNumbers(lotto);
         }
         System.out.println();
     }
 
-    private void viewPurchaseCount(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
-        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + automaticLottos.size() + "장을 구매했습니다.");
+    private void viewPurchaseCount(Lottos manualLottos, Lottos automaticLottos) {
+        System.out.println("수동으로 " + manualLottos.getLottoCount() + "장, 자동으로 " + automaticLottos.getLottoCount() + "장을 구매했습니다.");
     }
 
     public void viewLottoNumbers(Lotto lotto) {
