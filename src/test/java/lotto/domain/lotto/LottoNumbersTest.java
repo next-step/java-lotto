@@ -54,9 +54,6 @@ class LottoNumbersTest {
         copy.remove(0);
         numbers.add(new LottoNumber(20));
 
-        System.out.println(numbers);
-        System.out.println(copy);
-
         //then
         assertAll(
                 () -> assertThatThrownBy(
