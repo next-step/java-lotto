@@ -39,8 +39,8 @@ public class Lotto {
     }
 
     public int getMatchedCount(Lotto lotto) {
-        return (int) lotto.getLottoNumbers().stream()
-                .filter(l -> isExistNumber(l))
+        return (int) this.getLottoNumbers().stream()
+                .filter(l -> lotto.isExistNumber(l))
                 .count();
     }
 
