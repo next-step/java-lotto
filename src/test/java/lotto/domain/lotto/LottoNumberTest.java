@@ -50,12 +50,4 @@ class LottoNumberTest {
         assertThat(lottoNumber.intValue()).isEqualTo(number);
     }
 
-    @DisplayName("문자열로 로또 번호를 만들 수 있다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"1", "45"})
-    public void stringLottoNumberTest(String number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
-
-        assertThat(lottoNumber.intValue()).isEqualTo(Integer.parseInt(number));
-    }
 }

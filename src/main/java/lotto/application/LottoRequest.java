@@ -1,15 +1,15 @@
-package lotto.ui;
+package lotto.application;
 
-import lotto.domain.machine.LottoMoney;
 import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.machine.LottoMoney;
 
 import java.util.List;
 
-public class LottoGameDto {
+public class LottoRequest {
     private final LottoMoney lottoMoney;
-    private List<LottoNumbers> lottoNumbers;
+    private final List<LottoNumbers> lottoNumbers;
 
-    public LottoGameDto(LottoMoney lottoMoney, List<LottoNumbers> lottoNumbers) {
+    public LottoRequest(LottoMoney lottoMoney, List<LottoNumbers> lottoNumbers) {
         this.lottoMoney = lottoMoney;
         this.lottoNumbers = lottoNumbers;
     }
@@ -21,4 +21,5 @@ public class LottoGameDto {
     public List<LottoNumbers> getLottoNumbers() {
         return lottoNumbers;
     }
+
 }

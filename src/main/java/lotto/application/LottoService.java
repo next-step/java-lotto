@@ -1,33 +1,24 @@
 package lotto.application;
 
+import lotto.domain.lotto.Lottery;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.machine.LottoMachine;
-import lotto.domain.machine.LottoTickets;
-import lotto.domain.matcher.LottoGameResults;
-import lotto.domain.matcher.LottoMatcher;
-import lotto.domain.matcher.WinningTicket;
+import lotto.domain.machine.LottoMoney;
 import lotto.infrastructure.AutoLottoNumberStrategy;
-import lotto.ui.LottoMachineDto;
-import lotto.ui.WinningRequestDto;
+
+import java.util.List;
 
 public class LottoService {
-    private final LottoMachine lottoMachine;
-    private final LottoMatcher lottoMatcher;
 
-    public LottoService(LottoMachine lottoMachine, LottoMatcher lottoMatcher) {
-        this.lottoMachine = lottoMachine;
-        this.lottoMatcher = lottoMatcher;
+    public ManualLottery buyManual(LottoMoney lottoMoney, List<LottoNumbers> lottoNumbers) {
+        LottoMoney remainsMoney = lottoMoney.remainsMoney(lottoNumbers.size());
+        Lottery lottery = Lottery.of(lottoNumbers);
+        return new ManualLottery(lottery, remainsMoney);
     }
 
-
-    public LottoTickets game(LottoMachineDto lottoMachineDto) {
-        LottoMachine lottoMachine = new LottoMachine(lottoMachineDto);
-        return lottoMachine.buy(new AutoLottoNumberStrategy());
+    public Lottery buyAuto(LottoMoney lottoMoney) {
+        int autoCount = lottoMoney.getAvailableBuyingCount();
+        LottoMachine lottoMachine = new LottoMachine(autoCount);
+        return lottoMachine.buyAuto(new AutoLottoNumberStrategy());
     }
-
-    public LottoGameResults results(WinningRequestDto winningRequestDto) {
-        WinningTicket winningTicket = new WinningTicket(winningRequestDto);
-        LottoGameResults lottoGameResults = lottoMatcher.match(winningTicket);
-        return lottoGameResults;
-    }
-
 }

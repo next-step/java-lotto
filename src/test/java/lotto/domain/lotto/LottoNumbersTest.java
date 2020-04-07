@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import lotto.common.LottoStub;
 import lotto.domain.lotto.LottoNumber;
@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -125,5 +126,12 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(stringNumbers))
                 .isInstanceOf(LottoNumbersSizeException.class)
                 .hasMessageContaining("로또 번호는 6개 이어야만 합니다.");
+    }
+
+    @Test
+    public void test() {
+        String[] stringNumbers = new String[]{"1", "2", "3", "4", "5", "6"};
+        LottoNumbers lottoNumbers = new LottoNumbers(stringNumbers);
+        System.out.println(lottoNumbers.getLottoNumbers().stream().map(e -> e.intValue()).map(String::valueOf).collect(Collectors.joining(", ")));
     }
 }

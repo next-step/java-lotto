@@ -13,7 +13,7 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public LottoNumber(String lottoNumber) {
+    LottoNumber(String lottoNumber) {
         int parseLottoNumber = parseLottoNumber(lottoNumber);
         validateRange(parseLottoNumber);
         this.lottoNumber = parseLottoNumber;

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import lotto.common.LottoStub;
 import lotto.domain.lotto.BonusNumber;

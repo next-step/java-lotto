@@ -1,29 +1,24 @@
 package lotto.domain.machine;
 
+import lotto.domain.lotto.Lottery;
 import lotto.domain.lotto.LottoNumberStrategy;
-import lotto.ui.LottoMachineDto;
+import lotto.domain.lotto.LottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-    private final LottoMoney lottoMoney;
+    private final int lottoCount;
 
-    public LottoMachine(LottoMachineDto lottoGameDto) {
-        this(lottoGameDto.getLottoMoney());
+    public LottoMachine(int lottoCount) {
+        this.lottoCount = lottoCount;
     }
 
-    public LottoMachine(LottoMoney lottoMoney) {
-        this.lottoMoney = lottoMoney;
-    }
-
-    public LottoTickets buy(LottoNumberStrategy lottoNumberStrategy) {
-        int availableCount = lottoMoney.getAvailableBuyingCount();
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < availableCount; i++) {
-            LottoTicket lottoTicket = new LottoTicket(lottoNumberStrategy.get());
-            lottoTickets.add(lottoTicket);
+    public Lottery buyAuto(LottoNumberStrategy lottoNumberStrategy) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            lottoNumbers.add(lottoNumberStrategy.get());
         }
-        return new LottoTickets(lottoTickets);
+        return Lottery.of(lottoNumbers);
     }
 }

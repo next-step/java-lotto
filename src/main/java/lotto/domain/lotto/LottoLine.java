@@ -1,17 +1,16 @@
-package lotto.domain.machine;
+package lotto.domain.lotto;
 
 import com.sun.tools.javac.util.Pair;
 import lotto.domain.matcher.LottoRank;
 import lotto.domain.matcher.WinningTicket;
-import lotto.domain.lotto.LottoNumbers;
 
 import java.util.List;
 import java.util.Objects;
 
-public class LottoTicket {
+public class LottoLine {
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(LottoNumbers lottoNumbers) {
+    public LottoLine(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -30,8 +29,8 @@ public class LottoTicket {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof LottoTicket)) return false;
-        LottoTicket that = (LottoTicket) o;
+        if (!(o instanceof LottoLine)) return false;
+        LottoLine that = (LottoLine) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
