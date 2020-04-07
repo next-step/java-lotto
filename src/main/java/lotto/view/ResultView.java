@@ -12,6 +12,7 @@ import lotto.domain.LottoGame;
 import lotto.domain.WinningResult;
 import lotto.domain.model.LottoBall;
 import lotto.domain.model.Rank;
+import lotto.domain.model.Trilean;
 
 public class ResultView {
   private static final String RESULT_FORMAT = "%s개 일치%s(%s원) - %s개\n";
@@ -45,7 +46,7 @@ public class ResultView {
         .forEach(rank -> System.out.printf(
             RESULT_FORMAT,
             rank.getMatchCount(),
-            rank.getShouldMatchBonus() ? MATCH_BONUS_BALL : SPACE,
+            rank.getShouldMatchBonus() == Trilean.TRUE ? MATCH_BONUS_BALL : SPACE,
             rank.getWinningMoney(),
             Optional.ofNullable(rankStatistic.get(rank)).orElse(0L)
         ));
