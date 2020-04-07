@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.generator.RandomNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void generateLottoTest() {
-        Lotto.automatic().getLottoNumbers();
+        Lotto.automatic(new RandomNumber()).getLottoNumbers();
     }
 
     @Test
@@ -52,7 +53,7 @@ public class LottoTest {
     @Test
     @DisplayName("getLottoNumbers 불변검사")
     void getLottoNumbersTest() {
-        Lotto lo = Lotto.automatic();
+        Lotto lo = Lotto.automatic(new RandomNumber());
         lo.getLottoNumbers().add(LottoNumber.chooseNumber(44));
 
         assertThat(lo.getLottoNumbers().size()).isEqualTo(6);

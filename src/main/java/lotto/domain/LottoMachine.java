@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.generator.RandomNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < purchaseCount; i++) {
-            lottos.add(Lotto.automatic());
+            lottos.add(Lotto.automatic(new RandomNumber()));
         }
         return new Lottos(lottos);
     }

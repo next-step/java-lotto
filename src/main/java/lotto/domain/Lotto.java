@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.generator.RandomNumber;
+import lotto.generator.NumberGenerator;
 
 import java.util.*;
 
@@ -9,8 +9,8 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public static Lotto automatic() {
-        return new Lotto();
+    public static Lotto automatic(NumberGenerator numberGenerator) {
+        return new Lotto(numberGenerator);
     }
 
     public static Lotto manual(Set<LottoNumber> lottoNumbers) {
@@ -21,8 +21,8 @@ public class Lotto {
         return new Lotto(changeToLottoNumbers(lottoNumbers));
     }
 
-    private Lotto() {
-        this.lottoNumbers = new TreeSet<>(generatorLottoNumbers());
+    private Lotto(NumberGenerator numberGenerator) {
+        this.lottoNumbers = new TreeSet<>(generatorLottoNumbers(numberGenerator));
     }
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
@@ -44,10 +44,10 @@ public class Lotto {
                 .count();
     }
 
-    private Set<LottoNumber> generatorLottoNumbers() {
+    private Set<LottoNumber> generatorLottoNumbers(NumberGenerator numberGenerator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_MAX_SOCKET) {
-            LottoNumber lottoNumber = LottoNumber.randomNumber(new RandomNumber());
+            LottoNumber lottoNumber = LottoNumber.randomNumber(numberGenerator);
             lottoNumbers.add(lottoNumber);
         }
         return lottoNumbers;
