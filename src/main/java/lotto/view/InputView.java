@@ -25,6 +25,10 @@ public class InputView {
     }
 
     public static List<String> receiveBuyPassivityLottoNumber(final int count) {
+        if (count <= 0) {
+            return new ArrayList<>();
+        }
+
         System.out.println(PASSIVITY_BUY_LOTTO_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         List<String> input = new ArrayList<>();
