@@ -32,7 +32,7 @@ public class ResultView {
 
             stringBuilder.append(String.format(RESULT_COUNT_FORMAT, winning.getMatchCount(), winning.getWinningPrice(), matchCount));
 
-            winningPrice += matchCount * winning.getWinningPrice();
+            winningPrice += winning.calculatePrice(matchCount);
         }
         stringBuilder.append(getYieldResult((float) winningPrice / (float) paidMoney));
 

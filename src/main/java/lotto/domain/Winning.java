@@ -49,4 +49,8 @@ public enum Winning {
     public int getWinningPrice() {
         return winningPrice;
     }
+
+    public int calculatePrice(int matchCount) {
+        return matchCount * this.winningPrice;
+    }
 }
