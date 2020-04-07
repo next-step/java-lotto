@@ -29,7 +29,9 @@ public class Lotto {
     public String toString(String format, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        String joinedNumbers = lottoNumbers.stream().map(num -> Integer.toString(num)).collect(Collectors.joining(delimiter));
+        String joinedNumbers = lottoNumbers.stream()
+                .map(num -> Integer.toString(num))
+                .collect(Collectors.joining(delimiter));
         stringBuilder.append(String.format(format, joinedNumbers));
 
         return stringBuilder.toString();

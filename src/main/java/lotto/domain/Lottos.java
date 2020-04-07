@@ -5,29 +5,29 @@ import java.util.*;
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
 
-    private final Set<Lotto> issuedLotto;
+    private final Set<Lotto> lottos;
 
     public Lottos(int paidMoney) {
-        issuedLotto = new HashSet<>();
+        lottos = new HashSet<>();
 
         int count = paidMoney / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
-            issuedLotto.add(new Lotto());
+            lottos.add(new Lotto());
         }
     }
 
-    public Lottos(Set<Lotto> issuedLotto) {
-        this.issuedLotto = Collections.unmodifiableSet(issuedLotto);
+    public Lottos(Set<Lotto> lottos) {
+        this.lottos = Collections.unmodifiableSet(lottos);
     }
 
     public int size() {
-        return issuedLotto.size();
+        return lottos.size();
     }
 
     public Map<Winning, Integer> getResult(List<Integer> winningNumber) {
         Map<Winning, Integer> result = new HashMap<>();
 
-        for (Lotto lotto : issuedLotto) {
+        for (Lotto lotto : lottos) {
             Winning winning = lotto.getResult(winningNumber);
             result.put(winning, result.containsKey(winning) ? result.get(winning) + 1 : 1);
         }
@@ -38,7 +38,7 @@ public class Lottos {
     public String toString(String format, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Lotto lotto : issuedLotto) {
+        for (Lotto lotto : lottos) {
             stringBuilder.append(lotto.toString(format, delimiter));
         }
 
