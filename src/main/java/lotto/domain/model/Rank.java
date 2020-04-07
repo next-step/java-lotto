@@ -2,18 +2,18 @@ package lotto.domain.model;
 
 import static lotto.domain.LottoGame.LOTTO_NO_COUNT;
 import static lotto.domain.model.Trilean.FALSE;
-import static lotto.domain.model.Trilean.IRRELAVANT;
+import static lotto.domain.model.Trilean.IRRELEVANCE;
 import static lotto.domain.model.Trilean.TRUE;
 
 import java.util.Arrays;
 
 public enum Rank {
-  FAILURE(0, IRRELAVANT, 0),
-  FIFTH(3, IRRELAVANT, 5_000),
-  FOURTH(4, IRRELAVANT, 50_000),
+  FAILURE(0, IRRELEVANCE, 0),
+  FIFTH(3, IRRELEVANCE, 5_000),
+  FOURTH(4, IRRELEVANCE, 50_000),
   THIRD(5, FALSE, 1_500_000),
   SECOND(5, TRUE, 30_000_000),
-  FIRST(6, IRRELAVANT, 2_000_000_000);
+  FIRST(6, IRRELEVANCE, 2_000_000_000);
 
   private int matchCount;
   private Trilean shouldMatchBonus;

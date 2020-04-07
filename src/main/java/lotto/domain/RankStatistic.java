@@ -28,17 +28,26 @@ public class RankStatistic {
   }
 
   private long calculatePrizeMoney() {
-    return rankStatistic.entrySet().stream()
-        .mapToLong(entry -> entry.getKey().getWinningMoney() * entry.getValue())
+    return rankStatistic.entrySet()
+        .stream()
+        .mapToLong(entry -> {
+          Rank rank = entry.getKey();
+          long winCount = entry.getValue();
+          return rank.getWinningMoney() * winCount;
+        })
         .sum();
   }
 
   private long calculatePurchaseAmount() {
-    return rankStatistic.values().stream()
-        .mapToLong(v -> v).sum() * LOTTO_PRICE;
+    return rankStatistic.values()
+        .stream()
+        .mapToLong(v -> v)
+        .sum() * LOTTO_PRICE;
   }
 
   public long countWinsOf(Rank rank) {
-    return Optional.ofNullable(rankStatistic.get(rank)).orElse(0L);
+    return Optional.ofNullable(
+        rankStatistic.get(rank)
+    ).orElse(0L);
   }
 }

@@ -1,7 +1,7 @@
 package lotto.domain.model;
 
 public enum Trilean {
-  TRUE, FALSE, IRRELAVANT;
+  TRUE, FALSE, IRRELEVANCE;
 
   public boolean matches(boolean bool) {
     switch (this) {
@@ -11,9 +11,10 @@ public enum Trilean {
       case FALSE:
         return !bool;
 
-      case IRRELAVANT:
+      case IRRELEVANCE:
         return true;
     }
-    return bool;
+
+    throw new IllegalArgumentException("Invalid Trilean value");
   }
 }
