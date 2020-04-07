@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_MIN = 1;
@@ -8,8 +9,6 @@ public class Lotto {
     // TODO: 더 좋은 변수명 찾기
     private static final int LOTTO_NUMBER_LIMIT = 6;
     private static List<Integer> numbers;
-    // TODO: 객체로 포장
-    private final Set<Integer> lottoNumbers;
 
     static {
         numbers = new ArrayList<>();
@@ -18,19 +17,33 @@ public class Lotto {
         }
     }
 
+    // TODO: 객체로 포장
+    private final Set<Integer> lottoNumbers;
+
     public Lotto() {
         this.lottoNumbers = createNumbers();
     }
 
     public Lotto(Integer... numbers) {
+        this.lottoNumbers = validate(Arrays.asList(numbers));
+    }
+
+    public Lotto(String numbers) {
+        String[] lottoNumbers = numbers.split(",");
+        this.lottoNumbers = validate(Arrays.asList(lottoNumbers).stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
+    }
+
+    private Set<Integer> validate(List<Integer> numbers) {
         validateSize(numbers);
         Set<Integer> lottoNumbers = new TreeSet<>();
-        for(Integer number : numbers) {
+        for (Integer number : numbers) {
             validateNumber(number);
             lottoNumbers.add(number);
         }
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        return lottoNumbers;
     }
 
     private void validateNumber(Integer number) {
@@ -39,8 +52,8 @@ public class Lotto {
         }
     }
 
-    private void validateSize(Integer[] numbers) {
-        if (numbers.length != LOTTO_NUMBER_LIMIT) {
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_LIMIT) {
             throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
         }
     }

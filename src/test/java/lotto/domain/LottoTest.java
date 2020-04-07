@@ -54,6 +54,12 @@ public class LottoTest {
     }
 
     @Test
+    public void createLottoWithString() {
+        Lotto lotto = new Lotto(1, 3, 2, 4, 5, 6);
+        assertThat(lotto).isEqualTo(new Lotto("1,2,3,4,5,6"));
+    }
+
+    @Test
     public void match_6개_테스트() {
         lotto = new Lotto(1, 2, 3, 4, 5, 6);
         winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
