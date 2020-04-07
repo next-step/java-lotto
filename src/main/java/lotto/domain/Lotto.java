@@ -63,8 +63,8 @@ public class Lotto {
     private static Set<LottoNumber> changeToLottoNumbers(List<Integer> inputs) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
 
-        for (int i = 0; i < inputs.size(); i++) {
-            lottoNumbers.add(LottoNumber.chooseNumber(inputs.get(i)));
+        for (Integer input : inputs) {
+            lottoNumbers.add(LottoNumber.chooseNumber(input));
         }
         return lottoNumbers;
     }

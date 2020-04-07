@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 

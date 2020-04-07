@@ -11,8 +11,9 @@ public class LottoMachine {
 
     public Lottos purchaseManualLottos(ManualLottoOrderSheet manualLottoOrderSheet) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualLottoOrderSheet.getOrderCount(); i++) {
-            lottos.add(Lotto.manual(manualLottoOrderSheet.getManualLottoOrders().get(i)));
+
+        for (List<Integer> manualLottoOrder : manualLottoOrderSheet.getManualLottoOrders()) {
+            lottos.add(Lotto.manual(manualLottoOrder));
         }
         return new Lottos(lottos);
     }
