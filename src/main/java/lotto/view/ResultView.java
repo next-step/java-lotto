@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.LottoGame;
@@ -24,11 +25,14 @@ public class ResultView {
   public static void printBuying(List<LottoGame> lottoGames) {
     lottoGames.stream()
         .map(LottoGame::getLottoBalls)
-        .forEach(lottoNos -> System.out.println(
-            lottoNos.stream()
-                .map(LottoBall::toString)
-                .collect(Collectors.joining(", ", "[", "]"))
-        ));
+        .map(ResultView::formatLottoBalls)
+        .forEach(System.out::println);
+  }
+
+  private static String formatLottoBalls(Set<LottoBall> lottoBalls) {
+    return lottoBalls.stream()
+        .map(LottoBall::toString)
+        .collect(Collectors.joining(", ", "[", "]"));
   }
 
   public static void printResult(WinningResult winningResult) {

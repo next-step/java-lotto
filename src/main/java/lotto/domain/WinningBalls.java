@@ -24,7 +24,7 @@ public class WinningBalls {
 
   public Rank calculateRank(LottoGame lottoGame) {
     int matchCount = lottoGame.getMatchCount(criterion);
-    boolean bonusMatched = lottoGame.getLottoBalls().contains(bonus);
+    boolean bonusMatched = lottoGame.contains(bonus);
 
     return Rank.valueOf(matchCount, bonusMatched);
   }

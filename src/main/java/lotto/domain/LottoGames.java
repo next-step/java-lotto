@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.model.Rank;
 
 public class LottoGames {
   public static final int LOTTO_PRICE = 1000;
@@ -22,10 +23,10 @@ public class LottoGames {
   }
 
   public WinningResult confirmResult(WinningBalls winningBalls) {
-    return new WinningResult(
-        lottoGames.stream()
-            .map(winningBalls::calculateRank)
-            .collect(Collectors.toList())
-    );
+    List<Rank> ranks = lottoGames.stream()
+        .map(winningBalls::calculateRank)
+        .collect(Collectors.toList());
+
+    return new WinningResult(ranks);
   }
 }
