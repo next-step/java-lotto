@@ -22,6 +22,6 @@ public class LottoApplication {
 
         InsightResult insightResult = lottoInspector.getResult(winningLotto, purchaseResult.getAllLottos());
         resultView.viewInspect(insightResult);
-        resultView.viewInsight(lottoInspector.getYield(myMoney, insightResult.getTotalRevenue()));
+        resultView.viewRateOfReturn(lottoInspector.getYield(myMoney, insightResult.getTotalRevenue()));
     }
 }

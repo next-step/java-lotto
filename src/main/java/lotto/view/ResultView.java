@@ -58,12 +58,12 @@ public class ResultView {
         return description;
     }
 
-    public void viewInsight(BigDecimal yield) {
+    public void viewRateOfReturn(BigDecimal yield) {
         System.out.print("총 수익률은 " + String.format("%.2f", yield) + " 입니다.");
-        viewYieldAnalysis(yield.intValue() > BREAK_EVEN_POINT);
+        viewRateOfReturnAnalysis(yield.intValue() > BREAK_EVEN_POINT);
     }
 
-    private void viewYieldAnalysis(boolean isProfit) {
+    private void viewRateOfReturnAnalysis(boolean isProfit) {
         if (isProfit) {
             System.out.println("(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
             return;
