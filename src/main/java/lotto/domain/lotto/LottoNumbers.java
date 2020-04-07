@@ -18,11 +18,11 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public LottoNumbers(LottoNumber... lottoNumbers) {
+    LottoNumbers(LottoNumber... lottoNumbers) {
         this(Arrays.asList(lottoNumbers));
     }
 
-    public LottoNumbers(String[] strings) {
+    LottoNumbers(String[] strings) {
         this(Arrays.asList(strings).stream()
                 .map(LottoNumber::new)
                 .collect(toList()));

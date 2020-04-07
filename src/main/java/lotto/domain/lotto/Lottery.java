@@ -1,7 +1,9 @@
 package lotto.domain.lotto;
 
-import lotto.domain.matcher.LottoRank;
-import lotto.domain.matcher.WinningTicket;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.LottoRanks;
+import lotto.domain.rank.WinningLotto;
+import lotto.application.WinningLottoRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,12 @@ public class Lottery {
         this.lottery = lottery.getLottery();
     }
 
+    public Lottery(Lottery lotteryByManual, Lottery lotteryByAuto) {
+        List<Lotto> lottery = new ArrayList<>(lotteryByManual.getLottery());
+        lottery.addAll(lotteryByAuto.getLottery());
+        this.lottery = lottery;
+    }
+
     public static Lottery of(Lottery lottery) {
         return new Lottery(lottery);
     }
@@ -34,7 +42,7 @@ public class Lottery {
         return new Lottery(lottery);
     }
 
-    public List<LottoRank> getRank(WinningTicket winningLotto) {
+    public List<LottoRank> getRank(WinningLotto winningLotto) {
         return lottery.stream()
                 .map(lotto -> lotto.checkRank(winningLotto))
                 .flatMap(List::stream)
@@ -68,5 +76,13 @@ public class Lottery {
                 .map(LottoLine::new)
                 .collect(Collectors.toList());
         return new Lotto(lottoLines);
+    }
+
+    public LottoRanks matchWinningLotto(WinningLottoRequest winningLottoDto) {
+        List<LottoRank> lottoRanks = lottery.stream()
+                .map(lotto -> lotto.checkRank(winningLottoDto.to()))
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+        return new LottoRanks(lottoRanks);
     }
 }

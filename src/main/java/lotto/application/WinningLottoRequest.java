@@ -1,12 +1,13 @@
-package lotto.ui;
+package lotto.application;
 
 import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.rank.WinningLotto;
 
-public class WinningRequestDto {
+public class WinningLottoRequest {
     private LottoNumbers lottoNumbers;
     private int bonusNumber;
 
-    public WinningRequestDto(LottoNumbers lottoNumbers, int bonusNumber) {
+    public WinningLottoRequest(LottoNumbers lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -17,5 +18,9 @@ public class WinningRequestDto {
 
     public int getBonusNumber() {
         return bonusNumber;
+    }
+
+    public WinningLotto to() {
+        return WinningLotto.of(this);
     }
 }

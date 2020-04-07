@@ -1,4 +1,4 @@
-package lotto.infrastructure;
+package lotto.domain.machine.infra;
 
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoNumbers;

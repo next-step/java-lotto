@@ -1,9 +1,8 @@
 package lotto.domain.lotto;
 
 import lotto.common.LottoStub;
-import lotto.domain.lotto.LottoLine;
-import lotto.domain.matcher.LottoRank;
-import lotto.domain.matcher.WinningTicket;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +14,9 @@ class LottoLineTest {
     @Test
     public void checkPrize() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 8), 7);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 8), 7);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
 
         assertThat(lottoRank.getMatchCount()).isEqualTo(LottoRank.FIVE.getMatchCount());
     }
@@ -26,9 +25,9 @@ class LottoLineTest {
     @Test
     public void returnMatchedNumberCountTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 8), 7);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 8), 7);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int winningPrize = lottoRank.getWinningPrize();
 
         assertThat(winningPrize).isEqualTo(LottoRank.FIVE.getWinningPrize());
@@ -38,9 +37,9 @@ class LottoLineTest {
     @Test
     public void returnTwoMatchedNumberTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 7, 8, 9, 10), 11);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 7, 8, 9, 10), 11);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int matchCount = lottoRank.getMatchCount();
         int winningPrize = lottoRank.getWinningPrize();
 
@@ -52,9 +51,9 @@ class LottoLineTest {
     @Test
     public void returnThreeMatchedNumberTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 7, 8, 9), 10);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 7, 8, 9), 10);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int matchCount = lottoRank.getMatchCount();
         int winningPrize = lottoRank.getWinningPrize();
 
@@ -66,9 +65,9 @@ class LottoLineTest {
     @Test
     public void returnFourMatchedNumberTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 4, 8, 9), 10);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 4, 8, 9), 10);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int matchCount = lottoRank.getMatchCount();
         int winningPrize = lottoRank.getWinningPrize();
 
@@ -80,9 +79,9 @@ class LottoLineTest {
     @Test
     public void returnFiveMatchedNumberTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 9), 10);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 9), 10);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int matchCount = lottoRank.getMatchCount();
         int winningPrize = lottoRank.getWinningPrize();
 
@@ -94,9 +93,9 @@ class LottoLineTest {
     @Test
     public void returnFiveBonusMatchedNumberTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 9), 6);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 9), 6);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int matchCount = lottoRank.getMatchCount();
         int winningPrize = lottoRank.getWinningPrize();
 
@@ -108,9 +107,9 @@ class LottoLineTest {
     @Test
     public void returnSixBonusMatchedNumberTest() {
         LottoLine lottoLine = new LottoLine(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6));
-        WinningTicket winningTicket = new WinningTicket(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6), 7);
+        WinningLotto winningLotto = new WinningLotto(LottoStub.getLottoNumbers(1, 2, 3, 4, 5, 6), 7);
 
-        LottoRank lottoRank = lottoLine.checkPrize(winningTicket);
+        LottoRank lottoRank = lottoLine.checkPrize(winningLotto);
         int matchCount = lottoRank.getMatchCount();
         int winningPrize = lottoRank.getWinningPrize();
 

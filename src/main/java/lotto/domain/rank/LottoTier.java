@@ -1,4 +1,6 @@
-package lotto.domain.matcher;
+package lotto.domain.rank;
+
+import java.util.Objects;
 
 public class LottoTier {
     private final int matchCount;
@@ -19,5 +21,19 @@ public class LottoTier {
 
     public boolean isBonus() {
         return bonus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoTier)) return false;
+        LottoTier lottoTier = (LottoTier) o;
+        return getMatchCount() == lottoTier.getMatchCount() &&
+                isBonus() == lottoTier.isBonus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMatchCount(), isBonus());
     }
 }

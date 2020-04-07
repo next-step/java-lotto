@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.application.*;
 import lotto.domain.lotto.Lottery;
+import lotto.domain.rank.LottoRanks;
 
 public class LottoController {
     private final LottoService lottoService;
@@ -18,5 +19,9 @@ public class LottoController {
         Lottery lotteryByAuto = lottoService.buyAuto(manualLottery.getLottoMoney());
 
         return DtoAssembler.assembleLottoByResponse(lotteryByManual, lotteryByAuto);
+    }
+
+    public LottoRanks match(Lottery lottery, WinningLottoRequest winningLottoDto) {
+        return lottoService.match(lottery, winningLottoDto);
     }
 }

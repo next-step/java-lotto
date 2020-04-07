@@ -1,9 +1,8 @@
 package lotto.domain.lotto;
 
-import lotto.domain.matcher.LottoRank;
-import lotto.domain.matcher.WinningTicket;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.WinningLotto;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,18 +14,14 @@ public class Lotto {
 
     private final List<LottoLine> lottoLines;
 
-    public Lotto(List<LottoLine> lottoLines) {
+    Lotto(List<LottoLine> lottoLines) {
         validate(lottoLines);
         this.lottoLines = lottoLines;
     }
 
-    Lotto(LottoLine... lottoLine) {
-        this(Arrays.asList(lottoLine));
-    }
-
-    public List<LottoRank> checkRank(WinningTicket winningNumber) {
+    public List<LottoRank> checkRank(WinningLotto winningLotto) {
         return lottoLines.stream()
-                .map(lottoTicket -> lottoTicket.checkPrize(winningNumber))
+                .map(lottoTicket -> lottoTicket.checkPrize(winningLotto))
                 .collect(toList());
     }
 

@@ -1,8 +1,8 @@
 package lotto.domain.lotto;
 
 import lotto.common.LottoStub;
-import lotto.domain.matcher.LottoRank;
-import lotto.domain.matcher.WinningTicket;
+import lotto.domain.rank.LottoRank;
+import lotto.domain.rank.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +53,7 @@ class LotteryTest {
 
         Lottery lottery = Lottery.of(lottoNumbers);
 
-        List<LottoRank> rank = lottery.getRank(new WinningTicket(lottoNumbers1, 12));
+        List<LottoRank> rank = lottery.getRank(new WinningLotto(lottoNumbers1, 12));
 
         assertThat(rank).hasSize(6);
         assertThat(rank).containsExactly(LottoRank.ONE, LottoRank.ONE, LottoRank.ONE,

@@ -89,4 +89,19 @@ public class CollectionStudyTest {
         assertThat(count).isEqualTo(3);
     }
 
+    @Test
+    void limitSkipTest() {
+        IntStream.iterate(0, i -> i + 1)
+                .limit(10) // LIMIT
+                .skip(5)   // OFFSET
+                .forEach(System.out::println);
+    }
+
+    @Test
+    void skipLimitTest() {
+        IntStream.iterate(0, i -> i + 1)
+                .skip(10)   // OFFSET
+                .limit(5) // LIMIT
+                .forEach(System.out::println);
+    }
 }

@@ -1,7 +1,5 @@
-package lotto.domain;
+package lotto.domain.rank;
 
-import com.sun.tools.javac.util.Pair;
-import lotto.domain.matcher.LottoRank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,7 +13,7 @@ class LottoRankTest {
     @CsvSource(value = {"0 : false", "1 : false", "2 : false", "3 : false", "4 : false",
             "5 : false", "5 : true", "6 : false"}, delimiter = ':')
     public void getLottoRankInfoTest(int matchCount, boolean bonus) {
-        LottoRank lottoRank = LottoRank.of(Pair.of(matchCount, bonus));
+        LottoRank lottoRank = LottoRank.of(LottoTier.of(matchCount, bonus));
 
         assertThat(lottoRank.getMatchCount()).isEqualTo(matchCount);
     }

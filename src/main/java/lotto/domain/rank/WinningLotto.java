@@ -1,24 +1,24 @@
-package lotto.domain.matcher;
+package lotto.domain.rank;
 
 import lotto.domain.lotto.BonusNumber;
 import lotto.domain.lotto.LottoNumbers;
-import lotto.ui.WinningRequestDto;
+import lotto.application.WinningLottoRequest;
 
 import java.util.Objects;
 
-public class WinningTicket {
+public class WinningLotto {
     private static final int COUNT_ONE = 1;
 
     private final LottoNumbers lottoNumbers;
     private final BonusNumber bonusNumber;
 
-    public WinningTicket(WinningRequestDto winningDto) {
-        this(winningDto.getLottoNumbers(), winningDto.getBonusNumber());
-    }
-
-    public WinningTicket(LottoNumbers lottoNumbers, int bonusNumber) {
+    public WinningLotto(LottoNumbers lottoNumbers, int bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = new BonusNumber(lottoNumbers, bonusNumber);
+    }
+
+    public static WinningLotto of(WinningLottoRequest winningDto) {
+        return new WinningLotto(winningDto.getLottoNumbers(), winningDto.getBonusNumber());
     }
 
     public LottoNumbers getLottoNumbers() {
@@ -35,8 +35,8 @@ public class WinningTicket {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WinningTicket)) return false;
-        WinningTicket that = (WinningTicket) o;
+        if (!(o instanceof WinningLotto)) return false;
+        WinningLotto that = (WinningLotto) o;
         return getLottoNumbers().getLottoNumbers().containsAll(that.getLottoNumbers().getLottoNumbers()) &&
                 Objects.equals(bonusNumber, that.bonusNumber);
     }

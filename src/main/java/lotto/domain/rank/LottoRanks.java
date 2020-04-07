@@ -1,15 +1,15 @@
-package lotto.domain.matcher;
+package lotto.domain.rank;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import static lotto.domain.Constant.PRICE_PER_GAME;
 
-public class LottoGameResults {
+public class LottoRanks {
     private static final int SCALE_TWO = 2;
     private final List<LottoRank> lottoRanks;
 
-    LottoGameResults(List<LottoRank> lottoRanks) {
+    public LottoRanks(List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;
     }
 

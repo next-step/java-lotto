@@ -1,7 +1,7 @@
 package lotto.application;
 
 import lotto.domain.lotto.Lottery;
-import lotto.domain.machine.LottoMoney;
+import lotto.domain.money.LottoMoney;
 
 public class ManualLottery {
     private final Lottery lottery;

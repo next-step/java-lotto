@@ -1,6 +1,7 @@
 package lotto.application;
 
 import lotto.domain.lotto.Lottery;
+import lotto.domain.lotto.Lotto;
 
 public class LottoBuyResponse {
     private final Lottery lotteryByManual;
@@ -17,5 +18,9 @@ public class LottoBuyResponse {
 
     public Lottery getLotteryByAuto() {
         return lotteryByAuto;
+    }
+
+    public Lottery getLotteryTotal() {
+        return new Lottery(lotteryByManual, lotteryByAuto);
     }
 }

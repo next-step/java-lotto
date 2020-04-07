@@ -1,11 +1,14 @@
 package lotto.ui;
 
-import lotto.domain.machine.LottoMoney;
+import lotto.application.DtoAssembler;
+import lotto.application.LottoRequest;
+import lotto.application.WinningLottoRequest;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.matcher.WinningTicketRangeException;
+import lotto.domain.money.LottoMoney;
+import lotto.domain.rank.WinningLottoRangeException;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -22,21 +25,21 @@ public class InputView {
     private static final String REQUEST_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String COMMA = ",";
-    private static final String CARRIAGE_RETURN = "\n";
 
     public InputView() {
     }
 
-    public WinningRequestDto getWinningDto() {
-        return RequestAssembler.assembleWinningRequest(requestWinningNumbers(),
-                requestBonusNumber());
+    public static LottoRequest getRequestDto() {
+        return DtoAssembler.assembleLottoRequest(
+                LottoMoney.of(requestMoney()),
+                requestManual()
+        );
     }
 
-    public static LottoMachineDto lottoMachineDto() {
-        return RequestAssembler.assembleLottoMachineDto(
-                new LottoMoney(requestMoney()),
-                requestManualCount(),
-                requestManualNumbers()
+    public static WinningLottoRequest getWinningLottoDto() {
+        return DtoAssembler.assembleWinningRequest(
+                requestWinningNumbers(),
+                requestBonusNumber()
         );
     }
 
@@ -50,6 +53,16 @@ public class InputView {
         }
     }
 
+    private static List<LottoNumbers> requestManual() {
+        int manualCount = requestManualCount();
+        List<LottoNumbers> lottoNumbersByManual = new ArrayList<>();
+        System.out.println(REQUEST_MANUAL_NUMBER);
+        for (int i = 0; i < manualCount; i++) {
+            lottoNumbersByManual.add(requestManualNumbers());
+        }
+        return lottoNumbersByManual;
+    }
+
     private static int requestManualCount() {
         System.out.println(REQUEST_MANUAL_COUNT);
         Scanner scanner = new Scanner(System.in);
@@ -60,59 +73,54 @@ public class InputView {
         }
     }
 
-    private static List<LottoNumbers> requestManualNumbers() {
-        System.out.println(REQUEST_MANUAL_NUMBER);
+    private static LottoNumbers requestManualNumbers() {
         Scanner scanner = new Scanner(System.in);
-        return getManualNumbers(scanner);
+        String[] split = scanner.nextLine().split(COMMA);
+        List<LottoNumber> lottoNumbers = asList(split)
+                .stream()
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(toList());
+
+        return new LottoNumbers(lottoNumbers);
     }
 
-    private LottoNumbers requestWinningNumbers() {
+    private static LottoNumbers requestWinningNumbers() {
         String[] inputValue = winningRequestMessage();
         List<LottoNumber> winningNumbers = getWinningNumbers(inputValue);
         if (winningNumbers.size() != LOTTO_NUM_COUNT_LIMIT) {
-            throw new WinningTicketRangeException("당첨 번호는 6개의 숫자만 입력할 수 있습니다.");
+            throw new WinningLottoRangeException("당첨 번호는 6개의 숫자만 입력할 수 있습니다.");
         }
         return new LottoNumbers(winningNumbers);
     }
 
-    private int requestBonusNumber() {
+    private static int requestBonusNumber() {
         System.out.println(REQUEST_BONUS_NUMBER);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    private String[] winningRequestMessage() {
+    private static String[] winningRequestMessage() {
         System.out.println(REQUEST_WINNING_NUMBER);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine().split(COMMA);
     }
 
-    private List<LottoNumber> getWinningNumbers(String[] inputValue) {
+    private static List<LottoNumber> getWinningNumbers(String[] inputValue) {
         return asList(inputValue)
                 .stream()
-                .map(this::parseLottoNumber)
+                .map(InputView::parseLottoNumber)
                 .distinct()
                 .collect(toList());
     }
 
-    private LottoNumber parseLottoNumber(String lottoNumString) {
+    private static LottoNumber parseLottoNumber(String lottoNumString) {
         try {
             return new LottoNumber(parseInt(lottoNumString.trim()));
         } catch (NumberFormatException e) {
             throw new InvalidNumberException();
         }
-    }
-
-    private static List<LottoNumbers> getManualNumbers(Scanner scanner) {
-        String[] rows = scanner.nextLine().split(CARRIAGE_RETURN);
-        return toLottoNumbers(rows);
-    }
-
-    private static List<LottoNumbers> toLottoNumbers(String[] rows) {
-        return Arrays.stream(rows)
-                .map(row -> row.split(COMMA))
-                .map(LottoNumbers::new)
-                .collect(toList());
     }
 
 }

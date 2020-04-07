@@ -1,7 +1,7 @@
 package lotto.application;
 
 import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.machine.LottoMoney;
+import lotto.domain.money.LottoMoney;
 
 import java.util.List;
 

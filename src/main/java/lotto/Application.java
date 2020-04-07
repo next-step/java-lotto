@@ -1,39 +1,33 @@
 package lotto;
 
+import lotto.application.LottoBuyResponse;
 import lotto.application.LottoService;
-import lotto.domain.matcher.LottoMatcher;
 import lotto.domain.machine.LottoMachine;
-import lotto.domain.machine.LottoTickets;
-import lotto.ui.*;
+import lotto.domain.rank.LottoRanks;
+import lotto.ui.InputView;
+import lotto.ui.LottoController;
+import lotto.ui.ResultView;
+import lotto.application.WinningLottoRequest;
 
 public class Application {
 
     public static void main(String[] args) {
-        LottoGameController lottoGameController = new LottoGameController(lottoMachineDto(), lottoService());
+        LottoController lottoController = new LottoController(lottoService());
+        LottoBuyResponse lottoBuyResponse = lottoController.buy(InputView.getRequestDto());
+        ResultView.print(lottoBuyResponse);
+
+        WinningLottoRequest winningLottoDto = InputView.getWinningLottoDto();
+
+        LottoRanks lottoRanks = lottoController.match(lottoBuyResponse.getLotteryTotal(), winningLottoDto);
+        ResultView.print(lottoRanks);
     }
 
-    public static LottoTickets lottoTickets() {
-        return new LottoTickets();
+    private static LottoService lottoService() {
+        return new LottoService(lottoMachine());
     }
 
-    public static LottoMatcher lottoGame() {
-        return new LottoMatcher(lottoTickets());
-    }
-
-    public static LottoService lottoService() {
-        return new LottoService(lottoMachine(), lottoGame());
-    }
-
-    public static LottoMachine lottoMachine() {
-        return new LottoMachine(lottoMachineDto());
-    }
-
-    private static LottoMachineDto lottoMachineDto() {
-        return InputView.lottoMachineDto();
-    }
-
-    private static WinningRequestDto winningRequestDto() {
-        return null;
+    private static LottoMachine lottoMachine() {
+        return new LottoMachine();
     }
 
 }
