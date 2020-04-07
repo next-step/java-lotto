@@ -14,22 +14,22 @@ public class LottoTicket {
 
     private final LottoNumbers numbers;
 
-    public LottoTicket(List<LottoNumber> numbers) {
+    public LottoTicket(final List<LottoNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = new LottoNumbers(numbers);
     }
 
-    public LottoTicket(LottoNumbers numbers) {
+    public LottoTicket(final LottoNumbers numbers) {
         validateNumbers(numbers.getValue());
         this.numbers = new LottoNumbers(numbers);
     }
 
-    private void validateNumbers(List<LottoNumber> numbers) {
+    private void validateNumbers(final List<LottoNumber> numbers) {
         Optional<List<LottoNumber>> numbersOpt = Optional.ofNullable(numbers);
         numbersOpt.orElseThrow(() -> new ValidLottoException(NULL_PARAM_ERROR_MESSAGE));
     }
 
-    public int getMatchCount(WinLottoTicket winTicket) {
+    public int getMatchCount(final WinLottoTicket winTicket) {
         int matchCount = 0;
         for (LottoNumber num : this.numbers.getValue()) {
             matchCount += winTicket.getLottoTicket().numbers.getMatchNumberCount(num);
@@ -38,12 +38,12 @@ public class LottoTicket {
         return matchCount;
     }
 
-    private boolean isMatchBonus(WinLottoTicket winTicket) {
+    private boolean isMatchBonus(final WinLottoTicket winTicket) {
         LottoNumber bonus = winTicket.getBonus();
         return numbers.getValue().contains(bonus);
     }
 
-    public Rank getRank(WinLottoTicket winLottoTicket) {
+    public Rank getRank(final WinLottoTicket winLottoTicket) {
         int matchCount = getMatchCount(winLottoTicket);
         boolean matchBonus = isMatchBonus(winLottoTicket);
         return Rank.findRank(matchCount, matchBonus);

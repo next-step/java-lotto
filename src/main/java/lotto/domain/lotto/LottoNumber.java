@@ -14,18 +14,18 @@ public class LottoNumber implements Cloneable, Comparable<LottoNumber> {
 
     private int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         validateNumberRange(number);
         this.number = number;
     }
 
-    public static List<LottoNumber> newList(List<Integer> numbers) {
+    public static List<LottoNumber> newList(final List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private void validateNumberRange(int numbers) {
+    private void validateNumberRange(final int numbers) {
         if (numbers < LOTTO_MIN_NUMBER_SIZE || numbers > LOTTO_MAX_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_NUMBER_RANGE_MESSAGE);
         }

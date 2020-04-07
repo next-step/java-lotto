@@ -13,11 +13,11 @@ public enum Rank {
     FIFTH(3, false, 5_000),
     MISS(0, false, 0);
 
-    private int matchCount;
-    private double prize;
-    private boolean bonus;
+    private final int matchCount;
+    private final double prize;
+    private final boolean bonus;
 
-    Rank(int matchCount, boolean bonus, double prize) {
+    Rank(final int matchCount, final boolean bonus, final double prize) {
         this.matchCount = matchCount;
         this.prize = prize;
         this.bonus = bonus;
@@ -27,11 +27,11 @@ public enum Rank {
         return matchCount;
     }
 
-    public Money getWinningPrize(long ticketCount) {
+    public Money getWinningPrize(final long ticketCount) {
         return new Money(prize * ticketCount);
     }
 
-    public static Rank findRank(int matchCount, boolean bonusNumber) {
+    public static Rank findRank(final int matchCount, final boolean bonusNumber) {
         return Arrays.stream(values())
                 .filter(x -> x.matchCount == matchCount)
                 .filter(x -> x.bonus == bonusNumber)
@@ -39,7 +39,7 @@ public enum Rank {
                 .orElse(MISS);
     }
 
-    public boolean isEquals(Rank that) {
+    public boolean isEquals(final Rank that) {
         return this.name().equals(that.name());
     }
 }

@@ -15,11 +15,11 @@ public class LottoTickets implements Cloneable {
 
     private final List<LottoTicket> tickets;
 
-    public LottoTickets(List<LottoTicket> tickets) {
+    public LottoTickets(final List<LottoTicket> tickets) {
         this.tickets = new ArrayList<>(tickets);
     }
 
-    public static LottoTickets from(int count) {
+    public static LottoTickets from(final int count) {
         List<LottoTicket> result = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             LottoNumbers numbers = LottoNumbers.of(LottoNumberAutoGenerator.generateLottoNumber());
@@ -28,20 +28,20 @@ public class LottoTickets implements Cloneable {
         return new LottoTickets(result);
     }
 
-    public static LottoTickets from(List<LottoNumbers> numbers) {
+    public static LottoTickets from(final List<LottoNumbers> numbers) {
         List<LottoTicket> tickets = numbers.stream()
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
         return new LottoTickets(tickets);
     }
 
-    public long findWinLottoCountFromRank(Rank rank, WinLottoTicket winTicket) {
+    public long findWinLottoCountFromRank(final Rank rank, final WinLottoTicket winTicket) {
         return tickets.stream()
                 .filter(ticket -> rank == ticket.getRank(winTicket))
                 .count();
     }
 
-    public Money getAllEarningPrize(WinLottoTicket winTicket) {
+    public Money getAllEarningPrize(final WinLottoTicket winTicket) {
         Money earning = new Money();
 
         return earning

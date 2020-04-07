@@ -20,11 +20,11 @@ public class LottoService {
     private static final String LOTTO_SPLIT_DELIMITER = ",";
     private static final String IMPOSSIBLE_QUANTITY = "구매 불가능한 수량";
 
-    public Money createMoney(String inputMoney) {
+    public Money createMoney(final String inputMoney) {
         return new Money(StringUtil.parseStringToInt(inputMoney));
     }
 
-    public int validateAvailableQuantity(String inputBuyCount, Money money) {
+    public int validateAvailableQuantity(final String inputBuyCount, final Money money) {
         int count = StringUtil.parseStringToInt(inputBuyCount);
         int availableQuantity = money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
 
@@ -35,7 +35,7 @@ public class LottoService {
         return count;
     }
 
-    public MatchedLottoDto playMatchedLotto(int gameCount) {
+    public MatchedLottoDto playMatchedLotto(final int gameCount) {
         LottoTickets lottoTickets = LottoTickets.from(gameCount);
 
         MatchedLottoDto dto = new MatchedLottoDto();
@@ -43,7 +43,7 @@ public class LottoService {
         return dto;
     }
 
-    public MatchedLottoDto playManuallyLotto(List<String> buyPassivityNumber) {
+    public MatchedLottoDto playManuallyLotto(final List<String> buyPassivityNumber) {
         List<LottoNumbers> numbers = new ArrayList<>();
 
         for (String str : buyPassivityNumber) {
@@ -62,11 +62,11 @@ public class LottoService {
         return dto;
     }
 
-    public int getAvailableBuyCount(Money money) {
+    public int getAvailableBuyCount(final Money money) {
         return money.getHowManyBuyItem(new Money(LottoTicket.PRICE));
     }
 
-    public StatisticsLottoDto findWinGame(LottoTickets tickets, WinLottoTicket winTicket) {
+    public StatisticsLottoDto findWinGame(final LottoTickets tickets, final WinLottoTicket winTicket) {
         StatisticsLottoDto dto = new StatisticsLottoDto();
         dto.setFirstGameCount(tickets.findWinLottoCountFromRank(Rank.FIRST, winTicket));
         dto.setSecondGameCount(tickets.findWinLottoCountFromRank(Rank.SECOND, winTicket));
@@ -76,7 +76,7 @@ public class LottoService {
         return dto;
     }
 
-    public StatisticsLottoDto getEarningRate(LottoTickets tickets, WinLottoTicket winTicket) {
+    public StatisticsLottoDto getEarningRate(final LottoTickets tickets, final WinLottoTicket winTicket) {
         StatisticsLottoDto dto = new StatisticsLottoDto();
         Money prize = getAllEarningPrize(tickets, winTicket);
         int howManyBuyItem = tickets.size();
@@ -88,7 +88,7 @@ public class LottoService {
         return dto;
     }
 
-    private Money getAllEarningPrize(LottoTickets tickets, WinLottoTicket winTicket) {
+    private Money getAllEarningPrize(final LottoTickets tickets, final WinLottoTicket winTicket) {
         return tickets.getAllEarningPrize(winTicket);
     }
 }

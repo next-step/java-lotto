@@ -33,27 +33,27 @@ public class StatisticsLottoDto {
         return earningRate;
     }
 
-    public void setFirstGameCount(long firstGameCount) {
+    public void setFirstGameCount(final long firstGameCount) {
         this.firstGameCount = firstGameCount;
     }
 
-    public void setSecondGameCount(long secondGameCount) {
+    public void setSecondGameCount(final long secondGameCount) {
         this.secondGameCount = secondGameCount;
     }
 
-    public void setThirdGameCount(long thirdGameCount) {
+    public void setThirdGameCount(final long thirdGameCount) {
         this.thirdGameCount = thirdGameCount;
     }
 
-    public void setFourthGameCount(long fourthGameCount) {
+    public void setFourthGameCount(final long fourthGameCount) {
         this.fourthGameCount = fourthGameCount;
     }
 
-    public void setFifthGameCount(long fifthGameCount) {
+    public void setFifthGameCount(final long fifthGameCount) {
         this.fifthGameCount = fifthGameCount;
     }
 
-    public void setEarningRate(double earningRate) {
+    public void setEarningRate(final double earningRate) {
         this.earningRate = earningRate;
     }
 }

@@ -20,30 +20,30 @@ public class LottoNumbers {
         this.value = new ArrayList<>(value);
     }
 
-    public static LottoNumbers of(List<Integer> number) {
+    public static LottoNumbers of(final List<Integer> number) {
         List<LottoNumber> numbers = number.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
         return new LottoNumbers(numbers);
     }
 
-    public LottoNumbers(LottoNumbers copy) {
+    public LottoNumbers(final LottoNumbers copy) {
         this.value = new ArrayList<>(copy.value);
     }
 
-    public long getMatchNumberCount(LottoNumber lottoNumber) {
+    public long getMatchNumberCount(final LottoNumber lottoNumber) {
         return this.value.stream()
                 .filter(x -> x.equals(lottoNumber))
                 .count();
     }
 
-    private void validateSize(List<LottoNumber> numbers) {
+    private void validateSize(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new ValidLottoException(LOTTO_VALID_ONLY_6_MESSAGE);
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> numbers) {
+    private void validateDuplicate(final List<LottoNumber> numbers) {
         Set<LottoNumber> duplicate = new HashSet<>(numbers);
         if (numbers.size() != duplicate.size()) {
             throw new ValidLottoException(LOTTO_DUPLICATE_MESSAGE);

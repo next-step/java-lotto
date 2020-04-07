@@ -13,33 +13,33 @@ public class WinLottoTicket {
     private final LottoTicket lottoTicket;
     private final LottoNumber bonus;
 
-    public WinLottoTicket(LottoNumbers numbers, LottoNumber bonus) {
+    public WinLottoTicket(final LottoNumbers numbers, final LottoNumber bonus) {
         validateNull(bonus);
         validateBonusNumber(numbers, bonus);
         this.lottoTicket = new LottoTicket(numbers);
         this.bonus = bonus;
     }
 
-    public WinLottoTicket(List<LottoNumber> numbers, LottoNumber bonus) {
+    public WinLottoTicket(final List<LottoNumber> numbers, final LottoNumber bonus) {
         validateNull(bonus);
         validateBonusNumber(numbers, bonus);
         this.lottoTicket = new LottoTicket(numbers);
         this.bonus = bonus;
     }
 
-    private void validateBonusNumber(LottoNumbers numbers, LottoNumber bonus) {
+    private void validateBonusNumber(final LottoNumbers numbers, final LottoNumber bonus) {
         if (numbers.getValue().contains(bonus)) {
             throw new ValidLottoException(DUPLICATE_LOTTO_NUMBER);
         }
     }
 
-    private void validateBonusNumber(List<LottoNumber> numbers, LottoNumber bonus) {
+    private void validateBonusNumber(final List<LottoNumber> numbers, final LottoNumber bonus) {
         if (numbers.contains(bonus)) {
             throw new ValidLottoException(DUPLICATE_LOTTO_NUMBER);
         }
     }
 
-    private void validateNull(LottoNumber bonus) {
+    private void validateNull(final LottoNumber bonus) {
         if (bonus == null) {
             throw new ValidLottoException(NULL_PARAM_ERROR_MESSAGE);
         }

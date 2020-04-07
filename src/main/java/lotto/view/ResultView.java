@@ -13,17 +13,17 @@ public class ResultView {
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %S입니다";
 
 
-    public static void printLottoBuyCount(int pass, int auto) {
+    public static void printLottoBuyCount(final int pass, final int auto) {
         System.out.println(String.format(BUY_COUNT_MESSAGE, pass, auto));
     }
 
-    public static void printLoots(MatchedLottoDto dto) {
+    public static void printLoots(final MatchedLottoDto dto) {
         for (LottoTicket lotto : dto.getTickets().getTickets()) {
             System.out.println(lotto);
         }
     }
 
-    public static void printResult(StatisticsLottoDto dto) {
+    public static void printResult(final StatisticsLottoDto dto) {
         System.out.println(String.format(FIFTH_MESSAGE, dto.getFifthGameCount()));
         System.out.println(String.format(FOURTH_MESSAGE, dto.getFourthGameCount()));
         System.out.println(String.format(THIRD_MESSAGE, dto.getThirdGameCount()));
@@ -31,7 +31,7 @@ public class ResultView {
         System.out.println(String.format(FIRST_MESSAGE, dto.getFirstGameCount()));
     }
 
-    public static void printEarningResult(StatisticsLottoDto dto) {
+    public static void printEarningResult(final StatisticsLottoDto dto) {
         System.out.println(String.format(EARNING_RATE_MESSAGE, dto.getEarningRate()));
     }
 }

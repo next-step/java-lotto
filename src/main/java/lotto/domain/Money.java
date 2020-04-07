@@ -14,26 +14,26 @@ public class Money {
         money = ZERO;
     }
 
-    public Money(double money) {
+    public Money(final double money) {
         validatePositive(money);
         this.money = money;
     }
 
-    private void validatePositive(double money) {
+    private void validatePositive(final double money) {
         if (money < ZERO) {
             throw new IllegalArgumentException(MONEY_POSITIVE_INTEGER_ERR_MESSAGE);
         }
     }
 
-    public Money getTotalPurchaseAmount(int buyCount) {
+    public Money getTotalPurchaseAmount(final int buyCount) {
         return new Money(this.money * buyCount);
     }
 
-    public Money plus(Money money) {
+    public Money plus(final Money money) {
         return new Money(this.money + money.money);
     }
 
-    public Money minus(Money money) {
+    public Money minus(final Money money) {
         double calc = this.money - money.money;
         if (calc < ZERO) {
             throw new IllegalArgumentException(MONEY_NEGATIVE_INTEGER_ERR_MESSAGE);
@@ -42,15 +42,15 @@ public class Money {
         return new Money(this.money - money.money);
     }
 
-    public Money divide(Money money) {
+    public Money divide(final Money money) {
         return new Money(this.money / money.money);
     }
 
-    public Money multiply(Money money) {
+    public Money multiply(final Money money) {
         return new Money(this.money * money.money);
     }
 
-    public double getEarningRate(Money investmentAmount) {
+    public double getEarningRate(final Money investmentAmount) {
         return Math.floor(this.divide(investmentAmount).getMoney() * 100) / 100;
     }
 
@@ -58,7 +58,7 @@ public class Money {
         return money;
     }
 
-    public int getHowManyBuyItem(Money itemPrice) {
+    public int getHowManyBuyItem(final Money itemPrice) {
         return (int) Math.floor(this.money / itemPrice.money);
     }
 

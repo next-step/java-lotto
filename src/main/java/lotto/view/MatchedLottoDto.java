@@ -10,7 +10,7 @@ public class MatchedLottoDto {
         return tickets;
     }
 
-    public void setTickets(LottoTickets tickets) {
+    public void setTickets(final LottoTickets tickets) {
         this.tickets = tickets;
     }
 }

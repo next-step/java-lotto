@@ -24,7 +24,7 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public static List<String> receiveBuyPassivityLottoNumber(int count) {
+    public static List<String> receiveBuyPassivityLottoNumber(final int count) {
         System.out.println(PASSIVITY_BUY_LOTTO_NUMBER_INPUT_MESSAGE);
         Scanner sc = new Scanner(System.in);
         List<String> input = new ArrayList<>();
