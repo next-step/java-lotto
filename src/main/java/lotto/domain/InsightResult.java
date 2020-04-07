@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class InsightResult {
     private final Map<RankEnum, Integer> insightResult;
@@ -21,5 +22,18 @@ public class InsightResult {
             totalRevenue += rank.getReward() * insightResult.get(rank);
         }
         return totalRevenue;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InsightResult that = (InsightResult) o;
+        return Objects.equals(insightResult, that.insightResult);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(insightResult);
     }
 }

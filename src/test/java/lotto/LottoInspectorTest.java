@@ -1,27 +1,23 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoInspector;
-import lotto.domain.Money;
+import lotto.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoInspectorTest {
 
     private LottoInspector lottoInspector;
+    private List<Lotto> testLottos = new ArrayList<>();
 
     @BeforeEach
     void setting() {
         this.lottoInspector = new LottoInspector();
-        List<Lotto> testLottos = new ArrayList<>();
 
         Lotto lotto1 = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = Lotto.manual(Arrays.asList(1, 2, 3, 41, 42, 43));
@@ -35,5 +31,23 @@ public class LottoInspectorTest {
         assertThat(
                 this.lottoInspector.getYield(new Money(1000), 5000)
         ).isEqualByComparingTo(new BigDecimal(5));
+    }
+
+    @Test
+    @DisplayName("결과 가져오기 테스트")
+    void getResultTest() {
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+
+        Map<RankEnum, Integer> targetInsightReuslt = new HashMap<>();
+        targetInsightReuslt.put(RankEnum.FIRST, 1);
+        targetInsightReuslt.put(RankEnum.SECOND, 0);
+        targetInsightReuslt.put(RankEnum.THIRD, 0);
+        targetInsightReuslt.put(RankEnum.FOURTH, 0);
+        targetInsightReuslt.put(RankEnum.FIFTH, 1);
+        targetInsightReuslt.put(RankEnum.NO_RANK, 0);
+
+        assertThat(
+                lottoInspector.getResult(winningLotto, new Lottos(testLottos))
+        ).isEqualTo(new InsightResult(targetInsightReuslt));
     }
 }
