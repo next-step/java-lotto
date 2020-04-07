@@ -5,24 +5,26 @@ import java.util.List;
 
 public class PurchaseResult {
 
-    private final List<Lotto> purchasedLottos;
-    private final Money payedMoney;
+    private final List<Lotto> manualLottos;
+    private final List<Lotto> automaticLottos;
 
-    public PurchaseResult() {
-        this.purchasedLottos = new ArrayList();
-        this.payedMoney = new Money(0);
+    public PurchaseResult(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
+        this.manualLottos = manualLottos;
+        this.automaticLottos = automaticLottos;
     }
 
-    public PurchaseResult(List<Lotto> purchasedLottos, Money payedMoney) {
-        this.purchasedLottos = purchasedLottos;
-        this.payedMoney = payedMoney;
+    public List<Lotto> getManualLottos() {
+        return manualLottos;
     }
 
-    public List<Lotto> getPurchasedLottos() {
-        return new ArrayList<>(this.purchasedLottos);
+    public List<Lotto> getAutomaticLottos() {
+        return automaticLottos;
     }
 
-    public Money getPayedMoney() {
-        return new Money(payedMoney.getMoney());
+    public List<Lotto> getAllLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
+        lottos.addAll(automaticLottos);
+        return lottos;
     }
 }

@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.domain.ManualLottoOrderSheet;
+import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +13,9 @@ public class InputView {
     private static final String LOTTO_NUMBER_SPLIT_KEYWORD = ",";
     private Scanner scanner = new Scanner(System.in);
 
-    public int inputMoney() {
+    public Money inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return new Money(scanner.nextInt());
     }
 
     public int inputPurchaseManualCount() {
@@ -31,13 +33,15 @@ public class InputView {
         return new ManualLottoOrderSheet(manualLottoNumbers);
     }
 
-    public int[] inputWinningNumber() {
+    public WinningLotto inputWinningNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        int[] inputs = Arrays.stream(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD)).mapToInt(Integer::parseInt).toArray();
-        return inputs;
+        int[] winningNumbers = Arrays.stream(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD)).mapToInt(Integer::parseInt).toArray();
+        int bonusNumber = inputBonusNumber();
+
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    public int inputBonusNumber() {
+    private int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }

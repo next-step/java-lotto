@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.InsightResult;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.RankEnum;
+import lotto.domain.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,15 +15,16 @@ public class ResultView {
 
     }
 
-    public void viewPurchaseCount(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
-        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + automaticLottos.size() + "장을 구매했습니다.");
-    }
-
-    public void viewLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public void viewLottos(PurchaseResult purchaseResult) {
+        viewPurchaseCount(purchaseResult.getManualLottos(), purchaseResult.getAutomaticLottos());
+        for (Lotto lotto : purchaseResult.getAllLottos()) {
             viewLottoNumbers(lotto);
         }
         System.out.println();
+    }
+
+    private void viewPurchaseCount(List<Lotto> manualLottos, List<Lotto> automaticLottos) {
+        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + automaticLottos.size() + "장을 구매했습니다.");
     }
 
     public void viewLottoNumbers(Lotto lotto) {
