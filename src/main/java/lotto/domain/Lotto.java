@@ -5,13 +5,15 @@ import lotto.exception.InvalidLottoNumbersException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.toIntExact;
+
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
     private final List<Integer> lottoNumbers;
 
-    public Lotto() {
-        lottoNumbers = LottoNumber.generate(LOTTO_SIZE);
+    public static Lotto of() {
+        return new Lotto(LottoNumber.generate(LOTTO_SIZE));
     }
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -38,13 +40,15 @@ public class Lotto {
     }
 
     public Winning getResult(List<Integer> winningNumbers) {
-        int matchCount = 0;
-
-        for (Integer number : winningNumbers) {
-            matchCount += lottoNumbers.contains(number) ? 1 : 0;
-        }
-
-        return Winning.getWinningType(matchCount);
+        return Winning.getWinningType(toIntExact(countMatches(winningNumbers)));
+    }
+    private long countMatches(List<Integer> numbers) {
+        return numbers.stream()
+                .filter(this::contains)
+                .count();
+    }
+    private boolean contains(Integer number) {
+        return lottoNumbers.contains(number);
     }
 
     public static String calculateYield(int paidMoney, int profit) {
