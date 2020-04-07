@@ -29,10 +29,19 @@ public class Lottos {
 
         for (Lotto lotto : lottos) {
             Winning winning = lotto.getResult(winningNumber);
-            result.put(winning, result.containsKey(winning) ? result.get(winning) + 1 : 1);
+
+            result.put(winning, getCountByWinningType(result, winning));
         }
 
         return result;
+    }
+
+    private int getCountByWinningType(Map<Winning, Integer> result, Winning winning) {
+        if (result.containsKey(winning)) {
+            return result.get(winning) + 1;
+        }
+
+        return 1;
     }
 
     public String toString(String format, String delimiter) {
