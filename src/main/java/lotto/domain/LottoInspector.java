@@ -12,12 +12,9 @@ public class LottoInspector {
     public InsightResult getResult(WinningLotto winningLotto, Lottos lottos) {
         Map<RankEnum, Integer> matchedResult = initMatchedResult();
         for (Lotto lotto : lottos.getLottos()) {
-            int matchedCount = winningLotto.getWinningLotto().getMatchedCount(lotto);
-            boolean hasBonus = lotto.isExistNumber(winningLotto.getBonusNumber());
-            RankEnum rank = RankEnum.getRank(matchedCount, hasBonus);
+            RankEnum rank = winningLotto.getRank(lotto);
             matchedResult.put(rank, matchedResult.getOrDefault(rank, 0) + 1);
         }
-
         return new InsightResult(matchedResult);
     }
 

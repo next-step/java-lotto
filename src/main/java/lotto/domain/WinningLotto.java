@@ -32,6 +32,12 @@ public class WinningLotto {
         return this.bonusNumber;
     }
 
+    public RankEnum getRank(Lotto lotto) {
+        int matchedCount = getWinningLotto().getMatchedCount(lotto);
+        boolean hasBonus = lotto.isExistNumber(getBonusNumber());
+        return RankEnum.getRank(matchedCount, hasBonus);
+    }
+
     private void validateBonusNumber(Lotto inputWinningLotto, LottoNumber inputBonusNumber) {
         if (inputWinningLotto.isExistNumber(inputBonusNumber)) {
             throw new IllegalArgumentException("입력하신 보너스번호는 이미 있는 번호입니다.");
