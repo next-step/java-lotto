@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     private Lotto(NumberGenerator numberGenerator) {
-        this.lottoNumbers = new TreeSet<>(generatorLottoNumbers(numberGenerator));
+        this(generatorLottoNumbers(numberGenerator));
     }
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
@@ -44,7 +44,7 @@ public class Lotto {
                 .count();
     }
 
-    private Set<LottoNumber> generatorLottoNumbers(NumberGenerator numberGenerator) {
+    private static Set<LottoNumber> generatorLottoNumbers(NumberGenerator numberGenerator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_MAX_SOCKET) {
             LottoNumber lottoNumber = LottoNumber.randomNumber(numberGenerator);
