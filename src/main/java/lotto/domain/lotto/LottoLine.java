@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
-import com.sun.tools.javac.util.Pair;
 import lotto.domain.matcher.LottoRank;
+import lotto.domain.matcher.LottoTier;
 import lotto.domain.matcher.WinningTicket;
 
 import java.util.List;
@@ -17,9 +17,9 @@ public class LottoLine {
     public LottoRank checkPrize(WinningTicket winningTicket) {
         int matchCount = lottoNumbers.countMatchNumbers(winningTicket.getLottoNumbers());
         if (matchCount == LottoRank.FIVE.getMatchCount() && winningTicket.isMatchBonusNumber(lottoNumbers)) {
-            return LottoRank.of(Pair.of(matchCount, true));
+            return LottoRank.of(LottoTier.of(matchCount, true));
         }
-        return LottoRank.of(Pair.of(matchCount, false));
+        return LottoRank.of(LottoTier.of(matchCount, false));
     }
 
     public List<Integer> toIntNumbers() {

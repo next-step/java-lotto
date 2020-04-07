@@ -1,8 +1,8 @@
 package lotto.infrastructure;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumberStrategy;
 import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.machine.LottoNumberStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,11 +22,21 @@ public class AutoLottoNumberStrategy implements LottoNumberStrategy {
                 .collect(Collectors.toList());
     }
 
+    private final int autoCount;
+
+    public AutoLottoNumberStrategy(int autoCount) {
+        this.autoCount = autoCount;
+    }
+
     @Override
-    public LottoNumbers get() {
-        Collections.shuffle(lottoNumbers);
-        List<LottoNumber> selectedLottoNum = new ArrayList<>(lottoNumbers).subList(ZERO_INDEX, LOTTO_NUM_COUNT_LIMIT);
-        selectedLottoNum.sort(comparingInt(LottoNumber::intValue));
-        return new LottoNumbers(selectedLottoNum);
+    public List<LottoNumbers> get() {
+        List<LottoNumbers> lottoNumbersByAuto = new ArrayList<>();
+        for (int i = 0; i < autoCount; i++) {
+            Collections.shuffle(lottoNumbers);
+            List<LottoNumber> selectedLottoNum = new ArrayList<>(lottoNumbers).subList(ZERO_INDEX, LOTTO_NUM_COUNT_LIMIT);
+            selectedLottoNum.sort(comparingInt(LottoNumber::intValue));
+            lottoNumbersByAuto.add(new LottoNumbers(selectedLottoNum));
+        }
+        return lottoNumbersByAuto;
     }
 }
