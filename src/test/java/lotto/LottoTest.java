@@ -15,17 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private Lotto winningLotto;
-    private Lotto myLotto;
-
     private LottoGame lottoGame;
 
 
     @BeforeEach
     void setup() {
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        myLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
         lottoGame = new LottoGame();
     }
 
