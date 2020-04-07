@@ -21,8 +21,8 @@ public class LottoStore {
     }
 
     private void validatePurchasableManualLotto(Money money, ManualLottoOrderSheet manualLottoOrderSheet) {
-        int laftMoney = money.getMoney() - (LOTTO_UNIT_PRICE * manualLottoOrderSheet.getOrderCount());
-        if (laftMoney < 0) {
+        int leftMoney = money.getMoney() - (LOTTO_UNIT_PRICE * manualLottoOrderSheet.getOrderCount());
+        if (leftMoney < 0) {
             throw new IllegalArgumentException("돈이 부족합니다.");
         }
     }
