@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final String LOTTO_NUMBER_SPLIT_KEYWORD = ",";
@@ -25,17 +26,21 @@ public class InputView {
 
     public ManualLottoOrderSheet inputManualLottoNumbers(int purchaseManualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<int[]> manualLottoNumbers = new ArrayList<>();
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseManualCount; i++) {
-            int[] inputs = Arrays.stream(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD)).mapToInt(Integer::parseInt).toArray();
-            manualLottoNumbers.add(inputs);
+            List<String> inputs = Arrays.asList(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD));
+            List<Integer> inputNumbers = inputs.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+            manualLottoNumbers.add(inputNumbers);
         }
         return new ManualLottoOrderSheet(manualLottoNumbers);
     }
 
     public WinningLotto inputWinningNumber() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        int[] winningNumbers = Arrays.stream(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD)).mapToInt(Integer::parseInt).toArray();
+        List<String> inputs = Arrays.asList(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD));
+        List<Integer> winningNumbers = inputs.stream()
+                .map(s -> Integer.parseInt(s))
+                .collect(Collectors.toList());
         int bonusNumber = inputBonusNumber();
 
         return new WinningLotto(winningNumbers, bonusNumber);

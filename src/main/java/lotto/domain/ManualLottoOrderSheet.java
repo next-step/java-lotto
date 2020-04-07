@@ -5,13 +5,13 @@ import java.util.List;
 
 public class ManualLottoOrderSheet {
 
-    private final List<int[]> manualLottoOrders;
+    private final List<List<Integer>> manualLottoOrders;
 
-    public ManualLottoOrderSheet(List<int[]> manualLottoOrders) {
+    public ManualLottoOrderSheet(List<List<Integer>> manualLottoOrders) {
         this.manualLottoOrders = manualLottoOrders;
     }
 
-    public List<int[]> getManualLottoOrders() {
+    public List<List<Integer>> getManualLottoOrders() {
         return new ArrayList<>(this.manualLottoOrders);
     }
 

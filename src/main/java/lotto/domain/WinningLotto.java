@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusNumber;
@@ -14,11 +16,11 @@ public class WinningLotto {
         this(inputWinningLotto, LottoNumber.newChooseNumber(inputBonusNumber));
     }
 
-    public WinningLotto(int[] inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
+    public WinningLotto(List<Integer> inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
         this(Lotto.manual(inputWinningLottoNumbers), inputBonusNumber);
     }
 
-    public WinningLotto(int[] inputWinningLottoNumbers, int inputBonusNumber) {
+    public WinningLotto(List<Integer> inputWinningLottoNumbers, int inputBonusNumber) {
         this(Lotto.manual(inputWinningLottoNumbers), LottoNumber.newChooseNumber(inputBonusNumber));
     }
 

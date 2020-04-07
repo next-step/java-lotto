@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.generator.RandomNumber;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_MAX_SOCKET = 6;
@@ -18,11 +17,7 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto manual(List<LottoNumber> lottoNumbers) {
-        return new Lotto(lottoNumbers.stream().collect(Collectors.toSet()));
-    }
-
-    public static Lotto manual(int... lottoNumbers) {
+    public static Lotto manual(List<Integer> lottoNumbers) {
         return new Lotto(changeToLottoNumbers(lottoNumbers));
     }
 
@@ -65,10 +60,11 @@ public class Lotto {
         }
     }
 
-    private static Set<LottoNumber> changeToLottoNumbers(int[] inputs) {
+    private static Set<LottoNumber> changeToLottoNumbers(List<Integer> inputs) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = 0; i < inputs.length; i++) {
-            lottoNumbers.add(LottoNumber.newChooseNumber(inputs[i]));
+
+        for (int i = 0; i < inputs.size(); i++) {
+            lottoNumbers.add(LottoNumber.newChooseNumber(inputs.get(i)));
         }
         return lottoNumbers;
     }

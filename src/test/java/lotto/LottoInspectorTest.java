@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,8 +23,8 @@ public class LottoInspectorTest {
         this.lottoInspector = new LottoInspector();
         List<Lotto> testLottos = new ArrayList<>();
 
-        Lotto lotto1 = Lotto.manual(1, 2, 3, 4, 5, 6);
-        Lotto lotto2 = Lotto.manual(1, 2, 3, 41, 42, 43);
+        Lotto lotto1 = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.manual(Arrays.asList(1, 2, 3, 41, 42, 43));
         testLottos.add(lotto1);
         testLottos.add(lotto2);
     }

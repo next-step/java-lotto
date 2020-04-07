@@ -13,7 +13,11 @@ public class LottosTest {
     @Test
     @DisplayName("로또's 생성 테스트")
     void generateLottosTest() {
-        List<Lotto> lottoList = Arrays.asList(Lotto.manual(1, 2, 3, 4, 5, 6), Lotto.manual(1, 2, 3, 4, 5, 6), Lotto.manual(1, 2, 3, 4, 5, 6));
+        List<Lotto> lottoList = Arrays.asList(
+                Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
         Lottos lottos = new Lottos(lottoList);
     }
 }

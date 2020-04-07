@@ -4,10 +4,13 @@ import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
-    private int[] testCase = {1, 2, 3, 4, 5, 6};
+    private List<Integer> testCase = Arrays.asList(1, 2, 3, 4, 5, 6);
 
     @Test
     @DisplayName("로또당첨번호 생성 테스트")
