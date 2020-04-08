@@ -45,7 +45,7 @@ public class LottoGame {
   }
 
   public Set<LottoBall> getLottoBalls() {
-    return lottoBalls;
+    return Collections.unmodifiableSet(lottoBalls);
   }
 
   public int getMatchCount(LottoGame lottoGame) {

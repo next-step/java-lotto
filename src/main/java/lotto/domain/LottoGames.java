@@ -1,12 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.model.Rank;
 
 public class LottoGames {
-  public static final int LOTTO_PRICE = 1000;
+  public static final int LOTTO_PRICE = 1_000;
 
   private List<LottoGame> lottoGames = new ArrayList<>();
 
@@ -19,7 +20,7 @@ public class LottoGames {
   }
 
   public List<LottoGame> getLottoGames() {
-    return lottoGames;
+    return Collections.unmodifiableList(lottoGames);
   }
 
   public WinningResult confirmResult(WinningBalls winningBalls) {
