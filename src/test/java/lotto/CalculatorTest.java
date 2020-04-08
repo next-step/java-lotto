@@ -1,10 +1,14 @@
 package lotto;
 
+import lotto.domain.Calculator;
 import lotto.vo.Elements;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -24,10 +28,21 @@ public class CalculatorTest {
         assertThat(new Elements(formula)).isEqualTo(new Integer[] {1,2,3});
     }
 
+    static Stream<String> emptySumCase() {
+        return Stream.of(null, "", " ");
+    }
+
+    @ParameterizedTest
+    @MethodSource("emptySumCase")
+    void testEmptySum(String formula) {
+        assertThat(Calculator.Sum(formula)).isEqualTo(0);
+    }
+
+
     @ParameterizedTest
     @CsvSource(value = {"1=1", "1,2=3", "1,2:3=6"}, delimiter = '=')
     void testSum(String formula, Integer answer) {
-
+        assertThat(Calculator.Sum(formula)).isEqualTo(answer);
     }
 
     @Test

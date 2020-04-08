@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Elements {
 
+    private static final char SPLIT_SEPARATOR = '|';
+
     private static final String DEFAULT_DELIMITER_COMMA = ",";
     private static final String DEFAULT_DELIMITER_COLON = ":";
 
@@ -17,31 +19,31 @@ public class Elements {
     private final List<Integer> elements;
 
     public Elements(final String formula) {
-
         this.formula = formula;
-        validateFormulaEmpty();
-
-        final List<String> stringElements = new ArrayList<String>( split(formula, DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON) );
-        validateElement(stringElements);
-
-        this.elements = parseElementToInteger(stringElements);
+        this.elements = parse();
     }
 
-    private List<String> split(final String formula, final String ... delimiters) {
-        final String delimiterList = StringUtils.serialize(delimiters, '|');
-        return Arrays.asList(formula.split(delimiterList));
-    }
+    private List<Integer> parse() {
 
-    private void validateFormulaEmpty() {
         if ( StringUtils.isNullOrEmpty(formula) ) {
-            throw new InvalidFormatException(formula);
+            return new ArrayList<>();
         }
+
+        return makeList( split(formula, DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON) );
     }
 
-    private void validateElement(List<String> stringElements) {
+    private String[] split(final String formula, final String ... delimiters) {
+        final String delimiterList = StringUtils.serialize(delimiters, SPLIT_SEPARATOR);
+        return formula.split(delimiterList);
+    }
+
+    private List<Integer> makeList(final String[] stringElements) {
+        List<Integer> elements = new ArrayList<>();
         for (String elm : stringElements) {
             validateElementNegative(validateElementNumeric(elm));
+            elements.add(Integer.parseInt(elm));
         }
+        return elements;
     }
 
     private Integer validateElementNumeric(final String item) {
@@ -57,12 +59,8 @@ public class Elements {
         }
     }
 
-    private List<Integer> parseElementToInteger(List<String> stringElements) {
-        List<Integer> elements = new ArrayList<>();
-        for (String elm : stringElements) {
-            elements.add(Integer.parseInt(elm));
-        }
-        return elements;
+    public List<Integer> getElements() {
+        return this.elements;
     }
 
     @Override
