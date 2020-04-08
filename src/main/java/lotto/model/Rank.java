@@ -1,67 +1,42 @@
 package lotto.model;
 
-import java.util.HashMap;
-import java.util.Map;
 
-public class Rank {
+public enum  Rank {
 
-//    FIRST(6, 2000000000),
-//    SECOND(5, 1500000),
-//    THIRD(4, 50000),
-//    FOURTH(3, 5000),
-//    ZERO(0, 0);
-
+    FIRST(6, 2000000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000),
+    ZERO(0, 0);
 
     private int matchCount;
-    private int rank;
     private int prize;
 
-
-    public Rank(int matchCount) {
+    Rank(int matchCount, int prize) {
         this.matchCount = matchCount;
-        this.rank = calcRank(matchCount);
-        this.prize = calcPrize(calcRank(matchCount));
+        this.prize = prize;
     }
-
 
     public int getPrize() {
         return prize;
-    }
-
-    public int getRank() {
-        return rank;
     }
 
     public int getMatchCount() {
         return matchCount;
     }
 
-    int calcRank(int matchCount) {
+    public static Rank calcRank(int matchCount) {
         if (matchCount == 6) {
-            return 1;
+            return Rank.FIRST;
         } else if (matchCount == 5) {
-            return 2;
+            return Rank.SECOND;
         } else if (matchCount == 4) {
-            return 3;
+            return Rank.THIRD;
         } else if (matchCount == 3) {
-            return 4;
+            return Rank.FOURTH;
         } else if (matchCount == 2) {
-            return 5;
+            return Rank.ZERO;
         }
-        return 6;
+        return Rank.ZERO;
     }
-    int calcPrize(int rank) {
-        if (rank == 1) {
-            return 2000000000;
-        } else if (rank == 2) {
-            return  1500000;
-        } else if (rank == 3) {
-            return 50000;
-        } else if (rank == 4){
-            return 5000;
-        }
-        return 0;
-    }
-
-
 }

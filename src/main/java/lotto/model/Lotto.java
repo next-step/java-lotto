@@ -5,7 +5,6 @@ import java.util.List;
 public class Lotto {
     private List<Integer> numbers;
 
-
     public Lotto(final List<Integer> numbers) {
         this.numbers = numbers;
     }
@@ -19,7 +18,7 @@ public class Lotto {
                 .filter(number -> myLotto.getNumbers().contains(number))
                 .count());
 
-        return new Result(new Rank(count));
+        return new Result(Rank.calcRank(count));
     }
 
     private static int safeLongToInt(long l) {

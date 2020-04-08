@@ -41,7 +41,7 @@ public class LottoTest {
 
         List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            Result rank = lottoGame.match(winningLotto, lotto);
+            Result rank = lotto.match(winningLotto, lotto);
             results.add(rank);
         }
         assertThat(results.size()).isEqualTo(14);
