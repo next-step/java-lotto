@@ -9,9 +9,11 @@ public class StringAddCalculator {
     private static final String DEFAULT_DELIMITERS = ",:";
     private static final String CUSTOM_FORMAT = "//(.)\n(.*)";
 
+    private static Pattern pattern = Pattern.compile(CUSTOM_FORMAT);
+
     public static int splitAndSum(String input) {
 
-        if (isEmptyString(input)) {
+        if (isEmpty(input)) {
             return 0;
         }
 
@@ -30,7 +32,7 @@ public class StringAddCalculator {
     }
 
     private static int getValidValue(String input) {
-        int value = parseValidInt(input);
+        int value = Integer.parseInt(input);
 
         if (value < 0) {
             throw new RuntimeException();
@@ -39,16 +41,8 @@ public class StringAddCalculator {
         return value;
     }
 
-    private static int parseValidInt(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException();
-        }
-    }
-
     private static String[] splitInput(String input) {
-        Matcher matcher = Pattern.compile(CUSTOM_FORMAT).matcher(input);
+        Matcher matcher = pattern.matcher(input);
 
         if (matcher.find()) {
             String delimiter = String.format(REGEX_FORMAT, matcher.group(1).concat(DEFAULT_DELIMITERS));
@@ -58,7 +52,7 @@ public class StringAddCalculator {
         return input.split(String.format(REGEX_FORMAT, DEFAULT_DELIMITERS));
     }
 
-    private static boolean isEmptyString(String string) {
+    private static boolean isEmpty(String string) {
         return Objects.isNull(string) || string.isEmpty();
     }
 }
