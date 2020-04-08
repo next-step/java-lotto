@@ -3,7 +3,9 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -16,5 +18,9 @@ public class ResultView {
                     .collect(Collectors.joining(", ", "[", "]"));
             System.out.println(lottoNumbers);
         }
+    }
+
+    public static void printEarningRate(String earningRate) {
+        System.out.printf(String.format("총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", earningRate));
     }
 }
