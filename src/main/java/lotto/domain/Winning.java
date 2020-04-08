@@ -26,7 +26,9 @@ public enum Winning {
     }
 
     public static List<Winning> winValues() {
-        return Arrays.stream(values()).filter(winning -> winning != LOSE).collect(Collectors.toList());
+        return Arrays.stream(values())
+                .filter(winning -> winning != LOSE)
+                .collect(Collectors.toList());
     }
 
     public static Winning getWinningType(int matchCount) {
