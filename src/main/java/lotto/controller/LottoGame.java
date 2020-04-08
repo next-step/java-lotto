@@ -1,23 +1,25 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
-import lotto.domain.Rank;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class LottoGame {
     public void start() {
-        // TODO: input money
-        LottoGroup lottoGroup = new LottoGroup(14);
+        Money money = new Money(InputView.getMoney());
+        LottoGroup lottoGroup = new LottoGroup(money.getCountOfLotto());
         ResultView.printLottoGroup(lottoGroup);
         String winningLottoNumbers = InputView.getWinningLotto();
-        Lotto winningLotto = new Lotto(winningLottoNumbers);
         int bonusNo = InputView.getBonusNo();
-        // TODO: 결과 출력
-        List<Rank> ranks = lottoGroup.matching(winningLotto);
-        // TODO: 수익률 계산
+        List<Rank> ranks = lottoGroup.matching(new Lotto(winningLottoNumbers), bonusNo);
+        int totalWinningMoney = 0;
+        for (Rank rank : ranks) {
+            totalWinningMoney += rank.getWinningMoney();
+        }
+        BigDecimal earningRate = money.getEarningRate(totalWinningMoney);
+        ResultView.printEarningRate(earningRate.toString());
     }
 }
