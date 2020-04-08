@@ -63,13 +63,47 @@ public class LottoTest {
     public void match_6개_테스트() {
         lotto = new Lotto(1, 2, 3, 4, 5, 6);
         winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIRST);
+        int bonusNo = 7;
+        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    public void match_5개_보너스_테스트() {
+        lotto = new Lotto(1, 2, 3, 4, 5, 7);
+        winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNo = 7;
+        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    public void match_5개_테스트() {
+        lotto = new Lotto(1, 2, 3, 4, 5, 8);
+        winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNo = 7;
+        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.THIRD);
     }
 
     @Test
     public void match_3개_테스트() {
-        lotto = new Lotto(1, 2, 3, 4, 5, 6);
-        winningLotto = new Lotto(1, 2, 3, 14, 15, 16);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIFTH);
+        lotto = new Lotto(1, 2, 3, 7, 8, 9);
+        winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNo = 7;
+        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    public void match_3개_보너스_일치_테스트() {
+        lotto = new Lotto(1, 2, 3, 7, 8, 9);
+        winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNo = 7;
+        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    public void match_3개_보너스_포함_테스트() {
+        lotto = new Lotto(1, 2, 7, 8, 9, 10);
+        winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
+        int bonusNo = 7;
+        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.MISS);
     }
 }

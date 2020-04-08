@@ -21,10 +21,10 @@ public class LottoGroup {
         return this.lottos;
     }
 
-    public List<Rank> matching(Lotto winningLotto) {
+    public List<Rank> matching(Lotto winningLotto, int bonusNo) {
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lotto.match(winningLotto));
+            result.add(lotto.match(winningLotto, bonusNo));
         }
         return result;
     }

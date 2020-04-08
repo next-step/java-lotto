@@ -77,11 +77,15 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public Rank match(Lotto winningLotto) {
-        long match = winningLotto.lottoNumbers.stream()
+    public Rank match(Lotto winningLotto, int bonusNo) {
+        int match = winningLotto.lottoNumbers.stream()
                 .filter(winningNumber -> lottoNumbers.contains(winningNumber))
-                .count();
-        return Rank.valueOf(match);
+                .collect(Collectors.reducing(0, e -> 1, Integer::sum));
+        return Rank.valueOf(match, isMatchBonusNo(bonusNo));
+    }
+
+    private boolean isMatchBonusNo(int bonusNo) {
+        return lottoNumbers.contains(bonusNo);
     }
 
     @Override

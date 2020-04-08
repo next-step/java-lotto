@@ -16,9 +16,10 @@ public class LottoGroupTest {
     public void setup() {
         lottoGroup = new LottoGroup(new Lotto(1, 2, 3, 4, 5, 6),
                 new Lotto(1, 2, 3, 4, 5, 7),
+                new Lotto(1, 2, 3, 4, 5, 8),
                 new Lotto(1, 2, 3, 4, 7, 8),
                 new Lotto(1, 2, 3, 7, 8, 9),
-                new Lotto(4, 5, 6, 7, 8, 9));
+                new Lotto(1, 2, 7, 8, 9, 10));
     }
 
     @ParameterizedTest
@@ -40,7 +41,8 @@ public class LottoGroupTest {
     @Test
     public void matching() {
         Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        List<Rank> matchingResult = lottoGroup.matching(winningLotto);
-        assertThat(matchingResult).hasSize(5).contains(Rank.FIRST, Rank.THIRD, Rank.FOURTH, Rank.FIRST);
+        int bonusNo = 7;
+        List<Rank> matchingResult = lottoGroup.matching(winningLotto, bonusNo);
+        assertThat(matchingResult).hasSize(6).containsExactly(Rank.values());
     }
 }
