@@ -1,12 +1,21 @@
 package lotto.view;
 
+import lotto.model.Lotto;
 import lotto.model.Result;
 
 import java.util.List;
 
 public class ResultView {
 
-    public void print(List<Result> gameResults) {
+    public void printPurchasedLotto(List<Lotto> lottos) {
+        System.out.println(lottos.size() + "개 를 구매 했다");
+        for (Lotto lotto: lottos) {
+            System.out.println(lotto.getNumbers());
+        }
+    }
+
+
+    public void printGameResult(List<Result> gameResults) {
         // 4등
         System.out.println("3개 일치 (5000원)- " +
                 gameResults.stream().filter(result -> result.getRank().getMatchCount() == 3).count());
