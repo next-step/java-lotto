@@ -1,7 +1,7 @@
 package lotto.exception;
 
 public class CloneFailException extends RuntimeException {
-    public CloneFailException(String message) {
+    public CloneFailException(final String message) {
         super(message);
     }
 }

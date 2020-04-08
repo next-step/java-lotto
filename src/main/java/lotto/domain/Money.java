@@ -1,55 +1,77 @@
 package lotto.domain;
 
+import lotto.exception.ValidLottoException;
+
 import java.util.Objects;
 
 public class Money {
+
+    private static final int ZERO = 0;
+    private static final String MONEY_POSITIVE_INTEGER_ERR_MESSAGE = "금액은 양의 정수만 입력 가능 합니다.";
+    private static final String MONEY_NEGATIVE_INTEGER_ERR_MESSAGE = "금액은 음수가 될 수 없습니다.";
+    private static final String IMPOSSIBLE_QUANTITY = "구매 불가능한 수량";
+
     private final double money;
 
     public Money() {
-        money = 0;
+        money = ZERO;
     }
 
-    public Money(double money) {
+    public Money(final double money) {
         validatePositive(money);
         this.money = money;
     }
 
-    public static Money buyItemAmount(double itemPrice, int buyCount) {
-        return new Money(itemPrice).multiply(buyCount);
-    }
-
-    private void validatePositive(double money) {
-        if (money < 0) {
-            throw new IllegalArgumentException("금액은 양의 정수만 입력 가능 합니다.");
+    private void validatePositive(final double money) {
+        if (money < ZERO) {
+            throw new IllegalArgumentException(MONEY_POSITIVE_INTEGER_ERR_MESSAGE);
         }
     }
 
-    public Money plus(Money money) {
+    public Money getTotalPurchaseAmount(final int buyCount) {
+        return new Money(this.money * buyCount);
+    }
+
+    public Money plus(final Money money) {
         return new Money(this.money + money.money);
     }
 
-    public Money divide(Money money) {
+    public Money minus(final Money money) {
+        double calc = this.money - money.money;
+        if (calc < ZERO) {
+            throw new IllegalArgumentException(MONEY_NEGATIVE_INTEGER_ERR_MESSAGE);
+        }
+
+        return new Money(this.money - money.money);
+    }
+
+    public Money divide(final Money money) {
         return new Money(this.money / money.money);
     }
 
-    public Money divide(double count) {
-        return new Money(this.money / count);
-    }
-
-    public Money multiply(Money money) {
+    public Money multiply(final Money money) {
         return new Money(this.money * money.money);
     }
 
-    public Money multiply(double count) {
-        return new Money(this.money * count);
+    public double getEarningRate(final Money investmentAmount) {
+        return Math.floor(this.divide(investmentAmount).getMoney() * 100) / 100;
     }
 
     public double getMoney() {
         return money;
     }
 
-    public int getHowManyBuyItem(Money itemPrice) {
+    public int getHowManyBuyItem(final Money itemPrice) {
         return (int) Math.floor(this.money / itemPrice.money);
+    }
+
+    public int getPurchaseAvailableCount(final Money itemPrice, final int itemCount) {
+        Money amount = new Money(itemPrice.money * itemCount);
+
+        if (this.money < amount.money) {
+            throw new ValidLottoException(IMPOSSIBLE_QUANTITY);
+        }
+        return itemCount;
     }
 
     @Override

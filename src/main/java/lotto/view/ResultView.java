@@ -1,25 +1,37 @@
 package lotto.view;
 
-import lotto.domain.item.LottoTicket;
+import lotto.domain.lotto.LottoTicket;
 
 public class ResultView {
 
-    public static void printLoots(LottoDto dto) {
-        System.out.println(dto.getTickets().size() + "개를 구매 했습니다.");
-        for (LottoTicket lotto : dto.getTickets()) {
+    private static final String BUY_COUNT_MESSAGE = "수동으로 %s장, 자동으로 %s장을 구매 했습니다.";
+    private static final String FIFTH_MESSAGE = "3개 일치 (5000원)- %s개";
+    private static final String FOURTH_MESSAGE = "4개 일치 (50000원)- %s개";
+    private static final String THIRD_MESSAGE = "5개 일치 (1500000)- %s개";
+    private static final String SECOND_MESSAGE = "5개 일치, 보너스 볼 일치 (30000000원)- %s개";
+    private static final String FIRST_MESSAGE = "6개 일치 (2000000000원)- %s개";
+    private static final String EARNING_RATE_MESSAGE = "총 수익률은 %S입니다";
+
+
+    public static void printLottoBuyCount(final int pass, final int auto) {
+        System.out.println(String.format(BUY_COUNT_MESSAGE, pass, auto));
+    }
+
+    public static void printLoots(final MatchedLottoDto dto) {
+        for (LottoTicket lotto : dto.getTickets().getTickets()) {
             System.out.println(lotto);
         }
     }
 
-    public static void printResult(LottoDto dto) {
-        System.out.println("3개 일치 (5000원)- " + dto.getFifthGameCount() + "개");
-        System.out.println("4개 일치 (50000원)- " + dto.getFourthGameCount() + "개");
-        System.out.println("5개 일치 (1500000원)- " + dto.getThirdGameCount() + "개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30000000원)- " + dto.getSecondGameCount() + "개");
-        System.out.println("6개 일치 (2000000000원)- " + dto.getFirstGameCount() + "개");
+    public static void printResult(final StatisticsLottoDto dto) {
+        System.out.println(String.format(FIFTH_MESSAGE, dto.getFifthGameCount()));
+        System.out.println(String.format(FOURTH_MESSAGE, dto.getFourthGameCount()));
+        System.out.println(String.format(THIRD_MESSAGE, dto.getThirdGameCount()));
+        System.out.println(String.format(SECOND_MESSAGE, dto.getSecondGameCount()));
+        System.out.println(String.format(FIRST_MESSAGE, dto.getFirstGameCount()));
     }
 
-    public static void printEarningResult(LottoDto dto) {
-        System.out.println("총 수익률은" + dto.getEarningRate() + "입니다.");
+    public static void printEarningResult(final StatisticsLottoDto dto) {
+        System.out.println(String.format(EARNING_RATE_MESSAGE, dto.getEarningRate()));
     }
 }

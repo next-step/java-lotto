@@ -47,6 +47,36 @@ public class MoneyTest {
         assertThat(money1.getMoney()).isEqualTo(expect);
     }
 
+    @DisplayName("금액 뺄셈 기능")
+    @ParameterizedTest
+    @CsvSource(value = {"100:100:0.0", "3000:1000:2000"}, delimiter = ':')
+    public void minus_success(double int1, double int2, double expect) throws Exception {
+        //given
+        Money money1 = new Money(int1);
+        Money money2 = new Money(int2);
+
+        //when
+        money1 = money1.minus(money2);
+
+        //then
+        assertThat(money1.getMoney()).isEqualTo(expect);
+    }
+
+    @DisplayName("금액 뺄셈 기능")
+    @ParameterizedTest
+    @CsvSource(value = {"100:200", "1000:2000"}, delimiter = ':')
+    public void minus_fail(double int1, double int2) throws Exception {
+        //given
+        Money money1 = new Money(int1);
+        Money money2 = new Money(int2);
+
+        //then
+        assertThatThrownBy(
+                () -> money1.minus(money2)
+        ).isInstanceOf(IllegalArgumentException.class);
+
+    }
+
     @DisplayName("금액 나눗셈 기능")
     @ParameterizedTest
     @CsvSource(value = {"1000:10:100", "2000:1000:2", "500:1000:0.5"}, delimiter = ':')
@@ -55,7 +85,7 @@ public class MoneyTest {
         Money money1 = new Money(int1);
 
         //when
-        money1 = money1.divide(int2);
+        money1 = money1.divide(new Money(int2));
 
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);
@@ -69,7 +99,7 @@ public class MoneyTest {
         Money money1 = new Money(int1);
 
         //when
-        money1 = money1.multiply(int2);
+        money1 = money1.multiply(new Money(int2));
 
         //then
         assertThat(money1.getMoney()).isEqualTo(expect);
@@ -94,6 +124,32 @@ public class MoneyTest {
     @ParameterizedTest
     @CsvSource(value = {"100:3:300", "500:2:1000", "1500:3:4500"}, delimiter = ':')
     public void buyItemAmount_success(double itemPrice, int buyCount, double expect) throws Exception {
-        assertThat(Money.buyItemAmount(itemPrice, buyCount).getMoney()).isEqualTo(expect);
+        assertThat(new Money(itemPrice).getTotalPurchaseAmount(buyCount).getMoney()).isEqualTo(expect);
+    }
+
+    @DisplayName("투자 금액에 대한 수익률 계산")
+    @Test
+    public void getEarningRate_success() throws Exception {
+        //given
+        Money investment = new Money(14000);
+        Money earn = new Money(5000);
+
+        //when
+        double earningRate = earn.getEarningRate(investment);
+
+        //then
+        assertThat(earningRate).isEqualTo(0.35);
+    }
+
+    @DisplayName("구매 가능한 금액 범위 인지 계산")
+    @ParameterizedTest
+    @CsvSource(value = {"1000:10", "5000:2", "100:10"}, delimiter = ':')
+    public void getPurchaseAvailableCount_success(double price, int count) throws Exception {
+        //given
+        final Money money = new Money(10000);
+        final Money itemPrice = new Money(price);
+
+        //then
+        assertThat(money.getPurchaseAvailableCount(itemPrice, count)).isEqualTo(count);
     }
 }
