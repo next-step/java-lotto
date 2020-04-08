@@ -13,7 +13,6 @@ public class LottoGame {
     private static final int LOTTO_LIMIT_NUMBER = 45;
     private static final int LOTTO_LIMIT_SIZE = 6;
 
-
     public List<Lotto> initLottos(int money) {
         int lottoGameCount = purchaseLottoCount(money);
         return createLottos(lottoGameCount);
@@ -46,28 +45,9 @@ public class LottoGame {
         return money / DEFAULT_LOTTO_PRICE;
     }
 
-
     public List<Result> matches(Lotto winningLotto, List<Lotto> myLottos) {
         return myLottos.stream()
-                .map(myLotto -> match(winningLotto, myLotto))
+                .map(myLotto -> myLotto.match(winningLotto, myLotto))
                 .collect(Collectors.toList());
     }
-
-    public Result match(Lotto winningLotto, Lotto myLotto) {
-        int count = safeLongToInt(winningLotto.getNumbers().stream()
-                .filter(number -> myLotto.getNumbers().contains(number))
-                .count());
-
-        return new Result(new Rank(count));
-    }
-
-
-    public static int safeLongToInt(long l) {
-        int i = (int) l;
-        if ((long) i != l) {
-            throw new IllegalArgumentException(l + " cannot be cast to int without changing its value.");
-        }
-        return i;
-    }
-
 }
