@@ -4,6 +4,7 @@ import lotto.vo.Elements;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,14 +18,10 @@ public class CalculatorTest {
                 .hasMessageContaining(errMsg);
     }
 
-    @Test
-    void testValidFormula() {
-
-    }
-
-    @Test
-    void testSplitFormula() {
-
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3", "1,2:3", "1:2:3"})
+    void testValidAndSplitFormula(final String formula) {
+        assertThat(new Elements(formula)).isEqualTo(new Integer[] {1,2,3});
     }
 
     @ParameterizedTest

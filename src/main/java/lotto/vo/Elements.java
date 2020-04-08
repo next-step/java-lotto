@@ -64,4 +64,20 @@ public class Elements {
         }
         return elements;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if ( obj instanceof Elements ) {
+            return this.elements.equals( ((Elements)obj).elements );
+        }
+        if ( obj instanceof Integer[] ) {
+            return this.elements.equals( Arrays.asList( (Integer[]) obj ) );
+        }
+        return this.elements.equals( obj );
+    }
+
+    @Override
+    public String toString() {
+        return "{" + StringUtils.serialize(this.elements.toArray()) + "}";
+    }
 }

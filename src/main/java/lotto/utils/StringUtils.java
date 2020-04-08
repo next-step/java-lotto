@@ -29,10 +29,13 @@ public final class StringUtils {
             return false;
         }
     }
+    public static String serialize(final Object[] arrays) {
+        return serialize(arrays, ',');
+    }
 
-    public static String serialize(final String[] arrays, final char token) {
+    public static String serialize(final Object[] arrays, final char token) {
         StringBuilder sb = new StringBuilder();
-        for (String text : arrays) {
+        for (Object text : arrays) {
             sb.append(text).append(token);
         }
         sb.setLength(sb.length() - 1);
