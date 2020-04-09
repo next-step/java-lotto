@@ -9,21 +9,25 @@ public class LottoRanks {
     private static final int SCALE_TWO = 2;
     private final List<LottoRank> lottoRanks;
 
-    public LottoRanks(List<LottoRank> lottoRanks) {
+    private LottoRanks(List<LottoRank> lottoRanks) {
         this.lottoRanks = lottoRanks;
     }
 
-    public BigDecimal getProfitRate() {
-        return getWinningPrizeSum().divide(getPaidMoney(), SCALE_TWO, BigDecimal.ROUND_CEILING);
+    public static LottoRanks of(List<LottoRank> lottoRanks) {
+        return new LottoRanks(lottoRanks);
     }
 
-    public long getEachRankCountTotal(LottoRank lottoRank) {
-        return lottoRanks.stream()
-                .filter(lotto -> lotto.equals(lottoRank))
-                .count();
+    public List<LottoRank> getLottoRanks() {
+        return lottoRanks;
     }
 
-    BigDecimal getWinningPrizeSum() {
+    public float getProfitRate() {
+        return getWinningPrizeSum()
+                .divide(getPaidMoney(), SCALE_TWO, BigDecimal.ROUND_CEILING)
+                .floatValue();
+    }
+
+    private BigDecimal getWinningPrizeSum() {
         return BigDecimal.valueOf(lottoRanks.stream()
                 .mapToInt(LottoRank::getWinningPrize)
                 .sum());
@@ -33,4 +37,9 @@ public class LottoRanks {
         return BigDecimal.valueOf(lottoRanks.size() * PRICE_PER_GAME);
     }
 
+    public long getEachRankCountTotal(LottoRank lottoRank) {
+        return lottoRanks.stream()
+                .filter(myRank -> myRank.equals(lottoRank))
+                .count();
+    }
 }

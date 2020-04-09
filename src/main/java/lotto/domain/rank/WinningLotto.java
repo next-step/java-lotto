@@ -1,48 +1,41 @@
 package lotto.domain.rank;
 
-import lotto.domain.lotto.BonusNumber;
-import lotto.domain.lotto.LottoNumbers;
-import lotto.application.WinningLottoRequest;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
-import java.util.Objects;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class WinningLotto {
-    private static final int COUNT_ONE = 1;
+    private final List<Integer> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    private final LottoNumbers lottoNumbers;
-    private final BonusNumber bonusNumber;
-
-    public WinningLotto(LottoNumbers lottoNumbers, int bonusNumber) {
-        this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = new BonusNumber(lottoNumbers, bonusNumber);
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validate(lotto, bonusNumber);
+        this.winningNumbers = lotto.toIntValues();
+        this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLotto of(WinningLottoRequest winningDto) {
-        return new WinningLotto(winningDto.getLottoNumbers(), winningDto.getBonusNumber());
+    public static WinningLotto of(List<Integer> winningNumbers, int bonusNumber) {
+        return new WinningLotto(Lotto.of(winningNumbers), LottoNumber.of(bonusNumber));
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoRank> matchLotteries(List<Lotto> lotteries) {
+        return lotteries.stream()
+                .map(myLotto -> myLotto.checkRank(winningNumbers, bonusNumber))
+                .collect(toList());
     }
 
-    public boolean isMatchBonusNumber(LottoNumbers lottoNumbers) {
-        return lottoNumbers.getLottoNumbers()
+    private void validate(Lotto lotto, LottoNumber bonusNumber) {
+        if (isBeingBonus(lotto, bonusNumber)) {
+            throw new BonusNumberDuplicateException();
+        }
+    }
+
+    private boolean isBeingBonus(Lotto lotto, LottoNumber bonusNumber) {
+        return lotto.toIntValues()
                 .stream()
-                .filter(lottoNumber -> lottoNumber.isEqualBonusNumber(bonusNumber))
-                .count() == COUNT_ONE;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof WinningLotto)) return false;
-        WinningLotto that = (WinningLotto) o;
-        return getLottoNumbers().getLottoNumbers().containsAll(that.getLottoNumbers().getLottoNumbers()) &&
-                Objects.equals(bonusNumber, that.bonusNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getLottoNumbers(), bonusNumber);
+                .anyMatch(e -> e == bonusNumber.intValue());
     }
 }
