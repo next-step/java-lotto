@@ -18,11 +18,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class WinningBallsTest {
+public class WinningLottoGameTest {
 
   private static final String DELIMITER = ",";
   private static final Set<Integer> LOTTO_NUMBERS = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-  private static final WinningBalls WINNING_NUMBERS = new WinningBalls(
+  private static final WinningLottoGame WINNING_NUMBERS = new WinningLottoGame(
       LOTTO_NUMBERS,
       7
   );
@@ -39,7 +39,7 @@ public class WinningBallsTest {
   @ParameterizedTest
   @ValueSource(ints = {1, 2, 3, 4, 5, 6})
   public void IllegalArgumentTest(int bonus) {
-    assertThatThrownBy(() -> new WinningBalls(LOTTO_NUMBERS, bonus))
+    assertThatThrownBy(() -> new WinningLottoGame(LOTTO_NUMBERS, bonus))
         .isInstanceOf(IllegalArgumentException.class);
   }
 

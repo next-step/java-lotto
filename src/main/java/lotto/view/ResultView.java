@@ -24,6 +24,10 @@ public class ResultView {
     int autoCount = lottoGames.size() - manualCount;
     System.out.println();
     System.out.printf(PURCHASE_HISTORY_FORMAT, manualCount, autoCount);
+    printGames(lottoGames);
+  }
+
+  private static void printGames(List<LottoGame> lottoGames) {
     lottoGames.stream()
         .map(LottoGame::getLottoBalls)
         .map(ResultView::formatLottoBalls)
@@ -36,7 +40,7 @@ public class ResultView {
         .collect(Collectors.joining(", ", "[", "]"));
   }
 
-  public static void printResult(WinningResult winningResult) {
+  public static void printWinningResult(WinningResult winningResult) {
     RankStatistic rankStatistic = winningResult.deriveStatistics();
 
     printRankStatistic(rankStatistic);
@@ -47,13 +51,17 @@ public class ResultView {
     System.out.println(WINNING_STATISTICS);
     Arrays.stream(Rank.values())
         .filter(rank -> rank.getMatchCount() > 0)
-        .forEach(rank -> System.out.printf(
-            RESULT_FORMAT,
-            rank.getMatchCount(),
-            rank.getShouldMatchBonus() == Trilean.TRUE ? MATCH_BONUS_BALL : SPACE,
-            rank.getWinningMoney(),
-            rankStatistic.countWinsOf(rank)
-        ));
+        .forEach(rank -> printRankResult(rank, rankStatistic.countWinsOf(rank)));
+  }
+
+  private static void printRankResult(Rank rank, long count) {
+    System.out.printf(
+        RESULT_FORMAT,
+        rank.getMatchCount(),
+        rank.getShouldMatchBonus() == Trilean.TRUE ? MATCH_BONUS_BALL : SPACE,
+        rank.getWinningMoney(),
+        count
+    );
   }
 
   private static void printRateOfReturn(RankStatistic rankStatistic) {

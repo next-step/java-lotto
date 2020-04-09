@@ -15,15 +15,15 @@ public class LottoBall {
     number = integer;
   }
 
-  @Override
-  public String toString() {
-    return Integer.toString(number);
-  }
-
   private void throwIfInvalid(int integer) {
     if (integer < LOWER_BOUND || integer > UPPER_BOUND) {
       throw new IllegalArgumentException("로또 번호는 1 과 45 사이여야 합니다.");
     }
+  }
+
+  @Override
+  public String toString() {
+    return Integer.toString(number);
   }
 
   @Override

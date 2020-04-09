@@ -4,12 +4,12 @@ import java.util.Set;
 import lotto.domain.model.LottoBall;
 import lotto.domain.model.Rank;
 
-public class WinningBalls {
+public class WinningLottoGame {
 
   private LottoGame criterion;
   private LottoBall bonus;
 
-  public WinningBalls(Set<Integer> lottoNumbers, int bonus) {
+  public WinningLottoGame(Set<Integer> lottoNumbers, int bonus) {
     throwIfInvalid(lottoNumbers, bonus);
 
     this.criterion = new LottoGame(lottoNumbers);

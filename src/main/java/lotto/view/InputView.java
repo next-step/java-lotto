@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.LottoGame;
+import lotto.domain.WinningLottoGame;
 
 public class InputView {
 
@@ -25,32 +26,25 @@ public class InputView {
     scanner = new Scanner(System.in);
   }
 
-  public int getBonusBall() {
-    printWithNewLine(BONUS_BALL_QUESTION);
-    return Integer.parseInt(scanner.nextLine());
-  }
-
-  public List<LottoGame> getManualGames() {
-    List<LottoGame> manualGames = new ArrayList<>();
-
-    int manualCount = getManualCount();
+  public List<LottoGame> buyManualGames() {
+    int manualCount = askManualCount();
 
     printWithNewLine(MANUAL_LOTTO_NUMBERS_QUESTION);
-
+    List<LottoGame> manualGames = new ArrayList<>();
     for (int i = 0; i < manualCount; i++) {
-      LottoGame manualGame = getOneGame();
+      LottoGame manualGame = buyOneGame();
       manualGames.add(manualGame);
     }
 
     return manualGames;
   }
 
-  private int getManualCount() {
+  private int askManualCount() {
     printWithNewLine(MANUAL_COUNT_QUESTION);
     return Integer.parseInt(scanner.nextLine());
   }
 
-  private LottoGame getOneGame() {
+  private LottoGame buyOneGame() {
     String manualNumbers = scanner.nextLine();
     Set<Integer> manuals = Arrays.stream(manualNumbers.split(DELIMITER))
         .mapToInt(Integer::parseInt)
@@ -59,7 +53,7 @@ public class InputView {
     return new LottoGame(manuals);
   }
 
-  public int getPurchaseAmount() {
+  public int payMoney() {
     System.out.println(PURCHASE_AMOUNT_QUESTION);
     int purchaseAmount = Integer.parseInt(scanner.nextLine());
 
@@ -70,13 +64,25 @@ public class InputView {
     return purchaseAmount;
   }
 
-  public Set<Integer> getLastWinningBalls() {
+  public WinningLottoGame askWinningLottoGame() {
+    Set<Integer> winningNumbers = askWinningNumbers();
+    int bonus = askBonusBall();
+
+    return new WinningLottoGame(winningNumbers, bonus);
+  }
+
+  private Set<Integer> askWinningNumbers() {
     printWithNewLine(LAST_WEEK_RESULT_QUESTION);
     String lastWinningNumbers = scanner.nextLine();
     return Arrays.stream(lastWinningNumbers.split(DELIMITER))
         .mapToInt(Integer::parseInt)
         .boxed()
         .collect(Collectors.toSet());
+  }
+
+  private int askBonusBall() {
+    printWithNewLine(BONUS_BALL_QUESTION);
+    return Integer.parseInt(scanner.nextLine());
   }
 
   private void printWithNewLine(String sentence) {

@@ -34,9 +34,9 @@ public class LottoGamesTest {
         failure
     );
     LottoGames lotto = new LottoGames(6000, lottoNumbers);
-    WinningBalls winningBalls = new WinningBalls(new HashSet<>(Arrays.asList(1,2,3,4,5,6)), 7);
+    WinningLottoGame winningLottoGame = new WinningLottoGame(new HashSet<>(Arrays.asList(1,2,3,4,5,6)), 7);
 
-    WinningResult winningResult = lotto.confirmResult(winningBalls);
+    WinningResult winningResult = lotto.confirmResult(winningLottoGame);
     RankStatistic rankStatistic = winningResult.deriveStatistics();
 
     assertThat(rankStatistic.countWinsOf(FIRST)).isEqualTo(1);

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,9 +34,9 @@ public class LottoGames {
     return Collections.unmodifiableList(lottoGames);
   }
 
-  public WinningResult confirmResult(WinningBalls winningBalls) {
+  public WinningResult confirmResult(WinningLottoGame winningLottoGame) {
     List<Rank> ranks = lottoGames.stream()
-        .map(winningBalls::calculateRank)
+        .map(winningLottoGame::calculateRank)
         .collect(Collectors.toList());
 
     return new WinningResult(ranks);
