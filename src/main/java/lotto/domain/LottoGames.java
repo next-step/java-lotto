@@ -19,6 +19,10 @@ public class LottoGames {
     }
   }
 
+  public LottoGames(int purchaseAmount, List<LottoGame> manualLottoGames) {
+
+  }
+
   public List<LottoGame> getLottoGames() {
     return Collections.unmodifiableList(lottoGames);
   }
