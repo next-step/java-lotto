@@ -4,16 +4,14 @@ public enum Trilean {
   TRUE, FALSE, IRRELEVANCE;
 
   public boolean matches(boolean bool) {
-    switch (this) {
-      case TRUE:
+    if (this == TRUE)
         return bool;
 
-      case FALSE:
+    if (this == FALSE)
         return !bool;
 
-      case IRRELEVANCE:
+    if (this == IRRELEVANCE)
         return true;
-    }
 
     throw new IllegalArgumentException("Invalid Trilean value");
   }
