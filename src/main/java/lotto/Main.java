@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.List;
 import java.util.Set;
+import lotto.domain.LottoGame;
 import lotto.domain.LottoGames;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningBalls;
@@ -12,9 +14,10 @@ public class Main {
     InputView inputView = new InputView();
 
     int purchaseAmount = inputView.getPurchaseAmount();
+    List<LottoGame> manualGames = inputView.getManualGames();
 
-    LottoGames lottoGames = new LottoGames(purchaseAmount);
-    ResultView.printBuying(lottoGames.getLottoGames());
+    LottoGames lottoGames = new LottoGames(purchaseAmount, manualGames);
+    ResultView.printBuying(lottoGames.getLottoGames(), manualGames);
     Set<Integer> lastWinningBalls = inputView.getLastWinningBalls();
     int bonusBall = inputView.getBonusBall();
 
