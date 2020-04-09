@@ -7,13 +7,12 @@ import lotto.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Elements {
 
-    private static final char SPLIT_SEPARATOR = '|';
-
-    private static final String DEFAULT_DELIMITER_COMMA = ",";
-    private static final String DEFAULT_DELIMITER_COLON = ":";
+    private static final String DEFAULT_DELIMITER = "[,:]";
 
     private final String formula;
     private final List<Integer> elements;
@@ -29,12 +28,18 @@ public class Elements {
             return new ArrayList<>();
         }
 
-        return makeList( split(formula, DEFAULT_DELIMITER_COMMA, DEFAULT_DELIMITER_COLON) );
+        return makeList( split(formula) );
     }
 
-    private String[] split(final String formula, final String ... delimiters) {
-        final String delimiterList = StringUtils.serialize(delimiters, SPLIT_SEPARATOR);
-        return formula.split(delimiterList);
+    private String[] split(final String formula) {
+
+        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(formula);
+        if (m.find()) {
+            String customDelimiter = Pattern.quote(m.group(1));
+            return m.group(2).split(customDelimiter);
+        }
+
+        return formula.split(DEFAULT_DELIMITER);
     }
 
     private List<Integer> makeList(final String[] stringElements) {
