@@ -1,7 +1,6 @@
 package lotto.domain.machine.infra;
 
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.machine.LottoNumberStrategy;
 
 import java.util.ArrayList;
@@ -14,11 +13,11 @@ import static java.util.Comparator.comparingInt;
 import static lotto.domain.Constant.*;
 
 public class AutoLottoNumberStrategy implements LottoNumberStrategy {
-    private static final List<LottoNumber> lottoNumbers;
+    private static final List<Integer> lottoNumbers;
 
     static {
         lottoNumbers = IntStream.rangeClosed(LOTTO_NUM_MIN, LOTTO_NUM_MAX)
-                .mapToObj(LottoNumber::new)
+                .boxed()
                 .collect(Collectors.toList());
     }
 
@@ -29,14 +28,14 @@ public class AutoLottoNumberStrategy implements LottoNumberStrategy {
     }
 
     @Override
-    public List<LottoNumbers> get() {
-        List<LottoNumbers> lottoNumbersByAuto = new ArrayList<>();
+    public Lotteries get() {
+        List<List<Integer>> lottoByAuto = new ArrayList<>();
         for (int i = 0; i < autoCount; i++) {
             Collections.shuffle(lottoNumbers);
-            List<LottoNumber> selectedLottoNum = new ArrayList<>(lottoNumbers).subList(ZERO_INDEX, LOTTO_NUM_COUNT_LIMIT);
-            selectedLottoNum.sort(comparingInt(LottoNumber::intValue));
-            lottoNumbersByAuto.add(new LottoNumbers(selectedLottoNum));
+            List<Integer> selectedLottoNum = new ArrayList<>(lottoNumbers).subList(ZERO_INDEX, LOTTO_NUM_COUNT_LIMIT);
+            selectedLottoNum.sort(comparingInt(Integer::intValue));
+            lottoByAuto.add(selectedLottoNum);
         }
-        return lottoNumbersByAuto;
+        return Lotteries.of(lottoByAuto);
     }
 }

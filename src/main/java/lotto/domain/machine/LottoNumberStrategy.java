@@ -1,9 +1,7 @@
 package lotto.domain.machine;
 
-import lotto.domain.lotto.LottoNumbers;
-
-import java.util.List;
+import lotto.domain.lotto.Lotteries;
 
 public interface LottoNumberStrategy {
-    List<LottoNumbers> get();
+    Lotteries get();
 }

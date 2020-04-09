@@ -1,19 +1,17 @@
 package lotto.domain.machine.infra;
 
-import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.machine.LottoNumberStrategy;
 
-import java.util.List;
-
 public class ManualLottoNumberStrategy implements LottoNumberStrategy {
-    private final List<LottoNumbers> lottoNumbers;
+    private final Lotteries lottoNumbers;
 
-    public ManualLottoNumberStrategy(List<LottoNumbers> lottoNumbers) {
+    public ManualLottoNumberStrategy(Lotteries lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
     @Override
-    public List<LottoNumbers> get() {
+    public Lotteries get() {
         return lottoNumbers;
     }
 }
