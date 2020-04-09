@@ -40,6 +40,8 @@ public class ResultView {
         .collect(Collectors.joining(", ", "[", "]"));
   }
 
+  //-----------------------------------------------------------------------
+
   public static void printWinningResult(WinningResult winningResult) {
     RankStatistic rankStatistic = winningResult.deriveStatistics();
 

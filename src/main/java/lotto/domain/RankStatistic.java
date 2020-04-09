@@ -43,6 +43,8 @@ public class RankStatistic {
         * LOTTO_PRICE;
   }
 
+  //-----------------------------------------------------------------------
+
   public long countWinsOf(Rank rank) {
     return rankStatistic.get(rank) != null ? rankStatistic.get(rank) : 0L;
   }

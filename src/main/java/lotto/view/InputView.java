@@ -26,6 +26,8 @@ public class InputView {
     scanner = new Scanner(System.in);
   }
 
+  //-----------------------------------------------------------------------
+
   public List<LottoGame> buyManualGames() {
     int manualCount = askManualCount();
 
@@ -53,6 +55,8 @@ public class InputView {
     return new LottoGame(manuals);
   }
 
+  //-----------------------------------------------------------------------
+
   public int payMoney() {
     System.out.println(PURCHASE_AMOUNT_QUESTION);
     int purchaseAmount = Integer.parseInt(scanner.nextLine());
@@ -63,6 +67,8 @@ public class InputView {
 
     return purchaseAmount;
   }
+
+  //-----------------------------------------------------------------------
 
   public WinningLottoGame askWinningLottoGame() {
     Set<Integer> winningNumbers = askWinningNumbers();
