@@ -22,7 +22,7 @@ public class LottoBall {
 
   private void throwIfInvalid(int integer) {
     if (integer < LOWER_BOUND || integer > UPPER_BOUND) {
-      throw new IllegalArgumentException("LottoNo should be between 1 and 45.");
+      throw new IllegalArgumentException("로또 번호는 1 과 45 사이여야 합니다.");
     }
   }
 

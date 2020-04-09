@@ -18,7 +18,7 @@ public class WinningBalls {
 
   private static void throwIfInvalid(Set<Integer> lottoNumbers, int bonus) {
     if (lottoNumbers.contains(bonus)) {
-      throw new IllegalArgumentException("LottoGame should not conain bonus number.");
+      throw new IllegalArgumentException("보너스 번호는 당첨번호에 속할 수 없습니다.");
     }
   }
 

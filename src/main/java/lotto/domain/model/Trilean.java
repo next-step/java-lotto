@@ -13,6 +13,6 @@ public enum Trilean {
     if (this == IRRELEVANCE)
         return true;
 
-    throw new IllegalArgumentException("Invalid Trilean value");
+    throw new IllegalArgumentException("유효하지 않은 Trilean(three valued boolean) 값입니다.");
   }
 }

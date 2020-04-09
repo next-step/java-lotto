@@ -48,7 +48,7 @@ public enum Rank {
 
   private static void throwIfInvalid(int matchCount) {
     if (matchCount < 0 || matchCount > LOTTO_NO_COUNT) {
-      throw new IllegalArgumentException("matchCount should be between 1 and 6.");
+      throw new IllegalArgumentException("최소 1개에서 최대 6개까지만 맞을 수 있습니다.");
     }
   }
 

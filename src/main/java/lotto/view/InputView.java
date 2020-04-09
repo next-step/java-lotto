@@ -64,7 +64,7 @@ public class InputView {
     int purchaseAmount = Integer.parseInt(scanner.nextLine());
 
     if (purchaseAmount < LOTTO_PRICE) {
-      throw new IllegalArgumentException("You have to purchase at least 1,000 won.");
+      throw new IllegalArgumentException("최소 1,000원 이상 구입해야 합니다.");
     }
 
     return purchaseAmount;
