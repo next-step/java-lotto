@@ -13,7 +13,7 @@ public class Lotto {
         return numbers;
     }
 
-    public Result match(Lotto winningLotto, int bonus, Lotto myLotto) {
+  public Result match(Lotto winningLotto, int bonus, Lotto myLotto) {
         int count = safeLongToInt(winningLotto.getNumbers().stream()
                 .filter(number -> myLotto.getNumbers().contains(number))
                 .count());

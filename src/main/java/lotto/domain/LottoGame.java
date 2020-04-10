@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 public class LottoGame {
 
     private static final int DEFAULT_LOTTO_PRICE = 1000;
-
     public Lottos initLottos(int money) {
         int lottoGameCount = purchaseLottoCount(money);
         return new Lottos(lottoGameCount);
@@ -20,6 +19,7 @@ public class LottoGame {
     public int purchaseLottoCount(int money) {
         return money / DEFAULT_LOTTO_PRICE;
     }
+
 
     public List<Result> matches(Lotto winningLotto, int bonus, Lottos myLottos) {
         return myLottos.getLottos().stream()

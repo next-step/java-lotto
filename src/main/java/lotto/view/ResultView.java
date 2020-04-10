@@ -1,5 +1,6 @@
 package lotto.view;
 
+
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Rank;
@@ -9,13 +10,13 @@ import java.util.List;
 
 public class ResultView {
 
+
     public void printPurchasedLotto(Lottos lottos) {
         System.out.println(lottos.getLottos().size() + "개 를 구매 했다");
         for (Lotto lotto: lottos.getLottos()) {
             System.out.println(lotto.getNumbers());
         }
     }
-
 
     public void printGameResult(List<Result> gameResults) {
         // 4등
