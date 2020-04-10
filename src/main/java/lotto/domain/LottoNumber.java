@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class LottoNumber {
@@ -26,8 +27,24 @@ public class LottoNumber {
                 .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다."));
     }
 
-    static LottoNumber of(String number) {
-        return Optional.ofNullable(lottoNumbers.get(Integer.parseInt(number)))
-                .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다."));
+    static LottoNumber of(String value) {
+        if (Objects.isNull(value)) {
+            throw new IllegalArgumentException();
+        }
+
+        return of(Integer.parseInt(value.trim()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
