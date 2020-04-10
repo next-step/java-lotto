@@ -25,10 +25,10 @@ public enum  Rank {
         return matchCount;
     }
 
-    public static Rank calcRank(int matchCount) {
+    public static Rank calcRank(int matchCount, boolean isBonus) {
         if (matchCount == 6) {
             return Rank.FIRST;
-        } else if (matchCount == 5) {
+        } else if (matchCount == 5 && isBonus) {
             return Rank.SECOND;
         } else if (matchCount == 4) {
             return Rank.THIRD;

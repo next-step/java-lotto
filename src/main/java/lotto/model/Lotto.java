@@ -13,12 +13,15 @@ public class Lotto {
         return numbers;
     }
 
-    public Result match(Lotto winningLotto, Lotto myLotto) {
+    public Result match(Lotto winningLotto, int bonus, Lotto myLotto) {
         int count = safeLongToInt(winningLotto.getNumbers().stream()
                 .filter(number -> myLotto.getNumbers().contains(number))
                 .count());
 
-        return new Result(Rank.calcRank(count));
+        boolean isBonus = winningLotto.getNumbers().stream()
+                .anyMatch(number -> myLotto.getNumbers().contains(bonus));
+
+        return new Result(Rank.calcRank(count, isBonus));
     }
 
     private static int safeLongToInt(long l) {

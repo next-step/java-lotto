@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Result;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,10 +17,10 @@ public class App {
 
         LottoGame lottoGame = new LottoGame();
         int money = inputView.getMoney();
-        List<Lotto> lottos = lottoGame.initLottos(money);
+        Lottos lottos = lottoGame.initLottos(money);
         resultView.printPurchasedLotto(lottos);
 
-        List<Result> gameResults = lottoGame.matches(inputView.getWinningLotto(), lottos);
+        List<Result> gameResults = lottoGame.matches(inputView.getWinningLotto(), inputView.getBonusNumber(), lottos);
 
         resultView.printGameResult(gameResults);
         resultView.printRevenue(gameResults, money);

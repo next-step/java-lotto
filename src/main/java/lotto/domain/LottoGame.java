@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.Rank;
 import lotto.model.Result;
 
@@ -10,44 +11,19 @@ import java.util.stream.Collectors;
 public class LottoGame {
 
     private static final int DEFAULT_LOTTO_PRICE = 1000;
-    private static final int LOTTO_LIMIT_NUMBER = 45;
-    private static final int LOTTO_LIMIT_SIZE = 6;
 
-    public List<Lotto> initLottos(int money) {
+    public Lottos initLottos(int money) {
         int lottoGameCount = purchaseLottoCount(money);
-        return createLottos(lottoGameCount);
-    }
-
-    public List<Lotto> createLottos(int lottoGameCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoGameCount; i++) {
-            lottos.add(new Lotto(createRandomList()));
-        }
-
-        return lottos;
-    }
-
-    public int getRandom() {
-        return new Random().nextInt(LOTTO_LIMIT_NUMBER) + 1;
-    }
-
-    private List<Integer> createRandomList() {
-        Set<Integer> set = new HashSet<>();
-        while (set.size() != LOTTO_LIMIT_SIZE) {
-            set.add(getRandom());
-        }
-        List<Integer> createdLottos = new ArrayList<>(set);
-        Collections.sort(createdLottos);
-        return createdLottos;
+        return new Lottos(lottoGameCount);
     }
 
     public int purchaseLottoCount(int money) {
         return money / DEFAULT_LOTTO_PRICE;
     }
 
-    public List<Result> matches(Lotto winningLotto, List<Lotto> myLottos) {
-        return myLottos.stream()
-                .map(myLotto -> myLotto.match(winningLotto, myLotto))
+    public List<Result> matches(Lotto winningLotto, int bonus, Lottos myLottos) {
+        return myLottos.getLottos().stream()
+                .map(myLotto -> myLotto.match(winningLotto, bonus, myLotto))
                 .collect(Collectors.toList());
     }
 }
