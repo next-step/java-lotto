@@ -4,77 +4,35 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
-    // TODO: 더 좋은 변수명 찾기
-    private static final int LOTTO_NUMBER_LIMIT = 6;
-    private static List<Integer> numbers;
+    public static final int LOTTO_SIZE = 6;
 
-    static {
-        numbers = new ArrayList<>();
-        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
-            numbers.add(i);
+    private final Set<LottoNumber> lottoNumbers;
+
+    private Lotto(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않는 6개의 숫자만 가능합니다.");
         }
+        this.lottoNumbers = Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
     }
 
-    // TODO: 객체로 포장
-    private final Set<Integer> lottoNumbers;
-
-    public Lotto() {
-        this.lottoNumbers = createNumbers();
-    }
-
-    public Lotto(Integer... numbers) {
-        this.lottoNumbers = validate(Arrays.asList(numbers));
-    }
-
-    public Lotto(String numbers) {
-        String[] lottoNumbers = numbers.split(",");
-        this.lottoNumbers = validate(Arrays.asList(lottoNumbers).stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
-    }
-
-    private Set<Integer> validate(List<Integer> numbers) {
-        validateSize(numbers);
-        Set<Integer> lottoNumbers = new TreeSet<>();
+    public static Lotto of(List<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer number : numbers) {
-            validateNumber(number);
-            lottoNumbers.add(number);
+            lottoNumbers.add(LottoNumber.of(number));
         }
-        validateDuplicate(lottoNumbers);
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 
-    private void validateNumber(Integer number) {
-        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다.");
-        }
+    public static Lotto of(Integer... numbers) {
+        return of(Arrays.asList(numbers));
     }
 
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_LIMIT) {
-            throw new IllegalArgumentException("로또 번호는 6개만 가능합니다.");
-        }
-    }
-
-    private void validateDuplicate(Set<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_LIMIT) {
-            throw new IllegalArgumentException("로또 번호들은 중복될 수 없습니다.");
-        }
-    }
-
-    private Set<Integer> createNumbers() {
-        Collections.shuffle(numbers);
-        Set<Integer> lottoNumbers = new TreeSet<>();
-        for (int i = 0; i < LOTTO_NUMBER_LIMIT; i++) {
-            lottoNumbers.add(numbers.get(i));
-        }
-        return lottoNumbers;
-    }
-
-    public Set<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public static Lotto ofComma(String numbers) {
+        String[] values = numbers.split(",");
+        return new Lotto(
+            Arrays.asList(values).stream()
+                    .map(LottoNumber::of)
+                    .collect(Collectors.toSet()));
     }
 
     public Rank match(Lotto winningLotto, int bonusNo) {
@@ -85,7 +43,7 @@ public class Lotto {
     }
 
     private boolean isMatchBonusNo(int bonusNo) {
-        return lottoNumbers.contains(bonusNo);
+        return lottoNumbers.contains(LottoNumber.of(bonusNo));
     }
 
     @Override
