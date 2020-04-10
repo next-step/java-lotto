@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.Rank;
 import lotto.model.Result;
 
 import java.util.List;
@@ -25,9 +26,13 @@ public class ResultView {
         System.out.println("4개 일치 (50000원)- " +
                 gameResults.stream().filter(result -> result.getRank().getMatchCount() == 4).count());
 
-        // 2등
+        // 3등
         System.out.println("5개 일치 (1500000원)- " +
                 gameResults.stream().filter(result -> result.getRank().getMatchCount() == 5).count());
+
+        // 2등
+        System.out.println("5개 일치, 보너스볼 일치 (3000000원)- " +
+                gameResults.stream().filter(result -> result.getRank().getMatchCount() == 5 && result.getRank() == Rank.SECOND).count());
 
         // 1등
         System.out.println("6개 일치 (2000000000원)- " +

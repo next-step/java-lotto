@@ -1,12 +1,13 @@
 package lotto.model;
 
 
-public enum  Rank {
+public enum Rank {
 
     FIRST(6, 2000000000),
-    SECOND(5, 1500000),
-    THIRD(4, 50000),
-    FOURTH(3, 5000),
+    SECOND(5, 3000000),
+    THIRD(5, 150000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
     ZERO(0, 0);
 
     private int matchCount;
@@ -30,12 +31,12 @@ public enum  Rank {
             return Rank.FIRST;
         } else if (matchCount == 5 && isBonus) {
             return Rank.SECOND;
-        } else if (matchCount == 4) {
+        } else if (matchCount == 5) {
             return Rank.THIRD;
-        } else if (matchCount == 3) {
+        } else if (matchCount == 4) {
             return Rank.FOURTH;
-        } else if (matchCount == 2) {
-            return Rank.ZERO;
+        } else if (matchCount == 3) {
+            return Rank.FIFTH;
         }
         return Rank.ZERO;
     }
