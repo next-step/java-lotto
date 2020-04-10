@@ -3,14 +3,11 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.Fixture.lottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -51,6 +48,19 @@ public class LottoTest {
         Lotto actual = new Lotto(lottoNumbers);
 
         assertThat(sixNumbers.toString()).isEqualTo(actual.toString());
+    }
+
+    @DisplayName("로또는 번호가 중복없이 생성된다.")
+    @Test
+    void testLottoDuplicate() {
+        // given
+        List<LottoNumber> lottoNumbers = duplicateNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(lottoNumbers));
     }
 
 }
