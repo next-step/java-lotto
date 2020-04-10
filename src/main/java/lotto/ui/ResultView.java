@@ -1,11 +1,14 @@
 package lotto.ui;
 
-import lotto.application.LottoBuyResponse;
-import lotto.domain.lotto.Lottery;
+import lotto.application.LottoResponse;
+import lotto.application.LottoResults;
+import lotto.domain.lotto.Lotteries;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.rank.LottoRanks;
 
-import java.util.stream.Collectors;
+import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static lotto.domain.rank.LottoRank.*;
 
 public class ResultView {
@@ -20,10 +23,10 @@ public class ResultView {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
 
-    public static void print(LottoRanks results) {
+    public static void print(LottoResults lottoResults) {
         initMessage();
-        printWinningResults(results);
-        String profitMessage = String.format(NET_PROFIT_MESSAGE, results.getProfitRate());
+        printWinningResults(lottoResults);
+        String profitMessage = String.format(NET_PROFIT_MESSAGE, lottoResults.getProfitRate());
         stringBuilder.append(profitMessage);
 
         System.out.println(stringBuilder.toString());
@@ -36,32 +39,32 @@ public class ResultView {
                 .append(CARRIAGE_RETURN);
     }
 
-    public static void print(LottoBuyResponse lottoBuyResponse) {
-        Lottery lotteryByManual = lottoBuyResponse.getLotteryByManual();
-        Lottery lotteryByAuto = lottoBuyResponse.getLotteryByAuto();
-
-        String message = String.format(COUNT_BY_MANUAL_AND_AUTO, lotteryByManual.getSize(), lotteryByAuto.getSize());
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(message)
-                .append(CARRIAGE_RETURN)
-                .append(getLotterySources(lotteryByManual))
-                .append(CARRIAGE_RETURN)
-                .append(getLotterySources(lotteryByAuto));
-
-        System.out.println(stringBuilder.toString());
+    public static void print(LottoResponse lottoManualResponse, LottoResponse lottoAutoResponse) {
+        int manualCount = lottoManualResponse.size();
+        int autoCount = lottoAutoResponse.size();
+        System.out.println(String.format(COUNT_BY_MANUAL_AND_AUTO, manualCount, autoCount));
+        printLotteries(lottoManualResponse);
+        printLotteries(lottoAutoResponse);
     }
 
-    private static String getLotterySources(Lottery lottery) {
-        return lottery.getLotterySources().stream()
+    private static void printLotteries(LottoResponse lottoResponse) {
+        Lotteries lotteries = lottoResponse.getLottoResponse();
+        List<String> lottoValues = getLottoValues(lotteries.getLotteries());
+        lottoValues.forEach(System.out::println);
+    }
+
+    private static List<String> getLottoValues(List<Lotto> lotteries) {
+        return lotteries.stream()
+                .map(Lotto::toIntValues)
                 .map(String::valueOf)
-                .collect(Collectors.joining(CARRIAGE_RETURN));
+                .collect(toList());
     }
 
-    private static void printWinningResults(LottoRanks lottoRanks) {
-        stringBuilder.append(getThreeMatchResults(lottoRanks) + CARRIAGE_RETURN);
-        stringBuilder.append(getFourMatchResults(lottoRanks) + CARRIAGE_RETURN);
-        stringBuilder.append(getFiveMatchResults(lottoRanks) + CARRIAGE_RETURN);
-        stringBuilder.append(getSixMatchResults(lottoRanks) + CARRIAGE_RETURN);
+    private static void printWinningResults(LottoResults lottoResults) {
+        stringBuilder.append(getThreeMatchResults(lottoResults.getLottoRanks()) + CARRIAGE_RETURN);
+        stringBuilder.append(getFourMatchResults(lottoResults.getLottoRanks()) + CARRIAGE_RETURN);
+        stringBuilder.append(getFiveMatchResults(lottoResults.getLottoRanks()) + CARRIAGE_RETURN);
+        stringBuilder.append(getSixMatchResults(lottoResults.getLottoRanks()) + CARRIAGE_RETURN);
     }
 
     private static String getThreeMatchResults(LottoRanks lottoRanks) {

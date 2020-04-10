@@ -1,12 +1,6 @@
 package lotto.ui;
 
-import lotto.application.DtoAssembler;
-import lotto.application.LottoRequest;
-import lotto.application.WinningLottoRequest;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.money.LottoMoney;
-import lotto.domain.rank.WinningLottoRangeException;
+import lotto.domain.rank.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -16,7 +10,6 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.Constant.LOTTO_NUM_COUNT_LIMIT;
 
 public class InputView {
     private static final String REQUEST_MONEY_MESSAGE = "구매금액을 입력해 주세요.";
@@ -26,24 +19,10 @@ public class InputView {
     private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String COMMA = ",";
 
-    public InputView() {
+    private InputView() {
     }
 
-    public static LottoRequest getRequestDto() {
-        return DtoAssembler.assembleLottoRequest(
-                LottoMoney.of(requestMoney()),
-                requestManual()
-        );
-    }
-
-    public static WinningLottoRequest getWinningLottoDto() {
-        return DtoAssembler.assembleWinningRequest(
-                requestWinningNumbers(),
-                requestBonusNumber()
-        );
-    }
-
-    private static int requestMoney() {
+    public static int requestMoney() {
         System.out.println(REQUEST_MONEY_MESSAGE);
         Scanner scanner = new Scanner(System.in);
         try {
@@ -53,14 +32,20 @@ public class InputView {
         }
     }
 
-    private static List<LottoNumbers> requestManual() {
+    public static List<List<Integer>> requestManualLottoNumbers() {
         int manualCount = requestManualCount();
-        List<LottoNumbers> lottoNumbersByManual = new ArrayList<>();
+        List<List<Integer>> lottoNumbersByManual = new ArrayList<>();
         System.out.println(REQUEST_MANUAL_NUMBER);
         for (int i = 0; i < manualCount; i++) {
             lottoNumbersByManual.add(requestManualNumbers());
         }
         return lottoNumbersByManual;
+    }
+
+    public static WinningLotto requestWinningLotto() {
+        List<Integer> winningNumbers = requestWinningNumbers();
+        int bonusNumber = requestBonusNumber();
+        return WinningLotto.of(winningNumbers, bonusNumber);
     }
 
     private static int requestManualCount() {
@@ -73,26 +58,19 @@ public class InputView {
         }
     }
 
-    private static LottoNumbers requestManualNumbers() {
+    private static List<Integer> requestManualNumbers() {
         Scanner scanner = new Scanner(System.in);
         String[] split = scanner.nextLine().split(COMMA);
-        List<LottoNumber> lottoNumbers = asList(split)
+        return asList(split)
                 .stream()
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
                 .collect(toList());
-
-        return new LottoNumbers(lottoNumbers);
     }
 
-    private static LottoNumbers requestWinningNumbers() {
+    private static List<Integer> requestWinningNumbers() {
         String[] inputValue = winningRequestMessage();
-        List<LottoNumber> winningNumbers = getWinningNumbers(inputValue);
-        if (winningNumbers.size() != LOTTO_NUM_COUNT_LIMIT) {
-            throw new WinningLottoRangeException("당첨 번호는 6개의 숫자만 입력할 수 있습니다.");
-        }
-        return new LottoNumbers(winningNumbers);
+        return getWinningNumbers(inputValue);
     }
 
     private static int requestBonusNumber() {
@@ -107,7 +85,7 @@ public class InputView {
         return scanner.nextLine().split(COMMA);
     }
 
-    private static List<LottoNumber> getWinningNumbers(String[] inputValue) {
+    private static List<Integer> getWinningNumbers(String[] inputValue) {
         return asList(inputValue)
                 .stream()
                 .map(InputView::parseLottoNumber)
@@ -115,9 +93,9 @@ public class InputView {
                 .collect(toList());
     }
 
-    private static LottoNumber parseLottoNumber(String lottoNumString) {
+    private static int parseLottoNumber(String lottoNumString) {
         try {
-            return new LottoNumber(parseInt(lottoNumString.trim()));
+            return parseInt(lottoNumString.trim());
         } catch (NumberFormatException e) {
             throw new InvalidNumberException();
         }

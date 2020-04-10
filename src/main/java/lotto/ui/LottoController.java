@@ -1,7 +1,10 @@
 package lotto.ui;
 
-import lotto.application.*;
-import lotto.domain.lotto.Lottery;
+import lotto.application.LottoResponse;
+import lotto.application.LottoResults;
+import lotto.application.LottoService;
+import lotto.application.WinningLottoRequest;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.rank.LottoRanks;
 
 public class LottoController {
@@ -11,17 +14,22 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public LottoBuyResponse buy(LottoRequest lottoRequest) {
-        ManualLottery manualLottery =
-                lottoService.buyManual(lottoRequest.getLottoMoney(), lottoRequest.getLottoNumbers());
-
-        Lottery lotteryByManual = manualLottery.getLottery();
-        Lottery lotteryByAuto = lottoService.buyAuto(manualLottery.getLottoMoney());
-
-        return DtoAssembler.assembleLottoByResponse(lotteryByManual, lotteryByAuto);
+    public LottoResponse manual(Lotteries lotteries) {
+        return LottoResponse.of(lottoService.buyManual(lotteries));
     }
 
-    public LottoRanks match(Lottery lottery, WinningLottoRequest winningLottoDto) {
-        return lottoService.match(lottery, winningLottoDto);
+    public LottoResponse auto(int autoCount) {
+        return LottoResponse.of(lottoService.buyAuto(autoCount));
     }
+
+    public int pay(int boughtCount) {
+        return lottoService.pay(boughtCount);
+    }
+
+    public LottoResults match(WinningLottoRequest winningLottoRequest) {
+        LottoRanks lottoRanks =
+                lottoService.matchResults(winningLottoRequest.getLotteries(), winningLottoRequest.getWinningLotto());
+        return LottoResults.of(lottoRanks);
+    }
+
 }
