@@ -13,30 +13,46 @@
 - 로또 1장의 가격은 1000원이다.
 
 ## 구현 설계
-- Lotto class
+
+### Domain
+- LottoGames class
   - List<LottoGame> property
-  - getRanks method
+  - confirmResult method
   
 - LottoGame class
-  - List<LottoNo> property
-  - genarateRandomNumbers method
+  - Set<LottoBall> property
+  - getLottoBalls method
+  - getMatchCount method
+  - contains method
   
-- LottoNo class 
-  - Integer property
+- LottoBall class 
+  - int property
 
-- WinningNumbers class 
+- WinningBalls class 
   - LottoGame property
-  - LottoNo property
-  - getRank method
+  - LottoBall property
+  - calculateRank method
   
-- Ranks class  
+- WinningResult class  
   - List<Rank> property
+  - deriveStatistics method
+  
+- RankStatistic class
+  - Map<Rank, Long> property
+  - calculateYield method
+  - countWinsOf method
   
 - Rank enum
 
+- Trilean enum
+
+### View
+
 - InputView class
+  - getBonusBall method
   - getPurchaseAmount method
-  - getWinningNumbers method
+  - getLastWinningBalls method
   
 - ResultView class
-  - printRanks method
+  - printBuying method
+  - printResult method

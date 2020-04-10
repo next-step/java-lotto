@@ -40,12 +40,12 @@ public class LottoGame {
 
   private void throwIfInvalid(Set<Integer> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NO_COUNT) {
-      throw new IllegalArgumentException("LottoGame should have exactly 6 LottoNos");
+      throw new IllegalArgumentException("로또 번호는 서로 다른 6개의 숫자여야 합니다.");
     }
   }
 
   public Set<LottoBall> getLottoBalls() {
-    return lottoBalls;
+    return Collections.unmodifiableSet(lottoBalls);
   }
 
   public int getMatchCount(LottoGame lottoGame) {

@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 import static lotto.domain.LottoGames.LOTTO_PRICE;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Map.Entry;
 import lotto.domain.model.Rank;
 
 public class RankStatistic {
@@ -15,39 +16,36 @@ public class RankStatistic {
 
   public RankStatistic(List<Rank> ranks) {
     rankStatistic = ranks.stream()
-        .collect(
-            Collectors.groupingBy(
-                Function.identity(),
-                Collectors.counting()
-            )
-        );
+        .collect(groupingBy(identity(), counting()));
   }
 
   public double calculateYield() {
-    return calculatePrizeMoney() / (double) calculatePurchaseAmount();
+    return sumTotalPrizeMoney() / (double) calculatePurchaseAmount();
   }
 
-  private long calculatePrizeMoney() {
+  private long sumTotalPrizeMoney() {
     return rankStatistic.entrySet()
         .stream()
-        .mapToLong(entry -> {
-          Rank rank = entry.getKey();
-          long winCount = entry.getValue();
-          return rank.getWinningMoney() * winCount;
-        })
+        .mapToLong(this::sumRankPrizeMoney)
         .sum();
+  }
+
+  private long sumRankPrizeMoney(Entry<Rank, Long> entry) {
+      Rank rank = entry.getKey();
+      long winCount = entry.getValue();
+      return rank.getWinningMoney() * winCount;
   }
 
   private long calculatePurchaseAmount() {
     return rankStatistic.values()
         .stream()
-        .mapToLong(v -> v)
-        .sum() * LOTTO_PRICE;
+        .reduce(0L, Long::sum)
+        * LOTTO_PRICE;
   }
 
+  //-----------------------------------------------------------------------
+
   public long countWinsOf(Rank rank) {
-    return Optional.ofNullable(
-        rankStatistic.get(rank)
-    ).orElse(0L);
+    return rankStatistic.get(rank) != null ? rankStatistic.get(rank) : 0L;
   }
 }
