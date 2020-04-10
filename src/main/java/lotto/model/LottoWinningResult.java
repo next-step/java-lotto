@@ -42,7 +42,7 @@ public enum LottoWinningResult {
         return lottoWinningResult;
     }
 
-    public static LottoWinningResult of(int matchCount, boolean matchBonusNumber) {
+    public static LottoWinningResult of(final int matchCount, final boolean matchBonusNumber) {
         return of(LottoWinningResultMatchId.newInstance(matchCount, matchBonusNumber));
     }
 

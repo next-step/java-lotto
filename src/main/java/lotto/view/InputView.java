@@ -57,7 +57,7 @@ public class InputView {
         }
     }
 
-    public static LottoTickets inputManualLotto(ManualLottoCount manualLottoCount) {
+    public static LottoTickets inputManualLotto(final ManualLottoCount manualLottoCount) {
         try {
             List<String> lottoNumberLines = inputManualLottoTickets(manualLottoCount.getCount());
             return LottoTickets.newInstance(convertTo(lottoNumberLines));
@@ -90,7 +90,7 @@ public class InputView {
         }
     }
 
-    private static List<String> inputManualLottoTickets(int manualLottoCount) {
+    private static List<String> inputManualLottoTickets(final int manualLottoCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<String> manualLottoTickets = new ArrayList<>();
         for(int i = 0; i < manualLottoCount; i++) {

@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.model.LottoTickets;
 import lotto.model.LottoWinningResult;
-import lotto.model.LottoWinningResults;
 import lotto.model.dto.LottoTotalResult;
 import lotto.model.dto.LottoWinningResultWithCount;
 
@@ -24,10 +23,10 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLottoResults(final LottoWinningResults lottoWinningResults) {
+    public static void printLottoResults(final LottoTotalResult lottoTotalResult) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        LottoTotalResult lottoTotalResult = LottoTotalResult.newInstance(lottoWinningResults);
+
         lottoTotalResult.getWinResult()
                 .forEach(OutputView::printEachWinResult);
         printProfitResult(lottoTotalResult.getProfit());

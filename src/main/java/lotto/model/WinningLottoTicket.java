@@ -26,7 +26,7 @@ public class WinningLottoTicket {
         return new WinningLottoTicket(LottoTicket.newInstance(numbers), bonusNumber);
     }
 
-    public LottoWinningResult check(LottoTicket lottoTicket) {
+    public LottoWinningResult check(final LottoTicket lottoTicket) {
         long count = winningLottoTicket.getNumbers()
                 .stream()
                 .filter(lottoTicket::contains)

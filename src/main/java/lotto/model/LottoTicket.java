@@ -18,15 +18,15 @@ public class LottoTicket {
         this.numbers = new HashSet<>(numbers);
     }
 
-    public static LottoTicket newInstance() {
-        return new LottoTicket(AutomaticLottoGenerator.generate());
+    public static LottoTicket newInstance(final AutomaticLottoGenerator automaticLottoGenerator) {
+        return new LottoTicket(automaticLottoGenerator.generate());
     }
 
     public static LottoTicket newInstance(final Set<LottoNumber> numbers) {
         return new LottoTicket(numbers);
     }
 
-    public static LottoTicket newInstance(int... numbers) {
+    public static LottoTicket newInstance(final int... numbers) {
         Set<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .mapToObj(LottoNumber::of)
                 .collect(Collectors.toSet());
@@ -38,7 +38,7 @@ public class LottoTicket {
         return new HashSet<>(numbers);
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 

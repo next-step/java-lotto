@@ -2,6 +2,7 @@ import lotto.model.LottoStore;
 import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
 import lotto.model.WinningLottoTicket;
+import lotto.model.dto.LottoTotalResult;
 import lotto.model.wrapper.LottoNumber;
 import lotto.model.wrapper.ManualLottoCount;
 import lotto.model.wrapper.Payment;
@@ -25,7 +26,7 @@ public class Main {
 
         WinningLottoTicket winningLottoTicket = inputWinningLottoTicket();
 
-        printLottoResults(lottoTickets.checkAll(winningLottoTicket));
+        printLottoResults(LottoTotalResult.newInstance(lottoTickets.checkAll(winningLottoTicket)));
     }
 
     private static WinningLottoTicket inputWinningLottoTicket() {

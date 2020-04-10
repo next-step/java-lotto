@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.AutomaticLottoGenerator;
 import lotto.model.wrapper.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class LottoTicketTests {
     @DisplayName("로또 생성 테스트")
     @Test
     public void generateLottoTest() {
-        assertThatCode(LottoTicket::newInstance).doesNotThrowAnyException();
+        assertThatCode(() -> LottoTicket.newInstance(new AutomaticLottoGenerator().generate())).doesNotThrowAnyException();
     }
 
     @DisplayName("로또 생성 오류 테스트 - 숫자 갯수가 6개가 아니거나, 중복되는 숫자가 있을 경우")

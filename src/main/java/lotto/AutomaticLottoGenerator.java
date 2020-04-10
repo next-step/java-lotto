@@ -23,10 +23,10 @@ public class AutomaticLottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    private AutomaticLottoGenerator() {
+    public AutomaticLottoGenerator() {
     }
 
-    public static Set<LottoNumber> generate() {
+    public Set<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
         return IntStream.range(0, LOTTO_NUMBER_SIZE)
                 .mapToObj(i -> lottoNumbers.get(i))

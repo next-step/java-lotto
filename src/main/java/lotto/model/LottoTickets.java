@@ -21,7 +21,7 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public static LottoTickets newInstance(LottoTicket... lottoTickets) {
+    public static LottoTickets newInstance(final LottoTicket... lottoTickets) {
         return new LottoTickets(Arrays.asList(lottoTickets));
     }
 
@@ -37,7 +37,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public LottoTickets merge(List<LottoTicket> another) {
+    public LottoTickets merge(final List<LottoTicket> another) {
         List<LottoTicket> newLottoTickets = new ArrayList<>();
         newLottoTickets.addAll(lottoTickets);
         newLottoTickets.addAll(another);

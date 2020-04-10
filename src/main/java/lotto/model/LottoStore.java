@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.AutomaticLottoGenerator;
 import lotto.model.wrapper.Payment;
 
 import java.util.List;
@@ -15,13 +16,13 @@ public class LottoStore {
         int automaticLottoCount = countAutomaticLottoTickets(payment.countLottoTicket() - manualLottoTickets.size());
 
         List<LottoTicket> lottoTickets = IntStream.range(0, automaticLottoCount)
-                .mapToObj(i -> LottoTicket.newInstance())
+                .mapToObj(i -> LottoTicket.newInstance(new AutomaticLottoGenerator()))
                 .collect(Collectors.toList());
 
         return manualLottoTickets.merge(lottoTickets);
     }
 
-    private static int countAutomaticLottoTickets(int extraPayment) {
+    private static int countAutomaticLottoTickets(final int extraPayment) {
         if (extraPayment < 0) {
             throw new IllegalArgumentException("입력 받은 수동 로또들을 전부 구입하기엔 돈이 모자릅니다.");
         }
