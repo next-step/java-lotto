@@ -39,7 +39,7 @@ public class LottoWinningResultTests {
         assertThat(LottoWinningResult.FOUR.getPrice()).isEqualTo(50_000L);
         assertTrue(LottoWinningResult.TWO.isBlank());
         assertFalse(LottoWinningResult.FIVE.isBlank());
-        assertThat(LottoWinningResult.FIVE_WITH_BONUS.getLottoWinningResultMatchId()).isEqualTo(5);
+        assertThat(LottoWinningResult.FIVE_WITH_BONUS.getMatchCount()).isEqualTo(5);
     }
 
     private static Stream<Arguments> generateLottoResultCases() {

@@ -20,7 +20,7 @@ public class LottoNumberTests {
     @ParameterizedTest
     @ValueSource(ints = {1, 17, 45})
     public void compareLottoNumberTest(int input) {
-        assertThat(LottoNumber.of(input)).isEqualTo(LottoNumber.of(input));
+        assertThat(LottoNumber.of(input)).isSameAs(LottoNumber.of(input));
     }
 
     @DisplayName("로또 번호 생성 테스트 - 에러")

@@ -12,7 +12,7 @@ public class LottoWinningResultWithCount {
     }
 
     public int getMatchCount() {
-        return lottoWinningResult.getLottoWinningResultMatchId();
+        return lottoWinningResult.getMatchCount();
     }
 
     public long getPrice() {

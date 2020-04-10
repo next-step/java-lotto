@@ -47,7 +47,7 @@ public enum LottoWinningResult {
         return of(LottoWinningResultMatchId.newInstance(matchCount, matchBonusNumber));
     }
 
-    public int getLottoWinningResultMatchId() {
+    public int getMatchCount() {
         return lottoWinningResultMatchId.toInt();
     }
 
@@ -56,7 +56,7 @@ public enum LottoWinningResult {
     }
 
     public boolean isBlank() {
-        return price.equals(LottoPrice.of(0L));
+        return price.isZero();
     }
 
     private LottoWinningResultMatchId getLottoMatchCount() {

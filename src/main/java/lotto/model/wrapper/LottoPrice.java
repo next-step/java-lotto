@@ -21,6 +21,10 @@ public class LottoPrice {
         return price;
     }
 
+    public boolean isZero() {
+        return price == 0L;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
