@@ -17,7 +17,7 @@ public class LottoNumbers {
         List<LottoNumber> temp = new ArrayList<>();
 
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            temp.add(new LottoNumber(i));
+            temp.add(LottoNumber.of(i));
         }
         return temp;
     }

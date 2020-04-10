@@ -3,11 +3,14 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.domain.Fixture.lottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -15,11 +18,13 @@ public class LottoTest {
 
     private List<Integer> sixNumbers;
     private List<Integer> fiveNumbers;
+    private List<Integer> duplicateNumbers;
 
     @BeforeEach
     void setUp() {
         sixNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         fiveNumbers = Arrays.asList(1, 2, 3, 4, 5);
+        duplicateNumbers = Arrays.asList(1, 1, 1, 1, 1, 1);
     }
 
     @DisplayName("로또는 한 장에 숫자 6개로 생성된다.")
