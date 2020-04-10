@@ -33,7 +33,7 @@ public class LottoGroupTest {
     @Test
     public void matching() {
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
-        List<Rank> matchingResult = lottoGroup.matching(winningLotto);
-        assertThat(matchingResult).hasSize(6).containsExactly(Rank.values());
+        Ranks ranks = lottoGroup.matching(winningLotto);
+        assertThat(ranks.getRanks()).hasSize(6).containsExactly(Rank.values());
     }
 }

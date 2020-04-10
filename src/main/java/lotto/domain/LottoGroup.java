@@ -34,12 +34,12 @@ public class LottoGroup {
         return this.lottos;
     }
 
-    public List<Rank> matching(WinningLotto winningLotto) {
+    public Ranks matching(WinningLotto winningLotto) {
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
             result.add(lotto.match(winningLotto));
         }
-        return result;
+        return new Ranks(result);
     }
 
     @Override
