@@ -30,9 +30,9 @@ public class Lotto {
     public static Lotto ofComma(String numbers) {
         String[] values = numbers.split(",");
         return new Lotto(
-            Arrays.asList(values).stream()
-                    .map(LottoNumber::of)
-                    .collect(Collectors.toSet()));
+                Arrays.asList(values).stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet()));
     }
 
     public Rank match(WinningLotto winningLotto) {

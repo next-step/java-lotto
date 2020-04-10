@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class RankTest {
     private static final boolean MATCH_BONUS = true;
     private static final boolean MISMATCH_BONUS = false;
+
     @Test
     public void valueOf() {
         assertAll(

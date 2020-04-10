@@ -46,7 +46,7 @@ public class LottoTest {
             lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 6, 6));
         }).withMessage("로또 번호는 중복되지 않는 6개의 숫자만 가능합니다.");
     }
-    
+
     @Test
     public void match_6개_1등_테스트() {
         WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
