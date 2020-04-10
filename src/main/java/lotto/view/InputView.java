@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.utils.StringParser;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -12,9 +15,9 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public String askLastPrizeNumber() {
+    public List<String> askLastPrizeNumber() {
         System.out.println(PRIZE_QUESTION);
-        return scanner.nextLine();
+        return StringParser.splitText(scanner.nextLine());
     }
 
 

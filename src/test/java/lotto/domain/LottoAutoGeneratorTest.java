@@ -11,6 +11,13 @@ class LottoAutoGeneratorTest {
     @Test
     public void testLottoNumberCreate() {
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
-        assertThat(lottoAutoGenerator.generateNumbers().size()).isSameAs(6);
+        assertThat(lottoAutoGenerator.getLottoNumbers().size()).isSameAs(6);
+    }
+
+    @DisplayName("로또 범위를 생성한다.")
+    @Test
+    void canCreateLottoNumbers() {
+        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+        assertThat(lottoAutoGenerator.generateNumbers().size()).isSameAs(45);
     }
 }

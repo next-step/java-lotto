@@ -32,7 +32,7 @@ public class LottoController {
     private void generateAutoLottos(List<Lotto> purchasedLottos, Money money) {
         LottoAutoGenerator lottoNosGenerator = new LottoAutoGenerator();
         for (int i = 0; i < money.getLottoCount(); i++) {
-            List<LottoNumber> lottoNumbers = lottoNosGenerator.generateNumbers();
+            List<LottoNumber> lottoNumbers = lottoNosGenerator.getLottoNumbers();
             purchasedLottos.add(new Lotto(lottoNumbers));
         }
     }

@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
@@ -29,9 +32,10 @@ public class Lotto {
     }
 
     private Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != MAX_LOTTO_COUNT) {
+        if (lottoNumbers.stream().distinct().count() != MAX_LOTTO_COUNT) {
             throw new IllegalArgumentException("중복 없이 숫자를 6개 입력해주세요.");
         }
+
         return new TreeSet<>(lottoNumbers);
     }
 
