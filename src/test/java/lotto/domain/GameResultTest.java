@@ -22,7 +22,7 @@ class GameResultTest {
         // given
         Money purchasedAmount = new Money(14_000);
         long totalPrizeAmount = Prize.FOURTH.getAmount();
-        long expected = (totalPrizeAmount / purchasedAmount.getAmount());
+        double expected = (double) totalPrizeAmount / (double) purchasedAmount.getAmount();
 
         // then
         assertThat(expected).isEqualTo(actual.getProfit(purchasedAmount));

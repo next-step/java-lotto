@@ -13,13 +13,13 @@ public class OutputView {
 
     public void showInputResult(final List<Lotto> lottos, Money money) {
         StringBuilder sb = new StringBuilder();
-        sb.append(System.getProperty("line.separator"));
+        sb.append(System.lineSeparator());
         sb.append(money.getLottoCount() + "개를 구매했습니다.");
-        sb.append(System.getProperty("line.separator"));
+        sb.append(System.lineSeparator());
 
         for (Lotto lotto : lottos) {
             sb.append(lotto);
-            sb.append(System.getProperty("line.separator"));
+            sb.append(System.lineSeparator());
         }
 
         System.out.println(sb.toString());

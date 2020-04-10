@@ -27,7 +27,7 @@ public class GameResult {
     }
 
     public double getProfit(Money purchaseAmount) {
-        return (double)getTotalPrizeAmount() / (double)purchaseAmount.getAmount();
+        return (double) getTotalPrizeAmount() / (double) purchaseAmount.getAmount();
     }
 
     private long getTotalPrizeAmount() {
