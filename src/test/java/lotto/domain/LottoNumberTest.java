@@ -22,6 +22,4 @@ public class LottoNumberTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> LottoNumber.of(number));
     }
-
-
 }
