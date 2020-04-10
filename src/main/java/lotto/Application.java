@@ -1,33 +1,42 @@
 package lotto;
 
-import lotto.application.LottoBuyResponse;
+import lotto.application.LottoResponse;
+import lotto.application.LottoResults;
 import lotto.application.LottoService;
+import lotto.application.WinningLottoRequest;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.machine.LottoMachine;
-import lotto.domain.rank.LottoRanks;
+import lotto.domain.money.LottoMoney;
 import lotto.ui.InputView;
 import lotto.ui.LottoController;
 import lotto.ui.ResultView;
-import lotto.application.WinningLottoRequest;
 
 public class Application {
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(lottoService());
-        LottoBuyResponse lottoBuyResponse = lottoController.buy(InputView.getRequestDto());
-        ResultView.print(lottoBuyResponse);
+        LottoController lottoController = setUpLottoController(InputView.requestMoney());
+        LottoResponse lottoManualResponse = getManualLottoResponse(lottoController);
+        LottoResponse lottoAutoResponse = getAutoLottoResponse(lottoController, lottoManualResponse.boughtCount());
+        ResultView.print(lottoManualResponse, lottoAutoResponse);
 
-        WinningLottoRequest winningLottoDto = InputView.getWinningLottoDto();
-
-        LottoRanks lottoRanks = lottoController.match(lottoBuyResponse.getLotteryTotal(), winningLottoDto);
-        ResultView.print(lottoRanks);
+        LottoResponse allLotteries =
+                LottoResponse.of(lottoManualResponse.getLottoResponse(), lottoAutoResponse.getLottoResponse());
+        WinningLottoRequest winningLottoRequest =
+                WinningLottoRequest.of(allLotteries.getLottoResponse(), InputView.requestWinningLotto());
+        LottoResults lottoResults = lottoController.match(winningLottoRequest);
+        ResultView.print(lottoResults);
     }
 
-    private static LottoService lottoService() {
-        return new LottoService(lottoMachine());
+    private static LottoResponse getAutoLottoResponse(LottoController lottoController, int boughtCount) {
+        return lottoController.auto(lottoController.pay(boughtCount));
     }
 
-    private static LottoMachine lottoMachine() {
-        return new LottoMachine();
+    private static LottoResponse getManualLottoResponse(LottoController lottoController) {
+        Lotteries InputManualLottoValues = Lotteries.of(InputView.requestManualLottoNumbers());
+        return lottoController.manual(InputManualLottoValues);
     }
 
+    private static LottoController setUpLottoController(int lottoMoney) {
+        return new LottoController(new LottoService(new LottoMachine(), LottoMoney.of(lottoMoney)));
+    }
 }
