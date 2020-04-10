@@ -49,43 +49,37 @@ public class LottoTest {
     
     @Test
     public void match_6개_1등_테스트() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int bonusNo = 7;
-        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.FIRST);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIRST);
     }
 
     @Test
     public void match_5개_보너스_매치_2등_테스트() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
-        int bonusNo = 6;
-        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.SECOND);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,7", 6);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.SECOND);
     }
 
     @Test
     public void match_5개_3등_테스트() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
-        int bonusNo = 8;
-        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.THIRD);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,7", 8);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.THIRD);
     }
 
     @Test
     public void match_4개_4등_테스트() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 7, 8));
-        int bonusNo = 9;
-        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.FOURTH);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,7,8", 9);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
     public void match_3개_5등_테스트() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 7, 8, 9));
-        int bonusNo = 6;
-        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.FIFTH);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,7,8,9", 6);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
     public void match_보너스_포함_3개_테스트() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 7, 8, 9, 10));
-        int bonusNo = 6;
-        assertThat(lotto.match(winningLotto, bonusNo)).isEqualTo(Rank.MISS);
+        WinningLotto winningLotto = new WinningLotto("1,2,7,8,9,10", 6);
+        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.MISS);
     }
 }

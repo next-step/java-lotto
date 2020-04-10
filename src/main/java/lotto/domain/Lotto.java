@@ -35,15 +35,15 @@ public class Lotto {
                     .collect(Collectors.toSet()));
     }
 
-    public Rank match(Lotto winningLotto, int bonusNo) {
-        int match = winningLotto.lottoNumbers.stream()
+    public Rank match(WinningLotto winningLotto) {
+        int match = winningLotto.getWinningLotto().lottoNumbers.stream()
                 .filter(winningNumber -> lottoNumbers.contains(winningNumber))
                 .collect(Collectors.reducing(0, e -> 1, Integer::sum));
-        return Rank.valueOf(match, isMatchBonusNo(bonusNo));
+        return Rank.valueOf(match, isMatchBonusNo(winningLotto.getBonusNumber()));
     }
 
-    private boolean isMatchBonusNo(int bonusNo) {
-        return lottoNumbers.contains(LottoNumber.of(bonusNo));
+    private boolean isMatchBonusNo(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override

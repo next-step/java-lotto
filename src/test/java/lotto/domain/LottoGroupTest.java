@@ -32,9 +32,8 @@ public class LottoGroupTest {
 
     @Test
     public void matching() {
-        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        int bonusNo = 7;
-        List<Rank> matchingResult = lottoGroup.matching(winningLotto, bonusNo);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
+        List<Rank> matchingResult = lottoGroup.matching(winningLotto);
         assertThat(matchingResult).hasSize(6).containsExactly(Rank.values());
     }
 }
