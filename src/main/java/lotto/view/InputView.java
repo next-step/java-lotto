@@ -8,6 +8,7 @@ import lotto.model.wrapper.Payment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -23,7 +24,7 @@ public class InputView {
 
     public static <R> R inputData(Supplier<R> inputSupplier) {
         R result = null;
-        while (result == null) {
+        while (Objects.isNull(result)) {
             result = inputSupplier.get();
         }
         return result;
@@ -31,7 +32,7 @@ public class InputView {
 
     public static <T, R> R inputData(T semiInputComponent, Function<T, R> inputFunction) {
         R result = null;
-        while (result == null) {
+        while (Objects.isNull(result)) {
             result = inputFunction.apply(semiInputComponent);
         }
         return result;

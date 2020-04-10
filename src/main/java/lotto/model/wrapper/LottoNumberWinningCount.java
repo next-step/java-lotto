@@ -30,7 +30,7 @@ public class LottoNumberWinningCount {
     public static LottoNumberWinningCount of(final int count) {
         LottoNumberWinningCount lottoNumberWinningCount = COUNTS.get(count);
 
-        if (lottoNumberWinningCount == null) {
+        if (Objects.isNull(lottoNumberWinningCount)) {
             throw new IllegalArgumentException("당첨 번호와 매칭되는 숫자는 0 이상, 6 이하여야 합니다.");
         }
 

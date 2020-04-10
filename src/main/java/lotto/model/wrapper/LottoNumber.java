@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber of(final int number) {
         LottoNumber lottoNumber = NUMBERS.get(number);
 
-        if (lottoNumber == null) {
+        if (Objects.isNull(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호는 1 이상, 45 이하여야 합니다.");
         }
 

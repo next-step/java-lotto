@@ -5,6 +5,7 @@ import lotto.model.wrapper.LottoWinningResultMatchId;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,7 +36,7 @@ public enum LottoWinningResult {
     public static LottoWinningResult of(final LottoWinningResultMatchId lottoWinningResultMatchId) {
         LottoWinningResult lottoWinningResult = LOTTO_RESULTS.get(lottoWinningResultMatchId);
 
-        if (lottoWinningResult == null) {
+        if (Objects.isNull(lottoWinningResult)) {
             throw new IllegalArgumentException("일치하는 당첨 케이스가 없습니다.");
         }
 
