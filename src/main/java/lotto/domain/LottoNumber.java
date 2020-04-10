@@ -35,6 +35,10 @@ public class LottoNumber {
         return of(Integer.parseInt(value.trim()));
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -10,8 +10,8 @@ public class ResultViewTest {
 
     @Test
     public void printLottoGroup() {
-        LottoGroup lottoGroup = new LottoGroup(COUNT_OF_LOTTO);
-        ResultView.printLottoGroup(lottoGroup);
+        LottoGroup lottoGroup = LottoGroup.buyAutoSelectLotto(COUNT_OF_LOTTO);
+        ResultView.printLottoGroup(lottoGroup.getLottos());
     }
 
     @Test

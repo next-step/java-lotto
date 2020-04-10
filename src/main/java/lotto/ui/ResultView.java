@@ -1,20 +1,18 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ResultView {
-    public static void printLottoGroup(LottoGroup lottoGroup) {
-        List<Lotto> lottos = lottoGroup.getLottos();
+    public static void printLottoGroup(List<Lotto> lottos) {
         System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
         for (Lotto lotto : lottos) {
             String lottoNumbers = lotto.getLottoNumbers().stream()
-                    .map(lottoNumber -> String.valueOf(lottoNumber))
+                    .map(lottoNumber -> lottoNumber.getNumber())
+                    .sorted()
+                    .map(String::valueOf)
                     .collect(Collectors.joining(", ", "[", "]"));
             System.out.println(lottoNumbers);
         }

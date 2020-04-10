@@ -3,11 +3,11 @@ package lotto.ui;
 import java.util.Scanner;
 
 public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static int getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static String getWinningLotto() {
@@ -17,6 +17,6 @@ public class InputView {
 
     public static int getBonusNo() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 }

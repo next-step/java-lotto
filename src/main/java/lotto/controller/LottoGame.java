@@ -1,6 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.LottoGroup;
+import lotto.domain.Money;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -10,11 +13,12 @@ import java.util.List;
 public class LottoGame {
     public void start() {
         Money money = new Money(InputView.getMoney());
-        LottoGroup lottoGroup = new LottoGroup(money.getCountOfLotto());
-        ResultView.printLottoGroup(lottoGroup);
+        LottoGroup lottoGroup = LottoGroup.buyAutoSelectLotto(money.getCountOfLotto());
+        ResultView.printLottoGroup(lottoGroup.getLottos());
         String winningLottoNumbers = InputView.getWinningLotto();
         int bonusNo = InputView.getBonusNo();
-        List<Rank> ranks = lottoGroup.matching(new Lotto(winningLottoNumbers), bonusNo);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNo);
+        List<Rank> ranks = lottoGroup.matching(winningLotto);
         int totalWinningMoney = 0;
         for (Rank rank : ranks) {
             totalWinningMoney += rank.getWinningMoney();
