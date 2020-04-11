@@ -19,8 +19,8 @@ public class LottoInspectorTest {
     void setting() {
         this.lottoInspector = new LottoInspector();
 
-        Lotto lotto1 = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = Lotto.manual(Arrays.asList(1, 2, 3, 41, 42, 43));
+        Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.of(Arrays.asList(1, 2, 3, 41, 42, 43));
         testLottos.add(lotto1);
         testLottos.add(lotto2);
     }

@@ -8,7 +8,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto inputWinningLotto, LottoNumber inputBonusNumber) {
         validateBonusNumber(inputWinningLotto, inputBonusNumber);
-        this.winningLotto = Lotto.manual(inputWinningLotto.getLottoNumbers());
+        this.winningLotto = Lotto.of(inputWinningLotto.getLottoNumbers());
         this.bonusNumber = LottoNumber.chooseNumber(inputBonusNumber.getLottoNumber());
     }
 
@@ -17,15 +17,15 @@ public class WinningLotto {
     }
 
     public WinningLotto(List<Integer> inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
-        this(Lotto.manual(inputWinningLottoNumbers), inputBonusNumber);
+        this(Lotto.of(inputWinningLottoNumbers), inputBonusNumber);
     }
 
     public WinningLotto(List<Integer> inputWinningLottoNumbers, int inputBonusNumber) {
-        this(Lotto.manual(inputWinningLottoNumbers), LottoNumber.chooseNumber(inputBonusNumber));
+        this(Lotto.of(inputWinningLottoNumbers), LottoNumber.chooseNumber(inputBonusNumber));
     }
 
     public Lotto getWinningLotto() {
-        return Lotto.manual(this.winningLotto.getLottoNumbers());
+        return Lotto.of(this.winningLotto.getLottoNumbers());
     }
 
     public LottoNumber getBonusNumber() {

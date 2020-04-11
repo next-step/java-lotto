@@ -17,13 +17,13 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 테스트")
     void generateLottoTest() {
-        Lotto.automatic(new RandomNumber()).getLottoNumbers();
+        Lotto.of(new RandomNumber()).getLottoNumbers();
     }
 
     @Test
     @DisplayName("로또번호 생성시 이미 있는 번호 테스트")
     void isNumberExistTest() {
-        Lotto lotto = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertAll(
                 () -> assertThat(lotto.isExistNumber(LottoNumber.chooseNumber(1))).isTrue(),
@@ -37,15 +37,15 @@ public class LottoTest {
     @DisplayName("중복된 로또번호 테스트")
     void validateDuplicationNumbersTest() {
         assertThatThrownBy(
-                () -> Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 5))
+                () -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 5))
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("로또번호 맞춘 갯수 가져오기 테스트")
     void getMatchedCountTest() {
-        Lotto winningLotto = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto = Lotto.manual(Arrays.asList(1, 2, 3, 4, 5, 45));
+        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 45));
 
         assertThat(winningLotto.getMatchedCount(lotto)).isEqualTo(5);
     }
@@ -53,7 +53,7 @@ public class LottoTest {
     @Test
     @DisplayName("getLottoNumbers 불변검사")
     void getLottoNumbersTest() {
-        Lotto lo = Lotto.automatic(new RandomNumber());
+        Lotto lo = Lotto.of(new RandomNumber());
         lo.getLottoNumbers().add(LottoNumber.chooseNumber(44));
 
         assertThat(lo.getLottoNumbers().size()).isEqualTo(6);

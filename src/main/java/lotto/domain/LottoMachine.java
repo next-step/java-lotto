@@ -13,7 +13,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
 
         for (List<Integer> manualLottoOrder : manualLottoOrderSheet.getManualLottoOrders()) {
-            lottos.add(Lotto.manual(manualLottoOrder));
+            lottos.add(Lotto.of(manualLottoOrder));
         }
         return new Lottos(lottos);
     }
@@ -22,7 +22,7 @@ public class LottoMachine {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < purchaseCount; i++) {
-            lottos.add(Lotto.automatic(new RandomNumber()));
+            lottos.add(Lotto.of(new RandomNumber()));
         }
         return new Lottos(lottos);
     }

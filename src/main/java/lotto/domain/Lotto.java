@@ -9,15 +9,15 @@ public class Lotto {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    public static Lotto automatic(NumberGenerator numberGenerator) {
+    public static Lotto of(NumberGenerator numberGenerator) {
         return new Lotto(generatorLottoNumbers(numberGenerator));
     }
 
-    public static Lotto manual(Set<LottoNumber> lottoNumbers) {
+    public static Lotto of(Set<LottoNumber> lottoNumbers) {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto manual(List<Integer> lottoNumbers) {
+    public static Lotto of(List<Integer> lottoNumbers) {
         return new Lotto(changeToLottoNumbers(lottoNumbers));
     }
 
