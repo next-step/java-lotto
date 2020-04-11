@@ -29,7 +29,9 @@ public class InputView {
         List<List<Integer>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < purchaseManualCount; i++) {
             List<String> inputs = Arrays.asList(scanner.next().split(LOTTO_NUMBER_SPLIT_KEYWORD));
-            List<Integer> inputNumbers = inputs.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+            List<Integer> inputNumbers = inputs.stream()
+                    .map(s -> Integer.parseInt(s))
+                    .collect(Collectors.toList());
             manualLottoNumbers.add(inputNumbers);
         }
         return new ManualLottoOrderSheet(manualLottoNumbers);
