@@ -2,13 +2,13 @@ package Lotto;
 
 import java.util.List;
 
-public class LottoProgress {
+public class LottoInGame {
 
     private final int LOTTO_PRICE = 1000;
     private int[] winnerArray = new int[7];
 
     public int amountToQuantity(Amount amount) {
-        return amount.getAmount()/LOTTO_PRICE;
+        return amount.getAmount() / LOTTO_PRICE;
     }
 
     public int[] matchNumber(LottoBundle lottoBundle, List<Integer> prizeList) {
@@ -22,7 +22,7 @@ public class LottoProgress {
         return winnerArray;
     }
 
-    public int matchNumberPrize(LottoPaper paper, List<Integer> prizeList) {
+    private int matchNumberPrize(LottoPaper paper, List<Integer> prizeList) {
         int count = 0;
         for (Integer i : prizeList) {
            count += paper.contains(i) ? 1 : 0;

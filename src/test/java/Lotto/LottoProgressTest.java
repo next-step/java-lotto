@@ -1,11 +1,8 @@
 package Lotto;
 
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.api.BeforeEach;
-
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoProgressTest {
@@ -13,7 +10,7 @@ public class LottoProgressTest {
     private Amount amount;
     private int quantity;
 
-    private LottoProgress lottoProgress;
+    private LottoInGame lottoInGame;
     private LottoPaper lottoPaper;
     private LottoBundle lottoBundle;
     List<Integer> prizeList;
@@ -22,10 +19,10 @@ public class LottoProgressTest {
     public void setUp() {
         amount = new Amount("14000");
 
-        lottoProgress = new LottoProgress();
+        lottoInGame = new LottoInGame();
         lottoPaper = new LottoPaper();
 
-        quantity = lottoProgress.amountToQuantity(amount);
+        quantity = lottoInGame.amountToQuantity(amount);
 
         lottoBundle = new LottoBundle(quantity);
 
@@ -39,7 +36,7 @@ public class LottoProgressTest {
 
     @Test
     public void amountToQuantity() {
-        assertThat(lottoProgress.amountToQuantity(amount)).isEqualTo(14);
+        assertThat(lottoInGame.amountToQuantity(amount)).isEqualTo(14);
     }
 
 

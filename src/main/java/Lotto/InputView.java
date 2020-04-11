@@ -25,6 +25,10 @@ public class InputView {
             prizeList.add(Integer.parseInt(s));
         }
 
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusNumber = scanner.nextLine();
+        prizeList.add(Integer.parseInt(bonusNumber));
+
         return prizeList;
     }
 
