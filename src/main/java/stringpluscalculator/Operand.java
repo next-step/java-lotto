@@ -1,6 +1,7 @@
 package stringpluscalculator;
 
 public class Operand {
+    public static final Operand ZERO = new Operand(0);
     private int positiveNumber;
 
     public Operand(int input) {

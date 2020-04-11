@@ -3,7 +3,8 @@ package stringpluscalculator;
 import java.util.Objects;
 
 public class Separator {
-
+    public static final Separator DEFAULT_SEPARATOR_COLON = new Separator(":");
+    public static final Separator DEFAULT_SEPARATOR_COMMA = new Separator(",");
     private String separator;
 
     public Separator(String separator) {

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Formula {
-    private List<Operand> operands = Arrays.asList(new Operand(0));
+    private List<Operand> operands = Arrays.asList(Operand.ZERO);
 
     public Formula(String input, String separators) {
         String inputWithoutCustomSeparator = CustomSeparatorEnum.withoutCustomSeparator(input);
