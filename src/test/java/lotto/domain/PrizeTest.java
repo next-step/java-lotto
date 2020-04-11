@@ -17,11 +17,11 @@ public class PrizeTest {
         );
     }
 
-    @DisplayName("2등의 일치 갯수와 당첨 금액을 보여준다.  ")
+    @DisplayName("2등의 일치 갯수와 당첨 금액을 보여준다. ")
     @Test
     void testPrizeSecondAmount() {
         assertAll(
-                () -> assertThat(Prize.SECOND).isEqualTo(Prize.of(5,true)),
+                () -> assertThat(Prize.SECOND).isEqualTo(Prize.of(5, true)),
                 () -> assertThat(Prize.SECOND.getAmount()).isEqualTo(30_000_000)
         );
     }

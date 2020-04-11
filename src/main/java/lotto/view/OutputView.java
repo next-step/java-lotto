@@ -49,11 +49,24 @@ public class OutputView {
         if (Prize.MISS == prize) {
             return;
         }
+        printSecond(prize, gameResult);
 
-        System.out.println(String.format(GAME_RESULT,
-                prize.getMatch(),
-                prize.getAmount(),
-                gameResult.getWinResult(prize)));
+        if (Prize.SECOND != prize) {
+            System.out.println(String.format(GAME_RESULT,
+                    prize.getMatch(),
+                    prize.getAmount(),
+                    gameResult.getWinResult(prize)));
+        }
+    }
+
+    private void printSecond(Prize prize, GameResult gameResult) {
+        if (Prize.SECOND == prize) {
+            System.out.println(
+                    String.format("%d개 일치 보너스 볼 일치(%d원)- %d개",
+                            prize.getMatch(),
+                            prize.getAmount(),
+                            gameResult.getWinResult(prize)));
+        }
     }
 
     public void showProfit(final Money purchasedAmount, final GameResult gameResult) {
