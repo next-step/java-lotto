@@ -3,5 +3,5 @@ package lotto.generator;
 @FunctionalInterface
 public interface NumberGenerator {
 
-    int getRandomNumber();
+    int generate();
 }

@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber randomNumber(NumberGenerator lottoNumberGenerator) {
-        int number = lottoNumberGenerator.getRandomNumber();
+        int number = lottoNumberGenerator.generate();
         validateNumberRange(number);
         return lottoNumbers.get(number);
     }

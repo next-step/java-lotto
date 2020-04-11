@@ -7,7 +7,7 @@ public class RandomNumber implements NumberGenerator {
     private static final int LOTTO_MIN_NUMBER = 1;
 
     @Override
-    public int getRandomNumber() {
+    public int generate() {
         return new Random().nextInt(LOTTO_MAX_NUMBER) + LOTTO_MIN_NUMBER;
     }
 }
