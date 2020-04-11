@@ -39,7 +39,8 @@ public class LottoController {
 
     private WinningLotto generateWinningLotto() {
         Lotto winningLotto = new Lotto((new LottoManualGenerator(inputView.askLastPrizeNumber()).generateNumbers()));
-        return new WinningLotto(winningLotto);
+        LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private GameResult getGameResult(final List<Lotto> purchasedLottos, final WinningLotto winningLotto) {
