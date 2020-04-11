@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.dto.ManualLottoOrderSheet;
+import lotto.dto.PurchaseResult;
+
 public class LottoStore {
     private static final int LOTTO_UNIT_PRICE = 1000;
     private LottoMachine lottoMachine;

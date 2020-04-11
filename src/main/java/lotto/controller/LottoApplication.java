@@ -1,6 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.domain.InsightResults;
+import lotto.dto.ManualLottoOrderSheet;
+import lotto.dto.PurchaseResult;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

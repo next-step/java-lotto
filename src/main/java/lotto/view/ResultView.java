@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.InsightResults;
+import lotto.dto.PurchaseResult;
 
 import java.math.BigDecimal;
 

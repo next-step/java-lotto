@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
-import lotto.domain.ManualLottoOrderSheet;
+import lotto.dto.ManualLottoOrderSheet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

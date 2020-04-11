@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.ManualLottoOrderSheet;
+import lotto.dto.ManualLottoOrderSheet;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 

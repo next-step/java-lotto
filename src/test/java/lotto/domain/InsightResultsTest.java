@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.InsightResults;
 import lotto.domain.RankEnum;
