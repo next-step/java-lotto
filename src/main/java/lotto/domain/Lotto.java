@@ -10,7 +10,7 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public static Lotto automatic(NumberGenerator numberGenerator) {
-        return new Lotto(numberGenerator);
+        return new Lotto(generatorLottoNumbers(numberGenerator));
     }
 
     public static Lotto manual(Set<LottoNumber> lottoNumbers) {
@@ -19,10 +19,6 @@ public class Lotto {
 
     public static Lotto manual(List<Integer> lottoNumbers) {
         return new Lotto(changeToLottoNumbers(lottoNumbers));
-    }
-
-    private Lotto(NumberGenerator numberGenerator) {
-        this(generatorLottoNumbers(numberGenerator));
     }
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
