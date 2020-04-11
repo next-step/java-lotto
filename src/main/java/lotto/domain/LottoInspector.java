@@ -9,13 +9,13 @@ public class LottoInspector {
     public LottoInspector() {
     }
 
-    public InsightResult getResult(WinningLotto winningLotto, Lottos lottos) {
+    public InsightResults getResult(WinningLotto winningLotto, Lottos lottos) {
         Map<RankEnum, Integer> matchedResult = initMatchedResult();
         for (Lotto lotto : lottos.getLottos()) {
             RankEnum rank = winningLotto.getRank(lotto);
             matchedResult.put(rank, matchedResult.getOrDefault(rank, 0) + 1);
         }
-        return new InsightResult(matchedResult);
+        return new InsightResults(matchedResult);
     }
 
     private Map<RankEnum, Integer> initMatchedResult() {

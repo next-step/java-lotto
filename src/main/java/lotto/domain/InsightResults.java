@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class InsightResult {
+public class InsightResults {
     private final Map<RankEnum, Integer> insightResult;
 
-    public InsightResult(Map<RankEnum, Integer> results) {
+    public InsightResults(Map<RankEnum, Integer> results) {
         this.insightResult = Collections.unmodifiableMap(new LinkedHashMap<>(results));
     }
 
@@ -28,7 +28,7 @@ public class InsightResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InsightResult that = (InsightResult) o;
+        InsightResults that = (InsightResults) o;
         return Objects.equals(insightResult, that.insightResult);
     }
 

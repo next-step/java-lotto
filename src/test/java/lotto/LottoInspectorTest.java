@@ -48,6 +48,6 @@ public class LottoInspectorTest {
 
         assertThat(
                 lottoInspector.getResult(winningLotto, new Lottos(testLottos))
-        ).isEqualTo(new InsightResult(targetInsightReuslt));
+        ).isEqualTo(new InsightResults(targetInsightReuslt));
     }
 }

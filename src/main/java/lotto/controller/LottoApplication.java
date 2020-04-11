@@ -20,8 +20,8 @@ public class LottoApplication {
 
         WinningLotto winningLotto = inputView.inputWinningNumber();
 
-        InsightResult insightResult = lottoInspector.getResult(winningLotto, purchaseResult.getAllLottos());
-        resultView.viewInspect(insightResult);
-        resultView.viewRateOfReturn(lottoInspector.getYield(myMoney, insightResult.getTotalRevenue()));
+        InsightResults insightResults = lottoInspector.getResult(winningLotto, purchaseResult.getAllLottos());
+        resultView.viewInspect(insightResults);
+        resultView.viewRateOfReturn(lottoInspector.getYield(myMoney, insightResults.getTotalRevenue()));
     }
 }

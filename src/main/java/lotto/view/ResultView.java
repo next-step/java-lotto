@@ -34,10 +34,10 @@ public class ResultView {
         System.out.println("[" + numbers + "]");
     }
 
-    public void viewInspect(InsightResult insightResult) {
+    public void viewInspect(InsightResults insightResults) {
         System.out.println("\n당첨 통계\n--------------------");
-        for (RankEnum rank : insightResult.getInsightResult().keySet()) {
-            viewInspectRaw(rank, insightResult.getInsightResult().get(rank));
+        for (RankEnum rank : insightResults.getInsightResult().keySet()) {
+            viewInspectRaw(rank, insightResults.getInsightResult().get(rank));
         }
         System.out.println("\n--------------------");
     }

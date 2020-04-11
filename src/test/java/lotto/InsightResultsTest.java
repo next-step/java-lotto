@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.InsightResult;
+import lotto.domain.InsightResults;
 import lotto.domain.RankEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InsightResultTest {
+public class InsightResultsTest {
     private Map<RankEnum, Integer> results = new HashMap<>();
 
     @BeforeEach
@@ -23,16 +23,16 @@ public class InsightResultTest {
     @Test
     @DisplayName("로또결과 생성 테스트")
     void createInsightResultTest() {
-        InsightResult insightResult = new InsightResult(results);
+        InsightResults insightResults = new InsightResults(results);
     }
 
     @Test
     @DisplayName("로또 분석후 수익금 가져오기 테스트")
     void getTotalRevenueTest() {
-        InsightResult insightResult = new InsightResult(results);
+        InsightResults insightResults = new InsightResults(results);
 
         assertThat(
-                insightResult.getTotalRevenue()
+                insightResults.getTotalRevenue()
         ).isEqualTo(RankEnum.FIRST.getReward() + RankEnum.FIFTH.getReward());
     }
 }
