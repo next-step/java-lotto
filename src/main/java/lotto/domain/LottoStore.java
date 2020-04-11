@@ -17,13 +17,22 @@ public class LottoStore {
     }
 
     private int getPurchaseAutomaticLottoCount(Money money, int manualLottoCount) {
-        return money.leftMoney(manualLottoCount * LOTTO_UNIT_PRICE) / LOTTO_UNIT_PRICE;
+        int manualLottoTotalPrice = getTotalPrice(manualLottoCount);
+        return getPurchasableCount(money.leftMoney(manualLottoTotalPrice));
     }
 
     private void validatePurchasableManualLotto(Money money, ManualLottoOrderSheet manualLottoOrderSheet) {
-        int leftMoney = money.getMoney() - (LOTTO_UNIT_PRICE * manualLottoOrderSheet.getOrderCount());
+        int leftMoney = money.getMoney() - getTotalPrice(manualLottoOrderSheet.getOrderCount());
         if (leftMoney < 0) {
             throw new IllegalArgumentException("돈이 부족합니다.");
         }
+    }
+
+    private int getTotalPrice(int purchaseCount) {
+        return LOTTO_UNIT_PRICE * purchaseCount;
+    }
+
+    private int getPurchasableCount(int money) {
+        return money / LOTTO_UNIT_PRICE;
     }
 }
