@@ -12,14 +12,6 @@ public class WinningLotto {
         this.bonusNumber = LottoNumber.chooseNumber(inputBonusNumber.getLottoNumber());
     }
 
-    public WinningLotto(Lotto inputWinningLotto, int inputBonusNumber) {
-        this(inputWinningLotto, LottoNumber.chooseNumber(inputBonusNumber));
-    }
-
-    public WinningLotto(List<Integer> inputWinningLottoNumbers, LottoNumber inputBonusNumber) {
-        this(Lotto.of(inputWinningLottoNumbers), inputBonusNumber);
-    }
-
     public WinningLotto(List<Integer> inputWinningLottoNumbers, int inputBonusNumber) {
         this(Lotto.of(inputWinningLottoNumbers), LottoNumber.chooseNumber(inputBonusNumber));
     }
@@ -28,13 +20,9 @@ public class WinningLotto {
         return Lotto.of(this.winningLotto.getLottoNumbers());
     }
 
-    public LottoNumber getBonusNumber() {
-        return this.bonusNumber;
-    }
-
     public RankEnum getRank(Lotto lotto) {
         int matchedCount = getWinningLotto().getMatchedCount(lotto);
-        boolean hasBonus = lotto.isExistNumber(getBonusNumber());
+        boolean hasBonus = lotto.isExistNumber(this.bonusNumber);
         return RankEnum.getRank(matchedCount, hasBonus);
     }
 
