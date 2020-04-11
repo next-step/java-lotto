@@ -25,15 +25,24 @@ public class ResultView {
     }
 
     private void viewPurchaseCount(Lottos manualLottos, Lottos automaticLottos) {
-        System.out.println("수동으로 " + manualLottos.getLottoCount() + "장, 자동으로 " + automaticLottos.getLottoCount() + "장을 구매했습니다.");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("수동으로 ");
+        stringBuilder.append(manualLottos.getLottoCount());
+        stringBuilder.append("장, 자동으로 ");
+        stringBuilder.append(automaticLottos.getLottoCount());
+        stringBuilder.append("장을 구매했습니다.");
+        System.out.println(stringBuilder.toString());
     }
 
     public void viewLottoNumbers(Lotto lotto) {
+        StringBuilder stringBuilder = new StringBuilder("[");
         String numbers = lotto.getLottoNumbers().stream()
                 .map(LottoNumber::getLottoNumber)
                 .map(n -> n.toString())
                 .collect(joining(JOIN_DELIMETER));
-        System.out.println("[" + numbers + "]");
+        stringBuilder.append(numbers);
+        stringBuilder.append("]");
+        System.out.println(stringBuilder.toString());
     }
 
     public void viewInspect(InsightResults insightResults) {
@@ -46,21 +55,32 @@ public class ResultView {
 
     private void viewInspectRaw(RankEnum rank, int matchedCount) {
         if (rank.isWinning()) {
-            System.out.println(getRankDescription(rank) + " - " + matchedCount + "개");
+            StringBuilder stringBuilder = new StringBuilder(getRankDescription(rank));
+            stringBuilder.append(" - ");
+            stringBuilder.append(matchedCount);
+            stringBuilder.append("개");
+            System.out.println(stringBuilder.toString());
         }
     }
 
     private String getRankDescription(RankEnum rank) {
-        String description = rank.getMatched() + "개 일치";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(rank.getMatched());
+        stringBuilder.append("개 일치");
         if (rank.getRequiredBonus()) {
-            description += ", (보너스 볼 일치)";
+            stringBuilder.append(", (보너스 볼 일치)");
         }
-        description += "(" + rank.getReward() + "원)";
-        return description;
+        stringBuilder.append("(");
+        stringBuilder.append(rank.getReward());
+        stringBuilder.append("원)");
+        return stringBuilder.toString();
     }
 
     public void viewRateOfReturn(BigDecimal yield) {
-        System.out.print("총 수익률은 " + String.format("%.2f", yield) + " 입니다.");
+        StringBuilder stringBuilder = new StringBuilder("총 수익률은 ");
+        stringBuilder.append(String.format("%.2f", yield));
+        stringBuilder.append(" 입니다.");
+        System.out.print(stringBuilder.toString());
         viewRateOfReturnAnalysis(yield.intValue() > BREAK_EVEN_POINT);
     }
 
