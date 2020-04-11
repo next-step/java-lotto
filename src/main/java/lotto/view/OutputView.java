@@ -15,6 +15,7 @@ public class OutputView {
     private static final String TOTAL_PROPIT = "총 수익률은 ";
     private static final String PROPIT_END = "입니다.";
     private static final String GAME_RESULT = "%d개 일치 (%d원)- %d개";
+    public static final String SECOND_PRIZE_PRINT = "%d개 일치 보너스 볼 일치(%d원)- %d개";
     private static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     public void showInputResult(final List<Lotto> lottos, Money money) {
@@ -61,11 +62,10 @@ public class OutputView {
 
     private void printSecond(Prize prize, GameResult gameResult) {
         if (Prize.SECOND == prize) {
-            System.out.println(
-                    String.format("%d개 일치 보너스 볼 일치(%d원)- %d개",
-                            prize.getMatch(),
-                            prize.getAmount(),
-                            gameResult.getWinResult(prize)));
+            System.out.println(String.format(SECOND_PRIZE_PRINT,
+                    prize.getMatch(),
+                    prize.getAmount(),
+                    gameResult.getWinResult(prize)));
         }
     }
 
