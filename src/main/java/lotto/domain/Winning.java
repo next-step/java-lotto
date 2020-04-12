@@ -4,10 +4,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public enum Winning {
-    FIRST_PLACE(6, 2000000000),
-    SECOND_PLACE(5, 1500000),
-    THIRD_PLACE(4, 50000),
-    FOURTH_PLACE(3, 5000),
+    FIRST_PLACE(6, 2_000_000_000),
+    SECOND_PLACE(5, 1_500_000),
+    THIRD_PLACE(4, 50_000),
+    FOURTH_PLACE(3, 5_000),
     LOSE(0, 0);
 
     private static final int MIN_WINNING_CONDITION = 3;
@@ -25,6 +25,11 @@ public enum Winning {
         }
     }
 
+    Winning(int matchCount, int winningPrice) {
+        this.matchCount = matchCount;
+        this.winningPrice = winningPrice;
+    }
+
     public static List<Winning> winValues() {
         return Arrays.stream(values())
                 .filter(winning -> winning != LOSE)
@@ -37,11 +42,6 @@ public enum Winning {
         }
 
         return winningTypes.get(matchCount);
-    }
-
-    Winning(int matchCount, int winningPrice) {
-        this.matchCount = matchCount;
-        this.winningPrice = winningPrice;
     }
 
     public int getMatchCount() {
