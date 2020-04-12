@@ -18,7 +18,7 @@ public class LottoGame {
         int paidMoney = InputView.getMoney();
 
         Lottos lotto = new Lottos(paidMoney);
-        ResultView.printIssuedLotto(lotto);
+        ResultView.printLottos(lotto);
 
         ResultView.printLottoResult(lotto.getResult(getWinningNumbers()), paidMoney);
     }
