@@ -4,17 +4,7 @@ import practice.vo.Elements;
 
 public final class Calculator {
 
-    private Calculator() { }
-
-    public static int Sum(final String formula) {
-
-        int result = 0;
-
-        Elements elements = new Elements(formula);
-        for (int elm : elements.getElements()) {
-            result += elm;
-        }
-
-        return result;
+    public int sum(final String formula) {
+        return new Elements(formula).sum();
     }
 }

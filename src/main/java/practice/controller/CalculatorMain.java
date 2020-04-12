@@ -12,7 +12,6 @@ public class CalculatorMain {
         final String formula = inputView.getFormula();
 
         ResultView resultView = new ResultView();
-        resultView.printTitle();
-        resultView.printResult(formula, Calculator.Sum(formula));
+        resultView.printResult(formula, new Calculator().sum(formula));
     }
 }

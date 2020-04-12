@@ -1,24 +1,14 @@
 package aterilio.common.utils;
 
+import java.util.Objects;
+
 public final class StringUtils {
 
-    private StringUtils() { }
+    private StringUtils() {
+    }
 
     public static boolean isNullOrEmpty(final String text) {
-
-        if ( text == null ) {
-            return true;
-        }
-
-        if ( text.isEmpty() ) {
-            return true;
-        }
-
-        if ( text.trim().isEmpty() ) {
-            return true;
-        }
-
-        return false;
+        return Objects.isNull(text) || text.trim().isEmpty();
     }
 
     public static boolean isNumeric(final String text) {
@@ -29,6 +19,7 @@ public final class StringUtils {
             return false;
         }
     }
+
     public static String serialize(final Object[] arrays) {
         return serialize(arrays, ',');
     }

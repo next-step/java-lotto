@@ -13,55 +13,56 @@ import java.util.regex.Pattern;
 public class Elements {
 
     private static final String DEFAULT_DELIMITER = "[,:]";
+    private static final String CUSTOM_DELIMITER_PATTERN = "//(.)\n(.*)";
+    private static final int IDX_CUSTOM_DELIMITER_SYMBOL = 1;
+    private static final int IDX_CUSTOM_DELIMITER_FORMULA = 2;
 
-    private final String formula;
     private final List<Integer> elements;
 
     public Elements(final String formula) {
-        this.formula = formula;
-        this.elements = parse();
+        this.elements = parse(formula);
     }
 
-    private List<Integer> parse() {
+    private List<Integer> parse(final String formula) {
 
         if ( StringUtils.isNullOrEmpty(formula) ) {
             return new ArrayList<>();
         }
 
-        return makeList( split(formula) );
+        return makeArrayToListWithValidation( split(formula) );
     }
 
     private String[] split(final String formula) {
 
-        Matcher m = Pattern.compile("//(.)\n(.*)").matcher(formula);
+        Matcher m = Pattern.compile(CUSTOM_DELIMITER_PATTERN).matcher(formula);
         if (m.find()) {
-            String customDelimiter = Pattern.quote(m.group(1));
-            return m.group(2).split(customDelimiter);
+            String customDelimiter = Pattern.quote(m.group(IDX_CUSTOM_DELIMITER_SYMBOL));
+            return m.group(IDX_CUSTOM_DELIMITER_FORMULA).split(customDelimiter);
         }
 
         return formula.split(DEFAULT_DELIMITER);
     }
 
-    private List<Integer> makeList(final String[] stringElements) {
+    private List<Integer> makeArrayToListWithValidation(final String[] stringElements) {
         List<Integer> elements = new ArrayList<>();
         for (String elm : stringElements) {
-            validateElementNegative(validateElementNumeric(elm));
-            elements.add(Integer.parseInt(elm));
+            elements.add(validateElementNegative(validateElementNumeric(elm)));
         }
         return elements;
     }
 
-    private Integer validateElementNumeric(final String item) {
+    private int validateElementNumeric(final String item) {
         if ( !StringUtils.isNumeric(item) ) {
-            throw new InvalidFormatException(formula);
+            throw new InvalidFormatException(item);
         }
         return Integer.parseInt(item);
     }
 
-    private void validateElementNegative(final Integer item) {
+    private int validateElementNegative(final int item) {
         if ( item < 0 ) {
-            throw new NegativeElementException(formula);
+            throw new NegativeElementException(item);
         }
+        return item;
     }
 
     public int sum() {
@@ -73,10 +74,6 @@ public class Elements {
         }
 
         return result;
-    }
-
-    public List<Integer> getElements() {
-        return this.elements;
     }
 
     @Override

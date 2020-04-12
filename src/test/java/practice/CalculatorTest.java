@@ -37,14 +37,15 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("emptySumCase")
     void testEmptySum(final String formula) {
-        assertThat(Calculator.Sum(formula)).isEqualTo(0);
+        assertThat(new Calculator().sum(formula))
+                .isEqualTo(0);
     }
 
 
     @ParameterizedTest
     @CsvSource(value = {"1=1", "1,2=3", "1,2:3=6"}, delimiter = '=')
     void testSum(final String formula, final Integer answer) {
-        assertThat(Calculator.Sum(formula)).isEqualTo(answer);
+        assertThat(new Calculator().sum(formula)).isEqualTo(answer);
     }
 
     @ParameterizedTest
@@ -64,6 +65,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("getCustomCase")
     void testCustomSeparatorSum(final String formula, final Integer answer) {
-        assertThat(Calculator.Sum(formula)).isEqualTo(answer);
+        assertThat(new Calculator().sum(formula))
+                .isEqualTo(answer);
     }
 }
