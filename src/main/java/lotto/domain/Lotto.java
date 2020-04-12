@@ -1,9 +1,13 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Lotto {
 
+    private static final String INPUT_WITHOUT_DUPLICATE = "중복 없이 숫자를 6개 입력해주세요.";
     private static int MAX_LOTTO_COUNT = 6;
     private final Set<LottoNumber> lottoNumbers;
 
@@ -28,10 +32,15 @@ public class Lotto {
         return matchCount;
     }
 
+    public boolean isMatch(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     private Set<LottoNumber> validate(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != MAX_LOTTO_COUNT) {
-            throw new IllegalArgumentException("중복 없이 숫자를 6개 입력해주세요.");
+        if (lottoNumbers.stream().distinct().count() != MAX_LOTTO_COUNT) {
+            throw new IllegalArgumentException(INPUT_WITHOUT_DUPLICATE);
         }
+
         return new TreeSet<>(lottoNumbers);
     }
 

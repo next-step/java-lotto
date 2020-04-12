@@ -15,11 +15,13 @@ public class LottoTest {
 
     private List<Integer> sixNumbers;
     private List<Integer> fiveNumbers;
+    private List<Integer> duplicateNumbers;
 
     @BeforeEach
     void setUp() {
         sixNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         fiveNumbers = Arrays.asList(1, 2, 3, 4, 5);
+        duplicateNumbers = Arrays.asList(1, 1, 1, 1, 1, 1);
     }
 
     @DisplayName("로또는 한 장에 숫자 6개로 생성된다.")
@@ -46,6 +48,19 @@ public class LottoTest {
         Lotto actual = new Lotto(lottoNumbers);
 
         assertThat(sixNumbers.toString()).isEqualTo(actual.toString());
+    }
+
+    @DisplayName("로또는 번호가 중복없이 생성된다.")
+    @Test
+    void testLottoDuplicate() {
+        // given
+        List<LottoNumber> lottoNumbers = duplicateNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(lottoNumbers));
     }
 
 }

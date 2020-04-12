@@ -32,14 +32,15 @@ public class LottoController {
     private void generateAutoLottos(List<Lotto> purchasedLottos, Money money) {
         LottoAutoGenerator lottoNosGenerator = new LottoAutoGenerator();
         for (int i = 0; i < money.getLottoCount(); i++) {
-            List<LottoNumber> lottoNumbers = lottoNosGenerator.generateNumbers();
+            List<LottoNumber> lottoNumbers = lottoNosGenerator.getLottoNumbers();
             purchasedLottos.add(new Lotto(lottoNumbers));
         }
     }
 
     private WinningLotto generateWinningLotto() {
         Lotto winningLotto = new Lotto((new LottoManualGenerator(inputView.askLastPrizeNumber()).generateNumbers()));
-        return new WinningLotto(winningLotto);
+        LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private GameResult getGameResult(final List<Lotto> purchasedLottos, final WinningLotto winningLotto) {

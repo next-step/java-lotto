@@ -9,25 +9,32 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class OutputView {
+    private static final String BUY_LOTTOS = "개를 구매했습니다.";
+    private static final String WINNING_RESULT = "당첨 통계";
+    private static final String DASH = "---------";
+    private static final String TOTAL_PROPIT = "총 수익률은 ";
+    private static final String PROPIT_END = "입니다.";
+    private static final String GAME_RESULT = "%d개 일치 (%d원)- %d개";
+    public static final String SECOND_PRIZE_PRINT = "%d개 일치 보너스 볼 일치(%d원)- %d개";
     private static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     public void showInputResult(final List<Lotto> lottos, Money money) {
         StringBuilder sb = new StringBuilder();
-        sb.append(System.getProperty("line.separator"));
-        sb.append(money.getLottoCount() + "개를 구매했습니다.");
-        sb.append(System.getProperty("line.separator"));
+        sb.append(System.lineSeparator());
+        sb.append(money.getLottoCount() + BUY_LOTTOS);
+        sb.append(System.lineSeparator());
 
         for (Lotto lotto : lottos) {
             sb.append(lotto);
-            sb.append(System.getProperty("line.separator"));
+            sb.append(System.lineSeparator());
         }
 
         System.out.println(sb.toString());
     }
 
     public void showResult(GameResult gameResult) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(WINNING_RESULT);
+        System.out.println(DASH);
         for (Prize prize : Prize.values()) {
             showGameResult(prize, gameResult);
         }
@@ -43,15 +50,27 @@ public class OutputView {
         if (Prize.MISS == prize) {
             return;
         }
+        printSecond(prize, gameResult);
 
-        System.out.println(String.format("%d개 일치 (%d원)- %d개",
-                prize.getMatch(),
-                prize.getAmount(),
-                gameResult.getWinResult(prize)));
+        if (Prize.SECOND != prize) {
+            System.out.println(String.format(GAME_RESULT,
+                    prize.getMatch(),
+                    prize.getAmount(),
+                    gameResult.getWinResult(prize)));
+        }
+    }
+
+    private void printSecond(Prize prize, GameResult gameResult) {
+        if (Prize.SECOND == prize) {
+            System.out.println(String.format(SECOND_PRIZE_PRINT,
+                    prize.getMatch(),
+                    prize.getAmount(),
+                    gameResult.getWinResult(prize)));
+        }
     }
 
     public void showProfit(final Money purchasedAmount, final GameResult gameResult) {
-        System.out.println("총 수익률은 " + decimalFormat.format(gameResult.getProfit(purchasedAmount)) + "입니다.");
+        System.out.println(TOTAL_PROPIT + decimalFormat.format(gameResult.getProfit(purchasedAmount)) + PROPIT_END);
     }
 
 
