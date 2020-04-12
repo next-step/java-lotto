@@ -1,33 +1,38 @@
 package lotto.model;
 
-import lotto.model.wrapper.LottoMatchCount;
 import lotto.model.wrapper.LottoNumber;
 
 import java.util.Set;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
 
+    private final LottoTicket winningLottoTicket;
     private final LottoNumber bonusNumber;
 
-    private WinningLottoTicket(final Set<LottoNumber> numbers, final LottoNumber bonusNumber) {
-        super(numbers);
+    private WinningLottoTicket(final LottoTicket winningLottoTicket, final LottoNumber bonusNumber) {
+        if (winningLottoTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 숫자는 당첨 번호와 일치하면 안됩니다.");
+        }
+
+        this.winningLottoTicket = winningLottoTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottoTicket newInstance(final Set<LottoNumber> numbers, final LottoNumber bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("bonus number must be distinct.");
-        }
-
-        return new WinningLottoTicket(numbers, bonusNumber);
+    public static WinningLottoTicket newInstance(final LottoTicket winningLottoTicket, final LottoNumber bonusNumber) {
+        return new WinningLottoTicket(winningLottoTicket, bonusNumber);
     }
 
-    public LottoResult checkLottoTicket(Set<LottoNumber> lottoNumbers) {
-        long count = numbers.stream()
-                .filter(lottoNumbers::contains)
-                .count();
-        boolean matchBonusNumber = lottoNumbers.contains(bonusNumber);
+    public static WinningLottoTicket newInstance(final Set<LottoNumber> numbers, final LottoNumber bonusNumber) {
+        return new WinningLottoTicket(LottoTicket.newInstance(numbers), bonusNumber);
+    }
 
-        return LottoResult.of(LottoMatchCount.create(Math.toIntExact(count), matchBonusNumber));
+    public LottoWinningResult check(final LottoTicket lottoTicket) {
+        long count = winningLottoTicket.getNumbers()
+                .stream()
+                .filter(lottoTicket::contains)
+                .count();
+        boolean matchBonusNumber = lottoTicket.contains(bonusNumber);
+
+        return LottoWinningResult.of(Math.toIntExact(count), matchBonusNumber);
     }
 }

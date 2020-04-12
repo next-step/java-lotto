@@ -1,39 +1,40 @@
-import lotto.model.LottoPurchaseTickets;
 import lotto.model.LottoStore;
+import lotto.model.LottoTicket;
+import lotto.model.LottoTickets;
 import lotto.model.WinningLottoTicket;
+import lotto.model.dto.LottoTotalResult;
 import lotto.model.wrapper.LottoNumber;
+import lotto.model.wrapper.ManualLottoCount;
 import lotto.model.wrapper.Payment;
+import lotto.view.InputView;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static lotto.utils.LottoUtil.convertTo;
-import static lotto.view.InputView.*;
 import static lotto.view.OutputView.printLottoResults;
 import static lotto.view.OutputView.printLottoTickets;
 
 public class Main {
 
     public static void main(String[] args) {
-        Payment payment = Payment.of(inputPayment());
-        LottoPurchaseTickets lottoPurchaseTickets = LottoStore.sell(payment);
+        Payment payment = InputView.inputData(InputView::inputPayment);
 
-        printLottoTickets(lottoPurchaseTickets);
+        ManualLottoCount manualLottoCount = InputView.inputData(InputView::inputManualLottoCount);
+
+        LottoTickets manualLottoTickets = InputView.inputData(manualLottoCount, InputView::inputManualLotto);
+
+        LottoTickets lottoTickets = LottoStore.sell(payment, manualLottoTickets);
+
+        printLottoTickets(lottoTickets, manualLottoTickets.size());
 
         WinningLottoTicket winningLottoTicket = inputWinningLottoTicket();
 
-        printLottoResults(lottoPurchaseTickets.checkAll(winningLottoTicket));
+        printLottoResults(LottoTotalResult.newInstance(lottoTickets.checkAll(winningLottoTicket)));
     }
 
     private static WinningLottoTicket inputWinningLottoTicket() {
-        String winningNumberString = inputWinningNumber();
-        Set<LottoNumber> winningNumbers = convertTo(winningNumberString).stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
+        LottoTicket winningLottoTicket = InputView.inputData(InputView::inputWinningNumber);
 
-        Integer bonusNumber = inputBonusNumber();
+        LottoNumber bonusNumber = InputView.inputData(InputView::inputBonusNumber);
 
-        return WinningLottoTicket.newInstance(winningNumbers, LottoNumber.of(bonusNumber));
+        return WinningLottoTicket.newInstance(winningLottoTicket, bonusNumber);
     }
 
 }

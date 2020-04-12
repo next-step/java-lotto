@@ -13,8 +13,12 @@
     * LottoStore는 로또(LottoTicket)를 판매한다.
     * LottoStore는 구입금액 내에서 가능한 최대 갯수의 LottoTicket를 판매한다.
     * LottoStore가 판매하는 LottoTicket의 기본 가격은 1000원이다.
+    * LottoStore는 기본적으로 자동 로또를 판매한다.
+    * 구입 금액내에서, 수동 로또를 판매할 수 있다.
 * LottoTicket
     * LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 포함한다.
+    * LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 자동으로 생성할 수 있다.
+    * LottoTicket은 1부터 45 사이의 중복되지 않는 숫자 6개를 사용자에게 입력 받아 수동으로 생성할 수 있다.
     * WinningLottoTicket과 비교해서 당첨 결과(LottoResult)를 반환한다.
 * LottoTickets
     * LottoTickets은 구입한 LottoTicket 목록을 소유한다.

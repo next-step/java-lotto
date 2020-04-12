@@ -1,4 +1,4 @@
-package string_add_calculator.model;
+package stringaddcalculator.model;
 
 import java.util.Objects;
 import java.util.regex.Matcher;

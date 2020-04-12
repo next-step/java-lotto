@@ -1,8 +1,8 @@
-package string_add_calculator;
+package stringaddcalculator;
 
-import string_add_calculator.model.Expression;
-import string_add_calculator.model.Number;
-import string_add_calculator.model.Numbers;
+import stringaddcalculator.model.Expression;
+import stringaddcalculator.model.Number;
+import stringaddcalculator.model.Numbers;
 
 public class StringAddCalculator {
 

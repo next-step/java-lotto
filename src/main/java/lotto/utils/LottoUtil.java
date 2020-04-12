@@ -1,7 +1,11 @@
 package lotto.utils;
 
+import lotto.model.LottoTicket;
+import lotto.model.wrapper.LottoNumber;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoUtil {
@@ -14,11 +18,16 @@ public class LottoUtil {
         return line.split(COMMA_DELIMITER);
     }
 
-    public static List<Integer> convertTo(final String line) {
+    public static Set<LottoNumber> convertTo(final String line) {
         String[] separateLine = separateLineWithComma(line);
         return Arrays.stream(separateLine)
-                .mapToInt(Integer::parseInt)
-                .boxed()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet());
+    }
+
+    public static List<LottoTicket> convertTo(final List<String> lines) {
+        return lines.stream()
+                .map(line -> LottoTicket.newInstance(convertTo(line)))
                 .collect(Collectors.toList());
     }
 }

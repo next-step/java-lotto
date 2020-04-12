@@ -1,6 +1,5 @@
-package lotto_tests;
+package lotto.model.wrapper;
 
-import lotto.model.wrapper.Payment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -24,7 +23,7 @@ public class PaymentTests {
     public void generateMinusPaymentTest(int money) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Payment.of(money))
-                .withMessageContaining("payment must be greater than zero.");
+                .withMessageContaining("구입 금액은 0 보다 커야 합니다.");
     }
 
     @DisplayName("로또 구입 가능 숫자 테스트")
