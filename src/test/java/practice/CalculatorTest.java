@@ -1,7 +1,7 @@
-package lotto;
+package practice;
 
-import lotto.domain.Calculator;
-import lotto.vo.Elements;
+import practice.domain.Calculator;
+import practice.vo.Elements;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;

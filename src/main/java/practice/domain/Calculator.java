@@ -1,6 +1,6 @@
-package lotto.domain;
+package practice.domain;
 
-import lotto.vo.Elements;
+import practice.vo.Elements;
 
 public final class Calculator {
 

@@ -1,4 +1,4 @@
-package lotto.exception;
+package practice.exception;
 
 public class NegativeElementException extends InvalidFormatException {
     public NegativeElementException(String formula) {

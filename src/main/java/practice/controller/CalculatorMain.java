@@ -1,15 +1,14 @@
-package lotto.controller;
+package practice.controller;
 
-import lotto.domain.Calculator;
-import lotto.view.InputView;
-import lotto.view.ResultView;
+import practice.domain.Calculator;
+import practice.view.InputView;
+import practice.view.ResultView;
 
 public class CalculatorMain {
 
     public static void main(String[] args) {
 
         InputView inputView = new InputView();
-
         final String formula = inputView.getFormula();
 
         ResultView resultView = new ResultView();

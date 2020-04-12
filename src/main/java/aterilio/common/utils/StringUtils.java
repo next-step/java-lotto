@@ -1,4 +1,4 @@
-package lotto.utils;
+package aterilio.common.utils;
 
 public final class StringUtils {
 

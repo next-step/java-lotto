@@ -1,8 +1,8 @@
-package lotto.vo;
+package practice.vo;
 
-import lotto.exception.InvalidFormatException;
-import lotto.exception.NegativeElementException;
-import lotto.utils.StringUtils;
+import aterilio.common.utils.StringUtils;
+import practice.exception.InvalidFormatException;
+import practice.exception.NegativeElementException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +62,17 @@ public class Elements {
         if ( item < 0 ) {
             throw new NegativeElementException(formula);
         }
+    }
+
+    public int sum() {
+
+        int result = 0;
+
+        for (int elm : elements) {
+            result += elm;
+        }
+
+        return result;
     }
 
     public List<Integer> getElements() {

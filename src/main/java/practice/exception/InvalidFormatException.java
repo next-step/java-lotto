@@ -1,4 +1,4 @@
-package lotto.exception;
+package practice.exception;
 
 public class InvalidFormatException extends IllegalArgumentException {
     public InvalidFormatException(String formula) {

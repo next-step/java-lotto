@@ -1,6 +1,6 @@
-package lotto.view;
+package practice.view;
 
-import lotto.utils.StringUtils;
+import aterilio.common.utils.StringUtils;
 
 public class ResultView {
 
