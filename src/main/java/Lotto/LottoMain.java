@@ -19,6 +19,7 @@ public class LottoMain {
         List<Integer> prizeList = inputView.inputPrizeNumber();
 
         int[] winnerArray = lottoGame.matchNumber(lottoPapers, prizeList);
+        boolean bonusWin = lottoGame.isBonusWin(lottoPapers, prizeList);
         resultView.showWinner(winnerArray, amount);
     }
 
