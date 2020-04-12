@@ -4,17 +4,22 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumber(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateNumber(int number) {
+    // TODO: 캐싱 가능
+    public static LottoNumber of(int number) {
+        validateNumber(number);
+        return new LottoNumber(number);
+    }
+
+    private static void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또 번호 범위 벗어남");
         }
