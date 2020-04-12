@@ -17,7 +17,7 @@ public class Lottos {
     }
 
     public Lottos(Set<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableSet(lottos);
+        this.lottos = new HashSet<>(lottos);
     }
 
     public int size() {
