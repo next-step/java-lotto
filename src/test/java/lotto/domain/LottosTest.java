@@ -51,13 +51,13 @@ public class LottosTest {
 
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        Map<Winning, Integer> winning = lottos.getResult(winningNumber);
+        Map<Rank, Integer> result = lottos.getResult(winningNumber);
 
-        assertThat(winning.get(Winning.FIRST_PLACE)).isEqualTo(1);
-        assertThat(winning.get(Winning.SECOND_PLACE)).isEqualTo(1);
-        assertThat(winning.get(Winning.THIRD_PLACE)).isEqualTo(1);
-        assertNull(winning.get(Winning.FOURTH_PLACE));
-        assertThat(winning.get(Winning.LOSE)).isEqualTo(1);
+        assertThat(result.get(Rank.FIRST_PLACE)).isEqualTo(1);
+        assertThat(result.get(Rank.SECOND_PLACE)).isEqualTo(1);
+        assertThat(result.get(Rank.THIRD_PLACE)).isEqualTo(1);
+        assertNull(result.get(Rank.FOURTH_PLACE));
+        assertThat(result.get(Rank.LOSE)).isEqualTo(1);
     }
 
     @Test

@@ -24,21 +24,21 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Winning, Integer> getResult(List<Integer> winningNumber) {
-        Map<Winning, Integer> result = new HashMap<>();
+    public Map<Rank, Integer> getResult(List<Integer> winningNumber) {
+        Map<Rank, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            Winning winning = lotto.getResult(winningNumber);
+            Rank rank = lotto.getResult(winningNumber);
 
-            result.put(winning, getCountByWinningType(result, winning));
+            result.put(rank, getCountByRankType(result, rank));
         }
 
         return result;
     }
 
-    private int getCountByWinningType(Map<Winning, Integer> result, Winning winning) {
-        if (result.containsKey(winning)) {
-            return result.get(winning) + 1;
+    private int getCountByRankType(Map<Rank, Integer> result, Rank rank) {
+        if (result.containsKey(rank)) {
+            return result.get(rank) + 1;
         }
 
         return 1;

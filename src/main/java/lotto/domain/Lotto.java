@@ -39,8 +39,8 @@ public class Lotto {
         return stringBuilder.toString();
     }
 
-    public Winning getResult(List<Integer> winningNumbers) {
-        return Winning.getWinningType(toIntExact(countMatches(winningNumbers)));
+    public Rank getResult(List<Integer> winningNumbers) {
+        return Rank.getWinningType(toIntExact(countMatches(winningNumbers)));
     }
     private long countMatches(List<Integer> numbers) {
         return numbers.stream()

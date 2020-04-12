@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public enum Winning {
+public enum Rank {
     FIRST_PLACE(6, 2_000_000_000),
     SECOND_PLACE(5, 1_500_000),
     THIRD_PLACE(4, 50_000),
@@ -12,36 +12,36 @@ public enum Winning {
 
     private static final int MIN_WINNING_CONDITION = 3;
 
-    private static Map<Integer, Winning> winningTypes;
+    private static Map<Integer, Rank> rankTypes;
 
     private int matchCount;
     private int winningPrice;
 
     static {
-        winningTypes = new LinkedHashMap<>();
+        rankTypes = new LinkedHashMap<>();
 
-        for (Winning winning : Winning.values()) {
-            winningTypes.put(winning.getMatchCount(), winning);
+        for (Rank rank : Rank.values()) {
+            rankTypes.put(rank.getMatchCount(), rank);
         }
     }
 
-    Winning(int matchCount, int winningPrice) {
+    Rank(int matchCount, int winningPrice) {
         this.matchCount = matchCount;
         this.winningPrice = winningPrice;
     }
 
-    public static List<Winning> winValues() {
+    public static List<Rank> winValues() {
         return Arrays.stream(values())
-                .filter(winning -> winning != LOSE)
+                .filter(rank -> rank != LOSE)
                 .collect(Collectors.toList());
     }
 
-    public static Winning getWinningType(int matchCount) {
+    public static Rank getWinningType(int matchCount) {
         if (matchCount < MIN_WINNING_CONDITION) {
             return LOSE;
         }
 
-        return winningTypes.get(matchCount);
+        return rankTypes.get(matchCount);
     }
 
     public int getMatchCount() {
