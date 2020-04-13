@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,29 +11,26 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class LottoNumberTest {
     private LottoNumber lottoNumber;
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 23, 45})
-    public void create(int number) {
-        lottoNumber = new LottoNumber(number);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
+    @BeforeEach
+    public void setup() {
+        lottoNumber = LottoNumber.of(1);
+    }
+
+    @Test
+    public void of() {
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(1));
+    }
+
+    @Test
+    public void stringOf() {
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of("1"));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
-    public void doNotCreate(int number) {
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoNumber = new LottoNumber(number));
-    }
-
-    @Test
-    public void stringCreate() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber("1"));
-    }
-
-    @Test
-    public void compareTo() {
-        lottoNumber = new LottoNumber(2);
-        assertThat(lottoNumber.compareTo(new LottoNumber(2))).isEqualTo(0);
-        assertThat(lottoNumber.compareTo(new LottoNumber(1))).isEqualTo(1);
-        assertThat(lottoNumber.compareTo(new LottoNumber(3))).isEqualTo(-1);
+    public void invalidNumberThrowException(int number) {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            lottoNumber = LottoNumber.of(number);
+        }).withMessage("로또 번호는 1부터 45까지만 가능합니다.");
     }
 }

@@ -1,40 +1,53 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> lottoNumbers;
+    public static final int LOTTO_SIZE = 6;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        validateOfWinningNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
+    private final Set<LottoNumber> lottoNumbers;
 
-    private void validateOfWinningNumbers(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException("6개의 로또 번호를 입력해 주세요.");
+    private Lotto(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않는 6개의 숫자만 가능합니다.");
         }
+        this.lottoNumbers = Collections.unmodifiableSet(new HashSet<>(lottoNumbers));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public static Lotto of(List<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(LottoNumber.of(number));
+        }
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto of(Integer... numbers) {
+        return of(Arrays.asList(numbers));
+    }
+
+    public static Lotto ofComma(String numbers) {
+        String[] values = numbers.split(",");
+        return new Lotto(
+                Arrays.asList(values).stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet()));
+    }
+
+    public Rank match(WinningLotto winningLotto) {
+        int match = winningLotto.getWinningLotto().lottoNumbers.stream()
+                .filter(winningNumber -> lottoNumbers.contains(winningNumber))
+                .collect(Collectors.reducing(0, e -> 1, Integer::sum));
+        return Rank.valueOf(match, isMatchBonusNo(winningLotto.getBonusNumber()));
+    }
+
+    private boolean isMatchBonusNo(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public int match(Lotto winningLotto) {
-        List<LottoNumber> winning = winningLotto.getLottoNumbers();
-        int match = 0;
-        for (int i = 0; i < winning.size(); i++) {
-            match += contains(winning.get(i));
-        }
-        return match;
-    }
-
-    private int contains(LottoNumber winningNumber) {
-        if (lottoNumbers.contains(winningNumber)) {
-            return 1;
-        }
-        return 0;
     }
 
     @Override

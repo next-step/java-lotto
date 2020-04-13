@@ -1,21 +1,38 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
-public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int LOTTO_NUMBER_MIN = 1;
-    private static final int LOTTO_NUMBER_MAX = 45;
+public class LottoNumber {
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
     private final int number;
 
-    public LottoNumber(int number) {
-        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
-            throw new IllegalArgumentException();
-        }
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    public LottoNumber(String number) {
-        this(Integer.valueOf(number));
+    static LottoNumber of(int number) {
+        return Optional.ofNullable(lottoNumbers.get(number))
+                .orElseThrow(() -> new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다."));
+    }
+
+    static LottoNumber of(String value) {
+        if (Objects.isNull(value)) {
+            throw new IllegalArgumentException();
+        }
+
+        return of(Integer.parseInt(value.trim()));
     }
 
     public int getNumber() {
@@ -33,16 +50,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public int compareTo(LottoNumber lottoNumber) {
-        if (this.number == lottoNumber.number) {
-            return 0;
-        }
-        if (this.number > lottoNumber.number) {
-            return 1;
-        }
-        return -1;
     }
 }
