@@ -19,7 +19,6 @@ public class MatchResult {
     public void updateResult(Rank rank) {
         if (result.containsKey(rank)) {
             result.put(rank, result.get(rank) + 1);
-
         }
 
         result.put(rank, 1);

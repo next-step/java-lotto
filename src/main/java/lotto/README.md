@@ -50,7 +50,7 @@
 * WinningNumber
   - [x] 당첨 번호 객체로 구현
 * LottoService
-  - [ ] 로또 게임 로직 분리
+  - [x] 로또 게임 로직 분리
 * ResultView
   - [x] 보너스볼 일치여부 결과 출력
 
