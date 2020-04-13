@@ -10,9 +10,9 @@ public class Lottos {
     private static final int LOTTO_LIMIT_SIZE = 6;
 
     public Lottos() {}
-    public Lottos(final int lottoGameCount) {
+    public Lottos(final int money) {
         this.lottos = new ArrayList<>();
-        for (int i = 0; i < lottoGameCount; i++) {
+        for (int i = 0; i < purchaseLottoCount(money); i++) {
             lottos.add(new Lotto(createRandomList()));
         }
     }
@@ -31,6 +31,9 @@ public class Lottos {
         return new Random().nextInt(LOTTO_LIMIT_NUMBER) + 1;
     }
 
+    public int purchaseLottoCount(int money) {
+        return money / DEFAULT_LOTTO_PRICE;
+    }
     public List<Lotto> getLottos() {
         return lottos;
     }
