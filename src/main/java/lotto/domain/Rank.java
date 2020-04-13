@@ -4,10 +4,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public enum Rank {
-    FIRST_PLACE(6, 2_000_000_000),
-    SECOND_PLACE(5, 1_500_000),
-    THIRD_PLACE(4, 50_000),
-    FOURTH_PLACE(3, 5_000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     LOSE(0, 0);
 
     private static final int MIN_WINNING_CONDITION = 3;
@@ -41,8 +42,11 @@ public enum Rank {
             return LOSE;
         }
 
-        // 기능 구현
-        return LOSE;
+        if (matchCount == SECOND.matchCount && isBonusMatched) {
+            return SECOND;
+        }
+
+        return rankTypes.get(matchCount);
     }
 
     public int getMatchCount() {

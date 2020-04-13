@@ -37,34 +37,34 @@ public class LottoTest {
     @Test
     @DisplayName("1등 당첨 확인 테스트")
     public void rankFirstCheckTest() {
-        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Rank result = lotto.getResult(winningNumbers);
 
-        assertThat(result).isEqualTo(Rank.FIRST_PLACE);
+        assertThat(result).isEqualTo(Rank.FIRST);
     }
 
     @Test
     @DisplayName("2등 당첨 확인 테스트")
     public void rankSecondCheckTest() {
-        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 40), 6);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Rank result = lotto.getResult(winningNumbers);
 
-        assertThat(result).isEqualTo(Rank.FIRST_PLACE);
+        assertThat(result).isEqualTo(Rank.SECOND);
     }
 
     @Test
-    @DisplayName("당첨 확인 테스트")
+    @DisplayName("미당첨 확인 테스트")
     public void loseGameCheckTest() {
-        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Rank result = lotto.getResult(winningNumbers);
 
-        assertThat(result).isEqualTo(Rank.FIRST_PLACE);
+        assertThat(result).isEqualTo(Rank.FIRST);
     }
 
     @Test

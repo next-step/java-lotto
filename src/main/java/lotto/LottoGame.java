@@ -21,7 +21,9 @@ public class LottoGame {
         Lottos lottos = new Lottos(paidMoney);
         ResultView.printLottos(lottos);
 
-        ResultView.printLottoResult(lottos.getResult(WinningNumbers.getInstance(getWinningNumbers())), paidMoney);
+        ResultView.printLottoResult(
+                lottos.getResult(WinningNumbers.getInstance(getWinningNumbers(), InputView.getBonusNumber()))
+                , paidMoney);
     }
 
     private static List<Integer> getWinningNumbers() {

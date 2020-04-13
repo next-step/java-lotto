@@ -29,14 +29,21 @@ public class Lotto {
     }
 
     public Rank getResult(WinningNumbers winningNumbers) {
-        return Rank.getWinningType(toIntExact(countMatches(winningNumbers)), false);
+        return Rank.getWinningType(toIntExact(countMatches(winningNumbers)), isBonusMatched(winningNumbers.getBonusNumber()));
+    }
+
+    private boolean isBonusMatched(int bonus) {
+        return lottoNumbers.contains(bonus);
+    }
+
+    public static int getLottoSize() {
+        return LOTTO_SIZE;
     }
 
     private long countMatches(WinningNumbers winningNumbers) {
-//        return numbers.stream()
-//                .filter(this::contains)
-//                .count();
-        return -1;
+        return winningNumbers.getWinningNumbers().stream()
+                .filter(this::contains)
+                .count();
     }
 
     private boolean contains(Integer number) {

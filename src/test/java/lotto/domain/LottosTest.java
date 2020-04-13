@@ -49,14 +49,14 @@ public class LottosTest {
         Set<Lotto> expect = generateLottoValueWithNotMatching();
         Lottos lottos = new Lottos(expect);
 
-        WinningNumbers winningNumber = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningNumbers winningNumber = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 40);
 
         Map<Rank, Integer> result = lottos.getResult(winningNumber);
 
-        assertThat(result.get(Rank.FIRST_PLACE)).isEqualTo(1);
-        assertThat(result.get(Rank.SECOND_PLACE)).isEqualTo(1);
-        assertThat(result.get(Rank.THIRD_PLACE)).isEqualTo(1);
-        assertNull(result.get(Rank.FOURTH_PLACE));
+        assertThat(result.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(result.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(result.get(Rank.FOURTH)).isEqualTo(1);
+        assertNull(result.get(Rank.FIFTH));
         assertThat(result.get(Rank.LOSE)).isEqualTo(1);
     }
 
