@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import lotto.generator.LottoNumberGenerator;
 import lotto.generator.NumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MAX_NUMBER = 45;
@@ -22,56 +20,47 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber newRandomNumber() {
-        return Optional.ofNullable(lottoNumbers.get(new LottoNumberGenerator().getRandomNumber()))
-                .orElseThrow(IllegalArgumentException::new);
+    public static LottoNumber randomNumber(NumberGenerator lottoNumberGenerator) {
+        int number = lottoNumberGenerator.generate();
+        validateNumberRange(number);
+        return lottoNumbers.get(number);
     }
 
-    public static LottoNumber newRandomNumber(NumberGenerator lottoNumberGenerator) {
-        return Optional.ofNullable(lottoNumbers.get(lottoNumberGenerator.getRandomNumber()))
-                .orElseThrow(IllegalArgumentException::new);
-    }
-
-    public static LottoNumber newChooseNumber(int number) {
-        return Optional.ofNullable(lottoNumbers.get(number))
-                .orElseThrow(IllegalArgumentException::new);
-    }
-
-    public static LottoNumber newChooseNumber(String input) {
-        return LottoNumber.newChooseNumber(convertNumber(input));
+    public static LottoNumber chooseNumber(int number) {
+        validateNumberRange(number);
+        return lottoNumbers.get(number);
     }
 
     private LottoNumber(int number) {
+        validateNumberRange(number);
         this.lottoNumber = number;
-        validateNumberRange(this.lottoNumber);
     }
 
     public int getLottoNumber() {
         return this.lottoNumber;
     }
 
-    private void validateNumberRange(Integer number) {
-        Objects.requireNonNull(number, "로또 번호를 생성하는데 실패했습니다.");
+    private static void validateNumberRange(int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException("로또 숫자 범위를 넘어섰습니다.");
         }
     }
 
-    private static int convertNumber(String input) {
-        int number;
-        try {
-            number = Integer.parseInt(input);
-        } catch (NumberFormatException nfe) {
-            throw new IllegalArgumentException("숫자가 아닙니다.");
-        }
-        return number;
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.lottoNumber, o.getLottoNumber());
     }
 
     @Override
-    public int compareTo(LottoNumber o) {
-        if (this.lottoNumber < o.getLottoNumber()) {
-            return -1;
-        }
-        return 1;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

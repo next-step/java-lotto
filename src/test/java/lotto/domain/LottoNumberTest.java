@@ -1,11 +1,13 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
 
@@ -14,7 +16,7 @@ public class LottoNumberTest {
     @DisplayName("로또 숫자 생성 테스트")
     void generateLottoNumberTest(int value) {
         assertThat(
-                LottoNumber.newRandomNumber(() -> value).getLottoNumber()
+                LottoNumber.randomNumber(() -> value).getLottoNumber()
         ).isEqualTo(value);
     }
 
@@ -22,12 +24,14 @@ public class LottoNumberTest {
     @ValueSource(ints = {4, 5, 6, 9})
     @DisplayName("로또숫자 static 객체 테스트")
     void staticLottoNumberTest(int value) {
-        assertThat(
-                LottoNumber.newChooseNumber(value)
-        ).isEqualTo(LottoNumber.newChooseNumber(value));
+        assertThat(LottoNumber.chooseNumber(value)).isSameAs(LottoNumber.chooseNumber(value));
+    }
 
-        assertThat(
-                LottoNumber.newChooseNumber(value) == LottoNumber.newChooseNumber(value)
-        ).isTrue();
+    @Test
+    @DisplayName("범위를 넘어서는 로또번호 테스트")
+    void getNumberTest(){
+        assertThatThrownBy(
+                () -> LottoNumber.chooseNumber(99)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }

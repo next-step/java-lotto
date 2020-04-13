@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoInspector {
@@ -10,15 +9,13 @@ public class LottoInspector {
     public LottoInspector() {
     }
 
-    public Map<RankEnum, Integer> getResult(Lotto winningLotto, LottoNumber bonusNumber, List<Lotto> lottos) {
+    public InsightResults getResult(WinningLotto winningLotto, Lottos lottos) {
         Map<RankEnum, Integer> matchedResult = initMatchedResult();
-        for (Lotto lotto : lottos) {
-            int matchedCount = winningLotto.getMatchedCount(lotto);
-            boolean hasBonus = lotto.isExistNumber(bonusNumber);
-            RankEnum rank = RankEnum.getRank(matchedCount, hasBonus);
+        for (Lotto lotto : lottos.getLottos()) {
+            RankEnum rank = winningLotto.getRank(lotto);
             matchedResult.put(rank, matchedResult.getOrDefault(rank, 0) + 1);
         }
-        return matchedResult;
+        return new InsightResults(matchedResult);
     }
 
     private Map<RankEnum, Integer> initMatchedResult() {
@@ -27,14 +24,6 @@ public class LottoInspector {
             matchedResult.put(rank, 0);
         }
         return matchedResult;
-    }
-
-    public int getTotalRevenue(Map<RankEnum, Integer> result) {
-        int totalRevenue = 0;
-        for (RankEnum rank : result.keySet()) {
-            totalRevenue += rank.getReward() * result.get(rank);
-        }
-        return totalRevenue;
     }
 
     public BigDecimal getYield(Money money, int totalRevenue) {

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class Separators {
     private static final String SPLIT_DELIMITER = "|";
 
-    private List<Separator> separators = Arrays.asList(new Separator(":"), new Separator(","));
+    private List<Separator> separators = Arrays.asList(Separator.DEFAULT_SEPARATOR_COLON, Separator.DEFAULT_SEPARATOR_COMMA);
 
     public Separators(String input) {
         if (CustomSeparatorEnum.hasCustomSeparator(input)) {

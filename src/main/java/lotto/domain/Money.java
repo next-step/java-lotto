@@ -4,15 +4,23 @@ import java.util.Objects;
 
 public class Money {
 
-    private Integer money;
+    private final int money;
 
     public Money(int input) {
         validate(input);
         this.money = input;
     }
 
-    public Integer getMoney() {
+    public int getMoney() {
         return this.money;
+    }
+
+    public int leftMoney(int payedMoney) {
+        int leftMoney = this.money - payedMoney;
+        if (leftMoney < 0) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
+        }
+        return leftMoney;
     }
 
     public int getPurchasableCount(int price) {
@@ -30,7 +38,7 @@ public class Money {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Money money1 = (Money) o;
-        return Objects.equals(money, money1.money);
+        return money == money1.money;
     }
 
     @Override

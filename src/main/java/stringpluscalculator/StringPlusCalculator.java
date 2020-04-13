@@ -3,7 +3,6 @@ package stringpluscalculator;
 import java.util.Objects;
 
 public class StringPlusCalculator {
-
     private static final int RETURN_VALUE_WHEN_EMPTY = 0;
 
     private String input;
