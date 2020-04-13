@@ -6,13 +6,13 @@ public class WinningNumbers {
     private Lotto winningNumbers;
     private int bonusNumber;
 
-    private WinningNumbers(List<Integer> asList, int bonusNumber) {
-        this.winningNumbers = new Lotto(asList);
+    private WinningNumbers(List<Integer> numbers, int bonusNumber) {
+        this.winningNumbers = new Lotto(numbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumbers getInstance(List<Integer> asList, int bonusNumber) {
-        return new WinningNumbers(asList, bonusNumber);
+    public static WinningNumbers getInstance(List<Integer> numbers, int bonusNumber) {
+        return new WinningNumbers(numbers, bonusNumber);
     }
 
     public Lotto getWinningNumbers() {

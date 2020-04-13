@@ -59,12 +59,12 @@ public class LottoTest {
     @Test
     @DisplayName("미당첨 확인 테스트")
     public void loseGameCheckTest() {
-        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 10, 12, 23, 35), 7);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Rank result = lotto.getMatchResult(winningNumbers);
 
-        assertThat(result).isEqualTo(Rank.FIRST);
+        assertThat(result).isEqualTo(Rank.LOSE);
     }
 
     @Test
