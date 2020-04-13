@@ -24,7 +24,8 @@ public class LottoGame {
 
     public static List<Lotto> buy(long money) {
         // TODO: 돈만큼 구매
-//        List<Lotto> Lottos = new ArrayList<>();
-        return null;
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(autoGenerate());
+        return lottos;
     }
 }
