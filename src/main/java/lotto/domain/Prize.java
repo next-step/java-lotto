@@ -1,19 +1,24 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.function.BiFunction;
+
 public enum Prize {
-    MISS(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 50_000),
-    THIRD(5, 150_0000),
-    SECOND(5, 30_000_000),
-    FIRST(6, 2000_000_000);
+    MISS(0, 0, (match, bonusNumber) -> match < 3),
+    FIFTH(3, 5000, (match, bonusNumber) -> match == 3),
+    FOURTH(4, 50_000, (match, bonusNumber) -> match == 4),
+    THIRD(5, 150_0000, (match, bonusNumber) ->  match == 5 && !bonusNumber),
+    SECOND(5, 30_000_000, (match, bonusNumber) ->  match == 5 && bonusNumber),
+    FIRST(6, 2000_000_000, (match, bonusNumber) -> match == 6);
 
     private int match;
     private int amount;
+    private BiFunction<Integer, Boolean, Boolean> matcher;
 
-    Prize(int match, int amount) {
+    Prize(int match, int amount, BiFunction<Integer, Boolean, Boolean> matcher) {
         this.match = match;
         this.amount = amount;
+        this.matcher = matcher;
     }
 
     public int getMatch() {
@@ -25,25 +30,14 @@ public enum Prize {
     }
 
     static Prize of(int match, boolean bonusNumber) {
-        if (isSecondPrize(match, bonusNumber)) {
-            return SECOND;
-        }
-
-        for (Prize prize : values()) {
-            if (prize.isMatchCount(match) && prize != SECOND) {
-                return prize;
-            }
-        }
-
-        return MISS;
+        return Arrays.stream(values())
+                .filter(v -> v.match(match, bonusNumber))
+                .findFirst()
+                .orElse(Prize.MISS);
     }
 
-    private static boolean isSecondPrize(int match, boolean bonusNumber) {
-        return SECOND.isMatchCount(match) && bonusNumber;
-    }
-
-    private boolean isMatchCount(int match) {
-        return this.match == match;
+    public Boolean match(int matchCount, boolean bonusNumber) {
+        return matcher.apply(matchCount, bonusNumber);
     }
 
 }

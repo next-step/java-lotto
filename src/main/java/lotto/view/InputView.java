@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.utils.StringParser;
+import lotto.utils.Parser;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,9 +16,9 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public List<String> askLastPrizeNumber() {
+    public List<Integer> askLastPrizeNumber() {
         System.out.println(PRIZE_QUESTION);
-        return StringParser.splitText(scanner.nextLine());
+        return Parser.splitToNumbers(scanner.nextLine());
     }
 
     public int askBonusPrizeNumber() {

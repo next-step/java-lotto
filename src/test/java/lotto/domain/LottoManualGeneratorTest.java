@@ -22,7 +22,7 @@ class LottoManualGeneratorTest {
     @DisplayName("로또 입력 생성 테스트")
     @Test
     void testInputCreateLotto() {
-        List<String> inputText = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<Integer> inputText = Arrays.asList(1,2,3,4,5,6);
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(inputText);
 
         List<LottoNumber> actual = lottoManualGenerator.generateNumbers();

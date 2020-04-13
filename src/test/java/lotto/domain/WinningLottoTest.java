@@ -15,8 +15,8 @@ class WinningLottoTest {
     private LottoNumber bonusNumber;
     @BeforeEach
     void setUp() {
-        List<String> text = Arrays.asList("1", "2", "3", "4", "5", "6");
-        lotto = new Lotto(new LottoManualGenerator(text).generateNumbers());
+        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
+        lotto = new Lotto(new LottoManualGenerator(numbers).generateNumbers());
         bonusNumber = new LottoNumber(5);
     }
 

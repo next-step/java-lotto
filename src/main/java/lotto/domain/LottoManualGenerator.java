@@ -7,34 +7,24 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoManualGenerator implements GenerateStrategy {
-    private static final String NOT_NUMBER = "숫자가 아닙니다. ";
-    private final List<String> parsedText;
-    private final Set<LottoNumber> numbers;
+    private final List<Integer> parsedNumber;
 
-    public LottoManualGenerator(final List<String> parsedText) {
-        this.parsedText = new ArrayList<>(parsedText);
-        this.numbers = new TreeSet<>();
+    public LottoManualGenerator(final List<Integer> parsedNumber) {
+        this.parsedNumber = new ArrayList<>(parsedNumber);
     }
 
     @Override
     public List<LottoNumber> generateNumbers() {
-        return convertToLottoNumbers(parsedText);
+        return convertToLottoNumbers(parsedNumber);
     }
 
-    private List<LottoNumber> convertToLottoNumbers(List<String> text) {
-        return text.stream()
-                .map(this::parseToInt)
+    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    private int parseToInt(String inputText) {
-        try {
-            return (Integer.parseInt(inputText));
-        } catch (Exception e) {
-            throw new NumberFormatException(NOT_NUMBER + e.getMessage());
-        }
-    }
+
 
 
 }
