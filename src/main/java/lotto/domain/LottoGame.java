@@ -26,9 +26,10 @@ public class LottoGame {
 
     public static List<Lotto> buy(long money) {
         checkMoney(money);
-        // TODO: 돈만큼 구매
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(autoGenerate());
+        for (int i = 0; i < money / LOTTO_PRICE; i++) {
+            lottos.add(autoGenerate());
+        }
         return lottos;
     }
 
