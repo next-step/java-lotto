@@ -2,14 +2,14 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoGameTest {
 
@@ -20,11 +20,18 @@ class LottoGameTest {
         assertThat(lotto).isNotNull();
     }
 
-    @DisplayName("천원으로 로또 1장 구매")
+    @DisplayName("금액에 맞게 로또 구매")
+    @ParameterizedTest
+    @CsvSource({"1000, 1", "2000, 2", "3000, 3"})
+    void buy(long money, int expectedSize) {
+        List<Lotto> lottos = LottoGame.buy(money);
+        assertThat(lottos.size()).isEqualTo(expectedSize);
+    }
+
+    @DisplayName("천원미만 구매 불가 에러")
     @Test
-    void buy() {
-        List<Lotto> lottos = LottoGame.buy(1000);
-        assertThat(lottos.size()).isEqualTo(1);
+    void cantBuy() {
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoGame.buy(900));
     }
 
 //    @DisplayName("구매한 로또와 당첨번호 비교")
