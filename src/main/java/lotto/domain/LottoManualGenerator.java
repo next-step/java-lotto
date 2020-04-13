@@ -2,8 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoManualGenerator implements GenerateStrategy {
@@ -24,7 +23,16 @@ public class LottoManualGenerator implements GenerateStrategy {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoManualGenerator)) return false;
+        LottoManualGenerator that = (LottoManualGenerator) o;
+        return Objects.equals(parsedNumber, that.parsedNumber);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(parsedNumber);
+    }
 }

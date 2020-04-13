@@ -16,13 +16,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int validate(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("로또는 1과 45사이의 숫자만 가능합니다.");
+            throw new IllegalArgumentException(LOTTO_VALID_RANGE);
         }
         return number;
-    }
-
-    private static boolean isNumberRange(int number) {
-        return number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER;
     }
 
     public int getNumber() {
