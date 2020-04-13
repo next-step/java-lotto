@@ -51,21 +51,13 @@ public class LottosTest {
 
         WinningNumbers winningNumber = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 40);
 
-        Map<Rank, Integer> result = lottos.getResult(winningNumber);
+        MatchResult matchResult = lottos.getResult(winningNumber);
 
-        assertThat(result.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(result.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(result.get(Rank.FOURTH)).isEqualTo(1);
-        assertNull(result.get(Rank.FIFTH));
-        assertThat(result.get(Rank.LOSE)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("수익률 계산 테스트")
-    public void calculateYieldTest(){
-        String result = Lotto.calculateYield(14000, 5000);
-
-        assertThat(result).isEqualTo("0.36");
+        assertThat(matchResult.getOrDefault(Rank.FIRST)).isEqualTo(1);
+        assertThat(matchResult.getOrDefault(Rank.THIRD)).isEqualTo(1);
+        assertThat(matchResult.getOrDefault(Rank.FOURTH)).isEqualTo(1);
+        assertThat(matchResult.getOrDefault(Rank.FIFTH)).isEqualTo(0);
+        assertThat(matchResult.getOrDefault(Rank.LOSE)).isEqualTo(1);
     }
 
     private Set<Lotto> generateLottos() {

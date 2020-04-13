@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningNumbers {
-    private List<Integer> winningNumbers;
+    private Lotto winningNumbers;
     private int bonusNumber;
 
     private WinningNumbers(List<Integer> asList, int bonusNumber) {
-        this.winningNumbers = asList;
+        this.winningNumbers = new Lotto(asList);
         this.bonusNumber = bonusNumber;
     }
 
@@ -15,7 +15,7 @@ public class WinningNumbers {
         return new WinningNumbers(asList, bonusNumber);
     }
 
-    public List<Integer> getWinningNumbers() {
+    public Lotto getWinningNumbers() {
         return winningNumbers;
     }
 

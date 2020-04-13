@@ -46,9 +46,9 @@
 * InputView
   - [x] 보너스 볼 숫자 입력받기
 * Lotto
-  - [ ] 보너스볼 당첨 여부 확인
+  - [x] 보너스볼 당첨 여부 확인
 * WinningNumber
-  - [ ] 당첨 번호 객체로 구현
+  - [x] 당첨 번호 객체로 구현
 * LottoService
   - [ ] 로또 게임 로직 분리
 * ResultView

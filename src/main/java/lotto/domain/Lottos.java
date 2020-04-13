@@ -24,24 +24,16 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
-        Map<Rank, Integer> result = new HashMap<>();
+    public MatchResult getResult(WinningNumbers winningNumber) {
+        MatchResult matchResult = MatchResult.getInstance();
 
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.getResult(winningNumbers);
+            Rank rank = lotto.getMatchResult(winningNumber);
 
-            result.put(rank, getCountByRankType(result, rank));
+            matchResult.updateResult(rank);
         }
 
-        return result;
-    }
-
-    private int getCountByRankType(Map<Rank, Integer> result, Rank rank) {
-        if (result.containsKey(rank)) {
-            return result.get(rank) + 1;
-        }
-
-        return 1;
+        return matchResult;
     }
 
     public String toString(String format, String delimiter) {

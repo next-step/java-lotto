@@ -40,7 +40,7 @@ public class LottoTest {
         WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Rank result = lotto.getResult(winningNumbers);
+        Rank result = lotto.getMatchResult(winningNumbers);
 
         assertThat(result).isEqualTo(Rank.FIRST);
     }
@@ -51,7 +51,7 @@ public class LottoTest {
         WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 40), 6);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Rank result = lotto.getResult(winningNumbers);
+        Rank result = lotto.getMatchResult(winningNumbers);
 
         assertThat(result).isEqualTo(Rank.SECOND);
     }
@@ -62,7 +62,7 @@ public class LottoTest {
         WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        Rank result = lotto.getResult(winningNumbers);
+        Rank result = lotto.getMatchResult(winningNumbers);
 
         assertThat(result).isEqualTo(Rank.FIRST);
     }
