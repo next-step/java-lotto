@@ -10,16 +10,7 @@ public class LottoNumbers {
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers() {
-        this.lottoNumbers = generateLottoNumbers();
-    }
-
-    private List<LottoNumber> generateLottoNumbers() {
-        List<LottoNumber> temp = new ArrayList<>();
-
-        for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            temp.add(new LottoNumber(i));
-        }
-        return temp;
+        this.lottoNumbers = new ArrayList<>();
     }
 
     public List<LottoNumber> getLottoNumbers() {

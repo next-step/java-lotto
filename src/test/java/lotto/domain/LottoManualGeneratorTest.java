@@ -34,7 +34,7 @@ class LottoManualGeneratorTest {
         List<Integer> sixNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         return sixNumbers.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

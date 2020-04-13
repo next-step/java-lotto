@@ -24,7 +24,7 @@ public class LottoManualGenerator implements GenerateStrategy {
     private List<LottoNumber> convertToLottoNumbers(List<String> text) {
         return text.stream()
                 .map(this::parseToInt)
-                .map(LottoNumber::of)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

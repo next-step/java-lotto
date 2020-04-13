@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -14,25 +11,19 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(final int number) {
-        this.number = number;
+        this.number = validate(number);
+    }
+
+    private int validate(int number) {
+        if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또는 1과 45사이의 숫자만 가능합니다.");
+        }
+        return number;
     }
 
     private static boolean isNumberRange(int number) {
         return number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER;
     }
-
-    public static LottoNumber of(int lottoNumber) {
-        if (isNumberRange(lottoNumber)) {
-            throw new IllegalArgumentException(LOTTO_VALID_RANGE);
-        }
-
-        return lottoNumberFactory.get(lottoNumber);
-    }
-
-    private static final Map<Integer, LottoNumber> lottoNumberFactory =
-            IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                    .mapToObj(LottoNumber::new)
-                    .collect(Collectors.toMap(LottoNumber::getNumber, x -> x));
 
     public int getNumber() {
         return number;
