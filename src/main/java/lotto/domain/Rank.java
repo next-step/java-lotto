@@ -36,12 +36,13 @@ public enum Rank {
                 .collect(Collectors.toList());
     }
 
-    public static Rank getWinningType(int matchCount) {
+    public static Rank getWinningType(int matchCount, boolean isBonusMatched) {
         if (matchCount < MIN_WINNING_CONDITION) {
             return LOSE;
         }
 
-        return rankTypes.get(matchCount);
+        // 기능 구현
+        return LOSE;
     }
 
     public int getMatchCount() {

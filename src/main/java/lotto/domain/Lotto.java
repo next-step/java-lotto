@@ -28,6 +28,21 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
+    public Rank getResult(WinningNumbers winningNumbers) {
+        return Rank.getWinningType(toIntExact(countMatches(winningNumbers)), false);
+    }
+
+    private long countMatches(WinningNumbers winningNumbers) {
+//        return numbers.stream()
+//                .filter(this::contains)
+//                .count();
+        return -1;
+    }
+
+    private boolean contains(Integer number) {
+        return lottoNumbers.contains(number);
+    }
+
     public String toString(String format, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -37,18 +52,6 @@ public class Lotto {
         stringBuilder.append(String.format(format, joinedNumbers));
 
         return stringBuilder.toString();
-    }
-
-    public Rank getResult(List<Integer> winningNumbers) {
-        return Rank.getWinningType(toIntExact(countMatches(winningNumbers)));
-    }
-    private long countMatches(List<Integer> numbers) {
-        return numbers.stream()
-                .filter(this::contains)
-                .count();
-    }
-    private boolean contains(Integer number) {
-        return lottoNumbers.contains(number);
     }
 
     public static String calculateYield(int paidMoney, int profit) {

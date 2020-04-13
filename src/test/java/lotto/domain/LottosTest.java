@@ -49,7 +49,7 @@ public class LottosTest {
         Set<Lotto> expect = generateLottoValueWithNotMatching();
         Lottos lottos = new Lottos(expect);
 
-        List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+        WinningNumbers winningNumber = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         Map<Rank, Integer> result = lottos.getResult(winningNumber);
 

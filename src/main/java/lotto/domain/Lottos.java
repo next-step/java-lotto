@@ -24,11 +24,11 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> getResult(List<Integer> winningNumber) {
+    public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
         Map<Rank, Integer> result = new HashMap<>();
 
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.getResult(winningNumber);
+            Rank rank = lotto.getResult(winningNumbers);
 
             result.put(rank, getCountByRankType(result, rank));
         }
