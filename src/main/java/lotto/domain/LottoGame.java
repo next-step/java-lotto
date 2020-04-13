@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
@@ -20,5 +20,11 @@ public class LottoGame {
     private static int getRandomNumber() {
         Random random = new Random();
         return LottoNumber.MIN_LOTTO_NUMBER + random.nextInt(LottoNumber.MAX_LOTTO_NUMBER);
+    }
+
+    public static List<Lotto> buy(long money) {
+        // TODO: 돈만큼 구매
+//        List<Lotto> Lottos = new ArrayList<>();
+        return null;
     }
 }
