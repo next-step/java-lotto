@@ -14,7 +14,7 @@ public class InputView {
         return new Amount(amount);
     }
 
-    public List<Integer> inputPrizeNumber() {
+    public PrizeNumbers inputPrizeNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String prizeNumber = scanner.nextLine();
@@ -27,9 +27,8 @@ public class InputView {
 
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumber = scanner.nextLine();
-        prizeList.add(Integer.parseInt(bonusNumber));
 
-        return prizeList;
+        return new PrizeNumbers(prizeList, Integer.parseInt(bonusNumber));
     }
 
 }

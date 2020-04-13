@@ -16,11 +16,11 @@ public class LottoMain {
         LottoBundle lottoPapers = new LottoBundle(quantity);
         resultView.showLottoNumbers(lottoPapers);
 
-        List<Integer> prizeList = inputView.inputPrizeNumber();
+        PrizeNumbers prizeNumbers = inputView.inputPrizeNumber();
 
-        int[] winnerArray = lottoGame.matchNumber(lottoPapers, prizeList);
-        boolean bonusWin = lottoGame.isBonusWin(lottoPapers, prizeList);
-        resultView.showWinner(winnerArray, amount);
+        List<Rank> winners = lottoGame.matchNumber(lottoPapers, prizeNumbers);
+
+        resultView.showWinner(winners, amount);
     }
 
 

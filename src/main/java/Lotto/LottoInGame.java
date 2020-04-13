@@ -1,45 +1,50 @@
 package Lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoInGame {
 
     private final int LOTTO_PRICE = 1000;
-    private int[] winnerArray = new int[8];
+    private int[] winnerArray = new int[7];
+    private List<Rank> winners;
 
     public int amountToQuantity(Amount amount) {
         return amount.getAmount() / LOTTO_PRICE;
     }
 
-    public int[] matchNumber(LottoBundle lottoPapers, List<Integer> prizeList) {
+    public List<Rank> matchNumber(LottoBundle lottoPapers, PrizeNumbers prizeNumbers) {
+        winners = new ArrayList<>();
 
         for (int i = 0; i < lottoPapers.getSize(); i++) {
             LottoPaper paper = lottoPapers.getLottoPaper(i);
-            int prize = matchNumberPrize(paper, prizeList);
-            winnerArray[prize] += 1;
-            int isBonusWinFlag = isBonusWin(paper, prizeList) ? 1 : 0;
-            winnerArray[7] = isBonusWinFlag;
+            Rank rank = matchNumberPrize(paper, prizeNumbers);
+            winners.add(rank);
         }
 
-        return winnerArray;
+        return winners;
     }
 
-    private int matchNumberPrize(LottoPaper paper, List<Integer> prizeList) {
+    private Rank matchNumberPrize(LottoPaper paper, PrizeNumbers prizeNumbers) {
         int count = 0;
-        prizeList = prizeList.subList(0, prizeList.size() - 1);
+        boolean matchBonus = false;
 
-        for (int i = 0; i < prizeList.size(); i++) {
-            count += ((List<Integer>) paper.lottoNumberMap.get("lottoNumbers")).contains(i) ? 1 : 0;
+        for (int i = 0; i < prizeNumbers.getPrizeList().size(); i++) {
+            int prizeNumber = prizeNumbers.getPrizeList().get(i);
+            count += ((List<Integer>) paper.lottoNumberMap.get("lottoNumbers")).contains(prizeNumber) ? 1 : 0;
         }
-        return count;
+
+        if (count == 5) {
+            matchBonus = isBonusWin(paper, prizeNumbers);
+        }
+
+        return Rank.valueOf(count, matchBonus);
     }
 
-    public boolean isBonusWin(LottoPaper paper, List<Integer> prizeList) {
-        boolean bonusWin = false;
+    public boolean isBonusWin(LottoPaper paper, PrizeNumbers prizeNumbers) {
+        boolean bonusWin;
 
-        int inputBonusNumber = prizeList.get(prizeList.size() - 1);
-
-        bonusWin = ((int) paper.lottoNumberMap.get("bonusNumber")) == inputBonusNumber;
+        bonusWin = ((int) paper.lottoNumberMap.get("bonusNumber")) == prizeNumbers.getBonusNumber();
 
         return bonusWin;
     }

@@ -6,7 +6,7 @@ import java.util.*;
 public class LottoPaper {
 
     private final int LOTTO_NUMBER_BOUND = 45;
-    private final int LOTTO_MAX_LENGTH = 7;
+    private final int LOTTO_MAX_LENGTH = 8;
 
     private List<Integer> lottoNumbers;
     private int bonusNumber;
