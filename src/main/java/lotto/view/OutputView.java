@@ -18,19 +18,19 @@ public class OutputView {
     public static final String SECOND_PRIZE_PRINT = "%d개 일치 보너스 볼 일치(%d원)- %d개";
     private static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-    public void showInputResult(final List<Lotto> lottos, Money money) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(System.lineSeparator());
-        sb.append(money.getLottoCount() + BUY_LOTTOS);
-        sb.append(System.lineSeparator());
-
-        for (Lotto lotto : lottos) {
-            sb.append(lotto);
-            sb.append(System.lineSeparator());
-        }
-
-        System.out.println(sb.toString());
-    }
+//    public void showInputResult(final List<Lotto> lottos, Money money) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(System.lineSeparator());
+//        sb.append(money.getLottoCount() + BUY_LOTTOS);
+//        sb.append(System.lineSeparator());
+//
+//        for (Lotto lotto : lottos) {
+//            sb.append(lotto);
+//            sb.append(System.lineSeparator());
+//        }
+//
+//        System.out.println(sb.toString());
+//    }
 
     public void showResult(GameResult gameResult) {
         System.out.println(WINNING_RESULT);
@@ -39,6 +39,21 @@ public class OutputView {
             showGameResult(prize, gameResult);
         }
     }
+
+    public void showInputResult(final List<Lotto> lottos, int allLottoCounts, int manualConunts) {
+        int autoLottoCounts =  allLottoCounts - manualConunts;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("수동으로 " + manualConunts + "장, 자동으로 " + autoLottoCounts + "개를 구매했습니다.");
+        sb.append(System.lineSeparator());
+
+        for (Lotto lotto : lottos) {
+            sb.append(lotto);
+            sb.append(System.lineSeparator());
+        }
+        System.out.println(sb.toString());
+    }
+
 
     /**
      * 3개 일치 (5000원)- 1개

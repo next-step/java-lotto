@@ -19,8 +19,8 @@ public class Money {
         throw new IllegalArgumentException("1000원보다 큰 값을 입력해야합니다.");
     }
 
-    public long getLottoCount() {
-        return amount / LOTTO_PRICE;
+    public int getLottoCount() {
+        return (int) amount / LOTTO_PRICE;
     }
 
     public long getAmount() {
