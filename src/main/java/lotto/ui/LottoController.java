@@ -18,29 +18,18 @@ public class LottoController {
     }
 
     public void start() {
-        List<Lotto> purchasedLottos = new ArrayList<>();
         Money gameMoney = new Money(inputView.askNumberOfPurchase());
-
         int manualPurchase = validateCounts(gameMoney, inputView.askManualPurchase());
-        inputManualLotto(purchasedLottos, manualPurchase);
-        generateAutoLottos(purchasedLottos, gameMoney.getLottoCount() - manualPurchase);
+        LottoGenerator lottoGenerator = new LottoGenerator(gameMoney, manualPurchase);
+
+        List<Lotto> purchasedLottos = lottoGenerator.getPurchasedLottos();
 
         outputView.showInputResult(purchasedLottos, gameMoney.getLottoCount(), manualPurchase);
-        WinningLotto winningLotto = generateWinningLotto();
+        WinningLotto winningLotto = lottoGenerator.generateWinningLotto();
 
         GameResult gameResult = getGameResult(purchasedLottos, winningLotto);
         outputView.showResult(gameResult);
         outputView.showProfit(gameMoney, gameResult);
-    }
-
-
-    private void inputManualLotto(List<Lotto> purchasedLottos, int manualPurchased) {
-        inputView.askManualLottoNumber();
-
-        for (int i = 0; i < manualPurchased; i++) {
-            List<LottoNumber> lottoNumbers = new LottoManualGenerator(inputView.manualLottoNumber()).generateNumbers();
-            purchasedLottos.add(new Lotto(lottoNumbers));
-        }
     }
 
     private int validateCounts(Money money, int manualPurchase) {
@@ -48,19 +37,6 @@ public class LottoController {
             throw new IllegalArgumentException(OVER_BUDGET);
         }
         return manualPurchase;
-    }
-
-    private void generateAutoLottos(List<Lotto> purchasedLottos, int counts) {
-        for (int i = 0; i < counts; i++) {
-            List<LottoNumber> lottoNumbers = LottoAutoGenerator.getLottoNumbers();
-            purchasedLottos.add(new Lotto(lottoNumbers));
-        }
-    }
-
-    private WinningLotto generateWinningLotto() {
-        Lotto winningLotto = new Lotto((new LottoManualGenerator(inputView.askLastPrizeNumber()).generateNumbers()));
-        LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
-        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private GameResult getGameResult(final List<Lotto> purchasedLottos, final WinningLotto winningLotto) {
