@@ -1,6 +1,7 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -22,5 +23,11 @@ public class LottoNumberTest {
     @CsvSource({"0", "46"})
     public void createError(int number) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.of(number));
+    }
+
+    @Test
+    public void equalsTest() {
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.of(1));
     }
 }

@@ -20,4 +20,10 @@ public class LottoTest {
     public void invalidLottoSize() {
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.ofComma("1,2,3,4,5"));
     }
+
+    @Test
+    public void equalsTest() {
+        Lotto lotto = Lotto.ofComma("1,2,3,4,5,6");
+        assertThat(lotto).isEqualTo(Lotto.ofComma("1,2,3,4,5,6"));
+    }
 }

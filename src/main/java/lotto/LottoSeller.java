@@ -6,7 +6,7 @@ public class LottoSeller {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public static List<Lotto> buy(int money) {
+    public static List<Lotto> buyLottos(int money) {
         validateMoney(money);
 
         int lottoCount = money / LOTTO_PRICE;
@@ -19,7 +19,7 @@ public class LottoSeller {
 
     private static Lotto randomGenerateLotto() {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = 0; i < Lotto.LOTTO_SIZE; i++) {
+        while (lottoNumbers.size() < Lotto.LOTTO_SIZE) {
             lottoNumbers.add(LottoNumber.of(randomNumber()));
         }
         return Lotto.of(lottoNumbers);
