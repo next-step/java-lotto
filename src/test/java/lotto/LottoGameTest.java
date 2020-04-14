@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoGame;
+import lotto.domain.object.Lotto;
 import lotto.vo.LottoList;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,12 +38,14 @@ public class LottoGameTest {
 
     @Test
     void testValidationLotto() {
-
+        final Lotto lotto = new Lotto(new int[]{1,2,3,4,5});
+        assertThat(lotto).isEqualTo(new int[]{1,2,3,4,5});
     }
 
     @Test
     void testAscendingSort() {
-
+        final Lotto lotto = new Lotto(new int[]{4,2,41,1,23});
+        assertThat(lotto).isEqualTo(new int[]{1,2,4,23,41});
     }
 
     @Test
