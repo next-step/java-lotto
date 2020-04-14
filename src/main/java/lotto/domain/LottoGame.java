@@ -31,7 +31,7 @@ public class LottoGame {
         return (double) totalWinnings / price;
     }
 
-    public List<Lotto> createLottos(int purchaseCount) {
+    public List<Lotto> createLottos(List<Lotto> manualLottoNumbers, int purchaseCount) {
         return Stream
                 .generate(() -> new Lotto(new LottoNumbers().of()))
                 .limit(purchaseCount)

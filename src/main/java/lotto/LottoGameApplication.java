@@ -16,7 +16,7 @@ public class LottoGameApplication {
         int purchaseCount = lottoGame.purchaseLotto(price);
 
         ResultView.printPurChaseCount(purchaseCount);
-        List<Lotto> lottos = lottoGame.createLottos(purchaseCount);
+        List<Lotto> lottos = lottoGame.createLottos(manualLottoNumbers, purchaseCount);
 
         ResultView.printLottoNumbers(lottos);
 
