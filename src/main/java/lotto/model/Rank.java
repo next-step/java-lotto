@@ -1,6 +1,5 @@
 package lotto.model;
 
-
 public enum Rank {
 
     FIRST(6, 2000000000),
@@ -17,7 +16,7 @@ public enum Rank {
         this.matchCount = matchCount;
         this.prize = prize;
     }
-
+  
     public int getPrize() {
         return prize;
     }
