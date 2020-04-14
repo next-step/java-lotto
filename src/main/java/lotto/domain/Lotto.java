@@ -24,9 +24,13 @@ public class Lotto {
     }
 
     public int match(Lotto winningLotto) {
-        return (int) this.getNumbers().stream()
-                .filter(num -> winningLotto.getNumbers().contains(num))
+        return (int) lottoNumbers.stream()
+                .filter(num -> winningLotto.contains(num))
                 .count();
+    }
+
+    private boolean contains(Integer num) {
+        return lottoNumbers.contains(num);
     }
 
     private void validateSize(List<Integer> lottoNumbers) {
