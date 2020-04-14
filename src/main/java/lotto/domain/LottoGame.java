@@ -38,4 +38,40 @@ public class LottoGame {
             throw new IllegalArgumentException("천원 이하로 로또 구매 불가능");
         }
     }
+
+    public static int match(Lotto lotto, Lotto winningLotto, LottoNumber bonusNumber) {
+        int matchCount = 0;
+        boolean bonusMatch = false;
+
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (winningLotto.contains(lottoNumber)) {
+                matchCount++;
+            }
+            if (lottoNumber.equals(bonusNumber)) {
+                bonusMatch = true;
+            }
+        }
+
+        return rank(matchCount, bonusMatch);
+    }
+
+    private static int rank(int matchCount, boolean bonusMatch) {
+        if (matchCount == 6) {
+            return 1;
+        }
+        if (matchCount == 5) {
+            if (bonusMatch) {
+                return 2;
+            }
+            return 3;
+        }
+        if (matchCount == 4) {
+            return 4;
+        }
+        if (matchCount == 3) {
+            return 5;
+        }
+        return 0;
+    }
 }

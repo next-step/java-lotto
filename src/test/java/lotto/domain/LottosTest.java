@@ -10,6 +10,7 @@ public class LottosTest {
     @DisplayName("입력한 수 만큼 로또 생성")
     @Test
     void generate() {
+        // TODO
         Lottos lottos = Lottos.autoGenerate(3);
         assertThat(lottos.size()).isEqualTo(3);
     }

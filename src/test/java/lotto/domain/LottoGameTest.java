@@ -1,17 +1,36 @@
 package lotto.domain;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class LottoGameTest {
+
+    Lotto winningLotto;
+    LottoNumber bonusNumber;
+
+    @BeforeEach
+    public void setup() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+
+        winningLotto = Lotto.of(lottoNumbers);
+        bonusNumber = LottoNumber.of(7);
+    }
 
     @DisplayName("로또 자동 생성")
     @Test
@@ -34,21 +53,94 @@ class LottoGameTest {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoGame.buy(900));
     }
 
-//    @DisplayName("구매한 로또와 당첨번호 비교")
-//    @Test
-//    void match() {
-//        List<LottoNumber> lottoNumbers = Arrays.asList(
-//                LottoNumber.of(1),
-//                LottoNumber.of(2),
-//                LottoNumber.of(3),
-//                LottoNumber.of(4),
-//                LottoNumber.of(5),
-//                LottoNumber.of(6)
-//        );
-//
-//        Lotto lotto = LottoGame.autoGenerate();
-//        Lotto winningLotto = Lotto.of(lottoNumbers);
-//
-//        assertThat(LottoGame.match(lotto, winningLotto);
-//    }
+    @DisplayName("1등")
+    @Test
+    void match1st() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+        Lotto lotto = Lotto.of(lottoNumbers);
+        assertThat(LottoGame.match(lotto, winningLotto, bonusNumber)).isEqualTo(1);
+    }
+
+    @DisplayName("2등")
+    @Test
+    void match2nd() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(7)
+        );
+        Lotto lotto = Lotto.of(lottoNumbers);
+        assertThat(LottoGame.match(lotto, winningLotto, bonusNumber)).isEqualTo(2);
+    }
+
+    @DisplayName("3등")
+    @Test
+    void match3rd() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(8)
+        );
+        Lotto lotto = Lotto.of(lottoNumbers);
+        assertThat(LottoGame.match(lotto, winningLotto, bonusNumber)).isEqualTo(3);
+    }
+
+    @DisplayName("4등")
+    @Test
+    void match4() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(9),
+                LottoNumber.of(10)
+        );
+        Lotto lotto = Lotto.of(lottoNumbers);
+        assertThat(LottoGame.match(lotto, winningLotto, bonusNumber)).isEqualTo(4);
+    }
+
+    @DisplayName("5등")
+    @Test
+    void match5th() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(9),
+                LottoNumber.of(10),
+                LottoNumber.of(11)
+        );
+        Lotto lotto = Lotto.of(lottoNumbers);
+        assertThat(LottoGame.match(lotto, winningLotto, bonusNumber)).isEqualTo(5);
+    }
+
+    @DisplayName("꽝")
+    @Test
+    void match6th() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(9),
+                LottoNumber.of(10),
+                LottoNumber.of(11),
+                LottoNumber.of(12)
+        );
+        Lotto lotto = Lotto.of(lottoNumbers);
+        assertThat(LottoGame.match(lotto, winningLotto, bonusNumber)).isEqualTo(0);
+    }
+
 }
