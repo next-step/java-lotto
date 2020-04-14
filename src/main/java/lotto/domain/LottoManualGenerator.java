@@ -6,22 +6,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoManualGenerator implements GenerateStrategy {
-    private final List<Integer> parsedNumber;
+    private final List<LottoNumber> parsedNumber;
 
-    public LottoManualGenerator(final List<Integer> parsedNumber) {
+    public LottoManualGenerator(final List<LottoNumber> parsedNumber) {
         this.parsedNumber = new ArrayList<>(parsedNumber);
     }
 
     @Override
     public List<LottoNumber> generateNumbers() {
-        return convertToLottoNumbers(parsedNumber);
+        return parsedNumber;
     }
 
-    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public boolean equals(Object o) {

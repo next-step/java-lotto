@@ -12,12 +12,12 @@ public class LottoAutoGenerator {
     }
 
     public static List<LottoNumber> generateNumbers() {
-        List<LottoNumber> temp = new ArrayList<>();
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
 
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER; i++) {
-            temp.add(new LottoNumber(i));
+            lottoNumbers.add(new LottoNumber(i));
         }
-        return temp;
+        return lottoNumbers;
     }
 
     private static List<LottoNumber> shuffle(List<LottoNumber> lottoNumbers) {

@@ -38,7 +38,7 @@ public class LottoController {
         inputView.askManualLottoNumber();
 
         for (int i = 0; i < manualPurchased; i++) {
-            List<LottoNumber> lottoNumbers = new LottoManualGenerator(inputView.ManualLottoNumber()).generateNumbers();
+            List<LottoNumber> lottoNumbers = new LottoManualGenerator(inputView.manualLottoNumber()).generateNumbers();
             purchasedLottos.add(new Lotto(lottoNumbers));
         }
     }

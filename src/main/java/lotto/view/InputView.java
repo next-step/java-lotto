@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.utils.Parser;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class InputView {
         return Long.parseLong(scanner.nextLine());
     }
 
-    public List<Integer> askLastPrizeNumber() {
+    public List<LottoNumber> askLastPrizeNumber() {
         System.out.println(PRIZE_QUESTION);
         return Parser.splitToNumbers(scanner.nextLine());
     }
@@ -32,7 +33,7 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<Integer> ManualLottoNumber() {
+    public List<LottoNumber> manualLottoNumber() {
         return Parser.splitToNumbers(scanner.nextLine());
     }
 
