@@ -85,14 +85,13 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("입력된 구매 장수만큼 로또를 자동으로 생성한다")
+    @DisplayName("수동으로 입력된 로또 개수와 자동 구매 장숨나큼 로또를 생성한다")
     public void autoCreateLottoAsMuchAsPurchaseCount() {
         List<Lotto> manualLottoNumbers = Arrays.asList(
                 new Lotto(Arrays.asList(8, 21, 23, 41, 42 ,43)),
                 new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
                 new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44))
         );
-
         List<Lotto> lottos = lottoGame.createLottos(manualLottoNumbers, 11);
 
         assertThat(lottos).hasSize(14);
