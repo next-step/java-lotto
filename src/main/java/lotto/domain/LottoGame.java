@@ -32,10 +32,10 @@ public class LottoGame {
         return (double) totalWinnings / price;
     }
 
-    public List<Lotto> createLottos(List<Lotto> manualLottoNumbers, int purchaseCount) {
+    public List<Lotto> createLottos(List<Lotto> manualLottoNumbers, int autoPurchaseCount) {
         List<Lotto> autoLottoNumbers = Stream
                 .generate(() -> new Lotto(new LottoNumbers().of()))
-                .limit(purchaseCount)
+                .limit(autoPurchaseCount)
                 .collect(toList());
 
         return Stream.of(manualLottoNumbers, autoLottoNumbers)
