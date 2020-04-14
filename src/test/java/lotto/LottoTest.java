@@ -45,13 +45,6 @@ public class LottoTest {
         assertThat(results.size()).isEqualTo(14);
     }
 
-    @Test
-    void buyCount() {
-        int money = 14000;
-        int count = lottoGame.purchaseLottoCount(money);
-        assertThat(count).isEqualTo(14);
-    }
-
     @DisplayName("lotto 랜덤 값이 1~45 사이인지 테스")
     @Test
     void randomLimit() {
