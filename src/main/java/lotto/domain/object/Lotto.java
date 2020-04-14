@@ -1,8 +1,8 @@
 package lotto.domain.object;
 
 import lotto.domain.LottoGenerator;
+import lotto.vo.LottoPrize;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,12 +17,17 @@ public class Lotto {
         lotto = new LottoGenerator().create();
     }
 
-    public Lotto(int[] lotto) {
+    public Lotto(final int[] lotto) {
         this.lotto = Arrays.stream(lotto).boxed().collect(Collectors.toList());
         Collections.sort(this.lotto);
     }
 
-    public int countMatch(int[] luckyNumbers) {
+    public int getPrize(final int[] luckyNumbers) {
+        final int count = countMatch(luckyNumbers);
+        return LottoPrize.fromMatchCount(count).toMoney();
+    }
+
+    public int countMatch(final int[] luckyNumbers) {
         int countOfMatch = 0;
         for (int luckyNumber : luckyNumbers) {
             countOfMatch += judgeMatchAndCount(luckyNumber);
