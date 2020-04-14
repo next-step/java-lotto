@@ -13,7 +13,7 @@ public class WinningLottoTest {
     @Test
     void matchTwoLottoReturnResultRank() {
         Lotto userLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)), 7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
         Rank rank = winningLotto.match(userLotto);
 
         assertThat(rank).isEqualTo(Rank.SECOND);

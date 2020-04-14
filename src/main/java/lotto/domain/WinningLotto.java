@@ -10,6 +10,8 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        return Rank.SECOND;
+        int matchCount = lotto.match(userLotto);
+        boolean matchBonus = userLotto.contains(bonusNumber);
+        return Rank.of(matchCount, matchBonus);
     }
 }
