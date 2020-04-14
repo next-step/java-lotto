@@ -10,8 +10,6 @@ public enum Rank {
     FIFTH(3, 5_000),
     LOSER(0, 0);
 
-    public static final int WINNING_COUNT_BOUNDARY = 3;
-
     private int matchCount;
     private int winningMoney;
 
