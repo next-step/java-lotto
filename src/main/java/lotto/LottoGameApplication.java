@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoGame;
+import lotto.domain.Rank;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
