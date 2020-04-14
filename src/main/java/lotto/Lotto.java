@@ -1,6 +1,9 @@
 package lotto;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class Lotto {
 
@@ -35,6 +38,20 @@ public class Lotto {
         }
     }
 
+    public int match(Lotto target) {
+        int matchCount = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (target.contains(lottoNumber)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,4 +64,5 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
 }
