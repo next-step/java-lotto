@@ -5,22 +5,28 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.util.stream.Collectors.toList;
+
 public class Lotto {
     public static final int LOTTO_NUMBERS_SIZE = 6;
-    private final List<Integer> lottoNumbers;
+
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(num -> new LottoNumber(num))
+                .collect(toList());
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
     public Rank match(Lotto winningLotto, int bonusNumber) {
-        return Rank.of(match(winningLotto), this.getNumbers().contains(bonusNumber));
+        return Rank.of(match(winningLotto), contains(new LottoNumber(bonusNumber)));
     }
 
     public int match(Lotto winningLotto) {
@@ -29,7 +35,7 @@ public class Lotto {
                 .count();
     }
 
-    private boolean contains(Integer num) {
+    private boolean contains(LottoNumber num) {
         return lottoNumbers.contains(num);
     }
 

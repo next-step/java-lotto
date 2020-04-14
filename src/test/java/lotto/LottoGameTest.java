@@ -46,7 +46,9 @@ public class LottoGameTest {
         List<Lotto> lottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-        lottoGame.match(lottos, winningLotto, 7);
+        List<Rank> results = lottoGame.match(lottos, winningLotto, 7);
+
+        assertThat(results).contains(SECOND);
     }
 
     @ParameterizedTest
