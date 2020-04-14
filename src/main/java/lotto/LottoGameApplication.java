@@ -6,6 +6,7 @@ import lotto.domain.Rank;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoGameApplication {
@@ -16,6 +17,11 @@ public class LottoGameApplication {
         int purchaseCount = lottoGame.purchaseLotto(price);
 
         ResultView.printPurChaseCount(purchaseCount);
+        List<Lotto> manualLottoNumbers = Arrays.asList(
+                new Lotto(Arrays.asList(8, 21, 23, 41, 42 ,43)),
+                new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
+                new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44))
+        );
         List<Lotto> lottos = lottoGame.createLottos(manualLottoNumbers, purchaseCount);
 
         ResultView.printLottoNumbers(lottos);
