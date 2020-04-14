@@ -7,6 +7,9 @@ import java.util.Set;
 
 public class Lotto {
 
+    private static final String COMMA = ",";
+    private static final String INVALID_LOTTO_SIZE_ERROR = "invalid lotto size";
+
     public static final int LOTTO_SIZE = 6;
 
     Set<LottoNumber> lottoNumbers;
@@ -21,7 +24,7 @@ public class Lotto {
     }
 
     public static Lotto ofComma(String stringNumbers) {
-        String[] splitNumbers = stringNumbers.split(",");
+        String[] splitNumbers = stringNumbers.split(COMMA);
         Set<String> numbers = new HashSet<>();
         Collections.addAll(numbers, splitNumbers);
 
@@ -34,7 +37,7 @@ public class Lotto {
 
     private static void checkSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("invalid lotto size");
+            throw new IllegalArgumentException(INVALID_LOTTO_SIZE_ERROR);
         }
     }
 

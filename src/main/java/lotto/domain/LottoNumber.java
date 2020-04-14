@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+    private static final String LOTTO_NUMBER_OUT_OF_RANGE_ERROR = "lotto number out of range";
+
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
@@ -24,7 +26,7 @@ public class LottoNumber {
 
     private static void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("lotto number out of range");
+            throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_RANGE_ERROR);
         }
     }
 

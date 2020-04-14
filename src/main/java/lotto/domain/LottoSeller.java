@@ -4,6 +4,8 @@ import java.util.*;
 
 public class LottoSeller {
 
+    private static final String NOT_ENOUGH_MONEY_ERROR = "not enough money";
+
     private static final int LOTTO_PRICE = 1000;
 
     public static List<Lotto> buyLottos(int money) {
@@ -32,7 +34,7 @@ public class LottoSeller {
 
     private static void validateMoney(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException("not enough money");
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
         }
     }
 }
