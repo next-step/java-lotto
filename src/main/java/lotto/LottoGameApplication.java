@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -23,9 +24,8 @@ public class LottoGameApplication {
         List<Lotto> lottos = lottoGame.createLottos(manualLottos, autoPurchaseCount);
         ResultView.printLottoNumbers(lottos);
 
-        Lotto winningLotto = InputView.getWinningNumbers();
-        int bonusNumber = InputView.getBonusNumber();
-        List<Rank> results = lottoGame.match(lottos, winningLotto, bonusNumber);
+        WinningLotto winningLotto = InputView.getWinningLotto();
+        List<Rank> results = lottoGame.match(lottos, winningLotto);
         ResultView.printWinningStatus(results);
 
         double rateOfRevenue = lottoGame.getRateOfRevenue(price, lottoGame.getTotalWinnings(results));

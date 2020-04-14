@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,11 +20,11 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoGameTest {
     private LottoGame lottoGame = new LottoGame();
-    private Lotto winningLotto;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     public void setUp() {
-        winningLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
     }
 
     @Test
@@ -34,7 +35,7 @@ public class LottoGameTest {
                 new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12))
         );
 
-        List<Rank> results = lottoGame.match(lottos, winningLotto, 10);
+        List<Rank> results = lottoGame.match(lottos, winningLotto);
 
         assertThat(results).contains(FIFTH);
         assertThat(results).hasSize(2);
@@ -46,7 +47,7 @@ public class LottoGameTest {
         List<Lotto> lottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
 
-        List<Rank> results = lottoGame.match(lottos, winningLotto, 7);
+        List<Rank> results = lottoGame.match(lottos, winningLotto);
 
         assertThat(results).contains(SECOND);
     }

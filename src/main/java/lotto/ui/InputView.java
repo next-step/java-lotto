@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,14 +23,16 @@ public class InputView {
         return price;
     }
 
-    public static Lotto getWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String value = scanner.nextLine();
-
-        return createLotto(value);
+    public static WinningLotto getWinningLotto() {
+        return new WinningLotto(createLotto(getWinningNumbers()), getBonusNumber());
     }
 
-    public static int getBonusNumber() {
+    private static String getWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    private static int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextInt();
     }
