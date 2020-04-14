@@ -13,31 +13,31 @@ public class InputView {
     public static final String NUMBER_OF_MANUAL_PURCHASE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static Scanner scanner = new Scanner(System.in);
 
-    public long askNumberOfPurchase() {
+    public static long askNumberOfPurchase() {
         System.out.println(AMOUNT_QUESTION);
         return Long.parseLong(scanner.nextLine());
     }
 
-    public List<LottoNumber> askLastPrizeNumber() {
+    public static List<LottoNumber> askLastPrizeNumber() {
         System.out.println(PRIZE_QUESTION);
         return Parser.splitToNumbers(scanner.nextLine());
     }
 
-    public int askBonusPrizeNumber() {
+    public static int askBonusPrizeNumber() {
         System.out.println(BONUS_PRIZE_QUESTION);
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public int askManualPurchase() {
+    public static int askManualPurchase() {
         System.out.println(NUMBER_OF_MANUAL_PURCHASE);
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<LottoNumber> manualLottoNumber() {
+    public static List<LottoNumber> manualLottoNumber() {
         return Parser.splitToNumbers(scanner.nextLine());
     }
 
-    public void askManualLottoNumber() {
+    public static void askManualLottoNumber() {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 

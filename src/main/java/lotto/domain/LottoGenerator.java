@@ -15,12 +15,10 @@ public class LottoGenerator {
     }
 
     private List<Lotto> generateManualLotto() {
-        InputView inputView = new InputView();
-        inputView.askManualLottoNumber();
         List<Lotto> manualLottos = new ArrayList<>();
 
         for (int i = 0; i < manualCounts; i++) {
-            List<LottoNumber> lottoNumbers = new LottoManualGenerator(inputView.manualLottoNumber()).generateNumbers();
+            List<LottoNumber> lottoNumbers = new LottoManualGenerator(InputView.manualLottoNumber()).generateNumbers();
             manualLottos.add(new Lotto(lottoNumbers));
         }
 
@@ -42,11 +40,9 @@ public class LottoGenerator {
         return purchasedLottos;
     }
 
-    public static WinningLotto generateWinningLotto() {
-        InputView inputView = new InputView();
-
-        Lotto winningLotto = new Lotto((new LottoManualGenerator(inputView.askLastPrizeNumber()).generateNumbers()));
-        LottoNumber bonusNumber = new LottoNumber(inputView.askBonusPrizeNumber());
+    public WinningLotto generateWinningLotto(List<LottoNumber> winningLottoNumber, int winningBonus) {
+        Lotto winningLotto = new Lotto((new LottoManualGenerator(winningLottoNumber).generateNumbers()));
+        LottoNumber bonusNumber = new LottoNumber(winningBonus);
         return new WinningLotto(winningLotto, bonusNumber);
     }
 
