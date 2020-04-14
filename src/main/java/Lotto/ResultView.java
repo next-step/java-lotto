@@ -1,11 +1,8 @@
 package Lotto;
 
-public class ResultView {
+import java.util.List;
 
-    private final int FIFTH_PRIZE = 5_000;
-    private final int FOURTH_PRIZE = 50_000;
-    private final int THIRD_PRIZE = 1_500_000;
-    private final int FIRST_PRIZE = 2_000_000_000;
+public class ResultView {
 
     public void showQuantity(int quantity) {
         System.out.println(quantity + "개를 구매했습니다.");
@@ -22,30 +19,54 @@ public class ResultView {
     public void lottoNumberShower(LottoPaper paper) {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        for (int i = 0; i < paper.getSize(); i++) {
+        for (int i = 0; i < paper.getSize() - 1; i++) {
             builder.append(paper.getNumber(i));
             builder.append(",");
         }
         String temp = builder.toString();
         temp = temp.substring(0, temp.length() - 1);
         System.out.print(temp + "]");
+
+        System.out.print("Bonus Number: " + paper.lottoNumberMap.get("bonusNumber"));
     }
 
-    public void showWinner(int[] winnerArray, Amount amount) {
+    public void showWinner(List<Rank> winners, Amount amount) {
         System.out.println("당첨 통계");
         System.out.println("----------");
-        for (int i = 0; i < winnerArray.length; i++) {
-            System.out.println(winnerArray[i]);
+        int[] winnerCount = new int[6];
+
+        for (int i = 0; i < winners.size(); i++) {
+            int count = countWinners(winners.get(i));
+            winnerCount[count] += 1;
         }
 
-        System.out.println("3개 일치 (5000원) - " + winnerArray[3]+"개");
-        System.out.println("4개 일치 (50000원) - " + winnerArray[4]+"개");
-        System.out.println("5개 일치 (1500000원) - " + winnerArray[5]+"개");
-        System.out.println("6개 일치 (2000000000원) - " + winnerArray[6]+"개");
-        double winPrize = winnerArray[3] * FIFTH_PRIZE + winnerArray[4] * FOURTH_PRIZE
-                + winnerArray[5] * THIRD_PRIZE + winnerArray[6] * FIRST_PRIZE;
+        System.out.println("3개 일치 (5000원) - " + winnerCount[5]+"개");
+        System.out.println("4개 일치 (50000원) - " + winnerCount[4]+"개");
+        System.out.println("5개 일치 (1500000원) - " + winnerCount[3]+"개");
+        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + winnerCount[2] + "개");
+        System.out.println("6개 일치 (2000000000원) - " + winnerCount[1]+"개");
+        double winPrize = winnerCount[5] *  Rank.FIFTH.getWinningMoney() + winnerCount[4] * Rank.FOURTH.getWinningMoney()
+                + winnerCount[3] * Rank.THIRD.getWinningMoney() + winnerCount[2] * Rank.SECOND.getWinningMoney() +
+                winnerCount[1] * Rank.FIRST.getWinningMoney();
         double rate = winPrize == 0 ? 0 : Math.round(((winPrize / amount.getAmount()) * 100)/100.0);
         System.out.println("총 수익률은 " + rate + "입니다.");
 
+    }
+
+    private int countWinners(Rank winner) {
+        int count = 0;
+        if (winner.equals(Rank.FIRST)) {
+            count = 1;
+        } else if (winner.equals(Rank.SECOND)) {
+            count = 2;
+        } else if (winner.equals(Rank.THIRD)) {
+            count = 3;
+        } else if (winner.equals(Rank.FOURTH)) {
+            count = 4;
+        } else if (winner.equals(Rank.FIFTH)) {
+            count = 5;
+        }
+
+        return count;
     }
 }

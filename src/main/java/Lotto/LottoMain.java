@@ -6,20 +6,21 @@ public class LottoMain {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        LottoProgress lottoProgress = new LottoProgress();
+        LottoInGame lottoGame = new LottoInGame();
         ResultView resultView = new ResultView();
 
         Amount amount = inputView.inputPurchasingAmount();
 
-        int quantity = lottoProgress.amountToQuantity(amount);
+        int quantity = lottoGame.amountToQuantity(amount);
         resultView.showQuantity(quantity);
-        LottoBundle lottoBundle = new LottoBundle(quantity);
-        resultView.showLottoNumbers(lottoBundle);
+        LottoBundle lottoPapers = new LottoBundle(quantity);
+        resultView.showLottoNumbers(lottoPapers);
 
-        List<Integer> prizeList = inputView.inputPrizeNumber();
+        PrizeNumbers prizeNumbers = inputView.inputPrizeNumber();
 
-        int[] winnerArray = lottoProgress.matchNumber(lottoBundle, prizeList);
-        resultView.showWinner(winnerArray, amount);
+        List<Rank> winners = lottoGame.matchNumber(lottoPapers, prizeNumbers);
+
+        resultView.showWinner(winners, amount);
     }
 
 

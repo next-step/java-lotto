@@ -1,46 +1,52 @@
 package Lotto;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LottoPaper {
 
     private final int LOTTO_NUMBER_BOUND = 45;
-    private final int LOTTO_MAX_LENGTH = 6;
+    private final int LOTTO_MAX_LENGTH = 8;
 
-    private List<Integer> lottoPaper;
+    private List<Integer> lottoNumbers;
+    private int bonusNumber;
+    Map<String, Object> lottoNumberMap;
 
     public LottoPaper() {
-        lottoPaper = new ArrayList<>();
+        lottoNumbers = new ArrayList<>();
         makeDeal();
     }
 
-    private List<Integer> makeDeal() {
+    private Map<String, Object> makeDeal() {
 
         for (int i = 1; i <= LOTTO_NUMBER_BOUND; i++) {
-            lottoPaper.add(i);
+            lottoNumbers.add(i);
         }
 
-        Collections.shuffle(lottoPaper);
-        lottoPaper = lottoPaper.subList(0, LOTTO_MAX_LENGTH);
-        
-        Collections.sort(lottoPaper);
+        Collections.shuffle(lottoNumbers);
+        lottoNumbers = lottoNumbers.subList(0, LOTTO_MAX_LENGTH);
+        bonusNumber = lottoNumbers.get(lottoNumbers.size() - 1);
+        lottoNumbers = lottoNumbers.subList(0, LOTTO_MAX_LENGTH - 1);
 
-        return lottoPaper;
+        Collections.sort(lottoNumbers);
+
+        lottoNumberMap = new HashMap<>();
+        lottoNumberMap.put("lottoNumbers", lottoNumbers);
+        lottoNumberMap.put("bonusNumber", bonusNumber);
+
+        return lottoNumberMap;
     }
 
     public int getSize() {
-        return lottoPaper.size();
+        return lottoNumbers.size();
     }
 
     public int getNumber(int index) {
-        return lottoPaper.get(index);
+        return lottoNumbers.get(index);
     }
 
     public boolean contains(int value) {
-        return lottoPaper.contains(value);
+        return lottoNumbers.contains(value);
     }
 
 }

@@ -5,22 +5,22 @@ import java.util.List;
 
 public class LottoBundle {
 
-    List<LottoPaper> lottoBundle;
+    List<LottoPaper> lottoPapers;
 
     public LottoBundle() {}
 
     public LottoBundle(int quantity) {
-        lottoBundle = new ArrayList<>();
+        lottoPapers = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottoBundle.add(new LottoPaper());
+            lottoPapers.add(new LottoPaper());
         }
     }
 
     public int getSize() {
-        return lottoBundle.size();
+        return lottoPapers.size();
     }
 
     public LottoPaper getLottoPaper(int index) {
-        return lottoBundle.get(index);
+        return lottoPapers.get(index);
     }
 }
