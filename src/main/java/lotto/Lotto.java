@@ -6,13 +6,13 @@ public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
-    Set<Integer> lottoNumbers;
+    Set<LottoNumber> lottoNumbers;
 
-    private Lotto(Set<Integer> lottoNumbers) {
+    private Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
-    public static Lotto of(Set<Integer> lottoNumbers) {
+    public static Lotto of(Set<LottoNumber> lottoNumbers) {
         checkSize(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
@@ -22,15 +22,15 @@ public class Lotto {
         Set<String> numbers = new HashSet<>();
         Collections.addAll(numbers, splitNumbers);
 
-        Set<Integer> lottoNumbers = new HashSet<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (String number : numbers) {
-            lottoNumbers.add(Integer.parseInt(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
         return of(lottoNumbers);
     }
 
-    private static void checkSize(Set<Integer> splitNumbers) {
-        if (splitNumbers.size() != LOTTO_SIZE) {
+    private static void checkSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("invalid lotto size");
         }
     }

@@ -11,6 +11,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public static LottoNumber of(String number) {
+        return of(Integer.parseInt(number));
+    }
+
     public static LottoNumber of(int number) {
         validateNumber(number);
         return new LottoNumber(number);
@@ -21,4 +25,5 @@ public class LottoNumber {
             throw new IllegalArgumentException("lotto number out of range");
         }
     }
+
 }
