@@ -18,20 +18,6 @@ public class OutputView {
     public static final String SECOND_PRIZE_PRINT = "%d개 일치 보너스 볼 일치(%d원)- %d개";
     private static DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-//    public void showInputResult(final List<Lotto> lottos, Money money) {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(System.lineSeparator());
-//        sb.append(money.getLottoCount() + BUY_LOTTOS);
-//        sb.append(System.lineSeparator());
-//
-//        for (Lotto lotto : lottos) {
-//            sb.append(lotto);
-//            sb.append(System.lineSeparator());
-//        }
-//
-//        System.out.println(sb.toString());
-//    }
-
     public void showResult(GameResult gameResult) {
         System.out.println(WINNING_RESULT);
         System.out.println(DASH);

@@ -20,10 +20,10 @@ public class LottoController {
     public void start() {
         List<Lotto> purchasedLottos = new ArrayList<>();
         Money gameMoney = new Money(inputView.askNumberOfPurchase());
-        generateAutoLottos(purchasedLottos, gameMoney);
 
         int manualPurchase = validateCounts(gameMoney, inputView.askManualPurchase());
-        List<Lotto> userLottos = inputManualLotto(manualPurchase);
+        inputManualLotto(purchasedLottos, manualPurchase);
+        generateAutoLottos(purchasedLottos, gameMoney.getLottoCount() - manualPurchase);
 
         outputView.showInputResult(purchasedLottos, gameMoney.getLottoCount(), manualPurchase);
         WinningLotto winningLotto = generateWinningLotto();
@@ -34,15 +34,13 @@ public class LottoController {
     }
 
 
-    private List<Lotto> inputManualLotto(int manualPurchased) {
-        List<Lotto> manualLottos = new ArrayList<>();
+    private void inputManualLotto(List<Lotto> purchasedLottos, int manualPurchased) {
         inputView.askManualLottoNumber();
 
         for (int i = 0; i < manualPurchased; i++) {
             List<LottoNumber> lottoNumbers = new LottoManualGenerator(inputView.ManualLottoNumber()).generateNumbers();
-            manualLottos.add(new Lotto(lottoNumbers));
+            purchasedLottos.add(new Lotto(lottoNumbers));
         }
-        return manualLottos;
     }
 
     private int validateCounts(Money money, int manualPurchase) {
@@ -52,8 +50,8 @@ public class LottoController {
         return manualPurchase;
     }
 
-    private void generateAutoLottos(List<Lotto> purchasedLottos, Money money) {
-        for (int i = 0; i < money.getLottoCount(); i++) {
+    private void generateAutoLottos(List<Lotto> purchasedLottos, int counts) {
+        for (int i = 0; i < counts; i++) {
             List<LottoNumber> lottoNumbers = LottoAutoGenerator.getLottoNumbers();
             purchasedLottos.add(new Lotto(lottoNumbers));
         }
