@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
-class MannualCountTest {
+class ManualCountTest {
 
     private static final int ONE_LOTTO_PRICE = 1000;
     private static final int TWO_LOTTO_COUNTS = 2;
@@ -16,6 +15,6 @@ class MannualCountTest {
     void testOverBudget() {
         Money money = new Money(ONE_LOTTO_PRICE);
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new MannualCount(money, TWO_LOTTO_COUNTS));
+                .isThrownBy(() -> new ManualCount(money, TWO_LOTTO_COUNTS));
     }
 }

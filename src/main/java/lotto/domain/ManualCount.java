@@ -1,12 +1,12 @@
 package lotto.domain;
 
-public class MannualCount {
+public class ManualCount {
     public static final String OVER_BUDGET = "구입 금액 초과";
 
     private final Money money;
     private final int manualCounts;
 
-    public MannualCount(Money money, int manualCounts) {
+    public ManualCount(Money money, int manualCounts) {
         this.money = money;
         this.manualCounts = validateCounts(money, manualCounts);
     }

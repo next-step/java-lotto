@@ -14,6 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 class WinningLottoTest {
     private Lotto lotto;
     private LottoNumber bonusNumber;
+
     @BeforeEach
     void setUp() {
         List<LottoNumber> numbers = new ArrayList<>();
