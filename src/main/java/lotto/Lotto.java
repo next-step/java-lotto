@@ -1,25 +1,38 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
 
-    List<Integer> lottoNumbers;
+    private static final int LOTTO_SIZE = 6;
 
-    private Lotto(List<Integer> lottoNumbers) {
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    Set<Integer> lottoNumbers;
+
+    private Lotto(Set<Integer> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    public static Lotto of(Set<Integer> lottoNumbers) {
+        checkSize(lottoNumbers);
+        return new Lotto(lottoNumbers);
     }
 
     public static Lotto ofComma(String stringNumbers) {
-        List<Integer> lottoNumbers = new ArrayList<>();
+        String[] splitNumbers = stringNumbers.split(",");
+        Set<String> numbers = new HashSet<>();
+        Collections.addAll(numbers, splitNumbers);
 
-        String[] numbers = stringNumbers.split(",");
+        Set<Integer> lottoNumbers = new HashSet<>();
         for (String number : numbers) {
             lottoNumbers.add(Integer.parseInt(number));
         }
-
-        return new Lotto(lottoNumbers);
+        return of(lottoNumbers);
     }
+
+    private static void checkSize(Set<Integer> splitNumbers) {
+        if (splitNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("invalid lotto size");
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTest {
 
@@ -14,9 +15,9 @@ public class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
-    @DisplayName("로또는 중복되지 않는 6개의 번호로 구성")
+    @DisplayName("로또 번호 6개가 아닐시 에러")
     @Test
-    public void lotto() {
-
+    public void invalidLottoSize() {
+        assertThatIllegalArgumentException().isThrownBy(() -> Lotto.ofComma("1,2,3,4,5"));
     }
 }
