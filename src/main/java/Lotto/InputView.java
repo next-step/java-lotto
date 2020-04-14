@@ -14,7 +14,7 @@ public class InputView {
         return new Amount(amount);
     }
 
-    public PrizeNumbers inputPrizeNumber() {
+    public List<Integer> inputPrizeNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
         String prizeNumber = scanner.nextLine();
@@ -25,10 +25,15 @@ public class InputView {
             prizeList.add(Integer.parseInt(s));
         }
 
+        return prizeList;
+    }
+
+    public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
+        Scanner scanner = new Scanner(System.in);
         String bonusNumber = scanner.nextLine();
 
-        return new PrizeNumbers(prizeList, Integer.parseInt(bonusNumber));
+        return Integer.parseInt(bonusNumber);
     }
 
 }
