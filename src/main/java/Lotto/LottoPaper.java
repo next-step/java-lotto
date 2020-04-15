@@ -13,11 +13,24 @@ public class LottoPaper {
     Map<String, Object> lottoNumberMap;
 
     public LottoPaper() {
-        lottoNumbers = new ArrayList<>();
         makeDeal();
     }
 
+    public LottoPaper(String manual) {
+        lottoNumbers = new ArrayList<>();
+        String[] manualNumbers = manual.split(",");
+
+        for (int i = 0; i < manualNumbers.length; i++) {
+            addManualLottoNumbers(manualNumbers[i]);
+        }
+    }
+
+    private void addManualLottoNumbers(String manualNumbers) {
+         lottoNumbers.add(Integer.parseInt(manualNumbers));
+    }
+
     private Map<String, Object> makeDeal() {
+        lottoNumbers = new ArrayList<>();
 
         for (int i = 1; i <= LOTTO_NUMBER_BOUND; i++) {
             lottoNumbers.add(i);

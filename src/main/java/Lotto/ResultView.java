@@ -4,8 +4,10 @@ import java.util.List;
 
 public class ResultView {
 
-    public void showQuantity(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+    private final String PURCHASE_MUCH = "수동으로 %d장, 자동으로 %d개를 구매했습니다.%n";
+
+    public void showQuantity(int quantity, ManualLottoCount manualLottoCount) {
+        System.out.printf(PURCHASE_MUCH, quantity - manualLottoCount.getManualCount(), manualLottoCount.getManualCount());
     }
 
     public void showLottoNumbers(LottoBundle lottoBundle) {
@@ -27,7 +29,6 @@ public class ResultView {
         temp = temp.substring(0, temp.length() - 1);
         System.out.print(temp + "]");
 
-        System.out.print("Bonus Number: " + paper.lottoNumberMap.get("bonusNumber"));
     }
 
     public void showWinner(List<Rank> winners, Amount amount) {

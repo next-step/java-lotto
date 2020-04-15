@@ -31,17 +31,17 @@ public enum Rank {
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         Rank returnRank = null;
 
-        if (countOfMatch == Rank.FIRST.getCountOfMatch()) {
+        if (countOfMatch == Rank.FIRST.countOfMatch) {
             returnRank = Rank.FIRST;
-        } else if (countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus) {
+        } else if (countOfMatch == Rank.SECOND.countOfMatch && matchBonus) {
             returnRank = Rank.SECOND;
-        } else if (countOfMatch == Rank.THIRD.getCountOfMatch() && !matchBonus) {
+        } else if (countOfMatch == Rank.THIRD.countOfMatch && !matchBonus) {
             returnRank = Rank.THIRD;
-        } else if (countOfMatch == Rank.FOURTH.getCountOfMatch()) {
+        } else if (countOfMatch == Rank.FOURTH.countOfMatch) {
             returnRank = Rank.FOURTH;
-        } else if (countOfMatch == Rank.FIFTH.getCountOfMatch()) {
+        } else if (countOfMatch == Rank.FIFTH.countOfMatch) {
             returnRank = Rank.FIFTH;
-        } else if (countOfMatch < Rank.FIFTH.getCountOfMatch()) {
+        } else if (countOfMatch < Rank.FIFTH.countOfMatch) {
             returnRank = Rank.MISS;
         }
 

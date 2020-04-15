@@ -9,9 +9,14 @@ public class LottoBundle {
 
     public LottoBundle() {}
 
-    public LottoBundle(int quantity) {
+    public LottoBundle(int quantity, String[] manuals) {
         lottoPapers = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
+        for (int i = 0; i < manuals.length; i++) {
+            LottoPaper lottoPaper = new LottoPaper(manuals[i]);
+            lottoPapers.add(lottoPaper);
+        }
+
+        for (int i = 0; i < quantity - manuals.length; i++) {
             lottoPapers.add(new LottoPaper());
         }
     }
