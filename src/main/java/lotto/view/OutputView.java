@@ -19,7 +19,7 @@ public class OutputView {
         System.out.println(WINNING_RESULT);
         System.out.println(DASH);
         for (Prize prize : Prize.values()) {
-            showGameResult(prize, gameResult);
+            showGameResult(prize, gameResult.getResult());
         }
     }
 
@@ -68,7 +68,9 @@ public class OutputView {
     }
 
     public void showProfit(final Money purchasedAmount, final GameResult gameResult) {
-        System.out.println(TOTAL_PROPIT + decimalFormat.format(gameResult.getProfit(purchasedAmount)) + PROPIT_END);
+        GameResult result = gameResult.getResult();
+
+        System.out.println(TOTAL_PROPIT + decimalFormat.format(result.getProfit(purchasedAmount)) + PROPIT_END);
     }
 
 

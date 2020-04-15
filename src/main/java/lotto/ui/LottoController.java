@@ -4,7 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -27,17 +26,9 @@ public class LottoController {
         WinningLotto winningLotto = lottoGenerator.generateWinningLotto(
                 InputView.askLastPrizeNumber(), InputView.askBonusPrizeNumber());
 
-        GameResult gameResult = getGameResult(purchasedLottos, winningLotto);
+        GameResult gameResult = new GameResult(purchasedLottos, winningLotto);
         outputView.showResult(gameResult);
         outputView.showProfit(gameMoney, gameResult);
-    }
-
-    private GameResult getGameResult(final List<Lotto> purchasedLottos, final WinningLotto winningLotto) {
-        GameResult gameResult = new GameResult();
-        for (Lotto lotto : purchasedLottos) {
-            gameResult.addWinResult(winningLotto.match(lotto));
-        }
-        return gameResult;
     }
 
 }
