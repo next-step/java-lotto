@@ -21,15 +21,17 @@ public final class StringUtils {
     }
 
     public static String serialize(final Object[] arrays) {
-        return serialize(arrays, ',');
+        return serialize(arrays, ",");
     }
 
-    public static String serialize(final Object[] arrays, final char token) {
+    public static String serialize(final Object[] arrays, final String token) {
         StringBuilder sb = new StringBuilder();
         for (Object text : arrays) {
             sb.append(text).append(token);
         }
-        sb.setLength(sb.length() - 1);
+        if (sb.lastIndexOf(token) > -1) {
+            sb.setLength(sb.lastIndexOf(token));
+        }
         return sb.toString();
     }
 }

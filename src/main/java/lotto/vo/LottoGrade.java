@@ -1,6 +1,6 @@
 package lotto.vo;
 
-public enum LottoPrize {
+public enum LottoGrade {
 
     MATCHES_ALL,
     MATCHES_5,
@@ -14,7 +14,7 @@ public enum LottoPrize {
     private static final int PRIZE_FOR_MATCHES_3 = 5000;
     private static final int PRIZE_FOR_MATCHES_NONE = 0;
 
-    public static LottoPrize fromMatchCount(int matches) {
+    public static LottoGrade fromMatchCount(int matches) {
         switch (matches) {
             case 6:
                 return MATCHES_ALL;
