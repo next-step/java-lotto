@@ -6,13 +6,13 @@ import lotto.domain.Rank;
 import java.util.List;
 
 public class ResultView {
-    public static void printPurChaseCount(int purchaseCount) {
-        printMessage(String.format("%d개를 구매했습니다.", purchaseCount));
+    public static void printPurChaseCount(int manualPurchaseCount, int autoPurchaseCount) {
+        printMessage(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manualPurchaseCount, autoPurchaseCount));
     }
 
     public static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            printMessage(lotto.getNumbers().toString());
+            printMessage(String.join(",", lotto.toString()));
         }
     }
 

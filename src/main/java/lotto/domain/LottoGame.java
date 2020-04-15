@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -8,9 +9,9 @@ import static java.util.stream.Collectors.toList;
 public class LottoGame {
     public static final int LOTTO_PRICE = 1000;
 
-    public List<Rank> match(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
+    public List<Rank> match(List<Lotto> lottos, WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> lotto.match(winningLotto, bonusNumber))
+                .map(lotto -> winningLotto.match(lotto))
                 .collect(toList());
     }
 
@@ -31,10 +32,14 @@ public class LottoGame {
         return (double) totalWinnings / price;
     }
 
-    public List<Lotto> createLottos(int purchaseCount) {
-        return Stream
+    public List<Lotto> createLottos(List<Lotto> manualLottoNumbers, int autoPurchaseCount) {
+        List<Lotto> autoLottoNumbers = Stream
                 .generate(() -> new Lotto(new LottoNumbers().of()))
-                .limit(purchaseCount)
+                .limit(autoPurchaseCount)
+                .collect(toList());
+
+        return Stream.of(manualLottoNumbers, autoLottoNumbers)
+                .flatMap(Collection::stream)
                 .collect(toList());
     }
 }
