@@ -18,7 +18,7 @@ public class LottoController {
         Money gameMoney = new Money(InputView.askNumberOfPurchase());
         ManualCount manualCount = new ManualCount(gameMoney, InputView.askManualPurchase());
 
-        List<LottoNumbers> manualLottoNumbers = LottoManualGenerator.getManualLottoNumbers(manualCount);
+        List<LottoNumbers> manualLottoNumbers = InputView.askManualNumbers(manualCount);
         LottoGenerator lottoGenerator = new LottoGenerator(gameMoney, manualCount, manualLottoNumbers);
 
         List<Lotto> purchasedLottos = lottoGenerator.getPurchasedLottos();
