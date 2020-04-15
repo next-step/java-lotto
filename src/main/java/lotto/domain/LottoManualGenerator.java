@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.InputView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,21 @@ public class LottoManualGenerator implements GenerateStrategy {
     @Override
     public List<LottoNumber> generateNumbers() {
         return parsedNumber;
+    }
+
+    public static List<LottoNumbers> getManualLottoNumbers(ManualCount manualCounts) {
+        return getLottoNumbers(manualCounts.getManualCounts());
+    }
+
+    private static List<LottoNumbers> getLottoNumbers(int manualCounts) {
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        InputView.askManualLottoNumber();
+
+        for (int i = 0; i < manualCounts; i++) {
+            LottoNumbers lottoNumber = new LottoNumbers(InputView.manualLottoNumber());
+            lottoNumbers.add(lottoNumber);
+        }
+        return lottoNumbers;
     }
 
     @Override

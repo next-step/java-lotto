@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.GameResult;
-import lotto.domain.Lotto;
-import lotto.domain.Money;
-import lotto.domain.Prize;
+import lotto.domain.*;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -26,11 +23,11 @@ public class OutputView {
         }
     }
 
-    public void showInputResult(final List<Lotto> lottos, int allLottoCounts, int manualConunts) {
-        int autoLottoCounts =  allLottoCounts - manualConunts;
+    public void showInputResult(final List<Lotto> lottos, Money allLottoCounts, ManualCount manualConunts) {
+        int autoLottoCounts =  allLottoCounts.getLottoCount() - manualConunts.getManualCounts();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("수동으로 " + manualConunts + "장, 자동으로 " + autoLottoCounts + "개를 구매했습니다.");
+        sb.append("수동으로 " + manualConunts.getManualCounts() + "장, 자동으로 " + autoLottoCounts + "개를 구매했습니다.");
         sb.append(System.lineSeparator());
 
         for (Lotto lotto : lottos) {

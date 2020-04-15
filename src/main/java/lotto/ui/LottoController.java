@@ -19,11 +19,11 @@ public class LottoController {
         Money gameMoney = new Money(InputView.askNumberOfPurchase());
         ManualCount manualCount = new ManualCount(gameMoney, InputView.askManualPurchase());
 
-        List<LottoNumbers> manualLottoNumbers = getManualLottoNumbers(manualCount.getManualCounts());
+        List<LottoNumbers> manualLottoNumbers = LottoManualGenerator.getManualLottoNumbers(manualCount);
         LottoGenerator lottoGenerator = new LottoGenerator(gameMoney, manualCount, manualLottoNumbers);
 
         List<Lotto> purchasedLottos = lottoGenerator.getPurchasedLottos();
-        outputView.showInputResult(purchasedLottos, gameMoney.getLottoCount(), manualCount.getManualCounts());
+        outputView.showInputResult(purchasedLottos, gameMoney, manualCount);
         WinningLotto winningLotto = lottoGenerator.generateWinningLotto(
                 InputView.askLastPrizeNumber(), InputView.askBonusPrizeNumber());
 
@@ -38,17 +38,6 @@ public class LottoController {
             gameResult.addWinResult(winningLotto.match(lotto));
         }
         return gameResult;
-    }
-
-    private List<LottoNumbers> getManualLottoNumbers(int manualCounts) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        InputView.askManualLottoNumber();
-
-        for (int i = 0; i < manualCounts; i++) {
-            LottoNumbers lottoNumber = new LottoNumbers(InputView.manualLottoNumber());
-            lottoNumbers.add(lottoNumber);
-        }
-        return lottoNumbers;
     }
 
 }
