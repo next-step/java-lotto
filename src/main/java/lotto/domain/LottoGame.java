@@ -21,7 +21,7 @@ public class LottoGame {
         validateNumeric(totalPurchase);
         validatePositive(totalPurchase);
         purchaseMoney = Integer.parseInt(totalPurchase);
-        lottoList = new LottoList(purchaseMoney/PER_SALE_PRICE);
+        lottoList = new LottoList(purchaseMoney / PER_SALE_PRICE);
     }
 
     public LottoGame(final int[][] lottoLists) {
@@ -36,14 +36,14 @@ public class LottoGame {
     }
 
     private void validateNumeric(final String totalPurchase) {
-        if ( !StringUtils.isNumeric(totalPurchase) ) {
+        if (!StringUtils.isNumeric(totalPurchase)) {
             throw new InvalidFormatException(totalPurchase);
         }
     }
 
     private void validatePositive(final String totalPurchase) {
         int money = Integer.parseInt(totalPurchase);
-        if ( money < 0 ) {
+        if (money < 0) {
             throw new NegativeElementException(totalPurchase);
         }
     }
@@ -57,7 +57,7 @@ public class LottoGame {
     }
 
     public float getEarningsRate(final int totalPrize) {
-        return (float)totalPrize/(getCount() * PER_SALE_PRICE);
+        return (float) totalPrize / (getCount() * PER_SALE_PRICE);
     }
 
     @Override

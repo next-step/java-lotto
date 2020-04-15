@@ -16,6 +16,6 @@ public class ResultView {
         printTitle();
         final String printFormula = formula.replaceAll(CUSTOM_SEPARATOR_PHASE, EMPTY_STRING);
         final String print = StringUtils.isNullOrEmpty(printFormula) ? "[INPUT NONE]" : printFormula;
-        System.out.println( print + " = " + result );
+        System.out.println(print + " = " + result);
     }
 }

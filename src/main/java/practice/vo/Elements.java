@@ -25,11 +25,11 @@ public class Elements {
 
     private List<Integer> parse(final String formula) {
 
-        if ( StringUtils.isNullOrEmpty(formula) ) {
+        if (StringUtils.isNullOrEmpty(formula)) {
             return new ArrayList<>();
         }
 
-        return makeArrayToListWithValidation( split(formula) );
+        return makeArrayToListWithValidation(split(formula));
     }
 
     private String[] split(final String formula) {
@@ -52,14 +52,14 @@ public class Elements {
     }
 
     private int validateElementNumeric(final String item) {
-        if ( !StringUtils.isNumeric(item) ) {
+        if (!StringUtils.isNumeric(item)) {
             throw new InvalidFormatException(item);
         }
         return Integer.parseInt(item);
     }
 
     private int validateElementNegative(final int item) {
-        if ( item < 0 ) {
+        if (item < 0) {
             throw new NegativeElementException(item);
         }
         return item;
@@ -78,13 +78,13 @@ public class Elements {
 
     @Override
     public boolean equals(Object obj) {
-        if ( obj instanceof Elements ) {
-            return this.elements.equals( ((Elements)obj).elements );
+        if (obj instanceof Elements) {
+            return this.elements.equals(((Elements) obj).elements);
         }
-        if ( obj instanceof Integer[] ) {
-            return this.elements.equals( Arrays.asList( (Integer[]) obj ) );
+        if (obj instanceof Integer[]) {
+            return this.elements.equals(Arrays.asList((Integer[]) obj));
         }
-        return this.elements.equals( obj );
+        return this.elements.equals(obj);
     }
 
     @Override
