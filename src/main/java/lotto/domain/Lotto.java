@@ -14,7 +14,7 @@ public class Lotto {
     private Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
-    public static Object of(List<Integer> lottoNumbers) {
+    public static Lotto of(List<Integer> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
