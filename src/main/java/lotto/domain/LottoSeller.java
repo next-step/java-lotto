@@ -5,6 +5,9 @@ import java.util.List;
 
 public class LottoSeller {
     public static List<Object> buy(int buyCount) {
+        if (buyCount < 1) {
+            throw new IllegalArgumentException("1개 이상 구매 가능");
+        }
         List<Object> lottos = new ArrayList<>();
         for (int i = 0; i < buyCount; i++) {
             lottos.add(new Object());
