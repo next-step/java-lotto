@@ -9,10 +9,10 @@ import static org.assertj.core.api.Assertions.*;
 
 class LottoSellerTest {
 
-    @DisplayName("입력한 만큼 로또 구매")
+    @DisplayName("입력한 돈만큼 로또 구매")
     @Test
     void buy() {
-        List<Object> buy = LottoSeller.buy(5);
+        List<Lotto> buy = LottoSeller.buy(5000);
         assertThat(buy.size()).isEqualTo(5);
     }
 
