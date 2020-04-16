@@ -15,14 +15,25 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
     public static Object of(List<Integer> lottoNumbers) {
-        checkDuplicatedNumber(lottoNumbers);
+        validateLottoNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
+    }
+
+    private static void validateLottoNumbers(List<Integer> lottoNumbers) {
+        checkLottoSize(lottoNumbers);
+        checkDuplicatedNumber(lottoNumbers);
     }
 
     private static void checkDuplicatedNumber(List<Integer> lottoNumbers) {
         Set<Integer> numberSet = new HashSet<>(lottoNumbers);
         if (numberSet.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호 중복");
+        }
+    }
+
+    private static void checkLottoSize(List<Integer> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호가 6개가 아닙니다");
         }
     }
 
