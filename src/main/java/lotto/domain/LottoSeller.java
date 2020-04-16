@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoSeller {
-    public static ArrayList<Object> buy(int buyCount) {
+    public static List<Object> buy(int buyCount) {
         return null;
     }
 
@@ -12,4 +12,5 @@ public class LottoSeller {
         // TODO: compare
         return null;
     }
+
 }

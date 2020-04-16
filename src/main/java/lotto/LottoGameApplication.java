@@ -10,8 +10,6 @@ public class LottoGameApplication {
 
     public static void main(String[] args) {
         int money = InputView.inputMoney();
-        System.out.println(money);
-
         int buyCount = money / 1000;
         ResultView.printBuyCount(buyCount);
 
