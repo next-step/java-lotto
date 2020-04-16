@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class LottoTest {
 
-    @DisplayName("로또는 6개의 중복되지 않는 번호로 구성")
+    @DisplayName("로또는 6개의 번호로 구성")
     @Test
     void create() {
         assertThatCode(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6))).doesNotThrowAnyException();
