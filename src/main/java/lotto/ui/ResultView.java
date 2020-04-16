@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.domain.Lotto;
+
 import java.util.List;
 
 public class ResultView {
@@ -9,14 +11,14 @@ public class ResultView {
         System.out.println(buyCount + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<Object> lottos) {
+    public static void printLottos(List<Lotto> lottos) {
         // TODO: print
         //[8, 21, 23, 41, 42, 43]
         //[3, 5, 11, 16, 32, 38]
         //[7, 11, 16, 35, 36, 44]
     }
 
-    public static void printResults(List<Object> results) {
+    public static void printResults(List<Lotto> results) {
         // TODO: print
         //3개 일치 (5000원)- 1개
         //4개 일치 (50000원)- 0개
