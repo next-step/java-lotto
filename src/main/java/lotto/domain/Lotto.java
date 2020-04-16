@@ -16,6 +16,10 @@ public class Lotto {
         return new Lotto(LottoNumber.generate(LOTTO_SIZE));
     }
 
+    public static List<Integer> valueOf(Lotto lotto) {
+        return lotto.lottoNumbers;
+    }
+
     public Lotto(List<Integer> lottoNumbers) {
         if (Objects.isNull(lottoNumbers) || lottoNumbers.size() != LOTTO_SIZE) {
             throw new InvalidLottoNumbersException();
@@ -28,6 +32,24 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
+    public Rank getMatchResult(WinningNumbers winningNumbers) {
+        return Rank.getWinningType(countMatches(winningNumbers), isBonusMatched(winningNumbers));
+    }
+
+    private int countMatches(WinningNumbers winningNumbers) {
+        return toIntExact(Lotto.valueOf(winningNumbers.getWinningNumbers()).stream()
+                .filter(this::contains)
+                .count());
+    }
+
+    private boolean isBonusMatched(WinningNumbers winningNumbers) {
+        return lottoNumbers.contains(winningNumbers.getBonusNumber());
+    }
+
+    private boolean contains(Integer number) {
+        return lottoNumbers.contains(number);
+    }
+
     public String toString(String format, String delimiter) {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -37,21 +59,5 @@ public class Lotto {
         stringBuilder.append(String.format(format, joinedNumbers));
 
         return stringBuilder.toString();
-    }
-
-    public Winning getResult(List<Integer> winningNumbers) {
-        return Winning.getWinningType(toIntExact(countMatches(winningNumbers)));
-    }
-    private long countMatches(List<Integer> numbers) {
-        return numbers.stream()
-                .filter(this::contains)
-                .count();
-    }
-    private boolean contains(Integer number) {
-        return lottoNumbers.contains(number);
-    }
-
-    public static String calculateYield(int paidMoney, int profit) {
-        return String.format("%.2f", (float) profit / (float) paidMoney);
     }
 }

@@ -35,6 +35,39 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("1등 당첨 확인 테스트")
+    public void rankFirstCheckTest() {
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Rank result = lotto.getMatchResult(winningNumbers);
+
+        assertThat(result).isEqualTo(Rank.FIRST);
+    }
+
+    @Test
+    @DisplayName("2등 당첨 확인 테스트")
+    public void rankSecondCheckTest() {
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 40), 6);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Rank result = lotto.getMatchResult(winningNumbers);
+
+        assertThat(result).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("미당첨 확인 테스트")
+    public void loseGameCheckTest() {
+        WinningNumbers winningNumbers = WinningNumbers.getInstance(Arrays.asList(1, 2, 10, 12, 23, 35), 7);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Rank result = lotto.getMatchResult(winningNumbers);
+
+        assertThat(result).isEqualTo(Rank.LOSE);
+    }
+
+    @Test
     @DisplayName("로또 값을 정상적으로 string 변환하는지 테스트")
     public void lottoToStringTest() {
         List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -42,4 +75,5 @@ public class LottoTest {
 
         assertThat(lotto.toString("[%s]", ", ")).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
+
 }

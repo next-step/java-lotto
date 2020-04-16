@@ -17,31 +17,23 @@ public class Lottos {
     }
 
     public Lottos(Set<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableSet(lottos);
+        this.lottos = new HashSet<>(lottos);
     }
 
     public int size() {
         return lottos.size();
     }
 
-    public Map<Winning, Integer> getResult(List<Integer> winningNumber) {
-        Map<Winning, Integer> result = new HashMap<>();
+    public MatchResult getResult(WinningNumbers winningNumber) {
+        MatchResult matchResult = MatchResult.getInstance();
 
         for (Lotto lotto : lottos) {
-            Winning winning = lotto.getResult(winningNumber);
+            Rank rank = lotto.getMatchResult(winningNumber);
 
-            result.put(winning, getCountByWinningType(result, winning));
+            matchResult.updateResult(rank);
         }
 
-        return result;
-    }
-
-    private int getCountByWinningType(Map<Winning, Integer> result, Winning winning) {
-        if (result.containsKey(winning)) {
-            return result.get(winning) + 1;
-        }
-
-        return 1;
+        return matchResult;
     }
 
     public String toString(String format, String delimiter) {
