@@ -11,11 +11,8 @@ public class LottoGameApplication {
 
     public static void main(String[] args) {
         int money = InputView.inputMoney();
-        int buyCount = money / 1000;
-        ResultView.printBuyCount(buyCount);
-
-        List<Lotto> lottos = LottoSeller.buy(buyCount);
-        ResultView.printLottos(lottos);
+        List<Lotto> lottos = LottoSeller.buy(money);
+        ResultView.buyResult(lottos);
 
         String winningLottoNumbers = InputView.inputWinningLottoNumbers();
         // TODO: strings to lotto number

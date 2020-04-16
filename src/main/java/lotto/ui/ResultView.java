@@ -6,16 +6,17 @@ import java.util.List;
 
 public class ResultView {
 
-    public static void printBuyCount(int buyCount) {
-        // TODO: print
-        System.out.println(buyCount + "개를 구매했습니다.");
-    }
+    public static void buyResult(List<Lotto> lottos) {
+        printBuyCount(lottos.size());
 
-    public static void printLottos(List<Lotto> lottos) {
         // TODO: print
         //[8, 21, 23, 41, 42, 43]
         //[3, 5, 11, 16, 32, 38]
         //[7, 11, 16, 35, 36, 44]
+    }
+
+    private static void printBuyCount(int buyCount) {
+        System.out.println(buyCount + "개를 구매했습니다.");
     }
 
     public static void printResults(List<Lotto> results) {
