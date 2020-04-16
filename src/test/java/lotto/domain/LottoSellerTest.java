@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoSellerTest {
 
@@ -20,6 +19,7 @@ class LottoSellerTest {
     @DisplayName("1개 미만 로또 구매시 에러")
     @Test
     void buyFail() {
+        assertThatCode(() -> LottoSeller.buy(1)).doesNotThrowAnyException();
         assertThatIllegalArgumentException().isThrownBy(() -> LottoSeller.buy(0));
     }
 
