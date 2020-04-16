@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
     private List<Lotto> lottos;
@@ -15,6 +16,12 @@ public class Lottos {
         for (int i = 0; i < purchaseLottoCount(money); i++) {
             lottos.add(new Lotto(createRandomList()));
         }
+    }
+
+    static public List<Result> matches(Lotto winningLotto, int bonus, Lottos myLotto) {
+        return myLotto.getLottos().stream()
+                .map(lotto -> lotto.match(winningLotto, bonus))
+                .collect(Collectors.toList());
     }
 
     private List<Integer> createRandomList() {
