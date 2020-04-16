@@ -13,8 +13,6 @@ public class LottoGame {
     }
 
     public List<Result> matches(Lotto winningLotto, int bonus, Lottos myLottos) {
-        return myLottos.getLottos().stream()
-                .map(myLotto -> myLotto.match(winningLotto, bonus))
-                .collect(Collectors.toList());
+        return Lottos.matches(winningLotto, bonus, myLottos);
     }
 }
