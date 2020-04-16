@@ -29,7 +29,7 @@ public class ResultView {
 
         // 3등
         System.out.println("5개 일치 (1500000원)- " +
-                gameResults.stream().filter(result -> result.getRank().getMatchCount() == 5).count());
+                gameResults.stream().filter(result -> result.getRank().getMatchCount() == 5 && result.getRank() == Rank.THIRD).count());
 
         // 2등
         System.out.println("5개 일치, 보너스볼 일치 (3000000원)- " +
