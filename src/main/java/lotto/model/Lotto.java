@@ -14,12 +14,11 @@ public class Lotto {
     }
 
   public Result match(Lotto winningLotto, int bonus) {
-        int count = safeLongToInt(winningLotto.getNumbers().stream()
+      int count = safeLongToInt(winningLotto.getNumbers().stream()
                 .filter(number -> this.getNumbers().contains(number))
                 .count());
 
-        boolean isBonus = winningLotto.getNumbers().stream()
-                .anyMatch(number -> this.getNumbers().contains(bonus));
+      boolean isBonus = numbers.contains(bonus);
 
         return new Result(Rank.calcRank(count, isBonus));
     }
