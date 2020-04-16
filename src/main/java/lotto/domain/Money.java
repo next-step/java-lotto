@@ -1,17 +1,16 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Money {
     private static final int PRICE_OF_LOTTO = 1000;
-    private final int countOfLotto;
-    private final BigDecimal money;
+    private final int money;
 
     public Money(int money) {
         validateMoney(money);
-        this.countOfLotto = money / PRICE_OF_LOTTO;
-        this.money = new BigDecimal(String.valueOf(money));
+        this.money = money;
     }
 
     private void validateMoney(int money) {
@@ -21,11 +20,12 @@ public class Money {
     }
 
     public int getCountOfLotto() {
-        return countOfLotto;
+        return this.money / PRICE_OF_LOTTO;
     }
 
     public BigDecimal getEarningRate(int totalWinningMoney) {
-        return new BigDecimal(String.valueOf(totalWinningMoney)).divide(money, 2, BigDecimal.ROUND_FLOOR);
+        BigDecimal money = new BigDecimal(String.valueOf(this.money));
+        return new BigDecimal(String.valueOf(totalWinningMoney)).divide(money, 2, RoundingMode.FLOOR);
     }
 
     @Override

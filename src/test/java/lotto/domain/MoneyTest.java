@@ -22,6 +22,11 @@ public class MoneyTest {
     }
 
     @Test
+    public void getCountOfLotto() {
+        assertThat(money.getCountOfLotto()).isEqualTo(14);
+    }
+
+    @Test
     public void insufficientInputThrowException() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             money = new Money(999);
