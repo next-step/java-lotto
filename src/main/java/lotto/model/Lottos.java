@@ -11,6 +11,9 @@ public class Lottos {
     private static final int LOTTO_LIMIT_SIZE = 6;
 
     public Lottos() {}
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
     public Lottos(final int money) {
         this.lottos = new ArrayList<>();
         for (int i = 0; i < purchaseLottoCount(money); i++) {
