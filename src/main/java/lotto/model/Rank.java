@@ -26,9 +26,10 @@ public enum Rank {
     }
 
     public static Rank calcRank(int matchCount, boolean isBonus) {
-
         for (Rank rank : Rank.values()) {
-            if (rank.matchCount == matchCount) {
+            if (rank.matchCount == SECOND.matchCount && isBonus) {
+                return SECOND;
+            } else if (rank.matchCount == matchCount) {
                 return rank;
             }
         }
