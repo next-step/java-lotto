@@ -15,16 +15,16 @@ public class LottoNumberTest {
     @DisplayName("Number 생성 테스트")
     void createNewNumber() {
         final int number = 24;
-        final LottoNumber lottoNumber = LottoNumber.of(number);
-        assertThat(lottoNumber).isEqualTo(LottoNumber.of(number));
+        final LottoNumber lottoNumber = LottoNumber.from(number);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.from(number));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-2, 70})
     @DisplayName("Number 생성시 특정 값을 만들 때 에러 발생")
     void ErrorWhenCreateNumberWithOuterNumber(final int number) {
-        assertThatThrownBy(()->{
-            LottoNumber.of(number);
+        assertThatThrownBy(() -> {
+            LottoNumber.from(number);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
