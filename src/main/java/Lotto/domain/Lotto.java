@@ -3,8 +3,12 @@ package Lotto.domain;
 public class Lotto {
     private final LottoNumbers numbers;
 
-    public Lotto(final LottoNumbers numbers) {
+    private Lotto(final LottoNumbers numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto of(final LottoNumbers numbers) {
+        return new Lotto(numbers);
     }
 
     public WinningType getWinningTypeWithWinningNumbers(final LottoNumbers winningNumbers) {
