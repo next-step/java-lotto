@@ -10,7 +10,7 @@ public class LottoGroup {
     }
 
     public LottoGroup(Lotto... lottos) {
-        this.lottos = Arrays.asList(lottos.clone());
+        this(Arrays.asList(lottos));
     }
 
     public static LottoGroup buyLotto(int countOfLotto, List<String> manualLottoNumbers) {
