@@ -13,7 +13,7 @@ public class LottoNumbersGenerator {
 
     public static LottoNumbers createNewLotto() {
         Collections.shuffle(LOTTO_NUMBER_LIST);
-        return new LottoNumbers(LOTTO_NUMBER_LIST.subList(0, LottoNumbers.LOTTO_SIZE)
+        return LottoNumbers.of(LOTTO_NUMBER_LIST.subList(0, LottoNumbers.LOTTO_SIZE)
                 .stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toSet()));
