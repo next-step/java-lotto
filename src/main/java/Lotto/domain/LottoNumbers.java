@@ -1,16 +1,27 @@
 package Lotto.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int LOTTO_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumberSet;
 
-    public LottoNumbers(final Set<LottoNumber> lottoNumberSet) {
+    private LottoNumbers(final Set<LottoNumber> lottoNumberSet) {
         validateLottoSize(lottoNumberSet);
-        this.lottoNumberSet = new HashSet<>(lottoNumberSet);
+        this.lottoNumberSet = new TreeSet<>(lottoNumberSet);
+    }
+
+    public static LottoNumbers of(final Set<LottoNumber> lottoNumberSet) {
+        return new LottoNumbers(lottoNumberSet);
+    }
+
+    public static LottoNumbers of(final List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream().map(LottoNumber::from).collect(Collectors.toSet()));
     }
 
     private void validateLottoSize(final Set<LottoNumber> lottoNumberSet) {
@@ -21,12 +32,7 @@ public class LottoNumbers {
     }
 
     public int match(final LottoNumbers winningNumbers) {
-        int result = 0;
-        for (LottoNumber lottoNumber : this.lottoNumberSet) {
-            result += winningNumbers.increment(lottoNumber);
-        }
-
-        return result;
+        return this.lottoNumberSet.stream().mapToInt(winningNumbers::increment).sum();
     }
 
     public int increment(final LottoNumber number) {
