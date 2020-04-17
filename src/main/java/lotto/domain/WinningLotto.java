@@ -8,15 +8,12 @@ public class WinningLotto {
 
     public WinningLotto(String numbers, int bonusNumber) {
         this.winningLotto = Lotto.ofComma(numbers);
+        // TODO: 보너스 번호와 로또번호는 중복x
         this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public Lotto getWinningLotto() {
-        return winningLotto;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public Rank match(Lotto lotto) {
+        return Rank.valueOf(Math.toIntExact(lotto.match(winningLotto)), lotto.hasBonusNumber(bonusNumber));
     }
 
     @Override

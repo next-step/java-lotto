@@ -13,13 +13,22 @@ public class LottoGroup {
         this.lottos = Arrays.asList(lottos.clone());
     }
 
-    public static LottoGroup buyAutoSelectLotto(int countOfLotto) {
+    public static LottoGroup buyLotto(int countOfLotto, List<String> manualLottoNumbers) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String numbers : manualLottoNumbers) {
+            lottos.add(Lotto.ofComma(numbers));
+        }
+        lottos.addAll(buyAutoSelectLotto(countOfLotto));
+        return new LottoGroup(lottos);
+    }
+
+    private static List<Lotto> buyAutoSelectLotto(int countOfLotto) {
         List<Lotto> lottos = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < countOfLotto; i++) {
             lottos.add(Lotto.of(getNumbers(random)));
         }
-        return new LottoGroup(lottos);
+        return lottos;
     }
 
     private static List<Integer> getNumbers(Random random) {
@@ -37,7 +46,7 @@ public class LottoGroup {
     public Ranks matching(WinningLotto winningLotto) {
         List<Rank> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            result.add(lotto.match(winningLotto));
+            result.add(winningLotto.match(lotto));
         }
         return new Ranks(result);
     }

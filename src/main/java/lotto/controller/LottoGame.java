@@ -1,22 +1,20 @@
 package lotto.controller;
 
-import lotto.domain.LottoGroup;
-import lotto.domain.Money;
-import lotto.domain.Ranks;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class LottoGame {
     public void start() {
         Money money = new Money(InputView.getMoney());
-        LottoGroup lottoGroup = LottoGroup.buyAutoSelectLotto(money.getCountOfLotto());
+        int countOfManual = InputView.getManualSelectLottoCount();
+        List<String> manualLottoNumbers = InputView.getManualLottoNumbers(countOfManual);
+        LottoGroup lottoGroup = LottoGroup.buyLotto(money.getCountOfLotto() - countOfManual, manualLottoNumbers);
         ResultView.printLottoGroup(lottoGroup.getLottos());
-        String winningLottoNumbers = InputView.getWinningLotto();
-        int bonusNo = InputView.getBonusNo();
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNo);
+        WinningLotto winningLotto = new WinningLotto(InputView.getWinningLotto(), InputView.getBonusNo());
         Ranks ranks = lottoGroup.matching(winningLotto);
         BigDecimal earningRate = money.getEarningRate(ranks.getTotalWinningMoney());
         ResultView.printEarningRate(earningRate.toString());

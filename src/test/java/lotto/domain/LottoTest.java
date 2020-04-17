@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class LottoTest {
     private Lotto lotto;
@@ -48,38 +49,11 @@ public class LottoTest {
     }
 
     @Test
-    public void match_6개_1등_테스트() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIRST);
-    }
-
-    @Test
-    public void match_5개_보너스_매치_2등_테스트() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,7", 6);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.SECOND);
-    }
-
-    @Test
-    public void match_5개_3등_테스트() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,7", 8);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.THIRD);
-    }
-
-    @Test
-    public void match_4개_4등_테스트() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,7,8", 9);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FOURTH);
-    }
-
-    @Test
-    public void match_3개_5등_테스트() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,7,8,9", 6);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.FIFTH);
-    }
-
-    @Test
-    public void match_보너스_포함_3개_테스트() {
-        WinningLotto winningLotto = new WinningLotto("1,2,7,8,9,10", 6);
-        assertThat(lotto.match(winningLotto)).isEqualTo(Rank.MISS);
+    public void match() {
+        assertAll(
+                () -> assertThat(lotto.match(Lotto.of(1, 2, 3, 4, 5, 6))).isEqualTo(6),
+                () -> assertThat(lotto.match(Lotto.of(1, 2, 3, 7, 8, 9))).isEqualTo(3),
+                () -> assertThat(lotto.match(Lotto.of(7, 8, 9, 10, 11, 12))).isEqualTo(0)
+        );
     }
 }
