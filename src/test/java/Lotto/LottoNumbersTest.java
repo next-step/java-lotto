@@ -18,19 +18,19 @@ public class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        lackNumberSet.add(LottoNumber.of(1));
-        lackNumberSet.add(LottoNumber.of(4));
-        lackNumberSet.add(LottoNumber.of(6));
-        lackNumberSet.add(LottoNumber.of(14));
-        lackNumberSet.add(LottoNumber.of(24));
+        lackNumberSet.add(LottoNumber.from(1));
+        lackNumberSet.add(LottoNumber.from(4));
+        lackNumberSet.add(LottoNumber.from(6));
+        lackNumberSet.add(LottoNumber.from(14));
+        lackNumberSet.add(LottoNumber.from(24));
 
         final Set<LottoNumber> lottoNumbers = new TreeSet<>();
-        lottoNumbers.add(LottoNumber.of(1));
-        lottoNumbers.add(LottoNumber.of(4));
-        lottoNumbers.add(LottoNumber.of(6));
-        lottoNumbers.add(LottoNumber.of(14));
-        lottoNumbers.add(LottoNumber.of(24));
-        lottoNumbers.add(LottoNumber.of(30));
+        lottoNumbers.add(LottoNumber.from(1));
+        lottoNumbers.add(LottoNumber.from(4));
+        lottoNumbers.add(LottoNumber.from(6));
+        lottoNumbers.add(LottoNumber.from(14));
+        lottoNumbers.add(LottoNumber.from(24));
+        lottoNumbers.add(LottoNumber.from(30));
 
         numbers = new LottoNumbers(lottoNumbers);
     }
@@ -46,7 +46,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또에서 숫자가 잘 들어있는지 확인하는 테스트")
     void containsTest() {
-        final LottoNumber number = LottoNumber.of(6);
-        assertThat(numbers.contains(number)).isTrue();
+        final LottoNumber number = LottoNumber.from(6);
+        assertThat(numbers.increment(number)).isEqualTo(1);
     }
 }
