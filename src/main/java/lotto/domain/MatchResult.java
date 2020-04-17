@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class MatchResult {
     private static final int DEFAULT_MATCH_COUNT = 0;
+    private static final int COUNT = 1;
 
     private Map<Rank, Integer> result;
 
@@ -18,10 +19,10 @@ public class MatchResult {
 
     public void updateResult(Rank rank) {
         if (result.containsKey(rank)) {
-            result.put(rank, result.get(rank) + 1);
+            result.replace(rank, result.get(rank) + COUNT);
         }
 
-        result.put(rank, 1);
+        result.put(rank, COUNT);
     }
 
     public int getOrDefault(Rank rank) {
