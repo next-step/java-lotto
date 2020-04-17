@@ -26,7 +26,7 @@ public enum  WinningType {
         return winningMoney;
     }
 
-    public static WinningType valueOf(int countOfMatch) {
+    public static WinningType valueOf(final int countOfMatch) {
         return Stream.of(WinningType.values())
                 .filter(value-> value.getCountOfMatch() == countOfMatch)
                 .findFirst()
