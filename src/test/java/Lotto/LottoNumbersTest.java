@@ -32,14 +32,14 @@ public class LottoNumbersTest {
         lottoNumbers.add(LottoNumber.from(24));
         lottoNumbers.add(LottoNumber.from(30));
 
-        numbers = new LottoNumbers(lottoNumbers);
+        numbers = LottoNumbers.of(lottoNumbers);
     }
 
     @Test
     @DisplayName("로또 부족한 형태로 생성시 에러 발생")
     void ErrorOnLottoNumberSizeTest() {
         assertThatThrownBy(() -> {
-            new LottoNumbers(lackNumberSet);
+            LottoNumbers.of(lackNumberSet);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
