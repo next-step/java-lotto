@@ -20,7 +20,16 @@ public class LottoNumbers {
         }
     }
 
-    public boolean contains(LottoNumber number) {
-        return this.lottoNumberSet.contains(number);
+    public int match(final LottoNumbers winningNumbers) {
+        int result = 0;
+        for (LottoNumber lottoNumber : this.lottoNumberSet) {
+            result += winningNumbers.increment(lottoNumber);
+        }
+
+        return result;
+    }
+
+    public int increment(final LottoNumber number) {
+        return this.lottoNumberSet.contains(number) ? 1 : 0;
     }
 }
