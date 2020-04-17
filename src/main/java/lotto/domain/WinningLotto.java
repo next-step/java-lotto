@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class WinningLotto {
     private Lotto winningLotto;
@@ -8,8 +9,15 @@ public class WinningLotto {
 
     public WinningLotto(String numbers, int bonusNumber) {
         this.winningLotto = Lotto.ofComma(numbers);
-        // TODO: 보너스 번호와 로또번호는 중복x
         this.bonusNumber = LottoNumber.of(bonusNumber);
+        validateBonusNumber(this.bonusNumber);
+    }
+
+    private void validateBonusNumber(LottoNumber bonusNumber) {
+        Set<LottoNumber> numbers = winningLotto.getLottoNumbers();
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
     }
 
     public Rank match(Lotto lotto) {

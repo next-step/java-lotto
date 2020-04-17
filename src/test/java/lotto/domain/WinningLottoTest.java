@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class WinningLottoTest {
     private WinningLotto winningLotto;
@@ -18,6 +19,13 @@ public class WinningLottoTest {
     @Test
     public void equal() {
         assertThat(winningLotto).isEqualTo(new WinningLotto(numbers, bonusNumber));
+    }
+
+    @Test
+    public void 로또번호_보너스번호_중복X() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+           new WinningLotto("1,2,3,4,5,6", 6);
+        });
     }
 
     @Test
