@@ -60,15 +60,8 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
-    public String toString(String format, String delimiter) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        String joinedNumbers = lottoNumbers.stream()
-                .map(num -> Integer.toString(LottoNumber.valueOf(num)))
-                .collect(Collectors.joining(delimiter));
-        stringBuilder.append(String.format(format, joinedNumbers));
-
-        return stringBuilder.toString();
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
 }

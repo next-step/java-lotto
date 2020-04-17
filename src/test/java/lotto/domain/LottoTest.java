@@ -46,14 +46,4 @@ public class LottoTest {
                 });
     }
 
-
-    @Test
-    @DisplayName("로또 값을 정상적으로 string 변환하는지 테스트")
-    public void lottoToStringTest() {
-        List<Integer> expect = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotto lotto = Lotto.of(expect);
-
-        assertThat(lotto.toString("[%s]", ", ")).isEqualTo("[1, 2, 3, 4, 5, 6]");
-    }
-
 }

@@ -7,24 +7,40 @@ public class Lottos {
 
     private final Set<Lotto> lottos;
 
+    public Lottos() {
+        this.lottos = new LinkedHashSet<>();
+    }
+
     public Lottos(int paidMoney) {
-        lottos = new HashSet<>();
+        this.lottos = new LinkedHashSet<>();
 
         int count = paidMoney / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.getNewInstance());
+            this.lottos.add(Lotto.getNewInstance());
         }
     }
 
     public Lottos(Set<Lotto> lottos) {
-        this.lottos = new HashSet<>(lottos);
+        this.lottos = new LinkedHashSet<>(lottos);
     }
 
     public int size() {
-        return lottos.size();
+        return this.lottos.size();
     }
 
-    public MatchResult getResult(WinningNumbers winningNumber) {
+    public Lottos add(Lotto lotto) {
+        this.lottos.add(lotto);
+
+        return this;
+    }
+
+    public Lottos addAll(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+
+        return this;
+    }
+
+    public MatchResult getMatchResult(WinningNumbers winningNumber) {
         MatchResult matchResult = MatchResult.getInstance();
 
         for (Lotto lotto : lottos) {
@@ -36,13 +52,7 @@ public class Lottos {
         return matchResult;
     }
 
-    public String toString(String format, String delimiter) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.toString(format, delimiter));
-        }
-
-        return stringBuilder.toString();
+    public Set<Lotto> getLottos() {
+        return this.lottos;
     }
 }

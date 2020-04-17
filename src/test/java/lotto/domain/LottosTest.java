@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -33,18 +32,6 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("발행된 로또 값을 정상적으로 string 변환하는지 테스트")
-    public void LottoToStringTest() {
-        List<String> toStringExpect = Arrays.asList("[1, 2, 3, 4, 5, 6]","[2, 3, 4, 5, 6, 7]","[3, 4, 5, 6, 7, 8]");
-
-        Lottos lottos = new Lottos(generateLottos());
-
-        for (String expect : toStringExpect) {
-            assertTrue(lottos.toString("[%s]\n", ", ").contains(expect));
-        }
-    }
-
-    @Test
     @DisplayName("당첨 결과 생성 테스트")
     public void winningResultTset(){
         Set<Lotto> expect = generateLottoValueWithNotMatching();
@@ -52,7 +39,7 @@ public class LottosTest {
 
         WinningNumbers winningNumber = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 40);
 
-        MatchResult matchResult = lottos.getResult(winningNumber);
+        MatchResult matchResult = lottos.getMatchResult(winningNumber);
 
         assertThat(matchResult.getOrDefault(Rank.FIRST)).isEqualTo(1);
         assertThat(matchResult.getOrDefault(Rank.THIRD)).isEqualTo(1);

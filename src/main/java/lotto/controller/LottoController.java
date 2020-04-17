@@ -9,16 +9,15 @@ public class LottoController {
 
     public static void lottoGameStart() {
         int paidMoney = InputView.getMoney();
+        int manualLottoCount = InputView.getManualLottoCount();
 
-        Lottos lottos = new Lottos(paidMoney);
-        ResultView.printLottos(lottos);
-
+        Lottos manualLottos = InputView.getLottos(manualLottoCount);
+        Lottos autoLottos = new Lottos(paidMoney);
+        ResultView.printLottos(manualLottos, autoLottos);
 
         ResultView.printLottoResult(
-                LottoService.playLotto(lottos, InputView.getWinnerNumber()),
+                LottoService.playLotto(manualLottos.addAll(autoLottos), InputView.getWinnerNumbers()),
                 paidMoney);
     }
-
-
 
 }
