@@ -41,6 +41,10 @@ public enum Rank {
     }
 
     private boolean isMatchCondition(int countOfMatch, boolean matchBonus) {
+        if (countOfMatch == 6 && matchBonus) {
+            throw new IllegalArgumentException();
+        }
+
         if (countOfMatch == 5) {
             return Objects.equals(this.countOfMatch, countOfMatch)
                     && Objects.equals(this.matchBonus, matchBonus);
