@@ -12,7 +12,7 @@ public class Lottos {
 
         int count = paidMoney / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.of());
+            lottos.add(Lotto.getNewInstance());
         }
     }
 
@@ -28,7 +28,7 @@ public class Lottos {
         MatchResult matchResult = MatchResult.getInstance();
 
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.getMatchResult(winningNumber);
+            Rank rank = winningNumber.getMatchResult(lotto);
 
             matchResult.updateResult(rank);
         }

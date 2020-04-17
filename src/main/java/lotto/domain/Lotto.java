@@ -10,43 +10,53 @@ import static java.lang.Math.toIntExact;
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public static Lotto of() {
-        return new Lotto(LottoNumber.generate(LOTTO_SIZE));
+    public static Lotto getNewInstance() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (int i = 0; i < LOTTO_SIZE; i++) {
+            lottoNumbers.add(LottoNumber.getRandomInstance());
+        }
+        Collections.sort(lottoNumbers);
+
+        return new Lotto(lottoNumbers);
     }
 
-    public static List<Integer> valueOf(Lotto lotto) {
-        return lotto.lottoNumbers;
-    }
-
-    public Lotto(List<Integer> lottoNumbers) {
-        if (Objects.isNull(lottoNumbers) || lottoNumbers.size() != LOTTO_SIZE) {
+    public static Lotto of(List<Integer> numbers) {
+        if (!isValidNumbers(numbers)) {
             throw new InvalidLottoNumbersException();
         }
 
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+        return new Lotto(numbers.stream()
+                .map(LottoNumber::getInstance)
+                .collect(Collectors.toList()));
+    }
+
+    private static boolean isValidNumbers(List<Integer> numbers) {
+        return !Objects.isNull(numbers) &&
+                numbers.size() == LOTTO_SIZE;
+    }
+
+    public static List<LottoNumber> valueOf(Lotto lotto) {
+        return lotto.lottoNumbers;
+    }
+
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public int size() {
         return lottoNumbers.size();
     }
 
-    public Rank getMatchResult(WinningNumbers winningNumbers) {
-        return Rank.getWinningType(countMatches(winningNumbers), isBonusMatched(winningNumbers));
-    }
-
-    private int countMatches(WinningNumbers winningNumbers) {
-        return toIntExact(Lotto.valueOf(winningNumbers.getWinningNumbers()).stream()
-                .filter(this::contains)
+    public int countMatches(Lotto lotto) {
+        return toIntExact(Lotto.valueOf(lotto).stream()
+                .filter(this::isContain)
                 .count());
     }
 
-    private boolean isBonusMatched(WinningNumbers winningNumbers) {
-        return lottoNumbers.contains(winningNumbers.getBonusNumber());
-    }
-
-    private boolean contains(Integer number) {
+    public boolean isContain(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 
@@ -54,10 +64,11 @@ public class Lotto {
         StringBuilder stringBuilder = new StringBuilder();
 
         String joinedNumbers = lottoNumbers.stream()
-                .map(num -> Integer.toString(num))
+                .map(num -> Integer.toString(LottoNumber.valueOf(num)))
                 .collect(Collectors.joining(delimiter));
         stringBuilder.append(String.format(format, joinedNumbers));
 
         return stringBuilder.toString();
     }
+
 }

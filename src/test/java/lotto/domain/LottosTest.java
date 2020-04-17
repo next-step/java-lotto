@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -63,9 +64,9 @@ public class LottosTest {
     private Set<Lotto> generateLottos() {
         Set<Lotto> lottoNumbers = new HashSet<>();
 
-        lottoNumbers.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoNumbers.add(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
-        lottoNumbers.add(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
 
         return lottoNumbers;
     }
@@ -73,8 +74,12 @@ public class LottosTest {
     private Set<Lotto> generateLottoValueWithNotMatching() {
         Set<Lotto> lottoNumbers = generateLottos();
 
-        lottoNumbers.add(new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
 
         return lottoNumbers;
+    }
+
+    private Lotto numbersToLotto(List<Integer> numbers) {
+        return Lotto.of(numbers);
     }
 }
