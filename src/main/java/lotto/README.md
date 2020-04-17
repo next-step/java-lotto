@@ -68,3 +68,39 @@
   - 참고문서: https://google.github.io/styleguide/javaguide.html 또는 https://myeonguni.tistory.com/1596
 - else 예약어를 사용하지 않을 것
   - switch/case도 허용하지 않음
+  
+  
+  
+# 4단계 - 로또 (수)
+
+## 요구사항
+
+### 기능 요구사항
+
+* InputView
+  - [ ] 수동으로 구매 할 로또 갯수 입력받기
+  - [ ] 수동 로또 번호 입력받기
+* Lottos
+  - [ ] 수동 로또 번호가 리스트의 가장 앞에 가도록
+* LottoService
+  - [ ] 로또 게임의 결과값은 DTO 형식 반환
+* ResultView
+  - [ ] 수동/자동 로또의 갯수 출
+
+### 프로그래밍 요구사항
+
+- 모든 기능을 TDD로 구현 - 모든 단위 테스트가 존재해야 함
+  - UI(System.out, System.in) 로직은 제외
+  - Domain 로직 코드와 UI를 담당 로직 구분
+  - UI 로직 : InputView, ResultView와 같은 클래스를 추가해 분리
+- java enum을 적용해 프로그래밍
+- 규칙 3: 모든 원시값과 문자열을 포장한다.
+- 규칙 5: 줄여쓰지 않는다(축약 금지).
+- 규칙 8: 일급 컬렉션 사
+- 예외 처리를 통해 에러가 발생하지 않도록 한다.
+- indent(인덴트, 들여쓰기) depth < 2
+- 함수의 길이 < 15라인
+- 자바 코드 컨벤션을 지키면서 프로그래밍
+  - 참고문서: https://google.github.io/styleguide/javaguide.html 또는 https://myeonguni.tistory.com/1596
+- else 예약어를 사용하지 않을 것
+  - switch/case도 허용하지 않음
