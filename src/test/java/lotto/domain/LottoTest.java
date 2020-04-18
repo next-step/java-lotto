@@ -30,9 +30,9 @@ class LottoTest {
     @DisplayName("콤마 구분 문자열로 로또 생성")
     @Test
     void ofComma() {
-        Lotto lotto = Lotto.of(Arrays.asList(
-                1, 2, 3, 4, 5, 6
-        ));
+        Lotto lotto = Lotto.of(
+                Arrays.asList(1, 2, 3, 4, 5, 6)
+        );
         assertThat(Lotto.ofComma("1,2,3,4,5,6")).isEqualTo(lotto);
     }
 

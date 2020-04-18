@@ -15,7 +15,16 @@ public class Lotto {
     }
 
     public static Lotto ofComma(String lottoNumbersString) {
-        return null;
+        List<Integer> collect = getIntLottoNumbers(lottoNumbersString);
+        return of(collect);
+    }
+
+    private static List<Integer> getIntLottoNumbers(String lottoNumbersString) {
+        // TODO: validate
+        String[] lottoNumbers = lottoNumbersString.split(",");
+        return Arrays.stream(lottoNumbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public static Lotto of(List<Integer> lottoNumbers) {
@@ -43,6 +52,26 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return lottoNumbers.equals(lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 
 }
