@@ -11,13 +11,17 @@ public class Lottos {
         this.lottos = new LinkedHashSet<>();
     }
 
-    public Lottos(int paidMoney) {
+    public Lottos(int lottoPrice) {
         this.lottos = new LinkedHashSet<>();
 
-        int count = paidMoney / LOTTO_PRICE;
+        int count = lottoPrice / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
             this.lottos.add(Lotto.getNewInstance());
         }
+    }
+
+    public Lottos(int paidMoney, int generatedCount) {
+        this(paidMoney - generatedCount * LOTTO_PRICE);
     }
 
     public Lottos(Set<Lotto> lottos) {
