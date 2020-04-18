@@ -54,6 +54,18 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    public int match(Lotto lotto) {
+        int match = 0;
+        for (int lottoNumber : lottoNumbers) {
+            match += lotto.get1IfContains(lottoNumber);
+        }
+        return match;
+    }
+
+    private int get1IfContains(int lottoNumber) {
+        return lottoNumbers.contains(lottoNumber) ? 1 : 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,10 +84,6 @@ public class Lotto {
         return "Lotto{" +
                 "lottoNumbers=" + lottoNumbers +
                 '}';
-    }
-
-    public int match(Lotto winningLotto) {
-        return 0;
     }
 
 }

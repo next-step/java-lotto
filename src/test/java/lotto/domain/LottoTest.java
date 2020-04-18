@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
@@ -37,12 +39,13 @@ class LottoTest {
     }
 
     @DisplayName("다른 로또와 당첨 비교")
-    @Test
-    void match() {
-        Lotto buyLotto = Lotto.ofComma("1,2,3,4,5,6");
+    @ParameterizedTest
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5"}, delimiter = ':')
+    void matchAll(String lottoNumbers, int expected) {
         Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
+        Lotto buyLotto = Lotto.ofComma(lottoNumbers);
 
-        assertThat(winningLotto.match(buyLotto)).isEqualTo(6);
+        assertThat(winningLotto.match(buyLotto)).isEqualTo(expected);
     }
 
 }
