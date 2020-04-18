@@ -82,8 +82,6 @@
   - [x] 수동 로또 번호 입력받기
 * Lottos
   - [x] 수동 로또 번호가 리스트의 가장 앞에 가도록 (-> Lottos가 아닌 Controlelr에서 처리)
-* LottoService
-  - [ ] 로또 게임의 결과값은 DTO 형식 반환
 * ResultView
   - [x] 수동/자동 로또의 갯수 출력
 
