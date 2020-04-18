@@ -11,7 +11,16 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
+    public LottoNumbers getNumbers() {
+        return this.numbers;
+    }
+
     public WinningType getWinningTypeWithWinningNumbers(final LottoNumbers winningNumbers) {
         return WinningType.valueOf(numbers.match(winningNumbers));
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
