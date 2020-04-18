@@ -6,11 +6,9 @@ import java.util.*;
 public class LottoPaper {
 
     private final int LOTTO_NUMBER_BOUND = 45;
-    private final int LOTTO_MAX_LENGTH = 8;
+    private final int LOTTO_MAX_LENGTH = 6;
 
     private List<Integer> lottoNumbers;
-    private int bonusNumber;
-    Map<String, Object> lottoNumberMap;
 
     public LottoPaper() {
         makeDeal();
@@ -29,7 +27,7 @@ public class LottoPaper {
          lottoNumbers.add(Integer.parseInt(manualNumbers));
     }
 
-    private Map<String, Object> makeDeal() {
+    private List<Integer> makeDeal() {
         lottoNumbers = new ArrayList<>();
 
         for (int i = 1; i <= LOTTO_NUMBER_BOUND; i++) {
@@ -37,17 +35,12 @@ public class LottoPaper {
         }
 
         Collections.shuffle(lottoNumbers);
+
         lottoNumbers = lottoNumbers.subList(0, LOTTO_MAX_LENGTH);
-        bonusNumber = lottoNumbers.get(lottoNumbers.size() - 1);
-        lottoNumbers = lottoNumbers.subList(0, LOTTO_MAX_LENGTH - 1);
 
         Collections.sort(lottoNumbers);
 
-        lottoNumberMap = new HashMap<>();
-        lottoNumberMap.put("lottoNumbers", lottoNumbers);
-        lottoNumberMap.put("bonusNumber", bonusNumber);
-
-        return lottoNumberMap;
+        return lottoNumbers;
     }
 
     public int getSize() {
@@ -62,4 +55,11 @@ public class LottoPaper {
         return lottoNumbers.contains(value);
     }
 
+    public boolean isMatchNumber(int prizeNumber) {
+        return lottoNumbers.contains(prizeNumber);
+    }
+
+    public boolean isMatchBonus(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

@@ -30,7 +30,7 @@ public class LottoInGame {
 
         for (int i = 0; i < prizeNumbers.getPrizeStorage().size(); i++) {
             int prizeNumber = prizeNumbers.getPrizeStorage().get(i);
-            count += ((List<Integer>) paper.lottoNumberMap.get("lottoNumbers")).contains(prizeNumber) ? 1 : 0;
+            count += paper.isMatchNumber(prizeNumber) ? 1 : 0;
         }
 
         if (count == 5) {
@@ -41,10 +41,6 @@ public class LottoInGame {
     }
 
     public boolean isBonusWin(LottoPaper paper, PrizeNumbers prizeNumbers) {
-        boolean bonusWin;
-
-        bonusWin = ((int) paper.lottoNumberMap.get("bonusNumber")) == prizeNumbers.getBonusNumber();
-
-        return bonusWin;
+        return paper.isMatchBonus(prizeNumbers.getBonusNumber());
     }
 }

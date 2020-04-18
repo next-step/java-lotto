@@ -23,8 +23,9 @@ public class LottoProgressTest {
         lottoPaper = new LottoPaper();
 
         quantity = lottoInGame.translateAmountToQuantity(amount);
-
-        lottoBundle = new LottoBundle(quantity);
+        String[] manuals = new String[1];
+        manuals[0] = "1,2,3,4,5,6";
+        lottoBundle = new LottoBundle(quantity, manuals);
 
         prizeList.add(2);
         prizeList.add(3);

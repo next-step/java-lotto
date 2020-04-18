@@ -21,7 +21,7 @@ public class ResultView {
     public void lottoNumberShower(LottoPaper paper) {
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        for (int i = 0; i < paper.getSize() - 1; i++) {
+        for (int i = 0; i < paper.getSize(); i++) {
             builder.append(paper.getNumber(i));
             builder.append(",");
         }
@@ -46,10 +46,9 @@ public class ResultView {
         System.out.println("5개 일치 (1500000원) - " + winnerCount[3]+"개");
         System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + winnerCount[2] + "개");
         System.out.println("6개 일치 (2000000000원) - " + winnerCount[1]+"개");
-        double winPrize = winnerCount[5] *  Rank.FIFTH.getWinningMoney() + winnerCount[4] * Rank.FOURTH.getWinningMoney()
-                + winnerCount[3] * Rank.THIRD.getWinningMoney() + winnerCount[2] * Rank.SECOND.getWinningMoney() +
-                winnerCount[1] * Rank.FIRST.getWinningMoney();
-        double rate = winPrize == 0 ? 0 : Math.round(((winPrize / amount.getAmount()) * 100)/100.0);
+
+        double rate = calculateRate(calculateWinPrize(winnerCount), amount);
+
         System.out.println("총 수익률은 " + rate + "입니다.");
 
     }
@@ -69,5 +68,15 @@ public class ResultView {
         }
 
         return count;
+    }
+
+    private double calculateWinPrize(int[] winnerCount) {
+        return winnerCount[5] *  Rank.FIFTH.getWinningMoney() + winnerCount[4] * Rank.FOURTH.getWinningMoney()
+                + winnerCount[3] * Rank.THIRD.getWinningMoney() + winnerCount[2] * Rank.SECOND.getWinningMoney() +
+                winnerCount[1] * Rank.FIRST.getWinningMoney();
+    }
+
+    private double calculateRate(double winPrize, Amount amount) {
+        return winPrize == 0 ? 0 : Math.round(((winPrize / amount.getAmount()) * 100)/100.0);
     }
 }

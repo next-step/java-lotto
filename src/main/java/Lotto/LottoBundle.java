@@ -12,8 +12,7 @@ public class LottoBundle {
     public LottoBundle(int quantity, String[] manuals) {
         lottoPapers = new ArrayList<>();
         for (int i = 0; i < manuals.length; i++) {
-            LottoPaper lottoPaper = new LottoPaper(manuals[i]);
-            lottoPapers.add(lottoPaper);
+            lottoPapers.add(new LottoPaper(manuals[i]));
         }
 
         for (int i = 0; i < quantity - manuals.length; i++) {
