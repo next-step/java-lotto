@@ -13,7 +13,19 @@ public class LottoResult {
         }
     }
 
+    public Map<WinningType, Integer> getResults() {
+        return results;
+    }
+
     public void insertResult(final WinningType winningType) {
         this.results.put(winningType, this.results.get(winningType) + 1);
+    }
+
+    public float getEarningRate(final Money money) {
+        float totalEarningMoney = 0f;
+        for (WinningType type : results.keySet()) {
+            totalEarningMoney += results.get(type) * type.getWinningMoney();
+        }
+        return totalEarningMoney / money.getAmount();
     }
 }
