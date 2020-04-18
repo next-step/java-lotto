@@ -36,4 +36,13 @@ class LottoTest {
         assertThat(Lotto.ofComma("1,2,3,4,5,6")).isEqualTo(lotto);
     }
 
+    @DisplayName("다른 로또와 당첨 비교")
+    @Test
+    void match() {
+        Lotto buyLotto = Lotto.ofComma("1,2,3,4,5,6");
+        Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
+
+        assertThat(winningLotto.match(buyLotto)).isEqualTo(6);
+    }
+
 }

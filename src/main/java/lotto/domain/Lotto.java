@@ -74,4 +74,8 @@ public class Lotto {
                 '}';
     }
 
+    public int match(Lotto winningLotto) {
+        return 0;
+    }
+
 }

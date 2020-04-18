@@ -16,9 +16,8 @@ public class LottoGameApplication {
 
         String winningLottoNumbers = InputView.inputWinningLottoNumbers();
         Lotto winningLotto = Lotto.ofComma(winningLottoNumbers);
-        System.out.println(winningLotto);
         // TODO: strings to lotto number
-//        List<Lotto> results = LottoSeller.match(lottos, winningLottoNumbers);
+        List<Lotto> results = LottoSeller.match(lottos, winningLotto);
 //        ResultView.printResults(results);
     }
 

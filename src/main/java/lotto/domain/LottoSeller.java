@@ -14,7 +14,7 @@ public class LottoSeller {
         return LottoMachine.generate(buyCount);
     }
 
-    public static List<Lotto> match(List<Lotto> lottos, String winningLottoNumbers) {
+    public static List<Lotto> match(List<Lotto> lottos, Lotto winningLotto) {
         // TODO: compare
         return null;
     }
