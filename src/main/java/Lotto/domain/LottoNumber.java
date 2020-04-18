@@ -18,15 +18,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     private LottoNumber(int number) {
-        validateNumber(number);
         this.number = number;
     }
 
     public static LottoNumber from(int number) {
+        validateNumber(number);
         return numberMap.get(number);
     }
 
-    private void validateNumber(final int number) {
+    private static void validateNumber(final int number) {
         if (LOTTO_START_NUMBER > number || LOTTO_LAST_NUMBER < number) {
             throw new IllegalArgumentException("Not Allowed Number: " + number);
         }
@@ -48,5 +48,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.number);
     }
 }
