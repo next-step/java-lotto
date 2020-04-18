@@ -20,7 +20,7 @@ public class InputView {
     private static final String MANUAL_LOTTO_COUNT_NOTICE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_COUNT_INVALID_NOTICE = "0 이상의 숫자 값을 입력해 주세요.";
     private static final String MANUAL_LOTTO_NUMBERS_NOTICE = "\n수동으로 구매할 번호를 입력해 주세요.";
-    private static final String WINNING_NUMBERS_NOTICE = "\n지난 주 당첨 번호를 입력해 주세요.";
+    private static final String WINNING_NUMBERS_NOTICE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_NOTICE = "보너스 볼을 입력해 주세요.";
 
     private static final int MONEY_DEFAULT = 0;

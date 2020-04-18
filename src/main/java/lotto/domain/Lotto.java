@@ -13,11 +13,7 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public static Lotto getNewInstance() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            lottoNumbers.add(LottoNumber.getRandomInstance());
-        }
+        List<LottoNumber> lottoNumbers = LottoNumber.getRandomListInstance(LOTTO_SIZE);
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);

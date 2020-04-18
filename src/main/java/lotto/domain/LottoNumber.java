@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.exception.InvalidLottoNumbersException;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -12,6 +13,8 @@ import static java.util.stream.Collectors.toList;
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int SUBLIST_START_INDEX = 0;
+    private static final int SUBLIST_END_INDEX_DIFFERENCE = 1;
 
     private int lottoNumber;
 
@@ -28,10 +31,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumber.lottoNumber;
     }
 
-    public static LottoNumber getRandomInstance() {
+    public static List<LottoNumber> getRandomListInstance(int size) {
         Collections.shuffle(numbersWithinRange, new Random(System.currentTimeMillis()));
 
-        return numbersWithinRange.get(0);
+        return new ArrayList<>(numbersWithinRange.subList(SUBLIST_START_INDEX, getLastIndex(size)));
+    }
+
+    private static int getLastIndex(int size) {
+        return size - SUBLIST_END_INDEX_DIFFERENCE;
     }
 
     public static LottoNumber getInstance(int number) {
