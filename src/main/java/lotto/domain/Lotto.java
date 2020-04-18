@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -14,6 +12,10 @@ public class Lotto {
     private Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public static Lotto ofComma(String lottoNumbersString) {
+        return null;
     }
 
     public static Lotto of(List<Integer> lottoNumbers) {

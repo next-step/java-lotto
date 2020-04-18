@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
 
@@ -26,6 +25,15 @@ class LottoTest {
     @Test
     void invalidSize() {
         assertThatIllegalArgumentException().isThrownBy(() -> Lotto.of(Arrays.asList(1, 2, 3, 4, 5)));
+    }
+
+    @DisplayName("콤마 구분 문자열로 로또 생성")
+    @Test
+    void ofComma() {
+        Lotto lotto = Lotto.of(Arrays.asList(
+                1, 2, 3, 4, 5, 6
+        ));
+        assertThat(Lotto.ofComma("1,2,3,4,5,6")).isEqualTo(lotto);
     }
 
 }
