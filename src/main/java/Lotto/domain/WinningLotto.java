@@ -11,6 +11,10 @@ public class WinningLotto {
         return new WinningLotto(winningNumbers);
     }
 
+    public static WinningLotto of(final String inputString) {
+        return new WinningLotto(LottoNumbers.of(inputString));
+    }
+
     public LottoNumbers getWinningNumbers() {
         return this.winningNumbers;
     }
