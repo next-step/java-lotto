@@ -8,11 +8,13 @@ public class ResultView {
 
     public static void buyResult(List<Lotto> lottos) {
         printBuyCount(lottos.size());
+        printLottoNumbers(lottos);
+    }
 
-        // TODO: print
-        //[8, 21, 23, 41, 42, 43]
-        //[3, 5, 11, 16, 32, 38]
-        //[7, 11, 16, 35, 36, 44]
+    private static void printLottoNumbers(List<Lotto> lottos) {
+        lottos.stream()
+                .map(Lotto::getLottoNumbers)
+                .forEach(System.out::println);
     }
 
     private static void printBuyCount(int buyCount) {
