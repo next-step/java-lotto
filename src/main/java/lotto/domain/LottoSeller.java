@@ -18,9 +18,10 @@ public class LottoSeller {
 
     public static Map<Match, Integer> match(List<Lotto> lottos, Lotto winningLotto) {
         Map<Match, Integer> result = initResult();
-//        for (Lotto lotto : lottos) {
-//            int match = winningLotto.match(lotto);
-//        }
+        for (Lotto lotto : lottos) {
+            Match match = Match.valueOf(winningLotto.match(lotto));
+            result.put(match, result.get(match) + 1);
+        }
 
         // TODO: compare
         return result;

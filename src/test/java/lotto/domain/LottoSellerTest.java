@@ -42,7 +42,6 @@ class LottoSellerTest {
         Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
 
         Map<Match, Integer> match = LottoSeller.match(buy, winningLotto);
-        assertThat(match.size()).isEqualTo(buy.size());
         assertThat(match.get(Match.SIX)).isEqualTo(1);
         assertThat(match.get(Match.FIVE)).isEqualTo(1);
         assertThat(match.get(Match.FOUR)).isEqualTo(2);
