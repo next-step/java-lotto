@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.domain.StringConstants.NOT_ENOUGH_MONEY;
+
 public class LottoSeller {
 
     private static final int LOTTO_PRISE = 1000;
-
-    private static final String NOT_ENOUGH_MONEY = "돈이 모자랍니다";
 
     public static List<Lotto> buy(int money) {
         int buyCount = money / LOTTO_PRISE;
