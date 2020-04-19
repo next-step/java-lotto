@@ -14,7 +14,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int SUBLIST_START_INDEX = 0;
-    private static final int SUBLIST_END_INDEX_DIFFERENCE = 1;
 
     private int lottoNumber;
 
@@ -34,11 +33,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static List<LottoNumber> getRandomListInstance(int size) {
         Collections.shuffle(numbersWithinRange, new Random(System.currentTimeMillis()));
 
-        return new ArrayList<>(numbersWithinRange.subList(SUBLIST_START_INDEX, getLastIndex(size)));
-    }
-
-    private static int getLastIndex(int size) {
-        return size - SUBLIST_END_INDEX_DIFFERENCE;
+        return new ArrayList<>(numbersWithinRange.subList(SUBLIST_START_INDEX, size));
     }
 
     public static LottoNumber getInstance(int number) {
