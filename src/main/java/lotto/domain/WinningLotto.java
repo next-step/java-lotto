@@ -9,13 +9,13 @@ public class WinningLotto {
 
     public WinningLotto(String numbers, int bonusNumber) {
         this.winningLotto = Lotto.ofComma(numbers);
+        validateBonusNumber(bonusNumber);
         this.bonusNumber = LottoNumber.of(bonusNumber);
-        validateBonusNumber(this.bonusNumber);
     }
 
-    private void validateBonusNumber(LottoNumber bonusNumber) {
+    private void validateBonusNumber(int bonusNumber) {
         Set<LottoNumber> numbers = winningLotto.getLottoNumbers();
-        if (numbers.contains(bonusNumber)) {
+        if (numbers.contains(LottoNumber.of(bonusNumber))) {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }
