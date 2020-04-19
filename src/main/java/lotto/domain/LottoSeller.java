@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoSeller {
 
@@ -14,9 +16,22 @@ public class LottoSeller {
         return LottoMachine.generate(buyCount);
     }
 
-    public static List<Lotto> match(List<Lotto> lottos, Lotto winningLotto) {
+    public static Map<Match, Integer> match(List<Lotto> lottos, Lotto winningLotto) {
+        Map<Match, Integer> result = initResult();
+//        for (Lotto lotto : lottos) {
+//            int match = winningLotto.match(lotto);
+//        }
+
         // TODO: compare
-        return null;
+        return result;
+    }
+
+    private static Map<Match, Integer> initResult() {
+        Map<Match, Integer> init = new HashMap<>();
+        for (Match value : Match.values()) {
+            init.put(value, 0);
+        }
+        return init;
     }
 
 }
