@@ -13,8 +13,9 @@ public enum Match {
     FAIL(0, 0),
     ;
 
-    private int matchCount;
-    private int prizeMoney;
+    private final int matchCount;
+    private final int prizeMoney;
+    private static final String ILLEGAL_MATCH_COUNT = "match count must be greater than zero";
 
     Match(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
@@ -28,13 +29,19 @@ public enum Match {
     }
 
     public static Match valueOf(int matchCount) {
-        // TODO: validate
+        validateMatchCount(matchCount);
         for (Match match : values()) {
             if (match.matchCount == matchCount) {
                 return match;
             }
         }
         return FAIL;
+    }
+
+    private static void validateMatchCount(int matchCount) {
+        if (matchCount < 0) {
+            throw new IllegalArgumentException(ILLEGAL_MATCH_COUNT);
+        }
     }
 
     public int getMatchCount() {
