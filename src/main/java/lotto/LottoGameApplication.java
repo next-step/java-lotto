@@ -19,7 +19,7 @@ public class LottoGameApplication {
         String winningLottoNumbers = InputView.inputWinningLottoNumbers();
         Lotto winningLotto = Lotto.ofComma(winningLottoNumbers);
         Map<Match, Integer> result = LottoSeller.match(lottos, winningLotto);
-//        ResultView.printResults(result);
+        ResultView.printResults(result, money);
     }
 
 }

@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Match {
 
     SIX(6, 2_000_000_000),
@@ -15,6 +19,12 @@ public enum Match {
     Match(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
+    }
+
+    public static List<Match> winningValues() {
+        return Arrays.stream(values())
+                .filter(value -> value != FAIL)
+                .collect(Collectors.toList());
     }
 
     public static Match valueOf(int matchCount) {
