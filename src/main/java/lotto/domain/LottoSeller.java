@@ -22,8 +22,6 @@ public class LottoSeller {
             Match match = Match.valueOf(winningLotto.match(lotto));
             result.put(match, result.get(match) + 1);
         }
-
-        // TODO: compare
         return result;
     }
 

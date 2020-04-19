@@ -18,7 +18,6 @@ public class LottoGameApplication {
 
         String winningLottoNumbers = InputView.inputWinningLottoNumbers();
         Lotto winningLotto = Lotto.ofComma(winningLottoNumbers);
-        // TODO: strings to lotto number
         Map<Match, Integer> result = LottoSeller.match(lottos, winningLotto);
 //        ResultView.printResults(result);
     }
