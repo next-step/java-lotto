@@ -8,10 +8,12 @@ public class LottoSeller {
 
     private static final int LOTTO_PRISE = 1000;
 
+    private static final String NOT_ENOUGH_MONEY = "돈이 모자랍니다";
+
     public static List<Lotto> buy(int money) {
         int buyCount = money / LOTTO_PRISE;
         if (buyCount < 1) {
-            throw new IllegalArgumentException("돈이 모자랍니다");
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
         return LottoMachine.generate(buyCount);
     }
