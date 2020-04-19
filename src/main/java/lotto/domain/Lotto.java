@@ -7,11 +7,18 @@ public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private Lotto(List<Integer> lottoNumbers) {
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+    private Lotto(Set<LottoNumber> lottoNumbers) {
+        checkLottoSize(lottoNumbers);
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    public static Lotto of(List<Integer> lottoNumbers) {
+        checkDuplicatedNumber(lottoNumbers);
+        return new Lotto(lottoNumbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet()));
     }
 
     public static Lotto ofComma(String lottoNumbersString) {
@@ -20,21 +27,10 @@ public class Lotto {
     }
 
     private static List<Integer> getIntLottoNumbers(String lottoNumbersString) {
-        // TODO: validate
         String[] lottoNumbers = lottoNumbersString.split(",");
         return Arrays.stream(lottoNumbers)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-    }
-
-    public static Lotto of(List<Integer> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
-        return new Lotto(lottoNumbers);
-    }
-
-    private static void validateLottoNumbers(List<Integer> lottoNumbers) {
-        checkLottoSize(lottoNumbers);
-        checkDuplicatedNumber(lottoNumbers);
     }
 
     private static void checkDuplicatedNumber(List<Integer> lottoNumbers) {
@@ -44,25 +40,28 @@ public class Lotto {
         }
     }
 
-    private static void checkLottoSize(List<Integer> lottoNumbers) {
+    private static void checkLottoSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호가 6개가 아닙니다");
         }
     }
 
     public List<Integer> getLottoNumbers() {
+        List<Integer> lottoNumbers = this.lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
         return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int match(Lotto lotto) {
         int match = 0;
-        for (int lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             match += lotto.get1IfContains(lottoNumber);
         }
         return match;
     }
 
-    private int get1IfContains(int lottoNumber) {
+    private int get1IfContains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber) ? 1 : 0;
     }
 
