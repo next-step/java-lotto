@@ -21,7 +21,7 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto lotto) {
-        return Rank.valueOf(Math.toIntExact(lotto.match(winningLotto)), lotto.hasBonusNumber(bonusNumber));
+        return Rank.valueOf(Math.toIntExact(lotto.match(winningLotto)), lotto.isMatchBonusNumber(bonusNumber));
     }
 
     @Override
