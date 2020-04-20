@@ -21,7 +21,7 @@ public class LottoController {
 
     private static Lottos getLottos(int paidMoney, int manualLottoCount) {
         Lottos manualLottos = InputView.getLottos(manualLottoCount);
-        Lottos autoLottos = new Lottos(paidMoney, manualLottoCount);
+        Lottos autoLottos = Lottos.getAutoLottos(paidMoney, manualLottoCount);
 
         ResultView.printLottos(LottosDto.getInstance(manualLottos, autoLottos));
 

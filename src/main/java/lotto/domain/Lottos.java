@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputToGenerateLottos;
+
 import java.util.*;
 
 public class Lottos {
@@ -20,13 +22,27 @@ public class Lottos {
         }
     }
 
-    public Lottos(int paidMoney, int generatedCount) {
+    private Lottos(int paidMoney, int generatedCount) {
         this(paidMoney - generatedCount * LOTTO_PRICE);
     }
 
     public Lottos(Set<Lotto> lottos) {
         this.lottos = new LinkedHashSet<>(lottos);
     }
+
+
+    public static Lottos getAutoLottos(int paidMoney, int generatedCount) {
+        if (paidMoney - generatedCount * LOTTO_PRICE > 0) {
+            throw new InvalidInputToGenerateLottos();
+        }
+
+        return new Lottos(paidMoney, generatedCount);
+    }
+
+    public static Lottos getInstance(List<Lotto> lottos) {
+        return new Lottos(new HashSet<>(lottos));
+    }
+
 
     public int size() {
         return this.lottos.size();

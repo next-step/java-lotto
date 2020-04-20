@@ -7,10 +7,7 @@ import lotto.domain.WinningNumbers;
 import lotto.exception.InvalidLottoNumbersException;
 import lotto.exception.InvalidManualLottoCountException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -94,14 +91,15 @@ public class InputView {
         if (manualLottoCount == MANUAL_LOTTO_COUNT_MINIMUM) {
             return new Lottos();
         }
+
         System.out.println(MANUAL_LOTTO_NUMBERS_NOTICE);
 
-        Lottos lottos = new Lottos();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             lottos.add(generateManualLotto());
         }
 
-        return lottos;
+        return Lottos.getInstance(lottos);
     }
 
     private static Lotto generateManualLotto() {
