@@ -2,10 +2,11 @@ package Lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class LottoResult {
     private static final int DEFAULT_COUNT = 0;
-    private final Map<WinningType, Integer> results = new HashMap<>();
+    private final Map<WinningType, Integer> results = new TreeMap<>();
 
     public LottoResult() {
         for (WinningType type : WinningType.values()) {
