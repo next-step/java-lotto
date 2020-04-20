@@ -32,7 +32,7 @@ public class Lottos {
 
 
     public static Lottos getAutoLottos(int paidMoney, int generatedCount) {
-        if (paidMoney - generatedCount * LOTTO_PRICE > 0) {
+        if (paidMoney - generatedCount * LOTTO_PRICE < 0) {
             throw new InvalidInputToGenerateLottos();
         }
 

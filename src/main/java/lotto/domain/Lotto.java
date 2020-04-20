@@ -57,7 +57,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 
 }
