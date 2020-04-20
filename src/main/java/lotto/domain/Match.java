@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.StringConstants.ILLEGAL_MATCH_COUNT;
-
 public enum Match {
 
     SIX(6, 2_000_000_000),
@@ -14,6 +12,8 @@ public enum Match {
     THREE(3, 5_000),
     FAIL(0, 0),
     ;
+
+    public static final String ILLEGAL_MATCH_COUNT = "match count must be greater than zero";
 
     private final int matchCount;
     private final int prizeMoney;

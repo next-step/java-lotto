@@ -13,5 +13,5 @@ class LottoMachineTest {
         List<Lotto> lottos = LottoMachine.generate(5);
         assertThat(lottos).hasSize(5);
     }
-
+    
 }

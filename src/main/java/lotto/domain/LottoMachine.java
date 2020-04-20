@@ -16,7 +16,7 @@ public class LottoMachine {
     }
 
     private static Lotto generateRandomLotto() {
-        List<Integer> lottoNumbers = IntStream.range(1, 46)
+        List<Integer> lottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);

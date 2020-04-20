@@ -3,6 +3,8 @@ package lotto.ui;
 import lotto.domain.Lotto;
 import lotto.domain.Match;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ public class ResultView {
     private static final String RESULT_PRINT_START_STR = "\n당첨 통계";
     private static final String DIVIDER = "---------";
     private static final String RESULT_MATCH_FORMAT = "%d개 일치 (%d원) - %d개";
-    private static final String RATE_FORMAT = "총 수익률은 %.2f입니다.";
+    private static final String RATE_FORMAT = "총 수익률은 %f입니다.";
 
     public static void buyResult(List<Lotto> lottos) {
         printBuyCount(lottos.size());
@@ -34,6 +36,7 @@ public class ResultView {
         System.out.println(RESULT_PRINT_START_STR);
         System.out.println(DIVIDER);
 
+        // TODO: 로직을 외부로 이동. (출력만 수행)
         int totalPrize = 0;
         List<Match> matches = Match.winningValues();
         matches.sort(Comparator.reverseOrder());
@@ -41,11 +44,14 @@ public class ResultView {
             printResultFormat(match.getMatchCount(), match.getPrizeMoney(), result.get(match));
             totalPrize += match.getPrizeMoney() * result.get(match);
         }
-        printRateOfReturn(money, totalPrize);
+        BigDecimal bigDecimal1 = new BigDecimal(money);
+        BigDecimal bigDecimal2 = new BigDecimal(totalPrize);
+        BigDecimal rateOfReturn = bigDecimal2.divide(bigDecimal1, 2, RoundingMode.HALF_UP);
+
+        printRateOfReturn(rateOfReturn);
     }
 
-    private static void printRateOfReturn(int money, int totalPrize) {
-        double rateOfReturn = totalPrize / (double) money;
+    private static void printRateOfReturn(BigDecimal rateOfReturn) {
         System.out.println(String.format(RATE_FORMAT, rateOfReturn));
     }
 

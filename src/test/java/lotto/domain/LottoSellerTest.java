@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottoSellerTest {
 
@@ -42,11 +44,13 @@ class LottoSellerTest {
         Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
 
         Map<Match, Integer> match = LottoSeller.match(buy, winningLotto);
-        assertThat(match.get(Match.SIX)).isEqualTo(1);
-        assertThat(match.get(Match.FIVE)).isEqualTo(1);
-        assertThat(match.get(Match.FOUR)).isEqualTo(2);
-        assertThat(match.get(Match.THREE)).isEqualTo(1);
-        assertThat(match.get(Match.FAIL)).isEqualTo(1);
+        assertAll("당첨 결과 테스트",
+                () -> assertEquals(1, match.get(Match.SIX)),
+                () -> assertEquals(1, match.get(Match.FIVE)),
+                () -> assertEquals(2, match.get(Match.FOUR)),
+                () -> assertEquals(1, match.get(Match.THREE)),
+                () -> assertEquals(1, match.get(Match.FAIL))
+        );
     }
 
 }
