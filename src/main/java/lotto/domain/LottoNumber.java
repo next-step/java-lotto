@@ -46,7 +46,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return numbersWithinRange.get(numberToIndex(number));
     }
 
-    private static boolean isValidNumber(int number) {
+    public static boolean isValidNumber(int number) {
         return MIN_LOTTO_NUMBER <= number &&
                 number <= MAX_LOTTO_NUMBER;
     }

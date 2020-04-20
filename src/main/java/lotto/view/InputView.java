@@ -1,8 +1,11 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.WinningNumbers;
+import lotto.exception.InvalidLottoNumbersException;
+import lotto.exception.InvalidManualLottoCountException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,10 +21,15 @@ public class InputView {
     private static final String MONEY_INPUT_NOTICE = "구입금액을 입력해 주세요.";
     private static final String MONEY_INVALID_NOTICE = "1000원 이상의 금액을 입력해 주세요.";
     private static final String MANUAL_LOTTO_COUNT_NOTICE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String MANUAL_LOTTO_COUNT_INVALID_NOTICE = "0 이상의 숫자 값을 입력해 주세요.";
+    private static final String MANUAL_LOTTO_COUNT_INVALID_NOTICE = "잘못 된 수동으로 구매할 로또의 갯수입니다. 0 이상의 숫자 값을 입력해 주세요!";
     private static final String MANUAL_LOTTO_NUMBERS_NOTICE = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String WINNING_NUMBERS_NOTICE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_NOTICE = "보너스 볼을 입력해 주세요.";
+    private static final String BONUS_NUMBER_INVALID_RANGE_NOTICE = "보너스 볼의 값이 정상적인 범위를 벗어났습니다.";
+    private static final String BONUS_NUMBER_INVALID_CONTAINED_NOTICE = "보너스 볼의 값이 이미 당첨번호에 포함되어 있습니다.";
+
+    private static final String MANUAL_LOTTO_COUNT_EXCEPTION_MESSAGE = "구매 할 로또의 갯수는 양의 정수 값입니!";
+    private static final String BONUS_NUMBER_EXCEPTION_MESSAGE = "보너스 볼의 값은 양의 정수 값입니다!";
 
     private static final int MONEY_DEFAULT = 0;
     private static final int MONEY_MINIMUM = 1000;
@@ -69,7 +77,7 @@ public class InputView {
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            return MANUAL_LOTTO_COUNT_MINIMUM;
+            throw new InvalidManualLottoCountException(MANUAL_LOTTO_COUNT_EXCEPTION_MESSAGE);
         }
     }
 
@@ -120,17 +128,40 @@ public class InputView {
             winningNumbers.add(Integer.parseInt(input));
         }
 
-        return WinningNumbers.getInstance(winningNumbers, InputView.getBonusNumber());
+        return WinningNumbers.getInstance(winningNumbers, getBonusNumber(winningNumbers));
     }
 
-    public static int getBonusNumber() {
+    public static int getBonusNumber(List<Integer> winningNumbers) {
+        int bonusNumber;
+
+        do {
+            bonusNumber = parseBonusNumber();
+        } while (!isValidBonusNumber(bonusNumber, winningNumbers));
+
+        return bonusNumber;
+    }
+
+    private static int parseBonusNumber() {
         System.out.println(BONUS_NUMBER_NOTICE);
 
         try {
             return Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            return DEFAULT_NUMBER;
+            throw new InvalidLottoNumbersException(BONUS_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
+    private static boolean isValidBonusNumber(int bonusNumber, List<Integer> winningNumbers) {
+        if (!LottoNumber.isValidNumber(bonusNumber)) {
+            System.out.println(BONUS_NUMBER_INVALID_RANGE_NOTICE);
+            return false;
+        }
+
+        if (winningNumbers.contains(bonusNumber)) {
+            System.out.println(BONUS_NUMBER_INVALID_CONTAINED_NOTICE);
+            return false;
+        }
+
+        return true;
+    }
 }
