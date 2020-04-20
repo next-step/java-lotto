@@ -23,8 +23,8 @@ public class LottoNumber {
 
     static LottoNumber of(int number) {
         LottoNumber lottoNumber = lottoNumbers.get(number);
-        if (lottoNumber == null) {
-            new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다.");
+        if (Objects.isNull(lottoNumber)) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다.");
         }
         return lottoNumber;
     }
