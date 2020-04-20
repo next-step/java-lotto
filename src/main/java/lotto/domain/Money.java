@@ -19,6 +19,10 @@ public class Money {
         }
     }
 
+    public Money buyManual(int countOfManual) {
+        return new Money(money - (PRICE_OF_LOTTO * countOfManual));
+    }
+
     public int getCountOfLotto() {
         return this.money / PRICE_OF_LOTTO;
     }
