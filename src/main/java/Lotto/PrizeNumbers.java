@@ -22,4 +22,13 @@ public class PrizeNumbers {
         return this.bonusNumber;
     }
 
+    public int getMatchCount(LottoPaper paper) {
+        int count = 0;
+        for (int i = 0; i < prizeStorage.size(); i++) {
+            int prizeNumber = prizeStorage.get(i);
+            count += paper.isMatchNumber(prizeNumber) ? 1 : 0;
+        }
+
+        return count;
+    }
 }

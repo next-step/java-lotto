@@ -28,10 +28,7 @@ public class LottoInGame {
         int count = 0;
         boolean matchBonus = false;
 
-        for (int i = 0; i < prizeNumbers.getPrizeStorage().size(); i++) {
-            int prizeNumber = prizeNumbers.getPrizeStorage().get(i);
-            count += paper.isMatchNumber(prizeNumber) ? 1 : 0;
-        }
+        count = prizeNumbers.getMatchCount(paper);
 
         if (count == 5) {
             matchBonus = isBonusWin(paper, prizeNumbers);

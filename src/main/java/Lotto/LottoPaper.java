@@ -14,17 +14,12 @@ public class LottoPaper {
         makeDeal();
     }
 
-    public LottoPaper(String manual) {
-        lottoNumbers = new ArrayList<>();
-        String[] manualNumbers = manual.split(",");
+    public LottoPaper(LottoNumbers lottoNumberList) {
+        this.lottoNumbers = new ArrayList<>();
 
-        for (int i = 0; i < manualNumbers.length; i++) {
-            addManualLottoNumbers(manualNumbers[i]);
+        for (int i = 0; i < lottoNumberList.getSize(); i++) {
+            this.lottoNumbers.add(lottoNumberList.getNumber(i).getNumber());
         }
-    }
-
-    private void addManualLottoNumbers(String manualNumbers) {
-         lottoNumbers.add(Integer.parseInt(manualNumbers));
     }
 
     private List<Integer> makeDeal() {

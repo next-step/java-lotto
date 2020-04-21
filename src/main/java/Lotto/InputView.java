@@ -27,7 +27,7 @@ public class InputView {
         return new ManualLottoCount(count, amount);
     }
 
-    public String[] inputManualGame(ManualLottoCount manualLottoCount) {
+    public List<LottoNumbers> inputManualGame(ManualLottoCount manualLottoCount) {
         System.out.println(PLEASE_INPUT_MANUAL_GAME);
         Scanner scanner = new Scanner(System.in);
         String[] manuals = new String[manualLottoCount.getManualCount()];
@@ -35,7 +35,17 @@ public class InputView {
             manuals[i] = scanner.nextLine();
         }
 
-        return manuals;
+        List<LottoNumbers> lottoNumbersList = new ArrayList<>();
+        for (int i = 0; i < manuals.length; i++) {
+            String[] numbers = manuals[i].split(",");
+            lottoNumbersList.add(addManualLottoNumbers(numbers));
+        }
+
+        return lottoNumbersList;
+    }
+
+    private LottoNumbers addManualLottoNumbers(String[] manualNumbers) {
+        return new LottoNumbers(manualNumbers);
     }
 
     public List<Integer> inputPrizeNumber() {

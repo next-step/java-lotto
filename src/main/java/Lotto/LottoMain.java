@@ -13,11 +13,11 @@ public class LottoMain {
 
         ManualLottoCount manualLottoCount = inputView.inputManualGameCount(amount);
 
-        String[] manuals = inputView.inputManualGame(manualLottoCount);
+        List<LottoNumbers> lottoNumbersList = inputView.inputManualGame(manualLottoCount);
 
         int quantity = lottoGame.translateAmountToQuantity(amount);
         resultView.showQuantity(quantity, manualLottoCount);
-        LottoBundle lottoPapers = new LottoBundle(quantity, manuals);
+        LottoBundle lottoPapers = new LottoBundle(quantity, lottoNumbersList);
         resultView.showLottoNumbers(lottoPapers);
 
         List<Integer> prizeNumber = inputView.inputPrizeNumber();
