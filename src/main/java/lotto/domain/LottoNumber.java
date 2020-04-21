@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLottoNumbersException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,24 +10,53 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int SUBLIST_START_INDEX = 0;
 
-    private static final List<Integer> numberRange = IntStream
+    private int lottoNumber;
+
+    private static final List<LottoNumber> numbersWithinRange = IntStream
             .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-            .mapToObj(Integer::new)
+            .mapToObj(LottoNumber::new)
             .collect(toList());
 
-    static List<Integer> generate(int numberCount) {
-        Collections.shuffle(numberRange, new Random(System.currentTimeMillis()));
+    private LottoNumber(int lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
 
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i < numberCount; i++) {
-            numbers.add(numberRange.get(i));
+    public static int valueOf(LottoNumber lottoNumber) {
+        return lottoNumber.lottoNumber;
+    }
+
+    public static List<LottoNumber> getRandomListInstance(int size) {
+        Collections.shuffle(numbersWithinRange, new Random(System.currentTimeMillis()));
+
+        return new ArrayList<>(numbersWithinRange.subList(SUBLIST_START_INDEX, size));
+    }
+
+    public static LottoNumber getInstance(int number) {
+        if (!isValidNumber(number)) {
+            throw new InvalidLottoNumbersException();
         }
-        Collections.sort(numbers);
 
-        return numbers;
+        Collections.sort(numbersWithinRange);
+
+        return numbersWithinRange.get(numberToIndex(number));
+    }
+
+    public static boolean isValidNumber(int number) {
+        return MIN_LOTTO_NUMBER <= number &&
+                number <= MAX_LOTTO_NUMBER;
+    }
+
+    private static int numberToIndex(int number) {
+        return number - 1;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return lottoNumber > o.lottoNumber ? 1 : -1;
     }
 }

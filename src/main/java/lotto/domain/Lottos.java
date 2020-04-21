@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidInputToGenerateLottos;
+
 import java.util.*;
 
 public class Lottos {
@@ -7,28 +9,62 @@ public class Lottos {
 
     private final Set<Lotto> lottos;
 
-    public Lottos(int paidMoney) {
-        lottos = new HashSet<>();
+    public Lottos() {
+        this.lottos = new LinkedHashSet<>();
+    }
 
-        int count = paidMoney / LOTTO_PRICE;
+    public Lottos(int lottoPrice) {
+        this.lottos = new LinkedHashSet<>();
+
+        int count = lottoPrice / LOTTO_PRICE;
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.of());
+            this.lottos.add(Lotto.getNewInstance());
         }
     }
 
-    public Lottos(Set<Lotto> lottos) {
-        this.lottos = new HashSet<>(lottos);
+    private Lottos(int paidMoney, int generatedCount) {
+        this(paidMoney - generatedCount * LOTTO_PRICE);
     }
+
+    public Lottos(Set<Lotto> lottos) {
+        this.lottos = new LinkedHashSet<>(lottos);
+    }
+
+
+    public static Lottos getAutoLottos(int paidMoney, int generatedCount) {
+        if (paidMoney - generatedCount * LOTTO_PRICE < 0) {
+            throw new InvalidInputToGenerateLottos();
+        }
+
+        return new Lottos(paidMoney, generatedCount);
+    }
+
+    public static Lottos getInstance(List<Lotto> lottos) {
+        return new Lottos(new HashSet<>(lottos));
+    }
+
 
     public int size() {
-        return lottos.size();
+        return this.lottos.size();
     }
 
-    public MatchResult getResult(WinningNumbers winningNumber) {
+    public Lottos add(Lotto lotto) {
+        this.lottos.add(lotto);
+
+        return this;
+    }
+
+    public Lottos addAll(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos);
+
+        return this;
+    }
+
+    public MatchResult getMatchResult(WinningNumbers winningNumber) {
         MatchResult matchResult = MatchResult.getInstance();
 
         for (Lotto lotto : lottos) {
-            Rank rank = lotto.getMatchResult(winningNumber);
+            Rank rank = winningNumber.getMatchResult(lotto);
 
             matchResult.updateResult(rank);
         }
@@ -36,13 +72,7 @@ public class Lottos {
         return matchResult;
     }
 
-    public String toString(String format, String delimiter) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.toString(format, delimiter));
-        }
-
-        return stringBuilder.toString();
+    public Set<Lotto> getLottos() {
+        return this.lottos;
     }
 }

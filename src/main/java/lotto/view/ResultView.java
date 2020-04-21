@@ -1,11 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
-import lotto.domain.MatchResult;
-import lotto.domain.Rank;
+import lotto.controller.response.LottosDto;
+import lotto.domain.*;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ResultView {
-    private static final String PURCHASED_NUM_NOTICE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASED_LOTTOS_NUMBER_NOTICE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String RESULT_STATISTIC_NOTICE = "\n당첨 통계\n---------\n";
     private static final String LOTTO_NUMBER_FORMAT = "[%s]\n";
     private static final String RESULT_RANK_FORMAT = "%d개 일치 (%d원)- %d개\n";
@@ -15,12 +17,38 @@ public class ResultView {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final int YIELD_PROFIT_CONDITION = 1;
 
-    public static void printLottos(Lottos lottos) {
-        StringBuffer stringBuffer = new StringBuffer(String.format(PURCHASED_NUM_NOTICE, lottos.size()));
+    public static void printLottos(LottosDto lottosDto) {
+        StringBuffer stringBuffer = new StringBuffer(
+                String.format(PURCHASED_LOTTOS_NUMBER_NOTICE,
+                        lottosDto.manualLottoCount(),
+                        lottosDto.autoLottoCount())
+        );
 
-        stringBuffer.append(lottos.toString(LOTTO_NUMBER_FORMAT, LOTTO_NUMBER_DELIMITER));
+        stringBuffer.append(generateLottosFormat(lottosDto.getManualLottos()));
+        stringBuffer.append(generateLottosFormat(lottosDto.getAutoLottos()));
 
         System.out.println(stringBuffer.toString());
+    }
+
+    public static String generateLottosFormat(Set<Lotto> lottos) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Lotto lotto : lottos) {
+            stringBuilder.append(generateLottoFormat(lotto));
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public static String generateLottoFormat(Lotto lotto) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        String joinedNumbers = lotto.getLottoNumbers().stream()
+                .map(num -> Integer.toString(LottoNumber.valueOf(num)))
+                .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
+        stringBuilder.append(String.format(LOTTO_NUMBER_FORMAT, joinedNumbers));
+
+        return stringBuilder.toString();
     }
 
     public static void printLottoResult(MatchResult result, int paidMoney) {
@@ -29,7 +57,6 @@ public class ResultView {
 
         for (Rank rank : Rank.winValues()) {
             int matchCount = result.getOrDefault(rank);
-
             stringBuilder.append(generateRankResultFormat(rank, matchCount));
 
             winningPrice += rank.calculatePrice(matchCount);

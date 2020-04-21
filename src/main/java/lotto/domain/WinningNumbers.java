@@ -4,22 +4,22 @@ import java.util.List;
 
 public class WinningNumbers {
     private Lotto winningNumbers;
-    private int bonusNumber;
+    private LottoNumber bonusNumber;
 
     private WinningNumbers(List<Integer> numbers, int bonusNumber) {
-        this.winningNumbers = new Lotto(numbers);
-        this.bonusNumber = bonusNumber;
+        this.winningNumbers = Lotto.of(numbers);
+        this.bonusNumber = LottoNumber.getInstance(bonusNumber);
     }
 
     public static WinningNumbers getInstance(List<Integer> numbers, int bonusNumber) {
         return new WinningNumbers(numbers, bonusNumber);
     }
 
-    public Lotto getWinningNumbers() {
-        return winningNumbers;
+    public Rank getMatchResult(Lotto lotto) {
+        return Rank.getWinningType(winningNumbers.countMatches(lotto), isBonusMatched(lotto));
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
+    private boolean isBonusMatched(Lotto lotto) {
+        return lotto.isContain(bonusNumber);
     }
 }

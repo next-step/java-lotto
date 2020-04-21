@@ -32,18 +32,6 @@ public class LottosTest {
     }
 
     @Test
-    @DisplayName("발행된 로또 값을 정상적으로 string 변환하는지 테스트")
-    public void LottoToStringTest() {
-        List<String> toStringExpect = Arrays.asList("[1, 2, 3, 4, 5, 6]","[2, 3, 4, 5, 6, 7]","[3, 4, 5, 6, 7, 8]");
-
-        Lottos lottos = new Lottos(generateLottos());
-
-        for (String expect : toStringExpect) {
-            assertTrue(lottos.toString("[%s]\n", ", ").contains(expect));
-        }
-    }
-
-    @Test
     @DisplayName("당첨 결과 생성 테스트")
     public void winningResultTset(){
         Set<Lotto> expect = generateLottoValueWithNotMatching();
@@ -51,7 +39,7 @@ public class LottosTest {
 
         WinningNumbers winningNumber = WinningNumbers.getInstance(Arrays.asList(1, 2, 3, 4, 5, 6), 40);
 
-        MatchResult matchResult = lottos.getResult(winningNumber);
+        MatchResult matchResult = lottos.getMatchResult(winningNumber);
 
         assertThat(matchResult.getOrDefault(Rank.FIRST)).isEqualTo(1);
         assertThat(matchResult.getOrDefault(Rank.THIRD)).isEqualTo(1);
@@ -63,9 +51,9 @@ public class LottosTest {
     private Set<Lotto> generateLottos() {
         Set<Lotto> lottoNumbers = new HashSet<>();
 
-        lottoNumbers.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoNumbers.add(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
-        lottoNumbers.add(new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(3, 4, 5, 6, 7, 8)));
 
         return lottoNumbers;
     }
@@ -73,8 +61,12 @@ public class LottosTest {
     private Set<Lotto> generateLottoValueWithNotMatching() {
         Set<Lotto> lottoNumbers = generateLottos();
 
-        lottoNumbers.add(new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
+        lottoNumbers.add(numbersToLotto(Arrays.asList(9, 10, 11, 12, 13, 14)));
 
         return lottoNumbers;
+    }
+
+    private Lotto numbersToLotto(List<Integer> numbers) {
+        return Lotto.of(numbers);
     }
 }
