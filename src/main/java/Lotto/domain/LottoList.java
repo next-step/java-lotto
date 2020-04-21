@@ -20,7 +20,7 @@ public class LottoList {
     public LottoResult getResult(final WinningLotto winningLotto) {
         final LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottoList) {
-            lottoResult.insertResult(lotto.getWinningTypeWithWinningNumbers(winningLotto.getWinningNumbers()));
+            lottoResult.insertResult(lotto.getWinningTypeWithWinningNumbers(winningLotto));
         }
         return lottoResult;
     }

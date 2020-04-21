@@ -2,9 +2,7 @@ package Lotto.view;
 
 import Lotto.domain.*;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class LottoView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -15,7 +13,7 @@ public class LottoView {
         final LottoList lottoList = lottoGame.issueLotto(money.getLottoCount());
         printCountOfLotto(money.getLottoCount());
         printLottoResult(lottoList);
-        final WinningLotto winningLotto = WinningLotto.of(getLastWeekWinningNumbers()) ;
+        final WinningLotto winningLotto = WinningLotto.of(getLastWeekWinningNumbers(), getBonusNumber()) ;
         final LottoResult lottoResult = lottoList.getResult(winningLotto);
         printStatistic(lottoResult, money);
     }
@@ -28,6 +26,11 @@ public class LottoView {
     private String getLastWeekWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return SCANNER.next();
+    }
+
+    private int getBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return SCANNER.nextInt();
     }
 
     private void printCountOfLotto(final int countOfLotto) {
@@ -47,7 +50,8 @@ public class LottoView {
         final StringBuilder sb = new StringBuilder("당첨통계\n------------\n");
         for (WinningType type : lottoResult.getResults().keySet()) {
             sb.append(type.getCountOfMatch())
-                    .append("개 일치 (")
+                    .append("개 일치")
+                    .append(type == WinningType.SECOND ? ", 보너스 볼 일치(" : " (")
                     .append(type.getWinningMoney())
                     .append(")- ")
                     .append(lottoResult.getResults().get(type))

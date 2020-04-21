@@ -48,7 +48,11 @@ public class LottoNumbers {
     }
 
     public int increment(final LottoNumber number) {
-        return this.lottoNumberSet.contains(number) ? 1 : 0;
+        return contains(number) ? 1 : 0;
+    }
+
+    public boolean contains(final LottoNumber number) {
+        return this.lottoNumberSet.contains(number);
     }
 
     @Override
