@@ -12,4 +12,5 @@ public class MatchTest {
     void valueOf() {
         assertThat(Match.valueOf(3)).isEqualTo(Match.THREE);
     }
+
 }

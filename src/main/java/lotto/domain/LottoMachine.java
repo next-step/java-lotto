@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
-    public static List<Lotto> generate(int count) {
+    public static Lottos generate(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(generateRandomLotto());
         }
-        return lottos;
+        return Lottos.of(lottos);
     }
 
     private static Lotto generateRandomLotto() {

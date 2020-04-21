@@ -58,7 +58,7 @@
     - [X] 결과 출력
    
 ### step2 피드백
-- [ ] Lottos 일급 컬렉션         // TODO
+- [X] Lottos 일급 컬렉션
 - [ ] LottoResult 일급 컬렉션
 - [ ] view 내부 기능 로직 제거
 - [ ] BigDecimal 사용    

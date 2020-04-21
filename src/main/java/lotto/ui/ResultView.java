@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Match;
 
 import java.math.BigDecimal;
@@ -17,13 +18,14 @@ public class ResultView {
     private static final String RESULT_MATCH_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String RATE_FORMAT = "총 수익률은 %f입니다.";
 
-    public static void buyResult(List<Lotto> lottos) {
+    public static void buyResult(Lottos lottos) {
         printBuyCount(lottos.size());
         printLottoNumbers(lottos);
     }
 
-    private static void printLottoNumbers(List<Lotto> lottos) {
-        lottos.stream()
+    private static void printLottoNumbers(Lottos lottos) {
+        lottos.getLottos()
+                .stream()
                 .map(Lotto::getLottoNumbers)
                 .forEach(System.out::println);
     }
