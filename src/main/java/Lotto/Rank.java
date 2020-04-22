@@ -29,22 +29,23 @@ public enum Rank {
     }
 
     public static Rank valueOf(int countOfMatch, boolean matchBonus) {
-        Rank returnRank = null;
 
-        if (countOfMatch == Rank.FIRST.getCountOfMatch()) {
-            returnRank = Rank.FIRST;
-        } else if (countOfMatch == Rank.SECOND.getCountOfMatch() && matchBonus) {
-            returnRank = Rank.SECOND;
-        } else if (countOfMatch == Rank.THIRD.getCountOfMatch() && !matchBonus) {
-            returnRank = Rank.THIRD;
-        } else if (countOfMatch == Rank.FOURTH.getCountOfMatch()) {
-            returnRank = Rank.FOURTH;
-        } else if (countOfMatch == Rank.FIFTH.getCountOfMatch()) {
-            returnRank = Rank.FIFTH;
-        } else if (countOfMatch < Rank.FIFTH.getCountOfMatch()) {
-            returnRank = Rank.MISS;
+        if (countOfMatch == Rank.FIRST.countOfMatch) {
+            return Rank.FIRST;
+        }
+        if (countOfMatch == Rank.SECOND.countOfMatch && matchBonus) {
+            return Rank.SECOND;
+        }
+        if (countOfMatch == Rank.THIRD.countOfMatch && !matchBonus) {
+            return Rank.THIRD;
+        }
+        if (countOfMatch == Rank.FOURTH.countOfMatch) {
+            return Rank.FOURTH;
+        }
+        if (countOfMatch == Rank.FIFTH.countOfMatch) {
+            return Rank.FIFTH;
         }
 
-        return returnRank;
+        return Rank.MISS;
     }
 }

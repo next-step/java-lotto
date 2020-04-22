@@ -11,12 +11,19 @@ public class LottoMain {
 
         Amount amount = inputView.inputPurchasingAmount();
 
-        int quantity = lottoGame.amountToQuantity(amount);
-        resultView.showQuantity(quantity);
-        LottoBundle lottoPapers = new LottoBundle(quantity);
+        ManualLottoCount manualLottoCount = inputView.inputManualGameCount(amount);
+
+        List<LottoNumbers> lottoNumbersList = inputView.inputManualGame(manualLottoCount);
+
+        int quantity = lottoGame.translateAmountToQuantity(amount);
+        resultView.showQuantity(quantity, manualLottoCount);
+        LottoBundle lottoPapers = new LottoBundle(quantity, lottoNumbersList);
         resultView.showLottoNumbers(lottoPapers);
 
-        PrizeNumbers prizeNumbers = inputView.inputPrizeNumber();
+        List<Integer> prizeNumber = inputView.inputPrizeNumber();
+        int bonusNumber = inputView.inputBonusNumber();
+
+        PrizeNumbers prizeNumbers = new PrizeNumbers(prizeNumber, bonusNumber);
 
         List<Rank> winners = lottoGame.matchNumber(lottoPapers, prizeNumbers);
 

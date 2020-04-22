@@ -9,9 +9,13 @@ public class LottoBundle {
 
     public LottoBundle() {}
 
-    public LottoBundle(int quantity) {
+    public LottoBundle(int quantity, List<LottoNumbers> lottoNumbersList) {
         lottoPapers = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
+        for (int i = 0; i < lottoNumbersList.size(); i++) {
+            lottoPapers.add(new LottoPaper(lottoNumbersList.get(i)));
+        }
+        int autoGameCount =  quantity - lottoNumbersList.size();
+        for (int i = 0; i < autoGameCount; i++) {
             lottoPapers.add(new LottoPaper());
         }
     }

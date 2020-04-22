@@ -6,10 +6,9 @@ import java.util.List;
 public class LottoInGame {
 
     private final int LOTTO_PRICE = 1000;
-    private int[] winnerArray = new int[7];
     private List<Rank> winners;
 
-    public int amountToQuantity(Amount amount) {
+    public int translateAmountToQuantity(Amount amount) {
         return amount.getAmount() / LOTTO_PRICE;
     }
 
@@ -29,10 +28,7 @@ public class LottoInGame {
         int count = 0;
         boolean matchBonus = false;
 
-        for (int i = 0; i < prizeNumbers.getPrizeList().size(); i++) {
-            int prizeNumber = prizeNumbers.getPrizeList().get(i);
-            count += ((List<Integer>) paper.lottoNumberMap.get("lottoNumbers")).contains(prizeNumber) ? 1 : 0;
-        }
+        count = prizeNumbers.getMatchCount(paper);
 
         if (count == 5) {
             matchBonus = isBonusWin(paper, prizeNumbers);
@@ -42,10 +38,6 @@ public class LottoInGame {
     }
 
     public boolean isBonusWin(LottoPaper paper, PrizeNumbers prizeNumbers) {
-        boolean bonusWin;
-
-        bonusWin = ((int) paper.lottoNumberMap.get("bonusNumber")) == prizeNumbers.getBonusNumber();
-
-        return bonusWin;
+        return paper.isMatchBonus(prizeNumbers.getBonusNumber());
     }
 }

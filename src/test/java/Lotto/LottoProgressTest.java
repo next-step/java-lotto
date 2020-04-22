@@ -22,9 +22,10 @@ public class LottoProgressTest {
         lottoInGame = new LottoInGame();
         lottoPaper = new LottoPaper();
 
-        quantity = lottoInGame.amountToQuantity(amount);
-
-        lottoBundle = new LottoBundle(quantity);
+        quantity = lottoInGame.translateAmountToQuantity(amount);
+        String[] manuals = new String[1];
+        manuals[0] = "1,2,3,4,5,6";
+        lottoBundle = new LottoBundle(quantity, manuals);
 
         prizeList.add(2);
         prizeList.add(3);
@@ -36,7 +37,7 @@ public class LottoProgressTest {
 
     @Test
     public void amountToQuantity() {
-        assertThat(lottoInGame.amountToQuantity(amount)).isEqualTo(14);
+        assertThat(lottoInGame.translateAmountToQuantity(amount)).isEqualTo(14);
     }
 
 
