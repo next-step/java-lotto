@@ -13,7 +13,7 @@ public class LottoGame {
     public LottoList issueLotto(final int countOfLotto) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < countOfLotto; i++) {
-            lottoList.add(Lotto.of(LottoNumbersGenerator.createNewLotto()));
+            lottoList.add(Lotto.newAutoLotto(LottoNumbersGenerator.createNewLotto()));
         }
 
         return LottoList.of(lottoList);
