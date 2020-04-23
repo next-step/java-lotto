@@ -15,7 +15,7 @@ public class ResultView {
     private static final String RESULT_PRINT_START_STR = "\n당첨 통계";
     private static final String DIVIDER = "---------";
     private static final String RESULT_MATCH_FORMAT = "%d개 일치 (%d원) - %d개";
-    private static final String RATE_FORMAT = "총 수익률은 %f입니다.";
+    private static final String RATE_FORMAT = "총 수익률은 %.2f입니다.";
 
     public static void buyResult(Lottos lottos) {
         printBuyCount(lottos.size());
