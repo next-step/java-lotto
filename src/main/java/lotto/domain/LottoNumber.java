@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static lotto.domain.StringConstants.OUT_OF_RANGE;
@@ -8,6 +10,14 @@ public class LottoNumber {
 
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
+
+    private static final Map<Integer, LottoNumber> cache = new HashMap<>();
+
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            cache.put(i, new LottoNumber(i));
+        }
+    }
 
     private final int lottoNumber;
 
@@ -21,7 +31,7 @@ public class LottoNumber {
 
     public static LottoNumber of(int lottoNumber) {
         validateLottoNumber(lottoNumber);
-        return new LottoNumber(lottoNumber);
+        return cache.get(lottoNumber);
     }
 
     private static void validateLottoNumber(int lottoNumber) {

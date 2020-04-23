@@ -42,13 +42,13 @@ class LottoSellerTest {
         ));
         Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
 
-        Map<Match, Integer> match = LottoSeller.match(buy, winningLotto);
+        MatchResult match = LottoSeller.match(buy, winningLotto);
         assertAll("당첨 결과 테스트",
-                () -> assertEquals(1, match.get(Match.SIX)),
-                () -> assertEquals(1, match.get(Match.FIVE)),
-                () -> assertEquals(2, match.get(Match.FOUR)),
-                () -> assertEquals(1, match.get(Match.THREE)),
-                () -> assertEquals(1, match.get(Match.FAIL))
+                () -> assertEquals(1, match.getMatchCount(Match.SIX)),
+                () -> assertEquals(1, match.getMatchCount(Match.FIVE)),
+                () -> assertEquals(2, match.getMatchCount(Match.FOUR)),
+                () -> assertEquals(1, match.getMatchCount(Match.THREE)),
+                () -> assertEquals(1, match.getMatchCount(Match.FAIL))
         );
     }
 

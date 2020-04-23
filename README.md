@@ -62,6 +62,6 @@
 - [X] LottoResult 일급 컬렉션
 - [X] view 내부 기능 로직 제거
 - [X] BigDecimal 사용
-- [ ] LottoNumber 캐싱 // TODO
+- [X] LottoNumber 캐싱
  
 ---
