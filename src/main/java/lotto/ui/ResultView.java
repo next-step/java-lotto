@@ -2,11 +2,10 @@ package lotto.ui;
 
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.Match;
+import lotto.domain.Rank;
 import lotto.domain.MatchResult;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.List;
 
@@ -38,10 +37,10 @@ public class ResultView {
         System.out.println(RESULT_PRINT_START_STR);
         System.out.println(DIVIDER);
 
-        List<Match> matches = Match.winningValues();
-        matches.sort(Comparator.reverseOrder());
-        for (Match match : matches) {
-            printResultFormat(match, result.getMatchCount(match));
+        List<Rank> ranks = Rank.winningValues();
+        ranks.sort(Comparator.reverseOrder());
+        for (Rank rank : ranks) {
+            printResultFormat(rank, result.getRank(rank));
         }
         printRateOfReturn(result.rateOfReturn(money));
     }
@@ -50,8 +49,8 @@ public class ResultView {
         System.out.println(String.format(RATE_FORMAT, rateOfReturn));
     }
 
-    private static void printResultFormat(Match match, int matchCount) {
-        System.out.println(String.format(RESULT_MATCH_FORMAT, match.getMatchCount(), match.getPrizeMoney(), matchCount));
+    private static void printResultFormat(Rank rank, int matchCount) {
+        System.out.println(String.format(RESULT_MATCH_FORMAT, rank.getMatchCount(), rank.getPrizeMoney(), matchCount));
     }
 
 }

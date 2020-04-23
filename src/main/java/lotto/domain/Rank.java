@@ -4,12 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum Match {
+public enum Rank {
 
-    SIX(6, 2_000_000_000),
-    FIVE(5, 1_500_000),
-    FOUR(4, 50_000),
-    THREE(3, 5_000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_500_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     FAIL(0, 0),
     ;
 
@@ -18,22 +19,22 @@ public enum Match {
     private final int matchCount;
     private final int prizeMoney;
 
-    Match(int matchCount, int prizeMoney) {
+    Rank(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static List<Match> winningValues() {
+    public static List<Rank> winningValues() {
         return Arrays.stream(values())
                 .filter(value -> value != FAIL)
                 .collect(Collectors.toList());
     }
 
-    public static Match valueOf(int matchCount) {
+    public static Rank valueOf(int matchCount) {
         validateMatchCount(matchCount);
-        for (Match match : values()) {
-            if (match.matchCount == matchCount) {
-                return match;
+        for (Rank rank : values()) {
+            if (rank.matchCount == matchCount) {
+                return rank;
             }
         }
         return FAIL;
@@ -53,7 +54,4 @@ public enum Match {
         return prizeMoney;
     }
 
-    public int getTotalPrize() {
-        return matchCount * prizeMoney;
-    }
 }

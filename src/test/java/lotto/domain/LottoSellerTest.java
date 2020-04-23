@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -44,11 +43,11 @@ class LottoSellerTest {
 
         MatchResult match = LottoSeller.match(buy, winningLotto);
         assertAll("당첨 결과 테스트",
-                () -> assertEquals(1, match.getMatchCount(Match.SIX)),
-                () -> assertEquals(1, match.getMatchCount(Match.FIVE)),
-                () -> assertEquals(2, match.getMatchCount(Match.FOUR)),
-                () -> assertEquals(1, match.getMatchCount(Match.THREE)),
-                () -> assertEquals(1, match.getMatchCount(Match.FAIL))
+                () -> assertEquals(1, match.getRank(Rank.FIRST)),
+                () -> assertEquals(1, match.getRank(Rank.THIRD)),
+                () -> assertEquals(2, match.getRank(Rank.FOURTH)),
+                () -> assertEquals(1, match.getRank(Rank.FIFTH)),
+                () -> assertEquals(1, match.getRank(Rank.FAIL))
         );
     }
 
