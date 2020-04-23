@@ -40,7 +40,7 @@ public class ResultView {
         List<Rank> ranks = Rank.winningValues();
         ranks.sort(Comparator.reverseOrder());
         for (Rank rank : ranks) {
-            printResultFormat(rank, result.getRank(rank));
+            printResultFormat(rank, result.getRankCount(rank));
         }
         printRateOfReturn(result.rateOfReturn(money));
     }

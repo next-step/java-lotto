@@ -12,10 +12,11 @@ public class MatchResult {
         this.result = Collections.unmodifiableMap(result);
     }
 
-    public static MatchResult check(Lottos lottos, Lotto winningLotto) {
+    public static MatchResult check(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
         Map<Rank, Integer> result = initResult();
         for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = Rank.valueOf(winningLotto.match(lotto));
+            boolean isContainsBonus = lotto.contains(bonusNumber);
+            Rank rank = Rank.valueOf(winningLotto.match(lotto), isContainsBonus);
             result.put(rank, result.get(rank) + 1);
         }
         return new MatchResult(result);
@@ -29,7 +30,7 @@ public class MatchResult {
         return init;
     }
 
-    public int getRank(Rank rank) {
+    public int getRankCount(Rank rank) {
         return result.get(rank);
     }
 
@@ -43,14 +44,10 @@ public class MatchResult {
         int totalPrize = 0;
         List<Rank> ranks = Rank.winningValues();
         for (Rank rank : ranks) {
-            totalPrize += rank.getPrizeMoney() * getRank(rank);
+            totalPrize += rank.getPrizeMoney() * getRankCount(rank);
         }
 
         return totalPrize;
-    }
-
-    public Map<Rank, Integer> getResult() {
-        return Collections.unmodifiableMap(result);
     }
 
 }

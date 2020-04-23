@@ -33,21 +33,23 @@ class LottoSellerTest {
     void match() {
         Lottos buy = Lottos.of(Arrays.asList(
                 Lotto.ofComma("1,2,3,4,5,6"),
-                Lotto.ofComma("1,2,3,4,5,7"),
-                Lotto.ofComma("1,2,3,4,7,8"),
+                Lotto.ofComma("1,2,3,4,5,10"),
+                Lotto.ofComma("1,2,3,4,5,8"),
                 Lotto.ofComma("1,2,3,4,7,8"),
                 Lotto.ofComma("1,2,3,7,8,9"),
-                Lotto.ofComma("1,10,3,7,8,9")
+                Lotto.ofComma("1,2,10,7,8,9")
         ));
         Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.of(10);
 
-        MatchResult match = LottoSeller.match(buy, winningLotto);
+        MatchResult result = LottoSeller.match(buy, winningLotto, bonusNumber);
         assertAll("당첨 결과 테스트",
-                () -> assertEquals(1, match.getRank(Rank.FIRST)),
-                () -> assertEquals(1, match.getRank(Rank.THIRD)),
-                () -> assertEquals(2, match.getRank(Rank.FOURTH)),
-                () -> assertEquals(1, match.getRank(Rank.FIFTH)),
-                () -> assertEquals(1, match.getRank(Rank.FAIL))
+                () -> assertEquals(1, result.getRankCount(Rank.FIRST)),
+                () -> assertEquals(1, result.getRankCount(Rank.SECOND)),
+                () -> assertEquals(1, result.getRankCount(Rank.THIRD)),
+                () -> assertEquals(1, result.getRankCount(Rank.FOURTH)),
+                () -> assertEquals(1, result.getRankCount(Rank.FIFTH)),
+                () -> assertEquals(1, result.getRankCount(Rank.FAIL))
         );
     }
 

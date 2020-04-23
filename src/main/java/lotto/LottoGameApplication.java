@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.MatchResult;
-import lotto.domain.LottoSeller;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 import lotto.ui.InputView;
 import lotto.ui.ResultView;
 
@@ -15,8 +12,11 @@ public class LottoGameApplication {
         ResultView.buyResult(lottos);
 
         String winningLottoNumbers = InputView.inputWinningLottoNumbers();
+        int inputBonusLottoNumber = InputView.inputBonusLottoNumber();
+        LottoNumber bonusNumber = LottoNumber.of(inputBonusLottoNumber);
         Lotto winningLotto = Lotto.ofComma(winningLottoNumbers);
-        MatchResult result = LottoSeller.match(lottos, winningLotto);
+
+        MatchResult result = LottoSeller.match(lottos, winningLotto, bonusNumber);
         ResultView.printResults(result, money);
     }
 
