@@ -17,6 +17,14 @@ public class LottoList {
         return lottoList;
     }
 
+    public long getManualLottoCount() {
+        return lottoList.stream().filter(Lotto::isManualLotto).count();
+    }
+
+    public long getAutoLottoCount() {
+        return lottoList.stream().filter(Lotto::isAutoLotto).count();
+    }
+
     public LottoResult getResult(final WinningLotto winningLotto) {
         final LottoResult lottoResult = new LottoResult();
         for (Lotto lotto : lottoList) {

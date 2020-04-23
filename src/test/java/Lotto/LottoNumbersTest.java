@@ -44,13 +44,6 @@ public class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("로또에서 숫자가 잘 들어있는지 확인하는 테스트")
-    void incrementTest() {
-        final LottoNumber number = LottoNumber.from(6);
-        assertThat(numbers.increment(number)).isEqualTo(1);
-    }
-
-    @Test
     @DisplayName("로또에서 번호가 포함되어있는지 확인하는 테스트")
     void containsTest() {
         assertThat(numbers.contains(LottoNumber.from(24))).isTrue();

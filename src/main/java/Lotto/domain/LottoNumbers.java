@@ -44,11 +44,9 @@ public class LottoNumbers {
     }
 
     public int match(final LottoNumbers winningNumbers) {
-        return this.lottoNumberSet.stream().mapToInt(winningNumbers::increment).sum();
-    }
-
-    public int increment(final LottoNumber number) {
-        return contains(number) ? 1 : 0;
+        return (int) winningNumbers.lottoNumberSet.stream()
+                .filter(this.lottoNumberSet::contains)
+                .count();
     }
 
     public boolean contains(final LottoNumber number) {
