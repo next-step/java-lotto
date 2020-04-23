@@ -17,11 +17,11 @@ public class LottoList {
         return lottoList;
     }
 
-    public long manualLottoCount() {
+    public long getManualLottoCount() {
         return lottoList.stream().filter(Lotto::isManualLotto).count();
     }
 
-    public long autoLottoCount() {
+    public long getAutoLottoCount() {
         return lottoList.stream().filter(Lotto::isAutoLotto).count();
     }
 
