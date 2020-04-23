@@ -38,7 +38,7 @@ public enum Rank {
         return rank;
     }
 
-    public static Rank valueOf(int matchCount) {
+    private static Rank valueOf(int matchCount) {
         validateMatchCount(matchCount);
         for (Rank rank : values()) {
             if (rank.matchCount == matchCount) {
