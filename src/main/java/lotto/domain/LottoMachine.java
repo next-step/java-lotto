@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
+
     public static Lottos generate(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {

@@ -15,6 +15,7 @@ public class ResultView {
     private static final String RESULT_PRINT_START_STR = "\n당첨 통계";
     private static final String DIVIDER = "---------";
     private static final String RESULT_MATCH_FORMAT = "%d개 일치 (%d원) - %d개";
+    private static final String RESULT_MATCH_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String RATE_FORMAT = "총 수익률은 %.2f입니다.";
 
     public static void buyResult(Lottos lottos) {
@@ -50,7 +51,11 @@ public class ResultView {
     }
 
     private static void printResultFormat(Rank rank, int matchCount) {
-        System.out.println(String.format(RESULT_MATCH_FORMAT, rank.getMatchCount(), rank.getPrizeMoney(), matchCount));
+        String format = RESULT_MATCH_FORMAT;
+        if (rank == Rank.SECOND) {
+            format = RESULT_MATCH_BONUS_FORMAT;
+        }
+        System.out.println(String.format(format, rank.getMatchCount(), rank.getPrizeMoney(), matchCount));
     }
 
 }
