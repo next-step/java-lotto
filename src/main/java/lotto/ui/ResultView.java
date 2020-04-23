@@ -43,7 +43,6 @@ public class ResultView {
         for (Match match : matches) {
             printResultFormat(match, result.getMatchCount(match));
         }
-
         printRateOfReturn(result.rateOfReturn(money));
     }
 
