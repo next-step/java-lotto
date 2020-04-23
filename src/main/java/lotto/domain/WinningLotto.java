@@ -12,7 +12,8 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto buyLotto) {
-        return null;
+        boolean isContainsBonus = buyLotto.contains(bonusNumber);
+        return Rank.valueOf(winningLotto.match(buyLotto), isContainsBonus);
     }
 
 }
