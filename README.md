@@ -59,8 +59,9 @@
    
 ### step2 피드백
 - [X] Lottos 일급 컬렉션
-- [ ] LottoResult 일급 컬렉션
-- [ ] view 내부 기능 로직 제거
-- [ ] BigDecimal 사용    
+- [X] LottoResult 일급 컬렉션
+- [X] view 내부 기능 로직 제거
+- [X] BigDecimal 사용
+- [ ] LottoNumber 캐싱 // TODO
  
 ---

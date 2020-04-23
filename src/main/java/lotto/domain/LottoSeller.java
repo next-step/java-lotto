@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static lotto.domain.StringConstants.NOT_ENOUGH_MONEY;
 
 public class LottoSeller {
@@ -17,21 +14,8 @@ public class LottoSeller {
         return LottoMachine.generate(buyCount);
     }
 
-    public static Map<Match, Integer> match(Lottos lottos, Lotto winningLotto) {
-        Map<Match, Integer> result = initResult();
-        for (Lotto lotto : lottos.getLottos()) {
-            Match match = Match.valueOf(winningLotto.match(lotto));
-            result.put(match, result.get(match) + 1);
-        }
-        return result;
-    }
-
-    private static Map<Match, Integer> initResult() {
-        Map<Match, Integer> init = new HashMap<>();
-        for (Match value : Match.values()) {
-            init.put(value, 0);
-        }
-        return init;
+    public static MatchResult match(Lottos lottos, Lotto winningLotto) {
+        return MatchResult.check(lottos, winningLotto);
     }
 
 }

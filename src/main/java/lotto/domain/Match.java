@@ -52,4 +52,8 @@ public enum Match {
     public int getPrizeMoney() {
         return prizeMoney;
     }
+
+    public int getTotalPrize() {
+        return matchCount * prizeMoney;
+    }
 }
