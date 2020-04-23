@@ -14,8 +14,8 @@ public class LottoSeller {
         return LottoMachine.generate(buyCount);
     }
 
-    public static MatchResult match(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
-        return MatchResult.check(lottos, winningLotto, bonusNumber);
+    public static MatchResult match(Lottos lottos, WinningLotto winningLotto) {
+        return MatchResult.check(lottos, winningLotto);
     }
 
 }

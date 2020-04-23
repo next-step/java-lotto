@@ -13,10 +13,9 @@ public class LottoGameApplication {
 
         String winningLottoNumbers = InputView.inputWinningLottoNumbers();
         int inputBonusLottoNumber = InputView.inputBonusLottoNumber();
-        LottoNumber bonusNumber = LottoNumber.of(inputBonusLottoNumber);
-        Lotto winningLotto = Lotto.ofComma(winningLottoNumbers);
+        WinningLotto winningLotto = WinningLotto.of(Lotto.ofComma(winningLottoNumbers), inputBonusLottoNumber);
 
-        MatchResult result = LottoSeller.match(lottos, winningLotto, bonusNumber);
+        MatchResult result = LottoSeller.match(lottos, winningLotto);
         ResultView.printResults(result, money);
     }
 

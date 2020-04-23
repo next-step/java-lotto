@@ -39,10 +39,8 @@ class LottoSellerTest {
                 Lotto.ofComma("1,2,3,7,8,9"),
                 Lotto.ofComma("1,2,10,7,8,9")
         ));
-        Lotto winningLotto = Lotto.ofComma("1,2,3,4,5,6");
-        LottoNumber bonusNumber = LottoNumber.of(10);
 
-        MatchResult result = LottoSeller.match(buy, winningLotto, bonusNumber);
+        MatchResult result = LottoSeller.match(buy, WinningLotto.of(Lotto.ofComma("1,2,3,4,5,6"), 10));
         assertAll("당첨 결과 테스트",
                 () -> assertEquals(1, result.getRankCount(Rank.FIRST)),
                 () -> assertEquals(1, result.getRankCount(Rank.SECOND)),

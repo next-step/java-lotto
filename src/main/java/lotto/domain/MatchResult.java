@@ -12,11 +12,10 @@ public class MatchResult {
         this.result = Collections.unmodifiableMap(result);
     }
 
-    public static MatchResult check(Lottos lottos, Lotto winningLotto, LottoNumber bonusNumber) {
+    public static MatchResult check(Lottos lottos, WinningLotto winningLotto) {
         Map<Rank, Integer> result = initResult();
         for (Lotto lotto : lottos.getLottos()) {
-            boolean isContainsBonus = lotto.contains(bonusNumber);
-            Rank rank = Rank.valueOf(winningLotto.match(lotto), isContainsBonus);
+            Rank rank = winningLotto.match(lotto);
             result.put(rank, result.get(rank) + 1);
         }
         return new MatchResult(result);
