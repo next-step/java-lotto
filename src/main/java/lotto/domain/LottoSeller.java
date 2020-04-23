@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import static lotto.domain.StringConstants.NOT_ENOUGH_MONEY;
-
 public class LottoSeller {
+
+    private static final String NOT_ENOUGH_MONEY = "돈이 모자랍니다";
 
     private static final int LOTTO_PRISE = 1000;
 

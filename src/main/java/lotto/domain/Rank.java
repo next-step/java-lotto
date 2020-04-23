@@ -30,6 +30,14 @@ public enum Rank {
                 .collect(Collectors.toList());
     }
 
+    public static Rank valueOf(int matchCount, boolean matchBonus) {
+        Rank rank = valueOf(matchCount);
+        if (rank.matchCount == SECOND.matchCount) {
+            return matchBonus ? SECOND : THIRD;
+        }
+        return rank;
+    }
+
     public static Rank valueOf(int matchCount) {
         validateMatchCount(matchCount);
         for (Rank rank : values()) {

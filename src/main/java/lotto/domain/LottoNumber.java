@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static lotto.domain.StringConstants.OUT_OF_RANGE;
-
 public class LottoNumber {
+
+    private static final String OUT_OF_RANGE = "lotto number out of range";
 
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;

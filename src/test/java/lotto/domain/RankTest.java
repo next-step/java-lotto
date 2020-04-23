@@ -10,8 +10,8 @@ public class RankTest {
     @DisplayName("정상 생성 테스트")
     @Test
     void valueOf() {
-        assertThat(Rank.valueOf(4, false)).isEqualTo(Rank.FIFTH);
-        assertThat(Rank.valueOf(4, true)).isEqualTo(Rank.FIFTH);
+        assertThat(Rank.valueOf(4, false)).isEqualTo(Rank.FOURTH);
+        assertThat(Rank.valueOf(4, true)).isEqualTo(Rank.FOURTH);
     }
 
     @DisplayName("보너스가 true인 경우 2등")
