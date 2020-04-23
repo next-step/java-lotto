@@ -48,4 +48,14 @@ class LottoTest {
         assertThat(winningLotto.match(buyLotto)).isEqualTo(expected);
     }
 
+    @DisplayName("로또 번호 포함")
+    @ParameterizedTest
+    @CsvSource({"1,true", "7,false"})
+    void contains(int number, boolean expected) {
+        Lotto lotto = Lotto.ofComma("1,2,3,4,5,6");
+        LottoNumber lottoNumber = LottoNumber.of(number);
+
+        assertThat(lotto.contains(lottoNumber)).isEqualTo(expected);
+    }
+
 }
