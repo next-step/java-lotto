@@ -65,6 +65,10 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber) ? 1 : 0;
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
