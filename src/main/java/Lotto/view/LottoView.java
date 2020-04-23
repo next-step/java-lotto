@@ -2,6 +2,8 @@ package Lotto.view;
 
 import Lotto.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoView {
@@ -10,17 +12,32 @@ public class LottoView {
 
     public LottoView(final LottoGame lottoGame) {
         final Money money = Money.from(getUserMoney());
-        final LottoList lottoList = lottoGame.issueLotto(money.getLottoCount());
-        printCountOfLotto(money.getLottoCount());
+        final ManualLottoCount manualLottoCount = ManualLottoCount.of(getManualLottoCount(), money.getLottoCount());
+        final LottoList lottoList = lottoGame.issueLotto(getManualLottoNumbers(manualLottoCount), money.getLottoCount());
+        printCountOfLotto(lottoList);
         printLottoResult(lottoList);
-        final WinningLotto winningLotto = WinningLotto.of(getLastWeekWinningNumbers(), getBonusNumber()) ;
+        final WinningLotto winningLotto = WinningLotto.of(getLastWeekWinningNumbers(), getBonusNumber());
         final LottoResult lottoResult = lottoList.getResult(winningLotto);
         printStatistic(lottoResult, money);
     }
 
     private int getUserMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println("구입 금액을 입력해 주세요.");
         return SCANNER.nextInt();
+    }
+
+    private int getManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    private List<String> getManualLottoNumbers(final ManualLottoCount manualLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        final List<String> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount.getCount(); i++) {
+            manualLottoNumbers.add(SCANNER.next());
+        }
+        return manualLottoNumbers;
     }
 
     private String getLastWeekWinningNumbers() {
@@ -33,8 +50,11 @@ public class LottoView {
         return SCANNER.nextInt();
     }
 
-    private void printCountOfLotto(final int countOfLotto) {
-        System.out.println(countOfLotto + "개를 구매했습니다.");
+    private void printCountOfLotto(final LottoList lottoList) {
+        System.out.println("수동으로 " + lottoList.getManualLottoCount() +
+                "장, 자동으로 " +
+                lottoList.getAutoLottoCount() +
+                "개를 구매했습니다.");
     }
 
     private void printLottoResult(final LottoList lottoList) {
