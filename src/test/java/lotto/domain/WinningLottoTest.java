@@ -13,13 +13,13 @@ class WinningLottoTest {
 
     @BeforeEach
     void setup() {
-        winningLotto = new WinningLotto(Lotto.ofComma("1,2,3,4,5,6"), 7);
+        winningLotto = WinningLotto.of(Lotto.ofComma("1,2,3,4,5,6"), 7);
     }
 
     @DisplayName("당첨번호와 보너스번호 중복 불가")
     @Test
     void createError() {
-        assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(Lotto.ofComma("1,2,3,4,5,6"), 1));
+        assertThatIllegalArgumentException().isThrownBy(() -> WinningLotto.of(Lotto.ofComma("1,2,3,4,5,6"), 1));
     }
 
     @DisplayName("2등")

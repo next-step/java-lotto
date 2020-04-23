@@ -6,9 +6,20 @@ public class WinningLotto {
 
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningLotto, int bonusNumber) {
-        this.bonusNumber = LottoNumber.of(bonusNumber);
+    private WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        validateLottoNumbers(winningLotto, bonusNumber);
+        this.bonusNumber = bonusNumber;
         this.winningLotto = winningLotto;
+    }
+
+    private void validateLottoNumbers(Lotto winningLotto, LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("로또 번호 중복");
+        }
+    }
+
+    public static WinningLotto of(Lotto winningLotto, int number) {
+        return new WinningLotto(winningLotto, LottoNumber.of(number));
     }
 
     public Rank match(Lotto buyLotto) {
