@@ -8,4 +8,8 @@ public class Money {
         this.money = money;
     }
 
+    public int buyCount(int price) {
+        return 0;
+    }
+
 }
