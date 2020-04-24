@@ -1,5 +1,7 @@
 package lotto.ui;
 
+import lotto.domain.Money;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -8,10 +10,10 @@ public class InputView {
     private static final String WINNING_LOTTO_INPUT_GUIDE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_LOTTO_INPUT_GUIDE = "보너스 볼을 입력해 주세요.";
 
-    public static int inputMoney() {
+    public static Money inputMoney() {
         System.out.println(MONEY_INPUT_GUIDE);
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return new Money(scanner.nextInt());
     }
 
     public static String inputWinningLottoNumbers() {

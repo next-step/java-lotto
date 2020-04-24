@@ -15,4 +15,8 @@ public class Money {
         return money / price;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
 }

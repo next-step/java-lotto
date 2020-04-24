@@ -1,9 +1,6 @@
 package lotto.ui;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.MatchResult;
+import lotto.domain.*;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
@@ -34,7 +31,7 @@ public class ResultView {
         System.out.println(String.format(BUY_RESULT, buyCount));
     }
 
-    public static void printResults(MatchResult result, int money) {
+    public static void printResults(MatchResult result, Money money) {
         System.out.println(RESULT_PRINT_START_STR);
         System.out.println(DIVIDER);
 

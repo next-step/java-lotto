@@ -7,7 +7,7 @@ import lotto.ui.ResultView;
 public class LottoGameApplication {
 
     public static void main(String[] args) {
-        int money = InputView.inputMoney();
+        Money money = InputView.inputMoney();
         Lottos lottos = LottoSeller.buy(money);
         ResultView.buyResult(lottos);
 

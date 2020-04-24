@@ -18,14 +18,14 @@ class LottoSellerTest {
     @ParameterizedTest
     @CsvSource({"1000,1", "1500,1", "2000,2"})
     void buy(int money, int expected) {
-        Lottos buy = LottoSeller.buy(money);
+        Lottos buy = LottoSeller.buy(new Money(money));
         assertThat(buy.size()).isEqualTo(expected);
     }
 
     @DisplayName("천원 미만으로 로또 구매시 에러")
     @Test
     void buyFail() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoSeller.buy(999));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoSeller.buy(new Money(999)));
     }
 
     @DisplayName("당첨 결과 확인")

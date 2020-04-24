@@ -33,8 +33,8 @@ public class MatchResult {
         return result.get(rank);
     }
 
-    public BigDecimal rateOfReturn(int inputMoney) {
-        BigDecimal money = new BigDecimal(inputMoney);
+    public BigDecimal rateOfReturn(Money inputMoney) {
+        BigDecimal money = new BigDecimal(inputMoney.getMoney());
         BigDecimal totalPrize = new BigDecimal(calcTotalPrize());
         return totalPrize.divide(money, 2, RoundingMode.HALF_UP);
     }

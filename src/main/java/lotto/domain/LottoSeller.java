@@ -6,8 +6,8 @@ public class LottoSeller {
     private static final int LOTTO_PRISE = 1000;
     private static final int MIN_BUY_COUNT = 1;
 
-    public static Lottos buy(int money) {
-        int buyCount = money / LOTTO_PRISE;
+    public static Lottos buy(Money money) {
+        int buyCount = money.buyCount(LOTTO_PRISE);
         if (buyCount < MIN_BUY_COUNT) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
