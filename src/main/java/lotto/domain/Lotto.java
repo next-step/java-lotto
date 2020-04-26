@@ -7,11 +7,17 @@ public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     private Lotto(Set<LottoNumber> lottoNumbers) {
         checkLottoSize(lottoNumbers);
-        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+        this.lottoNumbers = Collections.unmodifiableList(sortedList(lottoNumbers));
+    }
+
+    private List<LottoNumber> sortedList(Set<LottoNumber> lottoNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
+        numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
+        return numbers;
     }
 
     public static Lotto of(List<Integer> lottoNumbers) {
@@ -63,6 +69,10 @@ public class Lotto {
 
     private int get1IfContains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber) ? 1 : 0;
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override

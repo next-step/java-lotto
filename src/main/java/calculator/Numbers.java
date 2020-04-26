@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Numbers {
 
-    private List<Number> numbers;
+    private final List<Number> numbers;
 
     private Numbers(List<Number> numbers) {
         this.numbers = Collections.unmodifiableList(numbers);
@@ -20,7 +20,7 @@ public class Numbers {
     }
 
     public int sum() {
-        Number result = new Number(0);
+        Number result = Number.ZERO;
         for (Number number : numbers) {
             result = number.add(result);
         }

@@ -2,6 +2,8 @@ package calculator;
 
 public class Number {
 
+    static final Number ZERO = new Number(0);
+
     private final int number;
 
     public Number(int number) {

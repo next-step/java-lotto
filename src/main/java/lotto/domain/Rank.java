@@ -4,36 +4,45 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.domain.StringConstants.ILLEGAL_MATCH_COUNT;
+public enum Rank {
 
-public enum Match {
-
-    SIX(6, 2_000_000_000),
-    FIVE(5, 1_500_000),
-    FOUR(4, 50_000),
-    THREE(3, 5_000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     FAIL(0, 0),
     ;
+
+    public static final String ILLEGAL_MATCH_COUNT = "match count must be greater than zero";
 
     private final int matchCount;
     private final int prizeMoney;
 
-    Match(int matchCount, int prizeMoney) {
+    Rank(int matchCount, int prizeMoney) {
         this.matchCount = matchCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static List<Match> winningValues() {
+    public static List<Rank> winningValues() {
         return Arrays.stream(values())
                 .filter(value -> value != FAIL)
                 .collect(Collectors.toList());
     }
 
-    public static Match valueOf(int matchCount) {
+    public static Rank valueOf(int matchCount, boolean matchBonus) {
+        Rank rank = valueOf(matchCount);
+        if (rank.matchCount == SECOND.matchCount) {
+            return matchBonus ? SECOND : THIRD;
+        }
+        return rank;
+    }
+
+    private static Rank valueOf(int matchCount) {
         validateMatchCount(matchCount);
-        for (Match match : values()) {
-            if (match.matchCount == matchCount) {
-                return match;
+        for (Rank rank : values()) {
+            if (rank.matchCount == matchCount) {
+                return rank;
             }
         }
         return FAIL;
@@ -52,4 +61,5 @@ public enum Match {
     public int getPrizeMoney() {
         return prizeMoney;
     }
+
 }

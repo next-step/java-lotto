@@ -7,16 +7,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
-    public static List<Lotto> generate(int count) {
+
+    public static Lottos generate(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(generateRandomLotto());
         }
-        return lottos;
+        return Lottos.of(lottos);
     }
 
     private static Lotto generateRandomLotto() {
-        List<Integer> lottoNumbers = IntStream.range(1, 46)
+        List<Integer> lottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(lottoNumbers);
