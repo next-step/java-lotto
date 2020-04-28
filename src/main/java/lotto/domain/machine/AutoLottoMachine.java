@@ -2,6 +2,7 @@ package lotto.domain.machine;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 
 import java.util.ArrayList;
@@ -9,20 +10,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoLottoMachine implements LottoMachine {
-    private final List<Integer> numbers;
+    private static final List<Integer> numbers = new ArrayList<>();
 
-    public AutoLottoMachine() {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+    static {
+        for (int i = LottoNumber.MIN_VALUE; i <= LottoNumber.MAX_VALUE; i++) {
             numbers.add(i);
         }
-        this.numbers = numbers;
     }
 
     @Override
     public List<Lotto> buyLotto(Money money) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.getCountOfLotto(); i++) {
+        int countOfLotto = money.getCountOfLotto();
+        for (int i = 0; i < countOfLotto; i++) {
             lottos.add(createLotto());
         }
         return lottos;
