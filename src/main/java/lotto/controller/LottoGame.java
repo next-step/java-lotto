@@ -15,7 +15,7 @@ public class LottoGame {
         int countOfManual = InputView.getManualSelectLottoCount();
         List<String> manualLottoNumbers = InputView.getManualLottoNumbers(countOfManual);
         LottoMachine lottoMachine = new DefaultLottoMachine();
-        LottoGroup lottoGroup = new LottoGroup(lottoMachine.buyLotto(money, manualLottoNumbers));
+        LottoGroup lottoGroup = lottoMachine.buyLotto(money, manualLottoNumbers);
         ResultView.printLottoGroup(lottoGroup.getLottos());
         WinningLotto winningLotto = new WinningLotto(Lotto.ofComma(InputView.getWinningLotto()), LottoNumber.of(InputView.getBonusNo()));
         Ranks ranks = lottoGroup.matching(winningLotto);
