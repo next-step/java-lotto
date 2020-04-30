@@ -22,7 +22,7 @@ public class LottoGroupTest {
 
     @Test
     public void matching() {
-        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6", 7);
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofComma("1,2,3,4,5,6"), LottoNumber.of(7));
         Ranks ranks = lottoGroup.matching(winningLotto);
         assertThat(ranks.getRanks()).hasSize(6).containsExactly(Rank.values());
     }

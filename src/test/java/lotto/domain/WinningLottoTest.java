@@ -9,22 +9,22 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 public class WinningLottoTest {
     private WinningLotto winningLotto;
     private String numbers = "1,2,3,4,5,6";
-    private int bonusNumber = 7;
+    private int bonus = 7;
 
     @BeforeEach
     public void setup() {
-        winningLotto = new WinningLotto(numbers, bonusNumber);
+        winningLotto = new WinningLotto(Lotto.ofComma(numbers), LottoNumber.of(bonus));
     }
 
     @Test
     public void equal() {
-        assertThat(winningLotto).isEqualTo(new WinningLotto(numbers, bonusNumber));
+        assertThat(winningLotto).isEqualTo(new WinningLotto(Lotto.ofComma(numbers), LottoNumber.of(bonus)));
     }
 
     @Test
     public void 로또번호_보너스번호_중복X() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-           new WinningLotto("1,2,3,4,5,6", 6);
+           new WinningLotto(Lotto.ofComma(numbers), LottoNumber.of(6));
         });
     }
 

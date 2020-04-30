@@ -21,7 +21,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    static LottoNumber of(int number) {
+    public static LottoNumber of(int number) {
         LottoNumber lottoNumber = lottoNumbers.get(number);
         if (Objects.isNull(lottoNumber)) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지만 가능합니다.");
@@ -29,7 +29,7 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    static LottoNumber of(String value) {
+    public static LottoNumber of(String value) {
         if (Objects.isNull(value)) {
             throw new IllegalArgumentException();
         }

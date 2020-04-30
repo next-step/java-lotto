@@ -45,6 +45,10 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

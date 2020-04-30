@@ -16,7 +16,7 @@ public class LottoGame {
         LottoMachine lottoMachine = new DefaultLottoMachine(manualLottoNumbers);
         LottoGroup lottoGroup = new LottoGroup(lottoMachine.buyLotto(money));
         ResultView.printLottoGroup(lottoGroup.getLottos());
-        WinningLotto winningLotto = new WinningLotto(InputView.getWinningLotto(), InputView.getBonusNo());
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofComma(InputView.getWinningLotto()), LottoNumber.of(InputView.getBonusNo()));
         Ranks ranks = lottoGroup.matching(winningLotto);
         BigDecimal earningRate = money.getEarningRate(ranks.getTotalWinningMoney());
         ResultView.printEarningRate(earningRate.toString());
