@@ -41,10 +41,6 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isMatchBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
-
     public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
