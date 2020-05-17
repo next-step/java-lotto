@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringSeparator {
-
     private final static String ZERO = "0";
 
     private final static String DEFAULT_SEPARATOR = ",|:";
@@ -26,34 +25,31 @@ public class StringSeparator {
         if (StringUtils.isEmpty(input)) {
             return new String[]{ZERO};
         }
-
-        if (defaultMatches(input)) {
+        if (INPUT_PATTERN.matcher(input).matches()) {
             return input.split(DEFAULT_SEPARATOR);
         }
-        if (customMatches(input)) {
-            Matcher matcher = CUSTOM_INPUT_PATTERN.matcher(input);
-            if (matcher.find()) {
-                String customDelimiter = matcher.group(1);
-                String find = matcher.group(2);
 
-                if(delimiterMatches(find, customDelimiter)){
-                    return find.split(customDelimiter);
-                }
-            }
+        Matcher customMatcher = CUSTOM_INPUT_PATTERN.matcher(input);
+
+        if (customMatcher.find()) {
+            return customSplit(customMatcher);
         }
-        throw new IllegalArgumentException("올바르지 않은 구분자 입니다.");
+        throw new IllegalArgumentException();
     }
 
-    private static boolean defaultMatches(String input) {
-        return INPUT_PATTERN.matcher(input).matches();
+    private static String[] customSplit(Matcher matcher) {
+        String delimiter = matcher.group(matcher.start() + 1);
+        String value = matcher.group(matcher.start() + 2);
+
+        valueCheck(value, delimiter);
+        return value.split(delimiter);
     }
 
-    private static boolean customMatches(String input) {
-        return CUSTOM_INPUT_PATTERN.matcher(input).matches();
-    }
-
-    private static boolean delimiterMatches(String input, String delimiter){
+    private static void valueCheck(String value, String delimiter) {
         String regex = "^((\\d+)|(?:[\\\\" + delimiter + "](\\d+)))+$";
-        return Pattern.compile(regex).matcher(input).matches();
+
+        if (!Pattern.compile(regex).matcher(value).matches()) {
+            throw new IllegalArgumentException("잘못된 인수 값입니다.");
+        }
     }
 }
