@@ -7,7 +7,8 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return 1;
+        String[] inputTokens = input.split(",");
+        return Integer.parseInt(inputTokens[0]);
     }
 
     private static boolean isBlank(String value) {
