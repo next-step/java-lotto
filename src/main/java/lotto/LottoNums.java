@@ -10,6 +10,5 @@ public class LottoNums {
             throw new IllegalArgumentException("lotto has only six nums");
         }
         this.lottoNums = lottoNums;
-
     }
 }

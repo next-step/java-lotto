@@ -14,5 +14,4 @@ public class LottoNum {
             throw new IllegalArgumentException("lotto num is 1 to 45");
         }
     }
-
 }
