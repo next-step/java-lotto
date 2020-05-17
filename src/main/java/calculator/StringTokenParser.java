@@ -16,8 +16,8 @@ public class StringTokenParser implements TokenParser {
 
         Pattern pattern = Pattern.compile("//(.)\\n(.*)");
         Matcher matcher = pattern.matcher(input);
-        if(matcher.matches()){
-            splitter =  matcher.group(1);
+        if (matcher.matches()) {
+            splitter = matcher.group(1);
             tokens = matcher.group(2);
         }
 
@@ -25,11 +25,11 @@ public class StringTokenParser implements TokenParser {
     }
 
     private TokenNumbers getTokenNumbers(String splitter, String tokens) {
-        if(tokens.isEmpty()){
+        if (tokens.isEmpty()) {
             return new TokenNumbers(Collections.EMPTY_LIST);
         }
 
-        List<TokenNumber> tokenNumbers= Stream.of(tokens.split(splitter))
+        List<TokenNumber> tokenNumbers = Stream.of(tokens.split(splitter))
             .map(token -> TokenNumber.of(token))
             .collect(Collectors.toList());
 

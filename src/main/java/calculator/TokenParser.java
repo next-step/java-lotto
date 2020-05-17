@@ -1,5 +1,6 @@
 package calculator;
 
-public interface TokenParser  {
+public interface TokenParser {
+
     TokenNumbers parseTokenNumbers(String input);
 }

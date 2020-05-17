@@ -19,7 +19,7 @@ public class CalculatorTest {
     private Calculator calculator;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         calculator = new Calculator(new StringTokenParser());
     }
 
@@ -37,10 +37,10 @@ public class CalculatorTest {
     @DisplayName("하나의 정수값의 계산 결과는 핻아 정수값이다.")
     @ParameterizedTest
     @CsvSource(
-        delimiter= ',',
-        value = {"1,1","2,2"}
+        delimiter = ',',
+        value = {"1,1", "2,2"}
     )
-    void return_single_val_when_input_single_val(String input, long expect){
+    void return_single_val_when_input_single_val(String input, long expect) {
         long result = calculator.calculate(input);
 
         assertThat(result).isEqualTo(expect);
@@ -49,10 +49,10 @@ public class CalculatorTest {
     @DisplayName("','으로 정수를 구분할수 있다.")
     @ParameterizedTest
     @CsvSource(
-        delimiterString= "==",
-        value = {"1,2==3","1,2,3==6"}
+        delimiterString = "==",
+        value = {"1,2==3", "1,2,3==6"}
     )
-    void given_dot_when_calculate_then_split_with_dot(String input, long expect){
+    void given_dot_when_calculate_then_split_with_dot(String input, long expect) {
         long result = calculator.calculate(input);
 
         assertThat(result).isEqualTo(expect);
@@ -61,10 +61,10 @@ public class CalculatorTest {
     @DisplayName("';'으로 정수를 구분할수 있다.")
     @ParameterizedTest
     @CsvSource(
-        delimiterString= "==",
-        value = {"1:2==3","1:2:3==6"}
+        delimiterString = "==",
+        value = {"1:2==3", "1:2:3==6"}
     )
-    void given_colon_when_calculate_then_split_with_colon(String input, long expect){
+    void given_colon_when_calculate_then_split_with_colon(String input, long expect) {
         long result = calculator.calculate(input);
 
         assertThat(result).isEqualTo(expect);
@@ -73,10 +73,11 @@ public class CalculatorTest {
     @DisplayName("',', ';' 두개로 정수를 구분할수 있다.")
     @ParameterizedTest
     @CsvSource(
-        delimiterString= "==",
-        value = {"1:2,3==6","1,2:3==6"}
+        delimiterString = "==",
+        value = {"1:2,3==6", "1,2:3==6"}
     )
-    void given_colon_and_dot_when_calculate_then_split_with_colon_and_dot(String input, long expect){
+    void given_colon_and_dot_when_calculate_then_split_with_colon_and_dot(String input,
+        long expect) {
         long result = calculator.calculate(input);
 
         assertThat(result).isEqualTo(expect);
@@ -84,24 +85,26 @@ public class CalculatorTest {
 
     @DisplayName("숫자 이외의 값 전달시 예외 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"z","1+2"})
-    void given_invalid_format_when_calculate_then_throw_exception(String input){
-        assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
+    @ValueSource(strings = {"z", "1+2"})
+    void given_invalid_format_when_calculate_then_throw_exception(String input) {
+        assertThatThrownBy(() -> calculator.calculate(input))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("음수를 전달하는 경우 예외 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"-1","-1,-2","-1:2"})
-    void given_negative_when_calculate_then_throw_exception(String input){
-        assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
+    @ValueSource(strings = {"-1", "-1,-2", "-1:2"})
+    void given_negative_when_calculate_then_throw_exception(String input) {
+        assertThatThrownBy(() -> calculator.calculate(input))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("커스텀 구분자를 '//{구분자}\\n{정수}'형식으로 사용할수있다.")
     @ParameterizedTest
     @MethodSource("customSplitter")
-    void given_custom_splitter_when_calculate_then_add_result(String input, long expect){
+    void given_custom_splitter_when_calculate_then_add_result(String input, long expect) {
         long result = calculator.calculate(input);
-        
+
         assertThat(result).isEqualTo(expect);
     }
 

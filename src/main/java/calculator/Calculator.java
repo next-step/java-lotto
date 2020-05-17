@@ -1,6 +1,5 @@
 package calculator;
 
-
 public class Calculator {
 
     private TokenParser tokenParser;
