@@ -10,14 +10,14 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return sum(split(input));
+        return sum(splitInputValue(input));
     }
 
     private static boolean isBlank(String value) {
         return value == null || value.trim().isEmpty();
     }
 
-    private static String[] split(String input) {
+    private static String[] splitInputValue(String input) {
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (!matcher.find()) {
             return input.split(",|:");
@@ -29,9 +29,18 @@ public class StringAddCalculator {
     private static int sum(String[] inputTokens) {
         int sum = 0;
         for (String token : inputTokens) {
-            sum += Integer.parseInt(token);
+            int number = Integer.parseInt(token);
+            validateNumber(number);
+
+            sum += number;
         }
 
         return sum;
+    }
+
+    private static void validateNumber(int number) {
+        if (number < 0) {
+            throw new RuntimeException();
+        }
     }
 }
