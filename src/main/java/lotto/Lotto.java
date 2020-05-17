@@ -1,9 +1,9 @@
 package lotto;
 
 public class Lotto {
+    private final LottoNums lottoNums;
 
-    private final static int price = 1000;
-
-    public Lotto() {
+    public Lotto(LottoNums lottoNums) {
+        this.lottoNums = lottoNums;
     }
 }
