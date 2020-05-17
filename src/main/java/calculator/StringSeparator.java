@@ -49,7 +49,7 @@ public class StringSeparator {
         String regex = "^((\\d+)|(?:[\\\\" + delimiter + "](\\d+)))+$";
 
         if (!Pattern.compile(regex).matcher(value).matches()) {
-            throw new IllegalArgumentException("잘못된 인수 값입니다.");
+            throw new IllegalArgumentException("잘못된 인자 값입니다.");
         }
     }
 }
