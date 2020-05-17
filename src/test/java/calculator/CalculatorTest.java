@@ -12,7 +12,7 @@ public class CalculatorTest {
 
     @BeforeEach
     void setup(){
-        calculator = new Calculator();
+        calculator = new Calculator(new StringTokenParser());
     }
 
     @Test
@@ -38,19 +38,19 @@ public class CalculatorTest {
 
     @Test
     void given_dot_when_calculate_then_split_with_dot(){
-        long result = calculator.calculate("1,2", ",");
+        long result = calculator.calculate("1,2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
-    void given_semicolon_when_calculate_then_split_with_semicolon(){
-        long result = calculator.calculate("1:2",":");
+    void given_colon_when_calculate_then_split_with_colon(){
+        long result = calculator.calculate("1:2");
         assertThat(result).isEqualTo(3);
     }
 
     @Test
-    void given_semicolon_and_dot_when_calculate_then_split_with_semicolon_and_dot(){
-        long result = calculator.calculate("1:2,3", ",|:");
+    void given_colon_and_dot_when_calculate_then_split_with_colon_and_dot(){
+        long result = calculator.calculate("1:2,3");
         assertThat(result).isEqualTo(6);
     }
 
@@ -63,8 +63,8 @@ public class CalculatorTest {
     @Test
     void given_negative_when_calculate_then_throw_exception(){
         assertThatThrownBy(() -> calculator.calculate("-1,-2")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> calculator.calculate("-1,2",",")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> calculator.calculate("-1:2",":")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculator.calculate("-1,2")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> calculator.calculate("-1:2")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
