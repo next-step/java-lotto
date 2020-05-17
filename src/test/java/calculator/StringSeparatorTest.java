@@ -16,7 +16,7 @@ public class StringSeparatorTest {
     @DisplayName("기본 구분자(, :) 를 갖는 문자열을 구분한다.")
     void 기본_구분자_테스트(String input, int expected) {
         String[] result = StringSeparator.split(input);
-        assertThat(result).isEqualTo(expected);
+        assertThat(result).hasSize(expected);
     }
 
     @ValueSource(strings = {"1:2-3", "1!2:3", "3*4,7", "3','+4,7"})
