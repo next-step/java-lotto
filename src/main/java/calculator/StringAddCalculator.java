@@ -7,11 +7,23 @@ public class StringAddCalculator {
             return 0;
         }
 
-        String[] inputTokens = input.split(",");
-        return Integer.parseInt(inputTokens[0]);
+        return sum(splitByComma(input));
     }
 
     private static boolean isBlank(String value) {
         return value == null || value.trim().isEmpty();
+    }
+
+    private static String[] splitByComma(String input) {
+        return input.split(",");
+    }
+
+    private static int sum(String[] inputTokens) {
+        int sum = 0;
+        for (String token : inputTokens) {
+            sum += Integer.parseInt(token);
+        }
+
+        return sum;
     }
 }
