@@ -1,5 +1,8 @@
 package calculator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class StringAddCalculator {
 
     public static int splitAndSum(String input) {
@@ -7,15 +10,20 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return sum(splitByCommaOrColon(input));
+        return sum(split(input));
     }
 
     private static boolean isBlank(String value) {
         return value == null || value.trim().isEmpty();
     }
 
-    private static String[] splitByCommaOrColon(String input) {
-        return input.split(",|:");
+    private static String[] split(String input) {
+        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        if (!matcher.find()) {
+            return input.split(",|:");
+        }
+
+        return matcher.group(2).split(matcher.group(1));
     }
 
     private static int sum(String[] inputTokens) {
