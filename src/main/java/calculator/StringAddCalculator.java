@@ -7,15 +7,15 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return sum(splitByComma(input));
+        return sum(splitByCommaOrColon(input));
     }
 
     private static boolean isBlank(String value) {
         return value == null || value.trim().isEmpty();
     }
 
-    private static String[] splitByComma(String input) {
-        return input.split(",");
+    private static String[] splitByCommaOrColon(String input) {
+        return input.split(",|:");
     }
 
     private static int sum(String[] inputTokens) {
