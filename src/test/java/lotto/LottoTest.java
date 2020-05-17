@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,7 +44,6 @@ public class LottoTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또는 6개의 숫자의 숫자를 가진다..")
     @DisplayName("로또는 6개의 숫자의 숫자를 가진다.")
     @Test
     void given_6_nums_when_lotto_create_then_success() {
@@ -53,5 +53,19 @@ public class LottoTest {
         new LottoNums(lottoNumList);
     }
 
+    @DisplayName("로또는 1부터 45까지의 수가 아니면 예외를 발생한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1,46})
+    void given_not_1_to_45_num_when_lotto_num_create_then_throw_exception(int lottoNum){
+        assertThatIllegalArgumentException()
+            .isThrownBy(()->new LottoNum(lottoNum));
+    }
+
+    @DisplayName("로또는 1부터 45까지의 수를 가지고 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1,3,45})
+    void given_1_to_45_num_when_lotto_num_create_then_success(int lottoNum){
+        new LottoNum(lottoNum);
+    }
 
 }
