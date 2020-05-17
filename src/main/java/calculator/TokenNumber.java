@@ -5,7 +5,7 @@ public class TokenNumber {
     private final long value;
 
     TokenNumber(long value) {
-        if (value <= 0) {
+        if (value < 0) {
             throw new IllegalArgumentException(String.format("%s is invalid format", value));
         }
 

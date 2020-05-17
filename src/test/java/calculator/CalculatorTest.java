@@ -2,83 +2,114 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class CalculatorTest {
 
-    Calculator calculator;
+    private Calculator calculator;
 
     @BeforeEach
     void setup(){
         calculator = new Calculator(new StringTokenParser());
     }
 
-    @Test
-    void return_0_when_empty_string() {
-        long result = calculator.calculate("");
-        assertThat(result).isEqualTo(0);
+    @DisplayName("빈문자열의 계산 결과는 0이다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"", "   ", "  \t\n"})
+    @NullAndEmptySource
+    void return_0_when_empty_string(String input) {
+        long result = calculator.calculate(input);
 
-        result = calculator.calculate("    \n");
-        assertThat(result).isEqualTo(0);
-
-        result = calculator.calculate(null);
         assertThat(result).isEqualTo(0);
     }
 
-    @Test
-    void return_single_val_when_input_single_val(){
-        long result = calculator.calculate("1");
-        assertThat(result).isEqualTo(1);
 
-        result = calculator.calculate("2");
-        assertThat(result).isEqualTo(2);
+    @DisplayName("하나의 정수값의 계산 결과는 핻아 정수값이다.")
+    @ParameterizedTest
+    @CsvSource(
+        delimiter= ',',
+        value = {"1,1","2,2"}
+    )
+    void return_single_val_when_input_single_val(String input, long expect){
+        long result = calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expect);
     }
 
-    @Test
-    void given_dot_when_calculate_then_split_with_dot(){
-        long result = calculator.calculate("1,2");
-        assertThat(result).isEqualTo(3);
+    @DisplayName("','으로 정수를 구분할수 있다.")
+    @ParameterizedTest
+    @CsvSource(
+        delimiterString= "==",
+        value = {"1,2==3","1,2,3==6"}
+    )
+    void given_dot_when_calculate_then_split_with_dot(String input, long expect){
+        long result = calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expect);
     }
 
-    @Test
-    void given_colon_when_calculate_then_split_with_colon(){
-        long result = calculator.calculate("1:2");
-        assertThat(result).isEqualTo(3);
+    @DisplayName("';'으로 정수를 구분할수 있다.")
+    @ParameterizedTest
+    @CsvSource(
+        delimiterString= "==",
+        value = {"1:2==3","1:2:3==6"}
+    )
+    void given_colon_when_calculate_then_split_with_colon(String input, long expect){
+        long result = calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expect);
     }
 
-    @Test
-    void given_colon_and_dot_when_calculate_then_split_with_colon_and_dot(){
-        long result = calculator.calculate("1:2,3");
-        assertThat(result).isEqualTo(6);
+    @DisplayName("',', ';' 두개로 정수를 구분할수 있다.")
+    @ParameterizedTest
+    @CsvSource(
+        delimiterString= "==",
+        value = {"1:2,3==6","1,2:3==6"}
+    )
+    void given_colon_and_dot_when_calculate_then_split_with_colon_and_dot(String input, long expect){
+        long result = calculator.calculate(input);
+
+        assertThat(result).isEqualTo(expect);
     }
 
-    @Test
-    void given_invalid_format_when_calculate_then_throw_exception(){
-        assertThatThrownBy(() -> calculator.calculate("z")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> calculator.calculate("1+2")).isInstanceOf(IllegalArgumentException.class);
+    @DisplayName("숫자 이외의 값 전달시 예외 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"z","1+2"})
+    void given_invalid_format_when_calculate_then_throw_exception(String input){
+        assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void given_negative_when_calculate_then_throw_exception(){
-        assertThatThrownBy(() -> calculator.calculate("-1,-2")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> calculator.calculate("-1,2")).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> calculator.calculate("-1:2")).isInstanceOf(IllegalArgumentException.class);
+    @DisplayName("음수를 전달하는 경우 예외 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"-1","-1,-2","-1:2"})
+    void given_negative_when_calculate_then_throw_exception(String input){
+        assertThatThrownBy(() -> calculator.calculate(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void given_custom_splitter_when_calculate_then_add_result(){
-        long result = calculator.calculate("//;\n1;2;3");
-        assertThat(result).isEqualTo(6);
+    @DisplayName("커스텀 구분자를 '//{구분자}\\n{정수}'형식으로 사용할수있다.")
+    @ParameterizedTest
+    @MethodSource("customSplitter")
+    void given_custom_splitter_when_calculate_then_add_result(String input, long expect){
+        long result = calculator.calculate(input);
+        
+        assertThat(result).isEqualTo(expect);
     }
 
-    /**
-     *
-     *
-     * 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환 (예: “” => 0, "1,2" => 3, "1,2,3" => 6, “1,2:3” => 6)
-     * 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
-     * 앞의 기본 구분자(쉼표, 콜론)외에 커스텀 구분자를 지정할 수 있다. 커스텀 구분자는 문자열 앞부분의 “//”와 “\n” 사이에 위치하는 문자를 커스텀 구분자로 사용한다. 예를 들어 “//;\n1;2;3”과 같이 값을 입력할 경우 커스텀 구분자는 세미콜론(;)이며, 결과 값은 6이 반환되어야 한다.
-     *
-     */
+    static Stream<Arguments> customSplitter() {
+        return Stream.of(
+            arguments("//;\n1;2;3", 6),
+            arguments("///\n1/2/3", 6),
+            arguments("//;\n", 0)
+        );
+    }
 }

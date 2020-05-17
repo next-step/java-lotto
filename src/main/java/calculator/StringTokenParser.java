@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +25,10 @@ public class StringTokenParser implements TokenParser {
     }
 
     private TokenNumbers getTokenNumbers(String splitter, String tokens) {
+        if(tokens.isEmpty()){
+            return new TokenNumbers(Collections.EMPTY_LIST);
+        }
+
         List<TokenNumber> tokenNumbers= Stream.of(tokens.split(splitter))
             .map(token -> TokenNumber.of(token))
             .collect(Collectors.toList());
