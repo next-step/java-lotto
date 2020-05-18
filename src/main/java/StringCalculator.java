@@ -7,7 +7,7 @@ public class StringCalculator {
             return ZERO;
         }
         isNegative(value);
-        return ZERO;
+        return Integer.parseInt(value);
     }
 
     private boolean isEmpty(final String str) {
