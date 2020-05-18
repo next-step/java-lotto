@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoNum {
 
     private final int num;
@@ -14,4 +16,22 @@ public class LottoNum {
             throw new IllegalArgumentException("lotto num is 1 to 45");
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNum lottoNum = (LottoNum) o;
+        return num == lottoNum.num;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(num);
+    }
 }
+

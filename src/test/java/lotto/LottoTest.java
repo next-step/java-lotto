@@ -67,4 +67,15 @@ public class LottoTest {
         new LottoNum(lottoNum);
     }
 
+    @DisplayName("로또가 몇게가 일치하는지 알수 있다.")
+    @Test
+    void match_count(){
+        List<LottoNum> lottoNumList = Stream.generate(() -> new LottoNum(1)).limit(6).collect(
+            Collectors.toList());
+        LottoNums lottoNums =new LottoNums(lottoNumList);
+        Lotto lotto = new Lotto(lottoNums);
+
+        assertThat(lotto.getMatchCount(lottoNums)).isEqualTo(6);
+    }
 }
+
