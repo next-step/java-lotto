@@ -3,10 +3,7 @@ package splitter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
@@ -20,6 +17,22 @@ public class CommaAndColonSplitterTest {
     @BeforeEach
     void setUp() {
         commaAndColonSplitter = new CommaAndColonSplitter();
+    }
+
+    @DisplayName("기본으로 문자열 계산기에 지원되는 구분자이므로 항상 지원 가능한 true 값 반환")
+    @ParameterizedTest
+    @NullAndEmptySource
+    @MethodSource("anyValueCase")
+    void support(final String customDelimiter) {
+        assertThat(commaAndColonSplitter.support(customDelimiter)).isTrue();
+    }
+
+    private static Stream<Arguments> anyValueCase() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3"),
+                Arguments.of("//?\n"),
+                Arguments.of("4,6")
+        );
     }
 
     @DisplayName("빈 문자열을 입력하면 빈 String 배열을 반환")
