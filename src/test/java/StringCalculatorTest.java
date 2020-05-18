@@ -3,9 +3,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -28,5 +28,13 @@ public class StringCalculatorTest {
     void negative() {
         assertThatThrownBy(() -> calculator.calculate("-1"))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @DisplayName(value = "숫자 이외의 값을 전달할 경우 RuntimeException 발생")
+    @ParameterizedTest
+    @ValueSource(strings = { "a,1", "//\\;\n1;a;3", "b", "*", "1:c,2", "1,^" })
+    void notNumeric(String value) {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> calculator.calculate(value));
     }
 }
