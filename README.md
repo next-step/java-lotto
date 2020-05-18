@@ -17,20 +17,32 @@
 - 문자열 계산기에 숫자 이외의 값 또는 음수를 전달하는 경우 RuntimeException 예외를 throw한다.
 
 ## 기능 요구사항 목록 
-### StringCalculator
+#### StringCalculator
 - [x] 빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.(예 : “” => 0, null => 0)
 - [x] 음수를 전달할 경우 RuntimeException 예외가 발생해야 한다. (예 : “-1,2,3”)
 - [x] 숫자 이외의 값을 전달할 경우 RuntimeException 예외가 발생해야 한다. (예: "a,1")
 - [x] 숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환한다.(예 : “1”)
 - [x] 숫자 두개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환한다.(예 : “1,2”)
-- [ ] 구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)
+- [x] 구분자를 컴마(,) 이외에 콜론(:)을 사용할 수 있다. (예 : “1,2:3” => 6)
 - [ ] “//”와 “\n” 문자 사이에 커스텀 구분자를 지정할 수 있다. (예 : “//;\n1;2;3” => 6)
 
-### Splitter
-- [ ] 콜론(:) 또는 콤마(,)를 구분자로 분리한 String 배열을 반환한다.
-- [x] 빈 문자열을 입력하면 빈 String 배열을 반환한다.
-- [x] null 을 입력하면 NullPointerException 예외 발생
+#### Splitter
+- 공통 
+    - 빈 문자열을 입력하면 빈 String 배열을 반환한다.
+    - null 을 입력하면 NullPointerException 예외 발생
+    - [ ] 문자열이 커스텀 구분자 형식이 아니면 커스텀 구분자로 split 한다.
+    - [ ] 문자열이 커스텀 구분자 형식이면 기본 구분자로 split 한다.
+- 기본 구분자
+    - [x] 빈 문자열을 입력하면 빈 String 배열을 반환한다.
+    - [x] null 을 입력하면 NullPointerException 예외 발생
+    - [ ] 문자열이 커스텀 구분자 형식이 아니면 CommaAndColonSplitter 로 split 한다.
+    - [x] 콜론(:) 또는 콤마(,)를 구분자로 분리한 String 배열을 반환한다.
+- 커스텀 구분자 
+    - [ ] 빈 문자열을 입력하면 빈 String 배열을 반환한다.
+    - [ ] null 을 입력하면 NullPointerException 예외 발생
+    - [ ] 커스텀 구분자 형식의 문자열인지 확인할 수 있다.
+    - [ ] 커스텀 구분자로 분리한 숫자 String 배열을 반환한다.
 
-### StringUtil
+#### StringUtil
 - [x] 문자열이 빈 문자열이거나 null 인 경우 return true
 - [x] 문자가 Integer 로 변환할 수 없는 값인 경우 NumberFormatException 예외 발생 
