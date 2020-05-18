@@ -9,20 +9,20 @@ import org.junit.jupiter.params.provider.NullSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
-public class CommaSplitterTest {
+public class CommaAndColonSplitterTest {
 
-    private CommaSplitter commaSplitter;
+    private CommaAndColonSplitter commaAndColonSplitter;
 
     @BeforeEach
     void setUp() {
-        commaSplitter = new CommaSplitter();
+        commaAndColonSplitter = new CommaAndColonSplitter();
     }
 
     @DisplayName("빈 문자열을 입력하면 빈 String 배열을 반환")
     @ParameterizedTest
     @EmptySource
     void failureSplitByEmpty(final String value) {
-        assertThat(commaSplitter.split(value))
+        assertThat(commaAndColonSplitter.split(value))
                 .isEqualTo(new String[0]);
     }
 
@@ -30,6 +30,6 @@ public class CommaSplitterTest {
     @ParameterizedTest
     @NullSource
     void failureSplitByNull(final String value) {
-        assertThatNullPointerException().isThrownBy(() -> commaSplitter.split(value));
+        assertThatNullPointerException().isThrownBy(() -> commaAndColonSplitter.split(value));
     }
 }

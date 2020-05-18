@@ -1,4 +1,4 @@
-import splitter.CommaSplitter;
+import splitter.CommaAndColonSplitter;
 import util.StringUtil;
 
 import java.util.Arrays;
@@ -12,8 +12,8 @@ public class StringCalculator {
             return ZERO;
         }
 
-        CommaSplitter commaSplitter = new CommaSplitter();
-        String[] twoNumbers = commaSplitter.split(value);
+        CommaAndColonSplitter commaAndColonSplitter = new CommaAndColonSplitter();
+        String[] twoNumbers = commaAndColonSplitter.split(value);
         for (String number : twoNumbers) {
             isNegative(number);
         }

@@ -1,6 +1,6 @@
 package splitter;
 
-public class CommaSplitter {
+public class CommaAndColonSplitter {
 
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
     private static final String[] EMPTY_ARRAY = new String[0];
