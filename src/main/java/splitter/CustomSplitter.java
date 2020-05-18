@@ -1,5 +1,8 @@
 package splitter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +14,9 @@ public class CustomSplitter {
     private static final String[] EMPTY_ARRAY = new String[0];
 
     private final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    private static final List<String> REGEX_META_CHAR = new ArrayList<>(
+            Arrays.asList(".", "|", "^", "$", "*", "+", "?", "(", "[", "{", ")")
+    );
 
     public boolean isMatchedPattern(final String value) {
         return CUSTOM_PATTERN.matcher(value).find();
@@ -22,9 +28,16 @@ public class CustomSplitter {
         }
         Matcher matcher = CUSTOM_PATTERN.matcher(value);
         if (matcher.find()) {
-            String customDelimiter = matcher.group(INDEX_OF_DELIMITER);
+            String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
             return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
         }
         return EMPTY_ARRAY;
+    }
+
+    private String convertEscapedString(final String customDelimiter) {
+        if (REGEX_META_CHAR.contains(customDelimiter)) {
+            return "\\" + customDelimiter;
+        }
+        return customDelimiter;
     }
 }
