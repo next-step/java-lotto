@@ -31,7 +31,7 @@ public class CustomSplitter implements Splitter {
             String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
             return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
         }
-        return EMPTY_ARRAY;
+        throw new RuntimeException();
     }
 
     private String convertEscapedString(final String customDelimiter) {
