@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -45,4 +46,10 @@ public class StringCalculatorTest {
         assertThat(calculator.calculate(value)).isEqualTo(Integer.parseInt(value));
     }
 
+    @DisplayName("숫자 두 개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
+    @ParameterizedTest
+    @CsvSource(value = { "1,2=3", "1,2,3=6", "10,100=110", "0,0=0" }, delimiter = '=')
+    void twoNumbers(final String value, final int expected) {
+        assertThat(calculator.calculate(value)).isEqualTo(expected);
+    }
 }
