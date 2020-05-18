@@ -62,4 +62,27 @@ public class CustomSplitterTest {
         assertThatThrownBy(() -> customSplitter.split(value))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @DisplayName("커스텀 구분자에 따라 입력값들 중 숫자를 분리한 String 배열을 반환")
+    @ParameterizedTest
+    @MethodSource("splitSuccessCase")
+    void successSplit(final String input, final String[] expected) {
+        assertThat(customSplitter.split(input)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> splitSuccessCase() {
+        return Stream.of(
+                Arguments.of("//;\n0", new String[]{"0"}),
+                Arguments.of("//;\n10000", new String[]{"10000"}),
+                Arguments.of("//;\n1;2;3", new String[]{"1", "2", "3"}),
+                Arguments.of("//|\n999", new String[]{"999"}),
+                Arguments.of("//|\n0|1|2", new String[]{"0", "1", "2"}),
+                Arguments.of("//\\|\n0|1|2", new String[]{"0", "1", "2"}),
+                Arguments.of("//.\n1", new String[]{"1"}),
+                Arguments.of("//.\n10011.2.3", new String[]{"10011", "2", "3"}),
+                Arguments.of("//^\n200^22", new String[]{"200", "22"}),
+                Arguments.of("//*\n1*2*3*", new String[]{"1", "2", "3"}),
+                Arguments.of("//\\*\n1*2*3*", new String[]{"1", "2", "3"})
+        );
+    }
 }
