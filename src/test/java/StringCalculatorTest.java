@@ -24,6 +24,12 @@ public class StringCalculatorTest {
         assertThat(calculator.calculate(value)).isZero();
     }
 
+    @DisplayName("커스텀 구분자 형식의 문자열 중 숫자값을 빈 문자열로 입력한 경우 0을 반환")
+    @Test
+    void customDelimiterValueIsEmpty() {
+        assertThat(calculator.calculate("//:\n")).isZero();
+    }
+
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 발생")
     @Test
     void negative() {
