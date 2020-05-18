@@ -16,6 +16,10 @@ public class LottoNums {
         if(lottoNums.size() != LOTTO_COUNT){
             throw new IllegalArgumentException("lotto has only six nums");
         }
+
+        if(lottoNums.stream().distinct().count() != LOTTO_COUNT){
+            throw new IllegalArgumentException("Lotto numbers must be unique");
+        }
     }
 
     public int getMatchCount(LottoNums targetNums) {
