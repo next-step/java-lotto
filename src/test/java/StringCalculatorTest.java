@@ -84,4 +84,26 @@ public class StringCalculatorTest {
                 Arguments.of("//;\n1;2;3", 6)
         );
     }
+
+    @DisplayName("//와 \n 문자 사이에 정규표현식 meta char 를 커스텀 구분자로 지정 가능")
+    @ParameterizedTest
+    @MethodSource(value = "metaCharDelimiterCase")
+    void customMetaCharDelimiterSum(final String value, final int expected) {
+        assertThat(calculator.calculate(value)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> metaCharDelimiterCase() {
+        return Stream.of(
+                // |
+                Arguments.of("//|\n999", 999),
+                Arguments.of("//|\n1|2|3", 6),
+                // .
+                Arguments.of("//.\n1", 1),
+                Arguments.of("//.\n10011.2.3", 10016),
+                // ^ $
+                Arguments.of("//^\n200^22", 222),
+                // * + { [ ? ( )
+                Arguments.of("//*\n1*2*3*", 6)
+        );
+    }
 }
