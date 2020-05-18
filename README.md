@@ -29,3 +29,7 @@
 ### Splitter
 - [ ] 콜론(:) 또는 콤마(,)를 구분자로 분리한 String 배열을 반환한다.
 - [ ] 빈 문자열을 입력하면 빈 String 배열을 반환한다.
+
+### StringUtil
+- [x] 문자열이 빈 문자열이거나 null 인 경우 return true
+- [x] 문자가 Integer 로 변환할 수 없는 값인 경우 NumberFormatException 예외 발생 
