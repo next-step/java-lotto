@@ -1,10 +1,10 @@
 package splitter;
 
-public class CommaAndColonSplitter {
+public class CommaAndColonSplitter implements Splitter{
 
     private static final String DEFAULT_DELIMITER_REGEX = "[,:]";
-    private static final String[] EMPTY_ARRAY = new String[0];
 
+    @Override
     public String[] split(final String value) {
         if (value.isEmpty()) {
             return EMPTY_ARRAY;
