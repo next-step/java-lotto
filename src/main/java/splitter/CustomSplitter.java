@@ -11,11 +11,11 @@ public class CustomSplitter implements Splitter {
     private static final String CUSTOM_DELIMITER_REGEX = "//(.*)\n(.*)";
     private static final int INDEX_OF_DELIMITER = 1;
     private static final int INDEX_OF_VALUE = 2;
-
-    private final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
     private static final List<String> REGEX_META_CHAR = new ArrayList<>(
             Arrays.asList(".", "|", "^", "$", "*", "+", "?", "(", "[", "{", ")")
     );
+
+    private final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
     public boolean isMatchedPattern(final String value) {
         return CUSTOM_PATTERN.matcher(value).find();
