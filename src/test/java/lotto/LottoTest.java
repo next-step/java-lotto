@@ -24,8 +24,8 @@ public class LottoTest {
         "3000,3"
     })
     void buy_many_lotto(long price, int count) {
-        LottoStore lottoStore = new LottoStore();
-        Lottos lottos = lottoStore.sell(price);
+        LottoSeller lottoSeller = new LottoSeller();
+        Lottos lottos = lottoSeller.sell(price);
 
         assertThat(lottos.getCount()).isEqualTo(count);
     }
