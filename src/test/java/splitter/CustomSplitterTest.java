@@ -3,9 +3,9 @@ package splitter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -16,6 +16,28 @@ public class CustomSplitterTest {
     @BeforeEach
     void setUp() {
         customSplitter = new CustomSplitter();
+    }
+
+    @DisplayName("문자열이 정규표현식 패턴에 매칭되면 true 반환")
+    @ParameterizedTest
+    @MethodSource("customDelimiterCase")
+    void support(final String customDelimiter, final boolean expected) {
+        assertThat(customSplitter.support(customDelimiter)).isSameAs(expected);
+    }
+
+    private static Stream<Arguments> customDelimiterCase() {
+        return Stream.of(
+                Arguments.of("//;\n1;2;3", true),
+                Arguments.of("//\\^\n10000", true),
+                Arguments.of("//\\|\n1|4", true),
+                Arguments.of("//|\n10000", true),
+                Arguments.of("//*\n10*20", true),
+                Arguments.of("//\\*\n10000", true),
+                Arguments.of("//++\n10++20", true),
+                Arguments.of("//?\n", true),
+                Arguments.of("4,6", false),
+                Arguments.of("", false)
+        );
     }
 
     @DisplayName("빈 문자열을 입력하면 빈 String 배열을 반환")
