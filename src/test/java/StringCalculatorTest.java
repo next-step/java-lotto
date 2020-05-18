@@ -2,9 +2,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +17,7 @@ public class StringCalculatorTest {
         calculator = new StringCalculator();
     }
 
-    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환해야 한다.")
+    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환")
     @ParameterizedTest
     @NullAndEmptySource
     void emptyOrNull(String value) {
@@ -46,10 +46,26 @@ public class StringCalculatorTest {
         assertThat(calculator.calculate(value)).isEqualTo(Integer.parseInt(value));
     }
 
-    @DisplayName("숫자 두 개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
+    @DisplayName("숫자 두 개를 콤마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
     @ParameterizedTest
     @CsvSource(value = { "1,2=3", "10,100=110", "0,0=0" }, delimiter = '=')
     void twoNumbers(final String value, final int expected) {
         assertThat(calculator.calculate(value)).isEqualTo(expected);
+    }
+
+    @DisplayName("구분자를 콤마(,) 이외에 콜론(:) 사용 가능")
+    @ParameterizedTest
+    @MethodSource
+    void defaultDelimiterSum(final String value, final int expected) {
+        assertThat(calculator.calculate(value)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> defaultDelimiterSum() {
+        return Stream.of(
+                Arguments.of("1,2,3", 6),
+                Arguments.of("100,101:102", 303),
+                Arguments.of("2:3:10000", 10005),
+                Arguments.of("1:2,3:4,5", 15)
+        );
     }
 }
