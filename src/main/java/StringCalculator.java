@@ -1,6 +1,22 @@
 public class StringCalculator {
 
+    private static final int ZERO = 0;
+
     public int calculate(final String value) {
-        return 0;
+        if (isEmpty(value)) {
+            return ZERO;
+        }
+        isNegative(value);
+        return ZERO;
+    }
+
+    private boolean isEmpty(final String str) {
+        return (str == null || str.isEmpty());
+    }
+
+    private void isNegative(final String value) {
+        if (Integer.parseInt(value) < ZERO) {
+            throw new RuntimeException();
+        }
     }
 }
