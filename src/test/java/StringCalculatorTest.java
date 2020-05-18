@@ -37,4 +37,12 @@ public class StringCalculatorTest {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> calculator.calculate(value));
     }
+
+    @DisplayName("숫자 하나를 문자열로 입력할 경우 해당 숫자를 반환")
+    @ParameterizedTest
+    @ValueSource(strings = { "1", "100000" })
+    void oneNumber(final String value) {
+        assertThat(calculator.calculate(value)).isEqualTo(Integer.parseInt(value));
+    }
+
 }
