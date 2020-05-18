@@ -1,4 +1,5 @@
 import splitter.CommaAndColonSplitter;
+import splitter.CustomSplitter;
 import util.StringUtil;
 
 import java.util.Arrays;
@@ -12,13 +13,21 @@ public class StringCalculator {
             return ZERO;
         }
 
-        CommaAndColonSplitter commaAndColonSplitter = new CommaAndColonSplitter();
-        String[] twoNumbers = commaAndColonSplitter.split(value);
-        for (String number : twoNumbers) {
-            isNegative(number);
+        CustomSplitter customSplitter = new CustomSplitter();
+        if (customSplitter.isMatchedPattern(value)) {
+            String[] numbers = customSplitter.split(value);
+            for (String number : numbers) {
+                isNegative(number);
+            }
+            return sum(numbers);
         }
 
-        return sum(twoNumbers);
+        CommaAndColonSplitter commaAndColonSplitter = new CommaAndColonSplitter();
+        String[] numbers = commaAndColonSplitter.split(value);
+        for (String number : numbers) {
+            isNegative(number);
+        }
+        return sum(numbers);
     }
 
     private int sum(final String[] numbers) {
