@@ -1,5 +1,10 @@
 package lotto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.LottoMatch;
+import lotto.domain.LottoNum;
+import lotto.domain.LottoNums;
 import lotto.domain.LottoSeller;
 import lotto.domain.Lottos;
 import lotto.view.InputView;
@@ -14,6 +19,17 @@ public class LottoCustomer {
         Lottos lottos = lottoSeller.sell(price);
 
         OutputView.printLottos(lottos.getLottos());
+
+        List<Integer> winNums =  InputView.requestNums();
+
+        LottoNums lottoNums = new LottoNums(
+            winNums.stream().map(integer -> new LottoNum(integer)).collect(
+                Collectors.toList())
+        );
+
+        lottos.getResult(lottoNums);
+
+        OutputView.printLottoResult();
     }
 
 }

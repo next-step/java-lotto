@@ -4,11 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMatch;
+import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoNums;
 import lotto.domain.LottoSeller;
@@ -76,7 +79,7 @@ public class LottoTest {
         LottoNums lottoNums = new LottoNums(lottoNumList);
         Lotto lotto = new Lotto(lottoNums);
 
-        assertThat(lotto.getMatchCount(lottoNums)).isEqualTo(6);
+        assertThat(lotto.getLottoMatch(lottoNums)).isEqualTo(LottoMatch.SIX);
     }
 
     @DisplayName("로또의 번호가 중복될경우 예외가 발생한다.")
@@ -87,6 +90,20 @@ public class LottoTest {
 
         assertThatThrownBy(()->new LottoNums(lottoNumList))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또들의 결과를 조회할수있다.")
+    @Test
+    void lotto_result() {
+        List<LottoNum> lottoNumList = IntStream.range(1, 7).mapToObj(value -> new LottoNum(value))
+            .collect(Collectors.toList());
+
+        LottoNums lottoNums = new LottoNums(lottoNumList);
+        Lotto lotto = new Lotto(lottoNums);
+        Lottos lottos = new Lottos(Arrays.asList(lotto));
+
+        LottoMatchResult lottoMatchResult = lottos.getResult(lottoNums);
+        assertThat(lottoMatchResult.get(LottoMatch.SIX)).isEqualTo(1L);
     }
 
 }

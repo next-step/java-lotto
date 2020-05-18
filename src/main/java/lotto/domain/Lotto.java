@@ -11,8 +11,8 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
-    public int getMatchCount(LottoNums lottoNums) {
-        return this.lottoNums.getMatchCount(lottoNums);
+    public LottoMatch getLottoMatch(LottoNums lottoNums) {
+        return LottoMatch.valueByCount(this.lottoNums.getMatchCount(lottoNums));
     }
 
     public List<Integer> getNums() {

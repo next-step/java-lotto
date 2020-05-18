@@ -11,13 +11,15 @@ public class InputView {
 
     public static int requestPrice() {
         System.out.println("구입급액을 입력해주세요.");
-        int num = scanner.nextInt();
+        int num = Integer.parseInt(scanner.nextLine().trim());
         return num;
     }
 
     public static List<Integer> requestNums() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(scanner.nextLine().split(","))
+        String winNums = scanner.nextLine();
+
+        return Arrays.stream(winNums.split(","))
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
