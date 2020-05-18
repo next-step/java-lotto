@@ -68,4 +68,30 @@ public class StringCalculatorTest {
                 Arguments.of("1:2,3:4,5", 15)
         );
     }
+
+    @DisplayName("//와 \n 문자 사이에 커스텀 구분자를 지정 가능")
+    @ParameterizedTest
+    @MethodSource
+    void customDelimiterSum(final String value, final int expected) {
+        assertThat(calculator.calculate(value)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> customDelimiterSum() {
+        return Stream.of(
+                // ; : & @ # %   = - ! ] }
+                Arguments.of("//;\n0", 0),
+                Arguments.of("//;\n10000", 10000),
+                Arguments.of("//;\n1;2;3", 6),
+                // |
+                Arguments.of("//|\n999", 999),
+                Arguments.of("//|\n1|2|3", 6),
+                // .
+                Arguments.of("//.\n1", 1),
+                Arguments.of("//.\n10011.2.3", 10016),
+                // ^ $
+                Arguments.of("//^\n200^22", 222),
+                // * + { [ ? ( )
+                Arguments.of("//*\n1*2*3*", 6)
+        );
+    }
 }
