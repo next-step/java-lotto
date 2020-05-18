@@ -48,7 +48,7 @@ public class StringCalculatorTest {
 
     @DisplayName("숫자 두 개를 컴마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
     @ParameterizedTest
-    @CsvSource(value = { "1,2=3", "1,2,3=6", "10,100=110", "0,0=0" }, delimiter = '=')
+    @CsvSource(value = { "1,2=3", "10,100=110", "0,0=0" }, delimiter = '=')
     void twoNumbers(final String value, final int expected) {
         assertThat(calculator.calculate(value)).isEqualTo(expected);
     }
