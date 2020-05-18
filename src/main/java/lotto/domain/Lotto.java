@@ -3,6 +3,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Lotto {
     private final LottoNums lottoNums;
@@ -11,7 +12,7 @@ public class Lotto {
         this.lottoNums = lottoNums;
     }
 
-    public LottoMatch getLottoMatch(LottoNums lottoNums) {
+    public Optional<LottoMatch> getLottoMatch(LottoNums lottoNums) {
         return LottoMatch.valueByCount(this.lottoNums.getMatchCount(lottoNums));
     }
 

@@ -27,9 +27,7 @@ public class LottoCustomer {
                 Collectors.toList())
         );
 
-        lottos.getResult(lottoNums);
-
-        OutputView.printLottoResult();
+        OutputView.printLottoResult(lottos.getResult(lottoNums, price));
     }
 
 }

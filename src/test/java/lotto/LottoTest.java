@@ -79,7 +79,7 @@ public class LottoTest {
         LottoNums lottoNums = new LottoNums(lottoNumList);
         Lotto lotto = new Lotto(lottoNums);
 
-        assertThat(lotto.getLottoMatch(lottoNums)).isEqualTo(LottoMatch.SIX);
+        assertThat(lotto.getLottoMatch(lottoNums).get()).isEqualTo(LottoMatch.SIX);
     }
 
     @DisplayName("로또의 번호가 중복될경우 예외가 발생한다.")
@@ -102,8 +102,22 @@ public class LottoTest {
         Lotto lotto = new Lotto(lottoNums);
         Lottos lottos = new Lottos(Arrays.asList(lotto));
 
-        LottoMatchResult lottoMatchResult = lottos.getResult(lottoNums);
+        LottoMatchResult lottoMatchResult = lottos.getResult(lottoNums, 1000);
         assertThat(lottoMatchResult.get(LottoMatch.SIX)).isEqualTo(1L);
+    }
+
+    @DisplayName("로또의 수익률을 계산할수있다.")
+    @Test
+    void profit_rate() {
+        List<LottoNum> lottoNumList = IntStream.range(1, 7).mapToObj(value -> new LottoNum(value))
+            .collect(Collectors.toList());
+
+        LottoNums lottoNums = new LottoNums(lottoNumList);
+        Lotto lotto = new Lotto(lottoNums);
+        Lottos lottos = new Lottos(Arrays.asList(lotto));
+
+        LottoMatchResult lottoMatchResult = lottos.getResult(lottoNums, 1000);
+        assertThat(lottoMatchResult.computeProfitRate()).isEqualTo(1_500_000/1000);
     }
 
 }
