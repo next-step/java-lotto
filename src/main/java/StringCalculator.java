@@ -1,36 +1,35 @@
+import splitter.CommaSplitter;
+import util.StringUtil;
+
+import java.util.Arrays;
+
 public class StringCalculator {
 
     private static final int ZERO = 0;
-    private static final String COMMA = ",";
 
     public int calculate(final String value) {
-        if (isEmpty(value)) {
+        if (StringUtil.isEmpty(value)) {
             return ZERO;
         }
 
-        String[] twoNumbers = value.split(COMMA);
+        CommaSplitter commaSplitter = new CommaSplitter();
+        String[] twoNumbers = commaSplitter.split(value);
         for (String number : twoNumbers) {
             isNegative(number);
         }
 
-        int sum = 0;
-        for (String twoNumber : twoNumbers) {
-            sum += toInt(twoNumber);
-        }
-        return sum;
+        return sum(twoNumbers);
     }
 
-    private boolean isEmpty(final String str) {
-        return (str == null || str.isEmpty());
+    private int sum(final String[] numbers) {
+        return Arrays.stream(numbers)
+                .mapToInt(StringUtil::toInt)
+                .sum();
     }
 
     private void isNegative(final String value) {
-        if (Integer.parseInt(value) < ZERO) {
+        if (StringUtil.toInt(value) < ZERO) {
             throw new RuntimeException();
         }
-    }
-
-    private int toInt(final String number) {
-        return Integer.parseInt(number);
     }
 }
