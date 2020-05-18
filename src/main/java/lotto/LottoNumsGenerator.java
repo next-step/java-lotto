@@ -18,7 +18,10 @@ public class LottoNumsGenerator {
         List<Integer> nums = new ArrayList<>(LOTTO_NUMS);
         Collections.shuffle(nums);
 
-        List<LottoNum> lottoNums = nums.stream().map(LottoNum::new).limit(6).collect(
+        List<Integer> lottoNumList = nums.subList(0, 6);
+        Collections.sort(lottoNumList);
+
+        List<LottoNum> lottoNums = lottoNumList.stream().map(LottoNum::new).limit(6).collect(
             Collectors.toList());
 
         return new LottoNums(lottoNums);
