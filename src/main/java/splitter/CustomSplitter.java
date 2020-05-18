@@ -17,8 +17,9 @@ public class CustomSplitter implements Splitter {
 
     private final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
-    public boolean isMatchedPattern(final String value) {
-        return CUSTOM_PATTERN.matcher(value).find();
+    @Override
+    public boolean support(final String value) {
+        return this.isMatchedPattern(value);
     }
 
     @Override
@@ -32,6 +33,10 @@ public class CustomSplitter implements Splitter {
             return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
         }
         throw new RuntimeException();
+    }
+
+    private boolean isMatchedPattern(final String value) {
+        return CUSTOM_PATTERN.matcher(value).find();
     }
 
     private String convertEscapedString(final String customDelimiter) {
