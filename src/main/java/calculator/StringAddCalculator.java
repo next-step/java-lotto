@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    private static final int NUMBER_START_INDEX = 2;
+    private static final int DELIMITER_INDEX = 1;
     private static final int MIN_NUMBER = 0;
     private static final Pattern INPUT_DELIMITER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
@@ -26,7 +28,7 @@ public class StringAddCalculator {
             return input.split(",|:");
         }
 
-        return matcher.group(2).split(matcher.group(1));
+        return matcher.group(NUMBER_START_INDEX).split(matcher.group(DELIMITER_INDEX));
     }
 
     private static int sum(String[] inputTokens) {
