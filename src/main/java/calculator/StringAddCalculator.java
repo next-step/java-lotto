@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 public class StringAddCalculator {
 
+    private static final int MIN_NUMBER = 0;
+
     public static int splitAndSum(String input) {
         if (isBlank(input)) {
             return 0;
@@ -39,7 +41,7 @@ public class StringAddCalculator {
     }
 
     private static void validateNumber(int number) {
-        if (number < 0) {
+        if (number < MIN_NUMBER) {
             throw new RuntimeException();
         }
     }
