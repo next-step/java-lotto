@@ -16,18 +16,20 @@ public class StringCalculator {
         CustomSplitter customSplitter = new CustomSplitter();
         if (customSplitter.isMatchedPattern(value)) {
             String[] numbers = customSplitter.split(value);
-            for (String number : numbers) {
-                isNegative(number);
-            }
+            validateNegative(numbers);
             return sum(numbers);
         }
 
         CommaAndColonSplitter commaAndColonSplitter = new CommaAndColonSplitter();
         String[] numbers = commaAndColonSplitter.split(value);
+        validateNegative(numbers);
+        return sum(numbers);
+    }
+
+    private void validateNegative(final String[] numbers) {
         for (String number : numbers) {
             isNegative(number);
         }
-        return sum(numbers);
     }
 
     private int sum(final String[] numbers) {
