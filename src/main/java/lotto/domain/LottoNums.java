@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class LottoNums {
 
     private static final int LOTTO_COUNT = 6;
+
     private List<LottoNum> lottoNums;
 
     public LottoNums(List<LottoNum> lottoNums) {

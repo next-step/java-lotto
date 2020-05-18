@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Lotto {
+public class LottoLine {
+
     private final LottoNums lottoNums;
 
-    public Lotto(LottoNums lottoNums) {
+    public LottoLine(LottoNums lottoNums) {
         this.lottoNums = lottoNums;
     }
 

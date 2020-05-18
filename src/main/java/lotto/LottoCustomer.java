@@ -2,11 +2,10 @@ package lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.LottoMatch;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoNums;
 import lotto.domain.LottoSeller;
-import lotto.domain.Lottos;
+import lotto.domain.LottoPaper;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,9 +15,9 @@ public class LottoCustomer {
         int price = InputView.requestPrice();
 
         LottoSeller lottoSeller = new LottoSeller();
-        Lottos lottos = lottoSeller.sell(price);
+        LottoPaper lottoPaper = lottoSeller.sell(price);
 
-        OutputView.printLottos(lottos.getLottos());
+        OutputView.printLottos(lottoPaper.getLottoLines());
 
         List<Integer> winNums =  InputView.requestNums();
 
@@ -27,7 +26,7 @@ public class LottoCustomer {
                 Collectors.toList())
         );
 
-        OutputView.printLottoResult(lottos.getResult(lottoNums, price));
+        OutputView.printLottoResult(lottoPaper.getResult(lottoNums, price));
     }
 
 }

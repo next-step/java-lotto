@@ -6,22 +6,24 @@ import java.util.stream.Stream;
 
 public class LottoSeller {
 
-    final LottoNumsGenerator lottoNumsGenerator = new LottoNumsGenerator();
+    private static final int LOTTO_LINE_PRICE = 1000;
 
-    public Lottos sell(long price){
-        List<Lotto> lottos =  Stream.generate(() -> createLotto())
+    private final LottoNumsGenerator lottoNumsGenerator = new LottoNumsGenerator();
+
+    public LottoPaper sell(long price){
+        List<LottoLine> lottoLines =  Stream.generate(() -> createLotto())
             .limit(getLottoCount(price))
             .collect(Collectors.toList());
 
-        return new Lottos(lottos);
+        return new LottoPaper(lottoLines);
     }
 
     private int getLottoCount(long price) {
-        return (int) (price / 1000);
+        return (int) (price / LOTTO_LINE_PRICE);
     }
 
-    private Lotto createLotto() {
-        return new Lotto(lottoNumsGenerator.generate());
+    private LottoLine createLotto() {
+        return new LottoLine(lottoNumsGenerator.generate());
     }
 
 }

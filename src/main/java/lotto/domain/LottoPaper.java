@@ -2,26 +2,25 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
-public class Lottos {
-    private final List<Lotto> lottos;
+public class LottoPaper {
+    private final List<LottoLine> lottoLines;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+    public LottoPaper(List<LottoLine> lottoLines) {
+        this.lottoLines = lottoLines;
     }
 
     public int getCount() {
-        return this.lottos.size();
+        return this.lottoLines.size();
     }
 
-    public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
+    public List<LottoLine> getLottoLines() {
+        return new ArrayList<>(lottoLines);
     }
 
     public LottoMatchResult getResult(LottoNums winNums, int totalPrice) {
         final LottoMatchResult lottoMatchResult = new LottoMatchResult(totalPrice);
-        this.lottos.forEach(lotto -> lotto.getLottoMatch(winNums)
+        this.lottoLines.forEach(lottoLine -> lottoLine.getLottoMatch(winNums)
             .ifPresent(lottoMatch -> lottoMatchResult.increment(lottoMatch)));
 
         return lottoMatchResult;
