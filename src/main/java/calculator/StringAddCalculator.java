@@ -1,5 +1,6 @@
 package calculator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +16,7 @@ public class StringAddCalculator {
             return 0;
         }
 
-        return sum(splitInputValue(input));
+        return sum(convertStringToInt(splitInputValue(input)));
     }
 
     private static boolean isBlank(String value) {
@@ -31,12 +32,21 @@ public class StringAddCalculator {
         return matcher.group(NUMBER_START_INDEX).split(matcher.group(DELIMITER_INDEX));
     }
 
-    private static int sum(String[] inputTokens) {
-        int sum = 0;
-        for (String token : inputTokens) {
-            int number = Integer.parseInt(token);
+    private static int[] convertStringToInt(String[] inputTokens) {
+        int[] numbers = new int[inputTokens.length];
+        for (int i = 0; i < inputTokens.length; i++) {
+            int number = Integer.parseInt(inputTokens[i]);
             validateNumber(number);
 
+            numbers[i] = number;
+        }
+
+        return numbers;
+    }
+
+    private static int sum(int[] numbers) {
+        int sum = 0;
+        for (int number : numbers) {
             sum += number;
         }
 
