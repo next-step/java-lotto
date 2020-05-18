@@ -5,16 +5,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoMatchResult {
-    private final Map<LottoMatch, Integer>  lottoMatchCountMap;
-    private int totalPrice;
+
+    private final Map<LottoMatch, Integer> lottoMatchCountMap;
+    private final int totalPrice;
 
     public LottoMatchResult(int totalPrice) {
         this.lottoMatchCountMap = new HashMap<>();
         this.totalPrice = totalPrice;
     }
 
-    void increment(LottoMatch lottoMatch){
-        lottoMatchCountMap.put(lottoMatch, lottoMatchCountMap.getOrDefault(lottoMatch, 0) +1);
+    void increment(LottoMatch lottoMatch) {
+        lottoMatchCountMap.put(lottoMatch, lottoMatchCountMap.getOrDefault(lottoMatch, 0) + 1);
     }
 
     public int get(LottoMatch lottoMatch) {
@@ -32,5 +33,4 @@ public class LottoMatchResult {
     private int computeMatchAmount(LottoMatch lottoMatch) {
         return lottoMatch.getAmount() * lottoMatchCountMap.get(lottoMatch);
     }
-
 }

@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public enum LottoMatch {
-    THREE(3,5_000),
+    THREE(3, 5_000),
     FOUR(4, 50_000),
     FIVE(5, 1_500_000),
     SIX(6, 1_500_000);

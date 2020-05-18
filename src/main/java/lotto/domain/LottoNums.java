@@ -21,11 +21,11 @@ public class LottoNums {
     }
 
     private void validate(List<LottoNum> lottoNums) {
-        if(lottoNums.size() != LOTTO_COUNT){
+        if (lottoNums.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("lotto has only six nums");
         }
 
-        if(lottoNums.stream().distinct().count() != LOTTO_COUNT){
+        if (lottoNums.stream().distinct().count() != LOTTO_COUNT) {
             throw new IllegalArgumentException("Lotto numbers must be unique");
         }
     }

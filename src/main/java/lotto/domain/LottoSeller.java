@@ -10,8 +10,8 @@ public class LottoSeller {
 
     private final LottoNumsGenerator lottoNumsGenerator = new LottoNumsGenerator();
 
-    public LottoPaper sell(long price){
-        List<LottoLine> lottoLines =  Stream.generate(() -> createLotto())
+    public LottoPaper sell(long price) {
+        List<LottoLine> lottoLines = Stream.generate(() -> createLotto())
             .limit(getLottoCount(price))
             .collect(Collectors.toList());
 
@@ -25,5 +25,4 @@ public class LottoSeller {
     private LottoLine createLotto() {
         return new LottoLine(lottoNumsGenerator.generate());
     }
-
 }

@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNum;
 import lotto.domain.LottoNums;
-import lotto.domain.LottoSeller;
 import lotto.domain.LottoPaper;
+import lotto.domain.LottoSeller;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoCustomer {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int price = InputView.requestPrice();
 
         LottoSeller lottoSeller = new LottoSeller();
@@ -19,7 +19,7 @@ public class LottoCustomer {
 
         OutputView.printLottos(lottoPaper.getLottoLines());
 
-        List<Integer> winNums =  InputView.requestNums();
+        List<Integer> winNums = InputView.requestNums();
 
         LottoNums lottoNums = new LottoNums(
             winNums.stream().map(integer -> new LottoNum(integer)).collect(

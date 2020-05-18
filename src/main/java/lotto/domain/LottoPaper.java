@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoPaper {
+
     private final List<LottoLine> lottoLines;
 
     public LottoPaper(List<LottoLine> lottoLines) {
