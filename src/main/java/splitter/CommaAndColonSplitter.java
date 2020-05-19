@@ -16,4 +16,14 @@ public class CommaAndColonSplitter implements Splitter {
         }
         return value.split(DEFAULT_DELIMITER_REGEX);
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
