@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,5 +32,15 @@ class LottoGameTest {
     void canGetPurchaseCountByLottoGame() {
         LottoGame lottoGame = new LottoGame(14000);
         assertThat(lottoGame.getPurchaseCount()).isEqualTo(14);
+    }
+
+    @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
+    @Test
+    void canCreateLottoNumbers() {
+        LottoGame lottoGame = new LottoGame(14000);
+        List<LottoNumbers> lottoNumbers = lottoGame.createLottoNumbers();
+
+        assertThat(lottoNumbers).isNotNull();
+        assertThat(lottoNumbers).hasSize(14);
     }
 }

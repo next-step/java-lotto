@@ -1,16 +1,18 @@
 package lotto.domain;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class LottoGame {
 
     private static final int LOTTO_SALE_PRICE = 1000;
 
-    private final int purchaseAmount;
     private final int purchaseCount;
 
     public LottoGame(int purchaseAmount) {
         validateLottoGame(purchaseAmount);
 
-        this.purchaseAmount = purchaseAmount;
         this.purchaseCount = purchaseAmount / LOTTO_SALE_PRICE;
     }
 
@@ -22,5 +24,11 @@ public class LottoGame {
 
     public int getPurchaseCount() {
         return this.purchaseCount;
+    }
+
+    public List<LottoNumbers> createLottoNumbers() {
+        return Stream.generate(NumbersFactory::createLottoNumbers)
+                .limit(this.purchaseCount)
+                .collect(Collectors.toList());
     }
 }
