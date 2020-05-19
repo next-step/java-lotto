@@ -1,18 +1,19 @@
 package splitter;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class SplitterManager {
 
-    private List<Splitter> splitters;
+    private Set<Splitter> splitters;
 
     private SplitterManager() {
         this(new CustomSplitter(), new CommaAndColonSplitter());
     }
 
     private SplitterManager(final Splitter... splitters) {
-        this.splitters = Arrays.asList(splitters);
+        this.splitters = new LinkedHashSet<>(Arrays.asList(splitters));
     }
 
     public static SplitterManager of() {
