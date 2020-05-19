@@ -20,13 +20,9 @@ public class Number {
         this.value = number;
     }
 
-    private Number(final String number) throws NumberFormatException {
-        this.value = StringUtil.toInt(number);
-        validateNegativeNumber(this.value);
-    }
-
     public static Number of(final String number) {
-        return new Number(number);
+        int parsedInt = StringUtil.toInt(number);
+        return new Number(parsedInt);
     }
 
     private void validateNegativeNumber(final int number) {
