@@ -2,6 +2,9 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LottoPaper {
 
@@ -20,10 +23,11 @@ public class LottoPaper {
     }
 
     public LottoMatchResult getResult(LottoNums winNums, int totalPrice) {
-        final LottoMatchResult lottoMatchResult = new LottoMatchResult(totalPrice);
-        this.lottoLines.forEach(lottoLine -> lottoLine.getLottoMatch(winNums)
-            .ifPresent(lottoMatch -> lottoMatchResult.increment(lottoMatch)));
+        Map<LottoMatch, Long> map = this.lottoLines.stream()
+            .map(lottoLine -> lottoLine.getLottoMatch(winNums))
+            .filter(lottoMatch -> lottoMatch != LottoMatch.NOT_FOUND)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        return lottoMatchResult;
+        return new LottoMatchResult(map, totalPrice);
     }
 }

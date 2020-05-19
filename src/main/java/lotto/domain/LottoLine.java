@@ -1,9 +1,7 @@
 package lotto.domain;
 
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class LottoLine {
 
@@ -13,7 +11,7 @@ public class LottoLine {
         this.lottoNums = lottoNums;
     }
 
-    public Optional<LottoMatch> getLottoMatch(LottoNums lottoNums) {
+    public LottoMatch getLottoMatch(LottoNums lottoNums) {
         return LottoMatch.valueByCount(this.lottoNums.getMatchCount(lottoNums));
     }
 

@@ -19,7 +19,7 @@ public class LottoLineTest {
         LottoNums lottoNums = new LottoNums(lottoNumList);
         LottoLine lottoLine = new LottoLine(lottoNums);
 
-        assertThat(lottoLine.getLottoMatch(lottoNums).get()).isEqualTo(LottoMatch.SIX);
+        assertThat(lottoLine.getLottoMatch(lottoNums)).isEqualTo(LottoMatch.SIX);
     }
 
 }

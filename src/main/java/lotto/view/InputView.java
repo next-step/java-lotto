@@ -23,8 +23,5 @@ public class InputView {
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
-
     }
-
-
 }

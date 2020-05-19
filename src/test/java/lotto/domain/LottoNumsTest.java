@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -26,7 +27,7 @@ class LottoNumsTest {
     @Test
     void given_6_nums_when_lotto_create_then_success() {
         List<LottoNum> lottoNumList = getLottoNums(7);
-        new LottoNums(lottoNumList);
+        assertThat(new LottoNums(lottoNumList).toList()).hasSize(6);
     }
 
     @DisplayName("로또의 번호가 중복될경우 예외가 발생한다.")

@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoLine;
 import lotto.domain.LottoMatch;
@@ -18,10 +17,8 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        Arrays.asList(LottoMatch.values()).forEach(lottoMatch -> {
-            String matchMessage = String
-                .format("%s개 일치 (%d원)- %d개", lottoMatch.getMatchCount(), lottoMatch.getAmount(),
-                    result.get(lottoMatch));
+        LottoMatch.matchesValues().forEach(lottoMatch -> {
+            String matchMessage = String.format("%s개 일치 (%d원)- %d개", lottoMatch.getMatchCount(), lottoMatch.getAmount(), result.get(lottoMatch));
             System.out.println(matchMessage);
         });
 
@@ -35,5 +32,4 @@ public class OutputView {
         List<Integer> nums = lottoLine.getNums();
         System.out.println(nums);
     }
-
 }
