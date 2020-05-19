@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputViewTests {
     private InputView inputView;
@@ -24,5 +25,12 @@ class InputViewTests {
         List<Integer> numbers = inputView.extractNumbers(input);
         assertThat(numbers.get(0)).isEqualTo(112);
         assertThat(numbers.get(3)).isEqualTo(523);
+    }
+
+    @DisplayName("입력값 중 잘못된 값(숫자가 아니거나 음수)이 입력된 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"112:3:5,523:123,-1", "112:3:5,523:123,hello"})
+    void parserFailWithInvalidInputs(String input) {
+        assertThatThrownBy(() -> inputView.extractNumbers(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }
