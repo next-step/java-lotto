@@ -7,11 +7,14 @@ import java.util.Arrays;
 
 public class StringCalculator {
 
+    private static final SplitterManager SPLITTER_MANAGER = SplitterManager.of();
+
     public int calculate(final String value) {
         if (StringUtil.isEmpty(value)) {
             return Number.ZERO_VALUE;
         }
-        Splitter splitter = SplitterManager.of().matchedSplitter(value);
+
+        Splitter splitter = SPLITTER_MANAGER.matchedSplitter(value);
         return sum(splitter.split(value));
     }
 
