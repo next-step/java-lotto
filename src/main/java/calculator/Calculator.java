@@ -2,8 +2,6 @@ package calculator;
 
 import calculator.delimiter.Delimiter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,21 +13,13 @@ public class Calculator {
             return ZERO;
         }
 
-        List<String> splitResult = this.split(expression, delimiters);
+        List<String> splitResult = Splitter.split(expression, delimiters);
         this.validateSplitExpressions(splitResult);
 
         return splitResult.stream()
                 .map(splitExpression -> Integer.parseInt(splitExpression))
                 .mapToInt(Integer::intValue)
                 .sum();
-    }
-
-    private List<String> split(String expression, List<Delimiter> delimiters) {
-        List<String> expressions = new ArrayList<>(Arrays.asList(expression));
-        for (Delimiter delimiter : delimiters) {
-            expressions = delimiter.split(expressions);
-        }
-        return expressions;
     }
 
     private void validateSplitExpressions(List<String> splitExpressions) {
@@ -46,10 +36,8 @@ public class Calculator {
             throw new IllegalArgumentException(String.format("invalid delimiter : %s", expression));
         }
 
-    private void validateNegativeNumber(String expression) {
-        Integer convertNumber = Integer.parseInt(expression);
         if (convertNumber < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.format("not permit negative number : %s", convertNumber));
         }
     }
 }

@@ -59,7 +59,8 @@ public class CalculatorTest {
     @DisplayName("유효하지 않은 구분자 테스트")
     void notValidDelimiterTest(String expression) {
         assertThatThrownBy(() -> this.calculate(expression))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("invalid delimiter");
     }
 
     private static Stream<Arguments> provideNotValidDelimiter() {
@@ -74,7 +75,8 @@ public class CalculatorTest {
     @DisplayName("음수 테스트")
     void negativeNumberTest(String expression) {
         assertThatThrownBy(() -> this.calculate(expression))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("not permit negative number");
     }
 
     private static Stream<Arguments> provideNegativeNumber() {
