@@ -37,7 +37,7 @@
 - [x] 빈 문자열 또는 null 값을 입력할 경우 예외가 발생한다.
 - [x] 0 이상의 양의 값 문자가 들어오면 Number 객체를 생성할 수 있다.
 - [x] 인수로 받은 값과 합한 값의 Number 객체를 반환한다.
-- [ ] 자신의 숫자값을 반환할 수 있다.
+- [x] 자신의 숫자값을 반환할 수 있다.
 
 #### Splitter
 - 공통
@@ -66,5 +66,5 @@
 - [x] 문자가 Integer 로 변환할 수 없는 값인 경우 NumberFormatException 예외 발생 
 
 #### Exception
-- [ ] RuntimeException 대신 명확한 exception 을 사용한다.
-- [ ] 구체적인 Error Message 를 지정한다.
+- [x] RuntimeException 대신 명확한 exception 을 사용한다.
+- [x] 구체적인 Error Message 를 지정한다.
