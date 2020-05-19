@@ -54,4 +54,12 @@ public class NumberTest {
                 Arguments.of("100", Number.of("101"))
         );
     }
+
+    @DisplayName("자신의 숫자값 반환")
+    @ParameterizedTest
+    @ValueSource(strings = { "0", "10", "1000" })
+    void getValue(final String number) {
+        assertThat(Number.of(number).getValue())
+                .isEqualTo(Integer.parseInt(number));
+    }
 }
