@@ -35,18 +35,16 @@ public class Calculator {
     private void validateSplitExpressions(List<String> splitExpressions) {
         for (String expression : splitExpressions) {
             this.validateNotValidString(expression);
-            this.validateNegativeNumber(expression);
         }
     }
 
     private void validateNotValidString(String expression) {
+        Integer convertNumber = null;
         try {
-            Integer.parseInt(expression);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            convertNumber = Integer.parseInt(expression);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format("invalid delimiter : %s", expression));
         }
-    }
-
 
     private void validateNegativeNumber(String expression) {
         Integer convertNumber = Integer.parseInt(expression);
