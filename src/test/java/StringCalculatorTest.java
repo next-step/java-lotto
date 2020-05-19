@@ -20,7 +20,7 @@ public class StringCalculatorTest {
     @DisplayName("빈 문자열 또는 null 값을 입력할 경우 0을 반환")
     @ParameterizedTest
     @NullAndEmptySource
-    void emptyOrNull(String value) {
+    void emptyOrNull(final String value) {
         assertThat(calculator.calculate(value)).isZero();
     }
 
@@ -40,7 +40,7 @@ public class StringCalculatorTest {
     @DisplayName(value = "숫자 이외의 값을 전달할 경우 RuntimeException 발생")
     @ParameterizedTest
     @ValueSource(strings = { "a,1", "//\\;\n1;a;3", "b", "*", "1:c,2", "1,^" })
-    void notNumeric(String value) {
+    void notNumeric(final String value) {
         assertThatExceptionOfType(RuntimeException.class)
                 .isThrownBy(() -> calculator.calculate(value));
     }

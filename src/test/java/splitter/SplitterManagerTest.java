@@ -30,7 +30,7 @@ public class SplitterManagerTest {
     @DisplayName("커스텀 구분자에 매칭되는 문자열이면 CustomSplitter 를 반환")
     @ParameterizedTest
     @MethodSource("customSplitterCase")
-    void customSplitter(String value) {
+    void customSplitter(final String value) {
         assertThat(splitterManager.matchedSplitter(value))
                 .isInstanceOf(CustomSplitter.class);
     }
@@ -54,7 +54,7 @@ public class SplitterManagerTest {
     @DisplayName("커스텀 구분자에 매칭되는 문자열이 아니면 CommaAndColonSplitter 반환")
     @ParameterizedTest
     @MethodSource("commaAndColonSplitterCase")
-    void commaAndColonSplitter(String value) {
+    void commaAndColonSplitter(final String value) {
         assertThat(splitterManager.matchedSplitter(value))
                 .isInstanceOf(CommaAndColonSplitter.class);
     }
