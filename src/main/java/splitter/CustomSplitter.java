@@ -20,12 +20,12 @@ public class CustomSplitter implements Splitter {
 
     @Override
     public boolean support(final String value) {
-        return this.isMatchedPattern(value);
+        return this.isMatchedPattern(customPattern, value);
     }
 
     @Override
     public String[] split(final String value) {
-        if (value.isEmpty() || isMatchedEmptyOperandPattern(value)) {
+        if (value.isEmpty() || this.isMatchedPattern(emptyOperandPattern, value)) {
             return EMPTY_ARRAY;
         }
 
@@ -38,13 +38,9 @@ public class CustomSplitter implements Splitter {
         return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
     }
 
-    private boolean isMatchedEmptyOperandPattern(final String value) {
-        return emptyOperandPattern.matcher(value)
+    private boolean isMatchedPattern(final Pattern pattern, final String value) {
+        return pattern.matcher(value)
                 .matches();
-    }
-
-    private boolean isMatchedPattern(final String value) {
-        return customPattern.matcher(value).find();
     }
 
     private String convertEscapedString(final String customDelimiter) {
