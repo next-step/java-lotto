@@ -1,6 +1,6 @@
 package number;
 
-import util.StringUtil;
+import java.util.Objects;
 
 public class Number {
 
@@ -11,8 +11,13 @@ public class Number {
     private Number() {
     }
 
-    private Number(final String number) {
-        this.value = StringUtil.toInt(number);
+    private Number(final int number) {
+        validateNegativeNumber(number);
+        this.value = number;
+    }
+
+    private Number(final String number) throws NumberFormatException {
+        this.value = Integer.parseInt(number);
         validateNegativeNumber(this.value);
     }
 
@@ -28,5 +33,22 @@ public class Number {
 
     private boolean isNegative(final int number) {
         return number < ZERO;
+    }
+
+    public Number plus(final Number number) {
+        return new Number(this.value + number.value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Number)) return false;
+        Number number = (Number) o;
+        return value == number.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
