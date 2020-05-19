@@ -1,5 +1,7 @@
 package splitter;
 
+import exception.NoSupportedSplitterException;
+
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,6 +26,6 @@ public class SplitterManager {
         return splitters.stream()
                 .filter(splitter -> splitter.support(value))
                 .findFirst()
-                .orElse(new CommaAndColonSplitter());
+                .orElseThrow(NoSupportedSplitterException::new);
     }
 }
