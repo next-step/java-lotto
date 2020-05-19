@@ -32,7 +32,7 @@ public class CustomSplitter implements Splitter {
             String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
             return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
         }
-        throw new RuntimeException();
+        throw new IllegalArgumentException();
     }
 
     private boolean isMatchedPattern(final String value) {

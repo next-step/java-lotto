@@ -60,7 +60,7 @@ public class CustomSplitterTest {
     @ValueSource(strings = { "3,4", "//1", "\n1" })
     void failureSplit(final String value) {
         assertThatThrownBy(() -> customSplitter.split(value))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("커스텀 구분자에 따라 입력값들 중 숫자를 분리한 String 배열을 반환")

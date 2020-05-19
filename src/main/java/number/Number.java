@@ -1,5 +1,6 @@
 package number;
 
+import exception.NegativeNumberException;
 import util.StringUtil;
 
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class Number {
 
     private void validateNegativeNumber(final int number) {
         if (isNegative(number)) {
-            throw new RuntimeException();
+            throw new NegativeNumberException(number);
         }
     }
 

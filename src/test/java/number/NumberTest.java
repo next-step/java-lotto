@@ -1,5 +1,6 @@
 package number;
 
+import exception.NegativeNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,7 +18,7 @@ public class NumberTest {
     @ParameterizedTest
     @ValueSource(strings = "-1")
     void createFailureByNegativeNumber(final String number) {
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(NegativeNumberException.class)
                 .isThrownBy(() -> Number.of(number));
     }
 

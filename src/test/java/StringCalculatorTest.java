@@ -1,3 +1,4 @@
+import exception.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,18 +31,19 @@ public class StringCalculatorTest {
         assertThat(calculator.calculate("//:\n")).isZero();
     }
 
-    @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 RuntimeException 발생")
+    @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 NegativeNumberException 발생")
     @Test
     void negative() {
         assertThatThrownBy(() -> calculator.calculate("-1"))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(NegativeNumberException.class)
+                .hasMessageContaining("음수는 허용하지 않습니다.");
     }
 
-    @DisplayName(value = "숫자 이외의 값을 전달할 경우 RuntimeException 발생")
+    @DisplayName(value = "숫자 이외의 값을 전달할 경우 NumberFormatException 발생")
     @ParameterizedTest
     @ValueSource(strings = { "a,1", "//\\;\n1;a;3", "b", "*", "1:c,2", "1,^" })
     void notNumeric(final String value) {
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(() -> calculator.calculate(value));
     }
 
