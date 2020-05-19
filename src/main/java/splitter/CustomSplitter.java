@@ -9,13 +9,14 @@ import java.util.regex.Pattern;
 public class CustomSplitter implements Splitter {
 
     private static final String CUSTOM_DELIMITER_REGEX = "//(.)\n(.*)";
+    private static final String EMPTY_OPERAND_REGEX = "//(.)\n";
     private static final int INDEX_OF_DELIMITER = 1;
     private static final int INDEX_OF_VALUE = 2;
     private static final List<String> REGEX_META_CHAR = new ArrayList<>(
             Arrays.asList(".", "|", "^", "$", "*", "+", "?", "(", "[", "{", ")")
     );
-
-    private final Pattern customPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    private static final Pattern customPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    private static final Pattern emptyOperandPattern = Pattern.compile(EMPTY_OPERAND_REGEX);
 
     @Override
     public boolean support(final String value) {
@@ -24,7 +25,7 @@ public class CustomSplitter implements Splitter {
 
     @Override
     public String[] split(final String value) {
-        if (value.isEmpty()) {
+        if (value.isEmpty() || isMatchedEmptyOperandPattern(value)) {
             return EMPTY_ARRAY;
         }
 
@@ -35,6 +36,11 @@ public class CustomSplitter implements Splitter {
 
         String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
         return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
+    }
+
+    private boolean isMatchedEmptyOperandPattern(final String value) {
+        return emptyOperandPattern.matcher(value)
+                .matches();
     }
 
     private boolean isMatchedPattern(final String value) {
