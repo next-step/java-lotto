@@ -42,12 +42,11 @@ public class SplitterManagerTest {
                 Arguments.of("//;\n1;2;3"),
                 Arguments.of("//|\n999"),
                 Arguments.of("//|\n0|1|2"),
-                Arguments.of("//\\|\n0|1|2"),
                 Arguments.of("//.\n1"),
                 Arguments.of("//.\n10011.2.3"),
                 Arguments.of("//^\n200^22"),
                 Arguments.of("//*\n1*2*3*"),
-                Arguments.of("//\\*\n1*2*3*")
+                Arguments.of("//*\n1*2*3*")
         );
     }
 

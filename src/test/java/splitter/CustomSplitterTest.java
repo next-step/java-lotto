@@ -28,12 +28,12 @@ public class CustomSplitterTest {
     private static Stream<Arguments> customDelimiterCase() {
         return Stream.of(
                 Arguments.of("//;\n1;2;3", true),
-                Arguments.of("//\\^\n10000", true),
-                Arguments.of("//\\|\n1|4", true),
+                Arguments.of("//^\n10000", true),
+                Arguments.of("//|\n1|4", true),
                 Arguments.of("//|\n10000", true),
                 Arguments.of("//*\n10*20", true),
-                Arguments.of("//\\*\n10000", true),
-                Arguments.of("//++\n10++20", true),
+                Arguments.of("//*\n10000", true),
+                Arguments.of("//+\n10+20", true),
                 Arguments.of("//?\n", true),
                 Arguments.of("4,6", false),
                 Arguments.of("", false)
@@ -77,12 +77,10 @@ public class CustomSplitterTest {
                 Arguments.of("//;\n1;2;3", new String[]{"1", "2", "3"}),
                 Arguments.of("//|\n999", new String[]{"999"}),
                 Arguments.of("//|\n0|1|2", new String[]{"0", "1", "2"}),
-                Arguments.of("//\\|\n0|1|2", new String[]{"0", "1", "2"}),
                 Arguments.of("//.\n1", new String[]{"1"}),
                 Arguments.of("//.\n10011.2.3", new String[]{"10011", "2", "3"}),
                 Arguments.of("//^\n200^22", new String[]{"200", "22"}),
-                Arguments.of("//*\n1*2*3*", new String[]{"1", "2", "3"}),
-                Arguments.of("//\\*\n1*2*3*", new String[]{"1", "2", "3"})
+                Arguments.of("//*\n1*2*3*", new String[]{"1", "2", "3"})
         );
     }
 }
