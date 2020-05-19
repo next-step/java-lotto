@@ -7,3 +7,7 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 문자열 계산기 Todo List
+- InputView
+    - [ ] 입력값 중 기본 구분자(:와 ,)를 제외한 숫자만 골라서 콜렉션으로 만든다.
