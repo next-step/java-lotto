@@ -15,7 +15,7 @@ public class CustomSplitter implements Splitter {
             Arrays.asList(".", "|", "^", "$", "*", "+", "?", "(", "[", "{", ")")
     );
 
-    private final Pattern CUSTOM_PATTERN = Pattern.compile(CUSTOM_DELIMITER_REGEX);
+    private final Pattern customPattern = Pattern.compile(CUSTOM_DELIMITER_REGEX);
 
     @Override
     public boolean support(final String value) {
@@ -27,7 +27,7 @@ public class CustomSplitter implements Splitter {
         if (value.isEmpty()) {
             return EMPTY_ARRAY;
         }
-        Matcher matcher = CUSTOM_PATTERN.matcher(value);
+        Matcher matcher = customPattern.matcher(value);
         if (matcher.find()) {
             String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
             return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
@@ -36,7 +36,7 @@ public class CustomSplitter implements Splitter {
     }
 
     private boolean isMatchedPattern(final String value) {
-        return CUSTOM_PATTERN.matcher(value).find();
+        return customPattern.matcher(value).find();
     }
 
     private String convertEscapedString(final String customDelimiter) {
