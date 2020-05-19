@@ -3,7 +3,6 @@ package stringcalculator.domain.vo;
 import java.util.Objects;
 
 public class Number {
-    private static final int DEFAULT_NUMBER = 0;
     private final int value;
 
     private Number(int number) {
@@ -11,10 +10,7 @@ public class Number {
     }
 
     public static Number stringToNumber(String number) {
-        if (isNullOrEmpty(number)) {
-            return new Number(DEFAULT_NUMBER);
-        }
-
+        validateNullOrEmpty(number);
         int parsedNumber = parseStringValueToInteger(number);
         validateNegative(parsedNumber);
 
@@ -31,8 +27,10 @@ public class Number {
         return new Number(result);
     }
 
-    private static boolean isNullOrEmpty(String number) {
-        return Objects.isNull(number) || number.isEmpty();
+    private static void validateNullOrEmpty(String number) {
+        if (Objects.isNull(number) || number.isEmpty()) {
+            throw new RuntimeException("빈문자열 또는 Null이 입력되었습니다.");
+        }
     }
 
     private static int parseStringValueToInteger(String number) {

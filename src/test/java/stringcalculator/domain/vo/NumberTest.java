@@ -26,12 +26,13 @@ public class NumberTest {
         );
     }
 
-    @DisplayName("Number는 빈문자열 또는 Null이 들어오면 Number는 0을 가진다.")
+    @DisplayName("Number는 빈문자열 또는 Null이 들어오면 RuntimeException Throw")
     @ParameterizedTest
     @NullAndEmptySource
     void nullOrEmptyStringIs0(String value) {
-        Number number = Number.stringToNumber(value);
-        assertThat(number).isEqualTo(0);
+        assertThatThrownBy(() -> Number.stringToNumber(value))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("빈문자열 또는 Null이 입력되었습니다.");
     }
 
     @DisplayName("Number는 숫자가 아닌 값이 들어오면 RuntimeException Throw")
