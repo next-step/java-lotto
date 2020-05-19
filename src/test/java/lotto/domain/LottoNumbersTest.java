@@ -46,4 +46,12 @@ class LottoNumbersTest {
         assertThat(LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6)).toString())
                 .isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
+
+    @DisplayName("다른 로또 번호와 일치하는 번호 개수를 구할 수 있다.")
+    @Test
+    void canGetMatchCountOtherLottoNumbers() {
+        LottoNumbers lottoNumbers = LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoNumbers.getMatchCount(LottoNumbers.newInstance(Arrays.asList(1, 2, 9, 4, 11, 26))))
+                .isEqualTo(3);
+    }
 }
