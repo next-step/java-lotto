@@ -21,6 +21,10 @@ public class Number {
         return new Number(parsedNumber);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public static Number sum(Number originalNumber, Number sourceNumber) {
         int result = originalNumber.value + sourceNumber.value;
 
