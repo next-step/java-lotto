@@ -2,11 +2,14 @@ package number;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class NumberTest {
 
@@ -33,5 +36,22 @@ public class NumberTest {
     void create(final String number) {
         assertThatCode(() -> Number.of(number))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("인수로 받은 값과 합한 값의 Number 객체를 반환")
+    @ParameterizedTest
+    @MethodSource()
+    void plus(final String value, final Number expected) {
+        Number operand = Number.of("1");
+        assertThat(Number.of(value).plus(operand))
+                .isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> plus() {
+        return Stream.of(
+                Arguments.of("0", Number.of("1")),
+                Arguments.of("1", Number.of("2")),
+                Arguments.of("100", Number.of("101"))
+        );
     }
 }
