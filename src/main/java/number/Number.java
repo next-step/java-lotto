@@ -1,10 +1,13 @@
 package number;
 
+import util.StringUtil;
+
 import java.util.Objects;
 
 public class Number {
 
-    private static final int ZERO = 0;
+    public static final Number ZERO = new Number(Number.ZERO_VALUE);
+    public static final int ZERO_VALUE = 0;
 
     private int value;
 
@@ -17,7 +20,7 @@ public class Number {
     }
 
     private Number(final String number) throws NumberFormatException {
-        this.value = Integer.parseInt(number);
+        this.value = StringUtil.toInt(number);
         validateNegativeNumber(this.value);
     }
 
@@ -32,11 +35,15 @@ public class Number {
     }
 
     private boolean isNegative(final int number) {
-        return number < ZERO;
+        return number < ZERO_VALUE;
     }
 
     public Number plus(final Number number) {
         return new Number(this.value + number.value);
+    }
+
+    public int getValue() {
+        return this.value;
     }
 
     @Override

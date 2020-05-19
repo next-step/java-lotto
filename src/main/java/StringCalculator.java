@@ -1,32 +1,34 @@
-import splitter.CommaAndColonSplitter;
-import splitter.CustomSplitter;
+import number.Number;
 import splitter.Splitter;
+import splitter.SplitterManager;
 import util.StringUtil;
 
 import java.util.Arrays;
 
 public class StringCalculator {
 
-    private static final int ZERO = 0;
-
     public int calculate(final String value) {
         if (StringUtil.isEmpty(value)) {
-            return ZERO;
+            return Number.ZERO_VALUE;
         }
-
-        Splitter customSplitter = new CustomSplitter();
-        if (customSplitter.support(value)) {
-            return sum(customSplitter.split(value));
-        }
-        Splitter commaAndColonSplitter = new CommaAndColonSplitter();
-        return sum(commaAndColonSplitter.split(value));
+        Splitter splitter = SplitterManager.of().matchedSplitter(value);
+        return sum(splitter.split(value));
     }
 
     private int sum(final String[] numbers) {
-//        validateIsBlank(numbers);
-//        validateNegativeNumber(numbers);
+        if (this.isEmptyNumbers(numbers)) {
+            return Number.ZERO_VALUE;
+        }
         return Arrays.stream(numbers)
-                .mapToInt(StringUtil::toInt)
-                .sum();
+                .map(Number::of)
+                .reduce(Number.ZERO, Number::plus)
+                .getValue();
+    }
+
+    private boolean isEmptyNumbers(final String[] numbers) {
+        if (numbers.length == 1) {
+            return numbers[0].isEmpty();
+        }
+        return false;
     }
 }
