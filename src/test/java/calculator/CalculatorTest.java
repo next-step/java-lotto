@@ -114,4 +114,20 @@ public class CalculatorTest {
                 Arguments.of("10", 10)
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("provideMultipleDelimiter")
+    @DisplayName("다중 구분자 반환값 테스트")
+    void multipleDelimiterTest(String expression, int sum) {
+        int result = this.calculate(expression);
+        assertThat(result).isEqualTo(sum);
+    }
+
+    private static Stream<Arguments> provideMultipleDelimiter() {
+        return Stream.of(
+                Arguments.of("1:3,3", 7),
+                Arguments.of("4,5:3", 12),
+                Arguments.of("//!\n1!2,3", 6)
+        );
+    }
 }
