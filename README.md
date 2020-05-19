@@ -7,3 +7,13 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+
+
+## 문자열 덧셈 계산기
+
+### 기능 목록
+
+- String 형태의 숫자를 정수로 바꾸고 유효성 검사도 하는 Number 클래스
+- 입력받은 Text를 구분자에 따라 split 하는 Splitter 클래스
+- 입력받은 Text를 계산하는 StringAddCalculator 클래스
