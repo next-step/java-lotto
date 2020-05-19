@@ -27,12 +27,14 @@ public class CustomSplitter implements Splitter {
         if (value.isEmpty()) {
             return EMPTY_ARRAY;
         }
+
         Matcher matcher = customPattern.matcher(value);
-        if (matcher.find()) {
-            String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
-            return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
+
+        String customDelimiter = this.convertEscapedString(matcher.group(INDEX_OF_DELIMITER));
+        return matcher.group(INDEX_OF_VALUE).split(customDelimiter);
     }
 
     private boolean isMatchedPattern(final String value) {
