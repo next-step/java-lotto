@@ -87,7 +87,9 @@ public class StringCalculatorTest {
                 // ; : & @ # %   = - ! ] }
                 Arguments.of("//;\n0", 0),
                 Arguments.of("//;\n10000", 10000),
-                Arguments.of("//;\n1;2;3", 6)
+                Arguments.of("//;\n1;2;3", 6),
+                Arguments.of("//;\n1;2;;", 3),
+                Arguments.of("//;\n;", 0)
         );
     }
 
