@@ -35,13 +35,13 @@ public final class InputView {
         validateBlank(lottoNumbers);
 
         return Arrays.stream(lottoNumbers.split(DELIMITER_PATTERN))
-                .map(Integer::parseInt)
+                .map(InputView::convertStringToInt)
                 .collect(Collectors.toList());
     }
 
-    private static void validatePurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount < MIN_PURCHASE_AMOUNT) {
-            throw new InputValueException("구입금액을 1000원보다 작게 입력할 수 없습니다.");
+    private static void validateBlank(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new InputValueException("데이터를 입력하세요.");
         }
     }
 
@@ -49,13 +49,13 @@ public final class InputView {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new InputValueException("구입금액을 숫자로 입력하세요.");
+            throw new InputValueException("숫자로 변환할 수 없습니다. " + value);
         }
     }
 
-    private static void validateBlank(String value) {
-        if (value == null || value.trim().isEmpty()) {
-            throw new InputValueException("데이터를 입력하세요.");
+    private static void validatePurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount < MIN_PURCHASE_AMOUNT) {
+            throw new InputValueException("구입금액을 1000원보다 작게 입력할 수 없습니다.");
         }
     }
 }
