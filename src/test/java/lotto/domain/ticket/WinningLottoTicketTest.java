@@ -1,17 +1,18 @@
 package lotto.domain.ticket;
 
+import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class WinningLottoTicketTest {
 
@@ -43,5 +44,14 @@ public class WinningLottoTicketTest {
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
+    }
+
+    @DisplayName("특정 숫자가 티켓에 포함되어 있으면 true 를 반환")
+    @ParameterizedTest
+    @CsvSource({ "1,true", "7,false" })
+    void contains(int number, final boolean expected) {
+        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        assertThat(winningLottoTicket.contains(LottoNumber.of(number)))
+                .isEqualTo(expected);
     }
 }

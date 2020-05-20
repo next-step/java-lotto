@@ -1,9 +1,11 @@
 package lotto.domain.ticket;
 
+import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -18,6 +20,8 @@ public class LottoTicketTest {
     @Test
     void create() {
         assertThatCode(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)))
+                .doesNotThrowAnyException();
+        assertThatCode(() -> LottoTicket.of("1, 2, 3, 4, 5, 6"))
                 .doesNotThrowAnyException();
     }
 
@@ -60,5 +64,14 @@ public class LottoTicketTest {
                 Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7)), 5),
                 Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6)
         );
+    }
+
+    @DisplayName("특정 숫자가 티켓에 포함되어 있으면 true 를 반환")
+    @ParameterizedTest
+    @CsvSource({ "1,true", "7,false" })
+    void contains(int number, final boolean expected) {
+        final LottoTicket ticket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        assertThat(ticket.contains(LottoNumber.of(number)))
+                .isEqualTo(expected);
     }
 }
