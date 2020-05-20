@@ -2,9 +2,7 @@ package stringcalculator.domain;
 
 import stringcalculator.domain.vo.Number;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class StringAddCalculator {
     private static final int DEFAULT_NUMBER = 0;
@@ -14,15 +12,9 @@ public class StringAddCalculator {
             return DEFAULT_NUMBER;
         }
 
-        List<String> splits = Splitter.split(expression);
+        ExpressionNumbers expressionNumbers = new ExpressionNumbers(Splitter.split(expression));
 
-        List<Number> numbers = splits.stream()
-                .map(Number::stringToNumber)
-                .collect(Collectors.toList());
-
-        Number result = numbers.stream()
-                .reduce(Number::sum)
-                .orElseThrow(() -> new IllegalStateException("계산할 값이 존재하지않습니다."));
+        Number result = expressionNumbers.sumAllNumbers();
 
         return result.getValue();
     }
