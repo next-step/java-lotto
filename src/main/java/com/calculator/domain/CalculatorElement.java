@@ -1,4 +1,4 @@
-package com.calculator;
+package com.calculator.domain;
 
 import java.util.ArrayList;
 import java.util.List;

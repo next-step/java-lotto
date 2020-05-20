@@ -1,4 +1,4 @@
-package com.calculator;
+package com.calculator.domain;
 
 import org.apache.commons.lang3.StringUtils;
 

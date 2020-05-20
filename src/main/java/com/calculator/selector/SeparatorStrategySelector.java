@@ -1,5 +1,8 @@
-package com.calculator;
+package com.calculator.selector;
 
+import com.calculator.domain.CustomSeparator;
+import com.calculator.domain.SeparatorStrategy;
+import com.calculator.domain.BaseSeparator;
 import org.apache.commons.lang3.StringUtils;
 
 public class SeparatorStrategySelector {

@@ -1,5 +1,8 @@
-package com.calculator;
+package com.calculator.controller;
 
+import com.calculator.domain.CalculatorElement;
+import com.calculator.domain.SeparatorStrategy;
+import com.calculator.selector.SeparatorStrategySelector;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
