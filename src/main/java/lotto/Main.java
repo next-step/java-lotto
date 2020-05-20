@@ -21,7 +21,7 @@ public class Main {
         LottoNumbers lastWeekLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
 
         LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance(lastWeekLottoNumbers, lottoNumbers);
-        lottoMatchResult.run();
+        lottoMatchResult.calculateMatchCount();
 
         ResultView.printMatchResult(lottoMatchResult);
     }
