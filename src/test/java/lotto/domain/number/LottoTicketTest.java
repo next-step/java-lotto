@@ -33,7 +33,15 @@ public class LottoTicketTest {
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(Arrays.asList(-1, 0, 3, 4, 5, 6))
         );
+    }
+
+    @DisplayName("LottoTicket 생성 실패: 1 ~ 45 이외의 숫자가 포함된 경우 예외 발생")
+    @Test
+    void outOfRangeLottoNumber() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoTicket.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
     }
 }
