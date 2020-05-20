@@ -17,7 +17,7 @@ public class LottoGame {
     }
 
     private void validateLottoGame(int purchaseAmount) {
-        if (purchaseAmount < 1000) {
+        if (purchaseAmount < LOTTO_SALE_PRICE) {
             throw new IllegalArgumentException("구입금액이 1000원 이상 이어야 합니다.");
         }
     }
