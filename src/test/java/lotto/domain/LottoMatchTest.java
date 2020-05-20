@@ -38,50 +38,35 @@ class LottoMatchTest {
     }
 
     @DisplayName("로또 일치 열거는 일치 개수를 얻을 수 있다.")
-    @ParameterizedTest
-    @MethodSource("provideIntsForCount")
-    void canGetCount(int count, int result) {
-        assertThat(count).isEqualTo(result);
-    }
-
-    private static Stream<Arguments> provideIntsForCount() {
-        return Stream.of(
-                Arguments.of(LottoMatch.THREE.getCount(), 3),
-                Arguments.of(LottoMatch.FOUR.getCount(), 4),
-                Arguments.of(LottoMatch.FIVE.getCount(), 5),
-                Arguments.of(LottoMatch.SIX.getCount(), 6)
-        );
+    @Test
+    void canGetCount() {
+        assertThat(LottoMatch.THREE.getCount()).isEqualTo(3);
+        assertThat(LottoMatch.FOUR.getCount()).isEqualTo(4);
+        assertThat(LottoMatch.FIVE.getCount()).isEqualTo(5);
+        assertThat(LottoMatch.SIX.getCount()).isEqualTo(6);
     }
 
     @DisplayName("로또 일치 열거는 당첨 금액을 얻을 수 있다.")
-    @ParameterizedTest
-    @MethodSource("provideLongsForAmount")
-    void canGetAmount(long amount, long result) {
-        assertThat(amount).isEqualTo(result);
-    }
-
-    private static Stream<Arguments> provideLongsForAmount() {
-        return Stream.of(
-                Arguments.of(LottoMatch.THREE.getAmount(), 5000),
-                Arguments.of(LottoMatch.FOUR.getAmount(), 50000),
-                Arguments.of(LottoMatch.FIVE.getAmount(), 1500000),
-                Arguments.of(LottoMatch.SIX.getAmount(), 2000000000)
-        );
+    @Test
+    void canGetAmount() {
+        assertThat(LottoMatch.THREE.getAmount()).isEqualTo(5000);
+        assertThat(LottoMatch.FOUR.getAmount()).isEqualTo(50000);
+        assertThat(LottoMatch.FIVE.getAmount()).isEqualTo(1500000);
+        assertThat(LottoMatch.SIX.getAmount()).isEqualTo(2000000000);
     }
 
     @DisplayName("로또 일치 열거는 당첨 건수로 총 당첨 금액을 얻을 수 있다.")
-    @ParameterizedTest
-    @MethodSource("provideLongsForWinAmount")
-    void canGetWinAmount(long winAmount, long result) {
-        assertThat(winAmount).isEqualTo(result);
+    @Test
+    void canGetWinAmount() {
+        assertThat(LottoMatch.THREE.getWinAmount(2)).isEqualTo(10000);
+        assertThat(LottoMatch.FOUR.getWinAmount(2)).isEqualTo(100000);
+        assertThat(LottoMatch.FIVE.getWinAmount(2)).isEqualTo(3000000);
+        assertThat(LottoMatch.SIX.getWinAmount(2)).isEqualTo(4000000000L);
     }
 
-    private static Stream<Arguments> provideLongsForWinAmount() {
-        return Stream.of(
-                Arguments.of(LottoMatch.THREE.getWinAmount(2), 10000),
-                Arguments.of(LottoMatch.FOUR.getWinAmount(2), 100000),
-                Arguments.of(LottoMatch.FIVE.getWinAmount(2), 3000000),
-                Arguments.of(LottoMatch.SIX.getWinAmount(2), 4000000000L)
-        );
+    @DisplayName("최소 당첨 일치 개수를 얻을 수 있다.")
+    @Test
+    void canGetMinMatchCount() {
+        assertThat(LottoMatch.getMinMatchCount()).isEqualTo(3);
     }
 }
