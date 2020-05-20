@@ -25,8 +25,8 @@
     
 ## 문자열 계산기 리뷰 반영
 - [X] Calculator 객체에서 자주 쓰는 값 캐싱하기
-- [ ] if문의 자바 컨벤션 지키기 (Number, InputView)
-- [ ] 자료구조 형이 들어간 변수명 개선하기
+- [X] if문의 자바 컨벤션 지키기 (Number, InputView)
+- [X] 자료구조 형이 들어간 변수명 개선하기
 - [ ] Number 객체의 add 메서드 파라미터 이름 수정
 - [ ] InputView에서 의미가 있는 변수들 상수화 하기
 - [ ] 비싼 연산(Pattern) 줄이기

@@ -10,8 +10,8 @@ public class Number {
         this.value = value;
     }
 
-    public Number(String stringValue) {
-        this(Integer.parseInt(stringValue));
+    public Number(String inputValue) {
+        this(Integer.parseInt(inputValue));
     }
 
     private void validateValue(int value) {
