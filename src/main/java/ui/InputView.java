@@ -14,6 +14,7 @@ public class InputView {
     private final static String NULL_OR_EMPTY_INPUT_VALUE = "0";
     private final static int REGEX_CUSTOM_DIVIDER_GROUP = 1;
     private final static int REGEX_TARGET_STRING_GROUP = 2;
+    private final static Pattern CUSTOM_DIVIDER_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private String divider;
     private String targetString;
@@ -31,7 +32,7 @@ public class InputView {
             return new InputView(DEFAULT_DIVIDER_HEADER + DEFAULT_DIVIDER_TAIL, NULL_OR_EMPTY_INPUT_VALUE);
         }
 
-        Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
+        Matcher matcher = CUSTOM_DIVIDER_PATTERN.matcher(input);
         if (matcher.find()) {
             String divider = DEFAULT_DIVIDER_HEADER +
                     matcher.group(REGEX_CUSTOM_DIVIDER_GROUP) +
