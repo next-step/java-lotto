@@ -28,5 +28,6 @@ public class LottoApplication {
         LottoPrizeResult result = LottoGame.of(tickets).play(winningLottoTicket);
 
         ResultView.printStatisticsResult(result);
+        ResultView.printProfitRate(result.calculateProfitRate(amount));
     }
 }
