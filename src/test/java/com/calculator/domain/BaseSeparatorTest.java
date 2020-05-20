@@ -16,7 +16,7 @@ public class BaseSeparatorTest {
 
     @DisplayName("comma와 colon으로 문자열 분리하는 테스트")
     @ParameterizedTest
-    @MethodSource("provideString")
+    @MethodSource("provideDummyString")
     void getSeparatedInputsTest(final String inputText, final List<String> expectedElements) {
         SeparatorStrategy separatorStrategy = new BaseSeparator(inputText);
 
@@ -25,7 +25,7 @@ public class BaseSeparatorTest {
         assertTrue(separatedElements.containsAll(expectedElements));
     }
 
-    private static Stream<Arguments> provideString() {
+    private static Stream<Arguments> provideDummyString() {
         return Stream.of(
                 Arguments.of("1,2:3", Arrays.asList("1", "2", "3")),
                 Arguments.of("4,5", Arrays.asList("4", "5")),
