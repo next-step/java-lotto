@@ -7,3 +7,18 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+## 문자열 계산기 Todo List
+- InputView
+    - [X] 입력값 중 기본 구분자(:와 ,)를 제외한 숫자만 골라서 콜렉션으로 만든다.
+    - [X] 콜렉션 전환 시 Number 타입으로 바꾼다.
+    - [X] 커스텀 구분자가 있는 경우 해당 구분자를 추출해야 한다.
+    
+- Calculator
+    - [X] 숫자 콜렉션을 받아서 콜렉션의 합을 계산할 수 있다.
+    
+- Number
+    - [X] 양수로 전환 가능한 정수형을 담는 클래스를 만들어서 입력값 검증을 담당시킨다.
+    
+- CalculatorService
+    - [ ] InputView에서 넘어온 값을 기반으로 연산을 수행한 뒤 결과값 반환
