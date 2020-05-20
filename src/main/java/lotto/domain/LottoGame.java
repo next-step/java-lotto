@@ -27,7 +27,7 @@ public class LottoGame {
     }
 
     public List<LottoNumbers> createLottoNumbers() {
-        return Stream.generate(NumbersFactory::createLottoNumbers)
+        return Stream.generate(LottoNumbersFactory::createLottoNumbers)
                 .limit(this.purchaseCount)
                 .collect(Collectors.toList());
     }

@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
+    public static final int LOTTO_NUMBERS_COUNT = 6;
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
     private static final String DELIMITER_PATTERN = ", ";
-    private static final int LOTTO_NUMBERS_COUNT = 6;
 
     private final List<Integer> lottoNumbers;
 
