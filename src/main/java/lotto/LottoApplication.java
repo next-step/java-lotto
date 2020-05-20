@@ -17,6 +17,7 @@ public class LottoApplication {
         List<LottoTicket> tickets = seller.buyTicket(amount);
 
         ResultView.printPurchasedTicketCount(tickets.size());
+        ResultView.printTickets(tickets);
 
         String winningNumbers = InputView.inputWinningNumbers();
     }
