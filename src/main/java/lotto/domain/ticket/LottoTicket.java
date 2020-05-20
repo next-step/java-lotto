@@ -41,6 +41,16 @@ public class LottoTicket {
         }
     }
 
+    public int matchedCount(final WinningLottoTicket winningLottoTicket) {
+        return Math.toIntExact(numbers.stream()
+                .filter(winningLottoTicket::contains)
+                .count());
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
+    }
+
     @Override
     public String toString() {
        return "["
