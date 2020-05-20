@@ -30,6 +30,10 @@ public enum LottoMatch {
         return this.amount * matchCount;
     }
 
+    public static int getMinMatchCount() {
+        return THREE.count;
+    }
+
     public static LottoMatch findByCount(int count) {
         return Arrays.stream(values())
                 .filter(lottoMatch -> lottoMatch.count == count)
