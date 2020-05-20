@@ -10,9 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAdditionalCalculatorTest {
 
-  @DisplayName("null 또는 빈문자를 입력시 0을 반환한다.")
-  @ParameterizedTest
-  @MethodSource("provideNullOrEmpty")
+  @Test
   public void splitAndSum_null_또는_빈문자() {
     int result = StringAdditionalCalculator.splitAndSum(null);
     assertThat(result).isEqualTo(0);
@@ -20,6 +18,8 @@ public class StringAdditionalCalculatorTest {
     result = StringAdditionalCalculator.splitAndSum("");
     assertThat(result).isEqualTo(0);
   }
+
+
 
   @Test
   public void splitAndSum_숫자하나() throws Exception {
