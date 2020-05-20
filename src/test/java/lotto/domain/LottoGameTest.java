@@ -32,6 +32,9 @@ class LottoGameTest {
     void canGetPurchaseCountByLottoGame() {
         LottoGame lottoGame = new LottoGame(14000);
         assertThat(lottoGame.getPurchaseCount()).isEqualTo(14);
+
+        lottoGame = new LottoGame(5600);
+        assertThat(lottoGame.getPurchaseCount()).isEqualTo(5);
     }
 
     @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
