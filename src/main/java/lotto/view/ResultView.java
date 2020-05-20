@@ -4,13 +4,11 @@ import lotto.domain.LottoMatch;
 import lotto.domain.LottoMatchResult;
 import lotto.domain.LottoNumbers;
 
-import java.util.Arrays;
 import java.util.List;
 
 public final class ResultView {
 
-    private static final double BASE_RATE = 1.0;
-    private static final String NEW_LINE = "\n";
+    private static final String NEW_LINE = System.lineSeparator();
 
     private ResultView() {
     }
@@ -29,21 +27,26 @@ public final class ResultView {
     public static void printMatchResult(LottoMatchResult lottoMatchResult) {
         printResultTitle();
 
-        StringBuilder builder = getResultMatchInfo(lottoMatchResult);
-        System.out.println(builder.append(getResultMessage(lottoMatchResult.getProfitRate())));
+        System.out.println(createResultMatchMessage(lottoMatchResult));
     }
 
     private static void printResultTitle() {
         System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
     }
 
+    private static StringBuilder createResultMatchMessage(LottoMatchResult lottoMatchResult) {
+        StringBuilder builder = getResultMatchInfo(lottoMatchResult);
+        builder.append(getResultMessage(lottoMatchResult));
+
+        return builder;
+    }
+
     private static StringBuilder getResultMatchInfo(LottoMatchResult lottoMatchResult) {
         StringBuilder builder = new StringBuilder();
-        Arrays.stream(LottoMatch.values())
-                .forEach(lottoMatch -> {
-                    String matchInfoMessage = getMatchInfoMessage(lottoMatch, lottoMatchResult.getMatchCount(lottoMatch));
-                    builder.append(matchInfoMessage).append(NEW_LINE);
-                });
+        for (LottoMatch lottoMatch : LottoMatch.values()) {
+            String matchInfoMessage = getMatchInfoMessage(lottoMatch, lottoMatchResult.getMatchCount(lottoMatch));
+            builder.append(matchInfoMessage).append(NEW_LINE);
+        }
 
         return builder;
     }
@@ -55,13 +58,11 @@ public final class ResultView {
                 matchCount);
     }
 
-    private static String getResultMessage(double profitRate) {
+    private static String getResultMessage(LottoMatchResult lottoMatchResult) {
+        double profitRate = lottoMatchResult.getProfitRate();
+
         return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
                 profitRate,
-                getProfitOrLoss(profitRate));
-    }
-
-    private static String getProfitOrLoss(double profitRate) {
-        return profitRate >= BASE_RATE ? "이익" : "손해";
+                lottoMatchResult.getProfitOrLoss(profitRate));
     }
 }
