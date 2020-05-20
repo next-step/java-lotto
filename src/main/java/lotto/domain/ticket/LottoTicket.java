@@ -2,12 +2,15 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private Set<LottoNumber> numbers;
 
@@ -21,6 +24,13 @@ public class LottoTicket {
 
     public static LottoTicket of(final List<Integer> numbers) {
         return new LottoTicket(numbers.stream()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
+    }
+
+    public static LottoTicket of(final String numbers) {
+        return new LottoTicket(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
+                .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
