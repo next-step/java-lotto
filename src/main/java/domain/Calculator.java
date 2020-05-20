@@ -3,7 +3,9 @@ package domain;
 import java.util.List;
 
 public class Calculator {
+    private static final Number NUMBER_ZERO = new Number("0");
+
     public static int sum(List<Number> numbers) {
-        return numbers.stream().reduce(new Number("0"), Number::add).getValue();
+        return numbers.stream().reduce(NUMBER_ZERO, Number::add).getValue();
     }
 }
