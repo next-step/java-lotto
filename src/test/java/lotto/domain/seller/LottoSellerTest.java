@@ -4,7 +4,10 @@ import lotto.domain.strategy.RandomGenerationStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoSellerTest {
@@ -20,5 +23,13 @@ public class LottoSellerTest {
     @Test
     void buyTicketFailureByLackMoney() {
         assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyTicket(1000 - 1));
+    }
+
+    @DisplayName("로또 구입 금액에 맞는 로또 티켓을 반환")
+    @ParameterizedTest
+    @ValueSource(ints = { 1000, 14000 })
+    void buyTickets(final int money) {
+        assertThat(lottoSeller.buyTicket(money).size())
+                .isEqualTo(money / 1000);
     }
 }
