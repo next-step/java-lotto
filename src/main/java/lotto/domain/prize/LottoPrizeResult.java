@@ -18,4 +18,12 @@ public class LottoPrizeResult {
     public static LottoPrizeResult init() {
         return new LottoPrizeResult();
     }
+
+    public void updateMatchedPrize(final Prize prize) {
+        matchedPrizes.put(prize, increasedMatchedTicketCount(prize));
+    }
+
+    private int increasedMatchedTicketCount(final Prize prize) {
+        return this.matchedPrizes.get(prize) + 1;
+    }
 }
