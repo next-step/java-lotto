@@ -24,4 +24,13 @@ public enum Prize {
                 .findFirst()
                 .orElse(Prize.MISS);
     }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d개 일치 (%d원)", matchedNumbersCount, prizeMoney);
+    }
 }

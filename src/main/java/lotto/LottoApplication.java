@@ -1,8 +1,11 @@
 package lotto;
 
+import lotto.domain.LottoGame;
+import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
 import lotto.domain.strategy.RandomGenerationStrategy;
 import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.WinningLottoTicket;
 import lotto.domain.view.InputView;
 import lotto.domain.view.ResultView;
 
@@ -20,5 +23,10 @@ public class LottoApplication {
         ResultView.printTickets(tickets);
 
         String winningNumbers = InputView.inputWinningNumbers();
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningNumbers);
+
+        LottoPrizeResult result = LottoGame.of(tickets).play(winningLottoTicket);
+
+        ResultView.printStatisticsResult(result);
     }
 }

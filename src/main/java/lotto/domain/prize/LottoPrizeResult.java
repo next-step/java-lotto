@@ -46,4 +46,15 @@ public class LottoPrizeResult {
     private int matchedTicketCount(final Prize prize) {
         return this.matchedPrizes.get(prize);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        matchedPrizes.keySet()
+                .forEach(prize ->
+                    stringBuilder.append(prize.toString())
+                            .append(String.format(" - %d개", matchedPrizes.get(prize)))
+                            .append("\n"));
+        return stringBuilder.toString();
+    }
 }
