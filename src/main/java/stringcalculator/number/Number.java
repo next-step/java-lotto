@@ -1,7 +1,7 @@
-package number;
+package stringcalculator.number;
 
-import exception.NegativeNumberException;
-import util.StringUtil;
+import stringcalculator.exception.NegativeNumberException;
+import stringcalculator.util.StringUtil;
 
 import java.util.Objects;
 

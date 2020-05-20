@@ -1,6 +1,6 @@
-package splitter;
+package stringcalculator.splitter;
 
-import exception.NoSupportedSplitterException;
+import stringcalculator.exception.NoSupportedSplitterException;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;

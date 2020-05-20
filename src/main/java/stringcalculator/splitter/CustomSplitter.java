@@ -1,4 +1,4 @@
-package splitter;
+package stringcalculator.splitter;
 
 import java.util.Arrays;
 import java.util.Collections;

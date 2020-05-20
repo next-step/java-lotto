@@ -1,4 +1,4 @@
-package exception;
+package stringcalculator.exception;
 
 public class NoSupportedSplitterException extends RuntimeException {
 

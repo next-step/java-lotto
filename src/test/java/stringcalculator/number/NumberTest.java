@@ -1,6 +1,6 @@
-package number;
+package stringcalculator.number;
 
-import exception.NegativeNumberException;
+import stringcalculator.exception.NegativeNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

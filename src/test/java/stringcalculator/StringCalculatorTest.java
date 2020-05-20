@@ -1,4 +1,7 @@
-import exception.NegativeNumberException;
+package stringcalculator;
+
+import stringcalculator.exception.NegativeNumberException;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,13 +25,13 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void emptyOrNull(final String value) {
-        assertThat(calculator.calculate(value)).isZero();
+        Assertions.assertThat(calculator.calculate(value)).isZero();
     }
 
     @DisplayName("커스텀 구분자 형식의 문자열 중 숫자값을 빈 문자열로 입력한 경우 0을 반환")
     @Test
     void customDelimiterValueIsEmpty() {
-        assertThat(calculator.calculate("//:\n")).isZero();
+        Assertions.assertThat(calculator.calculate("//:\n")).isZero();
     }
 
     @DisplayName(value = "문자열 계산기에 음수를 전달하는 경우 NegativeNumberException 발생")
@@ -51,21 +54,21 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @ValueSource(strings = { "1", "100000" })
     void oneNumber(final String value) {
-        assertThat(calculator.calculate(value)).isEqualTo(Integer.parseInt(value));
+        Assertions.assertThat(calculator.calculate(value)).isEqualTo(Integer.parseInt(value));
     }
 
     @DisplayName("숫자 두 개를 콤마(,) 구분자로 입력할 경우 두 숫자의 합을 반환")
     @ParameterizedTest
     @CsvSource(value = { "1,2=3", "10,100=110", "0,0=0" }, delimiter = '=')
     void twoNumbers(final String value, final int expected) {
-        assertThat(calculator.calculate(value)).isEqualTo(expected);
+        Assertions.assertThat(calculator.calculate(value)).isEqualTo(expected);
     }
 
     @DisplayName("구분자를 콤마(,) 이외에 콜론(:) 사용 가능")
     @ParameterizedTest
     @MethodSource
     void defaultDelimiterSum(final String value, final int expected) {
-        assertThat(calculator.calculate(value)).isEqualTo(expected);
+        Assertions.assertThat(calculator.calculate(value)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> defaultDelimiterSum() {
@@ -81,7 +84,7 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @MethodSource
     void customDelimiterSum(final String value, final int expected) {
-        assertThat(calculator.calculate(value)).isEqualTo(expected);
+        Assertions.assertThat(calculator.calculate(value)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> customDelimiterSum() {
@@ -99,7 +102,7 @@ public class StringCalculatorTest {
     @ParameterizedTest
     @MethodSource(value = "metaCharDelimiterCase")
     void customMetaCharDelimiterSum(final String value, final int expected) {
-        assertThat(calculator.calculate(value)).isEqualTo(expected);
+        Assertions.assertThat(calculator.calculate(value)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> metaCharDelimiterCase() {

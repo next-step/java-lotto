@@ -1,4 +1,4 @@
-package splitter;
+package stringcalculator.splitter;
 
 public interface Splitter {
 

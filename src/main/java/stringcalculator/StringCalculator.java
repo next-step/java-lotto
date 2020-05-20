@@ -1,7 +1,9 @@
-import number.Number;
-import splitter.Splitter;
-import splitter.SplitterManager;
-import util.StringUtil;
+package stringcalculator;
+
+import stringcalculator.number.Number;
+import stringcalculator.splitter.Splitter;
+import stringcalculator.splitter.SplitterManager;
+import stringcalculator.util.StringUtil;
 
 import java.util.Arrays;
 
