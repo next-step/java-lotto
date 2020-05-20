@@ -35,10 +35,12 @@ public class LottoMatchResult {
         }
     }
 
-    public void run() {
+    public void calculateMatchCount() {
+        int minMatchCount = LottoMatch.getMinMatchCount();
+
         this.lottoNumbers.stream()
                 .map(lottoNumbers -> lottoNumbers.getMatchCount(this.winLotto))
-                .filter(matchCount -> matchCount >= 3)
+                .filter(matchCount -> matchCount >= minMatchCount)
                 .forEach(this::increaseMatchCount);
     }
 
