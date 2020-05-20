@@ -10,8 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketTest {
 
@@ -43,5 +42,23 @@ public class LottoTicketTest {
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
+    }
+
+    @DisplayName("당첨 번호와 일치하는 숫자의 개수를 반환")
+    @ParameterizedTest
+    @MethodSource("purchasedTicketCase")
+    void matchedCount(final LottoTicket ticket, final int expected) {
+        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        assertThat(ticket.matchedCount(winningLottoTicket)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> purchasedTicketCase() {
+        return Stream.of(
+                Arguments.of(LottoTicket.of(Arrays.asList(7, 8, 9, 10, 11, 12)), 0),
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 7, 8, 9)), 3),
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 7, 8)), 4),
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7)), 5),
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6)
+        );
     }
 }
