@@ -23,7 +23,7 @@ public class BaseSeparator implements SeparatorStrategy {
 
     private enum BaseSeparatorType {
         COMMA(","),
-        COLON(";");
+        COLON(":");
 
         private String symbol;
 
