@@ -15,5 +15,6 @@
 ### 기능 목록
 
 - String 형태의 숫자를 정수로 바꾸고 유효성 검사도 하는 Number 클래스
+- Number 리스트를 관리하는 ExpressionNumbers 클래스
 - 입력받은 Text를 구분자에 따라 split 하는 Splitter 클래스
 - 입력받은 Text를 계산하는 StringAddCalculator 클래스
