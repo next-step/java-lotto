@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -28,13 +29,11 @@ class LottoGameTest {
     }
 
     @DisplayName("구입금액에 대한 구입수량을 구할 수 있다.")
-    @Test
-    void canGetPurchaseCountByLottoGame() {
-        LottoGame lottoGame = new LottoGame(14000);
-        assertThat(lottoGame.getPurchaseCount()).isEqualTo(14);
-
-        lottoGame = new LottoGame(5600);
-        assertThat(lottoGame.getPurchaseCount()).isEqualTo(5);
+    @ParameterizedTest
+    @CsvSource(value = { "14000,14", "5600,5" })
+    void canGetPurchaseCountByLottoGame(int amount, int result) {
+        LottoGame lottoGame = new LottoGame(amount);
+        assertThat(lottoGame.getPurchaseCount()).isEqualTo(result);
     }
 
     @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
