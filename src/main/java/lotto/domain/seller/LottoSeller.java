@@ -22,7 +22,13 @@ public class LottoSeller {
 
     public List<LottoTicket> buyTicket(final int money) {
         validateMoney(money);
-        return new ArrayList<>();
+        int countTicket = money / ONE_TICKET_PRICE;
+
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < countTicket; i++) {
+            tickets.add(LottoTicket.of(generationStrategy.generate()));
+        }
+        return tickets;
     }
 
     private void validateMoney(final int money) {
