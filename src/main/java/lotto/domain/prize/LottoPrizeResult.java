@@ -24,6 +24,26 @@ public class LottoPrizeResult {
     }
 
     private int increasedMatchedTicketCount(final Prize prize) {
-        return this.matchedPrizes.get(prize) + 1;
+        return this.matchedTicketCount(prize) + 1;
+    }
+
+    public float calculateProfitRate(final int purchaseAmount) {
+        return ((float) this.calculateTotalPrizes() / purchaseAmount);
+    }
+
+    private int calculateTotalPrizes() {
+        return matchedPrizes.keySet()
+                .stream()
+                .map(this::calculatePrizes)
+                .mapToInt(Integer::valueOf)
+                .sum();
+    }
+
+    private int calculatePrizes(final Prize prize) {
+        return prize.getPrizeMoney() * this.matchedTicketCount(prize);
+    }
+
+    private int matchedTicketCount(final Prize prize) {
+        return this.matchedPrizes.get(prize);
     }
 }
