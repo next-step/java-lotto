@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -59,9 +59,10 @@ public class StringAdditionalCalculatorTest {
   }
 
   @DisplayName("음수 혹은 숫자가 아닌 경우에 Throw를 발생시킨다")
-  @Test
-  public void splitAndSum_negative() throws Exception {
-    assertThatThrownBy(() -> StringAdditionalCalculator.splitAndSum("-1,2,3"))
+  @ParameterizedTest
+  @ValueSource(strings = { "-1,2,3", "test,1234,ada", "$!ASDasfa" })
+  public void splitAndSum_negative(String text) throws Exception {
+    assertThatThrownBy(() -> StringAdditionalCalculator.splitAndSum(text))
       .isInstanceOf(RuntimeException.class);
   }
 
