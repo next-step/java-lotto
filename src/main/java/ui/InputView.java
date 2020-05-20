@@ -17,8 +17,8 @@ public class InputView {
         this.targetString = targetString;
     }
 
-    public List<Number> extractNumbers(String input) {
-        return Arrays.stream(input.split("[,:]"))
+    public List<Number> extractNumbers() {
+        return Arrays.stream(this.targetString.split(divider))
                 .map(Number::new)
                 .collect(Collectors.toList());
     }

@@ -14,23 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputViewTests {
-    @DisplayName("입력값 중 기본 구분자(:와 쉼표)를 제외한 숫자만 골라낸 콜렉션 출력")
-    @ParameterizedTest
-    @ValueSource(strings = {"112:3:5,523:123,1", "112:3:5:523:123:1", "112,3,5,523,123,1"})
-    void compositeParser(String input) {
-        InputView inputView = InputView.create(input);
-        List<Number> numbers = inputView.extractNumbers(input);
-        assertThat(numbers.get(0)).isEqualTo(new Number("112"));
-        assertThat(numbers.get(3)).isEqualTo(new Number("523"));
-    }
-
-    @DisplayName("입력값 중 잘못된 값(숫자가 아니거나 음수)이 입력된 경우 예외가 발생한다.")
-    @ParameterizedTest
-    @ValueSource(strings = {"112:3:5,523:123,-1", "112:3:5,523:123,hello"})
-    void parserFailWithInvalidInputs(String input) {
-        assertThatThrownBy(() -> InputView.create(input).extractNumbers(input)).isInstanceOf(RuntimeException.class);
-    }
-
     @DisplayName("커스텀 구분자가 있는 경우 커스텀 구분자를 포함한 regex 반환")
     @ParameterizedTest
     @MethodSource("stringIncludedCustomDivider")
@@ -44,5 +27,22 @@ class InputViewTests {
                 Arguments.of("//!\n112!3:5,523:123!1", "[,!:]", "112!3:5,523:123!1"),
                 Arguments.of("//;\n112;3:5,523:123;1", "[,;:]", "112;3:5,523:123;1")
         );
+    }
+
+    @DisplayName("입력값 중 기본 구분자(:와 쉼표)를 제외한 숫자만 골라낸 콜렉션 출력")
+    @ParameterizedTest
+    @ValueSource(strings = {"112:3:5,523:123,1", "112:3:5:523:123:1", "112,3,5,523,123,1"})
+    void compositeParser(String input) {
+        InputView inputView = InputView.create(input);
+        List<Number> numbers = inputView.extractNumbers();
+        assertThat(numbers.get(0)).isEqualTo(new Number("112"));
+        assertThat(numbers.get(3)).isEqualTo(new Number("523"));
+    }
+
+    @DisplayName("입력값 중 잘못된 값(숫자가 아니거나 음수)이 입력된 경우 예외가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"112:3:5,523:123,-1", "112:3:5,523:123,hello"})
+    void parserFailWithInvalidInputs(String input) {
+        assertThatThrownBy(() -> InputView.create(input).extractNumbers()).isInstanceOf(RuntimeException.class);
     }
 }
