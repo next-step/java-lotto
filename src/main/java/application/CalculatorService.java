@@ -9,8 +9,6 @@ import java.util.List;
 public class CalculatorService {
     public int calculateSum(InputView inputView) {
         List<Number> numbers = inputView.extractNumbers();
-        Calculator.sum(numbers);
-
-        return 0;
+        return Calculator.sum(numbers);
     }
 }

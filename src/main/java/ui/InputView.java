@@ -18,11 +18,15 @@ public class InputView {
     }
 
     public static InputView create(String input) {
+        if (input == null) return new InputView("[,:]", "0");
+        if (input.trim().isEmpty()) return new InputView("[,:]", "0");
+
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
             String divider = "[," + matcher.group(1) + ":]";
             return new InputView(divider, matcher.group(2));
         }
+
         return new InputView("[,:]", input);
     }
 

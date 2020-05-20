@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
@@ -55,5 +56,16 @@ class InputViewTests {
 
         assertThat(numbers.size()).isEqualTo(1);
         assertThat(numbers.get(0)).isEqualTo(new Number(input));
+    }
+
+    @DisplayName("빈 문자열 또는 null 값을 입력할 경우 기본 구분자에 InputString에 0만 넣어서 보낸다")
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = {"  ", "     ", ""})
+    void parseWithNullOrEmptyString(String input) {
+        InputView inputView = InputView.create(input);
+
+        assertThat(inputView.getTargetString()).isEqualTo("0");
+        assertThat(inputView.getDivider()).isEqualTo("[,:]");
     }
 }
