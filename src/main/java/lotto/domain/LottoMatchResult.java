@@ -7,6 +7,7 @@ import java.util.Map;
 public class LottoMatchResult {
 
     private static final int LOTTO_SALE_AMOUNT = 1000;
+    private static final double BASE_RATE = 1.0;
 
     private final Map<LottoMatch, Integer> matchResult;
     private final LottoNumbers winLotto;
@@ -51,6 +52,10 @@ public class LottoMatchResult {
 
     public double getProfitRate() {
         return getTotalWinAmount() * 1.0 / getPurchaseAmount();
+    }
+
+    public String getProfitOrLoss(double profitRate) {
+        return profitRate >= BASE_RATE ? "이익" : "손해";
     }
 
     private long getTotalWinAmount() {
