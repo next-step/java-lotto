@@ -17,12 +17,6 @@ public class InputView {
         this.targetString = targetString;
     }
 
-    public List<Number> extractNumbers() {
-        return Arrays.stream(this.targetString.split(divider))
-                .map(Number::new)
-                .collect(Collectors.toList());
-    }
-
     public static InputView create(String input) {
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
@@ -30,6 +24,12 @@ public class InputView {
             return new InputView(divider, matcher.group(2));
         }
         return new InputView("[,:]", input);
+    }
+
+    public List<Number> extractNumbers() {
+        return Arrays.stream(this.targetString.split(divider))
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     public String getDivider() {

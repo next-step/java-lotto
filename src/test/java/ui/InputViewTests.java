@@ -45,4 +45,15 @@ class InputViewTests {
     void parserFailWithInvalidInputs(String input) {
         assertThatThrownBy(() -> InputView.create(input).extractNumbers()).isInstanceOf(RuntimeException.class);
     }
+
+    @DisplayName("숫자 하나짜리 입력에도 정상 처리 가능")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "5", "12"})
+    void parseWithOneNumberStringValue(String input) {
+        InputView inputView = InputView.create(input);
+        List<Number> numbers = inputView.extractNumbers();
+
+        assertThat(numbers.size()).isEqualTo(1);
+        assertThat(numbers.get(0)).isEqualTo(new Number(input));
+    }
 }
