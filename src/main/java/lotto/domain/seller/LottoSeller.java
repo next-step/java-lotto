@@ -1,6 +1,6 @@
 package lotto.domain.seller;
 
-import lotto.domain.number.LottoTicket;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.strategy.NumberGenerationStrategy;
 
 import java.util.ArrayList;

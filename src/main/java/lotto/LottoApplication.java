@@ -1,8 +1,8 @@
 package lotto;
 
-import lotto.domain.number.LottoTicket;
 import lotto.domain.seller.LottoSeller;
 import lotto.domain.strategy.RandomGenerationStrategy;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.view.InputView;
 import lotto.domain.view.ResultView;
 

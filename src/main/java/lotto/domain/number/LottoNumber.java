@@ -23,4 +23,8 @@ public class LottoNumber {
             throw new InvalidParameterException("1 ~ 45 사이의 숫자가 아닙니다.");
         }
     }
+
+    public int getNumber() {
+        return number;
+    }
 }

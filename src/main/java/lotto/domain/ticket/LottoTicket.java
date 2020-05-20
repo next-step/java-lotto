@@ -1,4 +1,6 @@
-package lotto.domain.number;
+package lotto.domain.ticket;
+
+import lotto.domain.number.LottoNumber;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -24,8 +26,17 @@ public class LottoTicket {
     }
 
     private void validateNumbers(final List<LottoNumber> numbers) {
-        if (numbers == null || numbers.size() != 6) {
+        if ((numbers == null) || (numbers.size() != 6)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public String toString() {
+       return "["
+               + numbers.stream()
+                        .map(number -> String.valueOf(number.getNumber()))
+                        .collect(Collectors.joining(", "))
+               + "]";
     }
 }
