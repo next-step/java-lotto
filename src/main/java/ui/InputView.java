@@ -20,8 +20,12 @@ public class InputView {
     }
 
     public static InputView create(String input) {
-        if (input == null) return new InputView(DEFAULT_DIVIDER, "0");
-        if (input.trim().isEmpty()) return new InputView(DEFAULT_DIVIDER, "0");
+        if (input == null) {
+            return new InputView(DEFAULT_DIVIDER, "0");
+        }
+        if (input.trim().isEmpty()) {
+            return new InputView(DEFAULT_DIVIDER, "0");
+        }
 
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {

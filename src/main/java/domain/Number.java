@@ -15,7 +15,9 @@ public class Number {
     }
 
     private void validateValue(int value) {
-        if (value < 0) throw new RuntimeException();
+        if (value < 0) {
+            throw new RuntimeException();
+        }
     }
 
     public Number add(Number number) {
@@ -28,8 +30,12 @@ public class Number {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Number number = (Number) o;
         return value == number.value;
     }
