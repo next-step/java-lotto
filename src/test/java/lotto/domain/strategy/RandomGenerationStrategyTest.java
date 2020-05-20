@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,5 +31,11 @@ public class RandomGenerationStrategyTest {
         assertThat(randomNumbers.stream()
                 .anyMatch(randomNumber -> randomNumber < LottoNumber.MIN_VALUE || randomNumber > LottoNumber.MAX_VALUE))
                 .isFalse();
+    }
+
+    @DisplayName("랜덤으로 생성한 숫자는 중복되지 않음")
+    @Test
+    void notDuplicate() {
+        assertThat(randomNumbers.size()).isEqualTo(new HashSet<>(randomNumbers).size());
     }
 }
