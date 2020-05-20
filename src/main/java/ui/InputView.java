@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputView {
+    private final static String DEFAULT_DIVIDER = "[,:]";
+
     private String divider;
     private String targetString;
 
@@ -18,8 +20,8 @@ public class InputView {
     }
 
     public static InputView create(String input) {
-        if (input == null) return new InputView("[,:]", "0");
-        if (input.trim().isEmpty()) return new InputView("[,:]", "0");
+        if (input == null) return new InputView(DEFAULT_DIVIDER, "0");
+        if (input.trim().isEmpty()) return new InputView(DEFAULT_DIVIDER, "0");
 
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
@@ -27,7 +29,7 @@ public class InputView {
             return new InputView(divider, matcher.group(2));
         }
 
-        return new InputView("[,:]", input);
+        return new InputView(DEFAULT_DIVIDER, input);
     }
 
     public List<Number> extractNumbers() {
