@@ -14,15 +14,11 @@ public final class NumbersFactory {
     private NumbersFactory() {
     }
 
-    public static LottoNumbers createLottoNumbers() {
-        return LottoNumbers.newInstance(createNonDuplicateNumbers());
-    }
-
-    private static List<Integer> createNonDuplicateNumbers() {
+    public static List<Integer> createNonDuplicateNumbers() {
         shuffleNumbers();
 
         return NUMBERS_REPOSITORY.stream()
-                .limit(6)
+                .limit(LottoNumbers.LOTTO_NUMBERS_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
     }

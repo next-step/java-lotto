@@ -7,9 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class NumbersFactoryTest {
 
-    @DisplayName("로또 번호를 만들 수 있다.")
+    @DisplayName("중복되지 않은 숫자들을 얻을 수 있다.")
     @Test
-    void canCreateLottoNumbers() {
-        assertThat(NumbersFactory.createLottoNumbers()).isNotNull();
+    void canCreateNonDuplicateNumbers() {
+        assertThat(NumbersFactory.createNonDuplicateNumbers()).isNotNull();
     }
 }
