@@ -18,6 +18,14 @@ public class Number {
         if (value < 0) throw new RuntimeException();
     }
 
+    public Number add(Number number) {
+        return new Number(this.value + number.getValue());
+    }
+
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

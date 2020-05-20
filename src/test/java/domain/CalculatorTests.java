@@ -15,15 +15,21 @@ class CalculatorTests {
     @DisplayName("숫자 콜렉션을 입력 받아서 전체 합산을 진행한다.")
     @ParameterizedTest
     @MethodSource("numberCollections")
-    void sumTest(List<Integer> numbers, int expected) {
+    void sumTest(List<Number> numbers, Number expected) {
         int result = Calculator.sum(numbers);
-        assertThat(expected).isEqualTo(result);
+        assertThat(expected.getValue()).isEqualTo(result);
     }
     public static Stream<Arguments> numberCollections() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5), 15),
-                Arguments.of(Arrays.asList(1, 2, 3, 4), 10),
-                Arguments.of(Arrays.asList(1, 2, 3), 6)
+                Arguments.of(Arrays.asList(new Number("1"), new Number("2"),
+                        new Number("3"), new Number("4"), new Number("5")),
+                        new Number("15")),
+                Arguments.of(Arrays.asList(new Number("1"), new Number("2"),
+                        new Number("3"), new Number("4")),
+                        new Number("10")),
+                Arguments.of(Arrays.asList(new Number("1"), new Number("2"),
+                        new Number("3")),
+                        new Number("6"))
         );
     }
 }
