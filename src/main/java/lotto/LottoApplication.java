@@ -13,7 +13,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         int amount = InputView.inputPurchaseAmount();
 
-        LottoSeller seller = LottoSeller.of(new RandomGenerationStrategy(6));
+        LottoSeller seller = LottoSeller.of(new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE));
         List<LottoTicket> tickets = seller.buyTicket(amount);
 
         ResultView.printPurchasedTicketCount(tickets.size());
