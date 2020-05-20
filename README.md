@@ -28,5 +28,5 @@
 - [X] if문의 자바 컨벤션 지키기 (Number, InputView)
 - [X] 자료구조 형이 들어간 변수명 개선하기
 - [X] Number 객체의 add 메서드 파라미터 이름 수정
-- [ ] InputView에서 의미가 있는 변수들 상수화 하기
+- [X] InputView에서 의미가 있는 변수들 상수화 하기
 - [ ] 비싼 연산(Pattern) 줄이기

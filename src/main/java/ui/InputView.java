@@ -9,7 +9,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private final static String DEFAULT_DIVIDER = "[,:]";
+    private final static String DEFAULT_DIVIDER_HEADER = "[,";
+    private final static String DEFAULT_DIVIDER_TAIL = ":]";
+    private final static String NULL_OR_EMPTY_INPUT_VALUE = "0";
+    private final static int REGEX_CUSTOM_DIVIDER_GROUP = 1;
+    private final static int REGEX_TARGET_STRING_GROUP = 2;
 
     private String divider;
     private String targetString;
@@ -21,19 +25,21 @@ public class InputView {
 
     public static InputView create(String input) {
         if (input == null) {
-            return new InputView(DEFAULT_DIVIDER, "0");
+            return new InputView(DEFAULT_DIVIDER_HEADER + DEFAULT_DIVIDER_TAIL, NULL_OR_EMPTY_INPUT_VALUE);
         }
         if (input.trim().isEmpty()) {
-            return new InputView(DEFAULT_DIVIDER, "0");
+            return new InputView(DEFAULT_DIVIDER_HEADER + DEFAULT_DIVIDER_TAIL, NULL_OR_EMPTY_INPUT_VALUE);
         }
 
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
-            String divider = "[," + matcher.group(1) + ":]";
-            return new InputView(divider, matcher.group(2));
+            String divider = DEFAULT_DIVIDER_HEADER +
+                    matcher.group(REGEX_CUSTOM_DIVIDER_GROUP) +
+                    DEFAULT_DIVIDER_TAIL;
+            return new InputView(divider, matcher.group(REGEX_TARGET_STRING_GROUP));
         }
 
-        return new InputView(DEFAULT_DIVIDER, input);
+        return new InputView(DEFAULT_DIVIDER_HEADER + DEFAULT_DIVIDER_TAIL, input);
     }
 
     public List<Number> extractNumbers() {
