@@ -10,12 +10,12 @@ public class SeparatorStrategySelector {
         this.inputText = inputText;
     }
 
-    public SeparatorStrategy selectSeparatorStrategy(String inputText) {
+    public SeparatorStrategy selectSeparatorStrategy() {
         if (isContainsCustomSeparator()) {
-            return new CustomSeparator(inputText);
+            return new CustomSeparator(this.inputText);
         }
 
-        return new BaseSeparator(inputText);
+        return new BaseSeparator(this.inputText);
     }
 
     private Boolean isContainsCustomSeparator() {
