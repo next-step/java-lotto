@@ -20,8 +20,8 @@ public class Number {
         }
     }
 
-    public Number add(Number number) {
-        return new Number(this.value + number.getValue());
+    public Number add(Number inputNumber) {
+        return new Number(this.value + inputNumber.getValue());
     }
 
     public int getValue() {
