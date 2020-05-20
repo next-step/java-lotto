@@ -1,6 +1,6 @@
-package ui;
+package stringcalculator.ui;
 
-import domain.Number;
+import stringcalculator.domain.Number;
 
 import java.util.Arrays;
 import java.util.List;
