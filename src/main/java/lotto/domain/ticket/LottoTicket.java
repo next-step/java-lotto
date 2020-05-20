@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    private static final int LOTTO_NUMBER_SIZE = 6;
 
     private Set<LottoNumber> numbers;
 
@@ -36,7 +37,7 @@ public class LottoTicket {
     }
 
     private void validateNumbers(final List<LottoNumber> numbers) {
-        if ((numbers == null) || (numbers.size() != 6)) {
+        if ((numbers == null) || (numbers.size() != LOTTO_NUMBER_SIZE)) {
             throw new IllegalArgumentException();
         }
     }
