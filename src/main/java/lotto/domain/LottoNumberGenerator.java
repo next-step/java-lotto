@@ -29,4 +29,11 @@ public class LottoNumberGenerator {
                 .sorted()
                 .collect(Collectors.toList());
     }
+
+    public static LottoNumber findByNumber(int number) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.getNumber() == number)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("1 ~ 45 사이의 값이 아닙니다."));
+    }
 }
