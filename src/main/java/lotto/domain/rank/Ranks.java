@@ -22,4 +22,10 @@ public class Ranks {
     public long calculateTotalPrize() {
         return values.stream().mapToLong(Rank::getPrice).sum();
     }
+
+    public long getCount(Rank rank) {
+        return values.stream()
+                .filter(value -> value.equals(rank))
+                .count();
+    }
 }

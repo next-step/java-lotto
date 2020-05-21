@@ -37,4 +37,14 @@ class RanksTests {
         Ranks ranks = Ranks.create(rankList);
         assertThat(ranks.calculateTotalPrize()).isEqualTo(FIRST.getPrice() + SECOND.getPrice());
     }
+
+    @DisplayName("제시받은 Rank가 몇개 있는지 알려줄 수 있다.")
+    @Test
+    void countRank() {
+        List<Rank> rankList = Arrays.asList(FIRST, FIRST, SECOND, THIRD);
+        Ranks ranks = Ranks.create(rankList);
+        assertThat(ranks.getCount(FIRST)).isEqualTo(2);
+        assertThat(ranks.getCount(SECOND)).isEqualTo(1);
+        assertThat(ranks.getCount(THIRD)).isEqualTo(1);
+    }
 }
