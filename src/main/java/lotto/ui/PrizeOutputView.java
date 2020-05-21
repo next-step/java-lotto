@@ -3,6 +3,8 @@ package lotto.ui;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 import static lotto.domain.rank.Rank.*;
@@ -28,5 +30,13 @@ public class PrizeOutputView {
                 .filter(rank -> FOURTH.equals(rank) || THIRD.equals(rank) || SECOND.equals(rank) || FIRST.equals(rank))
                 .map(this::getIndividualStatistics)
                 .reduce("", (a, b) -> a + b + "\n");
+    }
+
+    public String getTotalRateOfReturn(long boughtMoney) {
+        BigDecimal totalValue = BigDecimal.valueOf(ranks.calculateTotalPrize());
+        BigDecimal boughtValue = BigDecimal.valueOf(boughtMoney);
+        return "총 수익률은 " +
+                totalValue.divide(boughtValue, 2, RoundingMode.HALF_UP) +
+                "입니다.";
     }
 }

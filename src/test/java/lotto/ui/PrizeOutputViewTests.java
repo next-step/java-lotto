@@ -52,4 +52,12 @@ class PrizeOutputViewTests {
         assertThat(prizeOutputView.getTotalStatistics()).isEqualTo(
                 "3개 일치 (5000원)- 0개\n4개 일치 (50000원)- 0개\n5개 일치 (1500000원)- 1개\n6개 일치 (2000000000원)- 1개\n");
     }
+
+    @DisplayName("총 당첨 금액을 구할 수 있다.")
+    @Test
+    void getTotalPrize() {
+        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
+        assertThat(prizeOutputView.getTotalRateOfReturn(2000))
+                .isEqualTo("총 수익률은 1000750.00입니다.");
+    }
 }
