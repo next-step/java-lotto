@@ -39,4 +39,11 @@ public class PrizeOutputView {
                 totalValue.divide(boughtValue, 2, RoundingMode.HALF_UP) +
                 "입니다.";
     }
+
+    public void printPrizeStatistics(long boughtMoneyValue) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+        System.out.println(this.getTotalStatistics());
+        System.out.println(this.getTotalRateOfReturn(boughtMoneyValue));
+    }
 }

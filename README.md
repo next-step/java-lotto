@@ -74,7 +74,25 @@
         - [X] 구매한 로또 티켓들을 갖고 있다.
         - [X] 콘솔로 구매한 로또 티켓들 번호를 출력할 수 있다.
     - [X] BuyInputView를 통해 Service에 책임을 위임하고 OutputView로 결과를 출력한다.
-    - [ ] PrizeInputView를 입력받는다.
-        - [ ] 쉼표로 구분된 문자열을 입력받아서 int 콜렉션을 보관할 수 있어야 한다.
-        - [ ] null이나 빈 문자열 입력 시 IllegalArgumentException 발생 
-    - [ ] PrizeOutputView를 출력한다.
+    - [X] PrizeInputView를 입력받는다.
+        - [X] 쉼표로 구분된 문자열을 입력받아서 int 콜렉션을 보관할 수 있어야 한다.
+        - [X] null이나 빈 문자열 입력 시 IllegalArgumentException 발생 
+    - [X] PrizeOutputView를 출력한다.
+
+- Step2. 리뷰 반영 Todo
+    - [X] 응집도를 위해 컨트롤러에서 통계 결과 출력되는 부분을 PrizeOutputView로 옮긴다.
+    - [ ] 로또 결과 출력시 로또 번호들이 정렬된 상태로 출력되야 한다.
+    - [ ] Shop 에서 LottoTicket을 발급하는 책임이 buy인지 sell인지 더 고민해 볼 것
+    - [ ] 구매 금액(Money)도 일급 객체로 래핑한다.
+    - [ ] 구매 금액에 대한 validation은 어느 객체에서 책임질 지 고민해 볼 것
+    - [ ] 람다식 내에서도 좀 더 의미있는 변수명을 사용한다
+    - [ ] 예외에 대한 자바 컨벤션 지키도록 변경
+    - [ ] 각각의 예외 메시지를 도메인에 알맞는 예외 메시지로 래핑
+    - [ ] 당첨 티켓도 LottoTicket 객체로 변경
+    - [ ] PrizeInputView에서 당첨 티켓 입력하는 메소드명을 좀 더 책임에 맞게 변경할 것
+    - [ ] 4등 이상인 랭크를 찾는 책임의 응집도를 높일 것
+    - [ ] '사이드 이펙트가 없어야 한다'는 테스트의 목적을 확인할 것
+    - [ ] Shop 객체의 stream 사용 개선
+    - [ ] RankCalculator에서 getter로 기차놀이 하는 부분 개선할 것
+    - [ ] 단위가 큰 long 타입 사용 시 언더스코어로 가독성 높일 것
+    - [ ] 같은 객체 두개를 해당 객체 메소드에서 사용 시 getter 대신 속성에 바로 접근할 것

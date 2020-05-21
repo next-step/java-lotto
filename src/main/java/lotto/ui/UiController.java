@@ -25,9 +25,6 @@ public class UiController {
         Ranks ranks = lottoService.calculateRank(winnerTicketNumbers, lottoTickets);
 
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
-        System.out.println(prizeOutputView.getTotalStatistics());
-        System.out.println(prizeOutputView.getTotalRateOfReturn(boughtMoneyValue));
+        prizeOutputView.printPrizeStatistics(boughtMoneyValue);
     }
 }
