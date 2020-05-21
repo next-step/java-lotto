@@ -1,8 +1,8 @@
-package application;
+package stringcalculator.application;
 
-import domain.Calculator;
-import domain.Number;
-import ui.InputView;
+import stringcalculator.domain.Calculator;
+import stringcalculator.domain.Number;
+import stringcalculator.ui.InputView;
 
 import java.util.List;
 

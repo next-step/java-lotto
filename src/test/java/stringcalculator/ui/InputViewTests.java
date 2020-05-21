@@ -1,6 +1,6 @@
-package ui;
+package stringcalculator.ui;
 
-import domain.Number;
+import stringcalculator.domain.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

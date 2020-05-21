@@ -1,4 +1,4 @@
-package domain;
+package stringcalculator.domain;
 
 import java.util.Objects;
 
@@ -10,16 +10,18 @@ public class Number {
         this.value = value;
     }
 
-    public Number(String stringValue) {
-        this(Integer.parseInt(stringValue));
+    public Number(String inputValue) {
+        this(Integer.parseInt(inputValue));
     }
 
     private void validateValue(int value) {
-        if (value < 0) throw new RuntimeException();
+        if (value < 0) {
+            throw new RuntimeException();
+        }
     }
 
-    public Number add(Number number) {
-        return new Number(this.value + number.getValue());
+    public Number add(Number inputNumber) {
+        return new Number(this.value + inputNumber.getValue());
     }
 
     public int getValue() {
@@ -28,8 +30,12 @@ public class Number {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Number number = (Number) o;
         return value == number.value;
     }
