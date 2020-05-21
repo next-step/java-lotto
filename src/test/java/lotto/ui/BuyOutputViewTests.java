@@ -27,11 +27,4 @@ class BuyOutputViewTests {
         BuyOutputView buyOutputView = new BuyOutputView(fakeLottoTickets);
         assertThat(buyOutputView).isNotNull();
     }
-
-    @DisplayName("갖고 있는 LottoTickets의 상태를 String으로 바꿀 수 있다.")
-    @Test
-    void convertToStringTest() {
-        BuyOutputView buyOutputView = new BuyOutputView(fakeLottoTickets);
-        assertThat(buyOutputView.printResult()).isEqualTo("[1, 2, 3, 4, 5, 6]\n[7, 8, 9, 10, 11, 12]");
-    }
 }

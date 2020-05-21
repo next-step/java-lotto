@@ -74,5 +74,7 @@
         - [X] 구매한 로또 티켓들을 갖고 있다.
         - [X] 콘솔로 구매한 로또 티켓들 번호를 출력할 수 있다.
     - [X] BuyInputView를 통해 Service에 책임을 위임하고 OutputView로 결과를 출력한다.
-    - [ ] ResultInputView를 입력받는다.
-    - [ ] ResultOutputView를 출력한다.  
+    - [ ] PrizeInputView를 입력받는다.
+        - [ ] 쉼표로 구분된 문자열을 입력받아서 int 콜렉션을 보관할 수 있어야 한다.
+        - [ ] null이나 빈 문자열 입력 시 IllegalArgumentException 발생 
+    - [ ] PrizeOutputView를 출력한다.
