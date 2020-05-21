@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Rank {
-    FIRST(6, 2000000000L),
-    SECOND(5, 1500000L),
-    THIRD(4, 50000L),
-    FOURTH(3, 5000L),
-    FIFTH(2, 0L),
+    OUT(0, 0L),
     SIXTH(1, 0L),
-    OUT(0, 0L);
+    FIFTH(2, 0L),
+    FOURTH(3, 5000L),
+    THIRD(4, 50000L),
+    SECOND(5, 1500000L),
+    FIRST(6, 2000000000L);
 
     private int matchNumber;
     private long price;
