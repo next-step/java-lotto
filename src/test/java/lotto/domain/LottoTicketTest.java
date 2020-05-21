@@ -2,7 +2,10 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +21,7 @@ class LottoTicketTest {
     @DisplayName("LottoNumber 리스트의 크기가 6이 아니면 IllegalArgumentException Throw")
     @Test
     void lottoTicketThrowsExceptionWhenSizeOver() {
-        List<LottoNumber> lottoNumbers = IntStream.rangeClosed(1, 7)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket(lottoNumbers))
@@ -30,12 +31,27 @@ class LottoTicketTest {
     @DisplayName("LottoNumber 리스트에 중복된 번호가 있으면 IllegalArgumentExceptionThrow")
     @Test
     void lottoTicketThrowsExceptionWhenDuplicateNumber() {
-        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 3, 4, 5)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 5));
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket(lottoNumbers))
                 .withMessage("로또 번호는 중복 될 수 없습니다.");
+    }
+
+    @DisplayName("LottoNumber 리스트에 매개값으로 받은 번호가 존재하는지 판단.")
+    @ParameterizedTest
+    @CsvSource({"3, true", "7, false"})
+    void isContainingLottoNumber(int number, boolean expectResult) {
+        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
+        assertThat(lottoTicket.isContainingLottoNumbers(new LottoNumber(number))).isEqualTo(expectResult);
+    }
+
+    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -27,5 +28,9 @@ public class LottoTicket {
         if (nonDuplicateNumbers.size() < LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 중복 될 수 없습니다.");
         }
+    }
+
+    public boolean isContainingLottoNumbers(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }
