@@ -30,4 +30,8 @@ public class LottoTickets {
                 .collect(Collectors.toList());
         return Ranks.create(rankList);
     }
+
+    public List<LottoTicket> getValues() {
+        return Collections.unmodifiableList(new ArrayList<>(values));
+    }
 }

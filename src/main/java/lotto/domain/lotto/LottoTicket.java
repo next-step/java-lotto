@@ -47,10 +47,12 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
         for (LottoNumber value: values) {
-            result.append(value).append(" ");
+            builder.append(value.getValue()).append(", ");
         }
-        return result.toString();
+        String result = builder.toString().substring(0, builder.toString().length() - 2);
+        return result + "]";
     }
 }

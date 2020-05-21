@@ -73,5 +73,6 @@
     - [ ] BuyOutputView를 출력한다.
         - [ ] 구매한 로또 티켓들을 갖고 있다.
         - [ ] 콘솔로 구매한 로또 티켓들 번호를 출력할 수 있다.
+    - [ ] BuyInputView를 통해 Service에 책임을 위임하고 OutputView로 결과를 출력한다.
     - [ ] ResultInputView를 입력받는다.
     - [ ] ResultOutputView를 출력한다.  

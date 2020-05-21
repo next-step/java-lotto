@@ -56,4 +56,11 @@ class LottoTicketTests {
         LottoTicket lottoTicket2 = LottoTicket.create(values2);
         assertThat(lottoTicket1).isEqualTo(lottoTicket2);
     }
+
+    @DisplayName("리스트 형태를 toString으로 보여줄 수 있어야 한다.")
+    @Test
+    void toStringTest() {
+        LottoTicket lottoTicket = LottoTicket.create(values);
+        assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }
