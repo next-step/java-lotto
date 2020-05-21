@@ -19,8 +19,7 @@ public class LottoApplication {
         LottoSeller seller = LottoSeller.of(new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE));
         List<LottoTicket> tickets = seller.buyTicket(payment);
 
-        ResultView.printPurchasedTicketCount(tickets.size());
-        ResultView.printTickets(tickets);
+        ResultView.printPurchaseInfo(tickets);
 
         String winningNumbers = InputView.inputWinningNumbers();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningNumbers);
