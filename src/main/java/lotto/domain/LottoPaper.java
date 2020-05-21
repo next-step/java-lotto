@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -28,6 +29,6 @@ public class LottoPaper {
             .filter(lottoMatch -> lottoMatch != LottoMatch.NOT_FOUND)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        return new LottoMatchResult(map, totalPrice);
+        return new LottoMatchResult(new EnumMap<>(map), totalPrice);
     }
 }

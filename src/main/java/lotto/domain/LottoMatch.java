@@ -11,8 +11,7 @@ public enum LottoMatch {
     FIVE(5, 1_500_000),
     SIX(6, 1_500_000),
 
-    NOT_FOUND(-1, -1),
-    ;
+    NOT_FOUND(-1, -1);
 
     private final int matchCount;
     private final int amount;
