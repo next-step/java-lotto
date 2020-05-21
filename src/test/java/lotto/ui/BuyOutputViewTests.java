@@ -32,6 +32,6 @@ class BuyOutputViewTests {
     @Test
     void convertToStringTest() {
         BuyOutputView buyOutputView = new BuyOutputView(fakeLottoTickets);
-        assertThat(buyOutputView.convertToString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n[7, 8, 9, 10, 11, 12]");
+        assertThat(buyOutputView.printResult()).isEqualTo("[1, 2, 3, 4, 5, 6]\n[7, 8, 9, 10, 11, 12]");
     }
 }

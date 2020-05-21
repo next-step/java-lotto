@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Shop {
-    public static int getLottoTicketCount(long money) {
+    protected static int getLottoTicketCount(long money) {
         moneyValidation(money);
         return (int) (money / 1000);
     }
