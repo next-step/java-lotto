@@ -8,11 +8,19 @@ import java.util.stream.Collectors;
 
 public class LottoSeller {
     private final static int LOTTO_PRICE = 1000;
+    private final int DECIMAL_POINT = 2;
 
     private int price;
 
     public LottoSeller(int price) {
+        this.validatePrice(price);
         this.price = price;
+    }
+
+    private void validatePrice(int price) {
+        if (price < LOTTO_PRICE) {
+            throw new IllegalArgumentException("The price must be greater than the price of the Lotto");
+        }
     }
 
     public List<LottoNumberResult> buyLotto(LottoNumberGenerator lottoNumberGenerator, List<Integer> allLottoNumber, int size) {
@@ -55,6 +63,6 @@ public class LottoSeller {
         }
 
         BigDecimal purchaseAmount = new BigDecimal(Math.ceil(price / LOTTO_PRICE) * LOTTO_PRICE);
-        return amount.divide(purchaseAmount, 2, BigDecimal.ROUND_CEILING);
+        return amount.divide(purchaseAmount, DECIMAL_POINT, BigDecimal.ROUND_CEILING);
     }
 }
