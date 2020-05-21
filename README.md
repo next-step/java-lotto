@@ -29,4 +29,4 @@
 - 6개의 LottoNumber 를 관리하는 일급 컬렉션 LottoTicket
 - 금액에 맞춰 LottoTicket 을 발급하는 LottoMachine
 - 로또를 추첨하는 추첨기 Drawing Machine
-- 로또 당첨 통계 정보를 가지고 있는 Enum WinningStatistics
+- 로또 당첨표 정보를 가지고 있는 Enum WinningSheet
