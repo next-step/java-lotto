@@ -18,9 +18,9 @@ public class BaseSeparatorTest {
     @ParameterizedTest
     @MethodSource("provideDummyString")
     void getSeparatedInputsTest(final String inputText, final List<String> expectedElements) {
-        SeparatorStrategy separatorStrategy = new BaseSeparator(inputText);
+        SeparatorStrategy separatorStrategy = new BaseSeparator();
 
-        List<String> separatedElements = separatorStrategy.getSeparatedInputs();
+        List<String> separatedElements = separatorStrategy.getSeparatedInputs(inputText);
         assertEquals(separatedElements.size(), expectedElements.size());
         assertTrue(separatedElements.containsAll(expectedElements));
     }

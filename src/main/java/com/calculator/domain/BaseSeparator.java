@@ -7,16 +7,10 @@ import java.util.List;
 
 public class BaseSeparator implements SeparatorStrategy {
 
-    private String inputText;
-
-    public BaseSeparator(String inputText) {
-        this.inputText = inputText;
-    }
-
     @Override
-    public List<String> getSeparatedInputs() {
+    public List<String> getSeparatedInputs(String inputText) {
         String[] splitInput = StringUtils.split(
-                this.inputText, BaseSeparatorType.COMMA.getSymbol() + "|" + BaseSeparatorType.COLON.getSymbol()
+                inputText, BaseSeparatorType.COMMA.getSymbol() + "|" + BaseSeparatorType.COLON.getSymbol()
         );
         return Arrays.asList(splitInput);
     }

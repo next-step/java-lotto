@@ -19,7 +19,7 @@ public class CalculatorElementTest {
     @MethodSource("provideAbnormalDummyElements")
     void convertAllElementsFailureTest(final List<String> elements) {
         CalculatorElement calculatorElement = new CalculatorElement();
-        assertThatThrownBy(() -> calculatorElement.convertElements(elements))
+        assertThatThrownBy(() -> calculatorElement.validateElements(elements))
                 .isInstanceOf(NumberFormatException.class);
     }
 
@@ -36,8 +36,8 @@ public class CalculatorElementTest {
     @MethodSource("provideNegativeDummyElements")
     void validateElementsFailureTest(final List<String> elements) {
         CalculatorElement calculatorElement = new CalculatorElement();
-        calculatorElement.convertElements(elements);
-        assertThatThrownBy(calculatorElement::validateElements)
+
+        assertThatThrownBy(() -> calculatorElement.validateElements(elements))
                 .isInstanceOf(RuntimeException.class);
     }
 
@@ -51,16 +51,15 @@ public class CalculatorElementTest {
 
     @DisplayName(
             "1. 각 요소들의 타입을 String -> Integer 타입으로 변경하는 테스트" +
-            "2. 각 요소들의 값을 검증하는 테스트" +
-            "3. 각 요소들의 합을 구하는 테스트"
+                    "2. 각 요소들의 값을 검증하는 테스트" +
+                    "3. 각 요소들의 합을 구하는 테스트"
     )
     @ParameterizedTest
     @MethodSource("provideNormalDummyElements")
     void convertAndAddAllElementsTest(final List<String> elements, final Integer expected) {
         CalculatorElement calculatorElement = new CalculatorElement();
 
-        calculatorElement.convertElements(elements);
-        calculatorElement.validateElements();
+        calculatorElement.validateElements(elements);
         Integer result = calculatorElement.addAllElements();
 
         assertEquals(result, expected);

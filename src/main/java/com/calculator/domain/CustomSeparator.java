@@ -11,20 +11,20 @@ public class CustomSeparator implements SeparatorStrategy {
 
     public static final String PREFIX = "//";
     public static final String POSTFIX = "\n";
+    private static final Pattern pattern = Pattern.compile(PREFIX + "(.)" + POSTFIX + "(.*)");
 
     private String processedText;
     private String customDelimiter;
 
-    public CustomSeparator(String inputText) {
-        Matcher matcher = Pattern.compile(PREFIX + "(.)" + POSTFIX + "(.*)").matcher(inputText);
+    @Override
+    public List<String> getSeparatedInputs(String inputText) {
+
+        Matcher matcher = pattern.matcher(inputText);
         if (matcher.find()) {
             this.customDelimiter = matcher.group(1);
             this.processedText = matcher.group(2);
         }
-    }
 
-    @Override
-    public List<String> getSeparatedInputs() {
         String[] spiltProcessedText = StringUtils.split(this.processedText, this.customDelimiter);
         return Arrays.asList(spiltProcessedText);
     }

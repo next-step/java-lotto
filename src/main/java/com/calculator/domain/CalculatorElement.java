@@ -12,14 +12,15 @@ public class CalculatorElement {
         this.elements = new ArrayList<>();
     }
 
-    public void convertElements(List<String> originalElements) {
+    public void validateElements(List<String> originalElements) {
         for (String originalElement : originalElements) {
-            Integer convertedElement = convertEachElement(originalElement);
+            Integer convertedElement = convertStrToIntWithEachElement(originalElement);
+            checkNegativeElement(convertedElement);
             this.elements.add(convertedElement);
         }
     }
 
-    private Integer convertEachElement(String originalElement) {
+    private Integer convertStrToIntWithEachElement(String originalElement) {
         try {
             return Integer.valueOf(originalElement);
         } catch (NumberFormatException e) {
@@ -27,13 +28,7 @@ public class CalculatorElement {
         }
     }
 
-    public void validateElements() {
-        for (Integer element : this.elements) {
-            validateEachElement(element);
-        }
-    }
-
-    private void validateEachElement(Integer element) {
+    private void checkNegativeElement(Integer element) {
         if (element < 0) {
             throw new RuntimeException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE);
         }

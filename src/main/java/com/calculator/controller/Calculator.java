@@ -29,9 +29,8 @@ public class Calculator {
             return DEFAULT_NULL_OR_EMPTY_VALUE;
         }
 
-        List<String> elements = this.separatorStrategy.getSeparatedInputs();
-        this.calculatorElement.convertElements(elements);
-        this.calculatorElement.validateElements();
+        List<String> elements = this.separatorStrategy.getSeparatedInputs(this.inputText);
+        this.calculatorElement.validateElements(elements);
 
         return this.calculatorElement.addAllElements();
     }

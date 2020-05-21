@@ -1,8 +1,8 @@
 package com.calculator.selector;
 
+import com.calculator.domain.BaseSeparator;
 import com.calculator.domain.CustomSeparator;
 import com.calculator.domain.SeparatorStrategy;
-import com.calculator.domain.BaseSeparator;
 import org.apache.commons.lang3.StringUtils;
 
 public class SeparatorStrategySelector {
@@ -15,10 +15,10 @@ public class SeparatorStrategySelector {
 
     public SeparatorStrategy selectSeparatorStrategy() {
         if (isContainsCustomSeparator()) {
-            return new CustomSeparator(this.inputText);
+            return new CustomSeparator();
         }
 
-        return new BaseSeparator(this.inputText);
+        return new BaseSeparator();
     }
 
     private Boolean isContainsCustomSeparator() {
