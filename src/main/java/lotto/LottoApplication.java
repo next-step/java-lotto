@@ -14,10 +14,10 @@ import java.util.List;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        int amount = InputView.inputPurchaseAmount();
+        int payment = InputView.inputPurchaseAmount();
 
         LottoSeller seller = LottoSeller.of(new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE));
-        List<LottoTicket> tickets = seller.buyTicket(amount);
+        List<LottoTicket> tickets = seller.buyTicket(payment);
 
         ResultView.printPurchasedTicketCount(tickets.size());
         ResultView.printTickets(tickets);
@@ -28,6 +28,6 @@ public class LottoApplication {
         LottoPrizeResult result = LottoGame.of(tickets).play(winningLottoTicket);
 
         ResultView.printStatisticsResult(result);
-        ResultView.printProfitRate(result.calculateProfitRate(amount));
+        ResultView.printProfitRate(result.calculateProfitRate(payment));
     }
 }
