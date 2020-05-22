@@ -1,7 +1,10 @@
 package lotto.ui;
 
+import lotto.domain.lotto.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,10 +25,11 @@ class PrizeInputViewTest {
         assertThatThrownBy(() -> new PrizeInputView(null)).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("입력받은 문자열을 int 컬렉션으로 변화 가능")
+    @DisplayName("입력받은 문자열을 당첨 티켓으로 변환 가능")
     @Test
     void convertToIntCollectionTest() {
         PrizeInputView prizeInputView = new PrizeInputView("1, 2, 3, 4, 5, 6");
-        assertThat(prizeInputView.convertToIntCollection()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(prizeInputView.convertToWinTicket())
+                .isEqualTo(LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 }

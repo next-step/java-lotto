@@ -1,6 +1,6 @@
 package lotto.application;
 
-import lotto.domain.lotto.LottoGenerator;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.RankCalculator;
@@ -16,8 +16,8 @@ public class LottoService {
         return Shop.buyLottoTickets(money);
     }
 
-    public Ranks calculateRank(List<Integer> winTicketNumbers, LottoTickets lottoTickets) {
-        RankCalculator rankCalculator = new RankCalculator(LottoGenerator.createManualByIntList(winTicketNumbers));
+    public Ranks calculateRank(LottoTicket winTicket, LottoTickets lottoTickets) {
+        RankCalculator rankCalculator = new RankCalculator(winTicket);
         List<Rank> rankList = lottoTickets.getValues().stream()
                 .map(rankCalculator::getRank)
                 .collect(Collectors.toList());

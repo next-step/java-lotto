@@ -1,7 +1,9 @@
 package lotto.ui;
 
+import lotto.domain.lotto.LottoGenerator;
+import lotto.domain.lotto.LottoTicket;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -28,10 +30,12 @@ public class PrizeInputView {
         return new PrizeInputView(scanner.nextLine());
     }
 
-    public List<Integer> convertToIntCollection() {
-        return Arrays.asList(this.value.split(","))
-                .stream()
-                .map(inputValue -> Integer.parseInt(inputValue.trim()))
-                .collect(Collectors.toList());
+    public LottoTicket convertToWinTicket() {
+        return LottoGenerator.createManualByIntList(
+                Arrays.asList(this.value.split(","))
+                        .stream()
+                        .map(inputValue -> Integer.parseInt(inputValue.trim()))
+                        .collect(Collectors.toList())
+        );
     }
 }
