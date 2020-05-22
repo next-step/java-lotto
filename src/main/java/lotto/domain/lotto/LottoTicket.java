@@ -66,4 +66,10 @@ public class LottoTicket {
     public boolean isInThisTicket(LottoNumber lottoNumber) {
         return this.values.contains(lottoNumber);
     }
+
+    public int howManyMatch(LottoTicket lottoTicket) {
+        return (int) this.values.stream()
+                .filter(lottoTicket::isInThisTicket)
+                .count();
+    }
 }
