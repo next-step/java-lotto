@@ -22,10 +22,10 @@ public class UiController {
         buyOutputView.printResult();
 
         Scanner prizeInputScanner = new Scanner(System.in);
-        PrizeInputView prizeInputView = PrizeInputView.getThisWeekWinningNumbers(prizeInputScanner);
+        PrizeInputView prizeInputView = PrizeInputView.getThisWeekWinningInfo(prizeInputScanner);
         LottoTicket winTicket = prizeInputView.convertToWinTicket();
-        // TODO: 임의의 보너스 번호 추가 향후 InputView 에서 바꿀 것
-        Ranks ranks = lottoService.calculateRank(winTicket, LottoNumber.create(3), lottoTickets);
+        LottoNumber winBonusNumber = prizeInputView.getWinBonusNumber();
+        Ranks ranks = lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets);
 
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
         prizeOutputView.printPrizeStatistics(boughtMoneyValue);

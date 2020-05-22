@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.lotto.LottoGenerator;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 
 import java.util.Arrays;
@@ -8,11 +9,13 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class PrizeInputView {
-    private String value;
+    private String winTicketValue;
+    private int winBonusNumber;
 
-    public PrizeInputView(String inputValue) {
+    public PrizeInputView(String inputValue, int winBonusNumber) {
         validation(inputValue);
-        this.value = inputValue;
+        this.winTicketValue = inputValue;
+        this.winBonusNumber = winBonusNumber;
     }
 
     private void validation(String inputValue) {
@@ -25,17 +28,24 @@ public class PrizeInputView {
         }
     }
 
-    public static PrizeInputView getThisWeekWinningNumbers(Scanner scanner) {
+    public static PrizeInputView getThisWeekWinningInfo(Scanner scanner) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new PrizeInputView(scanner.nextLine());
+        String winTicketValue = scanner.nextLine();
+        System.out.println("보너스 볼을 입력해주세요.");
+        int winBonusNumber = scanner.nextInt();
+        return new PrizeInputView(winTicketValue, winBonusNumber);
     }
 
     public LottoTicket convertToWinTicket() {
         return LottoGenerator.createManualByIntList(
-                Arrays.asList(this.value.split(","))
+                Arrays.asList(this.winTicketValue.split(","))
                         .stream()
                         .map(inputValue -> Integer.parseInt(inputValue.trim()))
                         .collect(Collectors.toList())
         );
+    }
+
+    public LottoNumber getWinBonusNumber() {
+        return LottoNumber.create(this.winBonusNumber);
     }
 }
