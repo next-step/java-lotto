@@ -40,6 +40,7 @@ class LottoTicketsTests {
 
         LottoTicket winTicket = LottoGenerator.create();
 
-        assertThat(lottoTickets.calculateRanks(new RankCalculator(winTicket))).isInstanceOf(Ranks.class);
+        assertThat(lottoTickets.calculateRanks(new RankCalculator(winTicket, LottoNumber.create(3))))
+                .isInstanceOf(Ranks.class);
     }
 }

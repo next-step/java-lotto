@@ -1,6 +1,7 @@
 package lotto.ui;
 
 import lotto.application.LottoService;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.rank.Ranks;
@@ -23,7 +24,8 @@ public class UiController {
         Scanner prizeInputScanner = new Scanner(System.in);
         PrizeInputView prizeInputView = PrizeInputView.getThisWeekWinningNumbers(prizeInputScanner);
         LottoTicket winTicket = prizeInputView.convertToWinTicket();
-        Ranks ranks = lottoService.calculateRank(winTicket, lottoTickets);
+        // TODO: 임의의 보너스 번호 추가 향후 InputView 에서 바꿀 것
+        Ranks ranks = lottoService.calculateRank(winTicket, LottoNumber.create(3), lottoTickets);
 
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
         prizeOutputView.printPrizeStatistics(boughtMoneyValue);
