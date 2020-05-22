@@ -21,7 +21,7 @@ public class UiController {
         buyOutputView.printResult();
 
         Scanner prizeInputScanner = new Scanner(System.in);
-        PrizeInputView prizeInputView = PrizeInputView.create(prizeInputScanner);
+        PrizeInputView prizeInputView = PrizeInputView.getThisWeekWinningNumbers(prizeInputScanner);
         LottoTicket winTicket = prizeInputView.convertToWinTicket();
         Ranks ranks = lottoService.calculateRank(winTicket, lottoTickets);
 

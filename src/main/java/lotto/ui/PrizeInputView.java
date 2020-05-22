@@ -25,7 +25,7 @@ public class PrizeInputView {
         }
     }
 
-    public static PrizeInputView create(Scanner scanner) {
+    public static PrizeInputView getThisWeekWinningNumbers(Scanner scanner) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return new PrizeInputView(scanner.nextLine());
     }
