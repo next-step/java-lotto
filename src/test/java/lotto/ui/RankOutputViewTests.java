@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static lotto.domain.rank.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PrizeOutputViewTests {
+class RankOutputViewTests {
     private Ranks ranks;
 
     @BeforeEach
@@ -27,15 +27,15 @@ class PrizeOutputViewTests {
     @DisplayName("Ranks를 전달 받아서 객체를 생성할 수 있다.")
     @Test
     void createTest() {
-        assertThat(new PrizeOutputView(ranks)).isNotNull();
+        assertThat(new RankOutputView(ranks)).isNotNull();
     }
 
     @DisplayName("개별 등수의 결과를 반환한다.")
     @ParameterizedTest
     @MethodSource("ranksAndResults")
     void getIndividualStatistics(Rank rank, String result) {
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getIndividualStatistics(rank)).isEqualTo(result);
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        assertThat(rankOutputView.getIndividualStatistics(rank)).isEqualTo(result);
     }
     public static Stream<Arguments> ranksAndResults() {
         return Stream.of(
@@ -49,8 +49,8 @@ class PrizeOutputViewTests {
     @DisplayName("통합 등수의 결과를 반환한다.")
     @Test
     void getTotalStatistics() {
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getTotalStatistics()).isEqualTo("3개 일치 (5000원)- 0개\n" +
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        assertThat(rankOutputView.getTotalStatistics()).isEqualTo("3개 일치 (5000원)- 0개\n" +
                 "4개 일치 (50000원)- 0개\n" +
                 "5개 일치 (1500000원)- 0개\n" +
                 "5개 일치, 보너스 볼 일치(30000000원)- 1개\n" +
@@ -60,8 +60,8 @@ class PrizeOutputViewTests {
     @DisplayName("총 당첨 금액을 구할 수 있다.")
     @Test
     void getTotalPrize() {
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getTotalRateOfReturn(new Money(2000)))
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        assertThat(rankOutputView.getTotalRateOfReturn(new Money(2000)))
                 .isEqualTo("총 수익률은 1015000.00입니다.");
     }
 }

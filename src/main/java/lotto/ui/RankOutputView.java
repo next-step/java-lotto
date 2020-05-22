@@ -8,10 +8,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-public class PrizeOutputView {
+public class RankOutputView {
     private Ranks ranks;
 
-    public PrizeOutputView(Ranks ranks) {
+    public RankOutputView(Ranks ranks) {
         this.ranks = ranks;
     }
 
@@ -38,7 +38,7 @@ public class PrizeOutputView {
                 "입니다.";
     }
 
-    public void printPrizeStatistics(Money boughtMoneyValue) {
+    public void printRankStatistics(Money boughtMoneyValue) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println(this.getTotalStatistics());

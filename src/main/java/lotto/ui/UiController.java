@@ -21,13 +21,13 @@ public class UiController {
         BuyOutputView buyOutputView = new BuyOutputView(lottoTickets);
         buyOutputView.printResult();
 
-        Scanner prizeInputScanner = new Scanner(System.in);
-        PrizeInputView prizeInputView = PrizeInputView.getThisWeekWinningInfo(prizeInputScanner);
-        LottoTicket winTicket = prizeInputView.convertToWinTicket();
-        LottoNumber winBonusNumber = prizeInputView.getWinBonusNumber();
+        Scanner rankInputScanner = new Scanner(System.in);
+        RankInputView rankInputView = RankInputView.getThisWeekWinningInfo(rankInputScanner);
+        LottoTicket winTicket = rankInputView.convertToWinTicket();
+        LottoNumber winBonusNumber = rankInputView.getWinBonusNumber();
         Ranks ranks = lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets);
 
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        prizeOutputView.printPrizeStatistics(boughtMoney);
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        rankOutputView.printRankStatistics(boughtMoney);
     }
 }
