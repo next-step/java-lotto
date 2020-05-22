@@ -49,6 +49,16 @@ class LottoTicketTest {
         assertThat(lottoTicket.isContainingLottoNumbers(new LottoNumber(number))).isEqualTo(expectResult);
     }
 
+    @DisplayName("가지고있는 LottoNumber 리스트를 Integer 리스트로 반환")
+    @Test
+    void getLottoNumbers() {
+        List<LottoNumber> lottoNumbers = createLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
+        assertThat(lottoTicket.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+    }
+
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)

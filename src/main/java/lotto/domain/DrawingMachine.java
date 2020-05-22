@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class DrawingMachine {
     private static final int WINNING_NUMBER_SIZE = 6;
 
-    public final List<LottoNumber> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
 
     public DrawingMachine(List<Integer> winningNumbers) {
         validateWinningNumbersSize(winningNumbers);
