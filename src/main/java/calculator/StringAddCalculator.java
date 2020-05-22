@@ -14,7 +14,7 @@ public class StringAddCalculator {
     private final static int REGEX_SPLITTER_GROUP = 1;
     private final static int REGEX_STRING_INPUT_GROUP = 2;
     private final static String STRING_ZERO_NUMBER = "0";
-    private final static String REG_EXPRESSION = "//(.)\n(.*)";
+    private final static Pattern REG_EXPRESSION_PATTERN = Pattern.compile("//(.)\n(.*)");
 
     private String splitter;
     private String targetString;
@@ -27,11 +27,9 @@ public class StringAddCalculator {
     }
 
     public static StringAddCalculator execute(String inputValue) {
-        if (inputValue == null || inputValue.isBlank()) {
-            return new StringAddCalculator(DEFAULT_SPLITTER_START + DEFAULT_SPLITTER_END, STRING_ZERO_NUMBER);
-        }
+        validateInputValue(inputValue);
 
-        Matcher matcher = Pattern.compile(REG_EXPRESSION).matcher(inputValue);
+        Matcher matcher = REG_EXPRESSION_PATTERN.matcher(inputValue);
 
         if (matcher.find()) {
             String customSplitter = DEFAULT_SPLITTER_START  + matcher.group(REGEX_SPLITTER_GROUP) + DEFAULT_SPLITTER_END;
@@ -41,21 +39,20 @@ public class StringAddCalculator {
         return new StringAddCalculator(DEFAULT_SPLITTER_START + DEFAULT_SPLITTER_END, inputValue);
     }
 
+    private static void validateInputValue(String inputValue) {
+        if (inputValue == null || inputValue.isBlank()) {
+            throw new RuntimeException("값이 null 이거나 비어있습니다.");
+        }
+    }
+
     public int sum() {
         saveSplitNumbers();
         return this.numbers.stream().reduce(new Number(STRING_ZERO_NUMBER), Number::add).getValue();
     }
 
     private void saveSplitNumbers() {
-        this.numbers = Arrays.stream(this.targetString.split(this.splitter)).map(Number::new).collect(Collectors.toList());
+        this.numbers = Arrays.stream(this.targetString.split(this.splitter))
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
-
-    public String getSplitter() {
-        return this.splitter;
-    }
-
-    public String getTargetString() {
-        return this.targetString;
-    }
-
 }

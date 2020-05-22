@@ -14,17 +14,17 @@ public class Number {
     }
 
     public Number(String inputValue) {
-        this.value = Integer.parseInt(inputValue);
+        this(Integer.parseInt(inputValue));
     }
 
     private void validate(int value) {
         if (value < ZERO_NUMBER) {
-            throw new RuntimeException();
+            throw new RuntimeException("0 이하의 값을 입력했습니다.");
         }
     }
 
     public Number add(Number number) {
-        return new Number(this.value + number.getValue());
+        return new Number(this.value + number.value);
     }
 
     public int getValue() {
