@@ -87,8 +87,11 @@
 - [x] 1 ~ 45 까지의 정수 이외의 값이면 예외가 발생한다.
 - [x] 로또 번호 범위 1 ~ 45 사이의 정수면 로또 숫자를 생성할 수 있다.
 
-#### LottoTicket
+#### LottoNumbers
 : 로또 숫자에 대한 일급 컬렉션 
+
+#### LottoTicket
+: LottoNumbers 에 대한 Wrapping 클래스 
 - [x] List<Integer> 을 받아 LottoTicket 을 생성할 수 있다.
 - [x] 로또 슷자의 개수가 6개가 아니면 예외가 발생한다.
 - [x] 로또 슷자가 0 ~ 45 사이의 숫자가 아니면 예외가 발생한다.
@@ -97,7 +100,7 @@
 - [x] 중복된 숫자를 가질 수 없다. 
     - Set 으로 구성함.
 
-#### ~~~LottoTickets~~~
+#### LottoTickets
 : LottoTicket 에 대한 일급 컬렉션
 - [ ] 구입한 LottoTicket 을 추가할 수 있다.
 
