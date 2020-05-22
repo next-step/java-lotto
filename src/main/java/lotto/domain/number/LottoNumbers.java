@@ -26,6 +26,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers of(final String numbers) {
+        validateNumbers(numbers);
         return new LottoNumbers(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
@@ -38,6 +39,12 @@ public class LottoNumbers {
             throw new IllegalArgumentException(String.format(ErrorMessage.REQUIRED_SIZE_OF_LOTTO_NUMBERS, LOTTO_NUMBER_SIZE));
         }
         checkDuplication(numbers);
+    }
+
+    private static void validateNumbers(final String numbers) {
+        if (numbers == null || numbers.isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessage.NULL_VALUE);
+        }
     }
 
     private void checkDuplication(final List<LottoNumber> numbers) {

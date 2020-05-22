@@ -10,7 +10,7 @@ public class WinningLottoTicket extends LottoTicket {
     }
 
     public static WinningLottoTicket of(final String winningNumbers) {
-        return new WinningLottoTicket(LottoNumbers.of(winningNumbers)); // null 인 경우?
+        return new WinningLottoTicket(LottoNumbers.of(winningNumbers));
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
