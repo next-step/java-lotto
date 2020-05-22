@@ -34,8 +34,7 @@ public class LottoPrizeResult {
     private int calculateTotalPrizes() {
         return matchedPrizes.keySet()
                 .stream()
-                .map(this::calculatePrizes)
-                .mapToInt(Integer::valueOf)
+                .mapToInt(this::calculatePrizes)
                 .sum();
     }
 
