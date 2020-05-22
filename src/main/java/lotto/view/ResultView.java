@@ -27,18 +27,11 @@ public final class ResultView {
     public static void printMatchResult(LottoMatchResult lottoMatchResult) {
         printResultTitle();
 
-        System.out.println(createResultMatchMessage(lottoMatchResult));
+        System.out.println(getResultMatchInfo(lottoMatchResult));
     }
 
     private static void printResultTitle() {
         System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
-    }
-
-    private static StringBuilder createResultMatchMessage(LottoMatchResult lottoMatchResult) {
-        StringBuilder builder = getResultMatchInfo(lottoMatchResult);
-        builder.append(getResultMessage(lottoMatchResult));
-
-        return builder;
     }
 
     private static StringBuilder getResultMatchInfo(LottoMatchResult lottoMatchResult) {
@@ -58,11 +51,9 @@ public final class ResultView {
                 matchCount);
     }
 
-    private static String getResultMessage(LottoMatchResult lottoMatchResult) {
-        double profitRate = lottoMatchResult.getProfitRate();
-
-        return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
+    public static void printProfitRate(double profitRate, String result) {
+        System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)",
                 profitRate,
-                lottoMatchResult.getProfitOrLoss(profitRate));
+                result));
     }
 }
