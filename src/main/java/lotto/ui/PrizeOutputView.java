@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
+import lotto.domain.shop.Money;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -45,15 +46,15 @@ public class PrizeOutputView {
                 .reduce("", (previousStatistics, statistics) -> previousStatistics + statistics + "\n");
     }
 
-    public String getTotalRateOfReturn(long boughtMoney) {
+    public String getTotalRateOfReturn(Money boughtMoney) {
         BigDecimal totalValue = BigDecimal.valueOf(ranks.calculateTotalPrize());
-        BigDecimal boughtValue = BigDecimal.valueOf(boughtMoney);
+        BigDecimal boughtValue = BigDecimal.valueOf(boughtMoney.getValue());
         return "총 수익률은 " +
                 totalValue.divide(boughtValue, 2, RoundingMode.HALF_UP) +
                 "입니다.";
     }
 
-    public void printPrizeStatistics(long boughtMoneyValue) {
+    public void printPrizeStatistics(Money boughtMoneyValue) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println(this.getTotalStatistics());

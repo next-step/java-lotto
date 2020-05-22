@@ -15,8 +15,8 @@ public class UiController {
         BuyInputView inputViewByConsole = BuyInputView.createByConsole(buyInputScanner);
 
         LottoService lottoService = new LottoService();
-        long boughtMoneyValue = inputViewByConsole.getMoney();
-        LottoTickets lottoTickets = lottoService.buyLottoTickets(new Money(boughtMoneyValue));
+        Money boughtMoney = inputViewByConsole.getMoney();
+        LottoTickets lottoTickets = lottoService.buyLottoTickets(boughtMoney);
 
         BuyOutputView buyOutputView = new BuyOutputView(lottoTickets);
         buyOutputView.printResult();
@@ -28,6 +28,6 @@ public class UiController {
         Ranks ranks = lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets);
 
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        prizeOutputView.printPrizeStatistics(boughtMoneyValue);
+        prizeOutputView.printPrizeStatistics(boughtMoney);
     }
 }

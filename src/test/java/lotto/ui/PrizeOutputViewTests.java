@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
+import lotto.domain.shop.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,7 +61,7 @@ class PrizeOutputViewTests {
     @Test
     void getTotalPrize() {
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getTotalRateOfReturn(2000))
+        assertThat(prizeOutputView.getTotalRateOfReturn(new Money(2000)))
                 .isEqualTo("총 수익률은 1015000.00입니다.");
     }
 }
