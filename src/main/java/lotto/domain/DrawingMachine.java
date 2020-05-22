@@ -37,6 +37,12 @@ public class DrawingMachine {
         }
     }
 
+    public List<Integer> drawAllLottoTicket(List<LottoTicket> lottoTickets) {
+        return lottoTickets.stream()
+                .map(this::drawLottoTicket)
+                .collect(Collectors.toList());
+    }
+
     public int drawLottoTicket(LottoTicket lottoTicket) {
         return (int) winningNumbers.stream()
                 .filter(lottoTicket::isContainingLottoNumbers)
