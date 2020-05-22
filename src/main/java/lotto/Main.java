@@ -11,18 +11,20 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(InputView.getPurchaseAmount());
+        int purchaseAmount = InputView.getPurchaseAmount();
+        LottoGame lottoGame = new LottoGame(purchaseAmount);
 
         ResultView.printPurchaseCount(lottoGame.getPurchaseCount());
 
-        List<LottoNumbers> lottoNumbers = lottoGame.createLottoNumbers();
-        ResultView.printLottoNumbers(lottoNumbers);
+        List<LottoNumbers> lottoNumbersGroup = lottoGame.createLottoNumbers();
+        ResultView.printLottoNumbers(lottoNumbersGroup);
 
-        LottoNumbers lastWeekLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
+        LottoNumbers lastWinLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
 
-        LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance(lastWeekLottoNumbers, lottoNumbers);
-        lottoMatchResult.calculateMatchCount();
-
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(lastWinLottoNumbers);
         ResultView.printMatchResult(lottoMatchResult);
+
+        double profitRate = lottoMatchResult.calculateProfitRate(purchaseAmount);
+        ResultView.printProfitRate(profitRate, lottoMatchResult.getProfitOrLoss(profitRate));
     }
 }
