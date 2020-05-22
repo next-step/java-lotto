@@ -74,4 +74,12 @@ class LottoTicketTests {
         LottoTicket sorted = lottoTicket.sort();
         assertThat(sorted.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
+
+    @DisplayName("제시받은 LottoNumber가 현재 티켓 안에 있는 번호인지 확인할 수 있어야 한다.")
+    @Test
+    void isInThisTicketTest() {
+        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoTicket.isInThisTicket(LottoNumber.create(3))).isTrue();
+        assertThat(lottoTicket.isInThisTicket(LottoNumber.create(15))).isFalse();
+    }
 }

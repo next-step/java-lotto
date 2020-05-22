@@ -62,4 +62,8 @@ public class LottoTicket {
         sortTarget.sort(lottoNumberComparator);
         return new LottoTicket(sortTarget);
     }
+
+    public boolean isInThisTicket(LottoNumber lottoNumber) {
+        return this.values.contains(lottoNumber);
+    }
 }
