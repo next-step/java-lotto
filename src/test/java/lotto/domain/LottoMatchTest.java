@@ -6,11 +6,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMatchTest {
 
@@ -33,8 +31,7 @@ class LottoMatchTest {
     @DisplayName("유효하지 않은 개수로 로또 일치 열거를 찾을 수 없다.")
     @Test
     void canNotFindLottoMatchByInvalidCount() {
-        assertThatThrownBy(() -> LottoMatch.findByCount(1))
-                .isInstanceOf(NoSuchElementException.class);
+        assertThat(LottoMatch.findByCount(1)).isNull();
     }
 
     @DisplayName("로또 일치 열거는 일치 개수를 얻을 수 있다.")
@@ -58,10 +55,10 @@ class LottoMatchTest {
     @DisplayName("로또 일치 열거는 당첨 건수로 총 당첨 금액을 얻을 수 있다.")
     @Test
     void canGetWinAmount() {
-        assertThat(LottoMatch.THREE.getWinAmount(2)).isEqualTo(10000);
-        assertThat(LottoMatch.FOUR.getWinAmount(2)).isEqualTo(100000);
-        assertThat(LottoMatch.FIVE.getWinAmount(2)).isEqualTo(3000000);
-        assertThat(LottoMatch.SIX.getWinAmount(2)).isEqualTo(4000000000L);
+        assertThat(LottoMatch.THREE.calculateWinAmount(2)).isEqualTo(10000);
+        assertThat(LottoMatch.FOUR.calculateWinAmount(2)).isEqualTo(100000);
+        assertThat(LottoMatch.FIVE.calculateWinAmount(2)).isEqualTo(3000000);
+        assertThat(LottoMatch.SIX.calculateWinAmount(2)).isEqualTo(4000000000L);
     }
 
     @DisplayName("최소 당첨 일치 개수를 얻을 수 있다.")
