@@ -30,10 +30,7 @@ public enum Prize {
 
     public static Prize of(final int matchedNumbersCount) {
         validateMatchedNumbersCount(matchedNumbersCount);
-        if (!PRIZES.containsKey(matchedNumbersCount)) {
-            return Prize.MISS;
-        }
-        return PRIZES.get(matchedNumbersCount);
+        return PRIZES.getOrDefault(matchedNumbersCount, Prize.MISS);
     }
 
     private static void validateMatchedNumbersCount(final int matchedNumbersCount) {
