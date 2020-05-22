@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    public static final int LOTTO_NUMBERS_COUNT = 6;
+    private static final int LOTTO_NUMBERS_COUNT = 6;
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
     private static final String DELIMITER_PATTERN = ", ";
@@ -36,13 +36,17 @@ public class LottoNumbers {
         }
     }
 
+    public static List<Integer> createNonDuplicateNumbers() {
+        return NumbersFactory.createNonDuplicateNumbers(LOTTO_NUMBERS_COUNT);
+    }
+
     public int getMatchCount(LottoNumbers lotto) {
         return (int) this.lottoNumbers.stream()
                 .filter(lotto::isMatchNumber)
                 .count();
     }
 
-    public boolean isMatchNumber(int number) {
+    private boolean isMatchNumber(int number) {
         return this.lottoNumbers.contains(number);
     }
 
