@@ -14,10 +14,13 @@ class RankTests {
         assertThat(Rank.canGetPrize(SIXTH)).isFalse();
     }
 
-    @DisplayName("정적 팩터리 메서드로 로또 2등과 3등을 구분해서 생산할 수 있다.")
+    @DisplayName("정적 팩터리 메서드로 등수를 구분할 수 있다.")
     @Test
     void createTest() {
+        assertThat(Rank.create(6, false)).isEqualTo(FIRST);
         assertThat(Rank.create(5, false)).isEqualTo(THIRD);
         assertThat(Rank.create(5, true)).isEqualTo(SECOND);
+        assertThat(Rank.create(4, true)).isEqualTo(FOURTH);
+        assertThat(Rank.create(4, false)).isEqualTo(FOURTH);
     }
 }
