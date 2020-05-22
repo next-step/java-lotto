@@ -26,7 +26,7 @@ public enum Prize {
 
     public static Prize of(final int matchedNumbersCount) {
         if (!PRIZES.containsKey(matchedNumbersCount)) {
-            return MISS;
+            throw new IllegalArgumentException(String.format("%d개에 해당하는 상금을 구할 수 없습니다.", matchedNumbersCount));
         }
         return PRIZES.get(matchedNumbersCount);
     }
