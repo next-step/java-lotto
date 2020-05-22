@@ -7,8 +7,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-import static lotto.domain.rank.Rank.*;
-
 public class PrizeOutputView {
     private Ranks ranks;
 
@@ -27,7 +25,7 @@ public class PrizeOutputView {
 
     public String getTotalStatistics() {
         return Arrays.stream(Rank.values())
-                .filter(rank -> FOURTH.equals(rank) || THIRD.equals(rank) || SECOND.equals(rank) || FIRST.equals(rank))
+                .filter(Rank::canGetPrize)
                 .map(this::getIndividualStatistics)
                 .reduce("", (previousStatistics, statistics) -> previousStatistics + statistics + "\n");
     }

@@ -21,7 +21,7 @@ public enum Rank {
     }
 
     public static boolean canGetPrize(Rank inputRank) {
-        return !OUT.equals(inputRank) && !SIXTH.equals(inputRank) && !FIFTH.equals(inputRank);
+        return inputRank.getPrice() > 0L;
     }
 
     public int getMatchNumber() {
