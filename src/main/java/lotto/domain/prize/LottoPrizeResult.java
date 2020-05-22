@@ -15,16 +15,11 @@ public class LottoPrizeResult {
 
     private LottoPrizeResult(final Price price, final Map<Prize, Long> prizes) {
         this.price = price;
-
         this.matchedPrizes = new EnumMap<>(Prize.class);
         EnumSet.allOf(Prize.class)
-                .forEach(prize -> {
-                    if (!prizes.containsKey(prize)) {
-                        matchedPrizes.put(prize, DEFAULT_MATCHED_COUNT);
-                        return;
-                    }
-                    matchedPrizes.put(prize, prizes.get(prize).intValue());
-                });
+                .forEach(prize ->
+                    matchedPrizes.put(prize, Math.toIntExact(prizes.getOrDefault(prize, (long) DEFAULT_MATCHED_COUNT)))
+                );
     }
 
     public static LottoPrizeResult init(final Price price, final Map<Prize, Long> prizes) {
