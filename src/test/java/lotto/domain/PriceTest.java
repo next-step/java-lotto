@@ -4,7 +4,11 @@ import lotto.exception.NegativeNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -30,5 +34,20 @@ public class PriceTest {
     void validateAvailablePrice() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> Price.of(Price.ONE_TICKET_PRICE - 1).validateAvailablePrice());
+    }
+
+    @DisplayName("구입가능한 티켓의 개수를 반환")
+    @ParameterizedTest
+    @MethodSource
+    void ticketCount(final int price, final int expected) {
+        assertThat(Price.of(price).ticketCount()).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> ticketCount() {
+        return Stream.of(
+                Arguments.of(Price.ONE_TICKET_PRICE, 1),
+                Arguments.of(Price.ONE_TICKET_PRICE * 14, 14),
+                Arguments.of(Price.ONE_TICKET_PRICE * 14 + 100, 14)
+        );
     }
 }
