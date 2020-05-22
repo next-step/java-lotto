@@ -7,10 +7,10 @@ public enum Rank {
     OUT(0, 0L),
     SIXTH(1, 0L),
     FIFTH(2, 0L),
-    FOURTH(3, 5000L),
-    THIRD(4, 50000L),
-    SECOND(5, 1500000L),
-    FIRST(6, 2000000000L);
+    FOURTH(3, 5_000L),
+    THIRD(4, 50_000L),
+    SECOND(5, 1_500_000L),
+    FIRST(6, 2_000_000_000L);
 
     private int matchNumber;
     private long price;
