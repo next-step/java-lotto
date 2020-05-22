@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class PrizeTest {
 
@@ -23,6 +23,8 @@ public class PrizeTest {
     private static Stream<Arguments> matchedPrize() {
         return Stream.of(
                 Arguments.of(0, Prize.MISS),
+                Arguments.of(1, Prize.MISS),
+                Arguments.of(2, Prize.MISS),
                 Arguments.of(3, Prize.FIFTH),
                 Arguments.of(4, Prize.FOURTH),
                 Arguments.of(5, Prize.THIRD),
@@ -32,8 +34,9 @@ public class PrizeTest {
 
     @DisplayName("음수 또는 상금에 포함되지 않는 일치하는 개수인 경우 예외 반환")
     @ParameterizedTest
-    @ValueSource(ints = { -1, 7 })
-    void matchedPrizeFailure(final int matchedCount) {
-        assertThatIllegalArgumentException().isThrownBy(() -> Prize.of(matchedCount));
+    @ValueSource(ints = { Prize.MIN_MATCHED_COUNT - 1, Prize.MAX_MATCHED_COUNT + 1})
+    void matchedPrizeFailure(final int matchedNumbersCount) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> Prize.of(matchedNumbersCount));
     }
 }
