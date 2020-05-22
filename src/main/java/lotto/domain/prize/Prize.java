@@ -1,5 +1,7 @@
 package lotto.domain.prize;
 
+import lotto.exception.ErrorMessage;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
@@ -26,7 +28,7 @@ public enum Prize {
 
     public static Prize of(final int matchedNumbersCount) {
         if (!PRIZES.containsKey(matchedNumbersCount)) {
-            throw new IllegalArgumentException(String.format("%d개에 해당하는 상금을 구할 수 없습니다.", matchedNumbersCount));
+            throw new IllegalArgumentException(String.format(ErrorMessage.NOT_MATCHED_COUNT_OF_PRIZE, matchedNumbersCount));
         }
         return PRIZES.get(matchedNumbersCount);
     }

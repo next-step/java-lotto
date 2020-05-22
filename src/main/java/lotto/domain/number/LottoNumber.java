@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import lotto.exception.ErrorMessage;
+
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
@@ -21,7 +23,7 @@ public class LottoNumber {
 
     private void verifyRange(final int number) {
         if (MAX_VALUE < number || MIN_VALUE > number) {
-            throw new InvalidParameterException(String.format("%d ~ %d 사이의 숫자가 아닙니다.",MIN_VALUE, MAX_VALUE));
+            throw new InvalidParameterException(String.format(ErrorMessage.RANGE_OF_LOTTO_NUMBER, MIN_VALUE, MAX_VALUE));
         }
     }
 
