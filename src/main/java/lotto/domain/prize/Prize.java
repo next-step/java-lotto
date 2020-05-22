@@ -13,8 +13,8 @@ public enum Prize {
     THIRD(5, 1_500_000),
     FIRST(6, 2_000_000_000);
 
-    private int matchedNumbersCount;
-    private int prizeMoney;
+    private final int matchedNumbersCount;
+    private final int prizeMoney;
 
     private static final Map<Integer, Prize> PRIZES = Arrays.stream(Prize.values())
             .collect(Collectors.toMap(Prize::getMatchedNumbersCount, Function.identity()));
