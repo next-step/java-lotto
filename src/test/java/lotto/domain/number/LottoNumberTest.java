@@ -1,11 +1,11 @@
 package lotto.domain.number;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
 
@@ -23,5 +23,12 @@ public class LottoNumberTest {
     void create(final int number) {
         assertThatCode(() -> LottoNumber.of(number))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("재정의한 equals 테스트")
+    @Test
+    void equals() {
+        assertThat(LottoNumber.of(1).equals(LottoNumber.of(1))).isTrue();
+        assertThat(LottoNumber.of(1).equals(LottoNumber.of(2))).isFalse();
     }
 }
