@@ -8,24 +8,35 @@ import java.util.regex.Pattern;
 
 public class StringAdditionalCalculator {
 
+  private static final Pattern pattern = Pattern.compile("//(.)\n(.*)");
+  private static final int EXPRESSION = 2;
+  private static final int DELIMITER = 1;
+
+  private StringAdditionalCalculator () {}
+
   static int splitAndSum (String text) {
     if (StringUtils.isBlank(text)) return 0;
     String[] numbers = getNumbers(text);
     return Arrays.stream(numbers)
-                 .map(StringAdditionalCalculator::validatedNumber)
+                 .map(StringAdditionalCalculator::parseNumber)
                  .reduce(0, (sum, a) -> sum + a);
   }
 
   static String[] getNumbers (String text) {
-    Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-    return m.find() ? m.group(2).split(m.group(1)) : text.split(",|:");
+    Matcher m = pattern.matcher(text);
+    return m.find() ? m.group(EXPRESSION).split(m.group(DELIMITER)) : text.split(",|:");
   }
 
-  static int validatedNumber (String text) {
+  static int parseNumber (String text) {
+    validatedNumber(text);
+    return Integer.parseInt(text);
+  }
+
+  static void validatedNumber (String text) {
     try {
-      int number = Integer.parseInt(text);
-      if (number < 0) throw new Exception();
-      return number;
+      if (Integer.parseInt(text) < 0) {
+        throw new Exception();
+      }
     } catch(Exception e) {
       throw new RuntimeException();
     }
