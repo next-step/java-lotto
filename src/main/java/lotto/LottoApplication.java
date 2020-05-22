@@ -6,8 +6,8 @@ import lotto.domain.seller.LottoSeller;
 import lotto.domain.strategy.RandomGenerationStrategy;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.WinningLottoTicket;
-import lotto.domain.view.InputView;
-import lotto.domain.view.ResultView;
+import lotto.view.InputView;
+import lotto.view.ResultView;
 
 import java.util.List;
 
