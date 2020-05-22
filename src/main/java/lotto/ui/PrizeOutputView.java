@@ -26,7 +26,8 @@ public class PrizeOutputView {
         return Arrays.stream(Rank.values())
                 .filter(Rank::canGetPrize)
                 .map(this::getIndividualStatistics)
-                .reduce("", (previousStatistics, statistics) -> previousStatistics + statistics + "\n");
+                .reduce("", (previousStatistics, statistics) ->
+                        previousStatistics + statistics + System.lineSeparator());
     }
 
     public String getTotalRateOfReturn(Money boughtMoney) {
