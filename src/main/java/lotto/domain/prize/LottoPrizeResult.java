@@ -31,14 +31,6 @@ public class LottoPrizeResult {
         return new LottoPrizeResult(price, prizes);
     }
 
-    public void updateMatchedPrize(final Prize prize) {
-        matchedPrizes.put(prize, increasedMatchedTicketCount(prize));
-    }
-
-    private int increasedMatchedTicketCount(final Prize prize) {
-        return this.getMatchedTicketCount(prize) + 1;
-    }
-
     public float calculateProfitRate() {
         return ((float) this.calculateTotalPrizes() / price.getPrice());
     }
@@ -54,18 +46,11 @@ public class LottoPrizeResult {
         return prize.getPrizeMoney() * this.getMatchedTicketCount(prize);
     }
 
-    private int getMatchedTicketCount(final Prize prize) {
+    public int getMatchedTicketCount(final Prize prize) {
         return this.matchedPrizes.get(prize);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        matchedPrizes.keySet()
-                .forEach(prize ->
-                    stringBuilder.append(prize.toString())
-                            .append(String.format(" - %d개", matchedPrizes.get(prize)))
-                            .append("\n"));
-        return stringBuilder.toString();
+    public EnumMap<Prize, Integer> getMatchedPrizes() {
+        return matchedPrizes;
     }
 }

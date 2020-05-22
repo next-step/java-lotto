@@ -63,13 +63,4 @@ public class LottoNumbers {
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public String toString() {
-       return "["
-               + numbers.stream()
-                        .map(number -> String.valueOf(number.getNumber()))
-                        .collect(Collectors.joining(", "))
-               + "]";
-    }
 }

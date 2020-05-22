@@ -11,6 +11,8 @@ public class ResultView {
     private final static String TICKET_PURCHASE_CONFIRM_MESSAGE = "%d개를 구입했습니다.";
     private final static String RESULT = "\n당첨 통계\n--------";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.1f%% 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String PRIZE_RESULT_INFO_FORMAT = "%d개 일치 (%d원) - %d개";
+    private static final String NEW_LINE = "\n";
 
     public static void printPurchaseInfo(final List<LottoTicketDto> tickets) {
         printPurchasedTicketCount(tickets.size());
@@ -35,8 +37,20 @@ public class ResultView {
     }
 
     private static void printStatisticsResult(final LottoPrizeResult result) {
-        System.out.println(RESULT);
-        System.out.println(result.toString());
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(RESULT).append(NEW_LINE);
+
+        result.getMatchedPrizes()
+                .keySet()
+                .forEach(prize ->
+                        stringBuilder.append(
+                                String.format(PRIZE_RESULT_INFO_FORMAT,
+                                        prize.getMatchedNumbersCount(),
+                                        prize.getPrizeMoney(),
+                                        result.getMatchedTicketCount(prize)))
+                        .append(NEW_LINE)
+                );
+        System.out.println(stringBuilder);
     }
 
     private static void printProfitRate(final float profitRate) {

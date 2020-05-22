@@ -42,16 +42,11 @@ public enum Prize {
         }
     }
 
-    private int getMatchedNumbersCount() {
+    public int getMatchedNumbersCount() {
         return matchedNumbersCount;
     }
 
     public int getPrizeMoney() {
         return prizeMoney;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%d개 일치 (%d원)", matchedNumbersCount, prizeMoney);
     }
 }
