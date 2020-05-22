@@ -2,10 +2,7 @@ package lotto.domain.number;
 
 import lotto.domain.ticket.WinningLottoTicket;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -40,6 +37,15 @@ public class LottoNumbers {
     private void validateNumbers(final List<LottoNumber> numbers) {
         if ((numbers == null) || (numbers.size() != LOTTO_NUMBER_SIZE)) {
             throw new IllegalArgumentException(String.format("로또 숫자는 %d개 여야 합니다.", LOTTO_NUMBER_SIZE));
+        }
+        checkDuplication(numbers);
+    }
+
+    private void checkDuplication(final List<LottoNumber> numbers) {
+        Set<LottoNumber> numbersOfNotDuplicated = new HashSet<>(numbers);
+
+        if (numbersOfNotDuplicated.size() < LOTTO_NUMBER_SIZE) {
+            throw new IllegalArgumentException("중복된 숫자가 포함되어 있습니다.");
         }
     }
 
