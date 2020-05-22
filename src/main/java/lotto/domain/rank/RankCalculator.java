@@ -11,7 +11,7 @@ public class RankCalculator {
 
     protected int matchNumberCalculate(LottoTicket lottoTicket) {
         return (int) lottoTicket.getValues().stream()
-                .filter(lottoNumber -> winTicket.getValues().contains(lottoNumber))
+                .filter(lottoNumber -> winTicket.isInThisTicket(lottoNumber))
                 .count();
     }
 
