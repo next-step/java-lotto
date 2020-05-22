@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_DELIMITER = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private Set<LottoNumber> numbers;
@@ -31,6 +31,7 @@ public class LottoTicket {
 
     public static LottoTicket of(final String numbers) {
         return new LottoTicket(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
