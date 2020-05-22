@@ -31,7 +31,7 @@ public class LottoSellerTest {
     @ValueSource(ints = { 1000, 14000 })
     void buyTickets(final int money) {
         Price price = Price.of(money);
-        assertThat(lottoSeller.buyTicket(price).size())
+        assertThat(lottoSeller.buyTicket(price).getLottoTickets().size())
                 .isEqualTo(price.ticketCount());
     }
 }

@@ -32,7 +32,7 @@ public class PrizeTest {
         );
     }
 
-    @DisplayName("음수 또는 상금에 포함되지 않는 일치하는 개수인 경우 예외 반환")
+    @DisplayName("1 ~ 6 이내의 일치하는 개수인 경우 예외가 발생")
     @ParameterizedTest
     @ValueSource(ints = { Prize.MIN_MATCHED_COUNT - 1, Prize.MAX_MATCHED_COUNT + 1})
     void matchedPrizeFailure(final int matchedNumbersCount) {

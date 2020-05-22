@@ -32,4 +32,8 @@ public class LottoTickets {
                 .map(lottoTicket -> lottoTicket.matchPrize(winningLottoTicket))
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
 }
