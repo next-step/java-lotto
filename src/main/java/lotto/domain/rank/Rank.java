@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Rank {
-    OUT(0, false,  0L),
+    OUT_ALL(0, false,  0L),
+    ONLY_BONUS(0, true,  0L),
     SEVENTH(1, false, 0L),
     SIXTH(2, false, 0L),
     FIFTH(3, false, 5_000L),

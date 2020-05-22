@@ -1,10 +1,16 @@
 package lotto.application;
 
+import lotto.domain.lotto.LottoGenerator;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
+import lotto.domain.rank.Ranks;
 import lotto.domain.shop.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,11 +32,11 @@ class LottoServiceTests {
     @DisplayName("당첨 티켓 번호와 구매한 LottoTickets를 받아서 당첨 결과를 반환할 수 있다.")
     @Test
     void rankCalculateTest() {
-        // TODO: 테스트 케이스 추가 필요
-//        LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
-//        LottoTickets lottoTickets = LottoTickets.create(
-//                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
-//
-//        assertThat(lottoService.calculateRank(winTicket, lottoTickets)).isInstanceOf(Ranks.class);
+        LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber winBonusNumber = LottoNumber.create(10);
+        LottoTickets lottoTickets = LottoTickets.create(
+                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
+
+        assertThat(lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets)).isInstanceOf(Ranks.class);
     }
 }
