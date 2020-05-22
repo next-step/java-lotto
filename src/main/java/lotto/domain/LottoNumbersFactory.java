@@ -8,7 +8,7 @@ public final class LottoNumbersFactory {
     }
 
     public static LottoNumbers createLottoNumbers() {
-        List<Integer> nonDuplicateNumbers = NumbersFactory.createNonDuplicateNumbers();
+        List<Integer> nonDuplicateNumbers = LottoNumbers.createNonDuplicateNumbers();
         return LottoNumbers.newInstance(nonDuplicateNumbers);
     }
 }
