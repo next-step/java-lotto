@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoGame;
+import lotto.domain.Price;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
@@ -16,7 +17,7 @@ public class LottoApplication {
         int price = InputView.inputPurchasePrice();
 
         LottoSeller seller = LottoSeller.of();
-        List<LottoNumbers> tickets = seller.buyTicket(price);
+        List<LottoNumbers> tickets = seller.buyTicket(Price.of(price));
 
         ResultView.printPurchaseInfo(tickets);
 
