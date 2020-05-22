@@ -8,51 +8,49 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumbersTest {
 
-    @DisplayName("LottoTicket 생성")
+    @DisplayName("LottoNumbers 생성")
     @Test
     void create() {
-        assertThatCode(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> LottoNumbers.of("1, 2, 3, 4, 5, 6"))
                 .doesNotThrowAnyException();
         assertThatCode(() -> LottoNumbers.of("1, 2, 3, 4, 5, 6"))
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("LottoTicket 생성 실패: 로또 슷자의 개수가 6개가 아닌 경우 예외 발생")
+    @DisplayName("LottoNumbers 생성 실패: 로또 슷자의 개수가 6개가 아닌 경우 예외 발생")
     @ParameterizedTest
     @MethodSource("lottoNumbersCase")
-    void notMetNumberCountCondition(final List<Integer> numbers) {
+    void notMetNumberCountCondition(final String numbers) {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoNumbers.of(numbers));
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)),
-                Arguments.of(Arrays.asList(-1, 0, 3, 4, 5, 6))
+                Arguments.of("1, 2, 3, 4, 5"),
+                Arguments.of("1, 2, 3, 4, 5, 6, 7"),
+                Arguments.of("-1, 0, 3, 4, 5, 6")
         );
     }
 
-    @DisplayName("LottoTicket 생성 실패: 1 ~ 45 이외의 숫자가 포함된 경우 예외 발생")
+    @DisplayName("LottoNumbers 생성 실패: 1 ~ 45 이외의 숫자가 포함된 경우 예외 발생")
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
+                .isThrownBy(() -> LottoNumbers.of("-1, 0, 3, 4, 5, 6"));
     }
 
-    @DisplayName("LottoTicket 생성 실패: 중복된 숫자가 포함된 경우 예외 발생")
+    @DisplayName("LottoNumbers 생성 실패: 중복된 숫자가 포함된 경우 예외 발생")
     @Test
     void duplicatedNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 1, 3, 4, 5, 6)));
+                .isThrownBy(() -> LottoNumbers.of("1, 1, 3, 4, 5, 6"));
     }
 
     @DisplayName("당첨 번호와 일치하는 숫자의 개수를 반환")
@@ -65,11 +63,11 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> purchasedTicketCase() {
         return Stream.of(
-                Arguments.of(LottoNumbers.of(Arrays.asList(7, 8, 9, 10, 11, 12)), 0),
-                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9)), 3),
-                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8)), 4),
-                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7)), 5),
-                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6)
+                Arguments.of(LottoNumbers.of("7, 8, 9, 10, 11, 12"), 0),
+                Arguments.of(LottoNumbers.of("1, 2, 3, 7, 8, 9"), 3),
+                Arguments.of(LottoNumbers.of("1, 2, 3, 4, 7, 8"), 4),
+                Arguments.of(LottoNumbers.of("1, 2, 3, 4, 5, 7"), 5),
+                Arguments.of(LottoNumbers.of("1, 2, 3, 4, 5, 6"), 6)
         );
     }
 
