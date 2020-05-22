@@ -16,7 +16,7 @@ public class LottoSellerTest {
 
     @BeforeEach
     void setUp() {
-        lottoSeller = LottoSeller.of();
+        lottoSeller = LottoSeller.newInstance();
     }
 
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")

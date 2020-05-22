@@ -35,7 +35,7 @@ public class LottoTicket {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public List<Integer> getLottoNumbersToInts() {
-        return lottoNumbers.getNumbersToInts();
+    public List<Integer> getLottoNumbersAsInt() {
+        return lottoNumbers.getNumbersAsInt();
     }
 }

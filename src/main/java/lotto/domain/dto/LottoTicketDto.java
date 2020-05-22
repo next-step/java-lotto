@@ -11,7 +11,7 @@ public class LottoTicketDto {
     private final List<Integer> numbers;
 
     private LottoTicketDto(final LottoTicket lottoTicket) {
-        this.numbers = lottoTicket.getLottoNumbersToInts();
+        this.numbers = lottoTicket.getLottoNumbersAsInt();
     }
 
     private static LottoTicketDto of(final LottoTicket lottoTicket) {
