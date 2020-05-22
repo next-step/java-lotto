@@ -2,14 +2,12 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.Price;
-import lotto.domain.number.LottoNumbers;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
+import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoApplication {
 
@@ -17,7 +15,7 @@ public class LottoApplication {
         int price = InputView.inputPurchasePrice();
 
         LottoSeller seller = LottoSeller.of();
-        List<LottoNumbers> tickets = seller.buyTicket(Price.of(price));
+        LottoTickets tickets = seller.buyTicket(Price.of(price));
 
         ResultView.printPurchaseInfo(tickets);
 

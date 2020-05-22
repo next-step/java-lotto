@@ -2,6 +2,8 @@ package lotto.domain.seller;
 
 import lotto.domain.Price;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +17,14 @@ public class LottoSeller {
         return new LottoSeller();
     }
 
-    public List<LottoNumbers> buyTicket(final Price price) {
+    public LottoTickets buyTicket(final Price price) {
         validatePrice(price);
 
-        List<LottoNumbers> tickets = new ArrayList<>();
+        List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < price.ticketCount(); i++) {
-            tickets.add(LottoNumbers.auto());
+            tickets.add(LottoTicket.of(LottoNumbers.auto()));
         }
-        return tickets;
+        return LottoTickets.of(tickets);
     }
 
     private void validatePrice(final Price price) {

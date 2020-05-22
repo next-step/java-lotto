@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.ticket.LottoTickets;
 
 import java.util.List;
 
@@ -11,9 +12,9 @@ public class ResultView {
     private final static String RESULT = "\n당첨 통계\n--------";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.1f%% 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printPurchaseInfo(final List<LottoNumbers> tickets) {
-        printPurchasedTicketCount(tickets.size());
-        printTickets(tickets);
+    public static void printPurchaseInfo(final LottoTickets tickets) {
+//        printPurchasedTicketCount(tickets.size());
+//        printTickets(tickets);
     }
 
     private static void printPurchasedTicketCount(final int count) {
