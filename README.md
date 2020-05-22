@@ -93,6 +93,7 @@
 : 로또 숫자 범위 내의 숫자 
 - [x] 1 ~ 45 까지의 정수 이외의 값이면 예외가 발생한다.
 - [x] 로또 번호 범위 1 ~ 45 사이의 정수면 로또 숫자를 생성할 수 있다.
+- [ ] equals 재정의 테스트 
 
 #### LottoNumbers
 : 로또 숫자에 대한 일급 컬렉션 
@@ -104,11 +105,13 @@
 - [x] 중복된 숫자를 가질 수 없다. 
     - Set 으로 구성함.
 - [x] 자동으로 생성된 로또 번호를 반환한다.
+- [ ] Set<LottoNumber>의 값을 List<Integer> 로 구할 수 있다. 
 
 #### LottoTicket
 : LottoNumbers 에 대한 Wrapping 클래스 
 - [x] LottoNumbers 가 null 이면 예외를 반환한다.
 - [x] 우승 티켓과 일치하는 상금을 반환한다.
+- [ ] LottoNumbers 의 값을 List<Integer> 로 구할 수 있다. 
 
 #### LottoTickets
 : LottoTicket 에 대한 일급 컬렉션
@@ -126,9 +129,10 @@
 #### Prize
 : 일치하는 개수에 대한 상금액 (당첨 개수별 상)
 - [x] 일치하는 개수에 맞는 Prize 객체를 반환한다.
-- [x] 음수 또는 상금에 포함되지 않는 일치하는 개수인 경우 예외가 발생한다.
+- [x] 1 ~ 6 이내의 일치하는 개수인 경우 예외가 발생한다.
+- [x] 1, 2 개가 맞은 경우는 하나도 맞지 않은 경우와 동일한 상금을 반환한다.
 
-#### LottoPrizeResult (테스트 코드 어떻게?)
+#### LottoPrizeResult
 : 당첨 개수에 일치하는 티켓의 개수를 관리 
 - [x] 결과값을 초기화하면 당첨 개수에 일치하는 티켓 개수는 모두 0으로 설정된다.
 - [x] 당첨 개수에 일치하는 티켓 개수를 설정할 수 있다.
@@ -136,6 +140,10 @@
 - [x] 총 수익률을 반환한다. 
     - (최종 상금액 / 구매액)
     - (private) 최종 상금액을 반환한다. : 상금액 별 (상금액 * 당첨된 티켓 개수 = 당첨액)의 합 
+- 테스트 코드 
+    - [ ] LottoPrizeResult 생성 
+    - [ ] 예상되는 수익률 비교 (calculateProfitRate)
+    - [ ] 예상되는 일치하는 티켓 개수 비교 (getMatchedTicketCount)
 
 #### LottoSeller
 : LottoTickets 를 금액만큼 구매하는 책임 
@@ -153,6 +161,13 @@
 #### LottoGame (테스트 코드 어떻게?)
 : 구매한 티켓과 로또 당첨 번호로 로또 결과 수행 
 - [x] 구매한 티켓과 로또 당첨 번호에 맞는 결과를 반환한다.
+- 테스트 코드
+    - [ ] LottoGame 생성
+    - [ ] 생성 -> play -> 예상되는 LottoPrizeResult 객체와 비교 (equals 메소드 오버라이딩)
+
+#### LottoTicketDTO
+: 화면 출력에 필요한 정보에 대한 DTO
+- [x] LottoTickets 으로부터 List<LottoTicketDTO> 를 반환할 수 있다.
 
 ### # V (View)
 #### InputView
