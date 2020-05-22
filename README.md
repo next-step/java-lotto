@@ -93,7 +93,7 @@
 : 로또 숫자 범위 내의 숫자 
 - [x] 1 ~ 45 까지의 정수 이외의 값이면 예외가 발생한다.
 - [x] 로또 번호 범위 1 ~ 45 사이의 정수면 로또 숫자를 생성할 수 있다.
-- [ ] equals 재정의 테스트 
+- [x] equals 재정의 테스트 
 
 #### LottoNumbers
 : 로또 숫자에 대한 일급 컬렉션 
@@ -141,9 +141,9 @@
     - (최종 상금액 / 구매액)
     - (private) 최종 상금액을 반환한다. : 상금액 별 (상금액 * 당첨된 티켓 개수 = 당첨액)의 합 
 - 테스트 코드 
-    - [ ] LottoPrizeResult 생성 
-    - [ ] 예상되는 수익률 비교 (calculateProfitRate)
-    - [ ] 예상되는 일치하는 티켓 개수 비교 (getMatchedTicketCount)
+    - [x] LottoPrizeResult 생성 
+    - [x] 예상되는 수익률 비교 (calculateProfitRate)
+    - [x] 예상되는 일치하는 티켓 개수 비교 (getMatchedTicketCount)
 
 #### LottoSeller
 : LottoTickets 를 금액만큼 구매하는 책임 
@@ -162,8 +162,8 @@
 : 구매한 티켓과 로또 당첨 번호로 로또 결과 수행 
 - [x] 구매한 티켓과 로또 당첨 번호에 맞는 결과를 반환한다.
 - 테스트 코드
-    - [ ] LottoGame 생성
-    - [ ] 생성 -> play -> 예상되는 LottoPrizeResult 객체와 비교 (equals 메소드 오버라이딩)
+    - [x] LottoGame 생성
+    - [x] 생성 -> play -> LottoPrizeResult 의 당첨 개수로 비교
 
 #### LottoTicketDTO
 : 화면 출력에 필요한 정보에 대한 DTO
