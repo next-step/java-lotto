@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private static final String PURCHASE_AMOUNT_MESSAGE = "구입 금액을 입력해 주세요.";
+    private static final String PURCHASE_PRICE_MESSAGE = "구입 금액을 입력해 주세요.";
     private static final String WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -12,8 +12,8 @@ public class InputView {
     private InputView() {
     }
 
-    public static int inputPurchaseAmount() {
-        return inputInt(PURCHASE_AMOUNT_MESSAGE);
+    public static int inputPurchasePrice() {
+        return inputInt(PURCHASE_PRICE_MESSAGE);
     }
 
     public static String inputWinningNumbers() {
