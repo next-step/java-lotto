@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    private static final int NOT_LOSE_RATE = 1;
     private OutputView() {
     }
 
@@ -53,9 +54,9 @@ public class OutputView {
 
     private static void printRateOfReturn(double rateOfReturn) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("총 수익률은 %f 입니다.");
+        stringBuilder.append("총 수익률은 %.2f 입니다.");
 
-        if (rateOfReturn >= 1) {
+        if (rateOfReturn < NOT_LOSE_RATE) {
             stringBuilder.append("기준이 1이기 때문에 결과적으로 손해라는 의미임");
         }
 

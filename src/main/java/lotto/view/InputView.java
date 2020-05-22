@@ -30,6 +30,7 @@ public class InputView {
 
         String stringWinningNumbers = SCANNER.nextLine();
         return Arrays.stream(stringWinningNumbers.split(DELIMITER))
+                .map(String::trim)
                 .map(Integer::new)
                 .collect(Collectors.toList());
     }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class LottoResult {
     }
 
     private Map<WinningSheet, Long> makeWinningStatistics(List<Integer> drawResults) {
-        Map<WinningSheet, Long> winningStatistics = new HashMap<>();
+        Map<WinningSheet, Long> winningStatistics = new LinkedHashMap<>();
 
         for (WinningSheet winningSheet : WinningSheet.values()) {
             long count = drawResults.stream()
