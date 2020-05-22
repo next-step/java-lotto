@@ -43,7 +43,7 @@ public class LottoNumbers {
         }
     }
 
-    public int matchedCount(final WinningLottoTicket winningLottoTicket) {
+    public int matchCount(final WinningLottoTicket winningLottoTicket) {
         return Math.toIntExact(numbers.stream()
                 .filter(winningLottoTicket::contains)
                 .count());

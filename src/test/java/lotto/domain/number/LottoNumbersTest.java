@@ -53,7 +53,7 @@ public class LottoNumbersTest {
     @MethodSource("purchasedTicketCase")
     void matchedCount(final LottoNumbers ticket, final int expected) {
         final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
-        assertThat(ticket.matchedCount(winningLottoTicket)).isEqualTo(expected);
+        assertThat(ticket.matchCount(winningLottoTicket)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> purchasedTicketCase() {

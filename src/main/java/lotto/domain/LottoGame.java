@@ -23,7 +23,7 @@ public class LottoGame {
         LottoPrizeResult result = LottoPrizeResult.init();
 
         this.tickets.forEach(ticket ->
-            result.updateMatchedPrize(Prize.of(ticket.matchedCount(winningLottoTicket)))
+            result.updateMatchedPrize(Prize.of(ticket.matchCount(winningLottoTicket)))
         );
 
         return result;
