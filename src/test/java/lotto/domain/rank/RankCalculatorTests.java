@@ -44,47 +44,6 @@ class RankCalculatorTests {
                 .isInstanceOf(BonusNumberDuplicatedWithLottoTicket.class);
     }
 
-    @DisplayName("입력받은 로또 티켓과 당첨 티켓을 비교해서 몇개의 숫자가 일치하는지 알려줄 수 있다.")
-    @ParameterizedTest
-    @MethodSource("lottoTicketAndMatchNumber")
-    void matchNumberTest(LottoTicket lottoTicket, int matchNumber) {
-        RankCalculator rankCalculator = new RankCalculator(winTicket, bonusNumber);
-        int ticketResult = rankCalculator.matchNumberCalculate(lottoTicket);
-        assertThat(ticketResult).isEqualTo(matchNumber);
-    }
-    public static Stream<Arguments> lottoTicketAndMatchNumber() {
-        return Stream.of(
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        6
-                ),
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(2, 3, 4, 5, 6, 7)),
-                        5
-                ),
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(3, 4, 5, 6, 7, 8)),
-                        4
-                ),
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(4, 5, 6, 7, 8 ,9)),
-                        3
-                ),
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(5, 6, 7, 8, 9, 10)),
-                        2
-                ),
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(6, 7, 8, 9, 10, 11)),
-                        1
-                ),
-                Arguments.of(
-                        LottoGenerator.createManualByIntList(Arrays.asList(7, 8, 9, 10, 11, 12)),
-                        0
-                )
-        );
-    }
-
     @DisplayName("제시한 로또 티켓과 1등 티켓 일치하는 갯수와 보너스 번호 일치 여부에 따라 Rank를 받을 수 있다.")
     @ParameterizedTest
     @MethodSource("lottoTicketAndRank")

@@ -20,19 +20,9 @@ public class RankCalculator {
         }
     }
 
-    protected int matchNumberCalculate(LottoTicket lottoTicket) {
-        return (int) lottoTicket.getValues().stream()
-                .filter(lottoNumber -> winTicket.isInThisTicket(lottoNumber))
-                .count();
-    }
-
-    protected boolean isMatchBonusNumber(LottoTicket lottoTicket) {
-        return lottoTicket.getValues().contains(winBonusNumber);
-    }
-
     public Rank getRank(LottoTicket lottoTicket) {
-        int matchNumber = matchNumberCalculate(lottoTicket);
-        boolean isMatchBonusNumber = isMatchBonusNumber(lottoTicket);
+        int matchNumber = winTicket.howManyMatch(lottoTicket);
+        boolean isMatchBonusNumber = lottoTicket.isInThisTicket(winBonusNumber);
         return Rank.create(matchNumber, isMatchBonusNumber);
     }
 }
