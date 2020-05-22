@@ -3,19 +3,17 @@ package lotto.domain.ticket;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 
-public class WinningLottoTicket {
+public class WinningLottoTicket extends LottoTicket {
 
-    private final LottoNumbers ticket;
-
-    private WinningLottoTicket(final LottoNumbers ticket) {
-        this.ticket = ticket;
+    private WinningLottoTicket(final LottoNumbers numbers) {
+        super(numbers);
     }
 
     public static WinningLottoTicket of(final String winningNumbers) {
-        return new WinningLottoTicket(LottoNumbers.of(winningNumbers));
+        return new WinningLottoTicket(LottoNumbers.of(winningNumbers)); // null 인 경우?
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
-        return this.ticket.contains(lottoNumber);
+        return super.contains(lottoNumber);
     }
 }
