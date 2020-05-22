@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,8 +39,9 @@ class LottoTicketsTests {
         lottoTicketList.add(LottoGenerator.create());
         LottoTickets lottoTickets = LottoTickets.create(lottoTicketList);
 
-        LottoTicket winTicket = LottoGenerator.create();
+        LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        assertThat(lottoTickets.calculateRanks(new RankCalculator(winTicket))).isInstanceOf(Ranks.class);
+        assertThat(lottoTickets.calculateRanks(new RankCalculator(winTicket, LottoNumber.create(30))))
+                .isInstanceOf(Ranks.class);
     }
 }

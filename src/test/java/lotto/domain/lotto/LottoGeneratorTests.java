@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,16 +15,10 @@ class LottoGeneratorTests {
         assertThat(lottoTicket).isNotNull();
     }
 
-    @DisplayName("임의의 수로 중복 없는 로또 티켓을 발급해야 한다")
+    @DisplayName("임의의 수로 이루어진 로또 티켓을 생성할 수 있다.")
     @Test
     void randomTicketTest() {
-        // 너무 구현 테스트가 아닌지 고민해볼 것
-        Collections.shuffle(LottoGenerator.lottoSeed, new Random(10));
-
-        LottoTicket ticketByGenerator = LottoGenerator.create();
-        LottoTicket ticketByTestCode = LottoTicket.create(LottoGenerator.lottoSeed.subList(0, 6));
-
-        assertThat(ticketByGenerator).isEqualTo(ticketByTestCode);
+        assertThat(LottoGenerator.create()).isInstanceOf(LottoTicket.class);
     }
 
     @DisplayName("숫자 여섯개를 입력 받아서 로또 티켓을 발급 할 수 있어야 한다.")

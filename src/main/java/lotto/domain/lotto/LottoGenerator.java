@@ -12,7 +12,7 @@ public class LottoGenerator {
             .collect(Collectors.toList());
 
     public static LottoTicket create() {
-        Collections.shuffle(lottoSeed, new Random(10));
+        Collections.shuffle(lottoSeed, new Random());
         return LottoTicket.create(lottoSeed.subList(0, 6));
     }
 

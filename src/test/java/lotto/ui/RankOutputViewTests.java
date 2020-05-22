@@ -2,6 +2,7 @@ package lotto.ui;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
+import lotto.domain.shop.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 import static lotto.domain.rank.Rank.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class PrizeOutputViewTests {
+class RankOutputViewTests {
     private Ranks ranks;
 
     @BeforeEach
@@ -26,21 +27,21 @@ class PrizeOutputViewTests {
     @DisplayName("Ranks를 전달 받아서 객체를 생성할 수 있다.")
     @Test
     void createTest() {
-        assertThat(new PrizeOutputView(ranks)).isNotNull();
+        assertThat(new RankOutputView(ranks)).isNotNull();
     }
 
     @DisplayName("개별 등수의 결과를 반환한다.")
     @ParameterizedTest
     @MethodSource("ranksAndResults")
     void getIndividualStatistics(Rank rank, String result) {
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getIndividualStatistics(rank)).isEqualTo(result);
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        assertThat(rankOutputView.getIndividualStatistics(rank)).isEqualTo(result);
     }
     public static Stream<Arguments> ranksAndResults() {
         return Stream.of(
-                Arguments.of(FOURTH, "3개 일치 (5000원)- 0개"),
-                Arguments.of(THIRD, "4개 일치 (50000원)- 0개"),
-                Arguments.of(SECOND, "5개 일치 (1500000원)- 1개"),
+                Arguments.of(FOURTH, "4개 일치 (50000원)- 0개"),
+                Arguments.of(THIRD, "5개 일치 (1500000원)- 0개"),
+                Arguments.of(SECOND, "5개 일치, 보너스 볼 일치(30000000원)- 1개"),
                 Arguments.of(FIRST, "6개 일치 (2000000000원)- 1개")
         );
     }
@@ -48,16 +49,19 @@ class PrizeOutputViewTests {
     @DisplayName("통합 등수의 결과를 반환한다.")
     @Test
     void getTotalStatistics() {
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getTotalStatistics()).isEqualTo(
-                "3개 일치 (5000원)- 0개\n4개 일치 (50000원)- 0개\n5개 일치 (1500000원)- 1개\n6개 일치 (2000000000원)- 1개\n");
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        assertThat(rankOutputView.getTotalStatistics()).isEqualTo("3개 일치 (5000원)- 0개\n" +
+                "4개 일치 (50000원)- 0개\n" +
+                "5개 일치 (1500000원)- 0개\n" +
+                "5개 일치, 보너스 볼 일치(30000000원)- 1개\n" +
+                "6개 일치 (2000000000원)- 1개\n");
     }
 
     @DisplayName("총 당첨 금액을 구할 수 있다.")
     @Test
     void getTotalPrize() {
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getTotalRateOfReturn(2000))
-                .isEqualTo("총 수익률은 1000750.00입니다.");
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        assertThat(rankOutputView.getTotalRateOfReturn(new Money(2000)))
+                .isEqualTo("총 수익률은 1015000.00입니다.");
     }
 }

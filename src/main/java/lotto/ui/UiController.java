@@ -1,10 +1,12 @@
 package lotto.ui;
 
 import lotto.application.LottoService;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
 import lotto.domain.rank.Ranks;
+import lotto.domain.shop.Money;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UiController {
@@ -13,21 +15,19 @@ public class UiController {
         BuyInputView inputViewByConsole = BuyInputView.createByConsole(buyInputScanner);
 
         LottoService lottoService = new LottoService();
-        long boughtMoneyValue = inputViewByConsole.getMoney();
-        LottoTickets lottoTickets = lottoService.buyLottoTickets(boughtMoneyValue);
+        Money boughtMoney = inputViewByConsole.getMoney();
+        LottoTickets lottoTickets = lottoService.buyLottoTickets(boughtMoney);
 
         BuyOutputView buyOutputView = new BuyOutputView(lottoTickets);
         buyOutputView.printResult();
 
-        Scanner prizeInputScanner = new Scanner(System.in);
-        PrizeInputView prizeInputView = PrizeInputView.create(prizeInputScanner);
-        List<Integer> winnerTicketNumbers = prizeInputView.convertToIntCollection();
-        Ranks ranks = lottoService.calculateRank(winnerTicketNumbers, lottoTickets);
+        Scanner rankInputScanner = new Scanner(System.in);
+        RankInputView rankInputView = RankInputView.getThisWeekWinningInfo(rankInputScanner);
+        LottoTicket winTicket = rankInputView.convertToWinTicket();
+        LottoNumber winBonusNumber = rankInputView.getWinBonusNumber();
+        Ranks ranks = lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets);
 
-        PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
-        System.out.println(prizeOutputView.getTotalStatistics());
-        System.out.println(prizeOutputView.getTotalRateOfReturn(boughtMoneyValue));
+        RankOutputView rankOutputView = new RankOutputView(ranks);
+        rankOutputView.printRankStatistics(boughtMoney);
     }
 }

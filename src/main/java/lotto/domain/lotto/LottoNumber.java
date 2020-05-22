@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.exceptions.OutOfBoundOfLottoNumberException;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -13,7 +15,9 @@ public class LottoNumber {
     }
 
     private void validation(int value) {
-        if (value < MIN_VALUE || value > MAX_VALUE) throw new IllegalArgumentException();
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new OutOfBoundOfLottoNumberException("LottoNumber must in 1 ~ 45");
+        }
     }
 
     public static LottoNumber create(int value) {

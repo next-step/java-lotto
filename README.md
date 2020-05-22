@@ -74,7 +74,57 @@
         - [X] 구매한 로또 티켓들을 갖고 있다.
         - [X] 콘솔로 구매한 로또 티켓들 번호를 출력할 수 있다.
     - [X] BuyInputView를 통해 Service에 책임을 위임하고 OutputView로 결과를 출력한다.
-    - [ ] PrizeInputView를 입력받는다.
-        - [ ] 쉼표로 구분된 문자열을 입력받아서 int 콜렉션을 보관할 수 있어야 한다.
-        - [ ] null이나 빈 문자열 입력 시 IllegalArgumentException 발생 
-    - [ ] PrizeOutputView를 출력한다.
+    - [X] PrizeInputView를 입력받는다.
+        - [X] 쉼표로 구분된 문자열을 입력받아서 int 콜렉션을 보관할 수 있어야 한다.
+        - [X] null이나 빈 문자열 입력 시 IllegalArgumentException 발생 
+    - [X] PrizeOutputView를 출력한다.
+
+## Step2. 리뷰 반영 
+### Todo List
+- [X] 응집도를 위해 컨트롤러에서 통계 결과 출력되는 부분을 PrizeOutputView로 옮긴다.
+- [X] 로또 결과 출력시 로또 번호들이 정렬된 상태로 출력되야 한다.
+- [X] Shop 에서 LottoTicket을 발급하는 책임이 buy인지 sell인지 더 고민해 볼 것
+- [X] 구매 금액(Money)도 일급 객체로 래핑한다.
+- [X] 구매 금액에 대한 validation은 어느 객체에서 책임질 지 고민해 볼 것
+    - Money를 일급 객체로 빼면서 여기서 validation 하도록 구현
+- [X] 람다식 내에서도 좀 더 의미있는 변수명을 사용한다
+- [X] 예외에 대한 자바 컨벤션 지키도록 변경
+- [X] 각각의 예외 메시지를 도메인에 알맞는 예외 메시지로 래핑
+- [X] 당첨 티켓도 LottoTicket 객체로 변경
+- [X] PrizeInputView에서 당첨 티켓 입력하는 메소드명을 좀 더 책임에 맞게 변경할 것
+- [X] 4등 이상인 랭크를 찾는 책임의 응집도를 높일 것
+- [ ] '사이드 이펙트가 없어야 한다'는 테스트의 목적을 확인할 것
+- [X] Shop 객체의 stream 사용 개선
+- [X] RankCalculator에서 getter로 기차놀이 하는 부분 개선할 것
+- [X] 단위가 큰 long 타입 사용 시 언더스코어로 가독성 높일 것
+- [X] 같은 객체 두개를 해당 객체 메소드에서 사용 시 getter 대신 속성에 바로 접근할 것
+    
+## Step3. 로또(2등)
+- 당첨 번호는 로또 번호 6개 + 보너스 번호이다.
+- 등수 계산 시 `로또 번호 5개가 일치 and 보너스 번호 일치`이면 2등이다. 
+
+### Todo List
+- Rank
+    - [X] 속성에 bonusNumber를 추가한다.
+    - [X] 기존 등수 객체들의 속성을 추가된 bonusNumber에 맞게 수정한다.
+    - [X] 정적 팩터리 메서드를 바뀐 규칙에 맞게 리팩토링 한다.
+- RankCalculator
+    - [X] 당첨 티켓과 보너스 번호를 입력 받아서 관리한다.
+    - [X] 보너스 번호는 당첨 번호와 겹칠 수 없다.
+- LottoService
+    - [X] 당첨 보너스 번호를 입력받을 수 있도록 변경
+- PrizeOutputView
+    - [X] 변경된 2등 상금에 맞게 출력하도록 변경
+- PrizeInputView
+    - [X] 당첨 번호 입력 후 보너스 번호도 입력받을 수 있도록 리팩토링 한다.
+
+### 1차 리뷰 반영
+- [X] 2등 보너스볼 조건 다시 고민할 것
+- [X] Money 일급 객체 equals, hashcode 재정의
+- [X] UiController에서 금액을 입력받을 때 바로 Money 일급 객체로 받도록 변경
+- [X] View에서 2등 여부를 판단하고 출력 로직을 겹치게 사용하는 부분 개선
+- [X] Prize를 Rank로 대체해서 도메인 용어의 통일성 높이기
+- [X] 줄바꿈 부분 시스템 함수로 바꾸기
+- [X] 인자가 많은 메서드에 대한 코드 컨벤션 수정
+- [X] 로또 자동 생성 시 시드값 제거
+- [X] Rank Calculator에서 getter 사용하는 부분을 객체 간 메시지 전달로 개선하기

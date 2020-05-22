@@ -1,13 +1,14 @@
 package lotto.ui;
 
+import lotto.domain.shop.Money;
+
 import java.util.Scanner;
 
 public class BuyInputView {
-    private long money;
+    private Money money;
 
-    protected BuyInputView(long money) {
-        validation(money);
-        this.money = money;
+    protected BuyInputView(long moneyValue) {
+        this.money = new Money(moneyValue);
     }
 
     public static BuyInputView createByConsole(Scanner scanner) {
@@ -15,13 +16,7 @@ public class BuyInputView {
         return new BuyInputView(scanner.nextLong());
     }
 
-    public long getMoney() {
+    public Money getMoney() {
         return money;
-    }
-
-    private void validation(long money) {
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException();
-        }
     }
 }
