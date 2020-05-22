@@ -9,13 +9,15 @@ import java.util.stream.Stream;
 
 public class StringTokenParser implements TokenParser {
 
+    private static final Pattern STRING_TOKEN_PATTERN = Pattern.compile("//(.)\\n(.*)");
+    private static final String DEFAULT_SPLITTER = ",|:";
+
     @Override
     public TokenNumbers parseTokenNumbers(String input) {
         String tokens = input;
-        String splitter = ",|:";
+        String splitter = DEFAULT_SPLITTER;
 
-        Pattern pattern = Pattern.compile("//(.)\\n(.*)");
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = STRING_TOKEN_PATTERN.matcher(input);
         if (matcher.matches()) {
             splitter = matcher.group(1);
             tokens = matcher.group(2);
