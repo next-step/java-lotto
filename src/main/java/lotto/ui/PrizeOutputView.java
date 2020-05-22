@@ -29,7 +29,7 @@ public class PrizeOutputView {
         return Arrays.stream(Rank.values())
                 .filter(rank -> FOURTH.equals(rank) || THIRD.equals(rank) || SECOND.equals(rank) || FIRST.equals(rank))
                 .map(this::getIndividualStatistics)
-                .reduce("", (a, b) -> a + b + "\n");
+                .reduce("", (previousStatistics, statistics) -> previousStatistics + statistics + "\n");
     }
 
     public String getTotalRateOfReturn(long boughtMoney) {

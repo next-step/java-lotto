@@ -19,7 +19,7 @@ public class BuyOutputView {
         String result = values.stream()
                 .map(LottoTicket::sort)
                 .map(LottoTicket::toString)
-                .reduce((a, b) -> a + "\n" + b)
+                .reduce((previousTickets, lottoTicket) -> previousTickets + "\n" + lottoTicket)
                 .get();
 
         System.out.println(result);

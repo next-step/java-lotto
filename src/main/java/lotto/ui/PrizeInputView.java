@@ -31,7 +31,7 @@ public class PrizeInputView {
     public List<Integer> convertToIntCollection() {
         return Arrays.asList(this.value.split(","))
                 .stream()
-                .map(s -> Integer.parseInt(s.trim()))
+                .map(inputValue -> Integer.parseInt(inputValue.trim()))
                 .collect(Collectors.toList());
     }
 }
