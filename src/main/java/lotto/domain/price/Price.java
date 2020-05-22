@@ -31,6 +31,10 @@ public class Price {
         }
     }
 
+    public float calculateProfitRate(final int totalPrizes) {
+        return ((float) totalPrizes / price);
+    }
+
     public int ticketCount() {
         return price / ONE_TICKET_PRICE;
     }

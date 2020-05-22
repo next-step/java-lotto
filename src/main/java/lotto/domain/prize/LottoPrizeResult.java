@@ -27,7 +27,7 @@ public class LottoPrizeResult {
     }
 
     public float calculateProfitRate() {
-        return ((float) this.calculateTotalPrizes() / price.getPrice());
+        return this.price.calculateProfitRate(calculateTotalPrizes());
     }
 
     private int calculateTotalPrizes() {
