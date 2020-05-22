@@ -89,6 +89,7 @@
 - [x] 구매한 티켓과 로또 당첨 번호에 맞는 결과를 반환한다.
 - 테스트 코드
     - [x] LottoGame 생성
+    - [x] 인자 중 하나라도 null 이면 LottoGame 생성 실패 
     - [x] 생성 -> play -> LottoPrizeResult 의 당첨 개수로 비교
 
 #### LottoTicketDTO
