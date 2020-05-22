@@ -1,6 +1,7 @@
 package lotto.domain.seller;
 
 import lotto.domain.strategy.RandomGenerationStrategy;
+import lotto.domain.ticket.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,13 +17,13 @@ public class LottoSellerTest {
 
     @BeforeEach
     void setUp() {
-        lottoSeller = LottoSeller.of(new RandomGenerationStrategy(6));
+        lottoSeller = LottoSeller.of(new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE));
     }
 
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")
     @Test
     void buyTicketFailureByLackMoney() {
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyTicket(1000 - 1));
+        assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyTicket(LottoSeller.ONE_TICKET_PRICE - 1));
     }
 
     @DisplayName("로또 구입 금액에 맞는 로또 티켓을 반환")
@@ -30,6 +31,6 @@ public class LottoSellerTest {
     @ValueSource(ints = { 1000, 14000 })
     void buyTickets(final int money) {
         assertThat(lottoSeller.buyTicket(money).size())
-                .isEqualTo(money / 1000);
+                .isEqualTo(money / LottoSeller.ONE_TICKET_PRICE);
     }
 }

@@ -11,7 +11,7 @@ public class LottoNumberTest {
 
     @DisplayName("1 ~ 45 범위 이외의 값이면 예외 발생")
     @ParameterizedTest
-    @ValueSource(ints = { -1, 0, 46, 1000 })
+    @ValueSource(ints = { -1, LottoNumber.MIN_VALUE - 1, LottoNumber.MAX_VALUE + 1, 1000 })
     void createFail(final int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> LottoNumber.of(number));
@@ -19,7 +19,7 @@ public class LottoNumberTest {
 
     @DisplayName("1 ~ 45 범위 값이 들어오면 LottoNumber 객체를 생성")
     @ParameterizedTest
-    @ValueSource(ints = { 1, 10, 45 })
+    @ValueSource(ints = { LottoNumber.MIN_VALUE, 10, LottoNumber.MAX_VALUE })
     void create(final int number) {
         assertThatCode(() -> LottoNumber.of(number))
                 .doesNotThrowAnyException();

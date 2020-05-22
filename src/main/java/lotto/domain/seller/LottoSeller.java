@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoSeller {
 
-    private static final int ONE_TICKET_PRICE = 1000;
+    static final int ONE_TICKET_PRICE = 1000;
 
     private final NumberGenerationStrategy generationStrategy;
 
