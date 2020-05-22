@@ -34,7 +34,7 @@ public enum Rank {
 
     public static Rank create(int matchNumber) {
         Optional<Rank> candidateRank = Arrays.stream(Rank.values())
-                .filter(rank -> rank.getMatchNumber() == matchNumber)
+                .filter(rank -> rank.matchNumber == matchNumber)
                 .findFirst();
         return candidateRank.orElseThrow(IllegalArgumentException::new);
     }
