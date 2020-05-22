@@ -4,19 +4,22 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Rank {
-    OUT(0, 0L),
-    SIXTH(1, 0L),
-    FIFTH(2, 0L),
-    FOURTH(3, 5_000L),
-    THIRD(4, 50_000L),
-    SECOND(5, 1_500_000L),
-    FIRST(6, 2_000_000_000L);
+    OUT(0, false,  0L),
+    SEVENTH(1, false, 0L),
+    SIXTH(2, false, 0L),
+    FIFTH(3, false, 5_000L),
+    FOURTH(4, false, 50_000L),
+    THIRD(5, false, 1_500_000L),
+    SECOND(5, true, 30_000_000L),
+    FIRST(6, false, 2_000_000_000L);
 
     private int matchNumber;
+    private boolean bonusMatch;
     private long price;
 
-    Rank(int matchNumber, long price) {
+    Rank(int matchNumber, boolean bonusMatch, long price) {
         this.matchNumber = matchNumber;
+        this.bonusMatch = bonusMatch;
         this.price = price;
     }
 
@@ -32,9 +35,9 @@ public enum Rank {
         return price;
     }
 
-    public static Rank create(int matchNumber) {
+    public static Rank create(int matchNumber, boolean bonusMatch) {
         Optional<Rank> candidateRank = Arrays.stream(Rank.values())
-                .filter(rank -> rank.matchNumber == matchNumber)
+                .filter(rank -> rank.matchNumber == matchNumber && rank.bonusMatch == bonusMatch)
                 .findFirst();
         return candidateRank.orElseThrow(IllegalArgumentException::new);
     }

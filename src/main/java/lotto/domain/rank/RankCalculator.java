@@ -17,6 +17,6 @@ public class RankCalculator {
 
     public Rank getRank(LottoTicket lottoTicket) {
         int matchNumber = matchNumberCalculate(lottoTicket);
-        return Rank.create(matchNumber);
+        return Rank.create(matchNumber, false);
     }
 }
