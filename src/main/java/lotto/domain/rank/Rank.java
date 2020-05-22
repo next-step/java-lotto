@@ -20,6 +20,10 @@ public enum Rank {
         this.price = price;
     }
 
+    public static boolean canGetPrize(Rank inputRank) {
+        return !OUT.equals(inputRank) && !SIXTH.equals(inputRank) && !FIFTH.equals(inputRank);
+    }
+
     public int getMatchNumber() {
         return matchNumber;
     }
