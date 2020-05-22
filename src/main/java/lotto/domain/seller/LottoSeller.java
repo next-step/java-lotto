@@ -1,7 +1,6 @@
 package lotto.domain.seller;
 
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.number.LottoNumbersGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class LottoSeller {
 
         List<LottoNumbers> tickets = new ArrayList<>();
         for (int i = 0; i < countTicket; i++) {
-            tickets.add(LottoNumbers.of(LottoNumbersGenerator.generate()));
+            tickets.add(LottoNumbers.auto());
         }
         return tickets;
     }

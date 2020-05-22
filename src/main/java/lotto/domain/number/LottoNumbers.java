@@ -21,8 +21,8 @@ public class LottoNumbers {
         this.numbers = new LinkedHashSet<>(numbers);
     }
 
-    public static LottoNumbers of(final List<LottoNumber> numbers) {
-        return new LottoNumbers(numbers);
+    public static LottoNumbers auto() {
+        return new LottoNumbers(LottoNumbersGenerator.generate());
     }
 
     public static LottoNumbers of(final String numbers) {
