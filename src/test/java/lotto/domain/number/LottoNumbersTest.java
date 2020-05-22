@@ -28,7 +28,6 @@ public class LottoNumbersTest {
     @MethodSource("lottoNumbersCase")
     void notMetNumberCountCondition(final String numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbers.of(numbers));
-        assertThatIllegalArgumentException().isThrownBy(LottoNumbers::auto);
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
