@@ -18,6 +18,8 @@ public enum Prize {
     private final int matchedNumbersCount;
     private final int prizeMoney;
 
+    static final int MIN_MATCHED_COUNT = 0;
+    static final int MAX_MATCHED_COUNT = 6;
     private static final Map<Integer, Prize> PRIZES = Arrays.stream(Prize.values())
             .collect(Collectors.toMap(Prize::getMatchedNumbersCount, Function.identity()));
 
@@ -27,10 +29,17 @@ public enum Prize {
     }
 
     public static Prize of(final int matchedNumbersCount) {
+        validateMatchedNumbersCount(matchedNumbersCount);
         if (!PRIZES.containsKey(matchedNumbersCount)) {
-            throw new IllegalArgumentException(String.format(ErrorMessage.NOT_MATCHED_COUNT_OF_PRIZE, matchedNumbersCount));
+            return Prize.MISS;
         }
         return PRIZES.get(matchedNumbersCount);
+    }
+
+    private static void validateMatchedNumbersCount(final int matchedNumbersCount) {
+        if (matchedNumbersCount < MIN_MATCHED_COUNT || matchedNumbersCount > MAX_MATCHED_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.RANGE_OF_PRIZE_COUNT);
+        }
     }
 
     private int getMatchedNumbersCount() {
