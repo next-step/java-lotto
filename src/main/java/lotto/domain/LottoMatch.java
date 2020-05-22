@@ -1,14 +1,13 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public enum LottoMatch {
 
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 1500000),
-    SIX(6, 2000000000);
+    THREE(3, 5_000),
+    FOUR(4, 50_000),
+    FIVE(5, 1_500_000),
+    SIX(6, 2_000_000_000);
 
     private int count;
     private long amount;
@@ -26,7 +25,7 @@ public enum LottoMatch {
         return this.amount;
     }
 
-    public long getWinAmount(int matchCount) {
+    public long calculateWinAmount(int matchCount) {
         return this.amount * matchCount;
     }
 
@@ -38,6 +37,6 @@ public enum LottoMatch {
         return Arrays.stream(values())
                 .filter(lottoMatch -> lottoMatch.count == count)
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElse(null);
     }
 }
