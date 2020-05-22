@@ -26,12 +26,17 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void printStatisticsResult(final LottoPrizeResult result) {
+    public static void printResult(LottoPrizeResult result) {
+        printStatisticsResult(result);
+        printProfitRate(result.calculateProfitRate());
+    }
+
+    private static void printStatisticsResult(final LottoPrizeResult result) {
         System.out.println(RESULT);
         System.out.println(result.toString());
     }
 
-    public static void printProfitRate(final float profitRate) {
+    private static void printProfitRate(final float profitRate) {
         System.out.println(String.format(PROFIT_RATE_FORMAT, profitRate));
     }
 }

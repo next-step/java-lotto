@@ -1,22 +1,34 @@
 package lotto.domain.prize;
 
+import lotto.domain.Price;
+
 import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.Map;
 
 public class LottoPrizeResult {
 
     private static final int DEFAULT_MATCHED_COUNT = 0;
 
+    private final Price price;
     private final EnumMap<Prize, Integer> matchedPrizes;
 
-    private LottoPrizeResult() {
+    private LottoPrizeResult(final Price price, final Map<Prize, Long> prizes) {
+        this.price = price;
+
         this.matchedPrizes = new EnumMap<>(Prize.class);
-        for (Prize rank : Prize.values()) {
-            matchedPrizes.put(rank, DEFAULT_MATCHED_COUNT);
-        }
+        EnumSet.allOf(Prize.class)
+                .forEach(prize -> {
+                    if (!prizes.containsKey(prize)) {
+                        matchedPrizes.put(prize, DEFAULT_MATCHED_COUNT);
+                        return;
+                    }
+                    matchedPrizes.put(prize, prizes.get(prize).intValue());
+                });
     }
 
-    public static LottoPrizeResult init() {
-        return new LottoPrizeResult();
+    public static LottoPrizeResult init(final Price price, final Map<Prize, Long> prizes) {
+        return new LottoPrizeResult(price, prizes);
     }
 
     public void updateMatchedPrize(final Prize prize) {
@@ -27,8 +39,8 @@ public class LottoPrizeResult {
         return this.getMatchedTicketCount(prize) + 1;
     }
 
-    public float calculateProfitRate(final int purchaseAmount) {
-        return ((float) this.calculateTotalPrizes() / purchaseAmount);
+    public float calculateProfitRate() {
+        return ((float) this.calculateTotalPrizes() / price.getPrice());
     }
 
     private int calculateTotalPrizes() {

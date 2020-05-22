@@ -34,4 +34,8 @@ public class Price {
     public int ticketCount() {
         return price / ONE_TICKET_PRICE;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }

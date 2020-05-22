@@ -9,18 +9,20 @@ import java.util.Map;
 
 public class LottoGame {
 
+    private final Price price;
     private final LottoTickets tickets;
 
-    private LottoGame(final LottoTickets tickets) {
+    private LottoGame(final Price price, final LottoTickets tickets) {
+        this.price = price;
         this.tickets = tickets;
     }
 
-    public static LottoGame of(final LottoTickets tickets) {
-        return new LottoGame(tickets);
+    public static LottoGame of(final Price price, final LottoTickets tickets) {
+        return new LottoGame(price, tickets);
     }
 
     public LottoPrizeResult play(final WinningLottoTicket winningLottoTicket) {
         Map<Prize, Long> prizes = tickets.matchPrizes(winningLottoTicket);
-        return LottoPrizeResult.init(prizes);
+        return LottoPrizeResult.init(this.price, prizes);
     }
 }
