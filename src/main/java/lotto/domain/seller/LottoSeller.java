@@ -1,6 +1,7 @@
 package lotto.domain.seller;
 
 import lotto.domain.number.LottoNumbers;
+import lotto.exception.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class LottoSeller {
 
     private void validateMoney(final int money) {
         if (money < ONE_TICKET_PRICE) {
-            throw new IllegalArgumentException("최소 금액 " + ONE_TICKET_PRICE + "원이 필요합니다.");
+            throw new IllegalArgumentException(String.format(ErrorMessage.REQUIRED_MIN_PRICE, ONE_TICKET_PRICE));
         }
     }
 }
