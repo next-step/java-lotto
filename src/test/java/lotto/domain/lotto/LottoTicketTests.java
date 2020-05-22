@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -62,5 +63,14 @@ class LottoTicketTests {
     void toStringTest() {
         LottoTicket lottoTicket = LottoTicket.create(values);
         assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
+
+    @DisplayName("내부의 LottoNumber를 정렬할 수 있어야한다.")
+    @Test
+    void sortTest() {
+        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(6, 5, 4, 3, 2, 1));
+        assertThat(lottoTicket.toString()).isEqualTo("[6, 5, 4, 3, 2, 1]");
+        LottoTicket sorted = lottoTicket.sort();
+        assertThat(sorted.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }

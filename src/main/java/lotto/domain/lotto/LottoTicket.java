@@ -1,9 +1,6 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoTicket {
     private static final int SIZE=6;
@@ -19,9 +16,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket create(List<LottoNumber> values) {
-        return new LottoTicket(
-                Collections.unmodifiableList(new ArrayList<>(values))
-        );
+        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
     }
 
     protected int size() {
@@ -29,7 +24,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getValues() {
-        return new ArrayList<>(this.values);
+        return Collections.unmodifiableList(new ArrayList<>(this.values));
     }
 
     @Override
@@ -47,6 +42,7 @@ public class LottoTicket {
 
     @Override
     public String toString() {
+        this.sort();
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (LottoNumber value: values) {
@@ -54,5 +50,12 @@ public class LottoTicket {
         }
         String result = builder.toString().substring(0, builder.toString().length() - 2);
         return result + "]";
+    }
+
+    public LottoTicket sort() {
+        Comparator<LottoNumber> lottoNumberComparator = Comparator.comparing(LottoNumber::getValue);
+        List<LottoNumber> sortTarget = new ArrayList<>(this.values);
+        sortTarget.sort(lottoNumberComparator);
+        return new LottoTicket(sortTarget);
     }
 }
