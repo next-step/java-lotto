@@ -24,7 +24,7 @@ public class LottoPrizeResult {
     }
 
     private int increasedMatchedTicketCount(final Prize prize) {
-        return this.matchedTicketCount(prize) + 1;
+        return this.getMatchedTicketCount(prize) + 1;
     }
 
     public float calculateProfitRate(final int purchaseAmount) {
@@ -39,10 +39,10 @@ public class LottoPrizeResult {
     }
 
     private int calculatePrizes(final Prize prize) {
-        return prize.getPrizeMoney() * this.matchedTicketCount(prize);
+        return prize.getPrizeMoney() * this.getMatchedTicketCount(prize);
     }
 
-    private int matchedTicketCount(final Prize prize) {
+    private int getMatchedTicketCount(final Prize prize) {
         return this.matchedPrizes.get(prize);
     }
 
