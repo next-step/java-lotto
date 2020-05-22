@@ -9,6 +9,7 @@ public class LottoGame {
     private static final int LOTTO_SALE_PRICE = 1000;
 
     private final int purchaseCount;
+    private List<LottoNumbers> lottoNumbersGroup;
 
     public LottoGame(int purchaseAmount) {
         validateLottoGame(purchaseAmount);
@@ -27,8 +28,20 @@ public class LottoGame {
     }
 
     public List<LottoNumbers> createLottoNumbers() {
-        return Stream.generate(LottoNumbersFactory::createLottoNumbers)
+        this.lottoNumbersGroup = Stream.generate(LottoNumbersFactory::createLottoNumbers)
                 .limit(this.purchaseCount)
                 .collect(Collectors.toList());
+        return this.lottoNumbersGroup;
+    }
+
+    public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers) {
+        LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance();
+
+        this.lottoNumbersGroup.forEach(lottoNumbers -> {
+            LottoMatch lottoMatch = LottoMatch.findByCount(lottoNumbers.getMatchCount(lastWinLottoNumbers));
+            lottoMatchResult.increaseMatchCount(lottoMatch);
+        });
+
+        return lottoMatchResult;
     }
 }
