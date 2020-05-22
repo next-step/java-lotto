@@ -21,6 +21,7 @@ public class InputView {
     }
 
     private static String inputString(final String message) {
+        System.out.println();
         System.out.println(message);
         return SCANNER.nextLine();
     }

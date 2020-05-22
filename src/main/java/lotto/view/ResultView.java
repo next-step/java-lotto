@@ -1,9 +1,9 @@
 package lotto.view;
 
+import lotto.domain.dto.LottoTicketDto;
 import lotto.domain.prize.LottoPrizeResult;
-import lotto.domain.number.LottoNumbers;
-import lotto.domain.ticket.LottoTickets;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultView {
@@ -12,18 +12,21 @@ public class ResultView {
     private final static String RESULT = "\n당첨 통계\n--------";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.1f%% 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
-    public static void printPurchaseInfo(final LottoTickets tickets) {
-//        printPurchasedTicketCount(tickets.size());
-//        printTickets(tickets);
+    public static void printPurchaseInfo(final List<LottoTicketDto> tickets) {
+        printPurchasedTicketCount(tickets.size());
+        printTickets(tickets);
     }
 
     private static void printPurchasedTicketCount(final int count) {
         System.out.println(String.format(TICKET_PURCHASE_CONFIRM_MESSAGE, count));
     }
 
-    private static void printTickets(final List<LottoNumbers> tickets) {
-        tickets.forEach(ticket -> System.out.println(ticket.toString()));
-        System.out.println();
+    private static void printTickets(final List<LottoTicketDto> tickets) {
+        tickets.stream()
+                .map(LottoTicketDto::getNumbers)
+                .map(List::toArray)
+                .map(Arrays::toString)
+                .forEach(System.out::println);
     }
 
     public static void printResult(LottoPrizeResult result) {

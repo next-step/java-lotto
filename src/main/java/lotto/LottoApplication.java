@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoGame;
 import lotto.domain.Price;
+import lotto.domain.dto.LottoTicketDto;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
 import lotto.domain.ticket.LottoTickets;
@@ -17,7 +18,7 @@ public class LottoApplication {
         LottoSeller seller = LottoSeller.of();
         LottoTickets tickets = seller.buyTicket(price);
 
-        ResultView.printPurchaseInfo(tickets);
+        ResultView.printPurchaseInfo(LottoTicketDto.from(tickets));
 
         String winningNumbers = InputView.inputWinningNumbers();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningNumbers);

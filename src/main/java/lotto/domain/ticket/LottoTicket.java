@@ -5,11 +5,13 @@ import lotto.domain.number.LottoNumbers;
 import lotto.domain.prize.Prize;
 import lotto.exception.ErrorMessage;
 
+import java.util.List;
+
 public class LottoTicket {
 
     private final LottoNumbers lottoNumbers;
 
-    protected LottoTicket(final LottoNumbers lottoNumbers) {
+    LottoTicket(final LottoNumbers lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
@@ -31,5 +33,9 @@ public class LottoTicket {
 
     public boolean contains(final LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<Integer> getLottoNumbersToInts() {
+        return lottoNumbers.getNumbersToInts();
     }
 }

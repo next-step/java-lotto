@@ -58,6 +58,12 @@ public class LottoNumbers {
         return this.numbers.contains(lottoNumber);
     }
 
+    public List<Integer> getNumbersToInts() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
        return "["
