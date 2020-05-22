@@ -13,7 +13,9 @@ public class LottoNumber {
     }
 
     private void validation(int value) {
-        if (value < MIN_VALUE || value > MAX_VALUE) throw new IllegalArgumentException();
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public static LottoNumber create(int value) {

@@ -12,7 +12,9 @@ public class LottoTicket {
     }
 
     private void validation(List<LottoNumber> values) {
-        if (values.size() != SIZE) throw new IllegalArgumentException();
+        if (values.size() != SIZE) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public static LottoTicket create(List<LottoNumber> values) {
