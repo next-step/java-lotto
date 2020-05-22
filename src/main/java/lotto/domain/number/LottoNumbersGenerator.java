@@ -19,17 +19,22 @@ public class LottoNumbersGenerator {
         List<Integer> lottoNumbers = generateRangeNumbers();
         Collections.shuffle(lottoNumbers);
 
-        return convertToLottoNumbers(lottoNumbers);
+        return convertToLottoNumbers(extractAndSortNumbers(lottoNumbers));
     }
 
     private static List<Integer> generateRangeNumbers() {
         return new ArrayList<>(RANGED_LOTTO_NUMBERS);
     }
 
-    private static List<LottoNumber> convertToLottoNumbers(final List<Integer> lottoNumbers) {
+    private static List<Integer> extractAndSortNumbers(final List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .limit(LottoNumbers.LOTTO_NUMBER_SIZE)
                 .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(final List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
