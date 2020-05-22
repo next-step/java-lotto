@@ -21,10 +21,8 @@ public class LottoNumbers {
         this.numbers = new LinkedHashSet<>(numbers);
     }
 
-    public static LottoNumbers of(final List<Integer> numbers) {
-        return new LottoNumbers(numbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+    public static LottoNumbers of(final List<LottoNumber> numbers) {
+        return new LottoNumbers(numbers);
     }
 
     public static LottoNumbers of(final String numbers) {
