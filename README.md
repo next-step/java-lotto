@@ -107,11 +107,13 @@
 
 #### LottoTicket
 : LottoNumbers 에 대한 Wrapping 클래스 
-- [ ] 우승 티켓과 일치하는 상금을 반환한다.
+- [x] LottoNumbers 가 null 이면 예외를 반환한다.
+- [x] 우승 티켓과 일치하는 상금을 반환한다.
 
 #### LottoTickets
 : LottoTicket 에 대한 일급 컬렉션
-- [ ] 구입한 LottoTicket 을 추가할 수 있다.
+- [x] LottoNumbers List 가 null 이면 예외를 반환한다.
+- [x] 구입한 모든 티켓의 우승 티켓과 일치하는 상금의 개수를 반환한다. 
 
 #### WinningLottoTicket
 : 로또 당첨 번호 
