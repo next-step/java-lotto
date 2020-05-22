@@ -1,6 +1,5 @@
 package lotto.domain.number;
 
-import lotto.domain.ticket.WinningLottoTicket;
 import lotto.exception.ErrorMessage;
 
 import java.util.*;
@@ -55,9 +54,9 @@ public class LottoNumbers {
         }
     }
 
-    public int matchCount(final WinningLottoTicket winningLottoTicket) {
+    public int matchCount(final LottoNumbers winningLottoNumbers) {
         return Math.toIntExact(numbers.stream()
-                .filter(winningLottoTicket::contains)
+                .filter(winningLottoNumbers::contains)
                 .count());
     }
 

@@ -1,6 +1,5 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.prize.Prize;
 import lotto.exception.ErrorMessage;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final LottoNumbers lottoNumbers;
+    protected final LottoNumbers lottoNumbers;
 
     LottoTicket(final LottoNumbers lottoNumbers) {
         validate(lottoNumbers);
@@ -27,12 +26,8 @@ public class LottoTicket {
     }
 
     public Prize matchPrize(final WinningLottoTicket winningLottoTicket) {
-        int matchCount = lottoNumbers.matchCount(winningLottoTicket);
+        int matchCount = lottoNumbers.matchCount(winningLottoTicket.lottoNumbers);
         return Prize.of(matchCount);
-    }
-
-    public boolean contains(final LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
     }
 
     public List<Integer> getLottoNumbersAsInt() {
