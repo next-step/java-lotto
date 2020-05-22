@@ -45,4 +45,16 @@ class LottoGameTest {
         assertThat(lottoNumbers).isNotNull();
         assertThat(lottoNumbers).hasSize(14);
     }
+
+    @DisplayName("로또 당첨 결과를 얻을 수 있다.")
+    @Test
+    void canCreateLottoMatchResult() {
+        LottoGame lottoGame = new LottoGame(14000);
+        lottoGame.createLottoNumbers();
+
+        LottoNumbers winLottoNumbers = LottoNumbersFactory.createLottoNumbers();
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers);
+
+        assertThat(lottoMatchResult).isNotNull();
+    }
 }
