@@ -13,7 +13,7 @@ public class LottoSeller {
     private LottoSeller() {
     }
 
-    public static LottoSeller of() {
+    public static LottoSeller newInstance() {
         return new LottoSeller();
     }
 
