@@ -3,17 +3,20 @@ package lotto.domain.rank;
 import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.rank.exceptions.BonusNumberDuplicatedWithLottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class RankCalculatorTests {
     private LottoTicket winTicket;
@@ -34,9 +37,11 @@ class RankCalculatorTests {
     }
 
     @DisplayName("보너스 번호는 당첨 티켓 번호화 중복될 수 없다.")
-    @Test
-    void calculatorValidationTest() {
-
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void calculatorValidationTest(int duplicatedBonusNumber) {
+        assertThatThrownBy(() -> new RankCalculator(winTicket, LottoNumber.create(duplicatedBonusNumber)))
+                .isInstanceOf(BonusNumberDuplicatedWithLottoTicket.class);
     }
 
     @DisplayName("입력받은 로또 티켓과 당첨 티켓을 비교해서 몇개의 숫자가 일치하는지 알려줄 수 있다.")
