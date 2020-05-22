@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.exceptions.LottoTicketSizeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ class LottoTicketTests {
                 LottoTicket.create(
                         Collections.singletonList(LottoNumber.create(1))
                 ))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(LottoTicketSizeException.class);
     }
 
     @DisplayName("사이드 이펙트가 없어야 한다")

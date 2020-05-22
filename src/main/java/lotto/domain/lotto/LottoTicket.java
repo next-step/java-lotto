@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.exceptions.LottoTicketSizeException;
+
 import java.util.*;
 
 public class LottoTicket {
@@ -13,7 +15,7 @@ public class LottoTicket {
 
     private void validation(List<LottoNumber> values) {
         if (values.size() != SIZE) {
-            throw new IllegalArgumentException();
+            throw new LottoTicketSizeException("Lotto ticket can have only six lotto numbers");
         }
     }
 

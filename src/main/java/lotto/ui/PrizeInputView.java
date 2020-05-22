@@ -15,11 +15,11 @@ public class PrizeInputView {
 
     private void validation(String inputValue) {
         if (inputValue == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Input value must not null");
         }
 
         if (inputValue.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Input value must not empty");
         }
     }
 

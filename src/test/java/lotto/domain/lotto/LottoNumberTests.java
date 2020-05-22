@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lotto.exceptions.OutOfBoundOfLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,7 @@ class LottoNumberTests {
     @ValueSource(ints = { -100, 0, 46, 100 })
     void validationCheck(int invalidValue) {
         assertThatThrownBy(() -> LottoNumber.create(invalidValue))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(OutOfBoundOfLottoNumberException.class);
     }
 
     @DisplayName("동등성 비교")
