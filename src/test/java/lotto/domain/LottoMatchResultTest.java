@@ -1,42 +1,61 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoMatchResultTest {
 
-    @DisplayName("당첨 로또 번호나 구입 로또번호가 존재하지 않으면 생성할 수 없다.")
-    @Test
-    void canNotCreateIfWinLottoNumbersOrLottoNumbersIsNull() {
-        assertThatThrownBy(() -> LottoMatchResult.newInstance(null, null))
-                .isInstanceOf(IllegalArgumentException.class);
+    private LottoMatchResult lottoMatchResult;
 
-        assertThatThrownBy(() -> LottoMatchResult.newInstance(LottoNumbersFactory.createLottoNumbers(), null))
-                .isInstanceOf(IllegalArgumentException.class);
+    @BeforeEach
+    void setUp() {
+        LottoGame lottoGame = new LottoGame(14000);
+        lottoGame.createLottoNumbers();
 
-        assertThatThrownBy(() -> LottoMatchResult.newInstance(null, Arrays.asList(LottoNumbersFactory.createLottoNumbers())))
-                .isInstanceOf(IllegalArgumentException.class);
+        LottoNumbers winLottoNumbers = LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
+        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers);
     }
 
-    @DisplayName("구입 로또번호 장수가 존재하지 않으면 생성할 수 없다.")
-    @Test
-    void canNotCreateIfLottoNumbersSizeIs0() {
-        assertThatThrownBy(() -> LottoMatchResult.newInstance(LottoNumbersFactory.createLottoNumbers(), new ArrayList<>()))
-                .isInstanceOf(IllegalArgumentException.class);
+    @DisplayName("당첨 개수를 1씩 증가할 수 있다.")
+    @ParameterizedTest
+    @MethodSource("generateLottoMatch")
+    void canIncreaseMatchCount(LottoMatch lottoMatch) {
+        int matchCount = this.lottoMatchResult.getMatchCount(lottoMatch);
+        this.lottoMatchResult.increaseMatchCount(lottoMatch);
+
+        int increasedMatchCount = this.lottoMatchResult.getMatchCount(lottoMatch);
+        assertThat(matchCount + 1).isEqualTo(increasedMatchCount);
     }
 
-    @DisplayName("당첨 로또 번호나 구입 로또번호가 존재하면 생성할 수 있다.")
-    @Test
-    void canCreateLottoMatchResult() {
-        LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance(LottoNumbersFactory.createLottoNumbers()
-                , Arrays.asList(LottoNumbersFactory.createLottoNumbers()));
-        assertThat(lottoMatchResult).isNotNull();
+    static Stream<Arguments> generateLottoMatch() {
+        return Stream.of(
+                Arguments.of(LottoMatch.THREE),
+                Arguments.of(LottoMatch.FOUR),
+                Arguments.of(LottoMatch.FIVE),
+                Arguments.of(LottoMatch.SIX)
+        );
     }
 
+    @DisplayName("수익률에 대한 결과를 얻을 수 있다.")
+    @ParameterizedTest
+    @CsvSource(value = { "0.5,손해", "1.0,이익", "1.5,이익" })
+    void canGetProfitOrLoss(double rate, String result) {
+        assertThat(this.lottoMatchResult.getProfitOrLoss(rate)).isEqualTo(result);
+    }
+
+    @DisplayName("당첨 개수를 0 이상 값을 얻을 수 있다.")
+    @ParameterizedTest
+    @MethodSource("generateLottoMatch")
+    void canGetMatchCount(LottoMatch lottoMatch) {
+        assertThat(this.lottoMatchResult.getMatchCount(lottoMatch)).isGreaterThanOrEqualTo(0);
+    }
 }
