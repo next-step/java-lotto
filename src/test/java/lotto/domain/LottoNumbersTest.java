@@ -3,9 +3,12 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,13 +25,18 @@ class LottoNumbersTest {
     }
 
     @DisplayName("로또 번호가 6개가 아니면 로또 번호를 생성할 수 없다.")
-    @Test
-    void canNotCreateLottoNumbersIfUnless6LottoNumbers() {
-        assertThatThrownBy(() -> LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5)))
+    @ParameterizedTest
+    @MethodSource("generateNumbers")
+    void canNotCreateLottoNumbersIfUnless6LottoNumbers(List<Integer> numbers) {
+        assertThatThrownBy(() -> LottoNumbers.newInstance(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
 
-        assertThatThrownBy(() -> LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
-                .isInstanceOf(IllegalArgumentException.class);
+    static Stream<Arguments> generateNumbers() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))
+        );
     }
 
     @DisplayName("중복된 번호가 있으면 로또 번호를 생성할 수 없다.")
@@ -54,13 +62,16 @@ class LottoNumbersTest {
     @DisplayName("다른 로또 번호와 일치하는 번호 개수를 구할 수 있다.")
     @Test
     void canGetMatchCountOtherLottoNumbers() {
-        assertThat(lottoNumbers.getMatchCount(LottoNumbers.newInstance(Arrays.asList(1, 2, 9, 4, 11, 26))))
-                .isEqualTo(3);
+        LottoNumbers lotto = LottoNumbers.newInstance(Arrays.asList(1, 2, 9, 4, 11, 26));
+        assertThat(lottoNumbers.getMatchCount(lotto)).isEqualTo(3);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = { "1,true", "2,true", "3,true", "7,false" })
-    void canContainsNumber(int number, boolean result) {
-        assertThat(lottoNumbers.isMatchNumber(number)).isEqualTo(result);
+    @DisplayName("중복되지 않은 숫자를 생성할 수 있다.")
+    @Test
+    void canCreateNonDuplicateNumbers() {
+        List<Integer> nonDuplicateNumbers = LottoNumbers.createNonDuplicateNumbers();
+
+        assertThat(nonDuplicateNumbers).isNotNull();
+        assertThat(nonDuplicateNumbers).hasSize(6);
     }
 }
