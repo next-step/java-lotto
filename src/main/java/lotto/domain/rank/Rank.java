@@ -4,8 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum Rank {
-    OUT_ALL(0, 0L),
-    ONLY_BONUS(0,0L),
+    OUT(0,0L),
     SEVENTH(1, 0L),
     SIXTH(2, 0L),
     FIFTH(3, 5_000L),
@@ -44,5 +43,18 @@ public enum Rank {
         }
 
         return candidateRank.orElseThrow(IllegalArgumentException::new);
+    }
+
+
+    @Override
+    public String toString() {
+        return matchNumber + "개 일치" + secondAppender() + "(" + price + "원)";
+    }
+
+    private String secondAppender() {
+        if (price == 30_000_000L) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
     }
 }
