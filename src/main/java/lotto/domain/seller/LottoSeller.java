@@ -1,12 +1,13 @@
 package lotto.domain.seller;
 
-import lotto.domain.price.Price;
 import lotto.domain.number.LottoNumbers;
+import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoSeller {
 
@@ -20,10 +21,10 @@ public class LottoSeller {
     public LottoTickets buyTicket(final Price price) {
         validatePrice(price);
 
-        List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < price.ticketCount(); i++) {
-            tickets.add(LottoTicket.of(LottoNumbers.auto()));
-        }
+        List<LottoTicket> tickets = Stream.generate(LottoNumbers::auto)
+                .limit(price.ticketCount())
+                .map(LottoTicket::of)
+                .collect(Collectors.toList());
         return LottoTickets.of(tickets);
     }
 
