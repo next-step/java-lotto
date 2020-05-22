@@ -1,6 +1,6 @@
-package lotto.domain.ticket;
+package lotto.domain.number;
 
-import lotto.domain.number.LottoNumber;
+import lotto.domain.ticket.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,14 +14,14 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoTicketTest {
+public class LottoNumbersTest {
 
     @DisplayName("LottoTicket 생성")
     @Test
     void create() {
-        assertThatCode(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        assertThatCode(() -> LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 .doesNotThrowAnyException();
-        assertThatCode(() -> LottoTicket.of("1, 2, 3, 4, 5, 6"))
+        assertThatCode(() -> LottoNumbers.of("1, 2, 3, 4, 5, 6"))
                 .doesNotThrowAnyException();
     }
 
@@ -30,7 +30,7 @@ public class LottoTicketTest {
     @MethodSource("lottoNumbersCase")
     void notMetNumberCountCondition(final List<Integer> numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.of(numbers));
+                .isThrownBy(() -> LottoNumbers.of(numbers));
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
@@ -45,24 +45,24 @@ public class LottoTicketTest {
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
+                .isThrownBy(() -> LottoNumbers.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
     }
 
     @DisplayName("당첨 번호와 일치하는 숫자의 개수를 반환")
     @ParameterizedTest
     @MethodSource("purchasedTicketCase")
-    void matchedCount(final LottoTicket ticket, final int expected) {
+    void matchedCount(final LottoNumbers ticket, final int expected) {
         final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
         assertThat(ticket.matchedCount(winningLottoTicket)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> purchasedTicketCase() {
         return Stream.of(
-                Arguments.of(LottoTicket.of(Arrays.asList(7, 8, 9, 10, 11, 12)), 0),
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 7, 8, 9)), 3),
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 7, 8)), 4),
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7)), 5),
-                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6)
+                Arguments.of(LottoNumbers.of(Arrays.asList(7, 8, 9, 10, 11, 12)), 0),
+                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 7, 8, 9)), 3),
+                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 7, 8)), 4),
+                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 7)), 5),
+                Arguments.of(LottoNumbers.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 6)
         );
     }
 
@@ -70,7 +70,7 @@ public class LottoTicketTest {
     @ParameterizedTest
     @CsvSource({ "1,true", "7,false" })
     void contains(int number, final boolean expected) {
-        final LottoTicket ticket = LottoTicket.of("1, 2, 3, 4, 5, 6");
+        final LottoNumbers ticket = LottoNumbers.of("1, 2, 3, 4, 5, 6");
         assertThat(ticket.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
     }

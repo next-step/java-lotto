@@ -1,7 +1,7 @@
 package lotto.domain.strategy;
 
 import lotto.domain.number.LottoNumber;
-import lotto.domain.ticket.LottoTicket;
+import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,13 +17,13 @@ public class RandomGenerationStrategyTest {
 
     @BeforeEach
     void setUp() {
-        randomNumbers = new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE).generate();
+        randomNumbers = new RandomGenerationStrategy(LottoNumbers.LOTTO_NUMBER_SIZE).generate();
     }
 
     @DisplayName("1 ~ 45 사이의 6개의 숫자를 랜덤으로 생성")
     @Test
     void generate() {
-        assertThat(randomNumbers.size()).isEqualTo(LottoTicket.LOTTO_NUMBER_SIZE);
+        assertThat(randomNumbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBER_SIZE);
     }
 
     @DisplayName("랜덤으로 생성한 숫자는 1 ~ 45 사이의 값")

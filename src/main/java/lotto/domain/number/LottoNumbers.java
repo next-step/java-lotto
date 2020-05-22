@@ -1,6 +1,6 @@
-package lotto.domain.ticket;
+package lotto.domain.number;
 
-import lotto.domain.number.LottoNumber;
+import lotto.domain.ticket.WinningLottoTicket;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -8,29 +8,29 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public class LottoNumbers {
 
     private static final String LOTTO_NUMBER_DELIMITER = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private Set<LottoNumber> numbers;
 
-    private LottoTicket() {
+    private LottoNumbers() {
     }
 
-    private LottoTicket(final List<LottoNumber> numbers) {
+    private LottoNumbers(final List<LottoNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = new LinkedHashSet<>(numbers);
     }
 
-    public static LottoTicket of(final List<Integer> numbers) {
-        return new LottoTicket(numbers.stream()
+    public static LottoNumbers of(final List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 
-    public static LottoTicket of(final String numbers) {
-        return new LottoTicket(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
+    public static LottoNumbers of(final String numbers) {
+        return new LottoNumbers(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::of)

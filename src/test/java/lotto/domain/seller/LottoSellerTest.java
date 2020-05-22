@@ -1,7 +1,7 @@
 package lotto.domain.seller;
 
 import lotto.domain.strategy.RandomGenerationStrategy;
-import lotto.domain.ticket.LottoTicket;
+import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ public class LottoSellerTest {
 
     @BeforeEach
     void setUp() {
-        lottoSeller = LottoSeller.of(new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE));
+        lottoSeller = LottoSeller.of(new RandomGenerationStrategy(LottoNumbers.LOTTO_NUMBER_SIZE));
     }
 
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")

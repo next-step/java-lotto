@@ -1,6 +1,6 @@
 package lotto.domain.seller;
 
-import lotto.domain.ticket.LottoTicket;
+import lotto.domain.number.LottoNumbers;
 import lotto.domain.strategy.NumberGenerationStrategy;
 
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ public class LottoSeller {
         return new LottoSeller(generationStrategy);
     }
 
-    public List<LottoTicket> buyTicket(final int money) {
+    public List<LottoNumbers> buyTicket(final int money) {
         validateMoney(money);
         int countTicket = money / ONE_TICKET_PRICE;
 
-        List<LottoTicket> tickets = new ArrayList<>();
+        List<LottoNumbers> tickets = new ArrayList<>();
         for (int i = 0; i < countTicket; i++) {
-            tickets.add(LottoTicket.of(generationStrategy.generate()));
+            tickets.add(LottoNumbers.of(generationStrategy.generate()));
         }
         return tickets;
     }

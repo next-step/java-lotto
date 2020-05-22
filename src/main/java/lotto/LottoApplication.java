@@ -4,7 +4,7 @@ import lotto.domain.LottoGame;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.seller.LottoSeller;
 import lotto.domain.strategy.RandomGenerationStrategy;
-import lotto.domain.ticket.LottoTicket;
+import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -16,8 +16,8 @@ public class LottoApplication {
     public static void main(String[] args) {
         int payment = InputView.inputPurchaseAmount();
 
-        LottoSeller seller = LottoSeller.of(new RandomGenerationStrategy(LottoTicket.LOTTO_NUMBER_SIZE));
-        List<LottoTicket> tickets = seller.buyTicket(payment);
+        LottoSeller seller = LottoSeller.of(new RandomGenerationStrategy(LottoNumbers.LOTTO_NUMBER_SIZE));
+        List<LottoNumbers> tickets = seller.buyTicket(payment);
 
         ResultView.printPurchaseInfo(tickets);
 

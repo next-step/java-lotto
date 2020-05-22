@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +29,7 @@ public class WinningLottoTicketTest {
     @MethodSource("lottoNumbersCase")
     void notMetNumberCountCondition(final List<Integer> numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.of(numbers));
+                .isThrownBy(() -> LottoNumbers.of(numbers));
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
@@ -43,7 +44,7 @@ public class WinningLottoTicketTest {
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
+                .isThrownBy(() -> LottoNumbers.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
     }
 
     @DisplayName("특정 숫자가 티켓에 포함되어 있으면 true 를 반환")
