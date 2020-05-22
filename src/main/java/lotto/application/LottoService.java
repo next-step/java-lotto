@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class LottoService {
     public LottoTickets buyLottoTickets(Money money) {
-        return Shop.buyLottoTickets(money);
+        return Shop.sellLottoTickets(money);
     }
 
     public Ranks calculateRank(LottoTicket winTicket, LottoTickets lottoTickets) {

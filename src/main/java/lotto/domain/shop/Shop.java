@@ -11,7 +11,7 @@ public class Shop {
         return (int) (money.getValue() / 1000);
     }
 
-    public static LottoTickets buyLottoTickets(Money money) {
+    public static LottoTickets sellLottoTickets(Money money) {
         int lottoTicketCount = getLottoTicketCount(money);
         return IntStream.range(0, lottoTicketCount)
                 .mapToObj(num -> LottoGenerator.create())
