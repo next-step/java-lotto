@@ -2,7 +2,7 @@ package lotto;
 
 import lotto.domain.DrawingMachine;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoMoney;
+import lotto.domain.vo.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;

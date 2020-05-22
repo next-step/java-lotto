@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.number;
 
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,7 +11,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberGeneratorTest {
 
