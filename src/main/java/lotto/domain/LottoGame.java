@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.price.Price;
 import lotto.domain.prize.LottoPrizeResult;
 import lotto.domain.prize.Prize;
 import lotto.domain.ticket.LottoTickets;

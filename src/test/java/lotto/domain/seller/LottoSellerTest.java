@@ -1,6 +1,6 @@
 package lotto.domain.seller;
 
-import lotto.domain.Price;
+import lotto.domain.price.Price;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

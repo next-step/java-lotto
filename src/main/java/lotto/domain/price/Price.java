@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.price;
 
 import lotto.exception.ErrorMessage;
 import lotto.exception.NegativeNumberException;

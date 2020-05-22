@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.price;
 
 import lotto.exception.NegativeNumberException;
 import org.junit.jupiter.api.DisplayName;

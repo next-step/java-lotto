@@ -1,6 +1,6 @@
 package lotto.domain.prize;
 
-import lotto.domain.Price;
+import lotto.domain.price.Price;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
