@@ -48,6 +48,13 @@ public class LottoNumbersTest {
                 .isThrownBy(() -> LottoNumbers.of(Arrays.asList(-1, 0, 3, 4, 5, 6)));
     }
 
+    @DisplayName("LottoTicket 생성 실패: 중복된 숫자가 포함된 경우 예외 발생")
+    @Test
+    void duplicatedNumber() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoNumbers.of(Arrays.asList(1, 1, 3, 4, 5, 6)));
+    }
+
     @DisplayName("당첨 번호와 일치하는 숫자의 개수를 반환")
     @ParameterizedTest
     @MethodSource("purchasedTicketCase")
