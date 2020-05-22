@@ -19,7 +19,7 @@ public class LottoNumbersTest {
     void create() {
         assertThatCode(() -> LottoNumbers.of("1, 2, 3, 4, 5, 6"))
                 .doesNotThrowAnyException();
-        assertThatCode(() -> LottoNumbers.of("1, 2, 3, 4, 5, 6"))
+        assertThatCode(LottoNumbers::auto)
                 .doesNotThrowAnyException();
     }
 
@@ -27,8 +27,8 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("lottoNumbersCase")
     void notMetNumberCountCondition(final String numbers) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.of(numbers));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbers.of(numbers));
+        assertThatIllegalArgumentException().isThrownBy(LottoNumbers::auto);
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
