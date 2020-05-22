@@ -38,9 +38,9 @@ class PrizeOutputViewTests {
     }
     public static Stream<Arguments> ranksAndResults() {
         return Stream.of(
-                Arguments.of(FOURTH, "3개 일치 (5000원)- 0개"),
-                Arguments.of(THIRD, "4개 일치 (50000원)- 0개"),
-                Arguments.of(SECOND, "5개 일치 (1500000원)- 1개"),
+                Arguments.of(FOURTH, "4개 일치 (50000원)- 0개"),
+                Arguments.of(THIRD, "5개 일치 (1500000원)- 0개"),
+                Arguments.of(SECOND, "5개 일치, 보너스 볼 일치(30000000원)- 1개"),
                 Arguments.of(FIRST, "6개 일치 (2000000000원)- 1개")
         );
     }
@@ -49,8 +49,11 @@ class PrizeOutputViewTests {
     @Test
     void getTotalStatistics() {
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
-        assertThat(prizeOutputView.getTotalStatistics()).isEqualTo(
-                "3개 일치 (5000원)- 0개\n4개 일치 (50000원)- 0개\n5개 일치 (1500000원)- 1개\n6개 일치 (2000000000원)- 1개\n");
+        assertThat(prizeOutputView.getTotalStatistics()).isEqualTo("3개 일치 (5000원)- 0개\n" +
+                "4개 일치 (50000원)- 0개\n" +
+                "5개 일치 (1500000원)- 0개\n" +
+                "5개 일치, 보너스 볼 일치(30000000원)- 1개\n" +
+                "6개 일치 (2000000000원)- 1개\n");
     }
 
     @DisplayName("총 당첨 금액을 구할 수 있다.")
@@ -58,6 +61,6 @@ class PrizeOutputViewTests {
     void getTotalPrize() {
         PrizeOutputView prizeOutputView = new PrizeOutputView(ranks);
         assertThat(prizeOutputView.getTotalRateOfReturn(2000))
-                .isEqualTo("총 수익률은 1000750.00입니다.");
+                .isEqualTo("총 수익률은 1015000.00입니다.");
     }
 }
