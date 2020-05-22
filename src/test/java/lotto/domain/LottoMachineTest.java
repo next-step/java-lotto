@@ -18,19 +18,9 @@ class LottoMachineTest {
     @ParameterizedTest
     @CsvSource({"1000, 1", "3500, 3", "14000, 14"})
     void purchaseLottoTicket(int purchaseAmount, int ticketAmount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTicket(purchaseAmount);
+        LottoMoney lottoMoney = new LottoMoney(purchaseAmount);
+        List<LottoTicket> lottoTickets = LottoMachine.purchaseLottoTicket(lottoMoney);
 
         assertThat(lottoTickets.size()).isEqualTo(ticketAmount);
-    }
-
-    @DisplayName("로또를 살 수 없는 금액이면 IllegalArgumentException Throw")
-    @ParameterizedTest
-    @ValueSource(ints = {999, 0, 300})
-    void cannotPurchaseLottoTicketThrowException(int purchaseAmount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoMachine.purchaseLottoTicket(purchaseAmount))
-                .withMessage("로또를 살 수 없습니다.");
     }
 }
