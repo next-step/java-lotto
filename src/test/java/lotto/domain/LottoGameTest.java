@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoGameTest {
 
@@ -42,6 +41,15 @@ public class LottoGameTest {
     void create() {
         assertThatCode(() -> LottoGame.of(Price.of(Price.ONE_TICKET_PRICE), lottoTickets))
                 .doesNotThrowAnyException();
+    }
+
+    @DisplayName("LottoGame 생성 실패: 인자 중 하나라도 null 인 경우")
+    @Test
+    void createFailure() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoGame.of(null, lottoTickets));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> LottoGame.of(Price.of(Price.ONE_TICKET_PRICE), null));
     }
 
     @DisplayName("생성 -> play -> LottoPrizeResult 의 당첨 개수로 비교")
