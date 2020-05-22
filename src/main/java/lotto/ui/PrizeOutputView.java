@@ -8,8 +8,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-import static lotto.domain.rank.Rank.SECOND;
-
 public class PrizeOutputView {
     private Ranks ranks;
 
@@ -18,24 +16,9 @@ public class PrizeOutputView {
     }
 
     protected String getIndividualStatistics(Rank rank) {
-        if (SECOND.equals(rank)) {
-            return getSecondStatistics();
-        }
-
-        return rank.getMatchNumber() +
-                "개 일치 (" +
-                rank.getPrice() +
-                "원)- " +
+        return rank.toString() +
+                "- " +
                 ranks.getCount(rank) +
-                "개";
-    }
-
-    protected String getSecondStatistics() {
-        return SECOND.getMatchNumber() +
-                "개 일치, 보너스 볼 일치(" +
-                SECOND.getPrice() +
-                "원)- " +
-                ranks.getCount(SECOND) +
                 "개";
     }
 
