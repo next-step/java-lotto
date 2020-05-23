@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import lotto.domain.prize.Prize;
 import lotto.exception.ErrorMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -33,11 +34,18 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
-    }
-
     public int count() {
         return lottoTickets.size();
+    }
+
+    public LottoTickets merge(final LottoTickets tickets) {
+        List<LottoTicket> mergeTickets = new ArrayList<>(lottoTickets);
+        mergeTickets.addAll(tickets.getLottoTickets());
+
+        return LottoTickets.of(mergeTickets);
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 }
