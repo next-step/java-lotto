@@ -13,6 +13,7 @@ public enum Prize {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
     private final int matchedNumbersCount;
@@ -21,16 +22,25 @@ public enum Prize {
     static final int MIN_MATCHED_COUNT = 0;
     static final int MAX_MATCHED_COUNT = 6;
     private static final Map<Integer, Prize> PRIZES = Arrays.stream(Prize.values())
-            .collect(Collectors.toMap(Prize::getMatchedNumbersCount, Function.identity()));
+            .collect(Collectors.toMap(Prize::getMatchedNumbersCount, Function.identity(), (existing, replacement) -> existing));
 
     Prize(final int matchedNumbersCount, final int prizeMoney) {
         this.matchedNumbersCount = matchedNumbersCount;
         this.prizeMoney = prizeMoney;
     }
 
-    public static Prize of(final int matchedNumbersCount) {
+    public static Prize of(final int matchedNumbersCount, final boolean matchBonus) {
         validateMatchedNumbersCount(matchedNumbersCount);
-        return PRIZES.getOrDefault(matchedNumbersCount, Prize.MISS);
+
+        Prize prize = PRIZES.getOrDefault(matchedNumbersCount, Prize.MISS);
+        if (prize.isSecondPrize(matchBonus)) {
+            return Prize.SECOND;
+        }
+        return prize;
+    }
+
+    private boolean isSecondPrize(final boolean matchBonus) {
+        return this.equals(Prize.THIRD) && matchBonus;
     }
 
     private static void validateMatchedNumbersCount(final int matchedNumbersCount) {
