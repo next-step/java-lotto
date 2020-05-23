@@ -21,6 +21,7 @@ public class LottoApplication {
         ResultView.printPurchaseInfo(LottoTicketDto.from(tickets));
 
         String winningNumbers = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningNumbers);
 
         LottoPrizeResult result = LottoGame.of(price, tickets).play(winningLottoTicket);
