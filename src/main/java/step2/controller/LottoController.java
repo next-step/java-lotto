@@ -47,12 +47,11 @@ public class LottoController {
   }
 
   public static void main(String[] args) {
-    LottoController
-      .of()
-      .viewLottoGame()
-      .inputWinning()
-      .viewStat()
-      .viewPayoff();
+    LottoController.of()
+                   .viewLottoGame()
+                   .inputWinning()
+                   .viewStat()
+                   .viewPayoff();
   }
 
 }
