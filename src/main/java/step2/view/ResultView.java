@@ -1,8 +1,7 @@
 package step2.view;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import step2.domain.Lotto;
-import step2.domain.Lottos;
+import step2.domain.LottoGame;
 import step2.domain.WinningPrice;
 
 import java.util.Arrays;
@@ -20,22 +19,22 @@ public class ResultView {
 
   private ResultView () { }
 
-  public void printLottos (Lottos lottos) {
+  public void printLottos (LottoGame lottoGame) {
     System.out.println(
-      lottos.stream()
+      lottoGame.stream()
             .map(ResultView::lottoToString)
             .collect(Collectors.joining("\n"))
       + "\n"
     );
   }
 
-  public void printStat (Lottos lottos) {
+  public void printStat (LottoGame lottoGame) {
     Arrays.stream(winningPrize)
           .forEach(winningPrice -> System.out.printf(
               "%d개 일치 (%d원)- %d개\n",
               winningPrice.getSame(),
               winningPrice.getPrice(),
-              lottos.getWinning(winningPrice.getSame()),
+              lottoGame.getWinningCount(winningPrice.getSame())
             )
           );
   }
