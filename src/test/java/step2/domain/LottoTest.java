@@ -9,6 +9,7 @@ import step2.exception.LottoReduplicateException;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,5 +47,24 @@ public class LottoTest {
     );
   }
 
+  @DisplayName("로또 생성시 오름차순 정렬이 되는지 검사")
+  @ParameterizedTest
+  @MethodSource("provideNotSortedLottoNumbers")
+  void 로또_번호_오름차순_검사 (Lotto lotto, String expected) {
+    assertThat(expected)
+      .isEqualTo(lotto.stream().map(String::valueOf).collect(Collectors.joining(",")));
+  }
 
+  private static Stream<Arguments> provideNotSortedLottoNumbers () {
+    return Stream.of(
+      Arguments.of(
+        Lotto.ofString(Arrays.asList("5,6,4,1,2,10".split(","))),
+        "1,2,4,5,6,10"
+      ),
+      Arguments.of(
+        Lotto.ofString(Arrays.asList("6,5,4,3,2,1".split(","))),
+        "1,2,3,4,5,6"
+      )
+    );
+  }
 }

@@ -26,15 +26,18 @@ public class Lotto {
     return lottoNumbers.stream();
   }
 
-  public static Lotto of () {
-    Collections.shuffle(numbers);
-    List<Integer> lottoNumber = numbers.stream().limit(6L).collect(Collectors.toList());
-    lottoNumber.sort((a, b) -> a - b);
-    return of(lottoNumber);
+  public static Lotto ofString (List<String> lottoNumber) {
+    return Lotto.of(lottoNumber.stream().map(Integer::parseInt).collect(Collectors.toList()));
   }
 
-  public static Lotto of (List<Integer> numbers) {
-    return new Lotto(numbers);
+  public static Lotto of () {
+    Collections.shuffle(Lotto.numbers);
+    return of(Lotto.numbers.stream().limit(6L).collect(Collectors.toList()));
+  }
+
+  public static Lotto of (List<Integer> lottoNumber) {
+    lottoNumber.sort(Comparator.comparingInt(a -> a));
+    return new Lotto(lottoNumber);
   }
 
   private static void validateCount (List<Integer> lottoNumbers) throws RuntimeException {

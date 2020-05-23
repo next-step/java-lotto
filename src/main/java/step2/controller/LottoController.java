@@ -32,9 +32,7 @@ public class LottoController {
   }
 
   public LottoController inputWinning () {
-    Lotto winning = Lotto.of(Arrays.stream(inputView.inputWinning())
-                                   .map(Integer::parseInt)
-                                   .collect(Collectors.toList()));
+    Lotto winning = Lotto.ofString(Arrays.asList(inputView.inputWinning()));
     return this.inputWinning(winning);
   }
 
