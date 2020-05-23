@@ -22,7 +22,7 @@ public class LottoApplication {
 
         String winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningNumbers);
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf(winningNumbers, bonusNumber);
 
         LottoPrizeResult result = LottoGame.of(price, tickets).play(winningLottoTicket);
 
