@@ -11,8 +11,9 @@ public class LottoLine {
         this.lottoNums = lottoNums;
     }
 
-    public LottoMatch getLottoMatch(LottoNums lottoNums) {
-        return LottoMatch.valueByCount(this.lottoNums.getMatchCount(lottoNums));
+    public Rank getRank(LottoNums lottoNums, LottoNum bonusNum) {
+        return Rank
+            .valueOf(this.lottoNums.getCountOfMatch(lottoNums), this.lottoNums.isContain(bonusNum));
     }
 
     public List<Integer> getNums() {

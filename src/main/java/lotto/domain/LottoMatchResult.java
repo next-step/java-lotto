@@ -5,16 +5,16 @@ import java.util.stream.Collectors;
 
 public class LottoMatchResult {
 
-    private final Map<LottoMatch, Long> lottoMatchCountMap;
+    private final Map<Rank, Long> lottoMatchCountMap;
     private final int totalPrice;
 
-    public LottoMatchResult(Map<LottoMatch, Long> map, int totalPrice) {
+    public LottoMatchResult(Map<Rank, Long> map, int totalPrice) {
         this.lottoMatchCountMap = map;
         this.totalPrice = totalPrice;
     }
 
-    public long get(LottoMatch lottoMatch) {
-        return lottoMatchCountMap.getOrDefault(lottoMatch, 0L);
+    public long get(Rank rank) {
+        return lottoMatchCountMap.getOrDefault(rank, 0L);
     }
 
     public double computeProfitRate() {
@@ -25,7 +25,7 @@ public class LottoMatchResult {
         return 1.0 * sum / totalPrice;
     }
 
-    private Long computeMatchAmount(LottoMatch lottoMatch) {
-        return lottoMatch.getAmount() * lottoMatchCountMap.get(lottoMatch);
+    private Long computeMatchAmount(Rank rank) {
+        return rank.getWinningMoney() * lottoMatchCountMap.get(rank);
     }
 }
