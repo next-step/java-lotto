@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,11 +19,9 @@ class LottoPaperTest {
     @ParameterizedTest
     @MethodSource("source")
     void lotto_result(List<Integer> winNums, List<Integer> nums, Integer bonusNum,  Rank rank) {
-        LottoNums lottoNums = lottoNums(nums);
-        LottoLine lottoLine = new LottoLine(lottoNums);
-        LottoPaper lottoPaper = new LottoPaper(Arrays.asList(lottoLine));
+        LottoPaper lottoPaper = getLottoPaper(nums);
 
-        LottoMatchResult lottoMatchResult = lottoPaper.getResult(lottoNums(winNums), new LottoNum(bonusNum), 1000);
+        LottoMatchResult lottoMatchResult = lottoPaper.getResult(LottoNums.of(winNums), new LottoNum(bonusNum), 1000);
         assertThat(lottoMatchResult.get(rank)).isEqualTo(1L);
     }
 
@@ -30,13 +29,16 @@ class LottoPaperTest {
     @ParameterizedTest
     @MethodSource("source")
     void profit_rate(List<Integer> winNums, List<Integer> nums, Integer bonusNum, Rank rank) {
-        LottoNums lottoNums = lottoNums(nums);
-        LottoLine lottoLine = new LottoLine(lottoNums);
-        LottoPaper lottoPaper = new LottoPaper(Arrays.asList(lottoLine));
+        LottoPaper lottoPaper = getLottoPaper(nums);
 
-
-        LottoMatchResult lottoMatchResult = lottoPaper.getResult(lottoNums(winNums), new LottoNum(bonusNum), 1000);
+        LottoMatchResult lottoMatchResult = lottoPaper.getResult(LottoNums.of(winNums), new LottoNum(bonusNum), 1000);
         assertThat(lottoMatchResult.computeProfitRate()).isEqualTo(rank.getWinningMoney()/1000);
+    }
+
+    private LottoPaper getLottoPaper(List<Integer> nums) {
+        LottoNums lottoNums = LottoNums.of(nums);
+        LottoLine lottoLine = new LottoLine(lottoNums);
+        return new LottoPaper(Arrays.asList(lottoLine));
     }
 
     static Stream<Arguments> source() {
@@ -50,9 +52,5 @@ class LottoPaperTest {
         );
     }
 
-    private LottoNums lottoNums(List<Integer> nums){
-        List<LottoNum> lottoNums = nums.stream().map(integer -> new LottoNum(integer)).collect(Collectors.toList());
-        return new LottoNums(lottoNums);
-    }
 
 }
