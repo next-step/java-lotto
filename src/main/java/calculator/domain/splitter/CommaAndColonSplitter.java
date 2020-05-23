@@ -1,11 +1,16 @@
 package calculator.domain.splitter;
 
-public class CommaAndColonSplitter implements Splitter{
+public class CommaAndColonSplitter implements Splitter {
     private static final String COMMA_COLON_DELIMITER_REGEX = "[,:]";
 
     @Override
     public String[] split(String input) {
         return input.split(COMMA_COLON_DELIMITER_REGEX);
+    }
+
+    @Override
+    public boolean isSupport(String input) {
+        return true;
     }
 
     @Override
