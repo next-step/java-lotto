@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.prize.Prize;
+import lotto.util.Generator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +21,8 @@ public class LottoTicketTest {
     @DisplayName("LottoNumbers 를 인자로 받아 LottoTicket 생성")
     @Test
     void create() {
-        LottoNumbers lottoNumbers = LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6");
+        LottoNumbers lottoNumbers = LottoNumbers.manualCreate(Generator.lottoNumberList(1, 2, 3, 4, 5, 6));
+
         assertThatCode(() -> LottoTicket.of(lottoNumbers))
             .doesNotThrowAnyException();
     }
@@ -36,25 +38,27 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource
     void matchPrize(final LottoTicket ticket, final Prize expected) {
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
+        final WinningLottoTicket winningLottoTicket =
+                WinningLottoTicket.valueOf(Generator.lottoNumberList(1, 2, 3, 4, 5, 6), 7);
+
         assertThat(ticket.matchPrize(winningLottoTicket)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> matchPrize() {
         return Stream.of(
-                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6")), Prize.FIRST),
-                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 7")), Prize.SECOND),
-                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 8")), Prize.THIRD),
-                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 7, 8")), Prize.FOURTH),
-                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9")), Prize.FIFTH),
-                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("7, 8, 9, 10, 11, 12")), Prize.MISS)
+                Arguments.of(Generator.lottoTicket(1, 2, 3, 4, 5, 6), Prize.FIRST),
+                Arguments.of(Generator.lottoTicket(1, 2, 3, 4, 5, 7), Prize.SECOND),
+                Arguments.of(Generator.lottoTicket(1, 2, 3, 4, 5, 8), Prize.THIRD),
+                Arguments.of(Generator.lottoTicket(1, 2, 3, 4, 7, 8), Prize.FOURTH),
+                Arguments.of(Generator.lottoTicket(1, 2, 3, 7, 8, 9), Prize.FIFTH),
+                Arguments.of(Generator.lottoTicket(7, 8, 9, 10, 11, 12), Prize.MISS)
         );
     }
 
     @DisplayName("LottoNumbers 의 값을 List<Integer> 로 반환")
     @Test
     void getLottoNumbersAsInt() {
-        final LottoTicket ticket = LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6"));
+        final LottoTicket ticket = Generator.lottoTicket(1, 2, 3, 4, 5, 6);
         List<Integer> target = ticket.getLottoNumbersAsInt();
 
         List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));

@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import lotto.util.Generator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,10 +18,17 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumbersTest {
 
+    private LottoNumbers lottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        this.lottoNumbers = Generator.lottoNumbers(1, 2, 3, 4, 5, 6);
+    }
+
     @DisplayName("LottoNumbers 생성")
     @Test
     void create() {
-        assertThatCode(() -> LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6"))
+        assertThatCode(() -> LottoNumbers.manualCreate(Generator.lottoNumberList(1, 2, 3, 4, 5, 6)))
                 .doesNotThrowAnyException();
         assertThatCode(LottoNumbers::autoCreate)
                 .doesNotThrowAnyException();
@@ -28,15 +37,14 @@ public class LottoNumbersTest {
     @DisplayName("LottoNumbers 생성 실패: 로또 슷자의 개수가 6개가 아닌 경우 예외 발생")
     @ParameterizedTest
     @MethodSource("lottoNumbersCase")
-    void notMetNumberCountCondition(final String numbers) {
+    void notMetNumberCountCondition(final List<LottoNumber> numbers) {
         assertThatIllegalArgumentException().isThrownBy(() -> LottoNumbers.manualCreate(numbers));
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
         return Stream.of(
-                Arguments.of("1, 2, 3, 4, 5"),
-                Arguments.of("1, 2, 3, 4, 5, 6, 7"),
-                Arguments.of("-1, 0, 3, 4, 5, 6")
+                Arguments.of(Generator.lottoNumberList(1, 2, 3, 4, 5)),
+                Arguments.of(Generator.lottoNumberList(1, 2, 3, 4, 5, 6, 7))
         );
     }
 
@@ -44,31 +52,31 @@ public class LottoNumbersTest {
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.manualCreate("-1, 0, 3, 4, 5, 6"));
+                .isThrownBy(() -> Generator.lottoNumbers(-1, 0, 3, 4, 5, 6));
     }
 
     @DisplayName("LottoNumbers 생성 실패: 중복된 숫자가 포함된 경우 예외 발생")
     @Test
     void duplicatedNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.manualCreate("1, 1, 3, 4, 5, 6"));
+                .isThrownBy(() -> Generator.lottoNumbers(1, 1, 3, 4, 5, 6));
     }
 
     @DisplayName("당첨 번호와 일치하는 숫자의 개수를 반환")
     @ParameterizedTest
     @MethodSource("purchasedTicketCase")
     void matchedCount(final LottoNumbers ticket, final int expected) {
-        final LottoNumbers winningLottoNumbers = LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6");
+        final LottoNumbers winningLottoNumbers = lottoNumbers;
         assertThat(ticket.matchCount(winningLottoNumbers)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> purchasedTicketCase() {
         return Stream.of(
-                Arguments.of(LottoNumbers.manualCreate("7, 8, 9, 10, 11, 12"), 0),
-                Arguments.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9"), 3),
-                Arguments.of(LottoNumbers.manualCreate("1, 2, 3, 4, 7, 8"), 4),
-                Arguments.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 7"), 5),
-                Arguments.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6"), 6)
+                Arguments.of(Generator.lottoNumbers(7, 8, 9, 10, 11, 12), 0),
+                Arguments.of(Generator.lottoNumbers(1, 2, 3, 7, 8, 9), 3),
+                Arguments.of(Generator.lottoNumbers(1, 2, 3, 4, 7, 8), 4),
+                Arguments.of(Generator.lottoNumbers(1, 2, 3, 4, 5, 7), 5),
+                Arguments.of(Generator.lottoNumbers(1, 2, 3, 4, 5, 6), 6)
         );
     }
 
@@ -76,17 +84,14 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @CsvSource({ "1,true", "7,false" })
     void contains(int number, final boolean expected) {
-        final LottoNumbers ticket = LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6");
-        assertThat(ticket.contains(LottoNumber.of(number)))
+        assertThat(lottoNumbers.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
     }
 
     @DisplayName("Set<LottoNumber>의 값을 List<Integer> 로 반환")
     @Test
     void getNumbersAsInt() {
-        final LottoNumbers lottoNumbers = LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6");
         List<Integer> target = lottoNumbers.getNumbersAsInt();
-
         List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(target).isEqualTo(expected);
