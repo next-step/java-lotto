@@ -9,6 +9,7 @@ public class LottoTicket {
     private final List<LottoNumber> values;
 
     public static LottoTicket create(List<LottoNumber> values) {
+        Collections.sort(values);
         return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
     }
 
@@ -20,13 +21,6 @@ public class LottoTicket {
         return (int) this.values.stream()
                 .filter(lottoTicket::isInThisTicket)
                 .count();
-    }
-
-    public LottoTicket sort() {
-        Comparator<LottoNumber> lottoNumberComparator = Comparator.comparing(LottoNumber::getValue);
-        List<LottoNumber> sortTarget = new ArrayList<>(this.values);
-        sortTarget.sort(lottoNumberComparator);
-        return new LottoTicket(sortTarget);
     }
 
     protected int size() {
@@ -59,7 +53,6 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        this.sort();
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         for (LottoNumber value: values) {

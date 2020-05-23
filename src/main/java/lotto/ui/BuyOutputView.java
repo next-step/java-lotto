@@ -17,7 +17,6 @@ public class BuyOutputView {
 
         List<LottoTicket> values = lottoTickets.getValues();
         String result = values.stream()
-                .map(LottoTicket::sort)
                 .map(LottoTicket::toString)
                 .reduce((previousTickets, lottoTicket) -> previousTickets + "\n" + lottoTicket)
                 .get();

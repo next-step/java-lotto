@@ -66,13 +66,11 @@ class LottoTicketTests {
         assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
-    @DisplayName("내부의 LottoNumber를 정렬할 수 있어야한다.")
+    @DisplayName("생성된 LottoTicket은 내부의 값이 오름차순으로 정렬되어 있다.")
     @Test
     void sortTest() {
-        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(6, 5, 4, 3, 2, 1));
-        assertThat(lottoTicket.toString()).isEqualTo("[6, 5, 4, 3, 2, 1]");
-        LottoTicket sorted = lottoTicket.sort();
-        assertThat(sorted.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+        LottoTicket lottoTicket = LottoGenerator.createManualByIntList(Arrays.asList(5, 6, 4, 3, 2, 1));
+        assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
     @DisplayName("제시받은 LottoNumber가 현재 티켓 안에 있는 번호인지 확인할 수 있어야 한다.")
