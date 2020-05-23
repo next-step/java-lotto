@@ -18,7 +18,7 @@ public class InputView {
 
   public String[] inputWinning () {
     System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    return scanner.nextLine().split(", ");
+    return scanner.nextLine().split(",");
   }
 
   public static InputView getInstance () {
