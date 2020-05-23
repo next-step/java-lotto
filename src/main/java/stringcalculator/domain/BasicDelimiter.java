@@ -10,8 +10,8 @@ public enum BasicDelimiter {
     private static final String DELIMITER_JOINER = "|";
     private String type;
 
-    BasicDelimiter(String tyoe) {
-        this.type = tyoe;
+    BasicDelimiter(String type) {
+        this.type = type;
     }
 
     public static String convertToRegex() {

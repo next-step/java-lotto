@@ -8,9 +8,9 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class BasicDelimiterTest {
 
-    @DisplayName(".과 :로 구성된 정규식 문자열을 반환한다")
+    @DisplayName(",과 :로 구성된 정규식 문자열을 반환한다")
     @Test
     void makeRegex() {
-        assertThat(BasicDelimiter.convertToRegex()).isEqualTo(". | :");
+        assertThat(BasicDelimiter.convertToRegex()).isEqualTo(",|:");
     }
 }
