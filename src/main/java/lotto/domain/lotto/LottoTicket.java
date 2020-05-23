@@ -8,6 +8,35 @@ public class LottoTicket {
     private static final int SIZE=6;
     private final List<LottoNumber> values;
 
+    public static LottoTicket create(List<LottoNumber> values) {
+        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
+    }
+
+    public List<LottoNumber> getValues() {
+        return Collections.unmodifiableList(new ArrayList<>(this.values));
+    }
+
+    public boolean isInThisTicket(LottoNumber lottoNumber) {
+        return this.values.contains(lottoNumber);
+    }
+
+    public int howManyMatch(LottoTicket lottoTicket) {
+        return (int) this.values.stream()
+                .filter(lottoTicket::isInThisTicket)
+                .count();
+    }
+
+    public LottoTicket sort() {
+        Comparator<LottoNumber> lottoNumberComparator = Comparator.comparing(LottoNumber::getValue);
+        List<LottoNumber> sortTarget = new ArrayList<>(this.values);
+        sortTarget.sort(lottoNumberComparator);
+        return new LottoTicket(sortTarget);
+    }
+
+    protected int size() {
+        return this.values.size();
+    }
+
     private LottoTicket(List<LottoNumber> values) {
         validation(values);
         this.values = values;
@@ -17,18 +46,6 @@ public class LottoTicket {
         if (values.size() != SIZE) {
             throw new LottoTicketSizeException("Lotto ticket can have only six lotto numbers");
         }
-    }
-
-    public static LottoTicket create(List<LottoNumber> values) {
-        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
-    }
-
-    protected int size() {
-        return this.values.size();
-    }
-
-    public List<LottoNumber> getValues() {
-        return Collections.unmodifiableList(new ArrayList<>(this.values));
     }
 
     @Override
@@ -54,22 +71,5 @@ public class LottoTicket {
         }
         String result = builder.toString().substring(0, builder.toString().length() - 2);
         return result + "]";
-    }
-
-    public LottoTicket sort() {
-        Comparator<LottoNumber> lottoNumberComparator = Comparator.comparing(LottoNumber::getValue);
-        List<LottoNumber> sortTarget = new ArrayList<>(this.values);
-        sortTarget.sort(lottoNumberComparator);
-        return new LottoTicket(sortTarget);
-    }
-
-    public boolean isInThisTicket(LottoNumber lottoNumber) {
-        return this.values.contains(lottoNumber);
-    }
-
-    public int howManyMatch(LottoTicket lottoTicket) {
-        return (int) this.values.stream()
-                .filter(lottoTicket::isInThisTicket)
-                .count();
     }
 }
