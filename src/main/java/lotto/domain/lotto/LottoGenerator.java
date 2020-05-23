@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -22,5 +23,25 @@ public class LottoGenerator {
                         .map(LottoNumber::create)
                         .collect(Collectors.toList())
         );
+    }
+
+    public static LottoTicket createFromString(String inputString) {
+        stringValidation(inputString);
+        return LottoGenerator.createManualByIntList(
+                Arrays.asList(inputString.split(","))
+                        .stream()
+                        .map(inputValue -> Integer.parseInt(inputValue.trim()))
+                        .collect(Collectors.toList())
+        );
+    }
+
+    private static void stringValidation(String inputValue) {
+        if (inputValue == null) {
+            throw new IllegalArgumentException("Input value must not null");
+        }
+
+        if (inputValue.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input value must not empty");
+        }
     }
 }
