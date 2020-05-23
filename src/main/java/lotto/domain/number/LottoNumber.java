@@ -5,7 +5,7 @@ import lotto.exception.ErrorMessage;
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
@@ -42,5 +42,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(final LottoNumber lottoNumber) {
+        return this.number - lottoNumber.number;
     }
 }
