@@ -1,5 +1,7 @@
 package step2.domain;
 
+import step2.exception.LottoGamePriceException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ public class LottoGame {
   };
 
   private LottoGame(int price) {
+    validatePrice(price);
     this.lottoList = Arrays.stream(new int[price / 1000])
                            .boxed()
                            .map(v -> Lotto.of())
@@ -53,5 +56,11 @@ public class LottoGame {
   public static long getSames (Lotto lotto1, Lotto lotto2) {
     List<Integer> numbers = lotto2.stream().collect(Collectors.toList());
     return lotto1.stream().filter(numbers::contains).count();
+  }
+
+  public static void validatePrice (int price) throws RuntimeException {
+    if (price < 1000) {
+      throw new LottoGamePriceException();
+    }
   }
 }
