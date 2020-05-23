@@ -3,6 +3,7 @@ package lotto.domain.seller;
 import lotto.domain.price.Price;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
+import lotto.exception.AvailableCountExceedException;
 import lotto.util.Generator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -59,7 +60,7 @@ public class LottoSellerTest {
         lottoTickets.add(Generator.lottoTicket(1, 2, 3, 7, 8, 9));
         LottoTickets manualTickets = LottoTickets.of(lottoTickets);
 
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(AvailableCountExceedException.class)
                 .isThrownBy(() -> lottoSeller.buyTicket(price, manualTickets));
     }
 }
