@@ -36,4 +36,8 @@ public class LottoTickets {
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
+
+    public int count() {
+        return lottoTickets.size();
+    }
 }
