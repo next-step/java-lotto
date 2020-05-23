@@ -5,6 +5,7 @@ import lotto.domain.shop.exceptions.OutOfBoundMoneyCreationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,5 +30,13 @@ class MoneyTests {
     @ValueSource(longs = {1L, 333L, 10023L})
     void onlyThousandsTest(long invalidValue) {
         assertThatThrownBy(() -> new Money(invalidValue)).isInstanceOf(OnlyTenThousandsException.class);
+    }
+
+    @DisplayName("현재 값으로 LottoTicket을 몇 장 살 수 있는지 계산할 수 있어야 한다.")
+    @ParameterizedTest
+    @CsvSource(value = {"10000:10", "3000:3"}, delimiter = ':')
+    void howManyLottoTicketsCount(long moneyValue, int countResult) {
+        Money money = new Money(moneyValue);
+        assertThat(money.howManyLottoTickets()).isEqualTo(countResult);
     }
 }
