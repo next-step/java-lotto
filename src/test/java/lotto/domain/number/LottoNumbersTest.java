@@ -1,6 +1,5 @@
 package lotto.domain.number;
 
-import lotto.domain.ticket.WinningLottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,8 +55,8 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("purchasedTicketCase")
     void matchedCount(final LottoNumbers ticket, final int expected) {
-        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
-        assertThat(ticket.matchCount(winningLottoTicket)).isEqualTo(expected);
+        final LottoNumbers winningLottoNumbers = LottoNumbers.of("1, 2, 3, 4, 5, 6");
+        assertThat(ticket.matchCount(winningLottoNumbers)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> purchasedTicketCase() {

@@ -50,7 +50,7 @@ public class WinningLottoTicketTest {
     @CsvSource({ "1,true", "7,false" })
     void contains(int number, final boolean expected) {
         final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
-        assertThat(winningLottoTicket.contains(LottoNumber.of(number)))
+        assertThat(winningLottoTicket.lottoNumbers.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
     }
 }
