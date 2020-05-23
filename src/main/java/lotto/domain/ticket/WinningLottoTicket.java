@@ -26,4 +26,8 @@ public class WinningLottoTicket extends LottoTicket {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
         }
     }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }
