@@ -1,6 +1,5 @@
-package calculator.domain;
+package calculator;
 
-import calculator.Main;
 import calculator.domain.calculator.NegativeInputException;
 import calculator.domain.calculator.NonNumericValuesException;
 import org.junit.jupiter.api.DisplayName;
