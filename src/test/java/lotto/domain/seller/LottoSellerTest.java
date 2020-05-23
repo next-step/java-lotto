@@ -22,8 +22,8 @@ public class LottoSellerTest {
     @DisplayName("로또 1장의 가격보다 낮은 금액을 내면 예외가 발생")
     @Test
     void buyTicketFailureByLackMoney() {
-        Price price = Price.of(Price.ONE_TICKET_PRICE - 1);
-        assertThatIllegalArgumentException().isThrownBy(() -> lottoSeller.buyTicket(price));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> lottoSeller.buyTicket(Price.of(Price.ONE_TICKET_PRICE - 1)));
     }
 
     @DisplayName("로또 구입 금액에 맞는 로또 티켓을 반환")

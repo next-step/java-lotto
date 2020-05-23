@@ -33,7 +33,7 @@ public class PriceTest {
     @Test
     void validateAvailablePrice() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Price.of(Price.ONE_TICKET_PRICE - 1).validateAvailablePrice());
+                .isThrownBy(() -> Price.of(Price.ONE_TICKET_PRICE - 1));
     }
 
     @DisplayName("구입가능한 티켓의 개수를 반환")
