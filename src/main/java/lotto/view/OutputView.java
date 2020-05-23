@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.LottoLine;
-import lotto.domain.LottoMatch;
+import lotto.domain.Rank;
 import lotto.domain.LottoMatchResult;
 
 public class OutputView {
@@ -17,8 +17,8 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
-        LottoMatch.matchesValues().forEach(lottoMatch -> {
-            String matchMessage = String.format("%s개 일치 (%d원)- %d개", lottoMatch.getMatchCount(), lottoMatch.getAmount(), result.get(lottoMatch));
+        Rank.rankValues().forEach(lottoMatch -> {
+            String matchMessage = String.format("%s개 일치 (%d원)- %d개", lottoMatch.getCountOfMatch(), lottoMatch.getWinningMoney(), result.get(lottoMatch));
             System.out.println(matchMessage);
         });
 

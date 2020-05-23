@@ -21,7 +21,7 @@ public class LottoNums {
         this.lottoNums = lottoNums;
     }
 
-    public int getMatchCount(LottoNums targetNums) {
+    public int getCountOfMatch(LottoNums targetNums) {
         return (int) this.lottoNums.stream()
             .filter(num -> targetNums.contain(num))
             .count();

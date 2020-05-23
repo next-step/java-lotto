@@ -24,9 +24,9 @@ public class LottoPaper {
     }
 
     public LottoMatchResult getResult(LottoNums winNums, int totalPrice) {
-        Map<LottoMatch, Long> map = this.lottoLines.stream()
-            .map(lottoLine -> lottoLine.getLottoMatch(winNums))
-            .filter(lottoMatch -> lottoMatch != LottoMatch.NOT_FOUND)
+        Map<Rank, Long> map = this.lottoLines.stream()
+            .map(lottoLine -> lottoLine.getRank(winNums))
+            .filter(rank -> rank != Rank.MISS)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         return new LottoMatchResult(new EnumMap<>(map), totalPrice);

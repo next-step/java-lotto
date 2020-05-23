@@ -10,16 +10,16 @@ import org.junit.jupiter.api.Test;
 
 public class LottoLineTest {
 
-    @DisplayName("일치하는 로또번호의 갯수를 알수 있다.")
+    @DisplayName("일치하는 로또번호의 갯수(rank)를 알수 있다.")
     @Test
-    void match_count(){
+    void getRank(){
         List<LottoNum> lottoNumList = IntStream
             .range(1,7).mapToObj(value -> new LottoNum(value)).collect(Collectors.toList());
 
         LottoNums lottoNums = new LottoNums(lottoNumList);
         LottoLine lottoLine = new LottoLine(lottoNums);
 
-        assertThat(lottoLine.getLottoMatch(lottoNums)).isEqualTo(LottoMatch.SIX);
+        assertThat(lottoLine.getRank(lottoNums)).isEqualTo(Rank.FIRST);
     }
 
 }
