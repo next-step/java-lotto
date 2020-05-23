@@ -74,4 +74,13 @@ public class LottoTicketsTest {
     void count() {
         assertThat(LottoTickets.of(tickets).count()).isEqualTo(tickets.size());
     }
+
+    @DisplayName("인자로 입력받은 LottoTickets 를 이어 붙인 LottoTickets 반환")
+    @Test
+    void merge() {
+        LottoTickets originTickets = Generator.lottoTickets(Generator.lottoTicket(1, 2, 3, 4, 5, 6));
+
+        assertThat(originTickets.merge(LottoTickets.of(tickets)).count())
+                .isEqualTo(6);
+    }
 }
