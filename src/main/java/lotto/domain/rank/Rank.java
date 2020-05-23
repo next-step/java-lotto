@@ -41,6 +41,9 @@ public enum Rank {
         return candidateRank.orElseThrow(IllegalArgumentException::new);
     }
 
+    public boolean isSecond() {
+        return this.equals(SECOND);
+    }
 
     @Override
     public String toString() {

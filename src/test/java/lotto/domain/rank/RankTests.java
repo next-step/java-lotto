@@ -31,4 +31,11 @@ class RankTests {
         assertThat(SECOND.toString()).isEqualTo("5개 일치, 보너스 볼 일치(30000000원)");
         assertThat(THIRD.toString()).isEqualTo("5개 일치 (1500000원)");
     }
+
+    @DisplayName("당첨 등수가 2등인지를 알려줄 수 있다.")
+    @Test
+    void isSecondTest() {
+        assertThat(SECOND.isSecond()).isTrue();
+        assertThat(THIRD.isSecond()).isFalse();
+    }
 }
