@@ -14,13 +14,9 @@ public class StringCalculator implements Calculator {
     }
 
     private List<Number> stringToNumber(String[] texts) {
-        try {
-            return Arrays.stream(texts)
-                    .map(Number::new)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new NonNumericValuesException();
-        }
+        return Arrays.stream(texts)
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     @Override

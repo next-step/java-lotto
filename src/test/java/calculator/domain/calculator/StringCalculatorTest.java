@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("StringCalculator 클래스 테스트")
 public class StringCalculatorTest {
@@ -23,13 +22,6 @@ public class StringCalculatorTest {
 
         assertThat(stringCalculator).isNotNull();
         assertThat(stringCalculator.getNumbers().get(0).getNumber()).isEqualTo(1);
-    }
-
-    @DisplayName("숫자가 아닌 값을 전달하는 경우 RuntiemException 예외를 throw 할 수 있다.")
-    @Test
-    void NonNumericValues() {
-        String[] texts = {"1", "-", "3"};
-        assertThatThrownBy(() -> new StringCalculator(texts)).isInstanceOf(NonNumericValuesException.class);
     }
 
     @DisplayName("문자열 숫자의 합을 구할 수 있다.")
