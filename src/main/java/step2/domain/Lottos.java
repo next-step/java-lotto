@@ -1,4 +1,4 @@
 package step2.domain;
 
-public class lotto {
+public class Lottos {
 }
