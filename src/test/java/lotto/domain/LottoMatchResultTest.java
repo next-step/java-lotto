@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -57,5 +58,18 @@ class LottoMatchResultTest {
     @MethodSource("generateLottoMatch")
     void canGetMatchCount(LottoMatch lottoMatch) {
         assertThat(this.lottoMatchResult.getMatchCount(lottoMatch)).isGreaterThanOrEqualTo(0);
+    }
+
+    @DisplayName("당첨금을 계산할 수 있다.")
+    @ParameterizedTest
+    @MethodSource("generateLottoMatch")
+    void canCalculateWinAmount(LottoMatch lottoMatch) {
+        assertThat(this.lottoMatchResult.calculateWinAmount(lottoMatch)).isGreaterThanOrEqualTo(0);
+    }
+
+    @DisplayName("총 수익률을 계산할 수 있다.")
+    @Test
+    void canCalculateProfitRate() {
+        assertThat(this.lottoMatchResult.calculateProfitRate(14)).isGreaterThanOrEqualTo(0);
     }
 }
