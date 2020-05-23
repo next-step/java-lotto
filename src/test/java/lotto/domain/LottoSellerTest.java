@@ -44,7 +44,7 @@ class LottoSellerTest {
     @DisplayName("지난 주 당첨 번호가 6개가 아닌경우 Exception")
     void validateNotValidWinner(List<Integer> winners) {
         LottoSeller lottoSeller = this.createLottoSeller(1000);
-        List<LottoNumberResult> lottoNumberResults = lottoSeller.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumber.LOTTO_NUMBERS, LottoNumber.LOTTO_SIZE);
+        List<LottoNumberResult> lottoNumberResults = lottoSeller.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
         assertThatThrownBy(() -> lottoSeller.matchLottoRanking(winners, lottoNumberResults))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -64,7 +64,7 @@ class LottoSellerTest {
     @DisplayName("로또 발급 테스트")
     void buyLottoTest(int price, int lottoCount) {
         LottoSeller lottoSeller = this.createLottoSeller(price);
-        List<LottoNumberResult> lottoNumberResults = lottoSeller.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumber.LOTTO_NUMBERS, LottoNumber.LOTTO_SIZE);
+        List<LottoNumberResult> lottoNumberResults = lottoSeller.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
         assertThat(lottoNumberResults).hasSize(lottoCount);
     }
 

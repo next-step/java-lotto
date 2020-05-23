@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoNumberResultTest {
+class LottoNumbersResultTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumberAndWinnerNumbers")

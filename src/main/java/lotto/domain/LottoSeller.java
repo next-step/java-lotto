@@ -47,7 +47,7 @@ public class LottoSeller {
              throw new IllegalArgumentException();
          }
 
-         if (winnerNumbers.size() != LottoNumber.LOTTO_SIZE) {
+         if (winnerNumbers.size() != LottoNumbers.LOTTO_SIZE) {
              throw new IllegalArgumentException();
          }
     }

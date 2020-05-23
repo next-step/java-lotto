@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumbers {
     public final static List<Integer> LOTTO_NUMBERS;
     public final static int LOTTO_SIZE;
 
@@ -16,6 +16,6 @@ public class LottoNumber {
         LOTTO_SIZE = 6;
     }
 
-    private LottoNumber() {
+    private LottoNumbers() {
     }
 }

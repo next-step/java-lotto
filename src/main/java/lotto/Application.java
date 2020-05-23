@@ -15,8 +15,8 @@ public class Application {
 
         LottoSeller lottoSeller = new LottoSeller(buyLottoAmount);
         List<LottoNumberResult> lottoNumbers = lottoSeller.buyLotto(new AutoLottoNumberGenerator(),
-                LottoNumber.LOTTO_NUMBERS,
-                LottoNumber.LOTTO_SIZE);
+                LottoNumbers.LOTTO_NUMBERS,
+                LottoNumbers.LOTTO_SIZE);
 
         // 개수 출력 및 번호 출력
         OutputView.outputBuyCount(lottoNumbers.size());

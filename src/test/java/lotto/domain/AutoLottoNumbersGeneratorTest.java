@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AutoLottoNumberGeneratorTest {
+class AutoLottoNumbersGeneratorTest {
 
     private LottoNumberGenerator lottoNumberGenerator;
 
@@ -34,7 +34,7 @@ class AutoLottoNumberGeneratorTest {
 
     private static Stream<Arguments> provideLottoNumbers() {
         return Stream.of(
-                Arguments.of(LottoNumber.LOTTO_NUMBERS, LottoNumber.LOTTO_SIZE)
+                Arguments.of(LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE)
         );
     }
 }
