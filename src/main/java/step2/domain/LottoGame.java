@@ -24,7 +24,7 @@ public class LottoGame {
   }
 
   public Stream<Lotto> stream () {
-    return this.lottoList.stream();
+    return lottoList.stream();
   }
 
   public void setWinningNumber (Lotto winningLotto) {
@@ -32,14 +32,14 @@ public class LottoGame {
   }
 
   public long getWinningCount (int same) {
-    return this.stream().filter(lotto -> Lotto.getSames(lotto, winningLotto) == same).count();
+    return stream().filter(lotto -> getSames(lotto, winningLotto) == same).count();
   }
 
   public double getPayoff () {
     long payoff = Arrays.stream(winningPrize)
                         .map(v -> v.getPrice() * getWinningCount(v.getSame()))
                         .reduce(0L, Math::addExact);
-    return payoff / (double)this.stream().count();
+    return payoff / (double) stream().count();
   }
 
   public WinningPrice[] getWinningPrize() {
@@ -48,5 +48,10 @@ public class LottoGame {
 
   public static LottoGame of (int price) {
     return new LottoGame(price);
+  }
+
+  public static long getSames (Lotto lotto1, Lotto lotto2) {
+    List<Integer> numbers = lotto2.stream().collect(Collectors.toList());
+    return lotto1.stream().filter(numbers::contains).count();
   }
 }
