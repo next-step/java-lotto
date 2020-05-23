@@ -6,10 +6,10 @@ import java.util.stream.Stream;
 
 public class Lotto {
 
-  private static final List<Integer> numbers = Arrays.stream(new int[99])
-                                                     .map(v -> v + 1)
-                                                     .boxed()
-                                                     .collect(Collectors.toList());
+  private static final List<Integer> numbers = new ArrayList<>();
+  static {
+    for (int i = 1; i < 51; i++) numbers.add(i);
+  }
 
   private final List<Integer> lottoNumbers;
 
@@ -23,7 +23,9 @@ public class Lotto {
 
   public static Lotto of () {
     Collections.shuffle(numbers);
-    return of(numbers.stream().limit(6L).collect(Collectors.toList()));
+    List<Integer> lottoNumber = numbers.stream().limit(6L).collect(Collectors.toList());
+    lottoNumber.sort((a, b) -> a - b);
+    return of(lottoNumber);
   }
 
   public static Lotto of (List<Integer> numbers) {
