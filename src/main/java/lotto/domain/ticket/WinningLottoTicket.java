@@ -4,6 +4,8 @@ import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.exception.ErrorMessage;
 
+import java.util.List;
+
 public class WinningLottoTicket extends LottoTicket {
 
     private LottoNumber bonusNumber;
@@ -13,7 +15,7 @@ public class WinningLottoTicket extends LottoTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningLottoTicket valueOf(final String winningNumbers, final int bonusNumber) {
+    public static WinningLottoTicket valueOf(final List<LottoNumber> winningNumbers, final int bonusNumber) {
         LottoNumbers lottoNumbers = LottoNumbers.manualCreate(winningNumbers);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
         validateDuplication(lottoNumbers, bonusLottoNumber);

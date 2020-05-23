@@ -2,12 +2,14 @@ package lotto.domain.number;
 
 import lotto.exception.ErrorMessage;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private static final String LOTTO_NUMBER_DELIMITER = ",";
     public static final int LOTTO_NUMBER_SIZE = 6;
 
     private Set<LottoNumber> numbers;
@@ -24,13 +26,8 @@ public class LottoNumbers {
         return new LottoNumbers(LottoNumbersGenerator.generate());
     }
 
-    public static LottoNumbers manualCreate(final String numbers) {
-        validateNumbers(numbers);
-        return new LottoNumbers(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()));
+    public static LottoNumbers manualCreate(final List<LottoNumber> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers);
     }
 
     private void validateNumbers(final List<LottoNumber> numbers) {
