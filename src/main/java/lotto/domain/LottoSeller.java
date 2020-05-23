@@ -25,7 +25,8 @@ public class LottoSeller {
 
     public List<LottoNumberResult> buyLotto(LottoNumberGenerator lottoNumberGenerator, List<Integer> allLottoNumber, int size) {
         List<LottoNumberResult> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < Math.ceil(this.price / LOTTO_PRICE); i++) {
+        int purchaseCount = (int) Math.ceil(this.price / LOTTO_PRICE);
+        for (int i = 0; i < purchaseCount; i++) {
             List<Integer> lottoNumber = lottoNumberGenerator.generateLottoNumber(allLottoNumber, size);
             lottoNumbers.add(new LottoNumberResult(lottoNumber));
         }
