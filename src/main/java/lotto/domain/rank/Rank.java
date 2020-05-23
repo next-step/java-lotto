@@ -29,6 +29,10 @@ public enum Rank {
         return price;
     }
 
+    public int getMatchNumber() {
+        return matchNumber;
+    }
+
     public static Rank create(int matchNumber, boolean bonusMatch) {
         Optional<Rank> candidateRank = Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchNumber == matchNumber)
@@ -43,17 +47,5 @@ public enum Rank {
 
     public boolean isSecond() {
         return this.equals(SECOND);
-    }
-
-    @Override
-    public String toString() {
-        return matchNumber + "개 일치" + secondAppender() + "(" + price + "원)";
-    }
-
-    private String secondAppender() {
-        if (price == 30_000_000L) {
-            return ", 보너스 볼 일치";
-        }
-        return " ";
     }
 }

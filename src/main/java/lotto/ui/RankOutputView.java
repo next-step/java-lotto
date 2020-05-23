@@ -16,10 +16,19 @@ public class RankOutputView {
     }
 
     protected String getIndividualStatistics(Rank rank) {
-        return rank.toString() +
+        return rank.getMatchNumber() +
+                "개 일치" +
+                secondAppender(rank) +
+                "(" +
+                rank.getPrice() +
+                "원)" +
                 "- " +
                 ranks.getCount(rank) +
                 "개";
+    }
+
+    private String secondAppender(Rank rank) {
+        return rank.isSecond() ? ", 보너스 볼 일치" : " ";
     }
 
     public String getTotalStatistics() {
