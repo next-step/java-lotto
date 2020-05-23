@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DisplayName("CustomSplitter 클래스 테스트")
 public class CustomSplitterTest {
+    private final String input = "//;\n1;2;3";
     CustomSplitter customSplitter;
 
     @BeforeEach
@@ -19,13 +20,19 @@ public class CustomSplitterTest {
     @DisplayName("커스텀 구분자로 문자열을 분리할 수 있다.")
     @Test
     void split() {
-        String input = "//;\n1;2;3";
-
         String[] actual = customSplitter.split(input);
 
         assertAll(
                 () -> assertThat(actual).contains("1"),
                 () -> assertThat(actual).hasSize(3)
         );
+    }
+
+    @DisplayName("커스텀 구분자로 문자열을 분리 가능 여부를 확인할 수 있다.")
+    @Test
+    void isSupport() {
+        boolean actual = customSplitter.isSupport(input);
+
+        assertThat(actual).isEqualTo(true);
     }
 }
