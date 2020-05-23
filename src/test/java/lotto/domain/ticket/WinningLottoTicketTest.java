@@ -18,7 +18,7 @@ public class WinningLottoTicketTest {
     @DisplayName("WinningLottoTicket 생성")
     @Test
     void create() {
-        assertThatCode(() -> WinningLottoTicket.of("1, 2, 3, 4, 5, 6"))
+        assertThatCode(() -> WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6"))
                 .doesNotThrowAnyException();
     }
 
@@ -49,7 +49,7 @@ public class WinningLottoTicketTest {
     @ParameterizedTest
     @CsvSource({ "1,true", "7,false" })
     void contains(int number, final boolean expected) {
-        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         assertThat(winningLottoTicket.lottoNumbers.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
     }
