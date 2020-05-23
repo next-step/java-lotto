@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -18,7 +19,7 @@ public class WinningLottoTicketTest {
     @DisplayName("WinningLottoTicket 생성")
     @Test
     void create() {
-        assertThatCode(() -> WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6"))
+        assertThatCode(() -> WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7))
                 .doesNotThrowAnyException();
     }
 
@@ -48,9 +49,17 @@ public class WinningLottoTicketTest {
     @DisplayName("특정 숫자가 티켓에 포함되어 있으면 true 를 반환")
     @ParameterizedTest
     @CsvSource({ "1,true", "7,false" })
-    void contains(int number, final boolean expected) {
+    void contains(final int number, final boolean expected) {
         final WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         assertThat(winningLottoTicket.lottoNumbers.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
+    }
+
+    @DisplayName("보너스 볼이 기존의 당첨 번호와 중복되면 예외 반환")
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2 })
+    void duplicatedBonusNumber(final int bonusNumber) {
+        assertThatIllegalArgumentException().isThrownBy(() ->
+                WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", bonusNumber));
     }
 }
