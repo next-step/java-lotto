@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,7 +32,7 @@ public class LottoGame {
         this.lottoNumbersGroup = Stream.generate(LottoNumbersFactory::createLottoNumbers)
                 .limit(this.purchaseCount)
                 .collect(Collectors.toList());
-        return this.lottoNumbersGroup;
+        return new ArrayList<>(this.lottoNumbersGroup);
     }
 
     public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers) {
