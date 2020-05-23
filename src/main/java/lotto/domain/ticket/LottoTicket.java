@@ -27,7 +27,9 @@ public class LottoTicket {
 
     public Prize matchPrize(final WinningLottoTicket winningLottoTicket) {
         int matchCount = lottoNumbers.matchCount(winningLottoTicket.lottoNumbers);
-        return Prize.of(matchCount);
+        boolean hasBonusNumber =  lottoNumbers.contains(winningLottoTicket.getBonusNumber());
+
+        return Prize.of(matchCount, hasBonusNumber);
     }
 
     public List<Integer> getLottoNumbersAsInt() {
