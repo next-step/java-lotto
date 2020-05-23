@@ -31,14 +31,14 @@ public class LottoSeller {
     }
 
     private List<LottoLine> createAutoLottoLines(int autoCount) {
-        return Stream.generate(() -> new LottoLine(lottoNumsGenerator.generate()))
+        return Stream.generate(() -> new LottoLine(lottoNumsGenerator.generate(), true))
             .limit(autoCount)
             .collect(Collectors.toList());
     }
 
     private List<LottoLine> createManualLottoLines(List<LottoNums> manualLottoNums) {
         return manualLottoNums.stream()
-            .map(lottoNums -> new LottoLine(lottoNums))
+            .map(lottoNums -> new LottoLine(lottoNums, false))
             .collect(Collectors.toList());
     }
 

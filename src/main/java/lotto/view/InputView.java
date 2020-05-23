@@ -27,9 +27,8 @@ public class InputView {
         try {
             count = Integer.parseInt(scanner.nextLine().trim());
             if(count < 0){
-               throw new  NumberFormatException();
+               throw new NumberFormatException();
             }
-
         }catch (NumberFormatException e){
             System.out.println("입력을 확인해주세요.");
             return requestManualNumsList();

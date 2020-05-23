@@ -8,7 +8,8 @@ import lotto.domain.Rank;
 public class OutputView {
 
     public static void printLottos(List<LottoLine> lottoLines) {
-        System.out.println(String.format("\n%d개를 구매했습니다.", lottoLines.size()));
+        long autoLottoLineCount = lottoLines.stream().filter(lottoLine -> lottoLine.isAuto()).count();
+        System.out.println(String.format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.",lottoLines.size() - autoLottoLineCount, autoLottoLineCount ));
         lottoLines.forEach(lottoLine -> printLotto(lottoLine));
         System.out.println();
     }
