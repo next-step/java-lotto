@@ -23,4 +23,6 @@
     - [X] 음수 값이 전달되는 경우 RuntiemException 예외를 throw 할 수 있다.    
 - StringCalculator
     - [X] 문자열 숫자의 합을 구할 수 있다.
+- Main
     - [X] 숫자 이외의 값이 전달되는 경우 RuntiemException 예외를 throw 할 수 있다.
+    - [X] 빈 문자열 또는 null 값을 입력할 경우 0을 반환할 수 있따.
