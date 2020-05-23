@@ -43,17 +43,19 @@ public class ResultView {
 
         result.getMatchedPrizes()
                 .keySet()
-                .forEach(prize -> {
-                        String format = PRIZE_RESULT_INFO_FORMAT;
-                        if (prize.equals(Prize.SECOND)) {
-                            format = SECOND_PRIZE_RESULT_INFO_FORMAT;
-                        }
-                        System.out.println(String.format(format,
-                                prize.getMatchedNumbersCount(),
-                                prize.getPrizeMoney(),
-                                result.getMatchedTicketCount(prize)));
-                    }
-                );
+                .forEach(prize -> printPrizeResult(result, prize));
+    }
+
+    private static void printPrizeResult(final LottoPrizeResult result, final Prize prize) {
+        String format = PRIZE_RESULT_INFO_FORMAT;
+        if (prize.equals(Prize.SECOND)) {
+            format = SECOND_PRIZE_RESULT_INFO_FORMAT;
+        }
+
+        System.out.println(String.format(format,
+                prize.getMatchedNumbersCount(),
+                prize.getPrizeMoney(),
+                result.getMatchedTicketCount(prize)));
     }
 
     private static void printProfitRate(final float profitRate) {
