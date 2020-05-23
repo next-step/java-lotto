@@ -1,33 +1,36 @@
 package domain;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import utils.StringUtils;
+import utils.ValidationUtils;
 
 public class StringAddCalculator {
 
 	public static int splitAndSum(String operationTargetString) {
-		if(operationTargetString == null || operationTargetString.isEmpty()) {
+		
+		if(checkEmpty(operationTargetString)) {
 			return 0;
 		}
-		String[] operationTargets = null;
-		int result = 0;
-		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(operationTargetString);
-		if (m.find()) {
-		    String customDelimiter = m.group(1);
-		    operationTargets= m.group(2).split(customDelimiter);
-		    // 덧셈 구현
-		}
-
-		if (operationTargets == null) {
-			operationTargets = operationTargetString.split(":|,");
-		}
 		
+		String[] operationTargets = OperatorSplitter.split(operationTargetString);
+		
+		return calculate(operationTargets);
+	}
+
+	private static int calculate(String[] operationTargets) {
+		int result = 0;
 		for(String inputValue : operationTargets) {
-			if(Integer.parseInt(inputValue) < 0) {
-				throw new RuntimeException();
-			}
-			result += Integer.parseInt(inputValue);
+			int targetValue = StringUtils.parseInt(inputValue);
+			result += ValidationUtils.checkNegativeValue(targetValue);
 		}
 		return result;
+	}
+
+
+
+	private static boolean checkEmpty(String operationTargetString) {
+		if(operationTargetString == null || operationTargetString.isEmpty()) {
+			return true;
+		}
+		return false;
 	}
 }
