@@ -41,6 +41,6 @@ public class Price {
     }
 
     public boolean isExceedCount(final int ticketCount) {
-        return this.ticketCount() >= ticketCount;
+        return this.ticketCount() < ticketCount;
     }
 }
