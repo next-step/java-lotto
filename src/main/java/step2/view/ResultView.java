@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class ResultView {
 
-  public static ResultView instance;
-  public final WinningPrice[] winningPrize = {
+  private static ResultView instance;
+  private final WinningPrice[] winningPrize = {
     WinningPrice.of(5000, 3),
     WinningPrice.of(50000, 4),
     WinningPrice.of(1500000, 5),
@@ -26,6 +26,10 @@ public class ResultView {
             .collect(Collectors.joining("\n"))
       + "\n"
     );
+  }
+
+  public void printLottoCount (LottoGame lottoGame) {
+    System.out.printf("%d개를 구매했습니다.\n", lottoGame.stream().count());
   }
 
   public void printStat (LottoGame lottoGame) {
