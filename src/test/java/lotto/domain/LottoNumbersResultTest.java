@@ -15,18 +15,15 @@ class LottoNumbersResultTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoNumberAndWinnerNumbers")
-    @DisplayName("로또 번호 당첨 개수 테스트")
+    @DisplayName("로또 번호 당첨 결과 테스트")
     void calculateLottoMatchNumber(List<Integer> lottoNumber, List<Integer> winners, int matchCount) {
         LottoNumberResult lottoNumberResult = this.createLottoNumber(lottoNumber);
-        int count = lottoNumberResult.calculateMatchCount(winners);
-        assertThat(count).isEqualTo(matchCount);
+        LottoMatcher lottoMatcher = lottoNumberResult.findLottoMatchResult(winners);
+        assertThat(lottoMatcher.getMatchingCount()).isEqualTo(matchCount);
     }
 
     private static Stream<Arguments> provideLottoNumberAndWinnerNumbers() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12), 0),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(6, 7, 8, 9, 10, 11), 1),
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(5, 6, 7, 8, 9, 10), 2),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(4, 5, 6, 7, 8, 9), 3),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(3, 4, 5, 6, 7, 8), 4),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(2, 3, 4, 5, 6, 7), 5),

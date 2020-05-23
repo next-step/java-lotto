@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoSeller {
+public class LottoShop {
     private final static int LOTTO_PRICE = 1000;
     private final int DECIMAL_POINT = 2;
 
     private int price;
 
-    public LottoSeller(int price) {
+    public LottoShop(int price) {
         this.validatePrice(price);
         this.price = price;
     }
@@ -31,26 +31,6 @@ public class LottoSeller {
             lottoNumbers.add(new LottoNumberResult(lottoNumber));
         }
         return lottoNumbers;
-    }
-
-    public List<LottoMatcher> matchLottoRanking(List<Integer> winnerNumbers, List<LottoNumberResult> lottoNumberResults) {
-        this.validateWinnerNumbers(winnerNumbers);
-
-        return lottoNumberResults.stream()
-                .map(lottoNumberResult -> lottoNumberResult.calculateMatchCount(winnerNumbers))
-                .map(lottoNumberResult -> LottoMatcher.findRanking(lottoNumberResult))
-                .filter(lottoMatcher -> null != lottoMatcher)
-                .collect(Collectors.toList());
-    }
-
-    private void validateWinnerNumbers(List<Integer> winnerNumbers) {
-         if (Objects.isNull(winnerNumbers)) {
-             throw new IllegalArgumentException();
-         }
-
-         if (winnerNumbers.size() != LottoNumbers.LOTTO_SIZE) {
-             throw new IllegalArgumentException();
-         }
     }
 
     public BigDecimal calculateEarningsRate(List<LottoMatcher> lottoMatchers) {

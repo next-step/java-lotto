@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoSellerTest {
+class LottoShopTest {
 
-    private LottoSeller createLottoSeller(int price) {
-        return new LottoSeller(price);
+    private LottoShop createLottoSeller(int price) {
+        return new LottoShop(price);
     }
 
     private LottoNumberGenerator createAutoLottoNumberGenerator() {
@@ -44,10 +44,11 @@ class LottoSellerTest {
     @MethodSource("provideNotValidWinner")
     @DisplayName("지난 주 당첨 번호가 6개가 아닌경우 Exception")
     void validateNotValidWinner(List<Integer> winners) {
-        LottoSeller lottoSeller = this.createLottoSeller(1000);
-        List<LottoNumberResult> lottoNumberResults = lottoSeller.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
-        assertThatThrownBy(() -> lottoSeller.matchLottoRanking(winners, lottoNumberResults))
-                .isInstanceOf(IllegalArgumentException.class);
+        LottoShop lottoShop = this.createLottoSeller(1000);
+        List<LottoNumberResult> lottoNumberResults = lottoShop.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
+        assertThatThrownBy(() -> lottoNumberResults.stream()
+                .forEach(lottoNumberResult -> lottoNumberResult.findLottoMatchResult(winners))
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> provideNotValidWinner() {
@@ -64,8 +65,8 @@ class LottoSellerTest {
     @MethodSource("providePurchaseAmountAndLottoCount")
     @DisplayName("로또 발급 테스트")
     void buyLottoTest(int price, int lottoCount) {
-        LottoSeller lottoSeller = this.createLottoSeller(price);
-        List<LottoNumberResult> lottoNumberResults = lottoSeller.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
+        LottoShop lottoShop = this.createLottoSeller(price);
+        List<LottoNumberResult> lottoNumberResults = lottoShop.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
         assertThat(lottoNumberResults).hasSize(lottoCount);
     }
 
@@ -81,8 +82,8 @@ class LottoSellerTest {
     @MethodSource("providePriceAndLottoMatchers")
     @DisplayName("수익률 테스트")
     void calculateEarningsRateTest(int price, List<LottoMatcher> lottoMatchers, double earningRate) {
-        LottoSeller lottoSeller = this.createLottoSeller(price);
-        BigDecimal result = lottoSeller.calculateEarningsRate(lottoMatchers);
+        LottoShop lottoShop = this.createLottoSeller(price);
+        BigDecimal result = lottoShop.calculateEarningsRate(lottoMatchers);
         assertThat(result.doubleValue()).isEqualTo(earningRate);
     }
 
@@ -101,8 +102,8 @@ class LottoSellerTest {
     @MethodSource("provideLottoNumbers")
     @DisplayName("생성된 로또 번호 테스트")
     void verifyLottoNumbers(List<Integer> lottoNumber) {
-        LottoSeller lottoSeller = this.createLottoSeller(1000);
-        List<LottoNumberResult> result = lottoSeller.buyLotto(new FakeAutoLottoNumberGenerator(lottoNumber), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
+        LottoShop lottoShop = this.createLottoSeller(1000);
+        List<LottoNumberResult> result = lottoShop.buyLotto(new FakeAutoLottoNumberGenerator(lottoNumber), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
         assertThat(result.get(0).toString()).isEqualTo(lottoNumber.toString());
     }
 
