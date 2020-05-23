@@ -1,6 +1,7 @@
 package calculator.domain.calculator;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,5 +24,16 @@ class NumberTest {
     @ValueSource(strings = {"-1", "-10000"})
     void inputValueIsNegative (String input) {
         assertThatThrownBy(() -> new Number(input)).isInstanceOf(NegativeInputException.class);
+    }
+
+    @DisplayName("Number 객체 2개를 전달 받아 더한 후 새로운 Number 객체를 생성할 수 있다.")
+    @Test
+    void add () {
+        Number number1 = new Number(1);
+        Number number2 = new Number(2);
+
+        Number actual = Number.add(number1, number2);
+
+        assertThat(actual.getNumber()).isEqualTo(3);
     }
 }
