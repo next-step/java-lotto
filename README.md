@@ -130,8 +130,9 @@
 - [X] Rank Calculator에서 getter 사용하는 부분을 객체 간 메시지 전달로 개선하기
 
 ### 2차 리뷰 반영
-- [ ] LottoTicket 코드 컨벤션에 맞게 수정하기
-- [ ] RankCalculator에 아직 존재하는 getter 메시지 전달로 개선
+- [X] LottoTicket 코드 컨벤션에 맞게 수정하기
+- [X] RankCalculator에 아직 존재하는 getter 메시지 전달로 개선
+    - 구현 시 최대한 getter를 자제하고 일단 해당 객체에 전달할 수 있는 메시지가 있는지 확인하는 습관을 들이자
 - [ ] 구매 가능한 로또의 수를 일급 객체로 만든 Money에서 계산하도록 개선
 - [ ] LottoTicket 생성 시 아예 정렬된 상태로 생성되도록 변경
 - [ ] 사용하지 않는 메서드 제거

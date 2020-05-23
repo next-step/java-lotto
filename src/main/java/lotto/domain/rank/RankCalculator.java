@@ -15,7 +15,7 @@ public class RankCalculator {
     }
 
     private void bonusNumberValidation(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if (lottoTicket.getValues().contains(bonusNumber)) {
+        if (lottoTicket.isInThisTicket(bonusNumber)) {
             throw new BonusNumberDuplicatedWithLottoTicket("Bonus number cannot duplicated with win ticket numbers");
         }
     }
