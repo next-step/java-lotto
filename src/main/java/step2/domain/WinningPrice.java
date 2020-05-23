@@ -1,29 +1,31 @@
 package step2.domain;
 
-public class WinningPrice {
+import java.util.stream.Stream;
 
-  public static final int FIRST = 2000000000;
-  public static final int SECOND = 1500000;
-  public static final int THIRD = 50000;
-  public static final int FORTH = 5000;
+public enum WinningPrice {
 
-  private final int price;
-  private final int same;
+  FIRST(2000000000, 6),
+  SECOND(1500000, 5),
+  THIRD(50000, 4),
+  FORTH(5000, 3);
 
-  private WinningPrice (int price, int same) {
+  private int price;
+  private int same;
+
+  WinningPrice (int price, int same) {
     this.price = price;
     this.same = same;
   }
 
-  public int getPrice () {
-    return this.price;
+  public int getPrice() {
+    return price;
   }
 
-  public int getSame () {
-    return this.same;
+  public int getSame() {
+    return same;
   }
 
-  public static WinningPrice of (int price, int same) {
-    return new WinningPrice(price, same);
+  public static Stream<WinningPrice> stream () {
+    return Stream.of(FORTH, THIRD, SECOND, FIRST);
   }
 }

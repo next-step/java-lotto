@@ -11,12 +11,6 @@ public class LottoGame {
 
   private final List<Lotto> lottoList;
   private Lotto winningLotto;
-  private final WinningPrice[] winningPrize = {
-    WinningPrice.of(WinningPrice.FORTH, 3),
-    WinningPrice.of(WinningPrice.THIRD, 4),
-    WinningPrice.of(WinningPrice.SECOND, 5),
-    WinningPrice.of(WinningPrice.FIRST, 6)
-  };
 
   private LottoGame(List<Lotto> lottoList) {
     this.lottoList = lottoList;
@@ -35,14 +29,10 @@ public class LottoGame {
   }
 
   public double getPayoff () {
-    long payoff = Arrays.stream(winningPrize)
-                        .map(v -> v.getPrice() * getWinningCount(v.getSame()))
-                        .reduce(0L, Math::addExact);
+    long payoff = WinningPrice.stream()
+                              .map(v -> v.getPrice() * getWinningCount(v.getSame()))
+                              .reduce(0L, Math::addExact);
     return payoff / (double) (stream().count() * 1000);
-  }
-
-  public WinningPrice[] getWinningPrize() {
-    return winningPrize;
   }
 
   public static LottoGame of (int price) {

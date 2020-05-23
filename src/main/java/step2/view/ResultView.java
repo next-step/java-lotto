@@ -24,15 +24,17 @@ public class ResultView {
   }
 
   public void printStat (LottoGame lottoGame) {
+    String headFormat = "\n당첨 통계\n---------\n%s\n";
+    String bodyFormat = "%d개 일치 (%d원)- %d개";
     System.out.printf(
-      "\n당첨 통계\n---------\n%s\n",
-      Arrays.stream(lottoGame.getWinningPrize())
-            .map(winningPrice -> String.format(
-                "%d개 일치 (%d원)- %d개",
-                winningPrice.getSame(),
-                winningPrice.getPrice(),
-                lottoGame.getWinningCount(winningPrice.getSame())))
-            .collect(Collectors.joining("\n"))
+      headFormat,
+      WinningPrice.stream()
+                  .map(winningPrice -> String.format(
+                      bodyFormat,
+                      winningPrice.getSame(),
+                      winningPrice.getPrice(),
+                      lottoGame.getWinningCount(winningPrice.getSame())))
+                  .collect(Collectors.joining("\n"))
     );
   }
 
