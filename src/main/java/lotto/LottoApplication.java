@@ -23,7 +23,7 @@ public class LottoApplication {
         LottoSeller seller = LottoSeller.newInstance();
         LottoTickets tickets = seller.buyTicket(price);
 
-        ResultView.printPurchaseInfo(LottoTicketDto.from(tickets));
+        ResultView.printPurchaseInfo(manualTicketsCount, LottoTicketDto.from(tickets));
 
         List<LottoNumber> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
