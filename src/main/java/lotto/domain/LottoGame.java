@@ -35,11 +35,12 @@ public class LottoGame {
         return new ArrayList<>(this.lottoNumbersGroup);
     }
 
-    public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers) {
+    public LottoMatchResult calculateMatchCount(LottoNumbers lastWinLottoNumbers, int bonusNumber) {
         LottoMatchResult lottoMatchResult = LottoMatchResult.newInstance();
 
         this.lottoNumbersGroup.forEach(lottoNumbers -> {
-            LottoMatch lottoMatch = LottoMatch.findByCount(lottoNumbers.getMatchCount(lastWinLottoNumbers));
+            LottoMatch lottoMatch = LottoMatch.findByCount(lottoNumbers.getMatchCount(lastWinLottoNumbers),
+                    lottoNumbers.isMatchNumber(bonusNumber));
             lottoMatchResult.increaseMatchCount(lottoMatch);
         });
 
