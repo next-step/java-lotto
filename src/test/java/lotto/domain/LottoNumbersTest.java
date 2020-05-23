@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -73,5 +74,12 @@ class LottoNumbersTest {
 
         assertThat(nonDuplicateNumbers).isNotNull();
         assertThat(nonDuplicateNumbers).hasSize(6);
+    }
+
+    @DisplayName("로또 번호에 특정 번호가 포함되어 있는지 알 수 있다.")
+    @ParameterizedTest
+    @ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7 })
+    void canContainsMatchNumber(int lottoNumber) {
+        assertThat(this.lottoNumbers.isMatchNumber(lottoNumber)).isEqualTo(lottoNumber <= 6);
     }
 }
