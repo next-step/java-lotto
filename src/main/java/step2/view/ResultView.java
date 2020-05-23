@@ -2,6 +2,7 @@ package step2.view;
 
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import step2.domain.Lottos;
+import step2.domain.WinningPrice;
 
 import java.util.Arrays;
 
