@@ -1,6 +1,6 @@
 package lotto;
 
-import java.util.List;
+import lotto.domain.LottoNum;
 import lotto.domain.LottoNums;
 import lotto.domain.LottoPaper;
 import lotto.domain.LottoSeller;
@@ -17,11 +17,9 @@ public class LottoCustomer {
 
         OutputView.printLottos(lottoPaper.getLottoLines());
 
-        List<Integer> winNums = InputView.requestNums();
+        LottoNums lottoNums = LottoNums.of(InputView.requestNums());
 
-        LottoNums lottoNums = LottoNums.of(winNums);
-
-        OutputView.printLottoResult(lottoPaper.getResult(lottoNums, price));
+        OutputView.printLottoResult(lottoPaper.getResult(lottoNums, new LottoNum(InputView.requestBonusNum()),price));
     }
 
 }

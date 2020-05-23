@@ -27,6 +27,10 @@ public class LottoNums {
             .count();
     }
 
+    public boolean isContain(LottoNum lottoNum){
+        return lottoNums.contains(lottoNum);
+    }
+
     private void validate(List<LottoNum> lottoNums) {
         if (lottoNums.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException("lotto has only six nums");

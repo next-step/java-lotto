@@ -6,19 +6,22 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 1_500_000),
-    THIRD(4, 50_000),
-    FOURTH(3, 5_000),
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000,false),
 
-    MISS(0, 0);
+    MISS(0, 0,false);
 
     private final int countOfMatch;
     private final int winningMoney;
+    private final boolean matchBonus;
 
-    private Rank(int countOfMatch, int winningMoney) {
+    private Rank(int countOfMatch, int winningMoney, boolean matchBonus) {
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+        this.matchBonus = matchBonus;
     }
 
     public int getCountOfMatch() {
@@ -29,13 +32,15 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueByCount(final int countOfMatch) {
+    public static Rank valueOf(int countOfMatch, boolean matchBonus) {
         return Stream.of(Rank.values())
-            .filter(rank -> rank.countOfMatch == countOfMatch)
+            .filter(
+                rank -> rank.countOfMatch == countOfMatch &&
+                    (rank.matchBonus ? matchBonus : true)
+            )
             .findFirst()
             .orElse(MISS);
     }
-
     public static List<Rank> rankValues() {
         return Arrays.asList(Rank.values()).stream()
             .filter(lottoMatch -> lottoMatch != Rank.MISS)
