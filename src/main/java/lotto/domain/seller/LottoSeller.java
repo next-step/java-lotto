@@ -1,8 +1,13 @@
 package lotto.domain.seller;
 
+import lotto.domain.number.LottoNumbers;
 import lotto.domain.price.Price;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.exception.AvailableCountExceedException;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoSeller {
 
@@ -15,7 +20,14 @@ public class LottoSeller {
 
     public LottoTickets buyTicket(final Price price, final LottoTickets manualTickets) {
         verifyAvailableCount(price, manualTickets.count());
-        return null;
+
+        LottoTickets autoTickets = LottoTickets.of(
+                Stream.generate(LottoNumbers::autoCreate)
+                    .limit(price.ticketCount() - manualTickets.count())
+                    .map(LottoTicket::of)
+                    .collect(Collectors.toList())
+        );
+        return manualTickets.merge(autoTickets);
     }
 
     private static void verifyAvailableCount(final Price price, final int manualTicketCount) {
