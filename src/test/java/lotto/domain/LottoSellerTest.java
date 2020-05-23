@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.fake.FakeAutoLottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -93,6 +94,23 @@ class LottoSellerTest {
                 Arguments.of(1000, Arrays.asList(LottoMatcher.FOURTH_PLACE), 5.00),
                 Arguments.of(10000, Arrays.asList(LottoMatcher.THIRD_PLACE), 5.00),
                 Arguments.of(10000, Arrays.asList(LottoMatcher.FOURTH_PLACE), 0.50)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideLottoNumbers")
+    @DisplayName("생성된 로또 번호 테스트")
+    void verifyLottoNumbers(List<Integer> lottoNumber) {
+        LottoSeller lottoSeller = this.createLottoSeller(1000);
+        List<LottoNumberResult> result = lottoSeller.buyLotto(new FakeAutoLottoNumberGenerator(lottoNumber), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
+        assertThat(result.get(0).toString()).isEqualTo(lottoNumber.toString());
+    }
+
+    private static Stream<Arguments> provideLottoNumbers() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                Arguments.of(Arrays.asList(45, 44, 43, 2, 4, 5)),
+                Arguments.of(Arrays.asList(23, 22, 43, 31, 18, 1, 9))
         );
     }
 }
