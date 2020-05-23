@@ -53,7 +53,7 @@ class LottoGameTest {
         lottoGame.createLottoNumbers();
 
         LottoNumbers winLottoNumbers = LottoNumbersFactory.createLottoNumbers();
-        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers);
+        LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers, 7);
 
         assertThat(lottoMatchResult).isNotNull();
     }
