@@ -61,8 +61,8 @@ public class PriceTest {
 
     private static Stream<Arguments> isExceedCount() {
         return Stream.of(
-                Arguments.of(Price.of(Price.ONE_TICKET_PRICE), 1, true),
-                Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 2), 5, false)
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE), 1, false),
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 2), 5, true)
         );
     }
 }
