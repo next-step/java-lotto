@@ -18,23 +18,23 @@
 #### LottoNumbers
 : 로또 숫자에 대한 일급 컬렉션 
 - [ ] Set<LottoNumber>의 값을 List<Integer> 로 구할 수 있다. 
-- [ ] 보너스 볼이 포함되어 있는지 확인할 수 있다. 
 
 #### LottoTicket
 : LottoNumbers 에 대한 Wrapping 클래스 
 - [ ] LottoNumbers 의 값을 List<Integer> 로 구할 수 있다. 
+- [x] 당첨 번호와 보너스 볼에 맞는 Prize 를 반환한다.
 
 #### LottoTickets
 : LottoTicket 에 대한 일급 컬렉션
 
 #### WinningLottoTicket
 : 로또 당첨 번호 
-- [ ] 당첨 번호와 보너스 볼을 지정할 수 있다.
-- [ ] 보너스 볼은 기존의 당첨 번호와 중복될 수 없다.
+- [x] 당첨 번호와 보너스 볼을 지정할 수 있다.
+- [x] 보너스 볼은 기존의 당첨 번호와 중복될 수 없다.
     
 #### Prize
 : 일치하는 개수에 대한 상금액 (당첨 개수별 상)
-- [ ] 5개가 일치하고 보너스 볼이 포함되어 있으면 2등을 반환한다.
+- [x] 5개가 일치하고 보너스 볼이 포함되어 있으면 2등을 반환한다.
 
 #### LottoPrizeResult
 : 당첨 개수에 일치하는 티켓의 개수를 관리 
@@ -56,7 +56,7 @@
 - [x] 보너스 볼을 입력받는다.
 
 #### ResultView
-- [ ] 당첨 통계에 2등도 추가한다. 
+- [x] 당첨 통계에 2등도 추가한다. 
 
 ### # C (Controller)
 #### LottoApplication
