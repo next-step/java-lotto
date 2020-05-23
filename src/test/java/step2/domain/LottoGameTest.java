@@ -2,11 +2,15 @@ package step2.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.exception.LottoGamePriceException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoGameTest {
 
@@ -16,5 +20,59 @@ public class LottoGameTest {
   void 구매_금액_검증_테스트 (int price) {
     assertThatExceptionOfType(LottoGamePriceException.class)
       .isThrownBy(() -> LottoGame.of(price));
+  }
+
+  @DisplayName("로또 당첨 수를 구하는 메소드 검증")
+  @ParameterizedTest
+  @MethodSource("provideWinningLottoCount")
+  void 로또_당첨수_테스트 (Lotto winning, Lotto lotto, long expected) {
+    assertThat(expected).isEqualTo(LottoGame.getSames(winning, lotto));
+  }
+
+  private static Stream<Arguments> provideWinningLottoCount () {
+    return Stream.of(
+      Arguments.of(Lotto.of("1,2,3,4,5,6"), Lotto.of("1,2,3,7,8,9"), 3),
+      Arguments.of(Lotto.of("1,2,3,4,5,6"), Lotto.of("1,2,3,4,5,6"), 6)
+    );
+  }
+
+  @DisplayName("로또 당첨 금액 검증 테스트")
+  @ParameterizedTest
+  @MethodSource("provideLottoGameAndWinningPrice")
+  void 로또_당첨_수익률_테스트 (LottoGame lottoGame, Lotto winning, String expected) {
+    lottoGame.setWinningNumber(winning);
+    assertThat(expected).isEqualTo(String.format("%.2f", lottoGame.getPayoff()));
+  }
+
+  private static Stream<Arguments> provideLottoGameAndWinningPrice () {
+    return Stream.of(
+      Arguments.of(
+        LottoGame.of(
+          Stream.of(
+            Lotto.of("1,2,3,4,5,6"),
+            Lotto.of("1,2,3,4,5,10"),
+            Lotto.of("1,2,3,4,20,10"),
+            Lotto.of("1,2,3,30,20,10")
+          ).collect(Collectors.toList())
+        ),
+        Lotto.of("1,2,3,4,5,6"),
+        String.format(
+          "%.2f",
+          (WinningPrice.FIRST + WinningPrice.SECOND + WinningPrice.THIRD + WinningPrice.FORTH) / 4000.0
+        )
+      ),
+      Arguments.of(
+        LottoGame.of(
+          Stream.of(
+            Lotto.of("1,2,3,4,5,6"),
+            Lotto.of("1,2,3,4,5,10"),
+            Lotto.of("1,2,3,4,20,10"),
+            Lotto.of("1,2,3,30,20,10")
+          ).collect(Collectors.toList())
+        ),
+        Lotto.of("11,12,13,14,15,16"),
+        "0.00"
+      )
+    );
   }
 }
