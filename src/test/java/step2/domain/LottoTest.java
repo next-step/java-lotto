@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class LottoTest {
 
-  @DisplayName("로또 번호가 6개인지 검증하는 테스트")
+  @DisplayName("로또 번호가 6개가 아닐경우 LottoCountException 발")
   @ParameterizedTest
   @MethodSource("provideLottoWrongNumbers")
   void 로또_번호_갯수_검증 (List<Integer> lottoNumbers) {
@@ -32,7 +32,7 @@ public class LottoTest {
     );
   }
 
-  @DisplayName("로또 번호의 중복 여부를 검사")
+  @DisplayName("로또 번호에 중복이 있을 경우 LottoReduplicateException 발생")
   @ParameterizedTest
   @MethodSource("provideReduplicateLottoNumbers")
   void 로또_번호_중복_검증 (List<Integer> lottoNumbers) {
