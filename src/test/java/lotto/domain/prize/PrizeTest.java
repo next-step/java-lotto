@@ -16,19 +16,20 @@ public class PrizeTest {
     @DisplayName("일치하는 개수에 맞는 Prize 객체를 반환")
     @ParameterizedTest
     @MethodSource
-    void matchedPrize(final int matchedCount, final Prize expected) {
-        assertThat(Prize.of(matchedCount)).isEqualTo(expected);
+    void matchedPrize(final int matchedCount, final boolean matchBonus, final Prize expected) {
+        assertThat(Prize.of(matchedCount, matchBonus)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> matchedPrize() {
         return Stream.of(
-                Arguments.of(0, Prize.MISS),
-                Arguments.of(1, Prize.MISS),
-                Arguments.of(2, Prize.MISS),
-                Arguments.of(3, Prize.FIFTH),
-                Arguments.of(4, Prize.FOURTH),
-                Arguments.of(5, Prize.THIRD),
-                Arguments.of(6, Prize.FIRST)
+                Arguments.of(0, false, Prize.MISS),
+                Arguments.of(1, false, Prize.MISS),
+                Arguments.of(2, false, Prize.MISS),
+                Arguments.of(3, true, Prize.FIFTH),
+                Arguments.of(4, false, Prize.FOURTH),
+                Arguments.of(5, false, Prize.THIRD),
+                Arguments.of(5, true, Prize.SECOND),
+                Arguments.of(6, false, Prize.FIRST)
         );
     }
 
@@ -37,6 +38,6 @@ public class PrizeTest {
     @ValueSource(ints = { Prize.MIN_MATCHED_COUNT - 1, Prize.MAX_MATCHED_COUNT + 1})
     void matchedPrizeFailure(final int matchedNumbersCount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> Prize.of(matchedNumbersCount));
+                .isThrownBy(() -> Prize.of(matchedNumbersCount, false));
     }
 }
