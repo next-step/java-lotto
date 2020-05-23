@@ -25,5 +25,4 @@ public class StringExpressionConverter {
         return Arrays.asList(pureExpression.split(BasicDelimiter.convertToRegex()));
     }
 
-
 }

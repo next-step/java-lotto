@@ -3,6 +3,9 @@ package stringcalculator.domain;
 public class StringAddCalculator {
     private static final int INITIAL_RESULT_VALUE = 0;
 
+    private StringAddCalculator() {
+    }
+
     public static long execute(final String expression) {
         if (isNullOrEmpty(expression)) {
             return INITIAL_RESULT_VALUE;
