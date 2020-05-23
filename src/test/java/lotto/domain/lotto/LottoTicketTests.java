@@ -39,7 +39,7 @@ class LottoTicketTests {
                 .isInstanceOf(LottoTicketSizeException.class);
     }
 
-    @DisplayName("사이드 이펙트가 없어야 한다")
+    @DisplayName("객체 생성시 전달 된 컬렉션 레퍼런스에 변경이 발생해도 일급 콜렉션 내부의 상태값이 변하지 않는다.")
     @Test
     void isSideEffectFreeTest() {
         LottoTicket lottoTicket = LottoTicket.create(values);
