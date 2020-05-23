@@ -18,4 +18,8 @@ public class Number {
             throw new NegativeInputException();
         }
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
