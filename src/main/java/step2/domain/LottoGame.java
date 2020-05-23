@@ -12,18 +12,14 @@ public class LottoGame {
   private final List<Lotto> lottoList;
   private Lotto winningLotto;
   private final WinningPrice[] winningPrize = {
-    WinningPrice.of(5000, 3),
-    WinningPrice.of(50000, 4),
-    WinningPrice.of(1500000, 5),
-    WinningPrice.of(2000000000, 6)
+    WinningPrice.of(WinningPrice.FORTH, 3),
+    WinningPrice.of(WinningPrice.THIRD, 4),
+    WinningPrice.of(WinningPrice.SECOND, 5),
+    WinningPrice.of(WinningPrice.FIRST, 6)
   };
 
-  private LottoGame(int price) {
-    validatePrice(price);
-    this.lottoList = Arrays.stream(new int[price / 1000])
-                           .boxed()
-                           .map(v -> Lotto.of())
-                           .collect(Collectors.toList());
+  private LottoGame(List<Lotto> lottoList) {
+    this.lottoList = lottoList;
   }
 
   public Stream<Lotto> stream () {
@@ -50,7 +46,15 @@ public class LottoGame {
   }
 
   public static LottoGame of (int price) {
-    return new LottoGame(price);
+    validatePrice(price);
+    return new LottoGame(Arrays.stream(new int[price / 1000])
+                               .boxed()
+                               .map(v -> Lotto.of())
+                               .collect(Collectors.toList()));
+  }
+
+  public static LottoGame of (List<Lotto> lottoList) {
+    return new LottoGame(lottoList);
   }
 
   public static long getSames (Lotto lotto1, Lotto lotto2) {
