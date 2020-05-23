@@ -8,7 +8,7 @@ import lotto.domain.Rank;
 public class OutputView {
 
     public static void printLottos(List<LottoLine> lottoLines) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoLines.size()));
+        System.out.println(String.format("\n%d개를 구매했습니다.", lottoLines.size()));
         lottoLines.forEach(lottoLine -> printLotto(lottoLine));
         System.out.println();
     }
