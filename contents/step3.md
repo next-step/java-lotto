@@ -17,11 +17,11 @@
 
 #### LottoNumbers
 : 로또 숫자에 대한 일급 컬렉션 
-- [ ] Set<LottoNumber>의 값을 List<Integer> 로 구할 수 있다. 
+- [x] Set<LottoNumber>의 값을 List<Integer> 로 구할 수 있다. 
 
 #### LottoTicket
 : LottoNumbers 에 대한 Wrapping 클래스 
-- [ ] LottoNumbers 의 값을 List<Integer> 로 구할 수 있다. 
+- [x] LottoNumbers 의 값을 List<Integer> 로 구할 수 있다. 
 - [x] 당첨 번호와 보너스 볼에 맞는 Prize 를 반환한다.
 
 #### LottoTickets
