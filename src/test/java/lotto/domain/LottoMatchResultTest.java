@@ -23,7 +23,7 @@ class LottoMatchResultTest {
         lottoGame.createLottoNumbers();
 
         LottoNumbers winLottoNumbers = LottoNumbers.newInstance(Arrays.asList(1, 2, 3, 4, 5, 6));
-        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers);
+        this.lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers, 7);
     }
 
     @DisplayName("당첨 개수를 1씩 증가할 수 있다.")
