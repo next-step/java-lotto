@@ -31,7 +31,7 @@ public class LottoSeller {
     }
 
     private static void verifyAvailableCount(final Price price, final int manualTicketCount) {
-        if (price.ticketCount() < manualTicketCount) {
+        if (price.isExceedCount(manualTicketCount)) {
             throw new AvailableCountExceedException();
         }
     }

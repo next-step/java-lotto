@@ -39,4 +39,8 @@ public class Price {
     public int ticketCount() {
         return price / ONE_TICKET_PRICE;
     }
+
+    public boolean isExceedCount(final int ticketCount) {
+        return this.ticketCount() >= ticketCount;
+    }
 }
