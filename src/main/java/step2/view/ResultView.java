@@ -10,37 +10,30 @@ import java.util.stream.Collectors;
 public class ResultView {
 
   private static ResultView instance;
-  private final WinningPrice[] winningPrize = {
-    WinningPrice.of(5000, 3),
-    WinningPrice.of(50000, 4),
-    WinningPrice.of(1500000, 5),
-    WinningPrice.of(2000000000, 6)
-  };
 
   private ResultView () { }
 
-  public void printLottos (LottoGame lottoGame) {
-    System.out.println(
+  public void printLottoGame (LottoGame lottoGame) {
+    System.out.printf(
+      "%d개를 구매했습니다.\n%s\n",
+      lottoGame.stream().count(),
       lottoGame.stream()
-            .map(ResultView::lottoToString)
-            .collect(Collectors.joining("\n"))
-      + "\n"
+               .map(ResultView::lottoToString)
+               .collect(Collectors.joining("\n"))
     );
   }
 
-  public void printLottoCount (LottoGame lottoGame) {
-    System.out.printf("%d개를 구매했습니다.\n", lottoGame.stream().count());
-  }
-
   public void printStat (LottoGame lottoGame) {
-    Arrays.stream(winningPrize)
-          .forEach(winningPrice -> System.out.printf(
-              "%d개 일치 (%d원)- %d개\n",
-              winningPrice.getSame(),
-              winningPrice.getPrice(),
-              lottoGame.getWinningCount(winningPrice.getSame())
-            )
-          );
+    System.out.printf(
+      "당첨 통계\n---------\n%s\n",
+      Arrays.stream(lottoGame.getWinningPrize())
+            .map(winningPrice -> String.format(
+                "%d개 일치 (%d원)- %d개\n",
+                winningPrice.getSame(),
+                winningPrice.getPrice(),
+                lottoGame.getWinningCount(winningPrice.getSame())))
+            .collect(Collectors.joining("\n"))
+    );
   }
 
   public void printPayoffRatio (int payoffRatio) {
