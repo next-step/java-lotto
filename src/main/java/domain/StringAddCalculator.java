@@ -7,7 +7,7 @@ public class StringAddCalculator {
 
 	public static int splitAndSum(String operationTargetString) {
 		
-		if(checkEmpty(operationTargetString)) {
+		if(ValidationUtils.checkEmpty(operationTargetString)) {
 			return 0;
 		}
 		
@@ -23,14 +23,5 @@ public class StringAddCalculator {
 			result += ValidationUtils.checkNegativeValue(targetValue);
 		}
 		return result;
-	}
-
-
-
-	private static boolean checkEmpty(String operationTargetString) {
-		if(operationTargetString == null || operationTargetString.isEmpty()) {
-			return true;
-		}
-		return false;
 	}
 }

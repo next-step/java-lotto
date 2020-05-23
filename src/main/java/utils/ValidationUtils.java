@@ -7,4 +7,11 @@ public class ValidationUtils {
 		}
 		return targetValue;
 	}
+	
+	public static boolean checkEmpty(String operationTargetString) {
+		if(operationTargetString == null || operationTargetString.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
 }
