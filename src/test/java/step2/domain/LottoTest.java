@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import step2.exception.LottoCountException;
 import step2.exception.LottoReduplicateException;
 
@@ -19,32 +20,18 @@ public class LottoTest {
 
   @DisplayName("로또 번호가 6개가 아닐경우 LottoCountException 발")
   @ParameterizedTest
-  @MethodSource("provideLottoWrongNumbers")
-  void 로또_번호_갯수_검증 (List<Integer> lottoNumbers) {
+  @ValueSource( strings = { "1,2,3,4,5,6,7", "1,2,3,4,5" } )
+  void 로또_번호_갯수_검증 (String lottoNumbers) {
     assertThatExceptionOfType(LottoCountException.class)
       .isThrownBy(() -> Lotto.of(lottoNumbers));
   }
 
-  private static Stream<Arguments> provideLottoWrongNumbers () {
-    return Stream.of(
-      Arguments.of(Arrays.asList("1,2,3,4,5".split(","))),
-      Arguments.of(Arrays.asList("1,2,3,4,5,6,7".split(",")))
-    );
-  }
-
   @DisplayName("로또 번호에 중복이 있을 경우 LottoReduplicateException 발생")
   @ParameterizedTest
-  @MethodSource("provideReduplicateLottoNumbers")
-  void 로또_번호_중복_검증 (List<Integer> lottoNumbers) {
+  @ValueSource( strings = { "1,2,3,4,5,5", "1,1,2,2,3,3" } )
+  void 로또_번호_중복_검증 (String lottoNumbers) {
     assertThatExceptionOfType(LottoReduplicateException.class)
       .isThrownBy(() -> Lotto.of(lottoNumbers));
-  }
-
-  private static Stream<Arguments> provideReduplicateLottoNumbers () {
-    return Stream.of(
-      Arguments.of(Arrays.asList("1,2,3,4,5,5".split(","))),
-      Arguments.of(Arrays.asList("1,1,2,2,3,3".split(",")))
-    );
   }
 
   @DisplayName("로또 생성시 오름차순 정렬이 되는지 검사")
@@ -58,11 +45,11 @@ public class LottoTest {
   private static Stream<Arguments> provideNotSortedLottoNumbers () {
     return Stream.of(
       Arguments.of(
-        Lotto.ofString("5,6,4,1,2,10"),
+        Lotto.of("5,6,4,1,2,10"),
         "1,2,4,5,6,10"
       ),
       Arguments.of(
-        Lotto.ofString("6,5,4,3,2,1"),
+        Lotto.of("6,5,4,3,2,1"),
         "1,2,3,4,5,6"
       )
     );

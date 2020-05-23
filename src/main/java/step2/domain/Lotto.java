@@ -26,7 +26,7 @@ public class Lotto {
     return lottoNumbers.stream();
   }
 
-  public static Lotto ofString (String lottoNumbers) {
+  public static Lotto of (String lottoNumbers) {
     return Lotto.of(
       Arrays.stream(lottoNumbers.split(","))
             .map(Integer::parseInt)
