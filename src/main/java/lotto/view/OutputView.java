@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.LottoLine;
-import lotto.domain.Rank;
 import lotto.domain.LottoMatchResult;
+import lotto.domain.Rank;
 
 public class OutputView {
 
@@ -18,7 +18,8 @@ public class OutputView {
         System.out.println("---------");
 
         Rank.rankValues().forEach(lottoMatch -> {
-            String matchMessage = String.format("%s개 일치 (%d원)- %d개", lottoMatch.getCountOfMatch(), lottoMatch.getWinningMoney(), result.get(lottoMatch));
+            String matchMessage = String.format("%s개 일치 (%d원)- %d개", lottoMatch.getCountOfMatch(),
+                lottoMatch.getWinningMoney(), result.get(lottoMatch));
             System.out.println(matchMessage);
         });
 

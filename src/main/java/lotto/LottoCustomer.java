@@ -19,7 +19,8 @@ public class LottoCustomer {
 
         LottoNums lottoNums = LottoNums.of(InputView.requestNums());
 
-        OutputView.printLottoResult(lottoPaper.getResult(lottoNums, new LottoNum(InputView.requestBonusNum()),price));
+        OutputView.printLottoResult(
+            lottoPaper.getResult(lottoNums, new LottoNum(InputView.requestBonusNum()), price));
     }
 
 }
