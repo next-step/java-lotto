@@ -12,10 +12,6 @@ public class LottoTicket {
         return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
     }
 
-    public List<LottoNumber> getValues() {
-        return Collections.unmodifiableList(new ArrayList<>(this.values));
-    }
-
     public boolean isInThisTicket(LottoNumber lottoNumber) {
         return this.values.contains(lottoNumber);
     }

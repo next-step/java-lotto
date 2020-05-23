@@ -25,10 +25,6 @@ public enum Rank {
         return inputRank.getPrice() > 0L;
     }
 
-    public int getMatchNumber() {
-        return matchNumber;
-    }
-
     public long getPrice() {
         return price;
     }
