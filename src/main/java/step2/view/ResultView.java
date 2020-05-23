@@ -1,10 +1,12 @@
 package step2.view;
 
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+import step2.domain.Lotto;
 import step2.domain.Lottos;
 import step2.domain.WinningPrice;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class ResultView {
 
@@ -19,7 +21,12 @@ public class ResultView {
   private ResultView () { }
 
   public void printLottos (Lottos lottos) {
-    lottos.stream().forEach(System.out::println);
+    System.out.println(
+      lottos.stream()
+            .map(ResultView::lottoToString)
+            .collect(Collectors.joining("\n"))
+      + "\n"
+    );
   }
 
   public void printStat (Lottos lottos) {
@@ -49,6 +56,11 @@ public class ResultView {
   public static ResultView getInstance () {
     if (instance != null) instance = new ResultView();
     return instance;
+  }
+
+  public static String lottoToString (Lotto lotto) {
+    String str = lotto.stream().map(String::valueOf).collect(Collectors.joining(", "));
+    return "[" + str + "]";
   }
 
 }
