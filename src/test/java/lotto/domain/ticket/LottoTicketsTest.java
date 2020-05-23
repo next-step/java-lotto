@@ -48,7 +48,7 @@ public class LottoTicketsTest {
     @MethodSource
     @ParameterizedTest
     void matchPrizes(final Prize prize, final Long expected) {
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         LottoTickets lottoTickets = LottoTickets.of(tickets);
 
         Map<Prize, Long> prizes = lottoTickets.matchPrizes(winningLottoTicket);
@@ -59,7 +59,8 @@ public class LottoTicketsTest {
     private static Stream<Arguments> matchPrizes() {
         return Stream.of(
                 Arguments.of(Prize.FIRST, 1L),
-                Arguments.of(Prize.THIRD, 1L),
+                Arguments.of(Prize.SECOND, 1L),
+                Arguments.of(Prize.THIRD, null),
                 Arguments.of(Prize.FOURTH, null),
                 Arguments.of(Prize.FIFTH, 2L),
                 Arguments.of(Prize.MISS, 1L)

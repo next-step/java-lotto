@@ -56,7 +56,7 @@ public class LottoGameTest {
     @ParameterizedTest
     @MethodSource("getMatchedTicketCountCase")
     void play(final Prize prize, final int count) {
-        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         LottoPrizeResult lottoPrizeResult = LottoGame.of(Price.of(Price.ONE_TICKET_PRICE * 5), lottoTickets)
                 .play(winningLottoTicket);
 
@@ -68,7 +68,8 @@ public class LottoGameTest {
                 Arguments.of(Prize.MISS, 1),
                 Arguments.of(Prize.FIFTH, 2),
                 Arguments.of(Prize.FOURTH, 0),
-                Arguments.of(Prize.THIRD, 1),
+                Arguments.of(Prize.THIRD, 0),
+                Arguments.of(Prize.SECOND, 1),
                 Arguments.of(Prize.FIRST, 1)
         );
     }

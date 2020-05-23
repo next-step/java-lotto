@@ -34,7 +34,7 @@ public class LottoPrizeResultTest {
         tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
         tickets.add(LottoTicket.of(LottoNumbers.of("7, 8, 9, 10, 11, 12")));
 
-        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        final WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         matchedPrizes = LottoTickets.of(tickets).matchPrizes(winningLottoTicket);
     }
 
@@ -60,7 +60,8 @@ public class LottoPrizeResultTest {
                 Arguments.of(Prize.MISS, 1),
                 Arguments.of(Prize.FIFTH, 2),
                 Arguments.of(Prize.FOURTH, 0),
-                Arguments.of(Prize.THIRD, 1),
+                Arguments.of(Prize.THIRD, 0),
+                Arguments.of(Prize.SECOND, 1),
                 Arguments.of(Prize.FIRST, 1)
         );
     }
@@ -72,7 +73,7 @@ public class LottoPrizeResultTest {
         LottoPrizeResult lottoPrizeResult = LottoPrizeResult.init(Price.of(purchasedPrice), matchedPrizes);
 
         int expectedTotalPrizeMoney =
-                Prize.FIRST.getPrizeMoney() + Prize.THIRD.getPrizeMoney() + Prize.FIFTH.getPrizeMoney() * 2;
+                Prize.FIRST.getPrizeMoney() + Prize.SECOND.getPrizeMoney() + Prize.FIFTH.getPrizeMoney() * 2;
         float expected = (float) expectedTotalPrizeMoney / purchasedPrice;
 
         assertThat(lottoPrizeResult.calculateProfitRate()).isEqualTo(expected);
