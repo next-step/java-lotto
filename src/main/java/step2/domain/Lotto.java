@@ -29,4 +29,9 @@ public class Lotto {
   public static Lotto of (List<Integer> numbers) {
     return new Lotto(numbers);
   }
+
+  public static long getSames (Lotto lotto1, Lotto lotto2) {
+    List<Integer> numbers = lotto2.stream().collect(Collectors.toList());
+    return lotto1.stream().filter(numbers::contains).count();
+  }
 }
