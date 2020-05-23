@@ -36,15 +36,15 @@ public class ResultView {
     );
   }
 
-  public void printPayoffRatio (int payoffRatio) {
+  public void printPayoffRatio (double payoffRatio) {
     System.out.printf(
-      "총 수익률은 %d입니다. 결과적으로 %s입니다\n",
+      "총 수익률은 %.2f입니다. 결과적으로 %s입니다\n",
       payoffRatio,
       getPayoffResult(payoffRatio)
     );
   }
 
-  private String getPayoffResult (int payoffRatio) {
+  private String getPayoffResult (double payoffRatio) {
     if (payoffRatio == 1) return "본전";
     return payoffRatio < 1 ? "손해" : "이득";
   }
