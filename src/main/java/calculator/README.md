@@ -14,16 +14,13 @@
 
 ## Todo List
 
-- InputView
-    - [ ] 문자열을 입력 받을 수 있다.
 - Splitter
     - [X] 쉼표(,) 구분자로 문자열을 분리할 수 있다.
     - [X] 콜론(:) 구분자로 문자열을 분리할 수 있다.
     - [X] 쉼표(,), 콜론(:) 구분자로 문자열을 분리할 수 있다.
     - [X] 커스텀 구분로 문자열을 분리할 수 있다.
 - Number 
-    - [ ] 정수 Wrapping 클래스로 값을 검증할 수 있다.
-    - [ ] 음수 값이 전달되는 경우 RuntiemException 예외를 throw 할 수 있다.
-    - [ ] 숫자 이외의 값이 전달되는 경우 RuntiemException 예외를 throw 할 수 있다.
+    - [X] 음수 값이 전달되는 경우 RuntiemException 예외를 throw 할 수 있다.    
 - StringCalculator
-    - [ ] 문자열 숫자의 합을 구할 수 있다.
+    - [X] 문자열 숫자의 합을 구할 수 있다.
+    - [X] 숫자 이외의 값이 전달되는 경우 RuntiemException 예외를 throw 할 수 있다.
