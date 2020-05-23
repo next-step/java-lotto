@@ -7,6 +7,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
@@ -76,5 +79,16 @@ public class LottoNumbersTest {
         final LottoNumbers ticket = LottoNumbers.of("1, 2, 3, 4, 5, 6");
         assertThat(ticket.contains(LottoNumber.of(number)))
                 .isEqualTo(expected);
+    }
+
+    @DisplayName("Set<LottoNumber>의 값을 List<Integer> 로 반환")
+    @Test
+    void getNumbersAsInt() {
+        final LottoNumbers lottoNumbers = LottoNumbers.of("1, 2, 3, 4, 5, 6");
+        List<Integer> target = lottoNumbers.getNumbersAsInt();
+
+        List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        assertThat(target).isEqualTo(expected);
     }
 }
