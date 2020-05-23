@@ -25,10 +25,10 @@ class AutoLottoNumbersGeneratorTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
     @DisplayName("자동 로또번호 생성 테스트")
-    void generateAutoLottoNumber(List<Integer> lottoNumbers, int lottoSize) {
-        List<Integer> generateLottoNumber = lottoNumberGenerator.generateLottoNumber(lottoNumbers, lottoSize);
-        assertThat(generateLottoNumber).hasSize(lottoSize);
-        Set<Integer> uniqueNumbers = new HashSet<>(generateLottoNumber);
+    void generateAutoLottoNumber(List<Lotto> lottos, int lottoSize) {
+        List<Lotto> generateLotto = lottoNumberGenerator.generateLottoNumber(lottos, lottoSize);
+        assertThat(generateLotto).hasSize(lottoSize);
+        Set<Lotto> uniqueNumbers = new HashSet<>(generateLotto);
         assertThat(uniqueNumbers).hasSize(lottoSize);
     }
 

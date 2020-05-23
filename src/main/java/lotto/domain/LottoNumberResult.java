@@ -5,25 +5,25 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoNumberResult {
-    private final List<Integer> lottoNumber;
+    private final List<Lotto> lotto;
 
-    public LottoNumberResult(List<Integer> lottoNumber) {
-        this.lottoNumber = Collections.unmodifiableList(lottoNumber);
+    public LottoNumberResult(List<Lotto> lotto) {
+        this.lotto = Collections.unmodifiableList(lotto);
     }
 
-    private int calculateMatchCount(List<Integer> winnerNumbers) {
+    private int calculateMatchCount(List<Lotto> winnerNumbers) {
         return (int) winnerNumbers.stream()
-                .filter(winnerNumber -> lottoNumber.contains(winnerNumber))
+                .filter(winnerNumber -> lotto.contains(winnerNumber))
                 .count();
     }
 
-    public LottoMatcher findLottoMatchResult(List<Integer> winnerNumbers) {
+    public LottoMatcher findLottoMatchResult(List<Lotto> winnerNumbers) {
         this.validateWinnerNumbers(winnerNumbers);
         int matchCount = this.calculateMatchCount(winnerNumbers);
         return LottoMatcher.findRanking(matchCount);
     }
 
-    private void validateWinnerNumbers(List<Integer> winnerNumbers) {
+    private void validateWinnerNumbers(List<Lotto> winnerNumbers) {
         if (Objects.isNull(winnerNumbers)) {
             throw new IllegalArgumentException();
         }
@@ -34,6 +34,6 @@ public class LottoNumberResult {
     }
 
     public String toString() {
-        return lottoNumber.toString();
+        return lotto.toString();
     }
 }

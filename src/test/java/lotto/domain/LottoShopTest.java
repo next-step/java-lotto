@@ -43,7 +43,7 @@ class LottoShopTest {
     @ParameterizedTest
     @MethodSource("provideNotValidWinner")
     @DisplayName("지난 주 당첨 번호가 6개가 아닌경우 Exception")
-    void validateNotValidWinner(List<Integer> winners) {
+    void validateNotValidWinner(List<Lotto> winners) {
         LottoShop lottoShop = this.createLottoSeller(1000);
         List<LottoNumberResult> lottoNumberResults = lottoShop.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
         assertThatThrownBy(() -> lottoNumberResults.stream()
@@ -101,7 +101,7 @@ class LottoShopTest {
     @ParameterizedTest
     @MethodSource("provideLottoNumbers")
     @DisplayName("생성된 로또 번호 테스트")
-    void verifyLottoNumbers(List<Integer> lottoNumber) {
+    void verifyLottoNumbers(List<Lotto> lottoNumber) {
         LottoShop lottoShop = this.createLottoSeller(1000);
         List<LottoNumberResult> result = lottoShop.buyLotto(new FakeAutoLottoNumberGenerator(lottoNumber), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
         assertThat(result.get(0).toString()).isEqualTo(lottoNumber.toString());

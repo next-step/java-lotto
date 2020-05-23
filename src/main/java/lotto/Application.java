@@ -24,7 +24,7 @@ public class Application {
         OutputView.outputLottoNumbers(lottoNumbers);
 
         // 지난주 당첨 번호 입력
-        List<Integer> winnerNumbers = InputView.inputWinningNumbers();
+        List<Lotto> winnerNumbers = InputView.inputWinningNumbers();
         List<LottoMatcher> lottoMatchers = lottoNumbers.stream()
                 .map(lottoNumberResult -> lottoNumberResult.findLottoMatchResult(winnerNumbers))
                 .collect(Collectors.toList());

@@ -21,12 +21,12 @@ public class LottoShop {
         }
     }
 
-    public List<LottoNumberResult> buyLotto(LottoNumberGenerator lottoNumberGenerator, List<Integer> allLottoNumber, int size) {
+    public List<LottoNumberResult> buyLotto(LottoNumberGenerator lottoNumberGenerator, List<Lotto> allLotto, int size) {
         List<LottoNumberResult> lottoNumbers = new ArrayList<>();
         int purchaseCount = (int) Math.ceil(this.price / LOTTO_PRICE);
         for (int i = 0; i < purchaseCount; i++) {
-            List<Integer> lottoNumber = lottoNumberGenerator.generateLottoNumber(allLottoNumber, size);
-            lottoNumbers.add(new LottoNumberResult(lottoNumber));
+            List<Lotto> lotto = lottoNumberGenerator.generateLottoNumber(allLotto, size);
+            lottoNumbers.add(new LottoNumberResult(lotto));
         }
         return lottoNumbers;
     }
