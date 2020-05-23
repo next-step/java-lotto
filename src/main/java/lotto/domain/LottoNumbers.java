@@ -46,7 +46,7 @@ public class LottoNumbers {
                 .count();
     }
 
-    private boolean isMatchNumber(int number) {
+    public boolean isMatchNumber(int number) {
         return this.lottoNumbers.contains(number);
     }
 
