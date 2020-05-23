@@ -14,7 +14,6 @@ public class ResultView {
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.1f%% 입니다. (기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String PRIZE_RESULT_INFO_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_PRIZE_RESULT_INFO_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개";
-    private static final String NEW_LINE = "\n";
 
     public static void printPurchaseInfo(final List<LottoTicketDto> tickets) {
         printPurchasedTicketCount(tickets.size());
