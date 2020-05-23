@@ -3,17 +3,21 @@ package domain;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OperatorSplitter {
+public class Splitter {
 
 	public static String[] split(String operationTargetString) {
 		
 		String[] operationTargets = customSplit(operationTargetString);
 
 		if (operationTargets == null) {
-			operationTargets = operationTargetString.split(":|,");
+			operationTargets = generalSplit(operationTargetString);
 		}
 		
 		return operationTargets;
+	}
+
+	private static String[] generalSplit(String operationTargetString) {
+		return operationTargetString.split(":|,");
 	}
 
 	private static String[] customSplit(String operationTargetString) {

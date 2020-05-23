@@ -11,7 +11,7 @@ public class StringAddCalculator {
 			return 0;
 		}
 		
-		String[] operationTargets = OperatorSplitter.split(operationTargetString);
+		String[] operationTargets = Splitter.split(operationTargetString);
 		
 		return calculate(operationTargets);
 	}
