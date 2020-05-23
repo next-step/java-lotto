@@ -50,4 +50,19 @@ public class PriceTest {
                 Arguments.of(Price.ONE_TICKET_PRICE * 14 + 100, 14)
         );
     }
+
+    @DisplayName("구매 가능한 개수인지 확인")
+    @ParameterizedTest
+    @MethodSource
+    void isExceedCount(final Price price, final int ticketCount, final boolean expected) {
+        assertThat(price.isExceedCount(ticketCount))
+                .isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> isExceedCount() {
+        return Stream.of(
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE), 1, true),
+                Arguments.of(Price.of(Price.ONE_TICKET_PRICE * 2), 5, false)
+        );
+    }
 }
