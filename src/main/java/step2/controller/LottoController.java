@@ -32,7 +32,7 @@ public class LottoController {
   }
 
   public LottoController inputWinning () {
-    Lotto winning = Lotto.ofString(Arrays.asList(inputView.inputWinning()));
+    Lotto winning = Lotto.ofString(inputView.inputWinning());
     return this.inputWinning(winning);
   }
 

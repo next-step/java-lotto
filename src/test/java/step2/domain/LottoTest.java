@@ -58,11 +58,11 @@ public class LottoTest {
   private static Stream<Arguments> provideNotSortedLottoNumbers () {
     return Stream.of(
       Arguments.of(
-        Lotto.ofString(Arrays.asList("5,6,4,1,2,10".split(","))),
+        Lotto.ofString("5,6,4,1,2,10"),
         "1,2,4,5,6,10"
       ),
       Arguments.of(
-        Lotto.ofString(Arrays.asList("6,5,4,3,2,1".split(","))),
+        Lotto.ofString("6,5,4,3,2,1"),
         "1,2,3,4,5,6"
       )
     );
