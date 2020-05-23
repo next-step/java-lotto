@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class InputView {
 
   private static InputView instance;
-  private final Scanner scanner = new Scanner(System.in);
+  private final Scanner scanner;
 
-  private InputView () { }
+  private InputView () {
+    this.scanner = new Scanner(System.in);
+  }
 
   public int inputPrice () {
     System.out.println("구입금액을 입력해 주세요.");
@@ -20,7 +22,7 @@ public class InputView {
   }
 
   public static InputView getInstance () {
-    if (instance != null) instance = new InputView();
+    if (instance == null) instance = new InputView();
     return instance;
   }
 }

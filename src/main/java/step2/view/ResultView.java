@@ -50,7 +50,7 @@ public class ResultView {
   }
 
   public static ResultView getInstance () {
-    if (instance != null) instance = new ResultView();
+    if (instance == null) instance = new ResultView();
     return instance;
   }
 
