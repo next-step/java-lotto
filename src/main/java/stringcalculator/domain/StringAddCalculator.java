@@ -1,19 +1,18 @@
 package stringcalculator.domain;
 
-import java.util.stream.Collectors;
-
 public class StringAddCalculator {
+    private static final int INITIAL_RESULT_VALUE = 0;
 
     public static long execute(final String expression) {
         if (isNullOrEmpty(expression)) {
-            return 0;
+            return INITIAL_RESULT_VALUE;
         }
 
-        StringExpressionConverter.convert(expression)
+        return StringExpressionConverter.convert(expression)
                 .stream()
                 .map(Operand::new)
-                .collect(Collectors.toList());
-        return 0;
+                .reduce(new Operand(INITIAL_RESULT_VALUE), Operand::add)
+                .getValue();
     }
 
     private static boolean isNullOrEmpty(String expression) {

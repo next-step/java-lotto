@@ -14,14 +14,15 @@ public class StringExpressionConverter {
     }
 
     public static List<String> convert(final String expression) {
-        Matcher customDelimiterMather = CUSTOM_DELIMITER_PATTERN.matcher(expression);
+        String pureExpression = expression.trim();
+        Matcher customDelimiterMather = CUSTOM_DELIMITER_PATTERN.matcher(pureExpression);
 
         if (customDelimiterMather.find()) {
             String customDelimiter = customDelimiterMather.group(CUSTOM_DELIMITER_INDEX);
             return Arrays.asList(customDelimiterMather.group(PURE_EXPRESSION_INDEX).split(customDelimiter));
         }
 
-        return Arrays.asList(expression.split(BasicDelimiter.convertToRegex()));
+        return Arrays.asList(pureExpression.split(BasicDelimiter.convertToRegex()));
     }
 
 
