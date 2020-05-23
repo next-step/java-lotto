@@ -10,10 +10,10 @@ public class StringCalculator implements Calculator {
     List<Number> numbers;
 
     public StringCalculator(String[] texts) {
-        this.numbers = StringToNumber(texts);
+        this.numbers = stringToNumber(texts);
     }
 
-    private List<Number> StringToNumber(String[] texts) {
+    private List<Number> stringToNumber(String[] texts) {
         try {
             return Arrays.stream(texts)
                     .map(Number::new)
