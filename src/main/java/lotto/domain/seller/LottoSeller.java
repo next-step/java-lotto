@@ -19,7 +19,7 @@ public class LottoSeller {
     }
 
     public LottoTickets buyTicket(final Price price) {
-        List<LottoTicket> tickets = Stream.generate(LottoNumbers::auto)
+        List<LottoTicket> tickets = Stream.generate(LottoNumbers::autoCreate)
                 .limit(price.ticketCount())
                 .map(LottoTicket::of)
                 .collect(Collectors.toList());

@@ -28,7 +28,7 @@ public class WinningLottoTicketTest {
     @MethodSource("lottoNumbersCase")
     void notMetNumberCountCondition(final String numbers) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.of(numbers));
+                .isThrownBy(() -> LottoNumbers.manualCreate(numbers));
     }
 
     private static Stream<Arguments> lottoNumbersCase() {
@@ -43,7 +43,7 @@ public class WinningLottoTicketTest {
     @Test
     void outOfRangeLottoNumber() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoNumbers.of("-1, 0, 3, 4, 5, 6"));
+                .isThrownBy(() -> LottoNumbers.manualCreate("-1, 0, 3, 4, 5, 6"));
     }
 
     @DisplayName("특정 숫자가 티켓에 포함되어 있으면 true 를 반환")

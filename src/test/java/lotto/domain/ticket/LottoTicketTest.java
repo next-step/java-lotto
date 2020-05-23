@@ -20,7 +20,7 @@ public class LottoTicketTest {
     @DisplayName("LottoNumbers 를 인자로 받아 LottoTicket 생성")
     @Test
     void create() {
-        LottoNumbers lottoNumbers = LottoNumbers.of("1, 2, 3, 4, 5, 6");
+        LottoNumbers lottoNumbers = LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6");
         assertThatCode(() -> LottoTicket.of(lottoNumbers))
             .doesNotThrowAnyException();
     }
@@ -42,19 +42,19 @@ public class LottoTicketTest {
 
     private static Stream<Arguments> matchPrize() {
         return Stream.of(
-                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")), Prize.FIRST),
-                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 7")), Prize.SECOND),
-                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 8")), Prize.THIRD),
-                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 7, 8")), Prize.FOURTH),
-                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")), Prize.FIFTH),
-                Arguments.of(LottoTicket.of(LottoNumbers.of("7, 8, 9, 10, 11, 12")), Prize.MISS)
+                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6")), Prize.FIRST),
+                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 7")), Prize.SECOND),
+                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 8")), Prize.THIRD),
+                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 7, 8")), Prize.FOURTH),
+                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9")), Prize.FIFTH),
+                Arguments.of(LottoTicket.of(LottoNumbers.manualCreate("7, 8, 9, 10, 11, 12")), Prize.MISS)
         );
     }
 
     @DisplayName("LottoNumbers 의 값을 List<Integer> 로 반환")
     @Test
     void getLottoNumbersAsInt() {
-        final LottoTicket ticket = LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6"));
+        final LottoTicket ticket = LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6"));
         List<Integer> target = ticket.getLottoNumbersAsInt();
 
         List<Integer> expected = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));

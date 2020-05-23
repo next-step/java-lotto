@@ -23,11 +23,11 @@ public class LottoTicketsTest {
     @BeforeEach
     void setUp() {
         tickets = new ArrayList<>();
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 7")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("7, 8, 9, 10, 11, 12")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 7")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("7, 8, 9, 10, 11, 12")));
     }
 
     @DisplayName("List<LottoTicket> 를 인자로 받아 LottoTickets 생성")

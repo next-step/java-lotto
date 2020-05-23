@@ -14,7 +14,7 @@ public class WinningLottoTicket extends LottoTicket {
     }
 
     public static WinningLottoTicket valueOf(final String winningNumbers, final int bonusNumber) {
-        LottoNumbers lottoNumbers = LottoNumbers.of(winningNumbers);
+        LottoNumbers lottoNumbers = LottoNumbers.manualCreate(winningNumbers);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
         validateDuplication(lottoNumbers, bonusLottoNumber);
 

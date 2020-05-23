@@ -20,11 +20,11 @@ public class LottoNumbers {
         this.numbers = new LinkedHashSet<>(numbers);
     }
 
-    public static LottoNumbers auto() {
+    public static LottoNumbers autoCreate() {
         return new LottoNumbers(LottoNumbersGenerator.generate());
     }
 
-    public static LottoNumbers of(final String numbers) {
+    public static LottoNumbers manualCreate(final String numbers) {
         validateNumbers(numbers);
         return new LottoNumbers(Arrays.stream(numbers.split(LOTTO_NUMBER_DELIMITER))
                 .map(String::trim)

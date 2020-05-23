@@ -20,7 +20,7 @@ public class LottoTicketDtoTest {
         List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<LottoTicket> tickets = new ArrayList<>();
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6")));
         LottoTickets lottoTickets = LottoTickets.of(tickets);
 
         List<LottoTicketDto> ticketDTOS = LottoTicketDto.from(lottoTickets);

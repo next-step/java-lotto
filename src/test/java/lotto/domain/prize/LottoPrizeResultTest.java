@@ -28,11 +28,11 @@ public class LottoPrizeResultTest {
     @BeforeEach
     void setUp() {
         tickets = new ArrayList<>();
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 7")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")));
-        tickets.add(LottoTicket.of(LottoNumbers.of("7, 8, 9, 10, 11, 12")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 6")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 4, 5, 7")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("1, 2, 3, 7, 8, 9")));
+        tickets.add(LottoTicket.of(LottoNumbers.manualCreate("7, 8, 9, 10, 11, 12")));
 
         final WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         matchedPrizes = LottoTickets.of(tickets).matchPrizes(winningLottoTicket);
