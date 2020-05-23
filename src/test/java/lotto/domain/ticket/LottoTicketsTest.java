@@ -68,4 +68,10 @@ public class LottoTicketsTest {
                 Arguments.of(Prize.MISS, 1L)
         );
     }
+
+    @DisplayName("LottoTicket 의 개수 반환")
+    @Test
+    void count() {
+        assertThat(LottoTickets.of(tickets).count()).isEqualTo(tickets.size());
+    }
 }
