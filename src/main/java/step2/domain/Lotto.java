@@ -1,7 +1,6 @@
 package step2.domain;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,16 +13,20 @@ public class Lotto {
 
   private final List<Integer> lottoNumbers;
 
-  public Lotto () {
-    this(Lotto.numbers);
-  }
-
-  public Lotto (List<Integer> lottoNumbers) {
-    Collections.shuffle(lottoNumbers);
-    this.lottoNumbers = lottoNumbers.stream().limit(6L).collect(Collectors.toList());
+  private Lotto (List<Integer> lottoNumbers) {
+    this.lottoNumbers = lottoNumbers;
   }
 
   public Stream<Integer> stream () {
     return this.lottoNumbers.stream();
+  }
+
+  public static Lotto of () {
+    Collections.shuffle(numbers);
+    return of(numbers.stream().limit(6L).collect(Collectors.toList()));
+  }
+
+  public static Lotto of (List<Integer> numbers) {
+    return new Lotto(numbers);
   }
 }
