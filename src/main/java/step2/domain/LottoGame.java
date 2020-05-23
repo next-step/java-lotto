@@ -35,6 +35,13 @@ public class LottoGame {
     return this.stream().filter(lotto -> Lotto.getSames(lotto, winningLotto) == same).count();
   }
 
+  public double getPayoff () {
+    long payoff = Arrays.stream(winningPrize)
+                        .map(v -> v.getPrice() * getWinningCount(v.getSame()))
+                        .reduce(0L, Math::addExact);
+    return payoff / (double)this.stream().count();
+  }
+
   public WinningPrice[] getWinningPrize() {
     return winningPrize;
   }
