@@ -54,7 +54,10 @@ public class LottoGameTest {
   }
 
   private static Stream<Arguments> provideLottoGameAndWinningPrice () {
-    int payoff = WinningPrice.FIRST + WinningPrice.SECOND + WinningPrice.THIRD + WinningPrice.FORTH;
+    int payoff = WinningPrice.FIRST.getPrice() +
+                 WinningPrice.SECOND.getPrice() +
+                 WinningPrice.THIRD.getPrice() +
+                 WinningPrice.FORTH.getPrice();
     String payoffRatio = String.format("%.2f", payoff / 4000.0);
     LottoGame lottoGame = LottoGame.of(
                             Stream.of(
