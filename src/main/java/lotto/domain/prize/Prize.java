@@ -2,10 +2,11 @@ package lotto.domain.prize;
 
 import lotto.exception.ErrorMessage;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum Prize {
 
@@ -21,8 +22,10 @@ public enum Prize {
 
     static final int MIN_MATCHED_COUNT = 0;
     static final int MAX_MATCHED_COUNT = 6;
-    private static final Map<Integer, Prize> PRIZES = Arrays.stream(Prize.values())
-            .collect(Collectors.toMap(Prize::getMatchedNumbersCount, Function.identity(), (existing, replacement) -> existing));
+    private static final Map<Integer, Prize> PRIZES = Collections.unmodifiableMap(
+                Stream.of(Prize.values())
+                        .collect(Collectors.toMap(Prize::getMatchedNumbersCount, Function.identity(), (existing, replacement) -> existing))
+            );
 
     Prize(final int matchedNumbersCount, final int prizeMoney) {
         this.matchedNumbersCount = matchedNumbersCount;
@@ -40,7 +43,7 @@ public enum Prize {
     }
 
     private boolean isSecondPrize(final boolean matchBonus) {
-        return this.equals(Prize.THIRD) && matchBonus;
+        return this == Prize.THIRD && matchBonus;
     }
 
     private static void validateMatchedNumbersCount(final int matchedNumbersCount) {
