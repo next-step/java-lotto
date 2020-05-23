@@ -1,5 +1,8 @@
 package step2.domain;
 
+import step2.exception.LottoCountException;
+import step2.exception.LottoReduplicateException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,12 +16,14 @@ public class Lotto {
 
   private final List<Integer> lottoNumbers;
 
-  private Lotto (List<Integer> lottoNumbers) {
+  private Lotto (List<Integer> lottoNumbers) throws RuntimeException {
+    validateCount(lottoNumbers);
+    validateReduplicate(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
   public Stream<Integer> stream () {
-    return this.lottoNumbers.stream();
+    return lottoNumbers.stream();
   }
 
   public static Lotto of () {
@@ -35,5 +40,17 @@ public class Lotto {
   public static long getSames (Lotto lotto1, Lotto lotto2) {
     List<Integer> numbers = lotto2.stream().collect(Collectors.toList());
     return lotto1.stream().filter(numbers::contains).count();
+  }
+
+  private static void validateCount (List<Integer> lottoNumbers) throws RuntimeException {
+    if (lottoNumbers.size() != 6) {
+      throw new LottoCountException();
+    }
+  }
+
+  private static void validateReduplicate (List<Integer> lottoNumbers) throws RuntimeException {
+    if (new HashSet(lottoNumbers).size() != lottoNumbers.size()) {
+      throw new LottoReduplicateException();
+    }
   }
 }

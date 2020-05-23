@@ -55,7 +55,6 @@ public class LottoController {
       .inputWinning()
       .viewStat()
       .viewPayoff();
-
   }
 
 }
