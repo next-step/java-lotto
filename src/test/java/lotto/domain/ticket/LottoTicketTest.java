@@ -33,14 +33,15 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource
     void matchPrize(final LottoTicket ticket, final Prize expected) {
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of("1, 2, 3, 4, 5, 6");
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.valueOf("1, 2, 3, 4, 5, 6", 7);
         assertThat(ticket.matchPrize(winningLottoTicket)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> matchPrize() {
         return Stream.of(
                 Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 6")), Prize.FIRST),
-                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 7")), Prize.THIRD),
+                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 7")), Prize.SECOND),
+                Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 5, 8")), Prize.THIRD),
                 Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 4, 7, 8")), Prize.FOURTH),
                 Arguments.of(LottoTicket.of(LottoNumbers.of("1, 2, 3, 7, 8, 9")), Prize.FIFTH),
                 Arguments.of(LottoTicket.of(LottoNumbers.of("7, 8, 9, 10, 11, 12")), Prize.MISS)
