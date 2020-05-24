@@ -1,5 +1,6 @@
 package study;
 
+import java.util.Collections;
 import java.util.List;
 
 public class StringAddCalculator {
@@ -11,20 +12,16 @@ public class StringAddCalculator {
     }
 
     public int splitAndSum(String text) {
-        if (StringUtil.isNullOrEmpty(text)) {
-            return 0;
-        }
-
-        if (StringUtil.isSingleWord(text)) {
-            return Integer.parseInt(text);
-        }
-
-        List<Integer> numbers = getNumbers(text);
+        List<Integer> numbers = split(text);
         checkNegative(numbers);
         return sum(numbers);
     }
 
-    private List<Integer> getNumbers(String text) {
+    private List<Integer> split(String text) {
+        if (StringUtil.isNullOrEmpty(text)) {
+            return Collections.singletonList(0);
+        }
+
         String[] tokens = splitter.split(text);
         return IntegerUtil.parseArray(tokens);
     }
