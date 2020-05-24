@@ -11,12 +11,12 @@ public class BuyInputView {
         this.money = new Money(moneyValue);
     }
 
+    public Money getMoney() {
+        return money;
+    }
+
     public static BuyInputView createByConsole(Scanner scanner) {
         System.out.println("구매금액을 입력해주세요");
         return new BuyInputView(scanner.nextLong());
-    }
-
-    public Money getMoney() {
-        return money;
     }
 }

@@ -14,18 +14,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = value;
     }
 
-    private void validation(int value) {
-        if (value < MIN_VALUE || value > MAX_VALUE) {
-            throw new OutOfBoundOfLottoNumberException("LottoNumber must in 1 ~ 45");
-        }
+    public int getValue() {
+        return value;
     }
 
     public static LottoNumber create(int value) {
         return new LottoNumber(value);
     }
 
-    public int getValue() {
-        return value;
+    private void validation(int value) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new OutOfBoundOfLottoNumberException("LottoNumber must in 1 ~ 45");
+        }
     }
 
     @Override

@@ -18,6 +18,10 @@ public class LottoTickets {
         this.values = values;
     }
 
+    public List<LottoTicket> getValues() {
+        return Collections.unmodifiableList(new ArrayList<>(values));
+    }
+
     public static LottoTickets create(List<LottoTicket> values) {
         return new LottoTickets(Collections.unmodifiableList(new ArrayList<>(values)));
     }
@@ -37,10 +41,6 @@ public class LottoTickets {
                 .map(rankCalculator::getRank)
                 .collect(Collectors.toList());
         return Ranks.create(rankList);
-    }
-
-    public List<LottoTicket> getValues() {
-        return Collections.unmodifiableList(new ArrayList<>(values));
     }
 
     public LottoTickets combine(LottoTickets inputLottoTickets) {

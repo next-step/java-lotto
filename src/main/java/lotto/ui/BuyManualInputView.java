@@ -13,6 +13,15 @@ public class BuyManualInputView {
     private int manualLottoCount;
     private List<String> inputValues;
 
+    protected BuyManualInputView(int count, List<String> inputValues) {
+        this.manualLottoCount = count;
+        this.inputValues = inputValues;
+    }
+
+    protected BuyManualInputView(int i) {
+        this(i, new ArrayList<>());
+    }
+
     public static BuyManualInputView getManualLottoCount(Scanner scanner) {
         System.out.println(System.lineSeparator() + "수동으로 구매할 로또 수를 입력해 주세요.");
         return new BuyManualInputView(scanner.nextInt(), new ArrayList<>());
@@ -31,15 +40,6 @@ public class BuyManualInputView {
                         .map(LottoGenerator::createByManual)
                         .collect(Collectors.toList())
         );
-    }
-
-    protected BuyManualInputView(int i) {
-        this(i, new ArrayList<>());
-    }
-
-    protected BuyManualInputView(int count, List<String> inputValues) {
-        this.manualLottoCount = count;
-        this.inputValues = inputValues;
     }
 
     private void convertValidation() {

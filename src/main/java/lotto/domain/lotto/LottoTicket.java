@@ -10,6 +10,12 @@ public class LottoTicket {
     private final List<LottoNumber> values;
     private final CreationType creationType;
 
+    private LottoTicket(List<LottoNumber> values, CreationType creationType) {
+        validation(values);
+        this.values = values;
+        this.creationType = creationType;
+    }
+
     public static LottoTicket create(List<LottoNumber> values, CreationType creationType) {
         Collections.sort(values);
         return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)), creationType);
@@ -31,12 +37,6 @@ public class LottoTicket {
 
     protected int size() {
         return this.values.size();
-    }
-
-    private LottoTicket(List<LottoNumber> values, CreationType creationType) {
-        validation(values);
-        this.values = values;
-        this.creationType = creationType;
     }
 
     private void validation(List<LottoNumber> values) {

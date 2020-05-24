@@ -16,14 +16,8 @@ public class RankInputView {
         this.winBonusNumber = winBonusNumber;
     }
 
-    private void validation(String inputValue) {
-        if (inputValue == null) {
-            throw new IllegalArgumentException("Input value must not null");
-        }
-
-        if (inputValue.trim().isEmpty()) {
-            throw new IllegalArgumentException("Input value must not empty");
-        }
+    public LottoNumber getWinBonusNumber() {
+        return LottoNumber.create(this.winBonusNumber);
     }
 
     public static RankInputView getThisWeekWinningInfo(Scanner scanner) {
@@ -38,7 +32,13 @@ public class RankInputView {
         return LottoGenerator.createByManual(this.winTicketValue);
     }
 
-    public LottoNumber getWinBonusNumber() {
-        return LottoNumber.create(this.winBonusNumber);
+    private void validation(String inputValue) {
+        if (inputValue == null) {
+            throw new IllegalArgumentException("Input value must not null");
+        }
+
+        if (inputValue.trim().isEmpty()) {
+            throw new IllegalArgumentException("Input value must not empty");
+        }
     }
 }
