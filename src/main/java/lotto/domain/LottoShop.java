@@ -9,13 +9,17 @@ public class LottoShop {
     private final static int ZERO_NUMBER = 0;
     private int inputMoney;
 
-    public LottoShop(int inputMoney) {
+    private LottoShop(int inputMoney) {
         validateMoney(inputMoney);
         this.inputMoney = inputMoney;
     }
 
+    public static LottoShop putMoney(int money) {
+        return new LottoShop(money);
+    }
+
     private void validateMoney(int inputMoney) {
-        if (inputMoney < ZERO_NUMBER) {
+        if (inputMoney <= ZERO_NUMBER) {
             throw new IllegalArgumentException("0원 이하는 로또를 살 수 없습니다.");
         }
 
@@ -28,8 +32,8 @@ public class LottoShop {
         return money / LOTTO_PRICE;
     }
 
-    public static List<LottoTicket> buyLottoTickets(int money) {
-        int lottoTicketCount = getLottoTicketCount(money);
+    public List<LottoTicket> buyLottoTickets() {
+        int lottoTicketCount = getLottoTicketCount(inputMoney);
         List<LottoTicket> lottoTicketList = new ArrayList<>();
 
         for (int i = 0; i < lottoTicketCount; i++) {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import calculator.Number;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
 
     @Test
-    void createLottoNumberTest() {
+    void createLottoNumberTest_정상작동() {
         LottoNumber lottoNumber = new LottoNumber(1);
         assertThat(lottoNumber.getValue()).isEqualTo(1);
     }

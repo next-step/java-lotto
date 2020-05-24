@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -19,7 +20,7 @@ public class LottoTicket {
         shuffleLottoTicket();
     }
 
-    protected static LottoTicket create() {
+    public static LottoTicket create() {
         return new LottoTicket();
     }
 
@@ -35,4 +36,15 @@ public class LottoTicket {
         this.lottoNumbers =  newLottoNumbers;
     }
 
+    public int size() {
+        return this.lottoNumbers.size();
+    }
+
+    public void printLottoNumbers() {
+        List<Integer> collect = this.lottoNumbers.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+
+        System.out.println(collect.toString());
+    }
 }

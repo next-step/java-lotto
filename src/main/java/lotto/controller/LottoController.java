@@ -8,7 +8,6 @@ public class LottoController {
 
     public ResultView purchaseLotto() {
         int inputMoney = InputView.inputMoney();
-        new LottoShop(inputMoney);
 
         ResultView resultView = new ResultView();
 

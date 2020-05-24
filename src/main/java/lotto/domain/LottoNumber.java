@@ -25,4 +25,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int getValue() {
         return value;
     }
+
 }
