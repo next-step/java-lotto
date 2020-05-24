@@ -43,6 +43,6 @@ public class LottoGenerator {
     }
 
     public static LottoTicket createEmptyLottoTicket() {
-        return LottoTicket.create(new ArrayList<>());
+        return LottoTicket.createEmpty();
     }
 }
