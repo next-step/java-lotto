@@ -18,8 +18,8 @@ public class BuyManualInputView {
         this.inputValues = inputValues;
     }
 
-    protected BuyManualInputView(int i) {
-        this(i, new ArrayList<>());
+    protected BuyManualInputView(int manualLottoCount) {
+        this(manualLottoCount, new ArrayList<>());
     }
 
     public static BuyManualInputView getManualLottoCount(Scanner scanner) {
