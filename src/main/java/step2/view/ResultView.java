@@ -2,9 +2,10 @@ package step2.view;
 
 import step2.domain.Lotto;
 import step2.domain.LottoGame;
+import step2.domain.LottoShop;
 import step2.domain.Rank;
 
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.joining;
 
 public class ResultView {
 
@@ -17,11 +18,11 @@ public class ResultView {
 
   private ResultView () { }
 
-  public void printLottoGame (LottoGame lottoGame) {
-    final long lottoCount = lottoGame.stream().count();
-    final String lottoList = lottoGame.stream()
+  public void printLottoList(LottoShop lottoShop) {
+    final long lottoCount = lottoShop.stream().count();
+    final String lottoList = lottoShop.stream()
                                       .map(ResultView::lottoToString)
-                                      .collect(Collectors.joining("\n"));
+                                      .collect(joining("\n"));
 
     System.out.printf(BUYING_FORMAT, lottoCount, lottoList);
   }
@@ -33,7 +34,7 @@ public class ResultView {
                                      rank.getSame(),
                                      rank.getPrice(),
                                      lottoGame.getWinningCount(rank)))
-          .collect(Collectors.joining("\n"))
+          .collect(joining("\n"))
     );
   }
 
@@ -60,7 +61,7 @@ public class ResultView {
   public static String lottoToString (Lotto lotto) {
     String str = lotto.stream()
                       .map(String::valueOf)
-                      .collect(Collectors.joining(", "));
+                      .collect(joining(", "));
     return "[" + str + "]";
   }
 
