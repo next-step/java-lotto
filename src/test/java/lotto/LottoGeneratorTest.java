@@ -28,14 +28,14 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또를 자동으로 생성하고 결과크기를 검증한다.")
     void 로또_자동_생성_테스트() {
-        Lotto lotto = lottoGenerator.autoGenerate();
+        LottoTicket lotto = lottoGenerator.autoGenerate();
         assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 
     @Test
     @DisplayName("로또를 자동 생성하고 중복번호가 있는지 검증한다.")
     void 로또_중복_테스트() {
-        Lotto lotto = lottoGenerator.autoGenerate();
+        LottoTicket lotto = lottoGenerator.autoGenerate();
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(new HashSet<>(lotto.getLottoNumbers()).size());
     }
 }

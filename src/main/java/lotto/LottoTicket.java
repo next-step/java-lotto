@@ -2,16 +2,16 @@ package lotto;
 
 import java.util.List;
 
-public class Lotto {
+public class LottoTicket {
 
     private List<Integer> lottoNumbers;
 
-    private Lotto(List<Integer> lottoNumbers) {
+    private LottoTicket(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static Lotto of(List<Integer> lottoNumbers) {
-        return new Lotto(lottoNumbers);
+    public static LottoTicket of(List<Integer> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public List<Integer> getLottoNumbers(){

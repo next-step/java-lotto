@@ -36,23 +36,23 @@ public class LottoGameTest {
     @DisplayName("로또 게임을 추가하고, 결과 값을 검증한다.")
     void 로또_게임_추가_테스트(){
         lottoGame.add(round, winningNumbers);
-        Lotto lotto = lottoGame.get(round);
+        LottoTicket lotto = lottoGame.get(round);
         assertThat(lotto.getLottoNumbers()).hasSize(winningNumbers.length);
     }
 
     @MethodSource("generate_lotto_tickets")
     @ParameterizedTest
     @DisplayName("로또 게임 1회차의 당첨 개수를 검증한다.")
-    void 로또_게임_당첨_갯수_테스트(Lotto lotto, int expected){
+    void 로또_게임_당첨_갯수_테스트(LottoTicket lotto, int expected){
         int count = lottoGame.matchingCount(round, lotto);
         assertThat(count).isEqualTo(expected);
     }
 
     private static Stream<Arguments> generate_lotto_tickets() {
         return Stream.of(
-                Arguments.of(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), 6),
-                Arguments.of(Lotto.of(Arrays.asList(23, 45, 32, 14, 2, 3, 7)), 2),
-                Arguments.of(Lotto.of(Arrays.asList(23, 45, 32, 14, 2, 3, 7)), 4)
+                Arguments.of(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)), 6),
+                Arguments.of(LottoTicket.of(Arrays.asList(23, 45, 32, 14, 2, 3, 7)), 2),
+                Arguments.of(LottoTicket.of(Arrays.asList(23, 45, 32, 14, 2, 3, 7)), 4)
         );
     }
 }

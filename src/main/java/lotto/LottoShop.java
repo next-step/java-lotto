@@ -5,16 +5,16 @@ import java.util.List;
 
 public class LottoShop {
 
-    private final List<Lotto> lottoTickets = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public Lotto buy() {
-        Lotto lotto = lottoGenerator.autoGenerate();
+    public LottoTicket buy() {
+        LottoTicket lotto = lottoGenerator.autoGenerate();
         lottoTickets.add(lotto);
         return lotto;
     }
-    public List<Lotto> getLottoTickets() {
+    public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
     }
 }

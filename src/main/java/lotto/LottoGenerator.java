@@ -13,10 +13,10 @@ public class LottoGenerator {
     private static final int LOTTO_NUMBER_MAX = 45;
 
 
-    public Lotto autoGenerate() {
+    public LottoTicket autoGenerate() {
         List<Integer> generateNumbers = generateLottoNumbers();
         Collections.shuffle(generateNumbers);
-        return Lotto.of(generateNumbers.subList(0, LOTTO_GENERATE_COUNT));
+        return LottoTicket.of(generateNumbers.subList(0, LOTTO_GENERATE_COUNT));
     }
 
     private List<Integer> generateLottoNumbers() {

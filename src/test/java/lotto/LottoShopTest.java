@@ -12,7 +12,7 @@ public class LottoShopTest {
     @DisplayName("로또를 구입하고 크기를 검증한다.")
     void 로또_구입_테스트(){
         LottoShop lottoShop = new LottoShop();
-        Lotto lottoTicket = lottoShop.buy();
+        LottoTicket lottoTicket = lottoShop.buy();
 
         assertThat(lottoShop.getLottoTickets()).hasSize(1);
         assertThat(lottoShop.getLottoTickets().contains(lottoTicket)).isTrue();
