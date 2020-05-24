@@ -35,8 +35,8 @@ public class NumbersTest {
     private static Stream<Arguments> mockUserInputBuilder() {
         return Stream.of(
                 Arguments.of("1:2:3:4:5", 15),
-                Arguments.of("//!k\n100k200k300", 600),
-                Arguments.of("0:0,0", 0)
+                Arguments.of("//k\n100k200k300", 600),
+                Arguments.of("0,0:0", 0)
         );
     }
 }

@@ -9,4 +9,10 @@ public class Numbers {
     public Numbers(List<Integer> numbers) {
         this.numbers = numbers;
     }
+
+    public Integer getNumbersSum() {
+        return numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
