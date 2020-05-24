@@ -23,6 +23,11 @@ public class LottoController {
     return this;
   }
 
+  public LottoController viewPayoff () {
+    resultView.printPayoffRatio(lottoGame.getPayoffRatio());
+    return this;
+  }
+
   public LottoController inputWinning (Lotto winning) {
     lottoGame.setWinningNumber(winning);
     return this;
@@ -33,13 +38,17 @@ public class LottoController {
     return this.inputWinning(winning);
   }
 
-  public LottoController viewStat () {
-    resultView.printStat(lottoGame);
+  public LottoController inputBonusNumber () {
+    return this.inputBonusNumber(inputView.inputBonus());
+  }
+
+  public LottoController inputBonusNumber (int bonusNumber) {
+    lottoGame.setBonusNumber(bonusNumber);
     return this;
   }
 
-  public LottoController viewPayoff () {
-    resultView.printPayoffRatio(lottoGame.getPayoffRatio());
+  public LottoController viewStat () {
+    resultView.printStat(lottoGame);
     return this;
   }
 
@@ -47,6 +56,7 @@ public class LottoController {
     LottoController.of()
                    .viewLottoGame()
                    .inputWinning()
+                   .inputBonusNumber()
                    .viewStat()
                    .viewPayoff();
   }

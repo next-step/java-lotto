@@ -11,4 +11,4 @@
   - [X] 기존의 WinningPrice를 Rank의 변경
   - [X] java enum을 적용해 프로그래밍을 구현한다.
   - [X] valueOf Method 개발: 파라미터에 대한 Rank를 구함 
-  - [X] Rank Test Code 작성 
+  - [X] Rank Test Code 작성
