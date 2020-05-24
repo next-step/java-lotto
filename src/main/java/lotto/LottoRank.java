@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,7 +10,8 @@ public enum LottoRank {
     FIRST(6, 2000000000),
     SECOND(5, 1500000),
     THIRD(4, 50000),
-    FOURTH(3, 5000);
+    FOURTH(3, 5000),
+    BOOM(0, 0);
 
     private int matchCount;
     private int price;
@@ -36,5 +36,12 @@ public enum LottoRank {
 
     public int getPrice() {
         return price;
+    }
+
+    public static LottoRank valueOf(int matchCount) {
+        if(matchCount < FOURTH.matchCount) {
+            return LottoRank.BOOM;
+        }
+        return RANK.get(matchCount);
     }
 }
