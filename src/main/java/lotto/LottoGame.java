@@ -9,21 +9,27 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    private Map<Integer, Lotto> result = new HashMap<>();
+    private Map<Integer, List<Integer>> result = new HashMap<>();
 
     public void add(int round, int[] winningNumber) {
-
-        List<Integer> convertedList = Arrays.stream(winningNumber).boxed()
-                .collect(Collectors.toList());
-
-        result.put(round, Lotto.of(convertedList));
+        result.put(round, Arrays.stream(winningNumber).boxed().collect(Collectors.toList()));
     }
 
-    public Lotto get(int round) {
+    public List<Integer> get(int round) {
         return result.get(round);
     }
 
-    public int matchingCount(int round, Lotto lottoTickets) {
-        return 0;
+    public long matchingCount(int round, LottoTicket lottoTicket) {
+
+        List<Integer> winningNumbers = get(round);
+
+        if(winningNumbers == null) {
+            throw new IllegalArgumentException("존재하지 않는 회차입니다.");
+        }
+
+        return lottoTicket.getLottoNumbers()
+                .stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 }
