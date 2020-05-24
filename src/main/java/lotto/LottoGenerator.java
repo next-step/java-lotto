@@ -8,7 +8,7 @@ public class LottoGenerator {
 
     private final Random RANDOM = new Random();
 
-    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_GENERATE_COUNT = 6;
     private static final int LOTTO_NUMBER_MAX = 45;
 
 
@@ -19,7 +19,7 @@ public class LottoGenerator {
     private List<Integer> generateLottoNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
 
-        while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
+        while (lottoNumbers.size() < LOTTO_GENERATE_COUNT) {
             add(lottoNumbers, generateNumber());
         }
 
