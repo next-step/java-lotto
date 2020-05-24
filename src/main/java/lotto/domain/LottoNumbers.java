@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.util.StringUtils;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +25,7 @@ public class LottoNumbers {
         return new LottoNumbers(lottoNumbers);
     }
 
-    private void validateLottoNumbers(List<Integer> lottoNumbers) {
+    private static void validateLottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers == null) {
             throw new IllegalArgumentException("로또 번호를 생성할 수 없습니다.");
         }
@@ -38,6 +41,20 @@ public class LottoNumbers {
 
     public static List<Integer> createNonDuplicateNumbers() {
         return NumbersFactory.createNonDuplicateNumbers(LOTTO_NUMBERS_COUNT);
+    }
+
+    public static List<Integer> createNonDuplicateNumbers(String manualNumbers) {
+        List<Integer> lottoNumbers = Arrays.stream(manualNumbers.split(DELIMITER_PATTERN))
+                .map(StringUtils::toInt)
+                .collect(Collectors.toList());
+
+        validateLottoNumbers(lottoNumbers);
+
+        return lottoNumbers;
+    }
+
+    public LottoNumbers clone() {
+        return new LottoNumbers(this.lottoNumbers);
     }
 
     public int getMatchCount(LottoNumbers lotto) {
