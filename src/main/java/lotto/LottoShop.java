@@ -9,8 +9,12 @@ public class LottoShop {
 
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public List<Lotto> buy() {
-        lottoTickets.add(lottoGenerator.autoGenerate());
+    public Lotto buy() {
+        Lotto lotto = lottoGenerator.autoGenerate();
+        lottoTickets.add(lotto);
+        return lotto;
+    }
+    public List<Lotto> getLottoTickets() {
         return lottoTickets;
     }
 }
