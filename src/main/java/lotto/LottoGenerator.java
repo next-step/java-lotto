@@ -15,7 +15,7 @@ public class LottoGenerator {
 
     public Lotto autoGenerate() {
         List<Integer> generateNumbers = generateLottoNumbers();
-        Collections.shuffle(generateLottoNumbers());
+        Collections.shuffle(generateNumbers);
         return Lotto.of(generateNumbers.subList(0, LOTTO_GENERATE_COUNT));
     }
 
