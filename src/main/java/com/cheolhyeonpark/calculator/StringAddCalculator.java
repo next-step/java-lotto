@@ -10,6 +10,9 @@ public class StringAddCalculator {
         if (input == null || input.length() < 1) {
             return 0;
         }
+        if (input.contains("-")) {
+            throw new RuntimeException("There is negative number in your input.");
+        }
         Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(input);
         if (matcher.find()) {
             String customDelimiter = matcher.group(1);
