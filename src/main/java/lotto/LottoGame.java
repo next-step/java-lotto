@@ -44,6 +44,6 @@ public class LottoGame {
                 .mapToLong(LottoRank::getPrice)
                 .sum();
 
-        return sum / (lottoTickets.size() * 1000);
+        return sum / (lottoTickets.size() * 1000.0);
     }
 }

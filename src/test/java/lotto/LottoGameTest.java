@@ -97,7 +97,18 @@ public class LottoGameTest {
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
                                 LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15))
-                        ), 1.0)
+                        ), 1.0),
+                Arguments.of(
+                        Arrays.asList(
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 7, 8, 9)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15))
+                        ), 0.625)
         );
     }
 
