@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
@@ -45,20 +46,13 @@ class StringSplitterTest {
         );
     }
 
-    @DisplayName("음수값 혹은 숫자가 아닌 문자가 포함된 경우 RuntimeException 발생")
+    @DisplayName("UserInput이 Null이거나 Empty일 때 문자열 0을 원소로 가지는 String 배열 리턴 테스트")
     @ParameterizedTest
-    @MethodSource("mockInvalidStringBuilder")
+    @NullAndEmptySource
     public void throwRuntimeExceptionOnInvalidArguments(String userInput) {
-        assertThatExceptionOfType(RuntimeException.class)
-                .isThrownBy(() -> {
-                    StringParser.parseString(userInput);
-                });
-    }
+        String[] splittedString = StringSplitter.splitString(userInput);
+        String[] expectedResult = {"0"};
 
-    private static Stream<Arguments> mockInvalidStringBuilder() {
-        return Stream.of(
-                Arguments.of("1:2:3:-1:4:5"),
-                Arguments.of("//!\n1!2!3!a!abc!6"),
-                Arguments.of("1:3:k:!:3a")
-        );
-    }}
+        assertThat(splittedString).isEqualTo(expectedResult);
+    }
+}
