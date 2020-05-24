@@ -20,6 +20,6 @@ public class LottoGeneratorTest {
     void 로또_자동_생성_테스트() {
         LottoGenerator generator = new LottoGenerator();
         Lotto lotto = generator.autoGenerate();
-        assertThat(lotto.getLottoNumbers()).hasSize(7);
+        assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 }
