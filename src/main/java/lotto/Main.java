@@ -16,7 +16,7 @@ public class Main {
 
         ResultView.printPurchaseCount(lottoGame.getPurchaseCount());
 
-        List<LottoNumbers> lottoNumbersGroup = lottoGame.createLottoNumbers();
+        List<LottoNumbers> lottoNumbersGroup = lottoGame.createAutoLottoNumbers();
         ResultView.printLottoNumbers(lottoNumbersGroup);
 
         LottoNumbers lastWinLottoNumbers = LottoNumbers.newInstance(InputView.getLastWeekLottoNumbers());
