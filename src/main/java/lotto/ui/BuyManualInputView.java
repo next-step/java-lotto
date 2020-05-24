@@ -34,7 +34,7 @@ public class BuyManualInputView {
     }
 
     public LottoTickets convertToManualLottoTickets() {
-        convertValidation();
+        inputValuesSizeValidation();
         return LottoTickets.create(
                 inputValues.stream()
                         .map(LottoGenerator::createByManual)
@@ -42,7 +42,7 @@ public class BuyManualInputView {
         );
     }
 
-    private void convertValidation() {
+    private void inputValuesSizeValidation() {
         if (manualLottoCount != inputValues.size()) {
             throw new IllegalArgumentException();
         }
