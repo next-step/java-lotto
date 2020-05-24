@@ -11,22 +11,23 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step2.domain.LottoShop.buyLotto;
 
-public class LottoShopTest {
+public class LottosTest {
 
   @DisplayName("구매 금액이 1000이하일 경우 LottoGamePriceException 발생")
   @ParameterizedTest
   @ValueSource(ints = { -1000, 0, 999 })
   void 구매_금액_검증_테스트 (int price) {
     assertThatExceptionOfType(LottoGamePriceException.class)
-      .isThrownBy(() -> LottoShop.of(price));
+      .isThrownBy(() -> buyLotto(price));
   }
 
   @DisplayName("로또 한 개당 1000원에 구매할 수 있는지 테스트")
   @ParameterizedTest
   @MethodSource("provideLottoCountAboutPrice")
   void 구매_갯수_테스트 (long price, long expected) {
-    assertEquals(expected, LottoShop.of(price).stream().count());
+    assertEquals(expected, buyLotto(price).stream().count());
   }
 
   private static Stream<Arguments> provideLottoCountAboutPrice () {
