@@ -1,20 +1,20 @@
-package step1.step2.domain;
+package step3.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import step3.domain.Rank;
 
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
-  @DisplayName("랭크의 일치 여부를 가져오는 테스트")
+
+  @DisplayName("보너스 볼과 일치하는 로또 번호로부터 랭크를 가져")
   @ParameterizedTest
   @MethodSource("provideEqualRank")
-  void 랭크_테스트 (int same, boolean matchBonus, Rank expected) {
+  void 랭크_일치_테스트 (int same, boolean matchBonus, Rank expected) {
     assertThat(expected).isEqualTo(Rank.valueOf(same, matchBonus));
   }
 

@@ -1,5 +1,7 @@
 # 3단계 - 로또(2등)
 
+## 기능 개발
+
 - [X] 2등을 위해 추가 번호를 하나 더 추첨한다.
   - [X] InputView에 추가 번호 입력 기능 개발
   - [X] Lotto class에 hasBonus 개발
@@ -11,4 +13,10 @@
   - [X] 기존의 WinningPrice를 Rank의 변경
   - [X] java enum을 적용해 프로그래밍을 구현한다.
   - [X] valueOf Method 개발: 파라미터에 대한 Rank를 구함 
-  - [X] Rank Test Code 작성
+
+## 기능 테스트
+
+- [ ] Rank
+  - [X] Rank valueOf Method Test 개발
+- [ ] Lotto
+- [ ] LottoGame
