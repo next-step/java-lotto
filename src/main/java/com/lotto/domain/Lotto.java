@@ -7,11 +7,12 @@ public class Lotto {
     private List<Integer> extractedLottoNumbers;
     private Integer matchingCount;
 
-    public Lotto(List<Integer> extractedLottoNumbers) {
+    public Lotto(List<Integer> extractedLottoNumbers, Integer matchingCount) {
         this.extractedLottoNumbers = extractedLottoNumbers;
+        this.matchingCount = matchingCount;
     }
 
-    private Integer getNumberMatchingWithWinningNumber(List<Integer> winningNumbers) {
+    public Integer getNumberOfMatchingWithWinningNumber(List<Integer> winningNumbers) {
         for (Integer extractedLottoNumber : this.extractedLottoNumbers) {
             increaseMatchingCount(winningNumbers, extractedLottoNumber);
         }
