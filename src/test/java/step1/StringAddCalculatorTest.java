@@ -17,4 +17,12 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(formula);
         assertThat(result).isEqualTo(0);
     }
+
+    @DisplayName("숫자 하나를 문자열로 입력하면 해당 숫자를 반환한다")
+    @ValueSource(strings = {"1", "2", "3", "4", "5"})
+    @ParameterizedTest
+    void splitAndSum_SingleNumber_ConvertToInt(String formula) {
+        int result = StringAddCalculator.splitAndSum(formula);
+        assertThat(result).isEqualTo(Integer.parseInt(formula));
+    }
 }
