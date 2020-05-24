@@ -3,34 +3,32 @@ package step2.domain;
 public class LottoGame {
 
   private final Lotto winningLotto;
-  private final LottoShop lottoShop;
+  private final Lottos lottos;
 
-  public LottoGame(LottoShop lottoShop, Lotto winningLotto) {
-    this.lottoShop = lottoShop;
+  public LottoGame(Lottos lottos, Lotto winningLotto) {
+    this.lottos = lottos;
     this.winningLotto = winningLotto;
   }
 
+  public static LottoGame of (Lottos lottos, Lotto winningLotto) {
+    return new LottoGame(lottos, winningLotto);
+  }
+
   public long getWinningCount (Rank rank) {
-    return lottoShop.stream()
-                    .filter(lotto -> getEqualRankOfLotto(lotto, rank))
-                    .count();
+    return lottos.stream()
+                 .filter(lotto -> getRankOfLotto(lotto).equals(rank))
+                 .count();
   }
 
   public double getPayoffRatio () {
     long payoff = Rank.stream()
                       .map(rank -> rank.getPrice() * getWinningCount(rank))
                       .reduce(0L, Math::addExact);
-    return (double)payoff / lottoShop.getPrice();
+    return (double)payoff / lottos.getPrice();
   }
 
-  public static LottoGame of (LottoShop lottoShop, Lotto winningLotto) {
-    return new LottoGame(lottoShop, winningLotto);
-  }
-
-  public boolean getEqualRankOfLotto (Lotto lotto, Rank rank) {
-    long same = lotto.stream()
-                     .filter(winningLotto::has)
-                     .count();
-    return Rank.valueOf(same).equals(rank);
+  public Rank getRankOfLotto (Lotto lotto) {
+    long same = winningLotto.sameCount(lotto);
+    return Rank.valueOf(same);
   }
 }
