@@ -27,7 +27,7 @@ public class LottoAnalyzer {
                 .count();
     }
 
-    public List<LottoRank> gradeTicketRank(int round, List<LottoTicket> lottoTickets){
+    public List<LottoRank> gradeTicket(int round, List<LottoTicket> lottoTickets){
         return lottoTickets.stream()
                 .map(lottoTicket -> matchingCount(round, lottoTicket))
                 .map(LottoRank::valueOf)
@@ -36,7 +36,7 @@ public class LottoAnalyzer {
     }
 
     public double revenueRate(int round, List<LottoTicket> lottoTickets) {
-        long sum = gradeTicketRank(round, lottoTickets)
+        long sum = gradeTicket(round, lottoTickets)
                 .stream()
                 .map(LottoRank::getPrice)
                 .map(BigDecimal::longValue)

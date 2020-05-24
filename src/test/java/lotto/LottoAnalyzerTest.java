@@ -47,7 +47,7 @@ public class LottoAnalyzerTest {
     @MethodSource("generate_lotto_tickets")
     @DisplayName("로또 티켓의 순위 결과를 반환한다.")
     void 로또_랭크_변환_테스트(List<LottoTicket> lottoTickets) {
-        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicketRank(round, lottoTickets);
+        List<LottoRank> lottoRanks = lottoAnalyzer.gradeTicket(round, lottoTickets);
         assertThat(lottoRanks).hasSize(lottoTickets.size());
     }
 
