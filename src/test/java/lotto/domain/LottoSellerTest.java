@@ -23,7 +23,7 @@ class LottoSellerTest {
     void buy_many_lotto(long price, int count) {
         LottoPaper lottoPaper = lottoSeller.sell(price, Collections.emptyList());
 
-        assertThat(lottoPaper.getLottoLines().size()).isEqualTo(count);
+        assertThat(lottoPaper.getAutoLottoLines().size()).isEqualTo(count);
     }
 
     @DisplayName("수동으로 로또 번호 구매할수 있다.")
@@ -34,10 +34,8 @@ class LottoSellerTest {
 
         long price = 2000;
         LottoPaper lottoPaper = lottoSeller.sell(price, Arrays.asList(firstLottoNums, secondLottoNums));
-        long autoCount = lottoPaper.getLottoLines().stream().filter(LottoLine::isAuto).count();
-        long manualCount = lottoPaper.getLottoLines().size() - autoCount;
 
-        assertThat(manualCount).isEqualTo(2);
-        assertThat(lottoPaper.getLottoLines()).hasSize(2);
+        assertThat(lottoPaper.getManualLottoLines()).hasSize(2);
+        assertThat(lottoPaper.getAutoLottoLines()).hasSize(0);
     }
 }

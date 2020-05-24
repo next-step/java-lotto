@@ -9,14 +9,16 @@ import lotto.domain.Rank;
 public class OutputView {
 
     public void printLottoPaper(LottoPaper lottoPaper) {
-        long autoLottoLineCount = lottoPaper.getLottoLines().stream()
-            .filter(lottoLine -> lottoLine.isAuto())
-            .count();
+        List<LottoLine> manualLottoLines = lottoPaper.getManualLottoLines();
+        List<LottoLine> autoLottoLines = lottoPaper.getAutoLottoLines();
 
-        System.out.println(String
-            .format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoPaper.getLottoLines().size() - autoLottoLineCount,
-                autoLottoLineCount));
-        lottoPaper.getLottoLines().forEach(lottoLine -> printLotto(lottoLine));
+        final String countMessage = String
+            .format("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualLottoLines.size(),
+                autoLottoLines.size());
+        System.out.println(countMessage);
+
+        autoLottoLines.forEach(lottoLine -> printLotto(lottoLine));
+        manualLottoLines.forEach(lottoLine -> printLotto(lottoLine));
         System.out.println();
     }
 

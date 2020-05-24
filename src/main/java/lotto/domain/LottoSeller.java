@@ -9,7 +9,6 @@ public class LottoSeller {
 
     private static final int LOTTO_LINE_PRICE = 1000;
 
-    private final LottoNumsGenerator lottoNumsGenerator = new LottoNumsGenerator();
 
     public LottoPaper sell(long price, List<LottoNums> manualLottoNums) {
         int autoCount = getTotalCount(price) - manualLottoNums.size();
@@ -26,14 +25,14 @@ public class LottoSeller {
     }
 
     private List<LottoLine> createAutoLottoLines(int autoCount) {
-        return Stream.generate(() -> new LottoLine(lottoNumsGenerator.generate(), true))
+        return Stream.generate(LottoLine::newAuto)
             .limit(autoCount)
             .collect(Collectors.toList());
     }
 
     private List<LottoLine> createManualLottoLines(List<LottoNums> manualLottoNums) {
         return manualLottoNums.stream()
-            .map(lottoNums -> new LottoLine(lottoNums, false))
+            .map(LottoLine::newManual)
             .collect(Collectors.toList());
     }
 

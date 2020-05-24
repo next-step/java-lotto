@@ -8,7 +8,7 @@ public class LottoNums {
     private static final int LOTTO_COUNT = 6;
     private List<LottoNum> lottoNums;
 
-    public LottoNums(List<LottoNum> lottoNums) {
+    private LottoNums(List<LottoNum> lottoNums) {
         validate(lottoNums);
         this.lottoNums = lottoNums;
     }

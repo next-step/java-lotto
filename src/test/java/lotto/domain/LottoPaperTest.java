@@ -37,8 +37,7 @@ class LottoPaperTest {
 
     private LottoPaper getLottoPaper(List<Integer> nums) {
         LottoNums lottoNums = LottoNums.of(nums);
-        LottoLine lottoLine = new LottoLine(lottoNums);
-        return new LottoPaper(Arrays.asList(lottoLine));
+        return new LottoPaper(Arrays.asList(LottoLine.newManual(lottoNums)));
     }
 
     static Stream<Arguments> source() {

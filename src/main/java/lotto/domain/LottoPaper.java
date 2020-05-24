@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +14,16 @@ public class LottoPaper {
         this.lottoLines = lottoLines;
     }
 
-    public List<LottoLine> getLottoLines() {
-        return new ArrayList<>(lottoLines);
+    public List<LottoLine> getAutoLottoLines() {
+        return this.lottoLines.stream()
+            .filter(LottoLine::isAuto)
+            .collect(Collectors.toList());
+    }
+
+    public List<LottoLine> getManualLottoLines() {
+        return this.lottoLines.stream()
+            .filter(LottoLine::isManual)
+            .collect(Collectors.toList());
     }
 
     public LottoMatchResult getResult(LottoNums winNums, LottoNum bonusNum, int totalPrice) {

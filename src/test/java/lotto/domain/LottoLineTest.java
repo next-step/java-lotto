@@ -17,7 +17,7 @@ public class LottoLineTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("source")
     void getRank(String desc, List<Integer> winNums, List<Integer> nums, Integer bonusNum,  Rank rank){
-        LottoLine lottoLine = new LottoLine(LottoNums.of(nums));
+        LottoLine lottoLine = LottoLine.newManual(LottoNums.of(nums));
         assertThat(lottoLine.getRank(LottoNums.of(winNums), new LottoNum(bonusNum))).isEqualTo(rank);
     }
 
