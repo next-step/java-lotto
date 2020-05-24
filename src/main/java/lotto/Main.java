@@ -14,10 +14,7 @@ public class Main {
 
         int amount = InputView.inputLottoAmount();
 
-        for (int i = 0; i < amount; i++) {
-            lottoShop.buy();
-        }
-        List<LottoTicket> lottoTickets = lottoShop.getLottoTickets();
+        List<LottoTicket> lottoTickets = lottoShop.buy(amount);
         ResultView.printBuyingTickets(lottoTickets);
 
         int round = 1;

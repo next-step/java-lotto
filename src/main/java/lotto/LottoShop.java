@@ -1,20 +1,17 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoShop {
 
-    private final List<LottoTicket> lottoTickets = new ArrayList<>();
-
     private final LottoGenerator lottoGenerator = new LottoGenerator();
 
-    public LottoTicket buy() {
-        LottoTicket lotto = lottoGenerator.autoGenerate();
-        lottoTickets.add(lotto);
-        return lotto;
-    }
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public List<LottoTicket> buy(int amount) {
+        return IntStream.range(0, amount)
+                .boxed()
+                .map(integer -> lottoGenerator.autoGenerate())
+                .collect(Collectors.toList());
     }
 }
