@@ -2,7 +2,7 @@ package step2.view;
 
 import step2.domain.Lotto;
 import step2.domain.LottoGame;
-import step2.domain.LottoShop;
+import step2.domain.Lottos;
 import step2.domain.Rank;
 
 import static java.util.stream.Collectors.joining;
@@ -18,9 +18,9 @@ public class ResultView {
 
   private ResultView () { }
 
-  public void printLottoList(LottoShop lottoShop) {
-    final long lottoCount = lottoShop.stream().count();
-    final String lottoList = lottoShop.stream()
+  public void printLottoList(Lottos lottos) {
+    final long lottoCount = lottos.stream().count();
+    final String lottoList = lottos.stream()
                                       .map(ResultView::lottoToString)
                                       .collect(joining("\n"));
 
