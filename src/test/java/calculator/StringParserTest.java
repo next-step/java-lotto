@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StringParserTest {
 
@@ -45,6 +46,24 @@ public class StringParserTest {
                 Arguments.of("//;\n1;2;3", ";", "1;2;3"),
                 Arguments.of("//!\n1!2!49", "!", "1!2!49"),
                 Arguments.of("//p\n10?19?33", "p", "10?19?33")
+        );
+    }
+
+    @DisplayName("음수값 혹은 숫자가 아닌 문자가 포함된 경우 RuntimeException 발생")
+    @ParameterizedTest
+    @MethodSource("mockInvalidStringBuilder")
+    public void throwRuntimeExceptionOnInvalidArguments(String userInput) {
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    List<Integer> numbers = StringParser.parseString(userInput);
+                });
+    }
+
+    private static Stream<Arguments> mockInvalidStringBuilder() {
+        return Stream.of(
+                Arguments.of("1:2:3:-1:4:5"),
+                Arguments.of("//!\n1!2!3!a!abc!6"),
+                Arguments.of("1:3:k:!:3a")
         );
     }
 }

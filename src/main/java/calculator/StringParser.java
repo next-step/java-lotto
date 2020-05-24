@@ -33,7 +33,7 @@ public class StringParser {
         }
         return userInput.split(DEFAULT_DELIMITER);
     }
-    
+
     private static Integer parseIntAndValidate(String string) {
         Integer number;
         try {
