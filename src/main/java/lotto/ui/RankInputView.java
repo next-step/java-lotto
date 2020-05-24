@@ -4,9 +4,7 @@ import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class RankInputView {
     private String winTicketValue;
@@ -37,12 +35,7 @@ public class RankInputView {
     }
 
     public LottoTicket convertToWinTicket() {
-        return LottoGenerator.createManualByIntList(
-                Arrays.asList(this.winTicketValue.split(","))
-                        .stream()
-                        .map(inputValue -> Integer.parseInt(inputValue.trim()))
-                        .collect(Collectors.toList())
-        );
+        return LottoGenerator.createFromString(this.winTicketValue);
     }
 
     public LottoNumber getWinBonusNumber() {

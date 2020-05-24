@@ -29,13 +29,6 @@ class LottoTicketTests {
         assertThat(lottoTicket.size()).isEqualTo(6);
     }
 
-    @DisplayName("길이기 0인 빈 LttoTicket을 생성할 수 있다.")
-    @Test
-    void creatEmptyTicket() {
-        LottoTicket lottoTicket = LottoTicket.createEmpty();
-        assertThat(lottoTicket.size()).isEqualTo(0);
-    }
-
     @DisplayName("길이가 6이 아닌 LottoNumber 리스트로는 객체를 생성할 수 없다.")
     @Test
     void createLottoNumbersValidationTest() {

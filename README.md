@@ -148,10 +148,9 @@
 ### Todo List
 - BuyManualInputView
     - [X] 수동으로 구매할 로또 티켓의 갯수를 입력받을 수 있다.
-    - [ ] 수동으로 구매할 로또 티켓 갯수 만큼 로또 번호를 입력받고 LottoTickets를 만든다.
-        - 수동으로 구매할 로또 티켓 갯수가 0인 경우 빈 배열을 갖고 있는 LottoTicekt를 생성한다.
+    - [X] 수동으로 구매할 로또 티켓 갯수 만큼 로또 번호를 입력받고 LottoTickets를 만든다.
+        - 수동으로 구매할 로또 티켓 갯수가 0인 경우 빈 배열을 갖고 있는 LottoTicekts를 생성한다.
 - LottoGenerator
     - [X] 정적 팩토리 메서드로 쉼표로 구분된 문자열을 입력받아서 LottoTicket을 생성하는 기능 구현
         - 여러 곳에서 사용되는 기능이라 공통으로 사용되도록 구현
-        - [ ] BuyManualInputView, RankInputView에서 사용하도록 적용
-    - [X] 아무런 LottoTicket도 갖지 않은 빈 LottoTicket을 생성할 수 있음
+        - [X] BuyManualInputView, RankInputView에서 사용하도록 적용

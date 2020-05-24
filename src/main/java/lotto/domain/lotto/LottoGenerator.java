@@ -41,8 +41,4 @@ public class LottoGenerator {
             throw new IllegalArgumentException("Input value must not empty");
         }
     }
-
-    public static LottoTicket createEmptyLottoTicket() {
-        return LottoTicket.createEmpty();
-    }
 }
