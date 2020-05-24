@@ -34,4 +34,13 @@ class StringAddCalculatorTest {
         int result = StringAddCalculator.splitAndSum(formula);
         assertThat(result).isEqualTo(expected);
     }
+
+    @DisplayName("숫자 두개를 콜론 구분자로 입력할 경우 두 숫자의 합을 반환한다")
+    @CsvSource({"1,2,3", "2,3,5", "3,4,7"})
+    @ParameterizedTest
+    void splitAndSum_TwoNumberWithColon_Sum(String lOperand, String rOperand, int expected) {
+        String formula = lOperand + ":" + rOperand;
+        int result = StringAddCalculator.splitAndSum(formula);
+        assertThat(result).isEqualTo(expected);
+    }
 }
