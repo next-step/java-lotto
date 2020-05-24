@@ -13,7 +13,7 @@ public class LottoGenerator {
 
 
     public Lotto autoGenerate() {
-        return new Lotto(generateLottoNumbers());
+        return Lotto.of(generateLottoNumbers());
     }
 
     private List<Integer> generateLottoNumbers() {
