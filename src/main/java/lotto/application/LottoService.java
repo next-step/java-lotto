@@ -10,7 +10,7 @@ import lotto.domain.shop.Shop;
 
 public class LottoService {
     public LottoTickets buyLottoTickets(Money money) {
-        return Shop.sellLottoTickets(money);
+        return Shop.sellLottoTicketsAuto(money);
     }
 
     public Ranks calculateRank(LottoTicket winTicket, LottoNumber winBonusNumber, LottoTickets lottoTickets) {
