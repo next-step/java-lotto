@@ -14,10 +14,10 @@ public class ResultView {
 
     private static final String STATISTICS_BANNER_MESSAGE = "당첨 통계\n---------";
 
-    private static final String  PREFIX_REVENUE_MESSAGE =  "총 수익율은 ";
-    private static final String  SUFFIX_REVENUE_MESSAGE =  " 입니다.";
+    private static final String PREFIX_REVENUE_MESSAGE = "총 수익율은 ";
+    private static final String SUFFIX_REVENUE_MESSAGE = " 입니다.";
 
-    private ResultView(){
+    private ResultView() {
         throw new AssertionError();
     }
 
@@ -33,21 +33,22 @@ public class ResultView {
     public static void printLottoRanks(List<LottoRank> lottoRanks) {
         System.out.println(STATISTICS_BANNER_MESSAGE);
 
-        Map<Integer,Long> lottoRankMap = lottoRanks.stream()
+        Map<Integer, Long> lottoRankMap = lottoRanks.stream()
                 .collect(Collectors.groupingBy(LottoRank::getMatchCount, Collectors.counting()));
 
         Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank != LottoRank.BOOM)
+                .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
                 .sorted(Comparator.reverseOrder())
-                .forEach(lottoRank -> {
-                    Long matchCount = lottoRankMap.containsKey(lottoRank.getMatchCount()) ? lottoRankMap.get(lottoRank.getMatchCount()) : 0l;
-
-                    System.out.print(lottoRank.getMatchCount() + "개 일치 (" + lottoRank.getPrice() + " 원)");
-                    System.out.println("- " + matchCount + "개");
-                });
+                .forEach(lottoRank -> printLottoRank(lottoRankMap, lottoRank));
     }
 
-    public static void printRevenueRate(double revenueRate){
+    private static void printLottoRank(Map<Integer, Long> lottoRankMap, LottoRank lottoRank) {
+        Long matchCount = lottoRankMap.getOrDefault(lottoRank.getMatchCount(), 0l);
+        String.format("%s개 일치 (%s원)- %s개", lottoRank.getMatchCount(), lottoRank.getPrice(), matchCount);
+
+    }
+
+    public static void printRevenueRate(double revenueRate) {
         System.out.println(PREFIX_REVENUE_MESSAGE + revenueRate + SUFFIX_REVENUE_MESSAGE);
     }
 }
