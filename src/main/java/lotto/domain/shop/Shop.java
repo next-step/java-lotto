@@ -13,4 +13,8 @@ public class Shop {
                 .mapToObj(num -> LottoGenerator.create())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::create));
     }
+
+    public static int countAutoLottoTickets(LottoTickets manualLottoTickets, Money money) {
+        return money.howManyLottoTickets() - manualLottoTickets.size();
+    }
 }
