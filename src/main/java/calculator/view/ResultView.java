@@ -1,8 +1,8 @@
-package calculator;
+package calculator.view;
 
 public class ResultView {
 
-    private static final String RESULT_MESSAGE = "정답은 : ";
+    private static final String RESULT_MESSAGE = "정답 : ";
 
     private ResultView() {
     }
