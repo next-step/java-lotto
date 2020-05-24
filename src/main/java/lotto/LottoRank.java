@@ -1,5 +1,6 @@
 package lotto;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -34,8 +35,8 @@ public enum LottoRank {
         return matchCount;
     }
 
-    public long getPrice() {
-        return price;
+    public BigDecimal getPrice() {
+        return BigDecimal.valueOf(price);
     }
 
     public static LottoRank valueOf(int matchCount) {
