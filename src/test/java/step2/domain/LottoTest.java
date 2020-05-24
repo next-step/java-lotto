@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step2.domain.LottoGenerator.generateLotto;
 
 public class LottoTest {
 
@@ -20,7 +21,7 @@ public class LottoTest {
   @ValueSource( strings = { "1,2,3,4,5,6,7", "1,2,3,4,5", "1,2,3,4,5,5", "1,1,2,2,3,3" } )
   void 로또_번호_갯수_검증 (String lottoNumbers) {
     assertThatExceptionOfType(LottoCountException.class)
-      .isThrownBy(() -> Lotto.of(lottoNumbers));
+      .isThrownBy(() -> generateLotto(lottoNumbers));
   }
 
   @DisplayName("로또 번호에 중복이 있을 경우 LottoReduplicateException 발생")
@@ -28,7 +29,7 @@ public class LottoTest {
   @ValueSource( strings = { "1,2,3,4,5,6,6", "1,1,2,2,3,3,4,4,5,5,6,6" } )
   void 로또_번호_중복_제거 (String lottoNumbers) {
     String expected = "1,2,3,4,5,6";
-    Lotto lotto = Lotto.of(lottoNumbers);
+    Lotto lotto = generateLotto(lottoNumbers);
     assertEquals(expected, lotto.stream()
                                 .map(String::valueOf)
                                 .collect(Collectors.joining(",")));
@@ -46,11 +47,11 @@ public class LottoTest {
   private static Stream<Arguments> provideNotSortedLottoNumbers () {
     return Stream.of(
       Arguments.of(
-        Lotto.of("5,6,4,1,2,10"),
+        generateLotto("5,6,4,1,2,10"),
         "1,2,4,5,6,10"
       ),
       Arguments.of(
-        Lotto.of("6,5,4,3,2,1"),
+        generateLotto("6,5,4,3,2,1"),
         "1,2,3,4,5,6"
       )
     );
