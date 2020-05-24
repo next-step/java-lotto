@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.Collections.shuffle;
-import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
@@ -15,14 +14,13 @@ public class Lotto {
   private static final long MAX_COUNT = 6L;
 
   private static final List<Integer> numbers = new ArrayList<>();
-
   static {
     for (int i = 1; i < 46; i++) numbers.add(i);
   }
 
-  private final Set<Integer> lottoNumbers;
+  private final SortedSet<Integer> lottoNumbers;
 
-  private Lotto (Set<Integer> lottoNumbers) {
+  private Lotto (SortedSet<Integer> lottoNumbers) {
     validateCount(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
@@ -49,8 +47,7 @@ public class Lotto {
   }
 
   public static Lotto of (List<Integer> lottoNumber) {
-    lottoNumber.sort(comparingInt(a -> a));
-    return new Lotto(new HashSet<>(lottoNumber));
+    return new Lotto(new TreeSet<>(lottoNumber));
   }
 
   private static void validateCount (Set<Integer> lottoNumbers) throws RuntimeException {
