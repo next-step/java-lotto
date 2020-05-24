@@ -8,17 +8,15 @@ public class LottoTicket {
     private static final int EMPTY_SIZE = 0;
     private static final int SIZE = 6;
     private final List<LottoNumber> values;
-    private final CreationType creationType;
 
-    private LottoTicket(List<LottoNumber> values, CreationType creationType) {
+    private LottoTicket(List<LottoNumber> values) {
         validation(values);
         this.values = values;
-        this.creationType = creationType;
     }
 
-    public static LottoTicket create(List<LottoNumber> values, CreationType creationType) {
+    public static LottoTicket create(List<LottoNumber> values) {
         Collections.sort(values);
-        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)), creationType);
+        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
     }
 
     public boolean hasThisNumber(LottoNumber lottoNumber) {
@@ -29,10 +27,6 @@ public class LottoTicket {
         return (int) this.values.stream()
                 .filter(lottoTicket::hasThisNumber)
                 .count();
-    }
-
-    public CreationType getCreationType() {
-        return creationType;
     }
 
     protected int size() {

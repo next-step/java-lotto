@@ -25,7 +25,7 @@ class LottoTicketTests {
     @DisplayName("길이가 6인 LottoNumber 리스트로 객체를 생성할 수 있다.")
     @Test
     void createLottoNumbersTest() {
-        LottoTicket lottoTicket = LottoTicket.create(values, CreationType.MANUAL);
+        LottoTicket lottoTicket = LottoTicket.create(values);
         assertThat(lottoTicket.size()).isEqualTo(6);
     }
 
@@ -34,8 +34,7 @@ class LottoTicketTests {
     void createLottoNumbersValidationTest() {
         assertThatThrownBy(() ->
                 LottoTicket.create(
-                        Collections.singletonList(LottoNumber.create(1)),
-                        CreationType.MANUAL
+                        Collections.singletonList(LottoNumber.create(1))
                 ))
                 .isInstanceOf(LottoTicketSizeException.class);
     }
@@ -43,7 +42,7 @@ class LottoTicketTests {
     @DisplayName("객체 생성시 전달 된 컬렉션 레퍼런스에 변경이 발생해도 일급 콜렉션 내부의 상태값이 변하지 않는다.")
     @Test
     void isSideEffectFreeTest() {
-        LottoTicket lottoTicket = LottoTicket.create(values, CreationType.MANUAL);
+        LottoTicket lottoTicket = LottoTicket.create(values);
         values.add(LottoNumber.create(45));
         assertThat(lottoTicket.size()).isNotEqualTo(7);
     }
@@ -55,15 +54,15 @@ class LottoTicketTests {
         List<LottoNumber> values2 = new ArrayList<>();
         IntStream.rangeClosed(1, 6).forEach(num -> values2.add(LottoNumber.create(num)));
 
-        LottoTicket lottoTicket1 = LottoTicket.create(values, CreationType.MANUAL);
-        LottoTicket lottoTicket2 = LottoTicket.create(values2, CreationType.MANUAL);
+        LottoTicket lottoTicket1 = LottoTicket.create(values);
+        LottoTicket lottoTicket2 = LottoTicket.create(values2);
         assertThat(lottoTicket1).isEqualTo(lottoTicket2);
     }
 
     @DisplayName("리스트 형태를 toString으로 보여줄 수 있어야 한다.")
     @Test
     void toStringTest() {
-        LottoTicket lottoTicket = LottoTicket.create(values, CreationType.MANUAL);
+        LottoTicket lottoTicket = LottoTicket.create(values);
         assertThat(lottoTicket.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 

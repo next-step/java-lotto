@@ -11,15 +11,14 @@ public class LottoGenerator {
 
     public static LottoTicket createByAuto() {
         Collections.shuffle(lottoSeed, new Random());
-        return LottoTicket.create(lottoSeed.subList(0, 6), CreationType.AUTO);
+        return LottoTicket.create(lottoSeed.subList(0, 6));
     }
 
     public static LottoTicket createByManual(List<Integer> intList) {
         return LottoTicket.create(
                 intList.stream()
                         .map(LottoNumber::create)
-                        .collect(Collectors.toList()),
-                CreationType.MANUAL
+                        .collect(Collectors.toList())
         );
     }
 

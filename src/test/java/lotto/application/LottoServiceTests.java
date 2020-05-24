@@ -47,7 +47,6 @@ class LottoServiceTests {
 
         LottoTickets lottoTickets = lottoService.buyLottoTicketsCombine(manualLottoTickets, new Money(4000));
 
-        assertThat(lottoTickets.countType(CreationType.AUTO)).isEqualTo(2);
-        assertThat(lottoTickets.countType(CreationType.MANUAL)).isEqualTo(2);
+        assertThat(lottoTickets.size()).isEqualTo(4);
     }
 }

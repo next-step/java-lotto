@@ -68,18 +68,4 @@ class LottoTicketsTests {
         assertThat(emptyLottoTickets.combine(autoLottoTickets).size()).isEqualTo(2);
         assertThat(autoLottoTickets.combine(emptyLottoTickets).size()).isEqualTo(2);
     }
-
-    @DisplayName("현재 객체 내부에 수동 로또가 몇개인지, 자동 로또가 몇개인지 알 수 있다.")
-    @Test
-    void howManyAutoOrManualTest() {
-        LottoTickets autoLottoTickets = LottoTickets.create(
-                Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
-        LottoTickets manualLottoTickets = LottoTickets.create(
-                Collections.singletonList(LottoGenerator.createByManual("1,2,3,4,5,6")));
-
-        LottoTickets combinedLottoTicket = autoLottoTickets.combine(manualLottoTickets);
-
-        assertThat(combinedLottoTicket.countType(CreationType.AUTO)).isEqualTo(2);
-        assertThat(combinedLottoTicket.countType(CreationType.MANUAL)).isEqualTo(1);
-    }
 }
