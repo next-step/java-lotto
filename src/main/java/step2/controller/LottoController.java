@@ -5,20 +5,13 @@ import step2.domain.LottoGame;
 import step2.view.InputView;
 import step2.view.ResultView;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class LottoController {
   private final LottoGame lottoGame;
-  private final InputView inputView = InputView.getInstance();
-  private final ResultView resultView = ResultView.getInstance();
+  private final static InputView inputView = InputView.getInstance();
+  private final static ResultView resultView = ResultView.getInstance();
 
   private LottoController (LottoGame lottoGame) {
     this.lottoGame = lottoGame;
-  }
-
-  public static LottoController of () {
-    return new LottoController(LottoGame.of(InputView.getInstance().inputPrice()));
   }
 
   private LottoController viewLottoGame () {
@@ -41,9 +34,17 @@ public class LottoController {
     return this;
   }
 
-  public LottoController viewPayoff () {
+  public void viewPayoff () {
     resultView.printPayoffRatio(lottoGame.getPayoff());
-    return this;
+  }
+
+  public static LottoController of (LottoGame lottoGame) {
+    return new LottoController(lottoGame);
+  }
+
+  public static LottoController of () {
+    long price = inputView.inputPrice();
+    return of(LottoGame.of(price));
   }
 
   public static void main(String[] args) {
