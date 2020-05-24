@@ -54,15 +54,23 @@ public class LottoGameTest {
     @DisplayName("로또 게임에 존재하지 않는 라운드는 예외가 발생한다.")
     void 로또_게임_matching_count_예외_테스트(int round) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoGame.matchingCount(round, LottoTicket.of(Arrays.asList(1,2,3,4,5,6,7))));
+                .isThrownBy(() -> lottoGame.matchingCount(round, LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7))));
     }
 
     @ParameterizedTest
     @MethodSource("generate_lotto_tickets")
     @DisplayName("로또 티켓의 순위 결과를 반환한다.")
-    void 로또_랭크_변환_테스트(List<LottoTicket> lottoTickets){
+    void 로또_랭크_변환_테스트(List<LottoTicket> lottoTickets) {
         List<LottoRank> lottoRanks = lottoGame.lottoRanks(round, lottoTickets);
         assertThat(lottoRanks).hasSize(lottoTickets.size());
+    }
+
+    @ParameterizedTest
+    @MethodSource("generate_lotto_tickets")
+    @DisplayName("내 로또 티켓의 수익률을 계산한다.")
+    void 수익률_계산_테스트(List<LottoTicket> lottoTickets, double expected) {
+        double revenueRate = lottoGame.revenueRate(round, lottoTickets);
+        assertThat(revenueRate).isEqualTo(expected);
     }
 
 
@@ -70,13 +78,26 @@ public class LottoGameTest {
         return Stream.of(
                 Arguments.of(
                         Arrays.asList(
-                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 2, 6)),
-                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 6, 6)),
-                            LottoTicket.of(Arrays.asList(1, 2, 3, 4, 3, 4))
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 2, 6)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 6, 6)),
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 3, 4))
                         )
                 )
+        );
+    }
+
+    private static Stream<Arguments> generate_lotto_tickets_with_revenue_rate() {
+        return Stream.of(
+                Arguments.of(
+                        Arrays.asList(
+                                LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15)),
+                                LottoTicket.of(Arrays.asList(10, 11, 12, 13, 14, 15))
+                        ), 10.0)
         );
     }
 

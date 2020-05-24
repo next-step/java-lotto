@@ -37,4 +37,8 @@ public class LottoGame {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
+
+    public double revenueRate(int round, List<LottoTicket> lottoTickets) {
+        return 0;
+    }
 }
