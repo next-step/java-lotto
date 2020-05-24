@@ -8,30 +8,17 @@ import java.util.stream.Collectors;
 
 public class StringParser {
 
-    private static final String DEFAULT_DELIMITER = ",|:";
-    private static final String CUSTOM_REGULAR_EXPRESSION = "//(.)\n(.*)";
     private static final String ERROR_INVALID_ARGUMENT = "ERROR : 0 이상의 숫자만 계산할 수 있습니다.";
-    private static final int FIRST = 1;
-    private static final int SECOND = 2;
     private static final int MINIMUM_LIMIT = 0;
 
     private StringParser() {
     }
 
     public static List<Integer> parseString(String userInput) {
-        String[] stringTokens = splitString(userInput);
+        String[] stringTokens = StringSplitter.splitString(userInput);
         return Arrays.stream(stringTokens)
                 .map(StringParser::parseIntAndValidate)
                 .collect(Collectors.toList());
-    }
-
-    private static String[] splitString(String userInput) {
-        Matcher matcher = Pattern.compile(CUSTOM_REGULAR_EXPRESSION).matcher(userInput);
-        if (matcher.find()) {
-            String customDelimiter = matcher.group(FIRST);
-            return matcher.group(SECOND).split(customDelimiter);
-        }
-        return userInput.split(DEFAULT_DELIMITER);
     }
 
     private static Integer parseIntAndValidate(String string) {
