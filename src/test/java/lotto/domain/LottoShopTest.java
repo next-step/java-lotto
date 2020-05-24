@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,27 +42,6 @@ class LottoShopTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideNotValidWinner")
-    @DisplayName("지난 주 당첨 번호가 6개가 아닌경우 Exception")
-    void validateNotValidWinner(List<Lotto> winners) {
-        LottoShop lottoShop = this.createLottoSeller(1000);
-        List<LottoNumberResult> lottoNumberResults = lottoShop.buyLotto(this.createAutoLottoNumberGenerator(), LottoNumbers.LOTTO_NUMBERS, LottoNumbers.LOTTO_SIZE);
-        assertThatThrownBy(() -> lottoNumberResults.stream()
-                .forEach(lottoNumberResult -> lottoNumberResult.findLottoMatchResult(winners))
-        ).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    private static Stream<Arguments> provideNotValidWinner() {
-        return Stream.of(
-                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-                Arguments.of(Arrays.asList(1, 2, 3, 4)),
-                Arguments.of(Arrays.asList(1, 2, 3)),
-                Arguments.of(Arrays.asList(1, 2)),
-                Arguments.of(Arrays.asList(1))
-        );
-    }
-
-    @ParameterizedTest
     @MethodSource("providePurchaseAmountAndLottoCount")
     @DisplayName("로또 발급 테스트")
     void buyLottoTest(int price, int lottoCount) {
@@ -90,11 +70,11 @@ class LottoShopTest {
     private static Stream<Arguments> providePriceAndLottoMatchers() {
         return Stream.of(
                 Arguments.of(1000, Arrays.asList(LottoMatcher.FIRST_PLACE), 2000000.00),
-                Arguments.of(1000, Arrays.asList(LottoMatcher.SECOND_PLACE), 1500.00),
-                Arguments.of(1000, Arrays.asList(LottoMatcher.THIRD_PLACE), 50.00),
-                Arguments.of(1000, Arrays.asList(LottoMatcher.FOURTH_PLACE), 5.00),
-                Arguments.of(10000, Arrays.asList(LottoMatcher.THIRD_PLACE), 5.00),
-                Arguments.of(10000, Arrays.asList(LottoMatcher.FOURTH_PLACE), 0.50)
+                Arguments.of(1000, Arrays.asList(LottoMatcher.SECOND_PLACE), 30000.00),
+                Arguments.of(1000, Arrays.asList(LottoMatcher.THIRD_PLACE), 1500.00),
+                Arguments.of(1000, Arrays.asList(LottoMatcher.FOURTH_PLACE), 50.00),
+                Arguments.of(10000, Arrays.asList(LottoMatcher.THIRD_PLACE), 150.00),
+                Arguments.of(10000, Arrays.asList(LottoMatcher.FOURTH_PLACE), 5.00)
         );
     }
 
@@ -113,5 +93,16 @@ class LottoShopTest {
                 Arguments.of(Arrays.asList(45, 44, 43, 2, 4, 5)),
                 Arguments.of(Arrays.asList(23, 22, 43, 31, 18, 1, 9))
         );
+    }
+
+    private static LottoWinnerNumber createLottoWinnerNumber(List<Integer> winnerNumbers, int bonusBall) {
+        List<Lotto> lottos = winnerNumbers.stream()
+                .map(winnerNumber -> new Lotto(winnerNumber))
+                .collect(Collectors.toList());
+        return new LottoWinnerNumber(lottos, new Lotto(bonusBall));
+    }
+
+    private static Lotto createLotto(int number) {
+        return new Lotto(number);
     }
 }
