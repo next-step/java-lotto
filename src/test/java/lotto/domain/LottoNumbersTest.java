@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -78,8 +78,24 @@ class LottoNumbersTest {
 
     @DisplayName("로또 번호에 특정 번호가 포함되어 있는지 알 수 있다.")
     @ParameterizedTest
-    @ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7 })
-    void canContainsMatchNumber(int lottoNumber) {
-        assertThat(this.lottoNumbers.isMatchNumber(lottoNumber)).isEqualTo(lottoNumber <= 6);
+    @CsvSource(value = { "1,true", "2,true", "3,true", "4,true", "5,true", "6,true", "7,false" })
+    void canContainsMatchNumber(int lottoNumber, boolean result) {
+        assertThat(this.lottoNumbers.isMatchNumber(lottoNumber)).isEqualTo(result);
+    }
+
+    @DisplayName("로또 문자열로 중복되지 않은 숫자를 생성할 수 있다.")
+    @Test
+    void canCreateManualNonDuplicateNumbers() {
+        List<Integer> nonDuplicateNumbers = LottoNumbers.createNonDuplicateNumbers("1, 2, 3, 4, 5, 6");
+
+        assertThat(nonDuplicateNumbers).isNotNull();
+        assertThat(nonDuplicateNumbers).hasSize(6);
+    }
+
+    @DisplayName("객체를 복사할 수 있다.")
+    @Test
+    void canClone() {
+        LottoNumbers clonedLottoNumbers = this.lottoNumbers.clone();
+        assertThat(this.lottoNumbers).isNotEqualTo(clonedLottoNumbers);
     }
 }
