@@ -4,14 +4,13 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_MESSAGE = "계산할 문자열을 입력하세요.";
 
-    public InputView() {
-        this.scanner = new Scanner(System.in);
+    private InputView() {
     }
 
-    public String getUserInput() {
+    public static String getUserInput() {
         System.out.println(INPUT_MESSAGE);
         return scanner.next();
     }
