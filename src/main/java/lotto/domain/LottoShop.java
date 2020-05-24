@@ -7,6 +7,7 @@ public class LottoShop {
 
     private final static int LOTTO_PRICE = 1000;
     private final static int ZERO_NUMBER = 0;
+
     private int inputMoney;
 
     private LottoShop(int inputMoney) {
@@ -16,6 +17,10 @@ public class LottoShop {
 
     public static LottoShop putMoney(int money) {
         return new LottoShop(money);
+    }
+
+    public static void matchLottoTicket(String winningNumbers) {
+
     }
 
     private void validateMoney(int inputMoney) {

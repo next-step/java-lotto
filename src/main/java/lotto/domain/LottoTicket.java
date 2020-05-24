@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
@@ -11,17 +9,45 @@ public class LottoTicket {
     private final static int LOTTO_MIN_NUMBER = 1;
     private final static int LOTTO_TICKET_SIZE = 6;
 
+    private final static int LOTTO_MATCH  = 1;
+    private final static int LOTTO_NOT_MATCH  = 0;
+
     private List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private LottoTicket() {
-        for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
+        initLottoNumbers();
         shuffleLottoTicket();
     }
 
-    public static LottoTicket create() {
+    private void initLottoNumbers() {
+        for (int i = LOTTO_MIN_NUMBER; i < LOTTO_MAX_NUMBER; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+    }
+
+    protected static LottoTicket create() {
         return new LottoTicket();
+    }
+
+    public int matchWinningNumbers(String winningNumber) {
+        int matchResult = 0;
+        String[] splitNumbers = winningNumber.split(",");
+        for (String splitNumber : splitNumbers) {
+            int number = getNumber(splitNumber);
+            matchResult += isMatchNumber(number);
+        }
+        return matchResult;
+    }
+
+    private int isMatchNumber(int number) {
+        List<Integer> collect = this.lottoNumbers.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+        return collect.contains(number) ? LOTTO_MATCH : LOTTO_NOT_MATCH;
+    }
+
+    private static int getNumber(String splitNumber) {
+        return Integer.parseInt(splitNumber.trim());
     }
 
     private void shuffleLottoTicket() {

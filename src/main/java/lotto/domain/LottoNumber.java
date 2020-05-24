@@ -6,7 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int value;
 
-    public LottoNumber(int value) {
+    protected LottoNumber(int value) {
         validate(value);
         this.value = value;
     }

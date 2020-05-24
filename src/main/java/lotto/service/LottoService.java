@@ -14,9 +14,8 @@ public class LottoService {
         return lottoService == null ? new LottoService() : lottoService;
     }
 
-    public List<LottoTicket> purchaseLottoTicket() {
-        int inputMoney = InputView.inputMoney();
-        LottoShop lottoShop = LottoShop.putMoney(inputMoney);
+    public List<LottoTicket> purchaseLottoTicket(int money) {
+        LottoShop lottoShop = LottoShop.putMoney(money);
         return lottoShop.buyLottoTickets();
     }
 }
