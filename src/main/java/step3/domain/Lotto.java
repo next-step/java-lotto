@@ -26,6 +26,10 @@ public class Lotto {
     return lottoNumbers.stream();
   }
 
+  public boolean hasBonus (int bonusNumber) {
+    return stream().filter(v -> v == bonusNumber).count() == 1;
+  }
+
   public static Lotto of (String lottoNumbers) {
     return Lotto.of(
       Arrays.stream(lottoNumbers.split(","))
@@ -51,7 +55,7 @@ public class Lotto {
   }
 
   private static void validateReduplicate (List<Integer> lottoNumbers) throws RuntimeException {
-    if (new HashSet(lottoNumbers).size() != lottoNumbers.size()) {
+    if (new HashSet<Integer>(lottoNumbers).size() != lottoNumbers.size()) {
       throw new LottoReduplicateException();
     }
   }
