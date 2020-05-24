@@ -7,3 +7,14 @@
   * 숫자 이외의 값 & 음수 값 : RuntimeException
 * 문자열을 구분자로 분리하여 값을 구함
 * 결과물 출력
+
+* Domain
+    * StringAddCalculator
+    * StringParser
+    * StringSplitter
+    * Numbers
+    * InvalidNumberException
+ * View
+    * InputView
+    * ResultView
+ * Main

@@ -1,12 +1,9 @@
-package calculator;
+package calculator.domain;
 
-import calculator.domain.Numbers;
-import calculator.domain.StringParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -17,8 +14,8 @@ public class NumbersTest {
 
     @DisplayName("Numbers 컬렉션 정상 생성 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"1:2:3:4:5", "//!\n1!3!9"})
-    public void makeNumbersObject(String input) {
+    @MethodSource("mockUserInputBuilder")
+    public void makeNumbersObject(String input, int sum) {
         List<Integer> parsedNumbers = StringParser.parseString(input);
         assertThatCode(() -> {
             Numbers numbers = new Numbers(parsedNumbers);

@@ -1,10 +1,9 @@
-package calculator;
+package calculator.domain;
 
-import calculator.domain.Numbers;
-import calculator.domain.StringAddCalculator;
-import calculator.domain.StringParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,5 +17,15 @@ public class StringAddCalculatorTest {
         Integer calculationResult = StringAddCalculator.getNumbersSum(numbers);
 
         assertThat(calculationResult).isEqualTo(55);
+    }
+
+    @DisplayName("UserInput이 null or empty일 때 결과값이 0이 리턴됨")
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void getZeroWhenNullOrEmpty(String userInput) {
+        Numbers numbers = new Numbers(StringParser.parseString(userInput));
+        Integer calculationResult = StringAddCalculator.getNumbersSum(numbers);
+
+        assertThat(calculationResult).isEqualTo(0);
     }
 }
