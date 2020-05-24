@@ -7,5 +7,7 @@ public class Main {
 
         Numbers numbers = new Numbers(StringParser.parseString(userInput));
         Integer calculationResult = StringAddCalculator.getNumbersSum(numbers);
+
+        ResultView.printResult(calculationResult);
     }
 }
