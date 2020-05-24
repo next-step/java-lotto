@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,21 +39,33 @@ class LottoGameTest {
 
     @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
     @Test
-    void canCreateLottoNumbers() {
+    void canCreateAutoLottoNumbers() {
         LottoGame lottoGame = new LottoGame(14000);
-        List<LottoNumbers> lottoNumbers = lottoGame.createLottoNumbers();
+        List<LottoNumbers> lottoNumbers = lottoGame.createAutoLottoNumbers();
 
         assertThat(lottoNumbers).isNotNull();
         assertThat(lottoNumbers).hasSize(14);
+    }
+
+    @DisplayName("구입수량에 맞게 로또 번호를 생성할 수 있다.")
+    @Test
+    void canCreateManualLottoNumbers() {
+        LottoGame lottoGame = new LottoGame();
+        List<String> manulLottoNumbers = Arrays.asList("1, 2, 3, 4, 5, 6");
+
+        List<LottoNumbers> lottoNumbers = lottoGame.createManualLottoNumbers(manulLottoNumbers);
+
+        assertThat(lottoNumbers).isNotNull();
+        assertThat(lottoNumbers).hasSize(1);
     }
 
     @DisplayName("로또 당첨 결과를 얻을 수 있다.")
     @Test
     void canCreateLottoMatchResult() {
         LottoGame lottoGame = new LottoGame(14000);
-        lottoGame.createLottoNumbers();
+        lottoGame.createAutoLottoNumbers();
 
-        LottoNumbers winLottoNumbers = LottoNumbersFactory.createLottoNumbers();
+        LottoNumbers winLottoNumbers = LottoNumbersFactory.createAutoLottoNumbers();
         LottoMatchResult lottoMatchResult = lottoGame.calculateMatchCount(winLottoNumbers, 7);
 
         assertThat(lottoMatchResult).isNotNull();
