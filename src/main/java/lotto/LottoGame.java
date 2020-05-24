@@ -22,4 +22,8 @@ public class LottoGame {
     public Lotto get(int round) {
         return result.get(round);
     }
+
+    public int matchingCount(int round, Lotto lottoTickets) {
+        return 0;
+    }
 }
