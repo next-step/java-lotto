@@ -11,6 +11,7 @@ public class LottoGame {
 
   private final List<Lotto> lottoList;
   private Lotto winningLotto;
+  private int bonusNumber;
 
   private LottoGame(List<Lotto> lottoList) {
     this.lottoList = lottoList;
@@ -24,14 +25,18 @@ public class LottoGame {
     this.winningLotto = winningLotto;
   }
 
-  public long getWinningCount (int same) {
-    return stream().filter(lotto -> getSames(lotto, winningLotto) == same).count();
+  public void setBonusNumber (int bonusNumber) {
+    this.bonusNumber = bonusNumber;
   }
 
-  public double getPayoff () {
+  public long getRankCountOf (Rank rank) {
+    return stream().filter(lotto -> getLottoRank(lotto).equals(rank)).count();
+  }
+
+  public double getPayoffRatio () {
     long payoff = Rank.stream()
-                              .map(v -> v.getPrice() * getWinningCount(v.getSame()))
-                              .reduce(0L, Math::addExact);
+                      .map(rank -> rank.getPrice() * getRankCountOf(rank))
+                      .reduce(0L, Math::addExact);
     return payoff / (double) (stream().count() * 1000);
   }
 
@@ -47,9 +52,11 @@ public class LottoGame {
     return new LottoGame(lottoList);
   }
 
-  public static long getSames (Lotto lotto1, Lotto lotto2) {
-    List<Integer> numbers = lotto2.stream().collect(Collectors.toList());
-    return lotto1.stream().filter(numbers::contains).count();
+  public Rank getLottoRank (Lotto lotto) {
+    List<Integer> winningNumbers = winningLotto.stream().collect(Collectors.toList());
+    long same = lotto.stream().filter(winningNumbers::contains).count();
+    boolean matchBonus = lotto.hasBonus(bonusNumber);
+    return Rank.valueOf(same, matchBonus);
   }
 
   public static void validatePrice (int price) throws RuntimeException {
