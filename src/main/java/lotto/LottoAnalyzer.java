@@ -1,6 +1,7 @@
 package lotto;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -33,6 +34,7 @@ public class LottoAnalyzer {
                 .map(LottoRank::valueOf)
                 .filter(Objects::nonNull)
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.BOOM))
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
