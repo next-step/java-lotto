@@ -4,7 +4,11 @@ import java.util.List;
 
 public class StringAddCalculator {
 
-    public StringAddCalculator() {}
+    private final StringSplitter splitter;
+
+    public StringAddCalculator(StringSplitter splitter) {
+        this.splitter = splitter;
+    }
 
     public int splitAndSum(String text) {
         if (StringUtil.isNullOrEmpty(text)) {
@@ -21,7 +25,7 @@ public class StringAddCalculator {
     }
 
     private List<Integer> getNumbers(String text) {
-        String[] tokens = StringSplitter.split(text);
+        String[] tokens = splitter.split(text);
         return IntegerUtil.parseArray(tokens);
     }
 

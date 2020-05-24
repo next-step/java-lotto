@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StringAddCalculatorTest {
 
-    private StringAddCalculator calculator = new StringAddCalculator();
+    private StringAddCalculator calculator = new StringAddCalculator(new StringSplitter());
 
     @ParameterizedTest
     @NullAndEmptySource
