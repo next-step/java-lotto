@@ -10,8 +10,8 @@ import step2.exception.LottoCountException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
 
@@ -28,18 +28,19 @@ public class LottoTest {
   @ValueSource( strings = { "1,2,3,4,5,6,6", "1,1,2,2,3,3,4,4,5,5,6,6" } )
   void 로또_번호_중복_제거 (String lottoNumbers) {
     String expected = "1,2,3,4,5,6";
-    String lotto = Lotto.of(lottoNumbers).stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.joining(","));
-    assertThat(expected).isEqualTo(lotto);
+    Lotto lotto = Lotto.of(lottoNumbers);
+    assertEquals(expected, lotto.stream()
+                                .map(String::valueOf)
+                                .collect(Collectors.joining(",")));
   }
 
   @DisplayName("로또 생성시 오름차순 정렬이 되는지 검사")
   @ParameterizedTest
   @MethodSource("provideNotSortedLottoNumbers")
   void 로또_번호_오름차순_검사 (Lotto lotto, String expected) {
-    assertThat(expected)
-      .isEqualTo(lotto.stream().map(String::valueOf).collect(Collectors.joining(",")));
+    assertEquals(expected, lotto.stream()
+                                .map(String::valueOf)
+                                .collect(Collectors.joining(",")));
   }
 
   private static Stream<Arguments> provideNotSortedLottoNumbers () {
