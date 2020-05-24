@@ -15,7 +15,7 @@ public class StringSplitter {
     }
 
     public static String[] splitString(String userInput) {
-        if (validateNullOrEmpty(userInput) == true)
+        if (validateNullOrEmpty(userInput))
             return new String[]{EXCEPTION_RETURN_VALUE};
         Matcher matcher = Pattern.compile(CUSTOM_REGULAR_EXPRESSION).matcher(userInput);
         if (matcher.find()) {

@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.domain.InvalidNumberException;
 import calculator.domain.StringParser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,7 +55,7 @@ public class StringParserTest {
     @ParameterizedTest
     @MethodSource("mockInvalidStringBuilder")
     public void throwRuntimeExceptionOnInvalidArguments(String userInput) {
-        assertThatExceptionOfType(RuntimeException.class)
+        assertThatExceptionOfType(InvalidNumberException.class)
                 .isThrownBy(() -> {
                     StringParser.parseString(userInput);
                 });
