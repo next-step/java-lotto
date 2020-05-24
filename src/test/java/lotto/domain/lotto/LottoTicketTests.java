@@ -78,8 +78,8 @@ class LottoTicketTests {
     @Test
     void isInThisTicketTest() {
         LottoTicket lottoTicket = LottoGenerator.createByManual(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lottoTicket.isInThisTicket(LottoNumber.create(3))).isTrue();
-        assertThat(lottoTicket.isInThisTicket(LottoNumber.create(15))).isFalse();
+        assertThat(lottoTicket.hasThisNumber(LottoNumber.create(3))).isTrue();
+        assertThat(lottoTicket.hasThisNumber(LottoNumber.create(15))).isFalse();
     }
 
     @DisplayName("전달받은 LottoTicket과 비교해서 LottoNumber가 몇개나 일치하는지 알려줄 수 있다.")

@@ -21,13 +21,13 @@ public class LottoTicket {
         return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)), creationType);
     }
 
-    public boolean isInThisTicket(LottoNumber lottoNumber) {
+    public boolean hasThisNumber(LottoNumber lottoNumber) {
         return this.values.contains(lottoNumber);
     }
 
     public int howManyMatch(LottoTicket lottoTicket) {
         return (int) this.values.stream()
-                .filter(lottoTicket::isInThisTicket)
+                .filter(lottoTicket::hasThisNumber)
                 .count();
     }
 
