@@ -62,4 +62,24 @@ public class LottoGameTest {
       Arguments.of(LottoGame.of(lottos, generateLotto("11,12,13,14,15,16")), "0.00")
     );
   }
+
+  @DisplayName("로또의 랭킹을 검증하는 테스트")
+  @ParameterizedTest
+  @MethodSource("provideLottoGameAndLottoRank")
+  void 로또_랭킹_테스트 (LottoGame lottoGame, Lotto lotto, Rank expected) {
+    assertEquals(expected, lottoGame.getRankOfLotto(lotto));
+  }
+
+  private static Stream<Arguments> provideLottoGameAndLottoRank () {
+    LottoGame lottoGame = LottoGame.of(LottoShop.buyLotto(1000), generateLotto("1,2,3,4,5,6"));
+    return Stream.of(
+      Arguments.of(lottoGame, generateLotto("1,2,3,4,5,6"), Rank.FIRST),
+      Arguments.of(lottoGame, generateLotto("1,2,3,4,5,7"), Rank.SECOND),
+      Arguments.of(lottoGame, generateLotto("1,2,3,4,8,7"), Rank.THIRD),
+      Arguments.of(lottoGame, generateLotto("1,2,3,9,8,7"), Rank.FORTH),
+      Arguments.of(lottoGame, generateLotto("1,2,13,14,15,16"), Rank.MISS),
+      Arguments.of(lottoGame, generateLotto("1,12,13,14,15,16"), Rank.MISS),
+      Arguments.of(lottoGame, generateLotto("11,12,13,14,15,16"), Rank.MISS)
+    );
+  }
 }
