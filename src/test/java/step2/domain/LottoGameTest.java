@@ -7,12 +7,15 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import step2.exception.LottoGamePriceException;
 
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoGameTest {
+
+  private static final String RATIO_FORMAT = "%.2f";
 
   @DisplayName("구매 금액이 1000이하일 경우 LottoGamePriceException 발")
   @ParameterizedTest
@@ -25,8 +28,8 @@ public class LottoGameTest {
   @DisplayName("로또 당첨 수를 구하는 메소드 검증")
   @ParameterizedTest
   @MethodSource("provideWinningLottoCount")
-  void 로또_당첨수_테스트 (LottoGame lottoGame, int same, long expected) {
-    assertThat(expected).isEqualTo(lottoGame.getWinningCount(same));
+  void 로또_당첨수_테스트 (LottoGame lottoGame, Rank rank, long expected) {
+    assertEquals(expected, lottoGame.getWinningCount(rank));
   }
 
   private static Stream<Arguments> provideWinningLottoCount () {
@@ -36,12 +39,12 @@ public class LottoGameTest {
                               Lotto.of("1,2,3,4,5,8"),
                               Lotto.of("1,2,3,40,20,10"),
                               Lotto.of("1,2,3,30,20,10")
-                            ).collect(Collectors.toList())
+                            ).collect(toList())
                           );
     lottoGame.setWinningNumber(Lotto.of("1,2,3,4,5,6"));
     return Stream.of(
-      Arguments.of(lottoGame, 5, 2),
-      Arguments.of(lottoGame, 3, 2)
+      Arguments.of(lottoGame, Rank.SECOND, 2),
+      Arguments.of(lottoGame, Rank.FORTH, 2)
     );
   }
 
@@ -50,23 +53,22 @@ public class LottoGameTest {
   @MethodSource("provideLottoGameAndWinningPrice")
   void 로또_당첨_수익률_테스트 (LottoGame lottoGame, Lotto winning, String expected) {
     lottoGame.setWinningNumber(winning);
-    assertThat(expected).isEqualTo(String.format("%.2f", lottoGame.getPayoff()));
+    String payoffRatio = String.format(RATIO_FORMAT, lottoGame.getPayoff());
+    assertEquals(expected, payoffRatio);
   }
 
   private static Stream<Arguments> provideLottoGameAndWinningPrice () {
-    int payoff = WinningPrice.FIRST.getPrice() +
-                 WinningPrice.SECOND.getPrice() +
-                 WinningPrice.THIRD.getPrice() +
-                 WinningPrice.FORTH.getPrice();
-    String payoffRatio = String.format("%.2f", payoff / 4000.0);
+    long payoff = Rank.stream()
+                      .mapToLong(Rank::getPrice)
+                      .sum();
+    String payoffRatio = String.format(RATIO_FORMAT, payoff / 4000.0);
     LottoGame lottoGame = LottoGame.of(
                             Stream.of(
                               Lotto.of("1,2,3,4,5,6"),
                               Lotto.of("1,2,3,4,5,10"),
                               Lotto.of("1,2,3,4,20,10"),
                               Lotto.of("1,2,3,30,20,10")
-                            ).collect(Collectors.toList())
-                          );
+                            ).collect(toList()));
     return Stream.of(
       Arguments.of(lottoGame, Lotto.of("1,2,3,4,5,6"), payoffRatio),
       Arguments.of(lottoGame, Lotto.of("11,12,13,14,15,16"), "0.00")
