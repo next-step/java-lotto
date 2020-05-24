@@ -16,7 +16,7 @@ public class LottoGame {
         List<Integer> convertedList = Arrays.stream(winningNumber).boxed()
                 .collect(Collectors.toList());
 
-        result.put(round, new Lotto(convertedList));
+        result.put(round, Lotto.of(convertedList));
     }
 
     public Lotto get(int round) {
