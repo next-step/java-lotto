@@ -35,7 +35,7 @@ class LottoServiceTests {
         LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber winBonusNumber = LottoNumber.create(10);
         LottoTickets lottoTickets = LottoTickets.create(
-                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
+                Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
 
         assertThat(lottoService.calculateRank(winTicket, winBonusNumber, lottoTickets)).isInstanceOf(Ranks.class);
     }

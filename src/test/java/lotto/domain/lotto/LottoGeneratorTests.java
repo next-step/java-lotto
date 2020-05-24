@@ -15,14 +15,14 @@ class LottoGeneratorTests {
     @DisplayName("정적 팩터리 메서드로 로또 티켓을 만들 수 있다.")
     @Test
     void factoryCreateTest() {
-        LottoTicket lottoTicket = LottoGenerator.create();
+        LottoTicket lottoTicket = LottoGenerator.createByAuto();
         assertThat(lottoTicket).isNotNull();
     }
 
     @DisplayName("임의의 수로 이루어진 로또 티켓을 생성할 수 있다.")
     @Test
     void randomTicketTest() {
-        assertThat(LottoGenerator.create()).isInstanceOf(LottoTicket.class);
+        assertThat(LottoGenerator.createByAuto()).isInstanceOf(LottoTicket.class);
     }
 
     @DisplayName("숫자 여섯개를 입력 받아서 로또 티켓을 발급 할 수 있어야 한다.")

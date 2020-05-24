@@ -155,9 +155,13 @@
         - 여러 곳에서 사용되는 기능이라 공통으로 사용되도록 구현
         - [X] BuyManualInputView, RankInputView에서 사용하도록 적용
 - Shop
-    - [X] 수동 입력한 LottoTickets, 돈을 받아서 자동계산된 LottoTicket과 수동 LottoTicket이 합쳐진 LottoTickets 반환
+    - [X] 수동 입력한 LottoTickets, 돈을 받아서 자동계산된 LottoTicket과 수동 LottoTicket이 합진 LottoTickets 반환
     - [X] 수동 입력한 LottoTickets의 갯수와 돈을 계산해서 자동 구매할 LottoTickets 수를 계산할 수 있다.
         - [X] 수동 입력한 LottoTickets의 수는 Money로 구매 가능한 총 LottoTicets의 수를 넘을 수 없다.
         
 - LottoTickets
     - [X] LottoTickets에 다른 LottoTickets를 받아서 둘을 합할 수 있다.
+    - [ ] 내부 LottoTicket에서 수동이 몇 개인지, 자동이 몇 개인지 구분할 수 있다.
+    
+- LottoTicket
+    - [X] 생성 방식이 수동인지 자동인지 구분하는 속성을 추가한다.

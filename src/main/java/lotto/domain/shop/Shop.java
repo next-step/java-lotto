@@ -11,7 +11,7 @@ public class Shop {
     public static LottoTickets sellLottoTicketsAuto(Money money) {
         int lottoTicketCount = money.howManyLottoTickets();
         return IntStream.range(0, lottoTicketCount)
-                .mapToObj(num -> LottoGenerator.create())
+                .mapToObj(num -> LottoGenerator.createByAuto())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::create));
     }
 
@@ -35,7 +35,7 @@ public class Shop {
 
     private static LottoTickets getLottoTicketsByAuto(int count) {
         return IntStream.range(0, count)
-                .mapToObj(num -> LottoGenerator.create())
+                .mapToObj(num -> LottoGenerator.createByAuto())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::create));
     }
 }

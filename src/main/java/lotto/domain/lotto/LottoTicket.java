@@ -8,10 +8,11 @@ public class LottoTicket {
     private static final int EMPTY_SIZE = 0;
     private static final int SIZE = 6;
     private final List<LottoNumber> values;
+    private final CreationType creationType;
 
-    public static LottoTicket create(List<LottoNumber> values) {
+    public static LottoTicket create(List<LottoNumber> values, CreationType creationType) {
         Collections.sort(values);
-        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)));
+        return new LottoTicket(Collections.unmodifiableList(new ArrayList<>(values)), creationType);
     }
 
     public boolean isInThisTicket(LottoNumber lottoNumber) {
@@ -28,9 +29,10 @@ public class LottoTicket {
         return this.values.size();
     }
 
-    private LottoTicket(List<LottoNumber> values) {
+    private LottoTicket(List<LottoNumber> values, CreationType creationType) {
         validation(values);
         this.values = values;
+        this.creationType = creationType;
     }
 
     private void validation(List<LottoNumber> values) {

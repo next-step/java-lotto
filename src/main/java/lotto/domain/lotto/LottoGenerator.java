@@ -9,16 +9,17 @@ public class LottoGenerator {
             .mapToObj(LottoNumber::create)
             .collect(Collectors.toList());
 
-    public static LottoTicket create() {
+    public static LottoTicket createByAuto() {
         Collections.shuffle(lottoSeed, new Random());
-        return LottoTicket.create(lottoSeed.subList(0, 6));
+        return LottoTicket.create(lottoSeed.subList(0, 6), CreationType.AUTO);
     }
 
     public static LottoTicket createManualByIntList(List<Integer> intList) {
         return LottoTicket.create(
                 intList.stream()
                         .map(LottoNumber::create)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                CreationType.MANUAL
         );
     }
 

@@ -16,7 +16,7 @@ class LottoTicketsTests {
     @DisplayName("로또 티켓 리스트를 입력받아서 일급 객체를 생성할 수 있다.")
     @Test
     void createTest() {
-        List<LottoTicket> lottoTicketList = Collections.singletonList(LottoGenerator.create());
+        List<LottoTicket> lottoTicketList = Collections.singletonList(LottoGenerator.createByAuto());
         assertThat(LottoTickets.create(lottoTicketList)).isNotNull();
     }
 
@@ -24,11 +24,11 @@ class LottoTicketsTests {
     @Test
     void checkSideEffect() {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(LottoGenerator.create());
+        lottoTicketList.add(LottoGenerator.createByAuto());
         LottoTickets lottoTickets = LottoTickets.create(lottoTicketList);
         assertThat(lottoTickets.size()).isEqualTo(1);
 
-        lottoTicketList.add(LottoGenerator.create());
+        lottoTicketList.add(LottoGenerator.createByAuto());
         assertThat(lottoTickets.size()).isEqualTo(1);
     }
 
@@ -36,7 +36,7 @@ class LottoTicketsTests {
     @Test
     void calculateRanks() {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(LottoGenerator.create());
+        lottoTicketList.add(LottoGenerator.createByAuto());
         LottoTickets lottoTickets = LottoTickets.create(lottoTicketList);
 
         LottoTicket winTicket = LottoGenerator.createManualByIntList(Arrays.asList(1, 2, 3, 4, 5, 6));
@@ -49,7 +49,7 @@ class LottoTicketsTests {
     @Test
     void combineLottoTickets() {
         LottoTickets autoLottoTickets = LottoTickets.create(
-                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
+                Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
         LottoTickets manualLottoTickets = LottoTickets.create(
                 Collections.singletonList(LottoGenerator.createFromString("1,2,3,4,5,6")));
 
@@ -63,7 +63,7 @@ class LottoTicketsTests {
     void combineEmpty() {
         LottoTickets emptyLottoTickets = LottoTickets.create(new ArrayList<>());
         LottoTickets autoLottoTickets = LottoTickets.create(
-                Arrays.asList(LottoGenerator.create(), LottoGenerator.create()));
+                Arrays.asList(LottoGenerator.createByAuto(), LottoGenerator.createByAuto()));
 
         assertThat(emptyLottoTickets.combine(autoLottoTickets).size()).isEqualTo(2);
         assertThat(autoLottoTickets.combine(emptyLottoTickets).size()).isEqualTo(2);
