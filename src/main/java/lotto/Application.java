@@ -25,8 +25,11 @@ public class Application {
 
         // 지난주 당첨 번호 입력
         List<Lotto> winnerNumbers = InputView.inputWinningNumbers();
+        Lotto bonusBall = new Lotto(InputView.inputBonusNumber());
+
+        LottoWinnerNumber lottoWinnerNumber = new LottoWinnerNumber(winnerNumbers, bonusBall);
         List<LottoMatcher> lottoMatchers = lottoNumbers.stream()
-                .map(lottoNumberResult -> lottoNumberResult.findLottoMatchResult(winnerNumbers))
+                .map(lottoNumberResult -> lottoNumberResult.findLottoMatchResult(lottoWinnerNumber))
                 .collect(Collectors.toList());
 
         BigDecimal earningRate = lottoShop.calculateEarningsRate(lottoMatchers);

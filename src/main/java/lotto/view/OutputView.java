@@ -26,9 +26,9 @@ public class OutputView {
     }
 
     public static void outputRankingStatistics(List<LottoMatcher> lottoMatchers) {
-        LottoMatcher[] lottoMatchers1 = LottoMatcher.values();
+        List<LottoMatcher> rankingMatchers = LottoMatcher.findRankingMatchers();
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoMatcher lottoMatcher : lottoMatchers1) {
+        for (LottoMatcher lottoMatcher : rankingMatchers) {
             long matchCount = lottoMatchers.stream()
                     .filter(matcher -> matcher == lottoMatcher)
                     .count();
@@ -40,7 +40,12 @@ public class OutputView {
     }
 
     private static String combineRanking(long count, LottoMatcher lottoMatcher) {
-        return String.format("%d개 일치 (%d원) - %d개", lottoMatcher.getMatchingCount(), lottoMatcher.getPrice().intValue(), count);
+        String containsBonusBallString = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+        String notContainsBonusBallString = "%d개 일치 (%d원) - %d개";
+        if (lottoMatcher.isMatchBonusBall()) {
+            return String.format(containsBonusBallString, lottoMatcher.getMatchingCount(), lottoMatcher.getPrice().intValue(), count);
+        }
+        return String.format(notContainsBonusBallString, lottoMatcher.getMatchingCount(), lottoMatcher.getPrice().intValue(), count);
     }
 
     public static void outputEarningRate(BigDecimal earningRate) {
