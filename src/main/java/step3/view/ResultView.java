@@ -4,11 +4,14 @@ import step3.domain.Lotto;
 import step3.domain.LottoGame;
 import step3.domain.Rank;
 
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ResultView {
 
   private static ResultView instance;
+  private static final String HEAD_FORMAT = "\n당첨 통계\n---------\n%s\n";
+  private static final String BODY_FORMAT = "%d개 일치 (%d원)- %d개";
 
   private ResultView () { }
 
@@ -23,18 +26,13 @@ public class ResultView {
   }
 
   public void printStat (LottoGame lottoGame) {
-    String headFormat = "\n당첨 통계\n---------\n%s\n";
-    String bodyFormat = "%d개 일치 (%d원)- %d개";
-    System.out.printf(
-      headFormat,
-      Rank.stream()
-          .map(winningPrice -> String.format(
-              bodyFormat,
-              winningPrice.getSame(),
-              winningPrice.getPrice(),
-              lottoGame.getWinningCount(winningPrice.getSame())))
-          .collect(Collectors.joining("\n"))
-    );
+    final Function<Rank, String>
+          mapper = rank -> String.format(BODY_FORMAT,
+                                         rank.getSame(),
+                                         rank.getPrice(),
+                                         lottoGame.getRankCountOf(rank));
+    final String stat = Rank.stream().map(mapper).collect(Collectors.joining("\n"));
+    System.out.printf(HEAD_FORMAT, stat);
   }
 
   public void printPayoffRatio (double payoffRatio) {
