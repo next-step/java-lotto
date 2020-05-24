@@ -9,7 +9,14 @@ class LottoNumbersFactoryTest {
 
     @DisplayName("로또 번호 객체를 생성할 수 있다.")
     @Test
-    void canCreateLottoNumbers() {
-        assertThat(LottoNumbersFactory.createLottoNumbers()).isNotNull();
+    void canCreateAutoLottoNumbers() {
+        assertThat(LottoNumbersFactory.createAutoLottoNumbers()).isNotNull();
+    }
+
+    @DisplayName("수동 번호로 객체를 생성할 수 있다.")
+    @Test
+    void canCreateManualLottoNumbers() {
+        String manualNumbers = "1, 2, 3, 4, 5, 6";
+        assertThat(LottoNumbersFactory.createManualLottoNumbers(manualNumbers)).isNotNull();
     }
 }
