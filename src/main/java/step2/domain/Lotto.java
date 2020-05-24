@@ -1,24 +1,29 @@
 package step2.domain;
 
 import step2.exception.LottoCountException;
-import step2.exception.LottoReduplicateException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Collections.shuffle;
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class Lotto {
 
+  private static final long MAX_COUNT = 6L;
+
   private static final List<Integer> numbers = new ArrayList<>();
+
   static {
-    for (int i = 1; i < 51; i++) numbers.add(i);
+    for (int i = 1; i < 46; i++) numbers.add(i);
   }
 
-  private final List<Integer> lottoNumbers;
+  private final Set<Integer> lottoNumbers;
 
-  private Lotto (List<Integer> lottoNumbers) throws RuntimeException {
+  private Lotto (Set<Integer> lottoNumbers) {
     validateCount(lottoNumbers);
-    validateReduplicate(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
@@ -26,33 +31,31 @@ public class Lotto {
     return lottoNumbers.stream();
   }
 
+  public boolean has (int number) {
+    return lottoNumbers.contains(number);
+  }
+
   public static Lotto of (String lottoNumbers) {
-    return Lotto.of(
-      Arrays.stream(lottoNumbers.split(","))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList())
-    );
+    return Arrays.stream(lottoNumbers.split(","))
+                 .map(Integer::parseInt)
+                 .collect(collectingAndThen(toList(), Lotto::of));
   }
 
   public static Lotto of () {
-    Collections.shuffle(Lotto.numbers);
-    return of(Lotto.numbers.stream().limit(6L).collect(Collectors.toList()));
+    shuffle(numbers);
+    return numbers.stream()
+                  .limit(MAX_COUNT)
+                  .collect(collectingAndThen(toList(), Lotto::of));
   }
 
   public static Lotto of (List<Integer> lottoNumber) {
-    lottoNumber.sort(Comparator.comparingInt(a -> a));
-    return new Lotto(lottoNumber);
+    lottoNumber.sort(comparingInt(a -> a));
+    return new Lotto(new HashSet<>(lottoNumber));
   }
 
-  private static void validateCount (List<Integer> lottoNumbers) throws RuntimeException {
-    if (lottoNumbers.size() != 6) {
+  private static void validateCount (Set<Integer> lottoNumbers) throws RuntimeException {
+    if (lottoNumbers.size() != MAX_COUNT) {
       throw new LottoCountException();
-    }
-  }
-
-  private static void validateReduplicate (List<Integer> lottoNumbers) throws RuntimeException {
-    if (new HashSet(lottoNumbers).size() != lottoNumbers.size()) {
-      throw new LottoReduplicateException();
     }
   }
 }
