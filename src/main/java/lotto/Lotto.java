@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> lottoNumbers = Collections.EMPTY_LIST;
+    private List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -13,6 +13,10 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers(){
         return lottoNumbers;
+    }
+
+    public void shuffle() {
+        Collections.shuffle(lottoNumbers);
     }
 
     public void sort(){
