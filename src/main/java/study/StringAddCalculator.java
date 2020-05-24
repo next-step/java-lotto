@@ -22,7 +22,7 @@ public class StringAddCalculator {
 
     private static List<Integer> getNumbers(String text) {
         String[] tokens = StringSplitter.split(text);
-        return IntegerUtil.parseInt(tokens);
+        return IntegerUtil.parseArray(tokens);
     }
 
     private static Integer sum(List<Integer> numbers) {

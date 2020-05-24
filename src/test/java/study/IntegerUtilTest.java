@@ -13,14 +13,14 @@ class IntegerUtilTest {
     @Test
     void parseInt() {
         String[] strings = new String[]{"1", "2", "3"};
-        List<Integer> integers = IntegerUtil.parseInt(strings);
+        List<Integer> integers = IntegerUtil.parseArray(strings);
         assertThat(integers).isEqualTo(Arrays.asList(1, 2, 3));
     }
 
     @Test
     void parseInt_throwNumberFormatException() {
         String[] strings = {"1", "2", "a"};
-        assertThatThrownBy(() -> IntegerUtil.parseInt(strings))
+        assertThatThrownBy(() -> IntegerUtil.parseArray(strings))
                 .isInstanceOf(NumberFormatException.class);
     }
 }
