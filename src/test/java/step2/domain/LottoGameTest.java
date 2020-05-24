@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static step2.domain.LottoGenerator.generateLotto;
 
 public class LottoGameTest {
 
@@ -23,12 +24,12 @@ public class LottoGameTest {
 
   private static Stream<Arguments> provideWinningLottoCount () {
     final LottoGame lottoGame = LottoGame.of(
-      LottoShop.of(Stream.of(
-          Lotto.of("1,2,3,4,5,7"),
-          Lotto.of("1,2,3,4,5,8"),
-          Lotto.of("1,2,3,40,20,10"),
-          Lotto.of("1,2,3,30,20,10")).collect(toList())),
-      Lotto.of("1,2,3,4,5,6")
+      Lottos.of(Stream.of(
+          generateLotto("1,2,3,4,5,7"),
+          generateLotto("1,2,3,4,5,8"),
+          generateLotto("1,2,3,40,20,10"),
+          generateLotto("1,2,3,30,20,10")).collect(toList())),
+      generateLotto("1,2,3,4,5,6")
     );
     return Stream.of(
       Arguments.of(lottoGame, Rank.SECOND, 2),
@@ -49,16 +50,16 @@ public class LottoGameTest {
                       .mapToLong(Rank::getPrice)
                       .sum();
     String payoffRatio = String.format(RATIO_FORMAT, payoff / 4000.0);
-    LottoShop lottoShop = LottoShop.of(
+    Lottos lottos = Lottos.of(
                             Stream.of(
-                              Lotto.of("1,2,3,4,5,6"),
-                              Lotto.of("1,2,3,4,5,10"),
-                              Lotto.of("1,2,3,4,20,10"),
-                              Lotto.of("1,2,3,30,20,10")
+                              generateLotto("1,2,3,4,5,6"),
+                              generateLotto("1,2,3,4,5,10"),
+                              generateLotto("1,2,3,4,20,10"),
+                              generateLotto("1,2,3,30,20,10")
                             ).collect(toList()));
     return Stream.of(
-      Arguments.of(LottoGame.of(lottoShop, Lotto.of("1,2,3,4,5,6")), payoffRatio),
-      Arguments.of(LottoGame.of(lottoShop, Lotto.of("11,12,13,14,15,16")), "0.00")
+      Arguments.of(LottoGame.of(lottos, generateLotto("1,2,3,4,5,6")), payoffRatio),
+      Arguments.of(LottoGame.of(lottos, generateLotto("11,12,13,14,15,16")), "0.00")
     );
   }
 }
